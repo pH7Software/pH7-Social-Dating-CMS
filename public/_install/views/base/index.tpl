@@ -1,0 +1,18 @@
+{include file="inc/header.tpl"}
+
+<h2>{$LANG.welcome|upper} &laquo;{$software_name|upper}&raquo; {$LANG.version|upper} {$software_version}</h2>
+
+{$LANG.CMS_desc}
+
+<p>{$LANG.chose_lang_for_install}</p>
+
+<select name="l" onchange="document.location.href=this.value">
+    {$lang_select}
+</select>
+
+<p><a href="{$smarty.const.PH7_URL_SLUG_INSTALL}license">{$LANG.go}</a></p>
+
+<!-- Add a welcome sound -->
+<audio style="display:none" autoplay="autoplay" src="{$smarty.const.PH7_URL_ROOT}/static/sound/welcome.mp3" /></audio>
+
+{include file="inc/footer.tpl"}

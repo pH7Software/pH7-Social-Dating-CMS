@@ -1,0 +1,1 @@
+{{ ForumForm::display() }}

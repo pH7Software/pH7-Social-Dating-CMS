@@ -1,0 +1,1 @@
+{{ MsgForm::display() }}

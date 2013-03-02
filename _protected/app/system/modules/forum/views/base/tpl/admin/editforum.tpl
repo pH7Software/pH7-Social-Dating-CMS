@@ -1,0 +1,1 @@
+{{ EditForumForm::display() }}

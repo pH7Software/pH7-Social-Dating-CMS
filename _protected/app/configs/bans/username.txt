@@ -1,0 +1,22 @@
+# Do not delete "admin" in this list, otherwise the default avatar "admin" (AvatarDesignCore, ...), etc.. no longer work. #
+admin
+administrator
+administration
+administrateur
+administrador
+webmaster
+ass
+fuck
+fake
+shit
+crap
+bitch
+suck
+sucks
+dick
+jizz
+cum
+slut
+whore
+pussy
+cunt

@@ -1,0 +1,59 @@
+.folio_block {
+    position: absolute;
+    top:212px;
+}
+
+/*--Main Container--*/
+.splash_slideshow {
+    float: left;
+    margin-top:22px;
+}
+/*--Window/Masking Styles--*/
+.window, .profiles_window {
+    border:1px solid #999;
+    border-radius: 5px;
+    overflow: hidden; /*--Hides anything outside of the set width/height--*/
+    position: relative;
+}
+h1:hover{color:#1877D5;cursor:default}
+.window {height:300px;width:590px}
+.profiles_window{margin:2px;max-height:346px;max-width:590px}
+
+.img_reel {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.img_reel img{float:left;height:300px;width:590px;}
+
+/*--Paging Styles--*/
+.paging {
+    position: absolute;
+    bottom: 30px; right: -7px;
+    width: 178px; height:47px;
+    z-index: 100; /*--Assures the paging stays on the top layer--*/
+    text-align: center;
+    line-height: 40px;
+    background: url(../img/paging_bg2.png) no-repeat;
+    display: none; /*--Hidden by default, will be later shown with jQuery--*/
+}
+.paging a {
+    padding: 5px;
+    text-decoration: none;
+    color: #fff;
+}
+.paging a.active {
+    font-weight: bold;
+    background: #920000;
+    border: 1px solid #610000;
+    -border-radius: 4px;
+}
+.paging a:hover{font-weight: bold;}
+.block_txt{margin:-80px 80px 20px}
+.counter{margin:15px 2px 4px 1px}
+.login_block{margin:-5px 0 0 460px}
+
+/** Buttons (links) **/
+.bt_login_remember,.bt_login_forgot{padding-bottom:35px}
+.bt_login_remember{float:left;padding-left:36px;margin-top:-12px}
+.bt_login_forgot{float:right;padding-right:170px;margin-top:-52px}

@@ -1,0 +1,16 @@
+# Rules for Google
+User-agent: googlebot
+Crawl-delay: 0
+Disallow:
+
+# Rules for All Other Search Engines
+User-agent: *
+Crawl-delay: 10
+Disallow:
+
+# Disallow Internet Archiver Wayback Machine
+# User-agent: ia_archiver
+# Disallow: /
+
+
+Sitemap: /site-map-xml

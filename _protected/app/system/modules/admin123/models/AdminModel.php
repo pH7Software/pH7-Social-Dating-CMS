@@ -1,0 +1,126 @@
+<?php
+/**
+ * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @package        PH7 / App / System / Module / Admin / Inc / Model
+ */
+namespace PH7;
+use PH7\Framework\Mvc\Model\Engine\Db;
+
+class AdminModel extends AdminCoreModel
+{
+
+    /**
+     * It recreates an admin method more complicated and more secure than the classical PH7\UserCoreModel::login() method.
+     *
+     * @param string $sEmail
+     * @param string $sUsername
+     * @param string $sPassword
+     * @return boolean Returns "true" if successful otherwise returns "false".
+     */
+    public function adminLogin($sEmail, $sUsername, $sPassword)
+    {
+        $rStmt = Db::getInstance()->prepare('SELECT email, username, password, prefixSalt, suffixSalt FROM' .
+            Db::prefix('Admins') . 'WHERE email = :email AND username = :username LIMIT 1');
+        $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
+        $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
+        $rStmt->execute();
+        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        Db::free($rStmt);
+
+        return (@$oRow->password !== Framework\Security\Security::hashPwd(@$oRow->prefixSalt, $sPassword, @$oRow->suffixSalt)) ? false : true;
+    }
+
+    /**
+     * Adding an Admin.
+     *
+     * @param array $aData
+     * @return integer The ID of the Admin.
+     */
+    public function add(array $aData)
+    {
+        $sCurrentDate = (new Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s');
+
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Admins') .
+            '(email, username, password, firstName, lastName, sex, ip, prefixSalt, suffixSalt, joinDate, lastActivity)
+        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :ip, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
+        $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':password', Framework\Security\Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_INT);
+        $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
+        $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
+        $rStmt->execute();
+        Db::free($rStmt);
+        return Db::getInstance()->lastInsertId();
+    }
+
+    /**
+     * Delete Admin.
+     *
+     * @param integer $iProfileId
+     * @param string $sUsername
+     * @return void
+     */
+    public function delete($iProfileId, $sUsername)
+    {
+        $iProfileId = (int) $iProfileId;
+
+        if ($iProfileId === 1)
+            exit('You cannot delete the Root Administrator!');
+
+        $oDb = Db::getInstance();
+        $oDb->query('DELETE FROM' . Db::prefix('Admins') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        Db::free($oDb);
+    }
+
+    public function searchAdmin($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    {
+        $bCount = (bool) $bCount;
+        $iOffset = (int) $iOffset;
+        $iLimit = (int) $iLimit;
+
+        $sSqlLimit = ($bCount === false) ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(profileId) AS totalUsers';
+        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE profileId = :looking' :
+            ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::
+            prefix('Admins') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+
+        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::
+            PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::
+            PARAM_STR);
+
+        if ($bCount === false)
+        {
+            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        }
+
+        $rStmt->execute();
+
+        if ($bCount === false)
+        {
+            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+        }
+        else
+        {
+            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $mData = (int) $oRow->totalUsers;
+            unset($oRow);
+        }
+
+        return $mData;
+    }
+
+}

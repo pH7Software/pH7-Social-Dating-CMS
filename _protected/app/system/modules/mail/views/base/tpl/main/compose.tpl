@@ -1,0 +1,1 @@
+{{ MailForm::display() }}

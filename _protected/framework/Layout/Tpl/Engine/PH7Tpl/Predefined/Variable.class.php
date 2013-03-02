@@ -1,0 +1,75 @@
+<?php
+/***************************************************************************
+ * @title            PH7 Template Engine
+ * @desc             We define variables.
+ *                   Predefined variables can save considerable resources and speeds up the code with respect to variables assigned by through the object's template engine (PH7Tpl).
+ *
+ * @updated          The Last Update 07/31/12 23:22 (Greenwich Mean Time)
+ * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @category         PH7 Template Engine
+ * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
+ * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @version          1.0.2
+ * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
+ *
+ ***************************************************************************/
+
+namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined;
+defined('PH7') or exit('Restricted access');
+
+class Variable extends Predefined
+{
+
+    /**
+     * Assign the global variables.
+     *
+     * @access public
+     * @return this object
+     */
+    public function assign()
+    {
+        /***** Kernel Variables *****/
+        $this->addVar('software_name', 'self::SOFTWARE_NAME');
+        $this->addVar('software_url', 'self::SOFTWARE_WEBSITE');
+        $this->addVar('software_version', 'self::SOFTWARE_VERSION');
+
+        /***** URL *****/
+        $this->addVar('url_root', '$this->registry->site_url');
+        $this->addVar('url_relative', '$this->registry->url_relative');
+        $this->addVar('current_url', '$this->httpRequest->currentUrl()');
+        $this->addVar('url_admin_mod', 'PH7_ADMIN_MOD . PH7_DS');
+
+        /***** STATIC *****/
+        $this->addVar('url_static', 'PH7_URL_STATIC');
+        $this->addVar('url_static_css', 'PH7_URL_STATIC . PH7_CSS');
+        $this->addVar('url_static_img', 'PH7_URL_STATIC . PH7_IMG');
+        $this->addVar('url_static_js', 'PH7_URL_STATIC . PH7_JS');
+
+        /***** DATA *****/
+        $this->addVar('url_data', 'PH7_URL_DATA');
+        $this->addVar('url_data_sys', 'PH7_URL_DATA_SYS');
+        $this->addVar('url_data_sys_mod', 'PH7_URL_DATA_SYS_MOD');
+        $this->addVar('url_data_mod', 'PH7_URL_DATA_MOD');
+
+        /***** Extension *****/
+        $this->addVar('page_ext', 'PH7_PAGE_EXT');
+
+        /***** FOR SIMPLE TEMPLATE *****/
+        $this->addVar('url_tpl', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_DS');
+        $this->addVar('url_tpl_css', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS');
+        $this->addVar('url_tpl_img', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG');
+        $this->addVar('url_tpl_js', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_JS');
+
+        /***** FOR MODULES TEMPLATE *****/
+        $this->addVar('url_tpl_mod', '$this->registry->url_themes_module . PH7_TPL_MOD_NAME . PH7_DS');
+        $this->addVar('url_tpl_mod_css', '$this->registry->url_themes_module . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS');
+        $this->addVar('url_tpl_mod_img', '$this->registry->url_themes_module . PH7_TPL_MOD_NAME . PH7_DS . PH7_IMG');
+        $this->addVar('url_tpl_mod_js', '$this->registry->url_themes_module . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS');
+
+        /***** Globals Variables *****/
+        $this->addVar('ip', 'Framework\Ip\Ip::get()');
+
+        return $this;
+    }
+
+}

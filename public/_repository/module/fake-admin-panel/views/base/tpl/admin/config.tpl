@@ -1,0 +1,1 @@
+{{ ConfigFileCoreForm::display() }}

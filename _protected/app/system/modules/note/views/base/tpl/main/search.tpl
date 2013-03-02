@@ -1,0 +1,1 @@
+{{ SearchNoteForm::display() }}

@@ -1,0 +1,1 @@
+{{SearchMailForm::display(true)}}

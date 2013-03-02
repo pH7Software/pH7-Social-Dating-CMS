@@ -1,0 +1,1 @@
+{{ DeleteUserCoreForm::display() }}
