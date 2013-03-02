@@ -1,0 +1,113 @@
+<?php
+/**
+ * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @package        PH7 / App / System / Module / Admin / Asset / Ajax
+ */
+namespace PH7;
+use PH7\Framework\Mvc\Model\DesignModel, PH7\Framework\Mvc\Request\HttpRequest;
+defined('PH7') or exit('Restricted access');
+
+class AdsAjax
+{
+
+    private $_oHttpRequest, $_oAdsModel, $_sMsg, $_bStatus;
+
+    public function __construct()
+    {
+        if (!(new Framework\Security\CSRF\Token)->check('ads') )
+        exit(jsonMsg(0, Form::errorTokenMsg()));
+
+        $this->_oHttpRequest = new HttpRequest;
+        $this->_oAdsModel = new AdsCoreModel;
+
+        switch ($this->_oHttpRequest->post('type'))
+        {
+            case 'activate':
+                $this->activate();
+            break;
+
+            case 'deactivate':
+                $this->deactivate();
+            break;
+
+            case 'delete':
+                $this->delete();
+            break;
+
+            default:
+                Framework\Http\Http::setHeadersByCode(400);
+                exit('Bad Request Error');
+        }
+    }
+
+    protected function activate()
+    {
+        $sTable = AdsCore::getTable();
+
+        $this->_bStatus = $this->_oAdsModel->setStatus($this->_oHttpRequest->post('adsId'), 1, $sTable);
+
+        if ($this->_bStatus)
+        {
+            (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
+            $this->_sMsg = jsonMsg(1, t('The Advertisement we been activate.'));
+        }
+        else
+        {
+            $this->_sMsg = jsonMsg(0, t('Cannot activate Advertisement, please try later.'));
+        }
+        echo $this->_sMsg;
+    }
+
+    protected function deactivate()
+    {
+        $sTable = AdsCore::getTable();
+
+        $this->_bStatus = $this->_oAdsModel->setStatus($this->_oHttpRequest->post('adsId'), 0, $sTable);
+
+        if ($this->_bStatus)
+        {
+            (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
+            $this->_sMsg = jsonMsg(1, t('The deactivate we been deleted.'));
+        }
+        else
+        {
+            $this->_sMsg = jsonMsg(0, t('Cannot deactivate Advertisement, please try later.'));
+        }
+        echo $this->_sMsg;
+    }
+
+    protected function delete()
+    {
+        $sTable = AdsCore::getTable();
+
+        $this->_bStatus = $this->_oAdsModel->delete($this->_oHttpRequest->post('adsId'), $sTable);
+
+        if ($this->_bStatus)
+        {
+            /* Clean AdminCoreModel Ads and DesignModel for STATIC data */
+            (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear()
+                    ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
+                    ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliate', null)->clear();
+
+            $this->_sMsg = jsonMsg(1, t('The Advertisement we been deleted.'));
+        }
+        else
+        {
+            $this->_sMsg = jsonMsg(0, t('Cannot remove Advertisement, please try later.'));
+        }
+        echo $this->_sMsg;
+    }
+
+    public function __destruct()
+    {
+        unset($this->_oHttpRequest, $this->_oAdsModel, $this->_sMsg, $this->_bStatus);
+    }
+
+}
+
+// Only for the Admins
+if (Admin::auth()) {
+    new AdsAjax;
+}

@@ -1,0 +1,24 @@
+All (This means all files and folders of this software) of this code (software) was coded (created) by the development pH7 team (Pierre-Henry Soria), all rights reserved.
+Except certain files and library (JavaScript, PHP, or other) whose license and/or the author is identified in the file or a text file next to the file.
+
+All the Copyright Notice, Links and Copyright Comments can never be removed from the source code!
+
+Copyright (C) 2011-2013  Soria Pierre-Henry
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+------------------------------------------------------------
+
+
+The all text written and displayed (except third libraries and files where license is given their own) in this software in licensed: Attribution-ShareAlike 3.0 or later (http://creativecommons.org/licenses/by-sa/3.0/).

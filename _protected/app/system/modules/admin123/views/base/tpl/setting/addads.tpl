@@ -1,0 +1,1 @@
+{{ AdsForm::display() }}

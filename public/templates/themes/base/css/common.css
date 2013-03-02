@@ -1,0 +1,166 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+*{margin:0}
+body, td, pre {
+    font-family:Arial, Verdana, Helvetica, sans-serif;
+    font-size:12px;
+    color:#666;
+}
+body {background: white url(../img/body_bg.jpg) repeat-x;}
+
+#links {
+    float: right;
+}
+#links a {
+    display: block;
+    float: left;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    background-color: #f5f4f4;
+    border-radius: 0.5em;
+    white-space: nowrap;
+    margin-left: 0.25em;
+}
+#logo a{width:280px;height:60px;float:left;background:url('../img/logo.png') no-repeat; overflow:hidden;text-indent:-10000px;margin:20px}
+header{border-bottom:1px solid #C8C8C8;padding:10px 0 10px;background: url(../img/header2.png) repeat-x top;}
+header ul{margin:0;padding:0;}
+header li{list-style-type: none;float:left;padding-right: 20px;font-style:italic;}
+header,#content{margin-left:auto; margin-right:auto;padding-left:12px;padding-right:12px;width:985px;}
+#content:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+footer{padding:10px;margin:10px 20px;font-size:.9em;text-align:center;border-top:1px solid #C8C8C8;}
+footer a{color:#666;}
+.clear {
+    clear:both;
+    height:1px;
+    overflow:hidden;
+}
+.center {
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    width:80%;
+}
+.link {
+    background-color:#f3f3f3;
+    padding:4px;
+    border:1px solid #999;
+}
+
+.msg_content{margin:18px 2px 18px 2px}
+
+.middle {vertical-align:middle !important;}
+.top {position:absolute;top:0 !important;}
+.right {float:right !important;}
+.left {float:left !important;}
+.profile_desc {float:right;margin:-450px 340px 0;max-width:500px;position:absolute;}
+.break {border-bottom: 1px dotted #BBB;padding:4px 0 4px 0;width:25%}
+.br {border-bottom:1px dashed black; display:block;}
+hr{border:0;color:#9E9E9E;background-color:#9E9E9E;height:1px;margin:5px auto 5px auto;width:100%}
+.bold, .err_msg{font-weight:bold;font-size:13px;}
+.err_msg{text-align:center;color:#F00;text-transform:uppercase;}
+.msg{text-align:center;margin:3px auto 3px;font-style:italic;}
+label#percent{position:absolute;padding-left:115px;padding-top:6px;font-size:80%;font-weight:bold;}
+
+.thumb_photo, .s_photo, .m_photo, .m_video {float:left;vertical-align:bottom;}
+
+.thumb_photo img, .s_photo img, .m_photo img {
+    margin:2px;
+    padding:4px;
+    border:1px #DFDFDF solid;
+    background:#fff;
+    box-shadow: 3px 3px 3px #ccc;
+}
+
+.s_photo img {padding:3px}
+
+.thumb_photo img:hover {
+    box-shadow: 8px 8px 8px #666;
+    -webkit-transition:all 0.5s ease-in-out;
+    -moz-transition:all 0.5s ease-in-out;
+    -o-transition:all 0.5s ease-in-out;
+    -ms-transition:all 0.5s ease-in-out;
+    transition:all 0.5s ease-in-out;
+}
+
+.thumb_photo {margin:10px;}
+
+.thumb_photo img {width:160px;height:150px;}
+
+.s_photo {width:72px;margin:4px;}
+
+.s_photo img {width:62px;height:62px;}
+
+.m_photo {width:150px;margin:16px;}
+
+.m_photo img {width:140px;height:140px;}
+
+.m_video {width:180px;margin:16px;}
+
+.user_status img {
+    position:absolute;
+    width:12px;
+    height:12px;
+    margin:4px;
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+}
+
+.cy_ico img {
+    width:16px;
+    height:11px;
+    margin:0;
+    padding:0;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+}
+
+.picture:hover a{opacity:.5}
+.picture a,
+background-position: center center;
+background-color: rgba(14, 14, 14, 0.3);
+float: left;
+height: 110px;
+width: 145px;
+margin: 1px 1px 0 0;
+overflow: hidden;
+-moz-transition:0.25s;
+-webkit-transition:0.25s;
+-o-transition:0.25s;
+transition:0.25s;
+}
+.picture a:hover{opacity:1}
+.picture_block {
+    margin: 10px 8px 10px;
+    overflow: hidden;
+    width: 880px;
+}
+.img_picture {
+    height:200px;
+    width:200px;
+    border-radius:6px;
+}
+
+.thumb_img, .avatar, .map {
+    opacity:.9;
+    border-radius:5px;
+    margin-right:12px;
+    box-shadow:0 1px 3px rgba(51,51,51,0.3);
+    border: 1px solid #999;
+}
+
+/*----- Advertising Available -----*/
+.ads_728_90 {}
+.ads_468_60 {}
+.ads_160_600 {}
+.ads_120_600 {}
+.ads_336_280 {}
+.ads_300_250 {}
+.ads_250_250 {}
+.ads_200_200 {}

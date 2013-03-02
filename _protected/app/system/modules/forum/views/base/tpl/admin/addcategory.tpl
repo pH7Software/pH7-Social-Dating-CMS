@@ -1,0 +1,1 @@
+{{ CategoryForm::display() }}

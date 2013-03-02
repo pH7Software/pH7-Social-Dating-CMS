@@ -1,0 +1,5 @@
+.carouselTooltip{position:relative;background:#eaeaea;display:inline-block;text-decoration:none;outline:none}
+.carouselTooltip p{font-family:Arial, Verdana, Helvetica, sans-serif !important;font-size:11px !important;color:#333 !important;visibility:hidden;position:absolute;left:50%;z-index:999;width:230px;margin-left:-127px;border:2px solid #ccc;opacity:.9;background-color:#ddd;background-image:linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,0));-moz-border-radius:4px;border-radius:4px;-moz-box-shadow:0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;-webkit-box-shadow:0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;box-shadow:0 1px 2px rgba(0,0,0,.4), 0 1px 0 rgba(255,255,255,.5) inset;text-shadow:0 1px 0 rgba(255,255,255,.4);padding:10px}
+.carouselTooltip:hover p{visibility:visible}
+.carouselTooltip p:before,.carouselTooltip p:after{content:"";position:absolute;z-index:1000;bottom:-7px;left:50%;margin-left:-8px;border-top:8px solid #ddd;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:0}
+.carouselTooltip p:before{border-top-color:#ccc;bottom:-8px}

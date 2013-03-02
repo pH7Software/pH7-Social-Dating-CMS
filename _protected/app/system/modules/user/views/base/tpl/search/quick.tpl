@@ -1,0 +1,1 @@
+{{SearchUserCoreForm::quick()}}

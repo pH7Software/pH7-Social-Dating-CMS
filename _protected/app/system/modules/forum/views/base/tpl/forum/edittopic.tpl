@@ -1,0 +1,1 @@
+{{ EditMsgForm::display() }}

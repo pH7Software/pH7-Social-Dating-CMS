@@ -1,0 +1,53 @@
+<?php
+/**
+ * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @package        PH7 / App / System / Module / Admin / Asset / Ajax
+ */
+namespace PH7;
+use PH7\Framework\Mvc\Request\HttpRequest;
+defined('PH7') or exit('Restricted access');
+
+class ReportAjax
+{
+
+    private $_oHttpRequest, $_oReportModel, $_bStatus;
+
+    public function __construct()
+    {
+        if (!(new Framework\Security\CSRF\Token)->check('report'))
+        exit(jsonMsg(0, Form::errorTokenMsg()));
+
+        $this->_oHttpRequest = new HttpRequest;
+        $this->_oReportModel = new ReportCoreModel;
+
+        switch ($this->_oHttpRequest->post('type'))
+        {
+            case 'delete':
+                $this->delete();
+            break;
+
+            default:
+                Framework\Http\Http::setHeadersByCode(400);
+                exit('Bad Request Error');
+        }
+    }
+
+    protected function delete()
+    {
+        $this->_bStatus = $this->_oReportModel->delete($this->_oHttpRequest->post('reportId'));
+        echo ($this->_bStatus) ? jsonMsg(1, t('The Report we been deleted.')) : jsonMsg(0, t('Cannot remove Report, please try later.'));
+    }
+
+    public function __destruct()
+    {
+        unset($this->_oHttpRequest, $this->_oReportModel, $this->_bStatus);
+    }
+
+}
+
+// Only for Admins
+if (Admin::auth()) {
+    new ReportAjax;
+}

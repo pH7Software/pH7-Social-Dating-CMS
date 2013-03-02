@@ -1,0 +1,1 @@
+{{SearchPictureForm::display()}}

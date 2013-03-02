@@ -1,0 +1,16 @@
+#cache_chart {
+    height:400px;
+    width:600px;
+}
+
+#free_space_chart {
+    height:420px;
+    width:620px;
+}
+
+#user_chart {
+    height: 300px;
+    width: 100%;
+}
+
+table, td, th{border:1px solid gray}

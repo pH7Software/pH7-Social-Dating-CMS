@@ -1,0 +1,1 @@
+{{ SearchBlogForm::display() }}
