@@ -731,18 +731,19 @@ RewriteRule ^(.*)$ index.php?$1 [L,QSA]
 # Enable Expirations
 <IfModule mod_expires.c>
     ExpiresActive On
+    ExpiresDefault "access plus 1 month"
     # expire images/css/js/swf files after a month in the client's cache
-    ExpiresByType application/x-shockwave-flash "access plus 30 days"
-    ExpiresByType text/css "access plus 30 days"
-    ExpiresByType text/javascript "access plus 30 days"
-    ExpiresByType application/javascript "access plus 30 days"
-    ExpiresByType application/x-javascript "access plus 30 days"
-    ExpiresByType application/x-gzip "access plus 30 days"
-    ExpiresByType image/gif "access plus 30 days"
-    ExpiresByType image/jpeg "access plus 30 days"
-    ExpiresByType image/png "access plus 30 days"
-    ExpiresByType image/x-icon "access plus 30 days"
-    ExpiresByType image/vnd.microsoft.icon "access plus 30 days"
+    ExpiresByType text/css "access plus 31 days"
+    ExpiresByType text/javascript "access plus 31 days"
+    ExpiresByType application/javascript "access plus 31 days"
+    ExpiresByType application/x-javascript "access plus 31 days"
+    ExpiresByType application/x-gzip "access plus 31 days"
+    ExpiresByType image/gif "access plus 31 days"
+    ExpiresByType image/jpeg "access plus 31 days"
+    ExpiresByType image/png "access plus 31 days"
+    ExpiresByType application/x-shockwave-flash "access plus 31 days"
+    ExpiresByType image/vnd.microsoft.icon "access plus 31 days"
+    ExpiresByType image/x-icon "access plus 1 year"
 </IfModule>
 
 # For the videos extensions
