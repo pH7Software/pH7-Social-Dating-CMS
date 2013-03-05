@@ -176,7 +176,7 @@ class Http
      */
     public static function setMaintenanceCodes($iMaintenanceTime)
     {
-        header(static::getProtocol() . ' Service Temporarily Unavailable');
+        header(static::getProtocol() . ' 503 Service Temporarily Unavailable');
         header('Retry-After: ' . $iMaintenanceTime);
     }
 
