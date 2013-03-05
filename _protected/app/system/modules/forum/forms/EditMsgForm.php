@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Forum / Form
  */
 namespace PH7;
+
 use
 PH7\Framework\Config\Config,
 PH7\Framework\Session\Session,
@@ -16,8 +17,9 @@ class EditMsgForm
 
     public static function display()
     {
-        if(isset($_POST['submit_edit_msg'])) {
-            if(\PFBC\Form::isValid($_POST['submit_edit_msg']))
+        if (isset($_POST['submit_edit_msg']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_edit_msg']))
                 new EditMsgFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

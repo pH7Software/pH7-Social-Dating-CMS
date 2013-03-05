@@ -12,7 +12,8 @@ class AlbumForm
 
     public static function display()
     {
-        if (isset($_POST['submit_picture_album'])) {
+        if (isset($_POST['submit_picture_album']))
+        {
             if (\PFBC\Form::isValid($_POST['submit_picture_album']))
                 new AlbumFormProcessing;
 

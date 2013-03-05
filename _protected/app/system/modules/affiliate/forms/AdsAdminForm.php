@@ -12,8 +12,9 @@ class AdsAdminForm
 
     public static function display()
     {
-        if(isset($_POST['submit_admin_ads'])) {
-            if(\PFBC\Form::isValid($_POST['submit_admin_ads']))
+        if (isset($_POST['submit_admin_ads']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_admin_ads']))
                 new AdsAdminFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

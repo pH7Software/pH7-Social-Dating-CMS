@@ -16,10 +16,11 @@ PH7\Framework\Url\HeaderUrl;
 class JoinForm
 {
 
-   public static function step1()
-   {
-        if(isset($_POST['submit_join_aff'])) {
-            if(\PFBC\Form::isValid($_POST['submit_join_aff']))
+    public static function step1()
+    {
+        if (isset($_POST['submit_join_aff']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_join_aff']))
                 (new JoinFormProcessing)->step1();
 
             HeaderUrl::redirect();
@@ -51,7 +52,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Postal code (zip):'), 'zip_code', array('id'=>'str_zip_code', 'value'=>Geo::getZipCode(), 'onblur'=>'CValid(this.value,this.id,2,10)', 'title'=>t('Enter your post code (Zip).'), 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
 
-        if(DbConfig::getSetting('isCaptchaAffiliateSignup'))
+        if (DbConfig::getSetting('isCaptchaAffiliateSignup'))
         {
           $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description'=>t('Enter the code above:'))));
           $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));

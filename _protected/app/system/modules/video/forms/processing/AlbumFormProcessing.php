@@ -63,4 +63,5 @@ class AlbumFormProcessing extends Form
             HeaderUrl::redirect(UriRoute::get('video', 'main', 'addvideo', $iLastAlbumId));
         }
     }
+
 }

@@ -7,6 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
+
 use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
 
 class AdminEditFormProcessing extends Form

@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / User / Form
  */
 namespace PH7;
+
 use PH7\Framework\Session\Session;
 
 class NotificationForm
@@ -16,7 +17,8 @@ class NotificationForm
         $oUserModel = new UserCoreModel;
         $iProfileId = (int) (new Session)->get('member_id');
 
-        if (isset($_POST['submit_notification'])) {
+        if (isset($_POST['submit_notification']))
+        {
             if (\PFBC\Form::isValid($_POST['submit_notification']))
                 new NotificationFormProcessing($oUserModel, $iProfileId);
             Framework\Url\HeaderUrl::redirect();

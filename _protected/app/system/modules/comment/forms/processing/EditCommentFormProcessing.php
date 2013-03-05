@@ -25,14 +25,15 @@ class EditCommentFormProcessing extends Form
         $iRecipientId = $this->httpRequest->get('recipient', 'int');
         $iSenderId = $this->httpRequest->get('sender', 'int');
 
-        if(!$oCommentModel->idExists($iRecipientId, $sTable)) {
+        if (!$oCommentModel->idExists($iRecipientId, $sTable))
+        {
             \PFBC\Form::setError('form_comment', t('The comment recipient does not exists.'));
         }
         else
         {
-            if(($iMemberId == $iRecipientId) || ($iMemberId == $iSenderId))
+            if (($iMemberId == $iRecipientId) || ($iMemberId == $iSenderId))
             {
-                if($oCommentModel->update($iCommentId, $iRecipientId, $iSenderId, $this->httpRequest->post('comment'), 1, $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $sTable))
+                if ($oCommentModel->update($iCommentId, $iRecipientId, $iSenderId, $this->httpRequest->post('comment'), 1, $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $sTable))
                 {
                     /* Clean All Data of CommentModel Cache */
                     (new Framework\Cache\Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
@@ -46,7 +47,6 @@ class EditCommentFormProcessing extends Form
             }
         }
         unset($oCommentModel);
-
     }
 
 }

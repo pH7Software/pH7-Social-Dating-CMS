@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Forum / Form
  */
 namespace PH7;
+
 use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\HttpRequest;
 
 class EditReplyMsgForm
@@ -13,8 +14,9 @@ class EditReplyMsgForm
 
     public static function display()
     {
-        if(isset($_POST['submit_edit_reply_msg'])) {
-            if(\PFBC\Form::isValid($_POST['submit_edit_reply_msg']))
+        if (isset($_POST['submit_edit_reply_msg']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_edit_reply_msg']))
                 new EditReplyMsgFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

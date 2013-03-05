@@ -16,9 +16,9 @@ class Resource
 {
 
     /**
-     * @desc     Settor
-     * @param    string  $sName
-     * @param    string  $sValue
+     * @desc Settor
+     * @param string $sName
+     * @param string $sValue
      */
     public function __set($sName, $sValue)
     {
@@ -35,8 +35,8 @@ class Resource
     }
 
     /**
-     * @desc     Gettor
-     * @param    string  $sName
+     * @desc Gettor
+     * @param string $sName
      */
     public function __get($sName)
     {

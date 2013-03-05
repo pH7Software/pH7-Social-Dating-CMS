@@ -19,11 +19,13 @@ class ResendActivationCoreForm
 
         // Show the form only if the activation mode is activated by email
         $sMod = ($sTable == 'Affiliate') ? 'aff' : 'user';
-        if(DbConfig::getSetting($sMod . 'ActivationType') == 2) {
-            if(isset($_POST['submit_resend_activation'])) {
-                if(\PFBC\Form::isValid($_POST['submit_resend_activation'])) {
+        if (DbConfig::getSetting($sMod . 'ActivationType') == 2)
+        {
+            if (isset($_POST['submit_resend_activation']))
+            {
+                if (\PFBC\Form::isValid($_POST['submit_resend_activation']))
                     new ResendActivationCoreFormProcessing($sTable);
-                }
+
                 Framework\Url\HeaderUrl::redirect();
             }
 

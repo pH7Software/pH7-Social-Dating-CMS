@@ -7,6 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
+
 use
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Mvc\Model\DbConfig,
@@ -46,7 +47,7 @@ class NoteFormProcessing extends Form
                 'post_id' => $this->httpRequest->post('post_id'),
                 'lang_id' => $this->httpRequest->post('lang_id'),
                 'title' => $this->httpRequest->post('title'),
-                'content' => $this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), // HTML contents, So we use the constant: \PH7\Framework\Mvc\Router\UriRoute::ONLY_XSS_CLEAN
+                'content' => $this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN
                 'slogan' => $this->httpRequest->post('slogan'),
                 'tags' => $this->httpRequest->post('tags'),
                 'page_title' => $this->httpRequest->post('page_title'),
@@ -78,7 +79,7 @@ class NoteFormProcessing extends Form
                     return; // Stop execution of the method.
                 }
 
-                // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Router\UriRoute::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+                // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
                 // and damages the SET function SQL for entry into the database.
                 foreach($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId)
                 {

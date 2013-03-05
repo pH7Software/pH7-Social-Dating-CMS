@@ -16,9 +16,9 @@ class Role
 {
 
     /**
-     * @desc     Settor
-     * @param    string  $sName
-     * @param    string  $sValue
+     * @desc Settor
+     * @param string $sName
+     * @param string $sValue
      */
     public function __set($sName, $sValue)
     {
@@ -35,9 +35,9 @@ class Role
     }
 
     /**
-     * @desc     Gettor
-     * @param    string  $sName
-     * @return   string
+     * @desc Gettor
+     * @param string $sName
+     * @return string
      */
     public function __get($sName)
     {

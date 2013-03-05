@@ -41,8 +41,7 @@ class MetaMainForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3 class="underline"><a href="#showDiv_listLang" title="' . t('Click here to show/hide the languages') . '">' . t('Change language for the Meta Tags') . '</a></h3>'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<ul class="hidden" id="showDiv_listLang">'));
 
-        $i = 1;
-        foreach ($aLangs as $sLang) $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . $i++ . ') ' . '<a class="bold" href="' . UriRoute::get(PH7_ADMIN_MOD, 'setting', 'metamain', $sLang, false) . '">' . $sLang . '</a></li>'));
+        for ($i=0, $iLength = count($aLangs); $i < $iLength; $i++) $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($i+1) . ') ' . '<a class="bold" href="' . UriRoute::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$i], false) . '">' . $aLangs[$i] . '</a></li>'));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul>'));
         unset($oFile, $aLangs);

@@ -7,11 +7,12 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
+
 use
 PH7\Framework\Mvc\Model\DbConfig,
-    PH7\Framework\Mvc\Request\HttpRequest,
-    PH7\Framework\Url\HeaderUrl,
-    PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Mvc\Router\UriRoute;
 
 class EditNoteFormProcessing extends Form
 {
@@ -53,7 +54,7 @@ class EditNoteFormProcessing extends Form
 
             $oNoteModel->deleteCategory($iNoteId);
 
-            // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Router\UriRoute::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+            // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
             // and damages the SET function SQL for entry into the database.
             foreach($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId) {
                 $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
@@ -66,7 +67,7 @@ class EditNoteFormProcessing extends Form
         if(!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oNoteModel->updatePost('title', $this->httpRequest->post('title'), $iNoteId, $iProfileId);
 
-        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Router\UriRoute::ONLY_XSS_CLEAN
+        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN
         if(!$this->str->equals($this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), $oPost->content))
             $oNoteModel->updatePost('content', $this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), $iNoteId, $iProfileId);
 

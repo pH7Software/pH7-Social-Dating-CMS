@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Forum / Form
  */
 namespace PH7;
+
 use PH7\Framework\Config\Config, PH7\Framework\Mvc\Request\HttpRequest;
 
 class EditCategoryForm
@@ -13,8 +14,9 @@ class EditCategoryForm
 
     public static function display()
     {
-        if(isset($_POST['submit_category_edit'])) {
-            if(\PFBC\Form::isValid($_POST['submit_category_edit']))
+        if (isset($_POST['submit_category_edit']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_category_edit']))
                 new EditCategoryFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

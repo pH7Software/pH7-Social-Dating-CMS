@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / User / Form
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Mvc\Request\HttpRequest;
 
 class SearchFriendForm

@@ -15,9 +15,9 @@ class ImportUserForm
 
     public static function display()
     {
-        if(isset($_POST['submit_import_user']))
+        if (isset($_POST['submit_import_user']))
         {
-            if(\PFBC\Form::isValid($_POST['submit_import_user']))
+            if (\PFBC\Form::isValid($_POST['submit_import_user']))
                 new ImportUserFormProcessing;
 
             Framework\Url\HeaderUrl::redirect();
@@ -33,6 +33,6 @@ class ImportUserForm
         $oForm->addElement(new \PFBC\Element\Select(t('Enclosure:'), 'enclosure', array('"', '/'), array('required'=>1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
-   }
+    }
 
 }

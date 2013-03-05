@@ -16,21 +16,21 @@ class Acl
 {
 
     /**
-     * @access      protected
-     * @var array   $aRoles
+     * @access protected
+     * @var array $aRoles
      */
     protected $aRoles = array();
 
     /**
-     * @access   protected
-     * @var      array   $aResources
+     * @access protected
+     * @var array $aResources
      */
     protected $aResources = array();
 
     /**
-     * @desc     Add a role
-     * @param    string  $sName
-     * @return   object  Instance of Role
+     * @desc Add a role
+     * @param string $sName
+     * @return object Instance of Role
      */
     public function addRole($sName)
     {
@@ -43,10 +43,10 @@ class Acl
     }
 
     /**
-     * @desc     Add a resource
-     * @param    string  $sName
-     * @param    array   $aAllowed
-     * @return   object  Instance of Resource
+     * @desc Add a resource
+     * @param string $sName
+     * @param array $aAllowed
+     * @return object Instance of Resource
      */
     public function addResource($sName, array $aAllowed)
     {
@@ -59,10 +59,10 @@ class Acl
     }
 
     /**
-     * @desc     Allowed
-     * @param    object  $oRole
-     * @param    object  $oResource
-     * @return   boolean
+     * @desc Allowed
+     * @param object $oRole
+     * @param object $oResource
+     * @return boolean
      */
     public function isAllowed($oRole, $oResource)
     {
@@ -71,9 +71,9 @@ class Acl
 
 
     /**
-     * @desc     Get a resource
-     * @param    string  $sName
-     * @return   resource
+     * @desc Get a resource
+     * @param string $sName
+     * @return resource
      */
     public function getResource($sName)
     {
@@ -91,9 +91,9 @@ class Acl
     }
 
     /**
-     * @desc     Get a role
-     * @param    string  $sName
-     * @return   role
+     * @desc Get a role
+     * @param string $sName
+     * @return role
      */
     public function getRole($sName)
     {

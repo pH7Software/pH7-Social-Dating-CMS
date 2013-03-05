@@ -25,7 +25,7 @@ class DeleteUserCoreFormProcessing extends Form
         $sTable = ($this->registry->module == 'user') ? 'Members' : 'Affiliate';
         $sSessPrefix = ($this->registry->module == 'user') ? 'member' : 'affiliate';
 
-        if((new UserCoreModel)->login($this->session->get($sSessPrefix.'_email'), $this->httpRequest->post('password'), $sTable) === 'password_does_not_exist')
+        if ((new UserCoreModel)->login($this->session->get($sSessPrefix.'_email'), $this->httpRequest->post('password'), $sTable) === 'password_does_not_exist')
         {
             \PFBC\Form::setError('form_delete_account',t('Oops! This password you entered is incorrect.'));
         }

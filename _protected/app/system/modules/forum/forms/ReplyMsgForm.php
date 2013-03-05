@@ -6,15 +6,17 @@
  * @package        PH7 / App / System / Module / Forum / Form
  */
 namespace PH7;
-use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Mvc\Request\HttpRequest;
+
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class ReplyMsgForm
 {
 
     public static function display()
     {
-        if(isset($_POST['submit_reply'])) {
-            if(\PFBC\Form::isValid($_POST['submit_reply']))
+        if (isset($_POST['submit_reply']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_reply']))
                 new ReplyMsgFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();
@@ -25,7 +27,7 @@ class ReplyMsgForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_reply', 'form_reply'));
         $oForm->addElement(new \PFBC\Element\Token('reply'));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Message:'), 'message', array('required' => 1, 'validation'=>new \PFBC\Validation\Str(4))));
-        if(DbConfig::getSetting('isCaptchaForum')) {
+        if (DbConfig::getSetting('isCaptchaForum')) {
             $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha','onkeyup'=>'CValid(this.value, this.id)','description'=>t('Enter the code above:'))));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }

@@ -30,20 +30,20 @@ class ConfigFileCoreFormProcessing extends Form
         $aOldData = parse_ini_file($sIniFile, true);
         $sData = file_get_contents($sIniFile);
 
-        foreach($this->httpRequest->post('config') as $sKey => $sVal)
+        foreach ($this->httpRequest->post('config') as $sKey => $sVal)
           $sData = str_replace($sKey . ' = ' . $aOldData[$sConfigVar][$sKey], $sKey . ' = ' . $sVal,  $sData);
 
         // Check and correct the file permission if necessary.
         $this->file->chmod($sIniFile, 0644);
 
-        if($this->file->save($sIniFile, $sData))
-            HeaderUrl::redirect($this->httpRequest->previousPage(), ('The file content was saved successfully!'));
+        $sRedirectUrl = $this->httpRequest->previousPage();
+        if ($this->file->save($sIniFile, $sData))
+            HeaderUrl::redirect($sRedirectUrl, ('The file content was saved successfully!'));
         else
-            HeaderUrl::redirect($this->httpRequest->previousPage(), t('The file content could not be saved!'), 'error');
+            HeaderUrl::redirect($sRedirectUrl, t('The file content could not be saved!'), 'error');
 
         // Check and correct the file permission if necessary.
         $this->file->chmod($sIniFile, 0644);
-
     }
 
 }

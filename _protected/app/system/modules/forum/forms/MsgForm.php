@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Forum / Form
  */
 namespace PH7;
+
 use
 PH7\Framework\Config\Config,
 PH7\Framework\Mvc\Model\DbConfig,
@@ -16,8 +17,9 @@ class MsgForm
 
     public static function display()
     {
-        if(isset($_POST['submit_msg'])) {
-            if(\PFBC\Form::isValid($_POST['submit_msg']))
+        if (isset($_POST['submit_msg']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_msg']))
                 new MsgFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();
@@ -26,7 +28,7 @@ class MsgForm
         $iForumsId = (new ForumModel)->getForum(null, 0, 300);
 
         $aForumsName = array();
-        foreach($iForumsId as $id)
+        foreach ($iForumsId as $id)
             $aForumsName[$id->forumId] = $id->name;
 
         $oForm = new \PFBC\Form('form_msg', '100%');
@@ -41,7 +43,8 @@ class MsgForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Subject:'), 'title', array('id'=>'str_title', 'onblur'=>'CValid(this.value,this.id,4,60)', 'required' => 1, 'validation'=>new \PFBC\Validation\RegExp(Config::getInstance()->values['module.setting']['url_title.pattern']))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_title"></span>'));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Message:'), 'message', array('required' => 1, 'validation'=>new \PFBC\Validation\Str(4))));
-        if(DbConfig::getSetting('isCaptchaForum')) {
+        if (DbConfig::getSetting('isCaptchaForum'))
+        {
             $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha','onkeyup'=>'CValid(this.value, this.id)','description'=>t('Enter the code above:'))));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }

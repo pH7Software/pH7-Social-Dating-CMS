@@ -30,11 +30,11 @@ class MsgFormProcessing extends Form
         $iProfileId = (int) $this->session->get('member_id');
         $iForumId = $this->httpRequest->get('forum_id', 'int');
 
-        if(!$oForumModel->checkWaitTopic($iProfileId, $iTimeDelay, $sCurrentTime))
+        if (!$oForumModel->checkWaitTopic($iProfileId, $iTimeDelay, $sCurrentTime))
         {
             \PFBC\Form::setError('form_msg', Form::waitWriteMsg($iTimeDelay));
         }
-        elseif($oForumModel->isDuplicateTopic($iProfileId, $sMessage))
+        elseif ($oForumModel->isDuplicateTopic($iProfileId, $sMessage))
         {
             \PFBC\Form::setError('form_msg', Form::duplicateContentMsg());
         }

@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Blog / Form
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Router\UriRoute;
 
 class AdminBlogForm
@@ -13,7 +14,8 @@ class AdminBlogForm
 
     public static function display()
     {
-        if (isset($_POST['submit_blog'])) {
+        if (isset($_POST['submit_blog']))
+        {
             if (\PFBC\Form::isValid($_POST['submit_blog']))
                 new AdminBlogFormProcessing();
 

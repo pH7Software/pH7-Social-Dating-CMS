@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Blog / Form
  */
 namespace PH7;
+
 use
 PH7\Framework\Str\Str,
 PH7\Framework\Navigation\Browser,
@@ -17,7 +18,8 @@ class EditAdminBlogForm
 
     public static function display()
     {
-        if (isset($_POST['submit_edit_blog'])) {
+        if (isset($_POST['submit_edit_blog']))
+        {
             if (\PFBC\Form::isValid($_POST['submit_edit_blog']))
                 new EditAdminBlogFormProcessing();
 

@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Game / Form
  */
 namespace PH7;
+
 use PH7\Framework\Config\Config, PH7\Framework\Mvc\Router\UriRoute;
 
 class AdminForm
@@ -13,7 +14,8 @@ class AdminForm
 
     public static function display()
     {
-        if(isset($_POST['submit_game'])) {
+        if (isset($_POST['submit_game']))
+        {
             if(\PFBC\Form::isValid($_POST['submit_game']))
                 new AdminFormProcessing();
 
@@ -23,7 +25,7 @@ class AdminForm
         $oCategoriesData = (new GameModel)->getCategory(null, 0, 500);
 
         $aCategoriesName = array();
-        foreach($oCategoriesData as $oId)
+        foreach ($oCategoriesData as $oId)
             $aCategoriesName[$oId->categoryId] = $oId->name;
 
         $oForm = new \PFBC\Form('form_game', 650);
