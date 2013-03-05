@@ -17,8 +17,9 @@ class BankForm
 
     public static function display()
     {
-        if(isset($_POST['submit_bank_account'])) {
-            if(\PFBC\Form::isValid($_POST['submit_bank_account']))
+        if (isset($_POST['submit_bank_account']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_bank_account']))
                 new BankFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();
@@ -33,7 +34,8 @@ class BankForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_bank_account', 'form_bank_account'));
         $oForm->addElement(new \PFBC\Element\Token('bank_account'));
 
-        if(AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id')) {
+        if (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id'))
+        {
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="s_button" href="' . UriRoute::get('affiliate', 'admin', 'userlist') . '">' . t('Return to back affiliates browse') . '</a></p>'));
         }
         unset($oHR);

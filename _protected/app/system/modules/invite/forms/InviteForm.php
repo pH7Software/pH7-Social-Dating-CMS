@@ -15,8 +15,9 @@ class InviteForm
 
     public static function display()
     {
-        if(isset($_POST['submit_invite'])) {
-            if(\PFBC\Form::isValid($_POST['submit_invite']))
+        if (isset($_POST['submit_invite']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_invite']))
                 new InviteFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

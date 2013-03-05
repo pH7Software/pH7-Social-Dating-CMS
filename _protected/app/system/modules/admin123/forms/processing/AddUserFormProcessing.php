@@ -45,9 +45,8 @@ class AddUserFormProcessing extends Form
         ];
 
         $iProfileId = (new UserCoreModel)->add($aData);
-        if(!empty($_FILES['avatar']['tmp_name'])) {
+        if (!empty($_FILES['avatar']['tmp_name']))
             (new UserCore)->setAvatar($iProfileId, $aData['username'], $_FILES['avatar']['tmp_name'], 1);
-        }
 
         HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The user has been successfully added.'));
     }

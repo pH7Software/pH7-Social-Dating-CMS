@@ -17,8 +17,9 @@ class PictureForm
 
     public static function display()
     {
-        if(isset($_POST['submit_picture'])) {
-            if(\PFBC\Form::isValid($_POST['submit_picture']))
+        if (isset($_POST['submit_picture']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_picture']))
                 new PictureFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();
@@ -32,7 +33,7 @@ class PictureForm
         $oAlbumId = (new PictureModel)->getAlbumsName((new Session)->get('member_id'));
 
         $aAlbumName = array();
-        foreach($oAlbumId as $iId) $aAlbumName[$iId->albumId] = $iId->name;
+        foreach ($oAlbumId as $iId) $aAlbumName[$iId->albumId] = $iId->name;
 
         $oForm = new \PFBC\Form('form_picture', 500);
         $oForm->configure(array('action' =>''));

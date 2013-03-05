@@ -73,6 +73,6 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Button(t('Search'),'submit',array('icon'=>'search')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'geo/autocompleteCity.js"></script>'));
         $oForm->render();
-     }
+    }
 
 }

@@ -7,6 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
+
 use
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Image\Image,
@@ -23,7 +24,8 @@ class AdminFormProcessing extends Form
 
         // Thumbnail
         $oImg = new Image($_FILES['thumb']['tmp_name']);
-        if(!$oImg->validate()) {
+        if(!$oImg->validate())
+        {
             \PFBC\Form::setError('form_game', Form::wrongImgFileTypeMsg());
             return; // Stop execution of the method.
         }

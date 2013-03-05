@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Comment / Form
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Url\HeaderUrl;
 
 class CommentForm
@@ -13,7 +14,8 @@ class CommentForm
 
     public static function display()
     {
-        if (isset($_POST['submit_comment'])) {
+        if (isset($_POST['submit_comment']))
+        {
             if (\PFBC\Form::isValid($_POST['submit_comment']))
                 new CommentFormProcessing();
 
@@ -26,7 +28,8 @@ class CommentForm
         $oForm->addElement(new \PFBC\Element\Token('comment'));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Add a comment:'), 'comment', array('id' => 'str_com', 'onblur' => 'CValid(this.value,this.id,2,2500)', 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 2500))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_com"></span>'));
-        if (DbConfig::getSetting('isCaptchaComment')) {
+        if (DbConfig::getSetting('isCaptchaComment'))
+        {
             $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the code above:'))));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }

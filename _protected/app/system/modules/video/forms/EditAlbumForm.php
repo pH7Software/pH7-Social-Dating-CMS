@@ -14,8 +14,9 @@ class EditAlbumForm
 
     public static function display()
     {
-        if(isset($_POST['submit_edit_video_album'])) {
-            if(\PFBC\Form::isValid($_POST['submit_edit_video_album']))
+        if (isset($_POST['submit_edit_video_album']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_edit_video_album']))
                 new EditAlbumFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

@@ -25,7 +25,7 @@ class SubscriptionFormProcessing extends Form
         $sName = $this->httpRequest->post('name');
         $bIsSubscriber = (new ExistsCoreModel)->email($sEmail, 'Subscribers');
 
-        switch($this->httpRequest->post('direction'))
+        switch ($this->httpRequest->post('direction'))
         {
             case 'subscrire': {
                 if (!$bIsSubscriber)

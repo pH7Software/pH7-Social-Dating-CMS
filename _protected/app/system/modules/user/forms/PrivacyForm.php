@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / User / Form
  */
 namespace PH7;
+
 use PH7\Framework\Session\Session, PH7\Framework\Registry\Registry;
 
 class PrivacyForm
@@ -16,7 +17,8 @@ class PrivacyForm
         $oUserModel = new UserCoreModel;
         $iProfileId = (int) (new Session)->get('member_id');
 
-        if (isset($_POST['submit_privacy_account'])) {
+        if (isset($_POST['submit_privacy_account']))
+        {
             if (\PFBC\Form::isValid($_POST['submit_privacy_account']))
                 new PrivacyFormProcessing($oUserModel, $iProfileId);
 
@@ -42,6 +44,5 @@ class PrivacyForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 
 }

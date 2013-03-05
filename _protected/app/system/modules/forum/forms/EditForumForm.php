@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Forum / Form
  */
 namespace PH7;
+
 use PH7\Framework\Config\Config, PH7\Framework\Mvc\Request\HttpRequest;
 
 class EditForumForm
@@ -13,8 +14,9 @@ class EditForumForm
 
     public static function display()
     {
-        if(isset($_POST['submit_edit_forum'])) {
-            if(\PFBC\Form::isValid($_POST['submit_edit_forum']))
+        if (isset($_POST['submit_edit_forum']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_edit_forum']))
                 new EditForumFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();
@@ -25,7 +27,7 @@ class EditForumForm
         $oCategoriesData = $oForumModel->getCategory(null, 0, 300);
 
         $aCategoriesName = array();
-        foreach($oCategoriesData as $oId)
+        foreach ($oCategoriesData as $oId)
             $aCategoriesName[$oId->categoryId] = $oId->title;
 
         unset($oForumModel);

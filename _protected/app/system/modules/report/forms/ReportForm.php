@@ -17,8 +17,9 @@ class ReportForm
     {
         $oHttpRequest = new HttpRequest;
 
-        if($oHttpRequest->postExists('submit_report')) {
-            if(\PFBC\Form::isValid($oHttpRequest->post('submit_report')))
+        if ($oHttpRequest->postExists('submit_report'))
+        {
+            if (\PFBC\Form::isValid($oHttpRequest->post('submit_report')))
                 new ReportFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

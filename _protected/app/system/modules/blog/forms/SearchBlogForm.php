@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Blog / Form
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Router\UriRoute;
 
 class SearchBlogForm

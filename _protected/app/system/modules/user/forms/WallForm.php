@@ -22,8 +22,9 @@ class WallForm
 
    public static function display()
    {
-        if(isset($_POST['submit_wall'])) {
-            if(\PFBC\Form::isValid($_POST['submit_wall']))
+        if (isset($_POST['submit_wall']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_wall']))
                 new WallFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

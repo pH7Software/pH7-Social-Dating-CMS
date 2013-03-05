@@ -8,10 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Url\HeaderUrl,
-PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Request\HttpRequest;
 
 class EditFormProcessing extends Form
 {
@@ -47,7 +44,7 @@ class EditFormProcessing extends Form
             (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Members', null)->clear();
         }
 
-        // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Router\UriRoute::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+        // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
         // and damages the SET function SQL for entry into the database.
         if(!$this->str->equals($this->httpRequest->post('match_sex', HttpRequest::ONLY_XSS_CLEAN), $oUser->matchSex))
             $oUserModel->updateProfile('matchSex', Form::setVal($this->httpRequest->post('match_sex', HttpRequest::ONLY_XSS_CLEAN)), $iProfileId);

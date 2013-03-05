@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Game / Form
  */
 namespace PH7;
+
 use
 PH7\Framework\Config\Config,
 PH7\Framework\Str\Str,
@@ -17,8 +18,9 @@ class AdminEditForm
 
     public static function display()
     {
-        if(isset($_POST['submit_edit'])) {
-            if(\PFBC\Form::isValid($_POST['submit_edit']))
+        if (isset($_POST['submit_edit']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_edit']))
                 new AdminEditFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();
@@ -32,13 +34,13 @@ class AdminEditForm
         $oCategoriesData = $oGameModel->getCategory(null, 0, 500);
 
         $aCategoriesName = array();
-        foreach($oCategoriesData as $oId)
+        foreach ($oCategoriesData as $oId)
              $aCategoriesName[$oId->categoryId] = $oId->name;
 
         unset($oHttpRequest, $oGameModel);
 
 
-        if(!empty($oGame) && (new Str)->equals($iGameId, $oGame->gameId))
+        if (!empty($oGame) && (new Str)->equals($iGameId, $oGame->gameId))
         {
             $oForm = new \PFBC\Form('form_edit', 650);
             $oForm->configure(array('action' => '' ));

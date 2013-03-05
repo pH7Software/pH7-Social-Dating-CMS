@@ -12,8 +12,9 @@ class DesignForm
 
     public static function display()
     {
-        if(isset($_POST['submit_design'])) {
-            if(\PFBC\Form::isValid($_POST['submit_design']))
+        if (isset($_POST['submit_design']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_design']))
                 new DesignFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

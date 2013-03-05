@@ -70,7 +70,6 @@ class EditFormProcessing extends Form
          (new Affiliate)->clearReadProfileCache($iProfileId, 'Affiliate');
 
          \PFBC\Form::setSuccess('form_aff_edit_account', t('Your profile has been saved successfully!'));
-
     }
 
 }

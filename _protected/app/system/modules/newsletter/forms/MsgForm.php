@@ -12,8 +12,9 @@ class MsgForm
 
     public static function display()
     {
-        if(isset($_POST['submit_msg'])) {
-            if(\PFBC\Form::isValid($_POST['submit_msg']))
+        if (isset($_POST['submit_msg']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_msg']))
                 new MsgFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Forum / Form
  */
 namespace PH7;
+
 use PH7\Framework\Config\Config;
 
 class CategoryForm
@@ -13,8 +14,9 @@ class CategoryForm
 
     public static function display()
     {
-        if(isset($_POST['submit_category'])) {
-            if(\PFBC\Form::isValid($_POST['submit_category']))
+        if (isset($_POST['submit_category']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_category']))
                 new CategoryFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();

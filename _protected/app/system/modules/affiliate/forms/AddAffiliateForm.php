@@ -14,9 +14,9 @@ class AddAffiliateForm
 
     public static function display()
     {
-        if(isset($_POST['submit_add_aff']))
+        if (isset($_POST['submit_add_aff']))
         {
-            if(\PFBC\Form::isValid($_POST['submit_add_aff']))
+            if (\PFBC\Form::isValid($_POST['submit_add_aff']))
                 new AddAffiliateFormProcessing;
 
             Framework\Url\HeaderUrl::redirect();
@@ -44,6 +44,6 @@ class AddAffiliateForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'geo/autocompleteCity.js"></script>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
-   }
+    }
 
 }

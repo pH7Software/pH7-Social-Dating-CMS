@@ -18,8 +18,9 @@ class EditForm
 
     public static function display()
     {
-        if(isset($_POST['submit_user_edit_account'])) {
-            if(\PFBC\Form::isValid($_POST['submit_user_edit_account']))
+        if (isset($_POST['submit_user_edit_account']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_user_edit_account']))
                 new EditFormProcessing();
 
             Framework\Url\HeaderUrl::redirect();
@@ -39,7 +40,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_user_edit_account', 'form_user_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
-        if(AdminCore::auth() && !User::auth() && $oHR->getExists('profile_id'))
+        if (AdminCore::auth() && !User::auth() && $oHR->getExists('profile_id'))
         {
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="s_button" href="' . UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Return to back users browse') . '</a></p>'));
 

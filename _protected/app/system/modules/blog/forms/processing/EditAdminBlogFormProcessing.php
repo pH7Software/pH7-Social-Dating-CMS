@@ -7,6 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
+
 use
 PH7\Framework\Mvc\Request\HttpRequest,
 PH7\Framework\Url\HeaderUrl,
@@ -26,7 +27,8 @@ class EditAdminBlogFormProcessing extends Form
         $oPost = $oBlogModel->readPost($sPostId);
 
         $sPostId = $this->httpRequest->post('post_id'); // Updating the ID of the post if it has changed.
-        if(!$this->str->equals($sPostId, $oPost->postId)) {
+        if(!$this->str->equals($sPostId, $oPost->postId))
+        {
             if($oBlog->checkPostId($sPostId))
             {
                 $oBlogModel->updatePost('postId', $sPostId, $iBlogId);
@@ -43,7 +45,7 @@ class EditAdminBlogFormProcessing extends Form
         {
             $oBlogModel->deleteCategory($iBlogId);
 
-            // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Router\UriRoute::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+            // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
             // and damages the SET function SQL for entry into the database.
             foreach($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId)
             {
@@ -57,7 +59,7 @@ class EditAdminBlogFormProcessing extends Form
         if(!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oBlogModel->updatePost('title', $this->httpRequest->post('title'), $iBlogId);
 
-        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Router\UriRoute::ONLY_XSS_CLEAN
+        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN
         if(!$this->str->equals($this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), $oPost->content))
             $oBlogModel->updatePost('content', $this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), $iBlogId);
 

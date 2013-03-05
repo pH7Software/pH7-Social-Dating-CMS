@@ -12,10 +12,11 @@ use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\HttpRequest;
 class EditVideoForm
 {
 
-   public static function display()
-   {
-        if(isset($_POST['submit_edit_video'])) {
-            if(\PFBC\Form::isValid($_POST['submit_edit_video']))
+    public static function display()
+    {
+        if (isset($_POST['submit_edit_video']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_edit_video']))
                 new EditVideoFormProcessing;
 
             Framework\Url\HeaderUrl::redirect();
@@ -34,6 +35,6 @@ class EditVideoForm
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description of your video:'), 'description', array('value'=>$oVideo->description, 'validation'=>new \PFBC\Validation\Str(2,200))));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
-   }
+    }
 
 }

@@ -17,8 +17,8 @@ PH7\Framework\Url\HeaderUrl;
 class LoginFormProcessing extends Form
 {
 
-   public function __construct()
-   {
+    public function __construct()
+    {
         parent::__construct();
 
         $oAffModel = new AffiliateModel;
@@ -97,6 +97,6 @@ class LoginFormProcessing extends Form
                 HeaderUrl::redirect(UriRoute::get('affiliate','account','index'), t('You signup is successfully!'));
             }
         }
-   }
+    }
 
 }

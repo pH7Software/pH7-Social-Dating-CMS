@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Note / Form
  */
 namespace PH7;
+
 use
 PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Model\DbConfig,
@@ -54,7 +55,8 @@ class NoteForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Author (meta tag):'), 'meta_author', array('validation' => new \PFBC\Validation\Str(2, 50))));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Copyright (meta tag):'), 'meta_copyright', array('validation' => new \PFBC\Validation\Str(2, 50))));
         $oForm->addElement(new \PFBC\Element\Radio(t('Enable Comment:'), 'enable_comment', array('1' => t('Enable'), '0' => t('Disable')), array('value' => '1', 'required' => 1)));
-        if (DbConfig::getSetting('isCaptchaNote')) {
+        if (DbConfig::getSetting('isCaptchaNote'))
+        {
             $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the code above:'))));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }

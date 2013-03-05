@@ -7,6 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
+
 use
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Mvc\Request\HttpRequest,
@@ -25,7 +26,8 @@ class AdminBlogFormProcessing extends Form
         $oBlog = new Blog;
         $oBlogModel = new BlogModel;
 
-        if(!$oBlog->checkPostId($this->httpRequest->post('post_id'))) {
+        if (!$oBlog->checkPostId($this->httpRequest->post('post_id')))
+        {
             \PFBC\Form::setError('form_blog', t('The ID of the article is invalid or incorrect.'));
         }
         else
@@ -34,7 +36,7 @@ class AdminBlogFormProcessing extends Form
                 'post_id' => $this->httpRequest->post('post_id'),
                 'lang_id' => $this->httpRequest->post('lang_id'),
                 'title' => $this->httpRequest->post('title'),
-                'content' => $this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), // HTML contents, So we use the constant: \PH7\Framework\Mvc\Router\UriRoute::ONLY_XSS_CLEAN
+                'content' => $this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN
                 'slogan' => $this->httpRequest->post('$slogan'),
                 'tags'=> $this->httpRequest->post('tags'),
                 'page_title' => $this->httpRequest->post('page_title'),
@@ -47,7 +49,7 @@ class AdminBlogFormProcessing extends Form
                 'created_date' => $this->dateTime->get()->dateTime('Y-m-d H:i:s')
             ];
 
-            if(!$oBlogModel->addPost($aData))
+            if (!$oBlogModel->addPost($aData))
             {
                 $this->sMsg = t('An error occurred while adding the article.');
             }
@@ -59,9 +61,9 @@ class AdminBlogFormProcessing extends Form
                 $oPost = $oBlogModel->readPost($iBlogId);
                 $oBlog->setThumb($this->file, $oPost);
 
-                // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Router\UriRoute::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+                // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
                 // and damages the SET function SQL for entry into the database.
-                foreach($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId)
+                foreach ($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId)
                 {
                     $oBlogModel->addCategory($iCategoryId, $iBlogId);
                 }

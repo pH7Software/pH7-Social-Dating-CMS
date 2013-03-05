@@ -17,7 +17,7 @@ class AnalyticsApiFormProcessing extends Form
     {
         parent::__construct();
 
-        if(!$this->str->equals($this->httpRequest->post('code', HttpRequest::NO_CLEAN), (new DesignModel)->analyticsApi(false, false)))
+        if (!$this->str->equals($this->httpRequest->post('code', HttpRequest::NO_CLEAN), (new DesignModel)->analyticsApi(false, false)))
         {
             (new Framework\Mvc\Model\AnalyticsModel)->updateApi($this->httpRequest->post('code', HttpRequest::NO_CLEAN));
 
