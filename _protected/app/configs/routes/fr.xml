@@ -103,7 +103,7 @@
       <route url="about/team" path="system/modules" module="page" controller="main" action="team" />
 
       <!-- Error -->
-      <route url="error/([0-9]+)" path="system/modules" module="error" controller="http" action="index" vars="error" />
+      <route url="error/([0-9]+)" path="system/modules" module="error" controller="http" action="index" vars="code" />
 
       <!-- Site Map -->
       <route url="site-map" path="system/modules" module="xml" controller="sitemap" action="index" />
