@@ -562,17 +562,17 @@ Deny from env=bad_bot
  Deny from env=bad_bot
 </Limit>
 
-ErrorDocument 400 /error/http/index?error=400
-ErrorDocument 401 /error/http/index?error=401
-ErrorDocument 402 /error/http/index?error=402
-ErrorDocument 403 /error/http/index?error=403
+ErrorDocument 400 /error/http/index?code=400
+ErrorDocument 401 /error/http/index?code=401
+ErrorDocument 402 /error/http/index?code=402
+ErrorDocument 403 /error/http/index?code=403
 ErrorDocument 404 /error
-ErrorDocument 405 /error/http/index?error=405
-ErrorDocument 500 /error/http/index?error=500
-ErrorDocument 501 /error/http/index?error=501
-ErrorDocument 502 /error/http/index?error=502
-ErrorDocument 504 /error/http/index?error=504
-ErrorDocument 505 /error/http/index?error=505
+ErrorDocument 405 /error/http/index?code=405
+ErrorDocument 500 /error/http/index?code=500
+ErrorDocument 501 /error/http/index?code=501
+ErrorDocument 502 /error/http/index?code=502
+ErrorDocument 504 /error/http/index?code=504
+ErrorDocument 505 /error/http/index?code=505
 
 # URL Rewrite
 #<IfModule mod_rewrite.c>

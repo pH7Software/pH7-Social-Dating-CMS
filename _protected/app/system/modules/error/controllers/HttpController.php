@@ -15,7 +15,7 @@ class HttpController extends Controller
 
     public function index()
     {
-        switch ($this->httpRequest->get('error', 'int'))
+        switch ($this->httpRequest->get('code', 'int'))
         {
             case 400:
                 Http::setHeadersByCode(400);
