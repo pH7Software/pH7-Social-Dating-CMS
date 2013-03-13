@@ -3,7 +3,7 @@
  * @title            PH7 Template Engine
  * @desc             Create class Template Engine for pH7 CMS!
  *
- * @updated          The Last Update 01/14/13 23:22 (Greenwich Mean Time)
+ * @updated          The Last Update 03/13/13 20:15 (Greenwich Mean Time)
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
@@ -274,6 +274,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Compiler template.
      *
+     * @access private
      * @return boolean
      * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception If the template file could not be recovered or cannot be written.
      */
@@ -294,25 +295,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         // Parser the language constructs
         $this->parse();
 
-        $sPhpHeader = '
-namespace PH7;
-defined(\'PH7\') or exit(\'Restricted access\');
-/*
-Created on ' . gmdate('Y-m-d H:i:s') . '
-Compiled from file: ' . $this->sTemplateDirFile . '
-Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::AUTHOR . '
-*/
-/***************************************************************************
- *     ' . self::SOFTWARE_NAME . ' ' . self::SOFTWARE_COMPANY . '
- *               --------------------
- * @since      Mon Mar 21 2011
- * @author     SORIA Pierre-Henry
- * @email      ' . self::SOFTWARE_EMAIL . '
- * @link       ' . self::SOFTWARE_WEBSITE . '
- * @copyright  ' . self::SOFTWARE_COPYRIGHT . '
- * @license    ' . self::LICENSE . '
- ***************************************************************************/
-';
+        $sPhpHeader = $this->getHeaderContents();
 
         // Check if the "$design" variable is actually part of the \PH7\Framework\Layout\Html\Design class
         if (!$this->checkDesignInstance()) $this->setErrMsg();
@@ -353,6 +336,7 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
     /**
      * Parse the code for translating the template language.
      *
+     * @access private
      * @return void
      */
     private function parse()
@@ -585,7 +569,7 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
     }
 
     /**
-     * Cache system for static contents with support for different templates and languages!
+     * Cache system for the static contents with support for different templates and languages!
      *
      * @access protected
      * @return void
@@ -756,6 +740,35 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
     protected function getCurrentController()
     {
         return $this->httpRequest->currentController();
+    }
+
+    /**
+     * Get the header content to put in the file.
+     *
+     * @access protected
+     * @return string
+     */
+    final protected function getHeaderContents()
+    {
+        return '
+namespace PH7;
+defined(\'PH7\') or exit(\'Restricted access\');
+/*
+Created on ' . gmdate('Y-m-d H:i:s') . '
+Compiled from file: ' . $this->sTemplateDirFile . '
+Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::AUTHOR . '
+*/
+/***************************************************************************
+ *     ' . self::SOFTWARE_NAME . ' ' . self::SOFTWARE_COMPANY . '
+ *               --------------------
+ * @since      Mon Mar 21 2011
+ * @author     SORIA Pierre-Henry
+ * @email      ' . self::SOFTWARE_EMAIL . '
+ * @link       ' . self::SOFTWARE_WEBSITE . '
+ * @copyright  ' . self::SOFTWARE_COPYRIGHT . '
+ * @license    ' . self::LICENSE . '
+ ***************************************************************************/
+';
     }
 
     /**

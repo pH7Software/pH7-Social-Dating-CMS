@@ -7,21 +7,32 @@ We want to train a large team to work on this dating software open source projec
 Please contact us to work on this exciting project.
 Thank you!
 
-## Server Requirements
 
-PHP 5.4.0 or higher.
+## Requirements
+
+**Application Server** PHP 5.4.0 or higher.
+**Database** MySQL 5.0.15 or higher.
+**Operating System** Linux/Unix (Red Hat, CentOS, Debian, FreeBSD, Mandrake, Mac OS, etc.), Windows.
+**Web Server** Apache with mod_php or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work you should change some pieces of code and change the url rewriting to make it work).
+**URL rewriting extension modules** Apache, nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
+**Video** [FFmpeg](http://ffmpeg.org)
+**Minimum Web Space** 2.0 GB
+
 
 ## Author
 
 Pierre-Henry Soria
 
+
 ## Website
 
 **[Social Dating Script Website](http://software.hizup.com)**
 
+
 ## Contact
 
 Contact me at ph7software@gmail.com
+
 
 ## License
 

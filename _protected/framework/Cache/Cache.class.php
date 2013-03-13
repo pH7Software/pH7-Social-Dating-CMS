@@ -142,7 +142,7 @@ class Cache
      * Gets the data cache.
      *
      * @param boolean $bPrint Default FALSE
-     * @return mixed (boolean | integer | float | string | array | object) Returns the converted cache value if successful otherwise returns false.
+     * @return mixed (boolean | integer | float | string | array | object) Returns the converted cache value if successful, false otherwise.
      */
     public function get($bPrint = false)
     {
@@ -188,25 +188,24 @@ class Cache
      *
      * @access private
      * @param boolean $bPrint
-     * @return mixed (boolean | string) Returns true or a string if successful otherwise returns false.
+     * @return mixed (boolean | string) Returns true or a string if successful, false otherwise.
      */
     private function read($bPrint)
     {
         if ($this->check())
         {
-            $sFile = $this->getFile();
-            require $sFile;
+            require $this->getFile();
 
-            if (!empty($mData))
+            if (!empty($_mData))
             {
                 if ($bPrint)
                 {
-                    echo $mData;
+                    echo $_mData;
                     return true;
                 }
                 else
                 {
-                    return $mData;
+                    return $_mData;
                 }
             }
         }
@@ -228,23 +227,9 @@ class Cache
       $sFile = $this->getFile();
       $this->oFile->createDir($this->sCacheDir . $this->sGroup);
 
-      $sPhpHeader = 'defined(\'PH7\') or exit(\'Restricted access\');
-/*
-Created on ' . gmdate('Y-m-d H:i:s') . '
-*/
-/***************************************************************************
- *     ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_COMPANY . '
- *               --------------------
- * @since      Mon Oct 14 2011
- * @author     SORIA Pierre-Henry
- * @email      ' . Kernel::SOFTWARE_EMAIL . '
- * @link       ' . Kernel::SOFTWARE_WEBSITE . '
- * @copyright  ' . Kernel::SOFTWARE_COPYRIGHT . '
- * @license    ' . Kernel::SOFTWARE_LICENSE . '
- ***************************************************************************/
-';
+      $sPhpHeader = $this->getHeaderContents();
 
-        $sData = '<?php ' . $sPhpHeader . '$mData = <<<EOF' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL . '?>';
+        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<EOF' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL . '?>';
 
         if ($rHandle = @fopen($sFile, 'wb'))
         {
@@ -302,6 +287,31 @@ Created on ' . gmdate('Y-m-d H:i:s') . '
     {
         $this->sCacheDir = (empty($this->sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
         return $this;
+    }
+
+    /**
+     * Get the header content to put in the file.
+     *
+     * @access protected
+     * @return string
+     */
+    final protected function getHeaderContents()
+    {
+        return 'defined(\'PH7\') or exit(\'Restricted access\');
+/*
+Created on ' . gmdate('Y-m-d H:i:s') . '
+*/
+/***************************************************************************
+ *     ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_COMPANY . '
+ *               --------------------
+ * @since      Mon Oct 14 2011
+ * @author     SORIA Pierre-Henry
+ * @email      ' . Kernel::SOFTWARE_EMAIL . '
+ * @link       ' . Kernel::SOFTWARE_WEBSITE . '
+ * @copyright  ' . Kernel::SOFTWARE_COPYRIGHT . '
+ * @license    ' . Kernel::SOFTWARE_LICENSE . '
+ ***************************************************************************/
+';
     }
 
     public function __destruct()
