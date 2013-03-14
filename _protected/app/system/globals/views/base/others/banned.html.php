@@ -29,7 +29,7 @@ $aMeta = [
 <p>
 <?php echo t('We are sorry, your IP address or your location is banned.') ?>
 <br /><br />
-<span class="small italic"><?php echo t('Kind regards, The Team.'); ?></span></p>
+<span class="small italic"><?php echo t('Kind regards, The Team.') ?></span></p>
 </div>
 <!-- End Content -->
 
