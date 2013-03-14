@@ -25,7 +25,7 @@ $aMeta = [
 <div id="content" class="s_padd">
 <br />
 <h1><?php echo t('Site Maintenance') ?></h1>
-<p><?php echo t('Woops! The website is currently down for maintenance.') ?><br />
+<p><?php echo t('Whoops! The website is currently down for maintenance.') ?><br />
 <?php echo t('Please come back later!') ?><br /><br />
 <span class="small italic"><?php echo t('Kind regards, The Team.') ?></span></p>
 </div>
