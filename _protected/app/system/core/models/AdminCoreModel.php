@@ -36,8 +36,8 @@ class AdminCoreModel extends UserCoreModel
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sSqlLimit = ($bCount === false) ?  ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(profileId) AS totalUsers';
+        $sSqlLimit = (!$bCount) ?  ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
 
         $sSqlQuery = (!empty($iBanned)) ? '(ban = \'1\') AND ' : '';
         $sSqlQuery .= ($sWhere === 'all') ? '(username LIKE :what OR email LIKE :what OR firstName LIKE :what OR lastName LIKE :what OR ip LIKE :what)' : $sWhere . ' LIKE :what';
@@ -48,7 +48,7 @@ class AdminCoreModel extends UserCoreModel
         $rStmt->bindValue(':what', '%' . $mWhat . '%', \PDO::PARAM_STR);
         $rStmt->bindParam(':groupId', $iGroupId, \PDO::PARAM_INT);
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -56,7 +56,7 @@ class AdminCoreModel extends UserCoreModel
 
         $rStmt->execute();
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

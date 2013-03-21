@@ -159,8 +159,8 @@ class PictureModel extends PictureCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $sSqlLimit = ($bCount === false) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(p.pictureId) AS totalPictures';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(p.pictureId) AS totalPictures';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare('SELECT p.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN'
@@ -168,14 +168,15 @@ class PictureModel extends PictureCoreModel
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
+
         $rStmt->execute();
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

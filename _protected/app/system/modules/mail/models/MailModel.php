@@ -95,8 +95,8 @@ class MailModel extends MailCoreModel
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sSqlLimit = ($bCount === false) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(messageId) AS totalMails';
+        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(messageId) AS totalMails';
         $sSqlWhere = (ctype_digit($mLooking)) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
@@ -107,16 +107,20 @@ class MailModel extends MailCoreModel
 
         $rStmt->bindParam(':recipient', $iRecipient, \PDO::PARAM_INT);
 
-        if ($bCount === false) {
+        if (!$bCount)
+        {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if ($bCount === false) {
+        if (!$bCount)
+        {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-        } else {
+        }
+        else
+        {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             $mData = (int) $oRow->totalMails;
             unset($oRow);
@@ -132,8 +136,8 @@ class MailModel extends MailCoreModel
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sSqlLimit = ($bCount === false) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(messageId) AS totalMails';
+        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(messageId) AS totalMails';
         $sSqlWhere = (ctype_digit($mLooking)) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
@@ -141,7 +145,7 @@ class MailModel extends MailCoreModel
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -149,7 +153,7 @@ class MailModel extends MailCoreModel
 
         $rStmt->execute();
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         }

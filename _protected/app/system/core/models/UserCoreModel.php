@@ -264,7 +264,6 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $bIsLimit = ($bCount === false);
         $bIsSingleAge = !empty($aParams['age']);
         $bIsAge = empty($aParams['age']) && !empty($aParams['age1']) && !empty($aParams['age2']);
         $bIsHeight = !empty($aParams['height']);
@@ -277,8 +276,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $bIsSex = !empty($aParams['sex']);
 
 
-        $sSqlLimit = ($bIsLimit) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bIsLimit) ? '*' : 'COUNT(m.profileId) AS totalUsers';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(m.profileId) AS totalUsers';
         $sSqlSingleAge = ($bIsSingleAge) ? ' AND birthDate LIKE :year ' : '';
         $sSqlAge = ($bIsAge) ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
         $sSqlHeight = ($bIsHeight) ? ' AND height = :height ' : '';
@@ -339,7 +338,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if ($bIsZipCode) $rStmt->bindValue(':zipCode', '%' . $aParams['zip_code'] . '%', \PDO::PARAM_STR);
         if ($bIsMail) $rStmt->bindValue(':email', '%' . $aParams['mail'] . '%', \PDO::PARAM_STR);
 
-        if ($bIsLimit)
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -347,7 +346,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt->execute();
 
-        if ($bIsLimit)
+        if (!$bCount)
         {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -930,18 +929,16 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $bIsLimit = ($bCount === false);
-
-        $sOrder = ($bIsLimit) ? $this->profileOrderBy($sOrder) : '';
-        $sSqlLimit = ($bIsLimit) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bIsLimit) ? '*' : 'COUNT(profileId) AS totalUsers';
+        $sOrder = (!$bCount) ? $this->profileOrderBy($sOrder) : '';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
 
         $sSqlCity = (!empty($sCity)) ?  'AND (city LIKE :city)' : '';
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM'.Db::prefix('Members').' WHERE (username <> \''.PH7_GHOST_USERNAME.'\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId=\'2\')' . $sOrder . $sSqlLimit);
         $rStmt->bindValue(':country', $sCountry, \PDO::PARAM_STR);
         (!empty($sCity)) ? $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR) : '';
 
-        if ($bIsLimit)
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -949,7 +946,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt->execute();
 
-        if ($bIsLimit)
+        if (!$bCount)
         {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

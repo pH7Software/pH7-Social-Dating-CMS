@@ -245,15 +245,15 @@ class ForumModel extends ForumCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 't');
 
-        $sSqlLimit = ($bCount === false) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ?  't.*, f.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId) AS totalTopics';
+        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ?  't.*, f.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId) AS totalTopics';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE t.topicId = :looking ' : ' WHERE t.message LIKE :looking OR t.title LIKE :looking OR m.username LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -261,7 +261,7 @@ class ForumModel extends ForumCoreModel
 
         $rStmt->execute();
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

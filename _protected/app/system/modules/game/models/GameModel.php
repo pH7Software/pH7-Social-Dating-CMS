@@ -51,15 +51,15 @@ class GameModel extends GameCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
 
-        $sSqlLimit = ($bCount === false) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ?  'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
+        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ?  'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Games') . 'AS g LEFT JOIN ' . Db::prefix('GamesCategories') . 'AS c ON g.categoryId = c.categoryId
         WHERE c.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -67,7 +67,7 @@ class GameModel extends GameCoreModel
 
         $rStmt->execute();
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -118,8 +118,8 @@ class GameModel extends GameCoreModel
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sSqlLimit = ($bCount === false) ?  ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ?  '*' : 'COUNT(gameId) AS totalGames';
+        $sSqlLimit = (!$bCount) ?  ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ?  '*' : 'COUNT(gameId) AS totalGames';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE gameId = :looking' : ' WHERE title LIKE :looking OR name LIKE :looking OR description LIKE :looking OR keywords LIKE :looking';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
@@ -127,7 +127,7 @@ class GameModel extends GameCoreModel
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -135,7 +135,7 @@ class GameModel extends GameCoreModel
 
         $rStmt->execute();
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

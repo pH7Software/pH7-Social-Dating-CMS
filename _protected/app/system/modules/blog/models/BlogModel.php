@@ -99,15 +99,15 @@ class BlogModel extends BlogCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $sSqlLimit = ($bCount === false) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ?  '*' : 'COUNT(b.blogId) AS totalBlogs';
+        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ?  '*' : 'COUNT(b.blogId) AS totalBlogs';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Blogs') . 'AS b LEFT JOIN ' . Db::prefix('BlogsCategories') . 'AS c ON b.blogId = c.blogId LEFT JOIN' .
         Db::prefix('BlogsDataCategories') . 'AS d ON c.categoryId = d.categoryId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -115,7 +115,7 @@ class BlogModel extends BlogCoreModel
 
         $rStmt->execute();
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -139,15 +139,15 @@ class BlogModel extends BlogCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $sSqlLimit = ($bCount === false) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ?  '*' : 'COUNT(blogId) AS totalBlogs';
+        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ?  '*' : 'COUNT(blogId) AS totalBlogs';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE blogId = :looking' : ' WHERE postId LIKE :looking OR pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Blogs') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -155,7 +155,7 @@ class BlogModel extends BlogCoreModel
 
         $rStmt->execute();
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
