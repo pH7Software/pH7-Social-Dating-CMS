@@ -64,8 +64,8 @@ class VisitorModel
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sSqlLimit = ($bCount === false) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(who.profileId) AS totalVisitors';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(who.profileId) AS totalVisitors';
         $sSqlWhere = (ctype_digit($mLooking)) ? '(who.visitorId = :looking)' : '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
@@ -74,14 +74,15 @@ class VisitorModel
         $rStmt->bindValue(':profileId', $this->_iProfileId, \PDO::PARAM_INT);
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if ($bCount === false) {
+        if (!$bCount)
+        {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

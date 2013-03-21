@@ -127,15 +127,15 @@ class NoteModel extends NoteCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
 
-        $sSqlLimit = ($bCount === false) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ?  'n.*, c.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
+        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ?  'n.*, c.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Notes') . 'AS n LEFT JOIN ' . Db::prefix('NotesCategories') . 'AS c ON n.noteId = c.noteId LEFT JOIN' .
                 Db::prefix('NotesDataCategories') . 'AS d ON c.categoryId = d.categoryId INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId WHERE d.name LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -143,7 +143,7 @@ class NoteModel extends NoteCoreModel
 
         $rStmt->execute();
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -167,15 +167,15 @@ class NoteModel extends NoteCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
 
-        $sSqlLimit = ($bCount === false) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ?  'n.*, m.username, m.firstName, m.sex' : 'COUNT(m.profileId) AS totalAuthors';
+        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ?  'n.*, m.username, m.firstName, m.sex' : 'COUNT(m.profileId) AS totalAuthors';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Notes') . 'AS n
                 INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId WHERE m.username LIKE :name' . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':name', '%' . $sAuthor . '%', \PDO::PARAM_STR);
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -183,7 +183,7 @@ class NoteModel extends NoteCoreModel
 
         $rStmt->execute();
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -207,15 +207,15 @@ class NoteModel extends NoteCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
 
-        $sSqlLimit = ($bCount === false) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ?  'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId) AS totalNotes';
+        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ?  'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId) AS totalNotes';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE noteId = :looking' : ' WHERE postId LIKE :looking OR pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Notes') . 'AS n INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -223,7 +223,7 @@ class NoteModel extends NoteCoreModel
 
         $rStmt->execute();
 
-        if($bCount === false)
+        if(!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

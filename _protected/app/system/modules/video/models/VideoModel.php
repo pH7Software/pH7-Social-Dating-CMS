@@ -161,8 +161,8 @@ class VideoModel extends VideoCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $sSqlLimit = ($bCount === false) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(v.videoId) AS totalVideos';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(v.videoId) AS totalVideos';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE v.videoId = :looking' : ' WHERE v.title LIKE :looking OR v.description LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare('SELECT v.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
@@ -170,14 +170,15 @@ class VideoModel extends VideoCoreModel
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
+
         $rStmt->execute();
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

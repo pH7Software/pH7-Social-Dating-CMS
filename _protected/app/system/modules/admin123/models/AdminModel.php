@@ -86,8 +86,8 @@ class AdminModel extends AdminCoreModel
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sSqlLimit = ($bCount === false) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(profileId) AS totalUsers';
+        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE profileId = :looking' :
             ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
@@ -99,7 +99,7 @@ class AdminModel extends AdminCoreModel
             PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::
             PARAM_STR);
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -107,7 +107,7 @@ class AdminModel extends AdminCoreModel
 
         $rStmt->execute();
 
-        if ($bCount === false)
+        if (!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
