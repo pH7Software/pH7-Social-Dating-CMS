@@ -258,31 +258,46 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function search(array $aParams, $bCount, $iOffset, $iLimit, $sTable = 'Members')
     {
-        error_reporting(0);
-
         Various::checkModelTable($sTable); // Checks if this table is correct
 
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sSqlLimit = ($bCount === false) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(m.profileId) AS totalUsers';
-        $sSqlAge = (!empty($aParams['age1']) && !empty($aParams['age2'])) ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
-        $sSqlCountry = (!empty($aParams['country'])) ? ' AND country = :country ' : '';
-        $sSqlCity = (!empty($aParams['city'])) ? ' AND city LIKE :city ' : '';
-        $sSqlState = (!empty($aParams['state'])) ? ' AND state LIKE :state ' : '';
-        $sSqlZipCode = (!empty($aParams['zip_code'])) ? ' AND zipCode LIKE :zipCode ' : '';
-        $sSqlEmail = (!empty($aParams['mail'])) ? ' AND email LIKE :email ' : '';
-        $sSqlOnline = (!empty($aParams['online'])) ? ' AND userStatus = 1 AND lastActivity > SUBDATE(\'' . $this->sCurrentDate . '\', INTERVAL ' . Framework\Mvc\Model\DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
+        $bIsLimit = ($bCount === false);
+        $bIsSingleAge = !empty($aParams['age']);
+        $bIsAge = empty($aParams['age']) && !empty($aParams['age1']) && !empty($aParams['age2']);
+        $bIsHeight = !empty($aParams['height']);
+        $bIsWeight = !empty($aParams['weight']);
+        $bIsCountry = !empty($aParams['country']);
+        $bIsCity = !empty($aParams['city']);
+        $bIsState = !empty($aParams['state']);
+        $bIsZipCode = !empty($aParams['zip_code']);
+        $bIsMail = !empty($aParams['mail']);
+        $bIsSex = !empty($aParams['sex']);
+
+
+        $sSqlLimit = ($bIsLimit) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = ($bIsLimit) ? '*' : 'COUNT(m.profileId) AS totalUsers';
+        $sSqlSingleAge = ($bIsSingleAge) ? ' AND birthDate LIKE :year ' : '';
+        $sSqlAge = ($bIsAge) ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
+        $sSqlHeight = ($bIsHeight) ? ' AND height = :height ' : '';
+        $sSqlWeight = ($bIsWeight) ? ' AND weight = :weight ' : '';
+        $sSqlCountry = ($bIsCountry) ? ' AND country = :country ' : '';
+        $sSqlCity = ($bIsCity) ? ' AND city LIKE :city ' : '';
+        $sSqlState = ($bIsState) ? ' AND state LIKE :state ' : '';
+        $sSqlZipCode = ($bIsZipCode) ? ' AND zipCode LIKE :zipCode ' : '';
+        $sSqlEmail = ($bIsMail) ? ' AND email LIKE :email ' : '';
+        $sSqlOnline = (!empty($aParams['online'])) ? ' AND userStatus = 1 AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . Framework\Mvc\Model\DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
 
         if (empty($aParams['order'])) $aParams['order'] = SearchCoreModel::LATEST; // Default is "ORDER BY joinDate"
+        if (empty($aParams['sort'])) $aParams['sort'] =  SearchCoreModel::ASC; // Default is "ascending"
         $sSqlOrder = SearchCoreModel::order($aParams['order'], $aParams['sort']);
 
         $sSqlMatchSex = (!empty($aParams['match_sex'])) ? ' AND matchSex LIKE :matchSex ' : '';
 
         $sGender = '';
-        if (!empty($aParams['sex']))
+        if ($bIsSex)
         {
             $aSex = $aParams['sex'];
             foreach ($aSex as $sSex)
@@ -303,25 +318,28 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
                 }
             }
 
-            $sSqlSex = (!empty($aParams['sex'])) ? ' AND sex IN ( ' . substr($sGender, 0, -2) . ' ) ' : '';
+            $sSqlSex = ($bIsSex) ? ' AND sex IN ( ' . substr($sGender, 0, -2) . ' ) ' : '';
         }
         else
         {
             $sSqlSex = '';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix($sTable) . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId WHERE username <> \''.PH7_GHOST_USERNAME.'\' AND userSaveViews = \'yes\' AND groupId = \'2\'' .  $sSqlMatchSex .  $sSqlSex . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState . $sSqlZipCode . $sSqlEmail . $sSqlOnline . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix($sTable) . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId WHERE username <> \''.PH7_GHOST_USERNAME.'\' AND userSaveViews = \'yes\' AND groupId = \'2\'' .  $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState . $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlOrder . $sSqlLimit);
 
         if (!empty($aParams['match_sex'])) $rStmt->bindValue(':matchSex', '%' . $aParams['match_sex'] . '%', \PDO::PARAM_STR);
-        if (!empty($aParams['age1']) && !empty($aParams['age2'])) $rStmt->bindValue(':age1', $aParams['age1'], \PDO::PARAM_STR);
-        if (!empty($aParams['age1']) && !empty($aParams['age2'])) $rStmt->bindValue(':age2', $aParams['age2'], \PDO::PARAM_STR);
-        if (!empty($aParams['country'])) $rStmt->bindValue(':country', $aParams['country'], \PDO::PARAM_STR);
-        if (!empty($aParams['city'])) $rStmt->bindValue(':city', '%' . $aParams['city'] . '%', \PDO::PARAM_STR);
-        if (!empty($aParams['state'])) $rStmt->bindValue(':state', '%' . $aParams['state'] . '%', \PDO::PARAM_STR);
-        if (!empty($aParams['zip_code'])) $rStmt->bindValue(':zipCode', '%' . $aParams['zip_code'] . '%', \PDO::PARAM_STR);
-        if (!empty($aParams['mail'])) $rStmt->bindValue(':email', '%' . $aParams['mail'] . '%', \PDO::PARAM_STR);
+        if ($bIsSingleAge) $rStmt->bindValue(':year', '%' . ((int)$this->sCurrentDate-$aParams['age']) . '%', \PDO::PARAM_INT);
+        if ($bIsAge) $rStmt->bindValue(':age1', $aParams['age1'], \PDO::PARAM_INT);
+        if ($bIsAge) $rStmt->bindValue(':age2', $aParams['age2'], \PDO::PARAM_INT);
+        if ($bIsHeight) $rStmt->bindValue(':height', $aParams['height'], \PDO::PARAM_INT);
+        if ($bIsWeight) $rStmt->bindValue(':weight', $aParams['weight'], \PDO::PARAM_INT);
+        if ($bIsCountry) $rStmt->bindValue(':country', $aParams['country'], \PDO::PARAM_STR);
+        if ($bIsCity) $rStmt->bindValue(':city', '%' . $aParams['city'] . '%', \PDO::PARAM_STR);
+        if ($bIsState) $rStmt->bindValue(':state', '%' . $aParams['state'] . '%', \PDO::PARAM_STR);
+        if ($bIsZipCode) $rStmt->bindValue(':zipCode', '%' . $aParams['zip_code'] . '%', \PDO::PARAM_STR);
+        if ($bIsMail) $rStmt->bindValue(':email', '%' . $aParams['mail'] . '%', \PDO::PARAM_STR);
 
-        if ($bCount === false)
+        if ($bIsLimit)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -329,7 +347,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt->execute();
 
-        if ($bCount === false)
+        if ($bIsLimit)
         {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -357,7 +375,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $iTime = (int) $iTime;
 
         $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId
-            AND userStatus = 1 AND lastActivity > SUBDATE(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
+            AND userStatus = 1 AND lastActivity > DATE_SUB(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':time', $iTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $this->sCurrentDate, \PDO::PARAM_STR);
@@ -912,16 +930,18 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sOrder = ($bCount === false) ? $this->profileOrderBy($sOrder) : '';
-        $sSqlLimit = ($bCount === false) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = ($bCount === false) ? '*' : 'COUNT(profileId) AS totalUsers';
+        $bIsLimit = ($bCount === false);
+
+        $sOrder = ($bIsLimit) ? $this->profileOrderBy($sOrder) : '';
+        $sSqlLimit = ($bIsLimit) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = ($bIsLimit) ? '*' : 'COUNT(profileId) AS totalUsers';
 
         $sSqlCity = (!empty($sCity)) ?  'AND (city LIKE :city)' : '';
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM'.Db::prefix('Members').' WHERE (username <> \''.PH7_GHOST_USERNAME.'\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId=\'2\')' . $sOrder . $sSqlLimit);
         $rStmt->bindValue(':country', $sCountry, \PDO::PARAM_STR);
         (!empty($sCity)) ? $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR) : '';
 
-        if ($bCount === false)
+        if ($bIsLimit)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -929,7 +949,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt->execute();
 
-        if ($bCount === false)
+        if ($bIsLimit)
         {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

@@ -1,9 +1,8 @@
 <?php
 /**
- * @title Various Class
- *
- * MISC (Miscellaneous Functions) Class.
- * Some useful methods but different.
+ * @title          Various Class
+ * @desc           MISC (Miscellaneous Functions) Class.
+ *                 Some useful methods but different.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.

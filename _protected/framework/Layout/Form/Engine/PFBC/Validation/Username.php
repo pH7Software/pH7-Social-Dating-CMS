@@ -6,7 +6,8 @@
 namespace PFBC\Validation;
 use PH7\Framework\Mvc\Model\DbConfig;
 
-class Username extends \PFBC\Validation {
+class Username extends \PFBC\Validation
+{
 
     protected $sTable, $iMin, $iMax;
 

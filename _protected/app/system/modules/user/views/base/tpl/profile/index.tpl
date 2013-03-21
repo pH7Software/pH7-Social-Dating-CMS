@@ -50,7 +50,17 @@
   <div class="break"></div>
 {@/if@}
 
-<p><span class="bold">{@lang('Country:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span> <img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" /></p>
+{@if(!empty($height))@}
+  <p><span class="bold">{@lang('Height:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$height) }}">{height_txt}</a></span></p>
+  <div class="break"></div>
+{@/if@}
+
+{@if(!empty($weight))@}
+  <p><span class="bold">{@lang('Weight:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$weight) }}">{weight_txt}</a></span></p>
+  <div class="break"></div>
+{@/if@}
+
+<p><span class="bold">{@lang('Country:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" /></p>
 <div class="break"></div>
 
 {@if(!empty($city))@}
@@ -69,12 +79,12 @@
 {@/if@}
 
 {@if(!empty($website))@}
-  <p>{{ $design->favicon($website) }} &nbsp; <span class="bold">{@lang('Site:')@}</span> <span class="italic">{{ $design->urlTag($website) }}</span></p>
+  <p>{{ $design->favicon($website) }}&nbsp;&nbsp;<span class="bold">{@lang('Site:')@}</span> <span class="italic">{{ $design->urlTag($website) }}</span></p>
   <div class="break"></div>
 {@/if@}
 
 {@if(!empty($social_network_site))@}
-  <p>{{ $design->favicon($social_network_site) }} &nbsp; <span class="bold">{@lang('Social Network Profile:')@}</span> <span class="italic">{{ $design->urlTag($social_network_site) }}</span></p>
+  <p>{{ $design->favicon($social_network_site) }}&nbsp;&nbsp;<span class="bold">{@lang('Social Network Profile:')@}</span> <span class="italic">{{ $design->urlTag($social_network_site) }}</span></p>
   <div class="break"></div>
 {@/if@}
 

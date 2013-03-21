@@ -71,6 +71,8 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', array('id'=>'str_description', 'onblur' =>'CValid(this.value,this.id,10,2000)','value'=>$oUser->description, 'validation'=>new \PFBC\Validation\Str(10,2000), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));
+        $oForm->addElement(new \PFBC\Element\Height(t('Height:'), 'height', array('value'=>$oUser->height)));
+        $oForm->addElement(new \PFBC\Element\Weight(t('Weight:'), 'weight', array('value'=>$oUser->weight)));
         $oForm->addElement(new \PFBC\Element\Url(t('Your Website:'), 'website', array('id'=>'url','onblur'=>'CValid(this.value,this.id)','value'=>$oUser->website)));
         $oForm->addElement(new \PFBC\Element\HtmlExternal('<span class="input_error url"></span>'));
         $oForm->addElement(new \PFBC\Element\Url(t('Social Network Site:'), 'social_network_site', array('id'=>'url2','onblur'=>'CValid(this.value,this.id)','description'=>t('The url of your profile Facebook, Twitter, Google+, etc.'),'value'=>$oUser->socialNetworkSite)));

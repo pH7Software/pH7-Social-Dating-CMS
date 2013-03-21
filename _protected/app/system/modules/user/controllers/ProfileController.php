@@ -15,9 +15,9 @@ PH7\Framework\Analytics\Statistic,
 PH7\Framework\Parse\Emoticon,
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Url\Url,
-PH7\Framework\Geo\Map\Map;
-
-use PH7\Framework\Date\Various as VDate;
+PH7\Framework\Geo\Map\Map,
+PH7\Framework\Date\Various as VDate,
+PH7\Framework\Math\Measure as Measure;
 
 class ProfileController extends Controller
 {
@@ -97,7 +97,15 @@ class ProfileController extends Controller
             // Age
             $this->view->birth_date = $this->dateTime->get($oUser->birthDate)->date();
             $aAge = explode('-', $oUser->birthDate);
-            $iAge = (new User)->getAge($aAge[0], $aAge[1], $aAge[2]);
+            $iAge = (new Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get();
+
+            // Height
+            $this->view->height = $oUser->height;
+            $this->view->height_txt = (new Measure\Height($oUser->height))->display();
+
+            // Weight
+            $this->view->weight = $oUser->weight;
+            $this->view->weight_txt = (new Measure\Height($oUser->weight))->display();
 
             // Links of the Menubar
             $iNbFriend = FriendModel::totalFriends($iId);

@@ -35,7 +35,7 @@
 
    <h3>Recommended:</h3>
      <ul>
-       <li>PHP 5.4.12 or higher.</li>
+       <li>PHP 5.4.13 or higher.</li>
      </ul>
 
    <h3>Recommended Extensions:</h3>

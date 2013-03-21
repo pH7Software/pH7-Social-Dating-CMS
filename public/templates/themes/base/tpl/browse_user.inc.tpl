@@ -24,9 +24,7 @@
 
 {* Age Members *}
 {{ $aAge = explode('-', $user->birthDate);
-$oUser = new UserCore();
-$age = $oUser->getAge($aAge[0], $aAge[1], $aAge[2]);
-unset($oUser) }}
+$age = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get() }}
 
 <div class="thumb_photo">
 {{ UserDesignCoreModel::userStatus($user->profileId) }}

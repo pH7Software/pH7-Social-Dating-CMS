@@ -67,6 +67,12 @@ class EditFormProcessing extends Form
         if(!$this->str->equals($this->httpRequest->post('description', HttpRequest::ONLY_XSS_CLEAN), $oUser->description))
             $oUserModel->updateProfile('description', $this->httpRequest->post('description', HttpRequest::ONLY_XSS_CLEAN), $iProfileId);
 
+        if(!$this->str->equals($this->httpRequest->post('height'), $oUser->height))
+            $oUserModel->updateProfile('height', $this->httpRequest->post('height'), $iProfileId);
+
+        if(!$this->str->equals($this->httpRequest->post('weight'), $oUser->weight))
+            $oUserModel->updateProfile('weight', $this->httpRequest->post('weight'), $iProfileId);
+
         if(!$this->str->equals($this->httpRequest->post('website'), $oUser->website))
             $oUserModel->updateProfile('website', $this->httpRequest->post('website'), $iProfileId);
 

@@ -11,7 +11,8 @@ class UserDesignCore extends Framework\Layout\Html\Design
 {
 
     /**
-     * @desc Ajax counter of the number of users registered on the site.
+     * Ajax counter of the number of users registered on the site.
+     *
      * @return void
      */
     public function counterUsers()
