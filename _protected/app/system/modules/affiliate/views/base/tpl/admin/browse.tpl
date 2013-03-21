@@ -44,9 +44,7 @@
 
 {* Age Affiliated *}
 {{ $aAge = explode('-', $aff->birthDate);
-$oUser = new UserCore();
-$age = $oUser->getAge($aAge[0], $aAge[1], $aAge[2]);
-unset($oUser) }}
+$age = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get() }}
 
 <tr>
 <td><input type="checkbox" name="action[]" value="{% $aff->profileId %}_{% $aff->username %}" /></td>

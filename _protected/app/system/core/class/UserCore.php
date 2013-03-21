@@ -39,30 +39,6 @@ class UserCore
     }
 
     /**
-     * Calculating the age of a user relative to their date of birth.
-     *
-     * @param integer $iBirthYear
-     * @param integer $iBirthMonth
-     * @param integer $iBirthDay
-     * @param integer $iTimestamp Optional, You can set another date for the calculation of his age. By default age is checked against the current date.
-     * @return integer The age of the user.
-     */
-    public function getAge($iBirthYear, $iBirthMonth, $iBirthDay, $iTimestamp = null)
-    {
-        // If you want to check the current date (default)
-        if(empty($iTimestamp)) $iTimestamp = time();
-
-        // We estimate the age, one year in excess
-        $iAge = date('Y', $iTimestamp) - $iBirthYear;
-
-        // Taken out a year if the birthday is not over yet
-        if($iBirthMonth > date('n', $iTimestamp) || ( $iBirthMonth == date('n', $iTimestamp) && $iBirthDay > date('j', $iTimestamp)))
-        $iAge--;
-
-        return (int) $iAge;
-    }
-
-    /**
      * Delete User.
      *
      * @param integer $iProfileId

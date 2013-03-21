@@ -94,6 +94,8 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   website varchar(200) DEFAULT NULL,
   socialNetworkSite varchar(200) DEFAULT NULL,
   description text DEFAULT NULL,
+  height tinyint(3) unsigned DEFAULT NULL,
+  weight tinyint(3) unsigned DEFAULT NULL,
   bankAccount varchar(150) DEFAULT NULL,
   userStatus tinyint(1) unsigned NOT NULL DEFAULT 1, -- 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
   groupId tinyint(2) unsigned NOT NULL DEFAULT 2,

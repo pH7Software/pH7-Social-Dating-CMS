@@ -15,14 +15,13 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
 
-class CDateTime extends \DateTime
+class CDateTime
 {
 
-    private $_oConfig, $_oDateTime, $_sSetTime;
+    private $_oConfig, $_oDateTime;
 
     public function __construct()
     {
-        parent::__construct();
         $this->_oConfig = Config::getInstance();
     }
 
@@ -34,8 +33,8 @@ class CDateTime extends \DateTime
      */
     public function get($sTime = null)
     {
-        $this->_sSetTime = (!empty($sTime)) ? $sTime : null;
-        $this->_oDateTime = new $this($this->_sSetTime, new \DateTimeZone($this->_oConfig->values['language.application']['timezone']));
+        $sSetTime = (!empty($sTime)) ? date('Y-m-d', strtotime($sTime)) : 'now';
+        $this->_oDateTime = new \DateTime($sSetTime, new \DateTimeZone($this->_oConfig->values['language.application']['timezone']));
         return $this;
     }
 
@@ -77,7 +76,7 @@ class CDateTime extends \DateTime
 
     public function __destruct()
     {
-        unset($this->_oConfig, $this->_oDateTime, $this->_sSetTime);
+        unset($this->_oConfig, $this->_oDateTime);
     }
 
 }

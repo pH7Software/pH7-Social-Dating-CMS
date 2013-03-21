@@ -14,7 +14,7 @@ class Age extends \PFBC\OptionElement
     /**
      * Generate the select field for age search.
      *
-     * @return the field age with the default selected min age registration and maximum age registration
+     * @return The field age with the default selected minimum and maximum registration age.
      */
     public function __construct()
     {

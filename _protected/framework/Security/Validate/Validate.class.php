@@ -238,11 +238,11 @@ class Validate
     {
         if(empty($sValue) || !preg_match('#^\d\d/\d\d/\d\d\d\d$#', $sValue)) return false;
 
-        $aBirthDate = explode('/', $sValue);
-        $iCurrentYear = date('Y');
-        $iStartYear = $iCurrentYear - $iMin;
-        $iEndYear = $iCurrentYear - $iMax;
-        return (checkdate($aBirthDate[0],$aBirthDate[1],$aBirthDate[2]) || $aBirthDate[2] > $iStartYear || $aBirthDate[2] < $iEndYear);
+        $aBirthDate = explode('/', $sValue); // Format is "mm/dd/yyyy"
+        if(!checkdate($aBirthDate[0], $aBirthDate[1], $aBirthDate[2])) return false;
+
+        $iUserAge = (new \PH7\Framework\Math\Measure\Year($aBirthDate[2], $aBirthDate[0], $aBirthDate[1]))->get(); // Get the current user's age
+        return ($iUserAge >= $iMin && $iUserAge <= $iMax);
     }
 
     /**
