@@ -238,7 +238,8 @@ final class License
             return true;
 
         $aLicenseInfo = $this->_getLicInfo();
-        if($aLicenseInfo['key'] === $this->_sLicenseKey || $aLicenseInfo['key2'] === $this->_sLicenseKey) {
+        if($aLicenseInfo['key'] === $this->_sLicenseKey || $aLicenseInfo['key2'] === $this->_sLicenseKey)
+        {
             if(!empty($this->_sLicenseCopyright))
                 if($aLicenseInfo['copyright_key'] !== $this->_sLicenseCopyright) return false;
 

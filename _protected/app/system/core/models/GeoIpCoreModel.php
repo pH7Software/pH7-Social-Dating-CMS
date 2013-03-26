@@ -16,17 +16,17 @@ class GeoIpCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function getCountry($sWhere)
     {
-       return $this->orm->select('countryId, countryTitle', 'GeoCountry')->where('countryId', $sWhere)->orderBy('countryTitle')->execute();
+        return $this->orm->select('GeoCountry', 'countryId, countryTitle')->find('countryId', $sWhere)->orderBy('countryTitle')->execute();
     }
 
     public function getState($sWhere)
     {
-        return $this->orm->select('stateId, stateTitle', 'GeoState')->where($sWhere)->orderBy('stateTitle')->execute();
+        return $this->orm->select('GeoState', 'stateId, stateTitle')->find('stateId', $sWhere)->orderBy('stateTitle')->execute();
     }
 
     public function getCity($sWhere)
     {
-        return $this->orm->select('cityId, cityTitle', 'GeoCity')->where($sWhere)->orderBy('cityTitle')->execute();
+        return $this->orm->select('GeoCity', 'cityId, cityTitle')->find('cityId', $sWhere)->orderBy('cityTitle')->execute();
     }
 
 }

@@ -185,7 +185,7 @@ function delete_dir($sPath) {
  * @param string $sSqlFile SQL File.
  * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
  */
-function exec_file_query($oDb, $sSqlFile) {
+function exec_query_file($oDb, $sSqlFile) {
     if(!is_file($sSqlFile)) return false;
 
     $sSqlContent = file_get_contents($sSqlFile);

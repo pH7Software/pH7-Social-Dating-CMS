@@ -34,7 +34,7 @@ class Module implements Mixer
 
     public function mixer()
     {
-        switch($this->_sModName)
+        switch ($this->_sModName)
         {
 
 

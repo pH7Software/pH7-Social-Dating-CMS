@@ -39,7 +39,7 @@ class Link
      */
     public function getLinks()
     {
-        if(!@$this->_oXml->load($this->_sPath))
+        if (!@$this->_oXml->load($this->_sPath))
             throw new Exception('The file \'' . $this->_sPath . '\' does not exist');
 
         foreach ($this->_oXml->getElementsByTagName('link') as $oTag)

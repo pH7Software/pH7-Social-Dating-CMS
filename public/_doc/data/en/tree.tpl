@@ -1,4 +1,4 @@
-<!-- Last Update: 02/16/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 03/26/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -90,6 +90,7 @@
 |   |   |       |   `-- MainController.php
 |   |   |       |-- engine
 |   |   |       |   `-- kernel
+|   |   |       |       `-- ENGINE.txt
 |   |   |       |-- lang
 |   |   |       |   |-- en_US
 |   |   |       |   |   `-- LC_MESSAGES
@@ -1300,7 +1301,6 @@
 |   |   |   |-- file
 |   |   |   `-- sql
 |   |   |-- cache
-|   |   |   |-- pH7_cache
 |   |   |   |-- pH7_static
 |   |   |   |-- pH7tpl_cache
 |   |   |   `-- pH7tpl_compile
@@ -1479,6 +1479,7 @@
 |   |   |   |   |       |   |-- Date.php
 |   |   |   |   |       |   |-- Email.php
 |   |   |   |   |       |   |-- File.php
+|   |   |   |   |       |   |-- Height.php
 |   |   |   |   |       |   |-- Hidden.php
 |   |   |   |   |       |   |-- HTMLExternal.php
 |   |   |   |   |       |   |-- HTML.php
@@ -1497,6 +1498,7 @@
 |   |   |   |   |       |   |-- Token.php
 |   |   |   |   |       |   |-- Url.php
 |   |   |   |   |       |   |-- Username.php
+|   |   |   |   |       |   |-- Weight.php
 |   |   |   |   |       |   `-- YesNo.php
 |   |   |   |   |       |-- Element.php
 |   |   |   |   |       |-- Error
@@ -1756,6 +1758,13 @@
 |   |   |   |       |-- swift_required.php
 |   |   |   |       `-- VERSION
 |   |   |   `-- Mail.class.php
+|   |   |-- Math
+|   |   |   `-- Measure
+|   |   |       |-- Height.class.php
+|   |   |       |-- IMeasure.interface.php
+|   |   |       |-- Measure.class.php
+|   |   |       |-- Weight.class.php
+|   |   |       `-- Year.class.php
 |   |   |-- Module
 |   |   |   |-- Integration
 |   |   |   |-- Mixer.interface.php
@@ -2608,7 +2617,7 @@
 |   |       |       |-- conclusion.php
 |   |       |       |-- config.ini
 |   |       |       `-- introduction.php
-|   |       |-- 0.1.3-0.1.6
+|   |       |-- 0.1.4-0.1.6
 |   |       |   |-- data
 |   |       |   |   |-- file
 |   |       |   |   |   |-- _protected
@@ -2620,7 +2629,19 @@
 |   |       |       |-- conclusion.php
 |   |       |       |-- config.ini
 |   |       |       `-- introduction.php
-|   |       `-- 0.1.6-0.1.7
+|   |       |-- 0.1.6-0.1.7
+|   |       |   |-- data
+|   |       |   |   |-- file
+|   |       |   |   |   |-- _protected
+|   |       |   |   |   `-- public
+|   |       |   |   `-- sql
+|   |       |   |       `-- MySQL
+|   |       |   |           `-- upgrade.sql
+|   |       |   `-- info
+|   |       |       |-- conclusion.php
+|   |       |       |-- config.ini
+|   |       |       `-- introduction.php
+|   |       `-- 0.1.7-0.8.7
 |   |           |-- data
 |   |           |   |-- file
 |   |           |   |   |-- _protected
@@ -4251,7 +4272,6 @@
     |-- pH7.sh
     `-- php-webserver.sh
 
-
 </pre>
 
-<p>Statistics: 1268 directories, 2977 files.</p>
+<p>Statistics: 1277 directories, 2989 files.</p>

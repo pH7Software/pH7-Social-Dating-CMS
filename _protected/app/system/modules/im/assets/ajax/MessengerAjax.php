@@ -81,12 +81,12 @@ class MessengerAjax
             if (!isset($_SESSION['messenger_openBoxes'][$sFrom]) && isset($_SESSION['messenger_history'][$sFrom]))
                 $sItems = $_SESSION['messenger_history'][$sFrom];
 
-            $sItems .= $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsg], true);
+            $sItems .= $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsg]);
 
             if (!isset($_SESSION['messenger_history'][$sFrom]))
                 $_SESSION['messenger_history'][$sFrom] = '';
 
-            $_SESSION['messenger_history'][$sFrom] .= $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsg], true);
+            $_SESSION['messenger_history'][$sFrom] .= $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsg]);
 
             unset($_SESSION['messenger_boxes'][$sFrom]);
             $_SESSION['messenger_openBoxes'][$sFrom] = $sSent;
@@ -103,12 +103,12 @@ class MessengerAjax
 
                     $sMsg = "Sent at $sTime";
                     if ($iNow > 180) {
-                        $sItems .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg], true);
+                        $sItems .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg]);
 
                         if (!isset($_SESSION['messenger_history'][$sBox]))
                             $_SESSION['messenger_history'][$sBox] = '';
 
-                        $_SESSION['messenger_history'][$sBox] .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg], true);
+                        $_SESSION['messenger_history'][$sBox] .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg]);
                         $_SESSION['messenger_boxes'][$sBox] = 1;
                     }
                 }
@@ -180,13 +180,13 @@ class MessengerAjax
         else
             $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new \PH7\Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s'));
 
-        $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] .= $this->setJsonContent(['status' => '1', 'user' => $sTo, 'msg' => $sMsgTransform], true);
+        $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] .= $this->setJsonContent(['status' => '1', 'user' => $sTo, 'msg' => $sMsgTransform]);
 
 
         unset($_SESSION['messenger_boxes'][$this->_oHttpRequest->post('to')]);
 
         Http::setContentType('application/json');
-        echo $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsgTransform]);
+        echo $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsgTransform], false);
         exit(0);
     }
 
@@ -197,7 +197,7 @@ class MessengerAjax
         exit(0);
     }
 
-    protected function setJsonContent(array $aData, $bEndComma = false)
+    protected function setJsonContent(array $aData, $bEndComma = true)
     {
         // Default Array
         $aDefData = [

@@ -32,11 +32,14 @@ class AdminController extends MainController
 
     public function membershipList()
     {
-        $oMembership = $this->oPaymentModel->getMemberships();
+        $oMembership = $this->oPayModel->getMemberships();
 
-        if(empty($oMembership)) {
+        if(empty($oMembership))
+        {
             $this->displayPageNotFound(t('No membership found!'));
-        } else {
+        }
+        else
+        {
             $this->sTitle = t('Memberships List');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
@@ -63,7 +66,7 @@ class AdminController extends MainController
 
     public function deleteMembership()
     {
-        $this->oPaymentModel->deleteMembership( $this->httpRequest->post('id') );
+        $this->oPayModel->deleteMembership( $this->httpRequest->post('id') );
         HeaderUrl::redirect(UriRoute::get('payment', 'admin', 'membershiplist'), t('The Membership has been removed!'));
     }
 

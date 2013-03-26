@@ -12,7 +12,8 @@ class AffiliateModel extends AffiliateCoreModel
 {
 
     /**
-     * @desc Join Model
+     * Add a new affiliate.
+     *
      * @param array $aData
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
@@ -42,7 +43,8 @@ class AffiliateModel extends AffiliateCoreModel
     }
 
     /**
-     * @desc Adding a reference affiliate.
+     * Add a reference affiliate.
+     *
      * @param integer $iProfileId
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
@@ -55,7 +57,8 @@ class AffiliateModel extends AffiliateCoreModel
     }
 
     /**
-     * @desc Search an affiliated.
+     * Search an affiliated.
+     *
      * @param mixed (integer for profile ID or string for a keyword) $mLooking
      * @param boolean $bCount Put 'true' for count the affiliates or 'false' for the result of affiliates.
      * @param string $sOrderBy

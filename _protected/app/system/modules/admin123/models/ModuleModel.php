@@ -19,7 +19,7 @@ class ModuleModel extends Framework\Mvc\Model\Engine\Model
      */
     public function run($sSqlModuleFile)
     {
-        return Various::execFileQuery($sSqlModuleFile);
+        return Various::execQueryFile($sSqlModuleFile);
     }
 
 }
