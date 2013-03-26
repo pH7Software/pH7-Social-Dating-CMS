@@ -12,9 +12,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 {
 
-    const
-    TB_PICTURE = 'Pictures',
-    TB_VIDEO = 'Videos';
+    const TB_PICTURE = 'Pictures', TB_VIDEO = 'Videos';
 
     public function getPicsVids($sTable, $sOrder, $iOffset, $iLimit)
     {
@@ -73,7 +71,7 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function getForumsMessages($iTopicId)
     {
-        return (new ForumCoreModel)->getMessage($iTopicId, null, null, 1, 0, 300, ForumCoreModel::DESC);
+        return (new ForumCoreModel)->getMessage($iTopicId, null, null, 1, 0, 300, Db::DESC);
     }
 
     public function getCommentsProfiles()

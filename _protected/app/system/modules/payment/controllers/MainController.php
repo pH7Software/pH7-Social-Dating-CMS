@@ -17,13 +17,13 @@ class MainController extends Controller
      * @access protected Protected access for the AdminController class derived from this class.
      * @var string $sTitle
      */
-    protected $oPaymentModel, $sTitle;
+    protected $oPayModel, $sTitle;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->oPaymentModel = new PaymentModel;
+        $this->oPayModel = new PaymentModel;
     }
 
     public function index()
@@ -36,12 +36,13 @@ class MainController extends Controller
 
     public function membership()
     {
-        $oMembershipModel = $this->oPaymentModel->getMemberships();
+        $oMembershipModel = $this->oPayModel->getMemberships();
 
         if(empty($oMembershipModel))
         {
             $this->displayPageNotFound(t('No membership found!'));
-        } else
+        }
+        else
         {
             $this->sTitle = t('Memberships List');
             $this->view->page_title = $this->sTitle;
@@ -55,12 +56,13 @@ class MainController extends Controller
     {
         $iMembershipId = (int) $iMembershipId;
 
-        $oMembershipModel = $this->oPaymentModel->getMemberships($iMembershipId);
+        $oMembershipModel = $this->oPayModel->getMemberships($iMembershipId);
 
         if(empty($iMembershipId) || empty($oMembershipModel))
         {
             $this->displayPageNotFound(t('No membership found!'));
-        } else
+        }
+        else
         {
             // Adding the stylesheet for Gatway Logo
             $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'common.css');

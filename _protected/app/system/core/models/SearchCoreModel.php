@@ -11,6 +11,8 @@
  */
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Engine\Db;
+
 class SearchCoreModel
 {
 
@@ -38,13 +40,15 @@ class SearchCoreModel
 
     /**
      * @constructor
-     * @desc Private constructor to prevent instantiation of class since it's a static class.
+     * Private constructor to prevent instantiation of class since it's a static class.
+     *
      * @access private
      */
     private function __construct() {}
 
     /**
-     * @desc Order By method
+     * Order By method.
+     *
      * @param string $sOrder
      * @param string $sAsTable The Alias Table, this prevents the ambiguous clause. Default NULL
      * @return string SQL order by query
@@ -77,7 +81,7 @@ class SearchCoreModel
 
             default:
                 $sAsTable = ''; // No Alias because it is an SQL function
-                $sOrderBy = 'RAND()'; // Default value
+                $sOrderBy = Db::RAND; // Default value is RAND()
         }
 
         return ' ORDER BY ' . $sAsTable . $sOrderBy . static::sort($sSort);

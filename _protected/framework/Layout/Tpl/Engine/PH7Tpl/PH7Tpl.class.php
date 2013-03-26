@@ -316,7 +316,6 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
             if (!$this->isSmallMarkCopyright()) $this->setErrMsg();
         }
 
-
         if ($this->bPhpCompressor) {
             $this->sCode = (new \PH7\Framework\Compress\Compress)->parsePhp($this->sCode);
         }
@@ -334,15 +333,13 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     }
 
     /**
-     * Parse the code for translating the template language.
+     * Parse the general code for translating the template language.
      *
      * @access private
      * @return void
      */
     private function parse()
     {
-        /******************** GENERAL ********************/
-
         /***** PHP Variables *****/
         // $this->sCode = preg_replace('#\$([a-z0-9_]+)#i', '$this->_oVars->$1', $this->sCode);
         // $this->sCode = str_replace('$this->this->', '$this->', $this->sCode);
@@ -444,7 +441,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     public function parseMail($sMailTplFile, $sEmailAddress)
     {
         /**
-         * If the template does not contain theme for emails, we retrieve the emails default themes.
+         * If the template doesn't contain theme for emails, we retrieve the emails default themes.
          */
         if (!is_file($sMailTplFile) && defined('PH7_TPL_NAME'))
             $sMailTplFile = str_replace(PH7_TPL_NAME, PH7_DEFAULT_THEME, $sMailTplFile);
@@ -467,12 +464,12 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
             //$sCode = str_replace('{email}', $sEmailAddress, $sCode);
 
             $oMailDesign = new \PH7\Framework\Layout\Html\MailDesign;
+
             /* Headers */
 
             // Includes
             $sCode = str_replace('{inc_header}', $oMailDesign->header(), $sCode);
             $sCode = str_replace('{inc_sub_header}', $oMailDesign->subHeader(), $sCode);
-
 
             /* Footers */
 
@@ -523,7 +520,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     }
 
     /**
-     * Clean all variable from memory template.
+     * Remove all variables from memory template.
      *
      * @return void
      */
@@ -583,8 +580,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         $this->sCacheDir2 = $this->sCacheDir . $this->registry->module . '_' . md5($this->
                         registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . PH7_LANG_NAME . PH7_DS . $this->getCurrentController() . PH7_DS;
         $this->file->createDir($this->sCacheDir2);
-        $this->sCacheDirFile = $this->sCacheDir2 . str_replace(PH7_DS, '_', $this->file->
-                                getFileWithoutExt($this->sTplFile)) . '.cache.html';
+        $this->sCacheDirFile = $this->sCacheDir2 . str_replace(PH7_DS, '_', $this->file->getFileWithoutExt($this->sTplFile)) . '.cache.html';
 
         // If the cache has expired
         if ($this->file->modificationTime($this->sCompileDirFile) > $this->file->modificationTime($this->sCacheDirFile) || (!empty($this->mCacheExpire) && $this->
@@ -665,7 +661,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     }
 
     /**
-     * XML style syntax.
+     * Parse XML style syntax.
      *
      * @access protected
      * @return void

@@ -16,9 +16,7 @@ class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
     CACHE_GROUP = 'db/sys/mod/forum',
     CREATED = 'f.createdDate DESC',
     UPDATED = 'f.updatedDate DESC',
-    NAME = 'c.title, f.name ASC',
-    ASC = 'ASC',
-    DESC = 'DESC';
+    NAME = 'c.title, f.name ASC';
 
     public function getForum($iForumId = null, $iOffset, $iLimit, $sOrder = self::NAME)
     {
@@ -34,7 +32,7 @@ class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
         return (isset($iForumId)) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function getMessage($iTopicId, $iMessageId = null, $iProfileId = null, $iApproved, $iOffset, $iLimit, $sSort = self::ASC)
+    public function getMessage($iTopicId, $iMessageId = null, $iProfileId = null, $iApproved, $iOffset, $iLimit, $sSort = Db::ASC)
     {
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;

@@ -659,7 +659,7 @@ final class FrontController
     }
 
     /**
-     * Clean the Request Parameter.
+     * Remove the Request Parameter variable.
      *
      * @access private
      * @return void

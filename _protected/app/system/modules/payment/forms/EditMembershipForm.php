@@ -36,7 +36,8 @@ class EditMembershipForm
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), 'description', array('value'=>$oMembership->description, 'required'=>1, 'validation' => new \PFBC\Validation\Str(5, 255))));
 
         $aPerms = unserialize($oMembership->permissions);
-        foreach($aPerms as $sKey => $sVal) {
+        foreach($aPerms as $sKey => $sVal)
+        {
             $sLabel = (new Str)->upperFirstWords( str_replace('_', ' ', $sKey) );
             $oForm->addElement(new \PFBC\Element\Select($sLabel, 'perms[' . $sKey . ']', array('1'=>t('Yes'), '0'=>t('No')), array('value'=>$sVal)));
         }

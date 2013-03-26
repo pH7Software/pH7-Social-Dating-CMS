@@ -243,37 +243,37 @@ class InstallController extends Controller
 
                                         /*** Game ***/
                                         // We need to install the Game before the Core SQL for foreign keys that work are correct.
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_SchemaGame.sql');
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_DataGame.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_SchemaGame.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_DataGame.sql');
 
                                         /*** Core ***/
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_installCore.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_installCore.sql');
 
-                                        // --- GeoIp (exec_file_query() function executes these files only if they existens otherwise it does nothing) --- //
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCountry.sql');
+                                        // --- GeoIp (exec_query_file() function executes these files only if they existens otherwise it does nothing) --- //
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCountry.sql');
 
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity.sql');
 
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity2.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity2.sql');
 
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity3.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity3.sql');
 
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity4.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity4.sql');
 
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity5.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity5.sql');
 
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity6.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity6.sql');
 
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity7.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity7.sql');
 
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity8.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity8.sql');
 
-                                        exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoState.sql');
+                                        exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoState.sql');
 
                                         // --- Execute this file if there is something --- //
                                         if(filesize(PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_sampleData.sql') > 12)
                                         {
-                                            exec_file_query($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_sampleData.sql');
+                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_sampleData.sql');
                                         }
 
                                         unset($DB);

@@ -51,7 +51,8 @@ abstract class Kernel
         if(!defined( 'PH7_LICENSE_NO_COPYRIGHT' )) define( 'PH7_LICENSE_NO_COPYRIGHT', $oLicense->check()->noCopyrightStatus() );
         unset($oLicense);
 
-        if(!PH7_LICENSE_STATUS) {
+        if(!PH7_LICENSE_STATUS)
+        {
             echo t('Sorry, your License Key is incorrect! Please go <a href="%0%">HiZup Software</a> to get a valid license key.', self::SOFTWARE_WEBSITE);
             exit(1);
         }

@@ -74,14 +74,13 @@ class Record
      */
     public function getErrors()
     {
+        $sErrMsg = '';
         if (count($this->_aErrors) > 1)
         {
-            $sErrMsg = '';
             foreach ($this->_aErrors as $sError)
                 $sErrMsg .= $sError . "\r\n";
-
-            return $sErrMsg;
         }
+        return $sErrMsg;
     }
 
     /**
@@ -96,10 +95,9 @@ class Record
     {
         try
         {
-            // Get the primary key name
-            $this->_sSql = 'DELETE FROM ' . Db::prefix($sTable) . " WHERE $sField =:id";
+            $this->_sSql = 'DELETE FROM' . Db::prefix($sTable) . "WHERE $sField = :id";
             $rStmt = Db::getInstance()->prepare($this->_sSql);
-            $rStmt->bindParam(':id', $sId, \PDO::PARAM_STR);
+            $rStmt->bindParam(':id', $sId);
             $bStatus = $rStmt->execute();
             Db::free($rStmt);
             return $bStatus;
@@ -120,7 +118,7 @@ class Record
     public function insert($sTable, array $aValues)
     {
         $aValues = is_null($aValues) ? $this->_aValues : $aValues;
-        $this->_sSql = 'INSERT INTO ' . Db::prefix($sTable) . 'SET ';
+        $this->_sSql = 'INSERT INTO' . Db::prefix($sTable) . 'SET ';
 
         $oCachingIterator = new \CachingIterator(new \ArrayIterator($aValues));
 
@@ -163,11 +161,15 @@ class Record
         try
         {
             $bIsWhere = isset($sPk, $sId);
-            $sSqlWhere = ($bIsWhere) ? " WHERE $sPk = :id" : '';
-            $this->_sSql = 'UPDATE ' . Db::prefix($sTable) . " SET $sField= :value" . $sSqlWhere;
+
+            $this->_sSql = 'UPDATE' . Db::prefix($sTable) . "SET $sField = :value";
+
+            if ($bIsWhere)
+                $this->_sSql .= " WHERE $sPk = :id";
+
             $rStmt = Db::getInstance()->prepare($this->_sSql);
-            $rStmt->bindParam(':value', $sValue, \PDO::PARAM_STR);
-            if ($bIsWhere) $rStmt->bindParam(':id', $sId, \PDO::PARAM_STR);
+            $rStmt->bindParam(':value', $sValue);
+            if ($bIsWhere) $rStmt->bindParam(':id', $sId);
             $rStmt->execute();
             $iRow = $rStmt->rowCount();
             Db::free($rStmt);
@@ -215,45 +217,77 @@ class Record
     }
 
     /**
-     * Select All In One Query.
+     * Clean out the query variables.
+     * You can do this to build another query.
      *
-     * @param mixed (array | string) $mArrWhat
+     * @return void
+     */
+    public function clean()
+    {
+        // Set to default values
+        $this->_sSql = '';
+        $this->_aValues = array();
+    }
+
+    /**
+     * Escape.
+     *
+     * @param string $sValue
+     * @return string
+     */
+    public function escape($sValue)
+    {
+        return Db::getInstance()->quote($sValue);
+    }
+
+    /**
+     * Select "All In One" in a SQL's query.
+     *
      * @param mixed (array | string) $mTable
-     * @param string $sField
-     * @param string $sId
-     * @param array $aJoin Default ''
-     * @param string $sWhere Default NULL
+     * @param string $sField Default: NULL
+     * @param string $sId Default: NULL
+     * @param mixed (array | string) $mWhat Default: '*'
+     * @param array $aJoin Default: NULL
+     * @param string $sOptions Default: NULL
      * @return mixed (object | boolean) Object on success or throw PDOException on failure.
      */
-    public function selectAllInOne($mArrWhat, $mTable, $sField = '', $sId = '', $aJoin = '', $sWhere = null)
+    public function getAllInOne($mTable, $sField = null, $sId = null, $mWhat = '*', array $aJoin = null, $sOptions = null)
     {
         try
         {
-            if (is_array(Db::prefix($mTable)))
-                $mTable = implode(', ', Db::prefix($mTable));
-
-            if (is_array($mArrWhat))
+            if (is_array($mTable))
             {
-                if (count($mArrWhat))
-                    $mWhat = implode(', ', $mArrWhat);
-                else
-                    $mWhat = '*';
+                $sTable = '';
+                foreach ($mTable as $sTable)
+                    $sTable .= Db::prefix($sTable, true) . ', ';
+
+                $sTable = substr($sTable, 0, -2);
             }
             else
             {
-                $mWhat = $mArrWhat;
+                $sTable = Db::prefix($mTable, true);
             }
 
-            $sSql = "SELECT $mWhat FROM " . Db::prefix($mTable) . " WHERE $sField = :id";
+            if (is_array($mWhat))
+                $sWhat = (count($mWhat)) ? implode(', ', $mWhat) : '*';
+            else
+                $sWhat = $mWhat;
 
-            if (is_array($aJoin) && count($aJoin) == 2)
-                $sSql .= "LEFT JOIN $aJoin[0] ON $sTable.$aJoin[1] = $aJoin[0].$aJoin[1]";
+            $bIsWhere = isset($sField, $sId);
 
-            if (!empty($sWhere))
-                $sSql .= " WHERE $sWhere";
+            $this->_sSql = "SELECT $sWhat FROM " . $sTable;
 
-            $rStmt = Db::getInstance()->prepare($sSql);
-            $rStmt->bindParam(':id', $sId);
+            if (!empty($aJoin) && count($aJoin) == 2)
+                $this->_sSql .= " LEFT JOIN $aJoin[0] ON $sTable.$aJoin[1] = $aJoin[0].$aJoin[1]";
+
+            if ($bIsWhere)
+                $this->_sSql .= " WHERE $sField = :id";
+
+            if (!empty($sOptions))
+                $this->_sSql .= " $sOptions";
+
+            $rStmt = Db::getInstance()->prepare($this->_sSql);
+            if ($bIsWhere) $rStmt->bindParam(':id', $sId);
             $rStmt->execute();
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -266,8 +300,48 @@ class Record
     }
 
     /**
+     * Select query and return one value result.
+     *
+     * @param string $sTable
+     * @param string $sField Default: NULL
+     * @param string $sId Default: NULL
+     * @param string $sWhat Default: '*'
+     * @param string $sOptions Default: NULL
+     * @return mixed (string | object | boolean) SQL query on success (returns strong or object value) or throw PDOException on failure (returns a false boolean).
+     *
+     */
+    public function getOne($sTable, $sField = null, $sId = null, $sWhat = '*', $sOptions = null)
+    {
+        try
+        {
+            $bIsWhere = isset($sField, $sId);
+
+            $this->_sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
+
+            if ($bIsWhere)
+                $this->_sSql .= "WHERE $sField = :field ";
+
+            if (!empty($sOptions))
+                $this->_sSql .= " $sOptions ";
+
+            $this->_sSql .= 'LIMIT 0, 1'; // Get only one column
+
+            $rStmt = Db::getInstance()->prepare($this->_sSql);
+            if ($bIsWhere) $rStmt->bindParam(':id', $sId);
+            $rStmt->execute();
+            $mRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            return $mRow;
+        }
+        catch (Exception $oE)
+        {
+            $this->_aErrors[] = $oE->getMessage();
+        }
+    }
+
+    /**
      * Update statement.
-     * Sample: Record::getInstance()->updates('MyTable', array('foo' => 'bar', 'foo2' => 'bar4', 'foo9' => 'bar4'))->where('fooID', 22)->execute();
+     * Sample: Record::getInstance()->updates('MyTable', array('foo' => 'bar', 'foo2' => 'bar4', 'foo9' => 'bar4'))->find('fooID', 22)->execute();
      *
      * @param string $sTable
      * @param array $aValues
@@ -282,7 +356,7 @@ class Record
 
         foreach ($oCachingIterator as $sField => $sValue)
         {
-            $this->_sSql .= $sField . ' = ' . Db::getInstance()->quote($sValue);
+            $this->_sSql .= $sField . ' = ' . $this->escape($sValue);
             $this->_sSql .= $oCachingIterator->hasNext() ? ',' : ' ';
         }
 
@@ -291,29 +365,122 @@ class Record
 
     /**
      * Select statement.
+     * Sample: Record::getInstance()->select('MyTable', 'column1, column2')->where('column1', 'me')->andClause('column2', 'rack', '<>')->orderBy('column1', Db::DESC)->execute();
      *
-     * @param string $sArrWhat
      * @param string $sTable
+     * @param string $sWhat Default: '*'
      * @return object this
      *
      */
-    public function select($sArrWhat, $sTable)
+    public function select($sTable, $sWhat = '*')
     {
-        $this->_sSql = 'SELECT ' . $sArrWhat . ' FROM' . Db::prefix($sTable);
+        $this->_sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
         return $this;
     }
 
     /**
-     * Where clause.
+     * Find in SQL column(s) (with where clause).
+     *
+     * @see \PH7\Framework\Mvc\Model\Engine\Record::where()
      *
      * @param string $sField
      * @param string $sValue
      * @return object this
      *
      */
-    public function where($sField, $sValue)
+    public function find($sField, $sValue)
     {
-        $this->_sSql .= " WHERE $sField=$sValue";
+        $this->where($sField, $sValue, '=');
+        return $this;
+    }
+
+    /**
+     * AND for Find.
+     *
+     * @see \PH7\Framework\Mvc\Model\Engine\Record::andClause()
+     *
+     * @param string $sField
+     * @param string $sValue
+     * @return object this
+     *
+     */
+    public function andFind($sField, $sValue)
+    {
+        $this->andClause($sField, $sValue, '=');
+        return $this;
+    }
+
+    /**
+     * OR for Find.
+     *
+     * @see \PH7\Framework\Mvc\Model\Engine\Record::orClause()
+     *
+     * @param string $sField
+     * @param string $sValue
+     * @return object this
+     *
+     */
+    public function orFind($sField, $sValue)
+    {
+        $this->orClause($sField, $sValue, '=');
+        return $this;
+    }
+
+    /**
+     * HAVING for find.
+     *
+     * @see \PH7\Framework\Mvc\Model\Engine\Record::having()
+     *
+     * @param string $sField
+     * @param string $sValue
+     * @return object this
+     */
+    public function havingFind($sField, $sValue)
+    {
+        $this->having($sField, $sValue, '=');
+        return $this;
+    }
+
+    /**
+     * Add a WHERE clause.
+     *
+     * @param string $sField
+     * @param string $sValue
+     * @param string $sOperator Default: '='
+     * @return object this
+     *
+     */
+    public function where($sField, $sValue, $sOperator = '=')
+    {
+        $this->optClause('WHERE', $sField, $sValue, $sOperator);
+        return $this;
+    }
+
+    /**
+     * Add an AND clause.
+     *
+     * @param string $sField
+     * @param string $sValue
+     * @param string $sOperator Default: '='
+     * @return object this
+     */
+    public function andClause($sField, $sValue, $sOperator = '=')
+    {
+        $this->optClause('AND', $sField, $sValue, $sOperator);
+        return $this;
+    }
+
+    /**
+     * Add an OR clause.
+     *
+     * @param string $sField
+     * @param string $sValue
+     * @param string $sOperator Default: '='
+     * @return object this
+     */
+    public function orClause($sField, $sValue, $sOperator = '=')
+    {
+        $this->optClause('OR', $sField, $sValue, $sOperator);
         return $this;
     }
 
@@ -326,20 +493,7 @@ class Record
      */
     public function limit($iOffset, $iLimit)
     {
-        $this->_sSql .= " LIMIT $iOffset, $iLimit";
-        return $this;
-    }
-
-    /**
-     * Add an AND clause.
-     *
-     * @param string $sField
-     * @param string $sValue
-     * @return object this
-     */
-    public function andClause($sField, $sValue)
-    {
-        $this->_sSql .= " AND $sField = $sValue";
+        $this->clause('LIMIT', "$iOffset, $iLimit");
         return $this;
     }
 
@@ -347,12 +501,12 @@ class Record
      * Add an ORDER BY clause.
      *
      * @param string $sField
-     * @param string $sOrder
+     * @param string $sOrder Default: 'ASC'
      * @return object this
      */
-    public function orderBy($sField, $sOrder = 'ASC')
+    public function orderBy($sField, $sOrder = Db::ASC)
     {
-        $this->_sSql .= " ORDER BY $sField $sOrder";
+        $this->clause('ORDER BY', "$sField $sOrder");
         return $this;
     }
 
@@ -364,19 +518,50 @@ class Record
      */
     public function groupBy($sGroup)
     {
-        $this->_sSql .= " GROUP BY $sGroup";
+        $this->clause('GROUP BY', $sGroup);
         return $this;
     }
 
     /**
      * Add an HAVING clause.
      *
-     * @param string $sHaving
+     * @param string $sField
+     * @param string $sValue
+     * @param string $sOperator Default: '='
      * @return object this
      */
-    public function having($sHaving)
+    public function having($sField, $sValue, $sOperator = '=')
     {
-        $this->_sSql .= " HAVING $sHaving";
+        $this->optClause('HAVING', $sField, $sValue, $sOperator);
+        return $this;
+    }
+
+    /**
+     * Add any clauses.
+     *
+     * @param string $sClsName Clause operator.
+     * @param string $sVal Value.
+     * @return object this
+     */
+    protected function clause($sClsName, $sVal)
+    {
+        $this->_sSql .= " $sClsName $sVal";
+        return $this;
+    }
+
+    /**
+     * Add a clause with operator and escape the input value.
+     *
+     * @param string $sClsName Clause operator.
+     * @param string $sField Field
+     * @param string $sVal Value.
+     * @param string $sOpt Operator.
+     * @return object this
+     */
+    protected function optClause($sClsName, $sField, $sVal, $sOpt)
+    {
+        $sVal = $this->escape($sVal);
+        $this->_sSql .= " $sClsName $sField $sOpt $sVal";
         return $this;
     }
 

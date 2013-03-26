@@ -21,6 +21,8 @@ use PH7\Framework\Core\Core;
 class Db
 {
 
+    const ASC = 'ASC', DESC = 'DESC', RAND = 'RAND()';
+
     /**
      * Static attributes of the class.
      * Holds an insance of self with the \PDO class.

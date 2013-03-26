@@ -31,9 +31,9 @@ class Various
      * @param string $sSqlFile File SQL.
      * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
      */
-    public static function execFileQuery($sSqlFile)
+    public static function execQueryFile($sSqlFile)
     {
-        if(!is_file($sSqlFile)) return false;
+        if (!is_file($sSqlFile)) return false;
 
         $sSqlContent = file_get_contents($sSqlFile);
         $sSqlContent = str_replace(PH7_TABLE_PREFIX,  Db::prefix(), $sSqlContent);
@@ -88,7 +88,7 @@ class Various
      */
      public static function convertTableToMod($sTable)
      {
-         switch($sTable)
+         switch ($sTable)
          {
              case 'Members':
                  $sMod = 'user';
@@ -124,7 +124,7 @@ class Various
      */
     public static function convertTableToId($sTable)
     {
-        switch($sTable)
+        switch ($sTable)
         {
             case 'Members':
                 $sId = 'profileId';
@@ -185,7 +185,7 @@ class Various
      */
     public static function checkTable($sTable)
     {
-        switch($sTable)
+        switch ($sTable)
         {
             case 'Members':
             case 'AlbumsPictures':
@@ -217,7 +217,7 @@ class Various
      */
     public static function checkModelTable($sTable)
     {
-        switch($sTable)
+        switch ($sTable)
         {
             case 'Members':
             case 'Affiliate':

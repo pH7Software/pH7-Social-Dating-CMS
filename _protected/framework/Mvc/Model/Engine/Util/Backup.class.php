@@ -160,7 +160,7 @@ class Backup
      */
     public function restore()
     {
-        $mRet = Various::execFileQuery($this->_sPathName);
+        $mRet = Various::execQueryFile($this->_sPathName);
         return ($mRet !== true) ? print_r($mRet, true) : true;
     }
 

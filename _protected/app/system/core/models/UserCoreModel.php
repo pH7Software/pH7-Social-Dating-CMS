@@ -854,19 +854,19 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         switch($sOrder)
         {
             case static::RAND:
-                $sSqlOrderBy =  'RAND() ';
+                $sSqlOrderBy = Db::RAND;
             break;
 
             case static::LATEST:
             case static::LAST_ACTIVITY:
-                $sSqlOrderBy =  $sOrder . ' DESC ';
+                $sSqlOrderBy =  $sOrder . ' ' . Db::DESC;
             break;
 
             default:
                 throw new Framework\Error\CException\PH7Exception('The argument order is wrong, please correct it, please.');
         }
 
-        return ' ORDER BY ' . $sSqlOrderBy;
+        return ' ORDER BY ' . $sSqlOrderBy . ' ';
     }
 
     /**

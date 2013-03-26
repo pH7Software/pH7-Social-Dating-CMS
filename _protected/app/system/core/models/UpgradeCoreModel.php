@@ -20,7 +20,7 @@ class UpgradeCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function run($sSqlUpgradeFile)
     {
-        return Various::execFileQuery($sSqlUpgradeFile);
+        return Various::execQueryFile($sSqlUpgradeFile);
     }
 
 }

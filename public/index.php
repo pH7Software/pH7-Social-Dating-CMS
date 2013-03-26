@@ -22,7 +22,7 @@ if (version_compare(phpversion(), PH7_REQUIRE_VERSION, '<') === true)
 
 // If no system settings, go install
 if (!is_file(__DIR__ . '/_constants.php'))
-    exit((is_dir(__DIR__) . '/_install/') ? header('Location: _install/') : 'CONFIG FILE NOT FOUND!');
+    exit((is_dir(__DIR__ . '/_install/')) ? header('Location: _install/') : 'CONFIG FILE NOT FOUND!');
 
 require __DIR__ . '/_constants.php';
 require PH7_PATH_APP  . 'Bootstrap.php';
