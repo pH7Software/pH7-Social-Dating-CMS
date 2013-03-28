@@ -58,6 +58,13 @@ class UpgradeCore
         $this->_prepare(); // Preparation and verification for software upgrade
     }
 
+    public function display()
+    {
+        echo '<!doctype html><html><head><meta charset="utf-8"><title>', t('Upgrade %software_name% - %software_company% | Version %0%', $this->_sVerNumber), '</title><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.bold,.error{font-weight:bold;font-size:13px}.red,.error{color:red}.success{color:green}.italic{font-style:italic}.underline{text-decoration:underline}pre{margin:2px;font-style:italic}code{font-style:italic;font-size:11px}</style></head><body><div class="center">';
+        echo $this->_sHtml;
+        echo '</div></body></html>';
+    }
+
     private function _prepare()
     {
         if(!AdminCore::auth())
@@ -218,13 +225,6 @@ class UpgradeCore
        }
     }
 
-    public function display()
-    {
-        echo '<!doctype html><html><head><meta charset="utf-8"><title>', t('Upgrade %software_name% - %software_company% | Version %0%', $this->_sVerNumber), '</title><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.bold,.error{font-weight:bold;font-size:13px}.red,.error{color:red}.success{color:green}.italic{font-style:italic}.underline{text-decoration:underline}pre{margin:2px;font-style:italic}code{font-style:italic;font-size:11px}</style></head><body><div class="center">';
-        echo $this->_sHtml;
-        echo '</div></body></html>';
-    }
-
     private function _check()
     {
         if(!AdminCore::auth())
@@ -259,7 +259,7 @@ class UpgradeCore
      *
      * @return boolean
      */
-    private function isErr()
+    private function _isErr()
     {
         return (empty($this->_aErrors)) ? false : true;
     }
@@ -277,12 +277,12 @@ class UpgradeCore
 
            $this->_sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
 
-           $i = 1;
-           foreach($this->_aErrors as $sError) {
-               $this->_sHtml .= '<p class="error">' . t('%0%) %1%', $i++, $sError) . '</p>';
-           }
+           for($i=0; $i < $iErrors; $i++)
+               $this->_sHtml .= '<p class="error">' . t('%0%) %1%', $i+1, $this->_aErrors[$i]) . '</p>';
+
            return true;
         }
+
         return false;
     }
 

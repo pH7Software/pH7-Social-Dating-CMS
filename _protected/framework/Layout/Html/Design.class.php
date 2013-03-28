@@ -65,7 +65,7 @@ class Design
                 // Retrieve only the first two characters
                 $sAbbrLang = substr($sLang,0,2);
 
-                echo '<a href="', $sCurrentPage, $sLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang),'" title="', t($sAbbrLang),'" /></a>';
+                echo '<a href="', $sCurrentPage, $sLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>';
         }
 
         unset($aLangs, $sCurrentPage);
@@ -94,16 +94,17 @@ class Design
 
         $iMsgNum = count($this->aMessages);
         /*** Check if there are any messages in the aMessages array ***/
-        if($iMsgNum > 0) {
+        if($iMsgNum > 0)
+        {
             $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
             echo '<script>$(document).ready(function(){apprise(\'';
 
             if($iMsgNum > 1)
-                echo '<strong>', t('You have '), '<em>', $iMsgNum, '</em> ', t('messages:'), '</strong><br />';
+                echo '<strong>', t('You have'), ' <em>', $iMsgNum, '</em> ', nt('message:', 'messages:', $iMsgNum), '</strong><br />';
 
-            foreach($this->aMessages as $sMsg)
-                echo $this->oStr->upperFirst(str_replace('-', ' ', $sMsg)), '<br />';
+            for($i=0; $i < $iMsgNum; $i++)
+                echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$i])), '<br />';
 
             echo '\', {\'animate\':true})});</script>';
         }
@@ -134,17 +135,15 @@ class Design
 
         $iErrNum = count($this->aErrors);
         /*** Check if there are any errors in the aErrors array ***/
-        if($iErrNum > 0) {
+        if($iErrNum > 0)
+        {
            $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
            echo '<script>$(document).ready(function(){apprise(\'';
-           echo '<strong>', t('You have '), '<em>', $iErrNum, '</em> ';
+           echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
 
-           echo nt('error:', 'errors:', $iErrNum);
-           echo '</strong><br />';
-
-           foreach($this->aErrors as $sErr)
-             echo $this->oStr->upperFirst(str_replace('-', ' ', $sErr)), '<br />';
+           for($i=0; $i < $iErrNum; $i++)
+             echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
 
            echo '\', {\'animate\':true})});</script>';
         }
@@ -198,7 +197,7 @@ class Design
 
         $aHttpParams = [
             'label' => Url::encode($sLabel),
-            'mod=' => $sMod,
+            'mod' => $sMod,
             'ctrl' => $sCtrl,
             'act' => $sAct,
             'id' => Url::encode($mId)
@@ -231,9 +230,8 @@ class Design
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bLicenseLink = true)
     {
-        if(defined('PH7_LICENSE_STATUS')) {
+        if(defined('PH7_LICENSE_STATUS'))
             if(PH7_LICENSE_STATUS && PH7_LICENSE_NO_COPYRIGHT) return;
-        }
 
         ($bLink ? $bSoftwareName = true : '');
 
@@ -280,12 +278,12 @@ class Design
     {
         if($sType == 'js')
         {
-            echo '<script src="', PH7_RELATIVE, 'asset/gzip/?t=js&amp;d=',$sDir,'&amp;f=',$sFiles,'"></script>';
+            echo '<script src="', PH7_RELATIVE, 'asset/gzip/?t=js&amp;d=', $sDir, '&amp;f=', $sFiles, '"></script>';
         }
         else
         {
             $sCssMedia = (!empty($sCssMedia)) ? ' media="' . $sCssMedia . '" ' : ' ';
-            echo '<link rel="stylesheet" href="', PH7_RELATIVE, 'asset/gzip/?t=css&amp;d=',$sDir,'&amp;f=',$sFiles,'"', $sCssMedia, '/>';
+            echo '<link rel="stylesheet" href="', PH7_RELATIVE, 'asset/gzip/?t=css&amp;d=', $sDir, '&amp;f=', $sFiles, '"', $sCssMedia, '/>';
         }
     }
 
@@ -359,7 +357,8 @@ class Design
      */
     public function flashMsg()
     {
-        if($this->oSession->exists('flash_msg')) {
+        if($this->oSession->exists('flash_msg'))
+        {
             echo '<div class="center alert-message ', $this->oSession->get('flash_type'), '"><p>', $this->oSession->get('flash_msg'), '</p></div>';
 
             $this->oSession->remove('flash_msg'); // Remove the flash_msg session
@@ -371,7 +370,7 @@ class Design
         $sCountry = Geo::getCountry();
         $sCity = Geo::getCity();
 
-        echo '<a href="', UriRoute::get('user','country','index', $sCountry . PH7_DS . $sCity), '" title="', t('Meet New People on %0%, %1% with %site_name%!', $sCountry, $sCity),'">', $sCountry, ', ', $sCity, '</a>';
+        echo '<a href="', UriRoute::get('user', 'country', 'index', $sCountry . PH7_DS . $sCity), '" title="', t('Meet New People on %0%, %1% with %site_name%!', $sCountry, $sCity), '">', $sCountry, ', ', $sCity, '</a>';
     }
 
     /**
@@ -507,10 +506,10 @@ class Design
             's' => $sSex
         ];
 
-        $sLikeLink = (\PH7\UserCore::auth()) ? '#' : UriRoute::get('user','signup','step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+        $sLikeLink = (\PH7\UserCore::auth()) ? '#' : UriRoute::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
 
         $sUrlKey = (empty($sForceUrlKey)) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
-        echo '<a rel="nofollow" href="', $sLikeLink,'" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like">', t('Like %0%', $sFirstName), '</a>';
+        echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like">', t('Like %0%', $sFirstName), '</a>';
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'Like.js');
     }
 
@@ -610,7 +609,8 @@ class Design
         '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
         <script>var pH7Url={base:\'', PH7_URL_ROOT, '\'}</script></head><body>';
-        if($bLogo) {
+        if($bLogo)
+        {
             echo '<header>
             <div id="logo"><h1><a href="', PH7_URL_ROOT, '" title="', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '">', Kernel::SOFTWARE_NAME, '</a></h1></div>
             </header>';

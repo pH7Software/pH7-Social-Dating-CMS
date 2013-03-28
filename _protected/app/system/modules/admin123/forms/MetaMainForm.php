@@ -35,17 +35,14 @@ class MetaMainForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_meta', 'form_meta'));
         $oForm->addElement(new \PFBC\Element\Token('admin_meta'));
 
+        // Generate the list of languages
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center divShow">'));
-        $oFile = new File();
-        $aLangs = $oFile->getDirList(PH7_PATH_APP_LANG);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3 class="underline"><a href="#showDiv_listLang" title="' . t('Click here to show/hide the languages') . '">' . t('Change language for the Meta Tags') . '</a></h3>'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<ul class="hidden" id="showDiv_listLang">'));
-
+        $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
         for ($i=0, $iLength = count($aLangs); $i < $iLength; $i++) $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($i+1) . ') ' . '<a class="bold" href="' . UriRoute::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$i], false) . '">' . $aLangs[$i] . '</a></li>'));
-
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul>'));
-        unset($oFile, $aLangs);
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
+        unset($aLangs);
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', array('value' => $oMeta->langId, 'description' => t('EX: "en", "fr", "es", "jp"'), 'validation' => new \PFBC\Validation\Str(5, 5), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Home page title:'), 'page_title', array('value' => $oMeta->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));

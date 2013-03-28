@@ -128,7 +128,6 @@ class Record
             {
                 $this->_sSql .= $sField . ' = :' . $sField;
                 $this->_sSql .= $oCachingIterator->hasNext() ? ',' : '';
-                $this->_sSql .= "\n";
             }
 
             $rStmt = Db::getInstance()->prepare($this->_sSql);
@@ -259,9 +258,9 @@ class Record
             {
                 $sTable = '';
                 foreach ($mTable as $sTable)
-                    $sTable .= Db::prefix($sTable, true) . ', ';
+                    $sTable .= Db::prefix($sTable, true) . ',';
 
-                $sTable = substr($sTable, 0, -2);
+                $sTable = substr($sTable, 0, -1);
             }
             else
             {
@@ -269,7 +268,7 @@ class Record
             }
 
             if (is_array($mWhat))
-                $sWhat = (count($mWhat)) ? implode(', ', $mWhat) : '*';
+                $sWhat = (count($mWhat)) ? implode(',', $mWhat) : '*';
             else
                 $sWhat = $mWhat;
 
@@ -324,7 +323,7 @@ class Record
             if (!empty($sOptions))
                 $this->_sSql .= " $sOptions ";
 
-            $this->_sSql .= 'LIMIT 0, 1'; // Get only one column
+            $this->_sSql .= 'LIMIT 0,1'; // Get only one column
 
             $rStmt = Db::getInstance()->prepare($this->_sSql);
             if ($bIsWhere) $rStmt->bindParam(':id', $sId);
@@ -357,7 +356,7 @@ class Record
         foreach ($oCachingIterator as $sField => $sValue)
         {
             $this->_sSql .= $sField . ' = ' . $this->escape($sValue);
-            $this->_sSql .= $oCachingIterator->hasNext() ? ',' : ' ';
+            $this->_sSql .= $oCachingIterator->hasNext() ? ',' : '';
         }
 
         return $this;

@@ -27,16 +27,24 @@ class RatingCoreAjax
     {
        $this->_oHttpRequest = new HttpRequest;
 
-       if($this->_oHttpRequest->postExists('action') && $this->_oHttpRequest->postExists('table') && $this->_oHttpRequest->postExists('score') && $this->_oHttpRequest->postExists('id')) {
-           if($this->_oHttpRequest->post('action') == 'rating') {
-               if(!UserCore::auth()) { // Only for the Members
+       if($this->_oHttpRequest->postExists('action') && $this->_oHttpRequest->postExists('table') && $this->_oHttpRequest->postExists('score') && $this->_oHttpRequest->postExists('id'))
+       {
+           if($this->_oHttpRequest->post('action') == 'rating')
+           {
+               // Only for the Members
+               if(!UserCore::auth())
+               {
                    $this->_iStatus = 0;
                    $this->_sTxt = t('Please <b>register</b> or <b>login</b> to vote.');
-               } else {
+               }
+               else
+               {
                    $this->initialize();
                }
            }
-       } else {
+       }
+       else
+       {
            Framework\Http\Http::setHeadersByCode(400);
            exit('Bad Request Error!');
        }
@@ -54,9 +62,11 @@ class RatingCoreAjax
         $this->_sTable = $this->_oHttpRequest->post('table');
         $this->_iId = (int) $this->_oHttpRequest->post('id');
 
-        if($this->_sTable == 'Members') {
+        if($this->_sTable == 'Members')
+        {
             $iProfileId = (int) (new Framework\Session\Session)->get('member_id');
-            if($iProfileId === $this->_iId) {
+            if($iProfileId === $this->_iId)
+            {
                 $this->_iStatus = 0;
                 $this->_sTxt = t('You can not vote your own profile!');
                 return;
@@ -66,11 +76,14 @@ class RatingCoreAjax
         /* Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database */
         $oCookie = new Cookie;
         $sCookieName = 'pHSVoting' . $this->_iId . $this->_sTable;
-        if($oCookie->exists($sCookieName)) {
+        if($oCookie->exists($sCookieName))
+        {
             $this->_iStatus = 0;
             $this->_sTxt = t('You have already voted!');
             return;
-        } else {
+        }
+        else
+        {
             $oCookie->set($sCookieName, 1, 3600*24*7); // A week
         }
         unset($oCookie);

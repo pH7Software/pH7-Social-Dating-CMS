@@ -66,6 +66,7 @@ if($iErrors > 0)
 
     for($i = 1; $i <= $iErrors; $i++)
         printf('<p class="error">%d) %s</p>', $i, $sError);
+
     echo '</div></body></html>';
 
     exit(1);
