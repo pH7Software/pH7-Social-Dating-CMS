@@ -111,7 +111,7 @@ class Gzip
         $this->_sFiles = $this->_oHttpRequest->get('f');
         $this->_aElements = explode(',', $this->_sFiles);
 
-        while (list(, $sElement) = each($this->_aElements))
+        foreach ($this->_aElements as $sElement)
         {
             $sPath = realpath($this->_sBase . $sElement);
 
@@ -160,8 +160,7 @@ class Gzip
         $sExt = ($this->_bIsGzip) ? 'gz' : 'cache';
         $sCacheFile = md5($this->_sType . $this->_sDir . $this->_sFiles) . PH7_DOT . $sExt;
 
-        reset($this->_aElements);
-        while (list(, $sElement) = each($this->_aElements))
+        foreach ($this->_aElements as $sElement)
         {
             $sPath = realpath($this->_sBase . $sElement);
 
@@ -240,11 +239,8 @@ class Gzip
     protected function getContents()
     {
         $this->_sContents = '';
-        reset($this->_aElements);
-        while (list(, $sElement) = each($this->_aElements))
-        {
+        foreach ($this->_aElements as $sElement)
             $this->_sContents .= File::EOL . $this->_oFile->getUrlContents(PH7_URL_ROOT . $this->_sBaseUrl . $sElement);
-        }
 
         if ($this->_sType == 'css')
         {
