@@ -34,7 +34,7 @@ abstract class Kernel
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',
-    SOFTWARE_VERSION = '0.8.6',
+    SOFTWARE_VERSION = '0.8.9',
     SOFTWARE_BUILD = '1',
     SOFTWARE_NAME_TECHNOLOGY = 'pH7T/1.0.1', // Ph7 Technology
     SOFTWARE_NAME_SERVER = 'pH7WS/1.0.0', // pH7 Web Server

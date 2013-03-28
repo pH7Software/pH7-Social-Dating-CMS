@@ -175,9 +175,12 @@ class ValidateCoreAjax
         $iMin =  DbConfig::getSetting('minPasswordLength');
         $iMax = DbConfig::getSetting('maxPasswordLength');
 
-        if(!$this->_oValidate->password($sValue, $iMin, $iMax)) {
+        if(!$this->_oValidate->password($sValue, $iMin, $iMax))
+        {
             $this->_sMsg = sprintf(t('Your Password has to contain from %d to %d characters.'), $iMin, $iMax);
-        } else {
+        }
+        else
+        {
             $this->_iStatus = 1;
             $this->_sMsg = t('Password is correct!');
         }
@@ -195,11 +198,16 @@ class ValidateCoreAjax
         $iMin = DbConfig::getSetting('minAgeRegistration');
         $iMax = DbConfig::getSetting('maxAgeRegistration');
 
-        if(!$this->_oValidate->date($sValue)) {
+        if(!$this->_oValidate->date($sValue))
+        {
             $this->_sMsg = t('Your must enter a date valid (Month/Day/Year).');
-        } elseif(!$this->_oValidate->birthDate($sValue, $iMin, $iMax)) {
+        }
+        elseif(!$this->_oValidate->birthDate($sValue, $iMin, $iMax))
+        {
             $this->_sMsg = sprintf(t('You must be %d to %d years to register on the site.'), $iMin, $iMax);
-        } else {
+        }
+        else
+        {
             $this->_iStatus = 1;
             $this->_sMsg = t('OK!');
         }
@@ -252,9 +260,12 @@ class ValidateCoreAjax
      */
     protected function url($sValue)
     {
-        if(!$this->_oValidate->url($sValue)) {
+        if(!$this->_oValidate->url($sValue))
+        {
             $this->_sMsg = t('Your must enter a valid url (e.g. http://www.coolonweb.com).');
-        } else {
+        }
+        else
+        {
             $this->_iStatus = 1;
             $this->_sMsg = t('OK!');
         }
@@ -269,10 +280,13 @@ class ValidateCoreAjax
      */
     protected function captcha($sValue)
     {
-        if((new Framework\Security\Spam\Captcha\Captcha)->check($sValue)) {
+        if((new Framework\Security\Spam\Captcha\Captcha)->check($sValue))
+        {
             $this->_iStatus = 1;
             $this->_sMsg = t('OK!');
-        } else {
+        }
+        else
+        {
             $this->_sMsg = t('Captcha check failed!');
         }
     }
@@ -286,9 +300,12 @@ class ValidateCoreAjax
      */
     protected function phone($sValue)
     {
-        if(!$this->_oValidate->phone($sValue)) {
+        if(!$this->_oValidate->phone($sValue))
+        {
             $this->_sMsg = t('Please enter a correct phone number with area code!');
-        } else {
+        }
+        else
+        {
             $this->_iStatus = 1;
             $this->_sMsg = t('OK!');
         }
@@ -303,11 +320,10 @@ class ValidateCoreAjax
      */
     protected function terms($sValue)
     {
-        if($sValue != 'true') {
+        if($sValue != 'true')
             $this->_sMsg = t('You must read and approve the terms of use!');
-        } else {
+        else
             $this->_iStatus = 1;
-        }
     }
 
     /**
@@ -323,7 +339,8 @@ class ValidateCoreAjax
 
 $oHttpRequest = new HttpRequest;
 
-if($oHttpRequest->postExists('fieldId')) {
+if($oHttpRequest->postExists('fieldId'))
+{
   (new ValidateCoreAjax)->form($oHttpRequest->post('inputVal'), $oHttpRequest->post('fieldId'), $oHttpRequest->post('param1'), $oHttpRequest->post('param2'));
 }
 

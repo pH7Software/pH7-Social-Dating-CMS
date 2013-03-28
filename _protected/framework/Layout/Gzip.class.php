@@ -83,14 +83,16 @@ class Gzip
     {
         // Determine the directory and type we should use
         if (!$this->_oHttpRequest->getExists('t') || ($this->_oHttpRequest->get('t') !==
-            'html' && $this->_oHttpRequest->get('t') !== 'css' && $this->_oHttpRequest->get('t') !== 'js')) {
+            'html' && $this->_oHttpRequest->get('t') !== 'css' && $this->_oHttpRequest->get('t') !== 'js'))
+        {
             Http::setHeadersByCode(503);
             exit('Invalid type file!');
         }
         $this->_sType = ($this->_oHttpRequest->get('t') === 'js') ? 'javascript' : $this->_oHttpRequest->get('t');
 
         // Directory
-        if (!$this->_oHttpRequest->getExists('d')) {
+        if (!$this->_oHttpRequest->getExists('d'))
+        {
             Http::setHeadersByCode(503);
             exit('No directory specified!');
         }
@@ -100,7 +102,8 @@ class Gzip
         $this->_sBaseUrl = $this->_oFile->checkExtDir($this->_sDir);
 
         // The Files
-        if (!$this->_oHttpRequest->getExists('f')) {
+        if (!$this->_oHttpRequest->getExists('f'))
+        {
             Http::setHeadersByCode(503);
             exit('No file specified!');
         }
@@ -113,12 +116,14 @@ class Gzip
             $sPath = realpath($this->_sBase . $sElement);
 
             if (($this->_sType == 'html' && substr($sPath, -5) != '.html') || ($this->
-                _sType == 'javascript' && substr($sPath, -3) != '.js') || ($this->_sType == 'css' && substr($sPath, -4) != '.css')) {
+                _sType == 'javascript' && substr($sPath, -3) != '.js') || ($this->_sType == 'css' && substr($sPath, -4) != '.css'))
+            {
                 Http::setHeadersByCode(403);
                 exit('Error file extension.');
             }
 
-            if (substr($sPath, 0, strlen($this->_sBase)) != $this->_sBase || !is_file($sPath)) {
+            if (substr($sPath, 0, strlen($this->_sBase)) != $this->_sBase || !is_file($sPath))
+            {
                 Http::setHeadersByCode(404);
                 exit('The file not found!');
             }
@@ -174,7 +179,8 @@ class Gzip
             }
         }
 
-        if ($this->_oHttpRequest->getMethod() != 'HEAD') {
+        if ($this->_oHttpRequest->getMethod() != 'HEAD')
+        {
             $oBrowser->cache();
             //header('Not Modified', true, 304); // Warning: It can causes problems (ERR_FILE_NOT_FOUND)
         }

@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
 trait Escape
 {
 
-    const ALLOW_TAGS = '<br><b><i><em><strong><u><s>';
+    protected $sAllowTags = '<br><b><i><em><strong><u><s>';
 
     /**
      * Escape the exception message.
@@ -26,7 +26,7 @@ trait Escape
      */
     protected function init($sMsg)
     {
-        $this->message = strip_tags($sMsg, static::ALLOW_TAGS);
+        $this->message = strip_tags($sMsg, $this->sAllowTags);
     }
 
 }

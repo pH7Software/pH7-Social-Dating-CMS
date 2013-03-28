@@ -7,7 +7,7 @@
                 <li>Web Server - Apache with mod_php or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work you should change some pieces of code and change the url rewriting to make it work).</li>
                 <li>URL rewriting extension modules - Apache, nginx, LiteSpeed, IIS (for Web.config, you have a <a href="http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/">good tutorial here</a>).</li>
                 <li><a href="http://ffmpeg.org">FFmpeg</a>.</li>
-                <li>Minimum Web Space - 2.0 GB.</li>
+                <li>Minimum Web Space - 1.0 GB.</li>
             </ul>
 
             <h3>Recommended:</h3>

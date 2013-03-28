@@ -37,7 +37,7 @@ class Url
      */
     public static function decode($sUrl)
     {
-        return rawurldecode($sUrl);
+        return urldecode($sUrl);
     }
 
     /**

@@ -1,4 +1,4 @@
-<!-- Last Update: 03/26/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 03/28/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -1868,8 +1868,9 @@
 |   |   |   `-- Session.class.php
 |   |   |-- Str
 |   |   |   |-- Exception.class.php
-|   |   |   |-- LoremIpsum.class.php
-|   |   |   |-- loremipsum.txt
+|   |   |   |-- Generator
+|   |   |   |   |-- LoremIpsum.class.php
+|   |   |   |   `-- loremipsum.txt
 |   |   |   |-- Str.class.php
 |   |   |   `-- Utf8.class.php
 |   |   |-- Structure
@@ -4274,4 +4275,4 @@
 
 </pre>
 
-<p>Statistics: 1277 directories, 2989 files.</p>
+<p>Statistics: 1278 directories, 2989 files.</p>

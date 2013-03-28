@@ -34,7 +34,7 @@ class SmileCoreAjax extends \PH7\Framework\Service\Emoticon
         {
             $aEmoticons = static::gets();
 
-            foreach($aEmoticons as $sEmoticonKey => $aEmoticon)
+            foreach ($aEmoticons as $sEmoticonKey => $aEmoticon)
             {
                 $mCode = static::getCode($aEmoticon);
                 $sImg = static::getUrl($sEmoticonKey);
