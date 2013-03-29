@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            Image Class
- * @desc             Class is used to create/manipulate images using GD.
+ * @desc             Class is used to create/manipulate images using GD library.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
@@ -14,6 +14,8 @@
 
 namespace PH7\Framework\Image;
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\File\File;
 
 class Image
 {
@@ -127,9 +129,9 @@ class Image
             $iY = $this->iHeight * ($iX / $this->iWidth);
         }
 
-        $sTmp = imagecreatetruecolor($iX, $iY);
-        imagecopyresampled($sTmp, $this->rImage, 0, 0, 0, 0, $iX, $iY, $this->iWidth, $this->iHeight);
-        $this->rImage = $sTmp;
+        $rTmp = imagecreatetruecolor($iX, $iY);
+        imagecopyresampled($rTmp, $this->rImage, 0, 0, 0, 0, $iX, $iY, $this->iWidth, $this->iHeight);
+        $this->rImage =& $rTmp;
 
         $this->iWidth = $iX;
         $this->iHeight = $iY;
@@ -148,9 +150,9 @@ class Image
     public function crop($iX = 0, $iY = 0, $iWidth = 1, $iHeight = 1)
     {
 
-        $sTmp = imagecreatetruecolor($iWidth, $iHeight);
-        imagecopyresampled($sTmp, $this->rImage, 0, 0, $iX, $iY, $iWidth, $iHeight, $iWidth, $iHeight);
-        $this->rImage = $sTmp;
+        $rTmp = imagecreatetruecolor($iWidth, $iHeight);
+        imagecopyresampled($rTmp, $this->rImage, 0, 0, $iX, $iY, $iWidth, $iHeight, $iWidth, $iHeight);
+        $this->rImage =& $rTmp;
 
         $this->iWidth = $iWidth;
         $this->iHeight = $iHeight;
@@ -414,14 +416,27 @@ class Image
     }
 
     /**
-     * @desc Destruction of the attributes and destroy an image with imagedestroy() function.
+     * @desc Remove the attributes, temporary file and memory resources.
      */
     public function __destruct()
     {
+        // Remove the temporary image
+        (new File)->deleteFile($this->sFile);
+
+        // Free the memory associated with the image
         @imagedestroy($this->rImage);
 
         unset(
-            $this->sFile, $this->sType, $this->aInfo, $this->rImage, $this->iWidth, $this->iHeight, $this->iMaxWidth, $this->iMaxHeight, $this->iQuality, $this->iCompression
+            $this->sFile,
+            $this->sType,
+            $this->aInfo,
+            $this->rImage,
+            $this->iWidth,
+            $this->iHeight,
+            $this->iMaxWidth,
+            $this->iMaxHeight,
+            $this->iQuality,
+            $this->iCompression
         );
     }
 

@@ -9,7 +9,8 @@
  * @package        PH7 / App / System / Core / Class
  * @version        1.3
  *
- * @history        01/13/12 -Removed support Ogg Theora Vorbis | We do not support Ogg more, because now the WebM format is preferable and is now compatible with almost all browsers.
+ * @history        01/13/2013 -Removed support Ogg Theora Vorbis | We do not support Ogg more, because now the WebM format is preferable and is now compatible with almost all browsers.
+ * @history        03/29/2013 -Adding "video not found", if the requested video is not found on the server.
  */
 namespace PH7;
 
@@ -55,6 +56,15 @@ class VideoDesignCore
         else
         {
             $sDir = PH7_URL_DATA_SYS_MOD . 'video/file/' . $oData->username . PH7_DS . $oData->albumId . PH7_DS;
+            $sVidFullPath1 = $sDir . $oData->file . '.webm';
+            $sVidFullPath2 = $sDir . $oData->file . '.mp4';
+
+            // If the video is not found on the server, we show a video that shows an appropriate message.
+            if( !(is_file($sVidFullPath1) && is_file($sVidFullPath2)) )
+            {
+                $sVidFullPath1 = PH7_URL_DATA_SYS_MOD . 'video/not_found.webm';
+                $sVidFullPath2 = PH7_URL_DATA_SYS_MOD . 'video/not_found.mp4';
+            }
 
             if((new Validate)->url($sDir . $oData->thumb))
             {
@@ -75,8 +85,8 @@ class VideoDesignCore
             $sParam = (DbConfig::getSetting('autoplayVideo')) ? 'autoplay="autoplay"' : '';
             $sVideoTag = '
             <video poster="' . $sThumb . '" width="' . $iWidth . '" height="' . $iHeight . '" controls="controls" ' . $sParam . '>
-                <source src="' . $sDir . $oData->file . '.webm" type="video/webm" />
-                <source src="' . $sDir . $oData->file . '.mp4" type="video/mp4" />
+                <source src="' . $sVidFullPath1 . '" type="video/webm" />
+                <source src="' . $sVidFullPath2 . '" type="video/mp4" />
                 ' . t('Your browser is obsolete. Please use a browser that supports HTML5.') . '
             </video>
             <div class="center">

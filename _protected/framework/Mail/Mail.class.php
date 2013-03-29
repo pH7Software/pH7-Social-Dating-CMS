@@ -15,8 +15,6 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
 
-require PH7_PATH_FRAMEWORK . 'Mail/Engine/Swift/swift_required.php';
-
 class Mail
 {
 

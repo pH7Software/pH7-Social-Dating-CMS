@@ -125,14 +125,20 @@ class Video
      * @param string $sFile.
      * @return string The new name that you entered in the parameter of this method.
      */
-     public function rename($sFile)
-     {
-         exec("$this->sFfmpegPath -i {$this->aFile['tmp_name']} $sFile");
-         return $sFile;
-     }
+    public function rename($sFile)
+    {
+        $sParams = ''; // By default, we don't use parameter
+
+        $sType = $this->oFile->getFileExt($sFile); // Get the new format
+        if($sType == 'mp4')
+            $sParams = '-c copy -copyts';
+
+        exec("$this->sFfmpegPath -i {$this->aFile['tmp_name']} $sParams $sFile");
+        return $sFile;
+    }
 
     /*
-     * @desc Generate a thumbnail with FFmpeg
+     * @desc Generate a thumbnail with FFmpeg.
      * @param string $sPicturePath
      * @param integer $iWidth
      * @param integer $iHeight
@@ -164,10 +170,13 @@ class Video
     }
 
     /**
-     * @desc Destruction of attributes.
+     * @desc Destruction of attributes and temporary file.
      */
     public function __destruct()
     {
+        // If it exists, delete the temporary video
+        $this->oFile->deleteFile($this->aFile['tmp_name']);
+
         unset(
             $this->oFile,
             $this->sType,
