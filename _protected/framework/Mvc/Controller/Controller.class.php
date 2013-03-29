@@ -150,10 +150,10 @@ abstract class Controller extends \PH7\Framework\Core\Core
      *
      * @final
      *
+     * @param string $sMsg Default is empty ('')
+     *
      * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to "false"
      * Default value of this attribute is "true"
-     *
-     * @param string $sMsg Default is empty ('')
      *
      * @return void Quits the page with the exit() function
      */
