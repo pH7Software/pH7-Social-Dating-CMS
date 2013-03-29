@@ -105,11 +105,17 @@ use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
          $sDefLangCode = substr(PH7_DEFAULT_LANG, 0, 2);
 
          if (is_file($sPath . $sFileName . '.js'))
+         {
              return $sFileName . '.js';
-         elseif (is_file($sPath . $sDefLangCode . '.js'))
+         }
+         else if (is_file($sPath . $sDefLangCode . '.js'))
+         {
              return $sDefLangCode . '.js';
+         }
          else
+         {
              throw new Exception('Language file \'' . $sPath . $sDefLangCode . '.js\' not found.');
+         }
      }
 
      /**

@@ -96,7 +96,7 @@ class MainController extends Controller
         $this->view->setPhpCompress(false);
 
         // Display
-        header('Content-Type: text/xml; charset=utf-8');  // Header
+        $this->setContentType(); // Header
         $this->view->display($this->sAction . PH7_DOT . $this->sXmlType . '.xml.tpl');
     }
 

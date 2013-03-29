@@ -117,7 +117,6 @@ class VideoFormProcessing extends Form
                 $oVideo->rename($sPath . $sFile . '.webm');
                 $oVideo->rename($sPath . $sFile . '.mp4');
                 //$oVideo->save($sPath . $sFile); // Original file type
-
             }
         }
         else
@@ -127,7 +126,6 @@ class VideoFormProcessing extends Form
         }
 
         $iApproved = (DbConfig::getSetting('videoManualApproval') == 0) ? '1' : '0';
-
 
         (new VideoModel)->addVideo($this->session->get('member_id'), $iAlbumId, $sTitle, $sDescription, $sFile, $sThumb, $sDuration, $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $iApproved);
 

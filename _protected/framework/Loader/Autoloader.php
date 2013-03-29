@@ -41,31 +41,43 @@ final class Autoloader
     {
         $sClass = $this->_clean($sClass);
 
-        /***** To include the libraries *****/
+        switch (true)
+        {
+            /***** To include the libraries *****/
+
+            // To include Classes
+            case is_file(PH7_PATH_FRAMEWORK . $sClass . '.class.php'):
+                $sFile = PH7_PATH_FRAMEWORK . $sClass . '.class.php';
+            break;
+
+            // To include Interfaces
+            case is_file(PH7_PATH_FRAMEWORK . $sClass . '.interface.php'):
+                $sFile = PH7_PATH_FRAMEWORK . $sClass . '.interface.php';
+            break;
+
+            // To include Traits
+            case is_file(PH7_PATH_FRAMEWORK . $sClass . '.trait.php'):
+                $sFile =  PH7_PATH_FRAMEWORK . $sClass . '.interface.php';
+            break;
 
 
-        // To include Classes
-        if (is_file(PH7_PATH_FRAMEWORK . $sClass . '.class.php')) {
-            require_once PH7_PATH_FRAMEWORK . $sClass . '.class.php';
+            /***** To include third-party library that does not have the same naming convention that our CMS *****/
+
+            // To include PFBC library
+            case is_file(PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php'):
+                $sFile = PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php';
+            break;
+
+            // To include SwiftMailer library
+            case 0 === stripos($sClass, 'Swift'):
+                $sFile = PH7_PATH_FRAMEWORK . 'Mail/Engine/Swift/swift_required.php';
+            break;
+
+            default:
+                return; // Stop it
         }
 
-        // To include Interfaces
-        else if (is_file(PH7_PATH_FRAMEWORK . $sClass . '.interface.php')) {
-            require_once PH7_PATH_FRAMEWORK . $sClass . '.interface.php';
-        }
-
-        // To include Traits
-        else if (is_file(PH7_PATH_FRAMEWORK . $sClass . '.trait.php')) {
-            require_once PH7_PATH_FRAMEWORK . $sClass . '.trait.php';
-        }
-
-        /***** To include third-party library that does not have the same naming convention that our CMS *****/
-
-
-        // To include library PFBC and/or other
-        else if (is_file(PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php')) {
-            require_once PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php';
-        }
+        require_once $sFile;
     }
 
     /**

@@ -46,17 +46,11 @@ class UriRoute
         $sPathDefaultLang = realpath(PH7_PATH_APP_CONFIG . 'routes/' . substr(PH7_DEFAULT_LANG,0,2) . '.xml');
 
         if (is_file($sPathLangName))
-        {
             $sRoutePath = $sPathLangName;
-        }
         elseif (is_file($sPathDefaultLang))
-        {
             $sRoutePath = $sPathDefaultLang;
-        }
         else
-        {
             throw new \PH7\Framework\File\Exception('File route xml not found: ' . $sPathDefaultLang);
-        }
 
         $oDom->load($sRoutePath);
 
@@ -74,7 +68,7 @@ class UriRoute
     public static function get($sModule, $sController, $sAction, $sVars = null, $bFullClean = true)
     {
         static::$_bFullClean = $bFullClean;
-        $sUrl = static::_uri( array('module'=>$sModule, 'controller'=>$sController, 'action'=>$sAction, 'vars'=>$sVars) );
+        $sUrl = static::_uri( array('module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars) );
         return $sUrl;
     }
 
@@ -98,9 +92,7 @@ class UriRoute
 
             $aVar = explode(',', $aParams['vars']);
             foreach ($aVar as $sKey => $sVal)
-            {
                 $sVars .= '/' . $sVal;
-            }
             unset($aVar);
 
             $sVars = Url::clean($sVars, static::$_bFullClean);
@@ -110,7 +102,8 @@ class UriRoute
         $oUrl = static::loadFile(new \DOMDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute)
         {
-            if (preg_match('#^' . $oRoute->getAttribute('module') . '$#', $sModule) && preg_match('#^' . $oRoute->getAttribute('controller') . '$#', $sController) && preg_match('#^' . $oRoute->getAttribute('action') . '$#',$sAction)) {
+            if (preg_match('#^' . $oRoute->getAttribute('module') . '$#', $sModule) && preg_match('#^' . $oRoute->getAttribute('controller') . '$#', $sController) && preg_match('#^' . $oRoute->getAttribute('action') . '$#',$sAction))
+            {
                 // Strip the special caracters
                 $sUri = $oRoute->getAttribute('url');
                 $sUri = str_replace('\\','', $sUri);
