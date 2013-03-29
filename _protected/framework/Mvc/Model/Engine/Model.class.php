@@ -14,7 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
 
-abstract class Model
+abstract class Model extends Entity
 {
 
     protected $orm, $cache;
