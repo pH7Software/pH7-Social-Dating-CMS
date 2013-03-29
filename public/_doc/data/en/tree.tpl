@@ -1,4 +1,4 @@
-<!-- Last Update: 03/28/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 03/30/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -1774,7 +1774,8 @@
 |   |   |   |-- Action
 |   |   |   |-- Controller
 |   |   |   |   |-- Controller.class.php
-|   |   |   |   `-- Exception.class.php
+|   |   |   |   |-- Exception.class.php
+|   |   |   |   `-- IController.interface.php
 |   |   |   |-- Model
 |   |   |   |   |-- AnalyticsModel.class.php
 |   |   |   |   |-- DbConfig.class.php
@@ -1783,6 +1784,7 @@
 |   |   |   |   |   |-- Db.class.php
 |   |   |   |   |   |-- Driver
 |   |   |   |   |   |   `-- MySQL
+|   |   |   |   |   |-- Entity.class.php
 |   |   |   |   |   |-- Exception.class.php
 |   |   |   |   |   |-- Model.class.php
 |   |   |   |   |   |-- Record.class.php
@@ -2028,17 +2030,20 @@
 |   |           |       `-- img
 |   |           |-- video
 |   |           |   |-- file
+|   |           |   |-- not_found.mp4
+|   |           |   |-- not_found.webm
 |   |           |   `-- tmp
 |   |           `-- webcam
-|   |               `-- picture
-|   |                   |-- img
-|   |                   |   |-- original
-|   |                   |   `-- thumb
-|   |                   |-- pending
-|   |                   |   |-- original
-|   |                   |   `-- thumb
-|   |                   |-- pending.jpg
-|   |                   `-- tmp
+|   |               |-- picture
+|   |               |   |-- img
+|   |               |   |   |-- original
+|   |               |   |   `-- thumb
+|   |               |   |-- pending
+|   |               |   |   |-- original
+|   |               |   |   `-- thumb
+|   |               |   |-- pending.jpg
+|   |               |   `-- tmp
+|   |               `-- video
 |   |-- _doc
 |   |   |-- CHANGES
 |   |   |-- data
@@ -4275,4 +4280,4 @@
 
 </pre>
 
-<p>Statistics: 1278 directories, 2989 files.</p>
+<p>Statistics: 1279 directories, 2993 files.</p>
