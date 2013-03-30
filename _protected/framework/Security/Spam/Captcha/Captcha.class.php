@@ -53,12 +53,10 @@ class Captcha
     public function show($iRandom = null)
     {
         if (!empty($iRandom))
-        {
             $this->_sStr = Various::genRnd($iRandom, 5);
-        } else
-        {
+        else
             $this->_sStr = Various::genRnd('pH7_Pierre-Henry_Soria_Sanz_González_captcha', 5);
-        }
+
         $this->_oSession->set('rand_code', $this->_sStr);
 
         $this->_sFont = $this->_getFont();
@@ -138,7 +136,8 @@ class Captcha
      */
     private function _mixing()
     {
-        for ($i = 0, $iLength = strlen($this->_sStr); $i < $iLength; ++$i) {
+        for ($i = 0, $iLength = strlen($this->_sStr); $i < $iLength; ++$i)
+        {
             $sText = $this->_sStr[$i]; // A string can be seen as an array
             $iAngle = mt_rand(-70, 70);
             imagettftext($this->_rImg, mt_rand($this->_iSize / 2, $this->_iSize), $iAngle, ($i * $this->_iStringWidth) + $this->_iMargin, $this->_iHeight + mt_rand(1, $this->_iMargin / 2), $this->_aColor[array_rand($this->_aColor)], $this->_sFont, $sText);
@@ -159,7 +158,16 @@ class Captcha
     public function __destruct()
     {
         unset(
-            $this->_oSession, $this->_sStr, $this->_sFont, $this->_iStringWidth, $this->_iHeight, $this->_iWidth, $this->_iSize, $this->_iMargin, $this->_aColor, $this->_rImg
+            $this->_oSession,
+            $this->_sStr,
+            $this->_sFont,
+            $this->_iStringWidth,
+            $this->_iHeight,
+            $this->_iWidth,
+            $this->_iSize,
+            $this->_iMargin,
+            $this->_aColor,
+            $this->_rImg
         );
     }
 
