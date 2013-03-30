@@ -25,7 +25,7 @@ abstract class Entity
      *
      * @return integer
      */
-    public function getId()
+    public function getKeyId()
     {
         return $this->_iId;
     }
@@ -35,7 +35,7 @@ abstract class Entity
      *
      * @param integer $iId
      */
-    public function setId($iId)
+    public function setKeyId($iId)
     {
         $this->_iId = (int) $iId;
     }
