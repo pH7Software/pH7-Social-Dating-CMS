@@ -95,10 +95,13 @@ final class Version
 
         if(!is_string($sLastVerName)) return false;
 
-        if(version_compare($sCurrentVer, $sLastVer, '==')) {
+        if(version_compare($sCurrentVer, $sLastVer, '=='))
+        {
             if(version_compare($sCurrentBuild, $sLastBuild, '<'))
                 return true;
-        } else {
+        }
+        else
+        {
             if(version_compare($sCurrentVer, $sLastVer, '<'))
                 return true;
         }

@@ -14,6 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 class APi
 {
+
     const SOFTWARE_API_URL = 'http://api.hizup.com/';
 
     public function __construct()
