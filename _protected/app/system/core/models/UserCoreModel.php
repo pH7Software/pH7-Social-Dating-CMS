@@ -569,38 +569,36 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':lastActivity', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':groupId', (int) Framework\Mvc\Model\DbConfig::getSetting('defaultMembershipGroupId'), \PDO::PARAM_INT);
         $rStmt->execute();
-        $iProfileId = (int) Db::getInstance()->lastInsertId();
+        $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the user's ID
         Db::free($rStmt);
-        $this->setDefaultPrivacySetting($iProfileId);
-        $this->setDefaultNotification($iProfileId);
+        $this->setDefaultPrivacySetting();
+        $this->setDefaultNotification();
         return $iProfileId;
     }
 
     /**
      * Sets default privacy settings.
      *
-     * @param integer $iProfileId
      * @return Returns TRUE on success or FALSE on failure.
      */
-    public function setDefaultPrivacySetting($iProfileId)
+    public function setDefaultPrivacySetting()
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('MembersPrivacy').'(profileId, privacyProfile, searchProfile, userSaveViews)
             VALUES (:profileId, \'all\', \'yes\', \'yes\')');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         return $rStmt->execute();
     }
 
     /**
      * Sets default notifications.
      *
-     * @param integer $iProfileId
      * @return Returns TRUE on success or FALSE on failure.
      */
-    public function setDefaultNotification($iProfileId)
+    public function setDefaultNotification()
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('MembersNotifications').'(profileId, enableNewsletters)
             VALUES (:profileId, 0)');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         return $rStmt->execute();
     }
 
