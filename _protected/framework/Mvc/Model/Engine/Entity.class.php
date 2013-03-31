@@ -27,6 +27,8 @@ abstract class Entity
      */
     public function getKeyId()
     {
+        $this->checkKeyId();
+
         return $this->_iId;
     }
 
@@ -38,6 +40,20 @@ abstract class Entity
     public function setKeyId($iId)
     {
         $this->_iId = (int) $iId;
+    }
+
+    /**
+     * Check if the $_iId attribute is not empty, otherwise we set the last insert ID.
+     *
+     * @see \PH7\Framework\Mvc\Model\Engine\Db::lastInsertId()
+     *
+     * @return void
+     */
+    protected function checkKeyId()
+    {
+        // If empty, we set the last insert ID
+        if (empty($this->_iId))
+            $this->setKeyId( Db::getInstance()->lastInsertId() );
     }
 
 }
