@@ -51,7 +51,6 @@ abstract class Entity
      */
     protected function checkKeyId()
     {
-        // If empty, we set the last insert ID
         if (empty($this->_iId))
             $this->setKeyId( Db::getInstance()->lastInsertId() );
     }
