@@ -69,7 +69,7 @@ final class Autoloader
             break;
 
             // To include SwiftMailer library
-            case 0 === stripos($sClass, 'Swift'):
+            case 0 === strpos($sClass, 'Swift'):
                 $sFile = PH7_PATH_FRAMEWORK . 'Mail/Engine/Swift/swift_required.php';
             break;
 
