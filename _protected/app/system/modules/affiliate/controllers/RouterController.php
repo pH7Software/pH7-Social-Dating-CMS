@@ -10,6 +10,13 @@ namespace PH7;
 class RouterController extends Controller
 {
 
+    /**
+     * Set the reference to the visitor.
+     *
+     * @param string $sAff Affiliate's username (his ID). Default: NULL
+     * @param string $sAction Change the redirect URL. Default: ''
+     * @return void
+     */
     public function refer($sAff = null, $sAction = '')
     {
         if (!empty($sAff))
