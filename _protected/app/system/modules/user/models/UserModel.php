@@ -40,10 +40,10 @@ class UserModel extends UserCoreModel
         $rStmt->bindValue(':lastActivity', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':groupId', (int) Framework\Mvc\Model\DbConfig::getSetting('defaultMembershipGroupId'), \PDO::PARAM_INT);
         $rStmt->execute();
-        $iProfileId = (int) Db::getInstance()->lastInsertId();
+        $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the user's ID
         Db::free($rStmt);
-        $this->setDefaultPrivacySetting($iProfileId);
-        return $this->setDefaultNotification($iProfileId);
+        $this->setDefaultPrivacySetting();
+        return $this->setDefaultNotification();
     }
 
     /**
