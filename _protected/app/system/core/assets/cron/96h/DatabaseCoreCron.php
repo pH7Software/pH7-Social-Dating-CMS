@@ -17,12 +17,14 @@ PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Model\Engine\Util\Backup;
 
-class DatabaseCore extends Cron
+class DatabaseCoreCron extends Cron
 {
 
     public function __construct()
     {
         parent::__construct();
+
+        $this->isAlreadyExec();
 
         // Available options
         if ($this->httpRequest->getExists('option'))
@@ -190,4 +192,4 @@ class DatabaseCore extends Cron
 }
 
 // Go!
-new DatabaseCore;
+new DatabaseCoreCron;
