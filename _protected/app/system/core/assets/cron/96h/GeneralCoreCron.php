@@ -12,12 +12,14 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-class GeneralCore extends Cron
+class GeneralCoreCron extends Cron
 {
 
     public function __construct()
     {
         parent::__construct();
+
+        $this->isAlreadyExec();
 
         $this->chmod();
 
@@ -49,4 +51,4 @@ class GeneralCore extends Cron
 }
 
 // Go!
-new GeneralCore;
+new GeneralCoreCron;
