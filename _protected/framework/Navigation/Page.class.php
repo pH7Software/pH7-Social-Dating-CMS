@@ -47,11 +47,11 @@ class Page
      */
     protected function totalPages($iTotalItems, $iNbItemsByPage)
     {
-      $this->_iNbItemsByPage = (int) $iNbItemsByPage; // or intval() function, but it is slower than the cast
-      $this->_iTotalItems = (int) $iTotalItems;
-      $this->_iCurrentPage = (int) ($this->_oHttpRequest->getExists('p')) ? $this->_oHttpRequest->get('p') : 1;
-      $this->_iTotalPages = (int) ceil($this->_iTotalItems/$this->_iNbItemsByPage);
-      $this->iFirstItem = (int) ($this->_iCurrentPage-1) * $this->_iNbItemsByPage;
+        $this->_iTotalItems = (int) $iTotalItems;
+        $this->_iNbItemsByPage = (int) $iNbItemsByPage; // or intval() function, but it is slower than the cast
+        $this->_iCurrentPage = (int) ($this->_oHttpRequest->getExists('p')) ? $this->_oHttpRequest->get('p') : 1;
+        $this->_iTotalPages = (int) ($this->_iTotalItems !== 0 && $this->_iNbItemsByPage !== 0) ? ceil($this->_iTotalItems / $this->_iNbItemsByPage) : 0; // Ternary condition to prevent division by zero
+        $this->_iFirstItem = (int) ($this->_iCurrentPage-1) * $this->_iNbItemsByPage;
     }
 
     /**
@@ -62,7 +62,7 @@ class Page
     public function getTotalPages($iTotalItems, $iNbItemsByPage = 10)
     {
         $this->totalPages($iTotalItems, $iNbItemsByPage);
-        return ($this->_iTotalPages <1) ? 1 : $this->_iTotalPages;
+        return ($this->_iTotalPages < 1) ? 1 : $this->_iTotalPages;
     }
 
     public function getTotalItems()
@@ -72,7 +72,7 @@ class Page
 
     public function getFirstItem()
     {
-        return ($this->iFirstItem < 0) ? 0 : $this->iFirstItem;
+        return ($this->_iFirstItem < 0) ? 0 : $this->_iFirstItem;
     }
 
     public function getNbItemsByPage()
