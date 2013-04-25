@@ -3,6 +3,7 @@ public/_repository/upgrade/*
 public/_install/_license-key.txt
 public/_install/data/caches/smarty_cache/*
 public/_install/data/caches/smarty_compile/*
+public/data/*
 public/_constants.php
 _protected/app/configs/config.ini
 _protected/data/tmp/
