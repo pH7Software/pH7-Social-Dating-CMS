@@ -49,7 +49,7 @@ class Pagination
 
 
         // Management pages to see
-        $this->_iShowItems = ($this->_aOptions['range']*2)+1;
+        $this->_iShowItems = ($this->_aOptions['range'] * 2) + 1;
 
         // It generates the paging
         $this->_generate();

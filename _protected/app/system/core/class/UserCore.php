@@ -114,7 +114,7 @@ class UserCore
 
         $sFileName = Various::genRnd($oAvatar1->getFileName(), 1);
 
-        $sFile1 = $sFileName . '.' . $oAvatar1->getExt();  // Original, four caracters
+        $sFile1 = $sFileName . '.' . $oAvatar1->getExt();  // Original, four characters
         $sFile2 = $sFileName . '-32.' . $oAvatar2->getExt();
         $sFile3 = $sFileName . '-64.' . $oAvatar3->getExt();
         $sFile4 = $sFileName . '-100.' . $oAvatar4->getExt();
@@ -238,7 +238,7 @@ class UserCore
     }
 
     /**
-     * Get the profile link.
+     * Get the Profile Link.
      *
      * @param string $sUsername
      * @return string The Absolute Profile Link
@@ -253,7 +253,7 @@ class UserCore
     }
 
     /**
-     * Gets Profile Link with the link to the registration form if the user is not connected.
+     * Get Profile Link with the link to the registration form if the user is not connected.
      *
      * @param string $sUsername
      * @param string $sFirstName
@@ -283,7 +283,7 @@ class UserCore
     }
 
     /**
-     * Sets an user authentication.
+     * Set a user authentication.
      *
      * @param \PH7\UserCoreModel $oUserModel
      * @param \PH7\Framework\Session\Session $oSession
@@ -313,7 +313,7 @@ class UserCore
 
         $oSession->set($aSessionData);
 
-        (new Framework\Mvc\Model\SecurityModel)->addLoginLog($oUserData->email, $oUserData->username, '*****', 'Logged in!');
+        (new Framework\Mvc\Model\Security)->addLoginLog($oUserData->email, $oUserData->username, '*****', 'Logged in!');
         $oUserModel->setLastActivity($oUserData->profileId);
 
         unset($oUserModel, $oUserData);

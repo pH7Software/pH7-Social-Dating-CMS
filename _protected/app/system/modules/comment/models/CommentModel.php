@@ -100,7 +100,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        return Framework\Mvc\Model\SpamModel::detectDuplicate($sCheckMsg, 'comment', 'sender', $iSenderId, 'Comments' . $sTable);
+        return Framework\Mvc\Model\Spam::detectDuplicate($sCheckMsg, 'comment', 'sender', $iSenderId, 'Comments' . $sTable);
     }
 
     /**

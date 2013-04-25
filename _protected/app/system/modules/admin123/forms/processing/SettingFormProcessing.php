@@ -40,14 +40,21 @@ class SettingFormProcessing extends Form
         if(!$this->str->equals($this->httpRequest->post('site_status'), DbConfig::getSetting('siteStatus')))
             DbConfig::setSiteMode($this->httpRequest->post('site_status'));
 
+        if(!$this->str->equals($this->httpRequest->post('is_software_news_feed'), DbConfig::getSetting('isSoftwareNewsFeed')))
+            DbConfig::setSetting($this->httpRequest->post('is_software_news_feed'), 'isSoftwareNewsFeed');
+
 
         /********** Logo Settings **********/
 
-        if(!empty($_FILES['logo']['tmp_name'])) {
+        if(!empty($_FILES['logo']['tmp_name']))
+        {
             $oLogo = new Framework\Image\Image($_FILES['logo']['tmp_name']);
-            if(!$oLogo->validate()) {
+            if(!$oLogo->validate())
+            {
                 \PFBC\Form::setError('form_setting', Form::wrongImgFileTypeMsg());
-            } else {
+            }
+            else
+            {
                 /*
                  * The method deleteFile first test if the file exists, if so it delete the file.
                  */
@@ -82,7 +89,8 @@ class SettingFormProcessing extends Form
         if(!$this->str->equals($this->httpRequest->post('aff_activation_type'), DbConfig::getSetting('affActivationType')))
             DbConfig::setSetting($this->httpRequest->post('aff_activation_type'), 'affActivationType');
 
-        if(!$this->str->equals($this->httpRequest->post('min_username_length'), DbConfig::getSetting('minUsernameLength'))) {
+        if(!$this->str->equals($this->httpRequest->post('min_username_length'), DbConfig::getSetting('minUsernameLength')))
+        {
             if($this->httpRequest->post('min_username_length') > PH7_MAX_USERNAME_LENGTH)
                 \PFBC\Form::setError('form_setting', t('The minimum length of username cannot exceed %0% characters.', PH7_MAX_USERNAME_LENGTH));
             else
@@ -188,7 +196,8 @@ class SettingFormProcessing extends Form
             DbConfig::setSetting($this->httpRequest->post('stop_DDoS'), 'DDoS');
 
         $iSecTokenLifetime = (int) $this->httpRequest->post('security_token_lifetime');
-        if(!$this->str->equals($iSecTokenLifetime, DbConfig::getSetting('securityTokenLifetime'))) {
+        if(!$this->str->equals($iSecTokenLifetime, DbConfig::getSetting('securityTokenLifetime')))
+        {
             if($iSecTokenLifetime < 10)
                 \PFBC\Form::setError('form_setting', t('The token lifetime cannot be below 10 seconds.'));
             else

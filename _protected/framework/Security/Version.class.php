@@ -23,7 +23,7 @@ final class Version
     /***** Framework Kernel *****/
     const KERNEL_VERSION = Kernel::SOFTWARE_VERSION;
     const KERNEL_BUILD = Kernel::SOFTWARE_BUILD;
-    const KERNAL_RELASE_DATE = '2013-04-18';
+    const KERNAL_RELASE_DATE = '2013-05-18';
     const KERNEL_VERSION_NAME = Kernel::SOFTWARE_VERSION_NAME;
 
     /***** Form PFBC *****/
@@ -65,7 +65,7 @@ final class Version
                     $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
                 }
             }
-            unset($oDom, $oInfo);
+            unset($oDom);
 
             $mData = array('name' => $sVerName, 'version' => $sVerNumber, 'build' => $sVerBuild);
             $oCache->put($mData);

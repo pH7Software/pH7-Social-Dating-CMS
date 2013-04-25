@@ -50,17 +50,22 @@ class ValidateCoreAjax
         $sInputVal = $this->_oStr->escape($sInputVal, true);
 
         // Determine the field to validate and perform validation.
-        if(preg_match('#^str#', $sFieldId))
+        if(strstr($sFieldId, 'str_'))
         {   // Check Text
             $this->txt($sInputVal, $sParam1, $sParam2);
         }
-        elseif(preg_match('#^url#', $sFieldId))
+        elseif(strstr($sFieldId, 'email_'))
+        {   // Check email address.
+             $this->email($sInputVal, $sParam1, $sParam2);
+        }
+        elseif(strstr($sFieldId, 'url_'))
         {  // Check the url address.
             $this->url($sInputVal);
         }
-        elseif(preg_match('#^email#', $sFieldId))
-        {   // Check email address.
-             $this->email($sInputVal, $sParam1, $sParam2);
+        elseif(strstr($sFieldId, 'phone_'))
+        {
+            // Check the phone number
+            $this->phone($sInputVal);
         }
         else
         {
@@ -84,11 +89,6 @@ class ValidateCoreAjax
                 // Check the captcha.
                 case 'ccaptcha':
                   $this->captcha($sInputVal);
-                break;
-
-                // Check the phone number
-                case 'phone':
-                  $this->phone($sInputVal);
                 break;
 
                 // Check acceptance of the terms of use.

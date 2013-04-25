@@ -38,7 +38,7 @@ $age = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get() }}
  {{ $sex_ico = '' }}
 {@/if@}
 
-{{ $oAvatarDesign->get($user->username, $user->firstName, $user->sex, 100, 'rollover') }}
+{{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 100, 'rollover') }}
 <p class="cy_ico"><a href="{url_root}{% $user->username %}{page_ext}" title="{@lang('First name: %0%', $user->firstName)@}<br> {@lang('Sex: %0% %1%', t($user->sex), $sex_ico)@}<br> {@lang('Seeking %0%', t($user->matchSex))@}<br> {@lang('Age: %0%', $age)@}<br> {@lang('From %0%', $country_name)@}<br> {@lang('City %0%', $this->str->upperFirst($user->city))@}<br> {@lang('State %0%', $this->str->upperFirst($user->state))@}"><strong>{% substr($user->username,0,16) %}</strong></a> &nbsp; <img src="{{ $design->getSmallFlagIcon($user->country) }}" alt="{country_name}" title="{@lang('From %0%', $country_name)@}" /></p>
 
 {@if(AdminCore::auth())@}

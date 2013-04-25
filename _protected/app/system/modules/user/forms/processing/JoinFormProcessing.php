@@ -59,7 +59,8 @@ class JoinFormProcessing extends Form
         {
             \PFBC\Form::setError('form_join_user', t('An error occurred during registration!<br />
             Please try again with other information in the form fields or come back later.'));
-        } else
+        }
+        else
         {
             // Register successfully in database for step 1!
 
@@ -68,7 +69,7 @@ class JoinFormProcessing extends Form
 
             $this->session->set('mail_step1', $this->httpRequest->post('mail'));
             HeaderUrl::redirect(UriRoute::get('user','signup','step2'));
-         }
+        }
     }
 
     public function step2()
@@ -85,17 +86,19 @@ class JoinFormProcessing extends Form
             'city' => $this->httpRequest->post('city'),
             'state' => $this->httpRequest->post('state'),
             'zip_code' => $this->httpRequest->post('zip_code'),
-            'where_email' => $this->session->get('mail_step1')
+            'profile_id' => $this->oUserModel->getId($this->session->get('mail_step1'))
         ];
 
-        if(!$this->oUserModel->join2($aData)) {
-        \PFBC\Form::setError('form_join_user2', t('An error occurred during registration!<br />
-        Please try again with other information in the form fields or come back later.'));
-        } else {
-        // Register successfully in database for step 2!
-        $this->session->set('mail_step2', $this->session->get('mail_step1'));
-        HeaderUrl::redirect(UriRoute::get('user','signup','step3'));
-       }
+        if(!$this->oUserModel->join2($aData))
+        {
+            \PFBC\Form::setError('form_join_user2', t('An error occurred during registration!<br /> Please try again with other information in the form fields or come back later.'));
+        }
+        else
+        {
+            // Register successfully in database for step 2!
+            $this->session->set('mail_step2', $this->session->get('mail_step1'));
+            HeaderUrl::redirect(UriRoute::get('user','signup','step3'));
+        }
     }
 
     public function step3()
@@ -103,16 +106,19 @@ class JoinFormProcessing extends Form
 
         $aData = [
             'description' => $this->httpRequest->post('description', HttpRequest::ONLY_XSS_CLEAN),
-            'where_email' => $this->session->get('mail_step2')
+            'profile_id' => $this->oUserModel->getId($this->session->get('mail_step2'))
         ];
 
-        if(!$this->oUserModel->join3($aData)) {
+        if(!$this->oUserModel->join3($aData))
+        {
             \PFBC\Form\setError('form_join_user3', t('An error occurred during registration!<br /> Please try again with other information in the form fields or come back later.'));
-         } else {
-             $this->session->destroy(); // Remove all sessions created pending registration
+        }
+        else
+        {
+            $this->session->destroy(); // Remove all sessions created pending registration
 
-             HeaderUrl::redirect(UriRoute::get('user','main','login'), t('You now been registered! %0%', $this->oRegistration->getMsg()));
-         }
+            HeaderUrl::redirect(UriRoute::get('user','main','login'), t('You now been registered! %0%', $this->oRegistration->getMsg()));
+        }
     }
 
     public function __destruct()

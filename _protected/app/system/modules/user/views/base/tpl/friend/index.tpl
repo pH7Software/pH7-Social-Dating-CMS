@@ -8,7 +8,7 @@
 
 <div class="s_photo" id="friend_{% $f->fdId %}">
 
-  {{ $oAvatarDesign->get($f->username, $f->firstName, $f->sex, 64, true) }}
+  {{ $avatarDesign->get($f->username, $f->firstName, $f->sex, 64, true) }}
 
   {@if(User::auth() && $sess_member_id == $member_id)@}
     {@if($sess_member_id == $f->friendId && $f->pending == 1)@}

@@ -80,31 +80,17 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   sex enum('male','female','couple') NOT NULL DEFAULT 'female',
   matchSex set('male','female','couple') NOT NULL DEFAULT 'male',
   ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
-  businessName varchar(100) DEFAULT NULL,
-  address varchar(255) DEFAULT NULL,
-  street varchar(200) DEFAULT NULL,
-  city varchar(150) DEFAULT NULL,
-  state varchar(150) DEFAULT NULL,
-  zipCode varchar(20) DEFAULT NULL,
-  country char(2) DEFAULT NULL,
-  phone varchar(100) DEFAULT NULL,
-  fax varchar(100) DEFAULT NULL,
-  lang varchar(5) NOT NULL DEFAULT 'en_US',
-  featured tinyint(1) unsigned NOT NULL DEFAULT 0,
-  website varchar(200) DEFAULT NULL,
-  socialNetworkSite varchar(200) DEFAULT NULL,
-  description text DEFAULT NULL,
-  height tinyint(3) unsigned DEFAULT NULL,
-  weight tinyint(3) unsigned DEFAULT NULL,
   bankAccount varchar(150) DEFAULT NULL,
-  userStatus tinyint(1) unsigned NOT NULL DEFAULT 1, -- 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
   groupId tinyint(2) unsigned NOT NULL DEFAULT 2,
   membershipExpiration timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  userStatus tinyint(1) unsigned NOT NULL DEFAULT 1, -- 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
   joinDate datetime DEFAULT NULL,
   lastActivity datetime DEFAULT NULL,
   lastEdit datetime DEFAULT NULL,
   avatar char(5) DEFAULT NULL,
   approvedAvatar tinyint(1) unsigned NOT NULL DEFAULT 1,
+  featured tinyint(1) unsigned NOT NULL DEFAULT 0,
+  lang varchar(5) NOT NULL DEFAULT 'en_US',
   hashValidation char(40) DEFAULT NULL,
   prefixSalt char(40) DEFAULT NULL,
   suffixSalt char(40) DEFAULT NULL,
@@ -122,6 +108,28 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   KEY country (country),
   KEY birthDate (birthDate)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+-- Begin 1.0 Version
+CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
+  profileId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  middleName varchar(50) DEFAULT NULL,
+  description text DEFAULT NULL,
+  address varchar(255) DEFAULT NULL,
+  street varchar(200) DEFAULT NULL,
+  city varchar(150) DEFAULT NULL,
+  state varchar(150) DEFAULT NULL,
+  zipCode varchar(20) DEFAULT NULL,
+  country char(2) DEFAULT NULL,
+  phone varchar(100) DEFAULT NULL,
+  fax varchar(100) DEFAULT NULL,
+  website varchar(200) DEFAULT NULL,
+  socialNetworkSite varchar(200) DEFAULT NULL,
+  height tinyint(3) unsigned DEFAULT NULL,
+  weight tinyint(3) unsigned DEFAULT NULL,
+  PRIMARY KEY (profileId),
+  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersPrivacy (
@@ -142,8 +150,10 @@ CREATE TABLE IF NOT EXISTS pH7_MembersNotifications (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- GHOST User. Do not remove ghost default member!
-INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, sex, matchSex, hashValidation, ip, lastActivity, businessName, address, street, city, state, zipCode, country, phone, fax, lang, featured, website, socialNetworkSite, description, bankAccount, active, userStatus, groupId, joinDate, avatar, prefixSalt, suffixSalt, views, reference, votes, score, credits, ban, approvedAvatar) VALUES
-(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '', '', NULL, '127.0.0.1', @sCurrentDate, NULL, 'The Ghost City', 'Ghost street', 'Ghost town', 'Ghost state', '000000', 'US', '00000000', '00', 'en_US', 0, NULL, NULL, 'This profile no longer exists, so I''m a ghost who replaces him during this time', NULL, 1, 1, 2, @sCurrentDate, NULL, NULL, NULL, 0, NULL, 0, 0, 0, 0, 1);
+INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, sex, matchSex, hashValidation, ip, lastActivity, featured, active, userStatus, groupId, joinDate, avatar, prefixSalt, suffixSalt, views, reference, votes, score, credits, ban, approvedAvatar) VALUES
+(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '', '', NULL, '127.0.0.1', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate, NULL, NULL, NULL, 0, NULL, 0, 0, 0, 0, 1);
+INSERT INTO pH7_MembersInfo (profileId, description, address, street, city, state, zipCode, country) VALUES
+(1, 'This profile no longer exists, so I''m a ghost who replaces him during this time', 'The Ghost City', 'Ghost street', 'Ghost town', 'Ghost state', '000000', 'US');
 -- Privacy settings
 INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES (1, 'all', 'yes', 'yes');
 -- Notifications
@@ -160,24 +170,13 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliate (
   sex enum('male','female') NOT NULL DEFAULT 'male',
   birthDate date NOT NULL DEFAULT '0000-00-00',
   ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
-  businessName varchar(100) DEFAULT NULL,
-  address varchar(255) DEFAULT NULL,
-  street varchar(200) DEFAULT NULL,
-  country char(2) DEFAULT NULL,
-  city varchar(150) DEFAULT NULL,
-  state varchar(150) DEFAULT NULL,
-  zipCode varchar(20) DEFAULT NULL,
-  phone varchar(100) DEFAULT NULL,
-  description text DEFAULT NULL,
   bankAccount varchar(150) DEFAULT NULL,
-  website varchar(200) DEFAULT NULL,
-  fax varchar(100) DEFAULT NULL,
-  lang varchar(5) NOT NULL DEFAULT 'en_US',
   credits int(6) unsigned NOT NULL DEFAULT 0,
   summary decimal(8,2) NOT NULL DEFAULT '0.00',
   payment decimal(8,2) NOT NULL DEFAULT '0.00',
   paymentLast decimal(8,2) NOT NULL DEFAULT '0.00',
   paymentLastDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  lang varchar(5) NOT NULL DEFAULT 'en_US',
   hashValidation char(40) DEFAULT NULL,
   prefixSalt char(40) DEFAULT NULL,
   suffixSalt char(40) DEFAULT NULL,
@@ -193,6 +192,26 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliate (
   UNIQUE KEY email (email),
   KEY country (country),
   KEY birthDate (birthDate)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+-- Begin 1.0 Version
+CREATE TABLE IF NOT EXISTS pH7_AffiliateInfo (
+  profileId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  middleName varchar(50) DEFAULT NULL,
+  businessName varchar(100) DEFAULT NULL,
+  address varchar(255) DEFAULT NULL,
+  street varchar(200) DEFAULT NULL,
+  country char(2) DEFAULT NULL,
+  city varchar(150) DEFAULT NULL,
+  state varchar(150) DEFAULT NULL,
+  zipCode varchar(20) DEFAULT NULL,
+  phone varchar(100) DEFAULT NULL,
+  description text DEFAULT NULL,
+  website varchar(200) DEFAULT NULL,
+  fax varchar(100) DEFAULT NULL,
+  PRIMARY KEY (profileId),
+  FOREIGN KEY (profileId) REFERENCES pH7_Affiliate(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
@@ -596,13 +615,15 @@ INSERT INTO pH7_Forums (forumId, name, description, categoryId) VALUES
 CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
   topicId int(10) unsigned NOT NULL AUTO_INCREMENT,
   forumId mediumint(10) unsigned DEFAULT NULL,
-  message text COLLATE utf8_unicode_ci,
-  title varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  approved enum('1','0') COLLATE utf8_unicode_ci DEFAULT '1',
   profileId int(11) unsigned NOT NULL,
+  title varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  message text COLLATE utf8_unicode_ci,
+  approved enum('1','0') COLLATE utf8_unicode_ci DEFAULT '1',
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
   views int(11) NOT NULL DEFAULT '0',
+  -- Maybe we'll let the topic of member even if the member is deleted
+  -- FOREIGN KEY (profileId) pH7_Members(profileId),
   FOREIGN KEY (forumId) REFERENCES pH7_Forums(forumId),
   PRIMARY KEY (topicId)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
@@ -613,9 +634,11 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
   topicId int(10) unsigned NOT NULL,
   profileId int(11) unsigned NOT NULL,
   message text COLLATE utf8_unicode_ci,
-  createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   approved enum('1','0') COLLATE utf8_unicode_ci DEFAULT '1',
+  createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
+  -- Maybe we'll let the topic of member even if the member is deleted
+  -- FOREIGN KEY (profileId) pH7_Members(profileId),
   FOREIGN KEY (topicId) REFERENCES pH7_ForumsTopics(topicId),
   PRIMARY KEY (messageId)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
@@ -984,7 +1007,8 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('userTimeout', '1', 'User inactivity timeout. The number of minutes that a member becomes inactive (offline).', 'automation'),
 ('ipApi', @sIpApiUrl, 'IP Api URL', 'api'),
 ('chatApi', @sChatApiUrl, 'Chat Api URL', 'api'),
-('chatrouletteApi', @sChatrouletteApiUrl, 'Chatroulette Api URL', 'api');
+('chatrouletteApi', @sChatrouletteApiUrl, 'Chatroulette Api URL', 'api'),
+('isSoftwareNewsFeed', '1', 'Enable the news feed. 0 = Disable | 1 = Enable', 'general');
 
 
 CREATE TABLE IF NOT EXISTS pH7_StaticCss (

@@ -55,7 +55,7 @@ class Rest extends \PH7\Framework\Http\Http
      */
     private function _inputs()
     {
-        switch($this->get_request_method())
+        switch ($this->get_request_method())
         {
             case 'POST':
                 $this->_aRequest = $this->_cleanInputs($_POST);
@@ -87,7 +87,7 @@ class Rest extends \PH7\Framework\Http\Http
     {
         $aCleanInput = array();
 
-        if(is_array($mData))
+        if (is_array($mData))
         {
             foreach($mData as $sKey => $sValue)
                 $aCleanInput[$sKey] = $this->_cleanInputs($sValue); // Recursive method

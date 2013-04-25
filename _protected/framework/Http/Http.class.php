@@ -132,14 +132,12 @@ class Http
      */
     public static function setHeaders($mHeaders)
     {
-        // header already sent
-        if(static::_isSent()) throw new Exception('Headers were already sent.');
+        // Header already sent
+        if (static::_isSent()) throw new Exception('Headers were already sent.');
 
-        // loop elements
-        foreach((array) $mHeaders as $sHeader) {
-            // set header
+        // Loop elements and set header
+        foreach ((array) $mHeaders as $sHeader)
             header((string) $sHeader);
-        }
     }
 
     /**
@@ -150,7 +148,7 @@ class Http
      */
     public static function setHeadersByCode($iCode = 200)
     {
-        if(!static::getStatusCodes($iCode)) $iCode = 200;
+        if (!static::getStatusCodes($iCode)) $iCode = 200;
         // Set header
         static::setHeaders(static::getProtocol() . ' ' . static::getStatusCodes($iCode));
     }
@@ -193,13 +191,14 @@ class Http
         $sAuthUsr = Server::getVar(Server::AUTH_USER);
         $sAuthPwd = Server::getVar(Server::AUTH_PW);
 
-        if(!($sAuthUsr == $sUsr && $sAuthPwd == $sPwd))
+        if (!($sAuthUsr == $sUsr && $sAuthPwd == $sPwd))
         {
             header('WWW-Authenticate: Basic realm="HTTP Basic Authentication"');
             static::setHeadersByCode(401);
             echo t('You must enter a valid login ID and password to access this resource.') . "\n";
             exit(false);
-        } else
+        }
+        else
             return true;
     }
 
@@ -214,18 +213,30 @@ class Http
     {
         $sHttps = strtolower(Server::getVar(Server::HTTPS));
 
-        if (null !== $sHttps) {
+        if (null !== $sHttps)
+        {
              $sHttps = strtolower($sHttps);
 
              if ('on' == $sHttps) return true;
-             elseif('1' == $sHttps) return true;
+             elseif ('1' == $sHttps) return true;
              else
              {
                  $iPort = Server::getVar(Server::SERVER_PORT);
-                 if('443' == $iPort) return true;
+                 if ('443' == $iPort) return true;
              }
         }
         return false;
+    }
+
+    /**
+     * Check if the URL is relative.
+     *
+     * @param string $sUrl
+     * @return boolean
+     */
+    public function isRelativeUrl($sUrl)
+    {
+        return (0 !== stripos($sUrl, 'http'));
     }
 
     /**

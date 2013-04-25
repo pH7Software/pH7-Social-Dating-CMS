@@ -12,7 +12,7 @@
 {@foreach($visitors as $v)@}
 
    <div class="s_photo">
-    {{ $oAvatarDesign->get($v->username, $v->firstName, $v->sex, 64, true) }}
+    {{ $avatarDesign->get($v->username, $v->firstName, $v->sex, 64, true) }}
    </div>
 
   {@/foreach@}

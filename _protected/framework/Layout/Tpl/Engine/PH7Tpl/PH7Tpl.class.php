@@ -3,7 +3,7 @@
  * @title            PH7 Template Engine
  * @desc             Create class Template Engine for pH7 CMS!
  *
- * @updated          The Last Update 03/13/13 20:15 (Greenwich Mean Time)
+ * @updated          The Last Update 04/23/13 23:42 (Greenwich Mean Time)
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
@@ -22,7 +22,7 @@
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\DesignModel;
+use PH7\Framework\Mvc\Model\Design as DesignModel;
 
 class PH7Tpl extends \PH7\Framework\Core\Kernel
 {
@@ -238,7 +238,6 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * @see assign()
      *
      * @param string $sName The variable name to use in the template
-     * @param string $sValue The content you assign to $name
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
      * @return void
      */
@@ -419,7 +418,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
             }
             else
             {
-                /*** Extraction Variables ***/
+                // Extraction Variables
                 extract($this->_aVars);
                 require $this->sCompileDirFile;
             }
@@ -463,7 +462,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
             // Email Address
             //$sCode = str_replace('{email}', $sEmailAddress, $sCode);
 
-            $oMailDesign = new \PH7\Framework\Layout\Html\MailDesign;
+            $oMailDesign = new \PH7\Framework\Layout\Html\Mail;
 
             /* Headers */
 
@@ -490,11 +489,49 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Assign variables to the template.
      *
+     *
+     * @example
+     *
+     * Example with a string variable:
+     *
+     * <code>
+     * === PHP ===
+     *     $oPh7Tpl->assign('var_name', $sName);
+     *
+     * === TPL ===
+     *     {var_name}
+     * </code>
+     *
+     *
+     * Example with an array variable:
+     *
+     * <code>
+     * === PHP ===
+     *     $oPh7Tpl->assign('arr_data_var', $aData);
+     *
+     * === TPL ===
+     *     {% $arr_data_var['key1'] %}
+     * </code>
+     *
+     *
+     * Example with an object variable:
+     *
+     * <code>
+     * === PHP ===
+     *     $oPh7Tpl->assign('obj_user_var', $oUser);
+     *
+     * === TPL ===
+     *     {% $obj_user_var->getUsers() %}
+     * --- OR ---
+     *      {{ $obj_user_var->printUsers() }}
+     * </code>
+     *
+     *
      * @see __set()
      *
      * @param string $sName Variable name
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
-     * @param boolean $bEscape Specify true if you want to protect your variables against XSS. Default value is "false"
+     * @param boolean $bEscape Specify "true" if you want to protect your variables against XSS. Default value is "false"
      * @param boolean $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string. Default value is "false"
      * @return void
      */
@@ -504,6 +541,22 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
             $mValue = $this->str->escape($mValue, $bEscapeStrip);
 
         $this->_aVars[$sName] = $mValue;
+    }
+
+    /**
+     * Assign variables from array.
+     *
+     * @see assign()
+     *
+     * @param array $aVars
+     * @param boolean $bEscape Specify "true" if you want to protect your variables against XSS. Default value is "false"
+     * @param boolean $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string. Default value is "false"
+     * @return void
+     */
+    public function assignVars(array $aVars, $bEscape = false, $bEscapeStrip = false)
+    {
+        foreach ($aVars as $sKey => $sValue)
+            $this->assign($sKey, $sValue, $bEscape = false, $bEscapeStrip = false); // Assign a string variable
     }
 
     /**

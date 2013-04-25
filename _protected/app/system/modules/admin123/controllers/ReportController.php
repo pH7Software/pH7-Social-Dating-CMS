@@ -19,7 +19,7 @@ class ReportController extends Controller
 
         $this->oReportModel = new ReportCoreModel;
 
-        $this->view->oAvatarDesign = new AvatarDesignCore; // Avatar Design Class
+        $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
         $this->view->oUserModel = new UserCoreModel;
     }
 

@@ -10,7 +10,6 @@ defined('PH7') or die('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Model\SpamModel,
 PH7\Framework\Mail\Mail,
 PH7\Framework\Mvc\Request\HttpRequest,
 PH7\Framework\Mvc\Router\UriRoute,

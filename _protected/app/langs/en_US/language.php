@@ -297,4 +297,9 @@ Framework\Registry\Registry::getInstance()->lang = array(
     'gigabyte' => '%0% GB',
     'terabyte' => '%0% TB',
 
+    /***** USER'S INFO FIELDS *****/
+    'address' => 'Your Address',
+    'street' => 'Your Street',
+    'middlename' => 'Middle Name',
+
 );

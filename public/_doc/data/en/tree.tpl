@@ -1,4 +1,4 @@
-<!-- Last Update: 03/30/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 04/14/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -122,9 +122,15 @@
 |   |       |   |   |   |-- StatCoreAjax.php
 |   |       |   |   |   `-- ValidateCoreAjax.php
 |   |       |   |   |-- cron
-|   |       |   |   |   `-- 96h
-|   |       |   |   |       |-- DatabaseCoreCron.php
-|   |       |   |   |       `-- GeneralCoreCron.php
+|   |       |   |   |   |-- 24h
+|   |       |   |   |   |   `-- BirthdayCoreCron.php
+|   |       |   |   |   |-- 96h
+|   |       |   |   |   |   |-- DatabaseCoreCron.php
+|   |       |   |   |   |   `-- GeneralCoreCron.php
+|   |       |   |   |   `-- _delay
+|   |       |   |   |       |-- birthday.txt
+|   |       |   |   |       |-- database.txt
+|   |       |   |   |       `-- general.txt
 |   |       |   |   |-- css
 |   |       |   |   |   `-- style.cssCoreCss.php
 |   |       |   |   |-- file
@@ -137,21 +143,24 @@
 |   |       |   |   |-- AdminCore.php
 |   |       |   |   |-- AdsCore.php
 |   |       |   |   |-- AffiliateCore.php
-|   |       |   |   |-- AvatarDesignCore.php
+|   |       |   |   |-- BirthdayCore.php
 |   |       |   |   |-- CommentCore.php
-|   |       |   |   |-- CommentDesignCore.php
-|   |       |   |   |-- LostPwdDesignCore.php
+|   |       |   |   |-- design
+|   |       |   |   |   |-- AvatarDesignCore.php
+|   |       |   |   |   |-- CommentDesignCore.php
+|   |       |   |   |   |-- LostPwdDesignCore.php
+|   |       |   |   |   |-- RatingDesignCore.php
+|   |       |   |   |   |-- UserDesignCore.php
+|   |       |   |   |   |-- VideoDesignCore.php
+|   |       |   |   |   `-- XmlDesignCore.php
+|   |       |   |   |-- NewsFeedCore.php
 |   |       |   |   |-- PermissionCore.php
 |   |       |   |   |-- PictureCore.php
-|   |       |   |   |-- RatingDesignCore.php
 |   |       |   |   |-- RegistrationCore.php
 |   |       |   |   |-- ReportCore.php
 |   |       |   |   |-- Security.php
 |   |       |   |   |-- UserCore.php
-|   |       |   |   |-- UserDesignCore.php
-|   |       |   |   |-- VideoCore.php
-|   |       |   |   |-- VideoDesignCore.php
-|   |       |   |   `-- XmlDesignCore.php
+|   |       |   |   `-- VideoCore.php
 |   |       |   |-- forms
 |   |       |   |   |-- ChangePasswordCoreForm.php
 |   |       |   |   |-- ConfigFileCoreForm.php
@@ -170,9 +179,12 @@
 |   |       |       |-- AdminCoreModel.php
 |   |       |       |-- AdsCoreModel.php
 |   |       |       |-- AffiliateCoreModel.php
+|   |       |       |-- BirthdayCoreModel.php
 |   |       |       |-- BlogCoreModel.php
 |   |       |       |-- CommentCoreModel.php
 |   |       |       |-- DataCoreModel.php
+|   |       |       |-- design
+|   |       |       |   `-- UserDesignCoreModel.php
 |   |       |       |-- ExistsCoreModel.php
 |   |       |       |-- ForumCoreModel.php
 |   |       |       |-- FriendCoreModel.php
@@ -189,7 +201,6 @@
 |   |       |       |-- StatisticCoreModel.php
 |   |       |       |-- UpgradeCoreModel.php
 |   |       |       |-- UserCoreModel.php
-|   |       |       |-- UserDesignCoreModel.php
 |   |       |       `-- VideoCoreModel.php
 |   |       |-- globals
 |   |       |   `-- views
@@ -225,6 +236,7 @@
 |   |       |           |           |   `-- abuse.tpl
 |   |       |           |           `-- user
 |   |       |           |               |-- account_registration.tpl
+|   |       |           |               |-- birthday.tpl
 |   |       |           |               `-- friend_request.tpl
 |   |       |           `-- others
 |   |       |               |-- banned.html.php
@@ -329,6 +341,7 @@
 |   |           |               |-- main
 |   |           |               |   |-- index.tpl
 |   |           |               |   |-- login.tpl
+|   |           |               |   |-- news.inc.tpl
 |   |           |               |   `-- stat.tpl
 |   |           |               |-- moderator
 |   |           |               |   |-- albumpicture.tpl
@@ -906,7 +919,8 @@
 |   |           |   |   `-- SearchNoteForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
-|   |           |   |       |-- NoteDesign.php
+|   |           |   |       |-- design
+|   |           |   |       |   `-- NoteDesign.php
 |   |           |   |       `-- Note.php
 |   |           |   |-- lang
 |   |           |   |   |-- en_US
@@ -980,7 +994,8 @@
 |   |           |   |-- inc
 |   |           |   |   |-- class
 |   |           |   |   |   |-- Api.php
-|   |           |   |   |   |-- PaymentDesign.php
+|   |           |   |   |   |-- design
+|   |           |   |   |   |   `-- PaymentDesign.php
 |   |           |   |   |   |-- PayPal.php
 |   |           |   |   |   `-- TwoCO.php
 |   |           |   |   `-- _log
@@ -1089,6 +1104,7 @@
 |   |           |   |   `-- Permission.php
 |   |           |   |-- controllers
 |   |           |   |   |-- AccountController.php
+|   |           |   |   |-- BirthdayController.php
 |   |           |   |   |-- BrowseController.php
 |   |           |   |   |-- CountryController.php
 |   |           |   |   |-- FriendController.php
@@ -1131,6 +1147,7 @@
 |   |           |   |   `-- fr_FR
 |   |           |   |       `-- LC_MESSAGES
 |   |           |   |-- models
+|   |           |   |   |-- BirthdayModel.php
 |   |           |   |   |-- FriendModel.php
 |   |           |   |   |-- UserModel.php
 |   |           |   |   |-- VisitorModel.php
@@ -1141,6 +1158,8 @@
 |   |           |           |   `-- config.ini
 |   |           |           `-- tpl
 |   |           |               |-- account
+|   |           |               |   `-- index.tpl
+|   |           |               |-- birthday
 |   |           |               |   `-- index.tpl
 |   |           |               |-- browse
 |   |           |               |   `-- index.tpl
@@ -1198,7 +1217,8 @@
 |   |           |   |   `-- VideoForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
-|   |           |   |       |-- VideoDesign.php
+|   |           |   |       |-- design
+|   |           |   |       |   `-- VideoDesign.php
 |   |           |   |       `-- Video.php
 |   |           |   |-- lang
 |   |           |   |   |-- en_US
@@ -1251,10 +1271,11 @@
 |   |               |   |-- MainController.php
 |   |               |   |-- RssController.php
 |   |               |   `-- SitemapController.php
+|   |               |-- design
+|   |               |   `-- XmlDesign.php
 |   |               |-- inc
 |   |               |   `-- class
-|   |               |       |-- DateFormat.php
-|   |               |       `-- XmlDesign.php
+|   |               |       `-- DateFormat.php
 |   |               |-- lang
 |   |               |   |-- en_US
 |   |               |   |   `-- LC_MESSAGES
@@ -1355,6 +1376,8 @@
 |   |   |   |-- Exception.class.php
 |   |   |   |-- Resource.class.php
 |   |   |   `-- Role.class.php
+|   |   |-- Ads
+|   |   |   `-- Ads.class.php
 |   |   |-- Ajax
 |   |   |   `-- Ajax.class.php
 |   |   |-- Analytics
@@ -1541,7 +1564,7 @@
 |   |   |   |-- Gzip.class.php
 |   |   |   |-- Html
 |   |   |   |   |-- Design.class.php
-|   |   |   |   |-- MailDesign.class.php
+|   |   |   |   |-- Mail.class.php
 |   |   |   |   `-- Security.class.php
 |   |   |   |-- LoadTemplate.class.php
 |   |   |   |-- Optimization.class.php
@@ -1777,9 +1800,10 @@
 |   |   |   |   |-- Exception.class.php
 |   |   |   |   `-- IController.interface.php
 |   |   |   |-- Model
-|   |   |   |   |-- AnalyticsModel.class.php
+|   |   |   |   |-- Ads.class.php
+|   |   |   |   |-- Analytics.class.php
 |   |   |   |   |-- DbConfig.class.php
-|   |   |   |   |-- DesignModel.class.php
+|   |   |   |   |-- Design.class.php
 |   |   |   |   |-- Engine
 |   |   |   |   |   |-- Db.class.php
 |   |   |   |   |   |-- Driver
@@ -1791,10 +1815,10 @@
 |   |   |   |   |   `-- Util
 |   |   |   |   |       |-- Backup.class.php
 |   |   |   |   |       `-- Various.class.php
-|   |   |   |   |-- LangModel.class.php
-|   |   |   |   |-- SecurityModel.class.php
-|   |   |   |   |-- SpamModel.class.php
-|   |   |   |   `-- StatisticModel.class.php
+|   |   |   |   |-- Lang.class.php
+|   |   |   |   |-- Security.class.php
+|   |   |   |   |-- Spam.class.php
+|   |   |   |   `-- Statistic.class.php
 |   |   |   |-- Request
 |   |   |   |   |-- Exception.class.php
 |   |   |   |   `-- HttpRequest.class.php
@@ -2647,11 +2671,20 @@
 |   |       |       |-- conclusion.php
 |   |       |       |-- config.ini
 |   |       |       `-- introduction.php
-|   |       `-- 0.1.7-0.8.7
+|   |       |-- 0.1.7-0.8.7
+|   |       |   |-- data
+|   |       |   |   |-- file
+|   |       |   |   |   |-- _protected
+|   |       |   |   |   `-- public
+|   |       |   |   `-- sql
+|   |       |   |       `-- MySQL
+|   |       |   |           `-- upgrade.sql
+|   |       |   `-- info
+|   |       |       |-- conclusion.php
+|   |       |       |-- config.ini
+|   |       |       `-- introduction.php
+|   |       `-- 0.8.7-0.9.0
 |   |           |-- data
-|   |           |   |-- file
-|   |           |   |   |-- _protected
-|   |           |   |   `-- public
 |   |           |   `-- sql
 |   |           |       `-- MySQL
 |   |           |           `-- upgrade.sql
@@ -4280,4 +4313,4 @@
 
 </pre>
 
-<p>Statistics: 1279 directories, 2993 files.</p>
+<p>Statistics: 1294 directories, 3011 files.</p>

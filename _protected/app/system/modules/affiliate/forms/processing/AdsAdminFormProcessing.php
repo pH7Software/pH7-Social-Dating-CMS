@@ -19,8 +19,8 @@ class AdsAdminFormProcessing extends Form
 
         (new AdsCoreModel)->add($_POST['title'], $_POST['code'], 'AdsAffiliate');
 
-        /* Clean DesignModel for STATIC data */
-        (new Framework\Cache\Cache)->start(Framework\Mvc\Model\DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
+        /* Clean Model\Design for STATIC data */
+        (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear();
 
         HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'ads'), t('The Advertisements was added successfully!'));
     }

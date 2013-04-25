@@ -65,13 +65,13 @@ class Various
         }
 
         $iTimeDiff = time() - $mTime;
-        $iSeconds = $iTimeDiff;
-        $iMinutes = round($iTimeDiff / 60);
-        $iHours = round($iTimeDiff / 3600);
-        $iDays = round($iTimeDiff / 86400);
-        $iWeeks = round($iTimeDiff / 604800);
-        $iMonths = round($iTimeDiff / 2419200);
-        $iYears = round($iTimeDiff / 29030400);
+        $iSeconds =& $iTimeDiff;
+        $iMinutes = round($iSeconds / 60);
+        $iHours = round($iSeconds / 3600);
+        $iDays = round($iSeconds / 86400);
+        $iWeeks = round($iSeconds / 604800);
+        $iMonths = round($iSeconds / 2419200);
+        $iYears = round($iSeconds / 29030400);
 
         if ($iSeconds == 0)
             $sTxt = t('%0% seconds ago.', 0.5);

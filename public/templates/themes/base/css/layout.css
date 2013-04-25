@@ -1,31 +1,37 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
 .box-left {
-    float:left;
-    width:200px;
+    float: left;
+    width: 200px;
 }
 .box-right {
-    float:right;
-    width:780px;
+    float: right;
+    width: 780px;
 }
 .design-box {
-    text-align:left;
-    border:1px solid #CCC;
-    margin-right:20px;
-    margin-bottom:15px;
-    padding:5px;
-    border-radius:5px;
-    background-image:url(../img/bg_box.png);
+    text-align: left;
+    border: 1px solid #CCC;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    padding: 5px;
+    border-radius: 5px;
+    background-image: url(../img/bg_box.png);
 }
-.design-box h2{
-    text-align:center;
-    text-shadow:#666 0 -1px 0;
-    padding-bottom:4px;
+.design-box h2 {
+    text-align: center;
+    text-shadow: #666 0 -1px 0;
+    padding-bottom: 4px;
 }
 
 .dropdown_menu {
-    position:relative;
-    float:left;
-    margin:0;
-    z-index:800;
+    position: relative;
+    float: left;
+    margin: 0;
+    z-index: 800;
 }
 .dropdown_item_css {
     position: relative;
@@ -69,7 +75,8 @@
     right: -4px;
     width: 3px;
     background-image: url(../img/dropdown_after.png);
-    content: ''}
+    content: ''
+}
 .show_dropdown {
     display: none;
     padding: 5px 0;
@@ -81,8 +88,12 @@
 .dropdown_menu li {
     position: relative;
     display: block;
-    padding: 0 10px 5px;
+    padding: 2px 7px 2px;
     white-space: nowrap;
+}
+.dropdown_menu li > a:hover {
+    border-radius: 4px;
+    background-color: #EEE;
 }
 .dropdown_menu li a {
     display: block;
@@ -108,7 +119,7 @@
     margin-bottom: 0;
     font-size: .820em;
     line-height: 1.636;
-    margin-right:305px;
+    margin-right: 305px;
 }
 .ft_dm {
     float: none;
@@ -116,7 +127,7 @@
     zoom: 1;
 }
 .ft_dm:hover {
-    z-index:1090;
+    z-index: 1090;
 }
 .ft_dm a.dropdown_item {
     color: #64697A!important;
@@ -152,12 +163,9 @@
     left: auto;
     right: -3px;
 }
-.ft_dm li {
-    padding: 0 7px 2px;
-}
 .warning_block {
-    background-color:#f17a7a; width:340px; color:#fff; margin-top:1px; margin-bottom:1px; padding:3px; text-align:center; border-radius:3px;
+    background-color: #f17a7a; width:340px; color:#fff; margin-top:1px; margin-bottom:1px; padding:3px; text-align:center; border-radius:3px;
 }
 .warning_block p {
-    font-size:.8em;
+    font-size: .8em;
 }

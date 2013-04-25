@@ -221,6 +221,8 @@ class Various
         {
             case 'Members':
             case 'Affiliate':
+            case 'MembersInfo':
+            case 'AffiliateInfo':
             case 'Subscribers':
             case 'Admins':
                 return $sTable;

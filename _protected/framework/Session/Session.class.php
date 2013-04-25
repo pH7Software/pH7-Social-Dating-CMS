@@ -19,11 +19,14 @@ class Session
 {
 
     /**
-     * @desc Constructor to initialize PHP session.
+     * @desc Constructor to initialize PHP's session.
+     * @param boolean $bDisableSessCache Disable PHP's session cache. Default FALSE
      */
-    public function __construct()
+    public function __construct($bDisableSessCache = false)
     {
-        session_cache_limiter(false);
+        if (true === $bDisableSessCache)
+            session_cache_limiter(false);
+
         session_name(Config::getInstance()->values['session']['cookie_name']);
 
         $bSecure = (substr(PH7_URL_PROT, 0, 5) === 'https') ? true : false;
@@ -44,9 +47,9 @@ class Session
     }
 
     /**
-     * @desc Sets a PHP Session.
-     * @param mixed (array or string) $mName name of the session
-     * @param string $sValue value of the session, Optional if the session data is in a array
+     * @desc Set a PHP Session.
+     * @param mixed (array or string) $mName Name of the session.
+     * @param string $sValue Value of the session, Optional if the session data is in a array.
      * @return void
      */
     public function set($mName, $sValue = null)
@@ -63,8 +66,8 @@ class Session
     }
 
     /**
-     * @desc Gets Session.
-     * @param string $sName
+     * @desc Get Session.
+     * @param string $sName Name of the session.
      * @param boolean $bEscape Default TRUE
      * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session does not exist.
      */
@@ -76,7 +79,7 @@ class Session
 
     /**
      * @desc Returns a boolean informing of whether or not the requested session variable.
-     * @param mixed (array or string) $mName Name of the session
+     * @param mixed (array or string) $mName Name of the session.
      * @return boolean
      */
     public function exists($mName)
@@ -100,8 +103,8 @@ class Session
     }
 
     /**
-     * @desc Delete key if the session exists
-     * @param mixed (array or string) $mName name of the session to delete
+     * @desc Delete the session(s) key if the session exists.
+     * @param mixed (array or string) $mName Name of the session to delete.
      * @return void
      */
     public function remove($mName)
@@ -122,7 +125,7 @@ class Session
     }
 
     /**
-     * @desc Session regenerate Id
+     * @desc Session regenerate ID.
      * @return void
      */
     public function regenerateId()
@@ -131,7 +134,7 @@ class Session
     }
 
     /**
-     * @desc Destroy all the sessions PHP
+     * @desc Destroy all PHP's sessions.
      */
     public function destroy()
     {

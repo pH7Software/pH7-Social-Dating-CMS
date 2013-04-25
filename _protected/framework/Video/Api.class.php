@@ -221,7 +221,8 @@ class Api extends Video
     {
         $oHttp = new Http;
         if($oHttp->detectSubdomain($sUrl))
-        {   // Removes the subdomain with its dot (e.g. mysub.domain.com becomes domain.com).
+        {
+            // Removes the subdomain with its dot (e.g. mysub.domain.com becomes domain.com).
             $sUrl = str_replace($oHttp->getSubdomain($sUrl) . PH7_DOT, '', $sUrl);
         }
         unset($oHttp);

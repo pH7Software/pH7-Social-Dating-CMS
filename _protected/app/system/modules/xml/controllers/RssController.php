@@ -24,8 +24,8 @@ class RssController extends MainController
         $this->view->h1_title = $this->sTitle;
 
         /*** Get the links ***/
-        $sLinks = Framework\Mvc\Router\UriRoute::get('xml','rss','xmllink');
-        $this->view->urls = (new Link($sLinks))->getLinks();
+        $sUrl = Framework\Mvc\Router\UriRoute::get('xml','rss','xmllink');
+        $this->view->urls = (new Link($sUrl))->get();
         $this->output();
     }
 

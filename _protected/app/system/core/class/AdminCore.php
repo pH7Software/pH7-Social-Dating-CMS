@@ -12,7 +12,8 @@ class AdminCore extends UserCore
 {
 
     /**
-     * @desc Levels for admins
+     * Admins'levels.
+     *
      * @return boolean
      */
     public static function auth()

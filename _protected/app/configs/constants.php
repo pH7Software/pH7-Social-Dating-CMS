@@ -94,6 +94,8 @@ define ( 'PH7_MODELS', 'models/' );
 define ( 'PH7_VIEWS', 'views/' );
 define ( 'PH7_FORMS', 'forms/' );
 define ( 'PH7_INC', 'inc/' );
+define ( 'PH7_CLASS', 'class/' );
+define ( 'PH7_DESIGN', 'design/' );
 define ( 'PH7_CONFIG', 'config/' );
 define ( 'PH7_LANG', 'lang/' );
 

@@ -55,15 +55,20 @@ class UserModel extends UserCoreModel
     public function join2(array $aData)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Members') .
-            'SET sex=:sex, matchSex=:matchSex, birthDate=:birthDate, country=:country, city=:city, state=:state, zipCode=:zipCode WHERE email=:email');
+            'SET sex=:sex, matchSex=:matchSex, birthDate=:birthDate WHERE profileId = :profileId');
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':matchSex', Form::setVal($aData['match_sex']), \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $aData['profile_id'], \PDO::PARAM_INT);
+        $rStmt->execute();
+
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersInfo') . '(profileId, country, city, state, zipCode)
+            VALUES (:profileId, :country, :city, :state, :zipCode)');
         $rStmt->bindValue(':country', $aData['country'], \PDO::PARAM_STR);
         $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
         $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
         $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':email', $aData['where_email'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $aData['profile_id'], \PDO::PARAM_INT);
         return $rStmt->execute();
     }
 
@@ -75,10 +80,10 @@ class UserModel extends UserCoreModel
      */
     public function join3(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Members') .
-            'SET description=:description WHERE email = :email');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersInfo') . '(profileId, description)
+            VALUES (:profileId, :description)');
         $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':email', $aData['where_email'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $aData['profile_id'], \PDO::PARAM_INT);
         return $rStmt->execute();
     }
 

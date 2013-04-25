@@ -29,7 +29,8 @@ class Youtube extends \PH7\Framework\Video\Api implements Api
     public function getInfo($sUrl)
     {
         $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '?v=2&alt=jsonc';
-        if($oData = $this->getData($sDataUrl)) {
+        if($oData = $this->getData($sDataUrl))
+        {
             $this->oData = $oData->data;
             return $this;
         }

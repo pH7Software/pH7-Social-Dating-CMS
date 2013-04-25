@@ -21,7 +21,6 @@ class Newsletter extends Core
         parent::__construct();
 
         $this->_oSubscriptionModel = new SubscriptionModel;
-
     }
 
     /**
@@ -31,15 +30,13 @@ class Newsletter extends Core
      */
     public function sendMessages()
     {
-        $bOnlySubscribers = ($this->httpRequest->get('only_subscribers') == '1');
-        $oMail = new Mail;
+        $bOnlySubscribers = $this->httpRequest->postExists('only_subscribers');
         $iRes = 0; // Default value
 
-        if ($bOnlySubscribers)
-            $oSubscribers = $this->_oSubscriptionModel->getSubscribers();
-        else
-            $oSubscribers = $this->_oSubscriptionModel->getProfiles();
+        $sSubscribersMethod = ($bOnlySubscribers) ? 'getSubscribers' : 'getProfiles';
+        $oSubscribers = $this->_oSubscriptionModel->$sSubscribersMethod();
 
+        $oMail = new Mail;
         foreach ($oSubscribers as $oSubscriber)
         {
             // Do not send any emails at the same time to avoid overloading the mail server.
@@ -47,19 +44,19 @@ class Newsletter extends Core
 
             $this->view->content = $this->httpRequest->post('body', HttpRequest::NO_CLEAN);
 
-            $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/newsletter/msg.tpl', $oSubscribers->email);
+            $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
 
             $aInfo = [
                 'subject' => $this->httpRequest->post('subject'),
-                'to' => $oSubscribers->email,
-                'to_name' => ($bOnlySubscribers) ? $oSubscribers->name : $oSubscribers->firstName
+                'to' => $oSubscriber->email,
+                'to_name' => ($bOnlySubscribers) ? $oSubscriber->name : $oSubscriber->firstName
             ];
 
             if (!$iRes = $oMail->send($aInfo, $sMsgHtml)) break;
 
             self::$_iTotalSent++;
         }
-        unset($oMail);
+        unset($oMail, $oSubscribers);
 
         return ['status' => $iRes, 'nb_mail_sent' => self::$_iTotalSent];
     }

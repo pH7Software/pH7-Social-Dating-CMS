@@ -38,7 +38,7 @@ class VisitorController extends Controller
         $this->oVisitorModel = new VisitorModel($this->iId);
         $this->oPage = new Page;
 
-        $this->view->oAvatarDesign = new AvatarDesignCore; // Avatar Design Class
+        $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
 
         /**
          *  Predefined meta_description.

@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video
- * @version          0.3
+ * @version          0.4
  * @link             http://hizup.com
  */
 
@@ -41,9 +41,7 @@ class Video
         $this->sFfmpegPath = Config::getInstance()->values['video']['handle.ffmpeg_path'];
 
         if(!file_exists($this->sFfmpegPath))
-        {
             throw new \PH7\Framework\File\Exception('FFmpeg is not installed on your server, please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini"');
-        }
 
         if(!empty($aFile))
         {
@@ -51,10 +49,7 @@ class Video
             $this->sType = $this->oFile->getFileExt($this->aFile['name']);
 
             if(!is_file($this->aFile['tmp_name']))
-            {
-                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Video file not found: The video file ' . $this->aFile['tmp_name'] . ' could not be found.');
-            }
-
+                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Video file not found: The video file \'' . $this->aFile['tmp_name'] . '\' could not be found.');
         }
     }
 
@@ -113,9 +108,7 @@ class Video
         $iUploadMaxSize = ($this->iMaxSize*1024*1024);
 
         if($this->aFile['size'] <= $iUploadMaxSize)
-        {
             return true;
-        }
 
         return false;
     }

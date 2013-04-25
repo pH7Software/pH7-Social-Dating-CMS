@@ -11,7 +11,7 @@
 <h4>{% Framework\Security\Ban\Ban::filterWord($album->name) %}</h4>
 <a href="{absolute_url}"><img src="{url_data_sys_mod}picture/img/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" alt="{% $album->name %}" title="{% $album->name %}" /></a>
 <p>{% nl2br(Framework\Security\Ban\Ban::filterWord($album->description)) %}</p>
-<p class="italic">{@lang('Views:')@} {% Framework\Mvc\Model\StatisticModel::getView($album->albumId,'AlbumsPictures') %}</p>
+<p class="italic">{@lang('Views:')@} {% Framework\Mvc\Model\Statistic::getView($album->albumId,'AlbumsPictures') %}</p>
 
  {@if(UserCore::auth() && $member_id == $album->profileId)@}
    <div class="small">

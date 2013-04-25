@@ -9,7 +9,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Request\HttpRequest;
 
-class AdsCore
+class AdsCore extends Framework\Ads\Ads
 {
 
     /**

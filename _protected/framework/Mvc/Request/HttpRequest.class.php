@@ -8,7 +8,7 @@
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Request
  * @version          1.1
- * @update           01/15/13
+ * @update           04/15/13
  * @link             http://hizup.com
  */
 
@@ -26,10 +26,10 @@ defined('PH7') or exit('Restricted access');
  * namespace MyExample;
  *
  * $oHttpRequest = new \PH7\Framework\Mvc\Request\HttpRequest;
- * if($oHttpRequest->getExists('pH'))
- *   echo $oHttpRequest->get('pH');
+ * if ($oHttpRequest->getExists('pH'))
+ *     echo $oHttpRequest->get('pH');
  * else
- *   echo 'I love Pierre-Henry S ;)';
+ *     echo 'I love Pierre-Henry S ;)';
  * </code>
  *
  */
@@ -81,17 +81,17 @@ class HttpRequest extends \PH7\Framework\Http\Http
     {
         $bExists = false; // Default value
 
-        if(is_array($mKey))
+        if (is_array($mKey))
         {
-            foreach($mKey as $sKey)
+            foreach ($mKey as $sKey)
             {
-                if(!$bExists = $this->getExists($sKey, $sParam)) // Recursive method
+                if (!$bExists = $this->getExists($sKey, $sParam)) // Recursive method
                     break;
             }
         }
         else
         {
-            if(!$this->validate($this->_aGet, $mKey, $sParam)) return false;
+            if (!$this->validate($this->_aGet, $mKey, $sParam)) return false;
 
             $bExists = (!empty($this->_aGet[$mKey])) ? true : false;
         }
@@ -110,17 +110,17 @@ class HttpRequest extends \PH7\Framework\Http\Http
     {
         $bExists = false; // Default value
 
-        if(is_array($mKey))
+        if (is_array($mKey))
         {
-            foreach($mKey as $sKey)
+            foreach ($mKey as $sKey)
             {
-                if(!$bExists = $this->postExists($sKey, $sParam)) // Recursive method
+                if (!$bExists = $this->postExists($sKey, $sParam)) // Recursive method
                     break;
             }
         }
         else
         {
-            if(!$this->validate($this->_aPost, $mKey, $sParam)) return false;
+            if (!$this->validate($this->_aPost, $mKey, $sParam)) return false;
 
             $bExists = (!empty($this->_aPost[$mKey])) ? true : false;
         }
@@ -174,11 +174,11 @@ class HttpRequest extends \PH7\Framework\Http\Http
      */
     public function gets($sKey, $sParam = null)
     {
-        if($this->getExists($sKey, $sParam))
+        if ($this->getExists($sKey, $sParam))
         {
             return $this->get($sKey, $sParam);
         }
-        elseif($this->postExists($sKey, $sParam))
+        elseif ($this->postExists($sKey, $sParam))
         {
             return $this->post($sKey, $sParam);
         }
@@ -193,9 +193,9 @@ class HttpRequest extends \PH7\Framework\Http\Http
      */
     public function get($sKey, $sParam = null)
     {
-        //if($this->_sMethod !== self::METHOD_GET) throw new Exception('GET');
+        //if ($this->_sMethod !== self::METHOD_GET) throw new Exception('GET');
 
-        if(empty($this->_aGet[$sKey]))
+        if (empty($this->_aGet[$sKey]))
             return '';
 
         // Clear the CSRF token in the request variable
@@ -204,7 +204,7 @@ class HttpRequest extends \PH7\Framework\Http\Http
         $this->_aGet[$sKey] = $this->_clearCSRFToken($this->_aGet, $sKey);
         */
 
-        if($sParam === self::NO_CLEAN)
+        if ($sParam === self::NO_CLEAN)
             return $this->_aGet[$sKey];
 
         $this->setType($this->_aGet, $sKey, $sParam);
@@ -224,12 +224,12 @@ class HttpRequest extends \PH7\Framework\Http\Http
      */
     public function post($sKey, $sParam = null)
     {
-        if($this->_sMethod !== self::METHOD_POST) throw new Exception('POST');
+        if ($this->_sMethod !== self::METHOD_POST) throw new Exception('POST');
 
-        if(empty($this->_aPost[$sKey]))
+        if (empty($this->_aPost[$sKey]))
             return '';
 
-        if($sParam === self::NO_CLEAN)
+        if ($sParam === self::NO_CLEAN)
             return $this->_aPost[$sKey];
 
         $this->setType($this->_aPost, $sKey, $sParam);
@@ -260,7 +260,8 @@ class HttpRequest extends \PH7\Framework\Http\Http
     /**
      * @return string The Previous Page.
      */
-    public function previousPage() {
+    public function previousPage()
+    {
         return (new \PH7\Framework\Navigation\Browser)->getHttpReferer();
     }
 
@@ -277,7 +278,7 @@ class HttpRequest extends \PH7\Framework\Http\Http
      */
     public function pH7Url($sUrl)
     {
-      return (substr($sUrl, 0, 4) !== 'http') ? PH7_URL_ROOT . $sUrl : $sUrl;
+      return ($this->isRelativeUrl($sUrl)) ? PH7_URL_ROOT . $sUrl : $sUrl;
     }
 
     /**
@@ -291,9 +292,9 @@ class HttpRequest extends \PH7\Framework\Http\Http
      */
     protected function validate(&$aType, $sValue, $sParam)
     {
-        if(!empty($param)) {
-            if(!\PH7\Framework\Security\Validate::type($sValue, $sParam)) return false;
-        }
+        if (!empty($param))
+            if (!\PH7\Framework\Security\Validate::type($sValue, $sParam)) return false;
+
         return true;
     }
 
@@ -308,7 +309,7 @@ class HttpRequest extends \PH7\Framework\Http\Http
      */
     protected function setType(&$aType, $sValue, $sParam)
     {
-        if(!empty($sParam) && $sParam !== self::ONLY_XSS_CLEAN)
+        if (!empty($sParam) && $sParam !== self::ONLY_XSS_CLEAN)
             settype($aType[$sValue], $sParam);
     }
 
@@ -323,7 +324,7 @@ class HttpRequest extends \PH7\Framework\Http\Http
      */
     protected function cleanData(&$aType, $sValue, $sParam)
     {
-        if(!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN)
+        if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN)
             return (new \PH7\Framework\Security\Validate\Filter)->xssClean($aType[$sValue]);
 
         return (new \PH7\Framework\Str\Str)->escape($aType[$sValue], true);

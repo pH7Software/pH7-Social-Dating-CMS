@@ -27,7 +27,7 @@ class UserController extends Controller
         // Assigns variables for views
         $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
         $this->view->dateTime = $this->dateTime; // Date Time Class
-        $this->view->oAvatarDesign = new AvatarDesignCore; // For Avatar User
+        $this->view->avatarDesign = new AvatarDesignCore; // For Avatar User
     }
 
     public function index()

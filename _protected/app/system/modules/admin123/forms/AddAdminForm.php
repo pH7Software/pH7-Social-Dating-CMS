@@ -12,18 +12,18 @@ class AddAdminForm
 
     public static function display()
     {
-        if (isset($_POST['submit_admin_add']))
+        if (isset($_POST['submit_add_admin']))
         {
-            if (\PFBC\Form::isValid($_POST['submit_admin_add']))
+            if (\PFBC\Form::isValid($_POST['submit_add_admin']))
                 new AddAdminFormProcessing;
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_admin_add', 550);
+        $oForm = new \PFBC\Form('form_add_admin', 550);
         $oForm->configure(array('action' => ''));
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_admin_add', 'form_admin_add'));
-        $oForm->addElement(new \PFBC\Element\Token('admin_add'));
+        $oForm->addElement(new \PFBC\Element\Hidden('submit_add_admin', 'form_add_admin'));
+        $oForm->addElement(new \PFBC\Element\Token('add_admin'));
         $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('required' => 1, 'validation' => new \PFBC\Validation\Username('Admins'))));
         $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', array('required' => 1, 'validation' => new \PFBC\Validation\CEmail('guest', 'Admins'))));
         $oForm->addElement(new \PFBC\Element\Password(t('Password:'), 'password', array('required' => 1)));

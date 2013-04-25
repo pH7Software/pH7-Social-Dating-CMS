@@ -65,7 +65,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT email, password, prefixSalt, suffixSalt FROM'.Db::prefix($sTable).'WHERE email = :email LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT email, password, prefixSalt, suffixSalt FROM' . Db::prefix($sTable) . 'WHERE email = :email LIMIT 1');
         $rStmt->bindValue(':email',$sEmail, \PDO::PARAM_STR);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -121,7 +121,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         {
             Various::checkModelTable($sTable);
 
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM'.Db::prefix($sTable).'WHERE profileId= :profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -150,7 +150,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlDay = $bIsDay ? ' AND (joinDate + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGenger ? ' AND sex = :gender' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) AS totalUsers FROM' . Db::prefix($sTable) . 'WHERE username <> \''.PH7_GHOST_USERNAME.'\'' . $sSqlDay . $sSqlGender);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) AS totalUsers FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\'' . $sSqlDay . $sSqlGender);
         if ($bIsDay) $rStmt->bindValue(':day', $iDay, \PDO::PARAM_INT);
         if ($bIsGenger) $rStmt->bindValue(':gender', $sGenger, \PDO::PARAM_STR);
         $rStmt->execute();
@@ -303,31 +303,31 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             {
                 if ($sSex === 'male')
                 {
-                    $sGender .= '\'male\', ';
+                    $sGender .= '\'male\',';
                 }
 
                 if ($sSex === 'female')
                 {
-                    $sGender .= '\'female\', ';
+                    $sGender .= '\'female\',';
                 }
 
                 if ($sSex === 'couple')
                 {
-                    $sGender .= '\'couple\', ';
+                    $sGender .= '\'couple\',';
                 }
             }
 
-            $sSqlSex = ($bIsSex) ? ' AND sex IN ( ' . substr($sGender, 0, -2) . ' ) ' : '';
+            $sSqlSex = ($bIsSex) ? ' AND sex IN (' . substr($sGender, 0, -1) . ') ' : '';
         }
         else
         {
             $sSqlSex = '';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix($sTable) . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId WHERE username <> \''.PH7_GHOST_USERNAME.'\' AND userSaveViews = \'yes\' AND groupId = \'2\'' .  $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState . $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix($sTable) . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND userSaveViews = \'yes\' AND groupId = \'2\'' .  $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState . $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlOrder . $sSqlLimit);
 
         if (!empty($aParams['match_sex'])) $rStmt->bindValue(':matchSex', '%' . $aParams['match_sex'] . '%', \PDO::PARAM_STR);
-        if ($bIsSingleAge) $rStmt->bindValue(':year', '%' . ((int)$this->sCurrentDate-$aParams['age']) . '%', \PDO::PARAM_INT);
+        if ($bIsSingleAge) $rStmt->bindValue(':year', '%' . (date('Y') - $aParams['age']) . '%', \PDO::PARAM_INT);
         if ($bIsAge) $rStmt->bindValue(':age1', $aParams['age1'], \PDO::PARAM_INT);
         if ($bIsAge) $rStmt->bindValue(':age2', $aParams['age2'], \PDO::PARAM_INT);
         if ($bIsHeight) $rStmt->bindValue(':height', $aParams['height'], \PDO::PARAM_INT);
@@ -406,7 +406,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         if (!$iData = $this->cache->get())
         {
-            $rStmt = Db::getInstance()->prepare('SELECT userStatus FROM ' . Db::prefix('Members') . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT userStatus FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -444,7 +444,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         if (!$oData = $this->cache->get())
         {
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . Db::prefix('MembersNotifications') . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -543,8 +543,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('Members').'(email, username, password, firstName, lastName, sex, matchSex, birthDate, country, city, state, zipCode, description, website, socialNetworkSite, active, ip, hashValidation, prefixSalt, suffixSalt, joinDate, lastActivity, groupId)
-        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :country, :city, :state, :zipCode, :description, :website, :socialNetworkSite, :active, :ip, :hashValidation, :prefixSalt, :suffixSalt, :joinDate, :lastActivity, :groupId)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Members') . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, prefixSalt, suffixSalt, joinDate, lastActivity, groupId)
+            VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :prefixSalt, :suffixSalt, :joinDate, :lastActivity, :groupId)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
         $rStmt->bindValue(':password', Framework\Security\Security::hashPwd($aData['prefix_salt'],$aData['password'],$aData['suffix_salt'], Framework\Security\Security::USER), \PDO::PARAM_INT);
@@ -553,13 +553,6 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':matchSex', Form::setVal($aData['match_sex']), \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':country', $aData['country'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':website', trim($aData['website']), \PDO::PARAM_STR);
-        $rStmt->bindValue(':socialNetworkSite', trim($aData['social_network_site']), \PDO::PARAM_STR);
         $rStmt->bindValue(':active', (!empty($aData['is_active']) ? $aData['is_active'] : 1), \PDO::PARAM_INT);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_INT);
         $rStmt->bindValue(':hashValidation', (!empty($aData['hash_validation']) ? $aData['hash_validation'] : null), \PDO::PARAM_STR);
@@ -571,9 +564,26 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->execute();
         $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the user's ID
         Db::free($rStmt);
+        $this->setInfoFields($aData);
         $this->setDefaultPrivacySetting();
         $this->setDefaultNotification();
         return $iProfileId;
+    }
+
+    public function setInfoFields(array $aData)
+    {
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersInfo') . '(profileId, country, city, state, zipCode, description, website, socialNetworkSite)
+            VALUES (:profileId, :country, :city, :state, :zipCode, :description, :website, :socialNetworkSite)');
+        $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
+        $rStmt->bindValue(':middleName', $aData['middle_name'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':country', $aData['country'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':website', trim($aData['website']), \PDO::PARAM_STR);
+        $rStmt->bindValue(':socialNetworkSite', trim($aData['social_network_site']), \PDO::PARAM_STR);
+        return $rStmt->execute();
     }
 
     /**
@@ -583,7 +593,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function setDefaultPrivacySetting()
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('MembersPrivacy').'(profileId, privacyProfile, searchProfile, userSaveViews)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersPrivacy') . '(profileId, privacyProfile, searchProfile, userSaveViews)
             VALUES (:profileId, \'all\', \'yes\', \'yes\')');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         return $rStmt->execute();
@@ -596,7 +606,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function setDefaultNotification()
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('MembersNotifications').'(profileId, enableNewsletters)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersNotifications') . '(profileId, enableNewsletters)
             VALUES (:profileId, 0)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         return $rStmt->execute();
@@ -658,7 +668,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if (!$oData = $this->cache->get())
         {
             $sSqlApproved = (!empty($iApproved)) ? ' AND approvedAvatar = :approvedAvatar ' : ' ';
-            $rStmt = Db::getInstance()->prepare('SELECT profileId, avatar AS pic, approvedAvatar FROM' . Db::prefix('Members') . ' WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT profileId, avatar AS pic, approvedAvatar FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             if (!empty($iApproved)) $rStmt->bindValue(':approvedAvatar', $iApproved, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -698,7 +708,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if (!$sData = $this->cache->get())
         {
             $sSqlApproved = (!empty($iApproved)) ? ' AND approved = :approved ' : ' ';
-            $rStmt = Db::getInstance()->prepare('SELECT file FROM'.Db::prefix('MembersBackground').'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             if (!empty($iApproved)) $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -722,7 +732,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function addBackground($iProfileId, $sFile, $iApproved = 1)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('MembersBackground').'(profileId, file, approved) VALUES (:profileId, :file, :approved)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersBackground') . '(profileId, file, approved) VALUES (:profileId, :file, :approved)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':file', $sFile, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
@@ -737,7 +747,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function deleteBackground($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM'.Db::prefix('MembersBackground').'WHERE profileId = :profileId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
@@ -876,7 +886,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT profileId, username, sex FROM' . Db::prefix($sTable) . 'WHERE username <> \''.PH7_GHOST_USERNAME.'\' AND username LIKE :username');
+        $rStmt = Db::getInstance()->prepare('SELECT profileId, username, sex FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND username LIKE :username');
         $rStmt->bindValue(':username', '%'.$sUsernameSearch.'%', \PDO::PARAM_STR);
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
@@ -894,16 +904,22 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function getProfiles($sOrder = self::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
+        $bIsLimit = (null !== $iOffset && null !== $iLimit);
+
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
         $sOrder = $this->profileOrderBy($sOrder);
 
-        $bIsLimit = (null !== $iOffset && null !== $iLimit);
         $sSqlLimit = ($bIsLimit ? 'LIMIT :offset, :limit' : '');
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM '.Db::prefix('Members').' WHERE (username <> \''.PH7_GHOST_USERNAME.'\')
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')
             AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId=\'2\')' . $sOrder . $sSqlLimit);
-        if ($bIsLimit) $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        if ($bIsLimit) $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+
+        if ($bIsLimit)
+        {
+            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        }
+
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
@@ -932,7 +948,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
 
         $sSqlCity = (!empty($sCity)) ?  'AND (city LIKE :city)' : '';
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM'.Db::prefix('Members').' WHERE (username <> \''.PH7_GHOST_USERNAME.'\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId=\'2\')' . $sOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId=\'2\')' . $sOrder . $sSqlLimit);
         $rStmt->bindValue(':country', $sCountry, \PDO::PARAM_STR);
         (!empty($sCity)) ? $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR) : '';
 
@@ -1095,7 +1111,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         {
             Various::checkModelTable($sTable);
 
-            $rStmt = Db::getInstance()->prepare('SELECT firstName FROM' . Db::prefix($sTable) . 'WHERE profileId=:profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT firstName FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -1123,7 +1139,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
             if (!empty($iProfileId))
             {
-                $rStmt = Db::getInstance()->prepare('SELECT sex FROM' . Db::prefix($sTable) . 'WHERE profileId=:profileId LIMIT 1');
+                $rStmt = Db::getInstance()->prepare('SELECT sex FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
                 $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             }
             else
@@ -1159,7 +1175,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         {
             Various::checkModelTable($sTable);
 
-            $rStmt = Db::getInstance()->prepare('SELECT groupId FROM' . Db::prefix($sTable) . 'WHERE profileId=:profileId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT groupId FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -1227,6 +1243,33 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':price', $iPrice, \PDO::PARAM_INT);
         $rStmt->bindValue(':dateTime', $sDateTime, \PDO::PARAM_STR);
         return $rStmt->execute();
+    }
+
+    /**
+     * Get Info Fields from profile ID.
+     *
+     * @param integer $iProfileId
+     * @param string $sTable Default 'MembersInfo'
+     * @return object
+     */
+    public function getInfoFields($iProfileId, $sTable = 'MembersInfo')
+    {
+        if ($sTable !== 'MembersInfo' && $sTable !== 'AffiliateInfo')
+            Various::launchErr($sTable);
+
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
+        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        $rStmt->execute();
+        $oColumns = $rStmt->fetch(\PDO::FETCH_OBJ);
+        Db::free($rStmt);
+
+        $oRet = new \stdClass;
+        foreach ($oColumns as $sColumn => $sValue)
+        {
+            if ($sColumn != 'profileId')
+                $oRet->$sColumn = $sValue;
+        }
+        return $oRet;
     }
 
     /**

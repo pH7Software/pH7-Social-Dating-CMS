@@ -19,8 +19,6 @@ class GeneralCoreCron extends Cron
     {
         parent::__construct();
 
-        $this->isAlreadyExec();
-
         $this->chmod();
 
         echo '<br />' . t('Done!') . '<br />';
@@ -36,14 +34,10 @@ class GeneralCoreCron extends Cron
      */
     protected function chmod()
     {
-        $oFile = new Framework\File\File;
-
         /** Check and correct the file permissions if necessary **/
-        $oFile->chmod(PH7_PATH_ROOT . '_constants.php', 0644);
-        $oFile->chmod(PH7_PATH_TMP . \PH7\Framework\Core\License::FILE, 0444);
-        $oFile->chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
-
-        unset($oFile);
+        $this->file->chmod(PH7_PATH_ROOT . '_constants.php', 0644);
+        $this->file->chmod(PH7_PATH_TMP . \PH7\Framework\Core\License::FILE, 0444);
+        $this->file->chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
 
         echo t('Chmod file... Ok!') . '<br />';
     }

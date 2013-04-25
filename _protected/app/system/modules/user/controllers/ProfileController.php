@@ -16,8 +16,7 @@ PH7\Framework\Parse\Emoticon,
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Url\Url,
 PH7\Framework\Geo\Map\Map,
-PH7\Framework\Date\Various as VDate,
-PH7\Framework\Math\Measure as Measure;
+PH7\Framework\Date\Various as VDate;
 
 class ProfileController extends Controller
 {
@@ -28,9 +27,9 @@ class ProfileController extends Controller
     {
         $oUserModel = new UserModel;
 
-        // Adding Css Style for Tabs Menu
+        // Add the style sheet for the Tabs Menu
         $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'tabs.css');
-        // Adding JavaScript file for Ajax Friend
+        // Add the JavaScript file for the Ajax Friend
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'friend.js');
 
         $sGetUsername = $this->httpRequest->get('username', 'string');
@@ -38,74 +37,38 @@ class ProfileController extends Controller
 
         $oUser = $oUserModel->readProfile($iGetProfileId);
 
-        if (!empty($oUser->username) && $this->str->equalsIgnoreCase($sGetUsername, $oUser->username)) {
+        if (!empty($oUser->username) && $this->str->equalsIgnoreCase($sGetUsername, $oUser->username))
+        {
+            // Get the Profile's ID and the Visitor's ID.
+            $iId = (int) $oUser->profileId;
+            $iMemberId = (int) $this->session->get('member_id');
 
-            $iId = (int)$oUser->profileId;
+            // Get the Profile's username
             $sUsername = $this->str->escape($oUser->username, true);
-            $iMemberId = $this->session->get('member_id');
 
-            // Check Privacy Profile
-            $oPrivacyViewsUser = $oUserModel->getPrivacySetting($iId);
+            // The administrators can view all profiles and profile visits are not saved.
+            if (!AdminCore::auth())
+                $this->_initPrivacy($oUserModel, $iId, $iMemberId, $sUsername);
 
-            if (!User::auth() && $oPrivacyViewsUser->privacyProfile == 'only_members')
-            {
-                $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to view this profile.',
-                    $sUsername, UriRoute::get('user', 'main', 'login'), UriRoute::get('user',
-                    'signup', 'step1'));
-            } elseif (User::auth() && $oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->str->equals((int)$iMemberId, $iId))
-            {
-                $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $sUsername);
-            }
-
-            // Update the "Who's Viewed Your Profile"
-            if (User::auth())
-            {
-                $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($iMemberId);
-
-                if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->str->equals((int)$iMemberId, $iId))
-                {
-                    $oVisitorModel = new VisitorModel($iId, $iMemberId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-
-                    if (!$oVisitorModel->already())
-                    {
-                        // Add a new visit
-                        $oVisitorModel->set();
-                    }
-                    else
-                    {
-                        // Update the date of last visit
-                        $oVisitorModel->update();
-                    }
-
-                    unset($oVisitorModel);
-                }
-            }
-
-            // Gets the background user
+            // Gets the Profile's background
             $this->view->img_background = $oUserModel->getBackground($iId, 1);
+
+            $oFields = $oUserModel->getInfoFields($iId);
 
             unset($oUserModel);
 
             $sFirstName = (!empty($oUser->firstName)) ? $this->str->escape($this->str->upperFirst($oUser->firstName), true) : '';
             $sLastName = (!empty($oUser->lastName)) ? $this->str->escape($this->str->upperFirst($oUser->lastName), true) : '';
-            $sCountry = (!empty($oUser->country)) ? $oUser->country : '';
-            $sCity = (!empty($oUser->city)) ? $this->str->escape($this->str->upperFirst($oUser->city), true) : '';
-            $sState = (!empty($oUser->state)) ? $this->str->escape($this->str->upperFirst($oUser->state), true) : '';
-            $sZipCode = (!empty($oUser->zipCode)) ? $this->str->escape($this->str->upperFirst($oUser->zipCode), true) : '';
-            $sDescription = (!empty($oUser->description)) ? Emoticon::init(Ban::filterWord($oUser->description)) : '';
+
+            $sCountry = (!empty($oFields->country)) ? $oFields->country : '';
+            $sCity = (!empty($oFields->city)) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
+            $sState = (!empty($oFields->state)) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
+            $sDescription = (!empty($oFields->description)) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
 
             // Age
             $this->view->birth_date = $this->dateTime->get($oUser->birthDate)->date();
             $aAge = explode('-', $oUser->birthDate);
-            $iAge = (new Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get();
-
-            // Height
-            $this->view->height = $oUser->height;
-            $this->view->height_txt = (new Measure\Height($oUser->height))->display();
-
-            // Weight
-            $this->view->weight = $oUser->weight;
-            $this->view->weight_txt = (new Measure\Height($oUser->weight))->display();
+            $iAge = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get();
 
             // Links of the Menubar
             $iNbFriend = FriendModel::totalFriends($iId);
@@ -113,7 +76,8 @@ class ProfileController extends Controller
             $sFriendTxt = ($iNbFriend <= 1) ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') :
                 t('Friends:');
 
-            if (User::auth()) {
+            if (User::auth())
+            {
                 $iNbMutFriend = (new FriendModel)->get($iMemberId, $iId, null, true, null, null, null, null);
                 $sNbMutFriend = ($iNbMutFriend > 0) ? ' (' . $iNbMutFriend . ')' : '';
                 $sMutFriendTxt = ($iNbMutFriend <= 1) ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
@@ -141,7 +105,7 @@ class ProfileController extends Controller
                 t($oUser->sex), $iAge, t($sCountry), $sCity, $sState);
 
 
-            $this->view->oAvatarDesign = new AvatarDesignCore; // Avatar Design Class
+            $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
 
             // Member Menubar
             $this->view->friend_link = $sFriendTxt . $sNbFriend;
@@ -173,17 +137,17 @@ class ProfileController extends Controller
             $this->view->country_code = $sCountry;
             $this->view->city = $sCity;
             $this->view->state = $sState;
-            $this->view->zip_code = $sZipCode;
             $this->view->description = nl2br($sDescription);
-            $this->view->website = $this->str->escape($oUser->website);
-            $this->view->social_network_site = $this->str->escape($oUser->socialNetworkSite);
             $this->view->join_date = VDate::textTimeStamp($oUser->joinDate);
             $this->view->last_activity = VDate::textTimeStamp($oUser->lastActivity);
+            $this->view->fields = $oFields;
 
             // Stat Profile
             Statistic::setView($iId, 'Members');
 
-        } else {
+        }
+        else
+        {
             Framework\Http\Http::setHeadersByCode(404);
             $this->sTitle = t('Whoops! The profile "%0%" is not found. ', $this->str->
                 escape(substr($sGetUsername, 0, PH7_MAX_USERNAME_LENGTH), true));
@@ -194,6 +158,56 @@ class ProfileController extends Controller
         }
 
         $this->output();
+    }
+
+    /**
+     * Privacy Profile.
+     *
+     * @param object \PH7\UserModel $oUserModel
+     * @param integer $iId Profile's ID.
+     * @param integer $oMemberId Visitor's ID.
+     * @param string $sUsername Username's Profile.
+     * @return void
+     */
+    private function _initPrivacy(UserModel $oUserModel, $iId, $iMemberId, $sUsername)
+    {
+        // Check Privacy Profile
+        $oPrivacyViewsUser = $oUserModel->getPrivacySetting($iId);
+
+        if (!User::auth() && $oPrivacyViewsUser->privacyProfile == 'only_members')
+        {
+            $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to view this profile.',
+                $sUsername, UriRoute::get('user', 'main', 'login'), UriRoute::get('user',
+                'signup', 'step1'));
+        }
+        elseif (User::auth() && $oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->str->equals($iId, $iMemberId))
+        {
+            $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $sUsername);
+        }
+
+        // Update the "Who's Viewed Your Profile"
+        if (User::auth())
+        {
+            $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($iMemberId);
+
+            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->str->equals($iId, $iMemberId))
+            {
+                $oVisitorModel = new VisitorModel($iId, $iMemberId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
+
+                if (!$oVisitorModel->already())
+                {
+                    // Add a new visit
+                    $oVisitorModel->set();
+                }
+                else
+                {
+                    // Update the date of last visit
+                    $oVisitorModel->update();
+                }
+                unset($oVisitorModel);
+            }
+        }
+        unset($oPrivacyViewsUser, $oPrivacyViewsVisitor);
     }
 
 }

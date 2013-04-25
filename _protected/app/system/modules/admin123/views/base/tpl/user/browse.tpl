@@ -51,7 +51,7 @@
 <td>{% $user->username %}</td>
 <td>{{ if(!empty($user->name)) echo $user->name }} &nbsp; {% $user->firstName %}</td>
 <td><a href="{url_root}{% $user->username %}{page_ext}" target="_blank">{% $user->username %}{page_ext}</a></td>
-<td>{{ $oAvatarDesign->get($user->username, $user->firstName, null, 32) }}</td>
+<td>{{ $avatarDesign->get($user->username, $user->firstName, null, 32) }}</td>
 <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($user->ip) ) }}" title="{@lang('IP Country')@}" alt="{@lang('IP Country')@}" /> <a href="{% Framework\Ip\Ip::api($user->ip) %}" title="{@lang('See information from this user IP')@}" target="_blank">{% $user->ip %}</a></td>
 <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of Group Membership *}
 <td>{% $dateTime->get($user->joinDate)->dateTime() %}</td>

@@ -23,13 +23,13 @@ class AdsFormProcessing extends Form
         $sTable = AdsCore::getTable();
         (new AdsCoreModel)->add($this->httpRequest->post('title'), $this->httpRequest->post('code', HttpRequest::NO_CLEAN), $sTable);
 
-        /* Clean AdminCoreModel Ads and DesignModel for STATIC data */
-        (new Framework\Cache\Cache)->start(Framework\Mvc\Model\DesignModel::CACHE_STATIC_GROUP, null, null)->clear()
+        /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
+        (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear()
         ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
         ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliate', null)->clear();
 
         $sSlug = (AdsCore::getTable() == 'AdsAffiliate') ? 'affiliate' : '';
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisements was added successfully!'));
+        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisement was added successfully!'));
     }
 
 }

@@ -22,22 +22,25 @@ class EditFormProcessing extends Form
         $oUser = $oUserModel->readProfile($iProfileId);
 
         // For Admins only!
-        if((AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id'))) {
-            if(!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId)) {
+        if((AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id')))
+        {
+            if(!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId))
                 $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-            }
         }
 
-        if(!$this->str->equals($this->httpRequest->post('first_name'), $oUser->firstName)) {
+        if(!$this->str->equals($this->httpRequest->post('first_name'), $oUser->firstName))
+        {
             $oUserModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId);
             $this->session->set('member_first_name', $this->httpRequest->post('first_name'));
 
             (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Members', null)->clear();
         }
+
         if(!$this->str->equals($this->httpRequest->post('last_name'), $oUser->lastName))
             $oUserModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('sex'), $oUser->sex)) {
+        if(!$this->str->equals($this->httpRequest->post('sex'), $oUser->sex))
+        {
             $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
             $this->session->set('member_sex', $this->httpRequest->post('sex'));
 
@@ -52,32 +55,14 @@ class EditFormProcessing extends Form
         if(!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate))
             $oUserModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('country'), $oUser->country))
-            $oUserModel->updateProfile('country', $this->httpRequest->post('country'), $iProfileId);
-
-        if(!$this->str->equals($this->httpRequest->post('city'), $oUser->city))
-            $oUserModel->updateProfile('city', $this->httpRequest->post('city'), $iProfileId);
-
-        if(!$this->str->equals($this->httpRequest->post('state'), $oUser->state))
-            $oUserModel->updateProfile('state', $this->httpRequest->post('state'), $iProfileId);
-
-        if(!$this->str->equals($this->httpRequest->post('zip_code'), $oUser->zipCode))
-            $oUserModel->updateProfile('zipCode', $this->httpRequest->post('zip_code'), $iProfileId);
-
-        if(!$this->str->equals($this->httpRequest->post('description', HttpRequest::ONLY_XSS_CLEAN), $oUser->description))
-            $oUserModel->updateProfile('description', $this->httpRequest->post('description', HttpRequest::ONLY_XSS_CLEAN), $iProfileId);
-
-        if(!$this->str->equals($this->httpRequest->post('height'), $oUser->height))
-            $oUserModel->updateProfile('height', $this->httpRequest->post('height'), $iProfileId);
-
-        if(!$this->str->equals($this->httpRequest->post('weight'), $oUser->weight))
-            $oUserModel->updateProfile('weight', $this->httpRequest->post('weight'), $iProfileId);
-
-        if(!$this->str->equals($this->httpRequest->post('website'), $oUser->website))
-            $oUserModel->updateProfile('website', $this->httpRequest->post('website'), $iProfileId);
-
-        if(!$this->str->equals($this->httpRequest->post('social_network_site'), $oUser->socialNetworkSite))
-            $oUserModel->updateProfile('socialNetworkSite', $this->httpRequest->post('social_network_site'), $iProfileId);
+        // Update dynamic fields.
+        $oFields = $oUserModel->getInfoFields($iProfileId);
+        foreach($oFields as $sColumn => $sValue)
+        {
+            if(!$this->str->equals($this->httpRequest->post($sColumn), $sValue))
+                $oUserModel->updateProfile($sColumn, $this->httpRequest->post($sColumn), $iProfileId, 'MembersInfo');
+        }
+        unset($oFields);
 
         $oUserModel->setLastEdit($iProfileId);
 

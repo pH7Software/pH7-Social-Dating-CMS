@@ -6,8 +6,11 @@
  * @package        PH7 / App / System / Module / Admin / Asset / Ajax
  */
 namespace PH7;
-use PH7\Framework\Mvc\Model\DesignModel, PH7\Framework\Mvc\Request\HttpRequest;
 defined('PH7') or exit('Restricted access');
+
+use
+PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Model\Design as DesignModel;
 
 class AdsAjax
 {
@@ -86,7 +89,7 @@ class AdsAjax
 
         if ($this->_bStatus)
         {
-            /* Clean AdminCoreModel Ads and DesignModel for STATIC data */
+            /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
             (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear()
                     ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
                     ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliate', null)->clear();

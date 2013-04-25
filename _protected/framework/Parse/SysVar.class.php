@@ -32,7 +32,8 @@ class SysVar
     public function parse($sVar)
     {
         /*** Not to parse a text ***/
-        if(preg_match('/#!.+!#/', $sVar)) {
+        if(preg_match('/#!.+!#/', $sVar))
+        {
             $sVar = str_replace(array('#!', '!#'), '', $sVar);
             return $sVar;
         }

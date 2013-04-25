@@ -48,7 +48,7 @@ class FriendController extends Controller
         $this->view->sess_member_id = $this->iMemberId;
         $this->view->member_id = $this->iId;
         $this->view->csrf_token = (new Framework\Security\CSRF\Token)->generate('friend');
-        $this->view->oAvatarDesign = new AvatarDesignCore;
+        $this->view->avatarDesign = new AvatarDesignCore;
 
         /**
          *  Predefined meta_description.

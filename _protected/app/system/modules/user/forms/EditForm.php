@@ -26,10 +26,11 @@ class EditForm
             Framework\Url\HeaderUrl::redirect();
         }
 
+        $oUserModel = new UserModel;
         $oHR = new HttpRequest;
         $iProfileId = (AdminCore::auth() && !User::auth() && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('member_id');
 
-        $oUser = (new UserModel)->readProfile($iProfileId);
+        $oUser = $oUserModel->readProfile($iProfileId);
 
 
         // Birth Date with the date format for the date picker
@@ -62,21 +63,12 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Interested in:'), 'match_sex', array('male'=>t('Male'), 'female'=>t('Female'), 'couple'=>t('Couple')),array('value'=>Form::getVal($oUser->matchSex), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('id'=>'birth_date', 'onblur'=>'CValid(this.value, this.id)', 'value'=>$sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
-        $oForm->addElement(new \PFBC\Element\Country(t('Your Country:'), 'country', array('id'=>'str_country', 'value'=>$oUser->country, 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your City:'), 'city', array('id'=>'str_city', 'onblur' =>'CValid(this.value,this.id,2,150)','value'=>$oUser->city, 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_city"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your State or Province:'), 'state', array('id'=>'str_state', 'onblur' =>'CValid(this.value,this.id,2,150)','value'=>$oUser->state, 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_state"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Postal code (zip):'), 'zip_code', array('id'=>'str_zip_code', 'onblur' =>'CValid(this.value,this.id,2,10)','value'=>$oUser->zipCode, 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
-        $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', array('id'=>'str_description', 'onblur' =>'CValid(this.value,this.id,10,2000)','value'=>$oUser->description, 'validation'=>new \PFBC\Validation\Str(10,2000), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));
-        $oForm->addElement(new \PFBC\Element\Height(t('Height:'), 'height', array('value'=>$oUser->height)));
-        $oForm->addElement(new \PFBC\Element\Weight(t('Weight:'), 'weight', array('value'=>$oUser->weight)));
-        $oForm->addElement(new \PFBC\Element\Url(t('Your Website:'), 'website', array('id'=>'url','onblur'=>'CValid(this.value,this.id)','value'=>$oUser->website)));
-        $oForm->addElement(new \PFBC\Element\HtmlExternal('<span class="input_error url"></span>'));
-        $oForm->addElement(new \PFBC\Element\Url(t('Social Network Site:'), 'social_network_site', array('id'=>'url2','onblur'=>'CValid(this.value,this.id)','description'=>t('The url of your profile Facebook, Twitter, Google+, etc.'),'value'=>$oUser->socialNetworkSite)));
-        $oForm->addElement(new \PFBC\Element\HtmlExternal('<span class="input_error url2"></span>'));
+
+        // Generate dynamic fields
+        $oFields = $oUserModel->getInfoFields($iProfileId);
+        foreach ($oFields as $sColumn => $sValue)
+            $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
+
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script><script src="'.PH7_URL_STATIC.PH7_JS.'geo/autocompleteCity.js"></script>'));
         $oForm->render();

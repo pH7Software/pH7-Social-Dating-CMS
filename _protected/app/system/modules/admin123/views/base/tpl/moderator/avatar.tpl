@@ -7,7 +7,7 @@
     {{ $action = ($avatar->approvedAvatar == 1) ? 'disapprovedavatar' : 'approvedavatar' }}
 
  <div class="thumb_photo">
-    {{ $oAvatarDesign->lightBox($avatar->username, $avatar->firstName, $avatar->sex, 300, '0') }}
+    {{ $avatarDesign->lightBox($avatar->username, $avatar->firstName, $avatar->sex, 300, '0') }}
     <p class="italic">{@lang('Posted by')@} <a href="{% $oUser->getProfileLink($avatar->username) %}" target="_blank">{% $avatar->username %}</a></p>
 
    <div>

@@ -5,16 +5,16 @@
 
 {@if(empty($error))@}
 
-{{ $oAvatarDesign->get($data->username, $data->firstName, $data->sex, 400) }}
-<div class="hon_click">{{ RatingDesignCore::voting($data->profileId,'Members','center') }}</div>
+  {{ $avatarDesign->get($data->username, $data->firstName, $data->sex, 400) }}
+  <div class="hon_click">{{ RatingDesignCore::voting($data->profileId,'Members','center') }}</div>
 
-<br /><hr /><br />
-<p class="center">{{ $design->like($data->username, $data->firstName, $data->sex,(new UserCore)->getProfileLink($data->username)) }} | {{ $design->report($data->profileId, $data->username, $data->firstName, $data->sex) }}</p>
-{{ $design->likeApi() }}
+  <br /><hr /><br />
+  <p class="center">{{ $design->like($data->username, $data->firstName, $data->sex,(new UserCore)->getProfileLink($data->username)) }} | {{ $design->report($data->profileId, $data->username, $data->firstName, $data->sex) }}</p>
+  {{ $design->likeApi() }}
 
 {@else@}
 
-<p class="bold">{error}</p>
+  <p class="bold">{error}</p>
 
 {@/if@}
 

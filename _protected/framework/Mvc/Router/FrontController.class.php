@@ -9,7 +9,7 @@
  * @copyright        (c) 2011-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Router
- * @version          0.8
+ * @version          1.0
  */
 
 namespace PH7\Framework\Mvc\Router;
@@ -53,7 +53,8 @@ final class FrontController
         $this->oHttpRequest = new HttpRequest;
         $this->oUri = Uri::getInstance();
 
-        if ($this->oUri->fragment(0) === 'asset' && $this->oUri->fragment(1) === 'gzip') {
+        if ($this->oUri->fragment(0) === 'asset' && $this->oUri->fragment(1) === 'gzip')
+        {
             // Loading and compress CSS and JavaScript files
             $this->gzipRouter();
             exit;
@@ -394,10 +395,10 @@ final class FrontController
         \PH7\Framework\File\Import::pH7FwkClass('Ajax.Ajax');
 
         // Option for Content Type
-        if ($this->oHttpRequest->getExists('option')) {
-            if ($this->oHttpRequest->get('option') == 'plain') {
+        if ($this->oHttpRequest->getExists('option'))
+        {
+            if ($this->oHttpRequest->get('option') == 'plain')
                 header('Content-Type: text/plain; charset=utf-8');
-            }
         }
 
         if (!empty($sMod))
@@ -524,12 +525,14 @@ final class FrontController
         $this->removeDatabaseInfo();
 
         // It displays the banishment if a banned IP address is found
-        if (Ban::isIp(Ip::get())) {
+        if (Ban::isIp(Ip::get()))
+        {
             \PH7\Framework\Page\Page::banned();
         }
 
         // The maintenance page is not displayed for the module "Admin" hen and the administrator is logged
-        if (DbConfig::getSetting('siteStatus') === DbConfig::MAINTENANCE_SITE && !\PH7\AdminCore::auth() && $this->oRegistry->module !== PH7_ADMIN_MOD) {
+        if (DbConfig::getSetting('siteStatus') === DbConfig::MAINTENANCE_SITE && !\PH7\AdminCore::auth() && $this->oRegistry->module !== PH7_ADMIN_MOD)
+        {
             \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
         }
 
@@ -554,15 +557,14 @@ final class FrontController
         if (is_file($this->oRegistry->path_module_controller))
         {
             // For additional options modules
-            if (is_file($this->oRegistry->path_module . 'Bootstrap.php')) {
+            if (is_file($this->oRegistry->path_module . 'Bootstrap.php'))
                 require_once $this->oRegistry->path_module . 'Bootstrap.php'; // Include Bootstrap Module if there exists
-            }
 
             require_once $this->oRegistry->path_module_controller;
             $sController = 'PH7\\' . $this->oRegistry->controller;
             $oCtrl = new $sController;
 
-            if (method_exists($oCtrl, $this->oRegistry->action))
+            if ((new \ReflectionClass($oCtrl))->hasMethod($this->oRegistry->action))
             {
                 if ((new \ReflectionMethod($oCtrl, $this->oRegistry->action))->isPublic())
                 {
@@ -698,7 +700,8 @@ final class FrontController
      */
     private function isIndexFile()
     {
-        if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE) {
+        if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE)
+        {
             $this->notFound('If we\'re in production mode, we display an error page if it on the index file to indicate no file extension in order to avoid utilization of a security vulnerability  in the language.');
             return true;
         }
@@ -724,11 +727,10 @@ final class FrontController
         }
         else
         {
-            if (empty($iRedirect)) {
+            if (empty($iRedirect))
                 $this->oRegistry->module = 'error';
-            } else {
+            else
                 \PH7\Framework\Url\HeaderUrl::redirect(UriRoute::get('error', 'http', 'index'));
-            }
         }
     }
 

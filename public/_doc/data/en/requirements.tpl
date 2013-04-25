@@ -29,8 +29,10 @@
                 <li>Bz2 compression PHP module.</li>
                 <li>mbstring PHP module.</li>
                 <li>Gettext PHP extension.</li>
-                <li>SendMail PHP activated.</li>
+                <li>Send Mail PHP activated.</li>
                 <li>memory_limit - 128M or higher.</li>
+                <li>allow_url_fopen Enable (On)</li>
+                <li>allow_url_include Disable (Off)</li>
             </ul>
 
    <h3>Recommended:</h3>
