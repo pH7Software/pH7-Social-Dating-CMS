@@ -82,7 +82,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'meta_category' => $oInfo->metaCategory,
             'header' => 0 // Default value of header contents
         ];
-        $this->view->assignVars($aMetaVars);
+        $this->view->assigns($aMetaVars);
 
         unset($oInfo);
 
