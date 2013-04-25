@@ -553,7 +553,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * @param boolean $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string. Default value is "false"
      * @return void
      */
-    public function assignVars(array $aVars, $bEscape = false, $bEscapeStrip = false)
+    public function assigns(array $aVars, $bEscape = false, $bEscapeStrip = false)
     {
         foreach ($aVars as $sKey => $sValue)
             $this->assign($sKey, $sValue, $bEscape = false, $bEscapeStrip = false); // Assign a string variable
