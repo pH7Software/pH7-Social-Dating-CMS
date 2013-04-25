@@ -49,7 +49,8 @@ class Url
      * @param string $sLink The link
      * @return string The name of the domain with the first letter capitalized.
      */
-    public static function name($sLink) {
+    public static function name($sLink)
+    {
         $oStr = new Str;
         $sLink = $oStr->upperFirst(preg_replace('#(^https?://|www\.|\.[a-z]{2,4}/?$)#i', '', $oStr->lower($sLink)));
         unset($oStr);

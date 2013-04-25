@@ -18,12 +18,10 @@ class BirthdayCoreCron extends Cron
     {
         parent::__construct();
 
-        $this->isAlreadyExec();
-
-        $this->sent();
+        $this->send();
     }
 
-    protected function sent()
+    protected function send()
     {
         $iNum = (new BirthdayCore)->sendMails();
 

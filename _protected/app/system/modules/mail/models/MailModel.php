@@ -177,7 +177,7 @@ class MailModel extends MailCoreModel
      */
     public function isDuplicateContent($iSenderId, $sCheckMsg)
     {
-        return Framework\Mvc\Model\SpamModel::detectDuplicate($sCheckMsg, 'message', 'sender', $iSenderId, 'Messages');
+        return Framework\Mvc\Model\Spam::detectDuplicate($sCheckMsg, 'message', 'sender', $iSenderId, 'Messages');
     }
 
     /**

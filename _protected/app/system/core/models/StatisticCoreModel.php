@@ -12,7 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
-class StatisticCoreModel extends Framework\Mvc\Model\StatisticModel
+class StatisticCoreModel extends Framework\Mvc\Model\Statistic
 {
 
     /**

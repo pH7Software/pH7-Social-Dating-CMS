@@ -9,10 +9,10 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use
-PH7\Framework\Mvc\Model\SecurityModel,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\UriRoute,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 class LoginFormProcessing extends Form
 {

@@ -40,7 +40,7 @@ class Image
         $this->iMaxHeight = $iMaxHeight;
 
         if (!is_file($this->sFile))
-            throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Image file not found: The image file ' . $this->sFile . ' could not be found.');
+            throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Image file not found: The image file \'' . $this->sFile . '\' could not be found.');
     }
 
     /**
@@ -81,9 +81,7 @@ class Image
 
         // Automatic resizing if the image is too large
         if ($this->iWidth > $this->iMaxWidth OR $this->iHeight > $this->iMaxHeight)
-        {
             $this->dynamicResize($this->iMaxWidth, $this->iMaxHeight);
-        }
 
         return true;
     }

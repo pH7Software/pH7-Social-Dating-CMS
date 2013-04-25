@@ -27,7 +27,7 @@
 
 <div class="content" id="general">
 {{ UserDesignCoreModel::userStatus($id) }}
-{{ $oAvatarDesign->lightBox($username, $first_name, $sex, 400) }}
+{{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
 
 <p><span class="bold">{@lang('I am:')@}</span> <span class="italic">{@lang($sex)@}</span></p>
 <div class="break"></div>
@@ -50,43 +50,54 @@
   <div class="break"></div>
 {@/if@}
 
-{@if(!empty($height))@}
-  <p><span class="bold">{@lang('Height:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$height) }}">{height_txt}</a></span></p>
-  <div class="break"></div>
+{@if(!empty($description))@}
+  <div class="profile_desc"><p class="bold">{@lang('Description:')@}</p> <div class="quote"><p class="italic">{description}</p></div></div>
 {@/if@}
 
-{@if(!empty($weight))@}
-  <p><span class="bold">{@lang('Weight:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$weight) }}">{weight_txt}</a></span></p>
-  <div class="break"></div>
-{@/if@}
+{* Profile's Fields *}
+{@foreach($fields as $key => $val)@}
 
-<p><span class="bold">{@lang('Country:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" /></p>
-<div class="break"></div>
+  {@if($key != 'description' && !empty($val))@}
+    {{ $val = escape($val, true) }}
 
-{@if(!empty($city))@}
-  <p><span class="bold">{@lang('City / Town:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">{city}</a></span></p>
-  <div class="break"></div>
-{@/if@}
+    {@if($key == 'height')@}
+      <p><span class="bold">{@lang('Height:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span></p>
 
-{@if(!empty($state))@}
-  <p><span class="bold">{@lang('State:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span></p>
-  <div class="break"></div>
-{@/if@}
+    {@elseif($key == 'weight')@}
+      <p><span class="bold">{@lang('Weight:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span></p>
 
-{@if(!empty($zip_code))@}
-  <p><span class="bold">{@lang('Postal Code (zip):')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip='.$zip_code) }}">{zip_code}</a></span></p>
-  <div class="break"></div>
-{@/if@}
+    {@elseif($key == 'country')@}
+      <p><span class="bold">{@lang('Country:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" /></p>
 
-{@if(!empty($website))@}
-  <p>{{ $design->favicon($website) }}&nbsp;&nbsp;<span class="bold">{@lang('Site:')@}</span> <span class="italic">{{ $design->urlTag($website) }}</span></p>
-  <div class="break"></div>
-{@/if@}
+    {@elseif($key == 'city')@}
+      <p><span class="bold">{@lang('City / Town:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">{city}</a></span></p>
 
-{@if(!empty($social_network_site))@}
-  <p>{{ $design->favicon($social_network_site) }}&nbsp;&nbsp;<span class="bold">{@lang('Social Network Profile:')@}</span> <span class="italic">{{ $design->urlTag($social_network_site) }}</span></p>
-  <div class="break"></div>
-{@/if@}
+    {@elseif($key == 'state')@}
+      <p><span class="bold">{@lang('State:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span></p>
+
+    {@elseif($key == 'zipCode')@}
+      <p><span class="bold">{@lang('Postal Code (zip):')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip='.$val) }}">{val}</a></span></p>
+
+    {@elseif($key == 'website')@}
+      <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{@lang('Site / Blog:')@}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
+
+    {@elseif($key == 'socialNetworkSite')@}
+      <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{@lang('Social Network Profile:')@}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
+
+    {@else@}
+      {{ $lang_key = strtolower($key) }}
+
+      {@if(strstr($key, 'url'))@}
+        <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{@lang($lang_key)@}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
+      {@else@}
+        <p><span class="bold">{@lang($lang_key)@}</span> <span class="italic">{val}</a></span></p>
+      {@/if@}
+    {@/if@}
+
+    <div class="break"></div>
+  {@/if@}
+
+{@/foreach@}
 
 {@if(!empty($join_date))@}
   <p><span class="bold">{@lang('Join Date:')@}</span> <span class="italic">{join_date}</span></p>
@@ -98,16 +109,12 @@
   <div class="break"></div>
 {@/if@}
 
-<p><span class="bold">{@lang('Views:')@}</span> <span class="italic">{% Framework\Mvc\Model\StatisticModel::getView($id,'Members') %}</span></p>
+<p><span class="bold">{@lang('Views:')@}</span> <span class="italic">{% Framework\Mvc\Model\Statistic::getView($id,'Members') %}</span></p>
 <div class="break"></div>
 
 {{ RatingDesignCore::voting($id,'Members') }}
 
-{@if(!empty($description))@}
-  <div class="profile_desc"><p class="bold">{@lang('Description:')@}</p> <div class="quote"><p class="italic">{description}</p></div></div>
-  </div>
-{@/if@}
-</div>
+</div></div>
 
 <div class="content" id="map">
 <p><span class="bold">{@lang('Profile Map:')@}</span>{map}</p>

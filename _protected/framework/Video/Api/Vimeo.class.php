@@ -37,7 +37,8 @@ class Vimeo extends \PH7\Framework\Video\Api implements Api
     public function getInfo($sUrl)
     {
         $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '.json';
-        if($oData = $this->getData($sDataUrl)) {
+        if($oData = $this->getData($sDataUrl))
+        {
             $this->oData = $oData[0];
             return $this;
         }

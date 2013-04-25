@@ -124,7 +124,7 @@ class QRCode
      */
     public function url($sUrl)
     {
-        $sUrl = (substr($sUrl, 0, 4) != 'http') ? 'http://' . $sUrl : $sUrl;
+        $sUrl = ((new \PH7\Framework\Http\Http)->isRelativeUrl($sUrl)) ? 'http://' . $sUrl : $sUrl;
         $this->_sData .= 'URL:' . $sUrl . "\n";
         return $this;
     }

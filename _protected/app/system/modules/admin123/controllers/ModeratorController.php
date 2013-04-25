@@ -76,7 +76,7 @@ class ModeratorController extends Controller
             totalAvatars(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->avatars = $this->oModeratorModel->getAvatars($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
-        $this->view->oAvatarDesign = new AvatarDesignCore(); // Avatar Design Class
+        $this->view->avatarDesign = new AvatarDesignCore(); // Avatar Design Class
         $this->output();
     }
 

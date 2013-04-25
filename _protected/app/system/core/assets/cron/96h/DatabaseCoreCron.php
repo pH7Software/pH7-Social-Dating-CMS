@@ -24,8 +24,6 @@ class DatabaseCoreCron extends Cron
     {
         parent::__construct();
 
-        $this->isAlreadyExec();
-
         // Available options
         if ($this->httpRequest->getExists('option'))
         {
@@ -33,27 +31,27 @@ class DatabaseCoreCron extends Cron
             {
                 // Backup
                 case 'backup':
-                  $this->backup();
+                    $this->backup();
                 break;
 
                 // Restart Stat
                 case 'stat':
-                  $this->stat();
+                    $this->stat();
                 break;
 
                 // Repair Tables
                 case 'repair':
-                  $this->repair();
+                    $this->repair();
                 break;
 
                 // Delete Log
                 case 'remove_log':
-                  $this->removeLog();
+                    $this->removeLog();
                 break;
 
                 default:
-                  Framework\Http\Http::setHeadersByCode(400);
-                  exit('Bad Request Error!');
+                    Framework\Http\Http::setHeadersByCode(400);
+                    exit('Bad Request Error!');
             }
         }
 
@@ -68,7 +66,6 @@ class DatabaseCoreCron extends Cron
 
         echo '<br />' . t('Done!') . '<br />';
         echo t('The Jobs Cron is working to complete successfully!');
-
     }
 
     protected function stat()
@@ -167,7 +164,9 @@ class DatabaseCoreCron extends Cron
         $iCleanMsg = (int) DbConfig::getSetting('cleanMsg');
         $iCleanComment = (int) DbConfig::getSetting('cleanComment');
 
-        if ($iCleanMsg > 0) { // If the option is enabled
+        // If the option is enabled
+        if ($iCleanMsg > 0)
+        {
             $rStmt = Db::getInstance()->prepare('DELETE FROM'.Db::prefix('Messages').'WHERE sendDate < NOW() - INTERVAL :cleanMsg DAY');
             $rStmt->bindValue(':cleanMsg', $iCleanMsg, \PDO::PARAM_INT);
 
@@ -175,18 +174,18 @@ class DatabaseCoreCron extends Cron
                 echo nt('Deleted %n% message... OK!', 'Deleted %n% messages... OK!', $rStmt->rowCount()) . '<br />';
         }
 
-        if ($iCleanComment > 0) { // If the option is enabled
-
+        // If the option is enabled
+        if ($iCleanComment > 0)
+        {
             $aCommentMod = ['Blog', 'Note', 'Picture', 'Video', 'Game', 'Profile'];
-            foreach($aCommentMod as $sSuffixTable) {
+            foreach($aCommentMod as $sSuffixTable)
+            {
                 $rStmt = Db::getInstance()->prepare('DELETE FROM'.Db::prefix('Comments' . $sSuffixTable).'WHERE updatedDate < NOW() - INTERVAL :cleanComment DAY');
                 $rStmt->bindValue(':cleanComment', $iCleanComment, \PDO::PARAM_INT);
                 if ($rStmt->execute())
                     echo t('Deleted %0% %1% comment(s) ... OK!', $rStmt->rowCount(), $sSuffixTable) . '<br />';
             }
-
         }
-
     }
 
 }

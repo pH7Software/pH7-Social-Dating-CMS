@@ -44,11 +44,11 @@ class SettingForm
         foreach ($aTplsId as $sTpl) $aTpls[$sTpl] = ucfirst($sTpl);
 
         $aLangs = array();
-        foreach ($aLangsId as $sLang) {
+        foreach ($aLangsId as $sLang)
+        {
             $sAbbrLang = substr($sLang,0,2);
-            $aLangs[$sLang] = t($sAbbrLang);
+            $aLangs[$sLang] = t($sAbbrLang) . ' (' . $sLang . ')';
         }
-
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Site Name:'), 'site_name', array('value' => DbConfig::getSetting('siteName'), 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Theme by default:'), 'default_template', $aTpls, array('value' => DbConfig::getSetting('defaultTemplate'), 'required' => 1)));
@@ -59,6 +59,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Select(t('Splash Page:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page for the visitors, otherwise it will classic page that will be used.'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Ajax Site with AjPH:'), 'full_ajax_site', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('fullAjaxSite'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Site Status:'), 'site_status', array(DbConfig::ENABLE_SITE => t('Enable'), DbConfig::MAINTENANCE_SITE => t('Maintenance')), array('value' => DbConfig::getSetting('siteStatus'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show the news software on the admin dashboard.'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1)));
 
         /********** Logo Settings **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="logotype"><h2 class="underline">' . t('Logo:') . '</h2>'));

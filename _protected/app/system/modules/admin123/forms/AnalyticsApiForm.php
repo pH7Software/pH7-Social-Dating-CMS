@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DesignModel;
+use PH7\Framework\Mvc\Model\Design as DesignModel;
 
 class AnalyticsApiForm
 {

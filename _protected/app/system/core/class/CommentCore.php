@@ -17,6 +17,8 @@ class CommentCore
     private function __construct() {}
 
     /**
+     * Check table.
+     *
      * @param string $sTable
      * @return mixed (string or void) Returns the table if it is correct.
      * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()

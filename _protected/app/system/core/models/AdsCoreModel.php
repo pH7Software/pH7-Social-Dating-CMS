@@ -9,7 +9,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
-class AdsCoreModel extends Framework\Mvc\Model\Engine\Model
+class AdsCoreModel extends Framework\Mvc\Model\Ads
 {
 
     const CACHE_GROUP = 'db/sys/core/ads';

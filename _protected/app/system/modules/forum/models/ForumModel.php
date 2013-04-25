@@ -11,7 +11,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class ForumModel extends ForumCoreModel
 {
 
-    public function getCategory($iCategoryId = null, $iOffset, $iLimit)
+    public function getCategory($iCategoryId, $iOffset, $iLimit)
     {
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
@@ -22,29 +22,37 @@ class ForumModel extends ForumCoreModel
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return (isset($iCategoryId)) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function getTopic($sForumName, $iForumId, $sTopicSubject = null, $iTopicId = null, $iProfileId = null, $iApproved, $iOffset, $iLimit)
+    public function getTopic($sForumName, $iForumId, $sTopicSubject, $iTopicId, $iProfileId, $iApproved, $iOffset, $iLimit)
     {
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+
         $sSqlProfileId = (isset($iProfileId)) ?  'AND t.profileId = :profileId ' : '';
         $sSqlMsg = (isset($sTopicSubject, $iTopicId)) ? ' AND (t.title LIKE :topicSubject AND t.topicId = :topicId) ': '';
-        $rStmt = Db::getInstance()->prepare('SELECT t.*, f.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') .
-                ' AS m ON t.profileId = m.profileId WHERE (t.forumId = :forumId AND f.name LIKE :forumName) ' . $sSqlMsg . $sSqlProfileId . ' AND (t.approved= :approved) ORDER BY t.createdDate DESC LIMIT :offset, :limit');
+
+        $rStmt = Db::getInstance()->prepare('SELECT f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') .
+                'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') .
+                ' AS m ON t.profileId = m.profileId WHERE (t.forumId = :forumId AND f.name LIKE :forumName) ' . $sSqlMsg . $sSqlProfileId . ' AND (t.approved = :approved) ORDER BY t.createdDate DESC LIMIT :offset, :limit');
+
         $rStmt->bindValue(':forumName', $sForumName.'%', \PDO::PARAM_STR);
         $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
+
         if(isset($sTopicSubject, $iTopicId))
         {
             $rStmt->bindValue(':topicSubject', $sTopicSubject.'%', \PDO::PARAM_STR);
             $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
         }
+
         if(isset($iProfileId)) $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return (isset($sTopicSubject, $iTopicId)) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
@@ -246,11 +254,9 @@ class ForumModel extends ForumCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 't');
 
         $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ?  't.*, f.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId) AS totalTopics';
+        $sSqlSelect = (!$bCount) ?  'f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId) AS totalTopics';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE t.topicId = :looking ' : ' WHERE t.message LIKE :looking OR t.title LIKE :looking OR m.username LIKE :looking';
-
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
-
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
         if(!$bCount)
@@ -273,6 +279,7 @@ class ForumModel extends ForumCoreModel
             $mData = (int) $oRow->totalTopics;
             unset($oRow);
         }
+
         return $mData;
     }
 
@@ -311,9 +318,7 @@ class ForumModel extends ForumCoreModel
     public function totalTopics($iForumId = null, $iProfileId = null)
     {
         $sSql = (!empty($iForumId) ? ' WHERE forumId = :forumId' : (!empty($iProfileId) ? ' WHERE profileId = :profileId' : ''));
-
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(topicId) AS totalTopics FROM' . Db::prefix('ForumsTopics') . $sSql);
-
         (!empty($iForumId) ? $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT) : (!empty($iProfileId) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : ''));
 
         $rStmt->execute();
@@ -325,7 +330,6 @@ class ForumModel extends ForumCoreModel
     public function totalMessages($iTopicId = null, $iProfileId = null)
     {
         $sSql = (!empty($iTopicId) ? ' WHERE topicId = :topicId' : (!empty($iProfileId) ? ' WHERE profileId = :profileId' : ''));
-
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMessages FROM' . Db::prefix('ForumsMessages') . $sSql);
         (!empty($iTopicId) ? $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT) : (!empty($iProfileId) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : ''));
         $rStmt->execute();
@@ -343,7 +347,7 @@ class ForumModel extends ForumCoreModel
      */
     public function isDuplicateTopic($iProfileId, $sCheckMsg)
     {
-        return Framework\Mvc\Model\SpamModel::detectDuplicate($sCheckMsg, 'message', 'topicId', $iProfileId, 'ForumsTopics');
+        return Framework\Mvc\Model\Spam::detectDuplicate($sCheckMsg, 'message', 'topicId', $iProfileId, 'ForumsTopics');
     }
 
     /**
@@ -355,7 +359,7 @@ class ForumModel extends ForumCoreModel
      */
     public function isDuplicateMessage($iProfileId, $sCheckMsg)
     {
-        return Framework\Mvc\Model\SpamModel::detectDuplicate($sCheckMsg, 'message', 'messageId', $iProfileId, 'ForumsMessages');
+        return Framework\Mvc\Model\Spam::detectDuplicate($sCheckMsg, 'message', 'messageId', $iProfileId, 'ForumsMessages');
     }
 
     /**

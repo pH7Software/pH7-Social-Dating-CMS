@@ -12,6 +12,14 @@ namespace PH7;
 class Cron extends Framework\Cron\Run\Cron
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        // Check delay
+        $this->isAlreadyExec();
+    }
+
     /**
      * Check if the cron has already been executed.
      *

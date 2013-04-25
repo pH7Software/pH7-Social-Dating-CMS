@@ -1,292 +1,319 @@
 
-       {* Creating Objects *}
-       {{ $oSession = new Framework\Session\Session() }}
+    {* Creating Objects *}
+      {{ $oSession = new Framework\Session\Session() }}
 
 
-       {{ $class = (new Framework\Mvc\Request\HttpRequest)->currentUrl() == PH7_URL_ROOT ? 'class="current"' : '' }}
+    {{ $class = (new Framework\Mvc\Request\HttpRequest)->currentUrl() == PH7_URL_ROOT ? 'class="current"' : '' }}
 
-       {* For LoginUserAs of Admin Panel *}
-       {@if( AdminCore::auth() && $oSession->exists('login_user_as') )@}
-         <p class="bold center"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{@lang@}Click here to switch back to admin panel.{@/lang@}</a></p>
-       {@elseif( AdminCore::auth() && $oSession->exists('login_affiliate_as') )@}
-         <p class="bold center"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{@lang@}Click here to switch back to admin panel.{@/lang@}</a></p>
-       {@/if@}
-
-
-       {* Menu for All *}
-     <nav role="navigation">
-       <ul class="top_nav">
-        <li {% $class %} ><a href="{% (AdminCore::auth()) ? $design->url(PH7_ADMIN_MOD,'main','index') : PH7_URL_ROOT %}" title="{@lang('Home')@}">{@lang('Home')@}</a></li>
+    {* For LoginUserAs of Admin Panel *}
+      {@if( AdminCore::auth() && $oSession->exists('login_user_as') )@}
+        <p class="bold center"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{@lang@}Click here to switch back to admin panel.{@/lang@}</a></p>
+      {@elseif( AdminCore::auth() && $oSession->exists('login_affiliate_as') )@}
+        <p class="bold center"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{@lang@}Click here to switch back to admin panel.{@/lang@}</a></p>
+      {@/if@}
 
 
-        {* Guest Menu *}
-
-       {@if( !UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth() )@}
-
-            <li><a href="{{ $design->url('user','signup','step1') }}" title="{@lang('Join Now!')@}">{@lang('Join Now!')@}</a></li>
-            <li><a href="{{ $design->url('user', 'main','login') }}" title="{@lang('Login')@}">{@lang('Login')@}</a></li>
-
-       {@/if@}
+    {* Menu for All *}
+      <nav role="navigation">
+        <ul class="top_nav">
+          <li {% $class %} ><a href="{% (AdminCore::auth()) ? $design->url(PH7_ADMIN_MOD,'main','index') : PH7_URL_ROOT %}" title="{@lang('Home')@}">{@lang('Home')@}</a></li>
 
 
-       {* Menu Guest, Member and Admin *}
+    {* Guest Menu *}
 
-       {@if(!AffiliateCore::auth())@}
+      {@if( !UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth() )@}
 
-        <li><a href="{{ $design->url('user', 'browse','index') }}" title="{@lang('The Members')@}">{@lang('People')@}</a>
-            <ul>
-               <li><a href="{{ $design->url('user', 'browse','index') }}" title="{@lang('The Members')@}">{@lang('People')@}</a></li>
+        <li><a href="{{ $design->url('user','signup','step1') }}" title="{@lang('Join Now!')@}">{@lang('Join Now!')@}</a></li>
+        <li><a href="{{ $design->url('user', 'main','login') }}" title="{@lang('Login')@}">{@lang('Login')@}</a></li>
 
-               <li><a href="{{ $design->url('user','search','index') }}" title="{@lang('Search the members')@}">{@lang('Search')@}</a>
-                 <ul>
-                   <li><a href="{{ $design->url('user','search','quick') }}" title="{@lang('Quick Search')@}">{@lang('Quick Search')@}</a></li>
-                   <li><a href="{{ $design->url('user','search','advanced') }}" title="{@lang('Advanced Search')@}">{@lang('Advanced Search')@}</a></li>
-                 </ul>
-               </li>
-            </ul>
+      {@/if@}
+
+
+    {* Menu Guest, Member and Admin *}
+
+      {@if(!AffiliateCore::auth())@}
+
+        <li><a href="{{ $design->url('user', 'browse', 'index') }}" title="{@lang('Members')@}">{@lang('People')@}</a>
+          <ul>
+            <li><a href="{{ $design->url('user', 'browse', 'index') }}" rel="nofollow" title="{@lang('Members')@}">{@lang('People')@}</a></li>
+
+            <li><a href="{{ $design->url('user','search', 'index') }}" title="{@lang('Search the members')@}">{@lang('Search')@}</a>
+              <ul>
+                <li><a href="{{ $design->url('user', 'search', 'quick') }}" title="{@lang('Quick Search')@}">{@lang('Quick Search')@}</a></li>
+                <li><a href="{{ $design->url('user', 'search', 'advanced') }}" title="{@lang('Advanced Search')@}">{@lang('Advanced Search')@}</a></li>
+              </ul>
+            </li>
+
+            <li><a href="{{ $design->url('user', 'birthday', 'index') }}" title="{@lang('Users Birthday')@}">{@lang('Birthday')@}</a>
+              <ul>
+                <li><a href="{{ $design->url('user', 'birthday', 'index', 'all') }}" rel="nofollow" title="{@lang('All Birthday')@}">{@lang('All Birthday')@}</a></li>
+                <li><a href="{{ $design->url('user', 'birthday', 'index', 'male') }}" title="{@lang('Men Birthday')@}">{@lang('Men Birthday')@}</a></li>
+                <li><a href="{{ $design->url('user', 'birthday', 'index', 'female') }}" title="{@lang('Women Birthday')@}">{@lang('Women Birthday')@}</a></li>
+                <li><a href="{{ $design->url('user', 'birthday', 'index', 'couple') }}" title="{@lang('Couples Birthday')@}">{@lang('Couples Birthday')@}</a></li>
+              </ul>
+            </li>
+          </ul>
         </li>
-       {@/if@}
+      {@/if@}
 
 
-       {* Menu Guest, Member and LoginUserAs of Admin Panel *}
+    {* Menu Guest, Member and LoginUserAs of Admin Panel *}
 
-       {@if( ( !AffiliateCore::auth() && !AdminCore::auth() ) || $oSession->exists('login_user_as') )@}
+      {@if( ( !AffiliateCore::auth() && !AdminCore::auth() ) || $oSession->exists('login_user_as') )@}
 
         <li><a href="{{ $design->url('chat','home','index') }}" title="{@lang('The Free Chat Rooms')@}" data-load="ajax">{@lang('Chat Rooms')@}</a>
-            <ul>
-              <li><a href="{{ $design->url('chat','home','index') }}" title="{@lang('Video Chat')@}" data-load="ajax">{@lang('Chat')@}</a></li>
-              <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{@lang('Chat Roulette')@}">{@lang('Chatroulette')@}</a></li>
-            </ul>
-        </li>
-
-        <li><a href="{{ $design->url('picture','main','index') }}" title="{@lang('Photo Gallery')@}" data-load="ajax">{@lang('Pictures')@}</a>
-            <ul>
-              <li><a href="{{ $design->url('picture','main','index') }}" title="{@lang('Photo Gallery')@}" data-load="ajax">{@lang('Pictures')@}</a></li>
-              <li><a href="{{ $design->url('hotornot','main','rating') }}" title="{@lang('Hot Or Not')@}">{@lang('Hot Or Not')@}</a></li>
-              <li><a href="{{ $design->url('picture','main','search') }}" title="{@lang('Search a Picture')@}">{@lang('Search')@}</a></li>
-            </ul>
-        </li>
-
-        <li><a href="{{ $design->url('video','main','index') }}" title="{@lang('Video Gallery')@}" data-load="ajax">{@lang('Videos')@}</a>
-            <ul>
-              <li><a href="{{ $design->url('video','main','index') }}" title="{@lang('Video Gallery')@}" data-load="ajax">{@lang('Videos')@}</a></li>
-              <li><a href="{{ $design->url('video','main','search') }}" title="{@lang('Search a Video')@}">{@lang('Search')@}</a></li>
-            </ul>
-        </li>
-
-        <li><a href="{{ $design->url('game','main','index') }}" title="{@lang('Games Zone')@}">{@lang('Game')@}</a>
-            <ul>
-               <li><a href="{{ $design->url('game','main','index') }}" title="{@lang('Games Zone')@}">{@lang('Game')@}</a></li>
-               <li><a href="{{ $design->url('game','main','search') }}" title="{@lang('Search a Game')@}">{@lang('Search')@}</a></li>
-            </ul>
-        </li>
-
-        <li><a href="{{ $design->url('forum','forum','index') }}" title="{@lang('Forums')@}" data-load="ajax">{@lang('Forum')@}</a>
-            <ul>
-               <li><a href="{{ $design->url('forum','forum','index') }}" title="{@lang('Forums')@}" data-load="ajax">{@lang('Forum')@}</a></li>
-               <li><a href="{{ $design->url('forum','forum','search') }}" title="{@lang('Search a Topic')@}">{@lang('Search')@}</a></li>
-            </ul>
-        </li>
-
-        <li><a href="{{ $design->url('note','main','index') }}" title="{@lang('Community Notes')@}">{@lang('Notes')@}</a>
-            <ul>
-               <li><a href="{{ $design->url('note','main','index') }}" title="{@lang('Community Notes')@}">{@lang('Notes')@}</a></li>
-               <li><a href="{{ $design->url('note','main','search') }}" title="{@lang('Search a Note')@}">{@lang('Search')@}</a></li>
-            </ul>
-        </li>
-
-       {@/if@}
-
-
-       {* Member Menu *}
-
-       {@if( UserCore::auth() && ( !AffiliateCore::auth() && !AdminCore::auth() ) || $oSession->exists('login_user_as') )@}
-
-         <li><a href="{{ $design->url('mail','main','inbox') }}" title="{@lang('My Emails')@}">{@lang('Email')@} ({count_unread_mail})</a>
           <ul>
-          <li><a href="{{ $design->url('mail','main','compose') }}" title="{@lang('Compose')@}">{@lang('Compose')@}</a></li>
-          <li><a href="{{ $design->url('mail','main','inbox') }}" title="{@lang('Inbox')@}">{@lang('Inbox')@}</a></li>
-          <li><a href="{{ $design->url('mail','main','outbox') }}" title="{@lang('Outbox')@}">{@lang('Outbox')@}</a></li>
-          <li><a href="{{ $design->url('mail','main','trash') }}" title="{@lang('Trash')@}">{@lang('Trash')@}</a></li>
-          <li><a href="{{ $design->url('mail','main','search') }}" title="{@lang('Search')@}">{@lang('Search')@}</a></li>
-          </ul></li>
-
-         <li><a href="{{ $design->url('user','setting','index') }}" title="{@lang('My settings')@}">{@lang('Settings')@}</a>
-         <noscript><ul>
-         <li><a href="{{ $design->url('user','setting','edit') }}">{@lang('Edit Profile')@}</a></li>
-         <li><a href="{{ $design->url('user','setting','design') }}">{@lang('Design Profile')@}</a></li>
-         <li><a href="{{ $design->url('user','setting','notification') }}">{@lang('Notifications')@}</a></li>
-         <li><a href="{{ $design->url('user','setting','privacy') }}">{@lang('Privacy Setting')@}</a></li>
-         <li><a href="{{ $design->url('user','setting','password') }}">{@lang('Change Password')@}</a></li>
-         </ul></noscript></li>
-
-         <li><a href="{{ $design->url('user','account','index') }}" title="{@lang('My account')@}">{@lang('Account')@}</a>
-         <ul>
-         <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{@lang('My Profilet')@}">{@lang('My Profile')@}</a></li>
-         <li><a href="{{ $design->url('user','setting','avatar') }}" title="{@lang('My Avatar')@}">{@lang('My Avatar')@}</a></li>
-
-         <li><a href="{{ $design->url('picture','main','index') }}" title="{@lang('Photo Gallery')@}" data-load="ajax">{@lang('Photo Gallery')@}</a>
-         <ul>
-         <li><a href="{{ $design->url('picture','main','addalbum') }}" title="{@lang('Add an Album')@}">{@lang('Add an Album')@}</a></li>
-         <li><a href="{{ $design->url('picture','main','albums', $oSession->get('member_username')) }}" title="{@lang('My Albums')@}" data-load="ajax">{@lang('My Albums')@}</a></li>
-         </ul></li>
-
-         <li><a href="{{ $design->url('video','main','index') }}" title="{@lang('Videos Gallery')@}" data-load="ajax">{@lang('Videos')@}</a>
-         <ul>
-         <li><a href="{{ $design->url('video','main','addalbum') }}" title="{@lang('Add an Album')@}">{@lang('Add an Album')@}</a></li>
-         <li><a href="{{ $design->url('video','main','albums', $oSession->get('member_username')) }}" title="{@lang('My Albums')@}" data-load="ajax">{@lang('My Albums')@}</a></li>
-         </ul></li>
-
-         <li><a href="{{ $design->url('note','main','index') }}" title="{@lang('Notes')@}">{@lang('Notes')@}</a>
-         <ul>
-         <li><a href="{{ $design->url('note','main','add') }}" title="{@lang('Add a Note')@}">{@lang('Add a Note')@}</a></li>
-         <li><a href="{{ $design->url('note','main','author', $oSession->get('member_username')) }}" title="{@lang('My Notes')@}">{@lang('My Notes')@}</a></li>
-         </ul></li>
-
-         <li><a href="{{ $design->url('user','friend','index') }}" title="{@lang('Friends Management')@}">{@lang('Friends Management')@} ({count_pen_friend_request})</a>
-              <ul>
-                  <li><a href="{{ $design->url('user','friend','index') }}" title="{@lang('Friends List')@}">{@lang('Friends List')@}</a></li>
-                  <li><a href="{{ $design->url('user','friend','search',$oSession->get('member_username')) }}" title="{@lang('Find a friend in my list')@}">{@lang('Find a Friend')@}</a></li>
-              </ul>
-         </li>
-
-         <li><a href="{{ $design->url('user','visitor','index') }}" title="{@lang('Who Visited My Profile')@}">{@lang('Who See Me')@}</a>
-           <ul>
-             <li><a href="{{ $design->url('user','visitor','index') }}" title="{@lang('Who Visited My Profile')@}">{@lang('Who See Me')@}</a></li>
-             <li><a href="{{ $design->url('user','visitor','search') }}" title="{@lang('Find someone who has visited my profile')@}">{@lang('Find some Visitor(s)')@}</a></li>
-           </ul>
-         </li>
-
-         <li><a href="{{ $design->url('user','main','logout') }}" title="{@lang('Logout')@}">{@lang('Logout')@}</a></li>
-         </ul></li>
-
-      {@/if@}
-
-
-      {* Affiliate Menu *}
-
-      {@if( AffiliateCore::auth() && ( !UserCore::auth() && !AdminCore::auth() || $oSession->exists('login_affiliate_as') ) )@}
-
-      <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{@lang('Gets Banners')@}">{@lang('Banners')@}</a></li>
-
-      <li><a href="{{ $design->url('affiliate','account','index') }}" title="{@lang('My account')@}">{@lang('Account')@}</a>
-      <ul>
-        <li><a href="{{ $design->url('affiliate','account','index') }}" title="{@lang('My account')@}">{@lang('Account')@}</a></li>
-        <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{@lang('Edit account')@}">{@lang('Edit Account')@}</a></li>
-        <li><a href="{{ $design->url('affiliate','account','password') }}" title="{@lang('Change Password')@}">{@lang('Change Password')@}</a></li>
-        <li><a href="{{ $design->url('affiliate','home','logout') }}" title="{@lang('Logout')@}">{@lang('Logout')@}</a></li>
-      </ul></li>
-
-      {@/if@}
-
-
-      {* Admin Menu *}
-
-      {@if( AdminCore::auth() && ( !UserCore::auth() && !AffiliateCore::auth() ) )@}
-
-         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{@lang('Users/Admins')@}">{@lang('Users')@}</a>
-         <ul>
-           <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{@lang('Browse Users')@}">{@lang('Users')@}</a>
-           <ul>
-             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{@lang('Browse Users')@}">{@lang('Browse')@}</a></li>
-             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','search') }}" title="{@lang('Search a Users')@}">{@lang('Search')@}</a></li>
-             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'report','index') }}" title="{@lang('Report')@}">{@lang('Report')@}</a></li>
-             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','add') }}" title="{@lang('Add User')@}">{@lang('Add User')@}</a></li>
-             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{@lang('Import Users')@}">{@lang('Import Users')@}</a></li>
-           </ul></li>
-           <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}" title="{@lang('Browse Admins')@}">{@lang('Admins')@}</a>
-           <ul>
-             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}" title="{@lang('Browse Admins')@}">{@lang('Browse')@}</a></li>
-             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','search') }}" title="{@lang('Search an Admin')@}">{@lang('Search')@}</a></li>
-             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','add') }}" title="{@lang('Add Admin')@}">{@lang('Add Admin')@}</a></li>
-           </ul></li>
-         </ul></li>
-
-         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{@lang('Settings')@}">{@lang('Settings')@}</a>
-         <ul>
-         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{@lang('General Settings')@}">{@lang('General')@}</a></li>
-         <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting','metamain') }}" title="{@lang('Settings')@}">{@lang('Meta Tags')@}</a></li>
-         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','ads') }}" title="{@lang('Advertisement')@}">{@lang('Advertisement')@}</a></li>
-         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{@lang('Analytics Code')@}">{@lang('Analytics Code')@}</a></li>
-         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{@lang('Style')@}">{@lang('Style')@}</a></li>
-         </ul></li>
-
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','index') }}" title="{@lang('Informations')@}">{@lang('Info')@}</a>
-        <ul>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','stat') }}" title="{@lang('Site Statistics')@}">{@lang('Site Stats')@}</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','software') }}" title="{@lang('Software')@}">{@lang('Software')@}</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','language') }}" title="{@lang('PHP Info')@}">{@lang('PHP')@}</a></li>
-        </ul></li>
-
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{@lang('Modules Manager')@}">{@lang('Modules Manager')@}</a>
-        <ul>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{@lang('Modules Manager')@}">{@lang('Modules Manager')@}</a></li>
-        <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{@lang('Mass Mailer')@}">{@lang('Newsletters')@}</a></li>
-        <li><a href="{{ $design->url('forum','admin','index') }}" title="{@lang('Forum Admin')@}">{@lang('Forum')@}</a></li>
-        <li><a href="{{ $design->url('blog','admin','index') }}" title="{@lang('Blog Admin')@}">{@lang('Blog')@}</a></li>
-        <li><a href="{{ $design->url('game','admin','index') }}" title="{@lang('Game Admin')@}">{@lang('Game')@}</a>
-        <ul>
-         <li><a href="{{ $design->url('game','admin','add') }}" title="{@lang('Add a Game')@}">{@lang('Add a Game')@}</a></li>
-        </ul></li>
-
-        <li><a href="{{ $design->url('affiliate','admin','index') }}" title="{@lang('Affiliate Admin Manager')@}">{@lang('Affiliate')@}</a>
-        <ul>
-         <li><a href="{{ $design->url('affiliate','admin','banner') }}" title="{@lang('Banners Manager')@}">{@lang('Banners')@}</a></li>
-         <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{@lang('Affiliated List')@}">{@lang('Affiliated')@}</a></li>
-         <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{@lang('Search an Affiliated')@}">{@lang('Search an Affiliated')@}</a></li>
-         <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{@lang('Add Affiliate')@}">{@lang('Add Affiliate')@}</a></li>
-        </ul></li>
-
-        <li><a href="{{ $design->url('payment','admin','index') }}" title="{@lang('Payment System')@}">{@lang('Payment')@}</a>
-        <ul>
-         <li><a href="{{ $design->url('payment','admin','membershiplist') }}" title="{@lang('Memberships List')@}">{@lang('Memberships List')@}</a></li>
-         <li><a href="{{ $design->url('payment','admin','addmembership') }}" title="{@lang('Membership Management')@}">{@lang('Add a new plans')@}</a></li>
-         <li><a href="{{ $design->url('payment','admin','config') }}" title="{@lang('Payment Gateway Config')@}">{@lang('Gateway Config')@}</a></li>
-        </ul></li>
-
-        <li><a href="{{ $design->url('mail','admin','index') }}" title="{@lang('Email Management')@}">{@lang('Email Management')@}</a>
-        <ul>
-        <li><a href="{{ $design->url('mail','admin','msglist') }}" title="{@lang('Messages Monitor')@}">{@lang('Messages Monitor')@}</a></li>
-        <li><a href="{{ $design->url('mail','admin','search') }}" title="{@lang('Search Email')@}">{@lang('Search Message')@}</a></li>
-        </ul></li>
-
-        <li><a href="{{ $design->url('connect', 'admin', 'config') }}">{@lang('Universal Login Config')@}</a></li>
-
-        </ul></li>
-
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','index') }}" title="{@lang('User Moderation')@}">{@lang('Moderation')@}</a>
-        <ul>
-
-        {* Moderate Count *}
-        {{
-          $oModeratorModel = new ModeratorCoreModel();
-
-          $count_moderate_total_album_picture = $oModeratorModel->totalAlbumsPicture();
-          $count_moderate_total_picture = $oModeratorModel->totalPictures();
-          $count_moderate_total_album_video = $oModeratorModel->totalAlbumsVideo();
-          $count_moderate_total_video = $oModeratorModel->totalVideos();
-          $count_moderate_total_avatar = $oModeratorModel->totalAvatars();
-          $count_moderate_total_background = $oModeratorModel->totalBackgrounds();
-          $count_moderate_total_note = $oModeratorModel->totalNotes();
-
-          unset($oModeratorModel);
-        }}
-
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumpicture') }}" title="{@lang('Moderate Albums')@}">{@lang('Picture Album')@} ({count_moderate_total_album_picture})</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{@lang('Moderate Pictures')@}">{@lang('Picture')@} ({count_moderate_total_picture})</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumvideo') }}" title="{@lang('Moderate Albums')@}">{@lang('Video Album')@} ({count_moderate_total_album_video})</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{@lang('Moderate Videos')@}">{@lang('Video')@} ({count_moderate_total_video})</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{@lang('Moderate Avatars')@}">{@lang('Avatar')@} ({count_moderate_total_avatar})</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{@lang('Moderate Profile Background')@}">{@lang('Profile Background')@} ({count_moderate_total_background})</a></li>
-
-        <li><a href="{{ $design->url('note','admin','index') }}" title="{@lang('Moderate Note')@}">{@lang('Note')@} ({count_moderate_total_note})</a>
-          <ul>
-            <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{@lang('Moderate the Note Posts')@}">{@lang('Note Posts')@} ({count_moderate_total_note})</a></li>
+            <li><a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{@lang('Video Chat')@}" data-load="ajax">{@lang('Chat')@}</a></li>
+            <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{@lang('Chat Roulette')@}">{@lang('Chatroulette')@}</a></li>
           </ul>
         </li>
 
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{@lang('Moderate the Pictures Webcam')@}">{@lang('Pictures Webcam')@}</a></li>
-        </ul></li>
+        <li><a href="{{ $design->url('picture','main','index') }}" title="{@lang('Photo Gallery')@}" data-load="ajax">{@lang('Pictures')@}</a>
+          <ul>
+            <li><a href="{{ $design->url('picture','main','index') }}" rel="nofollow" title="{@lang('Photo Gallery')@}" data-load="ajax">{@lang('Pictures')@}</a></li>
+            <li><a href="{{ $design->url('hotornot','main','rating') }}" title="{@lang('Hot Or Not')@}">{@lang('Hot Or Not')@}</a></li>
+            <li><a href="{{ $design->url('picture','main','search') }}" title="{@lang('Search a Picture')@}">{@lang('Search')@}</a></li>
+          </ul>
+        </li>
+
+        <li><a href="{{ $design->url('video','main','index') }}" title="{@lang('Video Gallery')@}" data-load="ajax">{@lang('Videos')@}</a>
+          <ul>
+            <li><a href="{{ $design->url('video','main','index') }}" rel="nofollow" title="{@lang('Video Gallery')@}" data-load="ajax">{@lang('Videos')@}</a></li>
+            <li><a href="{{ $design->url('video','main','search') }}" title="{@lang('Search a Video')@}">{@lang('Search')@}</a></li>
+          </ul>
+        </li>
+
+        <li><a href="{{ $design->url('game','main','index') }}" title="{@lang('Games Zone')@}">{@lang('Game')@}</a>
+          <ul>
+            <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{@lang('Games Zone')@}">{@lang('Game')@}</a></li>
+            <li><a href="{{ $design->url('game','main','search') }}" title="{@lang('Search a Game')@}">{@lang('Search')@}</a></li>
+          </ul>
+        </li>
+
+        <li><a href="{{ $design->url('forum','forum','index') }}" title="{@lang('Forums')@}" data-load="ajax">{@lang('Forum')@}</a>
+          <ul>
+           <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{@lang('Forums')@}" data-load="ajax">{@lang('Forum')@}</a></li>
+            <li><a href="{{ $design->url('forum','forum','search') }}" title="{@lang('Search a Topic')@}">{@lang('Search')@}</a></li>
+          </ul>
+        </li>
+
+        <li><a href="{{ $design->url('note','main','index') }}" title="{@lang('Community Notes')@}">{@lang('Notes')@}</a>
+          <ul>
+            <li><a href="{{ $design->url('note','main','index') }}" rel="nofollow" title="{@lang('Community Notes')@}">{@lang('Notes')@}</a></li>
+            <li><a href="{{ $design->url('note','main','search') }}" title="{@lang('Search a Note')@}">{@lang('Search')@}</a></li>
+          </ul>
+        </li>
+
+      {@/if@}
+
+
+    {* Member Menu *}
+
+        {@if( UserCore::auth() && ( !AffiliateCore::auth() && !AdminCore::auth() ) || $oSession->exists('login_user_as') )@}
+
+          <li><a href="{{ $design->url('mail','main','inbox') }}" title="{@lang('My Emails')@}">{@lang('Email')@} ({count_unread_mail})</a>
+            <ul>
+              <li><a href="{{ $design->url('mail','main','compose') }}" title="{@lang('Compose')@}">{@lang('Compose')@}</a></li>
+              <li><a href="{{ $design->url('mail','main','inbox') }}" title="{@lang('Inbox')@}">{@lang('Inbox')@}</a></li>
+              <li><a href="{{ $design->url('mail','main','outbox') }}" title="{@lang('Outbox')@}">{@lang('Outbox')@}</a></li>
+             <li><a href="{{ $design->url('mail','main','trash') }}" title="{@lang('Trash')@}">{@lang('Trash')@}</a></li>
+             <li><a href="{{ $design->url('mail','main','search') }}" title="{@lang('Search')@}">{@lang('Search')@}</a></li>
+           </ul>
+         </li>
+
+          <li><a href="{{ $design->url('user','setting','index') }}" title="{@lang('My settings')@}">{@lang('Settings')@}</a>
+            <noscript>
+            <ul>
+              <li><a href="{{ $design->url('user','setting','edit') }}">{@lang('Edit Profile')@}</a></li>
+              <li><a href="{{ $design->url('user','setting','design') }}">{@lang('Design Profile')@}</a></li>
+              <li><a href="{{ $design->url('user','setting','notification') }}">{@lang('Notifications')@}</a></li>
+              <li><a href="{{ $design->url('user','setting','privacy') }}">{@lang('Privacy Setting')@}</a></li>
+              <li><a href="{{ $design->url('user','setting','password') }}">{@lang('Change Password')@}</a></li>
+            </ul>
+            </noscript>
+          </li>
+
+          <li><a href="{{ $design->url('user','account','index') }}" title="{@lang('My account')@}">{@lang('Account')@}</a>
+            <ul>
+              <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{@lang('My Profilet')@}">{@lang('My Profile')@}</a></li>
+              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{@lang('My Avatar')@}">{@lang('My Avatar')@}</a></li>
+              <li><a href="{{ $design->url('picture','main','index') }}" title="{@lang('Photo Gallery')@}" data-load="ajax">{@lang('Photo Gallery')@}</a>
+                <ul>
+                  <li><a href="{{ $design->url('picture','main','addalbum') }}" title="{@lang('Add an Album')@}">{@lang('Add an Album')@}</a></li>
+                  <li><a href="{{ $design->url('picture','main','albums', $oSession->get('member_username')) }}" title="{@lang('My Albums')@}" data-load="ajax">{@lang('My Albums')@}</a></li>
+                </ul>
+              </li>
+
+              <li><a href="{{ $design->url('video','main','index') }}" title="{@lang('Videos Gallery')@}" data-load="ajax">{@lang('Videos')@}</a>
+                <ul>
+                  <li><a href="{{ $design->url('video','main','addalbum') }}" title="{@lang('Add an Album')@}">{@lang('Add an Album')@}</a></li>
+                  <li><a href="{{ $design->url('video','main','albums', $oSession->get('member_username')) }}" title="{@lang('My Albums')@}" data-load="ajax">{@lang('My Albums')@}</a></li>
+                </ul>
+              </li>
+
+              <li><a href="{{ $design->url('note','main','index') }}" title="{@lang('Notes')@}">{@lang('Notes')@}</a>
+                <ul>
+                  <li><a href="{{ $design->url('note','main','add') }}" title="{@lang('Add a Note')@}">{@lang('Add a Note')@}</a></li>
+                  <li><a href="{{ $design->url('note','main','author', $oSession->get('member_username')) }}" title="{@lang('My Notes')@}">{@lang('My Notes')@}</a></li>
+                </ul>
+              </li>
+
+              <li><a href="{{ $design->url('user','friend','index') }}" title="{@lang('Friends Management')@}">{@lang('Friends Management')@} ({count_pen_friend_request})</a>
+                <ul>
+                  <li><a href="{{ $design->url('user','friend','index') }}" title="{@lang('Friends List')@}">{@lang('Friends List')@}</a></li>
+                  <li><a href="{{ $design->url('user','friend','search',$oSession->get('member_username')) }}" title="{@lang('Find a friend in my list')@}">{@lang('Find a Friend')@}</a></li>
+                </ul>
+              </li>
+
+              <li><a href="{{ $design->url('user','visitor','index') }}" title="{@lang('Who Visited My Profile')@}">{@lang('Who See Me')@}</a>
+                <ul>
+                  <li><a href="{{ $design->url('user','visitor','index') }}" title="{@lang('Who Visited My Profile')@}">{@lang('Who See Me')@}</a></li>
+                  <li><a href="{{ $design->url('user','visitor','search') }}" title="{@lang('Find someone who has visited my profile')@}">{@lang('Find some Visitor(s)')@}</a></li>
+                </ul>
+              </li>
+
+              <li><a href="{{ $design->url('user','main','logout') }}" title="{@lang('Logout')@}">{@lang('Logout')@}</a></li>
+            </ul>
+          </li>
+
+      {@/if@}
+
+
+    {* Affiliate Menu *}
+
+      {@if( AffiliateCore::auth() && ( !UserCore::auth() && !AdminCore::auth() || $oSession->exists('login_affiliate_as') ) )@}
+
+        <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{@lang('Gets Banners')@}">{@lang('Banners')@}</a></li>
+
+        <li><a href="{{ $design->url('affiliate','account','index') }}" title="{@lang('My account')@}">{@lang('Account')@}</a>
+          <ul>
+            <li><a href="{{ $design->url('affiliate','account','index') }}" title="{@lang('My account')@}">{@lang('Account')@}</a></li>
+            <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{@lang('Edit account')@}">{@lang('Edit Account')@}</a></li>
+            <li><a href="{{ $design->url('affiliate','account','password') }}" title="{@lang('Change Password')@}">{@lang('Change Password')@}</a></li>
+            <li><a href="{{ $design->url('affiliate','home','logout') }}" title="{@lang('Logout')@}">{@lang('Logout')@}</a></li>
+          </ul>
+        </li>
+
+      {@/if@}
+
+
+    {* Admin Menu *}
+
+      {@if( AdminCore::auth() && ( !UserCore::auth() && !AffiliateCore::auth() ) )@}
+
+        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{@lang('Users/Admins')@}">{@lang('Users')@}</a>
+          <ul>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{@lang('Browse Users')@}">{@lang('Users')@}</a>
+              <ul>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{@lang('Browse Users')@}">{@lang('Browse')@}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','search') }}" title="{@lang('Search a Users')@}">{@lang('Search')@}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'report','index') }}" title="{@lang('Report')@}">{@lang('Report')@}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','add') }}" title="{@lang('Add User')@}">{@lang('Add User')@}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{@lang('Import Users')@}">{@lang('Import Users')@}</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}" title="{@lang('Browse Admins')@}">{@lang('Admins')@}</a>
+              <ul>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}" title="{@lang('Browse Admins')@}">{@lang('Browse')@}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','search') }}" title="{@lang('Search an Admin')@}">{@lang('Search')@}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','add') }}" title="{@lang('Add Admin')@}">{@lang('Add Admin')@}</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{@lang('Settings')@}">{@lang('Settings')@}</a>
+          <ul>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{@lang('General Settings')@}">{@lang('General')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting','metamain') }}" title="{@lang('Settings')@}">{@lang('Meta Tags')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','ads') }}" title="{@lang('Advertisement')@}">{@lang('Advertisement')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{@lang('Analytics Code')@}">{@lang('Analytics Code')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{@lang('Style')@}">{@lang('Style')@}</a></li>
+          </ul>
+        </li>
+
+        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','index') }}" title="{@lang('Informations')@}">{@lang('Info')@}</a>
+          <ul>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','stat') }}" title="{@lang('Site Statistics')@}">{@lang('Site Stats')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','software') }}" title="{@lang('Software')@}">{@lang('Software')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','language') }}" title="{@lang('PHP Info')@}">{@lang('PHP')@}</a></li>
+          </ul>
+        </li>
+
+        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{@lang('Modules Manager')@}">{@lang('Modules Manager')@}</a>
+          <ul>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{@lang('Modules Manager')@}">{@lang('Modules Manager')@}</a></li>
+            <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{@lang('Mass Mailer')@}">{@lang('Newsletters')@}</a></li>
+            <li><a href="{{ $design->url('forum','admin','index') }}" title="{@lang('Forum Admin')@}">{@lang('Forum')@}</a></li>
+            <li><a href="{{ $design->url('blog','admin','index') }}" title="{@lang('Blog Admin')@}">{@lang('Blog')@}</a></li>
+            <li><a href="{{ $design->url('game','admin','index') }}" title="{@lang('Game Admin')@}">{@lang('Game')@}</a>
+              <ul>
+                <li><a href="{{ $design->url('game','admin','add') }}" title="{@lang('Add a Game')@}">{@lang('Add a Game')@}</a></li>
+              </ul>
+            </li>
+
+            <li><a href="{{ $design->url('affiliate','admin','index') }}" title="{@lang('Affiliate Admin Manager')@}">{@lang('Affiliate')@}</a>
+              <ul>
+                <li><a href="{{ $design->url('affiliate','admin','banner') }}" title="{@lang('Banners Manager')@}">{@lang('Banners')@}</a></li>
+                <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{@lang('Affiliated List')@}">{@lang('Affiliated')@}</a></li>
+                <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{@lang('Search an Affiliated')@}">{@lang('Search an Affiliated')@}</a></li>
+                <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{@lang('Add Affiliate')@}">{@lang('Add Affiliate')@}</a></li>
+              </ul>
+            </li>
+
+            <li><a href="{{ $design->url('payment','admin','index') }}" title="{@lang('Payment System')@}">{@lang('Payment')@}</a>
+              <ul>
+                <li><a href="{{ $design->url('payment','admin','membershiplist') }}" title="{@lang('Memberships List')@}">{@lang('Memberships List')@}</a></li>
+                <li><a href="{{ $design->url('payment','admin','addmembership') }}" title="{@lang('Membership Management')@}">{@lang('Add a new plans')@}</a></li>
+                <li><a href="{{ $design->url('payment','admin','config') }}" title="{@lang('Payment Gateway Config')@}">{@lang('Gateway Config')@}</a></li>
+              </ul>
+            </li>
+
+            <li><a href="{{ $design->url('mail','admin','index') }}" title="{@lang('Email Management')@}">{@lang('Email Management')@}</a>
+              <ul>
+                <li><a href="{{ $design->url('mail','admin','msglist') }}" title="{@lang('Messages Monitor')@}">{@lang('Messages Monitor')@}</a></li>
+                <li><a href="{{ $design->url('mail','admin','search') }}" title="{@lang('Search Email')@}">{@lang('Search Message')@}</a></li>
+              </ul>
+            </li>
+
+            <li><a href="{{ $design->url('connect', 'admin', 'config') }}">{@lang('Universal Login Config')@}</a></li>
+
+          </ul>
+        </li>
+
+        {* Moderate Count *}
+          {{
+            $oModeratorModel = new ModeratorCoreModel();
+
+            $count_moderate_total_album_picture = $oModeratorModel->totalAlbumsPicture();
+            $count_moderate_total_picture = $oModeratorModel->totalPictures();
+            $count_moderate_total_album_video = $oModeratorModel->totalAlbumsVideo();
+            $count_moderate_total_video = $oModeratorModel->totalVideos();
+            $count_moderate_total_avatar = $oModeratorModel->totalAvatars();
+            $count_moderate_total_background = $oModeratorModel->totalBackgrounds();
+            $count_moderate_total_note = $oModeratorModel->totalNotes();
+
+            unset($oModeratorModel);
+          }}
+
+        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','index') }}" title="{@lang('User Moderation')@}">{@lang('Moderation')@}</a>
+          <ul>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumpicture') }}" title="{@lang('Moderate Albums')@}">{@lang('Picture Album')@} ({count_moderate_total_album_picture})</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{@lang('Moderate Pictures')@}">{@lang('Picture')@} ({count_moderate_total_picture})</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumvideo') }}" title="{@lang('Moderate Albums')@}">{@lang('Video Album')@} ({count_moderate_total_album_video})</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{@lang('Moderate Videos')@}">{@lang('Video')@} ({count_moderate_total_video})</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{@lang('Moderate Avatars')@}">{@lang('Avatar')@} ({count_moderate_total_avatar})</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{@lang('Moderate Profile Background')@}">{@lang('Profile Background')@} ({count_moderate_total_background})</a></li>
+
+            <li><a href="{{ $design->url('note','admin','index') }}" title="{@lang('Moderate Note')@}">{@lang('Note')@} ({count_moderate_total_note})</a>
+              <ul>
+                <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{@lang('Moderate the Note Posts')@}">{@lang('Note Posts')@} ({count_moderate_total_note})</a></li>
+              </ul>
+            </li>
+
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{@lang('Moderate the Pictures Webcam')@}">{@lang('Pictures Webcam')@}</a></li>
+          </ul>
+        </li>
 
         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','index') }}" title="{@lang('File Management')@}">{@lang('File Management')@}</a>
           <ul>
@@ -301,26 +328,29 @@
         </li>
 
         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','index') }}" title="{@lang('Tools')@}">{@lang('Tools')@}</a>
-        <ul>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','index') }}" title="{@lang('Tools')@}">{@lang('Tools')@}</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','backup') }}" title="{@lang('Backup Management')@}">{@lang('Backup Management')@}</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{@lang('Cache Manegement')@}">{@lang('Cache Manegement')@}</a>
-        <ul>
-          <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cacheconfig') }}" title="{@lang('Cache Settings')@}">{@lang('Cache Settings')@}</a></li>
-        </ul></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','freeSpace') }}" title="{@lang('Free Space Server')@}">{@lang('Free Space Server')@}</a></li>
-        </ul></li>
+          <ul>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','index') }}" title="{@lang('Tools')@}">{@lang('Tools')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','backup') }}" title="{@lang('Backup Management')@}">{@lang('Backup Management')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{@lang('Cache Manegement')@}">{@lang('Cache Manegement')@}</a>
+              <ul>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cacheconfig') }}" title="{@lang('Cache Settings')@}">{@lang('Cache Settings')@}</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','freeSpace') }}" title="{@lang('Free Space Server')@}">{@lang('Free Space Server')@}</a></li>
+          </ul>
+        </li>
 
         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','index') }}" title="{@lang('Your Account')@}">{@lang('Account')@}</a>
-        <ul>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{@lang('Edit your Account')@}">{@lang('Edit Account')@}</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','password') }}" title="{@lang('Change Password')@}">{@lang('Change Password')@}</a></li>
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{@lang('Logout')@}">{@lang('Logout')@}</a></li>
-        </ul></li>
+          <ul>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{@lang('Edit your Account')@}">{@lang('Edit Account')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','password') }}" title="{@lang('Change Password')@}">{@lang('Change Password')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{@lang('Logout')@}">{@lang('Logout')@}</a></li>
+          </ul>
+        </li>
 
       {@/if@}
 
       </ul>
     </nav>
 
-      {{ unset($oSession) }}
+    {{ unset($oSession) }}

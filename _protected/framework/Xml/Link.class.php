@@ -19,25 +19,25 @@ class Link
     private $_oXml, $_sPath, $_aRet = array();
 
     /**
-     * The constructor with the instance of the DOMDocument object.
+     * Constructor with the instance of the DOMDocument object.
      *
-     * @param string $sPath The path to the XML file.
+     * @param string $sPath The path to the XML file. You can also specify a URL if the "allow_url_fopen" PHP directive is enabled.
      * @return void
      */
     public function __construct($sPath)
     {
         $this->_sPath = $sPath;
-        // Creating A DOM Object
+        // Creating a DOM Object
         $this->_oXml = new \DOMDocument;
     }
 
     /**
      * Gets the XML links.
      *
-     * @return object The XML tree
+     * @return array The XML tree.
      * @throws \PH7\Framework\Xml\Exception If the XML file is not found.
      */
-    public function getLinks()
+    public function get()
     {
         if (!@$this->_oXml->load($this->_sPath))
             throw new Exception('The file \'' . $this->_sPath . '\' does not exist');
@@ -46,6 +46,11 @@ class Link
             $this->_aRet[$oTag->getAttribute('url')] = $oTag->getAttribute('title');
 
         return $this->_aRet;
+    }
+
+    public function __destruct()
+    {
+        unset($this->_oXml, $this->_sPath, $this->_aRet);
     }
 
 }

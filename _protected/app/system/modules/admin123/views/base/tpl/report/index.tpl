@@ -12,7 +12,7 @@
 <ul>
 
 {@foreach($reports as $report)@}
-  <li id="report_{% $report->reportId %}"><input type="checkbox" name="action[]" value="{% $report->reportId %}" /> | <a href="{% $design->url(PH7_ADMIN_MOD, 'report', 'report', $report->reportId) %}">{@lang('View Report')@}</a> | {@lang('Reporter:')@} {{ $oAvatarDesign->get($oUserModel->getUsername($report->reporterId), $oUserModel->getFirstName($report->reporterId) ,null, 32) }} | {@lang('Spammer:')@} {{ $oAvatarDesign->get($oUserModel->getUsername($report->spammerId), $oUserModel->getFirstName($report->spammerId) ,null, 32) }} <a class="m_button" href="javascript:void(0)" onclick="report('delete', {% $report->reportId%},'{csrf_token}')">{@lang('Delete')@}</a></li>
+  <li id="report_{% $report->reportId %}"><input type="checkbox" name="action[]" value="{% $report->reportId %}" /> | <a href="{% $design->url(PH7_ADMIN_MOD, 'report', 'report', $report->reportId) %}">{@lang('View Report')@}</a> | {@lang('Reporter:')@} {{ $avatarDesign->get($oUserModel->getUsername($report->reporterId), $oUserModel->getFirstName($report->reporterId) ,null, 32) }} | {@lang('Spammer:')@} {{ $avatarDesign->get($oUserModel->getUsername($report->spammerId), $oUserModel->getFirstName($report->spammerId) ,null, 32) }} <a class="m_button" href="javascript:void(0)" onclick="report('delete', {% $report->reportId%},'{csrf_token}')">{@lang('Delete')@}</a></li>
 {@/foreach@}
 
 </ul>

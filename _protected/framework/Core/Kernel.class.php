@@ -7,7 +7,7 @@
  * @copyright        (c) 2011-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Core
- * @version          0.9
+ * @version          1.0
  */
 
 namespace PH7\Framework\Core;
@@ -34,7 +34,7 @@ abstract class Kernel
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',
-    SOFTWARE_VERSION = '0.9.0',
+    SOFTWARE_VERSION = '1.0.0',
     SOFTWARE_BUILD = '1',
     SOFTWARE_NAME_TECHNOLOGY = 'pH7T/1.0.1', // Ph7 Technology
     SOFTWARE_NAME_SERVER = 'pH7WS/1.0.0', // pH7 Web Server
@@ -47,11 +47,11 @@ abstract class Kernel
     {
         // Check license
         $oLicense = new License;
-        if(!defined( 'PH7_LICENSE_STATUS' )) define( 'PH7_LICENSE_STATUS', $oLicense->check()->licenseStatus() );
-        if(!defined( 'PH7_LICENSE_NO_COPYRIGHT' )) define( 'PH7_LICENSE_NO_COPYRIGHT', $oLicense->check()->noCopyrightStatus() );
+        if (!defined( 'PH7_LICENSE_STATUS' )) define( 'PH7_LICENSE_STATUS', $oLicense->check()->licenseStatus() );
+        if (!defined( 'PH7_LICENSE_NO_COPYRIGHT' )) define( 'PH7_LICENSE_NO_COPYRIGHT', $oLicense->check()->noCopyrightStatus() );
         unset($oLicense);
 
-        if(!PH7_LICENSE_STATUS)
+        if (!PH7_LICENSE_STATUS)
         {
             echo t('Sorry, your License Key is incorrect! Please go <a href="%0%">HiZup Software</a> to get a valid license key.', self::SOFTWARE_WEBSITE);
             exit(1);

@@ -56,10 +56,10 @@ footer a{color:#666;}
 .top {position:absolute;top:0 !important;}
 .right {float:right !important;}
 .left {float:left !important;}
-.profile_desc {float:right;margin:-450px 340px 0;max-width:500px;position:absolute;}
+.profile_desc {float:right;margin:-310px 340px 0;max-width:500px;position:absolute;}
 .break {border-bottom: 1px dotted #BBB;padding:4px 0 4px 0;width:25%}
 .br {border-bottom:1px dashed black; display:block;}
-hr{border:0;color:#9E9E9E;background-color:#9E9E9E;height:1px;margin:5px auto 5px auto;width:100%}
+hr {border:0;color:#9E9E9E;background-color:#9E9E9E;height:1px;margin:5px auto 5px auto;width:100%}
 .bold, .err_msg{font-weight:bold;font-size:13px;}
 .err_msg{text-align:center;color:#F00;text-transform:uppercase;}
 .msg{text-align:center;margin:3px auto 3px;font-style:italic;}

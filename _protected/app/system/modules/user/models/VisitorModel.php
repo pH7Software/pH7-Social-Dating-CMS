@@ -1,6 +1,6 @@
 <?php
 /**
- * @title Visitor Model
+ * @title          Visitor Model
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
@@ -50,13 +50,13 @@ class VisitorModel
     /**
      * Gets Viewed Profile.
      *
-     * @param mixed (integer for friend ID or string for a keyword) $mLooking
-     * @param boolean $bCount Put 'true' for count friends or 'false' for the result of friends.
+     * @param mixed (integer for visitor ID or string for a keyword) $mLooking
+     * @param boolean $bCount Put 'true' for count visitors or 'false' for the result of visitors.
      * @param string $sOrderBy
      * @param string $sSort
      * @param integer $iOffset
      * @param integer $iLimit
-     * @return mixed (object | integer) object for the friends list returned or integer for the total number friends returned.
+     * @return mixed (object | integer) object for the visitors list returned or integer for the total number visitors returned.
      */
     public function get($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {

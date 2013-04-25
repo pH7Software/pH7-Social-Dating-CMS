@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Router
- * @version          0.6
+ * @version          1.0
  */
 
 namespace PH7\Framework\Mvc\Router;
@@ -35,15 +35,12 @@ class UriRoute
      *
      * @param string \DOMDocument $oDom
      * @return object \DOMDocument
-     * @internal We use realpath() function because forward slashes can cause significant performance degradation on Windows OS.
      * @throws \PH7\Framework\File\Exception If the file is not found.
      */
     public static function loadFile(\DOMDocument $oDom)
     {
-        // For URL rewriting
-        // Read the file route for modules
-        $sPathLangName = realpath(PH7_PATH_APP_CONFIG . 'routes/' . substr(PH7_LANG_NAME,0,2) . '.xml');
-        $sPathDefaultLang = realpath(PH7_PATH_APP_CONFIG . 'routes/' . substr(PH7_DEFAULT_LANG,0,2) . '.xml');
+        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . substr(PH7_LANG_NAME,0,2) . '.xml';
+        $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . substr(PH7_DEFAULT_LANG,0,2) . '.xml';
 
         if (is_file($sPathLangName))
             $sRoutePath = $sPathLangName;
@@ -52,7 +49,9 @@ class UriRoute
         else
             throw new \PH7\Framework\File\Exception('File route xml not found: ' . $sPathDefaultLang);
 
-        $oDom->load($sRoutePath);
+        $sContents = file_get_contents($sRoutePath); // Get the XML contents
+        $sContents = static::_parseVariable($sContents); // Parse the variables
+        $oDom->loadXML($sContents); // Load the XML contents
 
         return $oDom;
     }
@@ -102,13 +101,13 @@ class UriRoute
         $oUrl = static::loadFile(new \DOMDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute)
         {
-            if (preg_match('#^' . $oRoute->getAttribute('module') . '$#', $sModule) && preg_match('#^' . $oRoute->getAttribute('controller') . '$#', $sController) && preg_match('#^' . $oRoute->getAttribute('action') . '$#',$sAction))
+            if (preg_match('#^' . $oRoute->getAttribute('module') . '$#', $sModule) && preg_match('#^' . $oRoute->getAttribute('controller') . '$#', $sController) && preg_match('#^' . $oRoute->getAttribute('action') . '$#', $sAction))
             {
-                // Strip the special caracters
+                // Strip the special characters
                 $sUri = $oRoute->getAttribute('url');
-                $sUri = str_replace('\\','', $sUri);
-                $sUri = preg_replace('#\(.+\)#','', $sUri);
-                $sUri = preg_replace('#([/\?]+)$#','',$sUri);
+                $sUri = str_replace('\\', '', $sUri);
+                $sUri = preg_replace('#\(.+\)#', '', $sUri);
+                $sUri = preg_replace('#([/\?]+)$#', '',$sUri);
                 return PH7_URL_ROOT . $sUri . $sVars;
             }
         }
@@ -116,5 +115,22 @@ class UriRoute
 
         return PH7_URL_ROOT . "$sModule/$sController/$sAction$sVars";
     }
+
+    /**
+     * Parse the variables route.
+     *
+     * @access private
+     * @param string $sContents
+     * @return string The contents parsed.
+     */
+    private static function _parseVariable($sContents)
+    {
+        // Replace the "[$admin_mod]" variable by the "PH7_ADMIN_MOD" constant
+        $sContents = str_replace('[$admin_mod]', PH7_ADMIN_MOD, $sContents);
+
+        return $sContents;
+    }
+
+
 
 }

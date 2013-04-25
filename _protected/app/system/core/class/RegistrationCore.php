@@ -25,8 +25,10 @@ abstract class RegistrationCore extends Core
     }
 
     /**
+     * Send an email.
+     *
      * @param array $aInfo
-     * @param boolean $bIsUniversalLogin Default FALSE
+     * @param boolean $bIsUniversalLogin Default: FALSE
      * @return object this
      */
     public function sendMail(array $aInfo, $bIsUniversalLogin = false)
@@ -51,7 +53,7 @@ abstract class RegistrationCore extends Core
                 $sEmailMsg = '';
         }
 
-        $sPasswordMsg = ($bIsUniversalLogin) ? t('Password: %0% (please change it next time you login).', $aInfo['password']) : t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', UriRoute::get('user','main','forgot'));
+        $sPwdMsg = ($bIsUniversalLogin) ? t('Password: %0% (please change it next time you login).', $aInfo['password']) : t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', UriRoute::get('user','main','forgot'));
 
         $this->view->content = t('Welcome to %site_name%, %0%!', $aInfo['first_name']) . '<br />' .
         t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $aInfo['first_name']) . '<br />' .
@@ -59,26 +61,27 @@ abstract class RegistrationCore extends Core
         '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
         t('Email: %0%.', $aInfo['email']) . '<br />' .
         t('Username: %0%.', $aInfo['username']) . '<br />' .
-        $sPasswordMsg . '</em>';
+        $sPwdMsg . '</em>';
         $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
         t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
         $sTplName = (defined('PH7_TPL_NAME')) ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . $sTplName . '/mails/sys/mod/user/account_registration.tpl', $aInfo['email']);
+        $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . $sTplName . '/mails/sys/mod/user/account_registration.tpl', $aInfo['email']);
 
         $aMailInfo = [
           'to' => $aInfo['email'],
           'subject' => t('Hello %0%, Welcome to %site_name%!', $aInfo['first_name'])
         ];
 
-        (new Framework\Mail\Mail)->send($aMailInfo, $sMessageHtml);
+        (new Framework\Mail\Mail)->send($aMailInfo, $sMsgHtml);
 
         return $this;
     }
 
     /**
-     * @desc Get Message
-     * @return string The Registration Message.
+     * Get the registration message.
+     *
+     * @return string The message.
      */
     public function getMsg()
     {

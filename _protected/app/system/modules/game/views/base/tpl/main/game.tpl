@@ -11,7 +11,7 @@
 
   <p><a class="m_button" href="{{ $design->url('game','main','download',$game->gameId) }}">{@lang('Download this game')@}</a></p>
 
-  <p class="italic">{@lang('%0% was played %1% and download %2%.','<strong>'.$game->title.'</strong>',Framework\Mvc\Model\StatisticModel::getView($game->gameId,'Games'),$downloads)@}</p>
+  <p class="italic">{@lang('%0% was played %1% and download %2%.','<strong>'.$game->title.'</strong>',Framework\Mvc\Model\Statistic::getView($game->gameId,'Games'),$downloads)@}</p>
 
   {{ RatingDesignCore::voting($game->gameId,'Games','center') }}
 

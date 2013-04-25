@@ -8,13 +8,14 @@
 namespace PH7;
 
 // Abstract Class
-class AffiliateCore extends AdminCore
+class AffiliateCore extends UserCore
 {
 
     const COOKIE_PREFIX = 'pHSAff_';
 
     /**
-     * @desc Levels for affiliated
+     * Affiliates'levels.
+     *
      * @return boolean
      */
     public static function auth()
@@ -31,7 +32,8 @@ class AffiliateCore extends AdminCore
     }
 
     /**
-     * @desc Delete Affiliated
+     * Delete Affiliated.
+     *
      * @param integer $iProfileId
      * @param string $sUsername
      * @return void

@@ -26,17 +26,17 @@ abstract class Controller extends \PH7\Framework\Core\Core
         parent::__construct();
 
         /***** Securing the server for DDoS attack only! Not for the attacks DoS *****/
-        if(!isDebug() && M\DbConfig::getSetting('DDoS'))
+        if (!isDebug() && M\DbConfig::getSetting('DDoS'))
         {
             $oDDoS = new Stop;
-            if($oDDoS->cookie() || $oDDoS->session())
+            if ($oDDoS->cookie() || $oDDoS->session())
                 sleep(PH7_DDOS_DELAY_SLEEP);
 
             unset($oDDoS);
         }
 
         /*
-        if($this->browser->isMobile())
+        if ($this->browser->isMobile())
         {
             \PH7\Framework\Url\HeaderUrl::redirect('mobile');
         }
@@ -68,28 +68,29 @@ abstract class Controller extends \PH7\Framework\Core\Core
         /***** Info *****/
         $oInfo = M\DbConfig::getMetaMain(PH7_LANG_NAME);
 
-        $this->view->site_name = $this->registry->site_name;
-        $this->view->page_title = $oInfo->pageTitle;
-        $this->view->slogan = $oInfo->slogan;
-        $this->view->meta_description = $oInfo->metaDescription;
-        $this->view->meta_keywords = $oInfo->metaKeywords;
-        $this->view->meta_author = $oInfo->metaAuthor;
-        $this->view->meta_robots = $oInfo->metaRobots;
-        $this->view->meta_copyright = $oInfo->metaCopyright;
-        $this->view->meta_rating = $oInfo->metaRating;
-        $this->view->meta_distribution = $oInfo->metaDistribution;
-        $this->view->meta_category = $oInfo->metaCategory;
+        $aMetaVars = [
+            'site_name' => $this->registry->site_name,
+            'page_title' => $oInfo->pageTitle,
+            'slogan' => $oInfo->slogan,
+            'meta_description' => $oInfo->metaDescription,
+            'meta_keywords' => $oInfo->metaKeywords,
+            'meta_author' => $oInfo->metaAuthor,
+            'meta_robots' => $oInfo->metaRobots,
+            'meta_copyright' => $oInfo->metaCopyright,
+            'meta_rating' => $oInfo->metaRating,
+            'meta_distribution' => $oInfo->metaDistribution,
+            'meta_category' => $oInfo->metaCategory,
+            'header' => 0 // Default value of header contents
+        ];
+        $this->view->assignVars($aMetaVars);
 
         unset($oInfo);
-
-
-        $this->view->header = 0; // Default value of header contents
 
         /**
          * This test is not necessary because if there is no session,
          * the get() method of the \PH7\Framework\Session\Session object an empty value and revisit this avoids having undefined variables in some modules (such as the "connect" module).
          */
-        //if(\PH7\UserCore::auth()) {
+        //if (\PH7\UserCore::auth()) {
             $this->view->count_unread_mail = \PH7\MailCoreModel::countUnreadMsg($this->session->get('member_id'));
             $this->view->count_pen_friend_request = \PH7\FriendCoreModel::getPenFd($this->session->get('member_id'));
         //}
@@ -100,7 +101,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
         /***** End Template Engine PH7Tpl *****/
 
         // For permission the modules
-        if(is_file($this->registry->path_module_config . 'Permission.php'))
+        if (is_file($this->registry->path_module_config . 'Permission.php'))
         {
             require $this->registry->path_module_config . 'Permission.php';
             new \PH7\Permission;
@@ -159,16 +160,16 @@ abstract class Controller extends \PH7\Framework\Core\Core
      */
     final public function displayPageNotFound($sMsg = '', $b404Status = true)
     {
-        if($b404Status) \PH7\Framework\Http\Http::setHeadersByCode(404);
+        if ($b404Status) \PH7\Framework\Http\Http::setHeadersByCode(404);
 
-        $this->view->page_title = t('%0% Page Not Found', $sMsg);
+        $this->view->page_title = t('%0% - Page Not Found', $sMsg);
         $this->view->h1_title = (!empty($sMsg)) ? $sMsg : t('Whoops! The page you requested was not found.');
 
         $sErrorDesc = t('You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive.') . '<br />
         <strong><em>' . t('Suggestions:') . '</em></strong><br />' .
         '<a href="'.$this->registry->site_url.'">' . t('Return home') . '</a><br />';
 
-        if(!\PH7\UserCore::auth())
+        if (!\PH7\UserCore::auth())
         {
             $sErrorDesc .=
             '<a href="' . UriRoute::get('user','signup','step1').'">' . t('Join Now') . '</a><br />

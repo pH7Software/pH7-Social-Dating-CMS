@@ -10,7 +10,7 @@
 
 <p>{% nl2br(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($picture->description))) %}</p>
 <p class="italic">{@lang('Album created on %0%.', $picture->createdDate)@} {@if(!empty($picture->updatedDate))@} <br>{@lang('Modified on %0%.', $picture->updatedDate)@} {@/if@}</p>
-<p class="italic">{@lang('Views:')@} {% Framework\Mvc\Model\StatisticModel::getView($picture->pictureId,'Pictures') %}</p>
+<p class="italic">{@lang('Views:')@} {% Framework\Mvc\Model\Statistic::getView($picture->pictureId,'Pictures') %}</p>
 
 {@if(UserCore::auth() && $member_id == $picture->profileId)@}
  <div class="small">

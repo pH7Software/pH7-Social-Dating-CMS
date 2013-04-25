@@ -21,11 +21,13 @@ class Permission extends PermissionCore
 
         // Overall levels
 
-        if (!Admin::auth() && $this->registry->action !== 'login') {
+        if (!Admin::auth() && $this->registry->action !== 'login')
+        {
             HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'main', 'login'), $this->signInMsg(), 'error');
         }
 
-        if (Admin::auth() && $this->registry->action === 'login') {
+        if (Admin::auth() && $this->registry->action === 'login')
+        {
             HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'main', 'index'), t('Oops! You are already logged in as administrator.'), 'error');
         }
 

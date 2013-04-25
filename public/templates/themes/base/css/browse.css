@@ -1,3 +1,9 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
 #content{width:96%}
 table tbody{width:100%;border:2px #999 solid}
 th,td{border-right:1px #ccc solid}

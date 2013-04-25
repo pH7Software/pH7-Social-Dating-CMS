@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- XML Country List -->
+<!-- XML Countries List -->
 <countries>
     <country iso="AF" name="Afghanistan" />
     <country iso="AL" name="Albania" />

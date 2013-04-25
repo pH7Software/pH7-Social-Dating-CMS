@@ -11,6 +11,7 @@
 <link title="{@lang('Blog')@}" url="{{ $design->url('blog','main','index') }}" />
 <link title="{@lang('Community Notes')@}" url="{{ $design->url('note','main','index') }}" />
 <link title="{@lang('Games Zone Party')@}" url="{{ $design->url('game','main','index') }}" />
+<link title="{@lang('Users Birthday')@}" url="{{ $design->url('user','birthday','index') }}" />
 <link title="{@lang('About Us')@}" url="{{ $design->url('page','main','about') }}" />
 <link title="{@lang('Help Us')@}" url="{{ $design->url('page','main','helpus') }}" />
 <link title="{@lang('Share %site_name%')@}" url="{{ $design->url('page','main','sharesite') }}" />

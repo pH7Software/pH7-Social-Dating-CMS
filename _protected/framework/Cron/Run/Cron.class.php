@@ -13,16 +13,20 @@
 namespace PH7\Framework\Cron\Run;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Url\Uri;
+
 abstract class Cron extends \PH7\Framework\Core\Core
 {
 
-    protected $sCurrentDate;
+    protected $iTime;
+    private $_oUri;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->sCurrentDate = $this->dateTime->get()->dateTime('Y-m-d H');
+        $this->iTime = time();
+        $this->_oUri = Uri::getInstance();
     }
 
     /**
@@ -31,22 +35,24 @@ abstract class Cron extends \PH7\Framework\Core\Core
     public function checkDelay()
     {
         $sFullPath = PH7_PATH_SYS . 'core/assets/cron/_delay/' . $this->getFileName() . '.txt';
+        $bStatus = true; // Default status is TRUE
 
-        if (!$this->file->existsFile($sFullPath))
+        if ($this->file->existsFile($sFullPath))
         {
-            $this->file->putFile($sFullPath, $this->sCurrentDate);
-            return true;
+            $iSavedTime = $this->file->getFile($sFullPath);
+            $iSeconds = $this->getDelay() * 3600; // Convert hours to seconds
+            $iCronTime = $iSavedTime + $iSeconds;
+
+            $bStatus = ($iCronTime < $this->iTime); // Status is FALSE if the delay has not yet elapsed
+
+            if ($bStatus)
+                $this->file->deleteFile($sFullPath);
         }
 
-        $sData = $this->file->getFile($sFullPath);
-        $sCronDate = $sData + $this->getDelay();
+        if ($bStatus)
+            $this->file->putFile($sFullPath, $this->iTime);
 
-        $bRet = ($sCronDate < $this->sCurrentDate);
-
-        if ($bRet)
-            $this->file->deleteFile($sFullPath);
-
-        return $bRet;
+        return $bStatus;
     }
 
     /**
@@ -56,7 +62,7 @@ abstract class Cron extends \PH7\Framework\Core\Core
      */
     protected function getFileName()
     {
-        return str_replace(array('\\', 'ph7', 'core', 'cron'), '', strtolower(get_called_class()));
+        return strtolower($this->_oUri->fragment(3));
     }
 
     /**
@@ -69,7 +75,7 @@ abstract class Cron extends \PH7\Framework\Core\Core
         /**
          * @internal We cast the value into integer type to get only the integer data (without the 'h' character).
          */
-        return (int) \PH7\Framework\Url\Uri::getInstance()->fragment(2);
+        return (int) $this->_oUri->fragment(2);
     }
 
 }

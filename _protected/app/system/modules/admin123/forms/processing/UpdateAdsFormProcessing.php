@@ -20,8 +20,8 @@ class UpdateAdsFormProcessing extends Form
         $sTable = AdsCore::getTable();
         (new AdsCoreModel)->update($this->httpRequest->post('id_ads'), $this->httpRequest->post('title'), $this->httpRequest->post('code', HttpRequest::NO_CLEAN), $sTable);
 
-        /* Clean DesignModel for STATIC data */
-        (new Framework\Cache\Cache)->start(Framework\Mvc\Model\DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
+        /* Clean Model\Design for STATIC data */
+        (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear();
 
         \PFBC\Form::setSuccess('form_update_ads', t('The Advertisements was saved successfully!'));
     }

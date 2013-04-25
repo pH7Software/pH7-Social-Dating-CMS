@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 namespace PH7;
+
 class AccountController extends Controller
 {
     private $sTitle;

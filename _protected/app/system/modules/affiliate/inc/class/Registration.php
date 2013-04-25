@@ -50,14 +50,14 @@ class Registration extends RegistrationCore
         $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
         t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/affiliate/registration.tpl', $aInfo['email']);
+        $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/affiliate/registration.tpl', $aInfo['email']);
 
         $aMailInfo = [
           'to' => $aInfo['email'],
           'subject' => t('Dear %0% %1%, Welcome to our affiliate platform!', $aInfo['last_name'], $aInfo['first_name'])
         ];
 
-        (new Framework\Mail\Mail)->send($aMailInfo, $sMessageHtml);
+        (new Framework\Mail\Mail)->send($aMailInfo, $sMsgHtml);
 
         return $this;
     }

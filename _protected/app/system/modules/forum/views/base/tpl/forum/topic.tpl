@@ -4,7 +4,7 @@
 
   {@foreach($topics as $topic)@}
 
-    {{ $total_views = Framework\Mvc\Model\StatisticModel::getView($topic->topicId,'ForumsTopics') }}
+    {{ $total_views = Framework\Mvc\Model\Statistic::getView($topic->topicId,'ForumsTopics') }}
     {{ $total_reply = (new ForumModel)->totalMessages($topic->topicId) }}
 
     <p><a href="{{ $design->url('forum', 'forum', 'post', "$topic->name,$topic->forumId,$topic->title,$topic->topicId") }}">{% escape(Framework\Security\Ban\Ban::filterWord($topic->title), true) %}</a></p>
