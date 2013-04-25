@@ -6,6 +6,7 @@ public/_install/data/caches/smarty_compile/*
 public/data/*
 public/_constants.php
 _protected/app/configs/config.ini
+_protected/app/system/core/assets/cron/_delay/
 _protected/data/tmp/
 _protected/data/backup/*
 _protected/data/cache/pH7_cache/*
