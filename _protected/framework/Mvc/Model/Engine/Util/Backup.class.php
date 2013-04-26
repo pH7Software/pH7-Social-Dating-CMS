@@ -51,12 +51,12 @@ class Backup
         while ($aRow = $oAllTables->fetch()) $aTables[] = $aRow[0];
         unset($oAllTables);
 
-        $rStmt = Db::getInstance();
+        $oDb = Db::getInstance();
 
         // Loop through tables
         foreach ($aTables as $sTable)
         {
-            $oResult = $rStmt->query('SHOW CREATE TABLE ' . $sTable);
+            $oResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
             Db::free();
 
             $iNum = (int) $oResult->rowCount();
@@ -80,7 +80,10 @@ class Backup
             }
             unset($oResult);
 
-            $oResult = $rStmt->query('SELECT * FROM ' . $sTable);
+            $oResult = $oDb->query('SELECT * FROM ' . $sTable);
+
+            /*** Free memory and close the database connection ***/
+            unset($oDb);
             Db::free();
 
             $iNum = (int) $oResult->rowCount();
@@ -181,10 +184,10 @@ class Backup
         bzclose($rArchive);
 
         $sSqlContent = str_replace(PH7_TABLE_PREFIX,  Db::prefix(), $sSqlContent);
-        $rStmt = Db::getInstance()->exec($sSqlContent);
+        $oDb = Db::getInstance()->exec($sSqlContent);
         unset($sSqlContent);
 
-        return ($rStmt === false) ? print_r($rStmt->errorInfo(), true) : true;
+        return ($oDb === false) ? print_r($oDb->errorInfo(), true) : true;
     }
 
     /**
