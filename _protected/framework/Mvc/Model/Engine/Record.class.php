@@ -113,10 +113,11 @@ class Record
         }
         catch (Exception $oE)
         {
+            $this->_aErrors[] = $oE->getMessage();
+
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
-
-            $this->_aErrors[] = $oE->getMessage();
+            return false;
         }
     }
 
@@ -125,7 +126,7 @@ class Record
      *
      * @param string $sTable
      * @param array $aValues
-     * @return integer The last Insert Id on success or throw PDOException on failure.
+     * @return mixed Returns the last Insert ID on success or FALSE on failure.
      */
     public function insert($sTable, array $aValues)
     {
@@ -162,10 +163,11 @@ class Record
         }
         catch (Exception $oE)
         {
+            $this->_aErrors[] = $oE->getMessage();
+
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
-
-            $this->_aErrors[] = $oE->getMessage();
+            return false;
         }
     }
 
@@ -177,7 +179,7 @@ class Record
      * @param string $sValue The new value
      * @param string $sPk The primary key. Default: NULL
      * @param string $sId The id. Default: NULL
-     * @return integer The number of rows on success or throw PDOException on failure.
+     * @return mixed Returns the number of rows on success or FALSE on failure.
      */
     public function update($sTable, $sField, $sValue, $sPk = null, $sId = null)
     {
@@ -209,10 +211,11 @@ class Record
         }
         catch (Exception $oE)
         {
+            $this->_aErrors[] = $oE->getMessage();
+
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
-
-            $this->_aErrors[] = $oE->getMessage();
+            return false;
         }
     }
 
@@ -220,7 +223,7 @@ class Record
      * SQL Query.
      *
      * @param string $sSql
-     * @return mixed (object | boolean) Object on success or throw PDOException on failure.
+     * @return mixed (object | boolean) Returns the object on success or FALSE on failure.
      *
      */
     public function query($sSql)
@@ -244,10 +247,11 @@ class Record
         }
         catch (Exception $oE)
         {
+            $this->_aErrors[] = $oE->getMessage();
+
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
-
-            $this->_aErrors[] = $oE->getMessage();
+            return false;
         }
     }
 
