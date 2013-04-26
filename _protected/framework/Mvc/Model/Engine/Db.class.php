@@ -315,21 +315,22 @@ class Db
     /**
      * Free database.
      *
-     * @param object \PH7\Framework\Mvc\Model\Engine\Db $oDb Close cursor of PDOStatement class. Default value NULL
+     * @param object \PDOStatement $rStmt Close cursor of PDOStatement class. Default value NULL
      * @param bool $bCloseConnection Close connection of PDO. Default value TRUE
      * @return void
      */
-    public static function free(&$oDb = NULL, $bCloseConnection = TRUE)
+    public static function free(\PDOStatement &$rStmt = NULL, $bCloseConnection = TRUE)
     {
         // Close Cursor
-        if(NULL !== $oDb)
+        if(NULL !== $rStmt)
         {
-            $oDb->closeCursor();
-
-            // Free instance of the PDO object
-            if(TRUE === $bCloseConnection)
-                $oDb = NULL;
+            $rStmt->closeCursor();
+            unset($rStmt);
         }
+
+        // Free instance of the PDO object
+        if(TRUE === $bCloseConnection)
+            self::$_oInstance = NULL;
     }
 
     /**
@@ -376,19 +377,6 @@ class Db
     private function _increment()
     {
         ++self::$_iCount;
-    }
-
-    public function __destruct()
-    {
-        unset(
-            self::$_sDsn,
-            self::$_sUsername,
-            self::$_sPassword,
-            self::$_sPrefix,
-            self::$_aDriverOptions,
-            self::$_iCount,
-            self::$_fTime
-        );
     }
 
     /**
