@@ -150,9 +150,9 @@
 
 {* To avoid scammers *}
 {@if(UserCore::auth() && $this->httpRequest->currentUrl() !== $this->registry->site_url)@}
-    <div class="warning_block center"><p>{@lang@}<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br />
-    People who is really interested in you will never ask for money.<br />
-    Be careful, don\'t send the money to anybody!{@/lang@}</p></div>
+  <div class="warning_block center"><p>{@lang@}<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br />
+  People who is really interested in you will never ask for money.<br />
+  Be careful, don\'t send the money to anybody!{@/lang@}</p></div>
 {@/if@}
 
 <div id="clock"></div>
