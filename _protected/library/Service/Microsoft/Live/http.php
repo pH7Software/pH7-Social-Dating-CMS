@@ -1428,7 +1428,7 @@ class http_class
                                 $success=$this->PutLine("--".$boundary."--");
                         }
                         if($success)
-                            $sucess=$this->FlushData();
+                            $success=$this->FlushData();
                     }
                 }
             }

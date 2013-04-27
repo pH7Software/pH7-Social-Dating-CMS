@@ -15,9 +15,16 @@ class MainController extends Controller
 
     /**
      * @access protected Protected access for the AdminController class derived from this class.
+     * @var object $oPayModel
      * @var string $sTitle
      */
     protected $oPayModel, $sTitle;
+
+    /**
+     * @access private
+     * @var boolean $_bStatus Payment status. Default is failure (FALSE).
+     */
+    private $_bStatus = false;
 
     public function __construct()
     {
@@ -38,7 +45,7 @@ class MainController extends Controller
     {
         $oMembershipModel = $this->oPayModel->getMemberships();
 
-        if(empty($oMembershipModel))
+        if (empty($oMembershipModel))
         {
             $this->displayPageNotFound(t('No membership found!'));
         }
@@ -58,7 +65,7 @@ class MainController extends Controller
 
         $oMembershipModel = $this->oPayModel->getMemberships($iMembershipId);
 
-        if(empty($iMembershipId) || empty($oMembershipModel))
+        if (empty($iMembershipId) || empty($oMembershipModel))
         {
             $this->displayPageNotFound(t('No membership found!'));
         }
@@ -78,46 +85,67 @@ class MainController extends Controller
         }
     }
 
-    public function success($sProvider = '')
+    public function process($sProvider = '')
     {
-        switch($sProvider)
+        switch ($sProvider)
         {
-            case 'paypal': {
-                $oPayPal = new PayPal;
-                if($oPayPal->valid() && $this->httpRequest->postExists('item_number'))
+            case 'paypal':
+            {
+                $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enable']);
+                if ($oPayPal->valid() && $this->httpRequest->postExists('item_number'))
                 {
-                    if((new UserCoreModel)->updateMembership($this->httpRequest->post('item_number'), $this->session->get('member_id'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    if ((new UserCoreModel)->updateMembership($this->httpRequest->post('item_number'), $this->session->get('member_id'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    {
                         $this->log($oPayPal, t('PayPal payment was made, the following informations:'));
+                        $this->_bStatus = true; // Status is OK
+                    }
                 }
                 unset($oPayPal);
             } break;
 
-            case '2co': {
-                $o2CO = new TwoCO;
+            case '2co':
+            {
+                $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enable']);
                 $sVendorId = $this->config->values['module.setting']['2co.vendor_id'];
                 $sSecretWord = $this->config->values['module.setting']['2co.secret_word'];
 
-                if($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id'))
+                if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id'))
                 {
-                    if((new UserCoreModel)->updateMembership($this->httpRequest->post('sale_id'), $this->session->get('member_id'), $this->httpRequest->post('price'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    if ((new UserCoreModel)->updateMembership($this->httpRequest->post('sale_id'), $this->session->get('member_id'), $this->httpRequest->post('price'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    {
                         $this->log($o2CO, t('2CheckOut payment was made, the following informations:'));
+                        $this->_bStatus = true; // Status is OK
+                    }
                 }
                 unset($o2CO);
             } break;
 
-            case 'ccbill': {
-
-
+            case 'ccbill':
+            {
+                // In developing...
+                // Contact us at <developers.ph7software@gmail.com> if you want to help us develop the payment system CCBill
             } break;
 
             default:
                 $this->displayPageNotFound(t('Provinder Not Found!'));
         }
 
-        $this->sTitle = t('Thank you!');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
-        $this->output();
+        if ($this->_bStatus)
+        {
+            $this->sTitle = t('Thank you!');
+            $this->view->page_title = $this->sTitle;
+            $this->view->h2_title = $this->sTitle;
+            $this->manualTplInclude('success.tpl');
+            $this->output();
+        }
+        else
+        {
+            $this->sTitle = t('Error occurred!');
+            $this->view->page_title = $this->sTitle;
+            $this->view->h2_title = $this->sTitle;
+            $this->manualTplInclude('error.tpl');
+            $this->output();
+        }
     }
 
     /**
@@ -127,7 +155,7 @@ class MainController extends Controller
      */
     private function log($oProvider, $sMsg)
     {
-        if($this->config->values['module.setting']['log_file.enable'])
+        if ($this->config->values['module.setting']['log_file.enable'])
         {
             $sLogTxt = $sMsg . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL;
             $oProvider->saveLog($sLogTxt . $_POST);

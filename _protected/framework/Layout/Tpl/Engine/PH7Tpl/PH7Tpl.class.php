@@ -102,7 +102,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Get the template extension.
      *
-     * @return string The extension.
+     * @return string The extension with the dot.
      */
     public function getTplExt()
     {
@@ -112,7 +112,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Set the template extension.
      *
-     * @param string $sExt
+     * @param string $sExt The extension with the dot.
      * @return void
      */
     public function setTplExt($sExt)

@@ -34,7 +34,7 @@ class AdminController extends MainController
     {
         $oMembership = $this->oPayModel->getMemberships();
 
-        if(empty($oMembership))
+        if (empty($oMembership))
         {
             $this->displayPageNotFound(t('No membership found!'));
         }
