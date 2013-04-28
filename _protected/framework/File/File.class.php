@@ -74,7 +74,7 @@ class File
     }
 
     /**
-     * Get File without Extension and the dot.
+     * Get File without Extension and dot.
      * This function is smarter than just a code like this, substr($sFile,0,strpos($sFile,'.'))
      * Just look at the example below for you to realize that the function removes only the extension and nothing else!
      * Example 1 "my_file.pl" The return value is "my_file"
