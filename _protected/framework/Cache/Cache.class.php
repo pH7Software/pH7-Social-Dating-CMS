@@ -18,7 +18,9 @@ use PH7\Framework\Core\Kernel, PH7\Framework\Config\Config, PH7\Framework\File\F
 class Cache
 {
 
-    const CACHE_DIR = 'pH7_cache/';
+    const
+    CACHE_DIR = 'pH7_cache/',
+    CACHE_FILE_EXT = '.cache.php';
 
     private
     $oFile,
@@ -253,7 +255,7 @@ class Cache
      */
     private function getFile()
     {
-        return $this->sCacheDir . $this->sGroup . sha1($this->sId) . '.cache.php';
+        return $this->sCacheDir . $this->sGroup . sha1($this->sId) . static::CACHE_FILE_EXT;
     }
 
     /**
