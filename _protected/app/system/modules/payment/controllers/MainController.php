@@ -130,22 +130,17 @@ class MainController extends Controller
                 $this->displayPageNotFound(t('Provinder Not Found!'));
         }
 
-        if ($this->_bStatus)
-        {
-            $this->sTitle = t('Thank you!');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
-            $this->manualTplInclude('success.tpl');
-            $this->output();
-        }
-        else
-        {
-            $this->sTitle = t('Error occurred!');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
-            $this->manualTplInclude('error.tpl');
-            $this->output();
-        }
+        // Set the page titles
+        $this->sTitle = ($this->_bStatus) ? t('Thank you!') : t('Error occurred!');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
+
+        // Set the valid page
+        $sPage = ($this->_bStatus) ? 'success' : 'error';
+        $this->manualTplInclude($sPage . $this->view->getTplExt());
+
+        // Output
+        $this->output();
     }
 
     /**
