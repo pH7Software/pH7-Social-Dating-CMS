@@ -59,7 +59,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     $sCompileDirFile,
     $sCacheDirFile,
     $bLicense,
-    $sTplExt = '.tpl',
+    $sTplExt = '.tpl', // Default extension
     $bCaching = false,
     $bHtmlCompressor,
     $bPhpCompressor,
