@@ -39,7 +39,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     MAIN_PAGE = 'layout',
     MAIN_COMPILE_PAGE = 'layout.cpl.php',
     XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php',
-    EXT_COMPILE_FILE = '.cpl.php';
+    COMPILE_FILE_EXT = '.cpl.php';
 
     /**
      * The attributes must always be private (or protected), so we do not indicate convention ($_var)
@@ -396,8 +396,8 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         $this->sCompileDir2 = ($this->isMainDir($sDirPath)) ? $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_TPL_NAME . PH7_DS
         : $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $this->getCurrentController();
 
-        $this->sCompileDirFile = ($this->isMainDir($sDirPath)) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::EXT_COMPILE_FILE : $this->sCompileDir2 .
-                str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::EXT_COMPILE_FILE;
+        $this->sCompileDirFile = ($this->isMainDir($sDirPath)) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2 .
+                str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
 
         if (!$this->file->existsFile($this->sTemplateDirFile))
             throw new Exception('File \'' . $this->sTemplateDirFile . '\' does no exist');
