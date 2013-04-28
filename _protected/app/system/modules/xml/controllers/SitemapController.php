@@ -45,6 +45,9 @@ class SitemapController extends MainController
         // XML router
         if(!empty($sAction))
         {
+            // We disable the cache since they are dynamic pages managed by the router.
+            $this->view->setCaching(false);
+
             switch($sAction)
             {
                 case 'main':
@@ -67,7 +70,6 @@ class SitemapController extends MainController
                 case 'comment-picture':
                 case 'comment-video':
                 case 'comment-game':
-                    $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router.
                     $this->sAction = 'comment.inc';
                 break;
 
