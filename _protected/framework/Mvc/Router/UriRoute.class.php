@@ -125,7 +125,16 @@ class UriRoute
      */
     private static function _parseVariable($sContents)
     {
-        // Replace the "[$admin_mod]" variable by the "PH7_ADMIN_MOD" constant
+        /**
+         * Replace the "[$page_ext]" variable by the "PH7_PAGE_EXT" constant.
+         *
+         * @internal We add a slash for RegEx ignores the dot (e.g., '.'html), (in RegEx, the dot means "any single character").
+         */
+        $sContents = str_replace('[$page_ext]', '\\' . PH7_PAGE_EXT, $sContents);
+
+        /**
+         * Replace the "[$admin_mod]" variable by the "PH7_ADMIN_MOD" constant.
+         */
         $sContents = str_replace('[$admin_mod]', PH7_ADMIN_MOD, $sContents);
 
         return $sContents;
