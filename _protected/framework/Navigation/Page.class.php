@@ -104,7 +104,7 @@ class Page
         }
         else
         {
-            $sIsSlash = (substr($sUrl, -1) !== '/') ? '/' : '';
+            $sIsSlash = (substr($sUrl, -1) !== '/' && !strstr($sUrl, PH7_PAGE_EXT)) ? '/' : '';
             $sPageUrl = $sUrl . $sIsSlash . '?' . $sVar . '=';
         }
 
