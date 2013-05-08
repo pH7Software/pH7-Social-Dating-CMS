@@ -106,9 +106,8 @@ class InstallController extends Controller
             {
                 if($_SESSION['status_license'] == 'success')
                 {
-                    if(empty($_SESSION['value'])) {
+                    if(empty($_SESSION['value']))
                         $_SESSION['value']['path_protected'] = dirname(PH7_ROOT_PUBLIC) . '/_protected/';
-                    }
 
                     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['path_protected']))
                     {
@@ -116,8 +115,8 @@ class InstallController extends Controller
 
                         if(is_dir($_SESSION['value']['path_protected']))
                         {
-                            if(is_writable($_SESSION['value']['path_protected'])) {
-
+                            if(is_writable($_SESSION['value']['path_protected']))
+                            {
                                 $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
 
                                 $sConstantContent = str_replace('%path_protected%', $_SESSION['value']['path_protected'], $sConstantContent);
@@ -279,9 +278,8 @@ class InstallController extends Controller
                                         unset($DB);
 
                                         /** Checks if the games are not already installed **/
-                                        if(!$this->_isGameInstalled()) {
+                                        if(!$this->_isGameInstalled())
                                             $this->_downloadGame();
-                                        }
 
                                         $_SESSION['step4'] = 1;
                                         unset($_SESSION['value']);
@@ -519,7 +517,8 @@ class InstallController extends Controller
 
         @require_once(PH7_ROOT_PUBLIC . '_constants.php');
 
-        if(!empty($_SESSION['value'])) {
+        if(!empty($_SESSION['value']))
+        {
             // Send email for finish instalation.
             $aParams = array(
               'to' => $_SESSION['value']['admin_login_email'],
@@ -542,7 +541,8 @@ class InstallController extends Controller
         // and we delete the cookie value locally to avoid using it by mistake in following our script.
         unset($_COOKIE[$sCookieName]);
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm_remove_install'])) {
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm_remove_install']))
+        {
             remove_install_dir();
             header('Location: ' . PH7_URL_ROOT);
         }
