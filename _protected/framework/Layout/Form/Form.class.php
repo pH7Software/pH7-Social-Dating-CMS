@@ -43,7 +43,7 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     public static function wrongVideoFileTypeMsg()
     {
-        return t('File type incompatible. The accepted file types are: .mov, .avi, .flv, .mp4, .mpg, .mpeg, wmv, ogg, ogv or webm.');
+        return t('File type incompatible. The accepted file types are: .mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv');
     }
 
     /**
