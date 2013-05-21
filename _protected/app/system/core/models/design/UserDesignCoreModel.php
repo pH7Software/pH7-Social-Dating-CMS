@@ -134,7 +134,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         $oUserModel = new \PH7\UserCoreModel;
 
         echo '<div class="user_status">';
-        if ($oUserModel->isOnline($iProfileId, Framework\Mvc\Model\DbConfig::getSetting('userTimeout')) == 1)
+        if ($oUserModel->isOnline($iProfileId, Framework\Mvc\Model\DbConfig::getSetting('userTimeout')))
         {
             echo '<img src="', PH7_URL_TPL, PH7_TPL_NAME, PH7_DS, PH7_IMG, 'icon/online.png" alt="', t('Online'), '" title="', t('Is Online!'), '" />';
         }
