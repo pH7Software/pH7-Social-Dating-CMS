@@ -64,8 +64,8 @@ class MailFormProcessing extends Form
             }
             else
             {
-                // If the message recipient isn't connected NOW, we send a message.
-                if (!$oUserModel->isOnline($iRecipientId, 0))
+                // If the notification is accepted and the message recipient isn't connected NOW, we send a message.
+                if (!$oUserModel->getNotification($iRecipientId)->newMsg == 1 && $oUserModel->isOnline($iRecipientId, 0))
                 {
                     $this->view->content = t('Hello %0%!<br />You\'ve a new private message of <strong>%1%</strong>.<br /> <a href="%2%">Click here</a> to read your message.', $this->httpRequest->post('recipient'), $this->session->get('member_username'), UriRoute::get('mail', 'main', 'inbox', $mSendMsg));
 
@@ -79,9 +79,9 @@ class MailFormProcessing extends Form
                     ];
 
                     (new Mail)->send($aInfo, $sMessageHtml);
-
-                    HeaderUrl::redirect(UriRoute::get('mail', 'main', 'index'), t('Your message has been sent successfully!'));
                 }
+
+                HeaderUrl::redirect(UriRoute::get('mail', 'main', 'index'), t('Your message has been sent successfully!'));
             }
 
             unset($oUserModel, $oMailModel);

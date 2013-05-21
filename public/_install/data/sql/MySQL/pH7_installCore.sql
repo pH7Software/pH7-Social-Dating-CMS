@@ -145,6 +145,8 @@ CREATE TABLE IF NOT EXISTS pH7_MembersPrivacy (
 CREATE TABLE IF NOT EXISTS pH7_MembersNotifications (
   profileId int(11) unsigned NOT NULL,
   enableNewsletters tinyint(1) unsigned NOT NULL DEFAULT 1,
+  newMsg tinyint(1) unsigned NOT NULL DEFAULT 1,
+  friendRequest tinyint(1) unsigned NOT NULL DEFAULT 1,
   PRIMARY KEY (profileId),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -157,7 +159,7 @@ INSERT INTO pH7_MembersInfo (profileId, description, address, street, city, stat
 -- Privacy settings
 INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES (1, 'all', 'yes', 'yes');
 -- Notifications
-INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters) VALUES (1, 0);
+INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES (1, 0, 0, 0);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Affiliate (

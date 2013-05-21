@@ -77,19 +77,19 @@ INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSa
 (@iProfileId+11, 'all', 'yes', 'yes');
 
 
-INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters) VALUES
-(@iProfileId, 0),
-(@iProfileId+1, 0),
-(@iProfileId+2, 0),
-(@iProfileId+3, 0),
-(@iProfileId+4, 0),
-(@iProfileId+5, 0),
-(@iProfileId+6, 0),
-(@iProfileId+7, 0),
-(@iProfileId+8, 0),
-(@iProfileId+9, 0),
-(@iProfileId+10, 0),
-(@iProfileId+11, 0);
+INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES
+(@iProfileId, 0, 0, 0),
+(@iProfileId+1, 0, 0, 0),
+(@iProfileId+2, 0, 0, 0),
+(@iProfileId+3, 0, 0, 0),
+(@iProfileId+4, 0, 0, 0),
+(@iProfileId+5, 0, 0, 0),
+(@iProfileId+6, 0, 0, 0),
+(@iProfileId+7, 0, 0, 0),
+(@iProfileId+8, 0, 0, 0),
+(@iProfileId+9, 0, 0, 0),
+(@iProfileId+10, 0, 0, 0),
+(@iProfileId+11, 0, 0, 0);
 
 
 
