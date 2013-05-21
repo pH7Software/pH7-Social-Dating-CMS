@@ -25,6 +25,12 @@ class NotificationFormProcessing extends Form
         if(!$this->str->equals($this->httpRequest->post('enable_newsletters'), $oGetNotofication->enableNewsletters))
             $oUserModel->setNotification('enableNewsletters', $this->httpRequest->post('enable_newsletters'), $iProfileId);
 
+        if(!$this->str->equals($this->httpRequest->post('new_msg'), $oGetNotofication->newMsg))
+            $oUserModel->setNotification('newMsg', $this->httpRequest->post('new_msg'), $iProfileId);
+
+        if(!$this->str->equals($this->httpRequest->post('friend_request'), $oGetNotofication->friendRequest))
+            $oUserModel->setNotification('friendRequest', $this->httpRequest->post('friend_request'), $iProfileId);
+
         unset($oUserModel);
 
         /* Clean UserCoreModel Cache */
