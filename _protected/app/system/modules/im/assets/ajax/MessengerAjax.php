@@ -223,7 +223,7 @@ EOD;
     {
         $oUserModel = new UserCoreModel;
         $iProfileId = $oUserModel->getId(null, $sUsername);
-        $bIsOnline = ($oUserModel->isOnline($iProfileId, Framework\Mvc\Model\DbConfig::getSetting('userTimeout')) == 1);
+        $bIsOnline = $oUserModel->isOnline($iProfileId, Framework\Mvc\Model\DbConfig::getSetting('userTimeout'));
         unset($oUserModel);
         return $bIsOnline;
     }
