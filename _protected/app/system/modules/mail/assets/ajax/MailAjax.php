@@ -18,14 +18,15 @@ class Mail
     public function __construct()
     {
         if (!(new Framework\Security\CSRF\Token)->check('mail'))
-        exit(jsonMsg(0, Form::errorTokenMsg()));
+            exit(jsonMsg(0, Form::errorTokenMsg()));
 
         /** Instance objects for the class * */
         $this->_oSession = new Session;
         $this->_oHttpRequest = new HttpRequest;
         $this->_oMailModel = new MailModel;
 
-        switch ($this->_oHttpRequest->post('type')) {
+        switch ($this->_oHttpRequest->post('type'))
+        {
             case 'delete':
                 $this->delete();
             break;
@@ -59,6 +60,5 @@ class Mail
 }
 
 // Only for the Members and Admins.
-if (UserCore::auth() || AdminCore::auth()) {
+if (UserCore::auth() || AdminCore::auth())
     new Mail;
-}
