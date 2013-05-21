@@ -47,7 +47,7 @@ class UserCore
      */
     public function delete($iProfileId, $sUsername)
     {
-        if($sUsername == PH7_GHOST_USERNAME) exit('You cannot delete this profile!');
+        if ($sUsername == PH7_GHOST_USERNAME) exit('You cannot delete this profile!');
 
         $oFile = new Framework\File\File;
         $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/' . PH7_IMG . $sUsername);
@@ -79,11 +79,11 @@ class UserCore
          * This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if(!isDebug()) error_reporting(0);
+        if (!isDebug()) error_reporting(0);
 
         $oAvatar1 = new Framework\Image\Image($sFile, 600, 800);
 
-        if(!$oAvatar1->validate()) return false; // File type incompatible.
+        if (!$oAvatar1->validate()) return false; // File type incompatible.
 
         // We removes the old avatar if it exists and we delete the cache at the same time.
         $this->deleteAvatar($iProfileId, $sUsername);
@@ -193,11 +193,11 @@ class UserCore
          * This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if(!isDebug()) error_reporting(0);
+        if (!isDebug()) error_reporting(0);
 
         $oWallpaper = new Framework\Image\Image($sFile, 600, 800);
 
-        if(!$oWallpaper->validate()) return false;
+        if (!$oWallpaper->validate()) return false;
 
         // We removes the old background if it exists and we delete the cache at the same time.
         $this->deleteBackground($iProfileId, $sUsername);
@@ -262,7 +262,7 @@ class UserCore
      */
     public function getProfileSignupLink($sUsername, $sFirstName, $sSex)
     {
-        if(!self::auth() && !AdminCore::auth())
+        if (!self::auth() && !AdminCore::auth())
         {
             $aHttpParams = [
                 'ref' => (new Framework\Mvc\Request\HttpRequest)->currentController(),
@@ -285,15 +285,15 @@ class UserCore
     /**
      * Set a user authentication.
      *
-     * @param \PH7\UserCoreModel $oUserModel
-     * @param \PH7\Framework\Session\Session $oSession
+     * @param object \PH7\UserCoreModel $oUserModel
+     * @param object \PH7\Framework\Session\Session $oSession
      * @param object $oUserData User database object.
      * @return void
      */
     public function setAuth(UserCoreModel $oUserModel, Session $oSession, $oUserData)
     {
         // Is disconnected if the user is logged on as "affiliated" or "administrator".
-        if(AffiliateCore::auth() || AdminCore::auth()) $oSession->destroy();
+        if (AffiliateCore::auth() || AdminCore::auth()) $oSession->destroy();
 
         // Regenerate the session ID to prevent the session fixation
         $oSession->regenerateId();
@@ -351,7 +351,7 @@ class UserCore
         {
             $sUsername = substr($sUsername, 0, $iMaxLen);
 
-            if((new Framework\Security\Validate\Validate)->username($sUsername))
+            if ( (new Framework\Security\Validate\Validate)->username($sUsername) )
                 break;
             else
                 $sUsername = Various::genRnd('pHO_Soria_Sanz', $iMaxLen); // Default value
@@ -371,13 +371,13 @@ class UserCore
     {
         $mRet = true; // Default value
 
-        if($oDbProfileData->active != 1)
+        if ($oDbProfileData->active != 1)
         {
-            if($oDbProfileData->active == 2)
+            if ($oDbProfileData->active == 2)
             {
                 $mRet = t('Sorry, your account has not yet been activated. Please activate it by clicking the activation link that was emailed.');
             }
-            elseif($oDbProfileData->active == 3)
+            elseif ($oDbProfileData->active == 3)
             {
                 $mRet = t('Sorry, your account has not yet been activated. An administrator must validate your account.');
             }
@@ -386,7 +386,7 @@ class UserCore
                 $mRet = t('Your account does not have a valid activation status. Please contact the database administrator so that it solves this problem.');
             }
         }
-        elseif($oDbProfileData->ban == 1)
+        elseif ($oDbProfileData->ban == 1)
         {
             $mRet = t('Sorry, Your account has been banned.');
         }
@@ -415,7 +415,7 @@ class UserCore
             if ($oUserModel->validateAccount($sEmail, $sHash, $sTableName))
             {
                 $iId = $oUserModel->getId($sEmail, null, $sTableName);
-                if($sMod != 'newsletter') $this->clearReadProfileCache($iId, $sTableName);
+                if ($sMod != 'newsletter') $this->clearReadProfileCache($iId, $sTableName);
 
                 Framework\Url\HeaderUrl::redirect($sRedirectLoginUrl, $sSuccessMsg);
             }
