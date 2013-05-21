@@ -8,8 +8,6 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\DbConfig;
-
 class FriendAjax extends Core
 {
 
@@ -79,9 +77,9 @@ class FriendAjax extends Core
                 $this->_sMsg = jsonMsg(1, t('This profile has been successfully added to your friends list.'));
 
                 $oUserModel = new UserCoreModel;
-                if (!$oUserModel->isOnline($iFriendId, DbConfig::getSetting('userTimeout')))
+                if (!$oUserModel->isOnline($iFriendId, 0))
                 {
-                    // Send mail if the user is not logged
+                    // Send mail if the user isn't connected NOW.
                     $this->sendMail($oUserModel, $iFriendId);
                 }
                 unset($oUserModel);
@@ -138,7 +136,7 @@ class FriendAjax extends Core
         /**
          * Get the site name, because we do not have access to predefined variables.
          */
-        $sSiteName = DbConfig::getSetting('siteName');
+        $sSiteName = Framework\Mvc\Model\DbConfig::getSetting('siteName');
 
         $this->view->content = t('Hello %0%!<br /><strong>%1%</strong> sent you a friendship request on %2%.<br /> <a href="%3%">Click here</a> to see your friend request.', $sFriendUsername, $this->session->get('member_username'), $sSiteName, Framework\Mvc\Router\UriRoute::get('user', 'friend', 'index'));
 

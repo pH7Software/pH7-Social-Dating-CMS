@@ -374,7 +374,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $iTime = (int) $iTime;
 
         $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId
-            AND userStatus = 1 AND lastActivity > DATE_SUB(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
+            AND userStatus = 1 AND lastActivity >= DATE_SUB(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':time', $iTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $this->sCurrentDate, \PDO::PARAM_STR);
