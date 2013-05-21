@@ -8,6 +8,8 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Mvc\Model\DbConfig;
+
 class FriendAjax extends Core
 {
 
@@ -52,22 +54,37 @@ class FriendAjax extends Core
         $iFriendId = $this->httpRequest->post('friendId', 'int');
         $iMemberId = $this->session->get('member_id');
 
-        if ($iMemberId == $iFriendId) {
+        if ($iMemberId == $iFriendId)
+        {
             $this->_sMsg = jsonMsg(0, t('You cannot be your own friend.'));
-        } else {
+        }
+        else
+        {
             $this->_mStatus = $this->_oFriendModel->add($this->session->get('member_id'), $iFriendId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
 
-            if ($this->_mStatus == 'error') {
+            if ($this->_mStatus == 'error')
+            {
                 $this->_sMsg = jsonMsg(0, t('Unable to add to friends list, please try later.'));
-            } elseif ($this->_mStatus == 'friend_exists') {
+            }
+            elseif ($this->_mStatus == 'friend_exists')
+            {
                 $this->_sMsg = jsonMsg(0, t('This profile already exists in your friends list.'));
-            } elseif ($this->_mStatus == 'id_does_not_exist') {
+            }
+            elseif ($this->_mStatus == 'id_does_not_exist')
+            {
                 $this->_sMsg = jsonMsg(0, t('Profile ID does not exist.')); // Should never happen unless someone changes the source code with firebug or other
-            } elseif ($this->_mStatus == 'success') {
+            }
+            elseif ($this->_mStatus == 'success')
+            {
                 $this->_sMsg = jsonMsg(1, t('This profile has been successfully added to your friends list.'));
 
-                // Send an email
-                $this->sendMessage($iFriendId);
+                $oUserModel = new UserCoreModel;
+                if (!$oUserModel->isOnline($iFriendId, DbConfig::getSetting('userTimeout')))
+                {
+                    // Send mail if the user is not logged
+                    $this->sendMail($oUserModel, $iFriendId);
+                }
+                unset($oUserModel);
             }
         }
         echo $this->_sMsg;
@@ -76,9 +93,12 @@ class FriendAjax extends Core
     protected function approval()
     {
         $this->_mStatus = $this->_oFriendModel->approval($this->session->get('member_id'), $this->httpRequest->post('friendId'));
-        if (!$this->_mStatus) {
+        if (!$this->_mStatus)
+        {
             $this->_sMsg = jsonMsg(0, t('Cannot approve friend, please try later.'));
-        } else {
+        }
+        else
+        {
             $this->_sMsg = jsonMsg(1, t('The friends has been approved.'));
         }
         echo $this->_sMsg;
@@ -87,25 +107,28 @@ class FriendAjax extends Core
     protected function delete()
     {
         $this->_mStatus = $this->_oFriendModel->delete($this->session->get('member_id'), $this->httpRequest->post('friendId'));
-        if (!$this->_mStatus) {
+        if (!$this->_mStatus)
+        {
             $this->_sMsg = jsonMsg(0, t('Cannot remove friend, please try later.'));
-        } else {
+        }
+        else
+        {
             $this->_sMsg = jsonMsg(1, t('The friends we been deleted.'));
         }
         echo $this->_sMsg;
     }
 
     /**
-     * @desc Send an email to warn the friend request
+     * Send an email to warn the friend request.
+     *
+     * @param object \PH7\UserCoreModel $oUserModel
      * @param int $iId friend id
      * @return void
      */
-    protected function sendMessage($iId)
+    protected function sendMail(UserCoreModel $oUserModel, $iId)
     {
-        $oUserModel = new UserModel;
         $sFriendEmail = $oUserModel->getEmail($iId);
         $sFriendUsername = $oUserModel->getUsername($iId);
-        unset($oUserModel);
 
         /**
          * Note: The predefined variables as %site_name% does not work here,
@@ -115,7 +138,7 @@ class FriendAjax extends Core
         /**
          * Get the site name, because we do not have access to predefined variables.
          */
-        $sSiteName = Framework\Mvc\Model\DbConfig::getSetting('siteName');
+        $sSiteName = DbConfig::getSetting('siteName');
 
         $this->view->content = t('Hello %0%!<br /><strong>%1%</strong> sent you a friendship request on %2%.<br /> <a href="%3%">Click here</a> to see your friend request.', $sFriendUsername, $this->session->get('member_username'), $sSiteName, Framework\Mvc\Router\UriRoute::get('user', 'friend', 'index'));
 
@@ -135,12 +158,12 @@ class FriendAjax extends Core
     public function __destruct()
     {
         parent::__destruct();
+
         unset($this->_oFriendModel, $this->_sMsg, $this->_mStatus);
     }
 
 }
 
 // Only Members
-if (User::auth()) {
+if (User::auth())
     new FriendAjax;
-}
