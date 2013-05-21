@@ -32,23 +32,23 @@ class MailFormProcessing extends Form
         $iRecipientId = $oUserModel->getId(null, $sRecipient);
         $iSenderId = (int) $this->session->get('member_id');
 
-        if($iSenderId == $iRecipientId)
+        if ($iSenderId == $iRecipientId)
         {
             \PFBC\Form::setError('form_compose_mail', t('Oops! You can not send a message to yourself.'));
         }
-        elseif($sRecipient == PH7_ADMIN_USERNAME)
+        elseif ($sRecipient == PH7_ADMIN_USERNAME)
         {
             \PFBC\Form::setError('form_compose_mail', t('Oops! You cannot reply to administrator! If you want to contact us, please use our <a href="%0%">contact form</a>.', UriRoute::get('contact', 'contact', 'index')));
         }
-        elseif( ! (new ExistsCoreModel)->id($iRecipientId, 'Members') )
+        elseif ( ! (new ExistsCoreModel)->id($iRecipientId, 'Members') )
         {
             \PFBC\Form::setError('form_compose_mail', t('Oops! The username "%0%" does not exist.', escape(substr($this->httpRequest->post('recipient'),0, PH7_MAX_USERNAME_LENGTH), true)));
         }
-        elseif(!$oMailModel->checkWaitSend($iSenderId, $iTimeDelay, $sCurrentTime))
+        elseif (!$oMailModel->checkWaitSend($iSenderId, $iTimeDelay, $sCurrentTime))
         {
             \PFBC\Form::setError('form_compose_mail', Form::waitWriteMsg($iTimeDelay));
         }
-        elseif($oMailModel->isDuplicateContent($iSenderId, $sMessage))
+        elseif ($oMailModel->isDuplicateContent($iSenderId, $sMessage))
         {
             \PFBC\Form::setError('form_compose_mail', Form::duplicateContentMsg());
         }
@@ -58,30 +58,33 @@ class MailFormProcessing extends Form
 
             $mSendMsg = $oMailModel->sendMessage($iSenderId, $iRecipientId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
 
-            if(false === $mSendMsg)
+            if (false === $mSendMsg)
             {
                 \PFBC\Form::setError('form_compose_mail', t('Problem while sending the message. Please try again later.'));
             }
             else
             {
-                $this->view->content = t('Hello %0%!<br />You\'ve a new private message of <strong>%1%</strong>.<br /> <a href="%2%">Click here</a> to read your message.', $this->httpRequest->post('recipient'), $this->session->get('member_username'), UriRoute::get('mail', 'main', 'inbox', $mSendMsg));
+                // If the message recipient isn't connected to the site, we send a message.
+                if (!$oUserModel->isOnline($iRecipientId, DbConfig::getSetting('userTimeout')))
+                {
+                    $this->view->content = t('Hello %0%!<br />You\'ve a new private message of <strong>%1%</strong>.<br /> <a href="%2%">Click here</a> to read your message.', $this->httpRequest->post('recipient'), $this->session->get('member_username'), UriRoute::get('mail', 'main', 'inbox', $mSendMsg));
 
-                $sRecipientEmail = $oUserModel->getEmail($iRecipientId);
+                    $sRecipientEmail = $oUserModel->getEmail($iRecipientId);
 
-                $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/mail/new_msg.tpl', $sRecipientEmail);
+                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/mail/new_msg.tpl', $sRecipientEmail);
 
-                $aInfo = [
-                    'to' => $sRecipientEmail,
-                    'subject' => t('You\'ve a new Private Message - %site_name%')
-                ];
+                    $aInfo = [
+                        'to' => $sRecipientEmail,
+                        'subject' => t('You\'ve a new Private Message - %site_name%')
+                    ];
 
-                (new Mail)->send($aInfo, $sMessageHtml);
+                    (new Mail)->send($aInfo, $sMessageHtml);
 
-                HeaderUrl::redirect(UriRoute::get('mail', 'main', 'index'), t('Your message has been sent successfully!'));
+                    HeaderUrl::redirect(UriRoute::get('mail', 'main', 'index'), t('Your message has been sent successfully!'));
+                }
             }
-        }
 
-        unset($oUserModel, $oMailModel);
+            unset($oUserModel, $oMailModel);
     }
 
 }
