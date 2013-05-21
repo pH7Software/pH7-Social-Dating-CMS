@@ -64,8 +64,8 @@ class MailFormProcessing extends Form
             }
             else
             {
-                // If the message recipient isn't connected to the site, we send a message.
-                if (!$oUserModel->isOnline($iRecipientId, DbConfig::getSetting('userTimeout')))
+                // If the message recipient isn't connected NOW, we send a message.
+                if (!$oUserModel->isOnline($iRecipientId, 0))
                 {
                     $this->view->content = t('Hello %0%!<br />You\'ve a new private message of <strong>%1%</strong>.<br /> <a href="%2%">Click here</a> to read your message.', $this->httpRequest->post('recipient'), $this->session->get('member_username'), UriRoute::get('mail', 'main', 'inbox', $mSendMsg));
 
@@ -85,6 +85,7 @@ class MailFormProcessing extends Form
             }
 
             unset($oUserModel, $oMailModel);
+        }
     }
 
 }
