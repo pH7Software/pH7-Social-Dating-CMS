@@ -72,6 +72,7 @@ class Video
             case 'ogg':
             case 'ogv':
             case 'webm':
+            case 'mkv':
                 return true;
             break;
 
