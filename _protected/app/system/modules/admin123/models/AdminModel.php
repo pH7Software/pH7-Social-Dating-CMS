@@ -43,14 +43,15 @@ class AdminModel extends AdminCoreModel
         $sCurrentDate = (new Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s');
 
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Admins') .
-            '(email, username, password, firstName, lastName, sex, ip, prefixSalt, suffixSalt, joinDate, lastActivity)
-        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :ip, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
+            '(email, username, password, firstName, lastName, sex, timeZone, ip, prefixSalt, suffixSalt, joinDate, lastActivity)
+        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :timeZone, :ip, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
         $rStmt->bindValue(':password', Framework\Security\Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_INT);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':timeZone', $aData['time_zone'], \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_INT);
         $rStmt->bindValue(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_INT);
         $rStmt->bindValue(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_INT);

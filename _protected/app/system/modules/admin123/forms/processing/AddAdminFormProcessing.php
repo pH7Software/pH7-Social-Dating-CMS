@@ -28,6 +28,7 @@ class AddAdminFormProcessing extends Form
             'first_name' => $this->httpRequest->post('first_name'),
             'last_name' => $this->httpRequest->post('last_name'),
             'sex' => $this->httpRequest->post('sex'),
+            'time_zone' => $this->httpRequest->post('time_zone'),
             'ip' => Ip::get(),
             'prefix_salt' => Various::genRnd(),
             'suffix_salt' => Various::genRnd()
