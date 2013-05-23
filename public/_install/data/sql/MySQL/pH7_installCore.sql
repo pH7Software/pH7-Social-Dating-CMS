@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS pH7_Admins (
   lastName varchar(50) DEFAULT NULL,
   sex enum('male','female') NOT NULL DEFAULT 'male',
   lang varchar(5) NOT NULL DEFAULT 'en_US',
-  timeZone smallint(3) NOT NULL DEFAULT '-6',
+  timeZone varchar(3) NOT NULL DEFAULT '-6',
   ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
   hashValidation char(40) DEFAULT NULL,
   prefixSalt char(40) DEFAULT NULL,

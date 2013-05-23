@@ -4,7 +4,6 @@
  * By pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Element;
-use PH7\Framework\Registry\Registry;
 
 class Timezone extends Select
 {
