@@ -43,9 +43,7 @@ class EditFormProcessing extends Form
         }
 
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oAdmin->lastName))
-        {
             $oAdminModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, 'Admins');
-        }
 
         if (!$this->str->equals($this->httpRequest->post('sex'), $oAdmin->sex))
         {
@@ -53,6 +51,9 @@ class EditFormProcessing extends Form
 
             (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Admins', null)->clear();
         }
+
+        if (!$this->str->equals($this->httpRequest->post('time_zone'), $oAdmin->timeZone))
+            $oAdminModel->updateProfile('timeZone', $this->httpRequest->post('time_zone'), $iProfileId, 'Admins');
 
         $oAdminModel->setLastEdit($iProfileId, 'Admins');
 
