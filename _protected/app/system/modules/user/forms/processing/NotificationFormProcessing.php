@@ -34,7 +34,8 @@ class NotificationFormProcessing extends Form
         unset($oUserModel);
 
         /* Clean UserCoreModel Cache */
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'notification' . $iProfileId, null)->clear();
+        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'notification' . $iProfileId, null)->clear()
+        ->start(UserCoreModel::CACHE_GROUP, 'isNotification' . $iProfileId, null)->clear();
 
         \PFBC\Form::setSuccess('form_notification', t('Your notifications settings have been saved successfully!'));
     }
