@@ -56,28 +56,36 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
-        if($this->httpRequest->getExists('id')) {
+        if($this->httpRequest->getExists('id'))
+        {
             $oMsg = $this->oMailModel->readMessage($this->session->get('member_id'), $this->httpRequest->get('id'));
 
-            if(empty($oMsg)) {
+            if(empty($oMsg))
+            {
                 $this->sTitle = t('Not Found Message!');
                 $this->notFound();
-            } else {
+            }
+            else
+            {
                 if($oMsg->status == 1) $this->oMailModel->setReadMsg($oMsg->messageId);
                 $this->view->msg = $oMsg;
             }
-
-        } else {
+        }
+        else
+        {
             $this->view->total_pages = $this->oPage->getTotalPages($this->oMailModel->totalMessages($this->session->get('member_id')), 10);
             $this->view->current_page = $this->oPage->getCurrentPage();
             $oMail = $this->oMailModel->readMessages($this->session->get('member_id'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
-            if(empty($oMail)) {
+            if(empty($oMail))
+            {
                 $this->sTitle = t('Empty Message!');
                 $this->notFound();
                 // We modified the default error message.
                 $this->view->error = t('Sorry %0%, you do not have any messages.', '<em>' . $this->session->get('member_first_name') . '</em>');
-            } else {
+            }
+            else
+            {
                 $this->view->inbox = $oMail;
             }
 
@@ -89,11 +97,10 @@ class MainController extends Controller
 
     public function delete()
     {
-        if($this->oMailModel->deleteMessage($this->session->get('member_id'), $this->httpRequest->post('id', 'int') )) {
+        if($this->oMailModel->deleteMessage($this->session->get('member_id'), $this->httpRequest->post('id', 'int')))
             $this->sMsg = t('Your message has been sent successfully!');
-        } else {
+        else
             $this->sMsg = t('Your message could not be deleted because there no exist.');
-        }
 
         HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg);
     }
@@ -101,7 +108,7 @@ class MainController extends Controller
     public function deleteAll()
     {
         if(!(new Framework\Security\CSRF\Token)->check('mail_action'))
-         {
+        {
             $this->sMsg = Form::errorTokenMsg();
         }
         else
@@ -149,10 +156,13 @@ class MainController extends Controller
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oSearch = $this->oMailModel->search($this->session->get('member_id'), $this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
-        if(empty($oSearch)) {
+        if(empty($oSearch))
+        {
             $this->sTitle = t('Search Not Found!');
             $this->notFound();
-        } else {
+        }
+        else
+        {
             $this->sTitle = t('Email | Message - Your search returned');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;

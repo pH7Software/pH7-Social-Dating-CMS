@@ -15,7 +15,7 @@ class SubscriptionModel extends UserCoreModel
     {
         $rStmt = Db::getInstance()->prepare('SELECT s.*, m.email, m.firstName AS name, n.enableNewsletters
             FROM' . Db::prefix('Subscribers') . 'AS s INNER JOIN' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('MembersNotifications') . 'as n ON m.profileId = n.profileId
-            WHERE (s.active = \'1\') AND (m.username <> \''.PH7_GHOST_USERNAME.'\') AND (m.username IS NOT NULL) AND (m.firstName IS NOT NULL) AND (m.sex IS NOT NULL) AND (m.matchSex IS NOT NULL) AND (m.country IS NOT NULL) AND (m.city IS NOT NULL) AND (m.groupId=\'2\') AND (n.enableNewsletters = \'1\')');
+            WHERE (s.active = 1) AND (m.username <> \'' . PH7_GHOST_USERNAME . '\') AND (m.username IS NOT NULL) AND (m.firstName IS NOT NULL) AND (m.sex IS NOT NULL) AND (m.matchSex IS NOT NULL) AND (m.country IS NOT NULL) AND (m.city IS NOT NULL) AND (m.groupId = 2) AND (n.enableNewsletters = 1)');
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
