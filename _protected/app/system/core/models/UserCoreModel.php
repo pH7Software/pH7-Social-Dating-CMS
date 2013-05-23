@@ -324,7 +324,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             $sSqlSex = '';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix($sTable) . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND userSaveViews = \'yes\' AND groupId = \'2\'' .  $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState . $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix($sTable) . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND userSaveViews = \'yes\' AND groupId = 2' .  $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState . $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlOrder . $sSqlLimit);
 
         if (!empty($aParams['match_sex'])) $rStmt->bindValue(':matchSex', '%' . $aParams['match_sex'] . '%', \PDO::PARAM_STR);
         if ($bIsSingleAge) $rStmt->bindValue(':year', '%' . (date('Y') - $aParams['age']) . '%', \PDO::PARAM_INT);
@@ -436,7 +436,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      * Get the user notifications.
      *
      * @param integer $iProfileId
-     * @return integer
+     * @return object
      */
     public function getNotification($iProfileId)
     {
@@ -453,6 +453,30 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         }
 
         return $oData;
+    }
+
+    /**
+     * Check notifications.
+     *
+     * @param integer $iProfileId
+     * @param string $sNotiName Notification name.
+     * @return boolean
+     */
+    public function isNotification($iProfileId, $sNotiName)
+    {
+        $this->cache->start(self::CACHE_GROUP, 'isNotification' . $iProfileId, static::CACHE_TIME);
+
+        if (!$sData = $this->cache->get())
+        {
+            $rStmt = Db::getInstance()->prepare('SELECT ' . $sNotiName . ' FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = :profileId AND ' . $sNotiName . ' = 1 LIMIT 1');
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->execute();
+            $bRet = ($rStmt->rowCount() === 1);
+            Db::free($rStmt);
+            $this->cache->put($sData);
+        }
+
+        return $sData;
     }
 
     /**
@@ -606,8 +630,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function setDefaultNotification()
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersNotifications') . '(profileId, enableNewsletters)
-            VALUES (:profileId, 0)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersNotifications') . '(profileId, enableNewsletters, newMsg, friendRequest)
+            VALUES (:profileId, 0, 1, 1)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         return $rStmt->execute();
     }
@@ -912,7 +936,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $sSqlLimit = ($bIsLimit ? 'LIMIT :offset, :limit' : '');
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')
-            AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId=\'2\')' . $sOrder . $sSqlLimit);
+            AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
 
         if ($bIsLimit)
         {
@@ -948,7 +972,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
 
         $sSqlCity = (!empty($sCity)) ?  'AND (city LIKE :city)' : '';
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId=\'2\')' . $sOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
         $rStmt->bindValue(':country', $sCountry, \PDO::PARAM_STR);
         (!empty($sCity)) ? $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR) : '';
 

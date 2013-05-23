@@ -20,8 +20,8 @@ class AdminCoreModel extends UserCoreModel
         $iLimit = (int) $iLimit;
 
         $sSql = ($sTable != 'Members')
-            ? 'SELECT * FROM'.Db::prefix($sTable). 'WHERE username <> \''.PH7_GHOST_USERNAME.'\' ORDER BY joinDate DESC LIMIT :offset, :limit'
-            : 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable). 'AS m INNER JOIN ' . Db::prefix('Memberships') . 'AS g ON m.groupId = g.groupId WHERE username <> \''.PH7_GHOST_USERNAME.'\' ORDER BY joinDate DESC LIMIT :offset, :limit';
+            ? 'SELECT * FROM'.Db::prefix($sTable). 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit'
+            : 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable). 'AS m INNER JOIN ' . Db::prefix('Memberships') . 'AS g ON m.groupId = g.groupId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
 
         $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
@@ -39,11 +39,11 @@ class AdminCoreModel extends UserCoreModel
         $sSqlLimit = (!$bCount) ?  ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
 
-        $sSqlQuery = (!empty($iBanned)) ? '(ban = \'1\') AND ' : '';
+        $sSqlQuery = (!empty($iBanned)) ? '(ban = 1) AND ' : '';
         $sSqlQuery .= ($sWhere === 'all') ? '(username LIKE :what OR email LIKE :what OR firstName LIKE :what OR lastName LIKE :what OR ip LIKE :what)' : $sWhere . ' LIKE :what';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \''.PH7_GHOST_USERNAME.'\') AND (groupId = :groupId) AND ' . $sSqlQuery . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (groupId = :groupId) AND ' . $sSqlQuery . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':what', '%' . $mWhat . '%', \PDO::PARAM_STR);
         $rStmt->bindParam(':groupId', $iGroupId, \PDO::PARAM_INT);
