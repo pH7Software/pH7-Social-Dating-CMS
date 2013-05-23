@@ -26,9 +26,12 @@ class AdminController extends MainController
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAllMsg = $this->oMailModel->allMessage($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
-        if(empty($oAllMsg)) {
+        if(empty($oAllMsg))
+        {
             $this->displayPageNotFound(t('No messages found!'));
-        } else {
+        }
+        else
+        {
             $this->design->addJs(PH7_STATIC . PH7_JS, 'divShow.js');
 
             $this->sTitle = t('Email List');
@@ -42,11 +45,10 @@ class AdminController extends MainController
 
     public function delete()
     {
-        if($this->oMailModel->adminDeleteMessage($this->httpRequest->post('id', 'int') )) {
+        if($this->oMailModel->adminDeleteMessage($this->httpRequest->post('id', 'int')))
             $this->sMsg = t('The message has been sent successfully!');
-        } else {
+        else
             $this->sMsg = t('The message could not be deleted because there no exist.');
-        }
 
         HeaderUrl::redirect(UriRoute::get('mail','admin','listmsg'), $this->sMsg);
     }
@@ -54,7 +56,7 @@ class AdminController extends MainController
     public function deleteAll()
     {
         if(!(new Framework\Security\CSRF\Token)->check('mail_action'))
-         {
+        {
             $this->sMsg = Form::errorTokenMsg();
         }
         else
