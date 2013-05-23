@@ -466,17 +466,17 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         $this->cache->start(self::CACHE_GROUP, 'isNotification' . $iProfileId, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get())
+        if (!$bData = $this->cache->get())
         {
             $rStmt = Db::getInstance()->prepare('SELECT ' . $sNotiName . ' FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = :profileId AND ' . $sNotiName . ' = 1 LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $bRet = ($rStmt->rowCount() === 1);
+            $bData = ($rStmt->rowCount() === 1);
             Db::free($rStmt);
-            $this->cache->put($sData);
+            $this->cache->put($bData);
         }
 
-        return $sData;
+        return $bData;
     }
 
     /**
