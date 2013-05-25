@@ -43,7 +43,6 @@ final class FrontController
      * Routing controllers.
      *
      * @access private
-     * @throws \PH7\Framework\File\Exception If the XML file is not found.
      */
     private function __construct()
     {
@@ -111,8 +110,10 @@ final class FrontController
                 $this->bRouterRewriting = true;
 
                 $sPathModule = $oRoute->getAttribute('path') . PH7_DS;
+
                 // Get module
                 $this->oRegistry->module = $oRoute->getAttribute('module');
+
                 // Check if file exist
                 if (!$this->oConfig->load(PH7_PATH_APP . $sPathModule . $this->oRegistry->module . '/config/config.ini'))
                 {
@@ -168,24 +169,24 @@ final class FrontController
             else
                 $this->simpleRouter();
         }
-
     }
 
     /**
      * Simple Router.
      *
+     * @access private
      * @return void
      */
     private function simpleRouter()
     {
         if ($this->oUri->fragment(0) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(0)))
         {
-            // Set module of system
+            // Set system module
             $this->oRegistry->module = $this->oUri->fragment(0);
         }
         else
         {
-            // Get module of system
+            // Get system module
             $this->oRegistry->module = $this->oConfig->values['system']['default_module'];
         }
 
@@ -247,26 +248,29 @@ final class FrontController
     /**
      * Simple Module Router.
      *
+     * @access private
      * @return void
      */
     private function simpleModuleRouter()
     {
-        // Set module
-        if ($this->oUri->fragment(1) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->
-            fragment(1))) {
+        if ($this->oUri->fragment(1) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(1)))
+        {
+            // Set module
             $this->oRegistry->module = $this->oUri->fragment(1);
-        } else {
-            // Get module
+        }
+        else
+        {
+            // Get default module
             $this->oRegistry->module = $this->oConfig->values['system']['default_module'];
         }
+
         // Check if file exist
-        if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module .
-            '/config/config.ini')) {
+        if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini'))
+        {
             $this->notFound('The module <b>' . $this->oRegistry->module . '</b> not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module .
                 '/</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini</b>');
             // It reloads the config.ini file for the new module "error"
-            $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module .
-                '/config/config.ini');
+            $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini');
         }
 
         /***** PATH THE MODULE *****/
@@ -426,17 +430,16 @@ final class FrontController
         }
         else
         {
-            // For all script of the Cms-Dating
-            $sFolder = ($this->oUri->fragment(3) && preg_match('#^[\w]+$#', $this->oUri->
-                fragment(3))) ? PH7_DS . $this->oUri->fragment(3) : '';
+            // For all scripts of the pH7 DatingCms
+            $sFolder = ($this->oUri->fragment(3) && preg_match('#^[\w]+$#', $this->oUri->fragment(3))) ? PH7_DS . $this->oUri->fragment(3) : '';
+
             if (is_file(PH7_PATH_SYS . 'core/assets/ajax/' . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php'))
             {
                 include_once PH7_PATH_SYS . 'core/assets/ajax/' . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php';
             }
             else
             {
-                $this->notFound('Error while loading the library of ajax<br />File: ' .
-                    PH7_PATH_SYS . 'core/assets/ajax/' . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php does not exist', 1);
+                $this->notFound('Error while loading the library of ajax<br />File: ' . PH7_PATH_SYS . 'core/assets/ajax/' . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php does not exist', 1);
             }
         }
     }
@@ -450,13 +453,9 @@ final class FrontController
         if (strcmp($this->oHttpRequest->get('secret_word'), DbConfig::getSetting('cronSecurityHash')) === 0)
         {
             if (is_file(PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php'))
-            {
                 require PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php';
-            }
             else
-            {
                 $this->notFound('Error while loading the Cron Jobs file<br />File: ' . PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php does not exist', 1);
-            }
         }
         else
         {
@@ -472,13 +471,9 @@ final class FrontController
     private function fileRouter()
     {
         if (is_file(PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php'))
-        {
             include_once PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php';
-        }
         else
-        {
             $this->notFound('Error while loading the file<br />File: ' . PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php does not exist', 1);
-        }
     }
 
     /**
@@ -518,19 +513,20 @@ final class FrontController
     /**
      * Run Router!
      *
+     * @access public
      * @return void
      */
     public function runRouter()
     {
         $this->removeDatabaseInfo();
 
-        // It displays the banishment if a banned IP address is found
+        // It displays the banishment if a banned IP address is found.
         if (Ban::isIp(Ip::get()))
         {
             \PH7\Framework\Page\Page::banned();
         }
 
-        // The maintenance page is not displayed for the module "Admin" hen and the administrator is logged
+        // The maintenance page is not displayed for the module "Admin" hen and the administrator is logged.
         if (DbConfig::getSetting('siteStatus') === DbConfig::MAINTENANCE_SITE && !\PH7\AdminCore::auth() && $this->oRegistry->module !== PH7_ADMIN_MOD)
         {
             \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
