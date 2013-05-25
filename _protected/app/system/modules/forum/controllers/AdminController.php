@@ -58,24 +58,22 @@ class AdminController extends Controller
 
     public function deleteCategory()
     {
-        if ($this->oForumModel->deleteCategory($this->httpRequest->post('id'))) {
+        if ($this->oForumModel->deleteCategory($this->httpRequest->post('id')))
             $this->sMsg = t('Your Category has been deleted!');
-        } else {
+        else
             $this->sMsg = t('Oops! Your Category could not be deleted');
-        }
 
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('forum', 'forum', 'index'), $this->sMsg);
+        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'index'), $this->sMsg);
     }
 
     public function deleteForum()
     {
-        if ($this->oForumModel->deleteForum($this->httpRequest->post('id'))) {
+        if ($this->oForumModel->deleteForum($this->httpRequest->post('id')))
             $this->sMsg = t('Your Forum has been deleted!');
-        } else {
+        else
             $this->sMsg = t('Oops! Your Forum could not be deleted');
-        }
 
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('forum', 'forum', 'index'), $this->sMsg);
+        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'index'), $this->sMsg);
     }
 
     public function __destruct()

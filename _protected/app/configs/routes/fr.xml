@@ -184,6 +184,11 @@
     <!-- Payment -->
       <route url="payment/edit/([0-9]+)" path="system/modules" module="payment" controller="admin" action="editmembership" vars="group_id" />
 
+    <!-- Field -->
+      <route url="field/list/([a-zA-Z]+)" path="system/modules" module="field" controller="field" action="all" vars="mod" />
+      <route url="field/add/([a-zA-Z]+)" path="system/modules" module="field" controller="field" action="add" vars="mod" />
+      <route url="field/edit/([a-zA-Z]+)/([a-zA-Z0-9_-]+)" path="system/modules" module="field" controller="field" action="edit" vars="mod,name" />
+
     <!-- END SYSTEM MODULES -->
 
 

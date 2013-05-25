@@ -55,14 +55,16 @@ class CommentController extends Controller
         $oComment = $this->oCommentModel->read($this->iId, 1, $oPage->getFirstItem(), $oPage->getNbItemsByPage(), $this->sTable);
         unset($oPage);
 
-        if (!empty($oComment)) {
-
+        if (!empty($oComment))
+        {
             $this->view->avatarDesign = new AvatarDesignCore(); // Avatar Design Class
             $this->view->member_id = $this->session->get('member_id');
             $this->view->csrf_token = (new Framework\Security\CSRF\Token)->generate('comment');
 
             $this->view->comment = $oComment;
-        } else {
+        }
+        else
+        {
             $this->notFound();
         }
         $this->output();
@@ -72,7 +74,8 @@ class CommentController extends Controller
     {
         $oComment = $this->oCommentModel->get($this->iId, 1, $this->sTable);
 
-        if (!empty($oComment)) {
+        if (!empty($oComment))
+        {
             $this->sTitle = t('Read this comment of <span class="pH1">%0%</span>', $oComment->firstName);
             $this->view->page_title = $this->sTitle;
             $this->view->meta_description = t('Read comment of %0%, %1%. %2%', $oComment->firstName, $oComment->username, substr(Ban::filterWord($oComment->comment, false), 0, 150));
@@ -83,7 +86,9 @@ class CommentController extends Controller
             $this->view->member_id = $this->session->get('member_id');
 
             $this->view->com = $oComment;
-        } else {
+        }
+        else
+        {
             $this->notFound();
             // Modified the message error
             $this->view->error = t('No comments yet, please return to the <a href="%0%">previous page</a>.', 'javascript:history.back();');

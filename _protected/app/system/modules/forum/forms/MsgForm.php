@@ -26,6 +26,7 @@ class MsgForm
         }
 
         $iForumsId = (new ForumModel)->getForum(null, 0, 300);
+        $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
         $aForumsName = array();
         foreach ($iForumsId as $id)
@@ -40,7 +41,7 @@ class MsgForm
         $oForm->addElement(new \PFBC\Element\Select(t('Forum:'), 'forum', $aForumsName, array('value'=>$oHttpRequest->get('forum_id'))));
         unset($aForumsName, $oHttpRequest);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Subject:'), 'title', array('id'=>'str_title', 'onblur'=>'CValid(this.value,this.id,4,60)', 'required' => 1, 'validation'=>new \PFBC\Validation\RegExp(Config::getInstance()->values['module.setting']['url_title.pattern']))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Subject:'), 'title', array('id'=>'str_title', 'onblur'=>'CValid(this.value,this.id,4,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_title"></span>'));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Message:'), 'message', array('required' => 1, 'validation'=>new \PFBC\Validation\Str(4))));
         if (DbConfig::getSetting('isCaptchaForum'))

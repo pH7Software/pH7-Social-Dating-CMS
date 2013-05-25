@@ -26,10 +26,11 @@ class EditForm
             Framework\Url\HeaderUrl::redirect();
         }
 
+        $oAffModel = new AffiliateModel;
         $oHR = new HttpRequest;
         $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
 
-        $oAff = (new AffiliateModel)->readProfile($iProfileId, 'Affiliate');
+        $oAff = $oAffModel->readProfile($iProfileId, 'Affiliate');
 
 
         // Birth date with the date format for the date picker
@@ -59,19 +60,12 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Radio(t('Your Sex:'), 'sex', array('male'=>t('Male'), 'female'=>t('Female')), array('value'=> $oAff->sex,'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Date(t('Your Date of birth:'), 'birth_date', array('id'=>'birth_date', 'onblur'=>'CValid(this.value, this.id)', 'value'=>$sBirthDate, 'validation'=> new \PFBC\Validation\BirthDate, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
-        $oForm->addElement(new \PFBC\Element\Country(t('Your Country:'), 'country', array('id'=>'str_country', 'value'=>$oAff->country, 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Address:'), 'address', array('id'=>'str_address', 'onblur'=>'CValid(this.value,this.id,4,255)', 'value'=>$oAff->address, 'validation'=>new \PFBC\Validation\Str(4,255), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_address"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your City:'), 'city', array('id'=>'str_city', 'onblur'=>'CValid(this.value,this.id,2,150)', 'value'=>$oAff->city, 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_city"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your State or Province:'), 'state', array('id'=>'str_state', 'onblur'=>'CValid(this.value,this.id,2,150)', 'value'=>$oAff->state, 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_state"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Postal code (zip):'), 'zip_code', array('id'=>'str_zip_code', 'onblur'=>'CValid(this.value,this.id,2,10)', 'value'=>$oAff->zipCode, 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), 'description', array('id'=>'str_description', 'onblur'=>'CValid(this.value,this.id,10,1000)', 'description'=>t('Description of your site(s).'), 'title'=>t('Tell us about your site(s).'), 'value'=>$oAff->description, 'validation'=>new \PFBC\Validation\Str(20,2000), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));
-        $oForm->addElement(new \PFBC\Element\Url(t('Your Website:'), 'website', array('id'=>'url', 'onblur'=>'CValid(this.value,this.id)', 'description'=>t('Your main website where you are the owner.'), 'title'=>t('You can advertise on other sites that you specify, but the site that you specify in this field must be your site.'), 'value'=>$oAff->website, 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\HtmlExternal('<span class="input_error url"></span>'));
+
+        // Generate dynamic fields
+        $oFields = $oAffModel->getInfoFields($iProfileId, 'AffiliateInfo');
+        foreach ($oFields as $sColumn => $sValue)
+            $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
+
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
         $oForm->render();

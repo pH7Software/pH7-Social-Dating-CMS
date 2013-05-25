@@ -48,7 +48,7 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') . 'AS m ON c.sender = m.profileId WHERE ' . $sSqlRecipientId . ' c.approved =:approved ORDER BY c.createdDate DESC LIMIT :offset, :limit');
 
-        if(!empty($iRecipientId)) $rStmt->bindParam(':recipient', $iRecipientId, \PDO::PARAM_INT);
+        if (!empty($iRecipientId)) $rStmt->bindParam(':recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -62,7 +62,8 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         $this->cache->start(static::CACHE_GROUP, 'total' . $iRecipientId . $sTable, static::CACHE_TIME);
 
-        if(!$iData = $this->cache->get()) {
+        if (!$iData = $this->cache->get())
+        {
             $sTable = CommentCore::checkTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('Comments' . $sTable) . ' WHERE recipient = :recipient');

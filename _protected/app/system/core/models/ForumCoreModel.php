@@ -40,7 +40,7 @@ class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlMessageId = (isset($iMessageId)) ? ' AND msg.messageId =:messageId ' : '';
         $sSqlProfileId = (isset($iProfileId)) ? ' AND msg.profileId =:profileId ' : '';
         $rStmt = Db::getInstance()->prepare('SELECT f.name, t.title, t.forumId, msg.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId INNER JOIN ' . Db::prefix('ForumsMessages') . 'AS msg ON t.topicId = msg.topicId LEFT JOIN' . Db::prefix('Members')  . 'AS m
-        ON msg.profileId = m.profileId WHERE msg.topicId =:topicId ' . $sSqlMessageId . $sSqlProfileId . ' AND msg.approved=:approved ORDER BY msg.createdDate ' . $sSort . ' LIMIT :offset, :limit');
+            ON msg.profileId = m.profileId WHERE msg.topicId =:topicId ' . $sSqlMessageId . $sSqlProfileId . ' AND msg.approved=:approved ORDER BY msg.createdDate ' . $sSort . ' LIMIT :offset, :limit');
         $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
         if(isset($iMessageId)) $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         if(isset($iProfileId)) $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);

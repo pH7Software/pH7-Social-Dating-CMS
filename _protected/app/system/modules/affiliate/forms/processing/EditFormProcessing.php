@@ -42,26 +42,14 @@ class EditFormProcessing extends Form
         if(!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate))
             $oAffModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId, 'Affiliate');
 
-        if(!$this->str->equals($this->httpRequest->post('address'), $oAff->address))
-            $oAffModel->updateProfile('address', $this->httpRequest->post('address'), $iProfileId, 'Affiliate');
-
-        if(!$this->str->equals($this->httpRequest->post('country'), $oAff->country))
-            $oAffModel->updateProfile('country', $this->httpRequest->post('country'), $iProfileId, 'Affiliate');
-
-        if(!$this->str->equals($this->httpRequest->post('city'), $oAff->city))
-            $oAffModel->updateProfile('city', $this->httpRequest->post('city'), $iProfileId, 'Affiliate');
-
-        if(!$this->str->equals($this->httpRequest->post('state'), $oAff->state))
-            $oAffModel->updateProfile('state', $this->httpRequest->post('state'), $iProfileId, 'Affiliate');
-
-        if(!$this->str->equals($this->httpRequest->post('zip_code'), $oAff->zipCode))
-            $oAffModel->updateProfile('zipCode', $this->httpRequest->post('zip_code'), $iProfileId, 'Affiliate');
-
-        if(!$this->str->equals($this->httpRequest->post('description'), $oAff->description))
-            $oAffModel->updateProfile('description', $this->httpRequest->post('description'), $iProfileId, 'Affiliate');
-
-        if(!$this->str->equals($this->httpRequest->post('website'), $oAff->website))
-            $oAffModel->updateProfile('website', $this->httpRequest->post('website'), $iProfileId, 'Affiliate');
+        // Update dynamic fields.
+        $oFields = $oAffModel->getInfoFields($iProfileId);
+        foreach($oFields as $sColumn => $sValue)
+        {
+            if(!$this->str->equals($this->httpRequest->post($sColumn), $sValue))
+                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn), $iProfileId, 'AffiliateInfo');
+        }
+        unset($oFields);
 
         $oAffModel->setLastEdit($iProfileId, 'Affiliate');
 
