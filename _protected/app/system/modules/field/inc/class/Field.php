@@ -44,13 +44,13 @@ class Field
     }
 
     /**
-     * Prevents duplication of field in a table.
+     * Checks if the field exists.
      *
      * @param string $sMod Mod name.
      * @param string $sField Field name.
      * @return boolean
      */
-    public static function isDuplicate($sMod, $sField)
+    public static function isExists($sMod, $sField)
     {
         $aFields = (new FieldModel(static::getTable($sMod)))->all();
         return in_array(strtolower($sField), array_map('strtolower', $aFields));
@@ -64,8 +64,8 @@ class Field
      */
     public static function unmodifiable($sField)
     {
-        $aList = ['profileId', 'middleName', 'description', 'businessName', 'address', 'street', 'city', 'state', 'zipCode', 'country', 'phone', 'fax', 'website', 'socialNetworkSite', 'height', 'weight'];
-        return in_array(strtolower($sField), array_map('strtolower', $aList));
+        $aList = ['profileid', 'middlename', 'description', 'businessname', 'address', 'street', 'city', 'state', 'zipcode', 'country', 'phone', 'fax', 'website', 'socialnetworksite', 'height', 'weight'];
+        return in_array(strtolower($sField), $aList);
 
     }
 
