@@ -1,4 +1,4 @@
-{* Last edit 02/15/13 22:26 by PH *}
+{* Last edit 05/26/13 23:51 by PH *}
 {{ $design->htmlHeader() }}
 <html lang="{% $config->values['language']['lang'] %}">
 <head>
@@ -22,7 +22,7 @@
 {header}
 {@/if@}
 
-<!-- Begin Copyright Dating Social CMS pH7 by Pierre-Henry SORIA, All Rights Reserved -->
+<!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
 <!-- Do not modify or remove this code! Think of those who spend time to develop this framework and CMS for you. -->
 <meta name="creator" content="pH7 Team - {software_url}" />
 <meta name="designer" content="pH7 Team - {software_url}" />

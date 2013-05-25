@@ -21,7 +21,7 @@ class HomeController extends Controller
         // Meta Tags
         $this->view->page_title = t('Hello World');
         $this->view->meta_description = t('This module is a test for create simple module');
-        $this->view->meta_keywords = t('hello world, test, developpers, CMS, Cms Dating');
+        $this->view->meta_keywords = t('hello world, test, developpers, CMS, Dating CMS, CMS Dating, Social CMS, pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social Network Software, Social Networking Software');
 
         /* H TITLE html tag H1 to H4 */
         $this->view->h1_title = t('Example of simple module that displays hello world for the CMS');
