@@ -23,7 +23,7 @@ class AddFieldFormProcessing extends Form
         $iLength = $this->httpRequest->post('length');
         $sDefVal = $this->httpRequest->post('value');
 
-        if (Field::isDuplicate($sMod, $sName))
+        if (Field::isExists($sMod, $sName))
         {
             \PFBC\Form::setError('form_add_field', t('Oops! The field already exists!'));
         }

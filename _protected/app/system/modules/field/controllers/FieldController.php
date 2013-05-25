@@ -18,7 +18,7 @@ class FieldController extends Controller
         HeaderUrl::redirect(UriRoute::get('field', 'field', 'all', 'user'));
     }
 
-    public function all($sMod)
+    public function all($sMod = '')
     {
         $this->sTitle = t('All Fields');
         $this->view->page_title = $this->sTitle;
@@ -40,13 +40,20 @@ class FieldController extends Controller
         $this->output();
     }
 
-    public function edit()
+    public function edit($sMod = '', $sName = '')
     {
-        $this->sTitle = t('Edit a Field');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        if (Field::isExists($sMod, $sName))
+        {
+            $this->sTitle = t('Edit a Field');
+            $this->view->page_title = $this->sTitle;
+            $this->view->h2_title = $this->sTitle;
 
-        $this->output();
+            $this->output();
+        }
+        else
+        {
+            $this->displayPageNotFound(t('Field "%0%" is not found!', $sName));
+        }
     }
 
     public function delete()
@@ -54,7 +61,7 @@ class FieldController extends Controller
         $sMod = $this->httpRequest->post('mod');
         $sName = $this->httpRequest->post('name');
 
-        if (Field::unmodifiable($sName))
+        if (Field::unmodifiable($sName) || !Field::isExists($sMod, $sName))
             $bStatus = false;
         else
             $bStatus = (new FieldModel(Field::getTable($sMod), $sName))->delete();
