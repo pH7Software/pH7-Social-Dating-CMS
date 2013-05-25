@@ -15,10 +15,6 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        /***** Levels for admin module *****/
-
-        // Overall levels
-
         if (!AdminCore::auth())
         {
              // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
