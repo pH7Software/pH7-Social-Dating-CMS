@@ -29,7 +29,8 @@ class Ip
         $sIp = ''; // Default IP address value.
         $aVars = [Server::HTTP_CLIENT_IP, Server::HTTP_X_FORWARDED_FOR, Server::REMOTE_ADDR];
 
-        foreach($aVars as $sVar) {
+        foreach ($aVars as $sVar)
+        {
             if (null !== Server::getVar($sVar))
             {
                 $sIp = Server::getVar($sVar);

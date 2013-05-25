@@ -157,10 +157,10 @@ class Design
     * @param string $sUrl If NULL, the URL will be the current page. Default NULL
     * @param string $sMsg, Optional, display a message after redirect of the page.
     * @param string $sType You can as the value of the message type: "success", "info", "warning" or "error". Default is sucess.
-    * @param integer $iTime Optional, a time. Default value is 2 seconds.
+    * @param integer $iTime Optional, a time. Default value is 3 seconds.
     * @return void
     */
-    public function setRedirect($sUrl = null, $sMsg = null, $sType = 'success', $iTime = 2)
+    public function setRedirect($sUrl = null, $sMsg = null, $sType = 'success', $iTime = 3)
     {
         if($sMsg)  $this->setFlashMsg($sMsg, $sType);
         $sUrl = (!empty($sUrl)) ? $sUrl : $this->oHttpRequest->currentUrl();

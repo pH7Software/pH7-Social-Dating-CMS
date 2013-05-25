@@ -234,7 +234,7 @@ class Various
     }
 
     /**
-     * Set a Error Message with a Exception then exit() function and with 500 Http Status Code.
+     * Set a Error Message with a Exception then exit() function.
      *
      * @param string $sTable The table value.
      * @return integer 1 (with exit function).
@@ -242,7 +242,6 @@ class Various
      */
     public static function launchErr($sTable)
     {
-        \PH7\Framework\Http\Http::setHeadersByCode(500);
         throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Bad data table: "' . $sTable . '"!');
         exit(1);
     }

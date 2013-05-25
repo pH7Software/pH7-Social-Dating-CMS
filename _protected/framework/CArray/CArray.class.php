@@ -28,7 +28,7 @@ class CArray
     {
         foreach($aTo as $mKey => $mVal)
         {
-            if(is_integer($mKey))
+            if(is_int($mKey))
                 $aFrom[] = $mVal;
             else if(is_array($mVal) && isset($aFrom[$mKey]) && is_array($aFrom[$mKey]))
                 $aFrom[$mKey] = self::merge($aFrom[$mKey], $mVal); // Recursive method

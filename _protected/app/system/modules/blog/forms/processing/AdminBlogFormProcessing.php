@@ -78,4 +78,3 @@ class AdminBlogFormProcessing extends Form
     }
 
 }
-

@@ -28,7 +28,7 @@ class CommentCore
     {
         $sTable = strtolower($sTable); // Case insensitivity
 
-        switch($sTable)
+        switch ($sTable)
         {
             case 'profile':
             case 'picture':

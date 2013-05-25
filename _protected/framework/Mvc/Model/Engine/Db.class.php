@@ -315,11 +315,11 @@ class Db
     /**
      * Free database.
      *
-     * @param object \PDOStatement $rStmt Close cursor of PDOStatement class. Default value NULL
-     * @param bool $bCloseConnection Close connection of PDO. Default value TRUE
+     * @param object \PDOStatement $rStmt Close cursor of PDOStatement class. Default NULL
+     * @param bool $bCloseConnection Close connection of PDO. Default FALSE
      * @return void
      */
-    public static function free(\PDOStatement &$rStmt = NULL, $bCloseConnection = TRUE)
+    public static function free(\PDOStatement &$rStmt = NULL, $bCloseConnection = FALSE)
     {
         // Close Cursor
         if(NULL !== $rStmt)

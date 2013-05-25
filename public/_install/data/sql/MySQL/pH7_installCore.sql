@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS pH7_Admins (
   lang varchar(5) NOT NULL DEFAULT 'en_US',
   timeZone varchar(3) NOT NULL DEFAULT '-6',
   ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
-  hashValidation char(40) DEFAULT NULL,
-  prefixSalt char(40) DEFAULT NULL,
-  suffixSalt char(40) DEFAULT NULL,
+  hashValidation varchar(40) DEFAULT NULL,
+  prefixSalt varchar(40) DEFAULT NULL,
+  suffixSalt varchar(40) DEFAULT NULL,
   joinDate datetime DEFAULT NULL,
   lastActivity datetime DEFAULT NULL,
   lastEdit datetime DEFAULT NULL,
@@ -71,7 +71,7 @@ INSERT INTO pH7_Memberships (groupId, name, description, permissions, price, exp
 
 
 CREATE TABLE IF NOT EXISTS pH7_Members (
-  profileId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   email varchar(200) NOT NULL,
   username varchar(40) NOT NULL,
   password char(120) NOT NULL,
@@ -92,9 +92,9 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   approvedAvatar tinyint(1) unsigned NOT NULL DEFAULT 1,
   featured tinyint(1) unsigned NOT NULL DEFAULT 0,
   lang varchar(5) NOT NULL DEFAULT 'en_US',
-  hashValidation char(40) DEFAULT NULL,
-  prefixSalt char(40) DEFAULT NULL,
-  suffixSalt char(40) DEFAULT NULL,
+  hashValidation varchar(40) DEFAULT NULL,
+  prefixSalt varchar(40) DEFAULT NULL,
+  suffixSalt varchar(40) DEFAULT NULL,
   views int(11) NOT NULL DEFAULT 0,
   reference varchar(255) DEFAULT NULL,
   votes int(11) DEFAULT 0,
@@ -106,14 +106,13 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   FOREIGN KEY (groupId) REFERENCES pH7_Memberships(groupId),
   UNIQUE KEY (username),
   UNIQUE KEY (email),
-  KEY country (country),
   KEY birthDate (birthDate)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 -- Begin 1.0 Version
 CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
-  profileId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   middleName varchar(50) DEFAULT NULL,
   description text DEFAULT NULL,
   address varchar(255) DEFAULT NULL,
@@ -129,12 +128,13 @@ CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
   height tinyint(3) unsigned DEFAULT NULL,
   weight tinyint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (profileId),
+  KEY country (country),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersPrivacy (
-  profileId int(11) unsigned NOT NULL,
+  profileId int(10) unsigned NOT NULL,
   privacyProfile enum('all','only_members','only_me') NOT NULL DEFAULT 'all',
   searchProfile enum('yes','no') NOT NULL DEFAULT 'yes',
   userSaveViews enum('yes','no') NOT NULL DEFAULT 'yes',
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersPrivacy (
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersNotifications (
-  profileId int(11) unsigned NOT NULL,
+  profileId int(10) unsigned NOT NULL,
   enableNewsletters tinyint(1) unsigned NOT NULL DEFAULT 1,
   newMsg tinyint(1) unsigned NOT NULL DEFAULT 1,
   friendRequest tinyint(1) unsigned NOT NULL DEFAULT 1,
@@ -153,8 +153,8 @@ CREATE TABLE IF NOT EXISTS pH7_MembersNotifications (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- GHOST User. Do not remove ghost default member!
-INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, sex, matchSex, hashValidation, ip, lastActivity, featured, active, userStatus, groupId, joinDate, avatar, prefixSalt, suffixSalt, views, reference, votes, score, credits, ban, approvedAvatar) VALUES
-(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '', '', NULL, '127.0.0.1', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate, NULL, NULL, NULL, 0, NULL, 0, 0, 0, 0, 1);
+INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, sex, matchSex, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
+(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '', '', '127.0.0.1', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
 INSERT INTO pH7_MembersInfo (profileId, description, address, street, city, state, zipCode, country) VALUES
 (1, 'This profile no longer exists, so I''m a ghost who replaces him during this time', 'The Ghost City', 'Ghost street', 'Ghost town', 'Ghost state', '000000', 'US');
 -- Privacy settings
@@ -164,7 +164,7 @@ INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters, newMsg, frie
 
 
 CREATE TABLE IF NOT EXISTS pH7_Affiliate (
-  profileId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   username varchar(40) NOT NULL,
   firstName varchar(50) NOT NULL,
   lastName varchar(50) NOT NULL,
@@ -180,10 +180,10 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliate (
   paymentLast decimal(8,2) NOT NULL DEFAULT '0.00',
   paymentLastDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   lang varchar(5) NOT NULL DEFAULT 'en_US',
-  hashValidation char(40) DEFAULT NULL,
-  prefixSalt char(40) DEFAULT NULL,
-  suffixSalt char(40) DEFAULT NULL,
-  refer int(11) unsigned DEFAULT 0,
+  hashValidation varchar(40) DEFAULT NULL,
+  prefixSalt varchar(40) DEFAULT NULL,
+  suffixSalt varchar(40) DEFAULT NULL,
+  refer int(10) unsigned DEFAULT 0,
   joinDate datetime DEFAULT NULL,
   lastActivity datetime DEFAULT NULL,
   lastEdit datetime DEFAULT NULL,
@@ -193,14 +193,13 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliate (
   UNIQUE KEY bankAccount (bankAccount), -- For the Security Bank Account --
   UNIQUE KEY username (username),
   UNIQUE KEY email (email),
-  KEY country (country),
   KEY birthDate (birthDate)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 -- Begin 1.0 Version
 CREATE TABLE IF NOT EXISTS pH7_AffiliateInfo (
-  profileId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   middleName varchar(50) DEFAULT NULL,
   businessName varchar(100) DEFAULT NULL,
   address varchar(255) DEFAULT NULL,
@@ -214,13 +213,14 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliateInfo (
   website varchar(200) DEFAULT NULL,
   fax varchar(100) DEFAULT NULL,
   PRIMARY KEY (profileId),
+  KEY country (country),
   FOREIGN KEY (profileId) REFERENCES pH7_Affiliate(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_BlockIp (
-  ip int(11) unsigned NOT NULL DEFAULT '0',
-  expires int(11) unsigned NOT NULL,
+  ip int(10) unsigned NOT NULL DEFAULT '0',
+  expires int(10) unsigned NOT NULL,
   PRIMARY KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS pH7_Ads (
   active enum('1','0') DEFAULT '1',
   width smallint(4) DEFAULT NULL,
   height smallint(4) DEFAULT NULL,
-  views int(11) unsigned NOT NULL DEFAULT '0',
+  views int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (adsId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -262,7 +262,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdsAffiliate (
   active enum('1','0') DEFAULT '1',
   width smallint(4) DEFAULT NULL,
   height smallint(4) DEFAULT NULL,
-  views int(11) unsigned NOT NULL DEFAULT '0',
+  views int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (adsId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -276,14 +276,14 @@ INSERT INTO pH7_AdsAffiliate (adsId, name, code, active, width, height, views) V
 
 
 CREATE TABLE IF NOT EXISTS pH7_AlbumsPictures (
-  albumId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  profileId int(11) unsigned NOT NULL,
+  albumId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL,
   name varchar(80) NOT NULL,
   thumb char(11) NOT NULL,
   approved enum('1','0') DEFAULT '1',
   votes int(9) unsigned DEFAULT '0',
   score float(9) unsigned DEFAULT '0',
-  views int(11) unsigned DEFAULT '0',
+  views int(10) unsigned DEFAULT '0',
   description varchar(255) DEFAULT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -293,14 +293,14 @@ CREATE TABLE IF NOT EXISTS pH7_AlbumsPictures (
 
 
 CREATE TABLE IF NOT EXISTS pH7_AlbumsVideos (
-  albumId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  profileId int(11) unsigned NOT NULL,
+  albumId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL,
   name varchar(80) NOT NULL,
   thumb char(11) NOT NULL,
   approved enum('1','0') DEFAULT '1',
   votes int(9) unsigned DEFAULT '0',
   score float(9) unsigned DEFAULT '0',
-  views int(11) unsigned DEFAULT '0',
+  views int(10) unsigned DEFAULT '0',
   description varchar(255) DEFAULT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -310,15 +310,15 @@ CREATE TABLE IF NOT EXISTS pH7_AlbumsVideos (
 
 
 CREATE TABLE IF NOT EXISTS pH7_Pictures (
-  pictureId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  profileId int(11) unsigned NOT NULL,
-  albumId int(11) unsigned NOT NULL,
+  pictureId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL,
+  albumId int(10) unsigned NOT NULL,
   title varchar(80) NOT NULL,
   file varchar(40) NOT NULL,
   approved enum('1','0') DEFAULT '1',
   votes int(9) unsigned DEFAULT '0',
   score float(9) unsigned DEFAULT '0',
-  views int(11) unsigned DEFAULT '0',
+  views int(10) unsigned DEFAULT '0',
   description varchar(255) DEFAULT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -329,15 +329,15 @@ CREATE TABLE IF NOT EXISTS pH7_Pictures (
 
 
 CREATE TABLE IF NOT EXISTS pH7_Videos (
-  videoId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  profileId int(11) unsigned NOT NULL,
-  albumId int(11) unsigned NOT NULL,
+  videoId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL,
+  albumId int(10) unsigned NOT NULL,
   file varchar(255) DEFAULT NULL, -- e.g. http://youtu.be/4fplAZfO9KY or local file server.
   thumb varchar(255) DEFAULT NULL, -- e.g. http://img.youtube.com/vi/4fplAZfO9KY/default.jpg or local file server.
   approved enum('1','0') NOT NULL DEFAULT '1',
   votes int(9) unsigned DEFAULT '0',
   score float(9) unsigned DEFAULT '0',
-  views int(11) unsigned DEFAULT '0',
+  views int(10) unsigned DEFAULT '0',
   description varchar(255) DEFAULT NULL,
   title varchar(80) DEFAULT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -377,7 +377,7 @@ CREATE TABLE IF NOT EXISTS pH7_Blogs (
   tags varchar(200) DEFAULT NULL,
   votes int(9) unsigned DEFAULT '0',
   score float(9) unsigned DEFAULT '0',
-  views int(11) unsigned DEFAULT '0',
+  views int(10) unsigned DEFAULT '0',
   enableComment enum('1','0') DEFAULT '1',
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -426,8 +426,8 @@ INSERT INTO pH7_BlogsDataCategories (categoryId, name) VALUES
 
 
 CREATE TABLE IF NOT EXISTS pH7_Notes (
-  noteId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  profileId int(11) unsigned NOT NULL,
+  noteId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL,
   postId varchar(60) NOT NULL,
   langId char(2) NOT NULL DEFAULT '',
   title varchar(100) DEFAULT NULL,
@@ -443,7 +443,7 @@ CREATE TABLE IF NOT EXISTS pH7_Notes (
   thumb char(24) DEFAULT NULL,
   votes int(9) unsigned DEFAULT '0',
   score float(9) unsigned DEFAULT '0',
-  views int(11) unsigned DEFAULT '0',
+  views int(10) unsigned DEFAULT '0',
   enableComment enum('1','0') DEFAULT '1',
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -456,8 +456,8 @@ CREATE TABLE IF NOT EXISTS pH7_Notes (
 
 CREATE TABLE IF NOT EXISTS pH7_NotesCategories (
   categoryId smallint(4) unsigned NOT NULL,
-  noteId int(11) unsigned NOT NULL,
-  profileId int(11) unsigned NOT NULL,
+  noteId int(10) unsigned NOT NULL,
+  profileId int(10) unsigned NOT NULL,
    INDEX (categoryId),
    INDEX (noteId),
    FOREIGN KEY (noteId) REFERENCES pH7_Notes(noteId),
@@ -496,8 +496,8 @@ INSERT INTO pH7_NotesDataCategories (categoryId, name) VALUES
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsBlog (
-  commentId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  sender int(11) unsigned NOT NULL,
+  commentId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  sender int(10) unsigned NOT NULL,
   recipient mediumint(10) unsigned NOT NULL,
   comment text NOT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -511,9 +511,9 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsBlog (
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsNote (
-  commentId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  sender int(11) unsigned NOT NULL,
-  recipient int(11) unsigned NOT NULL,
+  commentId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  sender int(10) unsigned NOT NULL,
+  recipient int(10) unsigned NOT NULL,
   comment text NOT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -526,9 +526,9 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsNote (
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsPicture (
-  commentId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  sender int(11) unsigned NOT NULL,
-  recipient int(11) unsigned NOT NULL,
+  commentId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  sender int(10) unsigned NOT NULL,
+  recipient int(10) unsigned NOT NULL,
   comment text NOT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -541,9 +541,9 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsPicture (
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsVideo (
-  commentId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  sender int(11) unsigned NOT NULL,
-  recipient int(11) unsigned NOT NULL,
+  commentId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  sender int(10) unsigned NOT NULL,
+  recipient int(10) unsigned NOT NULL,
   comment text NOT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -556,9 +556,9 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsVideo (
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsGame (
-  commentId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  sender int(11) unsigned NOT NULL,
-  recipient int(11) unsigned NOT NULL,
+  commentId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  sender int(10) unsigned NOT NULL,
+  recipient int(10) unsigned NOT NULL,
   comment text NOT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -571,9 +571,9 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsGame (
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsProfile (
-  commentId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  sender int(11) unsigned NOT NULL,
-  recipient int(11) unsigned NOT NULL,
+  commentId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  sender int(10) unsigned NOT NULL,
+  recipient int(10) unsigned NOT NULL,
   comment text NOT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -618,7 +618,7 @@ INSERT INTO pH7_Forums (forumId, name, description, categoryId) VALUES
 CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
   topicId int(10) unsigned NOT NULL AUTO_INCREMENT,
   forumId mediumint(10) unsigned DEFAULT NULL,
-  profileId int(11) unsigned NOT NULL,
+  profileId int(10) unsigned NOT NULL,
   title varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   message text COLLATE utf8_unicode_ci,
   approved enum('1','0') COLLATE utf8_unicode_ci DEFAULT '1',
@@ -633,9 +633,9 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
 
 
 CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
-  messageId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  messageId int(10) unsigned NOT NULL AUTO_INCREMENT,
   topicId int(10) unsigned NOT NULL,
-  profileId int(11) unsigned NOT NULL,
+  profileId int(10) unsigned NOT NULL,
   message text COLLATE utf8_unicode_ci,
   approved enum('1','0') COLLATE utf8_unicode_ci DEFAULT '1',
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -648,7 +648,7 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
 
 
 CREATE TABLE IF NOT EXISTS pH7_GroupsLevels (
-  id int(11) unsigned NOT NULL AUTO_INCREMENT,
+  id int(10) unsigned NOT NULL AUTO_INCREMENT,
   name varchar(64) CHARACTER SET armscii8 NOT NULL,
   icon varchar(64) CHARACTER SET armscii8 NOT NULL,
   slog varchar(64) CHARACTER SET armscii8 DEFAULT NULL,
@@ -757,7 +757,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogSession (
   email varchar(200) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
-  sessionHash char(40) NOT NULL,
+  sessionHash varchar(40) NOT NULL,
   idHash char(32) NOT NULL,
   lastActivity int(10) unsigned NOT NULL,
   location varchar(255) DEFAULT NULL,
@@ -773,13 +773,13 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogSession (
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersLogSession (
-  profileId int(11) unsigned DEFAULT NULL,
+  profileId int(10) unsigned DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
   email varchar(200) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
-  sessionHash char(40) NOT NULL,
+  sessionHash varchar(40) NOT NULL,
   idHash char(32) NOT NULL,
   lastActivity int(10) unsigned NOT NULL,
   location varchar(255) DEFAULT NULL,
@@ -795,13 +795,13 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogSession (
 
 
 CREATE TABLE IF NOT EXISTS pH7_AffiliateLogSession (
-  profileId int(11) unsigned DEFAULT NULL,
+  profileId int(10) unsigned DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
   email varchar(200) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
-  sessionHash char(40) NOT NULL,
+  sessionHash varchar(40) NOT NULL,
   idHash char(32) NOT NULL,
   lastActivity int(10) unsigned NOT NULL,
   location varchar(255) DEFAULT NULL,
@@ -817,7 +817,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliateLogSession (
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersBackground (
-  profileId int(11) unsigned NOT NULL,
+  profileId int(10) unsigned NOT NULL,
   file varchar(5) NOT NULL,
   approved tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY profileId (profileId),
@@ -826,8 +826,8 @@ CREATE TABLE IF NOT EXISTS pH7_MembersBackground (
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersWhoViews (
-  profileId int(11) unsigned NOT NULL,
-  visitorId int(11) unsigned NOT NULL,
+  profileId int(10) unsigned NOT NULL,
+  visitorId int(10) unsigned NOT NULL,
   lastVisit datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   INDEX profileId (profileId),
   INDEX visitorId (visitorId),
@@ -837,8 +837,8 @@ CREATE TABLE IF NOT EXISTS pH7_MembersWhoViews (
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersFriends (
-  profileId int(11) unsigned NOT NULL,
-  friendId int(11) unsigned NOT NULL,
+  profileId int(10) unsigned NOT NULL,
+  friendId int(10) unsigned NOT NULL,
   requestDate datetime DEFAULT NULL,
   pending tinyint(1) unsigned NOT NULL DEFAULT '0',
   INDEX profileId (profileId),
@@ -850,8 +850,8 @@ CREATE TABLE IF NOT EXISTS pH7_MembersFriends (
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersWall (
-  wallId int(11) unsigned NOT NULL AUTO_INCREMENT,
-  profileId int(11) unsigned NOT NULL DEFAULT '0',
+  wallId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL DEFAULT '0',
   post text CHARACTER SET armscii8,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
@@ -861,7 +861,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersWall (
 
 
 CREATE TABLE IF NOT EXISTS pH7_Messages (
-  messageId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  messageId int(10) unsigned NOT NULL AUTO_INCREMENT,
   sender int(10) unsigned NOT NULL DEFAULT '0',
   recipient int(10) unsigned NOT NULL DEFAULT '0',
   title varchar(30) NOT NULL DEFAULT '',
@@ -877,12 +877,12 @@ CREATE TABLE IF NOT EXISTS pH7_Messages (
 
 
 CREATE TABLE IF NOT EXISTS pH7_Messenger (
-  messengerId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  messengerId int(10) unsigned NOT NULL AUTO_INCREMENT,
   fromUser varchar(40) NOT NULL DEFAULT '',
   toUser varchar(40) NOT NULL DEFAULT '',
   message text NOT NULL,
   sent datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  recd int(11) unsigned NOT NULL DEFAULT '0',
+  recd int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (messengerId),
   FOREIGN KEY (fromUser) REFERENCES pH7_Members(username),
   FOREIGN KEY (toUser) REFERENCES pH7_Members(username)
@@ -922,8 +922,8 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
   reportId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
-  reporterId int(11) unsigned DEFAULT NULL,
-  spammerId int(11) unsigned DEFAULT NULL,
+  reporterId int(10) unsigned DEFAULT NULL,
+  spammerId int(10) unsigned DEFAULT NULL,
   dateTime datetime DEFAULT NULL,
   contentType enum('profile','avatar','mail','comment','photo','video','forum','note') NOT NULL DEFAULT 'profile',
   description varchar(255) DEFAULT NULL,
@@ -1031,11 +1031,11 @@ CREATE TABLE IF NOT EXISTS pH7_StaticJs (
 
 
 CREATE TABLE IF NOT EXISTS pH7_Subscribers (
-  profileId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   name varchar(200) NOT NULL,
   email varchar(200) NOT NULL,
   active tinyint(1) unsigned NOT NULL DEFAULT 2, -- 1 = Active Account, 2 = Pending Account
-  hashValidation char(40) DEFAULT NULL,
+  hashValidation varchar(40) DEFAULT NULL,
   INDEX (profileId),
   PRIMARY KEY (profileId),
   UNIQUE KEY (email)

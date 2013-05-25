@@ -50,7 +50,7 @@ class Validate
 
             case 'int':
             case 'integer':
-                $bValid = is_numeric($sValue);
+                $bValid = is_int($sValue);
             break;
 
             case 'float':

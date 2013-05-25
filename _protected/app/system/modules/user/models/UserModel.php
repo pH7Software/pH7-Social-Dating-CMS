@@ -80,8 +80,7 @@ class UserModel extends UserCoreModel
      */
     public function join3(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersInfo') . '(profileId, description)
-            VALUES (:profileId, :description)');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('MembersInfo') . 'SET description = :description WHERE profileId = :profileId');
         $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
         $rStmt->bindValue(':profileId', $aData['profile_id'], \PDO::PARAM_INT);
         return $rStmt->execute();

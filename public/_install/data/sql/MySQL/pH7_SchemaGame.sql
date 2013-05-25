@@ -11,7 +11,7 @@
 --
 
 CREATE TABLE IF NOT EXISTS pH7_Games (
-  gameId int(11) unsigned NOT NULL AUTO_INCREMENT,
+  gameId int(10) unsigned NOT NULL AUTO_INCREMENT,
   name varchar(120) NOT NULL,
   title varchar(120) NOT NULL,
   description varchar(255) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS pH7_Games (
   downloads int(9) unsigned DEFAULT '0',
   votes int(9) unsigned DEFAULT '0',
   score float unsigned DEFAULT '0',
-  views int(11) unsigned DEFAULT '0',
+  views int(10) unsigned DEFAULT '0',
   PRIMARY KEY (gameId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

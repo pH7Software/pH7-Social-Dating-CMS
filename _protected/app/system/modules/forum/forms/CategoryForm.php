@@ -22,11 +22,13 @@ class CategoryForm
             Framework\Url\HeaderUrl::redirect();
         }
 
+        $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
+
         $oForm = new \PFBC\Form('form_category', '100%');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_category', 'form_category'));
         $oForm->addElement(new \PFBC\Element\Token('category'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Category Name:'), 'title', array('id'=>'str_category', 'onblur'=>'CValid(this.value,this.id,4,60)', 'required' => 1, 'validation'=>new \PFBC\Validation\RegExp(Config::getInstance()->values['module.setting']['url_title.pattern']))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Category Name:'), 'title', array('id'=>'str_category', 'onblur'=>'CValid(this.value,this.id,4,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_category"></span>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));

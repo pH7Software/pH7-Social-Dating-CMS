@@ -210,6 +210,12 @@
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'report','index') }}" title="{@lang('Report')@}">{@lang('Report')@}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','add') }}" title="{@lang('Add User')@}">{@lang('Add User')@}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{@lang('Import Users')@}">{@lang('Import Users')@}</a></li>
+                <li><a href="{{ $design->url('field','field','all','user') }}" title="{@lang('User Fields')@}">{@lang('User Fields')@}</a>
+                  <ul>
+                    <li><a href="{{ $design->url('field','field','all','user') }}" title="{@lang('Fields List')@}">{@lang('Fields List')@}</a></li>
+                    <li><a href="{{ $design->url('field','field','add','user') }}" title="{@lang('Add a Field')@}">{@lang('Add a Field')@}</a></li>
+                  </ul>
+                </li>
               </ul>
             </li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}" title="{@lang('Browse Admins')@}">{@lang('Admins')@}</a>
@@ -258,6 +264,12 @@
                 <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{@lang('Affiliated List')@}">{@lang('Affiliated')@}</a></li>
                 <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{@lang('Search an Affiliated')@}">{@lang('Search an Affiliated')@}</a></li>
                 <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{@lang('Add Affiliate')@}">{@lang('Add Affiliate')@}</a></li>
+                <li><a href="{{ $design->url('field','field','all','aff') }}" title="{@lang('Affiliate Fields')@}">{@lang('Affiliate Fields')@}</a>
+                  <ul>
+                    <li><a href="{{ $design->url('field','field','all','aff') }}" title="{@lang('Fields List')@}">{@lang('Fields List')@}</a></li>
+                    <li><a href="{{ $design->url('field','field','add','aff') }}" title="{@lang('Add a Field')@}">{@lang('Add a Field')@}</a></li>
+                  </ul>
+                </li>
               </ul>
             </li>
 

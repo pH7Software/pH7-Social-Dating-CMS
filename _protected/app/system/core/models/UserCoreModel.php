@@ -253,13 +253,10 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      * @param boolean $bCount
      * @param integer $iOffset
      * @param integer $iLimit
-     * @param string $sTable Default "Members"
      * @return mixed (object | integer) object for the users list returned or integer for the total number users returned.
      */
-    public function search(array $aParams, $bCount, $iOffset, $iLimit, $sTable = 'Members')
+    public function search(array $aParams, $bCount, $iOffset, $iLimit)
     {
-        Various::checkModelTable($sTable); // Checks if this table is correct
-
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
@@ -324,7 +321,9 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             $sSqlSex = '';
         }
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix($sTable) . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND userSaveViews = \'yes\' AND groupId = 2' .  $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState . $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId
+            LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND userSaveViews = \'yes\'
+            AND groupId = 2' .  $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState . $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlOrder . $sSqlLimit);
 
         if (!empty($aParams['match_sex'])) $rStmt->bindValue(':matchSex', '%' . $aParams['match_sex'] . '%', \PDO::PARAM_STR);
         if ($bIsSingleAge) $rStmt->bindValue(':year', '%' . (date('Y') - $aParams['age']) . '%', \PDO::PARAM_INT);
@@ -358,7 +357,6 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             Db::free($rStmt);
             return (int) $oRow->totalUsers;
         }
-
     }
 
     /**
@@ -591,7 +589,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $this->setInfoFields($aData);
         $this->setDefaultPrivacySetting();
         $this->setDefaultNotification();
-        return $iProfileId;
+        return $this->getKeyId();
     }
 
     public function setInfoFields(array $aData)
@@ -793,83 +791,86 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $oDb = Db::getInstance();
 
         // DELETE MESSAGES
-        $oDb->query('DELETE FROM' . Db::prefix('Messages') . 'WHERE sender = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('Messages') . 'WHERE recipient = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('Messages') . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('Messages') . 'WHERE recipient = ' . $iProfileId);
 
         // DELETE MESSAGES OF MESSENGER
-        $oDb->query('DELETE FROM' . Db::prefix('Messenger') . 'WHERE fromUser = ' . Db::getInstance()->quote($sUsername));
-        $oDb->query('DELETE FROM' . Db::prefix('Messenger') . 'WHERE toUser = ' . Db::getInstance()->quote($sUsername));
+        $oDb->exec('DELETE FROM' . Db::prefix('Messenger') . 'WHERE fromUser = ' . Db::getInstance()->quote($sUsername));
+        $oDb->exec('DELETE FROM' . Db::prefix('Messenger') . 'WHERE toUser = ' . Db::getInstance()->quote($sUsername));
 
         // DELETE PROFILE COMMENTS
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsProfile') . 'WHERE sender = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsProfile') . 'WHERE recipient = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsProfile') . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsProfile') . 'WHERE recipient = ' . $iProfileId);
 
         // DELETE PICTURE COMMENTS
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsPicture') . 'WHERE sender = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsPicture') . 'WHERE recipient = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsPicture') . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsPicture') . 'WHERE recipient = ' . $iProfileId);
 
         // DELETE VIDEO COMMENTS
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsVideo') . 'WHERE sender = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsVideo') . 'WHERE recipient = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsVideo') . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsVideo') . 'WHERE recipient = ' . $iProfileId);
 
         // DELETE NOTE COMMENTS
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsNote') . 'WHERE sender = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsNote') . 'WHERE recipient = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsNote') . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsNote') . 'WHERE recipient = ' . $iProfileId);
 
         // DELETE BLOG COMMENTS
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsBlog') . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsBlog') . 'WHERE sender = ' . $iProfileId);
 
         // DELETE GAME COMMENTS
-        $oDb->query('DELETE FROM' . Db::prefix('CommentsGame') . 'WHERE sender = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('CommentsGame') . 'WHERE sender = ' . $iProfileId);
 
         // DELETE PICTURES ALBUMS AND PICTURES
-        $oDb->query('DELETE FROM' . Db::prefix('Pictures') . 'WHERE profileId = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('AlbumsPictures') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('Pictures') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('AlbumsPictures') . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE VIDEOS ALBUMS AND VIDEOS
-        $oDb->query('DELETE FROM' . Db::prefix('Videos') . 'WHERE profileId = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('AlbumsVideos') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('Videos') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('AlbumsVideos') . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE FRIENDS
-        $oDb->query('DELETE FROM' . Db::prefix('MembersFriends') . 'WHERE profileId = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('MembersFriends') . 'WHERE friendId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('MembersFriends') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('MembersFriends') . 'WHERE friendId = ' . $iProfileId);
 
         // DELETE WALL
-        $oDb->query('DELETE FROM' . Db::prefix('MembersWall') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('MembersWall') . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE BACKGROUND
-        $oDb->query('DELETE FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE NOTES
-        $oDb->query('DELETE FROM' . Db::prefix('NotesCategories') . 'WHERE profileId = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('Notes') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('NotesCategories') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('Notes') . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE LIKE
-        $oDb->query('DELETE FROM' . Db::prefix('Likes') . 'WHERE keyId LIKE ' . Db::getInstance()->quote('%' . $sUsername . '.html'));
+        $oDb->exec('DELETE FROM' . Db::prefix('Likes') . 'WHERE keyId LIKE ' . Db::getInstance()->quote('%' . $sUsername . '.html'));
 
         // DELETE PROFILE VISITS
-        $oDb->query('DELETE FROM' . Db::prefix('MembersWhoViews') . 'WHERE profileId = ' . $iProfileId);
-        $oDb->query('DELETE FROM' . Db::prefix('MembersWhoViews') . 'WHERE visitorId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('MembersWhoViews') . 'WHERE profileId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('MembersWhoViews') . 'WHERE visitorId = ' . $iProfileId);
 
         // DELETE REPORT
-        $oDb->query('DELETE FROM' . Db::prefix('Report') . 'WHERE spammerId = ' . $iProfileId);
+        $oDb->exec('DELETE FROM' . Db::prefix('Report') . 'WHERE spammerId = ' . $iProfileId);
 
         // DELETE TOPICS of FORUMS
         /*
         No! Ghost Profile is ultimately the best solution!
         WARNING: Do not change this part of code without asking permission from Pierre-Henry Soria
         */
-        //$oDb->query('DELETE FROM' . Db::prefix('ForumsMessages') . 'WHERE profileId = ' . $iProfileId);
-        //$oDb->query('DELETE FROM' . Db::prefix('ForumsTopics') . 'WHERE profileId = ' . $iProfileId);
+        //$oDb->exec('DELETE FROM' . Db::prefix('ForumsMessages') . 'WHERE profileId = ' . $iProfileId);
+        //$oDb->exec('DELETE FROM' . Db::prefix('ForumsTopics') . 'WHERE profileId = ' . $iProfileId);
 
         // DELETE NOTIFICATIONS
-        $oDb->query('DELETE FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
         // DELETE PRIVACY SETTINGS
-        $oDb->query('DELETE FROM' . Db::prefix('MembersPrivacy') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix('MembersPrivacy') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+
+        // DELETE INFO FIELDS
+        $oDb->exec('DELETE FROM' . Db::prefix('MembersInfo') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
         // DELETE USER
-        $oDb->query('DELETE FROM' . Db::prefix('Members') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix('Members') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
 
         unset($oDb); // Destruction of the object
     }
@@ -935,7 +936,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sOrder = $this->profileOrderBy($sOrder);
 
         $sSqlLimit = ($bIsLimit ? 'LIMIT :offset, :limit' : '');
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')
             AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
 
         if ($bIsLimit)
@@ -972,7 +973,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
 
         $sSqlCity = (!empty($sCity)) ?  'AND (city LIKE :city)' : '';
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
         $rStmt->bindValue(':country', $sCountry, \PDO::PARAM_STR);
         (!empty($sCity)) ? $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR) : '';
 
@@ -1243,7 +1244,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId WHERE pay.expirationDays = 0 OR DATE_SUB(m.membershipExpiration, INTERVAL pay.expirationDays DAY) <= :currentTime AND profileId = :profileId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId WHERE pay.expirationDays = 0 OR DATE_SUB(m.membershipExpiration, INTERVAL pay.expirationDays DAY) <= :currentTime AND m.profileId = :profileId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_INT);
         $rStmt->execute();

@@ -17,7 +17,8 @@ class Comment extends CommentCore
      */
     public static function getTable($sTable)
     {
-        switch($sTable) {
+        switch($sTable)
+        {
             case 'Profile':
               $sNewTable = 'Members';
             break;

@@ -77,8 +77,8 @@ class AdminModel extends AdminCoreModel
             exit('You cannot delete the Root Administrator!');
 
         $oDb = Db::getInstance();
-        $oDb->query('DELETE FROM' . Db::prefix('Admins') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
-        Db::free($oDb);
+        $oDb->exec('DELETE FROM' . Db::prefix('Admins') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        unset($oDb);
     }
 
     public function searchAdmin($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)

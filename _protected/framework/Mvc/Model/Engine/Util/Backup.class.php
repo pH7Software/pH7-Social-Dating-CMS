@@ -46,7 +46,7 @@ class Backup
         '# Created on ' . (new CDateTime)->get()->dateTime() . "\n" .
         "#########################################################\n\n";
 
-        $aTables = array();
+        $aTables = $aColumns = $aValues = array();
         $oAllTables = Db::showTables();
         while ($aRow = $oAllTables->fetch()) $aTables[] = $aRow[0];
         unset($oAllTables);
@@ -57,7 +57,6 @@ class Backup
         foreach ($aTables as $sTable)
         {
             $oResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
-            Db::free();
 
             $iNum = (int) $oResult->rowCount();
 
@@ -84,7 +83,6 @@ class Backup
 
             /*** Free memory and close the database connection ***/
             unset($oDb);
-            Db::free();
 
             $iNum = (int) $oResult->rowCount();
 

@@ -23,7 +23,7 @@ final class Version
     /***** Framework Kernel *****/
     const KERNEL_VERSION = Kernel::SOFTWARE_VERSION;
     const KERNEL_BUILD = Kernel::SOFTWARE_BUILD;
-    const KERNAL_RELASE_DATE = '2013-05-18';
+    const KERNAL_RELASE_DATE = '2013-06-26';
     const KERNEL_VERSION_NAME = Kernel::SOFTWARE_VERSION_NAME;
 
     /***** Form PFBC *****/
