@@ -365,11 +365,11 @@ class InstallController extends Controller
                                 {
                                     if(validate_password($_SESSION['value']['admin_password']) == 'ok')
                                     {
-                                        if(validate_identical($_SESSION['value']['admin_password'], $_SESSION['value']['admin_passwordS']) == true)
+                                        if(validate_identical($_SESSION['value']['admin_password'], $_SESSION['value']['admin_passwordS']))
                                         {
-                                            if(validate_name($_SESSION['value']['admin_first_name']) == true)
+                                            if(validate_name($_SESSION['value']['admin_first_name']))
                                             {
-                                                if(validate_name($_SESSION['value']['admin_last_name']) == true)
+                                                if(validate_name($_SESSION['value']['admin_last_name']))
                                                 {
                                                     @require_once(PH7_ROOT_PUBLIC . '_constants.php');
                                                     @require_once(PH7_PATH_APP . 'configs/constants.php');
