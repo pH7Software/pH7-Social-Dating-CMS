@@ -31,8 +31,8 @@ final class Version
     const PFBC_RELASE_DATE = '2011-09-22';
 
     /***** Swift Mailer *****/
-    const SWIFT_VERSION = '4.3.0';
-    const SWIFT_RELASE_DATE = '2013-01-08';
+    const SWIFT_VERSION = '5.0.0';
+    const SWIFT_RELASE_DATE = '2013-04-30';
 
 
     /**
