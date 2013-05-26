@@ -6,7 +6,11 @@
  * @package        PH7 / App / System / Module / Field / Controller
  */
 namespace PH7;
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+
+use
+PH7\Framework\Cache\Cache,
+PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Url\HeaderUrl;
 
 class FieldController extends Controller
 {
@@ -64,7 +68,11 @@ class FieldController extends Controller
         if (Field::unmodifiable($sName) || !Field::isExists($sMod, $sName))
             $bStatus = false;
         else
+        {
             $bStatus = (new FieldModel(Field::getTable($sMod), $sName))->delete();
+            /* Clean UserCoreModel Cache */
+            if ($bStatus) (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
+        }
 
         $sMsg = ($bStatus) ? t('The field has been deleted') : t('An error occurred while deleting the field.');
         $sMsgType = ($bStatus) ? 'success' : 'error';

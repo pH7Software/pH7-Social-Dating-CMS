@@ -66,9 +66,13 @@ class EditFormProcessing extends Form
 
         $oUserModel->setLastEdit($iProfileId);
 
-        unset($oUserModel, $oUser);
+        /*** Clear caches ***/
+        $oUserCache = new User;
+        $oUserCache->clearReadProfileCache($iProfileId);
+        $oUserCache->clearInfoFieldCache($iProfileId);
 
-        (new User)->clearReadProfileCache($iProfileId);
+        // Destroy objects
+        unset($oUserModel, $oUser, $oUserCache);
 
         \PFBC\Form::setSuccess('form_user_edit_account', t('Your profile has been saved successfully!'));
     }

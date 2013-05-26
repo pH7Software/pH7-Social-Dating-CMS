@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Field / Form
  */
 namespace PH7;
+
 use PH7\Framework\Config\Config;
 
 class AddFieldForm
