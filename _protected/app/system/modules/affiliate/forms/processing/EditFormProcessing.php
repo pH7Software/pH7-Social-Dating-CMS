@@ -48,9 +48,9 @@ class EditFormProcessing extends Form
         $oFields = $oAffModel->getInfoFields($iProfileId);
         foreach($oFields as $sColumn => $sValue)
         {
-            $sParam = ($sColumn == 'description') ? HttpRequest::ONLY_XSS_CLEAN : null;
-            if(!$this->str->equals($this->httpRequest->post($sColumn, $sParam), $sValue))
-                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sParam), $iProfileId, 'AffiliateInfo');
+            $sHRParam = ($sColumn == 'description') ? HttpRequest::ONLY_XSS_CLEAN : null;
+            if(!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue))
+                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'AffiliateInfo');
         }
         unset($oFields);
 
