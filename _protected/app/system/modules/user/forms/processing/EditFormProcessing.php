@@ -59,8 +59,9 @@ class EditFormProcessing extends Form
         $oFields = $oUserModel->getInfoFields($iProfileId);
         foreach($oFields as $sColumn => $sValue)
         {
-            if(!$this->str->equals($this->httpRequest->post($sColumn), $sValue))
-                $oUserModel->updateProfile($sColumn, $this->httpRequest->post($sColumn), $iProfileId, 'MembersInfo');
+            $sParam = ($sColumn == 'description') ? HttpRequest::ONLY_XSS_CLEAN : null;
+            if(!$this->str->equals($this->httpRequest->post($sColumn, $sParam), $sValue))
+                $oUserModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sParam), $iProfileId, 'MembersInfo');
         }
         unset($oFields);
 

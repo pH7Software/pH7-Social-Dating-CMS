@@ -8,7 +8,7 @@
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Request
  * @version          1.1
- * @update           04/15/13
+ * @update           05/27/13
  * @link             http://hizup.com
  */
 
@@ -45,7 +45,7 @@ class HttpRequest extends \PH7\Framework\Http\Http
     METHOD_DELETE = 'DELETE',
     METHOD_OPTIONS = 'OPTIONS',
     METHOD_OVERRIDE = '_METHOD',
-    ONLY_XSS_CLEAN = 'JS_CLEAN',
+    ONLY_XSS_CLEAN = 'XSS_CLEAN',
     NO_CLEAN = 'NO_CLEAN';
 
     private $_sRequestUri, $_sMethod, $_aRequest, $_aGet, $_aPost;

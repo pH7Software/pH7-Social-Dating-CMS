@@ -8,6 +8,8 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Mvc\Request\HttpRequest;
+
 class EditFormProcessing extends Form
 {
 
@@ -46,8 +48,9 @@ class EditFormProcessing extends Form
         $oFields = $oAffModel->getInfoFields($iProfileId);
         foreach($oFields as $sColumn => $sValue)
         {
-            if(!$this->str->equals($this->httpRequest->post($sColumn), $sValue))
-                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn), $iProfileId, 'AffiliateInfo');
+            $sParam = ($sColumn == 'description') ? HttpRequest::ONLY_XSS_CLEAN : null;
+            if(!$this->str->equals($this->httpRequest->post($sColumn, $sParam), $sValue))
+                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sParam), $iProfileId, 'AffiliateInfo');
         }
         unset($oFields);
 
