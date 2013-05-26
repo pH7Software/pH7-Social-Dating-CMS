@@ -98,7 +98,7 @@ class Design
         {
             $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
-            echo '<script>$(document).ready(function(){apprise(\'';
+            echo '<script>$(document).ready(function(){Apprise(\'';
 
             if($iMsgNum > 1)
                 echo '<strong>', t('You have'), ' <em>', $iMsgNum, '</em> ', nt('message:', 'messages:', $iMsgNum), '</strong><br />';
@@ -106,7 +106,7 @@ class Design
             for($i=0; $i < $iMsgNum; $i++)
                 echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$i])), '<br />';
 
-            echo '\', {\'animate\':true})});</script>';
+            echo '\')});</script>';
         }
 
         unset($this->aMessages);
@@ -139,13 +139,13 @@ class Design
         {
            $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
-           echo '<script>$(document).ready(function(){apprise(\'';
+           echo '<script>$(document).ready(function(){Apprise(\'';
            echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
 
            for($i=0; $i < $iErrNum; $i++)
              echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
 
-           echo '\', {\'animate\':true})});</script>';
+           echo '\')});</script>';
         }
 
         unset($this->aErrors);
