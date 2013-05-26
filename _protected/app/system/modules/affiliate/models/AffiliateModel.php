@@ -94,7 +94,7 @@ class AffiliateModel extends AffiliateCoreModel
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE a.profileId = :looking' : ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR bankAccount LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Affiliate') . 'AS a LEFT JOIN ' . Db::prefix('AffiliateInfo') . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Affiliate') . 'AS a LEFT JOIN' . Db::prefix('AffiliateInfo') . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
