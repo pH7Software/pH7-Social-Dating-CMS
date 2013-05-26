@@ -441,9 +441,7 @@ class UserCore
      */
     public function clearReadProfileCache($iId, $sTable = 'Members')
     {
-        Framework\Mvc\Model\Engine\Util\Various::checkModelTable($sTable);
-
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'readProfile' . $iId . $sTable, null)->clear();
+        $this->_clearCache('readProfile', $iId, $sTable);
     }
 
     /**
@@ -456,9 +454,22 @@ class UserCore
      */
     public function clearInfoFieldCache($iId, $sTable = 'MembersInfo')
     {
+        $this->_clearCache('infoFields', $iId, $sTable);
+    }
+
+    /**
+     * Generic method to clear the user cache.
+     *
+     * @param string $sId Cache ID.
+     * @param integer $iId User ID.
+     * @param string $sTable Table name.
+     * @return void
+     */
+    private function _clearCache($sId, $iId, $sTable)
+    {
         Framework\Mvc\Model\Engine\Util\Various::checkModelTable($sTable);
 
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'infoFields' . $iId . $sTable, null)->clear();
+        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, $sId . $iId . $sTable, null)->clear();
     }
 
     /**

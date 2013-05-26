@@ -30,7 +30,7 @@ class Security
     {
         Various::checkModelTable($sTable);
 
-        $sForgotPwdLink = UriRoute::get('lost-password','main','forgot',Various::convertTableToMod($sTable));
+        $sForgotPwdLink = UriRoute::get('lost-password', 'main', 'forgot', Various::convertTableToMod($sTable));
 
         $oView->content = t('Dear, %0%', (new UserCoreModel)->getUsername($sTo, $sTable)) . '<br />' .
         t('Somebody tried to connect more %0% times with the IP address: "%1%".', $iMaxAttempts, $sIp) . '<br />' .
