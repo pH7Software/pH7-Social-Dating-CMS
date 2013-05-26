@@ -436,7 +436,7 @@ class UserCore
      * Clean UserCoreModel / readProfile Cache
      *
      * @param integer $iId Profile ID.
-     * @param string $sTable Default value "Members"
+     * @param string $sTable Default 'Members'
      * @return void
      */
     public function clearReadProfileCache($iId, $sTable = 'Members')
@@ -444,6 +444,21 @@ class UserCore
         Framework\Mvc\Model\Engine\Util\Various::checkModelTable($sTable);
 
         (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'readProfile' . $iId . $sTable, null)->clear();
+    }
+
+    /**
+     * This method is a wrapper for the Info Fields cache.
+     * Clean UserCoreModel / infoFields Cache
+     *
+     * @param integer $iId Profile ID.
+     * @param string $sTable Default 'MembersInfo'
+     * @return void
+     */
+    public function clearInfoFieldCache($iId, $sTable = 'MembersInfo')
+    {
+        Framework\Mvc\Model\Engine\Util\Various::checkModelTable($sTable);
+
+        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'infoFields' . $iId . $sTable, null)->clear();
     }
 
     /**

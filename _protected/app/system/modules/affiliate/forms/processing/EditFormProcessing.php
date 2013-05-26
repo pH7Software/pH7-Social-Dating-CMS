@@ -53,9 +53,11 @@ class EditFormProcessing extends Form
 
         $oAffModel->setLastEdit($iProfileId, 'Affiliate');
 
-        unset($oAffModel, $oAff);
+        $oAffCache = new Affiliate;
+        $oAffCache->clearReadProfileCache($iProfileId, 'Affiliate');
+        $oAffCache->clearInfoFieldCache($iProfileId, 'AffiliateInfo');
 
-        (new Affiliate)->clearReadProfileCache($iProfileId, 'Affiliate');
+        unset($oAffModel, $oAff, $oAffCache);
 
         \PFBC\Form::setSuccess('form_aff_edit_account', t('Your profile has been saved successfully!'));
     }

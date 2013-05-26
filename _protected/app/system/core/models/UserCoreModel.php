@@ -1279,22 +1279,27 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function getInfoFields($iProfileId, $sTable = 'MembersInfo')
     {
-        if ($sTable !== 'MembersInfo' && $sTable !== 'AffiliateInfo')
-            Various::launchErr($sTable);
+        $this->cache->start(self::CACHE_GROUP, 'infoFields' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->execute();
-        $oColumns = $rStmt->fetch(\PDO::FETCH_OBJ);
-        Db::free($rStmt);
-
-        $oRet = new \stdClass;
-        foreach ($oColumns as $sColumn => $sValue)
+        if (!$oData = $this->cache->get())
         {
-            if ($sColumn != 'profileId')
-                $oRet->$sColumn = $sValue;
+            Various::checkModelTable($sTable);
+
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->execute();
+            $oColumns = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+
+            $oData = new \stdClass;
+            foreach ($oColumns as $sColumn => $sValue)
+            {
+                if ($sColumn != 'profileId')
+                    $oData->$sColumn = $sValue;
+            }
+            $this->cache->put($oData);
         }
-        return $oRet;
+        return $oData;
     }
 
     /**

@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Affiliate / Controller
  */
 namespace PH7;
+
 use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Mvc\Request\HttpRequest,
@@ -307,16 +308,14 @@ class AdminController extends Controller
 
                 if (!empty($this->sMsg))
                 {
-                    $this->view->content = t('Dear %0%,', $oUser->firstName) . '<br />' . $this->
-                        sMsg;
+                    // Set message
+                    $this->view->content = t('Dear %0%,', $oUser->firstName) . '<br />' . $this->sMsg;
                     $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $oUser->email) . '<br />' .
                     t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
-                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS .
-                        PH7_TPL_NAME . '/mails/sys/core/moderate_registration.tpl', $oUser->email);
-
+                    // Send email
+                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/core/moderate_registration.tpl', $oUser->email);
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
-
                     (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
 
                     $this->oAff->clearReadProfileCache($iId, 'Affiliate');
