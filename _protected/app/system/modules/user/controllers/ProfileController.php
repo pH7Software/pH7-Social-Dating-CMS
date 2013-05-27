@@ -59,6 +59,7 @@ class ProfileController extends Controller
 
             $sFirstName = (!empty($oUser->firstName)) ? $this->str->escape($this->str->upperFirst($oUser->firstName), true) : '';
             $sLastName = (!empty($oUser->lastName)) ? $this->str->escape($this->str->upperFirst($oUser->lastName), true) : '';
+            $sMiddleName = (!empty($oFields->middleName)) ? $this->str->escape($this->str->upperFirst($oFields->middleName), true) : '';
 
             $sCountry = (!empty($oFields->country)) ? $oFields->country : '';
             $sCity = (!empty($oFields->city)) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
@@ -130,6 +131,7 @@ class ProfileController extends Controller
             $this->view->username = $sUsername;
             $this->view->first_name = $sFirstName;
             $this->view->last_name = $sLastName;
+            $this->view->middle_name = $sMiddleName;
             $this->view->sex = $oUser->sex;
             $this->view->match_sex = $oUser->matchSex;
             $this->view->age = $iAge;

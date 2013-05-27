@@ -45,6 +45,11 @@
   <div class="break"></div>
 {@/if@}
 
+{@if(!empty($middle_name))@}
+  <p><span class="bold">{@lang('Middle name:')@}</span> <span class="italic">{middle_name}</span></p>
+  <div class="break"></div>
+{@/if@}
+
 {@if(!empty($age))@}
   <p><span class="bold">{@lang('Age:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$age) }}">{age}</a> <span class="gray">({birth_date})</span></span></p>
   <div class="break"></div>
@@ -57,7 +62,7 @@
 {* Profile's Fields *}
 {@foreach($fields as $key => $val)@}
 
-  {@if($key != 'description' && !empty($val))@}
+  {@if($key != 'description' && $key != 'middleName' && !empty($val))@}
     {{ $val = escape($val, true) }}
 
     {@if($key == 'height')@}
