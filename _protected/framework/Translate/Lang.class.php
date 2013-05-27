@@ -95,26 +95,24 @@ use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
       * Get JavaScript language file.
       *
       * @static
-      * @param string $sFileName The language name.
       * @param string $sPath The path.
+      * @param string $sFileName The language name. Default is the constant: 'PH7_LANG_NAME'
       * @return Valid file name (with the extension).
       * @throws \PH7\Framework\Translate\Exception If the language file is not found.
       */
-     public static function getJsFile($sFileName, $sPath)
+     public static function getJsFile($sPath, $sFileName = PH7_LANG_NAME)
      {
-         $sDefLangCode = substr(PH7_DEFAULT_LANG, 0, 2);
-
          if (is_file($sPath . $sFileName . '.js'))
          {
              return $sFileName . '.js';
          }
-         else if (is_file($sPath . $sDefLangCode . '.js'))
+         else if (is_file($sPath . PH7_DEFAULT_LANG_CODE . '.js'))
          {
-             return $sDefLangCode . '.js';
+             return PH7_DEFAULT_LANG_CODE . '.js';
          }
          else
          {
-             throw new Exception('Language file \'' . $sPath . $sDefLangCode . '.js\' not found.');
+             throw new Exception('Language file \'' . $sPath . PH7_DEFAULT_LANG_CODE . '.js\' not found.');
          }
      }
 

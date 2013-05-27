@@ -64,6 +64,9 @@ final class FrontController
          * so we can always display static files even if there are problems with the database.
          */
         $this->_databaseInitialize();
+        /**
+         * @internal This method must be declared before the rest of the code, because it initializes essential language constants for the rest of the code.
+         */
         $this->_languageInitialize();
 
         // For the resources of the assets folders
@@ -350,7 +353,9 @@ final class FrontController
         if (!defined('PH7_LANG_NAME'))
             define('PH7_LANG_NAME', (new Lang)->setDefaultLang(PH7_PREF_LANG)->getLang());
 
-        define('PH7_LANG_CODE', substr(PH7_LANG_NAME, 0,2)); // Get the ISO language code
+        /*** Get the ISO language code ***/
+        define('PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2));
+        define('PH7_DEFAULT_LANG_CODE', substr(PH7_DEFAULT_LANG, 0, 2));
 
         if (!defined('PH7_ENCODING'))
             define('PH7_ENCODING', $this->oConfig->values['language']['charset']);
