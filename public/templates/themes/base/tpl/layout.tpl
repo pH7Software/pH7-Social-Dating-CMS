@@ -1,4 +1,4 @@
-{* Last edit 05/26/13 23:51 by PH *}
+{* Last edit 05/28/13 22:48 by PH *}
 {{ $design->htmlHeader() }}
 <html lang="{% $config->values['language']['lang'] %}">
 <head>
@@ -123,7 +123,7 @@
 
 {* Loading JS Lang *}
 {* The file must be before the content of the site to avoid that the "pH7LangCore"  object is undefined *}
-{{ $lang_file =  Framework\Translate\Lang::getJsFile(PH7_LANG_CODE, PH7_PATH_STATIC . PH7_JS . PH7_LANG) }}
+{{ $lang_file =  Framework\Translate\Lang::getJsFile(PH7_PATH_STATIC . PH7_JS . PH7_LANG) }}
 {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, PH7_LANG . $lang_file) }}
 
 <div id="ajph">
@@ -180,7 +180,7 @@
 {* SetUserActivity & User Chat *}
 {@if(UserCore::auth())@}
     {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'setUserActivity.js,jquery/sound.js') }}
-    {{ $lang_file = Framework\Translate\Lang::getJsFile(PH7_LANG_CODE, PH7_PATH_TPL_SYS_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS . PH7_LANG) }}
+    {{ $lang_file = Framework\Translate\Lang::getJsFile(PH7_PATH_TPL_SYS_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS . PH7_LANG) }}
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS, PH7_LANG . $lang_file . ',jquery.cookie.js,Messenger.js') }}
 {@/if@}
 

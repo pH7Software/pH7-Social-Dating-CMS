@@ -39,8 +39,8 @@ class UriRoute
      */
     public static function loadFile(\DOMDocument $oDom)
     {
-        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . substr(PH7_LANG_NAME,0,2) . '.xml';
-        $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . substr(PH7_DEFAULT_LANG,0,2) . '.xml';
+        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . '.xml';
+        $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . '.xml';
 
         if (is_file($sPathLangName))
             $sRoutePath = $sPathLangName;
