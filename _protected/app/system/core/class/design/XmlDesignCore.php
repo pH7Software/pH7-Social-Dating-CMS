@@ -42,12 +42,12 @@ class XmlDesignCore
 
     public static function sitemapHeaderLink()
     {
-        echo'<link rel="alternate" type="application/xml" title="Sitemap" href="' . UriRoute::get('xml','sitemap','xmlrouter') . '" />';
+        echo '<link rel="alternate" type="application/xml" title="Sitemap" href="' . UriRoute::get('xml','sitemap','xmlrouter') . '" />';
     }
 
     public static function rssHeaderLinks()
     {
-        echo'<link rel="alternate" type="application/rss+xml" title="' . t('Latest Blog Posts') . '" href="' . UriRoute::get('xml','rss','xmlrouter','blog') . '" />
+        echo '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Blog Posts') . '" href="' . UriRoute::get('xml','rss','xmlrouter','blog') . '" />
         <link rel="alternate" type="application/rss+xml" title="' . t('Latest Notes') . '" href="' . UriRoute::get('xml','rss','xmlrouter','note') . '" />
         <link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Topics') . '" href="' . UriRoute::get('xml','rss','xmlrouter','forum-topic') . '" />
         <link rel="alternate" type="application/rss+xml" title="' . t('Latest Profile Comments') . '" href="' . UriRoute::get('xml','rss','xmlrouter','comment-profile') . '" />

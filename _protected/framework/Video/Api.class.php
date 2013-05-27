@@ -37,7 +37,7 @@ class Api extends Video
     public function getVideo($sUrl)
     {
         $sClass = $this->clear($sUrl);
-        switch($sClass)
+        switch ($sClass)
         {
             case 'youtube':
             case 'youtu':
@@ -71,7 +71,7 @@ class Api extends Video
     {
         $sClass = $this->clear($sUrl);
 
-        switch($sClass)
+        switch ($sClass)
         {
             case 'youtube':
             case 'youtu':
@@ -114,7 +114,7 @@ class Api extends Video
         $iWidth = ( isset($iWidth) ? $iWidth : $this->iWidth );
         $iHeight = (isset($iHeight) ? $iHeight : $this->iHeight );
 
-        switch($sClass)
+        switch ($sClass)
         {
             case 'youtube':
             case 'youtu':
@@ -142,7 +142,8 @@ class Api extends Video
     }
 
     /**
-     * @desc Gets title (it can be redefined if the recovery of the data information is more specific).
+     * Gets title (it can be redefined if the recovery of the data information is more specific).
+     *
      * @see \PH7\Framework\Video\Api::getInfo();
      * @return mixed (string | boolean) The title with escape function if found otherwise returns false.
      */
@@ -152,7 +153,8 @@ class Api extends Video
     }
 
     /**
-     * @desc Gets Description (it can be redefined if the recovery of the data information is more specific).
+     * Gets Description (it can be redefined if the recovery of the data information is more specific).
+     *
      * @see \PH7\Framework\Video\Api::getInfo();
      * @return mixed (string | boolean) The description with escape function if found otherwise returns false.
      */
@@ -162,7 +164,8 @@ class Api extends Video
     }
 
     /**
-     * @desc Gets Duration video (it can be redefined if the recovery of the data information is more specific).
+     * Gets Duration video (it can be redefined if the recovery of the data information is more specific).
+     *
      * @see \PH7\Framework\Video\Api::getInfo();
      * @return mixed (integer | boolean) The duration video if found otherwise returns false.
      */
@@ -177,13 +180,13 @@ class Api extends Video
      */
     public function getEmbedUrl($sUrl)
     {
-        if(!$this->getVideoId($sUrl)) return false;
+        if (!$this->getVideoId($sUrl)) return false;
 
         return static::PLAYER_URL . $this->getVideoId($sUrl);
     }
 
     /**
-     * @desc Generic method (but still specialized in Youtube API while remaining open to other APIs)
+     * Generic method (but still specialized in Youtube API while remaining open to other APIs)
      * to retrieve the ID of the video. It can be redefined if the recovery of the video ID is more specific.
      *
      * @param string $sUrl
@@ -200,7 +203,8 @@ class Api extends Video
     }
 
     /**
-     * @desc Retrieve information on the video site where it is hosted.
+     * Retrieve information on the video site where it is hosted.
+     *
      * @access protected
      * @param string $sUrl
      * @return mixed Returns OBJECT JSON on success or FALSE on failure.
@@ -220,7 +224,7 @@ class Api extends Video
     protected function clear($sUrl)
     {
         $oHttp = new Http;
-        if($oHttp->detectSubdomain($sUrl))
+        if ($oHttp->detectSubdomain($sUrl))
         {
             // Removes the subdomain with its dot (e.g. mysub.domain.com becomes domain.com).
             $sUrl = str_replace($oHttp->getSubdomain($sUrl) . PH7_DOT, '', $sUrl);

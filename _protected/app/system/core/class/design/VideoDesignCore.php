@@ -26,13 +26,15 @@ class VideoDesignCore
 {
 
     /**
-     * @desc Block constructing.
+     * Block constructing.
+     *
      * @access private
      */
     private function __construct() {}
 
     /**
-     * @desc Generates HTML contents Video.
+     * Generates HTML contents Video.
+     *
      * @param object $oData
      * @param string $sMedia Type of the media (preview or movie). Default value is 'movie'.
      * @param integer $iWidth Default 600
@@ -43,11 +45,11 @@ class VideoDesignCore
     {
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
 
-        if( (new VideoCore)->isApi($oData->file) )
+        if ( (new VideoCore)->isApi($oData->file) )
         {
             $oVideo = (new Api)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
 
-            if($sMedia == 'preview')
+            if ($sMedia == 'preview')
 
                 echo $sDurationTag . '<a href="' . $oData->file . '" title="' . $oData->title . '" data-popup="frame-video"><img src="' . $oVideo . '" alt="' . $oData->title . '" title="' . $oData->title . '" /></a>';
             else
@@ -60,13 +62,13 @@ class VideoDesignCore
             $sVidFullPath2 = $sDir . $oData->file . '.mp4';
 
             // If the video is not found on the server, we show a video that shows an appropriate message.
-            if( !(is_file($sVidFullPath1) && is_file($sVidFullPath2)) )
+            if ( !(is_file($sVidFullPath1) && is_file($sVidFullPath2)) )
             {
                 $sVidFullPath1 = PH7_URL_DATA_SYS_MOD . 'video/not_found.webm';
                 $sVidFullPath2 = PH7_URL_DATA_SYS_MOD . 'video/not_found.mp4';
             }
 
-            if((new Validate)->url($sDir . $oData->thumb))
+            if ((new Validate)->url($sDir . $oData->thumb))
             {
                 $oFile = new File;
                 $sThumbName = $oFile->getFileWithoutExt($oData->thumb);
@@ -96,7 +98,7 @@ class VideoDesignCore
                 <button onclick="Video.smallSize()">' . t('Small') . '</button>
             </div>';
 
-            if($sMedia == 'preview')
+            if ($sMedia == 'preview')
                 echo $sDurationTag . '<a href="#watch' . $oData->videoId . '" title="' . $oData->title . '" data-popup="video"><img src="' . $sThumb . '" alt="' . $oData->title . '" title="' . $oData->title . '" /></a>
                 <div class="hidden"><div id="watch' . $oData->videoId . '">' . $sVideoTag . '</div></div>';
             else

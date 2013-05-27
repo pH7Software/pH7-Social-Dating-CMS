@@ -16,7 +16,8 @@ class VideoCore
 {
 
     /**
-     * @desc Check if this is a url, if so, this is a video from an external site.
+     * Check if this is a url, if so, this is a video from an external site.
+     *
      * @param string $sFile
      * @return boolean
      */
@@ -42,7 +43,7 @@ class VideoCore
 
         // Delete video file
         $aVideoExt = explode(',', $sVideoExt);
-        foreach($aVideoExt as $sExt)
+        foreach ($aVideoExt as $sExt)
             $oFile->deleteFile($sDir . $sVideoLink . $sExt);
 
         // Delete thumbnail
