@@ -17,8 +17,8 @@ define('PH7', 1);
 
 define('PH7_REQUIRE_VERSION', '5.4.0');
 
-if (version_compare(phpversion(), PH7_REQUIRE_VERSION, '<') === true)
-    exit('ERROR: Your PHP version is ' . phpversion() . '. pH7 Dating CMS requires PHP ' . PH7_REQUIRE_VERSION . ' or newer.');
+if (version_compare(PHP_VERSION, PH7_REQUIRE_VERSION, '<') === true)
+    exit('ERROR: Your PHP version is ' . PHP_VERSION . '. pH7 Dating CMS requires PHP ' . PH7_REQUIRE_VERSION . ' or newer.');
 
 // If no system settings, go install
 if (!is_file(__DIR__ . '/_constants.php'))
