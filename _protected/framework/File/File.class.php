@@ -443,6 +443,7 @@ class File
      */
     public function getOctalAccess($sFile)
     {
+        clearstatcache();
         return substr(sprintf('%o', fileperms($sFile)), -4);
     }
 
