@@ -1,4 +1,4 @@
-<!-- Last Update: 04/14/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 05/27/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -128,9 +128,6 @@
 |   |       |   |   |   |   |-- DatabaseCoreCron.php
 |   |       |   |   |   |   `-- GeneralCoreCron.php
 |   |       |   |   |   `-- _delay
-|   |       |   |   |       |-- birthday.txt
-|   |       |   |   |       |-- database.txt
-|   |       |   |   |       `-- general.txt
 |   |       |   |   |-- css
 |   |       |   |   |   `-- style.cssCoreCss.php
 |   |       |   |   |-- file
@@ -166,6 +163,7 @@
 |   |       |   |   |-- ConfigFileCoreForm.php
 |   |       |   |   |-- ConfirmCoreForm.php
 |   |       |   |   |-- DeleteUserCoreForm.php
+|   |       |   |   |-- DynamicFieldCoreForm.php
 |   |       |   |   |-- LinkCoreForm.php
 |   |       |   |   |-- processing
 |   |       |   |   |   |-- ChangePasswordCoreFormProcessing.php
@@ -626,6 +624,37 @@
 |   |           |           `-- tpl
 |   |           |               `-- http
 |   |           |                   `-- index.tpl
+|   |           |-- field
+|   |           |   |-- config
+|   |           |   |   |-- config.ini
+|   |           |   |   `-- Permission.php
+|   |           |   |-- controllers
+|   |           |   |   `-- FieldController.php
+|   |           |   |-- forms
+|   |           |   |   |-- AddFieldForm.php
+|   |           |   |   |-- EditFieldForm.php
+|   |           |   |   `-- processing
+|   |           |   |       |-- AddFieldFormProcessing.php
+|   |           |   |       `-- EditFieldFormProcessing.php
+|   |           |   |-- inc
+|   |           |   |   `-- class
+|   |           |   |       `-- Field.php
+|   |           |   |-- lang
+|   |           |   |   |-- en_US
+|   |           |   |   |   `-- LC_MESSAGES
+|   |           |   |   `-- fr_FR
+|   |           |   |       `-- LC_MESSAGES
+|   |           |   |-- models
+|   |           |   |   `-- FieldModel.php
+|   |           |   `-- views
+|   |           |       `-- base
+|   |           |           |-- config
+|   |           |           |   `-- config.ini
+|   |           |           `-- tpl
+|   |           |               `-- field
+|   |           |                   |-- add.tpl
+|   |           |                   |-- all.tpl
+|   |           |                   `-- edit.tpl
 |   |           |-- forum
 |   |           |   |-- config
 |   |           |   |   |-- config.ini
@@ -1019,6 +1048,7 @@
 |   |           |               |   |-- index.tpl
 |   |           |               |   `-- membershiplist.tpl
 |   |           |               `-- main
+|   |           |                   |-- error.tpl
 |   |           |                   |-- index.tpl
 |   |           |                   |-- membership.tpl
 |   |           |                   |-- pay.tpl
@@ -1271,11 +1301,11 @@
 |   |               |   |-- MainController.php
 |   |               |   |-- RssController.php
 |   |               |   `-- SitemapController.php
-|   |               |-- design
-|   |               |   `-- XmlDesign.php
 |   |               |-- inc
 |   |               |   `-- class
-|   |               |       `-- DateFormat.php
+|   |               |       |-- DateFormat.php
+|   |               |       `-- design
+|   |               |           `-- XmlDesign.php
 |   |               |-- lang
 |   |               |   |-- en_US
 |   |               |   |   `-- LC_MESSAGES
@@ -1458,6 +1488,10 @@
 |   |   |   |-- Exception.class.php
 |   |   |   |-- File.class.php
 |   |   |   |-- Import.class.php
+|   |   |   |-- Permission
+|   |   |   |   |-- File.class.php
+|   |   |   |   |-- Folder.class.php
+|   |   |   |   `-- Permission.class.php
 |   |   |   |-- Stream.class.php
 |   |   |   |-- Transfer
 |   |   |   |   |-- Exception.class.php
@@ -1510,6 +1544,7 @@
 |   |   |   |   |       |   |-- Password.php
 |   |   |   |   |       |   |-- Phone.php
 |   |   |   |   |       |   |-- Radio.php
+|   |   |   |   |       |   |-- Range.php
 |   |   |   |   |       |   |-- Search.php
 |   |   |   |   |       |   |-- Select.php
 |   |   |   |   |       |   |-- Sort.php
@@ -1517,6 +1552,7 @@
 |   |   |   |   |       |   |-- Submit.php
 |   |   |   |   |       |   |-- Textarea.php
 |   |   |   |   |       |   |-- Textbox.php
+|   |   |   |   |       |   |-- Timezone.php
 |   |   |   |   |       |   |-- TinyMCE.php
 |   |   |   |   |       |   |-- Token.php
 |   |   |   |   |       |   |-- Url.php
@@ -1662,6 +1698,7 @@
 |   |   |   |       |   |   |   |   |-- NativeQpContentEncoder.php
 |   |   |   |       |   |   |   |   |-- PlainContentEncoder.php
 |   |   |   |       |   |   |   |   |-- QpContentEncoder.php
+|   |   |   |       |   |   |   |   |-- QpContentEncoderProxy.php
 |   |   |   |       |   |   |   |   `-- RawContentEncoder.php
 |   |   |   |       |   |   |   |-- ContentEncoder.php
 |   |   |   |       |   |   |   |-- EmbeddedFile.php
@@ -1730,7 +1767,6 @@
 |   |   |   |       |   |   |   |-- DKIMSigner.php
 |   |   |   |       |   |   |   |-- DomainKeySigner.php
 |   |   |   |       |   |   |   |-- HeaderSigner.php
-|   |   |   |       |   |   |   |-- PeclDKIMSigner.php
 |   |   |   |       |   |   |   `-- SMimeSigner.php
 |   |   |   |       |   |   |-- SmtpTransport.php
 |   |   |   |       |   |   |-- Spool.php
@@ -2083,6 +2119,7 @@
 |   |   |   |   |-- introduction.tpl
 |   |   |   |   |-- JS_DOC.help.txt
 |   |   |   |   |-- pH.tpl
+|   |   |   |   |-- rename-the-admin-folder.tpl
 |   |   |   |   |-- requirements.tpl
 |   |   |   |   |-- tree.tpl
 |   |   |   |   `-- upgrade.tpl
@@ -2090,14 +2127,15 @@
 |   |   |       |-- core
 |   |   |       |   |-- 404-error.tpl
 |   |   |       |   `-- welcome.tpl
-|   |   |       |-- cron-list.tpl
 |   |   |       |-- cron.tpl
 |   |   |       |-- Dev
 |   |   |       |   `-- Convention
 |   |   |       |       |-- copyright.txt
 |   |   |       |       `-- Nommage-variables.html
+|   |   |       |-- liste-cron.tpl
+|   |   |       |-- mise-a-jour.tpl
 |   |   |       |-- pH.tpl
-|   |   |       `-- upgrade.tpl
+|   |   |       `-- renommer-le-dossier-admin.tpl
 |   |   |-- inc
 |   |   |   |-- conf.const.php
 |   |   |   |-- conf.lang.php
@@ -2683,7 +2721,25 @@
 |   |       |       |-- conclusion.php
 |   |       |       |-- config.ini
 |   |       |       `-- introduction.php
-|   |       `-- 0.8.7-0.9.0
+|   |       |-- 0.8.7-0.9.8
+|   |       |   |-- data
+|   |       |   |   `-- sql
+|   |       |   |       `-- MySQL
+|   |       |   |           `-- upgrade.sql
+|   |       |   `-- info
+|   |       |       |-- conclusion.php
+|   |       |       |-- config.ini
+|   |       |       `-- introduction.php
+|   |       |-- 0.9.8-0.9.9
+|   |       |   |-- data
+|   |       |   |   `-- sql
+|   |       |   |       `-- MySQL
+|   |       |   |           `-- upgrade.sql
+|   |       |   `-- info
+|   |       |       |-- conclusion.php
+|   |       |       |-- config.ini
+|   |       |       `-- introduction.php
+|   |       `-- 0.9.9-1.0.0
 |   |           |-- data
 |   |           |   `-- sql
 |   |           |       `-- MySQL
@@ -3105,6 +3161,31 @@
 |   |   |   |   |-- box
 |   |   |   |   |   |-- box.css
 |   |   |   |   |   |-- box.js
+|   |   |   |   |   |-- i18n
+|   |   |   |   |   |   |-- jquery.colorbox-ar.js
+|   |   |   |   |   |   |-- jquery.colorbox-bg
+|   |   |   |   |   |   |-- jquery.colorbox-cs.js
+|   |   |   |   |   |   |-- jquery.colorbox-da.js
+|   |   |   |   |   |   |-- jquery.colorbox-de.js
+|   |   |   |   |   |   |-- jquery.colorbox-es.js
+|   |   |   |   |   |   |-- jquery.colorbox-fa.js
+|   |   |   |   |   |   |-- jquery.colorbox-fi.js
+|   |   |   |   |   |   |-- jquery.colorbox-fr.js
+|   |   |   |   |   |   |-- jquery.colorbox-hr.js
+|   |   |   |   |   |   |-- jquery.colorbox-hu.js
+|   |   |   |   |   |   |-- jquery.colorbox-it.js
+|   |   |   |   |   |   |-- jquery.colorbox-ja.js
+|   |   |   |   |   |   |-- jquery.colorbox-kr.js
+|   |   |   |   |   |   |-- jquery.colorbox-lv.js
+|   |   |   |   |   |   |-- jquery.colorbox-nl.js
+|   |   |   |   |   |   |-- jquery.colorbox-no.js
+|   |   |   |   |   |   |-- jquery.colorbox-pl.js
+|   |   |   |   |   |   |-- jquery.colorbox-pt-br.js
+|   |   |   |   |   |   |-- jquery.colorbox-ro.js
+|   |   |   |   |   |   |-- jquery.colorbox-ru.js
+|   |   |   |   |   |   |-- jquery.colorbox-sk.js
+|   |   |   |   |   |   |-- jquery.colorbox-tr.js
+|   |   |   |   |   |   `-- jquery.colorbox-zh-CN.js
 |   |   |   |   |   |-- images
 |   |   |   |   |   |   |-- border.png
 |   |   |   |   |   |   |-- controls.png
@@ -4313,4 +4394,4 @@
 
 </pre>
 
-<p>Statistics: 1294 directories, 3011 files.</p>
+<p>Statistics: 1324 directories, 3062 files.</p>
