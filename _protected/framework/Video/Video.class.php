@@ -40,26 +40,27 @@ class Video
         $this->iMaxSize = (int) Config::getInstance()->values['video']['upload.max_size'];
         $this->sFfmpegPath = Config::getInstance()->values['video']['handle.ffmpeg_path'];
 
-        if(!file_exists($this->sFfmpegPath))
+        if (!file_exists($this->sFfmpegPath))
             throw new \PH7\Framework\File\Exception('FFmpeg is not installed on your server, please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini"');
 
-        if(!empty($aFile))
+        if (!empty($aFile))
         {
             $this->aFile = $aFile;
             $this->sType = $this->oFile->getFileExt($this->aFile['name']);
 
-            if(!is_file($this->aFile['tmp_name']))
+            if (!is_file($this->aFile['tmp_name']))
                 throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Video file not found: The video file \'' . $this->aFile['tmp_name'] . '\' could not be found.');
         }
     }
 
     /**
-     * @desc Video Validate.
+     * Video Validate.
+     *
      * @return boolean
      */
     public function validate()
     {
-        switch($this->sType)
+        switch ($this->sType)
         {
             // Files supported List.
             case 'mov':
@@ -82,7 +83,8 @@ class Video
     }
 
      /**
-      * @desc Save Video.
+      * Save Video.
+      *
       * @param string $sFile
       * @return boolean
       */
@@ -92,7 +94,8 @@ class Video
     }
 
     /**
-     * @desc Get File Name.
+     * Get File Name.
+     *
      * @return string
      */
     public function getFileName()
@@ -101,21 +104,23 @@ class Video
     }
 
     /**
-     * @desc Check Video Size .
+     * Check Video Size.
+     *
      * @return boolean
      */
     public function check()
     {
         $iUploadMaxSize = ($this->iMaxSize*1024*1024);
 
-        if($this->aFile['size'] <= $iUploadMaxSize)
+        if ($this->aFile['size'] <= $iUploadMaxSize)
             return true;
 
         return false;
     }
 
     /**
-     * @desc Convert video file and the extension video type.
+     * Convert video file and the extension video type.
+     *
      * @param string $sFile.
      * @return string The new name that you entered in the parameter of this method.
      */
@@ -124,7 +129,7 @@ class Video
         $sParams = ''; // By default, we don't use parameter
 
         $sType = $this->oFile->getFileExt($sFile); // Get the new format
-        if($sType == 'mp4')
+        if ($sType == 'mp4')
             $sParams = '-c copy -copyts';
 
         exec("$this->sFfmpegPath -i {$this->aFile['tmp_name']} $sParams $sFile");
@@ -132,7 +137,8 @@ class Video
     }
 
     /*
-     * @desc Generate a thumbnail with FFmpeg.
+     * Generate a thumbnail with FFmpeg.
+     *
      * @param string $sPicturePath
      * @param integer $iWidth
      * @param integer $iHeight
@@ -145,7 +151,8 @@ class Video
     }
 
     /**
-     * @desc Gets video duration.
+     * Gets video duration.
+     *
      * @return integer Seconds.
      */
     public function getDuration()
@@ -155,7 +162,8 @@ class Video
      }
 
     /**
-     * @desc Get Type Video File.
+     * Get Type Video File.
+     *
      * @return string The extension of the video without the dot.
      */
     public function getExt()
@@ -164,7 +172,7 @@ class Video
     }
 
     /**
-     * @desc Destruction of attributes and temporary file.
+     * Destruction of attributes and temporary file.
      */
     public function __destruct()
     {

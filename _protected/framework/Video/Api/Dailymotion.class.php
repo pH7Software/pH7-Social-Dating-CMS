@@ -43,7 +43,7 @@ class Dailymotion extends \PH7\Framework\Video\Api implements Api
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
     {
 
-        if($sMedia == 'preview')
+        if ($sMedia == 'preview')
         {
             return 'http://dailymotion.com/thumbnail/160x120/video/' . $this->getVideoId($sUrl);
         }
@@ -61,11 +61,11 @@ class Dailymotion extends \PH7\Framework\Video\Api implements Api
     public function getVideoId($sUrl)
     {
         preg_match('#/video/(\w+)_#i', $sUrl, $aMatch);
-        if(!empty($aMatch[1]))
+        if (!empty($aMatch[1]))
             return $aMatch[1];
 
         preg_match('#/embed/video/(\w+)#i', $sUrl, $aMatch);
-        if(!empty($aMatch[1]))
+        if (!empty($aMatch[1]))
             return $aMatch[1];
 
         return false;

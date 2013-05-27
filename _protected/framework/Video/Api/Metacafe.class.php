@@ -33,7 +33,7 @@ class Metacafe extends \PH7\Framework\Video\Api implements Api
     public function getInfo($sUrl)
     {
         $oDom = new \DOMDocument;
-        if(!@$oDom->load(static::API_URL . $this->getVideoId($sUrl))) return false;
+        if (!@$oDom->load(static::API_URL . $this->getVideoId($sUrl))) return false;
 
         $this->oData = new \DOMXPath($oDom);
         $sRootNameSpace = $oDom->lookupNamespaceUri($oDom->namespaceURI);
@@ -43,38 +43,41 @@ class Metacafe extends \PH7\Framework\Video\Api implements Api
     }
 
     /**
-     * @desc We redefine this method to the specific needs of the API Metacafe
+     * We redefine this method to the specific needs of the Metacafe API.
+     *
      * @see \PH7\Framework\Video\Api::getInfo();
      * @return mixed (string | boolean) The title with escape function if found otherwise returns false.
      */
     public function getTitle()
     {
         $oElements = $this->oData->query('//media:title');
-        foreach($oElements as $oElement) $sTitle = $oElement->nodeValue;
+        foreach ($oElements as $oElement) $sTitle = $oElement->nodeValue;
         return (!empty($sTitle) ? $this->oStr->escape($sTitle, true) : false);
     }
 
     /**
-     * @desc We redefine this method to the specific needs of the API Metacafe
+     * We redefine this method to the specific needs of the Metacafe API.
+     *
      * @see \PH7\Framework\Video\Api::getInfo();
      * @return mixed (string | boolean) The description with escape function if found otherwise returns false.
      */
     public function getDescription()
     {
         $oElements = $this->oData->query('//media:description');
-        foreach($oElements as $oElement) $sDescription = $oElement->nodeValue;
+        foreach ($oElements as $oElement) $sDescription = $oElement->nodeValue;
         return (!empty($sDescription) ? $this->oStr->escape($sDescription, true) : false);
     }
 
     /**
-     * @desc We redefine this method to the specific needs of the API Metacafe
+     * We redefine this method to the specific needs of the Metacafe API.
+     *
      * @see \PH7\Framework\Video\Api\Metacafe::getInfo();
      * @return mixed (integer | boolean) The duration video if found otherwise returns false.
      */
     public function getDuration()
     {
         $oElements = $this->oData->query('//media:content');
-        foreach($oElements as $oElement) $iDuration = $oElement->getAttribute('duration');
+        foreach ($oElements as $oElement) $iDuration = $oElement->getAttribute('duration');
         return (!empty($iDuration) ? (int)$iDuration : false);
     }
 
@@ -106,7 +109,7 @@ class Metacafe extends \PH7\Framework\Video\Api implements Api
 
     public function getEmbedUrl($sUrl)
     {    // Checks if the ID is valid, otherwise returns false.
-        if(!$this->getVideoId($sUrl)) return false;
+        if (!$this->getVideoId($sUrl)) return false;
 
         return static::PLAYER_URL . $this->getVideoId($sUrl) . '/metacefe.swf';
     }
