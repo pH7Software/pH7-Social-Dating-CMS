@@ -19,8 +19,8 @@ defined('PH7') or exit('Restricted access');
 
 $aErrors = array();
 
-if(version_compare(phpversion(), PH7_REQUIRE_VERSION, '<') === true)
-    $aErrors[] = 'ERROR: Your PHP version is ' . phpversion() . '. pH7 CMS requires PHP ' . PH7_REQUIRE_VERSION . ' or newer.';
+if(version_compare(PHP_VERSION, PH7_REQUIRE_VERSION, '<') === true)
+    $aErrors[] = 'ERROR: Your PHP version is ' . PHP_VERSION . '. pH7 CMS requires PHP ' . PH7_REQUIRE_VERSION . ' or newer.';
 
 /*
  * This code is commented because:
