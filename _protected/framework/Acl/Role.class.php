@@ -22,7 +22,7 @@ class Role
      */
     public function __set($sName, $sValue)
     {
-        switch($sName)
+        switch ($sName)
         {
             case 'sName':
             case 'sPermissions':
@@ -41,7 +41,7 @@ class Role
      */
     public function __get($sName)
     {
-        switch($sName)
+        switch ($sName)
         {
             case 'sName':
             case 'sPermissions':

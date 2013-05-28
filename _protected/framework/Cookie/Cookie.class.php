@@ -72,10 +72,7 @@ class Cookie
         if (is_array($mName))
         {
             foreach ($mName as $sName)
-            {
-                if (!$bExists = $this->exists($sName)) // Recursive method
-                    break;
-            }
+                if (!$bExists = $this->exists($sName)) break; // Recursive method
         }
         else
         {
