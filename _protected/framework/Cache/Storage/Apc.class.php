@@ -23,7 +23,7 @@ class Apc
         $this->_iDefaultTtl = abs($iDefaultTtl);
 
         // Yoda Condition
-        if(false === extension_loaded('apc'))
+        if (false === extension_loaded('apc'))
             throw new \PH7\Framework\Cache\Exception('The APC extension is not loaded and thus, this can not be used.');
 
         $this->_bStarted = true;
@@ -33,14 +33,14 @@ class Apc
     {
         $iTtl = abs($iTtl);
 
-        if(0 == $iTtl)
+        if (0 == $iTtl)
             $iTtl = $this->_iDefaultTtl;
 
         // See if this ID exists in the override table.
-        if(true === isset($this->_aTtlOverride[$sId]))
+        if (true === isset($this->_aTtlOverride[$sId]))
             $iTtl = $this->_aTtlOverride[$sId];
 
-        if(false === is_null($sValue))
+        if (false === is_null($sValue))
             apc_store($sId, $sValue, $iTtl);
 
         return true;
@@ -50,7 +50,7 @@ class Apc
     {
         $sValue = apc_fetch($sId);
 
-        if(true === $bPurge)
+        if (true === $bPurge)
             apc_delete($sId);
 
         return $sValue;
