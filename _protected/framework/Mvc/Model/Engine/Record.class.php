@@ -126,7 +126,7 @@ class Record
      *
      * @param string $sTable
      * @param array $aValues
-     * @return mixed Returns the last Insert ID on success or FALSE on failure.
+     * @return mixed (integer | boolean) Returns the last Insert ID on success or FALSE on failure.
      */
     public function insert($sTable, array $aValues)
     {
@@ -179,7 +179,7 @@ class Record
      * @param string $sValue The new value
      * @param string $sPk The primary key. Default: NULL
      * @param string $sId The id. Default: NULL
-     * @return mixed Returns the number of rows on success or FALSE on failure.
+     * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
      */
     public function update($sTable, $sField, $sValue, $sPk = null, $sId = null)
     {
