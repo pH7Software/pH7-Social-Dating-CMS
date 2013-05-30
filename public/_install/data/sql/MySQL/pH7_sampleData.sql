@@ -59,7 +59,7 @@ INSERT INTO pH7_MembersInfo (profileId, description, city, state, zipCode, count
 (@iProfileId+8, 'Hello to all',  'Manhattan', 'Manhattan', '10002', 'US'),
 (@iProfileId+9, 'Hello to all',  'Dolton', 'Illinois', '60419', 'US'),
 (@iProfileId+10, 'Hello to all',  'Manhattan', 'Manhattan', '10002', 'US'),
-(@iProfileId+11,  'Hmmm, you\'ll see. I like to spend my free time on the Internet or traveling in different cities, places, mountain or sea...<br /> Listening good music of course.<br />See you soon! ;)', 'Soho', 'Westminster London', '139 L8', 'UK');
+(@iProfileId+11,  'Hmmm, you''ll see. I like to spend my free time on the Internet or traveling in different cities, places, mountain or sea...<br /> Listening good music of course.<br />See you soon! ;)', 'Soho', 'Westminster London', '139 L8', 'UK');
 
 
 INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES
