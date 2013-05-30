@@ -25,7 +25,6 @@ class PictureForm
             Framework\Url\HeaderUrl::redirect();
         }
 
-        // Generate form Picture upload
         $oHttpRequest = new HttpRequest;
         $iAlbumIdVal = ($oHttpRequest->getExists('album_id')) ? $oHttpRequest->get('album_id') : null; // Album ID Value
         unset($oHttpRequest);

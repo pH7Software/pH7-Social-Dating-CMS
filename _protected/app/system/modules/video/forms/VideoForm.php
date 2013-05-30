@@ -26,7 +26,6 @@ class VideoForm
             Framework\Url\HeaderUrl::redirect();
         }
 
-        // Generate form Video upload
         $oHttpRequest = new HttpRequest;
         $iAlbumIdVal = ($oHttpRequest->getExists('album_id')) ? $oHttpRequest->get('album_id') : null; // Album ID Value
         unset($oHttpRequest);
