@@ -19,7 +19,7 @@ class Analytics
      * Update the analytics API code.
      *
      * @param string $sCode
-     * @return integer Number of rows.
+     * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
      */
     public function updateApi($sCode)
     {
