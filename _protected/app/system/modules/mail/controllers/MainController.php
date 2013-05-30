@@ -185,7 +185,7 @@ class MainController extends Controller
                 $this->sTitle = t('Empty Message!');
                 $this->notFound();
                 // We modified the default error message.
-                $this->view->error = t('Sorry %0%, you do not have any messages.', '<em>' . $this->session->get('member_first_name') . '</em>');
+                $this->view->error = t('You do not have any messages in your Trash.');
             }
             else
             {
@@ -269,7 +269,7 @@ class MainController extends Controller
         $this->sMsg = ($bStatus) ? t('Your message has been moved to your Inbox.') : t('Your message could not be moved to Trash because there no exist.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
-        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg, $sMsgType);
+        HeaderUrl::redirect(UriRoute::get('mail','main','trash'), $this->sMsg, $sMsgType);
     }
 
     public function setRestorAll()
@@ -291,7 +291,7 @@ class MainController extends Controller
             }
         }
 
-        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg);
+        HeaderUrl::redirect(UriRoute::get('mail','main','trash'), $this->sMsg);
     }
 
     public function setDelete()

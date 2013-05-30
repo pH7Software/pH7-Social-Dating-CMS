@@ -23,7 +23,7 @@
   {{ $subject = escape(substr(Framework\Security\Ban\Ban::filterWord($msg->title, false),0,20), true) }}
   {{ $message = escape(Framework\Security\Ban\Ban::filterWord($msg->message), true) }}
   {{ $is_outbox = ($msg->sender == $member_id) }}
-  {{ $is_trash = (($msg->sender == $member_id && $msg->trash == 'sender') || ($msg->recipient == $member_id && $msg->trash == 'recipient') && !is_outbox && !$is_admin) }}
+  {{ $is_trash = (($msg->sender == $member_id && $msg->trash == 'sender') || ($msg->recipient == $member_id && $msg->trash == 'recipient') && !$is_outbox && !$is_admin) }}
   {{ $slug_url = ($is_trash ? 'trash' : ($is_outbox ? 'outbox' : 'inbox')) }}
   {{ $is_delete = ($is_outbox || $is_trash || $is_admin) }}
   {{ $move_to = ($is_delete) ? 'delete' : 'trash' }}
