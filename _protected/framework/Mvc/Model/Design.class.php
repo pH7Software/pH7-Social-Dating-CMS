@@ -20,7 +20,7 @@ PH7\Framework\Parse\SysVar;
 
 class Design extends \PH7\Framework\Layout\Html\Design
 {
-    const CACHE_GROUP = 'db/design', CACHE_STATIC_GROUP = 'db/design/static', CACHE_TIME = 172800;
+    const CACHE_STATIC_GROUP = 'db/design/static', CACHE_TIME = 172800;
 
     private $_oCache;
 
@@ -85,6 +85,8 @@ class Design extends \PH7\Framework\Layout\Html\Design
     }
 
     /**
+     * Analytics API code.
+     *
      * @param boolean $bPrint Echo the analytics HTML code. Default TRUE.
      * @param boolean $bOnlyActive Only active code. Default TRUE
      * @return mixed (string | void)
@@ -109,23 +111,49 @@ class Design extends \PH7\Framework\Layout\Html\Design
             echo $sData;
         else
             return $sData;
-
     }
 
     /**
-     * Get CSS files in their HTML tags.
+     * Get the custom code.
      *
+     * @param string $sType  Choose between 'css' and 'js'.
+     * @return string
+     */
+    public function customCode($sType)
+    {
+        $this->_oCache->start(self::CACHE_STATIC_GROUP, 'customCode' . $sType, static::CACHE_TIME);
+
+        if (!$sData = $this->_oCache->get())
+        {
+            $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix('CustomCode') . 'WHERE codeType = :type LIMIT 1');
+            $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
+            $rStmt->execute();
+            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $sData = $oRow->code;
+            unset($oRow);
+            $this->_oCache->put($sData);
+        }
+
+        return $sData;
+    }
+
+    /**
+     * Get CSS/JS files in their HTML tags.
+     *
+     * @param string $sType  Choose between 'css' and 'js'.
      * @param boolean $bOnlyActive Default: TRUE
      * @return void HTML output.
      */
-    public function css($bOnlyActive = true)
+    public function files($sType, $bOnlyActive = true)
     {
-        $this->_oCache->start(self::CACHE_STATIC_GROUP, 'css' . $bOnlyActive, static::CACHE_TIME);
+        $this->_oCache->start(self::CACHE_STATIC_GROUP, 'files' . $sType . $bOnlyActive, static::CACHE_TIME);
 
         if (!$oData = $this->_oCache->get())
         {
-            $sSqlWhere = ($bOnlyActive) ? 'WHERE active=\'1\'' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . Db::prefix('StaticCss') . $sSqlWhere);
+            $sSqlWhere = ($bOnlyActive) ? ' AND active=\'1\'' : '';
+            $rStmt = Db::getInstance()->prepare('SELECT file FROM ' . Db::prefix('StaticFiles') . 'WHERE fileType = :type' . $sSqlWhere);
+            $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -135,36 +163,14 @@ class Design extends \PH7\Framework\Layout\Html\Design
         if (!empty($oData) && is_string($oData))
         {
             while ($oData)
-                echo '<link rel="stylesheet" href="',PH7_RELATIVE, 'templates/', (new SysVar)->parse($oData->file),'" />';
-        }
+            {
+                $sFullPath = PH7_RELATIVE . 'templates/' . (new SysVar)->parse($oData->file);
 
-        unset($oData);
-    }
-
-    /**
-     * Get JS files in their HTML tags.
-     *
-     * @param boolean $bOnlyActive Default: TRUE
-     * @return void HTML output.
-     */
-    public function js($bOnlyActive = true)
-    {
-        $this->_oCache->start(self::CACHE_STATIC_GROUP, 'js' . $bOnlyActive, static::CACHE_TIME);
-
-        if (!$oData = $this->_oCache->get())
-        {
-            $sSqlWhere = ($bOnlyActive) ? 'WHERE active=\'1\'' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . Db::prefix('StaticJs') . $sSqlWhere);
-            $rStmt->execute();
-            $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            $this->_oCache->put($oData);
-        }
-
-        if (!empty($oData) && is_string($oData))
-        {
-            while ($oData)
-                echo '<script src="', PH7_RELATIVE, 'templates/', (new SysVar)->parse($oData->file),'"></script>';
+                if ($sType == 'js')
+                    $this->externalJsFile($sFullPath);
+                else
+                    $this->externalCssFile($sFullPath);
+            }
         }
 
         unset($oData);
