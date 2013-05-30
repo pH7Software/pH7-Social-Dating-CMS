@@ -36,13 +36,16 @@
    {{ $design->staticFiles('css', PH7_STATIC . PH7_JS . 'jquery/box/', 'box.css') }}
    {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'common.css,style.css,layout.css,pagination.css,menu.css,like.css,color.css,alert-msg.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
 
+   {* Custom CSS code *}
+   {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/style.css') }}
+
    {@if(UserCore::auth())@}
      {{ $design->staticFiles('css', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CSS, 'messenger.css') }}
    {@/if@}
 
    <!-- Other sheet CSS for modules etc. -->
     {{ $design->css() }}
-    {{ $designModel->css() }}
+    {{ $designModel->files('css') }}
    <!-- End CSS -->
 
    <!-- Begin Header JavaScript -->
@@ -184,11 +187,12 @@
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS, PH7_LANG . $lang_file . ',jquery.cookie.js,Messenger.js') }}
 {@/if@}
 
-<script src="http://s7.addthis.com/js/250/addthis_widget.js"></script>
+{* JS code Injection *}
+{{ $design->externalJsFile(PH7_RELATIVE.'asset/js/script.js') }}
 
 <!-- Other JavaScript files for modules etc. -->
 {{ $design->js() }}
-{{ $designModel->js() }}
+{{ $designModel->files('js') }}
 
 {@if(UserCore::auth())@}
     {@main_include('favicon_alert.inc.tpl')@}
