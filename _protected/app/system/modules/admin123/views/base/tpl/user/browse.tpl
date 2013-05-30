@@ -27,7 +27,7 @@
 <th><input type="checkbox" name="all_action" /></th>
 <th><button type="submit" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','banall') }}">{@lang('Ban')@}</button></th>
 <th><button type="submit" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','unbanall') }}">{@lang('UnBan')@}</button></th>
-<th><button type="submit" name="delete" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','deleteall') }}" class="red">{@lang('Delete')@}</button></th>
+<th><button type="submit" onclick="return checkChecked()" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','deleteall') }}" class="red">{@lang('Delete')@}</button></th>
 <th><button type="submit" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','approveall') }}">{@lang('Approve')@}</button></th>
 <th><button type="submit" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','disapproveall') }}">{@lang('Disapprove')@}</button></th>
 <th> </th>
@@ -88,9 +88,3 @@
 </form>
 
 {@main_include('page_nav.inc.tpl')@}
-
-<script>
-$('button[name=delete]').click(function() {
-   return confirm('{@lang('Caution! This action will remove users! (Irreversible Action)')@}');
-});
-</script>

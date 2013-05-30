@@ -17,7 +17,7 @@
 
 </ul>
 
-<p><input type="checkbox" name="all_action" /> <button type="submit" formaction="{{ $design->url(PH7_ADMIN_MOD,'report','deleteall') }}">{@lang('Delete')@}</button></p>
+<p><input type="checkbox" name="all_action" /> <button type="submit" onclick="return checkChecked(false)" formaction="{{ $design->url(PH7_ADMIN_MOD,'report','deleteall') }}">{@lang('Delete')@}</button></p>
 
 </form>
 
