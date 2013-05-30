@@ -60,27 +60,30 @@ class MainController extends Controller
 
             if (!empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId))
             {
-                /***** META TAGS *****/
-                $this->view->page_title = $oPost->pageTitle;
-                $this->view->meta_description = $oPost->metaDescription;
-                $this->view->meta_keywords = $oPost->metaKeywords;
+                $aVars = [
+                    /***** META TAGS *****/
+                    'page_title' => $oPost->pageTitle,
+                    'meta_description' => $oPost->metaDescription,
+                    'meta_keywords' => $oPost->metaKeywords,
 
-                $this->view->slogan = $oPost->slogan;
-                $this->view->meta_author = $oPost->metaAuthor;
-                $this->view->meta_robots = $oPost->metaRobots;
-                $this->view->meta_copyright = $oPost->metaCopyright;
+                    'slogan' => $oPost->slogan,
+                    'meta_author' => $oPost->metaAuthor,
+                    'meta_robots' => $oPost->metaRobots,
+                    'meta_copyright' => $oPost->metaCopyright,
 
-                /***** TITLE AND CONTENT OF PAGE *****/
-                $this->view->post_id = $oPost->postId;
-                $this->view->blog_id = $oPost->blogId;
-                $this->view->h1_title = $oPost->title;
-                $this->view->content = Emoticon::init($oPost->content);
-                $this->view->categories = $this->oBlogModel->getCategory($oPost->blogId, 0, 300);
-                $this->view->enable_comment = $oPost->enableComment;
+                    /***** TITLE AND CONTENT OF PAGE *****/
+                    'post_id' => $oPost->postId,
+                    'blog_id' => $oPost->blogId,
+                    'h1_title' => $oPost->title,
+                    'content' => Emoticon::init($oPost->content),
+                    'categories' => $this->oBlogModel->getCategory($oPost->blogId, 0, 300),
+                    'enable_comment' => $oPost->enableComment,
 
-                /** Date **/
-                $this->view->created_date = $this->dateTime->get($oPost->createdDate)->dateTime();
-                $this->view->updated_date = $this->dateTime->get($oPost->updatedDate)->dateTime();
+                    /** Date **/
+                    'created_date' => $this->dateTime->get($oPost->createdDate)->dateTime(),
+                    'updated_date' => $this->dateTime->get($oPost->updatedDate)->dateTime()
+                ];
+                $this->view->assigns($aVars);
 
                 // Set Blogs Post Views Statistics
                 Framework\Analytics\Statistic::setView($oPost->blogId, 'Blogs');
