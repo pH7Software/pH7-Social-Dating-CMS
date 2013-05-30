@@ -12,15 +12,15 @@ defined('PH7') or exit('Restricted access');
 class ChangePasswordCoreForm
 {
 
-   public static function display()
-   {
-       if (isset($_POST['submit_change_password']))
-       {
-           if (\PFBC\Form::isValid($_POST['submit_change_password']))
-               new ChangePasswordCoreFormProcessing();
+    public static function display()
+    {
+        if (isset($_POST['submit_change_password']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_change_password']))
+                new ChangePasswordCoreFormProcessing();
 
-           Framework\Url\HeaderUrl::redirect();
-       }
+            Framework\Url\HeaderUrl::redirect();
+        }
 
         $oForm = new \PFBC\Form('form_change_password', 500);
         $oForm->configure(array('action' => '' ));
