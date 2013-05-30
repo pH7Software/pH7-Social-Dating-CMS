@@ -284,7 +284,7 @@
             <li><a href="{{ $design->url('mail','admin','index') }}" title="{@lang('Email Management')@}">{@lang('Email Management')@}</a>
               <ul>
                 <li><a href="{{ $design->url('mail','admin','msglist') }}" title="{@lang('Messages Monitor')@}">{@lang('Messages Monitor')@}</a></li>
-                <li><a href="{{ $design->url('mail','admin','search') }}" title="{@lang('Search Email')@}">{@lang('Search Message')@}</a></li>
+                <li><a href="{{ $design->url('mail','main','search') }}" title="{@lang('Search Email')@}">{@lang('Search Message')@}</a></li>
               </ul>
             </li>
 
