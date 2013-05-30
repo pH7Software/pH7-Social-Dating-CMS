@@ -1015,22 +1015,6 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('isSoftwareNewsFeed', '1', 'Enable the news feed. 0 = Disable | 1 = Enable', 'general');
 
 
-CREATE TABLE IF NOT EXISTS pH7_StaticCss (
-  staticId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
-  file varchar(255) NOT NULL,
-  active enum('1','0') DEFAULT '1',
-  PRIMARY KEY (staticId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-
-CREATE TABLE IF NOT EXISTS pH7_StaticJs (
-  staticId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
-  file varchar(255) NOT NULL,
-  active enum('1','0') DEFAULT '1',
-  PRIMARY KEY (staticId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-
 CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   name varchar(200) NOT NULL,
@@ -1041,3 +1025,20 @@ CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   PRIMARY KEY (profileId),
   UNIQUE KEY (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE IF NOT EXISTS pH7_StaticFiles (
+  staticId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  file varchar(255) NOT NULL,
+  fileType enum('css', 'js') NOT NULL,
+  active enum('1','0') DEFAULT '1',
+  PRIMARY KEY (staticId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+CREATE TABLE IF NOT EXISTS pH7_CustomCode (
+  code text,
+  codeType enum('css', 'js') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO pH7_CustomCode VALUES ('/* Your custom CSS code here */', 'css'), ('/* Your custom JS code here */\r\n\r\n// Don''t remove the code below. Inclusion of the JS file for Social Bookmark.\r\ndocument.write(''<script src="http://s7.addthis.com/js/250/addthis_widget.js"></script>'');', 'js');

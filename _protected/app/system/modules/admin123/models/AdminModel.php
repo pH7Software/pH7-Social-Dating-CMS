@@ -124,4 +124,16 @@ class AdminModel extends AdminCoreModel
         return $mData;
     }
 
+    /**
+     * Update the custom code.
+     *
+     * @param string $sCode
+     * @param string $sType  Choose between 'css' and 'js'.
+     * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
+     */
+    public function updateCustomCode($sCode, $sType)
+    {
+        return $this->orm->update('CustomCode', 'code', $sCode, 'codeType', $sType);
+    }
+
 }
