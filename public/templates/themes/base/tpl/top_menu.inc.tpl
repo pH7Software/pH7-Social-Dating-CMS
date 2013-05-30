@@ -234,7 +234,8 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting','metamain') }}" title="{@lang('Settings')@}">{@lang('Meta Tags')@}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','ads') }}" title="{@lang('Advertisement')@}">{@lang('Advertisement')@}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{@lang('Analytics Code')@}">{@lang('Analytics Code')@}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{@lang('Style')@}">{@lang('Style')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{@lang('Custom Style')@}">{@lang('Style')@}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'script') }}" title="{@lang('JavaScript Injection')@}">{@lang('Script')@}</a></li>
           </ul>
         </li>
 
