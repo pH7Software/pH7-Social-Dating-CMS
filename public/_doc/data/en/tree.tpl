@@ -1,4 +1,4 @@
-<!-- Last Update: 05/28/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 05/29/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -293,13 +293,17 @@
 |   |           |   |   |   |-- MetaMainFormProcessing.php
 |   |           |   |   |   |-- ProtectedFileFormProcessing.php
 |   |           |   |   |   |-- PublicFileFormProcessing.php
+|   |           |   |   |   |-- ScriptFormProcessing.php
 |   |           |   |   |   |-- SettingFormProcessing.php
+|   |           |   |   |   |-- StyleFormProcessing.php
 |   |           |   |   |   `-- UpdateAdsFormProcessing.php
 |   |           |   |   |-- ProtectedFileForm.php
 |   |           |   |   |-- PublicFileForm.php
+|   |           |   |   |-- ScriptForm.php
 |   |           |   |   |-- SearchAdminForm.php
 |   |           |   |   |-- SearchUserForm.php
 |   |           |   |   |-- SettingForm.php
+|   |           |   |   |-- StyleForm.php
 |   |           |   |   `-- UpdateAdsForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
@@ -364,6 +368,7 @@
 |   |           |               |   |-- analyticsapi.tpl
 |   |           |               |   |-- general.tpl
 |   |           |               |   |-- metamain.tpl
+|   |           |               |   |-- script.tpl
 |   |           |               |   `-- style.tpl
 |   |           |               |-- tool
 |   |           |               |   |-- backup.tpl
@@ -1391,10 +1396,11 @@
 |   |   |   |-- 8.ttf
 |   |   |   `-- 9.ttf
 |   |   |-- log
-|   |   |   `-- pH7log
-|   |   |       `-- except
-|   |   |           |-- gzip
-|   |   |           `-- pH7log.json
+|   |   |   |-- pH7log
+|   |   |   |   `-- except
+|   |   |   |       |-- gzip
+|   |   |   |       `-- pH7log.json
+|   |   |   `-- php_error.log
 |   |   `-- tmp
 |   |       |-- _license.txt
 |   |       `-- stats
@@ -4393,4 +4399,4 @@
 
 </pre>
 
-<p>Statistics: 1325 directories, 3060 files.</p>
+<p>Statistics: 1325 directories, 3066 files.</p>
