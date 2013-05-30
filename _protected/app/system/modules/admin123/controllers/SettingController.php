@@ -68,7 +68,15 @@ class SettingController extends Controller
 
     public function style()
     {
-        $this->sTitle = t('Style Settings');
+        $this->sTitle = t('Style code injection');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
+        $this->output();
+    }
+
+    public function script()
+    {
+        $this->sTitle = t('JavaScript code injection');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
         $this->output();
