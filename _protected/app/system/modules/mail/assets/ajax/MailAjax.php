@@ -27,6 +27,13 @@ class Mail
 
         switch ($this->_oHttpRequest->post('type'))
         {
+            case 'trash':
+                $this->trash();
+            break;
+
+            case 'restor':
+                $this->restor();
+
             case 'delete':
                 $this->delete();
             break;
@@ -37,14 +44,38 @@ class Mail
         }
     }
 
+    protected function trash()
+    {
+            $this->_bStatus = $this->_oMailModel->setTo($this->_oSession->get('member_id'), $this->_oHttpRequest->post('msg_id'), 'trash');
+
+        if (!$this->_bStatus)
+            $this->_sMsg = jsonMsg(0, t('Your message could not be moved to Trash because there no exist.'));
+        else
+            $this->_sMsg = jsonMsg(1, t('Your message has been moved to your Trash!'));
+
+        echo $this->_sMsg;
+    }
+
+    protected function restor()
+    {
+            $this->_bStatus = $this->_oMailModel->setTo($this->_oSession->get('member_id'), $this->_oHttpRequest->post('msg_id'), 'restor');
+
+        if (!$this->_bStatus)
+            $this->_sMsg = jsonMsg(0, t('Your message could not be moved to Inbox because there no exist.'));
+        else
+            $this->_sMsg = jsonMsg(1, t('Your message has been moved to your Inbox.'));
+
+        echo $this->_sMsg;
+    }
+
     protected function delete()
     {
-        if(AdminCore::auth() && !UserCore::auth())
-            $this->_bStatus = $this->_oMailModel->adminDeleteMessage($this->_oHttpRequest->post('msg_id'));
+        if (AdminCore::auth() && !UserCore::auth())
+            $this->_bStatus = $this->_oMailModel->adminDeleteMsg($this->_oHttpRequest->post('msg_id'));
         else
-            $this->_bStatus = $this->_oMailModel->deleteMessage($this->_oSession->get('member_id'), $this->_oHttpRequest->post('msg_id'));
+            $this->_bStatus = $this->_oMailModel->setTo($this->_oSession->get('member_id'), $this->_oHttpRequest->post('msg_id'), 'delete');
 
-        if(!$this->_bStatus)
+        if (!$this->_bStatus)
             $this->_sMsg = jsonMsg(0, t('Your message could not be deleted because there no exist.'));
         else
             $this->_sMsg = jsonMsg(1, t('Your message has been successfully removed!'));

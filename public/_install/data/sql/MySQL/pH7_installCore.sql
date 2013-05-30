@@ -869,6 +869,7 @@ CREATE TABLE IF NOT EXISTS pH7_Messages (
   sendDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   status tinyint(1) unsigned NOT NULL DEFAULT '1',
   trash set('sender','recipient') NOT NULL DEFAULT '',
+  toDelete set('sender','recipient') NOT NULL DEFAULT '',
   PRIMARY KEY (messageId),
   -- This is wrong, because now administrators can also send emails.
   -- FOREIGN KEY (sender) REFERENCES pH7_Members(profileId),

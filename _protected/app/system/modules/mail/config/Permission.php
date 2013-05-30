@@ -7,7 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
 
 class Permission extends PermissionCore
 {
@@ -16,11 +16,13 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if(!UserCore::auth() && !AdminCore::auth()) {
-            Framework\Url\HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->signInMsg(), 'error');
+        if(!UserCore::auth() && !AdminCore::auth())
+        {
+            HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->signInMsg(), 'error');
         }
 
-        if(!AdminCore::auth() && $this->registry->controller === 'AdminController') {
+        if(!AdminCore::auth() && $this->registry->controller === 'AdminController')
+        {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
             HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->adminSignInMsg(), 'error');
         }

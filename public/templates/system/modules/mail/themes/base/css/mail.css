@@ -1,7 +1,7 @@
-.mb_nav{margin:5px 150px 18px 50px;font-weight:bold;line-height:13px;}
-.user, .content, .subject, .message, .date, .action{overflow:hidden;display:inline;}
-.content{cursor:pointer;}
+.mb_nav{margin:5px 150px 18px 50px;font-weight:bold;line-height:13px}
+.user, .content, .subject, .message, .date, .action{overflow:hidden;display:inline}
+.content{cursor:pointer}
 .subject{margin:2px 90px 2px 100px;width:110px}
-.message{margin:2px 90px 2px 100px;width:200px;}
-.date{margin-left:20px}
-.action{margin-left:70px}
+.message{margin:2px 90px 2px 100px;width:200px}
+.date{margin-left:30px}
+.action{margin-left:60px}

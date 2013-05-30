@@ -54,9 +54,9 @@ class MailFormProcessing extends Form
         }
         else
         {
-            $iSenderId = (AdminCore::auth() && !$this->session->exists('login_user_as')) ? PH7_ADMIN_ID : $iSenderId;
+            $iSenderId = (AdminCore::auth() && !UserCore::auth() && !$this->session->exists('login_user_as')) ? PH7_ADMIN_ID : $iSenderId;
 
-            $mSendMsg = $oMailModel->sendMessage($iSenderId, $iRecipientId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
+            $mSendMsg = $oMailModel->sendMsg($iSenderId, $iRecipientId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
 
             if (false === $mSendMsg)
             {

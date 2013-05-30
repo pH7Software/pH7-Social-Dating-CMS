@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Mail / Controller
  */
 namespace PH7;
+
 use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Mvc\Request\HttpRequest,
@@ -15,7 +16,8 @@ PH7\Framework\Mvc\Router\UriRoute;
 class MainController extends Controller
 {
 
-    protected $oMailModel, $sMsg, $sTitle, $iTotalMails;
+    protected $oMailModel, $oPage, $sMsg, $sTitle, $iTotalMails;
+    private $_bAdminLogged;
 
     public function __construct()
     {
@@ -23,12 +25,15 @@ class MainController extends Controller
 
         $this->oMailModel = new MailModel;
         $this->oPage = new Page;
+        $this->_bAdminLogged = (AdminCore::auth() && !UserCore::auth());
         $this->view->dateTime = $this->dateTime;
 
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
         $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
 
         $this->view->csrf_token = (new Framework\Security\CSRF\Token)->generate('mail');
+
+        $this->view->member_id = $this->session->get('member_id');
 
         // Adding Css Style Content and JavaScript for Mail and Form
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'mail.css');
@@ -56,28 +61,31 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
-        if($this->httpRequest->getExists('id'))
+        if ($this->httpRequest->getExists('id'))
         {
-            $oMsg = $this->oMailModel->readMessage($this->session->get('member_id'), $this->httpRequest->get('id'));
+            $oMsg = $this->oMailModel->readMsg($this->session->get('member_id'), $this->httpRequest->get('id'));
 
-            if(empty($oMsg))
+            if (empty($oMsg))
             {
                 $this->sTitle = t('Not Found Message!');
                 $this->notFound();
             }
             else
             {
-                if($oMsg->status == 1) $this->oMailModel->setReadMsg($oMsg->messageId);
+                if ($oMsg->status == 1) $this->oMailModel->setReadMsg($oMsg->messageId);
+                $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
             }
+
+            $this->manualTplInclude('msg.inc.tpl');
         }
         else
         {
-            $this->view->total_pages = $this->oPage->getTotalPages($this->oMailModel->totalMessages($this->session->get('member_id')), 10);
+            $this->view->total_pages = $this->oPage->getTotalPages($this->oMailModel->totalMsg($this->session->get('member_id')), 10);
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->readMessages($this->session->get('member_id'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+            $oMail = $this->oMailModel->readMsgs($this->session->get('member_id'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
-            if(empty($oMail))
+            if (empty($oMail))
             {
                 $this->sTitle = t('Empty Message!');
                 $this->notFound();
@@ -86,58 +94,107 @@ class MainController extends Controller
             }
             else
             {
-                $this->view->inbox = $oMail;
+                $this->view->msgs = $oMail;
             }
 
-            $this->manualTplInclude('list.tpl');
+            $this->manualTplInclude('msglist.inc.tpl');
         }
 
         $this->output();
     }
 
-    public function delete()
-    {
-        if($this->oMailModel->deleteMessage($this->session->get('member_id'), $this->httpRequest->post('id', 'int')))
-            $this->sMsg = t('Your message has been sent successfully!');
-        else
-            $this->sMsg = t('Your message could not be deleted because there no exist.');
-
-        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg);
-    }
-
-    public function deleteAll()
-    {
-        if(!(new Framework\Security\CSRF\Token)->check('mail_action'))
-        {
-            $this->sMsg = Form::errorTokenMsg();
-        }
-        else
-        {
-            if(count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
-            {
-                foreach($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
-                {
-                    $iId = (int) $sAction;
-                    $this->oMailModel->deleteMessage($this->session->get('member_id'), $iId);
-                }
-            }
-            $this->sMsg = t('Your message(s) has been sent successfully!');
-        }
-
-        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg);
-    }
-
     public function outbox()
     {
         $this->view->page_title = t('MailBox : Outbox');
-        $this->design->setRedirect(UriRoute::get('mail','main','index'), t('Empty!'), 'warning', 2); // For now, this method is useless
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
+
+        if ($this->httpRequest->getExists('id'))
+        {
+            $oMsg = $this->oMailModel->readSentMsg($this->session->get('member_id'), $this->httpRequest->get('id'));
+
+            if (empty($oMsg))
+            {
+                $this->sTitle = t('Empty!');
+                $this->notFound();
+            }
+            else
+            {
+                $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
+                $this->view->msg = $oMsg;
+            }
+
+            $this->manualTplInclude('msg.inc.tpl');
+        }
+        else
+        {
+            $this->view->total_pages = $this->oPage->getTotalPages($this->oMailModel->totalSentMsg($this->session->get('member_id')), 10);
+            $this->view->current_page = $this->oPage->getCurrentPage();
+            $oMail = $this->oMailModel->readSentMsgs($this->session->get('member_id'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+
+            if (empty($oMail))
+            {
+                $this->sTitle = t('Empty Message!');
+                $this->notFound();
+                // We modified the default error message.
+                $this->view->error = t('Empty message.');
+            }
+            else
+            {
+                $this->view->msgs = $oMail;
+            }
+
+            $this->manualTplInclude('msglist.inc.tpl');
+        }
+
         $this->output();
     }
 
     public function trash()
     {
         $this->view->page_title = t('MailBox : Trash');
-        $this->design->setRedirect(UriRoute::get('mail','main','index'), t('Empty!'), 'warning', 2); // For now, this method is useless
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
+
+        if ($this->httpRequest->getExists('id'))
+        {
+            $oMsg = $this->oMailModel->readTrashMsg($this->session->get('member_id'), $this->httpRequest->get('id'));
+
+            if (empty($oMsg))
+            {
+                $this->sTitle = t('Empty!');
+                $this->notFound();
+            }
+            else
+            {
+                if ($oMsg->status == 1) $this->oMailModel->setReadMsg($oMsg->messageId);
+                $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
+                $this->view->msg = $oMsg;
+            }
+
+            $this->manualTplInclude('msg.inc.tpl');
+        }
+        else
+        {
+            $this->view->total_pages = $this->oPage->getTotalPages($this->oMailModel->totalTrashMsg($this->session->get('member_id')), 10);
+            $this->view->current_page = $this->oPage->getCurrentPage();
+            $oMail = $this->oMailModel->readTrashMsgs($this->session->get('member_id'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+
+            if (empty($oMail))
+            {
+                $this->sTitle = t('Empty Message!');
+                $this->notFound();
+                // We modified the default error message.
+                $this->view->error = t('Sorry %0%, you do not have any messages.', '<em>' . $this->session->get('member_first_name') . '</em>');
+            }
+            else
+            {
+                $this->view->msgs = $oMail;
+            }
+
+            $this->manualTplInclude('msglist.inc.tpl');
+        }
+
         $this->output();
     }
 
@@ -151,12 +208,13 @@ class MainController extends Controller
 
     public function result()
     {
-        $this->iTotalMails = $this->oMailModel->search($this->session->get('member_id'), $this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $sMailModelMethod = ($this->httpRequest->get('where') == 'outbox') ? 'searchSentMsg' : 'searchMsg';
+        $this->iTotalMails = $this->oMailModel->$sMailModelMethod($this->session->get('member_id'), $this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
         $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 10);
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oSearch = $this->oMailModel->search($this->session->get('member_id'), $this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oMailModel->$sMailModelMethod($this->session->get('member_id'), $this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
-        if(empty($oSearch))
+        if (empty($oSearch))
         {
             $this->sTitle = t('Search Not Found!');
             $this->notFound();
@@ -167,15 +225,118 @@ class MainController extends Controller
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Mail Result!', '%n% Mails Result!', $this->iTotalMails);
-            $this->view->inbox = $oSearch;
+            $this->view->msgs = $oSearch;
         }
 
-        $this->manualTplInclude('list.tpl');
+        $this->manualTplInclude('msglist.inc.tpl');
         $this->output();
     }
 
+    public function setTrash()
+    {
+        $bStatus = $this->oMailModel->setTo($this->session->get('member_id'), $this->httpRequest->post('id', 'int'), 'trash');
+        $this->sMsg = ($bStatus) ? t('Your message has been moved to your Trash.') : t('Your message could not be moved to Trash because there no exist.');
+        $sMsgType = ($bStatus) ? 'success' : 'error';
+
+        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg, $sMsgType);
+    }
+
+    public function setTrashAll()
+    {
+        if (!(new Framework\Security\CSRF\Token)->check('mail_action'))
+        {
+            $this->sMsg = Form::errorTokenMsg();
+        }
+        else
+        {
+            if (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+            {
+                foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+                {
+                    $iId = (int) $sAction;
+                    $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'trash');
+                }
+                $this->sMsg = t('Your message(s) has been moved to your Trash.');
+            }
+        }
+
+        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg);
+    }
+
+    public function setRestor()
+    {
+        $bStatus = $this->oMailModel->setTo($this->session->get('member_id'), $this->httpRequest->post('id', 'int'), 'restor');
+        $this->sMsg = ($bStatus) ? t('Your message has been moved to your Inbox.') : t('Your message could not be moved to Trash because there no exist.');
+        $sMsgType = ($bStatus) ? 'success' : 'error';
+
+        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg, $sMsgType);
+    }
+
+    public function setRestorAll()
+    {
+        if (!(new Framework\Security\CSRF\Token)->check('mail_action'))
+        {
+            $this->sMsg = Form::errorTokenMsg();
+        }
+        else
+        {
+            if (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+            {
+                foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+                {
+                    $iId = (int) $sAction;
+                    $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'restor');
+                }
+                $this->sMsg = t('Your message(s) has been moved to your Inbox.');
+            }
+        }
+
+        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg);
+    }
+
+    public function setDelete()
+    {
+        $iId = $this->httpRequest->post('id', 'int');
+
+        if ($this->_bAdminLogged)
+            $bStatus = $this->oMailModel->adminDeleteMsg($iId);
+        else
+            $bStatus = $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'delete');
+
+        $this->sMsg = ($bStatus) ? t('Your message has been deleted successfully!') : t('Your message could not be deleted because there no exist.');
+        $sMsgType = ($bStatus) ? 'success' : 'error';
+        $sUrl = ($this->_bAdminLogged) ? UriRoute::get('mail','admin','msglist') : UriRoute::get('mail','main','trash');
+        HeaderUrl::redirect($sUrl, $this->sMsg, $sMsgType);
+    }
+
+    public function setDeleteAll()
+    {
+        if (!(new Framework\Security\CSRF\Token)->check('mail_action'))
+        {
+            $this->sMsg = Form::errorTokenMsg();
+        }
+        else
+        {
+            if (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+            {
+                foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+                {
+                    $iId = (int) $sAction;
+                    if ($this->_bAdminLogged)
+                        $this->oMailModel->adminDeleteMsg($iId);
+                    else
+                        $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'delete');
+                }
+                $this->sMsg = t('Your message(s) has been deleted successfully!');
+            }
+        }
+
+        $sUrl = ($this->_bAdminLogged) ? UriRoute::get('mail','admin','msglist') : UriRoute::get('mail','main','trash');
+        HeaderUrl::redirect($sUrl, $this->sMsg);
+    }
+
     /**
-     * @desc Set a Not Found Error Message.
+     * Set a Not Found Error Message.
      *
      * @access private
      * @return void
