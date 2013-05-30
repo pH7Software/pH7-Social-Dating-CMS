@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
  * @title            PH7 Template Engine
- * @desc             Create class Template Engine for pH7 CMS!
+ * @desc             Template Engine with Compiler and Cache for pH7 CMS!
  *
  * @updated          The Last Update 04/23/13 23:42 (Greenwich Mean Time)
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
@@ -63,7 +63,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     $bCaching = false,
     $bHtmlCompressor,
     $bPhpCompressor,
-    $mCacheExpire = null, // @var mixed (integer or null value) $mCacheExpire
+    $mCacheExpire, // @var mixed (integer or null value) $mCacheExpire
     $bXmlTags = false, // Enable (true) or Disables (false) xml Tags for Template Engine
     $_aVars = array(),
     $_oVars;
