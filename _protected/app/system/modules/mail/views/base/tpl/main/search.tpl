@@ -1,1 +1,1 @@
-{{SearchMailForm::display()}}
+{{ SearchMailForm::display() }}

@@ -22,10 +22,8 @@ class MailForm
             Framework\Url\HeaderUrl::redirect();
         }
 
-
         $oHttpRequest = new HttpRequest; // For Reply Function
 
-        // Generate form Sign In
         $oForm = new \PFBC\Form('form_compose_mail', 800);
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_compose_mail', 'form_compose_mail'));
