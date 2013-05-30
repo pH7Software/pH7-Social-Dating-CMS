@@ -23,18 +23,20 @@ class Spam
     /**
      * Detect duplicate contents.
      *
-     * @param string $sCheckContent
+     * @param string $sCheckContent Message content to check.
      * @param string $sFindColumn
      * @param string $sColumnId
      * @param integer $iFindId
      * @param string $sTable
+     * @param string $sAdditionalSql Additional SQL code. Default NULL
      * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
-    public static function detectDuplicate($sCheckContent, $sFindColumn, $sColumnId, $iFindId, $sTable)
+    public static function detectDuplicate($sCheckContent, $sFindColumn, $sColumnId, $iFindId, $sTable, $sAdditionalSql = null)
     {
         $bReturn = false; // Default value
+        $sSql = (!empty($sAdditionalSql)) ? ' ' . $sAdditionalSql : '';
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sFindColumn . ' AS content FROM ' . Db::prefix($sTable) . 'WHERE ' . $sColumnId . ' = :id' . $sSql);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sFindColumn . ' AS content FROM ' . Db::prefix($sTable) . 'WHERE ' . $sColumnId . ' = :id');
         $rStmt->bindValue(':id', $iFindId, \PDO::PARAM_INT);
         $rStmt->execute();
         while ($oRow = $rStmt->fetch(\PDO::FETCH_OBJ))
