@@ -129,8 +129,8 @@ function checkPassword(sPwd)
 /**
  * @param {String} Value.
  * @param {String} Field ID.
- * @param {String} [extra=false] Argument 1. Optional.
- * @param {String} [extra=false] Argument 2. Optional.
+ * @param {String} [extra=false] Argument 1. Default: 4
+ * @param {String} [extra=false] Argument 2. Default: 2000
  * @return {Void}
  */
 function CValid(sInputVal, sFieldId, sParam1, sParam2)
