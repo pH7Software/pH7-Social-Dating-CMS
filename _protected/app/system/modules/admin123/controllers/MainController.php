@@ -70,9 +70,9 @@ class MainController extends Controller
         //---------- Number of Logins Members ----------//
 
         // All Members
-        $this->view->today_login_members = $oStatModel->totalMembers('Members', 1);
-        $this->view->week_login_members = $oStatModel->totalMembers('Members', 7);
-        $this->view->month_login_members = $oStatModel->totalMembers('Members', 31);
+        $this->view->today_login_members = $oStatModel->totalLogins('Members', 1);
+        $this->view->week_login_members = $oStatModel->totalLogins('Members', 7);
+        $this->view->month_login_members = $oStatModel->totalLogins('Members', 31);
         $this->view->year_login_members = $oStatModel->totalLogins('Members', 365);
         $this->view->login_members = $oStatModel->totalLogins();
 
