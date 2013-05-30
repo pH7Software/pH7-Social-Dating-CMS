@@ -1,4 +1,4 @@
-<!-- Last Update: 05/27/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 05/28/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -867,15 +867,13 @@
 |   |           |           |   `-- config.ini
 |   |           |           `-- tpl
 |   |           |               |-- admin
-|   |           |               |   |-- msglist.tpl
-|   |           |               |   `-- search.tpl
+|   |           |               |   `-- msglist.tpl
+|   |           |               |-- list.inc.tpl
 |   |           |               `-- main
 |   |           |                   |-- compose.tpl
-|   |           |                   |-- inbox.tpl
-|   |           |                   |-- list.tpl
-|   |           |                   |-- outbox.tpl
-|   |           |                   |-- search.tpl
-|   |           |                   `-- trash.tpl
+|   |           |                   |-- msg.inc.tpl
+|   |           |                   |-- msglist.inc.tpl
+|   |           |                   `-- search.tpl
 |   |           |-- mobile
 |   |           |   |-- config
 |   |           |   |   |-- config.ini
@@ -1352,6 +1350,7 @@
 |   |   |   |-- file
 |   |   |   `-- sql
 |   |   |-- cache
+|   |   |   |-- pH7_cache
 |   |   |   |-- pH7_static
 |   |   |   |-- pH7tpl_cache
 |   |   |   `-- pH7tpl_compile
@@ -4394,4 +4393,4 @@
 
 </pre>
 
-<p>Statistics: 1324 directories, 3062 files.</p>
+<p>Statistics: 1325 directories, 3060 files.</p>
