@@ -96,11 +96,11 @@ use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
       *
       * @static
       * @param string $sPath The path.
-      * @param string $sFileName The language name. Default is the constant: 'PH7_LANG_NAME'
+      * @param string $sFileName The language name. Default is the constant: 'PH7_LANG_CODE'
       * @return Valid file name (with the extension).
       * @throws \PH7\Framework\Translate\Exception If the language file is not found.
       */
-     public static function getJsFile($sPath, $sFileName = PH7_LANG_NAME)
+     public static function getJsFile($sPath, $sFileName = PH7_LANG_CODE)
      {
          if (is_file($sPath . $sFileName . '.js'))
          {
