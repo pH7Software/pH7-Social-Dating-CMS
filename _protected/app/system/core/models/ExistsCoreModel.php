@@ -17,7 +17,8 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
 {
 
     /**
-     * @desc Checks if the same email address already exists.
+     * Checks if the same email address already exists.
+     *
      * @param string $sEmail
      * @param string $sTable Default is "Members"
      * @return boolean
@@ -29,7 +30,8 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * @desc Checks if the same username already exists.
+     * Checks if the same username already exists.
+     *
      * @param string $sUsername
      * @param string $sTable Default is "Members"
      * @return boolean
@@ -40,7 +42,8 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
      /**
-      * @desc Checks if the same ID already exists. Ignore the ghost ID (1)
+      * Checks if the same ID already exists. Ignore the ghost ID (1)
+      *
       * @param integer $iId
       * @param string $sTable Default is "Members"
       * @return boolean
@@ -51,7 +54,8 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
      }
 
     /**
-     * @desc SECURITY Checks if there is not another affiliate with the same bank account.
+     * SECURITY Checks if there is not another affiliate with the same bank account.
+     *
      * @param string $sAccount
      * @param string $sTable Default is "Affiliate"
      * @return boolean
@@ -62,7 +66,8 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * @desc Generic method to check if the field exists and with the check \PH7\Framework\Mvc\Model\Engine\Util\Various::checkModelTable() method.
+     * Generic method to check if the field exists and with the check \PH7\Framework\Mvc\Model\Engine\Util\Various::checkModelTable() method.
+     *
      * @access protected
      * @param string $sColumn
      * @param string $sValue

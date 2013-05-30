@@ -79,7 +79,8 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * @desc Delete a comment.
+     * Delete a comment.
+     *
      * @param integer $iRecipientId The Comment Recipient ID.
      * @param string $sTable The Comment Table.
      * @return boolean Returns TRUE on success, FALSE on failure.

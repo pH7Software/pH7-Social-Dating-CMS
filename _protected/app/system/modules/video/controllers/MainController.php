@@ -80,10 +80,13 @@ class MainController extends Controller
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbums = $this->oVideoModel->album($profileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
-        if (empty($oAlbums)) {
+        if (empty($oAlbums))
+        {
             $this->sTitle = t('Empty Video Album.'); // Because the Ajax blocks profile, we can not put HTTP error code 404, so the attribute is "false"
-            $this->notFound(false);
-        } else {
+            $this->_notFound(false);
+        }
+        else
+        {
             $this->sTitle = (!empty($profileId)) ? t('The Album of <a href="%0%">%1%</a>', $this->
                             sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
             $this->view->page_title = $this->sTitle; // We can include HTML tags in the title as the template will erase them before display.
@@ -91,9 +94,9 @@ class MainController extends Controller
             $this->view->h2_title = $this->sTitle;
             $this->view->albums = $oAlbums;
         }
-        if (empty($profileId)) {
+        if (empty($profileId))
             $this->manualTplInclude('index.tpl');
-        }
+
         $this->output();
     }
 
@@ -106,10 +109,13 @@ class MainController extends Controller
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbum = $this->oVideoModel->video($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
-        if (empty($oAlbum)) {
+        if (empty($oAlbum))
+        {
             $this->sTitle = t('Album not found or in pending approval.');
-            $this->notFound();
-        } else {
+            $this->_notFound();
+        }
+        else
+        {
             $this->sTitle = t('Album of <a href="%0%">%1%</a>', $this->sUsernameLink, $this->
                     str->upperFirst($this->sUsername));
             $this->view->page_title = t('Album of %0%', $this->str->upperFirst($this->
@@ -130,10 +136,13 @@ class MainController extends Controller
 
         $oVideo = $this->oVideoModel->video($this->iProfileId, $this->httpRequest->get('album_id', 'int'), $this->httpRequest->get('video_id', 'int'), 1, 0, 1);
 
-        if (empty($oVideo)) {
+        if (empty($oVideo))
+        {
             $this->sTitle = t('Video not found or in pending approval.');
-            $this->notFound();
-        } else {
+            $this->_notFound();
+        }
+        else
+        {
             $this->sTitle = t('Watch Video of <a href="%0%">%1%</a>', $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
 
             $sTitle = Ban::filterWord($oVideo->title, false);
@@ -192,10 +201,13 @@ class MainController extends Controller
         $oSearch = $this->oVideoModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->
                         getFirstItem(), $this->oPage->getNbItemsByPage());
 
-        if (empty($oSearch)) {
+        if (empty($oSearch))
+        {
             $this->sTitle = t('Sorry, Your search returned no results!');
-            $this->notFound();
-        } else {
+            $this->_notFound();
+        }
+        else
+        {
             $this->sTitle = t('Dating Social Video - Your search returned');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
@@ -210,12 +222,12 @@ class MainController extends Controller
     }
 
     /**
-     * @desc Set a Not Found Error Message with HTTP 404 Code Status.
-     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false"
-     * Default value of this attribute is "true"
+     * Set a Not Found Error Message with HTTP 404 Code Status.
+     *
+     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false". Default: TRUE
      * @return void
      */
-    private function notFound($b404Status = true)
+    private function _notFound($b404Status = true)
     {
         if ($b404Status === true)
             Framework\Http\Http::setHeadersByCode(404);

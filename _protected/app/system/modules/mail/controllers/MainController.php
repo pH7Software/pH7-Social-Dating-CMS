@@ -68,7 +68,7 @@ class MainController extends Controller
             if (empty($oMsg))
             {
                 $this->sTitle = t('Not Found Message!');
-                $this->notFound();
+                $this->_notFound();
             }
             else
             {
@@ -88,7 +88,7 @@ class MainController extends Controller
             if (empty($oMail))
             {
                 $this->sTitle = t('Empty Message!');
-                $this->notFound();
+                $this->_notFound();
                 // We modified the default error message.
                 $this->view->error = t('Sorry %0%, you do not have any messages.', '<em>' . $this->session->get('member_first_name') . '</em>');
             }
@@ -116,7 +116,7 @@ class MainController extends Controller
             if (empty($oMsg))
             {
                 $this->sTitle = t('Empty!');
-                $this->notFound();
+                $this->_notFound();
             }
             else
             {
@@ -135,7 +135,7 @@ class MainController extends Controller
             if (empty($oMail))
             {
                 $this->sTitle = t('Empty Message!');
-                $this->notFound();
+                $this->_notFound();
                 // We modified the default error message.
                 $this->view->error = t('Empty message.');
             }
@@ -163,7 +163,7 @@ class MainController extends Controller
             if (empty($oMsg))
             {
                 $this->sTitle = t('Empty!');
-                $this->notFound();
+                $this->_notFound();
             }
             else
             {
@@ -183,7 +183,7 @@ class MainController extends Controller
             if (empty($oMail))
             {
                 $this->sTitle = t('Empty Message!');
-                $this->notFound();
+                $this->_notFound();
                 // We modified the default error message.
                 $this->view->error = t('You do not have any messages in your Trash.');
             }
@@ -217,7 +217,7 @@ class MainController extends Controller
         if (empty($oSearch))
         {
             $this->sTitle = t('Search Not Found!');
-            $this->notFound();
+            $this->_notFound();
         }
         else
         {
@@ -341,7 +341,7 @@ class MainController extends Controller
      * @access private
      * @return void
      */
-    private function notFound()
+    private function _notFound()
     {
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

@@ -182,7 +182,8 @@ class MainController extends Controller
     }
 
     /**
-     * @desc Sets the Menu Variables for the template.
+     * Sets the Menu Variables for the template.
+     *
      * @access protected
      * @return void
      */
@@ -196,12 +197,10 @@ class MainController extends Controller
     }
 
     /**
-     * @desc Set a custom Not Found Error Message with HTTP 404 Code Status.
+     * Set a custom Not Found Error Message with HTTP 404 Code Status.
+     *
      * @access protected
-     *
-     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to "false"
-     * Default value of this attribute is "true"
-     *
+     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to "false". Default: TRUE
      * @return void
      */
     protected function notFound($b404Status = true)

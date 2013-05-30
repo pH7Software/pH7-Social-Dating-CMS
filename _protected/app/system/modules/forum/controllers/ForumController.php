@@ -44,7 +44,7 @@ class ForumController extends Controller
         if (empty($oForums))
         {
             $this->sTitle = t('No Forums found.');
-            $this->notFound();
+            $this->_notFound();
         }
         else
         {
@@ -70,7 +70,7 @@ class ForumController extends Controller
         if (empty($oTopics))
         {
             $this->sTitle = t('No Topics found.');
-            $this->notFound();
+            $this->_notFound();
         }
         else
         {
@@ -94,7 +94,7 @@ class ForumController extends Controller
         if (empty($oPost))
         {
             $this->sTitle = t('Topic Not Found!');
-            $this->notFound();
+            $this->_notFound();
         }
         else
         {
@@ -136,7 +136,7 @@ class ForumController extends Controller
         if (empty($oTopics))
         {
             $this->sTitle = t('No found the forum post of %0%.', $sUsername);
-            $this->notFound(false); // Because the Ajax blocks profile, we can not put HTTP error code 404, so the attribute is "false"
+            $this->_notFound(false); // Because the Ajax blocks profile, we can not put HTTP error code 404, so the attribute is "false"
         }
         else
         {
@@ -168,7 +168,7 @@ class ForumController extends Controller
         if (empty($oSearch))
         {
             $this->sTitle = t('Sorry, Your search returned no results!');
-            $this->notFound();
+            $this->_notFound();
         }
         else
         {
@@ -251,12 +251,12 @@ class ForumController extends Controller
     }
 
     /**
-     * @desc Set a Not Found Error Message with HTTP 404 Code Status.
-     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false"
-     * Default value of this attribute is "true"
+     * Set a Not Found Error Message with HTTP 404 Code Status.
+     *
+     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false". Default: TRUE
      * @return void
      */
-    private function notFound($b404Status = true)
+    private function _notFound($b404Status = true)
     {
         if ($b404Status === true)
             Framework\Http\Http::setHeadersByCode(404);

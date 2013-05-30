@@ -65,7 +65,7 @@ class CommentController extends Controller
         }
         else
         {
-            $this->notFound();
+            $this->_notFound();
         }
         $this->output();
     }
@@ -89,7 +89,7 @@ class CommentController extends Controller
         }
         else
         {
-            $this->notFound();
+            $this->_notFound();
             // Modified the message error
             $this->view->error = t('No comments yet, please return to the <a href="%0%">previous page</a>.', 'javascript:history.back();');
         }
@@ -135,10 +135,11 @@ class CommentController extends Controller
     }
 
     /**
-     * @desc Set a Not Found Error Message with HTTP 404 Code Status.
+     * Set a Not Found Error Message with HTTP 404 Code Status.
+     *
      * @return void
      */
-    private function notFound()
+    private function _notFound()
     {
         Http::setHeadersByCode(404);
         $this->view->page_title = t('Comment Not Found');
