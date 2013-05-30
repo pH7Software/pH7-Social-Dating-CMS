@@ -17,10 +17,11 @@ class PublicFileFormProcessing extends Form
     {
         parent::__construct();
 
-        if($this->file->save(PH7_PATH_ROOT . $this->httpRequest->get('file'), $this->httpRequest->post('content', HttpRequest::NO_CLEAN)))
-            HeaderUrl::redirect($this->httpRequest->previousPage(), t('The file content was saved successfully!'));
-        else
-            HeaderUrl::redirect($this->httpRequest->previousPage(), t('The file content could not be saved!'), 'error');
+        $bStatus = $this->file->save(PH7_PATH_ROOT . $this->httpRequest->get('file'), $this->httpRequest->post('content', HttpRequest::NO_CLEAN));
+        $sMsg = ($bStatus) ? t('The file content was saved successfully!') : t('The file content could not be saved!');
+        $sMsgType = ($bStatus) ? 'success' : 'error';
+
+        HeaderUrl::redirect($this->httpRequest->previousPage(), $sMsg, $sMsgType);
     }
 
 }
