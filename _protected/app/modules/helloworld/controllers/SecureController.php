@@ -20,7 +20,7 @@ class SecureController extends Controller
         $sUsr = $this->config->values['module.setting']['user'];
         $sPwd = $this->config->values['module.setting']['password'];
 
-        if(Http::requireAuth($sUsr, $sPwd))
+        if (Http::requireAuth($sUsr, $sPwd))
         {
             // Meta Tags
             $this->view->page_title = t('HTTP Secure Page');
