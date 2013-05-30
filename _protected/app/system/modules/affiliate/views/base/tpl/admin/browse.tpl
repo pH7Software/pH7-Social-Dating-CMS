@@ -26,7 +26,7 @@
 <th><input type="checkbox" name="all_action" /></th>
 <th><button type="submit" formaction="{{ $design->url('affiliate','admin','banall') }}">{@lang('Ban')@}</button></th>
 <th><button type="submit" formaction="{{ $design->url('affiliate','admin','unbanall') }}">{@lang('UnBan')@}</button></th>
-<th><button type="submit" name="delete" formaction="{{ $design->url('affiliate','admin','deleteall') }}" class="red">{@lang('Delete')@}</button></th>
+<th><button type="submit" onclick="return checkChecked()" formaction="{{ $design->url('affiliate','admin','deleteall') }}" class="red">{@lang('Delete')@}</button></th>
 <th><button type="submit" formaction="{{ $design->url('affiliate','admin','approveall') }}">{@lang('Approve')@}</button></th>
 <th><button type="submit" formaction="{{ $design->url('affiliate','admin','disapproveall') }}">{@lang('Disapprove')@}</button></th>
 <th> </th>
@@ -86,9 +86,3 @@ $age = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get() }}
 </form>
 
 {@main_include('page_nav.inc.tpl')@}
-
-<script>
-$('button[name=delete]').click(function() {
-   return confirm('{@lang('Caution! This action will remove affiliateds! (Irreversible Action)')@}');
-});
-</script>

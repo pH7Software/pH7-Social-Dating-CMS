@@ -21,7 +21,7 @@
 <tfoot>
 <tr>
 <th><input type="checkbox" name="all_action" /></th>
-<th><button type="submit" name="delete" formaction="{{ $design->url(PH7_ADMIN_MOD,'admin','deleteall') }}" class="red">{@lang('Delete')@}</button></th>
+<th><button type="submit" onclick="return checkChecked()" formaction="{{ $design->url(PH7_ADMIN_MOD,'admin','deleteall') }}" class="red">{@lang('Delete')@}</button></th>
 <th> </th>
 <th> </th>
 <th> </th>
@@ -57,9 +57,3 @@
 </form>
 
 {@main_include('page_nav.inc.tpl')@}
-
-<script>
-$('button[name=delete]').click(function() {
-   return confirm('{@lang('Caution! This action will remove admins! (Irreversible Action)')@}');
-});
-</script>
