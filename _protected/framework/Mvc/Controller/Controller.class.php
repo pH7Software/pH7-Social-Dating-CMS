@@ -112,7 +112,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      * Output Stream Views.
      *
      * @final
-     * @param string $sFile Specify another display file instead of the default layout file. Default is NULL
+     * @param string $sFile Specify another display file instead of the default layout file. Default NULL
      * @return void
      */
     final public function output($sFile = null)
@@ -150,12 +150,8 @@ abstract class Controller extends \PH7\Framework\Core\Core
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
      * @final
-     *
      * @param string $sMsg Default is empty ('')
-     *
-     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to "false"
-     * Default value of this attribute is "true"
-     *
+     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE. Default TRUE
      * @return void Quits the page with the exit() function
      */
     final public function displayPageNotFound($sMsg = '', $b404Status = true)

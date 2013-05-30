@@ -187,12 +187,12 @@ class UserController extends Controller
 
     public function approve()
     {
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->moderateRegistration($this->httpRequest->post('id'), 1));
+        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
     }
 
     public function disapprove()
     {
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->moderateRegistration($this->httpRequest->post('id'), 0));
+        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
     }
 
     public function approveAll($iId)
@@ -206,7 +206,7 @@ class UserController extends Controller
             foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
-                $this->sMsg = $this->moderateRegistration($iId, 1);
+                $this->sMsg = $this->_moderateRegistration($iId, 1);
             }
         }
 
@@ -224,7 +224,7 @@ class UserController extends Controller
             foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
-                $this->sMsg = $this->moderateRegistration($iId, 0);
+                $this->sMsg = $this->_moderateRegistration($iId, 0);
             }
         }
 
@@ -337,7 +337,7 @@ class UserController extends Controller
         HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
-    private function moderateRegistration($iId, $iStatus)
+    private function _moderateRegistration($iId, $iStatus)
     {
         if (isset($iId, $iStatus))
         {

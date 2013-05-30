@@ -34,7 +34,7 @@ class AdminController extends MainController
 
     public function delete()
     {
-        if( $this->httpRequest->postExists( array('id', 'thumb', 'file') ))
+        if ( $this->httpRequest->postExists( array('id', 'thumb', 'file') ))
         {
             $this->oGameModel->delete( $this->httpRequest->post('id') );
 

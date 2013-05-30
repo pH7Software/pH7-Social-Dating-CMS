@@ -38,10 +38,10 @@ class MainController extends Controller
         $oGames = $this->oGameModel->get(null, null, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
         $this->setMenuVars();
 
-        if(empty($oGames))
+        if (empty($oGames))
         {
             $this->sTitle = t('No Games Found!');
-            $this->notFound();
+            $this->_notFound();
         }
         else
         {
@@ -60,10 +60,10 @@ class MainController extends Controller
     {
         $oGame = $this->oGameModel->get(strstr($this->httpRequest->get('title'), '-', true), $this->httpRequest->get('id'), 0, 1);
 
-        if(empty($oGame))
+        if (empty($oGame))
         {
             $this->sTitle = t('No Games Found!');
-            $this->notFound();
+            $this->_notFound();
         }
         else
         {
@@ -97,10 +97,10 @@ class MainController extends Controller
         $this->setMenuVars();
 
         $sCategoryTxt = substr($sCategory,0,60);
-        if(empty($oSearch))
+        if (empty($oSearch))
         {
             $this->sTitle = t('Not found "%0%" category!', $sCategoryTxt);
-            $this->notFound();
+            $this->_notFound();
         }
         else
         {
@@ -135,10 +135,10 @@ class MainController extends Controller
         $oSearch = $this->oGameModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
         $this->setMenuVars();
 
-        if(empty($oSearch))
+        if (empty($oSearch))
         {
             $this->sTitle = t('Sorry, Your search returned no results!');
-            $this->notFound();
+            $this->_notFound();
         }
         else
         {
@@ -158,15 +158,16 @@ class MainController extends Controller
 
     public function download()
     {
-        if($this->httpRequest->getExists('id')) {
+        if ($this->httpRequest->getExists('id'))
+        {
             $iId = $this->httpRequest->get('id');
 
-            if(ctype_digit($iId))
+            if (ctype_digit($iId))
             {
                 $sFile = @$this->oGameModel->getFile($iId);
                 $sPathFile = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/' . $sFile;
 
-                if(!empty($sFile) && is_file($sPathFile))
+                if (!empty($sFile) && is_file($sPathFile))
                 {
                     $sFileName = basename($sFile);
                     $this->file->download($sPathFile, $sFileName);
@@ -177,12 +178,13 @@ class MainController extends Controller
         }
 
         $this->sTitle = t('Wrong download ID specified!');
-        $this->notFound();
+        $this->_notFound();
         $this->output();
     }
 
     /**
-     * @desc Sets the Menu Variables for the template.
+     * Sets the Menu Variables for the template.
+     *
      * @access protected
      * @return void
      */
@@ -195,10 +197,11 @@ class MainController extends Controller
     }
 
     /**
-     * @desc Set a Not Found Error Message with HTTP 404 Code Status.
+     * Set a Not Found Error Message with HTTP 404 Code Status.
+     *
      * @return void
      */
-    private function notFound()
+    private function _notFound()
     {
         Framework\Http\Http::setHeadersByCode(404);
         $this->view->page_title = $this->sTitle;

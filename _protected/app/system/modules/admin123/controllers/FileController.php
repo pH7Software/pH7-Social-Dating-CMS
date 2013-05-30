@@ -37,42 +37,42 @@ class FileController extends Controller
 
     public function themeDisplay()
     {
-        $this->prototypeDisplayAction(PH7_PATH_TPL);
+        $this->_prototypeDisplayAction(PH7_PATH_TPL);
         $this->manualTplInclude('publicdisplay.inc.tpl');
         $this->output();
     }
 
     public function mailDisplay()
     {
-        $this->prototypeDisplayAction(PH7_PATH_SYS . 'globals/' . PH7_VIEWS .PH7_TPL_NAME . '/mails/', '.tpl');
+        $this->_prototypeDisplayAction(PH7_PATH_SYS . 'globals/' . PH7_VIEWS .PH7_TPL_NAME . '/mails/', '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }
 
     public function banDisplay()
     {
-        $this->prototypeDisplayAction(PH7_PATH_APP_CONFIG . \PH7\Framework\Security\Ban\Ban::DIR, '.txt');
+        $this->_prototypeDisplayAction(PH7_PATH_APP_CONFIG . \PH7\Framework\Security\Ban\Ban::DIR, '.txt');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }
 
     public function suggestionDisplay()
     {
-        $this->prototypeDisplayAction(PH7_PATH_APP_CONFIG . \PH7\Framework\Service\Suggestion::DIR, '.txt');
+        $this->_prototypeDisplayAction(PH7_PATH_APP_CONFIG . \PH7\Framework\Service\Suggestion::DIR, '.txt');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }
 
     public function pageDisplay()
     {
-        $this->prototypeDisplayAction(PH7_PATH_SYS_MOD . 'page/' . PH7_VIEWS .PH7_TPL_NAME, '.tpl');
+        $this->_prototypeDisplayAction(PH7_PATH_SYS_MOD . 'page/' . PH7_VIEWS .PH7_TPL_NAME, '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }
 
     public function somethingProtectedAppDisplay()
     {
-        $this->prototypeDisplayAction(PH7_PATH_APP . $this->httpRequest->get('dir'));
+        $this->_prototypeDisplayAction(PH7_PATH_APP . $this->httpRequest->get('dir'));
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }
@@ -94,12 +94,13 @@ class FileController extends Controller
     }
 
     /**
-     * @desc Prototype method to show the public and protected files.
-     * @param string $sFile
-     * @param string $sExt
+     * Prototype method to show the public and protected files.
+     *
+     * @param string $sFile Full path.
+     * @param string $sExt Retrieves only files with specific extensions. Default NULL
      * @return void
      */
-    private function prototypeDisplayAction($sFile, $sExt = null)
+    private function _prototypeDisplayAction($sFile, $sExt = null)
     {
         $this->sTitle = t('File Management');
         $this->view->page_title = $this->sTitle;

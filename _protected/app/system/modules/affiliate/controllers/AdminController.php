@@ -130,12 +130,12 @@ class AdminController extends Controller
 
     public function approve()
     {
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->moderateRegistration($this->httpRequest->post('id'), 1));
+        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
     }
 
     public function disapprove()
     {
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->moderateRegistration($this->httpRequest->post('id'), 0));
+        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
     }
 
     public function approveAll($iId)
@@ -149,7 +149,7 @@ class AdminController extends Controller
             foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
-                $this->sMsg = $this->moderateRegistration($iId, 1);
+                $this->sMsg = $this->_moderateRegistration($iId, 1);
             }
         }
 
@@ -167,7 +167,7 @@ class AdminController extends Controller
             foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
-                $this->sMsg = $this->moderateRegistration($iId, 0);
+                $this->sMsg = $this->_moderateRegistration($iId, 0);
             }
         }
 
@@ -279,7 +279,7 @@ class AdminController extends Controller
         HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
     }
 
-    private function moderateRegistration($iId, $iStatus)
+    private function _moderateRegistration($iId, $iStatus)
     {
         if (isset($iId, $iStatus))
         {
