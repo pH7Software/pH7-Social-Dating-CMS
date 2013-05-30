@@ -37,7 +37,7 @@ class SearchUserCoreForm
 
     public static function quick($iWidth = 500)
     {
-         // Generate form Quick Search User
+         // Generate the Quick Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => UriRoute::get('user','browse','index') . '/', 'method'=>'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
@@ -55,7 +55,7 @@ class SearchUserCoreForm
 
     public static function advanced($iWidth = 500)
     {
-         // Generate form Advanced Search User
+         // Generate the Advanced Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => UriRoute::get('user','browse','index') . '/', 'method'=>'get' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));

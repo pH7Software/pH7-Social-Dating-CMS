@@ -29,7 +29,6 @@ class MetaMainForm
         $sWhereLang = (new HttpRequest)->get('meta_lang');
         $oMeta = DbConfig::getMetaMain($sWhereLang);
 
-        // Generate form Meta Tags
         $oForm = new \PFBC\Form('form_meta', 500);
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_meta', 'form_meta'));

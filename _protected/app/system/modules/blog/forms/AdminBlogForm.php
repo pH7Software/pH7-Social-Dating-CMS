@@ -28,7 +28,6 @@ class AdminBlogForm
         foreach ($oCategoriesData as $oId)
             $aCategoriesName[$oId->categoryId] = $oId->name;
 
-        // Generate form admin post of the blog
         $oForm = new \PFBC\Form('form_blog', 650);
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_blog', 'form_blog'));
