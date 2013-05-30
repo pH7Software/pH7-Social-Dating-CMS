@@ -1,1 +1,2 @@
+{{ StyleForm::display() }}
 
