@@ -277,14 +277,9 @@ class Design
     public function staticFiles($sType, $sDir, $sFiles, $sCssMedia = 'all')
     {
         if($sType == 'js')
-        {
-            echo '<script src="', PH7_RELATIVE, 'asset/gzip/?t=js&amp;d=', $sDir, '&amp;f=', $sFiles, '"></script>';
-        }
+            echo $this->externalJsFile(PH7_RELATIVE . 'asset/gzip/?t=js&amp;d=' . $sDir . '&amp;f=' . $sFiles);
         else
-        {
-            $sCssMedia = (!empty($sCssMedia)) ? ' media="' . $sCssMedia . '" ' : ' ';
-            echo '<link rel="stylesheet" href="', PH7_RELATIVE, 'asset/gzip/?t=css&amp;d=', $sDir, '&amp;f=', $sFiles, '"', $sCssMedia, '/>';
-        }
+            echo $this->externalCssFile(PH7_RELATIVE . 'asset/gzip/?t=css&amp;d=' . $sDir .'&amp;f=' . $sFiles, $sCssMedia);
     }
 
     /**
@@ -301,17 +296,6 @@ class Design
     }
 
     /**
-     * @return void
-     */
-    public function css()
-    {
-        for($i = 0, $iCount = count($this->aCssDir); $i < $iCount; $i++)
-            $this->staticFiles('css', $this->aCssDir[$i], $this->aCssFiles[$i], $this->aCssMedia[$i]);
-
-        unset($this->aCssDir, $this->aCssFiles, $this->aCssMedia);
-    }
-
-    /**
      * @param string $sDir The JavaScript folder.
      * @param string $sFiles The JavaScript files.
      * @return void
@@ -320,6 +304,17 @@ class Design
     {
         $this->aJsDir[] = $sDir;
         $this->aJsFiles[] = $sFiles;
+    }
+
+    /**
+     * @return void
+     */
+    public function css()
+    {
+        for($i = 0, $iCount = count($this->aCssDir); $i < $iCount; $i++)
+            $this->staticFiles('css', $this->aCssDir[$i], $this->aCssFiles[$i], $this->aCssMedia[$i]);
+
+        unset($this->aCssDir, $this->aCssFiles, $this->aCssMedia);
     }
 
     /**
@@ -563,7 +558,7 @@ class Design
      * @param string $sImg The image.
      * @param string $sAlt Alternate text.
      * @param array $aAttributes Optional. Array containing the "name" and "value" HTML attributes. Default NULL
-     * @return void The HTML link.
+     * @return void The HTML image tag.
      */
     public function imgTag($sImg, $sAlt, array $aAttributes = null)
     {
@@ -635,6 +630,30 @@ class Design
     public function xmlHeader()
     {
         echo '<?xml version="1.0" encoding="utf-8"?>';
+    }
+
+    /**
+     * Get an external CSS file.
+     *
+     * @param string $sFile CSS file.
+     * @param string $sCssMedia Only works for CSS files. The CSS Media type (e.g. screen,handheld,tv,projection). Default NULL
+     * @return void HTML link tag.
+     */
+    public function externalCssFile($sFile, $sCssMedia = null)
+    {
+        $sCssMedia = (!empty($sCssMedia)) ? ' media="' . $sCssMedia . '"' : '';
+        echo '<link rel="stylesheet" href="', $sFile, '"', $sCssMedia, ' />';
+    }
+
+    /**
+     * Get an external JS file.
+     *
+     * @param string $sFile JS file.
+     * @return void HTML link tag.
+     */
+    public function externalJsFile($sFile)
+    {
+        echo '<script src="', $sFile, '" /></script>';
     }
 
     public function __destruct()
