@@ -8,9 +8,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Model\Design as DesignModel;
+use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Mvc\Model\Design as DesignModel;
 
 class AnalyticsApiFormProcessing extends Form
 {
@@ -26,7 +24,7 @@ class AnalyticsApiFormProcessing extends Form
             /* Clean Model\Design for STATIC / analyticsApi data */
             (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, 'analyticsApi', null)->clear();
         }
-        \PFBC\Form::setSuccess('form_analytics_setting', t('The code Analytics Api was saved successfully!'));
+        \PFBC\Form::setSuccess('form_analytics', t('The code Analytics Api was saved successfully!'));
     }
 
 }
