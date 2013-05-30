@@ -27,3 +27,30 @@ $(sInputAgree).click(function()
 $('input[name=all_action]').on('click', function() {
     $('input[name="action[]"]').prop('checked', $(this).is(':checked'));
 });
+
+/**
+ * Check the checkbox fields.
+ *
+ * @param {Boolean} [extra=false]. Put FALSE if you do not want the confirmation alert. Default: TRUE
+ * @return {Boolean}
+ */
+function checkChecked(bIsConfirmAlert)
+{
+    if (typeof bIsConfirmAlert == "undefined")
+        var bIsConfirmAlert = true; // Default value
+
+    var iCountChecked = 0;
+    $('input[name="action[]"]').each(function() {
+        iCountChecked += $(this).is(':checked');
+    });
+
+    if (iCountChecked == 0)
+    {
+        alert(pH7LangCore.select_least_one);
+        return false;
+    }
+    else if (bIsConfirmAlert)
+        return confirm(pH7LangCore.warning_irreversible_action);
+
+    return true;
+}
