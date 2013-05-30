@@ -27,7 +27,6 @@ class SettingForm
             Framework\Url\HeaderUrl::redirect();
         }
 
-        // Generate form Settings
         $oForm = new \PFBC\Form('form_setting', 700);
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_setting', 'form_setting'));

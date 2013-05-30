@@ -21,7 +21,6 @@ class SearchUserForm
         $aGroupName = array();
         foreach ($oGroupId as $iId) $aGroupName[$iId->groupId] = $iId->name;
 
-        // Generate form Search User
         $oForm = new \PFBC\Form('form_user_search', 500);
         $oForm->configure(array('action' => UriRoute::get(PH7_ADMIN_MOD, 'user', 'result') . '/', 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_user_search', 'form_user_search'));
