@@ -15,6 +15,8 @@ var pH7LangCore = {
     very_very_strong : "Très, très fort",
     join_now : "Inscrivez-vous dès maintenant !",
     unable_retrive_feeds : "Impossible de récupérer le flux d'actualités!",
+    warning_irreversible_action : "Avertissement ! Cette action supprimera tous les éléments sélectionnés ! (Action irréversible)",
+    select_least_one : "Veuillez en sélectionner au moins un.",
     misloading : "Oops! Une erreur s'est produite, s'il vous plaît de recharger la page.",
     loading : "Chargement en cours..."
 };
