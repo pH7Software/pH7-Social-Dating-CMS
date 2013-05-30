@@ -34,7 +34,7 @@
 
   </table>
 
-  <script>$('input[type=submit]').click(function() {
+  <script>$('table tr td input[type=submit]').click(function() {
      return confirm('{@lang('Warning! This action will remove a User Field! (Irreversible Action)')@}');
    });</script>
 {@else@}
