@@ -31,7 +31,6 @@ class NoteForm
         foreach ($oCategoriesData as $oId)
             $aCategoriesName[$oId->categoryId] = $oId->name;
 
-        // Generate form post of the note
         $oForm = new \PFBC\Form('form_note', 650);
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_note', 'form_note'));

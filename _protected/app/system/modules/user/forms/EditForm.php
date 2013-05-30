@@ -32,7 +32,6 @@ class EditForm
 
         $oUser = $oUserModel->readProfile($iProfileId);
 
-
         // Birth Date with the date format for the date picker
         $sBirthDate = (new CDateTime)->get($oUser->birthDate)->date('m/d/Y');
 

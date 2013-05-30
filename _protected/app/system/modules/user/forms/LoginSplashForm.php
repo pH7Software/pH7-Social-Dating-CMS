@@ -22,7 +22,6 @@ class LoginSplashForm
             Framework\Url\HeaderUrl::redirect();
         }
 
-        // Generate the Sign In form
         $oForm = new \PFBC\Form('form_login_user');
         $oForm->configure(array('view' => new \PFBC\View\Horizontal, 'action' => UriRoute::get('user', 'main', 'login')));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_login_user', 'form_login_user'));
