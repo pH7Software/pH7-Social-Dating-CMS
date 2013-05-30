@@ -57,7 +57,6 @@ class ConfigFileCoreForm
                 $oForm->addElement(new \PFBC\Element\Textbox($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
         }
 
-
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
