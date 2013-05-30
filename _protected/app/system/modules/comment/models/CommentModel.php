@@ -19,7 +19,7 @@ class CommentModel extends CommentCoreModel
         {
             $sTable = CommentCore::checkTable($sTable);
 
-            $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') . 'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved =:approved ORDER BY c.createdDate DESC');
+            $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') . 'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved =:approved LIMIT 1');
             $rStmt->bindParam(':commentId', $iCommentId, \PDO::PARAM_INT);
             $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -47,7 +47,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE'. Db::prefix('Comments' . $sTable).'SET comment = :comment, approved = :approved, updatedDate = :updatedDate WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender');
+        $rStmt = Db::getInstance()->prepare('UPDATE'. Db::prefix('Comments' . $sTable).'SET comment = :comment, approved = :approved, updatedDate = :updatedDate WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
         $rStmt->bindValue('commentId', $iCommentId, \PDO::PARAM_INT);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
@@ -61,7 +61,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) . 'WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) . 'WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
         $rStmt->bindValue(':commentId', $iCommentId, \PDO::PARAM_INT);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
