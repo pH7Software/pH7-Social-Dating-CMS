@@ -65,22 +65,26 @@ class MainController extends Controller
 
             if(!empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId))
             {
-                /***** META TAGS *****/
-                $this->view->page_title = Ban::filterWord($oPost->pageTitle, false);
-                $this->view->meta_description = Ban::filterWord($oPost->metaDescription, false);
-                $this->view->meta_keywords  = Ban::filterWord($oPost->metaKeywords, false);
+                $aVars = [
+                    /***** META TAGS *****/
+                    'page_title' => Ban::filterWord($oPost->pageTitle, false),
+                    'meta_description' => Ban::filterWord($oPost->metaDescription, false),
+                    'meta_keywords' => Ban::filterWord($oPost->metaKeywords, false),
 
-                $this->view->slogan =  Ban::filterWord($oPost->slogan, false);
-                $this->view->meta_author = Ban::filterWord($oPost->metaAuthor, false);
-                $this->view->meta_robots = Ban::filterWord($oPost->metaRobots, false);
-                $this->view->meta_copyright = Ban::filterWord($oPost->metaCopyright, false);
+                    'slogan' => Ban::filterWord($oPost->slogan, false),
+                    'meta_author' => Ban::filterWord($oPost->metaAuthor, false),
+                    'meta_robots' => Ban::filterWord($oPost->metaRobots, false),
+                    'meta_copyright' => Ban::filterWord($oPost->metaCopyright, false),
 
-                /***** CONTENTS *****/
-                $this->view->h1_title = Ban::filterWord($oPost->title);
-                $this->view->categories = $this->oNoteModel->getCategory($oPost->noteId, 0,300);
+                    /***** CONTENTS *****/
+                    'h1_title' => Ban::filterWord($oPost->title),
+                    'categories' => $this->oNoteModel->getCategory($oPost->noteId, 0,300),
 
-                $this->view->dateTime = $this->dateTime;
-                $this->view->post = $oPost;
+                    /** Date **/
+                    'dateTime' => $this->dateTime,
+                    'post' => $oPost
+                ];
+                $this->view->assigns($aVars);
 
                 // Set Notes Post Views Statistics
                 Framework\Analytics\Statistic::setView($oPost->noteId, 'Notes');
