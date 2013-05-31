@@ -58,7 +58,7 @@
 {{ $content = escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($post->content),0,400), true) }}
 
 <h1><a href="{{$design->url('note','main','read',"$post->username,$post->postId")}}" title="{% $post->title %}">{% escape(Framework\Security\Ban\Ban::filterWord($post->title)) %}</a></h1>
-<div class="left">{{ NoteDesign::getThumb($post) }}</div>
+<div class="left">{{ NoteDesign::thumb($post) }}</div>
 {content}
 <p><a href="{{$design->url('note','main','read',"$post->username,$post->postId")}}">{@lang('See more')@}</a></p>
 

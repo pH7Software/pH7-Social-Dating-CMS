@@ -1244,7 +1244,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId WHERE pay.expirationDays = 0 OR DATE_SUB(m.membershipExpiration, INTERVAL pay.expirationDays DAY) <= :currentTime AND m.profileId = :profileId LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId WHERE (pay.expirationDays = 0 OR DATE_SUB(m.membershipExpiration, INTERVAL pay.expirationDays DAY) <= :currentTime) AND (m.profileId = :profileId) LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -1252,7 +1252,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Update the membership group of user.
+     * Update the membership group of a user.
      *
      * @param integer $iNewGroupId The new ID of membership group.
      * @param integer $iProfileId The ID of user.
