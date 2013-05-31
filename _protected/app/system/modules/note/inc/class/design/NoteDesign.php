@@ -19,7 +19,7 @@ class NoteDesign extends WriteDesignCoreModel
     {
         echo '<div class="pic thumb">';
 
-        if(!empty($oNoteModel->thumb))
+        if (!empty($oNoteModel->thumb))
             echo '<a href="', UriRoute::get('note','main','read', $oNoteModel->username . ',' . $oNoteModel->postId), '"><img src="', PH7_URL_DATA_SYS_MOD, 'note/', PH7_IMG, $oNoteModel->username, '/', $oNoteModel->thumb, '" alt="', $oNoteModel->pageTitle, '" title="', $oNoteModel->pageTitle, '" /></a>';
         else
             (new AvatarDesignCore)->get($oNoteModel->username, $oNoteModel->firstName, $oNoteModel->sex, 100);

@@ -19,10 +19,10 @@ class Blog
      */
     public function setThumb(Framework\File\File $oFile, $oPost)
     {
-        if(!empty($_FILES['thumb']['tmp_name']))
+        if (!empty($_FILES['thumb']['tmp_name']))
         {
             $oImage = new Framework\Image\Image($_FILES['thumb']['tmp_name']);
-            if(!$oImage->validate())
+            if (!$oImage->validate())
             {
                 \PFBC\Form::setError('form_edit_blog', Form::wrongImgFileTypeMsg());
             }

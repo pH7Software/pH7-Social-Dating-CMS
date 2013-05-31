@@ -31,10 +31,10 @@ abstract class WriteDesignCoreModel
         foreach ($oCategories as $oCategory)
             $sContents .= '<a href="' . UriRoute::get($sMod, 'main', 'category', $oCategory->name, ',title,asc') . '" data-load="ajax">' . $oCategory->name . '</a> &bull; ';
 
-       unset($oCategories);
+        unset($oCategories);
 
-       echo substr($sContents, 0, -8);
-       echo '</span></p>';
+        echo substr($sContents, 0, -8);
+        echo '</span></p>';
     }
 
 }

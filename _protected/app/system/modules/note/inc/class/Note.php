@@ -20,10 +20,10 @@ class Note
      */
     public function setThumb(Framework\File\File $oFile, NoteModel $oNoteModel, $oPost)
     {
-        if(!empty($_FILES['thumb']['tmp_name']))
+        if (!empty($_FILES['thumb']['tmp_name']))
         {
             $oImage = new Framework\Image\Image($_FILES['thumb']['tmp_name']);
-            if(!$oImage->validate())
+            if (!$oImage->validate())
             {
                 \PFBC\Form::setError('form_note', Form::wrongImgFileTypeMsg());
             }
