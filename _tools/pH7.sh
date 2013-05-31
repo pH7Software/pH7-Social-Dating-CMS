@@ -5,6 +5,7 @@
 # Description:     For this script to work correctly, you should use it when you're at the root of the project with the terminal (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 # Author:          By Pierre-Henry Soria <pierrehs@hotmail.com>
 # Copyright:       (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+# License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ##
 
 function init() {
@@ -61,7 +62,7 @@ function clear-cache() {
 function remove-tmp-file() {
     _confirm "Are you sure you want to remove the temporary files (e.g. file.pl~, ._file.py)?"
     if [ $? -eq 1 ]; then
-        find . -type f \( -name "*~" -or -name "*.swp" -or -name ".directory" -or -name "._*" -or -name ".DS_Store*" -or -name "Thumbs.db" \) -exec rm {} \;
+        find . -type f \( -name '*~' -or -name '*.swp' -or -name '.directory' -or -name '._*' -or -name '.DS_Store*' -or -name 'Thumbs.db' \) -exec rm {} \;
         echo "The temporary files were deleted!"
     fi
 }
@@ -70,8 +71,10 @@ function remove-tmp-file() {
 function clean-code() {
     _confirm "Are you sure you want to clean up the code?"
     if [ $? -eq 1 ]; then
-        find . -type f \( -name "*.php" -or -name "*.css" -or -name "*.js" -or -name "*.html" -or -name "*.xml" -or -name "*.xsl" -or -name "*.tpl" -or -name "*.phs" -or -name "*.ph7" -or -name "*.sh" -or -name "*.sql" -or -name ".htaccess" \) | xargs perl -wi -pe 's/\s+$/\n/'
-        find . -type f \( -name "*.php" -or -name "*.css" -or -name "*.js" -or -name "*.html" -or -name "*.xml" -or -name "*.xsl" -or -name "*.tpl" -or -name "*.phs" -or -name "*.ph7" -or -name "*.sh" -or -name "*.sql" -or -name ".htaccess" \) | xargs perl -wi -pe 's/\t/    /g'
+        params="-name '*.php' -or -name '*.css' -or -name '*.js' -or -name '*.html' -or -name '*.xml' -or -name '*.xsl' -or -name '*.tpl' -or -name '*.phs' -or -name '*.ph7' -or -name '*.sh' -or -name '*.sql' -or -name '*.ini' -or -name '.htaccess'"
+        exec="find . -type f \( $params \) | xargs perl -wi -pe"
+        eval "$exec 's/\s+$/\n/'"
+        eval "$exec 's/\t/    /g'"
 
         # _clean-indent
         echo "The code has been cleaned!"
