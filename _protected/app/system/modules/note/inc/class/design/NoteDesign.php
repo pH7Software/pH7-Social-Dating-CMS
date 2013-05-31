@@ -8,14 +8,14 @@
 namespace PH7;
 use PH7\Framework\Mvc\Router\UriRoute;
 
-class NoteDesign
+class NoteDesign extends WriteDesignCoreModel
 {
 
     /**
      * @param object $oNoteModel
-     * @return string The URL of the thumbnail.
+     * @return void Output the URL of the thumbnail.
      */
-    public static function getThumb($oNoteModel)
+    public static function thumb($oNoteModel)
     {
         echo '<div class="pic thumb">';
 
