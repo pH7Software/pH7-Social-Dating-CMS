@@ -182,7 +182,8 @@
 |   |       |       |-- CommentCoreModel.php
 |   |       |       |-- DataCoreModel.php
 |   |       |       |-- design
-|   |       |       |   `-- UserDesignCoreModel.php
+|   |       |       |   |-- UserDesignCoreModel.php
+|   |       |       |   `-- WriteDesignCoreModel.php
 |   |       |       |-- ExistsCoreModel.php
 |   |       |       |-- ForumCoreModel.php
 |   |       |       |-- FriendCoreModel.php
@@ -465,7 +466,9 @@
 |   |           |   |   `-- SearchBlogForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
-|   |           |   |       `-- Blog.php
+|   |           |   |       |-- Blog.php
+|   |           |   |       `-- design
+|   |           |   |           `-- BlogDesign.php
 |   |           |   |-- lang
 |   |           |   |   |-- en_US
 |   |           |   |   |   `-- LC_MESSAGES
@@ -1396,11 +1399,10 @@
 |   |   |   |-- 8.ttf
 |   |   |   `-- 9.ttf
 |   |   |-- log
-|   |   |   |-- pH7log
-|   |   |   |   `-- except
-|   |   |   |       |-- gzip
-|   |   |   |       `-- pH7log.json
-|   |   |   `-- php_error.log
+|   |   |   `-- pH7log
+|   |   |       `-- except
+|   |   |           |-- gzip
+|   |   |           `-- pH7log.json
 |   |   `-- tmp
 |   |       |-- _license.txt
 |   |       `-- stats
@@ -4399,4 +4401,4 @@
 
 </pre>
 
-<p>Statistics: 1325 directories, 3066 files.</p>
+<p>Statistics: 1326 directories, 3067 files.</p>
