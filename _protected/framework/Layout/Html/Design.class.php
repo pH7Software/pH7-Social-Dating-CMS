@@ -653,7 +653,7 @@ class Design
      */
     public function externalJsFile($sFile)
     {
-        echo '<script src="', $sFile, '" /></script>';
+        echo '<script src="', $sFile, '"></script>';
     }
 
     public function __destruct()
