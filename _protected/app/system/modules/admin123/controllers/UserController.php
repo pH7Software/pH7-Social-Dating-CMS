@@ -9,7 +9,6 @@ namespace PH7;
 
 use
 PH7\Framework\Navigation\Page,
-PH7\Framework\Mvc\Request\HttpRequest,
 PH7\Framework\Url\HeaderUrl,
 PH7\Framework\Mvc\Router\UriRoute;
 
@@ -41,13 +40,14 @@ class UserController extends Controller
         $this->iTotalUsers = $this->oAdminModel->total();
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 30);
+        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 15);
         $this->view->current_page = $oPage->getCurrentPage();
         $oBrowse = $this->oAdminModel->browse($oPage->getFirstItem(), $oPage->getNbItemsByPage());
         unset($oPage);
 
         if (empty($oBrowse))
         {
+            $this->design->setRedirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'));
             $this->displayPageNotFound(t('No user were found.'));
         }
         else
@@ -112,7 +112,7 @@ class UserController extends Controller
             $this->view->total_users = $this->iTotalUsers;
 
             $oPage = new Page;
-            $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 30);
+            $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 15);
             $this->view->current_page = $oPage->getCurrentPage();
             $oSearch = $this->oAdminModel->searchUser($what, $where, $group_id, $ban, false,
                 $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->
@@ -201,9 +201,9 @@ class UserController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
                 $this->sMsg = $this->_moderateRegistration($iId, 1);
@@ -219,9 +219,9 @@ class UserController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
                 $this->sMsg = $this->_moderateRegistration($iId, 0);
@@ -268,7 +268,10 @@ class UserController extends Controller
     public function delete()
     {
         $aData = explode('_', $this->httpRequest->post('id'));
-        $this->oAdmin->delete($aData[0], $aData[1]);
+        $iId = (int) $aData[0];
+        $sUsername = (string) $aData[1];
+
+        $this->oAdmin->delete($iId, $sUsername);
         HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The profile has been deleted.'));
     }
 
@@ -278,9 +281,9 @@ class UserController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
 
@@ -300,9 +303,9 @@ class UserController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
 
@@ -321,9 +324,9 @@ class UserController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $aData = explode('_', $sAction);
                 $iId = (int) $aData[0];

@@ -11,7 +11,6 @@ namespace PH7;
 
 use
 PH7\Framework\Navigation\Page,
-PH7\Framework\Mvc\Request\HttpRequest,
 PH7\Framework\Url\HeaderUrl,
 PH7\Framework\Mvc\Router\UriRoute;
 
@@ -38,7 +37,7 @@ class AdminController extends Controller
             $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->iTotalAdmins, 10);
+        $this->view->total_pages = $oPage->getTotalPages($this->iTotalAdmins, 15);
         $this->view->current_page = $oPage->getCurrentPage();
         $oSearch = $this->oAdminModel->searchAdmin($this->httpRequest->get('looking'), false,
             $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->
@@ -47,7 +46,7 @@ class AdminController extends Controller
 
         if (empty($oSearch))
         {
-            $this->design->setRedirect(UriRoute::get(PH7_ADMIN_MOD, 'admin', 'search'));
+            $this->design->setRedirect(UriRoute::get(PH7_ADMIN_MOD, 'admin', 'browse'));
             $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
         }
         else
@@ -63,7 +62,7 @@ class AdminController extends Controller
             $this->sTitle = t('Browse Admins');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Admin Result!', '%n% Admins Result!', $this->iTotalAdmins);
+            $this->view->h3_title = nt('%n% Admin', '%n% Admins', $this->iTotalAdmins);
             $this->view->browse = $oSearch;
         }
 
@@ -89,7 +88,10 @@ class AdminController extends Controller
     public function delete()
     {
         $aData = explode('_', $this->httpRequest->post('id'));
-        (new Admin)->delete($aData[0], $aData[1]);
+        $iId = (int) $aData[0];
+        $sUsername = (string) $aData[1];
+
+        (new Admin)->delete($iId, $sUsername);
         HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The admin has been deleted.'));
     }
 
@@ -99,9 +101,9 @@ class AdminController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $aData = explode('_', $sAction);
                 $iId = (int) $aData[0];
