@@ -293,7 +293,7 @@ class UpgradeCore
      */
     private function _setNewVersion()
     {
-        $sContents = file_get_contents(PH7_PATH_FRAMEWORK . 'Core/Core.class.php');
+        $sContents = $this->_oFile->getFile(PH7_PATH_FRAMEWORK . 'Core/Kernel.class.php');
 
         if($this->_sVerName != Kernel::SOFTWARE_VERSION_NAME)
             $sNewContents = str_replace('SOFTWARE_VERSION_NAME = \'' . Kernel::SOFTWARE_VERSION_NAME . '\'', 'SOFTWARE_VERSION_NAME = \'' . $this->_sVerName . '\'', $sContents);
@@ -305,7 +305,7 @@ class UpgradeCore
             $sNewContents = str_replace('SOFTWARE_BUILD = \'' . Kernel::SOFTWARE_BUILD . '\'', 'SOFTWARE_BUILD = \'' . $this->_iVerBuild . '\'', $sContents);
 
         unset($sContents);
-        file_put_contents(PH7_PATH_FRAMEWORK . 'Core/Core.class.php', $sNewContents);
+        $this->_oFile->putFile(PH7_PATH_FRAMEWORK . 'Core/Kernel.class.php', $sNewContents);
         unset($sNewContents);
     }
 
