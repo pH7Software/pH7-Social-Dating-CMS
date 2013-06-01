@@ -3,7 +3,7 @@
  * @title            PH7 Template Engine
  * @desc             Template Engine with Compiler and Cache for pH7 CMS!
  *
- * @updated          The Last Update 04/23/13 23:42 (Greenwich Mean Time)
+ * @updated          The Last Update 05/31/13 23:54 (Greenwich Mean Time)
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
@@ -282,7 +282,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         // Create folder compile
         $this->file->createDir($this->sCompileDir2);
 
-        if (!$this->sCode = @file_get_contents($this->sTemplateDirFile))
+        if (!$this->sCode = $this->file->getFile($this->sTemplateDirFile))
             throw new Exception('Template Fetch Error: \'' . $this->sTemplateDirFile . '\'');
 
         // Parser the predefined variables
@@ -445,7 +445,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         if (!is_file($sMailTplFile) && defined('PH7_TPL_NAME'))
             $sMailTplFile = str_replace(PH7_TPL_NAME, PH7_DEFAULT_THEME, $sMailTplFile);
 
-        if (!$sCode = @file_get_contents($sMailTplFile))
+        if (!$sCode = $this->file->getFile($sMailTplFile))
             throw new Exception('Can\'t open file: \'' . $sMailTplFile . '\'');
 
         /***** Other variables in file "/framework/Parse/SysVar.class.php" with syntax %var% *****/
@@ -651,7 +651,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
             if ($this->bHtmlCompressor)
                 $sOutput = (new \PH7\Framework\Compress\Compress)->parseHtml($sOutput);
 
-            if (!@file_put_contents($this->sCacheDirFile, $sOutput))
+            if (!$this->file->putFile($this->sCacheDirFile, $sOutput))
                 throw new Exception('Unable to write to cache file: \'' . $this->sCacheDirFile . '\'');
             echo $sOutput;
         }

@@ -97,7 +97,7 @@ class File
      * @param string $sFile File name.
      * @param boolean $bIncPath Default FALSE
      *
-     * @return mixed Returns the read data or FALSE on failure.
+     * @return mixed (string | boolean) Returns the read data or FALSE on failure.
      */
     public function getFile($sFile, $bIncPath = false)
     {
@@ -110,7 +110,7 @@ class File
      * @param string $sFile File name.
      * @param string $sContents Contents file.
      * @param integer $iFlag Constant (see http://php.net/manual/function.file-put-contents.php). Default 0
-     * @return integer Returns the number of bytes that were written to the file, or FALSE on failure.
+     * @return mixed (integer | boolean) Returns the number of bytes that were written to the file, or FALSE on failure.
      */
     public function putFile($sFile, $sContents, $iFlag = 0)
     {

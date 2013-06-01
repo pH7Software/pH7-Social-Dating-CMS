@@ -173,7 +173,7 @@ class Gzip
                 $this->getContents();
 
                 // Store cache
-                if (!@file_put_contents($this->_sCacheDir . $sCacheFile, $this->_sContents))
+                if (!$this->_oFile->putFile($this->_sCacheDir . $sCacheFile, $this->_sContents))
                     throw new Exception('Couldn\'t write cache file: \'' . $this->_sCacheDir . $sCacheFile . '\'');
             }
         }
@@ -186,7 +186,7 @@ class Gzip
 
         unset($oBrowser);
 
-        if (!$this->_sContents = @file_get_contents($this->_sCacheDir . $sCacheFile))
+        if (!$this->_sContents = $this->_oFile->getFile($this->_sCacheDir . $sCacheFile))
             throw new Exception('Couldn\'t read cache file: \'' . $this->_sCacheDir . $sCacheFile . '\'');
     }
 

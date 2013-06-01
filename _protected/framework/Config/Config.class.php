@@ -123,11 +123,11 @@ class Config implements IConfig
         $oFile = new \PH7\Framework\File\File;
 
         // Check and correct the file permission if necessary.
-        $oFile->chmod($this->_sConfigAppFilePath, 0644);
+        $oFile->chmod($this->_sConfigAppFilePath, 0666);
 
-        $sContents = file_get_contents($this->_sConfigAppFilePath);
+        $sContents = $oFile->getFile($this->_sConfigAppFilePath);
         $sNewContents = str_replace('environment = ' . $sSearch .  ' ; production or development', 'environment = ' . $sReplace . ' ; production or development', $sContents);
-        file_put_contents($this->_sConfigAppFilePath, $sNewContents);
+        $oFile->putFile($this->_sConfigAppFilePath, $sNewContents);
 
         // Check and correct the file permission if necessary.
         $oFile->chmod($this->_sConfigAppFilePath, 0644);
