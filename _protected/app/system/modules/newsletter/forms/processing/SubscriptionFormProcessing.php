@@ -10,6 +10,8 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Util\Various,
+PH7\Framework\Ip\Ip,
+PH7\Framework\Date\CDateTime,
 PH7\Framework\Mvc\Router\UriRoute,
 PH7\Framework\Mail\Mail;
 
@@ -33,6 +35,8 @@ class SubscriptionFormProcessing extends Form
                     $aData = [
                         'name' => $sName,
                         'email' => $sEmail,
+                        'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
+                        'ip' => Ip::get(),
                         'hash_validation' => Various::genRnd(),
                         'active' => '0'
                     ];

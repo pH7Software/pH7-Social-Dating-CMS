@@ -1019,7 +1019,9 @@ CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   name varchar(200) NOT NULL,
   email varchar(200) NOT NULL,
+  joinDate datetime DEFAULT NULL,
   active tinyint(1) unsigned NOT NULL DEFAULT 2, -- 1 = Active Account, 2 = Pending Account
+  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
   hashValidation varchar(40) DEFAULT NULL,
   INDEX (profileId),
   PRIMARY KEY (profileId),
