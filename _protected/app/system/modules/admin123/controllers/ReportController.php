@@ -6,7 +6,10 @@
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 namespace PH7;
-use PH7\Framework\Navigation\Page, PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Mvc\Router\UriRoute;
+use
+PH7\Framework\Navigation\Page,
+PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Mvc\Router\UriRoute;
 
 class ReportController extends Controller
 {
@@ -64,18 +67,18 @@ class ReportController extends Controller
     {
         $this->bStatus = $this->oReportModel->delete( $this->httpRequest->post('id', 'int') );
         $this->sMsg = ($this->bStatus) ? t('The report has been deleted.') : t('A problem occurred during the deleted of the reporting.');
-        Framework\Url\HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'report', 'index'), $this->sMsg);
+        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'report', 'index'), $this->sMsg);
     }
 
     public function deleteAll()
     {
-        if(!(new Framework\Security\CSRF\Token)->check('report_action'))
+        if (!(new Framework\Security\CSRF\Token)->check('report_action'))
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $iId = (int) $sAction;
                 $this->oReportModel->delete($iId);
@@ -83,12 +86,7 @@ class ReportController extends Controller
             $this->sMsg = t('The report has been deleted.');
         }
 
-        Framework\Url\HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'report', 'index'), $this->sMsg);
-    }
-
-    public function __destruct()
-    {
-        unset($this->oReportModel);
+        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'report', 'index'), $this->sMsg);
     }
 
 }

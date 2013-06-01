@@ -9,7 +9,6 @@ namespace PH7;
 
 use
 PH7\Framework\Navigation\Page,
-PH7\Framework\Mvc\Request\HttpRequest,
 PH7\Framework\Url\HeaderUrl,
 PH7\Framework\Mvc\Router\UriRoute;
 
@@ -249,9 +248,9 @@ class MainController extends Controller
         }
         else
         {
-            if (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+            if (count($this->httpRequest->post('action')) > 0)
             {
-                foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+                foreach ($this->httpRequest->post('action') as $sAction)
                 {
                     $iId = (int) $sAction;
                     $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'trash');
@@ -280,9 +279,9 @@ class MainController extends Controller
         }
         else
         {
-            if (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+            if (count($this->httpRequest->post('action')) > 0)
             {
-                foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+                foreach ($this->httpRequest->post('action') as $sAction)
                 {
                     $iId = (int) $sAction;
                     $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'restor');
@@ -317,9 +316,9 @@ class MainController extends Controller
         }
         else
         {
-            if (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+            if (count($this->httpRequest->post('action')) > 0)
             {
-                foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+                foreach ($this->httpRequest->post('action') as $sAction)
                 {
                     $iId = (int) $sAction;
                     if ($this->_bAdminLogged)

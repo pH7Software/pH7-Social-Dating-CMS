@@ -47,7 +47,7 @@ class AdminController extends Controller
         $iTotal = $this->oSubscriptionModel->browse($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($iTotal, 20);
+        $this->view->total_pages = $oPage->getTotalPages($iTotal, 30);
         $this->view->current_page = $oPage->getCurrentPage();
         $oBrowse = $this->oSubscriptionModel->browse($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->getFirstItem(), $oPage->getNbItemsByPage());
         unset($oPage);
@@ -70,7 +70,7 @@ class AdminController extends Controller
             $this->sTitle = t('Browse Subscribers');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Subscriber Result!', '%n% Subscribers Result!', $iTotal);
+            $this->view->h3_title = nt('%n% Subscriber', '%n% Subscribers', $iTotal);
 
             $this->view->browse = $oBrowse;
         }

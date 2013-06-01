@@ -9,7 +9,6 @@ namespace PH7;
 
 use
 PH7\Framework\Navigation\Page,
-PH7\Framework\Mvc\Request\HttpRequest,
 PH7\Framework\Url\HeaderUrl,
 PH7\Framework\Mvc\Router\UriRoute;
 
@@ -41,7 +40,7 @@ class AdminController extends Controller
         $this->iTotalUsers = $this->oAffModel->searchAff($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 10);
+        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 15);
         $this->view->current_page = $oPage->getCurrentPage();
         $oSearch = $this->oAffModel->searchAff($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->getFirstItem(), $oPage->getNbItemsByPage());
         unset($oPage);
@@ -64,7 +63,7 @@ class AdminController extends Controller
             $this->sTitle = t('Browse Affiliates');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Affiliate Result!', '%n% Affiliates Result!', $this->iTotalUsers);
+            $this->view->h3_title = nt('%n% Affiliate', '%n% Affiliates', $this->iTotalUsers);
 
             $this->view->browse = $oSearch;
         }
@@ -144,9 +143,9 @@ class AdminController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
                 $this->sMsg = $this->_moderateRegistration($iId, 1);
@@ -162,9 +161,9 @@ class AdminController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
                 $this->sMsg = $this->_moderateRegistration($iId, 0);
@@ -211,7 +210,10 @@ class AdminController extends Controller
     public function delete()
     {
         $aData = explode('_', $this->httpRequest->post('id'));
-        $this->oAff->delete($aData[0], $aData[1]);
+        $iId = (int) $aData[0];
+        $sUsername = (string) $aData[1];
+
+        $this->oAff->delete($iId, $sUsername);
         HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), t('The affiliate has been deleted.'));
     }
 
@@ -221,9 +223,9 @@ class AdminController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
 
@@ -242,9 +244,9 @@ class AdminController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $iId = (int) explode('_', $sAction)[0];
 
@@ -263,9 +265,9 @@ class AdminController extends Controller
         {
             $this->sMsg = Form::errorTokenMsg();
         }
-        elseif (count($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN)) > 0)
+        elseif (count($this->httpRequest->post('action')) > 0)
         {
-            foreach ($this->httpRequest->post('action', HttpRequest::ONLY_XSS_CLEAN) as $sAction)
+            foreach ($this->httpRequest->post('action') as $sAction)
             {
                 $aData = explode('_', $sAction);
                 $iId = (int) $aData[0];
