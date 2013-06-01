@@ -92,15 +92,15 @@ class ToolController extends Controller
 
         $oSecurityToken = new Framework\Security\CSRF\Token;
 
-        if($this->httpRequest->postExists('backup'))
+        if ($this->httpRequest->postExists('backup'))
         {
-            if(!$oSecurityToken->check('backup'))
+            if (!$oSecurityToken->check('backup'))
             {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
             }
             else
             {
-                switch($this->httpRequest->post('backup_type'))
+                switch ($this->httpRequest->post('backup_type'))
                 {
                     case 'server':
                         $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . (new Framework\Date\CDateTime)->get()->date() . '.sql';
@@ -132,9 +132,9 @@ class ToolController extends Controller
             }
         }
 
-        if($this->httpRequest->postExists('restore_dump'))
+        if ($this->httpRequest->postExists('restore_dump'))
         {
-            if(!$oSecurityToken->check('backup'))
+            if (!$oSecurityToken->check('backup'))
             {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
             }
@@ -142,7 +142,7 @@ class ToolController extends Controller
             {
                 $sDumpFile = $this->httpRequest->post('dump_file');
 
-                if(!empty($sDumpFile))
+                if (!empty($sDumpFile))
                 {
                     $mStatus = (new D\Util\Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
                 }
@@ -157,9 +157,9 @@ class ToolController extends Controller
             }
         }
 
-        if($this->httpRequest->postExists('remove_dump'))
+        if ($this->httpRequest->postExists('remove_dump'))
         {
-            if(!$oSecurityToken->check('backup'))
+            if (!$oSecurityToken->check('backup'))
             {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
             }
@@ -167,7 +167,7 @@ class ToolController extends Controller
             {
                 $sDumpFile = $this->httpRequest->post('dump_file');
 
-                if(!empty($sDumpFile))
+                if (!empty($sDumpFile))
                 {
                     $this->file->deleteFile(PH7_PATH_BACKUP_SQL . $sDumpFile);
                     $this->design->setFlashMsg(t('Dump file successfully deleted!'));
@@ -182,18 +182,18 @@ class ToolController extends Controller
         unset($oSecurityToken);
 
 
-        if($this->httpRequest->postExists('restore_sql_file'))
+        if ($this->httpRequest->postExists('restore_sql_file'))
         {
-            if(!empty($_FILES['sql_file']['tmp_name']))
+            if (!empty($_FILES['sql_file']['tmp_name']))
             {
                 $sNameFile = $_FILES['sql_file']['name'];
                 $sTmpFile = $_FILES['sql_file']['tmp_name'];
 
-                if($this->file->getFileExt($sNameFile) == 'sql')
+                if ($this->file->getFileExt($sNameFile) == 'sql')
                 {
                     $mStatus = (new D\Util\Backup($sTmpFile))->restore();
                 }
-                elseif($this->file->getFileExt($sNameFile) == 'bz2')
+                elseif ($this->file->getFileExt($sNameFile) == 'bz2')
                 {
                     $mStatus = (new D\Util\Backup($sTmpFile))->restoreArchive();
                 }
@@ -220,7 +220,7 @@ class ToolController extends Controller
 
     public function optimize()
     {
-        $this->checkPost();
+        $this->_checkPost();
 
         D\Db::optimize();
         HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been optimized!'));
@@ -228,7 +228,7 @@ class ToolController extends Controller
 
     public function repair()
     {
-        $this->checkPost();
+        $this->_checkPost();
 
         D\Db::repair();
         HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
@@ -237,23 +237,21 @@ class ToolController extends Controller
     /**
      * Checks and stops the script if the method is not POST.
      *
-     * @access private
      * @return string The text by exit() function.
      */
-     private function checkPost()
+     private function _checkPost()
      {
-         if(!$this->_isPost()) exit( Form::wrongRequestMethodMsg('POST') );
+         if (!$this->_isPost()) exit( Form::wrongRequestMethodMsg('POST') );
      }
 
     /**
      * Checks if the request been made ​​by the post method.
      *
-     * @access private ("_"isPost) Very private: Cannot be accessed in a public method.
      * @return boolean
      */
     private function _isPost()
     {
-        return ($this->httpRequest->postExists('is')) ? true : false;
+        return ($this->httpRequest->postExists('is'));
     }
 
 }

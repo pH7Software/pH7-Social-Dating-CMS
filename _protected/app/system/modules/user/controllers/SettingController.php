@@ -21,7 +21,7 @@ class SettingController extends Controller
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
 
         // Get the profile background
-        $this->view->path_img_background = $this->getWallpaper();
+        $this->view->path_img_background = $this->_getWallpaper();
 
         $this->sTitle = t('Account Settings');
         $this->view->page_title = $this->sTitle;
@@ -48,7 +48,7 @@ class SettingController extends Controller
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
 
         if ($this->httpRequest->postExists('del'))
-            $this->removeAvatar();
+            $this->_removeAvatar();
 
         $this->output();
     }
@@ -60,10 +60,10 @@ class SettingController extends Controller
         $this->view->h2_title = $this->sTitle;
 
         // Get the profile background
-        $this->view->path_img_background = $this->getWallpaper();
+        $this->view->path_img_background = $this->_getWallpaper();
 
         if ($this->httpRequest->postExists('del'))
-            $this->removeWallpaper();
+            $this->_removeWallpaper();
 
         $this->output();
     }
@@ -131,20 +131,21 @@ class SettingController extends Controller
             $this->output();
     }
 
-    private function getWallpaper()
+
+    private function _removeAvatar()
+    {
+        (new UserCore)->deleteAvatar($this->session->get('member_id'), $this->session->get('member_username'));
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('user', 'account', 'avatar'), t('Your avatar has been deleted successfully!'));
+    }
+
+    private function _getWallpaper()
     {
         $sBackground = (new UserModel)->getBackground($this->session->get('member_id'), 1);
         return (!empty($sBackground)) ? PH7_URL_DATA_SYS_MOD . 'user/background/img/' . $this->session->get('member_username') . PH7_DS . $sBackground : PH7_URL_TPL .
             PH7_TPL_NAME . PH7_DS . PH7_IMG . 'icon/none.jpg';
     }
 
-    private function removeAvatar()
-    {
-        (new UserCore)->deleteAvatar($this->session->get('member_id'), $this->session->get('member_username'));
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('user', 'account', 'avatar'), t('Your avatar has been deleted successfully!'));
-    }
-
-    private function removeWallpaper()
+    private function _removeWallpaper()
     {
         (new UserCore)->deleteBackground($this->session->get('member_id'), $this->session->get('member_username'));
         Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('user','setting', 'design'), t('Your wallpaper has been deleted successfully!'));
