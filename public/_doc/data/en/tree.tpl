@@ -1,4 +1,4 @@
-<!-- Last Update: 05/29/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 05/31/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -914,6 +914,7 @@
 |   |           |   |   |-- processing
 |   |           |   |   |   |-- MsgFormProcessing.php
 |   |           |   |   |   `-- SubscriptionFormProcessing.php
+|   |           |   |   |-- SearchSubscriberForm.php
 |   |           |   |   `-- SubscriptionForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
@@ -931,7 +932,9 @@
 |   |           |           |   `-- config.ini
 |   |           |           `-- tpl
 |   |           |               |-- admin
-|   |           |               |   `-- index.tpl
+|   |           |               |   |-- browse.tpl
+|   |           |               |   |-- index.tpl
+|   |           |               |   `-- search.tpl
 |   |           |               `-- home
 |   |           |                   `-- subscription.tpl
 |   |           |-- note
@@ -4401,4 +4404,4 @@
 
 </pre>
 
-<p>Statistics: 1326 directories, 3067 files.</p>
+<p>Statistics: 1326 directories, 3070 files.</p>
