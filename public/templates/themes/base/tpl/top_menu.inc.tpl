@@ -250,7 +250,18 @@
         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{@lang('Modules Manager')@}">{@lang('Modules Manager')@}</a>
           <ul>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{@lang('Modules Manager')@}">{@lang('Modules Manager')@}</a></li>
-            <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{@lang('Mass Mailer')@}">{@lang('Newsletters')@}</a></li>
+            <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{@lang('Mass Mailer')@}">{@lang('Newsletters')@}</a>
+              <ul>
+                <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{@lang('Mass Mailer')@}">{@lang('Newsletters')@}</a></li>
+                <li><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{@lang('Browse Subscribers')@}">{@lang('Subscribers')@}</a>
+                  <ul>
+                    <li><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{@lang('Browse Subscribers')@}">{@lang('Browse')@}</a></li>
+                    <li><a href="{{ $design->url('newsletter', 'admin', 'search') }}" title="{@lang('Search Subscribers')@}">{@lang('Search')@}</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+
             <li><a href="{{ $design->url('forum','admin','index') }}" title="{@lang('Forum Admin')@}">{@lang('Forum')@}</a></li>
             <li><a href="{{ $design->url('blog','admin','index') }}" title="{@lang('Blog Admin')@}">{@lang('Blog')@}</a></li>
             <li><a href="{{ $design->url('game','admin','index') }}" title="{@lang('Game Admin')@}">{@lang('Game')@}</a>
@@ -262,8 +273,8 @@
             <li><a href="{{ $design->url('affiliate','admin','index') }}" title="{@lang('Affiliate Admin Manager')@}">{@lang('Affiliate')@}</a>
               <ul>
                 <li><a href="{{ $design->url('affiliate','admin','banner') }}" title="{@lang('Banners Manager')@}">{@lang('Banners')@}</a></li>
-                <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{@lang('Affiliated List')@}">{@lang('Affiliated')@}</a></li>
-                <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{@lang('Search an Affiliated')@}">{@lang('Search an Affiliated')@}</a></li>
+                <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{@lang('Affiliates List')@}">{@lang('Affiliates')@}</a></li>
+                <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{@lang('Search an Affiliate')@}">{@lang('Search an Affiliate')@}</a></li>
                 <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{@lang('Add Affiliate')@}">{@lang('Add Affiliate')@}</a></li>
                 <li><a href="{{ $design->url('field','field','all','aff') }}" title="{@lang('Affiliate Fields')@}">{@lang('Affiliate Fields')@}</a>
                   <ul>

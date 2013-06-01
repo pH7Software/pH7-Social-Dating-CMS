@@ -30,10 +30,12 @@ class SubscriptionModel extends UserCoreModel
      */
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Subscribers') . '(name, email, hashValidation, active) VALUES (:name, :email, :hashValidation, :active)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Subscribers') . '(name, email, joinDate, ip, hashValidation, active) VALUES (:name, :email, :joinDate, :ip, :hashValidation, :active)');
         $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':joinDate', $aData['current_date'], \PDO::PARAM_STR);
+        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
+        $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':active', $aData['active'], \PDO::PARAM_INT);
         $rStmt->execute();
         return (int) Db::getInstance()->lastInsertId();
@@ -50,6 +52,54 @@ class SubscriptionModel extends UserCoreModel
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Subscribers') . 'WHERE email = :email LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         return $rStmt->execute();
+    }
+
+    /**
+     * Browse Subscribers.
+     *
+     * @param mixed (integer for profile ID or string for a keyword) $mLooking
+     * @param boolean $bCount Put 'true' for count the subscribers or 'false' for the result of subscribers.
+     * @param string $sOrderBy
+     * @param string $sSort
+     * @param integer $iOffset
+     * @param integer $iLimit
+     * @return mixed (integer for the number subscribers returned or string for the subscribers list returned)
+     */
+    public function browse($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    {
+        $bCount = (bool) $bCount;
+        $iOffset = (int) $iOffset;
+        $iLimit = (int) $iLimit;
+
+        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
+        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE profileId = :looking' : ' WHERE name LIKE :looking OR email LIKE :looking OR ip LIKE :looking';
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Subscribers') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+
+        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+
+        if (!$bCount)
+        {
+            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        }
+
+        $rStmt->execute();
+
+        if (!$bCount)
+        {
+            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        }
+        else
+        {
+            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $mData = (int) $oRow->totalUsers;
+            unset($oRow);
+        }
+        Db::free($rStmt);
+        return $mData;
     }
 
 }
