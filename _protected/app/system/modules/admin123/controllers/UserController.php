@@ -56,7 +56,7 @@ class UserController extends Controller
             $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'browse.css');
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
-            $this->sTitle = t('Users Browser');
+            $this->sTitle = t('Browse Users');
             $this->view->page_title = $this->sTitle;
             $this->view->h1_title = $this->sTitle;
             $this->view->h3_title = t('Total Users: %0%', $this->iTotalUsers);

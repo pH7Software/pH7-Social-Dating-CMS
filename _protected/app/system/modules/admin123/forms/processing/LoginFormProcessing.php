@@ -65,7 +65,7 @@ class LoginFormProcessing extends Form
             $oSecurityModel->clearLoginAttempts('Admins');
             $this->session->remove('captcha_admin_enabled');
 
-            // Is disconnected if the user is logged on as "user" or "affiliated".
+            // Is disconnected if the user is logged on as "user" or "affiliate".
             if(UserCore::auth() || AffiliateCore::auth()) $this->session->destroy();
 
             $iId = $oAdminModel->getId($mail, null, 'Admins');

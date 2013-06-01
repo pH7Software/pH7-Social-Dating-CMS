@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Admin / Inc / Model
  */
 namespace PH7;
-use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Security\Security, PH7\Framework\Mvc\Model\Engine\Db;
 
 class AdminModel extends AdminCoreModel
 {
@@ -29,7 +29,7 @@ class AdminModel extends AdminCoreModel
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return (@$oRow->password !== Framework\Security\Security::hashPwd(@$oRow->prefixSalt, $sPassword, @$oRow->suffixSalt)) ? false : true;
+        return (@$oRow->password !== Security::hashPwd(@$oRow->prefixSalt, $sPassword, @$oRow->suffixSalt)) ? false : true;
     }
 
     /**
@@ -47,14 +47,14 @@ class AdminModel extends AdminCoreModel
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :timeZone, :ip, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':password', Framework\Security\Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_INT);
+        $rStmt->bindParam(':password', Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_STR, Security::LENGTH_ADMIN_PASSWORD);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':timeZone', $aData['time_zone'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
+        $rStmt->bindParam(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->execute();
@@ -96,9 +96,7 @@ class AdminModel extends AdminCoreModel
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::
             prefix('Admins') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::
-            PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::
-            PARAM_STR);
+        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
         if (!$bCount)
         {

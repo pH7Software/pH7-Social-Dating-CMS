@@ -114,7 +114,7 @@ class NoteModel extends NoteCoreModel
         $rStmt->bindValue(':metaAuthor', $aData['meta_author'], \PDO::PARAM_STR);
         $rStmt->bindValue(':metaCopyright', $aData['meta_copyright'], \PDO::PARAM_STR);
         $rStmt->bindValue(':enableComment', $aData['enable_comment'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':createdDate', $aData['created_date'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':createdDate', $aData['created_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $aData['approved'], \PDO::PARAM_INT);
         return $rStmt->execute();
     }

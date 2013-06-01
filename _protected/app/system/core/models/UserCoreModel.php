@@ -13,7 +13,8 @@ namespace PH7;
 use
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Mvc\Model\Engine\Util\Various,
-PH7\Framework\Date\CDateTime;
+PH7\Framework\Date\CDateTime,
+PH7\Framework\Security\Security;
 
 // Abstract Class
 class UserCoreModel extends Framework\Mvc\Model\Engine\Model
@@ -66,7 +67,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('SELECT email, password, prefixSalt, suffixSalt FROM' . Db::prefix($sTable) . 'WHERE email = :email LIMIT 1');
-        $rStmt->bindValue(':email',$sEmail, \PDO::PARAM_STR);
+        $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
@@ -76,7 +77,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         if ($sEmail !== $sDbEmail)
             return 'email_does_not_exist';
-        elseif (Framework\Security\Security::hashPwd($oRow->prefixSalt, $sPassword, $oRow->suffixSalt) !== $sDbPassword)
+        elseif (Security::hashPwd($oRow->prefixSalt, $sPassword, $oRow->suffixSalt) !== $sDbPassword)
             return 'password_does_not_exist';
         else
             return true;
@@ -101,7 +102,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
         $rStmt->bindValue(':firstName', $sFirstName, \PDO::PARAM_STR);
-        $rStmt->bindValue(':ip', Framework\Ip\Ip::get(), \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', Framework\Ip\Ip::get(), \PDO::PARAM_STR);
         $rStmt->execute();
         Db::free($rStmt);
     }
@@ -193,20 +194,20 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param string $sEmail
      * @param string $sNewPassword
-     * @param string $sTable
      * @param string $sPrefixSalt
      * @param string $sSuffixSalt
+     * @param string $sTable
      * @return boolean
      */
-    public function changePassword($sEmail, $sNewPassword, $sTable, $sPrefixSalt, $sSuffixSalt)
+    public function changePassword($sEmail, $sNewPassword, $sPrefixSalt, $sSuffixSalt, $sTable)
     {
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET password = :newPassword, prefixSalt = :prefixSalt, suffixSalt = :suffixSalt WHERE email = :email LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
-        $rStmt->bindValue(':newPassword',Framework\Security\Security::hashPwd($sPrefixSalt,$sNewPassword,$sSuffixSalt), \PDO::PARAM_INT);
-        $rStmt->bindValue(':prefixSalt', $sPrefixSalt, \PDO::PARAM_INT);
-        $rStmt->bindValue(':suffixSalt', $sSuffixSalt, \PDO::PARAM_INT);
+        $rStmt->bindParam(':newPassword', Security::hashPwd($sPrefixSalt, $sNewPassword, $sSuffixSalt), \PDO::PARAM_STR, ($sTable == 'Admins' ? Security::LENGTH_ADMIN_PASSWORD : Security::LENGTH_USER_PASSWORD));
+        $rStmt->bindParam(':prefixSalt', $sPrefixSalt, \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':suffixSalt', $sSuffixSalt, \PDO::PARAM_STR, 40);
         return $rStmt->execute();
     }
 
@@ -223,7 +224,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET hashValidation = :hash WHERE profileId = :profileId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':hash', $sHash, \PDO::PARAM_STR);
+        $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
         return $rStmt->execute();
     }
 
@@ -241,7 +242,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) FROM' . Db::prefix($sTable) . 'WHERE email = :email AND hashValidation = :hash LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
-        $rStmt->bindValue(':hash', $sHash, \PDO::PARAM_STR);
+        $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
         $rStmt->execute();
         return ($rStmt->fetchColumn() == 1);
     }
@@ -331,7 +332,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if ($bIsAge) $rStmt->bindValue(':age2', $aParams['age2'], \PDO::PARAM_INT);
         if ($bIsHeight) $rStmt->bindValue(':height', $aParams['height'], \PDO::PARAM_INT);
         if ($bIsWeight) $rStmt->bindValue(':weight', $aParams['weight'], \PDO::PARAM_INT);
-        if ($bIsCountry) $rStmt->bindValue(':country', $aParams['country'], \PDO::PARAM_STR);
+        if ($bIsCountry) $rStmt->bindParam(':country', $aParams['country'], \PDO::PARAM_STR, 2);
         if ($bIsCity) $rStmt->bindValue(':city', '%' . $aParams['city'] . '%', \PDO::PARAM_STR);
         if ($bIsState) $rStmt->bindValue(':state', '%' . $aParams['state'] . '%', \PDO::PARAM_STR);
         if ($bIsZipCode) $rStmt->bindValue(':zipCode', '%' . $aParams['zip_code'] . '%', \PDO::PARAM_STR);
@@ -553,7 +554,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = 1 WHERE email = :email AND hashValidation = :hash AND active = 2');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
-        $rStmt->bindValue(':hash', $sHash, \PDO::PARAM_STR);
+        $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
         return $rStmt->execute();
     }
 
@@ -569,17 +570,17 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :prefixSalt, :suffixSalt, :joinDate, :lastActivity, :groupId)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
-        $rStmt->bindValue(':password', Framework\Security\Security::hashPwd($aData['prefix_salt'],$aData['password'],$aData['suffix_salt'], Framework\Security\Security::USER), \PDO::PARAM_INT);
+        $rStmt->bindParam(':password', Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt'], Security::USER), \PDO::PARAM_STR, Security::LENGTH_USER_PASSWORD);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':matchSex', Form::setVal($aData['match_sex']), \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':active', (!empty($aData['is_active']) ? $aData['is_active'] : 1), \PDO::PARAM_INT);
-        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':hashValidation', (!empty($aData['hash_validation']) ? $aData['hash_validation'] : null), \PDO::PARAM_STR);
-        $rStmt->bindValue(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
+        $rStmt->bindParam(':hashValidation', (!empty($aData['hash_validation']) ? $aData['hash_validation'] : null), \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':groupId', (int) Framework\Mvc\Model\DbConfig::getSetting('defaultMembershipGroupId'), \PDO::PARAM_INT);
@@ -598,7 +599,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             VALUES (:profileId, :country, :city, :state, :zipCode, :description, :website, :socialNetworkSite)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindValue(':middleName', $aData['middle_name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':country', $aData['country'], \PDO::PARAM_STR);
+        $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);
         $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
         $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
         $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);
@@ -649,7 +650,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix($sTable) . 'WHERE ip = :ip AND DATE_ADD(joinDate, INTERVAL :waitTime MINUTE) > :currentTime');
-        $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
@@ -974,7 +975,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $sSqlCity = (!empty($sCity)) ?  'AND (city LIKE :city)' : '';
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
-        $rStmt->bindValue(':country', $sCountry, \PDO::PARAM_STR);
+        $rStmt->bindParam(':country', $sCountry, \PDO::PARAM_STR, 2);
         (!empty($sCity)) ? $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR) : '';
 
         if (!$bCount)

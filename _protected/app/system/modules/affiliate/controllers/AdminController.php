@@ -61,10 +61,10 @@ class AdminController extends Controller
             $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
             $this->view->dateTime = $this->dateTime; // Date Time Class
 
-            $this->sTitle = t('Affiliated Browser');
+            $this->sTitle = t('Browse Affiliates');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Affiliated Result!', '%n% Affiliateds Result!', $this->iTotalUsers);
+            $this->view->h3_title = nt('%n% Affiliate Result!', '%n% Affiliates Result!', $this->iTotalUsers);
 
             $this->view->browse = $oSearch;
         }
@@ -103,12 +103,12 @@ class AdminController extends Controller
         ];
 
         $this->session->set($aSessionData);
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'account', 'index'), t('You are now logged in as affiliated: %0%!', $this->session->get('affiliate_username')));
+        HeaderUrl::redirect(UriRoute::get('affiliate', 'account', 'index'), t('You are now logged in as affiliate: %0%!', $this->session->get('affiliate_username')));
     }
 
     public function logoutUserAs()
     {
-        $this->sMsg = t('You are now  logged out in as an affiliated: %0%!', $this->
+        $this->sMsg = t('You are now  logged out in as an affiliate: %0%!', $this->
             session->get('affiliate_username'));
 
         $aSessionData = [
@@ -181,11 +181,11 @@ class AdminController extends Controller
         if ($this->oAffModel->ban($iId, 1, 'Affiliate'))
         {
             $this->oAff->clearReadProfileCache($iId, 'Affiliate');
-            $this->sMsg = t('The profile has been banned.');
+            $this->sMsg = t('The affiliate has been banned.');
         }
         else
         {
-            $this->sMsg = t('Oops! An error has occurred while banishment the profile.');
+            $this->sMsg = t('Oops! An error has occurred while banishment the affiliate.');
         }
 
         HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
@@ -198,11 +198,11 @@ class AdminController extends Controller
         if ($this->oAffModel->ban($iId, 0, 'Affiliate'))
         {
             $this->oAff > clearReadProfileCache($iId, 'Affiliate');
-            $this->sMsg = t('The profile has been unbanned.');
+            $this->sMsg = t('The affiliate has been unbanned.');
         }
         else
         {
-            $this->sMsg = t('Oops! An error has occurred while unban the profile.');
+            $this->sMsg = t('Oops! An error has occurred while unban the affiliate.');
         }
 
         HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
@@ -212,7 +212,7 @@ class AdminController extends Controller
     {
         $aData = explode('_', $this->httpRequest->post('id'));
         $this->oAff->delete($aData[0], $aData[1]);
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), t('The affiliated has been deleted.'));
+        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), t('The affiliate has been deleted.'));
     }
 
     public function banAll()
@@ -230,7 +230,7 @@ class AdminController extends Controller
                 $this->oAffModel->ban($iId, 1, 'Affiliate');
                 $this->oAff->clearReadProfileCache($iId, 'Affiliate');
             }
-            $this->sMsg = t('The profile(s) has been banned.');
+            $this->sMsg = t('The affiliate(s) has been banned.');
         }
 
         HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
@@ -251,7 +251,7 @@ class AdminController extends Controller
                 $this->oAffModel->ban($iId, 0, 'Affiliate');
                 $this->oAff->clearReadProfileCache($iId, 'Affiliate');
             }
-            $this->sMsg = t('The profile(s) has been unbanned.');
+            $this->sMsg = t('The affiliate(s) has been unbanned.');
         }
 
         HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
@@ -273,7 +273,7 @@ class AdminController extends Controller
 
                 $this->oAff->delete($iId, $sUsername);
             }
-            $this->sMsg = t('The profile(s) has been deleted.');
+            $this->sMsg = t('The affiliate(s) has been deleted.');
         }
 
         HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);

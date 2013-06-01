@@ -60,7 +60,7 @@ class AdminController extends Controller
             $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
             $this->view->dateTime = $this->dateTime; // Date Time Class
 
-            $this->sTitle = t('Admins Browser');
+            $this->sTitle = t('Browse Admins');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Admin Result!', '%n% Admins Result!', $this->iTotalAdmins);

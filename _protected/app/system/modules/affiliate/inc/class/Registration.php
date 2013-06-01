@@ -41,7 +41,7 @@ class Registration extends RegistrationCore
         }
 
         $this->view->content = t('Dear %0% %1%, welcome to affiliate platform %site_name%!', $aInfo['last_name'], $aInfo['first_name']) . '<br />' .
-        t('Hello %0%! We are proud to welcome you as an affiliated on our %site_name%!', $aInfo['first_name']) . '<br />' .
+        t('Hello %0%! We are proud to welcome you as an affiliate on our %site_name%!', $aInfo['first_name']) . '<br />' .
         $sEmailMsg .
         '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
         t('Email: %0%.', $aInfo['email']) . '<br />' .

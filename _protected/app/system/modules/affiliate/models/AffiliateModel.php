@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Affiliate / Model
  */
 namespace PH7;
-use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Security\Security, PH7\Framework\Mvc\Model\Engine\Db;
 
 class AffiliateModel extends AffiliateCoreModel
 {
@@ -23,16 +23,16 @@ class AffiliateModel extends AffiliateCoreModel
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :active, :ip, :hashValidation, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':password', Framework\Security\Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_INT);
+        $rStmt->bindParam(':password', Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_STR, Security::LENGTH_USER_PASSWORD);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':active', $aData['is_active'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
+        $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->execute();
@@ -51,7 +51,7 @@ class AffiliateModel extends AffiliateCoreModel
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliateInfo') . '(profileId, country, city, state, zipCode) VALUES (:profileId, :country, :city, :state, :zipCode)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
-        $rStmt->bindValue(':country', $aData['country'], \PDO::PARAM_STR);
+        $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);
         $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
         $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
         $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);
@@ -73,7 +73,7 @@ class AffiliateModel extends AffiliateCoreModel
     }
 
     /**
-     * Search an affiliated.
+     * Search an affiliate.
      *
      * @param mixed (integer for profile ID or string for a keyword) $mLooking
      * @param boolean $bCount Put 'true' for count the affiliates or 'false' for the result of affiliates.
@@ -134,15 +134,15 @@ class AffiliateModel extends AffiliateCoreModel
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :ip, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
-        $rStmt->bindValue(':password', Framework\Security\Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_INT);
+        $rStmt->bindParam(':password', Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_STR, Security::LENGTH_USER_PASSWORD);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':bankAccount', $aData['bank_account'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
+        $rStmt->bindParam(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->execute();
@@ -158,7 +158,7 @@ class AffiliateModel extends AffiliateCoreModel
             VALUES (:profileId, :middleName, :country, :city, :state, :zipCode, :phone, :description, :website)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindValue(':middleName', $aData['middle_name'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':country', $aData['country'], \PDO::PARAM_STR);
+        $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);
         $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
         $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
         $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);

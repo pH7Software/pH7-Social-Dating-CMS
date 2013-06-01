@@ -279,7 +279,7 @@ class Design
         if($sType == 'js')
             echo $this->externalJsFile(PH7_RELATIVE . 'asset/gzip/?t=js&amp;d=' . $sDir . '&amp;f=' . $sFiles);
         else
-            echo $this->externalCssFile(PH7_RELATIVE . 'asset/gzip/?t=css&amp;d=' . $sDir .'&amp;f=' . $sFiles, $sCssMedia);
+            echo $this->externalCssFile(PH7_RELATIVE . 'asset/gzip/?t=css&amp;d=' . $sDir . '&amp;f=' . $sFiles, $sCssMedia);
     }
 
     /**

@@ -22,7 +22,7 @@
 
 {{ $country_name = t($user->country) }}
 
-{* Age Members *}
+{* Members Age *}
 {{ $aAge = explode('-', $user->birthDate);
 $age = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get() }}
 

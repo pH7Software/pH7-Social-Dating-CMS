@@ -292,7 +292,7 @@ class UserCore
      */
     public function setAuth(UserCoreModel $oUserModel, Session $oSession, $oUserData)
     {
-        // Is disconnected if the user is logged on as "affiliated" or "administrator".
+        // Is disconnected if the user is logged on as "affiliate" or "administrator".
         if (AffiliateCore::auth() || AdminCore::auth()) $oSession->destroy();
 
         // Regenerate the session ID to prevent the session fixation

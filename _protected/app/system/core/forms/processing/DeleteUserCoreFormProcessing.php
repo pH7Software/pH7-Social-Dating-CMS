@@ -32,7 +32,7 @@ class DeleteUserCoreFormProcessing extends Form
         else
         {
             $sUsername = $this->session->get($sSessPrefix.'_username');
-            $sMembershipType = ($this->registry->module == 'affiliate') ? t('Affiliated') : t('Member');
+            $sMembershipType = ($this->registry->module == 'affiliate') ? t('Affiliate') : t('Member');
 
             $this->view->membership = t('Type of Membership: %0%.', $sMembershipType);
             $this->view->message = nl2br($this->httpRequest->post('message'));

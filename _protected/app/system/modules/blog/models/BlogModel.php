@@ -87,7 +87,7 @@ class BlogModel extends BlogCoreModel
         $rStmt->bindValue(':metaAuthor', $aData['meta_author'], \PDO::PARAM_STR);
         $rStmt->bindValue(':metaCopyright', $aData['meta_copyright'], \PDO::PARAM_STR);
         $rStmt->bindValue(':enableComment', $aData['enable_comment'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':createdDate', $aData['created_date'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':createdDate', $aData['created_date'], \PDO::PARAM_STR);
         return $rStmt->execute();
     }
 
