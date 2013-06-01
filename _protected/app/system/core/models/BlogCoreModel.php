@@ -33,7 +33,7 @@ class BlogCoreModel extends Framework\Mvc\Model\Engine\Model
              $rStmt->execute();
              $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
              Db::free($rStmt);
-             $iData = (int)$oRow->totalPosts;
+             $iData = (int) $oRow->totalPosts;
              unset($oRow);
              $this->cache->put($iData);
          }

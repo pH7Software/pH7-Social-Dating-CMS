@@ -32,7 +32,7 @@ class AffiliateCore extends UserCore
     }
 
     /**
-     * Delete Affiliated.
+     * Delete Affiliate.
      *
      * @param integer $iProfileId
      * @param string $sUsername

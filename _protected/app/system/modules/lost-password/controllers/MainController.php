@@ -42,7 +42,7 @@ class MainController extends Controller
         {
             $sNewPassword = Various::genRndWord(8,40);
 
-            (new UserCoreModel)->changePassword($sMail, $sNewPassword, $sTable, Various::genRnd(),  Various::genRnd());
+            (new UserCoreModel)->changePassword($sMail, $sNewPassword, Various::genRnd(),  Various::genRnd(), $sTable);
 
             $this->view->content = t('Hello!<br />Your password has been changed to <em>"%0%"</em>.<br />Please change it next time you login.', $sNewPassword);
 

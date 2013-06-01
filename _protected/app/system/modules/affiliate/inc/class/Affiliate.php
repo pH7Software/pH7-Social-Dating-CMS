@@ -16,7 +16,7 @@ class Affiliate extends AffiliateCore
 {
 
     /**
-     * Logout function for affiliated.
+     * Logout function for affiliate.
      *
      * @return void
      */

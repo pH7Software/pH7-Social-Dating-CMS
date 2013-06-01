@@ -14,7 +14,7 @@ class AffiliateCoreModel extends AdminCoreModel
 {
 
     /**
-     * Delete Affiliated.
+     * Delete Affiliate.
      *
      * @param integer $iProfileId
      * @param string $sUsername

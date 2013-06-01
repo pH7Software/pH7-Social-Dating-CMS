@@ -47,7 +47,7 @@ class Security
         if ($rStmt->rowCount() == 0) // Not Found IP
         {
             $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('BlockIp'). 'VALUES (:ip, :expires)');
-            $rStmt->bindValue(':ip',$iIp, \PDO::PARAM_INT);
+            $rStmt->bindValue(':ip', $iIp, \PDO::PARAM_INT);
             $rStmt->bindValue(':expires', $iExpirationInSec, \PDO::PARAM_INT);
             $rStmt->execute();
             return true;
@@ -73,9 +73,9 @@ class Security
         VALUES (:email, :username, :password, :status, :ip)');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
-        $rStmt->bindValue(':password', $sPassword, \PDO::PARAM_INT);
+        $rStmt->bindValue(':password', $sPassword, \PDO::PARAM_STR);
         $rStmt->bindValue(':status', $sStatus, \PDO::PARAM_STR);
-        $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_STR);
         $rStmt->execute();
         Db::free($rStmt);
     }
@@ -95,7 +95,7 @@ class Security
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable.'AttemptsLogin') . 'WHERE ip = :ip LIMIT 1');
-        $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_STR);
         $rStmt->execute();
 
         if ($rStmt->rowCount() == 1)
@@ -138,7 +138,7 @@ class Security
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable.'AttemptsLogin') . 'WHERE ip = :ip LIMIT 1');
-        $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_STR);
         $rStmt->execute();
 
         if ($rStmt->rowCount() == 1)
@@ -146,7 +146,7 @@ class Security
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             $iAttempts = $oRow->attempts+1;
             $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable.'AttemptsLogin') . 'SET attempts = :attempts, lastLogin = :currentTime WHERE ip = :ip');
-            $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_INT);
+            $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_STR);
             $rStmt->bindValue(':attempts', $iAttempts, \PDO::PARAM_INT);
             $rStmt->bindValue(':currentTime', $this->_sCurrentTime, \PDO::PARAM_STR);
             $rStmt->execute();
@@ -154,7 +154,7 @@ class Security
         else
         {
             $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable.'AttemptsLogin') . '(ip, attempts, lastLogin) VALUES (:ip, 1, :lastLogin)');
-            $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_INT);
+            $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_STR);
             $rStmt->bindValue(':lastLogin', $this->_sCurrentTime, \PDO::PARAM_STR);
             $rStmt->execute();
         }
@@ -173,7 +173,7 @@ class Security
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable.'AttemptsLogin') . 'WHERE ip = :ip');
-        $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_STR);
         $rStmt->execute();
         Db::free($rStmt);
     }
