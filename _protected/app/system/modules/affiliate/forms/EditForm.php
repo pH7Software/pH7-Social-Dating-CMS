@@ -26,9 +26,11 @@ class EditForm
             Framework\Url\HeaderUrl::redirect();
         }
 
+        $bAdminLogged = (AdminCore::auth() && !Affiliate::auth()); // Check if the admin is logged.
+
         $oAffModel = new AffiliateModel;
         $oHR = new HttpRequest;
-        $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
+        $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
 
         $oAff = $oAffModel->readProfile($iProfileId, 'Affiliate');
 
@@ -41,9 +43,9 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_aff_edit_account', 'form_aff_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
-        if (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id'))
+        if ($bAdminLogged && $oHR->getExists('profile_id'))
         {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="s_button" href="' . UriRoute::get('affiliate', 'admin', 'userlist') . '">' . t('Return to back affiliates browse') . '</a></p>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . UriRoute::get('affiliate', 'admin', 'userlist') . '">' . t('Back to Browse Affiliates') . '</a></p>'));
         }
         unset($oHR);
 
