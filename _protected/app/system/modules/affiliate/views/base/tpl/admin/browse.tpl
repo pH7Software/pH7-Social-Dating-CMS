@@ -60,7 +60,7 @@ $age = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get() }}
 <td>{@if(!empty($aff->lastActivity))@} {% $dateTime->get($aff->lastActivity)->dateTime() %} {@else@} {@lang('No last login')@} {@/if@}</td>
 <td>{@if(!empty($aff->lastEdit))@} {% $dateTime->get($aff->lastEdit)->dateTime() %} {@else@} {@lang('No last editing')@} {@/if@}</td>
 <td class="small">
-<a href="{{$design->url('affiliate','account','edit',$aff->profileId)}}" title="{@lang('Edit this Affiliate')@}">{@lang('Edit')@}</a> |
+<a href="{{$design->url('affiliate','account','edit',$aff->profileId)}}" title="{@lang("Edit Affiliate's Account")@}">{@lang('Edit')@}</a> |
 <a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{@lang('Login As a member (to all edit this user account).')@}">{@lang('Login as User')@}</a> |
 
 {@if($aff->ban == 0)@}
