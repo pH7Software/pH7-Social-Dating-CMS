@@ -1,18 +1,18 @@
 <ol id="toc">
-    <li><a href="#general"><span>{@lang('General Information')@}</span></a></li>
-    <li><a href="#edit"><span>{@lang('Edit')@}</span></a></li>
-    <li><a href="#design"><span>{@lang('Design')@}</span></a></li>
+    <li><a href="#edit"><span>{@lang('Edit Account')@}</span></a></li>
+    <li><a href="#avatar"><span>{@lang('Avatar')@}</span></a></li>
+    <li><a href="#design"><span>{@lang('Wallpaper')@}</span></a></li>
     <li><a href="#notification"><span>{@lang('Notifications')@}</span></a></li>
     <li><a href="#privacy"><span>{@lang('Privacy')@}</span></a></li>
-    <li><a href="#passwrd"><span>{@lang('Change Password')@}</span></a></li>
+    <li><a href="#pwd"><span>{@lang('Change Password')@}</span></a></li>
 </ol>
-
-<div class="content" id="general">
- <p>{@lang('Your settings of your account %site_name%.')@}</p>
-</div>
 
 <div class="content" id="edit">
   {@manual_include('edit.tpl')@}
+</div>
+
+<div class="content" id="avatar">
+  {@manual_include('avatar.tpl')@}
 </div>
 
 <div class="content" id="design">
@@ -27,9 +27,9 @@
   {@manual_include('privacy.tpl')@}
 </div>
 
-<div class="content" id="passwrd">
+<div class="content" id="pwd">
   {@manual_include('password.tpl')@}
 </div>
 
 <script src="{url_static}js/tabs.js"></script>
-<script>tabs('p', ['general','edit','design','notification','privacy','passwrd']);</script>
+<script>tabs('p', ['edit','avatar','design','notification','privacy','pwd']);</script>

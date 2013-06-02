@@ -23,17 +23,24 @@ class SettingController extends Controller
         $this->_sUsername = ($this->_bAdminLogged && $this->httpRequest->getExists('username')) ? $this->httpRequest->get('username') : $this->session->get('member_username');
         $this->_sFirstName = ($this->_bAdminLogged && $this->httpRequest->getExists('first_name')) ? $this->httpRequest->get('first_name') : $this->session->get('member_first_name');
         $this->_sSex = ($this->_bAdminLogged && $this->httpRequest->getExists('sex')) ? $this->httpRequest->get('sex') : $this->session->get('member_sex');
+
+        /** For the avatar on the index and avatar page **/
+        $this->view->username = $this->_sUsername;
+        $this->view->first_name = $this->_sFirstName;
+        $this->view->sex = $this->_sSex;
+        $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
+
+        /** For the wallpaper on the index and design page **/
+        $this->view->path_img_background = $this->_getWallpaper();
+
+        /** For the 'display_status' function on the index and privacy page **/
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
     }
 
     public function index()
     {
         // Add Css Style for Tabs
         $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'tabs.css');
-        // Add JS file for the 'display_status' function
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
-
-        // Get the profile background
-        $this->view->path_img_background = $this->_getWallpaper();
 
         $this->_sTitle = t('Account Settings');
         $this->view->page_title = $this->_sTitle;
@@ -53,11 +60,6 @@ class SettingController extends Controller
     {
         $this->view->page_title = t('Photo of profile');
         $this->view->h2_title = t('Change your Avatar');
-        $this->view->username = $this->_sUsername;
-        $this->view->first_name = $this->_sFirstName;
-        $this->view->sex = $this->_sSex;
-
-        $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
 
         if ($this->httpRequest->postExists('del'))
             $this->_removeAvatar();
@@ -70,9 +72,6 @@ class SettingController extends Controller
         $this->_sTitle = t('Your Wallpaper');
         $this->view->page_title = $this->_sTitle;
         $this->view->h2_title = $this->_sTitle;
-
-        // Get the profile background
-        $this->view->path_img_background = $this->_getWallpaper();
 
         if ($this->httpRequest->postExists('del'))
             $this->_removeWallpaper();
@@ -90,9 +89,6 @@ class SettingController extends Controller
 
     public function privacy()
     {
-        // Add JS file for the 'display_status' function
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
-
         $this->_sTitle = t('Privacy Settings');
         $this->view->page_title = $this->_sTitle;
         $this->view->h2_title = $this->_sTitle;
