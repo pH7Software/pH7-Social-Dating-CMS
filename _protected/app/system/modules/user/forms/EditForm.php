@@ -26,9 +26,11 @@ class EditForm
             Framework\Url\HeaderUrl::redirect();
         }
 
+        $bAdminLogged = (AdminCore::auth() && !User::auth()); // Check if the admin is logged.
+
         $oUserModel = new UserModel;
         $oHR = new HttpRequest;
-        $iProfileId = (AdminCore::auth() && !User::auth() && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('member_id');
+        $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('member_id');
 
         $oUser = $oUserModel->readProfile($iProfileId);
 
@@ -40,9 +42,9 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_user_edit_account', 'form_user_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
-        if (AdminCore::auth() && !User::auth() && $oHR->getExists('profile_id'))
+        if ($bAdminLogged && $oHR->getExists('profile_id'))
         {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="s_button" href="' . UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Return to back users browse') . '</a></p>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
 
             $oGroupId = (new AdminCoreModel)->getMemberships();
             $aGroupName = array();
