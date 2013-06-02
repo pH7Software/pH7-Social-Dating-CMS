@@ -56,7 +56,7 @@ final class Token
     public function generate($sName)
     {
         // If the token is still valid, it returns the correct token
-        if($this->_oSession->exists('security_token_' . $sName))
+        if ($this->_oSession->exists('security_token_' . $sName))
         {
             return $this->_oSession->get('security_token_' . $sName);
         }
@@ -102,12 +102,13 @@ final class Token
             'security_token_http_user_agent_' . $sName
         ];
 
-        if($this->_oSession->exists($aCheckSession) && !empty($sInputToken))
-            if($this->_oSession->get('security_token_' . $sName) === $sInputToken)
-                if($this->_oSession->get('security_token_time_' . $sName) >= (time() - $iTime))
-                    //if($this->_sHttpReferer === $this->_oSession->get('security_token_http_referer_' . $sName))
-                        if(Ip::get() === $this->_oSession->get('security_token_ip_' . $sName))
-                            if($this->_sUserAgent === $this->_oSession->get('security_token_http_user_agent_' . $sName)) {
+        if ($this->_oSession->exists($aCheckSession) && !empty($sInputToken))
+            if ($this->_oSession->get('security_token_' . $sName) === $sInputToken)
+                if ($this->_oSession->get('security_token_time_' . $sName) >= (time() - $iTime))
+                    //if ($this->_sHttpReferer === $this->_oSession->get('security_token_http_referer_' . $sName))
+                        if (Ip::get() === $this->_oSession->get('security_token_ip_' . $sName))
+                            if ($this->_sUserAgent === $this->_oSession->get('security_token_http_user_agent_' . $sName))
+                            {
                                 // Delete the token and data sessions expired
                                 $this->_oSession->remove($aCheckSession);
                                 return true;
@@ -146,11 +147,11 @@ final class Token
      */
     protected function currentSess()
     {
-        if(\PH7\UserCore::auth())
+        if (\PH7\UserCore::auth())
             $sToken = $this->_oSession->get('member_token');
-        elseif(\PH7\AdminCore::auth())
+        elseif (\PH7\AdminCore::auth())
             $sToken = $this->_oSession->get('admin_token');
-        elseif(\PH7\AffiliateCore::auth())
+        elseif (\PH7\AffiliateCore::auth())
             $sToken = $this->_oSession->get('affiliate_token');
         else $sToken = true; // If nobody is logged on, we did not need to do this test, so it returns true
 
