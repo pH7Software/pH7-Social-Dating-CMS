@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
 ########## URL ##########
 
 $sHttp = (isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';
-$sPhp_self = dirname(htmlspecialchars($_SERVER['PHP_SELF']));
+$sPhp_self = dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES));
 
 #################### CONSTANTS ####################
 

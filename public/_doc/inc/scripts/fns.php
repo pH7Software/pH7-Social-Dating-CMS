@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
  */
 function get_browser_lang() {
     $aLang = explode(',' ,@$_SERVER['HTTP_ACCEPT_LANGUAGE']);
-    return htmlspecialchars(strtolower(substr(chop($aLang[0]), 0, 2)));
+    return escape(strtolower(substr(chop($aLang[0]), 0, 2)));
 }
 
 /**
@@ -127,6 +127,14 @@ function set_lang() {
     }
 
     return $sLang;
+}
+
+/**
+ * @desc Escape function with htmlspecialchars() PHP function.
+ * @return string
+ */
+function escape($sVal) {
+    return htmlspecialchars($sVal, ENT_QUOTES);
 }
 
 /**

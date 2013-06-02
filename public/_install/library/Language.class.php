@@ -46,7 +46,7 @@ class Language
     public function getBrowser()
     {
         $sLang = explode(',',@$_SERVER['HTTP_ACCEPT_LANGUAGE']);
-        return htmlspecialchars(strtolower(substr(chop($sLang[0]),0,2)));
+        return htmlspecialchars(strtolower(substr(chop($sLang[0]),0,2)), ENT_QUOTES);
     }
 
     public function get()
