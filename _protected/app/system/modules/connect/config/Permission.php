@@ -16,10 +16,16 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if(UserCore::auth() && ($this->registry->action === 'index' || $this->registry->action === 'login' || $this->registry->action === 'register')) {
+        if (UserCore::auth() && ($this->registry->action === 'index' || $this->registry->action === 'login' || $this->registry->action === 'register'))
+        {
             HeaderUrl::redirect(UriRoute::get('user','account','index'), $this->alreadyConnectedMsg(), 'error');
         }
 
+        if(!AdminCore::auth() && $this->registry->controller === 'AdminController')
+        {
+            // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
+            HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->adminSignInMsg(), 'error');
+        }
     }
 
 }
