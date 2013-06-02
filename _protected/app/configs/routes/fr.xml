@@ -15,6 +15,7 @@
       <!-- admin -->
       <route url="user/admin/edit/([0-9]+)" path="system/modules" module="user" controller="setting" action="edit" vars="profile_id" />
       <route url="user/admin/avatar/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="avatar" vars="profile_id,username,first_name,sex" />
+      <route url="user/admin/design/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="design" vars="profile_id,username,first_name,sex" />
 
       <route url="meeting-people" path="system/modules" module="user" controller="browse" action="index" />
       <!-- search -->

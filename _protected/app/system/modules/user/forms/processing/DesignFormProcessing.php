@@ -17,8 +17,20 @@ class DesignFormProcessing extends Form
     {
         parent::__construct();
 
-        $iApproved = (DbConfig::getSetting('profileBackgroundManualApproval') == 0) ? '1' : '0';
-        $bWallpaper = (new UserCore)->setBackground($this->session->get('member_id'), $this->session->get('member_username'), $_FILES['wallpaper']['tmp_name'], $iApproved);
+        $iApproved = (AdminCore::auth() || DbConfig::getSetting('profileBackgroundManualApproval') == 0) ? '1' : '0';
+
+        if (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists( array('profile_id', 'username') ))
+        {
+            $iProfileId = $this->httpRequest->get('profile_id');
+            $sUsername = $this->httpRequest->get('username');
+        }
+        else
+        {
+            $iProfileId = $this->session->get('member_id');
+            $sUsername = $this->session->get('member_username');
+        }
+
+        $bWallpaper = (new UserCore)->setBackground($iProfileId, $sUsername, $_FILES['wallpaper']['tmp_name'], $iApproved);
 
         if (!$bWallpaper)
         {
