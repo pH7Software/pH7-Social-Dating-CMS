@@ -25,7 +25,7 @@ $sDomain = ($_SERVER['SERVER_PORT'] != '80') ?  $_SERVER['SERVER_NAME'] . ':' . 
 
 //------------ URL ----------------//
 if(!defined('PH7_PROT')) define('PH7_PROT', $sHttp);
-define('PH7_URL_INSTALL', dirname(PH7_PROT . $sDomain . $_SERVER['PHP_SELF']) . PH7_DS); // INSTALL URL
+define('PH7_URL_INSTALL', dirname(PH7_PROT . $sDomain . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES)) . PH7_DS); // INSTALL URL
 if(!defined('PH7_URL_ROOT')) define('PH7_URL_ROOT', dirname(PH7_URL_INSTALL) . PH7_DS); // ROOT URL
 
 //----------- PATH -----------------//

@@ -42,7 +42,7 @@ defined('PH7') or exit('Restricted access');
                $sType = 'Unknown error';
              break;
          }
-         return '<strong>' . $sType . '</strong> : [' . $this->code . '] ' . htmlspecialchars($this->message) . '<br /><strong>' . $this->file . '</strong> to line <strong>' . $this->line . '</strong>';
+         return '<strong>' . $sType . '</strong> : [' . $this->code . '] ' . htmlspecialchars($this->message, ENT_QUOTES) . '<br /><strong>' . $this->file . '</strong> to line <strong>' . $this->line . '</strong>';
      }
 
  }

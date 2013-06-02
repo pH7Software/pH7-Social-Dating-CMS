@@ -29,7 +29,7 @@ $sDomain = ($_SERVER['SERVER_PORT'] != '80') ?  $_SERVER['SERVER_NAME'] . ':' . 
 $sDomain_cookie = '.' . str_replace('www.', '', $sDomain);
 
 // Determines the current file of the application
-$sPhp_self = dirname(htmlspecialchars($_SERVER['PHP_SELF']));
+$sPhp_self = dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES));
 
 
 ################################### CONSTANTS ###################################

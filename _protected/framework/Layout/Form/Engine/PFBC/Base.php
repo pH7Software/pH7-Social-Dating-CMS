@@ -53,8 +53,9 @@ abstract class Base
     }
 
     /*This method converted special characters to entities in HTML attributes from breaking the markup.*/
-    protected function filter($str) {
-        return htmlspecialchars($str);
+    protected function filter($sText)
+    {
+        return htmlspecialchars($sText, ENT_QUOTES);
     }
 
     /*This method is used by the Form class and all Element classes to return a string of html

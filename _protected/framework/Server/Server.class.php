@@ -125,7 +125,7 @@ final class Server
     {
         if (null === $sKey) return $_SERVER;
 
-        return (!empty($_SERVER[$sKey])) ? $_SERVER[$sKey] : $sDefVal;
+        return (!empty($_SERVER[$sKey])) ? htmlspecialchars($_SERVER[$sKey], ENT_QUOTES) : $sDefVal;
     }
 
     /**

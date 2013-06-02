@@ -276,7 +276,7 @@ class Http
      */
     public function getRequestUri()
     {
-        return (new \PH7\Framework\Str\Str)->escape(Server::getVar(Server::REQUEST_URI));
+        return Server::getVar(Server::REQUEST_URI);
     }
 
     /**
