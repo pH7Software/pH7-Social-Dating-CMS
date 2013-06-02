@@ -16,7 +16,8 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if(!AdminCore::auth() && $this->registry->controller === 'AdminController') {
+        if(!AdminCore::auth() && $this->registry->controller === 'AdminController')
+        {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
             HeaderUrl::redirect(UriRoute::get('game','main','index'), $this->adminSignInMsg(), 'error');
         }
