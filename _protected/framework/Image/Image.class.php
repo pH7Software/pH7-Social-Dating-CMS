@@ -30,60 +30,66 @@ class Image
      * @param string $sFile
      * @param integer $iMaxWidth Default value 3000.
      * @param integer $iMaxHeight Default value 3000.
-     * @return void
-     * @throws \PH7\Framework\Error\CException\PH7BadMethodCallException If the image file is not found.
      */
     public function __construct($sFile, $iMaxWidth = 3000, $iMaxHeight = 3000)
     {
         $this->sFile = $sFile;
         $this->iMaxWidth = $iMaxWidth;
         $this->iMaxHeight = $iMaxHeight;
-
-        if (!is_file($this->sFile))
-            throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Image file not found: The image file \'' . $this->sFile . '\' could not be found.');
     }
 
     /**
      * @desc Image Validate.
      * @return boolean
+     * @throws \PH7\Framework\Error\CException\PH7BadMethodCallException If the image file is not found.
      */
     public function validate()
     {
-        $this->aInfo = getimagesize($this->sFile);
-
-        switch ($this->aInfo[2])
+        if (!is_file($this->sFile))
         {
-            // JPG
-            case self::JPG:
-                $this->rImage = imagecreatefromjpeg($this->sFile);
-                $this->sType = 'jpg';
-                break;
-
-            // PNG
-            case self::PNG:
-                $this->rImage = imagecreatefrompng($this->sFile);
-                $this->sType = 'png';
-                break;
-
-            // GIF
-            case self::GIF:
-                $this->rImage = imagecreatefromgif($this->sFile);
-                $this->sType = 'gif';
-                break;
-
-            // Invalid Zone
-            default:
-                return false; // File type incompatible. Please save the image in .jpg, .png or .gif
+            if (!isDebug())
+                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Image file not found: The image file \'' . $this->sFile . '\' could not be found.');
+            else
+                return false;
         }
+        else
+        {
+            $this->aInfo = getimagesize($this->sFile);
 
-        $this->iWidth = imagesx($this->rImage);
-        $this->iHeight = imagesy($this->rImage);
+            switch ($this->aInfo[2])
+            {
+                // JPG
+                case self::JPG:
+                    $this->rImage = imagecreatefromjpeg($this->sFile);
+                    $this->sType = 'jpg';
+                    break;
 
-        // Automatic resizing if the image is too large
-        if ($this->iWidth > $this->iMaxWidth OR $this->iHeight > $this->iMaxHeight)
-            $this->dynamicResize($this->iMaxWidth, $this->iMaxHeight);
+                // PNG
+                case self::PNG:
+                    $this->rImage = imagecreatefrompng($this->sFile);
+                    $this->sType = 'png';
+                    break;
 
-        return true;
+                // GIF
+                case self::GIF:
+                    $this->rImage = imagecreatefromgif($this->sFile);
+                    $this->sType = 'gif';
+                    break;
+
+                // Invalid Zone
+                default:
+                    return false; // File type incompatible. Please save the image in .jpg, .png or .gif
+            }
+
+            $this->iWidth = imagesx($this->rImage);
+            $this->iHeight = imagesy($this->rImage);
+
+            // Automatic resizing if the image is too large
+            if ($this->iWidth > $this->iMaxWidth OR $this->iHeight > $this->iMaxHeight)
+                $this->dynamicResize($this->iMaxWidth, $this->iMaxHeight);
+
+            return true;
+        }
     }
 
     /**
