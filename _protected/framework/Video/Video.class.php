@@ -29,7 +29,6 @@ class Video
      * @param array $aFile Example: $_FILES['video']
      * @return void
      * @throws \PH7\Framework\File\Exception If FFmpeg is not installed.
-     * @throws \PH7\Framework\Error\CException\PH7BadMethodCallException If the video file is not found.
      */
     public function __construct($aFile)
     {
@@ -47,9 +46,6 @@ class Video
         {
             $this->aFile = $aFile;
             $this->sType = $this->oFile->getFileExt($this->aFile['name']);
-
-            if (!is_file($this->aFile['tmp_name']))
-                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Video file not found: The video file \'' . $this->aFile['tmp_name'] . '\' could not be found.');
         }
     }
 
@@ -57,28 +53,39 @@ class Video
      * Video Validate.
      *
      * @return boolean
+     * @throws \PH7\Framework\Error\CException\PH7BadMethodCallException If the video file is not found.
      */
     public function validate()
     {
-        switch ($this->sType)
+        if (!is_file($this->aFile['tmp_name']))
         {
-            // Files supported List.
-            case 'mov':
-            case 'avi':
-            case 'flv':
-            case 'mp4':
-            case 'mpg':
-            case 'mpeg':
-            case 'wmv':
-            case 'ogg':
-            case 'ogv':
-            case 'webm':
-            case 'mkv':
-                return true;
-            break;
-
-            default:
+            if (!isDebug())
                 return false;
+            else
+                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Video file not found: The video file \'' . $this->aFile['tmp_name'] . '\' could not be found.');
+        }
+        else
+        {
+            switch ($this->sType)
+            {
+                // Files supported List.
+                case 'mov':
+                case 'avi':
+                case 'flv':
+                case 'mp4':
+                case 'mpg':
+                case 'mpeg':
+                case 'wmv':
+                case 'ogg':
+                case 'ogv':
+                case 'webm':
+                case 'mkv':
+                    return true;
+                break;
+
+                default:
+                    return false;
+            }
         }
     }
 
