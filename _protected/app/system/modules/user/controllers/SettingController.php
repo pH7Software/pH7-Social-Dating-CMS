@@ -6,12 +6,24 @@
  * @package        PH7 / App / System / Module / User / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\UriRoute;
+
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
 
 class SettingController extends Controller
 {
 
-    private $sTitle;
+    private $_sUsername, $_sFirstName, $_sSex, $_sTitle, $_iProfileId, $_bAdminLogged;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->_bAdminLogged = (AdminCore::auth() && !User::auth());
+        $this->_iProfileId = (int) ($this->_bAdminLogged && $this->httpRequest->getExists('profile_id')) ? $this->httpRequest->get('profile_id') : $this->session->get('member_id');
+        $this->_sUsername = ($this->_bAdminLogged && $this->httpRequest->getExists('username')) ? $this->httpRequest->get('username') : $this->session->get('member_username');
+        $this->_sFirstName = ($this->_bAdminLogged && $this->httpRequest->getExists('first_name')) ? $this->httpRequest->get('first_name') : $this->session->get('member_first_name');
+        $this->_sSex = ($this->_bAdminLogged && $this->httpRequest->getExists('sex')) ? $this->httpRequest->get('sex') : $this->session->get('member_sex');
+    }
 
     public function index()
     {
@@ -23,17 +35,17 @@ class SettingController extends Controller
         // Get the profile background
         $this->view->path_img_background = $this->_getWallpaper();
 
-        $this->sTitle = t('Account Settings');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->_sTitle = t('Account Settings');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h2_title = $this->_sTitle;
         $this->output();
     }
 
     public function edit()
     {
-        $this->sTitle = t('Edit Your Profile');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->_sTitle = t('Edit Your Profile');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h2_title = $this->_sTitle;
         $this->output();
     }
 
@@ -41,9 +53,9 @@ class SettingController extends Controller
     {
         $this->view->page_title = t('Photo of profile');
         $this->view->h2_title = t('Change your Avatar');
-        $this->view->username = (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('username')) ? $this->httpRequest->get('username') : $this->session->get('member_username');
-        $this->view->first_name = (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('first_name')) ? $this->httpRequest->get('first_name') : $this->session->get('member_first_name');
-        $this->view->sex = (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('sex')) ? $this->httpRequest->get('sex') : $this->session->get('member_sex');
+        $this->view->username = $this->_sUsername;
+        $this->view->first_name = $this->_sFirstName;
+        $this->view->sex = $this->_sSex;
 
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
 
@@ -55,9 +67,9 @@ class SettingController extends Controller
 
     public function design()
     {
-        $this->sTitle = t('Your Wallpaper');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->_sTitle = t('Your Wallpaper');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h2_title = $this->_sTitle;
 
         // Get the profile background
         $this->view->path_img_background = $this->_getWallpaper();
@@ -70,9 +82,9 @@ class SettingController extends Controller
 
     public function notification()
     {
-        $this->sTitle = t('Notifications');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->_sTitle = t('Notifications');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h2_title = $this->_sTitle;
         $this->output();
     }
 
@@ -81,30 +93,30 @@ class SettingController extends Controller
         // Add JS file for the 'display_status' function
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
 
-        $this->sTitle = t('Privacy Settings');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->_sTitle = t('Privacy Settings');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h2_title = $this->_sTitle;
         $this->output();
     }
 
     public function password()
     {
-        $this->sTitle = t('Change Password');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->_sTitle = t('Change Password');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h2_title = $this->_sTitle;
         $this->output();
     }
 
     public function delete()
     {
-        $this->sTitle = t('Delete Account');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->_sTitle = t('Delete Account');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h2_title = $this->_sTitle;
 
         if ($this->httpRequest->get('delete_status') == 'yesdelete')
         {
             $this->session->set('yes_delete', 1);
-            Framework\Url\HeaderUrl::redirect(UriRoute::get('user', 'setting', 'yesdelete'));
+            HeaderUrl::redirect(UriRoute::get('user', 'setting', 'yesdelete'));
         }
         elseif ($this->httpRequest->get('delete_status') == 'nodelete')
         {
@@ -126,7 +138,7 @@ class SettingController extends Controller
     public function yesDelete()
     {
         if (!$this->session->exists('yes_delete'))
-            Framework\Url\HeaderUrl::redirect(UriRoute::get('user', 'setting', 'delete'));
+            HeaderUrl::redirect(UriRoute::get('user', 'setting', 'delete'));
         else
             $this->output();
     }
@@ -134,21 +146,21 @@ class SettingController extends Controller
 
     private function _removeAvatar()
     {
-        (new UserCore)->deleteAvatar($this->session->get('member_id'), $this->session->get('member_username'));
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('user', 'account', 'avatar'), t('Your avatar has been deleted successfully!'));
+        (new UserCore)->deleteAvatar($this->_iProfileId, $this->_sUsername);
+        HeaderUrl::redirect(null, t('Your avatar has been deleted successfully!'));
     }
 
     private function _getWallpaper()
     {
-        $sBackground = (new UserModel)->getBackground($this->session->get('member_id'), 1);
-        return (!empty($sBackground)) ? PH7_URL_DATA_SYS_MOD . 'user/background/img/' . $this->session->get('member_username') . PH7_DS . $sBackground : PH7_URL_TPL .
+        $sBackground = (new UserModel)->getBackground($this->_iProfileId, 1);
+        return (!empty($sBackground)) ? PH7_URL_DATA_SYS_MOD . 'user/background/img/' . $this->_sUsername . PH7_DS . $sBackground : PH7_URL_TPL .
             PH7_TPL_NAME . PH7_DS . PH7_IMG . 'icon/none.jpg';
     }
 
     private function _removeWallpaper()
     {
-        (new UserCore)->deleteBackground($this->session->get('member_id'), $this->session->get('member_username'));
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('user','setting', 'design'), t('Your wallpaper has been deleted successfully!'));
+        (new UserCore)->deleteBackground($this->_iProfileId, $this->_sUsername);
+        HeaderUrl::redirect(null, t('Your wallpaper has been deleted successfully!'));
     }
 
 }

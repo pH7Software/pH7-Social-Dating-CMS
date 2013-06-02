@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Mvc\Router\UriRoute;
 
 class LinkCoreForm
 {
@@ -23,7 +23,7 @@ class LinkCoreForm
     */
     public static function display($sLabel, $sModule, $sController, $sAction, array $aParams)
     {
-        $sUrl = UriRoute::get($sModule, $sController, $sAction);
+        $sUrl = (!isset($sModule, $sController, $sAction)) ? (new HttpRequest)->currentUrl() : UriRoute::get($sModule, $sController, $sAction);
 
         $oForm = new \PFBC\Form('form_link');
         $oForm->configure(array('action'=>$sUrl, 'class'=>'form_link'));

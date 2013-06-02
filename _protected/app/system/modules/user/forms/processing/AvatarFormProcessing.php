@@ -17,7 +17,7 @@ class AvatarFormProcessing extends Form
     {
         parent::__construct();
 
-        $iApproved = (AdminCore::auth() || Framework\Mvc\Model\DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+        $iApproved = (AdminCore::auth() || DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
 
         if (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists( array('profile_id', 'username') ))
         {
