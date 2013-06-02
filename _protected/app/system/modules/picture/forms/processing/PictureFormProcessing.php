@@ -102,7 +102,7 @@ class PictureFormProcessing extends Form
             $iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
 
             // It creates a nice title if no title is specified.
-            $sTitle = ($this->httpRequest->postExists('title')) ? $this->httpRequest->post('title') : ucfirst(str_replace(array('-', '_'), ' ', str_replace(PH7_DOT . $oPicture1->getExt(), '', escape($_FILES['photos']['name'][$i], true))));
+            $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : $this->str->upperFirst(str_replace(array('-', '_'), ' ', str_replace(PH7_DOT . $oPicture1->getExt(), '', escape($_FILES['photos']['name'][$i], true))));
             (new PictureModel)->addPhoto($this->session->get('member_id'), $iAlbumId, $sTitle, $this->httpRequest->post('description'), $sFile1, $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $iApproved);
         }
 
