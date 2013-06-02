@@ -50,9 +50,9 @@ class EditNoteForm
             foreach ($oCategoryId as $iId)
                 $aSelectedCategories[] = $iId->categoryId;
 
-            $oForm = new \PFBC\Form('form_edit_note', 650);
+            $oForm = new \PFBC\Form('form_note', 650);
             $oForm->configure(array('action' => ''));
-            $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_note', 'form_edit_note'));
+            $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_note', 'form_note'));
             $oForm->addElement(new \PFBC\Element\Token('edit_note'));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title of article:'), 'title', array('value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
 

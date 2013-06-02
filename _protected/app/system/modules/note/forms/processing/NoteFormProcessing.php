@@ -82,9 +82,7 @@ class NoteFormProcessing extends Form
                 // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
                 // and damages the SET function SQL for entry into the database.
                 foreach($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId)
-                {
                     $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
-                }
 
                 /* Clean NoteModel Cache */
                 (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();

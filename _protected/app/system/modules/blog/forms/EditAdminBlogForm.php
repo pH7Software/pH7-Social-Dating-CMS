@@ -48,9 +48,9 @@ class EditAdminBlogForm
                 $aSelectedCategories[] = $iId->categoryId;
 
 
-            $oForm = new \PFBC\Form('form_edit_blog', 650);
+            $oForm = new \PFBC\Form('form_blog', 650);
             $oForm->configure(array('action' => ''));
-            $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_blog', 'form_edit_blog'));
+            $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_blog', 'form_blog'));
             $oForm->addElement(new \PFBC\Element\Token('edit_blog'));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title of article:'), 'title', array('value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
 

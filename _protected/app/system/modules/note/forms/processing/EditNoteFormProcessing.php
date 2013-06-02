@@ -40,7 +40,7 @@ class EditNoteFormProcessing extends Form
             }
             else
             {
-                \PFBC\Form::setError('form_edit_note', t('ID Article must be unique!'));
+                \PFBC\Form::setError('form_note', t('ID Article must be unique!'));
             }
         }
 
@@ -48,7 +48,7 @@ class EditNoteFormProcessing extends Form
         {
             if(count($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN)) > 3)
             {
-                \PFBC\Form::setError('form_edit_note', t('You can not select more than 3 categories.'));
+                \PFBC\Form::setError('form_note', t('You can not select more than 3 categories.'));
                 return; // Stop execution of the method.
             }
 
@@ -56,9 +56,8 @@ class EditNoteFormProcessing extends Form
 
             // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
             // and damages the SET function SQL for entry into the database.
-            foreach($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId) {
+            foreach($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId)
                 $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
-            }
         }
 
         // Thumbnail

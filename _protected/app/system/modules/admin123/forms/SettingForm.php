@@ -62,7 +62,7 @@ class SettingForm
 
         /********** Logo Settings **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="logotype"><h2 class="underline">' . t('Logo:') . '</h2>'));
-        $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo'));
+        $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo', array('accept' => 'image/*')));
 
         /** Disable the cache for the logo if the admin modifies **/
         (new Browser)->noCache();
