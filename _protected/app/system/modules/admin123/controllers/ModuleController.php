@@ -11,73 +11,73 @@ use PH7\Framework\File\File;
 class ModuleController extends Controller
 {
 
-    private $oModule, $sModulesDirModuleFolder, $sTitle;
+    private $_oModule, $_sModsDirModFolder, $_sTitle;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->oModule = new Module;
+        $this->_oModule = new Module;
 
         $this->view->oFile = new File;
-        $this->view->oModule = $this->oModule;
+        $this->view->oModule = $this->_oModule;
     }
 
     public function index()
     {
         if ($this->httpRequest->postExists('submit_mod_install'))
         {
-            if ($this->oModule->checkModFolder(Module::INSTALL, $this->httpRequest->post('submit_mod_install')))
+            if ($this->_oModule->checkModFolder(Module::INSTALL, $this->httpRequest->post('submit_mod_install')))
             {
-                $this->sModulesDirModuleFolder = $this->httpRequest->post('submit_mod_install'); // Module Directory Path
-                $this->install();
+                $this->_sModsDirModFolder = $this->httpRequest->post('submit_mod_install'); // Module Directory Path
+                $this->_install();
             }
         }
         elseif ($this->httpRequest->postExists('submit_mod_uninstall'))
         {
 
-            if ($this->oModule->checkModFolder(Module::UNINSTALL, $this->httpRequest->post('submit_mod_uninstall')))
+            if ($this->_oModule->checkModFolder(Module::UNINSTALL, $this->httpRequest->post('submit_mod_uninstall')))
             {
-                $this->sModulesDirModuleFolder = $this->httpRequest->post('submit_mod_uninstall'); // Module Directory Path
-                $this->unInstall();
+                $this->_sModsDirModFolder = $this->httpRequest->post('submit_mod_uninstall'); // Module Directory Path
+                $this->_unInstall();
             }
         }
         else
         {
-            $this->sTitle = t('Module Manager');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h1_title = $this->sTitle;
+            $this->_sTitle = t('Module Manager');
+            $this->view->page_title = $this->_sTitle;
+            $this->view->h1_title = $this->_sTitle;
 
             $this->output();
         }
     }
 
-    private function install()
+    private function _install()
     {
-        $this->sTitle = t('Installing Module');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->_sTitle = t('Installing Module');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h1_title = $this->_sTitle;
 
-        $this->oModule->setPath($this->sModulesDirModuleFolder);
+        $this->_oModule->setPath($this->_sModsDirModFolder);
 
-        $this->oModule->run(Module::INSTALL); // Run Install Module!
+        $this->_oModule->run(Module::INSTALL); // Run Install Module!
 
-        $this->view->content = $this->oModule->readInstruction(Module::INSTALL);
+        $this->view->content = $this->_oModule->readInstruction(Module::INSTALL);
 
         $this->manualTplInclude('install.tpl');
         $this->output();
     }
 
-    private function unInstall()
+    private function _unInstall()
     {
-        $this->sTitle = t('Uninstalling Module');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->_sTitle = t('Uninstalling Module');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h1_title = $this->_sTitle;
 
-        $this->setPath($this->sModulesDirModuleFolder);
-        $this->oModule->run(Module::UNINSTALL); // Run Uninstall Module!
+        $this->_oModule->setPath($this->_sModsDirModFolder);
+        $this->_oModule->run(Module::UNINSTALL); // Run Uninstall Module!
 
-        $this->view->content = $this->oModule->readInstruction(Module::UNINSTALL);
+        $this->view->content = $this->_oModule->readInstruction(Module::UNINSTALL);
 
         $this->manualTplInclude('uninstall.tpl');
         $this->output();
@@ -85,7 +85,7 @@ class ModuleController extends Controller
 
     public function __destruct()
     {
-        unset($this->oModule, $this->sModulesDirModuleFolder, $this->sTitle);
+        unset($this->_oModule, $this->_sModsDirModFolder, $this->_sTitle);
     }
 
 }

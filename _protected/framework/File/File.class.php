@@ -101,7 +101,7 @@ class File
      */
     public function getFile($sFile, $bIncPath = false)
     {
-        return file_get_contents($sFile, $bIncPath);
+        return @file_get_contents($sFile, $bIncPath);
     }
 
     /**
@@ -114,7 +114,7 @@ class File
      */
     public function putFile($sFile, $sContents, $iFlag = 0)
     {
-        return file_put_contents($sFile, $sContents, $iFlag);
+        return @file_put_contents($sFile, $sContents, $iFlag);
     }
 
     /**
@@ -296,6 +296,7 @@ class File
     {
         if (!file_exists($sFrom)) return false;
 
+        $bRet = false;
         $oIterator = new \RecursiveIteratorIterator($this->getDirectoryIterator($sFrom), \RecursiveIteratorIterator::SELF_FIRST);
         foreach ($oIterator as $sFromFile)
         {
@@ -303,9 +304,10 @@ class File
             {
                 $sToFile = $sTo . substr($sFromFile, strlen($sFrom));
                 $this->createDir(dirname($sToFile));
-                return copy($sFrom, $sToFile);
+                if (!$bRet = copy($sFrom, $sToFile)) break;
             }
         }
+        return $bRet;
     }
 
     /**
@@ -314,12 +316,14 @@ class File
      *
      * @param string $sFrom File or directory
      * @param string $sTo File or directory
-     * @return void
+     * @return mixed (integer | boolean) Returns the last line on success, and FALSE on failure.
      */
     public function copyMost($sFrom, $sTo)
     {
         if (file_exists($sFrom))
-            system("cp -r $sFrom $sTo");
+            return system("cp -r $sFrom $sTo");
+
+        return false;
     }
 
     /**
@@ -334,6 +338,7 @@ class File
     {
         if (!file_exists($sFrom)) return false;
 
+        $bRet = false;
         $oIterator = new \RecursiveIteratorIterator($this->getDirectoryIterator($sFrom), \RecursiveIteratorIterator::SELF_FIRST);
         foreach ($oIterator as $sFromFile)
         {
@@ -341,9 +346,10 @@ class File
             {
                 $sToFile = $sTo . substr($sFromFile, strlen($sFrom));
                 $this->createDir(dirname($sToFile));
-                return rename($sFrom, $sToFile);
+                if (!$bRet = rename($sFrom, $sToFile)) break;
             }
         }
+        return $bRet;
     }
 
     /**
@@ -352,12 +358,14 @@ class File
      *
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
-     * @return void
+     * @return mixed (integer | boolean) Returns the last line on success, and FALSE on failure.
      */
     public function renameMost($sFrom, $sTo)
     {
         if (file_exists($sFrom))
-            system("mv $sFrom $sTo");
+            return system("mv $sFrom $sTo");
+
+        return false;
     }
 
     /**

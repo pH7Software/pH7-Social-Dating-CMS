@@ -10,14 +10,14 @@
 
   {@foreach($oModule->showAvailableMods(Module::UNINSTALL) as $sFolder)@}
 
-         {{ $sModulesDirModuleFolder = $oFile->checkExtDir($sFolder) }}
+         {{ $sModsDirModFolder = $oFile->checkExtDir($sFolder) }}
 
-         {@if($oModule->checkModFolder(Module::UNINSTALL, $sModulesDirModuleFolder))@}
+         {@if($oModule->checkModFolder(Module::UNINSTALL, $sModsDirModFolder))@}
 
-             {{ $oModule->readConfig(Module::UNINSTALL, $sModulesDirModuleFolder) }}
+             {{ $oModule->readConfig(Module::UNINSTALL, $sModsDirModFolder) }}
 
              <p class="underline italic"><a href="{% $config->values['module.information']['website'] %}" title="{@lang('Website of module')@}">{% $config->values['module.information']['name'] %}</a> {@lang('version')@} {% $config->values['module.information']['version'] %} {@lang('by')@} <a href="mailto:{% $config->values['module.information']['email'] %}" title="{@lang('Contact Author')@}">{% $config->values['module.information']['author'] %}</a></p>
-             <button type="submit" class="success" name="submit_mod_uninstall" value="{% $sModulesDirModuleFolder %}" onclick="return confirm('{@lang('Are you sure you want to uninstall this module?')@}');">{@lang('Uninstall')@} {% $config->values['module.information']['name'] %}</button><br />
+             <button type="submit" class="success" name="submit_mod_uninstall" value="{% $sModsDirModFolder %}" onclick="return confirm('{@lang('Are you sure you want to uninstall this module?')@}');">{@lang('Uninstall')@} {% $config->values['module.information']['name'] %}</button><br />
 
          {@else@}
 

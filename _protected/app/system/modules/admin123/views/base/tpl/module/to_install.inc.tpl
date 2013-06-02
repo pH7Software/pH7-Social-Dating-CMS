@@ -10,14 +10,14 @@
 
   {@foreach($oModule->showAvailableMods(Module::INSTALL) as $sFolder)@}
 
-         {{ $sModulesDirModuleFolder = $oFile->checkExtDir($sFolder) }}
+         {{ $sModsDirModFolder = $oFile->checkExtDir($sFolder) }}
 
-         {@if($oModule->checkModFolder(Module::INSTALL, $sModulesDirModuleFolder))@}
+         {@if($oModule->checkModFolder(Module::INSTALL, $sModsDirModFolder))@}
 
-             {{ $oModule->readConfig(Module::INSTALL, $sModulesDirModuleFolder) }}
+             {{ $oModule->readConfig(Module::INSTALL, $sModsDirModFolder) }}
 
              <p class="underline italic"><a href="{% $config->values['module.information']['website'] %}" title="{@lang('Website of module')@}">{% $config->values['module.information']['name'] %}</a> {@lang('version')@} {% $config->values['module.information']['version'] %} {@lang('by')@} <a href="mailto:{% $config->values['module.information']['email'] %}" title="{@lang('Contact Author')@}">{% $config->values['module.information']['author'] %}</a></p>
-             <button type="submit" class="success" name="submit_mod_install" value="{% $sModulesDirModuleFolder %}" onclick="return confirm('{@lang('Are you sure to install this module?')@}');">{@lang('Install')@} {% $config->values['module.information']['name'] %}</button>
+             <button type="submit" class="success" name="submit_mod_install" value="{% $sModsDirModFolder %}" onclick="return confirm('{@lang('Are you sure to install this module?')@}');">{@lang('Install')@} {% $config->values['module.information']['name'] %}</button>
 
              <p><span class="bold">{@lang('Category:')@}</span> <span class="italic">{% $config->values['module.information']['category'] %}</span></p>
              <p><span class="bold">{@lang('Description:')@}</span> <span class="italic">{% $config->values['module.information']['description'] %}</span></p>
