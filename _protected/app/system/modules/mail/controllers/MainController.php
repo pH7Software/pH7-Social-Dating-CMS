@@ -250,9 +250,9 @@ class MainController extends Controller
         {
             if (count($this->httpRequest->post('action')) > 0)
             {
-                foreach ($this->httpRequest->post('action') as $sAction)
+                foreach ($this->httpRequest->post('action') as $iId)
                 {
-                    $iId = (int) $sAction;
+                    $iId = (int) $iId;
                     $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'trash');
                 }
                 $this->sMsg = t('Your message(s) has been moved to your Trash.');
@@ -281,9 +281,9 @@ class MainController extends Controller
         {
             if (count($this->httpRequest->post('action')) > 0)
             {
-                foreach ($this->httpRequest->post('action') as $sAction)
+                foreach ($this->httpRequest->post('action') as $iId)
                 {
-                    $iId = (int) $sAction;
+                    $iId = (int) $iId;
                     $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'restor');
                 }
                 $this->sMsg = t('Your message(s) has been moved to your Inbox.');
@@ -318,9 +318,9 @@ class MainController extends Controller
         {
             if (count($this->httpRequest->post('action')) > 0)
             {
-                foreach ($this->httpRequest->post('action') as $sAction)
+                foreach ($this->httpRequest->post('action') as $iId)
                 {
-                    $iId = (int) $sAction;
+                    $iId = (int) $iId;
                     if ($this->_bAdminLogged)
                         $this->oMailModel->adminDeleteMsg($iId);
                     else

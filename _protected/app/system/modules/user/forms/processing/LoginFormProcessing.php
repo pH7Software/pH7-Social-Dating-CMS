@@ -33,7 +33,7 @@ class LoginFormProcessing extends Form
         $iTimeDelay = (int) DbConfig::getSetting('loginUserAttemptTime');
 
 
-        if($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view))
+        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view))
         {
             \PFBC\Form::setError('form_login_user', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
@@ -41,7 +41,7 @@ class LoginFormProcessing extends Form
 
         $sLogin = $oUserModel->login($sEmail, $sPassword);
         // Check Login
-        if($sLogin === 'email_does_not_exist')
+        if ($sLogin === 'email_does_not_exist')
         {
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
 
@@ -49,11 +49,11 @@ class LoginFormProcessing extends Form
             \PFBC\Form::setError('form_login_user', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
             $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username');
         }
-        elseif($sLogin === 'password_does_not_exist')
+        elseif ($sLogin === 'password_does_not_exist')
         {
             $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password');
 
-            if($bIsLoginAttempt)
+            if ($bIsLoginAttempt)
                 $oSecurityModel->addLoginAttempt();
 
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
@@ -68,7 +68,7 @@ class LoginFormProcessing extends Form
             $iId = $oUserModel->getId($sEmail);
             $oUserData = $oUserModel->readProfile($iId);
 
-            if($this->httpRequest->postExists('remember'))
+            if ($this->httpRequest->postExists('remember'))
             {
                 // We hash again the password
                 (new Framework\Cookie\Cookie)->set(
@@ -77,7 +77,7 @@ class LoginFormProcessing extends Form
             }
 
             $oUser = new UserCore;
-            if(true !== ($mStatus = $oUser->checkAccountStatus($oUserData)))
+            if (true !== ($mStatus = $oUser->checkAccountStatus($oUserData)))
             {
                 \PFBC\Form::setError('form_login_user', $mStatus);
             }
