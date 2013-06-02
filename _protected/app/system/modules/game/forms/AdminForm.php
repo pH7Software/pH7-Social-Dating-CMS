@@ -34,13 +34,13 @@ class AdminForm
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_game', 'form_game'));
         $oForm->addElement(new \PFBC\Element\Token('game'));
-        $oForm->addElement(new \PFBC\Element\Select(t('Category Name:'), 'category_id', $aCategoriesName, array('required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Category Name:'), 'category_id', $aCategoriesName, array('required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Name of the Game:'), 'name', array('pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Title of the Game:'), 'title', array('validation' => new \PFBC\Validation\Str(2,120), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Description:'), 'description', array('validation' => new \PFBC\Validation\Str(2,255), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords:'), 'keywords', array('validation' => new \PFBC\Validation\Str(2,255), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\File(t('Thumbnail of the Game:'), 'thumb', array('required' => 1)));
-        $oForm->addElement(new \PFBC\Element\File(t('File of the Game:'), 'file', array('accept'=>'application/x-shockwave-flash', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\File(t('Thumbnail of the Game:'), 'thumb', array('accept' => 'image/*', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\File(t('File of the Game:'), 'file', array('accept' => 'application/x-shockwave-flash', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

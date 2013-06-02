@@ -24,7 +24,7 @@ class Blog
             $oImage = new Framework\Image\Image($_FILES['thumb']['tmp_name']);
             if (!$oImage->validate())
             {
-                \PFBC\Form::setError('form_edit_blog', Form::wrongImgFileTypeMsg());
+                \PFBC\Form::setError('form_blog', Form::wrongImgFileTypeMsg());
             }
             else
             {
