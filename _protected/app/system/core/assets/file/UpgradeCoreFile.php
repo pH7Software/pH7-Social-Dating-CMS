@@ -111,7 +111,7 @@ class UpgradeCore
 
                               // Introduction file
                               $this->_sHtml .= '<p class="bold underline">' . t('Introductory instruction:') . '</p>';
-                              $this->_sHtml .= $this->_readInstruction(self::INST_INTRO_FILE);
+                              $this->_sHtml .= $this->_readInstruction(static::INST_INTRO_FILE);
                         }
                         else
                         {
@@ -177,12 +177,12 @@ class UpgradeCore
                                 }
                                 else
                                 {
-                                    $this->_sHtml .= '<p>' . t('Please delete the file upgrade using an FTP client or SSH.') . '</p>';
+                                    $this->_sHtml .= '<p>' . t('Please delete the upgrade file using an FTP client or SSH.') . '</p>';
                                 }
 
                                 // Conclusion file
                                 $this->_sHtml .= '<p class="bold underline">' . t('Conclusion of Instruction:') . '</p>';
-                                $this->_sHtml .= $this->_readInstruction(self::INST_CONCL_FILE);
+                                $this->_sHtml .= $this->_readInstruction(static::INST_CONCL_FILE);
                             }
                         }
 
@@ -204,18 +204,24 @@ class UpgradeCore
 
     private function _file()
     {
-        $sPathPublicDir = PH7_PATH_REPOSITORY . self::DIR . $this->_sUpgradesDirUpgradeFolder . self::FILE_DIR . self::PUBLIC_DIR;
+        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . static::PUBLIC_DIR;
         if(is_dir($sPathPublicDir))
-            $this->_oFile->copyMost($sPathPublicDir, PH7_PATH_ROOT);
+        {
+            $this->_oFile->renameMost($sPathPublicDir, PH7_PATH_ROOT);
+            $this->_oFile->chmod(PH7_PATH_ROOT, 0777);
+        }
 
-        $sPathProtectedDir = PH7_PATH_REPOSITORY . self::DIR . $this->_sUpgradesDirUpgradeFolder . self::FILE_DIR . self::PROTECTED_DIR;
+        $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . static::PROTECTED_DIR;
         if(is_dir($sPathProtectedDir))
-            $this->_oFile->copyMost($sPathProtectedDir, PH7_PATH_PROTECTED);
+        {
+            $this->_oFile->renameMost($sPathProtectedDir, PH7_PATH_PROTECTED);
+            $this->_oFile->chmod(PH7_PATH_PROTECTED, 0777);
+        }
     }
 
     private function _sql()
     {
-       $sPath = PH7_PATH_REPOSITORY . self::DIR . $this->_sUpgradesDirUpgradeFolder . self::SQL_DIR . self::SQL_FILE;
+       $sPath = PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::SQL_DIR . static::SQL_FILE;
 
        if(is_file($sPath) && filesize($sPath) > 12)
        {
@@ -261,7 +267,7 @@ class UpgradeCore
      */
     private function _isErr()
     {
-        return (empty($this->_aErrors)) ? false : true;
+        return (empty($this->_aErrors));
     }
 
     /**
@@ -317,8 +323,8 @@ class UpgradeCore
      */
     private function _checkUpgradeFolder($sFolder)
     {
-        $sFullPath = PH7_PATH_REPOSITORY . self::DIR . $sFolder;
-        return (!preg_match('#^\d{1,2}\.\d{1,2}\.\d{1,2}\-\d{1,2}\.\d{1,2}\.\d{1,2}/?$#', $sFolder) || !is_file($sFullPath . self::INFO_DIR . self::CONFIG_FILE)) ? false : true;
+        $sFullPath = PH7_PATH_REPOSITORY . static::DIR . $sFolder;
+        return (!preg_match('#^\d{1,2}\.\d{1,2}\.\d{1,2}\-\d{1,2}\.\d{1,2}\.\d{1,2}/?$#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . static::CONFIG_FILE));
     }
 
     /**
@@ -328,7 +334,7 @@ class UpgradeCore
      */
     private function _readUpgrades()
     {
-        return $this->_oFile->readDirs(PH7_PATH_REPOSITORY . self::DIR);
+        return $this->_oFile->readDirs(PH7_PATH_REPOSITORY . static::DIR);
     }
 
     /**
@@ -338,7 +344,7 @@ class UpgradeCore
      */
     private function _removeUpgradeDir()
     {
-        return $this->_oFile->deleteDir(PH7_PATH_REPOSITORY . self::DIR . $this->_sUpgradesDirUpgradeFolder);
+        return $this->_oFile->deleteDir(PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder);
     }
 
     private function _showAvailableUpgrades()
@@ -383,7 +389,7 @@ class UpgradeCore
      */
     private function _readConfig()
     {
-        return $this->_oConfig->load(PH7_PATH_REPOSITORY . self::DIR . $this->_sUpgradesDirUpgradeFolder . self::INFO_DIR . self::CONFIG_FILE);
+        return $this->_oConfig->load(PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . static::CONFIG_FILE);
     }
 
     /**
@@ -394,7 +400,7 @@ class UpgradeCore
      */
     private function _readInstruction($sInstructionFile)
     {
-        $mInstruction = (F\Import::file(PH7_PATH_REPOSITORY . self::DIR . $this->_sUpgradesDirUpgradeFolder . self::INFO_DIR . $sInstructionFile));
+        $mInstruction = (F\Import::file(PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . $sInstructionFile));
         return (!$mInstruction) ? '<p class="error">' . t('Instruction file not found!') . '</p>' : $mInstruction;
     }
 

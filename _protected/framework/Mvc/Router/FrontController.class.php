@@ -354,8 +354,8 @@ final class FrontController
             define('PH7_LANG_NAME', (new Lang)->setDefaultLang(PH7_PREF_LANG)->getLang());
 
         /*** Get the ISO language code ***/
-        define('PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2));
         define('PH7_DEFAULT_LANG_CODE', substr(PH7_DEFAULT_LANG, 0, 2));
+        define('PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2));
 
         if (!defined('PH7_ENCODING'))
             define('PH7_ENCODING', $this->oConfig->values['language']['charset']);
