@@ -4,21 +4,12 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-function cache(sType, sCSRFToken)
+function report(sType, iReportId, sCSRFToken)
 {
-    $.post(pH7Url.base + pH7Url.admin_mod + 'asset/ajax/Cache', {type : sType, security_token : sCSRFToken}, function(oResponseData) {
-      (oResponseData.status == 1) ? $('.msg').addClass('alert-message success') : $('.msg').addClass('alert-message error');
-      $('.msg').text(oResponseData.txt).fadeOut(1000);
-      window.location.reload();
-    }, 'json');
-}
-
-function ads(sType, iAdsId, sCSRFToken)
-{
-    $.post(pH7Url.base + pH7Url.admin_mod + 'asset/ajax/Ads', {type : sType, adsId : iAdsId, security_token : sCSRFToken}, function(oResponseData) {
+    $.post(pH7Url.base + 'report/asset/ajax/Report', {type : sType, reportId : iReportId, security_token : sCSRFToken}, function(oResponseData) {
         if(oResponseData.status == 1) {
             $('.msg').addClass('alert-message success');
-            $('#ads_' +  iAdsId).hide("slow");
+            $('#report_' +  iReportId).hide("slow");
         } else {
             $('.msg').addClass('alert-message error');
         }
