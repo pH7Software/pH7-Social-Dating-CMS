@@ -17,7 +17,7 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
 
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM'.Db::prefix('Report').'WHERE reporterId=:reporterId AND spammerId=:spammerId AND url=:url AND contentType=:type');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM'.Db::prefix('Report').'WHERE reporterId = :reporterId AND spammerId = :spammerId AND url = :url AND contentType = :type');
         $rStmt->bindValue(':reporterId', $aData['reporter_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':spammerId', $aData['spammer_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':url', $aData['url'], \PDO::PARAM_STR);
@@ -58,7 +58,7 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
 
     public function delete($iReportId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Report') . 'WHERE reportId=:reportId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Report') . 'WHERE reportId = :reportId LIMIT 1');
         $rStmt->bindValue(':reportId', $iReportId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
