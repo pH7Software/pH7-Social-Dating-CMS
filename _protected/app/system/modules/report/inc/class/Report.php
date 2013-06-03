@@ -56,18 +56,21 @@ class Report
         {
             if (DbConfig::getSetting('sendReportMail'))
             {
+                $oUser = new UserCore;
                 $oUserModel = new UserCoreModel;
+                $sReporterUsername = $oUserModel->getUsername($this->_iReporterId);
+                $sSpammerUsername = $oUserModel->getUsername($this->_iSpammerId);
                 $sDate = (new CDateTime)->get($this->_sDate)->dateTime();
 
                 $this->_oView->content =
-                t('Reporter:') . ' <b><a href="' . PH7_URL_ROOT . $oUserModel->getUsername($this->_iReporterId) . PH7_PAGE_EXT . '">' . $oUserModel->getUsername($this->_iReporterId) . '</a></b><br /><br /> ' .
-                t('Spammer:') . ' <b><a href="' . PH7_URL_ROOT . $oUserModel->getUsername($this->_iSpammerId) . PH7_PAGE_EXT . '">' . $oUserModel->getUsername($this->_iSpammerId) . '</a></b><br /><br /> ' .
+                t('Reporter:') . ' <b><a href="' . $oUser->getProfileLink($sReporterUsername) . '">' . $sReporterUsername . '</a></b><br /><br /> ' .
+                t('Spammer:') . ' <b><a href="' . $oUser->getProfileLink($sSpammerUsername) . '">' . $sSpammerUsername . '</a></b><br /><br /> ' .
                 t('Contant Type:') . ' <b>' . $this->_sType . '</b><br /><br /> ' .
                 t('URL:') . ' <b>' . $this->_sUrl . '</b><br /><br /> ' .
                 t('Description of report:') . ' <b>' . $this->_sDesc . '</b><br /><br /> '.
                 t('Date:') . ' <b>' . $sDate . '</b><br /><br />';
 
-                unset($oUserModel, $sDate);
+                unset($oUser, $oUserModel);
 
                 $sMessageHtml = $this->_oView->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/report/abuse.tpl', DbConfig::getSetting('adminEmail'));
 
