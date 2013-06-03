@@ -25,7 +25,7 @@ class ReportFormProcessing extends Form
             'date' => $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         ];
 
-        $mReport = (new ReportCore($aData))->add()->get();
+        $mReport = (new Report($aData))->add()->get();
 
         unset($aData);
 

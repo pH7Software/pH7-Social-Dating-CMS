@@ -207,7 +207,7 @@
               <ul>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{@lang('Browse Users')@}">{@lang('Browse')@}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','search') }}" title="{@lang('Search a Users')@}">{@lang('Search')@}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'report','index') }}" title="{@lang('Report')@}">{@lang('Report')@}</a></li>
+                <li><a href="{{ $design->url('report','admin','index') }}" title="{@lang('Report')@}">{@lang('Report')@}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','add') }}" title="{@lang('Add User')@}">{@lang('Add User')@}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{@lang('Import Users')@}">{@lang('Import Users')@}</a></li>
                 <li><a href="{{ $design->url('field','field','all','user') }}" title="{@lang('User Fields')@}">{@lang('User Fields')@}</a>

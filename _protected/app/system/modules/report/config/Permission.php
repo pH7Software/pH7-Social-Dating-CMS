@@ -17,8 +17,16 @@ class Permission extends PermissionCore
         parent::__construct();
 
         // This module is available only to members
-        if(!UserCore::auth())
+        if(!UserCore::auth() && !AdminCore::auth())
+        {
             HeaderUrl::redirect(UriRoute::get('user', 'signup', 'step1'), t('You must register to report the abuse.'));
+        }
+
+        if(!AdminCore::auth() && $this->registry->controller === 'AdminController')
+        {
+            // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
+            HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->adminSignInMsg(), 'error');
+        }
     }
 
 }
