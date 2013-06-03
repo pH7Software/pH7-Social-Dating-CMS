@@ -27,7 +27,7 @@ class BankForm
 
         $oHR = new HttpRequest;
         $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
-        $oAff = (new AffiliateModel)->readProfile($iProfileId, 'Affiliate');
+        $oAff = (new AffiliateModel)->readProfile($iProfileId, 'Affiliates');
 
         $oForm = new \PFBC\Form('form_bank_account', 500);
         $oForm->configure(array('action'=> '' ));

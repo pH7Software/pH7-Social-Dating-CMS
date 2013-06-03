@@ -119,7 +119,7 @@ class ValidateCoreAjax
     protected function username($sValue, $sTable)
     {
         // Checks and corrects the table if it is incorrect.
-        if($sTable !== 'Members' && $sTable !== 'Affiliate' && $sTable !== 'Admins') $sTable = 'Members';
+        if($sTable !== 'Members' && $sTable !== 'Affiliates' && $sTable !== 'Admins') $sTable = 'Members';
 
         $this->_iStatus = ($this->_oValidate->username($sValue, DbConfig::getSetting('minUsernameLength'), PH7_MAX_USERNAME_LENGTH, $sTable)) ? 1 : 0;
         $this->_sMsg = ($this->_iStatus) ? t('This Username is available!') : t('Sorry, but this Username is not available.');
@@ -138,7 +138,7 @@ class ValidateCoreAjax
     {
 
         // Checks and corrects the table if it is incorrect.
-        if($sTable !== 'Members' && $sTable !== 'Affiliate' && $sTable !== 'Admins') $sTable = 'Members';
+        if($sTable !== 'Members' && $sTable !== 'Affiliates' && $sTable !== 'Admins') $sTable = 'Members';
 
         $sEmailHost = strrchr($sValue, '@');
         $bBanWholeEmail = Ban::isEmail($sValue);

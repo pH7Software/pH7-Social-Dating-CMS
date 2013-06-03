@@ -32,7 +32,7 @@ class ResendActivationCoreFormProcessing extends Form
             }
             else
             {
-                $sMod = ($sTable == 'Affiliate') ? 'affiliate' : 'user';
+                $sMod = ($sTable == 'Affiliates') ? 'affiliate' : 'user';
 
                 $sActivateLink = UriRoute::get($sMod,'account','activate') . '/' . $mHash->email . '/' . $mHash->hashValidation;
 

@@ -25,7 +25,7 @@ class AdsForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_ads', 'form_ads'));
         $oForm->addElement(new \PFBC\Element\Token('ads'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Title'), 'title', array('required' => 1, 'validation' => new \PFBC\Validation\Str(2, 40))));
-        $sText = (AdsCore::getTable() == 'AdsAffiliate') ? t('The predefined variable for the URL of an affiliate account to put in the HTML is: %0%.', '<strong>#!%affiliate_url%!#</strong>') : t('The predefined variable to the URL of your site to indicate this in the HTML is: %0%.', '<strong>#!%site_url%!#</strong>');
+        $sText = (AdsCore::getTable() == 'AdsAffiliates') ? t('The predefined variable for the URL of an affiliate account to put in the HTML is: %0%.', '<strong>#!%affiliate_url%!#</strong>') : t('The predefined variable to the URL of your site to indicate this in the HTML is: %0%.', '<strong>#!%site_url%!#</strong>');
         $oForm->addElement(new \PFBC\Element\Textarea(t('Advertisement'), 'code', array('description' => $sText, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();

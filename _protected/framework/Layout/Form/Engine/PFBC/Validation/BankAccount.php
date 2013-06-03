@@ -14,9 +14,9 @@ class BankAccount extends \PFBC\Validation
     /**
      * Constructor of class.
      *
-     * @param $sTable Default 'Affiliate'
+     * @param $sTable Default 'Affiliates'
      */
-    public function __construct($sTable = 'Affiliate')
+    public function __construct($sTable = 'Affiliates')
     {
         parent::__construct();
         $this->sTable = $sTable;

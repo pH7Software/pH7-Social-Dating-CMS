@@ -101,25 +101,25 @@ class MainController extends Controller
         //---------- Number of Logins Affiliates ----------//
 
         // All Affiliates
-        $this->view->today_login_affiliate = $oStatModel->totalLogins('Affiliate', 1);
-        $this->view->week_login_affiliate = $oStatModel->totalLogins('Affiliate', 7);
-        $this->view->month_login_affiliate = $oStatModel->totalLogins('Affiliate', 31);
-        $this->view->year_login_affiliate = $oStatModel->totalLogins('Affiliate', 365);
-        $this->view->login_affiliate = $oStatModel->totalLogins('Affiliate');
+        $this->view->today_login_affiliate = $oStatModel->totalLogins('Affiliates', 1);
+        $this->view->week_login_affiliate = $oStatModel->totalLogins('Affiliates', 7);
+        $this->view->month_login_affiliate = $oStatModel->totalLogins('Affiliates', 31);
+        $this->view->year_login_affiliate = $oStatModel->totalLogins('Affiliates', 365);
+        $this->view->login_affiliate = $oStatModel->totalLogins('Affiliates');
 
         // Men Affiliates
-        $this->view->today_login_male_affiliate = $oStatModel->totalLogins('Affiliate', 1, 'male');
-        $this->view->week_login_male_affiliate = $oStatModel->totalLogins('Affiliate', 7, 'male');
-        $this->view->month_login_male_affiliate = $oStatModel->totalLogins('Affiliate', 31, 'male');
-        $this->view->year_login_male_affiliate = $oStatModel->totalLogins('Affiliate', 365, 'male');
-        $this->view->login_male_affiliate = $oStatModel->totalLogins('Affiliate', 0, 'male');
+        $this->view->today_login_male_affiliate = $oStatModel->totalLogins('Affiliates', 1, 'male');
+        $this->view->week_login_male_affiliate = $oStatModel->totalLogins('Affiliates', 7, 'male');
+        $this->view->month_login_male_affiliate = $oStatModel->totalLogins('Affiliates', 31, 'male');
+        $this->view->year_login_male_affiliate = $oStatModel->totalLogins('Affiliates', 365, 'male');
+        $this->view->login_male_affiliate = $oStatModel->totalLogins('Affiliates', 0, 'male');
 
         // Women Affiliates
-        $this->view->today_login_female_affiliate = $oStatModel->totalLogins('Affiliate', 1, 'female');
-        $this->view->week_login_female_affiliate = $oStatModel->totalLogins('Affiliate', 7, 'female');
-        $this->view->month_login_female_affiliate = $oStatModel->totalLogins('Affiliate', 31, 'female');
-        $this->view->year_login_female_affiliate = $oStatModel->totalLogins('Affiliate', 365, 'female');
-        $this->view->login_female_affiliate = $oStatModel->totalLogins('Affiliate', 0, 'female');
+        $this->view->today_login_female_affiliate = $oStatModel->totalLogins('Affiliates', 1, 'female');
+        $this->view->week_login_female_affiliate = $oStatModel->totalLogins('Affiliates', 7, 'female');
+        $this->view->month_login_female_affiliate = $oStatModel->totalLogins('Affiliates', 31, 'female');
+        $this->view->year_login_female_affiliate = $oStatModel->totalLogins('Affiliates', 365, 'female');
+        $this->view->login_female_affiliate = $oStatModel->totalLogins('Affiliates', 0, 'female');
 
 
         //---------- Number of Logins Admins ----------//

@@ -105,9 +105,9 @@ DELIMITER ;
 */
 
 
-INSERT INTO pH7_Affiliate (email, username, password, firstName, lastName, bankAccount, birthDate, sex, ip, lastActivity, joinDate)
+INSERT INTO pH7_Affiliates (email, username, password, firstName, lastName, bankAccount, birthDate, sex, ip, lastActivity, joinDate)
 VALUES ('aff@affiliate.cow', 'aff1', @sPassword, 'Matthew', 'Rayen', 'bank_account@demo.cow', '1986-10-13', 'male', '127.0.0.1', @sCurrentDate, @sCurrentDate);
 SET @iProfileId = LAST_INSERT_ID();
 
-INSERT INTO pH7_AffiliateInfo (profileId, description, website, city, state, zipCode, country) VALUES
+INSERT INTO pH7_AffiliatesInfo (profileId, description, website, city, state, zipCode, country) VALUES
 (@iProfileId, 'My Website is very nice!', 'http://hizup.com', 'New York', 'NYC', '10001', 'US');

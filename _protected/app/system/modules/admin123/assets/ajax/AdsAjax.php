@@ -92,7 +92,7 @@ class AdsAjax
             /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
             (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear()
                     ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
-                    ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliate', null)->clear();
+                    ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
 
             $this->_sMsg = jsonMsg(1, t('The Advertisement we been deleted.'));
         }

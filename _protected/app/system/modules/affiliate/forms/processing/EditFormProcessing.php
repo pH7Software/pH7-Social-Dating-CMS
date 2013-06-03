@@ -19,30 +19,30 @@ class EditFormProcessing extends Form
 
         $oAffModel = new AffiliateModel;
         $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $this->httpRequest->getExists('profile_id')) ? $this->httpRequest->get('profile_id', 'int') : $this->session->get('affiliate_id');
-        $oAff = $oAffModel->readProfile($iProfileId, 'Affiliate');
+        $oAff = $oAffModel->readProfile($iProfileId, 'Affiliates');
 
         if(!$this->str->equals($this->httpRequest->post('first_name'), $oAff->firstName)) {
-            $oAffModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, 'Affiliate');
+            $oAffModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, 'Affiliates');
             $this->session->set('affiliate_first_name', $this->httpRequest->post('first_name'));
 
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Affiliate', null)->clear();
+            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Affiliates', null)->clear();
         }
 
         if(!$this->str->equals($this->httpRequest->post('last_name'), $oAff->lastName))
-            $oAffModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, 'Affiliate');
+            $oAffModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, 'Affiliates');
 
         if(!$this->str->equals($this->httpRequest->post('phone'), $oAff->phone))
-            $oAffModel->updateProfile('phone', $this->httpRequest->post('phone'), $iProfileId, 'Affiliate');
+            $oAffModel->updateProfile('phone', $this->httpRequest->post('phone'), $iProfileId, 'Affiliates');
 
         if(!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex)) {
-            $oAffModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, 'Affiliate');
+            $oAffModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, 'Affiliates');
             $this->session->set('affiliate_sex', $this->httpRequest->post('sex'));
 
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Affiliate', null)->clear();
+            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Affiliates', null)->clear();
         }
 
         if(!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate))
-            $oAffModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId, 'Affiliate');
+            $oAffModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId, 'Affiliates');
 
         // Update dynamic fields.
         $oFields = $oAffModel->getInfoFields($iProfileId);
@@ -50,15 +50,15 @@ class EditFormProcessing extends Form
         {
             $sHRParam = ($sColumn == 'description') ? HttpRequest::ONLY_XSS_CLEAN : null;
             if(!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue))
-                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'AffiliateInfo');
+                $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'AffiliatesInfo');
         }
         unset($oFields);
 
-        $oAffModel->setLastEdit($iProfileId, 'Affiliate');
+        $oAffModel->setLastEdit($iProfileId, 'Affiliates');
 
         $oAffCache = new Affiliate;
-        $oAffCache->clearReadProfileCache($iProfileId, 'Affiliate');
-        $oAffCache->clearInfoFieldCache($iProfileId, 'AffiliateInfo');
+        $oAffCache->clearReadProfileCache($iProfileId, 'Affiliates');
+        $oAffCache->clearInfoFieldCache($iProfileId, 'AffiliatesInfo');
 
         unset($oAffModel, $oAff, $oAffCache);
 

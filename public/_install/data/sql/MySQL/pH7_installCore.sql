@@ -163,7 +163,7 @@ INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSa
 INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES (1, 0, 0, 0);
 
 
-CREATE TABLE IF NOT EXISTS pH7_Affiliate (
+CREATE TABLE IF NOT EXISTS pH7_Affiliates (
   profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   username varchar(40) NOT NULL,
   firstName varchar(50) NOT NULL,
@@ -198,7 +198,7 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliate (
 
 
 -- Begin 1.0 Version
-CREATE TABLE IF NOT EXISTS pH7_AffiliateInfo (
+CREATE TABLE IF NOT EXISTS pH7_AffiliatesInfo (
   profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   middleName varchar(50) DEFAULT NULL,
   businessName varchar(100) DEFAULT NULL,
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliateInfo (
   fax varchar(100) DEFAULT NULL,
   PRIMARY KEY (profileId),
   KEY country (country),
-  FOREIGN KEY (profileId) REFERENCES pH7_Affiliate(profileId)
+  FOREIGN KEY (profileId) REFERENCES pH7_Affiliates(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
@@ -255,7 +255,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdsClicks (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS pH7_AdsAffiliate (
+CREATE TABLE IF NOT EXISTS pH7_AdsAffiliates (
   adsId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
   name varchar(40) DEFAULT NULL,
   code text,
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdsAffiliate (
   PRIMARY KEY (adsId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-INSERT INTO pH7_AdsAffiliate (adsId, name, code, active, width, height, views) VALUES
+INSERT INTO pH7_AdsAffiliates (adsId, name, code, active, width, height, views) VALUES
 (1, 'Sponsor pH7 Dating CMS 1 (728x90)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo1-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90, 0),
 (2, 'Sponsor pH7 Dating CMS 2 (728x90)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo2-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90, 0),
 (3, 'Sponsor pH7 Dating CMS 3 (468x60)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo1-468x60.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 468, 60, 0),
@@ -707,7 +707,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersAttemptsLogin (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_AffiliateAttemptsLogin (
+CREATE TABLE IF NOT EXISTS pH7_AffiliatesAttemptsLogin (
   ip varchar(20) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL
@@ -738,7 +738,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogLogin (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_AffiliateLogLogin (
+CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogLogin (
   logId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
   email varchar(200) NOT NULL DEFAULT '',
   username varchar(64) NOT NULL DEFAULT '',
@@ -750,7 +750,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliateLogLogin (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_AdminsLogSession (
+CREATE TABLE IF NOT EXISTS pH7_AdminsLogSess (
   profileId tinyint(3) unsigned DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(240) DEFAULT NULL,
@@ -772,7 +772,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogSession (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS pH7_MembersLogSession (
+CREATE TABLE IF NOT EXISTS pH7_MembersLogSess (
   profileId int(10) unsigned DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
@@ -794,7 +794,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogSession (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS pH7_AffiliateLogSession (
+CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogSess (
   profileId int(10) unsigned DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
@@ -810,7 +810,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliateLogSession (
   guest tinyint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY profileId (profileId),
-  FOREIGN KEY (profileId) REFERENCES pH7_Affiliate(profileId),
+  FOREIGN KEY (profileId) REFERENCES pH7_Affiliates(profileId),
   KEY sessionHash (sessionHash),
   KEY lastActivity (lastActivity)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

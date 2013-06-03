@@ -48,7 +48,7 @@ class Various
      *
      * @param string $Mod
      * @return mixed (string or void) Returns the table if it is correct.
-     * @throws If the table is not valid, a message is displayed with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
+     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
     public static function convertModToTable($Mod)
     {
@@ -59,7 +59,7 @@ class Various
             break;
 
             case 'affiliate':
-                $sTable = 'Affiliate';
+                $sTable = 'Affiliates';
             break;
 
             case 'newsletter':
@@ -84,7 +84,7 @@ class Various
      *
      * @param string $sTable
      * @return string The correct module name.
-     * @throws If the table is not valid, a message is displayed with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
+     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
      public static function convertTableToMod($sTable)
      {
@@ -94,7 +94,7 @@ class Various
                  $sMod = 'user';
              break;
 
-             case 'Affiliate':
+             case 'Affiliates':
                  $sMod = 'affiliate';
              break;
 
@@ -120,7 +120,7 @@ class Various
      *
      * @param string $sTable
      * @return mixed (string or void) Returns the table if it is correct.
-     * @throws If the table is not valid, a message is displayed with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
+     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
     public static function convertTableToId($sTable)
     {
@@ -181,7 +181,7 @@ class Various
      *
      * @param string $sTable
      * @return mixed (string or void) Returns the table if it is correct.
-     * @throws If the table is not valid, a message is displayed with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
+     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
     public static function checkTable($sTable)
     {
@@ -213,16 +213,16 @@ class Various
      *
      * @param string $sTable
      * @return mixed (string or void) Returns the table if it is correct.
-     * @throws If the table is not valid, a message is displayed with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
+     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
     public static function checkModelTable($sTable)
     {
         switch ($sTable)
         {
             case 'Members':
-            case 'Affiliate':
+            case 'Affiliates':
             case 'MembersInfo':
-            case 'AffiliateInfo':
+            case 'AffiliatesInfo':
             case 'Subscribers':
             case 'Admins':
                 return $sTable;
