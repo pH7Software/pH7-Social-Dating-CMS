@@ -285,37 +285,36 @@ class File
     }
 
     /**
-     * Copy the contents of a directory into another and
-     * checks if the file or directory exists with file_exists() function since it checks the existance of a file or directory (because, as in the Unix OS, a directory is a file).
+     * Copies files and checks if the "from file" exists.
      *
-     * @param string $sFrom File or directory
-     * @param string $sTo File or directory
-     * @return boolean Returns true if everything went well except if the file / directory from does not exist or if the copy went wrong.
+     * @param string $sFrom File.
+     * @param string $sTo File.
+     * @return boolean
      */
     public function copy($sFrom, $sTo)
     {
-        if (!file_exists($sFrom)) return false;
+        if (!is_file($sFrom)) return false;
 
-        $bRet = false;
-        $oIterator = new \RecursiveIteratorIterator($this->getDirectoryIterator($sFrom), \RecursiveIteratorIterator::SELF_FIRST);
-        foreach ($oIterator as $sFromFile)
-        {
-            if ($sFromFile->isFile())
-            {
-                $sToFile = $sTo . substr($sFromFile, strlen($sFrom));
-                $this->createDir(dirname($sToFile));
-                if (!$bRet = copy($sFrom, $sToFile)) break;
-            }
-        }
-        return $bRet;
+        return @copy($sFrom, $sTo);
     }
 
     /**
-     * Copy a file or directory with the Unix cp command and
-     * checks if the file or directory exists with file_exists() function since it checks the existance of a file or directory (because, as in the Unix OS, a directory is a file).
+     * Copy the contents of a directory into another.
      *
-     * @param string $sFrom File or directory
-     * @param string $sTo File or directory
+     * @param string $sFrom Old directory.
+     * @param string $sTo New directory.
+     * @return boolean Returns true if everything went well except if the file / directory from does not exist or if the copy went wrong.
+     */
+    public function copyDir($sFrom, $sTo)
+    {
+        return $this->_recursiveDirIterator($sFrom, $sTo, 'copy');
+    }
+
+    /**
+     * Copy a file or directory with the Unix cp command.
+     *
+     * @param string $sFrom File or directory.
+     * @param string $sTo File or directory.
      * @return mixed (integer | boolean) Returns the last line on success, and FALSE on failure.
      */
     public function copyMost($sFrom, $sTo)
@@ -327,34 +326,34 @@ class File
     }
 
     /**
-     * Renames the contents of a directory into another and
-     * checks if the file or directory exists with file_exists() function since it checks the existance of a file or directory (because, as in the Unix OS, a directory is a file).
+     * Renames a file or directory and checks if the "from file" or directory exists with file_exists() function
+     * since it checks the existance of a file or directory (because, as in the Unix OS, a directory is a file).
      *
-     * @param string $sFrom File or directory
-     * @param string $sTo File or directory
-     * @return boolean Returns true if everything went well except if the file / directory from does not exist or if the copy went wrong.
+     * @param string $sFrom File or directory.
+     * @param string $sTo File or directory.
+     * @return boolean
      */
     public function rename($sFrom, $sTo)
     {
         if (!file_exists($sFrom)) return false;
 
-        $bRet = false;
-        $oIterator = new \RecursiveIteratorIterator($this->getDirectoryIterator($sFrom), \RecursiveIteratorIterator::SELF_FIRST);
-        foreach ($oIterator as $sFromFile)
-        {
-            if ($sFromFile->isFile())
-            {
-                $sToFile = $sTo . substr($sFromFile, strlen($sFrom));
-                $this->createDir(dirname($sToFile));
-                if (!$bRet = rename($sFrom, $sToFile)) break;
-            }
-        }
-        return $bRet;
+        return @rename($sFrom, $sTo);
     }
 
     /**
-     * Renames a file or directory with the Unix mv command and
-     * checks if the file or directory exists with file_exists() function since it checks the existance of a file or directory (because, as in the Unix OS, a directory is a file).
+     * Renames the contents of a directory into another.
+     *
+     * @param string $sFrom Old directory.
+     * @param string $sTo New directory.
+     * @return boolean Returns true if everything went well except if the file / directory from does not exist or if the copy went wrong.
+     */
+    public function renameDir($sFrom, $sTo)
+    {
+        return $this->_recursiveDirIterator($sFrom, $sTo, 'rename');
+    }
+
+    /**
+     * Renames a file or directory with the Unix mv command.
      *
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
@@ -403,7 +402,7 @@ class File
      */
     public function remove($sDir)
     {
-        $oIterator = new \RecursiveIteratorIterator($this->getDirectoryIterator($sDir), \RecursiveIteratorIterator::CHILD_FIRST);
+        $oIterator = new \RecursiveIteratorIterator($this->getDirIterator($sDir), \RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($oIterator as $sPath) ($sPath->isFile()) ? unlink($sPath) : @rmdir($sPath);
         @rmdir($sDir);
     }
@@ -713,9 +712,40 @@ class File
      * @param string $sPath
      * @return string The directory.
      */
-    public function getDirectoryIterator($sPath)
+    public function getDirIterator($sPath)
     {
         return (new \RecursiveDirectoryIterator($sPath));
+    }
+
+    /**
+     * Recursive Directory Iterator.
+     *
+     * @access private
+     * @param string $sFuncName The function name. Choose between 'copy' and 'rename'.
+     * @param string $sFrom Directory.
+     * @param string $sTo Directory.
+     * @return boolean
+     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the type is bad.
+     */
+    private function _recursiveDirIterator($sFrom, $sTo, $sFuncName)
+    {
+        if ($sFuncName !== 'copy' && $sFuncName !== 'rename')
+            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Bad function name: \'' . $sFuncName . '\'');
+
+        if (!is_dir($sFrom)) return false;
+
+        $bRet = false;
+        $oIterator = new \RecursiveIteratorIterator($this->getDirIterator($sFrom), \RecursiveIteratorIterator::SELF_FIRST);
+        foreach ($oIterator as $sFromFile)
+        {
+            $sDest = $sTo . PH7_DS . $oIterator->getSubPathName();
+
+            if ($sFromFile->isDir())
+                $this->createDir($sDest);
+            else
+                if (!$bRet = $this->$sFuncName($sFromFile, $sDest)) break;
+        }
+        return $bRet;
     }
 
 }
