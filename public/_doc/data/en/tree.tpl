@@ -1,4 +1,4 @@
-<!-- Last Update: 05/31/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 06/02/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -154,7 +154,6 @@
 |   |       |   |   |-- PermissionCore.php
 |   |       |   |   |-- PictureCore.php
 |   |       |   |   |-- RegistrationCore.php
-|   |       |   |   |-- ReportCore.php
 |   |       |   |   |-- Security.php
 |   |       |   |   |-- UserCore.php
 |   |       |   |   `-- VideoCore.php
@@ -195,7 +194,6 @@
 |   |       |       |-- NoteCoreModel.php
 |   |       |       |-- PictureCoreModel.php
 |   |       |       |-- RatingCoreModel.php
-|   |       |       |-- ReportCoreModel.php
 |   |       |       |-- SearchCoreModel.php
 |   |       |       |-- StatisticCoreModel.php
 |   |       |       |-- UpgradeCoreModel.php
@@ -246,19 +244,18 @@
 |   |           |   |   `-- ajax
 |   |           |   |       |-- AdsAjax.php
 |   |           |   |       |-- CacheAjax.php
-|   |           |   |       |-- fileManager
-|   |           |   |       |   |-- Changelog
-|   |           |   |       |   |-- elFinder.class.php
-|   |           |   |       |   |-- elFinderConnector.class.php
-|   |           |   |       |   |-- elFinderVolumeDriver.class.php
-|   |           |   |       |   |-- elFinderVolumeLocalFileSystem.class.php
-|   |           |   |       |   |-- elFinderVolumeMySQL.class.php
-|   |           |   |       |   |-- mime.types
-|   |           |   |       |   |-- MySQLStorage.sql
-|   |           |   |       |   |-- protectedConnectorAjax.php
-|   |           |   |       |   |-- publicConnectorAjax.php
-|   |           |   |       |   `-- README.txt
-|   |           |   |       `-- ReportAjax.php
+|   |           |   |       `-- fileManager
+|   |           |   |           |-- Changelog
+|   |           |   |           |-- elFinder.class.php
+|   |           |   |           |-- elFinderConnector.class.php
+|   |           |   |           |-- elFinderVolumeDriver.class.php
+|   |           |   |           |-- elFinderVolumeLocalFileSystem.class.php
+|   |           |   |           |-- elFinderVolumeMySQL.class.php
+|   |           |   |           |-- mime.types
+|   |           |   |           |-- MySQLStorage.sql
+|   |           |   |           |-- protectedConnectorAjax.php
+|   |           |   |           |-- publicConnectorAjax.php
+|   |           |   |           `-- README.txt
 |   |           |   |-- config
 |   |           |   |   |-- config.ini
 |   |           |   |   `-- Permission.php
@@ -270,7 +267,6 @@
 |   |           |   |   |-- MainController.php
 |   |           |   |   |-- ModeratorController.php
 |   |           |   |   |-- ModuleController.php
-|   |           |   |   |-- ReportController.php
 |   |           |   |   |-- SettingController.php
 |   |           |   |   |-- ToolController.php
 |   |           |   |   `-- UserController.php
@@ -360,9 +356,6 @@
 |   |           |               |   |-- to_install.inc.tpl
 |   |           |               |   |-- to_uninstall.inc.tpl
 |   |           |               |   `-- uninstall.tpl
-|   |           |               |-- report
-|   |           |               |   |-- index.tpl
-|   |           |               |   `-- report.tpl
 |   |           |               |-- setting
 |   |           |               |   |-- addads.tpl
 |   |           |               |   |-- ads.tpl
@@ -1105,25 +1098,37 @@
 |   |           |                   |-- photo.tpl
 |   |           |                   `-- search.tpl
 |   |           |-- report
+|   |           |   |-- assets
+|   |           |   |   `-- ajax
+|   |           |   |       `-- ReportAjax.php
 |   |           |   |-- config
 |   |           |   |   |-- config.ini
 |   |           |   |   `-- Permission.php
 |   |           |   |-- controllers
+|   |           |   |   |-- AdminController.php
 |   |           |   |   `-- MainController.php
 |   |           |   |-- forms
 |   |           |   |   |-- processing
 |   |           |   |   |   `-- ReportFormProcessing.php
 |   |           |   |   `-- ReportForm.php
+|   |           |   |-- inc
+|   |           |   |   `-- class
+|   |           |   |       `-- Report.php
 |   |           |   |-- lang
 |   |           |   |   |-- en_US
 |   |           |   |   |   `-- LC_MESSAGES
 |   |           |   |   `-- fr_FR
 |   |           |   |       `-- LC_MESSAGES
+|   |           |   |-- models
+|   |           |   |   `-- ReportModel.php
 |   |           |   `-- views
 |   |           |       `-- base
 |   |           |           |-- config
 |   |           |           |   `-- config.ini
 |   |           |           `-- tpl
+|   |           |               |-- admin
+|   |           |               |   |-- index.tpl
+|   |           |               |   `-- report.tpl
 |   |           |               `-- main
 |   |           |                   `-- abuse.tpl
 |   |           |-- user
@@ -4081,6 +4086,13 @@
 |       |       |           `-- img
 |       |       |               |-- big_paypal.gif
 |       |       |               `-- small_paypal.gif
+|       |       |-- report
+|       |       |   `-- themes
+|       |       |       `-- base
+|       |       |           |-- config
+|       |       |           |   `-- config.ini
+|       |       |           `-- js
+|       |       |               `-- common.js
 |       |       |-- user
 |       |       |   `-- themes
 |       |       |       `-- base
@@ -4404,4 +4416,4 @@
 
 </pre>
 
-<p>Statistics: 1326 directories, 3070 files.</p>
+<p>Statistics: 1336 directories, 3072 files.</p>
