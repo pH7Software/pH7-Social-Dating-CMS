@@ -75,7 +75,7 @@ class UpgradeCore
 
         if(!$this->_displayIfIsErr())
         {
-            // If not found error!
+            // If not found error
             if(!$this->_showAvailableUpgrades())
             {
                 $this->_sHtml .= '<h2>' . t('No upgrade path for %software_name%!') . '</h2>';
@@ -148,14 +148,14 @@ class UpgradeCore
 
                         $this->_check(); // Checking
 
+                        // If not found error
                         if(!$this->_displayIfIsErr())
-                        {   // If not found error!
-
+                        {
                             $this->_run(); // Run Upgrade!
 
+                            // If no error
                             if(!$this->_displayIfIsErr())
-                            {   // If no error!
-
+                            {
                                 /**
                                  It resets the HTML variable ($this->_sHtml) to not display versions upgrade available.
                                  The user can refresh the page to réaficher the upgrade available.
@@ -267,7 +267,7 @@ class UpgradeCore
      */
     private function _isErr()
     {
-        return (empty($this->_aErrors));
+        return (!empty($this->_aErrors));
     }
 
     /**
@@ -324,7 +324,7 @@ class UpgradeCore
     private function _checkUpgradeFolder($sFolder)
     {
         $sFullPath = PH7_PATH_REPOSITORY . static::DIR . $sFolder;
-        return (!preg_match('#^\d{1,2}\.\d{1,2}\.\d{1,2}\-\d{1,2}\.\d{1,2}\.\d{1,2}/?$#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . static::CONFIG_FILE));
+        return (!preg_match('#^\d{1,2}\.\d{1,2}\.\d{1,2}\-\d{1,2}\.\d{1,2}\.\d{1,2}/?$#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . static::CONFIG_FILE)) ? false : true;
     }
 
     /**

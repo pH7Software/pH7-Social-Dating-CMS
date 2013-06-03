@@ -99,7 +99,7 @@ class Module
         $sValue = $this->_checkParam($sSwitch);
         $sFullPath = ($sValue == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . $sFolder : PH7_PATH_MOD . $sFolder;
 
-        return (!preg_match('#^[a-z0-9\-]{2,35}/?$#i', $sFolder) || !is_file($sFullPath . static::CONFIG_FILE) || (PH7_PATH_REPOSITORY . static::DIR . $sFolder == PH7_PATH_MOD . $sFolder));
+        return (!preg_match('#^[a-z0-9\-]{2,35}/?$#i', $sFolder) || !is_file($sFullPath . static::CONFIG_FILE) || (PH7_PATH_REPOSITORY . static::DIR . $sFolder == PH7_PATH_MOD . $sFolder)) ? false : true;
     }
 
     /**
