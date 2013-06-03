@@ -19,7 +19,7 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function join(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliate') . '(email, username, password, firstName, lastName, sex, birthDate, active, ip, hashValidation, prefixSalt, suffixSalt, joinDate, lastActivity)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, active, ip, hashValidation, prefixSalt, suffixSalt, joinDate, lastActivity)
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :active, :ip, :hashValidation, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
@@ -49,7 +49,7 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function join2(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliateInfo') . '(profileId, country, city, state, zipCode) VALUES (:profileId, :country, :city, :state, :zipCode)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliatesInfo') . '(profileId, country, city, state, zipCode) VALUES (:profileId, :country, :city, :state, :zipCode)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);
         $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
@@ -66,7 +66,7 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function addRefer($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Affiliate') . 'SET refer =refer+1 WHERE profileId = :profileId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Affiliates') . 'SET refer =refer+1 WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         Db::free($rStmt);
         return $rStmt->execute();
@@ -94,7 +94,7 @@ class AffiliateModel extends AffiliateCoreModel
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE a.profileId = :looking' : ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR bankAccount LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Affiliate') . 'AS a LEFT JOIN' . Db::prefix('AffiliateInfo') . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Affiliates') . 'AS a LEFT JOIN' . Db::prefix('AffiliatesInfo') . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
@@ -130,7 +130,7 @@ class AffiliateModel extends AffiliateCoreModel
     {
         $sCurrentDate = (new Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s');
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliate') . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, ip, prefixSalt, suffixSalt, joinDate, lastActivity)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, ip, prefixSalt, suffixSalt, joinDate, lastActivity)
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :ip, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
@@ -154,7 +154,7 @@ class AffiliateModel extends AffiliateCoreModel
 
     public function setInfoFields(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliateInfo') . '(profileId, middleName, country, city, state, zipCode, phone, description, website)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliatesInfo') . '(profileId, middleName, country, city, state, zipCode, phone, description, website)
             VALUES (:profileId, :middleName, :country, :city, :state, :zipCode, :phone, :description, :website)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindValue(':middleName', $aData['middle_name'], \PDO::PARAM_STR);

@@ -154,15 +154,15 @@ class DatabaseCoreCron extends Cron
     {
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AdminsAttemptsLogin'));
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('MembersAttemptsLogin'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliateAttemptsLogin'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliatesAttemptsLogin'));
 
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AdminsLogLogin'));
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('MembersLogLogin'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliateLogLogin'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliatesLogLogin'));
 
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AdminsLogSession'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('MembersLogSession'));
-        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliateLogSession'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AdminsLogSess'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('MembersLogSess'));
+        Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('AffiliatesLogSess'));
 
         Db::getInstance()->exec('TRUNCATE TABLE' . Db::prefix('LogError'));
 

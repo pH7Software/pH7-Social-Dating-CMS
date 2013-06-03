@@ -17,7 +17,7 @@ class AdsAdminFormProcessing extends Form
     {
         parent::__construct();
 
-        (new AdsCoreModel)->add($_POST['title'], $_POST['code'], 'AdsAffiliate');
+        (new AdsCoreModel)->add($_POST['title'], $_POST['code'], 'AdsAffiliates');
 
         /* Clean Model\Design for STATIC data */
         (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear();

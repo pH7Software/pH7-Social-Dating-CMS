@@ -32,13 +32,13 @@ class LoginFormProcessing extends Form
         $iMaxAttempts = (int) DbConfig::getSetting('maxAffiliateLoginAttempts');
         $iTimeDelay = (int) DbConfig::getSetting('loginAffiliateAttemptTime');
 
-        if($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Affiliate'))
+        if($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Affiliates'))
         {
             \PFBC\Form::setError('form_login_aff', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }
 
-        $sLogin = $oAffModel->login($sEmail, $sPassword, 'Affiliate');
+        $sLogin = $oAffModel->login($sEmail, $sPassword, 'Affiliates');
         // Check Login
         if($sLogin === 'email_does_not_exist')
         {
@@ -46,14 +46,14 @@ class LoginFormProcessing extends Form
 
             $this->session->set('captcha_enabled',1); // Enable Captcha
             \PFBC\Form::setError('form_login_aff', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
-            $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username', 'Affiliate');
+            $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username', 'Affiliates');
         }
         elseif($sLogin === 'password_does_not_exist')
         {
-            $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password', 'Affiliate');
+            $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password', 'Affiliates');
 
             if($bIsLoginAttempt)
-                $oSecurityModel->addLoginAttempt('Affiliate');
+                $oSecurityModel->addLoginAttempt('Affiliates');
 
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
 
@@ -62,10 +62,10 @@ class LoginFormProcessing extends Form
         }
         else
         {
-            $oSecurityModel->clearLoginAttempts('Affiliate');
+            $oSecurityModel->clearLoginAttempts('Affiliates');
             $this->session->remove('captcha_enabled');
-            $iId = $oAffModel->getId($sEmail, null, 'Affiliate');
-            $oAffData = $oAffModel->readProfile($iId, 'Affiliate');
+            $iId = $oAffModel->getId($sEmail, null, 'Affiliates');
+            $oAffData = $oAffModel->readProfile($iId, 'Affiliates');
 
             if(true !== ($mStatus = (new AffiliateCore)->checkAccountStatus($oAffData)))
             {
@@ -91,8 +91,8 @@ class LoginFormProcessing extends Form
                 ];
 
                 $this->session->set($aSessionData);
-                $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliate');
-                $oAffModel->setLastActivity($oAffData->profileId, 'Affiliate');
+                $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
+                $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
 
                 HeaderUrl::redirect(UriRoute::get('affiliate','account','index'), t('You signup is successfully!'));
             }

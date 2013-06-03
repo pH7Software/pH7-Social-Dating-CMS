@@ -7,7 +7,10 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Mvc\Model\Engine\Db;
+use
+PH7\Framework\Mvc\Model\Engine\Util\Various,
+PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Model\Engine\Db;
 
 class FieldModel extends Framework\Mvc\Model\Engine\Model
 {
@@ -25,7 +28,7 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
      */
     public function __construct($sTable, $sName = null, $sType = null, $iLength = null, $sDefVal = null)
     {
-        $this->_sTable = Field::checkTable($sTable);
+        $this->_sTable = Various::checkModelTable($sTable);
         $this->_sName = $sName;
         $this->_sType = $sType;
         $this->_iLength = (int) $iLength;

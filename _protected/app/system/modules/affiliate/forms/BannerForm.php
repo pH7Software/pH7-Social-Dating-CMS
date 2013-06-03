@@ -20,8 +20,8 @@ class BannerForm
 
         $oPage = new Page;
         $oAdsModel = new AdsCoreModel;
-        $oPage->getTotalPages($oAdsModel->total('AdsAffiliate'), 10);
-        $oAds = $oAdsModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsByPage(), 'AdsAffiliate');
+        $oPage->getTotalPages($oAdsModel->total('AdsAffiliates'), 10);
+        $oAds = $oAdsModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsByPage(), 'AdsAffiliates');
         unset($oPage, $oAdsModel);
 
         $oSysVar = new SysVar;

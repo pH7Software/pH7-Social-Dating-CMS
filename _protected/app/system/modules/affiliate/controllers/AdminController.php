@@ -92,10 +92,10 @@ class AdminController extends Controller
         $aSessionData = [
             'login_affiliate_as' => 1,
             'affiliate_id' => $iId,
-            'affiliate_email' => $this->oAffModel->getEmail($iId, 'Affiliate'),
-            'affiliate_username' => $this->oAffModel->getUsername($iId, 'Affiliate'),
-            'affiliate_first_name' => $this->oAffModel->getFirstName($iId, 'Affiliate'),
-            'affiliate_sex' => $this->oAffModel->getSex($iId, null, 'Affiliate'),
+            'affiliate_email' => $this->oAffModel->getEmail($iId, 'Affiliates'),
+            'affiliate_username' => $this->oAffModel->getUsername($iId, 'Affiliates'),
+            'affiliate_first_name' => $this->oAffModel->getFirstName($iId, 'Affiliates'),
+            'affiliate_sex' => $this->oAffModel->getSex($iId, null, 'Affiliates'),
             'affiliate_ip' => Framework\Ip\Ip::get(),
             'affiliate_http_user_agent' => $this->browser->getUserAgent(),
             'affiliate_token' => Framework\Util\Various::genRnd()
@@ -177,9 +177,9 @@ class AdminController extends Controller
     {
         $iId = $this->httpRequest->post('id');
 
-        if ($this->oAffModel->ban($iId, 1, 'Affiliate'))
+        if ($this->oAffModel->ban($iId, 1, 'Affiliates'))
         {
-            $this->oAff->clearReadProfileCache($iId, 'Affiliate');
+            $this->oAff->clearReadProfileCache($iId, 'Affiliates');
             $this->sMsg = t('The affiliate has been banned.');
         }
         else
@@ -194,9 +194,9 @@ class AdminController extends Controller
     {
         $iId = $this->httpRequest->post('id');
 
-        if ($this->oAffModel->ban($iId, 0, 'Affiliate'))
+        if ($this->oAffModel->ban($iId, 0, 'Affiliates'))
         {
-            $this->oAff > clearReadProfileCache($iId, 'Affiliate');
+            $this->oAff->clearReadProfileCache($iId, 'Affiliates');
             $this->sMsg = t('The affiliate has been unbanned.');
         }
         else
@@ -229,8 +229,8 @@ class AdminController extends Controller
             {
                 $iId = (int) explode('_', $sAction)[0];
 
-                $this->oAffModel->ban($iId, 1, 'Affiliate');
-                $this->oAff->clearReadProfileCache($iId, 'Affiliate');
+                $this->oAffModel->ban($iId, 1, 'Affiliates');
+                $this->oAff->clearReadProfileCache($iId, 'Affiliates');
             }
             $this->sMsg = t('The affiliate(s) has been banned.');
         }
@@ -250,8 +250,8 @@ class AdminController extends Controller
             {
                 $iId = (int) explode('_', $sAction)[0];
 
-                $this->oAffModel->ban($iId, 0, 'Affiliate');
-                $this->oAff->clearReadProfileCache($iId, 'Affiliate');
+                $this->oAffModel->ban($iId, 0, 'Affiliates');
+                $this->oAff->clearReadProfileCache($iId, 'Affiliates');
             }
             $this->sMsg = t('The affiliate(s) has been unbanned.');
         }
@@ -285,7 +285,7 @@ class AdminController extends Controller
     {
         if (isset($iId, $iStatus))
         {
-            if ($oUser = $this->oAffModel->readProfile($iId, 'Affiliate'))
+            if ($oUser = $this->oAffModel->readProfile($iId, 'Affiliates'))
             {
                 if ($iStatus == 0)
                 {
@@ -296,7 +296,7 @@ class AdminController extends Controller
                 elseif ($iStatus == 1)
                 {
                     // Approve User
-                    $this->oAffModel->approve($iId, 1, 'Affiliate');
+                    $this->oAffModel->approve($iId, 1, 'Affiliates');
                     $sSubject = t('Your membership account has been activated');
                     $this->sMsg = t('Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!',
                         '<a href="' . UriRoute::get('affiliate', 'home', 'login') . '"><b>' . t('log in') .
@@ -320,7 +320,7 @@ class AdminController extends Controller
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
                     (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
 
-                    $this->oAff->clearReadProfileCache($iId, 'Affiliate');
+                    $this->oAff->clearReadProfileCache($iId, 'Affiliates');
 
                     $sOutputMsg = t('Done!');
                 }

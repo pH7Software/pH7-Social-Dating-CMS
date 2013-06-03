@@ -25,7 +25,7 @@ class ChangePasswordCoreFormProcessing extends Form
         $oPasswordModel = ($this->registry->module == PH7_ADMIN_MOD) ? new AdminModel : new UserCoreModel;
 
         $sEmail = ($this->registry->module == PH7_ADMIN_MOD ? $this->session->get('admin_email') : ($this->registry->module == 'user' ? $this->session->get('member_email') : $this->session->get('affiliate_email')));
-        $sTable = ($this->registry->module == PH7_ADMIN_MOD ? 'Admins' : ($this->registry->module == 'user' ? 'Members' : 'Affiliate'));
+        $sTable = ($this->registry->module == PH7_ADMIN_MOD ? 'Admins' : ($this->registry->module == 'user' ? 'Members' : 'Affiliates'));
         $sMod = ($this->registry->module == PH7_ADMIN_MOD ? PH7_ADMIN_MOD : ($this->registry->module == 'user' ? 'user' : 'affiliate'));
         $sAction = ($this->registry->module == 'affiliate') ? 'home' : 'main';
 

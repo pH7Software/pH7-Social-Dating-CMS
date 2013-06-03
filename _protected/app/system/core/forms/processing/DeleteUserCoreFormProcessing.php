@@ -22,7 +22,7 @@ class DeleteUserCoreFormProcessing extends Form
     {
         parent::__construct();
 
-        $sTable = ($this->registry->module == 'user') ? 'Members' : 'Affiliate';
+        $sTable = ($this->registry->module == 'user') ? 'Members' : 'Affiliates';
         $sSessPrefix = ($this->registry->module == 'user') ? 'member' : 'affiliate';
 
         if ((new UserCoreModel)->login($this->session->get($sSessPrefix.'_email'), $this->httpRequest->post('password'), $sTable) === 'password_does_not_exist')

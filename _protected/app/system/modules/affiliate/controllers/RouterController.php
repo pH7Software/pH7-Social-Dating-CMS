@@ -20,7 +20,7 @@ class RouterController extends Controller
     public function refer($sAff = null, $sAction = '')
     {
         if (!empty($sAff))
-            if ((new ExistsCoreModel)->username($sAff, 'Affiliate'))
+            if ((new ExistsCoreModel)->username($sAff, 'Affiliates'))
                 (new Affiliate)->addRefer($sAff);
 
         Framework\Url\HeaderUrl::redirect($this->registry->site_url . $sAction);

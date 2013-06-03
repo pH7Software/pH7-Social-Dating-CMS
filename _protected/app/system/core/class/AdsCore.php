@@ -25,7 +25,7 @@ class AdsCore extends Framework\Ads\Ads
     public static function getTable()
     {
         $oHttpRequest = new HttpRequest;
-        $sTable = ($oHttpRequest->getExists('ads_type') && $oHttpRequest->get('ads_type') == 'affiliate') ? 'AdsAffiliate' : 'Ads';
+        $sTable = ($oHttpRequest->getExists('ads_type') && $oHttpRequest->get('ads_type') == 'affiliate') ? 'AdsAffiliates' : 'Ads';
         unset($oHttpRequest);
         return $sTable;
     }
@@ -40,7 +40,7 @@ class AdsCore extends Framework\Ads\Ads
         switch($sTable)
         {
             case 'Ads':
-            case 'AdsAffiliate':
+            case 'AdsAffiliates':
                 return $sTable;
             break;
 
@@ -59,7 +59,7 @@ class AdsCore extends Framework\Ads\Ads
         switch($sTable)
         {
             case 'Ads':
-            case 'AdsAffiliate':
+            case 'AdsAffiliates':
                 $sId = 'adsId';
             break;
 

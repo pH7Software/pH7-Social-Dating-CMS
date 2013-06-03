@@ -32,7 +32,7 @@ class EditForm
         $oHR = new HttpRequest;
         $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
 
-        $oAff = $oAffModel->readProfile($iProfileId, 'Affiliate');
+        $oAff = $oAffModel->readProfile($iProfileId, 'Affiliates');
 
 
         // Birth date with the date format for the date picker
@@ -64,7 +64,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 
         // Generate dynamic fields
-        $oFields = $oAffModel->getInfoFields($iProfileId, 'AffiliateInfo');
+        $oFields = $oAffModel->getInfoFields($iProfileId, 'AffiliatesInfo');
         foreach ($oFields as $sColumn => $sValue)
             $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
 

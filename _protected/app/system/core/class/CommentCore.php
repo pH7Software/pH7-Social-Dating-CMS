@@ -22,7 +22,7 @@ class CommentCore
      * @param string $sTable
      * @return mixed (string or void) Returns the table if it is correct.
      * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
-     * @throws If the table is not valid, a message is displayed with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
+     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
     public static function checkTable($sTable)
     {

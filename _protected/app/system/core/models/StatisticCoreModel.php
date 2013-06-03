@@ -49,7 +49,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
      */
     public function totalAffiliates($iDay = 0, $sGenger = 'all')
     {
-        return  (new UserCoreModel)->total('Affiliate', $iDay, $sGenger);
+        return  (new UserCoreModel)->total('Affiliates', $iDay, $sGenger);
     }
 
     /**

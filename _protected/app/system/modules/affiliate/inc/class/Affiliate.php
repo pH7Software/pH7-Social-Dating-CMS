@@ -39,7 +39,7 @@ class Affiliate extends AffiliateCore
         $oCookie = new Cookie;
         $sCookieName = static::COOKIE_PREFIX . $sUsername;
 
-        $iAffId = $this->getId(null, $sUsername, 'Affiliate');
+        $iAffId = $this->getId(null, $sUsername, 'Affiliates');
 
         if(!$oCookie->exists($sCookieName)) {
             $oCookie->set($sCookieName, $iAffId, 3600*24*7); // Set a week

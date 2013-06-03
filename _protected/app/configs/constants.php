@@ -31,7 +31,7 @@ define ( 'PH7_DOT', '.' );
 
 define ( 'PH7_ADMIN_MOD', 'admin123' );
 
-/***** Pattern Username (For the 'Members', 'Affiliate' and 'Admins') *****/
+/***** Pattern Username (For the 'Members', 'Affiliates' and 'Admins') *****/
 
 define ( 'PH7_USERNAME_PATTERN', '[\w-]' );
 

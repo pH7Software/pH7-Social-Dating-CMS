@@ -60,7 +60,7 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
      * @param string $sTable Default is "Affiliate"
      * @return boolean
      */
-    public function bankAccount($sAccount, $sTable = 'Affiliate')
+    public function bankAccount($sAccount, $sTable = 'Affiliates')
     {
         return $this->_is('bankAccount', $sAccount, $sTable);
     }

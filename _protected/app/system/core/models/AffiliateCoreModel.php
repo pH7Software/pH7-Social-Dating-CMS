@@ -25,8 +25,8 @@ class AffiliateCoreModel extends AdminCoreModel
         $iProfileId = (int) $iProfileId;
 
         $oDb = Db::getInstance();
-        $oDb->exec('DELETE FROM' . Db::prefix('AffiliateInfo') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
-        $oDb->exec('DELETE FROM' . Db::prefix('Affiliate') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix('AffiliatesInfo') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
+        $oDb->exec('DELETE FROM' . Db::prefix('Affiliates') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
         unset($oDb);
     }
 

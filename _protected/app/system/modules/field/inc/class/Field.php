@@ -24,23 +24,7 @@ class Field
      */
     public static function getTable($sMod)
     {
-        return (strtolower($sMod) == 'aff' ? 'Affiliate' : 'Members') . 'Info';
-    }
-
-    /**
-     * Check table.
-     *
-     * @param string $sTable
-     * @return mixed (string or void) Returns the table if it is correct.
-     * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
-     * @throws If the table is not valid, a message is displayed with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
-     */
-    public static function checkTable($sTable)
-    {
-        if ($sTable != 'MembersInfo' && $sTable != 'AffiliateInfo')
-            Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
-        else
-            return $sTable;
+        return (strtolower($sMod) == 'aff' ? 'Affiliates' : 'Members') . 'Info';
     }
 
     /**
