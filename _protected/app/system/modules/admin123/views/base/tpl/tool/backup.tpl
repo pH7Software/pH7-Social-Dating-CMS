@@ -90,7 +90,7 @@
     <tr>
       <td class="border vs_padd">
         <label for="sql_file">{@lang('Please select a SQL file (extension ".sql" or compressed archive ".bz2")')@}
-        <input type="file" name="sql_file" id="sql_file" /></label>
+        <input type="file" name="sql_file" id="sql_file" accept=".sql,.bz2" /></label>
 
         <input type="submit" name="restore_sql_file" value="{@lang('Restore')@}" />
       </td>
