@@ -127,6 +127,17 @@ final class Autoloader
     }
 
     /**
+     * Hack to remove the 'PH7' namespace.
+     *
+     * @param string $sClass
+     * @return string
+     */
+    private function _removeNamespace($sClass)
+    {
+        return str_replace('PH7\\', '', $sClass);
+    }
+
+    /**
      * Init Autoload Class.
      *
      * @return void
@@ -140,17 +151,6 @@ final class Autoloader
         spl_autoload_register(array(__CLASS__, '_loadClass'));
         spl_autoload_register(array(__CLASS__, '_loadModel'));
         spl_autoload_register(array(__CLASS__, '_loadForm'));
-    }
-
-    /**
-     * Hack to remove the 'PH7' namespace
-     *
-     * @param string $sClass
-     * @return string
-     */
-    private function _removeNamespace($sClass)
-    {
-        return str_replace('PH7\\', '', $sClass);
     }
 
 }
