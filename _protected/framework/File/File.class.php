@@ -204,10 +204,10 @@ class File
 
     /**
      * @param string $sDir
-     * @param string $sExt Optional, retrieves only files with specific extensions. Default value is NULL.
+     * @param mixed (string | array) $mExt Optional, retrieves only files with specific extensions. Default value is NULL.
      * @return array List of files sorted alphabetically.
      */
-    public function getFileList($sDir, $sExt = null)
+    public function getFileList($sDir, $mExt = null)
     {
         $aTree = array();
         $sDir = $this->checkExtDir($sDir);
@@ -224,10 +224,15 @@ class File
                     }
                     else
                     {
-                        if (!empty($sExt))
+                        if (!empty($mExt))
                         {
-                            if (substr($sF, -strlen($sExt)) === $sExt)
-                                $aTree[] = $sDir . $sF;
+                            $aExt = (array) $mExt;
+
+                            foreach ($aExt as $sExt)
+                            {
+                                if (substr($sF, -strlen($sExt)) === $sExt)
+                                    $aTree[] = $sDir . $sF;
+                            }
                         }
                         else
                         {

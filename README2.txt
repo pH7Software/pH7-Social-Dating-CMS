@@ -9,7 +9,7 @@ Except certain files and library (JavaScript, PHP, or other) whose license and/o
 
 ==============================================
 
-This project is a Dating CMS based on pH7 framework (written specifically for this project!).
+pH7 Dating CMS is based on the pH7Core framework (written specifically for this project!).
 This software is only compatible with PHP versions 5.4 (PHP 5.5) and higher and the code is 100% object-oriented.
 We need help to continue this project, so we are waiting for you!
 We want to train a large team to work on this dating software open source project.
