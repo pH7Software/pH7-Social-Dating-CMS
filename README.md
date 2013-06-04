@@ -1,6 +1,6 @@
 # pH7 Social Dating CMS
 
-This project is a Dating CMS software based on pH7 framework (written specifically for this project!).
+pH7 Dating CMS software is based on the pH7Core framework (written specifically for this project!).
 
 This software is only compatible with PHP versions 5.4 and higher and the code is 100% object-oriented.
 
