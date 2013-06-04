@@ -10,8 +10,6 @@
 --
 --
 
--- Sample Members --
-
 SET @iTotalMembers = 12;
 SET @iGroupId = 2; -- 1 = Visitor, 9 = Pending, 2 = Regular (Free), 4 = Platinum, 5 = Silver, 6 = Gold
 SET @iUserStatus = 1; -- 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
@@ -19,30 +17,20 @@ SET @sCurrentDate = CURRENT_TIMESTAMP;
 SET @sPassword = SHA1(RAND() + UNIX_TIMESTAMP());
 
 
+-- Sample Members --
+
 INSERT INTO pH7_Members (email, username, password, firstName, lastName, birthDate, sex, matchSex, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
-
 ('demo2@demo.cow', 'garcia', @sPassword, 'Grace', 'Park', '1992-11-21', 'female', 'male', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo3@demo.cow', 'peter22', @sPassword, 'Peter', 'Backhard', '1977-12-21', 'male', '', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo4@demo.cow', 'katin', @sPassword, 'Katin', 'Layjyr', '1988-12-21', 'female', 'male', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo5@demo.cow', 'trinityI', @sPassword, 'Trinity', 'Rivic', '1988-12-21', 'female', 'male,female', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo6@demo.cow', 'JohnH', @sPassword, 'John', 'Pittsburgh', '1988-12-21', 'male', 'female', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo7@demo.cow', 'AntonR', @sPassword, 'Anton', 'Storn', '1968-12-21', 'male', '', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo8@demo.cow', 'kate62', @sPassword, 'Kate', 'Slater', '1988-12-21', 'female', 'male,female', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo9@demo.cow', 'MarkO', @sPassword, 'Mark', 'Yohir', '1978-01-21', 'male', 'male,female', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo10@demo.cow', 'Tom4', @sPassword, 'Tomy', 'Pittsburgh', '1992-12-21', 'male', 'female', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo11@demo.cow', 'rachO0O', @sPassword, 'Rachel', 'Žarko', '1968-02-10', 'female', 'male', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo12@demo.cow', 'Stive', @sPassword, 'Stive', 'Upton', '1988-12-21', 'male', 'male,female', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-
 ('demo13@demo.cow', 'EmmaROK', @sPassword, 'Emma', 'Solon', '1992-06-16', 'female', 'male,female,couple', '127.0.0.1', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate);
 SET @iProfileId = LAST_INSERT_ID();
 
@@ -105,9 +93,12 @@ DELIMITER ;
 */
 
 
-INSERT INTO pH7_Affiliates (email, username, password, firstName, lastName, bankAccount, birthDate, sex, ip, lastActivity, joinDate)
-VALUES ('aff@affiliate.cow', 'aff1', @sPassword, 'Matthew', 'Rayen', 'bank_account@demo.cow', '1986-10-13', 'male', '127.0.0.1', @sCurrentDate, @sCurrentDate);
+-- Sample Affiliates --
+
+INSERT INTO pH7_Affiliates (email, username, password, firstName, lastName, bankAccount, birthDate, sex, ip, lastActivity, joinDate) VALUES
+('aff@affiliate.cow', 'aff1', @sPassword, 'Matthew', 'Rayen', 'bank_account@demo.cow', '1986-10-13', 'male', '127.0.0.1', @sCurrentDate, @sCurrentDate);
 SET @iProfileId = LAST_INSERT_ID();
+
 
 INSERT INTO pH7_AffiliatesInfo (profileId, description, website, city, state, zipCode, country) VALUES
 (@iProfileId, 'My Website is very nice!', 'http://hizup.com', 'New York', 'NYC', '10001', 'US');
