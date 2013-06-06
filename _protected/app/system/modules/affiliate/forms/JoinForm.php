@@ -48,7 +48,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_city"></span>'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your State:'), 'state', array('id'=>'str_state', 'value'=>Geo::getState(), 'onblur'=>'CValid(this.value,this.id,2,150)', 'title'=>t('Specify your state.'), 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_state"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Postal code (zip):'), 'zip_code', array('id'=>'str_zip_code', 'value'=>Geo::getZipCode(), 'onblur'=>'CValid(this.value,this.id,2,10)', 'title'=>t('Enter your post code (Zip).'), 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your ZIP/Postal Code:'), 'zip_code', array('id'=>'str_zip_code', 'value'=>Geo::getZipCode(), 'onblur'=>'CValid(this.value,this.id,2,10)', 'title'=>t('Enter your post code (Zip).'), 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
 
         if (DbConfig::getSetting('isCaptchaAffiliateSignup'))

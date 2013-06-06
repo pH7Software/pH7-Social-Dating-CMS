@@ -81,7 +81,7 @@
       <p><span class="bold">{@lang('State:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span></p>
 
     {@elseif($key == 'zipCode')@}
-      <p><span class="bold">{@lang('Postal Code (zip):')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip='.$val) }}">{val}</a></span></p>
+      <p><span class="bold">{@lang('ZIP/Postal Code:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip='.$val) }}">{val}</a></span></p>
 
     {@elseif($key == 'website')@}
       <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{@lang('Site / Blog:')@}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>

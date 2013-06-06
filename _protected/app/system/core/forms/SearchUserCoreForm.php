@@ -65,7 +65,7 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id'=>'str_country', 'value'=>Geo::getCountryCode())));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city')));
         $oForm->addElement(new \PFBC\Element\Textbox(t('State or Province:'), 'state', array('id'=>'str_state')));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Postal code (zip):'), 'zip_code', array('id'=>'str_zip_code')));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), 'zip_code', array('id'=>'str_zip_code')));
         $oForm->addElement(new \PFBC\Element\Email(t('Email Address:'), 'mail'));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', array('1'=>'<span class="bold green2">' . t('Only Online') . '</span>')));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array('latest'=>t('Latest Members'), 'last_activity'=>t('Last Activity'),'views'=>t('Most Popular'), 'rating'=>t('Top Rated'), 'username'=>t('Username'), 'first_name'=>t('First Name'), 'last_name'=>t('Last Name'), 'mail'=>t('Email'))));

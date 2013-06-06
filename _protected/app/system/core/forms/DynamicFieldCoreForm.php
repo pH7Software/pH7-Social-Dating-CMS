@@ -53,7 +53,7 @@ class DynamicFieldCoreForm
             break;
 
             case 'zipCode':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Postal code (zip):'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,10)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));
+                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,10)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));
                 $this->addCheckErrSpan('str');
             break;
 
