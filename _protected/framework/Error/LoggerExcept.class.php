@@ -93,7 +93,7 @@ final class LoggerExcept extends Logger
 
             case 'database':
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('LogError') . 'VALUE (:line)');
-                $rStmt->execute(array(':ligne'=> $sContents));
+                $rStmt->execute(array(':ligne' => $sContents));
                 Db::free($rStmt);
             break;
 
