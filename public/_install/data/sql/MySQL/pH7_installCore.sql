@@ -696,21 +696,24 @@ CREATE TABLE IF NOT EXISTS pH7_LogError (
 CREATE TABLE IF NOT EXISTS pH7_AdminsAttemptsLogin (
   ip varchar(20) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
-  lastLogin DATETIME NOT NULL
+  lastLogin DATETIME NOT NULL,
+  UNIQUE KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersAttemptsLogin (
   ip varchar(20) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
-  lastLogin DATETIME NOT NULL
+  lastLogin DATETIME NOT NULL,
+  UNIQUE KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_AffiliatesAttemptsLogin (
   ip varchar(20) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
-  lastLogin DATETIME NOT NULL
+  lastLogin DATETIME NOT NULL,
+  UNIQUE KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
