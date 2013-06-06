@@ -37,7 +37,7 @@ class AddAffiliateForm
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country',array('id'=>'str_country', 'value'=>Geo::getCountryCode(), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city', 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('State:'), 'state', array('id'=>'str_state', 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Postal code (zip):'), 'zip_code', array('id'=>'str_zip_code', 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), 'zip_code', array('id'=>'str_zip_code', 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), 'phone', array('description'=>t('Enter full phone number with area code.'), 'required'=>1, 'validation'=>new \PFBC\Validation\Phone)));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', array('description'=>t("Description of the affiliate's site(s)."), 'validation'=>new \PFBC\Validation\Str(10,2000), 'required' =>1)));
         $oForm->addElement(new \PFBC\Element\Url(t('Website:'), 'website', array('description'=>t('Main website where the affiliate is the owner.'), 'required'=>1)));
