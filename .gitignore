@@ -16,6 +16,9 @@ _protected/data/cache/pH7tpl_compile/*
 *.log
 *.tmp
 
+## Gettext ##
+*.mo
+
 ## OS ##
 
 # Linux
