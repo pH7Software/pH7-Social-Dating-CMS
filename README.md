@@ -1,8 +1,53 @@
 # pH7 Social Dating CMS
 
-pH7 Dating CMS software is based on the pH7Core framework (written specifically for this project!).
 
-This software is only compatible with PHP versions 5.4 and higher and the code is 100% object-oriented.
+## Overview
+
+**pH7 Dating CMS** is a CMS written in **Object-Oriented** PHP with an architecture **MVC** (Model-View-Controller).
+
+It is designed with the **KISS** principle in mind, and the entire source code can be read and understood in minutes, **PDO** (PHP Data Objects) abstraction allows choice of databases and the principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (Not duplicate code).
+
+It also wants to fast, low resource-intensive, extremely powerful and very secure.
+
+In addition to being **free**, **open source** and **relatively stable**, this software comes with more than **29 native modules** and based on the **pH7Core framework** (written specifically for this project!).
+
+
+## Some Features of pH7CMS
+
+* Best Dating Features
+* Advanced Search
+* Blogs
+* Notes
+* Pages Management
+* Friends, Visit, Messages, Instant messaging, Views, Rating, Geo Map, Avatar, Wallpaper, ...
+* Custom Profile (Background profile)
+* Comments
+* Hot or Not
+* Love Calculator
+* Geolocation
+* Photo Albums
+* Videos
+* Forums
+* Chat
+* Chatroulette
+* Games
+* Webcam Shot
+* Affiliate
+* Newsletter
+* Activity Streams
+* Advanced Admin Panel
+* User's Fields Management
+* Report
+* SEO Friendly (Title, Content, Code, ...), Sitemap module, ...
+* RSS Feed
+* Facebook, Google, Twitter connect
+* Invite Friends
+* Social Bookmark
+* Anti-spam system
+* Everyone can easily contribute to this great project with our [GitHub repository](http://github.com/pH7Software/pH7-Social-Dating-CMS)
+
+
+## Help Us
 
 We need help to continue this project, so we are waiting for you!
 
@@ -43,7 +88,7 @@ Pierre-Henry Soria
 
 ## Contact
 
-Contact me at: ph7software (at) gmail.com
+Contact me at: *ph7software (at) gmail.com*
 
 
 ## License
