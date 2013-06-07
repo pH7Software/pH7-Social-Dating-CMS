@@ -15,14 +15,14 @@ namespace PH7\Framework\Video;
 defined('PH7') or exit('Restricted access');
 
 use
-PH7\Framework\File\File,
 PH7\Framework\Date\Various,
-PH7\Framework\Config\Config;
+PH7\Framework\Config\Config,
+PH7\Framework\File as F;
 
 class Video
 {
 
-    private $oFile, $sType, $sFfmpegPath, $aFile, $iWidth, $iHeight, $iMaxSize, $iQuality;
+    private $oFile, $sType, $sFfmpegPath, $aFile;
 
     /**
      * @constructor
@@ -32,15 +32,11 @@ class Video
      */
     public function __construct($aFile)
     {
-        $this->oFile = new File;
-        $this->iWidth = 480;
-        $this->iHeight = 295;
-        $this->iQuality = 100;
-        $this->iMaxSize = (int) Config::getInstance()->values['video']['upload.max_size'];
+        $this->oFile = new F\File;
         $this->sFfmpegPath = Config::getInstance()->values['video']['handle.ffmpeg_path'];
 
         if (!file_exists($this->sFfmpegPath))
-            throw new \PH7\Framework\File\Exception('FFmpeg is not installed on your server, please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini"');
+            throw new F\File\Exception('FFmpeg is not installed on your server, please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini"');
 
         if (!empty($aFile))
         {
@@ -111,18 +107,30 @@ class Video
     }
 
     /**
-     * Check Video Size.
+     * Check the video size.
      *
      * @return boolean
      */
     public function check()
     {
-        $iUploadMaxSize = ($this->iMaxSize*1024*1024);
-
-        if ($this->aFile['size'] <= $iUploadMaxSize)
+        if ($this->aFile['size'] < $this->getMaxSize())
             return true;
 
         return false;
+    }
+
+    /**
+     * Get maximum file size.
+     *
+     * @return integer Bytes.
+     */
+    public function getMaxSize()
+    {
+        $iMaxSize = F\Various::sizeToBytes(Config::getInstance()->values['video']['upload.max_size']);
+        $iUploadMaxFileSize = F\Various::sizeToBytes(ini_get('upload_max_filesize'));
+        $iPostMaxSize = F\Various::sizeToBytes(ini_get('post_max_size'));
+
+        return min($iMaxSize, $iUploadMaxFileSize, $iPostMaxSize);
     }
 
     /**
@@ -184,17 +192,13 @@ class Video
     public function __destruct()
     {
         // If it exists, delete the temporary video
-        (new File)->deleteFile($this->aFile['tmp_name']);
+        (new F\File)->deleteFile($this->aFile['tmp_name']);
 
         unset(
             $this->oFile,
             $this->sType,
             $this->sFfmpegPath,
-            $this->aFile,
-            $this->iWidth,
-            $this->iHeight,
-            $this->iMaxSize,
-            $this->iQuality
+            $this->aFile
         );
     }
 
