@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7-DatingCMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-06 09:07-0500\n"
-"PO-Revision-Date: 2013-06-06 09:07-0500\n"
+"POT-Creation-Date: 2013-06-07 14:26-0500\n"
+"PO-Revision-Date: 2013-06-07 14:26-0500\n"
 "Last-Translator: \n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language: \n"
@@ -1026,39 +1026,39 @@ msgstr ""
 msgid "Your video has been updated successfully!"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:45
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:46
 msgid "Please add a category before you add a video."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:61
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:62
 msgid "Oops, the link of the video looks bad? Check that the link is correct."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:67
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:68
 msgid "Unable to retrieve information from the video. Are you sure that the URL of the video is correct?"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:71
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:72
 msgid "Untitled"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:77
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:78
 msgid "Invalid Api Video Type! Choose from Youtube, Vimeo, Dailymotion and Metacafe."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:91
-msgid "File exceeds maximum allowed video filesize of %0% MB!"
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:92
+msgid "File exceeds maximum allowed video filesize of %0%!"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:124
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:125
 msgid "You must choose a type of video!"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:135
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:136
 msgid "Your video has been received! But it will be visible once approved by our moderators. Please do not send a new video because this is useless!"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:136
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:137
 msgid "Your video has been added successfully!"
 msgstr ""
 
@@ -4000,7 +4000,7 @@ msgstr ""
 msgid "RSS Feed %site_name%, Free Onlide Dating Site with Webcam Chat Rooms, Meet Single People with %site_name%"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/RssController.php:74
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/RssController.php:72
 msgid "Not Found RSS Feed!"
 msgstr ""
 
@@ -4012,7 +4012,7 @@ msgstr ""
 msgid "Map of Website, Free Onlide Dating Site with Webcam Chat Rooms, Meet Single People with %site_name%"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/SitemapController.php:77
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/SitemapController.php:75
 msgid "Not Found Site Map!"
 msgstr ""
 
@@ -5492,32 +5492,36 @@ msgstr ""
 msgid "Score: %0% - Votes: %1%"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/RatingDesignCore.php:52
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/RatingDesignCore.php:53
 msgid "Please register for free in order to vote."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:92
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:90
 msgid "Your browser is obsolete. Please use a browser that supports HTML5."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:95
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:93
 msgid "Play/Pause"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:96
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:94
 msgid "Big"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:97
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:95
 msgid "Normal"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:98
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/VideoDesignCore.php:96
 msgid "Small"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/CommentDesignCore.php:35
 msgid "Add a comment"
+msgstr ""
+
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/CommentDesignCore.php:39
+msgid "RSS Feed"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/AvatarDesignCore.php:40
@@ -6131,8 +6135,8 @@ msgstr ""
 msgid "Config | Fake Admin Honeypot"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.4-0.1.6/info/conclusion.php:10
-msgid "Done!<br /> Please also delete all the cache files for the changes to take effect."
+#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.4-0.1.6/info/conclusion.php:11
+msgid "Please also delete all the cache files for the changes to take effect."
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.4-0.1.6/info/introduction.php:10
@@ -6147,5 +6151,21 @@ msgstr ""
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.7-0.8.7/info/introduction.php:10
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.9.8-0.9.9/info/introduction.php:10
 msgid "Please make a backup of your site and your database before proceeding with upgrade.!"
+msgstr ""
+
+#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/conclusion.php:11
+msgid "Warning, this is not finished yet ;-)"
+msgstr ""
+
+#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/conclusion.php:13
+msgid "Edit your \"%0%\" file."
+msgstr ""
+
+#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/conclusion.php:14
+msgid "Add M after the size of the \"upload.max_size\" variable (e.g., this: \"upload.max_size = 500M\" instead of \"upload.max_size = 500\""
+msgstr ""
+
+#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/conclusion.php:15
+msgid "Good luck :-)"
 msgstr ""
 

@@ -17,7 +17,6 @@ namespace PH7;
 use
 PH7\Framework\Date\Various,
 PH7\Framework\Video\Api,
-PH7\Framework\Security\Validate\Validate,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\File\File;
 
@@ -35,7 +34,7 @@ class VideoDesignCore
      * Generates HTML contents Video.
      *
      * @param object $oData
-     * @param string $sMedia Type of the media (preview or movie). Default value is 'movie'.
+     * @param string $sMedia Type of the media ('preview' or 'movie'). Default value is 'movie'.
      * @param integer $iWidth Default 600
      * @param integer $iHeight Default 400
      * @return void
@@ -56,18 +55,18 @@ class VideoDesignCore
         }
         else
         {
-            $sDir = PH7_URL_DATA_SYS_MOD . 'video/file/' . $oData->username . PH7_DS . $oData->albumId . PH7_DS;
-            $sVidFullPath1 = $sDir . $oData->file . '.webm';
-            $sVidFullPath2 = $sDir . $oData->file . '.mp4';
+            $sDir = 'video/file/' . $oData->username . PH7_DS . $oData->albumId . PH7_DS;
+            $sVidPath1 = $sDir . $oData->file . '.webm';
+            $sVidPath2 = $sDir . $oData->file . '.mp4';
 
             // If the video is not found on the server, we show a video that shows an appropriate message.
-            if ( !(is_file($sVidFullPath1) && is_file($sVidFullPath2)) )
+            if ( !(is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath1) && is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath2)) )
             {
-                $sVidFullPath1 = PH7_URL_DATA_SYS_MOD . 'video/not_found.webm';
-                $sVidFullPath2 = PH7_URL_DATA_SYS_MOD . 'video/not_found.mp4';
+                $sVidPath1 = PH7_URL_DATA_SYS_MOD . 'video/not_found.webm';
+                $sVidPath2 = PH7_URL_DATA_SYS_MOD . 'video/not_found.mp4';
             }
 
-            if ((new Validate)->url($sDir . $oData->thumb))
+            if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $oData->thumb))
             {
                 $oFile = new File;
                 $sThumbName = $oFile->getFileWithoutExt($oData->thumb);
@@ -76,18 +75,18 @@ class VideoDesignCore
 
                 $aThumb = ['', '-1', '-2', '-3', '-4'];
                 shuffle($aThumb);
-                $sThumb = $sDir . $sThumbName . $aThumb[0] . PH7_DOT . $sThumbExt;
+                $sThumbUrl = PH7_URL_DATA_SYS_MOD . $sDir . $sThumbName . $aThumb[0] . PH7_DOT . $sThumbExt;
             }
             else
             {
-                $sThumb = PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'icon/none.jpg';
+                $sThumbUrl = PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'icon/none.jpg';
             }
 
-            $sParam = (DbConfig::getSetting('autoplayVideo')) ? 'autoplay="autoplay"' : '';
+            $sParam = ($sMedia == 'movie' && DbConfig::getSetting('autoplayVideo')) ? 'autoplay="autoplay"' : '';
             $sVideoTag = '
-            <video poster="' . $sThumb . '" width="' . $iWidth . '" height="' . $iHeight . '" controls="controls" ' . $sParam . '>
-                <source src="' . $sVidFullPath1 . '" type="video/webm" />
-                <source src="' . $sVidFullPath2 . '" type="video/mp4" />
+            <video poster="' . $sThumbUrl . '" width="' . $iWidth . '" height="' . $iHeight . '" controls="controls" ' . $sParam . '>
+                <source src="' . PH7_URL_DATA_SYS_MOD . $sVidPath1 . '" type="video/webm" />
+                <source src="' . PH7_URL_DATA_SYS_MOD . $sVidPath2 . '" type="video/mp4" />
                 ' . t('Your browser is obsolete. Please use a browser that supports HTML5.') . '
             </video>
             <div class="center">
@@ -98,7 +97,7 @@ class VideoDesignCore
             </div>';
 
             if ($sMedia == 'preview')
-                echo $sDurationTag, '<a href="#watch', $oData->videoId, '" title="', $oData->title, '" data-popup="video"><img src="', $sThumb, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>
+                echo $sDurationTag, '<a href="#watch', $oData->videoId, '" title="', $oData->title, '" data-popup="video"><img src="', $sThumbUrl, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>
                 <div class="hidden"><div id="watch', $oData->videoId, '">', $sVideoTag, '</div></div>';
             else
                 echo $sVideoTag;

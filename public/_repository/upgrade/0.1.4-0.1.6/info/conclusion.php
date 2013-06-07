@@ -7,7 +7,8 @@ $sHtml = '';
 
 /*** Begin Contents ***/
 
-$sHtml .= t('Done!<br /> Please also delete all the cache files for the changes to take effect.');
+$sHtml .= '<p>' . t('Done!') . '<br />';
+$sHtml .= t('Please also delete all the cache files for the changes to take effect.') . '</p>';
 
 /*** End Contents ***/
 

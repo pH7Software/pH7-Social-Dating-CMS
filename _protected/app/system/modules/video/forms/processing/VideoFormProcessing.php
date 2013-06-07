@@ -20,6 +20,7 @@ PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\UriRoute,
 PH7\Framework\Url\HeaderUrl,
+PH7\Framework\File as F,
 PH7\Framework\Video as V;
 
 class VideoFormProcessing extends Form
@@ -88,7 +89,7 @@ class VideoFormProcessing extends Form
             }
             elseif(!$oVideo->check())
             {
-                 \PFBC\Form::setError('form_video', t('File exceeds maximum allowed video filesize of %0% MB!', Framework\Config\Config::getInstance()->values['video']['upload.max_size']));
+                 \PFBC\Form::setError('form_video', t('File exceeds maximum allowed video filesize of %0%!', F\Various::bytesToSize($oVideo->getMaxSize())));
                  return;
             }
             else
