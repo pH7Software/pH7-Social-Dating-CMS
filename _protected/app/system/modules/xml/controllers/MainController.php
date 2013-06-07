@@ -54,7 +54,7 @@ class MainController extends Controller
         $this->view->games = $this->oDataModel->getGames();
 
         // For the Comments
-        switch($sAction)
+        switch ($sAction)
         {
             case 'comment-profile':
                 $this->view->table = 'profile';

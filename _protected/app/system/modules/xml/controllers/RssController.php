@@ -44,11 +44,8 @@ class RssController extends MainController
         $this->view->current_date = DateFormat::getRss(); // Date format for RSS feed
 
         // RSS router
-        switch($sAction)
+        switch ($sAction)
         {
-            // We disable the cache since they are dynamic pages managed by the router.
-            $this->view->setCaching(false);
-
             case 'blog':
             case 'note':
             case 'forum-topic':
@@ -61,6 +58,7 @@ class RssController extends MainController
             case 'comment-picture':
             case 'comment-video':
             case 'comment-game':
+                $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router.
                 $this->sAction = 'comment.inc';
             break;
 

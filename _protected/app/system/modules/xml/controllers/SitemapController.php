@@ -43,12 +43,9 @@ class SitemapController extends MainController
         $this->view->current_date = DateFormat::getSitemap(); // Date format for sitemap
 
         // XML router
-        if(!empty($sAction))
+        if (!empty($sAction))
         {
-            // We disable the cache since they are dynamic pages managed by the router.
-            $this->view->setCaching(false);
-
-            switch($sAction)
+            switch ($sAction)
             {
                 case 'main':
                 case 'user':
@@ -70,6 +67,7 @@ class SitemapController extends MainController
                 case 'comment-picture':
                 case 'comment-video':
                 case 'comment-game':
+                    $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router.
                     $this->sAction = 'comment.inc';
                 break;
 
