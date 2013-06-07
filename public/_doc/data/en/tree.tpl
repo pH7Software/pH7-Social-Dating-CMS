@@ -1,4 +1,4 @@
-<!-- Last Update: 06/02/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 06/07/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -1511,6 +1511,7 @@
 |   |   |   |-- Transfer
 |   |   |   |   |-- Exception.class.php
 |   |   |   |   `-- Ftp.class.php
+|   |   |   |-- Upload.class.php
 |   |   |   `-- Various.class.php
 |   |   |-- Geo
 |   |   |   |-- Ip
@@ -1968,8 +1969,9 @@
 |   |   |   `-- Various.class.php
 |   |   |-- Video
 |   |   |   |-- Api
-|   |   |   |   |-- Api.interface.php
+|   |   |   |   |-- Api.class.php
 |   |   |   |   |-- Dailymotion.class.php
+|   |   |   |   |-- IApi.interface.php
 |   |   |   |   |-- Metacafe.class.php
 |   |   |   |   |-- Vimeo.class.php
 |   |   |   |   `-- Youtube.class.php
@@ -2754,7 +2756,16 @@
 |   |       |       |-- conclusion.php
 |   |       |       |-- config.ini
 |   |       |       `-- introduction.php
-|   |       `-- 0.9.9-1.0.0
+|   |       |-- 0.9.9-1.0.0
+|   |       |   |-- data
+|   |       |   |   `-- sql
+|   |       |   |       `-- MySQL
+|   |       |   |           `-- upgrade.sql
+|   |       |   `-- info
+|   |       |       |-- conclusion.php
+|   |       |       |-- config.ini
+|   |       |       `-- introduction.php
+|   |       `-- 1.0.0-1.0.1
 |   |           |-- data
 |   |           |   `-- sql
 |   |           |       `-- MySQL
@@ -4416,4 +4427,4 @@
 
 </pre>
 
-<p>Statistics: 1336 directories, 3072 files.</p>
+<p>Statistics: 1341 directories, 3078 files.</p>
