@@ -68,7 +68,7 @@ class VideoFormProcessing extends Form
                 return;
             }
 
-            $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : ($oInfo->getTitle() ? $oInfo->getTitle() : t('Untitled')));
+            $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : ($oInfo->getTitle() ? $oInfo->getTitle() : t('Untitled'));
             $sDescription = ($this->httpRequest->postExists('description') ? $this->httpRequest->post('description') : ($oInfo->getDescription() ? $oInfo->getDescription() : ''));
             $sDuration = ($oInfo->getDuration() ? $oInfo->getDuration() : '0'); // Time in seconds
 
@@ -94,7 +94,7 @@ class VideoFormProcessing extends Form
             else
             {
                 // It creates a nice title if no title is specified.
-                $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) : $this->str->upperFirst(str_replace(array('-', '_'), ' ', str_replace(PH7_DOT . $oVideo->getExt(), '', escape($_FILES['video']['name'], true))));
+                $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : $this->str->upperFirst(str_replace(array('-', '_'), ' ', str_replace(PH7_DOT . $oVideo->getExt(), '', escape($_FILES['video']['name'], true))));
                 $sDescription = $this->httpRequest->post('description');
                 $sDuration = $oVideo->getDuration();
 

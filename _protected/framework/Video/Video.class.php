@@ -22,7 +22,7 @@ PH7\Framework\Config\Config;
 class Video
 {
 
-    private $sType, $sFfmpegPath, $aFile, $iWidth, $iHeight, $iMaxSize, $iQuality;
+    private $oFile, $sType, $sFfmpegPath, $aFile, $iWidth, $iHeight, $iMaxSize, $iQuality;
 
     /**
      * @constructor
@@ -184,7 +184,7 @@ class Video
     public function __destruct()
     {
         // If it exists, delete the temporary video
-        $this->oFile->deleteFile($this->aFile['tmp_name']);
+        (new File)->deleteFile($this->aFile['tmp_name']);
 
         unset(
             $this->oFile,
