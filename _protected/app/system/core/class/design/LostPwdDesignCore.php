@@ -27,7 +27,7 @@ class LostPwdDesignCore
      */
     public static function link($sMod)
     {
-        echo '<a rel="nofollow" href="' . UriRoute::get('lost-password','main','forgot',$sMod) . '">' . t('Forgot your password?') . '</a>';
+        echo '<a rel="nofollow" href="', UriRoute::get('lost-password','main','forgot',$sMod), '">', t('Forgot your password?'), '</a>';
     }
 
 }

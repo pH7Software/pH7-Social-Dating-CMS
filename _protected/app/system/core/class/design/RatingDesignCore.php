@@ -48,9 +48,10 @@ class RatingDesignCore
          * Redirectionne the member to the registration page if not logged.
          * For security, a check on the server side ajax is already present, but javascript code allows this purpose the visitor to enter more Easily.
          */
-        if(!UserCore::auth()) {
+        if(!UserCore::auth())
+        {
             $sUrl = Framework\Mvc\Router\UriRoute::get('user','signup','step1','?msg=' . t('Please register for free in order to vote.'), false);
-            echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'' . $sUrl . '\'});</script>';
+            echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'', $sUrl, '\'});</script>';
         }
     }
 
