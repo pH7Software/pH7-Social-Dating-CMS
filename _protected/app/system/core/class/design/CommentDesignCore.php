@@ -32,10 +32,11 @@ class CommentDesignCore
         $iCommentNumber = $oCommentModel->total($iId, $sTable);
         unset($oCommentModel);
 
-        echo '<p><a href="' . UriRoute::get('comment','comment','add',"$sTable,$iId") . '">' . t('Add a comment') . '</a>';
-        if($iCommentNumber > 0) {
+        echo '<p><a href="', UriRoute::get('comment','comment','add',"$sTable,$iId"), '">', t('Add a comment'), '</a>';
+        if($iCommentNumber > 0)
+        {
             $sCommentTxt = nt('Read Comment', 'Read the Comments', $iCommentNumber);
-            echo ' - ' . t('OR') . ' -  <a href="' . UriRoute::get('comment','comment','read',$sTable.','.$iId) . '">' . $sCommentTxt . ' (' . $iCommentNumber . ')</a> <a href="' . UriRoute::get('xml','rss','xmlrouter','comment-'.$sTable.','.$iId) . '"><img src="' . PH7_URL_STATIC . PH7_IMG . 'icon/small-feed.png" alt="RSS Feed" /></a>';
+            echo ' - ', t('OR'), ' -  <a href="', UriRoute::get('comment','comment','read',$sTable.','.$iId), '">', $sCommentTxt, ' (', $iCommentNumber, ')</a> <a href="', UriRoute::get('xml','rss','xmlrouter','comment-'.$sTable.','.$iId), '"><img src="', PH7_URL_STATIC, PH7_IMG, 'icon/small-feed.png" alt="', t('RSS Feed'), '" /></a>';
         }
            echo '</p>';
     }

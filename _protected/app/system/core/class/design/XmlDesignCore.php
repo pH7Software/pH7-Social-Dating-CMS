@@ -21,7 +21,7 @@ class XmlDesignCore
 
     public static function xslHeader()
     {
-        echo '<?xml-stylesheet type="text/xsl" href="' . UriRoute::get('xml','main','xsllayout') . '"?>
+        echo '<?xml-stylesheet type="text/xsl" href="', UriRoute::get('xml','main','xsllayout'), '"?>
         <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
     }
 
@@ -42,20 +42,20 @@ class XmlDesignCore
 
     public static function sitemapHeaderLink()
     {
-        echo '<link rel="alternate" type="application/xml" title="Sitemap" href="' . UriRoute::get('xml','sitemap','xmlrouter') . '" />';
+        echo '<link rel="alternate" type="application/xml" title="Sitemap" href="', UriRoute::get('xml','sitemap','xmlrouter'), '" />';
     }
 
     public static function rssHeaderLinks()
     {
-        echo '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Blog Posts') . '" href="' . UriRoute::get('xml','rss','xmlrouter','blog') . '" />
-        <link rel="alternate" type="application/rss+xml" title="' . t('Latest Notes') . '" href="' . UriRoute::get('xml','rss','xmlrouter','note') . '" />
-        <link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Topics') . '" href="' . UriRoute::get('xml','rss','xmlrouter','forum-topic') . '" />
-        <link rel="alternate" type="application/rss+xml" title="' . t('Latest Profile Comments') . '" href="' . UriRoute::get('xml','rss','xmlrouter','comment-profile') . '" />
-        <link rel="alternate" type="application/rss+xml" title="' . t('Latest Blog Comments') . '" href="' . UriRoute::get('xml','rss','xmlrouter','comment-blog') . '" />
-        <link rel="alternate" type="application/rss+xml" title="' . t('Latest Note Comments') . '" href="' . UriRoute::get('xml','rss','xmlrouter','comment-note') . '" />
-        <link rel="alternate" type="application/rss+xml" title="' . t('Latest Picture Comments') . '" href="' . UriRoute::get('xml','rss','xmlrouter','comment-picture') . '" />
-        <link rel="alternate" type="application/rss+xml" title="' . t('Latest Video Comments') . '" href="' . UriRoute::get('xml','rss','xmlrouter','comment-video') . '" />
-        <link rel="alternate" type="application/rss+xml" title="' . t('Latest Game Comments') . '" href="' . UriRoute::get('xml','rss','xmlrouter','comment-game') . '" />';
+        echo '<link rel="alternate" type="application/rss+xml" title="', t('Latest Blog Posts'), '" href="', UriRoute::get('xml','rss','xmlrouter','blog'), '" />
+        <link rel="alternate" type="application/rss+xml" title="', t('Latest Notes'), '" href="', UriRoute::get('xml','rss','xmlrouter','note'), '" />
+        <link rel="alternate" type="application/rss+xml" title="', t('Latest Forum Topics'), '" href="', UriRoute::get('xml','rss','xmlrouter','forum-topic'), '" />
+        <link rel="alternate" type="application/rss+xml" title="', t('Latest Profile Comments'), '" href="', UriRoute::get('xml','rss','xmlrouter','comment-profile'), '" />
+        <link rel="alternate" type="application/rss+xml" title="', t('Latest Blog Comments'), '" href="', UriRoute::get('xml','rss','xmlrouter','comment-blog'), '" />
+        <link rel="alternate" type="application/rss+xml" title="', t('Latest Note Comments'), '" href="', UriRoute::get('xml','rss','xmlrouter','comment-note'), '" />
+        <link rel="alternate" type="application/rss+xml" title="', t('Latest Picture Comments'), '" href="', UriRoute::get('xml','rss','xmlrouter','comment-picture'), '" />
+        <link rel="alternate" type="application/rss+xml" title="', t('Latest Video Comments'), '" href="', UriRoute::get('xml','rss','xmlrouter','comment-video'), '" />
+        <link rel="alternate" type="application/rss+xml" title="', t('Latest Game Comments'), '" href="', UriRoute::get('xml','rss','xmlrouter','comment-game'), '" />';
     }
 
     /**

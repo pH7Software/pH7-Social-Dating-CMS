@@ -19,7 +19,6 @@ PH7\Framework\Date\Various,
 PH7\Framework\Video\Api,
 PH7\Framework\Security\Validate\Validate,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\UriRoute,
 PH7\Framework\File\File;
 
 class VideoDesignCore
@@ -51,7 +50,7 @@ class VideoDesignCore
 
             if ($sMedia == 'preview')
 
-                echo $sDurationTag . '<a href="' . $oData->file . '" title="' . $oData->title . '" data-popup="frame-video"><img src="' . $oVideo . '" alt="' . $oData->title . '" title="' . $oData->title . '" /></a>';
+                echo $sDurationTag, '<a href="', $oData->file, '" title="', $oData->title, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>';
             else
                 echo $oVideo;
         }
@@ -99,8 +98,8 @@ class VideoDesignCore
             </div>';
 
             if ($sMedia == 'preview')
-                echo $sDurationTag . '<a href="#watch' . $oData->videoId . '" title="' . $oData->title . '" data-popup="video"><img src="' . $sThumb . '" alt="' . $oData->title . '" title="' . $oData->title . '" /></a>
-                <div class="hidden"><div id="watch' . $oData->videoId . '">' . $sVideoTag . '</div></div>';
+                echo $sDurationTag, '<a href="#watch', $oData->videoId, '" title="', $oData->title, '" data-popup="video"><img src="', $sThumb, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>
+                <div class="hidden"><div id="watch', $oData->videoId, '">', $sVideoTag, '</div></div>';
             else
                 echo $sVideoTag;
         }

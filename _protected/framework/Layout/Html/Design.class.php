@@ -238,7 +238,7 @@ class Design
         if($bComment)
         {
         echo '
-        <!-- ' . Kernel::SOFTWARE_COPYRIGHT . ' -->
+        <!-- ', Kernel::SOFTWARE_COPYRIGHT, ' -->
         <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' backlink -->
         <!-- You must leave this link to return!
         This software is distributed free and you must respect the thousands of days, months and years it takes to develop this software!
