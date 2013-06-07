@@ -31,8 +31,12 @@
                 <li>Gettext PHP extension.</li>
                 <li>Send Mail PHP activated.</li>
                 <li>memory_limit - 128M or higher.</li>
-                <li>allow_url_fopen Enable (On)</li>
-                <li>allow_url_include Disable (Off)</li>
+                <li>file_uploads - On</li>
+                <li>max_input_time - -1 (Unlimited)</li>
+                <li>post_max_size - 100M or higher</li>
+                <li>upload_max_filesize - 100M or higher</li>
+                <li>allow_url_fopen - On</li>
+                <li>allow_url_include - Off</li>
             </ul>
 
    <h3>Recommended:</h3>
