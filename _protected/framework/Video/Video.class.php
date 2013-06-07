@@ -19,7 +19,7 @@ PH7\Framework\Date\Various,
 PH7\Framework\Config\Config,
 PH7\Framework\File as F;
 
-class Video
+class Video extends F\Upload
 {
 
     private $oFile, $sType, $sFfmpegPath, $aFile;
@@ -38,11 +38,12 @@ class Video
         if (!file_exists($this->sFfmpegPath))
             throw new F\File\Exception('FFmpeg is not installed on your server, please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini"');
 
-        if (!empty($aFile))
-        {
-            $this->aFile = $aFile;
-            $this->sType = $this->oFile->getFileExt($this->aFile['name']);
-        }
+        $this->aFile = $aFile;
+        $this->sType = $this->oFile->getFileExt($this->aFile['name']);
+
+        /** Attributes for the PH7\Framework\File\Upload abstract class **/
+        $this->iMaxSize = Config::getInstance()->values['video']['upload.max_size'];
+        $this->iFileSize = $this->aFile['size'];
     }
 
     /**
@@ -85,12 +86,12 @@ class Video
         }
     }
 
-     /**
-      * Save Video.
-      *
-      * @param string $sFile
-      * @return boolean
-      */
+    /**
+     * Save Video.
+     *
+     * @param string $sFile
+     * @return boolean
+     */
     public function save($sFile)
     {
         return (move_uploaded_file($this->aFile['tmp_name'], $sFile));
@@ -104,33 +105,6 @@ class Video
     public function getFileName()
     {
         return $this->aFile['name'];
-    }
-
-    /**
-     * Check the video size.
-     *
-     * @return boolean
-     */
-    public function check()
-    {
-        if ($this->aFile['size'] < $this->getMaxSize())
-            return true;
-
-        return false;
-    }
-
-    /**
-     * Get maximum file size.
-     *
-     * @return integer Bytes.
-     */
-    public function getMaxSize()
-    {
-        $iMaxSize = F\Various::sizeToBytes(Config::getInstance()->values['video']['upload.max_size']);
-        $iUploadMaxFileSize = F\Various::sizeToBytes(ini_get('upload_max_filesize'));
-        $iPostMaxSize = F\Various::sizeToBytes(ini_get('post_max_size'));
-
-        return min($iMaxSize, $iUploadMaxFileSize, $iPostMaxSize);
     }
 
     /**

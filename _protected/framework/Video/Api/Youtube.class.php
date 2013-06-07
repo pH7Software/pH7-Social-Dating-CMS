@@ -1,7 +1,6 @@
 <?php
 /**
  * @title            Youtube Class
- * @desc             Youtube Video API.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
@@ -14,7 +13,7 @@
 namespace PH7\Framework\Video\Api;
 defined('PH7') or exit('Restricted access');
 
-class Youtube extends \PH7\Framework\Video\Api implements Api
+class Youtube extends Api implements IApi
 {
 
     const
