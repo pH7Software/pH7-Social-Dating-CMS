@@ -42,8 +42,8 @@ class Video extends F\Upload
         $this->sType = $this->oFile->getFileExt($this->aFile['name']);
 
         /** Attributes for the PH7\Framework\File\Upload abstract class **/
-        $this->iMaxSize = Config::getInstance()->values['video']['upload.max_size'];
-        $this->iFileSize = $this->aFile['size'];
+        $this->sMaxSize = Config::getInstance()->values['video']['upload.max_size'];
+        $this->iFileSize = (int) $this->aFile['size'];
     }
 
     /**
