@@ -19,10 +19,7 @@ function disable_button()
 }
 
 var sInputAgree = 'input[name="agree[]"]';
-$(sInputAgree).click(function()
-{
-    $(sInputAgree+':checked').val()==1?enable_button():disable_button();
-});
+$(sInputAgree+':checked').val()==1?enable_button():disable_button();
 
 $('input[name=all_action]').on('click', function() {
     $('input[name="action[]"]').prop('checked', $(this).is(':checked'));
