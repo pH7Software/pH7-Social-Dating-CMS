@@ -1,5 +1,7 @@
 <?php
 /**
+ * @title            Upload File Class
+ *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
@@ -12,19 +14,16 @@ defined('PH7') or exit('Restricted access');
 abstract class Upload
 {
 
-    protected $iMaxSize, $iFileSize;
+    protected $sMaxSize, $iFileSize;
 
     /**
-     * Check the video size.
+     * Check if everything is correct.
      *
      * @return boolean
      */
     public function check()
     {
-        if ($this->iFileSize < $this->getMaxSize())
-            return true;
-
-        return false;
+        return $this->checkSize();
     }
 
     /**
@@ -34,11 +33,21 @@ abstract class Upload
      */
     public function getMaxSize()
     {
-        $iMaxSize = Various::sizeToBytes($this->iMaxSize);
+        $iMaxSize = Various::sizeToBytes($this->sMaxSize);
         $iUploadMaxFileSize = Various::sizeToBytes(ini_get('upload_max_filesize'));
         $iPostMaxSize = Various::sizeToBytes(ini_get('post_max_size'));
 
         return min($iMaxSize, $iUploadMaxFileSize, $iPostMaxSize);
+    }
+
+    /**
+     * Check the file size.
+     *
+     * @return boolean
+     */
+    protected function checkSize()
+    {
+        return ($this->iFileSize < $this->getMaxSize());
     }
 
 }
