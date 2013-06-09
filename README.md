@@ -19,7 +19,7 @@ In addition to being **free**, **open source** and **relatively stable**, this s
 * Blogs
 * Notes
 * Pages Management
-* Friends, Visit, Messages, Instant messaging, Views, Rating, Geo Map, Avatar, Wallpaper, ...
+* Friends, Visit, Messages, Instant messaging, Views, Rating, Smileys, Geo Map, Avatar, Wallpaper, Flirt, ...
 * Custom Profile (Background profile)
 * Comments
 * Hot or Not
@@ -28,7 +28,7 @@ In addition to being **free**, **open source** and **relatively stable**, this s
 * Photo Albums
 * Videos
 * Forums
-* Chat
+* Chat Rooms
 * Chatroulette
 * Games
 * Webcam Shot
@@ -36,10 +36,20 @@ In addition to being **free**, **open source** and **relatively stable**, this s
 * Newsletter
 * Activity Streams
 * Advanced Admin Panel
+* Notifications system
+* Registration delay
+* File Management
 * User's Fields Management
+* Privacy Settings
+* Banner/Advertisement Management
+* Support for Multiple Languages, Internationalization and Localization (I18N)
+* Database Backup
 * Report
 * SEO Friendly (Title, Content, Code, ...), Sitemap module, ...
 * RSS Feed
+* Feedback
+* Message templates
+* Multi Themes and many personalizable
 * Facebook, Google, Twitter connect
 * Invite Friends
 * Social Bookmark
