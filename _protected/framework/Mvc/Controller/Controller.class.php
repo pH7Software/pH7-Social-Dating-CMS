@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Security\DDoS\Stop,
+PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Router\UriRoute,
 PH7\Framework\Mvc\Model as M;
 
@@ -151,12 +152,12 @@ abstract class Controller extends \PH7\Framework\Core\Core
      *
      * @final
      * @param string $sMsg Default is empty ('')
-     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE. Default TRUE
+     * @param boolean $b404Status For the Ajax blocks and others, we cannot put the HTTP 404 error code, so the attribute must be set to FALSE. Default TRUE
      * @return void Quits the page with the exit() function
      */
     final public function displayPageNotFound($sMsg = '', $b404Status = true)
     {
-        if ($b404Status) \PH7\Framework\Http\Http::setHeadersByCode(404);
+        if ($b404Status) Http::setHeadersByCode(404);
 
         $this->view->page_title = t('%0% - Page Not Found', $sMsg);
         $this->view->h1_title = (!empty($sMsg)) ? $sMsg : t('Whoops! The page you requested was not found.');
@@ -175,6 +176,27 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $sErrorDesc .= '<a href="javascript:history.back();">' . t('Go back to the previous page') . '</a><br />';
 
         $this->view->error_desc = $sErrorDesc;
+
+        $this->view->pOH_not_found = 1;
+        $this->output();
+        exit;
+    }
+
+    /**
+     * Set an Access Denied page.
+     *
+     * @final
+     * @param boolean $b403Status Set the Forbidden status. For the Ajax blocks and others, we cannot put the HTTP 403 error code, so the attribute must be set to FALSE. Default TRUE
+     * @return void Quits the page with the exit() function
+     */
+    final public function displayPageDenied($b403Status = true)
+    {
+        if ($b403Status) Http::setHeadersByCode(403);
+
+        $sTitle = t('Access Denied!');
+        $this->view->page_title = $sTitle;
+        $this->view->h1_title = $sTitle;
+        $this->view->error_desc = t('Oops! You are not authorized to access this page!');
 
         $this->view->pOH_not_found = 1;
         $this->output();
