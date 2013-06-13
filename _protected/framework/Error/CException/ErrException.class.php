@@ -21,9 +21,10 @@ defined('PH7') or exit('Restricted access');
  final class ErrException extends \ErrorException
  {
 
-     public function __toString() {
-
-         switch ($this->severity) {
+     public function __toString()
+     {
+         switch ($this->severity)
+         {
              case E_USER_ERROR : // If the user issues a fatal error
                $sType = 'Fatal error ';
              break;
@@ -42,6 +43,7 @@ defined('PH7') or exit('Restricted access');
                $sType = 'Unknown error';
              break;
          }
+
          return '<strong>' . $sType . '</strong> : [' . $this->code . '] ' . htmlspecialchars($this->message, ENT_QUOTES) . '<br /><strong>' . $this->file . '</strong> to line <strong>' . $this->line . '</strong>';
      }
 
