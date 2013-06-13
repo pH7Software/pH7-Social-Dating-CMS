@@ -16,15 +16,16 @@ defined('PH7') or exit('Restricted access');
 // SECURITY CHECK
 /************************/
 
-// If php.ini is inadequate, it corrects on the fly
+// If php.ini is inadequate, we fix it.
 error_reporting(0);
-//error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
-ini_set('display_errors ' , 'Off' );
+//error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT);
+ini_set('display_errors' , 'Off');
 ini_set('display_startup_errors', 'Off');
 ini_set('track_errors', 'Off');
 ini_set('html_errors', 'Off');
 
-if(is_dir(PH7_PATH_ROOT .'_install/')) {
+if (is_dir(PH7_PATH_ROOT .'_install/'))
+{
     echo
     '<!doctype html><html><head><meta charset="utf-8"><title>SECURITY ALERT : Please remove "_install" folder</title><style>body{background:#EFEFEF;color:#555;font:normal 12px Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.error,.warning{font-weight:bold;font-size:13px;color:red}.warning{text-transform:uppercase}.italic{font-style:italic}.underline{text-decoration:underline}a{color:#08c;outline-style:none;cursor:pointer}a:link,a:visited{text-decoration:none}a:hover,a:active{color:#F24C9E;text-decoration:underline}</style></head><body><div class="center">
      <p class="warning">Security alert</p>
