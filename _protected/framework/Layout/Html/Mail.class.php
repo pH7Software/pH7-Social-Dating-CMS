@@ -75,7 +75,7 @@ class Mail
      */
     public function bottomFooter()
     {
-        return t('Best Regards,<br />The %0% Team.', '<a href="%site_url%">%site_name%</a>');
+        return t('Best regards,<br />The %0% Team.', '<a href="%site_url%">%site_name%</a>');
     }
 
     /**
