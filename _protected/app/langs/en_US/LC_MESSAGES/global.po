@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7-DatingCMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-07 14:26-0500\n"
-"PO-Revision-Date: 2013-06-07 14:26-0500\n"
+"POT-Creation-Date: 2013-06-16 18:44-0500\n"
+"PO-Revision-Date: 2013-06-16 18:44-0500\n"
 "Last-Translator: \n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language: \n"
@@ -344,7 +344,7 @@ msgid "Report"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Mail.class.php:78
-msgid "Best Regards,<br />The %0% Team."
+msgid "Best regards,<br />The %0% Team."
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Mail.class.php:87
@@ -355,36 +355,44 @@ msgstr ""
 msgid "You must enter a valid login ID and password to access this resource."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:161
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:162
 msgid "%0% - Page Not Found"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:162
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:163
 msgid "Whoops! The page you requested was not found."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:164
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:165
 msgid "You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:165
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:166
 msgid "Suggestions:"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:166
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:167
 msgid "Return home"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:171
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:172
 msgid "Join Now"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:172
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:173
 msgid "Login"
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:175
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:176
 msgid "Go back to the previous page"
+msgstr ""
+
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:196
+msgid "Access Denied!"
+msgstr ""
+
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:199
+msgid "Oops! You are not authorized to access this page!"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Math/Measure/Height.class.php:43
@@ -1168,7 +1176,6 @@ msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/connect/inc/class/Microsoft.php:84
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/connect/inc/class/Facebook.php:72
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/connect/inc/class/Google.php:79
 msgid "You now been registered! %0%"
 msgstr ""
 
@@ -1224,7 +1231,6 @@ msgid "Forum:"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/forms/MsgForm.php:44
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/forms/EditMsgForm.php:37
 msgid "Subject:"
 msgstr ""
 
@@ -2947,14 +2953,17 @@ msgid "Content:"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/LoginSplashForm.php:29
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:44
 msgid "Your Email"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/LoginSplashForm.php:30
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:46
 msgid "Your Password"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/LoginSplashForm.php:33
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/LoginForm.php:32
 msgid "Stay signed in"
 msgstr ""
 
@@ -4025,37 +4034,30 @@ msgid "Buy %0% with %1%!"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:29
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:35
 msgid "Name:"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:40
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:46
 msgid "Price:"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:40
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:46
 msgid "Currency: %0%. 0 = Free. To change the currency, please <a href=\"%1%\">go to settings</a>."
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:41
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:47
 msgid "Expiration Days:"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:41
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:47
 msgid "0 = Unlimited"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:42
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:48
 msgid "Active:"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:42
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:48
 msgid "Enabled"
 msgstr ""
 
@@ -4370,7 +4372,6 @@ msgid "Name of your photo:"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/forms/EditPictureForm.php:34
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/forms/PictureForm.php:49
 msgid "Description of your photo:"
 msgstr ""
 
@@ -5775,6 +5776,7 @@ msgid "No birthday today."
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/cron/96h/DatabaseCoreCron.php:71
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/cron/96h/GeneralCoreCron.php:25
 msgid "The Jobs Cron is working to complete successfully!"
 msgstr ""
 
@@ -5952,7 +5954,7 @@ msgid "Version Name: %0%, Version Number: %1%, Version Build: %2%"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:106
-msgid "Do you have made a backup of your database and your site and?"
+msgid "Have you made a backup of your website files, folders and database?"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:106
@@ -6142,14 +6144,12 @@ msgstr ""
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.4-0.1.6/info/introduction.php:10
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.6-0.1.7/info/introduction.php:10
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.7-0.8.7/info/introduction.php:10
-#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.9.8-0.9.9/info/introduction.php:10
 msgid "WARNING!"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.4-0.1.6/info/introduction.php:10
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.6-0.1.7/info/introduction.php:10
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.7-0.8.7/info/introduction.php:10
-#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.9.8-0.9.9/info/introduction.php:10
 msgid "Please make a backup of your site and your database before proceeding with upgrade.!"
 msgstr ""
 

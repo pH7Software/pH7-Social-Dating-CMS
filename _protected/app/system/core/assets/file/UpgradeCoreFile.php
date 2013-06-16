@@ -103,7 +103,7 @@ class UpgradeCore
 
                         if($this->_checkVersion($sVersionName, $sVersionNumber, $iVersionBuild))
                         {
-                              $this->_sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->_sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Do you have made a backup of your database and your site and?') . '\');">' . t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVersionName . ' ' . $sVersionNumber . ' Build ' . $iVersionBuild . '</span>') . '</button>';
+                              $this->_sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->_sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVersionName . ' ' . $sVersionNumber . ' Build ' . $iVersionBuild . '</span>') . '</button>';
 
                               // Description upgrade path
                               $this->_sHtml .= '<p class="underline">' . t('Description of the upgrade patch:') . '</p>';
