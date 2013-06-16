@@ -9,7 +9,7 @@ It is designed with the **KISS** principle in mind, and the entire source code c
 
 It also wants to fast, low resource-intensive, extremely powerful and very secure.
 
-In addition to being **free**, **open source** and **relatively stable**, this software comes with more than **29 native modules** and based on the **pH7Core framework** (written specifically for this project!).
+In addition to being **free**, **open source** and **relatively stable**, this software comes with more than **29 native modules** and based on the **pH7Core framework** (written specifically for this project).
 
 
 ## Some Features of pH7CMS
@@ -19,7 +19,7 @@ In addition to being **free**, **open source** and **relatively stable**, this s
 * Blogs
 * Notes
 * Pages Management
-* Friends, Visit, Messages, Instant messaging, Views, Rating, Smileys, Geo Map, Avatar, Wallpaper, Flirt, ...
+* Friends, Visit, Messages, Instant messaging, Views, Like, Rating, Smileys, Geo Map, Avatar, Wallpaper, ...
 * Custom Profile (Background profile)
 * Comments
 * Hot or Not
@@ -28,6 +28,8 @@ In addition to being **free**, **open source** and **relatively stable**, this s
 * Photo Albums
 * Videos
 * Forums
+* Content Moderation
+* Watermark Branding
 * Chat Rooms
 * Chatroulette
 * Games
@@ -35,7 +37,9 @@ In addition to being **free**, **open source** and **relatively stable**, this s
 * Affiliate
 * Newsletter
 * Activity Streams
+* Member approval system
 * Advanced Admin Panel
+* Statistics & Analytics System
 * Notifications system
 * Registration delay
 * File Management
@@ -43,13 +47,19 @@ In addition to being **free**, **open source** and **relatively stable**, this s
 * Privacy Settings
 * Banner/Advertisement Management
 * Support for Multiple Languages, Internationalization and Localization (I18N)
+* American & European for the Time and Date formats
+* Cache system for the database, pH7Tpl (our template engine), static files (HTML, CSS, JS), string content, ...
+* Maintenance Mode
 * Database Backup
 * Report
 * SEO Friendly (Title, Content, Code, ...), Sitemap module, ...
+* Multilingual URLs
 * RSS Feed
 * Feedback
+* Multi Themes and many customizable
 * Message templates
 * Multi Themes and many personalizable
+* Includes top HTML5 features
 * Facebook, Google, Twitter connect
 * Invite Friends
 * Social Bookmark
