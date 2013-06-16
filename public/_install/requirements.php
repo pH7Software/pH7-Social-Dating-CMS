@@ -12,7 +12,7 @@
  * @license        Lesser General Public License (LGPL) (http://www.gnu.org/copyleft/lesser.html)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25
- * @version        Last revision: 2013/01/20
+ * @version        Last revision: 2013/06/17
  */
 
 defined('PH7') or exit('Restricted access');
@@ -23,8 +23,8 @@ if(version_compare(PHP_VERSION, PH7_REQUIRE_VERSION, '<') === true)
     $aErrors[] = 'ERROR: Your PHP version is ' . PHP_VERSION . '. pH7 CMS requires PHP ' . PH7_REQUIRE_VERSION . ' or newer.';
 
 /*
- * This code is commented because:
- * Does not work with every type of servers even if the Apache rewrite mode is enabled (PHP CGI mode, ...).
+ * This code is commented because it
+ * does not work with every type of servers even if the Apache rewrite mode is enabled (PHP CGI mode, ...).
 if(!function_exists('apache_get_modules'))
     $aErrors[] = 'Please install Apache mod-rewrite module.';
 //*/
@@ -64,8 +64,8 @@ if($iErrors > 0)
 
     printf('<h3 class="error underline italic">You have %d error(s):</h3>', $iErrors);
 
-    for($i = 1; $i <= $iErrors; $i++)
-        printf('<p class="error">%d) %s</p>', $i, $sError);
+    for($i = 0; $i < $iErrors; $i++)
+        printf('<p class="error">%d) %s</p>', $i+1, $aErrors[$i]);
 
     echo '</div></body></html>';
 
