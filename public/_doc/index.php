@@ -16,6 +16,8 @@ include ROOT_PATH . 'inc/scripts/fns.html.php';
 
 define('LANG', get_lang());
 
+ob_start();
+
 get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/header.tpl');
 
 if(!empty($_GET['p']))
@@ -30,3 +32,5 @@ else
 }
 
 get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/footer.tpl');
+
+ob_end_flush();
