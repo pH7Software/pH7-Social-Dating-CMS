@@ -22,8 +22,4 @@
 
 </div>
 
-<script>
-$(document).ready( function() {
-    loveCounter(0, {love});
-});
-</script>
+<script>$(function(){ loveCounter(0, {love}) });</script>
