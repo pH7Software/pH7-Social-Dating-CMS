@@ -26,18 +26,18 @@ class Calculator
         $this->_sName = strtolower(escape($sName . $sSecondName));
         $aName = count_chars($this->_sName);
 
-        for($i = 97;$i <= 122; $i++)
+        for ($i = 97;$i <= 122; $i++)
         {
-            if($aName[$i] != false)
+            if ($aName[$i] != false)
             {
                 $iName2 = strlen($aName[$i]);
-                if($iName2 < 2)
+                if ($iName2 < 2)
                 {
                     $aCalc[] = $aName[$i];
                 }
                 else
                 {
-                    for($iA = 0; $iA < $iName2; $iA++)
+                    for ($iA = 0; $iA < $iName2; $iA++)
                     {
                         $aCalc[] = substr($aName[$i], $iA, 1);
                     }
@@ -45,20 +45,20 @@ class Calculator
             }
         }
 
-        while(($iLetter = count($aCalc)) > 2)
+        while (($iLetter = count($aCalc)) > 2)
         {
             $iCenterLetter = ceil($iLetter/2);
-            for($i = 0; $i < $iCenterLetter; $i++)
+            for ($i = 0; $i < $iCenterLetter; $i++)
             {
                 $sSum = array_shift($aCalc)+array_shift($aCalc);
                 $iD = strlen($sSum);
-                if($iD < 2)
+                if ($iD < 2)
                 {
                     $aCalcMore[] = $sSum;
                 }
                 else
                 {
-                    for($iA = 0;$iA < $iD; $iA++)
+                    for ($iA = 0;$iA < $iD; $iA++)
                     {
                         $aCalcMore[] = substr($sSum,$iA,1);
                     }
@@ -66,7 +66,7 @@ class Calculator
             }
 
             $iC = count($aCalcMore);
-            for($iB = 0; $iB < $iC; $iB++)
+            for ($iB = 0; $iB < $iC; $iB++)
             {
                 $aCalc[] = $aCalcMore[$iB];
             }
