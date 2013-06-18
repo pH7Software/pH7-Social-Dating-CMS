@@ -102,7 +102,8 @@ class MessengerAjax
                     $sTime = date('g:iA M dS', strtotime($iTime));
 
                     $sMsg = "Sent at $sTime";
-                    if ($iNow > 180) {
+                    if ($iNow > 180)
+                    {
                         $sItems .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg]);
 
                         if (!isset($_SESSION['messenger_history'][$sBox]))
@@ -245,7 +246,8 @@ EOD;
 }
 
 // Go only is the member id connected
-if (UserCore::auth()) {
+if (UserCore::auth())
+{
     $oSession = new Session; // Go start_session() function.
     if (empty($_SESSION['messenger_username'])) {
         $_SESSION['messenger_username'] = $oSession->get('member_username');

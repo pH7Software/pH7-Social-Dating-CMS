@@ -16,7 +16,7 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if((!UserCore::auth() && !AdminCore::auth()) && ($this->registry->action === 'add' || $this->registry->action === 'delete'))
+        if ((!UserCore::auth() && !AdminCore::auth()) && ($this->registry->action === 'add' || $this->registry->action === 'delete'))
         {
             Framework\Url\HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->signInMsg(), 'error');
         }

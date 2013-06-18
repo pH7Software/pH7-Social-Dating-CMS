@@ -16,7 +16,8 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if(!UserCore::auth()) {
+        if (!UserCore::auth())
+        {
             Framework\Url\HeaderUrl::redirect(UriRoute::get('user','signup','step1'), $this->signUpMsg());
         }
     }
