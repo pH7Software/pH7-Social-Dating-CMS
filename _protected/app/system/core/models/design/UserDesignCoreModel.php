@@ -63,7 +63,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         $oUser = $this->oUserModel->getProfiles(UserCoreModel::LATEST, $iOffset, $iLimit);
         if (empty($oUser)) return;
 
-        echo '<script>$(document).ready(function(){$(function(){$("#foo").carouFredSel()})});</script>
+        echo '<script>$(function(){$("#foo").carouFredSel()});</script>
         <div class="transparent p1"><div class="img_carousel"><div id="foo">';
 
         foreach ($oUser as $oRow)
@@ -102,7 +102,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         $oUser = $this->oUserModel->getProfiles(UserCoreModel::LATEST, $iOffset, $iLimit);
         if (empty($oUser)) return;
 
-        echo '<script>$(document).ready(function(){$(\'ul.zoomer_pic li\').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false})});</script>
+        echo '<script>$(function(){$(\'ul.zoomer_pic li\').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false})});</script>
         <ul class="zoomer_pic">';
 
         foreach ($oUser as $oRow)

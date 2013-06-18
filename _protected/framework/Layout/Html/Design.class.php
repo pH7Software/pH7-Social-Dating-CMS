@@ -98,7 +98,7 @@ class Design
         {
             $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
-            echo '<script>$(document).ready(function(){Apprise(\'';
+            echo '<script>$(function(){Apprise(\'';
 
             if($iMsgNum > 1)
                 echo '<strong>', t('You have'), ' <em>', $iMsgNum, '</em> ', nt('message:', 'messages:', $iMsgNum), '</strong><br />';
@@ -139,7 +139,7 @@ class Design
         {
            $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
-           echo '<script>$(document).ready(function(){Apprise(\'';
+           echo '<script>$(function(){Apprise(\'';
            echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
 
            for($i=0; $i < $iErrNum; $i++)
