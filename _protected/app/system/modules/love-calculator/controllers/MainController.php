@@ -34,7 +34,7 @@ class MainController extends Controller
         $sSecondUsername = $this->httpRequest->get('second_username');
 
         // Verifies that the username exists and that both user names are not the same.
-        if($this->oExists->username($sSecondUsername) && $sUsername != $sSecondUsername)
+        if ($this->oExists->username($sSecondUsername) && $sUsername != $sSecondUsername)
         {
             // Get ID
             $iId = $this->session->get('member_id');
@@ -65,7 +65,7 @@ class MainController extends Controller
             $this->view->avatarDesign = new AvatarDesignCore;
 
             // Calculate the mutual love
-            $this->view->love = (new Calculator($sFirstName, $sSecondFirstName))->get();
+            $this->view->amount_love = (new Calculator($sFirstName, $sSecondFirstName))->get();
 
             // Display
             $this->output();

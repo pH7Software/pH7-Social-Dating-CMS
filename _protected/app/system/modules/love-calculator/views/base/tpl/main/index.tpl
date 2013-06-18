@@ -22,4 +22,4 @@
 
 </div>
 
-<script>$(function(){ loveCounter(0, {love}) });</script>
+<script>$(function(){ loveCounter(0, {amount_love}) });</script>
