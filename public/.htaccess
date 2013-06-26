@@ -20,7 +20,9 @@ Options +FollowSymLinks
 ### Security and Spam ###
 
 # Protect the repository directory
-RewriteRule "(^|/)\.git" - [F,L]
+<IfModule mod_rewrite.c>
+    RewriteRule "(^|/)\.git" - [F,L]
+</IfModule>
 
 # Remove Apache version
 #ServerTokens Prod
@@ -575,7 +577,7 @@ ErrorDocument 504 /error/http/index?code=504
 ErrorDocument 505 /error/http/index?code=505
 
 # URL Rewrite
-#<IfModule mod_rewrite.c>
+<IfModule mod_rewrite.c>
 
 RewriteEngine On
 
@@ -686,7 +688,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?$1 [L,QSA]
 #RewriteRule ^(.*)$ init.ph7?$1 [L,QSA]
 
-#</IfModule>
+</IfModule>
 
 # Modify Headers
 <IfModule mod_headers.c>
