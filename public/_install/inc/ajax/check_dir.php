@@ -9,9 +9,9 @@
 define('PH7', 1);
 require '_ajax.inc.php';
 
-if(!empty($_POST['dir']))
+if (!empty($_POST['dir']))
 {
-    if(is_directory($_POST['dir']))
+    if (is_directory($_POST['dir']))
         echo '<p class="success">' . $LANG['yes_is_dir'] . '</p>';
     else
         echo '<p class="error">' . $LANG['no_is_dir'] . '</p>';

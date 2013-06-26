@@ -32,12 +32,12 @@ define('PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . $sSlugUrlInstall);
 $sDefaultCtrl = 'install';
 $sController = ucfirst($sDefaultCtrl) . 'Controller';
 
-if(!empty($_GET['a']))
+if (!empty($_GET['a']))
     $sAction = $_GET['a'];
 else
     $sAction = 'index';
 
-if(is_file(PH7_ROOT_PUBLIC . '_constants.php') && ($sAction == 'index' || $sAction == 'license' || $sAction == 'config_path'))
+if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && ($sAction == 'index' || $sAction == 'license' || $sAction == 'config_path'))
     exit('Your site is already installed.<br />If you want to redo a clean install, please delete your "_constants.php" file and delete all the content of your database.');
 
 try
@@ -45,7 +45,7 @@ try
     $sController = 'PH7\\' . $sController;
     $oCtrl = new $sController;
 
-    if(method_exists($oCtrl, $sAction))
+    if (method_exists($oCtrl, $sAction))
         call_user_func(array($oCtrl, $sAction));
     else
         (new PH7\MainController)->error_404();
