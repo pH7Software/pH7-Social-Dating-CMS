@@ -19,6 +19,7 @@ $LANG = array (
     'CMS_desc' => '<p>Welcome to installing of the CMS.<br />Thank you for choosing our CMS and we hope it will please you.</p>
     <p>Please follow the six step of the installation.</p>',
     'chose_lang_for_install' => 'Please choose your language to begin the installation',
+    'requirements_desc' => 'WARNING! Please be sure that your server has the necessary <a href="'.Controller::SOFTWARE_REQUIREMENTS_URL.'" target="_blank">requirements</a> to correctly run pH7CMS.',
     'config_path' => 'Directory path &quot;protected&quot;',
     'desc_config_path' => 'Please specify the full path to your &quot;protected&quot; folder.<br />
     It is wise and advisable to put this directory outside the public root of the your Web server.',
