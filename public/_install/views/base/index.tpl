@@ -10,6 +10,8 @@
     {$lang_select}
 </select>
 
+<p class="warning">{$LANG.requirements_desc}</p>
+
 <p><a href="{$smarty.const.PH7_URL_SLUG_INSTALL}license">{$LANG.go}</a></p>
 
 <!-- Add a welcome sound -->

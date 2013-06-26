@@ -21,6 +21,7 @@ abstract class Controller implements IController
     SOFTWARE_WEBSITE = 'http://hizup.com',
     SOFTWARE_LICENSE_URL = 'http://software.hizup.com/legal/license',
     SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/',
+    SOFTWARE_REQUIREMENTS_URL = 'http://software.hizup.com/doc/en/requirements',
     SOFTWARE_EMAIL = 'support.software@hizup.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
