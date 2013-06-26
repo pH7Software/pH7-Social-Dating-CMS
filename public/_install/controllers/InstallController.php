@@ -287,7 +287,7 @@ class InstallController extends Controller
 
                                         redirect(PH7_URL_SLUG_INSTALL . 'config_site');
                                     }
-                                    catch(\PDOException $oE)
+                                    catch (\PDOException $oE)
                                     {
                                         $aErrors[] = $LANG['database_error'] . $oE->getMessage();
                                     }
@@ -421,7 +421,7 @@ class InstallController extends Controller
 
                                                         redirect(PH7_URL_SLUG_INSTALL . 'finish');
                                                     }
-                                                    catch(\PDOException $oE)
+                                                    catch (\PDOException $oE)
                                                     {
                                                         $aErrors[] = $LANG['database_error'] . $oE->getMessage();
                                                     }
