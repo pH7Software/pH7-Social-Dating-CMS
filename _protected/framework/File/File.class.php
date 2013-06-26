@@ -257,11 +257,13 @@ class File
      */
     public function checkExtDir($sDir, $bStart = false, $bEnd = true)
     {
-        if ($bStart === true && substr($sDir, 0, 1) !== '/')
-            $sDir = '/' . $sDir;
+        $bIsWindows = \PH7\Framework\Server\Server::isWindows();
 
-        if ($bEnd === true && substr($sDir, -1) !== '/')
-            $sDir .= '/';
+        if (!$bIsWindows && $bStart === true && substr($sDir, 0, 1) !== PH7_DS)
+            $sDir = PH7_DS . $sDir;
+
+        if ($bEnd === true && substr($sDir, -1) !== PH7_DS)
+            $sDir .= PH7_DS;
 
         return $sDir;
     }
@@ -629,9 +631,9 @@ class File
             if ($sFile != '.' && $sFile != '..')
             {
                 if (strpos($sFile, '.') === false)
-                    $this->readFiles($sPath . '/' . $sFile, $mFiles);
+                    $this->readFiles($sPath . PH7_DS . $sFile, $mFiles);
                 else
-                    $mFiles[] = $sPath . '/' . $sFile;
+                    $mFiles[] = $sPath . PH7_DS . $sFile;
             }
         }
         closedir($rHandle);

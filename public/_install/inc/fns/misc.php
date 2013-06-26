@@ -17,12 +17,15 @@ defined('PH7') or exit('Restricted access');
  * @param string $sDir
  * @return array
  */
-function get_dir_list($sDir) {
+function get_dir_list($sDir)
+{
     $aDirList = array();
 
-    if($rHandle = opendir($sDir)) {
-        while(false !== ($sFile = readdir($rHandle))) {
-            if($sFile != '.' && $sFile != '..' && is_dir($sDir . '/' . $sFile))
+    if ($rHandle = opendir($sDir))
+    {
+        while (false !== ($sFile = readdir($rHandle)))
+        {
+            if ($sFile != '.' && $sFile != '..' && is_dir($sDir . '/' . $sFile))
                 $aDirList[] = $sFile;
         }
         closedir($rHandle);
@@ -38,10 +41,11 @@ function get_dir_list($sDir) {
  * @param string $sDir
  * @return boolean
  */
-function is_directory($sDir) {
+function is_directory($sDir)
+{
     $sPathProtected = check_ext_start(check_ext_end(trim($sDir)));
-    if(is_dir($sPathProtected))
-        if(is_writable($sPathProtected))
+    if (is_dir($sPathProtected))
+        if (is_writable($sPathProtected))
             return true;
     return false;
 }
@@ -52,8 +56,11 @@ function is_directory($sDir) {
  * @param string $sDir
  * @return string The good extension.
  */
-function check_ext_start($sDir) {
-    if(substr($sDir, 0, 1) != '/')
+function check_ext_start($sDir)
+{
+    if (is_windows()) return $sDir;
+
+    if (substr($sDir, 0, 1) != '/')
         return '/' . $sDir;
     return $sDir;
 }
@@ -64,9 +71,10 @@ function check_ext_start($sDir) {
  * @param string $sDir
  * @return string The good extension.
  */
-function check_ext_end($sDir) {
-    if(substr($sDir, -1) != '/')
-        return $sDir  . '/';
+function check_ext_end($sDir)
+{
+    if (substr($sDir, -1) != PH7_DS)
+        return $sDir  . PH7_DS;
     return $sDir;
 }
 
@@ -78,11 +86,12 @@ function check_ext_end($sDir) {
  * @param integer $iMax Default 40
  * @return string (ok, empty, tooshort, toolong, badusername).
  */
-function validate_username($sUsername, $iMin = 4, $iMax = 40) {
-    if(empty($sUsername)) return 'empty';
-    elseif(strlen($sUsername) < $iMin) return 'tooshort';
-    elseif(strlen($sUsername) > $iMax) return 'toolong';
-    elseif(preg_match('/[^\w]+$/', $sUsername)) return 'badusername';
+function validate_username($sUsername, $iMin = 4, $iMax = 40)
+{
+    if (empty($sUsername)) return 'empty';
+    elseif (strlen($sUsername) < $iMin) return 'tooshort';
+    elseif (strlen($sUsername) > $iMax) return 'toolong';
+    elseif (preg_match('/[^\w]+$/', $sUsername)) return 'badusername';
     else return 'ok';
 }
 
@@ -94,12 +103,13 @@ function validate_username($sUsername, $iMin = 4, $iMax = 40) {
  * @param integer $iMax 92
  * @return string (ok, empty, tooshort, toolong, nonumber, noupper).
  */
-function validate_password($sPassword, $iMin = 6, $iMax = 92) {
-    if(empty($sPassword)) return 'empty';
-    else if(strlen($sPassword) < $iMin) return 'tooshort';
-    else if(strlen($sPassword) > $iMax) return 'toolong';
-    else if(!preg_match('/[0-9]{1,}/', $sPassword)) return 'nonumber';
-    else if(!preg_match('/[A-Z]{1,}/', $sPassword)) return 'noupper';
+function validate_password($sPassword, $iMin = 6, $iMax = 92)
+{
+    if (empty($sPassword)) return 'empty';
+    elseif (strlen($sPassword) < $iMin) return 'tooshort';
+    elseif (strlen($sPassword) > $iMax) return 'toolong';
+    elseif (!preg_match('/[0-9]{1,}/', $sPassword)) return 'nonumber';
+    elseif (!preg_match('/[A-Z]{1,}/', $sPassword)) return 'noupper';
     else return 'ok';
 }
 
@@ -109,9 +119,10 @@ function validate_password($sPassword, $iMin = 6, $iMax = 92) {
  * @param string $sEmail
  * @return string (ok, empty, bademail).
  */
-function validate_email($sEmail) {
-    if($sEmail == '') return 'empty';
-    if(filter_var($sEmail, FILTER_VALIDATE_EMAIL)== false) return 'bademail';
+function validate_email($sEmail)
+{
+    if ($sEmail == '') return 'empty';
+    if (filter_var($sEmail, FILTER_VALIDATE_EMAIL)== false) return 'bademail';
     else return 'ok';
 }
 
@@ -123,8 +134,9 @@ function validate_email($sEmail) {
  * @param integer $iMax Default 30
  * @return boolean
  */
-function validate_name($sName, $iMin = 2, $iMax = 30) {
-    if(is_string($sName) && strlen($sName) >= $iMin && strlen($sName) <= $iMax)
+function validate_name($sName, $iMin = 2, $iMax = 30)
+{
+    if (is_string($sName) && strlen($sName) >= $iMin && strlen($sName) <= $iMax)
         return true;
     return false;
 }
@@ -135,9 +147,10 @@ function validate_name($sName, $iMin = 2, $iMax = 30) {
  * @param array $aVars
  * @return boolean
  */
-function filled_out($aVars) {
-    foreach($aVars as $sKey => $sValue)
-        if((!isset($sKey)) || (trim($sValue) == ''))
+function filled_out($aVars)
+{
+    foreach ($aVars as $sKey => $sValue)
+        if ((!isset($sKey)) || (trim($sValue) == ''))
             return false;
     return true;
 }
@@ -149,7 +162,8 @@ function filled_out($aVars) {
  * @param string $sVal2
  * @return boolean
  */
-function validate_identical($sVal1, $sVal2) {
+function validate_identical($sVal1, $sVal2)
+{
     return ($sVal1 === $sVal2);
 }
 
@@ -159,7 +173,8 @@ function validate_identical($sVal1, $sVal2) {
  * @param string $sUrl
  * @return void
  */
-function redirect($sUrl) {
+function redirect($sUrl)
+{
     header('Location: ' . $sUrl);
     exit;
 }
@@ -170,7 +185,8 @@ function redirect($sUrl) {
  * @param string $sPath
  * @return boolean
  */
-function delete_dir($sPath) {
+function delete_dir($sPath)
+{
     return is_file($sPath) ?
         @unlink($sPath) :
         is_dir($sPath) ?
@@ -185,8 +201,9 @@ function delete_dir($sPath) {
  * @param string $sSqlFile SQL File.
  * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
  */
-function exec_query_file($oDb, $sSqlFile) {
-    if(!is_file($sSqlFile)) return false;
+function exec_query_file($oDb, $sSqlFile)
+{
+    if (!is_file($sSqlFile)) return false;
 
     $sSqlContent = file_get_contents($sSqlFile);
     $sSqlContent = str_replace(PH7_TABLE_PREFIX, $_SESSION['db']['db_prefix'], $sSqlContent);
@@ -201,7 +218,8 @@ function exec_query_file($oDb, $sSqlFile) {
  *
  * @return void
  */
-function remove_install_dir() {
+function remove_install_dir()
+{
     // Delete the _install/ directory
     @chmod(PH7_ROOT_INSTALL, 0777);
     delete_dir(PH7_ROOT_INSTALL);
@@ -214,7 +232,8 @@ function remove_install_dir() {
  * @param integer $iLength Default 80
  * @return string The random hash. Maximum 128 characters with whirlpool encryption.
  */
-function generate_hash($iLength = 80) {
+function generate_hash($iLength = 80)
+{
     return substr(hash('whirlpool', time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid(mt_rand(), true) . microtime(true)*999999999999)), 0, $iLength);
 }
 
@@ -223,7 +242,8 @@ function generate_hash($iLength = 80) {
  *
  * @return boolean
  */
-function is_url_rewrite() {
+function is_url_rewrite()
+{
     return is_file(PH7_ROOT_INSTALL . '.htaccess');
 }
 
@@ -232,7 +252,8 @@ function is_url_rewrite() {
  *
  * @return boolean
  */
-function is_windows() {
+function is_windows()
+{
     return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
 }
 
@@ -242,7 +263,8 @@ function is_windows() {
  * @param string $sFile
  * @return mixed (string | boolean) Return the result content on success, FALSE on failure.
  */
-function get_url_contents($sFile) {
+function get_url_contents($sFile)
+{
     $rCh = curl_init();
     curl_setopt($rCh, CURLOPT_URL, $sFile);
     curl_setopt($rCh, CURLOPT_HEADER, 0);
@@ -262,12 +284,13 @@ function get_url_contents($sFile) {
  * @param string $sDir Destination to extract the file.
  * @return boolean
  */
-function zip_extract($sFile, $sDir) {
+function zip_extract($sFile, $sDir)
+{
     $oZip = new \ZipArchive;
 
     $mRes = $oZip->open($sFile);
 
-    if($mRes === true)
+    if ($mRes === true)
     {
         $oZip->extractTo($sDir);
         $oZip->close();
@@ -283,7 +306,8 @@ function zip_extract($sFile, $sDir) {
  * @return string $sUrl
  * @return boolean
  */
-function check_url($sUrl) {
+function check_url($sUrl)
+{
     // Checks if URL is valid with HTTP status code '200 OK' or '301 Moved Permanently'
     $aUrl = @get_headers($sUrl);
     return (strpos($aUrl[0], '200 OK') || strpos($aUrl[0], '301 Moved Permanently'));
@@ -295,11 +319,12 @@ function check_url($sUrl) {
  * @param string $sValue The License Key.
  * @return boolean
  */
-function check_license($sValue) {
+function check_license($sValue)
+{
     $sValue = trim($sValue);
-    if(!preg_match('/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/', $sValue))
+    if (!preg_match('/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/', $sValue))
         $bStatus = false;
-    elseif(substr($sValue,8,1)*substr($sValue,10,1)*substr($sValue,12,1)*substr($sValue,13,1) != substr($sValue,15,4))
+    elseif (substr($sValue,8,1)*substr($sValue,10,1)*substr($sValue,12,1)*substr($sValue,13,1) != substr($sValue,15,4))
         $bStatus = false;
     else
         $bStatus = true;
@@ -313,7 +338,8 @@ function check_license($sValue) {
  * @param array $aParams The parameters information to send email.
  * @return boolean Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
  */
-function send_mail($aParams) {
+function send_mail($aParams)
+{
     // Frontier to separate the text part and the HTML part.
     $sFrontier = "-----=" . md5(mt_rand());
 
@@ -334,7 +360,7 @@ function send_mail($aParams) {
 EOF;
 
     // If the email sender is empty, we define the server email.
-    if(empty($aParams['from']))
+    if (empty($aParams['from']))
         $aParams['from'] = $_SERVER['SERVER_ADMIN'];
 
     /*** Headers ***/

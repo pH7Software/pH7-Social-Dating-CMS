@@ -36,7 +36,7 @@ class InstallController extends Controller
     /********************* STEP 1 *********************/
     public function index ()
     {
-        if(empty($_SESSION['step1']))
+        if (empty($_SESSION['step1']))
         {
             $_SESSION['step1'] = 1;
         }
@@ -44,7 +44,7 @@ class InstallController extends Controller
         $aLangs = get_dir_list(PH7_ROOT_INSTALL . '/langs/');
         $sLangSelect = '';
 
-        foreach($aLangs as $sLang)
+        foreach ($aLangs as $sLang)
         {
             $sSel = (empty($_REQUEST['l']) ? $sLang == $this->sCurrentLang ? '" selected="selected' : '' : ($sLang == $_REQUEST['l']) ? '" selected="selected' : '');
             $sLangSelect .= '<option value="?l=' . $sLang . $sSel . '">' . $sLang . '</option>';
@@ -60,13 +60,13 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if(empty($_SESSION['step2']))
+        if (empty($_SESSION['step2']))
         {
-            if(isset($_SESSION['step1']))
+            if (isset($_SESSION['step1']))
             {
-                if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['license']))
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['license']))
                 {
-                    if(check_license($_POST['license']))
+                    if (check_license($_POST['license']))
                     {
                         $_SESSION['status_license'] = 'success';
                         $_SESSION['step2'] = 1;
@@ -100,22 +100,22 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if(empty($_SESSION['step3']))
+        if (empty($_SESSION['step3']))
         {
-            if(isset($_SESSION['step2']))
+            if (isset($_SESSION['step2']))
             {
-                if($_SESSION['status_license'] == 'success')
+                if ($_SESSION['status_license'] == 'success')
                 {
-                    if(empty($_SESSION['value']))
-                        $_SESSION['value']['path_protected'] = dirname(PH7_ROOT_PUBLIC) . '/_protected/';
+                    if (empty($_SESSION['value']))
+                        $_SESSION['value']['path_protected'] = dirname(PH7_ROOT_PUBLIC) . PH7_DS . '_protected' . PH7_DS;
 
-                    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['path_protected']))
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['path_protected']))
                     {
                         $_SESSION['value']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
 
-                        if(is_dir($_SESSION['value']['path_protected']))
+                        if (is_dir($_SESSION['value']['path_protected']))
                         {
-                            if(is_writable($_SESSION['value']['path_protected']))
+                            if (is_writable($_SESSION['value']['path_protected']))
                             {
                                 $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
 
@@ -166,14 +166,14 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if(empty($_SESSION['step4']))
+        if (empty($_SESSION['step4']))
         {
-            if(isset($_SESSION['step3']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
+            if (isset($_SESSION['step3']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
             {
-                if($_SESSION['status_license'] == 'success')
+                if ($_SESSION['status_license'] == 'success')
                 {
 
-                    if(empty($_SESSION['value']))
+                    if (empty($_SESSION['value']))
                     {
                         $_SESSION['db']['db_type'] = 'mysql';
                         $_SESSION['db']['db_hostname'] = 'localhost';
@@ -187,13 +187,13 @@ class InstallController extends Controller
                         $_SESSION['value']['ffmpeg_path'] = (is_windows()) ? 'C:\ffmpeg\ffmpeg.exe' : '/usr/bin/ffmpeg';
                     }
 
-                    if($this->_checkDownloadServer()) // Check if the link is available
+                    if ($this->_checkDownloadServer()) // Check if the link is available
                     {
 
-                        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['config_system_submit']))
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['config_system_submit']))
                         {
 
-                            foreach($_POST as $sKey => $sValue)
+                            foreach ($_POST as $sKey => $sValue)
                             {
                                 $_SESSION['db'][$sKey] = trim($sValue);
                             }
@@ -201,12 +201,13 @@ class InstallController extends Controller
                             $_SESSION['value']['bug_report_email'] = trim($_POST['bug_report_email']);
                             $_SESSION['value']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
 
-                            if(filled_out($_POST))
+                            if (filled_out($_POST))
                             {
 
-                                if(filter_input(INPUT_POST, 'bug_report_email', FILTER_VALIDATE_EMAIL) !== false)
+                                if (filter_input(INPUT_POST, 'bug_report_email', FILTER_VALIDATE_EMAIL) !== false)
                                 {
-                                    try {
+                                    try
+                                    {
                                         require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
 
                                         @require_once(PH7_ROOT_PUBLIC . '_constants.php');
@@ -270,7 +271,7 @@ class InstallController extends Controller
                                         exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoState.sql');
 
                                         // --- Execute this file if there is something --- //
-                                        if(filesize(PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_sampleData.sql') > 12)
+                                        if (filesize(PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_sampleData.sql') > 12)
                                         {
                                             exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_sampleData.sql');
                                         }
@@ -278,7 +279,7 @@ class InstallController extends Controller
                                         unset($DB);
 
                                         /** Checks if the games are not already installed **/
-                                        if(!$this->_isGameInstalled())
+                                        if (!$this->_isGameInstalled())
                                             $this->_downloadGame();
 
                                         $_SESSION['step4'] = 1;
@@ -333,13 +334,13 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if(empty($_SESSION['step5']))
+        if (empty($_SESSION['step5']))
         {
-            if(isset($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
+            if (isset($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
             {
-                if($_SESSION['status_license'] == 'success')
+                if ($_SESSION['status_license'] == 'success')
                 {
-                    if(empty($_SESSION['value']))
+                    if (empty($_SESSION['value']))
                     {
                         $_SESSION['value']['admin_login_email'] = '';
                         $_SESSION['value']['admin_email'] = '';
@@ -350,26 +351,26 @@ class InstallController extends Controller
                         $_SESSION['value']['admin_last_name'] = '';
                     }
 
-                    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['config_site_submit']))
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['config_site_submit']))
                     {
-                        foreach($_POST as $sKey => $sValue)
+                        foreach ($_POST as $sKey => $sValue)
                         {
                             $_SESSION['value'][$sKey] = trim($sValue);
                         }
 
-                        if(filled_out($_POST))
+                        if (filled_out($_POST))
                         {
-                            if(validate_email($_SESSION['value']['admin_login_email']) == 'ok' && validate_email($_SESSION['value']['admin_email']) == 'ok' && validate_email($_SESSION['value']['admin_feedback_email']) == 'ok' && validate_email($_SESSION['value']['admin_return_email']) == 'ok')
+                            if (validate_email($_SESSION['value']['admin_login_email']) == 'ok' && validate_email($_SESSION['value']['admin_email']) == 'ok' && validate_email($_SESSION['value']['admin_feedback_email']) == 'ok' && validate_email($_SESSION['value']['admin_return_email']) == 'ok')
                             {
-                                if(validate_username($_SESSION['value']['admin_username']) == 'ok')
+                                if (validate_username($_SESSION['value']['admin_username']) == 'ok')
                                 {
-                                    if(validate_password($_SESSION['value']['admin_password']) == 'ok')
+                                    if (validate_password($_SESSION['value']['admin_password']) == 'ok')
                                     {
-                                        if(validate_identical($_SESSION['value']['admin_password'], $_SESSION['value']['admin_passwordS']))
+                                        if (validate_identical($_SESSION['value']['admin_password'], $_SESSION['value']['admin_passwordS']))
                                         {
-                                            if(validate_name($_SESSION['value']['admin_first_name']))
+                                            if (validate_name($_SESSION['value']['admin_first_name']))
                                             {
-                                                if(validate_name($_SESSION['value']['admin_last_name']))
+                                                if (validate_name($_SESSION['value']['admin_last_name']))
                                                 {
                                                     @require_once(PH7_ROOT_PUBLIC . '_constants.php');
                                                     @require_once(PH7_PATH_APP . 'configs/constants.php');
@@ -440,40 +441,40 @@ class InstallController extends Controller
                                             $aErrors[] = $LANG['passwordS_different'];
                                         }
                                     }
-                                    elseif(validate_password($_SESSION['value']['admin_password']) == 'empty')
+                                    elseif (validate_password($_SESSION['value']['admin_password']) == 'empty')
                                     {
                                         $aErrors[] = $LANG['password_empty'];
                                     }
-                                    elseif(validate_password($_SESSION['value']['admin_password']) == 'tooshort')
+                                    elseif (validate_password($_SESSION['value']['admin_password']) == 'tooshort')
                                     {
                                         $aErrors[] = $LANG['password_tooshort'];
                                     }
-                                    elseif(validate_password($_SESSION['value']['admin_password']) == 'toolong')
+                                    elseif (validate_password($_SESSION['value']['admin_password']) == 'toolong')
                                     {
                                         $aErrors[] = $LANG['password_toolong'];
                                     }
-                                    elseif(validate_password($_SESSION['value']['admin_password']) ==  'nonumber')
+                                    elseif (validate_password($_SESSION['value']['admin_password']) ==  'nonumber')
                                     {
                                         $aErrors[] = $LANG['password_nonumber'];
                                     }
-                                    elseif(validate_password($_SESSION['value']['admin_password']) ==  'noupper')
+                                    elseif (validate_password($_SESSION['value']['admin_password']) ==  'noupper')
                                     {
                                         $aErrors[] = $LANG['password_noupper'];
                                     }
                                 }
-                                elseif(validate_username($_SESSION['value']['admin_username']) == 'empty')
+                                elseif (validate_username($_SESSION['value']['admin_username']) == 'empty')
                                 {
                                     $aErrors[] = $LANG['password_empty'];
                                 }
-                                elseif(validate_username($_SESSION['value']['admin_username']) == 'tooshort')
+                                elseif (validate_username($_SESSION['value']['admin_username']) == 'tooshort')
                                 {
                                     $aErrors[] = $LANG['username_tooshort'];
                                 }
-                                elseif(validate_username($_SESSION['value']['admin_username']) == 'toolong')
+                                elseif (validate_username($_SESSION['value']['admin_username']) == 'toolong')
                                 {
                                     $aErrors[] = $LANG['username_toolong'];
                                 }
-                                elseif(validate_username($_SESSION['value']['admin_username']) == 'badusername')
+                                elseif (validate_username($_SESSION['value']['admin_username']) == 'badusername')
                                 {
                                     $aErrors[] = $LANG['username_badusername'];
                                 }
@@ -517,7 +518,7 @@ class InstallController extends Controller
 
         @require_once(PH7_ROOT_PUBLIC . '_constants.php');
 
-        if(!empty($_SESSION['value']))
+        if (!empty($_SESSION['value']))
         {
             // Send email for finish instalation.
             $aParams = array(
@@ -541,7 +542,7 @@ class InstallController extends Controller
         // and we delete the cookie value locally to avoid using it by mistake in following our script.
         unset($_COOKIE[$sCookieName]);
 
-        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm_remove_install']))
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm_remove_install']))
         {
             remove_install_dir();
             header('Location: ' . PH7_URL_ROOT);
@@ -572,7 +573,7 @@ class InstallController extends Controller
     /***** Checks Download Server and checks if the games are not already installed *****/
     private function _checkDownloadServer ()
     {
-        if($this->_isGameInstalled()) return true; // Games are already installed.
+        if ($this->_isGameInstalled()) return true; // Games are already installed.
 
         return (check_url($this->_sGameDownloadPath));
     }
