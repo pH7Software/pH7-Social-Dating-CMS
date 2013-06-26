@@ -56,7 +56,7 @@ final class Server
      *
      * @return boolean TRUE if windows, FALSE if not.
      */
-    public function isWindows()
+    public static function isWindows()
     {
         return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
     }
@@ -66,7 +66,7 @@ final class Server
      *
      * @return boolean TRUE if Unix, FALSE if not.
      */
-    public function isUnix()
+    public static function isUnix()
     {
         $sOS = strtoupper(PHP_OS);
         return ($sOS === 'UNIX' || $sOS === 'LINUX' || $sOS === 'FREEBSD' || $sOS === 'OPENBSD');
@@ -77,7 +77,7 @@ final class Server
      *
      * @return boolean TRUE if windows, FALSE if not.
      */
-    public function isMac()
+    public static function isMac()
     {
         return strtoupper(substr(PHP_OS, 0, 3) === 'MAC');
     }
