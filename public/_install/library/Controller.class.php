@@ -26,7 +26,7 @@ abstract class Controller implements IController
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',
-    SOFTWARE_VERSION = '1.0.1',
+    SOFTWARE_VERSION = '1.0.2',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
@@ -38,7 +38,7 @@ abstract class Controller implements IController
         global $LANG;
 
         // PHP session initialization
-        if(empty($_SESSION)) @session_start();
+        if (empty($_SESSION)) @session_start();
 
         // Verify and correct the time zone if necessary
         if (! ini_get('date.timezone') ) date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
