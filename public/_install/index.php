@@ -31,11 +31,7 @@ define('PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . $sSlugUrlInstall);
 
 $sDefaultCtrl = 'install';
 $sController = ucfirst($sDefaultCtrl) . 'Controller';
-
-if (!empty($_GET['a']))
-    $sAction = $_GET['a'];
-else
-    $sAction = 'index';
+$sAction = (!empty($_GET['a'])) ? $_GET['a'] : 'index';
 
 if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && ($sAction == 'index' || $sAction == 'license' || $sAction == 'config_path'))
     exit('Your site is already installed.<br />If you want to redo a clean install, please delete your "_constants.php" file and delete all the content of your database.');
