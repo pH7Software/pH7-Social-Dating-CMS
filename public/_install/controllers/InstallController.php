@@ -119,7 +119,7 @@ class InstallController extends Controller
                             {
                                 $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
 
-                                $sConstantContent = str_replace('%path_protected%', $_SESSION['value']['path_protected'], $sConstantContent);
+                                $sConstantContent = str_replace('%path_protected%', addslashes($_SESSION['value']['path_protected']), $sConstantContent);
 
                                 file_put_contents(PH7_ROOT_PUBLIC . '_constants.php', $sConstantContent);
 

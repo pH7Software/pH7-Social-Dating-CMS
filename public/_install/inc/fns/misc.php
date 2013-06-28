@@ -74,7 +74,7 @@ function check_ext_start($sDir)
 function check_ext_end($sDir)
 {
     if (substr($sDir, -1) != PH7_DS)
-        return $sDir  . PH7_DS;
+        return $sDir . PH7_DS;
     return $sDir;
 }
 
