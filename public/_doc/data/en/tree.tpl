@@ -1,4 +1,4 @@
-<!-- Last Update: 06/07/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 06/28/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -2765,11 +2765,16 @@
 |   |       |       |-- conclusion.php
 |   |       |       |-- config.ini
 |   |       |       `-- introduction.php
-|   |       `-- 1.0.0-1.0.1
-|   |           |-- data
-|   |           |   `-- sql
-|   |           |       `-- MySQL
-|   |           |           `-- upgrade.sql
+|   |       |-- 1.0.0-1.0.1
+|   |       |   |-- data
+|   |       |   |   `-- sql
+|   |       |   |       `-- MySQL
+|   |       |   |           `-- upgrade.sql
+|   |       |   `-- info
+|   |       |       |-- conclusion.php
+|   |       |       |-- config.ini
+|   |       |       `-- introduction.php
+|   |       `-- 1.0.1-1.0.2
 |   |           `-- info
 |   |               |-- conclusion.php
 |   |               |-- config.ini
@@ -4427,4 +4432,4 @@
 
 </pre>
 
-<p>Statistics: 1341 directories, 3078 files.</p>
+<p>Statistics: 1343 directories, 3081 files.</p>
