@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7-DatingCMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-16 18:44-0500\n"
-"PO-Revision-Date: 2013-06-16 18:44-0500\n"
+"POT-Creation-Date: 2013-06-28 05:21-0500\n"
+"PO-Revision-Date: 2013-06-28 05:21-0500\n"
 "Last-Translator: \n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language: \n"
@@ -1421,16 +1421,16 @@ msgstr ""
 msgid "Please return to the <a href=\"%0%\">main forum page</a> or <a href=\"%1%\">go the previous page</a>."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:119
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:120
 msgid "You must have the status of ONLINE in order to speak instantaneous."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:121
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:179
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:122
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:180
 msgid "%0% is offline, send a message instead."
 msgstr ""
 
-#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:177
+#: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:178
 msgid "You must have the status of ONLINE in order to chat with other members."
 msgstr ""
 
@@ -5982,7 +5982,7 @@ msgid "Your update ran successfully!"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:169
-msgid "The upgrade directory <em>(~/YOUR-PUBLIC-FOLDER/_upgrade/)</em> has been deleted!"
+msgid "The upgrade directory <em>(~%0%)</em> has been deleted!"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:170
@@ -5990,7 +5990,7 @@ msgid "Status... OK!"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:174
-msgid "The upgrade directory <em>(~/YOUR-PUBLIC-FOLDER/_upgrade/)</em> could not be deleted, please delete it manually using an FTP client or SSH."
+msgid "The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH."
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:175
@@ -6154,18 +6154,22 @@ msgid "Please make a backup of your site and your database before proceeding wit
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/conclusion.php:11
+#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.1-1.0.2/info/conclusion.php:11
 msgid "Warning, this is not finished yet ;-)"
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/conclusion.php:13
+#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.1-1.0.2/info/conclusion.php:13
 msgid "Edit your \"%0%\" file."
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/conclusion.php:14
+#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.1-1.0.2/info/conclusion.php:14
 msgid "Add M after the size of the \"upload.max_size\" variable (e.g., this: \"upload.max_size = 500M\" instead of \"upload.max_size = 500\""
 msgstr ""
 
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/conclusion.php:15
+#: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.1-1.0.2/info/conclusion.php:15
 msgid "Good luck :-)"
 msgstr ""
 
