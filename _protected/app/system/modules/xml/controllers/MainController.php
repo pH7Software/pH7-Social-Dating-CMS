@@ -102,7 +102,7 @@ class MainController extends Controller
 
     protected function setContentType()
     {
-        header('Content-Type: text/xml; charset=utf-8');
+        header('Content-Type: text/xml; charset=' . PH7_ENCODING);
     }
 
 }

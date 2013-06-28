@@ -166,12 +166,12 @@ class UpgradeCore
                                 {
                                     if($this->_removeUpgradeDir())
                                     {
-                                        $this->_sHtml .= '<p class="success">' . t('The upgrade directory <em>(~/YOUR-PUBLIC-FOLDER/_upgrade/)</em> has been deleted!') . '</p>';
+                                        $this->_sHtml .= '<p class="success">' . t('The upgrade directory <em>(~%0%)</em> has been deleted!', PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder) . '</p>';
                                         $this->_sHtml .= '<p class="success">' . t('Status... OK!') . '</p>';
                                     }
                                     else
                                     {
-                                        $this->_sHtml .= '<p class="error">' . t('The upgrade directory <em>(~/YOUR-PUBLIC-FOLDER/_upgrade/)</em> could not be deleted, please delete it manually using an FTP client or SSH.') . '</p>';
+                                        $this->_sHtml .= '<p class="error">' . t('The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH.', PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder) . '</p>';
                                         $this->_sHtml .= '<p class="error">' . t('Status... Failure!') . '</p>';
                                     }
                                 }
