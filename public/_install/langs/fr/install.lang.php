@@ -6,7 +6,7 @@
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / FR
- * @update           02/13/13 23:52
+ * @update           07/13/13 00:22
  */
 
 namespace PH7;
@@ -45,13 +45,13 @@ $LANG = array (
     'success_license' => 'Votre clé de licence est correcte !',
     'failure_license' => 'Désolé, votre clé de licence est incorrecte !',
     'no_dir_exist' => 'Désolé, mais nous n\'avons pas trouvé le répertoire &laquo; protected &raquo;',
-    'no_dir_writable' => 'Veuillez mettre le répertoire &laquo; protected &raquo; en écriture (permission 777).',
+    'no_dir_writable' => 'Veuillez changer les permissions du répertoire &laquo; protected &raquo; pour qu\'il soit en mode &quot;écriture&quot; (CHMOD 777).',
     'database_error' => 'Erreur de connexion avec votre base de données.<br /> ',
     'error_sql_import' => 'Une erreur s\'est produit pendant l\'importation de du fichier SQL vers votre base de données',
     'field_required' => 'Ce champ est obligatoire',
     'all_fields_mandatory' => 'Tous les champs marqués d\'un astérisque (*) sont obligatoires',
     'db_hostname' => 'Nom de l\'hôte',
-    'desc_db_hostname' => '(Très souvent cette valeur est "localhost" ou "127.0.0.1")',
+    'desc_db_hostname' => '(Très souvent cette valeur est &quot;localhost&quot; ou &quot;127.0.0.1&quot;)',
     'db_name' =>'Nom de la base de données',
     'db_username' => 'Nom d\'utilisateur de la base de données',
     'db_password' => 'Mot de passe de la base de données',
@@ -76,14 +76,14 @@ $LANG = array (
     'admin_username' => 'Your nom d\'utilisateur pour vous connecter à votre panneau d\'administration',
     'admin_login_email' => 'Votre adresse e-mail pour vous connecter à votre panneau d\'administration',
     'admin_email' => 'L\'adresse e-mail d\'administration',
-    'admin_return_email' => 'Adresse e-mail sans réponse (Généralement noreply@yoursite.com)',
+    'admin_return_email' => 'Adresse e-mail sans réponse (généralement noreply@yoursite.com)',
     'admin_feedback_email' => 'L\'adresse email pour le formulaire de contact (feedback)',
     'admin_password' => 'Votre mot de passe',
     'admin_passwordS' => 'Veuillez confirmer votre mot de passe',
     'bad_first_name' => 'Veuillez entrer votre prénom, il doit également être compris entre 2 et 20 caractères.',
     'bad_last_name' => 'Veuillez entrer votre prénom, il doit également être compris entre 2 et 20 caractères.',
-    'remove_install_folder_auto' => 'Éffacer automatiquement le répertoire «install» de mon site (Cette opération nécessite des droits d\'accès en effacement sur le répertoire «install»).',
-    'confirm_remove_install_folder_auto' => 'ATTENTION, tous les fichiers du dossiers /_install/ vont être supprimés',
+    'remove_install_folder_auto' => 'Effacer automatiquement le répertoire &laquo; install &raquo; de mon site (cette opération nécessite les droits d\'accès nécessaires sur le dossier &laquo; install &raquo;).',
+    'confirm_remove_install_folder_auto' => 'ATTENTION, tous les fichiers du dossiers /_install/ vont être supprimés.',
     'title_email_finish_install' => 'Félicitation, l\'installation de votre site est terminé !',
     'content_email_finish_install' => '<p><strong>Félicitations, votre site est maintenant installé avec succès !</strong></p>
     <p>Nous espérons que vous allez avoir beaucoup de plaisir avec ce CMS !</p>
