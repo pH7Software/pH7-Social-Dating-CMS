@@ -13,13 +13,15 @@ defined('PH7') or exit('Restricted access');
 /**
  * @return string The links of the files doc tpl.
  */
-function get_links_html() {
+function get_links_html()
+{
     $sHtml = '<ul>';
 
     $aFiles = glob(DATA_PATH . LANG . '/*.tpl');
 
     $i = 1;
-    foreach($aFiles as $sLink) {
+    foreach ($aFiles as $sLink)
+    {
         $sLink = htmlentities(str_replace(array('.tpl', DATA_PATH, LANG . '/'), '', $sLink));
         $sName = ucfirst(str_replace(array('/', '-'), array('', ' '), $sLink));
 
@@ -34,14 +36,16 @@ function get_links_html() {
 /**
  * @return string The links of the languages ​​available.
  */
-function get_langs_html() {
+function get_langs_html()
+{
     $aLangs = get_dir_list(DATA_PATH);
     $aLangsList = include(ROOT_PATH . 'inc/conf.lang.php');
 
     $sHtml = ''; // Default value
 
-    foreach ($aLangs as $sLang) {
-        if($sLang === LANG) continue;
+    foreach ($aLangs as $sLang)
+    {
+        if ($sLang === LANG) continue;
         $sHtml .= '<a href="' . RELATIVE . substr($sLang,0,2) . '" data-load="ajax"><img src="' . STATIC_URL . 'img/flags/' . $sLang . '.gif" alt="' . $aLangsList[$sLang] . '" title="' . $aLangsList[$sLang] . '" /></a>&nbsp;';
     }
 
