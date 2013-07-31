@@ -1,4 +1,4 @@
-<h1>Cron List</h1>
+<h2>Cron List</h2>
 
 <pre>"GET http://YOUR-SITE.com/asset/cron/24h/Birthday/?secret_word=YOUR_SECRET_WORD"</pre>
 <pre>"GET http://YOUR-SITE.com/asset/cron/96h/Database/?secret_word=YOUR_SECRET_WORD" Parameter available: "stat" and "repair"</pre>
