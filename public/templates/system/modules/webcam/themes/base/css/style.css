@@ -72,6 +72,7 @@
     bottom: -466px;
     left:50%;
     margin-left:-300px;
+    z-index:1200;
 
     -moz-border-radius:4px 4px 0 0;
     -webkit-border-radius:4px 4px 0 0;
