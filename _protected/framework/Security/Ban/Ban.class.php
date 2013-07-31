@@ -102,13 +102,7 @@ class Ban
     {
         $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . static::$_sFile);
 
-        foreach($aBans as $sBan)
-        {
-            $sBan = trim($sBan);
-            if(static::$_sVal === $sBan) return true;
-        }
-
-        return false;
+        return in_array(static::$_sVal, array_map('trim', $aBans));
     }
 
     /**
@@ -118,10 +112,11 @@ class Ban
      * @param boolean $bWordReplace TRUE Replace the ban word by an other word. FALSE Replace the ban word by an empty string.
      * @return string The clean text.
      */
-    private static function _replace($bWordReplace) {
+    private static function _replace($bWordReplace)
+    {
         $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . static::$_sFile);
 
-        foreach($aBans as $sBan)
+        foreach ($aBans as $sBan)
         {
             $sBan = trim($sBan);
             $sWordReplace = ($bWordReplace) ? \PH7\Framework\Mvc\Model\DbConfig::getSetting('banWordReplace') : '';
