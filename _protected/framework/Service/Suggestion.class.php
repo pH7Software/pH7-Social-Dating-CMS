@@ -52,6 +52,7 @@ class Suggestion
 
        // It removes all spaces, line breaks, ...
        $aSuggestions = array_map('trim', $aSuggestions);
+
        return implode('\',\'', $aSuggestions);
    }
 
