@@ -678,7 +678,7 @@ RewriteCond %{HTTP_USER_AGENT} ^Zeus
 RewriteRule ^.* - [F,L]
 # End Bad Bot Prevention
 
-# Remove www subdomain to url
+# Remove www subdomain in the URL
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
