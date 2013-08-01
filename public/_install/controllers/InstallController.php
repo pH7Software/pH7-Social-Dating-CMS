@@ -180,7 +180,7 @@ class InstallController extends Controller
                         $_SESSION['db']['db_name'] = 'PHS-SOFTWARE';
                         $_SESSION['db']['db_username'] = 'root';
                         $_SESSION['db']['db_prefix'] = 'PH7_';
-                        $_SESSION['db']['db_port'] = '3760';
+                        $_SESSION['db']['db_port'] = '3306';
                         $_SESSION['db']['db_charset'] = 'UTF8';
 
                         $_SESSION['value']['bug_report_email'] = '';
