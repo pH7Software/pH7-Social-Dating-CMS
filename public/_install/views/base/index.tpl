@@ -15,6 +15,6 @@
 <p><a href="{$smarty.const.PH7_URL_SLUG_INSTALL}license">{$LANG.go}</a></p>
 
 <!-- Add a welcome sound -->
-<audio style="display:none" autoplay="autoplay" src="{$smarty.const.PH7_URL_ROOT}/static/sound/welcome.mp3" /></audio>
+<audio style="display:none" autoplay="autoplay" src="{$smarty.const.PH7_URL_ROOT}static/sound/welcome.mp3"></audio>
 
 {include file="inc/footer.tpl"}
