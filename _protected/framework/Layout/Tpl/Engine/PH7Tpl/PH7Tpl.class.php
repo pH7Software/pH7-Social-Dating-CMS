@@ -301,7 +301,8 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
 
         if ($this->isMainCompilePage())
         {
-            if (!$this->bLicense) {
+            if (!$this->bLicense)
+            {
                 $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by\') ?>' . ' ' . self::SOFTWARE_NAME .
                         ')</title>', $this->sCode);
             }
@@ -311,11 +312,13 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
             if (!$this->isMarkCopyright()) $this->setErrMsg();
         }
 
-        if ($this->isXmlSitemapCompilePage()) {
+        if ($this->isXmlSitemapCompilePage())
+        {
             if (!$this->isSmallMarkCopyright()) $this->setErrMsg();
         }
 
-        if ($this->bPhpCompressor) {
+        if ($this->bPhpCompressor)
+        {
             $this->sCode = (new \PH7\Framework\Compress\Compress)->parsePhp($this->sCode);
         }
 
