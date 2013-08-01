@@ -28,7 +28,7 @@
     <input type="text" name="db_charset" id="db_charset" onfocus="if ('UTF8' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'UTF8';" value="{$smarty.session.db.db_charset}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="db_port">{$LANG.db_port} :</label><br />
-    <input type="text" name="db_port" id="db_port" onfocus="if ('3760' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '3760';" value="{$smarty.session.db.db_port}" required="required" /></p>
+    <input type="text" name="db_port" id="db_port" onfocus="if ('3306' == this.value) this.value='';" onblur="if ('' == this.value) this.value = '3306';" value="{$smarty.session.db.db_port}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="ffmpeg_path">{$LANG.ffmpeg_path} :</label><br />
     <input type="text" name="ffmpeg_path" id="ffmpeg_path" value="{$smarty.session.value.ffmpeg_path}" required="required" /></p>
