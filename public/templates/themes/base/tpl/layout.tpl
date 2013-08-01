@@ -9,7 +9,7 @@
 {% $this->str->escape($this->str->upperFirst($page_title), true) %} - {site_name}{@else@}{site_name} - {slogan}{@/if@}</title>
 <meta name="description" content="{% $this->str->escape($this->str->upperFirst($meta_description), true) %}" />
 <meta name="keywords" content="{% $this->str->escape($meta_keywords, true) %}" />
-<link rel="shortcut icon" type="image/x-icon" href="{url_relative}favicon.ico" />
+<link rel="shortcut icon" href="{url_relative}favicon.ico" />
 <meta name="robots" content="{meta_robots}" />
 <meta name="author" content="{meta_author}"/>
 <meta name="copyright" content="{meta_copyright}" />
@@ -18,13 +18,12 @@
 <meta name="category" content="{meta_category}" />
 <meta name="rating" content="{meta_rating}"/>
 <meta name="distribution" content="{meta_distribution}"/>
-{@if($header)@}
-{header}
-{@/if@}
+<link rel="author" href="{url_root}humans.txt" />
+{@if($header)@}{header}{@/if@}
 
 <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
 <!-- Do not modify or remove this code! Think of those who spend time to develop this framework and CMS for you. -->
-<meta name="creator" content="pH7 Team - {software_url}" />
+<meta name="creator" content="pH7 Team, Pierre-Henry Soria - {software_url}" />
 <meta name="designer" content="pH7 Team - {software_url}" />
 <meta name="generator" content="{software_name}  {software_version}" />
 <!-- End Copyright -->
