@@ -25,6 +25,7 @@
         <ul class="show_dropdown">
           <li><a href="{{ $design->url('page','main','help') }}" title="{@lang('Help')@}" data-load="ajax">{@lang('Help')@}</a></li>
           <li><a href="{{ $design->url('page','main','faq') }}" title="{@lang('FAQ')@}">{@lang('FAQ')@}</a></li>
+          <li><a href="{{ $design->url('page','main','donation') }}" title="{@lang('Donation')@}" data-load="ajax">{@lang('Donate')@}</a></li>
           <li><a href="{{ $design->url('page','main','terms') }}" title="{@lang('Terms of Use')@}" data-load="ajax">{@lang('Terms of Use')@}</a></li>
           <li><a href="{{ $design->url('page','main','privacy') }}" title="{@lang('Privacy')@}" data-load="ajax">{@lang('Privacy')@}</a></li>
           <li><a href="{{ $design->url('page','main','imprint') }}" title="{@lang('Imprint')@}" data-load="ajax">{@lang('Imprint')@}</a></li>
