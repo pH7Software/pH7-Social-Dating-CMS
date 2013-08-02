@@ -1,16 +1,16 @@
           </article>
-      </section>
-    </div>
+        </section>
+      </div>
     </div>
 
     <footer>
       {menu_langs}
-      <p>By <a href="http://cool-on-web.com">cool on Web</a></p>
+      <p>Powered by <strong><a href="http://github.com/pH-7/Nav-Doc-Script-V2" title="Free PHP Documentation Script">Nav Doc Script</a></strong>. <em>Proud to be open source!</em></p>
     </footer>
 
   </div>
 
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
- <script src="{static_url}js/ajph.js"></script>
- </body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="{static_url}js/ajph.js"></script>
+</body>
 </html>

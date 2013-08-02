@@ -23,18 +23,18 @@ class Cache
     CACHE_FILE_EXT = '.cache.php';
 
     private
-    $oFile,
-    $sCaheDir,
-    $sGroup,
-    $sId,
-    $iTtl,
-    $sPrefix = 'pH7_',
-    $bEnabled = true;
+    $_oFile,
+    $_sCacheDir,
+    $_sGroup,
+    $_sId,
+    $_iTtl,
+    $_sPrefix = 'pH7_',
+    $_bEnabled = true;
 
     public function __construct()
     {
-        $this->oFile = new File;
-        $this->bEnabled = (bool) Config::getInstance()->values['cache']['enable.general.cache'];
+        $this->_oFile = new File;
+        $this->_bEnabled = (bool) Config::getInstance()->values['cache']['enable.general.cache'];
     }
 
     /**
@@ -45,7 +45,7 @@ class Cache
      */
     public function enabled($bIsEnable)
     {
-        $this->bEnabled = (bool) $bIsEnable;
+        $this->_bEnabled = (bool) $bIsEnable;
 
         return $this;
     }
@@ -62,7 +62,7 @@ class Cache
     public function setCacheDir($sCacheDir)
     {
         if (is_dir($sCacheDir))
-            $this->sCacheDir = $sCacheDir;
+            $this->_sCacheDir = $sCacheDir;
         else
             throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('No Cache directory \'' . $sCacheDir . '\' in template engine <strong>PH7Tpl</strong>');
 
@@ -77,7 +77,7 @@ class Cache
      */
     public function setPrefix($sPrefix)
     {
-        $this->sPrefix = $sPrefix;
+        $this->_sPrefix = $sPrefix;
         return $this;
     }
 
@@ -90,7 +90,7 @@ class Cache
     public function setExpire($iExpire)
     {
         // How long to cache for (in seconds, e.g. 3600*24 = 24 hour)
-        @touch($this->getFile(), time()+(int)$this->iTtl);
+        @touch($this->_getFile(), time()+(int)$this->_iTtl);
 
         return $this;
     }
@@ -105,13 +105,13 @@ class Cache
      */
     public function start($sGroup, $sId, $iTtl)
     {
-      $this->checkCacheDir();
+      $this->_checkCacheDir();
 
-      if ($this->bEnabled)
+      if ($this->_bEnabled)
       {
-          $this->sGroup = $sGroup . PH7_DS;
-          $this->sId = $sId;
-          $this->iTtl = $iTtl;
+          $this->_sGroup = $sGroup . PH7_DS;
+          $this->_sId = $sId;
+          $this->_iTtl = $iTtl;
           ob_start();
       }
 
@@ -126,11 +126,11 @@ class Cache
      */
     public function stop($bPrint = true)
     {
-        if (!$this->bEnabled) return null;
+        if (!$this->_bEnabled) return null;
 
         $sBuffer = ob_get_contents();
         ob_end_clean();
-        $this->write($sBuffer);
+        $this->_write($sBuffer);
         if ($bPrint)
         {
             echo $sBuffer;
@@ -144,11 +144,11 @@ class Cache
      * Gets the data cache.
      *
      * @param boolean $bPrint Default FALSE
-     * @return mixed (boolean | integer | float | string | array | object) Returns the converted cache value if successful, false otherwise.
+     * @return mixed (boolean | integer | float | string | array | object) Returns the converted cache value if successful, FALSE otherwise.
      */
     public function get($bPrint = false)
     {
-        $mData = $this->read($bPrint);
+        $mData = $this->_read($bPrint);
         if ($mData !== false)
             $mData = unserialize($mData);
 
@@ -163,9 +163,9 @@ class Cache
      */
     public function put($sData)
     {
-        if (!$this->bEnabled) return null;
+        if (!$this->_bEnabled) return null;
 
-        $this->write(serialize($sData));
+        $this->_write(serialize($sData));
 
         return $this;
     }
@@ -177,120 +177,14 @@ class Cache
      */
     public function clear()
     {
-        if (!empty($this->sId))
-            $this->oFile->deleteFile($this->getFile());
+        if (!empty($this->_sId))
+            $this->_oFile->deleteFile($this->_getFile());
          else
-            $this->oFile->deleteDir($this->sCacheDir . $this->sGroup);
+            $this->_oFile->deleteDir($this->_sCacheDir . $this->_sGroup);
 
          return $this;
     }
-
-    /**
-     * Reads the Cache.
-     *
-     * @access private
-     * @param boolean $bPrint
-     * @return mixed (boolean | string) Returns true or a string if successful, false otherwise.
-     */
-    private function read($bPrint)
-    {
-        if ($this->check())
-        {
-            require $this->getFile();
-
-            if (!empty($_mData))
-            {
-                if ($bPrint)
-                {
-                    echo $_mData;
-                    return true;
-                }
-                else
-                {
-                    return $_mData;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Writes data in a cache file.
-     *
-     * @access private
-     * @param string $sData
-     * @return boolean
-     * @throws \PH7\Framework\Cache\Exception If the file cannot be written.
-     */
-    final private function write($sData)
-    {
-      if (!$this->bEnabled) return null;
-
-      $sFile = $this->getFile();
-      $this->oFile->createDir($this->sCacheDir . $this->sGroup);
-
-      $sPhpHeader = $this->getHeaderContents();
-
-        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<EOF' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL . '?>';
-
-        if ($rHandle = @fopen($sFile, 'wb'))
-        {
-            if (@flock($rHandle, LOCK_EX))
-                fwrite($rHandle, $sData);
-
-            fclose($rHandle);
-            $this->setExpire($this->iTtl);
-            $this->oFile->chmod($sFile, 420);
-            return true;
-        }
-        throw new Exception('Could not write cache file: \'' . $sFile . '\'');
-        return false;
-    }
-
-    /**
-     * Gets the file cache.
-     *
-     * @access private
-     * @return string
-     */
-    private function getFile()
-    {
-        return $this->sCacheDir . $this->sGroup . sha1($this->sId) . static::CACHE_FILE_EXT;
-    }
-
-    /**
-     * Checks the cache.
-     *
-     * @access private
-     * @return boolean
-     */
-    private function check()
-    {
-        $sFile = $this->getFile();
-        if (!$this->bEnabled || !is_file($sFile) || (!empty($this->iTtl) && $this->oFile->modificationTime($sFile) < time()))
-        {   // If the cache has expired
-            $this->oFile->deleteFile($this->getFile());
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    /**
-     * Checks if the cache directory has been defined otherwise we create a default directory.
-     *
-     * If the folder cache does not exist, it creates a folder.
-     * @access private
-     * @return object this
-     */
-    private function checkCacheDir()
-    {
-        $this->sCacheDir = (empty($this->sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
-        return $this;
-    }
-
+    
     /**
      * Get the header content to put in the file.
      *
@@ -315,17 +209,124 @@ Created on ' . gmdate('Y-m-d H:i:s') . '
  ***************************************************************************/
 ';
     }
+    
+    /**
+     * Writes data in a cache file.
+     *
+     * @access private
+     * @param string $sData
+     * @return boolean
+     * @throws \PH7\Framework\Cache\Exception If the file cannot be written.
+     */
+    final private function _write($sData)
+    {
+      if (!$this->_bEnabled) return null;
+
+      $sFile = $this->_getFile();
+      $this->_oFile->createDir($this->_sCacheDir . $this->_sGroup);
+
+      $sPhpHeader = $this->getHeaderContents();
+
+        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<EOF' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL . '?>';
+
+        if ($rHandle = @fopen($sFile, 'wb'))
+        {
+            if (@flock($rHandle, LOCK_EX))
+                fwrite($rHandle, $sData);
+
+            fclose($rHandle);
+            $this->setExpire($this->_iTtl);
+            $this->_oFile->chmod($sFile, 420);
+            return true;
+        }
+        throw new Exception('Could not write cache file: \'' . $sFile . '\'');
+        return false;
+    }
+
+    /**
+     * Reads the Cache.
+     *
+     * @access private
+     * @param boolean $bPrint
+     * @return mixed (boolean | string) Returns TRUE or a string if successful, FALSE otherwise.
+     */
+    private function _read($bPrint)
+    {
+        if ($this->_check())
+        {
+            require $this->_getFile();
+
+            if (!empty($_mData))
+            {
+                if ($bPrint)
+                {
+                    echo $_mData;
+                    return true;
+                }
+                else
+                {
+                    return $_mData;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Gets the file cache.
+     *
+     * @access private
+     * @return string
+     */
+    private function _getFile()
+    {
+        return $this->_sCacheDir . $this->_sGroup . sha1($this->_sId) . static::CACHE_FILE_EXT;
+    }
+
+    /**
+     * Checks the cache.
+     *
+     * @access private
+     * @return boolean
+     */
+    private function _check()
+    {
+        $sFile = $this->_getFile();
+        if (!$this->_bEnabled || !is_file($sFile) || (!empty($this->_iTtl) && $this->_oFile->modificationTime($sFile) < time()))
+        {   
+			// If the cache has expired
+            $this->_oFile->deleteFile($this->_getFile());
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    /**
+     * Checks if the cache directory has been defined otherwise we create a default directory.
+     *
+     * If the folder cache does not exist, it creates a folder.
+     * @access private
+     * @return object this
+     */
+    private function _checkCacheDir()
+    {
+        $this->_sCacheDir = (empty($this->_sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->_sCacheDir;
+        return $this;
+    }
 
     public function __destruct()
     {
         unset(
-          $this->oFile,
-          $this->sCaheDir,
-          $this->sGroup,
-          $this->sId,
-          $this->iTtl,
-          $this->sPrefix,
-          $this->bEnabled
+          $this->_oFile,
+          $this->_sCacheDir,
+          $this->_sGroup,
+          $this->_sId,
+          $this->_iTtl,
+          $this->_sPrefix,
+          $this->_bEnabled
         );
     }
 
