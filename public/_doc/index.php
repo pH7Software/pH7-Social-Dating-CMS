@@ -20,7 +20,7 @@ ob_start();
 
 get_page(ROOT_PATH . 'themes/' . TPL . '/tpl/header.tpl');
 
-if(!empty($_GET['p']))
+if (!empty($_GET['p']))
 {
     $sPage = DATA_PATH . LANG . '/' . $_GET['p'] . '.tpl';
     get_page($sPage);

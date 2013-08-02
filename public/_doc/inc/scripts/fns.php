@@ -47,6 +47,7 @@ function parse_var($sContent)
 {
     $sContent = str_replace('{site_url}', RELATIVE, $sContent);
     $sContent = str_replace('{static_url}', STATIC_URL, $sContent);
+    $sContent = str_replace('{lang}', LANG, $sContent);
     $sContent = str_replace('{tpl_name}', TPL, $sContent);
     $sContent = str_replace('{site_name}', SITE_NAME, $sContent);
     $sContent = str_replace('{page_name}', get_page_name(), $sContent);
