@@ -147,7 +147,7 @@ class FriendAjax extends Core
 
         $aInfo = [
         'to' => $sFriendEmail,
-        'subject' => t('New friend request - %0%', $sSiteName)
+        'subject' => t('%0% wants to be friends with you on %1%', $this->session->get('member_first_name'), $sSiteName)
         ];
 
         (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);

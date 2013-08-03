@@ -31,7 +31,7 @@ class InviteFormProcessing extends Form
             {
                 $this->view->content = t('Hello!<br />You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%') . '<br />' .
                 '<strong><a href="' . UriRoute::get('user','signup','step1', '?ref=invitation') . '">' . t('Get exclusive privilege to join your friend is waiting for you!') . '</a></strong><br />' .
-                t('Message left by your friend:') . ' <br /><em>' . $this->httpRequest->post('message') . '</em>';
+                t('Message left by your friend:') . '<br />"<em>' . $this->httpRequest->post('message') . '</em>"';
                 $this->view->footer = t('You are receiving this message because "%0%" you know has entered your email address in the form of invitation of friends to our site. This is not spam!', $this->httpRequest->post('first_name'));
 
                 $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/invite/invitation.tpl', $sMail);
