@@ -19,7 +19,9 @@ function init() {
     echo "7) count php file"
     echo "8) count dir"
     echo "9) show empty file"
-    echo "10) backup"
+    echo "10) file permissions"
+    echo "11) file strict permissions"
+    echo "12) backup"
 
 
     read option
@@ -33,6 +35,8 @@ function init() {
       "count php file") count-php-file;;
       "count dir") count-dir;;
       "show empty file") show-empty-file;;
+      "file permissions") file-permissions;;
+      "file strict permissions") file-strict-permissions;;
       "backup") backup;;
       *) _error
     esac
@@ -42,8 +46,7 @@ function init() {
 function clear-cache() {
     _confirm "Are you sure you want to delete caches?"
     if [ $? -eq 1 ]; then
-        sudo chmod 777 -R ./_protected/data/cache/*
-        sudo chmod 777 -R ./public/_install/data/caches/*
+        _cache-permissions
 
         # public
         rm -rf ./public/_install/data/caches/smarty_compile/*
@@ -72,7 +75,7 @@ function clean-code() {
     _confirm "Are you sure you want to clean up the code?"
     if [ $? -eq 1 ]; then
         params="-name '*.php' -or -name '*.css' -or -name '*.js' -or -name '*.html' -or -name '*.xml' -or -name '*.xsl' -or -name '*.tpl' -or -name '*.phs' -or -name '*.ph7' -or -name '*.sh' -or -name '*.sql' -or -name '*.ini' -or -name '.htaccess'"
-        exec="find . -type f \( $params \) | xargs perl -wi -pe"
+        exec="find . -type f \( $params \) -print0 | xargs -0 perl -wi -pe"
         eval "$exec 's/\s+$/\n/'"
         eval "$exec 's/\t/    /g'"
 
@@ -111,6 +114,40 @@ function show-empty-file() {
     find . -type f -size 0
 }
 
+# Check and correct file permissions (CHMOD)
+# These permissions allow editing and creating files in the File Management admin module.
+function file-permissions() {
+    find . -type f -print0 | sudo xargs -0 chmod 666
+    find . -type d -print0 | sudo xargs -0 chmod 777
+    sudo chmod 777 -R ./public/
+    sudo chmod 777 -R ./public/_repository/module/*
+    sudo chmod 777 -R ./public/_repository/upgrade/*
+    sudo chmod 777 -R ./_protected/app/configs/*
+    sudo chmod 777 -R ./_protected/data/backup/*
+    sudo chmod 777 -R ./_protected/data/tmp/*
+    sudo chmod 777 -R ./_protected/data/log/*
+    _cache-permissions
+    echo "Permissions have been changed!"
+}
+
+# Check and correct file permissions (CHMOD)
+# These permissions don't allow editing and creating files in the File Management admin module.
+function file-strict-permissions()
+{
+    find . -type f -print0 | sudo xargs -0 chmod 644
+    find . -type d -print0 | sudo xargs -0 chmod 755
+    sudo chmod 777 ./public/
+    sudo chmod 777 -R ./public/_install/*
+    sudo chmod 777 -R ./public/_repository/module/*
+    sudo chmod 777 -R ./public/_repository/upgrade/*
+    sudo chmod 777 -R ./_protected/app/configs/*
+    sudo chmod 777 -R ./_protected/data/backup/*
+    sudo chmod 777 -R ./_protected/data/tmp/*
+    sudo chmod 777 -R ./_protected/data/log/*
+    _cache-permissions
+    echo "Permissions Strict have been changed!"
+}
+
 # Backup. Create a compressed archive of the project
 function backup() {
     echo "Specify the path ending with a SLASH where the archive will be stored"
@@ -140,6 +177,12 @@ function backup() {
 # Clean indentation code
 function _clean-indent() {
     sed -i 's/\(.*\)\(function\|class\|try\|catch\)\([^{]*\){\([^}].*\)/\1\2\3\n\1{\4/'  $(find -name '*.php')
+}
+
+# Cache permissions (CHMOD)
+function _cache-permissions() {
+    sudo chmod 777 -R ./public/_install/data/caches/*
+    sudo chmod 777 -R ./_protected/data/cache/*
 }
 
 # Confirmation of orders entered
