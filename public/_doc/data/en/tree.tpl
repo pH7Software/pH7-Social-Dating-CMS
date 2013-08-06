@@ -1,4 +1,4 @@
-<!-- Last Update: 06/28/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 07/06/2013 by Pierre-Henry Soria -->
 
 <h1>The Tree of the CMS</h1>
 
@@ -2132,6 +2132,8 @@
 |   |   |   |   |-- create-your-module.tpl
 |   |   |   |   |-- cron-list.tpl
 |   |   |   |   |-- cron.tpl
+|   |   |   |   |-- how-to-go-to-admin-panel.tpl
+|   |   |   |   |-- how-to-remove-the-link-in-the-footer.tpl
 |   |   |   |   |-- install.tpl
 |   |   |   |   |-- introduction.tpl
 |   |   |   |   |-- JS_DOC.help.txt
@@ -2141,16 +2143,14 @@
 |   |   |   |   |-- tree.tpl
 |   |   |   |   `-- upgrade.tpl
 |   |   |   `-- fr
+|   |   |       |-- comment-acc\303\251der-au-panneau-d'administration.tpl
 |   |   |       |-- core
 |   |   |       |   |-- 404-error.tpl
 |   |   |       |   `-- welcome.tpl
 |   |   |       |-- cron.tpl
-|   |   |       |-- Dev
-|   |   |       |   `-- Convention
-|   |   |       |       |-- copyright.txt
-|   |   |       |       `-- Nommage-variables.html
-|   |   |       |-- liste-cron.tpl
-|   |   |       |-- mise-a-jour.tpl
+|   |   |       |-- installation.tpl
+|   |   |       |-- liste-des-cron.tpl
+|   |   |       |-- mise-\303\240-jour.tpl
 |   |   |       |-- pH.tpl
 |   |   |       `-- renommer-le-dossier-admin.tpl
 |   |   |-- inc
@@ -2469,13 +2469,18 @@
 |   |   |   |-- _db_connect.inc.php
 |   |   |   |-- fns
 |   |   |   |   `-- misc.php
+|   |   |   |-- init.inc.php
 |   |   |   |-- loader.inc.php
 |   |   |   `-- log.inc.php
 |   |   |-- index.php
 |   |   |-- langs
 |   |   |   |-- en
 |   |   |   |   `-- install.lang.php
-|   |   |   `-- fr
+|   |   |   |-- es
+|   |   |   |   `-- install.lang.php
+|   |   |   |-- fr
+|   |   |   |   `-- install.lang.php
+|   |   |   `-- ru
 |   |   |       `-- install.lang.php
 |   |   |-- library
 |   |   |   |-- Controller.class.php
@@ -2610,8 +2615,6 @@
 |   |   |-- _license-key.txt
 |   |   |-- requirements.php
 |   |   |-- static
-|   |   |   |-- img
-|   |   |   |   `-- logo.png
 |   |   |   `-- js
 |   |   |       `-- AJAPH.js
 |   |   |-- themes
@@ -2774,7 +2777,12 @@
 |   |       |       |-- conclusion.php
 |   |       |       |-- config.ini
 |   |       |       `-- introduction.php
-|   |       `-- 1.0.1-1.0.2
+|   |       |-- 1.0.1-1.0.2
+|   |       |   `-- info
+|   |       |       |-- conclusion.php
+|   |       |       |-- config.ini
+|   |       |       `-- introduction.php
+|   |       `-- 1.0.2-1.0.3
 |   |           `-- info
 |   |               |-- conclusion.php
 |   |               |-- config.ini
@@ -3194,16 +3202,18 @@
 |   |   |   |   |   |-- box.js
 |   |   |   |   |   |-- i18n
 |   |   |   |   |   |   |-- jquery.colorbox-ar.js
-|   |   |   |   |   |   |-- jquery.colorbox-bg
+|   |   |   |   |   |   |-- jquery.colorbox-bg.js
 |   |   |   |   |   |   |-- jquery.colorbox-cs.js
 |   |   |   |   |   |   |-- jquery.colorbox-da.js
 |   |   |   |   |   |   |-- jquery.colorbox-de.js
 |   |   |   |   |   |   |-- jquery.colorbox-es.js
+|   |   |   |   |   |   |-- jquery.colorbox-et.js
 |   |   |   |   |   |   |-- jquery.colorbox-fa.js
 |   |   |   |   |   |   |-- jquery.colorbox-fi.js
 |   |   |   |   |   |   |-- jquery.colorbox-fr.js
 |   |   |   |   |   |   |-- jquery.colorbox-hr.js
 |   |   |   |   |   |   |-- jquery.colorbox-hu.js
+|   |   |   |   |   |   |-- jquery.colorbox-id.js
 |   |   |   |   |   |   |-- jquery.colorbox-it.js
 |   |   |   |   |   |   |-- jquery.colorbox-ja.js
 |   |   |   |   |   |   |-- jquery.colorbox-kr.js
@@ -3215,6 +3225,7 @@
 |   |   |   |   |   |   |-- jquery.colorbox-ro.js
 |   |   |   |   |   |   |-- jquery.colorbox-ru.js
 |   |   |   |   |   |   |-- jquery.colorbox-sk.js
+|   |   |   |   |   |   |-- jquery.colorbox-sv.js
 |   |   |   |   |   |   |-- jquery.colorbox-tr.js
 |   |   |   |   |   |   `-- jquery.colorbox-zh-CN.js
 |   |   |   |   |   |-- images
@@ -4432,4 +4443,4 @@
 
 </pre>
 
-<p>Statistics: 1343 directories, 3081 files.</p>
+<p>Statistics: 1344 directories, 3091 files.</p>
