@@ -16,7 +16,8 @@ $LANG = array (
     'charset' => 'utf-8',
     'lang_name' => 'Français',
     'version' => 'version',
-    'CMS_desc' => '<p>Bienvenue sur l\'installation du CMS, nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>
+    'CMS_desc' => '<p>Bienvenue à l\'installation de '.Controller::SOFTWARE_NAME.'.<br />
+    Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>
     <p>Veuillez suivre attentivement les six étape de l\'installation.</p>',
     'chose_lang_for_install' => 'Veuillez choisir votre langue pour commancer l\'installation',
     'requirements_desc' => 'ATTENTION ! Veuillez être sûr que votre serveur a les <a href="'.Controller::SOFTWARE_REQUIREMENTS_URL.'" target="_blank">exigences</a> nécessaires pour faire correctement fonctionner pH7CMS.',
@@ -44,9 +45,11 @@ $LANG = array (
     'error_page_not_found_desc' => 'Désolé, mais la page que vous cherchez est introuvable.',
     'success_license' => 'Votre clé de licence est correcte !',
     'failure_license' => 'Désolé, votre clé de licence est incorrecte !',
-    'no_dir_exist' => 'Désolé, mais nous n\'avons pas trouvé le répertoire &laquo; protected &raquo;',
-    'no_dir_writable' => 'Veuillez changer les permissions du répertoire &laquo; protected &raquo; pour qu\'il soit en mode &quot;écriture&quot; (CHMOD 777).',
-    'database_error' => 'Erreur de connexion avec votre base de données.<br /> ',
+    'no_protected_exist' => 'Désolé, mais nous n\'avons pas trouvé le répertoire &laquo; protected &raquo;',
+    'no_protected_readable' => 'Veuillez changer les permissions du répertoire &laquo; protected &raquo; pour qu\'il soit en mode &quot;lecture&quot; (CHMOD 755).',
+    'no_public_writable' => 'Veuillez changer les permissions du répertoire &laquo; public &raquo; pour qu\'il soit en mode &quot;écriture&quot; (CHMOD 777).',
+    'no_app_config_writable' => 'Veuillez changer les permissions du répertoire &laquo; protected/app/configs &raquo; pour qu\'il soit en mode &quot;écriture&quot; (CHMOD 777).',
+    'database_error' => 'Erreur de connexion avec votre base de données.<br />',
     'error_sql_import' => 'Une erreur s\'est produit pendant l\'importation de du fichier SQL vers votre base de données',
     'field_required' => 'Ce champ est obligatoire',
     'all_fields_mandatory' => 'Tous les champs marqués d\'un astérisque (*) sont obligatoires',
@@ -56,7 +59,7 @@ $LANG = array (
     'db_username' => 'Nom d\'utilisateur de la base de données',
     'db_password' => 'Mot de passe de la base de données',
     'db_prefix' => 'Le préfixe des tables de la base de données',
-    'desc_db_prefix' => 'Ceci est utile quand vous avez plusieurs installations du CMS sur la même base de données sinon nous vous recommandons quand même de modifier les valeurs pas défaut pour augmenter la sécurité de votre site Web.',
+    'desc_db_prefix' => 'Cette option est utile quand vous avez plusieurs installations de pH7CMS sur la même base de données. Nous vous recommandons quand même de modifier les valeurs par défaut afin d\'augmenter la sécurité de votre site Web.',
     'desc_charset' => 'Encodage de la base de données, généralement UTF8 pour un encodage internationale.',
     'db_port' => 'Port de votre base de données',
     'ffmpeg_path' => 'Le chemin vers l\'exécutable FFmpeg (si vous ne savez pas où il se trouve, veuillez vous renseigner à votre hébergeur)',
@@ -70,33 +73,34 @@ $LANG = array (
     'password_noupper' => 'Votre mot de passe doit contenir au moins une majuscule',
     'password_tooshort' => 'Votre mot de passe est trop court',
     'password_toolong' => 'Votre mot de passe est trop long',
-    'bug_report_email' => 'E-mail de rapport de bugs',
-    'admin_first_name' => 'Votre Prénom',
-    'admin_last_name' => 'Votre Nom de famille',
-    'admin_username' => 'Your nom d\'utilisateur pour vous connecter à votre panneau d\'administration',
-    'admin_login_email' => 'Votre adresse e-mail pour vous connecter à votre panneau d\'administration',
+    'bug_report_email' => 'E-mail de rapport de bogues',
+    'admin_first_name' => 'Votre prénom',
+    'admin_last_name' => 'Votre nom de famille',
+    'admin_username' => 'Votre nom d\'utilisateur pour vous connecter au panneau d\'administration de votre site',
+    'admin_login_email' => 'Votre adresse e-mail pour vous connecter au panneau d\'administration de votre site',
     'admin_email' => 'L\'adresse e-mail d\'administration',
-    'admin_return_email' => 'Adresse e-mail sans réponse (généralement noreply@yoursite.com)',
-    'admin_feedback_email' => 'L\'adresse email pour le formulaire de contact (feedback)',
+    'admin_return_email' => 'Adresse e-mail sans réponse (généralement noreply@votre-site.com)',
+    'admin_feedback_email' => 'L\'adresse e-mail pour le formulaire de contact (feedback)',
     'admin_password' => 'Votre mot de passe',
     'admin_passwordS' => 'Veuillez confirmer votre mot de passe',
     'bad_first_name' => 'Veuillez entrer votre prénom, il doit également être compris entre 2 et 20 caractères.',
     'bad_last_name' => 'Veuillez entrer votre prénom, il doit également être compris entre 2 et 20 caractères.',
-    'remove_install_folder_auto' => 'Effacer automatiquement le répertoire &laquo; install &raquo; de mon site (cette opération nécessite les droits d\'accès nécessaires sur le dossier &laquo; install &raquo;).',
+    'remove_install_folder_auto' => 'Effacer automatiquement le répertoire &laquo; install &raquo; (cette opération nécessite les droits d\'accès nécessaires sur le dossier &laquo; install &raquo;).',
     'confirm_remove_install_folder_auto' => 'ATTENTION, tous les fichiers du dossiers /_install/ vont être supprimés.',
-    'title_email_finish_install' => 'Félicitation, l\'installation de votre site est terminé !',
-    'content_email_finish_install' => '<p><strong>Félicitations, votre site est maintenant installé avec succès !</strong></p>
-    <p>Nous espérons que vous allez avoir beaucoup de plaisir avec ce CMS !</p>
-    <p>Pour tous rapport de bugs, suggestions, propositions, partenariat, participation au développement du CMS et à sa traduction, etc.</p>
+    'title_email_finish_install' => 'Félicitation, l\'installation de votre site Web est terminé !',
+    'content_email_finish_install' => '<p><strong>Félicitations, votre site Web est maintenant installé avec succès !</strong></p>
+    <p>Nous espérons que vous allez avoir beaucoup de plaisir avec '.Controller::SOFTWARE_NAME.' !</p>
+    <p>Pour tous rapport de bogues, suggestions, propositions, partenariat, participation au développement du CMS et à sa traduction, etc.</p>
     <p>Veuillez visitez notre <a href="'.Controller::SOFTWARE_WEBSITE.'" target="_blank">site Web</a>.</p>
     <p>---</p>
     <p>Cordialement,</p>
-    <p>L\'équipe de développement du CMS pHS7.</p>',
-    'yes_is_dir' => 'Le répertoire a été trouvé avec succès !',
-    'no_is_dir' => 'Le répertoire n\'existe pas.',
+    <p>L\'équipe de développement de pH7CMS.</p>',
+    'yes_dir' => 'Le répertoire a été trouvé avec succès !',
+    'no_dir' => 'Le répertoire n\'existe pas.',
     'wait_importing_database' => 'Veuillez patienter pendant l\'importation de la base de donnée.<br />
     Cette opération peut prendre plusieurs minutes.',
-    'error_get_server_url' => 'Problème d\'accès avec notre serveur Web.<br />Veuillez vérifier que votre serveur est bien connecté à internet, sinon veuillez un peu patienté (il est possible que notre serveur est surchargé).',
+    'error_get_server_url' => 'Problème d\'accès avec notre serveur Web.<br />
+    Veuillez vérifier que votre serveur est bien connecté à internet, sinon veuillez un peu patienté (il est possible que notre serveur est surchargé).',
     'powered' => 'Propulsé par',
     'loading' => 'Chargement en cours...',
 );
