@@ -64,6 +64,7 @@ In addition to being **free**, **open source** and **relatively stable**, this s
 * Invite Friends
 * Social Bookmark
 * Anti-spam system
+* Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
 * Everyone can easily contribute to this great project with our [GitHub repository](http://github.com/pH7Software/pH7-Social-Dating-CMS)
 
 
@@ -103,7 +104,12 @@ Pierre-Henry Soria
 
 ## Website
 
-**[Social Dating Script Website](http://software.hizup.com)**
+**[Social Dating Script](http://software.hizup.com)**
+
+
+## Documentation
+
+[pH7CMS Documentation](http://software.hizup.com/doc/)
 
 
 ## Contact
