@@ -7,7 +7,7 @@ $sHtml = '';
 
 /*** Begin Contents ***/
 
-$sHtml .= '<p><span class="red">' . t('WARNING!') . '</span><br />' . t('Please make a backup of your site and your database before proceeding with upgrade.!') . '</p>';
+$sHtml .= '<p><span class="red">' . t('WARNING!') . '</span><br />' . t('Please make a backup of your site and your database before proceeding with upgrade!') . '</p>';
 
 /*** End Contents ***/
 
