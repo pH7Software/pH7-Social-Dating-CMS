@@ -3,7 +3,7 @@
 <h2>{$LANG.license}</h2>
 
 <p class="warning">{$LANG.license_desc}</p>
-<p><iframe src="{$software_license_url}?lang={$current_lang}">{$LANG.need_frame}</iframe></p>
+<p><iframe src="{$software_license_url}?l={$current_lang}">{$LANG.need_frame}</iframe></p>
 
 {include file="inc/errors.tpl"}
 

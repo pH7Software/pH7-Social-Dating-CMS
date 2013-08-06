@@ -2,12 +2,11 @@
     <h1 class="pink2 italic underline">{@lang('Welcome to %site_name%!')@}</h1>
 
     {{ JoinForm::step1(290) }}
-<div class="counter center">{{ $userDesign->counterUsers() }}</div>
+    <div class="counter center">{{ $userDesign->counterUsers() }}</div>
 </div>
 
 <div class="left">
-
- <div class="folio_block">
+    <div class="folio_block">
         <h1 class="pink2 italic underline">{@lang('Free Online Dating Social Community Site with Chat Rooms')@}</h1>
 
         <div class="splash_slideshow">
@@ -28,15 +27,14 @@
                 <a href="#" rel="5">5</a>
             </div>
         </div>
- </div>
+    </div>
 
- <div class="block_txt">
-  <h2>{@lang('Meet new people in')@} {{ $design->geoIp() }} {@lang('with %site_name%')@}</h2>
-  <p>{@lang('This is the best place for meeting new people nearby. Chat, flirt, socialize and have fun!')@}<br />
-  {slogan}</p>
+    <div class="block_txt">
+        <h2>{@lang('Meet new people in')@} {{ $design->geoIp() }} {@lang('with %site_name%')@}</h2>
+        <p>{@lang('This is the best place for meeting new people nearby. Chat, flirt, socialize and have fun!')@}<br />
+        {slogan}</p>
 
- </div>
+    </div>
 
- {{ $userDesignModel->carouselProfiles() }}<br />
-
+    <div class="carousel">{{ $userDesignModel->carouselProfiles() }}</div>
 </div>

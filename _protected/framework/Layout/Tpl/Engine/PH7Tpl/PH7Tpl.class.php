@@ -302,10 +302,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         if ($this->isMainCompilePage())
         {
             if (!$this->bLicense)
-            {
-                $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by\') ?>' . ' ' . self::SOFTWARE_NAME .
-                        ')</title>', $this->sCode);
-            }
+                $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by\') ?>' . ' ' . self::SOFTWARE_NAME . ')</title>', $this->sCode);
 
             // It is forbidden to violate the copyright!
             // Thought for those who have spent years developing a software quality professional!
@@ -313,14 +310,10 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         }
 
         if ($this->isXmlSitemapCompilePage())
-        {
             if (!$this->isSmallMarkCopyright()) $this->setErrMsg();
-        }
 
         if ($this->bPhpCompressor)
-        {
             $this->sCode = (new \PH7\Framework\Compress\Compress)->parsePhp($this->sCode);
-        }
 
         $this->sCode = '<?php ' . $sPhpHeader . '?>' . $this->sCode;
 
@@ -656,6 +649,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
 
             if (!$this->file->putFile($this->sCacheDirFile, $sOutput))
                 throw new Exception('Unable to write to cache file: \'' . $this->sCacheDirFile . '\'');
+
             echo $sOutput;
         }
         else

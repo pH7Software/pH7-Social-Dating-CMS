@@ -15,7 +15,6 @@ function showField(sName, mShow)
 
 var $goBox = (function()
 {
-
     // Video Popup (video tag)
     $("a[data-popup=video]").colorbox({
         speed      : 500,
@@ -72,7 +71,6 @@ var $goBox = (function()
         rel          : 'photo',
         slideshow    :  true
     });
-
 });
 
 $goBox();
@@ -96,7 +94,6 @@ $('a[title],img[title]').each(function()
         oE.tipTip({defaultPosition: pos});
         $(this).tipTip({maxWidth:'auto',edgeOffset:5,fadeIn:400,fadeOut:400,defaultPosition: pos});
     }
-
 });
 
 // Title of the Forms

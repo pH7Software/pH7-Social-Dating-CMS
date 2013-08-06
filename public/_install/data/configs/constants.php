@@ -51,6 +51,6 @@ define('PH7_PATH_LIBRARY', PH7_PATH_PROTECTED . 'library/');
 
 #################### URL (PUBLIC) ####################
 
-define('PH7_URL_PROT', $sHttp);
+define('PH7_URL_PROT', $sHttp); // URL protocol
 define('PH7_DOMAIN_COOKIE', $sDomain_cookie);
 define('PH7_URL_ROOT', PH7_URL_PROT . $sDomain . PH7_SELF);

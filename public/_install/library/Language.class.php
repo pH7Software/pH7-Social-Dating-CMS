@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * @title            Language Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>

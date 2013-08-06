@@ -45,7 +45,7 @@ function is_directory($sDir)
 {
     $sPathProtected = check_ext_start(check_ext_end(trim($sDir)));
     if (is_dir($sPathProtected))
-        if (is_writable($sPathProtected))
+        if (is_readable($sPathProtected))
             return true;
     return false;
 }

@@ -63,14 +63,11 @@ class JoinForm
     public static function step2()
     {
         $oSession = new Session;
-
         if (!$oSession->exists('mail_step1'))
             Framework\Url\HeaderUrl::redirect(UriRoute::get('user','signup','step1'));
         elseif ($oSession->exists('mail_step2'))
             HeaderUrl::redirect(UriRoute::get('user','signup','step3'));
-
         unset($oSession);
-
 
         if (isset($_POST['submit_join_user2']))
         {
