@@ -2,6 +2,9 @@
     position: absolute;
     top:212px;
 }
+.carousel {
+    margin-top:30px;
+}
 
 /*--Main Container--*/
 .splash_slideshow {
@@ -49,7 +52,7 @@ h1:hover{color:#1877D5;cursor:default}
     -border-radius: 4px;
 }
 .paging a:hover{font-weight: bold;}
-.block_txt{margin:-80px 80px 20px}
+.block_txt{margin:380px 80px 5px 10px}
 .counter{margin:15px 2px 4px 1px}
 .login_block{margin:-5px 0 0 460px}
 
