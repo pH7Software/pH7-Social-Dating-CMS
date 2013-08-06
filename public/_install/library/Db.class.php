@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * @title            Helper PDO Database Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>

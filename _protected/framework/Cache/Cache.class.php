@@ -184,7 +184,7 @@ class Cache
 
          return $this;
     }
-    
+
     /**
      * Get the header content to put in the file.
      *
@@ -209,7 +209,7 @@ Created on ' . gmdate('Y-m-d H:i:s') . '
  ***************************************************************************/
 ';
     }
-    
+
     /**
      * Writes data in a cache file.
      *
@@ -293,8 +293,8 @@ Created on ' . gmdate('Y-m-d H:i:s') . '
     {
         $sFile = $this->_getFile();
         if (!$this->_bEnabled || !is_file($sFile) || (!empty($this->_iTtl) && $this->_oFile->modificationTime($sFile) < time()))
-        {   
-			// If the cache has expired
+        {
+            // If the cache has expired
             $this->_oFile->deleteFile($this->_getFile());
             return false;
         }

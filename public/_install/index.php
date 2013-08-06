@@ -6,7 +6,7 @@
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install
- * @version          1.2
+ * @version          1.3
  */
 
 define('PH7', 1);
@@ -29,27 +29,6 @@ require_once PH7_ROOT_INSTALL . 'inc/loader.inc.php';
 $sSlugUrlInstall = (!is_url_rewrite()) ? '?a=' : '';
 define('PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . $sSlugUrlInstall);
 
-$sDefaultCtrl = 'install';
-$sController = ucfirst($sDefaultCtrl) . 'Controller';
-$sAction = (!empty($_GET['a'])) ? $_GET['a'] : 'index';
-
-if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && ($sAction == 'index' || $sAction == 'license' || $sAction == 'config_path'))
-    exit('Your site is already installed.<br />If you want to redo a clean install, please delete your "_constants.php" file and delete all the content of your database.');
-
-try
-{
-    $sController = 'PH7\\' . $sController;
-    $oCtrl = new $sController;
-
-    if (method_exists($oCtrl, $sAction))
-        call_user_func(array($oCtrl, $sAction));
-    else
-        (new PH7\MainController)->error_404();
-
-}
-catch (Exception $oE)
-{
-    echo $oE->getMessage();
-}
+require PH7_ROOT_INSTALL . 'inc/init.inc.php';
 
 ob_end_flush();
