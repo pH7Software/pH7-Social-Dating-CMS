@@ -11,7 +11,8 @@ namespace PH7\Doc;
 defined('PH7') or exit('Restricted access');
 
 /**
- * @desc Detect the user's preferred language.
+ * Detect the user's preferred language.
+ *
  * @return string The first two lowercase letter of the browser language.
  */
 function get_browser_lang()
@@ -21,7 +22,8 @@ function get_browser_lang()
 }
 
 /**
- * @desc Display a page if the file exists, otherwise displays a 404.
+ * Display a page if the file exists, otherwise displays a 404.
+ *
  * @param string $sPage The page.
  * @return void
  */
@@ -33,13 +35,14 @@ function get_page($sPage)
         echo parse_var($sPage);
     }
     else
-    {   // Page Not Found!
+    {   // Set the Not Found page
         error_404();
     }
 }
 
 /**
- * @desc Parse the text to transform variable.
+ * Parse the text to transform variable.
+ *
  * @param string $sContent The text.
  * @return string The text parsed.
  */
@@ -58,7 +61,8 @@ function parse_var($sContent)
 }
 
 /**
- * @desc Get the page name.
+ * Get the page name.
+ *
  * @return string
  */
 function get_page_name()
@@ -117,7 +121,8 @@ function get_current_url()
 }
 
 /**
- * @desc Check if the language folder and the language core folder exists.
+ * Check if the language folder and the language core folder exists.
+ *
  * @return string The language available.
  */
 function set_lang()
@@ -144,7 +149,8 @@ function set_lang()
 }
 
 /**
- * @desc Escape function with htmlspecialchars() PHP function.
+ * Escape function with htmlspecialchars() PHP function.
+ *
  * @return string
  */
 function escape($sVal)
@@ -153,7 +159,8 @@ function escape($sVal)
 }
 
 /**
- * @desc Sets an error 404 page with HTTP 404 code status.
+ * Sets an error 404 page with HTTP 404 code status.
+ *
  * @return void
  */
 function error_404()

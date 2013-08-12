@@ -1,1 +1,1 @@
-<h1>Bienvenue sur la documentation du logiciel pH7 &laquo;Dating Community Social&raquo; !</h1>
+<h1>Bienvenue sur la documentation du logiciel &laquo; {site_name} &raquo; !</h1>
