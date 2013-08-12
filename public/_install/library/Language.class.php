@@ -39,7 +39,7 @@ class Language
     }
 
     /**
-     * Get language the browser of client.
+     * Get the language of the client browser.
      *
      * @return string First two letters of the languages ​​of the client browser.
      */
