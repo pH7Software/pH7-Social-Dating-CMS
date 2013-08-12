@@ -134,7 +134,7 @@ final class Server
      * @param string $sCheckHost Default: http://www.google.com
      * @return boolean Returns TRUE if the Internet connection is enabled, FALSE otherwise.
      */
-    public function checkInternetConnection($sCheckHost = 'www.google.com')
+    public static function checkInternetConnection($sCheckHost = 'www.google.com')
     {
         return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);
     }

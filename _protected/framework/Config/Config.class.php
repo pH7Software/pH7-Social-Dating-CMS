@@ -66,7 +66,7 @@ class Config implements IConfig
      */
     public function load($sFile)
     {
-        if(!is_file($sFile)) return false;
+        if (!is_file($sFile)) return false;
 
         $aContents = parse_ini_file($sFile, true);
         $this->values = array_merge($this->values, $aContents);

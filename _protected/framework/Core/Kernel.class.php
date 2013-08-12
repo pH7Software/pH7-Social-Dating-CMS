@@ -19,7 +19,8 @@ PH7\Framework\Str\Str,
 PH7\Framework\File\File,
 PH7\Framework\Mvc\Request\HttpRequest,
 PH7\Framework\Navigation\Browser,
-PH7\Framework\Registry\Registry;
+PH7\Framework\Registry\Registry,
+PH7\Framework\Server\Server;
 
 abstract class Kernel
 {
@@ -45,7 +46,25 @@ abstract class Kernel
 
     public function __construct()
     {
-        // Check license
+        $this->_checkInternetConnection();
+        $this->_checkLicense();
+
+        $this->config = Config::getInstance();
+        $this->str = new Str;
+        $this->file = new File;
+        $this->httpRequest = new HttpRequest;
+        $this->browser = new Browser;
+        $this->registry = Registry::getInstance();
+    }
+
+    /**
+     * Check License key.
+     *
+     * @final
+     * Returns '1' if the license key is invalid and stops the script with the exit() function.
+     */
+    private final function _checkLicense()
+    {
         $oLicense = new License;
         if (!defined( 'PH7_LICENSE_STATUS' )) define( 'PH7_LICENSE_STATUS', $oLicense->check()->licenseStatus() );
         if (!defined( 'PH7_LICENSE_NO_COPYRIGHT' )) define( 'PH7_LICENSE_NO_COPYRIGHT', $oLicense->check()->noCopyrightStatus() );
@@ -56,13 +75,21 @@ abstract class Kernel
             echo t('Sorry, your License Key is incorrect! Please go <a href="%0%">HiZup Software</a> to get a valid license key.', self::SOFTWARE_WEBSITE);
             exit(1);
         }
+    }
 
-        $this->config = Config::getInstance();
-        $this->str = new Str;
-        $this->file = new File;
-        $this->httpRequest = new HttpRequest;
-        $this->browser = new Browser;
-        $this->registry = Registry::getInstance();
+    /**
+     * Check Internet connection.
+     *
+     * @final
+     * @return integer Returns '1' if it is not connected to the Internet and stops the script with the exit() function.
+     */
+    private final function _checkInternetConnection()
+    {
+        if (!Server::checkInternetConnection())
+        {
+            echo t('Your server must be connected to the Internet for pH7Framework to function properly.');
+            exit(1);
+        }
     }
 
     public function __destruct()
