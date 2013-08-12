@@ -52,9 +52,9 @@ function loadPage(sLink)
         {
             var oContent = $(oData).find("#sub_ajph"); // Get the new Contents
             var oTitle = $(oData).filter('title'); // Get the new Title tag
-            var oHeadings = $(oData).find('#headings:first'); // Get the Headings Group
+            var oHeadings = $(oData).find('#lang'); // Get the Lang Menu
             $('title').text(oTitle.text()); // Set Title
-            $('#headings:first').html(oHeadings.html()); // Set the Headings Group
+            $('#lang').html(oHeadings.html()); // Set the Lang Menu
             $('#ajph').fadeOut(200, function() {
                 $(this).html(oContent.html()).fadeIn(200); // Set Contents
             });

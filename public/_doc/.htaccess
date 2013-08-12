@@ -1,6 +1,8 @@
 Options -MultiViews -Indexes
 Options +FollowSymLinks
 
+ErrorDocument 404 /no/__404err_this_is_not_found
+
 RewriteEngine On
 
 # e.g. http://my-site.com/en/

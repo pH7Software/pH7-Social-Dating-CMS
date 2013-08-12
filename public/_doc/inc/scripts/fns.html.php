@@ -11,7 +11,7 @@ namespace PH7\Doc;
 defined('PH7') or exit('Restricted access');
 
 /**
- * @return string The links of the files doc tpl.
+ * @return string The links of the tpl files doc.
  */
 function get_links_html()
 {
@@ -34,20 +34,20 @@ function get_links_html()
 }
 
 /**
- * @return string The links of the languages ​​available.
+ * @return string The links of the ​​available languages.
  */
 function get_langs_html()
 {
     $aLangs = get_dir_list(DATA_PATH);
     $aLangsList = include(ROOT_PATH . 'inc/conf.lang.php');
 
-    $sHtml = ''; // Default value
-
+    $sHtml = '<div id="lang">';
     foreach ($aLangs as $sLang)
     {
         if ($sLang === LANG) continue;
         $sHtml .= '<a href="' . RELATIVE . substr($sLang,0,2) . '" data-load="ajax"><img src="' . STATIC_URL . 'img/flags/' . $sLang . '.gif" alt="' . $aLangsList[$sLang] . '" title="' . $aLangsList[$sLang] . '" /></a>&nbsp;';
     }
+    $sHtml .= '</div>';
 
     return $sHtml;
 }
