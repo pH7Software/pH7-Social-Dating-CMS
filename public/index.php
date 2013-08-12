@@ -15,6 +15,7 @@ namespace PH7;
 
 define('PH7', 1);
 
+//define('PH7_REQUIRE_VERSION', '5.5.0'); // For pH7CMS 1.1
 define('PH7_REQUIRE_VERSION', '5.4.0');
 
 if (version_compare(PHP_VERSION, PH7_REQUIRE_VERSION, '<') === true)

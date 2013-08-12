@@ -12,6 +12,7 @@
 defined('PH7') or exit('Restricted access');
 
 //------------ Other ----------------//
+//define('PH7_REQUIRE_VERSION', '5.5.0'); // For pH7CMS 1.1
 define('PH7_REQUIRE_VERSION', '5.4.0');
 define('PH7_ENCODING', 'utf-8');
 define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');

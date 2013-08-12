@@ -97,7 +97,7 @@ catch (\Exception $oE)
     Except\PH7Exception::launch($oE);
 }
 
-/* Soon (Since PHP 5.5.0)
+/* Soo in pH7CMS 1.1 version
 finally {
     session_write_close();
 }*/
