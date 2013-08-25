@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            Autoloader Class
- * @desc             Loading Framework Class of CMS.
+ * @desc             Loading Framework Class of pH7CMS.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.

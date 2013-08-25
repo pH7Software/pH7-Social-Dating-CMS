@@ -1,7 +1,7 @@
 <?php
 /**
  * @title          License Class
- * @desc           License Class of the CMS.
+ * @desc           License Class of the pH7CMS.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
@@ -305,7 +305,7 @@ final class License
     }
 
     /**
-     * Get the status copyright of CMS, no copyright (true) = No trace of our society (the manufacturer, vendor), link, text, banner, etc.
+     * Get the status copyright, no copyright (true) = No trace of our society (the manufacturer, vendor), link, text, banner, etc.
      *
      * @access private
      * @return boolean

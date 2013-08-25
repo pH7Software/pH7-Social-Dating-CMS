@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            Kernel Class
- * @desc             Kernel Class of the CMS.
+ * @desc             Kernel Class of the pH7CMS.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2011-2013, Pierre-Henry Soria. All Rights Reserved.
