@@ -1,14 +1,14 @@
-{@if(!empty($backgrounds))@}
+{if !empty($backgrounds)}
 
 <ul>
 
- {@foreach($backgrounds as $background)@}
+ {each $background in $backgrounds}
 
     {{ $action = ($background->approved == 1) ? 'disapprovedbackground' : 'approvedbackground' }}
 
   <div class="thumb_photo">
-    <a href="{url_data_sys_mod}user/background/img/{% $background->username %}/{% $background->file %}" title="{@lang('Wallpaper of')@} {% $background->username %}" data-popup="image"><img src="{url_data_sys_mod}user/background/img/{% $background->username %}/{% $background->file %}" alt="{@lang('Wallpaper')@}" title="{@lang('Wallpaper of')@} {% $background->username %}" /></a>
-    <p class="italic">{@lang('Posted by')@} <a href="{% $oUser->getProfileLink($background->username) %}" target="_blank">{% $background->username %}</a></p>
+    <a href="{url_data_sys_mod}user/background/img/{% $background->username %}/{% $background->file %}" title="{lang 'Wallpaper of'} {% $background->username %}" data-popup="image"><img src="{url_data_sys_mod}user/background/img/{% $background->username %}/{% $background->file %}" alt="{lang 'Wallpaper'}" title="{lang 'Wallpaper of'} {% $background->username %}" /></a>
+    <p class="italic">{lang 'Posted by'} <a href="{% $oUser->getProfileLink($background->username) %}" target="_blank">{% $background->username %}</a></p>
 
     <div>
       {{ $text = ($background->approved == 1) ? t('Disapproved') : t('Approved') }}
@@ -17,14 +17,14 @@
     </div>
   </div>
 
- {@/foreach@}
+ {/each}
 
 </ul>
 
-{@main_include('page_nav.inc.tpl')@}
+{main_include 'page_nav.inc.tpl'}
 
-{@else@}
+{else}
 
-  <p class="center">{@lang('No Profile Background for the treatment of moderate.')@}</p>
+  <p class="center">{lang 'No Profile Background for the treatment of moderate.'}</p>
 
-{@/if@}
+{/if}

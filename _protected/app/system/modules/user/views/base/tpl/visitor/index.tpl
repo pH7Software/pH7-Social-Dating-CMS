@@ -1,30 +1,30 @@
 <div class="center" id="visitor_block">
 
- {@if($user_views_setting == 'no')@}
-  <div class="center alert-message warning">{@lang('To see the new members who view your profile, you must first change')@} <a href="{{ $design->url('user','setting','privacy') }}">{@lang('your privacy settings')@}</a>.</div>
- {@/if@}
+  {if $user_views_setting == 'no'}
+    <div class="center alert-message warning">{lang 'To see the new members who view your profile, you must first change'} <a href="{{ $design->url('user','setting','privacy') }}">{lang 'your privacy settings'}</a>.</div>
+  {/if}
 
-{@if(empty($error))@}
+  {if empty($error)}
 
-<h3 class="underline">{@lang('Recently Viewed By:')@}</h3>
-<p class="italic underline"><strong><a href="{{$design->url('user','visitor','index',$username)}}">{visitor_number}</a></strong></p><br />
+    <h3 class="underline">{lang 'Recently Viewed By:'}</h3>
+    <p class="italic underline"><strong><a href="{{ $design->url('user','visitor','index',$username) }}">{visitor_number}</a></strong></p><br />
 
-{@foreach($visitors as $v)@}
+    {each $v in $visitors}
 
-   <div class="s_photo">
-    {{ $avatarDesign->get($v->username, $v->firstName, $v->sex, 64, true) }}
-   </div>
+      <div class="s_photo">
+        {{ $avatarDesign->get($v->username, $v->firstName, $v->sex, 64, true) }}
+      </div>
 
-  {@/foreach@}
+    {/each}
 
-   {@main_include('page_nav.inc.tpl')@}
-   <br />
-   <p class="center bottom"><a class="m_button" href="{{$design->url('user','visitor','search',$username)}}">{@lang('Search for a visitor of %0%', $v->username)@}</a></p>
+    {main_include 'page_nav.inc.tpl'}
+    <br />
+    <p class="center bottom"><a class="m_button" href="{{ $design->url('user','visitor','search',$username) }}">{lang 'Search for a visitor of %0%', $v->username}</a></p>
 
-{@else@}
+  {else}
 
-  <p>{error}</p>
+    <p>{error}</p>
 
-{@/if@}
+  {/if}
 
 </div>

@@ -1,1 +1,1 @@
-{@include('list.inc.tpl')@}
+{include 'list.inc.tpl'}

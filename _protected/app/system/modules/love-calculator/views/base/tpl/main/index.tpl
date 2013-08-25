@@ -9,7 +9,7 @@
 
   <td width="300">
     <div class="heart"><span>0</span>%</div>
-    <p class="love_txt bold pink2">{@lang('Love!')@}</p>
+    <p class="love_txt bold pink2">{lang 'Love!'}</p>
   </td>
 
   <td width="126" height="140">

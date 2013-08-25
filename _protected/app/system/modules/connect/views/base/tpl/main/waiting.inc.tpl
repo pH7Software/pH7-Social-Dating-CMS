@@ -1,1 +1,1 @@
-{@main_include('loading.inc.tpl')@}
+{main_include 'loading.inc.tpl'}

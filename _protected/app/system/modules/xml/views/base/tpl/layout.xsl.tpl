@@ -6,21 +6,21 @@
     <xsl:template match="/">
           <html xmlns="http://www.w3.org/1999/xhtml">
             <head>
-                <title>{@lang('XML Sitemap - %site_name%')@}</title>
+                <title>{lang 'XML Sitemap - %site_name%'}</title>
                 <meta charset="utf-8" />
                 <link rel="stylesheet" href="{url_tpl_mod_css}style.css" />
             </head>
            <body>
               <header>
-                <h1>{@lang('Site Map')@} - <a href="{url_root}">{site_name}</a></h1>
+                <h1>{lang 'Site Map'} - <a href="{url_root}">{site_name}</a></h1>
               </header>
                 <section>
                     <table>
                         <tr style="border-bottom:1px black solid;">
-                            <th>{@lang('URL')@}</th>
-                            <th>{@lang('Priority')@}</th>
-                            <th>{@lang('Change Frequency')@}</th>
-                            <th>{@lang('LastChange (GMT)')@}</th>
+                            <th>{lang 'URL'}</th>
+                            <th>{lang 'Priority'}</th>
+                            <th>{lang 'Change Frequency'}</th>
+                            <th>{lang 'LastChange (GMT)'}</th>
                         </tr>
                         <xsl:variable name="alpha_lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
                         <xsl:variable name="alpha_upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>

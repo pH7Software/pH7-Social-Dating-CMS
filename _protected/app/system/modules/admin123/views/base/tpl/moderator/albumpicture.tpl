@@ -1,16 +1,16 @@
 <div class="center">
-{@if(!empty($albums))@}
+{if !empty($albums)}
 
 <ul>
 
- {@foreach($albums as $album)@}
+ {each $album in $albums}
 
    {{ $action = ($album->approved == 1) ? 'disapprovedalbumpicture' : 'approvedalbumpicture' }}
    {{ $absolute_url = Framework\Mvc\Router\UriRoute::get('picture','main','album',"$album->username,$album->title,$album->albumId") }}
 
   <div class="thumb_photo">
     <a href="{absolute_url}" target="_blank"><img src="{url_data_sys_mod}picture/img/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" /></a>
-    <p class="italic">{@lang('Posted by')@} <a href="{% $oUser->getProfileLink($album->username) %}" target="_blank">{% $album->username %}</a></p>
+    <p class="italic">{lang 'Posted by'} <a href="{% $oUser->getProfileLink($album->username) %}" target="_blank">{% $album->username %}</a></p>
 
     <div>
       {{ $text = ($album->approved == 1) ? t('Disapproved') : t('Approved') }}
@@ -19,15 +19,15 @@
     </div>
   </div>
 
- {@/foreach@}
+ {/each}
 
 </ul>
 
-{@main_include('page_nav.inc.tpl')@}
+{main_include 'page_nav.inc.tpl'}
 
-{@else@}
+{else}
 
-  {@lang('No Picture Albums for the treatment of moderate.')@}
+  {lang 'No Picture Albums for the treatment of moderate.'}
 
-{@/if@}
+{/if}
 </div>

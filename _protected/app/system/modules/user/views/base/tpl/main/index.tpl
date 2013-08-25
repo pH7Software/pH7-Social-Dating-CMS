@@ -1,17 +1,17 @@
-{@if(!User::auth())@}
+{if !User::auth()}
 
-  {@if($is_splash_page)@}
+  {if $is_splash_page}
 
-    {@manual_include('index.guest_splash.inc.tpl')@}
+    {manual_include 'index.guest_splash.inc.tpl'}
 
-  {@else@}
+  {else}
 
-    {@manual_include('index.guest.inc.tpl')@}
+    {manual_include 'index.guest.inc.tpl'}
 
-  {@/if@}
+  {/if}
 
-{@else@}
+{else}
 
-  {@manual_include('index.user.inc.tpl')@}
+  {manual_include 'index.user.inc.tpl'}
 
-{@/if@}
+{/if}

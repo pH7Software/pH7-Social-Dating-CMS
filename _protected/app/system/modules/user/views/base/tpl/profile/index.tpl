@@ -1,120 +1,120 @@
-{@if(!empty($img_background))@}
+{if !empty($img_background)}
   {* Sets The Profile Background *}
   <script>
   document.body.style.backgroundImage="url('{url_data_sys_mod}user/background/img/{username}/{img_background}')";
   document.body.style.backgroundRepeat='repeat';
   document.body.style.backgroundPosition='top center';
   </script>
-{@/if@}
+{/if}
 
-{@if(empty($error))@}
+{if empty($error)}
 
 <ol id="toc">
-    <li><a href="#general"><span>{@lang('Info')@}</span></a></li>
-    <li><a href="#map"><span>{@lang('Map')@}</span></a></li>
+    <li><a href="#general"><span>{lang 'Info'}</span></a></li>
+    <li><a href="#map"><span>{lang 'Map'}</span></a></li>
     <li><a href="#friend"><span>{friend_link}</span></a></li>
-    {@if(User::auth() && !$this->str->equals((int)$member_id, $id))@}<li><a href="#mutual_friend"><span>{mutual_friend_link}</span></a></li>{@/if@}
-    <li><a href="#picture"><span>{@lang('Photos')@}</span></a></li>
-    <li><a href="#video"><span>{@lang('Videos')@}</span></a></li>
-    <li><a href="#forum"><span>{@lang('Topics')@}</span></a></li>
-    <li><a href="#note"><span>{@lang('Notes')@}</span></a></li>
-    <li><a href="#visitor"><span>{@lang('Recently Viewed')@}</span></a></li>
-    <li><a rel="nofollow" href="{mail_link}"><span>{@lang('Send Message')@}</span></a></li>
-    <li><a rel="nofollow" href="{messenger_link}"><span>{@lang('Live Chat')@}</span></a></li>
-    <li><a ref="nofollow" href="{befriend_link}"><span>{@lang('Add Friend')@}</span></a></li>
-    {@if(User::auth() && !$this->str->equals((int)$member_id, $id))@}<li><a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{@lang('Love Calculator')@}"><span>{@lang('Match')@} <b class="pink2">&hearts;</b></span></a></li>{@/if@}
+    {if User::auth() && !$this->str->equals((int)$member_id, $id)}<li><a href="#mutual_friend"><span>{mutual_friend_link}</span></a></li>{/if}
+    <li><a href="#picture"><span>{lang 'Photos'}</span></a></li>
+    <li><a href="#video"><span>{lang 'Videos'}</span></a></li>
+    <li><a href="#forum"><span>{lang 'Topics'}</span></a></li>
+    <li><a href="#note"><span>{lang 'Notes'}</span></a></li>
+    <li><a href="#visitor"><span>{lang 'Recently Viewed'}</span></a></li>
+    <li><a rel="nofollow" href="{mail_link}"><span>{lang 'Send Message'}</span></a></li>
+    <li><a rel="nofollow" href="{messenger_link}"><span>{lang 'Live Chat'}</span></a></li>
+    <li><a ref="nofollow" href="{befriend_link}"><span>{lang 'Add Friend'}</span></a></li>
+    {if User::auth() && !$this->str->equals((int)$member_id, $id)}<li><a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Love Calculator'}"><span>{lang 'Match'} <b class="pink2">&hearts;</b></span></a></li>{/if}
 </ol>
 
 <div class="content" id="general">
 {{ UserDesignCoreModel::userStatus($id) }}
 {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
 
-<p><span class="bold">{@lang('I am:')@}</span> <span class="italic">{@lang($sex)@}</span></p>
+<p><span class="bold">{lang 'I am:'}</span> <span class="italic">{lang $sex}</span></p>
 <div class="break"></div>
 
-{@if(!empty($match_sex))@}
-  <p><span class="bold">{@lang('Seeking a:')@}</span> <span class="italic">{@lang($match_sex)@}</span></p>
+{if !empty($match_sex)}
+  <p><span class="bold">{lang 'Seeking a:'}</span> <span class="italic">{lang $match_sex}</span></p>
   <div class="break"></div>
-{@/if@}
+{/if}
 
-<p><span class="bold">{@lang('First name:')@}</span> <span class="italic">{first_name}</span></p>
+<p><span class="bold">{lang 'First name:'}</span> <span class="italic">{first_name}</span></p>
 <div class="break"></div>
 
-{@if(!empty($last_name))@}
-  <p><span class="bold">{@lang('Last name:')@}</span> <span class="italic">{last_name}</span></p>
+{if !empty($last_name)}
+  <p><span class="bold">{lang 'Last name:'}</span> <span class="italic">{last_name}</span></p>
   <div class="break"></div>
-{@/if@}
+{/if}
 
-{@if(!empty($middle_name))@}
-  <p><span class="bold">{@lang('Middle name:')@}</span> <span class="italic">{middle_name}</span></p>
+{if !empty($middle_name)}
+  <p><span class="bold">{lang 'Middle name:'}</span> <span class="italic">{middle_name}</span></p>
   <div class="break"></div>
-{@/if@}
+{/if}
 
-{@if(!empty($age))@}
-  <p><span class="bold">{@lang('Age:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$age) }}">{age}</a> <span class="gray">({birth_date})</span></span></p>
+{if !empty($age)}
+  <p><span class="bold">{lang 'Age:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$age) }}">{age}</a> <span class="gray">({birth_date})</span></span></p>
   <div class="break"></div>
-{@/if@}
+{/if}
 
-{@if(!empty($description))@}
-  <div class="profile_desc"><p class="bold">{@lang('Description:')@}</p> <div class="quote"><p class="italic">{description}</p></div></div>
-{@/if@}
+{if !empty($description)}
+  <div class="profile_desc"><p class="bold">{lang 'Description:'}</p> <div class="quote"><p class="italic">{description}</p></div></div>
+{/if}
 
 {* Profile's Fields *}
-{@foreach($fields as $key => $val)@}
+{each $key => $val in $fields}
 
-  {@if($key != 'description' && $key != 'middleName' && !empty($val))@}
+  {if $key != 'description' && $key != 'middleName' && !empty($val)}
     {{ $val = escape($val, true) }}
 
-    {@if($key == 'height')@}
-      <p><span class="bold">{@lang('Height:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span></p>
+    {if $key == 'height'}
+      <p><span class="bold">{lang 'Height:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span></p>
 
-    {@elseif($key == 'weight')@}
-      <p><span class="bold">{@lang('Weight:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span></p>
+    {elseif $key == 'weight'}
+      <p><span class="bold">{lang 'Weight:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span></p>
 
-    {@elseif($key == 'country')@}
-      <p><span class="bold">{@lang('Country:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" /></p>
+    {elseif $key == 'country'}
+      <p><span class="bold">{lang 'Country:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" /></p>
 
-    {@elseif($key == 'city')@}
-      <p><span class="bold">{@lang('City / Town:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">{city}</a></span></p>
+    {elseif $key == 'city'}
+      <p><span class="bold">{lang 'City / Town:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">{city}</a></span></p>
 
-    {@elseif($key == 'state')@}
-      <p><span class="bold">{@lang('State:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span></p>
+    {elseif $key == 'state'}
+      <p><span class="bold">{lang 'State:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span></p>
 
-    {@elseif($key == 'zipCode')@}
-      <p><span class="bold">{@lang('ZIP/Postal Code:')@}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip='.$val) }}">{val}</a></span></p>
+    {elseif $key == 'zipCode'}
+      <p><span class="bold">{lang 'ZIP/Postal Code:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip='.$val) }}">{val}</a></span></p>
 
-    {@elseif($key == 'website')@}
-      <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{@lang('Site / Blog:')@}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
+    {elseif $key == 'website'}
+      <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site / Blog:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
 
-    {@elseif($key == 'socialNetworkSite')@}
-      <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{@lang('Social Network Profile:')@}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
+    {elseif $key == 'socialNetworkSite'}
+      <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Network Profile:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
 
-    {@else@}
+    {else}
       {{ $lang_key = strtolower($key) }}
 
-      {@if(strstr($key, 'url'))@}
-        <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{@lang($lang_key)@}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
-      {@else@}
-        <p><span class="bold">{@lang($lang_key)@}</span> <span class="italic">{val}</a></span></p>
-      {@/if@}
-    {@/if@}
+      {if strstr($key, 'url')}
+        <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang $lang_key}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
+      {else}
+        <p><span class="bold">{lang $lang_key}</span> <span class="italic">{val}</a></span></p>
+      {/if}
+    {/if}
 
     <div class="break"></div>
-  {@/if@}
+  {/if}
 
-{@/foreach@}
+{/each}
 
-{@if(!empty($join_date))@}
-  <p><span class="bold">{@lang('Join Date:')@}</span> <span class="italic">{join_date}</span></p>
+{if !empty($join_date)}
+  <p><span class="bold">{lang 'Join Date:'}</span> <span class="italic">{join_date}</span></p>
   <div class="break"></div>
-{@/if@}
+{/if}
 
-{@if(!empty($last_activity))@}
-  <p><span class="bold">{@lang('Last Activity:')@}</span> <span class="italic">{last_activity}</span></p>
+{if !empty($last_activity)}
+  <p><span class="bold">{lang 'Last Activity:'}</span> <span class="italic">{last_activity}</span></p>
   <div class="break"></div>
-{@/if@}
+{/if}
 
-<p><span class="bold">{@lang('Views:')@}</span> <span class="italic">{% Framework\Mvc\Model\Statistic::getView($id,'Members') %}</span></p>
+<p><span class="bold">{lang 'Views:'}</span> <span class="italic">{% Framework\Mvc\Model\Statistic::getView($id,'Members') %}</span></p>
 <div class="break"></div>
 
 {{ RatingDesignCore::voting($id,'Members') }}
@@ -122,7 +122,7 @@
 </div></div>
 
 <div class="content" id="map">
-<p><span class="bold">{@lang('Profile Map:')@}</span>{map}</p>
+<p><span class="bold">{lang 'Profile Map:'}</span>{map}</p>
 </div>
 
 <div class="content" id="friend">
@@ -132,14 +132,14 @@
  </script>
 </div>
 
-{@if(User::auth() && !$this->str->equals((int)$member_id, $id))@}
+{if User::auth() && !$this->str->equals((int)$member_id, $id)}
   <div class="content" id="mutual_friend">
     <script>
      var url_mutual_friend_block = '{{ $design->url('user','friend','mutual',$username) }}';
      $('#mutual_friend').load(url_mutual_friend_block + ' #friend_block');
     </script>
   </div>
-{@/if@}
+{/if}
 
 <div class="content" id="picture">
  <script>
@@ -184,15 +184,15 @@
 {{ CommentDesignCore::link($id, 'Profile') }}
 
 <script src="{url_static_js}tabs.js"></script>
-<script>tabs('p', ['general','map','friend',{@if(User::auth() && !$this->str->equals((int)$member_id, $id))@}'mutual_friend',{@/if@}'picture','video','forum','note','visitor']);</script>
+<script>tabs('p', ['general','map','friend',{if User::auth() && !$this->str->equals((int)$member_id, $id)}'mutual_friend',{/if}'picture','video','forum','note','visitor']);</script>
 
 {* Signup Popup *}
-{@if(!User::auth() && !AdminCore::auth())@}
+{if !User::auth() && !AdminCore::auth()}
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'signup_popup.js') }}
-{@/if@}
+{/if}
 
-{@else@}
+{else}
 
 <p class="center">{error}</p>
 
-{@/if@}
+{/if}

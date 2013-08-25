@@ -1,2 +1,2 @@
 {{ ContactForm::display() }}
-<em>{@lang('Your IP is:')@} {ip}</em>
+<em>{lang 'Your IP is:'} {ip}</em>
