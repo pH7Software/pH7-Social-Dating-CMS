@@ -53,14 +53,14 @@ class BrowsePictureAjax
         // Scanning the thumbnail folder for JPG images:
         $aG = glob(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'webcam/picture/img/thumb/*.jpg');
 
-        if (!$aG) {
+        if (!$aG)
             $aG = array();
-        }
 
         // We loop though the file names returned by glob,
         // and we populate a second file with modifed timestamps.
 
-        for ($i = 0, $iCount = count($aG); $i < $iCount; $i++) {
+        for ($i = 0, $iCount = count($aG); $i < $iCount; $i++)
+        {
             $this->aPath = explode('/', $aG[$i]);
             $this->aNames[$i] = array_pop($this->aPath);
 
@@ -79,14 +79,16 @@ class BrowsePictureAjax
         {
             $this->mStart = array_search($this->oHttpRequest->get('start'), $this->aNames);
 
-            if ($this->mStart === false) {
+            if ($this->mStart === false)
+            {
                 // Such a picture was not found
                 $this->mStart = 0;
             }
         }
 
 
-        if (@$this->aNames[$this->mStart + $this->iPerPage]) {
+        if (@$this->aNames[$this->mStart + $this->iPerPage])
+        {
             $this->iNextStart = $this->aNames[$this->mStart + $this->iPerPage];
         }
 
@@ -95,11 +97,15 @@ class BrowsePictureAjax
 
     private function adminDeletePicture()
     {
-        if (AdminCore::auth()) {
-            if($this->httpRequest->getExists('file') == true && (new Framework\File\File)->deleteFile($sFile) == true) {
+        if (AdminCore::auth())
+        {
+            if ($this->httpRequest->getExists('file') == true && (new Framework\File\File)->deleteFile($sFile) == true)
+            {
                 ;
                 $this->sMsg = t('The photo has been deleted!');
-            } else {
+            }
+            else
+            {
                 $this->sMsg = t('Sorry, we did not find the photo!');
             }
             Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('webcam', 'webcam', 'picture'));

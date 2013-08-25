@@ -32,7 +32,7 @@ class UploadPictureAjax
          */
 
         // We only need to handle POST requests:
-        if((new HttpRequest)->getMethod() != HttpRequest::METHOD_POST) throw new UserException('The method must be post request!');
+        if ((new HttpRequest)->getMethod() != HttpRequest::METHOD_POST) throw new UserException('The method must be post request!');
 
         return $this;
     }
@@ -62,7 +62,8 @@ class UploadPictureAjax
 
 
         $rResult = file_put_contents($this->sTmpPathFile, $rInput);
-        if (!$rResult) {
+        if (!$rResult)
+        {
             echo '{
         "error"     : 1,
         "message"   : "Failed save the image. Make sure you chmod the uploads folder and its subfolders to 777."
@@ -77,7 +78,8 @@ class UploadPictureAjax
     {
         $aInfo = getimagesize($this->sTmpPathFile);
 
-        if ($aInfo['mime'] != 'image/jpeg') {
+        if ($aInfo['mime'] != 'image/jpeg')
+        {
             unlink($this->sTmpPathFile);
             throw new UserException('Image type invalid!');
         }

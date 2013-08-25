@@ -1,8 +1,7 @@
 <?php
 /**
- * @title Stop DDoS attack.
- *
- * Trying to protect against Distributed Denial-Of-Service attack.
+ * @title          Stop DDoS attack.
+ * @desc           Trying to protect against Distributed Denial-Of-Service attack.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.

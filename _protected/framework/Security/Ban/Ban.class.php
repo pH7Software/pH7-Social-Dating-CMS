@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            Ban Class
- * @desc             Method for managing the banishment of CMS.
+ * @desc             Method for managing the banishment of pH7CMS.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.

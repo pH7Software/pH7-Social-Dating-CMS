@@ -52,7 +52,7 @@ final class Autoloader
     {
         $sClass = $this->_removeNamespace($sClass);
 
-        // For the global Classes of the CMS
+        // For the global Classes of the pH7Framework
         if (is_file(PH7_PATH_APP . 'includes/classes/' . $sClass . '.php'))
             require_once PH7_PATH_APP . 'includes/classes/' . $sClass . '.php';
 
