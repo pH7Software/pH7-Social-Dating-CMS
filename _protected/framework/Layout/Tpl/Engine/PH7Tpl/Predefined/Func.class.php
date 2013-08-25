@@ -4,7 +4,7 @@
  * @desc             We define functions (and helpers).
  *                   Predefined functions can save considerable resources and speeds up the code with respect to functions in variables assigned by through the object's template engine (PH7Tpl).
  *
- * @updated          The Last Update 07/31/12 23:22 (Greenwich Mean Time)
+ * @updated          The Last Update 08/26/13 21:16 (Greenwich Mean Time)
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
@@ -28,7 +28,7 @@ class Func extends Predefined
      */
     public function assign()
     {
-        $this->addFunc('<ph:date="(\w+)" ?/?>', 'date(\'$1\')');
+        $this->addFunc('<ph:date value="(\w+)" ?/?>', 'date(\'$1\')');
 
         return $this;
     }
