@@ -1,8 +1,8 @@
-{@if(empty($msg))@}
+{if empty($msg)}
 
-<p class="bold">{@lang('Sorry, this message was not found.')@}</p>
+<p class="bold">{lang 'Sorry, this message was not found.'}</p>
 
-{@else@}
+{else}
 
 {* Set Variables *}
 {{ $usernameSender = (empty($msg->username)) ? 'admin' : escape($msg->username) }}
@@ -18,19 +18,19 @@
 <div class="center">
 
 <dl>
- <dt>{@lang('Author:')@}</dt>
+ <dt>{lang 'Author:'}</dt>
  <dd>{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</dd>
- <dt>{@lang('Date:')@}</dt>
+ <dt>{lang 'Date:'}</dt>
  <dd>{% $dateTime->get($msg->sendDate)->dateTime() %}</dd>
- <dt>{@lang('Subject:')@}</dt>
+ <dt>{lang 'Subject:'}</dt>
  <dd>{subject}</dd>
- <dt>{@lang('Message:')@}</dt>
+ <dt>{lang 'Message:'}</dt>
  <dd>{message}</dd>
 </dl>
 
-<div><a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{@lang('Reply')@}</a> | {{ LinkCoreForm::display($label_txt, 'mail', 'main', $set_to, array('id'=>$msg->messageId)) }}
-{@if($is_trash)@} | {{ LinkCoreForm::display(t('Move to Inbox'), 'mail', 'main', 'setrestor', array('id'=>$msg->messageId)) }}{@/if@}</div>
+<div><a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | {{ LinkCoreForm::display($label_txt, 'mail', 'main', $set_to, array('id'=>$msg->messageId)) }}
+{if $is_trash} | {{ LinkCoreForm::display(t('Move to Inbox'), 'mail', 'main', 'setrestor', array('id'=>$msg->messageId)) }}{/if}</div>
 
  </div>
 
-{@/if@}
+{/if}

@@ -23,7 +23,7 @@ function showUserChart() {
   var sDay = oD.toLocaleDateString();
 
   var aData = google.visualization.arrayToDataTable([
-    ['{@lang('Days')@}', '{@lang('All')@}', '{@lang('Man')@}', '{@lang('Women')@}', '{@lang('Couple')@}'],
+    ['{lang 'Days'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couple'}'],
     [sDateSince, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}],
     [sYear, {year_total_members}, {year_total_male_members}, {year_total_female_members}, {year_total_couple_members}],
     [sMonth, {month_total_members}, {month_total_male_members}, {month_total_female_members}, {month_total_couple_members}],
@@ -32,7 +32,7 @@ function showUserChart() {
   ]);
 
   var aOptions = {
-    title: '{@lang('Users Statistics')@}'
+    title: '{lang 'Users Statistics'}'
   };
 
   new google.visualization.LineChart($('#user_chart')[0]).draw(aData, aOptions);
@@ -44,16 +44,16 @@ function showUserChart() {
     <table class="center">
 
   <tr>
-    <th class="bold">{@lang('Quick Stats')@}</th>
-    <th class="bold">{@lang('Today')@}</th>
-    <th class="bold">{@lang('Last week')@}</th>
-    <th class="bold">{@lang('This month')@}</th>
-    <th class="bold">{@lang('This year (%0%)', date('Y'))@}</th>
-    <th class="bold">{@lang('All (since %0%)', $since_date)@}</th>
+    <th class="bold">{lang 'Quick Stats'}</th>
+    <th class="bold">{lang 'Today'}</th>
+    <th class="bold">{lang 'Last week'}</th>
+    <th class="bold">{lang 'This month'}</th>
+    <th class="bold">{lang 'This year (%0%)', date('Y')}</th>
+    <th class="bold">{lang 'All (since %0%)', $since_date}</th>
   </tr>
 
   <tr>
-    <td>{@lang('All Members Logins')@}</td>
+    <td>{lang 'All Members Logins'}</td>
     <td>{today_login_members}</td>
     <td>{week_login_members}</td>
     <td>{month_login_members}</td>
@@ -62,7 +62,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Men Members Logins')@}</td>
+    <td>{lang 'Men Members Logins'}</td>
     <td>{today_login_male_members}</td>
     <td>{week_login_male_members}</td>
     <td>{month_login_male_members}</td>
@@ -71,7 +71,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Women Members Logins')@}</td>
+    <td>{lang 'Women Members Logins'}</td>
     <td>{today_login_female_members}</td>
     <td>{week_login_female_members}</td>
     <td>{month_login_female_members}</td>
@@ -80,7 +80,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Couple Members Logins')@}</td>
+    <td>{lang 'Couple Members Logins'}</td>
     <td>{today_login_couple_members}</td>
     <td>{week_login_couple_members}</td>
     <td>{month_login_couple_members}</td>
@@ -89,7 +89,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('All Affiliates Logins')@}</td>
+    <td>{lang 'All Affiliates Logins'}</td>
     <td>{today_login_affiliate}</td>
     <td>{week_login_affiliate}</td>
     <td>{month_login_affiliate}</td>
@@ -98,7 +98,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Men Affiliates Logins')@}</td>
+    <td>{lang 'Men Affiliates Logins'}</td>
     <td>{today_login_male_affiliate}</td>
     <td>{week_login_male_affiliate}</td>
     <td>{month_login_male_affiliate}</td>
@@ -107,7 +107,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Women Affiliates Logins')@}</td>
+    <td>{lang 'Women Affiliates Logins'}</td>
     <td>{today_login_female_affiliate}</td>
     <td>{week_login_female_affiliate}</td>
     <td>{month_login_female_affiliate}</td>
@@ -116,7 +116,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('All Admins Logins')@}</td>
+    <td>{lang 'All Admins Logins'}</td>
     <td>{today_login_admins}</td>
     <td>{week_login_admins}</td>
     <td>{month_login_admins}</td>
@@ -125,7 +125,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Men Admins Logins')@}</td>
+    <td>{lang 'Men Admins Logins'}</td>
     <td>{today_login_male_admins}</td>
     <td>{week_login_male_admins}</td>
     <td>{month_login_male_admins}</td>
@@ -134,7 +134,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Women Admins Logins')@}</td>
+    <td>{lang 'Women Admins Logins'}</td>
     <td>{today_login_female_admins}</td>
     <td>{week_login_female_admins}</td>
     <td>{month_login_female_admins}</td>
@@ -143,7 +143,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('All Members Registrations')@}</td>
+    <td>{lang 'All Members Registrations'}</td>
     <td>{today_total_members}</td>
     <td>{week_total_members}</td>
     <td>{month_total_members}</td>
@@ -152,7 +152,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Men Members Registrations')@}</td>
+    <td>{lang 'Men Members Registrations'}</td>
     <td>{today_total_male_members}</td>
     <td>{week_total_male_members}</td>
     <td>{month_total_male_members}</td>
@@ -161,7 +161,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Women Members Registrations')@}</td>
+    <td>{lang 'Women Members Registrations'}</td>
     <td>{today_total_female_members}</td>
     <td>{week_total_female_members}</td>
     <td>{month_total_female_members}</td>
@@ -170,7 +170,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Couple Members Registrations')@}</td>
+    <td>{lang 'Couple Members Registrations'}</td>
     <td>{today_total_couple_members}</td>
     <td>{week_total_couple_members}</td>
     <td>{month_total_couple_members}</td>
@@ -179,7 +179,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('All Affiliates Registrations')@}</td>
+    <td>{lang 'All Affiliates Registrations'}</td>
     <td>{today_total_affiliate}</td>
     <td>{week_total_affiliate}</td>
     <td>{month_total_affiliate}</td>
@@ -188,7 +188,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Men Affiliates Registrations')@}</td>
+    <td>{lang 'Men Affiliates Registrations'}</td>
     <td>{today_total_male_affiliate}</td>
     <td>{week_total_male_affiliate}</td>
     <td>{month_total_male_affiliate}</td>
@@ -197,7 +197,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Women Affiliates Registrations')@}</td>
+    <td>{lang 'Women Affiliates Registrations'}</td>
     <td>{today_total_female_affiliate}</td>
     <td>{week_total_female_affiliate}</td>
     <td>{month_total_female_affiliate}</td>
@@ -206,7 +206,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('All Admins Registrations')@}</td>
+    <td>{lang 'All Admins Registrations'}</td>
     <td>{today_total_admins}</td>
     <td>{week_total_admins}</td>
     <td>{month_total_admins}</td>
@@ -215,7 +215,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Men Admins Registrations')@}</td>
+    <td>{lang 'Men Admins Registrations'}</td>
     <td>{today_total_male_admins}</td>
     <td>{week_total_male_admins}</td>
     <td>{month_total_male_admins}</td>
@@ -224,7 +224,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Women Admins Registrations')@}</td>
+    <td>{lang 'Women Admins Registrations'}</td>
     <td>{today_total_female_admins}</td>
     <td>{week_total_female_admins}</td>
     <td>{month_total_female_admins}</td>
@@ -233,7 +233,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Blogs')@}</td>
+    <td>{lang 'Blogs'}</td>
     <td>{today_total_blogs}</td>
     <td>{week_total_blogs}</td>
     <td>{month_total_blogs}</td>
@@ -242,7 +242,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Notes')@}</td>
+    <td>{lang 'Notes'}</td>
     <td>{today_total_notes}</td>
     <td>{week_total_notes}</td>
     <td>{month_total_notes}</td>
@@ -251,7 +251,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Messages')@}</td>
+    <td>{lang 'Messages'}</td>
     <td>{today_total_mails}</td>
     <td>{week_total_mails}</td>
     <td>{month_total_mails}</td>
@@ -260,7 +260,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Profile Comments')@}</td>
+    <td>{lang 'Profile Comments'}</td>
     <td>{today_total_profile_comments}</td>
     <td>{week_total_profile_comments}</td>
     <td>{month_total_profile_comments}</td>
@@ -269,7 +269,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Picture Comments')@}</td>
+    <td>{lang 'Picture Comments'}</td>
     <td>{today_total_picture_comments}</td>
     <td>{week_total_picture_comments}</td>
     <td>{month_total_picture_comments}</td>
@@ -278,7 +278,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Video Comments')@}</td>
+    <td>{lang 'Video Comments'}</td>
     <td>{today_total_video_comments}</td>
     <td>{week_total_video_comments}</td>
     <td>{month_total_video_comments}</td>
@@ -287,7 +287,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Blog Comments')@}</td>
+    <td>{lang 'Blog Comments'}</td>
     <td>{today_total_blog_comments}</td>
     <td>{week_total_blog_comments}</td>
     <td>{month_total_blog_comments}</td>
@@ -296,7 +296,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Note Comments')@}</td>
+    <td>{lang 'Note Comments'}</td>
     <td>{today_total_note_comments}</td>
     <td>{week_total_note_comments}</td>
     <td>{month_total_note_comments}</td>
@@ -305,7 +305,7 @@ function showUserChart() {
   </tr>
 
   <tr>
-    <td>{@lang('Game Comments')@}</td>
+    <td>{lang 'Game Comments'}</td>
     <td>{today_total_game_comments}</td>
     <td>{week_total_game_comments}</td>
     <td>{month_total_game_comments}</td>

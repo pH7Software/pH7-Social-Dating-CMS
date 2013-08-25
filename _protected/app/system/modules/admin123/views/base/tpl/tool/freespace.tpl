@@ -14,9 +14,9 @@
         oDataTable.addColumn('string', 'Free Space');
         oDataTable.addColumn('number', 'Size');
         var aData = [
-            {@foreach($aChartData as $aData)@}
+            {each $aData in $aChartData}
                 ["{% $aData['title'] %}", {v:{% $aData['size'] %}, f:"{% Framework\File\Various::bytesToSize($aData['size']) %}"}],
-            {@/foreach@}
+            {/each}
         ];
         oDataTable.addRows(aData);
         new google.visualization.PieChart($('#free_space_chart')[0]).draw(oDataTable);
@@ -26,6 +26,6 @@
   <div id="free_space_chart"></div>
   </div>
 
-  <p class="red">{@lang('Note: If all folders are on the same hard disk, you will have the same size')@}</p>
+  <p class="red">{lang 'Note: If all folders are on the same hard disk, you will have the same size'}</p>
 
 </div>

@@ -1,14 +1,14 @@
-{@if(!empty($videos))@}
+{if !empty($videos)}
 
 <ul>
 
- {@foreach($videos as $video)@}
+ {each $video in $videos}
 
     {{ $action = ($video->approved == 1) ? 'disapprovedvideo' : 'approvedvideo' }}
 
   <div class="m_video">
     {{ VideoDesignCore::generate($video, 'preview', 200, 200) }}
-    <p class="italic">{@lang('Posted by')@} <a href="{% $oUser->getProfileLink($video->username) %}" target="_blank">{% $video->username %}</a></p>
+    <p class="italic">{lang 'Posted by'} <a href="{% $oUser->getProfileLink($video->username) %}" target="_blank">{% $video->username %}</a></p>
 
     <div>
       {{ $text = ($video->approved == 1) ? t('Disapproved') : t('Approved') }}
@@ -17,14 +17,14 @@
     </div>
   </div>
 
- {@/foreach@}
+ {/each}
 
 </ul>
 
-{@main_include('page_nav.inc.tpl')@}
+{main_include 'page_nav.inc.tpl'}
 
-{@else@}
+{else}
 
-  <p class="center">{@lang('No Videos for the treatment of moderate.')@}</p>
+  <p class="center">{lang 'No Videos for the treatment of moderate.'}</p>
 
-{@/if@}
+{/if}

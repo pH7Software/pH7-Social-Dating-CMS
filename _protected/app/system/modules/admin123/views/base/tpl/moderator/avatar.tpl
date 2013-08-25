@@ -1,14 +1,14 @@
-{@if(!empty($avatars))@}
+{if !empty($avatars)}
 
 <ul>
 
- {@foreach($avatars as $avatar)@}
+ {each $avatar in $avatars}
 
     {{ $action = ($avatar->approvedAvatar == 1) ? 'disapprovedavatar' : 'approvedavatar' }}
 
  <div class="thumb_photo">
     {{ $avatarDesign->lightBox($avatar->username, $avatar->firstName, $avatar->sex, 300, '0') }}
-    <p class="italic">{@lang('Posted by')@} <a href="{% $oUser->getProfileLink($avatar->username) %}" target="_blank">{% $avatar->username %}</a></p>
+    <p class="italic">{lang 'Posted by'} <a href="{% $oUser->getProfileLink($avatar->username) %}" target="_blank">{% $avatar->username %}</a></p>
 
    <div>
      {{ $text = ($avatar->approvedAvatar == 1) ? t('Disapproved') : t('Approved') }}
@@ -17,14 +17,14 @@
    </div>
  </div>
 
- {@/foreach@}
+ {/each}
 
 </ul>
 
-{@main_include('page_nav.inc.tpl')@}
+{main_include 'page_nav.inc.tpl'}
 
-{@else@}
+{else}
 
-  <p class="center">{@lang('No Avatar for the treatment of moderate.')@}</p>
+  <p class="center">{lang 'No Avatar for the treatment of moderate.'}</p>
 
-{@/if@}
+{/if}

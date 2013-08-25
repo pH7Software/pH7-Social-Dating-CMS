@@ -6,29 +6,29 @@
 <thead>
 <tr>
 <th><input type="checkbox" name="all_action" /></th>
-<th>{@lang('User ID#')@}</th>
-<th>{@lang('Email Address')@}</th>
-<th>{@lang('Username')@}</th>
-<th>{@lang('Name')@}</th>
-<th>{@lang('Age')@}</th>
-<th>{@lang('Refers')@}</th>
-<th>{@lang('Bank Account')@}</th>
-<th>{@lang('IP')@}</th>
-<th>{@lang('Registration Date')@}</th>
-<th>{@lang('Last Activity')@}</th>
-<th>{@lang('Last Edit')@}</th>
-<th>{@lang('Action')@}</th>
+<th>{lang 'User ID#'}</th>
+<th>{lang 'Email Address'}</th>
+<th>{lang 'Username'}</th>
+<th>{lang 'Name'}</th>
+<th>{lang 'Age'}</th>
+<th>{lang 'Refers'}</th>
+<th>{lang 'Bank Account'}</th>
+<th>{lang 'IP'}</th>
+<th>{lang 'Registration Date'}</th>
+<th>{lang 'Last Activity'}</th>
+<th>{lang 'Last Edit'}</th>
+<th>{lang 'Action'}</th>
 </tr>
 </thead>
 
 <tfoot>
 <tr>
 <th><input type="checkbox" name="all_action" /></th>
-<th><button type="submit" formaction="{{ $design->url('affiliate','admin','banall') }}">{@lang('Ban')@}</button></th>
-<th><button type="submit" formaction="{{ $design->url('affiliate','admin','unbanall') }}">{@lang('UnBan')@}</button></th>
-<th><button type="submit" onclick="return checkChecked()" formaction="{{ $design->url('affiliate','admin','deleteall') }}" class="red">{@lang('Delete')@}</button></th>
-<th><button type="submit" formaction="{{ $design->url('affiliate','admin','approveall') }}">{@lang('Approve')@}</button></th>
-<th><button type="submit" formaction="{{ $design->url('affiliate','admin','disapproveall') }}">{@lang('Disapprove')@}</button></th>
+<th><button type="submit" formaction="{{ $design->url('affiliate','admin','banall') }}">{lang 'Ban'}</button></th>
+<th><button type="submit" formaction="{{ $design->url('affiliate','admin','unbanall') }}">{lang 'UnBan'}</button></th>
+<th><button type="submit" onclick="return checkChecked()" formaction="{{ $design->url('affiliate','admin','deleteall') }}" class="red">{lang 'Delete'}</button></th>
+<th><button type="submit" formaction="{{ $design->url('affiliate','admin','approveall') }}">{lang 'Approve'}</button></th>
+<th><button type="submit" formaction="{{ $design->url('affiliate','admin','disapproveall') }}">{lang 'Disapprove'}</button></th>
 <th> </th>
 <th> </th>
 <th> </th>
@@ -40,7 +40,7 @@
 </tfoot>
 
 <tbody>
-{@foreach($browse as $aff)@}
+{each $aff in $browse}
 
 {* Affiliate Age *}
 {{ $aAge = explode('-', $aff->birthDate);
@@ -55,34 +55,34 @@ $age = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get() }}
 <td>{age}</td>
 <td>{% $aff->refer %}</td>
 <td>{% $aff->bankAccount %}</td>
-<td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($aff->ip) ) }}" title="{@lang('IP Country')@}" alt="{@lang('IP Country')@}" /> <a href="{% Framework\Ip\Ip::api($aff->ip) %}" title="{@lang('See information from this user IP')@}" target="_blank">{% $aff->ip %}</a></td>
+<td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($aff->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> <a href="{% Framework\Ip\Ip::api($aff->ip) %}" title="{lang 'See information from this user IP'}" target="_blank">{% $aff->ip %}</a></td>
 <td>{% $dateTime->get($aff->joinDate)->dateTime() %}</td>
-<td>{@if(!empty($aff->lastActivity))@} {% $dateTime->get($aff->lastActivity)->dateTime() %} {@else@} {@lang('No last login')@} {@/if@}</td>
-<td>{@if(!empty($aff->lastEdit))@} {% $dateTime->get($aff->lastEdit)->dateTime() %} {@else@} {@lang('No last editing')@} {@/if@}</td>
+<td>{if !empty($aff->lastActivity)} {% $dateTime->get($aff->lastActivity)->dateTime() %} {else} {lang 'No last login'} {/if}</td>
+<td>{if !empty($aff->lastEdit)} {% $dateTime->get($aff->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>
 <td class="small">
-<a href="{{$design->url('affiliate','account','edit',$aff->profileId)}}" title="{@lang("Edit Affiliate's Account")@}">{@lang('Edit')@}</a> |
-<a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{@lang('Login As a member (to all edit this user account).')@}">{@lang('Login as User')@}</a> |
+<a href="{{ $design->url('affiliate','account','edit',$aff->profileId) }}" title="{lang "Edit Affiliate's Account"}">{lang 'Edit'}</a> |
+<a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{lang 'Login As a member (to all edit this user account).'}">{lang 'Login as User'}</a> |
 
-{@if($aff->ban == 0)@}
+{if $aff->ban == 0}
  {{ $design->popupLinkConfirm(t('Ban'), 'affiliate', 'admin', 'ban', $aff->profileId) }}
-{@else@}
+{else}
  {{ $design->popupLinkConfirm(t('UnBan'), 'affiliate', 'admin', 'unban', $aff->profileId) }}
-{@/if@}
+{/if}
 
-{@if($aff->active != 1)@}
+{if $aff->active != 1}
  | {{ $design->popupLinkConfirm(t('Approve'), 'affiliate', 'admin', 'approve', $aff->profileId) }}
  or {{ $design->popupLinkConfirm(t('Disapprove (This ONLY notified user by email).'), 'affiliate', 'admin', 'disapprove', $aff->profileId) }}
-{@/if@}
+{/if}
  | {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), 'affiliate', 'admin', 'delete', $aff->profileId.'_'.$aff->username) }}
 </td>
 
 </tr>
 
-{@/foreach@}
+{/each}
 </tbody>
 
 </table>
 
 </form>
 
-{@main_include('page_nav.inc.tpl')@}
+{main_include 'page_nav.inc.tpl'}

@@ -1,7 +1,7 @@
-{@if(!empty($error))@}
+{if !empty($error)}
 
     <div class="center">
         <p>{error}</p>
     </div>
 
-{@/if@}
+{/if}

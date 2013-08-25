@@ -1,1 +1,1 @@
-{@def_main_auto_include@}
+{def_main_auto_include}

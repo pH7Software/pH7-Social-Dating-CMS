@@ -1,13 +1,13 @@
 <div class="center">
 
-{@if(sizeof($urls) > 0)@}
+{if sizeof($urls) > 0}
   <ul>
-    {@foreach($urls as $key => $value)@}
+    {each $key => $value in $urls}
       <li class="underline"><a href="{key}">{value}</a></li>
-    {@/foreach@}
+    {/each}
   </ul>
-{@else@}
-  <p>{@lang('No links found at %site_name%')@}</p>
-{@/if@}
+{else}
+  <p>{lang 'No links found at %site_name%'}</p>
+{/if}
 
 </div>

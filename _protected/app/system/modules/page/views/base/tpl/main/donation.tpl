@@ -1,6 +1,6 @@
 <div class="center">
 
-<p><strong>{@lang('Help us pay for our servers and development of our volunteer %site_name% site.')@}</strong></p>
+<p><strong>{lang 'Help us pay for our servers and development of our volunteer %site_name% site.'}</strong></p>
 
  <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
     <input type="hidden" name="cmd" value="_s-xclick">

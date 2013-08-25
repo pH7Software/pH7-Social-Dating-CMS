@@ -1,1 +1,1 @@
-{@def_main_include('layout.tpl')@}
+{def_main_include 'layout.tpl'}

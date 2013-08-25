@@ -1,7 +1,7 @@
 <div class="center">
 
 
-{@lang@}
+{lang}
 <p>%site_name% is a free online dating between singles.<br />
 <strong>Meet Singles and Find now Love on %site_name%</strong>!<br />
 To love matches,  flirting, romantic encounter ...<br />
@@ -11,7 +11,7 @@ So come quickly register on the next generation of online dating community!<br /
 <hr /><br />
 Thank you,<br />
 The Team.</p>
-{@/lang@}
+{/lang}
 
 
 </div>
