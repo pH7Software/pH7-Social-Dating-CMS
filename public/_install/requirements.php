@@ -43,7 +43,7 @@ function is_mod_rewrite()
 $aErrors = array();
 
 if (version_compare(PHP_VERSION, PH7_REQUIRE_VERSION, '<') === true)
-    $aErrors[] = 'ERROR: Your PHP version is ' . PHP_VERSION . '. pH7 CMS requires PHP ' . PH7_REQUIRE_VERSION . ' or newer.';
+    $aErrors[] = 'Your PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_VERSION . ' or newer.';
 
 if (!is_mod_rewrite())
     $aErrors[] = 'Please install Apache mod_rewrite module.';
