@@ -34,7 +34,7 @@ class ToolController extends Controller
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'general.css');
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
 
-        $this->sTitle = t('Cache Management');
+        $this->sTitle = t('Caches Management');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
