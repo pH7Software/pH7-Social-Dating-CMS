@@ -239,16 +239,16 @@ class Design
         {
         echo '
         <!-- ', Kernel::SOFTWARE_COPYRIGHT, ' -->
-        <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' backlink -->
-        <!-- You must leave this link to return!
-        This software is distributed free and you must respect the thousands of days, months and years it takes to develop this software!
+        <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
+        <!-- You must leave this comment and the back link in the footer.
+        This open source software is distributed free and you must respect the thousands of days, months and years it takes to develop this software!
         All rights reserved for ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '
         You can never claim that you took, developed, or helped in any other way in this software if it is wrong! -->';
         }
 
         echo ($bSoftwareName ?  '<p><strong>' . t('Powered By') : ''), ' ', ($bLink ? '<a href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bLink ? '</a> ' : ' '), ($bVersion ? t('Version') . ' ' . Kernel::SOFTWARE_VERSION : ''), ($bSoftwareName ? '</strong></p>' : ''),
 
-        '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' backlink -->';
+        '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
 
         if($bLicenseLink)
         {
