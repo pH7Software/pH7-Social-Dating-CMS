@@ -1,1 +1,1 @@
-{{BankForm::display()}}
+{{ BankForm::display() }}

@@ -7,7 +7,7 @@
 
     <div class="m_photo center">
 
-      {{ $absolute_url = Framework\Mvc\Router\UriRoute::get('picture','main','photo',"$a->username,$a->albumId,$a->title,$a->pictureId") }}
+      {{ $absolute_url = Framework\Mvc\Router\Uri::get('picture','main','photo',"$a->username,$a->albumId,$a->title,$a->pictureId") }}
 
       <h4><a href="{absolute_url}">{% substr(Framework\Security\Ban\Ban::filterWord($a->title),0,25) %}</a></h4>
 
@@ -15,14 +15,14 @@
 
       {if UserCore::auth() && $member_id == $a->profileId}
         <div class="small">
-          <a href="{{$design->url('picture', 'main', 'editphoto', "$a->albumId,$a->title,$a->pictureId")}}">{lang 'Edit'}</a> |
+          <a href="{{ $design->url('picture', 'main', 'editphoto', "$a->albumId,$a->title,$a->pictureId") }}">{lang 'Edit'}</a> |
           {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletephoto', array('album_title'=>$a->name, 'album_id'=>$a->albumId, 'picture_id'=>$a->pictureId, 'picture_link'=>$a->file)) }}
         </div>
       {/if}
 
       <p>
       {{ RatingDesignCore::voting($a->pictureId,'Pictures') }}
-      {{$design->like($a->username,$a->firstName,$a->sex,$absolute_url}} | {{$design->report($a->profileId, $a->username, $a->firstName, $a->sex}}
+      {{ $design->like($a->username,$a->firstName,$a->sex,$absolute_url) }} | {{ $design->report($a->profileId, $a->username, $a->firstName, $a->sex) }}
       </p>
 
     </div>
@@ -32,7 +32,7 @@
   {main_include 'page_nav.inc.tpl'}
 
   {if UserCore::auth() && $member_id == $a->profileId}
-    <p class="center bottom"><a class="m_button" href="{{$design->url('picture', 'main', 'addphoto', $a->albumId}}">{lang 'Add new pictures'}</a></p>
+    <p class="center bottom"><a class="m_button" href="{{ $design->url('picture', 'main', 'addphoto', $a->albumId) }}">{lang 'Add new pictures'}</a></p>
   {/if}
 
 {else}

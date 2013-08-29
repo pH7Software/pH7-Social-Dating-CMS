@@ -2,23 +2,26 @@
 
 {if empty($error)}
 
-  {each $forum in $forums}
+  {each $category in $categories}
+    <h2 class="s_tMarg">{% $category->title %}</h2>
+    {if AdminCore::auth()}
+      <a class="s_button" href="{{ $design->url('forum', 'admin', 'editcategory', $category->categoryId) }}">{lang 'Edit Category'}</a> | {{ $design->popupLinkConfirm(t('Delete Category'), 'forum', 'admin', 'deletecategory', $category->categoryId, 's_button') }}<br /><br />
+    {/if}
 
-    {if $forum->categoryId == $forum->forumId}
-      <h2>{% $forum->title %}</h2>
+    {each $forum in $forums}
 
-      {if AdminCore::auth()}
-        <a class="m_button" href="{{ $design->url('forum', 'admin', 'editcategory', $forum->categoryId) }}">{lang 'Edit Category'}</a> | {{ $design->popupLinkConfirm(t('Delete Category'), 'forum', 'admin', 'deletecategory', $forum->categoryId, 'm_button') }}
+      {if $category->categoryId == $forum->categoryId}
+
+        <h3><a href="{{ $design->url('forum', 'forum', 'topic', "$forum->name,$forum->forumId") }}">{% escape($forum->name, true) %}</a></h3>
+        <p>{% escape($forum->description, true) %}</p>
+
+        {if AdminCore::auth()}
+          <a class="s_button" href="{{ $design->url('forum', 'admin', 'editforum', $forum->forumId) }}">{lang 'Edit Forum'}</a> | {{ $design->popupLinkConfirm(t('Delete Forum'), 'forum', 'admin', 'deleteforum', $forum->forumId, 's_button') }}<br />
+        {/if}
+
       {/if}
 
-    {/if}
-
-    <p><a href="{{ $design->url('forum', 'forum', 'topic', "$forum->name,$forum->forumId") }}">{% escape($forum->name, true) %}</a></p>
-    <p>{% escape($forum->description, true) %}</p>
-
-    {if AdminCore::auth()}
-      <a class="m_button" href="{{ $design->url('forum', 'admin', 'editforum', $forum->forumId) }}">{lang 'Edit Forum'}</a> | {{ $design->popupLinkConfirm(t('Delete Forum'), 'forum', 'admin', 'deleteforum', $forum->forumId, 'm_button') }}
-    {/if}
+    {/each}
 
   {/each}
 

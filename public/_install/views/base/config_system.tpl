@@ -7,7 +7,7 @@
 <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}config_system">
 
     <p><span class="mandatory">*</span> <label for="db_hostname">{$LANG.db_hostname} :</label><br />
-    <small>{$LANG.desc_db_hostname}</small><br />
+    <span class="small">{$LANG.desc_db_hostname}</span><br />
     <input type="text" name="db_hostname" id="db_hostname" onfocus="if ('localhost' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'localhost';" value="{$smarty.session.db.db_hostname}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="db_name">{$LANG.db_name} :</label><br />
@@ -20,11 +20,11 @@
     <input type="password" id="db_password" name="db_password" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="db_prefix">{$LANG.db_prefix} :</label><br />
-    <small>{$LANG.desc_db_prefix}</small><br />
+    <span class="small">{$LANG.desc_db_prefix}</span><br />
     <input type="text" name="db_prefix" id="db_prefix" onfocus="if ('PH7_' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'PH7_';" value="{$smarty.session.db.db_prefix}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="db_charset">{$LANG.charset} :</label><br />
-    <small>{$LANG.desc_charset}</small><br />
+    <span class="small">{$LANG.desc_charset}</span><br />
     <input type="text" name="db_charset" id="db_charset" onfocus="if ('UTF8' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'UTF8';" value="{$smarty.session.db.db_charset}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="db_port">{$LANG.db_port} :</label><br />

@@ -1,1 +1,1 @@
-{{EditVideoForm::display()}}
+{{ EditVideoForm::display() }}

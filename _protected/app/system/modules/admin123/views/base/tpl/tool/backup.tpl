@@ -1,5 +1,5 @@
 <form method="post" action="{current_url}" enctype="multipart/form-data">
-{{ $designSecurity->inputToken('backup') }}
+  {{ $designSecurity->inputToken('backup') }}
 
   <table class="center">
 

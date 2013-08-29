@@ -1,1 +1,1 @@
-{{EditCommentForm::display()}}
+{{ EditCommentForm::display() }}

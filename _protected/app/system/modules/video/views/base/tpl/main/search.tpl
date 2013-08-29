@@ -1,1 +1,1 @@
-{{SearchVideoForm::display()}}
+{{ SearchVideoForm::display() }}

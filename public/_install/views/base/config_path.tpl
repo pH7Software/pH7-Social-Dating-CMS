@@ -7,7 +7,7 @@
 <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}config_path">
 
     <p><span class="mandatory">*</span> <label for="path_protected">{$LANG.path_protected} :</label><br />
-    <small>{$LANG.desc_config_path}</small><br />
+    <span class="small">{$LANG.desc_config_path}</span><br />
     <input type="text" name="path_protected" id="path_protected" value="{$smarty.session.value.path_protected}" required="required" /></p>
 
     <div id="txtDir"></div>

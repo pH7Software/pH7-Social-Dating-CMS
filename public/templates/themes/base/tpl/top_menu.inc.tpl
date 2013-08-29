@@ -3,8 +3,6 @@
       {{ $oSession = new Framework\Session\Session() }}
 
 
-    {{ $class = (new Framework\Mvc\Request\HttpRequest)->currentUrl() == PH7_URL_ROOT ? 'class="current"' : '' }}
-
     {* For LoginUserAs of Admin Panel *}
       {if AdminCore::auth() && $oSession->exists('login_user_as') }
         <p class="bold center"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to admin panel.{/lang}</a></p>
@@ -16,7 +14,7 @@
     {* Menu for All *}
       <nav role="navigation">
         <ul class="top_nav">
-          <li {% $class %} ><a href="{% (AdminCore::auth()) ? $design->url(PH7_ADMIN_MOD,'main','index') : PH7_URL_ROOT %}" title="{lang 'Home'}">{lang 'Home'}</a></li>
+          <li{if $current_url == $url_root} class="current"{/if}><a href="{if AdminCore::auth()}{{ $design->url(PH7_ADMIN_MOD,'main','index') }}{else}{url_root}{/if}" title="{lang 'Home'}">{lang 'Home'}</a></li>
 
 
     {* Guest Menu *}
@@ -24,7 +22,7 @@
       {if !UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth() }
 
         <li><a href="{{ $design->url('user','signup','step1') }}" title="{lang 'Join Now!'}">{lang 'Join Now!'}</a></li>
-        <li><a href="{{ $design->url('user', 'main','login') }}" title="{lang 'Login'}">{lang 'Login'}</a></li>
+        <li><a href="{{ $design->url('user', 'main','login') }}" title="{lang 'Login'}" data-load="ajax">{lang 'Login'}</a></li>
 
       {/if}
 
@@ -33,23 +31,23 @@
 
       {if !AffiliateCore::auth()}
 
-        <li><a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}">{lang 'People'}</a>
+        <li><a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" data-load="ajax">{lang 'People'}</a>
           <ul>
-            <li><a href="{{ $design->url('user', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}">{lang 'People'}</a></li>
+            <li><a href="{{ $design->url('user', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax">{lang 'People'}</a></li>
 
-            <li><a href="{{ $design->url('user','search', 'index') }}" title="{lang 'Search the members'}">{lang 'Search'}</a>
+            <li><a href="{{ $design->url('user','search', 'index') }}" title="{lang 'Search the members'}" data-load="ajax">{lang 'Search'}</a>
               <ul>
-                <li><a href="{{ $design->url('user', 'search', 'quick') }}" title="{lang 'Quick Search'}">{lang 'Quick Search'}</a></li>
-                <li><a href="{{ $design->url('user', 'search', 'advanced') }}" title="{lang 'Advanced Search'}">{lang 'Advanced Search'}</a></li>
+                <li><a href="{{ $design->url('user', 'search', 'quick') }}" title="{lang 'Quick Search'}" data-load="ajax">{lang 'Quick Search'}</a></li>
+                <li><a href="{{ $design->url('user', 'search', 'advanced') }}" title="{lang 'Advanced Search'}" data-load="ajax">{lang 'Advanced Search'}</a></li>
               </ul>
             </li>
 
-            <li><a href="{{ $design->url('user', 'birthday', 'index') }}" title="{lang 'Users Birthday'}">{lang 'Birthday'}</a>
+            <li><a href="{{ $design->url('user', 'birthday', 'index') }}" title="{lang 'Users Birthday'}" data-load="ajax">{lang 'Birthday'}</a>
               <ul>
-                <li><a href="{{ $design->url('user', 'birthday', 'index', 'all') }}" rel="nofollow" title="{lang 'All Birthday'}">{lang 'All Birthday'}</a></li>
-                <li><a href="{{ $design->url('user', 'birthday', 'index', 'male') }}" title="{lang 'Men Birthday'}">{lang 'Men Birthday'}</a></li>
-                <li><a href="{{ $design->url('user', 'birthday', 'index', 'female') }}" title="{lang 'Women Birthday'}">{lang 'Women Birthday'}</a></li>
-                <li><a href="{{ $design->url('user', 'birthday', 'index', 'couple') }}" title="{lang 'Couples Birthday'}">{lang 'Couples Birthday'}</a></li>
+                <li><a href="{{ $design->url('user', 'birthday', 'index', 'all') }}" rel="nofollow" title="{lang 'All Birthday'}" data-load="ajax">{lang 'All Birthday'}</a></li>
+                <li><a href="{{ $design->url('user', 'birthday', 'index', 'male') }}" title="{lang 'Men Birthday'}" data-load="ajax">{lang 'Men Birthday'}</a></li>
+                <li><a href="{{ $design->url('user', 'birthday', 'index', 'female') }}" title="{lang 'Women Birthday'}" data-load="ajax">{lang 'Women Birthday'}</a></li>
+                <li><a href="{{ $design->url('user', 'birthday', 'index', 'couple') }}" title="{lang 'Couples Birthday'}" data-load="ajax">{lang 'Couples Birthday'}</a></li>
               </ul>
             </li>
           </ul>
@@ -71,36 +69,36 @@
         <li><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" data-load="ajax">{lang 'Pictures'}</a>
           <ul>
             <li><a href="{{ $design->url('picture','main','index') }}" rel="nofollow" title="{lang 'Photo Gallery'}" data-load="ajax">{lang 'Pictures'}</a></li>
-            <li><a href="{{ $design->url('hotornot','main','rating') }}" title="{lang 'Hot Or Not'}">{lang 'Hot Or Not'}</a></li>
-            <li><a href="{{ $design->url('picture','main','search') }}" title="{lang 'Search a Picture'}">{lang 'Search'}</a></li>
+            <li><a href="{{ $design->url('hotornot','main','rating') }}" title="{lang 'Hot Or Not'}" data-load="ajax">{lang 'Hot Or Not'}</a></li>
+            <li><a href="{{ $design->url('picture','main','search') }}" title="{lang 'Search a Picture'}" data-load="ajax">{lang 'Search'}</a></li>
           </ul>
         </li>
 
         <li><a href="{{ $design->url('video','main','index') }}" title="{lang 'Video Gallery'}" data-load="ajax">{lang 'Videos'}</a>
           <ul>
             <li><a href="{{ $design->url('video','main','index') }}" rel="nofollow" title="{lang 'Video Gallery'}" data-load="ajax">{lang 'Videos'}</a></li>
-            <li><a href="{{ $design->url('video','main','search') }}" title="{lang 'Search a Video'}">{lang 'Search'}</a></li>
+            <li><a href="{{ $design->url('video','main','search') }}" title="{lang 'Search a Video'}" data-load="ajax">{lang 'Search'}</a></li>
           </ul>
         </li>
 
-        <li><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}">{lang 'Game'}</a>
+        <li><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}" data-load="ajax">{lang 'Game'}</a>
           <ul>
-            <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{lang 'Games Zone'}">{lang 'Game'}</a></li>
-            <li><a href="{{ $design->url('game','main','search') }}" title="{lang 'Search a Game'}">{lang 'Search'}</a></li>
+            <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{lang 'Games Zone'}" data-load="ajax">{lang 'Game'}</a></li>
+            <li><a href="{{ $design->url('game','main','search') }}" title="{lang 'Search a Game'}" data-load="ajax">{lang 'Search'}</a></li>
           </ul>
         </li>
 
         <li><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" data-load="ajax">{lang 'Forum'}</a>
           <ul>
            <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Forums'}" data-load="ajax">{lang 'Forum'}</a></li>
-            <li><a href="{{ $design->url('forum','forum','search') }}" title="{lang 'Search a Topic'}">{lang 'Search'}</a></li>
+            <li><a href="{{ $design->url('forum','forum','search') }}" title="{lang 'Search a Topic'}" data-load="ajax">{lang 'Search'}</a></li>
           </ul>
         </li>
 
-        <li><a href="{{ $design->url('note','main','index') }}" title="{lang 'Community Notes'}">{lang 'Notes'}</a>
+        <li><a href="{{ $design->url('note','main','index') }}" title="{lang 'Community Notes'}" data-load="ajax">{lang 'Notes'}</a>
           <ul>
-            <li><a href="{{ $design->url('note','main','index') }}" rel="nofollow" title="{lang 'Community Notes'}">{lang 'Notes'}</a></li>
-            <li><a href="{{ $design->url('note','main','search') }}" title="{lang 'Search a Note'}">{lang 'Search'}</a></li>
+            <li><a href="{{ $design->url('note','main','index') }}" rel="nofollow" title="{lang 'Community Notes'}" data-load="ajax">{lang 'Notes'}</a></li>
+            <li><a href="{{ $design->url('note','main','search') }}" title="{lang 'Search a Note'}" data-load="ajax">{lang 'Search'}</a></li>
           </ul>
         </li>
 
@@ -273,7 +271,7 @@
             <li><a href="{{ $design->url('affiliate','admin','index') }}" title="{lang 'Affiliate Admin Manager'}">{lang 'Affiliate'}</a>
               <ul>
                 <li><a href="{{ $design->url('affiliate','admin','banner') }}" title="{lang 'Banners Manager'}">{lang 'Banners'}</a></li>
-                <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}">{lang 'Affiliates'}</a></li>
+                <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}">{lang 'Browse Affiliates'}</a></li>
                 <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}">{lang 'Search an Affiliate'}</a></li>
                 <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add Affiliate'}">{lang 'Add Affiliate'}</a></li>
                 <li><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}">{lang 'Affiliate Fields'}</a>

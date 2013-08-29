@@ -4,7 +4,7 @@
 
     {each $album in $albums}
 
-      {{ $absolute_url = Framework\Mvc\Router\UriRoute::get('video','main','album',"$album->username,$album->name,$album->albumId") }}
+      {{ $absolute_url = Framework\Mvc\Router\Uri::get('video','main','album',"$album->username,$album->name,$album->albumId") }}
 
       <div class="thumb_photo">
 
@@ -15,7 +15,7 @@
 
         {if UserCore::auth() && $member_id == $album->profileId}
           <div class="small">
-            <a href="{{$design->url('video', 'main', 'editalbum', $album->albumId}}">{lang 'Edit'}</a> |
+            <a href="{{ $design->url('video', 'main', 'editalbum', $album->albumId) }}">{lang 'Edit'}</a> |
             {{ LinkCoreForm::display(t('Delete'), 'video', 'main', 'deletealbum', array('album_id'=>$album->albumId)) }}
           </div>
         {/if}
@@ -37,6 +37,6 @@
 
   {/if}
 
-  <p class="bottom"><a class="m_button" href="{{$design->url('video', 'main', 'addalbum')}}">{lang 'Add a new album'}</a></p>
+  <p class="bottom"><a class="m_button" href="{{ $design->url('video', 'main', 'addalbum') }}">{lang 'Add a new album'}</a></p>
 
 </div>

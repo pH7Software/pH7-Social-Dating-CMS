@@ -1,1 +1,1 @@
-{{SearchFriendForm::display()}}
+{{ SearchFriendForm::display() }}

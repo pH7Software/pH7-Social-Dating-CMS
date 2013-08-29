@@ -1,1 +1,1 @@
-{{EditAlbumForm::display()}}
+{{ EditAlbumForm::display() }}

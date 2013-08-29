@@ -1,1 +1,1 @@
-{{ChangePasswordCoreForm::display()}}
+{{ ChangePasswordCoreForm::display() }}
