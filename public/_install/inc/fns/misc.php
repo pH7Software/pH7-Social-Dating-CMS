@@ -9,6 +9,7 @@
  * @version          1.7
  */
 
+namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 /**
@@ -190,7 +191,7 @@ function delete_dir($sPath)
     return is_file($sPath) ?
         @unlink($sPath) :
         is_dir($sPath) ?
-        array_map('delete_dir', glob($sPath.'/*')) === @rmdir($sPath) :
+        array_map(__NAMESPACE__ . '\delete_dir', glob($sPath.'/*')) === @rmdir($sPath) :
         false;
 }
 
@@ -214,16 +215,14 @@ function exec_query_file($oDb, $sSqlFile)
 }
 
 /**
- * Delete install folder.
+ * Delete the install folder.
  *
  * @return void
  */
 function remove_install_dir()
 {
-    // Delete the _install/ directory
     @chmod(PH7_ROOT_INSTALL, 0777);
     delete_dir(PH7_ROOT_INSTALL);
-    @rmdir(PH7_ROOT_INSTALL);
 }
 
 /**
