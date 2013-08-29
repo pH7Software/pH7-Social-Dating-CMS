@@ -1,6 +1,5 @@
 <div class="center">
 
-
 {lang}
 <p>This CMS is built by a small volunteer team of engineers, programmers, designers, and others in many different sites across the globe. It is updated continuously, and<br /> constantly evolving to give the best image of the next generation web.<br />
 If you want to help us as volunteer and if you know one of the following languages ​​(C+ +, Java, Python, PHP, Ruby framework as Rails, CSS, HTML, JavaScript, Linux Server, Apache, nginx)<br />
@@ -11,6 +10,5 @@ or help us in the translation of one of our CMS Open source, please contact us v
 Thank you,<br />
 The Team.</p>
 {/lang}
-
 
 </div>

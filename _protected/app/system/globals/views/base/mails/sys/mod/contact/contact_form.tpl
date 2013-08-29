@@ -6,6 +6,7 @@
 <p>{website}</p>
 <p>{subject}</p>
 <p>{message}</p>
+<p>&nbsp;</p>
 <p>----- {footer_title} -----</p>
 {footer_content}
 

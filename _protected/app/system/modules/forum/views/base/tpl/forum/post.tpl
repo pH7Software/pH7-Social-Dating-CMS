@@ -5,7 +5,7 @@
   {* Post *}
 
   <div class="left">{{ $avatarDesign->get($post->username, $post->firstName, $post->sex, 64) }}<br />
-    <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$post->username) }}">{lang 'Show Post of'} {% $post->username %}</a></p>
+    <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$post->username) }}" data-load="ajax">{lang 'Show Post of'} {% $post->username %}</a></p>
   </div>
 
   <p>{% Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($post->message)) %}</p>
@@ -33,12 +33,12 @@
 
     {each $msg in $messages}
 
-      {{ $relative_url = Framework\Mvc\Router\UriRoute::get('forum', 'forum', 'post', "$post->name,$post->forumId,$post->title,$post->topicId") . '#' . $msg->messageId }}
+      {{ $relative_url = Framework\Mvc\Router\Uri::get('forum', 'forum', 'post', "$post->name,$post->forumId,$post->title,$post->topicId") . '#' . $msg->messageId }}
 
       <div class="msg_content" id="{% $msg->messageId %}">
 
         <div class="left">{{ $avatarDesign->get($msg->username, $msg->firstName, $msg->sex, 64) }}<br />
-          <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$msg->username) }}">{lang 'Show Post of'} {% $msg->username %}</a></p>
+          <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$msg->username) }}" data-load="ajax">{lang 'Show Post of'} {% $msg->username %}</a></p>
         </div>
 
         <p>{% Framework\Parse\User::atUsernameToLink(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($msg->message))) %}</p>
@@ -70,7 +70,7 @@
     {main_include 'page_nav.inc.tpl'}
   {/if}
 
-  <p><a href="{{$design->url('xml','rss','xmlrouter','forum-post,'.$post->topicId}}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
+  <p><a href="{{ $design->url('xml','rss','xmlrouter','forum-post,'.$post->topicId) }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
 
 {else}
 

@@ -1,1 +1,1 @@
-{{EditForm::display()}}
+{{ EditForm::display() }}

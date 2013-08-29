@@ -1,1 +1,1 @@
-{{VideoForm::display()}}
+{{ VideoForm::display() }}

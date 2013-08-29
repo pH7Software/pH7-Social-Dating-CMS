@@ -1,1 +1,1 @@
-{{PublicFileForm::display()}}
+{{ PublicFileForm::display() }}

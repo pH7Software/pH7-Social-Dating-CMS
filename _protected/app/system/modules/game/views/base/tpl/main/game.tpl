@@ -13,19 +13,20 @@
 
   <p class="italic">{lang '%0% was played %1% and download %2%.','<strong>'.$game->title.'</strong>',Framework\Mvc\Model\Statistic::getView($game->gameId,'Games'),$downloads}</p>
 
+  {{ ShareUrlCoreForm::display(Framework\Mvc\Router\UriRoute::get('game','main','game',"$game->title,$game->gameId")) }}
   {{ RatingDesignCore::voting($game->gameId,'Games','center') }}
 
   {{ $design->likeApi() }}
 
   {if AdminCore::auth()}
-    <p><a class="m_button" href="{{ $design->url('game','admin','edit',"$game->title,$game->gameId") }}">{lang 'Edit this Game'}</a> | <div class="m_button inline">{{ LinkCoreForm::display(t('Delete this Game'), 'game', 'admin', 'delete', array('id'=>$game->gameId, 'thumb'=>$game->thumb, 'file'=>$game->file)) }}</div></div>
+    <div><a class="m_button" href="{{ $design->url('game','admin','edit',"$game->title,$game->gameId") }}">{lang 'Edit this Game'}</a> | <div class="m_button inline">{{ LinkCoreForm::display(t('Delete this Game'), 'game', 'admin', 'delete', array('id'=>$game->gameId, 'thumb'=>$game->thumb, 'file'=>$game->file)) }}</div></div>
   {/if}
 
   {{ CommentDesignCore::link($game->gameId, 'Game') }}
 
 {else}
 
-<p>{error}</p>
+  <p>{error}</p>
 
 {/if}
 

@@ -1,1 +1,1 @@
-{{SearchUserCoreForm::advanced()}}
+{{ SearchUserCoreForm::advanced() }}

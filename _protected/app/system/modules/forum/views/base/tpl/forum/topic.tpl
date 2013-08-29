@@ -26,6 +26,6 @@
 
 {main_include 'page_nav.inc.tpl'}
 
-<p><a href="{{$design->url('xml','rss','xmlrouter','forum-topic')}}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
+<p><a href="{{ $design->url('xml','rss','xmlrouter','forum-topic') }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
 
 </div>

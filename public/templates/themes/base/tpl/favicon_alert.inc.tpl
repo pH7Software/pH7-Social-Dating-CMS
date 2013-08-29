@@ -12,7 +12,7 @@
 {/if}
 
 {* Run Favicon Alert *}
-   {if $favicon_alert > 0}
-   <script src="{url_static_js}tinycon.js"></script>
-   <script>Tinycon.setBubble({favicon_alert})</script>
+{if $favicon_alert > 0}
+  <script src="{url_static_js}tinycon.js"></script>
+  <script>Tinycon.setBubble({favicon_alert})</script>
 {/if}

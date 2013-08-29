@@ -2,7 +2,7 @@
 
   {if empty($error)}
 
-    <h3>{% Framework\Security\Ban\Ban::filterWord($picture->title) %}</h3>
+    <h2>{% Framework\Security\Ban\Ban::filterWord($picture->title) %}</h2>
 
     <div class="picture_block">
       <a href="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{% str_replace('original', 1200, $picture->file) %}" title="{% $picture->title %}" data-popup="image"><img src="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{% str_replace('original', '600', $picture->file) %}" alt="{% $picture->title %}" title="{% $picture->title %}" class="thumb" /></a>
@@ -14,12 +14,12 @@
 
     {if UserCore::auth() && $member_id == $picture->profileId}
       <div class="small">
-        <a href="{{$design->url('picture', 'main', 'editphoto', "$picture->albumId,$picture->title,$picture->pictureId")}}">{lang 'Edit'}</a> |
+        <a href="{{ $design->url('picture', 'main', 'editphoto', "$picture->albumId,$picture->title,$picture->pictureId") }}">{lang 'Edit'}</a> |
         {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletephoto', array('album_title'=>$picture->name, 'album_id'=>$picture->albumId, 'picture_id'=>$picture->pictureId, 'picture_link'=>$picture->file)) }}
       </div>
     {/if}
 
-    {{ ShareUrlCoreForm::display(Framework\Mvc\Router\UriRoute::get('picture','main','photo',"$picture->username,$picture->albumId,$picture->title,$picture->pictureId")) }}
+    {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('picture','main','photo',"$picture->username,$picture->albumId,$picture->title,$picture->pictureId")) }}
     {{ RatingDesignCore::voting($picture->pictureId,'Pictures','center') }}
     {{ CommentDesignCore::link($picture->pictureId, 'Picture') }}
 

@@ -1,1 +1,1 @@
-{{AlbumForm::display()}}
+{{ AlbumForm::display() }}

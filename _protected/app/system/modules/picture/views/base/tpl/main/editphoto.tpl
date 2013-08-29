@@ -1,1 +1,1 @@
-{{EditPictureForm::display()}}
+{{ EditPictureForm::display() }}

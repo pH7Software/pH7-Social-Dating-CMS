@@ -1,1 +1,1 @@
-{{ProtectedFileForm::display()}}
+{{ ProtectedFileForm::display() }}

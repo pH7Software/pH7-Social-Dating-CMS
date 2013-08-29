@@ -1,1 +1,1 @@
-{{SearchVisitorForm::display()}}
+{{ SearchVisitorForm::display() }}
