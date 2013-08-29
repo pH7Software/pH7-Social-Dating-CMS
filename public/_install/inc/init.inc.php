@@ -9,9 +9,15 @@
  * @version          1.2
  */
 
+namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-$sController = ucfirst((!empty($_GET['c']) ? $_GET['c'] : 'install')) . 'Controller';
+/*** We define the URL if overwrite mode is enabled (to enable it. Htaccess must be present in the current directory) ***/
+define( 'PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . (!is_url_rewrite() ? '?a=' : '') );
+
+$sNP = 'PH7\\';
+$sMainCtrl = $sNP . 'MainController';
+$sCtrl = ucfirst((!empty($_GET['c']) ? $_GET['c'] : 'install')) . 'Controller';
 $sAction = (!empty($_GET['a'])) ? $_GET['a'] : 'index';
 
 if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && ($sAction == 'index' || $sAction == 'license' || $sAction == 'config_path'))
@@ -19,19 +25,18 @@ if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && ($sAction == 'index' || $sAct
 
 try
 {
-    if (is_file(PH7_ROOT_INSTALL . 'controllers/' . $sController . '.php'))
+    if (is_file(PH7_ROOT_INSTALL . 'controllers/' . $sCtrl . '.php'))
     {
-        $sController = 'PH7\\' . $sController;
-        $oCtrl = new $sController;
+        $sCtrl = $sNP . $sCtrl;
+        $oCtrl = new $sCtrl;
 
         if (method_exists($oCtrl, $sAction))
             call_user_func(array($oCtrl, $sAction));
         else
-            (new PH7\MainController)->error_404();
+            (new $sMainCtrl)->error_404();
     }
     else
-        (new PH7\MainController)->error_404();
-
+        (new $sMainCtrl)->error_404();
 }
 catch (Exception $oE)
 {

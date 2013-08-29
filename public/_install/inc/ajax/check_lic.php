@@ -6,7 +6,9 @@
  * @package          PH7 / Inc
  */
 
+namespace PH7;
 define('PH7', 1);
+
 require '_ajax.inc.php';
 
 if (!empty($_POST['lic']))

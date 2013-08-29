@@ -25,10 +25,6 @@ include_once PH7_ROOT_INSTALL . 'inc/fns/misc.php';
 require_once PH7_ROOT_INSTALL . 'library/Smarty/Smarty.class.php';
 require_once PH7_ROOT_INSTALL . 'inc/loader.inc.php';
 
-/*** We define the URL if overwrite mode is enabled (to enable it. Htaccess must be present in the current directory) ***/
-$sSlugUrlInstall = (!is_url_rewrite()) ? '?a=' : '';
-define('PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . $sSlugUrlInstall);
-
 require PH7_ROOT_INSTALL . 'inc/init.inc.php';
 
 ob_end_flush();
