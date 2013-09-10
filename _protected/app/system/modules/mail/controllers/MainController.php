@@ -10,13 +10,13 @@ namespace PH7;
 use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Url\HeaderUrl,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
 
     protected $oMailModel, $oPage, $sMsg, $sTitle, $iTotalMails;
-    private $_bAdminLogged;
+    private $_iProfileId, $_bAdminLogged;
 
     public function __construct()
     {
@@ -24,7 +24,9 @@ class MainController extends Controller
 
         $this->oMailModel = new MailModel;
         $this->oPage = new Page;
+        $this->_iProfileId = $this->session->get('member_id');
         $this->_bAdminLogged = (AdminCore::auth() && !UserCore::auth());
+
         $this->view->dateTime = $this->dateTime;
 
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
@@ -32,7 +34,7 @@ class MainController extends Controller
 
         $this->view->csrf_token = (new Framework\Security\CSRF\Token)->generate('mail');
 
-        $this->view->member_id = $this->session->get('member_id');
+        $this->view->member_id = $this->_iProfileId;
 
         // Adding Css Style Content and JavaScript for Mail and Form
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'mail.css');
@@ -41,7 +43,7 @@ class MainController extends Controller
 
     public function index()
     {
-        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'));
+        HeaderUrl::redirect(Uri::get('mail','main','inbox'));
     }
 
     public function compose()
@@ -62,7 +64,7 @@ class MainController extends Controller
 
         if ($this->httpRequest->getExists('id'))
         {
-            $oMsg = $this->oMailModel->readMsg($this->session->get('member_id'), $this->httpRequest->get('id'));
+            $oMsg = $this->oMailModel->readMsg($this->_iProfileId, $this->httpRequest->get('id'));
 
             if (empty($oMsg))
             {
@@ -80,9 +82,10 @@ class MainController extends Controller
         }
         else
         {
-            $this->view->total_pages = $this->oPage->getTotalPages($this->oMailModel->totalMsg($this->session->get('member_id')), 10);
+            $this->iTotalMails = $this->oMailModel->search(null, true, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, null, null, $this->_iProfileId, MailModel::INBOX);
+            $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 10);
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->readMsgs($this->session->get('member_id'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+            $oMail = $this->oMailModel->search(null, false, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->_iProfileId, MailModel::INBOX);
 
             if (empty($oMail))
             {
@@ -110,7 +113,7 @@ class MainController extends Controller
 
         if ($this->httpRequest->getExists('id'))
         {
-            $oMsg = $this->oMailModel->readSentMsg($this->session->get('member_id'), $this->httpRequest->get('id'));
+            $oMsg = $this->oMailModel->readSentMsg($this->_iProfileId, $this->httpRequest->get('id'));
 
             if (empty($oMsg))
             {
@@ -127,9 +130,10 @@ class MainController extends Controller
         }
         else
         {
-            $this->view->total_pages = $this->oPage->getTotalPages($this->oMailModel->totalSentMsg($this->session->get('member_id')), 10);
+            $this->iTotalMails = $this->oMailModel->search(null, true, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, null, null, $this->_iProfileId, MailModel::OUTBOX);
+            $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 10);
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->readSentMsgs($this->session->get('member_id'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+            $oMail = $this->oMailModel->search(null, false, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->_iProfileId, MailModel::OUTBOX);
 
             if (empty($oMail))
             {
@@ -157,7 +161,7 @@ class MainController extends Controller
 
         if ($this->httpRequest->getExists('id'))
         {
-            $oMsg = $this->oMailModel->readTrashMsg($this->session->get('member_id'), $this->httpRequest->get('id'));
+            $oMsg = $this->oMailModel->readTrashMsg($this->_iProfileId, $this->httpRequest->get('id'));
 
             if (empty($oMsg))
             {
@@ -175,9 +179,10 @@ class MainController extends Controller
         }
         else
         {
-            $this->view->total_pages = $this->oPage->getTotalPages($this->oMailModel->totalTrashMsg($this->session->get('member_id')), 10);
+            $this->iTotalMails = $this->oMailModel->search(null, true, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, null, null, $this->_iProfileId, MailModel::TRASH);
+            $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 10);
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->readTrashMsgs($this->session->get('member_id'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+            $oMail = $this->oMailModel->search(null, false, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->_iProfileId, MailModel::TRASH);
 
             if (empty($oMail))
             {
@@ -207,11 +212,12 @@ class MainController extends Controller
 
     public function result()
     {
-        $sMailModelMethod = ($this->httpRequest->get('where') == 'outbox') ? 'searchSentMsg' : 'searchMsg';
-        $this->iTotalMails = $this->oMailModel->$sMailModelMethod($this->session->get('member_id'), $this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $sType = $this->httpRequest->get('where');
+
+        $this->iTotalMails = $this->oMailModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null, $this->_iProfileId, $sType);
         $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 10);
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oSearch = $this->oMailModel->$sMailModelMethod($this->session->get('member_id'), $this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oMailModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->_iProfileId, $sType);
 
         if (empty($oSearch))
         {
@@ -220,7 +226,7 @@ class MainController extends Controller
         }
         else
         {
-            $this->sTitle = t('Email | Message - Your search returned');
+            $this->sTitle = t('Mail | Message - Your search returned');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Mail Result!', '%n% Mails Result!', $this->iTotalMails);
@@ -233,11 +239,11 @@ class MainController extends Controller
 
     public function setTrash()
     {
-        $bStatus = $this->oMailModel->setTo($this->session->get('member_id'), $this->httpRequest->post('id', 'int'), 'trash');
+        $bStatus = $this->oMailModel->setTo($this->_iProfileId, $this->httpRequest->post('id', 'int'), 'trash');
         $this->sMsg = ($bStatus) ? t('Your message has been moved to your Trash.') : t('Your message could not be moved to Trash because there no exist.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
-        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg, $sMsgType);
+        HeaderUrl::redirect(Uri::get('mail','main','inbox'), $this->sMsg, $sMsgType);
     }
 
     public function setTrashAll()
@@ -253,22 +259,22 @@ class MainController extends Controller
                 foreach ($this->httpRequest->post('action') as $iId)
                 {
                     $iId = (int) $iId;
-                    $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'trash');
+                    $this->oMailModel->setTo($this->_iProfileId, $iId, 'trash');
                 }
                 $this->sMsg = t('Your message(s) has been moved to your Trash.');
             }
         }
 
-        HeaderUrl::redirect(UriRoute::get('mail','main','inbox'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('mail','main','inbox'), $this->sMsg);
     }
 
     public function setRestor()
     {
-        $bStatus = $this->oMailModel->setTo($this->session->get('member_id'), $this->httpRequest->post('id', 'int'), 'restor');
+        $bStatus = $this->oMailModel->setTo($this->_iProfileId, $this->httpRequest->post('id', 'int'), 'restor');
         $this->sMsg = ($bStatus) ? t('Your message has been moved to your Inbox.') : t('Your message could not be moved to Trash because there no exist.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
-        HeaderUrl::redirect(UriRoute::get('mail','main','trash'), $this->sMsg, $sMsgType);
+        HeaderUrl::redirect(Uri::get('mail','main','trash'), $this->sMsg, $sMsgType);
     }
 
     public function setRestorAll()
@@ -284,13 +290,13 @@ class MainController extends Controller
                 foreach ($this->httpRequest->post('action') as $iId)
                 {
                     $iId = (int) $iId;
-                    $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'restor');
+                    $this->oMailModel->setTo($this->_iProfileId, $iId, 'restor');
                 }
                 $this->sMsg = t('Your message(s) has been moved to your Inbox.');
             }
         }
 
-        HeaderUrl::redirect(UriRoute::get('mail','main','trash'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('mail','main','trash'), $this->sMsg);
     }
 
     public function setDelete()
@@ -300,11 +306,11 @@ class MainController extends Controller
         if ($this->_bAdminLogged)
             $bStatus = $this->oMailModel->adminDeleteMsg($iId);
         else
-            $bStatus = $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'delete');
+            $bStatus = $this->oMailModel->setTo($this->_iProfileId, $iId, 'delete');
 
         $this->sMsg = ($bStatus) ? t('Your message has been deleted successfully!') : t('Your message could not be deleted because there no exist.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
-        $sUrl = ($this->_bAdminLogged) ? UriRoute::get('mail','admin','msglist') : UriRoute::get('mail','main','trash');
+        $sUrl = ($this->_bAdminLogged) ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage();
         HeaderUrl::redirect($sUrl, $this->sMsg, $sMsgType);
     }
 
@@ -324,13 +330,13 @@ class MainController extends Controller
                     if ($this->_bAdminLogged)
                         $this->oMailModel->adminDeleteMsg($iId);
                     else
-                        $this->oMailModel->setTo($this->session->get('member_id'), $iId, 'delete');
+                        $this->oMailModel->setTo($this->_iProfileId, $iId, 'delete');
                 }
                 $this->sMsg = t('Your message(s) has been deleted successfully!');
             }
         }
 
-        $sUrl = ($this->_bAdminLogged) ? UriRoute::get('mail','admin','msglist') : UriRoute::get('mail','main','trash');
+        $sUrl = ($this->_bAdminLogged) ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage();
         HeaderUrl::redirect($sUrl, $this->sMsg);
     }
 
@@ -344,7 +350,7 @@ class MainController extends Controller
     {
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
-        $this->view->error = t('Sorry, we weren\'t able to find the page you requested.<br />We suggest you <a href="%0%">make a new search</a>.', UriRoute::get('mail','main','search'));
+        $this->view->error = t('Sorry, we weren\'t able to find the page you requested.<br />We suggest you <a href="%0%">make a new search</a>.', Uri::get('mail','main','search'));
     }
 
     public function __destruct()

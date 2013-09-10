@@ -13,7 +13,7 @@ PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Date\CDateTime,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class JoinFormProcessing extends Form
 {

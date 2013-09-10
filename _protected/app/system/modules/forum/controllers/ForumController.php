@@ -10,7 +10,7 @@ namespace PH7;
 use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Security\Ban\Ban,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class ForumController extends Controller
@@ -27,21 +27,22 @@ class ForumController extends Controller
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
         $this->view->member_id = $this->session->get('member_id');
 
-        $this->view->meta_keywords = t('forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum,free forum,community forum,social forum'); // Predefined meta_keywords tags
+        // Predefined meta_keywords tags
+        $this->view->meta_keywords = t('forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum,free forum,community forum,social forum');
+
         // Adding Css Style for the Layout Forum
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module .
-                PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'common.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'common.css');
     }
 
     public function index()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oForumModel->
-                        totalForums(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oForumModel->totalForums(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oForums = $this->oForumModel->getForum(null, $this->oPage->getFirstItem(), $this->
-                oPage->getNbItemsByPage());
 
-        if (empty($oForums))
+        $oCategories = $this->oForumModel->getCategory();
+        $oForums = $this->oForumModel->getForum(null, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+
+        if (empty($oCategories) && empty($oForums))
         {
             $this->sTitle = t('No Forums found.');
             $this->_notFound();
@@ -52,6 +53,7 @@ class ForumController extends Controller
             $this->view->meta_description = t('Discussions Forums, Social Network Site - %site_name%');
             $this->view->h1_title = t('Discussions Forums, Social Network Site');
 
+            $this->view->categories = $oCategories;
             $this->view->forums = $oForums;
         }
 
@@ -99,7 +101,7 @@ class ForumController extends Controller
         else
         {
             // Adding the RSS link
-            $this->view->header = '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Posts') . '" href="' . UriRoute::get('xml', 'rss', 'xmlrouter', 'forum-post,' . $oPost->topicId) . '" />';
+            $this->view->header = '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Posts') . '" href="' . Uri::get('xml', 'rss', 'xmlrouter', 'forum-post,' . $oPost->topicId) . '" />';
             $this->sTitle = t('%0% | %1% - Forum', $this->str->upperFirst($this->httpRequest->get('forum_name')), $this->str->escape(Ban::filterWord($oPost->title), true));
             $this->view->page_title = $this->sTitle;
             $this->view->meta_description = t('%0% Topics - Discussions Forums', substr($this->str->escape(Ban::filterWord($oPost->message), true), 0, 150));
@@ -229,7 +231,7 @@ class ForumController extends Controller
         else
             $this->sMsg = t('Oops! Your topic could not be deleted');
 
-        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'topic', $sForumName . ',' . $iForumId), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('forum', 'forum', 'topic', $sForumName . ',' . $iForumId), $this->sMsg);
     }
 
     public function deleteMessage()
@@ -247,7 +249,7 @@ class ForumController extends Controller
         else
             $this->sMsg = t('Oops! Your message could not be deleted');
 
-        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId), $this->sMsg);
     }
 
     /**
@@ -261,7 +263,7 @@ class ForumController extends Controller
         if ($b404Status === true)
             Framework\Http\Http::setHeadersByCode(404);
 
-        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to the <a href="%0%">main forum page</a> or <a href="%1%">go the previous page</a>.', UriRoute::get('forum', 'forum', 'index'), 'javascript:history.back();') : '';
+        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to the <a href="%0%">main forum page</a> or <a href="%1%">go the previous page</a>.', Uri::get('forum', 'forum', 'index'), 'javascript:history.back();') : '';
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

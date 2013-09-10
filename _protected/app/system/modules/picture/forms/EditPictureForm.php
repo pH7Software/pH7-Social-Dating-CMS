@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\Http;
 
 class EditPictureForm
 {
@@ -16,7 +16,7 @@ class EditPictureForm
         if (isset($_POST['submit_edit_picture']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit_picture']))
-                new EditPictureFormProcessing;
+                new EditPictureFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -26,7 +26,7 @@ class EditPictureForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_picture', 'form_edit_picture'));
         $oForm->addElement(new \PFBC\Element\Token('edit_picture'));
 
-        $oHttpRequest = new HttpRequest;
+        $oHttpRequest = new Http;
         $oPhoto = (new PictureModel)->photo((new Session)->get('member_id'), $oHttpRequest->get('album_id'), $oHttpRequest->get('picture_id'), 1, 0, 1);
         unset($oHttpRequest);
 

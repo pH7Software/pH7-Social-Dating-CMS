@@ -10,7 +10,7 @@ namespace PH7;
 use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Url\HeaderUrl,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
@@ -27,12 +27,12 @@ class AdminController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'), t('Welcome to the administration of Ad Affiliate'));
+        Framework\Url\HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), t('Welcome to the administration of Ad Affiliate'));
     }
 
     public function banner()
     {
-        Framework\Url\HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'));
+        Framework\Url\HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'));
     }
 
     public function browse()
@@ -47,7 +47,7 @@ class AdminController extends Controller
 
         if (empty($oSearch))
         {
-            $this->design->setRedirect(UriRoute::get('affiliate', 'admin', 'browse'));
+            $this->design->setRedirect(Uri::get('affiliate', 'admin', 'browse'));
             $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
         }
         else
@@ -102,7 +102,7 @@ class AdminController extends Controller
         ];
 
         $this->session->set($aSessionData);
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'account', 'index'), t('You are now logged in as affiliate: %0%!', $this->session->get('affiliate_username')));
+        HeaderUrl::redirect(Uri::get('affiliate', 'account', 'index'), t('You are now logged in as affiliate: %0%!', $this->session->get('affiliate_username')));
     }
 
     public function logoutUserAs()
@@ -123,18 +123,18 @@ class AdminController extends Controller
         ];
 
         $this->session->remove($aSessionData);
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->
             sMsg);
     }
 
     public function approve()
     {
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
     }
 
     public function disapprove()
     {
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
     }
 
     public function approveAll($iId)
@@ -152,7 +152,7 @@ class AdminController extends Controller
             }
         }
 
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
     }
 
     public function disapproveAll($iId)
@@ -170,7 +170,7 @@ class AdminController extends Controller
             }
         }
 
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
     }
 
     public function ban()
@@ -187,7 +187,7 @@ class AdminController extends Controller
             $this->sMsg = t('Oops! An error has occurred while banishment the affiliate.');
         }
 
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
     }
 
     public function unBan()
@@ -204,7 +204,7 @@ class AdminController extends Controller
             $this->sMsg = t('Oops! An error has occurred while unban the affiliate.');
         }
 
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
     }
 
     public function delete()
@@ -214,7 +214,7 @@ class AdminController extends Controller
         $sUsername = (string) $aData[1];
 
         $this->oAff->delete($iId, $sUsername);
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), t('The affiliate has been deleted.'));
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), t('The affiliate has been deleted.'));
     }
 
     public function banAll()
@@ -235,7 +235,7 @@ class AdminController extends Controller
             $this->sMsg = t('The affiliate(s) has been banned.');
         }
 
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
     }
 
     public function unBanAll()
@@ -256,7 +256,7 @@ class AdminController extends Controller
             $this->sMsg = t('The affiliate(s) has been unbanned.');
         }
 
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
     }
 
     public function deleteAll()
@@ -278,7 +278,7 @@ class AdminController extends Controller
             $this->sMsg = t('The affiliate(s) has been deleted.');
         }
 
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
     }
 
     private function _moderateRegistration($iId, $iStatus)
@@ -299,7 +299,7 @@ class AdminController extends Controller
                     $this->oAffModel->approve($iId, 1, 'Affiliates');
                     $sSubject = t('Your membership account has been activated');
                     $this->sMsg = t('Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!',
-                        '<a href="' . UriRoute::get('affiliate', 'home', 'login') . '"><b>' . t('log in') .
+                        '<a href="' . Uri::get('affiliate', 'home', 'login') . '"><b>' . t('log in') .
                         '</b></a>');
                 }
                 else
@@ -316,7 +316,7 @@ class AdminController extends Controller
                     t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
                     // Send email
-                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/core/moderate_registration.tpl', $oUser->email);
+                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/core/moderate_registration.tpl', $oUser->email);
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
                     (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
 

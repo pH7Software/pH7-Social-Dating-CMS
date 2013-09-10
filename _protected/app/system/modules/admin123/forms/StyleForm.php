@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Design as DesignModel;
+use PH7\Framework\Mvc\Model\Design as Design;
 
 class StyleForm
 {
@@ -17,7 +17,7 @@ class StyleForm
         if (isset($_POST['submit_style']))
         {
             if (\PFBC\Form::isValid($_POST['submit_style']))
-                new StyleFormProcessing;
+                new StyleFormProcess;
             Framework\Url\HeaderUrl::redirect();
         }
 
@@ -25,7 +25,7 @@ class StyleForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_style', 'form_style'));
         $oForm->addElement(new \PFBC\Element\Token('style'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your custon CSS code'), 'code', array('value' => (new DesignModel)->customCode('css'), 'description' => t("WARNING! Here you don't have to put the %0% tags.", '<b><i>&lt;style&gt;&lt;/style&gt;</i></b>'), 'style' => 'height:450px')));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your custon CSS code'), 'code', array('value' => (new Design)->customCode('css'), 'description' => t("WARNING! Here you don't have to put the %0% tags.", '<b><i>&lt;style&gt;&lt;/style&gt;</i></b>'), 'style' => 'height:450px')));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

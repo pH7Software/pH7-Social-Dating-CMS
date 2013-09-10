@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class AdsAdminFormProcessing extends Form
 {
@@ -22,7 +22,7 @@ class AdsAdminFormProcessing extends Form
         /* Clean Model\Design for STATIC data */
         (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'ads'), t('The Advertisements was added successfully!'));
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'ads'), t('The Advertisements was added successfully!'));
     }
 
 }

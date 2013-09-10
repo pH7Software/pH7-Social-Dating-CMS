@@ -13,17 +13,19 @@
 namespace PH7\Framework\Layout\Html;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc as Mvc;
-
 use
-PH7\Framework\Registry\Registry,
 PH7\Framework\Core\Kernel,
+PH7\Framework\Registry\Registry,
+PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Url\Url,
+PH7\Framework\Ip\Ip,
 PH7\Framework\Geo\Ip\Geo,
 PH7\Framework\Str\Str,
+PH7\Framework\File\File,
 PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Navigation\Page,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri;
 
 class Design
 {
@@ -50,13 +52,13 @@ class Design
         /** Instance objects for the class **/
         $this->oStr = new Str;
         $this->oSession = new Session;
-        $this->oHttpRequest = new HttpRequest;
+        $this->oHttpRequest = new Http;
     }
 
     public function langList()
     {
-        $sCurrentPage = \PH7\Framework\Navigation\Page::cleanDynamicUrl('l');
-        $aLangs = (new \PH7\Framework\File\File)->getDirList(Registry::getInstance()->path_module . PH7_LANG);
+        $sCurrentPage = Page::cleanDynamicUrl('l');
+        $aLangs = (new File)->getDirList(Registry::getInstance()->path_module . PH7_LANG);
 
         foreach($aLangs as $sLang)
         {
@@ -170,14 +172,14 @@ class Design
 
     public function stat()
     {
-        $iCountQueries = Mvc\Model\Engine\Db::queryCount();
+        $iCountQueries = Db::queryCount();
         $sRequest = nt('Request', 'Requests', $iCountQueries);
-        echo t('Time of the request: %0% | %1% %2% | Page executed in %3% seconds | Amount of memory allocated: %4%', Mvc\Model\Engine\Db::time(), $iCountQueries, $sRequest, \PH7\Framework\Navigation\Page::time(Registry::getInstance()->start_time, microtime(true)), memory_get_usage(true));
+        echo t('Time of the request: %0% | %1% %2% | Page executed in %3% seconds | Amount of memory allocated: %4%', Db::time(), $iCountQueries, $sRequest, Page::time(Registry::getInstance()->start_time, microtime(true)), memory_get_usage(true));
     }
 
     public function url($sModule, $sController, $sAction, $sVars = null, $bClear = true)
     {
-        $sUrl = UriRoute::get($sModule, $sController, $sAction, $sVars, $bClear);
+        $sUrl = Uri::get($sModule, $sController, $sAction, $sVars, $bClear);
         echo Url::clean($sUrl); // For the parameters in the URL are valid in HTML
     }
 
@@ -207,7 +209,7 @@ class Design
     }
 
     /**
-     * @param string $sCountryCode The Country Code (e.g. US = United States).
+     * @param string $sCountryCode The Country Code (e.g., US = United States).
      * @return void Output the Flag Icon Url.
      */
     public function getSmallFlagIcon($sCountryCode)
@@ -252,7 +254,7 @@ class Design
 
         if($bLicenseLink)
         {
-            echo t('The text is available under the %0%, but additional %1% may apply.', ' <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a>', '<a href="' . UriRoute::get('page', 'main', 'terms') . '" rel="nofollow">' . t('terms') . '</a>');
+            echo t('The text is available under the %0%, but additional %1% may apply.', ' <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a>', '<a href="' . Uri::get('page', 'main', 'terms') . '" rel="nofollow">' . t('terms') . '</a>');
         }
 
     }
@@ -271,7 +273,7 @@ class Design
      * @param string $sType (js or css).
      * @param string $sDir
      * @param string $sFiles
-     * @param string $sCssMedia Only works for CSS files. The CSS Media type (e.g. screen,handheld,tv,projection). Default "all". Leave blank ('' or null) not to use the media attribute.
+     * @param string $sCssMedia Only works for CSS files. The CSS Media type (e.g., screen,handheld,tv,projection). Default "all". Leave blank ('' or null) not to use the media attribute.
      * @return void
      */
     public function staticFiles($sType, $sDir, $sFiles, $sCssMedia = 'all')
@@ -285,7 +287,7 @@ class Design
     /**
      * @param string $sDir The CSS folder.
      * @param string $sFiles The CSS files.
-     * @param string $sCssMedia CSS Media type (e.g. screen,handheld,tv,projection). Default "all". Leave blank ('' or null) not to use the media attribute.
+     * @param string $sCssMedia CSS Media type (e.g., screen,handheld,tv,projection). Default "all". Leave blank ('' or null) not to use the media attribute.
      * @return void
      */
     public function addCss($sDir, $sFiles, $sCssMedia = 'all')
@@ -340,8 +342,8 @@ class Design
         /*** Check the type of message, otherwise it is the default ***/
         $sType = ($sType == 'success' || $sType == 'info' || $sType == 'warning' || $sType == 'error') ? $sType : 'success';
         $this->oSession->set(array(
-        'flash_msg'=> $sMessage,
-        'flash_type'=> $sType
+            'flash_msg'=> $sMessage,
+            'flash_type'=> $sType
         ));
     }
 
@@ -360,12 +362,23 @@ class Design
         }
     }
 
+    /**
+     * Show the user IP address with a link to get the IP information.
+     *
+     * @param string $sIp IP address. Default NULL
+     * @return void
+     */
+    public function ip($sIp = null)
+    {
+        echo '<a href="', Ip::api($sIp), '" title="', t('See information from this IP'), '" target="_blank">', Ip::get($sIp), '</a>';
+    }
+
     public function geoIp()
     {
         $sCountry = Geo::getCountry();
         $sCity = Geo::getCity();
 
-        echo '<a href="', UriRoute::get('user', 'country', 'index', $sCountry . PH7_DS . $sCity), '" title="', t('Meet New People on %0%, %1% with %site_name%!', $sCountry, $sCity), '">', $sCountry, ', ', $sCity, '</a>';
+        echo '<a href="', Uri::get('user', 'country', 'index', $sCountry . PH7_DS . $sCity), '" title="', t('Meet New People on %0%, %1% with %site_name%!', $sCountry, $sCity), '">', $sCountry, ', ', $sCity, '</a>';
     }
 
     /**
@@ -373,7 +386,7 @@ class Design
      *
      * @param integer $iTotalPages
      * @param integer  $iCurrentPage
-     * @return string The HTML pagination code.
+     * @return void The HTML pagination code.
      */
     public function pagination($iTotalPages, $iCurrentPage)
     {
@@ -386,24 +399,23 @@ class Design
      * @param string $sUername
      * @param string $sSex
      * @param integer $iSize
-     * @param integer $iApproved (1 = approved | 0 = pending) Optional parameter, the default value is 1
      * @return void Html contents. URL avatar default 150px or the user avatar.
      */
-    public function getUserAvatar($sUsername, $sSex = '', $iSize = '', $iApproved = '1')
+    public function getUserAvatar($sUsername, $sSex = '', $iSize = '')
     {
-        $oCache = (new \PH7\Framework\Cache\Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize . $iApproved, 60*24*30);
+        $oCache = (new \PH7\Framework\Cache\Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize, 60*24*30);
 
         if(!$sUrl = $oCache->get())
         {
             $oUserModel = new \PH7\UserCoreModel;
 
             $iProfileId = $oUserModel->getId(null, $sUsername);
-            $sGetAvatar = $oUserModel->getAvatar($iProfileId);
+            $oGetAvatar = $oUserModel->getAvatar($iProfileId);
 
             $sSize = ($iSize == '32' || $iSize == '64' || $iSize == '100' || $iSize == '150' || $iSize == '200' || $iSize == '400') ? '-' . $iSize : '';
 
-            $sAvatar = @$sGetAvatar->pic;
-            $sExt = PH7_DOT . (new \PH7\Framework\File\File)->getFileExt($sAvatar);
+            $sAvatar = @$oGetAvatar->pic;
+            $sExt = PH7_DOT . (new File)->getFileExt($sAvatar);
 
             $sDir = 'user/avatar/img/' . $sUsername . '/';
             $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $sAvatar;
@@ -411,7 +423,7 @@ class Design
 
             $bIsModerate = (Registry::getInstance()->module === PH7_ADMIN_MOD);
 
-            if(!is_file($sPath) || $sGetAvatar->approvedAvatar == '0')
+            if(!is_file($sPath) || $oGetAvatar->approvedAvatar == '0')
             {
                 /* If sex is empty, it is recovered in the database using information from member */
                 $sSex = (!empty($sSex)) ? $sSex : $oUserModel->getSex(null, $sUsername, 'Members');
@@ -501,7 +513,7 @@ class Design
             's' => $sSex
         ];
 
-        $sLikeLink = (\PH7\UserCore::auth()) ? '#' : UriRoute::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+        $sLikeLink = (\PH7\UserCore::auth()) ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
 
         $sUrlKey = (empty($sForceUrlKey)) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
         echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like">', t('Like %0%', $sFirstName), '</a>';
@@ -531,8 +543,8 @@ class Design
     public function report($iId, $sUsername, $sFirstName, $sSex)
     {
         $sReportLink = (\PH7\UserCore::auth()) ?
-            UriRoute::get('report', 'main', 'abuse', '?spammer=' . $iId . '&amp;url=' . $this->oHttpRequest->currentUrl() . '&amp;type=' . Registry::getInstance()->module, false) . '" data-popup="block-page' :
-            UriRoute::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(array('msg' => t('You must register to report this person.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex)), false);
+            Uri::get('report', 'main', 'abuse', '?spammer=' . $iId . '&amp;url=' . $this->oHttpRequest->currentUrl() . '&amp;type=' . Registry::getInstance()->module, false) . '" data-popup="block-page' :
+            Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(array('msg' => t('You must register to report this person.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex)), false);
 
         echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
     }
@@ -623,8 +635,8 @@ class Design
 
     /**
      * The XML tag does not work in PHP files since it is the same "<?"
-     *
      * So this method can introduce the XML header without causing an error by the PHP interpreter.
+     *
      * @return void
      */
     public function xmlHeader()
@@ -636,7 +648,7 @@ class Design
      * Get an external CSS file.
      *
      * @param string $sFile CSS file.
-     * @param string $sCssMedia Only works for CSS files. The CSS Media type (e.g. screen,handheld,tv,projection). Default NULL
+     * @param string $sCssMedia Only works for CSS files. The CSS Media type (e.g., screen,handheld,tv,projection). Default NULL
      * @return void HTML link tag.
      */
     public function externalCssFile($sFile, $sCssMedia = null)
@@ -649,7 +661,7 @@ class Design
      * Get an external JS file.
      *
      * @param string $sFile JS file.
-     * @return void HTML link tag.
+     * @return void HTML script tag.
      */
     public function externalJsFile($sFile)
     {

@@ -17,7 +17,7 @@ class ImportUserForm
         if (isset($_POST['submit_import_user']))
         {
             if (\PFBC\Form::isValid($_POST['submit_import_user']))
-                new ImportUserFormProcessing;
+                new ImportUserFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }

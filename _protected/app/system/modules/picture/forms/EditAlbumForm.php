@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\Http;
 
 class EditAlbumForm
 {
@@ -17,12 +17,12 @@ class EditAlbumForm
         if (isset($_POST['submit_edit_picture_album']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit_picture_album']))
-                new EditAlbumFormProcessing();
+                new EditAlbumFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oAlbum = (new PictureModel)->album((new Session)->get('member_id'), (new HttpRequest)->get('album_id'), 1, 0, 1);
+        $oAlbum = (new PictureModel)->album((new Session)->get('member_id'), (new Http)->get('album_id'), 1, 0, 1);
 
         $oForm = new \PFBC\Form('form_edit_picture_album', 500);
         $oForm->configure(array('action' => '' ));

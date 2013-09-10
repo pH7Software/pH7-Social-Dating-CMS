@@ -21,7 +21,8 @@ defined('PH7') or exit('Restricted access');
  * @author Stephen Clay <steve@mrclay.org>
  * @author http://code.google.com/u/1stvamp/ (Issue 64 patch)
  */
-class Css {
+class Css
+{
 
     /**
      * Minify a CSS string
@@ -248,4 +249,5 @@ class Css {
         }
         return $out . $m[2];
     }
+
 }

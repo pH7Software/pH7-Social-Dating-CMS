@@ -18,7 +18,7 @@ class FileController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get(PH7_ADMIN_MOD, 'file', 'display'));
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'file', 'display'));
     }
 
     public function display($sDir = '')
@@ -48,7 +48,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Email Templates');
 
-        $this->_displayAction(PH7_PATH_SYS . 'globals/' . PH7_VIEWS .PH7_TPL_NAME . '/mails/', '.tpl');
+        $this->_displayAction(PH7_PATH_SYS . 'global/' . PH7_VIEWS .PH7_TPL_NAME . '/mail/', '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }

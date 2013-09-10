@@ -18,12 +18,12 @@ use PH7\Framework\Core\Kernel;
 final class Version
 {
 
-    const LATEST_VERSION_URL = 'http://software.hizup.com/rss/software-info.xml';
+    const LATEST_VERSION_URL = 'http://software.hizup.com/rss/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /***** Framework Kernel *****/
     const KERNEL_VERSION = Kernel::SOFTWARE_VERSION;
     const KERNEL_BUILD = Kernel::SOFTWARE_BUILD;
-    const KERNAL_RELASE_DATE = '2013-08-06';
+    const KERNAL_RELASE_DATE = '2013-09-15';
     const KERNEL_VERSION_NAME = Kernel::SOFTWARE_VERSION_NAME;
 
     /***** Form PFBC *****/
@@ -47,10 +47,9 @@ final class Version
      *
      * @return mixed (array | boolean) Returns version informations in an array or FALSE if an error occurred.
      */
-    public static function getLatestVersionInfo()
+    public static function getLatestInfo()
     {
         $oCache = (new \PH7\Framework\Cache\Cache)->start('str/security', 'version-info', 3600*24); // Stored for 1 day
-
         if(!$mData = $oCache->get())
         {
             $oDom = new \DOMDocument;
@@ -70,8 +69,8 @@ final class Version
             $mData = array('name' => $sVerName, 'version' => $sVerNumber, 'build' => $sVerBuild);
             $oCache->put($mData);
         }
-
         unset($oCache);
+
         return $mData;
     }
 
@@ -82,27 +81,23 @@ final class Version
      */
     public static function isUpdates()
     {
-        $sCurrentVerName = Kernel::SOFTWARE_VERSION_NAME;
-        $sCurrentVer = Kernel::SOFTWARE_VERSION;
-        $sCurrentBuild = Kernel::SOFTWARE_BUILD;
+        if(!$aLatestInfo = self::getLatestInfo()) return false;
 
-        if(!$aLatestVerInfo = self::getLatestVersionInfo()) return false;
+        $sLastName = $aLatestInfo['name'];
+        $sLastVer = $aLatestInfo['version'];
+        $sLastBuild = $aLatestInfo['build'];
+        unset($aLatestInfo);
 
-        $sLastVerName = $aLatestVerInfo['name'];
-        $sLastVer = $aLatestVerInfo['version'];
-        $sLastBuild = $aLatestVerInfo['build'];
-        unset($aLatestVerInfo);
+        if(!is_string($sLastName) || !preg_match('#^' . self::PATTERN . '$#', $sLastVer)) return false;
 
-        if(!is_string($sLastVerName)) return false;
-
-        if(version_compare($sCurrentVer, $sLastVer, '=='))
+        if(version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '=='))
         {
-            if(version_compare($sCurrentBuild, $sLastBuild, '<'))
+            if(version_compare(Kernel::SOFTWARE_BUILD, $sLastBuild, '<'))
                 return true;
         }
         else
         {
-            if(version_compare($sCurrentVer, $sLastVer, '<'))
+            if(version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '<'))
                 return true;
         }
         return false;

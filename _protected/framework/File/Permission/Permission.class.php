@@ -16,10 +16,6 @@ class Permission
 
     const READABLE_WRITABLE = 6, EXECUTABLE = 1, WRITABLE_EXECUTABLE = 3;
 
-    public function __construct()
-    {
-    }
-
     /**
      * Check the file permissions.
      *

@@ -8,18 +8,18 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class ForgotPasswordForm
 {
 
     public static function display()
     {
-        $sTable = Various::convertModToTable( (new HttpRequest)->get('mod') );
+        $sTable = Various::convertModToTable( (new Http)->get('mod') );
 
         if (isset($_POST['submit_forgot_password'])) {
             if (\PFBC\Form::isValid($_POST['submit_forgot_password']))
-                new ForgotPasswordFormProcessing($sTable);
+                new ForgotPasswordFormProcess($sTable);
 
             Framework\Url\HeaderUrl::redirect();
         }

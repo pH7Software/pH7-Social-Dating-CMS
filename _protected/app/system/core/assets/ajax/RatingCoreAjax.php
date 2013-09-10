@@ -13,9 +13,9 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Cookie\Cookie,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class RatingCoreAjax
 {
@@ -25,7 +25,7 @@ class RatingCoreAjax
 
     public function __construct()
     {
-       $this->_oHttpRequest = new HttpRequest;
+       $this->_oHttpRequest = new Http;
 
        if($this->_oHttpRequest->postExists('action') && $this->_oHttpRequest->postExists('table') && $this->_oHttpRequest->postExists('score') && $this->_oHttpRequest->postExists('id'))
        {

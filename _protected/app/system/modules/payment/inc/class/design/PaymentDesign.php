@@ -10,7 +10,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 class PaymentDesign extends Framework\Core\Core
 {
@@ -31,8 +31,8 @@ class PaymentDesign extends Framework\Core\Core
             ->param('no_shipping', 1)
             ->param('currency_code', $this->config->values['module.setting']['currency'])
             ->param('tax_cart', $this->config->values['module.setting']['tax_vat.percentage'])
-            ->param('return', UriRoute::get('payment', 'main', 'process', 'paypal'))
-            ->param('cancel_return', UriRoute::get('payment', 'main', 'pay', '?msg=' . t('The payment was aborted, no changes have been made to your account.'), false));
+            ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
+            ->param('cancel_return', Uri::get('payment', 'main', 'pay', '?msg=' . t('The payment was aborted, no changes have been made to your account.'), false));
         echo
         '<form name="check_out_form" action="', $oPayPal->getUrl(), '" method="post">',
         $oPayPal->generate(),
@@ -59,7 +59,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('c_name', $this->registry->site_name . ' ' . $oMembership->name)
             ->param('tco_currency', $this->config->values['module.setting']['currency'])
             ->param('c_tangible', 'N')
-            ->param('x_receipt_link_url', UriRoute::get('payment', 'main', 'process', '2co'));
+            ->param('x_receipt_link_url', Uri::get('payment', 'main', 'process', '2co'));
         echo
         '<form action="', $o2CO->getUrl(), '" method="post">',
         $o2CO->generate(),

@@ -13,7 +13,7 @@ class InfoController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get(PH7_ADMIN_MOD,
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD,
             'info', 'software'));
     }
 

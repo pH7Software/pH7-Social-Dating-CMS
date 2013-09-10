@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Forum / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class AdminController extends Controller
 {
@@ -21,7 +21,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'index'), t('Welcome to the forum administrator mode.'));
+        HeaderUrl::redirect(Uri::get('forum', 'forum', 'index'), t('Welcome to the forum administrator mode.'));
     }
 
     public function addCategory()
@@ -63,7 +63,7 @@ class AdminController extends Controller
         else
             $this->sMsg = t('Oops! Your Category could not be deleted');
 
-        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'index'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('forum', 'forum', 'index'), $this->sMsg);
     }
 
     public function deleteForum()
@@ -73,7 +73,7 @@ class AdminController extends Controller
         else
             $this->sMsg = t('Oops! Your Forum could not be deleted');
 
-        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'index'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('forum', 'forum', 'index'), $this->sMsg);
     }
 
     public function __destruct()

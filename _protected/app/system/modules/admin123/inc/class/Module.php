@@ -9,7 +9,8 @@
  * @version        1.1
  */
 namespace PH7;
-use PH7\Framework\Core\Core, PH7\Framework\File as F;
+
+use PH7\Framework\File as F;
 
 class Module
 {
@@ -90,9 +91,9 @@ class Module
     /**
      * Checks if the module is valid.
      *
-     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant
+     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      * @param string $sFolder The folder
-     * @return boolean Return "true" if correct otherwise "false"
+     * @return boolean Returns TRUE if it is correct, FALSE otherwise.
      */
     public function checkModFolder($sSwitch, $sFolder)
     {
@@ -105,9 +106,9 @@ class Module
     /**
      * Get the module informations in the config.ini file.
      *
-     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant
+     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      * @param string $sFolder
-     * @return string Contents file
+     * @return boolean
      */
     public function readConfig($sSwitch, $sFolder)
     {
@@ -120,23 +121,23 @@ class Module
     /**
      * Get the instructions.
      *
-     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant
-     * @return mixed (string or boolean) Returns "false" if the file does not exist or if it fails otherwise returns the "file contents"
+     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
+     * @return mixed (string or boolean) Returns "false" if the file does not exist or if it fails, otherwise returns the "file contents".
      */
     public function readInstruction($sSwitch)
     {
         $sValue = $this->_checkParam($sSwitch);
         $sDir = $this->_sModsDirModFolder . static::INSTALL_DIR . static::INFO_DIR;
         $sPath = ($sValue == static::INSTALL) ? PH7_PATH_MOD . $sDir . static::INSTALL_INST_CONCL_FILE : PH7_PATH_REPOSITORY . static::DIR . $sDir . static::UNINSTALL_INST_CONCL_FILE;
-        $mInstruction = (F\Import::file($sPath));
+        $mInstruction = F\Import::file($sPath);
         return (!$mInstruction) ? '<p class="error">' . t('Instruction file not found!') . '</p>' : $mInstruction;
     }
 
     /**
      * Read the modules folders.
      *
-     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant
-     * @return string Returns the module folders
+     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
+     * @return array Returns the module folders.
      */
     private function _readMods($sSwitch)
     {
@@ -147,7 +148,7 @@ class Module
     /**
      * FOR INSTALL: Movement of the back module of the repository to the modules directory OR FOR UNISTALL: Movement of the back module of the modules directory to the repository.
      *
-     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant
+     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      * @return void
      */
     private function _file($sSwitch)
@@ -167,8 +168,8 @@ class Module
     /**
      * FOR INSTALL: Execute SQL statements for module installation OR FOR UNISTALL: Uninstalling the database.
      *
-     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant
-     * @return void If it found a query SQL error, it display an error message with exit()
+     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
+     * @return void If it found a query SQL error, it display an error message with exit() function.
      */
     private function _sql($sSwitch)
     {
@@ -184,9 +185,9 @@ class Module
     }
 
     /**
-     * Router for the routes methods Module::addRoute() and Module::removeRoute()
+     * Add or remove the routes module.
      *
-     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant
+     * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      * @return void
      */
     private function _route($sSwitch)
@@ -231,8 +232,8 @@ class Module
     /**
      * Remove the module repository folder.
      *
-     * @param string $sModuleDir Folder of module
-     * @return boolean Return "true" if the folder has been deleted otherwise "false"
+     * @param string $sModuleDir Folder of module.
+     * @return boolean Returns TRUE if the folder has been deleted, FALSE otherwise.
      */
     private function _removeModDir($sModuleDir)
     {
@@ -243,8 +244,8 @@ class Module
      * Checks if the constant is correct.
      *
      * Note: This method is valid only for public methods, it is not necessary to check the private methods.
-     * @param string $sSwitch The constant check
-     * @return string Return the constant if it is correct otherwise an error message with exit()
+     * @param string $sSwitch The check constant.
+     * @return string Returns the constant if it is correct, otherwise an error message with exit() function.
      */
     private function _checkParam($sSwitch)
     {

@@ -21,7 +21,7 @@ $sPhp_self = dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES));
 #################### CONSTANTS ####################
 
 
-########## OTHERS ##########
+########## OTHER ##########
 
 define('SELF', (substr($sPhp_self,-1) !== '/') ? $sPhp_self . '/' : $sPhp_self);
 define('RELATIVE', SELF);

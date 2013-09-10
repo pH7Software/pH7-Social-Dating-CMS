@@ -151,7 +151,7 @@ class PictureModel extends PictureCoreModel
         return $rStmt->execute();
     }
 
-    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iApproved = 1)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
@@ -163,10 +163,11 @@ class PictureModel extends PictureCoreModel
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(p.pictureId) AS totalPictures';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
 
-        $rStmt = Db::getInstance()->prepare('SELECT p.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN'
-                . Db::prefix('Members') . 'AS m ON p.profileId = m.profileId ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT p.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN'
+                . Db::prefix('AlbumsPictures') . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix('Members') . 'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved=:approved' . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
 
         if (!$bCount)
         {

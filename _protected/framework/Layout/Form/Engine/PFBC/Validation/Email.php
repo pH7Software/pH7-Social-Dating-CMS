@@ -4,7 +4,6 @@
  * By pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Validation;
-use PH7\Framework\Security\Ban\Ban;
 
 class Email extends \PFBC\Validation
 {
@@ -17,7 +16,7 @@ class Email extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        $sEmailHost = strrchr($sValue, '@');
-        return ($this->isNotApplicable($sValue) || (!Ban::isEmail($sValue) && !Ban::isEmail($sEmailHost) && $this->oValidate->email($sValue)));
+        return ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue));
     }
+
 }

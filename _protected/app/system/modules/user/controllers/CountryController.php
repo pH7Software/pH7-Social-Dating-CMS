@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / User / Controller
  */
 namespace PH7;
+
 use PH7\Framework\Navigation\Page, PH7\Framework\Geo\Map\Map;
 
 class CountryController extends Controller

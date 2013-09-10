@@ -6,14 +6,14 @@
  * @package        PH7 / App / System / Module / Note / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class AdminController extends MainController
 {
 
     public function index()
     {
-        HeaderUrl::redirect(UriRoute::get('note', 'main', 'index'), t('Welcome to the Note administrator mode.'));
+        HeaderUrl::redirect(Uri::get('note', 'main', 'index'), t('Welcome to the Note administrator mode.'));
     }
 
     public function unmoderated()
@@ -22,7 +22,7 @@ class AdminController extends MainController
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts(), 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts($this->iApproved), 10);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oPosts = $this->oNoteModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), SearchCoreModel::CREATED, '0');
@@ -59,7 +59,7 @@ class AdminController extends MainController
             $this->sMsg = t('Oops! The Note could not be approved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get('note','admin','unmoderated'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('note','admin','unmoderated'), $this->sMsg);
     }
 
     public function disapproved()
@@ -80,7 +80,7 @@ class AdminController extends MainController
             $this->sMsg = t('Oops! The Note could not be approved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get('note','admin','unmoderated'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('note', 'main', 'index'), $this->sMsg);
     }
 
 }

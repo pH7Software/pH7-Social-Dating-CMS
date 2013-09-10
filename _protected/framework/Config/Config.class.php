@@ -62,7 +62,7 @@ class Config implements IConfig
      *
      * @access public
      * @param string $sFile
-     * @return boolean Returne false if the file does not exist otherwise returns true.
+     * @return boolean Returne FALSE if the file doesn't exist, TRUE otherwise.
      */
     public function load($sFile)
     {

@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class EditFormProcessing extends Form
 {
@@ -21,7 +21,8 @@ class EditFormProcessing extends Form
         $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $this->httpRequest->getExists('profile_id')) ? $this->httpRequest->get('profile_id', 'int') : $this->session->get('affiliate_id');
         $oAff = $oAffModel->readProfile($iProfileId, 'Affiliates');
 
-        if(!$this->str->equals($this->httpRequest->post('first_name'), $oAff->firstName)) {
+        if(!$this->str->equals($this->httpRequest->post('first_name'), $oAff->firstName))
+        {
             $oAffModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, 'Affiliates');
             $this->session->set('affiliate_first_name', $this->httpRequest->post('first_name'));
 
@@ -31,10 +32,8 @@ class EditFormProcessing extends Form
         if(!$this->str->equals($this->httpRequest->post('last_name'), $oAff->lastName))
             $oAffModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, 'Affiliates');
 
-        if(!$this->str->equals($this->httpRequest->post('phone'), $oAff->phone))
-            $oAffModel->updateProfile('phone', $this->httpRequest->post('phone'), $iProfileId, 'Affiliates');
-
-        if(!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex)) {
+        if(!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex))
+        {
             $oAffModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, 'Affiliates');
             $this->session->set('affiliate_sex', $this->httpRequest->post('sex'));
 
@@ -45,10 +44,10 @@ class EditFormProcessing extends Form
             $oAffModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId, 'Affiliates');
 
         // Update dynamic fields.
-        $oFields = $oAffModel->getInfoFields($iProfileId);
+        $oFields = $oAffModel->getInfoFields($iProfileId, 'AffiliatesInfo');
         foreach($oFields as $sColumn => $sValue)
         {
-            $sHRParam = ($sColumn == 'description') ? HttpRequest::ONLY_XSS_CLEAN : null;
+            $sHRParam = ($sColumn == 'description') ? Http::ONLY_XSS_CLEAN : null;
             if(!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue))
                 $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'AffiliatesInfo');
         }

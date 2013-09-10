@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mail\Mail;
 
 class Newsletter extends Core
 {
@@ -42,9 +42,9 @@ class Newsletter extends Core
             // Do not send any emails at the same time to avoid overloading the mail server.
             if (self::$_iTotalSent > 250) sleep(10);
 
-            $this->view->content = $this->httpRequest->post('body', HttpRequest::NO_CLEAN);
+            $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 
-            $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
+            $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
 
             $aInfo = [
                 'subject' => $this->httpRequest->post('subject'),

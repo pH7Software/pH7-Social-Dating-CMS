@@ -19,7 +19,7 @@ PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Util\Various,
 PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class Microsoft extends Api
 {
@@ -82,12 +82,12 @@ class Microsoft extends Api
                 $this->add(escape($oUserData, true), $oUserModel);
 
                 $this->oDesign->setFlashMsg( t('You now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
-                $this->sUrl = UriRoute::get('connect','main','register');
+                $this->sUrl = Uri::get('connect','main','register');
             }
             else
             {   // Login
                 $this->setLogin($oUserModel, $iId);
-                $this->sUrl = UriRoute::get('connect','main','home');
+                $this->sUrl = Uri::get('connect','main','home');
             }
 
             unset($oUserModel);
@@ -96,7 +96,7 @@ class Microsoft extends Api
         {
             // For testing purposes, if there was an error, let's kill the script
             $this->oDesign->setFlashMsg(t('Oops! An error has occurred. Please try again later.'));
-            $this->sUrl = UriRoute::get('connect','main','index');
+            $this->sUrl = Uri::get('connect','main','index');
         }
 
     }
@@ -147,7 +147,7 @@ class Microsoft extends Api
     private function _setConfig()
     {
         $this->_oClient->server = 'Microsoft';
-        $this->_oClient->redirect_uri = UriRoute::get('connect','main','login','google');
+        $this->_oClient->redirect_uri = Uri::get('connect','main','login','google');
 
         $this->_oClient->client_id = Config::getInstance()->values['module.api']['microsoft.client_id'];
         $this->_oClient->client_secret = Config::getInstance()->values['module.api']['microsoft.client_secret_key'];

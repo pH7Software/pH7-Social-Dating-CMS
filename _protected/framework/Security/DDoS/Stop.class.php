@@ -28,17 +28,18 @@ final class Stop
     {
         $oCookie = new Cookie;
         // SFC = Stop for Server Security
-        if(!$oCookie->exists('sfss')) {
+        if (!$oCookie->exists('sfss'))
             $oCookie->set('sfss', 1, 60*60*48);
-        } else {
+        else
              $oCookie->set('sfss', ($oCookie->get('sfss')+1));
-        }
-        if($oCookie->get('sfss') > PH7_DDOS_MAX_COOKIE_PAGE_LOAD) {
+
+        if ($oCookie->get('sfss') > PH7_DDOS_MAX_COOKIE_PAGE_LOAD)
+        {
             $oCookie->remove('sfss'); // Remove Cookie
             $bStatus = true;
-        } else {
-            $bStatus = false;
         }
+        else
+            $bStatus = false;
 
         unset($oCookie);
         return $bStatus;
@@ -51,17 +52,18 @@ final class Stop
     {
         $oSession = new Session;
         // SFC = Stop for Server Security
-        if(!$oSession->exists('sfss')) {
+        if (!$oSession->exists('sfss'))
             $oSession->set('sfss', 1);
-        } else {
+        else
              $oSession->set('sfss', ($oSession->get('sfss')+1));
-        }
-        if($oSession->get('sfss') > PH7_DDOS_MAX_SESSION_PAGE_LOAD) {
+
+        if ($oSession->get('sfss') > PH7_DDOS_MAX_SESSION_PAGE_LOAD)
+        {
             $oSession->remove('sfss'); // Remove Session
             $bStatus = true;
-        } else {
-            $bStatus = false;
         }
+        else
+            $bStatus = false;
 
         unset($oSession);
         return $bStatus;

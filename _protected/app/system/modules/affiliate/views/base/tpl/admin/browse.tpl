@@ -1,4 +1,4 @@
-<form method="post" action="{{ $design->url('affiliate','admin','userlist') }}">
+<form method="post" action="{{ $design->url('affiliate','admin','browse') }}">
   {{ $designSecurity->inputToken('aff_action') }}
 
   <table class="center">
@@ -55,7 +55,7 @@
           <td>{age}</td>
           <td>{% $aff->refer %}</td>
           <td>{% $aff->bankAccount %}</td>
-          <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($aff->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> <a href="{% Framework\Ip\Ip::api($aff->ip) %}" title="{lang 'See information from this user IP'}" target="_blank">{% $aff->ip %}</a></td>
+          <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($aff->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($aff->ip) }}</td>
           <td>{% $dateTime->get($aff->joinDate)->dateTime() %}</td>
           <td>{if !empty($aff->lastActivity)} {% $dateTime->get($aff->lastActivity)->dateTime() %} {else} {lang 'No last login'} {/if}</td>
           <td>{if !empty($aff->lastEdit)} {% $dateTime->get($aff->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>

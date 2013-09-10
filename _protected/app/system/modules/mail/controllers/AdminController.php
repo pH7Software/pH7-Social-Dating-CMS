@@ -12,15 +12,15 @@ class AdminController extends MainController
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('mail', 'admin', 'msglist'));
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('mail', 'admin', 'msglist'));
     }
 
     public function msgList()
     {
-        $this->iTotalMails = $this->oMailModel->allMsg($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $this->iTotalMails = $this->oMailModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
         $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oAllMsg = $this->oMailModel->allMsg($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oAllMsg = $this->oMailModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
         if (empty($oAllMsg))
         {

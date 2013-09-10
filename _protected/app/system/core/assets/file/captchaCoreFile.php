@@ -8,6 +8,6 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Security\Spam\Captcha\Captcha, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Security\Spam\Captcha\Captcha, PH7\Framework\Mvc\Request\Http;
 
-(new Captcha)->show( (new HttpRequest)->getExists('r') );
+(new Captcha)->show( (new Http)->getExists('r') );

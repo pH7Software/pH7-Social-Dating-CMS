@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class EditCommentFormProcessing extends Form
 {
@@ -38,7 +38,7 @@ class EditCommentFormProcessing extends Form
                     /* Clean All Data of CommentModel Cache */
                     (new Framework\Cache\Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
 
-                    HeaderUrl::redirect(UriRoute::get('comment','comment','read', $sTable . ',' . $iRecipientId), t('The comment has been updated successfully!'));
+                    HeaderUrl::redirect(Uri::get('comment','comment','read', $sTable . ',' . $iRecipientId), t('The comment has been updated successfully!'));
                 }
                 else
                 {

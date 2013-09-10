@@ -12,6 +12,7 @@ namespace PH7;
 
 use
 PH7\Framework\Mvc\Model\Engine\Db,
+PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Model\Engine\Util\Various,
 PH7\Framework\Date\CDateTime,
 PH7\Framework\Security\Security;
@@ -20,12 +21,7 @@ PH7\Framework\Security\Security;
 class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 {
 
-    const
-    CACHE_GROUP = 'db/sys/mod/user',
-    CACHE_TIME = 604800,
-    RAND = 'rand',
-    LATEST = 'joinDate',
-    LAST_ACTIVITY = 'lastActivity';
+    const CACHE_GROUP = 'db/sys/mod/user', CACHE_TIME = 604800;
 
     protected $sCurrentDate;
 
@@ -262,6 +258,9 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
+        $bIsFirstName = !empty($aParams['first_name']);
+        $bIsMiddleName = !empty($aParams['middle_name']);
+        $bIsLastName = !empty($aParams['last_name']);
         $bIsSingleAge = !empty($aParams['age']);
         $bIsAge = empty($aParams['age']) && !empty($aParams['age1']) && !empty($aParams['age2']);
         $bIsHeight = !empty($aParams['height']);
@@ -276,6 +275,9 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(m.profileId) AS totalUsers';
+        $sSqlFirstName = ($bIsFirstName) ? ' AND firstName = :firstName' : '';
+        $sSqlMiddleName = ($bIsMiddleName) ? ' AND middleName = :middleName' : '';
+        $sSqlLastName = ($bIsLastName) ? ' AND lastName = :lastName' : '';
         $sSqlSingleAge = ($bIsSingleAge) ? ' AND birthDate LIKE :year ' : '';
         $sSqlAge = ($bIsAge) ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
         $sSqlHeight = ($bIsHeight) ? ' AND height = :height ' : '';
@@ -285,7 +287,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlState = ($bIsState) ? ' AND state LIKE :state ' : '';
         $sSqlZipCode = ($bIsZipCode) ? ' AND zipCode LIKE :zipCode ' : '';
         $sSqlEmail = ($bIsMail) ? ' AND email LIKE :email ' : '';
-        $sSqlOnline = (!empty($aParams['online'])) ? ' AND userStatus = 1 AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . Framework\Mvc\Model\DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
+        $sSqlOnline = (!empty($aParams['online'])) ? ' AND userStatus = 1 AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
+        $sSqlAvatar = (!empty($aParams['avatar'])) ? ' AND avatar IS NOT NULL AND approvedAvatar = 1 ' : '';
 
         if (empty($aParams['order'])) $aParams['order'] = SearchCoreModel::LATEST; // Default is "ORDER BY joinDate"
         if (empty($aParams['sort'])) $aParams['sort'] =  SearchCoreModel::ASC; // Default is "ascending"
@@ -323,10 +326,13 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         }
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId
-            LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND userSaveViews = \'yes\'
-            AND groupId = 2' .  $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState . $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlOrder . $sSqlLimit);
-
+            LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND searchProfile = \'yes\'
+            AND groupId = 2' . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
+            $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit);
         if (!empty($aParams['match_sex'])) $rStmt->bindValue(':matchSex', '%' . $aParams['match_sex'] . '%', \PDO::PARAM_STR);
+        if ($bIsFirstName) $rStmt->bindValue(':firstName', $aParams['first_name'], \PDO::PARAM_STR);
+        if ($bIsMiddleName) $rStmt->bindValue(':middleName', $aParams['middle_name'], \PDO::PARAM_STR);
+        if ($bIsLastName) $rStmt->bindValue(':lastName', $aParams['last_name'], \PDO::PARAM_STR);
         if ($bIsSingleAge) $rStmt->bindValue(':year', '%' . (date('Y') - $aParams['age']) . '%', \PDO::PARAM_INT);
         if ($bIsAge) $rStmt->bindValue(':age1', $aParams['age1'], \PDO::PARAM_INT);
         if ($bIsAge) $rStmt->bindValue(':age2', $aParams['age2'], \PDO::PARAM_INT);
@@ -419,7 +425,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Update Notifications
+     * Update the notifications.
      *
      * @param string $sSection
      * @param string $sValue
@@ -583,7 +589,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindParam(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $this->sCurrentDate, \PDO::PARAM_STR);
-        $rStmt->bindValue(':groupId', (int) Framework\Mvc\Model\DbConfig::getSetting('defaultMembershipGroupId'), \PDO::PARAM_INT);
+        $rStmt->bindValue(':groupId', (int) DbConfig::getSetting('defaultMembershipGroupId'), \PDO::PARAM_INT);
         $rStmt->execute();
         $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the user's ID
         Db::free($rStmt);
@@ -610,7 +616,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Sets default privacy settings.
+     * Set the default privacy settings.
      *
      * @return Returns TRUE on success or FALSE on failure.
      */
@@ -623,7 +629,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Sets default notifications.
+     * Set the default notifications.
      *
      * @return Returns TRUE on success or FALSE on failure.
      */
@@ -649,7 +655,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix($sTable) . 'WHERE ip = :ip AND DATE_ADD(joinDate, INTERVAL :waitTime MINUTE) > :currentTime');
+        $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix($sTable) . 'WHERE ip = :ip AND DATE_ADD(joinDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
         $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
@@ -670,18 +676,18 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function setAvatar($iProfileId, $sAvatar, $iApproved)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Members') . 'SET avatar = :avatar, approvedAvatar = :approvedAvatar WHERE profileId = :profileId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Members') . 'SET avatar = :avatar, approvedAvatar = :approved WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':avatar', $sAvatar, \PDO::PARAM_STR);
-        $rStmt->bindValue(':approvedAvatar', $iApproved, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
 
     /**
-     * Gets avatar.
+     * Get avatar.
      *
      * @param integer $iProfileId
-     * @param integer $iApproved ('1' = approved '0' = pending, null = approved and pending) Default NULL
+     * @param integer $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
      * @return object The Avatar (SQL alias is pic), profileId and approvedAvatar
      */
     public function getAvatar($iProfileId, $iApproved = null)
@@ -690,10 +696,10 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         if (!$oData = $this->cache->get())
         {
-            $sSqlApproved = (!empty($iApproved)) ? ' AND approvedAvatar = :approvedAvatar ' : ' ';
+            $sSqlApproved = (isset($iApproved)) ? ' AND approvedAvatar = :approved ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT profileId, avatar AS pic, approvedAvatar FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-            if (!empty($iApproved)) $rStmt->bindValue(':approvedAvatar', $iApproved, \PDO::PARAM_INT);
+            if (isset($iApproved)) $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -718,10 +724,10 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     /********** BACKGROUND **********/
 
     /**
-     * Gets file of a user background.
+     * Get file of a user background.
      *
      * @param integer $iProfileId
-     * @param integer $iApproved ('1' = approved '0' = pending, null = approved and pending) Default NULL
+     * @param integer $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
      * @return boolean
      */
     public function getBackground($iProfileId, $iApproved = null)
@@ -730,10 +736,10 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         if (!$sData = $this->cache->get())
         {
-            $sSqlApproved = (!empty($iApproved)) ? ' AND approved = :approved ' : ' ';
+            $sSqlApproved = (isset($iApproved)) ? ' AND approved = :approved ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-            if (!empty($iApproved)) $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+            if (isset($iApproved)) $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -877,33 +883,6 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Order By method.
-     *
-     * @access protected
-     * @param string $sOrder
-     * @return string SQL order by query
-     */
-    protected function profileOrderBy($sOrder)
-    {
-        switch($sOrder)
-        {
-            case static::RAND:
-                $sSqlOrderBy = Db::RAND;
-            break;
-
-            case static::LATEST:
-            case static::LAST_ACTIVITY:
-                $sSqlOrderBy =  $sOrder . ' ' . Db::DESC;
-            break;
-
-            default:
-                throw new Framework\Error\CException\PH7Exception('The argument order is wrong, please correct it, please.');
-        }
-
-        return ' ORDER BY ' . $sSqlOrderBy . ' ';
-    }
-
-    /**
      * @param string $sUsernameSearch
      * @param string $sTable Default 'Members'
      * @return object data of users (profileId, username, sex)
@@ -923,21 +902,23 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Get profiles data.
      *
-     * @param string $sOrder Default PH7\UserCoreModel::LAST_ACTIVITY
+     * @param string $sOrder Default PH7\SearchCoreModel::LAST_ACTIVITY
      * @param integer $iOffset Default NULL
      * @param integer $iLimit Default NULL
      * @return object Data of users
      */
-    public function getProfiles($sOrder = self::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
+    public function getProfiles($sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
         $bIsLimit = (null !== $iOffset && null !== $iLimit);
 
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
-        $sOrder = $this->profileOrderBy($sOrder);
+
+        $sOrder = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 
         $sSqlLimit = ($bIsLimit ? 'LIMIT :offset, :limit' : '');
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId
+            LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (searchProfile = \'yes\')
             AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
 
         if ($bIsLimit)
@@ -969,12 +950,14 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sOrder = (!$bCount) ? $this->profileOrderBy($sOrder) : '';
+        $sOrder = (!$bCount) ? SearchCoreModel::order($sOrder, SearchCoreModel::DESC) : '';
+
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(m.profileId) AS totalUsers';
 
         $sSqlCity = (!empty($sCity)) ?  'AND (city LIKE :city)' : '';
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')
+            AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
         $rStmt->bindParam(':country', $sCountry, \PDO::PARAM_STR, 2);
         (!empty($sCity)) ? $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR) : '';
 
@@ -1094,7 +1077,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Retrieves the username from the user ID
+     * Retrieves the username from the user ID.
      *
      * @param integer $iProfileId
      * @param string $sTable Default 'Members'
@@ -1123,7 +1106,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Retrieves the first name from the user ID
+     * Retrieves the first name from the user ID.
      *
      * @param integer $iProfileId
      * @param string $sTable Default 'Members'
@@ -1214,7 +1197,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Get the membership data
+     * Get the memberships data.
      *
      * @param integer $iWhereId Default NULL
      * @return object The data

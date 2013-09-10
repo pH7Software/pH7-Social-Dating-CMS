@@ -7,7 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -20,7 +20,7 @@ class Permission extends PermissionCore
         || $this->registry->action === 'editalbum' || $this->registry->action === 'editphoto'
         || $this->registry->action === 'deletephoto' || $this->registry->action === 'deletealbum'))
         {
-            HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->signInMsg(), 'error');
+            HeaderUrl::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
         }
     }
 

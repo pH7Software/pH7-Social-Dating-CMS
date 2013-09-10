@@ -9,7 +9,7 @@
  * @version        1.0
  */
 namespace PH7;
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends MainController
 {
@@ -67,7 +67,7 @@ class AdminController extends MainController
     public function deleteMembership()
     {
         $this->oPayModel->deleteMembership( $this->httpRequest->post('id') );
-        HeaderUrl::redirect(UriRoute::get('payment', 'admin', 'membershiplist'), t('The Membership has been removed!'));
+        HeaderUrl::redirect(Uri::get('payment', 'admin', 'membershiplist'), t('The Membership has been removed!'));
     }
 
 }

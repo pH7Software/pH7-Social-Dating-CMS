@@ -11,8 +11,8 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class MsgFormProcessing extends Form
@@ -24,7 +24,7 @@ class MsgFormProcessing extends Form
 
         $oForumModel = new ForumModel;
 
-        $sMessage = $this->httpRequest->post('message', HttpRequest::ONLY_XSS_CLEAN);
+        $sMessage = $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN);
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendForumTopic');
         $iProfileId = (int) $this->session->get('member_id');
@@ -41,7 +41,7 @@ class MsgFormProcessing extends Form
         else
         {
             $oForumModel->addTopic($iProfileId, $iForumId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
-            HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name').','.$iForumId.','.$this->httpRequest->post('title').','.Db::getInstance()->lastInsertId()), t('Your message has been added successfully!'));
+            HeaderUrl::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name').','.$iForumId.','.$this->httpRequest->post('title').','.Db::getInstance()->lastInsertId()), t('Your message has been added successfully!'));
         }
         unset($oForumModel);
     }

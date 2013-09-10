@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class EditMembershipFormProcessing extends Form
 {
@@ -43,7 +43,7 @@ class EditMembershipFormProcessing extends Form
 
         unset($oPayModel);
 
-        HeaderUrl::redirect(UriRoute::get('payment','admin','membershiplist'), t('The Membership has been saved successfully!'));
+        HeaderUrl::redirect(Uri::get('payment','admin','membershiplist'), t('The Membership has been saved successfully!'));
     }
 
 }

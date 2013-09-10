@@ -17,11 +17,11 @@ class Permission extends PermissionCore
 
         /*
          * This file is not required, It serves the permissions of the module.
-         * CMS considers this file only if it exists
+         * pH7CMS includes this file only if it exists.
          *
          * Example of Code:
          * if(!UserCore::auth() && ($this->registry->controller === 'HelloWorldController')) {
-         *     Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('user','main','login'), $this->signInMsg(), 'error');
+         *     Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('user','main','login'), $this->signInMsg(), 'error');
          * }
          */
     }

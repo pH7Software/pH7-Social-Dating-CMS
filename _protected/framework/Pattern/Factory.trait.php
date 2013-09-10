@@ -27,7 +27,12 @@ trait Factory
      */
     public static function load()
     {
-        $sClass = get_called_class();
+        /**
+         * PHP 5.5
+         *
+        $sClass = static::class;
+         */
+        $sClass = get_called_class();//remove it for static::class
         $aArgs = func_get_args();
 
         if (class_exists($sClass))

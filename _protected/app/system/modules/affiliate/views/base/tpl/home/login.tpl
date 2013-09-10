@@ -3,6 +3,7 @@
 
 {{ LoginForm::display() }}
 
-<p>{{ LostPwdDesignCore::link('affiliate') }}
-  {if Framework\Mvc\Model\DbConfig::getSetting('affActivationType') == 2} | <a rel="nofollow" href="{{ $design->url('affiliate','home','resendactivation') }}">{lang 'Resend activation email'}</a> {/if}
+<p>
+  {{ LostPwdDesignCore::link('affiliate') }}
+  {if Framework\Mvc\Model\DbConfig::getSetting('affActivationType') == 2} | <a rel="nofollow" href="{{ $design->url('affiliate','home','resendactivation') }}">{lang 'Resend activation email'}</a>{/if}
 </p>

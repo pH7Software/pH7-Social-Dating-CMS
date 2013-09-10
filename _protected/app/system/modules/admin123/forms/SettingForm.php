@@ -10,7 +10,7 @@ namespace PH7;
 use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Navigation\Browser,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\File\File,
 PH7\Framework\Ip\Ip;
 
@@ -22,7 +22,7 @@ class SettingForm
         if (isset($_POST['submit_setting']))
         {
             if (\PFBC\Form::isValid($_POST['submit_setting']))
-                new SettingFormProcessing;
+                new SettingFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -72,9 +72,10 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="registration"><h2 class="underline">' . t('Registration:') . '</h2>'));
         $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Members:'), 'user_activation_type', array('1' => t('No activation required'), '2' => t('Self activation via email'), '3' => t('Manual activation by administrator')), array('value' => DbConfig::getSetting('userActivationType'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Affiliates:'), 'aff_activation_type', array('1' => t('No activation required'), '2' => t('Self activation via email'), '3' => t('Manual activation by administrator')), array('value' => DbConfig::getSetting('affActivationType'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Number(t('Minimum username length:'), 'min_username_length', array('value' => DbConfig::getSetting('minUsernameLength'), 'max' => PH7_MAX_USERNAME_LENGTH, 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Number(t('Minimum age for registration:'), 'min_age_registration', array('value' => DbConfig::getSetting('minAgeRegistration'), 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Minimum username length:'), 'min_username_length', array('value' => DbConfig::getSetting('minUsernameLength'), 'max' => DbConfig::getSetting('maxUsernameLength')-1, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Maximum username length:'), 'max_username_length', array('value' => DbConfig::getSetting('maxUsernameLength'), 'min' => DbConfig::getSetting('minUsernameLength')+1, 'max' => PH7_MAX_USERNAME_LENGTH, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Minimum age for registration:'), 'min_age_registration', array('value' => DbConfig::getSetting('minAgeRegistration'), 'max' => DbConfig::getSetting('maxAgeRegistration')-1, 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration')+1, 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Universal Registration and Login:'), 'is_universal_login', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isUniversalLogin'), 'required' => 1)));
 
         $oGroupId = (new AdminCoreModel)->getMemberships();
@@ -128,7 +129,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Various:') . '</h3>'));
         $oForm->addElement(new \PFBC\Element\Select(t('Send the reports by email:'), 'send_report_mail', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('sendReportMail'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Security Ip connection for Admin Panel:'), 'ip_login', array('description' => t('Enter <a href="%0%" title="Get your IP here!">your IP address</a> and an even higher security and exclude all other persons and bots that tried to connect with another IP address even if the login is correct! Leave blank to disable this feature.', Ip::api()), 'value' => DbConfig::getSetting('ipLogin'))));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Indicate a word that will replace the banned word in the <a href="%0%">list</a>.', UriRoute::get(PH7_ADMIN_MOD, 'file', 'protectededit', 'app/configs/bans/word.txt', false)), 'ban_word_replace', array('value' => DbConfig::getSetting('banWordReplace'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Indicate a word that will replace the banned word in the <a href="%0%">list</a>.', Uri::get(PH7_ADMIN_MOD, 'file', 'protectededit', 'app/configs/bans/word.txt', false)), 'ban_word_replace', array('value' => DbConfig::getSetting('banWordReplace'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Number(t('CSRF token lifetime:'), 'security_token_lifetime', array('description' => t('Time in seconds.'), 'value' => DbConfig::getSetting('securityTokenLifetime'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('System against the DDoS attacks:'), 'stop_DDoS', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('DDoS'), 'required' => 1)));
 
@@ -148,7 +149,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for Affiliate Signup Form:'), 'is_captcha_affiliate_signup', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaAffiliateSignup'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for send an Email:'), 'is_captcha_mail', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaMail'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding a Comment:'), 'is_captcha_comment', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaComment'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding or reply a message on the Forum:'), 'is_captcha_forum', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaForum'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding or reply a message in the Forum:'), 'is_captcha_forum', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaForum'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding a User Post Note:'), 'is_captcha_note', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaNote'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Pruning:') . '</h3>'));

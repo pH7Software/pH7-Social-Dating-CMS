@@ -16,7 +16,7 @@
       <p><a class="m_button" href="{{ $design->url('blog', 'admin', 'edit', $blog_id) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'blog', 'admin', 'delete', $blog_id, 'm_button') }}</p>
     {/if}
 
-    {{ ShareUrlCoreForm::display(Framework\Mvc\Router\UriRoute::get('blog','main','read',$post_id)) }}
+    {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('blog','main','read',$post_id)) }}
     {{ RatingDesignCore::voting($blog_id,'Blogs','center') }}
 
     {{ $design->likeApi() }}

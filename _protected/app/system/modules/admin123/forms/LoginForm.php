@@ -17,7 +17,7 @@ class LoginForm
         if (isset($_POST['submit_admin_login']))
         {
             if (\PFBC\Form::isValid($_POST['submit_admin_login']))
-                new LoginFormProcessing;
+                new LoginFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }

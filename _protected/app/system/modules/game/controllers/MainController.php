@@ -206,7 +206,7 @@ class MainController extends Controller
         Framework\Http\Http::setHeadersByCode(404);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
-        $this->view->error = $this->sTitle . '<br />' . t('Please return to the <a href="%0%">main game page</a> or <a href="%1%">go the previous page</a>.', Framework\Mvc\Router\UriRoute::get('game','main','index'), 'javascript:history.back();');
+        $this->view->error = $this->sTitle . '<br />' . t('Please return to the <a href="%0%">main game page</a> or <a href="%1%">go the previous page</a>.', Framework\Mvc\Router\Uri::get('game','main','index'), 'javascript:history.back();');
     }
 
 

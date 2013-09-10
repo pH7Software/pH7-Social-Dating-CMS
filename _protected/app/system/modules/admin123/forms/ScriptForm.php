@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Design as DesignModel;
+use PH7\Framework\Mvc\Model\Design as Design;
 
 class ScriptForm
 {
@@ -17,7 +17,7 @@ class ScriptForm
         if (isset($_POST['submit_script']))
         {
             if (\PFBC\Form::isValid($_POST['submit_script']))
-                new ScriptFormProcessing;
+                new ScriptFormProcess;
             Framework\Url\HeaderUrl::redirect();
         }
 
@@ -25,7 +25,7 @@ class ScriptForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_script', 'form_script'));
         $oForm->addElement(new \PFBC\Element\Token('script'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your custon JavaScript code'), 'code', array('value' => (new DesignModel)->customCode('js'), 'description' => t("WARNING! Here you don't have to put the %0% tags.", '<b><i>&lt;script&gt;&lt;/script&gt;</i></b>'), 'style' => 'height:450px')));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your custon JavaScript code'), 'code', array('value' => (new Design)->customCode('js'), 'description' => t("WARNING! Here you don't have to put the %0% tags.", '<b><i>&lt;script&gt;&lt;/script&gt;</i></b>'), 'style' => 'height:450px')));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

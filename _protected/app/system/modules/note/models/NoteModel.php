@@ -15,12 +15,12 @@ class NoteModel extends NoteCoreModel
     public function getCategory($iNoteId = null, $iOffset, $iLimit, $bCount = false)
     {
         $this->cache->start(self::CACHE_GROUP, 'category' . $iNoteId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
-        if(!$oData = $this->cache->get())
+        if (!$oData = $this->cache->get())
         {
             $iOffset = (int) $iOffset;
             $iLimit = (int) $iLimit;
 
-            if($bCount)
+            if ($bCount)
             {
                 $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix('NotesDataCategories') . 'AS d INNER JOIN' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name ASC LIMIT :offset, :limit';
             }
@@ -32,7 +32,7 @@ class NoteModel extends NoteCoreModel
 
             $rStmt = Db::getInstance()->prepare($sSql);
 
-            if(isset($iNoteId)) $rStmt->bindParam(':noteId', $iNoteId, \PDO::PARAM_INT);
+            if (isset($iNoteId)) $rStmt->bindParam(':noteId', $iNoteId, \PDO::PARAM_INT);
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -47,7 +47,7 @@ class NoteModel extends NoteCoreModel
     public function getAuthor($iOffset, $iLimit, $bCount = false)
     {
         $this->cache->start(self::CACHE_GROUP, 'author' . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
-        if(!$oData = $this->cache->get())
+        if (!$oData = $this->cache->get())
         {
             $iOffset = (int) $iOffset;
             $iLimit = (int) $iLimit;
@@ -81,12 +81,14 @@ class NoteModel extends NoteCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'readPost' . $sPostId . $iProfileId . $iApproved, static::CACHE_TIME);
 
-        if(!$oData = $this->cache->get())
+        if (!$oData = $this->cache->get())
         {
-            $rStmt = Db::getInstance()->prepare('SELECT n.*, c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Notes') . 'AS n LEFT JOIN' . Db::prefix('NotesCategories') . 'AS c ON n.noteId = c.noteId INNER JOIN' . Db::prefix('Members') . ' AS m ON n.profileId = m.profileId WHERE n.profileId = :profileId AND n.postId = :postId AND approved = :approved LIMIT 1');
+            $sSqlApproved = (isset($iApproved)) ? ' AND approved = :approved' : '';
+
+            $rStmt = Db::getInstance()->prepare('SELECT n.*, c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Notes') . 'AS n LEFT JOIN' . Db::prefix('NotesCategories') . 'AS c ON n.noteId = c.noteId INNER JOIN' . Db::prefix('Members') . ' AS m ON n.profileId = m.profileId WHERE n.profileId = :profileId AND n.postId = :postId' . $sSqlApproved . ' LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
-            $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+            if (isset($iApproved)) $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -135,7 +137,7 @@ class NoteModel extends NoteCoreModel
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
 
-        if(!$bCount)
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -143,7 +145,7 @@ class NoteModel extends NoteCoreModel
 
         $rStmt->execute();
 
-        if(!$bCount)
+        if (!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -175,7 +177,7 @@ class NoteModel extends NoteCoreModel
 
         $rStmt->bindValue(':name', '%' . $sAuthor . '%', \PDO::PARAM_STR);
 
-        if(!$bCount)
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -183,7 +185,7 @@ class NoteModel extends NoteCoreModel
 
         $rStmt->execute();
 
-        if(!$bCount)
+        if (!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -199,23 +201,36 @@ class NoteModel extends NoteCoreModel
         return $mData;
     }
 
-    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    /**
+     * @param mixed (integer for post ID or string for a keyword) $mLooking
+     * @param boolean $bCount Put 'true' for count the notes or 'false' for the result of notes.
+     * @param string $sOrderBy
+     * @param string $sSort
+     * @param integer $iOffset
+     * @param integer $iLimit
+     * @param integer $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
+     * @return mixed (integer for the number notes returned or string for the notes list returned)
+     */
+    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iApproved = 1)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
+        $sSqlApproved = (isset($iApproved)) ? ' AND (approved = :approved)' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
 
         $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ?  'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId) AS totalNotes';
-        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE noteId = :looking' : ' WHERE postId LIKE :looking OR pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking';
+        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE (noteId = :looking)' : ' WHERE (postId LIKE :looking OR pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Notes') . 'AS n INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Notes') . 'AS n INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId' . $sSqlWhere . $sSqlApproved . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if(!$bCount)
+        if (isset($iApproved)) $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
+
+        if (!$bCount)
         {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -223,7 +238,7 @@ class NoteModel extends NoteCoreModel
 
         $rStmt->execute();
 
-        if(!$bCount)
+        if (!$bCount)
         {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
@@ -243,7 +258,7 @@ class NoteModel extends NoteCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'postId' . $iNoteId, static::CACHE_TIME);
 
-        if(!$sData = $this->cache->get())
+        if (!$sData = $this->cache->get())
         {
             $rStmt = Db::getInstance()->prepare('SELECT postId FROM' . Db::prefix('Notes') . ' WHERE noteId = :noteId LIMIT 1');
             $rStmt->bindValue(':noteId', $iNoteId, \PDO::PARAM_INT);
@@ -262,7 +277,7 @@ class NoteModel extends NoteCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'postIdExists' . $sPostId . $iProfileId, static::CACHE_TIME);
 
-        if(!$bData = $this->cache->get())
+        if (!$bData = $this->cache->get())
         {
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) FROM'.Db::prefix('Notes').'WHERE postId = :postId AND profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
@@ -302,6 +317,9 @@ class NoteModel extends NoteCoreModel
 
     public function deleteThumb($iNoteId, $iProfileId)
     {
+        $iNoteId = (int) $iNoteId;
+        $iProfileId = (int) $iProfileId;
+
         $this->updatePost('thumb', null, $iNoteId, $iProfileId);
     }
 
@@ -332,12 +350,12 @@ class NoteModel extends NoteCoreModel
      */
     public function checkWaitSend($iProfileId, $iWaitTime, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT noteId FROM' . Db::prefix('Notes') . 'WHERE profileId = :profileId AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime');
+        $rStmt = Db::getInstance()->prepare('SELECT noteId FROM' . Db::prefix('Notes') . 'WHERE profileId = :profileId AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
-        return ($rStmt->rowCount() === 0) ? true : false;
+        return ($rStmt->rowCount() === 0);
     }
 
 }

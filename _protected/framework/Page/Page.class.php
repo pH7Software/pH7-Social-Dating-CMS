@@ -1,7 +1,6 @@
 <?php
 /**
  * @title            Page Class
- * @desc             Pages methods.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
@@ -42,7 +41,7 @@ class Page
         Http::setMaintenanceCodes($iMaintenanceTime);
 
         // Inclusion of the HTML Maintenance page
-        include PH7_PATH_SYS . 'globals/views/' . PH7_DEFAULT_THEME . '/others/maintenance.html.php';
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/other/maintenance.html.php';
 
         // Stop script
         exit;
@@ -61,7 +60,7 @@ class Page
         Http::setHeadersByCode(403);
 
         // Inclusion of the HTML IP Banned page
-        include PH7_PATH_SYS . 'globals/views/' . PH7_DEFAULT_THEME . '/others/banned.html.php';
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/other/banned.html.php';
 
         // Stop script
         exit;
@@ -84,7 +83,7 @@ class Page
         (new Browser)->noCache();
 
         // Inclusion of the HTML Exception page
-        include PH7_PATH_SYS . 'globals/views/' . PH7_DEFAULT_THEME . '/errors/exception.html.php';
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/error/except.html.php';
     }
 
     /**
@@ -103,7 +102,7 @@ class Page
         (new Browser)->noCache();
 
         // Inclusion of the HTML Internal Server Error page
-        include PH7_PATH_SYS . 'globals/views/' . PH7_DEFAULT_THEME . '/errors/error-500.html.php';
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/error/500.html.php';
 
         // Stop script
         exit;

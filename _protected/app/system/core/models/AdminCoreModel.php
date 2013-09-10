@@ -37,13 +37,13 @@ class AdminCoreModel extends UserCoreModel
         $iLimit = (int) $iLimit;
 
         $sSqlLimit = (!$bCount) ?  ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
+        $sSqlSelect = (!$bCount) ? 'm.*, g.name AS membershipName' : 'COUNT(m.profileId) AS totalUsers';
 
         $sSqlQuery = (!empty($iBanned)) ? '(ban = 1) AND ' : '';
-        $sSqlQuery .= ($sWhere === 'all') ? '(username LIKE :what OR email LIKE :what OR firstName LIKE :what OR lastName LIKE :what OR ip LIKE :what)' : $sWhere . ' LIKE :what';
+        $sSqlQuery .= ($sWhere === 'all') ? '(m.username LIKE :what OR m.email LIKE :what OR m.firstName LIKE :what OR m.lastName LIKE :what OR m.ip LIKE :what)' : '(m.' . $sWhere . ' LIKE :what)';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (groupId = :groupId) AND ' . $sSqlQuery . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m INNER JOIN ' . Db::prefix('Memberships') . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (m.groupId = :groupId) AND ' . $sSqlQuery . $sSqlOrder . $sSqlLimit);
 
         $rStmt->bindValue(':what', '%' . $mWhat . '%', \PDO::PARAM_STR);
         $rStmt->bindParam(':groupId', $iGroupId, \PDO::PARAM_INT);

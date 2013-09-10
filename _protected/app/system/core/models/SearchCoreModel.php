@@ -35,8 +35,9 @@ class SearchCoreModel
     SEND_DATE = 'sendDate',
     ADDED_DATE = 'addedDate',
     UPDATED = 'updatedDate',
-    ASC = 'asc',
-    DESC = 'desc';
+    IP = 'ip',
+    ASC = 1,
+    DESC = 2;
 
     /**
      * @constructor

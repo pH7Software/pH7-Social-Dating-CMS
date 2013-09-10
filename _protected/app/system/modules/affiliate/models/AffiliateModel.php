@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Affiliate / Model
  */
 namespace PH7;
+
 use PH7\Framework\Security\Security, PH7\Framework\Mvc\Model\Engine\Db;
 
 class AffiliateModel extends AffiliateCoreModel

@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Url\HeaderUrl;
 
 class PublicFileFormProcessing extends Form
 {
@@ -17,7 +17,7 @@ class PublicFileFormProcessing extends Form
     {
         parent::__construct();
 
-        $bStatus = $this->file->save(PH7_PATH_ROOT . $this->httpRequest->get('file'), $this->httpRequest->post('content', HttpRequest::NO_CLEAN));
+        $bStatus = $this->file->save(PH7_PATH_ROOT . $this->httpRequest->get('file'), $this->httpRequest->post('content', Http::NO_CLEAN));
         $sMsg = ($bStatus) ? t('The file content was saved successfully!') : t('The file content could not be saved!');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 

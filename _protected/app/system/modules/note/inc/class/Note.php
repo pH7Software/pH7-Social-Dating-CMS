@@ -8,11 +8,12 @@
 namespace PH7;
 use PH7\Framework\Util\Various, PH7\Framework\Config\Config;
 
-class Note
+class Note extends WriteCore
 {
 
     /**
      * Sets the Note Thumbnail.
+     *
      * @param \PH7\Framework\File\File $oFile
      * @param NoteModel $oNoteModel
      * @param object $oPost
@@ -29,8 +30,8 @@ class Note
             }
             else
             {
-                /*
-                 * @desc The method deleteFile first test if the file exists, if so it delete the file.
+                /**
+                 * The method deleteFile first test if the file exists, if so it delete the file.
                  */
                 $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . '/';
                 $oFile->deleteFile($sPathName); // It erases the old thumbnail
@@ -54,17 +55,6 @@ class Note
     public function checkPostId($sPostId, $iProfileId)
     {
         return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !(new NoteModel)->postIdExists($sPostId, $iProfileId)) ? true : false;
-    }
-
-    /**
-     * Removes the Note Thumbnail.
-     * @param \PH7\Framework\File\File $oFile
-     * @param string $sUsername
-     * @return void
-     */
-    public function deleteThumb(Framework\File\File $oFile, $sUsername)
-    {
-        $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $sUsername);
     }
 
 }

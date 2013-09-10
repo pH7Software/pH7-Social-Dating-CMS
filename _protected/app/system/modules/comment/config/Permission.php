@@ -7,7 +7,8 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Mvc\Router\UriRoute;
+
+use PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -18,7 +19,7 @@ class Permission extends PermissionCore
 
         if ((!UserCore::auth() && !AdminCore::auth()) && ($this->registry->action === 'add' || $this->registry->action === 'delete'))
         {
-            Framework\Url\HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->signInMsg(), 'error');
+            Framework\Url\HeaderUrl::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
         }
 
     }

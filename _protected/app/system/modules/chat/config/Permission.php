@@ -7,7 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -20,7 +20,7 @@ class Permission extends PermissionCore
         // Options and Memberships ...
         /*
         if(!UserCore::auth() && (!$this->group->can_chat)) {
-            Framework\Url\HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->alreadyConnectedMsg(), 'error');
+            Framework\Url\HeaderUrl::redirect(Uri::get('user','main','login'), $this->alreadyConnectedMsg(), 'error');
         } elseif(!$this->group->can_chat) {
             $this->design->setFlash(t('No access'));
             return;
@@ -29,7 +29,7 @@ class Permission extends PermissionCore
 
         /*
         if(!UserCore::auth()) {
-            Framework\Url\HeaderUrl::redirect(UriRoute::get('user','signup','step1'), t('You need to register for free to use the Free Chat Rooms!'));
+            Framework\Url\HeaderUrl::redirect(Uri::get('user','signup','step1'), t('You need to register for free to use the Free Chat Rooms!'));
         }
         */
     }

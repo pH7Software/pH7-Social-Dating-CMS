@@ -10,8 +10,8 @@ namespace PH7;
 use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\File\File,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri;
 
 class MetaMainForm
 {
@@ -21,12 +21,12 @@ class MetaMainForm
         if (isset($_POST['submit_meta']))
         {
             if (\PFBC\Form::isValid($_POST['submit_meta']))
-                new MetaMainFormProcessing;
+                new MetaMainFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $sWhereLang = (new HttpRequest)->get('meta_lang');
+        $sWhereLang = (new Http)->get('meta_lang');
         $oMeta = DbConfig::getMetaMain($sWhereLang);
 
         $oForm = new \PFBC\Form('form_meta', 500);
@@ -42,7 +42,7 @@ class MetaMainForm
         for ($i=0, $iLength = count($aLangs); $i < $iLength; $i++)
         {
             $sAbbrLang = substr($aLangs[$i],0,2);
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($i+1) . ') ' . '<a class="bold" href="' . UriRoute::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$i], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$i] . ')</a></li>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($i+1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$i], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$i] . ')</a></li>'));
         }
         unset($aLangs);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
@@ -57,7 +57,7 @@ class MetaMainForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Copyright (meta tag):'), 'meta_copyright', array('value' => $oMeta->metaCopyright, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Rating (meta tag):'), 'meta_rating', array('value' => $oMeta->metaRating, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Distribution (meta tag):'), 'meta_distribution', array('value' => $oMeta->metaDistribution, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Categorys (meta tag):'), 'meta_category', array('value' => $oMeta->metaCategory, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Category (meta tag):'), 'meta_category', array('value' => $oMeta->metaCategory, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

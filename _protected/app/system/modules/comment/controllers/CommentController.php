@@ -11,7 +11,7 @@ use
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Http\Http,
 PH7\Framework\Navigation\Page,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class CommentController extends Controller
 {
@@ -27,14 +27,16 @@ class CommentController extends Controller
         $this->view->table = $this->sTable;
         $this->iId = (is_numeric($this->httpRequest->get('id'))) ? $this->httpRequest->get('id') : null;
 
-        $this->view->meta_keywords = t('comment,comments,social,community,friend,social network,people,dating,post,wall,social dating'); // Predefined meta_keywords tags
+        // Predefined meta_keywords tags
+        $this->view->meta_keywords = t('comment,comments,social,community,friend,social network,people,dating,post,wall,social dating');
+
         // Adding Css Style for the Comment Post
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'common.css');
     }
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(UriRoute::get('error', 'http', 'index'));
+        Framework\Url\HeaderUrl::redirect(Uri::get('error', 'http', 'index'));
     }
 
     public function read()
@@ -131,7 +133,7 @@ class CommentController extends Controller
             $this->sMsg = t('Whoops! The comment could not be removed!');
         }
 
-        Framework\Url\HeaderUrl::redirect(UriRoute::get('comment', 'comment', 'read', $this->sTable . ',' . $this->httpRequest->post('recipient_id')), $this->sMsg);
+        Framework\Url\HeaderUrl::redirect(Uri::get('comment', 'comment', 'read', $this->sTable . ',' . $this->httpRequest->post('recipient_id')), $this->sMsg);
     }
 
     /**
@@ -143,7 +145,7 @@ class CommentController extends Controller
     {
         Http::setHeadersByCode(404);
         $this->view->page_title = t('Comment Not Found');
-        $this->view->error = t('No comments yet, <a class="bold" href="%0%">add one</a>!', UriRoute::get('comment', 'comment', 'add', $this->sTable . ',' . $this->str->escape($this->httpRequest->get('id'))));
+        $this->view->error = t('No comments yet, <a class="bold" href="%0%">add one</a>!', Uri::get('comment', 'comment', 'add', $this->sTable . ',' . $this->str->escape($this->httpRequest->get('id'))));
     }
 
     public function __destruct()

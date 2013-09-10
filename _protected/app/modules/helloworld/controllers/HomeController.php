@@ -11,7 +11,7 @@ class HomeController extends Controller
 {
 
     /**
-     * @desc URL Example: http://your-domain.com/m/helloworld/home/index/Pierre-Henry/Soria
+     * Example URL: http://your-domain.com/m/helloworld/home/index/Pierre-Henry/Soria
      */
     public function index ($sFirstName = '', $sLastName = '')
     {

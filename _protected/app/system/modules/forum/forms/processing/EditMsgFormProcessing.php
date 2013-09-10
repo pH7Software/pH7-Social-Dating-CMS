@@ -9,8 +9,8 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class EditMsgFormProcessing extends Form
@@ -23,8 +23,8 @@ class EditMsgFormProcessing extends Form
         $iForumId = $this->httpRequest->get('forum_id', 'int');
         $iTopicId = $this->httpRequest->get('topic_id', 'int');
 
-        (new ForumModel)->updateTopic($this->session->get('member_id'), $iTopicId, $this->httpRequest->post('title'), $this->httpRequest->post('message', HttpRequest::ONLY_XSS_CLEAN), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name').','.$iForumId.','.$this->httpRequest->post('title').','.$iTopicId), t('Your message has been updated successfully!'));
+        (new ForumModel)->updateTopic($this->session->get('member_id'), $iTopicId, $this->httpRequest->post('title'), $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
+        HeaderUrl::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name').','.$iForumId.','.$this->httpRequest->post('title').','.$iTopicId), t('Your message has been updated successfully!'));
     }
 
 }

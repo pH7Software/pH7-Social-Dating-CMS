@@ -13,6 +13,8 @@ use PH7\Framework\Mvc\Model\DbConfig;
 class SettingFormProcessing extends Form
 {
 
+    private $bIsErr = false;
+
     public function __construct()
     {
         parent::__construct();
@@ -52,6 +54,7 @@ class SettingFormProcessing extends Form
             if(!$oLogo->validate())
             {
                 \PFBC\Form::setError('form_setting', Form::wrongImgFileTypeMsg());
+                $this->bIsErr = true;
             }
             else
             {
@@ -91,14 +94,38 @@ class SettingFormProcessing extends Form
 
         if(!$this->str->equals($this->httpRequest->post('min_username_length'), DbConfig::getSetting('minUsernameLength')))
         {
-            if($this->httpRequest->post('min_username_length') > PH7_MAX_USERNAME_LENGTH)
-                \PFBC\Form::setError('form_setting', t('The minimum length of username cannot exceed %0% characters.', PH7_MAX_USERNAME_LENGTH));
+            $iMaxUsernameLength = DbConfig::getSetting('maxUsernameLength')-1;
+
+            if($this->httpRequest->post('min_username_length') > $iMaxUsernameLength)
+            {
+                \PFBC\Form::setError('form_setting', t('The minimum length of the username cannot exceed %0% characters.', $iMaxUsernameLength));
+                $this->bIsErr = true;
+            }
             else
                 DbConfig::setSetting($this->httpRequest->post('min_username_length'), 'minUsernameLength');
         }
 
+        if(!$this->str->equals($this->httpRequest->post('max_username_length'), DbConfig::getSetting('maxUsernameLength')))
+        {
+            if($this->httpRequest->post('max_username_length') > PH7_MAX_USERNAME_LENGTH)
+            {
+                \PFBC\Form::setError('form_setting', t('The maximum length of the username cannot exceed %0% characters.', PH7_MAX_USERNAME_LENGTH));
+                $this->bIsErr = true;
+            }
+            else
+                DbConfig::setSetting($this->httpRequest->post('max_username_length'), 'maxUsernameLength');
+        }
+
         if(!$this->str->equals($this->httpRequest->post('min_age_registration'), DbConfig::getSetting('minAgeRegistration')))
-            DbConfig::setSetting($this->httpRequest->post('min_age_registration'), 'minAgeRegistration');
+        {
+            if($this->httpRequest->post('min_age_registration') >= DbConfig::getSetting('maxAgeRegistration'))
+            {
+                \PFBC\Form::setError('form_setting', t('You cannot specify a minimum age higher than the maximum age.'));
+                $this->bIsErr = true;
+            }
+            else
+                DbConfig::setSetting($this->httpRequest->post('min_age_registration'), 'minAgeRegistration');
+        }
 
         if(!$this->str->equals($this->httpRequest->post('max_age_registration'), DbConfig::getSetting('maxAgeRegistration')))
             DbConfig::setSetting($this->httpRequest->post('max_age_registration'), 'maxAgeRegistration');
@@ -199,7 +226,10 @@ class SettingFormProcessing extends Form
         if(!$this->str->equals($iSecTokenLifetime, DbConfig::getSetting('securityTokenLifetime')))
         {
             if($iSecTokenLifetime < 10)
+            {
                 \PFBC\Form::setError('form_setting', t('The token lifetime cannot be below 10 seconds.'));
+                $this->bIsErr = true;
+            }
             else
                 DbConfig::setSetting($iSecTokenLifetime, 'securityTokenLifetime');
         }
@@ -278,7 +308,8 @@ class SettingFormProcessing extends Form
         /* Clean DbConfig Cache */
         (new Framework\Cache\Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
 
-        \PFBC\Form::setSuccess('form_setting', t('The configuration was saved successfully!'));
+        if(!$this->bIsErr)
+            \PFBC\Form::setSuccess('form_setting', t('The configuration was saved successfully!'));
     }
 
 }

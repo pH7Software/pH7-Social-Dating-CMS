@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Mail\Mail;
 
 /** For "user" and "affiliate" module **/
 class ResendActivationCoreFormProcessing extends Form
@@ -34,7 +34,7 @@ class ResendActivationCoreFormProcessing extends Form
             {
                 $sMod = ($sTable == 'Affiliates') ? 'affiliate' : 'user';
 
-                $sActivateLink = UriRoute::get($sMod,'account','activate') . '/' . $mHash->email . '/' . $mHash->hashValidation;
+                $sActivateLink = Uri::get($sMod,'account','activate') . '/' . $mHash->email . '/' . $mHash->hashValidation;
 
                 $this->view->content = t('Welcome to %site_name%, %0%!', $mHash->firstName) . '<br />' .
                 t('Hello %0% - We are proud to welcome you as a member of %site_name%!', $mHash->firstName) . '<br />' .

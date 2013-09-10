@@ -10,7 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Security\Validate\Validate,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Mail\Mail;
 
 class InviteFormProcessing extends Form
@@ -30,7 +30,7 @@ class InviteFormProcessing extends Form
             else
             {
                 $this->view->content = t('Hello!<br />You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%') . '<br />' .
-                '<strong><a href="' . UriRoute::get('user','signup','step1', '?ref=invitation') . '">' . t('Get exclusive privilege to join your friend is waiting for you!') . '</a></strong><br />' .
+                '<strong><a href="' . Uri::get('user','signup','step1', '?ref=invitation') . '">' . t('Get exclusive privilege to join your friend is waiting for you!') . '</a></strong><br />' .
                 t('Message left by your friend:') . '<br />"<em>' . $this->httpRequest->post('message') . '</em>"';
                 $this->view->footer = t('You are receiving this message because "%0%" you know has entered your email address in the form of invitation of friends to our site. This is not spam!', $this->httpRequest->post('first_name'));
 

@@ -67,10 +67,10 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
         $bIsDay = ($iDay > 0);
         $bIsGenger = ($sTable === 'Members' ? ($sGenger === 'male' || $sGenger === 'female' || $sGenger === 'couple') : ($sGenger === 'male' || $sGenger === 'female'));
 
-        $sSqlWhere = $bIsDay ? ' AND (lastActivity + INTERVAL :day DAY) > NOW()' : '';
+        $sSqlDay = $bIsDay ? ' AND (lastActivity + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGenger ? ' AND sex = :gender' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) AS totalLogins FROM' . Db::prefix($sTable) . 'WHERE username <> \''.PH7_GHOST_USERNAME.'\'' . $sSqlWhere . $sSqlGender);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) AS totalLogins FROM' . Db::prefix($sTable) . 'WHERE username <> \''.PH7_GHOST_USERNAME.'\'' . $sSqlDay . $sSqlGender);
         if($bIsDay) $rStmt->bindValue(':day', $iDay, \PDO::PARAM_INT);
         if($bIsGenger) $rStmt->bindValue(':gender', $sGenger, \PDO::PARAM_STR);
         $rStmt->execute();
@@ -103,9 +103,9 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
     public function totalMails($iDay = 0)
     {
         $iDay = (int) $iDay;
-        $sSqlWhere = ($iDay > 0) ? ' WHERE (sendDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
+        $sSqlDay = ($iDay > 0) ? ' WHERE (sendDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMails FROM' . Db::prefix('Messages') . $sSqlWhere);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMails FROM' . Db::prefix('Messages') . $sSqlDay);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
@@ -147,9 +147,9 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
         CommentCore::checkTable($sTable);
         $iDay = (int) $iDay;
 
-        $sSqlWhere = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
+        $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('Comments' . $sTable) . $sSqlWhere);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('Comments' . $sTable) . $sSqlDay);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         return (int) $oRow->totalComments;

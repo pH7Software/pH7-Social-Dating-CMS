@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class ForumFormProcessing extends Form
 {
@@ -18,7 +18,7 @@ class ForumFormProcessing extends Form
         parent::__construct();
 
         (new ForumModel)->addForum($this->httpRequest->post('category_id'), $this->httpRequest->post('name'), $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'index'), t('Your Forum was added successfully!'));
+        HeaderUrl::redirect(Uri::get('forum', 'forum', 'index'), t('Your Forum was added successfully!'));
     }
 
 }

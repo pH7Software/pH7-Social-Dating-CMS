@@ -1,7 +1,6 @@
 <?php
 /**
- * @title            Url Class
- * @desc             Url Parser.
+ * @title            Url Parser Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
@@ -31,7 +30,7 @@ class Url
         $sUrl = preg_replace( '/[\s]+/', '-', $sUrl);
         $sUrl = str_replace(array('«', '»', '"', '~', '#', '$', '@', '`', '§', '$', '£', 'µ', '\\', '[', ']', '<', '>', '%', '*', '{', '}'), '-', $sUrl);
 
-        if($bFullClean)
+        if ($bFullClean)
         {
             $sUrl = str_replace(array('.', '^', ',', ':', ';', '!'), '', $sUrl);
             $oStr = new Str;
@@ -39,6 +38,7 @@ class Url
             $sUrl = $oStr->escape($sUrl, true);
             unset($oStr);
         }
+
         return $sUrl;
     }
 

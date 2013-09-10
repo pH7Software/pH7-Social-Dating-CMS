@@ -29,12 +29,13 @@ class MainController extends Controller
         $this->view->member_id = $this->session->get('member_id');
         $this->iProfileId = (new UserCoreModel)->getId(null, $this->sUsername);
 
-        $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,picture dating'); // Predefined meta_keywords tags
+        // Predefined meta_keywords tags
+        $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,picture dating');
     }
 
     public function index()
     {
-        // Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('picture','main','albums'));
+        // Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('picture','main','albums'));
         $this->albums();
     }
 
@@ -80,13 +81,14 @@ class MainController extends Controller
 
         if (empty($oAlbums))
         {
-            $this->sTitle = t('Empty Photo Album.');  // Because the Ajax blocks profile, we can not put HTTP error code 404, so the attribute is "false"
-            $this->_notFound(false);
+            $this->sTitle = t('Empty Photo Album.');
+            $this->_notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
         }
         else
         {
+            // We can include HTML tags in the title since the template will erase them before display.
             $this->sTitle = (!empty($profileId)) ? t('The Album of <a href="%0%">%1%</a>', $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Photo Gallery Community');
-            $this->view->page_title = $this->sTitle; // We can include HTML tags in the title as the template will erase them before display.
+            $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->albums = $oAlbums;
         }
@@ -139,7 +141,7 @@ class MainController extends Controller
             $this->view->page_title = t('Photo of %0%, %1%', $oPicture->firstName, $sTitle);
             $this->view->meta_description = t('Photo of %0%, %1%, %2%', $oPicture->firstName, $sTitle, substr(Ban::filterWord($oPicture->description, false), 0, 100));
             $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,%0%,%1%,%2%', str_replace(' ', ',', $sTitle), $oPicture->firstName, $oPicture->username);
-            $this->view->h2_title = $this->sTitle;
+            $this->view->h1_title = $this->sTitle;
             $this->view->picture = $oPicture;
 
             //Set Photo Statistics
@@ -158,7 +160,7 @@ class MainController extends Controller
 
         /* Clean PictureModel Cache */
         (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your picture has been deleted!'));
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your picture has been deleted!'));
     }
 
     public function deleteAlbum()
@@ -171,7 +173,7 @@ class MainController extends Controller
         /* Clean PictureModel Cache */
         (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
 
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('picture', 'main', 'albums'), t('Your album has been deleted!'));
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('picture', 'main', 'albums'), t('Your album has been deleted!'));
     }
 
     public function search()
@@ -220,7 +222,7 @@ class MainController extends Controller
     {
         if ($b404Status === true)
             Framework\Http\Http::setHeadersByCode(404);
-        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">go the previous page</a> or <a href="%1%">add a new picture</a> in this album.', 'javascript:history.back();', Framework\Mvc\Router\UriRoute::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id'))) : '';
+        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">go the previous page</a> or <a href="%1%">add a new picture</a> in this album.', 'javascript:history.back();', Framework\Mvc\Router\Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id'))) : '';
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Mvc\Model\Design as DesignModel;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mvc\Model\Design;
 
 class ScriptFormProcessing extends Form
 {
@@ -17,12 +17,12 @@ class ScriptFormProcessing extends Form
     {
         parent::__construct();
 
-        if (!$this->str->equals($this->httpRequest->post('code', HttpRequest::NO_CLEAN), (new DesignModel)->customCode('js')))
+        if (!$this->str->equals($this->httpRequest->post('code', Http::NO_CLEAN), (new Design)->customCode('js')))
         {
-            (new AdminModel)->updateCustomCode($this->httpRequest->post('code', HttpRequest::NO_CLEAN), 'js');
+            (new AdminModel)->updateCustomCode($this->httpRequest->post('code', Http::NO_CLEAN), 'js');
 
             /* Clean Model\Design for STATIC / customCodejs data */
-            (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, 'customCodejs', null)->clear();
+            (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, 'customCodejs', null)->clear();
         }
         \PFBC\Form::setSuccess('form_script', t('Your JS code was saved successfully!'));
     }

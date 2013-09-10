@@ -9,8 +9,8 @@ namespace PH7;
 
 use
 PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Date\CDateTime;
 
 class EditForm
@@ -21,7 +21,7 @@ class EditForm
         if (isset($_POST['submit_user_edit_account']))
         {
             if (\PFBC\Form::isValid($_POST['submit_user_edit_account']))
-                new EditFormProcessing();
+                new EditFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -29,7 +29,7 @@ class EditForm
         $bAdminLogged = (AdminCore::auth() && !User::auth()); // Check if the admin is logged.
 
         $oUserModel = new UserModel;
-        $oHR = new HttpRequest;
+        $oHR = new Http;
         $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('member_id');
 
         $oUser = $oUserModel->readProfile($iProfileId);
@@ -44,7 +44,7 @@ class EditForm
 
         if ($bAdminLogged && $oHR->getExists('profile_id'))
         {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
 
             $oGroupId = (new AdminCoreModel)->getMemberships();
             $aGroupName = array();
@@ -61,7 +61,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', array('description'=>t('For site security, you cannot change your username.'),'disabled'=>'disabled','value'=>$oUser->username)));
         $oForm->addElement(new \PFBC\Element\Email(t('Email:'), 'mail', array('description'=>t('For site security and to avoid spam, you cannot change your email address.'), 'disabled'=>'disabled','value'=>$oUser->email)));
         $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('female'=>t('Female'), 'male'=>t('Male'), 'couple'=>t('Couple')), array('value' => $oUser->sex,'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Interested in:'), 'match_sex', array('male'=>t('Male'), 'female'=>t('Female'), 'couple'=>t('Couple')),array('value'=>Form::getVal($oUser->matchSex), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Interested in:'), 'match_sex', array('male'=>t('Male'), 'female'=>t('Female'), 'couple'=>t('Couple')), array('value'=>Form::getVal($oUser->matchSex), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('id'=>'birth_date', 'onblur'=>'CValid(this.value, this.id)', 'value'=>$sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 

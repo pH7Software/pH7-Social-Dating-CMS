@@ -3,15 +3,13 @@
 google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(showUserChart);
 
-function showUserChart() {
+function showUserChart()
+{
   $('#user_chart').html('');
 
   oD = new Date;
 
-  oD.setTime(Date.parse('{since_date}'));
-  var sDateSince = oD.toLocaleDateString();
-
-  oD.setYear(oD.getFullYear()-1);
+  oD.setFullYear(oD.getFullYear());
   var sYear = oD.toLocaleDateString();
 
   oD.setMonth(oD.getMonth()-1);
@@ -21,6 +19,9 @@ function showUserChart() {
   var sWeek = oD.toLocaleDateString();
 
   var sDay = oD.toLocaleDateString();
+
+  oD.setTime(Date.parse('{since_date}'));
+  var sDateSince = oD.toLocaleDateString();
 
   var aData = google.visualization.arrayToDataTable([
     ['{lang 'Days'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couple'}'],

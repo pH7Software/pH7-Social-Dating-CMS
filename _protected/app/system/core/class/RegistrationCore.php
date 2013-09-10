@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Mvc\Router\Uri;
 
 /**
  * @abstract
@@ -36,12 +36,12 @@ abstract class RegistrationCore extends Core
         switch($this->iActiveType)
         {
             case 1:
-                $sEmailMsg = t('Please %0% now to meet new people!', '<a href="' . UriRoute::get('user','main','login') . '"><b>'.t('log in').'</b></a>');
+                $sEmailMsg = t('Please %0% now to meet new people!', '<a href="' . Uri::get('user','main','login') . '"><b>'.t('log in').'</b></a>');
             break;
 
             case 2:
-                /** We place the text outside of UriRoute::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
-                $sActivateLink = UriRoute::get('user','account','activate') . '/' . $aInfo['email'] . '/' . $aInfo['hash_validation'];
+                /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
+                $sActivateLink = Uri::get('user','account','activate') . '/' . $aInfo['email'] . '/' . $aInfo['hash_validation'];
                 $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
             break;
 
@@ -53,7 +53,7 @@ abstract class RegistrationCore extends Core
                 $sEmailMsg = '';
         }
 
-        $sPwdMsg = ($bIsUniversalLogin) ? t('Password: %0% (please change it next time you login).', $aInfo['password']) : t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', UriRoute::get('user','main','forgot'));
+        $sPwdMsg = ($bIsUniversalLogin) ? t('Password: %0% (please change it next time you login).', $aInfo['password']) : t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', Uri::get('user','main','forgot'));
 
         $this->view->content = t('Welcome to %site_name%, %0%!', $aInfo['first_name']) . '<br />' .
         t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $aInfo['first_name']) . '<br />' .

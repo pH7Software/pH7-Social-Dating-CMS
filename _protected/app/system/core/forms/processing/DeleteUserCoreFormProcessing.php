@@ -11,7 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mail\Mail,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 /** For "user" and "affiliate" module **/
@@ -60,7 +60,7 @@ class DeleteUserCoreFormProcessing extends Form
 
             $this->session->destroy();
 
-            HeaderUrl::redirect(UriRoute::get('user','main','soon'), t('You delete account is successfully!'));
+            HeaderUrl::redirect(Uri::get('user','main','soon'), t('You delete account is successfully!'));
         }
     }
 

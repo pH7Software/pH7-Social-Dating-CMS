@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\Http;
 
 class EditVideoForm
 {
@@ -17,7 +17,7 @@ class EditVideoForm
         if (isset($_POST['submit_edit_video']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit_video']))
-                new EditVideoFormProcessing;
+                new EditVideoFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -27,7 +27,7 @@ class EditVideoForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_video', 'form_edit_video'));
         $oForm->addElement(new \PFBC\Element\Token('edit_video'));
 
-        $oHttpRequest = new HttpRequest;
+        $oHttpRequest = new Http;
         $oVideo = (new VideoModel)->video((new Session)->get('member_id'), $oHttpRequest->get('album_id'), $oHttpRequest->get('video_id'), 1, 0, 1);
         unset($oHttpRequest);
 

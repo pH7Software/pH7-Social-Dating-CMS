@@ -302,9 +302,9 @@ class MainController extends Controller
 
     protected function checkUpdates()
     {
-        if(Framework\Security\Version::isUpdates())
+        if (Framework\Security\Version::isUpdates())
         {
-            $aLatestVerInfo = Framework\Security\Version::getLatestVersionInfo();
+            $aLatestVerInfo = Framework\Security\Version::getLatestInfo();
             $sLatestVer = t('%0% build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
 
             $this->design->setMessage(t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update now</a>.', $sLatestVer, Framework\Core\Kernel::SOFTWARE_WEBSITE));

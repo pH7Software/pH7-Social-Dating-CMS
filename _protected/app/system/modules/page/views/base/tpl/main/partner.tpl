@@ -1,7 +1,7 @@
 <div class="center">
 
   <ul>
-    <li><a href="http://cool-on-web.com" title="{lang 'Free Dating Site'}">{lang 'Free Dating Site'}</a></li>
+    <li><a href="http://cool-on-web.com" title="{lang 'Free Dating Site'}">{lang 'Free Dating Site'}</a>{lang}, this dating service is our confidence in our software development and asked to be one of our featured partners.{/lang}</li>
     <li><a href="http://hizup.com" title="{lang 'Social Online Dating Site'}">{lang 'Community Dating Social'}</a></li>
     <li>{lang 'Your Advertise here!'}</li>
   </ul>

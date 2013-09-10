@@ -17,7 +17,7 @@ class AddFieldForm
         if (isset($_POST['submit_add_field']))
         {
             if (\PFBC\Form::isValid($_POST['submit_add_field']))
-                new AddFieldFormProcessing;
+                new AddFieldFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }

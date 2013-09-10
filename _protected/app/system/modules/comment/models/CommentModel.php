@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Comment / Model
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class CommentModel extends CommentCoreModel
@@ -116,12 +117,12 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT commentId FROM' . Db::prefix('Comments' . $sTable) . 'WHERE sender = :sender AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime');
+        $rStmt = Db::getInstance()->prepare('SELECT commentId FROM' . Db::prefix('Comments' . $sTable) . 'WHERE sender = :sender AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
-        return ($rStmt->rowCount() === 0) ? true : false;
+        return ($rStmt->rowCount() === 0);
     }
 
 }

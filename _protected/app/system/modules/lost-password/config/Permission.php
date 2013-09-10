@@ -7,7 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -17,12 +17,12 @@ class Permission extends PermissionCore
         parent::__construct();
 
         // Admin Security, if you have forgotten your admin password, comment this code below
-        if((new HttpRequest)->get('mod') == PH7_ADMIN_MOD && ($this->registry->action == 'forgot' || $this->registry->action == 'reset')) {
-            HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD,'main','login'), t('For security reasons, you do not have the right to generate a new password. To disable this security option, you must go to the Permission file of "lost-password" module'), 'error');
+        if((new Http)->get('mod') == PH7_ADMIN_MOD && ($this->registry->action == 'forgot' || $this->registry->action == 'reset')) {
+            HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD,'main','login'), t('For security reasons, you do not have the right to generate a new password. To disable this security option, you must go to the Permission file of "lost-password" module'), 'error');
         }
 
         if((UserCore::auth() || AffiliateCore::auth() || AdminCore::auth()) && ($this->registry->action == 'forgot' || $this->registry->action == 'reset')) {
-            HeaderUrl::redirect(UriRoute::get('lost-password', 'main', 'account'), $this->alreadyConnectedMsg(), 'error');
+            HeaderUrl::redirect(Uri::get('lost-password', 'main', 'account'), $this->alreadyConnectedMsg(), 'error');
         }
     }
 

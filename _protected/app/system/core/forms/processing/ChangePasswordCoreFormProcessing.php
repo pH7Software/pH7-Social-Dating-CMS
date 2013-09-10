@@ -10,7 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Util\Various,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 /** For "user", "affiliate" and "admin" module **/

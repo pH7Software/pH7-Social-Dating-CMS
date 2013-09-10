@@ -15,33 +15,6 @@ class BlogCoreModel extends Framework\Mvc\Model\Engine\Model
     const CACHE_GROUP = 'db/sys/mod/blog', CACHE_TIME = 999990;
 
     /**
-     * Gets the total posts.
-     *
-     * @param integer $iDay Default 0
-     * @return integer
-     */
-    public function totalPosts($iDay = 0)
-    {
-         $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_TIME);
-
-         if(!$iData = $this->cache->get())
-         {
-             $iDay = (int) $iDay;
-             $sSqlWhere = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
-
-             $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix('Blogs') . $sSqlWhere);
-             $rStmt->execute();
-             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-             Db::free($rStmt);
-             $iData = (int) $oRow->totalPosts;
-             unset($oRow);
-             $this->cache->put($iData);
-         }
-
-         return $iData;
-    }
-
-    /**
      * Gets all blog posts.
      *
      * @param integer $iOffset
@@ -54,12 +27,12 @@ class BlogCoreModel extends Framework\Mvc\Model\Engine\Model
         // We do not have a long duration of the cache for the changes of positions to be easily updated on the list of Blogs of the home page.
         $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder, 3600);
 
-        if(!$oData = $this->cache->get())
+        if (!$oData = $this->cache->get())
         {
             $iOffset = (int) $iOffset;
             $iLimit = (int) $iLimit;
 
-            $sOrderBy = SearchCoreModel::order($sOrder);
+            $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 
             $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Blogs') . $sOrderBy . 'LIMIT :offset, :limit');
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
@@ -71,6 +44,33 @@ class BlogCoreModel extends Framework\Mvc\Model\Engine\Model
         }
 
         return $oData;
+    }
+
+    /**
+     * Gets the total posts.
+     *
+     * @param integer $iDay Default 0
+     * @return integer
+     */
+    public function totalPosts($iDay = 0)
+    {
+         $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_TIME);
+
+         if (!$iData = $this->cache->get())
+         {
+             $iDay = (int) $iDay;
+             $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
+
+             $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix('Blogs') . $sSqlDay);
+             $rStmt->execute();
+             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+             Db::free($rStmt);
+             $iData = (int) $oRow->totalPosts;
+             unset($oRow);
+             $this->cache->put($iData);
+         }
+
+         return $iData;
     }
 
 }

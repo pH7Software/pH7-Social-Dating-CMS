@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 class InviteForm
 {
@@ -18,13 +18,13 @@ class InviteForm
         if (isset($_POST['submit_invite']))
         {
             if (\PFBC\Form::isValid($_POST['submit_invite']))
-                new InviteFormProcessing();
+                new InviteFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
         $oForm = new \PFBC\Form('form_invite', 350);
-        $oForm->configure(array('action' => UriRoute::get('invite', 'home', 'invitation')));
+        $oForm->configure(array('action' => Uri::get('invite', 'home', 'invitation')));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_invite', 'form_invite'));
         $oForm->addElement(new \PFBC\Element\Token('invite'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your name:'), 'first_name', array('id'=>'str_first_name','onblur'=>'CValid(this.value,this.id,2,20)', 'required'=>1,'validation'=>new \PFBC\Validation\Str('2','20'))));

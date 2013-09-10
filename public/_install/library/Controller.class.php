@@ -5,6 +5,7 @@
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @link             http://software.hizup.com
  * @package          PH7 / Install / Library
  * @version          1.0
  */
@@ -18,16 +19,17 @@ abstract class Controller implements IController
     const
     SOFTWARE_NAME = '¡pH7! Social Dating CMS',
     SOFTWARE_PREFIX_COOKIE_NAME = 'pH7',
-    SOFTWARE_WEBSITE = 'http://hizup.com',
+    SOFTWARE_WEBSITE = 'http://software.hizup.com',
+    SOFTWARE_REGISTRATION_URL = 'http://software.hizup.com/register',
     SOFTWARE_LICENSE_URL = 'http://software.hizup.com/legal/license',
     SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/',
     SOFTWARE_REQUIREMENTS_URL = 'http://software.hizup.com/doc/en/requirements',
-    SOFTWARE_EMAIL = 'support.software@hizup.com',
+    SOFTWARE_EMAIL = 'ph7software@gmail.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',
-    SOFTWARE_VERSION = '1.0.3',
+    SOFTWARE_VERSION = '1.0.10',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
@@ -39,24 +41,27 @@ abstract class Controller implements IController
         global $LANG;
 
         // PHP session initialization
-        if (empty($_SESSION)) @session_start();
+        if (empty($_SESSION))
+            @session_start();
 
         // Verify and correct the time zone if necessary
-        if (! ini_get('date.timezone') ) date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
+        if (!ini_get('date.timezone'))
+            date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
 
         // Language initialization
         $this->sCurrentLang = (new Language)->get();
         include_once PH7_ROOT_INSTALL . 'langs/' . $this->sCurrentLang . '/install.lang.php';
+
+        /* Smarty initialization */
         $this->view = new \Smarty;
         $this->view->use_sub_dirs = true;
         $this->view->setTemplateDir(PH7_ROOT_INSTALL . 'views/' . self::DEFAULT_THEME);
         $this->view->setCompileDir(PH7_ROOT_INSTALL . 'data/caches/smarty_compile');
         $this->view->setCacheDir(PH7_ROOT_INSTALL  . 'data/caches/smarty_cache');
         $this->view->setPluginsDir( PH7_ROOT_INSTALL . 'library/Smarty/plugins');
-
-        /* Smarty Cache */
-        $this->view->caching = 0; // 0 = disabled Cache | 1 = Cache enabled | 2 = Set the cache duration | 1 = Cache that never expires
-        $this->view->cache_lifetime = 3600; // 3600 seconds = 1H: cache duration
+        // Smarty Cache
+        $this->view->caching = 0; // 0 = Cache disabled |  1 = Cache never expires | 2 = Set the cache duration at "cache_lifetime" attribute
+        $this->view->cache_lifetime = 86400; // 86400 seconds = 24h
 
         $this->view->assign('content', '');
         $this->view->assign('LANG', $LANG);

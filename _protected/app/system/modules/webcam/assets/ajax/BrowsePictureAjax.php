@@ -14,7 +14,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class BrowsePictureAjax
 {
@@ -23,7 +23,7 @@ class BrowsePictureAjax
 
     public function __construct()
     {
-        $this->oHttpRequest = new HttpRequest;
+        $this->oHttpRequest = new Http;
         $this->init();
     }
 
@@ -108,7 +108,7 @@ class BrowsePictureAjax
             {
                 $this->sMsg = t('Sorry, we did not find the photo!');
             }
-            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('webcam', 'webcam', 'picture'));
+            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('webcam', 'webcam', 'picture'));
         }
     }
 

@@ -16,7 +16,8 @@ use
 PH7\Framework\Core\Kernel,
 PH7\Framework\Config\Config,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Security\Version,
 PH7\Framework\File as F;
 
 class UpgradeCore
@@ -48,7 +49,7 @@ class UpgradeCore
 
     public function __construct()
     {
-        $this->_oHttpRequest = new HttpRequest;
+        $this->_oHttpRequest = new Http;
         $this->_oFile = new F\File;
         $this->_oConfig = Config::getInstance();
 
@@ -92,22 +93,22 @@ class UpgradeCore
 
                     $this->_readConfig();
 
-                    $sVersionName = $this->_oConfig->values['upgrade.version']['name'];
-                    $sVersionNumber = $this->_oConfig->values['upgrade.version']['number'];
-                    $iVersionBuild = $this->_oConfig->values['upgrade.version']['build'];
-                    $sDescription = $this->_oConfig->values['upgrade.information']['description'];
+                    $sVerName = $this->_oConfig->values['upgrade.version']['name'];
+                    $sVerNumber = $this->_oConfig->values['upgrade.version']['number'];
+                    $iVerBuild = $this->_oConfig->values['upgrade.version']['build'];
+                    $sDesc = $this->_oConfig->values['upgrade.information']['description'];
 
                     if($this->_checkUpgradeFolder($this->_sUpgradesDirUpgradeFolder))
                     {
-                        $this->_sHtml .= '<p class="underline italic">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVersionName, $sVersionNumber, $iVersionBuild) . '</p>';
+                        $this->_sHtml .= '<p class="underline italic">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVerName, $sVerNumber, $iVerBuild) . '</p>';
 
-                        if($this->_checkVersion($sVersionName, $sVersionNumber, $iVersionBuild))
+                        if($this->_checkVersion($sVerName, $sVerNumber, $iVerBuild))
                         {
-                              $this->_sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->_sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVersionName . ' ' . $sVersionNumber . ' Build ' . $iVersionBuild . '</span>') . '</button>';
+                              $this->_sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->_sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVerName . ' ' . $sVerNumber . ' Build ' . $iVerBuild . '</span>') . '</button>';
 
                               // Description upgrade path
                               $this->_sHtml .= '<p class="underline">' . t('Description of the upgrade patch:') . '</p>';
-                              $this->_sHtml .= $sDescription;
+                              $this->_sHtml .= $sDesc;
 
                               // Introduction file
                               $this->_sHtml .= '<p class="bold underline">' . t('Introductory instruction:') . '</p>';
@@ -115,17 +116,17 @@ class UpgradeCore
                         }
                         else
                         {
-                            $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . t('Bad "version name, version number or version build" of upgrade path!') . '</button><br />';
+                            $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . t('Bad "version name, version number or version build" of upgrade path!') . '</button>';
                         }
                     }
                     else
                     {
-                        $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . t('Upgrade path is not valid!') . '</button><br />';
+                        $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . t('Upgrade path is not valid!') . '</button>';
                     }
 
-                    $this->_sHtml .= '<hr /><br />';
+                    $this->_sHtml .= '<br /><hr /><br />';
 
-                    unset($sVersionName, $sVersionNumber, $iVersionBuild);
+                    unset($sVerName, $sVerNumber, $iVerBuild);
                 }
 
                 $this->_sHtml .= '</form>';
@@ -273,7 +274,7 @@ class UpgradeCore
     /**
      * Check and return HTML contents errors.
      *
-     * @return boolean "true" if there are errors else "false"
+     * @return boolean TRUE if there are errors else FALSE
      */
     private function _displayIfIsErr()
     {
@@ -318,19 +319,19 @@ class UpgradeCore
     /**
      * Checks if the file upgrade is valid.
      *
-     * @param string $sFolder The folder
-     * @return boolean Return "true" if correct otherwise "false"
+     * @param string $sFolder The folder.
+     * @return boolean Returns TRUE if it is correct, FALSE otherwise.
      */
     private function _checkUpgradeFolder($sFolder)
     {
         $sFullPath = PH7_PATH_REPOSITORY . static::DIR . $sFolder;
-        return (!preg_match('#^\d{1,2}\.\d{1,2}\.\d{1,2}\-\d{1,2}\.\d{1,2}\.\d{1,2}/?$#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . static::CONFIG_FILE)) ? false : true;
+        return (!preg_match('#^' . Version::PATTERN . '\-' . Version::PATTERN . '/?$#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . static::CONFIG_FILE)) ? false : true;
     }
 
     /**
      * Read the upgrade folders.
      *
-     * @return string Returns the upgrade folders
+     * @return array Returns the upgrade folders.
      */
     private function _readUpgrades()
     {
@@ -340,7 +341,7 @@ class UpgradeCore
     /**
      * Remove the upgrade folder.
      *
-     * @return boolean Return "true" If the folder has been deleted otherwise "false"
+     * @return boolean Returns TRUE If the folder has been deleted, FALSE otherwise.
      */
     private function _removeUpgradeDir()
     {
@@ -360,24 +361,21 @@ class UpgradeCore
     /**
      * Check if the version name, number and build they are correct.
      *
-     * @param string $sName Name of version. e.g., pOH
-     * @param string $sNumber Number of version. e.g., 2.1.4
-     * @param integer $iBuild Number of version build. e.g., 1
-     * @return boolean Return "true" if the version name is correct otherwise "false"
+     * @param string $sName Name of the version. e.g., pOH
+     * @param string $sNumber Number of the version. e.g., 2.1.4
+     * @param integer $iBuild Number of the version build. e.g., 1
+     * @return boolean Returns TRUE if the version name is correct, FALSE otherwise.
      */
     private function _checkVersion($sName, $sNumber, $iBuild)
     {
-        if(!is_string($sName)) return false;
+        if(!is_string($sName) || !preg_match('#^' . Version::PATTERN . '$#', $sNumber)) return false;
 
-        $sSoftwareVersion = Kernel::SOFTWARE_VERSION;
-        $iSoftwareBuild = Kernel::SOFTWARE_BUILD;
+        if(version_compare($sNumber, Kernel::SOFTWARE_VERSION, '<')) return false;
 
-        if($sNumber < $sSoftwareVersion) return false;
-
-        if($sNumber == $sSoftwareVersion)
-            return ($iBuild > $iSoftwareBuild) ? true : false;
+        if(version_compare($sNumber, Kernel::SOFTWARE_VERSION, '=='))
+            return version_compare($iBuild, Kernel::SOFTWARE_BUILD, '>');
         else
-            if($sNumber > $sSoftwareVersion) return true;
+            if(version_compare($sNumber, Kernel::SOFTWARE_VERSION, '>')) return true;
 
         return false;
     }
@@ -385,7 +383,7 @@ class UpgradeCore
     /**
      * Get the version upgrade in the config.ini file.
      *
-     * @return string Version
+     * @return boolean
      */
     private function _readConfig()
     {
@@ -395,12 +393,12 @@ class UpgradeCore
     /**
      * Get the instructions.
      *
-     * @param string $sInstructionFile
-     * @return mixed (string or boolean) Returns "false" if the file does not exist or if it fails otherwise returns the "file contents"
+     * @param string $sInstFile Instruction file.
+     * @return mixed (string or boolean) Returns "false" if the file does not exist or if it fails, otherwise returns the "file contents"
      */
-    private function _readInstruction($sInstructionFile)
+    private function _readInstruction($sInstFile)
     {
-        $mInstruction = (F\Import::file(PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . $sInstructionFile));
+        $mInstruction = F\Import::file(PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . $sInstFile);
         return (!$mInstruction) ? '<p class="error">' . t('Instruction file not found!') . '</p>' : $mInstruction;
     }
 

@@ -10,37 +10,37 @@ namespace PH7;
 use
 PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri;
 
 class VideoForm
 {
 
     public static function display()
     {
-        if(isset($_POST['submit_video']))
+        if (isset($_POST['submit_video']))
         {
-            if(\PFBC\Form::isValid($_POST['submit_video']))
-                new VideoFormProcessing();
+            if (\PFBC\Form::isValid($_POST['submit_video']))
+                new VideoFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oHttpRequest = new HttpRequest;
+        $oHttpRequest = new Http;
         $iAlbumIdVal = ($oHttpRequest->getExists('album_id')) ? $oHttpRequest->get('album_id') : null; // Album ID Value
         unset($oHttpRequest);
 
         $oAlbumId = (new VideoModel)->getAlbumsName((new Session)->get('member_id'));
 
         $aAlbumName = array();
-        foreach($oAlbumId as $iId) $aAlbumName[$iId->albumId] = $iId->name;
+        foreach ($oAlbumId as $iId) $aAlbumName[$iId->albumId] = $iId->name;
 
         $oForm = new \PFBC\Form('form_video', 500);
         $oForm->configure(array('action' =>''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_video', 'form_video'));
         $oForm->addElement(new \PFBC\Element\Token('video'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Choose your album - OR - <a href="%0%">Add a new Album</a>', UriRoute::get('video', 'main', 'addalbum')), 'album_id', $aAlbumName, array('value'=>$iAlbumIdVal, 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('video', 'main', 'addalbum')), 'album_id', $aAlbumName, array('value'=>$iAlbumIdVal, 'required'=>1)));
         unset($aAlbumName);
 
         $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$iId->name)); // Bad title! Thank you for finding a solution and send it by email

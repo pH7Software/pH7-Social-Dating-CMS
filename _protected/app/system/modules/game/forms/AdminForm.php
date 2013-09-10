@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Config\Config, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Config\Config, PH7\Framework\Mvc\Router\Uri;
 
 class AdminForm
 {
@@ -17,7 +17,7 @@ class AdminForm
         if (isset($_POST['submit_game']))
         {
             if(\PFBC\Form::isValid($_POST['submit_game']))
-                new AdminFormProcessing();
+                new AdminFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }

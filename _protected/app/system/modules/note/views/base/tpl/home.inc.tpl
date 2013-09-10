@@ -2,7 +2,7 @@
 
   <div class="design-box">
     <h2>{lang 'Search Note Posts'}</h2>
-    {{ SearchNoteForm::display(168) }}
+    {{ SearchNoteForm::display(PH7_WIDTH_SEARCH_FORM) }}
   </div>
 
   <div class="design-box">

@@ -18,7 +18,7 @@ PH7\Framework\Session\Session,
 PH7\Framework\Navigation\Browser,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Ip\Ip;
 
 /**
@@ -92,7 +92,7 @@ final class Token
         $iTime = (empty($iTime)) ? DbConfig::getSetting('securityTokenLifetime') : $iTime;
 
         // The default tag name for the security token
-        $sInputToken = (empty($sInputToken)) ? (new HttpRequest)->post('security_token') : $sInputToken;
+        $sInputToken = (empty($sInputToken)) ? (new Http)->post('security_token') : $sInputToken;
 
         $aCheckSession = [
             'security_token_' . $sName,
@@ -135,8 +135,11 @@ final class Token
      */
     public function checkUrl()
     {
-        $oHttpRequest = new HttpRequest;
-        return ( ($this->currentSess() === true) || $oHttpRequest->currentUrl() === PH7_URL_ROOT || ($oHttpRequest->get(static::VAR_NAME) === $this->currentSess()) );
+        $oHttpRequest = new Http;
+        $bRet = ( ($this->currentSess() === true) || $oHttpRequest->currentUrl() === PH7_URL_ROOT || ($oHttpRequest->get(static::VAR_NAME) === $this->currentSess()) );
+        unset($oHttpRequest);
+
+        return $bRet;
     }
 
     /**

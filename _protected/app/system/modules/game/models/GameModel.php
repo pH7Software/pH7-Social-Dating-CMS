@@ -103,7 +103,8 @@ class GameModel extends GameCoreModel
     }
 
     /**
-     * @desc Search a Game.
+     * Search a Game.
+     *
      * @param mixed (integer for game ID or string for a keyword) $mLooking
      * @param boolean $bCount Put 'true' for count the games or 'false' for the result of games.
      * @param string $sOrderBy
@@ -170,7 +171,8 @@ class GameModel extends GameCoreModel
     }
 
     /**
-     * @desc Set Number Downloads Statistics
+     * Set Number Downloads Statistics.
+     *
      * @param integer $iId
      * @return void
      */
@@ -183,8 +185,9 @@ class GameModel extends GameCoreModel
     }
 
     /**
-     * @desc This method was created to avoid retrieving the column "download" with the GameModel::get() method
+     * This method was created to avoid retrieving the column "download" with the GameModel::get() method
      * since it uses the cache and therefore can not retrieve the number of real-time the number of download.
+     *
      * @param integer $iId
      * @return integer The number of downloads
      */

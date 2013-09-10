@@ -20,7 +20,7 @@ class PrivacyForm
         if (isset($_POST['submit_privacy_account']))
         {
             if (\PFBC\Form::isValid($_POST['submit_privacy_account']))
-                new PrivacyFormProcessing($oUserModel, $iProfileId);
+                new PrivacyFormProcess($oUserModel, $iProfileId);
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -34,7 +34,7 @@ class PrivacyForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Profile:') . '</u></h3>'));
         $oForm->addElement(new \PFBC\Element\Radio(t('Who can view your profile?'), 'privacy_profile', array('all' => t('Everyone (including people who are not %0% members).', Registry::getInstance()->site_name), 'only_members' => t('Only %0% members who are logged in.', Registry::getInstance()->site_name), 'only_me' => t('Only me.')), array('value' => $oPrivacy->privacyProfile, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Web search engine:') . '</u></h3>'));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Do you want to be included in search results?'), 'search_profile', array('yes' => t('Yes, include my profile in search results.'), 'no' => t('No, do not include my profile in search results.')), array('value' => $oPrivacy->searchProfile, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Do you want to be included in search results?'), 'search_profile', array('yes' => t("Yes, include my profile in search results (%site_name%'s search, Google, Bing, Yahoo, etc.)."), 'no' => t('No, do not include my profile in search results.')), array('value' => $oPrivacy->searchProfile, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Show profile visitors:') . '</u></h3>'));
         $oForm->addElement(new \PFBC\Element\Radio(t('Do you want display members who viewed your profile?'), 'user_save_views', array('yes' => t('Yes, display members who viewed my profile (Selecting this option will allow other members to see that you visited their profile).'), 'no' => t('No, don\'t display members who viewed my profile. (Selecting this option will prevent you from seeing who visited your profile).')), array('value' => $oPrivacy->userSaveViews, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3><u>' . t('Presence:') . '</u></h3>'));

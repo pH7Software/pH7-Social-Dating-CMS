@@ -47,7 +47,7 @@ class Various
      * Convert mod to table.
      *
      * @param string $Mod
-     * @return mixed (string or void) Returns the table if it is correct.
+     * @return mixed (string | void) Returns the table if it is correct.
      * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
     public static function convertModToTable($Mod)
@@ -119,7 +119,7 @@ class Various
      * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
      *
      * @param string $sTable
-     * @return mixed (string or void) Returns the table if it is correct.
+     * @return mixed (string | void) Returns the table if it is correct.
      * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
     public static function convertTableToId($sTable)
@@ -180,7 +180,7 @@ class Various
      * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
      *
      * @param string $sTable
-     * @return mixed (string or void) Returns the table if it is correct.
+     * @return mixed (string | void) Returns the table if it is correct.
      * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
     public static function checkTable($sTable)
@@ -212,7 +212,7 @@ class Various
      * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
      *
      * @param string $sTable
-     * @return mixed (string or void) Returns the table if it is correct.
+     * @return mixed (string | void) Returns the table if it is correct.
      * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
     public static function checkModelTable($sTable)

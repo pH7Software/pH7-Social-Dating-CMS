@@ -91,7 +91,7 @@ class Http
     /**
      * @static
      * @param integer $iStatus The "code" for the HTTP status
-     * @return mixed (string or boolean) $iStatus Returns the "HTTP status code" if found otherwise returns "false"
+     * @return mixed (string | boolean) $iStatus Returns the "HTTP status code" if found otherwise returns "false"
      */
     public static function getStatusCodes($iStatus)
     {
@@ -128,7 +128,7 @@ class Http
      * Set one or multiple headers.
      *
      * @static
-     * @param mixed (string or array) $mHeaders Headers to send.
+     * @param mixed (string | array) $mHeaders Headers to send.
      */
     public static function setHeaders($mHeaders)
     {
@@ -254,7 +254,7 @@ class Http
      * Get the subdomain in a URL address.
      *
      * @param string $sUrl
-     * @return mixed (string or null) Returns the "subdomain" in the URL address if he has found a subdomain otherwise "null".
+     * @return mixed (string | null) Returns the "subdomain" in the URL address if he has found a subdomain otherwise "null".
      */
     public function getSubdomain($sUrl)
     {
@@ -272,7 +272,7 @@ class Http
     }
 
     /**
-     * @return string  Request URI.
+     * @return string Request URI.
      */
     public function getRequestUri()
     {

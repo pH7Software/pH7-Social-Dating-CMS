@@ -90,8 +90,8 @@ function check_ext_end($sDir)
 function validate_username($sUsername, $iMin = 4, $iMax = 40)
 {
     if (empty($sUsername)) return 'empty';
-    elseif (strlen($sUsername) < $iMin) return 'tooshort';
-    elseif (strlen($sUsername) > $iMax) return 'toolong';
+    elseif (mb_strlen($sUsername) < $iMin) return 'tooshort';
+    elseif (mb_strlen($sUsername) > $iMax) return 'toolong';
     elseif (preg_match('/[^\w]+$/', $sUsername)) return 'badusername';
     else return 'ok';
 }
@@ -107,8 +107,8 @@ function validate_username($sUsername, $iMin = 4, $iMax = 40)
 function validate_password($sPassword, $iMin = 6, $iMax = 92)
 {
     if (empty($sPassword)) return 'empty';
-    elseif (strlen($sPassword) < $iMin) return 'tooshort';
-    elseif (strlen($sPassword) > $iMax) return 'toolong';
+    elseif (mb_strlen($sPassword) < $iMin) return 'tooshort';
+    elseif (mb_strlen($sPassword) > $iMax) return 'toolong';
     elseif (!preg_match('/[0-9]{1,}/', $sPassword)) return 'nonumber';
     elseif (!preg_match('/[A-Z]{1,}/', $sPassword)) return 'noupper';
     else return 'ok';
@@ -123,7 +123,7 @@ function validate_password($sPassword, $iMin = 6, $iMax = 92)
 function validate_email($sEmail)
 {
     if ($sEmail == '') return 'empty';
-    if (filter_var($sEmail, FILTER_VALIDATE_EMAIL)== false) return 'bademail';
+    if (!filter_var($sEmail, FILTER_VALIDATE_EMAIL)) return 'bademail';
     else return 'ok';
 }
 
@@ -132,12 +132,12 @@ function validate_email($sEmail)
  *
  * @param string $sName
  * @param integer $iMin Default 2
- * @param integer $iMax Default 30
+ * @param integer $iMax Default 20
  * @return boolean
  */
-function validate_name($sName, $iMin = 2, $iMax = 30)
+function validate_name($sName, $iMin = 2, $iMax = 20)
 {
-    if (is_string($sName) && strlen($sName) >= $iMin && strlen($sName) <= $iMax)
+    if (is_string($sName) && mb_strlen($sName) >= $iMin && mb_strlen($sName) <= $iMax)
         return true;
     return false;
 }
@@ -150,8 +150,8 @@ function validate_name($sName, $iMin = 2, $iMax = 30)
  */
 function filled_out($aVars)
 {
-    foreach ($aVars as $sKey => $sValue)
-        if ((!isset($sKey)) || (trim($sValue) == ''))
+    foreach ($aVars as $sKey => $sVal)
+        if (empty($sKey) || trim($sVal) == '')
             return false;
     return true;
 }
@@ -223,6 +223,45 @@ function remove_install_dir()
 {
     @chmod(PH7_ROOT_INSTALL, 0777);
     delete_dir(PH7_ROOT_INSTALL);
+}
+
+/**
+ * Get the client IP address.
+ *
+ * @return string
+ */
+function client_ip()
+{
+    if (!empty($_SERVER['HTTP_CLIENT_IP']))
+        $sIp = $_SERVER['HTTP_CLIENT_IP'];
+    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+        $sIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else
+        $sIp = $_SERVER['REMOTE_ADDR'];
+
+    return preg_match('/^[a-z0-9:.]{7,}$/', $sIp) ? $sIp : '0.0.0.0';
+}
+
+/**
+ * Escape string.
+ *
+ * @param string $sVal
+ * @return string The escaped string.
+ */
+function escape($sVal)
+{
+    return htmlspecialchars($sVal, ENT_QUOTES);
+}
+
+/**
+ * Clean string.
+ *
+ * @param string $sVal
+ * @return string The cleaned string.
+ */
+function clean_string($sVal)
+{
+    return str_replace('"', '\"', $sVal);
 }
 
 /**
@@ -315,20 +354,16 @@ function check_url($sUrl)
 /**
  * Check license key.
  *
- * @param string $sValue The License Key.
+ * @param string $sKey The License Key.
  * @return boolean
  */
-function check_license($sValue)
+function check_license($sKey)
 {
-    $sValue = trim($sValue);
-    if (!preg_match('/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/', $sValue))
-        $bStatus = false;
-    elseif (substr($sValue,8,1)*substr($sValue,10,1)*substr($sValue,12,1)*substr($sValue,13,1) != substr($sValue,15,4))
-        $bStatus = false;
+    $sKey = trim($sKey);
+    if (!preg_match('/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/', $sKey))
+        return false;
     else
-        $bStatus = true;
-
-    return $bStatus;
+        return !(substr($sKey,8,1)*substr($sKey,10,1)*substr($sKey,12,1)*substr($sKey,13,1) != substr($sKey,15,4));
 }
 
 /**

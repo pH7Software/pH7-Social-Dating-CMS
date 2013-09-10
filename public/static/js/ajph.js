@@ -36,7 +36,6 @@ function doPager()
     });
 }
 
-
 /**
  * Load page.
  *

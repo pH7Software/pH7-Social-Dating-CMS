@@ -15,9 +15,9 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Session\Session,
 PH7\Framework\File\Import,
-PH7\Framework\Http\Http,
 PH7\Framework\Parse\Emoticon,
-PH7\Framework\Mvc\Request\HttpRequest;
+PH7\Framework\Http\Http,
+PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class MessengerAjax
 {

@@ -153,7 +153,7 @@ class VideoModel extends VideoCoreModel
         return $rStmt->execute();
     }
 
-    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iApproved = 1)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
@@ -165,10 +165,11 @@ class VideoModel extends VideoCoreModel
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(v.videoId) AS totalVideos';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE v.videoId = :looking' : ' WHERE v.title LIKE :looking OR v.description LIKE :looking';
 
-        $rStmt = Db::getInstance()->prepare('SELECT v.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
-                . Db::prefix('Members') . 'AS m ON v.profileId = m.profileId ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare('SELECT v.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
+                . Db::prefix('AlbumsVideos') . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix('Members') . 'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved=:approved' . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
 
         if (!$bCount)
         {

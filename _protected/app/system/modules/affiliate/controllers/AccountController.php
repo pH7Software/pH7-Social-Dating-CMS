@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Affiliate / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 class AccountController extends Controller
 {
@@ -49,21 +49,21 @@ class AccountController extends Controller
         if ($this->httpRequest->get('delete_status') == 'yesdelete')
         {
             $this->session->set('yes_delete', 1);
-            Framework\Url\HeaderUrl::redirect(UriRoute::get('affiliate', 'account', 'yesdelete'));
+            Framework\Url\HeaderUrl::redirect(Uri::get('affiliate', 'account', 'yesdelete'));
         }
         elseif ($this->httpRequest->get('delete_status') == 'nodelete')
         {
             $this->view->content = t('<span class="bold green1">Great, you stay with us!<br />
             You see, you will not regret it!<br />We will do our best to you our %site_name%!</span>');
-            $this->design->setRedirect(UriRoute::get('affiliate', 'home', 'index'), null, null, 3);
+            $this->design->setRedirect(Uri::get('affiliate', 'home', 'index'), null, null, 3);
         }
         else
         {
             $this->view->content = '<span class="bold red">' . t('WARNING: If you delete your account you will not receive your money.') .
                 '<br />' . t('Are you really sure you want to delete your account?') . '</span><br /><br />
-                <a class="bold" href="' . UriRoute::get('affiliate', 'account',
+                <a class="bold" href="' . Uri::get('affiliate', 'account',
                 'delete', 'nodelete') . '">' . t('No I changed my mind and I stay with you!') .
-                '</a> &nbsp; ' . t('OR') . ' &nbsp; <a href="' . UriRoute::get('affiliate',
+                '</a> &nbsp; ' . t('OR') . ' &nbsp; <a href="' . Uri::get('affiliate',
                 'account', 'delete', 'yesdelete') . '">' . t('Yes I really want to delete my account') .
                 '</a>';
         }
@@ -74,7 +74,7 @@ class AccountController extends Controller
     public function yesDelete()
     {
         if (!$this->session->exists('yes_delete'))
-            Framework\Url\HeaderUrl::redirect(UriRoute::get('affiliate', 'account', 'delete'));
+            Framework\Url\HeaderUrl::redirect(Uri::get('affiliate', 'account', 'delete'));
         else
             $this->output();
     }

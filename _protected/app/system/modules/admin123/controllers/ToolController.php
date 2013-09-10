@@ -9,7 +9,11 @@
  * @version        1.1
  */
 namespace PH7;
-use PH7\Framework\Mvc\Model\Engine as D, PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+
+use
+PH7\Framework\Mvc\Model\Engine as D,
+PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Mvc\Router\Uri;
 
 class ToolController extends Controller
 {
@@ -84,7 +88,7 @@ class ToolController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
-        $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL);
+        $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, array('.sql', '.bz2'));
         // Removing the path
         $aDumpList = array_map(function($sValue) { return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue); }, $aDumpList);
         $this->view->aDumpList = $aDumpList;
@@ -144,7 +148,18 @@ class ToolController extends Controller
 
                 if (!empty($sDumpFile))
                 {
-                    $mStatus = (new D\Util\Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
+                    if ($this->file->getFileExt($sDumpFile) == 'sql')
+                    {
+                        $mStatus = (new D\Util\Backup($sDumpFile))->restore();
+                    }
+                    elseif ($this->file->getFileExt($sNameFile) == 'bz2')
+                    {
+                        $mStatus = (new D\Util\Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
+                    }
+                    else
+                    {
+                        $mStatus = t('Dump file must be a SQL type (extension ".sql" or compressed archive ".bz2")');
+                    }
                 }
                 else
                 {
@@ -223,7 +238,7 @@ class ToolController extends Controller
         $this->_checkPost();
 
         D\Db::optimize();
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been optimized!'));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been optimized!'));
     }
 
     public function repair()
@@ -231,7 +246,7 @@ class ToolController extends Controller
         $this->_checkPost();
 
         D\Db::repair();
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
     }
 
     /**

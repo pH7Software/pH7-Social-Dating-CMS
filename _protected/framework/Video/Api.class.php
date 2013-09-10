@@ -37,24 +37,25 @@ class Api
         {
             case 'youtube':
             case 'youtu':
-              $sClass = (new Api\Youtube)->getVideo($sUrl);
+                $sClass = (new Api\Youtube)->getVideo($sUrl);
             break;
 
             case 'vimeo':
-              $sClass = (new Api\Vimeo)->getVideo($sUrl);
+                $sClass = (new Api\Vimeo)->getVideo($sUrl);
             break;
 
             case 'dailymotion':
-              $sClass = (new Api\Dailymotion)->getVideo($sUrl);
+                $sClass = (new Api\Dailymotion)->getVideo($sUrl);
             break;
 
             case 'metacafe':
-              $sClass = (new Api\Metacafe)->getVideo($sUrl);
+                $sClass = (new Api\Metacafe)->getVideo($sUrl);
             break;
 
             default:
-              return false;
+                return false;
         }
+
         return $sClass;
     }
 

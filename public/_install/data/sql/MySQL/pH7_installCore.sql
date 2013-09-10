@@ -29,20 +29,20 @@ CREATE TABLE IF NOT EXISTS pH7_Admins (
   profileId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   username varchar(40) NOT NULL,
   password char(240) NOT NULL,
-  email varchar(200) NOT NULL,
+  email varchar(120) NOT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   sex enum('male','female') NOT NULL DEFAULT 'male',
   lang varchar(5) NOT NULL DEFAULT 'en_US',
-  timeZone varchar(3) NOT NULL DEFAULT '-6',
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
-  hashValidation varchar(40) DEFAULT NULL,
-  prefixSalt varchar(40) DEFAULT NULL,
-  suffixSalt varchar(40) DEFAULT NULL,
+  timeZone varchar(6) NOT NULL DEFAULT '-6',
   joinDate datetime DEFAULT NULL,
   lastActivity datetime DEFAULT NULL,
   lastEdit datetime DEFAULT NULL,
   ban enum('0','1') DEFAULT '0',
+  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  hashValidation varchar(40) DEFAULT NULL,
+  prefixSalt varchar(40) DEFAULT NULL,
+  suffixSalt varchar(40) DEFAULT NULL,
   PRIMARY KEY (profileId),
   UNIQUE KEY username (username),
   UNIQUE KEY email (email)
@@ -72,7 +72,7 @@ INSERT INTO pH7_Memberships (groupId, name, description, permissions, price, exp
 
 CREATE TABLE IF NOT EXISTS pH7_Members (
   profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
-  email varchar(200) NOT NULL,
+  email varchar(120) NOT NULL,
   username varchar(40) NOT NULL,
   password char(120) NOT NULL,
   firstName varchar(50) DEFAULT NULL,
@@ -122,9 +122,8 @@ CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
   zipCode varchar(20) DEFAULT NULL,
   country char(2) DEFAULT NULL,
   phone varchar(100) DEFAULT NULL,
-  fax varchar(100) DEFAULT NULL,
-  website varchar(200) DEFAULT NULL,
-  socialNetworkSite varchar(200) DEFAULT NULL,
+  website varchar(120) DEFAULT NULL,
+  socialNetworkSite varchar(120) DEFAULT NULL,
   height tinyint(3) unsigned DEFAULT NULL,
   weight tinyint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (profileId),
@@ -169,7 +168,7 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliates (
   firstName varchar(50) NOT NULL,
   lastName varchar(50) NOT NULL,
   password char(120) NOT NULL,
-  email varchar(200) NOT NULL,
+  email varchar(120) NOT NULL,
   sex enum('male','female') NOT NULL DEFAULT 'male',
   birthDate date NOT NULL DEFAULT '0000-00-00',
   ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
@@ -209,9 +208,9 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesInfo (
   state varchar(150) DEFAULT NULL,
   zipCode varchar(20) DEFAULT NULL,
   phone varchar(100) DEFAULT NULL,
-  description text DEFAULT NULL,
-  website varchar(200) DEFAULT NULL,
   fax varchar(100) DEFAULT NULL,
+  description text DEFAULT NULL,
+  website varchar(120) DEFAULT NULL,
   PRIMARY KEY (profileId),
   KEY country (country),
   FOREIGN KEY (profileId) REFERENCES pH7_Affiliates(profileId)
@@ -666,14 +665,14 @@ CREATE TABLE IF NOT EXISTS pH7_Language (
   active enum('0','1') NOT NULL DEFAULT '0',
   direction enum('ltr','rtl') NOT NULL DEFAULT 'ltr',
   author varchar(60) NOT NULL,
-  website varchar(200) DEFAULT NULL,
-  email varchar(200) DEFAULT NULL,
+  website varchar(120) DEFAULT NULL,
+  email varchar(120) DEFAULT NULL,
   PRIMARY KEY (langId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_Language (langId, name, lang_code, charset, active, direction, author, website, email) VALUES
-('en_US', 'English', 'en_US', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'pierrehs@hotmail.com'),
-('fr_FR', 'Français', 'fr_FR', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'pierrehs@hotmail.com');
+('en_US', 'English', 'en_US', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'ph7software@gmail.com'),
+('fr_FR', 'Français', 'fr_FR', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'ph7software@gmail.com');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Likes (
@@ -719,7 +718,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesAttemptsLogin (
 
 CREATE TABLE IF NOT EXISTS pH7_AdminsLogLogin (
   logId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
-  email varchar(200) NOT NULL DEFAULT '',
+  email varchar(120) NOT NULL DEFAULT '',
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
   status varchar(60) NOT NULL DEFAULT '',
@@ -731,7 +730,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogLogin (
 
 CREATE TABLE IF NOT EXISTS pH7_MembersLogLogin (
   logId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
-  email varchar(200) NOT NULL DEFAULT '',
+  email varchar(120) NOT NULL DEFAULT '',
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
   status varchar(60) NOT NULL DEFAULT '',
@@ -743,7 +742,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogLogin (
 
 CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogLogin (
   logId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
-  email varchar(200) NOT NULL DEFAULT '',
+  email varchar(120) NOT NULL DEFAULT '',
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
   status varchar(60) NOT NULL DEFAULT '',
@@ -757,7 +756,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogSess (
   profileId tinyint(3) unsigned DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(240) DEFAULT NULL,
-  email varchar(200) DEFAULT NULL,
+  email varchar(120) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   sessionHash varchar(40) NOT NULL,
@@ -779,7 +778,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogSess (
   profileId int(10) unsigned DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
-  email varchar(200) DEFAULT NULL,
+  email varchar(120) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   sessionHash varchar(40) NOT NULL,
@@ -801,7 +800,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogSess (
   profileId int(10) unsigned DEFAULT NULL,
   username varchar(40) DEFAULT NULL,
   password varchar(120) DEFAULT NULL,
-  email varchar(200) DEFAULT NULL,
+  email varchar(120) DEFAULT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
   sessionHash varchar(40) NOT NULL,
@@ -947,11 +946,11 @@ CREATE TABLE IF NOT EXISTS pH7_Settings (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
-('siteName', 'pH7 Social Dating CMS', '', 'general'),
+('siteName', '¡pH7! Social Dating CMS', '', 'general'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', 'base', '', 'design'),
-('emailName', 'pH7 Social Dating CMS', '', 'email'),
+('emailName', '¡pH7! Social Dating CMS', '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('splashPage', '0', 'Use Splash Page | enable = 1 or disable = 0', 'general'),
 ('fullAjaxSite', '1', 'enable = 1 or disable = 0', 'general'),
@@ -974,6 +973,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('maxAgeRegistration', '99', '', 'registration'),
 ('minAgeRegistration', '18', '', 'registration'),
 ('minUsernameLength', '3', '', 'registration'),
+('maxUsernameLength', '30', '', 'registration'),
 ('userActivationType', '1', '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('affActivationType', '1', '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('isUniversalLogin', '0', '0 for disable or 1 for enable', 'registration'),
@@ -1021,7 +1021,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   name varchar(200) NOT NULL,
-  email varchar(200) NOT NULL,
+  email varchar(120) NOT NULL,
   joinDate datetime DEFAULT NULL,
   active tinyint(1) unsigned NOT NULL DEFAULT 2, -- 1 = Active Account, 2 = Pending Account
   ip varchar(20) NOT NULL DEFAULT '127.0.0.1',

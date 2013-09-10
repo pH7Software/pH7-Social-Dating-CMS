@@ -10,5 +10,5 @@ defined('PH7') or die('Restricted access');
 
 /**
  * This file is not required, it is only used to include or add more lines of code to your module.
- * CMS considers this file only if it exists and is included before any other file of the module.
+ * pH7CMS includes this file only if it exists and it is included before any other file of the module.
  */

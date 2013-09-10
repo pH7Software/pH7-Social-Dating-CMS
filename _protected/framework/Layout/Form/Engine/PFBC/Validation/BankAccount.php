@@ -28,19 +28,26 @@ class BankAccount extends \PFBC\Validation
      */
     public function isValid($sValue)
     {
-        $sEmailHost = strrchr($sValue, '@');
-
-        if($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
-            if(!Ban::isBankAccount($sValue) && !Ban::isBankAccount($sEmailHost)) {
-                if(!(new ExistsCoreModel)->bankAccount($sValue, $this->sTable)) {
+        if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue))
+        {
+            if (!Ban::isBankAccount($sValue))
+            {
+                if (!(new ExistsCoreModel)->bankAccount($sValue, $this->sTable))
+                {
                     return true;
-                } else {
-                    $this->message = t('Error: Another account with the same bank account even exists. Please choose another.');
                 }
-            } else {
+                else
+                {
+                    $this->message = t('Error: Another account with the same bank account already exists. Please choose another.');
+                }
+            }
+            else
+            {
                 $this->message = t('Sorry, This bank account is not supported by our payment system.');
             }
-        } else {
+        }
+        else
+        {
             $this->message = t('Error: Your bank account is incorrect!');
         }
         return false;

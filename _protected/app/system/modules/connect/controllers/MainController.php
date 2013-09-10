@@ -75,29 +75,30 @@ class MainController extends Controller
 
     private function _whatApi()
     {
-        switch($this->_sApi) {
+        switch ($this->_sApi)
+        {
             case 'fb':
-              if(!$this->config->values['module.api']['facebook.enable']) continue;
-              $this->_sUrl = new Facebook;
+                if (!$this->config->values['module.api']['facebook.enable']) continue;
+                $this->_sUrl = new Facebook;
             break;
 
             case 'google':
-              if(!$this->config->values['module.api']['google.enable']) continue;
-              $this->_sUrl = new Google($this->session, $this->httpRequest, $this->registry);
+                if (!$this->config->values['module.api']['google.enable']) continue;
+                $this->_sUrl = new Google($this->session, $this->httpRequest, $this->registry);
             break;
 
             case 'twitter':
-              if(!$this->config->values['module.api']['twitter.enable']) continue;
-              $this->_sUrl = new Twitter;
+                if (!$this->config->values['module.api']['twitter.enable']) continue;
+                $this->_sUrl = new Twitter;
             break;
 
             case 'microsoft':
-              if(!$this->config->values['module.api']['microsoft.enable']) continue;
-              $this->_sUrl = new Microsoft;
+                if (!$this->config->values['module.api']['microsoft.enable']) continue;
+                $this->_sUrl = new Microsoft;
             break;
 
             default:
-              $this->displayPageNotFound(t('The %0% API is incorrect.', $this->_sApi));
+                $this->displayPageNotFound(t('The %0% API is incorrect.', $this->_sApi));
         }
     }
 

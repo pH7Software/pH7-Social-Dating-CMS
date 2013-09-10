@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class EditCategoryFormProcessing extends Form
 {
@@ -20,7 +20,7 @@ class EditCategoryFormProcessing extends Form
         $iCategoryId = $this->httpRequest->get('category_id', 'int');
 
         (new ForumModel)->updateCategory($iCategoryId, $this->httpRequest->post('title'));
-        HeaderUrl::redirect(UriRoute::get('forum', 'forum', 'index'), t('The Category has been updated successfully!'));
+        HeaderUrl::redirect(Uri::get('forum', 'forum', 'index'), t('The Category has been updated successfully!'));
     }
 
 }

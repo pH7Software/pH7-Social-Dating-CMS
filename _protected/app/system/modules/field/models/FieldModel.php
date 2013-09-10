@@ -9,7 +9,7 @@ namespace PH7;
 
 use
 PH7\Framework\Mvc\Model\Engine\Util\Various,
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Model\Engine\Db;
 
 class FieldModel extends Framework\Mvc\Model\Engine\Model
@@ -71,7 +71,7 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
 
     public function update()
     {
-        $this->_sSql = 'ALTER TABLE' . Db::prefix($this->_sTable) . 'CHANGE ' . (new HttpRequest)->get('name') . ' ' . $this->_sName . ' ' . $this->getType();
+        $this->_sSql = 'ALTER TABLE' . Db::prefix($this->_sTable) . 'CHANGE ' . (new Http)->get('name') . ' ' . $this->_sName . ' ' . $this->getType();
         return $this->execute();
     }
 

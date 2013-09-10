@@ -10,7 +10,7 @@ namespace PH7;
 use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Url\HeaderUrl,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class UserController extends Controller
 {
@@ -32,7 +32,7 @@ class UserController extends Controller
 
     public function index()
     {
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'));
     }
 
     public function browse()
@@ -47,7 +47,7 @@ class UserController extends Controller
 
         if (empty($oBrowse))
         {
-            $this->design->setRedirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'));
+            $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'));
             $this->displayPageNotFound(t('No user were found.'));
         }
         else
@@ -103,7 +103,7 @@ class UserController extends Controller
         if ($where !== 'all' && $where !== 'username' && $where !== 'email' && $where !== 'firstName' && $where !== 'lastName' && $where !== 'ip')
         {
             \PFBC\Form::setError('form_admin_search', 'Invalid argument.');
-            HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'search'));
+            HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
         }
         else
         {
@@ -121,7 +121,7 @@ class UserController extends Controller
 
             if (empty($oSearch))
             {
-                $this->design->setRedirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'search'));
+                $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
                 $this->displayPageNotFound('Empty search result. Please try again with wider or new search parameters.');
             }
             else
@@ -181,18 +181,18 @@ class UserController extends Controller
         ];
 
         $this->session->remove($aSessionData);
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->
             sMsg);
     }
 
     public function approve()
     {
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
     }
 
     public function disapprove()
     {
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
     }
 
     public function approveAll($iId)
@@ -210,7 +210,7 @@ class UserController extends Controller
             }
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function disapproveAll($iId)
@@ -228,7 +228,7 @@ class UserController extends Controller
             }
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function ban()
@@ -245,7 +245,7 @@ class UserController extends Controller
             $this->sMsg = t('Oops! An error has occurred while banishment the profile.');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function unBan()
@@ -262,7 +262,7 @@ class UserController extends Controller
             $this->sMsg = t('Oops! An error has occurred while unban the profile.');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function delete()
@@ -272,7 +272,7 @@ class UserController extends Controller
         $sUsername = (string) $aData[1];
 
         $this->oAdmin->delete($iId, $sUsername);
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The profile has been deleted.'));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The profile has been deleted.'));
     }
 
     public function banAll()
@@ -294,7 +294,7 @@ class UserController extends Controller
             $this->sMsg = t('The profile(s) has been banned.');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function unBanAll()
@@ -315,7 +315,7 @@ class UserController extends Controller
             $this->sMsg = t('The profile(s) has been unbanned.');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function deleteAll()
@@ -337,7 +337,7 @@ class UserController extends Controller
             $this->sMsg = t('The profile(s) has been deleted.');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     private function _moderateRegistration($iId, $iStatus)
@@ -358,7 +358,7 @@ class UserController extends Controller
                     $this->oAdminModel->approve($oUser->profileId, 1);
                     $sSubject = t('Your membership account has been activated');
                     $this->sMsg = t('Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!',
-                        '<a href="' . UriRoute::get('user', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
+                        '<a href="' . Uri::get('user', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
                 }
                 else
                 {
@@ -374,7 +374,7 @@ class UserController extends Controller
                     t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
                     // Send email
-                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/core/moderate_registration.tpl', $oUser->email);
+                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/core/moderate_registration.tpl', $oUser->email);
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
                     (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
 

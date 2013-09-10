@@ -12,19 +12,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class MailModel extends MailCoreModel
 {
 
-    public function readMsgs($iRecipient, $iOffset, $iLimit)
-    {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
-
-        $rStmt = Db::getInstance()->prepare('SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') .
-            'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.sender = m.profileId WHERE msg.recipient = :recipient AND NOT FIND_IN_SET(\'recipient\', msg.trash) ORDER BY msg.sendDate DESC LIMIT :offset, :limit');
-        $rStmt->bindValue(':recipient', $iRecipient, \PDO::PARAM_INT);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
-        $rStmt->execute();
-        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
-    }
+    const INBOX = 1, OUTBOX = 2, TRASH = 3;
 
     public function readMsg($iRecipient, $iMessageId)
     {
@@ -34,20 +22,6 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
         return $rStmt->fetch(\PDO::FETCH_OBJ);
-    }
-
-    public function readSentMsgs($iSender, $iOffset, $iLimit)
-    {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
-
-        $rStmt = Db::getInstance()->prepare('SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members') .
-            'AS m ON msg.recipient = m.profileId WHERE msg.sender = :sender AND NOT FIND_IN_SET(\'sender\', msg.toDelete) ORDER BY msg.sendDate DESC LIMIT :offset, :limit');
-        $rStmt->bindValue(':sender', $iSender, \PDO::PARAM_INT);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
-        $rStmt->execute();
-        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
     public function readSentMsg($iSender, $iMessageId)
@@ -60,25 +34,10 @@ class MailModel extends MailCoreModel
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
 
-    public function readTrashMsgs($iProfileId, $iOffset, $iLimit)
-    {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
-
-        $sSql = 'SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members');
-        $rStmt = Db::getInstance()->prepare($sSql . 'AS m ON msg.sender = m.profileId WHERE msg.recipient = :profileId AND FIND_IN_SET(\'recipient\', msg.trash)
-            AND msg.recipient = :profileId AND NOT FIND_IN_SET(\'recipient\', msg.toDelete) ORDER BY msg.sendDate DESC LIMIT :offset, :limit');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
-        $rStmt->execute();
-        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
-    }
-
     public function readTrashMsg($iProfileId, $iMessageId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members') .
-            'AS m ON msg.sender = m.profileId WHERE msg.recipient = :profileId AND FIND_IN_SET(\'recipient\', msg.trash) AND msg.recipient = :profileId AND NOT FIND_IN_SET(\'recipient\', msg.toDelete) LIMIT 1');
+            'AS m ON msg.sender = m.profileId WHERE msg.recipient = :profileId AND FIND_IN_SET(\'recipient\', msg.trash) AND NOT FIND_IN_SET(\'recipient\', msg.toDelete) LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -120,37 +79,6 @@ class MailModel extends MailCoreModel
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Messages') . 'WHERE messageId = :messageId LIMIT 1');
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         return $rStmt->execute();
-    }
-
-    public function totalMsg($iRecipient)
-    {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMsgs FROM' . Db::prefix('Messages') . 'WHERE recipient = :recipient AND NOT FIND_IN_SET(\'recipient\', trash)');
-        $rStmt->bindValue(':recipient', $iRecipient, \PDO::PARAM_INT);
-        $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-        Db::free($rStmt);
-        return $oRow->totalMsgs;
-    }
-
-    public function totalSentMsg($iSender)
-    {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMsgs FROM' . Db::prefix('Messages') . 'WHERE sender = :sender AND NOT FIND_IN_SET(\'sender\', toDelete)');
-        $rStmt->bindValue(':sender', $iSender, \PDO::PARAM_INT);
-        $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-        Db::free($rStmt);
-        return $oRow->totalMsgs;
-    }
-
-    public function totalTrashMsg($iProfileId)
-    {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMsgs FROM' . Db::prefix('Messages') . '
-            WHERE recipient = :profileId AND FIND_IN_SET(\'recipient\', trash) AND recipient = :profileId AND NOT FIND_IN_SET(\'recipient\', toDelete)');
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-        Db::free($rStmt);
-        return $oRow->totalMsgs;
     }
 
     public function setReadMsg($iMessageId)
@@ -198,7 +126,7 @@ class MailModel extends MailCoreModel
         return $rStmt->execute();
     }
 
-    public function searchMsg($iRecipient, $mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iProfileId = null, $sType = 'all')
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
@@ -206,94 +134,35 @@ class MailModel extends MailCoreModel
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(messageId) AS totalMails';
-        $sSqlWhere = (ctype_digit($mLooking)) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
+        $sSqlFind = ' ' . (ctype_digit($mLooking) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.sender = m.profileId
-            WHERE (msg.recipient = :recipient) AND (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
+        switch ($sType)
+        {
+            case self::INBOX:
+                $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
+            break;
+
+            case self::OUTBOX:
+                $sSql = 'msg.recipient = m.profileId WHERE (msg.sender = :profileId) AND (NOT FIND_IN_SET(\'sender\', msg.toDelete)) AND';
+            break;
+
+            case self::TRASH:
+                $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (FIND_IN_SET(\'recipient\', msg.trash)) AND (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
+            break;
+
+            default:
+                // All messages
+                $sSql = 'msg.sender = m.profileId WHERE ';
+        }
+
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON ' .
+        $sSql . $sSqlFind . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        $rStmt->bindParam(':recipient', $iRecipient, \PDO::PARAM_INT);
-
-        if (!$bCount)
-        {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
-        }
-
-        $rStmt->execute();
-
-        if (!$bCount)
-        {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-        }
-        else
-        {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            $mData = (int) $oRow->totalMails;
-            unset($oRow);
-        }
-
-        Db::free($rStmt);
-        return $mData;
-    }
-
-    public function searchSentMsg($iSender, $mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
-    {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
-
-        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(messageId) AS totalMails';
-        $sSqlWhere = (ctype_digit($mLooking)) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
-
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.recipient = m.profileId
-            WHERE (msg.sender = :sender) AND (NOT FIND_IN_SET(\'sender\', msg.toDelete)) AND ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
-
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
-
-        $rStmt->bindParam(':sender', $iSender, \PDO::PARAM_INT);
-
-        if (!$bCount)
-        {
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
-        }
-
-        $rStmt->execute();
-
-        if (!$bCount)
-        {
-            $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-        }
-        else
-        {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            $mData = (int) $oRow->totalMails;
-            unset($oRow);
-        }
-
-        Db::free($rStmt);
-        return $mData;
-    }
-
-    public function allMsg($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
-    {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
-
-        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(messageId) AS totalMails';
-        $sSqlWhere = (ctype_digit($mLooking)) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
-
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.sender = m.profileId WHERE ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
-
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        if (!empty($iProfileId))
+            $rStmt->bindParam(':profileId', $iProfileId, \PDO::PARAM_INT);
 
         if (!$bCount)
         {
@@ -340,12 +209,12 @@ class MailModel extends MailCoreModel
      */
     public function checkWaitSend($iSenderId, $iWaitTime, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT messageId FROM' . Db::prefix('Messages') . 'WHERE sender = :sender AND DATE_ADD(sendDate, INTERVAL :waitTime MINUTE) > :currentTime');
+        $rStmt = Db::getInstance()->prepare('SELECT messageId FROM' . Db::prefix('Messages') . 'WHERE sender = :sender AND DATE_ADD(sendDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
-        return ($rStmt->rowCount() === 0) ? true : false;
+        return ($rStmt->rowCount() === 0);
     }
 
 }

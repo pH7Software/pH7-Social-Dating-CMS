@@ -30,12 +30,13 @@ class Import
      * @param string $sClassName Class path.
      * @param string $sNameSpace Namespace. Default NULL
      * @param string $sExt Optional, the file extension without the dot. Default value is "php".
+     * @return mixed (resource, string, boolean, void, ...)
      */
     public static function pH7FwkClass($sClassName, $sNameSpace = null, $sExt = 'php')
     {
         $sClassName = static::_getSlashPath($sClassName);
 
-        static::_load(PH7_PATH_FRAMEWORK . $sClassName . '.class', $sExt, $sNameSpace);
+        return static::_load(PH7_PATH_FRAMEWORK . $sClassName . '.class', $sExt, $sNameSpace);
     }
 
     /**
@@ -46,12 +47,13 @@ class Import
      * @param string $sClassName Class path.
      * @param string $sNameSpace Namespace. Default NULL
      * @param string $sExt Optional, the file extension without the dot. Default value is "php".
+     * @return mixed (resource, string, boolean, void, ...)
      */
     public static function pH7App($sClassName, $sNameSpace = null, $sExt = 'php')
     {
         $sClassName = static::_getSlashPath($sClassName);
 
-        static::_load(PH7_PATH_APP . $sClassName, $sExt, $sNameSpace);
+        return static::_load(PH7_PATH_APP . $sClassName, $sExt, $sNameSpace);
     }
 
     /**
@@ -62,10 +64,11 @@ class Import
      * @param string $sFile File path.
      * @param string $sNameSpace Namespace. Default NULL
      * @param string $sExt Optional, the file extension without the dot. Default "php".
+     * @return mixed (resource, string, boolean, void, ...)
      */
     public static function file($sFile, $sNameSpace = null, $sExt = 'php')
     {
-        static::_load($sFile, $sExt, $sNameSpace);
+        return static::_load($sFile, $sExt, $sNameSpace);
     }
 
     /**
@@ -76,12 +79,13 @@ class Import
      * @param string $sFile File path.
      * @param string $sNameSpace Namespace. Default NULL
      * @param string $sExt Optional, the file extension without the dot. Default "php".
+     * @return mixed (resource, string, boolean, void, ...)
      */
     public static function lib($sFile, $sNameSpace = null, $sExt = 'php')
     {
         $sFile = static::_getSlashPath($sFile);
 
-        static::_load(PH7_PATH_LIBRARY . $sFile, $sExt, $sNameSpace);
+        return static::_load(PH7_PATH_LIBRARY . $sFile, $sExt, $sNameSpace);
     }
 
     /**
@@ -90,7 +94,7 @@ class Import
      * @access private
      * @static
      * @param string $sFile The path.
-     * @return string
+     * @return string The path convert.
      */
     private static function _getSlashPath($sFile)
     {
@@ -110,7 +114,7 @@ class Import
      */
     private static function _load($sFile, $sExt, $sNameSpace)
     {
-        $sFile = $sFile . PH7_DOT . $sExt;
+        $sFile .= PH7_DOT . $sExt;
 
         // Hack to remove the backslash
         if (!empty($sNameSpace))

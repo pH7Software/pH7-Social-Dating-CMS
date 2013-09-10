@@ -9,8 +9,8 @@ namespace PH7;
 
 use
 PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri;
 
 class EditForm
 {
@@ -20,12 +20,12 @@ class EditForm
         if (isset($_POST['submit_admin_edit_account']))
         {
             if (\PFBC\Form::isValid($_POST['submit_admin_edit_account']))
-                new EditFormProcessing;
+                new EditFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oHR = new HttpRequest;
+        $oHR = new Http;
         // Prohibit other administrators to edit the Root Administrator (ID 1)
         $iProfileId = ($oHR->getExists('profile_id') && $oHR->get('profile_id', 'int') !== 1) ? $oHR->get('profile_id', 'int') : (new Session)->get('admin_id');
 
@@ -38,7 +38,7 @@ class EditForm
 
         if ($oHR->getExists('profile_id') && $oHR->get('profile_id', 'int') !== 1)
         {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="s_button" href="' . UriRoute::get(PH7_ADMIN_MOD, 'admin', 'browse') . '">' . t('Return to back admins browse') . '</a></p>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="s_button" href="' . Uri::get(PH7_ADMIN_MOD, 'admin', 'browse') . '">' . t('Return to back admins browse') . '</a></p>'));
         }
         unset($oHR);
 

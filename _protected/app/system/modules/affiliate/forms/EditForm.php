@@ -9,8 +9,8 @@ namespace PH7;
 
 use
 PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Date\CDateTime;
 
 class EditForm
@@ -21,7 +21,7 @@ class EditForm
         if (isset($_POST['submit_aff_edit_account']))
         {
             if (\PFBC\Form::isValid($_POST['submit_aff_edit_account']))
-                new EditFormProcessing();
+                new EditFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -29,7 +29,7 @@ class EditForm
         $bAdminLogged = (AdminCore::auth() && !Affiliate::auth()); // Check if the admin is logged.
 
         $oAffModel = new AffiliateModel;
-        $oHR = new HttpRequest;
+        $oHR = new Http;
         $iProfileId = ($bAdminLogged && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
 
         $oAff = $oAffModel->readProfile($iProfileId, 'Affiliates');
@@ -45,7 +45,7 @@ class EditForm
 
         if ($bAdminLogged && $oHR->getExists('profile_id'))
         {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . UriRoute::get('affiliate', 'admin', 'userlist') . '">' . t('Back to Browse Affiliates') . '</a></p>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Back to Browse Affiliates') . '</a></p>'));
         }
         unset($oHR);
 
@@ -57,7 +57,6 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_last_name"></span>'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', array('description'=>t('For site security, you cannot change your username.'), 'disabled'=>'disabled', 'value'=>$oAff->username)));
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('description'=>t('For site security and to avoid spam, you cannot change your email address.'), 'disabled'=>'disabled', 'value'=>$oAff->email)));
-        $oForm->addElement(new \PFBC\Element\Phone(t('Your Phone Number:'), 'phone', array('id'=>'phone', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter full phone number with area code.'), 'value'=>$oAff->phone, 'required'=>1,'validation'=>new \PFBC\Validation\Phone)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
         $oForm->addElement(new \PFBC\Element\Radio(t('Your Sex:'), 'sex', array('male'=>t('Male'), 'female'=>t('Female')), array('value'=> $oAff->sex,'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Date(t('Your Date of birth:'), 'birth_date', array('id'=>'birth_date', 'onblur'=>'CValid(this.value, this.id)', 'value'=>$sBirthDate, 'validation'=> new \PFBC\Validation\BirthDate, 'required'=>1)));

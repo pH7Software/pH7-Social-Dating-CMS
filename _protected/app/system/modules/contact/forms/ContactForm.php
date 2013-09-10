@@ -16,7 +16,7 @@ class ContactForm
         if (isset($_POST['submit_contact']))
         {
             if (\PFBC\Form::isValid($_POST['submit_contact']))
-                new ContactFormProcessing();
+                new ContactFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -29,7 +29,7 @@ class ContactForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_first_name"></span>'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'str_last_name', 'onblur'=>'CValid(this.value, this.id,2,20)', 'title'=>t('Enter your last name.'), 'required'=> 1, 'validation'=>new \PFBC\Validation\Str(2,20))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_last_name"></span>'));
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Mail is failed'), 'mail', array('id'=>'email', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter your valid email address.'), 'required'=> 1)));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter your valid email address.'), 'required'=> 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
         $oForm->addElement(new \PFBC\Element\Phone(t('Your Phone Number:'), 'phone', array('id'=>'phone', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter full phone number with area code.'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
@@ -37,7 +37,7 @@ class ContactForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error url"></span>'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Subject:'), 'subject', array('id'=>'str_subject', 'onblur'=>'CValid(this.value, this.id,4,25)', 'title'=>t('Enter the subject of the message.'), 'required'=> 1, 'validation'=>new \PFBC\Validation\Str(4,25))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_subject"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your Message'), 'message', array('id'=>'str_message', 'onblur'=>'CValid(this.value, this.id,10,1500)', 'title'=>t('Enter your message.'), 'required'=>1, 'validation'=>new \PFBC\Validation\Str(10,1500))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your Message:'), 'message', array('id'=>'str_message', 'onblur'=>'CValid(this.value, this.id,10,1500)', 'title'=>t('Enter your message.'), 'required'=>1, 'validation'=>new \PFBC\Validation\Str(10,1500))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_message"></span>'));
         $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'title'=>t('Enter the code above.'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));

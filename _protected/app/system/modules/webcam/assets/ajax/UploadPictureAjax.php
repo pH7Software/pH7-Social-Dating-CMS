@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Util\Various,
 PH7\Framework\Error\CException\UserException;
 
@@ -32,7 +32,7 @@ class UploadPictureAjax
          */
 
         // We only need to handle POST requests:
-        if ((new HttpRequest)->getMethod() != HttpRequest::METHOD_POST) throw new UserException('The method must be post request!');
+        if ((new Http)->getMethod() !== Http::METHOD_POST) throw new UserException('The method must be post request!');
 
         return $this;
     }

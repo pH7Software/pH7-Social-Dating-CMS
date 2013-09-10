@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Config\Config, PH7\Framework\Str\Str, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Config\Config, PH7\Framework\Str\Str, PH7\Framework\Mvc\Router\Uri;
 
 class MembershipForm
 {
@@ -17,7 +17,7 @@ class MembershipForm
         if (isset($_POST['submit_membership']))
         {
             if (\PFBC\Form::isValid($_POST['submit_membership']))
-                new MembershipFormProcessing();
+                new MembershipFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -37,7 +37,7 @@ class MembershipForm
         }
         unset($aPerms);
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Price:'), 'price', array('description'=>t('Currency: %0%. 0 = Free. To change the currency, please <a href="%1%">go to settings</a>.', Config::getInstance()->values['module.setting']['currency'], UriRoute::get('payment','admin','config')), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Price:'), 'price', array('description'=>t('Currency: %0%. 0 = Free. To change the currency, please <a href="%1%">go to settings</a>.', Config::getInstance()->values['module.setting']['currency'], Uri::get('payment','admin','config')), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Number(t('Expiration Days:'), 'expiration_days', array('description'=>t('0 = Unlimited'), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Radio(t('Active:'), 'enable', array('1'=>t('Enabled'), '0'=>t('Disabled')), array('value'=>'1', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Button(t('Add')));

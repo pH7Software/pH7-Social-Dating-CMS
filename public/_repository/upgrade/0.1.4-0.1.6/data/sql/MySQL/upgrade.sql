@@ -105,7 +105,7 @@ INSERT INTO `pH7_Settings` (`name`, `value`, `desc`, `group`) VALUES
 
 UPDATE `pH7_Settings` SET `name` = 'isCaptchaUserSignup', `group` = 'spam' WHERE `name` = 'isCaptcha';
 
-DELETE FROM `pH7_Settings` WHERE `name` = 'recaptchaPublicKe'; -- We no longer use reCaptcha for now
+DELETE FROM `pH7_Settings` WHERE `name` = 'recaptchaPublicKey'; -- We no longer use reCaptcha for now
 DELETE FROM `pH7_Settings` WHERE `name` = 'recaptchaPrivateKey'; -- We no longer use reCaptcha for now
 DELETE FROM `pH7_Settings` WHERE `name` = 'pictureMaxHeight';
 DELETE FROM `pH7_Settings` WHERE `name` = 'pictureMaxWidth';

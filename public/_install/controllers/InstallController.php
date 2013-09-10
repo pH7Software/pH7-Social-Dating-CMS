@@ -37,17 +37,16 @@ class InstallController extends Controller
     public function index ()
     {
         if (empty($_SESSION['step1']))
-        {
             $_SESSION['step1'] = 1;
-        }
 
         $aLangs = get_dir_list(PH7_ROOT_INSTALL . '/langs/');
+        $aLangsList = include(PH7_ROOT_INSTALL . 'inc/lang_list.inc.php');
         $sLangSelect = '';
 
         foreach ($aLangs as $sLang)
         {
             $sSel = (empty($_REQUEST['l']) ? $sLang == $this->sCurrentLang ? '" selected="selected' : '' : ($sLang == $_REQUEST['l']) ? '" selected="selected' : '');
-            $sLangSelect .= '<option value="?l=' . $sLang . $sSel . '">' . $sLang . '</option>';
+            $sLangSelect .= '<option value="?l=' . $sLang . $sSel . '">' . $aLangsList[$sLang] . '</option>';
         }
 
         $this->view->assign('lang_select', $sLangSelect);
@@ -62,14 +61,21 @@ class InstallController extends Controller
 
         if (empty($_SESSION['step2']))
         {
-            if (isset($_SESSION['step1']))
+            if (!empty($_SESSION['step1']))
             {
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['license']))
+                if (empty($_SESSION['value']))
+                    $_SESSION['value']['license'] = '';
+
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license']))
                 {
+                    $_SESSION['value']['license'] = $_POST['license'];
+
                     if (check_license($_POST['license']))
                     {
                         $_SESSION['status_license'] = 'success';
                         $_SESSION['step2'] = 1;
+                        unset($_SESSION['value']);
+
                         redirect(PH7_URL_SLUG_INSTALL . 'config_path');
                     }
                     else
@@ -102,14 +108,14 @@ class InstallController extends Controller
 
         if (empty($_SESSION['step3']))
         {
-            if (isset($_SESSION['step2']))
+            if (!empty($_SESSION['step2']))
             {
                 if ($_SESSION['status_license'] == 'success')
                 {
                     if (empty($_SESSION['value']))
                         $_SESSION['value']['path_protected'] = dirname(PH7_ROOT_PUBLIC) . PH7_DS . '_protected' . PH7_DS;
 
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['path_protected']))
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected']))
                     {
                         $_SESSION['value']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
 
@@ -173,11 +179,10 @@ class InstallController extends Controller
 
         if (empty($_SESSION['step4']))
         {
-            if (isset($_SESSION['step3']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
+            if (!empty($_SESSION['step3']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
             {
                 if ($_SESSION['status_license'] == 'success')
                 {
-
                     if (empty($_SESSION['value']))
                     {
                         $_SESSION['db']['db_type'] = 'mysql';
@@ -194,22 +199,17 @@ class InstallController extends Controller
 
                     if ($this->_checkDownloadServer()) // Check if the link is available
                     {
-
-                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['config_system_submit']))
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_system_submit']))
                         {
-
                             foreach ($_POST as $sKey => $sValue)
-                            {
                                 $_SESSION['db'][$sKey] = trim($sValue);
-                            }
 
                             $_SESSION['value']['bug_report_email'] = trim($_POST['bug_report_email']);
                             $_SESSION['value']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
 
                             if (filled_out($_POST))
                             {
-
-                                if (filter_input(INPUT_POST, 'bug_report_email', FILTER_VALIDATE_EMAIL) !== false)
+                                if (validate_email($_SESSION['value']['bug_report_email']) == 'ok')
                                 {
                                     try
                                     {
@@ -223,14 +223,14 @@ class InstallController extends Controller
                                         $sConfigContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
 
                                         $sConfigContent = str_replace('%bug_report_email%', $_SESSION['value']['bug_report_email'], $sConfigContent);
-                                        $sConfigContent = str_replace('%ffmpeg_path%', $_SESSION['value']['ffmpeg_path'], $sConfigContent);
+                                        $sConfigContent = str_replace('%ffmpeg_path%', clean_string($_SESSION['value']['ffmpeg_path']), $sConfigContent);
 
                                         $sConfigContent = str_replace('%db_type%', $_SESSION['db']['db_type'], $sConfigContent);
                                         $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['db_hostname'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_name%', $_SESSION['db']['db_name'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_username%', $_SESSION['db']['db_username'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_password%', $_SESSION['db']['db_password'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_prefix%', $_SESSION['db']['db_prefix'], $sConfigContent);
+                                        $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['db_name']), $sConfigContent);
+                                        $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['db_username']), $sConfigContent);
+                                        $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['db_password']), $sConfigContent);
+                                        $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['db_prefix']), $sConfigContent);
                                         $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['db_charset'], $sConfigContent);
                                         $sConfigContent = str_replace('%db_port%', $_SESSION['db']['db_port'], $sConfigContent);
 
@@ -244,62 +244,53 @@ class InstallController extends Controller
                                         {
                                             @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
 
-                                            echo '<div style="text-align:center"><p>' . $LANG['wait_importing_database'] . '</p>
-                                            <p><img src="data:image/gif;base64,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" alt="' . $LANG['loading'] . '" /></p>
-                                            </div>';
-
-                                            /***** Execute the SQL files *****/
-
-                                            /*** Game ***/
-                                            // We need to install the Game before the Core SQL for foreign keys that work are correct.
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_SchemaGame.sql');
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_DataGame.sql');
-
-                                            /*** Core ***/
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_installCore.sql');
-
-                                            // --- GeoIp (exec_query_file() function executes these files only if they existens otherwise it does nothing) --- //
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCountry.sql');
-
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity.sql');
-
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity2.sql');
-
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity3.sql');
-
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity4.sql');
-
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity5.sql');
-
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity6.sql');
-
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity7.sql');
-
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoCity8.sql');
-
-                                            exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_geoState.sql');
-
-                                            // --- Execute this file if there is something --- //
-                                            if (filesize(PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_sampleData.sql') > 12)
+                                            if (!($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql' && version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRE_SQL_VERSION, '>=')))
                                             {
-                                                exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/pH7_sampleData.sql');
+                                                $aErrors[] = $LANG['require_mysql_version'];
                                             }
+                                            else
+                                            {
+                                                $aDumps = array(
+                                                    /*** Game ***/
+                                                    // We need to install the Game before the Core SQL for foreign keys that work are correct.
+                                                    'pH7_SchemaGame',
+                                                    'pH7_DataGame',
+                                                    /*** Core ***/
+                                                    'pH7_installCore',
+                                                    // --- GeoIp (exec_query_file() function executes these files only if they existens otherwise it does nothing) --- //
+                                                    'pH7_geoCountry',
+                                                    'pH7_geoCity',
+                                                    'pH7_geoCity2',
+                                                    'pH7_geoCity3',
+                                                    'pH7_geoCity4',
+                                                    'pH7_geoCity5',
+                                                    'pH7_geoCity6',
+                                                    'pH7_geoCity7',
+                                                    'pH7_geoCity8',
+                                                    'pH7_geoState',
+                                                    // --- Execute this file if there is something --- //
+                                                    'pH7_sampleData'
+                                                );
 
-                                            unset($DB);
+                                                for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++)
+                                                    exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/' . $aDumps[$i] . '.sql');
 
-                                            /** Checks if the games are not already installed **/
-                                            if (!$this->_isGameInstalled())
-                                                $this->_downloadGame();
+                                                unset($DB);
 
-                                            $_SESSION['step4'] = 1;
-                                            unset($_SESSION['value']);
+                                                /** Check if the games are not already installed **/
+                                                if (!$this->_isGameInstalled())
+                                                    $this->_downloadGame();
 
-                                            redirect(PH7_URL_SLUG_INSTALL . 'config_site');
+                                                $_SESSION['step4'] = 1;
+                                                unset($_SESSION['value']);
+
+                                                redirect(PH7_URL_SLUG_INSTALL . 'config_site');
+                                            }
                                         }
                                     }
                                     catch (\PDOException $oE)
                                     {
-                                        $aErrors[] = $LANG['database_error'] . $oE->getMessage();
+                                        $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                                     }
                                 }
                                 else
@@ -346,7 +337,7 @@ class InstallController extends Controller
 
         if (empty($_SESSION['step5']))
         {
-            if (isset($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
+            if (!empty($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
             {
                 if ($_SESSION['status_license'] == 'success')
                 {
@@ -361,12 +352,10 @@ class InstallController extends Controller
                         $_SESSION['value']['admin_last_name'] = '';
                     }
 
-                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['config_site_submit']))
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_site_submit']))
                     {
                         foreach ($_POST as $sKey => $sValue)
-                        {
                             $_SESSION['value'][$sKey] = trim($sValue);
-                        }
 
                         if (filled_out($_POST))
                         {
@@ -394,7 +383,9 @@ class InstallController extends Controller
                                                         require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
 
                                                         // SQL EXECUTE
-                                                        $oSqlQuery = $DB->prepare('INSERT INTO ' . $_SESSION['db']['db_prefix'] . 'Admins' . ' (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, prefixSalt, suffixSalt) VALUES(1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :prefixSalt, :suffixSalt)');
+                                                        $oSqlQuery = $DB->prepare('INSERT INTO ' . $_SESSION['db']['db_prefix'] . 'Admins
+                                                        (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip, prefixSalt, suffixSalt)
+                                                        VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip, :prefixSalt, :suffixSalt)');
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
                                                         $sPrefixSalt = Framework\Util\Various::genRnd();
@@ -407,6 +398,7 @@ class InstallController extends Controller
                                                             'lastName'=> $_SESSION['value']['admin_last_name'],
                                                             'joinDate'=> $sCurrentDate,
                                                             'lastActivity' => $sCurrentDate,
+                                                            'ip' => client_ip(),
                                                             'prefixSalt' => $sPrefixSalt,
                                                             'suffixSalt' => $sSuffixSalt
                                                         ));
@@ -433,7 +425,7 @@ class InstallController extends Controller
                                                     }
                                                     catch (\PDOException $oE)
                                                     {
-                                                        $aErrors[] = $LANG['database_error'] . $oE->getMessage();
+                                                        $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                                                     }
                                                 }
                                                 else
@@ -532,9 +524,9 @@ class InstallController extends Controller
         {
             // Send email for finish instalation.
             $aParams = array(
-              'to' => $_SESSION['value']['admin_login_email'],
-              'subject' => $LANG['title_email_finish_install'],
-              'body' => $LANG['content_email_finish_install']
+                'to' => $_SESSION['value']['admin_login_email'],
+                'subject' => $LANG['title_email_finish_install'],
+                'body' => $LANG['content_email_finish_install']
             );
             send_mail($aParams);
         }
@@ -552,17 +544,27 @@ class InstallController extends Controller
         // and we delete the cookie value locally to avoid using it by mistake in following our script.
         unset($_COOKIE[$sCookieName]);
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirm_remove_install']))
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['confirm_remove_install']))
         {
             remove_install_dir();
-            header('Location: ' . PH7_URL_ROOT);
+            exit(header('Location: ' . PH7_URL_ROOT));
         }
 
         $this->view->assign('sept_number', 6);
         $this->view->display('finish.tpl');
     }
 
-    /***** Checks if the games are installed *****/
+    /***** Get the loading image *****/
+    private function _loadImg()
+    {
+        global $LANG;
+
+        return '<div style="text-align:center"><p>' . $LANG['wait_importing_database'] . '</p>
+        <p><img src="data:image/gif;base64,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" alt="' . $LANG['loading'] . '" /></p>
+        </div>';
+    }
+
+    /***** Check if the games are installed *****/
     private function _isGameInstalled ()
     {
         return (is_dir($this->_sGamePath . 'file') && is_dir($this->_sGamePath . 'img/thumb'));
@@ -580,7 +582,7 @@ class InstallController extends Controller
         unlink($this->_sGamePath . $sGameTmpFile);
     }
 
-    /***** Checks Download Server and checks if the games are not already installed *****/
+    /***** Check Download Server and check if the games are not already installed *****/
     private function _checkDownloadServer ()
     {
         if ($this->_isGameInstalled()) return true; // Games are already installed.

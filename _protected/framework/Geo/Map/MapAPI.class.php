@@ -19,12 +19,13 @@ use PH7\Framework\Config\Config;
 * ----------------- Modification SORIA Pierre-Henry ----------------- *
 *
 * @author          SORIA Pierre-Henry <ph7software@gmail.com>
-* @copyright       (c) 2011 - 2012  SORIA Pierre-Henry, All right reserved
-* @version         last version 06/29/2012
+* @copyright       (c) 2011-2013, SORIA Pierre-Henry, All Rights Reserved.
+* @version         Last update 08/30/2013
 * @package         pH7 Dating CMS
 */
 
-class MapAPI {
+class MapAPI
+{
 
     /** GoogleMap ID for the HTML DIV  **/
     protected $googleMapId = 'googlemapapi';
@@ -356,22 +357,19 @@ class MapAPI {
 
     public function getMap()
     {
-         if($this->bCompressor) {
-            $oCompress = new \PH7\Framework\Compress\Compress();
-            $this->content = $oCompress->parseJs($this->content);
-            unset($oCompress);
-         }
+        if ($this->bCompressor)
+            $this->content = (new \PH7\Framework\Compress\Compress)->parseJs($this->content);
 
-          $returnContent = '';
-           $returnContent .= '<script src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$this->lang.'"></script>';
-            // Clusterer JS
-        if ($this->useClusterer == true) {
-           $returnContent .= '<script src="'.$this->clustererLibraryPath.'"></script>';
-        }
-           $returnContent .= '<script>'.$this->content.'</script>';
+        $returnContent = '';
+        $returnContent .= '<script src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$this->lang.'"></script>';
+        // Clusterer JS
+        if ($this->useClusterer == true)
+            $returnContent .= '<script src="'.$this->clustererLibraryPath.'"></script>';
 
-         // Geo Map DIV
-         $sStyle = (($this->width != '') && ($this->height != '')) ? ' style="width:'.$this->width.';height:'.$this->height.'" ' : ' ';
+        $returnContent .= '<script>'.$this->content.'</script>';
+
+        // Geo Map DIV
+        $sStyle = (($this->width != '') && ($this->height != '')) ? ' style="width:'.$this->width.';height:'.$this->height.'" ' : ' ';
 
         $returnContent .= '<div id="'. $this->googleMapId.'"' . $sStyle . 'class="map"></div>';
         return $returnContent;
@@ -429,11 +427,10 @@ class MapAPI {
         $encodeAddress = urlencode($this->withoutSpecialChars($address));
         $url = 'http://maps.google.com/maps/geo?q=' . $encodeAddress . '&output=csv';
 
-        if (function_exists('curl_init')) {
+        if (function_exists('curl_init'))
             $data = $this->getContent($url);
-        } else {
+        else
             $data = file_get_contents($url);
-        }
 
         $csvSplit = preg_split("/,/", $data);
         $status = $csvSplit[0];
@@ -462,9 +459,8 @@ class MapAPI {
 
     public function addMarkerByCoords($lat, $lng, $title, $html = '', $category = '', $icon = '')
     {
-        if ($icon == '') {
+        if ($icon == '')
             $icon = 'http://maps.gstatic.com/intl/fr_ALL/mapfiles/markers/marker_sprite.png';
-        }
 
         // Save the lat/lon to enable the automatic center/zoom
         $this->maxLng = (float)max((float)$lng, $this->maxLng);
@@ -568,51 +564,55 @@ class MapAPI {
     }
 
     /**
-     * @desc Add the method JS Map openInfoWindowHtml
+     * Add the openInfoWindowHtml method in JS Map.
      *
      * @param int $point (mandatory)
-     * @param string $string (facultative) Optional only if the following parameters are used, if $ string is mandatory
-     * @param string $link (facultative)
-     * @param string $icon (facultative)
-     * @param string $title (facultative) For the "a" tag or the "img" tag if used
-     * @param string $alt (facultative)
+     * @param string $string (optional) Optional only if the following parameters are used, otherwise it is mandatory.
+     * @param string $link (optional)
+     * @param string $icon (optional)
+     * @param string $title (optional) For the "a" tag or "img" tag if they are used.
+     * @param string $alt (optional)
      * @return void
      */
 
     public function addOpenInfoWindowHtml($point, $string = '', $link = '', $icon = '', $title = '', $alt = '')
     {
-            if($string !== '') {
-                $string+= '<br />';
-            }
-            if($link !== '') {
-                $href = '<a href="'.$link.'"';
-             }
-             if($icon === '') {
-                 if($title != '') {
-                    $href .= 'title="'.$title.'"';
-                }
-              $href .= '</a>';
-             }
-            if($icon !== '') {
-                 $img ='<br /><img src="'.$img.'" alt="'.$alt.'"';
-               if($title !== '') {
-                 $img .= 'title="'.$title.'"';
-               }
-                $img .= ' />';
-              if($link !== '') {
-                  $img.= '</a>';
-              }
-            }
+        if ($string !== '')
+            $string .= '<br />';
 
-            $this->openInfoWindowHtml = '
-            var point = new GLatLng('.$point.');
-            var marker = new GMarker(point);
-            var window = function() {
-            marker.openInfoWindowHtml(
-            '.$string.$href.$img.')
-            );
-          };
-                GEvent.addListener(marker, "click", window);';
+        if ($link !== '')
+        {
+            $href = '<a href="' . $link . '"';
+
+            if ($title !== '')
+                $href .= ' title="' . $title . '"';
+
+            $href .= '>';
+
+            if ($icon === '')
+                $href .= ($title !== '' ? $title : $link) . '</a>';
+        }
+
+        if ($icon !== '')
+        {
+            $img = '<br /><img src="' . $img . '" alt="' . $alt . '"';
+
+            if ($title !== '')
+                $img .= ' title="' . $title . '"';
+
+            $img .= ' />';
+
+            if ($link !== '')
+                  $img .= '</a>';
+        }
+
+        $this->openInfoWindowHtml = '
+        var point = new GLatLng(' . $point . ');
+        var marker = new GMarker(point);
+        var window = function() {
+            marker.openInfoWindowHtml(' . $string . $href . $img . ');
+        };
+        GEvent.addListener(marker, "click", window);';
     }
 
     /**
@@ -705,7 +705,7 @@ class MapAPI {
         $this->content .= "\t\t\t\t" . 'if (status == google.maps.GeocoderStatus.OK) {' . "\n";
         $this->content .= "\t\t\t\t" . 'map.setCenter(results[0].geometry.location);' . "\n";
         $this->content .= "\t\t\t\t" . '} else {' . "\n";
-        $this->content .= "\t\t\t\t" . 'alert("Oops! Geo Map was not successful for the following reason: " + status);' . "\n";
+        $this->content .= "\t\t\t\t" . 'alert("' . t('Oops! Geo Map was not successful for the following reason:') . '" + status);' . "\n";
         $this->content .= "\t\t\t\t" . '}' . "\n";
         $this->content .= "\t\t\t" . '});' . "\n";
         $this->content .= "\t\t" . '}' . "\n";
@@ -779,9 +779,8 @@ class MapAPI {
         $this->content .= "\t\t" . 'ctaLayer.setMap(map);' . "\n";
         $this->content .= "\t" . '}' . "\n";
         // openInfoWindowHtml
-        if($this->openInfoWindowHtml != '') {
-          $this->content .= "\t" . $this->openInfoWindowHtml;
-        }
+        if (!empty($this->openInfoWindowHtml))
+            $this->content .= "\t" . $this->openInfoWindowHtml;
     }
 
     public function generate()

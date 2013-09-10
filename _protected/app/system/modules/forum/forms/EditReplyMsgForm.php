@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\Http;
 
 class EditReplyMsgForm
 {
@@ -17,12 +17,12 @@ class EditReplyMsgForm
         if (isset($_POST['submit_edit_reply_msg']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit_reply_msg']))
-                new EditReplyMsgFormProcessing();
+                new EditReplyMsgFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oHttpRequest = new HttpRequest;
+        $oHttpRequest = new Http;
         $oMsg = (new ForumModel)->getMessage($oHttpRequest->get('topic_id'), $oHttpRequest->get('message_id'), (new Session)->get('member_id'), 1, 0, 1);
         unset($oHttpRequest);
 

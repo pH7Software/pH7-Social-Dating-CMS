@@ -10,5 +10,5 @@ Please visit our website for our software or contact us by email if you have any
 Best regards,
 The pH7 developers team of this open source dating community software.
 
-===== Email Contact =====
-ph7software@gmail.com
+===== Contact Email =====
+ph7software {AT} gmail {DOT} com

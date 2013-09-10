@@ -55,7 +55,7 @@ class Design extends \PH7\Framework\Layout\Html\Design
      *
      * @param integer $iWidth
      * @param integer $iHeight
-     * @param boolean $bOnlyActive Default: TRUE
+     * @param boolean $bOnlyActive Default TRUE
      * @return object Query
      */
     public function ads($iWidth, $iHeight, $bOnlyActive = true)
@@ -87,7 +87,7 @@ class Design extends \PH7\Framework\Layout\Html\Design
     /**
      * Analytics API code.
      *
-     * @param boolean $bPrint Echo the analytics HTML code. Default TRUE.
+     * @param boolean $bPrint Print the analytics HTML code. Default TRUE.
      * @param boolean $bOnlyActive Only active code. Default TRUE
      * @return mixed (string | void)
      */
@@ -142,7 +142,7 @@ class Design extends \PH7\Framework\Layout\Html\Design
      * Get CSS/JS files in their HTML tags.
      *
      * @param string $sType  Choose between 'css' and 'js'.
-     * @param boolean $bOnlyActive Default: TRUE
+     * @param boolean $bOnlyActive Default TRUE
      * @return void HTML output.
      */
     public function files($sType, $bOnlyActive = true)

@@ -21,7 +21,6 @@ class Spam
      *
      * @param string $sText1
      * @param string $sText2
-
      * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public static function detectDuplicate($sText1, $sText2)

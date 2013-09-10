@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class ShareUrlCoreForm
 {
@@ -18,7 +18,7 @@ class ShareUrlCoreForm
      */
     public static function display($sUrl = null)
     {
-        $sUrl = (!empty($sUrl)) ? $sUrl : (new HttpRequest)->currentUrl();
+        $sUrl = (!empty($sUrl)) ? $sUrl : (new Http)->currentUrl();
 
         $oForm = new \PFBC\Form('form_share_url', 300);
         $oForm->configure(array('class' => 'center'));

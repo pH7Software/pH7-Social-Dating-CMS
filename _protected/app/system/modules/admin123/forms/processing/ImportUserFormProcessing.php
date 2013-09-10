@@ -16,7 +16,7 @@ use
 PH7\Framework\Util\Various,
 PH7\Framework\Security\Validate\Validate,
 PH7\Framework\Ip\Ip,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class ImportUserFormProcessing extends Form
@@ -138,7 +138,7 @@ class ImportUserFormProcessing extends Form
         unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aTmpData, $aData);
         fclose($rHandler);
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse'), nt('%n% User has been successfully added.', '%n% Users has been successfully added.', $iRow));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), nt('%n% User has been successfully added.', '%n% Users has been successfully added.', $iRow));
     }
 
     /**

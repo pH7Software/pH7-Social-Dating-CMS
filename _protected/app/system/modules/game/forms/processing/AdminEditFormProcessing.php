@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class AdminEditFormProcessing extends Form
 {
@@ -31,7 +31,7 @@ class AdminEditFormProcessing extends Form
         /* Clean GameModel Cache */
         (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
 
-         HeaderUrl::redirect(UriRoute::get('game', 'main', 'index'), t('The game has been updated successfully!'));
+         HeaderUrl::redirect(Uri::get('game', 'main', 'index'), t('The game has been updated successfully!'));
 
     }
 

@@ -10,7 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
@@ -32,34 +32,34 @@ class LoginFormProcessing extends Form
         $iMaxAttempts = (int) DbConfig::getSetting('maxUserLoginAttempts');
         $iTimeDelay = (int) DbConfig::getSetting('loginUserAttemptTime');
 
-
         if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view))
         {
             \PFBC\Form::setError('form_login_user', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }
 
-        $sLogin = $oUserModel->login($sEmail, $sPassword);
         // Check Login
-        if ($sLogin === 'email_does_not_exist')
+        $sLogin = $oUserModel->login($sEmail, $sPassword);
+        if ($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist')
         {
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
 
-            $this->session->set('captcha_enabled',1); // Enable Captcha
-            \PFBC\Form::setError('form_login_user', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
-            $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username');
-        }
-        elseif ($sLogin === 'password_does_not_exist')
-        {
-            $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password');
+            if ($sLogin === 'email_does_not_exist')
+            {
+                $this->session->set('captcha_enabled',1); // Enable Captcha
+                \PFBC\Form::setError('form_login_user', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
+                $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username');
+            }
+            elseif ($sLogin === 'password_does_not_exist')
+            {
+                $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password');
 
-            if ($bIsLoginAttempt)
-                $oSecurityModel->addLoginAttempt();
+                if ($bIsLoginAttempt)
+                    $oSecurityModel->addLoginAttempt();
 
-            sleep(1); // Security against brute-force attack to avoid drowning the server and the database
-
-            $this->session->set('captcha_enabled',1); // Enable Captcha
-            \PFBC\Form::setError('form_login_user', t('Oops! This password you entered is incorrect.<br /> Please try again (make sure your caps lock is off).<br /> Forgot your password? <a href="%0%">Request a new one</a>.', UriRoute::get('user','main','forgot')));
+                $this->session->set('captcha_enabled',1); // Enable Captcha
+                \PFBC\Form::setError('form_login_user', t('Oops! This password you entered is incorrect.<br /> Please try again (make sure your caps lock is off).<br /> Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('user','main','forgot')));
+            }
         }
         else
         {
@@ -84,7 +84,7 @@ class LoginFormProcessing extends Form
             else
             {
                 $oUser->setAuth($oUserModel, $this->session, $oUserData);
-                HeaderUrl::redirect(UriRoute::get('user','account','index'), t('You signup is successfully!'));
+                HeaderUrl::redirect(Uri::get('user','account','index'), t('You signup is successfully!'));
             }
         }
     }

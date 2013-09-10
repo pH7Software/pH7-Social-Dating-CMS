@@ -20,7 +20,7 @@
                             <th>{lang 'URL'}</th>
                             <th>{lang 'Priority'}</th>
                             <th>{lang 'Change Frequency'}</th>
-                            <th>{lang 'LastChange (GMT)'}</th>
+                            <th>{lang 'Last Change (UTC)'}</th>
                         </tr>
                         <xsl:variable name="alpha_lower" select="'abcdefghijklmnopqrstuvwxyz'"/>
                         <xsl:variable name="alpha_upper" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>

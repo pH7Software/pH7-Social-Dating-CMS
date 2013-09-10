@@ -7,12 +7,12 @@
  * @package        Install
  * @file           requirements
  * @author         Pierre-Henry Soria
- * @email          <webmaster.soria@gmail.com>
+ * @email          <ph7software@gmail.com>
  * @copyright      (c) 2011-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license        Lesser General Public License (LGPL) (http://www.gnu.org/copyleft/lesser.html)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25
- * @version        Last revision: 2013/07/30
+ * @version        Last revision: 2013/09/14
  */
 
 defined('PH7') or exit('Restricted access');
@@ -27,13 +27,22 @@ function is_mod_rewrite()
     if (function_exists('apache_get_modules'))
     {
         // If PHP is installed as mod_php
-        $aMods = apache_get_modules();
-        $bIsRewrite = in_array('mod_rewrite', $aMods);
+        $bIsRewrite = in_array('mod_rewrite', apache_get_modules());
     }
     else
     {
         // If PHP is installed as CGI
-        $bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on');
+        if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
+        {
+            $sOutputMsg = 'mod_rewrite Works!';
+
+            if (!empty($_GET['a']) && $_GET['a'] == 'test_mod_rewrite')
+                exit($sOutputMsg);
+
+            $sPage = @file_get_contents(PH7_URL_INSTALL . 'test_mod_rewrite');
+
+            $bIsRewrite = ($sPage == $sOutputMsg);
+        }
     }
 
     return $bIsRewrite;
@@ -42,14 +51,14 @@ function is_mod_rewrite()
 
 $aErrors = array();
 
-if (version_compare(PHP_VERSION, PH7_REQUIRE_VERSION, '<') === true)
-    $aErrors[] = 'Your PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_VERSION . ' or newer.';
+if (version_compare(PHP_VERSION, PH7_REQUIRE_SERVER_VERSION, '<'))
+    $aErrors[] = 'Your PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.';
 
 if (!is_mod_rewrite())
-    $aErrors[] = 'Please install Apache mod_rewrite module.';
+    $aErrors[] = 'Please install Apache "mod_rewrite" module.';
 
-if (!extension_loaded ('pdo'))
-    $aErrors[] = 'Please install PDO PHP extension.';
+if (!extension_loaded ('pdo_mysql'))
+    $aErrors[] = 'Please install "PDO" PHP extension with MySQL driver.';
 
 if (!extension_loaded('zip'))
     $aErrors[] = 'Please install "Zip" compression PHP extension.';

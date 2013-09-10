@@ -8,13 +8,18 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Security\Validate\Validate, PH7\Framework\Mvc\Model\DbConfig;
+
 class EditFormProcessing extends Form
 {
+
+    private $bIsErr = false;
 
     public function __construct()
     {
         parent::__construct();
 
+        $oValidate = new Validate;
         $oAdminModel = new AdminModel;
         // Prohibit other administrators to edit the Root Administrator (ID 1)
         $iProfileId = ($this->httpRequest->getExists('profile_id') && $this->httpRequest->get('profile_id', 'int') !== 1) ? $this->httpRequest->get('profile_id', 'int') : $this->session->get('admin_id');
@@ -22,16 +27,35 @@ class EditFormProcessing extends Form
 
         if (!$this->str->equals($this->httpRequest->post('username'), $oAdmin->username))
         {
-            $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $iProfileId, 'Admins');
-            $this->session->set('admin_username', $this->httpRequest->post('username'));
+            $iMinUsernameLength = DbConfig::getSetting('minUsernameLength');
+            $iMaxUsernameLength = DbConfig::getSetting('maxUsernameLength');
 
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'username' . $iProfileId . 'Admins', null)->clear();
+            if (!$oValidate->username($this->httpRequest->post('username'), $iMinUsernameLength, $iMaxUsernameLength))
+            {
+                \PFBC\Form::setError('form_admin_edit_account', t('Your username has to contain from %0% to %1% characters, your username is not available or your username already used by other admin.', $iMinUsernameLength, $iMaxUsernameLength));
+                $this->bIsErr = true;
+            }
+            else
+            {
+                $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $iProfileId, 'Admins');
+                $this->session->set('admin_username', $this->httpRequest->post('username'));
+
+                (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'username' . $iProfileId . 'Admins', null)->clear();
+            }
         }
 
         if (!$this->str->equals($this->httpRequest->post('mail'), $oAdmin->email))
         {
-            $oAdminModel->updateProfile('email', $this->httpRequest->post('mail'), $iProfileId, 'Admins');
-            $this->session->set('admin_email', $this->httpRequest->post('mail'));
+            if ((new ExistsCoreModel)->email($this->httpRequest->post('mail')))
+            {
+                \PFBC\Form::setError('form_admin_edit_account', t('Invalid email address or this email is already used by another admin.'));
+                $this->bIsErr = true;
+            }
+            else
+            {
+                $oAdminModel->updateProfile('email', $this->httpRequest->post('mail'), $iProfileId, 'Admins');
+                $this->session->set('admin_email', $this->httpRequest->post('mail'));
+            }
         }
 
         if (!$this->str->equals($this->httpRequest->post('first_name'), $oAdmin->firstName))
@@ -57,11 +81,12 @@ class EditFormProcessing extends Form
 
         $oAdminModel->setLastEdit($iProfileId, 'Admins');
 
-        unset($oAdminModel, $oAdmin);
+        unset($oValidate, $oAdminModel, $oAdmin);
 
         (new Admin)->clearReadProfileCache($iProfileId, 'Admins');
 
-        \PFBC\Form::setSuccess('form_edit_account', t('Your profile has been saved successfully!'));
+        if (!$this->bIsErr)
+            \PFBC\Form::setSuccess('form_admin_edit_account', t('Your profile has been saved successfully!'));
     }
 
 }

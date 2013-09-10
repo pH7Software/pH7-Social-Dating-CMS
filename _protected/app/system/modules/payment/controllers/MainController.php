@@ -101,7 +101,8 @@ class MainController extends Controller
                     }
                 }
                 unset($oPayPal);
-            } break;
+            }
+            break;
 
             case '2co':
             {
@@ -118,13 +119,15 @@ class MainController extends Controller
                     }
                 }
                 unset($o2CO);
-            } break;
+            }
+            break;
 
             case 'ccbill':
             {
                 // In developing...
                 // Contact us at <developers.ph7software@gmail.com> if you want to help us develop the payment system CCBill
-            } break;
+            }
+            break;
 
             default:
                 $this->displayPageNotFound(t('Provinder Not Found!'));

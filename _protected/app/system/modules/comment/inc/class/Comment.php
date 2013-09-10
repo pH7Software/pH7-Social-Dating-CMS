@@ -17,34 +17,34 @@ class Comment extends CommentCore
      */
     public static function getTable($sTable)
     {
-        switch($sTable)
+        switch ($sTable)
         {
             case 'Profile':
-              $sNewTable = 'Members';
+                $sNewTable = 'Members';
             break;
 
             case 'Picture':
-              $sNewTable = 'Pictures';
+                $sNewTable = 'Pictures';
             break;
 
             case 'Video':
-              $sNewTable = 'Videos';
+                $sNewTable = 'Videos';
             break;
 
             case 'Blog':
-              $sNewTable = 'Blogs';
+                $sNewTable = 'Blogs';
             break;
 
             case 'Note':
-              $sNewTable = 'Notes';
+                $sNewTable = 'Notes';
             break;
 
             case 'Game':
-              $sNewTable = 'Games';
+                $sNewTable = 'Games';
             break;
 
             default:
-              Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
+                Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
         }
 
         return $sNewTable;

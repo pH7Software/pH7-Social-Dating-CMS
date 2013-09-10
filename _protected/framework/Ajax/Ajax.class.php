@@ -1,8 +1,6 @@
 <?php
 /**
- * @title Ajax Class
- *
- * Ajax Helper Class.
+ * @title            Ajax Helper Class
  *
  * @author           Pierre-Henry SORIA <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.

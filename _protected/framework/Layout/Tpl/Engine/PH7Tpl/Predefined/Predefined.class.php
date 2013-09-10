@@ -3,7 +3,7 @@
  * @title            PH7 Template Engine
  * @desc             Main Predefined Abstract Class
  *
- * @updated          The Last Update 07/31/12 23:22 (Greenwich Mean Time)
+ * @updated          Last Update 09/14/13 23:22
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
@@ -24,7 +24,6 @@ abstract class Predefined
     protected $sCode, $sLeftDelim = '{', $sRightDelim = '}';
 
     /**
-     * @access public
      * @param string $sCode
      * @return void
      */
@@ -44,6 +43,7 @@ abstract class Predefined
      */
     protected function addVar($sKey, $sValue, $bPrint = true)
     {
+        $this->sCode = str_replace('$' . $sKey, $sValue, $this->sCode);
         $this->sCode = str_replace($this->sLeftDelim . $sKey . $this->sRightDelim, static::PHP_OPEN . ($bPrint ? static::WRITE : '') . $sValue . static::PHP_CLOSE, $this->sCode);
     }
 
@@ -63,7 +63,6 @@ abstract class Predefined
     /**
      * Gets the parsed variables.
      *
-     * @access public
      * @return string
      */
     public function get()
@@ -72,8 +71,7 @@ abstract class Predefined
     }
 
     /**
-     * @access public
-     * @return this object
+     * @return object this
      */
     abstract public function assign();
 

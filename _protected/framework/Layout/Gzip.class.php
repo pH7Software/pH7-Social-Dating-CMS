@@ -15,10 +15,10 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\File\File,
+PH7\Framework\Config\Config,
 PH7\Framework\Navigation\Browser,
-PH7\Framework\Mvc\Request\HttpRequest,
 PH7\Framework\Http\Http,
-PH7\Framework\Config\Config;
+PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Gzip
 {

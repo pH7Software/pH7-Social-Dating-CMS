@@ -13,6 +13,8 @@
 namespace PH7\Framework\Http\Rest;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+
 class Rest extends \PH7\Framework\Http\Http
 {
 
@@ -57,16 +59,16 @@ class Rest extends \PH7\Framework\Http\Http
     {
         switch ($this->get_request_method())
         {
-            case 'POST':
+            case HttpRequest::METHOD_POST:
                 $this->_aRequest = $this->_cleanInputs($_POST);
             break;
 
-            case 'GET':
-            case 'DELETE':
+            case HttpRequest::METHOD_GET:
+            case HttpRequest::METHOD_DELETE:
                 $this->_aRequest = $this->_cleanInputs($_GET);
             break;
 
-            case 'PUT':
+            case HttpRequest::METHOD_PUT:
                 parse_str($this->getInput(), $this->_aRequest);
                 $this->_aRequest = $this->_cleanInputs($this->_aRequest);
             break;

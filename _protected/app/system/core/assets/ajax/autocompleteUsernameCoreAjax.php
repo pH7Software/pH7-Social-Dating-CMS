@@ -15,12 +15,12 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Layout\Html\Design,
 PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Request\HttpRequest;
+PH7\Framework\Mvc\Request\Http;
 
 // Only for members
 if(UserCore::auth())
 {
-    $oHttpRequest = new HttpRequest;
+    $oHttpRequest = new Http;
 
     if($oHttpRequest->postExists('username'))
     {

@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class UpdateAdsFormProcessing extends Form
 {
@@ -18,7 +18,7 @@ class UpdateAdsFormProcessing extends Form
         parent::__construct();
 
         $sTable = AdsCore::getTable();
-        (new AdsCoreModel)->update($this->httpRequest->post('id_ads'), $this->httpRequest->post('title'), $this->httpRequest->post('code', HttpRequest::NO_CLEAN), $sTable);
+        (new AdsCoreModel)->update($this->httpRequest->post('id_ads'), $this->httpRequest->post('title'), $this->httpRequest->post('code', Http::NO_CLEAN), $sTable);
 
         /* Clean Model\Design for STATIC data */
         (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear();

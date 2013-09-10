@@ -13,7 +13,7 @@
 namespace PH7\Framework\Security\Validate;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Str\Str;
+use PH7\Framework\Str\Str, PH7\Framework\Security\Ban\Ban;
 
 class Validate
 {
@@ -189,7 +189,7 @@ class Validate
     {
          $sUsername = trim($sUsername);
 
-         return (preg_match('#^'.PH7_USERNAME_PATTERN.'{'.$iMin.','.$iMax.'}$#', $sUsername) && !is_file(PH7_PATH_ROOT . $sUsername . PH7_PAGE_EXT) && !\PH7\Framework\Security\Ban\Ban::isUsername($sUsername) && !(new \PH7\ExistsCoreModel)->username($sUsername, $sTable));
+         return (preg_match('#^'.PH7_USERNAME_PATTERN.'{'.$iMin.','.$iMax.'}$#', $sUsername) && !is_file(PH7_PATH_ROOT . $sUsername . PH7_PAGE_EXT) && !Ban::isUsername($sUsername) && !(new \PH7\ExistsCoreModel)->username($sUsername, $sTable));
     }
 
     /**
@@ -217,12 +217,13 @@ class Validate
     {
         $sEmail = filter_var($sEmail, FILTER_SANITIZE_EMAIL);
 
-        if($bRealHost) {
+        if($bRealHost)
+        {
             $sEmailHost = substr(strrchr($sEmail, '@'), 1);
             // This function now works with Windows since version PHP 5.3, so we must not include the PEAR NET_DNS library.
             if( !(checkdnsrr($sEmailHost, 'MX') && checkdnsrr($sEmailHost, 'A')) ) return false;
         }
-        return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) && $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH);
+        return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) && $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail));
     }
 
 
@@ -302,12 +303,12 @@ class Validate
     /**
      * Validate international phone numbers in EPP format.
      *
-     * @param string $sPhone
+     * @param string $sNumber
      * @return boolean
      */
-    public function phone($sPhone)
+    public function phone($sNumber)
     {
-        return preg_match('#^'.\PH7\Framework\Config\Config::getInstance()->values['validate']['phone.pattern'].'$#', $sPhone);
+        return preg_match('#^'.\PH7\Framework\Config\Config::getInstance()->values['validate']['phone.pattern'].'$#', $sNumber);
     }
 
     /*

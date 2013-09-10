@@ -15,7 +15,7 @@ use
 PH7\Framework\Image\Image,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class PictureFormProcessing extends Form
@@ -112,7 +112,7 @@ class PictureFormProcessing extends Form
         $sModerationText = t('Your photo(s) has been received! But it will be visible once approved by our moderators. Please do not send a new photo(s) because this is useless!');
         $sText =  t('Your photo(s) has been added successfully!');
         $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
-        HeaderUrl::redirect(UriRoute::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
+        HeaderUrl::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
     }
 
 }

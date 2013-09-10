@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\Http;
 
 class Mail
 {
@@ -22,7 +22,7 @@ class Mail
 
         /** Instance objects for the class * */
         $this->_oSession = new Session;
-        $this->_oHttpRequest = new HttpRequest;
+        $this->_oHttpRequest = new Http;
         $this->_oMailModel = new MailModel;
 
         switch ($this->_oHttpRequest->post('type'))

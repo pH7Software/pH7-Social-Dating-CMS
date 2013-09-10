@@ -9,9 +9,9 @@ namespace PH7;
 defined('PH7') or die('Restricted access');
 
 use
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Url\HeaderUrl,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class EditAdminBlogFormProcessing extends Form
 {
@@ -41,13 +41,13 @@ class EditAdminBlogFormProcessing extends Form
             }
         }
 
-        if(!$this->str->equals($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN), $oPost->categoryId))
+        // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+        // and damages the SET function SQL for entry into the database.
+        if(!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId))
         {
             $oBlogModel->deleteCategory($iBlogId);
 
-            // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
-            // and damages the SET function SQL for entry into the database.
-            foreach($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId)
+            foreach($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
                 $oBlogModel->addCategory($iCategoryId, $iBlogId);
         }
 
@@ -57,9 +57,9 @@ class EditAdminBlogFormProcessing extends Form
         if(!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oBlogModel->updatePost('title', $this->httpRequest->post('title'), $iBlogId);
 
-        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN
-        if(!$this->str->equals($this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), $oPost->content))
-            $oBlogModel->updatePost('content', $this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), $iBlogId);
+        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN
+        if(!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content))
+            $oBlogModel->updatePost('content', $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $iBlogId);
 
         if(!$this->str->equals($this->httpRequest->post('lang_id'), $oPost->langId))
             $oBlogModel->updatePost('langId', $this->httpRequest->post('lang_id'), $iBlogId);
@@ -98,7 +98,7 @@ class EditAdminBlogFormProcessing extends Form
         /* Clean BlogModel Cache */
         (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(UriRoute::get('blog', 'main', 'read', $sPostId),  t('Your post has been saved successfully!'));
+        HeaderUrl::redirect(Uri::get('blog', 'main', 'read', $sPostId),  t('Your post has been saved successfully!'));
     }
 
 }
