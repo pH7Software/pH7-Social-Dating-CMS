@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class EditAlbumFormProcessing extends Form
 {
@@ -23,7 +23,7 @@ class EditAlbumFormProcessing extends Form
         /* Clean VideoModel Cache */
         (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(UriRoute::get('video', 'main', 'albums', $this->session->get('member_username'), $iAlbumId), t('Your album has been updated successfully!'));
+        HeaderUrl::redirect(Uri::get('video', 'main', 'albums', $this->session->get('member_username'), $iAlbumId), t('Your album has been updated successfully!'));
     }
 
 }

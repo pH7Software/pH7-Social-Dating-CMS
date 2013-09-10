@@ -2,7 +2,7 @@
 
   <div class="design-box">
     <h2>{lang 'Search Blog Posts'}</h2>
-    {{ SearchBlogForm::display(168) }}
+    {{ SearchBlogForm::display(PH7_WIDTH_SEARCH_FORM) }}
   </div>
 
   <div class="design-box">

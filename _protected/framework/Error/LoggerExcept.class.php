@@ -28,10 +28,10 @@ final class LoggerExcept extends Logger
         {
             \PH7\Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
         }
-        catch(\PH7\Framework\Mvc\Model\Engine\Exception $oE)
+        catch (\PH7\Framework\Mvc\Model\Engine\Exception $oE)
         {
             // If we are not in development mode, we display an error message to avoid showing information on the database.
-            if(!Debug::is()) exit('Could not connect to database server!');
+            if (!Debug::is()) exit('Could not connect to database server!');
         }
 
         parent::__construct();
@@ -70,14 +70,15 @@ final class LoggerExcept extends Logger
 
         // Encode the line
         $sContents = json_encode($aLog) . File::EOL . File::EOL . File::EOL;
-        switch($this->config->values['logging']['log_handler'])
+        switch ($this->config->values['logging']['log_handler'])
         {
             case 'file':
+            {
                 $sFullFile = $this->sDir . static::EXCEPT_DIR . $this->sFileName . '.json';
                 $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
 
                 // If the log file is larger than 5 Mo then it compresses it into gzip
-                if(file_exists($sFullFile) && filesize($sFullFile) >= 5 * 1024 * 1024)
+                if (file_exists($sFullFile) && filesize($sFullFile) >= 5 * 1024 * 1024)
                 {
                     $rHandler = @gzopen($sFullGzipFile, 'a') or exit('Unable to write to log file gzip.');
                     gzwrite($rHandler, $sContents);
@@ -89,21 +90,26 @@ final class LoggerExcept extends Logger
                     fwrite($rHandler, $sContents);
                     fclose($rHandler);
                 }
+            }
             break;
 
             case 'database':
+            {
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('LogError') . 'VALUE (:line)');
                 $rStmt->execute(array(':ligne' => $sContents));
                 Db::free($rStmt);
+            }
             break;
 
             case 'email':
+            {
                 $aInfo = [
                     'to' => $this->config->values['logging']['bug_report_email'],
                     'subject' => t('Errors Reporting of the pH7 Framework')
                 ];
 
                 (new \PH7\Framework\Mail\Mail)->send($aInfo, $sContents, false);
+            }
             break;
 
             default:

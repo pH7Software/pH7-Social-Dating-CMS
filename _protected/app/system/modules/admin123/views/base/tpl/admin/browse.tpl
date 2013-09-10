@@ -1,4 +1,4 @@
-<form method="post" action="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}">
+<form method="post" action="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}">
   {{ $designSecurity->inputToken('admin_action') }}
 
   <table class="center">
@@ -43,7 +43,7 @@
           <td>{% $admin->email %}</td>
           <td>{% $admin->username %}</td>
           <td>{{ if(!empty($admin->name)) echo $admin->name }} &nbsp; {% $admin->firstName %}</td>
-          <td><a href="{% Framework\Ip\Ip::api($admin->ip) %}" title="{lang 'See information from this user IP'}" target="_blank">{% $admin->ip %}</a></td>
+          <td>{{ $design->ip($admin->ip) }}</td>
           <td>{% $dateTime->get($admin->joinDate)->dateTime() %}</td>
           <td>{if !empty($admin->lastActivity)} {% $dateTime->get($admin->lastActivity)->dateTime() %} {else} {lang 'No last login'} {/if}</td>
           <td>{if !empty($admin->lastEdit)} {% $dateTime->get($admin->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>

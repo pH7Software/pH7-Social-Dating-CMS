@@ -12,7 +12,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 {
 
-    const TB_PICTURE = 'Pictures', TB_VIDEO = 'Videos';
+    const TB_PICTURE = 'Pictures', TB_VIDEO = 'Videos', MAX_ITEMS = 800;
 
     public function getPicsVids($sTable, $sOrder, $iOffset, $iLimit)
     {
@@ -46,32 +46,32 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function getProfiles()
     {
-        return (new UserCoreModel)->getProfiles(UserCoreModel::LATEST, 0, 300);
+        return (new UserCoreModel)->getProfiles(UserCoreModel::LATEST, 0, static::MAX_ITEMS);
     }
 
     public function getBlogs()
     {
-        return (new BlogCoreModel)->getPosts(0, 300, SearchCoreModel::UPDATED);
+        return (new BlogCoreModel)->getPosts(0, static::MAX_ITEMS, SearchCoreModel::UPDATED);
     }
 
     public function getNotes()
     {
-        return (new NoteCoreModel)->getPosts(0, 300, SearchCoreModel::UPDATED);
+        return (new NoteCoreModel)->getPosts(0, static::MAX_ITEMS, SearchCoreModel::UPDATED);
     }
 
     public function getForums()
     {
-        return (new ForumCoreModel)->getForum(null, 0, 300, ForumCoreModel::UPDATED);
+        return (new ForumCoreModel)->getForum(null, 0, static::MAX_ITEMS, ForumCoreModel::UPDATED);
     }
 
     public function getForumsTopics()
     {
-        return $this->getForumsPosts(SearchCoreModel::CREATED, 0, 300);
+        return $this->getForumsPosts(SearchCoreModel::CREATED, 0, static::MAX_ITEMS);
     }
 
     public function getForumsMessages($iTopicId)
     {
-        return (new ForumCoreModel)->getMessage($iTopicId, null, null, 1, 0, 300, Db::DESC);
+        return (new ForumCoreModel)->getMessage($iTopicId, null, null, 1, 0, static::MAX_ITEMS, Db::DESC);
     }
 
     public function getCommentsProfiles()
@@ -106,57 +106,57 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function getRecipientCommentsProfiles($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, 500, 'Profile');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Profile');
     }
 
     public function getRecipientCommentsBlogs($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, 500, 'Blog');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Blog');
     }
 
     public function getRecipientCommentsNotes($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, 500, 'Note');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Note');
     }
 
     public function getRecipientCommentsPictures($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, 500, 'Picture');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Picture');
     }
 
     public function getRecipientCommentsVideos($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, 500, 'Video');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Video');
     }
 
     public function getRecipientCommentsGames($iRecipientId)
     {
-        return (new CommentCoreModel)->read($iRecipientId, 1, 0, 500, 'Game');
+        return (new CommentCoreModel)->read($iRecipientId, 1, 0, static::MAX_ITEMS, 'Game');
     }
 
     public function getAlbumsPictures()
     {
-        return (new PictureCoreModel)->album(null, null, 1, 0, 300, SearchCoreModel::CREATED);
+        return (new PictureCoreModel)->album(null, null, 1, 0, static::MAX_ITEMS, SearchCoreModel::CREATED);
     }
 
     public function getPictures()
     {
-        return $this->getPicsVids(DataCoreModel::TB_PICTURE, SearchCoreModel::CREATED, 0, 300);
+        return $this->getPicsVids(static::TB_PICTURE, SearchCoreModel::CREATED, 0, static::MAX_ITEMS);
     }
 
     public function getAlbumsVideos()
     {
-        return (new VideoCoreModel)->album(null, null, 1, 0, 300, SearchCoreModel::CREATED);
+        return (new VideoCoreModel)->album(null, null, 1, 0, static::MAX_ITEMS, SearchCoreModel::CREATED);
     }
 
     public function getVideos()
     {
-        return $this->getPicsVids(DataCoreModel::TB_VIDEO, SearchCoreModel::CREATED, 0, 300);
+        return $this->getPicsVids(static::TB_VIDEO, SearchCoreModel::CREATED, 0, static::MAX_ITEMS);
     }
 
     public function getGames()
     {
-        return (new GameCoreModel)->get(null, null, 0, 1000, SearchCoreModel::ADDED_DATE);
+        return (new GameCoreModel)->get(null, null, 0, static::MAX_ITEMS, SearchCoreModel::ADDED_DATE);
     }
 
 }

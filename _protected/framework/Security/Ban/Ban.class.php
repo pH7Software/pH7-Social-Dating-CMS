@@ -24,7 +24,7 @@ class Ban
     BANK_ACCOUNT_FILE = 'bank_account.txt',
     IP_FILE = 'ip.txt';
 
-    private static $_sFile, $_sVal;
+    private static $_sFile, $_sVal, $_bIsEmail = false;
 
     /**
      * Private constructor to prevent instantiation of class since it is a private class.
@@ -54,6 +54,7 @@ class Ban
     {
         static::$_sFile = static::EMAIL_FILE;
         static::$_sVal = $sVal;
+        static::$_bIsEmail = true;
         return static::_is();
     }
 
@@ -65,6 +66,7 @@ class Ban
     {
         static::$_sFile = static::BANK_ACCOUNT_FILE;
         static::$_sVal = $sVal;
+        static::$_bIsEmail = true;
         return static::_is();
     }
 
@@ -96,20 +98,23 @@ class Ban
      * Generic method that checks if there.
      *
      * @access private
-     * @return boolean Returns "true" if the text is banned otherwise returns "false"
+     * @return boolean Returns TRUE if the text is banned, FALSE otherwise.
      */
     private static function _is()
     {
         $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . static::$_sFile);
 
-        return in_array(static::$_sVal, array_map('trim', $aBans));
+        if (static::$_bIsEmail)
+            if (static::_check(strrchr(static::$_sVal, '@'))) return true;
+
+        return static::_check(static::$_sVal);
     }
 
     /**
      * Generic method to replace forbidden words.
      *
      * @access private
-     * @param boolean $bWordReplace TRUE Replace the ban word by an other word. FALSE Replace the ban word by an empty string.
+     * @param boolean $bWordReplace TRUE = Replace the ban word by an other word. FALSE = Replace the ban word by an empty string.
      * @return string The clean text.
      */
     private static function _replace($bWordReplace)
@@ -124,6 +129,18 @@ class Ban
         }
 
         return static::$_sVal;
+    }
+
+    /**
+     * @access private
+     * @param string $sVal
+     * @return boolean Returns TRUE if the value is banned, FALSE otherwise.
+     */
+    private static function _check($sVal)
+    {
+        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . static::$_sFile);
+
+        return in_array($sVal, array_map('trim', $aBans));
     }
 
 }

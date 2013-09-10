@@ -7,24 +7,24 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Mvc\Request\Http;
 
 class SearchFriendForm
 {
 
     public static function display()
     {
-        $oHttpRequest = new HttpRequest;
+        $oHttpRequest = new Http;
         $sUsername = $oHttpRequest->get('username');
         $sAction = ($oHttpRequest->getExists('action')) ? 'mutual' : 'index';
         unset($oHttpRequest);
 
         $oForm = new \PFBC\Form('form_search', 500);
-        $oForm->configure(array('action' => UriRoute::get('user', 'friend', $sAction, $sUsername) . '/' , 'method'=>'get'));
-        $oForm->addElement(new \PFBC\Element\Search(t('Search a Friend of "%0%"', $sUsername), 'looking', array('title'=>t('Enter its First Name, Last Name, Username, Email address or ID of your Friend'))));
-        $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array('username'=>t('Username'), 'first_name'=>t('First Name'), 'last_name'=>t('Last Name'), 'mail'=>t('Email'), 'latest'=>t('Latest'), 'last_activity'=>t('Last Activity'),'views'=>t('Popular'), 'rating'=>t('Rated'))));
-        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array('asc'=>t('Ascending'), 'desc'=>t('Descending'))));
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'),'submit',array('icon'=>'search')));
+        $oForm->configure(array('action' => Uri::get('user', 'friend', $sAction, $sUsername) . '/' , 'method' => 'get'));
+        $oForm->addElement(new \PFBC\Element\Search(t('Search a Friend of "%0%"', $sUsername), 'looking', array('title' => t('Enter its First Name, Last Name, Username, Email address or ID of your Friend'))));
+        $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::LATEST => t('Latest'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated'))));
+        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array(SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending'))));
+        $oForm->addElement(new \PFBC\Element\Button(t('Search'),'submit', array('icon' => 'search')));
         $oForm->render();
     }
 

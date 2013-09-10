@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 class SearchAdminForm
 {
@@ -15,10 +15,10 @@ class SearchAdminForm
     public static function display()
     {
         $oForm = new \PFBC\Form('form_admin_search', 500);
-        $oForm->configure(array('action' => UriRoute::get(PH7_ADMIN_MOD, 'admin', 'browse') . '/', 'method' => 'get'));
+        $oForm->configure(array('action' => Uri::get(PH7_ADMIN_MOD, 'admin', 'browse') . '/', 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Search(t('Search an Admin:'), 'looking', array('description' => t('Enter their ID, First Name, Last Name, Username, Email, Sex or IP address.'))));
-        $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array('username' => t('Username'), 'first_name' => t('First Name'), 'last_name' => t('Last Name'), 'mail' => t('Email'), 'latest' => t('Latest Admins'), 'last_activity' => t('Last Activity'), 'last_edit'=> t('Last Account Edit'))));
-        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array('asc' => t('Ascending'), 'desc' => t('Descending'))));
+        $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::LATEST => t('Latest Admins'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::LAST_EDIT => t('Last Account Edit'))));
+        $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array(SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending'))));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
         $oForm->render();
     }

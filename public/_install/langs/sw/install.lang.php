@@ -3,10 +3,12 @@
  * @title            Swahili Language File
  *
  * @author           Jones B. <support@csshood.com>
+ * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2013, Jones B. All Rights Reserved.
+ * @copyright        (c) 2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / SW
- * @update           08/26/13 00:35
+ * @update           09/10/13 23:06
  */
 
 namespace PH7;
@@ -16,11 +18,11 @@ $LANG = array (
     'charset' => 'utf-8',
     'lang_name' => 'Kiswahili',
     'version' => 'version',
-    'CMS_desc' => '<p>Karibu katika ufungaji wa '.Controller::SOFTWARE_NAME.'.<br />
+    'CMS_desc' => '<p>Karibu katika ufungaji wa ' . Controller::SOFTWARE_NAME . '.<br />
     Asante kwa kuchagua programu yetu. Tunatumai utaridhika</p>
     <p>Tafadhali fuata maelekezo yetu sita ya ufungaji.</p>',
     'chose_lang_for_install' => 'Tafadhali chagua lugha utakayoitumia katika ufungaji',
-    'requirements_desc' => 'ONYO! Hakikisha mashine yako inaridhisha <a href="'.Controller::SOFTWARE_REQUIREMENTS_URL.'" target="_blank">matakwa</a> yafuatyo ili ufunge vyema pH7CMS.',
+    'requirements_desc' => 'ONYO! Hakikisha mashine yako inaridhisha <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">matakwa</a> yafuatyo ili ufunge vyema pH7CMS.',
     'config_path' => 'Eneo la saraka &quot;iliyodhibitiwa&quot;',
     'desc_config_path' => 'Tafadhali onyesha eneo la saraka iliyodhibitiwa.<br />
     Unashauriwa kutia saraka hii nje ya &quot;public root&quot; ya tovuti yako.',
@@ -30,7 +32,7 @@ $LANG = array (
     'go' => 'Hatua ifuatayo =>',
     'license' => 'Leseni',
     'license_desc' => 'Tafadhali soma leseni vyema kisha ukubali kabla ya kuendelea kupanga PH7!',
-    'registration_for_license' => 'Tafadhali jiandikishe kwa <a href="'.Controller::SOFTWARE_WEBSITE.'" target="_blank">wavuti</a> huu ili upate leseni yako ya bure.',
+    'registration_for_license' => 'Tafadhali jiandikishe kwa <a href="' . Controller::SOFTWARE_REGISTRATION_URL . '" target="_blank">ukurasa</a> huu ili upate leseni yako ya bure.',
     'your_license' => 'Leseni Yako',
     'agree_license' => 'Nimesoma na nikakubali matakwa ya leseni.',
     'step' => 'Hatua',
@@ -51,6 +53,7 @@ $LANG = array (
     'no_app_config_writable' => 'Tafadhali badilisha ruhusa ya &quot;protected/app/configs&quot; saraka yako (CHMOD 777).',
     'database_error' => 'Kosa! Hatuwezi kuunganisha &quot;database&quot; yako.<br />',
     'error_sql_import' => 'Kosa lilitendeka wakati wa kuagiza faili kwa &quot;SQL database&quot; yako',
+    'require_mysql_version' => 'Lazima kufunga MySQL ' . PH7_REQUIRE_SQL_VERSION . ' au juu zaidi ili kuendelea.',
     'field_required' => 'Lazima uandike kwa nafasi hii',
     'all_fields_mandatory' => 'Nafasi zote zenye alama (*) zahitajika',
     'db_hostname' => '&quot;Database Server hostname&quot;',
@@ -89,9 +92,9 @@ $LANG = array (
     'confirm_remove_install_folder_auto' => 'ONYO, faili zote katika saraka ya /_install/ zitatolewa.',
     'title_email_finish_install' => 'Pongezi, upangaji wa wavuti wako umekamilika!',
     'content_email_finish_install' => '<p><strong>Pongezi, wavuti wako umepangwa vyema!</strong></p>
-    <p>Tunaimani utafurahia kutumia '.Controller::SOFTWARE_NAME.'</p>
-    <p>Kwa shida zozote za kimatumizi, maombi, maoni ama ushirikiano</p>
-    <p>Tafadhali tembelea <a href="'.Controller::SOFTWARE_WEBSITE.'" target="_blank">wavuti</a> wetu.</p>
+    <p>Tunaimani utafurahia kutumia <em>' . Controller::SOFTWARE_NAME . '</em></p>
+    <p>Kwa shida zozote za kimatumizi, maombi, maoni ama ushirikiano,
+    tafadhali tembelea <a href="' . Controller::SOFTWARE_WEBSITE . '" target="_blank">wavuti</a> wetu.</p>
     <p>---</p>
     <p>Ni mimi wako msharifu,</p>
     <p>The pH7CMS developers team.</p>',

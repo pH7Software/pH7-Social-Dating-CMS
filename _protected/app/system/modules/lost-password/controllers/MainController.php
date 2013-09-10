@@ -11,7 +11,7 @@ use
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel,
 PH7\Framework\Mail\Mail,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class MainController extends Controller
@@ -46,7 +46,7 @@ class MainController extends Controller
 
             $this->view->content = t('Hello!<br />Your password has been changed to <em>"%0%"</em>.<br />Please change it next time you login.', $sNewPassword);
 
-            $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/lost-password/recover_password.tpl', $sMail);
+            $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/lost-password/recover_password.tpl', $sMail);
 
             $aInfo = [
                 'to' => $sMail,
@@ -64,11 +64,11 @@ class MainController extends Controller
     public function account()
     {
         if (UserCore::auth())
-            $sUrl = UriRoute::get('user', 'account', 'index');
+            $sUrl = Uri::get('user', 'account', 'index');
         elseif (AffiliateCore::auth())
-            $sUrl = UriRoute::get('affiliate', 'account', 'index');
+            $sUrl = Uri::get('affiliate', 'account', 'index');
         elseif (AdminCore::auth())
-            $sUrl = UriRoute::get(PH7_ADMIN_MOD, 'main', 'index');
+            $sUrl = Uri::get(PH7_ADMIN_MOD, 'main', 'index');
         else
             $sUrl = HeaderUrl::redirect($this->registry->site_url);
 

@@ -10,7 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\Engine\Db,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class CategoryFormProcessing extends Form
@@ -21,7 +21,7 @@ class CategoryFormProcessing extends Form
         parent::__construct();
 
         (new ForumModel)->addCategory($this->httpRequest->post('title'));
-        HeaderUrl::redirect(UriRoute::get('forum', 'admin', 'addforum', Db::getInstance()->lastInsertId()), t('The Category was added successfully!'));
+        HeaderUrl::redirect(Uri::get('forum', 'admin', 'addforum', Db::getInstance()->lastInsertId()), t('The Category was added successfully!'));
     }
 
 }

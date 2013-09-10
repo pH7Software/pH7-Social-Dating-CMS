@@ -16,7 +16,7 @@ class ProtectedFileForm
         if (isset($_POST['submit_file']))
         {
             if (\PFBC\Form::isValid($_POST['submit_file']))
-                new ProtectedFileFormProcessing;
+                new ProtectedFileFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }

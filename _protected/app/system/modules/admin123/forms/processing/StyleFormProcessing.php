@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Mvc\Model\Design as DesignModel;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mvc\Model\Design;
 
 class StyleFormProcessing extends Form
 {
@@ -17,12 +17,12 @@ class StyleFormProcessing extends Form
     {
         parent::__construct();
 
-        if (!$this->str->equals($this->httpRequest->post('code', HttpRequest::NO_CLEAN), (new DesignModel)->customCode('css')))
+        if (!$this->str->equals($this->httpRequest->post('code', Http::NO_CLEAN), (new Design)->customCode('css')))
         {
-            (new AdminModel)->updateCustomCode($this->httpRequest->post('code', HttpRequest::NO_CLEAN), 'css');
+            (new AdminModel)->updateCustomCode($this->httpRequest->post('code', Http::NO_CLEAN), 'css');
 
             /* Clean Model\Design for STATIC / customCodecss data */
-            (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, 'customCodecss', null)->clear();
+            (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, 'customCodecss', null)->clear();
         }
         \PFBC\Form::setSuccess('form_style', t('Your CSS code was saved successfully!'));
     }

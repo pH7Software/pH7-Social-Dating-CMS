@@ -15,7 +15,7 @@ class MsgForm
         if (isset($_POST['submit_msg']))
         {
             if (\PFBC\Form::isValid($_POST['submit_msg']))
-                new MsgFormProcessing();
+                new MsgFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }

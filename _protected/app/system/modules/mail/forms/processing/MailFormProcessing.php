@@ -11,8 +11,8 @@ defined('PH7') or die('Restricted access');
 use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mail\Mail,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class MailFormProcessing extends Form
@@ -25,7 +25,7 @@ class MailFormProcessing extends Form
         $oUserModel = new UserCoreModel;
         $oMailModel = new MailModel;
 
-        $sMessage = $this->httpRequest->post('message', HttpRequest::ONLY_XSS_CLEAN);
+        $sMessage = $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN);
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendMail');
         $sRecipient = $this->httpRequest->post('recipient');
@@ -38,7 +38,7 @@ class MailFormProcessing extends Form
         }
         elseif ($sRecipient == PH7_ADMIN_USERNAME)
         {
-            \PFBC\Form::setError('form_compose_mail', t('Oops! You cannot reply to administrator! If you want to contact us, please use our <a href="%0%">contact form</a>.', UriRoute::get('contact', 'contact', 'index')));
+            \PFBC\Form::setError('form_compose_mail', t('Oops! You cannot reply to administrator! If you want to contact us, please use our <a href="%0%">contact form</a>.', Uri::get('contact', 'contact', 'index')));
         }
         elseif ( ! (new ExistsCoreModel)->id($iRecipientId, 'Members') )
         {
@@ -67,7 +67,7 @@ class MailFormProcessing extends Form
                 // If the notification is accepted and the message recipient isn't connected NOW, we send a message.
                 if (!$oUserModel->isNotification($iRecipientId, 'newMsg') && $oUserModel->isOnline($iRecipientId, 0))
                 {
-                    $this->view->content = t('Hello %0%!<br />You have received a new message from <strong>%1%</strong>.<br /> <a href="%2%">Click here</a> to read your message.', $this->httpRequest->post('recipient'), $this->session->get('member_username'), UriRoute::get('mail', 'main', 'inbox', $mSendMsg));
+                    $this->view->content = t('Hello %0%!<br />You have received a new message from <strong>%1%</strong>.<br /> <a href="%2%">Click here</a> to read your message.', $this->httpRequest->post('recipient'), $this->session->get('member_username'), Uri::get('mail', 'main', 'inbox', $mSendMsg));
 
                     $sRecipientEmail = $oUserModel->getEmail($iRecipientId);
 
@@ -81,7 +81,7 @@ class MailFormProcessing extends Form
                     (new Mail)->send($aInfo, $sMessageHtml);
                 }
 
-                HeaderUrl::redirect(UriRoute::get('mail', 'main', 'index'), t('Your message has been sent successfully!'));
+                HeaderUrl::redirect(Uri::get('mail', 'main', 'index'), t('Your message has been sent successfully!'));
             }
 
             unset($oUserModel, $oMailModel);

@@ -58,5 +58,5 @@ h1:hover{color:#1877D5;cursor:default}
 
 /** Buttons (links) **/
 .bt_login_remember,.bt_login_forgot{padding-bottom:35px}
-.bt_login_remember{float:left;padding-left:36px;margin-top:-12px}
+.bt_login_remember{float:left;padding-left:36px;margin-top:-10px}
 .bt_login_forgot{float:right;padding-right:170px;margin-top:-52px}

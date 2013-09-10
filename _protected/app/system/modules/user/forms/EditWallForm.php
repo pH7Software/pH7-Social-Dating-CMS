@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\Http;
 
 class EditWallForm
 {
@@ -25,12 +25,12 @@ class EditWallForm
         if (isset($_POST['submit_edit_wall']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit_wall']))
-                new EditWallFormProcessing();
+                new EditWallFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oWallData = (new WallModel)->get((new Session)->get('member_id'), (new HttpRequest)->get('wall_id'), 0, 1);
+        $oWallData = (new WallModel)->get((new Session)->get('member_id'), (new Http)->get('wall_id'), 0, 1);
 
         $oForm = new \PFBC\Form('form_edit_wall', 500);
         $oForm->configure(array('action' => '' ));

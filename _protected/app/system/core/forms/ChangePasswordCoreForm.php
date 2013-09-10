@@ -17,7 +17,7 @@ class ChangePasswordCoreForm
         if (isset($_POST['submit_change_password']))
         {
             if (\PFBC\Form::isValid($_POST['submit_change_password']))
-                new ChangePasswordCoreFormProcessing();
+                new ChangePasswordCoreFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -29,8 +29,8 @@ class ChangePasswordCoreForm
         $oForm->addElement(new \PFBC\Element\Password(t('Old password:'), 'old_password', array('required' => 1)));
         $oForm->addElement(new \PFBC\Element\Password(t('New password:'), 'new_password', array('id'=>'password', 'onkeyup'=>'checkPassword(this.value)', 'onblur' => 'CValid(this.value, this.id)','required' => 1, 'validation'=> new \PFBC\Validation\Password)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error password"></span>'));
-        $oForm->addElement(new \PFBC\Element\Password(t('Repeat new password:'), 'new_password2', array('required' => 1 )));
-        $oForm->addElement(new \PFBC\Element\Button(t('Change Password!'),'submit',array('icon'=>'key')));
+        $oForm->addElement(new \PFBC\Element\Password(t('Repeat new password:'), 'new_password2', array('required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Button(t('Change Password!'),'submit', array('icon'=>'key')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
         $oForm->render();
     }

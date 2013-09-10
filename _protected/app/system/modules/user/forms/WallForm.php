@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\Http;
 
 class WallForm
 {
@@ -25,7 +25,7 @@ class WallForm
         if (isset($_POST['submit_wall']))
         {
             if (\PFBC\Form::isValid($_POST['submit_wall']))
-                new WallFormProcessing();
+                new WallFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }

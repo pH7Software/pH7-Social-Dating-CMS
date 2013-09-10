@@ -30,7 +30,8 @@ class MainController extends Controller
 
         $this->iProfileId = (new UserCoreModel)->getId(null, $this->sUsername);
 
-        $this->view->meta_keywords = t('video,videos,free,free videos,music,online,watch,dating,video dating,social,community,social network,people video,flirt'); // Predefined meta_keywords tags
+        // Predefined meta_keywords tags
+        $this->view->meta_keywords = t('video,videos,free,free videos,music,online,watch,dating,video dating,social,community,social network,people video,flirt');
     }
 
     public function index()
@@ -82,14 +83,14 @@ class MainController extends Controller
 
         if (empty($oAlbums))
         {
-            $this->sTitle = t('Empty Video Album.'); // Because the Ajax blocks profile, we can not put HTTP error code 404, so the attribute is "false"
-            $this->_notFound(false);
+            $this->sTitle = t('Empty Video Album.');
+            $this->_notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
         }
         else
         {
-            $this->sTitle = (!empty($profileId)) ? t('The Album of <a href="%0%">%1%</a>', $this->
-                            sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
-            $this->view->page_title = $this->sTitle; // We can include HTML tags in the title as the template will erase them before display.
+            // We can include HTML tags in the title since the template will erase them before display.
+            $this->sTitle = (!empty($profileId)) ? t('The Album of <a href="%0%">%1%</a>', $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
+            $this->view->page_title = $this->sTitle;
             $this->view->meta_description = t('%0%\'s Albums | Video Albums of the Dating Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
             $this->view->h2_title = $this->sTitle;
             $this->view->albums = $oAlbums;
@@ -149,7 +150,7 @@ class MainController extends Controller
             $this->view->page_title = t('Video of %0%, %1%', $oVideo->firstName, $sTitle);
             $this->view->meta_description = t('Video of %0%, %1%, %2%', $oVideo->firstName, $sTitle, substr(Ban::filterWord($oVideo->description, false), 0, 100));
             $this->view->meta_keywords = t('video,movie,videos,video sharing,music,gallery,%0%,%1%,%2%', str_replace(' ', ',', $sTitle), $oVideo->firstName, $oVideo->username);
-            $this->view->h2_title = $this->sTitle;
+            $this->view->h1_title = $this->sTitle;
             $this->view->video = $oVideo;
 
             //Set Video Statistics
@@ -169,7 +170,7 @@ class MainController extends Controller
         /* Clean VideoModel Cache */
         (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
 
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your video has been deleted!'));
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your video has been deleted!'));
     }
 
     public function deleteAlbum()
@@ -181,7 +182,7 @@ class MainController extends Controller
 
         /* Clean VideoModel Cache */
         (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('video', 'main', 'albums'), t('Your album has been deleted!'));
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('video', 'main', 'albums'), t('Your album has been deleted!'));
     }
 
     public function search()
@@ -231,7 +232,7 @@ class MainController extends Controller
     {
         if ($b404Status === true)
             Framework\Http\Http::setHeadersByCode(404);
-        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">go the previous page</a> or <a href="%1%">add a new video</a> in this album.', 'javascript:history.back();', Framework\Mvc\Router\UriRoute::get('video', 'main', 'addvideo', $this->httpRequest->get('album_id'))) : '';
+        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">go the previous page</a> or <a href="%1%">add a new video</a> in this album.', 'javascript:history.back();', Framework\Mvc\Router\Uri::get('video', 'main', 'addvideo', $this->httpRequest->get('album_id'))) : '';
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

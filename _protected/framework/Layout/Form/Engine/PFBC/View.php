@@ -4,21 +4,26 @@
  */
 namespace PFBC;
 
-abstract class View extends Base {
+abstract class View extends Base
+{
     protected $form;
 
-    public function __construct(array $properties = null) {
+    public function __construct(array $properties = null)
+    {
         $this->configure($properties);
     }
 
     /*This method encapsulates the various pieces that are included in an element's label.*/
-    protected function renderLabel(Element $element) {
+    protected function renderLabel(Element $element)
+    {
         $label = $element->getLabel();
         $id = $element->getID();
         $description = $element->getDescription();
-        if(!empty($label) || !empty($description)) {
+        if(!empty($label) || !empty($description))
+        {
             echo '<div class="pfbc-label">';
-            if(!empty($label)) {
+            if(!empty($label))
+            {
                 echo '<label for="', $id, '">';
                 if($element->isRequired())
                     echo '<strong>*</strong> ';
@@ -30,22 +35,26 @@ abstract class View extends Base {
         }
     }
 
-    public function setForm(Form $form) {
+    public function setForm(Form $form)
+    {
         $this->form = $form;
     }
 
     /*jQuery is used to apply css entries to the last element.*/
-    public function jQueryDocumentReady() {
+    public function jQueryDocumentReady()
+    {
         echo 'jQuery("#', $this->form->getId(), ' .pfbc-element:last").css({ "margin-bottom": "0", "padding-bottom": "0", "border-bottom": "none" });';
     }
 
     public function render() {}
 
-    public function renderCSS() {
+    public function renderCSS()
+    {
         $id = $this->form->getId();
 
         /*For ease-of-use, default styles are applied to form elements.*/
-        if(!in_array('style', $this->form->getPrevent())) {
+        if(!in_array('style', $this->form->getPrevent()))
+        {
             echo <<<CSS
 #$id .pfbc-label label{font-weight:bold}
 #$id em{font-size:.9em;color:#888}

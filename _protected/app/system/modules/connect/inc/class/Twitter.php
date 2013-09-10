@@ -21,7 +21,7 @@ PH7\Framework\Ip\Ip,
 PH7\Framework\File\File,
 PH7\Framework\Util\Various,
 PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class Twitter extends Api implements IApi
 {
@@ -88,13 +88,13 @@ class Twitter extends Api implements IApi
                     $this->setAvatar($aProfile);
 
                     $this->oDesign->setFlashMsg( t('You now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
-                    $this->sUrl = UriRoute::get('connect','main','register');
+                    $this->sUrl = Uri::get('connect','main','register');
                 }
                 else
                 {
                     // Login
                     $this->setLogin($oUserModel, $iId);
-                    $this->sUrl = UriRoute::get('connect','main','home');
+                    $this->sUrl = Uri::get('connect','main','home');
                 }
 
                 unset($oUserModel);
@@ -103,12 +103,12 @@ class Twitter extends Api implements IApi
             {
                 // For testing purposes, if there was an error, let's kill the script
                 $this->oDesign->setFlashMsg(t('Oops! An error has occurred. Please try again later.'));
-                $this->sUrl = UriRoute::get('connect','main','index');
+                $this->sUrl = Uri::get('connect','main','index');
             }
         }
         else
         {
-            $this->sUrl = UriRoute::get('connect','main','index');
+            $this->sUrl = Uri::get('connect','main','index');
         }
     }
 

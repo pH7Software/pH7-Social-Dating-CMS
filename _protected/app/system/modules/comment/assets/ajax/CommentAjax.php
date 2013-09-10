@@ -7,7 +7,8 @@
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
-use PH7\Framework\Mvc\Request\HttpRequest, PH7\Framework\Session\Session;
+
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Session\Session;
 
 class Comment
 {
@@ -21,7 +22,7 @@ class Comment
 
         /** Instance objects for the class * */
         $this->_oSession = new Session;
-        $this->_oHttpRequest = new HttpRequest;
+        $this->_oHttpRequest = new Http;
         $this->_oCommentModel = new CommentModel;
 
         switch ($this->_oHttpRequest->post('type'))
@@ -38,20 +39,26 @@ class Comment
 
     protected function delete()
     {
-            if ((($this->_oSession->get('member_id') == $this->_oHttpRequest->post('recipient_id')) || ($this->_oSession->get('member_id') == $this->_oHttpRequest->post('sender_id'))) || AdminCore::auth()) {
-                $this->_bStatus = $this->_oCommentModel->delete($this->_oHttpRequest->post('id'), $this->_oHttpRequest->post('recipient_id'), $this->_oHttpRequest->post('sender_id'), $this->_oHttpRequest->post('table'));
+        if ((($this->_oSession->get('member_id') == $this->_oHttpRequest->post('recipient_id')) || ($this->_oSession->get('member_id') == $this->_oHttpRequest->post('sender_id'))) || AdminCore::auth())
+        {
+            $this->_bStatus = $this->_oCommentModel->delete($this->_oHttpRequest->post('id'), $this->_oHttpRequest->post('recipient_id'), $this->_oHttpRequest->post('sender_id'), $this->_oHttpRequest->post('table'));
 
-                if ($this->_bStatus) {
-                    /* Clean All Data of CommentModel Cache */
-                    (new Framework\Cache\Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
+            if ($this->_bStatus)
+            {
+                /* Clean All Data of CommentModel Cache */
+                (new Framework\Cache\Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
 
-                    $this->_sMsg = jsonMsg(1, t('Your comment has been successfully removed!'));
-                } else {
-                    $this->_sMsg = jsonMsg(0, t('Your comment could not be deleted because there no exist.'));
-                }
-            } else {
-                $this->_sMsg = jsonMsg(0, t('Whoops! The comment could not be removed!'));
+                $this->_sMsg = jsonMsg(1, t('Your comment has been successfully removed!'));
             }
+            else
+            {
+                $this->_sMsg = jsonMsg(0, t('Your comment could not be deleted because there no exist.'));
+            }
+        }
+        else
+        {
+            $this->_sMsg = jsonMsg(0, t('Whoops! The comment could not be removed!'));
+        }
         echo $this->_sMsg;
     }
 
@@ -69,6 +76,5 @@ class Comment
 }
 
 // Only for members
-if (UserCore::auth()) {
+if (UserCore::auth())
     new Comment;
-}

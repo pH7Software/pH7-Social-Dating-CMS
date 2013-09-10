@@ -10,8 +10,8 @@ namespace PH7;
 use
 PH7\Framework\Config\Config,
 PH7\Framework\Str\Str,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri;
 
 class EditMembershipForm
 {
@@ -21,12 +21,12 @@ class EditMembershipForm
         if (isset($_POST['submit_edit_membership']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit_membership']))
-                new EditMembershipFormProcessing();
+                new EditMembershipFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oMembership = (new PaymentModel)->getMemberships( (new HttpRequest)->get('group_id', 'int') );
+        $oMembership = (new PaymentModel)->getMemberships( (new Http)->get('group_id', 'int') );
 
         $oForm = new \PFBC\Form('form_edit_membership', 600);
         $oForm->configure(array('action' => ''));
@@ -43,7 +43,7 @@ class EditMembershipForm
         }
         unset($aPerms);
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Price:'), 'price', array('description'=>t('Currency: %0%. 0 = Free. To change the currency, please <a href="%1%">go to settings</a>.', Config::getInstance()->values['module.setting']['currency'], UriRoute::get('payment','admin','config')), 'value'=>$oMembership->price, 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Price:'), 'price', array('description'=>t('Currency: %0%. 0 = Free. To change the currency, please <a href="%1%">go to settings</a>.', Config::getInstance()->values['module.setting']['currency'], Uri::get('payment','admin','config')), 'value'=>$oMembership->price, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Number(t('Expiration Days:'), 'expiration_days', array('description'=>t('0 = Unlimited'), 'value'=>$oMembership->expirationDays, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Radio(t('Active:'), 'enable', array('1'=>t('Enabled'), '0'=>t('Disabled')), array('value'=>$oMembership->enable, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Button(t('Add')));

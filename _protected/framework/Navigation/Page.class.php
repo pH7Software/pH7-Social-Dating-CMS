@@ -13,7 +13,7 @@
 namespace PH7\Framework\Navigation;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class Page
 {
@@ -22,7 +22,7 @@ class Page
 
     public function __construct()
     {
-        $this->_oHttpRequest = new HttpRequest;
+        $this->_oHttpRequest = new Http;
     }
 
       /**
@@ -94,7 +94,7 @@ class Page
      */
     public static function cleanDynamicUrl($sVar)
     {
-        $sCurrentUrl = (new HttpRequest)->currentUrl();
+        $sCurrentUrl = (new Http)->currentUrl();
         $sUrl = preg_replace('#\?.+$#', '', $sCurrentUrl);
 
         if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl))

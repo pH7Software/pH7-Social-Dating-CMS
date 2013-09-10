@@ -11,7 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class AddAffiliateFormProcessing extends Form
@@ -47,7 +47,7 @@ class AddAffiliateFormProcessing extends Form
 
         (new AffiliateModel)->add($aData);
 
-        HeaderUrl::redirect(UriRoute::get('affiliate', 'admin', 'browse'), t('The affiliate has been successfully added.'));
+        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), t('The affiliate has been successfully added.'));
     }
 
 }

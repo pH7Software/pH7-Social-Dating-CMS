@@ -21,11 +21,12 @@ PH7\Framework\Layout\LoadTemplate,
 PH7\Framework\Config\Config,
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Registry\Registry,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Url\Uri,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Ip\Ip,
-PH7\Framework\Mvc\Model\DbConfig;
+PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Url\Uri,
+PH7\Framework\Mvc\Router\Uri as UriRoute;
 
 /**
  * @class Singleton Class
@@ -49,7 +50,7 @@ final class FrontController
         /** Objects are created for the functioning of the class. * */
         $this->oConfig = Config::getInstance();
         $this->oRegistry = Registry::getInstance();
-        $this->oHttpRequest = new HttpRequest;
+        $this->oHttpRequest = new Http;
         $this->oUri = Uri::getInstance();
 
         if ($this->oUri->fragment(0) === 'asset' && $this->oUri->fragment(1) === 'gzip')
@@ -108,7 +109,7 @@ final class FrontController
         $oUrl = UriRoute::loadFile(new \DomDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute)
         {
-            if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->requestURI(), $aMatches))
+            if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->requestUri(), $aMatches))
             {
                 $this->bRouterRewriting = true;
 

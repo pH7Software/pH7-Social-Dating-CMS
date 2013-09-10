@@ -7,5 +7,16 @@
  */
 
 namespace PH7\Framework\Mvc\Model\Engine;
+defined('PH7') or exit('Restricted access');
 
-class Exception extends \PDOException {}
+class Exception extends \PDOException
+{
+
+    use PH7\Framework\Error\CException\Escape;
+
+    public function __construct($sMsg)
+    {
+        static::init($sMsg);
+    }
+
+}

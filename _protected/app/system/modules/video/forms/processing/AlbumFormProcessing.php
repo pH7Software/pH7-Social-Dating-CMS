@@ -13,7 +13,7 @@ PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Image\Image,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class AlbumFormProcessing extends Form
@@ -60,7 +60,7 @@ class AlbumFormProcessing extends Form
             /* Clean VideoModel Cache */
             (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
 
-            HeaderUrl::redirect(UriRoute::get('video', 'main', 'addvideo', $iLastAlbumId));
+            HeaderUrl::redirect(Uri::get('video', 'main', 'addvideo', $iLastAlbumId));
         }
     }
 

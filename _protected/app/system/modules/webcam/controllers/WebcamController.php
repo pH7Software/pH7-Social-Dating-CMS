@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Webcam / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 class WebcamController extends Controller
 {
@@ -15,7 +15,7 @@ class WebcamController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(UriRoute::get('webcam','webcam','picture'));
+        Framework\Url\HeaderUrl::redirect(Uri::get('webcam','webcam','picture'));
     }
 
     public function picture()

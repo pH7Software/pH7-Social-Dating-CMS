@@ -11,7 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class AddAdminFormProcessing extends Form
@@ -36,7 +36,7 @@ class AddAdminFormProcessing extends Form
 
         (new AdminModel)->add($aData);
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The administrator has been successfully added.'));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The administrator has been successfully added.'));
     }
 
 }

@@ -6,14 +6,14 @@
  * @package        PH7 / App / System / Module / Blog / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class AdminController extends MainController
 {
 
     public function index()
     {
-        HeaderUrl::redirect(UriRoute::get('blog', 'main', 'index'), t('Welcome to the Blog administrator mode.'));
+        HeaderUrl::redirect(Uri::get('blog', 'main', 'index'), t('Welcome to the Blog administrator mode.'));
     }
 
     public function add()
@@ -30,9 +30,6 @@ class AdminController extends MainController
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
-        if ($this->httpRequest->postExists('del_thumb'))
-            $this->removeThumb($this->httpRequest->post('id'));
-
         $this->output();
     }
 
@@ -43,22 +40,22 @@ class AdminController extends MainController
         CommentCoreModel::deleteRecipient($iId, 'Blog');
         $this->oBlogModel->deleteCategory($iId);
         $this->oBlogModel->deletePost($iId);
-        (new Blog)->deleteThumb($this->file, $iId);
+        (new Blog)->deleteThumb($this->file, $iId, 'blog');
 
         /* Clean BlogModel Cache  */
         (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(UriRoute::get('blog', 'main', 'index'), t('Your post was deleted!'));
+        HeaderUrl::redirect(Uri::get('blog', 'main', 'index'), t('Your post was deleted!'));
     }
 
     private function removeThumb($iId)
     {
-        (new Blog)->deleteThumb($this->file, $iId);
+        if(!(new Framework\Security\CSRF\Token)->checkUrl())
+            exit(Form::errorTokenMsg());
 
-        /* Clean BlogModel Cache */
-        (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
+        (new Blog)->deleteThumb($this->file, $iId, 'blog');
 
-        HeaderUrl::redirect(UriRoute::get('blog', 'admin', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
+        HeaderUrl::redirect(Uri::get('blog', 'admin', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
     }
 
 }

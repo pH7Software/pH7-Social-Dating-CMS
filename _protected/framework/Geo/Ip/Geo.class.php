@@ -1,7 +1,6 @@
 <?php
 /**
- * @title            Ip Class.
- * @desc             IP localization.
+ * @title            Ip localization Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
@@ -124,7 +123,7 @@ class Geo
 
         $oRecord = geoip_record_by_addr($oGeoIp, (!empty($sIpAddress) ? $sIpAddress : Ip::get()));
 
-        if($sOption == static::GET_REGION)
+        if ($sOption == static::GET_REGION)
             return $GEOIP_REGION_NAME[$oRecord->country_code][$oRecord->region];
         else
             return $oRecord;

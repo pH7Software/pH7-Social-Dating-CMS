@@ -15,7 +15,7 @@ class AdsForm
         if (isset($_POST['submit_ads']))
         {
             if (\PFBC\Form::isValid($_POST['submit_ads']))
-                new AdsFormProcessing;
+                new AdsFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }

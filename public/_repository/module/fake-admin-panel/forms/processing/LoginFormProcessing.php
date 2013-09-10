@@ -4,7 +4,7 @@
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License.
+ * @license        GNU General Public License <http://www.gnu.org/licenses/gpl.html>
  * @package        PH7 / App / Module / Fake Admin Panel / Form / Processing
  * @version        1.1.0
  */

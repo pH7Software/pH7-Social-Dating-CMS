@@ -26,21 +26,21 @@ defined('PH7') or exit('Restricted access');
          switch ($this->severity)
          {
              case E_USER_ERROR : // If the user issues a fatal error
-               $sType = 'Fatal error ';
+                 $sType = 'Fatal error ';
              break;
 
              case E_WARNING : // If PHP issues a warning
              case E_USER_WARNING : // If the user issues a warning
-               $sType = 'Warning error';
+                 $sType = 'Warning error';
              break;
 
              case E_NOTICE : // If PHP issues a notice
              case E_USER_NOTICE : // If the user issues a notice
-               $sType = 'Notice error';
+                 $sType = 'Notice error';
              break;
 
              default : // Unknown error
-               $sType = 'Unknown error';
+                 $sType = 'Unknown error';
              break;
          }
 

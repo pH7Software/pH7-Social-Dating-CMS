@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class EditCommentForm
 {
@@ -17,12 +17,12 @@ class EditCommentForm
         if (isset($_POST['submit_edit_comment']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit_comment']))
-                new EditCommentFormProcessing();
+                new EditCommentFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oHttpRequest = new HttpRequest;
+        $oHttpRequest = new Http;
 
         $oForm = new \PFBC\Form('form_edit_comment', 500);
         $oForm->configure(array('action' => ''));
@@ -30,7 +30,7 @@ class EditCommentForm
         $oForm->addElement(new \PFBC\Element\Token('edit_comment'));
 
         $oData = (new CommentModel)->get($oHttpRequest->get('id'), 1, $oHttpRequest->get('table'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Edit a comment:'), 'comment', array('value' => $oData->comment, 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 2000))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Edit your comment:'), 'comment', array('value' => $oData->comment, 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 2000))));
         unset($oHttpRequest, $oData);
 
         $oForm->addElement(new \PFBC\Element\Button);

@@ -12,7 +12,7 @@ namespace PH7;
 use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Url\HeaderUrl,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
@@ -28,7 +28,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'admin', 'browse'));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'));
     }
 
     public function browse()
@@ -46,7 +46,7 @@ class AdminController extends Controller
 
         if (empty($oSearch))
         {
-            $this->design->setRedirect(UriRoute::get(PH7_ADMIN_MOD, 'admin', 'browse'));
+            $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'));
             $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
         }
         else
@@ -92,7 +92,7 @@ class AdminController extends Controller
         $sUsername = (string) $aData[1];
 
         (new Admin)->delete($iId, $sUsername);
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The admin has been deleted.'));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The admin has been deleted.'));
     }
 
     public function deleteAll()
@@ -114,7 +114,7 @@ class AdminController extends Controller
             $this->sMsg = t('The admin(s) has been deleted.');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'admin', 'browse'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), $this->sMsg);
     }
 
     public function __destruct()

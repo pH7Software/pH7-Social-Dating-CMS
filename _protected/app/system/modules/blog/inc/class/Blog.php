@@ -8,11 +8,12 @@
 namespace PH7;
 use PH7\Framework\Config\Config;
 
-class Blog
+class Blog extends WriteCore
 {
 
     /**
      * Sets the Blog Thumbnail.
+     *
      * @param \PH7\Framework\File\File $oFile
      * @param object $oPost
      * @return void
@@ -28,8 +29,8 @@ class Blog
             }
             else
             {
-                /*
-                 * @desc The method deleteFile first test if the file exists, if so it delete the file.
+                /**
+                 * The method deleteFile first test if the file exists, if so it delete the file.
                  */
                 $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog/' . PH7_IMG . $oPost->blogId;
                 $oFile->deleteFile($sPathName); // It erases the old thumbnail
@@ -42,6 +43,8 @@ class Blog
     }
 
     /**
+     * Get the thumbnail of blog post.
+     *
      * @param integer $iBlogId The ID of the Blog Post.
      * @return string The URL of the thumbnail.
      */
@@ -61,17 +64,6 @@ class Blog
     public function checkPostId($sPostId)
     {
         return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !(new BlogModel)->postIdExists($sPostId)) ? true : false;
-    }
-
-    /**
-     * Removes the Blog Thumbnail.
-     * @param \PH7\Framework\File\File $oFile
-     * @param integer $iId
-     * @return void
-     */
-    public function deleteThumb(Framework\File\File $oFile, $iId)
-    {
-        $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog/' . PH7_IMG . $iId);
     }
 
 }

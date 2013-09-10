@@ -1,7 +1,6 @@
 <?php
 /**
- * @title            Markdown Class
- * @desc             Markdown Markup Parser.
+ * @title            Markdown Markup Parser Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.

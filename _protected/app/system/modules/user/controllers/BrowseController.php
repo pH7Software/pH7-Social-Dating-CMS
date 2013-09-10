@@ -6,7 +6,8 @@
  * @package        PH7 / App / System / Module / User / Controller
  */
 namespace PH7;
-use PH7\Framework\Navigation\Page, PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
+
+use PH7\Framework\Navigation\Page, PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class BrowseController extends Controller
 {
@@ -30,7 +31,7 @@ class BrowseController extends Controller
 
         if (empty($oUsers))
         {
-            HeaderUrl::redirect(UriRoute::get('user', 'search', 'index'), t('Empty search result. Please try again with wider or new search parameters.'));
+            HeaderUrl::redirect(Uri::get('user', 'search', 'index'), t('Empty search result. Please try again with wider or new search parameters.'));
         }
         else
         {

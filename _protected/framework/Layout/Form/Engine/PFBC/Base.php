@@ -8,8 +8,10 @@ namespace PFBC;
 abstract class Base
 {
 
-    public function configure(array $properties = null) {
-        if(!empty($properties)) {
+    public function configure(array $properties = null)
+    {
+        if(!empty($properties))
+        {
             $class = get_class($this);
 
             /*The property_reference lookup array is created so that properties can be set
@@ -26,10 +28,12 @@ abstract class Base
             foreach($available as $method)
                 $method_reference[strtolower($method)] = $method;
 
-            foreach($properties as $property => $value) {
+            foreach($properties as $property => $value)
+            {
                 $property = strtolower($property);
                 /*The attributes property cannot be set directly.*/
-                if($property != 'attributes') {
+                if($property != 'attributes')
+                {
                     /*If the appropriate class has a "set" method for the property provided, then
                     it is called instead or setting the property directly.*/
                     if(isset($method_reference['set' . $property]))
@@ -48,7 +52,8 @@ abstract class Base
     }
 
     /*This method can be used to view a class' state.*/
-    public function debug() {
+    public function debug()
+    {
         echo '<pre>', print_r($this, true), '</pre>';
     }
 
@@ -60,9 +65,11 @@ abstract class Base
 
     /*This method is used by the Form class and all Element classes to return a string of html
     attributes.  There is an ignore parameter that allows special attributes from being included.*/
-    public function getAttributes($ignore = '') {
+    public function getAttributes($ignore = '')
+    {
         $str = "";
-        if(!empty($this->attributes)) {
+        if(!empty($this->attributes))
+        {
             if(!is_array($ignore))
                 $ignore = array($ignore);
             $attributes = array_diff(array_keys($this->attributes), $ignore);

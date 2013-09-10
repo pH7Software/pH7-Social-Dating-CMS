@@ -21,43 +21,47 @@ defined('PH7') or exit('Restricted access');
 
 ################################### CONSTANTS ###################################
 
-#################### OTHERS ####################
+#################### OTHER ####################
 
-/***** Various *****/
+/***** VARIOUS *****/
 
 define ( 'PH7_DOT', '.' );
 
-/***** Name Admin Module *****/
+/***** ADMIN MODULE NAME *****/
 
 define ( 'PH7_ADMIN_MOD', 'admin123' );
 
-/***** Pattern Username (For the 'Members', 'Affiliates' and 'Admins') *****/
+/***** PATTERN USERNAME (for 'Members', 'Affiliates' and 'Admins') *****/
 
 define ( 'PH7_USERNAME_PATTERN', '[\w-]' );
 
-/***** ADMIN ID *****/
+/***** ADMIN ID (for sending email by an admin) *****/
 
-define ( 'PH7_ADMIN_ID', 0000 ); // Do not change please, without the permission of Pierre-Henry!
+define ( 'PH7_ADMIN_ID', 0000 ); // Don't change it please, without the permission of Pierre-Henry!
 
-/***** ADMIN Username *****/
+/***** ADMIN USERNAME (for sending email by an admin) *****/
 
-define ( 'PH7_ADMIN_USERNAME', 'admin' ); // Do not change please, without the permission of Pierre-Henry!
+define ( 'PH7_ADMIN_USERNAME', 'admin' ); // Don't change it please, without the permission of Pierre-Henry!
 
 /***** GHOST ID *****/
 
-define ( 'PH7_GHOST_ID', 1 ); // Do not change please, without the permission of Pierre-Henry!
+define ( 'PH7_GHOST_ID', 1 ); // Don't change it please, without the permission of Pierre-Henry!
 
-/***** GHOST Username *****/
+/***** GHOST USERNAME *****/
 
-define ( 'PH7_GHOST_USERNAME', 'ghost' ); // Do not change please, without the permission of Pierre-Henry!
+define ( 'PH7_GHOST_USERNAME', 'ghost' ); // Don't change it please, without the permission of Pierre-Henry!
 
-/***** Maximum value length for the username members, email and url *****/
+/***** MAXIMUM LENGTH VALUE (for the username, email and URL) *****/
 
-define ( 'PH7_MAX_USERNAME_LENGTH', 40 ); // Warning: Do not change because the number of the username is based on the length field (varchar(40)) of the database
-define ( 'PH7_MAX_EMAIL_LENGTH', 150 );
-define ( 'PH7_MAX_URL_LENGTH', 150 );
+define ( 'PH7_MAX_USERNAME_LENGTH', 40 ); // Warning: don't change it because the number of the username is based on the length field (varchar(40)) of the database
+define ( 'PH7_MAX_EMAIL_LENGTH', 120 );
+define ( 'PH7_MAX_URL_LENGTH', 120 );
 
-/***** Security *****/
+/***** DESIGN *****/
+
+define ( 'PH7_WIDTH_SEARCH_FORM', 168 );
+
+/***** SECURITY *****/
 
 /*** DDoS Attack ***/
 define ( 'PH7_DDOS_DELAY_SLEEP', 40 );
@@ -67,7 +71,7 @@ define ( 'PH7_DDOS_MAX_SESSION_PAGE_LOAD', 999 );
 
 /***** TABLE PREFIX *****/
 
-define ( 'PH7_TABLE_PREFIX', 'pH7_' ); // Warning: Do not change this value!
+define ( 'PH7_TABLE_PREFIX', 'pH7_' ); // Warning: don't change this value!
 
 /***** PAGE *****/
 
@@ -94,8 +98,6 @@ define ( 'PH7_MODELS', 'models/' );
 define ( 'PH7_VIEWS', 'views/' );
 define ( 'PH7_FORMS', 'forms/' );
 define ( 'PH7_INC', 'inc/' );
-define ( 'PH7_CLASS', 'class/' );
-define ( 'PH7_DESIGN', 'design/' );
 define ( 'PH7_CONFIG', 'config/' );
 define ( 'PH7_LANG', 'lang/' );
 

@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 abstract class WriteDesignCoreModel
 {
@@ -21,15 +21,14 @@ abstract class WriteDesignCoreModel
      */
     public static function categories($oCategories, $sMod)
     {
-        if ($sMod !== 'blog' && $sMod !== 'note')
-            Framework\Error\CException\PH7InvalidArgumentException('Bad module: ' .$sMod);
+        WriteCore::checkMod($sMod);
 
         $sContents = '';
 
         echo '<p>', t('Categories:'), '<span class="small italic">';
 
         foreach ($oCategories as $oCategory)
-            $sContents .= '<a href="' . UriRoute::get($sMod, 'main', 'category', $oCategory->name, ',title,asc') . '" data-load="ajax">' . $oCategory->name . '</a> &bull; ';
+            $sContents .= '<a href="' . Uri::get($sMod, 'main', 'category', $oCategory->name, ',title,asc') . '" data-load="ajax">' . $oCategory->name . '</a> &bull; ';
 
         unset($oCategories);
 

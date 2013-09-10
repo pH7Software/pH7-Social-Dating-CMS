@@ -16,7 +16,7 @@ class PublicFileForm
         if (isset($_POST['submit_file']))
         {
             if (\PFBC\Form::isValid($_POST['submit_file']))
-                new PublicFileFormProcessing;
+                new PublicFileFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }

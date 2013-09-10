@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Admin / Inc / Model
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class ModuleModel extends Framework\Mvc\Model\Engine\Model

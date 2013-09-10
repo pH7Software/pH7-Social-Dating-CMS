@@ -81,7 +81,7 @@ class DynamicFieldCoreForm
             case 'phone':
             case 'fax':
                 $sLang = ($this->_sColumn == 'fax') ? t('Your Fax Number:') : t('Your Phone Number:');
-                $this->_oForm->addElement(new \PFBC\Element\Phone($sLang, $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter full number with area code.'))));
+                $this->_oForm->addElement(new \PFBC\Element\Phone($sLang, $this->_sColumn, array('id'=>$this->getFieldId('phone'), 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter full number with area code.'), 'value' => $this->_sVal)));
                 $this->addCheckErrSpan('phone');
             break;
 

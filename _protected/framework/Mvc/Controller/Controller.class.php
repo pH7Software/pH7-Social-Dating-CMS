@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Security\DDoS\Stop,
 PH7\Framework\Http\Http,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Mvc\Model as M;
 
 abstract class Controller extends \PH7\Framework\Core\Core
@@ -59,7 +59,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->lang->load('global', PH7_PATH_APP_LANG);
 
 
-        /***** Initialization PH7Tpl Template Engine *****/
+        /***** PH7Tpl Template Engine initialization *****/
         /*** Assign the global variables ***/
 
         /*** Objects ***/
@@ -163,14 +163,14 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->view->h1_title = (!empty($sMsg)) ? $sMsg : t('Whoops! The page you requested was not found.');
 
         $sErrorDesc = t('You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive.') . '<br />
-        <strong><em>' . t('Suggestions:') . '</em></strong><br />' .
-        '<a href="'.$this->registry->site_url.'">' . t('Return home') . '</a><br />';
+        <strong><em>' . t('Suggestions:') . '</em></strong><br />
+        <a href="' . $this->registry->site_url . '">' . t('Return home') . '</a><br />';
 
         if (!\PH7\UserCore::auth())
         {
             $sErrorDesc .=
-            '<a href="' . UriRoute::get('user','signup','step1').'">' . t('Join Now') . '</a><br />
-             <a href="' . UriRoute::get('user','main','login').'">' . t('Login') . '</a><br />';
+            '<a href="' . Uri::get('user','signup','step1') . '">' . t('Join Now') . '</a><br />
+             <a href="' . Uri::get('user','main','login') . '">' . t('Login') . '</a><br />';
         }
 
         $sErrorDesc .= '<a href="javascript:history.back();">' . t('Go back to the previous page') . '</a><br />';

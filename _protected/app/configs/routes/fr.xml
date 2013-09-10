@@ -13,9 +13,9 @@
       <route url="resend-activation" path="system/modules" module="user" controller="main" action="resendactivation" />
       <route url="user/setting/delete-account/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="delete" vars="delete_status" />
       <!-- admin -->
-      <route url="user/admin/edit/([0-9]+)" path="system/modules" module="user" controller="setting" action="edit" vars="profile_id" />
-      <route url="user/admin/avatar/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="avatar" vars="profile_id,username,first_name,sex" />
-      <route url="user/admin/design/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="design" vars="profile_id,username,first_name,sex" />
+      <route url="user/edit/([0-9]+)" path="system/modules" module="user" controller="setting" action="edit" vars="profile_id" />
+      <route url="user/avatar/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="avatar" vars="profile_id,username,first_name,sex" />
+      <route url="user/design/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="design" vars="profile_id,username,first_name,sex" />
 
       <route url="meeting-people" path="system/modules" module="user" controller="browse" action="index" />
       <!-- search -->
@@ -76,7 +76,6 @@
       <route url="b/([a-zA-Z0-9_-]+)" path="system/modules" module="blog" controller="main" action="read" vars="post" />
       <!--admin-->
       <route url="blog/admin/edit/([0-9]+)" path="system/modules" module="blog" controller="admin" action="edit" vars="id" />
-      <route url="blog/admin/edit/([0-9]+)/([0-9]+)" path="system/modules" module="blog" controller="admin" action="edit" vars="id,del_thumb" />
 
     <!-- Note -->
       <route url="note" path="system/modules" module="note" controller="main" action="index" />
@@ -84,7 +83,6 @@
       <route url="note/author/([a-zA-Z0-9_-]+)/?([a-zA-Z]+)?/?([a-zA-Z]+)?" path="system/modules" module="note" controller="main" action="author" vars="author,order,sort" />
       <route url="n/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)" path="system/modules" module="note" controller="main" action="read" vars="username,post" />
       <route url="note/edit/([0-9]+)" path="system/modules" module="note" controller="main" action="edit" vars="id" />
-      <route url="note/edit/([0-9]+)/([0-9]+)" path="system/modules" module="note" controller="main" action="edit" vars="id,del_thumb" />
 
     <!-- Contact -->
       <route url="contact" path="system/modules" module="contact" controller="contact" action="index" />
@@ -176,7 +174,7 @@
       <route url="affiliate/login" path="system/modules" module="affiliate" controller="home" action="login" />
       <route url="affiliate/resend-activation" path="system/modules" module="affiliate" controller="home" action="resendactivation" />
       <!-- admin -->
-      <route url="affiliate/admin/edit/([0-9]+)" path="system/modules" module="affiliate" controller="account" action="edit" vars="profile_id" />
+      <route url="affiliate/edit/([0-9]+)" path="system/modules" module="affiliate" controller="account" action="edit" vars="profile_id" />
 
     <!-- Lost Password -->
       <route url="forgot/([a-zA-Z0-9_-]+)" path="system/modules" module="lost-password" controller="main" action="forgot" vars="mod" />

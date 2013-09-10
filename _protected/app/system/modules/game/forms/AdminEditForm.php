@@ -10,8 +10,8 @@ namespace PH7;
 use
 PH7\Framework\Config\Config,
 PH7\Framework\Str\Str,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri;
 
 class AdminEditForm
 {
@@ -21,12 +21,12 @@ class AdminEditForm
         if (isset($_POST['submit_edit']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit']))
-                new AdminEditFormProcessing();
+                new AdminEditFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oHttpRequest = new HttpRequest;
+        $oHttpRequest = new Http;
         $oGameModel = new GameModel;
         $iGameId = $oHttpRequest->get('id', 'int');
         $oGame = $oGameModel->get(strstr($oHttpRequest->get('title'), '-', true), $iGameId, 0, 1);

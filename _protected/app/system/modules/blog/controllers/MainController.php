@@ -96,7 +96,7 @@ class MainController extends Controller
         }
         else
         {
-            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\UriRoute::get('blog',
+            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('blog',
                 'main', 'index'));
         }
 
@@ -211,7 +211,7 @@ class MainController extends Controller
         $this->view->h2_title = $this->sTitle;
         $this->view->error = t('Sorry, we weren\'t able to find the page you requested.<br />
         May we suggest <a href="%0%">exploring some tags</a> or <a href="%1%">make a new search</a>.',
-            Framework\Mvc\Router\UriRoute::get('blog', 'main', 'index'), Framework\Mvc\Router\UriRoute::
+            Framework\Mvc\Router\Uri::get('blog', 'main', 'index'), Framework\Mvc\Router\Uri::
             get('blog', 'main', 'search'));
     }
 

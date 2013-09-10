@@ -10,9 +10,9 @@ defined('PH7') or die('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Url\HeaderUrl,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class EditNoteFormProcessing extends Form
 {
@@ -44,9 +44,11 @@ class EditNoteFormProcessing extends Form
             }
         }
 
-        if(!$this->str->equals($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN), $oPost->categoryId))
+        // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+        // and damages the SET function SQL for entry into the database.
+        if(!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId))
         {
-            if(count($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN)) > 3)
+            if(count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > 3)
             {
                 \PFBC\Form::setError('form_note', t('You can not select more than 3 categories.'));
                 return; // Stop execution of the method.
@@ -54,9 +56,7 @@ class EditNoteFormProcessing extends Form
 
             $oNoteModel->deleteCategory($iNoteId);
 
-            // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
-            // and damages the SET function SQL for entry into the database.
-            foreach($this->httpRequest->post('category_id', HttpRequest::ONLY_XSS_CLEAN) as $iCategoryId)
+            foreach($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
                 $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
         }
 
@@ -66,9 +66,9 @@ class EditNoteFormProcessing extends Form
         if(!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oNoteModel->updatePost('title', $this->httpRequest->post('title'), $iNoteId, $iProfileId);
 
-        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN
-        if(!$this->str->equals($this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), $oPost->content))
-            $oNoteModel->updatePost('content', $this->httpRequest->post('content', HttpRequest::ONLY_XSS_CLEAN), $iNoteId, $iProfileId);
+        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN
+        if(!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content))
+            $oNoteModel->updatePost('content', $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $iNoteId, $iProfileId);
 
         if(!$this->str->equals($this->httpRequest->post('lang_id'), $oPost->langId))
             $oNoteModel->updatePost('langId', $this->httpRequest->post('lang_id'), $iNoteId, $iProfileId);
@@ -113,7 +113,7 @@ class EditNoteFormProcessing extends Form
         (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
         $sMsg = ($iApproved == '0') ? t('Your Note has been received! But it will be visible once approved by our moderators. Please do not send a new Note because this is useless!') : t('Post created successfully!');
-        HeaderUrl::redirect(UriRoute::get('note', 'main', 'read', $sUsername . ',' . $sPostId), $sMsg);
+        HeaderUrl::redirect(Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId), $sMsg);
     }
 
 }

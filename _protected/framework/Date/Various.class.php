@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            Various Date Class
- * @desc             Various Date methods Class.
+ * @desc             Useful date methods.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.

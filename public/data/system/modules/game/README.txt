@@ -1,4 +1,4 @@
-The games are here: http://download.hizup.com/games/pH7_game.zip
+Download games here: http://download.hizup.com/games/pH7_game.zip
 
 If you use the automatic installer, it will download and install it for you, but 
 this is very slow because the archive is very heavy and is not supported by all servers.

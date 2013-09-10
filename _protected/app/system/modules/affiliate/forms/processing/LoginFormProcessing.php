@@ -10,7 +10,9 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Ip\Ip,
+PH7\Framework\Util\Various,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
@@ -38,27 +40,28 @@ class LoginFormProcessing extends Form
             return; // Stop execution of the method.
         }
 
-        $sLogin = $oAffModel->login($sEmail, $sPassword, 'Affiliates');
         // Check Login
-        if($sLogin === 'email_does_not_exist')
+        $sLogin = $oAffModel->login($sEmail, $sPassword, 'Affiliates');
+        if($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist')
         {
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
 
-            $this->session->set('captcha_enabled',1); // Enable Captcha
-            \PFBC\Form::setError('form_login_aff', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
-            $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username', 'Affiliates');
-        }
-        elseif($sLogin === 'password_does_not_exist')
-        {
-            $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password', 'Affiliates');
+            if($sLogin === 'email_does_not_exist')
+            {
+                $this->session->set('captcha_enabled',1); // Enable Captcha
+                \PFBC\Form::setError('form_login_aff', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
+                $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username', 'Affiliates');
+            }
+            elseif($sLogin === 'password_does_not_exist')
+            {
+                $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password', 'Affiliates');
 
-            if($bIsLoginAttempt)
-                $oSecurityModel->addLoginAttempt('Affiliates');
+                if($bIsLoginAttempt)
+                    $oSecurityModel->addLoginAttempt('Affiliates');
 
-            sleep(1); // Security against brute-force attack to avoid drowning the server and the database
-
-            $this->session->set('captcha_enabled',1); // Enable Captcha
-            \PFBC\Form::setError('form_login_aff', t('Oops! This password you entered is incorrect.<br /> Please try again (make sure your caps lock is off).<br /> Forgot your password? <a href="%0%">Request a new one</a>.', UriRoute::get('affiliate','home','forgot')));
+                $this->session->set('captcha_enabled',1); // Enable Captcha
+                \PFBC\Form::setError('form_login_aff', t('Oops! This password you entered is incorrect.<br /> Please try again (make sure your caps lock is off).<br /> Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('affiliate','home','forgot')));
+            }
         }
         else
         {
@@ -85,16 +88,16 @@ class LoginFormProcessing extends Form
                     'affiliate_username' => $oAffData->username,
                     'affiliate_first_name' => $oAffData->firstName,
                     'affiliate_sex' => $oAffData->sex,
-                    'affiliate_ip' => Framework\Ip\Ip::get(),
+                    'affiliate_ip' => Ip::get(),
                     'affiliate_http_user_agent' => $this->browser->getUserAgent(),
-                    'affiliate_token' => Framework\Util\Various::genRnd($oAffData->email)
+                    'affiliate_token' => Various::genRnd($oAffData->email)
                 ];
 
                 $this->session->set($aSessionData);
                 $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
                 $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
 
-                HeaderUrl::redirect(UriRoute::get('affiliate','account','index'), t('You signup is successfully!'));
+                HeaderUrl::redirect(Uri::get('affiliate','account','index'), t('You signup is successfully!'));
             }
         }
     }

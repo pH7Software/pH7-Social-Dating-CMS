@@ -17,7 +17,7 @@ class DeleteUserCoreForm
         if (isset($_POST['submit_delete_account']))
         {
             if (\PFBC\Form::isValid($_POST['submit_delete_account']))
-                new DeleteUserCoreFormProcessing();
+                new DeleteUserCoreFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }

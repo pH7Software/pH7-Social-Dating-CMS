@@ -121,7 +121,7 @@ defined('PH7') or exit('Restricted access');
       */
      public function equals($sText1, $sText2)
      {
-         //return (strcmp($sText1, $sText2) === 0) ? true : false;
+         //return (strcmp($sText1, $sText2) === 0);
          return ($sText1 === $sText2);
      }
 
@@ -134,7 +134,7 @@ defined('PH7') or exit('Restricted access');
       */
      public function equalsIgnoreCase($sText1, $sText2)
      {
-         //return (strcasecmp($sText1, $sText2) === 0) ? true : false;
+         //return (strcasecmp($sText1, $sText2) === 0);
          $sText1 = $this->lower($sText1);
          $sText2 = $this->lower($sText2);
          return $this->equals($sText1, $sText2);
@@ -159,12 +159,12 @@ defined('PH7') or exit('Restricted access');
      }
 
      /**
-      * The \PH7\Framework\Str\Str::lastIndexOf() method is case sensitive.
+      * Find the position of the last occurrence of a specified value in a string.
       *
       * @param string $sText The string to search in.
       * @param string $sFindText Value to search.
       * @param integer $iOffset Default: 0
-      * @return integer The position of the first occurrence or -1 if the value to search is not found.
+      * @return integer The position of the last occurrence or -1 if the value to search is not found.
       */
      public function lastIndexOf($sText, $sFindText, $iOffset = 0)
      {
@@ -260,7 +260,7 @@ defined('PH7') or exit('Restricted access');
       *
       * @param mixed (array | string) $mText
       * @param boolean $bStrip Default: FALSE
-      * @return mixed (array | string) content to HTML entities.
+      * @return mixed (array | string) The escaped string.
       */
      public function escape($mText, $bStrip = false)
      {
@@ -287,7 +287,7 @@ defined('PH7') or exit('Restricted access');
       * @access protected
       * @param string $sText
       * @param boolean $bStrip
-      * @return The text parsed by Str::stripTags() method if $bStrip parameter is true otherwise by Str::htmlSpecialChars method.
+      * @return The text parsed by Str::stripTags() method if $bStrip parameter is TRUE otherwise by Str::htmlSpecialChars method.
       */
      protected function CEscape($sText, $bStrip)
      {

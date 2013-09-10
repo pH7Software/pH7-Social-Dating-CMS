@@ -15,7 +15,7 @@ class AlbumForm
         if (isset($_POST['submit_picture_album']))
         {
             if (\PFBC\Form::isValid($_POST['submit_picture_album']))
-                new AlbumFormProcessing;
+                new AlbumFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }

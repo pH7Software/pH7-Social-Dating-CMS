@@ -257,7 +257,6 @@ final class License
     private function _getLicInfo()
     {
         $oCache = (new Cache)->start('str/core', 'license', 3600*192); // Stored for 8 days
-
         if(!$mData = $oCache->get())
         {
             $sFields =  'siteid=' . Url::encode($this->_sHostName) . '&hostip=' . Url::encode($this->_sHostIp);
@@ -290,6 +289,7 @@ final class License
             $oCache->put($mData);
         }
         unset($oCache);
+
         return $mData;
     }
 

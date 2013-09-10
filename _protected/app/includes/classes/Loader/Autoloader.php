@@ -57,20 +57,20 @@ final class Autoloader
             require_once PH7_PATH_APP . 'includes/classes/' . $sClass . '.php';
 
         // For the Core Classes
-        if (is_file(PH7_PATH_SYS . 'core/' . PH7_CLASS . $sClass . '.php'))
-            require_once PH7_PATH_SYS . 'core/' . PH7_CLASS . $sClass . '.php';
+        if (is_file(PH7_PATH_SYS . 'core/classes/' . $sClass . '.php'))
+            require_once PH7_PATH_SYS . 'core/classes/' . $sClass . '.php';
 
         // For the Classes of the modules
-        if (is_file(Registry::getInstance()->path_module_inc . PH7_CLASS . $sClass . '.php'))
-            require_once Registry::getInstance()->path_module_inc . PH7_CLASS . $sClass . '.php';
+        if (is_file(Registry::getInstance()->path_module_inc . 'class/' . $sClass . '.php'))
+            require_once Registry::getInstance()->path_module_inc . 'class/' . $sClass . '.php';
 
         // For the Core Designs Classes
-        if (is_file(PH7_PATH_SYS . 'core/' . PH7_CLASS . PH7_DESIGN . $sClass . '.php'))
-            require_once PH7_PATH_SYS . 'core/' . PH7_CLASS . PH7_DESIGN . $sClass . '.php';
+        if (is_file(PH7_PATH_SYS . 'core/classes/design/' . $sClass . '.php'))
+            require_once PH7_PATH_SYS . 'core/classes/design/' . $sClass . '.php';
 
         // For the Designs Classes of the modules
-        if (is_file(Registry::getInstance()->path_module_inc . PH7_CLASS . PH7_DESIGN . $sClass . '.php'))
-            require_once Registry::getInstance()->path_module_inc . PH7_CLASS . PH7_DESIGN . $sClass . '.php';
+        if (is_file(Registry::getInstance()->path_module_inc . 'class/design/' . $sClass . '.php'))
+            require_once Registry::getInstance()->path_module_inc . 'class/design/' . $sClass . '.php';
     }
 
     /**
@@ -92,8 +92,8 @@ final class Autoloader
             require_once Registry::getInstance()->path_module_models . $sClass . '.php';
 
         // For the Core Designs Models
-        if (is_file(PH7_PATH_SYS . 'core/' . PH7_MODELS . PH7_DESIGN . $sClass . '.php'))
-            require_once PH7_PATH_SYS . 'core/' . PH7_MODELS . PH7_DESIGN . $sClass . '.php';
+        if (is_file(PH7_PATH_SYS . 'core/' . PH7_MODELS . 'design/' . $sClass . '.php'))
+            require_once PH7_PATH_SYS . 'core/' . PH7_MODELS . 'design/' . $sClass . '.php';
 
         // For the Core Designs Models of the modules
         /**

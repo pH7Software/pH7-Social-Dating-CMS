@@ -72,7 +72,7 @@ class Report
 
                 unset($oUser, $oUserModel);
 
-                $sMessageHtml = $this->_oView->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_TPL_NAME . '/mails/sys/mod/report/abuse.tpl', DbConfig::getSetting('adminEmail'));
+                $sMessageHtml = $this->_oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/report/abuse.tpl', DbConfig::getSetting('adminEmail'));
 
                 $aInfo = [
                    'subject' => t('Spam report from %site_name%')

@@ -20,7 +20,7 @@ class NotificationForm
         if (isset($_POST['submit_notification']))
         {
             if (\PFBC\Form::isValid($_POST['submit_notification']))
-                new NotificationFormProcessing($oUserModel, $iProfileId);
+                new NotificationFormProcess($oUserModel, $iProfileId);
             Framework\Url\HeaderUrl::redirect();
         }
 

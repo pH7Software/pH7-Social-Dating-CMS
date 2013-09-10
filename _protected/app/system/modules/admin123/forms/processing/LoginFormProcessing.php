@@ -10,7 +10,9 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Ip\Ip,
+PH7\Framework\Util\Various,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
@@ -22,6 +24,7 @@ class LoginFormProcessing extends Form
         parent::__construct();
 
         extract($_POST);
+        $sIp = Ip::get();
         $oAdminModel = new AdminModel;
         $oSecurityModel = new SecurityModel;
 
@@ -40,25 +43,28 @@ class LoginFormProcessing extends Form
         }
 
         // Check Login
-        if($oAdminModel->adminLogin($mail, $username, $password) !== true)
-        {
-            $oSecurityModel->addLoginLog($mail, $username, $password, 'Failed! Incorrect Email, Username or Password', 'Admins');
-
-            if($bIsLoginAttempt)
-                $oSecurityModel->addLoginAttempt('Admins');
-
-            sleep(2); // Security against brute-force attack to avoid drowning the server and the database
-
-            $this->session->set('captcha_admin_enabled',1); // Enable Captcha
-            \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is Incorrect'));
-        }
-        elseif(!empty($sIpLogin) && $sIpLogin !== Framework\Ip\Ip::get())
+        $bIsLogged = $oAdminModel->adminLogin($mail, $username, $password) !== true;
+        $bIsIpBanned = !empty($sIpLogin) && $sIpLogin !== $sIp;
+        if($bIsLogged || $bIsIpBanned)
         {
             sleep(2); // Security against brute-force attack to avoid drowning the server and the database
 
-            $this->session->set('captcha_admin_enabled',1); // Enable Captcha
-            \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
-            $oSecurityModel->addLoginLog($mail, $username, $password, 'Failed! Bad Ip adress', 'Admins');
+            if($bIsLogged)
+            {
+                $oSecurityModel->addLoginLog($mail, $username, $password, 'Failed! Incorrect Email, Username or Password', 'Admins');
+
+                if($bIsLoginAttempt)
+                    $oSecurityModel->addLoginAttempt('Admins');
+
+                $this->session->set('captcha_admin_enabled',1); // Enable Captcha
+                \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is Incorrect'));
+            }
+            elseif($bIsIpBanned)
+            {
+                $this->session->set('captcha_admin_enabled',1); // Enable Captcha
+                \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
+                $oSecurityModel->addLoginLog($mail, $username, $password, 'Failed! Bad Ip adress', 'Admins');
+            }
         }
         else
         {
@@ -79,16 +85,16 @@ class LoginFormProcessing extends Form
                'admin_email' => $oAdminData->email,
                'admin_username' => $oAdminData->username,
                'admin_first_name' => $oAdminData->firstName,
-               'admin_ip' => Framework\Ip\Ip::get(),
+               'admin_ip' => $sIp,
                'admin_http_user_agent' => $this->browser->getUserAgent(),
-               'admin_token' => Framework\Util\Various::genRnd($oAdminData->email),
+               'admin_token' => Various::genRnd($oAdminData->email),
             );
 
             $this->session->set($aSessionData);
             $oSecurityModel->addLoginLog($mail, $username, '*****', 'Logged in!', 'Admins');
             $oAdminModel->setLastActivity($oAdminData->profileId, 'Admins');
 
-            HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD,'main','index'), t('You signup is successfully!'));
+            HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD,'main','index'), t('You signup is successfully!'));
         }
     }
 

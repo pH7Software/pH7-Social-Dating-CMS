@@ -6,8 +6,9 @@
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2011-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @link             http://software.hizup.com
  * @package          PH7 / Framework / Core
- * @version          1.3
+ * @version          1.0.10
  */
 
 namespace PH7\Framework\Core;
@@ -17,7 +18,7 @@ use
 PH7\Framework\Config\Config,
 PH7\Framework\Str\Str,
 PH7\Framework\File\File,
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Navigation\Browser,
 PH7\Framework\Registry\Registry,
 PH7\Framework\Server\Server;
@@ -29,13 +30,13 @@ abstract class Kernel
     SOFTWARE_NAME = '¡pH7! Social Dating CMS',
     SOFTWARE_DESCRIPTION = 'This builder community dating software for web 3.0 new generation!',
     SOFTWARE_WEBSITE = 'http://software.hizup.com',
-    SOFTWARE_EMAIL = 'support.software@hizup.com',
+    SOFTWARE_EMAIL = 'ph7software@gmail.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_COMPANY = 'pH7 Framework / Social CMS (Pierre-Henry Soria)',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',
-    SOFTWARE_VERSION = '1.0.3',
+    SOFTWARE_VERSION = '1.0.10',
     SOFTWARE_BUILD = '1',
     SOFTWARE_NAME_TECHNOLOGY = 'pH7T/1.0.1', // Ph7 Technology
     SOFTWARE_NAME_SERVER = 'pH7WS/1.0.0', // pH7 Web Server
@@ -46,13 +47,12 @@ abstract class Kernel
 
     public function __construct()
     {
-        $this->_checkInternetConnection();
         $this->_checkLicense();
 
         $this->config = Config::getInstance();
         $this->str = new Str;
         $this->file = new File;
-        $this->httpRequest = new HttpRequest;
+        $this->httpRequest = new Http;
         $this->browser = new Browser;
         $this->registry = Registry::getInstance();
     }
@@ -61,7 +61,8 @@ abstract class Kernel
      * Check License key.
      *
      * @final
-     * Returns '1' if the license key is invalid and stops the script with the exit() function.
+     * @internal For optimal security, we do not show the actual path to the license file with the "PH7_PATH_TMP" constant (keep in mind that everyone can see this message).
+     * @return integer Returns '1' if the license key is invalid and stops the script with the exit() function.
      */
     private final function _checkLicense()
     {
@@ -72,7 +73,10 @@ abstract class Kernel
 
         if (!PH7_LICENSE_STATUS)
         {
-            echo t('Sorry, your License Key is incorrect! Please go <a href="%0%">HiZup Software</a> to get a valid license key.', self::SOFTWARE_WEBSITE);
+            $this->_checkInternetConnection(); // First we check the Internet connection
+
+            echo t('Sorry, your License Key is incorrect! Please go on <a href="%0%">HiZup Software</a> to get a valid license key.', self::SOFTWARE_WEBSITE) . '<br />';
+            echo t('If the problem persists, delete the "%0%" file and check if the "%1%" folder is in write mode (CHMOD 777).', '~/YOUR-PROTECTED-FOLDER/data/tmp/_license.txt', '~/YOUR-PROTECTED-FOLDER/data/tmp/');
             exit(1);
         }
     }

@@ -54,7 +54,7 @@ class Various
         $cSuffix = strtolower(substr(trim($sSize), -1));
         $iSize = (int) $sSize;
 
-        switch($cSuffix)
+        switch ($cSuffix)
         {
             // kilobyte
             case 'k':

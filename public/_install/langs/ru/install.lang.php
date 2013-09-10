@@ -6,7 +6,7 @@
  * @copyright        (c) 2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / RU
- * @update           07/19/13 10:20
+ * @update           09/10/13 23:06
  */
 
 namespace PH7;
@@ -16,11 +16,11 @@ $LANG = array (
     'charset' => 'utf-8',
     'lang_name' => 'Pусский',
     'version' => 'версия',
-    'CMS_desc' => '<p>Добро пожаловать в установку '.Controller::SOFTWARE_NAME.'.<br />
+    'CMS_desc' => '<p>Добро пожаловать в установку ' . Controller::SOFTWARE_NAME . '.<br />
     Благодарим Вас за выбор нашей CMS, и мы надеемся, что он будет радовать вас.</p>
     <p>Пожалуйста, следуйте шесть шагу установки.</p>',
     'chose_lang_for_install' => 'Пожалуйста, выберите ваш язык, чтобы начать установку',
-    'requirements_desc' => 'ВНИМАНИЕ! Пожалуйста, убедитесь, что ваш сервер имеет необходимую <a href="'.Controller::SOFTWARE_REQUIREMENTS_URL.'" target="_blank">требование</a> правильно запустить pH7CMS.',
+    'requirements_desc' => 'ВНИМАНИЕ! Пожалуйста, убедитесь, что ваш сервер имеет необходимую <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">требование</a> правильно запустить pH7CMS.',
     'config_path' => '&laquo;protected&raquo; путь к каталогу',
     'desc_config_path' => 'Пожалуйста, укажите полный путь к &laquo;protected&raquo; папка.<br />
     Это мудрое и целесообразно поставить этот каталог за пределами публичного квадратный из вашего веб-сервера.',
@@ -30,7 +30,7 @@ $LANG = array (
     'go' => 'Следующий шаг =>',
     'license' => 'Лицензия',
     'license_desc' => 'Пожалуйста, прочитайте внимательно лицензию и принять его, прежде чем продолжить установку программного обеспечения!',
-    'registration_for_license' => 'Пожалуйста, зарегистрируйтесь по этой <a href="'.Controller::SOFTWARE_WEBSITE.'" target="_blank">сайт</a> чтобы получить бесплатную лицензию для продолжения загрузки требуется.',
+    'registration_for_license' => 'Пожалуйста, зарегистрируйтесь по этой <a href="' . Controller::SOFTWARE_REGISTRATION_URL . '" target="_blank">странице</a> чтобы получить бесплатную лицензию для продолжения загрузки требуется.',
     'your_license' => 'Лицензионный ключ',
     'agree_license' => 'Я прочитал и согласен с вышеуказанными условиями.',
     'step' => 'Шаг',
@@ -51,6 +51,7 @@ $LANG = array (
     'no_app_config_writable' => 'Пожалуйста, измените права доступа к &laquo;protected/app/configs&raquo; каталога в режиме записи (CHMOD 777).',
     'database_error' => 'Ошибка подключения к базе данных.<br />',
     'error_sql_import' => 'Произошла ошибка при импорте файла в базу данных SQL',
+    'require_mysql_version' => 'Вы должны установить MySQL ' . PH7_REQUIRE_SQL_VERSION . ' или выше для того, чтобы продолжить.',
     'field_required' => 'Это поле обязательно',
     'all_fields_mandatory' => 'Все поля, отмеченные звездочкой (*) обязательны для заполнения',
     'db_hostname' => 'Сервер базы данных хоста',
@@ -89,9 +90,9 @@ $LANG = array (
     'confirm_remove_install_folder_auto' => 'ВНИМАНИЕ, ВСЕ файлы в каталоге /_install/ папки будут удалены.',
     'title_email_finish_install' => 'Поздравляем, установка вашего сайта закончен!',
     'content_email_finish_install' => '<p><strong>Поздравляем, Ваш сайт в настоящее время успешно установлен!</strong></p>
-    <p>Мы надеемся, Вам понравится работать с '.Controller::SOFTWARE_NAME.'</p>
-    <p>Для сообщения об ошибке, предложения, предложения, партнерство, участие в разработке CMS и ее перевод и т.д.</p>
-    <p>Пожалуйста, посетите наш <a href="'.Controller::SOFTWARE_WEBSITE.'" target="_blank">веб-сайт</a>.</p>
+    <p>Мы надеемся, Вам понравится работать с <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
+    <p>Для сообщения об ошибке, предложения, предложения, партнерство, участие в разработке CMS и ее перевод и т.д.,
+    пожалуйста, посетите наш <a href="' . Controller::SOFTWARE_WEBSITE . '" target="_blank">веб-сайт</a>.</p>
     <p>---</p>
     <p>С уважением,</p>
     <p>Команда pH7CMS разработчиков.</p>',

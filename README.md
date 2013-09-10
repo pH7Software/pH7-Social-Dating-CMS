@@ -65,7 +65,7 @@ In addition to being **free**, **open source** and **relatively stable**, this s
 * Social Bookmark
 * Anti-spam system
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
-* Everyone can easily contribute to this great project with our [GitHub repository](http://github.com/pH7Software/pH7-Social-Dating-CMS)
+* Everyone can easily contribute to this great innovative project with our [GitHub repository](http://github.com/pH7Software/pH7-Social-Dating-CMS)
 
 
 ## Help Us
@@ -74,7 +74,7 @@ We need help to continue this project, so we are waiting for you!
 
 We want to train a large team to work on this open source dating project.
 
-Please contact us at *developers.ph7software (at) gmail.com* to work on this exciting project.
+Please contact us at *developers (DOT) ph7software (AT) gmail (DOT) com* to work on this exciting project.
 
 
 Thank you!
@@ -114,7 +114,7 @@ Pierre-Henry Soria
 
 ## Contact
 
-Contact me at: *ph7software (at) gmail.com*
+Contact me at: *ph7software (AT) gmail (DOT) com*
 
 
 ## License

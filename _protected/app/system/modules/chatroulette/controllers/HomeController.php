@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Chatroulette / Controller
  */
 namespace PH7;
+
 use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Parse\SysVar,

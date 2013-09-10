@@ -17,7 +17,7 @@ class CommentForm
         if (isset($_POST['submit_comment']))
         {
             if (\PFBC\Form::isValid($_POST['submit_comment']))
-                new CommentFormProcessing();
+                new CommentFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -26,7 +26,7 @@ class CommentForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_comment', 'form_comment'));
         $oForm->addElement(new \PFBC\Element\Token('comment'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Add a comment:'), 'comment', array('id' => 'str_com', 'onblur' => 'CValid(this.value,this.id,2,2500)', 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 2500))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your comment:'), 'comment', array('id' => 'str_com', 'onblur' => 'CValid(this.value,this.id,2,2500)', 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 2500))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_com"></span>'));
         if (DbConfig::getSetting('isCaptchaComment'))
         {

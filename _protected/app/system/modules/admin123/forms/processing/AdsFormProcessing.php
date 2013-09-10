@@ -9,8 +9,8 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class AdsFormProcessing extends Form
@@ -21,7 +21,7 @@ class AdsFormProcessing extends Form
         parent::__construct();
 
         $sTable = AdsCore::getTable();
-        (new AdsCoreModel)->add($this->httpRequest->post('title'), $this->httpRequest->post('code', HttpRequest::NO_CLEAN), $sTable);
+        (new AdsCoreModel)->add($this->httpRequest->post('title'), $this->httpRequest->post('code', Http::NO_CLEAN), $sTable);
 
         /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
         (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear()
@@ -29,7 +29,7 @@ class AdsFormProcessing extends Form
         ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
 
         $sSlug = (AdsCore::getTable() == 'AdsAffiliates') ? 'affiliate' : '';
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisement was added successfully!'));
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisement was added successfully!'));
     }
 
 }

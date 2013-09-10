@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Newsletter / Model
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class SubscriptionModel extends UserCoreModel

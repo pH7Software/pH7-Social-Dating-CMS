@@ -10,7 +10,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class UserApiAjax
 {
@@ -31,7 +31,7 @@ class UserApiAjax
 
     private function _init()
     {
-        $oHttpRequest = new HttpRequest;
+        $oHttpRequest = new Http;
         $sParam = $oHttpRequest->post('param');
         $sType = $oHttpRequest->post('type');
         unset($oHttpRequest);
@@ -39,15 +39,15 @@ class UserApiAjax
         switch( $sType )
         {
             case 'profile_link':
-              $this->_mOutput = $this->_oUser->getProfileLink($sParam);
+                $this->_mOutput = $this->_oUser->getProfileLink($sParam);
             break;
 
-           // If we receive another invalid value, we display a message with a HTTP header.
-           default:
-             Framework\Http\Http::setHeadersByCode(400);
-           exit('Bad Request Error!');
-       }
-   }
+            // If we receive another invalid value, we display a message with a HTTP header.
+            default:
+                Framework\Http\Http::setHeadersByCode(400);
+            exit('Bad Request Error!');
+        }
+    }
 
     public function __destruct()
     {

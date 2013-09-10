@@ -18,10 +18,10 @@ $('#str_city').autocomplete({
                 featureClass: 'P',
                 style: 'full',
                 maxRows: 12,
-                name_startsWith: request.term
+                name_startsWith: oRequest.term
             },
             success: function(oData) {
-                response($.map(oData.geonames, function(oItem)
+                oResponse($.map(oData.geonames, function(oItem)
                 {
                     $('#str_city').click(function()
                     {

@@ -49,7 +49,9 @@ defined('PH7') or exit('Restricted access');
  * @link https://github.com/rgrove/jsmin-php
  */
 
-class JS {
+class JS
+{
+
   const ORD_LF            = 10;
   const ORD_SPACE         = 32;
   const ACTION_KEEP_A     = 1;
@@ -74,7 +76,8 @@ class JS {
    * @param string $js Javascript to be minified
    * @return string
    */
-  public static function minify($js) {
+  public static function minify($js)
+  {
     return (new self($js))->min();
   }
 
@@ -85,7 +88,8 @@ class JS {
    *
    * @param string $input Javascript to be minified
    */
-  public function __construct($input) {
+  public function __construct($input)
+  {
     $this->input       = str_replace("\r\n", "\n", $input);
     $this->inputLength = strlen($this->input);
   }
@@ -109,8 +113,10 @@ class JS {
    *      ACTION_DELETE_A    Copy B to A. Get the next B. (Delete A).
    *      ACTION_DELETE_A_B  Get the next B. (Delete B).
   */
-  protected function action($command) {
-    switch($command) {
+  protected function action($command)
+  {
+    switch($command)
+    {
       case self::ACTION_KEEP_A:
         $this->output .= $this->a;
 
@@ -118,7 +124,8 @@ class JS {
         $this->a = $this->b;
 
         if ($this->a === "'" || $this->a === '"') {
-          for (;;) {
+          for (;;)
+          {
             $this->output .= $this->a;
             $this->a       = $this->get();
 
@@ -149,7 +156,8 @@ class JS {
 
           $this->output .= $this->a . $this->b;
 
-          for (;;) {
+          for (;;)
+          {
             $this->a = $this->get();
 
             if ($this->a === '[') {
@@ -157,7 +165,8 @@ class JS {
                 inside a regex [...] set, which MAY contain a '/' itself. Example: mootools Form.Validator near line 460:
                   return Form.Validator.getValidator('IsEmpty').test(element) || (/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]\.?){0,63}[a-z0-9!#$%&'*+/=?^_`{|}~-]@(?:(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\])$/i).test(element.get('value'));
               */
-              for (;;) {
+              for (;;)
+              {
                 $this->output .= $this->a;
                 $this->a = $this->get();
 
@@ -192,7 +201,8 @@ class JS {
    *
    * @return string|null
    */
-  protected function get() {
+  protected function get()
+  {
     $c = $this->lookAhead;
     $this->lookAhead = null;
 
@@ -221,7 +231,8 @@ class JS {
    *
    * @return bool
    */
-  protected function isAlphaNum($c) {
+  protected function isAlphaNum($c)
+  {
     return ord($c) > 126 || $c === '\\' || preg_match('/^[\w\$]$/', $c) === 1;
   }
 
@@ -234,7 +245,8 @@ class JS {
    * @uses peek()
    * @return string
    */
-  protected function min() {
+  protected function min()
+  {
     if (0 == strncmp($this->peek(), "\xef", 1)) {
         $this->get();
         $this->get();
@@ -244,8 +256,10 @@ class JS {
     $this->a = "\n";
     $this->action(self::ACTION_DELETE_A_B);
 
-    while ($this->a !== null) {
-      switch ($this->a) {
+    while ($this->a !== null)
+    {
+      switch ($this->a)
+      {
         case ' ':
           if ($this->isAlphaNum($this->b)) {
             $this->action(self::ACTION_KEEP_A);
@@ -255,7 +269,8 @@ class JS {
           break;
 
         case "\n":
-          switch ($this->b) {
+          switch ($this->b)
+          {
             case '{':
             case '[':
             case '(':
@@ -281,7 +296,8 @@ class JS {
           break;
 
         default:
-          switch ($this->b) {
+          switch ($this->b)
+          {
             case ' ':
               if ($this->isAlphaNum($this->a)) {
                 $this->action(self::ACTION_KEEP_A);
@@ -292,7 +308,8 @@ class JS {
               break;
 
             case "\n":
-              switch ($this->a) {
+              switch ($this->a)
+              {
                 case '}':
                 case ']':
                 case ')':
@@ -332,13 +349,16 @@ class JS {
    * @throws \PH7\Framework\Compress\Exception On unterminated comment.
    * @return string
    */
-  protected function next() {
+  protected function next()
+  {
     $c = $this->get();
 
     if ($c === '/') {
-      switch($this->peek()) {
+      switch($this->peek())
+      {
         case '/':
-          for (;;) {
+          for (;;)
+          {
             $c = $this->get();
 
             if (ord($c) <= self::ORD_LF) {
@@ -349,8 +369,10 @@ class JS {
         case '*':
           $this->get();
 
-          for (;;) {
-            switch($this->get()) {
+          for (;;)
+          {
+            switch($this->get())
+            {
               case '*':
                 if ($this->peek() === '/') {
                   $this->get();
@@ -377,8 +399,10 @@ class JS {
    * @uses get()
    * @return string|null
    */
-  protected function peek() {
+  protected function peek()
+  {
     $this->lookAhead = $this->get();
     return $this->lookAhead;
   }
+
 }

@@ -34,7 +34,7 @@ class Height extends Measure implements IMeasure
      *
      * @see get()
      *
-     * @param boolean $bPrint Default: FALSE
+     * @param boolean $bPrint Default FALSE
      * @return void
      */
     public function display($bPrint = false)

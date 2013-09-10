@@ -2,7 +2,7 @@
 
   <div role="search" class="design-box">
     <h2>{lang 'Quick Search'}</h2>
-    {{ SearchUserCoreForm::quick(168) }}
+    {{ SearchUserCoreForm::quick(PH7_WIDTH_SEARCH_FORM) }}
   </div>
 
 </div>
@@ -47,7 +47,7 @@
             {{ $design->popupLinkConfirm(t('UnBan'), PH7_ADMIN_MOD, 'user', 'unban', $user->profileId) }}
           {/if}
           | <br />{{ $design->popupLinkConfirm(t('Delete'), PH7_ADMIN_MOD, 'user', 'delete', $user->profileId.'_'.$user->username) }} |
-          <a href="{% Framework\Ip\Ip::api($user->ip) %}" title="{lang 'See information from this user IP'}" target="_blank">{% $user->ip %}</a>
+          {{ $design->ip($user->ip) }}
           </p>
         {/if}
       </div>

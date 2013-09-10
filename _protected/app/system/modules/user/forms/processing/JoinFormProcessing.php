@@ -10,11 +10,11 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Date\CDateTime,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class JoinFormProcessing extends Form
@@ -68,7 +68,7 @@ class JoinFormProcessing extends Form
             $this->oRegistration->sendMail($aData);
 
             $this->session->set('mail_step1', $this->httpRequest->post('mail'));
-            HeaderUrl::redirect(UriRoute::get('user','signup','step2'));
+            HeaderUrl::redirect(Uri::get('user','signup','step2'));
         }
     }
 
@@ -76,11 +76,11 @@ class JoinFormProcessing extends Form
     {
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
 
-        // WARNING FOT "matchSex" FIELD: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+        // WARNING FOT "matchSex" FIELD: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
         // and damages the SET function SQL for entry into the database
         $aData = [
             'sex' => $this->httpRequest->post('sex'),
-            'match_sex' => $this->httpRequest->post('match_sex', HttpRequest::ONLY_XSS_CLEAN),
+            'match_sex' => $this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN),
             'birth_date' => $sBirthDate,
             'country' => $this->httpRequest->post('country'),
             'city' => $this->httpRequest->post('city'),
@@ -97,7 +97,7 @@ class JoinFormProcessing extends Form
         {
             // Register successfully in database for step 2!
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
-            HeaderUrl::redirect(UriRoute::get('user','signup','step3'));
+            HeaderUrl::redirect(Uri::get('user','signup','step3'));
         }
     }
 
@@ -105,7 +105,7 @@ class JoinFormProcessing extends Form
     {
 
         $aData = [
-            'description' => $this->httpRequest->post('description', HttpRequest::ONLY_XSS_CLEAN),
+            'description' => $this->httpRequest->post('description', Http::ONLY_XSS_CLEAN),
             'profile_id' => $this->oUserModel->getId($this->session->get('mail_step2'))
         ];
 
@@ -117,7 +117,7 @@ class JoinFormProcessing extends Form
         {
             $this->session->destroy(); // Remove all sessions created pending registration
 
-            HeaderUrl::redirect(UriRoute::get('user','main','login'), t('You now been registered! %0%', $this->oRegistration->getMsg()));
+            HeaderUrl::redirect(Uri::get('user','main','login'), t('You now been registered! %0%', $this->oRegistration->getMsg()));
         }
     }
 

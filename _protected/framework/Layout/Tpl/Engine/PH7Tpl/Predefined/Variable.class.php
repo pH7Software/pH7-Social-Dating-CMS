@@ -4,7 +4,7 @@
  * @desc             We define variables.
  *                   Predefined variables can save considerable resources and speeds up the code with respect to variables assigned by through the object's template engine (PH7Tpl).
  *
- * @updated          The Last Update 07/31/12 23:22 (Greenwich Mean Time)
+ * @updated          Last Update 09/11/13 03:51
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
@@ -23,12 +23,11 @@ class Variable extends Predefined
     /**
      * Assign the global variables.
      *
-     * @access public
-     * @return this object
+     * @return object this
      */
     public function assign()
     {
-        /***** Kernel Variables *****/
+        /***** KERNEL VARIABLES *****/
         $this->addVar('software_name', 'self::SOFTWARE_NAME');
         $this->addVar('software_url', 'self::SOFTWARE_WEBSITE');
         $this->addVar('software_version', 'self::SOFTWARE_VERSION');
@@ -51,22 +50,22 @@ class Variable extends Predefined
         $this->addVar('url_data_sys_mod', 'PH7_URL_DATA_SYS_MOD');
         $this->addVar('url_data_mod', 'PH7_URL_DATA_MOD');
 
-        /***** Extension *****/
+        /***** EXTENSION *****/
         $this->addVar('page_ext', 'PH7_PAGE_EXT');
 
-        /***** FOR SIMPLE TEMPLATE *****/
+        /***** SYSTEM TEMPLATE *****/
         $this->addVar('url_tpl', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_DS');
         $this->addVar('url_tpl_css', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS');
         $this->addVar('url_tpl_img', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG');
         $this->addVar('url_tpl_js', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_JS');
 
-        /***** FOR MODULES TEMPLATE *****/
+        /***** MODULES TEMPLATE *****/
         $this->addVar('url_tpl_mod', '$this->registry->url_themes_module . PH7_TPL_MOD_NAME . PH7_DS');
         $this->addVar('url_tpl_mod_css', '$this->registry->url_themes_module . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS');
         $this->addVar('url_tpl_mod_img', '$this->registry->url_themes_module . PH7_TPL_MOD_NAME . PH7_DS . PH7_IMG');
         $this->addVar('url_tpl_mod_js', '$this->registry->url_themes_module . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS');
 
-        /***** Globals Variables *****/
+        /***** GLOBAL VARIABLES *****/
         $this->addVar('ip', 'Framework\Ip\Ip::get()');
 
         return $this;

@@ -167,10 +167,10 @@
 |   |       |   |   |-- DynamicFieldCoreForm.php
 |   |       |   |   |-- LinkCoreForm.php
 |   |       |   |   |-- processing
-|   |       |   |   |   |-- ChangePasswordCoreFormProcessing.php
-|   |       |   |   |   |-- ConfigFileCoreFormProcessing.php
-|   |       |   |   |   |-- DeleteUserCoreFormProcessing.php
-|   |       |   |   |   `-- ResendActivationCoreFormProcessing.php
+|   |       |   |   |   |-- ChangePasswordCoreFormProcess.php
+|   |       |   |   |   |-- ConfigFileCoreFormProcess.php
+|   |       |   |   |   |-- DeleteUserCoreFormProcess.php
+|   |       |   |   |   `-- ResendActivationCoreFormProcess.php
 |   |       |   |   |-- ResendActivationCoreForm.php
 |   |       |   |   |-- SearchUserCoreForm.php
 |   |       |   |   `-- ShareUrlCoreForm.php
@@ -282,20 +282,20 @@
 |   |           |   |   |-- LoginForm.php
 |   |           |   |   |-- MetaMainForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- AddAdminFormProcessing.php
-|   |           |   |   |   |-- AddUserFormProcessing.php
-|   |           |   |   |   |-- AdsFormProcessing.php
-|   |           |   |   |   |-- AnalyticsApiFormProcessing.php
-|   |           |   |   |   |-- EditFormProcessing.php
-|   |           |   |   |   |-- ImportUserFormProcessing.php
-|   |           |   |   |   |-- LoginFormProcessing.php
-|   |           |   |   |   |-- MetaMainFormProcessing.php
-|   |           |   |   |   |-- ProtectedFileFormProcessing.php
-|   |           |   |   |   |-- PublicFileFormProcessing.php
-|   |           |   |   |   |-- ScriptFormProcessing.php
-|   |           |   |   |   |-- SettingFormProcessing.php
-|   |           |   |   |   |-- StyleFormProcessing.php
-|   |           |   |   |   `-- UpdateAdsFormProcessing.php
+|   |           |   |   |   |-- AddAdminFormProcess.php
+|   |           |   |   |   |-- AddUserFormProcess.php
+|   |           |   |   |   |-- AdsFormProcess.php
+|   |           |   |   |   |-- AnalyticsApiFormProcess.php
+|   |           |   |   |   |-- EditFormProcess.php
+|   |           |   |   |   |-- ImportUserFormProcess.php
+|   |           |   |   |   |-- LoginFormProcess.php
+|   |           |   |   |   |-- MetaMainFormProcess.php
+|   |           |   |   |   |-- ProtectedFileFormProcess.php
+|   |           |   |   |   |-- PublicFileFormProcess.php
+|   |           |   |   |   |-- ScriptFormProcess.php
+|   |           |   |   |   |-- SettingFormProcess.php
+|   |           |   |   |   |-- StyleFormProcess.php
+|   |           |   |   |   `-- UpdateAdsFormProcess.php
 |   |           |   |   |-- ProtectedFileForm.php
 |   |           |   |   |-- PublicFileForm.php
 |   |           |   |   |-- ScriptForm.php
@@ -397,12 +397,12 @@
 |   |           |   |   |-- JoinForm.php
 |   |           |   |   |-- LoginForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- AddAffiliateFormProcessing.php
-|   |           |   |   |   |-- AdsAdminFormProcessing.php
-|   |           |   |   |   |-- BankFormProcessing.php
-|   |           |   |   |   |-- EditFormProcessing.php
-|   |           |   |   |   |-- JoinFormProcessing.php
-|   |           |   |   |   `-- LoginFormProcessing.php
+|   |           |   |   |   |-- AddAffiliateFormProcess.php
+|   |           |   |   |   |-- AdsAdminFormProcess.php
+|   |           |   |   |   |-- BankFormProcess.php
+|   |           |   |   |   |-- EditFormProcess.php
+|   |           |   |   |   |-- JoinFormProcess.php
+|   |           |   |   |   `-- LoginFormProcess.php
 |   |           |   |   `-- SearchAffiliateForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
@@ -456,8 +456,8 @@
 |   |           |   |   |-- AdminBlogForm.php
 |   |           |   |   |-- EditAdminBlogForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- AdminBlogFormProcessing.php
-|   |           |   |   |   `-- EditAdminBlogFormProcessing.php
+|   |           |   |   |   |-- AdminBlogFormProcess.php
+|   |           |   |   |   `-- EditAdminBlogFormProcess.php
 |   |           |   |   `-- SearchBlogForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
@@ -531,8 +531,8 @@
 |   |           |   |   |-- CommentForm.php
 |   |           |   |   |-- EditCommentForm.php
 |   |           |   |   `-- processing
-|   |           |   |       |-- CommentFormProcessing.php
-|   |           |   |       `-- EditCommentFormProcessing.php
+|   |           |   |       |-- CommentFormProcess.php
+|   |           |   |       `-- EditCommentFormProcess.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
 |   |           |   |       `-- Comment.php
@@ -594,7 +594,7 @@
 |   |           |   |-- forms
 |   |           |   |   |-- ContactForm.php
 |   |           |   |   `-- processing
-|   |           |   |       `-- ContactFormProcessing.php
+|   |           |   |       `-- ContactFormProcess.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
 |   |           |   |       `-- Contact.php
@@ -637,8 +637,8 @@
 |   |           |   |   |-- AddFieldForm.php
 |   |           |   |   |-- EditFieldForm.php
 |   |           |   |   `-- processing
-|   |           |   |       |-- AddFieldFormProcessing.php
-|   |           |   |       `-- EditFieldFormProcessing.php
+|   |           |   |       |-- AddFieldFormProcess.php
+|   |           |   |       `-- EditFieldFormProcess.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
 |   |           |   |       `-- Field.php
@@ -674,14 +674,14 @@
 |   |           |   |   |-- ForumForm.php
 |   |           |   |   |-- MsgForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- CategoryFormProcessing.php
-|   |           |   |   |   |-- EditCategoryFormProcessing.php
-|   |           |   |   |   |-- EditForumFormProcessing.php
-|   |           |   |   |   |-- EditMsgFormProcessing.php
-|   |           |   |   |   |-- EditReplyMsgFormProcessing.php
-|   |           |   |   |   |-- ForumFormProcessing.php
-|   |           |   |   |   |-- MsgFormProcessing.php
-|   |           |   |   |   `-- ReplyMsgFormProcessing.php
+|   |           |   |   |   |-- CategoryFormProcess.php
+|   |           |   |   |   |-- EditCategoryFormProcess.php
+|   |           |   |   |   |-- EditForumFormProcess.php
+|   |           |   |   |   |-- EditMsgFormProcess.php
+|   |           |   |   |   |-- EditReplyMsgFormProcess.php
+|   |           |   |   |   |-- ForumFormProcess.php
+|   |           |   |   |   |-- MsgFormProcess.php
+|   |           |   |   |   `-- ReplyMsgFormProcess.php
 |   |           |   |   |-- ReplyMsgForm.php
 |   |           |   |   `-- SearchTopicForm.php
 |   |           |   |-- lang
@@ -723,8 +723,8 @@
 |   |           |   |   |-- AdminEditForm.php
 |   |           |   |   |-- AdminForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- AdminEditFormProcessing.php
-|   |           |   |   |   `-- AdminFormProcessing.php
+|   |           |   |   |   |-- AdminEditFormProcess.php
+|   |           |   |   |   `-- AdminFormProcess.php
 |   |           |   |   `-- SearchGameForm.php
 |   |           |   |-- lang
 |   |           |   |   |-- en_US
@@ -786,7 +786,7 @@
 |   |           |   |-- forms
 |   |           |   |   |-- InviteForm.php
 |   |           |   |   `-- processing
-|   |           |   |       `-- InviteFormProcessing.php
+|   |           |   |       `-- InviteFormProcess.php
 |   |           |   |-- lang
 |   |           |   |   |-- en_US
 |   |           |   |   |   `-- LC_MESSAGES
@@ -808,7 +808,7 @@
 |   |           |   |-- forms
 |   |           |   |   |-- ForgotPasswordForm.php
 |   |           |   |   `-- processing
-|   |           |   |       `-- ForgotPasswordFormProcessing.php
+|   |           |   |       `-- ForgotPasswordFormProcess.php
 |   |           |   |-- lang
 |   |           |   |   |-- en_US
 |   |           |   |   |   `-- LC_MESSAGES
@@ -855,7 +855,7 @@
 |   |           |   |-- forms
 |   |           |   |   |-- MailForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   `-- MailFormProcessing.php
+|   |           |   |   |   `-- MailFormProcess.php
 |   |           |   |   `-- SearchMailForm.php
 |   |           |   |-- lang
 |   |           |   |   |-- en_US
@@ -907,8 +907,8 @@
 |   |           |   |-- forms
 |   |           |   |   |-- MsgForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- MsgFormProcessing.php
-|   |           |   |   |   `-- SubscriptionFormProcessing.php
+|   |           |   |   |   |-- MsgFormProcess.php
+|   |           |   |   |   `-- SubscriptionFormProcess.php
 |   |           |   |   |-- SearchSubscriberForm.php
 |   |           |   |   `-- SubscriptionForm.php
 |   |           |   |-- inc
@@ -947,8 +947,8 @@
 |   |           |   |   |-- EditNoteForm.php
 |   |           |   |   |-- NoteForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- EditNoteFormProcessing.php
-|   |           |   |   |   `-- NoteFormProcessing.php
+|   |           |   |   |   |-- EditNoteFormProcess.php
+|   |           |   |   |   `-- NoteFormProcess.php
 |   |           |   |   `-- SearchNoteForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
@@ -1022,8 +1022,8 @@
 |   |           |   |   |-- EditMembershipForm.php
 |   |           |   |   |-- MembershipForm.php
 |   |           |   |   `-- processing
-|   |           |   |       |-- EditMembershipFormProcessing.php
-|   |           |   |       `-- MembershipFormProcessing.php
+|   |           |   |       |-- EditMembershipFormProcess.php
+|   |           |   |       `-- MembershipFormProcess.php
 |   |           |   |-- inc
 |   |           |   |   |-- class
 |   |           |   |   |   |-- Api.php
@@ -1069,10 +1069,10 @@
 |   |           |   |   |-- EditPictureForm.php
 |   |           |   |   |-- PictureForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- AlbumFormProcessing.php
-|   |           |   |   |   |-- EditAlbumFormProcessing.php
-|   |           |   |   |   |-- EditPictureFormProcessing.php
-|   |           |   |   |   `-- PictureFormProcessing.php
+|   |           |   |   |   |-- AlbumFormProcess.php
+|   |           |   |   |   |-- EditAlbumFormProcess.php
+|   |           |   |   |   |-- EditPictureFormProcess.php
+|   |           |   |   |   `-- PictureFormProcess.php
 |   |           |   |   `-- SearchPictureForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
@@ -1111,7 +1111,7 @@
 |   |           |   |   `-- MainController.php
 |   |           |   |-- forms
 |   |           |   |   |-- processing
-|   |           |   |   |   `-- ReportFormProcessing.php
+|   |           |   |   |   `-- ReportFormProcess.php
 |   |           |   |   `-- ReportForm.php
 |   |           |   |-- inc
 |   |           |   |   `-- class
@@ -1171,15 +1171,15 @@
 |   |           |   |   |-- NotificationForm.php
 |   |           |   |   |-- PrivacyForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- AvatarFormProcessing.php
-|   |           |   |   |   |-- DesignFormProcessing.php
-|   |           |   |   |   |-- EditFormProcessing.php
-|   |           |   |   |   |-- EditWallFormProcessing.php
-|   |           |   |   |   |-- JoinFormProcessing.php
-|   |           |   |   |   |-- LoginFormProcessing.php
-|   |           |   |   |   |-- NotificationFormProcessing.php
-|   |           |   |   |   |-- PrivacyFormProcessing.php
-|   |           |   |   |   `-- WallFormProcessing.php
+|   |           |   |   |   |-- AvatarFormProcess.php
+|   |           |   |   |   |-- DesignFormProcess.php
+|   |           |   |   |   |-- EditFormProcess.php
+|   |           |   |   |   |-- EditWallFormProcess.php
+|   |           |   |   |   |-- JoinFormProcess.php
+|   |           |   |   |   |-- LoginFormProcess.php
+|   |           |   |   |   |-- NotificationFormProcess.php
+|   |           |   |   |   |-- PrivacyFormProcess.php
+|   |           |   |   |   `-- WallFormProcess.php
 |   |           |   |   |-- SearchFriendForm.php
 |   |           |   |   |-- SearchVisitorForm.php
 |   |           |   |   `-- WallForm.php
@@ -1255,10 +1255,10 @@
 |   |           |   |   |-- EditAlbumForm.php
 |   |           |   |   |-- EditVideoForm.php
 |   |           |   |   |-- processing
-|   |           |   |   |   |-- AlbumFormProcessing.php
-|   |           |   |   |   |-- EditAlbumFormProcessing.php
-|   |           |   |   |   |-- EditVideoFormProcessing.php
-|   |           |   |   |   `-- VideoFormProcessing.php
+|   |           |   |   |   |-- AlbumFormProcess.php
+|   |           |   |   |   |-- EditAlbumFormProcess.php
+|   |           |   |   |   |-- EditVideoFormProcess.php
+|   |           |   |   |   `-- VideoFormProcess.php
 |   |           |   |   |-- SearchVideoForm.php
 |   |           |   |   `-- VideoForm.php
 |   |           |   |-- inc
@@ -2656,7 +2656,7 @@
 |   |   |       |-- forms
 |   |   |       |   |-- LoginForm.php
 |   |   |       |   `-- processing
-|   |   |       |       `-- LoginFormProcessing.php
+|   |   |       |       `-- LoginFormProcess.php
 |   |   |       |-- inc
 |   |   |       |   |-- _attackers
 |   |   |       |   `-- class

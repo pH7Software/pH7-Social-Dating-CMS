@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 namespace PH7;
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Navigation\Page;
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri, PH7\Framework\Navigation\Page;
 
 class ModeratorController extends Controller
 {
@@ -60,6 +60,8 @@ class ModeratorController extends Controller
 
     public function video()
     {
+        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'video' . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'common.css');
+
         $this->view->page_title = t('Videos Moderation');
         $this->view->h2_title = t('Videos Moderation');
         $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalVideos(), 20);
@@ -93,7 +95,7 @@ class ModeratorController extends Controller
 
     public function pictureWebcam()
     {
-        HeaderUrl::redirect(UriRoute::get('webcam', 'webcam', 'picture'), t('Welcome to the Picture Webcam in "administrator mode"'));
+        HeaderUrl::redirect(Uri::get('webcam', 'webcam', 'picture'), t('Welcome to the Picture Webcam in "administrator mode"'));
     }
 
     public function approvedAlbumPicture()
@@ -110,7 +112,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The picture album could not be approved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'albumpicture'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumpicture'), $this->sMsg);
     }
 
     public function approvedPhoto()
@@ -127,7 +129,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The picture could not be approved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
     }
 
     public function approvedAlbumVideo()
@@ -145,7 +147,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The video album could not be approved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'albumvideo'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumvideo'), $this->sMsg);
     }
 
     public function approvedVideo()
@@ -162,7 +164,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The video could not be approved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'video'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'video'), $this->sMsg);
     }
 
     public function approvedAvatar()
@@ -179,7 +181,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The avatar could not be approved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
     }
 
     public function approvedBackground()
@@ -196,7 +198,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The wallpaper could not be approved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
     }
 
     public function disapprovedAlbumPicture()
@@ -213,7 +215,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The picture album could not be disapproved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'albumpicture'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumpicture'), $this->sMsg);
     }
 
     public function disapprovedPhoto()
@@ -230,7 +232,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The picture could not be disapproved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
     }
 
     public function disapprovedAlbumVideo()
@@ -248,7 +250,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The video album could not be disapproved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'albumvideo'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumvideo'), $this->sMsg);
     }
 
     public function disapprovedVideo()
@@ -265,7 +267,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The video could not be disapproved!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'video'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'video'), $this->sMsg);
     }
 
     public function disapprovedAvatar()
@@ -282,7 +284,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The avatar could not be disapprove!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
     }
 
     public function disapprovedBackground()
@@ -299,7 +301,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The wallpaper could not be disapprove!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
     }
 
     public function deleteAlbumPicture()
@@ -319,7 +321,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The picture album could not be deleted');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'albumpicture'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumpicture'), $this->sMsg);
     }
 
     public function deletePhoto()
@@ -340,7 +342,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The picture could not be deleted!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
     }
 
     public function deleteAlbumVideo()
@@ -360,7 +362,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The video album could not be deleted');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'albumvideo'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumvideo'), $this->sMsg);
     }
 
     public function deleteVideo()
@@ -381,21 +383,21 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The video could not be deleted!');
         }
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'video'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'video'), $this->sMsg);
     }
 
     public function deleteAvatar()
     {
         (new Admin)->deleteAvatar($this->httpRequest->post('id'), $this->httpRequest->post('username'));
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
     }
 
     public function deleteBackground()
     {
         (new Admin)->deleteBackground($this->httpRequest->post('id'), $this->httpRequest->post('username'));
 
-        HeaderUrl::redirect(UriRoute::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
     }
 
     public function __destruct()

@@ -12,7 +12,7 @@ use
 PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Date\CDateTime,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Mail\Mail;
 
 class SubscriptionFormProcessing extends Form
@@ -29,7 +29,8 @@ class SubscriptionFormProcessing extends Form
 
         switch ($this->httpRequest->post('direction'))
         {
-            case 'subscrire': {
+            case 'subscrire':
+            {
                 if (!$bIsSubscriber)
                 {
                     $aData = [
@@ -41,7 +42,7 @@ class SubscriptionFormProcessing extends Form
                         'active' => '0'
                     ];
 
-                    $sActivateLink = UriRoute::get('newsletter','home','activate') . '/' . $aData['email'] . '/' . $aData['hash_validation'];
+                    $sActivateLink = Uri::get('newsletter','home','activate') . '/' . $aData['email'] . '/' . $aData['hash_validation'];
 
                     $this->view->content = t('Hi %0%!') . '<br />' .
                     t('Welcome to %site_name% Subscription!', $aData['name']) . '<br />' .
@@ -70,9 +71,11 @@ class SubscriptionFormProcessing extends Form
                 {
                     \PFBC\Form::setError('form_subscription', t('Oops! You are already subscribed to our newsletter.'));
                 }
-            } break;
+            }
+            break;
 
-            case 'unsubscribe': {
+            case 'unsubscribe':
+            {
                 if ($bIsSubscriber)
                 {
                     $oSubscriptionModel->unsubscribe($sEmail);
@@ -82,7 +85,8 @@ class SubscriptionFormProcessing extends Form
                 {
                     \PFBC\Form::setError('form_subscription', t('We have not found any subscriber with the email address.'));
                 }
-            } break;
+            }
+            break;
 
             default:
                 Framework\Http\Http::setHeadersByCode(400);

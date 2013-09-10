@@ -15,7 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Registry\Registry,
-PH7\Framework\Mvc\Request\HttpRequest,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Util\Various;
 
 final class Security
@@ -50,7 +50,7 @@ final class Security
         if (!empty($sMod) && ($sMod === self::USER || $sMod === self::ADMIN))
             $iLengthPwd = ($sMod === self::ADMIN) ? self::LENGTH_ADMIN_PASSWORD : self::LENGTH_USER_PASSWORD;
         else
-            $iLengthPwd = (Registry::getInstance()->module === PH7_ADMIN_MOD || (new HttpRequest)->get('mod') === PH7_ADMIN_MOD) ? self::LENGTH_ADMIN_PASSWORD : self::LENGTH_USER_PASSWORD;
+            $iLengthPwd = (Registry::getInstance()->module === PH7_ADMIN_MOD || (new Http)->get('mod') === PH7_ADMIN_MOD) ? self::LENGTH_ADMIN_PASSWORD : self::LENGTH_USER_PASSWORD;
 
         // Chop the password
         return Various::padStr(hash('whirlpool', hash('sha512', self::PREFIX_SALT . hash('whirlpool', $sPrefixSalt)) . hash('whirlpool', $sPassword) . hash('sha512', hash('whirlpool', $sSuffixSalt) . self::SUFFIX_SALT)), $iLengthPwd);

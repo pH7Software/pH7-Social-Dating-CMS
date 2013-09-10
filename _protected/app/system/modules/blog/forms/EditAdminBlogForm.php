@@ -10,8 +10,9 @@ namespace PH7;
 use
 PH7\Framework\Str\Str,
 PH7\Framework\Navigation\Browser,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Security\CSRF\Token,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri;
 
 class EditAdminBlogForm
 {
@@ -21,14 +22,14 @@ class EditAdminBlogForm
         if (isset($_POST['submit_edit_blog']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit_blog']))
-                new EditAdminBlogFormProcessing();
+                new EditAdminBlogFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
         $oBlogModel = new BlogModel;
 
-        $iBlogId = (new HttpRequest)->get('id', 'int');
+        $iBlogId = (new Http)->get('id', 'int');
         $sPostId = $oBlogModel->getPostId($iBlogId);
         $oPost = $oBlogModel->readPost($sPostId);
 
@@ -53,9 +54,7 @@ class EditAdminBlogForm
             $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_blog', 'form_blog'));
             $oForm->addElement(new \PFBC\Element\Token('edit_blog'));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title of article:'), 'title', array('value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
-
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Id of article:'), 'post_id', array('value' => $oPost->postId, 'description' => UriRoute::get('blog', 'main', 'index') . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the url.'), 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1)));
-
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('value' => $oPost->postId, 'description' => Uri::get('blog', 'main', 'index') . '/<strong><span class="your-address">' . $oPost->postId . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the url.'), 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
             $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoriesName, array('description' => t('Select a category that best fits your article.'), 'value' => $aSelectedCategories, 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
@@ -69,9 +68,9 @@ class EditAdminBlogForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><br /><img src="' . Blog::getThumb($oPost->blogId) . '" alt="' . t('Thumbnail') . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'));
 
             if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog/' . PH7_IMG . $iBlogId . '/thumb.png'))
-                LinkCoreForm::display(t('Remove this avatar?'), 'blog', 'admin', 'edit', array('del_thumb' => 1, 'id' => $oPost->blogId));
+                $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="' . Uri::get('note', 'main', 'removethumb', $oPost->blogId . (new Token)->url(), false) . '">' . t('Remove this thumbnail?') . '</a>'));
 
-            $oForm->addElement(new \PFBC\Element\Textbox(t('tags:'), 'tags', array('value' => $oPost->tags, 'description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 200))));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', array('value' => $oPost->tags, 'description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 200))));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title (meta tag):'), 'page_title', array('value' => $oPost->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 200), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Description (meta tag):'), 'meta_description', array('value' => $oPost->metaDescription, 'validation' => new \PFBC\Validation\Str(2, 200))));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords (meta tag):'), 'meta_keywords', array('description' => t('Separate keywords by commas.'), 'value' => $oPost->metaKeywords, 'validation' => new \PFBC\Validation\Str(2, 200))));

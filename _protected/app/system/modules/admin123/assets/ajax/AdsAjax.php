@@ -8,9 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Model\Design as DesignModel;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mvc\Model\Design;
 
 class AdsAjax
 {
@@ -22,7 +20,7 @@ class AdsAjax
         if (!(new Framework\Security\CSRF\Token)->check('ads') )
         exit(jsonMsg(0, Form::errorTokenMsg()));
 
-        $this->_oHttpRequest = new HttpRequest;
+        $this->_oHttpRequest = new Http;
         $this->_oAdsModel = new AdsCoreModel;
 
         switch ($this->_oHttpRequest->post('type'))
@@ -53,7 +51,7 @@ class AdsAjax
 
         if ($this->_bStatus)
         {
-            (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
+            (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
             $this->_sMsg = jsonMsg(1, t('The Advertisement we been activate.'));
         }
         else
@@ -71,7 +69,7 @@ class AdsAjax
 
         if ($this->_bStatus)
         {
-            (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear();
+            (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
             $this->_sMsg = jsonMsg(1, t('The deactivate we been deleted.'));
         }
         else
@@ -90,7 +88,7 @@ class AdsAjax
         if ($this->_bStatus)
         {
             /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
-            (new Framework\Cache\Cache)->start(DesignModel::CACHE_STATIC_GROUP, null, null)->clear()
+            (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear()
                     ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
                     ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
 

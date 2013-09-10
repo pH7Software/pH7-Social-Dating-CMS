@@ -16,7 +16,8 @@ defined('PH7') or exit('Restricted access');
 *  @ version         19:38 04/08/2009
 */
 
-class GoogleKeywordsRankAPI {
+class GoogleKeywordsRankAPI
+{
         /** URL of the website to check in the google results **/
         private $url = '';
 
@@ -37,7 +38,8 @@ class GoogleKeywordsRankAPI {
           * @return void
           */
 
-        public function __construct($url, $maxPages=1, $extension = 'fr') {
+        public function __construct($url, $maxPages=1, $extension = 'en')
+        {
                 $this->url = str_replace('http://www.','',$url);
                 $this->extension = $extension;
 
@@ -84,7 +86,8 @@ class GoogleKeywordsRankAPI {
           * @return string the html code
           */
 
-        public function getContent($url) {
+        public function getContent($url)
+        {
                 if (!extension_loaded('curl')) {
                    throw new \PH7\Framework\Error\CException\PH7Exception('curl extension is not available');
                 }

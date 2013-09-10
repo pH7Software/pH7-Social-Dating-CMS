@@ -138,12 +138,12 @@ class FriendAjax extends Core
          */
         $sSiteName = Framework\Mvc\Model\DbConfig::getSetting('siteName');
 
-        $this->view->content = t('Hello %0%!<br /><strong>%1%</strong> sent you a friendship request on %2%.<br /> <a href="%3%">Click here</a> to see your friend request.', $sFriendUsername, $this->session->get('member_username'), $sSiteName, Framework\Mvc\Router\UriRoute::get('user', 'friend', 'index'));
+        $this->view->content = t('Hello %0%!<br /><strong>%1%</strong> sent you a friendship request on %2%.<br /> <a href="%3%">Click here</a> to see your friend request.', $sFriendUsername, $this->session->get('member_username'), $sSiteName, Framework\Mvc\Router\Uri::get('user', 'friend', 'index'));
 
         /* Because we work in Ajax, the constant "PH7_TPL_NAME" is not yet defined.
          * So we use the constant "PH7_DEFAULT_THEME" is already defined.
          */
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'globals/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/mails/sys/mod/user/friend_request.tpl', $sFriendEmail);
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/mail/sys/mod/user/friend_request.tpl', $sFriendEmail);
 
         $aInfo = [
         'to' => $sFriendEmail,

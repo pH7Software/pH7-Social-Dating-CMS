@@ -192,7 +192,7 @@ class File
     }
 
     /**
-     * Gets file size.
+     * Get file size.
      *
      * @param string $sFile
      * @return integer The size of the file in bytes.
@@ -649,16 +649,17 @@ class File
     public function readDirs($sPath = './')
     {
         if (!($rHandle = opendir($sPath))) return false;
-        $aRet = array();
+        $aRet = array();//remove it for yield
 
         while (false !== ($sFolder = readdir($rHandle)))
         {
             if ('.' == $sFolder || '..' == $sFolder || !is_dir($sPath . $sFolder))
                 continue;
-            $aRet[] = $sFolder;
+            //yield $sFolder; // PHP 5.5
+            $aRet[] = $sFolder;//remove it for yield
         }
         closedir($rHandle);
-        return $aRet;
+        return $aRet;//remove it for yield
     }
 
     /**

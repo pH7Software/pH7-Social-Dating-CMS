@@ -12,7 +12,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class StatCoreAjax
 {
@@ -32,7 +32,7 @@ class StatCoreAjax
 
     private function _init()
     {
-        switch( (new HttpRequest)->post('type') )
+        switch( (new Http)->post('type') )
         {
             case 'total_users':
               $this->_mOutput = $this->_oUserModel->total();

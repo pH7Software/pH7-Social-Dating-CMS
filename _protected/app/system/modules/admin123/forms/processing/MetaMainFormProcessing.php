@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Url\Uri;
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class MetaMainFormProcessing extends Form
 {

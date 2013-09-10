@@ -81,9 +81,6 @@ class Backup
 
             $oResult = $oDb->query('SELECT * FROM ' . $sTable);
 
-            /*** Free memory and close the database connection ***/
-            unset($oDb);
-
             $iNum = (int) $oResult->rowCount();
 
             if ($iNum > 0)
@@ -105,13 +102,14 @@ class Backup
                     $this->_sSql .= 'INSERT INTO ' . $sTable . ' (' . implode(', ', $aColumns) . ') VALUES(\'' . implode('\', \'', $aValues) . "');\n";
 
                     unset($aColumns, $aValues);
-
-                    $this->_sSql .= "\n\n";
                 }
+                $this->_sSql .= "\n\n";
+
                 unset($aRow);
             }
             unset($oResult);
         }
+        unset($oDb);
 
         return $this;
     }

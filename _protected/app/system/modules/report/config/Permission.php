@@ -7,7 +7,8 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\HeaderUrl;
+
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class Permission extends PermissionCore
 {
@@ -19,13 +20,13 @@ class Permission extends PermissionCore
         // This module is available only to members
         if(!UserCore::auth() && !AdminCore::auth())
         {
-            HeaderUrl::redirect(UriRoute::get('user', 'signup', 'step1'), t('You must register to report the abuse.'));
+            HeaderUrl::redirect(Uri::get('user', 'signup', 'step1'), t('You must register to report the abuse.'));
         }
 
         if(!AdminCore::auth() && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            HeaderUrl::redirect(UriRoute::get('user','main','login'), $this->adminSignInMsg(), 'error');
+            HeaderUrl::redirect(Uri::get('user','main','login'), $this->adminSignInMsg(), 'error');
         }
     }
 

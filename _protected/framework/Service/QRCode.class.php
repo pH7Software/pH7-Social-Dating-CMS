@@ -1,6 +1,6 @@
 <?php
 /**
- * @title            QRCode Class
+ * @title            QR Code Class
  * @desc             Compatible to vCard 4.0 or higher.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>

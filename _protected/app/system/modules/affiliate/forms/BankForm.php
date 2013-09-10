@@ -9,8 +9,8 @@ namespace PH7;
 
 use
 PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Request\HttpRequest,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Mvc\Router\Uri;
 
 class BankForm
 {
@@ -20,12 +20,12 @@ class BankForm
         if (isset($_POST['submit_bank_account']))
         {
             if (\PFBC\Form::isValid($_POST['submit_bank_account']))
-                new BankFormProcessing();
+                new BankFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oHR = new HttpRequest;
+        $oHR = new Http;
         $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
         $oAff = (new AffiliateModel)->readProfile($iProfileId, 'Affiliates');
 
@@ -36,7 +36,7 @@ class BankForm
 
         if (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id'))
         {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="s_button" href="' . UriRoute::get('affiliate', 'admin', 'userlist') . '">' . t('Return to back affiliates browse') . '</a></p>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="s_button" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Return to back affiliates browse') . '</a></p>'));
         }
         unset($oHR);
 

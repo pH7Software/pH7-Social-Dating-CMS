@@ -9,7 +9,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\UriRoute, PH7\Framework\Url\Url;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Url;
 
 class UserDesignCoreModel extends Framework\Mvc\Model\Design
 {
@@ -26,7 +26,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
 
     public function geoProfiles($sCountryCode, $sCity = '', $iOffset = 0, $iLimit = 24)
     {
-        $oUserGeo = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, UserCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
+        $oUserGeo = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUserGeo)) return;
 
         foreach ($oUserGeo as $oRow)
@@ -46,7 +46,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
                     's' => $oRow->sex
                 ];
 
-                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">'. $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', UriRoute::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, 150, 'Members'), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
+                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">'. $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, 150, 'Members'), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
             }
             else
             {
@@ -60,7 +60,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
 
     public function carouselProfiles($iOffset = 0, $iLimit = 25)
     {
-        $oUser = $this->oUserModel->getProfiles(UserCoreModel::LATEST, $iOffset, $iLimit);
+        $oUser = $this->oUserModel->getProfiles(SearchCoreModel::LATEST, $iOffset, $iLimit);
         if (empty($oUser)) return;
 
         echo '<script>$(function(){$("#foo").carouFredSel()});</script>
@@ -83,7 +83,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
                     's' => $oRow->sex
                 ];
 
-                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">' . $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', UriRoute::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, 150, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oRow->username), '" class="splash_avatar" /></a>';
+                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">' . $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, 150, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oRow->username), '" class="splash_avatar" /></a>';
             }
             else
             {
@@ -99,7 +99,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
 
     public function profilesBlock($iOffset = 0, $iLimit = 9)
     {
-        $oUser = $this->oUserModel->getProfiles(UserCoreModel::LATEST, $iOffset, $iLimit);
+        $oUser = $this->oUserModel->getProfiles(SearchCoreModel::LATEST, $iOffset, $iLimit);
         if (empty($oUser)) return;
 
         echo '<script>$(function(){$(\'ul.zoomer_pic li\').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false})});</script>
@@ -118,7 +118,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
 
     public function profiles($iOffset = 0, $iLimit = 36)
     {
-        $oUser = $this->oUserModel->getProfiles(UserCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
+        $oUser = $this->oUserModel->getProfiles(SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUser)) return;
 
         foreach ($oUser as $oRow)

@@ -32,7 +32,7 @@ class ConfigFileCoreForm
         if (isset($_POST['submit_config']))
         {
             if (\PFBC\Form::isValid($_POST['submit_config']))
-                new ConfigFileCoreFormProcessing($sConfigVar, $sIniFile);
+                new ConfigFileCoreFormProcess($sConfigVar, $sIniFile);
 
             Framework\Url\HeaderUrl::redirect();
         }

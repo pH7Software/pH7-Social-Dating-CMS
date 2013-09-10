@@ -121,7 +121,7 @@ class Cache
     /**
      * Stop the cache.
      *
-     * @param boolean $bPrint TRUE = Display data with ECHO. FALSE = Return data. Default is TRUE.
+     * @param boolean $bPrint TRUE = Display data with ECHO. FALSE = Return data. Default TRUE.
      * @return string (string | null)
      */
     public function stop($bPrint = true)
@@ -196,6 +196,7 @@ class Cache
         return 'defined(\'PH7\') or exit(\'Restricted access\');
 /*
 Created on ' . gmdate('Y-m-d H:i:s') . '
+ID file: ' . $this->_sId . '
 */
 /***************************************************************************
  *     ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_COMPANY . '

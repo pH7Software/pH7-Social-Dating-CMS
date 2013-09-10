@@ -6,7 +6,6 @@
  * @package        PH7 / App / System / Module / HotOrNot / Controller
  */
 namespace PH7;
-use PH7\Framework\Http\Http;
 
 class MainController extends Controller
 {
@@ -25,31 +24,27 @@ class MainController extends Controller
         if (UserCore::auth())
             $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'script.js');
 
-        // Meta Tags
+        /*** Meta Tags ***/
+        /**
+         * @internal We can include HTML tags in the title since the template will erase them before display.
+         */
+        $sMenDesc = t('You men!') . '<br />' . t('Vote for the most beautiful women, the sexiest and hottest online dating free site!');
+        $sWomenDesc = t('You women!') . '<br />' .t('Vote for the best men, the sexiest and hottest free online dating site!');
+
         $this->view->page_title = t('Hot On Not - Free Online Dating Site');
-
-        $this->view->meta_description = t('You men!
-                Vote for the most beautiful women, the sexiest and hottest online dating free site!
-                You women!
-                Vote for the best men, the sexiest and hottest free online dating site!');
-
+        $this->view->meta_description = $sMenDesc . ' ' . $sWomenDesc;
         $this->view->meta_keywords = t('hot, hot or not, hotornot, sexy, rate, rating, voting, women, free, dating, speed dating, flirt');
+        $this->view->desc_for_man = $sMenDesc;
+        $this->view->desc_for_woman = $sWomenDesc;
 
-        $this->view->desc_for_man = t('You men!<br />
-                Vote for the most beautiful women, the sexiest and hottest online dating free site!');
-
-        $this->view->desc_for_woman = t('You women!<br />
-                Vote for the best men, the sexiest and hottest free online dating site!');
-
-        /*** Go Display ***/
-
+        /*** Display ***/
         // If the user is connected, we do not display its own avarar since this user can not vote for himself.
         $iProfileId = (UserCore::auth()) ? $this->session->get('member_id') : null;
         $oData = $this->oHoNModel->getPicture($iProfileId);
 
         if (empty($oData))
         {
-            Http::setHeadersByCode(404);
+            Framework\Http\Http::setHeadersByCode(404);
             $this->view->error = t('Sorry, We did not find the photo to Hot Or Not Party.');
         }
         else

@@ -6,7 +6,7 @@
  * @copyright        (c) 2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / ES
- * @update           07/29/13 08:12
+ * @update           09/10/13 23:06
  */
 
 namespace PH7;
@@ -16,11 +16,11 @@ $LANG = array (
     'charset' => 'utf-8',
     'lang_name' => 'Español',
     'version' => 'versión',
-    'CMS_desc' => '<p>Bienvenido a la instalación de '.Controller::SOFTWARE_NAME.'.<br />
+    'CMS_desc' => '<p>Bienvenido a la instalación de ' . Controller::SOFTWARE_NAME . '.<br />
     Gracias por elegir nuestro CMS y esperamos que sea de su agrado usted.</p>
     <p>Por favor, siga el paso seis de la instalación.</p>',
     'chose_lang_for_install' => 'Por favor, elija su idioma para comenzar la instalación',
-    'requirements_desc' => '¡ADVERTENCIA! Por favor, asegúrese de que el servidor tiene la necesaria <a href="'.Controller::SOFTWARE_REQUIREMENTS_URL.'" target="_blank">requisitos</a> para funcionar correctamente pH7CMS.',
+    'requirements_desc' => '¡ADVERTENCIA! Por favor, asegúrese de que el servidor tiene la necesaria <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">requisitos</a> para funcionar correctamente pH7CMS.',
     'config_path' => 'Ruta del directorio &laquo;protected&raquo;',
     'desc_config_path' => 'Por favor, especifique la ruta completa a la carpeta de &laquo;protected&raquo;.<br />
     Es prudente y aconsejable colocar este directorio fuera de la raíz pública del servidor de la Web.',
@@ -30,7 +30,7 @@ $LANG = array (
     'go' => 'Siguiente paso =>',
     'license' => 'Licencia',
     'license_desc' => '¡Por favor, lea cuidadosamente la licencia y acéptelo para continuar la instalación del software!',
-    'registration_for_license' => 'Por favor regístrese en esta <a href="'.Controller::SOFTWARE_WEBSITE.'" target="_blank">sitio web</a> para obtener se requiere la licencia libre para continuar.',
+    'registration_for_license' => 'Por favor regístrese en esta <a href="' . Controller::SOFTWARE_REGISTRATION_URL . '" target="_blank">página</a> para obtener se requiere la licencia libre para continuar.',
     'your_license' => 'Su clave de licencia',
     'agree_license' => 'He leído y acepto los términos anteriores.',
     'step' => 'Paso',
@@ -51,6 +51,7 @@ $LANG = array (
     'no_app_config_writable' => 'Cambie los permisos del directorio &laquo;protected/app/configs&raquo; en el modo de escritura (CHMOD 777).',
     'database_error' => 'Error al conectar con la base de datos.<br />',
     'error_sql_import' => 'Se produjo un error al importar el archivo en su base de datos SQL',
+    'require_mysql_version' => 'Debe instalar MySQL ' . PH7_REQUIRE_SQL_VERSION . ' o superior para poder continuar.',
     'field_required' => 'Este campo es obligatorio',
     'all_fields_mandatory' => 'Todos los campos marcados con un asterisco (*) son obligatorios',
     'db_hostname' => 'Nombre de host del servidor de base de datos',
@@ -89,9 +90,9 @@ $LANG = array (
     'confirm_remove_install_folder_auto' => 'ADVERTENCIA, se eliminarán todos los archivos de la carpeta /_install/.',
     'title_email_finish_install' => '¡Enhorabuena, la instalación de su sitio web está terminado!',
     'content_email_finish_install' => '<p><strong>¡Enhorabuena, tu sitio web está instalado correctamente!</strong></p>
-    <p>Esperamos que usted disfrute de '.Controller::SOFTWARE_NAME.'</p>
-    <p>Para los informes de errores, sugerencias, propuestas, colaboración, participación en el desarrollo de la CMS y su traducción, etc</p>
-    <p>Por favor visite nuestro <a href="'.Controller::SOFTWARE_WEBSITE.'" target="_blank">sitio web</a>.</p>
+    <p>¡Esperamos que usted disfrute de <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
+    <p>Para los informes de errores, sugerencias, propuestas, colaboración, participación en el desarrollo de la CMS y su traducción, etc.
+    por favor visite nuestro <a href="' . Controller::SOFTWARE_WEBSITE . '" target="_blank">sitio web</a>.</p>
     <p>---</p>
     <p>Saludos cordiales,</p>
     <p>El equipo de desarrolladores pH7CMS.</p>',

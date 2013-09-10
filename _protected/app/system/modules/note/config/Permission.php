@@ -7,7 +7,7 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -20,13 +20,13 @@ class Permission extends PermissionCore
 
         if(!UserCore::auth() && ($this->registry->action === 'add' || $this->registry->action === 'edit' || $this->registry->action === 'delete'))
         {
-            HeaderUrl::redirect(UriRoute::get('user','signup','step1'), t('Please register or login to add an article.'), 'error');
+            HeaderUrl::redirect(Uri::get('user','signup','step1'), t('Please register or login to add an article.'), 'error');
         }
 
         if(!AdminCore::auth() && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            HeaderUrl::redirect(UriRoute::get('blog','main','index'), $this->adminSignInMsg(), 'error');
+            HeaderUrl::redirect(Uri::get('blog','main','index'), $this->adminSignInMsg(), 'error');
         }
     }
 

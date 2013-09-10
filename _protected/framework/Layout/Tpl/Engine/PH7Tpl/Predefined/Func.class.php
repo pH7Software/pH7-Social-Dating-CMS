@@ -4,7 +4,7 @@
  * @desc             We define functions (and helpers).
  *                   Predefined functions can save considerable resources and speeds up the code with respect to functions in variables assigned by through the object's template engine (PH7Tpl).
  *
- * @updated          The Last Update 08/26/13 21:16 (Greenwich Mean Time)
+ * @updated          Last Update 09/11/13 03:44
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
@@ -23,8 +23,7 @@ class Func extends Predefined
     /**
      * Assign the global functions.
      *
-     * @access public
-     * @return this object
+     * @return object this
      */
     public function assign()
     {

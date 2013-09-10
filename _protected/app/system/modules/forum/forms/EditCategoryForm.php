@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Config\Config, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Config\Config, PH7\Framework\Mvc\Request\Http;
 
 class EditCategoryForm
 {
@@ -17,19 +17,19 @@ class EditCategoryForm
         if (isset($_POST['submit_category_edit']))
         {
             if (\PFBC\Form::isValid($_POST['submit_category_edit']))
-                new EditCategoryFormProcessing();
+                new EditCategoryFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oCategoryData = (new ForumModel)->getCategory((new HttpRequest)->get('category_id'), 0, 1);
+        $oCategoryData = (new ForumModel)->getCategory((new Http)->get('category_id'), 0, 1);
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
         $oForm = new \PFBC\Form('form_category_edit', '100%');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_category_edit', 'form_category_edit'));
         $oForm->addElement(new \PFBC\Element\Token('category_edit'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Category Name:'), 'title', array('id'=>'str_category', 'value' => $oCategoryData->title, 'onblur'=>'CValid(this.value,this.id,4,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Category Name:'), 'title', array('id'=>'str_category', 'value' => $oCategoryData->title, 'onblur'=>'CValid(this.value,this.id,2,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_category"></span>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));

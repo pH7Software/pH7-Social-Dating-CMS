@@ -11,15 +11,15 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Security\Validate\Validate,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\HttpRequest;
+PH7\Framework\Mvc\Request\Http;
 
-$oHttpRequest = new HttpRequest;
+$oHttpRequest = new Http;
 
 $iStatus = 0; // Error Default Value
 
 if($oHttpRequest->postExists('username'))
 {
-    $iStatus = ((new Validate)->username($oHttpRequest->post('username'), DbConfig::getSetting('minUsernameLength'), PH7_MAX_USERNAME_LENGTH)) ? 1 : 0;
+    $iStatus = ((new Validate)->username($oHttpRequest->post('username'), DbConfig::getSetting('minUsernameLength'), DbConfig::getSetting('maxUsernameLength'))) ? 1 : 0;
 }
 
 echo json_encode(array('status'=>$iStatus));

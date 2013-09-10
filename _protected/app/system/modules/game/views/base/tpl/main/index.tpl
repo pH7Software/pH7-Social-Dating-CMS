@@ -2,7 +2,7 @@
 
   <div class="design-box">
     <h2>{lang 'Search Games'}</h2>
-    {{ SearchGameForm::display(168) }}
+    {{ SearchGameForm::display(PH7_WIDTH_SEARCH_FORM) }}
   </div>
 
   <div class="design-box">

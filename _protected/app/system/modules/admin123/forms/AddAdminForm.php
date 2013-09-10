@@ -15,7 +15,7 @@ class AddAdminForm
         if (isset($_POST['submit_add_admin']))
         {
             if (\PFBC\Form::isValid($_POST['submit_add_admin']))
-                new AddAdminFormProcessing;
+                new AddAdminFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }

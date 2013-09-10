@@ -19,7 +19,7 @@ class AddUserForm
         if (isset($_POST['submit_add_user']))
         {
             if (\PFBC\Form::isValid($_POST['submit_add_user']))
-                new AddUserFormProcessing;
+                new AddUserFormProcess;
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -35,9 +35,9 @@ class AddUserForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('required'=>1, 'validation'=>new \PFBC\Validation\Str(2,20))));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), 'middle_name', array('validation'=>new \PFBC\Validation\Str(2,20))));
         $oForm->addElement(new \PFBC\Element\Radio(t('Sex:'), 'sex', array('female'=>t('Female'), 'male'=>t('Male'), 'couple'=>t('Couple')), array('value'=>'female', 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Match Sex:'), 'match_sex', array('male'=>t('Male'), 'female'=>t('Female'), 'couple'=>t('Couple')),array('value'=>'male', 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Match Sex:'), 'match_sex', array('male'=>t('Male'), 'female'=>t('Female'), 'couple'=>t('Couple')), array('value'=>'male', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('placeholder'=>t('Month/Day/Year'), 'title'=>t('Please specify the birth date using the calendar or with this format: Month/Day/Year.'), 'validation'=> new \PFBC\Validation\BirthDate, 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country',array('id'=>'str_country', 'value'=>Geo::getCountryCode(), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id'=>'str_country', 'value'=>Geo::getCountryCode(), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city', 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('State:'), 'state', array('id'=>'str_state', 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), 'zip_code', array('id'=>'str_zip_code', 'validation'=>new \PFBC\Validation\Str(2,10), 'required'=>1)));

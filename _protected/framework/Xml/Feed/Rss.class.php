@@ -66,9 +66,9 @@ class Rss extends \DomDocument
         // Create an item
         $oItem = $this->createElement('item');
 
-        foreach($aItems as $sElement => $sValue)
+        foreach ($aItems as $sElement => $sValue)
         {
-            switch($sElement)
+            switch ($sElement)
             {
                 // Create the sub elements here
                 case 'image':
@@ -78,7 +78,7 @@ class Rss extends \DomDocument
                     $oIm = $this->createElement('image');
                     $this->_oChannel->appendChild($oIm);
 
-                    foreach($aValue as $sSubElement => $sSubValue)
+                    foreach ($aValue as $sSubElement => $sSubValue)
                     {
                         $oSub = $this->createElement($sSubElement, $sSubValue);
                         $oIm->appendChild($oSub);

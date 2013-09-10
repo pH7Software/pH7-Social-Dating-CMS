@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Report / Asset / Ajax
  */
 namespace PH7;
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 defined('PH7') or exit('Restricted access');
 
 class ReportAjax
@@ -19,7 +19,7 @@ class ReportAjax
         if (!(new Framework\Security\CSRF\Token)->check('report'))
         exit(jsonMsg(0, Form::errorTokenMsg()));
 
-        $this->_oHttpRequest = new HttpRequest;
+        $this->_oHttpRequest = new Http;
         $this->_oReportModel = new ReportModel;
 
         switch ($this->_oHttpRequest->post('type'))

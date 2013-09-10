@@ -13,7 +13,7 @@ PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Image\Image,
 PH7\Framework\Util\Various,
 PH7\Framework\Url\HeaderUrl,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class AdminFormProcessing extends Form
 {
@@ -61,7 +61,7 @@ class AdminFormProcessing extends Form
         /* Clean GameModel Cache */
         (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(UriRoute::get('game', 'main', 'game', $aData['title'].','.Db::getInstance()->lastInsertId()), t('The game was added successfully!'));
+        HeaderUrl::redirect(Uri::get('game', 'main', 'game', $aData['title'].','.Db::getInstance()->lastInsertId()), t('The game was added successfully!'));
     }
 
 }

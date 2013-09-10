@@ -5,6 +5,7 @@
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @link             http://software.hizup.com
  * @package          PH7 / Install
  * @version          1.0
  */
@@ -12,8 +13,9 @@
 defined('PH7') or exit('Restricted access');
 
 //------------ Other ----------------//
-//define('PH7_REQUIRE_VERSION', '5.5.0'); // For pH7CMS 1.1
-define('PH7_REQUIRE_VERSION', '5.4.0');
+//define('PH7_REQUIRE_SERVER_VERSION', '5.5.0'); // For pH7CMS 1.1
+define('PH7_REQUIRE_SERVER_VERSION', '5.4.0');
+define('PH7_REQUIRE_SQL_VERSION', '5.0');
 define('PH7_ENCODING', 'utf-8');
 define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
 define('PH7_DS', DIRECTORY_SEPARATOR);

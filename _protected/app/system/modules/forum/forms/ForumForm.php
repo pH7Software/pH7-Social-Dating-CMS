@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Config\Config, PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Config\Config, PH7\Framework\Mvc\Request\Http;
 
 class ForumForm
 {
@@ -17,15 +17,15 @@ class ForumForm
         if (isset($_POST['submit_forum']))
         {
             if (\PFBC\Form::isValid($_POST['submit_forum']))
-                new ForumFormProcessing();
+                new ForumFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
 
-        $oCategoriesData = (new ForumModel)->getCategory(null, 0, 300);
+        $oCategoriesData = (new ForumModel)->getCategory();
         $aCategoriesName = array();
-        foreach($oCategoriesData as $id)
-            $aCategoriesName[$id->categoryId] = $id->title;
+        foreach ($oCategoriesData as $oId)
+            $aCategoriesName[$oId->categoryId] = $oId->title;
         unset($oCategoriesData);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
@@ -34,12 +34,8 @@ class ForumForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_forum', 'form_forum'));
         $oForm->addElement(new \PFBC\Element\Token('forum'));
-
-        $oHttpRequest = new HttpRequest();
-        $oForm->addElement(new \PFBC\Element\Select(t('Category Name:'), 'category_id',  $aCategoriesName, array('value'=>$oHttpRequest->get('category_id'), 'required' => 1)));
-        unset($oHttpRequest);
-
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Forum Name:'), 'name', array('id'=>'str_name', 'onblur'=>'CValid(this.value,this.id,4,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
+        $oForm->addElement(new \PFBC\Element\Select(t('Category Name:'), 'category_id',  $aCategoriesName, array('value' => (new Http)->get('category_id'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Forum Name:'), 'name', array('id'=>'str_name', 'onblur'=>'CValid(this.value,this.id,2,60)', 'pattern' => $sTitlePattern, 'required' => 1, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_name"></span>'));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), 'description', array('id'=>'str_description', 'required' => 1, 'onblur'=>'CValid(this.value,this.id,4,255)', 'validation'=>new \PFBC\Validation\Str(4,255))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));

@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class EditFormProcessing extends Form
 {
@@ -47,10 +47,10 @@ class EditFormProcessing extends Form
             (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Members', null)->clear();
         }
 
-        // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\HttpRequest::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+        // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
         // and damages the SET function SQL for entry into the database.
-        if(!$this->str->equals($this->httpRequest->post('match_sex', HttpRequest::ONLY_XSS_CLEAN), $oUser->matchSex))
-            $oUserModel->updateProfile('matchSex', Form::setVal($this->httpRequest->post('match_sex', HttpRequest::ONLY_XSS_CLEAN)), $iProfileId);
+        if(!$this->str->equals($this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN), $oUser->matchSex))
+            $oUserModel->updateProfile('matchSex', Form::setVal($this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN)), $iProfileId);
 
         if(!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate))
             $oUserModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId);
@@ -59,7 +59,7 @@ class EditFormProcessing extends Form
         $oFields = $oUserModel->getInfoFields($iProfileId);
         foreach($oFields as $sColumn => $sValue)
         {
-            $sHRParam = ($sColumn == 'description') ? HttpRequest::ONLY_XSS_CLEAN : null;
+            $sHRParam = ($sColumn == 'description') ? Http::ONLY_XSS_CLEAN : null;
             if(!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue))
                 $oUserModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'MembersInfo');
         }

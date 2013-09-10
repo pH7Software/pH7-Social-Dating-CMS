@@ -13,7 +13,7 @@
 
   <p class="italic">{lang '%0% was played %1% and download %2%.','<strong>'.$game->title.'</strong>',Framework\Mvc\Model\Statistic::getView($game->gameId,'Games'),$downloads}</p>
 
-  {{ ShareUrlCoreForm::display(Framework\Mvc\Router\UriRoute::get('game','main','game',"$game->title,$game->gameId")) }}
+  {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('game','main','game',"$game->title,$game->gameId")) }}
   {{ RatingDesignCore::voting($game->gameId,'Games','center') }}
 
   {{ $design->likeApi() }}

@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            SysVar Class
- * @desc             Parse variables globals CMS.
+ * @desc             Parse the global pH7CMS variables.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
@@ -17,14 +17,14 @@ use
 PH7\Framework\Registry\Registry,
 PH7\Framework\Core\Kernel,
 PH7\Framework\Ip\Ip,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Session\Session;
 
 class SysVar
 {
 
     /**
-     * Parser for the System variables
+     * Parser for the System variables.
      *
      * @param string $sVar
      * @return The new parsed text
@@ -32,7 +32,7 @@ class SysVar
     public function parse($sVar)
     {
         /*** Not to parse a text ***/
-        if(preg_match('/#!.+!#/', $sVar))
+        if (preg_match('/#!.+!#/', $sVar))
         {
             $sVar = str_replace(array('#!', '!#'), '', $sVar);
             return $sVar;
@@ -50,10 +50,10 @@ class SysVar
         /***** Affiliate Variables *****/
         $oSession = new Session;
         $sAffUsername = ($oSession->exists('affiliate_username')) ? $oSession->get('affiliate_username') : 'aid';
-        $sVar = str_replace('%affiliate_url%', UriRoute::get('affiliate','router','refer', $sAffUsername), $sVar);
+        $sVar = str_replace('%affiliate_url%', Uri::get('affiliate','router','refer', $sAffUsername), $sVar);
         unset($oSession);
 
-        /***** Globals Variables *****/
+        /***** Global Variables *****/
         $sVar = str_replace('%ip%', Ip::get(), $sVar);
 
         /***** Kernel Variables *****/
@@ -66,7 +66,7 @@ class SysVar
         $sVar = str_replace('%software_email%', Kernel::SOFTWARE_EMAIL, $sVar);
         $sVar = str_replace('%software_website%', Kernel::SOFTWARE_WEBSITE, $sVar);
 
-        /***** Output *****/
+        // Output
         return $sVar;
     }
 

@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 class AvatarForm
 {
@@ -17,7 +17,7 @@ class AvatarForm
         if (isset($_POST['submit_avatar']))
         {
             if (\PFBC\Form::isValid($_POST['submit_avatar']))
-                new AvatarFormProcessing();
+                new AvatarFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -28,7 +28,7 @@ class AvatarForm
         $oForm->addElement(new \PFBC\Element\Token('avatar'));
         if (AdminCore::auth() && !User::auth())
         {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
         }
         $oForm->addElement(new \PFBC\Element\File(t('Your Avatar'), 'avatar', array('accept'=>'image/*', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Button);

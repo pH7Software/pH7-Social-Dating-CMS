@@ -7,9 +7,9 @@
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
-$oHttpRequest = new HttpRequest;
+$oHttpRequest = new Http;
 
 $iStatus = 0; // Error Default Value
 

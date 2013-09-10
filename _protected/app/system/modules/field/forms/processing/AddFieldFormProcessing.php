@@ -10,7 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Cache\Cache,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl;
 
 class AddFieldFormProcessing extends Form
@@ -38,7 +38,7 @@ class AddFieldFormProcessing extends Form
             {
                 /* Clean UserCoreModel Cache */
                 (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
-                HeaderUrl::redirect(UriRoute::get('field', 'field', 'all', $sMod), t('The field has been added.'));
+                HeaderUrl::redirect(Uri::get('field', 'field', 'all', $sMod), t('The field has been added.'));
             }
             else
                 \PFBC\Form::setError('form_add_field', t('Oops! An error occurred while adding the field, please try again.'));

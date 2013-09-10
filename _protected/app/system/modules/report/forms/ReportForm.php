@@ -8,19 +8,19 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\HttpRequest;
+use PH7\Framework\Mvc\Request\Http;
 
 class ReportForm
 {
 
     public static function display()
     {
-        $oHttpRequest = new HttpRequest;
+        $oHttpRequest = new Http;
 
         if ($oHttpRequest->postExists('submit_report'))
         {
             if (\PFBC\Form::isValid($oHttpRequest->post('submit_report')))
-                new ReportFormProcessing();
+                new ReportFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }

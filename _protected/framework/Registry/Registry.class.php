@@ -43,7 +43,7 @@ final class Registry
      */
     public function __get($sName)
     {
-        if(isset(self::$_aData[$sName]))
+        if (isset(self::$_aData[$sName]))
             return self::$_aData[$sName];
 
         return null;

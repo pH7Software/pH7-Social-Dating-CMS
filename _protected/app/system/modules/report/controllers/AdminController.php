@@ -6,10 +6,11 @@
  * @package        PH7 / App / System / Module / Report / Controller
  */
 namespace PH7;
+
 use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Url\HeaderUrl,
-PH7\Framework\Mvc\Router\UriRoute;
+PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
@@ -67,7 +68,7 @@ class AdminController extends Controller
     {
         $this->bStatus = $this->oReportModel->delete( $this->httpRequest->post('id', 'int') );
         $this->sMsg = ($this->bStatus) ? t('The report has been deleted.') : t('A problem occurred during the deleted of the reporting.');
-        HeaderUrl::redirect(UriRoute::get('report', 'admin', 'index'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('report', 'admin', 'index'), $this->sMsg);
     }
 
     public function deleteAll()
@@ -86,7 +87,7 @@ class AdminController extends Controller
             $this->sMsg = t('The report has been deleted.');
         }
 
-        HeaderUrl::redirect(UriRoute::get('report', 'admin', 'index'), $this->sMsg);
+        HeaderUrl::redirect(Uri::get('report', 'admin', 'index'), $this->sMsg);
     }
 
 }

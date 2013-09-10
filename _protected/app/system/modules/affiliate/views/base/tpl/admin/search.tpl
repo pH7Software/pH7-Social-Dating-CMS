@@ -1,1 +1,1 @@
-{{SearchAffiliateForm::display()}}
+{{ SearchAffiliateForm::display() }}

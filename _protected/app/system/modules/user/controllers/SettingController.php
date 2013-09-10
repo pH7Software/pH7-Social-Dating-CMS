@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class SettingController extends Controller
 {
@@ -112,19 +112,19 @@ class SettingController extends Controller
         if ($this->httpRequest->get('delete_status') == 'yesdelete')
         {
             $this->session->set('yes_delete', 1);
-            HeaderUrl::redirect(UriRoute::get('user', 'setting', 'yesdelete'));
+            HeaderUrl::redirect(Uri::get('user', 'setting', 'yesdelete'));
         }
         elseif ($this->httpRequest->get('delete_status') == 'nodelete')
         {
             $this->view->content = t('<span class="bold green1">Great, you stay with us!<br />
             You see, you will not regret it!<br />We will do our best to you our %site_name%!</span>');
-            $this->design->setRedirect(UriRoute::get('user', 'main', 'index'), null, null, 3);
+            $this->design->setRedirect(Uri::get('user', 'main', 'index'), null, null, 3);
         }
         else
         {
             $this->view->content = '<span class="bold red">' . t('Are you really sure you want to delete your account?') . '</span><br /><br />
-                <a class="bold" href="' . UriRoute::get('user', 'setting', 'delete', 'nodelete') . '">' . t('No I changed my mind and I stay with you!') .
-                '</a> &nbsp; ' . t('OR') . ' &nbsp; <a href="' . UriRoute::get('user',
+                <a class="bold" href="' . Uri::get('user', 'setting', 'delete', 'nodelete') . '">' . t('No I changed my mind and I stay with you!') .
+                '</a> &nbsp; ' . t('OR') . ' &nbsp; <a href="' . Uri::get('user',
                 'setting', 'delete', 'yesdelete') . '">' . t('Yes I really want to delete my account') . '</a>';
         }
 
@@ -134,7 +134,7 @@ class SettingController extends Controller
     public function yesDelete()
     {
         if (!$this->session->exists('yes_delete'))
-            HeaderUrl::redirect(UriRoute::get('user', 'setting', 'delete'));
+            HeaderUrl::redirect(Uri::get('user', 'setting', 'delete'));
         else
             $this->output();
     }

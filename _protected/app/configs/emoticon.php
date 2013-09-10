@@ -13,7 +13,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 /**
- * The emoticons are in ~/static/img/smile/
+ * The emoticons are in ~/static/img/smile/ folder.
  */
 
 return array(

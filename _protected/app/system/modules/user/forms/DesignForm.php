@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 class DesignForm
 {
@@ -17,7 +17,7 @@ class DesignForm
         if (isset($_POST['submit_design']))
         {
             if (\PFBC\Form::isValid($_POST['submit_design']))
-                new DesignFormProcessing();
+                new DesignFormProcess();
 
             Framework\Url\HeaderUrl::redirect();
         }
@@ -28,7 +28,7 @@ class DesignForm
         $oForm->addElement(new \PFBC\Element\Token('design'));
         if (AdminCore::auth() && !User::auth())
         {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . UriRoute::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
         }
         $oForm->addElement(new \PFBC\Element\File(t('Your Wallpaper for your Profile:'), 'wallpaper', array('accept'=>'image/*', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Button);

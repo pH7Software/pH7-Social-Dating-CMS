@@ -27,7 +27,7 @@ table{border-spacing: 0; border-collapse:collapse}
 .quote:before {content:url('../img/icon/quote_left.jpg')}
 .quote:after {content:url('../img/icon/quote_right.jpg')}
 .italic{font-style:italic}
-.small{font-size:8pt}
+.small{font-size:x-small}
 .border{margin:2px;border:1px solid #999}
 .underline{text-decoration:underline}
 .hidden{display:none}
@@ -90,6 +90,10 @@ dd{margin-bottom:4px}
 .s_marg{margin:12px}
 /* Medium Margin */
 .m_marg{margin:20px}
+/* Small Top Margin */
+.s_tMarg{margin-top:12px}
+/* Small Bottom Margin */
+.s_bMarg{margin-bottom:12px}
 /* Small Left Margin */
 .s_lMarg{margin-left:12px}
 /* Small Right Margin */

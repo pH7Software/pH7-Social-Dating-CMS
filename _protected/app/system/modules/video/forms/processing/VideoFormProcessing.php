@@ -18,7 +18,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\UriRoute,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl,
 PH7\Framework\File as F,
 PH7\Framework\Video as V;
@@ -69,7 +69,7 @@ class VideoFormProcessing extends Form
                 return;
             }
 
-            $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : ($oInfo->getTitle() ? $oInfo->getTitle() : t('Untitled'));
+            $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2 ? $this->httpRequest->post('title') : ($oInfo->getTitle() ? $oInfo->getTitle() : t('Untitled')));
             $sDescription = ($this->httpRequest->postExists('description') ? $this->httpRequest->post('description') : ($oInfo->getDescription() ? $oInfo->getDescription() : ''));
             $sDuration = ($oInfo->getDuration() ? $oInfo->getDuration() : '0'); // Time in seconds
 
@@ -136,7 +136,7 @@ class VideoFormProcessing extends Form
         $sModerationText = t('Your video has been received! But it will be visible once approved by our moderators. Please do not send a new video because this is useless!');
         $sText =  t('Your video has been added successfully!');
         $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
-        HeaderUrl::redirect(UriRoute::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
+        HeaderUrl::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
     }
 
 }

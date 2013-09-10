@@ -7,19 +7,19 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\UriRoute;
+use PH7\Framework\Mvc\Router\Uri;
 
 class SubscriptionForm
 {
 
     public static function display()
     {
-        $sActUrl = UriRoute::get('newsletter', 'home', 'subscription');
+        $sActUrl = Uri::get('newsletter', 'home', 'subscription');
 
         if (isset($_POST['submit_subscription']))
         {
             if (\PFBC\Form::isValid($_POST['submit_subscription']))
-                new SubscriptionFormProcessing();
+                new SubscriptionFormProcess();
 
             Framework\Url\HeaderUrl::redirect($sActUrl);
         }

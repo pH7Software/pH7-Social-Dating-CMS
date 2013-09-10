@@ -44,7 +44,7 @@ class Ads
         \PH7\Framework\Analytics\Statistic::setView($oData->adsId, 'Ads');
 
         // Advertisement Clicks
-        $oHttpRequest = new Mvc\Request\HttpRequest;
+        $oHttpRequest = new Mvc\Request\Http;
         if ($oHttpRequest->getExists(static::PARAM_URL))
         {
             $sUrl = base64_decode($oHttpRequest->get(static::PARAM_URL));

@@ -6,7 +6,7 @@
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / FR
- * @update           07/13/13 00:22
+ * @update           09/10/13 23:06
  */
 
 namespace PH7;
@@ -16,11 +16,11 @@ $LANG = array (
     'charset' => 'utf-8',
     'lang_name' => 'Français',
     'version' => 'version',
-    'CMS_desc' => '<p>Bienvenue à l\'installation de '.Controller::SOFTWARE_NAME.'.<br />
+    'CMS_desc' => '<p>Bienvenue à l\'installation de ' . Controller::SOFTWARE_NAME . '.<br />
     Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>
     <p>Veuillez suivre attentivement les six étape de l\'installation.</p>',
     'chose_lang_for_install' => 'Veuillez choisir votre langue pour commancer l\'installation',
-    'requirements_desc' => 'ATTENTION ! Veuillez être sûr que votre serveur a les <a href="'.Controller::SOFTWARE_REQUIREMENTS_URL.'" target="_blank">exigences</a> nécessaires pour faire correctement fonctionner pH7CMS.',
+    'requirements_desc' => 'ATTENTION ! Veuillez être sûr que votre serveur a les <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">exigences</a> nécessaires pour faire correctement fonctionner pH7CMS.',
     'config_path' => 'Chemin du répertoire &laquo; protected &raquo;',
     'desc_config_path' => 'Veuillez indiquer le chemin complet de votre répertoire &laquo; protected &raquo;<br />
     Il est préférable et conseillé de le mettre ce répertoire en dehors de la racine publique de votre site Web.',
@@ -30,7 +30,7 @@ $LANG = array (
     'go' => 'Étape suivante =>',
     'license' => 'Licence',
     'license_desc' => 'Veuillez lire la licence attentivement et l\'accepter avant de continuer l\'installation du logiciel !',
-    'registration_for_license' => 'Veuillez vous inscrire sur <a href="'.Controller::SOFTWARE_WEBSITE.'" target="_blank">le site</a> pour obtenir gratuitement votre licence qui est requise pour pouvoir continuer.',
+    'registration_for_license' => 'Veuillez vous inscrire sur <a href="' . Controller::SOFTWARE_REGISTRATION_URL . '" target="_blank">cette page</a> afin d\'obtenir gratuitement votre clé de licence qui est requise pour pouvoir continuer.',
     'your_license' => 'Votre clé de licence',
     'agree_license' => 'J\'ai lu et j\'accepte les Termes de licence ci-dessus.',
     'step' => 'Étape',
@@ -51,6 +51,7 @@ $LANG = array (
     'no_app_config_writable' => 'Veuillez changer les permissions du répertoire &laquo; protected/app/configs &raquo; pour qu\'il soit en mode &quot;écriture&quot; (CHMOD 777).',
     'database_error' => 'Erreur de connexion avec votre base de données.<br />',
     'error_sql_import' => 'Une erreur s\'est produit pendant l\'importation de du fichier SQL vers votre base de données',
+    'require_mysql_version' => 'Vous devez installer MySQL ' . PH7_REQUIRE_SQL_VERSION . ' ou supérieur afin de pouvoir continuer.',
     'field_required' => 'Ce champ est obligatoire',
     'all_fields_mandatory' => 'Tous les champs marqués d\'un astérisque (*) sont obligatoires',
     'db_hostname' => 'Nom de l\'hôte',
@@ -89,9 +90,9 @@ $LANG = array (
     'confirm_remove_install_folder_auto' => 'ATTENTION, tous les fichiers du dossiers /_install/ vont être supprimés.',
     'title_email_finish_install' => 'Félicitation, l\'installation de votre site Web est terminé !',
     'content_email_finish_install' => '<p><strong>Félicitations, votre site Web est maintenant installé avec succès !</strong></p>
-    <p>Nous espérons que vous allez avoir beaucoup de plaisir avec '.Controller::SOFTWARE_NAME.' !</p>
-    <p>Pour tous rapport de bogues, suggestions, propositions, partenariat, participation au développement du CMS et à sa traduction, etc.</p>
-    <p>Veuillez visitez notre <a href="'.Controller::SOFTWARE_WEBSITE.'" target="_blank">site Web</a>.</p>
+    <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
+    <p>Pour tous rapport de bogues, suggestions, propositions, partenariat, participation au développement du CMS et à sa traduction, etc.,
+    veuillez visitez notre <a href="' . Controller::SOFTWARE_WEBSITE . '" target="_blank">site Web</a>.</p>
     <p>---</p>
     <p>Cordialement,</p>
     <p>L\'équipe de développement de pH7CMS.</p>',

@@ -16,15 +16,18 @@ class Username extends \PFBC\Validation
      *
      * @param string $sTable Default 'Members'
      */
-    public function __construct($sTable = 'Members') {
+    public function __construct($sTable = 'Members')
+    {
         parent::__construct();
         $this->sTable = $sTable;
         $this->iMin = DbConfig::getSetting('minUsernameLength');
-        $this->iMax = PH7_MAX_USERNAME_LENGTH;
-        $this->message = t('Error: Your username has to contain from %0% to %1% characters, your username is not available or your username already used by member.', $this->iMin, $this->iMax);
+        $this->iMax = DbConfig::getSetting('maxUsernameLength');
+        $this->message = t('Error: Your username has to contain from %0% to %1% characters, your username is not available or your username already used by other member.', $this->iMin, $this->iMax);
     }
 
-    public function isValid($sValue) {
+    public function isValid($sValue)
+    {
         return $this->oValidate->username($sValue, $this->iMin, $this->iMax, $this->sTable);
     }
+
 }

@@ -45,7 +45,7 @@ class Ip
      * Returns the API IP with the IP address.
      *
      * @static
-     * @param string $sIp IP address.
+     * @param string $sIp IP address. Default NULL
      * @return string API URL with the IP address.
      */
     public static function api($sIp = null)

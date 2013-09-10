@@ -69,6 +69,8 @@ class Db
 
             self::$_oInstance = new \PDO(self::$_sDsn, self::$_sUsername, self::$_sPassword, self::$_aDriverOptions);
             self::$_oInstance->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+            static::checkMySqlVersion();
         }
 
         return self::$_oInstance;
@@ -355,6 +357,18 @@ class Db
         $oAllTables = static::showTables();
         while($aTableNames = $oAllTables->fetch()) self::getInstance()->query('REPAIR TABLE '. $aTableNames[0]);
         unset($oAllTables);
+    }
+
+    /**
+     * Check MySQL version.
+     *
+     * @return void
+     */
+    public static function checkMySqlVersion()
+    {
+        $sMySQLVer = self::$_oInstance->getAttribute(\PDO::ATTR_SERVER_VERSION);
+        if(version_compare($sMySQLVer, PH7_REQUIRE_SQL_VERSION, '<'))
+            exit('ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . PH7_REQUIRE_SQL_VERSION . ' or newer.');
     }
 
     /**

@@ -36,7 +36,7 @@ class PH7Exception extends \Exception
      */
     public static function launch(\Exception $oExcept)
     {
-        if(Debug::is())
+        if (Debug::is())
         {
             Page::exception($oExcept);
         }
