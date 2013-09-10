@@ -1,11 +1,12 @@
-<!-- Last Update: 07/06/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 09/14/2013 by Pierre-Henry Soria -->
 
-<h1>The Tree of the CMS</h1>
+<h1>Tree of the pH7CMS</h1>
 
 <pre>
 
 .
 |-- HELP_US.txt
+|-- installation_instructions.txt
 |-- PH7.COPYRIGHT.txt
 |-- PH7.LICENSE.txt
 |-- _protected
@@ -156,7 +157,8 @@
 |   |       |   |   |-- RegistrationCore.php
 |   |       |   |   |-- Security.php
 |   |       |   |   |-- UserCore.php
-|   |       |   |   `-- VideoCore.php
+|   |       |   |   |-- VideoCore.php
+|   |       |   |   `-- WriteCore.php
 |   |       |   |-- forms
 |   |       |   |   |-- ChangePasswordCoreForm.php
 |   |       |   |   |-- ConfigFileCoreForm.php
@@ -1873,11 +1875,11 @@
 |   |   |   |   `-- Statistic.class.php
 |   |   |   |-- Request
 |   |   |   |   |-- Exception.class.php
-|   |   |   |   `-- HttpRequest.class.php
+|   |   |   |   `-- Http.class.php
 |   |   |   |-- Response
 |   |   |   `-- Router
 |   |   |       |-- FrontController.class.php
-|   |   |       `-- UriRoute.class.php
+|   |   |       `-- Uri.class.php
 |   |   |-- Navigation
 |   |   |   |-- Browser.class.php
 |   |   |   |-- Page.class.php
@@ -2460,7 +2462,6 @@
 |   |   |           |-- pH7_installCore.sql
 |   |   |           |-- pH7_sampleData.sql
 |   |   |           `-- pH7_SchemaGame.sql
-|   |   |-- htaccess.txt
 |   |   |-- inc
 |   |   |   |-- ajax
 |   |   |   |   |-- _ajax.inc.php
@@ -2470,6 +2471,7 @@
 |   |   |   |-- fns
 |   |   |   |   `-- misc.php
 |   |   |   |-- init.inc.php
+|   |   |   |-- lang_list.inc.php
 |   |   |   |-- loader.inc.php
 |   |   |   `-- log.inc.php
 |   |   |-- index.php
@@ -2480,7 +2482,9 @@
 |   |   |   |   `-- install.lang.php
 |   |   |   |-- fr
 |   |   |   |   `-- install.lang.php
-|   |   |   `-- ru
+|   |   |   |-- ru
+|   |   |   |   `-- install.lang.php
+|   |   |   `-- sw
 |   |   |       `-- install.lang.php
 |   |   |-- library
 |   |   |   |-- Controller.class.php
@@ -2614,6 +2618,7 @@
 |   |   |           `-- smarty_security.php
 |   |   |-- _license-key.txt
 |   |   |-- requirements.php
+|   |   |-- sample.htaccess
 |   |   |-- static
 |   |   |   `-- js
 |   |   |       `-- AJAPH.js
@@ -2782,7 +2787,16 @@
 |   |       |       |-- conclusion.php
 |   |       |       |-- config.ini
 |   |       |       `-- introduction.php
-|   |       `-- 1.0.2-1.0.3
+|   |       |-- 1.0.2-1.0.3
+|   |       |   `-- info
+|   |       |       |-- conclusion.php
+|   |       |       |-- config.ini
+|   |       |       `-- introduction.php
+|   |       `-- 1.0.3-1.0.10
+|   |           |-- data
+|   |           |   `-- sql
+|   |           |       `-- MySQL
+|   |           |           `-- upgrade.sql
 |   |           `-- info
 |   |               |-- conclusion.php
 |   |               |-- config.ini
@@ -4443,4 +4457,4 @@
 
 </pre>
 
-<p>Statistics: 1344 directories, 3091 files.</p>
+<p>Statistics: 1350 directories, 3099 files.</p>
