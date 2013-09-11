@@ -1,7 +1,7 @@
 <?php
 /**
  * @title            Import Class
- * @desc             Generic Importer Class for the CMS.
+ * @desc             Generic Importer Class for the pH7CMS.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.

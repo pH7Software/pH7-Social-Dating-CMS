@@ -1,3 +1,9 @@
+--
+-- Author:        Pierre-Henry Soria <ph7software@gmail.com>
+-- Copyright:     (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+-- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+--
+
 ALTER TABLE pH7_Admins ADD COLUMN `groupId` smallint(4) unsigned NOT NULL DEFAULT '9';
 ALTER TABLE pH7_Members MODIFY `avatar` varchar(5) DEFAULT NULL;
 ALTER TABLE pH7_Members ADD `approvedAvatar` tinyint(1) unsigned NOT NULL DEFAULT '1';

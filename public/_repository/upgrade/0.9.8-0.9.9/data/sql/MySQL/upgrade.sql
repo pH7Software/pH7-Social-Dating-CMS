@@ -1,3 +1,9 @@
+--
+-- Author:        Pierre-Henry Soria <ph7software@gmail.com>
+-- Copyright:     (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+-- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+--
+
 CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
   profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   middleName varchar(50) DEFAULT NULL,
