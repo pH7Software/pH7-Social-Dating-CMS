@@ -137,7 +137,7 @@
 |   |       |   |   `-- js
 |   |       |   |       |-- mailcheck.jsCoreJs.php
 |   |       |   |       `-- script.jsCoreJs.php
-|   |       |   |-- class
+|   |       |   |-- classes
 |   |       |   |   |-- AdminCore.php
 |   |       |   |   |-- AdsCore.php
 |   |       |   |   |-- AffiliateCore.php
@@ -201,13 +201,13 @@
 |   |       |       |-- UpgradeCoreModel.php
 |   |       |       |-- UserCoreModel.php
 |   |       |       `-- VideoCoreModel.php
-|   |       |-- globals
+|   |       |-- global
 |   |       |   `-- views
 |   |       |       `-- base
-|   |       |           |-- errors
-|   |       |           |   |-- error-500.html.php
-|   |       |           |   `-- exception.html.php
-|   |       |           |-- mails
+|   |       |           |-- error
+|   |       |           |   |-- 500.html.php
+|   |       |           |   `-- except.html.php
+|   |       |           |-- mail
 |   |       |           |   |-- mod
 |   |       |           |   `-- sys
 |   |       |           |       |-- core
@@ -237,7 +237,7 @@
 |   |       |           |               |-- account_registration.tpl
 |   |       |           |               |-- birthday.tpl
 |   |       |           |               `-- friend_request.tpl
-|   |       |           `-- others
+|   |       |           `-- other
 |   |       |               |-- banned.html.php
 |   |       |               `-- maintenance.html.php
 |   |       `-- modules
