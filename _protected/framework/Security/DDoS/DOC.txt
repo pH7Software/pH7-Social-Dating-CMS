@@ -7,7 +7,7 @@ PH7 / Framework / Security / DDoS
 Soria Pierre-Henry
 
 ===== Email =====
-ph7software@gmail.com
+ph7software {AT} gmail {DOT} com
 
 ===== Links Documentation =====
 http://en.wikipedia.org/wiki/Denial-of-service_attack
