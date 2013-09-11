@@ -4,7 +4,7 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-table tbody{width:100%;border:2px #999 solid}
+table tbody{border:2px #999 solid}
 th,td{border-right:1px #ccc solid;padding:2px}
 td{margin:6px 4px 6px 4px;vertical-align:top}
 tr td{border-bottom:1px dashed #999;padding-top:10px;padding-bottom:5px}

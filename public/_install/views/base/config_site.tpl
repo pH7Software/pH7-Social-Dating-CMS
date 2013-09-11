@@ -12,8 +12,8 @@
     <p><span class="mandatory">*</span> <label for="admin_password">{$LANG.admin_password} :</label><br />
     <input type="password" name="admin_password" id="admin_password" required="required" /></p>
 
-    <p><span class="mandatory">*</span> <label for="admin_passwordS">{$LANG.admin_passwordS} :</label><br />
-    <input type="password" name="admin_passwordS" id="admin_passwordS" required="required" /></p>
+    <p><span class="mandatory">*</span> <label for="admin_passwords">{$LANG.admin_passwords} :</label><br />
+    <input type="password" name="admin_passwords" id="admin_passwords" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="admin_email">{$LANG.admin_login_email} :</label><br />
     <input type="email" name="admin_login_email" id="admin_login_email" value="{$smarty.session.value.admin_login_email|escape}" required="required" /></p>

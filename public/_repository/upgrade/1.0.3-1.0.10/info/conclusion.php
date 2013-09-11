@@ -134,6 +134,3 @@ $sHtml .= '<p>' . t('Good luck :-)') . '</p>';
 
 // Output!
 return $sHtml;
-
-
-

@@ -79,7 +79,7 @@ class Db
     /**
      * Initiates a transaction.
      *
-     * @return bool
+     * @return boolean
      */
     public function beginTransaction()
     {
@@ -89,7 +89,7 @@ class Db
     /**
      * Commits a transaction.
      *
-     * @return bool
+     * @return boolean
      */
     public function commit()
     {
@@ -304,8 +304,8 @@ class Db
     /**
      * If table name is empty, only prefix will be returned otherwise the table name with its prefix will be returned.
      *
-     * @param string $sTable Table name.
-     * @param boolean $bTrim With or without a space before and after the table name. Default valut is "false", so with space before and after table name.
+     * @param string $sTable Table name. Default ''
+     * @param boolean $bTrim With or without a space before and after the table name. Default valut is FALSE, so with space before and after table name.
      * @return string prefixed table name, just prefix if table name is empty.
      */
     public static function prefix($sTable = '', $bTrim = false)
@@ -318,7 +318,7 @@ class Db
      * Free database.
      *
      * @param object \PDOStatement $rStmt Close cursor of PDOStatement class. Default NULL
-     * @param bool $bCloseConnection Close connection of PDO. Default FALSE
+     * @param boolean $bCloseConnection Close connection of PDO. Default FALSE
      * @return void
      */
     public static function free(\PDOStatement &$rStmt = NULL, $bCloseConnection = FALSE)

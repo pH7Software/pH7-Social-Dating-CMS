@@ -42,7 +42,7 @@ class Pagination
         $this->_iCurrentPage = $iCurrentPage;
 
         // Put options update
-        $this->_aOptions = $aOptions + $this->_aOptions;
+        $this->_aOptions += $aOptions;
 
         // It retrieves the address of the page
         $this->_sPageName = Page::cleanDynamicUrl($sPageName);

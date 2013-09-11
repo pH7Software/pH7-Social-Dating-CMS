@@ -96,7 +96,6 @@ class File
      *
      * @param string $sFile File name.
      * @param boolean $bIncPath Default FALSE
-     *
      * @return mixed (string | boolean) Returns the read data or FALSE on failure.
      */
     public function getFile($sFile, $bIncPath = false)

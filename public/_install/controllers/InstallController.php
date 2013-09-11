@@ -183,6 +183,8 @@ class InstallController extends Controller
             {
                 if ($_SESSION['status_license'] == 'success')
                 {
+                    session_regenerate_id(true);
+
                     if (empty($_SESSION['value']))
                     {
                         $_SESSION['db']['db_type'] = 'mysql';
@@ -209,7 +211,7 @@ class InstallController extends Controller
 
                             if (filled_out($_POST))
                             {
-                                if (validate_email($_SESSION['value']['bug_report_email']) == 'ok')
+                                if (validate_email($_SESSION['value']['bug_report_email']))
                                 {
                                     try
                                     {
@@ -341,6 +343,8 @@ class InstallController extends Controller
             {
                 if ($_SESSION['status_license'] == 'success')
                 {
+                    session_regenerate_id(true);
+
                     if (empty($_SESSION['value']))
                     {
                         $_SESSION['value']['admin_login_email'] = '';
@@ -359,13 +363,13 @@ class InstallController extends Controller
 
                         if (filled_out($_POST))
                         {
-                            if (validate_email($_SESSION['value']['admin_login_email']) == 'ok' && validate_email($_SESSION['value']['admin_email']) == 'ok' && validate_email($_SESSION['value']['admin_feedback_email']) == 'ok' && validate_email($_SESSION['value']['admin_return_email']) == 'ok')
+                            if (validate_email($_SESSION['value']['admin_login_email']) && validate_email($_SESSION['value']['admin_email']) && validate_email($_SESSION['value']['admin_feedback_email']) && validate_email($_SESSION['value']['admin_return_email']))
                             {
-                                if (validate_username($_SESSION['value']['admin_username']) == 'ok')
+                                if (validate_username($_SESSION['value']['admin_username']) == 0)
                                 {
-                                    if (validate_password($_SESSION['value']['admin_password']) == 'ok')
+                                    if (validate_password($_SESSION['value']['admin_password']) == 0)
                                     {
-                                        if (validate_identical($_SESSION['value']['admin_password'], $_SESSION['value']['admin_passwordS']))
+                                        if (validate_identical($_SESSION['value']['admin_password'], $_SESSION['value']['admin_passwords']))
                                         {
                                             if (validate_name($_SESSION['value']['admin_first_name']))
                                             {
@@ -440,45 +444,37 @@ class InstallController extends Controller
                                         }
                                         else
                                         {
-                                            $aErrors[] = $LANG['passwordS_different'];
+                                            $aErrors[] = $LANG['passwords_different'];
                                         }
                                     }
-                                    elseif (validate_password($_SESSION['value']['admin_password']) == 'empty')
+                                    elseif (validate_password($_SESSION['value']['admin_password']) == 1)
                                     {
-                                        $aErrors[] = $LANG['password_empty'];
+                                        $aErrors[] = $LANG['password_too_short'];
                                     }
-                                    elseif (validate_password($_SESSION['value']['admin_password']) == 'tooshort')
+                                    elseif (validate_password($_SESSION['value']['admin_password']) == 2)
                                     {
-                                        $aErrors[] = $LANG['password_tooshort'];
+                                        $aErrors[] = $LANG['password_too_long'];
                                     }
-                                    elseif (validate_password($_SESSION['value']['admin_password']) == 'toolong')
+                                    elseif (validate_password($_SESSION['value']['admin_password']) ==  3)
                                     {
-                                        $aErrors[] = $LANG['password_toolong'];
+                                        $aErrors[] = $LANG['password_no_number'];
                                     }
-                                    elseif (validate_password($_SESSION['value']['admin_password']) ==  'nonumber')
+                                    elseif (validate_password($_SESSION['value']['admin_password']) ==  4)
                                     {
-                                        $aErrors[] = $LANG['password_nonumber'];
-                                    }
-                                    elseif (validate_password($_SESSION['value']['admin_password']) ==  'noupper')
-                                    {
-                                        $aErrors[] = $LANG['password_noupper'];
+                                        $aErrors[] = $LANG['password_no_upper'];
                                     }
                                 }
-                                elseif (validate_username($_SESSION['value']['admin_username']) == 'empty')
+                                elseif (validate_username($_SESSION['value']['admin_username']) == 1)
                                 {
-                                    $aErrors[] = $LANG['password_empty'];
+                                    $aErrors[] = $LANG['username_too_short'];
                                 }
-                                elseif (validate_username($_SESSION['value']['admin_username']) == 'tooshort')
+                                elseif (validate_username($_SESSION['value']['admin_username']) == 2)
                                 {
-                                    $aErrors[] = $LANG['username_tooshort'];
+                                    $aErrors[] = $LANG['username_too_long'];
                                 }
-                                elseif (validate_username($_SESSION['value']['admin_username']) == 'toolong')
+                                elseif (validate_username($_SESSION['value']['admin_username']) == 3)
                                 {
-                                    $aErrors[] = $LANG['username_toolong'];
-                                }
-                                elseif (validate_username($_SESSION['value']['admin_username']) == 'badusername')
-                                {
-                                    $aErrors[] = $LANG['username_badusername'];
+                                    $aErrors[] = $LANG['username_bad_username'];
                                 }
                             }
                             else
@@ -587,7 +583,7 @@ class InstallController extends Controller
     {
         if ($this->_isGameInstalled()) return true; // Games are already installed.
 
-        return (check_url($this->_sGameDownloadPath));
+        return check_url($this->_sGameDownloadPath);
     }
 
 }
