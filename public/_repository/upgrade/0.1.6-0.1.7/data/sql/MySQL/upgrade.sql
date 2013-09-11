@@ -1,3 +1,9 @@
+--
+-- Author:        Pierre-Henry Soria <ph7software@gmail.com>
+-- Copyright:     (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+-- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+--
+
 ALTER TABLE `pH7_MetaMain` DROP `siteName`;
 INSERT INTO `pH7_Settings` (`name`, `value`, `desc`, `group`) VALUES
 ('siteName', 'pH7 Social Dating CMS', '', 'general'),

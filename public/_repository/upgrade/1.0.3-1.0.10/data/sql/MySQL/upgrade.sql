@@ -1,3 +1,9 @@
+--
+-- Author:        Pierre-Henry Soria <ph7software@gmail.com>
+-- Copyright:     (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+-- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+--
+
 ALTER TABLE pH7_Admins MODIFY email varchar(120) NOT NULL;
 ALTER TABLE pH7_Members MODIFY email varchar(120) NOT NULL;
 ALTER TABLE pH7_Affiliates MODIFY email varchar(120) NOT NULL;

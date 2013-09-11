@@ -1,3 +1,9 @@
+--
+-- Author:        Pierre-Henry Soria <ph7software@gmail.com>
+-- Copyright:     (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+-- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+--
+
 TRUNCATE pH7_StaticJs;
 TRUNCATE pH7_StaticCss;
 ALTER TABLE pH7_Members MODIFY `country` char(2) DEFAULT NULL;
