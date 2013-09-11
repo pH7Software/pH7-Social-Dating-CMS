@@ -200,15 +200,15 @@ class MessengerAjax
 
     protected function setJsonContent(array $aData, $bEndComma = true)
     {
-        // Default Array
+        // Default array
         $aDefData = [
             'status' => '0',
             'user' => '',
             'msg' => ''
         ];
 
-        // Update Array
-        $aData =  $aData + $aDefData;
+        // Update array
+        $aData = += $aDefData;
 
         $sJsonData = <<<EOD
         {

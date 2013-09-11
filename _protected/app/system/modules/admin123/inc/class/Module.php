@@ -18,8 +18,8 @@ class Module
     private $_oFile, $_sModsDirModFolder, $_sDefLangRoute, $_sRoutePath, $_sModRoutePath;
 
     const
-    INSTALL = 'install',
-    UNINSTALL = 'uninstall',
+    INSTALL = 1,
+    UNINSTALL = 2,
 
     DIR = 'module/',
     INSTALL_DIR = 'install/',
