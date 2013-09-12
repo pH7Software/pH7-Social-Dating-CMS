@@ -208,7 +208,7 @@ class MessengerAjax
         ];
 
         // Update array
-        $aData = += $aDefData;
+        $aData += $aDefData;
 
         $sJsonData = <<<EOD
         {
