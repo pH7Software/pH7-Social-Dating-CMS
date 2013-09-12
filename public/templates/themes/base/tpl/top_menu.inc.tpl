@@ -286,7 +286,7 @@
             <li><a href="{{ $design->url('payment','admin','index') }}" title="{lang 'Payment System'}">{lang 'Payment'}</a>
               <ul>
                 <li><a href="{{ $design->url('payment','admin','membershiplist') }}" title="{lang 'Memberships List'}">{lang 'Memberships List'}</a></li>
-                <li><a href="{{ $design->url('payment','admin','addmembership') }}" title="{lang 'Membership Management'}">{lang 'Add a new plans'}</a></li>
+                <li><a href="{{ $design->url('payment','admin','addmembership') }}" title="{lang 'Membership Management'}">{lang 'Add a new Membership'}</a></li>
                 <li><a href="{{ $design->url('payment','admin','config') }}" title="{lang 'Payment Gateway Config'}">{lang 'Gateway Config'}</a></li>
               </ul>
             </li>
