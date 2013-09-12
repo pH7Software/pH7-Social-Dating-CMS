@@ -67,6 +67,9 @@ class AdminController extends MainController
     public function deleteMembership()
     {
         $this->oPayModel->deleteMembership( $this->httpRequest->post('id') );
+        /* Clean UserCoreModel Cache */
+        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
+
         HeaderUrl::redirect(Uri::get('payment', 'admin', 'membershiplist'), t('The Membership has been removed!'));
     }
 

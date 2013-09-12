@@ -46,7 +46,7 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function getProfiles()
     {
-        return (new UserCoreModel)->getProfiles(UserCoreModel::LATEST, 0, static::MAX_ITEMS);
+        return (new UserCoreModel)->getProfiles(SearchCoreModel::LATEST, 0, static::MAX_ITEMS);
     }
 
     public function getBlogs()
