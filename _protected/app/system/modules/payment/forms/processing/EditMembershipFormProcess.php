@@ -8,7 +8,10 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use
+PH7\Framework\Cache\Cache,
+PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Mvc\Router\Uri;
 
 class EditMembershipFormProcess extends Form
 {
@@ -39,9 +42,10 @@ class EditMembershipFormProcess extends Form
         if (!$this->str->equals($this->httpRequest->post('enable'), $oMembership->enable))
             $oPayModel->updateMembershipGroup('enable', $this->httpRequest->post('enable'), $iGroupId);
 
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'memberships' . $iGroupId, null)->clear();
-
         unset($oPayModel);
+
+        /* Clean UserCoreModel Cache */
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
         HeaderUrl::redirect(Uri::get('payment','admin','membershiplist'), t('The Membership has been saved successfully!'));
     }
