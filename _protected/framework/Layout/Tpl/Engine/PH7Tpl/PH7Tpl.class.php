@@ -632,7 +632,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         {
             ob_start();
 
-            /*** Extraction Variables ***/
+            // Extraction Variables
             extract($this->_aVars);
 
             require $this->sCompileDirFile;
@@ -889,9 +889,7 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
      */
     final private function checkDesignInstance()
     {
-        /*** Extraction Variables ***/
-        extract($this->_aVars);
-        return ($design instanceof \PH7\Framework\Layout\Html\Design);
+        return (!empty($this->_aVars['design']) && $this->_aVars['design'] instanceof \PH7\Framework\Layout\Html\Design);
     }
 
     /**
