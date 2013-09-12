@@ -100,6 +100,7 @@ define ( 'PH7_FORMS', 'forms/' );
 define ( 'PH7_INC', 'inc/' );
 define ( 'PH7_CONFIG', 'config/' );
 define ( 'PH7_LANG', 'lang/' );
+define ( 'PH7_QUERY', 'query/' );
 
 /***** REPOSITORY *****/
 

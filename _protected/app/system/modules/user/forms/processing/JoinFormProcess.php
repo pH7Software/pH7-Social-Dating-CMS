@@ -10,6 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Security\Security,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
@@ -39,7 +40,6 @@ class JoinFormProcess extends Form
         $aData = [
             'email' => $this->httpRequest->post('mail'),
             'username' => $this->httpRequest->post('username'),
-            'password' => $this->httpRequest->post('password'),
             'first_name' => $this->httpRequest->post('first_name'),
             'reference' => $sRef,
             'ip' => Ip::get(),
@@ -47,15 +47,17 @@ class JoinFormProcess extends Form
             'suffix_salt' => Various::genRnd(),
             'hash_validation' => Various::genRnd(),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
-            'is_active' => $this->iActiveType
+            'is_active' => $this->iActiveType,
+            'group_id' => (int) DbConfig::getSetting('defaultMembershipGroupId')
         ];
+        $aData += ['password' => Security::hashPwd($aData['prefix_salt'], $this->httpRequest->post('password'), $aData['suffix_salt'])];
 
         $iTimeDelay = (int) DbConfig::getSetting('timeDelayUserRegistration');
-        if(!$this->oUserModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date']))
+        if (!$this->oUserModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date']))
         {
             \PFBC\Form::setError('form_join_user', Form::waitRegistrationMsg($iTimeDelay));
         }
-        elseif(!$this->oUserModel->join($aData))
+        elseif (!$this->oUserModel->join($aData))
         {
             \PFBC\Form::setError('form_join_user', t('An error occurred during registration!<br />
             Please try again with other information in the form fields or come back later.'));
@@ -74,22 +76,27 @@ class JoinFormProcess extends Form
 
     public function step2()
     {
+        $iProfileId = $this->oUserModel->getId($this->session->get('mail_step1'));
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
 
         // WARNING FOT "matchSex" FIELD: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
         // and damages the SET function SQL for entry into the database
         $aData = [
             'sex' => $this->httpRequest->post('sex'),
-            'match_sex' => $this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN),
+            'match_sex' => Form::setVal($this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN)),
             'birth_date' => $sBirthDate,
+            'profile_id' => $iProfileId
+        ];
+
+        $aData2 = [
             'country' => $this->httpRequest->post('country'),
             'city' => $this->httpRequest->post('city'),
             'state' => $this->httpRequest->post('state'),
             'zip_code' => $this->httpRequest->post('zip_code'),
-            'profile_id' => $this->oUserModel->getId($this->session->get('mail_step1'))
+            'profile_id' => $iProfileId
         ];
 
-        if(!$this->oUserModel->join2($aData))
+        if (!$this->oUserModel->join2($aData) || !$this->oUserModel->join2_2($aData2))
         {
             \PFBC\Form::setError('form_join_user2', t('An error occurred during registration!<br /> Please try again with other information in the form fields or come back later.'));
         }
@@ -109,7 +116,7 @@ class JoinFormProcess extends Form
             'profile_id' => $this->oUserModel->getId($this->session->get('mail_step2'))
         ];
 
-        if(!$this->oUserModel->join3($aData))
+        if (!$this->oUserModel->join3($aData))
         {
             \PFBC\Form\setError('form_join_user3', t('An error occurred during registration!<br /> Please try again with other information in the form fields or come back later.'));
         }
