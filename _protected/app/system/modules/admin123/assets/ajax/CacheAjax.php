@@ -52,6 +52,5 @@ class CacheAjax extends Framework\Core\Kernel
 }
 
 // Only for Admins
-if (Admin::auth()) {
+if (Admin::auth())
     new CacheAjax;
-}
