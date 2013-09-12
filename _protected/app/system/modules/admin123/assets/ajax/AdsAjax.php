@@ -109,6 +109,5 @@ class AdsAjax
 }
 
 // Only for the Admins
-if (Admin::auth()) {
+if (Admin::auth())
     new AdsAjax;
-}
