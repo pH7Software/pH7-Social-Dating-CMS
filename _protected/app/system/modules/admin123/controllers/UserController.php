@@ -94,27 +94,26 @@ class UserController extends Controller
     {
         error_reporting(0);
 
-        extract($_GET);
+        $iGroupId = $this->httpRequest->get('group_id', 'int');
+        $iBan = $this->httpRequest->get('ban', 'int');
+        $sWhere = $this->httpRequest->get('where');
+        $sWhat = $this->httpRequest->get('what');
 
-        /*** We secure the variables ***/
-        $group_id = (int) $group_id;
-        $ban = (int) $ban;
-
-        if ($where !== 'all' && $where !== 'username' && $where !== 'email' && $where !== 'firstName' && $where !== 'lastName' && $where !== 'ip')
+        if ($sWhere !== 'all' && $sWhere !== 'username' && $sWhere !== 'email' && $sWhere !== 'firstName' && $sWhere !== 'lastName' && $sWhere !== 'ip')
         {
             \PFBC\Form::setError('form_admin_search', 'Invalid argument.');
             HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
         }
         else
         {
-            $this->iTotalUsers = $this->oAdminModel->searchUser($what, $where, $group_id, $ban, true,
+            $this->iTotalUsers = $this->oAdminModel->searchUser($sWhat, $sWhere, $iGroupId, $iBan, true,
                 $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
             $this->view->total_users = $this->iTotalUsers;
 
             $oPage = new Page;
             $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 15);
             $this->view->current_page = $oPage->getCurrentPage();
-            $oSearch = $this->oAdminModel->searchUser($what, $where, $group_id, $ban, false,
+            $oSearch = $this->oAdminModel->searchUser($sWhat, $sWhere, $iGroupId, $iBan, false,
                 $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->
                 getFirstItem(), $oPage->getNbItemsByPage());
             unset($oPage);
