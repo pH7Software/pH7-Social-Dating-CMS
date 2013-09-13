@@ -84,7 +84,7 @@ Thank you!
 
 **Application Server** PHP 5.4.0 or higher.
 
-**Database** MySQL 5.0.15 or higher.
+**Database** MySQL/MariaDB 5.0.15 or higher.
 
 **Operating System** Linux/Unix (Red Hat, CentOS, Debian, FreeBSD, Mandrake, Mac OS, etc.), Windows.
 
