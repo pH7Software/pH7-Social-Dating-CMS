@@ -51,7 +51,7 @@
       <li>iconv module.</li>
     </ul>
 
-<h2>MySQL</h2>
+<h2>MySQL or MariaDB</h2>
    <h3>Minimum:</h3>
            <ul>
                 <li>Version - 5.0.15.</li>
@@ -59,7 +59,7 @@
            </ul>
    <h3>Recommended:</h3>
            <ul>
-                <li>MySQL 5.5 or higher.</li>
+                <li>MySQL/MariaDB 5.5 or higher.</li>
            </ul>
 
 
