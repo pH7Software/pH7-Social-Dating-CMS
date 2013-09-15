@@ -1,4 +1,4 @@
-<!-- Last Update: 09/14/2013 by Pierre-Henry Soria -->
+<!-- Last Update: 09/16/2013 by Pierre-Henry Soria -->
 
 <h1>Tree of the pH7CMS</h1>
 
@@ -1195,6 +1195,11 @@
 |   |           |   |-- models
 |   |           |   |   |-- BirthdayModel.php
 |   |           |   |   |-- FriendModel.php
+|   |           |   |   |-- query
+|   |           |   |   |   |-- join2.1.sql
+|   |           |   |   |   |-- join2_2.sql
+|   |           |   |   |   |-- join3.sql
+|   |           |   |   |   `-- join.sql
 |   |           |   |   |-- UserModel.php
 |   |           |   |   |-- VisitorModel.php
 |   |           |   |   `-- WallModel.php
@@ -1951,8 +1956,7 @@
 |   |   |   |-- Generator
 |   |   |   |   |-- LoremIpsum.class.php
 |   |   |   |   `-- loremipsum.txt
-|   |   |   |-- Str.class.php
-|   |   |   `-- Utf8.class.php
+|   |   |   `-- Str.class.php
 |   |   |-- Structure
 |   |   |   `-- General.class.php
 |   |   |-- Translate
@@ -4457,4 +4461,4 @@
 
 </pre>
 
-<p>Statistics: 1350 directories, 3099 files.</p>
+<p>Statistics: 1351 directories, 3102 files.</p>
