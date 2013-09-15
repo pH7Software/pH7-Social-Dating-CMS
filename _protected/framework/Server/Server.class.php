@@ -131,7 +131,7 @@ final class Server
     /**
      * Check Internet Connection.
      *
-     * @param string $sCheckHost Default: http://www.google.com
+     * @param string $sCheckHost Default: www.google.com
      * @return boolean Returns TRUE if the Internet connection is enabled, FALSE otherwise.
      */
     public static function checkInternetConnection($sCheckHost = 'www.google.com')
