@@ -34,7 +34,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
             ->param('cancel_return', Uri::get('payment', 'main', 'pay', '?msg=' . t('The payment was aborted, no changes have been made to your account.'), false));
         echo
-        '<form name="check_out_form" action="', $oPayPal->getUrl(), '" method="post">',
+        '<form action="', $oPayPal->getUrl(), '" method="post">',
         $oPayPal->generate(),
         '<button type="submit" name="submit">', static::buyTxt($oMembership->name, 'PayPal'), '</button>
         </form>';
