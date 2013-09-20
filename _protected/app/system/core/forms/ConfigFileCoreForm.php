@@ -25,7 +25,7 @@ class ConfigFileCoreForm
     {
         $sConfigFile = 'config.ini';
 
-        $sIniFile = (empty($sConfigPath)) ? Registry::getInstance()->path_module_config . PH7_DS . $sConfigFile : $sConfigPath . $sConfigFile;
+        $sIniFile = (empty($sConfigPath)) ? Registry::getInstance()->path_module_config . $sConfigFile : $sConfigPath . $sConfigFile;
         $aData = parse_ini_file($sIniFile, true);
         $rData = file_get_contents($sIniFile);
 
