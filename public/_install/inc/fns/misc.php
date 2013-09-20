@@ -176,11 +176,13 @@ function redirect($sUrl)
  */
 function delete_dir($sPath)
 {
-    return is_file($sPath) ?
-        @unlink($sPath) :
-        is_dir($sPath) ?
-        array_map(__NAMESPACE__ . '\delete_dir', glob($sPath.'/*')) === @rmdir($sPath) :
-        false;
+    return (
+        is_file($sPath) ?
+          @unlink($sPath) :
+        (is_dir($sPath) ?
+          array_map(__NAMESPACE__ . '\delete_dir', glob($sPath.'/*')) === @rmdir($sPath) :
+        false)
+        );
 }
 
 /**

@@ -397,7 +397,7 @@ class File
      */
     public function deleteDir($sPath)
     {
-        return is_file($sPath) ? unlink($sPath) : is_dir($sPath) ? array_map(array($this, 'deleteDir'), glob($sPath . '/*')) === @rmdir($sPath) : false;
+        return (is_file($sPath) ? unlink($sPath) : (is_dir($sPath) ? array_map(array($this, 'deleteDir'), glob($sPath . '/*')) === @rmdir($sPath) : false));
     }
 
     /**
