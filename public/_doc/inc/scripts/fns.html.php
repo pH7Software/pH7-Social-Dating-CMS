@@ -15,19 +15,18 @@ defined('PH7') or exit('Restricted access');
  */
 function get_links_html()
 {
-    $sHtml = '<ul>';
-
     $aFiles = glob(DATA_PATH . LANG . '/*.tpl');
 
-    $i = 1;
-    foreach ($aFiles as $sLink)
+    $sHtml = '<ul>';
+    for ($i = 0, $iCount = count($aFiles); $i < $iCount; $i++)
     {
+        $sLink = $aFiles[$i];
+
         $sLink = htmlentities(str_replace(array('.tpl', DATA_PATH, LANG . '/'), '', $sLink));
         $sName = ucfirst(str_replace(array('/', '-'), array('', ' '), $sLink));
 
-        $sHtml .= '<li>' . $i++ . ') <a href="' . RELATIVE . LANG . '/' . $sLink . '" title="' . $sName . '" data-load="ajax">' . $sName . '</a>.</li>';
+        $sHtml .= '<li>' . ($i+1) . ') <a href="' . RELATIVE . LANG . '/' . $sLink . '" title="' . $sName . '" data-load="ajax">' . $sName . '</a>.</li>';
     }
-
     $sHtml .= '</ul>';
 
     return $sHtml;

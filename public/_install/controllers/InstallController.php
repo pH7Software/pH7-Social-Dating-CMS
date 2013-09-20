@@ -39,7 +39,7 @@ class InstallController extends Controller
         if (empty($_SESSION['step1']))
             $_SESSION['step1'] = 1;
 
-        $aLangs = get_dir_list(PH7_ROOT_INSTALL . '/langs/');
+        $aLangs = get_dir_list(PH7_ROOT_INSTALL . 'langs/');
         $aLangsList = include(PH7_ROOT_INSTALL . 'inc/lang_list.inc.php');
         $sLangSelect = '';
 
