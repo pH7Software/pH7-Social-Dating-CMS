@@ -16,7 +16,7 @@ class SignupController extends Controller
     public function step1()
     {
         // CSS and JavaScript files
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'zoomer.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'zoomer.css');
         $this->design->addJs(PH7_STATIC . PH7_JS, 'zoomer.js');
 
         /*** Display Sign Up page ***/

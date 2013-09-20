@@ -92,7 +92,7 @@ class LoadTemplate
         }
         else
         {
-            throw new Exception('Template file not found! File: \'' . PH7_PATH_TPL . 'base/config/config.ini\' does not exist.');
+            throw new Exception('Template file not found! File: \'' . PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . 'config' . PH7_DS . 'config.ini\' does not exist.');
         }
 
         return $this;
@@ -120,7 +120,7 @@ class LoadTemplate
         }
         else
         {
-            throw new Exception('Template module file not found! File: \'' . $oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . '/config/config.ini\' does not exist.');
+            throw new Exception('Template module file not found! File: \'' . $oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . 'config' . PH7_DS . 'config.ini\' does not exist.');
         }
 
         unset($oRegistry);

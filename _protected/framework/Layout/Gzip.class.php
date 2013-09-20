@@ -300,10 +300,10 @@ class Gzip
         $this->_sContents = str_replace('[$url_theme]', PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL, $this->_sContents);
 
          // Replace the "[$url_def_tpl_css]" variable
-        $this->_sContents = str_replace('[$url_def_tpl_css]', PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CSS , $this->_sContents);
+        $this->_sContents = str_replace('[$url_def_tpl_css]', PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . '/' . PH7_CSS , $this->_sContents);
 
         // Replace the "[$url_def_tpl_js]" variable
-        $this->_sContents = str_replace('[$url_def_tpl_js]', PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS , $this->_sContents);
+        $this->_sContents = str_replace('[$url_def_tpl_js]', PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . '/' . PH7_JS , $this->_sContents);
     }
 
     /**

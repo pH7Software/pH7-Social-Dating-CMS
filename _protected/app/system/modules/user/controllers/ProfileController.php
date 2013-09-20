@@ -35,9 +35,9 @@ class ProfileController extends Controller
         $oUserModel = new UserModel;
 
         // Add the style sheet for the Tabs Menu
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'tabs.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'tabs.css');
         // Add the JavaScript file for the Ajax Friend
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'friend.js');
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS, 'friend.js');
 
         // Set the Profile username
         $this->sUsername = $this->httpRequest->get('username', 'string');

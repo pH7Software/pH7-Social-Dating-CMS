@@ -35,8 +35,8 @@ class ToolController extends Controller
         $this->view->csrf_token = (new Framework\Security\CSRF\Token)->generate('cache');
 
         // Adding the common CSS and JS files for the ajax cache and the chart.
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'general.css');
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
+        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_CSS, 'general.css');
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS, 'common.js');
 
         $this->sTitle = t('Caches Management');
         $this->view->page_title = $this->sTitle;
@@ -64,7 +64,7 @@ class ToolController extends Controller
     public function freeSpace()
     {
         // Adding the common CSS for the chart.
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'general.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_CSS, 'general.css');
 
         $this->sTitle = t('Free Space of Server');
         $this->view->page_title = $this->sTitle;

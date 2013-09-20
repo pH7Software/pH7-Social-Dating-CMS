@@ -378,7 +378,7 @@ class Design
         $sCountry = Geo::getCountry();
         $sCity = Geo::getCity();
 
-        echo '<a href="', Uri::get('user', 'country', 'index', $sCountry . PH7_DS . $sCity), '" title="', t('Meet New People on %0%, %1% with %site_name%!', $sCountry, $sCity), '">', $sCountry, ', ', $sCity, '</a>';
+        echo '<a href="', Uri::get('user', 'country', 'index', $sCountry . '/' . $sCity), '" title="', t('Meet New People on %0%, %1% with %site_name%!', $sCountry, $sCity), '">', $sCountry, ', ', $sCity, '</a>';
     }
 
     /**
@@ -444,12 +444,12 @@ class Design
 
                     if(!(new \PH7\Framework\Security\Validate\Validate)->url($sUrl, true))
                        // Our Default Image
-                        $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_DS . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . '.jpg';
+                        $sUrl = PH7_URL_TPL . $sUrlTplName . '/' . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . '.jpg';
 
                 }
                 elseif(!$bIsModerate) // We do not display the pending approval image when an administrator is on the panel admin.
                 {
-                    $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_DS . PH7_IMG . 'icon/pending' . $sSize . '.jpg';
+                    $sUrl = PH7_URL_TPL . $sUrlTplName . '/' . PH7_IMG . 'icon/pending' . $sSize . '.jpg';
                 }
             }
 
@@ -612,7 +612,7 @@ class Design
         <meta name="designer" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="generator" content="', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, '" />
         <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css" />',
-        $this->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CSS, 'common.css,style.css,alert-msg.css,form.css'),
+        $this->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . '/' . PH7_CSS, 'common.css,style.css,alert-msg.css,form.css'),
         '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
         <script>var pH7Url={base:\'', PH7_URL_ROOT, '\'}</script></head><body>';

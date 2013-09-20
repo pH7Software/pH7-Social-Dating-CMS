@@ -1,4 +1,4 @@
-{* Last edit 09/08/13 21:56 by PH *}
+{* Last edit 09/21/13 04:34 by PH *}
 {{ $design->htmlHeader() }}
 <html lang="{% $config->values['language']['lang'] %}">
   <head>
@@ -32,13 +32,13 @@
     <!-- Begin Sheet CSS -->
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css" />
     {{ $design->staticFiles('css', PH7_STATIC . PH7_JS . 'jquery/box/', 'box.css') }}
-    {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'common.css,style.css,layout.css,pagination.css,menu.css,like.css,color.css,alert-msg.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
+    {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'common.css,style.css,layout.css,pagination.css,menu.css,like.css,color.css,alert-msg.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
 
     {* Custom CSS code *}
     {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/style.css') }}
 
     {if UserCore::auth()}
-      {{ $design->staticFiles('css', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CSS, 'messenger.css') }}
+      {{ $design->staticFiles('css', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . '/' . PH7_CSS, 'messenger.css') }}
     {/if}
 
     <!-- Other sheet CSS for modules etc. -->
@@ -57,7 +57,7 @@
 
     {* Begin AjPh *}
     {if $browser->isFullAjaxSite()}
-      {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'js/ajph.css') }}
+      {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'js/ajph.css') }}
       {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'ajph.js') }}
     {/if}
     {* End AjPh *}
@@ -174,13 +174,13 @@
 
     <!-- Begin Footer JavaScript -->
     {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/box/box.js,jquery/tipTip.js,common.js,clock.js,str.js') }}
-    {{ $design->staticFiles('js', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_JS, 'global.js') }}
+    {{ $design->staticFiles('js', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_JS, 'global.js') }}
 
     {* SetUserActivity & User Chat *}
     {if UserCore::auth()}
       {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'setUserActivity.js,jquery/sound.js') }}
       {{ $lang_file = Framework\Translate\Lang::getJsFile(PH7_PATH_TPL_SYS_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS . PH7_LANG) }}
-      {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS, PH7_LANG . $lang_file . ',jquery.cookie.js,Messenger.js') }}
+      {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . '/' . PH7_JS, PH7_LANG . $lang_file . ',jquery.cookie.js,Messenger.js') }}
     {/if}
 
     {* JS code Injection *}

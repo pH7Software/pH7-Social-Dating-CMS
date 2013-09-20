@@ -14,7 +14,7 @@ class Email extends Textbox
         $this->validation[] = new \PFBC\Validation\Email;
         parent::render();
 
-        echo '<script src="' . (new \PFBC\Form)->getResourcesPath() . PH7_DS . PH7_JS . 'jquery/mailcheck.js"></script><script src=' . PH7_RELATIVE . 'asset/js/mailcheck.js></script>';
+        echo '<script src="' . (new \PFBC\Form)->getResourcesPath() . '/' . PH7_JS . 'jquery/mailcheck.js"></script><script src=' . PH7_RELATIVE . 'asset/js/mailcheck.js></script>';
     }
 
 }

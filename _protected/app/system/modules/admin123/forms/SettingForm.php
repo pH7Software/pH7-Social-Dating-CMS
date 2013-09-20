@@ -66,7 +66,7 @@ class SettingForm
 
         /** Disable the cache for the logo if the admin modifies **/
         (new Browser)->noCache();
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png" alt="' . t('Logo') . '" title="' . t('The current logo of your site.') . '" /></p>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><img src="' . PH7_URL_TPL . PH7_TPL_NAME . '/' . PH7_IMG . 'logo.png" alt="' . t('Logo') . '" title="' . t('The current logo of your site.') . '" /></p>'));
 
         /********** Registration **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="registration"><h2 class="underline">' . t('Registration:') . '</h2>'));

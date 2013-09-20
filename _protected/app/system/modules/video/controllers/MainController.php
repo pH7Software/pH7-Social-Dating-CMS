@@ -50,7 +50,7 @@ class MainController extends Controller
     public function addVideo()
     {
         // Add JS file to choose the type of video (regular | embed)
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS, 'common.js');
 
         $this->sTitle = t('Add a new Video');
         $this->view->page_title = $this->sTitle;
@@ -103,7 +103,7 @@ class MainController extends Controller
 
     public function album()
     {
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_CSS, 'common.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_CSS, 'common.css');
 
         $this->view->meta_description = t('Browse Videos From %0% | Video Album Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
         $this->view->total_pages = $this->oPage->getTotalPages($this->oVideoModel->totalVideos($this->iProfileId), 26);
@@ -133,7 +133,7 @@ class MainController extends Controller
     public function video()
     {
         // Adding the JS Video Player file.
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'Video.js');
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS, 'Video.js');
 
         $oVideo = $this->oVideoModel->video($this->iProfileId, $this->httpRequest->get('album_id', 'int'), $this->httpRequest->get('video_id', 'int'), 1, 0, 1);
 
