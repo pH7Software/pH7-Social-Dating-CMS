@@ -24,7 +24,7 @@ class FriendController extends Controller
         /**
          *  Adding JavaScript file for Ajax friend.
          */
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'friend.js');
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS, 'friend.js');
 
         /**
          * @desc The Session of the User.

@@ -55,7 +55,7 @@ class VideoDesignCore
         }
         else
         {
-            $sDir = 'video/file/' . $oData->username . PH7_DS . $oData->albumId . PH7_DS;
+            $sDir = 'video/file/' . $oData->username . '/' . $oData->albumId . '/';
             $sVidPath1 = $sDir . $oData->file . '.webm';
             $sVidPath2 = $sDir . $oData->file . '.mp4';
 
@@ -79,7 +79,7 @@ class VideoDesignCore
             }
             else
             {
-                $sThumbUrl = PH7_URL_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'icon/none.jpg';
+                $sThumbUrl = PH7_URL_TPL . PH7_TPL_NAME . '/' . PH7_IMG . 'icon/none.jpg';
             }
 
             $sParam = ($sMedia == 'movie' && DbConfig::getSetting('autoplayVideo')) ? 'autoplay="autoplay"' : '';

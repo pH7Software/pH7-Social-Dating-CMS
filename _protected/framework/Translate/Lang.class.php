@@ -158,7 +158,7 @@ use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
          }
          else
          {
-             throw new Exception('Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/config/config.ini\' and/or Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php\' not found.');
+             throw new Exception('Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . 'config' . PH7_DS . 'config.ini\' and/or Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . 'language.php\' not found.');
          }
      }
 

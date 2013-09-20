@@ -15,7 +15,7 @@ class CountryController extends Controller
     public function index()
     {
         // Add Stylesheet tooltip
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'tooltip.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'tooltip.css');
 
         if ($this->httpRequest->getExists('country')) {
             // Get the country and city, limited to 50 characters and remove hyphens in too automatically insert the url.

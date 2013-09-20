@@ -24,7 +24,7 @@ class AccountController extends Controller
     public function edit()
     {
         // Adding Css Style for Tabs
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'tabs.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'tabs.css');
 
         $this->sTitle = t('Edit your profile');
         $this->view->page_title = $this->sTitle;

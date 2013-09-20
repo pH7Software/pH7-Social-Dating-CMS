@@ -34,13 +34,13 @@ class SettingController extends Controller
         $this->view->path_img_background = $this->_getWallpaper();
 
         /** For the 'display_status' function on the index and privacy page **/
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS, 'common.js');
     }
 
     public function index()
     {
         // Add Css Style for Tabs
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'tabs.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'tabs.css');
 
         $this->_sTitle = t('Account Settings');
         $this->view->page_title = $this->_sTitle;
@@ -149,8 +149,9 @@ class SettingController extends Controller
     private function _getWallpaper()
     {
         $sBackground = (new UserModel)->getBackground($this->_iProfileId, 1);
-        return (!empty($sBackground)) ? PH7_URL_DATA_SYS_MOD . 'user/background/img/' . $this->_sUsername . PH7_DS . $sBackground : PH7_URL_TPL .
-            PH7_TPL_NAME . PH7_DS . PH7_IMG . 'icon/none.jpg';
+        return (!empty($sBackground)) ?
+            PH7_URL_DATA_SYS_MOD . 'user/background/img/' . $this->_sUsername . '/' . $sBackground :
+            PH7_URL_TPL . PH7_TPL_NAME . '/' . PH7_IMG . 'icon/none.jpg';
     }
 
     private function _removeWallpaper()

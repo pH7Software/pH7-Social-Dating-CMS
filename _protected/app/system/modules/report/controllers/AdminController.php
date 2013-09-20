@@ -36,7 +36,7 @@ class AdminController extends Controller
         $this->view->designSecurity = new Framework\Layout\Html\Security;
 
         // Adding the JS files for the report and form.
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS, 'common.js');
         $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
         $this->sTitle = t('Report');

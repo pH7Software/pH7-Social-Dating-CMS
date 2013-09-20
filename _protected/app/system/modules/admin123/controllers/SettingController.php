@@ -21,7 +21,7 @@ class SettingController extends Controller
     public function general()
     {
         // Add Css Style for Tabs
-        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_DS . PH7_CSS, 'tabs.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'tabs.css');
 
         $this->sTitle = t('General Settings');
         $this->view->page_title = $this->sTitle;
@@ -40,7 +40,7 @@ class SettingController extends Controller
         unset($oPage, $sTable);
 
         // Add JS file for the ads form
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'common.js');
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS, 'common.js');
 
         $this->sTitle = t('Advertisement Settings');
         $this->view->page_title = $this->sTitle;

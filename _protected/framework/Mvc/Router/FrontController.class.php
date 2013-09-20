@@ -122,8 +122,8 @@ final class FrontController
                 if (!$this->oConfig->load(PH7_PATH_APP . $sPathModule . $this->oRegistry->module . '/config/config.ini'))
                 {
                     $this->notFound('The module <b>' . $this->oRegistry->module .
-                            '</b> of system not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module .
-                            '/</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . '/config/config.ini</b>');
+                            '</b> of system not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS .
+                            '</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . 'config' . PH7_DS . 'config.ini</b>');
                     // It reloads the config.ini file for the new module "error"
                     $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini');
                 }
@@ -132,13 +132,13 @@ final class FrontController
                 $this->oRegistry->path_module = PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS;
 
                 /***** URL THE MODULE *****/
-                $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . PH7_DS;
+                $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . '/';
 
                 /***** PATH THE TEMPLATE *****/
                 $this->oRegistry->path_themes_module = PH7_PATH_ROOT . PH7_LAYOUT . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_TPL;
 
                 /***** URL THE TEMPLATE *****/
-                $this->oRegistry->url_themes_module = PH7_RELATIVE . PH7_LAYOUT . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_TPL;
+                $this->oRegistry->url_themes_module = PH7_RELATIVE . PH7_LAYOUT . $sPathModule . $this->oRegistry->module . '/' . PH7_TPL;
 
                 // Get the default controller
                 $this->oRegistry->controller = ucfirst($oRoute->getAttribute('controller')) . 'Controller';
@@ -197,8 +197,8 @@ final class FrontController
         // Check if file exist
         if (!$this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . '/config/config.ini') || $this->isIndexFile())
         {
-            $this->notFound('The module <b>' . $this->oRegistry->module . '</b> of system not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module .
-                '/</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . '/config/config.ini</b>');
+            $this->notFound('The module <b>' . $this->oRegistry->module . '</b> of system not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS .
+                '</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . 'config' . PH7_DS . 'config.ini</b>');
 
             // It reloads the config.ini file for the new module "error"
             $this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . '/config/config.ini');
@@ -208,13 +208,13 @@ final class FrontController
         $this->oRegistry->path_module = PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS;
 
         /***** URL THE MODULE *****/
-        $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . PH7_DS;
+        $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . '/';
 
         /***** PATH THE TEMPLATE *****/
         $this->oRegistry->path_themes_module = PH7_PATH_TPL_SYS_MOD . PH7_DS . $this->oRegistry->module . PH7_DS . PH7_TPL;
 
         /***** URL THE TEMPLATE *****/
-        $this->oRegistry->url_themes_module = PH7_URL_TPL_SYS_MOD . $this->oRegistry->module . PH7_DS . PH7_TPL;
+        $this->oRegistry->url_themes_module = PH7_URL_TPL_SYS_MOD . $this->oRegistry->module . '/' . PH7_TPL;
 
         if ($this->oUri->fragment(1) === 'asset' && $this->oUri->fragment(2) === 'ajax')
         {
@@ -271,8 +271,8 @@ final class FrontController
         // Check if file exist
         if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini'))
         {
-            $this->notFound('The module <b>' . $this->oRegistry->module . '</b> not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module .
-                '/</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini</b>');
+            $this->notFound('The module <b>' . $this->oRegistry->module . '</b> not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS .
+                '</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . 'config' . PH7_DS . 'config.ini</b>');
             // It reloads the config.ini file for the new module "error"
             $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini');
         }
@@ -280,11 +280,11 @@ final class FrontController
         /***** PATH THE MODULE *****/
         $this->oRegistry->path_module = PH7_PATH_MOD . $this->oRegistry->module . PH7_DS;
         /***** URL THE MODULE *****/
-        $this->oRegistry->url_module = PH7_URL_ROOT . 'm/' . $this->oRegistry->module . PH7_DS;
+        $this->oRegistry->url_module = PH7_URL_ROOT . 'm/' . $this->oRegistry->module . '/';
         /***** PATH THE TEMPLATE *****/
         $this->oRegistry->path_themes_module = PH7_PATH_TPL_MOD . $this->oRegistry->module . PH7_DS . PH7_TPL;
         /***** URL THE TEMPLATE *****/
-        $this->oRegistry->url_themes_module = PH7_URL_TPL_MOD . $this->oRegistry->module . PH7_DS . PH7_TPL;
+        $this->oRegistry->url_themes_module = PH7_URL_TPL_MOD . $this->oRegistry->module . '/' . PH7_TPL;
 
         if ($this->oUri->fragment(2) === 'asset' && $this->oUri->fragment(3) === 'ajax')
         {
@@ -431,7 +431,7 @@ final class FrontController
             }
             else
             {
-                $this->notFound('Error while loading the library of module ajax<br />File: ' . $sMod . 'assets/ajax/' . $this->oUri->fragment(3) . $sFolder . 'Ajax.php does not exist', 1);
+                $this->notFound('Error while loading the library of module ajax<br />File: ' . $sMod . 'assets' . PH7_DS . 'ajax' . PH7_DS . $this->oUri->fragment(3) . $sFolder . 'Ajax.php does not exist', 1);
             }
         }
         else
@@ -445,7 +445,7 @@ final class FrontController
             }
             else
             {
-                $this->notFound('Error while loading the library of ajax<br />File: ' . PH7_PATH_SYS . 'core/assets/ajax/' . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php does not exist', 1);
+                $this->notFound('Error while loading the library of ajax<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'ajax' . PH7_DS . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php does not exist', 1);
             }
         }
     }
@@ -461,7 +461,7 @@ final class FrontController
             if (is_file(PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php'))
                 require PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php';
             else
-                $this->notFound('Error while loading the Cron Jobs file<br />File: ' . PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php does not exist', 1);
+                $this->notFound('Error while loading the Cron Jobs file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'cron' . PH7_DS . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php does not exist', 1);
         }
         else
         {
@@ -479,7 +479,7 @@ final class FrontController
         if (is_file(PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php'))
             include_once PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php';
         else
-            $this->notFound('Error while loading the file<br />File: ' . PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php does not exist', 1);
+            $this->notFound('Error while loading the file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'file' . PH7_DS . $this->oUri->fragment(2) . 'CoreFile.php does not exist', 1);
     }
 
     /**
@@ -495,7 +495,7 @@ final class FrontController
         }
         else
         {
-            $this->notFound('Error while loading the Javascript file<br />File: ' . PH7_PATH_SYS . 'core/assets/css/' . $this->oUri->fragment(2) . 'CoreCss.php does not exist', 1);
+            $this->notFound('Error while loading the Javascript file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'css' . PH7_DS . $this->oUri->fragment(2) . 'CoreCss.php does not exist', 1);
         }
     }
 
@@ -512,7 +512,7 @@ final class FrontController
         }
         else
         {
-            $this->notFound('Error while loading the Javascript file<br />File: ' . PH7_PATH_SYS . 'core/assets/js/' . $this->oUri->fragment(2) . 'CoreJs.php does not exist', 1);
+            $this->notFound('Error while loading the Javascript file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'js' . PH7_DS . $this->oUri->fragment(2) . 'CoreJs.php does not exist', 1);
         }
     }
 

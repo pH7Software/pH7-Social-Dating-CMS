@@ -22,7 +22,7 @@ class MainController extends Controller
     {
         /*** JS File Only to Members. For its part, the Rating System will redirect the visitors who are not connected to the registration form. ***/
         if (UserCore::auth())
-            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_DS . PH7_TPL . PH7_TPL_MOD_NAME . PH7_DS . PH7_JS, 'script.js');
+            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS, 'script.js');
 
         /*** Meta Tags ***/
         /**
