@@ -14,6 +14,7 @@
     <p>{lang 'Name: %software_version_name%'}</p>
     <p>{lang 'Version: %software_version%'}</p>
     <p>{lang 'Build: %software_build%'}</p>
+    <p>{lang 'Release Date: %0%', $release_date}</p>
   </div>
 
 </div>
