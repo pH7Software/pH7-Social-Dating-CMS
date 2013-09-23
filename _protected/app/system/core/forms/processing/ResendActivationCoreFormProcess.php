@@ -34,7 +34,7 @@ class ResendActivationCoreFormProcess extends Form
             {
                 $sMod = ($sTable == 'Affiliates') ? 'affiliate' : 'user';
 
-                $sActivateLink = Uri::get($sMod,'account','activate') . '/' . $mHash->email . '/' . $mHash->hashValidation;
+                $sActivateLink = Uri::get($sMod,'account','activate') . PH7_SH . $mHash->email . PH7_SH . $mHash->hashValidation;
 
                 $this->view->content = t('Welcome to %site_name%, %0%!', $mHash->firstName) . '<br />' .
                 t('Hello %0% - We are proud to welcome you as a member of %site_name%!', $mHash->firstName) . '<br />' .

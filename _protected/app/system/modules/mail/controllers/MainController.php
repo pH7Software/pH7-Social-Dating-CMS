@@ -37,8 +37,8 @@ class MainController extends Controller
         $this->view->member_id = $this->_iProfileId;
 
         // Adding Css Style Content and JavaScript for Mail and Form
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_CSS, 'mail.css');
-        $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'form.js,' . PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS . 'mail.js');
+        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'mail.css');
+        $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'form.js,' . PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'mail.js');
     }
 
     public function index()

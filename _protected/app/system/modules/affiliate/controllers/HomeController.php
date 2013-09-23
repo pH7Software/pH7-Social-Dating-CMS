@@ -30,7 +30,7 @@ class HomeController extends Controller
             $this->view->h3_title = t('Hello <em>%0%</em>, welcome to your site!', $this->session->get('affiliate_first_name'));
 
         if (!Affiliate::auth())
-            $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_CSS, 'style.css');
+            $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'style.css');
 
         $this->output();
     }

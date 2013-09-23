@@ -15,7 +15,7 @@ class SearchAffiliateForm
     public static function display()
     {
         $oForm = new \PFBC\Form('form_search', 500);
-        $oForm->configure(array('action' => Uri::get('affiliate','admin','browse') . '/', 'method' => 'get'));
+        $oForm->configure(array('action' => Uri::get('affiliate','admin','browse') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Search(t('Search an Affiliate:'), 'looking', array('description' => t('Enter their ID, First Name, Last Name, Username, Email, Bank Account, Sex or IP address.'))));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::PENDING_APPROVAL => t('Pending approval'), SearchCoreModel::LATEST => t('Latest'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::LAST_EDIT => t('Last Account Edit'))));
         $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array(SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending'))));

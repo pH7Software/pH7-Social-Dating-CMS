@@ -22,14 +22,14 @@ class MainController extends Controller
         {
             $this->view->is_splash_page = Framework\Mvc\Model\DbConfig::getSetting('splashPage');
 
-            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'splash.css,tooltip.css,js/jquery/carousel.css');
-            $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_JS . 'splash.js');
+            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'splash.css,tooltip.css,js/jquery/carousel.css');
+            $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
         }
 
         // Only Members
         if (UserCore::auth())
         {
-            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . '/' . PH7_CSS, 'zoomer.css');
+            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'zoomer.css');
             $this->design->addJs(PH7_STATIC . PH7_JS, 'zoomer.js,Wall.js');
             $this->view->first_name = $this->session->get('member_first_name'); // First Name for the welcome message.
         }

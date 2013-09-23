@@ -44,12 +44,11 @@ class Uri
         $this->_sUri = $_SERVER['QUERY_STRING'];
 
         /*** We remove the last slash to avoid taking a new fragment url empty ***/
-        if (substr($this->_sUri, -1) === '/') {
+        if (substr($this->_sUri, -1) === PH7_SH)
             $this->_sUri = substr($this->_sUri, 0, -1);
-        }
 
         /*** Here, we put the string into array ***/
-        self::$_aFragments = explode('/', $this->_sUri);
+        self::$_aFragments = explode(PH7_SH, $this->_sUri);
     }
 
     /**

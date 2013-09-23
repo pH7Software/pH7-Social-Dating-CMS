@@ -20,7 +20,7 @@ class SearchFriendForm
         unset($oHttpRequest);
 
         $oForm = new \PFBC\Form('form_search', 500);
-        $oForm->configure(array('action' => Uri::get('user', 'friend', $sAction, $sUsername) . '/' , 'method' => 'get'));
+        $oForm->configure(array('action' => Uri::get('user', 'friend', $sAction, $sUsername) . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Search(t('Search a Friend of "%0%"', $sUsername), 'looking', array('title' => t('Enter its First Name, Last Name, Username, Email address or ID of your Friend'))));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::LATEST => t('Latest'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated'))));
         $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array(SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending'))));

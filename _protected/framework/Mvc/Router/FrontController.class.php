@@ -132,13 +132,13 @@ final class FrontController
                 $this->oRegistry->path_module = PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS;
 
                 /***** URL THE MODULE *****/
-                $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . '/';
+                $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . PH7_SH;
 
                 /***** PATH THE TEMPLATE *****/
                 $this->oRegistry->path_themes_module = PH7_PATH_ROOT . PH7_LAYOUT . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_TPL;
 
                 /***** URL THE TEMPLATE *****/
-                $this->oRegistry->url_themes_module = PH7_RELATIVE . PH7_LAYOUT . $sPathModule . $this->oRegistry->module . '/' . PH7_TPL;
+                $this->oRegistry->url_themes_module = PH7_RELATIVE . PH7_LAYOUT . $sPathModule . $this->oRegistry->module . PH7_SH . PH7_TPL;
 
                 // Get the default controller
                 $this->oRegistry->controller = ucfirst($oRoute->getAttribute('controller')) . 'Controller';
@@ -208,13 +208,13 @@ final class FrontController
         $this->oRegistry->path_module = PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS;
 
         /***** URL THE MODULE *****/
-        $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . '/';
+        $this->oRegistry->url_module = PH7_URL_ROOT . $this->oRegistry->module . PH7_SH;
 
         /***** PATH THE TEMPLATE *****/
         $this->oRegistry->path_themes_module = PH7_PATH_TPL_SYS_MOD . PH7_DS . $this->oRegistry->module . PH7_DS . PH7_TPL;
 
         /***** URL THE TEMPLATE *****/
-        $this->oRegistry->url_themes_module = PH7_URL_TPL_SYS_MOD . $this->oRegistry->module . '/' . PH7_TPL;
+        $this->oRegistry->url_themes_module = PH7_URL_TPL_SYS_MOD . $this->oRegistry->module . PH7_SH . PH7_TPL;
 
         if ($this->oUri->fragment(1) === 'asset' && $this->oUri->fragment(2) === 'ajax')
         {
@@ -280,11 +280,11 @@ final class FrontController
         /***** PATH THE MODULE *****/
         $this->oRegistry->path_module = PH7_PATH_MOD . $this->oRegistry->module . PH7_DS;
         /***** URL THE MODULE *****/
-        $this->oRegistry->url_module = PH7_URL_ROOT . 'm/' . $this->oRegistry->module . '/';
+        $this->oRegistry->url_module = PH7_URL_ROOT . 'm/' . $this->oRegistry->module . PH7_SH;
         /***** PATH THE TEMPLATE *****/
         $this->oRegistry->path_themes_module = PH7_PATH_TPL_MOD . $this->oRegistry->module . PH7_DS . PH7_TPL;
         /***** URL THE TEMPLATE *****/
-        $this->oRegistry->url_themes_module = PH7_URL_TPL_MOD . $this->oRegistry->module . '/' . PH7_TPL;
+        $this->oRegistry->url_themes_module = PH7_URL_TPL_MOD . $this->oRegistry->module . PH7_SH . PH7_TPL;
 
         if ($this->oUri->fragment(2) === 'asset' && $this->oUri->fragment(3) === 'ajax')
         {

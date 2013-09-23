@@ -39,7 +39,7 @@ class SearchUserCoreForm
     {
          // Generate the Quick Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
-        $oForm->configure(array('action' => Uri::get('user','browse','index') . '/', 'method' => 'get'));
+        $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), array('value' => static::getGenderValues()['sex_user'], 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => array('male','female','couple'), 'required' => 1)));
@@ -58,7 +58,7 @@ class SearchUserCoreForm
     {
          // Generate the Advanced Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
-        $oForm->configure(array('action' => Uri::get('user','browse','index') . '/', 'method' => 'get' ));
+        $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), array('value' => static::getGenderValues()['sex_user'], 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => static::getGenderValues()['match_sex'], 'required' => 1)));

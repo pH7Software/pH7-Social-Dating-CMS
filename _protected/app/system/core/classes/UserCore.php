@@ -113,7 +113,7 @@ class UserCore
         $oAvatar6->watermarkText($sWatermarkText, $iSizeWatermarkText);
         $oAvatar7->watermarkText($sWatermarkText, $iSizeWatermarkText);
 
-        $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/img/' . $sUsername . '/';
+        $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/img/' . $sUsername . PH7_SH;
         (new File)->createDir($sPath);
 
         $sFileName = Various::genRnd($oAvatar1->getFileName(), 1);
@@ -159,7 +159,7 @@ class UserCore
         $oFile = new File;
         $sExt = PH7_DOT . $oFile->getFileExt($sFile);
 
-        $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/img/' . $sUsername . '/';
+        $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/avatar/img/' . $sUsername . PH7_SH;
 
         /** Array to the new format (>= PHP5.4) **/
         $aFiles = [
@@ -207,7 +207,7 @@ class UserCore
         $this->deleteBackground($iProfileId, $sUsername);
 
 
-        $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/img/' . $sUsername . '/';
+        $sPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/img/' . $sUsername . PH7_SH;
         (new File)->createDir($sPath);
 
         $sFileName = Various::genRnd($oWallpaper->getFileName(), 1);
@@ -234,7 +234,7 @@ class UserCore
          // We start to delete the file before the data in the database if we could not delete the file since we would have lost the link to the file found in the database.
         $sFile = (new UserCoreModel)->getBackground($iProfileId, null);
 
-        (new File)->deleteFile(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/img/' . $sUsername . '/' . $sFile);
+        (new File)->deleteFile(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/img/' . $sUsername . PH7_SH . $sFile);
         (new UserCoreModel)->deleteBackground($iProfileId);
 
         /* Clean User Background Cache */

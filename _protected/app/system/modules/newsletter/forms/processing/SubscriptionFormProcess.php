@@ -42,7 +42,7 @@ class SubscriptionFormProcess extends Form
                         'active' => '0'
                     ];
 
-                    $sActivateLink = Uri::get('newsletter','home','activate') . '/' . $aData['email'] . '/' . $aData['hash_validation'];
+                    $sActivateLink = Uri::get('newsletter','home','activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
 
                     $this->view->content = t('Hi %0%!') . '<br />' .
                     t('Welcome to %site_name% Subscription!', $aData['name']) . '<br />' .

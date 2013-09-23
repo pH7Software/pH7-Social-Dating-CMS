@@ -59,7 +59,7 @@ class MainController extends Controller
     protected function addStats()
     {
         // Adding the common CSS for the chart.
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . '/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_CSS, 'general.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'general.css');
 
         $oStatModel = new StatisticCoreModel;
 

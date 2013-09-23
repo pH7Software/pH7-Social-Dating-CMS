@@ -39,7 +39,8 @@ $sPhp_self = dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES));
 
 define('PH7_DS', DIRECTORY_SEPARATOR);
 define('PH7_PS', PATH_SEPARATOR);
-define('PH7_SELF', (substr($sPhp_self, -1) !== '/') ? $sPhp_self . '/' : $sPhp_self);
+define('PH7_SH', '/'); // SlasH
+define('PH7_SELF', (substr($sPhp_self, -1) !== PH7_SH) ? $sPhp_self . PH7_SH : $sPhp_self);
 define('PH7_RELATIVE', PH7_SELF);
 
 #################### PATH ####################

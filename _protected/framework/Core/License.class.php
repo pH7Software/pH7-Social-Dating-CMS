@@ -217,7 +217,7 @@ final class License
         unset($oHttp);
 
         $iLicenseKeyLength = strlen($sLicenseKey);
-        if(substr($sLicenseKey, ($iLicenseKeyLength-1), 1) === '/')
+        if(substr($sLicenseKey, ($iLicenseKeyLength-1), 1) === PH7_SH)
             $sLicenseKey = substr($sLicenseKey, 0, ($iLicenseKeyLength-1));
 
         return ($this->_bDynamicHostIp) ? $sLicenseKey : $this->_sHostIp . $sLicenseKey;

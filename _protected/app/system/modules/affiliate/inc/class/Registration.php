@@ -28,7 +28,7 @@ class Registration extends RegistrationCore
 
             case 2:
               /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
-              $sActivateLink = Uri::get('affiliate','account','activate') . '/' . $aInfo['email'] . '/' . $aInfo['hash_validation'];
+              $sActivateLink = Uri::get('affiliate','account','activate') . PH7_SH . $aInfo['email'] . PH7_SH . $aInfo['hash_validation'];
               $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
             break;
 
