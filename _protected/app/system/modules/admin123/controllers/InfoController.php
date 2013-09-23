@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 namespace PH7;
+
 class InfoController extends Controller
 {
 
@@ -13,8 +14,7 @@ class InfoController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD,
-            'info', 'software'));
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'info', 'software'));
     }
 
     public function language()
@@ -30,6 +30,7 @@ class InfoController extends Controller
         $this->sTitle = t('%software_name% Information');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+        $this->view->release_date = $this->dateTime->get(Framework\Security\Version::KERNEL_RELASE_DATE)->date();
         $this->output();
     }
 
