@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 namespace PH7;
+
 use PH7\Framework\File\File;
 
 class ModuleController extends Controller
