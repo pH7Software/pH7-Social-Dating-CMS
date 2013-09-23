@@ -8,7 +8,7 @@
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Request
  * @version          1.2
- * @update           09/07/13
+ * @update           09/24/13
  * @link             http://hizup.com
  */
 
@@ -241,8 +241,8 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function requestUri()
     {
-        $sRequestUri = (substr($this->_sRequestUri, 0, 1) === '/') ? substr($this->_sRequestUri, 1) : $this->_sRequestUri;
-        $sRelative = (substr(PH7_RELATIVE, 0, 1) === '/') ? substr(PH7_RELATIVE, 1) : PH7_RELATIVE;
+        $sRequestUri = (substr($this->_sRequestUri, 0, 1) === PH7_SH) ? substr($this->_sRequestUri, 1) : $this->_sRequestUri;
+        $sRelative = (substr(PH7_RELATIVE, 0, 1) === PH7_SH) ? substr(PH7_RELATIVE, 1) : PH7_RELATIVE;
         return str_replace($sRelative, '', $sRequestUri);
     }
 

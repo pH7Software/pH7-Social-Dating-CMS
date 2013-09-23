@@ -57,7 +57,7 @@ class HeaderUrl
     {
         $sSecure = (!empty($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 's' : '';
         $sServerProtocol = strtolower($_SERVER['SERVER_PROTOCOL']);
-        $sProtocol = substr($sServerProtocol, 0, strpos($sServerProtocol, '/')) . $sSecure;
+        $sProtocol = substr($sServerProtocol, 0, strpos($sServerProtocol, PH7_SH)) . $sSecure;
 
         // @var mixed $mPort (null or integer)
         $mPort = ($_SERVER['SERVER_PORT'] == '80') ? '' : (':' . $_SERVER['SERVER_PORT']);

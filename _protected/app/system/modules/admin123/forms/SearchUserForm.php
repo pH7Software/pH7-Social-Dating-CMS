@@ -20,7 +20,7 @@ class SearchUserForm
         foreach ($oGroupId as $iId) $aGroupName[$iId->groupId] = $iId->name;
 
         $oForm = new \PFBC\Form('form_user_search', 500);
-        $oForm->configure(array('action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . '/', 'method' => 'get'));
+        $oForm->configure(array('action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_user_search', 'form_user_search'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Search for:'), 'what'));
         $oForm->addElement(new \PFBC\Element\Select(t('Where:'), 'where', array('all' => t('All'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::IP => t('IP Address')), array('required' => 1)));

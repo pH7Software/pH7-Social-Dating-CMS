@@ -55,7 +55,7 @@ class Compress
     {
         $this->_sYuiCompressorPath = realpath(__DIR__) . '/Compiler/YUICompressor-2.4.7.jar';
         $this->_sClosureCompilerPath = realpath(__DIR__) . '/Compiler/ClosureCompiler.jar';
-        $this->_sTmpFilePath = PH7_PATH_TMP . '/' . uniqid() . '.tmp';
+        $this->_sTmpFilePath = PH7_PATH_TMP . PH7_DS . uniqid() . '.tmp';
         $this->_bJavaCompiler = (bool) Config::getInstance()->values['cache']['enable.static.minify_use_java_compiler'];
     }
 

@@ -66,7 +66,7 @@ class EditNoteForm
             $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', array('accept' => 'image/*')));
 
             if (!empty($oPost->thumb))
-                $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><br /><img src="' . PH7_URL_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . '/' . $oPost->thumb . '" alt="' . t('Thumbnail') . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'));
+                $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><br /><img src="' . PH7_URL_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . PH7_SH . $oPost->thumb . '" alt="' . t('Thumbnail') . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'));
 
             if (!empty($oPost->thumb))
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="' . Uri::get('note', 'main', 'removethumb', $oPost->noteId . (new Token)->url(), false) . '">' . t('Remove this thumbnail?') . '</a>'));
@@ -80,7 +80,7 @@ class EditNoteForm
             $oForm->addElement(new \PFBC\Element\Textbox(t('Copyright (meta tag):'), 'meta_copyright', array('validation' => new \PFBC\Validation\Str(2, 50), 'value' => $oPost->metaCopyright)));
             $oForm->addElement(new \PFBC\Element\Radio(t('Enable Comment:'), 'enable_comment', array('1' => t('Enable'), '0' => t('Disable')), array('value' => $oPost->enableComment, 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\Button);
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_TPL_SYS_MOD . 'note/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_JS . 'common.js"></script>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_TPL_SYS_MOD . 'note/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'));
             $oForm->render();
         }
         else

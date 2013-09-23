@@ -15,7 +15,7 @@ class SearchTopicForm
     public static function display()
     {
         $oForm = new \PFBC\Form('form_search', 500);
-        $oForm->configure(array('action' => Uri::get('forum','forum','result') . '/', 'method' => 'get'));
+        $oForm->configure(array('action' => Uri::get('forum','forum','result') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Search(t('Name, Keyword of message, Author (username) or ID of Topic Forum:'), 'looking'));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::TITLE => t('Title'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::CREATED => t('Created Date'), SearchCoreModel::UPDATED => t('Updated Date'))));
         $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array(SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending'))));

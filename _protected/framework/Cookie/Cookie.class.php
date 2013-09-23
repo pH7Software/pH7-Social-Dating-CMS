@@ -44,7 +44,7 @@ class Cookie
             if (!(new \PH7\Framework\Server\Server)->isLocalHost())
                 setcookie($sCookieName, $sValue, time() + $iTime, Config::getInstance()->values['cookie']['path'], Config::getInstance()->values['cookie']['domain'], $bSecure, true);
             else
-                setcookie($sCookieName, $sValue, time() + $iTime, '/');
+                setcookie($sCookieName, $sValue, time() + $iTime, PH7_SH);
         }
     }
 

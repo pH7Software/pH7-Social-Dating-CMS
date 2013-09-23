@@ -91,7 +91,7 @@ class Uri
 
             $aVar = explode(',', $aParams['vars']);
             foreach ($aVar as $sKey => $sVal)
-                $sVars .= '/' . $sVal;
+                $sVars .= PH7_SH . $sVal;
             unset($aVar);
 
             $sVars = Url::clean($sVars, static::$_bFullClean);

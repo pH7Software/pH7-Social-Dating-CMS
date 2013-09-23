@@ -33,7 +33,7 @@ class Note extends WriteCore
                 /**
                  * The method deleteFile first test if the file exists, if so it delete the file.
                  */
-                $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . '/';
+                $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . PH7_SH;
                 $oFile->deleteFile($sPathName); // It erases the old thumbnail
                 $oFile->createDir($sPathName);
                 $sFileName = Various::genRnd($oImage->getFileName(), 20) . PH7_DOT . $oImage->getExt();

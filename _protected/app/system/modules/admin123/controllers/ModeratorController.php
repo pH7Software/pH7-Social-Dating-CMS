@@ -61,7 +61,7 @@ class ModeratorController extends Controller
 
     public function video()
     {
-        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'video/' . PH7_TPL . PH7_TPL_MOD_NAME . '/' . PH7_CSS, 'common.css');
+        $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'video/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
 
         $this->view->page_title = t('Videos Moderation');
         $this->view->h2_title = t('Videos Moderation');

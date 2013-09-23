@@ -44,7 +44,7 @@ class Youtube extends Api implements IApi
         {
             $aThumb = ['default', 1, 2, 3];
             shuffle($aThumb);
-            return 'http://i' . mt_rand(1,4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . '/' . $aThumb[0] . '.jpg';
+            return 'http://i' . mt_rand(1,4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
         }
         else
         {
