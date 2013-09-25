@@ -159,7 +159,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
     {
         if ($b404Status) Http::setHeadersByCode(404);
 
-        $this->view->page_title = t('%0% - Page Not Found', $sMsg);
+        $this->view->page_title = (!empty($sMsg)) ? t('%0% - Page Not Found', $sMsg) : t('Page Not Found');
         $this->view->h1_title = (!empty($sMsg)) ? $sMsg : t('Whoops! The page you requested was not found.');
 
         $sErrorDesc = t('You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive.') . '<br />
