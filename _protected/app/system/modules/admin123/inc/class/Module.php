@@ -21,16 +21,22 @@ class Module
     INSTALL = 1,
     UNINSTALL = 2,
 
-    DIR = 'module/',
-    INSTALL_DIR = 'install/',
-    SQL_DIR = 'sql/',
-    INFO_DIR = 'info/',
-    INSTALL_SQL_FILE = 'MySQL/install.sql',
-    UNINSTALL_SQL_FILE = 'MySQL/uninstall.sql',
+    /**
+     * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
+     */
+    DIR = 'module',
+    INSTALL_DIR = 'install',
+    SQL_DIR = 'sql',
+    INFO_DIR = 'info',
+    CONFIG_DIR = 'config',
+    MYSQL_DIR = 'MySql',
+
+    INSTALL_SQL_FILE = 'install.sql',
+    UNINSTALL_SQL_FILE = 'uninstall.sql',
     INSTALL_INST_CONCL_FILE = 'in_conclusion',
     UNINSTALL_INST_CONCL_FILE = 'un_conclusion',
     ROUTE_FILE = 'route.xml',
-    CONFIG_FILE = 'config/config.ini';
+    CONFIG_FILE = 'config.ini';
 
     public function __construct()
     {
@@ -98,9 +104,9 @@ class Module
     public function checkModFolder($sSwitch, $sFolder)
     {
         $sValue = $this->_checkParam($sSwitch);
-        $sFullPath = ($sValue == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . $sFolder : PH7_PATH_MOD . $sFolder;
+        $sFullPath = ($sValue == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder : PH7_PATH_MOD . $sFolder;
 
-        return (!preg_match('#^[a-z0-9\-]{2,35}/?$#i', $sFolder) || !is_file($sFullPath . static::CONFIG_FILE) || (PH7_PATH_REPOSITORY . static::DIR . $sFolder == PH7_PATH_MOD . $sFolder)) ? false : true;
+        return (!preg_match('#^[a-z0-9\-]{2,35}#i', $sFolder) || !is_file($sFullPath . static::CONFIG_DIR . PH7_DS . static::CONFIG_FILE) || (PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder == PH7_PATH_MOD . $sFolder)) ? false : true;
     }
 
     /**
@@ -113,9 +119,9 @@ class Module
     public function readConfig($sSwitch, $sFolder)
     {
         $sValue = $this->_checkParam($sSwitch);
-        $sPath = ($sValue == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . $sFolder : PH7_PATH_MOD . $sFolder;
+        $sPath = ($sValue == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder : PH7_PATH_MOD . $sFolder;
 
-        return Framework\Config\Config::getInstance()->load($sPath . static::CONFIG_FILE);
+        return Framework\Config\Config::getInstance()->load($sPath . static::CONFIG_DIR . PH7_DS . static::CONFIG_FILE);
     }
 
     /**
@@ -127,8 +133,8 @@ class Module
     public function readInstruction($sSwitch)
     {
         $sValue = $this->_checkParam($sSwitch);
-        $sDir = $this->_sModsDirModFolder . static::INSTALL_DIR . static::INFO_DIR;
-        $sPath = ($sValue == static::INSTALL) ? PH7_PATH_MOD . $sDir . static::INSTALL_INST_CONCL_FILE : PH7_PATH_REPOSITORY . static::DIR . $sDir . static::UNINSTALL_INST_CONCL_FILE;
+        $sDir = $this->_sModsDirModFolder . static::INSTALL_DIR . PH7_DS . static::INFO_DIR . PH7_DS;
+        $sPath = ($sValue == static::INSTALL) ? PH7_PATH_MOD . $sDir . static::INSTALL_INST_CONCL_FILE : PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sDir . static::UNINSTALL_INST_CONCL_FILE;
         $mInstruction = F\Import::file($sPath);
         return (!$mInstruction) ? '<p class="error">' . t('Instruction file not found!') . '</p>' : $mInstruction;
     }
@@ -141,7 +147,7 @@ class Module
      */
     private function _readMods($sSwitch)
     {
-        $sPath = ($sSwitch == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR : PH7_PATH_MOD;
+        $sPath = ($sSwitch == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . PH7_DS : PH7_PATH_MOD;
         return $this->_oFile->readDirs($sPath);
     }
 
@@ -155,13 +161,13 @@ class Module
     {
         if($sSwitch == static::INSTALL)
         {
-            $this->_oFile->renameMost(PH7_PATH_REPOSITORY . static::DIR . $this->_sModsDirModFolder, PH7_PATH_MOD); // Files of module
+            $this->_oFile->renameMost(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sModsDirModFolder, PH7_PATH_MOD); // Files of module
             $this->_oFile->chmod(PH7_PATH_MOD . $this->_sModsDirModFolder, 0777);
         }
         else
         {
-            $this->_oFile->renameMost(PH7_PATH_MOD . $this->_sModsDirModFolder, PH7_PATH_REPOSITORY . static::DIR); // Files of module
-            $this->_oFile->chmod(PH7_PATH_REPOSITORY . static::DIR . $this->_sModsDirModFolder, 0777);
+            $this->_oFile->renameMost(PH7_PATH_MOD . $this->_sModsDirModFolder, PH7_PATH_REPOSITORY . static::DIR . PH7_DS); // Files of module
+            $this->_oFile->chmod(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sModsDirModFolder, 0777);
         }
     }
 
@@ -173,8 +179,8 @@ class Module
      */
     private function _sql($sSwitch)
     {
-        $sSqlFile = ($sSwitch == static::INSTALL) ? static::INSTALL_SQL_FILE : static::UNINSTALL_SQL_FILE;
-        $sPath = PH7_PATH_MOD . $this->_sModsDirModFolder . static::INSTALL_DIR . static::SQL_DIR . $sSqlFile;
+        $sSqlFile = static::MYSQL_DIR . PH7_DS . ($sSwitch == static::INSTALL ? static::INSTALL_SQL_FILE : static::UNINSTALL_SQL_FILE);
+        $sPath = PH7_PATH_MOD . $this->_sModsDirModFolder . static::INSTALL_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $sSqlFile;
 
         if(is_file($sPath) && filesize($sPath) > 12)
         {
@@ -192,7 +198,7 @@ class Module
      */
     private function _route($sSwitch)
     {
-        $this->_sModRoutePath = PH7_PATH_MOD . $this->_sModsDirModFolder . static::INSTALL_DIR . static::ROUTE_FILE;
+        $this->_sModRoutePath = PH7_PATH_MOD . $this->_sModsDirModFolder . static::INSTALL_DIR . PH7_DS . static::ROUTE_FILE;
 
         if(is_file($this->_sModRoutePath))
             ($sSwitch == static::INSTALL) ? $this->_addRoute() : $this->_removeRoute();
@@ -237,7 +243,7 @@ class Module
      */
     private function _removeModDir($sModuleDir)
     {
-        return $this->_oFile->deleteDir(PH7_PATH_REPOSITORY . static::DIR . $sModuleDir);
+        return $this->_oFile->deleteDir(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sModuleDir);
     }
 
     /**

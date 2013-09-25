@@ -24,13 +24,19 @@ class UpgradeCore
 {
 
     const
-    DIR = 'upgrade/',
-    FILE_DIR = 'file/',
-    PUBLIC_DIR = 'public/',
-    PROTECTED_DIR = '_protected/',
-    SQL_DIR = 'data/sql/',
-    INFO_DIR = 'info/',
-    SQL_FILE = 'MySQL/upgrade.sql',
+    /**
+     * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
+     */
+    DIR = 'upgrade',
+    FILE_DIR = 'file',
+    PUBLIC_DIR = 'public',
+    PROTECTED_DIR = '_protected',
+    DATA_DIR = 'data',
+    SQL_DIR = 'sql',
+    INFO_DIR = 'info',
+    MYSQL_DIR = 'MySQL',
+
+    UPGRADE_FILE = 'upgrade.sql',
     INST_INTRO_FILE = 'introduction',
     INST_CONCL_FILE = 'conclusion',
     CONFIG_FILE = 'config.ini';
@@ -163,16 +169,16 @@ class UpgradeCore
                                 */
                                 $this->_sHtml = '<h3 class="success">' . t('Your update ran successfully!') . '</h3>';
 
-                                if($this->_bAutoRemoveUpgradeDir == true)
+                                if($this->_bAutoRemoveUpgradeDir)
                                 {
                                     if($this->_removeUpgradeDir())
                                     {
-                                        $this->_sHtml .= '<p class="success">' . t('The upgrade directory <em>(~%0%)</em> has been deleted!', PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder) . '</p>';
+                                        $this->_sHtml .= '<p class="success">' . t('The upgrade directory <em>(~%0%)</em> has been deleted!', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder) . '</p>';
                                         $this->_sHtml .= '<p class="success">' . t('Status... OK!') . '</p>';
                                     }
                                     else
                                     {
-                                        $this->_sHtml .= '<p class="error">' . t('The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH.', PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder) . '</p>';
+                                        $this->_sHtml .= '<p class="error">' . t('The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH.', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder) . '</p>';
                                         $this->_sHtml .= '<p class="error">' . t('Status... Failure!') . '</p>';
                                     }
                                 }
@@ -205,14 +211,14 @@ class UpgradeCore
 
     private function _file()
     {
-        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . static::PUBLIC_DIR;
+        $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR . PH7_DS;
         if(is_dir($sPathPublicDir))
         {
             $this->_oFile->renameMost($sPathPublicDir, PH7_PATH_ROOT);
             $this->_oFile->chmod(PH7_PATH_ROOT, 0777);
         }
 
-        $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . static::PROTECTED_DIR;
+        $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR . PH7_DS;
         if(is_dir($sPathProtectedDir))
         {
             $this->_oFile->renameMost($sPathProtectedDir, PH7_PATH_PROTECTED);
@@ -222,7 +228,7 @@ class UpgradeCore
 
     private function _sql()
     {
-       $sPath = PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::SQL_DIR . static::SQL_FILE;
+       $sPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . static::MYSQL_DIR . PH7_DS . static::UPGRADE_FILE . PH7_DS;
 
        if(is_file($sPath) && filesize($sPath) > 12)
        {
@@ -324,8 +330,8 @@ class UpgradeCore
      */
     private function _checkUpgradeFolder($sFolder)
     {
-        $sFullPath = PH7_PATH_REPOSITORY . static::DIR . $sFolder;
-        return (!preg_match('#^' . Version::PATTERN . '\-' . Version::PATTERN . '/?$#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . static::CONFIG_FILE)) ? false : true;
+        $sFullPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder;
+        return (!preg_match('#^' . Version::PATTERN . '\-' . Version::PATTERN . '#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . PH7_DS . static::CONFIG_FILE)) ? false : true;
     }
 
     /**
@@ -335,7 +341,7 @@ class UpgradeCore
      */
     private function _readUpgrades()
     {
-        return $this->_oFile->readDirs(PH7_PATH_REPOSITORY . static::DIR);
+        return $this->_oFile->readDirs(PH7_PATH_REPOSITORY . static::DIR . PH7_DS);
     }
 
     /**
@@ -345,7 +351,7 @@ class UpgradeCore
      */
     private function _removeUpgradeDir()
     {
-        return $this->_oFile->deleteDir(PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder);
+        return $this->_oFile->deleteDir(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder);
     }
 
     private function _showAvailableUpgrades()
@@ -387,7 +393,7 @@ class UpgradeCore
      */
     private function _readConfig()
     {
-        return $this->_oConfig->load(PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . static::CONFIG_FILE);
+        return $this->_oConfig->load(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . static::CONFIG_FILE);
     }
 
     /**
@@ -398,7 +404,7 @@ class UpgradeCore
      */
     private function _readInstruction($sInstFile)
     {
-        $mInstruction = F\Import::file(PH7_PATH_REPOSITORY . static::DIR . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . $sInstFile);
+        $mInstruction = F\Import::file(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . $sInstFile);
         return (!$mInstruction) ? '<p class="error">' . t('Instruction file not found!') . '</p>' : $mInstruction;
     }
 

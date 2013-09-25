@@ -3,7 +3,7 @@
  * @title            PH7 Template Engine
  * @desc             Template Engine with Compiler and Cache for pH7 CMS!
  *
- * @updated          Last Update 08/26/13 00:52
+ * @updated          Last Update 09/25/13 15:24
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
@@ -33,9 +33,14 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     VERSION = '1.2.9',
     LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/',
     ERR_MSG = 'FATAL ERROR!',
-    COMPILE_DIR = 'pH7tpl_compile/',
-    CACHE_DIR = 'pH7tpl_cache/',
-    MAIN_COMPILE_DIR = 'public_main/',
+
+    /**
+     * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
+     */
+    COMPILE_DIR = 'pH7tpl_compile',
+    CACHE_DIR = 'pH7tpl_cache',
+    MAIN_COMPILE_DIR = 'public_main',
+
     MAIN_PAGE = 'layout',
     MAIN_COMPILE_PAGE = 'layout.cpl.php',
     XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php',
@@ -380,11 +385,11 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         if (!empty($sDirPath))
             $this->setTemplateDir($sDirPath);
 
-        $this->sTemplateDirFile = $this->sTemplateDir . 'tpl/' . $this->sTplFile;
+        $this->sTemplateDirFile = $this->sTemplateDir . 'tpl' . PH7_DS . $this->sTplFile;
 
         $this->file->createDir($this->sCompileDir);
 
-        $this->sCompileDir2 = ($this->isMainDir($sDirPath)) ? $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_TPL_NAME . PH7_DS
+        $this->sCompileDir2 = ($this->isMainDir($sDirPath)) ? $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS
         : $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $this->getCurrentController();
 
         $this->sCompileDirFile = ($this->isMainDir($sDirPath)) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2 .
@@ -582,7 +587,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      */
     private function checkCompileDir()
     {
-        $this->sCompileDir = (empty($this->sCompileDir)) ? PH7_PATH_CACHE . static::COMPILE_DIR : $this->sCompileDir;
+        $this->sCompileDir = (empty($this->sCompileDir)) ? PH7_PATH_CACHE . static::COMPILE_DIR . PH7_DS : $this->sCompileDir;
         return $this;
     }
 
@@ -595,7 +600,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      */
     private function checkCacheDir()
     {
-        $this->sCacheDir = (empty($this->sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
+        $this->sCacheDir = (empty($this->sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR . PH7_DS : $this->sCacheDir;
         return $this;
     }
 
@@ -855,7 +860,7 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
      */
     final private function isMainCompilePage()
     {
-        return preg_match('#' . $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_TPL_NAME . PH7_DS . static::MAIN_COMPILE_PAGE . '#', $this->sCompileDirFile);
+        return preg_match('#' . $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS . static::MAIN_COMPILE_PAGE . '#', $this->sCompileDirFile);
     }
 
     /**
