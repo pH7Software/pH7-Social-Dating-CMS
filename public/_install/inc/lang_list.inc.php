@@ -35,5 +35,6 @@ return array(
     'hr' => 'Hrvatski',
     'rs' => 'Srpski',
     'si' => 'Slovenski',
-    'sw' => 'Kiswahili'
+    'sw' => 'Kiswahili',
+    'hu' => 'Magyar'
 );
