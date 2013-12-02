@@ -17,6 +17,13 @@ class Url
 {
 
     /**
+     * Private constructor to prevent instantiation of class since it is a private class.
+     *
+     * @access private
+     */
+    private function __construct() {}
+
+    /**
      * URL-encodes string.
      *
      * @static
