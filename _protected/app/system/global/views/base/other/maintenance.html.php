@@ -35,5 +35,5 @@ $aMeta = [
 <footer>
 <?php $oDesign->link(); ?>
 </footer>
-<?php $oDesign->htmlFooter(); ?>
 <!-- End Footer -->
+<?php $oDesign->htmlFooter(); ?>
