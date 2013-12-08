@@ -220,7 +220,7 @@ class Validate
         if($bRealHost)
         {
             $sEmailHost = substr(strrchr($sEmail, '@'), 1);
-            // This function now works with Windows since version PHP 5.3, so we must not include the PEAR NET_DNS library.
+            // This function now works with Windows since version PHP 5.3, so we mustn't include the PEAR NET_DNS library.
             if( !(checkdnsrr($sEmailHost, 'MX') && checkdnsrr($sEmailHost, 'A')) ) return false;
         }
         return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) && $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail));
