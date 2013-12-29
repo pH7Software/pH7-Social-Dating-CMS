@@ -10,10 +10,11 @@
  * @version          1.1
  */
 
-namespace PH7\Framework\Translate {
-defined('PH7') or exit('Restricted access');
+namespace PH7\Framework\Translate
+{
+ defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
+ use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
 
  class Lang
  {
@@ -171,42 +172,49 @@ use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
 
 }
 
-namespace {
+namespace
+{
 
-use PH7\Framework\Registry\Registry, PH7\Framework\Parse\SysVar;
+ use PH7\Framework\Registry\Registry, PH7\Framework\Parse\SysVar;
+ 
+ /**
+  * Check if GetText PHP extension exists, if not, it'll includes the GetText library.
+  */
+ if (!function_exists('gettext'))
+     require __DIR__ . '/Adapter/Gettext/gettext.inc.php';
 
-    /**
-     * Language helper function.
-     *
-     * @param string $sVar [, string $... ]
-     * @return string Returns the text with gettext function or language in an array (this depends on whether a key language was found in the language table).
-     */
-    function t()
-    {
-        $sToken = func_get_arg(0);
+ /**
+  * Language helper function.
+  *
+  * @param string $sVar [, string $... ]
+  * @return string Returns the text with gettext function or language in an array (this depends on whether a key language was found in the language table).
+  */
+ function t()
+ {
+     $sToken = func_get_arg(0);
 
-        $sToken = (Registry::getInstance()->lang !== '' && array_key_exists($sToken, Registry::getInstance()->lang)) ? Registry::getInstance()->lang[$sToken] : gettext($sToken);
+     $sToken = (Registry::getInstance()->lang !== '' && array_key_exists($sToken, Registry::getInstance()->lang)) ? Registry::getInstance()->lang[$sToken] : gettext($sToken);
 
-        for ($i = 1, $iFuncArgs = func_num_args(); $i < $iFuncArgs; $i++)
-            $sToken = str_replace('%'. ($i-1) . '%', func_get_arg($i), $sToken);
+     for ($i = 1, $iFuncArgs = func_num_args(); $i < $iFuncArgs; $i++)
+         $sToken = str_replace('%'. ($i-1) . '%', func_get_arg($i), $sToken);
 
-        return (new SysVar)->parse($sToken);
-    }
+     return (new SysVar)->parse($sToken);
+ }
 
-    /**
-     * Plurial version of t() function.
-     *
-     * @param string $sMsg1
-     * @param string $sMsg2
-     * @param integer $iNumber
-     * @return string Returns the text with ngettext function the correct plural form of message identified by msgid1 and msgid2 for count n.
-     */
-    function nt($sMsg1, $sMsg2, $iNumber)
-    {
-        $sMsg1 = str_replace('%n%', $iNumber, $sMsg1);
-        $sMsg2 = str_replace('%n%', $iNumber, $sMsg2);
+ /**
+  * Plurial version of t() function.
+  *
+  * @param string $sMsg1
+  * @param string $sMsg2
+  * @param integer $iNumber
+  * @return string Returns the text with ngettext function the correct plural form of message identified by msgid1 and msgid2 for count n.
+  */
+ function nt($sMsg1, $sMsg2, $iNumber)
+ {
+     $sMsg1 = str_replace('%n%', $iNumber, $sMsg1);
+     $sMsg2 = str_replace('%n%', $iNumber, $sMsg2);
 
-        return ngettext($sMsg1, $sMsg2, $iNumber);
-    }
+     return ngettext($sMsg1, $sMsg2, $iNumber);
+ }
 
 }
