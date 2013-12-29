@@ -28,7 +28,6 @@
                 <li>Zlib compression PHP module.</li>
                 <li>Bz2 compression PHP module.</li>
                 <li>mbstring PHP module.</li>
-                <li>Gettext PHP extension.</li>
                 <li>Send Mail PHP activated.</li>
                 <li>memory_limit - 128M or higher.</li>
                 <li>file_uploads - On</li>
@@ -48,6 +47,8 @@
     <ul>
       <li>
       <li>APC module (for speed boost).</li>
+      <li>Gettext PHP extension (for better stability and optimization).</li>
+	  <li>OpenSSL (for the "Connect" module).</li>
       <li>iconv module.</li>
     </ul>
 

@@ -78,12 +78,6 @@ if (!function_exists('curl_init'))
 if (!function_exists('mb_internal_encoding'))
     $aErrors[] = 'Please install the "mbstring" PHP extension.';
 
-if (!function_exists('gettext'))
-    $aErrors[] = 'Please install "Gettext" extension.';
-
-if (!function_exists('openssl_public_encrypt'))
-    $aErrors[] = 'Please install "OpenSSL" PHP extension.';
-
 $iErrors = (!empty($aErrors)) ? count($aErrors) : 0;
 
 if ($iErrors > 0)
