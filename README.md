@@ -97,6 +97,17 @@ Thank you!
 **Minimum Web Space** 2.0 GB
 
 
+## Hosting
+
+Recommended Hosting for **pH7CMS**
+
+[![Arvixe: Recommended for pH7CMS](http://software.hizup.com/web/arvandixeimg)](http://software.hizup.com/web/arvandixe)
+
+[![HostForWeb: Recommended for pH7CMS](http://software.hizup.com/web/hostforwebimg)](http://software.hizup.com/web/hostforweb)
+
+[![HostUpon: Recommended for pH7CMS](http://software.hizup.com/web/hostuponimg)](http://software.hizup.com/web/hostupon)
+
+
 ## Author
 
 Pierre-Henry Soria

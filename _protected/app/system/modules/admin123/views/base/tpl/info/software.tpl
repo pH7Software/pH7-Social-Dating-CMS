@@ -17,4 +17,11 @@
     <p>{lang 'Release Date: %0%', $release_date}</p>
   </div>
 
+  <div class="s_bMarg"></div>
+
+  <h2 class="underline">{lang 'Recommended Hosting for %software_name%'}</h2>
+  <p><a href="http://software.hizup.com/web/arvandixe"><img src="http://software.hizup.com/web/arvandixeimg" width="250" height="250" alt="{lang 'Arvixe: Recommended for %software_name%'}"></a></p>
+  <p><a href="http://software.hizup.com/web/hostforweb"><img src="http://software.hizup.com/web/hostforwebimg" width="250" height="250" alt="{lang 'HostForWeb: Recommended for %software_name%'}"></a></p>
+  <p><a href="http://software.hizup.com/web/hostupon"><img src="http://software.hizup.com/web/hostuponimg" width="250" height="250" alt="{lang 'HostUpon: Recommended for %software_name%'}"></a></p>
+
 </div>

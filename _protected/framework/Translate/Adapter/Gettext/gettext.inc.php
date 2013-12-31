@@ -47,7 +47,7 @@ LC_ALL          6
 // LC_MESSAGES is not available if php-gettext is not loaded
 // while the other constants are already available from session extension.
 if (!defined('LC_MESSAGES')) {
-  define('LC_MESSAGES',	5);
+  define('LC_MESSAGES', 5);
 }
 
 require __DIR__ . PH7_DS . 'streams.php';
@@ -64,7 +64,7 @@ $EMULATEGETTEXT = 0;
 $CURRENTLOCALE = '';
 
 /* Class to hold a single domain included in $text_domains. */
-class __gettext_domain {
+class _gettext_domain {
   var $l10n;
   var $path;
   var $codeset;
@@ -147,7 +147,7 @@ function _get_reader($domain=null, $category=5, $enable_cache=true) {
 
         if (!array_key_exists($domain, $text_domains)) {
           // Initialize an empty domain object.
-          $text_domains[$domain] = new __gettext_domain();
+          $text_domains[$domain] = new _gettext_domain();
         }
         $text_domains[$domain]->l10n = new gettext_reader($input,
                                                           $enable_cache);
@@ -262,7 +262,7 @@ function _bindtextdomain($domain, $path) {
     }
     if (!array_key_exists($domain, $text_domains)) {
       // Initialize an empty domain object.
-      $text_domains[$domain] = new __gettext_domain();
+      $text_domains[$domain] = new _gettext_domain();
     }
     $text_domains[$domain]->path = $path;
 }
