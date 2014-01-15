@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
@@ -17,9 +17,10 @@ class StyleFormProcess extends Form
     {
         parent::__construct();
 
-        if (!$this->str->equals($this->httpRequest->post('code', Http::NO_CLEAN), (new Design)->customCode('css')))
+        $sCode = $this->httpRequest->post('code', Http::NO_CLEAN);
+        if (!$this->str->equals($sCode, (new Design)->customCode('css')))
         {
-            (new AdminModel)->updateCustomCode($this->httpRequest->post('code', Http::NO_CLEAN), 'css');
+            (new AdminModel)->updateCustomCode($sCode, 'css');
 
             /* Clean Model\Design for STATIC / customCodecss data */
             (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, 'customCodecss', null)->clear();

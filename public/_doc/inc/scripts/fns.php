@@ -3,7 +3,7 @@
  * @author      Pierre-Henry Soria
  * @email       pierrehs@hotmail.com
  * @link        http://github.com/pH-7/Nav-Doc-Script-V2
- * @copyright   (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright   (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license     CC-BY - http://creativecommons.org/licenses/by/3.0/
  */
 
@@ -56,6 +56,7 @@ function parse_var($sContent)
     $sContent = str_replace('{page_name}', get_page_name(), $sContent);
     $sContent = str_replace('{menu_links}', get_links_html(), $sContent);
     $sContent = str_replace('{menu_langs}', get_langs_html(), $sContent);
+    $sContent = str_replace('{year}', date('Y'), $sContent);
 
     return $sContent;
 }

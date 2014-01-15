@@ -8,7 +8,7 @@
  * @file           requirements
  * @author         Pierre-Henry Soria
  * @email          <ph7software@gmail.com>
- * @copyright      (c) 2011-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2011-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        Lesser General Public License (LGPL) (http://www.gnu.org/copyleft/lesser.html)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25
@@ -24,25 +24,17 @@ defined('PH7') or exit('Restricted access');
  */
 function is_mod_rewrite()
 {
-    if (function_exists('apache_get_modules'))
+    // Check if mod_rewrite is installed and is configured to be used via .htaccess
+    if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
     {
-        // If PHP is installed as mod_php
-        $bIsRewrite = in_array('mod_rewrite', apache_get_modules());
-    }
-    else
-    {
-        // If PHP is installed as CGI
-        if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
-        {
-            $sOutputMsg = 'mod_rewrite Works!';
+        $sOutputMsg = 'mod_rewrite Works!';
 
-            if (!empty($_GET['a']) && $_GET['a'] == 'test_mod_rewrite')
-                exit($sOutputMsg);
+        if (!empty($_GET['a']) && $_GET['a'] == 'test_mod_rewrite')
+            exit($sOutputMsg);
 
-            $sPage = @file_get_contents(PH7_URL_INSTALL . 'test_mod_rewrite');
+        $sPage = @file_get_contents(PH7_URL_INSTALL . 'test_mod_rewrite');
 
-            $bIsRewrite = ($sPage == $sOutputMsg);
-        }
+        $bIsRewrite = ($sPage == $sOutputMsg);
     }
 
     return $bIsRewrite;
@@ -55,7 +47,7 @@ if (version_compare(PHP_VERSION, PH7_REQUIRE_SERVER_VERSION, '<'))
     $aErrors[] = 'Your PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.';
 
 if (!is_mod_rewrite())
-    $aErrors[] = 'Please install Apache "mod_rewrite" module.';
+    $aErrors[] = 'Please install Apache "mod_rewrite" module.<br /> Click <a href="http://software.hizup.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> or more information on how to install the rewrite module.';
 
 if (!extension_loaded ('pdo_mysql'))
     $aErrors[] = 'Please install "PDO" PHP extension with MySQL driver.';

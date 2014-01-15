@@ -5,7 +5,7 @@
  * @author           Jones B. <support@csshood.com>
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2013, Jones B. All Rights Reserved.
- * @copyright        (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2013-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / SW
  * @update           09/10/13 23:06
@@ -23,11 +23,11 @@ $LANG = array (
     <p>Tafadhali fuata maelekezo yetu sita ya ufungaji.</p>',
     'chose_lang_for_install' => 'Tafadhali chagua lugha utakayoitumia katika ufungaji',
     'requirements_desc' => 'ONYO! Hakikisha mashine yako inaridhisha <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">matakwa</a> yafuatyo ili ufunge vyema pH7CMS.',
-    'config_path' => 'Eneo la saraka &quot;iliyodhibitiwa&quot;',
-    'desc_config_path' => 'Tafadhali onyesha eneo la saraka iliyodhibitiwa.<br />
-    Unashauriwa kutia saraka hii nje ya &quot;public root&quot; ya tovuti yako.',
+    'config_path' => 'Eneo la saraka &quot;protected&quot;',
+    'desc_config_path' => 'Tafadhali onyesha eneo la saraka &quot;protected&quot;.<br />
+    Ni busara na vyema kuweka saraka hii nje mzizi wa umma wa mtandao kompyuta yako.',
     'need_frame' => 'Unshauriwa kutumia brausa inayohimili &quot;inline frames&quot;!',
-    'path_protected' => 'Eneo la &quot;saraka iliyodhibitiwa&quot;',
+    'path_protected' => 'Eneo la saraka &quot;protected&quot;',
     'next' => 'ifuatayo',
     'go' => 'Hatua ifuatayo =>',
     'license' => 'Leseni',
@@ -43,12 +43,13 @@ $LANG = array (
     'bad_email' => 'Barua pepe sio sahihi',
     'finish' => 'Maliza Upangaji!',
     'go_your_site' => 'Enda kwa wavuti wako mpya!',
+    'go_your_admin_panel' => 'Kwenda admin yako jopo!',
     'error_page_not_found' => 'Ukurasa Haujapatikana',
     'error_page_not_found_desc' => 'Pole, ukurasa unaoutafuta haujapatikana.',
     'success_license' => 'Leseni yako ni sahihi!',
     'failure_license' => 'Pole, leseni yako sio sahihi!',
-    'no_protected_exist' => 'Pole, lakini hatujapata saraka yako iliyodhibitiwa.',
-    'no_protected_readable' => 'Tafadhili badilisha ruhusa ya saraka yako iliyodhibitiwa (CHMOD 755).',
+    'no_protected_exist' => 'Pole, lakini hatujapata saraka yako &quot;protected&quot;.',
+    'no_protected_readable' => 'Tafadhili badilisha ruhusa ya saraka yako &quot;protected&quot; (CHMOD 755).',
     'no_public_writable' => 'Tafadhali badilisha ruhusa ya &quot;public&quot; saraka yako (CHMOD 777).',
     'no_app_config_writable' => 'Tafadhali badilisha ruhusa ya &quot;protected/app/configs&quot; saraka yako (CHMOD 777).',
     'database_error' => 'Kosa! Hatuwezi kuunganisha &quot;database&quot; yako.<br />',
@@ -87,6 +88,7 @@ $LANG = array (
     'bad_first_name' => 'Tafadhali andika Jina lako la kwanza, lazima liwe kati ya herufi 2 na 20.',
     'bad_last_name'=> 'Tafadhali andika Jina lako la mwisho, lazima liwe kati ya herufi 2 na 20.',
     'remove_install_folder_auto' => 'Toa saraka ya &quot;install&quot; (hii inahitaji uwe na ruhusa ya kutoa saraka).',
+    'remove_install_folder' => 'Tafadhali kuondoa "_install" folder kutoka server yako kabla ya kutumia tovuti yako.',
     'confirm_remove_install_folder_auto' => 'ONYO, faili zote katika saraka ya /_install/ zitatolewa.',
     'title_email_finish_install' => 'Pongezi, upangaji wa wavuti wako umekamilika!',
     'content_email_finish_install' => '<p><strong>Pongezi, wavuti wako umepangwa vyema!</strong></p>

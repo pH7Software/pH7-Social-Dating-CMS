@@ -3,7 +3,7 @@
  * @title            French Language File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / FR
  * @update           09/10/13 23:06
@@ -41,6 +41,7 @@ $LANG = array (
     'bad_email' => 'E-mai incorrect',
     'finish' => 'Installation terminée !',
     'go_your_site' => 'Aller sur votre site !',
+    'go_your_admin_panel' => 'Allez à votre panneau d\'administration !',
     'error_page_not_found' => 'Page introuvable',
     'error_page_not_found_desc' => 'Désolé, mais la page que vous cherchez est introuvable.',
     'success_license' => 'Votre clé de licence est correcte !',
@@ -86,6 +87,7 @@ $LANG = array (
     'bad_last_name' => 'Veuillez entrer votre prénom, il doit également être compris entre 2 et 20 caractères.',
     'remove_install_folder_auto' => 'Effacer automatiquement le répertoire &laquo; install &raquo; (cette opération nécessite les droits d\'accès nécessaires sur le dossier &laquo; install &raquo;).',
     'confirm_remove_install_folder_auto' => 'ATTENTION, tous les fichiers du dossiers /_install/ vont être supprimés.',
+    'remove_install_folder' => 'Veuillez supprimer le dossier &laquo; _install &raquo; de votre serveur avant d\'utiliser votre site.',
     'title_email_finish_install' => 'Félicitation, l\'installation de votre site Web est terminé !',
     'content_email_finish_install' => '<p><strong>Félicitations, votre site Web est maintenant installé avec succès !</strong></p>
     <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>

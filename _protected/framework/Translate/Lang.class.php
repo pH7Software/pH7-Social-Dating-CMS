@@ -176,7 +176,7 @@ namespace
 {
 
  use PH7\Framework\Registry\Registry, PH7\Framework\Parse\SysVar;
- 
+
  /**
   * Check if GetText PHP extension exists, if not, it'll includes the GetText library.
   */

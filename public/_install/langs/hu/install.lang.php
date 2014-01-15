@@ -3,7 +3,7 @@
  * @title            Hungarian Language File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2013-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / HU
  * @update           09/29/13 16:53
@@ -41,6 +41,7 @@ $LANG = array (
     'bad_email' => 'Helytelen e-mail cím!',
     'finish' => 'Telepítés befejezése!',
     'go_your_site' => 'Tovább az új webhelyedhez!',
+    'go_your_admin_panel' => 'Menj az adminisztrációs weboldalára!',
     'error_page_not_found' => 'Oldal nem található',
     'error_page_not_found_desc' => 'Sajnáljuk, de az oldal amit keresel nem található.',
     'success_license' => 'A licenc kulcsod helyes!',
@@ -86,6 +87,7 @@ $LANG = array (
     'bad_last_name'=> 'Kérlek add meg a vezetékneved, ami 2 és 20 karakter között kell, hogy legyen.',
     'remove_install_folder_auto' => 'Automatikus törlése az &quot;install&quot; könyvtárnak (ehhez a művelethez hozzáférési jogok kellenek az &quot;install&quot; könyvtár törléséhez).',
     'confirm_remove_install_folder_auto' => 'FIGYELMEZTETÉS, Minden fájl a /_install/ könyvtárban törlésre kerül.',
+    'remove_install_folder' => 'Kérjük, távolítsa el a &quot;_install&quot; mappát a kiszolgálón, mielőtt használni a weboldalán.',
     'title_email_finish_install' => 'Gratulálunk, a webhelyed telepítése elkészült!',
     'content_email_finish_install' => '<p><strong>Gratulálunk, a webhelyed telepítése elkészült!</strong></p>
     <p>Reméljük élvezni fogod a <em>' . Controller::SOFTWARE_NAME . '</em> használatát!</p>
