@@ -3,7 +3,7 @@
  * @title            InstallController Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Controller
  * @version          1.3
@@ -388,23 +388,19 @@ class InstallController extends Controller
 
                                                         // SQL EXECUTE
                                                         $oSqlQuery = $DB->prepare('INSERT INTO ' . $_SESSION['db']['db_prefix'] . 'Admins
-                                                        (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip, prefixSalt, suffixSalt)
-                                                        VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip, :prefixSalt, :suffixSalt)');
+                                                        (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
+                                                        VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)');
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
-                                                        $sPrefixSalt = Framework\Util\Various::genRnd();
-                                                        $sSuffixSalt = Framework\Util\Various::genRnd();
                                                         $oSqlQuery->execute(array(
                                                             'username' => $_SESSION['value']['admin_username'],
-                                                            'password' => Framework\Security\Security::hashPwd($sPrefixSalt, $_SESSION['value']['admin_password'], $sSuffixSalt, Framework\Security\Security::ADMIN),
+                                                            'password' => Framework\Security\Security::hashPwd($_SESSION['value']['admin_password']),
                                                             'email' => $_SESSION['value']['admin_login_email'],
                                                             'firstName'=> $_SESSION['value']['admin_first_name'],
                                                             'lastName'=> $_SESSION['value']['admin_last_name'],
                                                             'joinDate'=> $sCurrentDate,
                                                             'lastActivity' => $sCurrentDate,
-                                                            'ip' => client_ip(),
-                                                            'prefixSalt' => $sPrefixSalt,
-                                                            'suffixSalt' => $sSuffixSalt
+                                                            'ip' => client_ip()
                                                         ));
 
                                                         $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :adminEmail WHERE name = \'adminEmail\'');

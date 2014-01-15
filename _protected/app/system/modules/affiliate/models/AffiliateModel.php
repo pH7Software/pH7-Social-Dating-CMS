@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Model
  */
@@ -20,11 +20,11 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function join(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, active, ip, hashValidation, prefixSalt, suffixSalt, joinDate, lastActivity)
-        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :active, :ip, :hashValidation, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, active, ip, hashValidation, joinDate, lastActivity)
+        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_STR, Security::LENGTH_USER_PASSWORD);
+        $rStmt->bindParam(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
@@ -32,8 +32,6 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt->bindValue(':active', $aData['is_active'], \PDO::PARAM_INT);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
-        $rStmt->bindParam(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_STR, 40);
-        $rStmt->bindParam(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->execute();
@@ -131,19 +129,17 @@ class AffiliateModel extends AffiliateCoreModel
     {
         $sCurrentDate = (new Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s');
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, ip, prefixSalt, suffixSalt, joinDate, lastActivity)
-        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :ip, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, ip, joinDate, lastActivity)
+        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :ip, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_STR, Security::LENGTH_USER_PASSWORD);
+        $rStmt->bindParam(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':bankAccount', $aData['bank_account'], \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_STR, 40);
-        $rStmt->bindParam(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->execute();

@@ -4,7 +4,7 @@
  * @desc           Import new Users from CSV data file.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  * @version        1.0
@@ -75,9 +75,7 @@ class ImportUserFormProcess extends Form
             'description' => 'Hi all!<br />How are you today?<br /> Bye ;)',
             'website' => '',
             'social_network_site' => '',
-            'ip' => Ip::get(),
-            'prefix_salt' => Various::genRnd(),
-            'suffix_salt' => Various::genRnd()
+            'ip' => Ip::get()
         ];
 
         foreach ($aFileData as $sKey => $sVal)

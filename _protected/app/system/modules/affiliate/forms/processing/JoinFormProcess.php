@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
@@ -44,8 +44,6 @@ class JoinFormProcess extends Form
             'state' => $this->httpRequest->post('state'),
             'zip_code' => $this->httpRequest->post('zip_code'),
             'ip' => Ip::get(),
-            'prefix_salt' => Various::genRnd(),
-            'suffix_salt' => Various::genRnd(),
             'hash_validation' => Various::genRnd(),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
             'is_active' => $this->iActiveType
