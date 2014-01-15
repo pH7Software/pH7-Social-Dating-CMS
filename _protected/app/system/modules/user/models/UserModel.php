@@ -3,7 +3,7 @@
  * @title          User Model
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7/ App / System / Module / User / Model
  * @version        1.0
@@ -34,14 +34,12 @@ class UserModel extends UserCoreModel
         $rStmt = Db::getInstance()->prepare( $this->getQuery('join', $this->_sQueryPath) );
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', $aData['password'], \PDO::PARAM_STR, Framework\Security\Security::LENGTH_USER_PASSWORD);
+        $rStmt->bindParam(':password', $aData['password'], \PDO::PARAM_STR, Framework\Security\Security::PASSWORD_LENGTH);
         $rStmt->bindValue(':first_name', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':reference', $aData['reference'], \PDO::PARAM_STR);
         $rStmt->bindValue(':is_active', $aData['is_active'], \PDO::PARAM_INT);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindParam(':hash_validation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
-        $rStmt->bindParam(':prefix_salt', $aData['prefix_salt'], \PDO::PARAM_STR, 40);
-        $rStmt->bindParam(':suffix_salt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':current_date', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':group_id', $aData['group_id'], \PDO::PARAM_INT);
         $rStmt->execute();

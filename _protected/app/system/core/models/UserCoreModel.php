@@ -62,7 +62,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT email, password, prefixSalt, suffixSalt FROM' . Db::prefix($sTable) . 'WHERE email = :email LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT email, password FROM' . Db::prefix($sTable) . 'WHERE email = :email LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -73,7 +73,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         if ($sEmail !== $sDbEmail)
             return 'email_does_not_exist';
-        elseif (Security::hashPwd($oRow->prefixSalt, $sPassword, $oRow->suffixSalt) !== $sDbPassword)
+        elseif (!Security::checkPwd($sPassword, $sDbPassword))
             return 'password_does_not_exist';
         else
             return true;
@@ -190,20 +190,16 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param string $sEmail
      * @param string $sNewPassword
-     * @param string $sPrefixSalt
-     * @param string $sSuffixSalt
      * @param string $sTable
      * @return boolean
      */
-    public function changePassword($sEmail, $sNewPassword, $sPrefixSalt, $sSuffixSalt, $sTable)
+    public function changePassword($sEmail, $sNewPassword, $sTable)
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET password = :newPassword, prefixSalt = :prefixSalt, suffixSalt = :suffixSalt WHERE email = :email LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET password = :newPassword WHERE email = :email LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
-        $rStmt->bindParam(':newPassword', Security::hashPwd($sPrefixSalt, $sNewPassword, $sSuffixSalt), \PDO::PARAM_STR, ($sTable == 'Admins' ? Security::LENGTH_ADMIN_PASSWORD : Security::LENGTH_USER_PASSWORD));
-        $rStmt->bindParam(':prefixSalt', $sPrefixSalt, \PDO::PARAM_STR, 40);
-        $rStmt->bindParam(':suffixSalt', $sSuffixSalt, \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':newPassword', Security::hashPwd($sNewPassword), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
         return $rStmt->execute();
     }
 
@@ -572,11 +568,11 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Members') . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, prefixSalt, suffixSalt, joinDate, lastActivity, groupId)
-            VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :prefixSalt, :suffixSalt, :joinDate, :lastActivity, :groupId)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Members') . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, joinDate, lastActivity, groupId)
+            VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity, :groupId)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt'], Security::USER), \PDO::PARAM_STR, Security::LENGTH_USER_PASSWORD);
+        $rStmt->bindParam(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
@@ -585,8 +581,6 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':active', (!empty($aData['is_active']) ? $aData['is_active'] : 1), \PDO::PARAM_INT);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindParam(':hashValidation', (!empty($aData['hash_validation']) ? $aData['hash_validation'] : null), \PDO::PARAM_STR, 40);
-        $rStmt->bindParam(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_STR, 40);
-        $rStmt->bindParam(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':groupId', (int) DbConfig::getSetting('defaultMembershipGroupId'), \PDO::PARAM_INT);
@@ -601,8 +595,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function setInfoFields(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersInfo') . '(profileId, country, city, state, zipCode, description, website, socialNetworkSite)
-            VALUES (:profileId, :country, :city, :state, :zipCode, :description, :website, :socialNetworkSite)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersInfo') . '(profileId, middleName, country, city, state, zipCode, description, website, socialNetworkSite)
+            VALUES (:profileId, :middleName, :country, :city, :state, :zipCode, :description, :website, :socialNetworkSite)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindValue(':middleName', $aData['middle_name'], \PDO::PARAM_STR);
         $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);

@@ -3,32 +3,30 @@
  * @title          Security Class
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Security
- * @version        1.1
+ * @version        1.2
  */
 
 namespace PH7\Framework\Security;
-
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Registry\Registry,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Util\Various;
+use PH7\Framework\Util\Various;
+
+if (version_compare(PHP_VERSION, '5.5.0', '<'))
+    require __DIR__ . PH7_DS . 'crypt.inc.php';
 
 final class Security
 {
-
     const
-    ADMIN = 'admin',
-    USER = 'user',
-    LENGTH_USER_PASSWORD = 120,
-    LENGTH_ADMIN_PASSWORD = 240,
+    PWD_ALGORITHM = PASSWORD_BCRYPT,
+    PASSWORD_LENGTH = 60,
     /*** Our salts. Never change these values​​, otherwise all passwords and other strings will be incorrect ***/
     PREFIX_SALT = 'c好，你今Здраврыве ты ў паітаньне е54йте天rt&eh好嗎_dمرحبا أنت بخير ال好嗎attú^u5atá inniu4a,?478привіなたは大丈夫今日はтивпряьоהעלאai54ng_scси днесpt',
     SUFFIX_SALT = '*éà12_you_è§§=≃ù%µµ££$);&,?µp{èàùf*sxdslut_waruआप नमस्क你好，你今ार ठΓει好嗎α σαςb안녕하세oi요 괜찮은 o नमस्कार ठीnjre;,?*-<καλά σήμεραीक आजсегодняm_54tjהעלאdgezsядкمرحبا';
+
+    private static $_aPwdOptions = array('cost' => 14);
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
@@ -38,45 +36,81 @@ final class Security
     /**
      * Generate Random Salt for Password encryption.
      *
-     * @param string $sPrefixSalt
-     * @param string $sPassword
-     * @param string $sSuffixSalt
-     * @param string $sMod The Values are the constants of this class: self::ADMIN or self::USER  |  Default NULL
+     * @param string $sPwd
      * @return string The Hash Password
      */
-    public static function hashPwd($sPrefixSalt, $sPassword, $sSuffixSalt, $sMod = null)
+    public static function hashPwd($sPwd)
     {
-        // Password 240 characters for administrators and 120 characters for users
-        if (!empty($sMod) && ($sMod === self::USER || $sMod === self::ADMIN))
-            $iLengthPwd = ($sMod === self::ADMIN) ? self::LENGTH_ADMIN_PASSWORD : self::LENGTH_USER_PASSWORD;
-        else
-            $iLengthPwd = (Registry::getInstance()->module === PH7_ADMIN_MOD || (new Http)->get('mod') === PH7_ADMIN_MOD) ? self::LENGTH_ADMIN_PASSWORD : self::LENGTH_USER_PASSWORD;
-
-        // Chop the password
-        return Various::padStr(hash('whirlpool', hash('sha512', self::PREFIX_SALT . hash('whirlpool', $sPrefixSalt)) . hash('whirlpool', $sPassword) . hash('sha512', hash('whirlpool', $sSuffixSalt) . self::SUFFIX_SALT)), $iLengthPwd);
+        return password_hash($sPwd , self::PWD_ALGORITHM, self::$_aPwdOptions);
     }
 
     /**
-     * Generate hash for Cookie Password encryption.
+     * Check the password.
+     *
+     * @param string $sPwd
+     * @param string $sHash
+     * @return boolean
+     */
+    public static function checkPwd($sPwd, $sHash)
+    {
+        return password_verify($sPwd, $sHash);
+    }
+
+    /**
+     * Checks if the given hash matches the given options
+     *
+     * @param string $sPwd
+     * @param string $sHash
+     *
+     * @return mixed (string | boolean) Returns the new password if the password needs to be rehash, otherwise FALSE
+     */
+    public static function pwdNeedsRehash($sPwd, $sHash)
+    {
+        if (password_needs_rehash($sHash, self::PWD_ALGORITHM, self::$_aPwdOptions))
+            return self::hashPwd($sPwd);
+        return false;
+    }
+
+
+    /**
+     * Generate a hash for Cookie Password encryption.
      *
      * @param string $sPassword
-     * @return string The Hash Password
+     * @param integer $iLength Default: 40
+     * @return string The Password Hash
      */
-    public static function hashCookie($sPassword)
+    public static function hashCookie($sPwd, $iLength = 40)
     {
-        return sha1(self::PREFIX_SALT . \PH7\Framework\Ip\Ip::get() . $sPassword . self::SUFFIX_SALT . (new \PH7\Framework\Navigation\Browser)->getUserAgent());
+        return self::userHash($sPwd, $iLength);
     }
 
     /**
      * Generate a hash.
      *
-     * @param string $sValue
+     * @param string $sVal
      * @param integer $iLength Default 80
      * @return string
      */
-    public static function hash($sValue, $iLength = 80)
+    public static function hash($sVal, $iLength = 80)
     {
-        return Various::padStr(hash('whirlpool', hash('sha512', self::PREFIX_SALT . hash('whirlpool', self::PREFIX_SALT)) . hash('whirlpool', $sValue) . hash('sha512', hash('whirlpool', self::SUFFIX_SALT) . self::SUFFIX_SALT)), $iLength);
+        return Various::padStr(hash('whirlpool', hash('sha512', self::PREFIX_SALT . hash('whirlpool', self::PREFIX_SALT)) . hash('whirlpool', $sVal) . hash('sha512', hash('whirlpool', self::SUFFIX_SALT) . self::SUFFIX_SALT)), $iLength);
+    }
+
+    /**
+     * Generate a user hash.
+     *
+     * @param string $sPassword
+     * @param integer $iLength
+     * @param string $sAlgo The algorithm. Only 'whirlpool' or 'sha512' is accepted.
+     * @return string
+     */
+    public function userHash($sVal, $iLength, $sAlgo = 'whirlpool')
+    {
+        if ($sAlgo !== 'whirlpool' && $sAlgo !== 'sha512')
+            exit('Wrong algorithm! Please choose between "whirlpool" or "sha512"');
+
+        $sSalt = self::PREFIX_SALT . \PH7\Framework\Ip\Ip::get() . self::SUFFIX_SALT . (new \PH7\Framework\Navigation\Browser)->getUserAgent();
+        return hash_pbkdf2($sAlgo, $sVal, $sSalt, 10000, $iLength);
     }
 
 }

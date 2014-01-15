@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
@@ -43,14 +43,12 @@ class JoinFormProcess extends Form
             'first_name' => $this->httpRequest->post('first_name'),
             'reference' => $sRef,
             'ip' => Ip::get(),
-            'prefix_salt' => Various::genRnd(),
-            'suffix_salt' => Various::genRnd(),
             'hash_validation' => Various::genRnd(),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
             'is_active' => $this->iActiveType,
             'group_id' => (int) DbConfig::getSetting('defaultMembershipGroupId')
         ];
-        $aData += ['password' => Security::hashPwd($aData['prefix_salt'], $this->httpRequest->post('password'), $aData['suffix_salt'])];
+        $aData += ['password' => Security::hashPwd($this->httpRequest->post('password'))];
 
         $iTimeDelay = (int) DbConfig::getSetting('timeDelayUserRegistration');
         if (!$this->oUserModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date']))

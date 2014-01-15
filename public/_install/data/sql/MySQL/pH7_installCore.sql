@@ -3,7 +3,7 @@
 -- Title:         SQL Core (base) Install File
 --
 -- Author:        Pierre-Henry Soria <ph7software@gmail.com>
--- Copyright:     (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
 -- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 -- Package:       PH7 / Install / Data / Sql
 -- Version:       1.1
@@ -28,7 +28,7 @@ SET @sPassword = SHA1(RAND() + UNIX_TIMESTAMP());
 CREATE TABLE IF NOT EXISTS pH7_Admins (
   profileId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
   username varchar(40) NOT NULL,
-  password char(240) NOT NULL,
+  password char(120) NOT NULL,
   email varchar(120) NOT NULL,
   firstName varchar(50) DEFAULT NULL,
   lastName varchar(50) DEFAULT NULL,
@@ -41,8 +41,6 @@ CREATE TABLE IF NOT EXISTS pH7_Admins (
   ban enum('0','1') DEFAULT '0',
   ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
   hashValidation varchar(40) DEFAULT NULL,
-  prefixSalt varchar(40) DEFAULT NULL,
-  suffixSalt varchar(40) DEFAULT NULL,
   PRIMARY KEY (profileId),
   UNIQUE KEY username (username),
   UNIQUE KEY email (email)
@@ -93,8 +91,6 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   featured tinyint(1) unsigned NOT NULL DEFAULT 0,
   lang varchar(5) NOT NULL DEFAULT 'en_US',
   hashValidation varchar(40) DEFAULT NULL,
-  prefixSalt varchar(40) DEFAULT NULL,
-  suffixSalt varchar(40) DEFAULT NULL,
   views int(11) NOT NULL DEFAULT 0,
   reference varchar(255) DEFAULT NULL,
   votes int(11) DEFAULT 0,
@@ -180,8 +176,6 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliates (
   paymentLastDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   lang varchar(5) NOT NULL DEFAULT 'en_US',
   hashValidation varchar(40) DEFAULT NULL,
-  prefixSalt varchar(40) DEFAULT NULL,
-  suffixSalt varchar(40) DEFAULT NULL,
   refer int(10) unsigned DEFAULT 0,
   joinDate datetime DEFAULT NULL,
   lastActivity datetime DEFAULT NULL,

@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Model
  */
@@ -18,11 +18,11 @@ class AdminModel extends AdminCoreModel
      * @param string $sEmail
      * @param string $sUsername
      * @param string $sPassword
-     * @return boolean Returns "true" if successful otherwise returns "false".
+     * @return boolean Returns TRUE if successful otherwise FALSE
      */
     public function adminLogin($sEmail, $sUsername, $sPassword)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT email, username, password, prefixSalt, suffixSalt FROM' .
+        $rStmt = Db::getInstance()->prepare('SELECT email, username, password FROM' .
             Db::prefix('Admins') . 'WHERE email = :email AND username = :username LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
@@ -30,7 +30,7 @@ class AdminModel extends AdminCoreModel
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return (@$oRow->password !== Security::hashPwd(@$oRow->prefixSalt, $sPassword, @$oRow->suffixSalt)) ? false : true;
+        return Security::checkPwd($sPassword, @$oRow->password);
     }
 
     /**
@@ -44,18 +44,16 @@ class AdminModel extends AdminCoreModel
         $sCurrentDate = (new Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s');
 
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Admins') .
-            '(email, username, password, firstName, lastName, sex, timeZone, ip, prefixSalt, suffixSalt, joinDate, lastActivity)
-        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :timeZone, :ip, :prefixSalt, :suffixSalt, :joinDate, :lastActivity)');
+            '(email, username, password, firstName, lastName, sex, timeZone, ip, joinDate, lastActivity)
+        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :timeZone, :ip, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', Security::hashPwd($aData['prefix_salt'], $aData['password'], $aData['suffix_salt']), \PDO::PARAM_STR, Security::LENGTH_ADMIN_PASSWORD);
+        $rStmt->bindParam(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
         $rStmt->bindValue(':timeZone', $aData['time_zone'], \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':prefixSalt', $aData['prefix_salt'], \PDO::PARAM_STR, 40);
-        $rStmt->bindParam(':suffixSalt', $aData['suffix_salt'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->execute();
