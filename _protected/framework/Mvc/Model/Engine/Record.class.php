@@ -4,7 +4,7 @@
  * @desc           Record Database Class. It is an Object-relational mapping (ORM).
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Mvc / Model / Engine
  * @version        1.1
@@ -368,7 +368,7 @@ class Record
             $this->_sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
 
             if ($bIsWhere)
-                $this->_sSql .= "WHERE $sField = :field ";
+                $this->_sSql .= "WHERE $sField = :id ";
 
             if (!empty($sOptions))
                 $this->_sSql .= " $sOptions ";

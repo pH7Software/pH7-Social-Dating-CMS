@@ -3,7 +3,7 @@
  * @title            English Language File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / EN
  * @update           09/10/13 23:06
@@ -41,6 +41,7 @@ $LANG = array (
     'bad_email' => 'Incorrect email',
     'finish' => 'Finish installation!',
     'go_your_site' => 'Go to your new website!',
+    'go_your_admin_panel' => 'Go to your admin panel!',
     'error_page_not_found' => 'Page not found',
     'error_page_not_found_desc' => 'Sorry, but the page you are looking for could not be found.',
     'success_license' => 'Your license key is correct!',
@@ -86,6 +87,7 @@ $LANG = array (
     'bad_last_name'=> 'Please enter your last name, it must also be between 2 and 20 characters.',
     'remove_install_folder_auto' => 'Automatically delete the &quot;install&quot; directory (this requires access rights to delete the &quot;install&quot; directory).',
     'confirm_remove_install_folder_auto' => 'WARNING, All files in the /_install/ folder will be removed.',
+    'remove_install_folder' => 'Please remove the &quot;_install&quot; folder from your server before to use your website.',
     'title_email_finish_install' => 'Congratulations, the installation of your website is finished!',
     'content_email_finish_install' => '<p><strong>Congratulations, your website is now successfully installed!</strong></p>
     <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>

@@ -41,6 +41,7 @@ $LANG = array (
     'bad_email' => 'Неверный адрес электронной почты',
     'finish' => 'Завершения установки!',
     'go_your_site' => 'Перейти на новый сайт!',
+    'go_your_admin_panel' => 'Перейдите на панель администратора!',
     'error_page_not_found' => 'Страница не найдена',
     'error_page_not_found_desc' => 'Извините, но страница, которую вы ищете, не может быть найден.',
     'success_license' => 'Лицензионный ключ правильно!',
@@ -86,6 +87,7 @@ $LANG = array (
     'bad_last_name'=> 'Пожалуйста, введите свои фамилию, она также должна быть от 2 до 20 символов.',
     'remove_install_folder_auto' => 'Автоматическое удаление &laquo;install&raquo; каталога (это требует прав доступа, чтобы удалить &laquo;install&raquo; каталог).',
     'confirm_remove_install_folder_auto' => 'ВНИМАНИЕ, ВСЕ файлы в каталоге /_install/ папки будут удалены.',
+    'remove_install_folder' => 'Пожалуйста, удалите папку &laquo;_install&raquo; с вашего сервера, прежде чем использовать свой ​​сайт.',
     'title_email_finish_install' => 'Поздравляем, установка вашего сайта закончен!',
     'content_email_finish_install' => '<p><strong>Поздравляем, Ваш сайт в настоящее время успешно установлен!</strong></p>
     <p>Мы надеемся, Вам понравится работать с <em>' . Controller::SOFTWARE_NAME . '</em>!</p>

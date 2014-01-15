@@ -28,7 +28,7 @@ class LoginSplashForm
         $oForm->addElement(new \PFBC\Element\Token('login'));
         $oForm->addElement(new \PFBC\Element\Email('', 'mail', array('placeholder'=>t('Your Email'), 'id'=>'email_login', 'style'=>'width:190px', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Password('', 'password', array('placeholder'=>t('Your Password'), 'style'=>'width:190px', 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Button(t('Login'),'submit', array('icon'=>'key')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Login'), 'submit', array('icon'=>'key')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="bt_login_remember">'));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'remember', array(1=>t('Stay signed in'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));

@@ -33,11 +33,11 @@ class LoginForm
 
         if ((new Session)->exists('captcha_enabled'))
         {
-            $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha','onkeyup'=>'CValid(this.value, this.id)','description'=>t('Enter the code above:'))));
+            $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description'=>t('Enter the code above:'))));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
-        $oForm->addElement(new \PFBC\Element\Button(t('Login'),'submit', array('icon'=>'key')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Login'), 'submit', array('icon'=>'key')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
         $oForm->render();
     }

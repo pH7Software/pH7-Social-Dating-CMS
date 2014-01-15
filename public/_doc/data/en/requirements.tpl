@@ -48,7 +48,7 @@
       <li>
       <li>APC module (for speed boost).</li>
       <li>Gettext PHP extension (for better stability and optimization).</li>
-	  <li>OpenSSL (for the "Connect" module).</li>
+      <li>OpenSSL (for the "Connect" module).</li>
       <li>iconv module.</li>
     </ul>
 

@@ -4,7 +4,7 @@
  * @desc             Version Information for the security of packaged software.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Security
  * @version          1.0
@@ -23,7 +23,7 @@ final class Version
     /***** Framework Kernel *****/
     const KERNEL_VERSION = Kernel::SOFTWARE_VERSION;
     const KERNEL_BUILD = Kernel::SOFTWARE_BUILD;
-    const KERNEL_RELASE_DATE = '2013-09-15';
+    const KERNEL_RELASE_DATE = '2014-01-30';
     const KERNEL_VERSION_NAME = Kernel::SOFTWARE_VERSION_NAME;
 
     /***** Form PFBC *****/

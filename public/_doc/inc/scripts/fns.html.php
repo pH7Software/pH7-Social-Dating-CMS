@@ -3,7 +3,7 @@
  * @author      Pierre-Henry Soria
  * @email       pierrehs@hotmail.com
  * @link        http://github.com/pH-7/Nav-Doc-Script-V2
- * @copyright   (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright   (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license     CC-BY - http://creativecommons.org/licenses/by/3.0/
  */
 

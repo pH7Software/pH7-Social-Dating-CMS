@@ -1,4 +1,8 @@
 <?php
+/**
+ * We made some changes in this code.
+ * By pH7 (Pierre-Henry SORIA).
+ */
 namespace PFBC\Element;
 
 class Select extends \PFBC\OptionElement
@@ -8,22 +12,26 @@ class Select extends \PFBC\OptionElement
 
     public function render()
     {
-        if(isset($this->attributes["value"])) {
-            if(!is_array($this->attributes["value"]))
-                $this->attributes["value"] = array($this->attributes["value"]);
+        $sAttr = ($this->isRequired()) ? ' required="required"' : '';
+
+        if (isset($this->attributes['value']))
+        {
+            if (!is_array($this->attributes['value']))
+                $this->attributes['value'] = array($this->attributes['value']);
         }
         else
-            $this->attributes["value"] = array();
+            $this->attributes['value'] = array();
 
-        if(!empty($this->attributes["multiple"]) && substr($this->attributes["name"], -2) != "[]")
-            $this->attributes["name"] .= "[]";
+        if (!empty($this->attributes['multiple']) && substr($this->attributes['name'], -2) != '[]')
+            $this->attributes['name'] .= '[]';
 
-        echo '<select', $this->getAttributes(array("value", "selected")), '>';
-        foreach($this->options as $value => $text) {
+        echo '<select', $this->getAttributes(array('value', 'selected')), $sAttr, '>';
+        foreach ($this->options as $value => $text)
+        {
             $value = $this->getOptionValue($value);
             echo '<option value="', $this->filter($value), '"';
             $selected = false;
-            if(in_array($value, $this->attributes["value"]))
+            if (in_array($value, $this->attributes['value']))
                 echo ' selected="selected"';
             echo '>', $text, '</option>';
         }
