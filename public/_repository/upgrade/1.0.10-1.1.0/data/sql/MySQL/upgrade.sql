@@ -11,3 +11,12 @@ ALTER TABLE pH7_Members DROP prefixSal;
 ALTER TABLE pH7_Members DROP suffixSalt;
 ALTER TABLE pH7_Affiliates DROP prefixSal;
 ALTER TABLE pH7_Affiliates DROP suffixSalt;
+
+
+CREATE TABLE IF NOT EXISTS pH7_License (
+  licenseId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  licenseKey text,
+  PRIMARY KEY (licenseId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO pH7_License VALUES (1, '');

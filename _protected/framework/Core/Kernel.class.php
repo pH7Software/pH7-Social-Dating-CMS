@@ -75,8 +75,7 @@ abstract class Kernel
         {
             $this->_checkInternetConnection(); // First we check the Internet connection
 
-            echo t('Sorry, your <a href="%0%">pH7CMS</a> License Key is incorrect!', self::SOFTWARE_WEBSITE) . '<br />';
-            echo t('To solve the problem, delete the "%0%" file and check if the "%1%" folder is in write mode (CHMOD 777).', '~/YOUR-PROTECTED-FOLDER/data/tmp/_license.txt', '~/YOUR-PROTECTED-FOLDER/data/tmp/');
+            echo t('Sorry, your <a href="%0%">pH7CMS</a> License Key is incorrect!', self::SOFTWARE_WEBSITE);
             exit(1);
         }
     }

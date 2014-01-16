@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
@@ -97,6 +97,15 @@ class SettingController extends Controller
             HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', PH7_LANG_NAME, false));
         }
         unset($aLangs);
+
+        $this->output();
+    }
+
+    public function license()
+    {
+        $this->sTitle = t('License Key');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
 
         $this->output();
     }

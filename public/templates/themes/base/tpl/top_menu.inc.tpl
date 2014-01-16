@@ -234,6 +234,7 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{lang 'Analytics Code'}">{lang 'Analytics Code'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{lang 'Custom Style'}">{lang 'Style'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'script') }}" title="{lang 'JavaScript Injection'}">{lang 'Script'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'license') }}" title="{lang 'License Key'}">{lang 'License'}</a></li>
           </ul>
         </li>
 

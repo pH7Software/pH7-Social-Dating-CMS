@@ -1,10 +1,9 @@
 <?php
 /**
  * @title          License Class
- * @desc           License Class of the pH7CMS.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Core
  * @version        1.1
@@ -14,6 +13,7 @@ namespace PH7\Framework\Core;
 defined('PH7') or exit('Restricted access');
 
 use
+PH7\Framework\Mvc\Model\License as LicenseModel,
 PH7\Framework\Server\Server,
 PH7\Framework\Security\Security,
 PH7\Framework\Http\Http,
@@ -32,41 +32,40 @@ final class License
      */
     const CHECK_LICENSE_URL = 'http://software.hizup.com/_check_license/';
 
-    /**
-     * @const string License file.
-     */
-    const FILE = '_license.txt';
-
     private
+    /**
+     * @var object $_oLicenseModel License object.
+     */
+     $_oLicenseModel,
+
+    /**
+     * @var string $_sBasicLicKey The basic license key automatically generated.
+     */
+     $_sBasicLicKey,
     /**
      * @var string $_sHostName Host name.
      */
-     $_sHostName = null,
+     $_sHostName,
 
     /**
      * @var string $_HostIp Host IP address.
      */
-     $_sHostIp = null,
+     $_sHostIp,
 
     /**
      * @var string $_sLicenseKey Default NULL
      */
-    $_sLicenseKey = null,
+    $_sLicKey = null,
 
     /**
-     * @var string $_sLicenseCopyright Default NULL
+     * @var string $_sLicCopyright Default NULL
      */
-    $_sLicenseCopyright = null,
+    $_sLicCopyright = null,
 
     /**
-     * @var string $_sFilePath File path of the license key. Default is the constant PH7_PATH_TMP
+     * @var mixed (string | array) $_mLicContent
      */
-    $_sFilePath = PH7_PATH_TMP,
-
-    /**
-     * @var mixed (string | array) $_mLicenseContent
-     */
-    $_mLicenseContent,
+    $_mLicContent,
 
     /**
      * @var boolean $_bDynamicHostIp Specify TRUE only if your host IP is dynamic. Default FALSE
@@ -80,21 +79,13 @@ final class License
     public function  __construct($sLicenseKey = null)
     {
         // Variables assignment
+        $this->_oLicenseModel = new LicenseModel;
         $this->_sHostName = Server::getName();
         $this->_sHostIp = Server::getIp();
+        $this->_sBasicLicKey = Security::hash($this->_generate(), 80);
 
         // Generate license key
         $this->generate($sLicenseKey);
-    }
-
-    /**
-     * Set license file path. Put trailing slash here (my_path/).
-     *
-     * @param string $sPath
-     */
-    public function setLicFilePath($sPath)
-    {
-        $this->_sFilePath = $sPath;
     }
 
     /**
@@ -116,10 +107,10 @@ final class License
     {
         $this->_validate();
 
-        if(!$this->_check())
+        if (!$this->_check())
         {
-            $this->_sLicenseKey = null;
-            $this->_sLicenseCopyright = null;
+            $this->_sLicKey = null;
+            $this->_sLicCopyright = null;
         }
 
         return $this;
@@ -147,7 +138,7 @@ final class License
     }
 
     /**
-     * Set Content of the license file.
+     * Set the license content.
      *
      * @access private
      * @param boolean $bNoCopyright Specify FALSE to indicate the copyright, if not TRUE. Default is FALSE
@@ -155,8 +146,8 @@ final class License
      */
     private function _setContent($bNoCopyright = false)
     {
-        $sNoCopyright = ($bNoCopyright === true) ? '，你今Здраврывеfdq98 fèè()(à"é&$*~ùùàs ты ў паітаньне е54йте天rt&eh好嗎_dمرحبا أنت بخير ال好嗎attú^u5atá inniu4a,?478привіなたは大丈12_you_è§§=≃ù%µµ££$?µp{èàùf*sxdslut_waruआप नमस्क你好，你今ार ठΓει好嗎α σαςb안녕하세oi요 괜찮은 o नमस्कार ठीnjre8778?fdsfdfty*-<καλά σήμεραीक आजсегодняm_54t5785tyfrjהעלאdgezsядкمرحبا夫今日はтивпряьоהעלאai54ng_scси днесpt' : '';
-        return Security::hash($this->_generate()) . ';' . $sNoCopyright . ';' ;
+        $sNoCopyright = ($bNoCopyright) ? '，你今Здраврывеfdq98 fèè()(à"é&$*~ùùàs ты ў паітаньне е54йте天rt&eh好嗎_dمرحبا أنت بخير ال好嗎attú^u5atá inniu4a,?478привіなたは大丈12_you_è§§=≃ù%µµ££$?µp{èàùf*sxdslut_waruआप नमस्क你好，你今ार ठΓει好嗎α σαςb안녕하세oi요 괜찮은 o नमस्कार ठीnjre8778?fdsfdfty*-<καλά σήμεραीक आजсегодняm_54t5785tyfrjהעלאdgezsядкمرحبا夫今日はтивпряьоהעלאai54ng_scси днесpt' : '';
+        return $this->_sBasicLicKey . ';' . $sNoCopyright . ';' ;
     }
 
     /**
@@ -167,27 +158,31 @@ final class License
      */
     private function _validate()
     {
-        if(!file_exists($this->_sFilePath . self::FILE))
+        // If there is no license key saved yet, it'll put a default license key.
+        if (trim($this->_oLicenseModel->get()) == '')
             $this->_save();
 
-        $this->_mLicenseContent = @file_get_contents($this->_sFilePath . self::FILE) or exit('Cannot read license file. Please check this file permissions for reading.');
+        $this->_mLicContent = $this->_oLicenseModel->get();
 
-        $this->_mLicenseContent = explode(';', $this->_mLicenseContent);
-        $this->_sLicenseKey = trim($this->_mLicenseContent[0]);
-        $this->_sLicenseCopyright = trim($this->_mLicenseContent[1]);
+        $this->_mLicContent = explode(';', $this->_mLicContent);
+        $this->_sLicKey = trim($this->_mLicContent[0]);
+        $this->_sLicCopyright = trim($this->_mLicContent[1]);
+
+        // If the basic license is wrong, it'll try to generate a new.
+        if (!$this->licenseStatus())
+            $this->_regenerateKey();
     }
 
     /**
-     * Save the license code into file.
+     * Save the license code into the database.
      *
      * @access private
      * @return void
      */
     private function _save()
     {
-        $this->_mLicenseContent = $this->_setContent();
-        @file_put_contents($this->_sFilePath . self::FILE, $this->_mLicenseContent) or exit('Cannot write license file. Please check write permissions for this file.');
-        @chmod($this->_sFilePath . self::FILE, 0444);
+        $this->_mLicContent = $this->_setContent();
+        $this->_oLicenseModel->save($this->_mLicContent);
     }
 
     /**
@@ -199,25 +194,25 @@ final class License
      */
     private function _generate($sLicenseKey = null)
     {
-        if(empty($sLicenseKey))
+        if (empty($sLicenseKey))
             $sLicenseKey = $this->_sHostName;
 
         $sLicenseKey = trim($sLicenseKey);
 
         $iUrlProtLength = strlen(PH7_URL_PROT);
-        if(substr($sLicenseKey, 0, $iUrlProtLength) === PH7_URL_PROT)
+        if (substr($sLicenseKey, 0, $iUrlProtLength) === PH7_URL_PROT)
             $sLicenseKey = substr($sLicenseKey, $iUrlProtLength);
 
-        if(substr($sLicenseKey, 0, 4) === 'www.')
+        if (substr($sLicenseKey, 0, 4) === 'www.')
             $sLicenseKey = substr($sLicenseKey, 4);
 
         $oHttp = new Http;
-        if($oHttp->detectSubdomain($sLicenseKey))
+        if ($oHttp->detectSubdomain($sLicenseKey))
             $sLicenseKey = str_replace($oHttp->getSubdomain($sLicenseKey) . PH7_DOT, '', $sLicenseKey);
         unset($oHttp);
 
         $iLicenseKeyLength = strlen($sLicenseKey);
-        if(substr($sLicenseKey, ($iLicenseKeyLength-1), 1) === PH7_SH)
+        if (substr($sLicenseKey, ($iLicenseKeyLength-1), 1) === PH7_SH)
             $sLicenseKey = substr($sLicenseKey, 0, ($iLicenseKeyLength-1));
 
         return ($this->_bDynamicHostIp) ? $sLicenseKey : $this->_sHostIp . $sLicenseKey;
@@ -232,16 +227,16 @@ final class License
     private function _check()
     {
         /**
-         * Only if the host is localhost, we validate the license without verification. Thus, the software can run locally without an Internet connection.
+         * Only if the host is localhost, it validate the license without verification. Thus, the software can run locally without an Internet connection.
          */
-        if(($this->_sHostName === 'localhost' || $this->_sHostName === '127.0.0.1') && ($this->_sHostIp === '127.0.0.1'))
+        if (($this->_sHostName === 'localhost' || $this->_sHostName === '127.0.0.1') && ($this->_sHostIp === '127.0.0.1'))
             return true;
 
         $aLicenseInfo = $this->_getLicInfo();
-        if($aLicenseInfo['key'] === $this->_sLicenseKey || $aLicenseInfo['key2'] === $this->_sLicenseKey)
+        if ($aLicenseInfo['key'] === $this->_sLicKey || $aLicenseInfo['key2'] === $this->_sLicKey)
         {
-            if(!empty($this->_sLicenseCopyright))
-                if($aLicenseInfo['copyright_key'] !== $this->_sLicenseCopyright) return false;
+            if (!empty($this->_sLicCopyright))
+                if ($aLicenseInfo['copyright_key'] !== $this->_sLicCopyright) return false;
 
             return (bool) $aLicenseInfo['status'];
         }
@@ -257,7 +252,7 @@ final class License
     private function _getLicInfo()
     {
         $oCache = (new Cache)->start('str/core', 'license', 3600*192); // Stored for 8 days
-        if(!$mData = $oCache->get())
+        if (!$mData = $oCache->get())
         {
             $sFields =  'siteid=' . Url::encode($this->_sHostName) . '&hostip=' . Url::encode($this->_sHostIp);
 
@@ -272,9 +267,9 @@ final class License
             unset($rCh);
 
             $oDom = new \DOMDocument;
-            if(@!$oDom->loadXML($mResult)) return false;
+            if (@!$oDom->loadXML($mResult)) return false;
 
-            foreach($oDom->getElementsByTagName('license') as $oLic)
+            foreach ($oDom->getElementsByTagName('license') as $oLic)
             {
                 $sKey = $oLic->getElementsByTagName('key')->item(0)->nodeValue;
                 $sKey2 = $oLic->getElementsByTagName('key2')->item(0)->nodeValue;
@@ -301,7 +296,7 @@ final class License
      */
     private function _license()
     {
-        return ($this->_sLicenseKey === Security::hash($this->_generate(), 80));
+        return ($this->_sLicKey === $this->_sBasicLicKey);
     }
 
     /**
@@ -312,7 +307,21 @@ final class License
      */
     private function _copyright()
     {
-        return (Security::hash($this->_sLicenseCopyright, 80) === 'cb1380e2e43751907b15039298d7473a26c55ec05d814d08d9505b05a50aeade35fb4f5bb0553b1c');
+        return (Security::hash($this->_sLicCopyright, 80) === 'cb1380e2e43751907b15039298d7473a26c55ec05d814d08d9505b05a50aeade35fb4f5bb0553b1c');
+    }
+
+    /**
+     * Regenerate a license key if the basic key is wrong.
+     *
+     * @return void
+     */
+    private function _regenerateKey()
+    {
+        // Update the '_sLicKey' property.
+        $this->_sLicKey = $this->_sBasicLicKey;
+
+        // Save the new basic key in the database.
+        $this->_oLicenseModel->save($this->_sLicKey . ';' . $this->_sLicCopyright . ';');
     }
 
 }

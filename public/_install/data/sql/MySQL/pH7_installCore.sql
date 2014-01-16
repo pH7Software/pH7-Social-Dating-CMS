@@ -1035,6 +1035,15 @@ CREATE TABLE IF NOT EXISTS pH7_StaticFiles (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
+CREATE TABLE IF NOT EXISTS pH7_License (
+  licenseId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  licenseKey text,
+  PRIMARY KEY (licenseId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO pH7_License VALUES (1, '');
+
+
 CREATE TABLE IF NOT EXISTS pH7_CustomCode (
   code text,
   codeType enum('css', 'js') NOT NULL
