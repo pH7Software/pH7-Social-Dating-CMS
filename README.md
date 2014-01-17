@@ -1,5 +1,6 @@
 # pH7 Social Dating CMS
 
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?s=79700cb86e25e0f125926f2f52984dd3ebacd81d)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/)
 
 ## Overview
 
