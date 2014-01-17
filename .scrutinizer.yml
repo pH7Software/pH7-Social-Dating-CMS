@@ -1,0 +1,40 @@
+filter:
+    excluded_paths: [_test]
+
+tools:
+  external_code_coverage: true
+    php_code_sniffer: true
+    php_code_coverage: true
+
+     # PHP Mess Detector (http://phpmd.org)
+    php_mess_detector: true
+
+    # Security Advisory Checker
+    sensiolabs_security_checker: true
+
+    # Analyzes the size and structure of a PHP project
+    php_pdepend:
+        enabled: true
+        excluded_dirs: [_test]
+
+    # Analyzes the size and structure of a PHP project
+    php_loc:
+        enabled: true
+        excluded_dirs: [_test]
+
+    # Copy/Paste Detector
+    php_cpd:
+        enabled: true
+        excluded_dirs: [_test]
+
+    # Runs the PHP CS Fixer (http://http://cs.sensiolabs.org/)
+    php_cs_fixer:
+        enabled: true
+        command: php-cs-fixer
+        config:
+            level: all # "all" allows the following values: psr0, psr1, psr2, and newer
+
+    # Runs Scrutinizer's PHP Analyzer Tool
+    php_analyzer:
+        enabled: true
+        excluded_dirs: [_test]
