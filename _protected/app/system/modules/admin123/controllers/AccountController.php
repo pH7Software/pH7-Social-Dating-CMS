@@ -3,7 +3,7 @@
  * @title          Account Controller
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
@@ -15,10 +15,7 @@ class AccountController extends Controller
 
     public function index()
     {
-        $this->sTitle = t('Administration Account');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
-        $this->output();
+        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'account', 'edit'));
     }
 
     public function password()

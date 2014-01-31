@@ -246,7 +246,7 @@
           </ul>
         </li>
 
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}">{lang 'Modules Manager'}</a>
+        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}">{lang 'Modules'}</a>
           <ul>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}">{lang 'Modules Manager'}</a></li>
             <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}">{lang 'Newsletters'}</a>
@@ -338,7 +338,7 @@
           </ul>
         </li>
 
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','index') }}" title="{lang 'File Management'}">{lang 'File Management'}</a>
+        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','index') }}" title="{lang 'File Management'}">{lang 'Files'}</a>
           <ul>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display') }}" title="{lang 'Public File Management'}">{lang 'Public Files'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display','protected') }}" title="{lang 'Protected File Management'}">{lang 'Protected Files'}</a></li>
@@ -368,6 +368,16 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{lang 'Edit your Account'}">{lang 'Edit Account'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','password') }}" title="{lang 'Change Password'}">{lang 'Change Password'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{lang 'Logout'}">{lang 'Logout'}</a></li>
+          </ul>
+        </li>
+
+        <li><a href="{software_help_url}" title="{lang "Need some Helps? We're here for you!"}">{lang 'Help'}</a>
+          <ul>
+            <li><a href="{software_help_url}" title="{lang 'Individual Ticket Support'}">{lang 'Support'}</a></li>
+            <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}">{lang 'Documentation'}</a></li>
+            <li><a href="{software_faq_url}" title="{lang 'Frequently Asked Questions'}">{lang 'Faq'}</a></li>
+            <li><a href="{software_forum_url}" title="{lang 'Support Forum'}">{lang 'Forum'}</a></li>
+            <li><a href="{software_license_url}" title="{lang 'Buy a License Key'}">{lang 'License'}</a></li>
           </ul>
         </li>
 

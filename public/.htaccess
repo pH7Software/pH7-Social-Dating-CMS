@@ -581,6 +581,9 @@ ErrorDocument 505 /error/http/index?code=505
 
 RewriteEngine On
 
+# Tell PHP that the mod_rewrite module is ENABLED.
+SetEnv HTTP_MOD_REWRITE On
+
 # Start Bad Bot Prvention
 RewriteCond %{HTTP_USER_AGENT} ^BackWeb [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Bandit [OR]

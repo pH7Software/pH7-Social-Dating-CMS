@@ -1,7 +1,6 @@
 <div class="center">
 
 
-<p class="small">Last Updated On January 26, 2012.<br /><br /></p>
 <p><strong><a href="{url_root}">{site_name}</a></strong> (URL address is {url_root}) is a dating social site service that allows members to create unique personal profiles online in order to find and communicate with old and new friends. The service is operated by {site_name}. By using the {site_name} Website you agree to be bound by these Terms of Use (this &quot;Agreement&quot;), whether or not you register as a member (&quot;Member&quot;). If you wish to become a Member, communicate with other Members and make use of the {site_name} services (the &quot;Service&quot;), please read this Agreement and indicate your acceptance by following the instructions in the Registration process.</p>
 <p>&nbsp;</p>
 <p>This Agreement sets out the legally binding terms for your use of the Website and your Membership in the Service.<br />
@@ -12,9 +11,11 @@
 <p>{site_name} reserves the right, in its sole discretion, to reject, refuse to post or remove any posting (including email) by you, or to restrict, suspend, or terminate your access to all or any part of the Website and/or Services at any time, for any or no reason, with or without prior notice, and without lability.</p>
 <p>&nbsp;</p>
 <p>By participating in any offline {site_name} event, you agree to release and hold {site_name} harmless from any and all losses, damages, rights, claims, and actions of any kind including, without limitation, personal injuries, death, and property damage, either directly or indirectly related to or arising from your participation in any such offline {site_name} event.</p>
-<h2 class="bold">Terms of Use</h2>
+<p>&nbsp;</p>
 
+<h3>Terms of Use</h3>
 
+<p>&nbsp;</p>
 <p><b>1) Your Interactions.</b></p>
 <p>You are solely responsible for your interactions and communication with other Members. You understand that {site_name} does not in any way screen its Members, nor does {site_name}  inquire into the backgrounds of its Members or attempt to verify the statements of its Members. {site_name} makes no representations or warranties as to the conduct of Members or their compatibility with any current or future Members. We do however recommend that if you  choose to meet or exchange personal information with any member of {site_name} then you should take it upon yourself to do a background check on said person.</p>
 <p>In no event shall {site_name} be liable for any damages whatsoever, whether direct, indirect, general, special, compensatory, consequential, and/or incidental, arising out of or relating to the conduct of you or anyone else in connection with the use of the Service, including without limitation, bodily injury, emotional distress, and/or any other damages resulting from communications or meetings with other registered users of this Service or persons you meet through this Service.</p>
@@ -44,8 +45,7 @@ and its licensors. Except for that information which is in the public domain or 
 <p>b. You are solely responsible for the Content that you publish or display (hereinafter, &quot;post&quot;) on the Service or any material or information that you transmit to other Members.</p>
 <p>&nbsp;</p>
 <p>c. By posting any Content to the public areas of the Website, you hereby grant to {site_name} the non-exclusive, fully paid, worldwide license to use, publicly perform and display such Content on the Website. This license will terminate at the time you remove such Content from the Website.</p>
-<p><br />
-</p>
+<p>&nbsp;</p>
 <p>d. The following is a partial list of the kind of Content that is illegal or prohibited on the Website. {site_name} reserves the right to investigate and take appropriate legal action in its sole discretion against anyone who violates this provision, including without limitation, removing the offending communication from the Service and terminating the membership of such violators. Prohibited Content includes Content that:</p>
 <p>&nbsp;</p>
 <p>  i. is patently offensive and promotes racism, bigotry, hatred or physical harm of any kind against any group or individual; </p>
@@ -89,8 +89,7 @@ and its licensors. Except for that information which is in the public domain or 
 <p>&nbsp;</p>
 <p><b>7) Copyright Policy.</b></p>
 <p>You may not post, distribute, or reproduce in any way any copyrighted material, trademarks, or other proprietary information without obtaining the prior written consent of the owner of such proprietary rights. It is the policy of {site_name} to terminate membership privileges of any member who repeatedly infringes copyright upon prompt notification to {site_name} by the copyright owner or the copyright owner's legal agent. Without limiting the foregoing, if you believe that your work has been copied and posted on the Service in a way that constitutes copyright infringement, please provide our Copyright Agent with the following information: an electronic or physical signature of the person authorized to act on behalf of the owner of the copyright interest; a description of the copyrighted work that you claim has been infringed; a description of where the material that you claim is infringing is located on the Website; your address, telephone number, and email address; a written statement by you that you have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law; a statement by you, made under penalty of perjury, that the above information in your notice is accurate and that you are the copyright owner or authorized to act on the copyright owner's behalf. {site_name}'s Copyright Agent for notice of claims of copyright infringement can be reached via email address.</p>
-<p><br />
-</p>
+<p>&nbsp;</p>
 <p><b>8) Member Disputes.</b></p>
 <p>You are solely responsible for your interactions with other {site_name} Members. {site_name} reserves the right, but has no obligation,  to monitor disputes between you and other Members.</p>
 <p>&nbsp;</p>
@@ -100,8 +99,7 @@ and its licensors. Except for that information which is in the public domain or 
 <p>&nbsp;</p>
 <p><b>10</b><b>) Limitation on Liability.</b></p>
 <p>IN NO EVENT SHALL {site_name} BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY INDIRECT, CONSEQUENTIAL, EXEMPLARY, INCIDENTAL, SPECIAL OR PUNITIVE DAMAGES, INCLUDING LOST PROFIT DAMAGES ARISING FROM YOUR USE OF THE WEB SITE OR THE SERVICE, EVEN IF {site_name} HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. NOTWITHSTANDING ANYTHING TO THE CONTRARY CONTAINED HEREIN, {site_name}.S LIABILITY TO YOU FOR ANY CAUSE WHATSOEVER AND REGARDLESS OF THE FORM OF THE ACTION, WILL AT ALL TIMES BE LIMITED TO AMOUNT PAID, IF ANY, BY YOU TO {site_name} FOR THE SERVICE DURING THE TERM OF MEMBERSHIP.</p>
-<p><br />
-</p>
+<p>&nbsp;</p>
 <p><b>11) Disputes.</b></p>
 <p>If there is any dispute about or involving the Website and/or the Service, by using the Website, you agree that any dispute shall be governed by the laws of the area in which we are based without regard to conflict of law provisions and you agree to personal jurisdiction by and venue in the area in which we are based.</p>
 <p>&nbsp;</p>
@@ -110,9 +108,9 @@ and its licensors. Except for that information which is in the public domain or 
 <p>&nbsp;</p>
 <p><b>13) Other.</b></p>
 <p>This Agreement is accepted upon your use of the Website and is further affirmed by you becoming a Member of the Service. This Agreement constitutes the entire agreement between you and {site_name} regarding the use of the Website and/or the Service. The failure of {site_name} to exercise or enforce any right or provision of this Agreement shall not operate as a waiver of such right or provision. The section titles in this Agreement are for convenience only and have no legal or contractual effect. Please contact us with any questions regarding this Agreement. {site_name} is a trademark of &lt;owners business name&gt;.</p>
-<p><br />
-</p>
+<p>&nbsp;</p>
 <p class="bold red">I HAVE READ THIS AGREEMENT AND AGREE TO ALL OF THE PROVISIONS CONTAINED ABOVE.</p>
+<p class="small">Last updated on January 26, 2012.</p>
 
 
 </div>

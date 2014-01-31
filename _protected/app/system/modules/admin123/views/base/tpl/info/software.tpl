@@ -20,8 +20,7 @@
   <div class="s_bMarg"></div>
 
   <h2 class="underline">{lang 'Recommended Hosting for %software_name%'}</h2>
-  <p><a href="http://software.hizup.com/web/arvandixe"><img src="http://software.hizup.com/web/arvandixeimg" width="250" height="250" alt="{lang 'Arvixe: Recommended for %software_name%'}"></a></p>
-  <p><a href="http://software.hizup.com/web/hostforweb"><img src="http://software.hizup.com/web/hostforwebimg" width="250" height="250" alt="{lang 'HostForWeb: Recommended for %software_name%'}"></a></p>
-  <p><a href="http://software.hizup.com/web/hostupon"><img src="http://software.hizup.com/web/hostuponimg" width="250" height="250" alt="{lang 'HostUpon: Recommended for %software_name%'}"></a></p>
-
+  <p><a href="http://software.hizup.com/web/tmdhost"><img src="http://software.hizup.com/web/tmdhostimg" width="250" height="250" alt="{lang 'TMD Hosting: Recommended for %software_name%'}" title="{lang 'TMD Hosting: Recommended for %software_name%'}"></a> &nbsp; <a href="http://software.hizup.com/web/arvandixe"><img src="http://software.hizup.com/web/arvandixeimg" width="250" height="250" alt="{lang 'Arvixe: Recommended for %software_name%'}" title="{lang 'Arvixe: Recommended for %software_name%'}"></a></p>
+  <p><a href="http://software.hizup.com/web/hostupon"><img src="http://software.hizup.com/web/hostuponimg" width="250" height="250" alt="{lang 'HostUpon: Recommended for %software_name%'}" title="{lang 'HostUpon: Recommended for %software_name%'}"></a> &nbsp; <a href="http://software.hizup.com/web/hostforweb"><img src="http://software.hizup.com/web/hostforwebimg" width="250" height="250" alt="{lang 'HostForWeb: Recommended for %software_name%'}" title="{lang 'HostForWeb: Recommended for %software_name%'}"></a></p>
+  <p><a href="http://software.hizup.com/web/faction"><img src="http://software.hizup.com/web/factionimg" width="250" height="250" alt="{lang 'WebFaction: Recommended for %software_name%'}" title="{lang 'WebFaction: Recommended for %software_name%'}"></a> &nbsp; <a href="http://software.hizup.com/web/rackhost"><img src="http://software.hizup.com/web/rackhostimg" width="250" height="250" alt="{lang 'RackSpace: Recommended for %software_name%'}" title="{lang 'RackSpace: Recommended for %software_name%'}"></a></p>
 </div>

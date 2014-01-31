@@ -24,7 +24,7 @@
                 <p><a href="{$smarty.const.PH7_URL_ROOT}"><img src="{$smarty.const.PH7_URL_ROOT}templates/themes/base/img/logo.png" alt="{$software_name|upper}" title="{$software_name|upper}" /></a></p>
 
                 {if !empty($sept_number)}
-                    <h1>{$LANG.welcome_to_installer} {$software_name} - {$LANG.step} {$sept_number}/6</h1>
+                    <h1>{$LANG.welcome_to_installer} {$software_name} - {$LANG.step} {$sept_number}/7</h1>
                 {/if}
             </header>
             <!-- End Header -->

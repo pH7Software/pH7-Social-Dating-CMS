@@ -102,6 +102,14 @@ $LANG = array (
     'no_dir' => 'Saraka haijapatikana.',
     'wait_importing_database' => 'Tafadhali subiri...<br />
     Yaweza chukua muda.',
+    'service' => 'Huduma muhimu ya ziada',
+    'buy_copyright_license_title' => 'Kununua leseni',
+    'buy_copyright_license' => '<span class="bold italic">£320</span> <span class="gray">Mara moja</span> <span class="right">Kununua sasa</span>',
+    'buy_copyright_license_desc' => 'By kununua muhimu leseni, huwezi kuwa na viungo yoyote na hati miliki matangazo kwenye tovuti yako.',
+    'buy_individual_ticket_support_title' => 'Kununua msaada wa huduma ya mtu binafsi',
+    'buy_individual_ticket_support' => '<span class="bold italic">£55</span> <span class="gray">Tiketi ya msaada kamili kwa mwezi mmoja</span> <span class="right">Kununua sasa</span>',
+    'buy_individual_ticket_support_desc' => 'By ununuzi wa mtu binafsi tiketi ya msaada, tutaweza kukusaidia wakati wowote una tatizo na programu yetu. Sisi ni ovyo wako kutatua tatizo lolote kukutana na pH7CMS.',
+    'looking_hosting' =>'Kuangalia kwa ajili ya jeshi Web sambamba na pH7CMS? Angalia <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">orodha ya mwenyeji</a>!',
     'error_get_server_url' => 'Shida ya mapatano na anayekutimizia wavuti.<br />
     Tafadhali hakikisha kuwa una wavuti (internet).',
     'powered' => 'Imetolewa na',

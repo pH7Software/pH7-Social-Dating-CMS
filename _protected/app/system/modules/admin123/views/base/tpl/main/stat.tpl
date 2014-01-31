@@ -25,11 +25,11 @@ function showUserChart()
 
   var aData = google.visualization.arrayToDataTable([
     ['{lang 'Days'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couple'}'],
-    [sDateSince, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}],
-    [sYear, {year_total_members}, {year_total_male_members}, {year_total_female_members}, {year_total_couple_members}],
-    [sMonth, {month_total_members}, {month_total_male_members}, {month_total_female_members}, {month_total_couple_members}],
+    [sDay, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}],
     [sWeek, {week_total_members}, {week_total_male_members}, {week_total_female_members}, {week_total_couple_members}],
-    [sDay, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}]
+    [sMonth, {month_total_members}, {month_total_male_members}, {month_total_female_members}, {month_total_couple_members}],
+    [sYear, {year_total_members}, {year_total_male_members}, {year_total_female_members}, {year_total_couple_members}],
+    [sDateSince, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}]
   ]);
 
   var aOptions = {

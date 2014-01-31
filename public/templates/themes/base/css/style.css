@@ -14,7 +14,7 @@ h1:first-letter, h2:first-letter{text-transform:capitalize;}
 h1, h2, h3, h4{margin-top:2px}
 
 p, li, pre {line-height: 1.5em}
-a{color:#08c; outline-style:none;cursor:pointer}
+a{color:#08c;outline-style:none;cursor:pointer}
 a:link, a:visited{text-decoration:none}
 a:hover, a:active{color:#F24C9E; text-decoration:underline; text-shadow:0 0 5px #fff,0 0 8px rgba(255,255,255,.6)}
 ul li{display:block}

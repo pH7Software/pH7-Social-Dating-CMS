@@ -3,7 +3,7 @@
  * @title            Misc (Miscellaneous Functions) File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Inc
  * @version          1.7
@@ -266,13 +266,26 @@ function generate_hash($iLength = 80)
 }
 
 /**
- * Check the URL rewrite file (.htaccess).
+ * Check if Apache's mod_rewrite is installed.
  *
  * @return boolean
  */
 function is_url_rewrite()
 {
-    return is_file(PH7_ROOT_INSTALL . '.htaccess');
+    // Check if mod_rewrite is installed and is configured to be used via .htaccess
+    if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
+    {
+        $sOutputMsg = 'mod_rewrite Works!';
+
+        if (!empty($_GET['a']) && $_GET['a'] == 'test_mod_rewrite')
+            exit($sOutputMsg);
+
+        $sPage = @file_get_contents(PH7_URL_INSTALL . 'test_mod_rewrite');
+
+        $bIsRewrite = ($sPage == $sOutputMsg);
+    }
+
+    return $bIsRewrite;
 }
 
 /**
