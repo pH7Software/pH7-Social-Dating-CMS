@@ -30,7 +30,7 @@ class InstallController extends Controller
 
         $this->_sGamePath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/';
         $this->_sGameDownloadPath = self::SOFTWARE_DOWNLOAD_URL . 'games/pH7_game.zip';
-        $this->_sRedirectUrlNoLicense = self::SOFTWARE_WEBSITE;
+        $this->_sRedirectUrlNoLicense = self::SOFTWARE_LICENSE_KEY_URL;
     }
 
     /********************* STEP 1 *********************/
@@ -421,7 +421,7 @@ class InstallController extends Controller
 
                                                         $_SESSION['step5'] = 1;
 
-                                                        redirect(PH7_URL_SLUG_INSTALL . 'finish');
+                                                        redirect(PH7_URL_SLUG_INSTALL . 'service');
                                                     }
                                                     catch (\PDOException $oE)
                                                     {
@@ -496,7 +496,7 @@ class InstallController extends Controller
         }
         else
         {
-            redirect(PH7_URL_SLUG_INSTALL . 'finish');
+            redirect(PH7_URL_SLUG_INSTALL . 'service');
         }
 
         $this->view->assign('sept_number', 5);
@@ -506,6 +506,13 @@ class InstallController extends Controller
     }
 
     /********************* STEP 6 *********************/
+    public function service ()
+    {
+        $this->view->assign('sept_number', 6);
+        $this->view->display('service.tpl');
+    }
+
+    /********************* STEP 7 *********************/
     public function finish ()
     {
         global $LANG;
@@ -524,7 +531,7 @@ class InstallController extends Controller
         }
 
         $_SESSION = array();
-        /* Remote the sessions */
+        /* Remove the sessions */
         session_unset();
         session_destroy();
 
@@ -542,7 +549,7 @@ class InstallController extends Controller
             exit(header('Location: ' . PH7_URL_ROOT));
         }
 
-        $this->view->assign('sept_number', 6);
+        $this->view->assign('sept_number', 7);
         $this->view->display('finish.tpl');
     }
 

@@ -9,6 +9,7 @@
 
 <p>&nbsp;</p>
 
+<p class="bold">{$LANG.looking_hosting}</p>
 <p class="bold"><a href="{$smarty.const.PH7_URL_ROOT}">{$LANG.go_your_site}</a> &nbsp; | &nbsp; <a href="{$smarty.const.PH7_URL_ROOT}admin123">{$LANG.go_your_admin_panel}</a></p>
 
 {include file="inc/footer.tpl"}

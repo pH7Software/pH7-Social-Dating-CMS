@@ -3,7 +3,7 @@
  * @title            Russian Language File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2013-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / RU
  * @update           09/10/13 23:06
@@ -100,6 +100,14 @@ $LANG = array (
     'no_dir' => 'Каталог не существует.',
     'wait_importing_database' => 'Пожалуйста, подождите при импорте базы данных.<br />
     Это может занять несколько минут.',
+    'service' => 'Полезные дополнительные услуги',
+    'buy_copyright_license_title' => 'Покупать лицензию',
+    'buy_copyright_license' => '<span class="bold italic">£320</span> <span class="gray">Пожизненная лицензия</span> <span class="right">Купить сейчас</span>',
+    'buy_copyright_license_desc' => 'По покупая лицензионный ключ, вы не будете иметь никаких связей и уведомления об авторских правах на вашем сайте.',
+    'buy_individual_ticket_support_title' => 'Купить индивидуальную службу поддержки',
+    'buy_individual_ticket_support' => '<span class="bold italic">£55</span> <span class="gray">Полная поддержка билет на один месяц</span> <span class="right">Купить сейчас</span>',
+    'buy_individual_ticket_support_desc' => 'Приобретая индивидуальную поддержку по бронированию билетов, мы вам поможем, когда у вас есть проблемы с нашим программным обеспечением. Мы в вашем распоряжении, чтобы разрешить любую проблему столкновение с pH7CMS.',
+    'looking_hosting' =>'Ищете веб-хостинга Совместимость с pH7CMS? Смотрите <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">наш список хостинг</a>!',
     'error_get_server_url' => 'Доступ проблемы с нашими веб-сервера.<br />
     Пожалуйста, убедитесь, что ваш сервер подключен к интернету, в противном случае следует лишь немного подождать (не исключено, что наш сервер перегружен).',
     'powered' => 'Создано',

@@ -30,6 +30,11 @@ abstract class Kernel
     SOFTWARE_NAME = '¡pH7! Social Dating CMS',
     SOFTWARE_DESCRIPTION = 'This builder community dating software for web 3.0 new generation!',
     SOFTWARE_WEBSITE = 'http://software.hizup.com',
+    SOFTWARE_HELP_URL = 'http://software.hizup.com/client', // Help Desk Support URL
+    SOFTWARE_DOC_URL = 'http://software.hizup.com/doc',
+    SOFTWARE_FAQ_URL = 'http://software.hizup.com/faq',
+    SOFTWARE_FORUM_URL = 'http://software.hizup.com/forum',
+    SOFTWARE_LICENSE_KEY_URL = 'http://software.hizup.com/license',
     SOFTWARE_EMAIL = 'ph7software@gmail.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_COMPANY = 'pH7 Framework / Social CMS (Pierre-Henry Soria)',

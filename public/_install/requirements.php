@@ -17,37 +17,11 @@
 
 defined('PH7') or exit('Restricted access');
 
-/**
- * Check if Apache's mod_rewrite is installed.
- *
- * @return boolean
- */
-function is_mod_rewrite()
-{
-    // Check if mod_rewrite is installed and is configured to be used via .htaccess
-    if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
-    {
-        $sOutputMsg = 'mod_rewrite Works!';
-
-        if (!empty($_GET['a']) && $_GET['a'] == 'test_mod_rewrite')
-            exit($sOutputMsg);
-
-        $sPage = @file_get_contents(PH7_URL_INSTALL . 'test_mod_rewrite');
-
-        $bIsRewrite = ($sPage == $sOutputMsg);
-    }
-
-    return $bIsRewrite;
-}
-
 
 $aErrors = array();
 
 if (version_compare(PHP_VERSION, PH7_REQUIRE_SERVER_VERSION, '<'))
     $aErrors[] = 'Your PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.';
-
-if (!is_mod_rewrite())
-    $aErrors[] = 'Please install Apache "mod_rewrite" module.<br /> Click <a href="http://software.hizup.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> or more information on how to install the rewrite module.';
 
 if (!extension_loaded ('pdo_mysql'))
     $aErrors[] = 'Please install "PDO" PHP extension with MySQL driver.';

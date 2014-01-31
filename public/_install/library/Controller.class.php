@@ -3,7 +3,7 @@
  * @title            Controller Core Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link             http://software.hizup.com
  * @package          PH7 / Install / Library
@@ -22,8 +22,11 @@ abstract class Controller implements IController
     SOFTWARE_WEBSITE = 'http://software.hizup.com',
     SOFTWARE_REGISTRATION_URL = 'http://software.hizup.com/register',
     SOFTWARE_LICENSE_URL = 'http://software.hizup.com/legal/license',
+    SOFTWARE_HELP_URL = 'http://software.hizup.com/client',
+    SOFTWARE_LICENSE_KEY_URL = 'http://software.hizup.com/web/buysinglelicense',
     SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/',
     SOFTWARE_REQUIREMENTS_URL = 'http://software.hizup.com/doc/en/requirements',
+    SOFTWARE_HOSTING_LIST_URL = 'http://software.hizup.com/doc/en/hosting',
     SOFTWARE_EMAIL = 'ph7software@gmail.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
@@ -69,6 +72,8 @@ abstract class Controller implements IController
         $this->view->assign('software_version', self::SOFTWARE_VERSION . ' Build ' . self::SOFTWARE_BUILD . ' - ' . self::SOFTWARE_VERSION_NAME);
         $this->view->assign('software_website', self::SOFTWARE_WEBSITE);
         $this->view->assign('software_license_url', self::SOFTWARE_LICENSE_URL);
+        $this->view->assign('software_help_url', self::SOFTWARE_HELP_URL);
+        $this->view->assign('software_license_key_url', self::SOFTWARE_LICENSE_KEY_URL);
         $this->view->assign('software_author', self::SOFTWARE_AUTHOR);
         $this->view->assign('software_email', self::SOFTWARE_EMAIL);
         $this->view->assign('tpl_name', self::DEFAULT_THEME);

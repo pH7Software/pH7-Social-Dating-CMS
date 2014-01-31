@@ -13,7 +13,7 @@
 namespace PH7\Framework\Server;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel;
+use PH7\Framework\Core\Kernel, PH7\Framework\Url\Uri;
 
 final class Server
 {
@@ -126,6 +126,29 @@ final class Server
         if (null === $sKey) return $_SERVER;
 
         return (!empty($_SERVER[$sKey])) ? htmlspecialchars($_SERVER[$sKey], ENT_QUOTES) : $sDefVal;
+    }
+
+    /**
+     * Check if Apache's mod_rewrite is installed.
+     *
+     * @return boolean
+    */
+    public static function isRewriteMod()
+    {
+        // Check if mod_rewrite is installed and is configured to be used via .htaccess
+        if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
+        {
+            $sOutputMsg = 'mod_rewrite Works!';
+
+            if (Uri::getInstance()->fragment(0) == 'test_mod_rewrite')
+                exit($sOutputMsg);
+
+            $sPage = @file_get_contents(PH7_URL_ROOT . 'test_mod_rewrite');
+
+            $bIsRewrite = ($sPage == $sOutputMsg);
+        }
+
+        return $bIsRewrite;
     }
 
     /**
