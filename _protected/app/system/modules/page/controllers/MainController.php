@@ -118,15 +118,6 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function donation()
-    {
-        $this->sTitle = t('Donation - Help Us');
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Help us pay for our servers and development of our volunteer %site_name% site.');
-        $this->view->h2_title = $this->sTitle;
-        $this->output();
-    }
-
     public function partner()
     {
         $this->sTitle = t('Partners of %site_name%');
