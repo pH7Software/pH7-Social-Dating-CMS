@@ -92,7 +92,6 @@
       <route url="help" path="system/modules" module="page" controller="main" action="help" />
       <route url="help-us" path="system/modules" module="page" controller="main" action="helpus" />
       <route url="share-site" path="system/modules" module="page" controller="main" action="sharesite" />
-      <route url="donation" path="system/modules" module="page" controller="main" action="donation" />
       <route url="help/about" path="system/modules" module="page" controller="main" action="about" />
       <route url="help/faq" path="system/modules" module="page" controller="main" action="faq" />
       <route url="legal/tos" path="system/modules" module="page" controller="main" action="terms" />

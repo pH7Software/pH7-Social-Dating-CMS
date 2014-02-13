@@ -15,7 +15,6 @@
 <link title="{lang 'About Us'}" url="{{ $design->url('page','main','about') }}" />
 <link title="{lang 'Help Us'}" url="{{ $design->url('page','main','helpus') }}" />
 <link title="{lang 'Share %site_name%'}" url="{{ $design->url('page','main','sharesite') }}" />
-<link title="{lang 'Help Us - Donation'}" url="{{ $design->url('page','main','donation') }}" />
 <link title="{lang 'FAQ'}" url="{{ $design->url('page','main','faq') }}" />
 <link title="{lang 'Affiliate'}" url="{{ $design->url('affiliate','home','index') }}" />
 <link title="{lang 'Jobs'}" url="{{ $design->url('page','main','job') }}" />
