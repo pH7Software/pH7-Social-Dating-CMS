@@ -15,7 +15,8 @@ function cache(sType, sCSRFToken)
 
 function ads(sType, iAdsId, sCSRFToken)
 {
-    $.post(pH7Url.base + pH7Url.admin_mod + 'asset/ajax/Ads', {type : sType, adsId : iAdsId, security_token : sCSRFToken}, function(oResponseData) {
+    $.post(pH7Url.base + pH7Url.admin_mod + 'asset/ajax/Ads', {type : sType, adsId : iAdsId, security_token : sCSRFToken}, function(oResponseData)
+    {
         if(oResponseData.status == 1) {
             $('.msg').addClass('alert-message success');
             $('#ads_' +  iAdsId).hide("slow");

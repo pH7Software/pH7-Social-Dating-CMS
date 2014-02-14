@@ -141,13 +141,11 @@ final class License
      * Set the license content.
      *
      * @access private
-     * @param boolean $bNoCopyright Specify FALSE to indicate the copyright, if not TRUE. Default is FALSE
      * @return string The Hash Key.
      */
-    private function _setContent($bNoCopyright = false)
+    private function _setContent()
     {
-        $sNoCopyright = ($bNoCopyright) ? '，你今Здраврывеfdq98 fèè()(à"é&$*~ùùàs ты ў паітаньне е54йте天rt&eh好嗎_dمرحبا أنت بخير ال好嗎attú^u5atá inniu4a,?478привіなたは大丈12_you_è§§=≃ù%µµ££$?µp{èàùf*sxdslut_waruआप नमस्क你好，你今ार ठΓει好嗎α σαςb안녕하세oi요 괜찮은 o नमस्कार ठीnjre8778?fdsfdfty*-<καλά σήμεραीक आजсегодняm_54t5785tyfrjהעלאdgezsядкمرحبا夫今日はтивпряьоהעלאai54ng_scси днесpt' : '';
-        return $this->_sBasicLicKey . ';' . $sNoCopyright . ';' ;
+        return $this->_sBasicLicKey . ';;' ;
     }
 
     /**
@@ -244,10 +242,10 @@ final class License
     }
 
     /**
-     * Get informations on the software license.
+     * Get information on the software license.
      *
      * @access private
-     * @return mixed (array | boolean) Returns license informations in an array or FALSE if an error occurred.
+     * @return mixed (array | boolean) Returns license information in an array or FALSE if an error occurred.
      */
     private function _getLicInfo()
     {

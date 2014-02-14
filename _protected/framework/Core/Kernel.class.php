@@ -21,6 +21,7 @@ PH7\Framework\File\File,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Navigation\Browser,
 PH7\Framework\Registry\Registry,
+PH7\Framework\Page\Page,
 PH7\Framework\Server\Server;
 
 abstract class Kernel
@@ -30,11 +31,11 @@ abstract class Kernel
     SOFTWARE_NAME = '¡pH7! Social Dating CMS',
     SOFTWARE_DESCRIPTION = 'This builder community dating software for web 3.0 new generation!',
     SOFTWARE_WEBSITE = 'http://software.hizup.com',
-    SOFTWARE_HELP_URL = 'http://software.hizup.com/client', // Help Desk Support URL
+    SOFTWARE_LICENSE_KEY_URL = 'https://hizup.net/clients/license',
+    SOFTWARE_HELP_URL = 'https://hizup.net/clients/support', // Help Desk Support URL
     SOFTWARE_DOC_URL = 'http://software.hizup.com/doc',
     SOFTWARE_FAQ_URL = 'http://software.hizup.com/faq',
     SOFTWARE_FORUM_URL = 'http://software.hizup.com/forum',
-    SOFTWARE_LICENSE_KEY_URL = 'http://software.hizup.com/license',
     SOFTWARE_EMAIL = 'ph7software@gmail.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_COMPANY = 'pH7 Framework / Social CMS (Pierre-Henry Soria)',
@@ -52,6 +53,14 @@ abstract class Kernel
 
     public function __construct()
     {
+        //** Temporary code
+        if (!Server::isRewriteMod())
+        {
+            $sModRewriteMsg = '<span style="font-weight:bold;color:red">pH7CMS requires Apache "mod_rewrite".</span><br /> Please install it so pH7CMS can works.<br /> Click <a href="http://software.hizup.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href="' . PH7_URL_ROOT . '">retry</a>.';
+            Page::message($sModRewriteMsg);
+        }
+        //*/
+
         $this->_checkLicense();
 
         $this->config = Config::getInstance();
@@ -66,7 +75,6 @@ abstract class Kernel
      * Check License key.
      *
      * @final
-     * @internal For optimal security, we do not show the actual path to the license file with the "PH7_PATH_TMP" constant (keep in mind that everyone can see this message).
      * @return integer Returns '1' if the license key is invalid and stops the script with the exit() function.
      */
     private final function _checkLicense()
@@ -80,8 +88,7 @@ abstract class Kernel
         {
             $this->_checkInternetConnection(); // First we check the Internet connection
 
-            echo t('Sorry, your <a href="%0%">pH7CMS</a> License Key is incorrect!', self::SOFTWARE_WEBSITE);
-            exit(1);
+            Page::message(t('Sorry, your <a href="%0%">pH7CMS</a> License Key is incorrect!', self::SOFTWARE_WEBSITE));
         }
     }
 
@@ -95,8 +102,7 @@ abstract class Kernel
     {
         if (!Server::checkInternetConnection())
         {
-            echo t('Your server must be connected to the Internet for pH7Framework to function properly.');
-            exit(1);
+            Page::message(t('Your server must be connected to the Internet for pH7Framework to function properly.'));
         }
     }
 

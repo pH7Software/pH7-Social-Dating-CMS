@@ -18,8 +18,8 @@ $LANG = array (
     'version' => 'version',
     'CMS_desc' => '<p>Welcome to installation of ' . Controller::SOFTWARE_NAME . '.<br />
     Thank you for choosing our CMS and we hope it will please you.</p>
-    <p>Please follow the six step of the installation.</p>',
-    'chose_lang_for_install' => 'Please choose your language to begin the installation',
+    <p>Please follow the seven step of the installation.</p>',
+    'choose_install_lang' => 'Please choose your language to begin the installation',
     'requirements_desc' => 'WARNING! Please be sure that your server has the necessary <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">requirements</a> to correctly run pH7CMS.',
     'config_path' => '&quot;protected&quot; directory path',
     'desc_config_path' => 'Please specify the full path to your &quot;protected&quot; folder.<br />
@@ -62,9 +62,10 @@ $LANG = array (
     'db_password' => 'Database password',
     'db_prefix' => 'Prefix for tables in database',
     'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7CMS on the same database. We recommend that you still change the default values ​​in order to increase the security of your website.',
-    'desc_charset' => 'Database encoding, usually UTF8 encoding for international.',
+    'db_encoding' => 'Encoding',
+    'desc_db_encoding' => 'Database encoding. Usually UTF8 encoding for international.',
     'db_port' => 'Database host port number',
-    'ffmpeg_path' => 'The path to the FFmpeg executable (if you do not know where he is, please ask your hosting)',
+    'ffmpeg_path' => 'The path to the FFmpeg executable (if you don\'t know where it is, please ask your hosting)',
     'passwords_different' => 'The password confirmation does not match the initial password',
     'username_bad_username' => 'Your username is incorrect',
     'username_too_short' => 'Your username is too short, at least 4 characters',

@@ -21,7 +21,7 @@ class Logger extends Core
 {
 
     /**
-     * Folder of the informations logs files.
+     * Folder of the information logs files.
      */
     const ATTACK_DIR = '_attackers/';
 
@@ -41,7 +41,7 @@ class Logger extends Core
      */
     private $_sIp;
     /**
-     * The informations contents.
+     * The information contents.
      *
      * @access private
      * @var string $_sContents
@@ -97,7 +97,7 @@ class Logger extends Core
     }
 
     /**
-     * Write a log file with the hacher informations.
+     * Write a log file with the hacher information.
      *
      * @access protected
      * @return object this

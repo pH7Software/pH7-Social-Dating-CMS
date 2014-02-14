@@ -238,7 +238,7 @@
           </ul>
         </li>
 
-        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','index') }}" title="{lang 'Informations'}">{lang 'Info'}</a>
+        <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','index') }}" title="{lang 'Information'}">{lang 'Info'}</a>
           <ul>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','stat') }}" title="{lang 'Site Statistics'}">{lang 'Site Stats'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','software') }}" title="{lang 'Software'}">{lang 'Software'}</a></li>
@@ -375,8 +375,11 @@
           <ul>
             <li><a href="{software_help_url}" title="{lang 'Individual Ticket Support'}">{lang 'Support'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}">{lang 'Documentation'}</a></li>
+          {* Coming soon *}
+          {*
             <li><a href="{software_faq_url}" title="{lang 'Frequently Asked Questions'}">{lang 'Faq'}</a></li>
             <li><a href="{software_forum_url}" title="{lang 'Support Forum'}">{lang 'Forum'}</a></li>
+          *}
             <li><a href="{software_license_url}" title="{lang 'Buy a License Key'}">{lang 'License'}</a></li>
           </ul>
         </li>

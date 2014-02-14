@@ -3,7 +3,7 @@
  * @title            Init Controller File
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Inc
  * @version          1.2
@@ -38,7 +38,7 @@ try
     else
         (new $sMainCtrl)->error_404();
 }
-catch (Exception $oE)
+catch (\Exception $oE)
 {
     echo $oE->getMessage();
 }

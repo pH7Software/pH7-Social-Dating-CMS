@@ -110,7 +110,7 @@ class Module
     }
 
     /**
-     * Get the module informations in the config.ini file.
+     * Get the module information in the config.ini file.
      *
      * @param string $sSwitch Module::INSTALL or Module::UNINSTALL constant.
      * @param string $sFolder

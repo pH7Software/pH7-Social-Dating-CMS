@@ -20,7 +20,7 @@ class Lang
     const CACHE_GROUP = 'db/lang';
 
     /**
-     * Get informations about the language.
+     * Get information about the language.
      *
      * @param boolean $bOnlyActive Only active lang. Default: TRUE
      * @return object Language data.

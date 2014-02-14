@@ -64,7 +64,7 @@ class Google extends Api implements IApi
             // User info is ok? Here we will be connect the user and/or adding the login and registering routines...
             $oUserModel = new UserCoreModel;
 
-            // Get informations of user
+            // Get information of user
             $aUserData = $oOauth->userinfo->get();
 
             if(!$iId = $oUserModel->getId($aUserData['email']))

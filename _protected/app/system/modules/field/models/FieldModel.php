@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2013, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2013-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Field / Model
  */
@@ -121,7 +121,7 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
             break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid field type!');
+                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid Field type!');
         }
 
         return $this->_sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->_sDefVal) . ';';
