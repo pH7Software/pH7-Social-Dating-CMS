@@ -34,14 +34,31 @@ class Page
      */
     public static function maintenance($iMaintenanceTime)
     {
+        // Set the HTTP status codes for the Maintenance page
+        Http::setMaintenanceCodes($iMaintenanceTime);
+
         // Prevent caching in the browser
         (new Browser)->noCache();
 
-        // Set the HTTP status codes for the maintenance page
-        Http::setMaintenanceCodes($iMaintenanceTime);
-
         // Inclusion of the HTML Maintenance page
         include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/other/maintenance.html.php';
+
+        // Stop script
+        exit;
+    }
+
+    /**
+     * Set a message page.
+     *
+     * @access public
+     * @static
+     * @param string $sMsg Information message.
+     * @return void
+     */
+    public static function message($sMsg)
+    {
+        // Inclusion of the HTML Message page
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/other/msg.html.php';
 
         // Stop script
         exit;

@@ -18,8 +18,8 @@ $LANG = array (
     'version' => 'versión',
     'CMS_desc' => '<p>Bienvenido a la instalación de ' . Controller::SOFTWARE_NAME . '.<br />
     Gracias por elegir nuestro CMS y esperamos que sea de su agrado usted.</p>
-    <p>Por favor, siga el paso seis de la instalación.</p>',
-    'chose_lang_for_install' => 'Por favor, elija su idioma para comenzar la instalación',
+    <p>Por favor, siga los siete pasos de la instalación.</p>',
+    'choose_install_lang' => 'Por favor, elija su idioma para comenzar la instalación',
     'requirements_desc' => '¡ADVERTENCIA! Por favor, asegúrese de que el servidor tiene la necesaria <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">requisitos</a> para funcionar correctamente pH7CMS.',
     'config_path' => 'Ruta del directorio &laquo;protected&raquo;',
     'desc_config_path' => 'Por favor, especifique la ruta completa a la carpeta de &laquo;protected&raquo;.<br />
@@ -62,9 +62,10 @@ $LANG = array (
     'db_password' => 'Contraseña para la base de datos',
     'db_prefix' => 'El prefijo de la tabla de la base de datos',
     'desc_db_prefix' => 'Esta opción es útil cuando tiene varias instalaciones de pH7CMS en la misma base de datos. Recomendamos que usted todavía cambiar los valores por defecto con el fin de aumentar la seguridad de su sitio web.',
-    'desc_charset' => 'Codificación de la base de datos, por lo general para la codificación UTF8 internacional.',
+    'db_encoding' => 'Codificación',
+    'desc_db_encoding' => 'Codificación de la base de datos, por lo general para la codificación UTF8 internacional.',
     'db_port' => 'Puerto de la base de datos',
-    'ffmpeg_path' => 'La ruta de acceso al archivo ejecutable FFmpeg (si usted no sabe dónde está, por favor, pregunte a su anfitrión)',
+    'ffmpeg_path' => 'La ruta de acceso al ejecutable FFmpeg (si usted no sabe dónde está, por favor pregunte a su anfitrión)',
     'passwords_different' => 'La confirmación de contraseña no coincide con la contraseña inicial',
     'username_bad_username' => 'Su nombre de usuario es incorrecto',
     'username_too_short' => 'Su apodo es demasiado corto, por lo menos 4 caracteres',

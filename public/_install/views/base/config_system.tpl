@@ -23,8 +23,8 @@
     <span class="small">{$LANG.desc_db_prefix}</span><br />
     <input type="text" name="db_prefix" id="db_prefix" onfocus="if ('PH7_' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'PH7_';" value="{$smarty.session.db.db_prefix|escape}" required="required" /></p>
 
-    <p><span class="mandatory">*</span> <label for="db_charset">{$LANG.charset} :</label><br />
-    <span class="small">{$LANG.desc_charset}</span><br />
+    <p><span class="mandatory">*</span> <label for="db_charset">{$LANG.db_encoding} :</label><br />
+    <span class="small">{$LANG.desc_db_encoding}</span><br />
     <input type="text" name="db_charset" id="db_charset" onfocus="if ('UTF8' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'UTF8';" value="{$smarty.session.db.db_charset|escape}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="db_port">{$LANG.db_port} :</label><br />

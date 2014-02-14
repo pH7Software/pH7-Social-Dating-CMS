@@ -21,9 +21,9 @@
     {if $header}{header}{/if}
 
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
-    <!-- Do not modify or remove this code! Think of those who spend time to develop this framework and CMS for you. -->
+    <!-- Do not modify or remove this code! Think of those who spend a lot of time to develop this CMS & Framework for you -->
     <meta name="creator" content="pH7 Team, Pierre-Henry Soria - {software_url}" />
-    <meta name="designer" content="pH7 Team - {software_url}" />
+    <meta name="designer" content="pH7 Team, Pierre-Henry Soria - {software_url}" />
     <meta name="generator" content="{software_name}  {software_version}" />
     <!-- End Copyright -->
 
@@ -159,7 +159,7 @@
       <div id="clock"></div>
 
       <div role="contentinfo">
-        <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /> - <strong><a href="http://cool-on-web.com" title="{lang 'Free Online Dating Site'}">{lang 'Online Dating Site'}</a></strong></p>{{ $design->littleLikeApi() }}</div> {{ $design->langList() }} {* {{ $designModel->langList() }} *} &nbsp;
+        <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /> - <strong><a href="http://cool-on-web.com" title="{lang 'Free Online Dating Site'}">{lang 'Online Dating Site'}</a></strong></p>{{ $design->littleLikeApi() }}</div>{* {{ $design->langList() }} *}{{ $designModel->langList() }}
         {main_include 'bottom_menu.inc.tpl'}
       </div>
 

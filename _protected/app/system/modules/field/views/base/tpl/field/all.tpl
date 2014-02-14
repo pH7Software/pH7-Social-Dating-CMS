@@ -21,14 +21,14 @@
         {if !$unmodifiable}
           <a href="{{ $design->url('field','field','edit',"$mod,$field") }}">{lang 'Edit'}</a>
         {else}
-          <span class="gray">{lang 'Not editable.'}</span>
+          <span class="gray">{lang 'Not editable'}</span>
         {/if}
         </td>
         <td>
         {if !$unmodifiable}
           {{ LinkCoreForm::display(t('Delete'), 'field', 'field', 'delete', array('mod'=>$mod, 'name'=>$field)) }}
         {else}
-          <span class="gray">{lang 'Not deletable.'}</span>
+          <span class="gray">{lang 'Not deletable'}</span>
         {/if}
         </td>
       </tr>

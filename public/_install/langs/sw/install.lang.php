@@ -20,8 +20,8 @@ $LANG = array (
     'version' => 'version',
     'CMS_desc' => '<p>Karibu katika ufungaji wa ' . Controller::SOFTWARE_NAME . '.<br />
     Asante kwa kuchagua programu yetu. Tunatumai utaridhika</p>
-    <p>Tafadhali fuata maelekezo yetu sita ya ufungaji.</p>',
-    'chose_lang_for_install' => 'Tafadhali chagua lugha utakayoitumia katika ufungaji',
+    <p>Tafadhali fuata maelekezo yetu saba ya ufungaji.</p>',
+    'choose_install_lang' => 'Tafadhali chagua lugha utakayoitumia katika ufungaji',
     'requirements_desc' => 'ONYO! Hakikisha mashine yako inaridhisha <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">matakwa</a> yafuatyo ili ufunge vyema pH7CMS.',
     'config_path' => 'Eneo la saraka &quot;protected&quot;',
     'desc_config_path' => 'Tafadhali onyesha eneo la saraka &quot;protected&quot;.<br />
@@ -61,11 +61,12 @@ $LANG = array (
     'desc_db_hostname' => '(Kwa ujumla &quot;localhost&quot; or &quot;127.0.0.1&quot;)',
     'db_name' =>'Jina la &quot;database&quot;',
     'db_username' => 'Jina la mtumiaji wa &quot;database&quot;',
-    'db_password' => 'Maneno ya siri ya &quot;Database&quot;',
-    'db_prefix' => 'Kiambishi cha table ya database',
+    'db_password' => 'Maneno ya siri ya &quot;database&quot;',
+    'db_prefix' => 'Kiambishi cha table ya &quot;database&quot;',
     'desc_db_prefix' => 'Chaguo hili ni muhimu ikiwa una upangaji zaidi ya moja wa pH7CMS. Tunakushauri ubadilishe maneno haya ili kuongeza usalama wa wavuti wako.',
-    'desc_charset' => 'Database Encoding, kwa kawaida ni UTF8 encoding.',
-    'db_port' => 'Port ya database',
+    'db_encoding' => 'Encoding',
+    'desc_db_encoding' => 'Database Encoding, kwa kawaida ni UTF8 encoding.',
+    'db_port' => 'Port ya &quot;database&quot;',
     'ffmpeg_path' => 'Eneo la FFmpeg executable (kama haujui iliko, tafadhali uliza anayekupatia wavuti)',
     'passwords_different' => 'Jina ama nambari yako ya siri haifanani na ile uliyotoa awali',
     'username_bad_username' => 'Jina lako la utumizi sio halali',

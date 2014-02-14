@@ -33,20 +33,19 @@ class Design extends \PH7\Framework\Layout\Html\Design
     public function langList()
     {
         $sCurrentPage = \PH7\Framework\Navigation\Page::cleanDynamicUrl('l');
+        $oLangs = (new Lang)->getInfos();
 
-        $oData = (new Lang)->getInfos();
-
-        foreach ($oData as $sLang)
+        foreach ($oLangs as $sLang)
         {
             if ($sLang->langId === PH7_LANG_NAME) continue;
 
             // Retrieve only the first two characters
             $sAbbrLang = substr($sLang->langId,0,2);
 
-            echo '<a href="', $sCurrentPage, $sLang->langId, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang),'" title="', t($sAbbrLang),'" /></a>';
+            echo '<a href="', $sCurrentPage, $sLang->langId, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang),'" title="', t($sAbbrLang),'" /></a>&nbsp;';
         }
 
-        unset($oData);
+        unset($oLangs);
     }
 
     /**

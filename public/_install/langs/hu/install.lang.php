@@ -18,8 +18,8 @@ $LANG = array (
     'version' => 'verzió',
     'CMS_desc' => '<p>Üdvözöllek a ' . Controller::SOFTWARE_NAME . ' telepítőjében.<br />
     Köszönjük, hogy a CMS-ünket választottad, és remélem, hogy elnyeri a tetszésed.</p>
-    <p>Kérlek kövesd a hat lépésből álló telepítés útmutatónkat.</p>',
-    'chose_lang_for_install' => 'Kérlek válaszd ki a nyelved a telepítés elkezdéséhez',
+    <p>Kérlek kövesd a hét lépésből álló telepítés útmutatónkat.</p>',
+    'choose_install_lang' => 'Kérlek válaszd ki a nyelved a telepítés elkezdéséhez',
     'requirements_desc' => 'FIGYELMEZTETÉS! Kérlek győződj meg arról, hogy a szervered eleget tesz a <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">követelményeknek</a> ami elengedhetetlen a CMS helyes működéséhez.',
     'config_path' => '&quot;protected&quot; könyvtár elérése',
     'desc_config_path' => 'Kérlek add meg a teljes elérési útját a &quot;protected&quot; könyvtárnak.<br />
@@ -62,7 +62,8 @@ $LANG = array (
     'db_password' => 'Adatbázis Jelszó',
     'db_prefix' => 'Tábla előtagok az adatbázisban',
     'desc_db_prefix' => 'Ez a funkció akkor lehet hasznos, ha több pH7CMS is egy azon adatbázisba van telepítve. Azért mi javasolnánk, hogy változtasd meg az alapértéket a biztonság növelésének érdekében.',
-    'desc_charset' => 'Adatbázis kódolás, Általában UTF8 van alkalmazva a nemzetköziséghez.',
+    'db_encoding' => 'Kódolás',
+    'desc_db_encoding' => 'Adatbázis kódolás, Általában UTF8 van alkalmazva a nemzetköziséghez.',
     'db_port' => 'Az adatbázis portja',
     'ffmpeg_path' => 'Elérési út az FFmpeg indítófájljához (ha nem tudod ez hol van, kérdezd meg a szolgáltatód)',
     'passwords_different' => 'A jelszó megerősítés nem egyezik az eredetivel',

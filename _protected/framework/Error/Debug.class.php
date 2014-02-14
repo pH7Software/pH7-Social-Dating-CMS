@@ -26,7 +26,7 @@ use PH7\Framework\Config\Config;
     private function __construct() {}
 
     /**
-     * Gets Informations (message, code, file, line, trace) of an Exception.
+     * Gets Information (message, code, file, line, trace) of an Exception.
      *
      * @param object $oE Exception object.
      * @return string

@@ -29,3 +29,4 @@ require_once PH7_ROOT_INSTALL . 'inc/loader.inc.php';
 require PH7_ROOT_INSTALL . 'inc/init.inc.php';
 
 ob_end_flush();
+

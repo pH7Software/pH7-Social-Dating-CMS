@@ -947,7 +947,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('emailName', '¡pH7! Social Dating CMS', '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('splashPage', '0', 'Use Splash Page | enable = 1 or disable = 0', 'general'),
-('fullAjaxSite', '1', 'enable = 1 or disable = 0', 'general'),
+('fullAjaxSite', '0', 'enable = 1 or disable = 0', 'general'),
 ('ipLogin', '', '', 'security'),
 ('timeDelayUserRegistration', '1440', '1440 minutes = 24 hours (in minutes!)', 'spam'),
 ('timeDelayAffRegistration', '2880', '2880 minutes = 2 days (in minutes!)', 'spam'),

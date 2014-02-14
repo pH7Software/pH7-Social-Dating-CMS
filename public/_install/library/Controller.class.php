@@ -22,7 +22,7 @@ abstract class Controller implements IController
     SOFTWARE_WEBSITE = 'http://software.hizup.com',
     SOFTWARE_REGISTRATION_URL = 'http://software.hizup.com/register',
     SOFTWARE_LICENSE_URL = 'http://software.hizup.com/legal/license',
-    SOFTWARE_HELP_URL = 'http://software.hizup.com/client',
+    SOFTWARE_HELP_URL = 'https://hizup.net/clients/support', // Help Desk URL
     SOFTWARE_LICENSE_KEY_URL = 'http://software.hizup.com/web/buysinglelicense',
     SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/',
     SOFTWARE_REQUIREMENTS_URL = 'http://software.hizup.com/doc/en/requirements',

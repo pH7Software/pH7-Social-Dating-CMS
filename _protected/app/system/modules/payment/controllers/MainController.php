@@ -96,7 +96,7 @@ class MainController extends Controller
                 {
                     if ((new UserCoreModel)->updateMembership($this->httpRequest->post('item_number'), $this->session->get('member_id'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
-                        $this->log($oPayPal, t('PayPal payment was made, the following informations:'));
+                        $this->log($oPayPal, t('PayPal payment was made, the following information:'));
                         $this->_bStatus = true; // Status is OK
                     }
                 }
@@ -114,7 +114,7 @@ class MainController extends Controller
                 {
                     if ((new UserCoreModel)->updateMembership($this->httpRequest->post('sale_id'), $this->session->get('member_id'), $this->httpRequest->post('price'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
-                        $this->log($o2CO, t('2CheckOut payment was made, the following informations:'));
+                        $this->log($o2CO, t('2CheckOut payment was made, the following information:'));
                         $this->_bStatus = true; // Status is OK
                     }
                 }

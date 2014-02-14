@@ -67,7 +67,7 @@ class Design
                 // Retrieve only the first two characters
                 $sAbbrLang = substr($sLang,0,2);
 
-                echo '<a href="', $sCurrentPage, $sLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>';
+                echo '<a href="', $sCurrentPage, $sLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
 
         unset($aLangs, $sCurrentPage);
@@ -233,7 +233,7 @@ class Design
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bLicenseLink = true)
     {
         if(defined('PH7_LICENSE_STATUS'))
-            if(PH7_LICENSE_STATUS && PH7_LICENSE_NO_COPYRIGHT) return;
+            if(PH7_LICENSE_NO_COPYRIGHT) return;
 
         ($bLink ? $bSoftwareName = true : '');
 
@@ -376,9 +376,10 @@ class Design
     public function geoIp()
     {
         $sCountry = Geo::getCountry();
+        $sCountryLang = t(str_replace('GB', 'UK', Geo::getCountryCode())); // Country name translated into the user language.
         $sCity = Geo::getCity();
 
-        echo '<a href="', Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity), '" title="', t('Meet New People on %0%, %1% with %site_name%!', $sCountry, $sCity), '">', $sCountry, ', ', $sCity, '</a>';
+        echo '<a href="', Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity), '" title="', t('Meet New People on %0%, %1% with %site_name%!', $sCountryLang, $sCity), '">', $sCountryLang, ', ', $sCity, '</a>';
     }
 
     /**

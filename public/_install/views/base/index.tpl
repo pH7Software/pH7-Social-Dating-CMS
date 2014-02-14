@@ -3,8 +3,9 @@
 <h2>{$LANG.welcome|upper} &laquo;{$software_name|upper}&raquo; {$LANG.version|upper} {$software_version}</h2>
 
 {$LANG.CMS_desc}
+<p>&nbsp;</p>
 
-<p>{$LANG.chose_lang_for_install}</p>
+<p>{$LANG.choose_install_lang}</p>
 
 <select name="l" onchange="document.location.href=this.value">
     {$lang_select}

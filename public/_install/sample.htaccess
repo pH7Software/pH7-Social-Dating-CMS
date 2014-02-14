@@ -9,5 +9,5 @@ Options +FollowSymLinks
     RewriteEngine On
 
     RewriteRule ^([a-z_]+)/?$ index.php?a=$1 [L]
-    
+
 </IfModule>

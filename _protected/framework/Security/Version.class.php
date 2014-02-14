@@ -43,9 +43,9 @@ final class Version
     private function __construct() {}
 
     /**
-     * Gets informations on the lastest software version.
+     * Gets information on the lastest software version.
      *
-     * @return mixed (array | boolean) Returns version informations in an array or FALSE if an error occurred.
+     * @return mixed (array | boolean) Returns version information in an array or FALSE if an error occurred.
      */
     public static function getLatestInfo()
     {
