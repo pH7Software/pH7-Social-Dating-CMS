@@ -40,7 +40,7 @@ abstract class Kernel
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_COMPANY = 'pH7 Framework / Social CMS (Pierre-Henry Soria)',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
-    SOFTWARE_COPYRIGHT = '© (c) 2012-2013, Pierre-Henry Soria. All Rights Reserved.',
+    SOFTWARE_COPYRIGHT = '© (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',
     SOFTWARE_VERSION = '1.1.0',
     SOFTWARE_BUILD = '1',
