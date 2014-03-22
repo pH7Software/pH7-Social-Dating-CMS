@@ -42,6 +42,7 @@ class UserModel extends UserCoreModel
         $rStmt->bindParam(':hash_validation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':current_date', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':group_id', $aData['group_id'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':affiliated_id', $aData['affiliate_id'], \PDO::PARAM_INT);
         $rStmt->execute();
         $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the user's ID
         Db::free($rStmt);

@@ -20,7 +20,7 @@ class PrivacyForm
         if (isset($_POST['submit_privacy_account']))
         {
             if (\PFBC\Form::isValid($_POST['submit_privacy_account']))
-                new PrivacyFormProcess($oUserModel, $iProfileId);
+                new PrivacyFormProcess($iProfileId, $oUserModel);
 
             Framework\Url\HeaderUrl::redirect();
         }

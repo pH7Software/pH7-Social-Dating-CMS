@@ -82,7 +82,7 @@ class Google extends Api implements IApi
             else
             {
                 // Login
-                $this->setLogin($oUserModel, $iId);
+                $this->setLogin($iId, $oUserModel);
                 $this->sUrl = Uri::get('connect','main','home');
             }
 

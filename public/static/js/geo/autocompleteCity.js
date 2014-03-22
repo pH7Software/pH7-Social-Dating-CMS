@@ -4,6 +4,12 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
+/*
+ * Please remplace "ph7cms" by your username by registering here: http://www.geonames.org/login
+ * After, you will need to enable the Web service here: http://www.geonames.org/manageaccount
+ */
+var sGeonamesUsername = 'ph7cms'; // Remplace "ph7cms" by your username!
+
 var sCountry = $('#str_country').val();
 var sUrlSlug = (typeof sCountry != 'undefined' ? '?country=' + sCountry : '');
 
@@ -11,7 +17,7 @@ $('#str_city').autocomplete({
     source: function(oRequest, oResponse)
     {
         $.ajax({
-            url: 'http://ws.geonames.org/searchJSON' + sUrlSlug,
+            url: 'http://ws.geonames.org/searchJSON' + sUrlSlug + '&username=' + sGeonamesUsername,
             dataType: 'jsonp',
             data:
             {

@@ -80,11 +80,11 @@ define ( 'PH7_PAGE_EXT', '.html' );
 /***** DATA *****/
 
 define ( 'PH7_DATA', 'data/' );
-define ( 'PH7_LOG', 'log/' );
-define ( 'PH7_TMP', 'tmp/' );
-define ( 'PH7_CACHE', 'cache/' );
-define ( 'PH7_BACKUP', 'backup/' );
-define ( 'PH7_SQL', 'sql/' );
+define ( 'PH7_LOG', 'log' . PH7_DS );
+define ( 'PH7_TMP', 'tmp' . PH7_DS );
+define ( 'PH7_CACHE', 'cache' . PH7_DS );
+define ( 'PH7_BACKUP', 'backup' . PH7_DS );
+define ( 'PH7_SQL', 'sql' . PH7_DS );
 
 /***** APP *****/
 
@@ -98,13 +98,14 @@ define ( 'PH7_MODELS', 'models/' );
 define ( 'PH7_VIEWS', 'views/' );
 define ( 'PH7_FORMS', 'forms/' );
 define ( 'PH7_INC', 'inc/' );
-define ( 'PH7_CONFIG', 'config/' );
 define ( 'PH7_LANG', 'lang/' );
-define ( 'PH7_QUERY', 'query/' );
+define ( 'PH7_QUERY', 'query' . PH7_DS );
+define ( 'PH7_CONFIG', 'config' . PH7_DS );
+define ( 'PH7_CONFIG_FILE', 'config.ini' );
 
 /***** REPOSITORY *****/
 
-define ( 'PH7_REPOSITORY', '_repository/' );
+define ( 'PH7_REPOSITORY', '_repository' . PH7_DS );
 
 /***** TEMPLATES & STATIC *****/
 

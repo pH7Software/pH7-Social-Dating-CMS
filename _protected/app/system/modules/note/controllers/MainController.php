@@ -302,7 +302,7 @@ class MainController extends Controller
     private function _deleteThumbFile($iId, $iProfileId)
     {
         $oFile = $this->oNoteModel->readPost($this->oNoteModel->getPostId($iId), $iProfileId, null);
-        return (new Note)->deleteThumb($this->file, $this->session->get('member_username') . PH7_DS . $oFile->thumb, 'note');
+        return (new Note)->deleteThumb($this->session->get('member_username') . PH7_DS . $oFile->thumb, 'note', $this->file);
     }
 
     public function __destruct()

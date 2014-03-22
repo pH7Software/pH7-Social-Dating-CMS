@@ -80,7 +80,7 @@ class FriendAjax extends Core
                 if (!$oUserModel->isNotification($iFriendId, 'friendRequest') && $oUserModel->isOnline($iFriendId, 0))
                 {
                     // Send mail if the notification is accepted and the user isn't connected NOW.
-                    $this->sendMail($oUserModel, $iFriendId);
+                    $this->sendMail($iFriendId, $oUserModel);
                 }
                 unset($oUserModel);
             }
@@ -119,11 +119,11 @@ class FriendAjax extends Core
     /**
      * Send an email to warn the friend request.
      *
+     * @param int $iId friend ID
      * @param object \PH7\UserCoreModel $oUserModel
-     * @param int $iId friend id
      * @return void
      */
-    protected function sendMail(UserCoreModel $oUserModel, $iId)
+    protected function sendMail($iId, UserCoreModel $oUserModel)
     {
         $sFriendEmail = $oUserModel->getEmail($iId);
         $sFriendUsername = $oUserModel->getUsername($iId);

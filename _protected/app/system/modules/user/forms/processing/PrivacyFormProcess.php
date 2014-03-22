@@ -12,11 +12,11 @@ class PrivacyFormProcess extends Form
 {
 
     /**
-     * @param \PH7\UserCoreModel $oUserModel
      * @param integer $iProfileId
+     * @param \PH7\UserCoreModel $oUserModel
      * @return void
      */
-    public function __construct(UserCoreModel $oUserModel, $iProfileId)
+    public function __construct($iProfileId, UserCoreModel $oUserModel)
     {
          parent::__construct();
 

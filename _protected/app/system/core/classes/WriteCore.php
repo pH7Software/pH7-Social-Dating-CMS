@@ -11,12 +11,12 @@ abstract class WriteCore
 {
 
     /**
-     * @param \PH7\Framework\File\File $oFile
      * @param mixed (integer | string) $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
+     * @param \PH7\Framework\File\File $oFile
      * @return boolean
      */
-    public function deleteThumb(Framework\File\File $oFile, $mId, $sMod)
+    public function deleteThumb($mId, $sMod, Framework\File\File $oFile)
     {
         self::checkMod($sMod);
 

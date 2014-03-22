@@ -14,12 +14,12 @@ class Note extends WriteCore
     /**
      * Sets the Note Thumbnail.
      *
-     * @param \PH7\Framework\File\File $oFile
-     * @param NoteModel $oNoteModel
      * @param object $oPost
+     * @param \PH7\NoteModel $oNoteModel
+     * @param \PH7\Framework\File\File $oFile
      * @return void
      */
-    public function setThumb(Framework\File\File $oFile, NoteModel $oNoteModel, $oPost)
+    public function setThumb($oPost, NoteModel $oNoteModel, Framework\File\File $oFile)
     {
         if (!empty($_FILES['thumb']['tmp_name']))
         {

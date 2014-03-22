@@ -11,6 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Util\Various,
+PH7\Framework\Cookie\Cookie,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Date\CDateTime,
 PH7\Framework\Mvc\Router\Uri;
@@ -30,6 +31,7 @@ class JoinFormProcess extends Form
     public function step1()
     {
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
+        $iAffId = (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME);
 
         $aData = [
             'email' => $this->httpRequest->post('mail'),
@@ -46,7 +48,8 @@ class JoinFormProcess extends Form
             'ip' => Ip::get(),
             'hash_validation' => Various::genRnd(),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
-            'is_active' => $this->iActiveType
+            'is_active' => $this->iActiveType,
+            'affiliate_id' => $iAffId
         ];
 
         $oAffModel = new AffiliateModel;
@@ -61,7 +64,14 @@ class JoinFormProcess extends Form
             \PFBC\Form::setError('form_join_aff', t('An error occurred during registration!<br /> Please try again with other information in the form fields or come back later.'));
         }
         else
-        {   // Send an email and sets the welcome message.
+        {
+            // Successful registration in the database!
+
+            /** Update the Affiliate Commission **/
+            if ($this->iActiveType == 0) // Only if the user's account is already activated.
+                AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
+
+            // Send an email and sets the welcome message.
             \PFBC\Form::setSuccess('form_join_aff', t('Your affiliate account has been created! %0%', (new Registration)->sendMail($aData)->getMsg()));
         }
 

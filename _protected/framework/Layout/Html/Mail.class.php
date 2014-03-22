@@ -57,7 +57,8 @@ class Mail
      */
     public function subHeader()
     {
-        /* Because we sometimes work with this class in Ajax (e.g. FriendAjax.php of the User Module), the constant "PH7_TPL_NAME" is not yet defined.
+        /**
+         * @internal Because we sometimes work with this class in Ajax (e.g. FriendAjax.php of the User Module), the constant "PH7_TPL_NAME" is not yet defined.
          * So we use the constant "PH7_DEFAULT_THEME" is already defined.
          */
         return '<table>

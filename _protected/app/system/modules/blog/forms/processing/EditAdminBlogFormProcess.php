@@ -52,7 +52,7 @@ class EditAdminBlogFormProcess extends Form
         }
 
         // Thumbnail
-        $oBlog->setThumb($this->file, $oPost);
+        $oBlog->setThumb($oPost, $this->file);
 
         if(!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oBlogModel->updatePost('title', $this->httpRequest->post('title'), $iBlogId);

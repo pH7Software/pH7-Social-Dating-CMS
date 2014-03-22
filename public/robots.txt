@@ -1,3 +1,8 @@
+####################
+# pH7CMS | Social Dating CMS
+# URL: http://software.hizup.com
+####################
+
 # Rules for Google
 User-agent: googlebot
 Crawl-delay: 0

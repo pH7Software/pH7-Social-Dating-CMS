@@ -32,23 +32,38 @@ class Affiliate extends AffiliateCore
      *
      * @param string $sUsername The Affiliate Username.
      * @return void
+     * @internal Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database.
      */
     public function addRefer($sUsername)
     {
-        /* Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database */
+        $oAffModel = new AffiliateModel;
         $oCookie = new Cookie;
-        $sCookieName = static::COOKIE_PREFIX . $sUsername;
 
-        $iAffId = $this->getId(null, $sUsername, 'Affiliates');
+        $iAffId = $oAffModel->getId(null, $sUsername, 'Affiliates');
 
-        if(!$oCookie->exists($sCookieName)) {
-            $oCookie->set($sCookieName, $iAffId, 3600*24*7); // Set a week
-            (new AffiliateModel)->addRefer($iAffId); // Add a reference only for new clicks (if the cookie does not exist)
-        } else {
-            $oCookie->set($sCookieName, $iAffId, 3600*24*7); // Add an extra week
+        if (!$oCookie->exists(static::COOKIE_NAME))
+        {
+            $this->_setCookie($iAffId, $oCookie); // Set a week
+            $oAffModel->addRefer($iAffId); // Add a reference only for new clicks (if the cookie does not exist)
+        }
+        else
+        {
+            $this->_setCookie($iAffId, $oCookie); // Add an extra week
         }
 
-        unset($oCookie);
+        unset($oAffModel, $oCookie);
+    }
+
+    /**
+     * Set an Affiliate Cookie.
+     *
+     * @param integer $iAffId
+     * @param object \PH7\Framework\Cookie\Cookie $oCookie
+     * @return void
+     */
+    private function _setCookie($iAffId, Cookie $oCookie)
+    {
+        $oCookie->set(static::COOKIE_NAME, $iAffId, 3600*24*7);
     }
 
 }

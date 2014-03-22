@@ -246,7 +246,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      * @param boolean $bCount
      * @param integer $iOffset
      * @param integer $iLimit
-     * @return mixed (object | integer) object for the users list returned or integer for the total number users returned.
+     * @return mixed (object | integer) Object for the users list returned or Integer for the total number users returned.
      */
     public function search(array $aParams, $bCount, $iOffset, $iLimit)
     {

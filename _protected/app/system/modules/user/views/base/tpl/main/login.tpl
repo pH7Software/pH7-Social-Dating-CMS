@@ -18,6 +18,9 @@
   {{ $img_list = ['girls', 'match'] }}
   {{ $img_name = $img_list[mt_rand(0,1)] }}
 
-  <p><a class="pic thumb" href="http://cool-on-web.com"><img src="http://static.cool-on-web.com/img/promo/{img_name}-social-dating-400x280.jpg" alt="Free Online Dating" title="Free Online Dating with cool on Web!"></a></p>
+  {* Check if the URL is HTTPS or not *}
+  {{ $bSecure = Framework\Http\Http::isSsl() }}
+  {{ $domain_url = ($bSecure ? 'https://cool-on-web.com/static' : 'http://static.coolonweb.com') }}
+  <p><a class="pic thumb" href="http://cool-on-web.com"><img src="{domain_url}/img/promo/{img_name}-social-dating-400x280.jpg" alt="{lang 'Free Online Dating'}" title="{lang 'Free Online Dating with cool on Web!'}"></a></p>
 
 </div>

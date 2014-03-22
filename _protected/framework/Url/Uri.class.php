@@ -65,7 +65,7 @@ class Uri
      * Gets URI fragment.
      *
      * @param integer $iKey The uri key.
-     * @return mixed boolean|string Returns false if key is not found otherwise string of the fragment URI if success.
+     * @return mixed boolean|string Returns FALSE if key is not found, otherwise STRING of the fragment URI if success.
      */
     public function fragment($iKey)
     {

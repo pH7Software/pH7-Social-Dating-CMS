@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Affiliate / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class AccountController extends Controller
 {
@@ -17,6 +17,11 @@ class AccountController extends Controller
         $this->sTitle = t('Account - Affiliate');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
+        $this->view->currency_sign = $this->str->trim($this->config->values['module.setting']['currency_sign']);
+        $this->view->min_withdrawal = $this->config->values['module.setting']['min_withdrawal_money'];
+        $this->view->amount = (new AffiliateModel)->getAmount($this->session->get('affiliate_id'));
+        $this->view->contact_url = Uri::get('contact', 'contact', 'index');
 
         $this->output();
     }
@@ -49,7 +54,7 @@ class AccountController extends Controller
         if ($this->httpRequest->get('delete_status') == 'yesdelete')
         {
             $this->session->set('yes_delete', 1);
-            Framework\Url\HeaderUrl::redirect(Uri::get('affiliate', 'account', 'yesdelete'));
+            HeaderUrl::redirect(Uri::get('affiliate', 'account', 'yesdelete'));
         }
         elseif ($this->httpRequest->get('delete_status') == 'nodelete')
         {
@@ -74,14 +79,14 @@ class AccountController extends Controller
     public function yesDelete()
     {
         if (!$this->session->exists('yes_delete'))
-            Framework\Url\HeaderUrl::redirect(Uri::get('affiliate', 'account', 'delete'));
+            HeaderUrl::redirect(Uri::get('affiliate', 'account', 'delete'));
         else
             $this->output();
     }
 
     public function activate($sMail, $sHash)
     {
-        (new UserCore)->activateAccount($sMail, $sHash, 'affiliate');
+        (new UserCore)->activateAccount($sMail, $sHash, $this->config, $this->registry, 'affiliate');
     }
 
 }

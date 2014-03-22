@@ -20,3 +20,15 @@ CREATE TABLE IF NOT EXISTS pH7_License (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_License VALUES (1, '');
+
+ALTER TABLE pH7_Members ADD COLUMN affiliatedId int(10) unsigned NOT NULL DEFAULT 0;
+ALTER TABLE pH7_Affiliates ADD COLUMN affiliatedId int(10) unsigned NOT NULL DEFAULT 0;
+ALTER TABLE pH7_Subscribers ADD COLUMN affiliatedId int(10) unsigned NOT NULL DEFAULT 0;
+
+
+ALTER TABLE pH7_Affiliates CHANGE paymentLast lastPayment decimal(8,2) NOT NULL DEFAULT '0.00';
+ALTER TABLE pH7_Affiliates CHANGE paymentLastDate lastPaymentDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00';
+ALTER TABLE pH7_Affiliates CHANGE payment totalPayment decimal(8,2) NOT NULL DEFAULT '0.00';
+ALTER TABLE pH7_Affiliates CHANGE summary amount decimal(8,2) NOT NULL DEFAULT '0.00';
+ALTER TABLE pH7_AffiliatesInfo ADD COLUMN taxId varchar(40) DEFAULT NULL;
+ALTER TABLE pH7_Affiliates DROP COLUMN credits;

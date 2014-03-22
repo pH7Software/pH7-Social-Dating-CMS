@@ -24,7 +24,7 @@ class HomeController extends Controller
 
     public function activate($sMail, $sHash)
     {
-        (new UserCore)->activateAccount($sMail, $sHash, 'newsletter');
+        (new UserCore)->activateAccount($sMail, $sHash, $this->config, $this->registry, 'newsletter');
     }
 
 }

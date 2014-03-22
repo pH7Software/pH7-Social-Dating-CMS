@@ -30,6 +30,14 @@ class AdminController extends Controller
         Framework\Url\HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), t('Welcome to the administration of Ad Affiliate'));
     }
 
+    public function config()
+    {
+        $this->sTitle = t('Affiliate Settings');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
+        $this->output();
+    }
+
     public function banner()
     {
         Framework\Url\HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'));

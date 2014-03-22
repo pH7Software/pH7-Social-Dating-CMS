@@ -17,11 +17,11 @@ interface IApi
     /**
      * Set an user authentication.
      *
-     * @param object \PH7\UserCoreModel $oUserModel
      * @param integer $iId
+     * @param object \PH7\UserCoreModel $oUserModel
      * @return void
      */
-    public function setLogin(UserCoreModel $oUserModel, $iId);
+    public function setLogin($iId, UserCoreModel $oUserModel);
 
     /**
      * Set Avatar.

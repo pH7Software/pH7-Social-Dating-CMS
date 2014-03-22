@@ -38,8 +38,7 @@ class UpgradeCore
 
     UPGRADE_FILE = 'upgrade.sql',
     INST_INTRO_FILE = 'introduction',
-    INST_CONCL_FILE = 'conclusion',
-    CONFIG_FILE = 'config.ini';
+    INST_CONCL_FILE = 'conclusion';
 
     private
     $_oHttpRequest,
@@ -254,12 +253,12 @@ class UpgradeCore
         if(!isDebug())
         {
             $this->_aErrors[] = t('You must put your site in development mode in order to launch the upgrade of your site!') . '<br />' .
-            t('1) Please change the permission of the ~%0% file for writing for all groups (0666 in octal).', PH7_PATH_APP_CONFIG . 'config.ini') . '<br />' .
-            t('2) Edit ~%0% file and find the code:', PH7_PATH_APP_CONFIG . 'config.ini') . '<br />' .
+            t('1) Please change the permission of the ~%0% file for writing for all groups (0666 in octal).', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
+            t('2) Edit ~%0% file and find the code:', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
             '"<code>environment = production ; production or development</code>"<br />' .
              t('and replace it with the code:') . '<br />' .
              '"<code>environment = development ; production or development</code>"<br />' .
-             t('3) After installation, please edit ~%0% file and find the code:', PH7_PATH_APP_CONFIG . 'config.ini') . '<br />' .
+             t('3) After installation, please edit ~%0% file and find the code:', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
              '"<code>environment = development ; production or development</code>"<br />' .
              t('and replace it with the code:') . '<br />' .
              '"<code>environment = production ; production or development</code>"<br />' .
@@ -331,7 +330,7 @@ class UpgradeCore
     private function _checkUpgradeFolder($sFolder)
     {
         $sFullPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder;
-        return (!preg_match('#^' . Version::PATTERN . '\-' . Version::PATTERN . '#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . PH7_DS . static::CONFIG_FILE)) ? false : true;
+        return (!preg_match('#^' . Version::PATTERN . '\-' . Version::PATTERN . '#', $sFolder) || !is_file($sFullPath . static::INFO_DIR . PH7_DS . PH7_CONFIG_FILE)) ? false : true;
     }
 
     /**
@@ -393,7 +392,7 @@ class UpgradeCore
      */
     private function _readConfig()
     {
-        return $this->_oConfig->load(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . static::CONFIG_FILE);
+        return $this->_oConfig->load(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . PH7_CONFIG_FILE);
     }
 
     /**

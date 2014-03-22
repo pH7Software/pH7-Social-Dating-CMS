@@ -14,6 +14,22 @@ class AffiliateCoreModel extends AdminCoreModel
 {
 
     /**
+     * Update Affiliate Commission.
+     *
+     * @param integer $iProfileId Affiliate ID.
+     * @param integer $iAffCom Amount.
+     * @return boolean Returns TRUE on success or FALSE on failure.
+     */
+    public function updateUserJoinCom($iProfileId, $iAffCom)
+    {
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Affiliates') . 'SET amount = amount + :amount WHERE profileId = :profileId LIMIT 1');
+        $rStmt->bindValue(':amount', $iAffCom, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        Db::free($rStmt);
+        return $rStmt->execute();
+    }
+
+    /**
      * Delete Affiliate.
      *
      * @param integer $iProfileId

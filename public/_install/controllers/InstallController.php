@@ -371,71 +371,78 @@ class InstallController extends Controller
                                     {
                                         if (validate_identical($_SESSION['value']['admin_password'], $_SESSION['value']['admin_passwords']))
                                         {
-                                            if (validate_name($_SESSION['value']['admin_first_name']))
+                                            if (!find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_username']) || !find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_first_name']) || !find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_last_name']))
                                             {
-                                                if (validate_name($_SESSION['value']['admin_last_name']))
+                                                if (validate_name($_SESSION['value']['admin_first_name']))
                                                 {
-                                                    @require_once(PH7_ROOT_PUBLIC . '_constants.php');
-                                                    @require_once(PH7_PATH_APP . 'configs/constants.php');
-
-                                                    require(PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php');
-                                                    // To load "Security" and "Various" class.
-                                                    Framework\Loader\Autoloader::getInstance()->init();
-
-                                                    try
+                                                    if (validate_name($_SESSION['value']['admin_last_name']))
                                                     {
-                                                        require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
+                                                        @require_once(PH7_ROOT_PUBLIC . '_constants.php');
+                                                        @require_once(PH7_PATH_APP . 'configs/constants.php');
 
-                                                        // SQL EXECUTE
-                                                        $oSqlQuery = $DB->prepare('INSERT INTO ' . $_SESSION['db']['db_prefix'] . 'Admins
-                                                        (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
-                                                        VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)');
+                                                        require(PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php');
+                                                        // To load "Security" and "Various" class.
+                                                        Framework\Loader\Autoloader::getInstance()->init();
 
-                                                        $sCurrentDate = date('Y-m-d H:i:s');
-                                                        $oSqlQuery->execute(array(
-                                                            'username' => $_SESSION['value']['admin_username'],
-                                                            'password' => Framework\Security\Security::hashPwd($_SESSION['value']['admin_password']),
-                                                            'email' => $_SESSION['value']['admin_login_email'],
-                                                            'firstName'=> $_SESSION['value']['admin_first_name'],
-                                                            'lastName'=> $_SESSION['value']['admin_last_name'],
-                                                            'joinDate'=> $sCurrentDate,
-                                                            'lastActivity' => $sCurrentDate,
-                                                            'ip' => client_ip()
-                                                        ));
+                                                        try
+                                                        {
+                                                            require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
 
-                                                        $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :adminEmail WHERE name = \'adminEmail\'');
-                                                        $oSqlQuery->execute(array(
-                                                            'adminEmail' => $_SESSION['value']['admin_email']
-                                                        ));
+                                                            // SQL EXECUTE
+                                                            $oSqlQuery = $DB->prepare('INSERT INTO ' . $_SESSION['db']['db_prefix'] . 'Admins
+                                                            (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
+                                                            VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)');
 
-                                                        $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :feedbackEmail WHERE name = \'feedbackEmail\'');
-                                                        $oSqlQuery->execute(array(
-                                                            'feedbackEmail' => $_SESSION['value']['admin_feedback_email']
-                                                        ));
+                                                            $sCurrentDate = date('Y-m-d H:i:s');
+                                                            $oSqlQuery->execute(array(
+                                                                'username' => $_SESSION['value']['admin_username'],
+                                                                'password' => Framework\Security\Security::hashPwd($_SESSION['value']['admin_password']),
+                                                                'email' => $_SESSION['value']['admin_login_email'],
+                                                                'firstName'=> $_SESSION['value']['admin_first_name'],
+                                                                'lastName'=> $_SESSION['value']['admin_last_name'],
+                                                                'joinDate'=> $sCurrentDate,
+                                                                'lastActivity' => $sCurrentDate,
+                                                                'ip' => client_ip()
+                                                            ));
 
-                                                        $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :returnEmail WHERE name = \'returnEmail\'');
-                                                        $oSqlQuery->execute(array(
-                                                            'returnEmail' => $_SESSION['value']['admin_return_email']
-                                                        ));
+                                                            $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :adminEmail WHERE name = \'adminEmail\'');
+                                                            $oSqlQuery->execute(array(
+                                                                'adminEmail' => $_SESSION['value']['admin_email']
+                                                            ));
+
+                                                            $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :feedbackEmail WHERE name = \'feedbackEmail\'');
+                                                            $oSqlQuery->execute(array(
+                                                                'feedbackEmail' => $_SESSION['value']['admin_feedback_email']
+                                                            ));
+
+                                                            $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :returnEmail WHERE name = \'returnEmail\'');
+                                                            $oSqlQuery->execute(array(
+                                                                'returnEmail' => $_SESSION['value']['admin_return_email']
+                                                            ));
 
 
-                                                        $_SESSION['step5'] = 1;
+                                                            $_SESSION['step5'] = 1;
 
-                                                        redirect(PH7_URL_SLUG_INSTALL . 'service');
+                                                            redirect(PH7_URL_SLUG_INSTALL . 'service');
+                                                        }
+                                                        catch (\PDOException $oE)
+                                                        {
+                                                            $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
+                                                        }
                                                     }
-                                                    catch (\PDOException $oE)
+                                                    else
                                                     {
-                                                        $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
+                                                        $aErrors[] = $LANG['bad_last_name'];
                                                     }
                                                 }
                                                 else
                                                 {
-                                                    $aErrors[] = $LANG['bad_last_name'];
+                                                    $aErrors[] = $LANG['bad_first_name'];
                                                 }
                                             }
                                             else
                                             {
-                                                $aErrors[] = $LANG['bad_first_name'];
+                                                $aErrors[] = $LANG['insecure_password'];
                                             }
                                         }
                                         else
@@ -470,7 +477,7 @@ class InstallController extends Controller
                                 }
                                 elseif (validate_username($_SESSION['value']['admin_username']) == 3)
                                 {
-                                    $aErrors[] = $LANG['username_bad_username'];
+                                    $aErrors[] = $LANG['bad_username'];
                                 }
                             }
                             else

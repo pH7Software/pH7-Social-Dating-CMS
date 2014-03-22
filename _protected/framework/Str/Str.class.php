@@ -287,7 +287,7 @@ defined('PH7') or exit('Restricted access');
       * @access protected
       * @param string $sText
       * @param boolean $bStrip
-      * @return The text parsed by Str::stripTags() method if $bStrip parameter is TRUE otherwise by Str::htmlSpecialChars method.
+      * @return The text parsed by Str::stripTags() method if $bStrip parameter is TRUE, otherwise by Str::htmlSpecialChars method.
       */
      protected function CEscape($sText, $bStrip)
      {
