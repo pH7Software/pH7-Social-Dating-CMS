@@ -13,17 +13,15 @@ class RouterController extends Controller
     /**
      * Set the reference to the visitor.
      *
-     * @param string $sAff Affiliate's username (his ID). Default: NULL
-     * @param string $sAction Change the redirect URL. Default: ''
      * @return void
      */
-    public function refer($sAff = null, $sAction = '')
+    public function refer()
     {
-        if (!empty($sAff))
-            if ((new ExistsCoreModel)->username($sAff, 'Affiliates'))
-                (new Affiliate)->addRefer($sAff);
+        if ($this->httpRequest->getExists('aff'))
+            if ((new ExistsCoreModel)->username($this->httpRequest->get('aff'), 'Affiliates'))
+                (new Affiliate)->addRefer($this->httpRequest->get('aff'));
 
-        Framework\Url\HeaderUrl::redirect($this->registry->site_url . $sAction);
+        Framework\Url\HeaderUrl::redirect($this->registry->site_url . $this->httpRequest->get('action'));
     }
 
 }

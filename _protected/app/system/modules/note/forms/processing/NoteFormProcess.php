@@ -81,7 +81,7 @@ class NoteFormProcess extends Form
 
                 // Thumbnail
                 $oPost = $oNoteModel->readPost($aData['post_id'], $iProfileId, null);
-                $oNote->setThumb($this->file, $oNoteModel, $oPost);
+                $oNote->setThumb($oPost, $oNoteModel, $this->file);
 
                 /* Clean NoteModel Cache */
                 (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();

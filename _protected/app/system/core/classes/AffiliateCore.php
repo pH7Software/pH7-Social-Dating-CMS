@@ -6,12 +6,13 @@
  * @package        PH7 / App / System / Core / Class
  */
 namespace PH7;
+use PH7\Framework\Config\Config, PH7\Framework\Registry\Registry;
 
 // Abstract Class
 class AffiliateCore extends UserCore
 {
 
-    const COOKIE_PREFIX = 'pHSAff_';
+    const COOKIE_NAME = 'pHSAff';
 
     /**
      * Affiliates'levels.
@@ -29,6 +30,28 @@ class AffiliateCore extends UserCore
         unset($oSession, $oBrowser);
 
         return $bIsConnect;
+    }
+
+    /**
+     * Update the Affiliate Commission.
+     *
+     * @param integer $iAffId Affiliate ID
+     * @param object \PH7\Framework\Config\Config $oConfig
+     * @param object \PH7\Framework\Registry\Registry $oRegistry
+     * @return void
+     */
+    public static function updateJoinCom($iAffId, Config $oConfig, Registry $oRegistry)
+    {
+        if ($iAffId < 1) return; // If there is no valid ID, we stop the method.
+
+        // Load the Affiliate config file
+        $oConfig->load(PH7_PATH_SYS_MOD . 'affiliate' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
+
+        $sType = ($oRegistry->module == 'newsletter' ? 'newsletter' : ($oRegistry->module == 'affiliate' ? 'affiliate' : 'user'));
+        $iAffCom = $oConfig->values['module.setting']['commission.join_' . $sType . '_money'];
+
+        if ($iAffCom > 0)
+            (new AffiliateCoreModel)->updateUserJoinCom($iAffId, $iAffCom);
     }
 
     /**

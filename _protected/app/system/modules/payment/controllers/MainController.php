@@ -10,6 +10,8 @@
  */
 namespace PH7;
 
+use PH7\Framework\Cookie\Cookie;
+
 class MainController extends Controller
 {
 
@@ -18,7 +20,7 @@ class MainController extends Controller
      * @var object $oPayModel
      * @var string $sTitle
      */
-    protected $oPayModel, $sTitle;
+    protected $oAffModel, $oPayModel, $sTitle, $iProfileId;
 
     /**
      * @access private
@@ -30,7 +32,9 @@ class MainController extends Controller
     {
         parent::__construct();
 
+        $this->oAffModel = new AffiliateCoreModel;
         $this->oPayModel = new PaymentModel;
+        $this->iProfileId = $this->session->get('member_id');
     }
 
     public function index()
@@ -94,7 +98,7 @@ class MainController extends Controller
                 $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enable']);
                 if ($oPayPal->valid() && $this->httpRequest->postExists('item_number'))
                 {
-                    if ((new UserCoreModel)->updateMembership($this->httpRequest->post('item_number'), $this->session->get('member_id'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    if ($this->oAffModel->updateMembership($this->httpRequest->post('item_number'), $this->iProfileId, $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
                         $this->log($oPayPal, t('PayPal payment was made, the following information:'));
                         $this->_bStatus = true; // Status is OK
@@ -112,7 +116,7 @@ class MainController extends Controller
 
                 if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id'))
                 {
-                    if ((new UserCoreModel)->updateMembership($this->httpRequest->post('sale_id'), $this->session->get('member_id'), $this->httpRequest->post('price'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    if ($this->oAffModel->updateMembership($this->httpRequest->post('sale_id'), $this->iProfileId, $this->httpRequest->post('price'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
                         $this->log($o2CO, t('2CheckOut payment was made, the following information:'));
                         $this->_bStatus = true; // Status is OK
@@ -138,6 +142,11 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
+        if ($this->_bStatus)
+        {
+            $this->updateAffCom();
+        }
+
         // Set the valid page
         $sPage = ($this->_bStatus) ? 'success' : 'error';
         $this->manualTplInclude($sPage . $this->view->getTplExt());
@@ -147,11 +156,33 @@ class MainController extends Controller
     }
 
     /**
+     * Update the Affiliate Commission.
+     *
+     * @return void
+     */
+    protected function updateAffCom()
+    {
+        // Load the Affiliate config file
+        $this->config->load(PH7_PATH_SYS_MOD . 'affiliate' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
+
+        $iAffId = (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME);
+        if ($iAffId < 1) return; // If there is no valid ID, we stop the method.
+
+        $iAmount = $this->oAffModel->readProfile($this->iProfileId)->price;
+        $iAffCom = ($iAmount*$this->config->values['module.setting']['rate.user_membership_payment']/100);
+
+        if ($iAffCom > 0)
+            $this->oAffModel->updateUserJoinCom($iAffId, $iAffCom);
+    }
+
+    /**
+     * Create a Payment Log file.
+     *
      * @param object $oProvider A provider class.
      * @param string $sMsg
      * @return void
      */
-    private function log($oProvider, $sMsg)
+    protected function log($oProvider, $sMsg)
     {
         if ($this->config->values['module.setting']['log_file.enable'])
         {

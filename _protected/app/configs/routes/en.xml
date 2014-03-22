@@ -13,7 +13,7 @@
       <route url="resend-activation" path="system/modules" module="user" controller="main" action="resendactivation" />
       <route url="user/setting/delete-account/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="delete" vars="delete_status" />
       <!-- admin -->
-      <route url="user/edit/([0-9]+)" path="system/modules" module="user" controller="setting" action="edit" vars="profile_id" />
+      <route url="user/edit/?([0-9]+)?" path="system/modules" module="user" controller="setting" action="edit" vars="profile_id" />
       <route url="user/avatar/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="avatar" vars="profile_id,username,first_name,sex" />
       <route url="user/design/?([0-9]+)?/?([a-zA-Z0-9_-]+)?/?([^/]+)?/?([a-z]+)?" path="system/modules" module="user" controller="setting" action="design" vars="profile_id,username,first_name,sex" />
 
@@ -173,7 +173,7 @@
       <route url="affiliate/login" path="system/modules" module="affiliate" controller="home" action="login" />
       <route url="affiliate/resend-activation" path="system/modules" module="affiliate" controller="home" action="resendactivation" />
       <!-- admin -->
-      <route url="affiliate/edit/([0-9]+)" path="system/modules" module="affiliate" controller="account" action="edit" vars="profile_id" />
+      <route url="affiliate/edit/?([0-9]+)?" path="system/modules" module="affiliate" controller="account" action="edit" vars="profile_id" />
 
     <!-- Lost Password -->
       <route url="forgot/([a-zA-Z0-9_-]+)" path="system/modules" module="lost-password" controller="main" action="forgot" vars="mod" />

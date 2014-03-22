@@ -12,6 +12,7 @@ use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Security\Security,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 class LoginFormProcess extends Form
@@ -72,7 +73,7 @@ class LoginFormProcess extends Form
             {
                 // We hash again the password
                 (new Framework\Cookie\Cookie)->set(
-                    array('member_remember' => Framework\Security\Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId)
+                    array('member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId)
                 );
             }
 
@@ -83,7 +84,7 @@ class LoginFormProcess extends Form
             }
             else
             {
-                $oUser->setAuth($oUserModel, $this->session, $oUserData);
+                $oUser->setAuth($oUserData, $oUserModel, $this->session);
                 HeaderUrl::redirect(Uri::get('user','account','index'), t('You signup is successfully!'));
             }
         }

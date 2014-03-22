@@ -61,7 +61,7 @@ class EditNoteFormProcess extends Form
         }
 
         // Thumbnail
-        $oNote->setThumb($this->file, $oNoteModel, $oPost);
+        $oNote->setThumb($oPost, $oNoteModel, $this->file);
 
         if(!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oNoteModel->updatePost('title', $this->httpRequest->post('title'), $iNoteId, $iProfileId);

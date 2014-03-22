@@ -14,11 +14,11 @@ class Blog extends WriteCore
     /**
      * Sets the Blog Thumbnail.
      *
-     * @param \PH7\Framework\File\File $oFile
      * @param object $oPost
+     * @param \PH7\Framework\File\File $oFile
      * @return void
      */
-    public function setThumb(Framework\File\File $oFile, $oPost)
+    public function setThumb($oPost, Framework\File\File $oFile)
     {
         if (!empty($_FILES['thumb']['tmp_name']))
         {

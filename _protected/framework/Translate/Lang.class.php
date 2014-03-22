@@ -19,6 +19,8 @@ namespace PH7\Framework\Translate
  class Lang
  {
 
+     const COOKIE_NAME = 'pHSLang';
+
      private $_oConfig, $_sDefaultLang, $_sUserLang, $_sLangName;
 
      public function __construct()
@@ -30,11 +32,11 @@ namespace PH7\Framework\Translate
          if (!empty($_REQUEST['l']) && strlen($_REQUEST['l']) == 5)
          {
              $this->_sUserLang = $_REQUEST['l'];
-             $oCookie->set('site_lang', $this->_sUserLang, 60*60*48);
+             $oCookie->set(static::COOKIE_NAME, $this->_sUserLang, 60*60*48);
          }
-         else if ($oCookie->exists('site_lang'))
+         else if ($oCookie->exists(static::COOKIE_NAME))
          {
-             $this->_sUserLang = $oCookie->get('site_lang');
+             $this->_sUserLang = $oCookie->get(static::COOKIE_NAME);
          }
          else
          {
@@ -139,19 +141,19 @@ namespace PH7\Framework\Translate
       */
      private function _loading()
      {
-         if (!empty($this->_sUserLang) && $this->_oConfig->load(PH7_PATH_APP_LANG . $this->_sUserLang . '/config/config.ini') && is_file( PH7_PATH_APP_LANG . $this->_sUserLang . '/language.php' ))
+         if (!empty($this->_sUserLang) && $this->_oConfig->load(PH7_PATH_APP_LANG . $this->_sUserLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . $this->_sUserLang . '/language.php' ))
          {
              $this->_sLangName = $this->_sUserLang;
              include PH7_PATH_APP_LANG . $this->_sUserLang . '/language.php';
              date_default_timezone_set($this->_oConfig->values['language.application']['timezone']);
          }
-         else if ($this->_oConfig->load(PH7_PATH_APP_LANG . $this->_sDefaultLang . '/config/config.ini') && is_file( PH7_PATH_APP_LANG . $this->_sDefaultLang . '/language.php' ))
+         else if ($this->_oConfig->load(PH7_PATH_APP_LANG . $this->_sDefaultLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . $this->_sDefaultLang . '/language.php' ))
          {
              $this->_sLangName = $this->_sDefaultLang;
              include PH7_PATH_APP_LANG . $this->_sDefaultLang . '/language.php';
              date_default_timezone_set($this->_oConfig->values['language.application']['timezone']);
          }
-         else if ($this->_oConfig->load(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/config/config.ini') && is_file( PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php' ))
+         else if ($this->_oConfig->load(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php' ))
          {
              $this->_sLangName = PH7_DEFAULT_LANG;
              include PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php';
@@ -159,7 +161,7 @@ namespace PH7\Framework\Translate
          }
          else
          {
-             throw new Exception('Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . 'config' . PH7_DS . 'config.ini\' and/or Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . 'language.php\' not found.');
+             throw new Exception('Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' and/or Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . 'language.php\' not found.');
          }
      }
 

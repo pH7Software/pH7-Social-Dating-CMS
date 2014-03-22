@@ -340,5 +340,6 @@ Framework\Registry\Registry::getInstance()->lang = array(
     'street' => 'Street:',
     'middlename' => 'Middle Name:',
     'businessname' => 'Business Name:',
+    'taxid' => 'Tax ID, VAT or SSN:',
 
 );

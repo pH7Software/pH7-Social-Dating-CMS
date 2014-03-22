@@ -6,7 +6,7 @@
     {* For LoginUserAs of Admin Panel *}
       {if AdminCore::auth() && $oSession->exists('login_user_as') }
         <p class="bold center"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to admin panel.{/lang}</a></p>
-      {elseif  AdminCore::auth() && $oSession->exists('login_affiliate_as') }
+      {elseif AdminCore::auth() && $oSession->exists('login_affiliate_as') }
         <p class="bold center"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to admin panel.{/lang}</a></p>
       {/if}
 
@@ -14,7 +14,14 @@
     {* Menu for All *}
       <nav role="navigation">
         <ul class="top_nav">
-          <li{if $current_url == $url_root} class="current"{/if}><a href="{if AdminCore::auth()}{{ $design->url(PH7_ADMIN_MOD,'main','index') }}{else}{url_root}{/if}" title="{lang 'Home'}">{lang 'Home'}</a></li>
+          <li{if $current_url == $url_root} class="current"{/if}><a href="
+          {if AdminCore::auth()}
+              {{ $design->url(PH7_ADMIN_MOD,'main','index') }}
+          {elseif AffiliateCore::auth()}
+              {{ $design->url('affiliate','account','index') }}
+          {else}
+              {url_root}
+          {/if}" title="{lang 'Home'}">{lang 'Home'}</a></li>
 
 
     {* Guest Menu *}
@@ -275,6 +282,7 @@
                 <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}">{lang 'Browse Affiliates'}</a></li>
                 <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}">{lang 'Search an Affiliate'}</a></li>
                 <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add Affiliate'}">{lang 'Add Affiliate'}</a></li>
+                <li><a href="{{ $design->url('affiliate','admin','config') }}" title="{lang 'Affiliate Settings'}">{lang 'Settings'}</a></li>
                 <li><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}">{lang 'Affiliate Fields'}</a>
                   <ul>
                     <li><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Fields List'}">{lang 'Fields List'}</a></li>

@@ -65,6 +65,9 @@ class SettingFormProcess extends Form
                 $this->file->deleteFile($sPathName); // It erases the old logo.
                 $oLogo->dynamicResize(250,60);
                 $oLogo->save($sPathName);
+
+                // Clear CSS cache
+                $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Gzip::CACHE_DIR);
             }
         }
 
@@ -296,6 +299,7 @@ class SettingFormProcess extends Form
 
         if(!$this->str->equals($this->httpRequest->post('chatroulette_api'), DbConfig::getSetting('chatrouletteApi')))
             DbConfig::setSetting($this->httpRequest->post('chatroulette_api'), 'chatrouletteApi');
+
 
         /********** Automation **********/
 

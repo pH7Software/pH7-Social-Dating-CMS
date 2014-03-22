@@ -25,7 +25,6 @@ class BannerForm
         unset($oPage, $oAdsModel);
 
         $oSysVar = new SysVar;
-
         foreach ($oAds as $oRow)
         {
             // Begin ads div tags

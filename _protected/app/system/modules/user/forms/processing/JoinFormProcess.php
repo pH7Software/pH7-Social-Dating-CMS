@@ -13,6 +13,7 @@ PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Security\Security,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Util\Various,
+PH7\Framework\Cookie\Cookie,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Date\CDateTime,
 PH7\Framework\Mvc\Router\Uri,
@@ -34,6 +35,7 @@ class JoinFormProcess extends Form
 
     public function step1()
     {
+        $iAffId = (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME);
         $sRef = ($this->session->exists('joinRef')) ? $this->session->get('joinRef') : t('No reference'); // Statistics
         $this->session->remove('joinRef');
 
@@ -46,7 +48,8 @@ class JoinFormProcess extends Form
             'hash_validation' => Various::genRnd(),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
             'is_active' => $this->iActiveType,
-            'group_id' => (int) DbConfig::getSetting('defaultMembershipGroupId')
+            'group_id' => (int) DbConfig::getSetting('defaultMembershipGroupId'),
+            'affiliate_id' => $iAffId
         ];
         $aData += ['password' => Security::hashPwd($this->httpRequest->post('password'))];
 
@@ -62,7 +65,11 @@ class JoinFormProcess extends Form
         }
         else
         {
-            // Register successfully in database for step 1!
+            // Successful registration in the database for step 1!
+
+            /** Update the Affiliate Commission **/
+            if ($this->iActiveType == 0) // Only if the user's account is already activated.
+                AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
 
             // Send email
             $this->oRegistration->sendMail($aData);

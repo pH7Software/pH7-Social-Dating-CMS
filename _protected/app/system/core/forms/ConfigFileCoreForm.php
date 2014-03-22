@@ -51,7 +51,7 @@ class ConfigFileCoreForm
                 $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array(1 => t('Enable'), 0 => t('Disable')), array('value' => $sVal)));
             elseif (false !== strpos($sKey, 'email'))
                 $oForm->addElement(new \PFBC\Element\Email($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
-            elseif (is_numeric($sVal))
+            elseif (ctype_digit($sVal))
                 $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
             else
                 $oForm->addElement(new \PFBC\Element\Textbox($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));

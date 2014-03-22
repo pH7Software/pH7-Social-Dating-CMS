@@ -119,13 +119,13 @@ final class FrontController
                 $this->oRegistry->module = $oRoute->getAttribute('module');
 
                 // Check if file exist
-                if (!$this->oConfig->load(PH7_PATH_APP . $sPathModule . $this->oRegistry->module . '/config/config.ini'))
+                if (!$this->oConfig->load(PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
                 {
                     $this->notFound('The module <b>' . $this->oRegistry->module .
                             '</b> of system not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS .
-                            '</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . 'config' . PH7_DS . 'config.ini</b>');
+                            '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
                     // It reloads the config.ini file for the new module "error"
-                    $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini');
+                    $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
                 }
 
                 /***** PATH THE MODULE *****/
@@ -195,13 +195,13 @@ final class FrontController
         }
 
         // Check if file exist
-        if (!$this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . '/config/config.ini') || $this->isIndexFile())
+        if (!$this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) || $this->isIndexFile())
         {
             $this->notFound('The module <b>' . $this->oRegistry->module . '</b> of system not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS .
-                '</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . 'config' . PH7_DS . 'config.ini</b>');
+                '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
 
             // It reloads the config.ini file for the new module "error"
-            $this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . '/config/config.ini');
+            $this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
         }
 
         /***** PATH THE MODULE *****/
@@ -269,12 +269,12 @@ final class FrontController
         }
 
         // Check if file exist
-        if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini'))
+        if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
         {
             $this->notFound('The module <b>' . $this->oRegistry->module . '</b> not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS .
-                '</b><br /> or the <b>config.ini</b> file not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . 'config' . PH7_DS . 'config.ini</b>');
+                '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
             // It reloads the config.ini file for the new module "error"
-            $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . '/config/config.ini');
+            $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
         }
 
         /***** PATH THE MODULE *****/
@@ -551,7 +551,7 @@ final class FrontController
         $this->oRegistry->path_module_controller = $this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php';
         /***** FOR FILE CONFIG .INI OF MODULE *****/
 
-        $this->oConfig->load($this->oRegistry->path_module . '/config/config.ini');
+        $this->oConfig->load($this->oRegistry->path_module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
         define('PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme']);
 
         $this->_templateInitialize();

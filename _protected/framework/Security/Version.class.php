@@ -13,7 +13,7 @@
 namespace PH7\Framework\Security;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel;
+use PH7\Framework\Core\Kernel, PH7\Framework\Security\Validate\Validate;
 
 final class Version
 {
@@ -59,6 +59,7 @@ final class Version
             {
                 foreach($oSoft->getElementsByTagName('social-dating-cms') as $oInfo)
                 {
+                    $bIsAlert = (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
                     $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
                     $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
                     $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
@@ -66,7 +67,7 @@ final class Version
             }
             unset($oDom);
 
-            $mData = array('name' => $sVerName, 'version' => $sVerNumber, 'build' => $sVerBuild);
+            $mData = array('is_alert' => $bIsAlert, 'name' => $sVerName, 'version' => $sVerNumber, 'build' => $sVerBuild);
             $oCache->put($mData);
         }
         unset($oCache);
@@ -83,12 +84,13 @@ final class Version
     {
         if(!$aLatestInfo = self::getLatestInfo()) return false;
 
+        $bIsAlert = $aLatestInfo['is_alert'];
         $sLastName = $aLatestInfo['name'];
         $sLastVer = $aLatestInfo['version'];
         $sLastBuild = $aLatestInfo['build'];
         unset($aLatestInfo);
 
-        if(!is_string($sLastName) || !preg_match('#^' . self::PATTERN . '$#', $sLastVer)) return false;
+        if(!$bIsAlert || !is_string($sLastName) || !preg_match('#^' . self::PATTERN . '$#', $sLastVer)) return false;
 
         if(version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '=='))
         {

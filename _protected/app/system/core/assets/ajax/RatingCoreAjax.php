@@ -73,7 +73,9 @@ class RatingCoreAjax
             }
         }
 
-        /* Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database */
+        /**
+         * @internal Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database.
+         */
         $oCookie = new Cookie;
         $sCookieName = 'pHSVoting' . $this->_iId . $this->_sTable;
         if($oCookie->exists($sCookieName))

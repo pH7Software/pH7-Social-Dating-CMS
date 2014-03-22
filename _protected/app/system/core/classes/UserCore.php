@@ -287,12 +287,12 @@ class UserCore
     /**
      * Set a user authentication.
      *
+     * @param object $oUserData User database object.
      * @param object \PH7\UserCoreModel $oUserModel
      * @param object \PH7\Framework\Session\Session $oSession
-     * @param object $oUserData User database object.
      * @return void
      */
-    public function setAuth(UserCoreModel $oUserModel, Session $oSession, $oUserData)
+    public function setAuth($oUserData, UserCoreModel $oUserModel, Session $oSession)
     {
         // Is disconnected if the user is logged on as "affiliate" or "administrator".
         if (AffiliateCore::auth() || AdminCore::auth()) $oSession->destroy();
@@ -400,10 +400,12 @@ class UserCore
      *
      * @param string $sEmail
      * @param string $sHash
-     * @param string $sMod (user, affiliate, newsletter). Default user
+     * @param object \PH7\Framework\Config\Config $oConfig
+     * @param object \PH7\Framework\Registry\Registry $oRegistry
+     * @param string $sMod (user, affiliate, newsletter). Default 'user'
      * @return void
      */
-    public function activateAccount($sEmail, $sHash, $sMod = 'user')
+    public function activateAccount($sEmail, $sHash, Framework\Config\Config $oConfig, Framework\Registry\Registry $oRegistry, $sMod = 'user')
     {
         $sTableName = Framework\Mvc\Model\Engine\Util\Various::convertModToTable($sMod);
         $sRedirectLoginUrl = ($sMod == 'newsletter' ? PH7_URL_ROOT : ($sMod == 'affiliate' ? Uri::get('affiliate', 'home', 'login') : Uri::get('user', 'main', 'login')));
@@ -416,13 +418,18 @@ class UserCore
             if ($oUserModel->validateAccount($sEmail, $sHash, $sTableName))
             {
                 $iId = $oUserModel->getId($sEmail, null, $sTableName);
-                if ($sMod != 'newsletter') $this->clearReadProfileCache($iId, $sTableName);
+                if ($sMod != 'newsletter')
+                    $this->clearReadProfileCache($iId, $sTableName);
+
+                /** Update the Affiliate Commission **/
+                $iAffId = (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME);
+                AffiliateCore::updateJoinCom($iAffId, $oConfig, $oRegistry);
 
                 HeaderUrl::redirect($sRedirectLoginUrl, $sSuccessMsg);
             }
             else
             {
-                HeaderUrl::redirect($sRedirectLoginUrl, t('Oops! The url is either invalid or you already have activated your account.'), 'error');
+                HeaderUrl::redirect($sRedirectLoginUrl, t('Oops! The URL is either invalid or you already have activated your account.'), 'error');
             }
             unset($oUserModel);
         }

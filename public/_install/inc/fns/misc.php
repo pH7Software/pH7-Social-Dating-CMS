@@ -131,6 +131,30 @@ function validate_email($sEmail)
 }
 
 /**
+ * Check a string identical.
+ *
+ * @param string $sVal1
+ * @param string $sVal2
+ * @return boolean
+ */
+function validate_identical($sVal1, $sVal2)
+{
+    return ($sVal1 === $sVal2);
+}
+
+/**
+ * Find a word in a sentence.
+ *
+ * @param string $sText Sentence.
+ * @param string $sWord Word to find.
+ * @return boolean Returns TRUE if the word is found, FALSE otherwise.
+ */
+function find($sText, $sWord)
+{
+    return (bool) stripos($sText, $sWord);
+}
+
+/**
  * Check that all fields are filled.
  *
  * @param array $aVars
@@ -142,18 +166,6 @@ function filled_out($aVars)
         if (empty($sKey) || trim($sVal) == '')
             return false;
     return true;
-}
-
-/**
- * Check a string identical.
- *
- * @param string $sVal1
- * @param string $sVal2
- * @return boolean
- */
-function validate_identical($sVal1, $sVal2)
-{
-    return ($sVal1 === $sVal2);
 }
 
 /**

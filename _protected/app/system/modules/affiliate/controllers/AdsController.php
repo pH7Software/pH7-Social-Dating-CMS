@@ -25,7 +25,7 @@ class AdsController extends Controller
         $this->sTitle = t('Banners');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
-        $this->view->h4_title = nt('%n% Banner', '%n% Banners', $iTotalAds);
+        $this->view->h3_title = nt('%n% Banner', '%n% Banners', $iTotalAds);
         $this->output();
     }
 

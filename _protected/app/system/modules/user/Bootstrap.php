@@ -20,7 +20,7 @@ if (!UserCore::auth() && Framework\Registry\Registry::getInstance()->action != '
             $oUser = $oUserModel->readProfile($oCookie->get('member_id'));
             if ($oCookie->get('member_remember') === Framework\Security\Security::hashCookie($oUser->password))
             {
-                (new UserCore)->setAuth($oUserModel, new Framework\Session\Session, $oUser);
+                (new UserCore)->setAuth($oUser, $oUserModel, new Framework\Session\Session);
             }
         }
     }

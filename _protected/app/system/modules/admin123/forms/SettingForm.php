@@ -62,7 +62,7 @@ class SettingForm
 
         /********** Logo Settings **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="logotype"><h2 class="underline">' . t('Logo:') . '</h2>'));
-        $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo', array('description' => t('If you use the cache for static files, please <a href="%0%">delete Static Files</a> then clear the cache of your Web browser (CTRL+F5) to see your new logo.', Uri::get(PH7_ADMIN_MOD, 'tool', 'cache')), 'accept' => 'image/*')));
+        $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo', array('accept' => 'image/*')));
 
         /** Disable the cache for the logo if the admin modifies **/
         (new Browser)->noCache();

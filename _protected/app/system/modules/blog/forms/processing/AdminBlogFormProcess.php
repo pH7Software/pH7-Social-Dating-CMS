@@ -63,7 +63,7 @@ class AdminBlogFormProcess extends Form
 
                 // Thumbnail
                 $oPost = $oBlogModel->readPost($aData['post_id']);
-                $oBlog->setThumb($this->file, $oPost);
+                $oBlog->setThumb($oPost, $this->file);
 
                 /* Clean BlogModel Cache */
                 (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();

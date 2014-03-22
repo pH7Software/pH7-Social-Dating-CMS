@@ -40,7 +40,7 @@ class AdminController extends MainController
         CommentCoreModel::deleteRecipient($iId, 'Blog');
         $this->oBlogModel->deleteCategory($iId);
         $this->oBlogModel->deletePost($iId);
-        (new Blog)->deleteThumb($this->file, $iId, 'blog');
+        (new Blog)->deleteThumb($iId, 'blog', $this->file);
 
         /* Clean BlogModel Cache  */
         (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
@@ -53,7 +53,7 @@ class AdminController extends MainController
         if(!(new Framework\Security\CSRF\Token)->checkUrl())
             exit(Form::errorTokenMsg());
 
-        (new Blog)->deleteThumb($this->file, $iId, 'blog');
+        (new Blog)->deleteThumb($iId, 'blog', $this->file);
 
         HeaderUrl::redirect(Uri::get('blog', 'admin', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
     }

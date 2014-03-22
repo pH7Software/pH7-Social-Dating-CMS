@@ -49,17 +49,17 @@ abstract class Api
     /**
      * Set an user authentication.
      *
-     * @param object \PH7\UserCoreModel $oUserModel
      * @param integer $iId
+     * @param object \PH7\UserCoreModel $oUserModel
      * @return void
      */
-    public function setLogin(UserCoreModel $oUserModel, $iId)
+    public function setLogin($iId, UserCoreModel $oUserModel)
     {
         $oUserData = $oUserModel->readProfile($iId);
         $oUser = new UserCore;
 
         if(true === ($sErrMsg = $oUser->checkAccountStatus($oUserData)))
-            $oUser->setAuth($oUserModel, new Framework\Session\Session, $oUserData);
+            $oUser->setAuth($oUserData, $oUserModel, new Framework\Session\Session);
 
         unset($oUser, $oUserModel);
 

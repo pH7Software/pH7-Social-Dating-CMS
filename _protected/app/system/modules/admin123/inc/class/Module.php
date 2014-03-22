@@ -28,15 +28,13 @@ class Module
     INSTALL_DIR = 'install',
     SQL_DIR = 'sql',
     INFO_DIR = 'info',
-    CONFIG_DIR = 'config',
     MYSQL_DIR = 'MySql',
 
     INSTALL_SQL_FILE = 'install.sql',
     UNINSTALL_SQL_FILE = 'uninstall.sql',
     INSTALL_INST_CONCL_FILE = 'in_conclusion',
     UNINSTALL_INST_CONCL_FILE = 'un_conclusion',
-    ROUTE_FILE = 'route.xml',
-    CONFIG_FILE = 'config.ini';
+    ROUTE_FILE = 'route.xml';
 
     public function __construct()
     {
@@ -106,7 +104,7 @@ class Module
         $sValue = $this->_checkParam($sSwitch);
         $sFullPath = ($sValue == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder : PH7_PATH_MOD . $sFolder;
 
-        return (!preg_match('#^[a-z0-9\-]{2,35}#i', $sFolder) || !is_file($sFullPath . static::CONFIG_DIR . PH7_DS . static::CONFIG_FILE) || (PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder == PH7_PATH_MOD . $sFolder)) ? false : true;
+        return (!preg_match('#^[a-z0-9\-]{2,35}#i', $sFolder) || !is_file($sFullPath . PH7_CONFIG . PH7_CONFIG_FILE) || (PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder == PH7_PATH_MOD . $sFolder)) ? false : true;
     }
 
     /**
@@ -121,7 +119,7 @@ class Module
         $sValue = $this->_checkParam($sSwitch);
         $sPath = ($sValue == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder : PH7_PATH_MOD . $sFolder;
 
-        return Framework\Config\Config::getInstance()->load($sPath . static::CONFIG_DIR . PH7_DS . static::CONFIG_FILE);
+        return Framework\Config\Config::getInstance()->load($sPath . PH7_CONFIG . PH7_CONFIG_FILE);
     }
 
     /**
