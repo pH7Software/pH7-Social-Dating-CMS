@@ -55,7 +55,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param string $sEmail
      * @param string $sPassword
-     * @param string $sTable
+     * @param string $sTable Default 'Members'
      * @return mixed (boolean "true" or string "message")
      */
     public function login($sEmail, $sPassword, $sTable = 'Members')
@@ -125,6 +125,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
@@ -513,7 +514,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param integer $iProfileId
      * @param integer $iStatus
-     * @param string $sTable 'Members'
+     * @param string $sTable Default 'Members'
      * @return void
      */
     public function approve($iProfileId, $iStatus, $sTable = 'Members')
@@ -999,6 +1000,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
@@ -1006,7 +1008,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      * @param string $sEmail Default NULL
      * @param string $sUsername Default NULL
      * @param string $sTable Default 'Members'
-     * @return integer The Member ID
+     * @return mixed (integer | boolean) The Member ID if it is found or FALSE if not found.
      */
     public function getId($sEmail = null, $sUsername = null, $sTable = 'Members')
     {
@@ -1067,6 +1069,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             unset($oRow);
             $this->cache->put($sData);
         }
+
         return $sData;
     }
 
@@ -1096,6 +1099,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             unset($oRow);
             $this->cache->put($sData);
         }
+
         return $sData;
     }
 
@@ -1123,6 +1127,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             unset($oRow);
             $this->cache->put($sData);
         }
+
         return $sData;
    }
 
@@ -1156,11 +1161,10 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             Db::free($rStmt);
             $sData = @$oRow->sex;
             unset($oRow);
-           $this->cache->put($sData);
+            $this->cache->put($sData);
         }
 
-       return $sData;
-
+        return $sData;
     }
 
     /**
@@ -1187,6 +1191,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             unset($oRow);
             $this->cache->put($sData);
         }
+
         return $sData;
     }
 
@@ -1210,6 +1215,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             Db::free($rStmt);
             $this->cache->put($mData);
         }
+
         return $mData;
     }
 
@@ -1277,6 +1283,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             }
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
