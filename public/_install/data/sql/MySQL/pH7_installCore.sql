@@ -942,11 +942,11 @@ CREATE TABLE IF NOT EXISTS pH7_Settings (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
-('siteName', '¡pH7! Social Dating CMS', '', 'general'),
+('siteName', 'pH7CMS', '', 'general'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', 'base', '', 'design'),
-('emailName', '¡pH7! Social Dating CMS', '', 'email'),
+('emailName', 'pH7CMS', '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('splashPage', '0', 'Use Splash Page | enable = 1 or disable = 0', 'general'),
 ('fullAjaxSite', '0', 'enable = 1 or disable = 0', 'general'),
@@ -1022,6 +1022,7 @@ CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   active tinyint(1) unsigned NOT NULL DEFAULT 2, -- 1 = Active Account, 2 = Pending Account
   ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
   hashValidation varchar(40) DEFAULT NULL,
+  affiliatedId int(10) unsigned NOT NULL DEFAULT 0,
   INDEX (profileId),
   PRIMARY KEY (profileId),
   UNIQUE KEY (email)

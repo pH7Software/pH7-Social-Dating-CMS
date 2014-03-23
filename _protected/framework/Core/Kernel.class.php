@@ -28,7 +28,7 @@ abstract class Kernel
 {
 
     const
-    SOFTWARE_NAME = '¡pH7! Social Dating CMS',
+    SOFTWARE_NAME = 'pH7CMS',
     SOFTWARE_DESCRIPTION = 'This builder community dating software for web 3.0 new generation!',
     SOFTWARE_WEBSITE = 'http://software.hizup.com',
     SOFTWARE_LICENSE_KEY_URL = 'https://hizup.net/clients/license',
