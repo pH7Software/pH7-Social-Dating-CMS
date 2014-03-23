@@ -10,6 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Util\Various,
+PH7\Framework\Cookie\Cookie,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Date\CDateTime,
 PH7\Framework\Mvc\Router\Uri,
@@ -39,7 +40,8 @@ class SubscriptionFormProcess extends Form
                         'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
                         'ip' => Ip::get(),
                         'hash_validation' => Various::genRnd(),
-                        'active' => '0'
+                        'active' => '0',
+                        'affiliated_id' => (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME)
                     ];
 
                     $sActivateLink = Uri::get('newsletter','home','activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];

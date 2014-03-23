@@ -34,7 +34,7 @@ class UserModel extends UserCoreModel
         $rStmt = Db::getInstance()->prepare( $this->getQuery('join', $this->_sQueryPath) );
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', $aData['password'], \PDO::PARAM_STR, Framework\Security\Security::PASSWORD_LENGTH);
+        $rStmt->bindValue(':password', $aData['password'], \PDO::PARAM_STR);
         $rStmt->bindValue(':first_name', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':reference', $aData['reference'], \PDO::PARAM_STR);
         $rStmt->bindValue(':is_active', $aData['is_active'], \PDO::PARAM_INT);
@@ -42,7 +42,7 @@ class UserModel extends UserCoreModel
         $rStmt->bindParam(':hash_validation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':current_date', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':group_id', $aData['group_id'], \PDO::PARAM_INT);
-        $rStmt->bindValue(':affiliated_id', $aData['affiliate_id'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':affiliated_id', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();
         $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the user's ID
         Db::free($rStmt);

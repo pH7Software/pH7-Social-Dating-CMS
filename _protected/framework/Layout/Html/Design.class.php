@@ -373,13 +373,24 @@ class Design
         echo '<a href="', Ip::api($sIp), '" title="', t('See information from this IP'), '" target="_blank">', Ip::get($sIp), '</a>';
     }
 
-    public function geoIp()
+    /**
+     * Show the geolocation of the user.
+     *
+     * @param boolean $bPrint Print or return the HTML code. Default TRUE
+     * @return mixed (string | void)
+     */
+    public function geoIp($bPrint = true)
     {
         $sCountry = Geo::getCountry();
         $sCountryLang = t(str_replace('GB', 'UK', Geo::getCountryCode())); // Country name translated into the user language.
         $sCity = Geo::getCity();
 
-        echo '<a href="', Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity), '" title="', t('Meet New People on %0%, %1% with %site_name%!', $sCountryLang, $sCity), '">', $sCountryLang, ', ', $sCity, '</a>';
+        $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People on %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCountryLang . ', ' . $sCity . '</a>';
+
+        if($bPrint)
+            echo $sHtml;
+        else
+            return $sHtml;
     }
 
     /**

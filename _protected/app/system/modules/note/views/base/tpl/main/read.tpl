@@ -22,7 +22,7 @@
         <p><a class="m_button" href="{{ $design->url('note','main','edit',$post->noteId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'note', 'main', 'delete', $post->noteId, 'm_button') }}</p>
       {/if}
 
-      {{ ShareUrlCoreForm::display(Framework\Mvc\Router\UriRoute::get('note','main','read',"$post->username,$post->postId")) }}
+      {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('note','main','read',"$post->username,$post->postId")) }}
       {{ RatingDesignCore::voting($post->noteId,'Notes','center') }}
 
       {{ $design->likeApi() }}

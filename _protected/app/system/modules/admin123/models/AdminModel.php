@@ -48,7 +48,7 @@ class AdminModel extends AdminCoreModel
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :timeZone, :ip, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
+        $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);

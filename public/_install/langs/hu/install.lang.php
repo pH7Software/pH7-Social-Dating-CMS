@@ -87,9 +87,9 @@ $LANG = array (
     'bad_first_name' => 'Kérlek add meg a keresztneved, ami 2 és 20 karakter között kell, hogy legyen.',
     'bad_last_name'=> 'Kérlek add meg a vezetékneved, ami 2 és 20 karakter között kell, hogy legyen.',
     'insecure_password' => 'Az Ön biztonsága érdekében a jelszó nem lehet más, mint a személyes adatok (felhasználónév, az első és az utolsó név).',
+    'remove_install_folder' => 'Kérjük, távolítsa el a &quot;_install&quot; mappát a kiszolgálón, mielőtt használni a weboldalán.',
     'remove_install_folder_auto' => 'Automatikus törlése az &quot;install&quot; könyvtárnak (ehhez a művelethez hozzáférési jogok kellenek az &quot;install&quot; könyvtár törléséhez).',
     'confirm_remove_install_folder_auto' => 'FIGYELMEZTETÉS, Minden fájl a /_install/ könyvtárban törlésre kerül.',
-    'remove_install_folder' => 'Kérjük, távolítsa el a &quot;_install&quot; mappát a kiszolgálón, mielőtt használni a weboldalán.',
     'title_email_finish_install' => 'Gratulálunk, a webhelyed telepítése elkészült!',
     'content_email_finish_install' => '<p><strong>Gratulálunk, a webhelyed telepítése elkészült!</strong></p>
     <p>Reméljük élvezni fogod a <em>' . Controller::SOFTWARE_NAME . '</em> használatát!</p>

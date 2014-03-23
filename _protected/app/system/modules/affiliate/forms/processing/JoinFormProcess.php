@@ -49,7 +49,7 @@ class JoinFormProcess extends Form
             'hash_validation' => Various::genRnd(),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
             'is_active' => $this->iActiveType,
-            'affiliate_id' => $iAffId
+            'affiliated_id' => $iAffId
         ];
 
         $oAffModel = new AffiliateModel;

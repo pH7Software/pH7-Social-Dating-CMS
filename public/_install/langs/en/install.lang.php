@@ -87,9 +87,9 @@ $LANG = array (
     'bad_first_name' => 'Please enter your first name, it must also be between 2 and 20 characters.',
     'bad_last_name'=> 'Please enter your last name, it must also be between 2 and 20 characters.',
     'insecure_password' => 'For your security, your password must be different than your personal information (username, first and last name).',
+    'remove_install_folder' => 'Please remove the &quot;_install&quot; folder from your server before to use your website.',
     'remove_install_folder_auto' => 'Automatically delete the &quot;install&quot; directory (this requires access rights to delete the &quot;install&quot; directory).',
     'confirm_remove_install_folder_auto' => 'WARNING, All files in the /_install/ folder will be removed.',
-    'remove_install_folder' => 'Please remove the &quot;_install&quot; folder from your server before to use your website.',
     'title_email_finish_install' => 'Congratulations, the installation of your website is finished!',
     'content_email_finish_install' => '<p><strong>Congratulations, your website is now successfully installed!</strong></p>
     <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
