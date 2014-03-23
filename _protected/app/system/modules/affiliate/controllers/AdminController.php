@@ -304,7 +304,11 @@ class AdminController extends Controller
                 elseif ($iStatus == 1)
                 {
                     // Approve User
-                    $this->oAffModel->approve($iId, 1, 'Affiliates');
+                    $this->oAffModel->approve($oUser->profileId, 1, 'Affiliates');
+
+                    /** Update the Affiliate Commission **/
+                    AffiliateCore::updateJoinCom($oUser->affiliatedId, $this->config, $this->registry);
+
                     $sSubject = t('Your membership account has been activated');
                     $this->sMsg = t('Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!',
                         '<a href="' . Uri::get('affiliate', 'home', 'login') . '"><b>' . t('log in') .
@@ -328,7 +332,7 @@ class AdminController extends Controller
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
                     (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
 
-                    $this->oAff->clearReadProfileCache($iId, 'Affiliates');
+                    $this->oAff->clearReadProfileCache($oUser->profileId, 'Affiliates');
 
                     $sOutputMsg = t('Done!');
                 }
