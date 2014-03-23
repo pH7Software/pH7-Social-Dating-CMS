@@ -17,7 +17,7 @@ abstract class Controller implements IController
 {
 
     const
-    SOFTWARE_NAME = '¡pH7! Social Dating CMS',
+    SOFTWARE_NAME = 'pH7CMS',
     SOFTWARE_PREFIX_COOKIE_NAME = 'pH7',
     SOFTWARE_WEBSITE = 'http://software.hizup.com',
     SOFTWARE_REGISTRATION_URL = 'http://software.hizup.com/register',
