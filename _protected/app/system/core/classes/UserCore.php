@@ -407,22 +407,22 @@ class UserCore
      */
     public function activateAccount($sEmail, $sHash, Framework\Config\Config $oConfig, Framework\Registry\Registry $oRegistry, $sMod = 'user')
     {
-        $sTableName = Framework\Mvc\Model\Engine\Util\Various::convertModToTable($sMod);
+        $sTable = Framework\Mvc\Model\Engine\Util\Various::convertModToTable($sMod);
         $sRedirectLoginUrl = ($sMod == 'newsletter' ? PH7_URL_ROOT : ($sMod == 'affiliate' ? Uri::get('affiliate', 'home', 'login') : Uri::get('user', 'main', 'login')));
         $sRedirectIndexUrl = ($sMod == 'newsletter' ? PH7_URL_ROOT : ($sMod == 'affiliate' ? Uri::get('affiliate', 'home', 'index') : Uri::get('user', 'main', 'index')));
         $sSuccessMsg = ($sMod == 'newsletter' ? t('Your subscription to our newsletters has been successfully validated!') : t('Your account has been successfully validated. You can now login!'));
 
         if (isset($sEmail, $sHash))
         {
-            $oUserModel = new UserCoreModel;
-            if ($oUserModel->validateAccount($sEmail, $sHash, $sTableName))
+            $oUserModel = new AffiliateCoreModel;
+            if ($oUserModel->validateAccount($sEmail, $sHash, $sTable))
             {
-                $iId = $oUserModel->getId($sEmail, null, $sTableName);
+                $iId = $oUserModel->getId($sEmail, null, $sTable);
                 if ($sMod != 'newsletter')
-                    $this->clearReadProfileCache($iId, $sTableName);
+                    $this->clearReadProfileCache($iId, $sTable);
 
                 /** Update the Affiliate Commission **/
-                $iAffId = (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME);
+                $iAffId = $oUserModel->getAffiliatedId($iId);
                 AffiliateCore::updateJoinCom($iAffId, $oConfig, $oRegistry);
 
                 HeaderUrl::redirect($sRedirectLoginUrl, $sSuccessMsg);

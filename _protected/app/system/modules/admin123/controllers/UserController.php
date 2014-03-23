@@ -355,6 +355,10 @@ class UserController extends Controller
                 {
                     // Approve User
                     $this->oAdminModel->approve($oUser->profileId, 1);
+
+                    /** Update the Affiliate Commission **/
+                    AffiliateCore::updateJoinCom($oUser->affiliatedId, $this->config, $this->registry);
+
                     $sSubject = t('Your membership account has been activated');
                     $this->sMsg = t('Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!',
                         '<a href="' . Uri::get('user', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
@@ -377,7 +381,7 @@ class UserController extends Controller
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
                     (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
 
-                    $this->oAdmin->clearReadProfileCache($iId);
+                    $this->oAdmin->clearReadProfileCache($oUser->profileId);
 
                     $sOutputMsg = t('Done!');
                 }
@@ -397,7 +401,6 @@ class UserController extends Controller
         }
 
         return $sOutputMsg;
-
     }
 
     public function __destruct()

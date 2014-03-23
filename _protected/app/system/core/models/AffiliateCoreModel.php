@@ -30,6 +30,34 @@ class AffiliateCoreModel extends AdminCoreModel
     }
 
     /**
+     * Get the Affiliated Id of a User.
+     *
+     * @param integer $iProfileId
+     * @param string $sTable 'Members', 'Affiliates' or 'Subscribers'. Default 'Members'
+     * @return integer The Affiliated ID
+     */
+    public function getAffiliatedId($iProfileId, $sTable = 'Members')
+    {
+        $this->cache->start(static::CACHE_GROUP, 'affiliatedId' . $iProfileId . $sTable, static::CACHE_TIME);
+
+        if (!$iData = $this->cache->get())
+        {
+            Various::checkModelTable($sTable);
+            $iProfileId = (int) $iProfileId;
+
+            $rStmt = Db::getInstance()->prepare('SELECT affiliatedId FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $iData = (int) $oRow->affiliatedId;
+            unset($oRow);
+            $this->cache->put($iData);
+        }
+
+        return $iData;
+    }
+
+    /**
      * Delete Affiliate.
      *
      * @param integer $iProfileId
