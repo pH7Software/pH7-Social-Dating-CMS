@@ -200,7 +200,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET password = :newPassword WHERE email = :email LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
-        $rStmt->bindParam(':newPassword', Security::hashPwd($sNewPassword), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
+        $rStmt->bindValue(':newPassword', Security::hashPwd($sNewPassword), \PDO::PARAM_STR);
         return $rStmt->execute();
     }
 
@@ -573,7 +573,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity, :groupId)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
+        $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);

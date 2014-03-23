@@ -21,10 +21,10 @@ class AffiliateModel extends AffiliateCoreModel
     public function join(array $aData)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, active, ip, hashValidation, joinDate, lastActivity, affiliatedId)
-        VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity, :affiliated_id)');
+            VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity, :affiliatedId)');
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
+        $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);
@@ -134,7 +134,7 @@ class AffiliateModel extends AffiliateCoreModel
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :ip, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
-        $rStmt->bindParam(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR, Security::PASSWORD_LENGTH);
+        $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':lastName', $aData['last_name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':sex', $aData['sex'], \PDO::PARAM_STR);

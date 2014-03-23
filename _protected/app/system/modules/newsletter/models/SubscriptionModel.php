@@ -31,13 +31,15 @@ class SubscriptionModel extends UserCoreModel
      */
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Subscribers') . '(name, email, joinDate, ip, hashValidation, active) VALUES (:name, :email, :joinDate, :ip, :hashValidation, :active)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Subscribers') . '(name, email, joinDate, ip, hashValidation, active, affiliatedId)
+            VALUES (:name, :email, :joinDate, :ip, :hashValidation, :active, :affiliatedId)');
         $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':joinDate', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindParam(':hashValidation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':active', $aData['active'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();
         return (int) Db::getInstance()->lastInsertId();
     }

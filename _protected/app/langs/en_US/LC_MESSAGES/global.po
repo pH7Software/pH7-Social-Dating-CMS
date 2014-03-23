@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7-Dating CMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-22 13:04+0100\n"
-"PO-Revision-Date: 2014-03-22 13:04+0100\n"
+"POT-Creation-Date: 2014-03-25 05:03+0100\n"
+"PO-Revision-Date: 2014-03-25 05:03+0100\n"
 "Last-Translator: Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language: en_US\n"
@@ -114,43 +114,43 @@ msgstr ""
 msgid "Unsubscribe"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:47
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:49
 msgid "Hi %0%!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:48
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:50
 msgid "Welcome to %site_name% Subscription!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:49
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:51
 msgid "Activation link: %0%."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:50
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:52
 msgid "You are receiving this mail because we received an application for registration with the email \"%0%\" has been provided in the form of %site_name% (%site_url%)."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:51
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:53
 msgid "If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:56
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:58
 msgid "Confirm you email address!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:62
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:64
 msgid "Please activate your subscription by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:72
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:74
 msgid "Oops! You are already subscribed to our newsletter."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:82
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:84
 msgid "Your subscription was successfully canceled."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:86
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:88
 msgid "We have not found any subscriber with the email address."
 msgstr ""
 
@@ -905,7 +905,7 @@ msgstr ""
 msgid "An error occurred during registration!<br /> Please try again with other information in the form fields or come back later."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/processing/JoinFormProcess.php:74
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/processing/JoinFormProcess.php:75
 msgid "Your affiliate account has been created! %0%"
 msgstr ""
 
@@ -1009,139 +1009,143 @@ msgstr ""
 msgid "Welcome to the administration of Ad Affiliate"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:63
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:35
+msgid "Affiliate Settings"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:71
 msgid "Browse Affiliates"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:66
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:74
 msgid "%n% Affiliate"
 msgid_plural "%n% Affiliates"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:76
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:84
 msgid "Search Affiliate - Looking a new Affiliate"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:84
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:92
 msgid "Add an Affiliate"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:105
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:113
 msgid "You are now logged in as affiliate: %0%!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:110
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:118
 msgid "You are now  logged out in as an affiliate: %0%!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:183
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:191
 msgid "The affiliate has been banned."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:187
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:195
 msgid "Oops! An error has occurred while banishment the affiliate."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:200
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:208
 msgid "The affiliate has been unbanned."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:204
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:212
 msgid "Oops! An error has occurred while unban the affiliate."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:217
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:225
 msgid "The affiliate has been deleted."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:235
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:243
 msgid "The affiliate(s) has been banned."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:256
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:264
 msgid "The affiliate(s) has been unbanned."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:278
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:286
 msgid "The affiliate(s) has been deleted."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:293
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:301
 msgid "Your membership account has been declined"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:294
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:302
 msgid "Sorry, Your membership account has been declined."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:300
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:312
 msgid "Your membership account has been activated"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:301
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:313
 msgid "Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:314
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:326
 msgid "Dear %0%,"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:325
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:337
 msgid "Done!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:329
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:341
 msgid "Error! Bad argument in the url."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:334
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:346
 msgid "The user is not found!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:339
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:351
 msgid "Error! Missing argument in the url."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:20
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:17
 msgid "Account - Affiliate"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:37
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:34
 msgid "Edit your profile"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:45
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:42
 msgid "Change Password"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:53
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:50
 msgid "Delete Affiliate Account"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:64
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:61
 msgid ""
 "<span class=\"bold green1\">Great, you stay with us!<br />\n"
 "            You see, you will not regret it!<br />We will do our best to you our %site_name%!</span>"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:70
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:67
 msgid "WARNING: If you delete your account you will not receive your money."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:71
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:68
 msgid "Are you really sure you want to delete your account?"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:73
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:70
 msgid "No I changed my mind and I stay with you!"
 msgstr "No, I changed my mind and I stay with you!"
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:74
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:71
 msgid "OR"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:75
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:72
 msgid "Yes I really want to delete my account"
 msgstr "Yes, I really want to delete my account"
 
@@ -1976,42 +1980,42 @@ msgstr ""
 msgid "Buy %0% with %1%!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:42
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:41
 msgid "Payment Zone"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:54
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:74
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:53
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:73
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/AdminController.php:39
 msgid "No membership found!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:58
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:57
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/AdminController.php:43
 msgid "Memberships List"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:84
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:83
 msgid "Pay!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:103
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:102
 msgid "PayPal payment was made, the following information:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:121
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:120
 msgid "2CheckOut payment was made, the following information:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:137
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:136
 msgid "Provinder Not Found!"
 msgstr "Provider Not Found!"
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:141
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:140
 msgid "Thank you!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:141
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:140
 msgid "Error occurred!"
 msgstr ""
 
@@ -3822,7 +3826,6 @@ msgid "The current logo of your site."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:72
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:167
 msgid "Registration:"
 msgstr ""
 
@@ -4202,54 +4205,22 @@ msgid "Chatroulette Api:"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:166
-msgid "Affiliate:"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:167
-msgid "Money given to a affiliate when user registers on the site through an affiliate."
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:168
-msgid "Commission Rate for a User Payment:"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:168
-msgid "Percentage from a user membership purchase."
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:169
-msgid "Commission Rate for an Affiliate Payment:"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:169
-msgid "Percentage of an affiliate's money that is given to him from another affiliate he has brought."
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:170
-msgid "Minimum money:"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:170
-msgid "Minimum money to request a withdrawal."
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:173
 msgid "Automation:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:174
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:167
 msgid "Secret word for the URL cron:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:174
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:167
 msgid "Your very secret word for the URL of cron. It will be used for running automated cron job."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:175
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:168
 msgid "User inactivity timeout:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:175
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:168
 msgid "The number of minutes that a member becomes inactive (offline)."
 msgstr ""
 
@@ -4508,7 +4479,7 @@ msgstr "You can't specify a minimum age higher than the maximum age."
 msgid "The token lifetime cannot be below 10 seconds."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:331
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:316
 msgid "The configuration was saved successfully!"
 msgstr ""
 
@@ -4540,11 +4511,11 @@ msgstr ""
 msgid "The cache has been deleted!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/inc/class/Module.php:139
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/inc/class/Module.php:137
 msgid "Instruction file not found!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/inc/class/Module.php:189
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/inc/class/Module.php:187
 msgid "Unable to execute the query SQL of module.<br />Error Message: %0%"
 msgstr ""
 
@@ -5279,19 +5250,19 @@ msgstr ""
 msgid "You can not vote your own profile!"
 msgstr "You can't vote your own profile!"
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/RatingCoreAjax.php:82
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/RatingCoreAjax.php:84
 msgid "You have already voted!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/RatingCoreAjax.php:94
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/RatingCoreAjax.php:96
 msgid "Votes"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/RatingCoreAjax.php:94
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/RatingCoreAjax.php:96
 msgid "Vote"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/RatingCoreAjax.php:95
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/RatingCoreAjax.php:97
 msgid "Score: %0% - %2%: %1%"
 msgstr ""
 
@@ -5387,117 +5358,117 @@ msgstr ""
 msgid "Did you mean %0%?"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:70
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:69
 msgid "Upgrade %software_name% - %software_company% | Version %0%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:80
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:246
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:79
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:245
 msgid "You must be logged in as administrator to upgrade your site."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:88
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:87
 msgid "No upgrade path for %software_name%!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:92
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:91
 msgid "Upgrade available for %software_name%:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:109
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:108
 msgid "Version Name: %0%, Version Number: %1%, Version Build: %2%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:113
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:112
 msgid "Have you made a backup of your website files, folders and database?"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:113
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:112
 msgid "Upgrade <span class=\"bold italic\">%software_version_name% %software_version% Build %software_build%</span> to version <span class=\"bold italic\">%0%</span>"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:116
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:115
 msgid "Description of the upgrade patch:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:120
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:119
 msgid "Introductory instruction:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:125
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:124
 msgid "Bad \"version name, version number or version build\" of upgrade path!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:130
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:129
 msgid "Upgrade path is not valid!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:170
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:169
 msgid "Your update ran successfully!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:176
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:175
 msgid "The upgrade directory <em>(~%0%)</em> has been deleted!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:177
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:176
 msgid "Status... OK!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:181
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:180
 msgid "The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:182
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:181
 msgid "Status... Failure!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:187
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:186
 msgid "Please delete the upgrade file using an FTP client or SSH."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:191
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:190
 msgid "Conclusion of Instruction:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:237
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:236
 msgid "Unable to execute the upgrade of the database SQL.<br />Error Message: %0%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:251
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:250
 msgid "Your site must be in maintenance mode to begin the upgrade."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:256
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:255
 msgid "You must put your site in development mode in order to launch the upgrade of your site!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:257
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:256
 msgid "1) Please change the permission of the ~%0% file for writing for all groups (0666 in octal)."
 msgstr "1) Please change the permission of the ~%0% file for writing for all groups (chmod 666)."
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:258
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:257
 msgid "2) Edit ~%0% file and find the code:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:260
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:264
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:259
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:263
 msgid "and replace it with the code:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:262
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:261
 msgid "3) After installation, please edit ~%0% file and find the code:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:266
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:265
 msgid "4) Change the permission of the file to write only for users and reading for the other groups (0644 in octal)."
 msgstr "4) Change the permission of the file to write only for users and reading for the other groups (chmod 666)."
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:291
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:290
 msgid "You have %0% error(s):"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:294
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:293
 msgid "%0%) %1%"
 msgstr ""
 
@@ -5636,19 +5607,19 @@ msgstr ""
 msgid "Sorry, Your account has been banned."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/UserCore.php:411
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/UserCore.php:413
 msgid "Your subscription to our newsletters has been successfully validated!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/UserCore.php:411
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/UserCore.php:413
 msgid "Your account has been successfully validated. You can now login!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/UserCore.php:425
-msgid "Oops! The url is either invalid or you already have activated your account."
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/UserCore.php:432
+msgid "Oops! The URL is either invalid or you already have activated your account."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/UserCore.php:431
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/UserCore.php:438
 msgid "Invalid approach, please use the link that has been send to your email."
 msgstr ""
 
@@ -5775,7 +5746,7 @@ msgstr ""
 msgid "No News Software."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/models/UserCoreModel.php:1082
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/models/UserCoreModel.php:1085
 msgid "Administration of %site_name%"
 msgstr ""
 
@@ -6082,11 +6053,11 @@ msgstr ""
 msgid "Oops! Geo Map was not successful for the following reason:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Mail.class.php:78
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Mail.class.php:79
 msgid "Best regards,<br />The %0% Team."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Mail.class.php:87
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Mail.class.php:88
 msgid "This message was sent to %0%.<br /> You are receiving this message because you have registered on %1%.<br /> You can change the e-mail alerts by visiting your account."
 msgstr ""
 
@@ -6139,23 +6110,23 @@ msgstr ""
 msgid "See information from this IP"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:382
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:388
 msgid "Meet New People on %0%, %1% with %site_name%!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:509
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:520
 msgid "Free registration for the feature Like."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:520
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:531
 msgid "Like %0%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:548
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:559
 msgid "You must register to report this person."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:550
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:561
 msgid "Report Abuse"
 msgstr ""
 
@@ -6176,7 +6147,7 @@ msgid "This HTTP parameter must be a %0% type!"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:67
-msgid "Oops! We are sorry but the mail server encountered an internal error and the email could not be sent. Please try again later!"
+msgid "Oops! We are sorry but our email server encountered an internal error and the email could not be sent. Please try again later!"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:78
@@ -6416,3 +6387,58 @@ msgstr ""
 msgid "Config | Fake Admin Honeypot"
 msgstr ""
 
+#, fuzzy
+#~ msgid "Search a Picture"
+#~ msgstr "Search a Subscriber:"
+
+#, fuzzy
+#~ msgid "Search a Video"
+#~ msgstr "Search a Subscriber:"
+
+#, fuzzy
+#~ msgid "Edit account"
+#~ msgstr "Edit the Comment"
+
+#, fuzzy
+#~ msgid "Edit Account"
+#~ msgstr "Edit the Comment"
+
+#, fuzzy
+#~ msgid "Search a Users"
+#~ msgstr "Search a Subscriber:"
+
+#, fuzzy
+#~ msgid "Search an Admin"
+#~ msgstr "Search a Subscriber:"
+
+#, fuzzy
+#~ msgid "Subscribers"
+#~ msgstr "Search a Subscriber:"
+
+#, fuzzy
+#~ msgid "Search an Affiliate"
+#~ msgstr "Search a Subscriber:"
+
+#, fuzzy
+#~ msgid "Add a new Membership"
+#~ msgstr "Add a new Comment"
+
+#, fuzzy
+#~ msgid "Edit your Account"
+#~ msgstr "Edit the Comment"
+
+#, fuzzy
+#~ msgid "Free Online Dating Site"
+#~ msgstr "Hot Or Not - Free Online Dating Site"
+
+#, fuzzy
+#~ msgid "Online Dating Site"
+#~ msgstr "Hot Or Not - Free Online Dating Site"
+
+#, fuzzy
+#~ msgid "Contact us"
+#~ msgstr "Content Type:"
+
+#, fuzzy
+#~ msgid "Free Online Dating"
+#~ msgstr "Hot Or Not - Free Online Dating Site"

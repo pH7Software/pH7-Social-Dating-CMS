@@ -49,7 +49,7 @@ class JoinFormProcess extends Form
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
             'is_active' => $this->iActiveType,
             'group_id' => (int) DbConfig::getSetting('defaultMembershipGroupId'),
-            'affiliate_id' => $iAffId
+            'affiliated_id' => $iAffId
         ];
         $aData += ['password' => Security::hashPwd($this->httpRequest->post('password'))];
 

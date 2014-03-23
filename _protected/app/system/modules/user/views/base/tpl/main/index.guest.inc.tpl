@@ -30,8 +30,8 @@
   </div>
 
   <div class="block_txt">
-    <h2>{lang 'Meet new people in'} {{ $design->geoIp() }} {lang 'with %site_name%!'}</h2>
-    <p>{lang 'This is the best place for meeting new people nearby. Chat, flirt, socialize and have fun!'}<br />
+    <h2>{lang 'Meet people in %0% with %site_name%!', $design->geoIp(false)}</h2>
+    <p>{lang "You're on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!"}<br />
     {slogan}</p>
   </div>
 

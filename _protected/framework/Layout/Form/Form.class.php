@@ -64,7 +64,7 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     public static function errorSendingEmail()
     {
-        return t('Oops! We are sorry but the mail server encountered an internal error and the email could not be sent. Please try again later!');
+        return t('Oops! We are sorry but our email server encountered an internal error and the email could not be sent. Please try again later!');
     }
 
     /**

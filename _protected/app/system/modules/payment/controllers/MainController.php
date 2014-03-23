@@ -10,8 +10,6 @@
  */
 namespace PH7;
 
-use PH7\Framework\Cookie\Cookie;
-
 class MainController extends Controller
 {
 

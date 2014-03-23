@@ -5,6 +5,8 @@
 --
 
 ALTER TABLE pH7_Admins MODIFY password varchar(120) NOT NULL;
+ALTER TABLE pH7_Members MODIFY password varchar(120) NOT NULL;
+ALTER TABLE pH7_Affiliates MODIFY password varchar(120) NOT NULL;
 ALTER TABLE pH7_Admins DROP prefixSal;
 ALTER TABLE pH7_Admins DROP suffixSalt;
 ALTER TABLE pH7_Members DROP prefixSal;

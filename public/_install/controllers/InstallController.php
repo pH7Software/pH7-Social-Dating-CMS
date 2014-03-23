@@ -203,14 +203,14 @@ class InstallController extends Controller
                     {
                         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_system_submit']))
                         {
-                            foreach ($_POST as $sKey => $sValue)
-                                $_SESSION['db'][$sKey] = trim($sValue);
-
-                            $_SESSION['value']['bug_report_email'] = trim($_POST['bug_report_email']);
-                            $_SESSION['value']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
-
                             if (filled_out($_POST))
                             {
+                                foreach ($_POST as $sKey => $sValue)
+                                    $_SESSION['db'][$sKey] = trim($sValue);
+
+                                $_SESSION['value']['bug_report_email'] = trim($_POST['bug_report_email']);
+                                $_SESSION['value']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
+
                                 if (validate_email($_SESSION['value']['bug_report_email']))
                                 {
                                     try
@@ -358,11 +358,11 @@ class InstallController extends Controller
 
                     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_site_submit']))
                     {
-                        foreach ($_POST as $sKey => $sValue)
-                            $_SESSION['value'][$sKey] = trim($sValue);
-
                         if (filled_out($_POST))
                         {
+                            foreach ($_POST as $sKey => $sValue)
+                                $_SESSION['value'][$sKey] = trim($sValue);
+
                             if (validate_email($_SESSION['value']['admin_login_email']) && validate_email($_SESSION['value']['admin_email']) && validate_email($_SESSION['value']['admin_feedback_email']) && validate_email($_SESSION['value']['admin_return_email']))
                             {
                                 if (validate_username($_SESSION['value']['admin_username']) == 0)
@@ -371,7 +371,7 @@ class InstallController extends Controller
                                     {
                                         if (validate_identical($_SESSION['value']['admin_password'], $_SESSION['value']['admin_passwords']))
                                         {
-                                            if (!find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_username']) || !find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_first_name']) || !find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_last_name']))
+                                            if (!find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_username']) && !find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_first_name']) && !find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_last_name']))
                                             {
                                                 if (validate_name($_SESSION['value']['admin_first_name']))
                                                 {

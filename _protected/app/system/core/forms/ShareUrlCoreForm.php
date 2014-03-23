@@ -20,7 +20,7 @@ class ShareUrlCoreForm
     {
         $sUrl = (!empty($sUrl)) ? $sUrl : (new Http)->currentUrl();
 
-        $oForm = new \PFBC\Form('form_share_url', 300);
+        $oForm = new \PFBC\Form('form_share_url', 350);
         $oForm->configure(array('class' => 'center'));
         $oForm->addElement(new \PFBC\Element\Url(t('Share URL:'), 'share', array('value'=>$sUrl, 'readonly'=>'readonly', 'onclick'=>'this.select()')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br />'));

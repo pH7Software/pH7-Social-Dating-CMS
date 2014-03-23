@@ -87,9 +87,9 @@ $LANG = array (
     'bad_first_name' => 'or favor, introduzca su nombre, debe ser de entre 2 y 20 caracteres.',
     'bad_last_name'=> 'Por favor, introduzca su nombre, debe ser de entre 2 y 20 caracteres.',
     'insecure_password' => 'Para su seguridad, la contraseña debe ser diferente de su información personal (nombre de usuario, nombre y apellidos).',
+    'remove_install_folder' => 'Por favor, elimine la carpeta &laquo;_install&raquo; de su servidor antes de usar su sitio web.',
     'remove_install_folder_auto' => 'Eliminar automáticamente el directorio &laquo;install&raquo; (esto requiere derechos de acceso para borrar el directorio &laquo;install&raquo;).',
     'confirm_remove_install_folder_auto' => 'ADVERTENCIA, se eliminarán todos los archivos de la carpeta /_install/.',
-    'remove_install_folder' => 'Por favor, elimine la carpeta &laquo;_install&raquo; de su servidor antes de usar su sitio web.',
     'title_email_finish_install' => '¡Enhorabuena, la instalación de su sitio web está terminado!',
     'content_email_finish_install' => '<p><strong>¡Enhorabuena, tu sitio web está instalado correctamente!</strong></p>
     <p>¡Esperamos que usted disfrute de <em>' . Controller::SOFTWARE_NAME . '</em>!</p>

@@ -151,7 +151,7 @@ function validate_identical($sVal1, $sVal2)
  */
 function find($sText, $sWord)
 {
-    return (bool) stripos($sText, $sWord);
+    return false !== stripos($sText, $sWord);
 }
 
 /**
@@ -284,6 +284,8 @@ function generate_hash($iLength = 80)
  */
 function is_url_rewrite()
 {
+    if (!is_file(PH7_ROOT_INSTALL . '.htaccess')) return false;
+
     // Check if mod_rewrite is installed and is configured to be used via .htaccess
     if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
     {
