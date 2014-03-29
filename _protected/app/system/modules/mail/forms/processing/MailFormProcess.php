@@ -25,12 +25,13 @@ class MailFormProcess extends Form
         $oUserModel = new UserCoreModel;
         $oMailModel = new MailModel;
 
+        $bIsAdmin = (AdminCore::auth() && !UserCore::auth() && !$this->session->exists('login_user_as'));
         $sMessage = $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN);
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendMail');
         $sRecipient = $this->httpRequest->post('recipient');
         $iRecipientId = $oUserModel->getId(null, $sRecipient);
-        $iSenderId = (int) $this->session->get('member_id');
+        $iSenderId = (int) ($bIsAdmin ? PH7_ADMIN_ID : $this->session->get('member_id'));
 
         if ($iSenderId == $iRecipientId)
         {
@@ -44,18 +45,16 @@ class MailFormProcess extends Form
         {
             \PFBC\Form::setError('form_compose_mail', t('Oops! The username "%0%" does not exist.', escape(substr($this->httpRequest->post('recipient'),0, PH7_MAX_USERNAME_LENGTH), true)));
         }
-        elseif (!$oMailModel->checkWaitSend($iSenderId, $iTimeDelay, $sCurrentTime))
+        elseif (!$bIsAdmin && !$oMailModel->checkWaitSend($iSenderId, $iTimeDelay, $sCurrentTime))
         {
             \PFBC\Form::setError('form_compose_mail', Form::waitWriteMsg($iTimeDelay));
         }
-        elseif ($oMailModel->isDuplicateContent($iSenderId, $sMessage))
+        elseif (!$bIsAdmin && $oMailModel->isDuplicateContent($iSenderId, $sMessage))
         {
             \PFBC\Form::setError('form_compose_mail', Form::duplicateContentMsg());
         }
         else
         {
-            $iSenderId = (AdminCore::auth() && !UserCore::auth() && !$this->session->exists('login_user_as')) ? PH7_ADMIN_ID : $iSenderId;
-
             $mSendMsg = $oMailModel->sendMsg($iSenderId, $iRecipientId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
 
             if (false === $mSendMsg)
@@ -81,7 +80,8 @@ class MailFormProcess extends Form
                     (new Mail)->send($aInfo, $sMessageHtml);
                 }
 
-                HeaderUrl::redirect(Uri::get('mail', 'main', 'index'), t('Your message has been sent successfully!'));
+                $sUrl = ($bIsAdmin ? Uri::get(PH7_ADMIN_MOD, 'user', 'browse') : Uri::get('mail', 'main', 'index'));
+                HeaderUrl::redirect($sUrl, t('Your message has been sent successfully!'));
             }
 
             unset($oUserModel, $oMailModel);
