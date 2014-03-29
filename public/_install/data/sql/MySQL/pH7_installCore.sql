@@ -606,7 +606,7 @@ CREATE TABLE IF NOT EXISTS pH7_Forums (
 
 INSERT INTO pH7_Forums (forumId, name, description, categoryId) VALUES
 (1, 'Hello', 'Free dating site', 1),
-(2, 'Online Dating', 'The discussion for the website online dating', 2),
+(2, 'Online Dating', 'Discussion about the online dating websites', 2),
 (3, 'The Best Dating Site', 'The best dating site', 1);
 
 

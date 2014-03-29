@@ -310,7 +310,7 @@ class MainController extends Controller
 
         $this->sMsg = ($bStatus) ? t('Your message has been deleted successfully!') : t('Your message could not be deleted because there no exist.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
-        $sUrl = ($this->_bAdminLogged) ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage();
+        $sUrl = ($this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage());
         HeaderUrl::redirect($sUrl, $this->sMsg, $sMsgType);
     }
 
@@ -336,7 +336,7 @@ class MainController extends Controller
             }
         }
 
-        $sUrl = ($this->_bAdminLogged) ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage();
+        $sUrl = ($this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage());
         HeaderUrl::redirect($sUrl, $this->sMsg);
     }
 
