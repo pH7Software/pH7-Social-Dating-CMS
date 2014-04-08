@@ -12,10 +12,10 @@ You must transfer ALL files and folders (even empty folders and files). Don't de
 <p>If your OS server is a Unix-like, you must check if the file permissions (CHMOD) are correctly configured.<br />
 In numerical values ​​that must be <em>755</em> for all folders and <em>644</em> for all files.<br />
 Warning, the following folders must have <em>777</em> permissions:</p>
-<pre>~/public/</pre>
-<pre>~/public/_install/*</pre>
-<pre>~/public/_repository/module/*</pre>
-<pre>~/public/_repository/upgrade/*</pre>
+<pre>~/YOUR-PUBLIC-FOLDER/</pre>
+<pre>~/YOUR-PUBLIC-FOLDER/_install/*</pre>
+<pre>~/YOUR-PUBLIC-FOLDER/_repository/module/*</pre>
+<pre>~/YOUR-PUBLIC-FOLDER/_repository/upgrade/*</pre>
 <pre>~/YOUR-PROTECTED-FOLDER/app/configs/*</pre>
 <pre>~/YOUR-PROTECTED-FOLDER/data/cache/*</pre>
 <pre>~/YOUR-PROTECTED-FOLDER/data/backup/*</pre>

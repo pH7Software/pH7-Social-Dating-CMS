@@ -12,10 +12,10 @@ Transférer TOUS les fichiers et dossiers (même les dossiers et les fichiers vi
 <p>Si le système d'exploitation de votre serveur est de type Unix, vous devez vérifier si les permissions des fichiers (CHMOD) sont correctement configuré.<br />
 En valeurs numériques cela doit être <em>755</em> pour tous les dossiers et <em>644</em> pour tous les fichiers.<br />
 Attention, les dossiers suivants doivent avoir les permissions <em>777</em> :</p>
-<pre>~/public/</pre>
-<pre>~/public/_install/*</pre>
-<pre>~/public/_repository/module/*</pre>
-<pre>~/public/_repository/upgrade/*</pre>
+<pre>~/VOTRE-DOSSIER-PUBLIC/</pre>
+<pre>~/VOTRE-DOSSIER-PUBLIC/_install/*</pre>
+<pre>~/VOTRE-DOSSIER-PUBLIC/_repository/module/*</pre>
+<pre>~/VOTRE-DOSSIER-PUBLIC/_repository/upgrade/*</pre>
 <pre>~/VOTRE-DOSSIER-PROTECTED/app/configs/*</pre>
 <pre>~/VOTRE-DOSSIER-PROTECTED/data/cache/*</pre>
 <pre>~/VOTRE-DOSSIER-PROTECTED/data/backup/*</pre>
