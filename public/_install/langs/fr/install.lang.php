@@ -109,7 +109,7 @@ $LANG = array (
     'buy_individual_ticket_support_title' => 'Acheter un service support technique individuel',
     'buy_individual_ticket_support' => '<span class="bold italic">55£</span> <span class="gray">Support technique individuel complet pour un mois</span> <span class="right">Acheter maintenant</span>',
     'buy_individual_ticket_support_desc' => 'En achetant un support technique individuel, nous allons vous aider à chaque fois que vous aurez un problème avec notre logiciel. Nous serons à votre disposition pour résoudre d\'éventuelles problème que rencontreriez avec pH7CMS.',
-    'looking_hosting' =>'À la recherche d\'un hébergement Web ? Regardez <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">notre Liste d\'Hébergeurs</a> ?',
+    'looking_hosting' =>'À la recherche d\'un hébergement Web ? Regardez <a href="' . Controller::SOFTWARE_HOSTING_LIST_FR_URL . '" target="_blank">notre Liste d\'Hébergeurs</a> ?',
     'error_get_server_url' => 'Problème d\'accès avec notre serveur Web.<br />
     Veuillez vérifier que votre serveur est bien connecté à internet, sinon veuillez un peu patienté (il est possible que notre serveur est surchargé).',
     'powered' => 'Propulsé par',
