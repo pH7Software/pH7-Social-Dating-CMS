@@ -172,7 +172,7 @@ class Gzip
                 // Get contents of the files
                 $this->getContents();
 
-                // Store cache
+                // Store the file in the cache
                 if (!$this->_oFile->putFile($this->_sCacheDir . $sCacheFile, $this->_sContents))
                     throw new Exception('Couldn\'t write cache file: \'' . $this->_sCacheDir . $sCacheFile . '\'');
             }
@@ -222,7 +222,7 @@ class Gzip
     }
 
     /**
-     * Conpressed the contents of gzip files.
+     * Transform the contents into a gzip compressed string.
      *
      * @return void
      */

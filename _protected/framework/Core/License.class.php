@@ -138,12 +138,12 @@ final class License
     }
 
     /**
-     * Set the license content.
+     * Get the license content.
      *
      * @access private
      * @return string The Hash Key.
      */
-    private function _setContent()
+    private function _getContent()
     {
         return $this->_sBasicLicKey . ';;' ;
     }
@@ -179,7 +179,7 @@ final class License
      */
     private function _save()
     {
-        $this->_mLicContent = $this->_setContent();
+        $this->_mLicContent = $this->_getContent();
         $this->_oLicenseModel->save($this->_mLicContent);
     }
 
