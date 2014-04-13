@@ -117,7 +117,7 @@ class DatabaseCoreCron extends Cron
 
     protected function backup()
     {
-        (new Backup(PH7_PATH_BACKUP_SQL . 'Periodic-database-update.' . (new Framework\Date\CDateTime)->get()->date() . '.sql.bz2'))->back()->saveArchive();
+        (new Backup(PH7_PATH_BACKUP_SQL . 'Periodic-database-update.' . (new Framework\Date\CDateTime)->get()->date() . '.sql.gz'))->back()->saveArchive();
 
         echo t('Backup of the Database... Ok!') . '<br />';
     }

@@ -7,7 +7,8 @@
  * @copyright        (c) 2011-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine / Util
- * @version          1.1
+ * @version          1.2
+ * @history          04/13/2014 - We replaced the bzip2 compression program by gzip because bzip2 is much too slow to compress and uncompress files and the  compression is only a little higher. In addition, gzip is much more common on shared hosting that bzip2.
  */
 
 namespace PH7\Framework\Mvc\Model\Engine\Util;
@@ -139,16 +140,16 @@ class Backup
     }
 
     /**
-     * Saves the backup in the bzip2 compressed archive in the server.
+     * Saves the backup in the gzip compressed archive in the server.
      *
      * @access public
      * @return void
      */
     public function saveArchive()
     {
-        $rArchive = bzopen($this->_sPathName, 'w');
-        bzwrite($rArchive, $this->_sSql);
-        bzclose($rArchive);
+        $rArchive = gzopen($this->_sPathName, 'w');
+        gzwrite($rArchive, $this->_sSql);
+        gzclose($rArchive);
     }
 
     /**
@@ -164,20 +165,20 @@ class Backup
     }
 
     /**
-     * Restore the bzip2 compressed archive backup.
+     * Restore the gzip compressed archive backup.
      *
      * @access public
      * @return mixed (boolean | string) Returns TRUE if there are no errors, otherwise returns "the error message".
      */
     public function restoreArchive()
     {
-        $rArchive = bzopen($this->_sPathName, 'r');
+        $rArchive = gzopen($this->_sPathName, 'r');
 
         $sSqlContent = '';
         while (!feof($rArchive))
-            $sSqlContent .= bzread($rArchive, filesize($this->_sPathName));
+            $sSqlContent .= gzread($rArchive, filesize($this->_sPathName));
 
-        bzclose($rArchive);
+        gzclose($rArchive);
 
         $sSqlContent = str_replace(PH7_TABLE_PREFIX,  Db::prefix(), $sSqlContent);
         $oDb = Db::getInstance()->exec($sSqlContent);
@@ -198,7 +199,7 @@ class Backup
     }
 
     /**
-     * Download the backup in the bzip2 compressed archive on the desktop.
+     * Download the backup in the gzip compressed archive on the desktop.
      *
      * @access public
      * @return void
@@ -209,10 +210,10 @@ class Backup
     }
 
     /**
-     * Generic method that allows you to download a file or a SQL file bzip2 compressed archive.
+     * Generic method that allows you to download a file or a SQL file gzip compressed archive.
      *
      * @access private
-     * @param boolean $bArchive If TRUE, the string will be compressed in bzip2. Default FALSE
+     * @param boolean $bArchive If TRUE, the string will be compressed in gzip. Default FALSE
      * @return void
      */
     private function _download($bArchive = false)
@@ -224,7 +225,7 @@ class Backup
         header('Content-Disposition: attachment; filename=' . $this->_sPathName);
 
         /***** Show the SQL contents *****/
-        echo ($bArchive ? bzcompress($this->_sSql, 9) : $this->_sSql);
+        echo ($bArchive ? gzcompress($this->_sSql, 9) : $this->_sSql);
 
         /***** Catch output *****/
         $sBuffer = ob_get_contents();

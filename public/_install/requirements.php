@@ -32,9 +32,6 @@ if (!extension_loaded('zip'))
 if (!extension_loaded('zlib'))
     $aErrors[] = 'Please install "Zlib" compression PHP extension.';
 
-if (!extension_loaded('bz2'))
-    $aErrors[] = 'Please install "Bz2" compression PHP extension.';
-
 if (!extension_loaded('gd'))
     $aErrors[] = 'Please install "GD" graphics PHP extension.';
 

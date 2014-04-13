@@ -88,7 +88,7 @@ class ToolController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
-        $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, array('.sql', '.bz2'));
+        $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, array('.sql', '.gz'));
         // Removing the path
         $aDumpList = array_map(function($sValue) { return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue); }, $aDumpList);
         $this->view->aDumpList = $aDumpList;
@@ -113,7 +113,7 @@ class ToolController extends Controller
                     break;
 
                     case 'server_archive':
-                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . (new Framework\Date\CDateTime)->get()->date() . '.sql.bz2';
+                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . (new Framework\Date\CDateTime)->get()->date() . '.sql.gz';
                         (new D\Util\Backup($sFullPath))->back()->saveArchive();
                         $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
                     break;
@@ -123,7 +123,7 @@ class ToolController extends Controller
                     break;
 
                     case 'client_archive':
-                        (new D\Util\Backup($this->registry->site_name . '_' . (new Framework\Date\CDateTime)->get()->date() . '.sql.bz2'))->back()->downloadArchive();
+                        (new D\Util\Backup($this->registry->site_name . '_' . (new Framework\Date\CDateTime)->get()->date() . '.sql.gz'))->back()->downloadArchive();
                     break;
 
                     case 'show':
@@ -152,13 +152,13 @@ class ToolController extends Controller
                     {
                         $mStatus = (new D\Util\Backup($sDumpFile))->restore();
                     }
-                    elseif ($this->file->getFileExt($sNameFile) == 'bz2')
+                    elseif ($this->file->getFileExt($sNameFile) == 'gz')
                     {
                         $mStatus = (new D\Util\Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
                     }
                     else
                     {
-                        $mStatus = t('Dump file must be a SQL type (extension ".sql" or compressed archive ".bz2")');
+                        $mStatus = t('Dump file must be a SQL type (extension ".sql" or compressed archive ".gz")');
                     }
                 }
                 else
@@ -208,13 +208,13 @@ class ToolController extends Controller
                 {
                     $mStatus = (new D\Util\Backup($sTmpFile))->restore();
                 }
-                elseif ($this->file->getFileExt($sNameFile) == 'bz2')
+                elseif ($this->file->getFileExt($sNameFile) == 'gz')
                 {
                     $mStatus = (new D\Util\Backup($sTmpFile))->restoreArchive();
                 }
                 else
                 {
-                    $mStatus = t('Dump file must be a SQL type (extension ".sql" or compressed archive ".bz2")');
+                    $mStatus = t('Dump file must be a SQL type (extension ".sql" or compressed archive ".gz")');
                 }
 
                 // Remove the temporary file
