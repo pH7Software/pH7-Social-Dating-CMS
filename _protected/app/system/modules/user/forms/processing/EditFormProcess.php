@@ -25,7 +25,7 @@ class EditFormProcess extends Form
         if((AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id')))
         {
             if(!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId))
-                $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
+                $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId);
         }
 
         if(!$this->str->equals($this->httpRequest->post('first_name'), $oUser->firstName))

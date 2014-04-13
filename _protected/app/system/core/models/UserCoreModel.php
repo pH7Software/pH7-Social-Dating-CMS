@@ -269,7 +269,6 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $bIsMail = !empty($aParams['mail']);
         $bIsSex = !empty($aParams['sex']);
 
-
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(m.profileId) AS totalUsers';
         $sSqlFirstName = ($bIsFirstName) ? ' AND firstName = :firstName' : '';
@@ -1196,22 +1195,24 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Get the memberships data.
+     * Get the membership(s) data.
      *
-     * @param integer $iWhereId Default NULL
-     * @return object The data
+     * @param integer $iGroupId Group ID. Select only the specific membership from a group ID. Default NULL
+     * @return object The membership(s) data.
      */
-    public function getMemberships($iWhereId = null)
+    public function getMemberships($iGroupId = null)
     {
-        $this->cache->start(self::CACHE_GROUP, 'memberships' . $iWhereId, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'memberships' . $iGroupId, static::CACHE_TIME);
 
         if (!$mData = $this->cache->get())
         {
-            $sSqlWhere = (!empty($iWhereId)) ? ' WHERE groupId = :groupId ' : ' ';
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Memberships') . $sSqlWhere . 'ORDER BY enable DESC, name ASC');
-            if (!empty($iWhereId)) $rStmt->bindValue(':groupId', $iWhereId, \PDO::PARAM_INT);
+            $bIsGroupId = !empty($iGroupId);
+            $sSqlGroup = ($bIsGroupId) ? ' WHERE groupId = :groupId ' : ' ';
+
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Memberships') . $sSqlGroup . 'ORDER BY enable DESC, name ASC');
+            if (!empty($iGroupId)) $rStmt->bindValue(':groupId', $iGroupId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $mData = (!empty($iWhereId)) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = ($bIsGroupId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($mData);
         }
@@ -1228,7 +1229,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId WHERE (pay.expirationDays = 0 OR DATE_SUB(m.membershipExpiration, INTERVAL pay.expirationDays DAY) <= :currentTime) AND (m.profileId = :profileId) LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId WHERE (pay.expirationDays = 0 OR DATE_SUB(m.membershipDate, INTERVAL pay.expirationDays DAY) <= :currentTime) AND (m.profileId = :profileId) LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -1240,17 +1241,23 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param integer $iNewGroupId The new ID of membership group.
      * @param integer $iProfileId The ID of user.
-     * @param integer $iPrice
-     * @param string $sDateTime In date format: 0000-00-00 00:00:00
+     * @param integer $iPrice Default NULL
+     * @param string $sDateTime In date format: 0000-00-00 00:00:00 Default NULL
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
-    public function updateMembership($iNewGroupId, $iProfileId, $iPrice, $sDateTime)
+    public function updateMembership($iNewGroupId, $iProfileId, $iPrice = null, $sDateTime = null)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Membership') . 'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId, m.membershipExpiration = :dateTime WHERE m.profileId = :profileId AND pay.price = :price LIMIT 1');
+        $bIsPrice = !empty($iPrice);
+        $bIsTime = !empty($sDateTime);
+
+        $sSqlPrice = ($bIsPrice) ? ' AND pay.price = :price' : '';
+        $sSqlTime = ($bIsTime) ? ',m.membershipDate = :dateTime ' : ' ';
+
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlPrice);
         $rStmt->bindValue(':groupId', $iNewGroupId, \PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':price', $iPrice, \PDO::PARAM_INT);
-        $rStmt->bindValue(':dateTime', $sDateTime, \PDO::PARAM_STR);
+        if ($bIsPrice) $rStmt->bindValue(':price', $iPrice, \PDO::PARAM_INT);
+        if ($bIsTime) $rStmt->bindValue(':dateTime', $sDateTime, \PDO::PARAM_STR);
         return $rStmt->execute();
     }
 
