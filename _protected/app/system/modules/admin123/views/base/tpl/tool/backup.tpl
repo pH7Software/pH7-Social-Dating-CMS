@@ -23,7 +23,7 @@
 
     <tr>
       <td class="border vs_padd">
-        <label for="server_archive">{lang 'Save Bzp2 Archive (.bz2) to your server'}
+        <label for="server_archive">{lang 'Save Gzip Archive (.gz) to your server'}
         <input type="radio" name="backup_type" value="server_archive" id="server_archive" /></label>
       </td>
     </tr>
@@ -37,7 +37,7 @@
 
     <tr>
       <td class="border vs_padd">
-        <label for="client_archive">{lang 'Download Bzp2 Archive (.bz2) to your desktop'}
+        <label for="client_archive">{lang 'Download Gzip Archive (.gz) to your desktop'}
         <input type="radio" name="backup_type" value="client_archive" id="client_archive" /></label>
       </td>
     </tr>
@@ -89,8 +89,8 @@
 
     <tr>
       <td class="border vs_padd">
-        <label for="sql_file">{lang 'Please select a SQL file (extension ".sql" or compressed archive ".bz2")'}
-        <input type="file" name="sql_file" id="sql_file" accept=".sql,.bz2" /></label>
+        <label for="sql_file">{lang 'Please select a SQL file (extension ".sql" or compressed archive ".gz")'}
+        <input type="file" name="sql_file" id="sql_file" accept=".sql,.gz" /></label>
 
         <input type="submit" name="restore_sql_file" value="{lang 'Restore'}" />
       </td>

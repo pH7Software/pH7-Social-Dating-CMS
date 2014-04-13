@@ -26,7 +26,6 @@
                 <li>PHP CURL extension.</li>
                 <li>Zip compression PHP module.</li>
                 <li>Zlib compression PHP module.</li>
-                <li>Bz2 compression PHP module.</li>
                 <li>mbstring PHP module.</li>
                 <li>Send Mail PHP activated.</li>
                 <li>memory_limit - 128M or higher.</li>
