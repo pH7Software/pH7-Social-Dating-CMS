@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
   bankAccount varchar(150) DEFAULT NULL,
   groupId tinyint(2) unsigned NOT NULL DEFAULT 2,
-  membershipExpiration timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  membershipDate datetime DEFAULT NULL,
   userStatus tinyint(1) unsigned NOT NULL DEFAULT 1, -- 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
   joinDate datetime DEFAULT NULL,
   lastActivity datetime DEFAULT NULL,
@@ -1040,7 +1040,7 @@ CREATE TABLE IF NOT EXISTS pH7_StaticFiles (
 
 CREATE TABLE IF NOT EXISTS pH7_License (
   licenseId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
-  licenseKey text,
+  licenseKey char(16) NOT NULL,
   PRIMARY KEY (licenseId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 

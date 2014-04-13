@@ -48,7 +48,12 @@ class EditForm
 
             $oGroupId = (new AdminCoreModel)->getMemberships();
             $aGroupName = array();
-            foreach ($oGroupId as $iId) $aGroupName[$iId->groupId] = $iId->name;
+            foreach ($oGroupId as $oId)
+            {
+                // Retrieve only the activated memberships
+                if ($oId->enable == 1)
+                    $aGroupName[$oId->groupId] = $oId->name;
+            }
             $oForm->addElement(new \PFBC\Element\Select(t('Membership Group:'), 'group_id', $aGroupName, array('value'=>$oUser->groupId, 'required'=>1)));
             unset($aGroupName);
         }
