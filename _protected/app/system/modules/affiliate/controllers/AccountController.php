@@ -18,7 +18,7 @@ class AccountController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
-        $this->view->currency_sign = $this->str->trim($this->config->values['module.setting']['currency_sign']);
+        $this->view->currency_sign = $this->config->values['module.setting']['currency_sign'];
         $this->view->min_withdrawal = $this->config->values['module.setting']['min_withdrawal_money'];
         $this->view->amount = (new AffiliateModel)->getAmount($this->session->get('affiliate_id'));
         $this->view->contact_url = Uri::get('contact', 'contact', 'index');
