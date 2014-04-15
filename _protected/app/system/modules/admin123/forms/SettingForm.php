@@ -76,7 +76,6 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Number(t('Maximum username length:'), 'max_username_length', array('value' => DbConfig::getSetting('maxUsernameLength'), 'min' => DbConfig::getSetting('minUsernameLength')+1, 'max' => PH7_MAX_USERNAME_LENGTH, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Number(t('Minimum age for registration:'), 'min_age_registration', array('value' => DbConfig::getSetting('minAgeRegistration'), 'max' => DbConfig::getSetting('maxAgeRegistration')-1, 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration')+1, 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Universal Registration and Login:'), 'is_universal_login', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isUniversalLogin'), 'required' => 1)));
 
         $oGroupId = (new AdminCoreModel)->getMemberships();
         $aGroupName = array();

@@ -133,9 +133,6 @@ class SettingFormProcess extends Form
         if(!$this->str->equals($this->httpRequest->post('max_age_registration'), DbConfig::getSetting('maxAgeRegistration')))
             DbConfig::setSetting($this->httpRequest->post('max_age_registration'), 'maxAgeRegistration');
 
-        if(!$this->str->equals($this->httpRequest->post('is_universal_login'), DbConfig::getSetting('isUniversalLogin')))
-            DbConfig::setSetting($this->httpRequest->post('is_universal_login'), 'isUniversalLogin');
-
         if(!$this->str->equals($this->httpRequest->post('default_membership_group_id'), DbConfig::getSetting('defaultMembershipGroupId')))
             DbConfig::setSetting($this->httpRequest->post('default_membership_group_id'), 'defaultMembershipGroupId');
 
