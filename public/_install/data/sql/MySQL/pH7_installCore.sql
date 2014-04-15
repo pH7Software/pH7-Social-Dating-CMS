@@ -972,7 +972,6 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('maxUsernameLength', '30', '', 'registration'),
 ('userActivationType', '1', '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('affActivationType', '1', '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
-('isUniversalLogin', '0', '0 for disable or 1 for enable', 'registration'),
 ('defaultMembershipGroupId', 2, 'Default Membership Group', 'registration'),
 ('minPasswordLength', '6', '', 'security'),
 ('maxPasswordLength', '60', '', 'security'),
@@ -1040,7 +1039,7 @@ CREATE TABLE IF NOT EXISTS pH7_StaticFiles (
 
 CREATE TABLE IF NOT EXISTS pH7_License (
   licenseId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
-  licenseKey char(16) NOT NULL,
+  licenseKey varchar(40) NOT NULL,
   PRIMARY KEY (licenseId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 

@@ -7,8 +7,8 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Config\Config;
 
 // If the module is not enabled, we display a Not Found page, except if the administrator is logged, so it can make the module configuration.
-if(!DbConfig::getSetting('isUniversalLogin') && !AdminCore::auth())
+if (!Config::getInstance()->values['module.setting']['enable'] && !AdminCore::auth())
     (new Controller)->displayPageNotFound();
