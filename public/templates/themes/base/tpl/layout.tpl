@@ -1,4 +1,4 @@
-{* Last edit 09/24/13 01:16 by PH *}
+{* Last edit 04/15/14 21:16 by PH *}
 {{ $design->htmlHeader() }}
 <html lang="{% $config->values['language']['lang'] %}">
   <head>
@@ -50,7 +50,7 @@
     <script>var pH7Url={base:'{url_root}',relative:'{url_relative}',tpl:'{url_tpl}',stic:'{url_static}',tplImg:'{url_tpl_img}',tplJs:'{url_tpl_js}',tplMod:'{url_tpl_mod}',data:'{url_data}'};</script>
     {if AdminCore::auth()}<script>pH7Url.admin_mod = '{url_admin_mod}';</script>{/if}
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <!--<script src="http://cdn.jquerytools.org/1.2.6/jquery.tools.min.js"></script>-->
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <!-- End Header JavaScript -->

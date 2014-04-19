@@ -21,21 +21,24 @@ use PH7\Framework\Cookie\Cookie, PH7\Framework\Session\Session;
 final class Stop
 {
 
+    // SSS = Stop for Server Security
+    const COOKIE_NAME = 'sss';
+
     /**
      * @return boolean Return "true" If we believe that this person takes too much request otherwise "false"
      */
     public function cookie()
     {
         $oCookie = new Cookie;
-        // SFC = Stop for Server Security
-        if (!$oCookie->exists('sfss'))
-            $oCookie->set('sfss', 1, 60*60*48);
-        else
-             $oCookie->set('sfss', ($oCookie->get('sfss')+1));
 
-        if ($oCookie->get('sfss') > PH7_DDOS_MAX_COOKIE_PAGE_LOAD)
+        if (!$oCookie->exists(static::COOKIE_NAME))
+            $oCookie->set(static::COOKIE_NAME, 1, 60*60*48);
+        else
+             $oCookie->set(static::COOKIE_NAME, ($oCookie->get(static::COOKIE_NAME)+1));
+
+        if ($oCookie->get(static::COOKIE_NAME) > PH7_DDOS_MAX_COOKIE_PAGE_LOAD)
         {
-            $oCookie->remove('sfss'); // Remove Cookie
+            $oCookie->remove(static::COOKIE_NAME); // Remove Cookie
             $bStatus = true;
         }
         else
@@ -51,15 +54,15 @@ final class Stop
     public function session()
     {
         $oSession = new Session;
-        // SFC = Stop for Server Security
-        if (!$oSession->exists('sfss'))
-            $oSession->set('sfss', 1);
-        else
-             $oSession->set('sfss', ($oSession->get('sfss')+1));
 
-        if ($oSession->get('sfss') > PH7_DDOS_MAX_SESSION_PAGE_LOAD)
+        if (!$oSession->exists(static::COOKIE_NAME))
+            $oSession->set(static::COOKIE_NAME, 1);
+        else
+             $oSession->set(static::COOKIE_NAME, ($oSession->get(static::COOKIE_NAME)+1));
+
+        if ($oSession->get(static::COOKIE_NAME) > PH7_DDOS_MAX_SESSION_PAGE_LOAD)
         {
-            $oSession->remove('sfss'); // Remove Session
+            $oSession->remove(static::COOKIE_NAME); // Remove Session
             $bStatus = true;
         }
         else

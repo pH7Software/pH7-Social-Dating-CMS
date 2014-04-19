@@ -22,6 +22,8 @@ final class Server
     SERVER_PORT = 'SERVER_PORT',
     SERVER_PROTOCOL = 'SERVER_PROTOCOL',
     SERVER_NAME = 'SERVER_NAME',
+    SERVER_ADDR = 'SERVER_ADDR',
+    LOCAL_ADDR = 'LOCAL_ADDR',
     HTTPS = 'HTTPS',
     HTTP_HOST = 'HTTP_HOST',
     HTTP_X_FORWARDED_HOST = 'HTTP_X_FORWARDED_HOST',
@@ -95,11 +97,12 @@ final class Server
     /**
      * Get the IP address of server.
      *
+     * @internal We use LOCAL_ADDR variable for compatibility with Windows servers.
      * @return string IP address.
      */
     public static function getIp()
     {
-        return gethostbyname( self::getName() );
+        return self::getVar(self::SERVER_ADDR, self::getVar(self::LOCAL_ADDR, gethostbyname(self::getName())));
     }
 
     /**

@@ -7,6 +7,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Security
  * @version        1.2
+ * @history        01/15/2014 - This system replaces the other highly secure password hashing created by Pierre-Henry Soria
  */
 
 namespace PH7\Framework\Security;
