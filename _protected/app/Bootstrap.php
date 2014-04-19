@@ -1,7 +1,6 @@
 <?php
 /**
  * @title          Bootstrap
- * @desc           Bootstrapping file.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
  * @link           http://software.hizup.com

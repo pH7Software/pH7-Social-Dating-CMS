@@ -29,7 +29,7 @@ final class Token
 {
 
     /**
-     * Note: We have commented on"security_token_http_referer_*"  as this causes bugs and does not
+     * Note: We have commented on "security_token_http_referer_*" because it causes bugs and it doesn't
      * play a big role for safety because this variable can be changed by users (and the web browser).
      */
 

@@ -18,13 +18,13 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Translate\Lang,
 PH7\Framework\Layout\LoadTemplate,
-PH7\Framework\Config\Config,
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Registry\Registry,
+PH7\Framework\Config\Config,
+PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Ip\Ip,
-PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Url\Uri,
 PH7\Framework\Mvc\Router\Uri as UriRoute;
 
