@@ -163,7 +163,7 @@ class SettingForm
 
         /********** Automation **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="automation"><h2 class="underline">' . t('Automation:') . '</h2>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Secret word for the URL cron:'), 'cron_security_hash', array('description' => t('Your very secret word for the URL of cron. It will be used for running automated cron job.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(1, 64))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Secret word for the URL cron:'), 'cron_security_hash', array('description' => t('Your very secret word for the cron URL. It will be used for running automated cron job.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(1, 64))));
         $oForm->addElement(new \PFBC\Element\Number(t('User inactivity timeout:'), 'user_timeout', array('description' => t('The number of minutes that a member becomes inactive (offline).'), 'value' => DbConfig::getSetting('userTimeout'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><script src="' . PH7_URL_STATIC . PH7_JS . 'tabs.js"></script><script>tabs(\'p\', [\'general\',\'logotype\',\'registration\',\'pic_vid\',\'moderation\',\'email\',\'security\',\'spam\',\'api\',\'automation\']);</script>'));

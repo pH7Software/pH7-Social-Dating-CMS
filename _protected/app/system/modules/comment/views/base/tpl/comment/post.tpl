@@ -15,7 +15,8 @@
 </div>
 
 {if (UserCore::auth() && ($member_id == $com->sender || $member_id == $com->recipient)) || AdminCore::auth()}
- <div><a href="{{ $design->url('comment','comment','edit',"$table,$com->recipient,$com->sender,$com->commentId") }}">{lang 'Edit'}</a> | {{ LinkCoreForm::display(t('Delete'), 'comment', 'comment', 'delete', array('table'=>$table, 'recipient_id'=>$com->recipient, 'sender_id'=>$com->sender, 'id'=>$com->commentId)) }}</div>
+ <div><a href="{{ $design->url('comment','comment','edit',"$table,$com->recipient,$com->sender,$com->commentId") }}">{lang 'Edit'}</a> |
+ {{ LinkCoreForm::display(t('Delete'), 'comment', 'comment', 'delete', array('table'=>$table, 'recipient_id'=>$com->recipient, 'sender_id'=>$com->sender, 'id'=>$com->commentId)) }}</div>
 {/if}
 
 <br />

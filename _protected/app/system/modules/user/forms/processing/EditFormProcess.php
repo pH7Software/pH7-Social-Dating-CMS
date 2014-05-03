@@ -22,13 +22,13 @@ class EditFormProcess extends Form
         $oUser = $oUserModel->readProfile($iProfileId);
 
         // For Admins only!
-        if((AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id')))
+        if ((AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id')))
         {
-            if(!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId))
+            if (!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId))
                 $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId);
         }
 
-        if(!$this->str->equals($this->httpRequest->post('first_name'), $oUser->firstName))
+        if (!$this->str->equals($this->httpRequest->post('first_name'), $oUser->firstName))
         {
             $oUserModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId);
             $this->session->set('member_first_name', $this->httpRequest->post('first_name'));
@@ -36,10 +36,10 @@ class EditFormProcess extends Form
             (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Members', null)->clear();
         }
 
-        if(!$this->str->equals($this->httpRequest->post('last_name'), $oUser->lastName))
+        if (!$this->str->equals($this->httpRequest->post('last_name'), $oUser->lastName))
             $oUserModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('sex'), $oUser->sex))
+        if (!$this->str->equals($this->httpRequest->post('sex'), $oUser->sex))
         {
             $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
             $this->session->set('member_sex', $this->httpRequest->post('sex'));
@@ -49,10 +49,10 @@ class EditFormProcess extends Form
 
         // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
         // and damages the SET function SQL for entry into the database.
-        if(!$this->str->equals($this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN), $oUser->matchSex))
+        if (!$this->str->equals($this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN), $oUser->matchSex))
             $oUserModel->updateProfile('matchSex', Form::setVal($this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN)), $iProfileId);
 
-        if(!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate))
+        if (!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oUser->birthDate))
             $oUserModel->updateProfile('birthDate', $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $iProfileId);
 
         // Update dynamic fields.
@@ -60,7 +60,7 @@ class EditFormProcess extends Form
         foreach($oFields as $sColumn => $sValue)
         {
             $sHRParam = ($sColumn == 'description') ? Http::ONLY_XSS_CLEAN : null;
-            if(!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue))
+            if (!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue))
                 $oUserModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'MembersInfo');
         }
         unset($oFields);

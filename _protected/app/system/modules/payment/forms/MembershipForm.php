@@ -33,13 +33,13 @@ class MembershipForm
         foreach ($aPerms as $sKey => $sVal)
         {
             $sLabel = (new Str)->upperFirstWords( str_replace('_', ' ', $sKey) );
-            $oForm->addElement(new \PFBC\Element\Select($sLabel, 'perms[' . $sKey . ']', array('1'=>t('Yes'), '0'=>t('No')), array('value'=>$sVal)));
+            $oForm->addElement(new \PFBC\Element\Select($sLabel, 'perms[' . $sKey . ']', array(1=>t('Yes'), 0=>t('No')), array('value'=>$sVal)));
         }
         unset($aPerms);
 
         $oForm->addElement(new \PFBC\Element\Number(t('Price:'), 'price', array('description'=>t('Currency: %0%. 0 = Free. To change the currency, please <a href="%1%">go to settings</a>.', Config::getInstance()->values['module.setting']['currency'], Uri::get('payment','admin','config')), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Number(t('Expiration Days:'), 'expiration_days', array('description'=>t('0 = Unlimited'), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Active:'), 'enable', array('1'=>t('Enabled'), '0'=>t('Disabled')), array('value'=>'1', 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Active:'), 'enable', array(1=>t('Enabled'), 0=>t('Disabled')), array('value'=>1, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Button(t('Add')));
         $oForm->render();
     }

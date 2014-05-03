@@ -104,10 +104,10 @@ $LANG = array (
     Ez eltarthat néhány percig is.',
     'service' => 'Hasznos kiegészítő szolgáltatások',
     'buy_copyright_license_title' => 'Vegyél egy engedély',
-    'buy_copyright_license' => '<span class="bold italic">320£</span> <span class="gray">Egy alkalommal</span> <span class="right">Vásárlás</span>',
+    'buy_copyright_license' => '<span class="gray">Egy alkalommal</span> <span class="right">Vásárlás</span>',
     'buy_copyright_license_desc' => 'A vásárló egy licenckulcs, akkor nem lesz olyan linkeket, és szerzői jogi figyelmeztetést weboldalán.',
     'buy_individual_ticket_support_title' => 'Vegyél egy egyéni támogató szolgálat',
-    'buy_individual_ticket_support' => '<span class="bold italic">55£</span> <span class="gray">Teljes jegy támogatás egy hónapra</span> <span class="right">Vásárlás</span>',
+    'buy_individual_ticket_support' => '<span class="gray">Teljes jegy támogatás egy hónapra</span> <span class="right">Vásárlás</span>',
     'buy_individual_ticket_support_desc' => 'Megvásárlásával egy egyéni jegyet támogatás, segítünk, ha van egy probléma a szoftver. Mi az Ön rendelkezésére megoldani minden problémát találkozás pH7CMS.',
     'looking_hosting' =>'Keresek egy Web Host kompatibilis pH7CMS? Tekintse <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">meg a Listát Hosting</a>!',
     'error_get_server_url' => 'Hozzáférési problémák a Webszerverünkhöz.<br />
