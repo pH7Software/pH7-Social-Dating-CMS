@@ -17,21 +17,23 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
+        $bAdminAuth = AdminCore::auth();
+
         /***** Levels for admin module *****/
 
         // Overall levels
 
-        if (!Admin::auth() && $this->registry->action !== 'login')
+        if (!$bAdminAuth && $this->registry->action !== 'login')
         {
             HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'login'), $this->signInMsg(), 'error');
         }
 
-        if (Admin::auth() && $this->registry->action === 'login')
+        if ($bAdminAuth && $this->registry->action === 'login')
         {
             HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('Oops! You are already logged in as administrator.'), 'error');
         }
 
-        // Options
+        // Options ...
     }
 
 }

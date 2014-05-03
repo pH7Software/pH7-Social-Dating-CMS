@@ -7,7 +7,6 @@
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
 
 class Permission extends PermissionCore
 {
@@ -16,15 +15,29 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if(!UserCore::auth() && !AdminCore::auth())
+        $bAdminAuth = AdminCore::auth();
+
+        if (!UserCore::auth() && !$bAdminAuth)
         {
-            HeaderUrl::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
+            $this->signInRedirect();
         }
 
-        if(!AdminCore::auth() && $this->registry->controller === 'AdminController')
+        if (!$bAdminAuth)
+        {
+            if (!$this->checkMembership() || ($this->registry->action === 'inbox' && !$this->group->read_mails))
+            {
+                $this->paymentRedirect();
+            }
+            elseif ($this->registry->action === 'compose' && !$this->group->write_mails)
+            {
+                $this->paymentRedirect();
+            }
+        }
+
+        if (!$bAdminAuth && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            HeaderUrl::redirect(Uri::get('user','main','login'), $this->adminSignInMsg(), 'error');
+            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('user','main','login'), $this->adminSignInMsg(), 'error');
         }
     }
 

@@ -8,8 +8,6 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Mvc\Router\Uri;
-
 class Permission extends PermissionCore
 {
 
@@ -17,11 +15,24 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if ((!UserCore::auth() && !AdminCore::auth()) && ($this->registry->action === 'add' || $this->registry->action === 'delete'))
+        $bAdminAuth = AdminCore::auth();
+
+        if ((!UserCore::auth() && !$bAdminAuth) && ($this->registry->action === 'add' || $this->registry->action === 'delete'))
         {
-            Framework\Url\HeaderUrl::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
+            $this->signInRedirect();
         }
 
+        if (!$bAdminAuth)
+        {
+            if (!$this->checkMembership() || !$this->group->view_comments))
+            {
+                $this->paymentRedirect();
+            }
+            elseif ($this->registry->action === 'add' && !$this->group->write_comments)
+            {
+                $this->paymentRedirect();
+            }
+        }
     }
 
 }

@@ -7,7 +7,6 @@
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
-use PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -18,7 +17,11 @@ class Permission extends PermissionCore
 
         if (!UserCore::auth())
         {
-            Framework\Url\HeaderUrl::redirect(Uri::get('user','signup','step1'), $this->signUpMsg());
+            $this->signUpRedirect();
+        }
+        elseif (!$this->checkMembership() || !$this->group->love_calculator)
+        {
+            $this->paymentRedirect();
         }
     }
 

@@ -7,7 +7,6 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -16,12 +15,21 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-         // Level for Blogs
+        // Level for Blogs
+        $bAdminAuth = AdminCore::auth();
 
-        if(!AdminCore::auth() && $this->registry->controller === 'AdminController')
+        if (!$bAdminAuth)
+        {
+            if (!$this->checkMembership() || ($this->registry->action === 'read' && !$this->group->read_blog_posts))
+            {
+                $this->paymentRedirect();
+            }
+        }
+
+        if (!$bAdminAuth && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            HeaderUrl::redirect(Uri::get('blog','main','index'), $this->adminSignInMsg(), 'error');
+            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('blog','main','index'), $this->adminSignInMsg(), 'error');
         }
     }
 

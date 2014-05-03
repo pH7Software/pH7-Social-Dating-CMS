@@ -9,7 +9,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 /**
- * The default data permissions of memberships.
+ * Default data permissions of memberships.
  * After the data will be serialized and stored in the database for the personalized membership groups.
  *
  * 1 = Yes | 0 = No
@@ -18,4 +18,26 @@ defined('PH7') or exit('Restricted access');
 return array(
     'quick_search_profiles' => 1,
     'advanced_search_profiles' => 1,
+    'read_mails' => 1,
+    'send_mails' => 1,
+    'view_pictures' => 1,
+    'upload_pictures' => 1,
+    'view_videos' => 1,
+    'upload_videos' => 1,
+    //'im' => 1, // Instant Messaging
+    'chat' => 1,
+    'chatroulette' => 1,
+    'hot_or_not' => 1,
+    'love_calculator' =>1,
+    'read_notes' => 1,
+    'write_notes' => 1,
+    'read_blog_posts' => 1,
+    'view_comments' => 1,
+    'write_comments' => 1,
+    'forum_access' => 1,
+    'create_forum_topics' => 1,
+    'answer_forum_topics' => 1,
+    'games_access' => 1,
+    'webcam_access' => 1,
+    'member_site_access' => 1,
 );

@@ -7,7 +7,6 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -17,17 +16,35 @@ class Permission extends PermissionCore
         parent::__construct();
 
         /***** Levels for the forums *****/
+        $bAdminAuth = AdminCore::auth();
 
-        if((!UserCore::auth() && !AdminCore::auth()) && ($this->registry->action === 'addtopic' || $this->registry->action === 'edittopic' || $this->registry->action === 'deletetopic' ||
-        $this->registry->action === 'reply' || $this->registry->action === 'editmessage' || $this->registry->action === 'deletemessage'))
+        if ((!UserCore::auth() && !$bAdminAuth) && ($this->registry->action === 'addtopic' || $this->registry->action === 'edittopic'
+        || $this->registry->action === 'deletetopic' || $this->registry->action === 'reply' || $this->registry->action === 'editmessage'
+        || $this->registry->action === 'deletemessage'))
         {
-            HeaderUrl::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
+            $this->signInRedirect();
         }
 
-        if((!AdminCore::auth()) && ($this->registry->controller === 'AdminController'))
+        if (!$bAdminAuth)
+        {
+            if (!$this->checkMembership() || !$this->group->forum_access)
+            {
+                $this->paymentRedirect();
+            }
+            elseif ($this->registry->action === 'addtopic' && !$this->group->create_forum_topics)
+            {
+                $this->paymentRedirect();
+            }
+            elseif ($this->registry->action === 'reply' && !$this->group->answer_forum_topics)
+            {
+                $this->paymentRedirect();
+            }
+        }
+
+        if (!$bAdminAuth && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            Framework\Url\HeaderUrl::redirect(Uri::get('forum','forum','index'), $this->adminSignInMsg(), 'error');
+            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('forum','forum','index'), $this->adminSignInMsg(), 'error');
         }
     }
 
