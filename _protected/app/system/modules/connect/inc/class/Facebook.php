@@ -115,7 +115,7 @@ class Facebook extends Api implements IApi
         $this->_aUserInfo = [
             'email' => $aProfile['email'],
             'username' => $this->_sUsername,
-            'password' => Various::genRndWord(8,40),
+            'password' => Various::genRndWord(8,30),
             'first_name' => (!empty($aProfile['first_name'])) ? $aProfile['first_name'] : '',
             'last_name' => (!empty($aProfile['last_name'])) ? $aProfile['last_name'] : '',
             'middle_name' => (!empty($aProfile['middle_name'])) ? $aProfile['middle_name'] : '',

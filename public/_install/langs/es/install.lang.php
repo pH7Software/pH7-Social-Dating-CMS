@@ -104,10 +104,10 @@ $LANG = array (
     Esto puede tardar varios minutos.',
     'service' => 'Servicios adicionales útiles',
     'buy_copyright_license_title' => 'Comprar una licencia',
-    'buy_copyright_license' => '<span class="bold italic">320£</span> <span class="gray">Licencia de por vida</span> <span class="right">Compre ahora</span>',
+    'buy_copyright_license' => '<span class="gray">Licencia de por vida</span> <span class="right">Compre ahora</span>',
     'buy_copyright_license_desc' => 'Al comprar una clave de licencia, usted no tendrá ningún vínculo y avisos de derechos de autor en su sitio web.',
     'buy_individual_ticket_support_title' => 'Compre un servicio de apoyo individual',
-    'buy_individual_ticket_support' => '<span class="bold italic">55£</span> <span class="gray">Tickets de soporte completo durante un mes</span> <span class="right">Compre ahora</span>',
+    'buy_individual_ticket_support' => '<span class="gray">Tickets de soporte completo durante un mes</span> <span class="right">Compre ahora</span>',
     'buy_individual_ticket_support_desc' => 'Al comprar el apoyo individual, le ayudaremos siempre que tenga un problema con nuestro software. Estamos a su disposición para resolver cualquier encuentro problema pH7CMS.',
     'looking_hosting' =>'¿Buscando un alojamiento web compatible con pH7CMS? ¡Vea <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">nuestra Lista de Alojamiento</a>!',
     'error_get_server_url' => 'Acceda a problemas con nuestro servidor Web.<br />
