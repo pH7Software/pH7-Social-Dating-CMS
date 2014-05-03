@@ -19,7 +19,7 @@ class Permission extends PermissionCore
 
         if (UserCore::auth() && $this->registry->controller === 'HomeController')
         {
-            // Only for visitors
+            // Newsletter subscription is only for visitors, not for members since they can subscribe into their account.
             HeaderUrl::redirect(Uri::get('user','main','index'));
         }
 

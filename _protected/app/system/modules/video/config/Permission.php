@@ -7,7 +7,6 @@
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -16,11 +15,23 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if(!UserCore::auth() && ($this->registry->action === 'addvideo' || $this->registry->action === 'addalbum'
+        if(!UserCore::auth() && ($this->registry->action === 'addalbum' || $this->registry->action === 'addvideo'
         || $this->registry->action === 'editalbum' || $this->registry->action === 'editvideo'
         || $this->registry->action === 'deletevideo' || $this->registry->action === 'deletealbum'))
         {
-            HeaderUrl::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
+            $this->signInRedirect();
+        }
+
+        if (!AdminCore::auth()) // If the administrator is not logged
+        {
+            if (!$this->checkMembership() || !$this->group->view_videos)
+            {
+                $this->paymentRedirect();
+            }
+            elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addvideo') && $this->group->upload_videos)
+            {
+                $this->paymentRedirect();
+            }
         }
     }
 

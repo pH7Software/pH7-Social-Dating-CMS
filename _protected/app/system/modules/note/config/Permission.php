@@ -7,7 +7,6 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -17,16 +16,29 @@ class Permission extends PermissionCore
         parent::__construct();
 
         // Level for Notes
+        $bAdminAuth = AdminCore::auth();
 
         if(!UserCore::auth() && ($this->registry->action === 'add' || $this->registry->action === 'edit' || $this->registry->action === 'delete'))
         {
-            HeaderUrl::redirect(Uri::get('user','signup','step1'), t('Please register or login to add an article.'), 'error');
+            $this->signUpRedirect();
         }
 
-        if(!AdminCore::auth() && $this->registry->controller === 'AdminController')
+        if (!$bAdminAuth)
+        {
+            if (!$this->checkMembership() || ($this->registry->action === 'read' && !$this->group->read_notes))
+            {
+                $this->paymentRedirect();
+            }
+            elseif ($this->registry->action === 'add' && !$this->group->write_notes)
+            {
+                $this->paymentRedirect();
+            }
+        }
+
+        if(!$bAdminAuth && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            HeaderUrl::redirect(Uri::get('blog','main','index'), $this->adminSignInMsg(), 'error');
+            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('blog','main','index'), $this->adminSignInMsg(), 'error');
         }
     }
 
