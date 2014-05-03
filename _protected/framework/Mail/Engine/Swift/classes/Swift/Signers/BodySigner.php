@@ -12,7 +12,7 @@
  * Body Signer Interface used to apply Body-Based Signature to a message
  *
  * @package    Swift
- * @subpackage Signed
+ * @subpackage Signatures
  * @author     Xavier De Cock <xdecock@gmail.com>
  */
 interface Swift_Signers_BodySigner extends Swift_Signer
@@ -20,11 +20,11 @@ interface Swift_Signers_BodySigner extends Swift_Signer
     /**
      * Change the Swift_Signed_Message to apply the singing.
      *
-     * @param Swift_Signed_Message $message
+     * @param Swift_Message $message
      *
      * @return Swift_Signers_BodySigner
      */
-    public function signMessage(Swift_SignedMessage $message);
+    public function signMessage(Swift_Message $message);
 
     /**
      * Return the list of header a signer might tamper

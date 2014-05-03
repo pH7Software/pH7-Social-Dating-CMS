@@ -24,7 +24,7 @@ class Mail
      * @param array $aInfo
      * @param string $sContents
      * @param boolean $bHtmlFormat Default TRUE
-     * @return integer
+     * @return integer Number of recipients who were accepted for delivery.
      */
     public function send(array $aInfo, $sContents, $bHtmlFormat = true)
     {
