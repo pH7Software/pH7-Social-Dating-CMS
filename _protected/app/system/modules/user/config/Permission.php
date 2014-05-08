@@ -41,7 +41,7 @@ class Permission extends PermissionCore
         // Options and Memberships ...
         if (!$bAdminAuth) // If the administrator is not logged
         {
-            if (!$this->checkMembership() || ($bUserAuth && !$this->group->site_access))
+            if (!$this->checkMembership() || ($bUserAuth && !$this->group->member_site_access))
             {
                 $this->paymentRedirect();
             }
