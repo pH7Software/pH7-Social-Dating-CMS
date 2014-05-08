@@ -598,14 +598,14 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersInfo') . '(profileId, middleName, country, city, state, zipCode, description, website, socialNetworkSite)
             VALUES (:profileId, :middleName, :country, :city, :state, :zipCode, :description, :website, :socialNetworkSite)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
-        $rStmt->bindValue(':middleName', $aData['middle_name'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);
-        $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':website', trim($aData['website']), \PDO::PARAM_STR);
-        $rStmt->bindValue(':socialNetworkSite', trim($aData['social_network_site']), \PDO::PARAM_STR);
+        $rStmt->bindValue(':middleName', (!empty($aData['middle_name']) ? $aData['middle_name'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindParam(':country', (!empty($aData['country']) ? $aData['country'] : ''), \PDO::PARAM_STR, 2);
+        $rStmt->bindValue(':city', (!empty($aData['city']) ? $aData['city'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':state', (!empty($aData['state']) ? $aData['state'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':zipCode', (!empty($aData['zip_code']) ? $aData['zip_code'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':description', (!empty($aData['description']) ? $aData['description'] : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':website', (!empty($aData['website']) ? trim($aData['website']) : ''), \PDO::PARAM_STR);
+        $rStmt->bindValue(':socialNetworkSite', (!empty($aData['social_network_site']) ? trim($aData['social_network_site']) : ''), \PDO::PARAM_STR);
         return $rStmt->execute();
     }
 

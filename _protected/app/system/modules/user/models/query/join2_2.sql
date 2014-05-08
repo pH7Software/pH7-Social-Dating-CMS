@@ -1,1 +1,1 @@
-INSERT INTO [DB_PREFIX]MembersInfo (profileId, country, city, state, zipCode) VALUES (:profile_id, :country, :city, :state, :zip_code);
+UPDATE [DB_PREFIX]MembersInfo SET country = :country, city = :city, state = :state, zipCode = :zip_code WHERE profileId = :profile_id LIMIT 1;
