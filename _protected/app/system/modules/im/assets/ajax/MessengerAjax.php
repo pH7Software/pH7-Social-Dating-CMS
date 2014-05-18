@@ -119,7 +119,7 @@ class MessengerAjax
         if (!$this->isOnline($sFrom))
             $sItems = t('You must have the status of ONLINE in order to speak instantaneous.');
         elseif (!$this->isOnline($sSent))
-            $sItems = t('%0% is offline, send a message instead.', $sSent);
+            $sItems = '<small><em>' . t('%0% is offline. Send a Private Message instead.', $sSent) . '</em></small>';
         else
             $this->_oMessengerModel->update($sFrom);
 
@@ -177,7 +177,7 @@ class MessengerAjax
         if (!$this->isOnline($sFrom))
             $sMsgTransform = t('You must have the status of ONLINE in order to chat with other members.');
         elseif (!$this->isOnline($sTo))
-            $sMsgTransform = t('%0% is offline, send a message instead.', $sTo);
+            $sMsgTransform = '<small><em>' . t('%0% is offline. Send a Private Message instead.', $sTo) . '</em></small>';
         else
             $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new \PH7\Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s'));
 
