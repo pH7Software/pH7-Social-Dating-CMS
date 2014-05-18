@@ -227,15 +227,11 @@ var Messenger = {
 
         for (x in this.aNewMessages)
         {
-            if (this.aNewMessages[x] == true)
-            {
-                if (this.aBoxFocus[x] == false)
-                {
+
                     //FIXME: add toggle all or none policy, otherwise it looks funny
                     oMe.soundAlert();
                     $('#chatbox_' + x + ' .chatboxhead').toggleClass('chatboxblink');
-                }
-            }
+
         }
 
         $.ajax(
@@ -466,9 +462,11 @@ $(document).ready(function ()
 
     Messenger.Messenger().startSession();
 
-    $([window, document]).blur(function () {
+    $([window, document]).blur(function ()
+    {
         bWindowFocus = false;
-    }).focus(function () {
+    }).focus(function ()
+    {
         bWindowFocus = true;
         document.title = sOriginalTitle;
     });
