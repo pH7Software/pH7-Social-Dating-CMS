@@ -24,7 +24,7 @@ class Permission extends PermissionCore
 
         if (!$bAdminAuth)
         {
-            if (!$this->checkMembership() || !$this->group->view_comments))
+            if (!$this->checkMembership() || !$this->group->view_comments)
             {
                 $this->paymentRedirect();
             }
