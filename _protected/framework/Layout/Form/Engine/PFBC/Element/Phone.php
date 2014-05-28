@@ -11,7 +11,7 @@ class Phone extends Textbox
 
     public function render()
     {
-        $this->attributes['type'] = 'tel'; // Phone Type
+        $this->attributes['type'] = 'tel'; // Phone type
         $this->attributes['pattern'] = Config::getInstance()->values['validate']['phone.pattern'];
         $this->validation[] = new \PFBC\Validation\Phone;
         parent::render();

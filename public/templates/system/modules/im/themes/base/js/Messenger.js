@@ -21,9 +21,9 @@ var Messenger = {
     sUsername: null,
     sBoxTitle: '',
     iHeartbeatCount: 0,
-    iMinHeartbeat: 5000,
-    iMaxHeartbeat: 50000,
-    iHeartbeatTime: this.minHeartbeat,
+    iHeartbeatTime: 0,
+    iMinHeartbeat: 1500,
+    iMaxHeartbeat: 40000,
     iBlinkOrder: 0,
     sMessage: '',
 
@@ -36,6 +36,7 @@ var Messenger = {
     // Constructor
     Messenger: function ()
     {
+        this.iHeartbeatTime = this.iMinHeartbeat;
         oMe = this; // Self Object
 
         return this;
@@ -59,9 +60,8 @@ var Messenger = {
                 }
                 else
                 {
-                    width = (iAlign) * (225 + 7) + 20;
-                    $("#chatbox_" + this.sBoxTitle)
-                        .css('right', width + 'px');
+                    iWidth = (iAlign) * (225 + 7) + 20;
+                    $("#chatbox_" + this.sBoxTitle).css('right', iWidth + 'px');
                 }
                 ++iAlign;
             }
@@ -117,14 +117,13 @@ var Messenger = {
 
         if (iBoxesLength == 0)
         {
-            $("#chatbox_" + sBoxTitle)
-                .css('right', '20px');
+            $("#chatbox_" + sBoxTitle).css('right', '20px');
         }
         else
         {
-            width = (iBoxesLength) * (225 + 7) + 20;
+            iWidth = (iBoxesLength) * (225 + 7) + 20;
             $("#chatbox_" + sBoxTitle)
-                .css('right', width + 'px');
+                .css('right', iWidth + 'px');
         }
 
         this.aBoxes.push(sBoxTitle);
@@ -192,8 +191,8 @@ var Messenger = {
 
         if (bWindowFocus == false)
         {
-            var iBlinkNumber = 0,
-                iTitleChanged = 0;
+            var iBlinkNumber = 0, iTitleChanged = 0;
+
             for (x in this.aNewMessagesWin)
             {
                 if (this.aNewMessagesWin[x] == true)
@@ -227,10 +226,9 @@ var Messenger = {
 
         for (x in this.aNewMessages)
         {
-
-                    //FIXME: add toggle all or none policy, otherwise it looks funny
-                    oMe.soundAlert();
-                    $('#chatbox_' + x + ' .chatboxhead').toggleClass('chatboxblink');
+            //TODO: Add toggle all or none policy, otherwise it looks awkward.
+            oMe.soundAlert();
+            $('#chatbox_' + x + ' .chatboxhead').toggleClass('chatboxblink');
 
         }
 
@@ -246,14 +244,12 @@ var Messenger = {
                 {
                     oMe.sBoxTitle = oItem.user;
 
-                    if ($("#chatbox_" + oMe.sBoxTitle)
-                        .length <= 0) oMe.createBox(oMe.sBoxTitle);
+                    if ($("#chatbox_" + oMe.sBoxTitle).length <= 0)
+                        oMe.createBox(oMe.sBoxTitle);
 
-                    if ($("#chatbox_" + oMe.sBoxTitle)
-                        .css('display') == 'none')
+                    if ($("#chatbox_" + oMe.sBoxTitle).css('display') == 'none')
                     {
-                        $("#chatbox_" + oMe.sBoxTitle)
-                            .css('display', 'block');
+                        $("#chatbox_" + oMe.sBoxTitle).css('display', 'block');
                         oMe.restructureBoxes();
                     }
 
@@ -301,8 +297,7 @@ var Messenger = {
 
     closeBox: function (sBoxTitle)
     {
-        $('#chatbox_' + sBoxTitle)
-            .css('display', 'none');
+        $('#chatbox_' + sBoxTitle).css('display', 'none');
         this.restructureBoxes();
 
         $.post(pH7Url.base + "im/asset/ajax/Messenger/?act=close", {box: sBoxTitle});
@@ -310,8 +305,7 @@ var Messenger = {
 
     toggleBoxGrowth: function (sBoxTitle)
     {
-        if ($('#chatbox_' + sBoxTitle + ' .chatboxcontent')
-            .css('display') == 'none')
+        if ($('#chatbox_' + sBoxTitle + ' .chatboxcontent').css('display') == 'none')
         {
             if ($.cookie('chatbox_minimized')) this.aMinimizedBoxes = $.cookie('chatbox_minimized')
                 .split(/\|/);
@@ -330,10 +324,8 @@ var Messenger = {
 
 
             $.cookie('chatbox_minimized', sNewCookie);
-            $('#chatbox_' + sBoxTitle + ' .chatboxcontent')
-                .css('display', 'block');
-            $('#chatbox_' + sBoxTitle + ' .chatboxinput')
-                .css('display', 'block');
+            $('#chatbox_' + sBoxTitle + ' .chatboxcontent').css('display', 'block');
+            $('#chatbox_' + sBoxTitle + ' .chatboxinput').css('display', 'block');
             $("#chatbox_" + sBoxTitle + " .chatboxcontent")
                 .scrollTop($("#chatbox_" + sBoxTitle + " .chatboxcontent")[0].scrollHeight);
         }
@@ -344,10 +336,8 @@ var Messenger = {
             if ($.cookie('chatbox_minimized')) sNewCookie += '|' + $.cookie('chatbox_minimized');
 
             $.cookie('chatbox_minimized', sNewCookie);
-            $('#chatbox_' + sBoxTitle + ' .chatboxcontent')
-                .css('display', 'none');
-            $('#chatbox_' + sBoxTitle + ' .chatboxinput')
-                .css('display', 'none');
+            $('#chatbox_' + sBoxTitle + ' .chatboxcontent').css('display', 'none');
+            $('#chatbox_' + sBoxTitle + ' .chatboxinput').css('display', 'none');
         }
     },
 
@@ -355,27 +345,20 @@ var Messenger = {
     {
         if (oEvent.keyCode == 13 && oEvent.shiftKey == 0)
         {
-            this.sMessage = $(oBoxTextarea)
-                .val();
+            this.sMessage = $(oBoxTextarea).val();
             this.sMessage = this.sMessage.replace(/^\s+|\s+$/g, "");
 
-            $(oBoxTextarea)
-                .val('');
-            $(oBoxTextarea)
-                .focus();
-            $(oBoxTextarea)
-                .css('height', '44px');
+            $(oBoxTextarea).val('');
+            $(oBoxTextarea).focus();
+            $(oBoxTextarea).css('height', '44px');
             if (this.sMessage != '')
             {
                 $.post(pH7Url.base + "im/asset/ajax/Messenger/?act=send", {to: sBoxTitle, message: this.sMessage}, function (oData)
                 {
-                    oMe.sMessage = oMe.sMessage.replace(/</g, "&lt;")
-                        .replace(/>/g, "&gt;")
-                        .replace(/\"/g, "&quot;");
+                    oMe.sMessage = oMe.sMessage.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;");
                     $("#chatbox_" + sBoxTitle + " .chatboxcontent")
                         .append('<div class="chatboxmessage"><span class="chatboxmessagefrom">' + oData.user + ':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">' + oData.msg + '</span></div>');
-                    $("#chatbox_" + sBoxTitle + " .chatboxcontent")
-                        .scrollTop($("#chatbox_" + sBoxTitle + " .chatboxcontent")[0].scrollHeight);
+                    $("#chatbox_" + sBoxTitle + " .chatboxcontent").scrollTop($("#chatbox_" + sBoxTitle + " .chatboxcontent")[0].scrollHeight);
                 });
             }
             this.iHeartbeatTime = this.iMinHeartbeat;
@@ -391,8 +374,7 @@ var Messenger = {
         {
             iAdjustedHeight = Math.max(oBoxTextarea.scrollHeight, iAdjustedHeight);
             if (iMaxHeight) iAdjustedHeight = Math.min(iMaxHeight, iAdjustedHeight);
-            if (iAdjustedHeight > oBoxTextarea.clientHeight) $(oBoxTextarea)
-                .css('height', iAdjustedHeight + 8 + 'px');
+            if (iAdjustedHeight > oBoxTextarea.clientHeight) $(oBoxTextarea).css('height', iAdjustedHeight + 8 + 'px');
         }
         else
         {

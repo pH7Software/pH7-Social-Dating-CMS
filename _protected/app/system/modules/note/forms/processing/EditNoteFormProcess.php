@@ -29,7 +29,8 @@ class EditNoteFormProcess extends Form
         $iProfileId = $this->session->get('member_id');
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);
 
-        $sPostId = $this->httpRequest->post('post_id'); // Updating the ID of the post if it has changed.
+        /*** Updating the ID of the post if it has changed ***/
+        $sPostId = $this->httpRequest->post('post_id');
         if(!$this->str->equals($sPostId, $oPost->postId))
         {
             if($oNote->checkPostId($sPostId, $iProfileId))

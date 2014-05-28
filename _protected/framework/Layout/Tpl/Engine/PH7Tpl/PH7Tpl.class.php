@@ -216,12 +216,12 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Set the time of expire cache.
      *
-     * @param integer $iCacheExpire In seconds.
+     * @param integer $iLifeTime In seconds.
      * @return void
      */
-    public function setCacheExpire($iCacheExpire)
+    public function setCacheExpire($iLifeTime)
     {
-        $this->mCacheExpire = (int) $iCacheExpire; // 3600 seconds = 1 hour cache duration
+        $this->mCacheExpire = (int) $iLifeTime; // 3600 seconds = 1 hour cache duration
     }
 
     /**

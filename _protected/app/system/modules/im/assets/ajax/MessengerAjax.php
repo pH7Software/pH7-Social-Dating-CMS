@@ -101,7 +101,7 @@ class MessengerAjax
                     $iNow = time() - strtotime($iTime);
                     $sTime = date('g:iA M dS', strtotime($iTime));
 
-                    $sMsg = "Sent at $sTime";
+                    $sMsg = t('Sent at %0%', Framework\Date\Various::textTimeStamp($sTime));
                     if ($iNow > 180)
                     {
                         $sItems .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg]);
@@ -117,7 +117,7 @@ class MessengerAjax
         }
 
         if (!$this->isOnline($sFrom))
-            $sItems = t('You must have the status of ONLINE in order to speak instantaneous.');
+            $sItems = t('You must have the ONLINE status in order to speak instantaneous.');
         elseif (!$this->isOnline($sSent))
             $sItems = '<small><em>' . t('%0% is offline. Send a Private Message instead.', $sSent) . '</em></small>';
         else
@@ -175,7 +175,7 @@ class MessengerAjax
             $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] = '';
 
         if (!$this->isOnline($sFrom))
-            $sMsgTransform = t('You must have the status of ONLINE in order to chat with other members.');
+            $sMsgTransform = t('You must have the ONLINE status in order to chat with other members.');
         elseif (!$this->isOnline($sTo))
             $sMsgTransform = '<small><em>' . t('%0% is offline. Send a Private Message instead.', $sTo) . '</em></small>';
         else

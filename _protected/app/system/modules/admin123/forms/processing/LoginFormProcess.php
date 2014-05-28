@@ -32,10 +32,10 @@ class LoginFormProcess extends Form
         $sPassword = $this->httpRequest->post('password');
 
 
-        /** Security IP Login */
+        /*** Security IP Login ***/
         $sIpLogin = DbConfig::getSetting('ipLogin');
 
-        /** Check if the connection is not locked **/
+        /*** Check if the connection is not locked ***/
         $bIsLoginAttempt = (bool) DbConfig::getSetting('isAdminLoginAttempt');
         $iMaxAttempts = (int) DbConfig::getSetting('maxAdminLoginAttempts');
         $iTimeDelay = (int) DbConfig::getSetting('loginAdminAttemptTime');
@@ -46,14 +46,15 @@ class LoginFormProcess extends Form
             return; // Stop execution of the method.
         }
 
-        // Check Login
-        $bIsLogged = $oAdminModel->adminLogin($sEmail, $sUsername, $sPassword) !== true;
+        /*** Check Login ***/
+        $bIsLogged = $oAdminModel->adminLogin($sEmail, $sUsername, $sPassword);
         $bIsIpBanned = !empty($sIpLogin) && $sIpLogin !== $sIp;
-        if($bIsLogged || $bIsIpBanned)
+
+        if(!$bIsLogged || $bIsIpBanned) // If the login is failed or if the IP address is banned
         {
             sleep(2); // Security against brute-force attack to avoid drowning the server and the database
 
-            if($bIsLogged)
+            if(!$bIsLogged)
             {
                 $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', 'Admins');
 

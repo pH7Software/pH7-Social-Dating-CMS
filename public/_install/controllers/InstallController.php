@@ -49,9 +49,9 @@ class InstallController extends Controller
             $sLangSelect .= '<option value="?l=' . $sLang . $sSel . '">' . $aLangsList[$sLang] . '</option>';
         }
 
-        $this->view->assign('lang_select', $sLangSelect);
-        $this->view->assign('sept_number', 1);
-        $this->view->display('index.tpl');
+        $this->oView->assign('lang_select', $sLangSelect);
+        $this->oView->assign('sept_number', 1);
+        $this->oView->display('index.tpl');
     }
 
     /********************* STEP 2 *********************/
@@ -95,10 +95,10 @@ class InstallController extends Controller
             redirect(PH7_URL_SLUG_INSTALL . 'config_path');
         }
 
-        $this->view->assign('sept_number', 2);
-        $this->view->assign('errors', @$aErrors);
+        $this->oView->assign('sept_number', 2);
+        $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
-        $this->view->display('license.tpl');
+        $this->oView->display('license.tpl');
     }
 
     /********************* STEP 3 *********************/
@@ -166,10 +166,10 @@ class InstallController extends Controller
             redirect(PH7_URL_SLUG_INSTALL . 'config_system');
         }
 
-        $this->view->assign('sept_number', 3);
-        $this->view->assign('errors', @$aErrors);
+        $this->oView->assign('sept_number', 3);
+        $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
-        $this->view->display('config_path.tpl');
+        $this->oView->display('config_path.tpl');
     }
 
     /********************* STEP 4 *********************/
@@ -326,10 +326,10 @@ class InstallController extends Controller
             redirect(PH7_URL_SLUG_INSTALL . 'config_site');
         }
 
-        $this->view->assign('sept_number', 4);
-        $this->view->assign('errors', @$aErrors);
+        $this->oView->assign('sept_number', 4);
+        $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
-        $this->view->display('config_system.tpl');
+        $this->oView->display('config_system.tpl');
     }
 
     /********************* STEP 5 *********************/
@@ -506,17 +506,17 @@ class InstallController extends Controller
             redirect(PH7_URL_SLUG_INSTALL . 'service');
         }
 
-        $this->view->assign('sept_number', 5);
-        $this->view->assign('errors', @$aErrors);
+        $this->oView->assign('sept_number', 5);
+        $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
-        $this->view->display('config_site.tpl');
+        $this->oView->display('config_site.tpl');
     }
 
     /********************* STEP 6 *********************/
     public function service ()
     {
-        $this->view->assign('sept_number', 6);
-        $this->view->display('service.tpl');
+        $this->oView->assign('sept_number', 6);
+        $this->oView->display('service.tpl');
     }
 
     /********************* STEP 7 *********************/
@@ -556,8 +556,8 @@ class InstallController extends Controller
             exit(header('Location: ' . PH7_URL_ROOT));
         }
 
-        $this->view->assign('sept_number', 7);
-        $this->view->display('finish.tpl');
+        $this->oView->assign('sept_number', 7);
+        $this->oView->display('finish.tpl');
     }
 
     /***** Get the loading image *****/

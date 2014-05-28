@@ -10,7 +10,7 @@ class Url extends Textbox
 
     public function render()
     {
-        $this->attributes['type'] = 'url'; // URL Type
+        $this->attributes['type'] = 'url'; // URL type
         $this->validation[] = new \PFBC\Validation\Url;
         parent::render();
     }
