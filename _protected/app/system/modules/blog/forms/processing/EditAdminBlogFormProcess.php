@@ -26,7 +26,8 @@ class EditAdminBlogFormProcess extends Form
         $sPostId = $oBlogModel->getPostId($iBlogId);
         $oPost = $oBlogModel->readPost($sPostId);
 
-        $sPostId = $this->httpRequest->post('post_id'); // Updating the ID of the post if it has changed.
+        /*** Updating the ID of the post if it has changed ***/
+        $sPostId = $this->httpRequest->post('post_id');
         if(!$this->str->equals($sPostId, $oPost->postId))
         {
             if($oBlog->checkPostId($sPostId))

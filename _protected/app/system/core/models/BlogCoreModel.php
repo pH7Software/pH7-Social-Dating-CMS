@@ -19,7 +19,7 @@ class BlogCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param integer $iOffset
      * @param integer $iLimit
-     * @param string $sOrder A constant: BlogCoreModel::CREATED (default value) or BlogCoreModel::UPDATED.
+     * @param string $sOrder A constant: SearchCoreModel::CREATED (default value) or SearchCoreModel::UPDATED
      * @return string
      */
     public function getPosts($iOffset, $iLimit, $sOrder = SearchCoreModel::CREATED)

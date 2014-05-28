@@ -54,7 +54,7 @@ class Note extends WriteCore
      */
     public function checkPostId($sPostId, $iProfileId)
     {
-        return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !(new NoteModel)->postIdExists($sPostId, $iProfileId)) ? true : false;
+        return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !(new NoteModel)->postIdExists($sPostId, $iProfileId));
     }
 
 }

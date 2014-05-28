@@ -166,7 +166,7 @@ class Http extends \PH7\Framework\Http\Http
     }
 
     /**
-     * Get the $_GET and $_POST request type.
+     * $_GET and $_POST request type.
      *
      * @param string $sKey
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
@@ -213,11 +213,12 @@ class Http extends \PH7\Framework\Http\Http
     }
 
     /**
-     * Post only Request Parameter.
+     * Post Request Parameter.
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
+     * @throws \PH7\Framework\Mvc\Request\Exception If the request is not POST.
      */
     public function post($sKey, $sParam = null)
     {

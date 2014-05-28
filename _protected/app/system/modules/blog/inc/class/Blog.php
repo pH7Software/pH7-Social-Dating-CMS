@@ -63,7 +63,7 @@ class Blog extends WriteCore
      */
     public function checkPostId($sPostId)
     {
-        return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !(new BlogModel)->postIdExists($sPostId)) ? true : false;
+        return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !(new BlogModel)->postIdExists($sPostId));
     }
 
 }

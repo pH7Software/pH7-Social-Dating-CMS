@@ -18,7 +18,7 @@ class MainController extends Controller
     /********************* ERROR 404 *********************/
     public function error_404 ()
     {
-        $this->view->display('error_404.tpl');
+        $this->oView->display('error_404.tpl');
     }
 
 }

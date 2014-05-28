@@ -33,12 +33,12 @@ abstract class Controller implements IController
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',
-    SOFTWARE_VERSION = '1.1.0',
+    SOFTWARE_VERSION = '1.1.2',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
 
-    protected $sCurrentLang;
+    protected $oView, $sCurrentLang;
 
     public function __construct ()
     {
@@ -57,28 +57,27 @@ abstract class Controller implements IController
         include_once PH7_ROOT_INSTALL . 'langs/' . $this->sCurrentLang . '/install.lang.php';
 
         /* Smarty initialization */
-        $this->view = new \Smarty;
-        $this->view->use_sub_dirs = true;
-        $this->view->setTemplateDir(PH7_ROOT_INSTALL . 'views/' . self::DEFAULT_THEME);
-        $this->view->setCompileDir(PH7_ROOT_INSTALL . 'data/caches/smarty_compile');
-        $this->view->setCacheDir(PH7_ROOT_INSTALL  . 'data/caches/smarty_cache');
-        $this->view->setPluginsDir( PH7_ROOT_INSTALL . 'library/Smarty/plugins');
+        $this->oView = new \Smarty;
+        $this->oView->use_sub_dirs = true;
+        $this->oView->setTemplateDir(PH7_ROOT_INSTALL . 'views/' . self::DEFAULT_THEME);
+        $this->oView->setCompileDir(PH7_ROOT_INSTALL . 'data/caches/smarty_compile');
+        $this->oView->setCacheDir(PH7_ROOT_INSTALL  . 'data/caches/smarty_cache');
+        $this->oView->setPluginsDir(PH7_ROOT_INSTALL . 'library/Smarty/plugins');
         // Smarty Cache
-        $this->view->caching = 0; // 0 = Cache disabled |  1 = Cache never expires | 2 = Set the cache duration at "cache_lifetime" attribute
-        $this->view->cache_lifetime = 86400; // 86400 seconds = 24h
+        $this->oView->caching = 0; // 0 = Cache disabled |  1 = Cache never expires | 2 = Set the cache duration at "cache_lifetime" attribute
+        $this->oView->cache_lifetime = 86400; // 86400 seconds = 24h
 
-        $this->view->assign('content', '');
-        $this->view->assign('LANG', $LANG);
-        $this->view->assign('software_name', self::SOFTWARE_NAME);
-        $this->view->assign('software_version', self::SOFTWARE_VERSION . ' Build ' . self::SOFTWARE_BUILD . ' - ' . self::SOFTWARE_VERSION_NAME);
-        $this->view->assign('software_website', self::SOFTWARE_WEBSITE);
-        $this->view->assign('software_license_url', self::SOFTWARE_LICENSE_URL);
-        $this->view->assign('software_help_url', self::SOFTWARE_HELP_URL);
-        $this->view->assign('software_license_key_url', self::SOFTWARE_LICENSE_KEY_URL);
-        $this->view->assign('software_author', self::SOFTWARE_AUTHOR);
-        $this->view->assign('software_email', self::SOFTWARE_EMAIL);
-        $this->view->assign('tpl_name', self::DEFAULT_THEME);
-        $this->view->assign('current_lang', $this->sCurrentLang);
+        $this->oView->assign('LANG', $LANG);
+        $this->oView->assign('software_name', self::SOFTWARE_NAME);
+        $this->oView->assign('software_version', self::SOFTWARE_VERSION . ' Build ' . self::SOFTWARE_BUILD . ' - ' . self::SOFTWARE_VERSION_NAME);
+        $this->oView->assign('software_website', self::SOFTWARE_WEBSITE);
+        $this->oView->assign('software_license_url', self::SOFTWARE_LICENSE_URL);
+        $this->oView->assign('software_help_url', self::SOFTWARE_HELP_URL);
+        $this->oView->assign('software_license_key_url', self::SOFTWARE_LICENSE_KEY_URL);
+        $this->oView->assign('software_author', self::SOFTWARE_AUTHOR);
+        $this->oView->assign('software_email', self::SOFTWARE_EMAIL);
+        $this->oView->assign('tpl_name', self::DEFAULT_THEME);
+        $this->oView->assign('current_lang', $this->sCurrentLang);
     }
 
 }

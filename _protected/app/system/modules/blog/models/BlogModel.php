@@ -199,7 +199,7 @@ class BlogModel extends BlogCoreModel
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) FROM'.Db::prefix('Blogs').'WHERE postId = :postId LIMIT 1');
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             $rStmt->execute();
-            $bData = ($rStmt->fetchColumn() == 1) ? true : false;
+            $bData = ($rStmt->fetchColumn() == 1);
             Db::free($rStmt);
             $this->cache->put($bData);
         }

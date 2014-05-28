@@ -19,7 +19,7 @@ class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param integer $iOffset
      * @param integer $iLimit
-     * @param string $sOrder A constant: NoteCoreModel::CREATED (default value) or NoteCoreModel::UPDATED.
+     * @param string $sOrder A constant: SearchCoreModel::CREATED (default value) or SearchCoreModel::UPDATED
      * @param integer $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
      * @return string
      */

@@ -121,9 +121,9 @@ final class FrontController
                 // Check if file exist
                 if (!$this->oConfig->load(PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
                 {
-                    $this->notFound('The module <b>' . $this->oRegistry->module .
-                            '</b> of system not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS .
-                            '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
+                    $this->notFound('The <b>' . $this->oRegistry->module .
+                            '</b> system module is not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS .
+                            '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_APP . $sPathModule . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
                     // It reloads the config.ini file for the new module "error"
                     $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
                 }
@@ -197,8 +197,8 @@ final class FrontController
         // Check if file exist
         if (!$this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) || $this->isIndexFile())
         {
-            $this->notFound('The module <b>' . $this->oRegistry->module . '</b> of system not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS .
-                '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
+            $this->notFound('The <b>' . $this->oRegistry->module . '</b> system module is not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS .
+                '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
 
             // It reloads the config.ini file for the new module "error"
             $this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
@@ -271,8 +271,8 @@ final class FrontController
         // Check if file exist
         if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
         {
-            $this->notFound('The module <b>' . $this->oRegistry->module . '</b> not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS .
-                '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
+            $this->notFound('The <b>' . $this->oRegistry->module . '</b> module is not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS .
+                '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
             // It reloads the config.ini file for the new module "error"
             $this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
         }
@@ -588,8 +588,8 @@ final class FrontController
         }
         else
         {
-            $this->notFound('The controller <b>' . $this->oRegistry->controller . '</b> of the module <b>' . $this->oRegistry->module .
-                '</b> not found.<br />File: <b>' . $this->oRegistry->path_module . '</b>', 1);
+            $this->notFound('The <b>' . $this->oRegistry->controller . '</b> controller of the <b>' . $this->oRegistry->module .
+                '</b> module is not found.<br />File: <b>' . $this->oRegistry->path_module . '</b>', 1);
         }
     }
 
