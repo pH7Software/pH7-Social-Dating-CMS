@@ -120,6 +120,7 @@ function smarty_function_html_options($params, $template)
 
     if (!isset($options) && !isset($values)) {
         /* raise error here? */
+
         return '';
     }
 
@@ -165,6 +166,7 @@ function smarty_function_html_options_optoutput($key, $value, $selected, $id, $c
                 $value = smarty_function_escape_special_chars((string) $value->__toString());
             } else {
                 trigger_error("html_options: value is an object of class '". get_class($value) ."' without __toString() method", E_USER_NOTICE);
+
                 return '';
             }
         } else {
@@ -177,6 +179,7 @@ function smarty_function_html_options_optoutput($key, $value, $selected, $id, $c
         $_html_result = smarty_function_html_options_optgroup($key, $value, $selected, !empty($id) ? ($id.'-'.$idx) : null, $class, $_idx);
         $idx++;
     }
+
     return $_html_result;
 }
 
@@ -187,7 +190,6 @@ function smarty_function_html_options_optgroup($key, $values, $selected, $id, $c
         $optgroup_html .= smarty_function_html_options_optoutput($key, $value, $selected, $id, $class, $idx);
     }
     $optgroup_html .= "</optgroup>\n";
+
     return $optgroup_html;
 }
-
-?>

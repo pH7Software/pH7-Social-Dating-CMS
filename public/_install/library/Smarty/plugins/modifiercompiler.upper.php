@@ -26,5 +26,3 @@ function smarty_modifiercompiler_upper($params, $compiler)
     // no MBString fallback
     return 'strtoupper(' . $params[0] . ')';
 }
-
-?>

@@ -20,6 +20,9 @@ class Smarty_Internal_Configfilelexer
     public $node;
     public $line;
     private $state = 1;
+    public $yyTraceFILE;
+    public $yyTracePrompt;
+    public $state_name = array (1 => 'START', 2 => 'VALUE', 3 => 'NAKED_STRING_VALUE', 4 => 'COMMENT', 5 => 'SECTION', 6 => 'TRIPPLE');
     public $smarty_token_names = array (        // Text for parser error messages
                    );
 
@@ -41,37 +44,58 @@ class Smarty_Internal_Configfilelexer
             $instance = $new_instance;
         return $instance;
     }
+    public function PrintTrace()
+    {
+        $this->yyTraceFILE = fopen('php://output', 'w');
+        $this->yyTracePrompt = '<br>';
+    }
 
 
 
     private $_yy_state = 1;
     private $_yy_stack = array();
 
-    function yylex()
+    public function yylex()
     {
         return $this->{'yylex' . $this->_yy_state}();
     }
 
-    function yypushstate($state)
+    public function yypushstate($state)
     {
+        if ($this->yyTraceFILE) {
+             fprintf($this->yyTraceFILE, "%sState push %s\n", $this->yyTracePrompt, isset($this->state_name[$this->_yy_state]) ? $this->state_name[$this->_yy_state] : $this->_yy_state);
+        }
         array_push($this->_yy_stack, $this->_yy_state);
         $this->_yy_state = $state;
+        if ($this->yyTraceFILE) {
+             fprintf($this->yyTraceFILE, "%snew State %s\n", $this->yyTracePrompt, isset($this->state_name[$this->_yy_state]) ? $this->state_name[$this->_yy_state] : $this->_yy_state);
+        }
     }
 
-    function yypopstate()
+    public function yypopstate()
     {
-        $this->_yy_state = array_pop($this->_yy_stack);
+       if ($this->yyTraceFILE) {
+             fprintf($this->yyTraceFILE, "%sState pop %s\n", $this->yyTracePrompt,  isset($this->state_name[$this->_yy_state]) ? $this->state_name[$this->_yy_state] : $this->_yy_state);
+        }
+       $this->_yy_state = array_pop($this->_yy_stack);
+        if ($this->yyTraceFILE) {
+             fprintf($this->yyTraceFILE, "%snew State %s\n", $this->yyTracePrompt, isset($this->state_name[$this->_yy_state]) ? $this->state_name[$this->_yy_state] : $this->_yy_state);
+        }
+
     }
 
-    function yybegin($state)
+    public function yybegin($state)
     {
-        $this->_yy_state = $state;
+       $this->_yy_state = $state;
+        if ($this->yyTraceFILE) {
+             fprintf($this->yyTraceFILE, "%sState set %s\n", $this->yyTracePrompt, isset($this->state_name[$this->_yy_state]) ? $this->state_name[$this->_yy_state] : $this->_yy_state);
+        }
     }
 
 
 
 
-    function yylex1()
+    public function yylex1()
     {
         $tokenMap = array (
               1 => 0,
@@ -182,7 +206,7 @@ class Smarty_Internal_Configfilelexer
 
 
 
-    function yylex2()
+    public function yylex2()
     {
         $tokenMap = array (
               1 => 0,
@@ -311,7 +335,7 @@ class Smarty_Internal_Configfilelexer
 
 
 
-    function yylex3()
+    public function yylex3()
     {
         $tokenMap = array (
               1 => 0,
@@ -378,7 +402,7 @@ class Smarty_Internal_Configfilelexer
 
 
 
-    function yylex4()
+    public function yylex4()
     {
         $tokenMap = array (
               1 => 0,
@@ -457,7 +481,7 @@ class Smarty_Internal_Configfilelexer
 
 
 
-    function yylex5()
+    public function yylex5()
     {
         $tokenMap = array (
               1 => 0,
@@ -529,7 +553,7 @@ class Smarty_Internal_Configfilelexer
     }
 
 
-    function yylex6()
+    public function yylex6()
     {
         $tokenMap = array (
               1 => 0,
@@ -619,4 +643,4 @@ class Smarty_Internal_Configfilelexer
 
 
 }
-?>
+

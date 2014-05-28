@@ -16,8 +16,8 @@
     * @package Smarty
     * @subpackage Cacher
     */
-    class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
-
+    class Smarty_Internal_CacheResource_File extends Smarty_CacheResource
+    {
         /**
         * populate Cached Object with meta data from Resource
         *
@@ -87,6 +87,7 @@
         public function process(Smarty_Internal_Template $_template, Smarty_Template_Cached $cached=null)
         {
             $_smarty_tpl = $_template;
+
             return @include $_template->cached->filepath;
         }
 
@@ -106,6 +107,7 @@
                     return true;
                 }
             }
+
             return false;
         }
 
@@ -137,7 +139,7 @@
             $_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;
             $_dir_sep = $smarty->use_sub_dirs ? '/' : '^';
             $_compile_id_offset = $smarty->use_sub_dirs ? 3 : 0;
-            $_dir = $smarty->getCacheDir();
+            $_dir = realpath($smarty->getCacheDir()) . '/';
             $_dir_length = strlen($_dir);
             if (isset($_cache_id)) {
                 $_cache_id_parts = explode('|', $_cache_id);
@@ -186,7 +188,7 @@
                             @rmdir($_file->getPathname());
                         }
                     } else {
-                        $_parts = explode($_dir_sep, str_replace('\\', '/', substr((string)$_file, $_dir_length)));
+                        $_parts = explode($_dir_sep, str_replace('\\', '/', substr((string) $_file, $_dir_length)));
                         $_parts_count = count($_parts);
                         // check name
                         if (isset($resource_name)) {
@@ -210,7 +212,7 @@
                             }
                         }
                         // expired ?
-                        if  (isset($exp_time)) {
+                        if (isset($exp_time)) {
                             if ($exp_time < 0) {
                                 preg_match('#\'cache_lifetime\' =>\s*(\d*)#', file_get_contents($_file), $match);
                                 if ($_time < (@filemtime($_file) + $match[1])) {
@@ -226,6 +228,7 @@
                     }
                 }
             }
+
             return $_count;
         }
 
@@ -244,6 +247,7 @@
                 clearstatcache();
             }
             $t = @filemtime($cached->lock_id);
+
             return $t && (time() - $t < $smarty->locking_timeout);
         }
 
@@ -271,5 +275,3 @@
             @unlink($cached->lock_id);
         }
     }
-
-?>
