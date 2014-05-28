@@ -13,14 +13,14 @@
  * @package Smarty
  * @subpackage PluginsInternal
  */
-class Smarty_Internal_Write_File {
-
+class Smarty_Internal_Write_File
+{
     /**
      * Writes file in a safe way to disk
      *
-     * @param string $_filepath complete filepath
-     * @param string $_contents file content
-     * @param Smarty $smarty    smarty instance
+     * @param  string  $_filepath complete filepath
+     * @param  string  $_contents file content
+     * @param  Smarty  $smarty    smarty instance
      * @return boolean true
      */
     public static function writeFile($_filepath, $_contents, Smarty $smarty)
@@ -38,10 +38,11 @@ class Smarty_Internal_Write_File {
         }
 
         // write to tmp file, then move to overt file lock race condition
-        $_tmp_file = $_dirpath . DS . uniqid('wrt', true);
+        $_tmp_file = $_dirpath . DS . str_replace(array('.',','), '_', uniqid('wrt', true));
         if (!file_put_contents($_tmp_file, $_contents)) {
             error_reporting($_error_reporting);
             throw new SmartyException("unable to write file {$_tmp_file}");
+
             return false;
         }
 
@@ -71,6 +72,7 @@ class Smarty_Internal_Write_File {
         if (!$success) {
             error_reporting($_error_reporting);
             throw new SmartyException("unable to write file {$_filepath}");
+
             return false;
         }
 
@@ -80,9 +82,8 @@ class Smarty_Internal_Write_File {
             umask($old_umask);
         }
         error_reporting($_error_reporting);
+
         return true;
     }
 
 }
-
-?>

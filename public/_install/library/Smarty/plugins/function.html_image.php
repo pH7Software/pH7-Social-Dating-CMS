@@ -47,7 +47,7 @@ function smarty_function_html_image($params, $template)
     $suffix = '';
     $path_prefix = '';
     $basedir = isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : '';
-    foreach($params as $_key => $_val) {
+    foreach ($params as $_key => $_val) {
         switch ($_key) {
             case 'file':
             case 'height':
@@ -84,6 +84,7 @@ function smarty_function_html_image($params, $template)
 
     if (empty($file)) {
         trigger_error("html_image: missing 'file' parameter", E_USER_NOTICE);
+
         return;
     }
 
@@ -106,12 +107,12 @@ function smarty_function_html_image($params, $template)
     if (isset($template->smarty->security_policy)) {
         if ($protocol) {
             // remote resource (or php stream, …)
-            if(!$template->smarty->security_policy->isTrustedUri($params['file'])) {
+            if (!$template->smarty->security_policy->isTrustedUri($params['file'])) {
                 return;
             }
         } else {
             // local file
-            if(!$template->smarty->security_policy->isTrustedResourceDir($params['file'])) {
+            if (!$template->smarty->security_policy->isTrustedResourceDir($params['file'])) {
                 return;
             }
         }
@@ -122,12 +123,15 @@ function smarty_function_html_image($params, $template)
         if (!$_image_data = @getimagesize($_image_path)) {
             if (!file_exists($_image_path)) {
                 trigger_error("html_image: unable to find '$_image_path'", E_USER_NOTICE);
+
                 return;
-            } else if (!is_readable($_image_path)) {
+            } elseif (!is_readable($_image_path)) {
                 trigger_error("html_image: unable to read '$_image_path'", E_USER_NOTICE);
+
                 return;
             } else {
                 trigger_error("html_image: '$_image_path' is not a valid image file", E_USER_NOTICE);
+
                 return;
             }
         }
@@ -155,5 +159,3 @@ function smarty_function_html_image($params, $template)
 
     return $prefix . '<img src="' . $path_prefix . $file . '" alt="' . $alt . '" width="' . $width . '" height="' . $height . '"' . $extra . ' />' . $suffix;
 }
-
-?>

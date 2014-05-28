@@ -57,7 +57,7 @@ function smarty_function_html_radios($params, $template)
     $output = null;
     $extra = '';
 
-    foreach($params as $_key => $_val) {
+    foreach ($params as $_key => $_val) {
         switch ($_key) {
             case 'name':
             case 'separator':
@@ -131,6 +131,7 @@ function smarty_function_html_radios($params, $template)
 
     if (!isset($options) && !isset($values)) {
         /* raise error here? */
+
         return '';
     }
 
@@ -163,6 +164,7 @@ function smarty_function_html_radios_output($name, $value, $output, $selected, $
             $value = (string) $value->__toString();
         } else {
             trigger_error("html_options: value is an object of class '". get_class($value) ."' without __toString() method", E_USER_NOTICE);
+
             return '';
         }
     } else {
@@ -174,6 +176,7 @@ function smarty_function_html_radios_output($name, $value, $output, $selected, $
             $output = (string) $output->__toString();
         } else {
             trigger_error("html_options: output is an object of class '". get_class($output) ."' without __toString() method", E_USER_NOTICE);
+
             return '';
         }
     } else {
@@ -211,7 +214,6 @@ function smarty_function_html_radios_output($name, $value, $output, $selected, $
     }
 
     $_output .= $separator;
+
     return $_output;
 }
-
-?>
