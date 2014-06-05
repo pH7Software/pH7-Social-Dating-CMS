@@ -86,7 +86,7 @@ class JoinFormProcess extends Form
 
         // WARNING FOT "matchSex" FIELD: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
         // and damages the SET function SQL for entry into the database
-        $aData = [
+        $aData1 = [
             'sex' => $this->httpRequest->post('sex'),
             'match_sex' => Form::setVal($this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN)),
             'birth_date' => $sBirthDate,
@@ -101,7 +101,7 @@ class JoinFormProcess extends Form
             'profile_id' => $iProfileId
         ];
 
-        if (!$this->oUserModel->join2($aData) || !$this->oUserModel->join2_2($aData2))
+        if (!$this->oUserModel->exe($aData1, '2_1') || !$this->oUserModel->exe($aData2, '2_2'))
         {
             \PFBC\Form::setError('form_join_user2', t('An error occurred during registration!<br /> Please try again with other information in the form fields or come back later.'));
         }
@@ -121,7 +121,7 @@ class JoinFormProcess extends Form
             'profile_id' => $this->oUserModel->getId($this->session->get('mail_step2'))
         ];
 
-        if (!$this->oUserModel->join3($aData))
+        if (!$this->oUserModel->exe($aData, '3'))
         {
             \PFBC\Form\setError('form_join_user3', t('An error occurred during registration!<br /> Please try again with other information in the form fields or come back later.'));
         }

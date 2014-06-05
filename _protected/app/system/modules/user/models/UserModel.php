@@ -52,37 +52,15 @@ class UserModel extends UserCoreModel
     }
 
     /**
-     * Join Step 2
+     * Execute SQL Join files.
      *
      * @param array $aData
+     * @param string $sJoinStep Step of the "Join" file ('2_1', '2_2' or '3').
      * @return boolean
      */
-    public function join2(array $aData)
+    public function exe(array $aData, $sJoinStep)
     {
-        return $this->exec('join2.1', $this->_sQueryPath, $aData);
-    }
-
-    /**
-     * Join Step 2 part 2
-     *
-     * @param array $aData
-     * @return boolean
-     */
-    public function join2_2(array $aData)
-    {
-        return $this->exec('join2_2', $this->_sQueryPath, $aData);
-    }
-
-
-    /**
-     * Join Step 3
-     *
-     * @param array $aData
-     * @return boolean
-     */
-    public function join3(array $aData)
-    {
-        return $this->exec('join3', $this->_sQueryPath, $aData);
+        return $this->exec('join' . $sJoinStep, $this->_sQueryPath, $aData);
     }
 
 }
