@@ -19,7 +19,7 @@ class AnalyticsApiFormProcess extends Form
 
         if (!$this->str->equals($this->httpRequest->post('code', Http::NO_CLEAN), (new Design)->analyticsApi(false, false)))
         {
-            (new Framework\Mvc\Model\AnalyticsModel)->updateApi($this->httpRequest->post('code', Http::NO_CLEAN));
+            (new Framework\Mvc\Model\Analytics)->updateApi($this->httpRequest->post('code', Http::NO_CLEAN));
 
             /* Clean Model\Design for STATIC / analyticsApi data */
             (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, 'analyticsApi', null)->clear();

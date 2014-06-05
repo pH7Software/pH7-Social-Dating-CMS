@@ -7,7 +7,9 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Engine\Db;
+use
+PH7\Framework\Mvc\Model\Engine\Db,
+PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 // Abstract Class
 class AffiliateCoreModel extends AdminCoreModel
