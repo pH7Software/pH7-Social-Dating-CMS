@@ -50,11 +50,12 @@ class SearchCoreModel
     /**
      * Order By method.
      *
-     * @param string $sOrder
-     * @param string $sAsTable The Alias Table, this prevents the ambiguous clause. Default NULL
+     * @param string $sColumn Table Column
+     * @param integer $iSort \PH7\SearchCoreModel::ASC OR \PH7\SearchCoreModel::DESC Default: \PH7\SearchCoreModel::ASC
+     * @param string $sAsTable The Alias Table, this prevents the ambiguous clause. Default: NULL
      * @return string SQL order by query
      */
-    public static function order($sColumn, $sSort = self::ASC, $sAsTable = null)
+    public static function order($sColumn, $iSort = self::ASC, $sAsTable = null)
     {
         switch ($sColumn)
         {
@@ -85,17 +86,17 @@ class SearchCoreModel
                 $sOrderBy = Db::RAND; // Default value is RAND()
         }
 
-        return ' ORDER BY ' . $sAsTable . $sOrderBy . static::sort($sSort);
+        return ' ORDER BY ' . $sAsTable . $sOrderBy . static::sort($iSort);
     }
 
     /**
      * @access protected
-     * @param string $sSort
+     * @param integer $iSort
      * @return string
      */
-    protected static function sort($sSort)
+    protected static function sort($iSort)
     {
-        return ($sSort === static::DESC) ? ' DESC ' : ' ASC ';
+        return ($iSort === static::DESC) ? ' DESC ' : ' ASC ';
     }
 
 }
