@@ -15,6 +15,7 @@
  * @return string
  */
 namespace {
+defined('PH7') or exit('Restricted access');
 
  if (!function_exists('hash_pbkdf2'))
  {

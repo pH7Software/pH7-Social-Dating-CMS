@@ -13,7 +13,7 @@ class ShareUrlCoreForm
 {
 
     /**
-     * @param $sUrl The URL to share. If you enter nothing, it will be the current url. Default value NULL
+     * @param $sUrl The URL to share. If you enter nothing, it will be the current url. Default: NULL
      * @return void
      */
     public static function display($sUrl = null)

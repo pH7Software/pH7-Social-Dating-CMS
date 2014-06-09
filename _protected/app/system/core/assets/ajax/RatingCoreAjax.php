@@ -25,29 +25,29 @@ class RatingCoreAjax
 
     public function __construct()
     {
-       $this->_oHttpRequest = new Http;
+        $this->_oHttpRequest = new Http;
 
-       if($this->_oHttpRequest->postExists('action') && $this->_oHttpRequest->postExists('table') && $this->_oHttpRequest->postExists('score') && $this->_oHttpRequest->postExists('id'))
-       {
-           if($this->_oHttpRequest->post('action') == 'rating')
-           {
-               // Only for the Members
-               if(!UserCore::auth())
-               {
-                   $this->_iStatus = 0;
-                   $this->_sTxt = t('Please <b>register</b> or <b>login</b> to vote.');
-               }
-               else
-               {
-                   $this->initialize();
-               }
-           }
-       }
-       else
-       {
-           Framework\Http\Http::setHeadersByCode(400);
-           exit('Bad Request Error!');
-       }
+        if($this->_oHttpRequest->postExists('action') && $this->_oHttpRequest->postExists('table') && $this->_oHttpRequest->postExists('score') && $this->_oHttpRequest->postExists('id'))
+        {
+            if($this->_oHttpRequest->post('action') == 'rating')
+            {
+                // Only for the Members
+                if(!UserCore::auth())
+                {
+                    $this->_iStatus = 0;
+                    $this->_sTxt = t('Please <b>register</b> or <b>login</b> to vote.');
+                }
+                else
+                {
+                    $this->initialize();
+                }
+            }
+        }
+        else
+        {
+            Framework\Http\Http::setHeadersByCode(400);
+            exit('Bad Request Error!');
+        }
     }
 
     /**

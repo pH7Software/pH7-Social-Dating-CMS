@@ -1,4 +1,3 @@
-{* Last edit 04/15/14 21:16 by PH *}
 {{ $design->htmlHeader() }}
 <html lang="{% $config->values['language']['lang'] %}">
   <head>
@@ -159,7 +158,7 @@
       <div id="clock"></div>
 
       <div role="contentinfo">
-        <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /> - <strong><a href="http://cool-on-web.com" title="{lang 'Free Online Dating Site'}">{lang 'Online Dating Site'}</a></strong></p>{{ $design->littleLikeApi() }}</div>{* {{ $design->langList() }} *}{{ $designModel->langList() }}
+        <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /> - <strong><a href="http://cool-on-web.com" title="{lang 'Free Online Dating Site'}">{lang 'Online Dating Site'}</a></strong></p>{{ $design->littleLikeApi() }}</div>{{ $design->langList() }}
         {main_include 'bottom_menu.inc.tpl'}
       </div>
 
