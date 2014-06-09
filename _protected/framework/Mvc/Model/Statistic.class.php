@@ -28,7 +28,7 @@ class Statistic
     {
         $sWhere = Various::convertTableToId($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET views = views+1 WHERE ' . $sWhere . ' = :id');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET views = views+1 WHERE ' . $sWhere . ' = :id LIMIT 1');
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         $rStmt->execute();
         Db::free($rStmt);
@@ -46,7 +46,7 @@ class Statistic
     {
         $sWhere = Various::convertTableToId($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT views FROM' . Db::prefix($sTable) . 'WHERE ' . $sWhere . ' = :id');
+        $rStmt = Db::getInstance()->prepare('SELECT views FROM' . Db::prefix($sTable) . 'WHERE ' . $sWhere . ' = :id LIMIT 1');
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);

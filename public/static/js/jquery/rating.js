@@ -15,7 +15,7 @@ pHS pH Star
     $.fn.pHRating = function(op) {
         var defaults = {
             /** String vars **/
-                        url : pH7Url.base + 'asset/ajax/Rating/',
+            url : pH7Url.base + 'asset/ajax/Rating/',
             bigStarUrl : pH7Url.stic + 'img/icon/m_star.png', // URL of the icon m_star.png
             smallStarUrl : pH7Url.stic + 'img/icon/s_star.png', // URL of the icon s_star.png
             type : 'big', // can be set to 'small' or 'big'
@@ -55,7 +55,7 @@ pHS pH Star
 
             var average = parseFloat($(this).attr('id').split('_')[0]),
             id = parseInt($(this).attr('id').split('_')[1]), // get the id of the box for database
-                        table = $(this).attr('id').split('_')[2], // Table
+            table = $(this).attr('id').split('_')[2], // Table
             widthRatingContainer = starWidth*opts.length, // Width of the Container
             widthColor = average/opts.rateMax*widthRatingContainer, // Width of the color Container
 

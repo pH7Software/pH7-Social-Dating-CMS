@@ -82,10 +82,35 @@ final class DbConfig
         // @return value of meta tags the database
         if (!$oData = $oCache->get())
         {
-            $rStmt = Engine\Db::getInstance()->prepare('SELECT * FROM' . Engine\Db::prefix('MetaMain') . 'WHERE langId=:langId');
+            $sSql = 'SELECT * FROM' . Engine\Db::prefix('MetaMain') . 'WHERE langId = :langId';
+
+            // Get meta data with the current language if it exists in the "MetaMain" table ...
+            $rStmt = Engine\Db::getInstance()->prepare($sSql);
             $rStmt->bindParam(':langId', $sLangId, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
+
+            // If the current language doesn't exist in the "MetaMain" table, we create a new table for the new language with default value
+            if (empty($oData))
+            {
+                $aData = [
+                    'langId' => $sLangId, // The new language key (e.g., de_DE)
+                    'pageTitle' => 'Home',
+                    'metaDescription' => 'The Dating Software for creating online dating service or online social community.',
+                    'metaKeywords' => 'script,CMS,PHP,dating script,dating software,social networking software,social networking script,social network script,free,open source,match clone,friend finder clone,adult friend finder clone',
+                    'slogan' => 'pH7CMS is the leading Dating CMS specializes in online open source dating software!',
+                    'metaRobots' => 'index, follow, all',
+                    'metaAuthor' => 'Pierre-Henry Soria',
+                    'metaCopyright' => 'Copyright Pierre-Henry Soria. All Rights Reserved.',
+                    'metaRating' => 'general',
+                    'metaDistribution' => 'global',
+                    'metaCategory' => 'dating'
+                ];
+
+                Engine\Record::getInstance()->insert('MetaMain', $aData); // Create the new meta data language
+                $oData = (object) $aData;
+                unset($aData);
+            }
             Engine\Db::free($rStmt);
             $oCache->put($oData);
         }
@@ -113,7 +138,7 @@ final class DbConfig
      */
     public static function setSiteMode($sStatus)
     {
-        if ($sStatus != self::MAINTENANCE_SITE && $sStatus != self::ENABLE_SITE) exit('Poor maintenance mode!');
+        if ($sStatus != self::MAINTENANCE_SITE && $sStatus != self::ENABLE_SITE) exit('Wrong maintenance mode type!');
 
         self::setSetting($sStatus, 'siteStatus');
 

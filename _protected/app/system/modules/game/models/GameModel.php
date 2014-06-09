@@ -50,9 +50,8 @@ class GameModel extends GameCoreModel
         $iLimit = (int) $iLimit;
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
-
-        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ?  'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
+        $sSqlSelect = (!$bCount) ? 'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Games') . 'AS g LEFT JOIN ' . Db::prefix('GamesCategories') . 'AS c ON g.categoryId = c.categoryId
         WHERE c.name LIKE :name' . $sSqlOrder . $sSqlLimit);
@@ -89,7 +88,7 @@ class GameModel extends GameCoreModel
 
         if(!$sData = $this->cache->get())
         {
-            $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix('Games') . 'WHERE gameId =:gameId');
+            $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix('Games') . 'WHERE gameId = :gameId LIMIT 1');
             $rStmt->bindValue(':gameId', $iGameId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -119,10 +118,10 @@ class GameModel extends GameCoreModel
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sSqlLimit = (!$bCount) ?  ' LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ?  '*' : 'COUNT(gameId) AS totalGames';
-        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE gameId = :looking' : ' WHERE title LIKE :looking OR name LIKE :looking OR description LIKE :looking OR keywords LIKE :looking';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(gameId) AS totalGames';
+        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE gameId = :looking' : ' WHERE title LIKE :looking OR name LIKE :looking OR description LIKE :looking OR keywords LIKE :looking';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Games') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
@@ -178,7 +177,7 @@ class GameModel extends GameCoreModel
      */
     public function setDownloadStat($iId)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Games') . 'SET downloads = downloads+1 WHERE gameId = :id');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Games') . 'SET downloads = downloads+1 WHERE gameId = :id LIMIT 1');
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         $rStmt->execute();
         Db::free($rStmt);
@@ -193,7 +192,7 @@ class GameModel extends GameCoreModel
      */
     public function getDownloadStat($iId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT downloads FROM' . Db::prefix('Games') . 'WHERE gameId = :id');
+        $rStmt = Db::getInstance()->prepare('SELECT downloads FROM' . Db::prefix('Games') . 'WHERE gameId = :id LIMIT 1');
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -216,7 +215,7 @@ class GameModel extends GameCoreModel
 
     public function update(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Games') . 'SET categoryId = :categoryId, name = :name, title = :title, description = :description, keywords = :keywords WHERE gameId = :id');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Games') . 'SET categoryId = :categoryId, name = :name, title = :title, description = :description, keywords = :keywords WHERE gameId = :id LIMIT 1');
         $rStmt->bindValue(':id', $aData['id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':categoryId', $aData['category_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
@@ -228,7 +227,7 @@ class GameModel extends GameCoreModel
 
     public function delete($iId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Games') . 'WHERE gameId = :id');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Games') . 'WHERE gameId = :id LIMIT 1');
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }

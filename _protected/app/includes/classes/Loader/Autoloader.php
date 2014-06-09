@@ -27,6 +27,23 @@ final class Autoloader
      * We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
      */
 
+
+    /**
+     * Init Autoload Class.
+     *
+     * @return void
+     */
+    public function init()
+    {
+        // Specify the extensions that may be loaded
+        spl_autoload_extensions('.php');
+        /** Register the loader methods **/
+        spl_autoload_register(array(__CLASS__, '_loadController'));
+        spl_autoload_register(array(__CLASS__, '_loadClass'));
+        spl_autoload_register(array(__CLASS__, '_loadModel'));
+        spl_autoload_register(array(__CLASS__, '_loadForm'));
+    }
+
     /**
      * Autoload Controllers.
      *
@@ -135,22 +152,6 @@ final class Autoloader
     private function _removeNamespace($sClass)
     {
         return str_replace('PH7\\', '', $sClass);
-    }
-
-    /**
-     * Init Autoload Class.
-     *
-     * @return void
-     */
-    public function init()
-    {
-        // Specify the extensions that may be loaded
-        spl_autoload_extensions('.php');
-        /** Register the loader methods **/
-        spl_autoload_register(array(__CLASS__, '_loadController'));
-        spl_autoload_register(array(__CLASS__, '_loadClass'));
-        spl_autoload_register(array(__CLASS__, '_loadModel'));
-        spl_autoload_register(array(__CLASS__, '_loadForm'));
     }
 
 }
