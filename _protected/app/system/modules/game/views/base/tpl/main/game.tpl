@@ -13,8 +13,9 @@
 
   <p class="italic">{lang '%0% was played %1% and download %2%.','<strong>'.$game->title.'</strong>','<strong>'.Framework\Mvc\Model\Statistic::getView($game->gameId,'Games').'</strong>','<strong>'.$downloads.'</strong>'}</p>
 
-  {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('game','main','game',"$game->title,$game->gameId")) }}
   {{ RatingDesignCore::voting($game->gameId,'Games','center') }}
+  {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('game','main','game',"$game->title,$game->gameId")) }}
+  {{ SahreEmbedCoreForm::display(PH7_URL_DATA_SYS_MOD . 'game/file/' . $game->file) }}
 
   {{ $design->likeApi() }}
 

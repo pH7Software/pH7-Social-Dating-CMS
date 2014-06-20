@@ -24,7 +24,7 @@ class Session
      */
     public function __construct($bDisableSessCache = false)
     {
-        if (true === $bDisableSessCache)
+        if ($bDisableSessCache)
             session_cache_limiter(false);
 
         session_name(Config::getInstance()->values['session']['cookie_name']);

@@ -47,7 +47,7 @@ class Image
     {
         if (!is_file($this->sFile))
         {
-            if (!isDebug())
+            if (isDebug())
                 throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Image file not found: The image file \'' . $this->sFile . '\' could not be found.');
             else
                 return false;

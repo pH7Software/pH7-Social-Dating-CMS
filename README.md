@@ -4,13 +4,15 @@
 
 ## Overview
 
-**pH7 Dating CMS** is a CMS written in **Object-Oriented** PHP with an architecture **MVC** (Model-View-Controller).
+**pH7 Dating CMS** is a CMS written in **Object-Oriented** PHP (*OOP*) with an **MVC** architecture (Model-View-Controller).
 
 It is designed with the **KISS** principle in mind, and the entire source code can be read and understood in minutes, **PDO** (PHP Data Objects) abstraction allows choice of databases and the principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (Not duplicate code).
 
 It also wants to fast, low resource-intensive, extremely powerful and very secure.
 
 In addition to being **free**, **open source** and **relatively stable**, this software comes with more than **29 native modules** and based on the **pH7Core framework** (written specifically for this project).
+
+To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best dating service** or **social networking** website on the World Wide Web!
 
 
 ## Some Features of pH7CMS
@@ -122,11 +124,29 @@ Pierre-Henry Soria
 [pH7CMS Documentation](http://software.hizup.com/doc/)
 
 
+## Contribute!
+
+Everyone can contribute on the **[pH7CMS GitHub](http://github.com/pH7Software/pH7-Social-Dating-CMS)** repository.
+
+Just clone the repository, make your changes and then make a push ;-)
+
+*WARNING, your code/modification must be quality.*
+
+--We manually validate all the improvements and changes.--
+
+
 ## Contact
 
-Contact me at: *ph7software (AT) gmail (DOT) com*
+You can send email for any suggestions or comments at *ph7software (AT) gmail (DOT) com*
+
+
+## Help & Modifications
+
+If you want, we also offer a *Premium Commercial* support at *[HiZup Support Department](https://hizup.net/clients/support)*
 
 
 ## License
 
-[General Public License 3](http://www.gnu.org/licenses/gpl.html) or later; See the PH7.LICENSE.txt and PH7.COPYRIGHT.txt files.
+**pH7CMS** is under **Open Source** License.
+
+License: [General Public License 3](http://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.

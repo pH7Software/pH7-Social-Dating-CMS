@@ -107,7 +107,6 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
--- Begin 1.0 Version
 CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
   profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   middleName varchar(50) DEFAULT NULL,
@@ -126,7 +125,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
   PRIMARY KEY (profileId),
   KEY country (country),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersPrivacy (
@@ -191,7 +190,6 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliates (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
--- Begin 1.0 Version
 CREATE TABLE IF NOT EXISTS pH7_AffiliatesInfo (
   profileId int(10) unsigned NOT NULL AUTO_INCREMENT,
   middleName varchar(50) DEFAULT NULL,
@@ -378,7 +376,7 @@ CREATE TABLE IF NOT EXISTS pH7_Blogs (
   updatedDate datetime DEFAULT NULL,
   PRIMARY KEY (blogId),
   UNIQUE KEY postId (postId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_BlogsCategories (
@@ -387,7 +385,7 @@ CREATE TABLE IF NOT EXISTS pH7_BlogsCategories (
    INDEX (categoryId),
    INDEX (blogId),
    FOREIGN KEY (blogId) REFERENCES pH7_Blogs(blogId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_BlogsDataCategories (
@@ -446,7 +444,7 @@ CREATE TABLE IF NOT EXISTS pH7_Notes (
   PRIMARY KEY (noteId),
   UNIQUE KEY postId (postId),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_NotesCategories (
@@ -602,7 +600,7 @@ CREATE TABLE IF NOT EXISTS pH7_Forums (
   updatedDate datetime DEFAULT NULL,
   PRIMARY KEY (forumId),
   FOREIGN KEY (categoryId) REFERENCES pH7_ForumsCategories(categoryId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_Forums (forumId, name, description, categoryId) VALUES
 (1, 'Hello', 'Free dating site', 1),
@@ -624,7 +622,7 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
   -- FOREIGN KEY (profileId) pH7_Members(profileId),
   FOREIGN KEY (forumId) REFERENCES pH7_Forums(forumId),
   PRIMARY KEY (topicId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
@@ -639,7 +637,7 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
   -- FOREIGN KEY (profileId) pH7_Members(profileId),
   FOREIGN KEY (topicId) REFERENCES pH7_ForumsTopics(topicId),
   PRIMARY KEY (messageId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_GroupsLevels (
@@ -685,7 +683,7 @@ CREATE TABLE IF NOT EXISTS pH7_LogError (
   logError longtext,
   PRIMARY KEY (logId),
   FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_AdminsAttemptsLogin (
@@ -693,7 +691,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsAttemptsLogin (
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL,
   UNIQUE KEY (ip)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersAttemptsLogin (
@@ -701,7 +699,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersAttemptsLogin (
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL,
   UNIQUE KEY (ip)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_AffiliatesAttemptsLogin (
@@ -709,7 +707,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesAttemptsLogin (
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL,
   UNIQUE KEY (ip)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_AdminsLogLogin (
@@ -820,7 +818,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersBackground (
   approved tinyint(1) unsigned NOT NULL DEFAULT '1',
   PRIMARY KEY profileId (profileId),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersWhoViews (
@@ -831,7 +829,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersWhoViews (
   INDEX visitorId (visitorId),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId),
   FOREIGN KEY (visitorId) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersFriends (
@@ -843,7 +841,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersFriends (
   INDEX friendId (friendId),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId),
   FOREIGN KEY (friendId) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_Pages (
@@ -864,7 +862,7 @@ CREATE TABLE IF NOT EXISTS pH7_Pages (
   updatedDate datetime DEFAULT NULL,
   PRIMARY KEY (pageId),
   UNIQUE KEY slugId (slugId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_Pages  (slugId, langId, title, content, pageTitle, createdDate)
 ('affiliateterms', 'en', 'Affiliate Terms', 'Your TOS HERE', 'Affiliate Temrs', @sCurrentDate),
@@ -927,8 +925,8 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, slogan, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
-('fr_FR', 'Accueil', 'Le CMS pour la création de site de rencontre en ligne', 'script, CMS, clone rencontre, PHP, script rencontre, logiciel rencontre site, reseau social, cms communautaire', 'Le CMS-Dating, Le premier CMS spécialisé dans la rencontre en ligne !', 'index, follow, all', 'pH7 Company !', 'Copyright Pierre-Henry Soria. Tous droits réservés.', 'general', 'global', 'rencontre'),
-('en_US', 'Home', 'The Dating software for creating online dating site or online community, social network,', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'Dating CMS Script is the leading CMS specializes in online dating software open source!', 'index, follow, all', 'Dating CMS Company!', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
+('fr_FR', 'Accueil', 'Le CMS pour la création de site de rencontre en ligne', 'script, CMS, clone rencontre, PHP, script rencontre, logiciel rencontre site, reseau social, cms communautaire', 'Le CMS-Dating, Le premier CMS spécialisé dans la rencontre en ligne !', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. Tous droits réservés.', 'general', 'global', 'rencontre'),
+('en_US', 'Home', 'The Dating software for creating online dating site or online community, social network,', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'Dating CMS Script is the leading CMS specializes in online dating software open source!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (
@@ -939,7 +937,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
   uri varchar(32) DEFAULT NULL,
   path varchar(255) DEFAULT NULL,
   PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -1048,7 +1046,7 @@ CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   INDEX (profileId),
   PRIMARY KEY (profileId),
   UNIQUE KEY (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_StaticFiles (

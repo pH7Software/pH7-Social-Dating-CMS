@@ -162,7 +162,7 @@ class MainController extends Controller
         {
             $iId = $this->httpRequest->get('id');
 
-            if (ctype_digit($iId))
+            if (is_numeric($iId))
             {
                 $sFile = @$this->oGameModel->getFile($iId);
                 $sPathFile = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/' . $sFile;

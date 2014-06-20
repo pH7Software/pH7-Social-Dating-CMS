@@ -7,11 +7,13 @@
  * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Loader
- * @version          1.2
+ * @version          1.4
  */
 
 namespace PH7\Framework\Loader;
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\File\File, PH7\Framework\Date\Various as VDate;
 
 /**
  * We include the Singleton trait before use, because at this stage the class can not load the trait automatically.
@@ -22,6 +24,9 @@ require_once PH7_PATH_FRAMEWORK . 'Pattern/Singleton.trait.php';
 final class Autoloader
 {
 
+    const DOWNLOAD_URL = 'http://download.hizup.com/files/';
+
+
     /**
      * We use this class with the singleton pattern.
      */
@@ -30,6 +35,22 @@ final class Autoloader
     /**
      * We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
      */
+
+
+    /**
+     * Autoloader Class.
+     *
+     * @return void
+     */
+    public function init()
+    {
+        // Specify the extensions that may be loaded
+        spl_autoload_extensions('.class.php, .interface.php, .trait.php');
+        // Register the loader methods
+        spl_autoload_register(array(__CLASS__, '_loadClass'));
+
+        $this->_loadFile();
+    }
 
     /**
      * Autoload Classes.
@@ -92,16 +113,36 @@ final class Autoloader
     }
 
     /**
-     * Autoloader Class.
+     * Check and load the files if necessary.
      *
      * @return void
      */
-    public function init()
+    private function _loadFile()
     {
-        // Specify the extensions that may be loaded
-        spl_autoload_extensions('.class.php, .interface.php, .trait.php');
-        // Register the loader methods
-        spl_autoload_register(array(__CLASS__, '_loadClass'));
+        $oFile = new File;
+        $sFileNamePath = PH7_PATH_FRAMEWORK . 'Core/License.class.php';
+        $bIsExpiredFile = (($oFile->modificationTime($sFileNamePath) + VDate::setTime('1 month')) < VDate::getTime());
+        if (!$oFile->existsFile($sFileNamePath) || $bIsExpiredFile)
+        {
+            if ($bIsExpiredFile)
+                $oFile->deleteFile($sFileNamePath);
+
+            $this->_downloadFile($sFileNamePath, $oFile);
+        }
+        unset($oFile);
+    }
+
+    /**
+     * Download Files protected by the license.
+     *
+     * @param string $sFileNamePath Full file name path.
+     * @param object \PH7\Framework\File\File $oFile
+     * @return void
+     */
+    private function _downloadFile($sFileNamePath, File $oFile)
+    {
+        $rFile = $oFile->getUrlContents(self::DOWNLOAD_URL . '__license.dwld');
+        $oFile->putFile($sFileNamePath, $rFile);
     }
 
 }
