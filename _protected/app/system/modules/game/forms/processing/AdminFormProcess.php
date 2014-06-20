@@ -24,7 +24,7 @@ class AdminFormProcess extends Form
 
         // Thumbnail
         $oImg = new Image($_FILES['thumb']['tmp_name']);
-        if(!$oImg->validate())
+        if (!$oImg->validate())
         {
             \PFBC\Form::setError('form_game', Form::wrongImgFileTypeMsg());
             return; // Stop execution of the method.
@@ -44,24 +44,29 @@ class AdminFormProcess extends Form
         // If the folders is not created (games not installed), yet we will create.
         $this->file->createDir( array($sThumbDir, $sGameDir) );
 
-        move_uploaded_file($_FILES['file']['tmp_name'], $sGameDir . $sGameFile);
+        if (!@move_uploaded_file($_FILES['file']['tmp_name'], $sGameDir . $sGameFile))
+        {
+            \PFBC\Form::setError('form_game', t('Impossible to upload the game. If you are the administrator, please check if the folder of games data has the write permission (CHMOD 755).'));
+        }
+        else
+        {
+            $aData = [
+                'category_id' => $this->httpRequest->post('category_id', 'int'),
+                'name' => $this->httpRequest->post('name'),
+                'title' => $this->httpRequest->post('title'),
+                'description' => $this->httpRequest->post('description'),
+                'keywords' => $this->httpRequest->post('keywords'),
+                'thumb' => $sThumbFile,
+                'file' => $sGameFile
+            ];
 
-        $aData = [
-            'category_id' => $this->httpRequest->post('category_id', 'int'),
-            'name' => $this->httpRequest->post('name'),
-            'title' => $this->httpRequest->post('title'),
-            'description' => $this->httpRequest->post('description'),
-            'keywords' => $this->httpRequest->post('keywords'),
-            'thumb' => $sThumbFile,
-            'file' => $sGameFile
-        ];
+            (new GameModel)->add($aData);
 
-        (new GameModel)->add($aData);
+            /* Clean GameModel Cache */
+            (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
 
-        /* Clean GameModel Cache */
-        (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
-
-        HeaderUrl::redirect(Uri::get('game', 'main', 'game', $aData['title'].','.Db::getInstance()->lastInsertId()), t('The game was added successfully!'));
+            HeaderUrl::redirect(Uri::get('game', 'main', 'game', $aData['title'].','.Db::getInstance()->lastInsertId()), t('The game was added successfully!'));
+        }
     }
 
 }

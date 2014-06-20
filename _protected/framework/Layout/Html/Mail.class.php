@@ -89,6 +89,14 @@ class Mail
     }
 
     /**
+     * Provide a "Powered By" link for the email bottom.
+     */
+    final public function link()
+    {
+        (new Design)->link(true, true, true, true, false, true);
+    }
+
+    /**
      * @param string $sEmail The email address from a user to indicate in the privacy policy against spam.
      * @return string HTML Contents.
      */
@@ -100,6 +108,7 @@ class Mail
             <div class="break"></div>
             <p class="foot1">' . $this->bottomFooter() . '</p>
             <p class="foot2">' . $this->privacyPolicyFooter($sEmail) .'</p>
+            <p class="foot2">' . $this->link() .'</p>
             </td></tr>
             </table>';
     }

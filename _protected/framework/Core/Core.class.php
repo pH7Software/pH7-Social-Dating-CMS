@@ -5,10 +5,10 @@
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  * @link             http://software.hizup.com
  * @package          PH7 / Framework / Core
- * @version          1.1.0
+ * @version          1.1.2
  */
 
 namespace PH7\Framework\Core;

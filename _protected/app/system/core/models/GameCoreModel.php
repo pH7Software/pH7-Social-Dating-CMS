@@ -19,7 +19,7 @@ class GameCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sOrderBy = SearchCoreModel::order($sOrder);
+        $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 
         $sSqlGameId = (!empty($iGameId)) ? ' WHERE title LIKE :title AND gameId =:gameId ' : '';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Games') . $sSqlGameId . $sOrderBy . 'LIMIT :offset, :limit');

@@ -36,7 +36,7 @@ class AdminController extends MainController
     {
         if ( $this->httpRequest->postExists( array('id', 'thumb', 'file') ))
         {
-            $this->oGameModel->delete( $this->httpRequest->post('id') );
+            $this->oGameModel->delete( $this->httpRequest->post('id', 'int') );
 
             $aFiles = [
                 'thumb' => PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/img/thumb/' . $this->httpRequest->post('thumb'),

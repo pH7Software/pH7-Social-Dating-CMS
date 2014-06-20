@@ -25,7 +25,7 @@ $sHttp = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'] == 'on')) ? 
 // Determines the domain name with the port
 $sDomain = ($_SERVER['SERVER_PORT'] != '80') ?  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_NAME'];
 
-// Get domain that the cookie and cookie session is available (Set-Cookie: domain=your_site_name.com)
+// Get the domain that the cookie and cookie session is available (Set-Cookie: domain=your_site_name.com)
 // $sDomain_cookie = (substr($_SERVER['HTTP_HOST'], 0, 4) === 'www.') ? '.' . substr($_SERVER['HTTP_HOST'], 4) : '.' . $_SERVER['HTTP_HOST'];
 $sDomain_cookie = '.' . str_replace('www.', '', $sDomain);
 

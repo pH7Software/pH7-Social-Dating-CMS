@@ -15,5 +15,5 @@ All cron jobs are located in the following directory: <pre>"/YOUR-PATH/YOUR-PROT
 
 <strong>Careful, you should not put the end of the file: Cron.php in the executor of the cron job.</strong></p>
 
-<p>If you have problems with setting up cron jobs, simply buy a ticket on our website (in the support section) and we will configure it properly for you.</p>
-<p><em>Professional support is the best solution for your website!</em></p>
+<p>If you have problems with setting up cron jobs, simply <a href="http://hizup.net/clients/support">buy a ticket</a> on <a href="http://hizup.net" target="_blank">our website</a> (in the support section) and we will configure it properly for you.<br />
+<em>Professional support is the best solution for your website!</em></p>

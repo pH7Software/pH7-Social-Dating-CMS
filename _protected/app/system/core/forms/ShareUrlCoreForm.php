@@ -13,14 +13,15 @@ class ShareUrlCoreForm
 {
 
     /**
-     * @param $sUrl The URL to share. If you enter nothing, it will be the current url. Default: NULL
+     * @param $sUrl The URL to share. If you enter nothing, it will be the current URL. Default: NULL
+     * @param integer $iWidth Default: 350
      * @return void
      */
-    public static function display($sUrl = null)
+    public static function display($sUrl = null, $iWidth = 350)
     {
         $sUrl = (!empty($sUrl)) ? $sUrl : (new Http)->currentUrl();
 
-        $oForm = new \PFBC\Form('form_share_url', 350);
+        $oForm = new \PFBC\Form('form_share_url', $iWidth);
         $oForm->configure(array('class' => 'center'));
         $oForm->addElement(new \PFBC\Element\Url(t('Share URL:'), 'share', array('value'=>$sUrl, 'readonly'=>'readonly', 'onclick'=>'this.select()')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br />'));
