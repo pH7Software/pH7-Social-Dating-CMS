@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7-Dating CMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-25 05:03+0100\n"
-"PO-Revision-Date: 2014-03-25 05:03+0100\n"
+"POT-Creation-Date: 2014-07-02 10:25+0100\n"
+"PO-Revision-Date: 2014-07-02 10:25+0100\n"
 "Last-Translator: Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language: en_US\n"
@@ -18,6 +18,1184 @@ msgstr ""
 "X-Poedit-Country: UNITED STATES\n"
 "X-Poedit-SearchPath-0: /var/www/CmsDating/pH7DatingCms\n"
 
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Group ID#"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Name"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Price (%0%)"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Expiration Days"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Active"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Action"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Enable"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Disable"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Edit"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/payment_ddf79070e43702224752a6e20db5b5c9/base/admin/membershiplist.cpl.php:19
+msgid "Delete (Irreversible!)"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Click here to switch back to admin panel."
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Home"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Join Now!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Login"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Members"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "People"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search the members"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Search"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Quick Search"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Advanced Search"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Users Birthday"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Birthday"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "All Birthday"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Men Birthday"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Women Birthday"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Couples Birthday"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "The Free Chat Rooms"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Chat Rooms"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Video Chat"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Chat"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Chat Roulette"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Chatroulette"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Photo Gallery"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Pictures"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Hot Or Not"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search a Picture"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Video Gallery"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Videos"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search a Video"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Games Zone"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Game"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search a Game"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Forums"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Forum"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search a Topic"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Community Notes"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Notes"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search a Note"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "My Emails"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Email"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Compose"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Inbox"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Outbox"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Trash"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "My settings"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Settings"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Edit Profile"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Design Profile"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Notifications"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Privacy Setting"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Change Password"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "My account"
+msgstr "Edit the Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Account"
+msgstr "Edit the Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "My Profilet"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "My Profile"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "My Avatar"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Add an Album"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "My Albums"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Videos Gallery"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Add a Note"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "My Notes"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Friends Management"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Friends List"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Find a friend in my list"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Find a Friend"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Who Visited My Profile"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Who See Me"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Find someone who has visited my profile"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Find some Visitor(s)"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Logout"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Gets Banners"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Banners"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Edit account"
+msgstr "Edit the Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Edit Account"
+msgstr "Edit the Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Users/Admins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Users"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Browse Users"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Browse"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search a Users"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Report"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Add User"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Import Users"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "User Fields"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Fields List"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Add a Field"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Browse Admins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Admins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search an Admin"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Add Admin"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "General Settings"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "General"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Meta Tags"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Advertisement"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Analytics Code"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Custom Style"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Style"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "JavaScript Injection"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Script"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "License Key"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "License"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Information"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Info"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Site Statistics"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Site Stats"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Software"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "PHP Info"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "PHP"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Modules Manager"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Modules"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Mass Mailer"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Newsletters"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Browse Subscribers"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Subscribers"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Search Subscribers"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Forum Admin"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Blog Admin"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Blog"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Game Admin"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Add a Game"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Affiliate Admin Manager"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Affiliate"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Banners Manager"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Affiliates List"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Browse Affiliates"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search an Affiliate"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Add Affiliate"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Affiliate Settings"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Affiliate Fields"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Payment System"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Payment"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Memberships List"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Membership Management"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Add a new Membership"
+msgstr "Add a new Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Payment Gateway Config"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Gateway Config"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Email Management"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Messages Monitor"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search Email"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Search Message"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Universal Login Config"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "User Moderation"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Moderation"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Moderate Albums"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Picture Album"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Moderate Pictures"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Picture"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Video Album"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Moderate Videos"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Video"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Moderate Avatars"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Avatar"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Moderate Profile Background"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Profile Background"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Moderate Note"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Note"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Moderate the Note Posts"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Note Posts"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Moderate the Pictures Webcam"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Pictures Webcam"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "File Management"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Files"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Public File Management"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Public Files"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Protected File Management"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Protected Files"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Display Page of Module"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Page Module"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Display Email Template"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Email Template"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Display the all Templates Files"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Templates Files"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Suggestion List"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Ban Options"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Tools"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Backup Management"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Caches Controls"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Caches Management"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Cache Settings"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Free Space Server"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Your Account"
+msgstr "Edit the Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Edit your Account"
+msgstr "Edit the Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Need some Helps? We're here for you!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Help"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Individual Ticket Support"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Support"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Software Documentation"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Documentation"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
+msgid "Buy a License Key"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
+msgid "Powered by"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
+msgid "Please enable JavaScript in your browser!<br /> This site is not inconsistent activation of JavaScript, so it is necessary to activate it via the options of your browser."
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
+msgid "<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br /> People who is really interested in you will never ask for money.<br /> Be careful, don't send the money to anybody!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
+#, fuzzy
+msgid "Free Online Dating Site"
+msgstr "Hot Or Not - Free Online Dating Site"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
+#, fuzzy
+msgid "Online Dating Site"
+msgstr "Hot Or Not - Free Online Dating Site"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
+msgid "WARNING: Your site is in development mode!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "About %site_name%"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "About Us"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Help Us"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Our Blog"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Become an Affiliate"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+#, fuzzy
+msgid "Contact us"
+msgstr "Content Type:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Our Partners"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Partners"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Links"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Jobs | Careers"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Jobs"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Our Team"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Team"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "About"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "FAQ"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Terms of Use"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Privacy"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Imprint"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Subscribe to our newsletter!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Newsletter"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Invite your friends!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Invite"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "Site Map"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "RSS Feed List"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
+msgid "RSS Feed"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/main/index.guest.inc.cpl.php:19
+msgid "Welcome to %site_name%!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/main/index.guest.inc.cpl.php:19
+msgid "Free Online Dating Social Community Site with Chat Rooms"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/main/index.guest.inc.cpl.php:19
+#, fuzzy
+msgid "Free Online Dating"
+msgstr "Hot Or Not - Free Online Dating Site"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/main/index.guest.inc.cpl.php:19
+msgid "Free Chat Rooms"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/main/index.guest.inc.cpl.php:19
+msgid "Dating with Webcam Chat"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/main/index.guest.inc.cpl.php:19
+#, fuzzy
+msgid "Dating Flirt"
+msgstr "Hot Or Not - Free Online Dating Site"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/main/index.guest.inc.cpl.php:19
+msgid "Social Community"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/main/index.guest.inc.cpl.php:19
+msgid "Meet people in %0% with %site_name%!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/main/index.guest.inc.cpl.php:19
+msgid "You're on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/signup/step1.cpl.php:19
+msgid "Already registered?"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/user_138cb7122be1308ab9b0e42c920d6bb2/base/signup/step1.cpl.php:19
+msgid "Sign In!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/login.cpl.php:19
+msgid "Your IP connection is:"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Days"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "All"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Man"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Women"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Couple"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Users Statistics"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Quick Stats"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Today"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Last week"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "This month"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "This year (%0%)"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "All (since %0%)"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "All Members Logins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Men Members Logins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Women Members Logins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Couple Members Logins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "All Affiliates Logins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+#, fuzzy
+msgid "Men Affiliates Logins"
+msgstr "Search a Subscriber:"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Women Affiliates Logins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "All Admins Logins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Men Admins Logins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Women Admins Logins"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "All Members Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Men Members Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Women Members Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Couple Members Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "All Affiliates Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Men Affiliates Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Women Affiliates Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "All Admins Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Men Admins Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Women Admins Registrations"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Blogs"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Messages"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Profile Comments"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+#, fuzzy
+msgid "Picture Comments"
+msgstr "Edit the Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+#, fuzzy
+msgid "Video Comments"
+msgstr "Edit the Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+msgid "Blog Comments"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+#, fuzzy
+msgid "Note Comments"
+msgstr "Edit the Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/stat.cpl.php:19
+#, fuzzy
+msgid "Game Comments"
+msgstr "Add a new Comment"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/main/news.inc.cpl.php:19
+msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">Software</a>'s News"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/tool/index.cpl.php:19
+msgid "Database"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/tool/index.cpl.php:19
+msgid "Optimization Tables"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_2dde561d607819bcabeb5fb8eee59611/base/tool/index.cpl.php:19
+msgid "Repair Tables"
+msgstr ""
+
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:19
 msgid "Search an Subscriber:"
 msgstr "Search a Subscriber:"
@@ -29,14 +1207,6 @@ msgstr ""
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:20
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/SearchMailForm.php:23
 msgid "Browse By:"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:20
-msgid "Email"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:20
-msgid "Name"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:20
@@ -56,11 +1226,6 @@ msgstr ""
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:21
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/SearchMailForm.php:25
 msgid "Descending"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:22
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/SearchMailForm.php:26
-msgid "Search"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/MsgForm.php:27
@@ -172,20 +1337,8 @@ msgstr ""
 msgid "newsletter, newsletters, subscription, email, social, social network, social networking, community, metting, dating, friends, people"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/controllers/AdminController.php:29
-msgid "Newsletter"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/controllers/AdminController.php:37
-msgid "Search Subscribers"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/controllers/AdminController.php:58
 msgid "Sorry, Your search returned no results!"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/controllers/AdminController.php:70
-msgid "Browse Subscribers"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/controllers/AdminController.php:73
@@ -234,39 +1387,27 @@ msgstr ""
 msgid "Where:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/SearchMailForm.php:24
-msgid "Inbox"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/SearchMailForm.php:24
-msgid "Outbox"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/SearchMailForm.php:24
-msgid "Trash"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:37
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:38
 msgid "Oops! You can not send a message to yourself."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:41
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:42
 msgid "Oops! You cannot reply to administrator! If you want to contact us, please use our <a href=\"%0%\">contact form</a>."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:45
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:46
 msgid "Oops! The username \"%0%\" does not exist."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:63
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:62
 msgid "Problem while sending the message. Please try again later."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:70
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:69
 msgid "Hello %0%!<br />You have received a new message from <strong>%1%</strong>.<br /> <a href=\"%2%\">Click here</a> to read your message."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:78
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcess.php:77
 msgid "New private message from %0% on %site_name%"
 msgstr ""
 
@@ -466,40 +1607,40 @@ msgstr "Up to 10 email addresses separated by commas."
 msgid "Message:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/InviteForm.php:37
-msgid "Invite your friends!"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/InviteForm.php:38
 msgid "Cancel"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:28
-msgid "One or more email addresses are invalid!"
-msgstr "One or more email address(es) are invalid!"
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:32
-msgid "Hello!<br />You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:33
-msgid "Get exclusive privilege to join your friend is waiting for you!"
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:26
+msgid "To prevent spam, you cannot put more than 10 email addresses at a time."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:34
+msgid "One or more email addresses are invalid!"
+msgstr "One or more email address(es) are invalid!"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:38
+msgid "Hello!<br />You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:39
+msgid "Get exclusive privilege to join your friend is waiting for you!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:40
 msgid "Message left by your friend:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:35
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:41
 msgid "You are receiving this message because \"%0%\" you know has entered your email address in the form of invitation of friends to our site. This is not spam!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:41
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:47
 msgid "Privilege on the invitation from your friend for the new generation community platform - %site_name%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:47
-msgid "Cool, we've sent that!"
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:53
+msgid "Cool! We have sent that."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/controllers/HomeController.php:16
@@ -741,10 +1882,6 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/AdsAdminForm.php:28
-msgid "Advertisement"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:19
 msgid "Search an Affiliate:"
 msgstr ""
@@ -783,10 +1920,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/BannerForm.php:37
 msgid "Banner:"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/LoginForm.php:39
-msgid "Login"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/BankForm.php:39
@@ -831,10 +1964,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:35
 msgid "Sex:"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:35
-msgid "Couple"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:36
@@ -1009,14 +2138,6 @@ msgstr ""
 msgid "Welcome to the administration of Ad Affiliate"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:35
-msgid "Affiliate Settings"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:71
-msgid "Browse Affiliates"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:74
 msgid "%n% Affiliate"
 msgid_plural "%n% Affiliates"
@@ -1115,10 +2236,6 @@ msgstr ""
 msgid "Edit your profile"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:42
-msgid "Change Password"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AccountController.php:50
 msgid "Delete Affiliate Account"
 msgstr ""
@@ -1149,19 +2266,11 @@ msgstr ""
 msgid "Yes I really want to delete my account"
 msgstr "Yes, I really want to delete my account"
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdsController.php:25
-msgid "Banners"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdsController.php:28
 msgid "%n% Banner"
 msgid_plural "%n% Banners"
 msgstr[0] ""
 msgstr[1] ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/RssController.php:21
-msgid "RSS Feed List"
-msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/RssController.php:23
 msgid "RSS Feed %site_name%, Free Onlide Dating Site with Webcam Chat Rooms, Meet Single People with %site_name%"
@@ -1169,10 +2278,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/RssController.php:72
 msgid "Not Found RSS Feed!"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/SitemapController.php:21
-msgid "Site Map"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/SitemapController.php:23
@@ -1267,7 +2372,6 @@ msgid "Article ID:"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:57
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/AdminBlogForm.php:36
 msgid "Article ID will be the name of the url."
 msgstr ""
 
@@ -1372,16 +2476,6 @@ msgstr ""
 msgid "Enable Comment:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:80
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/AdminBlogForm.php:51
-msgid "Enable"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:80
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/AdminBlogForm.php:51
-msgid "Disable"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:86
 msgid "Post Not Found!"
 msgstr ""
@@ -1390,12 +2484,16 @@ msgstr ""
 msgid "your-address"
 msgstr ""
 
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/AdminBlogForm.php:36
+msgid "Article ID will be the name of the URL."
+msgstr ""
+
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/AdminBlogForm.php:41
 msgid "EX: \"en\", \"fr\", \"es\", \"js\""
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/processing/AdminBlogFormProcess.php:31
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/processing/EditAdminBlogFormProcess.php:40
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/processing/EditAdminBlogFormProcess.php:41
 msgid "The ID of the article is invalid or incorrect."
 msgstr ""
 
@@ -1407,7 +2505,7 @@ msgstr ""
 msgid "Post created successfully!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/processing/EditAdminBlogFormProcess.php:101
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/forms/processing/EditAdminBlogFormProcess.php:102
 msgid "Your post has been saved successfully!"
 msgstr ""
 
@@ -1427,46 +2525,46 @@ msgstr ""
 msgid "Blog Not Found"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:123
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:122
 msgid "Not found \"%0%\" category!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:128
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:127
 msgid "Search by Category: \"%0%\" Blog"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:131
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:173
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:130
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:172
 msgid "%n% Blog Result!"
 msgid_plural "%n% Blogs Result!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:132
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:131
 msgid "Search Blog Post by Category %0% - Dating Social Community Blog"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:134
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:133
 msgid "search,post,blog,dating,social network,community,news"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:145
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:144
 msgid "Search Blog - Looking a post"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:170
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:169
 msgid "Dating Social Blog - Your search returned"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:174
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:173
 msgid "Search - Dating Social Community Blog"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:175
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:174
 msgid "search,blog,dating,social network,community,news"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:212
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:211
 msgid ""
 "Sorry, we weren't able to find the page you requested.<br />\n"
 "        May we suggest <a href=\"%0%\">exploring some tags</a> or <a href=\"%1%\">make a new search</a>."
@@ -1915,53 +3013,56 @@ msgid "Name:"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:36
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:42
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:44
 msgid "Yes"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:36
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:42
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:44
 msgid "No"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:40
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:46
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:48
 msgid "Price:"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:40
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:46
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:48
 msgid "Currency: %0%. 0 = Free. To change the currency, please <a href=\"%1%\">go to settings</a>."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:41
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:47
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:49
 msgid "Expiration Days:"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:41
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:47
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:49
 msgid "0 = Unlimited"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:42
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:48
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:50
 msgid "Active:"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:42
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:48
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:50
 msgid "Enabled"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:42
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:48
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:50
 msgid "Disabled"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:43
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:49
 msgid "Add"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/EditMembershipForm.php:51
+msgid "Update"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/processing/EditMembershipFormProcess.php:50
@@ -1988,11 +3089,6 @@ msgstr ""
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:73
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/AdminController.php:39
 msgid "No membership found!"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:57
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/AdminController.php:43
-msgid "Memberships List"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/controllers/MainController.php:83
@@ -2063,16 +3159,8 @@ msgstr ""
 msgid "About this web site %site_name%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:47
-msgid "Help"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:49
 msgid "Help about of %site_name%"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:60
-msgid "FAQ"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:61
@@ -2103,16 +3191,8 @@ msgstr ""
 msgid "Privacy Policy - %site_name%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:96
-msgid "Imprint"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:98
 msgid "Imprint - %site_name%"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:105
-msgid "Help Us"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:107
@@ -2147,10 +3227,6 @@ msgstr ""
 msgid "Links and Partners of %site_name%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/config/Permission.php:23
-msgid "You must register to report the abuse."
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:34
 msgid "Do your want to report this?"
 msgstr ""
@@ -2164,10 +3240,6 @@ msgid "Profile"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:35
-msgid "Avatar"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:35
 msgid "Message"
 msgstr ""
 
@@ -2177,18 +3249,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:35
 msgid "Photo"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:35
-msgid "Video"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:35
-msgid "Forum"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:35
-msgid "Note"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:36
@@ -2255,10 +3315,6 @@ msgstr ""
 msgid "Report abuse contents"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/controllers/AdminController.php:42
-msgid "Report"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/report/controllers/AdminController.php:59
 msgid "Watching Report"
 msgstr ""
@@ -2272,7 +3328,7 @@ msgstr ""
 msgid "A problem occurred during the deleted of the reporting."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/config/Permission.php:21
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/config/Permission.php:23
 msgid "For security reasons, you do not have the right to generate a new password. To disable this security option, you must go to the Permission file of \"lost-password\" module"
 msgstr ""
 
@@ -2508,7 +3564,7 @@ msgid "Search Games"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/game/forms/SearchGameForm.php:19
-msgid "Enter Name, Description, Keyword or ID of a Game:"
+msgid "Enter Name, Description, Keyword or ID of a Game."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/game/forms/SearchGameForm.php:20
@@ -2551,7 +3607,11 @@ msgstr ""
 msgid "The game has been updated successfully!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/game/forms/processing/AdminFormProcess.php:64
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/game/forms/processing/AdminFormProcess.php:49
+msgid "Impossible to upload the game. If you are the administrator, please check if the folder of games data has the write permission (CHMOD 755)."
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/game/forms/processing/AdminFormProcess.php:68
 msgid "The game was added successfully!"
 msgstr ""
 
@@ -2647,21 +3707,21 @@ msgstr ""
 msgid "The game could not be removed."
 msgstr ""
 
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:104
+msgid "Sent at %0%"
+msgstr ""
+
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:120
-msgid "You must have the status of ONLINE in order to speak instantaneous."
+msgid "You must have the ONLINE status in order to speak instantaneous."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:122
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:180
-msgid "%0% is offline, send a message instead."
+msgid "%0% is offline. Send a Private Message instead."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:178
-msgid "You must have the status of ONLINE in order to chat with other members."
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/config/Permission.php:23
-msgid "Please register or login to add an article."
+msgid "You must have the ONLINE status in order to chat with other members."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/SearchNoteForm.php:19
@@ -2682,16 +3742,16 @@ msgstr ""
 msgid "The language of your post:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/EditNoteFormProcess.php:43
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/EditNoteFormProcess.php:44
 msgid "ID Article must be unique!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/EditNoteFormProcess.php:53
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/EditNoteFormProcess.php:54
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/NoteFormProcess.php:74
 msgid "You can not select more than 3 categories."
 msgstr "You can't select more than 3 categories."
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/EditNoteFormProcess.php:115
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/EditNoteFormProcess.php:116
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/NoteFormProcess.php:89
 msgid "Your Note has been received! But it will be visible once approved by our moderators. Please do not send a new Note because this is useless!"
 msgstr ""
@@ -2768,10 +3828,6 @@ msgstr ""
 msgid "search,note,dating,social network,community,news"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/controllers/MainController.php:219
-msgid "Add a Note"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/note/controllers/MainController.php:227
 msgid "Edit the Note"
 msgstr ""
@@ -2804,59 +3860,54 @@ msgstr ""
 msgid "Oops! The Note could not be approved!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/config/Permission.php:48
-msgid "Please update your membership!"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:39
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:42
 msgid "Universal Login"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:43
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:46
 msgid "your-user-name"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:43
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:46
 msgid "This username will be used for your site url."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:57
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:60
 msgid "I sign up for free!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:84
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:63
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:87
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:68
 msgid "Gender:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:85
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:64
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:88
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:69
 msgid "Interested in:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:85
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:88
 msgid "Please specify whom you are looking for"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:91
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:94
 msgid "Your State or Province:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:117
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:120
 msgid "Describe yourself in a few words. Your description should be at least 20 characters long."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:47
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/AvatarForm.php:31
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/DesignForm.php:31
 msgid "Back to Browse Users"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:52
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:57
 msgid "Membership Group:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:62
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:67
 msgid "Email:"
 msgstr ""
 
@@ -2871,7 +3922,7 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/SearchVisitorForm.php:21
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/SearchFriendForm.php:24
-msgid "Enter its First Name, Last Name, Username, Email address or ID of your Friend"
+msgid "Enter its First Name, Last Name, Username, Email address or ID of your Friend."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/SearchVisitorForm.php:22
@@ -2891,7 +3942,6 @@ msgid "Your Password"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/LoginSplashForm.php:33
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/LoginForm.php:32
 msgid "Stay signed in"
 msgstr ""
 
@@ -2974,10 +4024,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/PrivacyForm.php:41
 msgid "Away"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/NotificationForm.php:33
-msgid "Newsletters"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/NotificationForm.php:33
@@ -3274,10 +4320,6 @@ msgstr ""
 msgid "Your Wallpaper"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SettingController.php:84
-msgid "Notifications"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SettingController.php:92
 msgid "Privacy Settings"
 msgstr ""
@@ -3479,6 +4521,7 @@ msgstr ""
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/forms/processing/EditReplyMsgFormProcess.php:28
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/forms/processing/EditMsgFormProcess.php:27
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/forms/processing/EditForumFormProcess.php:23
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/forms/processing/ReplyMsgFormProcess.php:44
 msgid "Your message has been updated successfully!"
 msgstr ""
 
@@ -3691,10 +4734,6 @@ msgstr ""
 msgid "Default Field Value"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/field/forms/EditFieldForm.php:35
-msgid "Edit"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/field/forms/processing/EditFieldFormProcess.php:31
 msgid "Bad field name!"
 msgstr ""
@@ -3720,10 +4759,6 @@ msgstr ""
 msgid "All Fields"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/field/controllers/FieldController.php:40
-msgid "Add a Field"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/field/controllers/FieldController.php:51
 msgid "Edit a Field"
 msgstr ""
@@ -3740,7 +4775,7 @@ msgstr ""
 msgid "An error occurred while deleting the field."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/config/Permission.php:31
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/config/Permission.php:33
 msgid "Oops! You are already logged in as administrator."
 msgstr ""
 
@@ -3868,359 +4903,355 @@ msgstr ""
 msgid "Maximum age for registration:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:79
-msgid "Universal Registration and Login:"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:84
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:83
 msgid "Default Membership Group:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:88
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:87
 msgid "Picture and Video:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:90
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:89
 msgid "Image:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:91
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:90
 msgid "Watermark text:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:92
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:91
 msgid "Size Watermark Text:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:92
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:91
 msgid "Between 0 to 5."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:95
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:94
 msgid "Default video:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:95
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:94
 msgid "Video by default if no video found."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:96
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:95
 msgid "Autoplay Video:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:99
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:98
 msgid "Moderation:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:100
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:99
 msgid "Avarar Manual Approval:"
 msgstr "Avatar Manual Approval:"
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:101
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:100
 msgid "Profile Background Manual Approval:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:102
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:101
 msgid "Note Post Manual Approval:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:103
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:102
 msgid "Pictures Manual Approval:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:104
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:103
 msgid "Videos Manual Approval:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:105
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:104
 msgid "Webcam Pictures Manual Approval:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:105
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:104
 msgid "This mode is experimental approval, do not use it in production."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:108
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:107
 msgid "Email Parameters:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:109
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:108
 msgid "Email Name:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:110
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:109
 msgid "Admin Email:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:111
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:110
 msgid "Feedback Email:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:112
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:111
 msgid "Return Email:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:115
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:114
 msgid "Security:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:117
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:116
 msgid "Minimum password length:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:118
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:117
 msgid "Maximum password length:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:119
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:118
 msgid "Blocking login attempts exceeded:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:120
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:119
 msgid "Enable blocking for User:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:121
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:120
 msgid "Enable blocking for Affiliate:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:122
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:121
 msgid "Enable blocking for Admin:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:123
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:122
 msgid "Max login attempts before blocking for User:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:124
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:123
 msgid "Max login attempts before blocking for Affiliate:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:125
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:124
 msgid "Max login attempts before blocking for Admin:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:126
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:125
 msgid "Time interval blocking for User:"
 msgstr ""
 
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:125
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:126
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:127
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:128
 msgid "Time in minutes."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:127
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:126
 msgid "Time interval blocking for Affiliate:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:128
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:127
 msgid "Time interval blocking for Admin:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:129
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:128
 msgid "Various:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:130
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:129
 msgid "Send the reports by email:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:130
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:134
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:129
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:133
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:147
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:148
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:149
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:150
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:151
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:152
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:153
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/UpdateAdsForm.php:61
 msgid "Activate"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:130
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:134
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:129
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:133
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:147
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:148
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:149
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:150
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:151
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:152
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:153
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/UpdateAdsForm.php:59
 msgid "Deactivate"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:131
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:130
 msgid "Security Ip connection for Admin Panel:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:131
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:130
 msgid "Enter <a href=\"%0%\" title=\"Get your IP here!\">your IP address</a> and an even higher security and exclude all other persons and bots that tried to connect with another IP address even if the login is correct! Leave blank to disable this feature."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:132
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:131
 msgid "Indicate a word that will replace the banned word in the <a href=\"%0%\">list</a>."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:133
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:132
 msgid "CSRF token lifetime:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:133
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:132
 msgid "Time in seconds."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:134
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:133
 msgid "System against the DDoS attacks:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:137
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:136
 msgid "Spam:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:138
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:137
 msgid "Time Delay:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:139
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:138
 msgid "Registration delay for User"
 msgstr ""
 
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:138
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:139
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:140
 msgid "Number of minutes for a new registration with the same IP address."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:140
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:139
 msgid "Registration delay for Affiliate"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:141
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:140
 msgid "Send Note delay"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:141
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:140
 msgid "Number of minutes for the same user to post a new note."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:142
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:141
 msgid "Send Mail delay"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:142
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:141
 msgid "Number of minutes for the same user can send a new email."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:143
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:142
 msgid "Send Comment delay"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:143
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:142
 msgid "Number of minutes for the same user can send a new comment."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:144
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:143
 msgid "Send Forum Topic delay"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:144
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:143
 msgid "Number of minutes for the same user can send a new topic in the forum."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:145
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:144
 msgid "Send Forum Message delay"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:145
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:144
 msgid "Number of minutes for the same user can send a reply message in the same topic."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:148
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:147
 msgid "Captcha for User Signup Form:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:149
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:148
 msgid "Captcha for Affiliate Signup Form:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:150
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:149
 msgid "Captcha for send an Email:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:151
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:150
 msgid "Captcha for adding a Comment:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:152
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:151
 msgid "Captcha for adding or reply a message in the Forum:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:153
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:152
 msgid "Captcha for adding a User Post Note:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:155
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:154
 msgid "Pruning:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:156
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:155
 msgid "Delete older messages:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:156
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:155
 msgid "Delete messages older than days. 0 to disable."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:157
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:156
 msgid "Delete older comments:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:157
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:156
 msgid "Delete comments older than days. 0 to disable."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:160
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:159
 msgid "Api:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:161
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:160
 msgid "IP Api:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:161
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:160
 msgid "The URL must end with a slash."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:162
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:161
 msgid "Chat Api:"
 msgstr ""
 
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:161
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:162
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:163
 msgid "Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#)."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:163
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:162
 msgid "Chatroulette Api:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:166
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:165
 msgid "Automation:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:167
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:166
 msgid "Secret word for the URL cron:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:167
-msgid "Your very secret word for the URL of cron. It will be used for running automated cron job."
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:166
+msgid "Your very secret word for the cron URL. It will be used for running automated cron job."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:168
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:167
 msgid "User inactivity timeout:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:168
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:167
 msgid "The number of minutes that a member becomes inactive (offline)."
 msgstr ""
 
@@ -4233,7 +5264,6 @@ msgid "Your custon CSS code"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/StyleForm.php:28
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/ScriptForm.php:28
 msgid "WARNING! Here you don't have to put the %0% tags."
 msgstr ""
 
@@ -4284,10 +5314,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/UpdateAdsForm.php:52
 msgid "Advertisement:"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/UpdateAdsForm.php:54
-msgid "Update"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/UpdateAdsForm.php:55
@@ -4343,10 +5369,6 @@ msgid "Search for:"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SearchUserForm.php:26
-msgid "All"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SearchUserForm.php:26
 msgid "IP Address"
 msgstr ""
 
@@ -4374,19 +5396,19 @@ msgstr ""
 msgid "Your custon JavaScript code"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/LicenseForm.php:33
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/LicenseForm.php:30
 msgid "Your License Key"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/LicenseForm.php:33
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/LicenseForm.php:30
 msgid "Buy a license"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/LicenseForm.php:33
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/LicenseForm.php:30
 msgid "to remove the links from us."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/LicenseForm.php:34
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/LicenseForm.php:31
 msgid "Register"
 msgstr ""
 
@@ -4438,21 +5460,16 @@ msgstr ""
 msgid "The Meta Tags was saved successfully!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/LoginFormProcess.php:64
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/LoginFormProcess.php:65
 msgid "\"Email\", \"Username\" or \"Password\" is Incorrect"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/LoginFormProcess.php:69
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/LoginFormProcess.php:70
 msgid "Incorrect Login!"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/UpdateAdsFormProcess.php:26
 msgid "The Advertisements was saved successfully!"
-msgstr "The Advertisements were saved successfully!"
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/LicenseFormProcess.php:33
-#, fuzzy
-msgid "Your License Key was saved successfully!"
 msgstr "The Advertisements were saved successfully!"
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/AddAdminFormProcess.php:37
@@ -4475,11 +5492,11 @@ msgstr ""
 msgid "You cannot specify a minimum age higher than the maximum age."
 msgstr "You can't specify a minimum age higher than the maximum age."
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:233
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:230
 msgid "The token lifetime cannot be below 10 seconds."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:316
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:313
 msgid "The configuration was saved successfully!"
 msgstr ""
 
@@ -4523,20 +5540,12 @@ msgstr ""
 msgid "No user were found."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:59
-msgid "Browse Users"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:62
 msgid "Total Users: %0%"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:71
 msgid "Add a User"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:79
-msgid "Import Users"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:87
@@ -4625,24 +5634,12 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/FileController.php:92
-msgid "Public Files"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/FileController.php:94
 msgid "Edit Public Files"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/FileController.php:102
-msgid "Protected Files"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/FileController.php:104
 msgid "Edit Protected Files"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/FileController.php:119
-msgid "File Management"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/MainController.php:20
@@ -4852,10 +5849,6 @@ msgstr ""
 msgid "Oops! The video could not be deleted!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/SettingController.php:27
-msgid "General Settings"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/SettingController.php:46
 msgid "Advertisement Settings"
 msgstr ""
@@ -4884,8 +5877,25 @@ msgstr ""
 msgid "Meta Tags - Settings"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/SettingController.php:106
-msgid "License Key"
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/SettingController.php:132
+#, fuzzy
+msgid "Hurrah! Your License Key was saved successfully."
+msgstr "The Advertisements were saved successfully!"
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/SettingController.php:137
+msgid "Oops! Your license key is Invalid."
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/SettingController.php:141
+msgid "Oops! Your license key is Expired."
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/SettingController.php:145
+msgid "We are sorry, but your license key is Suspended."
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/SettingController.php:149
+msgid "Oops! We have received an invalid response from the server. Please try again later."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ModuleController.php:48
@@ -4898,14 +5908,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ModuleController.php:74
 msgid "Uninstalling Module"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:25
-msgid "Tools"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:41
-msgid "Caches Management"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:46
@@ -4922,10 +5924,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:49
 msgid "Static files"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:57
-msgid "Cache Settings"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:69
@@ -4948,10 +5946,6 @@ msgstr ""
 msgid "Protected data"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:87
-msgid "Backup Management"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:112
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:118
 msgid "Data successfully dumped into file \"%0%\""
@@ -4963,7 +5957,7 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:161
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:217
-msgid "Dump file must be a SQL type (extension \".sql\" or compressed archive \".bz2\")"
+msgid "Dump file must be a SQL type (extension \".sql\" or compressed archive \".gz\")"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:166
@@ -4993,10 +5987,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:249
 msgid "All tables have been repaired!"
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/AdminController.php:62
-msgid "Browse Admins"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/AdminController.php:65
@@ -5072,7 +6062,7 @@ msgstr ""
 msgid "Top Rated"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/ShareUrlCoreForm.php:25
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/ShareUrlCoreForm.php:26
 msgid "Share URL:"
 msgstr ""
 
@@ -5092,23 +6082,23 @@ msgstr ""
 msgid "Change Password!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:66
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:68
 msgid "Height:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:70
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:72
 msgid "Weight:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:76
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:78
 msgid "Your Website/Blog"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:83
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:85
 msgid "Your Fax Number:"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:84
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/DynamicFieldCoreForm.php:86
 msgid "Enter full number with area code."
 msgstr ""
 
@@ -5178,11 +6168,6 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/DeleteUserCoreFormProcess.php:30
 msgid "Oops! This password you entered is incorrect."
-msgstr ""
-
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/DeleteUserCoreFormProcess.php:35
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/DeleteUserCoreFormProcess.php:50
-msgid "Affiliate"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/DeleteUserCoreFormProcess.php:35
@@ -5352,6 +6337,10 @@ msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/popup/confirmCoreAjax.php:38
 msgid "Bad parameters in the URL!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/popup/confirmCoreAjax.php:47
+msgid "You must register to report the abuse."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/assets/js/mailcheck.jsCoreJs.php:34
@@ -5547,20 +6536,24 @@ msgstr ""
 msgid "Happy Birthday %0%!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/PermissionCore.php:34
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/PermissionCore.php:61
 msgid "Please you logged!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/PermissionCore.php:39
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/PermissionCore.php:66
 msgid "Please go to the administrative part of the site and log in as administrator."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/PermissionCore.php:44
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/PermissionCore.php:71
 msgid "Oops! You are already connected."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/PermissionCore.php:49
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/PermissionCore.php:76
 msgid "Please register or login to use this service."
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/PermissionCore.php:81
+msgid "Please upgrade your membership!"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/RegistrationCore.php:39
@@ -5702,10 +6695,6 @@ msgstr ""
 msgid "Add a comment"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/design/CommentDesignCore.php:39
-msgid "RSS Feed"
-msgstr ""
-
 #: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/classes/design/XmlDesignCore.php:50
 msgid "Latest Blog Posts"
 msgstr ""
@@ -5746,7 +6735,7 @@ msgstr ""
 msgid "No News Software."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/models/UserCoreModel.php:1085
+#: /var/www/CmsDating/pH7DatingCms/_protected/app/system/core/models/UserCoreModel.php:1084
 msgid "Administration of %site_name%"
 msgstr ""
 
@@ -5968,64 +6957,68 @@ msgstr ""
 msgid "%0% sts &ndash; %1% lbs &ndash; %2% kgs"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:77
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:79
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:103
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:105
 msgid "%0% seconds ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:81
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:107
 msgid "one minute ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:81
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:107
 msgid "%0% minutes ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:83
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:109
 msgid "one hour ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:83
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:109
 msgid "%0% hours ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:86
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:112
 msgid "one day ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:86
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:112
 msgid "%0% days ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:88
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:114
 msgid "one week ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:88
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:114
 msgid "%0% weeks ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:90
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:116
 msgid "one month ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:90
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:116
 msgid "%0% months ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:92
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:118
 msgid "one year ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:92
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:118
 msgid "%0% years ago."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Core/Kernel.class.php:91
-msgid "Sorry, your <a href=\"%0%\">pH7CMS</a> License Key is incorrect!"
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Core/Kernel.class.php:75
+msgid "<span style=\"font-weight:bold;color:red\"><a href=\"%0%\">pH7CMS</a> requires Apache \"mod_rewrite\".</span><br /> Please install it so that pH7CMS can works.<br /> Click <a href=\"%1%\" target=\"_blank\">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href=\"%2%\">retry</a>."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Core/Kernel.class.php:105
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Core/Kernel.class.php:99
+msgid "You need to buy a <strong>valid <a href=\"%0%\">pH7CMS</a> License Key</strong> to use features requiring a license key!"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Core/Kernel.class.php:113
 msgid "Your server must be connected to the Internet for pH7Framework to function properly."
 msgstr ""
 
@@ -6061,72 +7054,76 @@ msgstr ""
 msgid "This message was sent to %0%.<br /> You are receiving this message because you have registered on %1%.<br /> You can change the e-mail alerts by visiting your account."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:106
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:145
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:107
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:146
 msgid "You have"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:106
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:107
 msgid "message:"
 msgid_plural "messages:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:145
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:146
 msgid "error:"
 msgid_plural "errors:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:176
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:179
 msgid "Request"
 msgid_plural "Requests"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:177
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:180
 msgid "Time of the request: %0% | %1% %2% | Page executed in %3% seconds | Amount of memory allocated: %4%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:251
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:269
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:244
+msgid "Want to delete this below link?"
+msgstr ""
+
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:257
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:272
 msgid "Powered By"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:251
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:269
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:257
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:272
 msgid "Version"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:257
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:262
 msgid "terms"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:257
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:262
 msgid "The text is available under the %0%, but additional %1% may apply."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:373
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:376
 msgid "See information from this IP"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:388
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:391
 msgid "Meet New People on %0%, %1% with %site_name%!"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:520
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:523
 msgid "Free registration for the feature Like."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:531
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:534
 msgid "Like %0%"
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:559
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:562
 msgid "You must register to report this person."
 msgstr ""
 
-#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:561
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:564
 msgid "Report Abuse"
 msgstr ""
 
@@ -6265,6 +7262,7 @@ msgid "Error: %element% is a required field."
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/CCaptcha.php:13
+#: /var/www/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/Captcha.php:11
 msgid "The code of Captcha entered was incorrect. Please re-try."
 msgstr ""
 
@@ -6291,22 +7289,12 @@ msgstr ""
 #: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.6-0.1.7/info/introduction.php:16
 #: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.10-1.1.0/info/introduction.php:16
 #: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.9.8-0.9.9/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.3-0.1.4/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.7-0.8.7/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.4-0.1.6/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.3-1.0.10/info/introduction.php:16
 msgid "WARNING!"
 msgstr ""
 
 #: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.6-0.1.7/info/introduction.php:16
 #: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.10-1.1.0/info/introduction.php:16
 #: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.9.8-0.9.9/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.3-0.1.4/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.7-0.8.7/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.4-0.1.6/info/introduction.php:16
-#: /var/www/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.3-1.0.10/info/introduction.php:16
 msgid "Please make a backup of your site and your database before proceeding with upgrade!"
 msgstr ""
 
@@ -6387,58 +7375,3 @@ msgstr ""
 msgid "Config | Fake Admin Honeypot"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Search a Picture"
-#~ msgstr "Search a Subscriber:"
-
-#, fuzzy
-#~ msgid "Search a Video"
-#~ msgstr "Search a Subscriber:"
-
-#, fuzzy
-#~ msgid "Edit account"
-#~ msgstr "Edit the Comment"
-
-#, fuzzy
-#~ msgid "Edit Account"
-#~ msgstr "Edit the Comment"
-
-#, fuzzy
-#~ msgid "Search a Users"
-#~ msgstr "Search a Subscriber:"
-
-#, fuzzy
-#~ msgid "Search an Admin"
-#~ msgstr "Search a Subscriber:"
-
-#, fuzzy
-#~ msgid "Subscribers"
-#~ msgstr "Search a Subscriber:"
-
-#, fuzzy
-#~ msgid "Search an Affiliate"
-#~ msgstr "Search a Subscriber:"
-
-#, fuzzy
-#~ msgid "Add a new Membership"
-#~ msgstr "Add a new Comment"
-
-#, fuzzy
-#~ msgid "Edit your Account"
-#~ msgstr "Edit the Comment"
-
-#, fuzzy
-#~ msgid "Free Online Dating Site"
-#~ msgstr "Hot Or Not - Free Online Dating Site"
-
-#, fuzzy
-#~ msgid "Online Dating Site"
-#~ msgstr "Hot Or Not - Free Online Dating Site"
-
-#, fuzzy
-#~ msgid "Contact us"
-#~ msgstr "Content Type:"
-
-#, fuzzy
-#~ msgid "Free Online Dating"
-#~ msgstr "Hot Or Not - Free Online Dating Site"
