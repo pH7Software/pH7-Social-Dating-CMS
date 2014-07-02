@@ -19,7 +19,7 @@ class Permission extends PermissionCore
 
         if (!$bAdminAuth)
         {
-            if (!$this->checkMembership() || !$this->group->game_access)
+            if (!$this->checkMembership() || !$this->group->games_access)
             {
                 $this->paymentRedirect();
             }

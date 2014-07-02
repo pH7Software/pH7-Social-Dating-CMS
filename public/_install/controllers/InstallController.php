@@ -258,7 +258,7 @@ class InstallController extends Controller
                                                     'pH7_SchemaGame',
                                                     'pH7_DataGame',
                                                     /*** Core ***/
-                                                    'pH7_installCore',
+                                                    'pH7_Core',
                                                     // --- GeoIp (exec_query_file() function executes these files only if they existens otherwise it does nothing) --- //
                                                     'pH7_geoCountry',
                                                     'pH7_geoCity',
