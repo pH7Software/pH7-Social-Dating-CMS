@@ -23,7 +23,7 @@ final class Version
     /***** Framework Kernel *****/
     const KERNEL_VERSION = Kernel::SOFTWARE_VERSION;
     const KERNEL_BUILD = Kernel::SOFTWARE_BUILD;
-    const KERNEL_RELASE_DATE = '2014-03-29';
+    const KERNEL_RELASE_DATE = '2014-07-02';
     const KERNEL_VERSION_NAME = Kernel::SOFTWARE_VERSION_NAME;
 
     /***** Form PFBC *****/
@@ -31,8 +31,8 @@ final class Version
     const PFBC_RELASE_DATE = '2011-09-22';
 
     /***** Swift Mailer *****/
-    const SWIFT_VERSION = '5.0.1';
-    const SWIFT_RELASE_DATE = '2013-05-17';
+    const SWIFT_VERSION = '5.1.0';
+    const SWIFT_RELASE_DATE = '2014-03-18';
 
 
     /**
