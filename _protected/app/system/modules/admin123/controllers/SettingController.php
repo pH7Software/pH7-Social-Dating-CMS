@@ -107,7 +107,49 @@ class SettingController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
+        if ($this->httpRequest->getExists('set_msg'))
+        {
+            $aData = $this->_getLicStatusMsg();
+            $this->design->setFlashMsg($aData['msg'], ($aData['is_err'] ? 'error' : 'success'));
+        }
+
         $this->output();
+    }
+
+    /**
+     * Get the status and the message for the license key.
+     *
+     * @access private
+     * @return array ['is_err' => BOOLEAN, 'msg' => STRING];
+     */
+    private function _getLicStatusMsg()
+    {
+        $bIsErr = true; // Set default value
+
+        switch (PH7_LICENSE_STATUS)
+        {
+            case 'active':
+                $sMsg = t('Hurrah! Your License Key was saved successfully.');
+                $bIsErr = false;
+            break;
+
+            case 'invalid':
+                $sMsg = t('Oops! Your license key is Invalid.');
+            break;
+
+            case 'expired':
+                $sMsg = t('Oops! Your license key is Expired.');
+            break;
+
+            case 'suspended':
+                $sMsg = t('We are sorry, but your license key is Suspended.');
+            break;
+
+            default:
+                $sMsg = t('Oops! We have received an invalid response from the server. Please try again later.');
+        }
+
+        return ['is_err' => $bIsErr, 'msg' => $sMsg];
     }
 
 }
