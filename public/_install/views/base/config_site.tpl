@@ -15,6 +15,12 @@
     <p><span class="mandatory">*</span> <label for="admin_passwords">{$LANG.admin_passwords} :</label><br />
     <input type="password" name="admin_passwords" id="admin_passwords" required="required" /></p>
 
+    <p><span class="mandatory">*</span> <label for="admin_first_name">{$LANG.admin_first_name} :</label><br />
+    <input type="text" name="admin_first_name" id="admin_first_name" value="{$smarty.session.value.admin_first_name|escape}" required="required" /></p>
+
+    <p><span class="mandatory">*</span> <label for="admin_last_name">{$LANG.admin_last_name} :</label><br />
+    <input type="text" name="admin_last_name" id="admin_last_name" value="{$smarty.session.value.admin_last_name|escape}" required="required" /></p>
+
     <p><span class="mandatory">*</span> <label for="admin_email">{$LANG.admin_login_email} :</label><br />
     <input type="email" name="admin_login_email" id="admin_login_email" value="{$smarty.session.value.admin_login_email|escape}" required="required" /></p>
 
@@ -26,12 +32,6 @@
 
     <p><span class="mandatory">*</span> <label for="admin_return_email">{$LANG.admin_return_email} :</label><br />
     <input type="email" name="admin_return_email" id="admin_return_email" value="{$smarty.session.value.admin_return_email|escape}" required="required" /></p>
-
-    <p><span class="mandatory">*</span> <label for="admin_first_name">{$LANG.admin_first_name} :</label><br />
-    <input type="text" name="admin_first_name" id="admin_first_name" value="{$smarty.session.value.admin_first_name|escape}" required="required" /></p>
-
-    <p><span class="mandatory">*</span> <label for="admin_last_name">{$LANG.admin_last_name} :</label><br />
-    <input type="text" name="admin_last_name" id="admin_last_name" value="{$smarty.session.value.admin_last_name|escape}" required="required" /></p>
 
     <p><input type="submit" name="config_site_submit" value="{$LANG.next}" /></p>
 
