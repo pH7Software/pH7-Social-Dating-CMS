@@ -844,30 +844,6 @@ CREATE TABLE IF NOT EXISTS pH7_MembersFriends (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-CREATE TABLE IF NOT EXISTS pH7_Pages (
-  pageId tinyint(4) unsigned NOT NULL AUTO_INCREMENT,
-  slugId varchar(60) NOT NULL,
-  langId char(2) NOT NULL DEFAULT '',
-  title varchar(100) DEFAULT NULL,
-  content longtext NOT NULL,
-  pageTitle varchar(100) NOT NULL,
-  metaDescription varchar(255) NOT NULL,
-  metaKeywords varchar(255) NOT NULL,
-  metaRobots varchar(50) NOT NULL,
-  metaAuthor varchar(50) NOT NULL,
-  metaCopyright varchar(50) NOT NULL,
-  tags varchar(200) DEFAULT NULL,
-  views int(10) unsigned DEFAULT '0',
-  createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  updatedDate datetime DEFAULT NULL,
-  PRIMARY KEY (pageId),
-  UNIQUE KEY slugId (slugId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-INSERT INTO pH7_Pages  (slugId, langId, title, content, pageTitle, createdDate)
-('affiliateterms', 'en', 'Affiliate Terms', 'Your TOS HERE', 'Affiliate Temrs', @sCurrentDate),
-('faq', 'en', 'FAQ', 'Your FAQ HERE', 'Affiliate Temrs', @sCurrentDate),
-
 CREATE TABLE IF NOT EXISTS pH7_MembersWall (
   wallId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL DEFAULT '0',
