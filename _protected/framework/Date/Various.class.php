@@ -17,6 +17,32 @@ class Various
 {
 
     /**
+     * Get the Unix timestamp representing the date.
+     *
+     * @return integer
+     */
+    public static function getTime()
+    {
+        return (new \DateTime)->getTimestamp();
+    }
+
+    /**
+     * Add or Remove Time from the current date.
+     *
+     * @param string $sTime A date/time string. EX: Add one month '+1 month' | Remove one month '-1 month'
+     * @return integer The Unix timestamp representing the date.
+     */
+    public static function setTime($sTime)
+    {
+        $oDate = new \DateTime;
+        $oDate->modify($sTime);
+        $iNewTime = $oDate->getTimestamp();
+        unset($oDate);
+
+        return $iNewTime;
+    }
+
+    /**
      * Convert the time (e.g. hour:minutes:seconds) to seconds.
      *
      * @static
