@@ -86,6 +86,8 @@ abstract class Kernel
      */
     final private function _checkLicense()
     {
+        $this->_checkInternetConnection(); // First we check the Internet connection
+
         $oLicense = new License;
         define( 'PH7_SOFTWARE_STATUS', !$oLicense->isBanned() );
         define( 'PH7_LICENSE_STATUS', $this->str->lower($oLicense->checkCopyright()['status']) );
@@ -94,8 +96,6 @@ abstract class Kernel
 
         if (!PH7_SOFTWARE_STATUS)
         {
-            $this->_checkInternetConnection(); // First we check the Internet connection
-
             $sLicenseMsg = t('You need to buy a <strong>valid <a href="%0%">pH7CMS</a> License Key</strong> to use features requiring a license key!', self::SOFTWARE_WEBSITE);
             Page::message($sLicenseMsg);
         }
@@ -110,7 +110,7 @@ abstract class Kernel
     final private function _checkInternetConnection()
     {
         if (!Server::checkInternetConnection())
-            Page::message(t('Your server must be connected to the Internet for pH7Framework to function properly.'));
+            Page::message(t('Your server must be connected to the Internet to work properly.'));
     }
 
     public function __destruct()
