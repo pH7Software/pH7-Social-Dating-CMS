@@ -1,4 +1,4 @@
-<!-- Last Update: 03/23/2014 by Pierre-Henry Soria -->
+<!-- Last Update: 07/02/2014 by Pierre-Henry Soria -->
 
 <h1>Tree of pH7CMS</h1>
 
@@ -180,6 +180,7 @@
 │   │       │   │   │   └── ResendActivationCoreFormProcess.php
 │   │       │   │   ├── ResendActivationCoreForm.php
 │   │       │   │   ├── SearchUserCoreForm.php
+│   │       │   │   ├── ShareEmbedCoreForm.php
 │   │       │   │   └── ShareUrlCoreForm.php
 │   │       │   └── models
 │   │       │       ├── AdminCoreModel.php
@@ -514,7 +515,8 @@
 │   │           │                   └── index.tpl
 │   │           ├── chatroulette
 │   │           │   ├── config
-│   │           │   │   └── config.ini
+│   │           │   │   ├── config.ini
+│   │           │   │   └── Permission.php
 │   │           │   ├── controllers
 │   │           │   │   └── HomeController.php
 │   │           │   ├── lang
@@ -759,7 +761,8 @@
 │   │           │                   └── search.tpl
 │   │           ├── hotornot
 │   │           │   ├── config
-│   │           │   │   └── config.ini
+│   │           │   │   ├── config.ini
+│   │           │   │   └── Permission.php
 │   │           │   ├── controllers
 │   │           │   │   └── MainController.php
 │   │           │   ├── lang
@@ -1206,7 +1209,7 @@
 │   │           │   │   ├── BirthdayModel.php
 │   │           │   │   ├── FriendModel.php
 │   │           │   │   ├── query
-│   │           │   │   │   ├── join2.1.sql
+│   │           │   │   │   ├── join2_1.sql
 │   │           │   │   │   ├── join2_2.sql
 │   │           │   │   │   ├── join3.sql
 │   │           │   │   │   └── join.sql
@@ -1309,7 +1312,8 @@
 │   │           │   │       ├── BrowsePictureAjax.php
 │   │           │   │       └── UploadPictureAjax.php
 │   │           │   ├── config
-│   │           │   │   └── config.ini
+│   │           │   │   ├── config.ini
+│   │           │   │   └── Permission.php
 │   │           │   ├── controllers
 │   │           │   │   └── WebcamController.php
 │   │           │   ├── lang
@@ -1490,6 +1494,7 @@
 │   │   ├── Cookie
 │   │   │   └── Cookie.class.php
 │   │   ├── Core
+│   │   │   ├── __BACKUP.License.class.php
 │   │   │   ├── Core.class.php
 │   │   │   ├── Exception.class.php
 │   │   │   ├── Kernel.class.php
@@ -1748,6 +1753,7 @@
 │   │   │   │       │   │   │   │   ├── DateHeader.php
 │   │   │   │       │   │   │   │   ├── IdentificationHeader.php
 │   │   │   │       │   │   │   │   ├── MailboxHeader.php
+│   │   │   │       │   │   │   │   ├── OpenDKIMHeader.php
 │   │   │   │       │   │   │   │   ├── ParameterizedHeader.php
 │   │   │   │       │   │   │   │   ├── PathHeader.php
 │   │   │   │       │   │   │   │   └── UnstructuredHeader.php
@@ -1800,6 +1806,7 @@
 │   │   │   │       │   │   │   ├── DKIMSigner.php
 │   │   │   │       │   │   │   ├── DomainKeySigner.php
 │   │   │   │       │   │   │   ├── HeaderSigner.php
+│   │   │   │       │   │   │   ├── OpenDKIMSigner.php
 │   │   │   │       │   │   │   └── SMimeSigner.php
 │   │   │   │       │   │   ├── SmtpTransport.php
 │   │   │   │       │   │   ├── Spool.php
@@ -1816,7 +1823,9 @@
 │   │   │   │       │   │   │   │   ├── Auth
 │   │   │   │       │   │   │   │   │   ├── CramMd5Authenticator.php
 │   │   │   │       │   │   │   │   │   ├── LoginAuthenticator.php
-│   │   │   │       │   │   │   │   │   └── PlainAuthenticator.php
+│   │   │   │       │   │   │   │   │   ├── NTLMAuthenticator.php
+│   │   │   │       │   │   │   │   │   ├── PlainAuthenticator.php
+│   │   │   │       │   │   │   │   │   └── XOAuth2Authenticator.php
 │   │   │   │       │   │   │   │   ├── Authenticator.php
 │   │   │   │       │   │   │   │   └── AuthHandler.php
 │   │   │   │       │   │   │   ├── EsmtpHandler.php
@@ -1846,6 +1855,7 @@
 │   │   │   │       ├── preferences.php
 │   │   │   │       ├── README
 │   │   │   │       ├── swift_init.php
+│   │   │   │       ├── swiftmailer_generate_mimes_config.php
 │   │   │   │       ├── swift_required_pear.php
 │   │   │   │       ├── swift_required.php
 │   │   │   │       └── VERSION
@@ -2164,13 +2174,16 @@
 │   │   │   │   ├── rename-the-admin-folder.tpl
 │   │   │   │   ├── requirements.tpl
 │   │   │   │   ├── tree.tpl
-│   │   │   │   └── upgrade.tpl
+│   │   │   │   ├── upgrade.tpl
+│   │   │   │   ├── use-it-on-a-non-linux-host.tpl
+│   │   │   │   └── where-download-games-for-my-site.tpl
 │   │   │   └── fr
 │   │   │       ├── comment-accéder-au-panneau-d'administration.tpl
 │   │   │       ├── core
 │   │   │       │   ├── 404-error.tpl
 │   │   │       │   └── welcome.tpl
 │   │   │       ├── cron.tpl
+│   │   │       ├── hébergement-web.tpl
 │   │   │       ├── installation.tpl
 │   │   │       ├── liste-des-cron.tpl
 │   │   │       ├── mise-à-jour.tpl
@@ -2480,7 +2493,6 @@
 │   │   │   │   ├── config.ini
 │   │   │   │   └── constants.php
 │   │   │   ├── logs
-│   │   │   │   └── php_error.log
 │   │   │   └── sql
 │   │   │       └── MySQL
 │   │   │           ├── pH7_DataGame.sql
@@ -2829,7 +2841,16 @@
 │   │       │       ├── conclusion.php
 │   │       │       ├── config.ini
 │   │       │       └── introduction.php
-│   │       └── 1.0.3-1.0.10
+│   │       ├── 1.0.3-1.0.10
+│   │       │   ├── data
+│   │       │   │   └── sql
+│   │       │   │       └── MySQL
+│   │       │   │           └── upgrade.sql
+│   │       │   └── info
+│   │       │       ├── conclusion.php
+│   │       │       ├── config.ini
+│   │       │       └── introduction.php
+│   │       └── 1.1.0-1.1.2
 │   │           ├── data
 │   │           │   └── sql
 │   │           │       └── MySQL
@@ -4466,6 +4487,8 @@
 │               │   │   ├── visitor_no_picture-64.jpg
 │               │   │   └── visitor_no_picture.jpg
 │               │   ├── logo.png
+│               │   ├── paging_bg2.png
+│               │   ├── preview.png
 │               │   └── slideshow
 │               │       ├── 1.jpg
 │               │       ├── 2.jpg
@@ -4494,4 +4517,4 @@
 
 </pre>
 
-<p>Statistics: 1361 directories, 3125 files.</p>
+<p>Statistics: 1366 directories, 3143 files.</p>
