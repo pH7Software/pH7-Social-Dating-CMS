@@ -11,7 +11,7 @@
 
     <p><label for="license">{$LANG.your_license}</label><br />
     {$LANG.registration_for_license}<br />
-    <input type="text" name="license" onkeypress="return checkInput(event)" id="license" value="{$smarty.session.value.license|escape}" required="required" /></p>
+    <input type="text" name="license" onkeypress="return checkInput(event)" id="license" value="{$smarty.session.val.license|escape}" required="required" /></p>
 
     <div id="txtLic"></div>
 

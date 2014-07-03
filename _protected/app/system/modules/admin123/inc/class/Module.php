@@ -10,7 +10,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\File as F;
+use PH7\Framework\Config\Config, PH7\Framework\File as F;
 
 class Module
 {
@@ -28,7 +28,6 @@ class Module
     INSTALL_DIR = 'install',
     SQL_DIR = 'sql',
     INFO_DIR = 'info',
-    MYSQL_DIR = 'MySql',
 
     INSTALL_SQL_FILE = 'install.sql',
     UNINSTALL_SQL_FILE = 'uninstall.sql',
@@ -119,7 +118,7 @@ class Module
         $sValue = $this->_checkParam($sSwitch);
         $sPath = ($sValue == static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder : PH7_PATH_MOD . $sFolder;
 
-        return Framework\Config\Config::getInstance()->load($sPath . PH7_CONFIG . PH7_CONFIG_FILE);
+        return Config::getInstance()->load($sPath . PH7_CONFIG . PH7_CONFIG_FILE);
     }
 
     /**
@@ -177,7 +176,7 @@ class Module
      */
     private function _sql($sSwitch)
     {
-        $sSqlFile = static::MYSQL_DIR . PH7_DS . ($sSwitch == static::INSTALL ? static::INSTALL_SQL_FILE : static::UNINSTALL_SQL_FILE);
+        $sSqlFile = Config::getInstance()->values['database']['type_name'] . PH7_DS . ($sSwitch == static::INSTALL ? static::INSTALL_SQL_FILE : static::UNINSTALL_SQL_FILE);
         $sPath = PH7_PATH_MOD . $this->_sModsDirModFolder . static::INSTALL_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $sSqlFile;
 
         if(is_file($sPath) && filesize($sPath) > 12)

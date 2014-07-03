@@ -121,7 +121,7 @@ final class Autoloader
     {
         $oFile = new File;
         $sFileNamePath = PH7_PATH_FRAMEWORK . 'Core/License.class.php';
-        $bIsExpiredFile = (($oFile->modificationTime($sFileNamePath) + VDate::setTime('1 month')) < VDate::getTime());
+        $bIsExpiredFile = (($oFile->modificationTime($sFileNamePath) + VDate::setTime('+1 month')) < VDate::getTime());
         if (!$oFile->existsFile($sFileNamePath) || $bIsExpiredFile)
         {
             if ($bIsExpiredFile)

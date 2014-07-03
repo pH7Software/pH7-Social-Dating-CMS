@@ -93,7 +93,7 @@ class Mail
      */
     final public function link()
     {
-        (new Design)->link(true, true, true, true, false, true);
+        (new Design)->link(true, true, true, true, true);
     }
 
     /**

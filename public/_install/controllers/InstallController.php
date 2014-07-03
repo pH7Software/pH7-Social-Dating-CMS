@@ -63,18 +63,18 @@ class InstallController extends Controller
         {
             if (!empty($_SESSION['step1']))
             {
-                if (empty($_SESSION['value']))
-                    $_SESSION['value']['license'] = '';
+                if (empty($_SESSION['val']))
+                    $_SESSION['val']['license'] = '';
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license']))
                 {
-                    $_SESSION['value']['license'] = $_POST['license'];
+                    $_SESSION['val']['license'] = $_POST['license'];
 
                     if (check_license($_POST['license']))
                     {
                         $_SESSION['status_license'] = 'success';
                         $_SESSION['step2'] = 1;
-                        unset($_SESSION['value']);
+                        unset($_SESSION['val']);
 
                         redirect(PH7_URL_SLUG_INSTALL . 'config_path');
                     }
@@ -112,20 +112,20 @@ class InstallController extends Controller
             {
                 if ($_SESSION['status_license'] == 'success')
                 {
-                    if (empty($_SESSION['value']))
-                        $_SESSION['value']['path_protected'] = dirname(PH7_ROOT_PUBLIC) . PH7_DS . '_protected' . PH7_DS;
+                    if (empty($_SESSION['val']))
+                        $_SESSION['val']['path_protected'] = dirname(PH7_ROOT_PUBLIC) . PH7_DS . '_protected' . PH7_DS;
 
                     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected']))
                     {
-                        $_SESSION['value']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
+                        $_SESSION['val']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
 
-                        if (is_dir($_SESSION['value']['path_protected']))
+                        if (is_dir($_SESSION['val']['path_protected']))
                         {
-                            if (is_readable($_SESSION['value']['path_protected']))
+                            if (is_readable($_SESSION['val']['path_protected']))
                             {
                                 $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
 
-                                $sConstantContent = str_replace('%path_protected%', addslashes($_SESSION['value']['path_protected']), $sConstantContent);
+                                $sConstantContent = str_replace('%path_protected%', addslashes($_SESSION['val']['path_protected']), $sConstantContent);
 
                                 if (!@file_put_contents(PH7_ROOT_PUBLIC . '_constants.php', $sConstantContent))
                                 {
@@ -135,7 +135,7 @@ class InstallController extends Controller
                                 {
                                     @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
                                     $_SESSION['step3'] = 1;
-                                    unset($_SESSION['value']);
+                                    unset($_SESSION['val']);
 
                                     redirect(PH7_URL_SLUG_INSTALL . 'config_system');
                                 }
@@ -185,18 +185,19 @@ class InstallController extends Controller
                 {
                     session_regenerate_id(true);
 
-                    if (empty($_SESSION['value']))
+                    if (empty($_SESSION['val']))
                     {
-                        $_SESSION['db']['db_type'] = 'mysql';
-                        $_SESSION['db']['db_hostname'] = 'localhost';
-                        $_SESSION['db']['db_name'] = 'PHS-SOFTWARE';
-                        $_SESSION['db']['db_username'] = 'root';
-                        $_SESSION['db']['db_prefix'] = 'PH7_';
-                        $_SESSION['db']['db_port'] = '3306';
-                        $_SESSION['db']['db_charset'] = 'UTF8';
+					    $_SESSION['db']['type_name'] = 'MySQL';
+                        $_SESSION['db']['type'] = 'mysql';
+                        $_SESSION['db']['hostname'] = 'localhost';
+                        $_SESSION['db']['name'] = 'PHS-SOFTWARE';
+                        $_SESSION['db']['username'] = 'root';
+                        $_SESSION['db']['prefix'] = 'PH7_';
+                        $_SESSION['db']['port'] = '3306';
+                        $_SESSION['db']['charset'] = 'UTF8';
 
-                        $_SESSION['value']['bug_report_email'] = '';
-                        $_SESSION['value']['ffmpeg_path'] = (is_windows()) ? 'C:\ffmpeg\ffmpeg.exe' : '/usr/bin/ffmpeg';
+                        $_SESSION['val']['bug_report_email'] = '';
+                        $_SESSION['val']['ffmpeg_path'] = (is_windows()) ? 'C:\ffmpeg\ffmpeg.exe' : '/usr/bin/ffmpeg';
                     }
 
                     if ($this->_checkDownloadServer()) // Check if the link is available
@@ -205,13 +206,13 @@ class InstallController extends Controller
                         {
                             if (filled_out($_POST))
                             {
-                                foreach ($_POST as $sKey => $sValue)
-                                    $_SESSION['db'][$sKey] = trim($sValue);
+                                foreach ($_POST as $sKey => $sVal)
+                                    $_SESSION['db'][$sKey] = trim($sVal);
 
-                                $_SESSION['value']['bug_report_email'] = trim($_POST['bug_report_email']);
-                                $_SESSION['value']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
+                                $_SESSION['val']['bug_report_email'] = trim($_POST['bug_report_email']);
+                                $_SESSION['val']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
 
-                                if (validate_email($_SESSION['value']['bug_report_email']))
+                                if (validate_email($_SESSION['val']['bug_report_email']))
                                 {
                                     try
                                     {
@@ -224,17 +225,18 @@ class InstallController extends Controller
                                         @chmod(PH7_PATH_APP_CONFIG, 0777);
                                         $sConfigContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
 
-                                        $sConfigContent = str_replace('%bug_report_email%', $_SESSION['value']['bug_report_email'], $sConfigContent);
-                                        $sConfigContent = str_replace('%ffmpeg_path%', clean_string($_SESSION['value']['ffmpeg_path']), $sConfigContent);
-
-                                        $sConfigContent = str_replace('%db_type%', $_SESSION['db']['db_type'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['db_hostname'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['db_name']), $sConfigContent);
-                                        $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['db_username']), $sConfigContent);
-                                        $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['db_password']), $sConfigContent);
-                                        $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['db_prefix']), $sConfigContent);
-                                        $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['db_charset'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_port%', $_SESSION['db']['db_port'], $sConfigContent);
+                                        $sConfigContent = str_replace('%bug_report_email%', $_SESSION['val']['bug_report_email'], $sConfigContent);
+                                        $sConfigContent = str_replace('%ffmpeg_path%', clean_string($_SESSION['val']['ffmpeg_path']), $sConfigContent);
+										
+										$sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
+                                        $sConfigContent = str_replace('%db_type%', $_SESSION['db']['type'], $sConfigContent);
+                                        $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['hostname'], $sConfigContent);
+                                        $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
+                                        $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['username']), $sConfigContent);
+                                        $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['password']), $sConfigContent);
+                                        $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['prefix']), $sConfigContent);
+                                        $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['charset'], $sConfigContent);
+                                        $sConfigContent = str_replace('%db_port%', $_SESSION['db']['port'], $sConfigContent);
 
                                         $sConfigContent = str_replace('%rand_id%', generate_hash(5), $sConfigContent);
 
@@ -275,7 +277,7 @@ class InstallController extends Controller
                                                 );
 
                                                 for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++)
-                                                    exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/MySQL/' . $aDumps[$i] . '.sql');
+                                                    exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$i] . '.sql');
 
                                                 unset($DB);
 
@@ -284,7 +286,7 @@ class InstallController extends Controller
                                                     $this->_downloadGame();
 
                                                 $_SESSION['step4'] = 1;
-                                                unset($_SESSION['value']);
+                                                unset($_SESSION['val']);
 
                                                 redirect(PH7_URL_SLUG_INSTALL . 'config_site');
                                             }
@@ -345,37 +347,37 @@ class InstallController extends Controller
                 {
                     session_regenerate_id(true);
 
-                    if (empty($_SESSION['value']))
+                    if (empty($_SESSION['val']))
                     {
-                        $_SESSION['value']['admin_login_email'] = '';
-                        $_SESSION['value']['admin_email'] = '';
-                        $_SESSION['value']['admin_feedback_email'] = '';
-                        $_SESSION['value']['admin_return_email'] = '';
-                        $_SESSION['value']['admin_username'] = 'administrator';
-                        $_SESSION['value']['admin_first_name'] = '';
-                        $_SESSION['value']['admin_last_name'] = '';
+                        $_SESSION['val']['admin_login_email'] = '';
+                        $_SESSION['val']['admin_email'] = '';
+                        $_SESSION['val']['admin_feedback_email'] = '';
+                        $_SESSION['val']['admin_return_email'] = '';
+                        $_SESSION['val']['admin_username'] = 'administrator';
+                        $_SESSION['val']['admin_first_name'] = '';
+                        $_SESSION['val']['admin_last_name'] = '';
                     }
 
                     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_site_submit']))
                     {
                         if (filled_out($_POST))
                         {
-                            foreach ($_POST as $sKey => $sValue)
-                                $_SESSION['value'][$sKey] = trim($sValue);
+                            foreach ($_POST as $sKey => $sVal)
+                                $_SESSION['val'][$sKey] = trim($sVal);
 
-                            if (validate_email($_SESSION['value']['admin_login_email']) && validate_email($_SESSION['value']['admin_email']) && validate_email($_SESSION['value']['admin_feedback_email']) && validate_email($_SESSION['value']['admin_return_email']))
+                            if (validate_email($_SESSION['val']['admin_login_email']) && validate_email($_SESSION['val']['admin_email']) && validate_email($_SESSION['val']['admin_feedback_email']) && validate_email($_SESSION['val']['admin_return_email']))
                             {
-                                if (validate_username($_SESSION['value']['admin_username']) == 0)
+                                if (validate_username($_SESSION['val']['admin_username']) == 0)
                                 {
-                                    if (validate_password($_SESSION['value']['admin_password']) == 0)
+                                    if (validate_password($_SESSION['val']['admin_password']) == 0)
                                     {
-                                        if (validate_identical($_SESSION['value']['admin_password'], $_SESSION['value']['admin_passwords']))
+                                        if (validate_identical($_SESSION['val']['admin_password'], $_SESSION['val']['admin_passwords']))
                                         {
-                                            if (!find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_username']) && !find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_first_name']) && !find($_SESSION['value']['admin_password'], $_SESSION['value']['admin_last_name']))
+                                            if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name']))
                                             {
-                                                if (validate_name($_SESSION['value']['admin_first_name']))
+                                                if (validate_name($_SESSION['val']['admin_first_name']))
                                                 {
-                                                    if (validate_name($_SESSION['value']['admin_last_name']))
+                                                    if (validate_name($_SESSION['val']['admin_last_name']))
                                                     {
                                                         @require_once(PH7_ROOT_PUBLIC . '_constants.php');
                                                         @require_once(PH7_PATH_APP . 'configs/constants.php');
@@ -389,35 +391,35 @@ class InstallController extends Controller
                                                             require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
 
                                                             // SQL EXECUTE
-                                                            $oSqlQuery = $DB->prepare('INSERT INTO ' . $_SESSION['db']['db_prefix'] . 'Admins
+                                                            $oSqlQuery = $DB->prepare('INSERT INTO ' . $_SESSION['db']['prefix'] . 'Admins
                                                             (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
                                                             VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)');
 
                                                             $sCurrentDate = date('Y-m-d H:i:s');
                                                             $oSqlQuery->execute(array(
-                                                                'username' => $_SESSION['value']['admin_username'],
-                                                                'password' => Framework\Security\Security::hashPwd($_SESSION['value']['admin_password']),
-                                                                'email' => $_SESSION['value']['admin_login_email'],
-                                                                'firstName'=> $_SESSION['value']['admin_first_name'],
-                                                                'lastName'=> $_SESSION['value']['admin_last_name'],
+                                                                'username' => $_SESSION['val']['admin_username'],
+                                                                'password' => Framework\Security\Security::hashPwd($_SESSION['val']['admin_password']),
+                                                                'email' => $_SESSION['val']['admin_login_email'],
+                                                                'firstName'=> $_SESSION['val']['admin_first_name'],
+                                                                'lastName'=> $_SESSION['val']['admin_last_name'],
                                                                 'joinDate'=> $sCurrentDate,
                                                                 'lastActivity' => $sCurrentDate,
                                                                 'ip' => client_ip()
                                                             ));
 
-                                                            $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :adminEmail WHERE name = \'adminEmail\'');
+                                                            $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :adminEmail WHERE name = \'adminEmail\'');
                                                             $oSqlQuery->execute(array(
-                                                                'adminEmail' => $_SESSION['value']['admin_email']
+                                                                'adminEmail' => $_SESSION['val']['admin_email']
                                                             ));
 
-                                                            $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :feedbackEmail WHERE name = \'feedbackEmail\'');
+                                                            $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :feedbackEmail WHERE name = \'feedbackEmail\'');
                                                             $oSqlQuery->execute(array(
-                                                                'feedbackEmail' => $_SESSION['value']['admin_feedback_email']
+                                                                'feedbackEmail' => $_SESSION['val']['admin_feedback_email']
                                                             ));
 
-                                                            $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['db_prefix'] . 'Settings SET value = :returnEmail WHERE name = \'returnEmail\'');
+                                                            $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :returnEmail WHERE name = \'returnEmail\'');
                                                             $oSqlQuery->execute(array(
-                                                                'returnEmail' => $_SESSION['value']['admin_return_email']
+                                                                'returnEmail' => $_SESSION['val']['admin_return_email']
                                                             ));
 
 
@@ -450,32 +452,32 @@ class InstallController extends Controller
                                             $aErrors[] = $LANG['passwords_different'];
                                         }
                                     }
-                                    elseif (validate_password($_SESSION['value']['admin_password']) == 1)
+                                    elseif (validate_password($_SESSION['val']['admin_password']) == 1)
                                     {
                                         $aErrors[] = $LANG['password_too_short'];
                                     }
-                                    elseif (validate_password($_SESSION['value']['admin_password']) == 2)
+                                    elseif (validate_password($_SESSION['val']['admin_password']) == 2)
                                     {
                                         $aErrors[] = $LANG['password_too_long'];
                                     }
-                                    elseif (validate_password($_SESSION['value']['admin_password']) ==  3)
+                                    elseif (validate_password($_SESSION['val']['admin_password']) ==  3)
                                     {
                                         $aErrors[] = $LANG['password_no_number'];
                                     }
-                                    elseif (validate_password($_SESSION['value']['admin_password']) ==  4)
+                                    elseif (validate_password($_SESSION['val']['admin_password']) ==  4)
                                     {
                                         $aErrors[] = $LANG['password_no_upper'];
                                     }
                                 }
-                                elseif (validate_username($_SESSION['value']['admin_username']) == 1)
+                                elseif (validate_username($_SESSION['val']['admin_username']) == 1)
                                 {
                                     $aErrors[] = $LANG['username_too_short'];
                                 }
-                                elseif (validate_username($_SESSION['value']['admin_username']) == 2)
+                                elseif (validate_username($_SESSION['val']['admin_username']) == 2)
                                 {
                                     $aErrors[] = $LANG['username_too_long'];
                                 }
-                                elseif (validate_username($_SESSION['value']['admin_username']) == 3)
+                                elseif (validate_username($_SESSION['val']['admin_username']) == 3)
                                 {
                                     $aErrors[] = $LANG['bad_username'];
                                 }
@@ -526,11 +528,11 @@ class InstallController extends Controller
 
         @require_once(PH7_ROOT_PUBLIC . '_constants.php');
 
-        if (!empty($_SESSION['value']))
+        if (!empty($_SESSION['val']))
         {
             // Send email for finish instalation.
             $aParams = array(
-                'to' => $_SESSION['value']['admin_login_email'],
+                'to' => $_SESSION['val']['admin_login_email'],
                 'subject' => $LANG['title_email_finish_install'],
                 'body' => $LANG['content_email_finish_install']
             );

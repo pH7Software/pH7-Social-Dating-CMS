@@ -34,7 +34,6 @@ class UpgradeCore
     DATA_DIR = 'data',
     SQL_DIR = 'sql',
     INFO_DIR = 'info',
-    MYSQL_DIR = 'MySQL',
 
     UPGRADE_FILE = 'upgrade.sql',
     INST_INTRO_FILE = 'introduction',
@@ -227,7 +226,7 @@ class UpgradeCore
 
     private function _sql()
     {
-       $sPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . static::MYSQL_DIR . PH7_DS . static::UPGRADE_FILE . PH7_DS;
+       $sPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $this->_oConfig->values['database']['type_name'] . PH7_DS . static::UPGRADE_FILE . PH7_DS;
 
        if(is_file($sPath) && filesize($sPath) > 12)
        {

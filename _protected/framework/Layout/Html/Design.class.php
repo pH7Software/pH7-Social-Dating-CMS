@@ -230,11 +230,10 @@ class Design
      * @param boolean $bSoftwareName Default TRUE
      * @param boolean $bVersion To include the version being used. Default TRUE
      * @param boolean $bComment HTML comment. Default TRUE
-     * @param boolean $bTextLicense Link to license. Default TRUE
      * @param boolean $bEmail Is it for email content or not. Default FALSE
      * @return void
      */
-    final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bTextLicense = true, $bEmail = false)
+    final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
     {
         if (PH7_LICENSE_NO_COPYRIGHT) return;
 
@@ -249,7 +248,7 @@ class Design
             <!-- ', Kernel::SOFTWARE_COPYRIGHT, ' -->
             <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
             <!-- You must leave this comment and the back link in the footer.
-            This open source software is distributed free and you must respect the thousands of days, months and years it takes to develop this software!
+            This open source software is distributed free and you must respect the thousands of days, months and years it takes to develop it!
             All rights reserved for ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '
             You can never claim that you took, developed, or helped in any other way in this software if it is wrong! -->';
         }
@@ -257,9 +256,6 @@ class Design
         echo ($bSoftwareName ?  '<p><strong>' . t('Powered By') : ''), ' ', ($bLink ? '<a href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bLink ? '</a> ' : ' '), ($bVersion ? t('Version') . ' ' . Kernel::SOFTWARE_VERSION : ''), ($bSoftwareName ? '</strong></p>' : ''),
 
         '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
-
-        if ($bTextLicense)
-            echo t('The text is available under the %0%, but additional %1% may apply.', ' <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a>', '<a href="' . Uri::get('page', 'main', 'terms') . '" rel="nofollow">' . t('terms') . '</a>');
     }
 
     /**
