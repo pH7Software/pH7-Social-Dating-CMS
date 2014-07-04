@@ -5,10 +5,10 @@
 {include file="inc/errors.tpl"}
 
 <form method="post" action="{$smarty.const.PH7_URL_SLUG_INSTALL}config_system">
-    
-	<input type="hidden" name="db_type_name" value="{$smarty.session.db.type_name|escape}" required="required" />
-	<input type="hidden" name="db_type" value="{$smarty.session.db.type|escape}" required="required" />
-	
+
+    <input type="hidden" name="db_type_name" value="{$smarty.session.db.type_name|escape}" required="required" />
+    <input type="hidden" name="db_type" value="{$smarty.session.db.type|escape}" required="required" />
+
     <p><span class="mandatory">*</span> <label for="db_hostname">{$LANG.db_hostname} :</label><br />
     <span class="small">{$LANG.desc_db_hostname}</span><br />
     <input type="text" name="db_hostname" id="db_hostname" onfocus="if ('localhost' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'localhost';" value="{$smarty.session.db.hostname|escape}" required="required" /></p>
