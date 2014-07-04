@@ -187,7 +187,7 @@ class InstallController extends Controller
 
                     if (empty($_SESSION['val']))
                     {
-					    $_SESSION['db']['type_name'] = 'MySQL';
+                        $_SESSION['db']['type_name'] = 'MySQL';
                         $_SESSION['db']['type'] = 'mysql';
                         $_SESSION['db']['hostname'] = 'localhost';
                         $_SESSION['db']['name'] = 'PHS-SOFTWARE';
@@ -227,8 +227,8 @@ class InstallController extends Controller
 
                                         $sConfigContent = str_replace('%bug_report_email%', $_SESSION['val']['bug_report_email'], $sConfigContent);
                                         $sConfigContent = str_replace('%ffmpeg_path%', clean_string($_SESSION['val']['ffmpeg_path']), $sConfigContent);
-										
-										$sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
+
+                                        $sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
                                         $sConfigContent = str_replace('%db_type%', $_SESSION['db']['type'], $sConfigContent);
                                         $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['hostname'], $sConfigContent);
                                         $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
