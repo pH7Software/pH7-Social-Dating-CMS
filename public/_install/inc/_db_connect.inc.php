@@ -12,12 +12,12 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 $aParams = array(
-    'db_type' => $_SESSION['db']['db_type'],
-    'db_hostname' => $_SESSION['db']['db_hostname'],
-    'db_name' => $_SESSION['db']['db_name'],
-    'db_username' => $_SESSION['db']['db_username'],
-    'db_password' => $_SESSION['db']['db_password'],
-    'db_charset' => $_SESSION['db']['db_charset']
+    'db_type' => $_SESSION['db']['type'],
+    'db_hostname' => $_SESSION['db']['hostname'],
+    'db_name' => $_SESSION['db']['name'],
+    'db_username' => $_SESSION['db']['username'],
+    'db_password' => $_SESSION['db']['password'],
+    'db_charset' => $_SESSION['db']['charset']
 );
 
 $DB = new Db($aParams);

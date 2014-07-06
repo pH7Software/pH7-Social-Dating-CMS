@@ -209,7 +209,7 @@ function exec_query_file($oDb, $sSqlFile)
     if (!is_file($sSqlFile)) return false;
 
     $sSqlContent = file_get_contents($sSqlFile);
-    $sSqlContent = str_replace(PH7_TABLE_PREFIX, $_SESSION['db']['db_prefix'], $sSqlContent);
+    $sSqlContent = str_replace(PH7_TABLE_PREFIX, $_SESSION['db']['prefix'], $sSqlContent);
     $rStmt = $oDb->exec($sSqlContent);
     unset($sSqlContent);
 

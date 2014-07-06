@@ -128,7 +128,7 @@ class MainController extends Controller
             case 'ccbill':
             {
                 // In developing...
-                // Contact us at <developers.ph7software@gmail.com> if you want to help us develop the payment system CCBill
+                // Contact us at <ph7software@gmail.com> if you want to help us develop the payment system CCBill
             }
             break;
 
