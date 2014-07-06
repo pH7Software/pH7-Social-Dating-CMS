@@ -77,7 +77,7 @@ We need help to continue this project, so we are waiting for you!
 
 We want to train a large team to work on this open source dating project.
 
-Please contact us at *developers (DOT) ph7software (AT) gmail (DOT) com* to work on this exciting project.
+Please contact us at *ph7software (AT) gmail (DOT) com* to work on this exciting project.
 
 
 Thank you!
