@@ -17,6 +17,7 @@
     <meta name="category" content="{meta_category}" />
     <meta name="rating" content="{meta_rating}"/>
     <meta name="distribution" content="{meta_distribution}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {if $header}{header}{/if}
 
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
