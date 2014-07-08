@@ -28,7 +28,7 @@ class BannerForm
         foreach ($oAds as $oRow)
         {
             // Begin ads div tags
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div id="ads_' . $oRow->adsId . '">'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div id="ad_' . $oRow->adsId . '">'));
 
             $oForm->addElement(new \PFBC\Element\Hidden('id_ads', $oRow->adsId));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2>' . $oRow->name . '</h2>'));

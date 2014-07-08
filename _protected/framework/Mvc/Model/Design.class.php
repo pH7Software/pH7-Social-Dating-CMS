@@ -57,13 +57,13 @@ class Design extends \PH7\Framework\Layout\Html\Design
      * @param boolean $bOnlyActive Default TRUE
      * @return object Query
      */
-    public function ads($iWidth, $iHeight, $bOnlyActive = true)
+    public function ad($iWidth, $iHeight, $bOnlyActive = true)
     {
         $this->_oCache->start(self::CACHE_STATIC_GROUP, 'ads' . $iWidth . $iHeight . $bOnlyActive, static::CACHE_TIME);
 
         if (!$oData = $this->_oCache->get())
         {
-            $sSqlActive = ($bOnlyActive) ? 'AND (active=\'1\') ' : ' ';
+            $sSqlActive = ($bOnlyActive) ? ' AND (active=\'1\') ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . Db::prefix('Ads') . 'WHERE (width=:width) AND (height=:height)' . $sSqlActive . 'ORDER BY RAND() LIMIT 1');
             $rStmt->bindValue(':width', $iWidth, \PDO::PARAM_INT);
             $rStmt->bindValue(':height', $iHeight, \PDO::PARAM_INT);
@@ -78,8 +78,11 @@ class Design extends \PH7\Framework\Layout\Html\Design
          * otherwise it doesn't make sense and tracking of advertising could reveal the URL of directors or retrieve sensitive data from the administrator, ...
          */
         if (!\PH7\AdminCore::auth() && $oData)
+        {
+            echo '<div class="inline" onclick="$(\'#ad_' . $oData->adsId . '\').attr(\'src\',\'' . PH7_URL_ROOT . '?' . \PH7\Framework\Ads\Ads::PARAM_URL . '=' . $oData->adsId . '\');return true;">';
             echo \PH7\Framework\Ads\Ads::output($oData);
-
+            echo '<img src="' . PH7_URL_STATIC . PH7_IMG . 'useful/blank.gif" style="border:0;width:0px;height:0px;" alt="" id="ad_' . $oData->adsId . '" /></div>';
+        }
         unset($oData);
     }
 
