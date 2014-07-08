@@ -19,7 +19,7 @@ function ads(sType, iAdsId, sCSRFToken)
     {
         if(oResponseData.status == 1) {
             $('.msg').addClass('alert-message success');
-            $('#ads_' +  iAdsId).hide("slow");
+            $('#ad_' +  iAdsId).hide("slow");
         } else {
             $('.msg').addClass('alert-message error');
         }

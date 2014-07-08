@@ -14,6 +14,7 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
+
     private $oAff, $oAffModel, $sMsg, $sTitle, $iTotalUsers;
 
     public function __construct()

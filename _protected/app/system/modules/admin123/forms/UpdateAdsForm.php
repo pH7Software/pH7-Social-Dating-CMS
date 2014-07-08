@@ -40,7 +40,7 @@ class UpdateAdsForm
             $oForm->addElement(new \PFBC\Element\Token('update_ads'));
 
             // Begin ads div tags
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div id="ads_' . $oRow->adsId . '">'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div id="ad_' . $oRow->adsId . '">'));
 
             $oForm->addElement(new \PFBC\Element\Hidden('id_ads', $oRow->adsId));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title:'), 'title', array('value' => $oRow->name, 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 40))));

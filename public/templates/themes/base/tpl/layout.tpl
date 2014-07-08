@@ -78,7 +78,7 @@
       </noscript>
 
       <div role="banner" id="logo"><h1><a href="{url_root}" title="{slogan}">{site_name}</a></h1></div>
-      <div role="banner" class="right ads_468_60">{{ $designModel->ads(468,60) }}</div>
+      <div role="banner" class="right ad_468_60">{{ $designModel->ad(468,60) }}</div>
 
     </header>
     <!-- End Header -->
@@ -97,8 +97,8 @@
         {main_include 'top_menu.inc.tpl'}
       {/if}
 
-      <div role="banner" class="right ads_120_600">{{ $designModel->ads(120,600) }}</div>
-      <div role="banner" class="left ads_120_600">{{ $designModel->ads(120,600) }}</div>
+      <div role="banner" class="right ad_160_600">{{ $designModel->ad(160,600) }}</div>
+      <div role="banner" class="left ad_160_600">{{ $designModel->ad(160,600) }}</div>
 
       {* Headings group *}
       <div id="headings" class="center">
@@ -146,7 +146,7 @@
 
     <!-- Begin Footer -->
     <footer>
-      <div role="banner" class="center ads_728_90">{{ $designModel->ads(728,90) }}</div>
+      <div role="banner" class="center ad_728_90">{{ $designModel->ad(728,90) }}</div>
       {{ $design->link() }}
 
       {* To avoid scammers *}

@@ -21,14 +21,12 @@ class Ads extends Engine\Model
      * Adding an Advertisement Click.
      *
      * @param integer $iAdsId
-     * @param string $sLink
      * @return void
      */
-    public static function setClick($iAdsId, $sLink)
+    public static function setClick($iAdsId)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AdsClicks') . 'SET adsId = :adsId, url = :url, ip = :ip, dateTime = :dateTime');
         $rStmt->bindValue(':adsId', $iAdsId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':url', $sLink, \PDO::PARAM_STR);
         $rStmt->bindValue(':ip', \PH7\Framework\Ip\Ip::get(), \PDO::PARAM_STR);
         $rStmt->bindValue(':dateTime', (new \PH7\Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s'), \PDO::PARAM_STR);
         $rStmt->execute();
