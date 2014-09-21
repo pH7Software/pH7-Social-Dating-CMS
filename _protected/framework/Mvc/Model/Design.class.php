@@ -75,7 +75,7 @@ class Design extends \PH7\Framework\Layout\Html\Design
 
         /**
          * Only if the administrator is not connected,
-         * otherwise it doesn't make sense and tracking of advertising could reveal the URL of directors or retrieve sensitive data from the administrator, ...
+         * otherwise it doesn't make sense and tracking of advertising could reveal the admin URL or retrieve sensitive data from the administrator, ...
          */
         if (!\PH7\AdminCore::auth() && $oData)
         {

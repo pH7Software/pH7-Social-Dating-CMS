@@ -20,16 +20,16 @@ defined('PH7') or exit(header('Location: ./'));
 
 #################### URL ####################
 
-// URL association for SSL and protocol compatibility
+// Check the SSL protocol compatibility
 $sHttp = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';
-// Determines the domain name with the port
+// Determine the domain name with the port
 $sDomain = ($_SERVER['SERVER_PORT'] != '80') ?  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_NAME'];
 
 // Get the domain that the cookie and cookie session is available (Set-Cookie: domain=your_site_name.com)
 // $sDomain_cookie = (substr($_SERVER['HTTP_HOST'], 0, 4) === 'www.') ? '.' . substr($_SERVER['HTTP_HOST'], 4) : '.' . $_SERVER['HTTP_HOST'];
 $sDomain_cookie = '.' . str_replace('www.', '', $sDomain);
 
-// Determines the current file of the application
+// Determine the current file of the application
 $sPhp_self = dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES));
 
 
