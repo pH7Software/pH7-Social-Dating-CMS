@@ -25,10 +25,8 @@ class Ads extends Engine\Model
      */
     public static function setClick($iAdsId)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AdsClicks') . 'SET adsId = :adsId, url = :url, ip = :ip, dateTime = :dateTime');
-        $rStmt->bindValue(':adsId', $iAdsId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':ip', \PH7\Framework\Ip\Ip::get(), \PDO::PARAM_STR);
-        $rStmt->bindValue(':dateTime', (new \PH7\Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s'), \PDO::PARAM_STR);
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Ads') . 'SET clicks = clicks+1 WHERE adsId = :id LIMIT 1');
+        $rStmt->bindValue(':id', $iAdsId, \PDO::PARAM_INT);
         $rStmt->execute();
         Db::free($rStmt);
     }
