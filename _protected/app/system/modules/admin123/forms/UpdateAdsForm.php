@@ -52,8 +52,11 @@ class UpdateAdsForm
             $oForm->addElement(new \PFBC\Element\Textarea(t('Advertisement:'), 'code', array('id' => mt_rand(), 'value' => $oSysVar->parse($oRow->code), 'required' => 1)));
             // mt_rand() function for generate an ID different if it causes problems in the display.
             $oForm->addElement(new \PFBC\Element\Button(t('Update'), 'submit', array('id' => mt_rand())));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal(t('Views: %0%', Framework\Mvc\Model\Statistic::getView($oRow->adsId, $sTable)) .
-                            ' | <a class="medium_button" href="javascript:void(0)" onclick="ads(\'delete\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Delete') . '</a> | '));
+
+            if (AdsCore::getTable() == 'Ads') // This feature is not available for affiliate banners
+                $oForm->addElement(new \PFBC\Element\HTMLExternal(t('Views: %0% | Clicks: %1%', $oRow->views, $oRow->clicks) . ' | '));
+
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<a class="medium_button" href="javascript:void(0)" onclick="ads(\'delete\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Delete') . '</a> | '));
 
             if ($oRow->active == 1)
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<a class="medium_button" href="javascript:void(0)" onclick="ads(\'deactivate\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Deactivate') . '</a>'));
