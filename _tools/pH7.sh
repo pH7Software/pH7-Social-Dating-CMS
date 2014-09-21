@@ -57,7 +57,7 @@ function clear-cache() {
         rm -rf ./_protected/data/cache/pH7tpl_cache/*
         rm -rf ./_protected/data/cache/pH7_static/*
         rm -rf ./_protected/data/cache/pH7_cache/*
-        echo "The caches were deleted!"
+        echo "The caches have been removed!"
     fi
 }
 
@@ -66,7 +66,7 @@ function remove-tmp-file() {
     _confirm "Are you sure you want to remove the temporary files (e.g. file.pl~, ._file.py)?"
     if [ $? -eq 1 ]; then
         find . -type f \( -name '*~' -or -name '*.swp' -or -name '.directory' -or -name '._*' -or -name '.DS_Store*' -or -name 'Thumbs.db' \) -exec rm {} \;
-        echo "The temporary files were deleted!"
+        echo "The temporary files have been removed!"
     fi
 }
 
@@ -159,11 +159,11 @@ function backup() {
     file="PH7SocialDatingCms.tar.bz2"
     full_path=$path$file
     if [ -e  $full_path ]; then
-        _confirm "A backup already exists in this directory, do you want to delete?"
+        _confirm "A backup already exists in this directory, do you want to delete it?"
         if [ $? -eq 1 ]; then
             rm $full_path
         else
-            echo "Backup canceled in the future, please choose a different backup directory or delete the old backup."
+            echo "Backup canceled. Please choose a different backup directory or delete the old one."
             exit 2
         fi
     fi
