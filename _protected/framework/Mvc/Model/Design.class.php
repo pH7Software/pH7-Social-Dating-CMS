@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\Engine\Db,
+PH7\Framework\Registry\Registry,
 PH7\Framework\Cache\Cache,
 PH7\Framework\Parse\SysVar;
 
@@ -74,10 +75,9 @@ class Design extends \PH7\Framework\Layout\Html\Design
         }
 
         /**
-         * Only if the administrator is not connected,
-         * otherwise it doesn't make sense and tracking of advertising could reveal the admin URL or retrieve sensitive data from the administrator, ...
+         * Don't display ads on the admin panel.
          */
-        if (!\PH7\AdminCore::auth() && $oData)
+        if (!(Registry::getInstance()->module === PH7_ADMIN_MOD) && $oData)
         {
             echo '<div class="inline" onclick="$(\'#ad_' . $oData->adsId . '\').attr(\'src\',\'' . PH7_URL_ROOT . '?' . \PH7\Framework\Ads\Ads::PARAM_URL . '=' . $oData->adsId . '\');return true;">';
             echo \PH7\Framework\Ads\Ads::output($oData);
@@ -89,7 +89,7 @@ class Design extends \PH7\Framework\Layout\Html\Design
     /**
      * Analytics API code.
      *
-     * @param boolean $bPrint Print the analytics HTML code. Default TRUE.
+     * @param boolean $bPrint Print the analytics HTML code. Default TRUE
      * @param boolean $bOnlyActive Only active code. Default TRUE
      * @return mixed (string | void)
      */
