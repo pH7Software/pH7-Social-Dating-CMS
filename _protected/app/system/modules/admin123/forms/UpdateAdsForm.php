@@ -44,7 +44,7 @@ class UpdateAdsForm
 
             $oForm->addElement(new \PFBC\Element\Hidden('id_ads', $oRow->adsId));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title:'), 'title', array('value' => $oRow->name, 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 40))));
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p>' . t('Preview Ads:') . '</p>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p>' . t('Preview Ad:') . '</p>'));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="border">' . $oSysVar->parse($oRow->code) . '</div>'));
 
             // ID textarea form was generated with "mt_rand" because it is faster than "uniqid"

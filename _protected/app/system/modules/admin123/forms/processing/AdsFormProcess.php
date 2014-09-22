@@ -20,15 +20,22 @@ class AdsFormProcess extends Form
     {
         parent::__construct();
 
+        $iIsAff = (AdsCore::getTable() == 'AdsAffiliates');
+
         $sTable = AdsCore::getTable();
-        (new AdsCoreModel)->add($this->httpRequest->post('title'), $this->httpRequest->post('code', Http::NO_CLEAN), $sTable);
+        $sTitle = $this->httpRequest->post('title');
+        $sCode = $this->httpRequest->post('code', Http::NO_CLEAN);
+        $aSize = explode('x', $this->httpRequest->post('size'));
+        $iWidth = $aSize[0];
+        $iHeight = $aSize[1];
+
+        (new AdsCoreModel)->add($sTitle, $sCode, $iWidth, $iHeight, $sTable);
 
         /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
         (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear()
-        ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
-        ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
+        ->start(AdsCoreModel::CACHE_GROUP, 'totalAds' . ($iIsAff ? 'Affiliates' : ''), null)->clear();
 
-        $sSlug = (AdsCore::getTable() == 'AdsAffiliates') ? 'affiliate' : '';
+        $sSlug = ($iIsAff) ? 'affiliate' : '';
         HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisement was added successfully!'));
     }
 

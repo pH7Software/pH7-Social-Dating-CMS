@@ -38,13 +38,15 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
         return $oRow;
     }
 
-    public function add($sName, $sCode, $sTable = 'Ads')
+    public function add($sName, $sCode, $iWidth, $iHeight, $sTable = 'Ads')
     {
         AdsCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix($sTable).'(name, code) VALUES(:name, :code)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix($sTable).'(name, code, width, height) VALUES(:name, :code, :width, :height)');
         $rStmt->bindValue(':name', $sName, \PDO::PARAM_STR);
         $rStmt->bindValue(':code', $sCode, \PDO::PARAM_STR);
+        $rStmt->bindValue(':width', $iWidth, \PDO::PARAM_INT);
+        $rStmt->bindValue(':height', $iWidth, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
 
