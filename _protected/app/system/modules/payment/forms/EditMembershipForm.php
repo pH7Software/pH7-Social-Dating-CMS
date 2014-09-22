@@ -35,7 +35,7 @@ class EditMembershipForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Name:'), 'name', array('value'=>$oMembership->name, 'required' => 1, 'validation' => new \PFBC\Validation\Str(2, 64))));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), 'description', array('value'=>$oMembership->description, 'required'=>1, 'validation' => new \PFBC\Validation\Str(5, 255))));
 
-        $aDefPerms = include dirname(__DIR__) . '/config/perms.inc.php';
+        $aDefPerms = include dirname(__DIR__) . PH7_DS . PH7_CONFIG . 'perms.inc.php';
         $aDbPerms = unserialize($oMembership->permissions);
         $aPerms = array_merge($aDefPerms, $aDbPerms); // Update new permissions from perms.inc.php file
         foreach($aPerms as $sKey => $sVal)
