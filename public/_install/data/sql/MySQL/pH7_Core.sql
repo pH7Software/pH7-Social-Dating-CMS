@@ -231,22 +231,22 @@ CREATE TABLE IF NOT EXISTS pH7_Ads (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_Ads (adsId, name, code, active, width, height, views, clicks) VALUES
-(1, 'Sponsor pH7 Dating CMS 1 (728x90)', '<a href="%software_website%"><img src="%software_website%/static/img/logo1-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90, 0, 0),
-(2, 'Sponsor pH7 Dating CMS 2 (728x90)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo2-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90, 0, 0),
-(3, 'Sponsor pH7 Dating CMS 3 (200x200)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo1-200x200.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 200, 200, 0, 0),
-(4, 'Sponsor pH7 Dating CMS 4 (200x200)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-200x200.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 200, 200, 0, 0),
-(5, 'Sponsor pH7 Dating CMS 5 (250x250)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo1-250x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 250, 250, 0, 0),
-(6, 'Sponsor pH7 Dating CMS 6 (250x250)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-250x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 250, 250, 0, 0),
-(7, 'Sponsor pH7 Dating CMS 7 (468x60)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo1-468x60.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 468, 60, 0, 0),
-(8, 'Sponsor pH7 Dating CMS 8 (468x60)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-468x60.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 468, 60, 0, 0),
-(9, 'Sponsor pH7 Dating CMS 9 (300x250)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo1-300x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 300, 250, 0, 0),
-(10, 'Sponsor pH7 Dating CMS 10 (350x250)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-300x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 300, 250, 0, 0),
-(11, 'Sponsor pH7 Dating CMS 11 (336x280)', '<a href="%software_website%"><img src="%software_website%/static/img/logo1-336x280.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 336, 280, 0, 0),
-(12, 'Sponsor pH7 Dating CMS 12 (336x280)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-336x280.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 336, 280, 0, 0),
-(13, 'Sponsor pH7 Dating CMS 13 (120x600)', '<a href="%software_website%"><img src="%software_website%/static/img/logo1-120x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 120, 600, 0, 0),
-(14, 'Sponsor pH7 Dating CMS 14 (120x600)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-120x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 120, 600, 0, 0),
-(15, 'Sponsor pH7 Dating CMS 15 (160x600)', '<a href="%software_website%"><img src="%software_website%/static/img/logo1-160x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 160, 600, 0, 0),
-(16, 'Sponsor pH7 Dating CMS 16 (160x600)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-160x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 160, 600, 0, 0);
+(1, 'Sponsor pH7CMS 1 (728x90)', '<a href="%software_website%"><img src="%software_website%/static/img/logo1-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90, 0, 0),
+(2, 'Sponsor pH7CMS 2 (728x90)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo2-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90, 0, 0),
+(3, 'Sponsor pH7CMS 3 (200x200)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo1-200x200.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 200, 200, 0, 0),
+(4, 'Sponsor pH7CMS 4 (200x200)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-200x200.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 200, 200, 0, 0),
+(5, 'Sponsor pH7CMS 5 (250x250)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo1-250x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 250, 250, 0, 0),
+(6, 'Sponsor pH7CMS 6 (250x250)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-250x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 250, 250, 0, 0),
+(7, 'Sponsor pH7CMS 7 (468x60)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo1-468x60.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 468, 60, 0, 0),
+(8, 'Sponsor pH7CMS 8 (468x60)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-468x60.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 468, 60, 0, 0),
+(9, 'Sponsor pH7CMS 9 (300x250)', '<a href="%software_website%/signup"><img src="%software_website%/static/img/logo1-300x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 300, 250, 0, 0),
+(10, 'Sponsor pH7CMS 10 (350x250)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-300x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 300, 250, 0, 0),
+(11, 'Sponsor pH7CMS 11 (336x280)', '<a href="%software_website%"><img src="%software_website%/static/img/logo1-336x280.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 336, 280, 0, 0),
+(12, 'Sponsor pH7CMS 12 (336x280)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-336x280.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 336, 280, 0, 0),
+(13, 'Sponsor pH7CMS 13 (120x600)', '<a href="%software_website%"><img src="%software_website%/static/img/logo1-120x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 120, 600, 0, 0),
+(14, 'Sponsor pH7CMS 14 (120x600)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-120x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 120, 600, 0, 0),
+(15, 'Sponsor pH7CMS 15 (160x600)', '<a href="%software_website%"><img src="%software_website%/static/img/logo1-160x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 160, 600, 0, 0),
+(16, 'Sponsor pH7CMS 16 (160x600)', '<a href="%software_website%"><img src="%software_website%/static/img/logo2-160x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 160, 600, 0, 0);
 
 
 CREATE TABLE IF NOT EXISTS pH7_AdsAffiliates (
@@ -260,22 +260,22 @@ CREATE TABLE IF NOT EXISTS pH7_AdsAffiliates (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_AdsAffiliates (adsId, name, code, active, width, height) VALUES
-(1, 'Sponsor pH7 Dating CMS 1 (728x90)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo1-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90),
-(2, 'Sponsor pH7 Dating CMS 2 (728x90)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo2-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90),
-(3, 'Sponsor pH7 Dating CMS 3 (200x200)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo1-200x200.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 200, 200),
-(4, 'Sponsor pH7 Dating CMS 4 (200x200)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-200x200.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 200, 200),
-(5, 'Sponsor pH7 Dating CMS 5 (250x250)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo1-250x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 250, 250),
-(6, 'Sponsor pH7 Dating CMS 6 (250x250)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-250x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 250, 250),
-(7, 'Sponsor pH7 Dating CMS 7 (468x60)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo1-468x60.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 468, 60),
-(8, 'Sponsor pH7 Dating CMS 8 (468x60)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-468x60.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 468, 60),
-(9, 'Sponsor pH7 Dating CMS 9 (300x250)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo1-300x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 300, 250),
-(10, 'Sponsor pH7 Dating CMS 10 (350x250)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-300x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 300, 250),
-(11, 'Sponsor pH7 Dating CMS 11 (336x280)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo1-336x280.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 336, 280),
-(12, 'Sponsor pH7 Dating CMS 12 (336x280)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-336x280.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 336, 280),
-(13, 'Sponsor pH7 Dating CMS 13 (120x600)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo1-120x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 120, 600),
-(14, 'Sponsor pH7 Dating CMS 14 (120x600)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-120x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 120, 600),
-(15, 'Sponsor pH7 Dating CMS 15 (160x600)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo1-160x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 160, 600),
-(16, 'Sponsor pH7 Dating CMS 16 (160x600)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-160x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 160, 600);
+(1, 'Sponsor pH7CMS 1 (728x90)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo1-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90),
+(2, 'Sponsor pH7CMS 2 (728x90)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo2-728x90.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 728, 90),
+(3, 'Sponsor pH7CMS 3 (200x200)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo1-200x200.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 200, 200),
+(4, 'Sponsor pH7CMS 4 (200x200)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-200x200.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 200, 200),
+(5, 'Sponsor pH7CMS 5 (250x250)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo1-250x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 250, 250),
+(6, 'Sponsor pH7CMS 6 (250x250)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-250x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 250, 250),
+(7, 'Sponsor pH7CMS 7 (468x60)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo1-468x60.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 468, 60),
+(8, 'Sponsor pH7CMS 8 (468x60)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-468x60.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 468, 60),
+(9, 'Sponsor pH7CMS 9 (300x250)', '<a href="%affiliate_url%/signup"><img src="%software_website%/static/img/logo1-300x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 300, 250),
+(10, 'Sponsor pH7CMS 10 (350x250)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-300x250.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 300, 250),
+(11, 'Sponsor pH7CMS 11 (336x280)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo1-336x280.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 336, 280),
+(12, 'Sponsor pH7CMS 12 (336x280)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-336x280.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 336, 280),
+(13, 'Sponsor pH7CMS 13 (120x600)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo1-120x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 120, 600),
+(14, 'Sponsor pH7CMS 14 (120x600)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-120x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 120, 600),
+(15, 'Sponsor pH7CMS 15 (160x600)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo1-160x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 160, 600),
+(16, 'Sponsor pH7CMS 16 (160x600)', '<a href="%affiliate_url%"><img src="%software_website%/static/img/logo2-160x600.gif" alt="%software_name%" title="%software_name% by %software_company%" /></a>', '0', 160, 600);
 
 
 CREATE TABLE IF NOT EXISTS pH7_AlbumsPictures (

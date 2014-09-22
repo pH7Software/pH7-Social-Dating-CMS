@@ -29,7 +29,7 @@ class MembershipForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Name:'), 'name', array('required' => 1, 'validation' => new \PFBC\Validation\Str(2, 64))));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), 'description', array('required'=>1, 'validation' => new \PFBC\Validation\Str(5, 255))));
 
-        $aPerms = include dirname(__DIR__) . '/config/perms.inc.php';
+        $aPerms = include dirname(__DIR__) . PH7_DS . PH7_CONFIG . 'perms.inc.php';
         foreach ($aPerms as $sKey => $sVal)
         {
             $sLabel = (new Str)->upperFirstWords( str_replace('_', ' ', $sKey) );
