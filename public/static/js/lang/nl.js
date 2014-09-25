@@ -18,5 +18,7 @@ var pH7LangCore = {
     warning_irreversible_action : "Waarschuwing! Dit zal verwijderen van alle geselecteerde items! (Actie Irreversible)",
     select_least_one : "Selecteer ten minste een.",
     misloading : "Er is een fout opgetreden, gelieve de pagina opnieuw te laden.",
-    loading : "Laden..."
+    loading : "Laden...",
+    ok : "Oké",
+    cookie_consent_msg : "Deze website maakt gebruik van cookies om ervoor te zorgen dat wij u de beste ervaring op onze website. Als u doorgaat met deze site te gebruiken gaan we ervan uit dat u tevreden bent met het."
 };

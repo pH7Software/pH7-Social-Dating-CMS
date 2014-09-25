@@ -18,5 +18,7 @@ var pH7LangCore = {
     warning_irreversible_action : "¡Advertencia! Esto eliminará todos los elementos seleccionados! (Acción Irreversible)",
     select_least_one : "Por favor, seleccione al menos uno.",
     misloading : "Ha ocurrido un error, por favor volver a cargar la página.",
-    loading : "Loading ..."
+    loading : "Loading ...",
+    ok : "Bueno",
+    cookie_consent_msg : "Este sitio utiliza cookies para asegurar que le damos la mejor experiencia en nuestro sitio web. Si usted continúa utilizando este sitio vamos a suponer que usted es feliz con ella."
 };
