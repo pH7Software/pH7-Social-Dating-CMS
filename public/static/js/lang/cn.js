@@ -19,5 +19,7 @@ var pH7LangCore = {
     warning_irreversible_action : "警告！这将删除所有选定的项目！ （不可逆行动）",
     select_least_one : "请选择至少一个。",
     misloading : "发生错误，请重新载入页面。",
-    loading : "载入中..."
+    loading : "载入中...",
+    ok : "好",
+    cookie_consent_msg : "本网站使用cookie来确保没有我们给您在我们网站上的最佳体验。如果您继续使用本网站，我们假设你是满意的了。"
 };

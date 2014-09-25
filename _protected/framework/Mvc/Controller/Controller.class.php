@@ -81,14 +81,15 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'meta_rating' => $oInfo->metaRating,
             'meta_distribution' => $oInfo->metaDistribution,
             'meta_category' => $oInfo->metaCategory,
-            'header' => 0 // Default value of header contents
+            'header' => 0, // Default value of header contents
+            'cookie_consent_bar' => (int) M\DbConfig::getSetting('cookieConsentBar') // Displays a header cookie information bar
         ];
         $this->view->assigns($aMetaVars);
 
         unset($oInfo);
 
         /**
-         * This test is not necessary because if there is no session,
+         * This below PHP condition is not necessary because if there is no session,
          * the get() method of the \PH7\Framework\Session\Session object an empty value and revisit this avoids having undefined variables in some modules (such as the "connect" module).
          */
         //if (\PH7\UserCore::auth()) {

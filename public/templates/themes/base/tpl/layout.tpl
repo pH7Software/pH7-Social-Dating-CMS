@@ -183,6 +183,11 @@
       {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, PH7_LANG . $lang_file . ',jquery.cookie.js,Messenger.js') }}
     {/if}
 
+    {* Cookie info bar *}
+    {if $cookie_consent_bar}
+      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS . 'cookie_consent/', 'library.js,bar.js') }}
+    {/if}
+
     {* JS code Injection *}
     {{ $design->externalJsFile(PH7_RELATIVE.'asset/js/script.js') }}
 
