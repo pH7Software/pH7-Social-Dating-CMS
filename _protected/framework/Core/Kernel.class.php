@@ -31,7 +31,7 @@ abstract class Kernel
     SOFTWARE_NAME = 'pH7CMS',
     SOFTWARE_DESCRIPTION = 'This builder community dating software for web 3.0 new generation!',
     SOFTWARE_WEBSITE = 'http://software.hizup.com',
-    SOFTWARE_LICENSE_KEY_URL = 'https://hizup.net/clients/license',
+    SOFTWARE_LICENSE_KEY_URL = 'http://software.hizup.com/memberships',
     SOFTWARE_HELP_URL = 'https://hizup.net/clients/support', // Help Desk Support URL
     SOFTWARE_DOC_URL = 'http://software.hizup.com/doc',
     SOFTWARE_FAQ_URL = 'http://software.hizup.com/faq',
