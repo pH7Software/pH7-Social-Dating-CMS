@@ -82,7 +82,8 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'meta_distribution' => $oInfo->metaDistribution,
             'meta_category' => $oInfo->metaCategory,
             'header' => 0, // Default value of header contents
-            'cookie_consent_bar' => (int) M\DbConfig::getSetting('cookieConsentBar') // Displays a header cookie information bar
+            'is_disclaimer' => (bool) M\DbConfig::getSetting('disclaimer'), // Displays a disclaimer to enter to the site. This is useful for sites with adult content
+            'is_cookie_consent_bar' => (bool) M\DbConfig::getSetting('cookieConsentBar') // Displays a header cookie information bar
         ];
         $this->view->assigns($aMetaVars);
 

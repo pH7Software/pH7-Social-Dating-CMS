@@ -17,7 +17,7 @@
     <meta name="category" content="{meta_category}" />
     <meta name="rating" content="{meta_rating}"/>
     <meta name="distribution" content="{meta_distribution}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     {if $header}{header}{/if}
 
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
@@ -184,7 +184,7 @@
     {/if}
 
     {* Cookie info bar *}
-    {if $cookie_consent_bar}
+    {if $is_cookie_consent_bar}
       {{ $design->staticFiles('js', PH7_STATIC . PH7_JS . 'cookie_consent/', 'library.js,bar.js') }}
     {/if}
 
@@ -202,6 +202,10 @@
     <!-- Common Dialog -->
     {{ $design->message() }}
     {{ $design->error() }}
+    {if $is_disclaimer}
+      {main_include 'disclaimer.inc.tpl'}
+    {/if}
+
     <!-- End Footer JavaScript -->
 
 {{ $design->htmlFooter() }}
