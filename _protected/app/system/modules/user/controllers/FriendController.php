@@ -76,7 +76,7 @@ class FriendController extends Controller
             $this->sTitle = t('No Friend found on the profile of "%0%"', $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->error = t('Not Found Friend!');
+            $this->view->error = t('No Friends found!');
         } else {
             $this->sTitle = t('%0%\'s Friends:', $this->sUsername);
             $this->view->page_title = $this->sTitle;
@@ -102,7 +102,7 @@ class FriendController extends Controller
             $this->sTitle = t('No Mutual Friend found on the profile of "%0%"', $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->error = t('Not Found Mutual Friend!');
+            $this->view->error = t('No Mutual Friend found!');
         } else {
             $this->sTitle = t('%0%\'s Mutual Friends:', $this->sUsername);
             $this->view->page_title = $this->sTitle;
