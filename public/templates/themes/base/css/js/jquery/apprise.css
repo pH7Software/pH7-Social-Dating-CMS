@@ -1,3 +1,8 @@
+/*
+ * CSS file for the jQuery Apprise 2 plugin by Daniel Raftery under MIT License (http://opensource.org/licenses/mit-license.php)
+ * The file has been modified by Pierre-Henry Soria for the proper functioning of the template.
+ */
+
 .apprise-overlay {
   background-color: rgb(255,255,255);
     display: none;
