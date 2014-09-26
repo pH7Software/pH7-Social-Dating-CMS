@@ -1018,6 +1018,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('chatApi', @sChatApiUrl, 'Chat Api URL', 'api'),
 ('chatrouletteApi', @sChatrouletteApiUrl, 'Chatroulette Api URL', 'api'),
 ('cookieConsentBar', 0, 'Enable the cookie consent bar to prevent your users that your site uses cookies. 0 = Disable | 1 = Enable', 'general'),
+('disclaimer', 0, 'Enable a disclaimer to enter to the site. This is useful for sites with adult content. 0 = Disable | 1 = Enable', 'general'),
 ('isSoftwareNewsFeed', 1, 'Enable the news feed. 0 = Disable | 1 = Enable', 'general');
 
 

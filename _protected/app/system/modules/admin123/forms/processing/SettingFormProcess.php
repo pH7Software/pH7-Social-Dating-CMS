@@ -42,6 +42,10 @@ class SettingFormProcess extends Form
         if(!$this->str->equals($this->httpRequest->post('site_status'), DbConfig::getSetting('siteStatus')))
             DbConfig::setSiteMode($this->httpRequest->post('site_status'));
 
+        if(!$this->str->equals($this->httpRequest->post('disclaimer'), DbConfig::getSetting('disclaimer')))
+            DbConfig::setSetting($this->httpRequest->post('disclaimer'), 'disclaimer');
+
+
         if(!$this->str->equals($this->httpRequest->post('cookie_consent_bar'), DbConfig::getSetting('cookieConsentBar')))
             DbConfig::setSetting($this->httpRequest->post('cookie_consent_bar'), 'cookieConsentBar');
 
