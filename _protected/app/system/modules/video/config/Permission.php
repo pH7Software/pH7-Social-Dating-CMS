@@ -28,7 +28,7 @@ class Permission extends PermissionCore
             {
                 $this->paymentRedirect();
             }
-            elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addvideo') && $this->group->upload_videos)
+            elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addvideo') && !$this->group->upload_videos)
             {
                 $this->paymentRedirect();
             }

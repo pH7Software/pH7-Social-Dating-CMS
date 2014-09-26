@@ -28,7 +28,7 @@ class Permission extends PermissionCore
             {
                 $this->paymentRedirect();
             }
-            elseif ($this->registry->action === 'compose' && !$this->group->write_mails)
+            elseif ($this->registry->action === 'compose' && !$this->group->send_mails)
             {
                 $this->paymentRedirect();
             }
