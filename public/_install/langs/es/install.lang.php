@@ -105,7 +105,7 @@ $LANG = array (
     'service' => 'Servicios adicionales útiles',
     'buy_copyright_license_title' => 'Comprar una licencia',
     'buy_copyright_license' => '<span class="gray">Licencia de por vida</span> <span class="right">Compre ahora</span>',
-    'buy_copyright_license_desc' => 'Al comprar una clave de licencia, usted no tendrá ningún vínculo y avisos de derechos de autor en su sitio web.',
+    'buy_copyright_license_desc' => 'Al comprar una clave de licencia, usted no tendrá ningún vínculo y avisos de derechos de autor en su sitio web, y usted también será capaz de actualizar/actualizarlo.',
     'buy_individual_ticket_support_title' => 'Compre un servicio de apoyo individual',
     'buy_individual_ticket_support' => '<span class="gray">Tickets de soporte completo durante un mes</span> <span class="right">Compre ahora</span>',
     'buy_individual_ticket_support_desc' => 'Al comprar el apoyo individual, le ayudaremos siempre que tenga un problema con nuestro software. Estamos a su disposición para resolver cualquier encuentro problema pH7CMS.',
