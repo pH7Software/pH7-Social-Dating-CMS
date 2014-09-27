@@ -32,7 +32,7 @@ class Lang
         if (!$oData = $oCache->get())
         {
             $sSqlWhere = ($bOnlyActive) ? 'WHERE active=\'1\'' : '';
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . DB::prefix('Language') . $sSqlWhere . ' ORDER BY name ASC');
+            $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . DB::prefix('LanguagesInfo') . $sSqlWhere . ' ORDER BY name ASC');
             $rStmt->execute();
             $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);

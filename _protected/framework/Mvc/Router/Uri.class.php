@@ -86,13 +86,13 @@ class Uri
 
         if (!empty($aParams['vars']))
         {
-            // Removes the comma which are part of a sentence and not the url parameters
+            // Omit the commas which may be part of a sentence in the URL parameters
             $aParams['vars'] = str_replace(array(', ', ' ,'), '', $aParams['vars']);
 
-            $aVar = explode(',', $aParams['vars']);
-            foreach ($aVar as $sKey => $sVal)
-                $sVars .= PH7_SH . $sVal;
-            unset($aVar);
+            $aVars = explode(',', $aParams['vars']);
+            foreach ($aVars as $sVar)
+                $sVars .= PH7_SH . $sVar;
+            unset($aVars);
 
             $sVars = Url::clean($sVars, static::$_bFullClean);
 
