@@ -20,7 +20,7 @@ class MainController extends Controller
         // Only visitors
         if (!UserCore::auth())
         {
-            $this->view->is_splash_page = Framework\Mvc\Model\DbConfig::getSetting('splashPage');
+            $this->view->is_splash_page = (bool) Framework\Mvc\Model\DbConfig::getSetting('splashPage');
 
             $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'splash.css,tooltip.css,js/jquery/carousel.css');
             $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
