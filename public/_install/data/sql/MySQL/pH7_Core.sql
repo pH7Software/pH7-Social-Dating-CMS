@@ -650,21 +650,9 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
-CREATE TABLE IF NOT EXISTS pH7_GroupsLevels (
-  id int(10) unsigned NOT NULL AUTO_INCREMENT,
-  name varchar(64) CHARACTER SET armscii8 NOT NULL,
-  icon varchar(64) CHARACTER SET armscii8 NOT NULL,
-  slog varchar(64) CHARACTER SET armscii8 DEFAULT NULL,
-  level tinyint(2) DEFAULT NULL,
-  PRIMARY KEY (id),
-  UNIQUE KEY name (name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-
-CREATE TABLE IF NOT EXISTS pH7_Language (
-  langId varchar(5) NOT NULL DEFAULT '',
+CREATE TABLE IF NOT EXISTS pH7_LanguagesInfo (
+  langId varchar(5) NOT NULL,
   name varchar(60) NOT NULL,
-  lang_code varchar(5) NOT NULL,
   charset varchar(15) NOT NULL,
   active enum('0','1') NOT NULL DEFAULT '0',
   direction enum('ltr','rtl') NOT NULL DEFAULT 'ltr',
@@ -674,9 +662,22 @@ CREATE TABLE IF NOT EXISTS pH7_Language (
   PRIMARY KEY (langId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO pH7_Language (langId, name, lang_code, charset, active, direction, author, website, email) VALUES
-('en_US', 'English', 'en_US', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'ph7software@gmail.com'),
-('fr_FR', 'Français', 'fr_FR', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'ph7software@gmail.com');
+INSERT INTO pH7_LanguagesInfo (langId, name, charset, active, direction, author, website, email) VALUES
+('en_US', 'English', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'ph7software@gmail.com'),
+('fr_FR', 'Français', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'ph7software@gmail.com');
+
+
+CREATE TABLE IF NOT EXISTS pH7_LanguagesPhrases (
+  phraseId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  langId varchar(5) NOT NULL,
+  moduleName varchar(40) NOT NULL,
+  vendorName varchar(40) NOT NULL,
+  token varchar(120) NOT NULL,
+  text mediumtext,
+  added int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (phraseId),
+  FOREIGN KEY (langId) REFERENCES pH7_LanguagesInfo(langId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_Likes (
@@ -916,13 +917,14 @@ INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, slog
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (
-  id tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
-  packageName varchar(120) NOT NULL,
-  title varchar(120) NOT NULL,
+  moduleId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  vendorName varchar(40) NOT NULL,
+  moduleName varchar(40) NOT NULL,
   version smallint(4) NOT NULL,
-  uri varchar(32) DEFAULT NULL,
+  uri varchar(40) DEFAULT NULL,
   path varchar(255) DEFAULT NULL,
-  PRIMARY KEY (id)
+  active enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (moduleId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
@@ -1034,6 +1036,35 @@ CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   INDEX (profileId),
   PRIMARY KEY (profileId),
   UNIQUE KEY (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+CREATE TABLE IF NOT EXISTS pH7_TopMenus (
+  menuId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  vendorName varchar(40) NOT NULL,
+  moduleName varchar(40) NOT NULL,
+  controllerName varchar(40) NOT NULL,
+  actionName varchar(40) NOT NULL,
+  vars varchar(60) DEFAULT NULL,
+  parentMenu smallint(4) unsigned DEFAULT NULL,
+  grandParentMenu smallint(4) unsigned DEFAULT NULL,
+  onlyForUsers enum('0','1') NOT NULL DEFAULT '0',
+  active enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (menuId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+CREATE TABLE IF NOT EXISTS pH7_BottomMenus (
+  menuId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  vendorName varchar(40) NOT NULL,
+  moduleName varchar(40) NOT NULL,
+  controllerName varchar(40) NOT NULL,
+  actionName varchar(40) NOT NULL,
+  vars varchar(60) DEFAULT NULL,
+  parentMenu smallint(4) unsigned DEFAULT NULL,
+  grandParentMenu smallint(4) unsigned DEFAULT NULL,
+  active enum('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (menuId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 

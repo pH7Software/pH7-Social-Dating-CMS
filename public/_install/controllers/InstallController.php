@@ -262,18 +262,18 @@ class InstallController extends Controller
                                                     /*** Core ***/
                                                     'pH7_Core',
                                                     // --- GeoIp (exec_query_file() function executes these files only if they existens otherwise it does nothing) --- //
-                                                    'pH7_geoCountry',
-                                                    'pH7_geoCity',
-                                                    'pH7_geoCity2',
-                                                    'pH7_geoCity3',
-                                                    'pH7_geoCity4',
-                                                    'pH7_geoCity5',
-                                                    'pH7_geoCity6',
-                                                    'pH7_geoCity7',
-                                                    'pH7_geoCity8',
-                                                    'pH7_geoState',
+                                                    'pH7_GeoCountry',
+                                                    'pH7_GeoCity',
+                                                    'pH7_GeoCity2',
+                                                    'pH7_GeoCity3',
+                                                    'pH7_GeoCity4',
+                                                    'pH7_GeoCity5',
+                                                    'pH7_GeoCity6',
+                                                    'pH7_GeoCity7',
+                                                    'pH7_GeoCity8',
+                                                    'pH7_GeoState',
                                                     // --- Execute this file if there is something --- //
-                                                    'pH7_sampleData'
+                                                    'pH7_SampleData'
                                                 );
 
                                                 for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++)
