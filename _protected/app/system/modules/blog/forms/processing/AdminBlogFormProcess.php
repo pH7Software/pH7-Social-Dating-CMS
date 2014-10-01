@@ -55,21 +55,27 @@ class AdminBlogFormProcess extends Form
             }
             else
             {
-                // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
-                // and damages the SET function SQL for entry into the database.
+                /*** Set the categorie(s) ***/
+                /**
+                 * WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Http::post() method
+                 * removes the special tags and damages the SQL queries for entry into the database.
+                 */
                 $iBlogId = Db::getInstance()->lastInsertId();
                 foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
                     $oBlogModel->addCategory($iCategoryId, $iBlogId);
 
-                // Thumbnail
+
+                /*** Set the thumbnail if there's one ***/
                 $oPost = $oBlogModel->readPost($aData['post_id']);
                 $oBlog->setThumb($oPost, $this->file);
+
 
                 /* Clean BlogModel Cache */
                 (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
 
                 $this->sMsg = t('Post created successfully!');
             }
+
             HeaderUrl::redirect(Uri::get('blog', 'main', 'read', $this->httpRequest->post('post_id')), $this->sMsg);
         }
     }

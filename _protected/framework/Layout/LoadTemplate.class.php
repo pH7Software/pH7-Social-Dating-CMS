@@ -78,21 +78,21 @@ class LoadTemplate
      */
     public function tpl()
     {
-        if (!empty($this->_sUserTpl) && $this->_oConfig->load(PH7_PATH_TPL . $this->_sUserTpl . '/config/config.ini'))
+        if (!empty($this->_sUserTpl) && $this->_oConfig->load(PH7_PATH_TPL . $this->_sUserTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
         {
             $this->_sTplName = $this->_sUserTpl;
         }
-        else if ($this->_oConfig->load(PH7_PATH_TPL . $this->_sDefaultTpl . '/config/config.ini'))
+        else if ($this->_oConfig->load(PH7_PATH_TPL . $this->_sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
         {
             $this->_sTplName = $this->_sDefaultTpl;
         }
-        else if ($this->_oConfig->load(PH7_PATH_TPL . PH7_DEFAULT_THEME . '/config/config.ini'))
+        else if ($this->_oConfig->load(PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
         {
             $this->_sTplName = PH7_DEFAULT_THEME;
         }
         else
         {
-            throw new Exception('Template file not found! File: \'' . PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . 'config' . PH7_DS . 'config.ini\' does not exist.');
+            throw new Exception('Template file not found! File: \'' . PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
         }
 
         return $this;
@@ -106,21 +106,21 @@ class LoadTemplate
     {
         $oRegistry = \PH7\Framework\Registry\Registry::getInstance();
 
-        if ($this->_oConfig->load($oRegistry->path_module_views . $this->_sUserTpl . '/config/config.ini'))
+        if ($this->_oConfig->load($oRegistry->path_module_views . $this->_sUserTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
         {
             $this->_sModTplName = $this->_sUserTpl;
         }
-        else if ($this->_oConfig->load($oRegistry->path_module_views . $this->_sDefaultTpl . '/config/config.ini'))
+        else if ($this->_oConfig->load($oRegistry->path_module_views . $this->_sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
         {
             $this->_sModTplName = $this->_sDefaultTpl;
         }
-        else if ($this->_oConfig->load($oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . '/config/config.ini'))
+        else if ($this->_oConfig->load($oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
         {
             $this->_sModTplName = PH7_DEFAULT_TPL_MOD;
         }
         else
         {
-            throw new Exception('Template module file not found! File: \'' . $oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . 'config' . PH7_DS . 'config.ini\' does not exist.');
+            throw new Exception('Template module file not found! File: \'' . $oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
         }
 
         unset($oRegistry);
