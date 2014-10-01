@@ -93,8 +93,7 @@ $LANG = array (
     'title_email_finish_install' => 'Congratulations, the installation of your website is finished!',
     'content_email_finish_install' => '<p><strong>Congratulations, your website is now successfully installed!</strong></p>
     <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
-    <p>For bug reports, suggestions, proposals, partnership, participation in the development of CMS and its translation, etc.,
-    please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '" target="_blank">website</a>.</p>
+    <p>For any bug reports, suggestions, partnership, translation, contribution or other, please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
     <p>---</p>
     <p>Kind regards,</p>
     <p>The pH7CMS developers team.</p>',

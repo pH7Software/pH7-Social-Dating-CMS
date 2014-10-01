@@ -94,7 +94,7 @@ $LANG = array (
     'content_email_finish_install' => '<p><strong>Gratulálunk, a webhelyed telepítése elkészült!</strong></p>
     <p>Reméljük élvezni fogod a <em>' . Controller::SOFTWARE_NAME . '</em> használatát!</p>
     <p>Hibajelentéshez, javaslatokhoz, ötletekhez, partnerséghez, a fejlesztésben való részvételhez, fordításban segédkezéshez
-    kérlek látogass el a <a href="' . Controller::SOFTWARE_WEBSITE . '" target="_blank">webhelyünkre</a>.</p>
+    kérlek látogass el a <a href="' . Controller::SOFTWARE_WEBSITE . '">webhelyünkre</a>.</p>
     <p>---</p>
     <p>Köszönettel,</p>
     <p>A pH7CMS fejlesztőcsapata.</p>',
