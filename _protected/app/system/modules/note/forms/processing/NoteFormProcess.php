@@ -67,8 +67,11 @@ class NoteFormProcess extends Form
             }
             else
             {
-                // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
-                // and damages the SET function SQL for entry into the database.
+                /*** Set the categorie(s) ***/
+                /**
+                 * WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Http::post() method
+                 * removes the special tags and damages the SQL queries for entry into the database.
+                 */
                 if(count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > 3)
                 {
                     \PFBC\Form::setError('form_note', t('You can not select more than 3 categories.'));
@@ -79,15 +82,18 @@ class NoteFormProcess extends Form
                 foreach($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
                     $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
 
-                // Thumbnail
+
+                /*** Set the thumbnail if there's one ***/
                 $oPost = $oNoteModel->readPost($aData['post_id'], $iProfileId, null);
                 $oNote->setThumb($oPost, $oNoteModel, $this->file);
+
 
                 /* Clean NoteModel Cache */
                 (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
                 $this->sMsg = ($iApproved == '0') ? t('Your Note has been received! But it will be visible once approved by our moderators. Please do not send a new Note because this is useless!') : t('Post created successfully!');
             }
+
             HeaderUrl::redirect(Uri::get('note','main','read',$this->session->get('member_username') .','. $this->httpRequest->post('post_id')), $this->sMsg);
         }
     }

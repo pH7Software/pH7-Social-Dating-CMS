@@ -51,8 +51,8 @@ class Config implements IConfig
      */
     private function __construct()
     {
-        $this->_sConfigAppFilePath = PH7_PATH_APP_CONFIG . 'config.ini';
-        $this->_sConfigSysFilePath = PH7_PATH_SYS . PH7_CONFIG . 'config.ini';
+        $this->_sConfigAppFilePath = PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE;
+        $this->_sConfigSysFilePath = PH7_PATH_SYS . PH7_CONFIG . PH7_CONFIG_FILE;
 
         $this->_read();
     }

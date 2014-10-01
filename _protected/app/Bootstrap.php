@@ -35,9 +35,9 @@ try
 {
     /** Loading configuration files environments **/
     // For All environment
-    Import::file(PH7_PATH_APP . 'configs/environment/all.env');
+    Import::file(PH7_PATH_APP_CONFIG . 'environment/all.env');
     // Specific to the current environment
-    Import::file(PH7_PATH_APP . 'configs/environment/' . Config::getInstance()->values['application']['environment'] . '.env');
+    Import::file(PH7_PATH_APP_CONFIG . 'environment/' . Config::getInstance()->values['application']['environment'] . '.env');
 
     // Loading Class ~/protected/app/includes/classes/*
     Import::pH7App('includes.classes.Loader.Autoloader');
