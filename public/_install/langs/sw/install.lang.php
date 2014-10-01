@@ -96,7 +96,7 @@ $LANG = array (
     'content_email_finish_install' => '<p><strong>Pongezi, wavuti wako umepangwa vyema!</strong></p>
     <p>Tunaimani utafurahia kutumia <em>' . Controller::SOFTWARE_NAME . '</em></p>
     <p>Kwa shida zozote za kimatumizi, maombi, maoni ama ushirikiano,
-    tafadhali tembelea <a href="' . Controller::SOFTWARE_WEBSITE . '" target="_blank">wavuti</a> wetu.</p>
+    tafadhali tembelea <a href="' . Controller::SOFTWARE_WEBSITE . '">wavuti</a> wetu.</p>
     <p>---</p>
     <p>Ni mimi wako msharifu,</p>
     <p>The pH7CMS developers team.</p>',

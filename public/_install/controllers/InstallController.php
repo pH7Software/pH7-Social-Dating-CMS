@@ -530,7 +530,7 @@ class InstallController extends Controller
 
         if (!empty($_SESSION['val']))
         {
-            // Send email for finish instalation.
+            // Send an email to say the installation is now done, and give some information...
             $aParams = array(
                 'to' => $_SESSION['val']['admin_login_email'],
                 'subject' => $LANG['title_email_finish_install'],
@@ -540,16 +540,16 @@ class InstallController extends Controller
         }
 
         $_SESSION = array();
-        /* Remove the sessions */
+        // Remove the sessions
         session_unset();
         session_destroy();
 
-        /* Remove the cookie */
+        // Remove the cookie
         $sCookieName = Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
 
         // We are asking the browser to delete the cookie.
         setcookie($sCookieName);
-        // and we delete the cookie value locally to avoid using it by mistake in following our script.
+        // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
         unset($_COOKIE[$sCookieName]);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['confirm_remove_install']))
