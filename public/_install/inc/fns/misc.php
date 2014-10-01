@@ -437,5 +437,5 @@ EOF;
     $sBody .= "--$sFrontier--\r\n";
 
     /** Send Email ***/
-    return mail($aParams['to'], $aParams['subject'], $sBody, $sHeaders);
+    return @mail($aParams['to'], $aParams['subject'], $sBody, $sHeaders);
 }
