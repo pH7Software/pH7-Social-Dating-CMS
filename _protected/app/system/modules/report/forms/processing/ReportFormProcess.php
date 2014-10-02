@@ -25,12 +25,12 @@ class ReportFormProcess extends Form
             'date' => $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         ];
 
-        $mReport = (new Report($aData))->add()->get();
+        $mReport = (new Report())->add($aData)->get();
 
         unset($aData);
 
 
-        if ($mReport == 'already_reported')
+        if ($mReport === 'already_reported')
         {
             \PFBC\Form::setError('form_report', t('You have already reported abuse about this profile.'));
         }

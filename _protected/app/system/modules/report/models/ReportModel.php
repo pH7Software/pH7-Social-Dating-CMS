@@ -17,7 +17,7 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
 
     public function add(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM'.Db::prefix('Report').'WHERE reporterId = :reporterId AND spammerId = :spammerId AND url = :url AND contentType = :type');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Report') . 'WHERE reporterId = :reporterId AND spammerId = :spammerId AND url = :url AND contentType = :type');
         $rStmt->bindValue(':reporterId', $aData['reporter_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':spammerId', $aData['spammer_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':url', $aData['url'], \PDO::PARAM_STR);
@@ -65,11 +65,11 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
 
     public function totalReports()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(reportId) AS totalReports FROM' . Db::prefix('Report'));
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(reportId) AS totalRpts FROM' . Db::prefix('Report'));
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        $oRow->totalReports;
+        return (int) $oRow->totalRpts;
     }
 
 }
