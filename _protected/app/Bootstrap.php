@@ -35,9 +35,9 @@ try
 {
     /** Loading configuration files environments **/
     // For All environment
-    Import::file(PH7_PATH_APP_CONFIG . 'environment/all.env');
+    Import::file(PH7_PATH_APP . 'configs/environment/all.env');
     // Specific to the current environment
-    Import::file(PH7_PATH_APP_CONFIG . 'environment/' . Config::getInstance()->values['application']['environment'] . '.env');
+    Import::file(PH7_PATH_APP . 'configs/environment/' . Config::getInstance()->values['application']['environment'] . '.env');
 
     // Loading Class ~/protected/app/includes/classes/*
     Import::pH7App('includes.classes.Loader.Autoloader');
@@ -52,7 +52,15 @@ try
     // We expect that this function is simply used // Import::pH7FwkClass('Structure.General');
 
 
-    /***** End Loading Files *****/
+    /*** End Loading Files ***/
+
+    //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
+    if (!Server::isRewriteMod())
+    {
+        $sModRewriteMsg = t('<span style="font-weight:bold;color:red"><a href="%0%">pH7CMS</a> requires Apache "mod_rewrite".</span><br /> Please install it so that pH7CMS can works.<br /> Click <a href="%1%" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href="%2%">retry</a>.', self::SOFTWARE_WEBSITE, 'http://software.hizup.com/doc/en/how-to-install-rewrite-module', PH7_URL_ROOT);
+        Framework\Page\Page::message($sModRewriteMsg);
+    }
+    //*/
 
     // Enable client browser cache
     (new Browser)->cache();
