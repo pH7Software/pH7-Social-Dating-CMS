@@ -18,14 +18,15 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
      * @param integer $iFriendId
      * @return integer
      */
-    public static function getPenFd($iFriendId)
+    public static function getPending($iFriendId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pending) AS p FROM' . Db::prefix('MembersFriends') . 'WHERE friendId = :friendId AND pending = \'1\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pending) AS pendingFds FROM' . Db::prefix('MembersFriends') . 'WHERE friendId = :friendId AND pending = \'1\'');
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return (int)$oRow->p;
+
+        return (int) $oRow->pendingFds;
     }
 
     /**
@@ -34,14 +35,15 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
      * @param integer $iProfileId
      * @return integer
      */
-    public static function totalFriends($iProfileId)
+    public static function total($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) AS totalFriends FROM' . Db::prefix('MembersFriends') . 'WHERE (profileId = :profileId OR friendId= :profileId)');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) AS totalFds FROM' . Db::prefix('MembersFriends') . 'WHERE (profileId = :profileId OR friendId= :profileId)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return (int)$oRow->totalFriends;
+
+        return (int) $oRow->totalFds;
     }
 
 }

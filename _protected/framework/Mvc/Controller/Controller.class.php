@@ -95,7 +95,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
          */
         //if (\PH7\UserCore::auth()) {
             $this->view->count_unread_mail = \PH7\MailCoreModel::countUnreadMsg($this->session->get('member_id'));
-            $this->view->count_pen_friend_request = \PH7\FriendCoreModel::getPenFd($this->session->get('member_id'));
+            $this->view->count_pen_friend_request = \PH7\FriendCoreModel::getPending($this->session->get('member_id'));
         //}
 
         /***** Display *****/

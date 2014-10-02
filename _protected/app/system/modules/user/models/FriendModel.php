@@ -30,14 +30,14 @@ class FriendModel extends FriendCoreModel
         $iProfileId = (int) $iProfileId;
         $iFriendId = (int) $iFriendId;
 
-        $sSqlPending = ($mPending != 'all') ? 'AND pending=:pending' : '';
+        $sSqlPending = ($mPending !== 'all') ? 'AND pending=:pending' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('MembersFriends') .
           'WHERE profileId=:profileId AND friendId=:friendId ' . $sSqlPending . ' LIMIT 1');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
-        if ($mPending != 'all') $rStmt->bindValue(':pending', $mPending, \PDO::PARAM_INT);
+        if ($mPending !== 'all') $rStmt->bindValue(':pending', $mPending, \PDO::PARAM_INT);
         $rStmt->execute();
         return ($rStmt->fetchColumn() > 0) ? true : false;
     }
@@ -172,7 +172,7 @@ class FriendModel extends FriendCoreModel
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
         if (!empty($iFriendId)) $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
-        if ($mPending != 'all') $rStmt->bindValue(':pending', $mPending, \PDO::PARAM_INT);
+        if ($mPending !== 'all') $rStmt->bindValue(':pending', $mPending, \PDO::PARAM_INT);
 
         if (!$bCount)
         {

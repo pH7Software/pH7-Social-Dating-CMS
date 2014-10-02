@@ -85,12 +85,14 @@ class FriendAjax extends Core
                 unset($oUserModel);
             }
         }
+
         echo $this->_sMsg;
     }
 
     protected function approval()
     {
         $this->_mStatus = $this->_oFriendModel->approval($this->session->get('member_id'), $this->httpRequest->post('friendId'));
+
         if (!$this->_mStatus)
         {
             $this->_sMsg = jsonMsg(0, t('Cannot approve friend, please try later.'));
@@ -99,12 +101,14 @@ class FriendAjax extends Core
         {
             $this->_sMsg = jsonMsg(1, t('The friends has been approved.'));
         }
+
         echo $this->_sMsg;
     }
 
     protected function delete()
     {
         $this->_mStatus = $this->_oFriendModel->delete($this->session->get('member_id'), $this->httpRequest->post('friendId'));
+
         if (!$this->_mStatus)
         {
             $this->_sMsg = jsonMsg(0, t('Cannot remove friend, please try later.'));
@@ -113,6 +117,7 @@ class FriendAjax extends Core
         {
             $this->_sMsg = jsonMsg(1, t('The friends we been deleted.'));
         }
+
         echo $this->_sMsg;
     }
 
@@ -146,8 +151,8 @@ class FriendAjax extends Core
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/mail/sys/mod/user/friend_request.tpl', $sFriendEmail);
 
         $aInfo = [
-        'to' => $sFriendEmail,
-        'subject' => t('%0% wants to be friends with you on %1%', $this->session->get('member_first_name'), $sSiteName)
+            'to' => $sFriendEmail,
+            'subject' => t('%0% wants to be friends with you on %1%', $this->session->get('member_first_name'), $sSiteName)
         ];
 
         (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);

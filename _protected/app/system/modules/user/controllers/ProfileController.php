@@ -77,7 +77,7 @@ class ProfileController extends Controller
             $iAge = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get();
 
             // Links of the Menubar
-            $iNbFriend = FriendModel::totalFriends($this->iProfileId);
+            $iNbFriend = FriendModel::total($this->iProfileId);
             $sNbFriend = ($iNbFriend > 0) ? ' (' . $iNbFriend . ')' : '';
             $sFriendTxt = ($iNbFriend <= 1) ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') :
                 t('Friends:');
