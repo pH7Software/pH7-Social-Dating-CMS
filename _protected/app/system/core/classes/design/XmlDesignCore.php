@@ -62,11 +62,12 @@ class XmlDesignCore
      * Show the software news.
      *
      * @static
+     * @param integet $iNum Number of news to display.
      * @return void HTML contents.
      */
-    public static function softwareNews()
+    public static function softwareNews($iNum)
     {
-        $aNews = (new NewsFeedCore)->getSoftware();
+        $aNews = (new NewsFeedCore)->getSoftware($iNum);
 
         if (sizeof($aNews) > 0)
         {
