@@ -1010,7 +1010,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('watermarkTextImage', 'HiZup.com', 'Watermark text', 'image'),
 ('sizeWatermarkTextImage', 2, 'Between 0 to 5', 'image'),
 ('banWordReplace', '[removed]',  '',  'security'),
-('securityTokenLifetime', 480, 'Time in seconds. Default 480 seconds (8 min)', 'security'),
+('securityTokenLifetime', 720, 'Time in seconds. Default 720 seconds (12 mins)', 'security'),
 ('DDoS', 0,  '0 for disabled or 1 for enabled',  'security'),
 ('cleanMsg', 0, 'Delete messages older than X days. 0 = Disable', 'pruning'),
 ('cleanComment', 0, 'Delete comments older than X days. 0 = Disable', 'pruning'),
