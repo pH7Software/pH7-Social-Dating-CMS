@@ -49,7 +49,7 @@ class Newsletter extends Core
             $aInfo = [
                 'subject' => $this->httpRequest->post('subject'),
                 'to' => $oSubscriber->email,
-                'to_name' => ($bOnlySubscribers) ? $oSubscriber->name : $oSubscriber->firstName
+                'to_name' => $oSubscriber->firstName
             ];
 
             if (!$iRes = $oMail->send($aInfo, $sMsgHtml)) break;
