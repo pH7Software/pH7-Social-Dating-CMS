@@ -83,7 +83,7 @@ final class Token
      * @param string $sInputToken The name of the token inserted in the hidden tag of the form.
      * (e.g. for a from with method "post" and the field "<input type="hidden" name="my_token" />" the name of the token is "$_POST['my_token']" Default NULL
      *
-     * @param integer $iTime Lifetime of token in seconds. Default NULL (value specified in the settings database).
+     * @param integer $iTime Lifetime of token in seconds. Default NULL (value specified in the database settings).
      *
      * @return boolean
      */
