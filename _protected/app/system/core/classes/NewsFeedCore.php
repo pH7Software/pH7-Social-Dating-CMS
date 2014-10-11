@@ -36,7 +36,7 @@ class NewsFeedCore
      */
     public function getSoftware($iNum = 10)
     {
-        $this->_oCache->start(self::CACHE_GROUP, 'get', 3600*24);
+        $this->_oCache->start(self::CACHE_GROUP, 'software_feed_news' . $iNum, 3600*24);
 
         if (!$this->_aData = $this->_oCache->get())
         {

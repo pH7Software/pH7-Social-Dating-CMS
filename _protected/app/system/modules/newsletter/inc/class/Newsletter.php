@@ -39,9 +39,6 @@ class Newsletter extends Core
         $oMail = new Mail;
         foreach ($oSubscribers as $oSubscriber)
         {
-            // Do not send any emails at the same time to avoid overloading the mail server.
-            if (self::$_iTotalSent > 250) sleep(10);
-
             $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 
             $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
@@ -54,7 +51,8 @@ class Newsletter extends Core
 
             if (!$iRes = $oMail->send($aInfo, $sMsgHtml)) break;
 
-            self::$_iTotalSent++;
+            // Do not send all emails at the same time to avoid overloading the mail server.
+            if (++self::$_iTotalSent > 250) sleep(10);
         }
         unset($oMail, $oSubscribers);
 
