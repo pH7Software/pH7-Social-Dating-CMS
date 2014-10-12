@@ -7,7 +7,7 @@
 
 <div class="left">
   <div class="folio_block">
-    <h1 class="pink2 italic underline">{lang 'Free Online Dating Social Community Site with Chat Rooms'}</h1>
+    <h1 class="pink2 italic underline">{slogan}</h1>
 
     <div class="splash_slideshow">
       <div class="window">
@@ -31,8 +31,7 @@
 
   <div class="block_txt">
     <h2>{lang 'Meet people in %0% with %site_name%!', $design->geoIp(false)}</h2>
-    <p>{lang "You're on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!"}<br />
-    {slogan}</p>
+    {promo_text}
   </div>
 
   <div class="carousel">{{ $userDesignModel->carouselProfiles() }}</div>
