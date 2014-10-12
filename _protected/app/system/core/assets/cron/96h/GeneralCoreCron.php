@@ -36,7 +36,6 @@ class GeneralCoreCron extends Cron
     {
         /** Check and correct the file permissions if necessary **/
         $this->file->chmod(PH7_PATH_ROOT . '_constants.php', 0644);
-        $this->file->chmod(PH7_PATH_TMP . \PH7\Framework\Core\License::FILE, 0444);
         $this->file->chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
 
         echo t('Chmod file... Ok!') . '<br />';

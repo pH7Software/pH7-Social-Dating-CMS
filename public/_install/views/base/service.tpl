@@ -16,6 +16,6 @@
     </div>
 </div>
 
-<p class="clear"><a href="{$smarty.const.PH7_URL_SLUG_INSTALL}finish">{$LANG.go}</a></p>
+<p class="clear"><a href="{$smarty.const.PH7_URL_SLUG_INSTALL}finish">{$LANG.later}</a></p>
 
 {include file="inc/footer.tpl"}

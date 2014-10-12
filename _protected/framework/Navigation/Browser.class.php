@@ -65,7 +65,7 @@ class Browser
     }
 
     /**
-     * Are we capable of receiving gzipped data?
+     * Are we capable to receive gzipped data?
      *
      * @return mixed (string | boolean) Returns the encoding if it is accepted, false otherwise. Maybe additional check for Mac OS...
      */
@@ -75,10 +75,10 @@ class Browser
             return false;
 
         $sEncoding = Server::getVar(Server::HTTP_ACCEPT_ENCODING);
-        if (strpos($sEncoding, 'gzip') !== false)
+        if (false !== strpos($sEncoding, 'gzip'))
             return 'gzip';
 
-        if (strpos($sEncoding, 'x-gzip') !== false)
+        if (false !== strpos($sEncoding, 'x-gzip'))
             return 'x-gzip';
 
         return false;

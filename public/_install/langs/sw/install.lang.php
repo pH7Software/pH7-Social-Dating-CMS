@@ -30,6 +30,7 @@ $LANG = array (
     'path_protected' => 'Eneo la saraka &quot;protected&quot;',
     'next' => 'ifuatayo',
     'go' => 'Hatua ifuatayo =>',
+    'later' => 'Baadaye ...',
     'license' => 'Leseni',
     'license_desc' => 'Tafadhali soma leseni vyema kisha ukubali kabla ya kuendelea kupanga PH7!',
     'registration_for_license' => 'Tafadhali jiandikishe kwa <a href="' . Controller::SOFTWARE_REGISTRATION_URL . '" target="_blank">ukurasa</a> huu ili upate leseni yako ya bure.',

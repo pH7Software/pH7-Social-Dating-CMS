@@ -15,11 +15,12 @@ class ReportFormProcess extends Form
     {
         parent::__construct();
 
-        // The getPost method with the escape method to secure value POST
+        $sUrl = ($this->httpRequest->postExists('url') ? $this->httpRequest->post('url') : $this->httpRequest->currentUrl());
+        $mNeedle = strstr($sUrl, '?', true);
         $aData = [
             'reporter_id' => $this->session->get('member_id'),
             'spammer_id' => $this->httpRequest->post('spammer'),
-            'url' => ($this->httpRequest->postExists('url')) ? $this->httpRequest->post('url') : $this->httpRequest->currentUrl(),
+            'url' => ($mNeedle ? $mNeedle : $sUrl),
             'type' => $this->httpRequest->post('type'),
             'desc' => $this->httpRequest->post('desc'),
             'date' => $this->dateTime->get()->dateTime('Y-m-d H:i:s')

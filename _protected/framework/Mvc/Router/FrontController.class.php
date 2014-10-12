@@ -341,7 +341,7 @@ final class FrontController
     }
 
     /**
-     * Start Instantiation language of Gettext.
+     * Internationalization with Gettext.
      *
      * @access public
      * @return void

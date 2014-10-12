@@ -1029,7 +1029,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             }
             $rStmt->execute();
 
-            if ($rStmt->rowCount() == 0)
+            if ($rStmt->rowCount() === 0)
             {
                 return false;
             }
@@ -1233,7 +1233,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_INT);
         $rStmt->execute();
-        return ($rStmt->rowCount() == 1);
+        return ($rStmt->rowCount() === 1);
     }
 
     /**
