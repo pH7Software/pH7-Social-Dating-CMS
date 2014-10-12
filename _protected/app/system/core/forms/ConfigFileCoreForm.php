@@ -51,7 +51,7 @@ class ConfigFileCoreForm
             elseif (false !== strpos($sKey, 'email'))
                 $oForm->addElement(new \PFBC\Element\Email($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
             elseif (ctype_digit($sVal))
-                $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
+                $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', array('step' => 'any', 'value' => $sVal)));
             else
                 $oForm->addElement(new \PFBC\Element\Textbox($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
         }
