@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Mvc\Request\Http;
 
 class MetaMainFormProcess extends Form
 {
@@ -28,6 +28,9 @@ class MetaMainFormProcess extends Form
 
         if(!$this->str->equals($this->httpRequest->post('slogan'), $oMeta->slogan))
             DbConfig::setMetaMain('slogan', $this->httpRequest->post('slogan'), $sWhereLang);
+
+        if(!$this->str->equals($this->httpRequest->post('promo_text'), $oMeta->promoText))
+            DbConfig::setMetaMain('promoText', $this->httpRequest->post('promo_text', Http::ONLY_XSS_CLEAN), $sWhereLang);
 
         if(!$this->str->equals($this->httpRequest->post('meta_description'), $oMeta->metaDescription))
             DbConfig::setMetaMain('metaDescription', $this->httpRequest->post('meta_description'), $sWhereLang);

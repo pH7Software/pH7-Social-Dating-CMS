@@ -9,15 +9,13 @@
 </div>
 
 <div class="left">
-  <h1 class="pink2 italic underline">{lang 'Free Online Dating Social Community Site with Chat Rooms'}</h1><br />
+  <h1 class="pink2 italic underline s_bMarg">{slogan}</h1>
   <div class="center profiles_window thumb">
-    {{ $userDesignModel->profiles() }}<br />
+    {{ $userDesignModel->profiles() }}
   </div>
 
-  <div class="center">
-    <br /><br />
+  <div class="center s_tMarg">
     <h2>{lang 'Meet people in %0% with %site_name%!', $design->geoIp(false)}</h2>
-    <p>{lang "You're on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!"}<br />
-    {slogan}</p>
+    {promo_text}
   </div>
 </div>
