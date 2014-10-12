@@ -7,14 +7,19 @@
  * @copyright        (c) 2011-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine / Util
- * @version          1.2
+ * @version          1.3
  * @history          04/13/2014 - We replaced the bzip2 compression program by gzip because bzip2 is much too slow to compress and uncompress files and the  compression is only a little higher. In addition, gzip is much more common on shared hosting that bzip2.
  */
 
 namespace PH7\Framework\Mvc\Model\Engine\Util;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel, PH7\Framework\Date\CDateTime, PH7\Framework\Mvc\Model\Engine\Db;
+use
+PH7\Framework\Core\Kernel,
+PH7\Framework\Config\Config,
+PH7\Framework\Date\CDateTime,
+PH7\Framework\Navigation\Browser,
+PH7\Framework\Mvc\Model\Engine\Db;
 
 class Backup
 {
@@ -43,7 +48,7 @@ class Backup
         $this->_sSql =
         "#################### Database Backup ####################\n" .
         '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\n" .
-        '# Database name: ' . \PH7\Framework\Config\Config::getInstance()->values['database']['name'] . "\n" .
+        '# Database name: ' . Config::getInstance()->values['database']['name'] . "\n" .
         '# Created on ' . (new CDateTime)->get()->dateTime() . "\n" .
         "#########################################################\n\n";
 
@@ -92,8 +97,10 @@ class Backup
                     {
                         if (!is_numeric($sColumn))
                         {
-                            $sValue = str_replace("\r", '', $sValue);
-                            $sValue = str_replace("\n", '\n', $sValue);
+                            if (!is_numeric($sValue) && !empty($sValue))
+                                $sValue = Db::getInstance()->quote($sValue);
+
+                            $sValue = str_replace(array("\r", "\n"), array('', '\n'), $sValue);
 
                             $aColumns[] = $sColumn;
                             $aValues[] = $sValue;
@@ -220,12 +227,12 @@ class Backup
     {
         ob_start();
         /***** Set Headers *****/
-        (new \PH7\Framework\Navigation\Browser)->nocache(); // No cache
+        (new Browser)->nocache(); // No cache
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . $this->_sPathName);
 
         /***** Show the SQL contents *****/
-        echo ($bArchive ? gzcompress($this->_sSql, 9) : $this->_sSql);
+        echo ($bArchive ? gzencode($this->_sSql, 9, FORCE_GZIP) : $this->_sSql);
 
         /***** Catch output *****/
         $sBuffer = ob_get_contents();

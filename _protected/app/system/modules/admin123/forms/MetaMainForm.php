@@ -50,7 +50,7 @@ class MetaMainForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', array('value' => $oMeta->langId, 'description' => t('EX: "en", "fr", "es", "jp"'), 'validation' => new \PFBC\Validation\Str(5, 5), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Home page title:'), 'page_title', array('value' => $oMeta->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('value' => $oMeta->slogan, 'validation' => new \PFBC\Validation\Str(2, 200), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\CKEditor(t('SEO text:'), 'promo_text', array('value' => $oMeta->promoText, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\CKEditor(t('SEO text:'), 'promo_text', array('description' => t('Promotional text to display on the homepage for visitors.'), 'value' => $oMeta->promoText, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Description (meta tag):'), 'meta_description', array('value' => $oMeta->metaDescription, 'validation' => new \PFBC\Validation\Str(2, 255), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Keywords (meta tag):'), 'meta_keywords', array('description' => t('Separate keywords by commas.'), 'value' => $oMeta->metaKeywords, 'validation' => new \PFBC\Validation\Str(2, 255), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Robots (meta tag):'), 'meta_robots', array('value' => $oMeta->metaRobots, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));

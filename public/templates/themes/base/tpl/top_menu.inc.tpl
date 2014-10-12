@@ -140,7 +140,7 @@
 
           <li><a href="{{ $design->url('user','account','index') }}" title="{lang 'My account'}">{lang 'Account'}</a>
             <ul>
-              <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'My Profilet'}">{lang 'My Profile'}</a></li>
+              <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'My Profile'}">{lang 'My Profile'}</a></li>
               <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'My Avatar'}">{lang 'My Avatar'}</a></li>
               <li><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" data-load="ajax">{lang 'Photo Gallery'}</a>
                 <ul>

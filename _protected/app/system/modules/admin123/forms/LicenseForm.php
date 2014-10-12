@@ -27,7 +27,7 @@ class LicenseForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_license', 'form_license'));
         $oForm->addElement(new \PFBC\Element\Token('license'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your License Key'), 'copyright_key', array('description' => '<strong><a href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Buy a license') . '</a></strong> ' . t('to remove the links from us.'), 'value' => (new License)->get(self::$_iLicenseId), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your License Key'), 'copyright_key', array('description' => '<strong><a href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Buy a license') . '</a></strong> ' . t('to remove the links from us.'), 'value' => (new License)->get(self::$_iLicenseId), 'autocomplete' => 'off', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button(t('Register'), 'submit', array('icon' => 'key')));
         $oForm->render();
     }
