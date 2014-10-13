@@ -76,9 +76,9 @@ final class Version
     }
 
     /**
-     * Checks if updates are available.
+     * Checks if there is an update available.
      *
-     * @return boolean Returns TRUE if the update is available, otherwise FALSE
+     * @return boolean Returns TRUE if a new update is available, FALSE otherwise.
      */
     public static function isUpdates()
     {
