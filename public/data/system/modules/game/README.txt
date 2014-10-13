@@ -1,4 +1,4 @@
-Download games here: http://www.mediafire.com/download/x4l7vpv2j1l8ph6/pH7_game.zip
+Download games here: http://software.hizup.com/web/ph7game
 
 If you use the automatic installer, it will download and install it for you, but 
 this is very slow because the archive is very heavy and is not supported by all servers.
