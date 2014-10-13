@@ -1,4 +1,4 @@
-<!-- Last Update: 07/02/2014 by Pierre-Henry Soria -->
+<!-- Last Update: 10/13/2014 by Pierre-Henry Soria -->
 
 <h1>Tree of pH7CMS</h1>
 
@@ -16,6 +16,7 @@
 │   │   │   └── shell
 │   │   ├── components
 │   │   ├── configs
+│   │   │   ├── ad_sizes.php
 │   │   │   ├── bans
 │   │   │   │   ├── bank_account.txt
 │   │   │   │   ├── email.txt
@@ -59,6 +60,8 @@
 │   │   │   │   │   └── config.ini
 │   │   │   │   ├── language.php
 │   │   │   │   └── LC_MESSAGES
+│   │   │   │       ├── global.mo
+│   │   │   │       └── global.po
 │   │   │   ├── global.pot
 │   │   │   └── nl_NL
 │   │   │       ├── config
@@ -1494,7 +1497,6 @@
 │   │   ├── Cookie
 │   │   │   └── Cookie.class.php
 │   │   ├── Core
-│   │   │   ├── __BACKUP.License.class.php
 │   │   │   ├── Core.class.php
 │   │   │   ├── Exception.class.php
 │   │   │   ├── Kernel.class.php
@@ -2167,6 +2169,7 @@
 │   │   │   │   ├── how-to-go-to-admin-panel.tpl
 │   │   │   │   ├── how-to-install-rewrite-module.tpl
 │   │   │   │   ├── how-to-remove-the-link-in-the-footer.tpl
+│   │   │   │   ├── how-to-set-the-development-mode.tpl
 │   │   │   │   ├── install.tpl
 │   │   │   │   ├── introduction.tpl
 │   │   │   │   ├── JS_DOC.help.txt
@@ -2176,7 +2179,9 @@
 │   │   │   │   ├── tree.tpl
 │   │   │   │   ├── upgrade.tpl
 │   │   │   │   ├── use-it-on-a-non-linux-host.tpl
-│   │   │   │   └── where-download-games-for-my-site.tpl
+│   │   │   │   ├── where-download-games-for-my-site.tpl
+│   │   │   │   ├── why-I-can't-submit-a-form.tpl
+│   │   │   │   └── why-pH7CMS-can't-send-emails.tpl
 │   │   │   └── fr
 │   │   │       ├── comment-accéder-au-panneau-d'administration.tpl
 │   │   │       ├── core
@@ -2495,9 +2500,9 @@
 │   │   │   ├── logs
 │   │   │   └── sql
 │   │   │       └── MySQL
+│   │   │           ├── pH7_Core.sql
 │   │   │           ├── pH7_DataGame.sql
-│   │   │           ├── pH7_installCore.sql
-│   │   │           ├── pH7_sampleData.sql
+│   │   │           ├── pH7_SampleData.sql
 │   │   │           └── pH7_SchemaGame.sql
 │   │   ├── inc
 │   │   │   ├── ajax
@@ -2655,7 +2660,6 @@
 │   │   │           ├── smarty_resource_recompiled.php
 │   │   │           ├── smarty_resource_uncompiled.php
 │   │   │           └── smarty_security.php
-│   │   ├── _license-key.txt
 │   │   ├── requirements.php
 │   │   ├── sample.htaccess
 │   │   ├── static
@@ -3249,6 +3253,7 @@
 │   │   │   │   ├── wink.gif
 │   │   │   │   └── zip.gif
 │   │   │   └── useful
+│   │   │       ├── blank.gif
 │   │   │       ├── comma.png
 │   │   │       └── dev
 │   │   │           ├── people-under-construction_animated.gif
@@ -3261,6 +3266,10 @@
 │   │   │   ├── autocompleteUsername.js
 │   │   │   ├── clock.js
 │   │   │   ├── common.js
+│   │   │   ├── cookie_consent
+│   │   │   │   ├── bar.js
+│   │   │   │   └── library.js
+│   │   │   ├── disclaimer.js
 │   │   │   ├── divShow.js
 │   │   │   ├── flash.js
 │   │   │   ├── form.js
@@ -4397,6 +4406,7 @@
 │           │   └── tpl
 │           │       ├── bottom_menu.inc.tpl
 │           │       ├── browse_user.inc.tpl
+│           │       ├── disclaimer.inc.tpl
 │           │       ├── error.inc.tpl
 │           │       ├── favicon_alert.inc.tpl
 │           │       ├── layout.tpl
@@ -4517,4 +4527,4 @@
 
 </pre>
 
-<p>Statistics: 1366 directories, 3143 files.</p>
+<p>Statistics: 1367 directories, 3152 files.</p>
