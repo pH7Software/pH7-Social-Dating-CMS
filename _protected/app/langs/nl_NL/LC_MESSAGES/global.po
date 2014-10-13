@@ -1,10 +1,10 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: pH7-Dating CMS\n"
+"Project-Id-Version: pH7CMS\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-09-09 12:29-0500\n"
-"PO-Revision-Date: 2014-02-09 14:33+0100\n"
-"Last-Translator: Erwin van der Meulen <vdmeulen.nl@gmail.com>\n"
+"PO-Revision-Date: 2014-10-12 22:27+0100\n"
+"Last-Translator: Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,9 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 1.6.3\n"
-"X-Poedit-SearchPath-0: /var/www/html/CmsDating/pH7DatingCms\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SearchPath-0: /var/www/pH7-Social-Dating-CMS\n"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:77
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Date/Various.class.php:79
@@ -71,28 +73,16 @@ msgid "%0% years ago."
 msgstr "%0% jaren geleden."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Core/Kernel.class.php:77
-msgid ""
-"Sorry, your License Key is incorrect! Please go on <a href=\"%0%\">HiZup "
-"Software</a> to get a valid license key."
-msgstr ""
-"Sorry, je Licentie Sleutel is onjuist! Ga naar <a href=\"%0%\">HiZup "
-"Software</a> voor een geldige Licentie Sleutel."
+msgid "Sorry, your License Key is incorrect! Please go on <a href=\"%0%\">HiZup Software</a> to get a valid license key."
+msgstr "Sorry, je Licentie Sleutel is onjuist! Ga naar <a href=\"%0%\">HiZup Software</a> voor een geldige Licentie Sleutel."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Core/Kernel.class.php:78
-msgid ""
-"If the problem persists, delete the \"%0%\" file and check if the \"%1%\" "
-"folder is in write mode (CHMOD 777)."
-msgstr ""
-"Als het probleem blijft,verwijder het \"%0%\" bestand en controleer of de "
-"\"%1%\" map schrijfrechten heeft (CHMOD 777)."
+msgid "If the problem persists, delete the \"%0%\" file and check if the \"%1%\" folder is in write mode (CHMOD 777)."
+msgstr "Als het probleem blijft,verwijder het \"%0%\" bestand en controleer of de \"%1%\" map schrijfrechten heeft (CHMOD 777)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Core/Kernel.class.php:93
-msgid ""
-"Your server must be connected to the Internet for pH7Framework to function "
-"properly."
-msgstr ""
-"Je server moet zijn verbonden met het internet om pH7 Framework correct te "
-"laten functioneren."
+msgid "Your server must be connected to the Internet for pH7Framework to function properly."
+msgstr "Je server moet zijn verbonden met het internet om pH7 Framework correct te laten functioneren."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Analytics/Analytics.class.php:203
 msgid "Unknown OS"
@@ -151,64 +141,40 @@ msgid "Invalid connection to 2CheckOut."
 msgstr "Ongeldige verbinding met  2CheckOut."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:26
-msgid ""
-"The security token does not exist or the time of expiry of the security "
-"token has expire. Please try again!"
-msgstr ""
-"De veiligheids-identificatie bestaat niet of de verloopdatum van de "
-"veiligheids-identificatie is verstrekenen. Probeer opnieuw!"
+msgid "The security token does not exist or the time of expiry of the security token has expire. Please try again!"
+msgstr "De veiligheids-identificatie bestaat niet of de verloopdatum van de veiligheids-identificatie is verstrekenen. Probeer opnieuw!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:36
 msgid "File type incompatible. Please save the image in .gif, .png or .jpg"
-msgstr ""
-"Bestandstype niet compatibel. Bewaar de afbeeling als .gif, .png of .jpg"
+msgstr "Bestandstype niet compatibel. Bewaar de afbeeling als .gif, .png of .jpg"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:46
-msgid ""
-"File type incompatible. The accepted file types are: .mov, .avi, .flv, ."
-"mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv"
-msgstr ""
-"Bestandstype niet compatibel. De geldige bestandstypes zijn: .mov, .avi, ."
-"flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm of.mkv"
+msgid "File type incompatible. The accepted file types are: .mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv"
+msgstr "Bestandstype niet compatibel. De geldige bestandstypes zijn: .mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm of.mkv"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:57
 msgid "This HTTP parameter must be a %0% type!"
 msgstr "Deze HTTP parameter moet van het %0% type zijn!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:67
-msgid ""
-"Oops! We are sorry but the mail server encountered an internal error and the "
-"email could not be sent. Please try again later!"
-msgstr ""
-"Ohoh! De mail server constateerde een interne fout en de mail kon niet "
-"verzonden worden. Probeer het later opnieuw!."
+msgid "Oops! We are sorry but the mail server encountered an internal error and the email could not be sent. Please try again later!"
+msgstr "Ohoh! De mail server constateerde een interne fout en de mail kon niet verzonden worden. Probeer het later opnieuw!."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:78
-msgid ""
-"Oops! You have exceeded allowed login attemts. Please try again in %0% %1%."
-msgstr ""
-"Ohoh! Je hebt het aantal toegestane login pogingen overschreden. Probeer het "
-"opnieuw over %0% %1%."
+msgid "Oops! You have exceeded allowed login attemts. Please try again in %0% %1%."
+msgstr "Ohoh! Je hebt het aantal toegestane login pogingen overschreden. Probeer het opnieuw over %0% %1%."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:88
-msgid ""
-"Oops! It seems that you have already sent the same message to prevent spam "
-"you can not send multiple same content."
-msgstr ""
-"Ohoh! Het blijkt dat je dit bericht al verzonden hebt. Om spam te voorkomen "
-"kan je inhoudelijk dezelfde mails niet nogmaals versturen."
+msgid "Oops! It seems that you have already sent the same message to prevent spam you can not send multiple same content."
+msgstr "Ohoh! Het blijkt dat je dit bericht al verzonden hebt. Om spam te voorkomen kan je inhoudelijk dezelfde mails niet nogmaals versturen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:99
 msgid "Oops! You have to wait %0% %1% before you can send another."
 msgstr "Ohoh! Wacht even %0% %1% voordat je nogmaals verzendt."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:110
-msgid ""
-"Oops! Somebody has recently registered with the same IP address. You have to "
-"wait %0% %1% before try again."
-msgstr ""
-"Ohoh! Iemand heeft onlangs geregistreerd met hetzelfde IP adres. Je dient "
-"%0% %1% te wachten om opnieuw te proberen."
+msgid "Oops! Somebody has recently registered with the same IP address. You have to wait %0% %1% before try again."
+msgstr "Ohoh! Iemand heeft onlangs geregistreerd met hetzelfde IP adres. Je dient %0% %1% te wachten om opnieuw te proberen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Form.class.php:123
 msgid "minute"
@@ -258,32 +224,19 @@ msgstr "Verstuur"
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/BirthDate.php:16
 #, php-format
 msgid "You must be %s to %s years to register on the site."
-msgstr ""
-"Je moet tussen de %s en %s jaar zijn om te mogen registreren op deze site."
+msgstr "Je moet tussen de %s en %s jaar zijn om te mogen registreren op deze site."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/CEmail.php:19
-msgid ""
-"Error: Invalid email address or this email is already used by another member."
-msgstr ""
-"Fout: Ongeldig email adres of dit email adres is al in gebruik door een "
-"ander lid."
+msgid "Error: Invalid email address or this email is already used by another member."
+msgstr "Fout: Ongeldig email adres of dit email adres is al in gebruik door een ander lid."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/Username.php:25
-msgid ""
-"Error: Your username has to contain from %0% to %1% characters, your "
-"username is not available or your username already used by other member."
-msgstr ""
-"Fout: Je gebruikersnaam dient tussen de %0% en %1% karakters te zijn, je "
-"gebruikersnaam is niet beschikbaar of je gebruikersnaam is al in gebruik bij "
-"een ander lid."
+msgid "Error: Your username has to contain from %0% to %1% characters, your username is not available or your username already used by other member."
+msgstr "Fout: Je gebruikersnaam dient tussen de %0% en %1% karakters te zijn, je gebruikersnaam is niet beschikbaar of je gebruikersnaam is al in gebruik bij een ander lid."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/AlphaNumeric.php:13
-msgid ""
-"Error: %element% must be alphanumeric (contain only numbers, letters, "
-"underscores, and/or hyphens)."
-msgstr ""
-"Fout: %element% moet alfanummeriek zijn (alleen getallen, letters, liggend "
-"streepje, en/of leestekens)."
+msgid "Error: %element% must be alphanumeric (contain only numbers, letters, underscores, and/or hyphens)."
+msgstr "Fout: %element% moet alfanummeriek zijn (alleen getallen, letters, liggend streepje, en/of leestekens)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/Numeric.php:14
 msgid "Error: %element% must be numeric."
@@ -298,20 +251,12 @@ msgid "Error: Your password has to contain from %0% to %1% characters."
 msgstr "Fout: Je wachtwoord dient tussen de %0% en %1% karakters te zijn ."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/Url.php:12
-msgid ""
-"Error: %element% must contain a URL (e.g., <a href=\"http://cool-on-web.com"
-"\">http://www.cool-on-Web.com</a>)."
-msgstr ""
-"Fout: %element% dient een URL te bevatten (zoals, <a href=\"http://leuk-op-"
-"internet.nl\">http://www.leuk-op-internet.nl</a>)."
+msgid "Error: %element% must contain a URL (e.g., <a href=\"http://cool-on-web.com\">http://www.cool-on-Web.com</a>)."
+msgstr "Fout: %element% dient een URL te bevatten (zoals, <a href=\"http://leuk-op-internet.nl\">http://www.leuk-op-internet.nl</a>)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/Phone.php:14
-msgid ""
-"Error: Your phone number is incorrect. Please enter full phone number with "
-"area code."
-msgstr ""
-"Fout: Je telefoonnummer is onjuist. Geef je telefoonnummer in met je "
-"kengetal."
+msgid "Error: Your phone number is incorrect. Please enter full phone number with area code."
+msgstr "Fout: Je telefoonnummer is onjuist. Geef je telefoonnummer in met je kengetal."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/Date.php:12
 msgid "Error: %element% must contain a valid date."
@@ -334,17 +279,12 @@ msgid "Please enter a string."
 msgstr "Geef aub een waarde in."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:41
-msgid ""
-"Error: Another account with the same bank account already exists. Please "
-"choose another."
-msgstr ""
-"Fout: Een andere account met dezelfde bankgegevens bestaat al. Kies aub een "
-"ander."
+msgid "Error: Another account with the same bank account already exists. Please choose another."
+msgstr "Fout: Een andere account met dezelfde bankgegevens bestaat al. Kies aub een ander."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:46
 msgid "Sorry, This bank account is not supported by our payment system."
-msgstr ""
-"Sorry, Deze bankrekekening wordt niet ondersteund door ons betaal systeem."
+msgstr "Sorry, Deze bankrekekening wordt niet ondersteund door ons betaal systeem."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/BankAccount.php:51
 msgid "Error: Your bank account is incorrect!"
@@ -355,12 +295,8 @@ msgid "Error: %element% must contain an email address."
 msgstr "Fout: %element% dient een email adres te bevatten."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/RegExp.php:16
-msgid ""
-"Error: %element% contains invalid characters. Here is the rule to be "
-"observed: \"%0%\""
-msgstr ""
-"Fout: %element% bevat ongeldige karakters. Hier is de regel die even "
-"nagekenen dient te worden: \"%0%\""
+msgid "Error: %element% contains invalid characters. Here is the rule to be observed: \"%0%\""
+msgstr "Fout: %element% bevat ongeldige karakters. Hier is de regel die even nagekenen dient te worden: \"%0%\""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Form/Engine/PFBC/Validation/YesNo.php:11
 msgid "Error: You must accept our %element%."
@@ -390,12 +326,8 @@ msgstr[0] "Verzoek"
 msgstr[1] "Verzoeken"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:177
-msgid ""
-"Time of the request: %0% | %1% %2% | Page executed in %3% seconds | Amount "
-"of memory allocated: %4%"
-msgstr ""
-"Tijd van de aanvraag: %0% | %1% %2% | Pagina berekend in %3% seconden | "
-"Toegewezen geheugen grootte: %4%"
+msgid "Time of the request: %0% | %1% %2% | Page executed in %3% seconds | Amount of memory allocated: %4%"
+msgstr "Tijd van de aanvraag: %0% | %1% %2% | Pagina berekend in %3% seconden | Toegewezen geheugen grootte: %4%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:251
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:269
@@ -413,9 +345,7 @@ msgstr "condities"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:257
 msgid "The text is available under the %0%, but additional %1% may apply."
-msgstr ""
-"Deze tekst is beschikbaar middels de %0%, maar additioneel is %1% van "
-"toepassing."
+msgstr "Deze tekst is beschikbaar middels de %0%, maar additioneel is %1% van toepassing."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Design.class.php:373
 msgid "See information from this IP"
@@ -450,20 +380,12 @@ msgid "Best regards,<br />The %0% Team."
 msgstr "Met vriendelijke groeten,<br />The %0% Team."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Layout/Html/Mail.class.php:87
-msgid ""
-"This message was sent to %0%.<br /> You are receiving this message because "
-"you have registered on %1%.<br /> You can change the e-mail alerts by "
-"visiting your account."
-msgstr ""
-"Dit bericht is verzonden aan %0%.<br /> Je ontvangt dit bericht omdat je "
-"bent geregistreerd op %1%.<br /> Je kan je email meldingen veranderen via je "
-"account instellingen."
+msgid "This message was sent to %0%.<br /> You are receiving this message because you have registered on %1%.<br /> You can change the e-mail alerts by visiting your account."
+msgstr "Dit bericht is verzonden aan %0%.<br /> Je ontvangt dit bericht omdat je bent geregistreerd op %1%.<br /> Je kan je email meldingen veranderen via je account instellingen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Http/Http.class.php:198
 msgid "You must enter a valid login ID and password to access this resource."
-msgstr ""
-"Je dient een geldige login ID en wachtwoord in te voeren om toegang te "
-"krijgen tot deze bron."
+msgstr "Je dient een geldige login ID en wachtwoord in te voeren om toegang te krijgen tot deze bron."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:162
 msgid "%0% - Page Not Found"
@@ -474,12 +396,8 @@ msgid "Whoops! The page you requested was not found."
 msgstr "Ohoh! De opgevraagde pagina is niet gevonden."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:165
-msgid ""
-"You may have clicked an expired link or mistyped the address. Some web "
-"addresses are case sensitive."
-msgstr ""
-"Je kan een verlopen link hebben aangeklikt, of een adres verkeerd ingegeven "
-"hebben. Sommige adressen zijn hoofd en/of kleine letter(s) gevoelig."
+msgid "You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive."
+msgstr "Je kan een verlopen link hebben aangeklikt, of een adres verkeerd ingegeven hebben. Sommige adressen zijn hoofd en/of kleine letter(s) gevoelig."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/framework/Mvc/Controller/Controller.class.php:166
 msgid "Suggestions:"
@@ -522,20 +440,12 @@ msgid "Virtual Earth 3D !"
 msgstr "Virtual Earth 3D!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/modules/virtual-earth/controllers/MainController.php:16
-msgid ""
-"Virtual World, Earth 3D. A virtual Life 3D revolutionary ! Best Virtual Free "
-"Online Dating 3D !"
-msgstr ""
-"Virtuale Wereld, Earth 3D. Een Virtuale Life 3D revolutie ! Beste Virtuale "
-"Gratis Online Dating 3D !"
+msgid "Virtual World, Earth 3D. A virtual Life 3D revolutionary ! Best Virtual Free Online Dating 3D !"
+msgstr "Virtuale Wereld, Earth 3D. Een Virtuale Life 3D revolutie ! Beste Virtuale Gratis Online Dating 3D !"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/modules/virtual-earth/controllers/MainController.php:17
-msgid ""
-"virtual, world, earth, life, 3D, dating 3d, online, second life, free online "
-"dating, free"
-msgstr ""
-"virtueel, wereld, aarde, leven, 3D, dating 3d, online, tweede leven, gratis "
-"online dating, gratis"
+msgid "virtual, world, earth, life, 3D, dating 3d, online, second life, free online dating, free"
+msgstr "virtueel, wereld, aarde, leven, 3D, dating 3d, online, tweede leven, gratis online dating, gratis"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/modules/virtual-earth/controllers/MainController.php:18
 msgid "Virtual Earth 3D, Revolutionary Online Virtual World 3D !"
@@ -563,14 +473,8 @@ msgid "This module is a test for create simple module"
 msgstr "Deze module is een test om simpel een module te maken"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/modules/helloworld/controllers/HomeController.php:24
-msgid ""
-"hello world, test, developpers, CMS, Dating CMS, CMS Dating, Social CMS, "
-"pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social "
-"Network Software, Social Networking Software"
-msgstr ""
-"hello world, test, ontwikkelaars, CMS, Dating CMS, CMS Dating, Social CMS, "
-"pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social "
-"Network Software, Social Networking Software"
+msgid "hello world, test, developpers, CMS, Dating CMS, CMS Dating, Social CMS, pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social Network Software, Social Networking Software"
+msgstr "hello world, test, ontwikkelaars, CMS, Dating CMS, CMS Dating, Social CMS, pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social Network Software, Social Networking Software"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/modules/helloworld/controllers/HomeController.php:27
 msgid "Example of simple module that displays hello world for the CMS"
@@ -734,8 +638,7 @@ msgstr[0] "%n% Game Resultaat!"
 msgstr[1] "%n% Games Resultaat!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/game/controllers/MainController.php:111
-msgid ""
-"Search the Flash Game in the Category %0% - Community Dating Social Games"
+msgid "Search the Flash Game in the Category %0% - Community Dating Social Games"
 msgstr "Zoek de Flash Game in de Categorie %0% - Community Dating Social Games"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/game/controllers/MainController.php:122
@@ -756,20 +659,15 @@ msgstr "Zoeken - Gratis Games for Gamers, Flash Games, Gratis Online Games"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/game/controllers/MainController.php:150
 msgid "search,game,free,flash,game site,flash game,games,gaming,online game"
-msgstr ""
-"zoeken,zoek,game,gratis,flash,game site,flash game,games,gaming,online game"
+msgstr "zoeken,zoek,game,gratis,flash,game site,flash game,games,gaming,online game"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/game/controllers/MainController.php:180
 msgid "Wrong download ID specified!"
 msgstr "Verkeerde download ID gespecificeerd!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/game/controllers/MainController.php:209
-msgid ""
-"Please return to the <a href=\"%0%\">main game page</a> or <a href=\"%1%"
-"\">go the previous page</a>."
-msgstr ""
-"Ga terug naar de <a href=\"%0%\">hoofdpagina</a> of <a href=\"%1%\">ga naar "
-"de vorige pagina</a>."
+msgid "Please return to the <a href=\"%0%\">main game page</a> or <a href=\"%1%\">go the previous page</a>."
+msgstr "Ga terug naar de <a href=\"%0%\">hoofdpagina</a> of <a href=\"%1%\">ga naar de vorige pagina</a>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/game/controllers/AdminController.php:16
 msgid "Welcome to the Game administrator mode."
@@ -813,12 +711,8 @@ msgstr "Veld Naam:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/field/forms/EditFieldForm.php:32
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/field/forms/AddFieldForm.php:32
-msgid ""
-"Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] "
-"and [_], [-])."
-msgstr ""
-"De veld naam dient 2-30 alfanummerieke karakters ([a-z], [A-Z], [0-9] and "
-"[_], [-]) te bevatten."
+msgid "Field Name must contain 2-30 alphanumeric characters ([a-z], [A-Z], [0-9] and [_], [-])."
+msgstr "De veld naam dient 2-30 alfanummerieke karakters ([a-z], [A-Z], [0-9] and [_], [-]) te bevatten."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/field/forms/EditFieldForm.php:33
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/field/forms/AddFieldForm.php:33
@@ -853,9 +747,7 @@ msgstr "Het veld is bewerkt."
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/field/forms/processing/EditFieldFormProcessing.php:44
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/field/forms/processing/AddFieldFormProcessing.php:44
 msgid "Oops! An error occurred while adding the field, please try again."
-msgstr ""
-"Ohoh! Er is een fout opgetreden tijdens het toevoegen van het veld, probeer "
-"opnieuw."
+msgstr "Ohoh! Er is een fout opgetreden tijdens het toevoegen van het veld, probeer opnieuw."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/field/forms/processing/AddFieldFormProcessing.php:31
 msgid "Oops! The field already exists!"
@@ -927,39 +819,24 @@ msgid "One or more email addresses are invalid!"
 msgstr "Eén of meerdere email adressen zijn ongeldig!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcessing.php:32
-msgid ""
-"Hello!<br />You have received a privilege on the invitation from your friend "
-"on the new platform to meet new generation - %site_name%"
-msgstr ""
-"Hallo!<br />Je ontvangt  een voorrecht van een vriend van je om op een nieuw "
-"platform de nieuwe generatie te ontmoeten - %site_name%"
+msgid "Hello!<br />You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%"
+msgstr "Hallo!<br />Je ontvangt  een voorrecht van een vriend van je om op een nieuw platform de nieuwe generatie te ontmoeten - %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcessing.php:33
 msgid "Get exclusive privilege to join your friend is waiting for you!"
-msgstr ""
-"Krijg exclusieve privileges om je vriend gezelschap te houden. Je wordt nu "
-"verwacht!"
+msgstr "Krijg exclusieve privileges om je vriend gezelschap te houden. Je wordt nu verwacht!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcessing.php:34
 msgid "Message left by your friend:"
 msgstr "Bericht achtergelaten door je vriend:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcessing.php:35
-msgid ""
-"You are receiving this message because \"%0%\" you know has entered your "
-"email address in the form of invitation of friends to our site. This is not "
-"spam!"
-msgstr ""
-"Je ontvangt dit bericht omdat \"%0%\" die je kent, jou heeft ingevuld op het "
-"uitnodigingsformulier op onze site. Dit is geen spam!"
+msgid "You are receiving this message because \"%0%\" you know has entered your email address in the form of invitation of friends to our site. This is not spam!"
+msgstr "Je ontvangt dit bericht omdat \"%0%\" die je kent, jou heeft ingevuld op het uitnodigingsformulier op onze site. Dit is geen spam!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcessing.php:41
-msgid ""
-"Privilege on the invitation from your friend for the new generation "
-"community platform - %site_name%"
-msgstr ""
-"Privilege op uitnodiging van je vriend voor de nieuwe generatie community "
-"platform - %site_name%"
+msgid "Privilege on the invitation from your friend for the new generation community platform - %site_name%"
+msgstr "Privilege op uitnodiging van je vriend voor de nieuwe generatie community platform - %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/invite/forms/processing/InviteFormProcessing.php:47
 msgid "Cool, we've sent that!"
@@ -1152,12 +1029,8 @@ msgid "Note:"
 msgstr "Noot:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/VideoForm.php:51
-msgid ""
-"Please be patient while downloading video, this may take time (especially if "
-"you download a long video)."
-msgstr ""
-"Even geduld tijdens het downloaden van de video. Dit kost even tijd (vooral "
-"als het een lange video is)"
+msgid "Please be patient while downloading video, this may take time (especially if you download a long video)."
+msgstr "Even geduld tijdens het downloaden van de video. Dit kost even tijd (vooral als het een lange video is)"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/VideoForm.php:52
 msgid "I have the right to distribute this Video"
@@ -1206,27 +1079,19 @@ msgstr "Voeg een categorie toe voordat je een video toe gaat voegen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:62
 msgid "Oops, the link of the video looks bad? Check that the link is correct."
-msgstr ""
-"Ohoh!, de link van de video ziet er niet goed uit! Controleer de link of die "
-"juist is."
+msgstr "Ohoh!, de link van de video ziet er niet goed uit! Controleer de link of die juist is."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:68
-msgid ""
-"Unable to retrieve information from the video. Are you sure that the URL of "
-"the video is correct?"
-msgstr ""
-"Het is niet mogelijk om de informatie te krijgen van de video. Weet je zeker "
-"dat de URL van de video juist is?"
+msgid "Unable to retrieve information from the video. Are you sure that the URL of the video is correct?"
+msgstr "Het is niet mogelijk om de informatie te krijgen van de video. Weet je zeker dat de URL van de video juist is?"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:72
 msgid "Untitled"
 msgstr "Geen Titel"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:78
-msgid ""
-"Invalid Api Video Type! Choose from Youtube, Vimeo, Dailymotion and Metacafe."
-msgstr ""
-"Ongeldige Api Video Type! Kies van Youtube, Vimeo, Dailymotion of Metacafe."
+msgid "Invalid Api Video Type! Choose from Youtube, Vimeo, Dailymotion and Metacafe."
+msgstr "Ongeldige Api Video Type! Kies van Youtube, Vimeo, Dailymotion of Metacafe."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:92
 msgid "File exceeds maximum allowed video filesize of %0%!"
@@ -1237,12 +1102,8 @@ msgid "You must choose a type of video!"
 msgstr "Je moet het type van de video selecteren!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:136
-msgid ""
-"Your video has been received! But it will be visible once approved by our "
-"moderators. Please do not send a new video because this is useless!"
-msgstr ""
-"Je video is ontvangen! Zodra deze is goedgekeurd door de beheerder(s) is "
-"deze zichtbaar. Een nieuwe video sturen heeft geen zin, gaarne geduld!"
+msgid "Your video has been received! But it will be visible once approved by our moderators. Please do not send a new video because this is useless!"
+msgstr "Je video is ontvangen! Zodra deze is goedgekeurd door de beheerder(s) is deze zichtbaar. Een nieuwe video sturen heeft geen zin, gaarne geduld!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/forms/processing/VideoFormProcessing.php:137
 msgid "Your video has been added successfully!"
@@ -1253,12 +1114,8 @@ msgid "Your album has been updated successfully!"
 msgstr "Je album is met succes bijgewerkt!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/controllers/MainController.php:34
-msgid ""
-"video,videos,free,free videos,music,online,watch,dating,video dating,social,"
-"community,social network,people video,flirt"
-msgstr ""
-"video,video's,gratis,gratis video's,muziek,online,bekijk,dating,video dating,"
-"social,community,social network,people video,flirt"
+msgid "video,videos,free,free videos,music,online,watch,dating,video dating,social,community,social network,people video,flirt"
+msgstr "video,video's,gratis,gratis video's,muziek,online,bekijk,dating,video dating,social,community,social network,people video,flirt"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/controllers/MainController.php:44
 msgid "Add a new Album"
@@ -1289,15 +1146,12 @@ msgid "Video Gallery Community"
 msgstr "Video Gallerij Community"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/controllers/MainController.php:94
-msgid ""
-"%0%'s Albums | Video Albums of the Dating Social Community - %site_name%"
-msgstr ""
-"%0%'s Albums | Video Albums van de Dating Social Community - %site_name%"
+msgid "%0%'s Albums | Video Albums of the Dating Social Community - %site_name%"
+msgstr "%0%'s Albums | Video Albums van de Dating Social Community - %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/controllers/MainController.php:108
 msgid "Browse Videos From %0% | Video Album Social Community - %site_name%"
-msgstr ""
-"Blader door de Videos van %0% | Video Album Social Community - %site_name%"
+msgstr "Blader door de Videos van %0% | Video Album Social Community - %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/controllers/MainController.php:115
 msgid "Album not found or in pending approval."
@@ -1358,19 +1212,12 @@ msgid "Search - %site_name% is a Dating Social Video Community!"
 msgstr "Zoeken - %site_name% is een Dating Social Video Community!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/controllers/MainController.php:217
-msgid ""
-"search,video,dating,social network,community,music,movie,news,video sharing"
-msgstr ""
-"search,video,dating,daten,social network,netwerk,community,music,muziek,"
-"movie,film,news,nieuws,video sharing, video delen"
+msgid "search,video,dating,social network,community,music,movie,news,video sharing"
+msgstr "search,video,dating,daten,social network,netwerk,community,music,muziek,movie,film,news,nieuws,video sharing, video delen"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/video/controllers/MainController.php:235
-msgid ""
-"Please return to <a href=\"%1%\">go the previous page</a> or <a href=\"%1%"
-"\">add a new video</a> in this album."
-msgstr ""
-"Ga terug naar de <a href=\"%1%\">vorige pagina</a> of <a href=\"%1%\">voeg "
-"een nieuwe video toe</a> in dit album."
+msgid "Please return to <a href=\"%1%\">go the previous page</a> or <a href=\"%1%\">add a new video</a> in this album."
+msgstr "Ga terug naar de <a href=\"%1%\">vorige pagina</a> of <a href=\"%1%\">voeg een nieuwe video toe</a> in dit album."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/connect/inc/class/Microsoft.php:84
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/connect/inc/class/Facebook.php:72
@@ -1391,22 +1238,12 @@ msgid "Welcome to Universal Login"
 msgstr "Welkom bij de Algemene Inlog Pagina"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/connect/controllers/MainController.php:29
-msgid ""
-"Universal Login, Use the service Facebook, Twitter, Yahoo, AOL, Windows "
-"Live, Microsoft Live, Google, or other account to login on the social dating "
-"site %site_name%"
-msgstr ""
-"Algemene Login, Gebruik Facebook, Twitter, Yahoo, AOL, Windows Live, "
-"Microsoft Live, Google, of een ander account om in te loggen op de social "
-"dating site %site_name%"
+msgid "Universal Login, Use the service Facebook, Twitter, Yahoo, AOL, Windows Live, Microsoft Live, Google, or other account to login on the social dating site %site_name%"
+msgstr "Algemene Login, Gebruik Facebook, Twitter, Yahoo, AOL, Windows Live, Microsoft Live, Google, of een ander account om in te loggen op de social dating site %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/connect/controllers/MainController.php:30
-msgid ""
-"connect, login, Register, universal login, Facebook, Twitter, Yahoo, AOL, "
-"Windows Live, Microsoft Live, Google, social network, dating site, email"
-msgstr ""
-"connect, login, Registreer, algemene login, Facebook, Twitter, Yahoo, AOL, "
-"Windows Live, Microsoft Live, Google, social network, dating site, email"
+msgid "connect, login, Register, universal login, Facebook, Twitter, Yahoo, AOL, Windows Live, Microsoft Live, Google, social network, dating site, email"
+msgstr "connect, login, Registreer, algemene login, Facebook, Twitter, Yahoo, AOL, Windows Live, Microsoft Live, Google, social network, dating site, email"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/connect/controllers/MainController.php:39
 msgid "You are successfully registered!"
@@ -1444,8 +1281,7 @@ msgstr "Onderwerp:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/forms/SearchTopicForm.php:19
 msgid "Name, Keyword of message, Author (username) or ID of Topic Forum:"
-msgstr ""
-"Naam, Trefwoord van bericht, Auteur (gebruikersnaam) of ID van Topic Forum:"
+msgstr "Naam, Trefwoord van bericht, Auteur (gebruikersnaam) of ID van Topic Forum:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/forms/processing/EditMsgFormProcessing.php:27
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/forms/processing/EditForumFormProcessing.php:23
@@ -1507,12 +1343,8 @@ msgid "Oops! Your Forum could not be deleted"
 msgstr "Ohoh! Je Forum kon niet worden verwijderd"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/controllers/ForumController.php:31
-msgid ""
-"forum,discussion,dating forum,social forum,people,meet people,forums,free "
-"dating forum,free forum,community forum,social forum"
-msgstr ""
-"forum,discussie,dating forum,social forum,mensen,ontmoet mensen,forums,"
-"gratis dating forum,gratis forum,community forum,social forum"
+msgid "forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum,free forum,community forum,social forum"
+msgstr "forum,discussie,dating forum,social forum,mensen,ontmoet mensen,forums,gratis dating forum,gratis forum,community forum,social forum"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/controllers/ForumController.php:47
 msgid "No Forums found."
@@ -1543,12 +1375,8 @@ msgid "%0% - Topics - Discussions Forums"
 msgstr "%0% - Topics - Discussie Forums"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/controllers/ForumController.php:81
-msgid ""
-"%0%,forum,discussion,dating forum,social forum,people,meet people,forums,"
-"free dating forum"
-msgstr ""
-"%0%,forum,discussie,dating forum,social forum,mensen,ontmoet people,forums,"
-"gratis dating forum"
+msgid "%0%,forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum"
+msgstr "%0%,forum,discussie,dating forum,social forum,mensen,ontmoet people,forums,gratis dating forum"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/controllers/ForumController.php:98
 msgid "Topic Not Found!"
@@ -1641,12 +1469,8 @@ msgid "Oops! Your message could not be deleted"
 msgstr "Ohoh! Je bericht kon niet worden verwijderd"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/forum/controllers/ForumController.php:266
-msgid ""
-"Please return to the <a href=\"%0%\">main forum page</a> or <a href=\"%1%"
-"\">go the previous page</a>."
-msgstr ""
-"Ga terug naar <a href=\"%0%\">hoofd forum pagina</a> of <a href=\"%1%\">ga "
-"naar de vorige pagina</a>."
+msgid "Please return to the <a href=\"%0%\">main forum page</a> or <a href=\"%1%\">go the previous page</a>."
+msgstr "Ga terug naar <a href=\"%0%\">hoofd forum pagina</a> of <a href=\"%1%\">ga naar de vorige pagina</a>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:120
 msgid "You must have the status of ONLINE in order to speak instantaneous."
@@ -1659,8 +1483,7 @@ msgstr "%0% is offline, stuur daarom een bericht."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/im/assets/ajax/MessengerAjax.php:178
 msgid "You must have the status of ONLINE in order to chat with other members."
-msgstr ""
-"Je moet de status van online hebben om te kunnen chatten met andere leden."
+msgstr "Je moet de status van online hebben om te kunnen chatten met andere leden."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/config/Permission.php:31
 msgid "Oops! You are already logged in as administrator."
@@ -1676,9 +1499,7 @@ msgstr "Introductie bestand niet gevonden!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/inc/class/Module.php:182
 msgid "Unable to execute the query SQL of module.<br />Error Message: %0%"
-msgstr ""
-"Niet mogelijk om het verzoek uit te voeren op de SQL van de module.<br /"
-">Error Message: %0%"
+msgstr "Niet mogelijk om het verzoek uit te voeren op de SQL van de module.<br />Error Message: %0%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SearchUserForm.php:25
 msgid "Search for:"
@@ -1819,12 +1640,8 @@ msgid "Disable"
 msgstr "Uit"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:58
-msgid ""
-"Use the Splash Page for the visitors, otherwise it will classic page that "
-"will be used."
-msgstr ""
-"Gebruik de Landings Pagina voor de bezoekers, anders wordt de klassieke "
-"pagina gebruikt."
+msgid "Use the Splash Page for the visitors, otherwise it will classic page that will be used."
+msgstr "Gebruik de Landings Pagina voor de bezoekers, anders wordt de klassieke pagina gebruikt."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:59
 msgid "Ajax Site with AjPH:"
@@ -2101,24 +1918,12 @@ msgid "Security Ip connection for Admin Panel:"
 msgstr "Veiligheid IP-Verbinding voor Beheerders Paneel:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:131
-msgid ""
-"Enter <a href=\"%0%\" title=\"Get your IP here!\">your IP address</a> and an "
-"even higher security and exclude all other persons and bots that tried to "
-"connect with another IP address even if the login is correct! Leave blank to "
-"disable this feature."
-msgstr ""
-"Geef <a href=\"%0%\" title=\"Get your IP here!\">je IP adres</a>in, en zelfs "
-"derden met hogere rechten of derden met de logingegevens worden geweigerd. "
-"Alleen jou IP adres heeft toegang. Leeg laten om deze optie niet te "
-"gebruiken.."
+msgid "Enter <a href=\"%0%\" title=\"Get your IP here!\">your IP address</a> and an even higher security and exclude all other persons and bots that tried to connect with another IP address even if the login is correct! Leave blank to disable this feature."
+msgstr "Geef <a href=\"%0%\" title=\"Get your IP here!\">je IP adres</a>in, en zelfs derden met hogere rechten of derden met de logingegevens worden geweigerd. Alleen jou IP adres heeft toegang. Leeg laten om deze optie niet te gebruiken.."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:132
-msgid ""
-"Indicate a word that will replace the banned word in the <a href=\"%0%"
-"\">list</a>."
-msgstr ""
-"Geeft het woord aan dat op de plaats komt van de <a href=\"%0%\">lijst</a> "
-"van verbannen woorden."
+msgid "Indicate a word that will replace the banned word in the <a href=\"%0%\">list</a>."
+msgstr "Geeft het woord aan dat op de plaats komt van de <a href=\"%0%\">lijst</a> van verbannen woorden."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:133
 msgid "CSRF token lifetime:"
@@ -2147,8 +1952,7 @@ msgstr "Vertraging voor Gebruiker bij registratie"
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:139
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:140
 msgid "Number of minutes for a new registration with the same IP address."
-msgstr ""
-"Aantal minuten tot tijdstip nieuwe registratie vanaf hetzelfde IP adres."
+msgstr "Aantal minuten tot tijdstip nieuwe registratie vanaf hetzelfde IP adres."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:140
 msgid "Registration delay for Affiliate"
@@ -2168,8 +1972,7 @@ msgstr "Verstuur Mail vertraging"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:142
 msgid "Number of minutes for the same user can send a new email."
-msgstr ""
-"Aantal minuten tot tijdstip dat gebruiker een nieuwe email kan versturen."
+msgstr "Aantal minuten tot tijdstip dat gebruiker een nieuwe email kan versturen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:143
 msgid "Send Comment delay"
@@ -2177,9 +1980,7 @@ msgstr "Verstuur Commentaar vertraging"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:143
 msgid "Number of minutes for the same user can send a new comment."
-msgstr ""
-"Aantal minuten voor dezelfde gebruiker, voordat deze een nieuwe reactie kan "
-"geven."
+msgstr "Aantal minuten voor dezelfde gebruiker, voordat deze een nieuwe reactie kan geven."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:144
 msgid "Send Forum Topic delay"
@@ -2187,21 +1988,15 @@ msgstr "Verstuur Forum Topic vertraging"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:144
 msgid "Number of minutes for the same user can send a new topic in the forum."
-msgstr ""
-"Aantal minuten voor dezelfde gebruiker, voordat deze een een nieuwe topic "
-"kan starten op het forum."
+msgstr "Aantal minuten voor dezelfde gebruiker, voordat deze een een nieuwe topic kan starten op het forum."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:145
 msgid "Send Forum Message delay"
 msgstr "Verstuur Forum Bericht vertraging"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:145
-msgid ""
-"Number of minutes for the same user can send a reply message in the same "
-"topic."
-msgstr ""
-"Aantal minuten voor dezelfde gebruiker, voordat deze een antwoord kan geven "
-"op een bericht in dezelfde topic."
+msgid "Number of minutes for the same user can send a reply message in the same topic."
+msgstr "Aantal minuten voor dezelfde gebruiker, voordat deze een antwoord kan geven op een bericht in dezelfde topic."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:148
 msgid "Captcha for User Signup Form:"
@@ -2221,8 +2016,7 @@ msgstr "Captcha om commentaar te geven:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:152
 msgid "Captcha for adding or reply a message in the Forum:"
-msgstr ""
-"Captcha voor het toevoegen van een antwoord op een bericht in het forum:"
+msgstr "Captcha voor het toevoegen van een antwoord op een bericht in het forum:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:153
 msgid "Captcha for adding a User Post Note:"
@@ -2238,8 +2032,7 @@ msgstr "Verwijder oudere berichten:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:156
 msgid "Delete messages older than days. 0 to disable."
-msgstr ""
-"Aantal dagen dat berichten worden verwijderd. 0 om dit niet te gebruiken."
+msgstr "Aantal dagen dat berichten worden verwijderd. 0 om dit niet te gebruiken."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:157
 msgid "Delete older comments:"
@@ -2247,8 +2040,7 @@ msgstr "Verwijder ouder commentaar:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:157
 msgid "Delete comments older than days. 0 to disable."
-msgstr ""
-"Aantal dagen dat commentaar wordt verwijderd. 0 om dit niet te gebruiken."
+msgstr "Aantal dagen dat commentaar wordt verwijderd. 0 om dit niet te gebruiken."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:160
 msgid "Api:"
@@ -2268,12 +2060,8 @@ msgstr "Chat Api:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:162
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:163
-msgid ""
-"Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url="
-"%0%&name=%1%!#)."
-msgstr ""
-"Parsing labels zijn toegestaan (bijvoorbeeld #!http://api.your-service-chat."
-"com/?url=%0%&name=%1%!#)."
+msgid "Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#)."
+msgstr "Parsing labels zijn toegestaan (bijvoorbeeld #!http://api.your-service-chat.com/?url=%0%&name=%1%!#)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:163
 msgid "Chatroulette Api:"
@@ -2288,12 +2076,8 @@ msgid "Secret word for the URL cron:"
 msgstr "Geheim woord voor de URL cron:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:167
-msgid ""
-"Your very secret word for the URL of cron. It will be used for running "
-"automated cron job."
-msgstr ""
-"Je super geheime woord voor de URL van de cron. Het wordt gebruikt om "
-"automatisch cron jobs te draaien."
+msgid "Your very secret word for the URL of cron. It will be used for running automated cron job."
+msgstr "Je super geheime woord voor de URL van de cron. Het wordt gebruikt om automatisch cron jobs te draaien."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SettingForm.php:168
 msgid "User inactivity timeout:"
@@ -2336,31 +2120,20 @@ msgid "Search an Admin:"
 msgstr "Zoek een Beheerder:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SearchAdminForm.php:19
-msgid ""
-"Enter their ID, First Name, Last Name, Username, Email, Sex or IP address."
-msgstr ""
-"Voer hun ID, Voornaam, Achternaam, Gebruikersnaam, Email, Geslacht of IP "
-"adres in."
+msgid "Enter their ID, First Name, Last Name, Username, Email, Sex or IP address."
+msgstr "Voer hun ID, Voornaam, Achternaam, Gebruikersnaam, Email, Geslacht of IP adres in."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/SearchAdminForm.php:20
 msgid "Latest Admins"
 msgstr "Laatste Beheerders"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/AdsForm.php:28
-msgid ""
-"The predefined variable for the URL of an affiliate account to put in the "
-"HTML is: %0%."
-msgstr ""
-"De vooraf gedefinieerde variabele voor de URL van een affiliate account om "
-"in de HTML te zetten is:% 0%."
+msgid "The predefined variable for the URL of an affiliate account to put in the HTML is: %0%."
+msgstr "De vooraf gedefinieerde variabele voor de URL van een affiliate account om in de HTML te zetten is:% 0%."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/AdsForm.php:28
-msgid ""
-"The predefined variable to the URL of your site to indicate this in the HTML "
-"is: %0%."
-msgstr ""
-"De vooraf gedefinieerde variabele naar de URL van je site om dit aan te "
-"geven in de HTML is:% 0%."
+msgid "The predefined variable to the URL of your site to indicate this in the HTML is: %0%."
+msgstr "De vooraf gedefinieerde variabele naar de URL van je site om dit aan te geven in de HTML is:% 0%."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/AdsForm.php:29
 msgid "Advertisement"
@@ -2443,12 +2216,8 @@ msgid "Month/Day/Year"
 msgstr "Maand/Dag/Jaar"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/AddUserForm.php:39
-msgid ""
-"Please specify the birth date using the calendar or with this format: Month/"
-"Day/Year."
-msgstr ""
-"Specificeer aub het  geboortedatum met gebruik van de kalender of met de "
-"wijze: Maand/Dag/Jaar."
+msgid "Please specify the birth date using the calendar or with this format: Month/Day/Year."
+msgstr "Specificeer aub het  geboortedatum met gebruik van de kalender of met de wijze: Maand/Dag/Jaar."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/AddUserForm.php:40
 msgid "Country:"
@@ -2487,12 +2256,8 @@ msgid "Your Password:"
 msgstr "Je Wachtword:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/AddAdminForm.php:33
-msgid ""
-"With your time zone, the other administrators may know when they can contact "
-"you easily."
-msgstr ""
-"Met jouw tijdzone kan de beheerder zien wanner hij het beste eventueel "
-"contact met je op kan nemen."
+msgid "With your time zone, the other administrators may know when they can contact you easily."
+msgstr "Met jouw tijdzone kan de beheerder zien wanner hij het beste eventueel contact met je op kan nemen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/MetaMainForm.php:39
 msgid "Click here to show/hide the languages"
@@ -2555,14 +2320,8 @@ msgid "Category (meta tag):"
 msgstr "Distribution (meta tag):"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/ImportUserForm.php:27
-msgid ""
-"Import members into your site from a <strong><abbr title=\"Comma Separated "
-"Values\">CSV</abbr></strong> file. You can find database users <strong><a "
-"href=\"%0%\">here</a></strong>."
-msgstr ""
-"Importeer leden in je site vannuit een <strong><abbr title=\"Comma Separated "
-"Values\">CSV</abbr></strong> bestand. Je vindt database gebruikers "
-"<strong><a href=\"%0%\">hier</a></strong>."
+msgid "Import members into your site from a <strong><abbr title=\"Comma Separated Values\">CSV</abbr></strong> file. You can find database users <strong><a href=\"%0%\">here</a></strong>."
+msgstr "Importeer leden in je site vannuit een <strong><abbr title=\"Comma Separated Values\">CSV</abbr></strong> bestand. Je vindt database gebruikers <strong><a href=\"%0%\">hier</a></strong>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/ImportUserForm.php:30
 msgid "CSV file:"
@@ -2605,18 +2364,12 @@ msgid "You signup is successfully!"
 msgstr "Met succes ingelogd!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/EditFormProcessing.php:35
-msgid ""
-"Your username has to contain from %0% to %1% characters, your username is "
-"not available or your username already used by other admin."
-msgstr ""
-"Your username has to contain from %0% to %1% characters, your username is "
-"not available or your username already used by other admin."
+msgid "Your username has to contain from %0% to %1% characters, your username is not available or your username already used by other admin."
+msgstr "Your username has to contain from %0% to %1% characters, your username is not available or your username already used by other admin."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/EditFormProcessing.php:51
 msgid "Invalid email address or this email is already used by another admin."
-msgstr ""
-"Ongeldig email adres of dit email adres is al in gebruik door een andere "
-"beheerder."
+msgstr "Ongeldig email adres of dit email adres is al in gebruik door een andere beheerder."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/EditFormProcessing.php:89
 msgid "Your profile has been saved successfully!"
@@ -2638,9 +2391,7 @@ msgstr "Het bestand kon niet worden bewaard!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/ImportUserFormProcessing.php:51
 msgid "Wrong file! Please select a valid CSV file containing data members."
-msgstr ""
-"Verkeerd bestand! Selecteer aub een geldig CSV bestand met de gegevens van "
-"de leden."
+msgstr "Verkeerd bestand! Selecteer aub een geldig CSV bestand met de gegevens van de leden."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/ImportUserFormProcessing.php:141
 msgid "%n% User has been successfully added."
@@ -2662,25 +2413,19 @@ msgstr "De Meta Tags zijn met succes opgeslagen!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcessing.php:101
 msgid "The minimum length of the username cannot exceed %0% characters."
-msgstr ""
-"De minimum lengte van de gebruikersnaam mag niet  kleiner zijn dan %0% "
-"karakters."
+msgstr "De minimum lengte van de gebruikersnaam mag niet  kleiner zijn dan %0% karakters."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcessing.php:112
 msgid "The maximum length of the username cannot exceed %0% characters."
-msgstr ""
-"De maximum lengte van de gebruikersnaam mag niet  groter zijn dan %0% "
-"karakters."
+msgstr "De maximum lengte van de gebruikersnaam mag niet  groter zijn dan %0% karakters."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcessing.php:123
 msgid "You cannot specify a minimum age higher than the maximum age."
-msgstr ""
-"Je kan geen minimum leeftijd ingeven die hoger is als de maximum leeftijd."
+msgstr "Je kan geen minimum leeftijd ingeven die hoger is als de maximum leeftijd."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcessing.php:230
 msgid "The token lifetime cannot be below 10 seconds."
-msgstr ""
-"De identificatiesleutel levensduur kan niet lager zijn als 10 seconden."
+msgstr "De identificatiesleutel levensduur kan niet lager zijn als 10 seconden."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/forms/processing/SettingFormProcessing.php:312
 msgid "The configuration was saved successfully!"
@@ -2755,12 +2500,8 @@ msgid "%0% build %1%"
 msgstr "%0% build %1%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/MainController.php:310
-msgid ""
-"%software_name% <strong>%0%</strong> is available! Please <a href=\"%1%\" "
-"target=\"_blank\">update now</a>."
-msgstr ""
-"%software_name% <strong>%0%</strong> is beschikbaar! Klik op <a href=\"%1%\" "
-"target=\"_blank\"> voor de laatste versie.</a>."
+msgid "%software_name% <strong>%0%</strong> is available! Please <a href=\"%1%\" target=\"_blank\">update now</a>."
+msgstr "%software_name% <strong>%0%</strong> is beschikbaar! Klik op <a href=\"%1%\" target=\"_blank\"> voor de laatste versie.</a>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ModeratorController.php:26
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ModeratorController.php:27
@@ -2992,12 +2733,8 @@ msgstr "Selecteer aub een veld."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:161
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:217
-msgid ""
-"Dump file must be a SQL type (extension \".sql\" or compressed archive \"."
-"bz2\")"
-msgstr ""
-"Data bestand moet van het SQL type zijn (extensie \".sql\" or compressed "
-"archive \".bz2\")"
+msgid "Dump file must be a SQL type (extension \".sql\" or compressed archive \".bz2\")"
+msgstr "Data bestand moet van het SQL type zijn (extensie \".sql\" or compressed archive \".bz2\")"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:166
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/ToolController.php:192
@@ -3124,9 +2861,7 @@ msgstr "Het profiel is weer toegestaan."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:262
 msgid "Oops! An error has occurred while unban the profile."
-msgstr ""
-"Ohoh! Een fout is opgetreden tijdens het ongedaan maken van een verboden "
-"profiel."
+msgstr "Ohoh! Een fout is opgetreden tijdens het ongedaan maken van een verboden profiel."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:275
 msgid "The profile has been deleted."
@@ -3161,36 +2896,20 @@ msgid "log in"
 msgstr "Inloggen"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:360
-msgid ""
-"Congratulations! Your account has been approved by our team of "
-"administrators.<br />You can now %0% to meeting new people!"
-msgstr ""
-"Gefeliciteerd! Je account is goedgekeurd door het team van beheerders.<br /"
-">Je kan nu %0% om nieuwe mensen te ontmoeten!"
+msgid "Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!"
+msgstr "Gefeliciteerd! Je account is goedgekeurd door het team van beheerders.<br />Je kan nu %0% om nieuwe mensen te ontmoeten!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:372
 msgid "Dear %0%,"
 msgstr "Beste %0%,"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:373
-msgid ""
-"You are receiving this mail because we received an application for "
-"registration with the email \"%0%\" has been provided in the form of "
-"%site_name% (%site_url%)."
-msgstr ""
-"Je ontvangt deze email omdat we een aanvraag tot registratie hebben "
-"ontvangen bij de e-mail \"% 0% \" die is verstrekt in de vorm van% site_name"
-"% (% site_url%)."
+msgid "You are receiving this mail because we received an application for registration with the email \"%0%\" has been provided in the form of %site_name% (%site_url%)."
+msgstr "Je ontvangt deze email omdat we een aanvraag tot registratie hebben ontvangen bij de e-mail \"% 0% \" die is verstrekt in de vorm van% site_name% (% site_url%)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:374
-msgid ""
-"If you think someone has used your email address without your knowledge to "
-"create an account on %site_name%, please contact us using our contact form "
-"available on our website."
-msgstr ""
-"Als je denkt dat iemand je email adres heeft gebruikt zonder dat je hiervan "
-"afwist om een account aan te maken op %site_name%, neem dan aub contact met "
-"ons op via het contactformulier op onze website."
+msgid "If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website."
+msgstr "Als je denkt dat iemand je email adres heeft gebruikt zonder dat je hiervan afwist om een account aan te maken op %site_name%, neem dan aub contact met ons op via het contactformulier op onze website."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/admin123/controllers/UserController.php:383
 msgid "Done!"
@@ -3362,12 +3081,8 @@ msgstr "Wil je ook in andere zoekmachines opgenomen worden?"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/PrivacyForm.php:37
 #, php-format
-msgid ""
-"Yes, include my profile in search results (%site_name%'s search, Google, "
-"Bing, Yahoo, etc.)."
-msgstr ""
-"Ja, inclusief mijn profiel in zoekresultaten (%site_name%'s search, Google, "
-"Bing, Yahoo, etc.)."
+msgid "Yes, include my profile in search results (%site_name%'s search, Google, Bing, Yahoo, etc.)."
+msgstr "Ja, inclusief mijn profiel in zoekresultaten (%site_name%'s search, Google, Bing, Yahoo, etc.)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/PrivacyForm.php:37
 msgid "No, do not include my profile in search results."
@@ -3382,21 +3097,12 @@ msgid "Do you want display members who viewed your profile?"
 msgstr "Wil je weergeven welke leden je profiel bekeken hebben?"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/PrivacyForm.php:39
-msgid ""
-"Yes, display members who viewed my profile (Selecting this option will allow "
-"other members to see that you visited their profile)."
-msgstr ""
-"Ja, laat de leden zien die naar mijn profiel hebben gekeken. (Deze optie "
-"gebruiken betekend ook dat andere jou ook kunnen zien)"
+msgid "Yes, display members who viewed my profile (Selecting this option will allow other members to see that you visited their profile)."
+msgstr "Ja, laat de leden zien die naar mijn profiel hebben gekeken. (Deze optie gebruiken betekend ook dat andere jou ook kunnen zien)"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/PrivacyForm.php:39
-msgid ""
-"No, don't display members who viewed my profile. (Selecting this option will "
-"prevent you from seeing who visited your profile)."
-msgstr ""
-"Nee, laat de leden niet zien die naar mijn profiel hebben gekeken. (Deze "
-"optie gebruiken betekend dat een ander jou ook nooit kan als je hun profiel "
-"bekeken hebt)"
+msgid "No, don't display members who viewed my profile. (Selecting this option will prevent you from seeing who visited your profile)."
+msgstr "Nee, laat de leden niet zien die naar mijn profiel hebben gekeken. (Deze optie gebruiken betekend dat een ander jou ook nooit kan als je hun profiel bekeken hebt)"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/PrivacyForm.php:40
 msgid "Presence:"
@@ -3441,12 +3147,8 @@ msgid "This username will be used for your site url."
 msgstr "Deze gebruikersnaam wordt gebruikt voor je site url hier."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:46
-msgid ""
-"Your password. It will be used for logging in to the site. This storage is "
-"secure, because we are using an encrypted format."
-msgstr ""
-"Je wachtwoord. Het zal worden gebruikt om in te loggen op de site. De opslag "
-"is veilig, omdat we met versleuteling werken."
+msgid "Your password. It will be used for logging in to the site. This storage is secure, because we are using an encrypted format."
+msgstr "Je wachtwoord. Het zal worden gebruikt om in te loggen op de site. De opslag is veilig, omdat we met versleuteling werken."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:55
 msgid "Terms of Service"
@@ -3483,12 +3185,8 @@ msgid "Your Date of birth:"
 msgstr "Je Geboortedatum:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:86
-msgid ""
-"Please specify your birth date using the calendar or with this format: Month/"
-"Day/Year."
-msgstr ""
-"Specificeer je geboortedatum door de internationale kalender te gebruiken: "
-"Maand/Dag/Jaar."
+msgid "Please specify your birth date using the calendar or with this format: Month/Day/Year."
+msgstr "Specificeer je geboortedatum door de internationale kalender te gebruiken: Maand/Dag/Jaar."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:88
 msgid "Your Country:"
@@ -3523,12 +3221,8 @@ msgid "Enter your post code (Zip)."
 msgstr "Geef je postcode in (ZIP)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/JoinForm.php:117
-msgid ""
-"Describe yourself in a few words. Your description should be at least 20 "
-"characters long."
-msgstr ""
-"Beschrijf jezelf in een paar woorden. Je beschrijving moet minimaal 20 "
-"karakters lang zijn."
+msgid "Describe yourself in a few words. Your description should be at least 20 characters long."
+msgstr "Beschrijf jezelf in een paar woorden. Je beschrijving moet minimaal 20 karakters lang zijn."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/SearchFriendForm.php:24
 msgid "Search a Friend of \"%0%\""
@@ -3536,11 +3230,8 @@ msgstr "Zoek iemand van \"%0%\""
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/SearchFriendForm.php:24
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/SearchVisitorForm.php:21
-msgid ""
-"Enter its First Name, Last Name, Username, Email address or ID of your Friend"
-msgstr ""
-"Geef de Voornaam, Achternaam, Gebruikersnaam, Email adres of ID van je "
-"vriend in"
+msgid "Enter its First Name, Last Name, Username, Email address or ID of your Friend"
+msgstr "Geef de Voornaam, Achternaam, Gebruikersnaam, Email adres of ID van je vriend in"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/SearchFriendForm.php:25
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/SearchVisitorForm.php:22
@@ -3552,14 +3243,8 @@ msgid "Newsletters"
 msgstr "Nieuwsbrief"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/NotificationForm.php:33
-msgid ""
-"By enabling this option, you would be likely to receive occasional news on "
-"our website and our services and offers, promotions and other benefits to "
-"our partners."
-msgstr ""
-"Door deze optie aan te zetten, vindt je het leuk om zo nu en dan nieuws op "
-"en over onze website, diensten en aanbiedingen als ook de extra voordeeltjes "
-"van onze partners te ontvangen."
+msgid "By enabling this option, you would be likely to receive occasional news on our website and our services and offers, promotions and other benefits to our partners."
+msgstr "Door deze optie aan te zetten, vindt je het leuk om zo nu en dan nieuws op en over onze website, diensten en aanbiedingen als ook de extra voordeeltjes van onze partners te ontvangen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/NotificationForm.php:34
 msgid "Message"
@@ -3593,34 +3278,23 @@ msgstr "Laatst gezien op je profiel"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:61
 msgid "For site security, you cannot change your username."
-msgstr ""
-"Voor de veiligheid van de site kan je de gekozen gebruikersnaam niet "
-"veranderen."
+msgstr "Voor de veiligheid van de site kan je de gekozen gebruikersnaam niet veranderen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:62
 msgid "Email:"
 msgstr "Email:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/EditForm.php:62
-msgid ""
-"For site security and to avoid spam, you cannot change your email address."
-msgstr ""
-"Wegens veiligheidsoverwegingen en om spam tegen te gaan, kan je niet je "
-"email adres wijzigen."
+msgid "For site security and to avoid spam, you cannot change your email address."
+msgstr "Wegens veiligheidsoverwegingen en om spam tegen te gaan, kan je niet je email adres wijzigen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/LoginFormProcessing.php:51
 msgid "Oops! \"%0%\" is not associated with any %site_name% account."
 msgstr "Ohoh! \"%0%\" is niet gekoppeld met enig %site_name% account."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/LoginFormProcessing.php:62
-msgid ""
-"Oops! This password you entered is incorrect.<br /> Please try again (make "
-"sure your caps lock is off).<br /> Forgot your password? <a href=\"%0%"
-"\">Request a new one</a>."
-msgstr ""
-"Ohoh! Het ingegeven wachtwoord is onjuist.<br /> Probeer opnieuw (let op je "
-"Caps-Lock).<br />Wachtwoord vergeten? <a href=\"%0%\">Vraag een nieuwe aan.</"
-"a>."
+msgid "Oops! This password you entered is incorrect.<br /> Please try again (make sure your caps lock is off).<br /> Forgot your password? <a href=\"%0%\">Request a new one</a>."
+msgstr "Ohoh! Het ingegeven wachtwoord is onjuist.<br /> Probeer opnieuw (let op je Caps-Lock).<br />Wachtwoord vergeten? <a href=\"%0%\">Vraag een nieuwe aan.</a>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/NotificationFormProcessing.php:40
 msgid "Your notifications settings have been saved successfully!"
@@ -3631,12 +3305,8 @@ msgid "Your privacy settings have been saved successfully!"
 msgstr "Je privacy instellingen zijn met succes opgeslagen!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/AvatarFormProcessing.php:41
-msgid ""
-"Your avatar has been received! But it will be visible once approved by our "
-"moderators. Please do not send a new avatar because this is useless!"
-msgstr ""
-"Je avatar is ontvangen! Deze wordt zichtbaar als een moderator hem heeft "
-"goedgekeurd. Opnieuw een avatar sturen heeft geen zin!"
+msgid "Your avatar has been received! But it will be visible once approved by our moderators. Please do not send a new avatar because this is useless!"
+msgstr "Je avatar is ontvangen! Deze wordt zichtbaar als een moderator hem heeft goedgekeurd. Opnieuw een avatar sturen heeft geen zin!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/AvatarFormProcessing.php:42
 msgid "Your avatar has been updated successfully!"
@@ -3649,29 +3319,19 @@ msgstr "Geen referenties"
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/JoinFormProcessing.php:60
 msgid ""
 "An error occurred during registration!<br />\n"
-"            Please try again with other information in the form fields or "
-"come back later."
+"            Please try again with other information in the form fields or come back later."
 msgstr ""
 "Er is een fout opgetreden tijdens de registratie!<br />\n"
-"            Probeer opnieuw met de juiste informatie in de velden of kom "
-"later nog eens."
+"            Probeer opnieuw met de juiste informatie in de velden of kom later nog eens."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/JoinFormProcessing.php:94
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/JoinFormProcessing.php:114
-msgid ""
-"An error occurred during registration!<br /> Please try again with other "
-"information in the form fields or come back later."
-msgstr ""
-"Er is een fout opgetreden tijdens de registratie!<br /> Probeer opnieuw met "
-"de juiste informatie in de velden of kom later nog eens."
+msgid "An error occurred during registration!<br /> Please try again with other information in the form fields or come back later."
+msgstr "Er is een fout opgetreden tijdens de registratie!<br /> Probeer opnieuw met de juiste informatie in de velden of kom later nog eens."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/DesignFormProcessing.php:41
-msgid ""
-"Your Wallpaper has been received! But it will be visible once approved by "
-"our moderators. Please do not send a new Wallpaper because this is useless!"
-msgstr ""
-"Je Achtergrond is ontvangen! Deze wordt zichtbaar als een moderator hem "
-"heeft goedgekeurd. Opnieuw een Achtergrond sturen heeft geen zin!"
+msgid "Your Wallpaper has been received! But it will be visible once approved by our moderators. Please do not send a new Wallpaper because this is useless!"
+msgstr "Je Achtergrond is ontvangen! Deze wordt zichtbaar als een moderator hem heeft goedgekeurd. Opnieuw een Achtergrond sturen heeft geen zin!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/forms/processing/DesignFormProcessing.php:42
 msgid "Your Wallpaper has been updated successfully!"
@@ -3726,8 +3386,7 @@ msgstr "Je kan je eigen vriend niet zijn."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/assets/ajax/FriendAjax.php:65
 msgid "Unable to add to friends list, please try later."
-msgstr ""
-"Niet mogelijk om een vrienden lijst toe te voegen, probeer later nog eens."
+msgstr "Niet mogelijk om een vrienden lijst toe te voegen, probeer later nog eens."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/assets/ajax/FriendAjax.php:69
 msgid "This profile already exists in your friends list."
@@ -3758,33 +3417,20 @@ msgid "The friends we been deleted."
 msgstr "De vrienden die we hebben verwijderd."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/assets/ajax/FriendAjax.php:141
-msgid ""
-"Hello %0%!<br /><strong>%1%</strong> sent you a friendship request on %2%."
-"<br /> <a href=\"%3%\">Click here</a> to see your friend request."
-msgstr ""
-"Hallo %0%!<br /><strong>%1%</strong> stuurde je een vriendschapsverzoek op "
-"%2%.<br /> <a href=\"%3%\">Klik hier</a> om het vriendschapsverzoek te zien.."
+msgid "Hello %0%!<br /><strong>%1%</strong> sent you a friendship request on %2%.<br /> <a href=\"%3%\">Click here</a> to see your friend request."
+msgstr "Hallo %0%!<br /><strong>%1%</strong> stuurde je een vriendschapsverzoek op %2%.<br /> <a href=\"%3%\">Klik hier</a> om het vriendschapsverzoek te zien.."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/assets/ajax/FriendAjax.php:150
 msgid "%0% wants to be friends with you on %1%"
 msgstr "%0% wil een vriend van je zijn op %1%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/FriendController.php:57
-msgid ""
-"The Hot Friend of %0%. Meet new people and make new friends, sex friends, "
-"hot friends for Flirt, Speed Dating or social relationship with %site_name%"
-msgstr ""
-"De Hot Friend van %0%. Ontmoet nieuwe mensen en maak nieuwe vrienden, sex "
-"maatjes, hete vrienden om te flirten, speeddaten of gewoon vriendschap met "
-"%site_name%"
+msgid "The Hot Friend of %0%. Meet new people and make new friends, sex friends, hot friends for Flirt, Speed Dating or social relationship with %site_name%"
+msgstr "De Hot Friend van %0%. Ontmoet nieuwe mensen en maak nieuwe vrienden, sex maatjes, hete vrienden om te flirten, speeddaten of gewoon vriendschap met %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/FriendController.php:62
-msgid ""
-"friend,friends,girl friend,boy friend,sex friend,hot friend,new friend,"
-"friendship,dating,flirt,%0%"
-msgstr ""
-"vriend, vriendin,vienden,sex vriend,sex maatje,hete vriend, heet vriendje,"
-"heet vriendinnetje,vriendschap,dating,daten,flirt,flirten,%0%"
+msgid "friend,friends,girl friend,boy friend,sex friend,hot friend,new friend,friendship,dating,flirt,%0%"
+msgstr "vriend, vriendin,vienden,sex vriend,sex maatje,hete vriend, heet vriendje,heet vriendinnetje,vriendschap,dating,daten,flirt,flirten,%0%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/FriendController.php:76
 msgid "No Friend found on the profile of \"%0%\""
@@ -3856,36 +3502,23 @@ msgstr "Gebruikersnaam: %0%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SignupController.php:63
 msgid "Free Sign Up to meet %0% on %site_name%, The social dating site!"
-msgstr ""
-"Gratis Inschrijven om %0% te ontmoeten op %site_name%, De social dating site!"
+msgstr "Gratis Inschrijven om %0% te ontmoeten op %site_name%, De social dating site!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SignupController.php:63
 msgid "Free Sign Up for Online Social Dating!"
 msgstr "Gratis inschrijven voor Online Social Dating!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SignupController.php:64
-msgid ""
-"Free Sign up for Meet <span class=\"pink2\">%0%</span> (<span class="
-"\"pink1\">%1%</span>) on <span class=\"pink2\">%site_name%</span>!"
-msgstr ""
-"Schrijf je gratis is en ontmoet <span class=\"pink2\">%0%</span> (<span "
-"class=\"pink1\">%1%</span>) op <span class=\"pink2\">%site_name%</span>!"
+msgid "Free Sign up for Meet <span class=\"pink2\">%0%</span> (<span class=\"pink1\">%1%</span>) on <span class=\"pink2\">%site_name%</span>!"
+msgstr "Schrijf je gratis is en ontmoet <span class=\"pink2\">%0%</span> (<span class=\"pink1\">%1%</span>) op <span class=\"pink2\">%site_name%</span>!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SignupController.php:64
 msgid "Join Now on %site_name%!"
 msgstr "Doe mee op %site_name%!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SignupController.php:65
-msgid ""
-"Sign Up today for meet friends, sex friends, singles, families, neighbors "
-"and many others people near or far from you! %site_name% is a free social "
-"dating with profiles, blogs, rating, hot or not, video chat rooms, ..."
-msgstr ""
-"Schrijf Je Vandaag Gratis in en ontmoet vrienden, sex maatjes, "
-"alleenstaande, singles, families, buren en vele andere mensen vlakbij of "
-"verweg van je! %site_name% is een gratis dating site met vele profielen, "
-"blogs, waarderingen, Hot or Not, video, foto's en ja... Chat Rooms "
-"(eventueel met Webcam)...."
+msgid "Sign Up today for meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blogs, rating, hot or not, video chat rooms, ..."
+msgstr "Schrijf Je Vandaag Gratis in en ontmoet vrienden, sex maatjes, alleenstaande, singles, families, buren en vele andere mensen vlakbij of verweg van je! %site_name% is een gratis dating site met vele profielen, blogs, waarderingen, Hot or Not, video, foto's en ja... Chat Rooms (eventueel met Webcam)...."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SignupController.php:72
 msgid "Sign Up for Free Online Dating - STEP 2/3"
@@ -3948,32 +3581,20 @@ msgid "Meet %0% %1% | %2% - %3%"
 msgstr "Ontmoet %0% %1% | %2% - %3%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/ProfileController.php:108
-msgid ""
-"Meet <span class=\"pH1\">%0%</span> on <span class=\"pH0\">%site_name%</span>"
-msgstr ""
-"Ontmoet <span class=\"pH1\">%0%</span> op <span class=\"pH0\">%site_name%</"
-"span>"
+msgid "Meet <span class=\"pH1\">%0%</span> on <span class=\"pH0\">%site_name%</span>"
+msgstr "Ontmoet <span class=\"pH1\">%0%</span> op <span class=\"pH0\">%site_name%</span>"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/ProfileController.php:110
-msgid ""
-"A <span class=\"pH1\">%0%</span> of <span class=\"pH3\">%1% years</span>, "
-"from <span class=\"pH2\">%2%, %3% %4%</span>"
-msgstr ""
-"Een <span class=\"pH1\">%0%</span> van <span class=\"pH3\">%1% jaar</span>, "
-"uit <span class=\"pH2\">%2%, %3% %4%</span>"
+msgid "A <span class=\"pH1\">%0%</span> of <span class=\"pH3\">%1% years</span>, from <span class=\"pH2\">%2%, %3% %4%</span>"
+msgstr "Een <span class=\"pH1\">%0%</span> van <span class=\"pH3\">%1% jaar</span>, uit <span class=\"pH2\">%2%, %3% %4%</span>"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/ProfileController.php:129
 msgid "Meet %0% near here!"
 msgstr "Ontmoet %0% in de buurt!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/ProfileController.php:184
-msgid ""
-"Whoops! The \"%0%\" profile is only visible to members. Please <a href=\"%1%"
-"\">login</a> or <a href=\"%2%\">register</a> to see this profile."
-msgstr ""
-"Ohoh! Het profiel van \"%0%\" is alleen zichtbaar voor leden. Klik op <a "
-"href=\"%1%\">login</a> of <a href=\"%2%\">registreer</a> om het profiel te "
-"zien."
+msgid "Whoops! The \"%0%\" profile is only visible to members. Please <a href=\"%1%\">login</a> or <a href=\"%2%\">register</a> to see this profile."
+msgstr "Ohoh! Het profiel van \"%0%\" is alleen zichtbaar voor leden. Klik op <a href=\"%1%\">login</a> of <a href=\"%2%\">registreer</a> om het profiel te zien."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/ProfileController.php:189
 msgid "Whoops! The \"%0%\" profile is not available to you."
@@ -3984,18 +3605,12 @@ msgid "Whoops! The \"%0%\" profile is not found."
 msgstr "Ohoh! Het profiel van \"%0%\" is niet gevonden."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/VisitorController.php:47
-msgid ""
-"The Last Visitors of %0%. Meet new people and make new visitors on your "
-"social profile, Make new Visitors and Friends with %site_name%"
-msgstr ""
-"De laatste bezoekers van %0%. Ontmoet nieuwe mensen en krijg bezoekers op je "
-"eigen profiel, Ontmoet nieuwe mensen en krijg meer vrieden met %site_name%"
+msgid "The Last Visitors of %0%. Meet new people and make new visitors on your social profile, Make new Visitors and Friends with %site_name%"
+msgstr "De laatste bezoekers van %0%. Ontmoet nieuwe mensen en krijg bezoekers op je eigen profiel, Ontmoet nieuwe mensen en krijg meer vrieden met %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/VisitorController.php:52
 msgid "visitor,friend,dating,social networking,visitors,spy,profile,social,%0%"
-msgstr ""
-"bezoeker,vriend,vriendin,dating,daten,social networking,bezoekers,spion,"
-"profiel,social,%0%"
+msgstr "bezoeker,vriend,vriendin,dating,daten,social networking,bezoekers,spion,profiel,social,%0%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/VisitorController.php:67
 msgid "No Visitors found for the profile of \"%0%\""
@@ -4054,12 +3669,10 @@ msgstr "Verwijder Account"
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SettingController.php:119
 msgid ""
 "<span class=\"bold green1\">Great, you stay with us!<br />\n"
-"            You see, you will not regret it!<br />We will do our best to you "
-"our %site_name%!</span>"
+"            You see, you will not regret it!<br />We will do our best to you our %site_name%!</span>"
 msgstr ""
 "<span class=\"bold green1\">Geweldig, je blijft bij ons!<br />\n"
-"            Je zult zien dat je er geen spijt van krijgt!<br />We doen onze "
-"best voor je op %site_name%!</span>"
+"            Je zult zien dat je er geen spijt van krijgt!<br />We doen onze best voor je op %site_name%!</span>"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SettingController.php:125
 msgid "Are you really sure you want to delete your account?"
@@ -4090,10 +3703,8 @@ msgid "Hello <em>%0%</em>, welcome to %site_name%!"
 msgstr "Hallo <em>%0%</em>, welkom op %site_name%!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/BrowseController.php:34
-msgid ""
-"Empty search result. Please try again with wider or new search parameters."
-msgstr ""
-"Leeg zoek resultaat. Probeer opnieuw met andere trefwoorden of parameters."
+msgid "Empty search result. Please try again with wider or new search parameters."
+msgstr "Leeg zoek resultaat. Probeer opnieuw met andere trefwoorden of parameters."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/BrowseController.php:39
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/BrowseController.php:40
@@ -4106,9 +3717,7 @@ msgstr "Ontmoet Nieuwe Mensen met %0%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/BrowseController.php:42
 msgid "Meet new People and Friends near you with %site_name% - Browse Members"
-msgstr ""
-"Ontmoet nieuwe Mensen en Vrienden bij je in de buurt met %site_name% - Leden "
-"Doorbladeren"
+msgstr "Ontmoet nieuwe Mensen en Vrienden bij je in de buurt met %site_name% - Leden Doorbladeren"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/SearchController.php:20
 msgid "Search Quick Profiles"
@@ -4131,36 +3740,16 @@ msgid "Meet new people here!"
 msgstr "Ontmoet hier nieuwe mensen!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/CountryController.php:52
-msgid ""
-"Free online dating in %0% %1%, meet people, find friends. Single men & women "
-"in %2% %3%"
-msgstr ""
-"Gratis online dating in %0% %1%, ontmoet mensen, vindt vrienden. "
-"Alleenstaande mannen & vrouwen in %2% %3%"
+msgid "Free online dating in %0% %1%, meet people, find friends. Single men & women in %2% %3%"
+msgstr "Gratis online dating in %0% %1%, ontmoet mensen, vindt vrienden. Alleenstaande mannen & vrouwen in %2% %3%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/CountryController.php:53
-msgid ""
-"Free online dating in %0% with single women & men. Personals, meet people & "
-"find friends in %1% on internet dating site. Find sweet love or sex dating "
-"and flirt in %2%, %3% with %site_name%"
-msgstr ""
-"Gratis online dating in %0% met alleenstaande vrouwen & mannen. Bekenden, "
-"ontmoet mensen & vindt vrienden in %1% op internet dating site. Zoek naar "
-"liefde of sex dating en flirt in %2%, %3% met %site_name%"
+msgid "Free online dating in %0% with single women & men. Personals, meet people & find friends in %1% on internet dating site. Find sweet love or sex dating and flirt in %2%, %3% with %site_name%"
+msgstr "Gratis online dating in %0% met alleenstaande vrouwen & mannen. Bekenden, ontmoet mensen & vindt vrienden in %1% op internet dating site. Zoek naar liefde of sex dating en flirt in %2%, %3% met %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/CountryController.php:54
-msgid ""
-"meeting woman, meeting man, %0%, %1%, meet people, networking, friends, "
-"communicate, meet online, online community, clubs, announces meeting, free "
-"dating, dating, %2% dating, communication, matrimonial meeting, sharing "
-"photos, flirt, finding friends, classifieds, personals, online, social "
-"networking"
-msgstr ""
-"ontmoet vrouwen, ontmoet mannen, %0%, %1%, ontmoet mensen, networking, "
-"vrienden, communiceer, ontmoet online, online community, clubs, meld "
-"ontmoetingen, gratis daten, dating, %2% dating, communicatie, paren "
-"ontmoetingen, foto's delen, flirt, vindt vrienden, advertenties, "
-"persoonlijkheden, online, social networking"
+msgid "meeting woman, meeting man, %0%, %1%, meet people, networking, friends, communicate, meet online, online community, clubs, announces meeting, free dating, dating, %2% dating, communication, matrimonial meeting, sharing photos, flirt, finding friends, classifieds, personals, online, social networking"
+msgstr "ontmoet vrouwen, ontmoet mannen, %0%, %1%, ontmoet mensen, networking, vrienden, communiceer, ontmoet online, online community, clubs, meld ontmoetingen, gratis daten, dating, %2% dating, communicatie, paren ontmoetingen, foto's delen, flirt, vindt vrienden, advertenties, persoonlijkheden, online, social networking"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/CountryController.php:55
 msgid "Meet new people in %0% %1%"
@@ -4185,12 +3774,8 @@ msgid "Users Birthday %0%"
 msgstr "Gebruikers Verjaardag %0%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/BirthdayController.php:35
-msgid ""
-"birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,"
-"social"
-msgstr ""
-"verjaardag,geboortedatum,geboren,vriend,dating,social networking,profiel,"
-"social"
+msgid "birthday,birthdate,anniversary,birth,friend,dating,social networking,profile,social"
+msgstr "verjaardag,geboortedatum,geboren,vriend,dating,social networking,profiel,social"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/user/controllers/BirthdayController.php:48
 msgid "Users Birthday (<span class=\"pH3\">%0%</span>)"
@@ -4201,12 +3786,8 @@ msgid "You men!"
 msgstr "Jullie mannen!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/hotornot/controllers/MainController.php:32
-msgid ""
-"Vote for the most beautiful women, the sexiest and hottest online dating "
-"free site!"
-msgstr ""
-"Stem op de meest mooie vrouwen, de meest sexy en heetste gratis online "
-"dating site!"
+msgid "Vote for the most beautiful women, the sexiest and hottest online dating free site!"
+msgstr "Stem op de meest mooie vrouwen, de meest sexy en heetste gratis online dating site!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/hotornot/controllers/MainController.php:33
 msgid "You women!"
@@ -4214,22 +3795,15 @@ msgstr "Jullie vrouwen!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/hotornot/controllers/MainController.php:33
 msgid "Vote for the best men, the sexiest and hottest free online dating site!"
-msgstr ""
-"Stem op de meest mooie mannen, de  meest sexy en heetste gratis online "
-"dating site!"
+msgstr "Stem op de meest mooie mannen, de  meest sexy en heetste gratis online dating site!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/hotornot/controllers/MainController.php:35
 msgid "Hot On Not - Free Online Dating Site"
 msgstr "Hot or Not - Free Online Dating Site"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/hotornot/controllers/MainController.php:37
-msgid ""
-"hot, hot or not, hotornot, sexy, rate, rating, voting, women, free, dating, "
-"speed dating, flirt"
-msgstr ""
-"hot, hot or not, hotornot,heet, sexy, rate, rating,stemmen, voting, women,"
-"vrouwen, mannen, single, married, getrouwd, bi, gay, homo, free, dating, "
-"speed dating, flirt"
+msgid "hot, hot or not, hotornot, sexy, rate, rating, voting, women, free, dating, speed dating, flirt"
+msgstr "hot, hot or not, hotornot,heet, sexy, rate, rating,stemmen, voting, women,vrouwen, mannen, single, married, getrouwd, bi, gay, homo, free, dating, speed dating, flirt"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/hotornot/controllers/MainController.php:49
 msgid "Sorry, We did not find the photo to Hot Or Not Party."
@@ -4240,21 +3814,12 @@ msgid "Online Dating Sie for Single!"
 msgstr "Online Dating Site voor Alleenstaande!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:29
-msgid ""
-"Meet new people and have meetings near you with %site_name%, the new online "
-"dating free site  new generation with webcam chat!"
-msgstr ""
-"Ontmoet nieuwe mensen en ontmoet ze bij je in de buurt met %site_name%, de "
-"nieuwe gratis online dating site van de nieuwe generatie met webcam chat!"
+msgid "Meet new people and have meetings near you with %site_name%, the new online dating free site  new generation with webcam chat!"
+msgstr "Ontmoet nieuwe mensen en ontmoet ze bij je in de buurt met %site_name%, de nieuwe gratis online dating site van de nieuwe generatie met webcam chat!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:30
-msgid ""
-"dating, free dating, online dating, people, meeting, romance, woman, man, "
-"dating site, flirt, chat, chat room, webcam, video chat, %site_name%"
-msgstr ""
-"dating, gratis dating, online dating, mensen, ontmoeten, romantisch, "
-"vrouwen, mannen, dating site, flirt, chat, chat room, webcam, video, chat, "
-"%site_name%"
+msgid "dating, free dating, online dating, people, meeting, romance, woman, man, dating site, flirt, chat, chat room, webcam, video chat, %site_name%"
+msgstr "dating, gratis dating, online dating, mensen, ontmoeten, romantisch, vrouwen, mannen, dating site, flirt, chat, chat room, webcam, video, chat, %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:31
 msgid "Free Online Dating with %site_name%!"
@@ -4329,12 +3894,8 @@ msgid "Share this site with others!"
 msgstr "Deel deze site met anderen!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:116
-msgid ""
-"Do you like %site_name% and want it even more popular, then share this site "
-"on your website, blog, discussion forum, etc..."
-msgstr ""
-"Vindt je %site_name% leuk en wil je dat het groeit ? Deel deze site dan op "
-"je website, blog, forum, Facebook, Twitter, etc... "
+msgid "Do you like %site_name% and want it even more popular, then share this site on your website, blog, discussion forum, etc..."
+msgstr "Vindt je %site_name% leuk en wil je dat het groeit ? Deel deze site dan op je website, blog, forum, Facebook, Twitter, etc... "
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:123
 msgid "Donation - Help Us"
@@ -4342,12 +3903,8 @@ msgstr "Doneer en Steun ons Bestaan"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:125
 #, php-format
-msgid ""
-"Help us pay for our servers and development of our volunteer %site_name"
-"% site."
-msgstr ""
-"Help ons om de servers en doorontwikkelingvan onze vrijwilligers %site_name"
-"% site."
+msgid "Help us pay for our servers and development of our volunteer %site_name% site."
+msgstr "Help ons om de servers en doorontwikkelingvan onze vrijwilligers %site_name% site."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/page/controllers/MainController.php:132
 msgid "Partners of %site_name%"
@@ -4508,8 +4065,7 @@ msgstr[1] "%n% Blogs Resultaten!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:132
 msgid "Search Blog Post by Category %0% - Dating Social Community Blog"
-msgstr ""
-"Doorzoek Blog postingen middels categorie %0% - Dating Social Community Blog"
+msgstr "Doorzoek Blog postingen middels categorie %0% - Dating Social Community Blog"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:134
 msgid "search,post,blog,dating,social network,community,news"
@@ -4534,12 +4090,10 @@ msgstr "zoeken,blog,dating,social netwerk,community,nieuws"
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/MainController.php:212
 msgid ""
 "Sorry, we weren't able to find the page you requested.<br />\n"
-"        May we suggest <a href=\"%0%\">exploring some tags</a> or <a href="
-"\"%1%\">make a new search</a>."
+"        May we suggest <a href=\"%0%\">exploring some tags</a> or <a href=\"%1%\">make a new search</a>."
 msgstr ""
 "Sorry, we konden de pagina waar je om vroeg niet vinden.<br />\n"
-"        Een suggestie is, <a href=\"%0%\">doorzoek met trefwoorden</a> or <a "
-"href=\"%1%\">en een nieuwe zoekpoging</a>."
+"        Een suggestie is, <a href=\"%0%\">doorzoek met trefwoorden</a> or <a href=\"%1%\">en een nieuwe zoekpoging</a>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/blog/controllers/AdminController.php:16
 msgid "Welcome to the Blog administrator mode."
@@ -4566,12 +4120,8 @@ msgid "RSS Feed List"
 msgstr "RSS Feed Lijst"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/RssController.php:23
-msgid ""
-"RSS Feed %site_name%, Free Onlide Dating Site with Webcam Chat Rooms, Meet "
-"Single People with %site_name%"
-msgstr ""
-"RSS Feed %site_name%, Gratis Onlide Dating Site met Webcam Chat Rooms, "
-"Ontmoet Single People with %site_name%"
+msgid "RSS Feed %site_name%, Free Onlide Dating Site with Webcam Chat Rooms, Meet Single People with %site_name%"
+msgstr "RSS Feed %site_name%, Gratis Onlide Dating Site met Webcam Chat Rooms, Ontmoet Single People with %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/RssController.php:72
 msgid "Not Found RSS Feed!"
@@ -4582,12 +4132,8 @@ msgid "Site Map"
 msgstr "Site Map"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/SitemapController.php:23
-msgid ""
-"Map of Website, Free Onlide Dating Site with Webcam Chat Rooms, Meet Single "
-"People with %site_name%"
-msgstr ""
-"Map van de Website, Gratis Online Dating Site met Webcam Chat Rooms, Ontmoet "
-"Alleenstaande Mensen met %site_name%"
+msgid "Map of Website, Free Onlide Dating Site with Webcam Chat Rooms, Meet Single People with %site_name%"
+msgstr "Map van de Website, Gratis Online Dating Site met Webcam Chat Rooms, Ontmoet Alleenstaande Mensen met %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/xml/controllers/SitemapController.php:75
 msgid "Not Found Site Map!"
@@ -4595,9 +4141,7 @@ msgstr "Geen Site Map Gevonden!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/inc/class/design/PaymentDesign.php:35
 msgid "The payment was aborted, no changes have been made to your account."
-msgstr ""
-"De betaling is afgebroken en er zijn geen veranderingen gemaakt op je "
-"account."
+msgstr "De betaling is afgebroken en er zijn geen veranderingen gemaakt op je account."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/inc/class/design/PaymentDesign.php:89
 msgid "Buy %0% with %1%!"
@@ -4612,12 +4156,8 @@ msgid "Price:"
 msgstr "Prijs:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:40
-msgid ""
-"Currency: %0%. 0 = Free. To change the currency, please <a href=\"%1%\">go "
-"to settings</a>."
-msgstr ""
-"Munteenheid: %0%. 0 = Free. Om de munteenheid te veranderen <a href=\"%1%"
-"\">ga naar instellingen</a>."
+msgid "Currency: %0%. 0 = Free. To change the currency, please <a href=\"%1%\">go to settings</a>."
+msgstr "Munteenheid: %0%. 0 = Free. Om de munteenheid te veranderen <a href=\"%1%\">ga naar instellingen</a>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/payment/forms/MembershipForm.php:41
 msgid "Expiration Days:"
@@ -4708,12 +4248,8 @@ msgstr "Log in of registreer om een artikel toe te voegen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/EditNoteForm.php:61
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/NoteForm.php:41
-msgid ""
-"Select a category that best fits your article. You can select up to three "
-"different categories"
-msgstr ""
-"Selecteer een categorie dat het beste past bij je artikel. Je mag er "
-"maximaal drie selecteren."
+msgid "Select a category that best fits your article. You can select up to three different categories"
+msgstr "Selecteer een categorie dat het beste past bij je artikel. Je mag er maximaal drie selecteren."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/EditNoteForm.php:64
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/NoteForm.php:44
@@ -4725,12 +4261,8 @@ msgid "Search Note Post:"
 msgstr "Zoek Artikel Posting:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/SearchNoteForm.php:19
-msgid ""
-"Enter Name, Keyword of post, Author (username, first name, last name) or ID "
-"of a Note."
-msgstr ""
-"Geef de Naam, Trefwoord van de Posting, Auteur (gebruikersnaam, voornaam, "
-"achternaam) of ID van het Artikel."
+msgid "Enter Name, Keyword of post, Author (username, first name, last name) or ID of a Note."
+msgstr "Geef de Naam, Trefwoord van de Posting, Auteur (gebruikersnaam, voornaam, achternaam) of ID van het Artikel."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/NoteFormProcessing.php:74
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/EditNoteFormProcessing.php:53
@@ -4739,12 +4271,8 @@ msgstr "je kan niet meer dan 3 categoriën selecteren."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/NoteFormProcessing.php:89
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/EditNoteFormProcessing.php:115
-msgid ""
-"Your Note has been received! But it will be visible once approved by our "
-"moderators. Please do not send a new Note because this is useless!"
-msgstr ""
-"Je Artikel is ontvangen! Deze wordt zichtbaar nadat deze is goedgekeurd door "
-"een moderator. Nogmaals het artikel sturen heeft geen zin!"
+msgid "Your Note has been received! But it will be visible once approved by our moderators. Please do not send a new Note because this is useless!"
+msgstr "Je Artikel is ontvangen! Deze wordt zichtbaar nadat deze is goedgekeurd door een moderator. Nogmaals het artikel sturen heeft geen zin!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/forms/processing/EditNoteFormProcessing.php:43
 msgid "ID Article must be unique!"
@@ -4780,9 +4308,7 @@ msgstr[1] "%n% Artikelen Resultaten!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/controllers/MainController.php:133
 msgid "Search Note Post by Category %0% - Dating Social Community Note"
-msgstr ""
-"Zoek Artikel Posting middels Categorie %0% - Dating Social Community "
-"Artikelen"
+msgstr "Zoek Artikel Posting middels Categorie %0% - Dating Social Community Artikelen"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/controllers/MainController.php:134
 msgid "search,post,blog,note,dating,social network,community,news"
@@ -4802,14 +4328,11 @@ msgstr "Zoeken met Auteur: \"%0%\" Artikel"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/controllers/MainController.php:169
 msgid "Search Note Post by Author %0% - Dating Social Community Note"
-msgstr ""
-"Zoeken naar Artikel Posting door Auteur %0% - Dating Social Community "
-"Artikelen"
+msgstr "Zoeken naar Artikel Posting door Auteur %0% - Dating Social Community Artikelen"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/controllers/MainController.php:170
 msgid "author,search,post,blog,note,dating,social network,community,news"
-msgstr ""
-"auteur,zoeken,posting,blog,artikel,dating,social network,community,nieuws"
+msgstr "auteur,zoeken,posting,blog,artikel,dating,social network,community,nieuws"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/controllers/MainController.php:181
 msgid "Search Note - Looking a post"
@@ -4838,12 +4361,10 @@ msgstr "Artikel Bewerken"
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/controllers/MainController.php:292
 msgid ""
 "Sorry, we weren't able to find the page you requested.<br />\n"
-"                May we suggest <a href=\"%0%\">exploring some tags</a> or <a "
-"href=\"%1%\">make a new search</a>."
+"                May we suggest <a href=\"%0%\">exploring some tags</a> or <a href=\"%1%\">make a new search</a>."
 msgstr ""
 "Sorry, we konden je opgevraagde pagina niet vinden.<br />\n"
-"                We adviseren je om wat andere <a href=\"%0%\">trefwoorden</"
-"a> or <a href=\"%1%\">te gebruiken in een nieuwe zoekopdracht</a>."
+"                We adviseren je om wat andere <a href=\"%0%\">trefwoorden</a> or <a href=\"%1%\">te gebruiken in een nieuwe zoekopdracht</a>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/note/controllers/AdminController.php:16
 msgid "Welcome to the Note administrator mode."
@@ -4911,12 +4432,8 @@ msgid "Whoops! The comment could not be removed!"
 msgstr "Ohoh! het commentaar kon niet worden verwijderd!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/comment/controllers/CommentController.php:31
-msgid ""
-"comment,comments,social,community,friend,social network,people,dating,post,"
-"wall,social dating"
-msgstr ""
-"commentaar,commentaren,social,community,vriend,social network,dating,posting,"
-"muur,social dating"
+msgid "comment,comments,social,community,friend,social network,people,dating,post,wall,social dating"
+msgstr "commentaar,commentaren,social,community,vriend,social network,dating,posting,muur,social dating"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/comment/controllers/CommentController.php:47
 msgid "Read Comment"
@@ -4935,10 +4452,8 @@ msgid "comment,%0%"
 msgstr "commentaar,%0%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/comment/controllers/CommentController.php:96
-msgid ""
-"No comments yet, please return to the <a href=\"%0%\">previous page</a>."
-msgstr ""
-"Geen commentaar gevonden, ga terug naar de <a href=\"%0%\">vorige pagina</a>."
+msgid "No comments yet, please return to the <a href=\"%0%\">previous page</a>."
+msgstr "Geen commentaar gevonden, ga terug naar de <a href=\"%0%\">vorige pagina</a>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/comment/controllers/CommentController.php:103
 msgid "Add a new comment"
@@ -4958,39 +4473,23 @@ msgstr "Commentaar Niet gevonden"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/comment/controllers/CommentController.php:148
 msgid "No comments yet, <a class=\"bold\" href=\"%0%\">add one</a>!"
-msgstr ""
-"Momenteel geen commentaar, <a class=\"bold\" href=\"%0%\">voeg er één toe</"
-"a>!"
+msgstr "Momenteel geen commentaar, <a class=\"bold\" href=\"%0%\">voeg er één toe</a>!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/chatroulette/controllers/HomeController.php:20
 msgid "Free Video Room, Live Speed Dating ChatRoulette"
 msgstr "Gratis Video Room, Live Speed Dating ChatRoulette"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/chatroulette/controllers/HomeController.php:21
-msgid ""
-"Free Live Speed Dating with the Chatroulette of %site_name%, Meet new people "
-"near you and make new friends, sex friends and free flirting, Free online "
-"dating site for singles without registration with Video Chat Rooms!"
-msgstr ""
-"Gratis Live Speed Dating met de Chatroulette van %site_name%,Ontmoet nieuwe "
-"mensen bij je in de buurt, sex maatjes en gratis flirten, Gratis online "
-"dating site voor alleenstaande zonder registratie met Video Chat Rooms!"
+msgid "Free Live Speed Dating with the Chatroulette of %site_name%, Meet new people near you and make new friends, sex friends and free flirting, Free online dating site for singles without registration with Video Chat Rooms!"
+msgstr "Gratis Live Speed Dating met de Chatroulette van %site_name%,Ontmoet nieuwe mensen bij je in de buurt, sex maatjes en gratis flirten, Gratis online dating site voor alleenstaande zonder registratie met Video Chat Rooms!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/chatroulette/controllers/HomeController.php:22
-msgid ""
-"chat, chatroulette, sex friend, single, speed dating, meet singles, dating, "
-"free dating, chat room, chat webcam"
-msgstr ""
-"chat, chatroulette, sex maatje, alleenstaande, speed dating, ontmoet "
-"alleenstaande, dating, gratis dating, chat room, chat webcam"
+msgid "chat, chatroulette, sex friend, single, speed dating, meet singles, dating, free dating, chat room, chat webcam"
+msgstr "chat, chatroulette, sex maatje, alleenstaande, speed dating, ontmoet alleenstaande, dating, gratis dating, chat room, chat webcam"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/chatroulette/controllers/HomeController.php:23
-msgid ""
-"Welcome to <span class=\"pH1\">Speed Dating ChatRoulette</span> of <span "
-"class=\"pH0\">%site_name%</span>!"
-msgstr ""
-"Welkom bij de <span class=\"pH1\">Speed Dating ChatRoulette</span> van <span "
-"class=\"pH0\">%site_name%</span>!"
+msgid "Welcome to <span class=\"pH1\">Speed Dating ChatRoulette</span> of <span class=\"pH0\">%site_name%</span>!"
+msgstr "Welkom bij de <span class=\"pH1\">Speed Dating ChatRoulette</span> van <span class=\"pH0\">%site_name%</span>!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/forms/EditPictureForm.php:33
 msgid "Name of your photo:"
@@ -5013,20 +4512,12 @@ msgid "Tip:"
 msgstr "Tip:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/forms/PictureForm.php:47
-msgid ""
-"You can select multiple photos at once by clicking multiple files while "
-"holding down the \"CTRL\" key."
-msgstr ""
-"Je kan meerdere foto's tegelijk selecteren door te klikken op meerdere "
-"foto's tegelijk met de \"CTRL\" toets ingedrukt. "
+msgid "You can select multiple photos at once by clicking multiple files while holding down the \"CTRL\" key."
+msgstr "Je kan meerdere foto's tegelijk selecteren door te klikken op meerdere foto's tegelijk met de \"CTRL\" toets ingedrukt. "
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/forms/PictureForm.php:48
-msgid ""
-"Please be patient while downloading pictures, this may take time (especially "
-"if you download a lot of photos at once)."
-msgstr ""
-"Gelieve even geduld te hebben tijdens het downloaden van foto's. Dit kan "
-"enige tijd kosten (vooral als je meerdere foto's tegelijkertijd download)"
+msgid "Please be patient while downloading pictures, this may take time (especially if you download a lot of photos at once)."
+msgstr "Gelieve even geduld te hebben tijdens het downloaden van foto's. Dit kan enige tijd kosten (vooral als je meerdere foto's tegelijkertijd download)"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/forms/SearchPictureForm.php:19
 msgid "ID or Name of Picture:"
@@ -5037,12 +4528,8 @@ msgid "Please add a category before you add some photos."
 msgstr "Voeg eerst een categorie toe voordat je wat foto's toevoegd."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/forms/processing/PictureFormProcessing.php:112
-msgid ""
-"Your photo(s) has been received! But it will be visible once approved by our "
-"moderators. Please do not send a new photo(s) because this is useless!"
-msgstr ""
-"Je foto(s) zijn ontvangen! Deze is/zijn zichtbaar nadat deze is/zijn "
-"goedgekeurd door een moderator. Nogmaals het insturen heeft geen zin!"
+msgid "Your photo(s) has been received! But it will be visible once approved by our moderators. Please do not send a new photo(s) because this is useless!"
+msgstr "Je foto(s) zijn ontvangen! Deze is/zijn zichtbaar nadat deze is/zijn goedgekeurd door een moderator. Nogmaals het insturen heeft geen zin!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/forms/processing/PictureFormProcessing.php:113
 msgid "Your photo(s) has been added successfully!"
@@ -5053,12 +4540,8 @@ msgid "Your photo has been updated successfully!"
 msgstr "Je foto is met succes bijgewerkt!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:33
-msgid ""
-"picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,"
-"picture dating"
-msgstr ""
-"foto,foto's,afbeeldingen,album,albums,picture,foto album,foto gallerij,"
-"gallerij,foto dating"
+msgid "picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,picture dating"
+msgstr "foto,foto's,afbeeldingen,album,albums,picture,foto album,foto gallerij,gallerij,foto dating"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:52
 msgid "Add some new Pictures"
@@ -5069,10 +4552,8 @@ msgid "Edit Picture"
 msgstr "Bewerk Foto"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:76
-msgid ""
-"%0%'s Albums | Picture Albums of the Dating Social Community - %site_name%"
-msgstr ""
-"%0%'s Albums | Foto Albums van de Dating Social Community - %site_name%"
+msgid "%0%'s Albums | Picture Albums of the Dating Social Community - %site_name%"
+msgstr "%0%'s Albums | Foto Albums van de Dating Social Community - %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:84
 msgid "Empty Photo Album."
@@ -5084,8 +4565,7 @@ msgstr "Foto Gallerij Community"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:117
 msgid "Browse Photos From %0% | Picture Album Social Community - %site_name%"
-msgstr ""
-"Blader door de Foto's van %0% | Foto Album Social Community - %site_name% "
+msgstr "Blader door de Foto's van %0% | Foto Album Social Community - %site_name% "
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:133
 msgid "Photo not found or in pending approval."
@@ -5104,12 +4584,8 @@ msgid "Photo of %0%, %1%, %2%"
 msgstr "Foto van %0%, %1%, %2%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:143
-msgid ""
-"picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,"
-"%0%,%1%,%2%"
-msgstr ""
-"afbeelding,foto,afbeeldingen,foto's,album,albums,afbeeldingen album,photo "
-"album,gallerij,%0%,%1%,%2%"
+msgid "picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,%0%,%1%,%2%"
+msgstr "afbeelding,foto,afbeeldingen,foto's,album,albums,afbeeldingen album,photo album,gallerij,%0%,%1%,%2%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:163
 msgid "Your picture has been deleted!"
@@ -5134,20 +4610,12 @@ msgid "Search - %site_name% is a Dating Social Photo Community!"
 msgstr "Zoeken - %site_name% is een Dating Social Foto Community!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:205
-msgid ""
-"search,picture,photo, photo gallery,dating,social network,community,music,"
-"movie,news,picture sharing"
-msgstr ""
-"zoeken,afbeelding,foto,foto gallerij,dating,social network,community,muziek,"
-"film,nieuws,foto's delen"
+msgid "search,picture,photo, photo gallery,dating,social network,community,music,movie,news,picture sharing"
+msgstr "zoeken,afbeelding,foto,foto gallerij,dating,social network,community,muziek,film,nieuws,foto's delen"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/picture/controllers/MainController.php:225
-msgid ""
-"Please return to <a href=\"%1%\">go the previous page</a> or <a href=\"%1%"
-"\">add a new picture</a> in this album."
-msgstr ""
-"Ga terug naar <a href=\"%1%\">de vorige pagina</a> of <a href=\"%1%\">voeg "
-"een foto toe</a> in dit album."
+msgid "Please return to <a href=\"%1%\">go the previous page</a> or <a href=\"%1%\">add a new picture</a> in this album."
+msgstr "Ga terug naar <a href=\"%1%\">de vorige pagina</a> of <a href=\"%1%\">voeg een foto toe</a> in dit album."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:22
 msgid "Bad Request"
@@ -5162,157 +4630,92 @@ msgid "Unauthorized"
 msgstr "Ongeautoriseerd"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:33
-msgid ""
-"Your IP address or the username/password you entered were not correct. Your "
-"request was denied as you have no permission to access the data."
-msgstr ""
-"Je IP adres of je gebruikersnaam/wachtwoord die je in hebt gegeven is "
-"onjuist. Je verzoek is afgewezen omdat je geen toegang hebt tot de data."
+msgid "Your IP address or the username/password you entered were not correct. Your request was denied as you have no permission to access the data."
+msgstr "Je IP adres of je gebruikersnaam/wachtwoord die je in hebt gegeven is onjuist. Je verzoek is afgewezen omdat je geen toegang hebt tot de data."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:38
 msgid "Payment Required"
 msgstr "Betaling benodigd"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:41
-msgid ""
-"The data is not accessible at the time. The owner of the space has not yet "
-"payed their service provider."
-msgstr ""
-"De data is momenteel niet beschikbaar. De eigenaar van de ruimte heeft nog "
-"niet betaald aan de service provider."
+msgid "The data is not accessible at the time. The owner of the space has not yet payed their service provider."
+msgstr "De data is momenteel niet beschikbaar. De eigenaar van de ruimte heeft nog niet betaald aan de service provider."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:46
 msgid "Forbidden"
 msgstr "Verboden"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:49
-msgid ""
-"Your IP address or the username/password you entered were not correct. Your "
-"request was denied as you have no permission to access the data.<br />OR<br /"
-">The server was unable to serve the data that was requested."
-msgstr ""
-"Je IP adres of je gebruikersnaam/wachtwoord die je in hebt gegeven is "
-"onjuist. Je verzoek is afgewezen omdat je geen toegang hebt tot de data.<br /"
-">OF<br />De server kon niet de data geven waar je om vroeg."
+msgid "Your IP address or the username/password you entered were not correct. Your request was denied as you have no permission to access the data.<br />OR<br />The server was unable to serve the data that was requested."
+msgstr "Je IP adres of je gebruikersnaam/wachtwoord die je in hebt gegeven is onjuist. Je verzoek is afgewezen omdat je geen toegang hebt tot de data.<br />OF<br />De server kon niet de data geven waar je om vroeg."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:54
 msgid "Method Not Allowed"
 msgstr "Methode Niet Toegestaan"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:57
-msgid ""
-"A request was made of a resource using a request method not supported by "
-"that resource;[2] for example, using GET on a form which requires data to be "
-"presented via POST, or using PUT on a read-only resource."
-msgstr ""
-"Een verzoek die is gedaan dooe een bron methode die niet is ondersteund;[2] "
-"als voorbeeld, dmv GET op een formulier welke data vereist die aanwezig is "
-"via POST, of door gebruik making van PUT op een alleen-lezen bron."
+msgid "A request was made of a resource using a request method not supported by that resource;[2] for example, using GET on a form which requires data to be presented via POST, or using PUT on a read-only resource."
+msgstr "Een verzoek die is gedaan dooe een bron methode die niet is ondersteund;[2] als voorbeeld, dmv GET op een formulier welke data vereist die aanwezig is via POST, of door gebruik making van PUT op een alleen-lezen bron."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:62
 msgid "Internal Server Error"
 msgstr "Interne Server Error"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:65
-msgid ""
-"The server encountered an error. This is most often caused by a scripting "
-"problem, a failed database access attempt, or other similar reasons.<br /"
-">Please come back later!"
-msgstr ""
-"De server stelde een fout vast. Meestal door een script probleem, een fout "
-"met database-toegang of andere soortgelijke problemen.<br />Probeer later "
-"nog eens!"
+msgid "The server encountered an error. This is most often caused by a scripting problem, a failed database access attempt, or other similar reasons.<br />Please come back later!"
+msgstr "De server stelde een fout vast. Meestal door een script probleem, een fout met database-toegang of andere soortgelijke problemen.<br />Probeer later nog eens!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:70
 msgid "Not Implemented"
 msgstr "Niet Geïmplementeerd"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:73
-msgid ""
-"The method you are using to access the document can not be performed by the "
-"server.<br />Possible methods include:"
-msgstr ""
-"De methode die je gebruikt om toegang tot het document kan niet worden "
-"uitgevoerd door de server <br /> Mogelijke methoden zijn:"
+msgid "The method you are using to access the document can not be performed by the server.<br />Possible methods include:"
+msgstr "De methode die je gebruikt om toegang tot het document kan niet worden uitgevoerd door de server <br /> Mogelijke methoden zijn:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:87
 msgid "Bad Gateway"
 msgstr "Slechte Gateway"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:90
-msgid ""
-"The server was acting as a gateway or proxy and received an invalid response "
-"from the upstream server."
-msgstr ""
-"De server werd als gateway of proxy gebruikt en ontving een ongeldig "
-"antwoord van de upstream-server."
+msgid "The server was acting as a gateway or proxy and received an invalid response from the upstream server."
+msgstr "De server werd als gateway of proxy gebruikt en ontving een ongeldig antwoord van de upstream-server."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:95
 msgid "Gateway Timeout"
 msgstr "Gateway Timeout"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:98
-msgid ""
-"Most likely the client has lost connectivity (disconnected from the "
-"internet) or the client's host is having technical difficulties.<br /> This "
-"could also meanthat a server that allows access to the requested server is "
-"down, having bandwidth/load issues, or otherwise unavailable."
-msgstr ""
-"Waarschijnlijk is de verbinding verbroken (onderbreking van het internet) of "
-"de provider heeft technische problemen. <br /> Dit kan ook een server zijn "
-"die het mogelijk maakt dat de toegang tot de opgevraagde server down is. Dit "
-"kan een bandbreedte/belasting kwestie of op een andere wijze niet "
-"beschikbaar."
+msgid "Most likely the client has lost connectivity (disconnected from the internet) or the client's host is having technical difficulties.<br /> This could also meanthat a server that allows access to the requested server is down, having bandwidth/load issues, or otherwise unavailable."
+msgstr "Waarschijnlijk is de verbinding verbroken (onderbreking van het internet) of de provider heeft technische problemen. <br /> Dit kan ook een server zijn die het mogelijk maakt dat de toegang tot de opgevraagde server down is. Dit kan een bandbreedte/belasting kwestie of op een andere wijze niet beschikbaar."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:103
 msgid "HTTP Version Not Supported"
 msgstr "HTTP Versie Niet Ondersteund"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/error/controllers/HttpController.php:106
-msgid ""
-"The server does not support the HTTP protocol version used in the request."
-msgstr ""
-"De server ondersteund niet de HTTP protocol versie die in het verzoek is "
-"gebruikt."
+msgid "The server does not support the HTTP protocol version used in the request."
+msgstr "De server ondersteund niet de HTTP protocol versie die in het verzoek is gebruikt."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/config/Permission.php:21
-msgid ""
-"For security reasons, you do not have the right to generate a new password. "
-"To disable this security option, you must go to the Permission file of "
-"\"lost-password\" module"
-msgstr ""
-"Om veiligheidsredenen, heb je geen rechten om een nieuw wachtwoord te "
-"genereren. Om deze optie uit te schakelen moet naar de Bestands-Permissie "
-"van de \"lost-password\" module gaan."
+msgid "For security reasons, you do not have the right to generate a new password. To disable this security option, you must go to the Permission file of \"lost-password\" module"
+msgstr "Om veiligheidsredenen, heb je geen rechten om een nieuw wachtwoord te genereren. Om deze optie uit te schakelen moet naar de Bestands-Permissie van de \"lost-password\" module gaan."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/forms/ForgotPasswordForm.php:35
 msgid "Generate a new password!"
 msgstr "Genereer een nieuw wachtwoord!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcessing.php:30
-msgid ""
-"Oops, this \"%0%\" is not associated with any %site_name% account. Please, "
-"make sure that you entered the e-mail address used in creating your account."
-msgstr ""
-"Ohoh!, de \"%0%\" is niet gekoppeld aan enig %site_name% account. Gelieve er "
-"zeker van te zijn dat het ingegeven email adres gelijk is bij destijds "
-"aanmaken van het account."
+msgid "Oops, this \"%0%\" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account."
+msgstr "Ohoh!, de \"%0%\" is niet gekoppeld aan enig %site_name% account. Gelieve er zeker van te zijn dat het ingegeven email adres gelijk is bij destijds aanmaken van het account."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcessing.php:41
-msgid ""
-"Hello %0%!<br />Somebody (from the IP address %1%) has requested a new "
-"password for their account."
-msgstr ""
-"Hallo %0%!<br />Iemand (met het IP adres %1%) heeft een verzoek ingedient "
-"voor een nieuw wachtwoord voor het account"
+msgid "Hello %0%!<br />Somebody (from the IP address %1%) has requested a new password for their account."
+msgstr "Hallo %0%!<br />Iemand (met het IP adres %1%) heeft een verzoek ingedient voor een nieuw wachtwoord voor het account"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcessing.php:42
-msgid ""
-"If you requested for this, click on the link below, otherwise ignore this "
-"email and your password will remain unchanged."
-msgstr ""
-"Als je hierom hebt verzocht, klik dan op onderstaande link. Anders deze mail "
-"als niet verzonden beschouwen en het wachtwoord blijft ongewijzigd."
+msgid "If you requested for this, click on the link below, otherwise ignore this email and your password will remain unchanged."
+msgstr "Als je hierom hebt verzocht, klik dan op onderstaande link. Anders deze mail als niet verzonden beschouwen en het wachtwoord blijft ongewijzigd."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcessing.php:49
 msgid "Request for new password - %site_name%"
@@ -5335,12 +4738,8 @@ msgid "Oops! Email or hash is invalid."
 msgstr "Ohoh! Email of hash is ongeldig."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/controllers/MainController.php:47
-msgid ""
-"Hello!<br />Your password has been changed to <em>\"%0%\"</em>.<br />Please "
-"change it next time you login."
-msgstr ""
-"Hallo!<br />Je wachtwoord is veranderd naar <em>\"%0%\"</em>.<br />Gelieve "
-"dit de volgende keer na het inloggen te wijzigen."
+msgid "Hello!<br />Your password has been changed to <em>\"%0%\"</em>.<br />Please change it next time you login."
+msgstr "Hallo!<br />Je wachtwoord is veranderd naar <em>\"%0%\"</em>.<br />Gelieve dit de volgende keer na het inloggen te wijzigen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/lost-password/controllers/MainController.php:53
 msgid "Your new password - %site_name%"
@@ -5359,27 +4758,16 @@ msgid "Free Chat Room Dating"
 msgstr "Gratis Chat Room Dating"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/chat/controllers/HomeController.php:21
-msgid ""
-"Find Your Match at The Best Free Online Dating Site with Free Chat Rooms, "
-"Single Chat Meet People"
-msgstr ""
-"Vindt je Match op De Beste Gratis Online Dating Site met Gratis Chat Rooms, "
-"Alleenstaande Chat om Mensen te Ontmoeten"
+msgid "Find Your Match at The Best Free Online Dating Site with Free Chat Rooms, Single Chat Meet People"
+msgstr "Vindt je Match op De Beste Gratis Online Dating Site met Gratis Chat Rooms, Alleenstaande Chat om Mensen te Ontmoeten"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/chat/controllers/HomeController.php:22
-msgid ""
-"chat, speed dating, meet singles, dating, free dating, chat room, chat webcam"
-msgstr ""
-"chat, speed dating, ontmoet singles, dating, gratis dating, chat room, chat "
-"webcam"
+msgid "chat, speed dating, meet singles, dating, free dating, chat room, chat webcam"
+msgstr "chat, speed dating, ontmoet singles, dating, gratis dating, chat room, chat webcam"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/chat/controllers/HomeController.php:23
-msgid ""
-"Welcome to <span class=\"pH3\">Free Chat Room</span> on <span class=\"pH0\">"
-"%site_name%</span>!"
-msgstr ""
-"Welkom op <span class=\"pH3\">Gratis Chat Room</span> op <span class=\"pH0\">"
-"%site_name%</span>!"
+msgid "Welcome to <span class=\"pH3\">Free Chat Room</span> on <span class=\"pH0\">%site_name%</span>!"
+msgstr "Welkom op <span class=\"pH3\">Gratis Chat Room</span> op <span class=\"pH0\">%site_name%</span>!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:19
 msgid "Search an Subscriber:"
@@ -5446,14 +4834,8 @@ msgid "Confirm you email address!"
 msgstr "Bevestig je email adres!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcessing.php:62
-msgid ""
-"Please activate your subscription by clicking the activation link you "
-"received by email. If you can not find the email, please look in your SPAM "
-"FOLDER and mark as not spam."
-msgstr ""
-"Activeer je inschrijving door op de activatielink te klikken die je in de "
-"mail hebt ontvangen. Zie je de mail niet direct, kijk dan eens in je SPAM "
-"folder of hij daar niet terecht is gekomen."
+msgid "Please activate your subscription by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam."
+msgstr "Activeer je inschrijving door op de activatielink te klikken die je in de mail hebt ontvangen. Zie je de mail niet direct, kijk dan eens in je SPAM folder of hij daar niet terecht is gekomen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcessing.php:72
 msgid "Oops! You are already subscribed to our newsletter."
@@ -5500,20 +4882,12 @@ msgid "Subscribe to our newsletter"
 msgstr "Schrijf je in voor onze nieuwsbrief"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/controllers/HomeController.php:19
-msgid ""
-"Newsletters - Subscribe to our newsletter %site_name% | Social networking, "
-"dating website."
-msgstr ""
-"Nieuwsbrieven - Schrijf je in voor de nieuwsbrief van %site_name% | Social "
-"networking, dating website."
+msgid "Newsletters - Subscribe to our newsletter %site_name% | Social networking, dating website."
+msgstr "Nieuwsbrieven - Schrijf je in voor de nieuwsbrief van %site_name% | Social networking, dating website."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/newsletter/controllers/HomeController.php:20
-msgid ""
-"newsletter, newsletters, subscription, email, social, social network, social "
-"networking, community, metting, dating, friends, people"
-msgstr ""
-"nieuwsbrief, nieuwsbrieven, inschrijving, email,social network, social "
-"networking, community, ontmoeten, dating, vrienden, mensen"
+msgid "newsletter, newsletters, subscription, email, social, social network, social networking, community, metting, dating, friends, people"
+msgstr "nieuwsbrief, nieuwsbrieven, inschrijving, email,social network, social networking, community, ontmoeten, dating, vrienden, mensen"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/report/config/Permission.php:22
 msgid "You must register to report the abuse."
@@ -5584,13 +4958,8 @@ msgid "Comment:"
 msgstr "Commentaar:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:36
-msgid ""
-"Please tell us why you want to report this content (scam, illegal content, "
-"adult content, etc.). Help us to eliminate scams, fake profiles, spam ... "
-"Thank you"
-msgstr ""
-"Vertel ons waarom je de inhoud wil rapporteren (scam, illegale inhoud, "
-"porno, etc). Help ons om scams, nepprofielen, spam aan te vechten... Bedankt!"
+msgid "Please tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you"
+msgstr "Vertel ons waarom je de inhoud wil rapporteren (scam, illegale inhoud, porno, etc). Help ons om scams, nepprofielen, spam aan te vechten... Bedankt!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/report/forms/ReportForm.php:37
 msgid "Report this"
@@ -5631,16 +5000,11 @@ msgstr "De rapportage is verwijderd."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/report/controllers/AdminController.php:69
 msgid "A problem occurred during the deleted of the reporting."
-msgstr ""
-"Er is een probleem opgetreden tijdens het verwijderen van de rapportage."
+msgstr "Er is een probleem opgetreden tijdens het verwijderen van de rapportage."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/love-calculator/controllers/MainController.php:48
-msgid ""
-"Love Calculator with <span class=\"pH1\">You</span> and <span class=\"pH1\">"
-"%0%</span>"
-msgstr ""
-"Liefdes Calculator met <span class=\"pH1\">Jij</span> en <span class=\"pH1\">"
-"%0%</span>"
+msgid "Love Calculator with <span class=\"pH1\">You</span> and <span class=\"pH1\">%0%</span>"
+msgstr "Liefdes Calculator met <span class=\"pH1\">Jij</span> en <span class=\"pH1\">%0%</span>"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/love-calculator/controllers/MainController.php:75
 msgid "Not Found Name for the Love Calculator!"
@@ -5651,23 +5015,16 @@ msgid "Please %0% now to make money!"
 msgstr "AUB %0% om geld te verdienen!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/inc/class/Registration.php:36
-msgid ""
-"Caution! Your account is not activated yet. You will receive an email of any "
-"decision."
-msgstr ""
-"Waarschuwing! Je account is nog niet geactiveerd. Je ontvangt ongetwijfeld "
-"een email."
+msgid "Caution! Your account is not activated yet. You will receive an email of any decision."
+msgstr "Waarschuwing! Je account is nog niet geactiveerd. Je ontvangt ongetwijfeld een email."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/inc/class/Registration.php:43
 msgid "Dear %0% %1%, welcome to affiliate platform %site_name%!"
 msgstr "Beste %0% %1%, welkom op het affiliate platform van %site_name%!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/inc/class/Registration.php:44
-msgid ""
-"Hello %0%! We are proud to welcome you as an affiliate on our %site_name%!"
-msgstr ""
-"Hallo %0%!  We zijn er trots op om je te mogen verwelkomen als een affiliate "
-"op %site_name%! "
+msgid "Hello %0%! We are proud to welcome you as an affiliate on our %site_name%!"
+msgstr "Hallo %0%!  We zijn er trots op om je te mogen verwelkomen als een affiliate op %site_name%! "
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/inc/class/Registration.php:46
 msgid "Please save the following information for future refenrence:"
@@ -5682,14 +5039,8 @@ msgid "Username: %0%."
 msgstr "Gebruikersnaam: %0%."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/inc/class/Registration.php:49
-msgid ""
-"Password: ****** (This field is hidden to protect against theft of your "
-"account. If you have forgotten your password, please request a new one <a "
-"href=\"%0%\">here</a>)."
-msgstr ""
-"Wachwoord: ****** (Dit veld is verborgen in verband met veiligheid. Ale je "
-"het wachtwoord vergeten bent, vraag dan een nieuwe aan en klik <a href=\"%0%"
-"\">hier</a>)."
+msgid "Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href=\"%0%\">here</a>)."
+msgstr "Wachwoord: ****** (Dit veld is verborgen in verband met veiligheid. Ale je het wachtwoord vergeten bent, vraag dan een nieuwe aan en klik <a href=\"%0%\">hier</a>)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/inc/class/Registration.php:57
 msgid "Dear %0% %1%, Welcome to our affiliate platform!"
@@ -5781,12 +5132,8 @@ msgid "Search an Affiliate:"
 msgstr "Zoek een Affliliate:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:19
-msgid ""
-"Enter their ID, First Name, Last Name, Username, Email, Bank Account, Sex or "
-"IP address."
-msgstr ""
-"Geef hun ID, Voornaam, Achternaam, Gebruikersnaam, Email, Bankrekening, "
-"Geslacht of IP adres."
+msgid "Enter their ID, First Name, Last Name, Username, Email, Bank Account, Sex or IP address."
+msgstr "Geef hun ID, Voornaam, Achternaam, Gebruikersnaam, Email, Bankrekening, Geslacht of IP adres."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/forms/processing/AdsAdminFormProcessing.php:25
 msgid "The Advertisements was added successfully!"
@@ -5878,8 +5225,7 @@ msgstr "De affiliate verbanning is ongedaan gemaakt."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:204
 msgid "Oops! An error has occurred while unban the affiliate."
-msgstr ""
-"Ohoh! Er is een fout opgetreden tijdens het ongedaan maken van de verbanning."
+msgstr "Ohoh! Er is een fout opgetreden tijdens het ongedaan maken van de verbanning."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/AdminController.php:217
 msgid "The affiliate has been deleted."
@@ -5898,18 +5244,12 @@ msgid "The affiliate(s) has been deleted."
 msgstr "De affiliate(s) zijn verwijderd."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/HomeController.php:20
-msgid ""
-"Become an Affiliate with the affiliate dating community platform %site_name%"
-msgstr ""
-"Wordt een Affiliate met de affiliate dating community platform %site_name%"
+msgid "Become an Affiliate with the affiliate dating community platform %site_name%"
+msgstr "Wordt een Affiliate met de affiliate dating community platform %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/HomeController.php:21
-msgid ""
-"affiliate,dating,dating site,social network,pay per click affiliate program, "
-"affiliate program"
-msgstr ""
-"affiliate,dating,dating site,social network,pay per click affiliate "
-"programma, affiliate programma"
+msgid "affiliate,dating,dating site,social network,pay per click affiliate program, affiliate program"
+msgstr "affiliate,dating,dating site,social network,pay per click affiliate programma, affiliate programma"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/affiliate/controllers/HomeController.php:26
 msgid "Affiliate Platform with %site_name%! Dating Social Affiliate"
@@ -5936,12 +5276,8 @@ msgid "Webcam Picture Party Fun"
 msgstr "Webcam Picture Party Fun"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/webcam/controllers/WebcamController.php:26
-msgid ""
-"Come take your best pictures of you and your friends on the wall of the best "
-"photo shoots!"
-msgstr ""
-"Kom en maak je mooiste foto's van jou en je vrienden op de muur van de beste "
-"foto shoots!"
+msgid "Come take your best pictures of you and your friends on the wall of the best photo shoots!"
+msgstr "Kom en maak je mooiste foto's van jou en je vrienden op de muur van de beste foto shoots!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/webcam/controllers/WebcamController.php:27
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/webcam/controllers/WebcamController.php:42
@@ -5953,24 +5289,16 @@ msgid "Webcam Video Party Fun"
 msgstr "Webcam Video Party Fun"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/webcam/controllers/WebcamController.php:41
-msgid ""
-"Come take your best videos of you and your friends on the wall of the best "
-"video shoots!"
-msgstr ""
-"Kom en maak je mooiste foto's van jou en je vrienden op de muur van de beste "
-"foto shoots!"
+msgid "Come take your best videos of you and your friends on the wall of the best video shoots!"
+msgstr "Kom en maak je mooiste foto's van jou en je vrienden op de muur van de beste foto shoots!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/SearchMailForm.php:22
 msgid "Search a message:"
 msgstr "Zoek een bericht:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/SearchMailForm.php:22
-msgid ""
-"Enter a keyword in the Subject, Contents, Author (username, first name, last "
-"name) or message ID."
-msgstr ""
-"Geef een trefwoord voor het Onderwerp, Inhoud, Auteur (gebruikersnaam, "
-"voornaam, achternaam) of bericht ID."
+msgid "Enter a keyword in the Subject, Contents, Author (username, first name, last name) or message ID."
+msgstr "Geef een trefwoord voor het Onderwerp, Inhoud, Auteur (gebruikersnaam, voornaam, achternaam) of bericht ID."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/SearchMailForm.php:23
 msgid "Subject"
@@ -6013,12 +5341,8 @@ msgid "Oops! You can not send a message to yourself."
 msgstr "Ohoh! Je kan geen berichten naar jezelf sturen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcessing.php:41
-msgid ""
-"Oops! You cannot reply to administrator! If you want to contact us, please "
-"use our <a href=\"%0%\">contact form</a>."
-msgstr ""
-"Ohoh! Je kan niet reageren als beheerder! Als je contact met ons wilt "
-"opnemen ga dan naar het <a href=\"%0%\">contact formulier</a>. "
+msgid "Oops! You cannot reply to administrator! If you want to contact us, please use our <a href=\"%0%\">contact form</a>."
+msgstr "Ohoh! Je kan niet reageren als beheerder! Als je contact met ons wilt opnemen ga dan naar het <a href=\"%0%\">contact formulier</a>. "
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcessing.php:45
 msgid "Oops! The username \"%0%\" does not exist."
@@ -6026,16 +5350,11 @@ msgstr "Ohoh! De gebruikersnaam \"%0%\" bestaat niet."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcessing.php:63
 msgid "Problem while sending the message. Please try again later."
-msgstr ""
-"Er is een probleem met het zenden van het bericht. Probeer later nog eens."
+msgstr "Er is een probleem met het zenden van het bericht. Probeer later nog eens."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcessing.php:70
-msgid ""
-"Hello %0%!<br />You have received a new message from <strong>%1%</strong>."
-"<br /> <a href=\"%2%\">Click here</a> to read your message."
-msgstr ""
-"Hallo %0%!<br />Je hebt een nieuw bericht ontvangen van <strong>%1%</strong>."
-"<br /> <a href=\"%2%\">Klik hier</a> om het bericht te lezen."
+msgid "Hello %0%!<br />You have received a new message from <strong>%1%</strong>.<br /> <a href=\"%2%\">Click here</a> to read your message."
+msgstr "Hallo %0%!<br />Je hebt een nieuw bericht ontvangen van <strong>%1%</strong>.<br /> <a href=\"%2%\">Klik hier</a> om het bericht te lezen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/forms/processing/MailFormProcessing.php:78
 msgid "New private message from %0% on %site_name%"
@@ -6045,8 +5364,7 @@ msgstr "Nieuw privé bericht van %0% op %site_name%"
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/controllers/MainController.php:243
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/controllers/MainController.php:274
 msgid "Your message could not be moved to Trash because there no exist."
-msgstr ""
-"Je bericht kon niet worden verplaats naar de Prullenmand, omdat er geen is."
+msgstr "Je bericht kon niet worden verplaats naar de Prullenmand, omdat er geen is."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/assets/ajax/MailAjax.php:54
 msgid "Your message has been moved to your Trash!"
@@ -6157,12 +5475,8 @@ msgid "Your message(s) has been deleted successfully!"
 msgstr "Je bericht(en) is/zijn met succes verwijderd!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/controllers/MainController.php:353
-msgid ""
-"Sorry, we weren't able to find the page you requested.<br />We suggest you "
-"<a href=\"%0%\">make a new search</a>."
-msgstr ""
-"Sorry, we konden de pagina die je zocht niet vinden.<br />We adviseren je om "
-"opnieuw te<a href=\"%0%\">zoeken</a>."
+msgid "Sorry, we weren't able to find the page you requested.<br />We suggest you <a href=\"%0%\">make a new search</a>."
+msgstr "Sorry, we konden de pagina die je zocht niet vinden.<br />We adviseren je om opnieuw te<a href=\"%0%\">zoeken</a>."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/modules/mail/controllers/AdminController.php:27
 msgid "No messages found!"
@@ -6203,22 +5517,12 @@ msgid "Login now!"
 msgstr "Log nu in!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/RegistrationCore.php:95
-msgid ""
-"Please activate your account by clicking the activation link you received by "
-"email. If you can not find the email, please look in your SPAM FOLDER and "
-"mark as not spam."
-msgstr ""
-"Gelieve je account te activeren door te klikken op de link in je ontvangen "
-"email. Als je de desbetreffende email niet kan vinden, kijk dan in je SPAM "
-"map en markeer ons als geen spam."
+msgid "Please activate your account by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam."
+msgstr "Gelieve je account te activeren door te klikken op de link in je ontvangen email. Als je de desbetreffende email niet kan vinden, kijk dan in je SPAM map en markeer ons als geen spam."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/RegistrationCore.php:99
-msgid ""
-"Your account must be approved by an administrator. You will receive an email "
-"of any decision."
-msgstr ""
-"Je account moet worden goedgekeurd door een beheerder. Je zult een email "
-"ontvangen van de status."
+msgid "Your account must be approved by an administrator. You will receive an email of any decision."
+msgstr "Je account moet worden goedgekeurd door een beheerder. Je zult een email ontvangen van de status."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/BirthdayCore.php:31
 msgid "Hello %0%!"
@@ -6242,42 +5546,23 @@ msgstr "Beste, %0%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/Security.php:36
 msgid "Somebody tried to connect more %0% times with the IP address: \"%1%\"."
-msgstr ""
-"Iemand probeerde meer als %0% keer in te loggen met het IP adres: \"%1%\"."
+msgstr "Iemand probeerde meer als %0% keer in te loggen met het IP adres: \"%1%\"."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/Security.php:37
-msgid ""
-"For safety reasons we have blocked access to this person for a delay of %1% "
-"minutes."
-msgstr ""
-"Om veiligheidredenen hebben we deze persoon geblokkeerd met een vertraging "
-"van %1% minuten."
+msgid "For safety reasons we have blocked access to this person for a delay of %1% minutes."
+msgstr "Om veiligheidredenen hebben we deze persoon geblokkeerd met een vertraging van %1% minuten."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/Security.php:38
-msgid ""
-"If it is you who have made ​​the connection attempts, we suggest you request a "
-"new password <a href=\"%0%\">here</a> in %1% minutes."
-msgstr ""
-"Als jij het was die de inlogpogingen, adviseren we je om een nieuw "
-"wachtwoord aan te vragen door <a href=\"%0%\">hier</a> te klikken over %1% "
-"minuten."
+msgid "If it is you who have made ​​the connection attempts, we suggest you request a new password <a href=\"%0%\">here</a> in %1% minutes."
+msgstr "Als jij het was die de inlogpogingen, adviseren we je om een nieuw wachtwoord aan te vragen door <a href=\"%0%\">hier</a> te klikken over %1% minuten."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/Security.php:39
-msgid ""
-"If you do not know the person who made ​​the connection attempts, you should "
-"be very careful and change your password to a password more complicated."
-msgstr ""
-"Als je niet weet wie de persoon was die de inlogpogingen deed, moet je "
-"voorzichtig zijn en je wachtwoord wijzigen (liefst bijna niet te raden)."
+msgid "If you do not know the person who made ​​the connection attempts, you should be very careful and change your password to a password more complicated."
+msgstr "Als je niet weet wie de persoon was die de inlogpogingen deed, moet je voorzichtig zijn en je wachtwoord wijzigen (liefst bijna niet te raden)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/Security.php:40
-msgid ""
-"We also recommend that you change the password for your mailbox, because it "
-"is in this box email we send a potential new password in case you forget."
-msgstr ""
-"We adviseren je ook om het wachtwoord van je mailbox te veranderen omdat we "
-"naar deze mailbox een mogelijk nieuw wachtwoord sturen, in het geval dat je "
-"het vergeet."
+msgid "We also recommend that you change the password for your mailbox, because it is in this box email we send a potential new password in case you forget."
+msgstr "We adviseren je ook om het wachtwoord van je mailbox te veranderen omdat we naar deze mailbox een mogelijk nieuw wachtwoord sturen, in het geval dat je het vergeet."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/Security.php:41
 msgid "Have a nice day!"
@@ -6288,28 +5573,16 @@ msgid "Security Alert : Login Attempts - %site_name%"
 msgstr "Beveiligings Melding : Login Pogingen - %site_name%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/UserCore.php:379
-msgid ""
-"Sorry, your account has not yet been activated. Please activate it by "
-"clicking the activation link that was emailed."
-msgstr ""
-"Sorry, je account is nog niet geactiveerd. Activeer het door te klikken op "
-"de activatielink die naar je is gemaild."
+msgid "Sorry, your account has not yet been activated. Please activate it by clicking the activation link that was emailed."
+msgstr "Sorry, je account is nog niet geactiveerd. Activeer het door te klikken op de activatielink die naar je is gemaild."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/UserCore.php:383
-msgid ""
-"Sorry, your account has not yet been activated. An administrator must "
-"validate your account."
-msgstr ""
-"Sorry, je account is nog niet geactiveerd. Een beheerder zal eerst je "
-"account valideren."
+msgid "Sorry, your account has not yet been activated. An administrator must validate your account."
+msgstr "Sorry, je account is nog niet geactiveerd. Een beheerder zal eerst je account valideren."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/UserCore.php:387
-msgid ""
-"Your account does not have a valid activation status. Please contact the "
-"database administrator so that it solves this problem."
-msgstr ""
-"Je account heeft geen geldige activatie statues. Neem contact op met de "
-"database beheerder om dit probleem op te lossen."
+msgid "Your account does not have a valid activation status. Please contact the database administrator so that it solves this problem."
+msgstr "Je account heeft geen geldige activatie statues. Neem contact op met de database beheerder om dit probleem op te lossen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/UserCore.php:392
 msgid "Sorry, Your account has been banned."
@@ -6324,23 +5597,19 @@ msgid "Your account has been successfully validated. You can now login!"
 msgstr "Je inschrijving is met succes gevalideerd. Je kunt nu inloggen!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/UserCore.php:425
-msgid ""
-"Oops! The url is either invalid or you already have activated your account."
+msgid "Oops! The url is either invalid or you already have activated your account."
 msgstr "Ohoh! De URL is of ongeldig of al geactiveerd voor je account."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/UserCore.php:431
 msgid "Invalid approach, please use the link that has been send to your email."
-msgstr ""
-"Ongeldige ingang. Gelieve de link te gebruiken die naar je is verstuurd via "
-"email."
+msgstr "Ongeldige ingang. Gelieve de link te gebruiken die naar je is verstuurd via email."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/PermissionCore.php:34
 msgid "Please you logged!"
 msgstr "Gelieve in te loggen!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/PermissionCore.php:39
-msgid ""
-"Please go to the administrative part of the site and log in as administrator."
+msgid "Please go to the administrative part of the site and log in as administrator."
 msgstr "Ga naar het beheerdersgedeelte van de site en log in als beheerder."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/PermissionCore.php:44
@@ -6349,8 +5618,7 @@ msgstr "Ohoh! Je bent al ingelogd."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/PermissionCore.php:49
 msgid "Please register or login to use this service."
-msgstr ""
-"Gelieve te registreren if in te loggen om van deze dienst gebruik te maken."
+msgstr "Gelieve te registreren if in te loggen om van deze dienst gebruik te maken."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/class/design/XmlDesignCore.php:50
 msgid "Latest Blog Posts"
@@ -6640,11 +5908,8 @@ msgid "The passwords do not match."
 msgstr "De wachtwoorden zijn niet eender"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcessing.php:49
-msgid ""
-"The old and new passwords are identical. So why do you change your password?"
-msgstr ""
-"Het oude en het nieuwe wachtwoord zijn hetzelfde. Waarom ben je het "
-"wachtwoord aan het wijzigen?"
+msgid "The old and new passwords are identical. So why do you change your password?"
+msgstr "Het oude en het nieuwe wachtwoord zijn hetzelfde. Waarom ben je het wachtwoord aan het wijzigen?"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcessing.php:53
 msgid "The old password is not correct."
@@ -6660,8 +5925,7 @@ msgstr "Ohoh! Je account is  al reeds geactiveerd."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcessing.php:40
 msgid "Hello %0% - We are proud to welcome you as a member of %site_name%!"
-msgstr ""
-"Hallo %0% - We zijn er trots op om je te mogen verwelkomen op %site_name%!"
+msgstr "Hallo %0% - We zijn er trots op om je te mogen verwelkomen op %site_name%!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcessing.php:41
 msgid "Your hash validation is <em>\"%0%\"</em>."
@@ -6676,12 +5940,8 @@ msgid "Username: "
 msgstr "Gebruikersnaam:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcessing.php:45
-msgid ""
-"Password: ***** (This field is hidden to protect against theft of your "
-"account)."
-msgstr ""
-"Wachtwoord: ***** (Dit veld is onleesbaar om eventuele diefstal tegen te "
-"gaan)."
+msgid "Password: ***** (This field is hidden to protect against theft of your account)."
+msgstr "Wachtwoord: ***** (Dit veld is onleesbaar om eventuele diefstal tegen te gaan)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcessing.php:60
 msgid "Your hash validation has been emailed to you."
@@ -6786,9 +6046,7 @@ msgstr "Je moet een geldige datum invoeren (Maand/Dag/Jaar)."
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/ValidateCoreAjax.php:200
 #, php-format
 msgid "You must be %d to %d years to register on the site."
-msgstr ""
-"Je dient tussen de %d en %d jaar te zijn om op deze site te mogen "
-"registreren."
+msgstr "Je dient tussen de %d en %d jaar te zijn om op deze site te mogen registreren."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/ValidateCoreAjax.php:205
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/ValidateCoreAjax.php:238
@@ -6814,9 +6072,7 @@ msgstr "Dit veld is vereist!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/ValidateCoreAjax.php:258
 msgid "Your must enter a valid url (e.g. http://www.coolonweb.com)."
-msgstr ""
-"Je dient een geldige URL in te geven (bijvoorbeeld http://www.leukophetweb."
-"nl)."
+msgstr "Je dient een geldige URL in te geven (bijvoorbeeld http://www.leukophetweb.nl)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/ajax/ValidateCoreAjax.php:283
 msgid "Captcha check failed!"
@@ -6893,18 +6149,11 @@ msgstr "Versie Naam: %0%, Versie Nummer: %1%, Versie Samengesteld: %2%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:107
 msgid "Have you made a backup of your website files, folders and database?"
-msgstr ""
-"Heb je een backup gemaakt van je website bestanden, folders en database?"
+msgstr "Heb je een backup gemaakt van je website bestanden, folders en database?"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:107
-msgid ""
-"Upgrade <span class=\"bold italic\">%software_version_name% %software_version"
-"% Build %software_build%</span> to version <span class=\"bold italic\">%0%</"
-"span>"
-msgstr ""
-"Upgrade <span class=\"bold italic\">%software_version_name% %software_version"
-"% Build %software_build%</span> naar versie <span class=\"bold italic\">%0%</"
-"span>"
+msgid "Upgrade <span class=\"bold italic\">%software_version_name% %software_version% Build %software_build%</span> to version <span class=\"bold italic\">%0%</span>"
+msgstr "Upgrade <span class=\"bold italic\">%software_version_name% %software_version% Build %software_build%</span> naar versie <span class=\"bold italic\">%0%</span>"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:110
 msgid "Description of the upgrade patch:"
@@ -6916,9 +6165,7 @@ msgstr "Instructies:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:119
 msgid "Bad \"version name, version number or version build\" of upgrade path!"
-msgstr ""
-"Slechte \"versie naam, versie nummer or version samengesteld\" van het "
-"upgrade pad!"
+msgstr "Slechte \"versie naam, versie nummer or version samengesteld\" van het upgrade pad!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:124
 msgid "Upgrade path is not valid!"
@@ -6937,12 +6184,8 @@ msgid "Status... OK!"
 msgstr "Status... OK!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:175
-msgid ""
-"The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it "
-"manually using an FTP client or SSH."
-msgstr ""
-"De upgrade directory <em>(~%0%)</em> kon niet worden verwijderd. Doe dit "
-"handmatig via een FTP client of SSH."
+msgid "The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH."
+msgstr "De upgrade directory <em>(~%0%)</em> kon niet worden verwijderd. Doe dit handmatig via een FTP client of SSH."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:176
 msgid "Status... Failure!"
@@ -6957,31 +6200,20 @@ msgid "Conclusion of Instruction:"
 msgstr "Conclusie van de Instructie:"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:231
-msgid ""
-"Unable to execute the upgrade of the database SQL.<br />Error Message: %0%"
-msgstr ""
-"Niet mogelijk om een upgrade uit te voeren op de database SQL.<br />Fout "
-"Melding: %0%"
+msgid "Unable to execute the upgrade of the database SQL.<br />Error Message: %0%"
+msgstr "Niet mogelijk om een upgrade uit te voeren op de database SQL.<br />Fout Melding: %0%"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:245
 msgid "Your site must be in maintenance mode to begin the upgrade."
-msgstr ""
-"De site moet in de onderhoud modus worden gezet om de upgrade te beginnen."
+msgstr "De site moet in de onderhoud modus worden gezet om de upgrade te beginnen."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:250
-msgid ""
-"You must put your site in development mode in order to launch the upgrade of "
-"your site!"
-msgstr ""
-"De site moet in ontwikkelaar modus gezet te worden om een upgrade uit te "
-"voeren op je site!"
+msgid "You must put your site in development mode in order to launch the upgrade of your site!"
+msgstr "De site moet in ontwikkelaar modus gezet te worden om een upgrade uit te voeren op je site!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:251
-msgid ""
-"1) Please change the permission of the ~%0% file for writing for all groups "
-"(0666 in octal)."
-msgstr ""
-"1) Verander de permissie van het ~%0% bestand voor alle groepen (0666)."
+msgid "1) Please change the permission of the ~%0% file for writing for all groups (0666 in octal)."
+msgstr "1) Verander de permissie van het ~%0% bestand voor alle groepen (0666)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:252
 msgid "2) Edit ~%0% file and find the code:"
@@ -6997,12 +6229,8 @@ msgid "3) After installation, please edit ~%0% file and find the code:"
 msgstr "3) Na de installatie, bewerk het ~%0% bestand en zoek de code::"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:260
-msgid ""
-"4) Change the permission of the file to write only for users and reading for "
-"the other groups (0644 in octal)."
-msgstr ""
-"4) Verander de permissie van het bestand naar alleen schrijven voor "
-"genruikers and aleen lezen voor andere groepen (0644)."
+msgid "4) Change the permission of the file to write only for users and reading for the other groups (0644 in octal)."
+msgstr "4) Verander de permissie van het bestand naar alleen schrijven voor genruikers and aleen lezen voor andere groepen (0644)."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/core/assets/file/UpgradeCoreFile.php:285
 msgid "You have %0% error(s):"
@@ -7023,9 +6251,7 @@ msgstr "Gratis Dating Social Community - Je IP is geblokkeerd"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/globals/views/base/others/banned.html.php:18
 msgid "banned,ban,dating site,free online dating social,social network,dating"
-msgstr ""
-"geblokkeerd,bannen,banned,ban,dating site,gratis online dating social,social "
-"network,dating"
+msgstr "geblokkeerd,bannen,banned,ban,dating site,gratis online dating social,social network,dating"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/app/system/globals/views/base/others/banned.html.php:28
 msgid "Sorry, your IP or your location is banned!"
@@ -7711,26 +6937,12 @@ msgid "Edit your Account"
 msgstr "Bewerk je Account"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
-msgid ""
-"Please enable JavaScript in your browser!<br /> This site is not "
-"inconsistent activation of JavaScript, so it is necessary to activate it via "
-"the options of your browser."
-msgstr ""
-"Zet Javascript in je browser aan!<br /> Deze site heeft geen eigen "
-"JavaScript, dus is het noodzakelijk dat dit via je eigen browser gebeurd."
+msgid "Please enable JavaScript in your browser!<br /> This site is not inconsistent activation of JavaScript, so it is necessary to activate it via the options of your browser."
+msgstr "Zet Javascript in je browser aan!<br /> Deze site heeft geen eigen JavaScript, dus is het noodzakelijk dat dit via je eigen browser gebeurd."
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
-msgid ""
-"<strong>Attention!</strong> Some of the women (or men) profiles you see on "
-"dating sites might be scams to collect money.<br /> People who is really "
-"interested in you will never ask for money.<br /> Be careful, don't send the "
-"money to anybody!"
-msgstr ""
-"<strong>Attentie!</strong> Sommige van de vrouwlijke (of mannelijke) "
-"profielen die je vaak ziet op dating sites, zijn SCAM op geld in te zamelen."
-"<br /> Mensen die echt geïnterreseerd in je zijn vragen nooit om geld. Ook "
-"niet voor een vliegticket!<br /> Wees voorzichtig,  stuur NOOIT naar iemand "
-"geld!"
+msgid "<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br /> People who is really interested in you will never ask for money.<br /> Be careful, don't send the money to anybody!"
+msgstr "<strong>Attentie!</strong> Sommige van de vrouwlijke (of mannelijke) profielen die je vaak ziet op dating sites, zijn SCAM op geld in te zamelen.<br /> Mensen die echt geïnterreseerd in je zijn vragen nooit om geld. Ook niet voor een vliegticket!<br /> Wees voorzichtig,  stuur NOOIT naar iemand geld!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
 msgid "Free Online Dating Site"
@@ -7808,12 +7020,8 @@ msgid "Uninstall"
 msgstr "De-installeren"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_8c35129889056fa929174f0e9329a348/base/main/news.inc.cpl.php:19
-msgid ""
-"Latest <a href=\"%software_website%\" title=\"%software_name%\">Software</"
-"a>'s News"
-msgstr ""
-"Laatste <a href=\"%software_website%\" title=\"%software_name%\">Software</"
-"a>Nieuws"
+msgid "Latest <a href=\"%software_website%\" title=\"%software_name%\">Software</a>'s News"
+msgstr "Laatste <a href=\"%software_website%\" title=\"%software_name%\">Software</a>Nieuws"
 
 #: /var/www/html/CmsDating/pH7DatingCms/_protected/data/cache/pH7tpl_compile/admin123_8c35129889056fa929174f0e9329a348/base/main/login.cpl.php:19
 msgid "Your IP connection is:"
@@ -8028,12 +7236,8 @@ msgstr "WAARSCHUWING!"
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.3-1.0.10/info/introduction.php:10
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.2-1.0.3/info/introduction.php:10
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/0.1.7-0.8.7/info/introduction.php:10
-msgid ""
-"Please make a backup of your site and your database before proceeding with "
-"upgrade!"
-msgstr ""
-"Maak aub een backup van je site en database, voordat je verder gaat met de "
-"upgrade!"
+msgid "Please make a backup of your site and your database before proceeding with upgrade!"
+msgstr "Maak aub een backup van je site en database, voordat je verder gaat met de upgrade!"
 
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.3-1.0.10/info/conclusion.php:11
 msgid "Now you need to delete the following files via FTP or SSH:"
@@ -8052,9 +7256,6 @@ msgid "Edit your \"%0%\" file."
 msgstr "Bewerk je \"%0%\" bestand."
 
 #: /var/www/html/CmsDating/pH7DatingCms/public/_repository/upgrade/1.0.0-1.0.1/info/conclusion.php:14
-msgid ""
-"Add M after the size of the \"upload.max_size\" variable (e.g., this: "
-"\"upload.max_size = 500M\" instead of \"upload.max_size = 500\""
-msgstr ""
-"Voeg een M toe achter de grootte van de \"upload.max_size\" variable (zoals "
-"b.v.: \"upload.max_size = 500M\" in plaats van \"upload.max_size = 500\""
+msgid "Add M after the size of the \"upload.max_size\" variable (e.g., this: \"upload.max_size = 500M\" instead of \"upload.max_size = 500\""
+msgstr "Voeg een M toe achter de grootte van de \"upload.max_size\" variable (zoals b.v.: \"upload.max_size = 500M\" in plaats van \"upload.max_size = 500\""
+
