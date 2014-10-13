@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7CMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-12 23:03+0100\n"
-"PO-Revision-Date: 2014-10-12 23:03+0100\n"
+"POT-Creation-Date: 2014-10-12 23:02+0100\n"
+"PO-Revision-Date: 2014-10-12 23:10+0100\n"
 "Last-Translator: Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language: en_US\n"
@@ -14,33 +14,33 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: English\n"
-"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
 "X-Poedit-SearchPath-0: /var/www/pH7-Social-Dating-CMS\n"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/login.cpl.php:19
 msgid "Your IP connection is:"
-msgstr ""
+msgstr "Votre adresse Ip est :"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "Days"
-msgstr ""
+msgstr "Jours"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "All"
-msgstr ""
+msgstr "Tous"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "Man"
-msgstr ""
+msgstr "Homme"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "Women"
-msgstr ""
+msgstr "Femmes"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "Couple"
-msgstr ""
+msgstr "Couple"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "Users Statistics"
@@ -52,15 +52,15 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "Today"
-msgstr ""
+msgstr "Aujourd'hui"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "Last week"
-msgstr ""
+msgstr "La semaine passée"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "This month"
-msgstr ""
+msgstr "Ce mois"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/admin123_25d4174025ab1da9909fd74674a0e360/base/main/stat.cpl.php:19
 msgid "This year (%0%)"
@@ -344,23 +344,23 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Join Now!"
-msgstr ""
+msgstr "Inscription"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Login"
-msgstr ""
+msgstr "Connexion"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Members"
-msgstr ""
+msgstr "Membres"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "People"
-msgstr ""
+msgstr "Personnes"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 #, fuzzy
@@ -369,11 +369,11 @@ msgstr "Search a Subscriber:"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Quick Search"
-msgstr ""
+msgstr "Recherche rapide"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Advanced Search"
@@ -385,7 +385,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Birthday"
-msgstr ""
+msgstr "Anniversaire"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "All Birthday"
@@ -413,7 +413,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Video Chat"
-msgstr ""
+msgstr "Chat Webcam"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Chat"
@@ -514,11 +514,11 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "My settings"
-msgstr ""
+msgstr "Mes paramètres"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Edit Profile"
@@ -538,7 +538,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Change Password"
-msgstr ""
+msgstr "Changer le mot de passe"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 #, fuzzy
@@ -552,11 +552,11 @@ msgstr "Edit the Comment"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "My Profile"
-msgstr ""
+msgstr "Mon profil"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "My Avatar"
-msgstr ""
+msgstr "Mon Avatar"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Add an Album"
@@ -564,11 +564,11 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "My Albums"
-msgstr ""
+msgstr "Mes albums"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Videos Gallery"
-msgstr ""
+msgstr "Galerie vidéos"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Add a Note"
@@ -612,7 +612,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Logout"
-msgstr ""
+msgstr "Déconnexion"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Gets Banners"
@@ -659,7 +659,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Add User"
-msgstr ""
+msgstr "Ajouter un utilisateur"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Import Users"
@@ -857,7 +857,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Payment"
-msgstr ""
+msgstr "Paiement"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Memberships List"
@@ -935,7 +935,7 @@ msgstr "Search a Subscriber:"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Video"
-msgstr ""
+msgstr "Vidéo"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Moderate Avatars"
@@ -983,7 +983,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Files"
-msgstr ""
+msgstr "Fichiers"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Public File Management"
@@ -1035,7 +1035,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Tools"
-msgstr ""
+msgstr "Outils"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Backup Management"
@@ -1074,7 +1074,7 @@ msgstr ""
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Help"
-msgstr ""
+msgstr "Aide"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Individual Ticket Support"
@@ -1094,11 +1094,11 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/top_menu.inc.cpl.php:19
 msgid "Buy a License Key"
-msgstr ""
+msgstr "Acheter une clé de licence"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
 msgid "Powered by"
-msgstr ""
+msgstr "Propulsé par"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/layout.cpl.php:19
 msgid "Please enable JavaScript in your browser!<br /> This site is not inconsistent activation of JavaScript, so it is necessary to activate it via the options of your browser."
@@ -1128,15 +1128,15 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "About Us"
-msgstr ""
+msgstr "À propos"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Help Us"
-msgstr ""
+msgstr "Aidez-nous"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Our Blog"
-msgstr ""
+msgstr "Notre blog"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 #, fuzzy
@@ -1150,11 +1150,11 @@ msgstr "Content Type:"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Our Partners"
-msgstr ""
+msgstr "Nos partenaires"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Partners"
-msgstr ""
+msgstr "Partenaires"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Links"
@@ -1170,7 +1170,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Our Team"
-msgstr ""
+msgstr "Notre équipe"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Team"
@@ -1178,7 +1178,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "About"
-msgstr ""
+msgstr "À propos"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "FAQ"
@@ -1186,15 +1186,15 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Terms of Use"
-msgstr ""
+msgstr "CGU"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Privacy"
-msgstr ""
+msgstr "Confidentialité"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Imprint"
-msgstr ""
+msgstr "Mentions légales"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Subscribe to our newsletter!"
@@ -1206,7 +1206,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Invite your friends!"
-msgstr ""
+msgstr "Inviter un ami"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/data/cache/pH7tpl_compile/public_main/base/bottom_menu.inc.cpl.php:19
 msgid "Invite"
@@ -2106,7 +2106,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:38
 msgid "City:"
-msgstr ""
+msgstr "Ville :"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:39
 msgid "State:"
@@ -2187,7 +2187,7 @@ msgstr ""
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:26
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:315
 msgid "log in"
-msgstr ""
+msgstr "connexion"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:26
 msgid "Please %0% now to make money!"
@@ -2383,7 +2383,7 @@ msgstr "No, I changed my mind and I stay with you!"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:71
 msgid "OR"
-msgstr ""
+msgstr "OU"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:72
 msgid "Yes I really want to delete my account"
@@ -3360,7 +3360,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/forms/ReportForm.php:35
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/forms/ReportForm.php:35
 msgid "Message"
@@ -3368,7 +3368,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/forms/ReportForm.php:35
 msgid "Comment"
-msgstr ""
+msgstr "Commentaire"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/forms/ReportForm.php:35
 msgid "Photo"
@@ -3376,7 +3376,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/forms/ReportForm.php:36
 msgid "Comment:"
-msgstr ""
+msgstr "Commentaire :"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/forms/ReportForm.php:36
 msgid "Please tell us why you want to report this content (scam, illegal content, adult content, etc.). Help us to eliminate scams, fake profiles, spam ... Thank you"
@@ -3384,7 +3384,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/forms/ReportForm.php:37
 msgid "Report this"
-msgstr ""
+msgstr "Reporter cela"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/forms/processing/ReportFormProcess.php:35
 msgid "You have already reported abuse about this profile."
@@ -3408,11 +3408,11 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/inc/class/Report.php:50
 msgid "Reporter:"
-msgstr ""
+msgstr "Reporteur"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/inc/class/Report.php:51
 msgid "Spammer:"
-msgstr ""
+msgstr "Spammeur"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/inc/class/Report.php:52
 msgid "Contant Type:"
@@ -3424,7 +3424,7 @@ msgstr ""
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/inc/class/Report.php:54
 msgid "Description of report:"
-msgstr ""
+msgstr "Description du report :"
 
 #: /var/www/pH7-Social-Dating-CMS/_protected/app/system/modules/report/inc/class/Report.php:55
 msgid "Date:"
