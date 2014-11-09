@@ -340,10 +340,12 @@ class Design
     {
         /*** Check the type of message, otherwise it is the default ***/
         $sType = ($sType == 'success' || $sType == 'info' || $sType == 'warning' || $sType == 'error') ? $sType : 'success';
-        $this->oSession->set(array(
-            'flash_msg'=> $sMessage,
-            'flash_type'=> $sType
-        ));
+        $this->oSession->set(
+            [
+                'flash_msg'=> $sMessage,
+                'flash_type'=> $sType
+            ]
+        );
     }
 
     /**
@@ -381,7 +383,7 @@ class Design
     public function geoIp($bPrint = true)
     {
         $sCountry = Geo::getCountry();
-        $sCountryLang = t(str_replace('GB', 'UK', Geo::getCountryCode())); // Country name translated into the user language.
+        $sCountryLang = t(str_replace('GB', 'UK', Geo::getCountryCode())); // Country name translated into the user language
         $sCity = Geo::getCity();
 
         $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People on %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCountryLang . ', ' . $sCity . '</a>';
@@ -447,7 +449,7 @@ class Design
                 {
                    // The user has no avatar, we try to get her Gravatar.
 
-                    // Get the User Email.
+                    // Get the User Email
                     $sEmail = $oUserModel->getEmail($iProfileId);
 
                     $bSecureGravatar = \PH7\Framework\Http\Http::isSsl();
@@ -458,7 +460,7 @@ class Design
                         $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . '.jpg';
 
                 }
-                elseif (!$bIsModerate) // We do not display the pending approval image when an administrator is on the panel admin.
+                elseif (!$bIsModerate) // We do not display the pending approval image when an administrator is on the panel admin
                 {
                     $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . '.jpg';
                 }
@@ -501,7 +503,7 @@ class Design
         $sImg = \PH7\Framework\Navigation\Browser::favicon($sUrl);
         $sName = \PH7\Framework\Http\Http::getHostName($sUrl);
 
-        $this->imgTag($sImg, $sName, array('width'=>16, 'height'=>16) );
+        $this->imgTag($sImg, $sName, ['width'=>16, 'height'=>16]);
     }
 
     /**
@@ -555,7 +557,7 @@ class Design
     {
         $sReportLink = (\PH7\UserCore::auth()) ?
             Uri::get('report', 'main', 'abuse', '?spammer=' . $iId . '&amp;url=' . $this->oHttpRequest->currentUrl() . '&amp;type=' . Registry::getInstance()->module, false) . '" data-popup="block-page' :
-            Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(array('msg' => t('You must register to report this person.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex)), false);
+            Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(['msg' => t('You must register to report this person.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex]), false);
 
         echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
     }
@@ -563,16 +565,19 @@ class Design
     /**
      * Generate a Link tag.
      *
-     * @param string $sLink The link
-     * @param boolean $bNoFollow Set "true" for the rel="nofollow" attribute otherwise "false". Default value is "true"
+     * @param string $sLink The link.
+     * @param boolean $bNoFollow Set TRUE for the rel="nofollow" attribute otherwise FALSE. Default TRUE
      * @return void The HTML link tag.
      */
     public function urlTag($sLink, $bNoFollow = true)
     {
-        $sNoFollowTag = ($bNoFollow === true) ? ' rel="nofollow"' : '';
         $sLinkName = \PH7\Framework\Parse\Url::name($sLink);
+        $aDefAttrs = ['href' => $sLink, 'title' => $sLinkName];
 
-        echo '<a href="', $sLink, '" title="', $sLinkName, '"', $sNoFollowTag, '>', $sLinkName, '</a>';
+        if ($bNoFollow)
+            $aDefAttrs += ['rel' => 'nofollow']; // Add "nofollow" attribute if "$bNoFollow" is TURE
+
+        $this->htmlTag('a', $aDefAttrs, true, $sLinkName);
     }
 
     /**
@@ -580,20 +585,39 @@ class Design
      *
      * @param string $sImg The image.
      * @param string $sAlt Alternate text.
-     * @param array $aAttributes Optional. Array containing the "name" and "value" HTML attributes. Default NULL
+     * @param array $aAttrs Optional. Array containing the "name" and "value" HTML attributes. Default NULL
      * @return void The HTML image tag.
      */
-    public function imgTag($sImg, $sAlt, array $aAttributes = null)
+    public function imgTag($sImg, $sAlt, array $aAttrs = null)
     {
-        $sAttributes = '';
+        $aDefAttrs = ['src' => $sImg, 'alt' => $sAlt];
 
-        if (!empty($aAttributes))
+        if (!empty($aAttrs))
+            $aDefAttrs += $aAttrs; // Update the attributes if necessary
+
+        $this->htmlTag('img',  $aDefAttrs);
+    }
+
+    /**
+     * Generate any HTML tag.
+     *
+     * @param string $sTag
+     * @param array $aAttrs Optional. Default NULL
+     * @param boolean $bPair Optional. Default FALSE
+     * @param string $sText Optional. Add text, available only for pair tag. Default NULL
+     * @return string The custom HTML tag.
+     */
+    public function htmlTag($sTag, array $aAttrs = null, $bPair = false, $sText = null)
+    {
+        $sAttrs = '';
+
+        if (!empty($aAttrs))
         {
-            foreach ($aAttributes as $sAttName => $sAttValue)
-                $sAttributes .= ' ' . $sAttName . '="' . $sAttValue . '"';
+            foreach ($aAttrs as $sName => $sValue)
+                $sAttrs .= ' ' . $sName . '="' . $sValue . '"';
         }
 
-        echo '<img src="', $sImg, '" alt="', $sAlt, '"', $sAttributes, ' />';
+        echo ($bPair ? '<' . $sTag . $sAttrs . '>' . ($sText === null ? '' : $sText) . '</' . $sTag . '>' : '<' . $sTag . $sAttrs . ' />');
     }
 
     public function htmlHeader()
