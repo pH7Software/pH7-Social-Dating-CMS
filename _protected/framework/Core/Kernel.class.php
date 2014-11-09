@@ -29,7 +29,7 @@ abstract class Kernel
 
     const
     SOFTWARE_NAME = 'pH7CMS',
-    SOFTWARE_DESCRIPTION = 'This builder community dating software for web 3.0 new generation!',
+    SOFTWARE_DESCRIPTION = 'pH7CMS software allows to build any Dating and Community Social websites for the 3.0 Web new generation!',
     SOFTWARE_WEBSITE = 'http://software.hizup.com',
     SOFTWARE_LICENSE_KEY_URL = 'http://software.hizup.com/memberships',
     SOFTWARE_HELP_URL = 'https://hizup.net/clients/support', // Help Desk Support URL
@@ -38,7 +38,7 @@ abstract class Kernel
     SOFTWARE_FORUM_URL = 'http://software.hizup.com/forum',
     SOFTWARE_EMAIL = 'ph7software@gmail.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
-    SOFTWARE_COMPANY = 'pH7 Framework / Social CMS (Pierre-Henry Soria)',
+    SOFTWARE_COMPANY = 'Social/Dating CMS | Created by Pierre-Henry Soria',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',

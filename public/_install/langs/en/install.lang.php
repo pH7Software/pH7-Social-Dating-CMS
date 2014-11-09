@@ -103,7 +103,7 @@ $LANG = array (
     'wait_importing_database' => 'Please wait while importing the database.<br />
     This may take several minutes.',
     'service' => 'Useful additional services',
-    'buy_copyright_license_title' => 'Buy a copyright removal license',
+    'buy_copyright_license_title' => 'Buy a Copyright Removal License',
     'buy_copyright_license' => '<span class="gray">One-time Payment</span> <span class="right">Buy Now</span>',
     'buy_copyright_license_desc' => 'By buying a lifetime license, you won\'t have any links and copyright notices on your website, and you\'ll also be able to update/upgrade it.',
     'buy_individual_ticket_support_title' => 'Buy a individual support service',
