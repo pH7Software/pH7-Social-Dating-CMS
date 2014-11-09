@@ -78,7 +78,7 @@ $goBox();
 // Setup tooltips
 // Title of the links
 
-$('a[title],img[title]').each(function()
+$('a[title],img[title],abbr[title]').each(function()
 {
     // "bIsDataPopup" checks that only for links that do not possess the attribute "data-popup", otherwise not the title of the popup (colorbox) cannot appear because of the plugin (tipTip).
     var bIsDataPopup = $(this).data('popup');
