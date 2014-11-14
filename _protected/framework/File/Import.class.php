@@ -23,7 +23,7 @@ class Import
     private function __construct() {}
 
     /**
-     * Import only Class or Interface of the "framework" pH7 (without dot).
+     * Import only Class or Interface of the "pH7Framework" (without dot).
      *
      * @access public
      * @static
