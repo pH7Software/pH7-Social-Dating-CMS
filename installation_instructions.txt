@@ -1,2 +1,2 @@
-1. Requirements: http://software.hizup.com/doc/en/requirements
-2. Installation: http://software.hizup.com/doc/en/install
+1. Requirements: http://ph7cms.com/doc/en/requirements
+2. Installation: http://ph7cms.com/doc/en/install

@@ -3,7 +3,6 @@
  * @title          Bootstrap
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @link           http://software.hizup.com
  * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link           http://software.hizup.com
@@ -57,7 +56,7 @@ try
     //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
     if (!Server::isRewriteMod())
     {
-        $sModRewriteMsg = t('<span style="font-weight:bold;color:red"><a href="%0%">pH7CMS</a> requires Apache "mod_rewrite".</span><br /> Please install it so that pH7CMS can works.<br /> Click <a href="%1%" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href="%2%">retry</a>.', self::SOFTWARE_WEBSITE, 'http://software.hizup.com/doc/en/how-to-install-rewrite-module', PH7_URL_ROOT);
+        $sModRewriteMsg = t('<span style="font-weight:bold;color:red"><a href="%0%">pH7CMS</a> requires Apache "mod_rewrite".</span><br /> Please install it so that pH7CMS can works.<br /> Click <a href="%1%" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href="%2%">retry</a>.', self::SOFTWARE_WEBSITE, 'http://ph7cms.com/doc/en/how-to-install-rewrite-module', PH7_URL_ROOT);
         Framework\Page\Page::message($sModRewriteMsg);
     }
     //*/

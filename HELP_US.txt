@@ -1,2 +1,2 @@
-We need your help!!! Thank you for helping us to contribute to this project by adding your code changes with Git.
-For more information, contact us at: ph7software (AT) gmail (DOT) com
+We need your help!!! Thank you for helping us to contribute to this project by adding your code modifications on our Git repo: https://github.com/pH7Software/pH7-Social-Dating-CMS
+For more information, contact us here: http://ph7cms.com/contact/
