@@ -104,9 +104,9 @@ Thank you!
 
 Recommended Hosting for **pH7CMS**
 
-<p><a href="http://software.hizup.com/web/arvandixe"><img src="http://software.hizup.com/web/arvandixeimg" width="250" height="250" alt="Arvixe: Recommended for pH7CMS" title="Arvixe: Recommended for pH7CMS"></a> &nbsp; <a href="http://software.hizup.com/web/hostupon"><img src="http://software.hizup.com/web/hostuponimg" width="250" height="250" alt="HostUpon: Recommended for pH7CMS" title="HostUpon: Recommended for pH7CMS"></a></p>
-<p><a href="http://software.hizup.com/web/tmdhost"><img src="http://software.hizup.com/web/tmdhostimg" width="250" height="250" alt="TMD Hosting: Recommended for pH7CMS" title="TMD Hosting: Recommended for pH7CMS"></a> &nbsp; &nbsp; <a href="http://software.hizup.com/web/hostforweb"><img src="http://software.hizup.com/web/hostforwebimg" width="250" height="250" alt="HostForWeb: Recommended for pH7CMS" title="HostForWeb: Recommended for pH7CMS"></a></p>
-<p><a href="http://software.hizup.com/web/faction"><img src="http://software.hizup.com/web/factionimg" width="250" height="250" alt="WebFaction: Recommended for pH7CMS" title="WebFaction: Recommended for pH7CMS"></a> &nbsp; <a href="http://software.hizup.com/web/rackhost"><img src="http://software.hizup.com/web/rackhostimg" width="250" height="250" alt="RackSpace: Recommended for pH7CMS" title="RackSpace: Recommended for pH7CMS"></a></p>
+<p><a href="http://ph7cms.com/web/arvandixe"><img src="http://ph7cms.com/web/arvandixeimg" width="250" height="250" alt="Arvixe: Recommended for pH7CMS" title="Arvixe: Recommended for pH7CMS"></a> &nbsp; <a href="http://ph7cms.com/web/hostupon"><img src="http://ph7cms.com/web/hostuponimg" width="250" height="250" alt="HostUpon: Recommended for pH7CMS" title="HostUpon: Recommended for pH7CMS"></a></p>
+<p><a href="http://ph7cms.com/web/tmdhost"><img src="http://ph7cms.com/web/tmdhostimg" width="250" height="250" alt="TMD Hosting: Recommended for pH7CMS" title="TMD Hosting: Recommended for pH7CMS"></a> &nbsp; &nbsp; <a href="http://ph7cms.com/web/hostforweb"><img src="http://ph7cms.com/web/hostforwebimg" width="250" height="250" alt="HostForWeb: Recommended for pH7CMS" title="HostForWeb: Recommended for pH7CMS"></a></p>
+<p><a href="http://ph7cms.com/web/faction"><img src="http://ph7cms.com/web/factionimg" width="250" height="250" alt="WebFaction: Recommended for pH7CMS" title="WebFaction: Recommended for pH7CMS"></a> &nbsp; <a href="http://ph7cms.com/web/rackhost"><img src="http://ph7cms.com/web/rackhostimg" width="250" height="250" alt="RackSpace: Recommended for pH7CMS" title="RackSpace: Recommended for pH7CMS"></a></p>
 
 
 ## Author
@@ -116,12 +116,12 @@ Pierre-Henry Soria
 
 ## Website
 
-**[Social Dating Script](http://software.hizup.com)**
+**[Social Dating Script](http://ph7cms.com)**
 
 
 ## Documentation
 
-[pH7CMS Documentation](http://software.hizup.com/doc/)
+[pH7CMS Documentation](http://ph7cms.com/doc/)
 
 
 ## Contribute!

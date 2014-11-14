@@ -1,6 +1,6 @@
 ####################
 # pH7CMS | Social Dating CMS
-# URL: http://software.hizup.com
+# URL: http://ph7cms.com
 ####################
 
 # Rules for Google
