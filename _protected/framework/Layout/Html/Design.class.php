@@ -235,7 +235,7 @@ class Design
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
     {
-        if (PH7_LICENSE_NO_COPYRIGHT) return;
+        if (PH7_VALID_LICENSE) return;
 
         ($bLink ? $bSoftwareName = true : '');
 

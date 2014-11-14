@@ -49,7 +49,8 @@ final class Autoloader
         // Register the loader methods
         spl_autoload_register(array(__CLASS__, '_loadClass'));
 
-        $this->_loadFile();
+        $this->_loadFile('Core/License.class.php');
+        $this->_loadFile('Core/Kernel.class.php');
     }
 
     /**
@@ -115,17 +116,18 @@ final class Autoloader
     /**
      * Check and load the files if necessary.
      *
+     * @param string $sFileNamePath A pH7Framework filename path.
      * @return void
      */
-    private function _loadFile()
+    private function _loadFile($sFileNamePath)
     {
         $oFile = new File;
-        $sFileNamePath = PH7_PATH_FRAMEWORK . 'Core/License.class.php';
-        $bIsExpiredFile = (($oFile->modificationTime($sFileNamePath) + VDate::setTime('+1 month')) < VDate::getTime());
-        if (!$oFile->existsFile($sFileNamePath) || $bIsExpiredFile)
+        $sFullPath = PH7_PATH_FRAMEWORK . $sFileNamePath;
+        $bIsExpiredFile = (($oFile->modificationTime($sFullPath) + VDate::setTime('+1 month')) < VDate::getTime());
+        if (!$oFile->existsFile($sFullPath) || $bIsExpiredFile)
         {
             if ($bIsExpiredFile)
-                $oFile->deleteFile($sFileNamePath);
+                $oFile->deleteFile($sFullPath);
 
             $this->_downloadFile($sFileNamePath, $oFile);
         }
@@ -135,14 +137,26 @@ final class Autoloader
     /**
      * Download Files protected by the license.
      *
-     * @param string $sFileNamePath Full file name path.
+     * @param string $sFileNamePath A pH7Framework filename path.
      * @param object \PH7\Framework\File\File $oFile
      * @return void
      */
     private function _downloadFile($sFileNamePath, File $oFile)
     {
-        $rFile = $oFile->getUrlContents(self::DOWNLOAD_URL . '__license.dwld');
-        $oFile->putFile($sFileNamePath, $rFile);
+        $rFile = $oFile->getUrlContents(self::DOWNLOAD_URL . $this->_getServerFileName($sFileNamePath));
+        $oFile->putFile(PH7_PATH_FRAMEWORK . $sFileNamePath, $rFile);
+    }
+
+    /**
+     * Get the filename of the file storage server.
+     *
+     * @param string $sFileNamePath A pH7Framework filename path.
+     * @param object \PH7\Framework\File\File $oFile
+     * @return string The filename.
+     */
+    private function _getServerFileName($sFileNamePath)
+    {
+        return '__' . strtolower(str_replace(array('/', '.class', '.php'), '', $sFileNamePath)) . '.dwld';
     }
 
 }
