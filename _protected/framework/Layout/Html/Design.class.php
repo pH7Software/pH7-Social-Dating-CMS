@@ -68,7 +68,28 @@ class Design
                 // Retrieve only the first two characters
                 $sAbbrLang = substr($sLang,0,2);
 
-                echo '<a href="', $sCurrentPage, $sLang, '" hreflang="' . $sAbbrLang . '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
+                echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
+        }
+
+        unset($aLangs, $sCurrentPage);
+    }
+
+    /**
+     * For better SEO optimization for multilingual sites. Ref: https://support.google.com/webmasters/answer/189077
+     *
+     * @return void
+     */
+    public function regionalUrls()
+    {
+        $sCurrentPage = Page::cleanDynamicUrl('l');
+        $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
+
+        echo '<link rel="alternate" hreflang="x-default" href="', PH7_URL_ROOT, '">'; // For pages that are not specifically targeted
+        foreach ($aLangs as $sLang)
+        {
+            // Retrieve only the first two characters
+            $sAbbrLang = substr($sLang,0,2);
+            echo '<link rel="alternate" hreflang="', $sAbbrLang, '" href="', $sCurrentPage, $sLang, '" />';
         }
 
         unset($aLangs, $sCurrentPage);
