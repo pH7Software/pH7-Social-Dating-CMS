@@ -43,7 +43,7 @@ class Design extends \PH7\Framework\Layout\Html\Design
             // Retrieve only the first two characters
             $sAbbrLang = substr($sLang->langId,0,2);
 
-            echo '<a href="', $sCurrentPage, $sLang->langId, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang),'" title="', t($sAbbrLang),'" /></a>&nbsp;';
+            echo '<a href="', $sCurrentPage, $sLang->langId, '" hreflang="' . $sAbbrLang . '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang),'" title="', t($sAbbrLang),'" /></a>&nbsp;';
         }
 
         unset($oLangs);
