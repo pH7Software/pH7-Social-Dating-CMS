@@ -1,6 +1,6 @@
     <nav role="navigation" class="bottom_nav">
 
-      <div class="dropdown_menu ft_dm">
+      <div role="listbox" class="dropdown_menu ft_dm">
         <span class="dropdown_item_css">
           <a rel="nofollow" href="{{ $design->url('page','main','about') }}" class="dropdown_item" data-load="ajax">{lang 'About %site_name%'}</a>
         </span>
@@ -18,7 +18,7 @@
         </ul>
       </div> |
 
-      <div class="dropdown_menu ft_dm">
+      <div role="listbox" class="dropdown_menu ft_dm">
         <span class="dropdown_item_css">
           <a rel="nofollow" href="{{ $design->url('page','main','help') }}" class="dropdown_item" data-load="ajax">{lang 'Help'}</a>
         </span>

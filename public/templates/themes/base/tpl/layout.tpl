@@ -1,3 +1,6 @@
+{* Get this function in a variable in order to optimize the script and call this function only once in the file *}
+{{ $is_user_auth = UserCore::auth() }}
+
 {{ $design->htmlHeader() }}
 <html lang="{% $config->values['language']['lang'] %}">
   <head>
@@ -9,6 +12,7 @@
     <meta name="keywords" content="{% $this->str->escape($meta_keywords, true) %}" />
     <link rel="shortcut icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />
+    {if !$is_user_auth}{{ $design->regionalUrls() }}{/if}
     <link rel="author" href="{url_root}humans.txt" />
     <meta name="robots" content="{meta_robots}" />
     <meta name="author" content="{meta_author}"/>
@@ -37,7 +41,7 @@
     {* Custom CSS code *}
     {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/style.css') }}
 
-    {if UserCore::auth()}
+    {if $is_user_auth}
       {{ $design->staticFiles('css', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'messenger.css') }}
     {/if}
 
@@ -150,13 +154,13 @@
       {{ $design->link() }}
 
       {* To avoid scammers *}
-      {if UserCore::auth() && $current_url !== $url_root}
+      {if $is_user_auth && $current_url !== $url_root}
         <div class="warning_block center"><p>{lang}<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br />
         People who is really interested in you will never ask for money.<br />
         Be careful, don\'t send the money to anybody!{/lang}</p></div>
       {/if}
 
-      <div id="clock"></div>
+      <div role="secondary" id="clock"></div>
 
       <div role="contentinfo">
         <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /> - <strong><a href="http://cool-on-web.com" title="{lang 'Free Online Dating Site'}">{lang 'Online Dating Site'}</a></strong></p>{{ $design->littleLikeApi() }}</div>{{ $design->langList() }}
@@ -177,7 +181,7 @@
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS, 'global.js') }}
 
     {* SetUserActivity & User Chat *}
-    {if UserCore::auth()}
+    {if $is_user_auth}
       {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'setUserActivity.js,jquery/sound.js') }}
       {{ $lang_file = Framework\Translate\Lang::getJsFile(PH7_PATH_TPL_SYS_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS . PH7_LANG) }}
       {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, PH7_LANG . $lang_file . ',jquery.cookie.js,Messenger.js') }}
@@ -195,7 +199,7 @@
     {{ $design->js() }}
     {{ $designModel->files('js') }}
 
-    {if UserCore::auth()}
+    {if $is_user_auth}
       {main_include 'favicon_alert.inc.tpl'}
     {/if}
 
@@ -207,5 +211,8 @@
     {/if}
 
     <!-- End Footer JavaScript -->
+
+{* Destroy the variable *}
+{{ unset($is_user_auth) }}
 
 {{ $design->htmlFooter() }}

@@ -1,12 +1,18 @@
+    {* Get the frequently used functions in a variable in order to optimize the script and call this function only once in the file *}
+      {{
+        $is_admin_auth = AdminCore::auth();
+        $is_user_auth = UserCore::auth();
+        $is_aff_auth = AffiliateCore::auth()
+      }}
 
     {* Creating Objects *}
       {{ $oSession = new Framework\Session\Session() }}
 
 
     {* For LoginUserAs of Admin Panel *}
-      {if AdminCore::auth() && $oSession->exists('login_user_as') }
+      {if $is_admin_auth && $oSession->exists('login_user_as') }
         <p class="bold center"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to admin panel.{/lang}</a></p>
-      {elseif AdminCore::auth() && $oSession->exists('login_affiliate_as') }
+      {elseif $is_admin_auth && $oSession->exists('login_affiliate_as') }
         <p class="bold center"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to admin panel.{/lang}</a></p>
       {/if}
 
@@ -15,9 +21,9 @@
       <nav role="navigation">
         <ul class="top_nav">
           <li{if $current_url == $url_root} class="current"{/if}><a href="
-          {if AdminCore::auth()}
+          {if $is_admin_auth}
               {{ $design->url(PH7_ADMIN_MOD,'main','index') }}
-          {elseif AffiliateCore::auth()}
+          {elseif $is_aff_auth}
               {{ $design->url('affiliate','account','index') }}
           {else}
               {url_root}
@@ -26,7 +32,7 @@
 
     {* Guest Menu *}
 
-      {if !UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth() }
+      {if !$is_user_auth && !$is_aff_auth && !$is_admin_auth}
 
         <li><a href="{{ $design->url('user','signup','step1') }}" title="{lang 'Join Now!'}">{lang 'Join Now!'}</a></li>
         <li><a href="{{ $design->url('user', 'main','login') }}" title="{lang 'Login'}" data-load="ajax">{lang 'Login'}</a></li>
@@ -36,7 +42,7 @@
 
     {* Menu Guest, Member and Admin *}
 
-      {if !AffiliateCore::auth()}
+      {if !$is_aff_auth}
 
         <li><a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" data-load="ajax">{lang 'People'}</a>
           <ul>
@@ -64,7 +70,7 @@
 
     {* Menu Guest, Member and LoginUserAs of Admin Panel *}
 
-      {if ( !AffiliateCore::auth() && !AdminCore::auth() ) || $oSession->exists('login_user_as') }
+      {if ( !$is_aff_auth && !$is_admin_auth ) || $oSession->exists('login_user_as') }
 
         <li><a href="{{ $design->url('chat','home','index') }}" title="{lang 'The Free Chat Rooms'}" data-load="ajax">{lang 'Chat Rooms'}</a>
           <ul>
@@ -114,7 +120,7 @@
 
     {* Member Menu *}
 
-        {if UserCore::auth() && ( !AffiliateCore::auth() && !AdminCore::auth() ) || $oSession->exists('login_user_as') }
+        {if $is_user_auth && ( !$is_aff_auth && !$is_admin_auth ) || $oSession->exists('login_user_as') }
 
           <li><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}">{lang 'Email'} ({count_unread_mail})</a>
             <ul>
@@ -186,7 +192,7 @@
 
     {* Affiliate Menu *}
 
-      {if AffiliateCore::auth() && ( !UserCore::auth() && !AdminCore::auth() || $oSession->exists('login_affiliate_as') ) }
+      {if $is_aff_auth && ( !$is_user_auth && !$is_admin_auth || $oSession->exists('login_affiliate_as') ) }
 
         <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Gets Banners'}">{lang 'Banners'}</a></li>
 
@@ -204,7 +210,7 @@
 
     {* Admin Menu *}
 
-      {if AdminCore::auth() && ( !UserCore::auth() && !AffiliateCore::auth() ) }
+      {if $is_admin_auth && ( !$is_user_auth && !$is_aff_auth ) }
 
         <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{lang 'Users/Admins'}">{lang 'Users'}</a>
           <ul>
@@ -397,4 +403,19 @@
       </ul>
     </nav>
 
-    {{ unset($oSession) }}
+    {* Destroy the varaibles *}
+      {{
+        unset(
+          $oSession,
+          $is_admin_auth,
+          $is_user_auth,
+          $is_aff_auth,
+          $count_moderate_total_album_picture,
+          $count_moderate_total_picture,
+          $count_moderate_total_album_video,
+          $count_moderate_total_video,
+          $count_moderate_total_avatar,
+          $count_moderate_total_background,
+          $count_moderate_total_note
+        )
+      }}
