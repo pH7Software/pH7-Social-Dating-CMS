@@ -56,8 +56,7 @@ try
     //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
     if (!Server::isRewriteMod())
     {
-        $sModRewriteMsg = t('<span style="font-weight:bold;color:red"><a href="%0%">pH7CMS</a> requires Apache "mod_rewrite".</span><br /> Please install it so that pH7CMS can works.<br /> Click <a href="%1%" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href="%2%">retry</a>.', self::SOFTWARE_WEBSITE, 'http://ph7cms.com/doc/en/how-to-install-rewrite-module', PH7_URL_ROOT);
-        Framework\Page\Page::message($sModRewriteMsg);
+        exit('<html><head><title>ERROR!</title></head><body><div style="margin-left:auto;margin-right:auto;width:80%;text-align:center"><span style="font-weight:bold;color:red"><a href="' . Framework\Core\Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</span><br /> Please install it so that pH7CMS can works.<br /> Click <a href="http://ph7cms.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href="' . PH7_URL_ROOT . '">retry</a>.</div></body></html>');
     }
     //*/
 
