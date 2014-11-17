@@ -1008,7 +1008,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('smtpHostName', 'mail.example.com', '', 'email'),
 ('smtpPassword', 123456, '', 'email'),
 ('smtpPort', 25, '', 'email'),
-('watermarkTextImage', 'HiZup.com', 'Watermark text', 'image'),
+('watermarkTextImage', 'pH7CMS.com', 'Watermark text', 'image'),
 ('sizeWatermarkTextImage', 2, 'Between 0 to 5', 'image'),
 ('banWordReplace', '[removed]',  '',  'security'),
 ('securityTokenLifetime', 720, 'Time in seconds. Default 720 seconds (12 mins)', 'security'),

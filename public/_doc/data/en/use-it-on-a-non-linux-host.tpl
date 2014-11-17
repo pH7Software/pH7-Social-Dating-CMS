@@ -1,4 +1,4 @@
-<h2>Use <a href="http://software.hizup.com">pH7CMS</a> on a non-Linux system</h2>
+<h2>Use <a href="http://ph7cms.com">pH7CMS</a> on a non-Linux system</h2>
 
 <p>Of course, you can do it with <strong>pH7CMS</strong>!</p>
 <p>All versions are compatible with Mac OS and from <em>1.0.2</em> version for Windows OS.</p>
