@@ -9,7 +9,7 @@
 
 This website is built by a small volunteer team of engineers, programmers, designers, and others in many different sites across the globe. It is updated continuously, and constantly evolving to give the best image of the next generation Web!
 If you want to help us as volunteer and if you know one of the following languages ​​(C++, Java, Python, PHP, Ruby on Rails, SQL, CSS, HTML, JavaScript, Linux Server, Apache, nginx) or professional hackers who could help us in the security of our web software to find any security vulnerability possible to create a 100% secure web-based software or help us in the translation of one of our open source CMS, please contact us here: http://ph7cms.com/contact/
-
-
 Thank you!
-The pH7 developers team (Pierre-Henry Soria).
+
+Pierre-Henry Soria (the main developer of pH7CMS).
+pH7CMS Website: http://ph7cms.com

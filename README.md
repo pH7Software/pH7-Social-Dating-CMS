@@ -4,13 +4,13 @@
 
 ## Overview
 
-**pH7 Dating CMS** is a CMS written in **Object-Oriented** PHP (*OOP*) with an **MVC** architecture (Model-View-Controller).
+**pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*) with a **MVC** architecture (Model-View-Controller).
 
-It is designed with the **KISS** principle in mind, and the entire source code can be read and understood in minutes, **PDO** (PHP Data Objects) abstraction allows choice of databases and the principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (Not duplicate code).
+It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (not duplicate code).
 
-It also wants to fast, low resource-intensive, extremely powerful and very secure.
+It also wants to be fast, low-resource-intensive, extremely powerful and very secure.
 
-In addition to being **free**, **open source** and **relatively stable**, this software comes with more than **29 native modules** and based on the **pH7Core framework** (written specifically for this project).
+In addition to being **free**, **open source** and **relatively stable**, the software comes with more than **29 native modules** and based on **pH7Framework** *(written specifically for this project)* which includes more than 51 packages.
 
 To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best dating service** or **social networking** website on the World Wide Web!
 
@@ -93,7 +93,7 @@ Thank you!
 
 **Web Server** Apache with mod_php or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work you should change some pieces of code and change the url rewriting to make it work).
 
-**URL rewriting extension modules** Apache, nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
+**URL rewriting extension module** Apache, nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
 
 **Video** [FFmpeg](http://ffmpeg.org)
 
