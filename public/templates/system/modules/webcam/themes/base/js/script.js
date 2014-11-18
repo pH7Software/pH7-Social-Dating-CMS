@@ -7,9 +7,9 @@
  * This code was inspired by Martin Angelov's tutorial: http://tutorialzine.com/2011/04/jquery-webcam-photobooth/
  */
 
-    var camera = $('#camera'),
-        photos = $('#photos'),
-        screen =  $('#screen');
+    var oCamera = $('#camera'),
+        oPhotos = $('#photos'),
+        oScreen = $('#screen');
 
     var template = '<a href="' + pH7Url.data + 'system/modules/webcam/picture/img/original/{src}" class="cam" '
         +'style="background-image:url(' + pH7Url.data + 'system/modules/webcam/picture/img/thumb/{src})"></a>';
@@ -25,8 +25,8 @@
     webcam.set_shutter_sound(true, pH7Url.tplMod + 'shutter.mp3');
 
     // Generating the embed code and adding it to the page:
-    screen.html(
-        webcam.get_html(screen.width(), screen.height())
+    oScreen.html(
+        webcam.get_html(oScreen.width(), oScreen.height())
     );
 
 
@@ -61,7 +61,7 @@
         return false;
     });
 
-    camera.find('.settings').click(function(){
+    oCamera.find('.settings').click(function(){
         if(!shootEnabled){
             return false;
         }
@@ -77,12 +77,12 @@
         $('.tooltip').fadeOut('fast');
 
         if(shown){
-            camera.animate({
+            oCamera.animate({
                 bottom:-466
             });
         }
         else {
-            camera.animate({
+            oCamera.animate({
                 bottom:-5
             },{easing:'easeOutExpo',duration:'slow'});
         }
@@ -119,13 +119,13 @@
         }
         else {
             // Adding it to the page;
-            photos.prepend(templateReplace(template,{src:msg.filename}));
+            oPhotos.prepend(templateReplace(template,{src:msg.filename}));
             initBox();
         }
     });
 
     webcam.set_hook('onError',function(e){
-        screen.html(e);
+        oScreen.html(e);
     });
 
 
@@ -154,7 +154,7 @@
 
         $.getJSON(pH7Url.base + 'webcam/asset/ajax/BrowsePicture/',{'start':start},function(r){
 
-            photos.find('a').show();
+            oPhotos.find('a').show();
             var loadMore = $('#loadMore').detach();
 
             if(!loadMore.length){
@@ -166,7 +166,7 @@
             }
 
             $.each(r.files,function(i,filename){
-                photos.append(templateReplace(template,{src:filename}));
+                oPhotos.append(templateReplace(template,{src:filename}));
             });
 
             // If there is a next page with images:
@@ -176,8 +176,8 @@
                 // that comes after the last one shown currently.
 
                 start = r.nextStart;
-                photos.find('a:last').hide();
-                photos.append(loadMore.html('Load More'));
+                oPhotos.find('a:last').hide();
+                oPhotos.append(loadMore.html('Load More'));
             }
 
             // We have to re-initialize the box every
@@ -204,7 +204,7 @@
     // box lightbox script.
 
     function initBox(filename){
-        photos.find('a:visible').colorbox({
+        oPhotos.find('a:visible').colorbox({
             maxWidth     :  '95%',
             maxHeight    :  '95%',
             rel          :  'cam',
