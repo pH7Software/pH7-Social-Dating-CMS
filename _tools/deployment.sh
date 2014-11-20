@@ -1,0 +1,74 @@
+#!/bin/bash
+
+##
+# Title:           Deployment Automation
+# Description:     pH7CMS Deployment Automation. It is used to clean the script before distribution to customers.
+# Author:          Pierre-Henry Soria <ph7software@gmail.com>
+# Copyright:       (c) 2014, Pierre-Henry Soria. All Rights Reserved.
+# License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+##
+
+function run() {
+    _confirm "Are you sure you want to run the DEPLOYMENT process (Irreversible Action)?"
+    if [ $? -eq 1 ]; then
+        _confirm "Have you made a copy of it before?"
+        if [ $? -eq 1 ]; then
+            ## Permission
+            sudo chmod 777 -R .
+
+            ## TMP files
+            find . -type f \( -name '*~' -or -name '*.swp' -or -name '.directory' -or -name '._*' -or -name '.DS_Store*' -or -name 'Thumbs.db' \) -exec rm {} \;
+
+            ## Cleaning the code
+            params="-name '*.php' -or -name '*.css' -or -name '*.js' -or -name '*.html' -or -name '*.xml' -or -name '*.xsl' -or -name '*.yml' -or -name '*.tpl' -or -name '*.phs' -or -name '*.ph7' -or -name '*.sh' -or -name '*.sql' -or -name '*.ini' -or -name '*.md' -or -name '*.markdown' -or -name '.htaccess'"
+            exec="find . -type f \( $params \) -print0 | xargs -0 perl -wi -pe"
+            eval "$exec 's/\s+$/\n/'"
+            eval "$exec 's/\t/    /g'"
+
+            ## Caches
+            # public
+            rm -rf ./public/_install/data/caches/smarty_compile/*
+            rm -rf ./public/_install/data/caches/smarty_cache/*
+            # _protected
+            rm -rf ./_protected/data/cache/pH7tpl_compile/*
+            rm -rf ./_protected/data/cache/pH7tpl_cache/*
+            rm -rf ./_protected/data/cache/pH7_static/*
+            rm -rf ./_protected/data/cache/pH7_cache/*
+
+            ## Config Files, etc.
+            rm ./public/_constants.php
+            rm ./_protected/app/configs/config.ini
+            rm ./_protected/framework/Core/Kernel.class.php
+            rm ./_protected/framework/Core/License.class.php
+            rm ./_protected/app/system/core/assets/cron/_delay/*
+            rm ./public/_repository/import/*
+            rm ./public/_repository/module/*
+            rm ./public/_repository/upgrade/*
+            rm -rf ./public/_doc/*
+
+            echo "Done!"
+            echo "Remove \"deployment.sh\" (this file) before packaging pH7CMS"
+        else
+            echo "You must make a copy of all the software before running the deployement. Go back!"
+            exit 1
+    fi
+}
+
+# Confirmation of orders entered
+function _confirm() {
+    echo $1 "(Y/N)"
+    read input
+    input=$(_to-lower $input) # Case-insensitive
+    if [ "$input" == "y" ]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+# To lower
+function _to-lower() {
+    echo $1 | tr '[:upper:]' '[:lower:]'
+}
+
+run
