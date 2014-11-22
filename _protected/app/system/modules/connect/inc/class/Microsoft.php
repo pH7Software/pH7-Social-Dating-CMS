@@ -108,10 +108,12 @@ class Microsoft extends Api
      */
     public function add($oProfile, UserCoreModel $oUserModel)
     {
+        $oUser = new UserCore;
         $sBirthDate = (isset($oProfile->birth_month, $oProfile->birth_day, $oProfile->birth_year)) ? $oProfile->birth_month . '/' . $oProfile->birth_day . '/' . $oProfile->birth_year : date('m/d/Y', strtotime('-30 year'));
         $sSex = ($oProfile->gender != 'male' && $oProfile->gender != 'female' && $oProfile->gender != 'couple') ? 'female' : $oProfile->gender; // Default 'female'
-        $sMatchSex = ($sSex == 'male' ? 'female' : ($sSex == 'female' ? 'male' : 'couple'));
-        $this->_sUsername = (new UserCore)->findUsername($oProfile->name, $oProfile->first_name, $oProfile->last_name);
+        $sMatchSex = $oUser->getMatchSex($sSex);
+        $this->_sUsername = $oUser->findUsername($oProfile->name, $oProfile->first_name, $oProfile->last_name);
+        unset($oUser);
 
         $this->_aUserInfo = [
             'email' => $oProfile->emails->account,

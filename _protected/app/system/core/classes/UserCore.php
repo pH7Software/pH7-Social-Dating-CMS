@@ -440,6 +440,17 @@ class UserCore
     }
 
     /**
+     * Get the correct matching sex.
+     *
+     * @param string $sSex
+     * @return string The Match Sex.
+     */
+    public function getMatchSex($sSex)
+    {
+        return ($sSex == 'male' ? 'female' : ($sSex == 'female' ? 'male' : 'couple'));
+    }
+
+    /**
      * This method is a wrapper for the cache of the profile of users.
      * Clean UserCoreModel / readProfile Cache
      *

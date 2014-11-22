@@ -7,7 +7,6 @@
  * @copyright      (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
- * @version        1.0
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
@@ -65,9 +64,9 @@ class ImportUserFormProcess extends Form
             'password' => Various::genRnd(),
             'first_name' => 'Alex' . $sFiveChars,
             'last_name' => 'Rolli' . $sFiveChars,
-            'sex' => $aGenderList[mt_rand(0,2)],
-            'match_sex' => $aGenderList[mt_rand(0,2)],
-            'birth_date' => date('Y')-22 . '-09-11',
+            'sex' => $aGenderList[mt_rand(0,2)], // Generate randomly it
+            'match_sex' => $aGenderList[mt_rand(0,2)], // Generate randomly it
+            'birth_date' => date('Y')-mt_rand(20,40).'-'.mt_rand(1,12).'-'.mt_rand(1,28), // Generate randomly the anniversary date
             'country' => 'US',
             'city' => 'Virginia',
             'state' => 'Doswell',
@@ -106,6 +105,8 @@ class ImportUserFormProcess extends Form
         $oValidate = new Validate;
         while (($aFileData = fgetcsv($rHandler, 0, $sDelimiter, $sEnDelimiter)) !== false)
         {
+            $aData[$iRow] = $aTmpData; // Set data by the default contents
+
             $sEmail = trim($aFileData[$aTmpData['email']]);
             if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail))
             {
@@ -117,7 +118,7 @@ class ImportUserFormProcess extends Form
                 $aData[$iRow]['first_name'] = $sFirstName;
                 $aData[$iRow]['last_name'] = $sLastName;
                 $aData[$iRow]['sex'] = trim($aFileData[$aTmpData['sex']]);
-                $aData[$iRow]['match_sex'] = trim($aFileData[$aTmpData['match_sex']]);
+                $aData[$iRow]['match_sex'] = array(trim($aFileData[$aTmpData['match_sex']]));
                 $aData[$iRow]['email'] = $sEmail;
                 $aData[$iRow]['description'] = trim($aFileData[$aTmpData['description']]);
                 $aData[$iRow]['country'] = trim($aFileData[$aTmpData['country']]);

@@ -82,6 +82,14 @@ class UserController extends Controller
         $this->output();
     }
 
+    public function addFakeProfiles()
+    {
+        $this->sTitle = t('Add Fake Profiles');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h2_title = $this->sTitle;
+        $this->output();
+    }
+
     public function search()
     {
         $this->sTitle = t('Search Users');

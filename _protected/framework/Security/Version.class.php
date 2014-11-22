@@ -18,7 +18,7 @@ use PH7\Framework\Core\Kernel, PH7\Framework\Security\Validate\Validate;
 final class Version
 {
 
-    const LATEST_VERSION_URL = 'http://software.hizup.com/xml/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
+    const LATEST_VERSION_URL = 'http://ph7cms.com/xml/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /***** Framework Kernel *****/
     const KERNEL_VERSION = Kernel::SOFTWARE_VERSION;

@@ -186,10 +186,12 @@ class Twitter extends Api implements IApi
      */
     public function add(array $aProfile, UserCoreModel $oUserModel)
     {
+        $oUser = new UserCore;
         $sBirthDate = (!empty($aProfile['birthday'])) ? $aProfile['birthday'] : date('m/d/Y', strtotime('-30 year'));
         $sSex = ($aProfile['gender'] != 'male' && $aProfile['gender'] != 'female' && $aProfile['gender'] != 'couple') ? 'female' : $aProfile['gender']; // Default 'female'
-        $sMatchSex = ($sSex == 'male' ? 'female' : ($sSex == 'female' ? 'male' : 'couple'));
-        $this->_sUsername = (new UserCore)->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
+        $sMatchSex = $oUser->getMatchSex($sSex);
+        $this->_sUsername = $oUser->findUsername($aProfile['given_name'], $aProfile['name'], $aProfile['family_name']);
+        unset($oUser);
 
         $this->_aUserInfo = [
             'email' => $aProfile['email'],

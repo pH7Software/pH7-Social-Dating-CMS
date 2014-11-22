@@ -28,12 +28,12 @@ class CDateTime
     /**
      * Get, initialization method.
      *
-     * @param string $sTime If specified, you must enter a date/time string else return the current time.
+     * @param mixed (string | integer) $mTime If specified, you must enter a date/timestamp, otherwise returns the current time.
      * @return void $this
      */
-    public function get($sTime = null)
+    public function get($mTime = null)
     {
-        $sSetTime = (!empty($sTime)) ? date('Y-m-d', strtotime($sTime)) : 'now';
+        $sSetTime = (!empty($mTime)) ? date('Y-m-d', (!is_numeric($mTime) ? strtotime($mTime) : $mTime) ) : 'now';
         $this->_oDateTime = new \DateTime($sSetTime, new \DateTimeZone($this->_oConfig->values['language.application']['timezone']));
         return $this;
     }

@@ -388,6 +388,24 @@ final class FrontController
     }
 
     /**
+     * @access public
+     * @return void
+     */
+    public function _pathInitialize()
+    {
+        $this->oRegistry->action = strtolower($this->oRegistry->action);
+
+        /***** SHORTCUTS PATH FOR MODULES *****/
+        $this->oRegistry->path_module_controllers = $this->oRegistry->path_module . PH7_CTRL;
+        $this->oRegistry->path_module_models = $this->oRegistry->path_module . PH7_MODELS;
+        $this->oRegistry->path_module_views = $this->oRegistry->path_module . PH7_VIEWS;
+        $this->oRegistry->path_module_forms = $this->oRegistry->path_module . PH7_FORMS;
+        $this->oRegistry->path_module_inc = $this->oRegistry->path_module . PH7_INC;
+        $this->oRegistry->path_module_config = $this->oRegistry->path_module . PH7_CONFIG;
+        $this->oRegistry->path_module_lang = $this->oRegistry->path_module . PH7_LANG;
+    }
+
+    /**
      * @access private
      * @return void
      */
@@ -415,14 +433,7 @@ final class FrontController
         {
             // For module only!
 
-            /***** SHORTCUTS PATH THE MODULE *****/
-            $this->oRegistry->path_module_controllers = $this->oRegistry->path_module . PH7_CTRL;
-            $this->oRegistry->path_module_models = $this->oRegistry->path_module . PH7_MODELS;
-            $this->oRegistry->path_module_views = $this->oRegistry->path_module . PH7_VIEWS;
-            $this->oRegistry->path_module_forms = $this->oRegistry->path_module . PH7_FORMS;
-            $this->oRegistry->path_module_inc = $this->oRegistry->path_module . PH7_INC;
-            $this->oRegistry->path_module_config = $this->oRegistry->path_module . PH7_CONFIG;
-            $this->oRegistry->path_module_lang = $this->oRegistry->path_module . PH7_LANG;
+            $this->_pathInitialize();
 
             $sFolder = ($this->oUri->fragment(4) && preg_match('#^[\w]+$#', $this->oUri->fragment(4))) ? PH7_DS . $this->oUri->fragment(4) : '';
             if (is_file($sMod . 'assets/ajax/' . $this->oUri->fragment(3) . $sFolder . 'Ajax.php'))
@@ -538,19 +549,12 @@ final class FrontController
             \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
         }
 
-        /***** SHORTCUTS PATH THE MODULE *****/
-        $this->oRegistry->path_module_controllers = $this->oRegistry->path_module . PH7_CTRL;
-        $this->oRegistry->path_module_models = $this->oRegistry->path_module . PH7_MODELS;
-        $this->oRegistry->path_module_views = $this->oRegistry->path_module . PH7_VIEWS;
-        $this->oRegistry->path_module_forms = $this->oRegistry->path_module . PH7_FORMS;
-        $this->oRegistry->path_module_inc = $this->oRegistry->path_module . PH7_INC;
-        $this->oRegistry->path_module_config = $this->oRegistry->path_module . PH7_CONFIG;
-        $this->oRegistry->path_module_lang = $this->oRegistry->path_module . PH7_LANG;
+        $this->_pathInitialize();
 
-        /***** PATH FULL OF FILE MODULE *****/
+        /***** FULL PATH OF MODULE FILE *****/
         $this->oRegistry->path_module_controller = $this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php';
-        /***** FOR FILE CONFIG .INI OF MODULE *****/
 
+        /***** FOR FILE CONFIG .INI OF MODULE *****/
         $this->oConfig->load($this->oRegistry->path_module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
         define('PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme']);
 
