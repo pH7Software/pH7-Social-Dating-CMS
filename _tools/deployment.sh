@@ -38,12 +38,14 @@ function run() {
             ## Config Files, etc.
             rm ./public/_constants.php
             rm ./_protected/app/configs/config.ini
+            rm ./public/_install/_license-key.txt
             rm ./_protected/framework/Core/Kernel.class.php
             rm ./_protected/framework/Core/License.class.php
             rm ./_protected/app/system/core/assets/cron/_delay/*
             rm ./public/_repository/import/*
             rm ./public/_repository/module/*
             rm ./public/_repository/upgrade/*
+            rm -rf ./_test/*
             rm -rf ./public/_doc/*
 
             echo "Done!"

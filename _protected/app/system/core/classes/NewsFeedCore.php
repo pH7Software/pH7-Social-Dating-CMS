@@ -16,7 +16,7 @@ class NewsFeedCore
 {
 
     const
-    NEWS_URL = 'http://software.hizup.com/feed/',
+    NEWS_URL = 'http://ph7cms.com/feed/',
     CACHE_GROUP = 'str/sys/mod/admin';
 
     private $_oXml, $_oCache, $_aData = array();

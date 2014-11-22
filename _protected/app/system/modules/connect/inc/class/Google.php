@@ -19,6 +19,9 @@ PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Ip\Ip,
 PH7\Framework\File\File,
 PH7\Framework\Util\Various,
+PH7\Framework\Session\Session,
+PH7\Framework\Registry\Registry,
+PH7\Framework\Mvc\Request\Http as HttpRequest,
 PH7\Framework\Geo\Ip\Geo,
 PH7\Framework\Mvc\Router\Uri;
 
@@ -35,7 +38,7 @@ class Google extends Api implements IApi
      * @param object \PH7\Framework\Registry\Registry $oRegistry
      * @return void
      */
-    public function __construct(Framework\Session\Session $oSession, Framework\Mvc\Request\Http $oHttpRequest, Framework\Registry\Registry $oRegistry)
+    public function __construct(Session $oSession, HttpRequest $oHttpRequest, Registry $oRegistry)
     {
         parent::__construct();
 

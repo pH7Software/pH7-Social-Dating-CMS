@@ -261,7 +261,7 @@ class Design
         ($bLink ? $bSoftwareName = true : '');
 
         if (!$bEmail && \PH7\AdminCore::auth())
-            echo '<p><strong><em><a class="red" href="', Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), '">', t('Want to delete this below link?'), '</a></em></strong></p>';
+            echo '<p class="underline"><strong><em><a class="red" href="', Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), '">', t('Want to delete this below link?'), '</a></em></strong></p>';
 
         if ($bComment)
         {

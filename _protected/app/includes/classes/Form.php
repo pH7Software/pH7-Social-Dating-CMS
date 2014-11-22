@@ -15,7 +15,7 @@ class Form extends Framework\Layout\Form\Form
 {
 
     /**
-     * For gets Value Data in the database.
+     * To get Value Data from the database.
      *
      * @param string $sValue
      * @return array
@@ -32,7 +32,7 @@ class Form extends Framework\Layout\Form\Form
     }
 
     /**
-     * For sets Value Data in the database.
+     * To set Value Data into the database.
      *
      * @param array $aValue
      * @return string

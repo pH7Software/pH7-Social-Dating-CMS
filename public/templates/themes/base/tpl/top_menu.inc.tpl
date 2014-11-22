@@ -221,6 +221,7 @@
                 <li><a href="{{ $design->url('report','admin','index') }}" title="{lang 'Report'}">{lang 'Report'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','add') }}" title="{lang 'Add User'}">{lang 'Add User'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{lang 'Import Users'}">{lang 'Import Users'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','addfakeprofiles') }}" title="{lang 'Fake Profiles Automatic Generator'}">{lang 'Fake Profile Generator'}</a></li>
                 <li><a href="{{ $design->url('field','field','all','user') }}" title="{lang 'User Fields'}">{lang 'User Fields'}</a>
                   <ul>
                     <li><a href="{{ $design->url('field','field','all','user') }}" title="{lang 'Fields List'}">{lang 'Fields List'}</a></li>
