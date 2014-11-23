@@ -16,7 +16,7 @@ class Optimization
 {
 
     /**
-     * Data URIs base64 encoding.
+     * Data URI scheme - base64 encoding.
      *
      * @param string $sFile
      * @return string Returns format: data:[<MIME-type>][;base64],<data>

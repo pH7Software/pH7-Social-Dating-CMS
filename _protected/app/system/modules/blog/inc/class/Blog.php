@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Blog / Inc / Class
  */
 namespace PH7;
-use PH7\Framework\Config\Config;
+use PH7\Framework\File\File, PH7\Framework\Config\Config;
 
 class Blog extends WriteCore
 {
@@ -18,7 +18,7 @@ class Blog extends WriteCore
      * @param \PH7\Framework\File\File $oFile
      * @return void
      */
-    public function setThumb($oPost, Framework\File\File $oFile)
+    public function setThumb($oPost, File $oFile)
     {
         if (!empty($_FILES['thumb']['tmp_name']))
         {
@@ -37,6 +37,9 @@ class Blog extends WriteCore
                 $oFile->createDir($sPathName);
                 $oImage->square(100);
                 $oImage->save($sPathName . '/thumb.png');
+
+                // Clear the Web browser cache
+                (new Framework\Navigation\Browser)->noCache();
             }
             unset($oImage);
         }
@@ -51,7 +54,8 @@ class Blog extends WriteCore
     public static function getThumb($iBlogId)
     {
         $sUrl = PH7_URL_DATA_SYS_MOD . 'blog/' . PH7_IMG;
-        $sThumb = (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog/' . PH7_IMG . $iBlogId . '/thumb.png')) ? $iBlogId . '/thumb.png' : 'default_thumb.jpg';
+        $sFullPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog/' . PH7_IMG . $iBlogId . '/thumb.png';
+        $sThumb = (is_file($sFullPath)) ? $iBlogId . '/thumb.png?v=' . File::version($sFullPath) : 'default_thumb.jpg';
         return $sUrl . $sThumb;
     }
 

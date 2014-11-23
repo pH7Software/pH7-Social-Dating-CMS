@@ -414,12 +414,27 @@ class File
     }
 
     /**
-     * @param string File Name.
-     * @return mixed (integer | boolean) Returns the "time the file was last modified", or "false" if it not found.
+     * Get the modification time of a file in the Unix timestamp.
+     *
+     * @param string Full path of the file.
+     * @return mixed (integer | boolean) Returns the time the file was last modified, or FALSE if it not found.
      */
-    public function modificationTime($sFile)
+    public function getModifTime($sFile)
     {
         return (is_file($sFile)) ? filemtime($sFile) : false;
+    }
+
+    /**
+     * Get the version of a file based on the its latest modification.
+     * Shortened form of self::getModifTime()
+     *
+     * @static
+     * @param string Full path of the file.
+     * @return integer Returns the latest modification time of the file in Unix timestamp.
+     */
+    public static function version($sFile)
+    {
+        return @filemtime($sFile);
     }
 
     /**
@@ -643,7 +658,7 @@ class File
      * Reading Directories.
      *
      * @param string $sPath
-     * @return mixed (array | boolean) Returns an array with the folders or false if the folder could not be opened.
+     * @return mixed (array | boolean) Returns an ARRAY with the folders or FALSE if the folder could not be opened.
      */
     public function readDirs($sPath = './')
     {

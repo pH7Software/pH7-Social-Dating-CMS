@@ -293,7 +293,7 @@ ID file: ' . $this->_sId . '
     private function _check()
     {
         $sFile = $this->_getFile();
-        if (!$this->_bEnabled || !is_file($sFile) || (!empty($this->_iTtl) && $this->_oFile->modificationTime($sFile) < time()))
+        if (!$this->_bEnabled || !is_file($sFile) || (!empty($this->_iTtl) && $this->_oFile->getModifTime($sFile) < time()))
         {
             // If the cache has expired
             $this->_oFile->deleteFile($this->_getFile());

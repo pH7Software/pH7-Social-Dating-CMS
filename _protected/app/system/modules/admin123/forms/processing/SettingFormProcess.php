@@ -72,8 +72,11 @@ class SettingFormProcess extends Form
                 $oLogo->dynamicResize(250,60);
                 $oLogo->save($sPathName);
 
-                // Clear CSS cache
+                // Clear CSS cache, because the logo is storaged with data URI in the CSS cache file
                 $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Gzip::CACHE_DIR);
+
+                // Clear the Web browser cache
+                (new Framework\Navigation\Browser)->noCache();
             }
         }
 
