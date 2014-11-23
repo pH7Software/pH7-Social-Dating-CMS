@@ -849,7 +849,7 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
      */
     private function isMainPage()
     {
-        return preg_match('#' . PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . $this->getMainPage() . '#', $this->sTemplateDirFile);
+        return preg_match('#' . $this->addSlashes(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . $this->getMainPage()) . '#', $this->sTemplateDirFile);
     }
 
     /**
@@ -860,7 +860,7 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
      */
     final private function isMainCompilePage()
     {
-        return preg_match('#' . $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS . static::MAIN_COMPILE_PAGE . '#', $this->sCompileDirFile);
+        return preg_match('#' . $this->addSlashes($this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS . static::MAIN_COMPILE_PAGE) . '#', $this->sCompileDirFile);
     }
 
     /**
@@ -883,7 +883,7 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
      */
     final private function isMainDir($sDirPath)
     {
-        return !empty($sDirPath) && preg_match('#' . PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . '#', $sDirPath);
+        return !empty($sDirPath) && preg_match('#' . $this->addSlashes(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS) . '#', $sDirPath);
     }
 
     /**
@@ -922,6 +922,17 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
     final private function isSmallMarkCopyright()
     {
         return (false !== strpos($this->sCode, 'design->smallLink()'));
+    }
+
+    /**
+     * Add slashes to avoid errors with "preg_replace()" with Windows' backslashes in directories.
+     *
+     * @param string $sStr String
+     * @return string Escaped string
+     */
+    private function addSlashes($sStr)
+    {
+        return addslashes($sStr);
     }
 
     /**
