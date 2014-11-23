@@ -341,7 +341,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     private function parse()
     {
         /***** Includes *****/
-        $this->sCode = str_replace('{auto_include}', '<?php $this->display($this->getCurrentController() . PH7_DS . $this->str->lower($this->registry->action).\'' .
+        $this->sCode = str_replace('{auto_include}', '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' .
                 $this->sTplExt . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>', $this->sCode);
         $this->sCode = preg_replace('#{include ([^\{\}\n]+)}#', '<?php $this->display($1); ?>', $this->sCode);
         $this->sCode = preg_replace('#{main_include ([^\{\}\n]+)}#', '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>', $this->sCode);
