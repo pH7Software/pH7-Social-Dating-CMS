@@ -164,9 +164,9 @@ class Gzip
         {
             $sPath = realpath($this->_sBase . $sElement);
 
-            if ($this->_oFile->modificationTime($sPath) > $this->_oFile->modificationTime($this->_sCacheDir . $sCacheFile))
+            if ($this->_oFile->getModifTime($sPath) > $this->_oFile->getModifTime($this->_sCacheDir . $sCacheFile))
             {
-                if (!empty($this->_iIfModified) && $this->_oFile->modificationTime($sPath) > $this->_oFile->modificationTime($this->_iIfModified))
+                if (!empty($this->_iIfModified) && $this->_oFile->getModifTime($sPath) > $this->_oFile->getModifTime($this->_iIfModified))
                     $oBrowser->noCache();
 
                 // Get contents of the files
@@ -351,12 +351,12 @@ class Gzip
 
         for ($i = 0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++)
         {
-            $imgPath = PH7_PATH_ROOT . $this->_sBaseUrl . $aHit[1][$i] . $aHit[2][$i];
-            $imgUrl = PH7_URL_ROOT . $this->_sBaseUrl . $aHit[1][$i] . $aHit[2][$i];
+            $sImgPath = PH7_PATH_ROOT . $this->_sBaseUrl . $aHit[1][$i] . $aHit[2][$i];
+            $sImgUrl = PH7_URL_ROOT . $this->_sBaseUrl . $aHit[1][$i] . $aHit[2][$i];
 
-            // If image-file exists and if file-size is lower than 24 KB
-            $this->_sContents = ($this->_bDataUri == true && is_file($imgPath) && $this->_oFile->size($imgPath) <
-                24000) ? str_replace($aHit[0][$i], 'url(' . Optimization::dataUri($imgPath) . ')', $this->_sContents) : str_replace($aHit[0][$i], 'url(' . $imgUrl . ')', $this->_sContents);
+            // If the image-file exists and if file-size is lower than 24 KB, we convert it into base64 data URI
+            $this->_sContents = ($this->_bDataUri && is_file($sImgPath) && $this->_oFile->size($sImgPath) <
+                24000) ? str_replace($aHit[0][$i], 'url(' . Optimization::dataUri($sImgPath) . ')', $this->_sContents) : str_replace($aHit[0][$i], 'url(' . $sImgUrl . ')', $this->_sContents);
         }
     }
 

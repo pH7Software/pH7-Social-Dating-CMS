@@ -9,7 +9,6 @@ namespace PH7;
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Navigation\Browser,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\File\File,
 PH7\Framework\Ip\Ip;
@@ -66,9 +65,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="logotype"><h2 class="underline">' . t('Logo:') . '</h2>'));
         $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo', array('accept' => 'image/*')));
 
-        /** Disable the cache for the logo if the admin modifies **/
-        (new Browser)->noCache();
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'logo.png" alt="' . t('Logo') . '" title="' . t('The current logo of your site.') . '" /></p>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'logo.png?v=' . File::version(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png') . '" alt="' . t('Logo') . '" title="' . t('The current logo of your site.') . '" /></p>'));
 
         /********** Registration **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="registration"><h2 class="underline">' . t('Registration:') . '</h2>'));

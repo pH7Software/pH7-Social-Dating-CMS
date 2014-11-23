@@ -400,8 +400,8 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
 
 
         /*** If the file does not exist or if the template has been modified, recompile the makefiles ***/
-        if ($this->file->modificationTime($this->sTemplateDirFile) > $this->file->
-                        modificationTime($this->sCompileDirFile))
+        if ($this->file->getModifTime($this->sTemplateDirFile) > $this->file->
+                        getModifTime($this->sCompileDirFile))
             $this->compile();
 
         if (!empty($_bInclude))
@@ -632,8 +632,8 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         $this->sCacheDirFile = $this->sCacheDir2 . str_replace(PH7_DS, '_', $this->file->getFileWithoutExt($this->sTplFile)) . '.cache.html';
 
         // If the cache has expired
-        if ($this->file->modificationTime($this->sCompileDirFile) > $this->file->modificationTime($this->sCacheDirFile) || (!empty($this->mCacheExpire) && $this->
-                file->modificationTime($this->sCacheDirFile) < time() - $this->mCacheExpire))
+        if ($this->file->getModifTime($this->sCompileDirFile) > $this->file->getModifTime($this->sCacheDirFile) || (!empty($this->mCacheExpire) && $this->
+                file->getModifTime($this->sCacheDirFile) < time() - $this->mCacheExpire))
         {
             ob_start();
 

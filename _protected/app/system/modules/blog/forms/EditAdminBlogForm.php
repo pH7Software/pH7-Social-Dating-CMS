@@ -9,7 +9,6 @@ namespace PH7;
 
 use
 PH7\Framework\Str\Str,
-PH7\Framework\Navigation\Browser,
 PH7\Framework\Security\CSRF\Token,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri;
@@ -63,8 +62,6 @@ class EditAdminBlogForm
             $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(2, 200))));
             $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', array('accept' => 'image/*')));
 
-            /** Disable the cache for the thumbnail if the user modifies * */
-            (new Browser)->noCache();
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><br /><img src="' . Blog::getThumb($oPost->blogId) . '" alt="' . t('Thumbnail') . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'));
 
             if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog/' . PH7_IMG . $iBlogId . '/thumb.png'))
