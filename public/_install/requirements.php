@@ -45,7 +45,7 @@ $iErrors = (!empty($aErrors)) ? count($aErrors) : 0;
 
 if ($iErrors > 0)
 {
-    echo '<!doctype html><html><head><meta charset="utf-8"><title>Requirements - Installation pH7 - PHS - Dating SOCIAL CMS</title><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.error{color:red;font-size:13px}.success{color:green}.success,.error{font-weight:bold}.italic{font-style:italic}.underline{text-decoration:underline}</style></head><body><div class="center">';
+    echo '<!doctype html><html><head><meta charset="utf-8"><title>Requirements - Installation of pH7CMS</title><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.error{color:red;font-size:13px}.success{color:green}.success,.error{font-weight:bold}.italic{font-style:italic}.underline{text-decoration:underline}</style></head><body><div class="center">';
 
     printf('<h3 class="error underline italic">You have %d error(s):</h3>', $iErrors);
 
