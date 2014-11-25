@@ -5,6 +5,7 @@
  */
 
 /*
+ * ATTENTION!
  * Please remplace "ph7cms" by your username by registering here: http://www.geonames.org/login
  * After, you will need to enable the Web service here: http://www.geonames.org/manageaccount
  */
