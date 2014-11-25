@@ -26,8 +26,8 @@ class HeaderUrl
      * @static
      * @param string $sUrl Default NULL, so it's the current URL.
      * @param string $sMessage Default NULL, so no message.
-     * @param string $sType You can as the value of the message type: "success", "info", "warning" or "error". Default is sucess.
-     * @param integer $iRedirectCode Default NULL, so the redirect code is "301".
+     * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
+     * @param integer $iRedirectCode Default NULL, so the redirect code will be "301".
      * @return void
      */
     public static function redirect($sUrl = null, $sMessage = null, $sType = 'success', $iRedirectCode = null)

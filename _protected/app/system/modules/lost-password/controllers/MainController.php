@@ -70,7 +70,7 @@ class MainController extends Controller
         elseif (AdminCore::auth())
             $sUrl = Uri::get(PH7_ADMIN_MOD, 'main', 'index');
         else
-            $sUrl = HeaderUrl::redirect($this->registry->site_url);
+            $sUrl = $this->registry->site_url;
 
         HeaderUrl::redirect($sUrl);
 

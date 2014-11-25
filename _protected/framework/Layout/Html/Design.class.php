@@ -180,8 +180,8 @@ class Design
     *
     * @param string $sUrl If NULL, the URL will be the current page. Default NULL
     * @param string $sMsg, Optional, display a message after redirect of the page.
-    * @param string $sType You can as the value of the message type: "success", "info", "warning" or "error". Default is sucess.
-    * @param integer $iTime Optional, a time. Default value is 3 seconds.
+    * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
+    * @param integer $iTime Optional, a time. Default: "3" seconds.
     * @return void
     */
     public function setRedirect($sUrl = null, $sMsg = null, $sType = 'success', $iTime = 3)
@@ -354,7 +354,7 @@ class Design
      * Set flash message.
      *
      * @param string $sMessage
-     * @param string $sType Default is sucess, You can as the value of the message type: "success", "info", "warning" or "error".
+     * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
      * @return void
      */
     public function setFlashMsg($sMessage, $sType = '')
@@ -503,7 +503,7 @@ class Design
      * @param string $sType The default image type to show. Default wavatar
      * @param integer $iSize  The size of the image. Default 80
      * @param character $cRating The max image rating allowed. Default G (for all)
-     * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get warning with most web browsers. Default FALSE
+     * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default FALSE
      * @return string The Link Avatar.
      */
     public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $cRating = 'g', $bSecure = false)

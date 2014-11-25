@@ -109,8 +109,8 @@ class Security
                 if ($sLockoutTime > $this->_sCurrentTime)
                 {
                     /**
-                     * Send email to prevent someone tries to hack the member account.
-                     * We test that the number of attempts equals the number of tantatives maximim to avoid duplication of sending emails.
+                     * Send email to prevent that someone tries to hack their member account.
+                     * We test that the number of attempts equals the number of maximim tantatives to avoid duplication of sending emails.
                      */
                     if ($oRow->attempts == $iMaxAttempts)
                         (new \PH7\Security)->sendAlertLoginAttemptsExceeded($iMaxAttempts, $iAttemptTime, $this->_sIp, $sEmail, $oView, $sTable);
