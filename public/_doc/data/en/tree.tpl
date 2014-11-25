@@ -1,4 +1,4 @@
-<!-- Last Update: 10/13/2014 by Pierre-Henry Soria -->
+<!-- Last Update: 11/26/2014 by Pierre-Henry Soria -->
 
 <h1>Tree of pH7CMS</h1>
 
@@ -286,6 +286,7 @@
 │   │           │   │   └── UserController.php
 │   │           │   ├── forms
 │   │           │   │   ├── AddAdminForm.php
+│   │           │   │   ├── AddFakeProfilesForm.php
 │   │           │   │   ├── AddUserForm.php
 │   │           │   │   ├── AdsForm.php
 │   │           │   │   ├── AnalyticsApiForm.php
@@ -296,6 +297,7 @@
 │   │           │   │   ├── MetaMainForm.php
 │   │           │   │   ├── processing
 │   │           │   │   │   ├── AddAdminFormProcess.php
+│   │           │   │   │   ├── AddFakeProfilesFormProcess.php
 │   │           │   │   │   ├── AddUserFormProcess.php
 │   │           │   │   │   ├── AdsFormProcess.php
 │   │           │   │   │   ├── AnalyticsApiFormProcess.php
@@ -387,6 +389,7 @@
 │   │           │               │   ├── freespace.tpl
 │   │           │               │   └── index.tpl
 │   │           │               └── user
+│   │           │                   ├── addfakeprofiles.tpl
 │   │           │                   ├── add.tpl
 │   │           │                   ├── browse.tpl
 │   │           │                   ├── import.tpl
@@ -1436,7 +1439,6 @@
 │   │   │           ├── gzip
 │   │   │           └── pH7log.json
 │   │   └── tmp
-│   │       ├── _license.txt
 │   │       └── stats
 │   │           └── readme.txt
 │   ├── framework
@@ -1500,6 +1502,7 @@
 │   │   │   ├── Core.class.php
 │   │   │   ├── Exception.class.php
 │   │   │   ├── Kernel.class.php
+│   │   │   ├── Kerneltmp.class.php
 │   │   │   └── License.class.php
 │   │   ├── Cron
 │   │   │   └── Run
@@ -2498,6 +2501,7 @@
 │   │   │   │   ├── config.ini
 │   │   │   │   └── constants.php
 │   │   │   ├── logs
+│   │   │   │   └── keep
 │   │   │   └── sql
 │   │   │       └── MySQL
 │   │   │           ├── pH7_Core.sql
@@ -2660,6 +2664,7 @@
 │   │   │           ├── smarty_resource_recompiled.php
 │   │   │           ├── smarty_resource_uncompiled.php
 │   │   │           └── smarty_security.php
+│   │   ├── _license-key.txt
 │   │   ├── requirements.php
 │   │   ├── sample.htaccess
 │   │   ├── static
@@ -4522,9 +4527,10 @@
 ├── _test
 │   └── Unit
 └── _tools
+    ├── deployment.sh
     ├── pH7.sh
     └── php-webserver.sh
 
 </pre>
 
-<p>Statistics: 1367 directories, 3152 files.</p>
+<p>Statistics: 1367 directories, 3158 files.</p>
