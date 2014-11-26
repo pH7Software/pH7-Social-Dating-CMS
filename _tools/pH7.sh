@@ -65,7 +65,7 @@ function clear-cache() {
 function remove-tmp-file() {
     _confirm "Are you sure you want to remove the temporary files (e.g. file.pl~, ._file.py)?"
     if [ $? -eq 1 ]; then
-        find . -type f \( -name '*~' -or -name '*.swp' -or -name '.directory' -or -name '._*' -or -name '.DS_Store*' -or -name 'Thumbs.db' \) -exec rm {} \;
+        find . -type f \( -name '*~' -or -name '*.tmp' -or -name '*.swp' -or -name '.directory' -or -name '._*' -or -name '.DS_Store*' -or -name 'Thumbs.db' \) -exec rm {} \;
         echo "The temporary files have been removed!"
     fi
 }
