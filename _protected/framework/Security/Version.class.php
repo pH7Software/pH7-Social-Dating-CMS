@@ -21,10 +21,14 @@ final class Version
     const LATEST_VERSION_URL = 'http://ph7cms.com/xml/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /***** Framework Kernel *****/
-    const KERNEL_VERSION = Kernel::SOFTWARE_VERSION;
-    const KERNEL_BUILD = Kernel::SOFTWARE_BUILD;
+    const KERNEL_VERSION_NAME = 'pOH';
+    const KERNEL_VERSION = '1.2.0';
+    const KERNEL_BUILD = '1';
     const KERNEL_RELASE_DATE = '2014-11-28';
-    const KERNEL_VERSION_NAME = Kernel::SOFTWARE_VERSION_NAME;
+
+    /***** Framework Server *****/
+    const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
+    const KERNEL_SERVER_NAME = 'pH7WS/1.0.0'; // pH7 Web Server
 
     /***** Form PFBC *****/
     const PFBC_VERSION = '2.3';
