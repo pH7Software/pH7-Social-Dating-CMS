@@ -95,7 +95,7 @@ class SettingForm
 
         /********** Moderation **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="moderation"><h2 class="underline">' . t('Moderation:') . '</h2>'));
-        $oForm->addElement(new \PFBC\Element\Select(t('Avarar Manual Approval:'), 'avatar_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('avatarManualApproval'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Avatar Manual Approval:'), 'avatar_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('avatarManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Profile Background Manual Approval:'), 'profile_background_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('profileBackgroundManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Note Post Manual Approval:'), 'note_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('noteManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Pictures Manual Approval:'), 'picture_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('pictureManualApproval'), 'required' => 1)));

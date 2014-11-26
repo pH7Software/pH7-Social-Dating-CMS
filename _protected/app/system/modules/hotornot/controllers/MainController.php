@@ -38,7 +38,7 @@ class MainController extends Controller
         $this->view->desc_for_woman = $sWomenDesc;
 
         /*** Display ***/
-        // If the user is connected, we do not display its own avarar since this user can not vote for himself.
+        // If the user is connected, we do not display its own avatar since this user can not vote for himself.
         $iProfileId = (UserCore::auth()) ? $this->session->get('member_id') : null;
         $oData = $this->oHoNModel->getPicture($iProfileId);
 
