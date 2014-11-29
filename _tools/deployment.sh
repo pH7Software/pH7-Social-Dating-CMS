@@ -37,16 +37,22 @@ function run() {
 
             ## Config Files, etc.
             rm ./public/_constants.php
+             rm ./.gitignore
+            rm ./.scrutinizer.yml
+            rm ./.travis.yml
             rm ./public/_install/_license-key.txt
             rm ./_protected/app/configs/config.ini
+
+            ## Other
             rm ./_protected/framework/Core/Kernel.class.php
             rm ./_protected/framework/Core/License.class.php
             rm -f ./_protected/app/system/core/assets/cron/_delay/*
             rm -rf ./public/_repository/import/*
             rm -rf ./public/_repository/module/*
             rm -rf ./public/_repository/upgrade/*
-            rm -rf ./_test/*
-            rm -rf ./public/_doc/*
+            rm -rf ./public/_doc/
+            rm -rf ./_test/
+            rm -rf ./git/
 
             echo "Done!"
             echo "Remove \"deployment.sh\" (this file) before packaging pH7CMS"
