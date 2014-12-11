@@ -42,7 +42,7 @@ class EditForm
         }
         unset($oHR);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', array('value'=>$oAdmin->username, 'required'=>1, 'validation'=>new \PFBC\Validation\Str(6,40))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', array('value'=>$oAdmin->username, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', array('value'=>$oAdmin->email, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('value'=>$oAdmin->firstName, 'required'=>1, 'validation'=>new \PFBC\Validation\Str(2,20))));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('value'=>$oAdmin->lastName, 'required'=>1, 'validation'=>new \PFBC\Validation\Str(2,20))));

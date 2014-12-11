@@ -94,7 +94,7 @@ function validate_name($sName, $iMin = 2, $iMax = 20)
  * @param integer $iMax Default 40
  * @return integer (0 = OK | 1 = too short | 2 = too long | 3 = bad username).
  */
-function validate_username($sUsername, $iMin = 4, $iMax = 40)
+function validate_username($sUsername, $iMin = 3, $iMax = 30)
 {
     if (mb_strlen($sUsername) < $iMin) return 1;
     elseif (mb_strlen($sUsername) > $iMax) return 2;
