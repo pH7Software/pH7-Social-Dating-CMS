@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Loader
- * @version          1.4
+ * @version          1.5
  */
 
 namespace PH7\Framework\Loader;
@@ -156,7 +156,7 @@ final class Autoloader
      */
     private function _getServerFileName($sFileNamePath)
     {
-        return '__' . strtolower(str_replace(array('/', '.class', '.php'), '', $sFileNamePath)) . '.dwld';
+        return md5(strtolower(str_replace(array('/', '.class', '.php'), '', $sFileNamePath))) . '.dwld';
     }
 
 }

@@ -113,7 +113,7 @@ class InstallController extends Controller
                 if ($_SESSION['status_license'] == 'success')
                 {
                     if (empty($_SESSION['val']))
-                        $_SESSION['val']['path_protected'] = dirname(PH7_ROOT_PUBLIC) . PH7_DS . '_protected' . PH7_DS;
+                        $_SESSION['val']['path_protected'] = PH7_ROOT_PUBLIC . '_protected' . PH7_DS;
 
                     if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected']))
                     {

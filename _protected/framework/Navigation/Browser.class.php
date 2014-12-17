@@ -15,6 +15,9 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Str\Str, PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Server\Server;
 
+/**
+ * @internal In this class, there're some yoda conditions.
+ */
 class Browser
 {
 

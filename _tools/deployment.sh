@@ -27,8 +27,8 @@ function run() {
 
             ## Caches
             # public
-            rm -rf ./public/_install/data/caches/smarty_compile/*
-            rm -rf ./public/_install/data/caches/smarty_cache/*
+            rm -rf ./_install/data/caches/smarty_compile/*
+            rm -rf ./_install/data/caches/smarty_cache/*
             # _protected
             rm -rf ./_protected/data/cache/pH7tpl_compile/*
             rm -rf ./_protected/data/cache/pH7tpl_cache/*
@@ -36,21 +36,21 @@ function run() {
             rm -rf ./_protected/data/cache/pH7_cache/*
 
             ## Config Files, etc.
-            rm ./public/_constants.php
+            rm ./_constants.php
              rm ./.gitignore
             rm ./.scrutinizer.yml
             rm ./.travis.yml
-            rm ./public/_install/_license-key.txt
+            rm ./_install/_license-key.txt
             rm ./_protected/app/configs/config.ini
 
             ## Other
             rm ./_protected/framework/Core/Kernel.class.php
             rm ./_protected/framework/Core/License.class.php
             rm -f ./_protected/app/system/core/assets/cron/_delay/*
-            rm -rf ./public/_repository/import/*
-            rm -rf ./public/_repository/module/*
-            rm -rf ./public/_repository/upgrade/*
-            rm -rf ./public/_doc/
+            rm -rf ./_repository/import/*
+            rm -rf ./_repository/module/*
+            rm -rf ./_repository/upgrade/*
+            rm -rf ./_doc/
             rm -rf ./_test/
             rm -rf ./git/
 

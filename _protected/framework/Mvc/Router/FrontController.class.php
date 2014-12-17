@@ -53,6 +53,8 @@ final class FrontController
         $this->oHttpRequest = new Http;
         $this->oUri = Uri::getInstance();
 
+        $this->indexFileRouter();
+
         if ($this->oUri->fragment(0) === 'asset' && $this->oUri->fragment(1) === 'gzip')
         {
             // Loading and compress CSS and JavaScript files
@@ -109,7 +111,7 @@ final class FrontController
         $oUrl = UriRoute::loadFile(new \DomDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute)
         {
-            if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->requestUri(), $aMatches))
+            if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->getPH7RequestUri(), $aMatches))
             {
                 $this->bRouterRewriting = true;
 
@@ -195,7 +197,7 @@ final class FrontController
         }
 
         // Check if file exist
-        if (!$this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) || $this->isIndexFile())
+        if (!$this->oConfig->load(PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
         {
             $this->notFound('The <b>' . $this->oRegistry->module . '</b> system module is not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS .
                 '</b><br /> or the <b>' . PH7_CONFIG_FILE . '</b> file is not found.<br />File: <b>' . PH7_PATH_SYS . PH7_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '</b>');
@@ -699,19 +701,26 @@ final class FrontController
 
     /**
      * We display an error page if it on the index file to indicate no file extension in order to avoid utilization of a security vulnerability  in the language.
+     * Otherwise, if the URL rewrite extension is not enabled, we redirect the page to index.php file (then [URL]/index.php/[REQUEST]/ ).
      *
      * @access private
      * @see \PH7\Framework\Mvc\Router\FrontController\notFound()
-     * @return boolean Returns TRUE if it is on the index file, otherwise FALSE.
+     * @return void
      */
-    private function isIndexFile()
+    private function indexFileRouter()
     {
-        if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE)
+        /*
+
+        if (!\PH7\Framework\Server\Server::isRewriteMod() && false === strpos($this->oHttpRequest->currentUrl(), static::INDEX_FILE))
         {
-            $this->notFound('If we\'re in production mode, we display an error page if it on the index file to indicate no file extension in order to avoid utilization of a security vulnerability  in the language.');
-            return true;
+            \PH7\Framework\Url\HeaderUrl::redirect(PH7_URL_ROOT . static::INDEX_FILE);
         }
-        return false;
+        elseif (\PH7\Framework\Server\Server::isRewriteMod() && false !== strpos($this->oHttpRequest->currentUrl(), static::INDEX_FILE))
+        {
+            $this->notFound('If we are in production mode, we display an error page if it is on the index.php file to indicate no file extension in order to avoid utilization of a security vulnerability in the PHP programming language.');
+        }
+
+        */
     }
 
     /**
