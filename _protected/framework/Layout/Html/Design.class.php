@@ -256,7 +256,7 @@ class Design
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
     {
-        if (PH7_VALID_LICENSE) return;
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) return;
 
         ($bLink ? $bSoftwareName = true : '');
 
