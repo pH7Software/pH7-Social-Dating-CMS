@@ -280,7 +280,7 @@ class Http
     }
 
     /**
-     * @return string Request URI without the main path and/or index.php file extension.
+     * @return string Request URI without the main path and index.php file extension.
      */
     public function getPH7RequestUri()
     {

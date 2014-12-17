@@ -156,7 +156,7 @@ final class FrontController
                     {
                         if ($sKey !== 0)
                         {
-                            $this->oHttpRequest->setGet($aVars[$sKey - 1], $sMatch);
+                            $this->oHttpRequest->setGet($aVars[$sKey-1], $sMatch);
 
                             /** Request Parameter for the Router Rewriting mode. * */
                             $this->aRequestParameter = $this->oUri->segments($this->oUri->totalFragment()-$iOffset);

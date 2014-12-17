@@ -162,7 +162,7 @@ final class Server
      */
     public static function checkInternetConnection($sCheckHost = 'www.google.com')
     {
-        return (bool) fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);
+        return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);
     }
 
 }
