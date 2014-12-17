@@ -49,8 +49,8 @@ function clear-cache() {
         _cache-permissions
 
         # public
-        rm -rf ./public/_install/data/caches/smarty_compile/*
-        rm -rf ./public/_install/data/caches/smarty_cache/*
+        rm -rf ./_install/data/caches/smarty_compile/*
+        rm -rf ./_install/data/caches/smarty_cache/*
 
         # _protected
         rm -rf ./_protected/data/cache/pH7tpl_compile/*
@@ -119,9 +119,9 @@ function show-empty-file() {
 function file-permissions() {
     find . -type f -print0 | sudo xargs -0 chmod 666
     find . -type d -print0 | sudo xargs -0 chmod 777
-    sudo chmod 777 -R ./public/
-    sudo chmod 777 -R ./public/_repository/module/*
-    sudo chmod 777 -R ./public/_repository/upgrade/*
+    sudo chmod 777 -R ./
+    sudo chmod 777 -R ./_repository/module/*
+    sudo chmod 777 -R ./_repository/upgrade/*
     sudo chmod 777 -R ./_protected/app/configs/*
     sudo chmod 777 -R ./_protected/data/backup/*
     sudo chmod 777 -R ./_protected/data/tmp/*
@@ -136,10 +136,10 @@ function file-strict-permissions()
 {
     find . -type f -print0 | sudo xargs -0 chmod 644
     find . -type d -print0 | sudo xargs -0 chmod 755
-    sudo chmod 777 ./public/
-    sudo chmod 777 -R ./public/_install/*
-    sudo chmod 777 -R ./public/_repository/module/*
-    sudo chmod 777 -R ./public/_repository/upgrade/*
+    sudo chmod 777 ./
+    sudo chmod 777 -R ./_install/*
+    sudo chmod 777 -R ./_repository/module/*
+    sudo chmod 777 -R ./_repository/upgrade/*
     sudo chmod 777 -R ./_protected/app/configs/*
     sudo chmod 777 -R ./_protected/data/backup/*
     sudo chmod 777 -R ./_protected/data/tmp/*
@@ -181,7 +181,7 @@ function _clean-indent() {
 
 # Cache permissions (CHMOD)
 function _cache-permissions() {
-    sudo chmod 777 -R ./public/_install/data/caches/*
+    sudo chmod 777 -R ./_install/data/caches/*
     sudo chmod 777 -R ./_protected/data/cache/*
 }
 

@@ -280,6 +280,17 @@ class Http
     }
 
     /**
+     * @return string Request URI without the main path and/or index.php file extension.
+     */
+    public function getPH7RequestUri()
+    {
+        $sPath = substr(PH7_PATH_ROOT, 1, -1);
+        $aExport = explode(PH7_DS, $sPath);
+        $sRequest = str_replace(array($aExport[count($aExport)-1], 'index.php'), array('', PH7_SH), $this->getRequestUri());
+        return str_replace(PH7_SH . PH7_SH, '', $sRequest);
+    }
+
+    /**
      * @return mixed (string | null) The Query String or the NULL value.
      */
     public function getQueryString()
