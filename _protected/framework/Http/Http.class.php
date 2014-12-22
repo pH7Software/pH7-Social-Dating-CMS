@@ -287,7 +287,9 @@ class Http
         $sPath = substr(PH7_PATH_ROOT, 1, -1);
         $aExport = explode(PH7_DS, $sPath);
         $sRequest = str_replace(array($aExport[count($aExport)-1], 'index.php'), array('', PH7_SH), $this->getRequestUri());
-        return str_replace(PH7_SH . PH7_SH, '', $sRequest);
+        $sRequest = str_replace(PH7_SH . PH7_SH, PH7_SH, $sRequest); // We clean the URL by removing any slashes in duplicates
+
+        return substr($sRequest, 1); // Finally, we have to remove the first slash (which is the first character) for compatibility
     }
 
     /**
