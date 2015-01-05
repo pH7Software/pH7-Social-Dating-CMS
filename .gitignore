@@ -6,6 +6,10 @@ data/*
 _constants.php
 _protected/app/configs/config.ini
 _protected/app/system/core/assets/cron/_delay/
+_protected/framework/Core/Kernel.class.php
+_protected/framework/Core/Kernel_tmp.class.php
+_protected/framework/Core/License.class.php
+_protected/framework/Core/License_tmp.class.php
 _protected/data/tmp/*
 _protected/data/backup/*
 _protected/data/cache/*
