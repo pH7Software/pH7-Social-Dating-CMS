@@ -19,7 +19,7 @@ class AvatarForm
             if (\PFBC\Form::isValid($_POST['submit_avatar']))
                 new AvatarFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_avatar', 500);

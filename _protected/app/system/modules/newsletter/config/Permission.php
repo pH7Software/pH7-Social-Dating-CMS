@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -20,13 +20,13 @@ class Permission extends PermissionCore
         if (UserCore::auth() && $this->registry->controller === 'HomeController')
         {
             // Newsletter subscription is only for visitors, not for members since they can subscribe into their account.
-            HeaderUrl::redirect(Uri::get('user','main','index'));
+            Header::redirect(Uri::get('user','main','index'));
         }
 
         if (!AdminCore::auth() && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            HeaderUrl::redirect(Uri::get('user','main','login'), $this->adminSignInMsg(), 'error');
+            Header::redirect(Uri::get('user','main','login'), $this->adminSignInMsg(), 'error');
         }
 
     }

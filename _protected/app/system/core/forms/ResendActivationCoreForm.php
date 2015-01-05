@@ -25,7 +25,7 @@ class ResendActivationCoreForm
                 if (\PFBC\Form::isValid($_POST['submit_resend_activation']))
                     new ResendActivationCoreFormProcess($sTable);
 
-                Framework\Url\HeaderUrl::redirect();
+                Framework\Url\Header::redirect();
             }
 
             $oForm = new \PFBC\Form('form_resend_activation', 500);

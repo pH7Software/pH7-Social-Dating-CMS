@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 abstract class PermissionCore extends Framework\Core\Core
 {
@@ -34,17 +34,17 @@ abstract class PermissionCore extends Framework\Core\Core
 
     public function signUpRedirect()
     {
-        HeaderUrl::redirect(Uri::get('user','signup','step1'), $this->signUpMsg(), 'error');
+        Header::redirect(Uri::get('user','signup','step1'), $this->signUpMsg(), 'error');
     }
 
     public function signInRedirect()
     {
-        HeaderUrl::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
+        Header::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
     }
 
     public function alreadyConnectedRedirect()
     {
-        HeaderUrl::redirect(Uri::get('user','account','index'), $this->alreadyConnectedMsg(), 'error');
+        Header::redirect(Uri::get('user','account','index'), $this->alreadyConnectedMsg(), 'error');
     }
 
     /**
@@ -54,7 +54,7 @@ abstract class PermissionCore extends Framework\Core\Core
      */
     public function paymentRedirect()
     {
-        HeaderUrl::redirect(Uri::get('payment','main','index'), $this->upgradeMembershipMsg(), 'warning');
+        Header::redirect(Uri::get('payment','main','index'), $this->upgradeMembershipMsg(), 'warning');
     }
 
     public function signInMsg()

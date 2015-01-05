@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Url\Header;
 
 class CommentForm
 {
@@ -19,7 +19,7 @@ class CommentForm
             if (\PFBC\Form::isValid($_POST['submit_comment']))
                 new CommentFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_comment', 600);

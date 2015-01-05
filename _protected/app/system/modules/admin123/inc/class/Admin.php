@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Session\Session, PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class Admin extends AdminCore
 {
@@ -21,7 +21,7 @@ class Admin extends AdminCore
     {
         (new Session)->destroy();
 
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD,'main','login'), t('You have logged out!'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD,'main','login'), t('You have logged out!'));
     }
 
     /**

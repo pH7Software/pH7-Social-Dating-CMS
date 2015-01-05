@@ -12,7 +12,7 @@ use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class ReplyMsgFormProcess extends Form
 {
@@ -41,7 +41,7 @@ class ReplyMsgFormProcess extends Form
         else
         {
             $oForumModel->addMessage($iProfileId, $iTopicId, $sMessage, $sCurrentTime);
-            HeaderUrl::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name').','.$iForumId.','.$this->httpRequest->get('topic_name').','.$iTopicId), t('Your message has been updated successfully!'));
+            Header::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name').','.$iForumId.','.$this->httpRequest->get('topic_name').','.$iTopicId), t('Your message has been updated successfully!'));
         }
         unset($oForumModel);
     }

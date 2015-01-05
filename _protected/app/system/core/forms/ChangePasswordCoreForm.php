@@ -19,7 +19,7 @@ class ChangePasswordCoreForm
             if (\PFBC\Form::isValid($_POST['submit_change_password']))
                 new ChangePasswordCoreFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_change_password', 500);

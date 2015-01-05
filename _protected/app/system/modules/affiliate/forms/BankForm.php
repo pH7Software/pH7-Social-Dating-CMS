@@ -22,7 +22,7 @@ class BankForm
             if (\PFBC\Form::isValid($_POST['submit_bank_account']))
                 new BankFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oHR = new Http;

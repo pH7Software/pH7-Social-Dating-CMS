@@ -28,7 +28,7 @@ class Permission extends PermissionCore
         if (!$bAdminAuth && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('game','main','index'), $this->adminSignInMsg(), 'error');
+            Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('game','main','index'), $this->adminSignInMsg(), 'error');
         }
     }
 

@@ -11,7 +11,7 @@ defined('PH7') or die('Restricted access');
 use
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
 class AdminBlogFormProcess extends Form
@@ -76,7 +76,7 @@ class AdminBlogFormProcess extends Form
                 $this->sMsg = t('Post created successfully!');
             }
 
-            HeaderUrl::redirect(Uri::get('blog', 'main', 'read', $this->httpRequest->post('post_id')), $this->sMsg);
+            Header::redirect(Uri::get('blog', 'main', 'read', $this->httpRequest->post('post_id')), $this->sMsg);
         }
     }
 

@@ -17,7 +17,7 @@ PH7\Framework\Cookie\Cookie,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Date\CDateTime,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class JoinFormProcess extends Form
 {
@@ -75,7 +75,7 @@ class JoinFormProcess extends Form
             $this->oRegistration->sendMail($aData);
 
             $this->session->set('mail_step1', $this->httpRequest->post('mail'));
-            HeaderUrl::redirect(Uri::get('user','signup','step2'));
+            Header::redirect(Uri::get('user','signup','step2'));
         }
     }
 
@@ -109,7 +109,7 @@ class JoinFormProcess extends Form
         {
             // Register successfully in database for step 2!
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
-            HeaderUrl::redirect(Uri::get('user','signup','step3'));
+            Header::redirect(Uri::get('user','signup','step3'));
         }
     }
 
@@ -129,7 +129,7 @@ class JoinFormProcess extends Form
         {
             $this->session->destroy(); // Remove all sessions created pending registration
 
-            HeaderUrl::redirect(Uri::get('user','main','login'), t('You now been registered! %0%', $this->oRegistration->getMsg()));
+            Header::redirect(Uri::get('user','main','login'), t('You now been registered! %0%', $this->oRegistration->getMsg()));
         }
     }
 

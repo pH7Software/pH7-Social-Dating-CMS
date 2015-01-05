@@ -10,7 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Cache\Cache,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
 class MembershipFormProcess extends Form
@@ -33,7 +33,7 @@ class MembershipFormProcess extends Form
         /* Clean UserCoreModel Cache */
         (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(Uri::get('payment','admin','membershiplist'), t('The Membership has been added!'));
+        Header::redirect(Uri::get('payment','admin','membershiplist'), t('The Membership has been added!'));
     }
 
 }

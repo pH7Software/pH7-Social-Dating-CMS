@@ -25,7 +25,7 @@ class EditNoteForm
             if (\PFBC\Form::isValid($_POST['submit_edit_note']))
                 new EditNoteFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         // Generate edit form post of the note

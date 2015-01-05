@@ -6,14 +6,14 @@
  * @package        PH7 / App / System / Module / Note / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
 
     public function index()
     {
-        HeaderUrl::redirect(Uri::get('note', 'main', 'index'), t('Welcome to the Note administrator mode.'));
+        Header::redirect(Uri::get('note', 'main', 'index'), t('Welcome to the Note administrator mode.'));
     }
 
     public function unmoderated()
@@ -59,7 +59,7 @@ class AdminController extends MainController
             $this->sMsg = t('Oops! The Note could not be approved!');
         }
 
-        HeaderUrl::redirect(Uri::get('note','admin','unmoderated'), $this->sMsg);
+        Header::redirect(Uri::get('note','admin','unmoderated'), $this->sMsg);
     }
 
     public function disapproved()
@@ -80,7 +80,7 @@ class AdminController extends MainController
             $this->sMsg = t('Oops! The Note could not be approved!');
         }
 
-        HeaderUrl::redirect(Uri::get('note', 'main', 'index'), $this->sMsg);
+        Header::redirect(Uri::get('note', 'main', 'index'), $this->sMsg);
     }
 
 }

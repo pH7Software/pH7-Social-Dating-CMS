@@ -11,7 +11,7 @@ defined('PH7') or die('Restricted access');
 use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
 class EditNoteFormProcess extends Form
@@ -114,7 +114,7 @@ class EditNoteFormProcess extends Form
         (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
         $sMsg = ($iApproved == '0') ? t('Your Note has been received! But it will be visible once approved by our moderators. Please do not send a new Note because this is useless!') : t('Post created successfully!');
-        HeaderUrl::redirect(Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId), $sMsg);
+        Header::redirect(Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId), $sMsg);
     }
 
 }

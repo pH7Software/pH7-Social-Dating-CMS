@@ -39,7 +39,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
         /*
         if ($this->browser->isMobile())
         {
-            \PH7\Framework\Url\HeaderUrl::redirect('mobile');
+            \PH7\Framework\Url\Header::redirect('mobile');
         }
         */
 

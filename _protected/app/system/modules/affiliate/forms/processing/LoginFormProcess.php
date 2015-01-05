@@ -13,7 +13,7 @@ PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 class LoginFormProcess extends Form
@@ -97,7 +97,7 @@ class LoginFormProcess extends Form
                 $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
                 $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
 
-                HeaderUrl::redirect(Uri::get('affiliate','account','index'), t('You signup is successfully!'));
+                Header::redirect(Uri::get('affiliate','account','index'), t('You signup is successfully!'));
             }
         }
     }

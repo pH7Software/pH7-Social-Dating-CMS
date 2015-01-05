@@ -22,7 +22,7 @@ class EditMsgForm
             if (\PFBC\Form::isValid($_POST['submit_edit_msg']))
                 new EditMsgFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oHttpRequest = new Http;

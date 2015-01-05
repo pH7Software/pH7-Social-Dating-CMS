@@ -19,7 +19,7 @@ class ImportUserForm
             if (\PFBC\Form::isValid($_POST['submit_import_user']))
                 new ImportUserFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_import_user',550);

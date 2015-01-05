@@ -23,7 +23,7 @@ class EditMembershipForm
             if (\PFBC\Form::isValid($_POST['submit_edit_membership']))
                 new EditMembershipFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oMembership = (new PaymentModel)->getMemberships( (new Http)->get('group_id', 'int') );

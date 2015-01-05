@@ -6,14 +6,14 @@
  * @package        PH7 / App / System / Module / Game / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
 
     public function index()
     {
-        HeaderUrl::redirect(Uri::get('game', 'main', 'index'), t('Welcome to the Game administrator mode.'));
+        Header::redirect(Uri::get('game', 'main', 'index'), t('Welcome to the Game administrator mode.'));
     }
 
     public function add()
@@ -55,7 +55,7 @@ class AdminController extends MainController
             $sMsg = t('The game could not be removed.');
         }
 
-        HeaderUrl::redirect(Uri::get('game', 'admin', 'index'), $sMsg);
+        Header::redirect(Uri::get('game', 'admin', 'index'), $sMsg);
     }
 
 }

@@ -21,7 +21,7 @@ class NotificationForm
         {
             if (\PFBC\Form::isValid($_POST['submit_notification']))
                 new NotificationFormProcess($iProfileId, $oUserModel);
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oNotification = $oUserModel->getNotification($iProfileId);

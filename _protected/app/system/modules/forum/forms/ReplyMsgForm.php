@@ -19,7 +19,7 @@ class ReplyMsgForm
             if (\PFBC\Form::isValid($_POST['submit_reply']))
                 new ReplyMsgFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_reply', '100%');

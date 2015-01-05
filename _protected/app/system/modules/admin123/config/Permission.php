@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -25,12 +25,12 @@ class Permission extends PermissionCore
 
         if (!$bAdminAuth && $this->registry->action !== 'login')
         {
-            HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'login'), $this->signInMsg(), 'error');
+            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'login'), $this->signInMsg(), 'error');
         }
 
         if ($bAdminAuth && $this->registry->action === 'login')
         {
-            HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('Oops! You are already logged in as administrator.'), 'error');
+            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('Oops! You are already logged in as administrator.'), 'error');
         }
 
         // Options ...

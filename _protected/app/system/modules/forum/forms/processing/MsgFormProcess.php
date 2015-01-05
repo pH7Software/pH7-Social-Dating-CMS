@@ -13,7 +13,7 @@ PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class MsgFormProcess extends Form
 {
@@ -41,7 +41,7 @@ class MsgFormProcess extends Form
         else
         {
             $oForumModel->addTopic($iProfileId, $iForumId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
-            HeaderUrl::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name').','.$iForumId.','.$this->httpRequest->post('title').','.Db::getInstance()->lastInsertId()), t('Your message has been added successfully!'));
+            Header::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name').','.$iForumId.','.$this->httpRequest->post('title').','.Db::getInstance()->lastInsertId()), t('Your message has been added successfully!'));
         }
         unset($oForumModel);
     }

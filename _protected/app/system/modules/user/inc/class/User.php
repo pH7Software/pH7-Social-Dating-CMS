@@ -9,7 +9,7 @@ namespace PH7;
 use
 PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class User extends UserCore
 {
@@ -23,7 +23,7 @@ class User extends UserCore
     {
         (new Session)->destroy();
 
-        HeaderUrl::redirect(Uri::get('user','main','soon'), t('You have logged out!'));
+        Header::redirect(Uri::get('user','main','soon'), t('You have logged out!'));
     }
 
 }

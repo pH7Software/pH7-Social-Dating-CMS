@@ -19,7 +19,7 @@ class EditReplyMsgForm
             if (\PFBC\Form::isValid($_POST['submit_edit_reply_msg']))
                 new EditReplyMsgFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oHttpRequest = new Http;

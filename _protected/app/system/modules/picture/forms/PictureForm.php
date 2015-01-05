@@ -22,7 +22,7 @@ class PictureForm
             if (\PFBC\Form::isValid($_POST['submit_picture']))
                 new PictureFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oHttpRequest = new Http;

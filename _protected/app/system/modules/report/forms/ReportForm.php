@@ -22,7 +22,7 @@ class ReportForm
             if (\PFBC\Form::isValid($oHttpRequest->post('submit_report')))
                 new ReportFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_report', 350);

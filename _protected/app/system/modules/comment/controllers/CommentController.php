@@ -36,7 +36,7 @@ class CommentController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Uri::get('error', 'http', 'index'));
+        Framework\Url\Header::redirect(Uri::get('error', 'http', 'index'));
     }
 
     public function read()
@@ -133,7 +133,7 @@ class CommentController extends Controller
             $this->sMsg = t('Whoops! The comment could not be removed!');
         }
 
-        Framework\Url\HeaderUrl::redirect(Uri::get('comment', 'comment', 'read', $this->sTable . ',' . $this->httpRequest->post('recipient_id')), $this->sMsg);
+        Framework\Url\Header::redirect(Uri::get('comment', 'comment', 'read', $this->sTable . ',' . $this->httpRequest->post('recipient_id')), $this->sMsg);
     }
 
     /**

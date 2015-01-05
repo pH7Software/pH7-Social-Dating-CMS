@@ -20,7 +20,7 @@ class InviteForm
             if (\PFBC\Form::isValid($_POST['submit_invite']))
                 new InviteFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_invite', 350);

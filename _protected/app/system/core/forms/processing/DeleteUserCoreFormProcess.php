@@ -12,7 +12,7 @@ use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mail\Mail,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 /** For "user" and "affiliate" module **/
 class DeleteUserCoreFormProcess extends Form
@@ -60,7 +60,7 @@ class DeleteUserCoreFormProcess extends Form
 
             $this->session->destroy();
 
-            HeaderUrl::redirect(Uri::get('user','main','soon'), t('You delete account is successfully!'));
+            Header::redirect(Uri::get('user','main','soon'), t('You delete account is successfully!'));
         }
     }
 

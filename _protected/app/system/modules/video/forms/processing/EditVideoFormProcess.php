@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class EditVideoFormProcess extends Form
 {
@@ -25,7 +25,7 @@ class EditVideoFormProcess extends Form
         /* Clean VideoModel Cache */
         (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(Uri::get('video', 'main', 'video', $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sVideoTitle . ',' . $iVideoId), t('Your video has been updated successfully!'));
+        Header::redirect(Uri::get('video', 'main', 'video', $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sVideoTitle . ',' . $iVideoId), t('Your video has been updated successfully!'));
     }
 
 }

@@ -22,7 +22,7 @@ class EditForm
             if (\PFBC\Form::isValid($_POST['submit_admin_edit_account']))
                 new EditFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oHR = new Http;

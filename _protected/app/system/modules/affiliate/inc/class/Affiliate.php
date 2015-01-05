@@ -9,7 +9,7 @@ namespace PH7;
 use
 PH7\Framework\Session\Session,
 PH7\Framework\Cookie\Cookie,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
 class Affiliate extends AffiliateCore
@@ -24,7 +24,7 @@ class Affiliate extends AffiliateCore
     {
         (new Session)->destroy();
 
-        HeaderUrl::redirect(Uri::get('affiliate','home','index'), t('You have logged out!'));
+        Header::redirect(Uri::get('affiliate','home','index'), t('You have logged out!'));
     }
 
     /**

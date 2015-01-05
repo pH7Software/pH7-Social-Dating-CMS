@@ -23,7 +23,7 @@ class MetaMainForm
             if (\PFBC\Form::isValid($_POST['submit_meta']))
                 new MetaMainFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $sWhereLang = (new Http)->get('meta_lang');

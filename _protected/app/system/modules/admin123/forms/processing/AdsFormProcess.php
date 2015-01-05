@@ -11,7 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class AdsFormProcess extends Form
 {
@@ -36,7 +36,7 @@ class AdsFormProcess extends Form
         ->start(AdsCoreModel::CACHE_GROUP, 'totalAds' . ($iIsAff ? 'Affiliates' : ''), null)->clear();
 
         $sSlug = ($iIsAff) ? 'affiliate' : '';
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisement was added successfully!'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisement was added successfully!'));
     }
 
 }

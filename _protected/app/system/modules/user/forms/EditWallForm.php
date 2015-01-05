@@ -27,7 +27,7 @@ class EditWallForm
             if (\PFBC\Form::isValid($_POST['submit_edit_wall']))
                 new EditWallFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oWallData = (new WallModel)->get((new Session)->get('member_id'), (new Http)->get('wall_id'), 0, 1);

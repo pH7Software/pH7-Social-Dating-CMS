@@ -19,7 +19,7 @@ class EditAlbumForm
             if (\PFBC\Form::isValid($_POST['submit_edit_video_album']))
                 new EditAlbumFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oAlbum = (new VideoModel)->album((new Session)->get('member_id'), (new Http)->get('album_id'), 1, 0, 1);

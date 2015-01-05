@@ -19,7 +19,7 @@ class CategoryForm
             if (\PFBC\Form::isValid($_POST['submit_category']))
                 new CategoryFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];

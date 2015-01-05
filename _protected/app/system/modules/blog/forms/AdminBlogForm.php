@@ -19,7 +19,7 @@ class AdminBlogForm
             if (\PFBC\Form::isValid($_POST['submit_blog']))
                 new AdminBlogFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oCategoriesData = (new BlogModel)->getCategory(null, 0, 300);

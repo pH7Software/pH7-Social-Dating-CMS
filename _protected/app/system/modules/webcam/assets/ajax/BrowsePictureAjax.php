@@ -108,7 +108,7 @@ class BrowsePictureAjax
             {
                 $this->sMsg = t('Sorry, we did not find the photo!');
             }
-            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('webcam', 'webcam', 'picture'));
+            Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('webcam', 'webcam', 'picture'));
         }
     }
 

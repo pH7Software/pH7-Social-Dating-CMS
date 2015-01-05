@@ -19,7 +19,7 @@ class MembershipForm
             if (\PFBC\Form::isValid($_POST['submit_membership']))
                 new MembershipFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_membership', 600);

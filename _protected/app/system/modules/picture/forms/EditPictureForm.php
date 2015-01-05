@@ -18,7 +18,7 @@ class EditPictureForm
             if (\PFBC\Form::isValid($_POST['submit_edit_picture']))
                 new EditPictureFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_edit_picture', 500);

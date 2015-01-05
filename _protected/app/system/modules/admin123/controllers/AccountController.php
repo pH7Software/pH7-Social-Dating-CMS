@@ -15,7 +15,7 @@ class AccountController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'account', 'edit'));
+        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'account', 'edit'));
     }
 
     public function password()

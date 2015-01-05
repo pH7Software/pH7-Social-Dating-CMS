@@ -20,7 +20,7 @@ class LicenseForm
         {
             if (\PFBC\Form::isValid($_POST['submit_license']))
                 new LicenseFormProcess(self::$_iLicenseId);
-            Framework\Url\HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'license', '?set_msg=1'));
+            Framework\Url\Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'license', '?set_msg=1'));
         }
 
         $oForm = new \PFBC\Form('form_license', 500);

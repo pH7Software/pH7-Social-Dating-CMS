@@ -11,7 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Cache\Cache,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class EditFieldFormProcess extends Form
 {
@@ -38,7 +38,7 @@ class EditFieldFormProcess extends Form
             {
                 /* Clean UserCoreModel Cache */
                 (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
-                HeaderUrl::redirect(Uri::get('field', 'field', 'all', $sMod), t('The field has been edited.'));
+                Header::redirect(Uri::get('field', 'field', 'all', $sMod), t('The field has been edited.'));
             }
             else
                 \PFBC\Form::setError('form_edit_field', t('Oops! An error occurred while adding the field, please try again.'));

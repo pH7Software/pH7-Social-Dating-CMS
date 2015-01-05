@@ -19,7 +19,7 @@ class EditFieldForm
             if (\PFBC\Form::isValid($_POST['submit_edit_field']))
                 new EditFieldFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $sFieldPattern = Config::getInstance()->values['module.setting']['field.pattern'];

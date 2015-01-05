@@ -18,7 +18,7 @@ class Permission extends PermissionCore
         if (!AdminCore::auth())
         {
              // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            Framework\Url\HeaderUrl::redirect(PH7_URL_ROOT, $this->adminSignInMsg(), 'error');
+            Framework\Url\Header::redirect(PH7_URL_ROOT, $this->adminSignInMsg(), 'error');
         }
     }
 

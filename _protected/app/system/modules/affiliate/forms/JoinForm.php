@@ -11,7 +11,7 @@ use
 PH7\Framework\Geo\Ip\Geo,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class JoinForm
 {
@@ -23,7 +23,7 @@ class JoinForm
             if (\PFBC\Form::isValid($_POST['submit_join_aff']))
                 (new JoinFormProcess)->step1();
 
-            HeaderUrl::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_join_aff', 400);

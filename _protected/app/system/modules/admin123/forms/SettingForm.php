@@ -23,7 +23,7 @@ class SettingForm
             if (\PFBC\Form::isValid($_POST['submit_setting']))
                 new SettingFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_setting', 700);

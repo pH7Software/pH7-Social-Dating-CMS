@@ -21,7 +21,7 @@ class ForgotPasswordForm
             if (\PFBC\Form::isValid($_POST['submit_forgot_password']))
                 new ForgotPasswordFormProcess($sTable);
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_forgot_password', 500);

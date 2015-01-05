@@ -18,7 +18,7 @@ class AnalyticsApiForm
         {
             if (\PFBC\Form::isValid($_POST['submit_analytics']))
                 new AnalyticsApiFormProcess;
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_analytics', 500);

@@ -10,7 +10,7 @@ defined('PH7') or die('Restricted access');
 
 use
 PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
 class EditAdminBlogFormProcess extends Form
@@ -99,7 +99,7 @@ class EditAdminBlogFormProcess extends Form
         /* Clean BlogModel Cache */
         (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(Uri::get('blog', 'main', 'read', $sPostId),  t('Your post has been saved successfully!'));
+        Header::redirect(Uri::get('blog', 'main', 'read', $sPostId),  t('Your post has been saved successfully!'));
     }
 
 }

@@ -18,7 +18,7 @@ class PublicFileForm
             if (\PFBC\Form::isValid($_POST['submit_file']))
                 new PublicFileFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $rData = file_get_contents(PH7_PATH_ROOT . $_GET['file']);

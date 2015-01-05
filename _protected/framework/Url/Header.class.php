@@ -17,7 +17,7 @@ use
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Request\Http as HttpRequest;
 
-class HeaderUrl
+class Header
 {
 
     /**

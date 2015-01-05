@@ -23,7 +23,7 @@ class EditForm
             if (\PFBC\Form::isValid($_POST['submit_aff_edit_account']))
                 new EditFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $bAdminLogged = (AdminCore::auth() && !Affiliate::auth()); // Check if the admin is logged.

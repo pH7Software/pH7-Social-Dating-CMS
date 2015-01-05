@@ -19,7 +19,7 @@ class EditCommentForm
             if (\PFBC\Form::isValid($_POST['submit_edit_comment']))
                 new EditCommentFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oHttpRequest = new Http;

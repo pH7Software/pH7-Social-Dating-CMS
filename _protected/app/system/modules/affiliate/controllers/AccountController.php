@@ -6,7 +6,7 @@
  * @package        PH7 / App / System / Module / Affiliate / Controller
  */
 namespace PH7;
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class AccountController extends Controller
 {
@@ -54,7 +54,7 @@ class AccountController extends Controller
         if ($this->httpRequest->get('delete_status') == 'yesdelete')
         {
             $this->session->set('yes_delete', 1);
-            HeaderUrl::redirect(Uri::get('affiliate', 'account', 'yesdelete'));
+            Header::redirect(Uri::get('affiliate', 'account', 'yesdelete'));
         }
         elseif ($this->httpRequest->get('delete_status') == 'nodelete')
         {
@@ -79,7 +79,7 @@ class AccountController extends Controller
     public function yesDelete()
     {
         if (!$this->session->exists('yes_delete'))
-            HeaderUrl::redirect(Uri::get('affiliate', 'account', 'delete'));
+            Header::redirect(Uri::get('affiliate', 'account', 'delete'));
         else
             $this->output();
     }

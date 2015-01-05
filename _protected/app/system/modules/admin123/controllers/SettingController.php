@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Navigation\Page, PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Page, PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class SettingController extends Controller
 {
@@ -16,7 +16,7 @@ class SettingController extends Controller
 
     public function index()
     {
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'general'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'general'));
     }
 
     public function general()
@@ -94,7 +94,7 @@ class SettingController extends Controller
 
         $aLangs = $this->file->getDirList(PH7_PATH_APP_LANG);
         if (!in_array(substr($this->httpRequest->currentUrl(), -5), $aLangs)) {
-            HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', PH7_LANG_NAME, false));
+            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', PH7_LANG_NAME, false));
         }
         unset($aLangs);
 

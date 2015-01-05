@@ -280,7 +280,7 @@ class Twitter extends Api implements IApi
 
             // redirect the user to Twitter to authorize
             $sUrl = $this->_oTwOAuth->url('oauth/authorize', '') . '?oauth_token=' . $aResponse['oauth_token'];
-            Framework\Url\HeaderUrl::redirect($sUrl);
+            Framework\Url\Header::redirect($sUrl);
         }
         return false;
     }
