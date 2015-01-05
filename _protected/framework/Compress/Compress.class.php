@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @author           Some pieces of code are inspired script Schepp Christian Schaefer (CSS JS booster).
- * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Compress
  * @version          0.9

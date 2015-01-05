@@ -3,7 +3,7 @@
  * @title            Controller Core Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link             http://software.hizup.com
  * @package          PH7 / Install / Library
@@ -31,7 +31,7 @@ abstract class Controller implements IController
     SOFTWARE_EMAIL = 'ph7software@gmail.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
-    SOFTWARE_COPYRIGHT = '© (c) 2012-2014, Pierre-Henry Soria. All Rights Reserved.',
+    SOFTWARE_COPYRIGHT = '© (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',
     SOFTWARE_VERSION = '1.1.8',
     SOFTWARE_BUILD = '1',

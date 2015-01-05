@@ -4,7 +4,7 @@
 # Title:           Deployment Automation
 # Description:     pH7CMS Deployment Automation. It is used to clean the script before distribution to customers.
 # Author:          Pierre-Henry Soria <ph7software@gmail.com>
-# Copyright:       (c) 2014, Pierre-Henry Soria. All Rights Reserved.
+# Copyright:       (c) 2014-2015, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ##
 

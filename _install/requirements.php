@@ -8,7 +8,7 @@
  * @file           requirements
  * @author         Pierre-Henry Soria
  * @email          <ph7software@gmail.com>
- * @copyright      (c) 2011-2014, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2011-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license        Lesser General Public License (LGPL) (http://www.gnu.org/copyleft/lesser.html)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25
