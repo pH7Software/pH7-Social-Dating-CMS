@@ -22,7 +22,7 @@ class NoteForm
             if (\PFBC\Form::isValid($_POST['submit_note']))
                 new NoteFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oCategoriesData = (new NoteModel)->getCategory(null, 0, 300);

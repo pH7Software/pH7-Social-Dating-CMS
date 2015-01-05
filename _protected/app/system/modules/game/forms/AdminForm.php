@@ -19,7 +19,7 @@ class AdminForm
             if(\PFBC\Form::isValid($_POST['submit_game']))
                 new AdminFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oCategoriesData = (new GameModel)->getCategory(null, 0, 500);

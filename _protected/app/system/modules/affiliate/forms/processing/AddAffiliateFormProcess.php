@@ -12,7 +12,7 @@ use
 PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class AddAffiliateFormProcess extends Form
 {
@@ -45,7 +45,7 @@ class AddAffiliateFormProcess extends Form
 
         (new AffiliateModel)->add($aData);
 
-        HeaderUrl::redirect(Uri::get('affiliate', 'admin', 'browse'), t('The affiliate has been successfully added.'));
+        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('The affiliate has been successfully added.'));
     }
 
 }

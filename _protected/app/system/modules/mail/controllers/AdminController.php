@@ -12,7 +12,7 @@ class AdminController extends MainController
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('mail', 'admin', 'msglist'));
+        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('mail', 'admin', 'msglist'));
     }
 
     public function msgList()

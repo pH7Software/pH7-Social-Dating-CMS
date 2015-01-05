@@ -23,7 +23,7 @@ class EditAdminBlogForm
             if (\PFBC\Form::isValid($_POST['submit_edit_blog']))
                 new EditAdminBlogFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oBlogModel = new BlogModel;

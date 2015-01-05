@@ -18,7 +18,7 @@ PH7\Framework\Ip\Ip,
 PH7\Framework\File\File,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 // Abstract Class
 class UserCore
@@ -425,17 +425,17 @@ class UserCore
                 $iAffId = $oUserModel->getAffiliatedId($iId);
                 AffiliateCore::updateJoinCom($iAffId, $oConfig, $oRegistry);
 
-                HeaderUrl::redirect($sRedirectLoginUrl, $sSuccessMsg);
+                Header::redirect($sRedirectLoginUrl, $sSuccessMsg);
             }
             else
             {
-                HeaderUrl::redirect($sRedirectLoginUrl, t('Oops! The URL is either invalid or you already have activated your account.'), 'error');
+                Header::redirect($sRedirectLoginUrl, t('Oops! The URL is either invalid or you already have activated your account.'), 'error');
             }
             unset($oUserModel);
         }
         else
         {
-            HeaderUrl::redirect($sRedirectIndexUrl, t('Invalid approach, please use the link that has been send to your email.'), 'error');
+            Header::redirect($sRedirectIndexUrl, t('Invalid approach, please use the link that has been send to your email.'), 'error');
         }
     }
 

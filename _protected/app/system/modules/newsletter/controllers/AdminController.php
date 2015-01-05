@@ -9,7 +9,7 @@ namespace PH7;
 
 use
 PH7\Framework\Navigation\Page,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
@@ -90,7 +90,7 @@ class AdminController extends Controller
             $this->sMsg = t('The subscribers(s) has been deleted.');
         }
 
-        HeaderUrl::redirect(Uri::get('newsletter', 'admin', 'browse'), $this->sMsg);
+        Header::redirect(Uri::get('newsletter', 'admin', 'browse'), $this->sMsg);
     }
 
 }

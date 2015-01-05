@@ -713,7 +713,7 @@ final class FrontController
 
         if (!\PH7\Framework\Server\Server::isRewriteMod() && false === strpos($this->oHttpRequest->currentUrl(), static::INDEX_FILE))
         {
-            \PH7\Framework\Url\HeaderUrl::redirect(PH7_URL_ROOT . static::INDEX_FILE);
+            \PH7\Framework\Url\Header::redirect(PH7_URL_ROOT . static::INDEX_FILE);
         }
         elseif (\PH7\Framework\Server\Server::isRewriteMod() && false !== strpos($this->oHttpRequest->currentUrl(), static::INDEX_FILE))
         {
@@ -745,7 +745,7 @@ final class FrontController
             if (empty($iRedirect))
                 $this->oRegistry->module = 'error';
             else
-                \PH7\Framework\Url\HeaderUrl::redirect(UriRoute::get('error', 'http', 'index'));
+                \PH7\Framework\Url\Header::redirect(UriRoute::get('error', 'http', 'index'));
         }
     }
 

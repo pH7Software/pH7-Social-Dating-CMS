@@ -21,7 +21,7 @@ class AddUserForm
             if (\PFBC\Form::isValid($_POST['submit_add_user']))
                 new AddUserFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_add_user',550);

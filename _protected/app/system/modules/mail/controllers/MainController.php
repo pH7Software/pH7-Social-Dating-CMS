@@ -9,7 +9,7 @@ namespace PH7;
 
 use
 PH7\Framework\Navigation\Page,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
@@ -43,7 +43,7 @@ class MainController extends Controller
 
     public function index()
     {
-        HeaderUrl::redirect(Uri::get('mail','main','inbox'));
+        Header::redirect(Uri::get('mail','main','inbox'));
     }
 
     public function compose()
@@ -243,7 +243,7 @@ class MainController extends Controller
         $this->sMsg = ($bStatus) ? t('Your message has been moved to your Trash.') : t('Your message could not be moved to Trash because there no exist.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
-        HeaderUrl::redirect(Uri::get('mail','main','inbox'), $this->sMsg, $sMsgType);
+        Header::redirect(Uri::get('mail','main','inbox'), $this->sMsg, $sMsgType);
     }
 
     public function setTrashAll()
@@ -265,7 +265,7 @@ class MainController extends Controller
             }
         }
 
-        HeaderUrl::redirect(Uri::get('mail','main','inbox'), $this->sMsg);
+        Header::redirect(Uri::get('mail','main','inbox'), $this->sMsg);
     }
 
     public function setRestor()
@@ -274,7 +274,7 @@ class MainController extends Controller
         $this->sMsg = ($bStatus) ? t('Your message has been moved to your Inbox.') : t('Your message could not be moved to Trash because there no exist.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
-        HeaderUrl::redirect(Uri::get('mail','main','trash'), $this->sMsg, $sMsgType);
+        Header::redirect(Uri::get('mail','main','trash'), $this->sMsg, $sMsgType);
     }
 
     public function setRestorAll()
@@ -296,7 +296,7 @@ class MainController extends Controller
             }
         }
 
-        HeaderUrl::redirect(Uri::get('mail','main','trash'), $this->sMsg);
+        Header::redirect(Uri::get('mail','main','trash'), $this->sMsg);
     }
 
     public function setDelete()
@@ -311,7 +311,7 @@ class MainController extends Controller
         $this->sMsg = ($bStatus) ? t('Your message has been deleted successfully!') : t('Your message could not be deleted because there no exist.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
         $sUrl = ($this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage());
-        HeaderUrl::redirect($sUrl, $this->sMsg, $sMsgType);
+        Header::redirect($sUrl, $this->sMsg, $sMsgType);
     }
 
     public function setDeleteAll()
@@ -337,7 +337,7 @@ class MainController extends Controller
         }
 
         $sUrl = ($this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage());
-        HeaderUrl::redirect($sUrl, $this->sMsg);
+        Header::redirect($sUrl, $this->sMsg);
     }
 
     /**

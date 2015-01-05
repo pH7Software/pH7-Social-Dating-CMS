@@ -13,7 +13,7 @@ PH7\Framework\Config\Config,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class JoinForm
 {
@@ -21,14 +21,14 @@ class JoinForm
    public static function step1($iWidth = 300)
    {
         if ((new Session)->exists('mail_step1'))
-         HeaderUrl::redirect(Uri::get('user', 'signup', 'step2'));
+         Header::redirect(Uri::get('user', 'signup', 'step2'));
 
         if (isset($_POST['submit_join_user']))
         {
             if (\PFBC\Form::isValid($_POST['submit_join_user']))
                 (new JoinFormProcess)->step1();
 
-            HeaderUrl::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_join_user', $iWidth);
@@ -67,9 +67,9 @@ class JoinForm
     {
         $oSession = new Session;
         if (!$oSession->exists('mail_step1'))
-            Framework\Url\HeaderUrl::redirect(Uri::get('user', 'signup', 'step1'));
+            Framework\Url\Header::redirect(Uri::get('user', 'signup', 'step1'));
         elseif ($oSession->exists('mail_step2'))
-            HeaderUrl::redirect(Uri::get('user', 'signup', 'step3'));
+            Header::redirect(Uri::get('user', 'signup', 'step3'));
         unset($oSession);
 
         if (isset($_POST['submit_join_user2']))
@@ -77,7 +77,7 @@ class JoinForm
             if (\PFBC\Form::isValid($_POST['submit_join_user2']))
                 (new JoinFormProcess)->step2();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_join_user2', 650);
@@ -103,14 +103,14 @@ class JoinForm
     public static function step3()
     {
         if (!(new Session)->exists('mail_step2'))
-            HeaderUrl::redirect(Uri::get('user', 'signup', 'step2'));
+            Header::redirect(Uri::get('user', 'signup', 'step2'));
 
         if (isset($_POST['submit_join_user3']))
         {
             if (\PFBC\Form::isValid($_POST['submit_join_user3']))
                 (new JoinFormProcess)->step3();
 
-            HeaderUrl::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_join_user3', 650);

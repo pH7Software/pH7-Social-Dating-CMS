@@ -14,7 +14,7 @@ class InfoController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'info', 'software'));
+        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'info', 'software'));
     }
 
     public function language()

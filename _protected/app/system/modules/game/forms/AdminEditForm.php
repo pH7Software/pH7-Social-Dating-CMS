@@ -23,7 +23,7 @@ class AdminEditForm
             if (\PFBC\Form::isValid($_POST['submit_edit']))
                 new AdminEditFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oHttpRequest = new Http;

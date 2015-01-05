@@ -18,7 +18,7 @@ class ContactForm
             if (\PFBC\Form::isValid($_POST['submit_contact']))
                 new ContactFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_contact', 400);

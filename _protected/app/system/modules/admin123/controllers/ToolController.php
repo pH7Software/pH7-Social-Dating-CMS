@@ -12,7 +12,7 @@ namespace PH7;
 
 use
 PH7\Framework\Mvc\Model\Engine as D,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
 class ToolController extends Controller
@@ -238,7 +238,7 @@ class ToolController extends Controller
         $this->_checkPost();
 
         D\Db::optimize();
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been optimized!'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been optimized!'));
     }
 
     public function repair()
@@ -246,7 +246,7 @@ class ToolController extends Controller
         $this->_checkPost();
 
         D\Db::repair();
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
     }
 
     /**

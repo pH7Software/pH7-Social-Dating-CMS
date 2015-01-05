@@ -19,7 +19,7 @@ class ForumForm
             if (\PFBC\Form::isValid($_POST['submit_forum']))
                 new ForumFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oCategoriesData = (new ForumModel)->getCategory();

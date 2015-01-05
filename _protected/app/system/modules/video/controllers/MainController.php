@@ -170,7 +170,7 @@ class MainController extends Controller
         /* Clean VideoModel Cache */
         (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
 
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your video has been deleted!'));
+        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your video has been deleted!'));
     }
 
     public function deleteAlbum()
@@ -182,7 +182,7 @@ class MainController extends Controller
 
         /* Clean VideoModel Cache */
         (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('video', 'main', 'albums'), t('Your album has been deleted!'));
+        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('video', 'main', 'albums'), t('Your album has been deleted!'));
     }
 
     public function search()

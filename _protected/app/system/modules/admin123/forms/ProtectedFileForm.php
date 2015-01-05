@@ -18,7 +18,7 @@ class ProtectedFileForm
             if (\PFBC\Form::isValid($_POST['submit_file']))
                 new ProtectedFileFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $rData = file_get_contents(PH7_PATH_PROTECTED . $_GET['file']);

@@ -17,7 +17,7 @@ class AdsAdminForm
             if (\PFBC\Form::isValid($_POST['submit_admin_ads']))
                 new AdsAdminFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_admin_ads', 500);

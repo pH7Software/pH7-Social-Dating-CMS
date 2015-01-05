@@ -17,7 +17,7 @@ class AdsForm
             if (\PFBC\Form::isValid($_POST['submit_ads']))
                 new AdsFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $aAdSizes = PH7_PATH_APP_CONFIG . 'ad_sizes.php';

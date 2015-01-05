@@ -23,7 +23,7 @@ class VideoForm
             if (\PFBC\Form::isValid($_POST['submit_video']))
                 new VideoFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oHttpRequest = new Http;

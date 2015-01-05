@@ -10,7 +10,7 @@ namespace PH7;
 use
 PH7\Framework\Cache\Cache,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class FieldController extends Controller
 {
@@ -19,7 +19,7 @@ class FieldController extends Controller
 
     public function index()
     {
-        HeaderUrl::redirect(Uri::get('field', 'field', 'all', 'user'));
+        Header::redirect(Uri::get('field', 'field', 'all', 'user'));
     }
 
     public function all($sMod = '')
@@ -77,7 +77,7 @@ class FieldController extends Controller
         $sMsg = ($bStatus) ? t('The field has been deleted') : t('An error occurred while deleting the field.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
-        HeaderUrl::redirect(Uri::get('field', 'field', 'all', $sMod), $sMsg, $sMsgType);
+        Header::redirect(Uri::get('field', 'field', 'all', $sMod), $sMsg, $sMsgType);
     }
 
 }

@@ -9,7 +9,7 @@
  * @version        1.0
  */
 namespace PH7;
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends MainController
 {
@@ -70,7 +70,7 @@ class AdminController extends MainController
         /* Clean UserCoreModel Cache */
         (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(Uri::get('payment', 'admin', 'membershiplist'), t('The Membership has been removed!'));
+        Header::redirect(Uri::get('payment', 'admin', 'membershiplist'), t('The Membership has been removed!'));
     }
 
 }

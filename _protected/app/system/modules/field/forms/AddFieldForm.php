@@ -19,7 +19,7 @@ class AddFieldForm
             if (\PFBC\Form::isValid($_POST['submit_add_field']))
                 new AddFieldFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $sFieldPattern = Config::getInstance()->values['module.setting']['field.pattern'];

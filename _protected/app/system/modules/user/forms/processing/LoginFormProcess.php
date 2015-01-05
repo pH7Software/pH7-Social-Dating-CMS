@@ -11,7 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Security\Security,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
@@ -85,7 +85,7 @@ class LoginFormProcess extends Form
             else
             {
                 $oUser->setAuth($oUserData, $oUserModel, $this->session);
-                HeaderUrl::redirect(Uri::get('user','account','index'), t('You signup is successfully!'));
+                Header::redirect(Uri::get('user','account','index'), t('You signup is successfully!'));
             }
         }
     }

@@ -35,7 +35,7 @@ class MainController extends Controller
 
     public function index()
     {
-        // Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('picture','main','albums'));
+        // Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('picture','main','albums'));
         $this->albums();
     }
 
@@ -160,7 +160,7 @@ class MainController extends Controller
 
         /* Clean PictureModel Cache */
         (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your picture has been deleted!'));
+        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your picture has been deleted!'));
     }
 
     public function deleteAlbum()
@@ -173,7 +173,7 @@ class MainController extends Controller
         /* Clean PictureModel Cache */
         (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
 
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('picture', 'main', 'albums'), t('Your album has been deleted!'));
+        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('picture', 'main', 'albums'), t('Your album has been deleted!'));
     }
 
     public function search()

@@ -9,7 +9,7 @@ namespace PH7;
 
 use
 PH7\Framework\Navigation\Page,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
 class UserController extends Controller
@@ -32,7 +32,7 @@ class UserController extends Controller
 
     public function index()
     {
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'));
     }
 
     public function browse()
@@ -110,7 +110,7 @@ class UserController extends Controller
         if ($sWhere !== 'all' && $sWhere !== 'username' && $sWhere !== 'email' && $sWhere !== 'firstName' && $sWhere !== 'lastName' && $sWhere !== 'ip')
         {
             \PFBC\Form::setError('form_admin_search', 'Invalid argument.');
-            HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
+            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
         }
         else
         {
@@ -165,7 +165,7 @@ class UserController extends Controller
         ];
 
         $this->session->set($aSessionData);
-        HeaderUrl::redirect($this->registry->site_url, t('You are now logged in as member: %0%!',
+        Header::redirect($this->registry->site_url, t('You are now logged in as member: %0%!',
             $this->session->get('member_username')));
     }
 
@@ -188,18 +188,18 @@ class UserController extends Controller
         ];
 
         $this->session->remove($aSessionData);
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->
             sMsg);
     }
 
     public function approve()
     {
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
     }
 
     public function disapprove()
     {
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
     }
 
     public function approveAll($iId)
@@ -217,7 +217,7 @@ class UserController extends Controller
             }
         }
 
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function disapproveAll($iId)
@@ -235,7 +235,7 @@ class UserController extends Controller
             }
         }
 
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function ban()
@@ -252,7 +252,7 @@ class UserController extends Controller
             $this->sMsg = t('Oops! An error has occurred while banishment the profile.');
         }
 
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function unBan()
@@ -269,7 +269,7 @@ class UserController extends Controller
             $this->sMsg = t('Oops! An error has occurred while unban the profile.');
         }
 
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function delete()
@@ -279,7 +279,7 @@ class UserController extends Controller
         $sUsername = (string) $aData[1];
 
         $this->oAdmin->delete($iId, $sUsername);
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The profile has been deleted.'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The profile has been deleted.'));
     }
 
     public function banAll()
@@ -301,7 +301,7 @@ class UserController extends Controller
             $this->sMsg = t('The profile(s) has been banned.');
         }
 
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function unBanAll()
@@ -322,7 +322,7 @@ class UserController extends Controller
             $this->sMsg = t('The profile(s) has been unbanned.');
         }
 
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     public function deleteAll()
@@ -344,7 +344,7 @@ class UserController extends Controller
             $this->sMsg = t('The profile(s) has been deleted.');
         }
 
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
     }
 
     private function _moderateRegistration($iId, $iStatus)

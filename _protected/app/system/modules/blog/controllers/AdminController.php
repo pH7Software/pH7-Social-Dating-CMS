@@ -6,14 +6,14 @@
  * @package        PH7 / App / System / Module / Blog / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
 
     public function index()
     {
-        HeaderUrl::redirect(Uri::get('blog', 'main', 'index'), t('Welcome to the Blog administrator mode.'));
+        Header::redirect(Uri::get('blog', 'main', 'index'), t('Welcome to the Blog administrator mode.'));
     }
 
     public function add()
@@ -45,7 +45,7 @@ class AdminController extends MainController
         /* Clean BlogModel Cache  */
         (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(Uri::get('blog', 'main', 'index'), t('Your post was deleted!'));
+        Header::redirect(Uri::get('blog', 'main', 'index'), t('Your post was deleted!'));
     }
 
     private function removeThumb($iId)
@@ -55,7 +55,7 @@ class AdminController extends MainController
 
         (new Blog)->deleteThumb($iId, 'blog', $this->file);
 
-        HeaderUrl::redirect(Uri::get('blog', 'admin', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
+        Header::redirect(Uri::get('blog', 'admin', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
     }
 
 }

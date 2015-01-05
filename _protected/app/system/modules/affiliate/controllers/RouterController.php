@@ -21,7 +21,7 @@ class RouterController extends Controller
             if ((new ExistsCoreModel)->username($this->httpRequest->get('aff'), 'Affiliates'))
                 (new Affiliate)->addRefer($this->httpRequest->get('aff'));
 
-        Framework\Url\HeaderUrl::redirect($this->registry->site_url . $this->httpRequest->get('action'));
+        Framework\Url\Header::redirect($this->registry->site_url . $this->httpRequest->get('action'));
     }
 
 }

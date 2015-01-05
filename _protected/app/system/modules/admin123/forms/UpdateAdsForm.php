@@ -19,7 +19,7 @@ class UpdateAdsForm
             if (\PFBC\Form::isValid($_POST['submit_update_ads']))
                 new UpdateAdsFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oPage = new Page;

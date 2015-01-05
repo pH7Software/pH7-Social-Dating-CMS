@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class EditAlbumFormProcess extends Form
 {
@@ -23,7 +23,7 @@ class EditAlbumFormProcess extends Form
         /* Clean PictureModel Cache */
         (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(Uri::get('picture', 'main', 'albums', $this->session->get('member_username'), $iAlbumId), t('Your album has been updated successfully!'));
+        Header::redirect(Uri::get('picture', 'main', 'albums', $this->session->get('member_username'), $iAlbumId), t('Your album has been updated successfully!'));
     }
 
 }

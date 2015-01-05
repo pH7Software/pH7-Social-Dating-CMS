@@ -19,7 +19,7 @@ class EditCategoryForm
             if (\PFBC\Form::isValid($_POST['submit_category_edit']))
                 new EditCategoryFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oCategoryData = (new ForumModel)->getCategory((new Http)->get('category_id'), 0, 1);

@@ -13,7 +13,7 @@ PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mail\Mail,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class MailFormProcess extends Form
 {
@@ -81,7 +81,7 @@ class MailFormProcess extends Form
                 }
 
                 $sUrl = ($bIsAdmin ? Uri::get(PH7_ADMIN_MOD, 'user', 'browse') : Uri::get('mail', 'main', 'index'));
-                HeaderUrl::redirect($sUrl, t('Your message has been sent successfully!'));
+                Header::redirect($sUrl, t('Your message has been sent successfully!'));
             }
 
             unset($oUserModel, $oMailModel);

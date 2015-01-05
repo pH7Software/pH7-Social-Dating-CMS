@@ -15,7 +15,7 @@ class WebcamController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Uri::get('webcam','webcam','picture'));
+        Framework\Url\Header::redirect(Uri::get('webcam','webcam','picture'));
     }
 
     public function picture()

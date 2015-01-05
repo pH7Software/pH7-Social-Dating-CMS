@@ -18,7 +18,7 @@ class StyleForm
         {
             if (\PFBC\Form::isValid($_POST['submit_style']))
                 new StyleFormProcess;
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_style', '100%');

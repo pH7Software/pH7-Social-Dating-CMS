@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Url\Header;
 
 class ProtectedFileFormProcess extends Form
 {
@@ -21,7 +21,7 @@ class ProtectedFileFormProcess extends Form
         $sMsg = ($bStatus) ? t('The file content was saved successfully!') : t('The file content could not be saved!');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
-        HeaderUrl::redirect($this->httpRequest->previousPage(), $sMsg, $sMsgType);
+        Header::redirect($this->httpRequest->previousPage(), $sMsg, $sMsgType);
     }
 
 }

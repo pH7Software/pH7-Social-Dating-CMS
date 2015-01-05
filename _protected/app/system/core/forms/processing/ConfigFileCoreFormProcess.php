@@ -11,7 +11,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Url\Header;
 
 class ConfigFileCoreFormProcess extends Form
 {
@@ -47,9 +47,9 @@ class ConfigFileCoreFormProcess extends Form
 
         $sRedirectUrl = $this->httpRequest->previousPage();
         if ($this->file->save($sIniFile, $sData))
-            HeaderUrl::redirect($sRedirectUrl, ('The file content was saved successfully!'));
+            Header::redirect($sRedirectUrl, ('The file content was saved successfully!'));
         else
-            HeaderUrl::redirect($sRedirectUrl, t('The file content could not be saved!'), 'error');
+            Header::redirect($sRedirectUrl, t('The file content could not be saved!'), 'error');
 
         // Check and correct the file permission if necessary.
         $this->file->chmod($sIniFile, 0644);

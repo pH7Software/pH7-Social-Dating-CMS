@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class EditForumFormProcess extends Form
 {
@@ -20,7 +20,7 @@ class EditForumFormProcess extends Form
         $iForumId = $this->httpRequest->get('forum_id', 'int');
 
         (new ForumModel)->updateForum($iForumId, $this->httpRequest->post('category_id'), $this->httpRequest->post('name'), $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        HeaderUrl::redirect(Uri::get('forum', 'forum', 'index'), t('Your message has been updated successfully!'));
+        Header::redirect(Uri::get('forum', 'forum', 'index'), t('Your message has been updated successfully!'));
     }
 
 }

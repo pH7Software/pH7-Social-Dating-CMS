@@ -12,7 +12,7 @@ use
 PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class AddAdminFormProcess extends Form
 {
@@ -34,7 +34,7 @@ class AddAdminFormProcess extends Form
 
         (new AdminModel)->add($aData);
 
-        HeaderUrl::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The administrator has been successfully added.'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The administrator has been successfully added.'));
     }
 
 }

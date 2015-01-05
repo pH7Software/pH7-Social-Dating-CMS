@@ -19,7 +19,7 @@ use
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl,
+PH7\Framework\Url\Header,
 PH7\Framework\File as F,
 PH7\Framework\Video as V;
 
@@ -136,7 +136,7 @@ class VideoFormProcess extends Form
         $sModerationText = t('Your video has been received! But it will be visible once approved by our moderators. Please do not send a new video because this is useless!');
         $sText =  t('Your video has been added successfully!');
         $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
-        HeaderUrl::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
+        Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
     }
 
 }

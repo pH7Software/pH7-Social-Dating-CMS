@@ -18,7 +18,7 @@ class ScriptForm
         {
             if (\PFBC\Form::isValid($_POST['submit_script']))
                 new ScriptFormProcess;
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_script', '100%');

@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\HeaderUrl;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class EditWallFormProcess extends Form
 {
@@ -25,7 +25,7 @@ class EditWallFormProcess extends Form
         parent::__construct();
 
         (new WallModel)->edit($this->session->get('member_id'), $this->httpRequest->post('post'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        HeaderUrl::redirect(Uri::get('user', 'main', 'index'), t('Your message has been added successfully!'));
+        Header::redirect(Uri::get('user', 'main', 'index'), t('Your message has been added successfully!'));
     }
 
 }

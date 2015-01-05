@@ -12,7 +12,7 @@ class SearchController extends Controller
 
     public function index()
     {
-        Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('user', 'search', 'quick'));
+        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('user', 'search', 'quick'));
     }
 
     public function quick()

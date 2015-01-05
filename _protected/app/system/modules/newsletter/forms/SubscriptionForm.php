@@ -21,7 +21,7 @@ class SubscriptionForm
             if (\PFBC\Form::isValid($_POST['submit_subscription']))
                 new SubscriptionFormProcess();
 
-            Framework\Url\HeaderUrl::redirect($sActUrl);
+            Framework\Url\Header::redirect($sActUrl);
         }
 
         $oForm = new \PFBC\Form('form_subscription', 350);

@@ -19,7 +19,7 @@ class MailForm
             if (\PFBC\Form::isValid($_POST['submit_compose_mail']))
                 new MailFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oHttpRequest = new Http; // For Reply Function

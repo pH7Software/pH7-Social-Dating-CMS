@@ -12,7 +12,7 @@ PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel,
 PH7\Framework\Mail\Mail,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
@@ -36,7 +36,7 @@ class MainController extends Controller
 
         if ( ! (new UserCoreModel)->checkHashValidation($sMail, $sHash, $sTable) )
         {
-            HeaderUrl::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), 'error');
+            Header::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), 'error');
         }
         else
         {
@@ -54,9 +54,9 @@ class MainController extends Controller
             ];
 
             if ( ! (new Mail)->send($aInfo, $sMessageHtml) )
-                HeaderUrl::redirect($this->registry->site_url, Form::errorSendingEmail(), 'error');
+                Header::redirect($this->registry->site_url, Form::errorSendingEmail(), 'error');
             else
-                HeaderUrl::redirect($this->registry->site_url, t('Your new password has been emailed to you.'));
+                Header::redirect($this->registry->site_url, t('Your new password has been emailed to you.'));
         }
 
     }
@@ -72,14 +72,14 @@ class MainController extends Controller
         else
             $sUrl = $this->registry->site_url;
 
-        HeaderUrl::redirect($sUrl);
+        Header::redirect($sUrl);
 
     }
 
     private function checkMod($sMod)
     {
         if ($sMod != 'user' && $sMod != 'affiliate' && $sMod != PH7_ADMIN_MOD)
-            HeaderUrl::redirect($this->registry->site_url, t('Module not found!'), 'error');
+            Header::redirect($this->registry->site_url, t('Module not found!'), 'error');
     }
 
 }

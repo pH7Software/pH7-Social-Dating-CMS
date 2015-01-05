@@ -19,7 +19,7 @@ class AddFakeProfilesForm
             if (\PFBC\Form::isValid($_POST['submit_add_fake_profiles']))
                 new AddFakeProfilesFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_add_fake_profiles',550);

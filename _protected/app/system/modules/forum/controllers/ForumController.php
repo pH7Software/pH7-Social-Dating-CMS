@@ -11,7 +11,7 @@ use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class ForumController extends Controller
 {
@@ -231,7 +231,7 @@ class ForumController extends Controller
         else
             $this->sMsg = t('Oops! Your topic could not be deleted');
 
-        HeaderUrl::redirect(Uri::get('forum', 'forum', 'topic', $sForumName . ',' . $iForumId), $this->sMsg);
+        Header::redirect(Uri::get('forum', 'forum', 'topic', $sForumName . ',' . $iForumId), $this->sMsg);
     }
 
     public function deleteMessage()
@@ -249,7 +249,7 @@ class ForumController extends Controller
         else
             $this->sMsg = t('Oops! Your message could not be deleted');
 
-        HeaderUrl::redirect(Uri::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId), $this->sMsg);
+        Header::redirect(Uri::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId), $this->sMsg);
     }
 
     /**

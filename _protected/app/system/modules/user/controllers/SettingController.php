@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class SettingController extends Controller
 {
@@ -112,7 +112,7 @@ class SettingController extends Controller
         if ($this->httpRequest->get('delete_status') == 'yesdelete')
         {
             $this->session->set('yes_delete', 1);
-            HeaderUrl::redirect(Uri::get('user', 'setting', 'yesdelete'));
+            Header::redirect(Uri::get('user', 'setting', 'yesdelete'));
         }
         elseif ($this->httpRequest->get('delete_status') == 'nodelete')
         {
@@ -134,7 +134,7 @@ class SettingController extends Controller
     public function yesDelete()
     {
         if (!$this->session->exists('yes_delete'))
-            HeaderUrl::redirect(Uri::get('user', 'setting', 'delete'));
+            Header::redirect(Uri::get('user', 'setting', 'delete'));
         else
             $this->output();
     }
@@ -143,7 +143,7 @@ class SettingController extends Controller
     private function _removeAvatar()
     {
         (new UserCore)->deleteAvatar($this->_iProfileId, $this->_sUsername);
-        HeaderUrl::redirect(null, t('Your avatar has been deleted successfully!'));
+        Header::redirect(null, t('Your avatar has been deleted successfully!'));
     }
 
     private function _getWallpaper()
@@ -157,7 +157,7 @@ class SettingController extends Controller
     private function _removeWallpaper()
     {
         (new UserCore)->deleteBackground($this->_iProfileId, $this->_sUsername);
-        HeaderUrl::redirect(null, t('Your wallpaper has been deleted successfully!'));
+        Header::redirect(null, t('Your wallpaper has been deleted successfully!'));
     }
 
 }

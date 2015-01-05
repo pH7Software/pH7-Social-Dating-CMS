@@ -27,7 +27,7 @@ class WallForm
             if (\PFBC\Form::isValid($_POST['submit_wall']))
                 new WallFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_wall', 500);

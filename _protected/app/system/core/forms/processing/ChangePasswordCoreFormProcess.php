@@ -11,7 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 /** For "user", "affiliate" and "admin" module **/
 class ChangePasswordCoreFormProcess extends Form

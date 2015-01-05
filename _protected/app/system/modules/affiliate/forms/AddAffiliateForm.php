@@ -19,7 +19,7 @@ class AddAffiliateForm
             if (\PFBC\Form::isValid($_POST['submit_add_aff']))
                 new AddAffiliateFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_add_aff',550);

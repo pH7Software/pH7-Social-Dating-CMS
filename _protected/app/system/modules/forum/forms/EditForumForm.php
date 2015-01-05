@@ -19,7 +19,7 @@ class EditForumForm
             if (\PFBC\Form::isValid($_POST['submit_edit_forum']))
                 new EditForumFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForumModel = new ForumModel;

@@ -17,7 +17,7 @@ class MsgForm
             if (\PFBC\Form::isValid($_POST['submit_msg']))
                 new MsgFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_msg', 650);

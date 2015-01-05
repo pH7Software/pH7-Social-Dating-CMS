@@ -11,7 +11,7 @@ use
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Navigation\Page,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
@@ -99,7 +99,7 @@ class MainController extends Controller
         }
         else
         {
-            HeaderUrl::redirect(Uri::get('note', 'main', 'index'));
+            Header::redirect(Uri::get('note', 'main', 'index'));
         }
 
         $this->output();
@@ -244,7 +244,7 @@ class MainController extends Controller
 
         /* Clean NoteModel Cache */
         (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
-        HeaderUrl::redirect(Uri::get('note', 'main', 'index'), t('Your post was deleted!'));
+        Header::redirect(Uri::get('note', 'main', 'index'), t('Your post was deleted!'));
     }
 
     public function removeThumb($iId)
@@ -260,7 +260,7 @@ class MainController extends Controller
         /* Clean BlogModel Cache */
         (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
-        HeaderUrl::redirect(Uri::get('note','main','edit', $iId), t('The thumbnail has been deleted successfully!'));
+        Header::redirect(Uri::get('note','main','edit', $iId), t('The thumbnail has been deleted successfully!'));
     }
 
     /**

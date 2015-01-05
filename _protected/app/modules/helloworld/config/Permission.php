@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -24,7 +24,7 @@ class Permission extends PermissionCore
          * Example of Code:
          * if (!UserCore::auth() && ($this->registry->controller === 'HelloWorldController'))
          * {
-         *     HeaderUrl::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
+         *     Header::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
          * }
          */
     }

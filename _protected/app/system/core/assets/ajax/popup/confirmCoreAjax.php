@@ -13,7 +13,7 @@ PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Layout\Html\Design,
 PH7\Framework\Url\Url,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\HeaderUrl;
+PH7\Framework\Url\Header;
 
 if (AdminCore::auth() || UserCore::auth() || AffiliateCore::auth())
 {
@@ -44,5 +44,5 @@ if (AdminCore::auth() || UserCore::auth() || AffiliateCore::auth())
 }
 else
 {
-    HeaderUrl::redirect(Uri::get('user', 'signup', 'step1'), t('You must register to report the abuse.'));
+    Header::redirect(Uri::get('user', 'signup', 'step1'), t('You must register to report the abuse.'));
 }

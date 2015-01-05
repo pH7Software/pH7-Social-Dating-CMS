@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Url\HeaderUrl, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class Permission extends PermissionCore
 {
@@ -22,25 +22,25 @@ class Permission extends PermissionCore
 
         if (!$bAffAuth && ($this->registry->controller === 'AdsController' || $this->registry->action === 'logout'))
         {
-            HeaderUrl::redirect(Uri::get('affiliate','signup','step1'), $this->signUpMsg(), 'error');
+            Header::redirect(Uri::get('affiliate','signup','step1'), $this->signUpMsg(), 'error');
         }
 
         if ((!$bAffAuth && !$bAdminAuth) && ($this->registry->controller === 'AccountController'
         && $this->registry->action !== 'activate'))
         {
-            HeaderUrl::redirect(Uri::get('affiliate','signup','step1'), $this->signUpMsg(), 'error');
+            Header::redirect(Uri::get('affiliate','signup','step1'), $this->signUpMsg(), 'error');
         }
 
         if ($bAffAuth && ($this->registry->controller === 'SignupController' || $this->registry->action === 'activate'
         || $this->registry->action === 'resendactivation' || $this->registry->action === 'login'))
         {
-            HeaderUrl::redirect(Uri::get('affiliate','account','index'), $this->alreadyConnectedMsg(), 'error');
+            Header::redirect(Uri::get('affiliate','account','index'), $this->alreadyConnectedMsg(), 'error');
         }
 
         if (!$bAdminAuth && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            HeaderUrl::redirect(Uri::get('affiliate','home','index'), $this->adminSignInMsg(), 'error');
+            Header::redirect(Uri::get('affiliate','home','index'), $this->adminSignInMsg(), 'error');
         }
     }
 

@@ -23,7 +23,7 @@ class LoginForm
             if (\PFBC\Form::isValid($_POST['submit_login']))
                 new LoginFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_login', 500);

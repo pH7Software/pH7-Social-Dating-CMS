@@ -96,7 +96,7 @@ class MainController extends Controller
         }
         else
         {
-            Framework\Url\HeaderUrl::redirect(Framework\Mvc\Router\Uri::get('blog', 'main', 'index'));
+            Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('blog', 'main', 'index'));
         }
 
         $this->output();

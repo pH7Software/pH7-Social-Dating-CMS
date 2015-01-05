@@ -19,7 +19,7 @@ class DesignForm
             if (\PFBC\Form::isValid($_POST['submit_design']))
                 new DesignFormProcess();
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_design', 500);

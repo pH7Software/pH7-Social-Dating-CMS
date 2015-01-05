@@ -19,7 +19,7 @@ class EditVideoForm
             if (\PFBC\Form::isValid($_POST['submit_edit_video']))
                 new EditVideoFormProcess;
 
-            Framework\Url\HeaderUrl::redirect();
+            Framework\Url\Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_edit_video', 500);
