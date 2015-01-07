@@ -93,7 +93,8 @@ $LANG = array (
     'title_email_finish_install' => 'Congratulations, the installation of your website is finished!',
     'content_email_finish_install' => '<p><strong>Congratulations, your website is now successfully installed!</strong></p>
     <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
-    <p>For any bug reports, suggestions, partnership, translation, contribution or other, please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
+    <p>For any bug reports, suggestions, partnership, translation, contribution or other,
+    please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
     <p>---</p>
     <p>Kind regards,</p>
     <p>The pH7CMS developers team.</p>',
@@ -109,8 +110,6 @@ $LANG = array (
     'buy_individual_ticket_support' => '<span class="gray">Full ticket support for one month</span> <span class="right">Buy Now</span>',
     'buy_individual_ticket_support_desc' => 'By purchasing a individual ticket support, we\'ll help you whenever you have a problem with our software. We are at your disposal to solve any problem encounter with pH7CMS.',
     'looking_hosting' =>'Looking for a Web host compatible with pH7CMS? See <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">our List of Hosting</a>!',
-    'error_get_server_url' => 'Access problems with our Web server.<br />
-    Please verify that your server is connected to internet, otherwise please wait a bit (it is possible that our server is overloaded).',
     'powered' => 'Powered by',
     'loading' => 'Loading...',
 );

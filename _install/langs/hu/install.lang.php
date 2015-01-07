@@ -110,8 +110,6 @@ $LANG = array (
     'buy_individual_ticket_support' => '<span class="gray">Teljes jegy támogatás egy hónapra</span> <span class="right">Vásárlás</span>',
     'buy_individual_ticket_support_desc' => 'Megvásárlásával egy egyéni jegyet támogatás, segítünk, ha van egy probléma a szoftver. Mi az Ön rendelkezésére megoldani minden problémát találkozás pH7CMS.',
     'looking_hosting' =>'Keresek egy Web Host kompatibilis pH7CMS? Tekintse <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">meg a Listát Hosting</a>!',
-    'error_get_server_url' => 'Hozzáférési problémák a Webszerverünkhöz.<br />
-    Kérjük ellenőrizd, hogy a webszervered hozzáfér az internethez, egyéb esetben kérlek várj (lehetséges, hogy a mi szerverünk túl van terhelve).',
     'powered' => 'A CMS készítője a',
     'loading' => 'Töltés...',
 );

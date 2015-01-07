@@ -93,7 +93,8 @@ $LANG = array (
     'title_email_finish_install' => '¡Enhorabuena, la instalación de su sitio web está terminado!',
     'content_email_finish_install' => '<p><strong>¡Enhorabuena, tu sitio web está instalado correctamente!</strong></p>
     <p>¡Esperamos que usted disfrute de <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
-    <p>Para informes de errores, sugerencias, colaboración, participación en el desarrollo y / o traducción de software, etc, por favor visite nuestro <a href="' . Controller::SOFTWARE_WEBSITE . '">sitio web</a>.</p>
+    <p>Para informes de errores, sugerencias, colaboración, participación en el desarrollo y / o traducción de software, etc,
+    por favor visite nuestro <a href="' . Controller::SOFTWARE_WEBSITE . '">sitio web</a>.</p>
     <p>---</p>
     <p>Saludos cordiales,</p>
     <p>El equipo de desarrolladores pH7CMS.</p>',
@@ -109,8 +110,6 @@ $LANG = array (
     'buy_individual_ticket_support' => '<span class="gray">Tickets de soporte completo durante un mes</span> <span class="right">Compre ahora</span>',
     'buy_individual_ticket_support_desc' => 'Al comprar el apoyo individual, le ayudaremos siempre que tenga un problema con nuestro software. Estamos a su disposición para resolver cualquier encuentro problema pH7CMS.',
     'looking_hosting' =>'¿Buscando un alojamiento web compatible con pH7CMS? ¡Vea <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">nuestra Lista de Alojamiento</a>!',
-    'error_get_server_url' => 'Acceda a problemas con nuestro servidor Web.<br />
-    Por favor, compruebe que el servidor está conectado a internet, de lo contrario por favor espere un poco (es posible que nuestro servidor está sobrecargado).',
     'powered' => 'Desarrollado por',
     'loading' => 'Cargando ...',
 );

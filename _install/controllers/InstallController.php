@@ -21,15 +21,13 @@ defined('PH7') or exit('Restricted access');
 class InstallController extends Controller
 {
 
-    private $_sRedirectUrlNoLicense, $_sGameDownloadPath, $_sGamePath;
+    private $_sRedirectUrlNoLicense;
 
     /***** Constructor (initializing variables) *****/
     public function __construct ()
     {
         parent::__construct();
 
-        $this->_sGamePath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/';
-        $this->_sGameDownloadPath = self::SOFTWARE_DOWNLOAD_URL . 'games/pH7_game.zip';
         $this->_sRedirectUrlNoLicense = self::SOFTWARE_LICENSE_KEY_URL;
     }
 
@@ -200,117 +198,105 @@ class InstallController extends Controller
                         $_SESSION['val']['ffmpeg_path'] = (is_windows()) ? 'C:\ffmpeg\ffmpeg.exe' : '/usr/bin/ffmpeg';
                     }
 
-                    if ($this->_checkDownloadServer()) // Check if the link is available
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_system_submit']))
                     {
-                        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_system_submit']))
+                        if (filled_out($_POST))
                         {
-                            if (filled_out($_POST))
+                            foreach ($_POST as $sKey => $sVal)
+                                $_SESSION['db'][str_replace('db_', '', $sKey)] = trim($sVal);
+
+                            $_SESSION['val']['bug_report_email'] = trim($_POST['bug_report_email']);
+                            $_SESSION['val']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
+
+                            if (validate_email($_SESSION['val']['bug_report_email']))
                             {
-                                foreach ($_POST as $sKey => $sVal)
-                                    $_SESSION['db'][str_replace('db_', '', $sKey)] = trim($sVal);
-
-                                $_SESSION['val']['bug_report_email'] = trim($_POST['bug_report_email']);
-                                $_SESSION['val']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
-
-                                if (validate_email($_SESSION['val']['bug_report_email']))
+                                try
                                 {
-                                    try
+                                    require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
+                                     @require_once(PH7_ROOT_PUBLIC . '_constants.php');
+                                    @require_once(PH7_PATH_APP . 'configs/constants.php');
+
+                                    // Config File
+                                    @chmod(PH7_PATH_APP_CONFIG, 0777);
+                                    $sConfigContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
+
+                                    $sConfigContent = str_replace('%bug_report_email%', $_SESSION['val']['bug_report_email'], $sConfigContent);
+                                    $sConfigContent = str_replace('%ffmpeg_path%', clean_string($_SESSION['val']['ffmpeg_path']), $sConfigContent);
+
+                                    $sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
+                                    $sConfigContent = str_replace('%db_type%', $_SESSION['db']['type'], $sConfigContent);
+                                    $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['hostname'], $sConfigContent);
+                                    $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
+                                    $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['username']), $sConfigContent);
+                                    $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['password']), $sConfigContent);
+                                    $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['prefix']), $sConfigContent);
+                                    $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['charset'], $sConfigContent);
+                                    $sConfigContent = str_replace('%db_port%', $_SESSION['db']['port'], $sConfigContent);
+
+                                    $sConfigContent = str_replace('%rand_id%', generate_hash(5), $sConfigContent);
+
+                                    if (!@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $sConfigContent))
                                     {
-                                        require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
+                                        $aErrors[] = $LANG['no_app_config_writable'];
+                                    }
+                                    else
+                                    {
+                                        @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
 
-                                        @require_once(PH7_ROOT_PUBLIC . '_constants.php');
-                                        @require_once(PH7_PATH_APP . 'configs/constants.php');
-
-                                        // Config File
-                                        @chmod(PH7_PATH_APP_CONFIG, 0777);
-                                        $sConfigContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/config.ini');
-
-                                        $sConfigContent = str_replace('%bug_report_email%', $_SESSION['val']['bug_report_email'], $sConfigContent);
-                                        $sConfigContent = str_replace('%ffmpeg_path%', clean_string($_SESSION['val']['ffmpeg_path']), $sConfigContent);
-
-                                        $sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_type%', $_SESSION['db']['type'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['hostname'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
-                                        $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['username']), $sConfigContent);
-                                        $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['password']), $sConfigContent);
-                                        $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['prefix']), $sConfigContent);
-                                        $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['charset'], $sConfigContent);
-                                        $sConfigContent = str_replace('%db_port%', $_SESSION['db']['port'], $sConfigContent);
-
-                                        $sConfigContent = str_replace('%rand_id%', generate_hash(5), $sConfigContent);
-
-                                        if (!@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $sConfigContent))
+                                        if (!($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql' && version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRE_SQL_VERSION, '>=')))
                                         {
-                                            $aErrors[] = $LANG['no_app_config_writable'];
+                                            $aErrors[] = $LANG['require_mysql_version'];
                                         }
                                         else
                                         {
-                                            @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
+                                            $aDumps = array(
+                                                /*** Game ***/
+                                                // We need to install the Game before the Core SQL for "foreign keys" that work are correct.
+                                                'pH7_SchemaGame',
+                                                'pH7_DataGame',
+                                                /*** Core ***/
+                                                'pH7_Core',
+                                                // --- GeoIp (exec_query_file() function executes these files only if they existens otherwise it does nothing) --- //
+                                                'pH7_GeoCountry',
+                                                'pH7_GeoCity',
+                                                'pH7_GeoCity2',
+                                                'pH7_GeoCity3',
+                                                'pH7_GeoCity4',
+                                                'pH7_GeoCity5',
+                                                'pH7_GeoCity6',
+                                                'pH7_GeoCity7',
+                                                'pH7_GeoCity8',
+                                                'pH7_GeoState',
+                                                // --- Execute this file if there is something --- //
+                                                'pH7_SampleData'
+                                            );
 
-                                            if (!($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql' && version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRE_SQL_VERSION, '>=')))
-                                            {
-                                                $aErrors[] = $LANG['require_mysql_version'];
-                                            }
-                                            else
-                                            {
-                                                $aDumps = array(
-                                                    /*** Game ***/
-                                                    // We need to install the Game before the Core SQL for foreign keys that work are correct.
-                                                    'pH7_SchemaGame',
-                                                    'pH7_DataGame',
-                                                    /*** Core ***/
-                                                    'pH7_Core',
-                                                    // --- GeoIp (exec_query_file() function executes these files only if they existens otherwise it does nothing) --- //
-                                                    'pH7_GeoCountry',
-                                                    'pH7_GeoCity',
-                                                    'pH7_GeoCity2',
-                                                    'pH7_GeoCity3',
-                                                    'pH7_GeoCity4',
-                                                    'pH7_GeoCity5',
-                                                    'pH7_GeoCity6',
-                                                    'pH7_GeoCity7',
-                                                    'pH7_GeoCity8',
-                                                    'pH7_GeoState',
-                                                    // --- Execute this file if there is something --- //
-                                                    'pH7_SampleData'
-                                                );
+                                            for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++)
+                                                exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$i] . '.sql');
 
-                                                for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++)
-                                                    exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$i] . '.sql');
+                                            unset($DB);
 
-                                                unset($DB);
+                                            $_SESSION['step4'] = 1;
+                                            unset($_SESSION['val']);
 
-                                                /** Check if the games are not already installed **/
-                                                if (!$this->_isGameInstalled())
-                                                    $this->_downloadGame();
-
-                                                $_SESSION['step4'] = 1;
-                                                unset($_SESSION['val']);
-
-                                                redirect(PH7_URL_SLUG_INSTALL . 'config_site');
-                                            }
+                                            redirect(PH7_URL_SLUG_INSTALL . 'config_site');
                                         }
                                     }
-                                    catch (\PDOException $oE)
-                                    {
-                                        $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
-                                    }
                                 }
-                                else
+                                catch (\PDOException $oE)
                                 {
-                                    $aErrors[] = $LANG['bad_email'];
+                                    $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                                 }
                             }
                             else
                             {
-                                $aErrors[] = $LANG['all_fields_mandatory'];
+                                $aErrors[] = $LANG['bad_email'];
                             }
                         }
-                    }
-                    else
-                    {
-                        $aErrors[] = $LANG['error_get_server_url'];
+                        else
+                        {
+                            $aErrors[] = $LANG['all_fields_mandatory'];
+                        }
                     }
                 }
                 else
@@ -570,32 +556,6 @@ class InstallController extends Controller
         return '<div style="text-align:center"><p>' . $LANG['wait_importing_database'] . '</p>
         <p><img src="data:image/gif;base64,R0lGODlhHwAfAPUAAP///wAAAOjo6NLS0ry8vK6urqKiotzc3Li4uJqamuTk5NjY2KqqqqCgoLCwsMzMzPb29qioqNTU1Obm5jY2NiYmJlBQUMTExHBwcJKSklZWVvr6+mhoaEZGRsbGxvj4+EhISDIyMgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAHwAfAAAG/0CAcEgUDAgFA4BiwSQexKh0eEAkrldAZbvlOD5TqYKALWu5XIwnPFwwymY0GsRgAxrwuJwbCi8aAHlYZ3sVdwtRCm8JgVgODwoQAAIXGRpojQwKRGSDCRESYRsGHYZlBFR5AJt2a3kHQlZlERN2QxMRcAiTeaG2QxJ5RnAOv1EOcEdwUMZDD3BIcKzNq3BJcJLUABBwStrNBtjf3GUGBdLfCtadWMzUz6cDxN/IZQMCvdTBcAIAsli0jOHSJeSAqmlhNr0awo7RJ19TJORqdAXVEEVZyjyKtE3Bg3oZE2iK8oeiKkFZGiCaggelSTiA2LhxiZLBSjZjBL2siNBOFQ84LxHA+mYEiRJzBO7ZCQIAIfkECQoAAAAsAAAAAB8AHwAABv9AgHBIFAwIBQPAUCAMBMSodHhAJK5XAPaKOEynCsIWqx0nCIrvcMEwZ90JxkINaMATZXfju9jf82YAIQxRCm14Ww4PChAAEAoPDlsAFRUgHkRiZAkREmoSEXiVlRgfQgeBaXRpo6MOQlZbERN0Qx4drRUcAAJmnrVDBrkVDwNjr8BDGxq5Z2MPyUQZuRgFY6rRABe5FgZjjdm8uRTh2d5b4NkQY0zX5QpjTc/lD2NOx+WSW0++2RJmUGJhmZVsQqgtCE6lqpXGjBchmt50+hQKEAEiht5gUcTIESR9GhlgE9IH0BiTkxrMmWIHDkose9SwcQlHDsOIk9ygiVbl5JgMLuV4HUmypMkTOkEAACH5BAkKAAAALAAAAAAfAB8AAAb/QIBwSBQMCAUDwFAgDATEqHR4QCSuVwD2ijhMpwrCFqsdJwiK73DBMGfdCcZCDWjAE2V347vY3/NmdXNECm14Ww4PChAAEAoPDltlDGlDYmQJERJqEhGHWARUgZVqaWZeAFZbERN0QxOeWwgAAmabrkMSZkZjDrhRkVtHYw+/RA9jSGOkxgpjSWOMxkIQY0rT0wbR2LQV3t4UBcvcF9/eFpdYxdgZ5hUYA73YGxruCbVjt78G7hXFqlhY/fLQwR0HIQdGuUrTz5eQdIc0cfIEwByGD0MKvcGSaFGjR8GyeAPhIUofQGNQSgrB4IsdOCqx7FHDBiYcOQshYjKDxliVDpRjunCjdSTJkiZP6AQBACH5BAkKAAAALAAAAAAfAB8AAAb/QIBwSBQMCAUDwFAgDATEqHR4QCSuVwD2ijhMpwrCFqsdJwiK73DBMGfdCcZCDWjAE2V347vY3/NmdXNECm14Ww4PChAAEAoPDltlDGlDYmQJERJqEhGHWARUgZVqaWZeAFZbERN0QxOeWwgAAmabrkMSZkZjDrhRkVtHYw+/RA9jSGOkxgpjSWOMxkIQY0rT0wbR2I3WBcvczltNxNzIW0693MFYT7bTumNQqlisv7BjswAHo64egFdQAbj0RtOXDQY6VAAUakihN1gSLaJ1IYOGChgXXqEUpQ9ASRlDYhT0xQ4cACJDhqDD5mRKjCAYuArjBmVKDP9+VRljMyMHDwcfuBlBooSCBQwJiqkJAgAh+QQJCgAAACwAAAAAHwAfAAAG/0CAcEgUDAgFA8BQIAwExKh0eEAkrlcA9oo4TKcKwharHScIiu9wwTBn3QnGQg1owBNld+O72N/zZnVzRApteFsODwoQABAKDw5bZQxpQ2JkCRESahIRh1gEVIGVamlmXgBWWxETdEMTnlsIAAJmm65DEmZGYw64UZFbR2MPv0QPY0hjpMYKY0ljjMZCEGNK09MG0diN1gXL3M5bTcTcyFtOvdzBWE+207pjUKpYrL+wY7MAB4EerqZjUAG4lKVCBwMbvnT6dCXUkEIFK0jUkOECFEeQJF2hFKUPAIkgQwIaI+hLiJAoR27Zo4YBCJQgVW4cpMYDBpgVZKL59cEBhw+U+QROQ4bBAoUlTZ7QCQIAIfkECQoAAAAsAAAAAB8AHwAABv9AgHBIFAwIBQPAUCAMBMSodHhAJK5XAPaKOEynCsIWqx0nCIrvcMEwZ90JxkINaMATZXfju9jf82Z1c0QKbXhbDg8KEAAQCg8OW2UMaUNiZAkREmoSEYdYBFSBlWppZl4AVlsRE3RDE55bCAACZpuuQxJmRmMOuFGRW0djD79ED2NIY6TGCmNJY4zGQhBjStPTFBXb21DY1VsGFtzbF9gAzlsFGOQVGefIW2LtGhvYwVgDD+0V17+6Y6BwaNfBwy9YY2YBcMAPnStTY1B9YMdNiyZOngCFGuIBxDZAiRY1eoTvE6UoDEIAGrNSUoNBUuzAaYlljxo2M+HIeXiJpRsRNMaq+JSFCpsRJEqYOPH2JQgAIfkECQoAAAAsAAAAAB8AHwAABv9AgHBIFAwIBQPAUCAMBMSodHhAJK5XAPaKOEynCsIWqx0nCIrvcMEwZ90JxkINaMATZXfjywjlzX9jdXNEHiAVFX8ODwoQABAKDw5bZQxpQh8YiIhaERJqEhF4WwRDDpubAJdqaWZeAByoFR0edEMTolsIAA+yFUq2QxJmAgmyGhvBRJNbA5qoGcpED2MEFrIX0kMKYwUUslDaj2PA4soGY47iEOQFY6vS3FtNYw/m1KQDYw7mzFhPZj5JGzYGipUtESYowzVmF4ADgOCBCZTgFQAxZBJ4AiXqT6ltbUZhWdToUSR/Ii1FWbDnDkUyDQhJsQPn5ZU9atjUhCPHVhgTNy/RSKsiqKFFbUaQKGHiJNyXIAAh+QQJCgAAACwAAAAAHwAfAAAG/0CAcEh8JDAWCsBQIAwExKhU+HFwKlgsIMHlIg7TqQeTLW+7XYIiPGSAymY0mrFgA0LwuLzbCC/6eVlnewkADXVECgxcAGUaGRdQEAoPDmhnDGtDBJcVHQYbYRIRhWgEQwd7AB52AGt7YAAIchETrUITpGgIAAJ7ErdDEnsCA3IOwUSWaAOcaA/JQ0amBXKa0QpyBQZyENFCEHIG39HcaN7f4WhM1uTZaE1y0N/TacZoyN/LXU+/0cNyoMxCUytYLjm8AKSS46rVKzmxADhjlCACMFGkBiU4NUQRxS4OHijwNqnSJS6ZovzRyJAQo0NhGrgs5bIPmwWLCLHsQsfhxBWTe9QkOzCwC8sv5Ho127akyRM7QQAAOwAAAAAAAAAAAA==" alt="' . $LANG['loading'] . '" /></p>
         </div>';
-    }
-
-    /***** Check if the games are installed *****/
-    private function _isGameInstalled ()
-    {
-        return (is_dir($this->_sGamePath . 'file') && is_dir($this->_sGamePath . 'img/thumb'));
-    }
-
-    /***** Download and extract the games in his directory *****/
-    private function _downloadGame ()
-    {
-        $sGameTmpFile = 'tmp_game.zip';
-
-        $rHandle = fopen($this->_sGamePath . $sGameTmpFile, 'wb');
-        fwrite($rHandle, get_url_contents($this->_sGameDownloadPath));
-        fclose($rHandle);
-        zip_extract($this->_sGamePath . $sGameTmpFile, $this->_sGamePath);
-        unlink($this->_sGamePath . $sGameTmpFile);
-    }
-
-    /***** Check Download Server and check if the games are not already installed *****/
-    private function _checkDownloadServer ()
-    {
-        if ($this->_isGameInstalled()) return true; // Games are already installed.
-
-        return check_url($this->_sGameDownloadPath);
     }
 
 }
