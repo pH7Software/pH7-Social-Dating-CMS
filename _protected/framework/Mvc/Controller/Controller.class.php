@@ -36,13 +36,6 @@ abstract class Controller extends \PH7\Framework\Core\Core
             unset($oDDoS);
         }
 
-        /*
-        if ($this->browser->isMobile())
-        {
-            \PH7\Framework\Url\Header::redirect('mobile');
-        }
-        */
-
         /***** Assign the values for Registry Class *****/
 
         // URL

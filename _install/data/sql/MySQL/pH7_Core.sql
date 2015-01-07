@@ -392,9 +392,9 @@ CREATE TABLE IF NOT EXISTS pH7_Blogs (
 CREATE TABLE IF NOT EXISTS pH7_BlogsCategories (
   categoryId smallint(4) unsigned NOT NULL,
   blogId mediumint(10) unsigned NOT NULL,
-   INDEX (categoryId),
-   INDEX (blogId),
-   FOREIGN KEY (blogId) REFERENCES pH7_Blogs(blogId)
+  INDEX (categoryId),
+  INDEX (blogId),
+  FOREIGN KEY (blogId) REFERENCES pH7_Blogs(blogId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -461,10 +461,10 @@ CREATE TABLE IF NOT EXISTS pH7_NotesCategories (
   categoryId smallint(4) unsigned NOT NULL,
   noteId int(10) unsigned NOT NULL,
   profileId int(10) unsigned NOT NULL,
-   INDEX (categoryId),
-   INDEX (noteId),
-   FOREIGN KEY (noteId) REFERENCES pH7_Notes(noteId),
-   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
+  INDEX (categoryId),
+  INDEX (noteId),
+  FOREIGN KEY (noteId) REFERENCES pH7_Notes(noteId),
+  FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
@@ -958,7 +958,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('defaultTemplate', 'base', '', 'design'),
 ('emailName', 'pH7CMS', '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
-('splashPage', 0, 'Use Splash Page | enable = 1 or disable = 0', 'general'),
+('splashPage', 1, 'Use Splash Page | enable = 1 or disable = 0', 'general'),
 ('fullAjaxSite', 0, 'enable = 1 or disable = 0', 'general'),
 ('ipLogin', '', '', 'security'),
 ('timeDelayUserRegistration', 1440, '1440 minutes = 24 hours (in minutes!)', 'spam'),

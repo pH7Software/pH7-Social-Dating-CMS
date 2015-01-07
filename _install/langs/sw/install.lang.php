@@ -112,8 +112,6 @@ $LANG = array (
     'buy_individual_ticket_support' => '<span class="gray">Tiketi ya msaada kamili kwa mwezi mmoja</span> <span class="right">Kununua sasa</span>',
     'buy_individual_ticket_support_desc' => 'By ununuzi wa mtu binafsi tiketi ya msaada, tutaweza kukusaidia wakati wowote una tatizo na programu yetu. Sisi ni ovyo wako kutatua tatizo lolote kukutana na pH7CMS.',
     'looking_hosting' =>'Kuangalia kwa ajili ya jeshi Web sambamba na pH7CMS? Angalia <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">Orodha ya Mwenyeji</a>!',
-    'error_get_server_url' => 'Shida ya mapatano na anayekutimizia wavuti.<br />
-    Tafadhali hakikisha kuwa una wavuti (internet).',
     'powered' => 'Imetolewa na',
     'loading' => 'Subiri...',
 );
