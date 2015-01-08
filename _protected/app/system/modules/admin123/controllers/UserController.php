@@ -107,9 +107,9 @@ class UserController extends Controller
         $sWhere = $this->httpRequest->get('where');
         $sWhat = $this->httpRequest->get('what');
 
-        if ($sWhere !== 'all' && $sWhere !== 'username' && $sWhere !== 'email' && $sWhere !== 'firstName' && $sWhere !== 'lastName' && $sWhere !== 'ip')
+        if ($sWhere !== 'all' && $sWhere !== SearchCoreModel::USERNAME && $sWhere !== SearchCoreModel::EMAIL && $sWhere !== SearchCoreModel::FIRST_NAME && $sWhere !== SearchCoreModel::LAST_NAME && $sWhere !== SearchCoreModel::IP)
         {
-            \PFBC\Form::setError('form_admin_search', 'Invalid argument.');
+            \PFBC\Form::setError('form_user_search', 'Invalid argument.');
             Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
         }
         else
