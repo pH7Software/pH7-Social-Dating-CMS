@@ -23,7 +23,7 @@ class PaymentDesign extends Framework\Core\Core
     {
         $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enable']);
         $oPayPal->param('business', $this->config->values['module.setting']['paypal.email'])
-            ->param('custom', $this->session->get('member_username'))
+            ->param('custom', $this->session->get('member_id'))
             ->param('amount', $oMembership->price)
             ->param('item_number', $oMembership->groupId)
             ->param('item_name', $this->registry->site_name . ' ' . $oMembership->name)
@@ -32,6 +32,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('currency_code', $this->config->values['module.setting']['currency'])
             ->param('tax_cart', $this->config->values['module.setting']['tax_vat.percentage'])
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
+            ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PayPal'))
             ->param('cancel_return', Uri::get('payment', 'main', 'pay', '?msg=' . t('The payment was aborted, no changes have been made to your account.'), false));
         echo
         '<form action="', $oPayPal->getUrl(), '" method="post">',

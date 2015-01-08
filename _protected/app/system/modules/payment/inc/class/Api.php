@@ -10,7 +10,9 @@
  */
 namespace PH7;
 
-use PH7\Framework\Ip\Ip;
+use
+PH7\Framework\Registry\Registry,
+PH7\Framework\Ip\Ip;
 
 trait Api
 {
@@ -19,11 +21,12 @@ trait Api
      * Save log message.
      *
      * @param mixed $mData
+     * @param \PH7\Framework\Registry\Registry $oRegistry
      * @return Returns the number of bytes that were written to the file, or FALSE on failure.
      */
-    public function saveLog($mData)
+    public function saveLog($mData, Registry $oRegistry)
     {
-        return file_put_contents($this->registry->path_module_inc . '_log/' . Ip::get() . '.log', $mData, FILE_APPEND);
+        return file_put_contents($oRegistry->path_module_inc . '_log/' . Ip::get() . '.log', $mData, FILE_APPEND);
     }
 
 }
