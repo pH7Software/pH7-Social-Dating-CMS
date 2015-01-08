@@ -10,6 +10,10 @@
  */
 namespace PH7;
 
+use
+PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Mail\Mail;
+
 class MainController extends Controller
 {
 
@@ -95,11 +99,10 @@ class MainController extends Controller
             case 'paypal':
             {
                 $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enable']);
-                if ($oPayPal->valid() && $this->httpRequest->postExists('item_number'))
+                if ($oPayPal->valid() && $this->httpRequest->postExists('item_number') && $this->httpRequest->postExists('custom'))
                 {
-                    if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->iProfileId, $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->httpRequest->post('custom', 'int'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
-                        $this->log($oPayPal, t('PayPal payment was made, the following information:'));
                         $this->_bStatus = true; // Status is OK
                     }
                 }
@@ -117,7 +120,6 @@ class MainController extends Controller
                 {
                     if ($this->oUserModel->updateMembership($this->httpRequest->post('sale_id'), $this->iProfileId, $this->httpRequest->post('price'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
-                        $this->log($o2CO, t('2CheckOut payment was made, the following information:'));
                         $this->_bStatus = true; // Status is OK
                     }
                 }
@@ -154,6 +156,19 @@ class MainController extends Controller
         $this->output();
     }
 
+    public function notification($sGatewayName = '')
+    {
+        // Save buyer information to a log file
+        if ($sGatewayName == 'PayPal' || $sGatewayName == 'TwoCO' || $sGatewayName == 'CCBill')
+        {
+            $sGatewayName = 'PH7\\' . $sGatewayName;
+            $this->log(new $sGatewayName(false), t('%0% payment was made, the following information:', $sGatewayName));
+        }
+
+        // Send a notification email
+        $this->sendNotifMail();
+    }
+
     /**
      * Update the Affiliate Commission.
      *
@@ -175,18 +190,45 @@ class MainController extends Controller
     }
 
     /**
+     * Send a notification email to the admin.
+     *
+     * @return integer Number of recipients who were accepted for delivery.
+     */
+    protected function sendNotifMail()
+    {
+        $sTo = DbConfig::getSetting('adminEmail');
+        $sBuyer = $this->session->get('member_first_name') . ' (' . $this->session->get('member_username') . ')';
+
+        $this->view->intro = t('Hello!') . '<br />' . t('You have received a new Payment from %0%', $sBuyer);
+        $this->view->date = t('Date of the payment: %0%', $this->dateTime->get()->date());
+        $this->view->browser_info = t('User Browser info: %0%', $this->browser->getUserAgent());
+        $this->view->ip = t('Ip of the buyer: %0%', $this->design->ip(null, false));
+        $this->view->details_text = t('Please find all other details below');
+        $this->view->details_data = print_r($_POST, true);
+
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/payment/ipn.tpl', $sTo);
+
+        $aInfo = [
+            'to' => $sTo,
+            'subject' => t('New Payment Received from %0%', $sBuyer)
+        ];
+
+        return (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    /**
      * Create a Payment Log file.
      *
-     * @param object $oProvider A provider class.
+     * @param \PH7\Framework\Payment\Gateway\Api\Api $oProvider A provider class.
      * @param string $sMsg
      * @return void
      */
-    protected function log($oProvider, $sMsg)
+    protected function log(Framework\Payment\Gateway\Api\Api $oProvider, $sMsg)
     {
         if ($this->config->values['module.setting']['log_file.enable'])
         {
             $sLogTxt = $sMsg . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL;
-            $oProvider->saveLog($sLogTxt . $_POST);
+            $oProvider->saveLog($sLogTxt . print_r($_POST, true), $this->registry);
         }
     }
 
