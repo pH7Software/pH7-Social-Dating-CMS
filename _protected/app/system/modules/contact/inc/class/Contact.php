@@ -6,14 +6,19 @@
  * @package        PH7 / App / System / Module / Contact / Inc / Class
  */
 namespace PH7;
+
 use
-PH7\Framework\Layout\Html\Design,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mail\Mail;
 
 class Contact extends Core
 {
 
+    /**
+     * Send the contact message to the admin.
+     *
+     * @return integer Number of recipients who were accepted for delivery.
+     */
     public function sendMessage()
     {
         $sFeedbackEmail = DbConfig::getSetting('feedbackEmail');
@@ -32,8 +37,8 @@ class Contact extends Core
 
         $this->view->footer_title = t('User Information');
         $this->view->footer_content =
-        '<p>' . t('User IP: ') . (new Design)->ip() . '</p>
-         <p>' . t('Browser info: %0%', $this->browser->getUserAgent()) . '</p>
+        '<p>' . t('User IP: %0%', $this->design->ip(null, false)) . '</p>
+         <p>' . t('User Browser info: %0%', $this->browser->getUserAgent()) . '</p>
          <p>' . t('User come from: %0%', '<a href="' . $this->httpRequest->currentUrl() . '">' . t('URL Page') . '</a>') . '</p>';
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/contact/contact_form.tpl', $sFeedbackEmail);

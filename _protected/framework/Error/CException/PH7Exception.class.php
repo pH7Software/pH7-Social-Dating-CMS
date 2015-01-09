@@ -42,8 +42,8 @@ class PH7Exception extends \Exception
         }
         else
         {
-            Page::error500();
             (new LoggerExcept)->except($oExcept); // Set Exception in Error Log
+            Page::error500();
         }
     }
 

@@ -343,6 +343,17 @@ final class FrontController
     }
 
     /**
+     * Removing the sensitive database information in the config object.
+     *
+     * @access public
+     * @return void
+     */
+    public function _removeDatabaseInfo()
+    {
+        unset($this->oConfig->values['database']);
+    }
+
+    /**
      * Internationalization with Gettext.
      *
      * @access public
@@ -537,8 +548,6 @@ final class FrontController
      */
     public function runRouter()
     {
-        $this->removeDatabaseInfo();
-
         // It displays the banishment if a banned IP address is found.
         if (Ban::isIp(Ip::get()))
         {
@@ -677,26 +686,6 @@ final class FrontController
     private function clearRequestParameter()
     {
         unset($this->aRequestParameter);
-    }
-
-    /**
-     * Removing the sensitive database information in the config object (unless the name of the database because we will need later).
-     *
-     * @access private
-     * @return void
-     */
-    private function removeDatabaseInfo()
-    {
-        unset(
-            $this->oConfig->values['database']['type'],
-            $this->oConfig->values['database']['hostname'],
-            $this->oConfig->values['database']['username'],
-            $this->oConfig->values['database']['password'],
-            $this->oConfig->values['database']['prefix'],
-            $this->oConfig->values['database']['charset'],
-            $this->oConfig->values['database']['port'],
-            $this->oConfig->values['database']['sock']
-        );
     }
 
     /**

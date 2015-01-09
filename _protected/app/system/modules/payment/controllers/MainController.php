@@ -166,7 +166,7 @@ class MainController extends Controller
         }
 
         // Send a notification email
-        $this->sendNotifMail();
+        $this->sendNotifyMail();
     }
 
     /**
@@ -190,11 +190,11 @@ class MainController extends Controller
     }
 
     /**
-     * Send a notification email to the admin.
+     * Send a notification email to the admin about the payment (IPN -> Instant Payment Notification).
      *
      * @return integer Number of recipients who were accepted for delivery.
      */
-    protected function sendNotifMail()
+    protected function sendNotifyMail()
     {
         $sTo = DbConfig::getSetting('adminEmail');
         $sBuyer = $this->session->get('member_first_name') . ' (' . $this->session->get('member_username') . ')';
