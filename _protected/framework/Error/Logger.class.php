@@ -15,7 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\File;
 
-final class Logger extends \PH7\Framework\Core\Core
+class Logger extends \PH7\Framework\Core\Core
 {
 
     const

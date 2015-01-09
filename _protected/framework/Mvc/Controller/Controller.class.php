@@ -113,6 +113,11 @@ abstract class Controller extends \PH7\Framework\Core\Core
      */
     final public function output($sFile = null)
     {
+        /**
+         * Remove database information for the tpl files in order to prevent any attack attempt.
+         **/
+        \PH7\Framework\Mvc\Router\FrontController::getInstance()->_removeDatabaseInfo();
+
        /**
         * Destroy all object instances of PDO and close the connection to the database before the display and the start of the template and free memory
         */

@@ -22,7 +22,7 @@ trait Api
      *
      * @param mixed $mData
      * @param \PH7\Framework\Registry\Registry $oRegistry
-     * @return Returns the number of bytes that were written to the file, or FALSE on failure.
+     * @return mixed (integer | boolean) Returns the number of bytes that were written to the file, or FALSE on failure.
      */
     public function saveLog($mData, Registry $oRegistry)
     {

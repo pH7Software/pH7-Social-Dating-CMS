@@ -104,7 +104,7 @@ final class Security
      * @param string $sAlgo The algorithm. Only 'whirlpool' or 'sha512' is accepted.
      * @return string
      */
-    public function userHash($sVal, $iLength, $sAlgo = 'whirlpool')
+    public static function userHash($sVal, $iLength, $sAlgo = 'whirlpool')
     {
         if ($sAlgo !== 'whirlpool' && $sAlgo !== 'sha512')
             exit('Wrong algorithm! Please choose between "whirlpool" or "sha512"');

@@ -388,17 +388,23 @@ class Design
      * Show the user IP address with a link to get the IP information.
      *
      * @param string $sIp IP address. Default NULL
-     * @return void
+     * @param boolean $bPrint Print or Return the HTML code. Default TRUE
+     * @return mixed (string | void)
      */
-    public function ip($sIp = null)
+    public function ip($sIp = null, $bPrint = true)
     {
-        echo '<a href="', Ip::api($sIp), '" title="', t('See information from this IP'), '" target="_blank">', Ip::get($sIp), '</a>';
+        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See information from this IP') . '" target="_blank">' . Ip::get($sIp) . '</a>';
+
+        if ($bPrint)
+            echo $sHtml;
+        else
+            return $sHtml;
     }
 
     /**
      * Show the geolocation of the user.
      *
-     * @param boolean $bPrint Print or return the HTML code. Default TRUE
+     * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      * @return mixed (string | void)
      */
     public function geoIp($bPrint = true)

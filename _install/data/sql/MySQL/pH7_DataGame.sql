@@ -14,8 +14,8 @@ SET @sCurrentDate = CURRENT_TIMESTAMP;
 
 
 INSERT INTO pH7_GamesCategories (categoryId, name) VALUES
-(1, 'Arcade'),
-(2, 'Action'),
+(1, 'Action'),
+(2, 'Arcade'),
 (3, 'Casino'),
 (4, 'Drawing'),
 (5, 'Fighting'),
@@ -28,15 +28,15 @@ INSERT INTO pH7_GamesCategories (categoryId, name) VALUES
 
 
 INSERT INTO pH7_Games (gameId, name, title, description, keywords, thumb, file, categoryId, addedDate, downloads, votes, score, views) VALUES
--- Arcade (1)
-(1, '', 'America Fights Back', 'Think you can do better in the war? Well heres your chance.Use your mouse and click to fire your guns! Watch your energy level to make sure you dont die. There are no second chances or extra', 'America Fights Back', 'america_strikes_back.png', 'america_strikes_back.swf', 1, @sCurrentDate, 0, 0, 0, 0),
-(2, '', 'Altex', 'Be fast and shoot them all!', 'Altex', 'altex.png', 'altex.swf', 1, @sCurrentDate, 0, 0, 0, 0),
-(3, '', 'Alpine Escape', 'Catch the brides falling from the airship but don''t shoot it down - shoot down the fighter plane in', 'Alpine Escape', 'alpine_escape.png', 'alpine_escape.swf', 1, @sCurrentDate, 0, 0, 0, 0),
+-- Action (1)
+(4, '', 'Flashblox', 'Tetris clone', '', 'tetris_clone.png', 'tetris_clone.swf', 1, @sCurrentDate, 0, 0, 0, 0),
+(5, '', 'Bell Boys', 'Help the bell boy to deliver their orders to the right floor by controling the elevators', '', 'bell_boys.png', 'bell_boys.swf', 1, @sCurrentDate, 0, 0, 0, 0),
+(6, '', 'Frogger', 'This is a real classic simple and addictive. Just help the frog to cross the street with heavy traffic', '', 'frogger.png', 'frogger.swf', 1, @sCurrentDate, 0, 0, 0, 0),
 
--- Action (2)
-(4, '', 'Flashblox', 'Tetris clone', '', 'tetris_clone.png', 'tetris_clone.swf', 2, @sCurrentDate, 0, 0, 0, 0),
-(5, '', 'Bell Boys', 'Help the bell boy to deliver their orders to the right floor by controling the elevators', '', 'bell_boys.png', 'bell_boys.swf', 2, @sCurrentDate, 0, 0, 0, 0),
-(6, '', 'Frogger', 'This is a real classic simple and addictive. Just help the frog to cross the street with heavy traffic', '', 'frogger.png', 'frogger.swf', 2, @sCurrentDate, 0, 0, 0, 0),
+-- Arcade (2)
+(1, '', 'America Fights Back', 'Think you can do better in the war? Well heres your chance.Use your mouse and click to fire your guns! Watch your energy level to make sure you dont die. There are no second chances or extra', 'America Fights Back', 'america_strikes_back.png', 'america_strikes_back.swf', 2, @sCurrentDate, 0, 0, 0, 0),
+(2, '', 'Altex', 'Be fast and shoot them all!', 'Altex', 'altex.png', 'altex.swf', 2, @sCurrentDate, 0, 0, 0, 0),
+(3, '', 'Alpine Escape', 'Catch the brides falling from the airship but don''t shoot it down - shoot down the fighter plane in', 'Alpine Escape', 'alpine_escape.png', 'alpine_escape.swf', 2, @sCurrentDate, 0, 0, 0, 0),
 
 -- Casino (3)
 (7, '', 'Blackjack', 'This is a nice Blackjack games that allow playing upto 5 hands at once', '', 'blackjack.png', 'blackjack.swf', 3, @sCurrentDate, 0, 0, 0, 0),
