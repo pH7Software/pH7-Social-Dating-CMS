@@ -12,12 +12,6 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-/**
- * This is usually necessary to import data from remote server.
- */
-@set_time_limit(0);
-@ini_set('memory_limit', '528M');
-
 class InstallController extends Controller
 {
 
