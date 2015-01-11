@@ -23,11 +23,18 @@ class LicenseForm
             Framework\Url\Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'license', '?set_msg=1'));
         }
 
+        $sStatusColor = (PH7_VALID_LICENSE ? 'green1' : 'red');
+        $sLicLink = '<a href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Buy a License') . '</a>';
+        $sStatusTxt = '<span class="italic ' . $sStatusColor . '">' . (PH7_VALID_LICENSE ? t('Active') : t('Inactive')) . '</span>';
+        $sLicTypeTxt = '<span class="italic">' . PH7_LICENSE_NAME . '</span>' . (PH7_LICENSE_NAME == 'Trial' ? ' -> ' . t('%0% to get Premium Features!', $sLicLink) : '');
+
         $oForm = new \PFBC\Form('form_license', 500);
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_license', 'form_license'));
         $oForm->addElement(new \PFBC\Element\Token('license'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your License Key'), 'copyright_key', array('description' => '<strong><a href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Buy a license') . '</a></strong> ' . t('to remove the links from us.'), 'value' => (new License)->get(self::$_iLicenseId), 'autocomplete' => 'off', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="bold">' . t('Paid License Status: %0%', $sStatusTxt) . '</p>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="bold">' . t('License Type: %0%', $sLicTypeTxt) . '</p>'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your License Key'), 'copyright_key', array('description' => '<strong> ' . $sLicLink . '</strong> ' . t('to remove the Links from us and get the Premium Features.'), 'value' => (new License)->get(self::$_iLicenseId), 'autocomplete' => 'off', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button(t('Register'), 'submit', array('icon' => 'key')));
         $oForm->render();
     }
