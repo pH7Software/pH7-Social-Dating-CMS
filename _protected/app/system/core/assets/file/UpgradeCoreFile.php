@@ -20,7 +20,13 @@ PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Security\Version,
 PH7\Framework\File as F;
 
-class UpgradeCore
+/**
+ * This is usually necessary to import data from remote server.
+ */
+@set_time_limit(0);
+@ini_set('memory_limit', '528M');
+
+class UpgradeCore extends Kernel
 {
 
     const
@@ -53,6 +59,8 @@ class UpgradeCore
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->_oHttpRequest = new Http;
         $this->_oFile = new F\File;
         $this->_oConfig = Config::getInstance();
