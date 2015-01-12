@@ -11,10 +11,14 @@
         <meta name="designer" content="pH7 CMS (Pierre-Henry Soria)" />
         <meta name="generator" content="{$software_name} {$software_version}" />
         <!-- End Copyright pH7 Dating/Social CMS; All Rights Reserved -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <!-- End Title and Meta -->
-        <!-- Sheet Css -->
+        <!-------- Sheet Css -------->
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{$smarty.const.PH7_URL_ROOT}static/css/bootstrap.css">
+        <!-- pH7CMS CSS -->
         <link rel="stylesheet" media="all" href="{$smarty.const.PH7_URL_INSTALL}themes/{$tpl_name}/css/common.css" />
-        <!-- End Css -->
+        <!-------- End Css -------->
         <script>var sInstallUrl = "{$smarty.const.PH7_URL_INSTALL}";</script>
     </head>
     <body>
@@ -22,6 +26,10 @@
             <!-- Begin Header -->
             <header>
                 <p><a href="{$smarty.const.PH7_URL_ROOT}"><img src="{$smarty.const.PH7_URL_ROOT}templates/themes/base/img/logo.png" alt="{$software_name|upper}" title="{$software_name|upper}" /></a></p>
+
+                <noscript>
+                    <div class="err_msg">{$LANG.warning_no_js}</div>
+                </noscript>
 
                 {if !empty($sept_number)}
                     <h1>{$LANG.welcome_to_installer} {$software_name} - {$LANG.step} {$sept_number}/7</h1>

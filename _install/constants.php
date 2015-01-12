@@ -12,8 +12,22 @@
 
 defined('PH7') or exit('Restricted access');
 
+//---------------------------- Variables --------------------------------//
+
+//------------ URL ----------------//
+// Check the SSL protocol compatibility
+$sHttp = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';
+// Determine the domain name with the port
+$sDomain = ($_SERVER['SERVER_PORT'] != '80') ?  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_NAME'];
+
+// Determine the current file of the application
+$sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES))); // Remove backslashes for Windows compatibility
+
+
+//---------------------------- Constants --------------------------------//
+
 //------------ Other ----------------//
-//define('PH7_REQUIRE_SERVER_VERSION', '5.5.0'); // For pH7CMS 1.1
+//define('PH7_REQUIRE_SERVER_VERSION', '5.5.0'); // For pH7CMS 2.0
 define('PH7_REQUIRE_SERVER_VERSION', '5.4.0');
 define('PH7_REQUIRE_SQL_VERSION', '5.0');
 define('PH7_ENCODING', 'utf-8');
@@ -21,14 +35,9 @@ define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
 define('PH7_DS', DIRECTORY_SEPARATOR);
 define('PH7_PS', PATH_SEPARATOR);
 
-// URL association for SSL and protocol compatibility
-$sHttp = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';
-// Determines the domain name with the port
-$sDomain = ($_SERVER['SERVER_PORT'] != '80') ?  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_NAME'];
-
 //------------ URL ----------------//
 define('PH7_PROT', $sHttp);
-define('PH7_URL_INSTALL', dirname(PH7_PROT . $sDomain . htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES)) . '/'); // INSTALL URL
+define('PH7_URL_INSTALL', $sPhp_self . '/'); // INSTALL URL
 define('PH7_URL_ROOT', dirname(PH7_URL_INSTALL) . '/'); // ROOT URL
 
 //----------- PATH -----------------//

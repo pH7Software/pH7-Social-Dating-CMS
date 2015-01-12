@@ -16,6 +16,6 @@
     </div>
 </div>
 
-<p class="clear"><a href="{$smarty.const.PH7_URL_SLUG_INSTALL}finish">{$LANG.later}</a></p>
+<p><button type="button" onclick="window.location='{$smarty.const.PH7_URL_SLUG_INSTALL}license'">{$LANG.later}</button></p>
 
 {include file="inc/footer.tpl"}
