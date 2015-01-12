@@ -10,7 +10,15 @@
  */
 namespace PH7;
 
-use PH7\Framework\Config\Config, PH7\Framework\File as F;
+use
+PH7\Framework\Config\Config,
+PH7\Framework\File as F;
+
+/**
+ * This is usually necessary to import data from remote server.
+ */
+@set_time_limit(0);
+@ini_set('memory_limit', '528M');
 
 class Module
 {
