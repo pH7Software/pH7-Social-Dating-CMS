@@ -376,11 +376,8 @@ function check_url($sUrl)
  */
 function check_license($sKey)
 {
-    $sKey = trim($sKey);
-    if (!preg_match('/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/', $sKey))
-        return false;
-    else
-        return !(substr($sKey,8,1)*substr($sKey,10,1)*substr($sKey,12,1)*substr($sKey,13,1) != substr($sKey,15,4));
+    $sKey = trim(strtolower($sKey));
+    return (preg_match('/^ph7-[a-z0-9]{36}$/', $sKey));
 }
 
 /**

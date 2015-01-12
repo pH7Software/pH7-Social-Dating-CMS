@@ -16,21 +16,23 @@ $LANG = array (
     'lang_name' => 'Français',
     'version' => 'version',
     'CMS_desc' => '<p>Bienvenue à l\'installation de ' . Controller::SOFTWARE_NAME . '.<br />
-    Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>
-    <p>Veuillez suivre attentivement les sept étapes de l\'installation.</p>',
+    Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>',
     'choose_install_lang' => 'Veuillez choisir votre langue pour commencer l\'installation',
     'requirements_desc' => 'ATTENTION ! Veuillez être sûr que votre serveur a les <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">exigences</a> nécessaires pour faire correctement fonctionner pH7CMS.',
+    'requirements2_desc' => 'Avant toute chose, veuillez créer une base de données MySQL et affecter un utilisateur à elle avec tous les privilèges. Une fois que vous avez créé la base de données MySQL et son utilisateur, assurez-vous d\'écrire le nom de la base de données, le nom d\'utilisateur et le mot de passe, car vous en aurez besoin pour l\'installation.',
     'config_path' => 'Chemin du répertoire &laquo; protected &raquo;',
     'desc_config_path' => 'Veuillez indiquer le chemin complet de votre répertoire &laquo; protected &raquo;<br />
-    Il est préférable et conseillé de le mettre ce répertoire en dehors de la racine publique de votre site Web.',
+    Il est préférable et conseillé (mais en aucun cas pas obligatoire) de le mettre ce répertoire en dehors de la racine publique de votre site Web.',
     'need_frame' => 'Vous devez utiliser un navigateur Web qui accepte les iframes !',
     'path_protected' => 'Chemin du répertoire &laquo; protected &raquo;',
     'next' => 'Suivant',
     'go' => 'Étape Suivante =>',
-    'later' => 'Plus tard ...',
-    'license' => 'Licence',
+    'later' => 'Pas maintenant',
+    'register' => 'Enregistrer !',
+    'site_name' => 'Nom de votre site',
+    'license' => 'Votre Licence',
     'license_desc' => 'Veuillez lire la licence attentivement et l\'accepter avant de continuer l\'installation du logiciel !',
-    'registration_for_license' => 'Veuillez vous inscrire sur <a href="' . Controller::SOFTWARE_REGISTRATION_URL . '" target="_blank">cette page</a> afin d\'obtenir gratuitement votre clé de licence qui est requise pour pouvoir continuer.',
+    'registration_for_license' => 'Si vous ne l\'avez pas encore fait, c\'est un excellent moment pour acheter <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">une licence</a> afin d\'obtenir les caractéristiques hautes de gamme offerts par le logiciel. Si votre voulez essayer ces avantages ainsi que la suppression des liens promotionnels, vous pouvez sauter cette étape.',
     'your_license' => 'Votre clé de licence',
     'agree_license' => 'J\'ai lu et j\'accepte les Termes de licence ci-dessus.',
     'step' => 'Étape',
@@ -43,8 +45,8 @@ $LANG = array (
     'go_your_admin_panel' => 'Allez à votre panneau d\'administration !',
     'error_page_not_found' => 'Page introuvable',
     'error_page_not_found_desc' => 'Désolé, mais la page que vous cherchez est introuvable.',
-    'success_license' => 'Votre clé de licence est correcte !',
-    'failure_license' => 'Désolé, votre clé de licence est incorrecte !',
+    'success_license' => 'Bien joué !',
+    'failure_license' => 'Le format de la licence est incorrecte !',
     'no_protected_exist' => 'Désolé, mais nous n\'avons pas trouvé le répertoire &laquo; protected &raquo;',
     'no_protected_readable' => 'Veuillez changer les permissions du répertoire &laquo; protected &raquo; pour qu\'il soit en mode &laquo; lecture &raquo; (CHMOD 755).',
     'no_public_writable' => 'Veuillez changer les permissions du répertoire &laquo; public &raquo; pour qu\'il soit en mode &laquo; écriture &raquo; (CHMOD 777).',
@@ -90,9 +92,14 @@ $LANG = array (
     'remove_install_folder' => 'Veuillez supprimer le dossier &laquo; _install &raquo; de votre serveur avant d\'utiliser votre site.',
     'remove_install_folder_auto' => 'Effacer automatiquement le répertoire &laquo; install &raquo; (cette opération nécessite les droits d\'accès nécessaires sur le dossier &laquo; install &raquo;).',
     'confirm_remove_install_folder_auto' => 'ATTENTION, tous les fichiers du dossiers /_install/ vont être supprimés.',
-    'title_email_finish_install' => 'Félicitation, l\'installation de votre site Web est terminé !',
+    'title_email_finish_install' => 'À propos de l\'installation : Informations',
     'content_email_finish_install' => '<p><strong>Félicitations, votre site Web est maintenant installé avec succès !</strong></p>
     <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
+    <p>L\'URL de VOTRE Site de Rencontre est : <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
+    <p>L\'URL du panneau d\'administration est : <a href="' . PH7_URL_ROOT . 'admin123/">' . PH7_URL_ROOT . 'admin123/</a></p>
+    <p>N\'oubliez pas de vous la frimer en montrant votre nouveau site de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
+    <p>Enfin, si cela n\'est pas encore fait, c\'est une excellent idée pour acheter aujourd\'hui une clé de licence en vous rendant simplement sur <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">notre site Web</a> afin d\'obtenir les fonctionnalités Premium, la suppression des liens et les mentions de copyright sur votre site et même l\'accès au support de ticket illimité.</p>
+    <p>&nbsp;</p>
     <p>Pour tous rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
     veuillez visiter notre <a href="' . Controller::SOFTWARE_WEBSITE . '">site Web</a>.</p>
     <p>---</p>
@@ -110,6 +117,8 @@ $LANG = array (
     'buy_individual_ticket_support' => '<span class="gray">Support technique individuel complet pour un mois</span> <span class="right">Acheter maintenant</span>',
     'buy_individual_ticket_support_desc' => 'En achetant un support technique individuel, nous allons vous aider à chaque fois que vous aurez un problème avec notre logiciel. Nous serons à votre disposition pour résoudre d\'éventuelles problème que rencontreriez avec pH7CMS.',
     'looking_hosting' =>'À la recherche d\'un hébergement Web ? Regardez <a href="' . Controller::SOFTWARE_HOSTING_LIST_FR_URL . '" target="_blank">notre Liste d\'Hébergeurs</a> ?',
+    'warning_no_js' => 'Cette page Web est incompatible sans l\'activation de JavaScript.<br />
+    Veuillez activer JavaScript via les options de votre navigateur Web.',
     'powered' => 'Propulsé par',
     'loading' => 'Chargement en cours...',
 );
