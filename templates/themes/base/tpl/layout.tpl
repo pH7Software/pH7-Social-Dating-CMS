@@ -160,10 +160,8 @@
         Be careful, don\'t send the money to anybody!{/lang}</p></div>
       {/if}
 
-      <div role="secondary" id="clock"></div>
-
       <div role="contentinfo">
-        <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /> - <strong><a href="http://cool-on-web.com" title="{lang 'Free Online Dating Site'}">{lang 'Online Dating Site'}</a></strong></p>{{ $design->littleLikeApi() }}</div>{{ $design->langList() }}
+        <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /></p> {{ $design->littleLikeApi() }}</div>{{ $design->langList() }}
         {main_include 'bottom_menu.inc.tpl'}
       </div>
 
@@ -177,7 +175,7 @@
     <!-- End Footer -->
 
     <!-- Begin Footer JavaScript -->
-    {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/box/box.js,jquery/tipTip.js,common.js,clock.js,str.js') }}
+    {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/box/box.js,jquery/tipTip.js,common.js,str.js') }}
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS, 'global.js') }}
 
     {* SetUserActivity & User Chat *}

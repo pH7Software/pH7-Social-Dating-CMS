@@ -14,13 +14,7 @@
 
 <div class="right">
 
-  {* Show promotional image chosen from the list *}
-  {{ $img_list = ['girls', 'match'] }}
-  {{ $img_name = $img_list[mt_rand(0,1)] }}
-
-  {* Check if the URL is HTTPS or not *}
-  {{ $bSecure = Framework\Http\Http::isSsl() }}
-  {{ $domain_url = ($bSecure ? 'https://cool-on-web.com/static' : 'http://static.coolonweb.com') }}
-  <p><a class="pic thumb" href="http://cool-on-web.com"><img src="{domain_url}/img/promo/{img_name}-social-dating-400x280.jpg" alt="{lang 'Free Online Dating'}" title="{lang 'Free Online Dating with cool on Web!'}"></a></p>
+  {* Show promotional images (you can change the images from the "/static/img/promo/" folder *}
+  <p class="pic thumb"><img src="{url_static_img}promo/login{% mt_rand(1,2) %}_400x280.jpg" alt="{lang 'Free Online Dating Site'}" title="{lang 'Free Online Dating Site'}"></p>
 
 </div>
