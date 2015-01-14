@@ -34,9 +34,9 @@
     <!-- End Title and Meta -->
 
     <!-- Begin Sheet CSS -->
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
-    {{ $design->staticFiles('css', PH7_STATIC . PH7_JS . 'jquery/box/', 'box.css') }}
-    {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'common.css,style.css,layout.css,pagination.css,menu.css,like.css,color.css,alert-msg.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+    {{ $design->staticFiles('css', PH7_STATIC, PH7_CSS . 'bootstrap.css,' . PH7_CSS . 'bootstrap_customize.css,' . PH7_JS . 'jquery/box/box.css') }}
+   {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'common.css,style.css,layout.css,menu.css,like.css,color.css,alert-msg.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
 
     {* Custom CSS code *}
     {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/style.css') }}
@@ -53,10 +53,7 @@
     <!-- Begin Header JavaScript -->
     <script>var pH7Url={base:'{url_root}',relative:'{url_relative}',tpl:'{url_tpl}',stic:'{url_static}',tplImg:'{url_tpl_img}',tplJs:'{url_tpl_js}',tplMod:'{url_tpl_mod}',data:'{url_data}'};</script>
     {if AdminCore::auth()}<script>pH7Url.admin_mod = '{url_admin_mod}';</script>{/if}
-
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <!--<script src="//cdn.jquerytools.org/1.2.6/jquery.tools.min.js"></script>-->
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- End Header JavaScript -->
 
     {* Begin AjPh *}
@@ -77,8 +74,7 @@
     <header>
 
       <noscript>
-        <div class="err_msg">{lang}Please enable JavaScript in your browser!<br />
-        This site is not inconsistent activation of JavaScript, so it is necessary to activate it via the options of your browser.{/lang}</div>
+        <div class="err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
       </noscript>
 
       <div role="banner" id="logo"><h1><a href="{url_root}" title="{slogan}">{site_name}</a></h1></div>
@@ -94,7 +90,7 @@
     <!-- End Popups -->
 
     <!-- Begin Content -->
-    <div role="main" id="content">
+    <div role="main" class="container" id="content">
 
       {* If the splash page is not enabled, it displays the menu *}
       {if empty($is_splash_page)}
@@ -175,8 +171,9 @@
     <!-- End Footer -->
 
     <!-- Begin Footer JavaScript -->
-    {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/box/box.js,jquery/tipTip.js,common.js,str.js') }}
+    {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/box/box.js,jquery/tipTip.js,bootstrap.js,common.js,str.js') }}
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS, 'global.js') }}
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
     {* SetUserActivity & User Chat *}
     {if $is_user_auth}

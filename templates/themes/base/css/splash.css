@@ -1,3 +1,15 @@
+/* 1210px or more */
+@media (min-width: 1210px)
+{
+  .login_block{margin:-20px 0 0 50%}
+}
+/* 1209px or less */
+@media (max-width: 1209px)
+{
+    .bt_login_forgot{display:none}
+}
+#logo{float:left}
+
 .folio_block {
     position: absolute;
     top:212px;
@@ -54,9 +66,8 @@ h1:hover{color:#1877D5;cursor:default}
 .paging a:hover{font-weight: bold;}
 .block_txt{margin:380px 80px 5px 10px}
 .counter{margin:15px 2px 4px 1px}
-.login_block{margin:-5px 0 0 460px}
 
 /** Buttons (links) **/
-.bt_login_remember,.bt_login_forgot{padding-bottom:35px}
-.bt_login_remember{float:left;padding-left:36px;margin-top:-10px}
-.bt_login_forgot{float:right;padding-right:170px;margin-top:-52px}
+.bt_login_remember,.bt_login_forgot{padding-bottom:4%}
+.bt_login_remember{float:left;padding-left:5.5%;margin-top:-1.5%}
+.bt_login_forgot{float:right;padding-right:40%;margin-top:-2px}

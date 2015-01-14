@@ -23,11 +23,17 @@ class LostPwdDesignCore
      * Get the link "forgot password".
      *
      * @param string $sMod
+     * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      * @return void
      */
-    public static function link($sMod)
+    public static function link($sMod, $bPrint = true)
     {
-        echo '<a rel="nofollow" href="', Uri::get('lost-password','main','forgot',$sMod), '">', t('Forgot your password?'), '</a>';
+        $sHtml = '<a rel="nofollow" href="' . Uri::get('lost-password','main','forgot',$sMod) . '">' . t('Forgot your password?') . '</a>';
+
+        if ($bPrint)
+            echo $sHtml;
+        else
+            return $sHtml;
     }
 
 }

@@ -1,6 +1,5 @@
 <div class="login_block">
   {{ LoginSplashForm::display(290) }}
-  <div class="bt_login_forgot">{{ LostPwdDesignCore::link('user') }}</div>
 </div>
 
 <div class="right">
