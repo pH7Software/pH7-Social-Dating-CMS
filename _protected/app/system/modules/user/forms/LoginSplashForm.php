@@ -32,6 +32,7 @@ class LoginSplashForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="bt_login_remember">'));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'remember', array(1=>t('Stay signed in'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="bt_login_forgot">' . LostPwdDesignCore::link('user', false) . '</div>'));
         $oForm->render();
     }
 

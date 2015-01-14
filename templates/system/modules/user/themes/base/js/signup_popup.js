@@ -5,7 +5,7 @@
  */
 
 // Only for visitors
-(function()
+$(document).ready(function()
 {
     var $oDialog = $('div#box').html('<iframe style="border:0px" src="{url_root}user/asset/ajax/popup/signup" width="100%" height="100%"></iframe>').dialog
     ({
@@ -28,4 +28,4 @@
         $('title').text(pH7LangCore.join_now); // Set an attractive title
         $oDialog.dialog('open');
     }, 5E3);
-})();
+});

@@ -11,8 +11,10 @@ code{white-space: nowrap;}
 h1{font-size:18px;}
 h2{font-size:16px;}
 h1:first-letter, h2:first-letter{text-transform:capitalize;}
-h1, h2, h3, h4{margin-top:2px}
+h1, h2, h3, h4{margin-top:2px;font-weight:bold}
 
+p{margin:1em}
+img{border:0}
 p, li, pre {line-height: 1.5em}
 a{color:#08c;outline-style:none;cursor:pointer}
 a:link, a:visited{text-decoration:none}

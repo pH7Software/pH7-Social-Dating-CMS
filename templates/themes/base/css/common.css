@@ -4,6 +4,21 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
+/* 980px or more */
+@media (min-width: 980px)
+{
+    header, #content {width:78%}
+    .picture_block {width:90%}
+}
+/* 980px or less */
+@media (max-width: 980px)
+{
+    body{overflow-x:auto;overflow-y:auto}
+    header, #content {width:auto;float:none}
+    .picture_block {width:auto;float:none}
+}
+
+
 *{margin:0}
 body, td, pre {
     font-family:Arial, Verdana, Helvetica, sans-serif;
@@ -25,11 +40,12 @@ body {background: white url(../img/body_bg.jpg) repeat-x;}
     white-space: nowrap;
     margin-left: 0.25em;
 }
-#logo a{width:280px;height:60px;float:left;background:url('../img/logo.png') no-repeat; overflow:hidden;text-indent:-10000px;margin:20px}
+#logo{padding-left:50px;background:url('../img/logo.png') no-repeat;margin-top:20px;overflow:hidden}
+#logo h1{font-size:2em}
 header{border-bottom:1px solid #C8C8C8;padding:10px 0 10px;background: url(../img/header2.png) repeat-x top;}
 header ul{margin:0;padding:0;}
 header li{list-style-type: none;float:left;padding-right: 20px;font-style:italic;}
-header,#content{margin-left:auto; margin-right:auto;padding-left:12px;padding-right:12px;width:985px;}
+header, #content{margin-left:auto; margin-right:auto;padding-left:12px;padding-right:12px;}
 #content:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 footer{padding:10px;margin:10px 20px;font-size:.9em;text-align:center;border-top:1px solid #C8C8C8;}
 footer a{color:#666;}
@@ -122,7 +138,7 @@ label#percent{position:absolute;padding-left:115px;padding-top:6px;font-size:80%
 }
 
 .picture:hover a{opacity:.5}
-.picture a,
+.picture a {
 background-position: center center;
 background-color: rgba(14, 14, 14, 0.3);
 float: left;
@@ -139,7 +155,6 @@ transition:0.25s;
 .picture_block {
     margin: 10px 8px 10px;
     overflow: hidden;
-    width: 880px;
 }
 .img_picture {
     height:200px;
