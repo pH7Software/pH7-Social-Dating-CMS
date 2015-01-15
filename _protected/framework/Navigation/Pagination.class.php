@@ -75,7 +75,7 @@ class Pagination
         // If you have more than one page, it displays the navigation
         if ($this->_iTotalPages > 1)
         {
-            $this->_sHtmlOutput = '<div class="clear"></div><nav><ul class="pagination">';
+            $this->_sHtmlOutput = '<div class="clear"></div><nav class="center" role="navigation"><ul class="pagination">';
 
             // Management link to go to the first page
             if ($this->_aOptions['text_first_page'])
@@ -94,7 +94,7 @@ class Pagination
             for ($i=1; $i <= $this->_iTotalPages; $i++)
             {
                 if (($i >= $this->_iCurrentPage - $this->_aOptions['range'] && $i <= $this->_iCurrentPage + $this->_aOptions['range']) || $this->_iTotalPages <= $this->_iShowItems)
-                    $this->_sHtmlOutput .= ($this->_iCurrentPage == $i) ? '<li class="active"><a href="' . $this->_sPageName . $i . '">' . $i . '</a></li>' : '<li><a href="' . $this->_sPageName . $i . '">' . $i . '</a></li>';
+                    $this->_sHtmlOutput .= '<li' . ($this->_iCurrentPage == $i ? ' class="active"' : '') . '><a href="' . $this->_sPageName . $i . '">' . $i . '</a></li>';
             }
 
             //  Management the "Next" link

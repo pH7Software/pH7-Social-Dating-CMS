@@ -13,7 +13,7 @@
 <p class="warning">{$LANG.requirements_desc}</p>
 <p class="italic">&bull; {$LANG.requirements2_desc}</p>
 
-<p><button type="button" onclick="window.location='{$smarty.const.PH7_URL_SLUG_INSTALL}config_system'">{$LANG.go}</button></p>
+<p><button type="button" onclick="window.location='{$smarty.const.PH7_URL_SLUG_INSTALL}config_system'" class="btn btn-primary btn-lg">{$LANG.go}</button></p>
 
 <!-- Add a welcome sound -->
 <audio style="display:none" autoplay="autoplay" src="{$smarty.const.PH7_URL_ROOT}static/sound/welcome.mp3"></audio>

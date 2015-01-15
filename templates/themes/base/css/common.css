@@ -160,6 +160,7 @@ transition:0.25s;
     height:200px;
     width:200px;
     border-radius:6px;
+    border:1px #DFDFDF solid;
 }
 
 .thumb_img, .avatar, .map {

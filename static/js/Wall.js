@@ -34,7 +34,7 @@ function Wall()
         $.post(pH7Url.base + this.sUrl, {type : 'show'}).success(function(sHtmlData) {
             $('#wall').html(sHtmlData);
         }).error(function() {
-            $('.msg').addClass('alert-message error').text(pH7LangCore.unable_retrive_feeds).delay(2000).fadeOut();
+            $('.msg').addClass('alert alert-danger').text(pH7LangCore.unable_retrive_feeds).delay(2000).fadeOut();
         });
         setTimeout(function() {oMe.show()}, 5000);
     };
@@ -49,7 +49,7 @@ function Wall()
         $.post(pH7Url.base + this.sUrl, {type : 'showCommentProfile'}).success(function(sHtmlData) {
             $('#wall').html(sHtmlData);
         }).error(function() {
-            $('.msg').addClass('alert-message error').text(pH7LangCore.unable_retrive_feeds).delay(2000).fadeOut();
+            $('.msg').addClass('alert alert-danger').text(pH7LangCore.unable_retrive_feeds).delay(2000).fadeOut();
         });
         setTimeout(function() {oMe.showComment()}, 5000);
     };
@@ -107,10 +107,10 @@ function Wall()
     this._output = function(oData)
     {
         if (oData.status == 1) {
-            $('.msg').addClass('alert-message success');
+            $('.msg').addClass('alert alert-success');
             $('#wall_' +  oData.msgId).hide("slow");
         } else {
-           $('.msg').addClass('alert-message error');
+           $('.msg').addClass('alert alert-danger');
         }
         $('.msg').text(oData.txt).delay(2000).fadeOut();
     };

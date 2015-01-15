@@ -56,7 +56,7 @@ var Like = {
                 $(this).animate({'opacity':1}, {'duration':'slow'});
             },
             error: function () {
-                $('.msg').addClass('alert-message error').text(pH7LangCore.misloading).delay(2000).fadeOut();
+                $('.msg').addClass('alert alert-danger').text(pH7LangCore.misloading).delay(2000).fadeOut();
             }
         });
         return false;

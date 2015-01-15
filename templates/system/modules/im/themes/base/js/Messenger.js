@@ -430,7 +430,7 @@ var Messenger = {
     {
         if (sUser == this.sUsername)
         {
-            $('.msg').addClass('alert-message error').text(pH7LangIM.cannot_chat_yourself).fadeOut(5000);
+            $('.msg').addClass('alert alert-danger').text(pH7LangIM.cannot_chat_yourself).fadeOut(5000);
             return false;
         }
         return true;

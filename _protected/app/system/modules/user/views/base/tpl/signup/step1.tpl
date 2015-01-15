@@ -1,7 +1,11 @@
 <div class="center">
 
   <div class="left">
-    <div id="progress_bar"><label id="percent"></label></div>
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:33%">33% - STEP 1/3</div>
+    </div>
+
     {{ JoinForm::step1() }}
   </div>
 
@@ -16,5 +20,3 @@
   </div>
 
 </div>
-
-<script>$('#progress_bar').progressbar({value:33});$('#progress_bar').css('width','300px');$('#percent').text('33% - STEP 1/3');</script>

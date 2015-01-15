@@ -1,7 +1,5 @@
-<!-- Last update: 07/12/12 by Pierre-Henry Soria -->
-
-<h1>pH Code Convention</h1>
-<p>When working with pH7 code, developing extensions and modifications in the code, this coding convention is highly recommended for your code and have a code easy to proofreading.</p>
+<h1>Code Convention for pH7CMS</h1>
+<p>When working with pH7CMS's code, developing extensions and modifications in the code, this coding convention is highly recommended for your code and have a code easy to proofreading.</p>
 
 <h2>Classes And Interfaces: Names</h2>
 <p>Name Class and Interface: UpperCamelCase (<a href="http://en.wikipedia.org/wiki/StudlyCaps">StudlyCaps</a>) and alphanumeric only.<br />

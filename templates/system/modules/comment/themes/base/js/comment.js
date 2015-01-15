@@ -13,10 +13,10 @@ function comment(sType, iCommentId, iRecipientId, iSenderId, sTable, sCSRFToken)
     {
         if(oResponseData.status == 1) {
             $('.msg').show();
-            $('.msg').addClass('alert-message success');
+            $('.msg').addClass('alert alert-success');
             $('#' +  iCommentId).hide("slow");
         } else {
-            $('.msg').addClass('alert-message error');
+            $('.msg').addClass('alert alert-danger');
         }
 
         $('.msg').text(oResponseData.txt).fadeOut(2000);

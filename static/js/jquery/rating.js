@@ -151,7 +151,7 @@ pHS pH Star
                                     if(data.status == 1)
                                         $(txt_class).html(data.txt).show('slow');
                                     else
-                                        $(txt_class).addClass('alert-message error').html(data.txt).delay(3000).fadeOut();
+                                        $(txt_class).addClass('alert alert-danger').html(data.txt).delay(3000).fadeOut();
                         },
                         'json'
                     );

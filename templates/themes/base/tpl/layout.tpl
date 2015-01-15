@@ -34,9 +34,10 @@
     <!-- End Title and Meta -->
 
     <!-- Begin Sheet CSS -->
-    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-    {{ $design->staticFiles('css', PH7_STATIC, PH7_CSS . 'bootstrap.css,' . PH7_CSS . 'bootstrap_customize.css,' . PH7_JS . 'jquery/box/box.css') }}
-   {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'common.css,style.css,layout.css,menu.css,like.css,color.css,alert-msg.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+    {{ $design->staticFiles('css', PH7_STATIC . PH7_JS . 'jquery/box/', 'box.css') }} {* We have to include box CSS alone because it includes images in its folder *}
+    {{ $design->staticFiles('css', PH7_STATIC, PH7_CSS . 'bootstrap.css,' . PH7_CSS . 'bootstrap_customize.css') }}
+   {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'common.css,style.css,layout.css,menu.css,like.css,color.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
 
     {* Custom CSS code *}
     {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/style.css') }}

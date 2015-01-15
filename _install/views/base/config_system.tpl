@@ -39,7 +39,7 @@
     <p><span class="mandatory">*</span> <label for="bug_report_email">{$LANG.bug_report_email} :</label><br />
     <input type="email" name="bug_report_email" id="bug_report_email" value="{$smarty.session.val.bug_report_email|escape}" required="required" /></p>
 
-    <p><input type="submit" name="config_system_submit" value="{$LANG.next}" /></p>
+    <p><button type="submit" name="config_system_submit" class="btn btn-primary btn-lg">{$LANG.next}</button></p>
 
 </form>
 

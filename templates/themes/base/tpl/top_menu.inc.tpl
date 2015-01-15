@@ -135,7 +135,7 @@
 
         {if $is_user_auth && ( !$is_aff_auth && !$is_admin_auth ) || $oSession->exists('login_user_as') }
 
-          <li class="dropdown"><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Email'} ({count_unread_mail}) <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Email'} <span class="badge">{count_unread_mail}</span> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('mail','main','compose') }}" title="{lang 'Compose'}">{lang 'Compose'}</a></li>
               <li><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'Inbox'}">{lang 'Inbox'}</a></li>
@@ -182,7 +182,7 @@
                 </ul>
               </li>
 
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','friend','index') }}" title="{lang 'Friends Management'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Friends Management'} ({count_pen_friend_request})</a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','friend','index') }}" title="{lang 'Friends Management'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Friends Management'} <span class="badge">{count_pen_friend_request}</span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('user','friend','index') }}" title="{lang 'Friends List'}">{lang 'Friends List'}</a></li>
                   <li><a href="{{ $design->url('user','friend','search',$oSession->get('member_username')) }}" title="{lang 'Find a friend in my list'}">{lang 'Find a Friend'}</a></li>
@@ -349,16 +349,16 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','index') }}" title="{lang 'User Moderation'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Moderation'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumpicture') }}" title="{lang 'Moderate Albums'}">{lang 'Picture Album'} ({count_moderate_total_album_picture})</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}">{lang 'Picture'} ({count_moderate_total_picture})</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumvideo') }}" title="{lang 'Moderate Albums'}">{lang 'Video Album'} ({count_moderate_total_album_video})</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}">{lang 'Video'} ({count_moderate_total_video})</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Avatars'}">{lang 'Avatar'} ({count_moderate_total_avatar})</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}">{lang 'Profile Background'} ({count_moderate_total_background})</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumpicture') }}" title="{lang 'Moderate Albums'}">{lang 'Picture Album'} <span class="badge">{count_moderate_total_album_picture}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}">{lang 'Picture'} <span class="badge">{count_moderate_total_picture}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumvideo') }}" title="{lang 'Moderate Albums'}">{lang 'Video Album'} <span class="badge">{count_moderate_total_album_video}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}">{lang 'Video'} <span class="badge">{count_moderate_total_video}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Avatars'}">{lang 'Avatar'} <span class="badge">{count_moderate_total_avatar}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}">{lang 'Profile Background'} <span class="badge">{count_moderate_total_background}</span></a></li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Note'} ({count_moderate_total_note})</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Note'} <span class="badge">{count_moderate_total_note}</span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{lang 'Moderate the Note Posts'}">{lang 'Note Posts'} ({count_moderate_total_note})</a></li>
+                <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{lang 'Moderate the Note Posts'}">{lang 'Note Posts'} <span class="badge">{count_moderate_total_note}</span></a></li>
               </ul>
             </li>
 

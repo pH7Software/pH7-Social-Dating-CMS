@@ -361,6 +361,7 @@ class Design
     {
         /*** Check the type of message, otherwise it is the default ***/
         $sType = ($sType == 'success' || $sType == 'info' || $sType == 'warning' || $sType == 'error') ? $sType : 'success';
+        $sType = ($sType == 'error' ? 'danger' : $sType); // Now the "error" CSS class has become "danger", so we have to convert it
         $this->oSession->set(
             [
                 'flash_msg'=> $sMessage,
@@ -378,7 +379,7 @@ class Design
     {
         if ($this->oSession->exists('flash_msg'))
         {
-            echo '<div class="center alert-message ', $this->oSession->get('flash_type'), '"><p>', $this->oSession->get('flash_msg'), '</p></div>';
+            echo '<div class="center bold alert alert-', $this->oSession->get('flash_type'), '" role="alert">', $this->oSession->get('flash_msg'), '</div>';
 
             $this->oSession->remove('flash_msg'); // Remove the flash_msg session
         }
@@ -673,10 +674,10 @@ class Design
         <meta name="creator" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="designer" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="generator" content="', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, '" />
-        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.css" />',
-        $this->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'common.css,style.css,alert-msg.css,form.css'),
-        '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />',
+        $this->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'common.css,style.css,form.css'),
+        '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <script>var pH7Url={base:\'', PH7_URL_ROOT, '\'}</script></head><body>';
         if ($bLogo)
         {

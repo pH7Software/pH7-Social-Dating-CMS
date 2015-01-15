@@ -162,7 +162,7 @@ class MainController extends Controller
         if ($sGatewayName == 'PayPal' || $sGatewayName == 'TwoCO' || $sGatewayName == 'CCBill')
         {
             $sGatewayName = 'PH7\\' . $sGatewayName;
-            $this->log(new $sGatewayName(false), t('%0% payment was made, the following information:', $sGatewayName));
+            $this->log(new $sGatewayName(false), t('%0% payment was made with the following information:', $sGatewayName));
         }
 
         // Send a notification email
