@@ -9,10 +9,10 @@ function friend(sType, iFriendId, sCSRFToken)
 {
     $.post(pH7Url.base + 'user/asset/ajax/Friend', {type : sType, friendId : iFriendId, security_token : sCSRFToken}, function(oResponseData) {
         if(oResponseData.status == 1) {
-            $('.msg').addClass('alert-message success');
+            $('.msg').addClass('alert alert-success');
             $('#friend_' +  iFriendId).hide('slow');
         } else {
-            $('.msg').addClass('alert-message error');
+            $('.msg').addClass('alert alert-danger');
         }
 
         $('.msg').text(oResponseData.txt).fadeOut(2000);

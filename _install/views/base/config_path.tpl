@@ -12,7 +12,7 @@
 
     <div id="txtDir"></div>
 
-    <p><input type="submit" value="{$LANG.next}" /></p>
+    <p><button type="submit" class="btn btn-primary btn-lg">{$LANG.next}</button></p>
 
 </form>
 

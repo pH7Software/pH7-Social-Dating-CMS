@@ -27,7 +27,7 @@
     z-index:3;
 }
 
-/** P containing the rate informations **/
+/** P contains the rate information **/
 p.pHRatingInfo {
     position:        absolute;
     z-index:9999;

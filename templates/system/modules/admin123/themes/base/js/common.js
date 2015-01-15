@@ -7,7 +7,7 @@
 function cache(sType, sCSRFToken)
 {
     $.post(pH7Url.base + pH7Url.admin_mod + 'asset/ajax/Cache', {type : sType, security_token : sCSRFToken}, function(oResponseData) {
-      (oResponseData.status == 1) ? $('.msg').addClass('alert-message success') : $('.msg').addClass('alert-message error');
+      (oResponseData.status == 1) ? $('.msg').addClass('alert alert-success') : $('.msg').addClass('alert alert-danger');
       $('.msg').text(oResponseData.txt).fadeOut(1000);
       window.location.reload();
     }, 'json');
@@ -17,11 +17,14 @@ function ads(sType, iAdsId, sCSRFToken)
 {
     $.post(pH7Url.base + pH7Url.admin_mod + 'asset/ajax/Ads', {type : sType, adsId : iAdsId, security_token : sCSRFToken}, function(oResponseData)
     {
-        if(oResponseData.status == 1) {
-            $('.msg').addClass('alert-message success');
+        if(oResponseData.status == 1)
+        {
+            $('.msg').addClass('alert alert-success');
             $('#ad_' +  iAdsId).hide("slow");
-        } else {
-            $('.msg').addClass('alert-message error');
+        }
+        else
+        {
+            $('.msg').addClass('alert alert-danger');
         }
 
         $('.msg').text(oResponseData.txt).fadeOut(2000);

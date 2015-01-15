@@ -36,3 +36,7 @@
                 {/if}
             </header>
             <!-- End Header -->
+
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{$sept_number*14}%">{$sept_number*14}%</div>
+            </div>

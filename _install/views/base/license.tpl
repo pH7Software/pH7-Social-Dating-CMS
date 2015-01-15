@@ -10,10 +10,10 @@
     {$LANG.registration_for_license}<br />
     <input type="text" name="license" onkeypress="return checkInput(event)" id="license" value="{$smarty.session.val.license|escape}" autocomplete="off" required="required" /></p>
     <div id="txtLic"></div>
-    <p><input type="submit" value="{$LANG.register}" /></p>
+    <p><button type="submit" class="btn btn-primary btn-lg">{$LANG.register}</button></p>
 </form>
 
-<p><button type="button" onclick="window.location='{$smarty.const.PH7_URL_SLUG_INSTALL}finish'">{$LANG.later}</button></p>
+<p><button type="button" onclick="window.location='{$smarty.const.PH7_URL_SLUG_INSTALL}finish'" class="btn btn-primary">{$LANG.later}</button></p>
 
 <script src="{$smarty.const.PH7_URL_INSTALL}static/js/AJAPH.js"></script>
 {literal}

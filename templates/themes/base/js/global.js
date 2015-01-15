@@ -124,4 +124,4 @@ function loadingImg(iStatus, sIdContainer) {
         $("#" + sIdContainer).html('');
 }
 
-$('.alert-message').fadeOut(10000);
+$('div[role=alert]').fadeOut(10000);

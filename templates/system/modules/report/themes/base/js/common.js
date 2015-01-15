@@ -8,10 +8,10 @@ function report(sType, iReportId, sCSRFToken)
 {
     $.post(pH7Url.base + 'report/asset/ajax/Report', {type : sType, reportId : iReportId, security_token : sCSRFToken}, function(oResponseData) {
         if(oResponseData.status == 1) {
-            $('.msg').addClass('alert-message success');
+            $('.msg').addClass('alert alert-success');
             $('#report_' +  iReportId).hide("slow");
         } else {
-            $('.msg').addClass('alert-message error');
+            $('.msg').addClass('alert alert-danger');
         }
 
         $('.msg').text(oResponseData.txt).fadeOut(2000);

@@ -446,6 +446,10 @@ class InstallController extends Controller
                         $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                     }
                 }
+                else
+                {
+                    $aErrors[] = $LANG['failure_license'];
+                }
             }
         }
         else
@@ -453,8 +457,9 @@ class InstallController extends Controller
             redirect(PH7_URL_SLUG_INSTALL . 'config_site');
         }
 
-
         $this->oView->assign('sept_number', 6);
+        $this->oView->assign('errors', @$aErrors);
+        unset($aErrors);
         $this->oView->display('license.tpl');
     }
 

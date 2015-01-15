@@ -36,7 +36,7 @@
     <p><span class="mandatory">*</span> <label for="admin_return_email">{$LANG.admin_return_email} :</label><br />
     <input type="email" name="admin_return_email" id="admin_return_email" value="{$smarty.session.val.admin_return_email|escape}" required="required" /></p>
 
-    <p><input type="submit" name="config_site_submit" value="{$LANG.next}" /></p>
+    <p><button type="submit" name="config_site_submit" class="btn btn-primary btn-lg">{$LANG.next}</button></p>
 
 </form>
 
