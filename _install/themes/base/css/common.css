@@ -10,6 +10,8 @@ img{border:0}
 h1,h2{font-weight:bold}
 h1{font-size:2em}
 h2{font-size:1.5em}
+#logo{margin-bottom:3%}
+#logo h1{font-size:2.5em}
 .center{text-align:center;margin-left:auto;margin-right:auto;width:80%}
 .right{float:right;margin-right:10px}
 .left{float:left;margin-left:10px}
