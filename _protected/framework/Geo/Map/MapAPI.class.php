@@ -79,7 +79,7 @@ class MapAPI
     protected $useClusterer = false;
     protected $gridSize = 100;
     protected $maxZoom = 9;
-    protected $clustererLibrarypath = 'http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js';
+    protected $clustererLibrarypath = '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js';
 
     /** Enable automatic center/zoom **/
     protected $enableAutomaticCenterZoom = false;
@@ -144,7 +144,7 @@ class MapAPI
         $this->useClusterer = $useClusterer;
         $this->gridSize = $gridSize;
         $this->maxZoom = $maxZoom;
-        ($clustererLibraryPath == '') ? $this->clustererLibraryPath = 'http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js' : $clustererLibraryPath;
+        ($clustererLibraryPath == '') ? $this->clustererLibraryPath = '//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js' : $clustererLibraryPath;
     }
 
     /**
@@ -361,7 +361,7 @@ class MapAPI
             $this->content = (new \PH7\Framework\Compress\Compress)->parseJs($this->content);
 
         $returnContent = '';
-        $returnContent .= '<script src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$this->lang.'"></script>';
+        $returnContent .= '<script src="//maps.google.com/maps/api/js?sensor=false&amp;language='.$this->lang.'"></script>';
         // Clusterer JS
         if ($this->useClusterer == true)
             $returnContent .= '<script src="'.$this->clustererLibraryPath.'"></script>';
@@ -425,7 +425,7 @@ class MapAPI
     public function geocoding($address)
     {
         $encodeAddress = urlencode($this->withoutSpecialChars($address));
-        $url = 'http://maps.google.com/maps/geo?q=' . $encodeAddress . '&output=csv';
+        $url = '//maps.google.com/maps/geo?q=' . $encodeAddress . '&output=csv';
 
         if (function_exists('curl_init'))
             $data = $this->getContent($url);
@@ -460,7 +460,7 @@ class MapAPI
     public function addMarkerByCoords($lat, $lng, $title, $html = '', $category = '', $icon = '')
     {
         if ($icon == '')
-            $icon = 'http://maps.gstatic.com/intl/fr_ALL/mapfiles/markers/marker_sprite.png';
+            $icon = '//maps.gstatic.com/intl/fr_ALL/mapfiles/markers/marker_sprite.png';
 
         // Save the lat/lon to enable the automatic center/zoom
         $this->maxLng = (float)max((float)$lng, $this->maxLng);
