@@ -22,10 +22,12 @@
         <script>var sInstallUrl = "{$smarty.const.PH7_URL_INSTALL}";</script>
     </head>
     <body>
-        <div class="center">
+        <div role="main" class="center">
             <!-- Begin Header -->
             <header>
-                <p><a href="{$smarty.const.PH7_URL_ROOT}"><img src="{$smarty.const.PH7_URL_ROOT}templates/themes/base/img/logo.png" alt="{$software_name|upper}" title="{$software_name|upper}" /></a></p>
+                <div role="banner" id="logo">
+                    <h1><a href="{$smarty.const.PH7_URL_ROOT}"><img src="{$smarty.const.PH7_URL_ROOT}templates/themes/base/img/logo.png" alt="{$software_name|upper}" title="{$software_name|upper}" /> pH7CMS</a></h1>
+                </div>
 
                 <noscript>
                     <div class="err_msg">{$LANG.warning_no_js}</div>
