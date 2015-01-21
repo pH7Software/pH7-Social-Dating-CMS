@@ -15,8 +15,8 @@ class MainController extends Controller
 
     public function index()
     {
-        // Display home page of web site
-        // We must not put the title as this is the home page, so this is the default title is used.
+        // Display the homepage of website
+        // We must not put the title as this is the homepage, so this is the default title is used.
 
         /**** BEGIN Style sheet and JS files ****/
         // Only visitors
