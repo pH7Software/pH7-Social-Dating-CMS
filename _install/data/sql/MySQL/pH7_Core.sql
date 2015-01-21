@@ -921,7 +921,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
   moduleId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
   vendorName varchar(40) NOT NULL,
   moduleName varchar(40) NOT NULL,
-  version smallint(4) NOT NULL,
+  version varchar(5) NOT NULL,
   uri varchar(40) DEFAULT NULL,
   path varchar(255) DEFAULT NULL,
   active enum('0','1') NOT NULL DEFAULT '0',

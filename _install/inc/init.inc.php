@@ -20,7 +20,7 @@ $sMainCtrl = $sNP . 'MainController';
 $sCtrl = ucfirst((!empty($_GET['c']) ? $_GET['c'] : 'install')) . 'Controller';
 $sAction = (!empty($_GET['a'])) ? $_GET['a'] : 'index';
 
-if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && $sCtrl == 'InstallController' && ($sAction == 'index' || $sAction == 'license' || $sAction == 'config_path'))
+if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && $sCtrl == 'InstallController' && $sAction == 'index')
     exit('Your site is already installed.<br />If you want to redo a clean install, please delete your "_constants.php" file and delete all the content of your database.');
 
 try
