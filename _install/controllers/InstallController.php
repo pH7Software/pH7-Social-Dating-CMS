@@ -51,7 +51,7 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if (empty($_SESSION['val']))
+        if (empty($_SESSION['val']['path_protected']))
             $_SESSION['val']['path_protected'] = PH7_ROOT_PUBLIC . '_protected' . PH7_DS;
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected']))
@@ -420,8 +420,13 @@ class InstallController extends Controller
     /********************* STEP 6 *********************/
     public function license ()
     {
+        global $LANG;
+
         if (!empty($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
         {
+            if (empty($_SESSION['val']['license']))
+                $_SESSION['val']['license'] = '';
+
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license']))
             {
                 $sKey = trim($_POST['license']);
