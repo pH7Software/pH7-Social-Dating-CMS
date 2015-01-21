@@ -40,7 +40,7 @@ INSERT INTO pH7_Games (gameId, name, title, description, keywords, thumb, file, 
 
 -- Casino (3)
 (7, '', 'Blackjack', 'This is a nice Blackjack games that allow playing upto 5 hands at once', '', 'blackjack.png', 'blackjack.swf', 3, @sCurrentDate, 0, 0, 0, 0),
-(8, '', 'The Blackjack Casino', 'One of the most popular Casino games', '', 'blackjack_casino', 'blackjack_casino.swf', 3, @sCurrentDate, 0, 0, 0, 0),
+(8, '', 'The Blackjack Casino', 'One of the most popular Casino games', '', 'blackjack_casino.png', 'blackjack_casino.swf', 3, @sCurrentDate, 0, 0, 0, 0),
 (9, '', 'Casino - Let It Ride', 'Click on the chip amount you wish to bet. Press DEAL button to get cards. Determine if your hand is worth keeping or dropping one of your bets.', '', 'let_ride.png', 'let_ride.swf', 3, @sCurrentDate, 0, 0, 0, 0),
 
 -- Drawing (4)
@@ -75,8 +75,8 @@ INSERT INTO pH7_Games (gameId, name, title, description, keywords, thumb, file, 
 
 -- Shooting (10)
 (28, '', 'Amok Madman', 'Get tought by an expert in this fun shooting game.', 'Amok Madman', 'amok.png', 'amok.swf', 10, @sCurrentDate, 0, 0, 0, 0),
-(29, '', 'AO War On Iraq', 'Shoot down Iraqis tanks and everything you see using AK Machine guns.', 'AO War On Iraq', 'war_on_iraq.png', 'war_on_iraq.swf', 10, @sCurrentDate, 0, 0, 0, 0),
-(30, '', 'AO-War On Iraq', 'Shoot down Iraqi Terrorists Jeeps Grenaders and hostile villagers using AK Machine guns.', 'AO-War On Iraq', 'war_on_iraq2.png', 'war_on_iraq2.swf', 10, @sCurrentDate, 0, 0, 0, 0),
+(29, '', 'Aderans Forest', 'Aderans Forest is under attack. Shoot all the enemies before they destroy it! Click the mouse to shoot.', 'Aderans Forest', 'aderans_forest.png', 'aderans_forest.swf', 10, @sCurrentDate, 0, 0, 0, 0),
+(30, '', 'AO-War On Iraq', 'Shoot down Iraqi Terrorists Jeeps Grenaders and hostile villagers using AK Machine guns.', 'AO-War On Iraq', 'war_on_iraq.png', 'war_on_iraq.swf', 10, @sCurrentDate, 0, 0, 0, 0),
 
 -- Sports (11)
 (31, '', 'Bullseye', 'Play this classic darts game.', 'Bullseye', 'bullseye.png', 'bullseye.swf', 11, @sCurrentDate, 0, 0, 0, 0),
