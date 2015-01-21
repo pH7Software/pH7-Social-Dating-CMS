@@ -47,7 +47,7 @@
         {if $is_trash} | <a href="javascript:void(0)" onclick="mail('restor',{% $msg->messageId %},'{csrf_token}')">{lang 'Restor'}</a>{/if}</div>
 
         {if $is_admin}
-          {* The hidden message *}
+          {*  Hide the message *}
           <div class="hidden center" id="divShow_{% $msg->messageId %}">{message}</div>
         {/if}
       </div>
