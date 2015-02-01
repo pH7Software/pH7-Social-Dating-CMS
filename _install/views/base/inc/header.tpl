@@ -15,7 +15,7 @@
         <!-- End Title and Meta -->
         <!-------- Sheet Css -------->
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="{$smarty.const.PH7_URL_ROOT}static/css/bootstrap.css">
+        <link rel="stylesheet" href="{$smarty.const.PH7_URL_ROOT}static/css/bootstrap.css" />
         <!-- pH7CMS CSS -->
         <link rel="stylesheet" media="all" href="{$smarty.const.PH7_URL_INSTALL}themes/{$tpl_name}/css/common.css" />
         <!-------- End Css -------->

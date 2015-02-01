@@ -103,7 +103,7 @@ catch (\Exception $oE)
     Except\PH7Exception::launch($oE);
 }
 
-/* Soo in pH7CMS 1.1 version
+/* Soon in pH7CMS 2.0 version (when it will accept only PHP 5.5 or higher)
 finally
 {
     if ('' !== session_id()) session_write_close();

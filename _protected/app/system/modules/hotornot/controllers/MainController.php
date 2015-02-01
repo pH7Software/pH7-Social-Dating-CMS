@@ -45,7 +45,7 @@ class MainController extends Controller
         if (empty($oData))
         {
             Framework\Http\Http::setHeadersByCode(404);
-            $this->view->error = t('Sorry, We did not find the photo to Hot Or Not Party.');
+            $this->view->error = t('Sorry, We did not find any photo to Hot Or Not Party.');
         }
         else
         {
