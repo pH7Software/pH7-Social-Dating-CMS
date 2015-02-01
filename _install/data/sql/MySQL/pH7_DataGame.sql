@@ -80,5 +80,5 @@ INSERT INTO pH7_Games (gameId, name, title, description, keywords, thumb, file, 
 
 -- Sports (11)
 (31, '', 'Bullseye', 'Play this classic darts game.', 'Bullseye', 'bullseye.png', 'bullseye.swf', 11, @sCurrentDate, 0, 0, 0, 0),
-(32, '', 'Bowling Master', 'Power up the meter hold the mouse button down and let go on the green area to bowl a strike.', 'Bowling Master', 'bowling_master.png', 'bowling_master.swf', 11, @sCurrentDate, 0, 0, 0, 0),
+(32, '', 'Billiards', 'Billiards Flash Game. So famous, you have to play with our Cue Sports game right now. Finally, our Billiards flash game is simple to use, smart and modern.', 'Cue Sports, Cuesports, Billiard, Billiards, Snooker, poll, Billiards balls, Pool Balls', 'billiards.png', 'billiards.swf', 11, @sCurrentDate, 0, 0, 0, 0),
 (33, '', 'Bowling', 'Here you are. A superb bowling game. Turn your speakers up!Throw the ball when you see the sign. In order to throw the ball push the go botton. Keep it pressed until the yellow field at t', 'Bowling', 'bowling.png', 'bowling.swf', 11, @sCurrentDate, 0, 0, 0, 0);
