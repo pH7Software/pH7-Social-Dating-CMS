@@ -44,9 +44,7 @@ class Db
     private function __construct() {}
 
     /**
-     * Return DB instance or create intitial connection.
-     *
-     * @return object (PDO)
+     * @return object Returns the PDO instance class or create initial connection.
      */
     public static function getInstance($sDsn = NULL, $sUsername = NULL, $sPassword = NULL, $aDriverOptions = NULL, $sPrefix = NULL)
     {

@@ -27,7 +27,7 @@ trait Singleton
      *
      * @access public
      * @static
-     * @return object Return the instance class or create intitial instance of the class.
+     * @return object Returns the instance class or create initial instance of the class.
      */
     public static function getInstance()
     {

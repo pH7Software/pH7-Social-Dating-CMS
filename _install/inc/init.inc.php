@@ -15,8 +15,8 @@ defined('PH7') or exit('Restricted access');
 /*** We define the URL if overwrite mode is enabled (to enable it. Htaccess must be present in the current directory) ***/
 define( 'PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . (!is_url_rewrite() ? '?a=' : '') );
 
-$sNP = 'PH7\\';
-$sMainCtrl = $sNP . 'MainController';
+$sNS = 'PH7\\';
+$sMainCtrl = $sNS . 'MainController';
 $sCtrl = ucfirst((!empty($_GET['c']) ? $_GET['c'] : 'install')) . 'Controller';
 $sAction = (!empty($_GET['a'])) ? $_GET['a'] : 'index';
 
@@ -27,7 +27,7 @@ try
 {
     if (is_file(PH7_ROOT_INSTALL . 'controllers/' . $sCtrl . '.php'))
     {
-        $sCtrl = $sNP . $sCtrl;
+        $sCtrl = $sNS . $sCtrl;
         $oCtrl = new $sCtrl;
 
         if (method_exists($oCtrl, $sAction))

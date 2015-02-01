@@ -415,9 +415,9 @@
       {/if}
 
       </ul>
-      </div><!-- /.navbar-collapse -->
+    </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
-    </nav>
+</nav>
 
     {* Destroy the varaibles *}
       {{
