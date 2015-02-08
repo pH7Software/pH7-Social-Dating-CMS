@@ -38,8 +38,8 @@ if (!extension_loaded('gd'))
 if (!function_exists('curl_init'))
      $aErrors[] = 'Please install "cURL" PHP library.';
 
-if (!function_exists('mb_internal_encoding'))
-    $aErrors[] = 'Please install the "mbstring" PHP extension.';
+if (!extension_loaded('mbstring'))
+    $aErrors[] = 'Please install "mbstring" PHP extension.';
 
 $iErrors = (!empty($aErrors)) ? count($aErrors) : 0;
 
