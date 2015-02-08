@@ -6,17 +6,21 @@
 
 $('select[name=type]').click(function()
 {
+    var sShowCss = 'display:block !important;visibility:visible !important';
+    var sHideCss = 'display:none !important;visibility:none !important';
     var sVal = $(this).val();
 
-    if(sVal == 'regular') {
-        $('#regular').slideDown('fast');
-        $('#embed').hide();
+    if(sVal == 'regular')
+    {
+        $('#regular').fadeIn(500).attr('style', sShowCss);
+        $('#embed').attr('style', sHideCss);
         disable_button(); // This function is in the file: ~/static/js/form.js
     }
 
-    if(sVal == 'embed') {
-        $('#embed').slideDown('fast');
-        $('#regular').hide();
-        enable_button(); // This function is in the file: ~/static/js/form.js
+    if(sVal == 'embed')
+    {
+        $('#embed').fadeIn(500).attr('style', sShowCss);
+        $('#regular').attr('style', sHideCss);
+        enable_button(); // This function is located in the file: ~/static/js/form.js
     }
 });
