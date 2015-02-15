@@ -71,16 +71,18 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Everyone can easily contribute to this great innovative project with our [GitHub repository](http://github.com/pH7Software/pH7-Social-Dating-CMS)
 
 
-## Help Us
+## Help Us to Grow Up
 
-We need help to continue this project, so we are waiting for you!
+**It's 100% Open Source & Free**
 
-We want to train a large team to work on this open source dating project.
+**It's an Awesome Project.** We want You to Make It the Best!
 
-Please contact us at *ph7software (AT) gmail (DOT) com* to work on this exciting project.
+If you want to work on an Inovative and Exciting Project with a Beautiful PHP code using the latest PHP features while collaborating with nice people, ... So You Have to **Join Us**!
+
+Send an email at: *ph7software {AT} gmail {D0T} com* and Start a wonderful Adventure!
 
 
-Thank you!
+Thank you so much in advance!
 
 
 ## Requirements
@@ -137,7 +139,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 ## Contact
 
-You can send email for any suggestions or comments at *ph7software (AT) gmail (DOT) com*
+You can send email for any suggestions or comments at: *ph7software {AT} gmail {D0T} com*
 
 
 ## Help & Modifications
