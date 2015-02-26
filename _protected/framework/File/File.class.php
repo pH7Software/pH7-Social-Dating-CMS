@@ -122,7 +122,7 @@ class File
      * @param mixed (array | string) $mFile
      * @return boolean TRUE if file exists, FALSE otherwise.
      */
-    public function existsFile($mFile)
+    public function existFile($mFile)
     {
         $bExists = false; // Default value
 
@@ -130,7 +130,7 @@ class File
         {
             foreach ($mFile as $sF)
             {
-                if (!$bExists = $this->existsFile($sF))
+                if (!$bExists = $this->existFile($sF))
                     break;
             }
         }
@@ -148,7 +148,7 @@ class File
      * @param mixed (array | string) $mDir
      * @return boolean TRUE if file exists, FALSE otherwise.
      */
-    public function existsDir($mDir)
+    public function existDir($mDir)
     {
         $bExists = false; // Default value
 
@@ -156,7 +156,7 @@ class File
         {
             foreach ($mDir as $sD)
             {
-                if (!$bExists = $this->existsDir($sD))
+                if (!$bExists = $this->existDir($sD))
                     break;
             }
         }

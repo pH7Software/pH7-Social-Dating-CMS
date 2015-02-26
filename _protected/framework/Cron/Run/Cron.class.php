@@ -36,7 +36,7 @@ abstract class Cron extends \PH7\Framework\Core\Core
         $sFullPath = PH7_PATH_SYS . 'core/assets/cron/_delay/' . $this->getFileName() . '.txt';
         $bStatus = true; // Default status is TRUE
 
-        if ($this->file->existsFile($sFullPath))
+        if ($this->file->existFile($sFullPath))
         {
             $iSavedTime = $this->file->getFile($sFullPath);
             $iSeconds = $this->getDelay() * 3600; // Convert hours to seconds
