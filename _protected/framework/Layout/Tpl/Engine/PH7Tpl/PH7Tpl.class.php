@@ -395,7 +395,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         $this->sCompileDirFile = ($this->isMainDir($sDirPath)) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2 .
                 str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
 
-        if (!$this->file->existsFile($this->sTemplateDirFile))
+        if (!$this->file->existFile($this->sTemplateDirFile))
             throw new Exception('File \'' . $this->sTemplateDirFile . '\' does no exist');
 
 

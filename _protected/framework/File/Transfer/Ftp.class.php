@@ -82,7 +82,7 @@ class Ftp extends \PH7\Framework\File\File
      * @param string $sFile
      * @return boolean
      */
-    public function existsFile($sFile)
+    public function existFile($sFile)
     {
         return is_array(ftp_nlist($this->_rStream, $sFile));
     }
@@ -93,7 +93,7 @@ class Ftp extends \PH7\Framework\File\File
      * @param $sDir string
      * @return boolean
      */
-    public function existsDir($sDir)
+    public function existDir($sDir)
     {
         $sCurrent = $this->getCurrentDir();
 
@@ -127,7 +127,7 @@ class Ftp extends \PH7\Framework\File\File
         }
         else
         {
-            if (!$this->existsDir($mDir))
+            if (!$this->existDir($mDir))
             {
                 if (@ftp_mkdir($this->_rStream, $mDir))
                     $this->chmod($mDir, $iMode); // For Unix OS
@@ -180,7 +180,7 @@ class Ftp extends \PH7\Framework\File\File
      */
     public function rename($sFrom, $sTo)
     {
-        if (!$this->existsFile($sFrom)) return false;
+        if (!$this->existFile($sFrom)) return false;
 
         return ftp_rename($this->_rStream, $sFrom, $sTo);
     }
@@ -197,7 +197,7 @@ class Ftp extends \PH7\Framework\File\File
         if (is_array($mFile))
             foreach ($mFile as $sF) $this->deleteFile($sF);
         else
-            if ($this->existsFile($mFile)) ftp_delete($this->_rStream, $mFile);
+            if ($this->existFile($mFile)) ftp_delete($this->_rStream, $mFile);
     }
 
     /**
@@ -208,7 +208,7 @@ class Ftp extends \PH7\Framework\File\File
      */
     public function deleteDir($sPath)
     {
-        return $this->existsFile($sPath) ? $this->deleteFile($sPath) : array_map(array($this, 'deleteDir'), glob($sPath . '/*')) === @ftp_rmdir($this->_rStream, $sPath);
+        return $this->existFile($sPath) ? $this->deleteFile($sPath) : array_map(array($this, 'deleteDir'), glob($sPath . '/*')) === @ftp_rmdir($this->_rStream, $sPath);
     }
 
     /**
