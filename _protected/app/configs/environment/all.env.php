@@ -17,10 +17,6 @@ ini_set('log_errors' , 'On');
 ini_set('error_log', PH7_PATH_LOG . 'php_error.log');
 ini_set('ignore_repeated_errors', 'On'); // Do not log repeated errors that occur in same file on same line
 
-// Date
-if (!ini_get('date.timezone'))
-    ini_set('date.timezone', 'America/Los_Angeles');
-
 // For Security Session
 // ini_set('session.auto_start', 0); // The default configuration of PHP (php.ini) should already have this setting disabled
 ini_set('session.use_cookies', 1);

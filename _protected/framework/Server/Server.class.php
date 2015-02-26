@@ -155,14 +155,14 @@ final class Server
     }
 
     /**
-     * Check Internet Connection.
+     * Alias method of the checkInternetConnection() function (located in ~/_protected/app/includes/helpers/misc.php).
      *
      * @param string $sCheckHost Default: www.google.com
      * @return boolean Returns TRUE if the Internet connection is enabled, FALSE otherwise.
      */
     public static function checkInternetConnection($sCheckHost = 'www.google.com')
     {
-        return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);
+        return \PH7\is_internet($sCheckHost);
     }
 
 }

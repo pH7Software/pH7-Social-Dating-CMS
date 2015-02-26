@@ -27,6 +27,10 @@ defined('PH7') or exit('Restricted access');
 
 define ( 'PH7_DOT', '.' );
 
+/***** TIME ZONE ****/
+
+define( 'PH7_DEFAULT_TIMEZONE', 'America/Chicago' );
+
 /***** ADMIN MODULE NAME *****/
 
 define ( 'PH7_ADMIN_MOD', 'admin123' );
