@@ -36,8 +36,7 @@ define('PH7_DS', DIRECTORY_SEPARATOR);
 define('PH7_PS', PATH_SEPARATOR);
 
 //------------ URL ----------------//
-define('PH7_PROT', $sHttp);
-define('PH7_URL_INSTALL', $sPhp_self . '/'); // INSTALL URL
+define('PH7_URL_INSTALL', $sHttp . $sDomain . $sPhp_self . '/'); // INSTALL URL
 define('PH7_URL_ROOT', dirname(PH7_URL_INSTALL) . '/'); // ROOT URL
 
 //----------- PATH -----------------//

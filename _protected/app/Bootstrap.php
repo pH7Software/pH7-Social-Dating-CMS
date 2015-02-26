@@ -25,13 +25,27 @@ PH7\Framework\Error\CException as Except;
 /***** Begin Loading Files *****/
 
 require 'configs/constants.php';
+require 'includes/helpers/misc.php';
 
-// Loading Framework Classes
-require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-Framework\Loader\Autoloader::getInstance()->init();
+// Set a default timezone if it is not already configured
+if (!ini_get('date.timezone'))
+    ini_set('date.timezone', PH7_DEFAULT_TIMEZONE);
 
 try
 {
+    /**
+     * First off, check it the server is connected to the Internet.
+     */
+    if (!is_internet())
+    {
+        echo html_body('Whoops! Your server has to be connect to the Internet in order to get your website working.');
+        exit;
+    }
+    
+    // Loading Framework Classes
+    require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+    Framework\Loader\Autoloader::getInstance()->init();        
+    
     /** Loading configuration files environments **/
     // For All environment
     Import::file(PH7_PATH_APP . 'configs/environment/all.env');
@@ -56,9 +70,10 @@ try
     //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
     if (!Server::isRewriteMod())
     {
-        exit('<html><head><title>SERVER ERROR!</title></head><body><div style="margin-left:auto;margin-right:auto;width:80%;text-align:center"><span style="font-weight:bold;color:red"><a href="' . Framework\Core\Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</span><br /> Please install it so that pH7CMS can works.<br /> Click <a href="http://ph7cms.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href="' . PH7_URL_ROOT . '">retry</a>.</div></body></html>');
-    }
-    //*/
+        $sMsg = '<a href="' . Framework\Core\Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</span><br /> Please install it so that pH7CMS can works.<br /> Click <a href="http://ph7cms.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href="' . PH7_URL_ROOT . '">retry</a>.';
+        echo html_body($sMsg);
+        exit;
+    }  //*/
 
     // Enable client browser cache
     (new Browser)->cache();
@@ -82,7 +97,6 @@ try
      * Initialize the FrontController, we are asking the front controller to process the HTTP request
      */
     FrontController::getInstance()->runRouter();
-
 }
 
 # \PH7\Framework\Error\CException\UserException
