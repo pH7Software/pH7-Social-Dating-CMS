@@ -97,7 +97,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         echo '</div><div class="clearfix"></div></div></div>';
     }
 
-    public function profilesBlock($iOffset = 0, $iLimit = 9)
+    public function profilesBlock($iOffset = 0, $iLimit = 8)
     {
         $oUser = $this->oUserModel->getProfiles(SearchCoreModel::LATEST, $iOffset, $iLimit);
         if (empty($oUser)) return;
@@ -122,9 +122,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         if (empty($oUser)) return;
 
         foreach ($oUser as $oRow)
-        {
             (new AvatarDesignCore)->get($oRow->username, $oRow->firstName, $oRow->sex, 64);
-        }
 
     }
 
