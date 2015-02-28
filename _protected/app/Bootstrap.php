@@ -38,14 +38,17 @@ try
      */
     if (!is_internet())
     {
-        echo html_body('Whoops! Your server has to be connect to the Internet in order to get your website working.');
+        $sMsg = '<p class="warning">No Internet Connection</p>
+        <p>Whoops! Your server has to be connect to the Internet in order to get your website working.</p>';
+
+        echo html_body('Enable your Internet connection', $sMsg);
         exit;
     }
-    
+
     // Loading Framework Classes
     require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-    Framework\Loader\Autoloader::getInstance()->init();        
-    
+    Framework\Loader\Autoloader::getInstance()->init();
+
     /** Loading configuration files environments **/
     // For All environment
     Import::file(PH7_PATH_APP . 'configs/environment/all.env');
@@ -70,8 +73,11 @@ try
     //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
     if (!Server::isRewriteMod())
     {
-        $sMsg = '<a href="' . Framework\Core\Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</span><br /> Please install it so that pH7CMS can works.<br /> Click <a href="http://ph7cms.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br /> After doing this, please <a href="' . PH7_URL_ROOT . '">retry</a>.';
-        echo html_body($sMsg);
+        $sMsg = '<p class="warning"><a href="' . Framework\Core\Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</p>
+        <p>Please install it so that pH7CMS can works.<br /> Click <a href="http://ph7cms.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br />
+        After doing this, please <a href="' . PH7_URL_ROOT . '">retry</a>.</p>';
+
+        echo html_body("Apache's mod_rewrite is required", $sMsg);
         exit;
     }  //*/
 

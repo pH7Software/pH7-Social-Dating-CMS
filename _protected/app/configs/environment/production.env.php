@@ -26,13 +26,13 @@ ini_set('html_errors', 'Off');
 
 if (is_dir(PH7_PATH_ROOT .'_install/'))
 {
-    echo
-    '<!doctype html><html><head><meta charset="utf-8"><title>SECURITY ALERT : Please remove "_install" folder</title><style>body{background:#EFEFEF;color:#555;font:normal 12px Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.error,.warning{font-weight:bold;font-size:13px;color:red}.warning{text-transform:uppercase}.italic{font-style:italic}.underline{text-decoration:underline}a{color:#08c;outline-style:none;cursor:pointer}a:link,a:visited{text-decoration:none}a:hover,a:active{color:#F24C9E;text-decoration:underline}</style></head><body><div class="center">
-     <p class="warning">Security Alert – <a href="' . Framework\Core\Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a></p>
+   $sMsg = '<p class="warning">Security Alert – <a href="' . Framework\Core\Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a></p>
      <p class="error">Please remove "_install/" folder from your server before continuing.</p>
      <p>You can delete this folder using an FTP client (FileZilla or other).</p>
      <p>You can also delete this folder with an SSH connection if your host allows. Below is the UNIX command to do this is:<br />
      <code>sudo rm -rf /YOUR-PUBLIC-SERVER-PATH/YOUR-WEBSITE/_install/</code></p>
-     <p>After doing this, please <a href="' . PH7_URL_ROOT . '">reload pH7CMS</a></p></div></body></html>';
-    exit;
+     <p>After doing this, please <a href="' . PH7_URL_ROOT . '">reload pH7CMS</a></p>';
+
+     echo html_body('SECURITY ALERT : Please remove "_install" folder', $sMsg);
+     exit;
 }
