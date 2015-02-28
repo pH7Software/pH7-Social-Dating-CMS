@@ -23,7 +23,7 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     public static function errorTokenMsg()
     {
-        return t('The security token does not exist or the time of expiry of the security token has expire. Please try again!');
+        return t('The security token does not exist or the security time of the token has expired. Please try again!');
     }
 
     /**

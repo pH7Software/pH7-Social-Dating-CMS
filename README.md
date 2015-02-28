@@ -75,7 +75,10 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 
 **It's 100% Open Source & Free**
 
-**It's an Awesome Project.** We want You to Make It the Best!
+**It's an Awesome Project.**
+
+**We want You to Make It the Best!**
+
 
 If you want to work on an Inovative and Exciting Project with a Beautiful PHP code using the latest PHP features while collaborating with nice people, ... So You Have to **Join Us**!
 
@@ -132,7 +135,7 @@ Everyone can contribute on the **[pH7CMS GitHub](http://github.com/pH7Software/p
 
 Just clone the repository, make your changes and then make a push ;-)
 
-*WARNING, your code/modification must be quality.*
+*WARNING, your code/modification must be of excellent quality.*
 
 --We manually validate all the improvements and changes.--
 
