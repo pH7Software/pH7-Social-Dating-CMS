@@ -30,7 +30,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     const
     NAME = 'PH7Tpl',
     AUTHOR = 'Pierre-Henry Soria',
-    VERSION = '1.2.9',
+    VERSION = '1.3.0',
     LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/',
     ERR_MSG = 'FATAL ERROR!',
 
@@ -137,7 +137,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         if (is_dir($sDir))
             $this->sTemplateDir = $this->file->checkExtDir($sDir);
         else
-            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('No Template directory \'' . $sDir . '\' for <strong>' . self::NAME . '</strong> template engine.');
+            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" template directory.');
     }
 
     /**
@@ -152,7 +152,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         if (is_dir($sDir))
             $this->sCompileDir = $this->file->checkExtDir($sDir);
         else
-            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('No Compile directory \'' . $sDir . '\' for <strong>' . self::NAME . '</strong> template engine.');
+            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" compile directory.');
     }
 
     /**
@@ -167,7 +167,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         if (is_dir($sDir))
             $this->sCacheDir = $this->file->checkExtDir($sDir);
         else
-            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('No Cache directory \'' . $sDir . '\' for <strong>' . self::NAME . '</strong> template engine.');
+            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" cache directory.');
     }
 
     /**
