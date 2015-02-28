@@ -64,7 +64,7 @@ class Cache
         if (is_dir($sCacheDir))
             $this->_sCacheDir = $sCacheDir;
         else
-            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('No Cache directory \'' . $sCacheDir . '\' in template engine <strong>PH7Tpl</strong>');
+            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('"' . $sCacheDir . '" cache directory cannot be found!');
 
         return $this;
     }
