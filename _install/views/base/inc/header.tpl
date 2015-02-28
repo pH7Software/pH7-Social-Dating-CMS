@@ -7,8 +7,9 @@
         <link rel="shortcut icon" href="{$smarty.const.PH7_URL_ROOT}favicon.ico" />
         <!-- Copyright pH7 Dating/Social CMS; All Rights Reserved -->
         <meta name="author" content="{$software_author}" />
-        <meta name="creator" content="pH7 CMS (Pierre-Henry Soria)" />
-        <meta name="designer" content="pH7 CMS (Pierre-Henry Soria)" />
+        <meta name="copyright" content="{$software_copyright}" />
+        <meta name="creator" content="pH7CMS (Pierre-Henry Soria)" />
+        <meta name="designer" content="pH7CMS (Pierre-Henry Soria)" />
         <meta name="generator" content="{$software_name} {$software_version}" />
         <!-- End Copyright pH7 Dating/Social CMS; All Rights Reserved -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
