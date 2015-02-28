@@ -12,6 +12,7 @@ button.success{font-weight:bold}
 button:active{color: #000}
 border:hover, border:active{border-color:2px solid #000}
 .is_checked{background:#FF8}
+textarea{white-space:pre-line !important}
 
 input, textarea, select {
     font-size: 14px;

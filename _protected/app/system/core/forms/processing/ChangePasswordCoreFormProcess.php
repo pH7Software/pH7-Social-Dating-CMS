@@ -8,10 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Util\Various,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 /** For "user", "affiliate" and "admin" module **/
 class ChangePasswordCoreFormProcess extends Form
@@ -55,7 +52,7 @@ class ChangePasswordCoreFormProcess extends Form
         else
         {
             // Update
-            $oPasswordModel->changePassword($sEmail, $this->httpRequest->post('new_password'), Various::genRnd(), Various::genRnd(), $sTable);
+            $oPasswordModel->changePassword($sEmail, $this->httpRequest->post('new_password'), $sTable);
             \PFBC\Form::setSuccess('form_change_password', t('Your password has been correctly updated.'));
         }
     }

@@ -47,7 +47,7 @@
 
       {if !$is_user_auth && !$is_aff_auth && !$is_admin_auth}
 
-        <li class="active"><a href="{{ $design->url('user','signup','step1') }}" title="{lang 'Join Now!'}">{lang 'Join Now!'}</a></li>
+        <li class="bold"><a href="{{ $design->url('user','signup','step1') }}" title="{lang 'Join Now!'}">{lang 'Join Now!'}</a></li>
         <li><a href="{{ $design->url('user', 'main','login') }}" title="{lang 'Login'}" data-load="ajax">{lang 'Login'}</a></li>
 
       {/if}
@@ -140,22 +140,23 @@
               <li><a href="{{ $design->url('mail','main','compose') }}" title="{lang 'Compose'}">{lang 'Compose'}</a></li>
               <li><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'Inbox'}">{lang 'Inbox'}</a></li>
               <li><a href="{{ $design->url('mail','main','outbox') }}" title="{lang 'Outbox'}">{lang 'Outbox'}</a></li>
-             <li><a href="{{ $design->url('mail','main','trash') }}" title="{lang 'Trash'}">{lang 'Trash'}</a></li>
-             <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search'}">{lang 'Search'}</a></li>
-           </ul>
-         </li>
-
-          <li class="dropdown"><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Settings'} <span class="caret"></span></a>
-            <noscript>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('user','setting','edit') }}">{lang 'Edit Profile'}</a></li>
-              <li><a href="{{ $design->url('user','setting','design') }}">{lang 'Design Profile'}</a></li>
-              <li><a href="{{ $design->url('user','setting','notification') }}">{lang 'Notifications'}</a></li>
-              <li><a href="{{ $design->url('user','setting','privacy') }}">{lang 'Privacy Setting'}</a></li>
-              <li><a href="{{ $design->url('user','setting','password') }}">{lang 'Change Password'}</a></li>
+              <li><a href="{{ $design->url('mail','main','trash') }}" title="{lang 'Trash'}">{lang 'Trash'}</a></li>
+              <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search'}">{lang 'Search'}</a></li>
             </ul>
-            </noscript>
           </li>
+
+          <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My settings'}">{lang 'Settings'}</span></a></li>
+            <noscript>
+			<li class="dropdown"><a href="{{ $design->url('user','setting','edit') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Settings'} <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ $design->url('user','setting','edit') }}">{lang 'Edit Profile'}</a></li>
+                <li><a href="{{ $design->url('user','setting','design') }}">{lang 'Design Profile'}</a></li>
+                <li><a href="{{ $design->url('user','setting','notification') }}">{lang 'Notifications'}</a></li>
+                <li><a href="{{ $design->url('user','setting','privacy') }}">{lang 'Privacy Setting'}</a></li>
+                <li><a href="{{ $design->url('user','setting','password') }}">{lang 'Change Password'}</a></li>
+              </ul>
+			</li>
+            </noscript>          
 
           <li class="dropdown"><a href="{{ $design->url('user','account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">

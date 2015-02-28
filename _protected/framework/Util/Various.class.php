@@ -62,7 +62,7 @@ class Various
 
         // Remember to change this path to suit your system
         $sDir = PH7_PATH_FRAMEWORK . 'Translate/Dict/';
-        $sDict = (file_exists($sDir . PH7_LANG_NAME)) ? PH7_LANG_NAME : PH7_DEFAULT_LANG;
+        $sDict = (file_exists($sDir . PH7_LANG_CODE)) ? PH7_LANG_CODE : PH7_DEFAULT_LANG_CODE;
         if (!$rHandle = @fopen($sDir . $sDict, 'r')) return false;
         $iSize = filesize($sDir . $sDict);
 

@@ -47,10 +47,10 @@ class Backup
     {
         $this->_sSql =
         "#################### Database Backup ####################\n" .
-        '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\n" .
-        '# Database name: ' . Config::getInstance()->values['database']['name'] . "\n" .
-        '# Created on ' . (new CDateTime)->get()->dateTime() . "\n" .
-        "#########################################################\n\n";
+        '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
+        '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
+        '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
+        "#########################################################\r\n\r\n";
 
         $aTables = $aColumns = $aValues = array();
         $oAllTables = Db::showTables();
@@ -70,8 +70,8 @@ class Backup
             {
                 $aRow = $oResult->fetch();
 
-                $this->_sSql .= "#\n# Table: $sTable\n#\n\n";
-                $this->_sSql .= "DROP TABLE IF EXISTS $sTable;\n\n";
+                $this->_sSql .= "#\n# Table: $sTable\r\n#\r\n\r\n";
+                $this->_sSql .= "DROP TABLE IF EXISTS $sTable;\r\n\r\n";
 
                 $sValue = $aRow[1];
 
@@ -79,7 +79,7 @@ class Backup
                 $sValue = str_replace('`', '', $sValue);
 
                 /*** Table structure ***/
-                $this->_sSql .= $sValue . ";\n\n";
+                $this->_sSql .= $sValue . ";\r\n\r\n";
 
                 unset($aRow);
             }
@@ -111,7 +111,7 @@ class Backup
 
                     unset($aColumns, $aValues);
                 }
-                $this->_sSql .= "\n\n";
+                $this->_sSql .= "\r\n\r\n";
 
                 unset($aRow);
             }
