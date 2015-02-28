@@ -32,7 +32,7 @@ abstract class Controller implements IController
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'pOH',
-    SOFTWARE_VERSION = '1.1.8',
+    SOFTWARE_VERSION = '1.2.0',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
@@ -74,6 +74,7 @@ abstract class Controller implements IController
         $this->oView->assign('software_help_url', self::SOFTWARE_HELP_URL);
         $this->oView->assign('software_license_key_url', self::SOFTWARE_LICENSE_KEY_URL);
         $this->oView->assign('software_author', self::SOFTWARE_AUTHOR);
+        $this->oView->assign('software_copyright', self::SOFTWARE_COPYRIGHT);
         $this->oView->assign('software_email', self::SOFTWARE_EMAIL);
         $this->oView->assign('tpl_name', self::DEFAULT_THEME);
         $this->oView->assign('current_lang', $this->sCurrentLang);
