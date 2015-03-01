@@ -22,15 +22,16 @@ h2{font-size:1.5em}
 .error,.warning,.mandatory{color:red}
 .italic{font-style:italic}
 .underline{text-decoration:underline}
-button,input,select{font-size:16px}
-input:not([type=checkbox]){margin:6px;width:260px;height:24px}
+button,input,select{font-size:17px}
+input:not([type=checkbox]){margin:6px;width:260px;height:28px}
 button,input[type="submit"],input[type="reset"]{width:190px}
 iframe{border:1px #475c9e solid;width:100%;height:300px;margin:0;overflow:scroll}
+input,iframe,.button{border-radius:5px;border:solid 1px #999}
 header{margin-bottom:10px}
 footer{padding:10px;margin-top:25px;font-size:.9em;text-align:center;border-top:1px solid #c8c8c8}
 .success,.error,.warning,.mandatory,.bold,.err_msg{font-weight:bold;font-size:13px}
 .err_msg{text-align:center;color:#F00;text-transform:uppercase}
 .gray{color:#999}
-.button{text-decoration:none;color:#333;display:inline-block;text-align:center;padding:6px 10px;border-radius:2px 2px;border:solid 1px #999;background:-webkit-linear-gradient(top,#fff,#ddd);background:-moz-linear-gradient(top,#fff,#ddd);background:linear-gradient(top,#fff,#ddd);text-shadow:0 1px 1px rgba(255,255,255,1);line-height:1}
+.button{text-decoration:none;color:#333;display:inline-block;text-align:center;padding:6px 10px;background:-webkit-linear-gradient(top,#fff,#ddd);background:-moz-linear-gradient(top,#fff,#ddd);background:linear-gradient(top,#fff,#ddd);text-shadow:0 1px 1px rgba(255,255,255,1);line-height:1}
 .button:hover{border:solid 1px #000;background:-webkit-linear-gradient(top,#fff,#c8c8c8);background:-moz-linear-gradient(top,#fff,#c8c8c8);background:linear-gradient(top,#fff,#c8c8c8)}
 .clear{clear:both}
