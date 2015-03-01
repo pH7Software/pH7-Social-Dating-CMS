@@ -37,7 +37,8 @@ function run() {
 
             ## Config Files, etc.
             rm ./_constants.php
-             rm ./.gitignore
+            rm ./.gitignore
+            rm ./.gitattributes
             rm ./.scrutinizer.yml
             rm ./.travis.yml
             rm ./_install/_license-key.txt
