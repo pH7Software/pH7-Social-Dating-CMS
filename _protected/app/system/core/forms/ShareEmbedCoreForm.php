@@ -22,9 +22,9 @@ class ShareEmbedCoreForm
     public static function display($sFileUrl, $iEmbedWidth = 580, $iEmbedHeight = 450, $iWidth = 350)
     {
         $sEmbedCode = '<object codebase="http://www.adobe.com/go/getflashplayer" width="' . $iEmbedWidth . '" height="' . $iEmbedHeight . '" align="middle">
-		<param name="movie" value="' . $sFileUrl . '" /><param name="quality" value="high" />
-		<embed src="'. $sFileUrl . '" width="' . $iEmbedWidth . '" height="' . $iEmbedHeight . '" align="middle" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
-		</object>';
+        <param name="movie" value="' . $sFileUrl . '" /><param name="quality" value="high" />
+        <embed src="'. $sFileUrl . '" width="' . $iEmbedWidth . '" height="' . $iEmbedHeight . '" align="middle" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>
+        </object>';
 
         $oForm = new \PFBC\Form('form_share_embed', $iWidth);
         $oForm->configure(array('class' => 'center'));
