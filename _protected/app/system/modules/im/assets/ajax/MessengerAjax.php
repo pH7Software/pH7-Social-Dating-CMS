@@ -16,6 +16,7 @@ use
 PH7\Framework\Session\Session,
 PH7\Framework\File\Import,
 PH7\Framework\Parse\Emoticon,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Request\Http as HttpRequest;
 
@@ -119,7 +120,7 @@ class MessengerAjax
         if (!$this->isOnline($sFrom))
             $sItems = t('You must have the ONLINE status in order to speak instantaneous.');
         elseif (!$this->isOnline($sSent))
-            $sItems = '<small><em>' . t('%0% is offline. Send a Private Message instead.', $sSent) . '</em></small>';
+            $sItems = '<small><em>' . t('%0% is offline. Send a <a href="%1%">Private Message</a> instead.', $sSent, Uri::get('mail','main','compose', $sSent)) . '</em></small>';
         else
             $this->_oMessengerModel->update($sFrom);
 
@@ -177,7 +178,7 @@ class MessengerAjax
         if (!$this->isOnline($sFrom))
             $sMsgTransform = t('You must have the ONLINE status in order to chat with other members.');
         elseif (!$this->isOnline($sTo))
-            $sMsgTransform = '<small><em>' . t('%0% is offline. Send a Private Message instead.', $sTo) . '</em></small>';
+            $sMsgTransform = '<small><em>' . t('%0% is offline. Send a <a href="%1%">Private Message</a> instead.', $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
         else
             $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new \PH7\Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s'));
 
