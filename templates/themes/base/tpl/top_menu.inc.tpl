@@ -147,7 +147,7 @@
 
           <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My settings'}">{lang 'Settings'}</span></a></li>
             <noscript>
-			<li class="dropdown"><a href="{{ $design->url('user','setting','edit') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Settings'} <span class="caret"></span></a>
+            <li class="dropdown"><a href="{{ $design->url('user','setting','edit') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Settings'} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('user','setting','edit') }}">{lang 'Edit Profile'}</a></li>
                 <li><a href="{{ $design->url('user','setting','design') }}">{lang 'Design Profile'}</a></li>
@@ -155,8 +155,8 @@
                 <li><a href="{{ $design->url('user','setting','privacy') }}">{lang 'Privacy Setting'}</a></li>
                 <li><a href="{{ $design->url('user','setting','password') }}">{lang 'Change Password'}</a></li>
               </ul>
-			</li>
-            </noscript>          
+            </li>
+            </noscript>
 
           <li class="dropdown"><a href="{{ $design->url('user','account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
