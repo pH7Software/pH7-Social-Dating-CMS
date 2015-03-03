@@ -1,2 +1,21 @@
-table{margin-left:24px; margin-top:22px;}
-.heart{background:url('../img/heart.png');font: 70px Verdana, Geneva, Arial, Helvetica, sans-serif;color: yellow;text-align:center;height:170px;width:300px;font-weight:bold;padding-top:82px;}
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+table {
+    margin-left: 24px;
+    margin-top: 22px;
+}
+.heart {
+    background: url('../img/heart.png');
+    font: 70px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    color: yellow;
+    text-align: center;
+    height: 170px;
+    width: 300px;
+    font-weight: bold;
+    padding-top: 82px;
+    box-sizing: content-box;
+}
