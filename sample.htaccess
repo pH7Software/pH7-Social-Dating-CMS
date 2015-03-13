@@ -5,7 +5,6 @@
 # License:        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ####################
 
-
 ## Remove a line below if your Apache server already supports one of the parameters below (this will relieve Apache since this file is read on every request). ##
 ## Also, if your host allows it, you are strongly advised to put these settings in your Apache configuration file (httpd.conf). ##
 
@@ -581,8 +580,24 @@ ErrorDocument 505 /error/http/index?code=505
 
 RewriteEngine On
 
+## Uncomment "#RewriteBase /" line below (remove "#") if pH7CMS is installed in a folder and so add the folder name after the slash "/"
+## Example: If pH7CMS is installed in "/public_html/ph7cms/", then it should be "RewriteBase /ph7cms/", however it may depends of your Apache configuration.
+#RewriteBase /
+
+
 # Tell PHP that the mod_rewrite module is ENABLED.
 SetEnv HTTP_MOD_REWRITE On
+
+# Remove www subdomain in the URL
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php?$1 [L,QSA]
+#RewriteRule ^(.*)$ init.ph7?$1 [L,QSA]
+
 
 # Start Bad Bot Prvention
 RewriteCond %{HTTP_USER_AGENT} ^BackWeb [OR]
@@ -680,17 +695,6 @@ RewriteCond %{HTTP_USER_AGENT} ^Xaldon\ WebSpider [OR]
 RewriteCond %{HTTP_USER_AGENT} ^Zeus
 RewriteRule ^.* - [F,L]
 # End Bad Bot Prevention
-
-# Remove www subdomain in the URL
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-RewriteRule ^(.*)$ index.php?$1 [L,QSA]
-#RewriteRule ^(.*)$ init.ph7?$1 [L,QSA]
-
 </IfModule>
 
 # Modify Headers
