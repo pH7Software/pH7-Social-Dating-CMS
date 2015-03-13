@@ -1,10 +1,16 @@
-#make_money{
-background:url(../img/make_money.jpg);
-margin:20px;
-width:300px;
-height:291px;
-margin:2px 2px 2px 2px;border:1px solid #999;
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+#make_money {
+    background: url(../img/make_money.jpg);
+    margin: 20px;
+    width: 300px;
+    height: 291px;
+    margin: 2px 2px 2px 2px;border:1px solid #999;
 }
-.aff_login{
-margin-top:20px;
+.aff_login {
+    margin-top: 20px;
 }

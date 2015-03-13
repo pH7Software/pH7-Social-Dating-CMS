@@ -1,3 +1,9 @@
+/*
+ * Author:        Pierre-Henry Soria <ph7software@gmail.com>
+ * Copyright:     (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
 .mb_nav{margin:5px 150px 18px 50px;font-weight:bold;line-height:13px}
 .user, .content, .subject, .message, .date, .action{overflow:hidden;display:inline}
 .content{cursor:pointer}
