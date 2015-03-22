@@ -11,6 +11,15 @@
 Options -MultiViews -Indexes
 Options +FollowSymLinks
 
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    ## Uncomment "#RewriteBase /" line below (remove "#") if pH7CMS is installed in a folder and so add the folder name after the slash "/"
+    ## Example: If pH7CMS is installed in "/public_html/ph7cms/", then it should be "RewriteBase /ph7cms/", however it may depends of your Apache configuration.
+
+    #RewriteBase /
+</IfModule>
+
+
 <IfModule mod_php5.c>
     php_flag allow_url_include Off
     php_flag expose_php Off
@@ -577,14 +586,6 @@ ErrorDocument 505 /error/http/index?code=505
 
 # URL Rewrite
 <IfModule mod_rewrite.c>
-
-RewriteEngine On
-
-## Uncomment "#RewriteBase /" line below (remove "#") if pH7CMS is installed in a folder and so add the folder name after the slash "/"
-## Example: If pH7CMS is installed in "/public_html/ph7cms/", then it should be "RewriteBase /ph7cms/", however it may depends of your Apache configuration.
-#RewriteBase /
-
-
 # Tell PHP that the mod_rewrite module is ENABLED.
 SetEnv HTTP_MOD_REWRITE On
 
@@ -592,6 +593,7 @@ SetEnv HTTP_MOD_REWRITE On
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
+### For pH7CMS's URL router (DO NOT REMOVE THESE FOLLOWING CODE) ###
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
@@ -759,6 +761,6 @@ RewriteRule ^.* - [F,L]
 AddType video/webm .webm
 AddType video/mp4 .mp4
 
-# Personal file extension pH7
+# Personal pH7CMS extension file
 #AddType application/x-httpd-php .ph7
 #DirectoryIndex init.ph7

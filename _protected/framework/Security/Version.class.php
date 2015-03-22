@@ -21,7 +21,7 @@ final class Version
     const LATEST_VERSION_URL = 'http://ph7cms.com/xml/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /***** Framework Kernel *****/
-    const KERNEL_VERSION_NAME = 'pOH';
+    const KERNEL_VERSION_NAME = '!BETA!'; // Still in Development... but will be able to receive stable versions
     const KERNEL_VERSION = '1.2.0';
     const KERNEL_BUILD = '1';
     const KERNEL_RELASE_DATE = '2014-11-28';
