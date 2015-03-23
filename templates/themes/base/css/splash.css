@@ -8,6 +8,24 @@
 {
     .bt_login_forgot{display:none}
 }
+
+/* 1230px or more */
+@media (min-width: 1230px)
+{
+    .window {height:300px;width:590px}
+    .profiles_window{margin:2px;max-height:346px;max-width:590px}
+    .img_reel img{float:left;height:300px;width:590px}
+}
+
+/* 1230px or less */
+@media (max-width: 1230px)
+{
+    .window {height:200px;width:393px}
+    .profiles_window{margin:2px;max-height:230px;max-width:393px}
+    .img_reel img{float:left;height:200px;width:393px}
+}
+
+
 #logo{float:left}
 
 .folio_block {
@@ -30,15 +48,12 @@
     position: relative;
 }
 h1:hover{color:#1877D5;cursor:default}
-.window {height:300px;width:590px}
-.profiles_window{margin:2px;max-height:346px;max-width:590px}
 
 .img_reel {
     position: absolute;
     top: 0;
     left: 0;
 }
-.img_reel img{float:left;height:300px;width:590px;}
 
 /*--Paging Styles--*/
 .paging {

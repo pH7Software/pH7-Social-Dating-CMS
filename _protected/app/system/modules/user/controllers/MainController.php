@@ -13,35 +13,65 @@ class MainController extends Controller
 {
     private $sTitle;
 
+    /**
+     * Displaying the main homepage of the website.
+     */
     public function index()
     {
-        // Display the homepage of website
         // We must not put the title as this is the homepage, so this is the default title is used.
-
-        /**** BEGIN Style sheet and JS files ****/
-        // Only visitors
-        if (!UserCore::auth())
-        {
-            $this->view->is_splash_page = (bool) DbConfig::getSetting('splashPage');
-            $this->view->promo_text = DbConfig::getMetaMain(PH7_LANG_NAME)->promoText;
-
-            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'splash.css,tooltip.css,js/jquery/carousel.css');
-            $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
-        }
-
-        // Only Members
-        if (UserCore::auth())
-        {
-            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'zoomer.css');
-            $this->design->addJs(PH7_STATIC . PH7_JS, 'zoomer.js,Wall.js');
-            $this->view->first_name = $this->session->get('member_first_name'); // First Name for the welcome message.
-        }
-
-        /**** END Style sheet and JS files ****/
 
         // For Profiles Carousel
         $this->view->userDesignModel = new UserDesignCoreModel;
         $this->view->userDesign = new UserDesignCore;
+
+        // Only visitors
+        if (!UserCore::auth())
+        {
+            // Set CSS and JS files
+            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'splash.css,tooltip.css,js/jquery/carousel.css');
+            $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
+
+            // Assigns the promo text to the view
+            $this->view->promo_text = DbConfig::getMetaMain(PH7_LANG_NAME)->promoText;
+
+            /**
+             * When you are in the development mode, you can force the guest page by set a "force" GET request with the "splash" or "classic" parameter.
+             * Example: "/?force=splash" or "/?force=classic"
+             */
+             if (isDebug() && $this->httpRequest->getExists('force'))
+             {
+                 switch ($this->httpRequest->get('force'))
+                 {
+                     case 'classic':
+                         $sPage = 'index.guest';
+                     break;
+
+                     case 'splash':
+                         $sPage = 'index.guest_splash';
+                     break;
+
+                     default:
+                         exit('You can only choose between "classic" or "splash"');
+                }
+            }
+            else
+            {
+                $bIsSplashPage = (bool) DbConfig::getSetting('splashPage');
+                $sPage = ($bIsSplashPage) ? 'index.guest_splash' : 'index.guest';
+            }
+            $this->manualTplInclude($sPage . '.inc.tpl');
+        }
+        elseif (UserCore::auth()) // Only for Members
+        {
+            // Set CSS and JS files
+            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'zoomer.css');
+            $this->design->addJs(PH7_STATIC . PH7_JS, 'zoomer.js,Wall.js');
+
+            // Assigns the user's first name to the view for the Welcome Message
+            $this->view->first_name = $this->session->get('member_first_name');
+
+            $this->manualTplInclude('index.user.inc.tpl');
+        }
         $this->output();
     }
 

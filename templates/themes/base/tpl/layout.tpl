@@ -94,7 +94,7 @@
     <div role="main" class="container" id="content">
 
       {* If the splash page is not enabled, it displays the menu *}
-      {if empty($is_splash_page)}
+      {if !(!$is_user_auth && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index')}
         {main_include 'top_menu.inc.tpl'}
       {/if}
 
@@ -151,7 +151,7 @@
       {{ $design->link() }}
 
       {* To avoid scammers *}
-      {if $is_user_auth && $current_url !== $url_root}
+      {if $is_user_auth && $current_url != $url_root}
         <div class="warning_block center"><p>{lang}<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br />
         People who is really interested in you will never ask for money.<br />
         Be careful, don\'t send the money to anybody!{/lang}</p></div>
