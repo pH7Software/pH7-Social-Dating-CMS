@@ -55,6 +55,7 @@
     <script>var pH7Url={base:'{url_root}',relative:'{url_relative}',tpl:'{url_tpl}',stic:'{url_static}',tplImg:'{url_tpl_img}',tplJs:'{url_tpl_js}',tplMod:'{url_tpl_mod}',data:'{url_data}'};</script>
     {if AdminCore::auth()}<script>pH7Url.admin_mod = '{url_admin_mod}';</script>{/if}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
     <!-- End Header JavaScript -->
 
     {* Begin AjPh *}
@@ -174,7 +175,6 @@
     <!-- Begin Footer JavaScript -->
     {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/box/box.js,jquery/tipTip.js,bootstrap.js,common.js,str.js,holder.js') }}
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS, 'global.js') }}
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 
     {* SetUserActivity & User Chat *}
     {if $is_user_auth}

@@ -56,7 +56,7 @@ function run() {
             rm -rf ./_repository/upgrade/*
             rm -rf ./_doc/
             rm -rf ./_test/
-            rm -rf ./git/
+            rm -rf .git/
 
             echo "Done!"
             echo "Remove \"deployment.sh\" (this file) before packaging pH7CMS"
