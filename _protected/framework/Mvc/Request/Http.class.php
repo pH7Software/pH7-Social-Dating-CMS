@@ -302,10 +302,10 @@ class Http extends \PH7\Framework\Http\Http
      * @access protected
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
-     * @param string $sParam
+     * @param string $sType A PHP Type: "bool", "int", "float", "string", "array", "object" or "null".
      * @return void
      */
-    protected function setType(&$aType, $sKey, $sParam)
+    protected function setType(&$aType, $sKey, $sType)
     {
         if (!empty($sParam) && $sParam !== self::ONLY_XSS_CLEAN)
             settype($aType[$sKey], $sParam);
