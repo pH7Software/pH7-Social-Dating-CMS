@@ -1,4 +1,4 @@
-{* Get this function in a variable in order to optimize the script and call this function only once in the file *}
+{* Store "UserCore::auth()" function in a variable in order to optimize the script and call this function only once in the file *}
 {{ $is_user_auth = UserCore::auth() }}
 
 {{ $design->htmlHeader() }}
@@ -212,3 +212,5 @@
 {{ unset($is_user_auth) }}
 
 {{ $design->htmlFooter() }}
+
+1050
