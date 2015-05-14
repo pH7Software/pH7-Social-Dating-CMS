@@ -47,6 +47,16 @@ class PaymentDesign extends Framework\Core\Core
      * @param object $oMembership The Object Membership Model.
      * @return void
      */
+    public function buttonStripe($oMembership)
+    {
+        \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.api_key']);
+        // Still in development...
+    }
+
+    /**
+     * @param object $oMembership The Object Membership Model.
+     * @return void
+     */
     public function button2CheckOut($oMembership)
     {
         $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enable']);

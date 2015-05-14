@@ -14,10 +14,10 @@ class Stripe extends Framework\Payment\Gateway\Api\Stripe
 
     use Api; // Import the Api trait
 
-    public function __construct($bSandbox)
+    public function __construct()
     {
-        parent::__construct($bSandbox);
+        parent::__construct();
     }
 
 }
-
+ 
