@@ -14,12 +14,8 @@ defined('PH7') or exit('Restricted access');
 
 class Stripe
 {
-
     public function __construct()
     {
-        parent::__construct();
-
         Import::lib('Service.Stripe.init'); // Import the Stripe library
     }
-
 }
