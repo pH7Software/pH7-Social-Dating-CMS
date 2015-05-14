@@ -32,7 +32,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('currency_code', $this->config->values['module.setting']['currency'])
             ->param('tax_cart', $this->config->values['module.setting']['tax_vat.percentage'])
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
-            ->param('rm', 1)) // Auto redirection in POST data
+            ->param('rm', 2)) // Auto redirection in POST data
             ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PayPal'))
             ->param('cancel_return', Uri::get('payment', 'main', 'pay', '?msg=' . t('The payment was aborted, no changes have been made to your account.'), false));
         echo
