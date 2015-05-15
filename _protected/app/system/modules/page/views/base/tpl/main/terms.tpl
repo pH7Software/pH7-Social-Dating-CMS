@@ -13,7 +13,7 @@
 <p>By participating in any offline {site_name} event, you agree to release and hold {site_name} harmless from any and all losses, damages, rights, claims, and actions of any kind including, without limitation, personal injuries, death, and property damage, either directly or indirectly related to or arising from your participation in any such offline {site_name} event.</p>
 <p>&nbsp;</p>
 
-<h3>Terms of Use</h3>
+<h4>Terms of Use</h4>
 
 <p>&nbsp;</p>
 <p><b>1) Your Interactions.</b></p>
