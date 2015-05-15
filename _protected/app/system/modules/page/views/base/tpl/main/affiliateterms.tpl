@@ -4,16 +4,11 @@
 <p>To be an authorized affiliate of <strong><a href="{url_root}">{site_name}</a></strong> (URL address is {url_root}), you agree to abide by the terms and conditions contained in this agreement.<br />
 Please read this agreement carefully before registering and using the {site_name} service as an affiliate. By signing up for the {site_name} affiliate program, you indicate your acceptance of this agreement and its terms and conditions.</p>
 
-<h2 class="bold">Terms of Use</h2>
+<h4>Terms of Use</h4>
 
 <p>Our affiliates are very important to us. We do our best to treat you with the fairness and respect you deserve. We simply ask the same consideration of you. We have written the following affiliate agreement with you in mind, as well as to protect our company's good name. So please bear with us as we take you through this legal formality.<br />
 <br />
-If you have any questions, please don't hesitate to let us know. We are strong believers in straight-forward and honest communication. For quickest results please email us at {admin_email}.<br />
-<br />
-Best regards,<br />
-<br />
-Geno Prussakov<br />
-{site_name} Affiliate Manager<br />
+If you have any questions, please don't hesitate to let us know. We are strong believers in straight-forward and honest communication. For quickest results please <a href="{{ $design->url('contact','contact','index') }}" title="Contact Us">contact us here</a>.<br />
 <br />
  <br />
 <br />

@@ -38,7 +38,7 @@ class MainController extends Controller
         $this->sTitle = t('About this web site %site_name%');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -47,7 +47,7 @@ class MainController extends Controller
         $this->sTitle = t('Help');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Help about of %site_name%');
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -60,7 +60,7 @@ class MainController extends Controller
         $this->view->page_title = t('FAQ');
         $this->sTitle = t('Frequently asked questions of %site_name%');
         $this->view->meta_description = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -69,7 +69,7 @@ class MainController extends Controller
         $this->sTitle = t('Terms and Conditions of Use');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Terms and Conditions of Use, Terms of Use - %site_name%');
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -78,7 +78,7 @@ class MainController extends Controller
         $this->sTitle = t('Affiliate Terms and Conditions of Use');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Affiliate Terms and Conditions of Use, Terms of Use - %site_name%');
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -87,7 +87,7 @@ class MainController extends Controller
         $this->sTitle = t('Privacy Policy');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Privacy Policy - %site_name%');
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -96,7 +96,7 @@ class MainController extends Controller
         $this->sTitle = t('Imprint');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Imprint - %site_name%');
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -105,7 +105,7 @@ class MainController extends Controller
         $this->sTitle = t('Help Us');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Help US - %site_name%');
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -114,7 +114,7 @@ class MainController extends Controller
         $this->sTitle = t('Share this site with others!');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Do you like %site_name% and want it even more popular, then share this site on your website, blog, discussion forum, etc...');
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -123,7 +123,7 @@ class MainController extends Controller
         $this->sTitle = t('Partners of %site_name%');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -132,7 +132,7 @@ class MainController extends Controller
         $this->sTitle = t('Jobs - Careers @ %site_name%');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
-        $this->view->h2_title = t('Careers, Jobs and Internships at %site_name%');
+        $this->view->h1_title = t('Careers, Jobs and Internships at %site_name%');
         $this->output();
     }
 
@@ -141,7 +141,7 @@ class MainController extends Controller
         $this->sTitle = t('%site_name%\'s Team');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
@@ -150,7 +150,7 @@ class MainController extends Controller
         $this->sTitle = t('Links and Partners of %site_name%');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
