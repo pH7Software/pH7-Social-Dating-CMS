@@ -13,7 +13,7 @@
 namespace PH7\Framework\Url;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 /**
  * @class Singleton Class
@@ -43,7 +43,7 @@ class Uri
      */
     private function __construct()
     {
-        $this->_sUri = (new Http)->getPH7RequestUri();
+        $this->_sUri = (new HttpRequest)->requestUri();
 
         /*** We remove the latest slash in order to avoid taking a wrong fragment URL ***/
         if (substr($this->_sUri, -1) === PH7_SH)
