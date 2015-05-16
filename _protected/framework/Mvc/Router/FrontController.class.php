@@ -111,7 +111,7 @@ final class FrontController
         $oUrl = UriRoute::loadFile(new \DomDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute)
         {
-            if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->getPH7RequestUri(), $aMatches))
+            if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->requestUri(), $aMatches))
             {
                 $this->bRouterRewriting = true;
 
@@ -701,7 +701,6 @@ final class FrontController
         // The following code will be useless when pH7CMS will be able to work without mod_rewrite \\
         if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE)
             $this->notFound('If we\'re in production mode, we display an error page if it on the index file to indicate no file extension in order to avoid utilization of a security vulnerability  in the language.');
-
 
         /*
 
