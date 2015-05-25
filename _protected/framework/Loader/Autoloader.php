@@ -124,8 +124,10 @@ final class Autoloader
         $oFile = new File;
         $sFullPath = PH7_PATH_FRAMEWORK . $sFileNamePath;
         $bIsExpiredFile = (($oFile->getModifTime($sFullPath) + VDate::setTime('+2 months')) < VDate::getTime());
-        $bFileExists = $oFile->existFile($sFullPath);
-        if (!$bFileExists || $oFile->size($sFullPath) < 10240 || $bIsExpiredFile)
+		$bFileExists = $oFile->existFile($sFullPath);
+		$bIsTooSmallFile = ($oFile->size($sFullPath) < 1000);
+		
+		if (!$bFileExists || $bIsTooSmallFile || $bIsExpiredFile)
         {
             if ($bFileExists) // Delete the file if it already exists
                 $oFile->deleteFile($sFullPath);

@@ -198,7 +198,7 @@ class File
      */
     public function size($sFile)
     {
-        return filesize($sFile);
+        return (int) @filesize($sFile);
     }
 
     /**
