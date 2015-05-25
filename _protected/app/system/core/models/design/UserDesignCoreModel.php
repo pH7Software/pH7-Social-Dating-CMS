@@ -102,8 +102,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         $oUser = $this->oUserModel->getProfiles(SearchCoreModel::LATEST, $iOffset, $iLimit);
         if (empty($oUser)) return;
 
-        echo '<script>$(function(){$(\'ul.zoomer_pic li\').Zoomer({speedView:200,speedRemove:400,altAnim:true,speedTitle:400,debug:false})});</script>
-        <ul class="zoomer_pic">';
+        echo '<ul class="zoomer_pic">';
 
         foreach ($oUser as $oRow)
         {
