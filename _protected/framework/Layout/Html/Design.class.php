@@ -274,7 +274,7 @@ class Design
             You can never claim that you took, developed, or helped in any other way in this software if it is wrong! -->';
         }
 
-        echo ($bSoftwareName ?  '<p><strong>' . t('Powered By') : ''), ' ', ($bLink ? '<a href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bLink ? '</a> ' : ' '), ($bVersion ? t('Version') . ' ' . Kernel::SOFTWARE_VERSION : ''), ($bSoftwareName ? '</strong></p>' : ''),
+        echo ($bSoftwareName ?  '<p><strong>' . t('Powered By') : ''), ' ', ($bLink ? '<a href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bLink ? '</a> ' : ' '), ($bVersion ? Kernel::SOFTWARE_VERSION : ''), ($bSoftwareName ? '</strong></p>' : ''),
 
         '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
     }
@@ -286,7 +286,7 @@ class Design
      */
     final public function smallLink()
     {
-        echo '<p><strong>', t('Powered By'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', t('Version'), ' ', Kernel::SOFTWARE_VERSION, '</strong></p>';
+        echo '<p><strong>', t('Powered By'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong></p>';
     }
 
     /**
