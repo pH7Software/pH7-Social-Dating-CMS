@@ -33,6 +33,20 @@ trait Singleton
     {
         return (null === static::$_oInstance) ? static::$_oInstance = new static : static::$_oInstance;
     }
-
+    
+    /**
+     * Directly call "static::getInstance()" method when the object is called as a function.
+     */
+    public function __invoke()
+    {
+        return static::getInstance();
+    }
+    
+    /**
+     * Private serialize/unserialize method to prevent serializing/unserializing.
+     */
+    private function __wakeup() {}
+    private function __sleep() {}
+    
 }
 
