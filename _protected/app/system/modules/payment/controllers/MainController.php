@@ -104,12 +104,36 @@ class MainController extends Controller
                     if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->httpRequest->post('custom', 'int'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
                         $this->_bStatus = true; // Status is OK
+                        // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
                     }
                 }
                 unset($oPayPal);
             }
             break;
-
+        
+            case 'stripe':
+            {
+                if ($this->httpRequest->postExists('stripeToken'))
+                {
+                    Framework\File\Import::lib('Service.Stripe.init'); // Import the Stripe library
+                    \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
+                    
+                     $oCharge = \Stripe\Charge::create(
+                        array(
+                            'source' => $this->httpRequest->post('stripeToken'),
+                            'email'    => $this->httpRequest->post('stripeEmail')
+                        )
+                    );
+                    
+                    if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->httpRequest->post('member_id', 'int'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    {
+                        $this->_bStatus = true; // Status is OK
+                        $this->notification('Stripe'); // Add info into the log file
+                    }
+                }
+            }
+            break;
+        
             case '2co':
             {
                 $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enable']);
@@ -121,6 +145,7 @@ class MainController extends Controller
                     if ($this->oUserModel->updateMembership($this->httpRequest->post('sale_id'), $this->iProfileId, $this->httpRequest->post('price'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
                         $this->_bStatus = true; // Status is OK
+                        $this->notification('TwoCO'); // Add info into the log file
                     }
                 }
                 unset($o2CO);
@@ -159,7 +184,7 @@ class MainController extends Controller
     public function notification($sGatewayName = '')
     {
         // Save buyer information to a log file
-        if ($sGatewayName == 'PayPal' || $sGatewayName == 'TwoCO' || $sGatewayName == 'CCBill')
+        if ($sGatewayName == 'PayPal' || $sGatewayName == 'Stripe' || $sGatewayName == 'TwoCO' || $sGatewayName == 'CCBill')
         {
             $sGatewayName = 'PH7\\' . $sGatewayName;
             $this->log(new $sGatewayName(false), t('%0% payment was made with the following information:', $sGatewayName));

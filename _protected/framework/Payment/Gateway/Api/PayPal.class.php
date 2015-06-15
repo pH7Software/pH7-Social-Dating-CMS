@@ -39,7 +39,7 @@ class Paypal extends Provider implements Api
      * Get Checkout URL.
      *
      * @return string
-     * @internal We add two empty parameters for the method to be compatible with the API interface.
+     * @internal We add an empty parameter for the method to be compatible with the API interface.
      */
     public function getUrl($sParam = '')
     {
