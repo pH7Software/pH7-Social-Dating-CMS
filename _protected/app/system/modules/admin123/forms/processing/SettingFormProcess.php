@@ -227,9 +227,9 @@ class SettingFormProcess extends Form
 
         if(!$this->str->equals($this->httpRequest->post('ban_word_replace'), DbConfig::getSetting('banWordReplace')))
             DbConfig::setSetting($this->httpRequest->post('ban_word_replace'), 'banWordReplace');
-
-        if(!$this->str->equals($this->httpRequest->post('stop_DDoS'), DbConfig::getSetting('DDoS')))
-            DbConfig::setSetting($this->httpRequest->post('stop_DDoS'), 'DDoS');
+            
+        if(!$this->str->equals($this->httpRequest->post('security_token'), DbConfig::getSetting('securityToken')))
+            DbConfig::setSetting($this->httpRequest->post('security_token'), 'securityToken');
 
         $iSecTokenLifetime = (int) $this->httpRequest->post('security_token_lifetime');
         if(!$this->str->equals($iSecTokenLifetime, DbConfig::getSetting('securityTokenLifetime')))
@@ -242,6 +242,9 @@ class SettingFormProcess extends Form
             else
                 DbConfig::setSetting($iSecTokenLifetime, 'securityTokenLifetime');
         }
+        
+        if(!$this->str->equals($this->httpRequest->post('stop_DDoS'), DbConfig::getSetting('DDoS')))
+            DbConfig::setSetting($this->httpRequest->post('stop_DDoS'), 'DDoS');
 
 
         /********** Spam **********/
