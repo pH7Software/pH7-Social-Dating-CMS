@@ -85,7 +85,7 @@ final class Token
      *
      * @param integer $iTime Lifetime of token in seconds. Default NULL (value specified in the database settings).
      *
-     * @return boolean
+     * @return boolean Returns TRUE if the token is validated, FALSE otherwise.
      */
     public function check($sName, $sInputToken = null, $iTime = null)
     {

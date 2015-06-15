@@ -1,15 +1,14 @@
 <?php
 /**
- * We made this code.
- * By pH7 (Pierre-Henry SORIA).
+ * This code has been made by pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Validation;
-use \PH7\Framework\Security\Spam\Captcha\Captcha;
+use PH7\Framework\Security\Spam\Captcha\Captcha;
 
 class CCaptcha extends \PFBC\Validation
 {
-
-    public function __construct() {
+    public function __construct()
+    {
         $this->message = t('The code of Captcha entered was incorrect. Please re-try.');
     }
 
@@ -20,5 +19,4 @@ class CCaptcha extends \PFBC\Validation
     {
         return (new Captcha)->check($sValue);
     }
-
 }
