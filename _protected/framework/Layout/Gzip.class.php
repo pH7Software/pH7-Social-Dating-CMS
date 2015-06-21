@@ -99,7 +99,7 @@ class Gzip
 
         $this->_sDir = $this->_oHttpRequest->get('d');
         $this->_sBase = $this->_oFile->checkExtDir(realpath($this->_sDir));
-        $this->_sBaseUrl = $this->_oFile->checkExtDir($this->_sDir);
+        $this->_sBaseUrl = $this->_clearUrl($this->_oFile->checkExtDir($this->_sDir));
 
         // The Files
         if (!$this->_oHttpRequest->getExists('f'))
@@ -296,14 +296,13 @@ class Gzip
      */
     protected function parseVariable()
     {
-        // Replace the "[$url_tpl_css]" variable
-        $this->_sContents = str_replace('[$url_theme]', PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL, $this->_sContents);
-
-         // Replace the "[$url_def_tpl_css]" variable
-        $this->_sContents = str_replace('[$url_def_tpl_css]', PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS , $this->_sContents);
-
-        // Replace the "[$url_def_tpl_js]" variable
-        $this->_sContents = str_replace('[$url_def_tpl_js]', PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS , $this->_sContents);
+        $aVars = [   
+            'url_theme' => PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL, // Replace the "[$url_tpl_css]" variable
+            'url_def_tpl_css' => PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL, // Replace the "[$url_def_tpl_css]" variable
+            'url_def_tpl_js' => PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, // Replace the "[$url_def_tpl_js]" variable
+        ];
+        
+        $this->_setVariables($aVars);        
     }
 
     /**
@@ -359,6 +358,19 @@ class Gzip
                 24000) ? str_replace($aHit[0][$i], 'url(' . Optimization::dataUri($sImgPath) . ')', $this->_sContents) : str_replace($aHit[0][$i], 'url(' . $sImgUrl . ')', $this->_sContents);
         }
     }
+    
+    /**
+     * Set CSS/JS variables.
+     *
+     * @param array $aVars Variable names containing the values.
+     * @return void
+     */
+    private function _setVariables(array $aVals)
+    {
+        // Replace the variable name by the content
+        foreach ($aVals as $sKey => $sVal)
+            $this->_sContents = str_replace('[$' . $sKey . ']', $sVal, $this->_sContents);
+    }
 
     /**
      * Checks if the cache directory has been defined otherwise we create a default directory.
@@ -369,6 +381,17 @@ class Gzip
     private function _checkCacheDir()
     {
         $this->_sCacheDir = (empty($this->_sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->_sCacheDir;
+    }
+    
+    /**
+     * Remove backslashes on Windows.
+     *
+     * @param string $sPath
+     * @return string The path without backslashes and/or double slashes.
+     */
+    private function _clearUrl($sPath)
+    {
+        return str_replace(array('\\', '//'), '/', $sPath);
     }
 
     public function __destruct()
