@@ -85,3 +85,19 @@ h1:hover{color:#1877D5;cursor:default}
 .bt_login_remember,.bt_login_forgot{padding-bottom:4%}
 .bt_login_remember{float:left;padding-left:5.5%;margin-top:-1.5%}
 .bt_login_forgot{float:right;padding-right:40%;margin-top:-2px}
+
+
+video#bgvid {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  background: url(../img/splash_vid.jpg') no-repeat;
+  background-size: cover;
+}

@@ -33,6 +33,9 @@ class MainController extends Controller
 
             // Assigns the promo text to the view
             $this->view->promo_text = DbConfig::getMetaMain(PH7_LANG_NAME)->promoText;
+            
+            // Assign the background video option
+            $this->view->is_bg_video = DbConfig::getSetting('bgSplashVideo');
 
             /**
              * When you are in the development mode, you can force the guest page by set a "force" GET request with the "splash" or "classic" parameter.
