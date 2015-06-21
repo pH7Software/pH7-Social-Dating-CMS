@@ -212,7 +212,6 @@ class UpgradeCore extends Kernel
     {
         //$this->_file();
         $this->_sql();
-        $this->_setNewVersion();
     }
 
     private function _file()
@@ -303,29 +302,6 @@ class UpgradeCore extends Kernel
         }
 
         return false;
-    }
-
-    /**
-     * Set new version in the Code.class.php file.
-     *
-     * @return void
-     */
-    private function _setNewVersion()
-    {
-        $sContents = $this->_oFile->getFile(PH7_PATH_FRAMEWORK . 'Core/Kernel.class.php');
-
-        if($this->_sVerName != Kernel::SOFTWARE_VERSION_NAME)
-            $sNewContents = str_replace('SOFTWARE_VERSION_NAME = \'' . Kernel::SOFTWARE_VERSION_NAME . '\'', 'SOFTWARE_VERSION_NAME = \'' . $this->_sVerName . '\'', $sContents);
-
-        if($this->_sVerNumber != Kernel::SOFTWARE_VERSION)
-            $sNewContents = str_replace('SOFTWARE_VERSION = \'' . Kernel::SOFTWARE_VERSION . '\'', 'SOFTWARE_VERSION = \'' . $this->_sVerNumber . '\'', $sContents);
-
-        if($this->_iVerBuild != Kernel::SOFTWARE_BUILD)
-            $sNewContents = str_replace('SOFTWARE_BUILD = \'' . Kernel::SOFTWARE_BUILD . '\'', 'SOFTWARE_BUILD = \'' . $this->_iVerBuild . '\'', $sContents);
-
-        unset($sContents);
-        $this->_oFile->putFile(PH7_PATH_FRAMEWORK . 'Core/Kernel.class.php', $sNewContents);
-        unset($sNewContents);
     }
 
     /**
