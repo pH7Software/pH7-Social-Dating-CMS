@@ -35,6 +35,9 @@ class SettingFormProcess extends Form
 
         if(!$this->str->equals($this->httpRequest->post('splash_page'), DbConfig::getSetting('splashPage')))
             DbConfig::setSetting($this->httpRequest->post('splash_page'), 'splashPage');
+            
+        if(!$this->str->equals($this->httpRequest->post('bg_splash_vid'), DbConfig::getSetting('bgSplashVideo')))
+            DbConfig::setSetting($this->httpRequest->post('bg_splash_vid'), 'bgSplashVideo');
 
         if(!$this->str->equals($this->httpRequest->post('full_ajax_site'), DbConfig::getSetting('fullAjaxSite')))
             DbConfig::setSetting($this->httpRequest->post('full_ajax_site'), 'fullAjaxSite');

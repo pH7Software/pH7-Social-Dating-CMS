@@ -1,3 +1,9 @@
+{if $is_bg_video}
+    <video autoplay loop poster="{url_tpl_img}splash_vid.jpg" id="bgvid">
+      <source src="{url_tpl}file/splash.webm" type="video/webm" />
+    </video>
+{/if}
+
 <div class="login_block">
   {{ LoginSplashForm::display(290) }}
 </div>
@@ -12,6 +18,8 @@
   <div class="center profiles_window thumb">
     {{ $userDesignModel->profiles() }}
   </div>
+
+
 
   <div class="center s_tMarg">
     <h2>{lang 'Meet people in %0% with %site_name%!', $design->geoIp(false)}</h2>
