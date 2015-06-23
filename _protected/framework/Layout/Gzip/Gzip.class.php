@@ -296,9 +296,7 @@ class Gzip
      */
     protected function parseVariable()
     {
-        $aVars = include('variables.inc.php');
-        
-        $this->_setVariables($aVars);        
+        $this->_setVariables( include('variables.inc.php') );        
     }
 
     /**

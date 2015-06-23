@@ -9,7 +9,9 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Url;
+use
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Url;
 
 class UserDesignCoreModel extends Framework\Mvc\Model\Design
 {
@@ -20,12 +22,21 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
     {
         parent::__construct();
 
-        $this->oUser = new User;
-        $this->oUserModel = new UserModel;
+        $this->oUser = new UserCore;
+        $this->oUserModel = new UserCoreModel;
     }
 
-    public function geoProfiles($sCountryCode, $sCity = '', $iOffset = 0, $iLimit = 24)
-    {
+    /**
+     * Get profile avatars from the geolocation.
+     *
+     * @param string $sCountryCode Optional The country code (e.g., GB, RU, FR, ES, ...). Default ''
+     * @param string $sCity Optional. The city name. Default ''
+     * @param integer $iOffset Optional. Default 0
+     * @param integer $iLimit Optional. Default 14
+     * @return void HTML output.
+     */
+    public function geoProfiles($sCountryCode = '', $sCity = '', $iOffset = 0, $iLimit = 14)
+    {        
         $oUserGeo = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUserGeo)) return;
 
@@ -38,6 +49,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
 
             if (!UserCore::auth() && !AdminCore::auth())
             {
+                // Build GET parameters for tracking references
                 $aHttpParams = [
                     'ref' => $this->oHttpRequest->currentController(),
                     'a' => 'carousel',
@@ -55,7 +67,6 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
 
             echo '</div>';
         }
-
     }
 
     public function carouselProfiles($iOffset = 0, $iLimit = 25)
@@ -75,6 +86,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
 
             if (!UserCore::auth() && !AdminCore::auth())
             {
+                // Build GET parameters for tracking references
                 $aHttpParams = [
                     'ref' => $this->oHttpRequest->currentController(),
                     'a' => 'carousel',
