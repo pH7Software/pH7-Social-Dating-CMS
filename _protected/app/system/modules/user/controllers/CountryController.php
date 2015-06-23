@@ -56,11 +56,14 @@ class CountryController extends Controller
             $sMemberTxt = nt('%n% member', '%n% members', $iTotalUsers);
             $this->view->h3_title = t('%0% lives near %1% %2%', $sMemberTxt, $this->registry->country, $this->registry->city);
 
-        } else {
+        }
+        else
+        {
             // Not found page
             Framework\Http\Http::setHeadersByCode(404);
             $this->view->error = t('Error, country is empty.');
         }
+        
         $this->output();
     }
 
