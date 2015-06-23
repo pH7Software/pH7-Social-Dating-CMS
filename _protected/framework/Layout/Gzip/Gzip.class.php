@@ -6,11 +6,11 @@
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @package          PH7 / Framework / Layout
- * @version          1.3
+ * @package          PH7 / Framework / Layout / Gzip
+ * @version          1.4
  */
 
-namespace PH7\Framework\Layout;
+namespace PH7\Framework\Layout\Gzip;
 defined('PH7') or exit('Restricted access');
 
 use
@@ -141,7 +141,7 @@ class Gzip
      * Set Caching.
      *
      * @return string The contents.
-     * @throws \PH7\Framework\Layout\Exception If the cache file couldn't be written.
+     * @throws \PH7\Framework\Layout\Gzip\Exception If the cache file couldn't be written.
      */
     public function cache()
     {
@@ -296,11 +296,7 @@ class Gzip
      */
     protected function parseVariable()
     {
-        $aVars = [   
-            'url_theme' => PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL, // Replace the "[$url_tpl_css]" variable
-            'url_def_tpl_css' => PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL, // Replace the "[$url_def_tpl_css]" variable
-            'url_def_tpl_js' => PH7_URL_ROOT . PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, // Replace the "[$url_def_tpl_js]" variable
-        ];
+        $aVars = include('variables.inc.php');
         
         $this->_setVariables($aVars);        
     }

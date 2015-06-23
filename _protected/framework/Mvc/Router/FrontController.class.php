@@ -424,7 +424,7 @@ final class FrontController
      */
     private function gzipRouter()
     {
-        (new \PH7\Framework\Layout\Gzip)->run();
+        (new \PH7\Framework\Layout\Gzip\Gzip)->run();
     }
 
     /**
