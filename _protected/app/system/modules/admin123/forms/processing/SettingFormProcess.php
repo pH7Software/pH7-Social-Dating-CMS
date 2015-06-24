@@ -35,7 +35,7 @@ class SettingFormProcess extends Form
 
         if(!$this->str->equals($this->httpRequest->post('splash_page'), DbConfig::getSetting('splashPage')))
             DbConfig::setSetting($this->httpRequest->post('splash_page'), 'splashPage');
-            
+
         if(!$this->str->equals($this->httpRequest->post('bg_splash_vid'), DbConfig::getSetting('bgSplashVideo')))
             DbConfig::setSetting($this->httpRequest->post('bg_splash_vid'), 'bgSplashVideo');
 
@@ -230,7 +230,7 @@ class SettingFormProcess extends Form
 
         if(!$this->str->equals($this->httpRequest->post('ban_word_replace'), DbConfig::getSetting('banWordReplace')))
             DbConfig::setSetting($this->httpRequest->post('ban_word_replace'), 'banWordReplace');
-            
+
         if(!$this->str->equals($this->httpRequest->post('security_token'), DbConfig::getSetting('securityToken')))
             DbConfig::setSetting($this->httpRequest->post('security_token'), 'securityToken');
 
@@ -245,7 +245,7 @@ class SettingFormProcess extends Form
             else
                 DbConfig::setSetting($iSecTokenLifetime, 'securityTokenLifetime');
         }
-        
+
         if(!$this->str->equals($this->httpRequest->post('stop_DDoS'), DbConfig::getSetting('DDoS')))
             DbConfig::setSetting($this->httpRequest->post('stop_DDoS'), 'DDoS');
 

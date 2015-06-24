@@ -36,7 +36,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
      * @return void HTML output.
      */
     public function geoProfiles($sCountryCode = '', $sCity = '', $iOffset = 0, $iLimit = 14)
-    {        
+    {
         $oUserGeo = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUserGeo)) return;
 

@@ -21,12 +21,12 @@
                 {{ $oDesign->buttonPayPal($membership) }}
               </div>
           {/if}
-		  
-		  {if $is_stripe}
-		      <div class="left vs_marg">
-		        {{ $oDesign->buttonStripe($membership) }}
-		      </div>
-		  {/if}
+
+          {if $is_stripe}
+              <div class="left vs_marg">
+                {{ $oDesign->buttonStripe($membership) }}
+              </div>
+          {/if}
 
           {if $is_2co}
               <div class="left vs_marg">

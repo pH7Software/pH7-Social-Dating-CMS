@@ -63,7 +63,7 @@ class CountryController extends Controller
             Framework\Http\Http::setHeadersByCode(404);
             $this->view->error = t('Error, country is empty.');
         }
-        
+
         $this->output();
     }
 
