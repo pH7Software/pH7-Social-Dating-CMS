@@ -1,4 +1,4 @@
-<!-- Last Update: 03/23/2015 by Pierre-Henry Soria -->
+<!-- Last Update: 06/25/2015 by Pierre-Henry Soria -->
 
 <h1>Tree of pH7CMS</h1>
 
@@ -1642,6 +1642,7 @@
 │   │           │   │   │   ├── design
 │   │           │   │   │   │   └── PaymentDesign.php
 │   │           │   │   │   ├── PayPal.php
+│   │           │   │   │   ├── Stripe.php
 │   │           │   │   │   └── TwoCO.php
 │   │           │   │   └── _log
 │   │           │   ├── lang
@@ -1985,7 +1986,7 @@
 │   │   │   ├── file
 │   │   │   └── sql
 │   │   ├── cache
-│   │   │   ├── pH7_cache
+│   │   │   ├── pH7_cache
 │   │   │   ├── pH7_static
 │   │   │   ├── pH7tpl_cache
 │   │   │   └── pH7tpl_compile
@@ -2233,7 +2234,10 @@
 │   │   │   │   │       │   └── Standard.php
 │   │   │   │   │       └── View.php
 │   │   │   │   └── Form.class.php
-│   │   │   ├── Gzip.class.php
+│   │   │   ├── Gzip
+│   │   │   │   ├── Exception.class.php
+│   │   │   │   ├── Gzip.class.php
+│   │   │   │   └── variables.inc.php
 │   │   │   ├── Html
 │   │   │   │   ├── Design.class.php
 │   │   │   │   ├── Mail.class.php
@@ -2528,6 +2532,7 @@
 │   │   │           ├── Api.interface.php
 │   │   │           ├── PayPal.class.php
 │   │   │           ├── Provider.class.php
+│   │   │           ├── Stripe.class.php
 │   │   │           └── TwoCheckOut.class.php
 │   │   ├── Registry
 │   │   │   ├── File.class.php
@@ -2698,6 +2703,53 @@
 │       │   │       ├── http.php
 │       │   │       └── oauth_client.php
 │       │   ├── ShortUrl
+│       │   ├── Stripe
+│       │   │   ├── init.php
+│       │   │   └── lib
+│       │   │       ├── Account.php
+│       │   │       ├── ApiRequestor.php
+│       │   │       ├── ApiResource.php
+│       │   │       ├── ApplicationFee.php
+│       │   │       ├── ApplicationFeeRefund.php
+│       │   │       ├── AttachedObject.php
+│       │   │       ├── Balance.php
+│       │   │       ├── BalanceTransaction.php
+│       │   │       ├── BitcoinReceiver.php
+│       │   │       ├── BitcoinTransaction.php
+│       │   │       ├── Card.php
+│       │   │       ├── Charge.php
+│       │   │       ├── Collection.php
+│       │   │       ├── Coupon.php
+│       │   │       ├── Customer.php
+│       │   │       ├── Error
+│       │   │       │   ├── ApiConnection.php
+│       │   │       │   ├── Api.php
+│       │   │       │   ├── Authentication.php
+│       │   │       │   ├── Base.php
+│       │   │       │   ├── Card.php
+│       │   │       │   ├── InvalidRequest.php
+│       │   │       │   └── RateLimit.php
+│       │   │       ├── Event.php
+│       │   │       ├── FileUpload.php
+│       │   │       ├── HttpClient
+│       │   │       │   ├── ClientInterface.php
+│       │   │       │   └── CurlClient.php
+│       │   │       ├── InvoiceItem.php
+│       │   │       ├── Invoice.php
+│       │   │       ├── Object.php
+│       │   │       ├── Plan.php
+│       │   │       ├── Recipient.php
+│       │   │       ├── Refund.php
+│       │   │       ├── SingletonApiResource.php
+│       │   │       ├── Stripe.php
+│       │   │       ├── Subscription.php
+│       │   │       ├── Token.php
+│       │   │       ├── Transfer.php
+│       │   │       ├── TransferReversal.php
+│       │   │       └── Util
+│       │   │           ├── RequestOptions.php
+│       │   │           ├── Set.php
+│       │   │           └── Util.php
 │       │   ├── Twitter
 │       │   │   ├── LICENSE
 │       │   │   ├── README.md
@@ -4306,6 +4358,9 @@
 │       │   │   ├── tabs.css
 │       │   │   ├── tooltip.css
 │       │   │   └── zoomer.css
+│       │   ├── file
+│       │   │   ├── splash_video.copyright.txt
+│       │   │   └── splash.webm
 │       │   ├── img
 │       │   │   ├── arrow.gif
 │       │   │   ├── bar.png
@@ -4424,6 +4479,7 @@
 │       │   │   │   ├── 3.jpg
 │       │   │   │   ├── 4.jpg
 │       │   │   │   └── 5.jpg
+│       │   │   ├── splash_vid.jpg
 │       │   │   ├── tabs.gif
 │       │   │   ├── tooltip_bg.png
 │       │   │   └── zoomer
@@ -4552,4 +4608,4 @@
 
 </pre>
 
-<p>Statistics: 1335 directories, 3209 files.</p>
+<p>Statistics: 1341 directories, 3258 files.</p>
