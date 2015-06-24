@@ -24,11 +24,11 @@ class Token extends Hidden
     {
         if (!$this->_isEnabled())
             return; // If it's disabled, we stop the execution of the class
-        
+
         $this->validation[] = new \PFBC\Validation\Token($this->sName);
         parent::render();
     }
-    
+
     /**
      * Check if the CSRF security token for forms is enabled.
      *

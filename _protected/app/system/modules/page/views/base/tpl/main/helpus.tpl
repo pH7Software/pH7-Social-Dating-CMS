@@ -1,7 +1,7 @@
 <div class="center">
 
 {lang}
-<p><strong><a href="http://ph7cms.com">pH7CMS</a></strong> is built by a small volunteer team of engineers, programmers, designers, and others in many different sites across the globe. It is updated continuously, and<br /> 
+<p><strong><a href="http://ph7cms.com">pH7CMS</a></strong> is built by a small volunteer team of engineers, programmers, designers, and others in many different sites across the globe. It is updated continuously, and<br />
 in constantly evolving to give the best image of the <strong>next Social Dating Web generation</strong>!<br />
 If you wish to help us as volunteer developer and if you know one of the following languages ​​(C++, Java, Python, PHP, CSS, HTML, JavaScript, Objective-C/Swift, Unix Server, Apache, Nginx)<br />
 or professional hackers who could help us in the security of our web software to find any security vulnerability possible to create 100% secure web software<br />

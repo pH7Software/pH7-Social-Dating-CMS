@@ -21,7 +21,7 @@ class Token extends \PFBC\Validation
      * @return boolean Returns TRUE if the token is validated, FALSE otherwise.
      */
     public function isValid($sValue)
-    {        
+    {
         return (new T)->check($this->sName, $sValue);
     }
 }

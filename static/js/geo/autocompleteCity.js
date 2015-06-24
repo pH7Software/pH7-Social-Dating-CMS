@@ -15,16 +15,16 @@ var sGeonamesUsername = 'ph7cms'; // Remplace "ph7cms" by your username!
 
 function autocompleteCityInit(sGeonamesUsername)
 {
-	// Set the variables
+    // Set the variables
     var sCountry = $('#str_country').val();
     var sUrlSlug = (typeof sCountry != 'undefined' ? '?country=' + sCountry : '');
 
     $('#str_city').autocomplete(
-	{
+    {
         source: function(oRequest, oResponse)
         {
             $.ajax(
-			{
+            {
                 url: 'http://ws.geonames.org/searchJSON' + sUrlSlug + '&username=' + sGeonamesUsername,
                 dataType: 'jsonp',
                 data:
@@ -35,7 +35,7 @@ function autocompleteCityInit(sGeonamesUsername)
                     name_startsWith: oRequest.term
                 },
                 success: function(oData)
-				{
+                {
                     oResponse($.map(oData.geonames, function(oItem)
                     {
                         $('#str_city').click(function()
@@ -45,7 +45,7 @@ function autocompleteCityInit(sGeonamesUsername)
                         });
 
                         return
-						{
+                        {
                             label: oItem.name + (oItem.adminName1 ? ', ' + oItem.adminName1 : '') + (sCountry ? '' : ', ' + oItem.countryName),
                             value: oItem.name
                         }
@@ -59,5 +59,5 @@ function autocompleteCityInit(sGeonamesUsername)
 
 $(document).ready(function()
 {
-	autocompleteCityInit();
+    autocompleteCityInit();
 });

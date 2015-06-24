@@ -296,7 +296,7 @@ class Gzip
      */
     protected function parseVariable()
     {
-        $this->_setVariables( include('variables.inc.php') );        
+        $this->_setVariables( include('variables.inc.php') );
     }
 
     /**
@@ -352,7 +352,7 @@ class Gzip
                 24000) ? str_replace($aHit[0][$i], 'url(' . Optimization::dataUri($sImgPath) . ')', $this->_sContents) : str_replace($aHit[0][$i], 'url(' . $sImgUrl . ')', $this->_sContents);
         }
     }
-    
+
     /**
      * Set CSS/JS variables.
      *
@@ -376,7 +376,7 @@ class Gzip
     {
         $this->_sCacheDir = (empty($this->_sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->_sCacheDir;
     }
-    
+
     /**
      * Remove backslashes on Windows.
      *

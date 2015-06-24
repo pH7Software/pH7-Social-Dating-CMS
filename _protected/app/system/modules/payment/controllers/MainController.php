@@ -110,21 +110,21 @@ class MainController extends Controller
                 unset($oPayPal);
             }
             break;
-        
+
             case 'stripe':
             {
                 if ($this->httpRequest->postExists('stripeToken'))
                 {
                     Framework\File\Import::lib('Service.Stripe.init'); // Import the Stripe library
                     \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
-                    
+
                      $oCharge = \Stripe\Charge::create(
                         array(
                             'source' => $this->httpRequest->post('stripeToken'),
                             'email'    => $this->httpRequest->post('stripeEmail')
                         )
                     );
-                    
+
                     if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->httpRequest->post('member_id', 'int'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
                         $this->_bStatus = true; // Status is OK
@@ -133,7 +133,7 @@ class MainController extends Controller
                 }
             }
             break;
-        
+
             case '2co':
             {
                 $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enable']);
