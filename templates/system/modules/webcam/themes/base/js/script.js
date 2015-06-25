@@ -7,12 +7,15 @@
  * This code was inspired by Martin Angelov's tutorial: http://tutorialzine.com/2011/04/jquery-webcam-photobooth/
  */
 
+    var sShowCss = 'display:block !important;visibility:visible !important';
+    var sHideCss = 'display:none !important;visibility:none !important';
+
     var oCamera = $('#camera'),
         oPhotos = $('#photos'),
         oScreen = $('#screen');
 
-    var template = '<a href="' + pH7Url.data + 'system/modules/webcam/picture/img/original/{src}" class="cam" '
-        +'style="background-image:url(' + pH7Url.data + 'system/modules/webcam/picture/img/thumb/{src})"></a>';
+    var sTemplate = '<a href="{url}system/modules/webcam/picture/img/original/{src}" class="cam" '
+        +'style="background-image:url({url}system/modules/webcam/picture/img/thumb/{src})"></a>';
 
     /*----------------------------------
         Setting up the web camera
@@ -20,7 +23,7 @@
 
 
     webcam.set_swf_url(pH7Url.tplMod + 'webcam.swf');
-    webcam.set_api_url(pH7Url.base + 'webcam/asset/ajax/UploadPicture');   // The upload script
+    webcam.set_api_url(pH7Url.base + 'webcam/asset/ajax/UploadPicture'); // The upload script
     webcam.set_quality(80);             // JPEG Photo Quality
     webcam.set_shutter_sound(true, pH7Url.tplMod + 'shutter.mp3');
 
@@ -74,7 +77,7 @@
     var shown = false;
     $('.camTop').click(function(){
 
-        $('.tooltip').fadeOut('fast');
+        $('.tooltip').fadeOut('fast').attr('style', sHideCss);
 
         if(shown){
             oCamera.animate({
@@ -91,7 +94,7 @@
     });
 
     $('.tooltip').mouseenter(function(){
-        $(this).fadeOut('fast');
+        $(this).fadeOut('fast').attr('style', sHideCss);
     });
 
 
@@ -119,7 +122,7 @@
         }
         else {
             // Adding it to the page;
-            oPhotos.prepend(templateReplace(template,{src:msg.filename}));
+            oPhotos.prepend(templateReplace(sTemplate, {url:pH7Url.data, src:msg.filename}));
             initBox();
         }
     });
@@ -154,7 +157,7 @@
 
         $.getJSON(pH7Url.base + 'webcam/asset/ajax/BrowsePicture/',{'start':start},function(r){
 
-            oPhotos.find('a').show();
+            oPhotos.find('a').attr('style', sShowCss);
             var loadMore = $('#loadMore').detach();
 
             if(!loadMore.length){
@@ -166,7 +169,7 @@
             }
 
             $.each(r.files,function(i,filename){
-                oPhotos.append(templateReplace(template,{src:filename}));
+                oPhotos.append(templateReplace(sTemplate, {url:pH7Url.data, src:filename}));
             });
 
             // If there is a next page with images:
@@ -176,7 +179,7 @@
                 // that comes after the last one shown currently.
 
                 start = r.nextStart;
-                oPhotos.find('a:last').hide();
+                oPhotos.find('a:last').attr('style', sHideCss);
                 oPhotos.append(loadMore.html('Load More'));
             }
 
@@ -203,7 +206,8 @@
     // This function initializes the
     // box lightbox script.
 
-    function initBox(filename){
+    function initBox(filename)
+    {
         oPhotos.find('a:visible').colorbox({
             maxWidth     :  '95%',
             maxHeight    :  '95%',
@@ -216,12 +220,14 @@
     // This function toggles the two
     // .buttonPane divs into visibility:
 
-    function togglePane(){
+    function togglePane()
+    {
         var visible = $('#camera .buttonPane:visible:first');
         var hidden = $('#camera .buttonPane:hidden:first');
 
-        visible.fadeOut('fast',function(){
-            hidden.show();
+        visible.attr('style', sHideCss).fadeOut('fast', function()
+        {
+            hidden.attr('style', sShowCss);
         });
     }
 
@@ -229,8 +235,10 @@
     // Helper function for replacing "{KEYWORD}" with
     // the respectful values of an object:
 
-    function templateReplace(template,data){
-        return template.replace(/{([^}]+)}/g,function(match,group){
-            return data[group.toLowerCase()];
+    function templateReplace(oContent,aData)
+    {
+        return oContent.replace(/{([^}]+)}/g,function(oMatch,oGroup)
+        {
+            return aData[oGroup.toLowerCase()];
         });
     }
