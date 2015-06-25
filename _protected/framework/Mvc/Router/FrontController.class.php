@@ -115,7 +115,7 @@ final class FrontController
             {
                 $this->bRouterRewriting = true;
 
-                $sPathModule = $oRoute->getAttribute('path') . PH7_DS;
+                $sPathModule = $oRoute->getAttribute('path') . PH7_SH;
 
                 // Get module
                 $this->oRegistry->module = $oRoute->getAttribute('module');
