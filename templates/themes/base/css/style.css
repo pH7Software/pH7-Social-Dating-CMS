@@ -8,10 +8,12 @@ pre{border: 1px solid #3366CC;background-color: #E5ECF9;padding: 0.5em;font-fami
 code{white-space: nowrap;}
 
 /** TITLE (h1, h2, h3, h4) **/
-h1{font-size:18px;}
-h2{font-size:16px;}
-h1:first-letter, h2:first-letter{text-transform:capitalize;}
-h1, h2, h3, h4{margin-top:2px;font-weight:bold}
+h1{font-size:18px}
+h2{font-size:16px}
+h3{font-size:15px}
+h4{font-size:14px}
+h1:first-letter, h2:first-letter{text-transform:capitalize}
+h1,h2,h3,h4{margin-top:2px;font-weight:bold}
 
 p{margin:0 0 0}
 img{border:0}

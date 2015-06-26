@@ -12,7 +12,7 @@
 
       {if $category->categoryId == $forum->categoryId}
 
-        <h3><a href="{{ $design->url('forum', 'forum', 'topic', "$forum->name,$forum->forumId") }}">{% escape($forum->name, true) %}</a></h3>
+        <h4><a href="{{ $design->url('forum', 'forum', 'topic', "$forum->name,$forum->forumId") }}">{% escape($forum->name, true) %}</a></h4>
         <p>{% escape($forum->description, true) %}</p>
 
         {if AdminCore::auth()}
