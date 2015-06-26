@@ -113,9 +113,9 @@ $LANG = array (
     'buy_copyright_license_title' => 'Buy a Copyright Removal License',
     'buy_copyright_license' => '<span class="gray">One-time Payment</span> <span class="right">Buy Now</span>',
     'buy_copyright_license_desc' => 'By buying a License, you won\'t have any Links and Copyright Notice on your website, get all Premium Features and you\'ll also be able to Update/Upgrade it.',
-    'buy_individual_ticket_support_title' => 'Buy a individual support service',
+    'buy_individual_ticket_support_title' => 'Buy an Individual Support Service',
     'buy_individual_ticket_support' => '<span class="gray">Full ticket support for one month</span> <span class="right">Buy Now</span>',
-    'buy_individual_ticket_support_desc' => 'By purchasing a individual ticket support, we\'ll help you whenever you have a problem with our software. We are at your disposal to solve any problem encounter with pH7CMS.',
+    'buy_individual_ticket_support_desc' => 'By purchasing an individual unlimited ticket support, we\'ll help you whenever you have a issue/problem with our software. We are at your disposal to solve any problem encounter with pH7CMS.',
     'looking_hosting' =>'Looking for a Web host compatible with pH7CMS? See <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">our List of Hosting</a>!',
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
     Please enable JavaScript via the options of your Web browser in order to use this website.',
