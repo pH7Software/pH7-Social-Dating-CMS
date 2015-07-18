@@ -21,9 +21,9 @@ class Http
     /**
      * The HTTP response codes and messages.
      *
-     * @staticvar array $_aStatusCodes
+     * @staticvar array $aStatusCodes
      */
-    private static $_aStatusCodes = [
+    protected static $aStatusCodes = [
         100 => '100 Continue',
         101 => '101 Switching Protocols',
         102 => '102 Processing',
@@ -96,7 +96,7 @@ class Http
     public static function getStatusCodes($iStatus)
     {
         $iStatus = (int) $iStatus;
-        return (!empty(static::$_aStatusCodes[$iStatus])) ? $iStatus : false;
+        return (!empty(static::$aStatusCodes[$iStatus])) ? $iStatus : false;
     }
 
     /**

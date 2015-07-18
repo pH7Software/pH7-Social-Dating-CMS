@@ -1,6 +1,6 @@
 <?php
 /**
- * @title            Api Class
+ * @title            Tool Class
  *
  * @author           Pierre-Henry SORIA <ph7software@gmail.com>
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
@@ -13,14 +13,10 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config, PH7\Framework\Mvc\Request\Http;
 
-class APi
+class Tool
 {
-
+	
     const SOFTWARE_API_URL = 'http://api.hizup.com/';
-
-    public function __construct()
-    {
-    }
 	
 	/**
 	 * Check if an external app can have access to the API.
@@ -32,7 +28,7 @@ class APi
 	public static function checkAccess(Config $oConfig, Http $oRequest)
 	{
 		if (strcmp($oRequest->post('private_api_key'), $oConfig->values['api']['private_key']) === 0)
-	    {
+		{
 			return in_array($oRequest->post('url'), $oConfig->values['api']['allow_domains']);
 		}
 		return false;

@@ -7,13 +7,13 @@
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Http / Rest
- * @version          1.0
+ * @version          1.1
  */
 
 namespace PH7\Framework\Http\Rest;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\File\Stream, PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Rest extends \PH7\Framework\Http\Http
 {
@@ -26,7 +26,7 @@ class Rest extends \PH7\Framework\Http\Http
 
 
     /**
-     * Sets the default values.
+     * Calls Rest::_inputs() method and sets default values.
      */
     public function __construct()
     {
@@ -35,7 +35,7 @@ class Rest extends \PH7\Framework\Http\Http
     }
 
     /**
-     * @param array $aData
+     * @param array $aData The data from a request
      * @param integer $iStatus Status Code. Default 200
      * @return void
      */
@@ -46,16 +46,26 @@ class Rest extends \PH7\Framework\Http\Http
         /**
          * @internal \PH7\Framework\Http\Http::getStatusCodes() returns FLASE when it doesn't find a GTTP status code.
          */
-        $this->_iCode = (false !== $this->getStatusCodes()) ? $iStatus : 500; // If it finds nothing, then we put the 500 HTTP Status Code.
+        $this->_iCode = (false !== static::getStatusCodes($iStatus)) ? $iStatus : 500; // If it finds nothing, then we put the 500 HTTP Status Code.
         $this->_output();
     }
+	
+	/**
+	 * Get the request data.
+	 *
+	 * @return array
+	 */
+	public function getRequest()
+	{
+		return $this->_aRequest;
+	}
 
     /**
      * @return void
      */
     private function _inputs()
     {
-        switch ($this->get_request_method())
+        switch ($this->getRequestMethod())
         {
             case HttpRequest::METHOD_POST:
                 $this->_aRequest = $this->_cleanInputs($_POST);
@@ -67,7 +77,7 @@ class Rest extends \PH7\Framework\Http\Http
             break;
 
             case HttpRequest::METHOD_PUT:
-                parse_str($this->getInput(), $this->_aRequest);
+                parse_str(Stream::getInput(), $this->_aRequest);
                 $this->_aRequest = $this->_cleanInputs($this->_aRequest);
             break;
 
@@ -108,10 +118,10 @@ class Rest extends \PH7\Framework\Http\Http
      */
     private function _output()
     {
-        $this->setHeadersByCode($this->_iCode);
-        $this->setContentType($this->_sContentType);
+        static::setHeadersByCode($this->_iCode);
+        static::setContentType($this->_sContentType);
         echo $this->_aData;
-        exit; // Stop Script
+        exit; // Stop the Script
     }
 
 }

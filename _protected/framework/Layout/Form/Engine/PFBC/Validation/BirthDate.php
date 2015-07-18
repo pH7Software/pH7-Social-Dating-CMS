@@ -14,7 +14,7 @@ class BirthDate extends \PFBC\Validation
         parent::__construct();
         $this->iMin = DbConfig::getSetting('minAgeRegistration');
         $this->iMax = DbConfig::getSetting('maxAgeRegistration');
-        $this->message = sprintf( t('You must be %s to %s years to register on the site.'), $this->iMin,$this->iMax );
+        $this->message = t('You must be %0% to %1% years to register on the site.', $this->iMin, $this->iMax );
     }
 
     public function isValid($sValue)

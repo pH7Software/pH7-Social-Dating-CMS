@@ -22,7 +22,7 @@ class Username extends \PFBC\Validation
         $this->sTable = $sTable;
         $this->iMin = DbConfig::getSetting('minUsernameLength');
         $this->iMax = DbConfig::getSetting('maxUsernameLength');
-        $this->message = t('Error: Your username has to contain from %0% to %1% characters, your username is not available or your username already used by other member.', $this->iMin, $this->iMax);
+        $this->message = t('Error: Your username has to contain from %0% to %1% characters, your username is not available or it is already used by other member.', $this->iMin, $this->iMax);
     }
 
     public function isValid($sValue)

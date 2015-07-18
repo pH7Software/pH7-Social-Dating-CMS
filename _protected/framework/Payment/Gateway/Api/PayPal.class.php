@@ -12,7 +12,7 @@
 namespace PH7\Framework\Payment\Gateway\Api;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Url\Url;
+use PH7\Framework\File\Stream, PH7\Framework\Url\Url;
 
 class Paypal extends Provider implements Api
 {
@@ -156,7 +156,7 @@ class Paypal extends Provider implements Api
      */
     protected function getPostDatas()
     {
-        $rRawPost = Framework\File\Stream::getInput();
+        $rRawPost = Stream::getInput();
         $aRawPost = explode('&', $rRawPost);
         $aPostData = array();
 
