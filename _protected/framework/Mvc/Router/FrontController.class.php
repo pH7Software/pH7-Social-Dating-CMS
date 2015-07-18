@@ -87,6 +87,11 @@ final class FrontController
                     $this->fileRouter();
                 break;
 
+                case 'api':
+                    // Loading the Api files
+                    $this->apiRouter();
+                break;
+				
                 case 'cron':
                     // Loading Cron Jobs files
                     $this->cronRouter();
@@ -473,7 +478,44 @@ final class FrontController
             }
         }
     }
+	
+    /**
+     * @access private
+     * @return void
+     */
+    private function fileRouter()
+    {
+        if (is_file(PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php'))
+            include_once PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php';
+        else
+            $this->notFound('Error while loading the file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'file' . PH7_DS . $this->oUri->fragment(2) . 'CoreFile.php does not exist', 1);
+    }
 
+    /**
+     * @access private
+     * @return void
+     */
+    private function apiRouter()
+    {
+		if ( \PH7\Framework\Api\Api::checkAccess($this->oConfig, $this->oHttpRequest) )
+	    {
+			if (is_file(PH7_PATH_SYS . 'core/assets/api/' . $this->oUri->fragment(2) . 'CoreApi.php'))
+			{
+				header('Content-Type: application/json');
+				include_once PH7_PATH_SYS . 'core/assets/api/' . $this->oUri->fragment(2) . 'CoreApi.php';
+			}
+			else
+			{
+				$this->notFound('Error while loading the API file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'api' . PH7_DS . $this->oUri->fragment(2) . 'CoreApi.php does not exist', 1);
+			}
+        }
+        else
+        {
+            \PH7\Framework\Http\Http::setHeadersByCode(403);
+            exit('Your API key and/or the URL of your external application don\'t match with the one in the pH7CMS\'s configuration system!');
+        }
+    }
+	
     /**
      * @access private
      * @return void
@@ -492,18 +534,6 @@ final class FrontController
             \PH7\Framework\Http\Http::setHeadersByCode(403);
             exit('Secret word is invalid for the cron hash!');
         }
-    }
-
-    /**
-     * @access private
-     * @return void
-     */
-    private function fileRouter()
-    {
-        if (is_file(PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php'))
-            include_once PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php';
-        else
-            $this->notFound('Error while loading the file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'file' . PH7_DS . $this->oUri->fragment(2) . 'CoreFile.php does not exist', 1);
     }
 
     /**

@@ -301,7 +301,7 @@ class Http
      *
      * @access private
      * @static
-     * @return boolean True if the headers were sent, false if not.
+     * @return boolean TRUE if the headers were sent, FALSE if not.
      */
     final private static function _isSent()
     {

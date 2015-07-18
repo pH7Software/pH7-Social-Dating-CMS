@@ -44,11 +44,9 @@ class Rest extends \PH7\Framework\Http\Http
         $this->_aData = $aData;
 
         /**
-         * @internal \PH7\Framework\Http\Http::getStatusCodes() returns FLASE when it does not find status code.
+         * @internal \PH7\Framework\Http\Http::getStatusCodes() returns FLASE when it doesn't find a GTTP status code.
          */
-        $sStatusCode = $this->getStatusCodes();
-
-        $this->_iCode = (false !== $sStatusCode) ? $iStatus : 500; // If it finds nothing, then we put the 500 HTTP Status Code.
+        $this->_iCode = (false !== $this->getStatusCodes()) ? $iStatus : 500; // If it finds nothing, then we put the 500 HTTP Status Code.
         $this->_output();
     }
 
