@@ -8,8 +8,8 @@
 $(".paging").show();
 $(".paging a:first").addClass("active");
 
-// Get size of images, how many there are, then determin the size of the image reel.
-var iImgWidth = $(".window").width();
+// Get size of images, how many there are, then determine the size of the image reel.
+var iImgWidth = $(".img_reel").width();
 var iImgSum = $(".img_reel img").size();
 var iImgReelWidth = iImgWidth * iImgSum;
 
