@@ -80,9 +80,9 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 **We want You to Make It the Best!**
 
 
-If you want to work on an Inovative and Exciting Project with a Beautiful PHP code using the latest PHP features while collaborating with nice people, ... So You Have to **Join Us**!
+If you want to work on an Innovative and Exciting Project with a Beautiful PHP code using the latest PHP features while collaborating with nice people, ... So You Have to **Join Us**!
 
-Send an email at: *ph7software {AT} gmail {D0T} com* and Start a wonderful Adventure!
+Send an email at: *hello {AT} ph7cms {D0T} com* and Start a Wonderful Adventure!
 
 
 Thank you so much in advance!
@@ -142,7 +142,7 @@ Just clone the repository, make your changes and then make a push ;-)
 
 ## Contact
 
-You can send email for any suggestions or comments at: *ph7software {AT} gmail {D0T} com*
+You can send email for any suggestions or comments at: *hello {AT} ph7cms {D0T} com*
 
 
 ## Help & Modifications
