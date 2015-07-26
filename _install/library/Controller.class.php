@@ -2,10 +2,10 @@
 /**
  * @title            Controller Core Class
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @link             http://software.hizup.com
+ * @link             http://ph7cms.com
  * @package          PH7 / Install / Library
  * @version          1.0
  */
@@ -25,7 +25,7 @@ abstract class Controller implements IController
     SOFTWARE_LICENSE_KEY_URL = 'http://ph7cms.com/web/buysinglelicense',
     SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/',
     SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements',
-    SOFTWARE_HOSTING_LIST_URL = 'http://ph7cms.com/doc/en/hosting',
+    SOFTWARE_HOSTING_LIST_URL = 'http://ph7cms.com/hosting',
     SOFTWARE_HOSTING_LIST_FR_URL = 'http://ph7cms.com/doc/fr/h%C3%A9bergement-web',
     SOFTWARE_EMAIL = 'ph7software@gmail.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
