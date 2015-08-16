@@ -34,7 +34,7 @@ class AdsCore extends Framework\Ads\Ads
      * Checks Ads Table.
      *
      * @return mixed (string or void if table is not valid) Returns the table if it is correct.
-     * @throws If the table is not valid, it throws an exception and displays a error message with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
+     * @throws If the table is not valid, it throws an exception and displays an error message with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
      */
     public static function checkTable($sTable)
     {
@@ -55,7 +55,7 @@ class AdsCore extends Framework\Ads\Ads
      *
      * @param string $sTable
      * @return mixed (string or void if table is not valid) Returns the table if it is correct.
-     * @throws If the table is not valid, it throws an exception and displays a error message with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
+     * @throws If the table is not valid, it throws an exception and displays an error message with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
      */
     public static function convertTableToId($sTable)
     {
