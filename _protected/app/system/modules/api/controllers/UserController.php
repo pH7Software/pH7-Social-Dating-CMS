@@ -33,6 +33,7 @@ class UserController extends MainController
 		{
 			$aReqs = $this->oRest->getRequest();
 
+			// Set the User Setting variables
 			$iMinUsr = DbConfig::getSetting('minUsernameLength');
 			$iMaxUsr = DbConfig::getSetting('maxUsernameLength');
 			$iMinPwd = DbConfig::getSetting('minPasswordLength');
@@ -88,7 +89,6 @@ class UserController extends MainController
 				$this->oRest->response($this->set($aData));
 			}
 		}
-		
 	}
 	
 	public function login()
@@ -119,7 +119,6 @@ class UserController extends MainController
 				$this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('The Password or Email was incorrected'))), 400);
 			}
 		}
-		
 	}
 	
 	public function getUser($iId)
