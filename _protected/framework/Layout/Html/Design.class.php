@@ -3,7 +3,7 @@
  * @title            Design Class
  * @desc             File containing HTML for display management.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  * @package          PH7 / Framework / Layout / Html
