@@ -186,7 +186,7 @@
 
     {* Cookie info bar *}
     {if $is_cookie_consent_bar}
-      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS . 'cookie_consent/', 'library.js,bar.js') }}
+      {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'cookie_consent/eu-states.js') }}
     {/if}
 
     {* JS code Injection *}
