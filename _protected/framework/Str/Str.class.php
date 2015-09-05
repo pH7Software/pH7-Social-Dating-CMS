@@ -176,7 +176,7 @@ defined('PH7') or exit('Restricted access');
          return $mPos;
      }
 
-     /*
+     /**
       * Creates a new string by trimming any leading or trailing whitespace from the current string.
       *
       * @param string $sText
@@ -255,8 +255,8 @@ defined('PH7') or exit('Restricted access');
          return $mRet;
      }
 
-     /*
-      * Escape function, uses the PHP native htmlspecialchars but improves.
+     /**
+      * Escape function, uses the PHP native htmlspecialchars but improved.
       *
       * @param mixed (array | string) $mText
       * @param boolean $bStrip Default: FALSE
