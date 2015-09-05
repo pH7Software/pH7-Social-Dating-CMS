@@ -311,11 +311,13 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
 
             // It is forbidden to violate the copyright!
             // Thought for those who have spent years developing a software quality professional!
-            if (!$this->isMarkCopyright()) $this->setErrMsg();
+            if (!$this->isMarkCopyright() && !$this->bLicense)
+                $this->setErrMsg();
         }
 
         if ($this->isXmlSitemapCompilePage())
-            if (!$this->isSmallMarkCopyright()) $this->setErrMsg();
+            if (!$this->isSmallMarkCopyright() && !$this->bLicense)
+                $this->setErrMsg();
 
         if ($this->bPhpCompressor)
             $this->sCode = (new \PH7\Framework\Compress\Compress)->parsePhp($this->sCode);
@@ -908,6 +910,7 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
         return
         (
             (false !== strpos($this->sCode, 'design->link()'))
+            || (false !== strpos($this->sCode, 'design->smartLink()'))
             ||
             (false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) && false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)'))
         );

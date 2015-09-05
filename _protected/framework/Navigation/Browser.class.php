@@ -24,14 +24,17 @@ class Browser
     /**
      * Detect the user's preferred language.
      *
-     * @return string First two letters of the languages ​​of the client browser.
+     * @param boollean $bFullLangCode If TRUE, returns the full lang code (e.g., en-us, en-gb, en-ie, en-au, fr-fr, fr-be, fr-ca, fr-ch, ...),
+     *     otherwise returns the two letters of the client browser's language (e.g., en, it, fr, ru, ...). Default: FALSE
+     * @return string Client's Language Code.
      */
-    public function getLanguage()
+    public function getLanguage($bFullLangCode = false)
     {
         $oStr = new Str;
         $sLang = explode(',', Server::getVar(Server::HTTP_ACCEPT_LANGUAGE))[0];
         // The rtrim function is slightly faster than chop function
-        return $oStr->escape($oStr->lower(substr(rtrim($sLang), 0, 2)));
+        $iFullLangCode = ($bFullLangCode ? 5 : 2);
+        return $oStr->escape($oStr->lower(substr(rtrim($sLang), 0, $iFullLangCode)));
         unset($oStr);
     }
 
