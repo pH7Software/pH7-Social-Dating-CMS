@@ -288,6 +288,40 @@ class Design
     {
         echo '<p><strong>', t('Powered By'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong></p>';
     }
+    
+    /**
+     * The below code MUST be present if you didn't pay a pH7CMS Pro License.
+     * 
+     * @return string Returns relevant link based on the client browser's language. 
+     */
+    final public function smartLink()
+    {
+		$sLangCode = (new \PH7\Framework\Navigation\Browser)->getLanguage(true); // Get Client's Language Code
+		
+		if ($sLangCode == 'en-ie') {
+			$iRand = 0;
+			$aData = [
+			    ['title' => 'Dating Site in Dublin', 'link' => 'http://dublin.meetlovelypeople.com']
+			];
+		} elseif (substr($sLangCode,0,2) == 'fr') {
+			$iRand = mt_rand(0,2);
+		    $aData = [
+		        ['title' => '1er Site de Rencontre Cool', 'link' => 'http://coolonweb.com'],
+		        ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
+		        ['title' => 'Site de Tchat 100% Gratuit', 'link' => 'http://01tchat.com']
+		    ];
+		} else { // Default links, set to English
+			$iRand = mt_rand(0,3);
+		    $aData = [
+		        ['title' => 'Friend New Fun Date', 'link' => 'http://sofun.co'],
+		        ['title' => 'Flirt Hot People', 'link' => 'http://flirtme.biz'],
+		        ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],
+		        ['title' => 'Learn Languages Online', 'link' => 'http://newayup.com']
+		    ];
+		}
+		
+		echo '<a href="', $aData[$iRand]['link'], '">', $aData[$iRand]['title'], '</a>';
+	}
 
     /**
      * @param string $sType (js or css).
@@ -594,7 +628,7 @@ class Design
      * Generate a Link tag.
      *
      * @param string $sLink The link.
-     * @param boolean $bNoFollow Set TRUE for the rel="nofollow" attribute otherwise FALSE. Default TRUE
+     * @param boolean $bNoFollow Set TRUE to set the link "nofollow", FALSE otherwise. Default TRUE
      * @return void The HTML link tag.
      */
     public function urlTag($sLink, $bNoFollow = true)
