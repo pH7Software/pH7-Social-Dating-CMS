@@ -34,6 +34,8 @@ function run() {
             rm -rf ./_protected/data/cache/pH7tpl_cache/*
             rm -rf ./_protected/data/cache/pH7_static/*
             rm -rf ./_protected/data/cache/pH7_cache/*
+            rm -rf ./_protected/data/backup/file/*
+            rm -rf ./_protected/data/backup/sql/*
             rm ./_protected/data/tmp/*.txt
 
             ## Config Files, etc.
