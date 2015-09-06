@@ -26,9 +26,13 @@ function html_body($sTitle, $sMsg)
  * Check Internet Connection.
  *
  * @param string $sCheckHost Default: www.google.com
+ * @param boolean $bDisable Disable the checking and force pH7CMS running without an Internet connection. Default: FALSE
  * @return boolean Returns TRUE if the Internet connection is enabled, FALSE otherwise.
  */
-function is_internet($sCheckHost = 'www.google.com')
+function is_internet($sCheckHost = 'www.google.com', $bDisable = !PH7_INTERNET_NEEDED)
 {
-    return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);
+	if ($bDisable) 
+	    return true;
+	
+	return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);
 }
