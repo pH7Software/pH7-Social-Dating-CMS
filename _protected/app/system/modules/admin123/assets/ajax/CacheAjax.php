@@ -38,7 +38,7 @@ class CacheAjax extends Framework\Core\Kernel
             break;
 
             case 'static':
-                $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Gzip::CACHE_DIR);
+                $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Gzip\Gzip::CACHE_DIR);
             break;
 
             default:
