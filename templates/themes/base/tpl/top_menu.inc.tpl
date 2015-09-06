@@ -197,7 +197,7 @@
                 </ul>
               </li>
 
-              <li><a href="{{ $design->url('user','main','logout') }}" title="{lang 'Logout'}">{lang 'Logout'}</a></li>
+              <li><a href="{{ $design->url('user','main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
             </ul>
           </li>
 
@@ -215,7 +215,7 @@
             <li><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My account'}">{lang 'Account'}</a></li>
             <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{lang 'Edit account'}">{lang 'Edit Account'}</a></li>
             <li><a href="{{ $design->url('affiliate','account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
-            <li><a href="{{ $design->url('affiliate','home','logout') }}" title="{lang 'Logout'}">{lang 'Logout'}</a></li>
+            <li><a href="{{ $design->url('affiliate','home','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
           </ul>
         </li>
 
@@ -266,15 +266,7 @@
           </ul>
         </li>
 
-        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'info','index') }}" title="{lang 'Information'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Info'} <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','stat') }}" title="{lang 'Site Statistics'}">{lang 'Site Stats'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','software') }}" title="{lang 'Software'}">{lang 'Software'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','language') }}" title="{lang 'PHP Info'}">{lang 'PHP'}</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Modules'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Mods'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}">{lang 'Modules Manager'}</a></li>
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Newsletters'}</a>
@@ -383,12 +375,20 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','index') }}" title="{lang 'Tools'}">{lang 'Tools'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','backup') }}" title="{lang 'Backup Management'}">{lang 'Backup Management'}</a></li>
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{lang 'Caches Controls'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Caches Management'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{lang 'Caches Management'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Caches Management'}</a>
               <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{lang 'Caches Controls'}">{lang 'Caches Controls'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cacheconfig') }}" title="{lang 'Cache Settings'}">{lang 'Cache Settings'}</a></li>
               </ul>
             </li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','freeSpace') }}" title="{lang 'Free Space Server'}">{lang 'Free Space Server'}</a></li>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'info','index') }}" title="{lang 'Information'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-info-circle"></i> {lang 'Info'}</a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','stat') }}" title="{lang 'Site Statistics'}">{lang 'Site Stats'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','software') }}" title="{lang 'Software'}">{lang 'Software'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'info','language') }}" title="{lang 'PHP Info'}">{lang 'PHP'}</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
 
@@ -396,20 +396,20 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{lang 'Edit your Account'}"><i class="fa fa-pencil fa-fw"></i> {lang 'Edit Account'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{lang 'Logout'}">{lang 'Logout'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
           </ul>
         </li>
 
         <li class="dropdown"><a href="{software_help_url}" title="{lang "Need some Helps? We're here for you!"}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Help'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{software_help_url}" title="{lang 'Individual Ticket Support'}">{lang 'Support'}</a></li>
-            <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}">{lang 'Documentation'}</a></li>
-            {* Coming soon *}
-            {*
+            <li><a href="{software_help_url}" title="{lang 'Individual Ticket Support'}"><i class="fa fa-life-ring"></i> {lang 'Support'}</a></li>
+            <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
+            <li><a href="http://ph7cms.com/how-to-report-bugs" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
+            {* Coming soon ...
             <li><a href="{software_faq_url}" title="{lang 'Frequently Asked Questions'}">{lang 'Faq'}</a></li>
             <li><a href="{software_forum_url}" title="{lang 'Support Forum'}">{lang 'Forum'}</a></li>
             *}
-            <li><a href="{software_license_url}" title="{lang 'Buy a License Key'}">{lang 'License'}</a></li>
+            <li><a href="{software_license_url}" title="{lang 'Buy a License Key'}"><i class="fa fa-key"></i> {lang 'You Need a License'}</a></li>
           </ul>
         </li>
 
