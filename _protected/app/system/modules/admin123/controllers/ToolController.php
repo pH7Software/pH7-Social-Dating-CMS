@@ -46,7 +46,7 @@ class ToolController extends Controller
             ['title' => t('Database and other data'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Cache\Cache::CACHE_DIR)],
             ['title' => t('Compile template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl::COMPILE_DIR)],
             ['title' => t('HTML Template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl::CACHE_DIR)],
-            ['title' => t('Static files'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Gzip::CACHE_DIR)]
+            ['title' => t('Static files'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Gzip\Gzip::CACHE_DIR)]
         ];
 
         $this->output();
