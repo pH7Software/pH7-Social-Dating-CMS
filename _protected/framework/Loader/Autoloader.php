@@ -50,7 +50,7 @@ final class Autoloader
         spl_autoload_register(array(__CLASS__, '_loadClass'));
 
         $this->_loadFile('Core/License.class.php');
-        $this->_loadFile('Core/Kernel.class.php');    
+        $this->_loadFile('Core/Kernel.class.php');
         // Include Composer libraries (GeoIp2, ...)
         require_once PH7_PATH_PROTECTED . 'vendor/autoload.php';
     }

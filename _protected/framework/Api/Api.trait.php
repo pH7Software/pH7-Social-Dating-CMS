@@ -22,11 +22,11 @@ trait Api
      * Set the Json Output data.
      *
      * @return string
-	 */
+     */
     public function set($mData)
     {
-    	if (is_array($mData))
-			return json_encode($mData);
-	}
-	
+        if (is_array($mData))
+            return json_encode($mData);
+    }
+
 }
