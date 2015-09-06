@@ -1,0 +1,26 @@
+{
+    "name": "ph7cms/ph7cms",
+    "description": "Professional Social/Dating Site Builder",
+    "keywords": ["Web business builder","CMS","dating","social","social network","social networking","community","portal","user","member","member area","payment","business"],
+    "type": "project",
+    "homepage": "http://ph7cms.com",
+    "version" : "1.2.1",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Pierre-Henry Soria",
+            "email": "phy@hizup.uk",
+            "homepage": "http://about.ph7.me",
+            "role": "Senior Software Developer"
+        }
+    ],
+    "config": {
+        "vendor-dir": "_protected/vendor",
+        "bin-dir": "_protected/vendor/bin",
+        "cache-dir": "_protected/vendor/cache"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "geoip2/geoip2": "~2.0"
+    }
+}
