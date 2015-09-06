@@ -13,6 +13,8 @@ _protected/framework/Core/License_tmp.class.php
 _protected/data/tmp/*
 _protected/data/backup/*
 _protected/data/cache/*
+composer.lock
+composer.phar
 *.log
 *.tmp
 
