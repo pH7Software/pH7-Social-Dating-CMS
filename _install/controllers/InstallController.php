@@ -154,7 +154,7 @@ class InstallController extends Controller
                             $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['charset'], $sConfigContent);
                             $sConfigContent = str_replace('%db_port%', $_SESSION['db']['port'], $sConfigContent);
 
-							$sConfigContent = str_replace('%private_key%', generate_hash(40), $sConfigContent);
+                            $sConfigContent = str_replace('%private_key%', generate_hash(40), $sConfigContent);
                             $sConfigContent = str_replace('%rand_id%', generate_hash(5), $sConfigContent);
 
                             if (!@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $sConfigContent))

@@ -34,7 +34,7 @@ class Backup
      */
     public function __construct($sPathName = null)
     {
-		// Clean the path name to avoid bug
+        // Clean the path name to avoid bug
         $this->_sPathName = str_replace(' ', '_', $sPathName);
     }
 

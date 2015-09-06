@@ -86,7 +86,7 @@ final class FrontController
                     // Loading files
                     $this->fileRouter();
                 break;
-				
+
                 case 'cron':
                     // Loading Cron Jobs files
                     $this->cronRouter();
@@ -473,7 +473,7 @@ final class FrontController
             }
         }
     }
-	
+
     /**
      * @access private
      * @return void
@@ -485,7 +485,7 @@ final class FrontController
         else
             $this->notFound('Error while loading the file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'file' . PH7_DS . $this->oUri->fragment(2) . 'CoreFile.php does not exist', 1);
     }
-	
+
     /**
      * @access private
      * @return void

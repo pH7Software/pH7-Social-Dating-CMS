@@ -8,7 +8,7 @@
  * @copyright      (c) 2014-2015, HiZup, Ltd. All Rights Reserved.
  * @copyright      (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license        See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @link           http://hizup.uk                 
+ * @link           http://hizup.uk
  * @link           http://ph7cms.com
  * @package        PH7 / ROOT / Core
  * @version        1.0

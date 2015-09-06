@@ -49,16 +49,16 @@ class Rest extends \PH7\Framework\Http\Http
         $this->_iCode = (false !== static::getStatusCodes($iStatus)) ? $iStatus : 500; // If it finds nothing, then we put the 500 HTTP Status Code.
         $this->_output();
     }
-	
-	/**
-	 * Get the request data.
-	 *
-	 * @return array
-	 */
-	public function getRequest()
-	{
-		return $this->_aRequest;
-	}
+
+    /**
+     * Get the request data.
+     *
+     * @return array
+     */
+    public function getRequest()
+    {
+        return $this->_aRequest;
+    }
 
     /**
      * @return void

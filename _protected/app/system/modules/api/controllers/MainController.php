@@ -11,27 +11,27 @@ use PH7\Framework\Http\Rest\Rest;
 
 class MainController extends Controller
 {
-	
-	use Framework\Api\Api; // Import the Api Trait
-		
-	protected $oRest;
-	
-	public function __construct()
+
+    use Framework\Api\Api; // Import the Api Trait
+
+    protected $oRest;
+
+    public function __construct()
     {
-		parent::__construct();
-		
-		$this->oRest = new Rest;
-	}
-	
-	/**
-	 * Test if the API works well.
-	 */
-	public function test()
-	{
-		if ($this->oRest->getRequestMethod() != 'POST')
-			$this->oRest->response('', 406);	
-		else
-			$this->oRest->response($this->set(array('return' => 'It Works!')));
-	}
+        parent::__construct();
+
+        $this->oRest = new Rest;
+    }
+
+    /**
+     * Test if the API works well.
+     */
+    public function test()
+    {
+        if ($this->oRest->getRequestMethod() != 'POST')
+            $this->oRest->response('', 406);
+        else
+            $this->oRest->response($this->set(array('return' => 'It Works!')));
+    }
 
 }
