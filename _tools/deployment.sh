@@ -42,6 +42,8 @@ function run() {
             rm ./.gitattributes
             rm ./.scrutinizer.yml
             rm ./.travis.yml
+            rm ./composer.lock
+            rm ./composer.phar
             rm ./_install/_license-key.txt
             rm ./_protected/app/configs/config.ini
 
