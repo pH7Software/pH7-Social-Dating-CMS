@@ -1,0 +1,150 @@
+[
+    {
+        "name": "maxmind/web-service-common",
+        "version": "v0.0.4",
+        "version_normalized": "0.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/maxmind/web-service-common-php.git",
+            "reference": "f26fce5281290973beeeca3e33847887177dd138"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/maxmind/web-service-common-php/zipball/f26fce5281290973beeeca3e33847887177dd138",
+            "reference": "f26fce5281290973beeeca3e33847887177dd138",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "php": ">=5.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.6.*"
+        },
+        "time": "2015-07-21 20:07:31",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "MaxMind\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Gregory Oschwald",
+                "email": "goschwald@maxmind.com"
+            }
+        ],
+        "description": "Internal MaxMind Web Service API",
+        "homepage": "https://github.com/maxmind/mm-web-service-api-php"
+    },
+    {
+        "name": "maxmind-db/reader",
+        "version": "v1.0.3",
+        "version_normalized": "1.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
+            "reference": "07f211ab596ba60f9663d9984b888f76ee1beac9"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/07f211ab596ba60f9663d9984b888f76ee1beac9",
+            "reference": "07f211ab596ba60f9663d9984b888f76ee1beac9",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.2.*",
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "time": "2015-03-13 22:35:13",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "MaxMind": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Gregory J. Oschwald",
+                "email": "goschwald@maxmind.com",
+                "homepage": "http://www.maxmind.com/"
+            }
+        ],
+        "description": "MaxMind DB Reader API",
+        "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
+        "keywords": [
+            "database",
+            "geoip",
+            "geoip2",
+            "geolocation",
+            "maxmind"
+        ]
+    },
+    {
+        "name": "geoip2/geoip2",
+        "version": "v2.3.1",
+        "version_normalized": "2.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/maxmind/GeoIP2-php.git",
+            "reference": "8bd919d9d829a1f25e01895cdead97c5247aacb7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/8bd919d9d829a1f25e01895cdead97c5247aacb7",
+            "reference": "8bd919d9d829a1f25e01895cdead97c5247aacb7",
+            "shasum": ""
+        },
+        "require": {
+            "maxmind-db/reader": "~1.0",
+            "maxmind/web-service-common": "~0.0.3",
+            "php": ">=5.3.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.2.*"
+        },
+        "time": "2015-06-30 19:03:29",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "GeoIp2\\": "src",
+                "": "compat/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Gregory J. Oschwald",
+                "email": "goschwald@maxmind.com",
+                "homepage": "http://www.maxmind.com/"
+            }
+        ],
+        "description": "MaxMind GeoIP2 PHP API",
+        "homepage": "https://github.com/maxmind/GeoIP2-php",
+        "keywords": [
+            "IP",
+            "geoip",
+            "geoip2",
+            "geolocation",
+            "maxmind"
+        ]
+    }
+]
