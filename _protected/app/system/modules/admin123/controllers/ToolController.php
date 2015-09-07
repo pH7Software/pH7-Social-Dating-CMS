@@ -104,6 +104,9 @@ class ToolController extends Controller
             }
             else
             {
+                // Clean the site name to avoid bug with the backup path
+                $sSiteName = str_replace(array(' ', '/', '\\'), '_', $this->registry->site_name);
+
                 switch ($this->httpRequest->post('backup_type'))
                 {
                     case 'server':
@@ -119,11 +122,11 @@ class ToolController extends Controller
                     break;
 
                     case 'client':
-                        (new D\Util\Backup($this->registry->site_name . '_' . (new Framework\Date\CDateTime)->get()->date() . '.sql'))->back()->download();
+                        (new D\Util\Backup($sSiteName . '_' . (new Framework\Date\CDateTime)->get()->date() . '.sql'))->back()->download();
                     break;
 
                     case 'client_archive':
-                        (new D\Util\Backup($this->registry->site_name . '_' . (new Framework\Date\CDateTime)->get()->date() . '.sql.gz'))->back()->downloadArchive();
+                        (new D\Util\Backup($sSiteName . '_' . (new Framework\Date\CDateTime)->get()->date() . '.sql.gz'))->back()->downloadArchive();
                     break;
 
                     case 'show':
