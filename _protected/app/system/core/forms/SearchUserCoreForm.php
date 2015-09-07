@@ -45,7 +45,7 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => array('male','female','couple'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Age);
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id' => 'str_country', 'value' => Geo::getCountryCode())));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id' => 'str_city')));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city', 'value'=> Geo::getCity())));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'latest', array('1' => '<span class="bold">' . t('Latest members') . '</span>')));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', array('1' => '<span class="bold">' . t('Only with Avatar') . '</span>')));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', array('1' => '<span class="bold green2">' . t('Only Online') . '</span>')));
@@ -64,8 +64,8 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => static::getGenderValues()['match_sex'], 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Age);
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id' => 'str_country', 'value' => Geo::getCountryCode())));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id' => 'str_city')));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('State or Province:'), 'state', array('id' => 'str_state')));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city', 'value'=> Geo::getCity())));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('State or Province:'), 'state', array('id' => 'str_state', 'value'=> Geo::getState())));
         $oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), 'zip_code', array('id' => 'str_zip_code')));
         $oForm->addElement(new \PFBC\Element\Email(t('Email Address:'), 'mail'));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', array('1' => '<span class="bold">' . t('Only with Avatar') . '</span>')));
