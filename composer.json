@@ -17,7 +17,8 @@
     "config": {
         "vendor-dir": "_protected/vendor",
         "bin-dir": "_protected/vendor/bin",
-        "cache-dir": "_protected/vendor/cache"
+        "cache-dir": "_protected/vendor/cache",
+        "autoloader-suffix": "PH7"
     },
     "require": {
         "php": ">=5.4.0",
