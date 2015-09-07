@@ -93,6 +93,17 @@ class Geo
     }
 
     /**
+     * Get State (region) Name.
+     *
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
+     * @return string State Name.
+     */
+    public static function getState($sIpAddress = null)
+    {
+        return ''; // Currently, with GeoIp2 under the free version, it is impossible to get the region names.
+    }
+
+    /**
      * Get Geo Ip Data Information.
      *
      * @access protected
