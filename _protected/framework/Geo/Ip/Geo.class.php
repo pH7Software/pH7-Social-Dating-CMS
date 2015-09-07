@@ -12,12 +12,10 @@
 namespace PH7\Framework\Geo\Ip;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Ip\Ip;
+use GeoIp2\Database\Reader, PH7\Framework\Ip\Ip;
 
 class Geo
 {
-
-    const GET_REGION = 'region';
 
     /**
      * Static Class.
@@ -27,14 +25,14 @@ class Geo
     private function __construct() {}
 
     /**
-     * Get Country Code (e.g., en, it, es, ru, fr, ...).
+     * Get Country ISO Code (e.g., en, it, es, ru, fr, ...).
      *
      * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
      * @return string Country Code.
      */
     public static function getCountryCode($sIpAddress = null)
     {
-        return @static::get($sIpAddress)->country_code;
+        return static::get($sIpAddress)->country->isoCode;
     }
 
     /**
@@ -45,7 +43,7 @@ class Geo
      */
     public static function getZipCode($sIpAddress = null)
     {
-        return @static::get($sIpAddress)->postal_code;
+        return static::get($sIpAddress)->postal->code;
     }
 
     /**
@@ -56,7 +54,7 @@ class Geo
      */
     public static function getLatitude($sIpAddress = null)
     {
-        return @static::get($sIpAddress)->latitude;
+        return static::get($sIpAddress)->location->latitude;
     }
 
     /**
@@ -67,7 +65,7 @@ class Geo
      */
     public static function getLongitude($sIpAddress = null)
     {
-        return @static::get($sIpAddress)->longitude;
+        return static::get($sIpAddress)->location->longitude;
     }
 
     /**
@@ -79,7 +77,7 @@ class Geo
     public static function getCountry($sIpAddress = null)
     {
         // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
-        return utf8_encode(@static::get($sIpAddress)->country_name);
+        return utf8_encode(static::get($sIpAddress)->country->name);
     }
 
     /**
@@ -91,42 +89,26 @@ class Geo
     public static function getCity($sIpAddress = null)
     {
         // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
-        return utf8_encode(@static::get($sIpAddress)->city);
-    }
-
-    /**
-     * Get State (region) Name.
-     *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
-     * @return string State Name.
-     */
-    public static function getState($sIpAddress = null)
-    {
-        // Encode to UTF8 for Latin and other characters of the GeoIP database are displayed correctly.
-        return utf8_encode(@static::get($sIpAddress, self::GET_REGION));
+        return utf8_encode(static::get($sIpAddress)->city->name);
     }
 
     /**
      * Get Geo Ip Data Information.
      *
      * @access protected
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
-     * @param string $sOption Default NULL
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default: NULL
      * @return object
      */
-    protected static function get($sIpAddress = null, $sOption = null)
+    protected static function get($sIpAddress = null)
     {
-        require_once 'geoip.inc.php';
-        require_once 'geoipcity.inc.php';
-        require_once 'geoipregionvars.php';
-        $oGeoIp = geoip_open(__DIR__ . '/GeoLiteCity.dat', GEOIP_STANDARD);
+        $sIpAddr = (!empty($sIpAddress) ? $sIpAddress : Ip::get());
+        if ($sIpAddr == '127.0.0.1') {
+            // Set a valid IP address, if it's the invalid local one
+            $sIpAddr = '128.101.101.101';
+        }
 
-        $oRecord = geoip_record_by_addr($oGeoIp, (!empty($sIpAddress) ? $sIpAddress : Ip::get()));
-
-        if ($sOption == static::GET_REGION)
-            return $GEOIP_REGION_NAME[$oRecord->country_code][$oRecord->region];
-        else
-            return $oRecord;
+        $oReader = new Reader(__DIR__ . '/GeoLite2-City.mmdb');
+        return @$oReader->city( $sIpAddr );
     }
 
     /**
