@@ -113,7 +113,7 @@ class Geo
     protected static function get($sIpAddress = null)
     {
         $sIpAddr = (!empty($sIpAddress) ? $sIpAddress : Ip::get());
-        if ($sIpAddr == '127.0.0.1') {
+        if ($sIpAddr == '127.0.0.1' || $sIpAddr == '0.0.0.0') {
             // Set a valid IP address, if it's the invalid local one
             $sIpAddr = '128.101.101.101';
         }

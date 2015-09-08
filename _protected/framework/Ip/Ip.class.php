@@ -22,7 +22,7 @@ class Ip
      * Get IP address.
      *
      * @static
-     * @return string IP address.
+     * @return string IP address. If the IP format is invalid, returns '0.0.0.0'
      */
     public static function get()
     {
