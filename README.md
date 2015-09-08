@@ -42,11 +42,13 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Activity Streams
 * Member approval system
 * Advanced Admin Panel
+* Full Membership System
+* Payment Gateways Integration, PayPal, Stripe, 2CheckOut
 * Statistics & Analytics System
 * Notifications system
 * Registration delay
 * File Management
-* User's Fields Management
+* Dynamic Field Forms Management
 * Privacy Settings
 * Banner/Advertisement Management
 * Support for Multiple Languages, Internationalization and Localization (I18N)
@@ -58,8 +60,10 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * SEO Friendly (Title, Content, Code, ...), Sitemap module, ...
 * Multilingual URLs
 * RSS Feed
+* Full API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
-* Multi Themes and many customizable
+* Full Responsive Templates
+* Multiple-Themes and many customization possible
 * Message templates
 * Multi Themes and many personalizable
 * Includes top HTML5 features
