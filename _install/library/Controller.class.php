@@ -21,7 +21,7 @@ abstract class Controller implements IController
     SOFTWARE_PREFIX_COOKIE_NAME = 'pH7',
     SOFTWARE_WEBSITE = 'http://ph7cms.com',
     SOFTWARE_LICENSE_URL = 'http://ph7cms.com/legal/license',
-    SOFTWARE_HELP_URL = 'https://hizup.net/clients/support', // Help Desk URL
+    SOFTWARE_HELP_URL = 'http://clients.hizup.com/support', // Help Desk URL
     SOFTWARE_LICENSE_KEY_URL = 'http://ph7cms.com/web/buysinglelicense',
     SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/',
     SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements',

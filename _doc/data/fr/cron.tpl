@@ -16,5 +16,5 @@ Toutes les tâches cron se trouvent dans le répertoire suivant : <pre>"/CHEMIN-
 
 <strong>Attention, vous ne devez pas mettre la fin du fichier : "Cron.php" dans l'exécuteur des tâches cron.</strong></p>
 
-<p>Si vous avez des difficultés avec la configuration des Crons Jobs, veuillez simplement <a href="http://hizup.net/clients/support">acheter un ticket</a> sur <a href="http://hizup.net" target="_blank">notre site</a> (dans la section soutien), et nous allons le configurer correctement pour vous.<br />
+<p>Si vous avez des difficultés avec la configuration des Crons Jobs, veuillez simplement <a href="http://clients.hizup.com/support">acheter un ticket</a> et nous allons le configurer correctement pour vous.<br />
 <em>Un soutien professionnel est la meilleure solution pour votre site internet !</em></p>

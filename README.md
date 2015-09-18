@@ -151,7 +151,7 @@ You can send email for any suggestions or comments at: *hello {AT} ph7cms {D0T} 
 
 ## Help & Modifications
 
-If you want, we also offer a *Premium Commercial* support at *[HiZup Support Department](https://hizup.net/clients/support)*
+If you want, we also offer a *Premium Commercial* support at *[HiZup Support Department](http://clients.hizup.com/support)*
 
 
 ## License
