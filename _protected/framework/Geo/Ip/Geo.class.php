@@ -2,11 +2,11 @@
 /**
  * @title            Ip localization Class
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Geo / Ip
- * @version          1.0
+ * @version          1.1
  */
 
 namespace PH7\Framework\Geo\Ip;
@@ -113,7 +113,7 @@ class Geo
     protected static function get($sIpAddress = null)
     {
         $sIpAddr = (!empty($sIpAddress) ? $sIpAddress : Ip::get());
-        if ($sIpAddr == '127.0.0.1' || $sIpAddr == '0.0.0.0') {
+        if ($sIpAddr == '127.0.0.1') {
             // Set a valid IP address, if it's the invalid local one
             $sIpAddr = '128.101.101.101';
         }
