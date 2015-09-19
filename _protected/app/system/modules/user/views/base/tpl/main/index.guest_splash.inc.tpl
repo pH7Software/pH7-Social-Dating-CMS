@@ -10,7 +10,7 @@
 </div>
 
 <div class="right animated fadeInRight">
-  <h1 class="pink2 italic underline">{lang 'Welcome to %site_name%!'}</h1>
+  <h1 class="pink2 italic underline">{lang 'Be on the best place to meet people!'}</h1>
   {{ JoinForm::step1() }}
 </div>
 
