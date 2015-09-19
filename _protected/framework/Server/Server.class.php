@@ -3,7 +3,7 @@
  * @title          Server Class
  * @desc           This class is used to manage settings of the web server and can simulate a server secure and reliable.
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Server
@@ -36,6 +36,7 @@ final class Server
     REQUEST_METHOD = 'REQUEST_METHOD',
     REQUEST_URI = 'REQUEST_URI',
     QUERY_STRING = 'QUERY_STRING',
+    HTTP_ACCEPT = 'HTTP_ACCEPT',
     HTTP_ACCEPT_LANGUAGE = 'HTTP_ACCEPT_LANGUAGE',
     HTTP_ACCEPT_ENCODING = 'HTTP_ACCEPT_ENCODING',
     HTTP_X_WAP_PROFILE = 'HTTP_X_WAP_PROFILE',
