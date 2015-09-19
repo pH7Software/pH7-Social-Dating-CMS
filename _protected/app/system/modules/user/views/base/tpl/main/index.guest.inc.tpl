@@ -1,8 +1,8 @@
-<div class="right">
-  <h1 class="pink2 italic underline">{lang 'Welcome to %site_name%!'}</h1>
+<div class="right animated fadeInRight">
+    <h1 class="pink2 italic underline">{lang 'Welcome to %site_name%!'}</h1>
+    {{ JoinForm::step1(290) }}
 
-  {{ JoinForm::step1(290) }}
-  <div class="counter center">{{ $userDesign->counterUsers() }}</div>
+    <div class="counter center">{{ $userDesign->counterUsers() }}</div>
 </div>
 
 <div class="left">
