@@ -60,9 +60,12 @@ class SignupController extends Controller
             $this->view->userDesignModel = new UserDesignCoreModel();
         }
 
-        $this->view->page_title = ($bUserRef) ? t('Free Sign Up to meet %0% on %site_name%, The social dating site!',  $sFirstName) : t('Free Sign Up for Online Social Dating!');
-        $this->view->h1_title = ($bUserRef) ? t('Free Sign up for Meet <span class="pink2">%0%</span> (<span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername)) : t('Join Now on %site_name%!');
-        $this->view->meta_description = t('Sign Up today for meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blogs, rating, hot or not, video chat rooms, ...');
+        $this->view->page_title = ($bUserRef) ? t('Register for free to meet %0% on %site_name%. The Real Social Dating app!',  $sFirstName) : t('Free Sign Up to Meet Lovely People!');
+        $sH1Txt = ($bUserRef)
+            ? t('Register for Free to Meet <span class="pink2">%0%</span> (<span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername))
+            : t('Sign Up on %site_name%!');
+        $this->view->h1_title = '<span class="animated fadeInDown">' . $sH1Txt . '</span>';
+        $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blogs, rating, hot or not, video chat rooms, ...');
 
         $this->output();
     }
