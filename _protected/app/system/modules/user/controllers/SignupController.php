@@ -64,7 +64,7 @@ class SignupController extends Controller
         $sH1Txt = ($bUserRef)
             ? t('Register for Free to Meet <span class="pink2">%0%</span> (<span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername))
             : t('Sign Up on %site_name%!');
-        $this->view->h1_title = '<span class="animated fadeInDown">' . $sH1Txt . '</span>';
+        $this->view->h1_title = '<div class="animated fadeInDown">' . $sH1Txt . '</div>';
         $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blogs, rating, hot or not, video chat rooms, ...');
 
         $this->output();
