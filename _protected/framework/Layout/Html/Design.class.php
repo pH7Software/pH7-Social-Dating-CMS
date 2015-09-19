@@ -308,11 +308,13 @@ class Design
             $aData = [
                 ['title' => '1er Site de Rencontre Cool', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
-                ['title' => 'Site de Tchat 100% Gratuit', 'link' => 'http://01tchat.com']
+                ['title' => 'Site de Tchat 100% Gratuit', 'link' => 'http://01tchat.com'],
+                ['title' => 'Rencontre &amp; Flirt', 'link' => 'http://flirt-rencontre.net']
             ];
         } else { // Default links, set to English
             $iRand = mt_rand(0,3);
             $aData = [
+                ['title' => 'Date Lovely People', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Friend New Fun Date', 'link' => 'http://sofun.co'],
                 ['title' => 'Flirt Hot People', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],
@@ -595,14 +597,32 @@ class Design
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'Like.js');
     }
 
-    public function likeApi()
+    /**
+     * Add Normal size Media Social Widgets.
+     *
+     * @param boolean $bDisable Disable or Enable it.
+     * AddThis JS file makes the site very slow (and nowadays social widgets like those are a bit old fashioned). So it's by default deactivated and the JS file in the database as well -> 'pH7_StaticFiles' table.
+     *
+     * @return void HTML output.
+     */
+    public function likeApi($bDisable = true)
     {
-        echo  '<br /><br /><div class="center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_counter addthis_pill_style"></a></div>';
+        if ($bDisable === false)
+            echo  '<br /><br /><div class="center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_counter addthis_pill_style"></a></div>';
     }
 
-    public function littleLikeApi()
+    /**
+     * Add Small size Media Social Widgets.
+     *
+     * @param boolean $bDisable Disable or Enable it.
+     * AddThis JS file makes the site very slow (and nowadays social widgets like those are a bit old fashioned). So it's by default deactivated and the JS file in the database as well -> 'pH7_StaticFiles' table.
+     *
+     * @return void HTML output.
+     */
+    public function littleLikeApi($bDisable = true)
     {
-        echo  '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
+        if ($bDisable === false)
+            echo  '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
     }
 
     /**

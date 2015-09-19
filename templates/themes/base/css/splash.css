@@ -1,7 +1,7 @@
 /* 1210px or more */
 @media (min-width: 1210px)
 {
-  .login_block{margin:-20px 0 0 50%}
+  .login_block{margin:-10px 0 0 48%}
 }
 /* 1209px or less */
 @media (max-width: 1209px)
