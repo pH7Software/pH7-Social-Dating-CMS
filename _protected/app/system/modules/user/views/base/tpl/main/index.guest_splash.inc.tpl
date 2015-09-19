@@ -1,6 +1,7 @@
-{if $is_bg_video}
+{* Enable the Splash Background Video if it is enabled and if the visitor is not from a mobile device *}
+{if $is_bg_video && !$browser->isMobile()}
     <video autoplay loop poster="{url_tpl_img}splash_vid.jpg" id="bgvid">
-      <source src="{url_tpl}file/splash.webm" type="video/webm" />
+        <source src="{url_tpl}file/splash.webm" type="video/webm" />
     </video>
 {/if}
 
@@ -8,12 +9,12 @@
   {{ LoginSplashForm::display(290) }}
 </div>
 
-<div class="right">
+<div class="right animated fadeInRight">
   <h1 class="pink2 italic underline">{lang 'Welcome to %site_name%!'}</h1>
   {{ JoinForm::step1() }}
 </div>
 
-<div class="left">
+<div class="left animated fadeInLeft">
   <h1 class="pink2 italic underline s_bMarg">{slogan}</h1>
   <div class="center profiles_window thumb">
     {{ $userDesignModel->profiles() }}
