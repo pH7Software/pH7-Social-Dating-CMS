@@ -5,7 +5,7 @@
     </video>
 {/if}
 
-<div class="login_block">
+<div class="login_block animated fadeInDown">
   {{ LoginSplashForm::display(290) }}
 </div>
 
