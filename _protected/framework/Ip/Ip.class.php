@@ -36,7 +36,7 @@ class Ip
         }
         unset($aVars);
 
-        if (static::isPrivateIp($sIp)) {
+        if (static::isPrivate($sIp)) {
             $sIp = ($sIp = @file_get_contents('http://addons.hizup.com/ip/')) ? trim($sIp) : '127.0.0.1';
         }
         return preg_match('/^[a-z0-9:.]{7,}$/', $sIp) ? $sIp : '127.0.0.1';
@@ -61,7 +61,7 @@ class Ip
      * @param string $sIp The IP address.
      * @return boolean Returns TRUE is it's a private IP, FALSE otherwite.
      */
-    public static function isPrivateIp($sIp)
+    public static function isPrivate($sIp)
     {
         return (filter_var($sIp, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_NO_PRIV_RANGE |  FILTER_FLAG_NO_RES_RANGE)) ? false : true;
     }
