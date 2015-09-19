@@ -361,7 +361,7 @@ CREATE TABLE IF NOT EXISTS pH7_AnalyticsApi (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_AnalyticsApi (analyticsId, name, code, active) VALUES
-(1, 'Google Analytics', '<script>\r\nvar _gaq = _gaq || [];\r\n  _gaq.push([''_setAccount'', ''YOUR_ID_API'']);\r\n  _gaq.push([''_trackPageview'']);\r\n  (function() {\r\n    var ga = document.createElement(''script''); ga.type = ''text/javascript''; ga.async = true;\r\n    ga.src = (''https:'' == document.location.protocol ? ''https://ssl'' : ''http://www'') + ''.google-analytics.com/ga.js'';\r\n    var s = document.getElementsByTagName(''script'')[0]; s.parentNode.insertBefore(ga, s);\r\n  })();</script>', '1');
+(1, 'Analytics Code', '', '1');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Blogs (
@@ -1083,6 +1083,8 @@ CREATE TABLE IF NOT EXISTS pH7_StaticFiles (
   PRIMARY KEY (staticId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
+INSERT INTO pH7_StaticFiles VALUES (1, '//s7.addthis.com/js/250/addthis_widget.js', 'js', '0');
+
 
 CREATE TABLE IF NOT EXISTS pH7_License (
   licenseId tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
@@ -1097,5 +1099,3 @@ CREATE TABLE IF NOT EXISTS pH7_CustomCode (
   code text,
   codeType enum('css', 'js') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
-
-INSERT INTO pH7_CustomCode VALUES ('/* Your custom CSS code here */', 'css'), ('/* Your custom JS code here */\r\n\r\n// Don''t remove the code below. Inclusion of the JS file for Social Bookmark.\r\ndocument.write(''<script src="//s7.addthis.com/js/250/addthis_widget.js"></script>'');', 'js');

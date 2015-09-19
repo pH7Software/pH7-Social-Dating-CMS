@@ -132,7 +132,7 @@ class Design extends \PH7\Framework\Layout\Html\Design
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $sData = $oRow->code;
+            $sData = (!empty($oRow->code)) ? $oRow->code : null;
             unset($oRow);
             $this->_oCache->put($sData);
         }
@@ -141,10 +141,10 @@ class Design extends \PH7\Framework\Layout\Html\Design
     }
 
     /**
-     * Get CSS/JS files in their HTML tags.
+     * Get CSS/JS files.
      *
      * @param string $sType  Choose between 'css' and 'js'.
-     * @param boolean $bOnlyActive Default TRUE
+     * @param boolean $bOnlyActive If TRUE, it will get only the files activated. Default TRUE
      * @return void HTML output.
      */
     public function files($sType, $bOnlyActive = true)
@@ -166,15 +166,11 @@ class Design extends \PH7\Framework\Layout\Html\Design
         {
             while ($oData)
             {
-                $sFullPath = PH7_RELATIVE . 'templates/' . (new SysVar)->parse($oData->file);
-
-                if ($sType == 'js')
-                    $this->externalJsFile($sFullPath);
-                else
-                    $this->externalCssFile($sFullPath);
+                $sFullPath = (new SysVar)->parse($oData->file);
+                $sMethodName = 'external' . ($sType == 'js' ? 'Js' : 'Css') . 'File';
+                $this->$sMethodName($sFullPath);
             }
         }
-
         unset($oData);
     }
 

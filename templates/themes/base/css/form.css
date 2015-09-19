@@ -15,6 +15,7 @@ border:hover, border:active{border-color:2px solid #000}
 textarea{white-space:pre-line !important}
 
 input, textarea, select {
+    box-sizing:content-box; /* Bugfix with Botstrap for transition in forms */
     font-size: 14px;
     border: 1px solid #ccc;
     color: #3F3F3F;
