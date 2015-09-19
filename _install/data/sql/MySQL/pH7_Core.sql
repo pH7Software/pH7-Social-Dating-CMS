@@ -956,7 +956,7 @@ CREATE TABLE IF NOT EXISTS pH7_Settings (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
-('siteName', 'My Own Social/Dating Site!', '', 'general'),
+('siteName', 'My Social/Dating App!', '', 'general'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', 'base', '', 'design'),
