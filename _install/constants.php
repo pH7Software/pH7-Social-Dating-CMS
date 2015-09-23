@@ -18,7 +18,7 @@ defined('PH7') or exit('Restricted access');
 // Check the SSL protocol compatibility
 $sHttp = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';
 // Determine the domain name with the port
-$sDomain = ($_SERVER['SERVER_PORT'] != '80') ?  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_NAME'];
+$sDomain = (($_SERVER['SERVER_PORT'] != '80') && ($_SERVER['SERVER_PORT'] != '443')) ?  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_NAME'];
 
 // Determine the current file of the application
 $sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF'], ENT_QUOTES))); // Remove backslashes for Windows compatibility
@@ -43,4 +43,3 @@ define('PH7_URL_ROOT', dirname(PH7_URL_INSTALL) . '/'); // ROOT URL
 define('PH7_ROOT_PUBLIC', dirname(__DIR__) . PH7_DS); // PUBLIC ROOT
 define('PH7_ROOT_INSTALL', __DIR__ . PH7_DS); // ROOT INSTALL'
 define('PH7_PATH_PUBLIC_DATA_SYS_MOD', PH7_ROOT_PUBLIC . 'data/system/modules/');
-
