@@ -61,6 +61,9 @@ function run() {
             rm -rf ./_doc/
             rm -rf ./_test/
             rm -rf .git/
+            
+            # Optimize Composer
+            php ../composer.phar dumpautoload -o
 
             echo "Done!"
             echo "Remove \"deployment.sh\" (this file) before packaging pH7CMS"
