@@ -99,7 +99,7 @@ class LoginFormProcess extends Form
             $oSecurityModel->addLoginLog($sEmail, $sUsername, '*****', 'Logged in!', 'Admins');
             $oAdminModel->setLastActivity($oAdminData->profileId, 'Admins');
 
-            Header::redirect(Uri::get(PH7_ADMIN_MOD,'main','index'), t('You signup is successfully!'));
+            Header::redirect(Uri::get(PH7_ADMIN_MOD,'main','index'), t('You are successfully login!'));
         }
     }
 
