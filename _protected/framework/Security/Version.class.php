@@ -34,10 +34,6 @@ final class Version
     const PFBC_VERSION = '2.3';
     const PFBC_RELASE_DATE = '2011-09-22';
 
-    /***** Swift Mailer *****/
-    const SWIFT_VERSION = '5.1.0';
-    const SWIFT_RELASE_DATE = '2014-03-18';
-
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.

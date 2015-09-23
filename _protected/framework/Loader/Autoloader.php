@@ -51,7 +51,7 @@ final class Autoloader
 
         $this->_loadFile('Core/License.class.php');
         $this->_loadFile('Core/Kernel.class.php');
-        // Include Composer libraries (GeoIp2, ...)
+        // Include Composer libraries (GeoIp2, Swift, ...)
         require_once PH7_PATH_PROTECTED . 'vendor/autoload.php';
     }
 
@@ -90,11 +90,6 @@ final class Autoloader
             // To include PFBC library
             case is_file(PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php'):
                 $sFile = PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php';
-            break;
-
-            // To include SwiftMailer library
-            case 0 === strpos($sClass, 'Swift'):
-                $sFile = PH7_PATH_FRAMEWORK . 'Mail/Engine/Swift/swift_required.php';
             break;
 
             default:
