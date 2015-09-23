@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
+    'GeoIp2\\Compat\\JSONSerializable' => $vendorDir . '/geoip2/geoip2/src/Compat/JsonSerializable.php',
+    'GeoIp2\\Compat\\JsonSerializable' => $vendorDir . '/geoip2/geoip2/src/Compat/JsonSerializable.php',
     'GeoIp2\\Database\\Reader' => $vendorDir . '/geoip2/geoip2/src/Database/Reader.php',
     'GeoIp2\\Exception\\AddressNotFoundException' => $vendorDir . '/geoip2/geoip2/src/Exception/AddressNotFoundException.php',
     'GeoIp2\\Exception\\AuthenticationException' => $vendorDir . '/geoip2/geoip2/src/Exception/AuthenticationException.php',
@@ -34,7 +36,6 @@ return array(
     'GeoIp2\\Record\\Subdivision' => $vendorDir . '/geoip2/geoip2/src/Record/Subdivision.php',
     'GeoIp2\\Record\\Traits' => $vendorDir . '/geoip2/geoip2/src/Record/Traits.php',
     'GeoIp2\\WebService\\Client' => $vendorDir . '/geoip2/geoip2/src/WebService/Client.php',
-    'JsonSerializable' => $vendorDir . '/geoip2/geoip2/compat/JsonSerializable.php',
     'MaxMind\\Db\\Reader' => $vendorDir . '/maxmind-db/reader/src/MaxMind/Db/Reader.php',
     'MaxMind\\Db\\Reader\\Decoder' => $vendorDir . '/maxmind-db/reader/src/MaxMind/Db/Reader/Decoder.php',
     'MaxMind\\Db\\Reader\\InvalidDatabaseException' => $vendorDir . '/maxmind-db/reader/src/MaxMind/Db/Reader/InvalidDatabaseException.php',
