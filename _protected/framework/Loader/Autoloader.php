@@ -92,6 +92,11 @@ final class Autoloader
                 $sFile = PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php';
             break;
 
+            // To include SwiftMailer library
+            case 0 === strpos($sClass, 'Swift'):
+                $sFile = PH7_PATH_PROTECTED . 'vendor/swiftmailer/swiftmailer/lib/swift_required.php';
+            break;
+
             default:
                 return; // Stop it
         }

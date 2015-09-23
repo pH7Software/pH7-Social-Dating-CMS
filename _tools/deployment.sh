@@ -61,7 +61,7 @@ function run() {
             rm -rf ./_doc/
             rm -rf ./_test/
             rm -rf .git/
-            
+
             # Optimize Composer
             php ../composer.phar dumpautoload -o
 
