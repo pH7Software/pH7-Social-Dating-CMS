@@ -21,7 +21,7 @@ class Paypal extends Provider implements Api
     $_sUrl = 'https://www.paypal.com/cgi-bin/webscr',
     $_sRequest = 'cmd=_notify-validate',
     $_sMsg,
-    $_bValid = false;
+    $_bValid = null;
 
 
     /**
