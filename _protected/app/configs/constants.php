@@ -26,7 +26,7 @@ defined('PH7') or exit('Restricted access');
 /***** VARIOUS *****/
 
 define ( 'PH7_DOT', '.' );
-define ( 'PH7_INTERNET_NEEDED', false ); // Please never change it if you don't know what you are doing
+define ( 'PH7_INTERNET_NEEDED', true ); // Please never change it if you don't know what you are doing
 
 /***** TIME ZONE ****/
 
