@@ -14,7 +14,8 @@ namespace PH7\Framework\Mvc\Controller;
 defined('PH7') or exit('Restricted access');
 
 use
-PH7\Framework\Security\DDoS\Stop,
+PH7\Framework\Security\Ban\Ban,
+PH7\Framework\Ip\Ip,
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Mvc\Model as M;
@@ -29,11 +30,24 @@ abstract class Controller extends \PH7\Framework\Core\Core
         /***** Securing the server for DDoS attack only! Not for the attacks DoS *****/
         if (!isDebug() && M\DbConfig::getSetting('DDoS'))
         {
-            $oDDoS = new Stop;
+            $oDDoS = new \PH7\Framework\Security\DDoS\Stop;
             if ($oDDoS->cookie() || $oDDoS->session())
                 sleep(PH7_DDOS_DELAY_SLEEP);
 
             unset($oDDoS);
+        }
+
+        // It displays the banishment page if a banned IP address is found.
+        if (Ban::isIp(Ip::get()))
+        {
+            \PH7\Framework\Page\Page::banned();
+        }
+
+        // The maintenance page is not displayed for the "Admin" module and if the administrator is logged.
+        if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE
+            && !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD)
+        {
+            \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
         }
 
         /***** Assign the values for Registry Class *****/

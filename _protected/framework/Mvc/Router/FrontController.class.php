@@ -23,8 +23,6 @@ PH7\Framework\Registry\Registry,
 PH7\Framework\Config\Config,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Security\Ban\Ban,
-PH7\Framework\Ip\Ip,
 PH7\Framework\Url\Uri,
 PH7\Framework\Mvc\Router\Uri as UriRoute;
 
@@ -548,18 +546,6 @@ final class FrontController
      */
     public function runRouter()
     {
-        // It displays the banishment if a banned IP address is found.
-        if (Ban::isIp(Ip::get()))
-        {
-            \PH7\Framework\Page\Page::banned();
-        }
-
-        // The maintenance page is not displayed for the module "Admin" hen and the administrator is logged.
-        if (DbConfig::getSetting('siteStatus') === DbConfig::MAINTENANCE_SITE && !\PH7\AdminCore::auth() && $this->oRegistry->module !== PH7_ADMIN_MOD)
-        {
-            \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
-        }
-
         $this->_pathInitialize();
 
         /***** FULL PATH OF MODULE FILE *****/
