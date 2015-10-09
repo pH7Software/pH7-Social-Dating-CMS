@@ -22,7 +22,7 @@ $aMeta = [
 <!-- End Header -->
 
 <!-- Begin Content -->
-<div id="content" class="s_padd">
+<div id="content" class="center s_padd">
 <br />
 <h1>Internal Server Error</h1>
 <p>The server encountered an error. This is most often caused by a scripting problem, a failed database access attempt, or other similar reasons.</p>
