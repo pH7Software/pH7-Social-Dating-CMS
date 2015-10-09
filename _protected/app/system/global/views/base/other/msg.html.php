@@ -21,7 +21,7 @@ $aMeta = [
 <!-- End Header -->
 
 <!-- Begin Content -->
-<div id="content" class="s_padd">
+<div id="content" class="center s_padd">
 <br />
 <h1><?php echo t('Whoops!') ?></h1>
 <p>&nbsp;</p>

@@ -12,8 +12,8 @@ use PH7\Framework\Layout\Html\Design;
 $oDesign = new Design;
 $oDesign->htmlHeader();
 $aMeta = [
-    'title' => t('Maintenance of website') . ' - ' . Core::SOFTWARE_NAME . ' | ' . Core::SOFTWARE_COMPANY,
-    'description' => t('Maintenance of website') . ' ' . Core::SOFTWARE_DESCRIPTION,
+    'title' => t('Website Maintenance') . ' - ' . Core::SOFTWARE_NAME . ' | ' . Core::SOFTWARE_COMPANY,
+    'description' => t('Website in Maintenance') . ' ' . Core::SOFTWARE_DESCRIPTION,
     'keywords' => t('dating site,free dating site,online dating site,social dating')
 ];
 ?>
@@ -22,7 +22,7 @@ $aMeta = [
 <!-- End Header -->
 
 <!-- Begin Content -->
-<div id="content" class="s_padd">
+<div id="content" class="center s_padd">
 <br />
 <h1><?php echo t('Site Maintenance') ?></h1>
 <p><?php echo t('Whoops! Our website is currently down for maintenance.') ?><br />
