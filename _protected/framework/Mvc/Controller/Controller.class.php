@@ -37,19 +37,6 @@ abstract class Controller extends \PH7\Framework\Core\Core
             unset($oDDoS);
         }
 
-        // It displays the banishment page if a banned IP address is found.
-        if (Ban::isIp(Ip::get()))
-        {
-            \PH7\Framework\Page\Page::banned();
-        }
-
-        // The maintenance page is not displayed for the "Admin" module and if the administrator is logged.
-        if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE
-            && !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD)
-        {
-            \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
-        }
-
         /***** Assign the values for Registry Class *****/
 
         // URL
@@ -115,6 +102,19 @@ abstract class Controller extends \PH7\Framework\Core\Core
         {
             require $this->registry->path_module_config . 'Permission.php';
             new \PH7\Permission;
+        }
+
+        // It displays the banishment page if a banned IP address is found.
+        if (Ban::isIp(Ip::get()))
+        {
+            \PH7\Framework\Page\Page::banned();
+        }
+
+        // The maintenance page is not displayed for the "Admin" module and if the administrator is logged.
+        if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE
+            && !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD)
+        {
+            \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
         }
     }
 
