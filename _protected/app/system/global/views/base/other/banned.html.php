@@ -23,7 +23,7 @@ $aMeta = [
 <!-- End Header -->
 
 <!-- Begin Content -->
-<div id="content" class="s_padd">
+<div id="content" class="center s_padd">
 <br />
 <h1 class="err_msg"><?php echo t('Sorry, your IP or your location is banned!') ?></h1>
 <p>
