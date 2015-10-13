@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mail
- * @version          1.1 (Last update 01/14/2013)
+ * @version          1.2 (Last update 10/13/2015)
  */
 
 namespace PH7\Framework\Mail;
@@ -50,7 +50,42 @@ class Mail
 
         unset($oTransport, $oMailer, $oMessage);
 
+        /*
+         * Check if Swift is able to send message, otherwise we use the traditional native PHP mail() function
+         * as on some hosts config, Swift Mail doesn't work.
+         */
+
+        if (!$iResult) {
+            $aData = ['from' => $sFromMail, 'to' => $sToMail, 'subject' => $sSubject, 'body' => $sContents];
+            $iResult = (int) $this->phpMail($aData);
+        }
+
         return $iResult;
+    }
+
+
+    /**
+     * Send an email with the native PHP mail() function in text and HTML format.
+     *
+     * @param array $aParams The parameters information to send email.
+     * @return boolean Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
+     */
+    protected function phpMail(array $aParams)
+    {
+        // If the email sender is empty, we define the server email.
+        if (empty($aParams['from']))
+            $aParams['from'] = $_SERVER['SERVER_ADMIN'];
+
+        /*** Headers ***/
+        // To avoid the email goes in the spam folder of email client.
+        $sHeaders = "From: \"{$_SERVER['HTTP_HOST']}\" <{$_SERVER['SERVER_ADMIN']}>\r\n";
+
+        $sHeaders .= "Reply-To: <{$aParams['from']}>\r\n";
+        $sHeaders .= "MIME-Version: 1.0\r\n";
+        $sHeaders .= "Content-Type: text/html; charset=\"utf-8\"\r\n";
+
+        /** Send Email ***/
+        return @mail($aParams['to'], $aParams['subject'], $aParams['body'], $sHeaders);
     }
 
 }
