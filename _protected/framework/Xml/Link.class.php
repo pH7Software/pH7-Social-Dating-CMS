@@ -40,7 +40,7 @@ class Link
     public function get()
     {
         if (!@$this->_oXml->load($this->_sPath))
-            throw new Exception('The file \'' . $this->_sPath . '\' does not exist');
+            throw new Exception('The file \'' . $this->_sPath . '\' does not exist.');
 
         foreach ($this->_oXml->getElementsByTagName('link') as $oTag)
             $this->_aRet[$oTag->getAttribute('url')] = $oTag->getAttribute('title');

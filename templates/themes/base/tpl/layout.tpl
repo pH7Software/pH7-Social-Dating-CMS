@@ -94,7 +94,7 @@
     <!-- Begin Content -->
     <div role="main" class="container" id="content">
 
-      {* If the splash page is not enabled, it displays the menu *}
+      {* If we aren't on the the splash page, then display the menu *}
       {if !(!$is_user_auth && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index')}
         {main_include 'top_menu.inc.tpl'}
       {/if}
