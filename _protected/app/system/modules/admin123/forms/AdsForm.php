@@ -7,6 +7,8 @@
  */
 namespace PH7;
 
+use PH7\Framework\File\Import;
+
 class AdsForm
 {
 
@@ -20,7 +22,7 @@ class AdsForm
             Framework\Url\Header::redirect();
         }
 
-        $aAdSizes = PH7_PATH_APP_CONFIG . 'ad_sizes.php';
+        $aAdSizes = Import::file(PH7_PATH_APP_CONFIG . 'ad_sizes');
 
         $oForm = new \PFBC\Form('form_ads', 500);
         $oForm->configure(array('action' => ''));
