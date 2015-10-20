@@ -7,10 +7,12 @@ namespace PFBC\Element;
 
 class Email extends Textbox
 {
-
+	
+	private $_bMailCheck;
+	
     public function __construct($sLabel, $sName, array $aProperties = null, $bMailCheck = true)
     {
-        $this->bMailCheck = $bMailCheck;
+        $this->_bMailCheck = $bMailCheck;
         parent::__construct($sLabel, $sName, $aProperties);
     }
 
@@ -20,7 +22,7 @@ class Email extends Textbox
         $this->validation[] = new \PFBC\Validation\Email;
         parent::render();
 
-        if ($this->bMailCheck) {
+        if ($this->_bMailCheck) {
             echo '<script src="' . (new \PFBC\Form)->getResourcesPath() . PH7_SH . PH7_JS . 'jquery/mailcheck.js"></script>
             <script src=' . PH7_RELATIVE . 'asset/js/mailcheck.js></script>';
         }
