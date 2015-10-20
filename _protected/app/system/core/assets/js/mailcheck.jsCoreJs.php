@@ -41,8 +41,7 @@ if (!$sData = $oCache->get())
                 input.next(\'span\').remove();
             }
         })
-    });'
-    ;
+    });';
 
     if (Config::getInstance()->values['cache']['enable.static.compressor'])
     {
