@@ -727,12 +727,12 @@ class Design
         <meta name="copyright" content="', Kernel::SOFTWARE_COPYRIGHT, '" />
         <meta name="creator" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="designer" content="', Kernel::SOFTWARE_NAME, '" />
-        <meta name="generator" content="', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, '" />
-        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />',
-        $this->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'common.css,style.css,form.css'),
-        '<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-        <script>var pH7Url={base:\'', PH7_URL_ROOT, '\'}</script></head><body>';
+        <meta name="generator" content="', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, '" />';
+        $this->externalCssFile(PH7_URL_STATIC. PH7_CSS . 'js/jquery/smoothness/jquery-ui.css');
+        $this->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'common.css,style.css,form.css');
+        $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery.js');
+        $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery-ui.js');
+        echo '<script>var pH7Url={base:\'', PH7_URL_ROOT, '\'}</script></head><body>';
         if ($bLogo)
         {
             // Website's name
