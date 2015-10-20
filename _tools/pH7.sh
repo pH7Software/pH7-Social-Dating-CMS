@@ -12,22 +12,24 @@ function init() {
     echo "Please enter a command, OPTION:"
     echo "1) clear cache"
     echo "2) remove tmp file"
-    echo "3) clean code"
-    echo "4) count line code"
-    echo "5) count php line code"
-    echo "6) count file"
-    echo "7) count php file"
-    echo "8) count dir"
-    echo "9) show empty file"
-    echo "10) file permissions"
-    echo "11) file strict permissions"
-    echo "12) backup"
+    echo "3) remove log file"
+    echo "4) clean code"
+    echo "5) count line code"
+    echo "6) count php line code"
+    echo "7) count file"
+    echo "8) count php file"
+    echo "9) count dir"
+    echo "10) show empty file"
+    echo "11) file permissions"
+    echo "12) file strict permissions"
+    echo "13) backup"
 
 
     read option
     case $option in
       "clear cache") clear-cache;;
       "remove tmp file") remove-tmp-file;;
+      "remove log file") remove-log-file;;
       "clean code") clean-code;;
       "count line code") count-line-code;;
       "count php line code") count-php-line-code;;
@@ -57,16 +59,25 @@ function clear-cache() {
         rm -rf ./_protected/data/cache/pH7tpl_cache/*
         rm -rf ./_protected/data/cache/pH7_static/*
         rm -rf ./_protected/data/cache/pH7_cache/*
-        echo "The caches have been removed!"
+        echo "The Caches have been removed!"
     fi
 }
 
 # Deleting temporary files
 function remove-tmp-file() {
-    _confirm "Are you sure you want to remove the temporary files (e.g. file.pl~, ._file.py)?"
+    _confirm "Are you sure you want to remove the temporary files (e.g., file.pl~, ._file.php)?"
     if [ $? -eq 1 ]; then
         find . -type f \( -name '*~' -or -name '*.tmp' -or -name '*.swp' -or -name '.directory' -or -name '._*' -or -name '.DS_Store*' -or -name 'Thumbs.db' \) -exec rm {} \;
-        echo "The temporary files have been removed!"
+        echo "Temporary files have been removed!"
+    fi
+}
+
+# Deleting log files
+function remove-log-file() {
+    _confirm "Are you sure you want to remove all log files (*.log)?"
+    if [ $? -eq 1 ]; then
+        find . -type f -name '*.log' -exec rm {} \;
+        echo "Log files have been removed!"
     fi
 }
 
@@ -117,33 +128,15 @@ function show-empty-file() {
 # Check and correct file permissions (CHMOD)
 # These permissions allow editing and creating files in the File Management admin module.
 function file-permissions() {
-    find . -type f -print0 | sudo xargs -0 chmod 666
-    find . -type d -print0 | sudo xargs -0 chmod 777
-    sudo chmod 777 -R ./
-    sudo chmod 777 -R ./_repository/module/*
-    sudo chmod 777 -R ./_repository/upgrade/*
-    sudo chmod 777 -R ./_protected/app/configs/*
-    sudo chmod 777 -R ./_protected/data/backup/*
-    sudo chmod 777 -R ./_protected/data/tmp/*
-    sudo chmod 777 -R ./_protected/data/log/*
+    _permissions 666 777
     _cache-permissions
     echo "Permissions have been changed!"
 }
 
 # Check and correct file permissions (CHMOD)
 # These permissions don't allow editing and creating files in the File Management admin module.
-function file-strict-permissions()
-{
-    find . -type f -print0 | sudo xargs -0 chmod 644
-    find . -type d -print0 | sudo xargs -0 chmod 755
-    sudo chmod 777 ./
-    sudo chmod 777 -R ./_install/*
-    sudo chmod 777 -R ./_repository/module/*
-    sudo chmod 777 -R ./_repository/upgrade/*
-    sudo chmod 777 -R ./_protected/app/configs/*
-    sudo chmod 777 -R ./_protected/data/backup/*
-    sudo chmod 777 -R ./_protected/data/tmp/*
-    sudo chmod 777 -R ./_protected/data/log/*
+function file-strict-permissions() {
+    _permissions 644 755
     _cache-permissions
     echo "Permissions Strict have been changed!"
 }
@@ -177,6 +170,21 @@ function backup() {
 # Clean indentation code
 function _clean-indent() {
     sed -i 's/\(.*\)\(function\|class\|try\|catch\)\([^{]*\){\([^}].*\)/\1\2\3\n\1{\4/'  $(find -name '*.php')
+}
+
+# CHange permissions of the folders/files (CHMOD)
+function _permissions() {
+    find . -type f -print0 | sudo xargs -0 chmod $1 # First parameter for Files
+    find . -type d -print0 | sudo xargs -0 chmod $2 # Second parameter for Folders
+
+    sudo chmod 777 ./
+    sudo chmod 777 -R ./_install/*
+    sudo chmod 777 -R ./_repository/module/*
+    sudo chmod 777 -R ./_repository/upgrade/*
+    sudo chmod 777 -R ./_protected/app/configs/*
+    sudo chmod 777 -R ./_protected/data/backup/*
+    sudo chmod 777 -R ./_protected/data/tmp/*
+    sudo chmod 777 -R ./_protected/data/log/*
 }
 
 # Cache permissions (CHMOD)
