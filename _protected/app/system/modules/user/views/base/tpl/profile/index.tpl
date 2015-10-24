@@ -55,10 +55,6 @@
       <div class="break"></div>
     {/if}
 
-    {if !empty($description)}
-      <div class="profile_desc"><p class="bold">{lang 'Description:'}</p> <div class="quote italic">{description}</div></div>
-    {/if}
-
     {* Profile's Fields *}
     {each $key => $val in $fields}
 
@@ -119,6 +115,10 @@
 
     {{ RatingDesignCore::voting($id,'Members') }}
 
+    {if !empty($description)}
+      <div class="profile_desc"><p class="bold">{lang 'Description:'}</p> <div class="quote italic">{description}</div></div>
+    {/if}
+
   </div>
 
   <div class="content" id="map">
@@ -177,6 +177,7 @@
     </script>
   </div>
 
+  <div class="clear"></div>
   <p class="center">{{ $design->like($username, $first_name, $sex) }} | {{ $design->report($id, $username, $first_name, $sex) }}</p>
   {{ $design->likeApi() }}
 
