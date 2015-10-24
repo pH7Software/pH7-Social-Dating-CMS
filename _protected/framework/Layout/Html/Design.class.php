@@ -204,7 +204,7 @@ class Design
     public function url($sModule, $sController, $sAction, $sVars = null, $bClear = true)
     {
         $sUrl = Uri::get($sModule, $sController, $sAction, $sVars, $bClear);
-        echo Url::clean($sUrl); // For the parameters in the URL are valid in HTML
+        echo Url::clean($sUrl); // For the parameters in the URL to make a valid HTML code
     }
 
     /**
@@ -533,7 +533,11 @@ class Design
             }
 
             unset($oUserModel);
-            $oCache->put($sUrl);
+            /**
+             * @internal Clean URL for parameters in Gravatar URL to make the HTML code valid.
+             * If we set replace '&' by '&amp;' before checking the 404's Gravatar URL, it will always return '200 OK', that's why we need to clean the URL now.
+             */
+            $oCache->put( Url::clean($sUrl) );
         }
 
         unset($oCache);
@@ -555,7 +559,7 @@ class Design
     {
         $sProtocol = ($bSecure) ? 'https' : 'http';
         $bSubDomain = ($bSecure) ? 'secure' : 'www';
-        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5( strtolower($sEmail) ) . '?d=' . $sType . '&amp;s=' . $iSize . '&amp;r=' . $cRating;
+        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5( strtolower($sEmail) ) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $cRating;
     }
 
     /**
