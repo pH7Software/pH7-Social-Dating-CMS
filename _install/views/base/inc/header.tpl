@@ -2,17 +2,19 @@
 <html lang="{$LANG.lang}">
     <head>
         <meta charset="{$LANG.charset}" />
-        <!-- Begin Title and Meta -->
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+        <!-- Begin Title and Meta Info -->
         <title>{$LANG.welcome|upper} «{$software_name|upper}» {$software_version}</title>
         <link rel="shortcut icon" href="{$smarty.const.PH7_URL_ROOT}favicon.ico" />
-        <!-- Copyright pH7 Dating/Social CMS; All Rights Reserved -->
+        <!---- Copyright pH7 Dating/Social CMS; All Rights Reserved ---->
         <meta name="author" content="{$software_author}" />
         <meta name="copyright" content="{$software_copyright}" />
         <meta name="creator" content="pH7CMS (Pierre-Henry Soria)" />
         <meta name="designer" content="pH7CMS (Pierre-Henry Soria)" />
         <meta name="generator" content="{$software_name} {$software_version}" />
-        <!-- End Copyright pH7 Dating/Social CMS; All Rights Reserved -->
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <!---- End Copyright pH7 Dating/Social CMS; All Rights Reserved ---->
         <!-- End Title and Meta -->
         <!-------- Sheet Css -------->
         <!-- Bootstrap -->
