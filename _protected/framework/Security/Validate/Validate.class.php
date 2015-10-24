@@ -266,7 +266,7 @@ class Validate
      * Validate URL.
      *
      * @param string $sUrl
-     * @param boolean $bRealUrl Checks whether the URL actually exists. Default FALSE
+     * @param boolean $bRealUrl Checks if the current URL exists. Default FALSE
      * @return boolean
      */
     public function url($sUrl, $bRealUrl = false)
@@ -278,10 +278,14 @@ class Validate
         if($bRealUrl)
         {
             /**
-             * Checks if the URL is valid with the HTTP status code '200 OK' or '301 Moved Permanently'
+             * Checks if the URL is valid and contains the HTTP status code '200 OK', '301 Moved Permanently' or '302 Found'
              */
-            $aUrl = @get_headers($sUrl);
-            return (strpos($aUrl[0], '200 OK') || strpos($aUrl[0], '301 Moved Permanently'));
+            $rCurl = curl_init();
+            curl_setopt_array($rCurl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_URL => $sUrl]);
+            curl_exec($rCurl);
+            $iResponse = (int) curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
+            curl_close($rCurl);
+            return ($iResponse === 200 || $iResponse === 301 || $iResponse === 302);
         }
         else
         {
