@@ -5,8 +5,10 @@
 <html lang="{% $config->values['language']['lang'] %}">
   <head>
     <meta charset="{% $config->values['language']['charset'] %}" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <!-- Begin Title and Meta -->
+    <!-- Begin Title and Meta info -->
     <title>{if $page_title}{% $this->str->escape($this->str->upperFirst($page_title), true) %} - {site_name}{else}{site_name} - {slogan}{/if}</title>
     <meta name="description" content="{% $this->str->escape($this->str->upperFirst($meta_description), true) %}" />
     <meta name="keywords" content="{% $this->str->escape($meta_keywords, true) %}" />
@@ -21,7 +23,6 @@
     <meta name="category" content="{meta_category}" />
     <meta name="rating" content="{meta_rating}"/>
     <meta name="distribution" content="{meta_distribution}"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     {if $header}{header}{/if}
 
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
