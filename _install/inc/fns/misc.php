@@ -356,16 +356,20 @@ function zip_extract($sFile, $sDir)
 }
 
 /**
- * Check valid URL.
+ * Checks if the URL is valid and contains the HTTP status code '200 OK', '301 Moved Permanently' or '302 Found'
  *
  * @return string $sUrl
  * @return boolean
  */
 function check_url($sUrl)
 {
-    // Checks if URL is valid with HTTP status code '200 OK' or '301 Moved Permanently'
-    $aUrl = @get_headers($sUrl);
-    return (strpos($aUrl[0], '200 OK') || strpos($aUrl[0], '301 Moved Permanently'));
+    $rCurl = curl_init();
+    curl_setopt_array($rCurl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_URL => $sUrl]);
+    curl_exec($rCurl);
+    $iResponse = (int) curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
+    curl_close($rCurl);
+
+    return ($iResponse === 200 || $iResponse === 301 || $iResponse === 302);
 }
 
 /**
