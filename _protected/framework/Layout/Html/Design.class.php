@@ -511,7 +511,7 @@ class Design
                 /*** If the user does not have an avatar ***/
                 if (!is_file($sPath))
                 {
-                   // The user has no avatar, we try to get her Gravatar.
+                    /* The user has no avatar, we try to get a Gravatar */
 
                     // Get the User Email
                     $sEmail = $oUserModel->getEmail($iProfileId);
@@ -520,7 +520,7 @@ class Design
                     $sUrl = $this->getGravatarUrl($sEmail, '404', $iSize, 'g', $bSecureGravatar);
 
                     if (!(new \PH7\Framework\Security\Validate\Validate)->url($sUrl, true))
-                       // Our Default Image
+                        // If there is no Gravatar, we set the default pH7CMS's avatar
                         $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . '.jpg';
 
                 }
