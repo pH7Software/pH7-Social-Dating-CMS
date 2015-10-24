@@ -10,7 +10,7 @@
 --
 --
 
-SET @iTotalMembers = 12;
+SET @iTotalMembers = 16;
 SET @iGroupId = 2; -- 1 = Visitor, 9 = Pending, 2 = Regular (Free), 4 = Platinum, 5 = Silver, 6 = Gold
 SET @iUserStatus = 1; -- 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
 SET @sCurrentDate = CURRENT_TIMESTAMP;
@@ -31,7 +31,11 @@ INSERT INTO pH7_Members (email, username, password, firstName, lastName, birthDa
 ('demo10@demo.cow', 'Tom4', @sPassword, 'Tomy', 'Pittsburgh', '1992-12-21', 'male', 'female', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
 ('demo11@demo.cow', 'rachO0O', @sPassword, 'Rachel', 'Žarko', '1968-02-10', 'female', 'male', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
 ('demo12@demo.cow', 'Stive', @sPassword, 'Stive', 'Upton', '1988-12-21', 'male', 'male,female', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-('demo13@demo.cow', 'EmmaROK', @sPassword, 'Emma', 'Solon', '1992-06-16', 'female', 'male,female,couple', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate);
+('demo13@demo.cow', 'EmmaROK', @sPassword, 'Emma', 'Solon', '1992-06-16', 'female', 'male,female,couple', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
+('demo14@demo.cow', 'scarlaaa', @sPassword, 'Scarlett', 'Stewart', '1990-05-26', 'female', 'male', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
+('demo15@demo.cow', 'lolo22', @sPassword, 'Lola', 'Weisz', '1991-06-09', 'female', 'male,female', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
+('demo16@demo.cow', 'bartys', @sPassword, 'Bart', 'San', '1978-11-01', 'male', 'female', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
+('demo17@demo.cow', 'wenwen', @sPassword, 'Wendy', 'Beaumnt', '1965-06-10', 'female', 'male,couple', @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate);
 SET @iProfileId = LAST_INSERT_ID();
 
 
@@ -47,7 +51,12 @@ INSERT INTO pH7_MembersInfo (profileId, description, city, state, zipCode, count
 (@iProfileId+8, 'Hello to all',  'Manhattan', 'Manhattan', '10002', 'US'),
 (@iProfileId+9, 'Hello to all',  'Dolton', 'Illinois', '60419', 'US'),
 (@iProfileId+10, 'Hello to all',  'Manhattan', 'Manhattan', '10002', 'US'),
-(@iProfileId+11,  'Hmmm, you''ll see. I like to spend my free time on the Internet or traveling in different cities, places, mountain or sea...<br /> Listening good music of course.<br />See you soon! ;)', 'Soho', 'Westminster London', '139 L8', 'UK');
+(@iProfileId+11, 'Hi :D', 'Soho', 'Westminster London', '139 L8', 'UK'),
+(@iProfileId+12, 'Hi you y''all, what''s up? :-)',  'Manhattan', 'Manhattan', '10002', 'US'),
+(@iProfileId+13, 'Hello to YOU. How are you?',  'Dolton', 'Illinois', '60419', 'US'),
+(@iProfileId+14, 'Hello to all',  'Manhattan', 'Manhattan', '10002', 'US'),
+(@iProfileId+15,  'Want to see new people!! :)', 'Soho', 'Westminster London', '139 L8', 'UK');
+
 
 
 INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES
@@ -62,7 +71,11 @@ INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSa
 (@iProfileId+8, 'all', 'yes', 'yes'),
 (@iProfileId+9, 'all', 'yes', 'yes'),
 (@iProfileId+10, 'all', 'yes', 'yes'),
-(@iProfileId+11, 'all', 'yes', 'yes');
+(@iProfileId+11, 'all', 'yes', 'yes'),
+(@iProfileId+12, 'all', 'yes', 'yes'),
+(@iProfileId+13, 'all', 'yes', 'yes'),
+(@iProfileId+14, 'all', 'yes', 'yes'),
+(@iProfileId+15, 'all', 'yes', 'yes');
 
 
 INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters, newMsg, friendRequest) VALUES
@@ -77,7 +90,11 @@ INSERT INTO pH7_MembersNotifications (profileId, enableNewsletters, newMsg, frie
 (@iProfileId+8, 0, 0, 0),
 (@iProfileId+9, 0, 0, 0),
 (@iProfileId+10, 0, 0, 0),
-(@iProfileId+11, 0, 0, 0);
+(@iProfileId+11, 0, 0, 0),
+(@iProfileId+12, 0, 0, 0),
+(@iProfileId+13, 0, 0, 0),
+(@iProfileId+14, 0, 0, 0),
+(@iProfileId+15, 0, 0, 0);
 
 
 /*
