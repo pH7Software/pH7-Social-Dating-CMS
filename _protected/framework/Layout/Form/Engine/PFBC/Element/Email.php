@@ -7,9 +7,9 @@ namespace PFBC\Element;
 
 class Email extends Textbox
 {
-	
-	private $_bMailCheck;
-	
+
+    private $_bMailCheck;
+
     public function __construct($sLabel, $sName, array $aProperties = null, $bMailCheck = true)
     {
         $this->_bMailCheck = $bMailCheck;
