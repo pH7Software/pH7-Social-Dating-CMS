@@ -36,9 +36,9 @@ class Ip
         }
         unset($aVars);
 
-        if (static::isPrivate($sIp)) {
-            $sIp = ($sIp = @file_get_contents('http://addons.hizup.com/ip/')) ? trim($sIp) : '127.0.0.1';
-        }
+        if (static::isPrivate($sIp))
+            $sIp = '127.0.0.1'; // Avoid invalid local IP for GeoIp
+
         return preg_match('/^[a-z0-9:.]{7,}$/', $sIp) ? $sIp : '127.0.0.1';
     }
 
