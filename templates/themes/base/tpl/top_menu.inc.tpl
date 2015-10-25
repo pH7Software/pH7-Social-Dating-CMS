@@ -145,8 +145,7 @@
             </ul>
           </li>
 
-          <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'Settings'}</a></li>
-            <noscript>
+          <noscript>
             <li class="dropdown"><a href="{{ $design->url('user','setting','edit') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Settings'} <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('user','setting','edit') }}">{lang 'Edit Profile'}</a></li>
@@ -156,11 +155,12 @@
                 <li><a href="{{ $design->url('user','setting','password') }}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
               </ul>
             </li>
-            </noscript>
+          </noscript>
 
           <li class="dropdown"><a href="{{ $design->url('user','account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'My Profile'}">{lang 'My Profile'}</a></li>
+              <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'My Settings'}</a></li>
+              <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'My Profile'}</a></li>
               <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'My Avatar'}">{lang 'My Avatar'}</a></li>
               <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" data-load="ajax">{lang 'Photo Gallery'}</a>
                 <ul class="dropdown-menu" role="menu">
