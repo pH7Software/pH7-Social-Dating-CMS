@@ -1,31 +1,3 @@
-/* 1210px or more */
-@media (min-width: 1210px)
-{
-  .login_block{margin:-10px 0 0 48%}
-}
-/* 1209px or less */
-@media (max-width: 1209px)
-{
-    .bt_login_forgot{display:none}
-}
-
-/* 1230px or more */
-@media (min-width: 1230px)
-{
-    .window {height:300px;width:590px}
-    .profiles_window{margin:2px;max-height:346px;max-width:590px}
-    .img_reel img{float:left;height:300px;width:590px}
-}
-
-/* 1230px or less */
-@media (max-width: 1230px)
-{
-    .window {height:200px;width:393px}
-    .profiles_window{margin:2px;max-height:230px;max-width:393px}
-    .img_reel img{float:left;height:200px;width:393px}
-}
-
-
 #logo{float:left}
 
 .folio_block {
@@ -100,4 +72,43 @@ video#bgvid {
   transform: translateX(-50%) translateY(-50%);
   background: url('../img/splash_vid.jpg') no-repeat;
   background-size: cover;
+}
+
+.login_block{margin:-10px 0 0 48%}
+
+/* Slideshow */
+.window {height:300px;width:590px}
+.profiles_window{margin:2px;max-height:346px;max-width:590px}
+.img_reel img{float:left;height:300px;width:590px}
+
+
+/*** Media Queries ***/
+
+/* 1185px or less */
+@media (max-width: 1185px)
+{
+    .left{width:400px}
+}
+/* 1209px or less */
+@media (max-width: 1209px)
+{
+    .login_block{display:none}
+    .login_button{display:block !important}
+}
+/* 1230px or less */
+@media (max-width: 1230px)
+{
+    .window {height:200px;width:393px}
+    .profiles_window{margin:2px;max-height:230px;max-width:393px}
+    .img_reel img{float:left;height:200px;width:393px}
+}
+/* 925px or less */
+@media (max-width: 760px)
+{
+    .left, .right, .login_block {
+        text-align:center;
+        margin-left:auto;
+        margin-right:auto;
+        width:80%;
+    }
 }
