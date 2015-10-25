@@ -4,38 +4,6 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-/* 980px or more */
-@media (min-width: 980px)
-{
-    header, #content {width:78%}
-    .picture_block {width:90%}
-}
-/* 980px or less */
-@media (max-width: 980px)
-{
-    body{overflow-x:auto;overflow-y:auto}
-    header, #content {width:auto;float:none}
-    .picture_block {width:auto;float:none}
-}
-
-/* 900px or more */
-@media (min-width: 900px)
-{
-    .profile_desc {
-        float:right;
-        max-width:500px;
-        position:absolute;
-        margin-left:25%;
-        margin-top:-600px;
-    }
-}
-/* 900px or less */
-@media (max-width: 600px)
-{
-    .profile_desc {margin:20px 0 20px}
-}
-
-
 *{margin:0}
 body, td, pre {
     font-family:Arial, Verdana, Helvetica, sans-serif;
@@ -197,3 +165,36 @@ transition:0.25s;
 .ad_336_280 {}
 .ad_120_600 {}
 .ad_160_600 {}
+
+
+/*** Media Queries ***/
+/* 980px or more */
+@media (min-width: 980px)
+{
+    header, #content {width:78%}
+    .picture_block {width:90%}
+}
+/* 980px or less */
+@media (max-width: 980px)
+{
+    body{overflow-x:auto;overflow-y:auto}
+    header, #content {width:auto;float:none}
+    .picture_block {width:auto;float:none}
+}
+
+/* 900px or more */
+@media (min-width: 900px)
+{
+    .profile_desc {
+        float:right;
+        max-width:500px;
+        position:absolute;
+        margin-left:25%;
+        margin-top:-600px;
+    }
+}
+/* 900px or less */
+@media (max-width: 600px)
+{
+    .profile_desc {margin:20px 0 20px}
+}
