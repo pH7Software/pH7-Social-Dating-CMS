@@ -1,5 +1,8 @@
 <div class="right animated fadeInRight">
     <h1 class="pink2 italic underline">{lang 'Be on the best place to meet people!'}</h1>
+    <div class="center">
+        <a href="{{ $design->url('user','main','login') }}" class="btn btn-primary btn-lg"><strong>{lang 'Login'}</strong></a>
+    </div>
     {{ JoinForm::step1(290) }}
 
     <div class="counter center">{{ $userDesign->counterUsers() }}</div>
