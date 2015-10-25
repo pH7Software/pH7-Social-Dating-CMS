@@ -4,14 +4,6 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-.box-left {
-    float: left;
-    width: 200px;
-}
-.box-right {
-    float: right;
-    width: 780px;
-}
 .design-box {
     text-align: left;
     border: 1px solid #CCC;
@@ -168,4 +160,41 @@
 }
 .warning_block p {
     font-size: .8em;
+}
+
+.box-left {
+    float: left;
+    width: 200px;
+}
+.box-right {
+    float: right;
+    width: 700px;
+}
+/*** Overwrite with media queries for small devices ***/
+/* 1200px or less */
+@media (max-width: 1200px)
+{
+    .box-right{width:600px}
+}
+/* 1075px or less */
+@media (max-width: 1075px)
+{
+    .box-right{width:550px}
+}
+
+/* 1010px or less */
+@media (max-width: 1010px)
+{
+    .box-right{width:500px}
+}
+/* 985px or less */
+@media (max-width: 985px)
+{
+    .box-right{width:530px}
+}
+/* 745px or less */
+@media (max-width: 770px)
+{
+    .box-right{width:100%}
+    .box-left{display:none}
 }
