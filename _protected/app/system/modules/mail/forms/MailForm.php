@@ -24,7 +24,7 @@ class MailForm
 
         $oHttpRequest = new Http; // For Reply Function
 
-        $oForm = new \PFBC\Form('form_compose_mail', 800);
+        $oForm = new \PFBC\Form('form_compose_mail', '100%');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_compose_mail', 'form_compose_mail'));
         $oForm->addElement(new \PFBC\Element\Token('compose_mail'));

@@ -12,7 +12,7 @@ use PH7\Framework\Session\Session;
 class LoginForm
 {
 
-    public static function display($iWidth = 500)
+    public static function display($iWidth = 450)
     {
         if (isset($_POST['submit_login_user']))
         {
