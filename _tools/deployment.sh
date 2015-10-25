@@ -62,6 +62,12 @@ function run() {
             rm -rf ./_test/
             rm -rf .git/
 
+            ## TMP folders
+            rm -rf ./.quarantine/
+            rm -rf ./.tmb/
+            rm -rf ./_protected/.quarantine/
+            rm -rf ./_protected/.tmb/
+
             # Optimize Composer
             php ../composer.phar dumpautoload -o
 
