@@ -12,7 +12,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Request\Http;
 
-class UserApiAjax
+class ApiAjax
 {
     private $_oUser, $_mOutput;
 
@@ -48,4 +48,4 @@ class UserApiAjax
     }
 }
 
-echo (new UserApiAjax)->display();
+echo (new ApiAjax)->display();
