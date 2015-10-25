@@ -14,13 +14,11 @@ use PH7\Framework\Mvc\Request\Http;
 
 class UserApiAjax
 {
-
-    private $_oUser, $_oUserModel, $_mOutput;
+    private $_oUser, $_mOutput;
 
     public function __construct()
     {
         $this->_oUser = new UserCore;
-        $this->_oUserModel = new UserCoreModel;
         $this->_init();
     }
 
@@ -36,7 +34,7 @@ class UserApiAjax
         $sType = $oHttpRequest->post('type');
         unset($oHttpRequest);
 
-        switch( $sType )
+        switch($sType)
         {
             case 'profile_link':
                 $this->_mOutput = $this->_oUser->getProfileLink($sParam);
@@ -48,12 +46,6 @@ class UserApiAjax
             exit('Bad Request Error!');
         }
     }
-
-    public function __destruct()
-    {
-        unset($this->_oUser, $this->_oUserModel, $this->_mOutput);
-    }
-
 }
 
 echo (new UserApiAjax)->display();
