@@ -280,12 +280,14 @@ class Design
     }
 
     /**
-     * Provide a small "Powered By" link.
+     * Provide a small "Powered By" link (e.g., for sitemap.xsl.tpl).
      *
      * @return void
      */
     final public function smallLink()
     {
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) return;
+
         echo '<p><strong>', t('Powered By'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong></p>';
     }
 
