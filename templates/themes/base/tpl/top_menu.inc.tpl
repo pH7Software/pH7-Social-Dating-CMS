@@ -162,9 +162,9 @@
               <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'My Settings'}</a></li>
               <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'My Profile'}</a></li>
               <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'My Avatar'}">{lang 'My Avatar'}</a></li>
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" data-load="ajax">{lang 'Photo Gallery'}</a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Photo Gallery'}</a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('picture','main','addalbum') }}" title="{lang 'Add an Album'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Add an Album'}</a></li>
+                  <li><a href="{{ $design->url('picture','main','addalbum') }}" title="{lang 'Add an Album'}">{lang 'Add an Album'}</a></li>
                   <li><a href="{{ $design->url('picture','main','albums', $oSession->get('member_username')) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
                 </ul>
               </li>
