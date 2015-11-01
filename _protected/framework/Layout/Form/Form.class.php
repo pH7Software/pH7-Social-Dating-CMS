@@ -33,7 +33,7 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     public static function wrongImgFileTypeMsg()
     {
-        return t('File type incompatible. Please save the image in .gif, .png or .jpg');
+        return t('The file type is incompatible or too large. Please try again a smaller image with .gif, .png or .jpg extension.');
     }
 
     /**
@@ -43,7 +43,7 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     public static function wrongVideoFileTypeMsg()
     {
-        return t('File type incompatible. The accepted file types are: .mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv');
+        return t('The file type is incompatible or too large. The accepted file types are: .mov, .avi, .flv, .mp4, .mpg/.mpeg, .wmv, .ogg, .ogv, .webm or .mkv');
     }
 
     /**

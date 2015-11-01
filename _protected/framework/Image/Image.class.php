@@ -45,10 +45,10 @@ class Image
      */
     public function validate()
     {
-        if (!is_file($this->sFile))
+        if (!is_uploaded_file($this->sFile))
         {
             if (isDebug())
-                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Image file not found: The image file \'' . $this->sFile . '\' could not be found.');
+                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
             else
                 return false;
         }
