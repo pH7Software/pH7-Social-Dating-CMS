@@ -3,6 +3,8 @@
 ##
 # Title:           Deployment Automation
 # Description:     pH7CMS Deployment Automation. It is used to clean the script before distribution to customers.
+#                  To work correctly, you have to execute this script when you're in the root of the project in your terminal
+#                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 # Author:          Pierre-Henry Soria <ph7software@gmail.com>
 # Copyright:       (c) 2014-2015, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
@@ -60,7 +62,7 @@ function run() {
             rm -rf ./_repository/upgrade/*
             rm -rf ./_doc/
             rm -rf ./_test/
-            rm -rf .git/
+            rm -rf ./.git/
 
             ## TMP folders
             rm -rf ./.quarantine/
@@ -69,7 +71,7 @@ function run() {
             rm -rf ./_protected/.tmb/
 
             # Optimize Composer
-            php ../composer.phar dumpautoload -o
+            php ./composer.phar dumpautoload -o
 
             echo "Done!"
             echo "Remove \"deployment.sh\" (this file) before packaging pH7CMS"
