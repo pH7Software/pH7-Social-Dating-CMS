@@ -2,7 +2,8 @@
 
 ##
 # Title:           Useful Unix functions
-# Description:     For this script to work correctly, you should use it when you're at the root of the project with the terminal (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
+# Description:     To work correctly, you have to execute this script when you're in the root of the project in your terminal
+#                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 # Author:          Pierre-Henry Soria <ph7software@gmail.com>
 # Copyright:       (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
