@@ -54,12 +54,12 @@ class Video extends F\Upload
      */
     public function validate()
     {
-        if (!is_file($this->aFile['tmp_name']))
+        if (!is_uploaded_file($this->aFile['tmp_name']))
         {
             if (!isDebug())
                 return false;
             else
-                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('Video file not found: The video file \'' . $this->aFile['tmp_name'] . '\' could not be found.');
+                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
         }
         else
         {
