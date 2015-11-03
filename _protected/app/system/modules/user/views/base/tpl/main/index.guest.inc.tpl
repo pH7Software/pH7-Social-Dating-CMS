@@ -15,11 +15,11 @@
     <div class="splash_slideshow">
       <div class="window">
         <div class="img_reel">
-          <a href="{url_root}"><img src="{url_tpl_img}slideshow/1.jpg" alt="{lang 'Free Online Dating'}" /></a>
-          <a href="{url_root}"><img src="{url_tpl_img}slideshow/2.jpg" alt="{lang 'Free Chat Rooms'}" /></a>
-          <a href="{url_root}"><img src="{url_tpl_img}slideshow/3.jpg" alt="{lang 'Dating with Webcam Chat'}" /></a>
-          <a href="{url_root}"><img src="{url_tpl_img}slideshow/4.jpg" alt="{lang 'Dating Flirt'}" /></a>
-          <a href="{url_root}"><img src="{url_tpl_img}slideshow/5.jpg" alt="{lang 'Social Community'}" /></a>
+          {* For PHP 5.5+, keep just only the following *} {* {for $i in [1,2,3,4,5]} *}
+          {{ $num = [1,2,3,4,5] }}
+          {for $i in $num}
+            <a href="{url_root}"><img src="{url_tpl_img}slideshow/{i}.jpg" alt="{lang 'Social Dating Web App'}" /></a>
+          {/for}
         </div>
       </div>
       <div class="paging">
