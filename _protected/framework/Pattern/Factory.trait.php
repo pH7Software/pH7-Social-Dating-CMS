@@ -31,7 +31,7 @@ trait Factory
          * PHP 5.5
          *
         $sClass = static::class;
-         */
+        */
         $sClass = get_called_class();//remove it for static::class
         $aArgs = func_get_args();
 
