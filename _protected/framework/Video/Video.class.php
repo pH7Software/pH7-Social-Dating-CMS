@@ -36,7 +36,7 @@ class Video extends F\Upload
         $this->sFfmpegPath = Config::getInstance()->values['video']['handle.ffmpeg_path'];
 
         if (!file_exists($this->sFfmpegPath))
-            throw new F\File\Exception('FFmpeg is not installed on your server, please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini"');
+            throw new F\Exception('FFmpeg is not installed on your server, please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini"');
 
         $this->aFile = $aFile;
         $this->sType = $this->oFile->getFileExt($this->aFile['name']);
