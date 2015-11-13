@@ -12,7 +12,7 @@ defined('PH7') or exit('Restricted access');
 class Exception extends \PDOException
 {
 
-    use PH7\Framework\Error\CException\Escape;
+    use \PH7\Framework\Error\CException\Escape;
 
     public function __construct($sMsg)
     {
