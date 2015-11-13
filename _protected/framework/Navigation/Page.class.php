@@ -25,17 +25,6 @@ class Page
         $this->_oHttpRequest = new Http;
     }
 
-      /**
-       * @static
-       * @param float $iStartTime
-       * @param float $iEndTime
-       * @return float
-       */
-    public static function time($fStartTime, $fEndTime)
-    {
-        return round($fEndTime - $fStartTime, 8);
-    }
-
 
     /***** Methods for preparing the paging system *****/
 
