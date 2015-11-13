@@ -36,7 +36,7 @@ class Db
      * @staticvar float $_fTime
      * @staticvar object $_oInstance
      */
-    private static $_sDsn, $_sUsername, $_sPassword, $_sPrefix, $_aDriverOptions, $_iCount = 0, $_fTime = 0.0, $_oInstance = NULL;
+    private static $_sDsn, $_sUsername, $_sPassword, $_sPrefix, $_aDriverOptions, $_iCount = 0, $_fTime = 0.0, $_oInstance = NULL, $_oDb;
 
     /**
      * The constructor is set to private, so nobody can create a new instance using new.
@@ -65,8 +65,17 @@ class Db
             if(!empty($sPrefix))
                 self::$_sPrefix = $sPrefix;
 
-            self::$_oInstance = new \PDO(self::$_sDsn, self::$_sUsername, self::$_sPassword, self::$_aDriverOptions);
-            self::$_oInstance->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            static::$_oInstance = new static;
+
+            try
+            {
+                self::$_oDb = new \PDO(self::$_sDsn, self::$_sUsername, self::$_sPassword, self::$_aDriverOptions);
+                self::$_oDb->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            }
+            catch (Exception $oE)
+            {
+                exit('Error Establishing a Database Connection');
+            }
 
             static::checkMySqlVersion();
         }
@@ -81,7 +90,7 @@ class Db
      */
     public function beginTransaction()
     {
-        return self::$_oInstance->beginTransaction();
+        return self::$_oDb->beginTransaction();
     }
 
     /**
@@ -91,7 +100,7 @@ class Db
      */
     public function commit()
     {
-        return self::$_oInstance->commit();
+        return self::$_oDb->commit();
     }
 
     /**
@@ -101,7 +110,7 @@ class Db
      */
     public function errorCode()
     {
-        return self::$_oInstance->errorCode();
+        return self::$_oDb->errorCode();
     }
 
     /**
@@ -111,7 +120,7 @@ class Db
      */
     public function errorInfo()
     {
-        return self::$_oInstance->errorInfo();
+        return self::$_oDb->errorInfo();
     }
 
     /**
@@ -123,7 +132,7 @@ class Db
     public function exec($sStatement)
     {
         $fStartTime = microtime(true);
-        $mReturn = self::$_oInstance->exec($sStatement);
+        $mReturn = self::$_oDb->exec($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
         return $mReturn;
@@ -137,7 +146,7 @@ class Db
      */
     public function getAttribute($iAttribute)
     {
-        return self::$_oInstance->getAttribute($iAttribute);
+        return self::$_oDb->getAttribute($iAttribute);
     }
 
     /**
@@ -147,7 +156,7 @@ class Db
      */
     public function getAvailableDrivers()
     {
-        return self::$_oInstance->getAvailableDrivers();
+        return self::$_oDb->getAvailableDrivers();
     }
 
     /**
@@ -158,7 +167,7 @@ class Db
      */
     public function lastInsertId($sName = null)
     {
-        return self::$_oInstance->lastInsertId($sName);
+        return self::$_oDb->lastInsertId($sName);
     }
 
     /**
@@ -169,7 +178,7 @@ class Db
      */
     public function prepare($sStatement)
     {
-        return self::$_oInstance->prepare($sStatement);
+        return self::$_oDb->prepare($sStatement);
     }
 
     /**
@@ -181,7 +190,7 @@ class Db
     public function execute($sStatement)
     {
         $fStartTime = microtime(true);
-        $bReturn = self::$_oInstance->execute($sStatement);
+        $bReturn = self::$_oDb->execute($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
         return $bReturn;
@@ -196,7 +205,7 @@ class Db
     public function query($sStatement)
     {
         $fStartTime = microtime(true);
-        $mReturn = self::$_oInstance->query($sStatement);
+        $mReturn = self::$_oDb->query($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
         return $mReturn;
@@ -210,7 +219,7 @@ class Db
      */
     public function queryFetchAllAssoc($sStatement)
     {
-        return self::$_oInstance->query($sStatement)->fetchAll(PDO::FETCH_ASSOC);
+        return self::$_oDb->query($sStatement)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -221,7 +230,7 @@ class Db
      */
     public function queryFetchRowAssoc($sStatement)
     {
-        return self::$_oInstance->query($sStatement)->fetch(PDO::FETCH_ASSOC);
+        return self::$_oDb->query($sStatement)->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -232,7 +241,7 @@ class Db
      */
     public function queryFetchColAssoc($sStatement)
     {
-        return self::$_oInstance->query($sStatement)->fetchColumn();
+        return self::$_oDb->query($sStatement)->fetchColumn();
     }
 
     /**
@@ -244,7 +253,7 @@ class Db
      */
     public function quote($sInput, $iParameterType = 0)
     {
-        return self::$_oInstance->quote($sInput, $iParameterType);
+        return self::$_oDb->quote($sInput, $iParameterType);
     }
 
     /**
@@ -254,7 +263,7 @@ class Db
      */
     public function rollBack()
     {
-        return self::$_oInstance->rollBack();
+        return self::$_oDb->rollBack();
     }
 
     /**
@@ -266,7 +275,7 @@ class Db
      */
     public function setAttribute($iAttribute, $mValue)
     {
-        return self::$_oInstance->setAttribute($iAttribute, $mValue);
+        return self::$_oDb->setAttribute($iAttribute, $mValue);
     }
 
     /**
@@ -330,7 +339,7 @@ class Db
 
         // Free instance of the PDO object
         if(TRUE === $bCloseConnection)
-            self::$_oInstance = NULL;
+            self::$_oDb = NULL;
     }
 
     /**
@@ -364,7 +373,7 @@ class Db
      */
     public static function checkMySqlVersion()
     {
-        $sMySQLVer = self::$_oInstance->getAttribute(\PDO::ATTR_SERVER_VERSION);
+        $sMySQLVer = self::$_oDb->getAttribute(\PDO::ATTR_SERVER_VERSION);
         if(version_compare($sMySQLVer, PH7_REQUIRE_SQL_VERSION, '<'))
             exit('ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . PH7_REQUIRE_SQL_VERSION . ' or newer.');
     }
