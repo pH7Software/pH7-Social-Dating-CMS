@@ -24,6 +24,7 @@ PH7\Framework\Str\Str,
 PH7\Framework\File\File,
 PH7\Framework\Session\Session,
 PH7\Framework\Navigation\Page,
+PH7\Framework\Benchmark\Benchmark,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri;
 
@@ -194,11 +195,21 @@ class Design
         header('Refresh: ' . intval($iTime) . '; URL=' . $this->oHttpRequest->pH7Url($sUrl));
     }
 
+    /**
+     * Get stats from the benchmark.
+     *
+     * @return void HTML output.
+     */
     public function stat()
     {
         $iCountQueries = Db::queryCount();
-        $sRequest = nt('Request', 'Requests', $iCountQueries);
-        echo t('Time of the request: %0% | %1% %2% | Page executed in %3% seconds | Amount of memory allocated: %4%', Db::time(), $iCountQueries, $sRequest, Page::time(Registry::getInstance()->start_time, microtime(true)), memory_get_usage(true));
+        $sRequest = nt('Query', 'Queries', $iCountQueries);
+
+        $sMicrotime = microtime(true) - Registry::getInstance()->start_time;
+        $sTime = Benchmark::readableElapsedTime($sMicrotime);
+        $iMemory = Benchmark::readableSize(memory_get_usage(true));
+
+        echo t('Queries time: %0% | %1% %2% | Generated in %3% | Memory allocated: %4%', Db::time(), $iCountQueries, $sRequest, $sTime, $iMemory);
     }
 
     public function url($sModule, $sController, $sAction, $sVars = null, $bClear = true)
@@ -216,6 +227,7 @@ class Design
      * @param string $sAct
      * @param mixed (integer | string) $mId
      * @param string $sClass Add a CSS class. Default NULL
+     * @return void HTML output.
      */
     public function popupLinkConfirm($sLabel, $sMod, $sCtrl, $sAct, $mId, $sClass = null)
     {
