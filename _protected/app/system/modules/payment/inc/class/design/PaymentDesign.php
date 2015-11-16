@@ -31,7 +31,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('no_note', 1)
             ->param('no_shipping', 1)
             ->param('currency_code', $this->config->values['module.setting']['currency'])
-            ->param('tax_cart', $this->config->values['module.setting']['tax_vat.percentage'])
+            ->param('tax_cart', $this->config->values['module.setting']['vat_rate'])
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
             ->param('rm', 2) // Auto redirection in POST data
             ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PayPal'))
