@@ -178,7 +178,11 @@ class Db
      */
     public function prepare($sStatement)
     {
-        return self::$_oDb->prepare($sStatement);
+        $fStartTime = microtime(true);
+        $bReturn = self::$_oDb->prepare($sStatement);
+        $this->_increment();
+        $this->_addTime($fStartTime, microtime(true));
+        return $bReturn;
     }
 
     /**
