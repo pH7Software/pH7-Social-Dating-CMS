@@ -193,11 +193,7 @@ class Db
      */
     public function execute($sStatement)
     {
-        $fStartTime = microtime(true);
-        $bReturn = self::$_oDb->execute($sStatement);
-        $this->_increment();
-        $this->_addTime($fStartTime, microtime(true));
-        return $bReturn;
+        return self::$_oDb->execute($sStatement);
     }
 
     /**
