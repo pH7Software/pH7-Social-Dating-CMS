@@ -56,7 +56,7 @@ h1:hover{color:#1877D5;cursor:default}
 /** Buttons (links) **/
 .bt_login_remember,.bt_login_forgot{padding-bottom:4%}
 .bt_login_remember{float:left;padding-left:5.5%;margin-top:-1.5%}
-.bt_login_forgot{float:right;padding-right:40%;margin-top:-2px}
+.bt_login_forgot{float:right;padding-right:34%;margin-top:-2px}
 
 
 video#bgvid {
