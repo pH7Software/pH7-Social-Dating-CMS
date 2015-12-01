@@ -1,6 +1,6 @@
 {* Enable the Splash Background Video if it is enabled and if the visitor is not from a mobile device *}
 {if $is_bg_video && !$browser->isMobile()}
-    <video autoplay loop poster="{url_tpl_img}splash_vid.jpg" id="bgvid">
+    <video autoplay loop muted poster="{url_tpl_img}splash_vid.jpg" id="bgvid">
         <source src="{url_tpl}file/splash.webm" type="video/webm" />
     </video>
 {/if}
