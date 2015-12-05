@@ -2,7 +2,7 @@
 /**
  * @title          Main Controller
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Payment / Controller
@@ -155,7 +155,7 @@ class MainController extends Controller
             case 'ccbill':
             {
                 // In developing...
-                // Contact us at <ph7software@gmail.com> if you want to help us develop the payment system CCBill
+                // Contact us at <hello@ph7cms.com> or <contact@hizup.net> if you want to help us by developing the payment system CCBill
             }
             break;
 
