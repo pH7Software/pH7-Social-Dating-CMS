@@ -281,7 +281,7 @@ class Design
             <!-- ', Kernel::SOFTWARE_COPYRIGHT, ' -->
             <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
             <!-- You must leave this comment and the back link in the footer.
-            This open source software is distributed free and you must respect the thousands of days, months and years it takes to develop it!
+            This open source software is distributed free and you must respect the thousands of days, months and several years it takes to develop it!
             All rights reserved for ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '
             You can never claim that you took, developed, or helped in any other way in this software if it is wrong! -->';
         }
@@ -314,12 +314,12 @@ class Design
 
         if ($sLangCode == 'en-ie') {
             $iRand = 0;
-            $aData = [
+            $aSites = [
                 ['title' => 'Dating Site in Dublin', 'link' => 'http://dublin.meetlovelypeople.com']
             ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $iRand = mt_rand(0,2);
-            $aData = [
+            $aSites = [
                 ['title' => '1er Site de Rencontre Cool', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
                 ['title' => 'Site de Tchat 100% Gratuit', 'link' => 'http://01tchat.com'],
@@ -327,7 +327,7 @@ class Design
             ];
         } else { // Default links, set to English
             $iRand = mt_rand(0,3);
-            $aData = [
+            $aSites = [
                 ['title' => 'Date Lovely People', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Friend New Fun Date', 'link' => 'http://sofun.co'],
                 ['title' => 'Flirt Hot People', 'link' => 'http://flirtme.biz'],
@@ -336,7 +336,7 @@ class Design
             ];
         }
 
-        echo '<a href="', $aData[$iRand]['link'], '">', $aData[$iRand]['title'], '</a>';
+        echo '<a href="', $aSites[$iRand]['link'], '">', $aSites[$iRand]['title'], '</a>';
     }
 
     /**
