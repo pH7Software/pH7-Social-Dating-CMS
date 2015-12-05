@@ -311,7 +311,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
 
             // It is forbidden to violate the copyright!
             // Thought for those who have spent years for developing a professional, high-quality software and done their best to help developers!
-            if (!$this->isMarkCopyright() && !$this->bLicense)
+            if (!$this->isMarkCopyright())
                 $this->setErrMsg();
         }
 
@@ -907,11 +907,14 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
      */
     final private function isMarkCopyright()
     {
+        // "design->smartLink()" can be removed ONLY if you bought a license
+        if (!$this->bLicense && false === strpos($this->sCode, 'design->smartLink()'))
+            return false;
+
+        // "design->link()" can never be removed. Copyright notices won't be displayed if you bought a license
         return
         (
-            (false !== strpos($this->sCode, 'design->link()')
-            && false !== strpos($this->sCode, 'design->smartLink()'))
-            ||
+            (false !== strpos($this->sCode, 'design->link()')) ||
             (false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) && false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)'))
         );
     }
