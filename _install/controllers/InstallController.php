@@ -18,16 +18,6 @@ defined('PH7') or exit('Restricted access');
 class InstallController extends Controller
 {
 
-    private $_sRedirectUrlNoLicense;
-
-    /***** Constructor (initializing variables) *****/
-    public function __construct ()
-    {
-        parent::__construct();
-
-        $this->_sRedirectUrlNoLicense = self::SOFTWARE_LICENSE_KEY_URL;
-    }
-
     /********************* STEP 1 *********************/
     public function index ()
     {
