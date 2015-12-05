@@ -41,9 +41,9 @@ class Ban
      */
     public static function isUsername($sVal)
     {
-        static::$_sFile = static::USERNAME_FILE;
-        static::$_sVal = $sVal;
-        return static::_is();
+        self::$_sFile = static::USERNAME_FILE;
+        self::$_sVal = $sVal;
+        return self::_is();
     }
 
     /**
@@ -52,10 +52,10 @@ class Ban
      */
     public static function isEmail($sVal)
     {
-        static::$_sFile = static::EMAIL_FILE;
-        static::$_sVal = $sVal;
-        static::$_bIsEmail = true;
-        return static::_is();
+        self::$_sFile = static::EMAIL_FILE;
+        self::$_sVal = $sVal;
+        self::$_bIsEmail = true;
+        return self::_is();
     }
 
     /**
@@ -64,10 +64,10 @@ class Ban
      */
     public static function isBankAccount($sVal)
     {
-        static::$_sFile = static::BANK_ACCOUNT_FILE;
-        static::$_sVal = $sVal;
-        static::$_bIsEmail = true;
-        return static::_is();
+        self::$_sFile = static::BANK_ACCOUNT_FILE;
+        self::$_sVal = $sVal;
+        self::$_bIsEmail = true;
+        return self::_is();
     }
 
     /**
@@ -76,9 +76,9 @@ class Ban
      */
     public static function isIp($sVal)
     {
-        static::$_sFile = static::IP_FILE;
-        static::$_sVal = $sVal;
-        return static::_is();
+        self::$_sFile = static::IP_FILE;
+        self::$_sVal = $sVal;
+        return self::_is();
     }
 
     /**
@@ -89,9 +89,9 @@ class Ban
      */
     public static function filterWord($sVal, $bWordReplace = true)
     {
-        static::$_sFile = static::WORD_FILE;
-        static::$_sVal = $sVal;
-        return static::_replace($bWordReplace);
+        self::$_sFile = static::WORD_FILE;
+        self::$_sVal = $sVal;
+        return self::_replace($bWordReplace);
     }
 
     /**
@@ -102,12 +102,12 @@ class Ban
      */
     private static function _is()
     {
-        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . static::$_sFile);
+        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
 
-        if (static::$_bIsEmail)
-            if (static::_check(strrchr(static::$_sVal, '@'))) return true;
+        if (self::$_bIsEmail)
+            if (self::_check(strrchr(self::$_sVal, '@'))) return true;
 
-        return static::_check(static::$_sVal);
+        return self::_check(self::$_sVal);
     }
 
     /**
@@ -119,16 +119,16 @@ class Ban
      */
     private static function _replace($bWordReplace)
     {
-        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . static::$_sFile);
+        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
 
         foreach ($aBans as $sBan)
         {
             $sBan = trim($sBan);
             $sWordReplace = ($bWordReplace) ? \PH7\Framework\Mvc\Model\DbConfig::getSetting('banWordReplace') : '';
-            static::$_sVal = str_ireplace($sBan, $sWordReplace, static::$_sVal);
+            self::$_sVal = str_ireplace($sBan, $sWordReplace, self::$_sVal);
         }
 
-        return static::$_sVal;
+        return self::$_sVal;
     }
 
     /**
@@ -138,7 +138,7 @@ class Ban
      */
     private static function _check($sVal)
     {
-        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . static::$_sFile);
+        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
 
         return in_array($sVal, array_map('trim', $aBans));
     }

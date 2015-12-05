@@ -39,10 +39,10 @@ class Validate
     {
         $sType = strtolower($sType); // Case-insensitive type.
 
-        if(false === $bRequired && 0 === $this->_oStr->length($sValue)) return true; // Yoga Condition ;-)
+        if (false === $bRequired && 0 === (new Str)->length($sValue)) // Yoga Condition ;-)
+            return true;
 
-        switch($sType)
-        {
+        switch ($sType) {
             case 'str':
             case 'string':
                 $bValid = is_string($sValue);
@@ -101,14 +101,16 @@ class Validate
     {
         $sValue = filter_var($sValue, FILTER_SANITIZE_STRING);
 
-        if(!empty($sValue))
-            if(!empty($iMin) && $this->_oStr->length($sValue) < $iMin)
+        if (!empty($sValue)) {
+            if (!empty($iMin) && $this->_oStr->length($sValue) < $iMin)
                 return false;
-            elseif(!empty($iMax) && $this->_oStr->length($sValue) > $iMax)
+            elseif (!empty($iMax) && $this->_oStr->length($sValue) > $iMax)
                 return false;
-            elseif(!is_string($sValue))
+            elseif (!is_string($sValue))
                 return false;
-            return true;
+            else
+                return true;
+        }
         return false;
     }
 

@@ -35,8 +35,8 @@ class Suggestion
      */
     public static function email()
     {
-        static::$_sFile = static::EMAIL_FILE;
-        return static::_gets();
+        self::$_sFile = static::EMAIL_FILE;
+        return self::_gets();
     }
 
    /**
@@ -48,7 +48,7 @@ class Suggestion
     */
    private static function _gets()
    {
-       $aSuggestions = file(PH7_PATH_APP_CONFIG . static::DIR . static::$_sFile);
+       $aSuggestions = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
 
        // It removes all spaces, line breaks, ...
        $aSuggestions = array_map('trim', $aSuggestions);
