@@ -310,15 +310,14 @@ class Design
      */
     final public function smartLink()
     {
-        $sLangCode = (new \PH7\Framework\Navigation\Browser)->getLanguage(true); // Get Client's Language Code
+        // Get Client's Language Code
+        $sLangCode = (new \PH7\Framework\Navigation\Browser)->getLanguage(true);
 
         if ($sLangCode == 'en-ie') {
-            $iRand = 0;
             $aSites = [
                 ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com']
             ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
-            $iRand = mt_rand(0,2);
             $aSites = [
                 ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
@@ -326,7 +325,6 @@ class Design
                 ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
             ];
         } else { // Default links, set to English
-            $iRand = mt_rand(0,3);
             $aSites = [
                 ['title' => 'Date Lovely People', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Friend New Fun Date', 'link' => 'http://sofun.co'],
@@ -337,6 +335,7 @@ class Design
             ];
         }
 
+        $iRand = mt_rand(0,count($aSites)-1);
         echo '<a href="', $aSites[$iRand]['link'], '">', $aSites[$iRand]['title'], '</a>';
     }
 
