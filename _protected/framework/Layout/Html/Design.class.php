@@ -315,22 +315,23 @@ class Design
         if ($sLangCode == 'en-ie') {
             $iRand = 0;
             $aSites = [
-                ['title' => 'Dating Site in Dublin', 'link' => 'http://dublin.meetlovelypeople.com']
+                ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com']
             ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $iRand = mt_rand(0,2);
             $aSites = [
-                ['title' => '1er Site de Rencontre Cool', 'link' => 'http://coolonweb.com'],
+                ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
                 ['title' => 'Site de Tchat 100% Gratuit', 'link' => 'http://01tchat.com'],
-                ['title' => 'Rencontre &amp; Flirt', 'link' => 'http://flirt-rencontre.net']
+                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
             ];
         } else { // Default links, set to English
             $iRand = mt_rand(0,3);
             $aSites = [
                 ['title' => 'Date Lovely People', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Friend New Fun Date', 'link' => 'http://sofun.co'],
-                ['title' => 'Flirt Hot People', 'link' => 'http://flirtme.biz'],
+                ['title' => 'Flirt Hot Girls', 'link' => 'http://flirtme.biz'],
+                ['title' => 'Flirt Naughty Girls', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],
                 ['title' => 'Learn Languages Online', 'link' => 'http://newayup.com']
             ];
