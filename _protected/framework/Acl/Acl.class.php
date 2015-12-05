@@ -1,6 +1,6 @@
 <?php
 /**
- * @title            Acl Main Class
+ * @title            ACL (Access Control Lists) Main Class
  *
  * @author           Pierre-Henry SORIA <ph7software@gmail.com>
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
@@ -105,7 +105,7 @@ class Acl
                 break;
             }
         }
-        var_dump($rRole); exit();
+        //var_dump($rRole); exit;
         return $rRole;
     }
 
