@@ -14,6 +14,11 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\Stream, PH7\Framework\Url\Url;
 
+/**
+ * PayPal class using PayPal's API
+ *
+ * @link https://developer.paypal.com/docs/integration/direct/identity/seamless-checkout/
+ */
 class Paypal extends Provider implements Api
 {
 
@@ -39,7 +44,7 @@ class Paypal extends Provider implements Api
      * Get Checkout URL.
      *
      * @return string
-     * @internal We add an empty parameter for the method to be compatible with the API interface.
+     * @internal We added an empty parameter for the method only to be compatible with the API interface.
      */
     public function getUrl($sParam = '')
     {
@@ -60,7 +65,7 @@ class Paypal extends Provider implements Api
      * Check if the transaction is valid.
      *
      * @return boolean
-     * @internal We add two empty parameters for the method to be compatible with the API interface.
+     * @internal We added two empty parameters for the method only to be compatible with the API interface.
      */
     public function valid($sParam1 = '', $sParam2 = '')
     {
@@ -104,18 +109,17 @@ class Paypal extends Provider implements Api
     /**
      * Connect to Paypal.
      *
-     * @return mixed (boolean | string) Message from the transaction status on success, false on failure.
+     * @return mixed (boolean | string) Message from the transaction status on success or FALSE on failure.
      */
      protected function getStatus()
      {
-         // Connect to PayPal
          $rCh = curl_init($this->_sUrl);
          curl_setopt($rCh, CURLOPT_POST, 1);
          curl_setopt($rCh, CURLOPT_RETURNTRANSFER, 1);
          curl_setopt($rCh, CURLOPT_POSTFIELDS, $this->_sRequest);
-         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Host: www.paypal.com'));
+         curl_setopt($rCh, CURLOPT_SSL_VERIFYPEER, 1);
+         curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, 2);
+         curl_setopt($rCh, CURLOPT_HTTPHEADER, array('Host: www.paypal.com'));
          $mRes = curl_exec($rCh);
          curl_close($rCh);
          unset($rCh);
