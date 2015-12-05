@@ -310,7 +310,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
                 $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by\') ?>' . ' ' . self::SOFTWARE_NAME . ')</title>', $this->sCode);
 
             // It is forbidden to violate the copyright!
-            // Thought for those who have spent years developing a software quality professional!
+            // Thought for those who have spent years for developing a professional, high-quality software and done their best to help developers!
             if (!$this->isMarkCopyright() && !$this->bLicense)
                 $this->setErrMsg();
         }
@@ -909,8 +909,8 @@ Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self:
     {
         return
         (
-            (false !== strpos($this->sCode, 'design->link()'))
-            || (false !== strpos($this->sCode, 'design->smartLink()'))
+            (false !== strpos($this->sCode, 'design->link()')
+            && false !== strpos($this->sCode, 'design->smartLink()'))
             ||
             (false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) && false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)'))
         );

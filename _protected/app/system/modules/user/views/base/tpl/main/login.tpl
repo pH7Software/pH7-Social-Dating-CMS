@@ -14,7 +14,7 @@
 
 <div class="right">
 
-  {* Show promotional images (you can change the images from the "/static/img/promo/" folder *}
+  {* Show promotional images (you can change the images in the "/static/img/promo/" folder *}
   <p class="pic thumb"><img src="{url_static_img}promo/login{% mt_rand(1,2) %}_400x280.jpg" alt="{lang 'Free Online Dating Site'}" title="{lang 'Free Online Dating Site'}"></p>
 
 </div>
