@@ -1167,6 +1167,34 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
+     * Get Birth Date of a user.
+     *
+     * @param integer $iProfileId
+     * @param string $sTable Default 'Members'
+     * @return string The User's birthdate.
+     */
+    public function getBirthDate($iProfileId, $sTable = 'Members')
+    {
+        $this->cache->start(self::CACHE_GROUP, 'birthdate' . $iProfileId . $sTable, static::CACHE_TIME);
+
+        if (!$sData = $this->cache->get())
+        {
+            Various::checkModelTable($sTable);
+
+            $rStmt = Db::getInstance()->prepare('SELECT birthDate FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->execute();
+            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $sData = $oRow->birthDate;
+            unset($oRow);
+            $this->cache->put($sData);
+        }
+
+        return $sData;
+    }
+
+    /**
      * Get user's group.
      *
      * @param integer $iProfileId
