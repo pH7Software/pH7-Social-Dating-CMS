@@ -65,7 +65,7 @@ class Db
             if(!empty($sPrefix))
                 self::$_sPrefix = $sPrefix;
 
-            static::$_oInstance = new static;
+            self::$_oInstance = new static;
 
             try
             {
@@ -295,7 +295,7 @@ class Db
      */
     public static function showTables()
     {
-        return self::getInstance()->query('SHOW TABLES');
+        return static::getInstance()->query('SHOW TABLES');
     }
 
     /**
@@ -350,7 +350,7 @@ class Db
     public static function optimize()
     {
         $oAllTables = static::showTables();
-        while($aTableNames = $oAllTables->fetch()) self::getInstance()->query('OPTIMIZE TABLE '. $aTableNames[0]);
+        while($aTableNames = $oAllTables->fetch()) static::getInstance()->query('OPTIMIZE TABLE '. $aTableNames[0]);
         unset($oAllTables);
     }
 
@@ -362,7 +362,7 @@ class Db
     public static function repair()
     {
         $oAllTables = static::showTables();
-        while($aTableNames = $oAllTables->fetch()) self::getInstance()->query('REPAIR TABLE '. $aTableNames[0]);
+        while($aTableNames = $oAllTables->fetch()) static::getInstance()->query('REPAIR TABLE '. $aTableNames[0]);
         unset($oAllTables);
     }
 
