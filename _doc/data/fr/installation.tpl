@@ -27,4 +27,5 @@ Attention, les dossiers suivants doivent avoir les permissions <em>777</em> :</p
 Si vous voulez le permettre, vous devez mettre en valeurs numériques <em>777</em> pour tous les dossiers et <em>666</em> pour tous les fichiers.</p>
 
 <h3>Lancez l'installateur</h3>
-<p><p>Vous devez simplement vous rendre à l'URL suivante et suivre attentivement les instructions : <em>http://www.VOTRE-SITE.com/<strong>_install</strong>/</em></p>
+<p><p>Vous devez simplement vous rendre à l'URL suivante et suivre attentivement les instructions : <em>http://www.VOTRE-SITE.com/<strong>_install</strong>/</em><br />
+<iframe width="560" height="315" src="//www.youtube.com/embed/PlgxdLIdmoA" frameborder="0" allowfullscreen></iframe></p>
