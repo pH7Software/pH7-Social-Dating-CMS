@@ -18,8 +18,7 @@ h1,h2,h3,h4{margin-top:2px;font-weight:bold}
 p{margin:0 0 0}
 img{border:0}
 p, li, pre {line-height: 1.5em}
-a{color:#08c;outline-style:none;cursor:pointer}
-a:link, a:visited{text-decoration:none}
+a, a:link, a:visited{color:#08c;outline-style:none;cursor:pointer;text-decoration:none}
 a:hover, a:active{color:#F24C9E; text-decoration:underline; text-shadow:0 0 5px #fff,0 0 8px rgba(255,255,255,.6)}
 ul li{display:block}
 abbr{border-bottom:1px dotted #666}
