@@ -34,7 +34,7 @@ header li{list-style-type: none;float:left;padding-right: 20px;font-style:italic
 header, #content{margin-left:auto; margin-right:auto;padding-left:12px;padding-right:12px;}
 #content:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 footer{padding:10px;margin:10px 20px;font-size:.9em;text-align:center;border-top:1px solid #C8C8C8;}
-footer a{color:#666;}
+footer a, footer a:link, footer a:visited{color:#666;}
 .clear {
     clear:both;
     height:1px;
@@ -124,17 +124,17 @@ label#percent{position:absolute;padding-left:115px;padding-top:6px;font-size:80%
 
 .picture:hover a{opacity:.5}
 .picture a {
-background-position: center center;
-background-color: rgba(14, 14, 14, 0.3);
-float: left;
-height: 110px;
-width: 145px;
-margin: 1px 1px 0 0;
-overflow: hidden;
--moz-transition:0.25s;
--webkit-transition:0.25s;
--o-transition:0.25s;
-transition:0.25s;
+    background-position: center center;
+    background-color: rgba(14, 14, 14, 0.3);
+    float: left;
+    height: 110px;
+    width: 145px;
+    margin: 1px 1px 0 0;
+    overflow: hidden;
+    -moz-transition:0.25s;
+    -webkit-transition:0.25s;
+    -o-transition:0.25s;
+    transition:0.25s;
 }
 .picture a:hover{opacity:1}
 .picture_block {
