@@ -132,7 +132,6 @@ class Api
 
             default:
                 throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \''  . $sClass . '\'');
-                return; // Stop it
         }
 
         return $sClass;

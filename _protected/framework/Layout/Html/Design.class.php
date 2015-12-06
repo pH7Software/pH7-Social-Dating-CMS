@@ -322,11 +322,11 @@ class Design
                 ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
                 ['title' => 'Site de Tchat 100% Gratuit', 'link' => 'http://01tchat.com'],
-                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
+                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net'],
+                ['title' => ' Site de Rencontre bourgeois', 'link' => 'http://bourgeoisie.club']
             ];
         } else { // Default links, set to English
             $aSites = [
-                ['title' => 'Date Lovely People', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Friend New Fun Date', 'link' => 'http://sofun.co'],
                 ['title' => 'Flirt Hot Girls', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Flirt Naughty Girls', 'link' => 'http://flirtme.biz'],
