@@ -11,29 +11,14 @@
 namespace PH7;
 
 use
-PH7\Framework\Session\Session,
+PH7\Framework\Math\Measure\Year,
 PH7\Framework\Geo\Ip\Geo,
+PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Router\Uri;
 
 class SearchUserCoreForm
 {
-
-    /**
-     * @return array The 'sex_user' and 'match_sex'
-     */
-    public static function getGenderValues()
-    {
-        $sSexUser = 'male';
-        $sMatchSex = 'female';
-
-        if(UserCore::auth())
-        {
-            $sSexUser = (new UserModel)->getSex((new Session)->get('member_id'));
-            $sMatchSex = ($sSexUser == 'male' ? 'female' : ($sSexUser == 'couple' ? 'couple' : 'male'));
-        }
-
-        return ['sex_user' => $sSexUser, 'match_sex' => $sMatchSex];
-    }
 
     public static function quick($iWidth = 500)
     {
@@ -41,9 +26,9 @@ class SearchUserCoreForm
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
-        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), array('value' => static::getGenderValues()['sex_user'], 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => array('male','female','couple'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Age);
+        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), array('value' => static::getGenderVals()['user_sex'], 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => static::getGenderVals()['match_sex'], 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Age(array('value' => static::getAgeVals())));
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id' => 'str_country', 'value' => Geo::getCountryCode())));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city', 'value'=> Geo::getCity())));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'latest', array('1' => '<span class="bold">' . t('Latest members') . '</span>')));
@@ -60,9 +45,9 @@ class SearchUserCoreForm
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
-        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), array('value' => static::getGenderValues()['sex_user'], 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => static::getGenderValues()['match_sex'], 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Age);
+        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), array('value' => static::getGenderVals()['user_sex'], 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => static::getGenderVals()['match_sex'], 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Age(array('value' => static::getAgeVals())));
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id' => 'str_country', 'value' => Geo::getCountryCode())));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city', 'value'=> Geo::getCity())));
         $oForm->addElement(new \PFBC\Element\Textbox(t('State or Province:'), 'state', array('id' => 'str_state', 'value'=> Geo::getState())));
@@ -75,6 +60,47 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Button(t('Search'),'submit', array('icon' => 'search')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'geo/autocompleteCity.js"></script>'));
         $oForm->render();
+    }
+
+    /**
+     * If a user is logged, get the relative 'user_sex' and 'match_sex' for better and more intuitive search.
+     *
+     * @return array The 'user_sex' and 'match_sex'
+     */
+    protected static function getGenderVals()
+    {
+        $sUserSex = 'male';
+        $sMatchSex = ['male', 'female', 'couple'];
+
+        if(UserCore::auth())
+        {
+            $sUserSex = (new UserModel)->getSex((new Session)->get('member_id'));
+            $sMatchSex = ($sUserSex == 'male' ? 'female' : ($sUserSex == 'couple' ? 'couple' : 'male'));
+        }
+
+        return ['user_sex' => $sUserSex, 'match_sex' => $sMatchSex];
+    }
+
+    /**
+     * If a user is logged, get "approximately" the relative age for better and more intuitive search.
+     *
+     * @return array 'min_age' and 'max_age' which is the approximately age the user is looking for.
+     */
+    protected static function getAgeVals()
+    {
+        $iMinAge = DbConfig::getSetting('minAgeRegistration');
+        $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
+
+        if(UserCore::auth())
+        {
+            $sBirthDate = (new UserModel)->getBirthDate((new Session)->get('member_id'));
+            $aAge = explode('-', $sBirthDate);
+            $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
+            $iMinAge = $iAge-5;
+            $iMaxAge = $iAge+5;
+        }
+
+        return ['min_age' => $iMinAge, 'max_age' => $iMaxAge];
     }
 
 }

@@ -16,8 +16,10 @@ class Age extends \PFBC\OptionElement
      *
      * @return The field age with the default selected minimum and maximum registration age.
      */
-    public function __construct()
+    public function __construct($aProperties = null)
     {
+        parent::__construct('', '', array(), $aProperties);
+
         $this->iMinAge = DbConfig::getSetting('minAgeRegistration');
         $this->iMaxAge = DbConfig::getSetting('maxAgeRegistration');
 
@@ -25,20 +27,32 @@ class Age extends \PFBC\OptionElement
         $sSelect1 = '';
         $sSelect2 = '';
 
-        for($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++)
+        for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++)
         {
-            if($iAge == $this->iMinAge)
-                 $sSelect1 .= '<option value="' . $iAge . '" selected="selected">' . $iAge . '</option>';
+            $sSelect1 .= '<option value="' . $iAge . '"';
 
-            $sSelect1 .= '<option value="' . $iAge . '">' . $iAge . '</option>';
+            if (!empty($this->attributes['value']['min_age']) && $iAge == $this->attributes['value']['min_age']
+                || empty($this->attributes['value']['min_age']) && $iAge == $this->iMinAge
+            )
+            {
+                $sSelect1 .= ' selected="selected"';
+            }
+
+            $sSelect1 .= '>' . $iAge . '</option>';
         }
 
-        for($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++)
+        for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++)
         {
-            if($iAge == $this->iMaxAge)
-                $sSelect2 .= '<option value="' . $iAge . '" selected="selected">' . $iAge . '</option>';
+            $sSelect2 .= '<option value="' . $iAge . '"';
 
-            $sSelect2 .= '<option value="' . $iAge . '">' . $iAge . '</option>';
+            if (!empty($this->attributes['value']['max_age']) && $iAge == $this->attributes['value']['max_age']
+                || empty($this->attributes['value']['max_age']) && $iAge == $this->iMaxAge
+            )
+            {
+                $sSelect2 .= ' selected="selected"';
+            }
+
+            $sSelect2 .= '>' . $iAge . '</option>';
         }
 
         $this->sHtmlOutput = '<div class="pfbc-label"><label><strong>*</strong>' . t('Age') . '</label></div><select name="age1">' . $sSelect1 . '</select> - <select name="age2">' . $sSelect2 . '</select> &nbsp; ' . t('years');
