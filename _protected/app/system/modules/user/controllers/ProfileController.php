@@ -15,6 +15,8 @@ PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Analytics\Statistic,
 PH7\Framework\Parse\Emoticon,
 PH7\Framework\Security\Ban\Ban,
+PH7\Framework\Math\Measure\Year,
+PH7\Framework\Security\CSRF\Token,
 PH7\Framework\Url\Url,
 PH7\Framework\Geo\Map\Map,
 PH7\Framework\Date\Various as VDate;
@@ -74,7 +76,7 @@ class ProfileController extends Controller
             // Age
             $this->view->birth_date = $this->dateTime->get($oUser->birthDate)->date();
             $aAge = explode('-', $oUser->birthDate);
-            $iAge = (new Framework\Math\Measure\Year($aAge[0], $aAge[1], $aAge[2]))->get();
+            $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
 
             // Links of the Menubar
             $iNbFriend = FriendModel::total($this->iProfileId);
@@ -98,7 +100,7 @@ class ProfileController extends Controller
                 Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(array('msg' => t('You need to free register for talk to %0%.', $sFirstName),
                 'ref' => 'profile', 'a' => 'messenger', 'u' => $this->sUsername, 'f_n' => $sFirstName, 's' => $oUser->sex)), false);
             $sBefriendLink = ($this->sUserAuth) ?
-                'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\''.(new Framework\Security\CSRF\Token)->generate('friend').'\')' :
+                'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\''.(new Token)->generate('friend').'\')' :
                 Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(array('msg' => t('Free Sign up for %site_name% to become friend with %0%.', $sFirstName), 'ref' => 'profile', 'a' => 'befriend&', 'u' => $this->sUsername, 'f_n' => $sFirstName, 's' => $oUser->sex)), false);
 
             $this->view->page_title = t('Meet %0%, A beautiful %1% looking some %2% - %3% years - %4% - %5% %6%',
