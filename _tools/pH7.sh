@@ -91,7 +91,7 @@ function clean-code() {
         eval "$exec 's/\s+$/\n/'"
         eval "$exec 's/\t/    /g'"
 
-        # _clean-indent
+        #_clean-indent
         echo "The code has been cleaned!"
     fi
 }
@@ -168,9 +168,11 @@ function backup() {
 
 #### Private functions ####
 
-# Clean indentation code
+# Clean coding-style. Set PSR-* Ident Style (http://cs.sensiolabs.org)
 function _clean-indent() {
-    sed -i 's/\(.*\)\(function\|class\|try\|catch\)\([^{]*\){\([^}].*\)/\1\2\3\n\1{\4/'  $(find -name '*.php')
+    indents=indentation,linefeed,trailing_spaces,eof_ending,php_closing_tag,braces,extra_empty_lines,short_tag,phpdoc_params
+    cs_script="./_tools/php-cs-fixer.phar"
+    find . -type f -name "*.php" -exec php $cs_script fix {} --fixers=$indents \;
 }
 
 # CHange permissions of the folders/files (CHMOD)
