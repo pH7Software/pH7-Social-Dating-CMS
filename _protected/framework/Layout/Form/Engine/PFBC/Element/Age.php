@@ -1,13 +1,19 @@
 <?php
 /**
- * We made this code.
- * By pH7 (Pierre-Henry SORIA).
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
+ * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @link             http://ph7cms.com
+ * @package          PH7 / Framework / Layout / Form / Engine / PFBC / Element
  */
 namespace PFBC\Element;
+
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Age extends \PFBC\OptionElement
 {
+
+    const MIN_AGE = 'min_age', MAX_AGE = 'max_age';
 
     protected $sHtmlOutput, $iMinAge, $iMaxAge;
 
@@ -23,37 +29,8 @@ class Age extends \PFBC\OptionElement
         $this->iMinAge = DbConfig::getSetting('minAgeRegistration');
         $this->iMaxAge = DbConfig::getSetting('maxAgeRegistration');
 
-        // Default values
-        $sSelect1 = '';
-        $sSelect2 = '';
-
-        for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++)
-        {
-            $sSelect1 .= '<option value="' . $iAge . '"';
-
-            if (!empty($this->attributes['value']['min_age']) && $iAge == $this->attributes['value']['min_age']
-                || empty($this->attributes['value']['min_age']) && $iAge == $this->iMinAge
-            )
-            {
-                $sSelect1 .= ' selected="selected"';
-            }
-
-            $sSelect1 .= '>' . $iAge . '</option>';
-        }
-
-        for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++)
-        {
-            $sSelect2 .= '<option value="' . $iAge . '"';
-
-            if (!empty($this->attributes['value']['max_age']) && $iAge == $this->attributes['value']['max_age']
-                || empty($this->attributes['value']['max_age']) && $iAge == $this->iMaxAge
-            )
-            {
-                $sSelect2 .= ' selected="selected"';
-            }
-
-            $sSelect2 .= '>' . $iAge . '</option>';
-        }
+        $sSelect1 = static::getOptions(static::MIN_AGE);
+        $sSelect2 = static::getOptions(static::MAX_AGE);
 
         $this->sHtmlOutput = '<div class="pfbc-label"><label><strong>*</strong>' . t('Age') . '</label></div><select name="age1">' . $sSelect1 . '</select> - <select name="age2">' . $sSelect2 . '</select> &nbsp; ' . t('years');
     }
@@ -61,6 +38,31 @@ class Age extends \PFBC\OptionElement
     public function render()
     {
         echo $this->sHtmlOutput;
+    }
+
+    /**
+     * @param string $sType 'min_age' or 'max_age'
+     */
+    protected function getOptions($sType)
+    {
+        $sSelect = '';
+        $sAttrName = ($sType == static::MIN_AGE) ? 'iMinAge' : 'iMaxAge';
+
+        for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++)
+        {
+            $sSelect .= '<option value="' . $iAge . '"';
+
+            if (!empty($this->attributes['value'][$sType]) && $iAge == $this->attributes['value'][$sType]
+                || empty($this->attributes['value'][$sType]) && $iAge == $this->$sAttrName
+            )
+            {
+                $sSelect .= ' selected="selected"';
+            }
+
+            $sSelect .= '>' . $iAge . '</option>';
+        }
+
+        return $sSelect;
     }
 
 }
