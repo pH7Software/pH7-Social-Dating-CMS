@@ -115,7 +115,6 @@ class MainController extends Controller
             {
                 if ($this->httpRequest->postExists('stripeToken'))
                 {
-                    Framework\File\Import::lib('Service.Stripe.init'); // Import the Stripe library
                     \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
 
                      $oCharge = \Stripe\Charge::create(
