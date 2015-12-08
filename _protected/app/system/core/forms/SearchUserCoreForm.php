@@ -88,16 +88,16 @@ class SearchUserCoreForm
      */
     protected static function getAgeVals()
     {
-        $iMinAge = DbConfig::getSetting('minAgeRegistration');
-        $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
+        $iMinAge = (int) DbConfig::getSetting('minAgeRegistration');
+        $iMaxAge = (int) DbConfig::getSetting('maxAgeRegistration');
 
         if(UserCore::auth())
         {
             $sBirthDate = (new UserModel)->getBirthDate((new Session)->get('member_id'));
             $aAge = explode('-', $sBirthDate);
             $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
-            $iMinAge = $iAge-5;
-            $iMaxAge = $iAge+5;
+            $iMinAge = ($iAge-5 < $iMinAge) ? $iMinAge : $iAge-5;
+            $iMaxAge = ($iAge+5 > $iMaxAge) ? $iMaxAge : $iAge+5;
         }
 
         return ['min_age' => $iMinAge, 'max_age' => $iMaxAge];
