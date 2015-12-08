@@ -43,8 +43,3 @@ class ComposerAutoloaderInitPH7
         return $loader;
     }
 }
-
-function composerRequirePH7($file)
-{
-    require $file;
-}

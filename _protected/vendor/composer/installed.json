@@ -96,17 +96,17 @@
     },
     {
         "name": "geoip2/geoip2",
-        "version": "v2.3.2",
-        "version_normalized": "2.3.2.0",
+        "version": "v2.3.3",
+        "version_normalized": "2.3.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/maxmind/GeoIP2-php.git",
-            "reference": "56da4bd576880d437d92c28cb376b337a5daa08f"
+            "reference": "ee15b2e466dd09fd2246cf64efa1aa9eca988b86"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/56da4bd576880d437d92c28cb376b337a5daa08f",
-            "reference": "56da4bd576880d437d92c28cb376b337a5daa08f",
+            "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/ee15b2e466dd09fd2246cf64efa1aa9eca988b86",
+            "reference": "ee15b2e466dd09fd2246cf64efa1aa9eca988b86",
             "shasum": ""
         },
         "require": {
@@ -117,7 +117,7 @@
         "require-dev": {
             "phpunit/phpunit": "4.2.*"
         },
-        "time": "2015-09-23 16:25:07",
+        "time": "2015-09-24 17:29:28",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -144,6 +144,63 @@
             "geoip2",
             "geolocation",
             "maxmind"
+        ]
+    },
+    {
+        "name": "stripe/stripe-php",
+        "version": "v3.5.0",
+        "version_normalized": "3.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/stripe/stripe-php.git",
+            "reference": "0ec0ce46278db7d9d35df72a236c3490b713f028"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/0ec0ce46278db7d9d35df72a236c3490b713f028",
+            "reference": "0ec0ce46278db7d9d35df72a236c3490b713f028",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "ext-mbstring": "*",
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0",
+            "satooshi/php-coveralls": "~0.6.1",
+            "squizlabs/php_codesniffer": "~2.0"
+        },
+        "time": "2015-12-02 00:11:27",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Stripe\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Stripe and contributors",
+                "homepage": "https://github.com/stripe/stripe-php/contributors"
+            }
+        ],
+        "description": "Stripe PHP Library",
+        "homepage": "https://stripe.com/",
+        "keywords": [
+            "api",
+            "payment processing",
+            "stripe"
         ]
     }
 ]
