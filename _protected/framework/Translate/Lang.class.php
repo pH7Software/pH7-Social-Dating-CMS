@@ -206,10 +206,10 @@ namespace
  /**
   * Plurial version of t() function.
   *
-  * @param string $sMsg1
-  * @param string $sMsg2
+  * @param string $sMsg1 Singular string.
+  * @param string $sMsg2 Plurial string.
   * @param integer $iNumber
-  * @return string Returns the text with ngettext function the correct plural form of message identified by msgid1 and msgid2 for count n.
+  * @return string Returns the text with ngettext function which is the correct plural form of message identified by msgid1 and msgid2 for count n.
   */
  function nt($sMsg1, $sMsg2, $iNumber)
  {

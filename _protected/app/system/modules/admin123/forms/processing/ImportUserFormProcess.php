@@ -36,10 +36,8 @@ class ImportUserFormProcess extends Form
 
         if ($sExtFile != 'csv' && $sExtFile != 'txt')
             $sErrMsg = static::ERR_BAD_FILE;
-
         elseif (!$rHandler = @fopen($this->_aFile['tmp_name'], 'rb'))
             $sErrMsg = static::ERR_BAD_FILE;
-
          elseif (!($aFileData = @fgetcsv($rHandler, 0, $sDelimiter, $sEnDelimiter)) || !(is_array($aFileData)))
              $sErrMsg = static::ERR_BAD_FILE;
 
@@ -137,7 +135,7 @@ class ImportUserFormProcess extends Form
         unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aTmpData, $aData);
         fclose($rHandler);
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), nt('%n% User has been successfully added.', '%n% Users has been successfully added.', $iRow));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), nt('%n% user has been successfully added.', '%n% users has been successfully added.', $iRow));
     }
 
     /**
