@@ -1,10 +1,13 @@
-<!-- Last Update: 06/25/2015 by Pierre-Henry Soria -->
+<!-- Last Update: 12/15/2015 by Pierre-Henry Soria -->
 
-<h1>Tree of pH7CMS</h1>
+<h1>pH7CMS Tree</h1>
 
 <pre>
 
 .
+├── composer.json
+├── composer.lock
+├── composer.phar
 ├── _constants.php
 ├── data
 │   ├── modules
@@ -74,6 +77,7 @@
 │           │           ├── blackjack.png
 │           │           ├── boeing.jpg
 │           │           ├── book.jpg
+│           │           ├── bowling.png
 │           │           ├── brighton_bounty_hunter.png
 │           │           ├── bullseye.png
 │           │           ├── burj_al_arab.jpg
@@ -163,7 +167,6 @@
 │   ├── README
 │   ├── static
 │   │   ├── img
-│   │   │   ├── en
 │   │   │   ├── flags
 │   │   │   │   ├── ad.gif
 │   │   │   │   ├── ae.gif
@@ -418,7 +421,6 @@
 │   │   │   │   ├── zm.gif
 │   │   │   │   ├── zr.gif
 │   │   │   │   └── zw.gif
-│   │   │   ├── fr
 │   │   │   ├── html5-page-structure-(image-from-basewebmaster.com).gif
 │   │   │   ├── pH.png
 │   │   │   └── seo_tags.png
@@ -614,7 +616,6 @@
 │   │           ├── smarty_resource_recompiled.php
 │   │           ├── smarty_resource_uncompiled.php
 │   │           └── smarty_security.php
-│   ├── _license-key.txt
 │   ├── requirements.php
 │   ├── sample.htaccess
 │   ├── static
@@ -937,6 +938,7 @@
 │   │           │   ├── inc
 │   │           │   │   └── class
 │   │           │   │       ├── Admin.php
+│   │           │   │       ├── ImportUser.php
 │   │           │   │       └── Module.php
 │   │           │   ├── lang
 │   │           │   │   ├── en_US
@@ -1073,6 +1075,22 @@
 │   │           │               ├── login.inc.tpl
 │   │           │               └── signup
 │   │           │                   └── step1.tpl
+│   │           ├── api
+│   │           │   ├── config
+│   │           │   │   ├── config.ini
+│   │           │   │   └── Permission.php
+│   │           │   ├── controllers
+│   │           │   │   ├── MainController.php
+│   │           │   │   └── UserController.php
+│   │           │   ├── lang
+│   │           │   │   ├── en_US
+│   │           │   │   │   └── LC_MESSAGES
+│   │           │   │   └── fr_FR
+│   │           │   │       └── LC_MESSAGES
+│   │           │   └── views
+│   │           │       └── base
+│   │           │           └── config
+│   │           │               └── config.ini
 │   │           ├── blog
 │   │           │   ├── assets
 │   │           │   │   └── ajax
@@ -1749,13 +1767,13 @@
 │   │           ├── user
 │   │           │   ├── assets
 │   │           │   │   └── ajax
+│   │           │   │       ├── ApiAjax.php
 │   │           │   │       ├── form
 │   │           │   │       │   └── checkUsernameAjax.php
 │   │           │   │       ├── FriendAjax.php
 │   │           │   │       ├── popup
 │   │           │   │       │   └── signupAjax.php
 │   │           │   │       ├── setActivityAjax.php
-│   │           │   │       ├── UserApiAjax.php
 │   │           │   │       └── WallAjax.php
 │   │           │   ├── Bootstrap.php
 │   │           │   ├── config
@@ -1986,7 +2004,7 @@
 │   │   │   ├── file
 │   │   │   └── sql
 │   │   ├── cache
-│   │   │   ├── pH7_cache
+│   │   │   ├── pH7_cache
 │   │   │   ├── pH7_static
 │   │   │   ├── pH7tpl_cache
 │   │   │   └── pH7tpl_compile
@@ -2036,7 +2054,7 @@
 │   │           └── readme.txt
 │   ├── framework
 │   │   ├── Acl
-│   │   │   ├── Alc.class.php
+│   │   │   ├── Acl.class.php
 │   │   │   ├── Exception.class.php
 │   │   │   ├── Resource.class.php
 │   │   │   └── Role.class.php
@@ -2052,7 +2070,8 @@
 │   │   ├── Annotation
 │   │   │   └── Annotation.class.php
 │   │   ├── Api
-│   │   │   ├── Api.class.php
+│   │   │   ├── Api.trait.php
+│   │   │   ├── Tool.class.php
 │   │   │   └── XmlRpc
 │   │   │       └── DOC.txt
 │   │   ├── Auth
@@ -2095,9 +2114,7 @@
 │   │   │   ├── Core.class.php
 │   │   │   ├── Exception.class.php
 │   │   │   ├── Kernel.class.php
-│   │   │   ├── Kernel_tmp.class.php
-│   │   │   ├── License.class.php
-│   │   │   └── License_tmp.class.php
+│   │   │   └── License.class.php
 │   │   ├── Cron
 │   │   │   └── Run
 │   │   │       └── Cron.class.php
@@ -2137,10 +2154,8 @@
 │   │   ├── Geo
 │   │   │   ├── Ip
 │   │   │   │   ├── Geo.class.php
-│   │   │   │   ├── geoipcity.inc.php
-│   │   │   │   ├── geoip.inc.php
-│   │   │   │   ├── geoipregionvars.php
-│   │   │   │   └── GeoLiteCity.dat
+│   │   │   │   ├── GeoLite2-City.mmdb
+│   │   │   │   └── Maxmind-GeoLite2.license.txt
 │   │   │   └── Map
 │   │   │       ├── MapAPI.class.php
 │   │   │       └── Map.class.php
@@ -2259,208 +2274,6 @@
 │   │   ├── Loader
 │   │   │   └── Autoloader.php
 │   │   ├── Mail
-│   │   │   ├── Engine
-│   │   │   │   └── Swift
-│   │   │   │       ├── CHANGES
-│   │   │   │       ├── classes
-│   │   │   │       │   ├── Swift
-│   │   │   │       │   │   ├── Attachment.php
-│   │   │   │       │   │   ├── ByteStream
-│   │   │   │       │   │   │   ├── AbstractFilterableInputStream.php
-│   │   │   │       │   │   │   ├── ArrayByteStream.php
-│   │   │   │       │   │   │   ├── FileByteStream.php
-│   │   │   │       │   │   │   └── TemporaryFileByteStream.php
-│   │   │   │       │   │   ├── CharacterReader
-│   │   │   │       │   │   │   ├── GenericFixedWidthReader.php
-│   │   │   │       │   │   │   ├── UsAsciiReader.php
-│   │   │   │       │   │   │   └── Utf8Reader.php
-│   │   │   │       │   │   ├── CharacterReaderFactory
-│   │   │   │       │   │   │   └── SimpleCharacterReaderFactory.php
-│   │   │   │       │   │   ├── CharacterReaderFactory.php
-│   │   │   │       │   │   ├── CharacterReader.php
-│   │   │   │       │   │   ├── CharacterStream
-│   │   │   │       │   │   │   ├── ArrayCharacterStream.php
-│   │   │   │       │   │   │   └── NgCharacterStream.php
-│   │   │   │       │   │   ├── CharacterStream.php
-│   │   │   │       │   │   ├── ConfigurableSpool.php
-│   │   │   │       │   │   ├── DependencyContainer.php
-│   │   │   │       │   │   ├── DependencyException.php
-│   │   │   │       │   │   ├── EmbeddedFile.php
-│   │   │   │       │   │   ├── Encoder
-│   │   │   │       │   │   │   ├── Base64Encoder.php
-│   │   │   │       │   │   │   ├── QpEncoder.php
-│   │   │   │       │   │   │   └── Rfc2231Encoder.php
-│   │   │   │       │   │   ├── Encoder.php
-│   │   │   │       │   │   ├── Encoding.php
-│   │   │   │       │   │   ├── Events
-│   │   │   │       │   │   │   ├── CommandEvent.php
-│   │   │   │       │   │   │   ├── CommandListener.php
-│   │   │   │       │   │   │   ├── EventDispatcher.php
-│   │   │   │       │   │   │   ├── EventListener.php
-│   │   │   │       │   │   │   ├── EventObject.php
-│   │   │   │       │   │   │   ├── Event.php
-│   │   │   │       │   │   │   ├── ResponseEvent.php
-│   │   │   │       │   │   │   ├── ResponseListener.php
-│   │   │   │       │   │   │   ├── SendEvent.php
-│   │   │   │       │   │   │   ├── SendListener.php
-│   │   │   │       │   │   │   ├── SimpleEventDispatcher.php
-│   │   │   │       │   │   │   ├── TransportChangeEvent.php
-│   │   │   │       │   │   │   ├── TransportChangeListener.php
-│   │   │   │       │   │   │   ├── TransportExceptionEvent.php
-│   │   │   │       │   │   │   └── TransportExceptionListener.php
-│   │   │   │       │   │   ├── FailoverTransport.php
-│   │   │   │       │   │   ├── FileSpool.php
-│   │   │   │       │   │   ├── FileStream.php
-│   │   │   │       │   │   ├── Filterable.php
-│   │   │   │       │   │   ├── Image.php
-│   │   │   │       │   │   ├── InputByteStream.php
-│   │   │   │       │   │   ├── IoException.php
-│   │   │   │       │   │   ├── KeyCache
-│   │   │   │       │   │   │   ├── ArrayKeyCache.php
-│   │   │   │       │   │   │   ├── DiskKeyCache.php
-│   │   │   │       │   │   │   ├── KeyCacheInputStream.php
-│   │   │   │       │   │   │   ├── NullKeyCache.php
-│   │   │   │       │   │   │   └── SimpleKeyCacheInputStream.php
-│   │   │   │       │   │   ├── KeyCache.php
-│   │   │   │       │   │   ├── LoadBalancedTransport.php
-│   │   │   │       │   │   ├── Mailer
-│   │   │   │       │   │   │   ├── ArrayRecipientIterator.php
-│   │   │   │       │   │   │   └── RecipientIterator.php
-│   │   │   │       │   │   ├── Mailer.php
-│   │   │   │       │   │   ├── MailTransport.php
-│   │   │   │       │   │   ├── MemorySpool.php
-│   │   │   │       │   │   ├── Message.php
-│   │   │   │       │   │   ├── Mime
-│   │   │   │       │   │   │   ├── Attachment.php
-│   │   │   │       │   │   │   ├── CharsetObserver.php
-│   │   │   │       │   │   │   ├── ContentEncoder
-│   │   │   │       │   │   │   │   ├── Base64ContentEncoder.php
-│   │   │   │       │   │   │   │   ├── NativeQpContentEncoder.php
-│   │   │   │       │   │   │   │   ├── PlainContentEncoder.php
-│   │   │   │       │   │   │   │   ├── QpContentEncoder.php
-│   │   │   │       │   │   │   │   ├── QpContentEncoderProxy.php
-│   │   │   │       │   │   │   │   └── RawContentEncoder.php
-│   │   │   │       │   │   │   ├── ContentEncoder.php
-│   │   │   │       │   │   │   ├── EmbeddedFile.php
-│   │   │   │       │   │   │   ├── EncodingObserver.php
-│   │   │   │       │   │   │   ├── Grammar.php
-│   │   │   │       │   │   │   ├── HeaderEncoder
-│   │   │   │       │   │   │   │   ├── Base64HeaderEncoder.php
-│   │   │   │       │   │   │   │   └── QpHeaderEncoder.php
-│   │   │   │       │   │   │   ├── HeaderEncoder.php
-│   │   │   │       │   │   │   ├── HeaderFactory.php
-│   │   │   │       │   │   │   ├── Header.php
-│   │   │   │       │   │   │   ├── Headers
-│   │   │   │       │   │   │   │   ├── AbstractHeader.php
-│   │   │   │       │   │   │   │   ├── DateHeader.php
-│   │   │   │       │   │   │   │   ├── IdentificationHeader.php
-│   │   │   │       │   │   │   │   ├── MailboxHeader.php
-│   │   │   │       │   │   │   │   ├── OpenDKIMHeader.php
-│   │   │   │       │   │   │   │   ├── ParameterizedHeader.php
-│   │   │   │       │   │   │   │   ├── PathHeader.php
-│   │   │   │       │   │   │   │   └── UnstructuredHeader.php
-│   │   │   │       │   │   │   ├── HeaderSet.php
-│   │   │   │       │   │   │   ├── Message.php
-│   │   │   │       │   │   │   ├── MimeEntity.php
-│   │   │   │       │   │   │   ├── MimePart.php
-│   │   │   │       │   │   │   ├── ParameterizedHeader.php
-│   │   │   │       │   │   │   ├── SimpleHeaderFactory.php
-│   │   │   │       │   │   │   ├── SimpleHeaderSet.php
-│   │   │   │       │   │   │   ├── SimpleMessage.php
-│   │   │   │       │   │   │   └── SimpleMimeEntity.php
-│   │   │   │       │   │   ├── MimePart.php
-│   │   │   │       │   │   ├── NullTransport.php
-│   │   │   │       │   │   ├── OutputByteStream.php
-│   │   │   │       │   │   ├── Plugins
-│   │   │   │       │   │   │   ├── AntiFloodPlugin.php
-│   │   │   │       │   │   │   ├── BandwidthMonitorPlugin.php
-│   │   │   │       │   │   │   ├── Decorator
-│   │   │   │       │   │   │   │   └── Replacements.php
-│   │   │   │       │   │   │   ├── DecoratorPlugin.php
-│   │   │   │       │   │   │   ├── ImpersonatePlugin.php
-│   │   │   │       │   │   │   ├── Logger.php
-│   │   │   │       │   │   │   ├── LoggerPlugin.php
-│   │   │   │       │   │   │   ├── Loggers
-│   │   │   │       │   │   │   │   ├── ArrayLogger.php
-│   │   │   │       │   │   │   │   └── EchoLogger.php
-│   │   │   │       │   │   │   ├── MessageLogger.php
-│   │   │   │       │   │   │   ├── Pop
-│   │   │   │       │   │   │   │   ├── Pop3Connection.php
-│   │   │   │       │   │   │   │   └── Pop3Exception.php
-│   │   │   │       │   │   │   ├── PopBeforeSmtpPlugin.php
-│   │   │   │       │   │   │   ├── RedirectingPlugin.php
-│   │   │   │       │   │   │   ├── Reporter.php
-│   │   │   │       │   │   │   ├── ReporterPlugin.php
-│   │   │   │       │   │   │   ├── Reporters
-│   │   │   │       │   │   │   │   ├── HitReporter.php
-│   │   │   │       │   │   │   │   └── HtmlReporter.php
-│   │   │   │       │   │   │   ├── Sleeper.php
-│   │   │   │       │   │   │   ├── ThrottlerPlugin.php
-│   │   │   │       │   │   │   └── Timer.php
-│   │   │   │       │   │   ├── Preferences.php
-│   │   │   │       │   │   ├── ReplacementFilterFactory.php
-│   │   │   │       │   │   ├── RfcComplianceException.php
-│   │   │   │       │   │   ├── SendmailTransport.php
-│   │   │   │       │   │   ├── SignedMessage.php
-│   │   │   │       │   │   ├── Signer.php
-│   │   │   │       │   │   ├── Signers
-│   │   │   │       │   │   │   ├── BodySigner.php
-│   │   │   │       │   │   │   ├── DKIMSigner.php
-│   │   │   │       │   │   │   ├── DomainKeySigner.php
-│   │   │   │       │   │   │   ├── HeaderSigner.php
-│   │   │   │       │   │   │   ├── OpenDKIMSigner.php
-│   │   │   │       │   │   │   └── SMimeSigner.php
-│   │   │   │       │   │   ├── SmtpTransport.php
-│   │   │   │       │   │   ├── Spool.php
-│   │   │   │       │   │   ├── SpoolTransport.php
-│   │   │   │       │   │   ├── StreamFilter.php
-│   │   │   │       │   │   ├── StreamFilters
-│   │   │   │       │   │   │   ├── ByteArrayReplacementFilter.php
-│   │   │   │       │   │   │   ├── StringReplacementFilterFactory.php
-│   │   │   │       │   │   │   └── StringReplacementFilter.php
-│   │   │   │       │   │   ├── SwiftException.php
-│   │   │   │       │   │   ├── Transport
-│   │   │   │       │   │   │   ├── AbstractSmtpTransport.php
-│   │   │   │       │   │   │   ├── Esmtp
-│   │   │   │       │   │   │   │   ├── Auth
-│   │   │   │       │   │   │   │   │   ├── CramMd5Authenticator.php
-│   │   │   │       │   │   │   │   │   ├── LoginAuthenticator.php
-│   │   │   │       │   │   │   │   │   ├── NTLMAuthenticator.php
-│   │   │   │       │   │   │   │   │   ├── PlainAuthenticator.php
-│   │   │   │       │   │   │   │   │   └── XOAuth2Authenticator.php
-│   │   │   │       │   │   │   │   ├── Authenticator.php
-│   │   │   │       │   │   │   │   └── AuthHandler.php
-│   │   │   │       │   │   │   ├── EsmtpHandler.php
-│   │   │   │       │   │   │   ├── EsmtpTransport.php
-│   │   │   │       │   │   │   ├── FailoverTransport.php
-│   │   │   │       │   │   │   ├── IoBuffer.php
-│   │   │   │       │   │   │   ├── LoadBalancedTransport.php
-│   │   │   │       │   │   │   ├── MailInvoker.php
-│   │   │   │       │   │   │   ├── MailTransport.php
-│   │   │   │       │   │   │   ├── NullTransport.php
-│   │   │   │       │   │   │   ├── SendmailTransport.php
-│   │   │   │       │   │   │   ├── SimpleMailInvoker.php
-│   │   │   │       │   │   │   ├── SmtpAgent.php
-│   │   │   │       │   │   │   ├── SpoolTransport.php
-│   │   │   │       │   │   │   └── StreamBuffer.php
-│   │   │   │       │   │   ├── TransportException.php
-│   │   │   │       │   │   ├── Transport.php
-│   │   │   │       │   │   └── Validate.php
-│   │   │   │       │   └── Swift.php
-│   │   │   │       ├── dependency_maps
-│   │   │   │       │   ├── cache_deps.php
-│   │   │   │       │   ├── message_deps.php
-│   │   │   │       │   ├── mime_deps.php
-│   │   │   │       │   └── transport_deps.php
-│   │   │   │       ├── LICENSE
-│   │   │   │       ├── mime_types.php
-│   │   │   │       ├── preferences.php
-│   │   │   │       ├── README
-│   │   │   │       ├── swift_init.php
-│   │   │   │       ├── swiftmailer_generate_mimes_config.php
-│   │   │   │       ├── swift_required_pear.php
-│   │   │   │       ├── swift_required.php
-│   │   │   │       └── VERSION
 │   │   │   └── Mail.class.php
 │   │   ├── Math
 │   │   │   └── Measure
@@ -2617,154 +2430,823 @@
 │   │       ├── Feed
 │   │       │   └── Rss.class.php
 │   │       └── Link.class.php
-│   └── library
-│       ├── HtmlPurifier
-│       ├── PhpIds
-│       ├── PhpUnit
-│       ├── Service
-│       │   ├── Akismet
-│       │   ├── Ebay
-│       │   ├── Facebook
-│       │   │   ├── BaseFacebook.php
-│       │   │   └── Facebook.php
-│       │   ├── Google
-│       │   │   ├── Analytics
-│       │   │   ├── OAuth
-│       │   │   │   ├── auth
-│       │   │   │   │   ├── Google_AssertionCredentials.php
-│       │   │   │   │   ├── Google_AuthNone.php
-│       │   │   │   │   ├── Google_Auth.php
-│       │   │   │   │   ├── Google_LoginTicket.php
-│       │   │   │   │   ├── Google_OAuth2.php
-│       │   │   │   │   ├── Google_P12Signer.php
-│       │   │   │   │   ├── Google_PemVerifier.php
-│       │   │   │   │   ├── Google_Signer.php
-│       │   │   │   │   └── Google_Verifier.php
-│       │   │   │   ├── cache
-│       │   │   │   │   ├── Google_ApcCache.php
-│       │   │   │   │   ├── Google_Cache.php
-│       │   │   │   │   ├── Google_FileCache.php
-│       │   │   │   │   └── Google_MemcacheCache.php
-│       │   │   │   ├── config.php
-│       │   │   │   ├── contrib
-│       │   │   │   │   ├── Google_AdexchangebuyerService.php
-│       │   │   │   │   ├── Google_AdsensehostService.php
-│       │   │   │   │   ├── Google_AdsenseService.php
-│       │   │   │   │   ├── Google_AnalyticsService.php
-│       │   │   │   │   ├── Google_BigqueryService.php
-│       │   │   │   │   ├── Google_BloggerService.php
-│       │   │   │   │   ├── Google_BooksService.php
-│       │   │   │   │   ├── Google_CalendarService.php
-│       │   │   │   │   ├── Google_ComputeService.php
-│       │   │   │   │   ├── Google_CustomsearchService.php
-│       │   │   │   │   ├── Google_DriveService.php
-│       │   │   │   │   ├── Google_FreebaseService.php
-│       │   │   │   │   ├── Google_FusiontablesService.php
-│       │   │   │   │   ├── Google_GanService.php
-│       │   │   │   │   ├── Google_LatitudeService.php
-│       │   │   │   │   ├── Google_LicensingService.php
-│       │   │   │   │   ├── Google_ModeratorService.php
-│       │   │   │   │   ├── Google_Oauth2Service.php
-│       │   │   │   │   ├── Google_OrkutService.php
-│       │   │   │   │   ├── Google_PagespeedonlineService.php
-│       │   │   │   │   ├── Google_PlusMomentsService.php
-│       │   │   │   │   ├── Google_PlusService.php
-│       │   │   │   │   ├── Google_PredictionService.php
-│       │   │   │   │   ├── Google_ShoppingService.php
-│       │   │   │   │   ├── Google_SiteVerificationService.php
-│       │   │   │   │   ├── Google_StorageService.php
-│       │   │   │   │   ├── Google_TaskqueueService.php
-│       │   │   │   │   ├── Google_TasksService.php
-│       │   │   │   │   ├── Google_TranslateService.php
-│       │   │   │   │   ├── Google_UrlshortenerService.php
-│       │   │   │   │   ├── Google_WebfontsService.php
-│       │   │   │   │   └── Google_YoutubeService.php
-│       │   │   │   ├── external
-│       │   │   │   │   └── URITemplateParser.php
-│       │   │   │   ├── Google_Client.php
-│       │   │   │   ├── io
-│       │   │   │   │   ├── cacerts.pem
-│       │   │   │   │   ├── Google_CacheParser.php
-│       │   │   │   │   ├── Google_CurlIO.php
-│       │   │   │   │   ├── Google_HttpRequest.php
-│       │   │   │   │   ├── Google_IO.php
-│       │   │   │   │   └── Google_REST.php
-│       │   │   │   └── service
-│       │   │   │       ├── Google_BatchRequest.php
-│       │   │   │       ├── Google_MediaFileUpload.php
-│       │   │   │       ├── Google_Model.php
-│       │   │   │       ├── Google_Service.php
-│       │   │   │       ├── Google_ServiceResource.php
-│       │   │   │       └── Google_Utils.php
-│       │   │   ├── ReCaptcha
-│       │   │   └── Translate
-│       │   ├── Microsoft
-│       │   │   └── Live
-│       │   │       ├── http.php
-│       │   │       └── oauth_client.php
-│       │   ├── ShortUrl
-│       │   ├── Stripe
-│       │   │   ├── init.php
-│       │   │   └── lib
-│       │   │       ├── Account.php
-│       │   │       ├── ApiRequestor.php
-│       │   │       ├── ApiResource.php
-│       │   │       ├── ApplicationFee.php
-│       │   │       ├── ApplicationFeeRefund.php
-│       │   │       ├── AttachedObject.php
-│       │   │       ├── Balance.php
-│       │   │       ├── BalanceTransaction.php
-│       │   │       ├── BitcoinReceiver.php
-│       │   │       ├── BitcoinTransaction.php
-│       │   │       ├── Card.php
-│       │   │       ├── Charge.php
-│       │   │       ├── Collection.php
-│       │   │       ├── Coupon.php
-│       │   │       ├── Customer.php
-│       │   │       ├── Error
-│       │   │       │   ├── ApiConnection.php
-│       │   │       │   ├── Api.php
-│       │   │       │   ├── Authentication.php
-│       │   │       │   ├── Base.php
-│       │   │       │   ├── Card.php
-│       │   │       │   ├── InvalidRequest.php
-│       │   │       │   └── RateLimit.php
-│       │   │       ├── Event.php
-│       │   │       ├── FileUpload.php
-│       │   │       ├── HttpClient
-│       │   │       │   ├── ClientInterface.php
-│       │   │       │   └── CurlClient.php
-│       │   │       ├── InvoiceItem.php
-│       │   │       ├── Invoice.php
-│       │   │       ├── Object.php
-│       │   │       ├── Plan.php
-│       │   │       ├── Recipient.php
-│       │   │       ├── Refund.php
-│       │   │       ├── SingletonApiResource.php
-│       │   │       ├── Stripe.php
-│       │   │       ├── Subscription.php
-│       │   │       ├── Token.php
-│       │   │       ├── Transfer.php
-│       │   │       ├── TransferReversal.php
-│       │   │       └── Util
-│       │   │           ├── RequestOptions.php
-│       │   │           ├── Set.php
-│       │   │           └── Util.php
-│       │   ├── Twitter
-│       │   │   ├── LICENSE
-│       │   │   ├── README.md
-│       │   │   ├── tmhOAuth.php
-│       │   │   └── tmhUtilities.php
-│       │   └── Yahoo
-│       ├── XAjax
-│       └── Zend
+│   ├── library
+│   │   ├── HtmlPurifier
+│   │   ├── PhpIds
+│   │   ├── PhpUnit
+│   │   ├── Service
+│   │   │   ├── Akismet
+│   │   │   ├── Ebay
+│   │   │   ├── Facebook
+│   │   │   │   ├── BaseFacebook.php
+│   │   │   │   └── Facebook.php
+│   │   │   ├── Google
+│   │   │   │   ├── Analytics
+│   │   │   │   ├── OAuth
+│   │   │   │   │   ├── auth
+│   │   │   │   │   │   ├── Google_AssertionCredentials.php
+│   │   │   │   │   │   ├── Google_AuthNone.php
+│   │   │   │   │   │   ├── Google_Auth.php
+│   │   │   │   │   │   ├── Google_LoginTicket.php
+│   │   │   │   │   │   ├── Google_OAuth2.php
+│   │   │   │   │   │   ├── Google_P12Signer.php
+│   │   │   │   │   │   ├── Google_PemVerifier.php
+│   │   │   │   │   │   ├── Google_Signer.php
+│   │   │   │   │   │   └── Google_Verifier.php
+│   │   │   │   │   ├── cache
+│   │   │   │   │   │   ├── Google_ApcCache.php
+│   │   │   │   │   │   ├── Google_Cache.php
+│   │   │   │   │   │   ├── Google_FileCache.php
+│   │   │   │   │   │   └── Google_MemcacheCache.php
+│   │   │   │   │   ├── config.php
+│   │   │   │   │   ├── contrib
+│   │   │   │   │   │   ├── Google_AdexchangebuyerService.php
+│   │   │   │   │   │   ├── Google_AdsensehostService.php
+│   │   │   │   │   │   ├── Google_AdsenseService.php
+│   │   │   │   │   │   ├── Google_AnalyticsService.php
+│   │   │   │   │   │   ├── Google_BigqueryService.php
+│   │   │   │   │   │   ├── Google_BloggerService.php
+│   │   │   │   │   │   ├── Google_BooksService.php
+│   │   │   │   │   │   ├── Google_CalendarService.php
+│   │   │   │   │   │   ├── Google_ComputeService.php
+│   │   │   │   │   │   ├── Google_CustomsearchService.php
+│   │   │   │   │   │   ├── Google_DriveService.php
+│   │   │   │   │   │   ├── Google_FreebaseService.php
+│   │   │   │   │   │   ├── Google_FusiontablesService.php
+│   │   │   │   │   │   ├── Google_GanService.php
+│   │   │   │   │   │   ├── Google_LatitudeService.php
+│   │   │   │   │   │   ├── Google_LicensingService.php
+│   │   │   │   │   │   ├── Google_ModeratorService.php
+│   │   │   │   │   │   ├── Google_Oauth2Service.php
+│   │   │   │   │   │   ├── Google_OrkutService.php
+│   │   │   │   │   │   ├── Google_PagespeedonlineService.php
+│   │   │   │   │   │   ├── Google_PlusMomentsService.php
+│   │   │   │   │   │   ├── Google_PlusService.php
+│   │   │   │   │   │   ├── Google_PredictionService.php
+│   │   │   │   │   │   ├── Google_ShoppingService.php
+│   │   │   │   │   │   ├── Google_SiteVerificationService.php
+│   │   │   │   │   │   ├── Google_StorageService.php
+│   │   │   │   │   │   ├── Google_TaskqueueService.php
+│   │   │   │   │   │   ├── Google_TasksService.php
+│   │   │   │   │   │   ├── Google_TranslateService.php
+│   │   │   │   │   │   ├── Google_UrlshortenerService.php
+│   │   │   │   │   │   ├── Google_WebfontsService.php
+│   │   │   │   │   │   └── Google_YoutubeService.php
+│   │   │   │   │   ├── external
+│   │   │   │   │   │   └── URITemplateParser.php
+│   │   │   │   │   ├── Google_Client.php
+│   │   │   │   │   ├── io
+│   │   │   │   │   │   ├── cacerts.pem
+│   │   │   │   │   │   ├── Google_CacheParser.php
+│   │   │   │   │   │   ├── Google_CurlIO.php
+│   │   │   │   │   │   ├── Google_HttpRequest.php
+│   │   │   │   │   │   ├── Google_IO.php
+│   │   │   │   │   │   └── Google_REST.php
+│   │   │   │   │   └── service
+│   │   │   │   │       ├── Google_BatchRequest.php
+│   │   │   │   │       ├── Google_MediaFileUpload.php
+│   │   │   │   │       ├── Google_Model.php
+│   │   │   │   │       ├── Google_Service.php
+│   │   │   │   │       ├── Google_ServiceResource.php
+│   │   │   │   │       └── Google_Utils.php
+│   │   │   │   ├── ReCaptcha
+│   │   │   │   └── Translate
+│   │   │   ├── Microsoft
+│   │   │   │   └── Live
+│   │   │   │       ├── http.php
+│   │   │   │       └── oauth_client.php
+│   │   │   ├── ShortUrl
+│   │   │   ├── Twitter
+│   │   │   │   ├── LICENSE
+│   │   │   │   ├── README.md
+│   │   │   │   ├── tmhOAuth.php
+│   │   │   │   └── tmhUtilities.php
+│   │   │   └── Yahoo
+│   │   ├── XAjax
+│   │   └── Zend
+│   └── vendor
+│       ├── autoload.php
+│       ├── cache
+│       │   ├── files
+│       │   │   ├── geoip2
+│       │   │   │   └── geoip2
+│       │   │   │       ├── 56da4bd576880d437d92c28cb376b337a5daa08f.zip
+│       │   │   │       └── ee15b2e466dd09fd2246cf64efa1aa9eca988b86.zip
+│       │   │   ├── stripe
+│       │   │   │   └── stripe-php
+│       │   │   │       └── 0ec0ce46278db7d9d35df72a236c3490b713f028.zip
+│       │   │   └── swiftmailer
+│       │   │       └── swiftmailer
+│       │   │           └── 0697e6aa65c83edf97bb0f23d8763f94e3f11421.zip
+│       │   └── repo
+│       │       └── https---packagist.org
+│       │           ├── packages.json
+│       │           ├── p-provider-2013.json
+│       │           ├── p-provider-2014-10.json
+│       │           ├── p-provider-2014.json
+│       │           ├── p-provider-2015-01.json
+│       │           ├── p-provider-2015-04.json
+│       │           ├── p-provider-2015-07.json
+│       │           ├── p-provider-2015-10.json
+│       │           ├── p-provider-archived.json
+│       │           ├── p-provider-latest.json
+│       │           ├── provider-geoip2$geoip2.json
+│       │           ├── provider-guzzle$batch.json
+│       │           ├── provider-guzzle$cache.json
+│       │           ├── provider-guzzle$common.json
+│       │           ├── provider-guzzle$guzzle.json
+│       │           ├── provider-guzzle$http.json
+│       │           ├── provider-guzzle$inflection.json
+│       │           ├── provider-guzzle$iterator.json
+│       │           ├── provider-guzzle$log.json
+│       │           ├── provider-guzzle$parser.json
+│       │           ├── provider-guzzle$plugin-async.json
+│       │           ├── provider-guzzle$plugin-backoff.json
+│       │           ├── provider-guzzle$plugin-cache.json
+│       │           ├── provider-guzzle$plugin-cookie.json
+│       │           ├── provider-guzzle$plugin-curlauth.json
+│       │           ├── provider-guzzle$plugin-error-response.json
+│       │           ├── provider-guzzle$plugin-history.json
+│       │           ├── provider-guzzle$plugin.json
+│       │           ├── provider-guzzle$plugin-log.json
+│       │           ├── provider-guzzle$plugin-md5.json
+│       │           ├── provider-guzzle$plugin-mock.json
+│       │           ├── provider-guzzle$plugin-oauth.json
+│       │           ├── provider-guzzle$service.json
+│       │           ├── provider-guzzle$stream.json
+│       │           ├── provider-maxmind-db$reader.json
+│       │           ├── provider-maxmind$web-service-common.json
+│       │           ├── provider-stripe$stripe-php.json
+│       │           ├── provider-swiftmailer$swiftmailer.json
+│       │           └── provider-symfony$event-dispatcher.json
+│       ├── composer
+│       │   ├── autoload_classmap.php
+│       │   ├── autoload_namespaces.php
+│       │   ├── autoload_psr4.php
+│       │   ├── autoload_real.php
+│       │   ├── ClassLoader.php
+│       │   ├── installed.json
+│       │   └── LICENSE
+│       ├── geoip2
+│       │   └── geoip2
+│       │       ├── bin
+│       │       │   └── benchmark.php
+│       │       ├── box.json
+│       │       ├── CHANGELOG.md
+│       │       ├── composer.json
+│       │       ├── dev-bin
+│       │       │   ├── phar-test.php
+│       │       │   └── release.sh
+│       │       ├── LICENSE
+│       │       ├── maxmind-db
+│       │       ├── phar-stub.php
+│       │       ├── phpunit.xml.dist
+│       │       ├── README.dev.md
+│       │       ├── README.md
+│       │       ├── src
+│       │       │   ├── Compat
+│       │       │   │   └── JsonSerializable.php
+│       │       │   ├── Database
+│       │       │   │   └── Reader.php
+│       │       │   ├── Exception
+│       │       │   │   ├── AddressNotFoundException.php
+│       │       │   │   ├── AuthenticationException.php
+│       │       │   │   ├── GeoIp2Exception.php
+│       │       │   │   ├── HttpException.php
+│       │       │   │   ├── InvalidRequestException.php
+│       │       │   │   └── OutOfQueriesException.php
+│       │       │   ├── Model
+│       │       │   │   ├── AbstractModel.php
+│       │       │   │   ├── AnonymousIp.php
+│       │       │   │   ├── City.php
+│       │       │   │   ├── ConnectionType.php
+│       │       │   │   ├── Country.php
+│       │       │   │   ├── Domain.php
+│       │       │   │   ├── Insights.php
+│       │       │   │   └── Isp.php
+│       │       │   ├── ProviderInterface.php
+│       │       │   ├── Record
+│       │       │   │   ├── AbstractPlaceRecord.php
+│       │       │   │   ├── AbstractRecord.php
+│       │       │   │   ├── City.php
+│       │       │   │   ├── Continent.php
+│       │       │   │   ├── Country.php
+│       │       │   │   ├── Location.php
+│       │       │   │   ├── MaxMind.php
+│       │       │   │   ├── Postal.php
+│       │       │   │   ├── RepresentedCountry.php
+│       │       │   │   ├── Subdivision.php
+│       │       │   │   └── Traits.php
+│       │       │   └── WebService
+│       │       │       └── Client.php
+│       │       └── tests
+│       │           ├── bootstrap.php
+│       │           └── GeoIp2
+│       │               └── Test
+│       │                   ├── Database
+│       │                   │   └── ReaderTest.php
+│       │                   ├── Model
+│       │                   │   ├── CountryTest.php
+│       │                   │   ├── InsightsTest.php
+│       │                   │   └── NameTest.php
+│       │                   └── WebService
+│       │                       └── ClientTest.php
+│       ├── maxmind
+│       │   └── web-service-common
+│       │       ├── CHANGELOG.md
+│       │       ├── composer.json
+│       │       ├── LICENSE
+│       │       ├── phpunit.xml.dist
+│       │       ├── README.md
+│       │       ├── src
+│       │       │   ├── Exception
+│       │       │   │   ├── AuthenticationException.php
+│       │       │   │   ├── HttpException.php
+│       │       │   │   ├── InsufficientFundsException.php
+│       │       │   │   ├── InvalidInputException.php
+│       │       │   │   ├── InvalidRequestException.php
+│       │       │   │   ├── IpAddressNotFoundException.php
+│       │       │   │   └── WebServiceException.php
+│       │       │   └── WebService
+│       │       │       ├── cacert.pem
+│       │       │       ├── Client.php
+│       │       │       └── Http
+│       │       │           ├── CurlRequest.php
+│       │       │           ├── RequestFactory.php
+│       │       │           └── Request.php
+│       │       └── tests
+│       │           ├── bootstrap.php
+│       │           └── MaxMind
+│       │               └── Test
+│       │                   └── WebService
+│       │                       ├── ClientTest.php
+│       │                       └── Http
+│       │                           └── CurlRequestTest.php
+│       ├── maxmind-db
+│       │   └── reader
+│       │       ├── CHANGELOG.md
+│       │       ├── composer.json
+│       │       ├── dev-bin
+│       │       │   └── make-release.sh
+│       │       ├── examples
+│       │       │   └── benchmark.php
+│       │       ├── ext
+│       │       │   ├── config.m4
+│       │       │   ├── maxminddb.c
+│       │       │   ├── php_maxminddb.h
+│       │       │   └── tests
+│       │       │       └── 001-load.phpt
+│       │       ├── LICENSE
+│       │       ├── phpunit.xml.dist
+│       │       ├── README.md
+│       │       ├── src
+│       │       │   └── MaxMind
+│       │       │       └── Db
+│       │       │           ├── Reader
+│       │       │           │   ├── Decoder.php
+│       │       │           │   ├── InvalidDatabaseException.php
+│       │       │           │   ├── Metadata.php
+│       │       │           │   └── Util.php
+│       │       │           └── Reader.php
+│       │       └── tests
+│       │           ├── bootstrap.php
+│       │           ├── data
+│       │           └── MaxMind
+│       │               └── Db
+│       │                   └── Test
+│       │                       ├── Reader
+│       │                       │   ├── DecoderTest.php
+│       │                       │   └── PointerTest.php
+│       │                       └── ReaderTest.php
+│       ├── stripe
+│       │   └── stripe-php
+│       │       ├── build.php
+│       │       ├── CHANGELOG.md
+│       │       ├── composer.json
+│       │       ├── data
+│       │       │   ├── ca-certificates.crt
+│       │       │   └── test.png
+│       │       ├── init.php
+│       │       ├── lib
+│       │       │   ├── Account.php
+│       │       │   ├── AlipayAccount.php
+│       │       │   ├── ApiRequestor.php
+│       │       │   ├── ApiResource.php
+│       │       │   ├── ApiResponse.php
+│       │       │   ├── ApplicationFee.php
+│       │       │   ├── ApplicationFeeRefund.php
+│       │       │   ├── AttachedObject.php
+│       │       │   ├── Balance.php
+│       │       │   ├── BalanceTransaction.php
+│       │       │   ├── BankAccount.php
+│       │       │   ├── BitcoinReceiver.php
+│       │       │   ├── BitcoinTransaction.php
+│       │       │   ├── Card.php
+│       │       │   ├── Charge.php
+│       │       │   ├── Collection.php
+│       │       │   ├── Coupon.php
+│       │       │   ├── Customer.php
+│       │       │   ├── Dispute.php
+│       │       │   ├── Error
+│       │       │   │   ├── ApiConnection.php
+│       │       │   │   ├── Api.php
+│       │       │   │   ├── Authentication.php
+│       │       │   │   ├── Base.php
+│       │       │   │   ├── Card.php
+│       │       │   │   ├── InvalidRequest.php
+│       │       │   │   └── RateLimit.php
+│       │       │   ├── Event.php
+│       │       │   ├── ExternalAccount.php
+│       │       │   ├── FileUpload.php
+│       │       │   ├── HttpClient
+│       │       │   │   ├── ClientInterface.php
+│       │       │   │   └── CurlClient.php
+│       │       │   ├── InvoiceItem.php
+│       │       │   ├── Invoice.php
+│       │       │   ├── JsonSerializable.php
+│       │       │   ├── Order.php
+│       │       │   ├── Plan.php
+│       │       │   ├── Product.php
+│       │       │   ├── Recipient.php
+│       │       │   ├── Refund.php
+│       │       │   ├── SingletonApiResource.php
+│       │       │   ├── SKU.php
+│       │       │   ├── StripeObject.php
+│       │       │   ├── Stripe.php
+│       │       │   ├── Subscription.php
+│       │       │   ├── Token.php
+│       │       │   ├── Transfer.php
+│       │       │   ├── TransferReversal.php
+│       │       │   └── Util
+│       │       │       ├── RequestOptions.php
+│       │       │       ├── Set.php
+│       │       │       └── Util.php
+│       │       ├── LICENSE
+│       │       ├── phpunit.no_autoload.xml
+│       │       ├── phpunit.xml
+│       │       ├── README.md
+│       │       ├── tests
+│       │       │   ├── AccountTest.php
+│       │       │   ├── ApiRequestorTest.php
+│       │       │   ├── ApplicationFeeRefundTest.php
+│       │       │   ├── ApplicationFeeTest.php
+│       │       │   ├── AuthenticationErrorTest.php
+│       │       │   ├── BalanceTest.php
+│       │       │   ├── BalanceTransactionTest.php
+│       │       │   ├── BankAccountTest.php
+│       │       │   ├── BitcoinReceiverTest.php
+│       │       │   ├── bootstrap.no_autoload.php
+│       │       │   ├── bootstrap.php
+│       │       │   ├── CardErrorTest.php
+│       │       │   ├── ChargeTest.php
+│       │       │   ├── CouponTest.php
+│       │       │   ├── CurlClientTest.php
+│       │       │   ├── CustomerTest.php
+│       │       │   ├── DiscountTest.php
+│       │       │   ├── DisputeTest.php
+│       │       │   ├── ErrorTest.php
+│       │       │   ├── ExternalAccountTest.php
+│       │       │   ├── FileUploadTest.php
+│       │       │   ├── InvalidRequestErrorTest.php
+│       │       │   ├── InvoiceTest.php
+│       │       │   ├── PlanTest.php
+│       │       │   ├── ProductTest.php
+│       │       │   ├── RateLimitErrorTest.php
+│       │       │   ├── RecipientTest.php
+│       │       │   ├── RefundTest.php
+│       │       │   ├── RequestOptionsTest.php
+│       │       │   ├── StripeObjectTest.php
+│       │       │   ├── SubscriptionTest.php
+│       │       │   ├── TestCase.php
+│       │       │   ├── TokenTest.php
+│       │       │   ├── TransferReversalTest.php
+│       │       │   ├── TransferTest.php
+│       │       │   └── UtilTest.php
+│       │       └── VERSION
+│       └── swiftmailer
+│           └── swiftmailer
+│               ├── CHANGES
+│               ├── composer.json
+│               ├── doc
+│               │   ├── headers.rst
+│               │   ├── help-resources.rst
+│               │   ├── including-the-files.rst
+│               │   ├── index.rst
+│               │   ├── installing.rst
+│               │   ├── introduction.rst
+│               │   ├── japanese.rst
+│               │   ├── messages.rst
+│               │   ├── overview.rst
+│               │   ├── plugins.rst
+│               │   ├── sending.rst
+│               │   └── uml
+│               │       ├── Encoders.graffle
+│               │       ├── Mime.graffle
+│               │       └── Transports.graffle
+│               ├── lib
+│               │   ├── classes
+│               │   │   ├── Swift
+│               │   │   │   ├── Attachment.php
+│               │   │   │   ├── ByteStream
+│               │   │   │   │   ├── AbstractFilterableInputStream.php
+│               │   │   │   │   ├── ArrayByteStream.php
+│               │   │   │   │   ├── FileByteStream.php
+│               │   │   │   │   └── TemporaryFileByteStream.php
+│               │   │   │   ├── CharacterReader
+│               │   │   │   │   ├── GenericFixedWidthReader.php
+│               │   │   │   │   ├── UsAsciiReader.php
+│               │   │   │   │   └── Utf8Reader.php
+│               │   │   │   ├── CharacterReaderFactory
+│               │   │   │   │   └── SimpleCharacterReaderFactory.php
+│               │   │   │   ├── CharacterReaderFactory.php
+│               │   │   │   ├── CharacterReader.php
+│               │   │   │   ├── CharacterStream
+│               │   │   │   │   ├── ArrayCharacterStream.php
+│               │   │   │   │   └── NgCharacterStream.php
+│               │   │   │   ├── CharacterStream.php
+│               │   │   │   ├── ConfigurableSpool.php
+│               │   │   │   ├── DependencyContainer.php
+│               │   │   │   ├── DependencyException.php
+│               │   │   │   ├── EmbeddedFile.php
+│               │   │   │   ├── Encoder
+│               │   │   │   │   ├── Base64Encoder.php
+│               │   │   │   │   ├── QpEncoder.php
+│               │   │   │   │   └── Rfc2231Encoder.php
+│               │   │   │   ├── Encoder.php
+│               │   │   │   ├── Encoding.php
+│               │   │   │   ├── Events
+│               │   │   │   │   ├── CommandEvent.php
+│               │   │   │   │   ├── CommandListener.php
+│               │   │   │   │   ├── EventDispatcher.php
+│               │   │   │   │   ├── EventListener.php
+│               │   │   │   │   ├── EventObject.php
+│               │   │   │   │   ├── Event.php
+│               │   │   │   │   ├── ResponseEvent.php
+│               │   │   │   │   ├── ResponseListener.php
+│               │   │   │   │   ├── SendEvent.php
+│               │   │   │   │   ├── SendListener.php
+│               │   │   │   │   ├── SimpleEventDispatcher.php
+│               │   │   │   │   ├── TransportChangeEvent.php
+│               │   │   │   │   ├── TransportChangeListener.php
+│               │   │   │   │   ├── TransportExceptionEvent.php
+│               │   │   │   │   └── TransportExceptionListener.php
+│               │   │   │   ├── FailoverTransport.php
+│               │   │   │   ├── FileSpool.php
+│               │   │   │   ├── FileStream.php
+│               │   │   │   ├── Filterable.php
+│               │   │   │   ├── Image.php
+│               │   │   │   ├── InputByteStream.php
+│               │   │   │   ├── IoException.php
+│               │   │   │   ├── KeyCache
+│               │   │   │   │   ├── ArrayKeyCache.php
+│               │   │   │   │   ├── DiskKeyCache.php
+│               │   │   │   │   ├── KeyCacheInputStream.php
+│               │   │   │   │   ├── NullKeyCache.php
+│               │   │   │   │   └── SimpleKeyCacheInputStream.php
+│               │   │   │   ├── KeyCache.php
+│               │   │   │   ├── LoadBalancedTransport.php
+│               │   │   │   ├── Mailer
+│               │   │   │   │   ├── ArrayRecipientIterator.php
+│               │   │   │   │   └── RecipientIterator.php
+│               │   │   │   ├── Mailer.php
+│               │   │   │   ├── MailTransport.php
+│               │   │   │   ├── MemorySpool.php
+│               │   │   │   ├── Message.php
+│               │   │   │   ├── Mime
+│               │   │   │   │   ├── Attachment.php
+│               │   │   │   │   ├── CharsetObserver.php
+│               │   │   │   │   ├── ContentEncoder
+│               │   │   │   │   │   ├── Base64ContentEncoder.php
+│               │   │   │   │   │   ├── NativeQpContentEncoder.php
+│               │   │   │   │   │   ├── PlainContentEncoder.php
+│               │   │   │   │   │   ├── QpContentEncoder.php
+│               │   │   │   │   │   ├── QpContentEncoderProxy.php
+│               │   │   │   │   │   └── RawContentEncoder.php
+│               │   │   │   │   ├── ContentEncoder.php
+│               │   │   │   │   ├── EmbeddedFile.php
+│               │   │   │   │   ├── EncodingObserver.php
+│               │   │   │   │   ├── Grammar.php
+│               │   │   │   │   ├── HeaderEncoder
+│               │   │   │   │   │   ├── Base64HeaderEncoder.php
+│               │   │   │   │   │   └── QpHeaderEncoder.php
+│               │   │   │   │   ├── HeaderEncoder.php
+│               │   │   │   │   ├── HeaderFactory.php
+│               │   │   │   │   ├── Header.php
+│               │   │   │   │   ├── Headers
+│               │   │   │   │   │   ├── AbstractHeader.php
+│               │   │   │   │   │   ├── DateHeader.php
+│               │   │   │   │   │   ├── IdentificationHeader.php
+│               │   │   │   │   │   ├── MailboxHeader.php
+│               │   │   │   │   │   ├── OpenDKIMHeader.php
+│               │   │   │   │   │   ├── ParameterizedHeader.php
+│               │   │   │   │   │   ├── PathHeader.php
+│               │   │   │   │   │   └── UnstructuredHeader.php
+│               │   │   │   │   ├── HeaderSet.php
+│               │   │   │   │   ├── Message.php
+│               │   │   │   │   ├── MimeEntity.php
+│               │   │   │   │   ├── MimePart.php
+│               │   │   │   │   ├── ParameterizedHeader.php
+│               │   │   │   │   ├── SimpleHeaderFactory.php
+│               │   │   │   │   ├── SimpleHeaderSet.php
+│               │   │   │   │   ├── SimpleMessage.php
+│               │   │   │   │   └── SimpleMimeEntity.php
+│               │   │   │   ├── MimePart.php
+│               │   │   │   ├── NullTransport.php
+│               │   │   │   ├── OutputByteStream.php
+│               │   │   │   ├── Plugins
+│               │   │   │   │   ├── AntiFloodPlugin.php
+│               │   │   │   │   ├── BandwidthMonitorPlugin.php
+│               │   │   │   │   ├── Decorator
+│               │   │   │   │   │   └── Replacements.php
+│               │   │   │   │   ├── DecoratorPlugin.php
+│               │   │   │   │   ├── ImpersonatePlugin.php
+│               │   │   │   │   ├── Logger.php
+│               │   │   │   │   ├── LoggerPlugin.php
+│               │   │   │   │   ├── Loggers
+│               │   │   │   │   │   ├── ArrayLogger.php
+│               │   │   │   │   │   └── EchoLogger.php
+│               │   │   │   │   ├── MessageLogger.php
+│               │   │   │   │   ├── Pop
+│               │   │   │   │   │   ├── Pop3Connection.php
+│               │   │   │   │   │   └── Pop3Exception.php
+│               │   │   │   │   ├── PopBeforeSmtpPlugin.php
+│               │   │   │   │   ├── RedirectingPlugin.php
+│               │   │   │   │   ├── Reporter.php
+│               │   │   │   │   ├── ReporterPlugin.php
+│               │   │   │   │   ├── Reporters
+│               │   │   │   │   │   ├── HitReporter.php
+│               │   │   │   │   │   └── HtmlReporter.php
+│               │   │   │   │   ├── Sleeper.php
+│               │   │   │   │   ├── ThrottlerPlugin.php
+│               │   │   │   │   └── Timer.php
+│               │   │   │   ├── Preferences.php
+│               │   │   │   ├── ReplacementFilterFactory.php
+│               │   │   │   ├── RfcComplianceException.php
+│               │   │   │   ├── SendmailTransport.php
+│               │   │   │   ├── SignedMessage.php
+│               │   │   │   ├── Signer.php
+│               │   │   │   ├── Signers
+│               │   │   │   │   ├── BodySigner.php
+│               │   │   │   │   ├── DKIMSigner.php
+│               │   │   │   │   ├── DomainKeySigner.php
+│               │   │   │   │   ├── HeaderSigner.php
+│               │   │   │   │   ├── OpenDKIMSigner.php
+│               │   │   │   │   └── SMimeSigner.php
+│               │   │   │   ├── SmtpTransport.php
+│               │   │   │   ├── Spool.php
+│               │   │   │   ├── SpoolTransport.php
+│               │   │   │   ├── StreamFilter.php
+│               │   │   │   ├── StreamFilters
+│               │   │   │   │   ├── ByteArrayReplacementFilter.php
+│               │   │   │   │   ├── StringReplacementFilterFactory.php
+│               │   │   │   │   └── StringReplacementFilter.php
+│               │   │   │   ├── SwiftException.php
+│               │   │   │   ├── Transport
+│               │   │   │   │   ├── AbstractSmtpTransport.php
+│               │   │   │   │   ├── Esmtp
+│               │   │   │   │   │   ├── Auth
+│               │   │   │   │   │   │   ├── CramMd5Authenticator.php
+│               │   │   │   │   │   │   ├── LoginAuthenticator.php
+│               │   │   │   │   │   │   ├── NTLMAuthenticator.php
+│               │   │   │   │   │   │   ├── PlainAuthenticator.php
+│               │   │   │   │   │   │   └── XOAuth2Authenticator.php
+│               │   │   │   │   │   ├── Authenticator.php
+│               │   │   │   │   │   └── AuthHandler.php
+│               │   │   │   │   ├── EsmtpHandler.php
+│               │   │   │   │   ├── EsmtpTransport.php
+│               │   │   │   │   ├── FailoverTransport.php
+│               │   │   │   │   ├── IoBuffer.php
+│               │   │   │   │   ├── LoadBalancedTransport.php
+│               │   │   │   │   ├── MailInvoker.php
+│               │   │   │   │   ├── MailTransport.php
+│               │   │   │   │   ├── NullTransport.php
+│               │   │   │   │   ├── SendmailTransport.php
+│               │   │   │   │   ├── SimpleMailInvoker.php
+│               │   │   │   │   ├── SmtpAgent.php
+│               │   │   │   │   ├── SpoolTransport.php
+│               │   │   │   │   └── StreamBuffer.php
+│               │   │   │   ├── TransportException.php
+│               │   │   │   ├── Transport.php
+│               │   │   │   └── Validate.php
+│               │   │   └── Swift.php
+│               │   ├── dependency_maps
+│               │   │   ├── cache_deps.php
+│               │   │   ├── message_deps.php
+│               │   │   ├── mime_deps.php
+│               │   │   └── transport_deps.php
+│               │   ├── mime_types.php
+│               │   ├── preferences.php
+│               │   ├── swift_init.php
+│               │   ├── swiftmailer_generate_mimes_config.php
+│               │   ├── swift_required_pear.php
+│               │   └── swift_required.php
+│               ├── LICENSE
+│               ├── phpunit.xml.dist
+│               ├── README
+│               ├── tests
+│               │   ├── acceptance
+│               │   │   └── Swift
+│               │   │       ├── AttachmentAcceptanceTest.php
+│               │   │       ├── ByteStream
+│               │   │       │   └── FileByteStreamAcceptanceTest.php
+│               │   │       ├── CharacterReaderFactory
+│               │   │       │   └── SimpleCharacterReaderFactoryAcceptanceTest.php
+│               │   │       ├── DependencyContainerAcceptanceTest.php
+│               │   │       ├── EmbeddedFileAcceptanceTest.php
+│               │   │       ├── Encoder
+│               │   │       │   ├── Base64EncoderAcceptanceTest.php
+│               │   │       │   ├── QpEncoderAcceptanceTest.php
+│               │   │       │   └── Rfc2231EncoderAcceptanceTest.php
+│               │   │       ├── EncodingAcceptanceTest.php
+│               │   │       ├── KeyCache
+│               │   │       │   ├── ArrayKeyCacheAcceptanceTest.php
+│               │   │       │   └── DiskKeyCacheAcceptanceTest.php
+│               │   │       ├── MessageAcceptanceTest.php
+│               │   │       ├── Mime
+│               │   │       │   ├── AttachmentAcceptanceTest.php
+│               │   │       │   ├── ContentEncoder
+│               │   │       │   │   ├── Base64ContentEncoderAcceptanceTest.php
+│               │   │       │   │   ├── NativeQpContentEncoderAcceptanceTest.php
+│               │   │       │   │   ├── PlainContentEncoderAcceptanceTest.php
+│               │   │       │   │   └── QpContentEncoderAcceptanceTest.php
+│               │   │       │   ├── EmbeddedFileAcceptanceTest.php
+│               │   │       │   ├── HeaderEncoder
+│               │   │       │   │   └── Base64HeaderEncoderAcceptanceTest.php
+│               │   │       │   ├── MimePartAcceptanceTest.php
+│               │   │       │   └── SimpleMessageAcceptanceTest.php
+│               │   │       ├── MimePartAcceptanceTest.php
+│               │   │       └── Transport
+│               │   │           └── StreamBuffer
+│               │   │               ├── AbstractStreamBufferAcceptanceTest.php
+│               │   │               ├── BasicSocketAcceptanceTest.php
+│               │   │               ├── ProcessAcceptanceTest.php
+│               │   │               ├── SocketTimeoutTest.php
+│               │   │               ├── SslSocketAcceptanceTest.php
+│               │   │               └── TlsSocketAcceptanceTest.php
+│               │   ├── acceptance.conf.php.default
+│               │   ├── bootstrap.php
+│               │   ├── bug
+│               │   │   └── Swift
+│               │   │       ├── Bug111Test.php
+│               │   │       ├── Bug118Test.php
+│               │   │       ├── Bug206Test.php
+│               │   │       ├── Bug274Test.php
+│               │   │       ├── Bug34Test.php
+│               │   │       ├── Bug35Test.php
+│               │   │       ├── Bug38Test.php
+│               │   │       ├── Bug518Test.php
+│               │   │       ├── Bug51Test.php
+│               │   │       ├── Bug534Test.php
+│               │   │       ├── Bug71Test.php
+│               │   │       └── Bug76Test.php
+│               │   ├── fixtures
+│               │   │   ├── EsmtpTransportFixture.php
+│               │   │   └── MimeEntityFixture.php
+│               │   ├── IdenticalBinaryConstraint.php
+│               │   ├── _samples
+│               │   │   ├── charsets
+│               │   │   │   ├── iso-2022-jp
+│               │   │   │   │   └── one.txt
+│               │   │   │   ├── iso-8859-1
+│               │   │   │   │   └── one.txt
+│               │   │   │   └── utf-8
+│               │   │   │       ├── one.txt
+│               │   │   │       ├── three.txt
+│               │   │   │       └── two.txt
+│               │   │   ├── dkim
+│               │   │   │   ├── dkim.test.priv
+│               │   │   │   └── dkim.test.pub
+│               │   │   ├── files
+│               │   │   │   ├── data.txt
+│               │   │   │   ├── swiftmailer.png
+│               │   │   │   └── textfile.zip
+│               │   │   └── smime
+│               │   │       ├── ca.crt
+│               │   │       ├── ca.key
+│               │   │       ├── CA.srl
+│               │   │       ├── create-cert.sh
+│               │   │       ├── encrypt2.crt
+│               │   │       ├── encrypt2.key
+│               │   │       ├── encrypt.crt
+│               │   │       ├── encrypt.key
+│               │   │       ├── intermediate.crt
+│               │   │       ├── intermediate.key
+│               │   │       ├── sign2.crt
+│               │   │       ├── sign2.key
+│               │   │       ├── sign.crt
+│               │   │       └── sign.key
+│               │   ├── smoke
+│               │   │   └── Swift
+│               │   │       └── Smoke
+│               │   │           ├── AttachmentSmokeTest.php
+│               │   │           ├── BasicSmokeTest.php
+│               │   │           ├── HtmlWithAttachmentSmokeTest.php
+│               │   │           └── InternationalSmokeTest.php
+│               │   ├── smoke.conf.php.default
+│               │   ├── StreamCollector.php
+│               │   ├── SwiftMailerSmokeTestCase.php
+│               │   ├── SwiftMailerTestCase.php
+│               │   └── unit
+│               │       └── Swift
+│               │           ├── ByteStream
+│               │           │   └── ArrayByteStreamTest.php
+│               │           ├── CharacterReader
+│               │           │   ├── GenericFixedWidthReaderTest.php
+│               │           │   ├── UsAsciiReaderTest.php
+│               │           │   └── Utf8ReaderTest.php
+│               │           ├── CharacterStream
+│               │           │   └── ArrayCharacterStreamTest.php
+│               │           ├── DependencyContainerTest.php
+│               │           ├── Encoder
+│               │           │   ├── Base64EncoderTest.php
+│               │           │   ├── QpEncoderTest.php
+│               │           │   └── Rfc2231EncoderTest.php
+│               │           ├── Events
+│               │           │   ├── CommandEventTest.php
+│               │           │   ├── EventObjectTest.php
+│               │           │   ├── ResponseEventTest.php
+│               │           │   ├── SendEventTest.php
+│               │           │   ├── SimpleEventDispatcherTest.php
+│               │           │   ├── TransportChangeEventTest.php
+│               │           │   └── TransportExceptionEventTest.php
+│               │           ├── KeyCache
+│               │           │   ├── ArrayKeyCacheTest.php
+│               │           │   └── SimpleKeyCacheInputStreamTest.php
+│               │           ├── Mailer
+│               │           │   └── ArrayRecipientIteratorTest.php
+│               │           ├── MailerTest.php
+│               │           ├── MessageTest.php
+│               │           ├── Mime
+│               │           │   ├── AbstractMimeEntityTest.php
+│               │           │   ├── AttachmentTest.php
+│               │           │   ├── ContentEncoder
+│               │           │   │   ├── Base64ContentEncoderTest.php
+│               │           │   │   ├── PlainContentEncoderTest.php
+│               │           │   │   └── QpContentEncoderTest.php
+│               │           │   ├── EmbeddedFileTest.php
+│               │           │   ├── HeaderEncoder
+│               │           │   │   ├── Base64HeaderEncoderTest.php
+│               │           │   │   └── QpHeaderEncoderTest.php
+│               │           │   ├── Headers
+│               │           │   │   ├── DateHeaderTest.php
+│               │           │   │   ├── IdentificationHeaderTest.php
+│               │           │   │   ├── MailboxHeaderTest.php
+│               │           │   │   ├── ParameterizedHeaderTest.php
+│               │           │   │   ├── PathHeaderTest.php
+│               │           │   │   └── UnstructuredHeaderTest.php
+│               │           │   ├── MimePartTest.php
+│               │           │   ├── SimpleHeaderFactoryTest.php
+│               │           │   ├── SimpleHeaderSetTest.php
+│               │           │   ├── SimpleMessageTest.php
+│               │           │   └── SimpleMimeEntityTest.php
+│               │           ├── Plugins
+│               │           │   ├── AntiFloodPluginTest.php
+│               │           │   ├── BandwidthMonitorPluginTest.php
+│               │           │   ├── DecoratorPluginTest.php
+│               │           │   ├── LoggerPluginTest.php
+│               │           │   ├── Loggers
+│               │           │   │   ├── ArrayLoggerTest.php
+│               │           │   │   └── EchoLoggerTest.php
+│               │           │   ├── PopBeforeSmtpPluginTest.php
+│               │           │   ├── RedirectingPluginTest.php
+│               │           │   ├── ReporterPluginTest.php
+│               │           │   ├── Reporters
+│               │           │   │   ├── HitReporterTest.php
+│               │           │   │   └── HtmlReporterTest.php
+│               │           │   └── ThrottlerPluginTest.php
+│               │           ├── Signers
+│               │           │   ├── DKIMSignerTest.php
+│               │           │   ├── OpenDKIMSignerTest.php
+│               │           │   └── SMimeSignerTest.php
+│               │           ├── StreamFilters
+│               │           │   ├── ByteArrayReplacementFilterTest.php
+│               │           │   ├── StringReplacementFilterFactoryTest.php
+│               │           │   └── StringReplacementFilterTest.php
+│               │           └── Transport
+│               │               ├── AbstractSmtpEventSupportTest.php
+│               │               ├── AbstractSmtpTest.php
+│               │               ├── Esmtp
+│               │               │   ├── Auth
+│               │               │   │   ├── CramMd5AuthenticatorTest.php
+│               │               │   │   ├── LoginAuthenticatorTest.php
+│               │               │   │   ├── NTLMAuthenticatorTest.php
+│               │               │   │   └── PlainAuthenticatorTest.php
+│               │               │   └── AuthHandlerTest.php
+│               │               ├── EsmtpTransport
+│               │               │   └── ExtensionSupportTest.php
+│               │               ├── EsmtpTransportTest.php
+│               │               ├── FailoverTransportTest.php
+│               │               ├── LoadBalancedTransportTest.php
+│               │               ├── MailTransportTest.php
+│               │               ├── SendmailTransportTest.php
+│               │               └── StreamBufferTest.php
+│               └── VERSION
 ├── README2.txt
 ├── README.md
 ├── _repository
 │   ├── import
 │   │   ├── Import.php
-│   │   ├── README_DEVELOPING.txt
-│   │   └── software
+│   │   └── README_DEVELOPING.txt
 │   ├── module
 │   │   └── fake-admin-panel
 │   │       ├── config
@@ -2790,11 +3272,6 @@
 │   │       │       └── MySQL
 │   │       │           ├── install.sql
 │   │       │           └── uninstall.sql
-│   │       ├── lang
-│   │       │   ├── en_US
-│   │       │   │   └── LC_MESSAGES
-│   │       │   └── fr_FR
-│   │       │       └── LC_MESSAGES
 │   │       └── views
 │   │           └── base
 │   │               ├── config
@@ -2808,9 +3285,6 @@
 │   └── upgrade
 │       ├── 0.1.2-0.1.3
 │       │   ├── data
-│       │   │   ├── file
-│       │   │   │   ├── _protected
-│       │   │   │   └── public
 │       │   │   └── sql
 │       │   │       └── MySQL
 │       │   │           └── upgrade.sql
@@ -2820,9 +3294,6 @@
 │       │       └── introduction.php
 │       ├── 0.1.3-0.1.4
 │       │   ├── data
-│       │   │   ├── file
-│       │   │   │   ├── _protected
-│       │   │   │   └── public
 │       │   │   └── sql
 │       │   │       └── MySQL
 │       │   │           └── upgrade.sql
@@ -2832,9 +3303,6 @@
 │       │       └── introduction.php
 │       ├── 0.1.4-0.1.6
 │       │   ├── data
-│       │   │   ├── file
-│       │   │   │   ├── _protected
-│       │   │   │   └── public
 │       │   │   └── sql
 │       │   │       └── MySQL
 │       │   │           └── upgrade.sql
@@ -2844,9 +3312,6 @@
 │       │       └── introduction.php
 │       ├── 0.1.6-0.1.7
 │       │   ├── data
-│       │   │   ├── file
-│       │   │   │   ├── _protected
-│       │   │   │   └── public
 │       │   │   └── sql
 │       │   │       └── MySQL
 │       │   │           └── upgrade.sql
@@ -2856,9 +3321,6 @@
 │       │       └── introduction.php
 │       ├── 0.1.7-0.8.7
 │       │   ├── data
-│       │   │   ├── file
-│       │   │   │   ├── _protected
-│       │   │   │   └── public
 │       │   │   └── sql
 │       │   │       └── MySQL
 │       │   │           └── upgrade.sql
@@ -2943,9 +3405,48 @@
 ├── sample.htaccess
 ├── static
 │   ├── css
+│   │   ├── animate.css
 │   │   ├── bootstrap.css
 │   │   ├── bootstrap_customize.css
-│   │   └── bootstrap-theme.css
+│   │   ├── bootstrap-theme.css
+│   │   ├── font-awesome.css
+│   │   ├── jquery
+│   │   │   └── smoothness
+│   │   │       ├── images
+│   │   │       │   ├── animated-overlay.gif
+│   │   │       │   ├── ui-bg_flat_0_aaaaaa_40x100.png
+│   │   │       │   ├── ui-bg_flat_75_ffffff_40x100.png
+│   │   │       │   ├── ui-bg_glass_55_fbf9ee_1x400.png
+│   │   │       │   ├── ui-bg_glass_65_ffffff_1x400.png
+│   │   │       │   ├── ui-bg_glass_75_dadada_1x400.png
+│   │   │       │   ├── ui-bg_glass_75_e6e6e6_1x400.png
+│   │   │       │   ├── ui-bg_glass_95_fef1ec_1x400.png
+│   │   │       │   ├── ui-bg_highlight-soft_75_cccccc_1x100.png
+│   │   │       │   ├── ui-icons_222222_256x240.png
+│   │   │       │   ├── ui-icons_2e83ff_256x240.png
+│   │   │       │   ├── ui-icons_454545_256x240.png
+│   │   │       │   ├── ui-icons_888888_256x240.png
+│   │   │       │   └── ui-icons_cd0a0a_256x240.png
+│   │   │       └── jquery-ui.css
+│   │   └── js
+│   │       └── jquery
+│   │           └── smoothness
+│   │               ├── images
+│   │               │   ├── animated-overlay.gif
+│   │               │   ├── ui-bg_flat_0_aaaaaa_40x100.png
+│   │               │   ├── ui-bg_flat_75_ffffff_40x100.png
+│   │               │   ├── ui-bg_glass_55_fbf9ee_1x400.png
+│   │               │   ├── ui-bg_glass_65_ffffff_1x400.png
+│   │               │   ├── ui-bg_glass_75_dadada_1x400.png
+│   │               │   ├── ui-bg_glass_75_e6e6e6_1x400.png
+│   │               │   ├── ui-bg_glass_95_fef1ec_1x400.png
+│   │               │   ├── ui-bg_highlight-soft_75_cccccc_1x100.png
+│   │               │   ├── ui-icons_222222_256x240.png
+│   │               │   ├── ui-icons_2e83ff_256x240.png
+│   │               │   ├── ui-icons_454545_256x240.png
+│   │               │   ├── ui-icons_888888_256x240.png
+│   │               │   └── ui-icons_cd0a0a_256x240.png
+│   │               └── jquery-ui.css
 │   ├── fileManager
 │   │   ├── css
 │   │   │   ├── elFinder.css
@@ -2986,6 +3487,13 @@
 │   │   │   └── proxy
 │   │   │       └── elFinderSupportVer1.js
 │   │   └── README.txt
+│   ├── fonts
+│   │   ├── FontAwesome.otf
+│   │   ├── fontawesome-webfont.eot
+│   │   ├── fontawesome-webfont.svg
+│   │   ├── fontawesome-webfont.ttf
+│   │   ├── fontawesome-webfont.woff
+│   │   └── fontawesome-webfont.woff2
 │   ├── img
 │   │   ├── counter
 │   │   │   └── digits.png
@@ -3350,8 +3858,7 @@
 │   │   ├── clock.js
 │   │   ├── common.js
 │   │   ├── cookie_consent
-│   │   │   ├── bar.js
-│   │   │   └── library.js
+│   │   │   └── eu-states.js
 │   │   ├── disclaimer.js
 │   │   ├── divShow.js
 │   │   ├── flash.js
@@ -3368,6 +3875,8 @@
 │   │   │   │   ├── i18n
 │   │   │   │   │   ├── jquery.colorbox-ar.js
 │   │   │   │   │   ├── jquery.colorbox-bg.js
+│   │   │   │   │   ├── jquery.colorbox-bn.js
+│   │   │   │   │   ├── jquery.colorbox-ca.js
 │   │   │   │   │   ├── jquery.colorbox-cs.js
 │   │   │   │   │   ├── jquery.colorbox-da.js
 │   │   │   │   │   ├── jquery.colorbox-de.js
@@ -3376,23 +3885,32 @@
 │   │   │   │   │   ├── jquery.colorbox-fa.js
 │   │   │   │   │   ├── jquery.colorbox-fi.js
 │   │   │   │   │   ├── jquery.colorbox-fr.js
+│   │   │   │   │   ├── jquery.colorbox-gl.js
+│   │   │   │   │   ├── jquery.colorbox-gr.js
+│   │   │   │   │   ├── jquery.colorbox-he.js
 │   │   │   │   │   ├── jquery.colorbox-hr.js
 │   │   │   │   │   ├── jquery.colorbox-hu.js
 │   │   │   │   │   ├── jquery.colorbox-id.js
 │   │   │   │   │   ├── jquery.colorbox-it.js
 │   │   │   │   │   ├── jquery.colorbox-ja.js
 │   │   │   │   │   ├── jquery.colorbox-kr.js
+│   │   │   │   │   ├── jquery.colorbox-lt.js
 │   │   │   │   │   ├── jquery.colorbox-lv.js
+│   │   │   │   │   ├── jquery.colorbox-my.js
 │   │   │   │   │   ├── jquery.colorbox-nl.js
 │   │   │   │   │   ├── jquery.colorbox-no.js
 │   │   │   │   │   ├── jquery.colorbox-pl.js
-│   │   │   │   │   ├── jquery.colorbox-pt-br.js
+│   │   │   │   │   ├── jquery.colorbox-pt-BR.js
 │   │   │   │   │   ├── jquery.colorbox-ro.js
 │   │   │   │   │   ├── jquery.colorbox-ru.js
+│   │   │   │   │   ├── jquery.colorbox-si.js
 │   │   │   │   │   ├── jquery.colorbox-sk.js
+│   │   │   │   │   ├── jquery.colorbox-sr.js
 │   │   │   │   │   ├── jquery.colorbox-sv.js
 │   │   │   │   │   ├── jquery.colorbox-tr.js
-│   │   │   │   │   └── jquery.colorbox-zh-CN.js
+│   │   │   │   │   ├── jquery.colorbox-uk.js
+│   │   │   │   │   ├── jquery.colorbox-zh-CN.js
+│   │   │   │   │   └── jquery.colorbox-zh-TW.js
 │   │   │   │   ├── images
 │   │   │   │   │   ├── border.png
 │   │   │   │   │   ├── controls.png
@@ -3402,6 +3920,8 @@
 │   │   │   ├── carouFredSel.js
 │   │   │   ├── counter.js
 │   │   │   ├── form.js
+│   │   │   ├── jquery.js
+│   │   │   ├── jquery-ui.js
 │   │   │   ├── rating.js
 │   │   │   ├── sound.js
 │   │   │   └── tipTip.js
@@ -4526,6 +5046,9 @@
 │           │   ├── tooltip.css
 │           │   └── zoomer.css
 │           ├── img
+│           │   ├── arrow.gif
+│           │   ├── dropdown_after.png
+│           │   ├── dropdown_before.png
 │           │   ├── header2.png
 │           │   ├── icon
 │           │   │   ├── admin_no_picture-100.jpg
@@ -4571,6 +5094,8 @@
 │           │   │   ├── pending-400.jpg
 │           │   │   ├── pending-64.jpg
 │           │   │   ├── pending.jpg
+│           │   │   ├── quote_left.jpg
+│           │   │   ├── quote_right.jpg
 │           │   │   ├── visitor_no_picture-100.jpg
 │           │   │   ├── visitor_no_picture-150.jpg
 │           │   │   ├── visitor_no_picture-200.jpg
@@ -4604,8 +5129,9 @@
 └── _tools
     ├── deployment.sh
     ├── pH7.sh
+    ├── php-cs-fixer.phar
     └── php-webserver.sh
 
 </pre>
 
-<p>Statistics: 1341 directories, 3258 files.</p>
+<p>Statistics: 1449 directories, 3677 files.</p>
