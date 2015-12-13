@@ -119,7 +119,7 @@
         {/if}
       </div>
 
-      <br />
+      <div class="clear"></div>
 
       {* Alert Message *}
       {{ $design->flashMsg() }}
