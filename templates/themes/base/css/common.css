@@ -56,8 +56,8 @@ footer a, footer a:link, footer a:visited{color:#666;}
 
 .middle {vertical-align:middle !important;}
 .top {position:absolute;top:0 !important;}
-.right {float:right !important;}
-.left {float:left !important;}
+.right {float:right !important}
+.left {float:left !important}
 .break {border-bottom: 1px dotted #BBB;padding:4px 0 4px 0;margin-bottom:5px;width:25%}
 .br {border-bottom:1px dashed black; display:block;}
 hr {border:0;color:#9E9E9E;background-color:#9E9E9E;height:1px;margin:5px auto 5px auto;width:100%}
@@ -196,5 +196,7 @@ label#percent{position:absolute;padding-left:115px;padding-top:6px;font-size:80%
 /* 900px or less */
 @media (max-width: 600px)
 {
+    .right {float:inherit !important}
+    .left {float:inherit !important}
     .profile_desc {margin:20px 0 20px}
 }
