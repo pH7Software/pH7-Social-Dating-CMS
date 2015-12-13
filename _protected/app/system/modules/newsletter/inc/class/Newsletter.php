@@ -10,6 +10,10 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mail\Mail;
 
+/** Reset the time limit and increase the memory **/
+@set_time_limit(0);
+@ini_set('memory_limit', '528M');
+
 class Newsletter extends Core
 {
 
