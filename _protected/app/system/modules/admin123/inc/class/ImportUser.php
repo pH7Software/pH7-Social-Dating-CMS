@@ -27,6 +27,11 @@ class ImportUser extends Core
 
     private $_aFile, $_aData = [], $_aTmpData, $_aFileData, $_aRes, $_iErrType;
 
+    /**
+     * @var array $_aGenderList Gender types available for pH7CMS.
+     */
+    private $_aGenderList = ['male', 'female', 'couple'];
+
     /*
      * @var array $_aDbTypes Array containing the DB data types.
      */
@@ -141,8 +146,10 @@ class ImportUser extends Core
 
             if ($sType == 'username') {
                 $this->_aData[$iRow][$sType] = $oUser->findUsername($sData, $this->_aData[$iRow]['first_name'], $this->_aData[$iRow]['last_name']);
+            } elseif ($sType == 'sex') {
+                $this->_aData[$iRow][$sType] = $this->checkGender($sData);
             } elseif ($sType == 'match_sex') {
-                $this->_aData[$iRow][$sType] = [$sData];
+                $this->_aData[$iRow][$sType] = [$this->checkGender($sData)];
             } else {
                 $this->_aData[$iRow][$sType] = $sData;
             }
@@ -158,7 +165,6 @@ class ImportUser extends Core
      */
     protected function setDefVals()
     {
-        $aGenderList = ['male', 'female', 'couple'];
         $sFiveChars = Various::genRnd($this->_aFile['name'], 5);
 
         $this->_aTmpData = [
@@ -167,8 +173,8 @@ class ImportUser extends Core
             'password' => Various::genRnd(),
             'first_name' => 'Alex' . $sFiveChars,
             'last_name' => 'Rolli' . $sFiveChars,
-            'sex' => $aGenderList[mt_rand(0,2)], // Generate randomly it
-            'match_sex' => $aGenderList[mt_rand(0,2)], // Generate randomly it
+            'sex' => $this->_aGenderList[mt_rand(0,2)], // Generate randomly it
+            'match_sex' => $this->_aGenderList[mt_rand(0,2)], // Generate randomly it
             'birth_date' => date('Y')-mt_rand(20,40).'-'.mt_rand(1,12).'-'.mt_rand(1,28), // Generate randomly the anniversary date
             'country' => 'US',
             'city' => 'Virginia',
@@ -203,6 +209,20 @@ class ImportUser extends Core
         }
 
         return $sErrMsg;
+    }
+
+    /**
+     * Check (and modify if incorrect) the gender type.
+     *
+     * @param string $sSex
+     * @return string
+     */
+    protected function checkGender($sSex)
+    {
+        if (!in_array($sSex, $this->_aGenderList))
+            $sSex = $this->_aGenderList[mt_rand(0,2)];
+
+        return strtolower($sSex);
     }
 
     /**
