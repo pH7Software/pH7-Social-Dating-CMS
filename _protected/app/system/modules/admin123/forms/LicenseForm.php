@@ -34,7 +34,7 @@ class LicenseForm
         $oForm->addElement(new \PFBC\Element\Token('license'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="bold">' . t('Paid License Status: %0%', $sStatusTxt) . '</p>'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="bold">' . t('License Type: %0%', $sLicTypeTxt) . '</p>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your License Key'), 'copyright_key', array('description' => '<strong> ' . $sLicLink . '</strong> ' . t('to remove the Links from us and get the Premium Features.'), 'value' => (new License)->get(self::$_iLicenseId), 'autocomplete' => 'off', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your License Key'), 'copyright_key', array('description' => '<strong> ' . $sLicLink . '</strong> ' . t('to remove the Links from us and get All Premium Features!'), 'value' => (new License)->get(self::$_iLicenseId), 'autocomplete' => 'off', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button(t('Register'), 'submit', array('icon' => 'key')));
         $oForm->render();
     }

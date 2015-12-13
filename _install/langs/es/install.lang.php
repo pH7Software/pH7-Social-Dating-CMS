@@ -32,7 +32,7 @@ $LANG = array (
     'site_name' => 'Nombre de tu sitio',
     'license' => 'Su Licencia',
     'license_desc' => '¡Por favor, lea cuidadosamente la licencia y acéptelo para continuar la instalación del software!',
-    'registration_for_license' => 'Si no lo has hecho todavía, es un buen momento para comprar ahora <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">una licencia</a> con el fin de obtener la prima características ofrecen por el software.<br /> Si tu quieres probar primero pH7CMS con sus características básicas y enlaces promocionales, puede omitir este paso.',
+    'registration_for_license' => 'Si no lo has hecho todavía, es un buen momento para comprar ahora <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">una licencia</a> con el fin de obtener la prima características ofrecen por el software.<br /> Si quieres probar la versión de prueba y que contienen enlaces de publicidad, puede omitir este paso.',
     'your_license' => 'Su clave de licencia',
     'agree_license' => 'He leído y acepto los términos anteriores.',
     'step' => 'Paso',

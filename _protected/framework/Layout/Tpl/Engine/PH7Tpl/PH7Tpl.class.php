@@ -284,7 +284,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      */
     final private function compile()
     {
-        // Create folder compile
+        // Create compile folder
         $this->file->createDir($this->sCompileDir2);
 
         if (!$this->sCode = $this->file->getFile($this->sTemplateDirFile))
@@ -625,7 +625,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      */
     protected function cache()
     {
-        // Create folder cache
+        // Create cache folder
         $this->file->createDir($this->sCacheDir);
 
         $this->sCacheDir2 = $this->sCacheDir . $this->registry->module . '_' . md5($this->
@@ -827,8 +827,8 @@ namespace PH7;
 defined(\'PH7\') or exit(\'Restricted access\');
 /*
 Created on ' . gmdate('Y-m-d H:i:s') . '
-Compiled from file: ' . $this->sTemplateDirFile . '
-Template Engine is ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::AUTHOR . '
+Compiled file from: ' . $this->sTemplateDirFile . '
+Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::AUTHOR . '
 */
 /***************************************************************************
  *     ' . self::SOFTWARE_NAME . ' ' . self::SOFTWARE_COMPANY . '
