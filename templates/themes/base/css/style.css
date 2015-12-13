@@ -19,11 +19,13 @@ p{margin:0 0 0}
 img{border:0}
 
 p, li, pre {line-height: 1.5em}
+
 /* A tag */
-a, a:link:not(.btn), a:visited:not(.btn) {
+a {
     color:#08c;
     outline-style:none;
     cursor:pointer;
+    text-decoration:none;
 }
 a:hover, a:active {
     color:#F24C9E;
