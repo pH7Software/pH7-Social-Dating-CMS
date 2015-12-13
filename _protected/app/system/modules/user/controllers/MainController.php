@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mobile\MobApp, PH7\Framework\Mvc\Model\DbConfig;
 
 class MainController extends Controller
 {
@@ -37,6 +37,9 @@ class MainController extends Controller
             // Assign the background video option
             $this->view->is_bg_video = DbConfig::getSetting('bgSplashVideo');
 
+            // To check if the site is called by a mobile native app
+            $bMobApp = $this->view->is_mobapp = MobApp::is();
+
             /**
              * When you are in the development mode, you can force the guest page by set a "force" GET request with the "splash" or "classic" parameter.
              * Example: "/?force=splash" or "/?force=classic"
@@ -56,6 +59,10 @@ class MainController extends Controller
                      default:
                          exit('You can only choose between "classic" or "splash"');
                 }
+            }
+            elseif ($bMobApp)
+            {
+                $sPage = 'index.guest_splash';
             }
             else
             {
