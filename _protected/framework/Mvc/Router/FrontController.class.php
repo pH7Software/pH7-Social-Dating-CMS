@@ -582,7 +582,7 @@ final class FrontController
             }
             else
             {
-                $this->notFound('The method <b>' . $this->oRegistry->action . '</b> of controller does not exist', 1);
+                $this->notFound('The <b>' . $this->oRegistry->action . '</b> method of the <b>' . $this->oRegistry->controller . '</b> controller does not exist.', 1);
             }
 
             unset($oCtrl); // Destruction of the object and minimize CPU resources

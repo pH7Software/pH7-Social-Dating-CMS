@@ -1,4 +1,6 @@
 <div id="box_block">
-    <script src="//static.hizup.com/js/validate-site/mailbox.js"></script>
-    <script>$('form input[name=ph7cmsurl]').val(pH7Url.base);$('form input[name=ph7cmsvalidatorurl]').val(pH7Url.base + 'validate-site/main/validator');</script>
+    <h1 class="center">{lang 'Last Step! Validate your Site'}</h1>
+    {{ new ValidationForm }}
+    <p>{lang 'Validate your site by entering your valid email address and confirm it through your emailbox.'}<br />
+    {lang "This will officially validate your site. Although you probably don't need this if you test only pH7CMS on your local machine server, it is still highly recommended to do it for getting all security patches and new versions by email before all."}</p>
 </div>

@@ -11,7 +11,7 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    private $oValidateModel, $sTitle;
+    private $oValidateModel;
 
     public function __construct()
     {
@@ -24,9 +24,7 @@ class MainController extends Controller
     {
         // Display the form box only if the site isn't validated
         if (!$this->oValidateModel->is()) {
-            $this->sTitle = t('Validate your Site');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h1_title = $this->sTitle;
+            $this->view->page_title = t('Validate your Site');
             $this->output();
         }
     }

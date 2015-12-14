@@ -10,6 +10,8 @@ var $validationBox = (function() {
             $.colorbox({
                 width      :  '450px',
                 maxHeight  :  '85%',
+                speed      : 500,
+                scrolling  : false,
                 html       : $(oData).find('#box_block')
             });
        }
