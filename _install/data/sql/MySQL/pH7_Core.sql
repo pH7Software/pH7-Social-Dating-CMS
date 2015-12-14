@@ -930,7 +930,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.2.0', 1);
+('pH7CMS', 'SQL System Schema', '1.2.1', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -1019,6 +1019,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('securityToken', 0, '0 to disable or 1 to enable the CSRF security token in the forms', 'security'),
 ('securityTokenLifetime', 720, 'Time in seconds to the CSRF security token. Default 720 seconds (12 mins)', 'security'),
 ('DDoS', 0,  '0 to disabled or 1 to enabled the DDoS attack protection',  'security'),
+('isSiteValidated', 0,  '0 = site not validated | 1 = site validated',  'security'),
 ('cleanMsg', 0, 'Delete messages older than X days. 0 = Disable', 'pruning'),
 ('cleanComment', 0, 'Delete comments older than X days. 0 = Disable', 'pruning'),
 ('cronSecurityHash', 'change_this_secret_cron_word_by_yours', 'The secret word for the URL of the cron', 'automation'),

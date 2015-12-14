@@ -17,6 +17,9 @@ class MainController extends Controller
 
     public function index()
     {
+        // Add Validate-Site JS file
+        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'validate-site' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'validationbox.js');
+
         $this->view->page_title = t('Admin Panel');
         $this->view->h1_title = t('Dashboard');
         $this->view->h2_title = t('Hello <em>%0%</em>, welcome to your site!', $this->session->get('admin_first_name'));
