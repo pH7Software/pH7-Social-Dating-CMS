@@ -219,10 +219,12 @@ class ImportUser extends Core
      */
     protected function checkGender($sSex)
     {
+        $sSex = strtolower($sSex);
+
         if (!in_array($sSex, $this->_aGenderList))
             $sSex = $this->_aGenderList[mt_rand(0,2)];
 
-        return strtolower($sSex);
+        return $sSex;
     }
 
     /**
