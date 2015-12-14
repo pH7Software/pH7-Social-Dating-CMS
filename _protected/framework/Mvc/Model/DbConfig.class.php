@@ -70,9 +70,14 @@ final class DbConfig
         return (empty($mData)) ? 0 : $mData;
     }
 
+    /**
+     * @param string $sValue Value to set.
+     * @param string $sName Name of the DB pH7_Settings column.
+     * @return integer 1 on success.
+     */
     public static function setSetting($sValue, $sName)
     {
-        Engine\Record::getInstance()->update('Settings', 'value', $sValue, 'name', $sName);
+        return Engine\Record::getInstance()->update('Settings', 'value', $sValue, 'name', $sName);
     }
 
     public static function getMetaMain($sLangId)
