@@ -2,7 +2,7 @@
 /**
  * @title            Upload File Class
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2013-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / File
@@ -13,7 +13,9 @@ defined('PH7') or exit('Restricted access');
 
 abstract class Upload
 {
-
+    /**
+     * @internal Protected access because those attributes are used in \PH7\Framework\Video\Video class
+     */
     protected $sMaxSize, $iFileSize;
 
     /**
