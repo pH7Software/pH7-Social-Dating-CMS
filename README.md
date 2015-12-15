@@ -8,14 +8,12 @@
 
 It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (not duplicate code).
 
-It also wants to be fast, low-resource-intensive, extremely powerful and very secure.
-
-In addition to being **free**, **open source** and **relatively stable**, the software comes with more than **29 native modules** and based on **pH7Framework** *(written specifically for this project)* which includes more than 51 packages.
+This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 30 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
 To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best dating service** or **social networking** website on the World Wide Web!
 
 
-## Some Features of pH7CMS
+## How Powerful is your future Dating App?
 
 * Best Dating Features
 * Advanced Search
@@ -43,10 +41,10 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Member approval system
 * Advanced Admin Panel
 * Full Membership System
-* Payment Gateways Integration, PayPal, Stripe, 2CheckOut
+* Payment Gateways Integration, PayPal, Stripe, Bitcoin, 2CheckOut
 * Statistics & Analytics System
-* Notifications system
-* Registration delay
+* Live Notification System
+* Registration delay (to avoid spam)
 * File Management
 * Dynamic Field Forms Management
 * Privacy Settings
@@ -57,8 +55,9 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Maintenance Mode
 * Database Backup
 * Report
-* SEO Friendly (Title, Content, Code, ...), Sitemap module, ...
+* SEO-Friendly (Title, Content, Code, ...), Sitemap module, [hreflang](https://support.google.com/webmasters/answer/189077), possibility to translate each URL, ...
 * Multilingual URLs
+* Check that all UGC (User-Generated Content) is Unique (to avoid spam and malicious users)
 * RSS Feed
 * Full API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
@@ -74,6 +73,10 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
 * Everyone can easily contribute to this great innovative project with our [GitHub repository](http://github.com/pH7Software/pH7-Social-Dating-CMS)
 
+
+**It's not a hazard that pH7CMS is considered to be the first choice for creating enterprise level Dating Apps/Service or Social Networking Sites**
+
+*If you need, [here is some features](http://ph7cms.com/social-dating-features/) included in pH7CMS (and obviously in [pH7CMS Pro](http://ph7cms.com/pro/) as well) that may interest you!*
 
 ## Help Us to Grow Up
 
