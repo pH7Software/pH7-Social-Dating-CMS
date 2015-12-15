@@ -3,7 +3,7 @@
  * @title            Video Class
  * @desc             Class is used to create/manipulate videos using FFmpeg.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video
@@ -22,7 +22,25 @@ PH7\Framework\File as F;
 class Video extends F\Upload
 {
 
+
     private $oFile, $sType, $sFfmpegPath, $aFile;
+
+    /**
+     * @var $aAllowedTypes File formats supported.
+     */
+    private $aAllowedTypes = [
+        'video/mov',
+        'video/avi',
+        'video/flv',
+        'video/mp4',
+        'video/mpg',
+        'video/mpeg',
+        'video/wmv',
+        'video/ogg',
+        'video/ogv',
+        'video/webm',
+        'video/mkv'
+    ];
 
     /**
      * @constructor
@@ -42,9 +60,9 @@ class Video extends F\Upload
         }
 
         $this->aFile = $aFile;
-        $this->sType = $this->oFile->getFileExt($this->aFile['name']);
+        $this->sType = $this->aFile['type'];
 
-        /** Attributes for the PH7\Framework\File\Upload abstract class **/
+        /** Attributes for PH7\Framework\File\Upload abstract class **/
         $this->sMaxSize = Config::getInstance()->values['video']['upload.max_size'];
         $this->iFileSize = (int) $this->aFile['size'];
     }
@@ -66,26 +84,7 @@ class Video extends F\Upload
         }
         else
         {
-            switch ($this->sType)
-            {
-                // Files supported List.
-                case 'mov':
-                case 'avi':
-                case 'flv':
-                case 'mp4':
-                case 'mpg':
-                case 'mpeg':
-                case 'wmv':
-                case 'ogg':
-                case 'ogv':
-                case 'webm':
-                case 'mkv':
-                    return true;
-                break;
-
-                default:
-                    return false;
-            }
+            return (in_array($this->sType, $this->aAllowedTypes));
         }
     }
 

@@ -3,7 +3,7 @@
  * @title            Image Class
  * @desc             Class is used to create/manipulate images using GD library.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Image
@@ -21,9 +21,9 @@ class Image
 {
 
     /*** Alias ***/
-    const JPG = IMAGETYPE_JPEG, PNG = IMAGETYPE_PNG, GIF = IMAGETYPE_GIF;
+    const JPG = IMAGETYPE_JPEG, PNG = IMAGETYPE_PNG, GIF = IMAGETYPE_GIF, WEBP = 'image/webp';
 
-    private $sFile, $sType, $aInfo, $rImage, $iWidth, $iHeight, $iMaxWidth, $iMaxHeight, $iQuality = 100, $iCompression = 4;
+    private $sFile, $sType, $rImage, $iWidth, $iHeight, $iMaxWidth, $iMaxHeight, $iQuality = 100, $iCompression = 4;
 
     /**
      * @constructor
@@ -45,7 +45,9 @@ class Image
      */
     public function validate()
     {
-        if (!is_uploaded_file($this->sFile))
+        $mImgType = $this->getType();
+
+        if (!is_uploaded_file($this->sFile) || !$mImgType)
         {
             if (isDebug())
                 throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
@@ -54,9 +56,7 @@ class Image
         }
         else
         {
-            $this->aInfo = getimagesize($this->sFile);
-
-            switch ($this->aInfo[2])
+            switch ($mImgType)
             {
                 // JPG
                 case self::JPG:
@@ -411,6 +411,16 @@ class Image
     }
 
     /**
+     * Determine and get the type of the image (even an unallowed image type) by reading the first bytes and checking its signature.
+     *
+     * @return mixed (string | boolean) When a correct signature is found, returns the appropriate value, FALSE otherwise.
+     */
+    public function getType()
+    {
+        return @exif_imagetype($this->sFile);
+    }
+
+    /**
      * @desc Get image extension.
      * @return string The extension of the image without the dot.
      */
@@ -433,7 +443,6 @@ class Image
         unset(
             $this->sFile,
             $this->sType,
-            $this->aInfo,
             $this->rImage,
             $this->iWidth,
             $this->iHeight,
