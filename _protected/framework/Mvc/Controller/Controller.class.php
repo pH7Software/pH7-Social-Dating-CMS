@@ -16,6 +16,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Ip\Ip,
+PH7\Framework\Geo\Ip\Geo,
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Mvc\Model as M;
@@ -77,7 +78,10 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'meta_category' => $oInfo->metaCategory,
             'header' => 0, // Default value of header contents
             'is_disclaimer' => (bool) M\DbConfig::getSetting('disclaimer'), // Displays a disclaimer to enter to the site. This is useful for sites with adult content
-            'is_cookie_consent_bar' => (bool) M\DbConfig::getSetting('cookieConsentBar') // Displays a header cookie information bar
+            'is_cookie_consent_bar' => (bool) M\DbConfig::getSetting('cookieConsentBar'), // Displays a header cookie information bar
+            /* Put user's Geo details (country/city) into the template variables */
+            'country' => Geo::getCountry(),
+            'city' => Geo::getCity()
         ];
         $this->view->assigns($aMetaVars);
 
