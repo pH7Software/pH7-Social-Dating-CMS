@@ -59,22 +59,27 @@ class Image
             switch ($mImgType)
             {
                 // JPG
-                case self::JPG:
+                case static::JPG:
                     $this->rImage = imagecreatefromjpeg($this->sFile);
                     $this->sType = 'jpg';
-                    break;
+                break;
 
                 // PNG
-                case self::PNG:
+                case static::PNG:
                     $this->rImage = imagecreatefrompng($this->sFile);
                     $this->sType = 'png';
-                    break;
+                break;
 
                 // GIF
-                case self::GIF:
+                case static::GIF:
                     $this->rImage = imagecreatefromgif($this->sFile);
                     $this->sType = 'gif';
-                    break;
+                break;
+
+                case static::WEBP:
+                    $this->rImage = imagecreatefromgif($this->sFile);
+                    $this->sType = 'webp';
+                break;
 
                 // Invalid Zone
                 default:
