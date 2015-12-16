@@ -65,10 +65,10 @@ If you do not agree to this policy, please do not use our Site. Your continued u
 
 <p><strong>Contact us</strong></p>
 <p>If you have any questions about this policy<br />
-privacy practices of this site, please contact us via our &quot;<a href="{{ $design->url('contact','contact','index') }}" title="Contact Us">contact form</a>&quot;</p>
+privacy practices of this site, please contact us via our &quot;<a href="{{ $design->url('contact','contact','index') }}" title="Contact Us">contact form</a>&quot;.</p>
 <p>&nbsp;</p>
 
-<p>This document was last updated on January 26, 2012.</p>
+<p>This document was last updated on December 18, 2015.</p>
 
 
 </div>
