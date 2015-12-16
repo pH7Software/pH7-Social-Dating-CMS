@@ -18,7 +18,7 @@ class ValidationForm extends Form
         $oForm = new \PFBC\Form('form_validation', '400px');
         $oForm->configure(array('action' => $this->config->values['module.setting']['remote_url']));
         $oForm->addElement(new \PFBC\Element\Hidden('ph7cmsurl', PH7_URL_ROOT));
-        $oForm->addElement(new \PFBC\Element\Hidden('ph7cmsadminurl', PH7_URL_ROOT . PH7_ADMIN_MOD));
+        $oForm->addElement(new \PFBC\Element\Hidden('ph7cmspendingurl', Uri::get('validate-site', 'main', 'pending')));
         $oForm->addElement(new \PFBC\Element\Hidden('ph7cmsvalidatorurl', Uri::get('validate-site', 'main', 'validator')));
         $oForm->addElement(new \PFBC\Element\Hidden('name', $this->session->get('admin_first_name')));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Valid Email:'), 'email',  array('id' => 'email',  'onblur' => 'CValid(this.value, this.id)', 'required' => 1), false));
