@@ -29,6 +29,13 @@ class MainController extends Controller
         }
     }
 
+    public function pending()
+    {
+        $this->view->page_title = t('Pending Status: Please confirm your site');
+        $this->view->h1_title = t('We sent an email. Please confirm your Site');
+        $this->output();
+    }
+
     public function validator($sHash)
     {
         if (!empty($sHash) && $this->checkHash($sHash)) {
