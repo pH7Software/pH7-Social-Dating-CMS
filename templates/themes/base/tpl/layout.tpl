@@ -99,9 +99,6 @@
         {main_include 'top_menu.inc.tpl'}
       {/if}
 
-      <div role="banner" class="right ad_160_600">{{ $designModel->ad(160,600) }}</div>
-      <div role="banner" class="left ad_160_600">{{ $designModel->ad(160,600) }}</div>
-
       {* Headings group *}
       <div id="headings" class="center">
         {if !empty($h1_title )}
@@ -117,7 +114,7 @@
           <h4>{h4_title}</h4>
         {/if}
       </div>
-      {* If we aren't on the the splash page, then display the top middle banner *}
+      {* Don't display the top middle banner on the the splash page *}
       {if !(!$is_user_auth && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index')}
           <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
       {/if}
