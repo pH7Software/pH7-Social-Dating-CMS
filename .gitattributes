@@ -35,7 +35,7 @@
 *.docx binary
 
 ## Exclude files from release
-/_test export-ignore
+/_tests export-ignore
 /_tools export-ignore
 /_doc export-ignore
 /_repository/import export-ignore
