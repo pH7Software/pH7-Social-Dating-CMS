@@ -60,6 +60,8 @@ class Design extends \PH7\Framework\Layout\Html\Design
      */
     public function ad($iWidth, $iHeight, $bOnlyActive = true)
     {
+        if (!PH7_VALID_LICENSE) return false;
+
         $this->_oCache->start(self::CACHE_STATIC_GROUP, 'ads' . $iWidth . $iHeight . $bOnlyActive, static::CACHE_TIME);
 
         if (!$oData = $this->_oCache->get())
