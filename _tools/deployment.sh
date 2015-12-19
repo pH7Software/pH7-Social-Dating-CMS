@@ -61,7 +61,7 @@ function run() {
             rm -rf ./_repository/module/*
             rm -rf ./_repository/upgrade/*
             rm -rf ./_doc/
-            rm -rf ./_test/
+            rm -rf ./_tests/
             rm -rf ./.git/
 
             ## TMP folders
