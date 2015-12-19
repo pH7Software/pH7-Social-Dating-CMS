@@ -1,12 +1,18 @@
-filter:
-    excluded_paths: [_tests, _tools]
+checks:
+    php:
+        code_rating: true
+        duplication: true
 
 tools:
     external_code_coverage:
         timeout: 1800
         runs: 1
 
+    # Runs PHP CodeSniffer
     php_code_sniffer: true
+
+    # Runs PHP Coding Standards Fixer
+    php_cs_fixer: true
 
      # PHP Mess Detector (http://phpmd.org)
     php_mess_detector: true
@@ -15,21 +21,17 @@ tools:
     sensiolabs_security_checker: true
 
     # Analyzes the size and structure of a PHP project
-    php_pdepend:
-        enabled: true
-        excluded_dirs: [_tests, _tools]
+    php_pdepend: true
 
     # Analyzes the size and structure of a PHP project
-    php_loc:
-        enabled: true
-        excluded_dirs: [_tests, _tools]
+    php_loc: true
 
     # Copy/Paste Detector
-    php_cpd:
-        enabled: true
-        excluded_dirs: [_tests, _tools]
+    php_cpd: true
 
     # Runs Scrutinizer's PHP Analyzer Tool
-    php_analyzer:
-        enabled: true
-        excluded_dirs: [_tests, _tools]
+    php_analyzer: true
+
+filter:
+    # Folders we want to exclude
+    excluded_paths: [_tests, _tools]
