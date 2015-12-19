@@ -81,7 +81,6 @@
       </noscript>
 
       <div role="banner" id="logo"><h1><a href="{url_root}" title="{slogan}">{site_name}</a></h1></div>
-      <div role="banner" class="right ad_468_60">{{ $designModel->ad(468,60) }}</div>
 
     </header>
     <!-- End Header -->
@@ -118,6 +117,10 @@
           <h4>{h4_title}</h4>
         {/if}
       </div>
+      {* If we aren't on the the splash page, then display the top middle banner *}
+      {if !(!$is_user_auth && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index')}
+          <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
+      {/if}
 
       <div class="clear"></div>
 
