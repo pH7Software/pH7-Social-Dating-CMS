@@ -93,7 +93,7 @@ class MainController extends Controller
             }
             else
             {
-                $this->sTitle = t('Note Not Found');
+                $this->sTitle = t('No Note Found.');
                 $this->notFound();
             }
         }
@@ -121,7 +121,7 @@ class MainController extends Controller
         $sCategoryTxt = substr($sCategory,0,60);
         if(empty($oSearch))
         {
-            $this->sTitle = t('Not found "%0%" category!', $sCategoryTxt);
+            $this->sTitle = t('Not "%0%" category found!', $sCategoryTxt);
             $this->notFound();
         }
         else
@@ -156,9 +156,9 @@ class MainController extends Controller
         $sAuthorTxt = substr($sAuthor,0,60);
         if(empty($oSearch))
         {
-            $this->sTitle = t('Not found "%0%" author!', $sAuthorTxt);
+            $this->sTitle = t('None "%0%" author was found!', $sAuthorTxt);
             $this->notFound(false); // For the Ajax profile blocks, we can not put HTTP error code 404, so the attribute is "false"
-            $this->view->error = t('No found the note post of %0%.', $sAuthor); // We change the error message
+            $this->view->error = t("No %0%'s post was found.", $sAuthor); // We change the error message
         }
         else
         {

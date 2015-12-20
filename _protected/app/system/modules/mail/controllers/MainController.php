@@ -68,7 +68,7 @@ class MainController extends Controller
 
             if (empty($oMsg))
             {
-                $this->sTitle = t('Not Found Message!');
+                $this->sTitle = t('No Message Found!');
                 $this->_notFound();
             }
             else
@@ -221,7 +221,7 @@ class MainController extends Controller
 
         if (empty($oSearch))
         {
-            $this->sTitle = t('Search Not Found!');
+            $this->sTitle = t('Your search did not match any of your messages.');
             $this->_notFound();
         }
         else

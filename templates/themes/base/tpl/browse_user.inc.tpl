@@ -11,7 +11,7 @@
 
   {if empty($users)}
 
-    <p class="center bold">{lang 'Whoops! Not Found Users.'}</p>
+    <p class="center bold">{lang 'Whoops! No users found.'}</p>
 
   {else}
 

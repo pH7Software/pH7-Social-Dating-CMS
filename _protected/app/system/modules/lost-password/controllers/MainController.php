@@ -79,7 +79,7 @@ class MainController extends Controller
     private function checkMod($sMod)
     {
         if ($sMod != 'user' && $sMod != 'affiliate' && $sMod != PH7_ADMIN_MOD)
-            Header::redirect($this->registry->site_url, t('Module not found!'), 'error');
+            Header::redirect($this->registry->site_url, t('No module found!'), 'error');
     }
 
 }
