@@ -90,7 +90,7 @@ class MainController extends Controller
             }
             else
             {
-                $this->sTitle = t('Blog Not Found');
+                $this->sTitle = t('No Blog Found');
                 $this->notFound();
             }
         }
@@ -119,7 +119,7 @@ class MainController extends Controller
         $sCategoryTxt = substr($sCategory, 0, 60);
         if (empty($oSearch))
         {
-            $this->sTitle = t('Not found "%0%" category!', $sCategoryTxt);
+            $this->sTitle = t('No "%0%" category found!', $sCategoryTxt);
             $this->notFound();
         }
         else
