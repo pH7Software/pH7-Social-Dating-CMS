@@ -31,13 +31,16 @@ class DeleteUserCoreFormProcess extends Form
         }
         else
         {
+            /**
+             * Send an email to the site administrator saying the reason why a user wanted to delete his account from the site.
+             */
             $sUsername = $this->session->get($sSessPrefix.'_username');
             $sMembershipType = ($this->registry->module == 'affiliate') ? t('Affiliate') : t('Member');
 
             $this->view->membership = t('Type of Membership: %0%.', $sMembershipType);
             $this->view->message = nl2br($this->httpRequest->post('message'));
-            $this->view->why_delete = t('Due to the deletion of the account: %0%', $this->httpRequest->post('why_delete'));
-            $this->view->footer_title = t('Information of the user who has deleted their account');
+            $this->view->why_delete = t('Reason why the user wanted to leave: %0%', $this->httpRequest->post('why_delete'));
+            $this->view->footer_title = t('User Information');
             $this->view->email = t('Email: %0%', $this->session->get($sSessPrefix.'_email'));
             $this->view->username = t('Username: %0%', $sUsername);
             $this->view->first_name = t('First Name: %0%', $this->session->get($sSessPrefix.'_first_name'));
@@ -60,7 +63,7 @@ class DeleteUserCoreFormProcess extends Form
 
             $this->session->destroy();
 
-            Header::redirect(Uri::get('user','main','soon'), t('You delete account is successfully!'));
+            Header::redirect(Uri::get('user','main','soon'), t('Your account has been removed successfully!'));
         }
     }
 

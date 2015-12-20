@@ -45,7 +45,7 @@ class AdminController extends MainController
         /* Clean BlogModel Cache  */
         (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
 
-        Header::redirect(Uri::get('blog', 'main', 'index'), t('Your post was deleted!'));
+        Header::redirect(Uri::get('blog', 'main', 'index'), t('Your post has been deleted!'));
     }
 
     private function removeThumb($iId)

@@ -27,9 +27,9 @@ class DeleteUserCoreForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_delete_account', 'form_delete_account'));
         $oForm->addElement(new \PFBC\Element\Token('delete_account'));
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('required' => 1 )));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your message for your delete account:'), 'message', array('required' =>1, 'validation'=>new \PFBC\Validation\Str(5,500))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Reason:'), 'message', array('description' =>t('Please be specific in your reason. This will hep us to improve our service and make it the best social service for you.'), 'required' =>1, 'validation'=>new \PFBC\Validation\Str(5,500))));
         $oForm->addElement(new \PFBC\Element\Radio(t('Why:'), 'why_delete', array(t('I do not like the site'), t('I met someone'), t('Other, I put the answer in the message!')), array('required' =>1)));
-        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('description' =>t('Enter the code above:'))));
+        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('description' =>t('Enter the code above'))));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

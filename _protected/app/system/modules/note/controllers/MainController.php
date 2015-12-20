@@ -244,7 +244,7 @@ class MainController extends Controller
 
         /* Clean NoteModel Cache */
         (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
-        Header::redirect(Uri::get('note', 'main', 'index'), t('Your post was deleted!'));
+        Header::redirect(Uri::get('note', 'main', 'index'), t('Your post has been deleted!'));
     }
 
     public function removeThumb($iId)
