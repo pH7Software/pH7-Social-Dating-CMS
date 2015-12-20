@@ -17,10 +17,10 @@ PH7\Framework\Url\Header;
 
 if (AdminCore::auth() || UserCore::auth() || AffiliateCore::auth())
 {
+    $oHttpRequest = new Http;
     $oDesign = new Design;
     $oDesign->htmlHeader();
     $oDesign->usefulHtmlHeader();
-    $oHttpRequest = new Http;
     echo '<div class="center">';
 
     if ($oHttpRequest->getExists( array('mod', 'ctrl', 'act', 'id') ))
@@ -40,9 +40,9 @@ if (AdminCore::auth() || UserCore::auth() || AffiliateCore::auth())
 
     echo '</div>';
     $oDesign->htmlFooter();
-    unset($oDesign, $oHttpRequest);
+    unset($oHttpRequest, $oDesign);
 }
 else
 {
-    Header::redirect(Uri::get('user', 'signup', 'step1'), t('You must register to report the abuse.'));
+    Header::redirect(Uri::get('user', 'signup', 'step1'), t('You must be registered to report an abuse.'));
 }
