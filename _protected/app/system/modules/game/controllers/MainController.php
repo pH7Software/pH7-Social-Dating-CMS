@@ -99,7 +99,7 @@ class MainController extends Controller
         $sCategoryTxt = substr($sCategory,0,60);
         if (empty($oSearch))
         {
-            $this->sTitle = t('Not found "%0%" category!', $sCategoryTxt);
+            $this->sTitle = t('No "%0%" category found.', $sCategoryTxt);
             $this->_notFound();
         }
         else

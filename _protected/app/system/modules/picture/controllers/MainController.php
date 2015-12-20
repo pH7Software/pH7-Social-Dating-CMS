@@ -107,7 +107,7 @@ class MainController extends Controller
 
         if (empty($oAlbum))
         {
-            $this->sTitle = t('Album not found or in pending approval.');
+            $this->sTitle = t('No album found or still in pending approval.');
             $this->_notFound();
         }
         else
@@ -130,7 +130,7 @@ class MainController extends Controller
 
         if (empty($oPicture))
         {
-            $this->sTitle = t('Photo not found or in pending approval.');
+            $this->sTitle = t('No photo found or still in pending approval.');
             $this->_notFound();
         }
         else
