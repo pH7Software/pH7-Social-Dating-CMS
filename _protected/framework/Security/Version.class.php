@@ -21,10 +21,11 @@ final class Version
     const LATEST_VERSION_URL = 'http://ph7cms.com/xml/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /***** Framework Kernel *****/
-    const KERNEL_VERSION_NAME = 'pOW'; // 1.0 and 1.1 branches were "pOH", 1.2 branch is now "pOW" and the new one should be "p[H]"
+    /** "Xmas" Version is a really "special" one as it will be released on the 24th with some unexpected features!!! Happy Christmas guys! **/
+    const KERNEL_VERSION_NAME = 'Xmas'; // 1.0 and 1.1 branches were "pOH", 1.2 branch is now "pOW" and the new one should be "p[H]"
     const KERNEL_VERSION = '1.2.7';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2015-12-15';
+    const KERNEL_RELASE_DATE = '2015-12-24';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
