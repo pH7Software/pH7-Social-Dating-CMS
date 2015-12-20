@@ -10,7 +10,7 @@
   <div class="left">
 
     <h1 class="pink2 italic underline">{lang 'Make Money with our Affiliate Program!'}</h1>
-    <h2>Our affiliate program is a highest payouts in dating!</h2>
+    <h2>Our affiliate program is one of the highest payout rate findable!</h2>
 
     <div id="make_money"></div>
 
