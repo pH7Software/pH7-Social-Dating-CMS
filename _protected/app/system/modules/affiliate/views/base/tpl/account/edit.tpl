@@ -12,7 +12,7 @@
 </div>
 
 <br />
-<p class="small"><a href="{{ $design->url('affiliate','account','delete') }}">{lang 'Delete your account'}</a>.</p>
+<p class="small"><a href="{{ $design->url('affiliate','account','delete') }}">{lang 'Want to delete your account...?'}</a>.</p>
 
 <script src="{url_static}{% PH7_JS %}tabs.js"></script>
 <script>tabs('p', ['general','bank']);</script>
