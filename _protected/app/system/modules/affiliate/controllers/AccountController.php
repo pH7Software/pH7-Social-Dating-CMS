@@ -58,9 +58,10 @@ class AccountController extends Controller
         }
         elseif ($this->httpRequest->get('delete_status') == 'nodelete')
         {
-            $this->view->content = t('<span class="bold green1">Great, you stay with us!<br />
-            You see, you will not regret it!<br />We will do our best to you our %site_name%!</span>');
-            $this->design->setRedirect(Uri::get('affiliate', 'home', 'index'), null, null, 3);
+            $this->view->content = '<span class="bold green1">' . t('Excellent choice!') . '<br />' .
+            t('You will see, you will not regret that!') . '<br />' .
+            t('At %site_name%, we are working hard to give you one of the best affiliate service!') . '</span>';
+            $this->design->setRedirect(Uri::get('affiliate', 'home', 'index'), null, null, 4);
         }
         else
         {
