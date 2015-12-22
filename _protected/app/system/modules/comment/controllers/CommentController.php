@@ -125,7 +125,7 @@ class CommentController extends Controller
             }
             else
             {
-                $this->sMsg = t('Your comment could not be deleted because there no exist.');
+                $this->sMsg = t('Your comment does not exist anymore.');
             }
         }
         else

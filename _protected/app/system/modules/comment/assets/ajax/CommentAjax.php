@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Comment / Asset / Ajax
@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Request\Http, PH7\Framework\Session\Session;
 
 class Comment
 {
-
     private $_oSession, $_oHttpRequest, $_oCommentModel, $_sMsg, $_bStatus;
 
     public function __construct()
@@ -52,7 +51,7 @@ class Comment
             }
             else
             {
-                $this->_sMsg = jsonMsg(0, t('Your comment could not be deleted because there no exist.'));
+                $this->_sMsg = jsonMsg(0, t('Your comment does not exist anymore.'));
             }
         }
         else
@@ -61,18 +60,6 @@ class Comment
         }
         echo $this->_sMsg;
     }
-
-    public function __destruct()
-    {
-        unset(
-            $this->_oSession,
-            $this->_oHttpRequest,
-            $this->_oCommentModel,
-            $this->_sMsg,
-            $this->_bStatus
-        );
-    }
-
 }
 
 // Only for members

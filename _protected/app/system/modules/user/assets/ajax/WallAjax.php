@@ -120,7 +120,7 @@ class WallAjax extends Core
     {
         $this->_bStatus = $this->_oWallModel->delete($this->session->get('member_id'), $this->httpRequest->post('post'));
         if (!$this->_bStatus)
-            $this->_sMsg = jsonMsg(0, t('Your post could not be deleted because there no exist.'));
+            $this->_sMsg = jsonMsg(0, t('Your post does not exist anymore.'));
         else
             $this->_sMsg = jsonMsg(1, t('Your post has been sent successfully!'));
 

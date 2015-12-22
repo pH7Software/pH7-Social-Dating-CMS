@@ -133,7 +133,7 @@ class VideoFormProcess extends Form
         /* Clean VideoModel Cache */
         (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
 
-        $sModerationText = t('Your video has been received! But it will be visible once approved by our moderators. Please do not send a new video because this is useless!');
+        $sModerationText = t('Your video has been received! But it will not be visible until it is approved by our moderators. Please do not send a new not.');
         $sText =  t('Your video has been added successfully!');
         $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
         Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);

@@ -23,7 +23,7 @@ class User extends UserCore
     {
         (new Session)->destroy();
 
-        Header::redirect(Uri::get('user','main','soon'), t('You have logged out!'));
+        Header::redirect(Uri::get('user','main','soon'), t('You are successfully logged out. See you soon!'));
     }
 
 }

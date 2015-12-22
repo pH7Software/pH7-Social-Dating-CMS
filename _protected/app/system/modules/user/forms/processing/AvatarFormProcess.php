@@ -38,7 +38,7 @@ class AvatarFormProcess extends Form
         }
         else
         {
-            $sModerationText = t('Your avatar has been received! But it will be visible once approved by our moderators. Please do not send a new avatar because this is useless!');
+            $sModerationText = t('Your avatar has been received! But it will not be visible until it is approved by our moderators. Please do not send a new not.');
             $sText =  t('Your avatar has been updated successfully!');
             $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
             \PFBC\Form::setSuccess('form_avatar', $sMsg);
