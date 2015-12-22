@@ -234,7 +234,7 @@ class Various
     }
 
     /**
-     * Set a Error Message with a Exception then exit() function.
+     * Set an Error Message with an Exception then exit() function.
      *
      * @param string $sTable The table value.
      * @return integer 1 (with exit function).

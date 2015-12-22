@@ -28,8 +28,8 @@ class MainController extends Controller
         /**
          * @internal We can include HTML tags in the title since the template will erase them before display.
          */
-        $sMenDesc = t('You men!') . '<br />' . t('Vote for the most beautiful women, the sexiest and hottest online dating free site!');
-        $sWomenDesc = t('You women!') . '<br />' .t('Vote for the best men, the sexiest and hottest free online dating site!');
+        $sMenDesc = t('You Men!') . '<br />' . t('Vote for the most beautiful women, the sexiest and hottest!');
+        $sWomenDesc = t('You Women!') . '<br />' .t('Vote for the best men, the sexiest and hottest!');
 
         $this->view->page_title = t('Hot On Not - Free Online Dating Site');
         $this->view->meta_description = $sMenDesc . ' ' . $sWomenDesc;
@@ -45,7 +45,7 @@ class MainController extends Controller
         if (empty($oData))
         {
             Framework\Http\Http::setHeadersByCode(404);
-            $this->view->error = t('Sorry, We did not find any photo to Hot Or Not Party.');
+            $this->view->error = t("Sorry, we haven't found any photo to Hot Or Not Party.");
         }
         else
         {

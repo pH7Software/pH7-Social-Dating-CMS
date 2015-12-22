@@ -21,7 +21,7 @@ class CategoryFormProcess extends Form
         parent::__construct();
 
         (new ForumModel)->addCategory($this->httpRequest->post('title'));
-        Header::redirect(Uri::get('forum', 'admin', 'addforum', Db::getInstance()->lastInsertId()), t('The Category was added successfully!'));
+        Header::redirect(Uri::get('forum', 'admin', 'addforum', Db::getInstance()->lastInsertId()), t('The Category has been successfully added!'));
     }
 
 }

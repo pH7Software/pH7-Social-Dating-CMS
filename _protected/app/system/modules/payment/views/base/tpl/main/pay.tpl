@@ -13,7 +13,7 @@
           {{ $oDesign = new PaymentDesign }}
 
           {if $is_paypal}
-              <div class="paypal_logo left"><img src="{url_tpl_mod_img}big_paypal.gif" alt="PayPal" title="{lang 'Buy with PayPal on %site_name%'}" /></div>
+              <div class="paypal_logo left"><img src="{url_tpl_mod_img}big_paypal.gif" alt="PayPal" title="{lang 'Purchase your subscription using PayPal'}" /></div>
           {/if}
 
           {if $is_paypal}

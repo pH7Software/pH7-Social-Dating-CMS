@@ -109,7 +109,7 @@ class PictureFormProcess extends Form
         /* Clean PictureModel Cache */
         (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
 
-        $sModerationText = t('Your photo(s) has been received! But it will be visible once approved by our moderators. Please do not send a new photo(s) because this is useless!');
+        $sModerationText = t('Your photo(s) has been received! But it will not be visible until it is approved by our moderators. Please do not send a new not.');
         $sText =  t('Your photo(s) has been added successfully!');
         $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
         Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);

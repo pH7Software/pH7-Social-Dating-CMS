@@ -263,7 +263,7 @@ class ForumController extends Controller
         if ($b404Status === true)
             Framework\Http\Http::setHeadersByCode(404);
 
-        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to the <a href="%0%">main forum page</a> or <a href="%1%">go the previous page</a>.', Uri::get('forum', 'forum', 'index'), 'javascript:history.back();') : '';
+        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to the <a href="%0%">main forum page</a> or <a href="%1%">the previous page</a>.', Uri::get('forum', 'forum', 'index'), 'javascript:history.back();') : '';
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
