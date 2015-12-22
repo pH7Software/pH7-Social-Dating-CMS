@@ -117,16 +117,15 @@ class Validate
     /**
      * Validate Is Integer.
      *
-     * @param integer $int
+     * @param integer $iInt
      * @param integer $iMin Default 0
-     * @param integer $iMax Default 0
+     * @param integer $iMax Default 999999999999
      * @return boolean
      */
-    public function int($int, $iMin = 0, $iMax = 0)
+    public function int($iInt, $iMin = 0, $iMax = 999999999999)
     {
-        $int = filter_var($int, FILTER_SANITIZE_NUMBER_INT);
-
-        return filter_var($int, FILTER_VALIDATE_INT, array('options' => array('min_range'=>$iMin, 'max_range'=>$iMax)));
+        $iInt = filter_var($iInt, FILTER_SANITIZE_NUMBER_INT);
+        return (filter_var($iInt, FILTER_VALIDATE_INT, static::getFilterOption($iMin, $iMax)) !== false);
 
     }
 
@@ -155,27 +154,26 @@ class Validate
     /**
      * Validate Is Float.
      *
-     * @param float $float
-     * @param integer $iMin Default 0
-     * @param integer $iMax Default 0
+     * @param float $fFloat
+     * @param mixed (float | integer) $mMin Default 0
+     * @param mixed (float | integer) $mMax Default 999999999999
      * @return boolean
      */
-    public function float($float, $iMin = 0, $iMax = 0)
+    public function float($fFloat, $mMin = 0, $mMax = 999999999999)
     {
-        $float = filter_var($float, FILTER_SANITIZE_NUMBER_FLOAT);
-
-        return filter_var($float, FILTER_VALIDATE_FLOAT, array('options' => array('min_range'=>$iMin, 'max_range'=>$iMax)));
+        $fFloat = filter_var($fFloat, FILTER_SANITIZE_NUMBER_FLOAT);
+        return (filter_var($fFloat, FILTER_VALIDATE_FLOAT, static::getFilterOption($mMin, $mMax)) !== false);
     }
 
     /*
      * Validate Is Boolean.
      *
-     * @param boolean $bool
+     * @param boolean $bBool
      * @return boolean
      */
-    public function bool($bool)
+    public function bool($bBool)
     {
-        return filter_var($bool, FILTER_VALIDATE_BOOLEAN);
+        return (filter_var($bBool, FILTER_VALIDATE_BOOLEAN) !== false);
     }
 
     /**
@@ -225,7 +223,7 @@ class Validate
             // This function now works with Windows since version PHP 5.3, so we mustn't include the PEAR NET_DNS library.
             if( !(checkdnsrr($sEmailHost, 'MX') && checkdnsrr($sEmailHost, 'A')) ) return false;
         }
-        return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) && $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail));
+        return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false && $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail));
     }
 
 
@@ -275,7 +273,8 @@ class Validate
     {
         $sUrl = filter_var($sUrl, FILTER_SANITIZE_URL);
 
-        if(!(filter_var($sUrl, FILTER_VALIDATE_URL) && $this->_oStr->length($sUrl) <= PH7_MAX_URL_LENGTH)) return false;
+        if (filter_var($sUrl, FILTER_VALIDATE_URL) === false || $this->_oStr->length($sUrl) >= PH7_MAX_URL_LENGTH)
+            return false;
 
         if($bRealUrl)
         {
@@ -303,7 +302,7 @@ class Validate
      */
     public function ip($sIp)
     {
-        return filter_var($sIp, FILTER_VALIDATE_IP);
+        return (filter_var($sIp, FILTER_VALIDATE_IP) !== false);
     }
 
     /**
@@ -374,5 +373,17 @@ class Validate
         }
     }
     */
+
+    /**
+     * Get option for some filter_var().
+     *
+     * @param mixed (float | integer) $mMin Minimum range.
+     * @param mixed (float | integer) $mMax Maximum range.
+     * @return array
+     */
+    protected static function getFilterOption($mMin, $mMax)
+    {
+        return ['options' => ['min_range' => $mMin, 'max_range' => $mMax]];
+    }
 
 }
