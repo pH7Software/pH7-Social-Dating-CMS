@@ -4,7 +4,7 @@
  * By pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Validation;
-use PH7\Framework\Str\Str as String;
+use PH7\Framework\Str\Str as FwkStr;
 
 class Str extends \PFBC\Validation
 {
@@ -17,7 +17,7 @@ class Str extends \PFBC\Validation
      */
     public function __construct($iMin = null, $iMax = null)
     {
-        $this->oStr = new String;
+        $this->oStr = new FwkStr;
         $this->iMin = $iMin;
         $this->iMax = $iMax;
     }
