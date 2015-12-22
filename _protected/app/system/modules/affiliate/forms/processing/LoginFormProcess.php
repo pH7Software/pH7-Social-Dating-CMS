@@ -97,7 +97,7 @@ class LoginFormProcess extends Form
                 $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
                 $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
 
-                Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully login!'));
+                Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged!'));
             }
         }
     }

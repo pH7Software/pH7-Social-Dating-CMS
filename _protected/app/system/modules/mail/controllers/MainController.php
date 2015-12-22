@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Mail / Controller
@@ -14,7 +14,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
-
     protected $oMailModel, $oPage, $sMsg, $sTitle, $iTotalMails;
     private $_iProfileId, $_bAdminLogged;
 
@@ -89,7 +88,7 @@ class MainController extends Controller
 
             if (empty($oMail))
             {
-                $this->sTitle = t('Empty Message!');
+                $this->sTitle = t('Sorry!');
                 $this->_notFound();
                 // We modified the default error message.
                 $this->view->error = t('Sorry %0%, you do not have any messages.', '<em>' . $this->session->get('member_first_name') . '</em>');
@@ -137,10 +136,10 @@ class MainController extends Controller
 
             if (empty($oMail))
             {
-                $this->sTitle = t('Empty Message!');
+                $this->sTitle = t('Sorry!');
                 $this->_notFound();
                 // We modified the default error message.
-                $this->view->error = t('Empty message.');
+                $this->view->error = t('No message found.');
             }
             else
             {
@@ -186,10 +185,10 @@ class MainController extends Controller
 
             if (empty($oMail))
             {
-                $this->sTitle = t('Empty Message!');
+                $this->sTitle = t('Sorry!');
                 $this->_notFound();
                 // We modified the default error message.
-                $this->view->error = t('You do not have any messages in your Trash.');
+                $this->view->error = t('No trash was found.');
             }
             else
             {
@@ -204,7 +203,7 @@ class MainController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search Mail - Looking a new Message');
+        $this->sTitle = t('Search Mail - Look for a message');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();
@@ -240,7 +239,7 @@ class MainController extends Controller
     public function setTrash()
     {
         $bStatus = $this->oMailModel->setTo($this->_iProfileId, $this->httpRequest->post('id', 'int'), 'trash');
-        $this->sMsg = ($bStatus) ? t('Your message has been moved to your Trash.') : t('Your message could not be moved to Trash because there no exist.');
+        $this->sMsg = ($bStatus) ? t('Your message has been moved to your trash bin.') : t('Your message does not exist anymore in your trash bin.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
         Header::redirect(Uri::get('mail','main','inbox'), $this->sMsg, $sMsgType);
@@ -261,7 +260,7 @@ class MainController extends Controller
                     $iId = (int) $iId;
                     $this->oMailModel->setTo($this->_iProfileId, $iId, 'trash');
                 }
-                $this->sMsg = t('Your message(s) has been moved to your Trash.');
+                $this->sMsg = t('Your message(s) has been moved to your trash bin.');
             }
         }
 
@@ -271,7 +270,7 @@ class MainController extends Controller
     public function setRestor()
     {
         $bStatus = $this->oMailModel->setTo($this->_iProfileId, $this->httpRequest->post('id', 'int'), 'restor');
-        $this->sMsg = ($bStatus) ? t('Your message has been moved to your Inbox.') : t('Your message could not be moved to Trash because there no exist.');
+        $this->sMsg = ($bStatus) ? t('Your message has been moved to your inbox.') : t('Your message does not exist anymore in your inbox.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
         Header::redirect(Uri::get('mail','main','trash'), $this->sMsg, $sMsgType);
@@ -292,7 +291,7 @@ class MainController extends Controller
                     $iId = (int) $iId;
                     $this->oMailModel->setTo($this->_iProfileId, $iId, 'restor');
                 }
-                $this->sMsg = t('Your message(s) has been moved to your Inbox.');
+                $this->sMsg = t('Your message(s) has been moved to your inbox.');
             }
         }
 
@@ -308,7 +307,7 @@ class MainController extends Controller
         else
             $bStatus = $this->oMailModel->setTo($this->_iProfileId, $iId, 'delete');
 
-        $this->sMsg = ($bStatus) ? t('Your message has been deleted successfully!') : t('Your message could not be deleted because there no exist.');
+        $this->sMsg = ($bStatus) ? t('Your message has been deleted successfully') : t('Your message does not exist anymore.');
         $sMsgType = ($bStatus) ? 'success' : 'error';
         $sUrl = ($this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage());
         Header::redirect($sUrl, $this->sMsg, $sMsgType);
@@ -350,12 +349,6 @@ class MainController extends Controller
     {
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
-        $this->view->error = t('Sorry, we weren\'t able to find the page you requested.<br />We suggest you <a href="%0%">make a new search</a>.', Uri::get('mail','main','search'));
+        $this->view->error = t('Sorry, we weren\'t able to find the page you requested.<br />We suggest you doing a <a href="%0%">new search</a>.', Uri::get('mail','main','search'));
     }
-
-    public function __destruct()
-    {
-        unset($this->oMailModel, $this->oPage, $this->sMsg, $this->sTitle, $this->iTotalMails);
-    }
-
 }

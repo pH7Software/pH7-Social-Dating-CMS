@@ -21,7 +21,7 @@
 {if isset($forum_name,$forum_id)}
   <a class="m_button" rel="nofollow" href="{{ $design->url('forum', 'forum', 'addtopic', "$forum_name,$forum_id") }}">{lang 'Create a new Topic'}</a>
 {else}
-  <a class="m_button" rel="nofollow" href="{{ $design->url('forum', 'forum', 'search') }}">{lang 'Make a new search'}</a>
+  <a class="m_button" rel="nofollow" href="{{ $design->url('forum', 'forum', 'search') }}">{lang 'New Search'}</a>
 {/if}
 
 {main_include 'page_nav.inc.tpl'}

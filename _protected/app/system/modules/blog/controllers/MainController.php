@@ -12,7 +12,7 @@ class MainController extends Controller
 {
 
     /**
-     * @access protected Protected access for the AdminController class derived from this class.
+     * @access protected Protected access because AdminController class is derived from this class and will use these attributes.
      * @var object $oBlogModel
      * @var object $oPage
      * @var string $sTitle
@@ -209,7 +209,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->view->error = t('Sorry, we weren\'t able to find the page you requested.<br />
-        May we suggest <a href="%0%">exploring some tags</a> or <a href="%1%">make a new search</a>.',
+        May we suggest <a href="%0%">exploring some tags</a> or <a href="%1%">creating a new search</a>.',
             Framework\Mvc\Router\Uri::get('blog', 'main', 'index'), Framework\Mvc\Router\Uri::
             get('blog', 'main', 'search'));
     }

@@ -18,7 +18,7 @@ class ForumFormProcess extends Form
         parent::__construct();
 
         (new ForumModel)->addForum($this->httpRequest->post('category_id'), $this->httpRequest->post('name'), $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        Header::redirect(Uri::get('forum', 'forum', 'index'), t('Your Forum was added successfully!'));
+        Header::redirect(Uri::get('forum', 'forum', 'index'), t('The Forum has been successfully added!'));
     }
 
 }

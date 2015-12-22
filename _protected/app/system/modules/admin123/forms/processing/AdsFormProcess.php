@@ -36,7 +36,7 @@ class AdsFormProcess extends Form
         ->start(AdsCoreModel::CACHE_GROUP, 'totalAds' . ($iIsAff ? 'Affiliates' : ''), null)->clear();
 
         $sSlug = ($iIsAff) ? 'affiliate' : '';
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisement was added successfully!'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisement has been successfully added!'));
     }
 
 }

@@ -222,7 +222,7 @@ class MainController extends Controller
     {
         if ($b404Status === true)
             Framework\Http\Http::setHeadersByCode(404);
-        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">go the previous page</a> or <a href="%1%">add a new picture</a> in this album.', 'javascript:history.back();', Framework\Mvc\Router\Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id'))) : '';
+        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add a new picture</a> in this album.', 'javascript:history.back();', Framework\Mvc\Router\Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id'))) : '';
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

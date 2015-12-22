@@ -87,7 +87,7 @@ class Twitter extends Api implements IApi
                     // Add User Avatar
                     $this->setAvatar($aProfile);
 
-                    $this->oDesign->setFlashMsg( t('You now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
+                    $this->oDesign->setFlashMsg( t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
                     $this->sUrl = Uri::get('connect','main','register');
                 }
                 else
