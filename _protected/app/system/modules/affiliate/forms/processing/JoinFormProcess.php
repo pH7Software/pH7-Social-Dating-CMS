@@ -61,7 +61,7 @@ class JoinFormProcess extends Form
         }
         elseif (!$oAffModel->join($aData))
         {
-            \PFBC\Form::setError('form_join_aff', 
+            \PFBC\Form::setError('form_join_aff',
                 t('An error occurred during registration!') . '<br />' .
                 t('Please try again with new information in the form fields or come back later.')
             );
