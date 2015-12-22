@@ -127,7 +127,7 @@ function validate_password($sPassword, $iMin = 6, $iMax = 92)
  */
 function validate_email($sEmail)
 {
-    return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) && mb_strlen($sEmail) < 120);
+    return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false && mb_strlen($sEmail) < 120);
 }
 
 /**
