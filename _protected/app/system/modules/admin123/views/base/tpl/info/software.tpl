@@ -2,9 +2,9 @@
 
   <h2 class="underline">{lang 'Software Information'}</h2>
   <div class="italic">
-    <p>{lang 'Name: %software_name%'}</p>
-    <p>{lang 'Company: %software_company%'}</p>
-    <p>{lang 'Support Site: %0%', '<a href="%software_website%">%software_name%</a>'}</p>
+    <p>{lang 'Name: %0%', '<a href="%software_website%">%software_name%</a>'}</p>
+    <p>{lang 'Company: %0%', '<a href="http://hizup.uk">%software_company%</a>'}</p>
+    <p>{lang 'Support Site: %0%', '<a href="%software_website%/order/">%software_name%</a>'}</p>
   </div>
 
   <div class="s_bMarg"></div>
