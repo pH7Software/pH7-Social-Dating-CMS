@@ -28,7 +28,7 @@ class CDateTime
     /**
      * Get, initialization method.
      *
-     * @param mixed (string | integer) $mTime If specified, you must enter a date/timestamp, otherwise returns the current time.
+     * @param mixed (string | integer) $mTime If specified, you must enter a date/timestamp, otherwise it's the current time.
      * @return void $this
      */
     public function get($mTime = null)

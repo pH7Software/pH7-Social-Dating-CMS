@@ -17,8 +17,10 @@ class MainController extends Controller
 
     public function index()
     {
-        // Add Validate-Site JS file
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'validate-site' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'validationbox.js');
+        // Add Validate-Site JS file if needed
+        if (ValidateSiteCore::isInject()) {
+            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'validate-site' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'validationbox.js');
+        }
 
         $this->view->page_title = t('Admin Panel');
         $this->view->h1_title = t('Dashboard');
