@@ -29,7 +29,7 @@
             <span class="icon-bar"></span>
           </button>
 
-          <a class="navbar-brand" href="{{ $design->homePage() }}" title="{lang 'Home'}">{lang 'Home'}</a>
+          <a class="navbar-brand" href="{{ $design->homePageUrl() }}" title="{lang 'Home'}">{lang 'Home'}</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
