@@ -16,7 +16,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
 {
 
     /**
-     * Get the since date of the website.
+     * Get the date since the website has been created.
      *
      * @return string The date.
      */

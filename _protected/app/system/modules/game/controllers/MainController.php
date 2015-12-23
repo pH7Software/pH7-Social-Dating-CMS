@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Game / Controller
  */
 namespace PH7;
+
 use PH7\Framework\Navigation\Page;
 
 class MainController extends Controller

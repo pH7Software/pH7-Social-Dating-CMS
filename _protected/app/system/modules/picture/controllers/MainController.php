@@ -6,7 +6,11 @@
  * @package        PH7 / App / System / Module / Picture / Controller
  */
 namespace PH7;
-use PH7\Framework\Security\Ban\Ban, PH7\Framework\Navigation\Page;
+use
+PH7\Framework\Security\Ban\Ban,
+PH7\Framework\Navigation\Page,
+PH7\Framework\Url\Header,
+PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
@@ -35,7 +39,7 @@ class MainController extends Controller
 
     public function index()
     {
-        // Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('picture','main','albums'));
+        // Header::redirect(Uri::get('picture','main','albums'));
         $this->albums();
     }
 
@@ -160,7 +164,7 @@ class MainController extends Controller
 
         /* Clean PictureModel Cache */
         (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
-        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your picture has been deleted!'));
+        Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your picture has been deleted!'));
     }
 
     public function deleteAlbum()
@@ -173,7 +177,7 @@ class MainController extends Controller
         /* Clean PictureModel Cache */
         (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
 
-        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('picture', 'main', 'albums'), t('Your album has been deleted!'));
+        Header::redirect(Uri::get('picture', 'main', 'albums'), t('Your album has been deleted!'));
     }
 
     public function search()
@@ -222,7 +226,7 @@ class MainController extends Controller
     {
         if ($b404Status === true)
             Framework\Http\Http::setHeadersByCode(404);
-        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add a new picture</a> in this album.', 'javascript:history.back();', Framework\Mvc\Router\Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id'))) : '';
+        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add a new picture</a> in this album.', 'javascript:history.back();', Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id'))) : '';
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
