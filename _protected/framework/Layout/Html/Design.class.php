@@ -212,6 +212,21 @@ class Design
         echo t('Queries time: %0% | %1% %2% | Generated in %3% | Memory allocated: %4%', Db::time(), $iCountQueries, $sRequest, $sTime, $iMemory);
     }
 
+    /**
+     * Display accurate homepage URL.
+     *
+     * @return void URL output.
+     */
+    public function homePage()
+    {
+        if (\PH7\AdminCore::auth())
+            $this->url(PH7_ADMIN_MOD, 'main', 'index');
+        elseif (\PH7\AffiliateCore::auth())
+            $this->url('affiliate', 'account', 'index');
+        else
+            echo PH7_URL_ROOT;
+    }
+
     public function url($sModule, $sController, $sAction, $sVars = null, $bClear = true)
     {
         $sUrl = Uri::get($sModule, $sController, $sAction, $sVars, $bClear);
