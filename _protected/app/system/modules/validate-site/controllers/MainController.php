@@ -25,6 +25,7 @@ class MainController extends Controller
         // Display the form box only if the site isn't validated
         if (!$this->oValidateModel->is()) {
             $this->view->page_title = t('Validate your Site');
+            $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
             $this->output();
         }
     }

@@ -6,7 +6,11 @@
  * @package        PH7 / App / System / Module / Video / Controller
  */
 namespace PH7;
-use PH7\Framework\Security\Ban\Ban, PH7\Framework\Navigation\Page;
+use
+PH7\Framework\Security\Ban\Ban,
+PH7\Framework\Navigation\Page,
+PH7\Framework\Url\Header,
+PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
@@ -170,7 +174,7 @@ class MainController extends Controller
         /* Clean VideoModel Cache */
         (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
 
-        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your video has been deleted!'));
+        Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your video has been deleted!'));
     }
 
     public function deleteAlbum()
@@ -182,7 +186,7 @@ class MainController extends Controller
 
         /* Clean VideoModel Cache */
         (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
-        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('video', 'main', 'albums'), t('Your album has been deleted!'));
+        Header::redirect(Uri::get('video', 'main', 'albums'), t('Your album has been deleted!'));
     }
 
     public function search()
@@ -232,7 +236,7 @@ class MainController extends Controller
     {
         if ($b404Status === true)
             Framework\Http\Http::setHeadersByCode(404);
-        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add a new video</a> in this album.', 'javascript:history.back();', Framework\Mvc\Router\Uri::get('video', 'main', 'addvideo', $this->httpRequest->get('album_id'))) : '';
+        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add a new video</a> in this album.', 'javascript:history.back();', Uri::get('video', 'main', 'addvideo', $this->httpRequest->get('album_id'))) : '';
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
