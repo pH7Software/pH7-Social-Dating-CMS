@@ -10,7 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
 
-class ValidateSiteModel extends Framework\Mvc\Model\Engine\Model
+class ValidateSiteModel extends ValidateSiteCoreModel
 {
     /**
      * Set a site validated/unvalidated.
@@ -21,15 +21,5 @@ class ValidateSiteModel extends Framework\Mvc\Model\Engine\Model
     public function set($iStatus = 1)
     {
         return DbConfig::setSetting($iStatus, 'isSiteValidated');
-    }
-
-    /**
-     * Check if the site has been validated or not.
-     *
-     * @return boolean
-     */
-    public function is()
-    {
-        return (bool) DbConfig::getSetting('isSiteValidated');
     }
 }

@@ -18,7 +18,7 @@ class MainController extends Controller
 {
 
     /**
-     * @access protected Protected access for the AdminController class derived from this class.
+     * @access protected Protected access because the AdminController class is derived from this class and used these attributes.
      * @var object $oUserModel
      * @var object $oPayModel
      * @var string $sTitle

@@ -22,11 +22,13 @@ class MainController extends Controller
 
     public function validationBox()
     {
-        // Display the form box only if the site isn't validated
+        // Display the form box only if the site isn't validated yet
         if (!$this->oValidateModel->is()) {
             $this->view->page_title = t('Validate your Site');
             $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
             $this->output();
+        } else {
+            $this->displayPageNotFound(t('Whoops! It appears the site has already been activated.'));
         }
     }
 

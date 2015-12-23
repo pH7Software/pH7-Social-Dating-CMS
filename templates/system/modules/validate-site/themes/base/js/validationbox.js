@@ -6,16 +6,14 @@
 
 var $validationBox = (function() {
     $.get(pH7Url.base + 'validate-site/main/validationbox', function(oData) {
-        if(oData.length > 1) {
-            $.colorbox({
-                width      :  '450px',
-                maxHeight  :  '85%',
-                speed      : 500,
-                scrolling  : false,
-                html       : $(oData).find('#box_block')
-            });
-       }
-   });
+        $.colorbox({
+            width      :  '450px',
+            maxHeight  :  '85%',
+            speed      : 500,
+            scrolling  : false,
+            html       : $(oData).find('#box_block')
+        })
+   })
 });
 
 $validationBox();
