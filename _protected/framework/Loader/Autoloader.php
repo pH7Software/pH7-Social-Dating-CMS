@@ -120,7 +120,7 @@ final class Autoloader
     {
         $oFile = new File;
         $sFullPath = PH7_PATH_FRAMEWORK . $sFileNamePath;
-        $bIsExpiredFile = (($oFile->getModifTime($sFullPath) + VDate::setTime('+2 months')) < VDate::getTime());
+        $bIsExpiredFile = (VDate::setTime('-2 months') > $oFile->getModifTime($sFullPath));
         $bFileExists = $oFile->existFile($sFullPath);
         $bIsTooSmallFile = ($oFile->size($sFullPath) < 1000);
 
