@@ -23,17 +23,18 @@ class ValidateSiteCore
      *
      * @return boolean
      */
-    public static function isInject()
+    public static function needInject()
     {
+        $oVSModel = new ValidateSiteCoreModel;
         $iSinceSiteCreated = VDate::getTime(StatisticCoreModel::getSiteSinceDate());
 
-        if (VDate::setTime('-2 days') > $iSinceSiteCreated) {
+        if (!$oVSModel->is() && VDate::setTime('-2 days') > $iSinceSiteCreated) {
             // OK for adding the validation colorbox
             return true;
         }
 
         // After over 2 months, the site is still not validated, maybe the validation box doesn't really work, so we redirected to the page form
-        if (VDate::setTime('-2 months') > $iSinceSiteCreated && !(new Session)->exists(self::SESS_IS_VISITED)) {
+        if (!$oVSModel->is() && VDate::setTime('-2 months') > $iSinceSiteCreated && !(new Session)->exists(self::SESS_IS_VISITED)) {
             Header::redirect(Uri::get('validate-site', 'main', 'validationbox'));
         }
 
