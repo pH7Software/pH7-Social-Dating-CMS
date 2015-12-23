@@ -19,18 +19,19 @@ class Various
     /**
      * Get the Unix timestamp representing the date.
      *
+     * @param string $sTime A date/time string valid formats (http://php.net/manual/en/datetime.formats.php). Default: 'now'
      * @return integer
      */
-    public static function getTime()
+    public static function getTime($sTime = 'now')
     {
-        return (new \DateTime)->getTimestamp();
+        return (new \DateTime($sTime))->getTimestamp();
     }
 
     /**
      * Add or Remove Time from the current date.
      *
      * @param string $sTime A date/time string. EX: Add one month '+1 month' | Remove one month '-1 month'
-     * @return integer The Unix timestamp representing the date.
+     * @return integer The Unix timestamp representing including the time modification.
      */
     public static function setTime($sTime)
     {
