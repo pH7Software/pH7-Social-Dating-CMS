@@ -215,9 +215,9 @@ class Design
     /**
      * Display accurate homepage URL.
      *
-     * @return void URL output.
+     * @return void The homepage URL output.
      */
-    public function homePage()
+    public function homePageUrl()
     {
         if (\PH7\AdminCore::auth())
             $this->url(PH7_ADMIN_MOD, 'main', 'index');
