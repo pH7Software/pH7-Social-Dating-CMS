@@ -1,4 +1,5 @@
-<div id="block_page">
+<div class="left" id="block_page">
+  <h1>{lang 'Invite your Friends'}</h1>
   {{ InviteForm::display() }}
 </div>
 
