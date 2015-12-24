@@ -7,7 +7,10 @@
  */
 namespace PH7;
 
-use PH7\Framework\Url\Header;
+use
+PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Cache\Cache,
+PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
@@ -47,7 +50,12 @@ class MainController extends Controller
         }
         elseif (!empty($sHash) && $this->checkHash($sHash))
         {
-            $this->oValidateModel->set(); // Set the site "validated"
+            // Set the site to "validated" status
+            $this->oValidateModel->set();
+
+            // Clean DbConfig Cache
+            (new Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
+
             Header::redirect(PH7_ADMIN_MOD, t('Congrats! Your site has now the Published status and you will be aware by email to any security patches or updates.'), 'success');
         }
         else
