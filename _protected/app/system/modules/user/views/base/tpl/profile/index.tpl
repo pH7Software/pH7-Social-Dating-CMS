@@ -118,7 +118,7 @@
     {if !empty($description)}
       <div class="profile_desc">
         <p class="bold">{lang 'Description:'}</p> <div class="quote italic">{description}</div>
-        <div class="right ad_336_280">{{ $designModel->ad(336,280) }}</div>
+        <div class="ad_336_280">{{ $designModel->ad(336,280) }}</div>
       </div>
     {/if}
 
