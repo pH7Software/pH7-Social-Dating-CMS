@@ -41,15 +41,23 @@ class MainController extends Controller
 
     public function validator($sHash)
     {
-        if (!empty($sHash) && $this->checkHash($sHash)) {
-            $this->oValidateModel->set();
+        if ($this->oValidateModel->is())
+        {
+            Header::redirect(PH7_ADMIN_MOD, t('Your site is already validated!'), 'success');
+        }
+        elseif (!empty($sHash) && $this->checkHash($sHash))
+        {
+            $this->oValidateModel->set(); // Set the site "validated"
             Header::redirect(PH7_ADMIN_MOD, t('Congrats! Your site has now the Published status and you will be aware by email to any security patches or updates.'), 'success');
         }
-        Header::redirect(PH7_ADMIN_MOD, t('The hash is incorrect. Please copy/paste the hash link received in your email in Web browser URL bar.'), 'error');
+        else
+        {
+            Header::redirect(PH7_ADMIN_MOD, t('The hash is incorrect. Please copy/paste the hash link received in your email in Web browser URL bar.'), 'error');
+        }
     }
 
     protected function checkHash($sHash)
     {
-        return (md5('681cd81b17b71c746e9ab7ac0445d3a3c960c329') === substr($sHash,3,24));
+        return ('681cd81b17b71c746e9ab7ac0445d3a3c960c329' === sha1(substr($sHash,3,24)));
     }
 }
