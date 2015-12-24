@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Controller
@@ -14,7 +14,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
-
     private $oSubscriptionModel, $sTitle;
 
     public function __construct()
@@ -92,5 +91,4 @@ class AdminController extends Controller
 
         Header::redirect(Uri::get('newsletter', 'admin', 'browse'), $this->sMsg);
     }
-
 }
