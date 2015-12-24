@@ -8,8 +8,6 @@
 namespace PH7;
 
 use
-PH7\Framework\Layout\Html\Design,
-PH7\Framework\Session\Session,
 PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Date\Various as VDate;
@@ -21,23 +19,23 @@ class ValidateSiteCore
     /**
      * Check if the JS validationbox has to be added and redirect if the site hasn't been validated yet for a while.
      *
+     * @param object \PH7\Framework\Session\Session $oSess
      * @return boolean
      */
-    public static function needInject()
+    public static function needInject(Framework\Session\Session $oSess)
     {
         $oVSModel = new ValidateSiteCoreModel;
         $iSinceSiteCreated = VDate::getTime(StatisticCoreModel::getSiteSinceDate());
+
+        // After over 2 months, the site is still not validated, maybe the validation box doesn't really work, so we redirected to the page form
+        if (!$oVSModel->is() && VDate::setTime('-2 months') > $iSinceSiteCreated && !$oSess->exists(self::SESS_IS_VISITED)) {
+            Header::redirect(Uri::get('validate-site', 'main', 'validationbox'));
+        }
 
         if (!$oVSModel->is() && VDate::setTime('-2 days') > $iSinceSiteCreated) {
             // OK for adding the validation colorbox
             return true;
         }
-
-        // After over 2 months, the site is still not validated, maybe the validation box doesn't really work, so we redirected to the page form
-        if (!$oVSModel->is() && VDate::setTime('-2 months') > $iSinceSiteCreated && !(new Session)->exists(self::SESS_IS_VISITED)) {
-            Header::redirect(Uri::get('validate-site', 'main', 'validationbox'));
-        }
-
         return false;
     }
 

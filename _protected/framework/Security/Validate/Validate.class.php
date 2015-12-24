@@ -232,10 +232,10 @@ class Validate
      *
      * @param string $sValue The date format must be formatted like this: mm/dd/yyyy
      * @param integer $iMin Default 18
-     * @param integer $iMax Default 100
+     * @param integer $iMax Default 99
      * @return boolean
      */
-    public function birthDate($sValue, $iMin = 18, $iMax = 100)
+    public function birthDate($sValue, $iMin = 18, $iMax = 99)
     {
         if(empty($sValue) || !preg_match('#^\d\d/\d\d/\d\d\d\d$#', $sValue)) return false;
 

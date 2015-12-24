@@ -99,7 +99,7 @@ class ImportUser extends Core
                 if ($sVal == 'state' || $sVal == 'district' || $sVal == 'province' || $sVal == 'region') $this->_aTmpData['state'] = $sKey;
                 if ($sVal == 'zip' || $sVal == 'zipcode' || $sVal == 'postal' || $sVal == 'postalcode' || $sVal == 'eircode') $this->_aTmpData['zip_code'] = $sKey;
                 if ($sVal == 'website' || $sVal == 'site' || $sVal == 'url') $this->_aTmpData['website'] = $sKey;
-                if ($sVal == 'birthday' || $sVal == 'birthdate' || $sVal == 'dateofbirth') $this->_aTmpData['birth_date'] = $this->dateTime->get($sKey)->date('Y-m-d');
+                if ($sVal == 'birthday' || $sVal == 'birthdate' || $sVal == 'dateofbirth') $this->_aTmpData['birth_date'] = $sKey;
             }
 
             $iRow = 0;
@@ -150,6 +150,8 @@ class ImportUser extends Core
                 $this->_aData[$iRow][$sType] = $this->checkGender($sData);
             } elseif ($sType == 'match_sex') {
                 $this->_aData[$iRow][$sType] = [$this->checkGender($sData)];
+            } elseif ($sType == 'birth_date') {
+                $this->_aData[$iRow][$sType] = $this->dateTime->get($sData)->date('Y-m-d');
             } else {
                 $this->_aData[$iRow][$sType] = $sData;
             }
@@ -175,7 +177,7 @@ class ImportUser extends Core
             'last_name' => 'Rolli' . $sFiveChars,
             'sex' => $this->_aGenderList[mt_rand(0,2)], // Generate randomly it
             'match_sex' => $this->_aGenderList[mt_rand(0,2)], // Generate randomly it
-            'birth_date' => date('Y')-mt_rand(20,40).'-'.mt_rand(1,12).'-'.mt_rand(1,28), // Generate randomly the anniversary date
+            'birth_date' => date('Y')-mt_rand(20,50).'-'.mt_rand(1,12).'-'.mt_rand(1,28), // Generate randomly the anniversary date
             'country' => 'US',
             'city' => 'Virginia',
             'state' => 'Doswell',
