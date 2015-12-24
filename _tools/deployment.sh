@@ -74,7 +74,7 @@ function run() {
             php ./composer.phar dumpautoload -o
 
             echo "Done!"
-            echo "Remove \"deployment.sh\" (this file) before packaging pH7CMS"
+            echo "Remove \"_tools/\" folder (containing this file) before packaging pH7CMS"
         else
             echo "You must make a copy of all the software before running the deployement. Go back!"
             exit 1
