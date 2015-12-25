@@ -453,13 +453,15 @@ class Design
     /**
      * Show the user IP address with a link to get the IP information.
      *
+     * @internal If it's an IPv6, show only the beginning, otherwise it would be too long in the template.
      * @param string $sIp IP address. Default NULL
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      * @return mixed (string | void)
      */
     public function ip($sIp = null, $bPrint = true)
     {
-        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See information from this IP') . '" target="_blank">' . Ip::get($sIp) . '</a>';
+        $sIp = Ip::get($sIp);
+        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See info of this IP, %0%', $sIp) . '" target="_blank">' . $this->oStr->extract($sIp,0,15) . '</a>';
 
         if ($bPrint)
             echo $sHtml;
