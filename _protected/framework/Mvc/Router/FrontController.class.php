@@ -572,7 +572,7 @@ final class FrontController
                 $oMvc = new \ReflectionMethod($sController, $this->oRegistry->action);
                 if ($oMvc->isPublic())
                 {
-                    // And finally there is more to perform the action
+                    // And finally we perform the controller's action
                     $oMvc->invokeArgs($oCtrl, $this->getRequestParameter());
                 }
                 else
