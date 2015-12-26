@@ -3,7 +3,7 @@
  * @title            String Class
  * @desc             Many useful functions for string manipulation.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2011-2015, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Str
@@ -243,7 +243,7 @@ defined('PH7') or exit('Restricted access');
       */
      public static function match($sText, $sPattern)
      {
-         preg_match_all(static::_regexNormalize($sPattern), $sText, $aMatches, PREG_PATTERN_ORDER);
+         preg_match_all(self::_regexNormalize($sPattern), $sText, $aMatches, PREG_PATTERN_ORDER);
 
          if (!empty($aMatches[1]))
              $mRet = $aMatches[1];
@@ -264,7 +264,7 @@ defined('PH7') or exit('Restricted access');
       */
      public function escape($mText, $bStrip = false)
      {
-         return (is_array($mText)) ? $this->arrayEscape($mText, $bStrip) : $this->CEscape($mText, $bStrip);
+         return (is_array($mText)) ? $this->arrayEscape($mText, $bStrip) : $this->cEscape($mText, $bStrip);
      }
 
      /**
@@ -278,7 +278,7 @@ defined('PH7') or exit('Restricted access');
      protected function arrayEscape(array $aData, $bStrip)
      {
          foreach ($aData as $sKey => $mValue)
-             $aData[$sKey] = (is_array($mValue)) ? $this->arrayEscape($mValue, $bStrip) : $this->CEscape($mValue, $bStrip);
+             $aData[$sKey] = (is_array($mValue)) ? $this->arrayEscape($mValue, $bStrip) : $this->cEscape($mValue, $bStrip);
 
          return $aData;
      }
@@ -289,7 +289,7 @@ defined('PH7') or exit('Restricted access');
       * @param boolean $bStrip
       * @return The text parsed by Str::stripTags() method if $bStrip parameter is TRUE, otherwise by Str::htmlSpecialChars method.
       */
-     protected function CEscape($sText, $bStrip)
+     protected function cEscape($sText, $bStrip)
      {
          return (true === $bStrip) ? $this->stripTags($sText) : $this->htmlSpecialChars($sText);
      }
@@ -316,7 +316,7 @@ defined('PH7') or exit('Restricted access');
 
      private static function _regexNormalize($sPattern)
      {
-         return static::$_sRegexDelimiter . trim($sPattern, static::$_sRegexDelimiter) . static::$_sRegexDelimiter;
+         return self::$_sRegexDelimiter . trim($sPattern, self::$_sRegexDelimiter) . self::$_sRegexDelimiter;
      }
 
  }
