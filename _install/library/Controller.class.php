@@ -3,11 +3,10 @@
  * @title            Controller Core Class
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright        (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link             http://ph7cms.com
  * @package          PH7 / Install / Library
- * @version          1.0
  */
 
 namespace PH7;
@@ -30,7 +29,7 @@ abstract class Controller implements IController
     SOFTWARE_EMAIL = 'ph7software@gmail.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
-    SOFTWARE_COPYRIGHT = '© (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.',
+    SOFTWARE_COPYRIGHT = '© (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.',
     /** "Xmas" Version is a really "special" one as it will be released on the 24th with some unexpected features!!! Happy Christmas guys! **/
     SOFTWARE_VERSION_NAME = 'Xmas', // 1.0 and 1.1 branches were "pOH", 1.2 branch is now "pOW" and the new one should be "p[H]"
     SOFTWARE_VERSION = '1.2.7',
