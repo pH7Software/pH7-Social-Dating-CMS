@@ -13,7 +13,10 @@
 namespace PH7\Framework\Cache;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel, PH7\Framework\Config\Config, PH7\Framework\File\File;
+use
+PH7\Framework\Core\Kernel,
+PH7\Framework\Config\Config,
+PH7\Framework\File\File;
 
 class Cache
 {
