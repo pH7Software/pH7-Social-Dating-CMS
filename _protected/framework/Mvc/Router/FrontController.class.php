@@ -6,7 +6,7 @@
  * It can also retrieve the URL roads, the instantiation of languages​​, themes, database, ...
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2011-2015, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Router
  * @version          1.0
