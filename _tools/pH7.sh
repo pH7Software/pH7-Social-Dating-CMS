@@ -170,7 +170,7 @@ function backup() {
 
 # Clean coding-style. Set PSR-* Ident Style (http://cs.sensiolabs.org)
 function _clean-indent() {
-    indents=indentation,linefeed,trailing_spaces,eof_ending,php_closing_tag,braces,extra_empty_lines,short_tag,phpdoc_params
+    indents=indentation,linefeed,trailing_spaces,eof_ending,php_closing_tag,braces,extra_empty_lines,short_tag
     cs_script="./_tools/php-cs-fixer.phar"
     find . -type f -name "*.php" -exec php $cs_script fix {} --fixers=$indents \;
 }
