@@ -567,13 +567,13 @@ final class FrontController
             $sController = 'PH7\\' . $this->oRegistry->controller;
             $oCtrl = new $sController;
 
-            if ((new \ReflectionClass($oCtrl))->hasMethod($this->oRegistry->action))
+            if ((new \ReflectionClass($sController))->hasMethod($this->oRegistry->action))
             {
-                if ((new \ReflectionMethod($oCtrl, $this->oRegistry->action))->isPublic())
+                $oMvc = new \ReflectionMethod($sController, $this->oRegistry->action);
+                if ($oMvc->isPublic())
                 {
                     // And finally there is more to perform the action
-                    call_user_func_array(array($oCtrl, $this->oRegistry->action), $this->getRequestParameter());
-
+                    $oMvc->invokeArgs($oCtrl, $this->getRequestParameter());
                 }
                 else
                 {
