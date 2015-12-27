@@ -38,15 +38,15 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if (!$oSession->exists('member_group_id'))
         {
             $oSession->regenerateId();
-            $oSession->set('member_group_id', '1'); // Visitor's group
+            $oSession->set('member_group_id', '1'); // By default, it's the Visitor's group (ID 1)
         }
-        unset($oSession);
 
         $rStmt = Db::getInstance()->prepare('SELECT permissions FROM' . Db::prefix('Memberships') . 'WHERE groupId = :groupId LIMIT 1');
-        $rStmt->bindParam(':groupId', $_SESSION[Framework\Config\Config::getInstance()->values['session']['prefix'] . 'member_group_id'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':groupId', $oSession->get('member_group_id'), \PDO::PARAM_INT);
         $rStmt->execute();
         $oFetch = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+        unset($oSession);
         return Framework\CArray\ObjArr::toObject(unserialize($oFetch->permissions));
     }
 
