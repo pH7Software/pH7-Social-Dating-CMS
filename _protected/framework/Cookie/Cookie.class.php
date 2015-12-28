@@ -28,7 +28,7 @@ class Cookie
      */
     public function set($mName, $sValue = null, $iTime = null, $bSecure = null)
     {
-        $iTime = (int) (!empty($iTime)) ? $iTime : Config::getInstance()->values['cookie']['expiration'];
+        $iTime = time() + ((int) !empty($iTime) ? $iTime : Config::getInstance()->values['cookie']['expiration']);
         $bSecure = (!empty($bSecure) && is_bool($bSecure)) ? $bSecure : (substr(PH7_URL_PROT, 0, 5) === 'https') ? true : false;
 
         if (is_array($mName))
@@ -42,9 +42,9 @@ class Cookie
 
             /* Check if we are not in localhost mode, otherwise may not work. */
             if (!(new \PH7\Framework\Server\Server)->isLocalHost())
-                setcookie($sCookieName, $sValue, time() + $iTime, Config::getInstance()->values['cookie']['path'], Config::getInstance()->values['cookie']['domain'], $bSecure, true);
+                setcookie($sCookieName, $sValue, $iTime, Config::getInstance()->values['cookie']['path'], Config::getInstance()->values['cookie']['domain'], $bSecure, true);
             else
-                setcookie($sCookieName, $sValue, time() + $iTime, PH7_SH);
+                setcookie($sCookieName, $sValue, $iTime, PH7_SH);
         }
     }
 
