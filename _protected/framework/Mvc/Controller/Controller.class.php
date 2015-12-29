@@ -32,9 +32,9 @@ abstract class Controller extends \PH7\Framework\Core\Core
         if (!isDebug() && M\DbConfig::getSetting('DDoS'))
         {
             $oDDoS = new \PH7\Framework\Security\DDoS\Stop;
-            if ($oDDoS->cookie() || $oDDoS->session())
-                sleep(PH7_DDOS_DELAY_SLEEP);
-
+            if ($oDDoS->cookie() || $oDDoS->session()) {
+                $oDDoS->wait();
+            }
             unset($oDDoS);
         }
 

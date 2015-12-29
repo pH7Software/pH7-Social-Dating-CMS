@@ -72,6 +72,16 @@ final class Stop
         return $bStatus;
     }
 
+    /**
+     * Set delay in the script execution.
+     *
+     * @return void
+     */
+    public function wait()
+    {
+        sleep(PH7_DDOS_DELAY_SLEEP);
+    }
+
     private function __clone() {}
 
 }
