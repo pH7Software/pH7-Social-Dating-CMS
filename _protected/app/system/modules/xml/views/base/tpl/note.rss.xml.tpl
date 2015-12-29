@@ -4,7 +4,7 @@
 <channel>
   <title>{lang 'Latest Notes'}</title>
   <link>{{ $design->url('note','main','index') }}</link>
-  <description>>{lang 'Latest Notes %site_name%'}</description>
+  <description>{lang 'Latest Notes %site_name%'}</description>
 
 {each $post in $notes}
   <item>
