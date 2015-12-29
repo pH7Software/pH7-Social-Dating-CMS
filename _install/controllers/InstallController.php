@@ -466,7 +466,7 @@ class InstallController extends Controller
 
         @require_once(PH7_ROOT_PUBLIC . '_constants.php');
 
-        if (!empty($_SESSION['val']))
+        if (!empty($_SESSION['val']['admin_login_email']))
         {
             // Send an email to say the installation is now done, and give some information...
             $aParams = array(
