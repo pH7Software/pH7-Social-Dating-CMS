@@ -8,7 +8,7 @@
 
   {each $com in $comments}
     <item>
-      <title>{lang 'Comments of %0%.', $com->username}</title>
+      <title>{lang "%0%'s comments", $com->username}</title>
       <link>{{ $design->url('comment','comment','post',"$table,$com->commentId") }}</link>
       <pubDate>{% DateFormat::getRss($com->createdDate) %}</pubDate>
       {if !empty($com->updatedDate)}<lastBuildDate>{% DateFormat::getRss($com->updatedDate) %}</lastBuildDate>{/if}
