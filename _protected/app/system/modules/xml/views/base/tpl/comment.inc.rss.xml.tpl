@@ -4,7 +4,7 @@
 <channel>
   <title>{lang 'Latest %0% Comments', ucfirst($table)}</title>
   <link>{current_url}</link>
-  <description>>{lang 'Latest Blog Posts %site_name%'}</description>
+  <description>{lang 'Latest Blog Posts %site_name%'}</description>
 
   {each $com in $comments}
     <item>
