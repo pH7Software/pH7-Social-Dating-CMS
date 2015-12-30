@@ -1100,3 +1100,7 @@ CREATE TABLE IF NOT EXISTS pH7_CustomCode (
   code text,
   codeType enum('css', 'js') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO pH7_CustomCode VALUES
+('/* Your custom CSS code here */\r\n', 'css'),
+('/* Your custom JS code here */\r\n', 'js');
