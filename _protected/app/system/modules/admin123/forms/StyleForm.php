@@ -25,7 +25,7 @@ class StyleForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_style', 'form_style'));
         $oForm->addElement(new \PFBC\Element\Token('style'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your custon CSS code'), 'code', array('value' => (new Design)->customCode('css'), 'description' => t("WARNING! Here you don't have to put the %0% tags.", '<b><i>&lt;style&gt;&lt;/style&gt;</i></b>'), 'style' => 'height:450px')));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your custon CSS code'), 'code', array('value' => (new Design)->customCode('css'), 'description' => t("WARNING! Here, you don't need to add the %0% tags.", '<b><i>&lt;style&gt;&lt;/style&gt;</i></b>'), 'style' => 'height:450px')));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
