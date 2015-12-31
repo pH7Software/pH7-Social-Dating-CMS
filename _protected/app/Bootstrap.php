@@ -22,8 +22,7 @@ PH7\Framework\Config\Config,
 PH7\Framework\File\Import,
 PH7\Framework\Error\CException as Except;
 
-/***** Begin Loading Files *****/
-
+/*** Begin Loading Files ***/
 require 'configs/constants.php';
 require 'includes/helpers/misc.php';
 
@@ -65,10 +64,11 @@ try
     // Loading String Class
     Import::pH7FwkClass('Str.Str');
 
-    // We expect that this function is simply used // Import::pH7FwkClass('Structure.General');
-
+    /* Structure/General.class.php functions are not currently used */
+    // Import::pH7FwkClass('Structure.General');
 
     /*** End Loading Files ***/
+
 
     //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
     if (!Server::isRewriteMod())
@@ -93,6 +93,7 @@ try
      */
     //ini_set('zlib.output_compression', 2048);
     //ini_set('zlib.output_compression_level', 6);
+
     ob_start();
 
     new Server; // Start Server
