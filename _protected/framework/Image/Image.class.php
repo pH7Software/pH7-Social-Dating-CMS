@@ -47,7 +47,7 @@ class Image
     {
         $mImgType = $this->getType();
 
-        if (!is_uploaded_file($this->sFile) || !$mImgType)
+        if (!is_file($this->sFile) || !$mImgType)
         {
             if (isDebug())
                 throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
