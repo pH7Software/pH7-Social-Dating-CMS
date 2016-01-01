@@ -15,26 +15,26 @@ defined('PH7') or exit('Restricted access');
 $sHtml = '';
 
 $sCode = <<<'EOS'
-<li><a href="{{ $design->url('m/fake-admin-panel', 'admin', 'index') }}">{@lang('Fake Admin Panel')@}</a>
-  <ul>
-    <li><a href="{{ $design->url('m/fake-admin-panel', 'admin', 'config') }}">{@lang('Config Fake Admin Panel')@}</a></li>
+<li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('m/fake-admin-panel', 'admin', 'index') }}">{lang 'Fake Admin Panel'}</a>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="{{ $design->url('m/fake-admin-panel', 'admin', 'config') }}">{lang 'Config Fake Admin Panel'}</a></li>
   </ul>
 </li>
 EOS;
 
 $sFindCode = <<<'EOS'
-'{@lang('Universal Login Config')@}</a></li>'
+'{lang 'Universal Login Config'}</a></li>'
 EOS;
 
 
 /*** Begin Contents ***/
 
 $sHtml .= '<p>' . t('The installation is finished.') . '</p>';
-$sHtml .= '<p class="underline">' . t('Please add the link to the administration of the module in the file menu.') . '</p>';
+$sHtml .= '<p class="underline">' . t('Please add the module link in the menu file.') . '</p>';
 $sHtml .= '<p>' . t('1) Open the "%0%" file.', '<em>~/templates/themes/base/tpl/top_menu.inc.tpl</em>') . '</p>';
-$sHtml .= '<p>' . t('2) Find this piece code "%0%" and add the following code after it.', escape($sFindCode)) . '</p>';
+$sHtml .= '<p>' . t('2) Find this piece of code "%0%" and add the following code after it.', escape($sFindCode)) . '</p>';
 $sHtml .= '<textarea cols="65" rows="7" readonly="readonly" onclick="this.focus(); this.select();">' . $sCode . '</textarea>';
-$sHtml .= '<p>' . t('3) Save the file and to got in your real admin panel for the configuration.') . '</p>';
+$sHtml .= '<p>' . t('3) Save the file and go to your Admin Panel -> Mods -> Fake Admin Panel -> Config Fake Admin Panel') . '</p>';
 $sHtml .= '<p>' . t('4) Done!') . '</p>';
 $sHtml .= '<p>' . t('Thank you for using our module!') . '</p>';
 
