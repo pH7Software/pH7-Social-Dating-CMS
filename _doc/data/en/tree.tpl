@@ -1,4 +1,4 @@
-<!-- Last Update: 12/15/2015 by Pierre-Henry Soria -->
+<!-- Last Update: 01/05/2016 by Pierre-Henry Soria -->
 
 <h1>pH7CMS Tree</h1>
 
@@ -780,6 +780,7 @@
 │   │       │   │   ├── RegistrationCore.php
 │   │       │   │   ├── Security.php
 │   │       │   │   ├── UserCore.php
+│   │       │   │   ├── ValidateSiteCore.php
 │   │       │   │   ├── VideoCore.php
 │   │       │   │   └── WriteCore.php
 │   │       │   ├── forms
@@ -824,6 +825,7 @@
 │   │       │       ├── StatisticCoreModel.php
 │   │       │       ├── UpgradeCoreModel.php
 │   │       │       ├── UserCoreModel.php
+│   │       │       ├── ValidateSiteCoreModel.php
 │   │       │       └── VideoCoreModel.php
 │   │       ├── global
 │   │       │   └── views
@@ -1879,6 +1881,29 @@
 │   │           │               └── visitor
 │   │           │                   ├── index.tpl
 │   │           │                   └── search.tpl
+│   │           ├── validate-site
+│   │           │   ├── config
+│   │           │   │   ├── config.ini
+│   │           │   │   └── Permission.php
+│   │           │   ├── controllers
+│   │           │   │   └── MainController.php
+│   │           │   ├── forms
+│   │           │   │   └── ValidationForm.php
+│   │           │   ├── lang
+│   │           │   │   ├── en_US
+│   │           │   │   │   └── LC_MESSAGES
+│   │           │   │   └── fr_FR
+│   │           │   │       └── LC_MESSAGES
+│   │           │   ├── models
+│   │           │   │   └── ValidateSiteModel.php
+│   │           │   └── views
+│   │           │       └── base
+│   │           │           ├── config
+│   │           │           │   └── config.ini
+│   │           │           └── tpl
+│   │           │               └── main
+│   │           │                   ├── pending.tpl
+│   │           │                   └── validationbox.tpl
 │   │           ├── video
 │   │           │   ├── config
 │   │           │   │   ├── config.ini
@@ -4816,6 +4841,13 @@
 │   │       │               ├── common.js
 │   │       │               ├── friend.js
 │   │       │               └── signup_popup.js
+│   │       ├── validate-site
+│   │       │   └── themes
+│   │       │       └── base
+│   │       │           ├── config
+│   │       │           │   └── config.ini
+│   │       │           └── js
+│   │       │               └── validationbox.js
 │   │       ├── video
 │   │       │   └── themes
 │   │       │       └── base
@@ -5126,7 +5158,7 @@
 │               ├── loading.inc.tpl
 │               ├── page_nav.inc.tpl
 │               └── top_menu.inc.tpl
-├── _test
+├── _tests
 │   └── Unit
 └── _tools
     ├── deployment.sh
@@ -5136,4 +5168,4 @@
 
 </pre>
 
-<p>Statistics: 1450 directories, 3678 files.</p>
+<p>Statistics: 1470 directories, 3690 files.</p>
