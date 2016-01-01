@@ -63,10 +63,10 @@ class Logger extends Core
         // Creates the log message and adds it to the list of logs.
         $this->setLogMsg()->writeFile();
 
-        if ($this->config->values['module.setting']['report_email.enable'])
+        if ($this->config->values['module.setting']['report_email.enabled'])
             $this->sendMessage();
 
-        if ($this->config->values['module.setting']['auto_banned_ip.enable'])
+        if ($this->config->values['module.setting']['auto_banned_ip.enabled'])
             $this->blockIp();
 
     }
