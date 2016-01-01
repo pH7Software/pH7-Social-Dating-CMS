@@ -10,13 +10,8 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Config\Config,
-PH7\Framework\File as F;
+use PH7\Framework\Config\Config, PH7\Framework\File as F;
 
-/**
- * This is usually necessary to import data from remote server.
- */
 @set_time_limit(0);
 @ini_set('memory_limit', '528M');
 
@@ -140,8 +135,13 @@ class Module
         $sValue = $this->_checkParam($sSwitch);
         $sDir = $this->_sModsDirModFolder . static::INSTALL_DIR . PH7_DS . static::INFO_DIR . PH7_DS;
         $sPath = ($sValue == static::INSTALL) ? PH7_PATH_MOD . $sDir . static::INSTALL_INST_CONCL_FILE : PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sDir . static::UNINSTALL_INST_CONCL_FILE;
-        $mInstruction = F\Import::file($sPath);
-        return (!$mInstruction) ? '<p class="error">' . t('Instruction file not found!') . '</p>' : $mInstruction;
+        try {
+            return F\Import::file($sPath);
+        }
+        catch (Framework\File\Exception $e)
+        {
+            return '<p class="error">' . t('Instruction file not found!') . '</p>';
+        }
     }
 
     /**
@@ -266,11 +266,6 @@ class Module
             return static::UNINSTALL;
         else
             exit('Wrong value in the parameter of the method: ' . __METHOD__ . ' in the class: ' . __CLASS__);
-    }
-
-    public function __destruct()
-    {
-        unset($this->_oFile, $this->_sModsDirModFolder, $this->_sDefLangRoute, $this->_sRoutePath, $this->_sModRoutePath);
     }
 
 }
