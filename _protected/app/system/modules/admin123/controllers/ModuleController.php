@@ -24,6 +24,14 @@ class ModuleController extends Controller
         $this->view->oModule = $this->_oModule;
     }
 
+    public function disable()
+    {
+        $this->_sTitle = t('Enable/Disable System Modules');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h1_title = $this->_sTitle;
+        $this->output();
+    }
+
     public function index()
     {
         if ($this->httpRequest->postExists('submit_mod_install'))
