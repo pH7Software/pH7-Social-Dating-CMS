@@ -22,7 +22,11 @@ class Various
      */
     public static function isEnabled($sModFolderName)
     {
-        $iIs = ((int) (new Module)->get($sModFolderName)->enabled);
-        return ($iIs === 1);
+        $oMods = (new Module)->get($sModFolderName);
+
+        // If the module is not in the SysModsEnabled table, return always TRUE
+        if (!isset($oMods->enabled)) return true;
+
+        return (((int)$oMods->enabled) === 1);
     }
 }

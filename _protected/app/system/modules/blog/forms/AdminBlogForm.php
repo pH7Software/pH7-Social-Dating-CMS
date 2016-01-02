@@ -22,11 +22,11 @@ class AdminBlogForm
             Framework\Url\Header::redirect();
         }
 
-        $oCategoriesData = (new BlogModel)->getCategory(null, 0, 300);
+        $oCategoryData = (new BlogModel)->getCategory(null, 0, 300);
 
-        $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId)
-            $aCategoriesName[$oId->categoryId] = $oId->name;
+        $aCategoryNames = array();
+        foreach ($oCategoryData as $oId)
+            $aCategoryNames[$oId->categoryId] = $oId->name;
 
         $oForm = new \PFBC\Form('form_blog', 650);
         $oForm->configure(array('action' => ''));
@@ -35,7 +35,7 @@ class AdminBlogForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Title of article:'), 'title', array('validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('description' => Uri::get('blog', 'main', 'index') . '/<strong><span class="your-address">' . t('your-address') . '</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoriesName, array('description' => t('Select a category that best fits your article.'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, array('description' => t('Select a category that fits the best for your article.'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Contents:'), 'content', array('description' => t('Content of the article'), 'validation' => new \PFBC\Validation\Str(30), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('The language of your article:'), 'lang_id', array('description' => t('EX: "en", "fr", "es", "js"'), 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1)));
