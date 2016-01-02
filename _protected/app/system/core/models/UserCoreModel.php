@@ -1133,6 +1133,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
    }
 
     /**
+     * Get Gender (sex) of a user.
+     *
      * @param integer $iProfileId Default NULL
      * @param string $sUsername Default NULL
      * @param string $sTable Default 'Members'
@@ -1161,6 +1163,31 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $sData = @$oRow->sex;
+            unset($oRow);
+            $this->cache->put($sData);
+        }
+
+        return $sData;
+    }
+
+    /**
+     * Get Match sex for a member (so only from the Members table, because Affiliates and Admins don't have match sex).
+     *
+     * @param integer $iProfileId
+     * @return string The User's birthdate.
+     */
+    public function getMatchSex($iProfileId)
+    {
+        $this->cache->start(self::CACHE_GROUP, 'matchsex' . $iProfileId, static::CACHE_TIME);
+
+        if (!$sData = $this->cache->get())
+        {
+            $rStmt = Db::getInstance()->prepare('SELECT matchSex FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->execute();
+            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $sData = $oRow->matchSex;
             unset($oRow);
             $this->cache->put($sData);
         }

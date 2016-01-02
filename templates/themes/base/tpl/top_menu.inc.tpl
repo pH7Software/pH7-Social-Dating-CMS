@@ -263,6 +263,7 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Mods'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','disable') }}" title="{lang 'Enable/Disable System Modules'}">{lang 'Enable/Disable System Modules'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Third-party Modules Manager'}">{lang 'Third-party Mods Manager'}</a></li>
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Newsletters'}</a>
               <ul class="dropdown-menu" role="menu">
@@ -277,9 +278,15 @@
             </li>
 
             <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Forum Admin'}">{lang 'Forum'}</a></li>
-            <li><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Blog Admin'}">{lang 'Blog'}</a></li>
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Game Admin'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Game'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Blog'}">{lang 'Blog'}</a>
               <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Blog Admin'}">{lang 'Blog Admin'}</a></li>
+                <li><a href="{{ $design->url('blog','admin','add') }}" title="{lang 'Add a Blog Post'}">{lang 'Add a Post'}</a></li>
+              </ul>
+            </li>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Game'}</a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}">{lang 'Admin Game'}</a></li>
                 <li><a href="{{ $design->url('game','admin','add') }}" title="{lang 'Add a Game'}">{lang 'Add a Game'}</a></li>
               </ul>
             </li>

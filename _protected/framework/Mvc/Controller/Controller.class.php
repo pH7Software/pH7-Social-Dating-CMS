@@ -19,6 +19,7 @@ PH7\Framework\Ip\Ip,
 PH7\Framework\Geo\Ip\Geo,
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Module\Various as SysMod,
 PH7\Framework\Mvc\Model as M;
 
 abstract class Controller extends \PH7\Framework\Core\Core
@@ -101,12 +102,8 @@ abstract class Controller extends \PH7\Framework\Core\Core
 
         /***** End Template Engine PH7Tpl *****/
 
-        // For permission the modules
-        if (is_file($this->registry->path_module_config . 'Permission.php'))
-        {
-            require $this->registry->path_module_config . 'Permission.php';
-            new \PH7\Permission;
-        }
+        $this->_checkPerms();
+        $this->_checkModStatus();
 
         // It displays the banishment page if a banned IP address is found.
         if (Ban::isIp(Ip::get()))
@@ -219,6 +216,31 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->view->pOH_not_found = 1;
         $this->output();
         exit;
+    }
+
+    /**
+     * Check if the module is not disabled, otherwise we displayed a Not Found page.
+     *
+     * @return void
+     */
+    final private function _checkModStatus()
+    {
+        if (!SysMod::isEnabled($this->registry->module))
+            $this->displayPageNotFound();
+    }
+
+    /**
+     * Add permissions if the Permission file of the module exists.
+     *
+     * @return void
+     */
+    final private function _checkPerms()
+    {
+        if (is_file($this->registry->path_module_config . 'Permission.php'))
+        {
+            require $this->registry->path_module_config . 'Permission.php';
+            new \PH7\Permission;
+        }
     }
 
 }
