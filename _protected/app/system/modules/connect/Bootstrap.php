@@ -7,8 +7,8 @@
  */
 namespace PH7;
 defined('PH7') or die('Restricted access');
-use PH7\Framework\Config\Config;
+use PH7\Framework\Module\Various as SysMod;
 
 // If the module is not enabled, we display a Not Found page, except if the administrator is logged, so it can make the module configuration.
-if (!Config::getInstance()->values['module.setting']['enable'] && !AdminCore::auth())
+if (!SysMod::isEnabled('connect') && !AdminCore::auth())
     (new Controller)->displayPageNotFound();

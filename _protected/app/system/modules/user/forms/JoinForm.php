@@ -9,7 +9,7 @@ namespace PH7;
 
 use
 PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Config\Config,
+PH7\Framework\Module\Various as SysMod,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Router\Uri,
@@ -36,10 +36,10 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user', 'form_join_user'));
         $oForm->addElement(new \PFBC\Element\Token('join'));
 
-        // Load the Connect config file
-        Config::getInstance()->load(PH7_PATH_SYS_MOD . 'connect' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
-        if (Config::getInstance()->values['module.setting']['enable'])
+        // Check if the Connect module is enabled
+        if (SysMod::isEnabled('connect')) {
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center"><a href="' . Uri::get('connect', 'main', 'index') . '" target="_blank" class="btn btn-primary">' . t('Universal Login') . '</a></div>'));
+        }
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'str_first_name', 'onblur' =>'CValid(this.value,this.id,2,20)', 'title'=>t('Enter your first name.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Str(2,20))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_first_name"></span>'));
