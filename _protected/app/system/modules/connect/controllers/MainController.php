@@ -78,22 +78,22 @@ class MainController extends Controller
         switch ($this->_sApi)
         {
             case 'fb':
-                if (!$this->config->values['module.api']['facebook.enable']) continue;
+                if (!$this->config->values['module.api']['facebook.enabled']) continue;
                 $this->_sUrl = new Facebook;
             break;
 
             case 'google':
-                if (!$this->config->values['module.api']['google.enable']) continue;
+                if (!$this->config->values['module.api']['google.enabled']) continue;
                 $this->_sUrl = new Google($this->session, $this->httpRequest, $this->registry);
             break;
 
             case 'twitter':
-                if (!$this->config->values['module.api']['twitter.enable']) continue;
+                if (!$this->config->values['module.api']['twitter.enabled']) continue;
                 $this->_sUrl = new Twitter;
             break;
 
             case 'microsoft':
-                if (!$this->config->values['module.api']['microsoft.enable']) continue;
+                if (!$this->config->values['module.api']['microsoft.enabled']) continue;
                 $this->_sUrl = new Microsoft;
             break;
 

@@ -917,6 +917,27 @@ INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, slog
 ('en_US', 'Home', 'The Best Dating software for creating online dating site or online community, social network,', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'The Best place to Meet Nice People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like this one with the <a href="http://ph7cms.com">Dating Site Builder</a>. It is Professional, modern, Free, Open Source, and gives you the best way to create a dating business...', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
 
 
+CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
+  moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
+  folderName varchar(20) NOT NULL,
+  enabled enum('0','1') NOT NULL DEFAULT '1',
+  PRIMARY KEY (moduleId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO pH7_SysModsEnabled (folderName, enabled) VALUES
+('connect', '0'),
+('gane', '1'),
+('chat', '1'),
+('chatroulette', '1'),
+('picture', '1'),
+('video', '1'),
+('hot-or-not', '1'),
+('picture', '1'),
+('forum', '1'),
+('note', '1'),
+('blog', '1');
+
+
 CREATE TABLE IF NOT EXISTS pH7_Modules (
   moduleId smallint(4) unsigned NOT NULL AUTO_INCREMENT,
   vendorName varchar(40) NOT NULL,
