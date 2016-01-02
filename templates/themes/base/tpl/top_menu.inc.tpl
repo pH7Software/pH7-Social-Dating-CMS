@@ -263,7 +263,7 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Mods'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}">{lang 'Modules Manager'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Third-party Modules Manager'}">{lang 'Third-party Mods Manager'}</a></li>
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Newsletters'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}">{lang 'Newsletters'}</a></li>
