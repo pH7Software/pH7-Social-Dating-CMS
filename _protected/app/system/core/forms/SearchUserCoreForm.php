@@ -44,6 +44,9 @@ class SearchUserCoreForm
 
     public static function advanced($iWidth = 500)
     {
+        $oSession = new Session;
+        $oUserModel = new UserCoreModel;
+
          // Generate the Advanced Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get' ));
