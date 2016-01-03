@@ -80,7 +80,7 @@ class JoinForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_join_user2', '100%');
+        $oForm = new \PFBC\Form('form_join_user2');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
         $oForm->addElement(new \PFBC\Element\Token('join2'));
@@ -113,7 +113,7 @@ class JoinForm
             Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_join_user3', '100%');
+        $oForm = new \PFBC\Form('form_join_user3');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user3', 'form_join_user3'));
         $oForm->addElement(new \PFBC\Element\Token('join3'));
