@@ -13,16 +13,34 @@
     <li><a href="#general"><span>{lang 'Info'}</span></a></li>
     <li><a href="#map"><span>{lang 'Map'}</span></a></li>
     <li><a href="#friend"><span>{friend_link}</span></a></li>
-    {if $is_logged && !$is_himself_profile}<li><a href="#mutual_friend"><span>{mutual_friend_link}</span></a></li>{/if}
-    <li><a href="#picture"><span>{lang 'Photos'}</span></a></li>
-    <li><a href="#video"><span>{lang 'Videos'}</span></a></li>
-    <li><a href="#forum"><span>{lang 'Topics'}</span></a></li>
-    <li><a href="#note"><span>{lang 'Notes'}</span></a></li>
+    {if $is_logged AND !$is_himself_profile}
+      <li><a href="#mutual_friend"><span>{mutual_friend_link}</span></a></li>
+    {/if}
+    {if $is_picture_enabled}
+      <li><a href="#picture"><span>{lang 'Photos'}</span></a></li>
+    {/if}
+    {if $is_video_enabled}
+      <li><a href="#video"><span>{lang 'Videos'}</span></a></li>
+    {/if}
+    {if $is_forum_enabled}
+      <li><a href="#forum"><span>{lang 'Topics'}</span></a></li>
+    {/if}
+    {if $is_note_enabled}
+      <li><a href="#note"><span>{lang 'Notes'}</span></a></li>
+    {/if}
     <li><a href="#visitor"><span>{lang 'Recently Viewed'}</span></a></li>
-    {if $is_logged && !$is_himself_profile}<li><a rel="nofollow" href="{mail_link}"><span>{lang 'Send Message'}</span></a></li>{/if}
-    {if $is_logged && !$is_himself_profile}<li><a rel="nofollow" href="{messenger_link}"><span>{lang 'Live Chat'}</span></a></li>{/if}
-    {if $is_logged && !$is_himself_profile}<li><a ref="nofollow" href="{befriend_link}"><span>{lang 'Add Friend'}</span></a></li>{/if}
-    {if $is_logged && !$is_himself_profile}<li><a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Love Calculator'}"><span>{lang 'Match'} <b class="pink2">&hearts;</b></span></a></li>{/if}
+    {if $is_logged AND !$is_himself_profile}
+      <li><a rel="nofollow" href="{mail_link}"><span>{lang 'Send Message'}</span></a></li>
+    {/if}
+    {if $is_logged AND !$is_himself_profile}
+      <li><a rel="nofollow" href="{messenger_link}"><span>{lang 'Live Chat'}</span></a></li>
+    {/if}
+    {if $is_logged AND !$is_himself_profile}
+      <li><a ref="nofollow" href="{befriend_link}"><span>{lang 'Add Friend'}</span></a></li>
+    {/if}
+    {if $is_logged AND !$is_himself_profile AND Framework\Module\Various::isEnabled('love-calculator')}
+      <li><a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Love Calculator'}"><span>{lang 'Match'} <b class="pink2">&hearts;</b></span></a></li>
+    {/if}
   </ol>
 
   <div class="content" id="general">
@@ -58,7 +76,7 @@
     {* Profile's Fields *}
     {each $key => $val in $fields}
 
-      {if $key != 'description' && $key != 'middleName' && !empty($val)}
+      {if $key != 'description' AND $key != 'middleName' AND !empty($val)}
         {{ $val = escape($val, true) }}
 
         {if $key == 'height'}
@@ -135,7 +153,7 @@
     </script>
   </div>
 
-  {if $is_logged && !$is_himself_profile}
+  {if $is_logged AND !$is_himself_profile}
     <div class="content" id="mutual_friend">
       <script>
         var url_mutual_friend_block = '{{ $design->url('user','friend','mutual',$username) }}';
@@ -188,10 +206,10 @@
   {{ CommentDesignCore::link($id, 'Profile') }}
 
   <script src="{url_static_js}tabs.js"></script>
-  <script>tabs('p', ['general','map','friend',{if $is_logged && !$is_himself_profile}'mutual_friend',{/if}'picture','video','forum','note','visitor']);</script>
+  <script>tabs('p', ['general','map','friend',{if $is_logged AND !$is_himself_profile}'mutual_friend',{/if}'picture','video','forum','note','visitor']);</script>
 
   {* Signup Popup *}
-  {if !$is_logged && !AdminCore::auth()}
+  {if !$is_logged AND !AdminCore::auth()}
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'signup_popup.js') }}
   {/if}
 

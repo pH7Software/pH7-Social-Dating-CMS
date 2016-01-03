@@ -31,15 +31,15 @@ class DisableModuleForm
                 $aSelectedMods[] = $oId->moduleId;
             }
 
-            $aModuleNames[$oId->moduleId] = ucfirst($oId->folderName);
+            $aModuleNames[$oId->moduleId] = ucwords(str_replace(['-','_'], ' ', $oId->folderName));
         }
 
-        $oForm = new \PFBC\Form('form_module', 700);
+        $oForm = new \PFBC\Form('form_module');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_module', 'form_module'));
         $oForm->addElement(new \PFBC\Element\Token('module'));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Enable/Disable Modules'), 'module_id', $aModuleNames, array('value' => $aSelectedMods)));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new \PFBC\Element\Checkbox('', 'module_id', $aModuleNames, array('value' => $aSelectedMods)));
+        $oForm->addElement(new \PFBC\Element\Button(t('Save')));
         $oForm->render();
     }
 
