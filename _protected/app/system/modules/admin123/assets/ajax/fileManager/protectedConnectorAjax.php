@@ -1,6 +1,6 @@
 <?php
 defined('PH7') or exit('Restricted access');
-if(!\PH7\Admin::auth()) exit('Restricted access'); // Only for the Admins
+if (!\PH7\Admin::auth()) exit('Restricted access'); // Accessible only for the Admin users
 
 error_reporting(0); // Set E_ALL for debuging
 
@@ -34,7 +34,7 @@ $opts = array(
         array(
             'driver'        => 'LocalFileSystem',   // driver for accessing file system (REQUIRED)
             'path'          => PH7_PATH_PROTECTED,       // path to files (REQUIRED)
-            'URL'           => '',        // URL to files (REQUIRED)
+            'URL'           => '',        // URL to files (REQUIRED) - No URL because this part is not accessible to Web browsers
             'accessControl' => 'access'             // disable and hide dot starting files (OPTIONAL)
         )
     )
