@@ -44,8 +44,7 @@ function autocompleteCityInit(sGeonamesUsername)
                             $('#str_zip_code').val(oItem.postalcode);
                         });
 
-                        return
-                        {
+                        return {
                             label: oItem.name + (oItem.adminName1 ? ', ' + oItem.adminName1 : '') + (sCountry ? '' : ', ' + oItem.countryName),
                             value: oItem.name
                         }
