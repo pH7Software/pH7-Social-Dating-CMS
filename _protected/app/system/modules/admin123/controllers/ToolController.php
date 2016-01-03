@@ -22,7 +22,7 @@ class ToolController extends Controller
 
     public function index()
     {
-        $this->sTitle = t('Tools');
+        $this->sTitle = t('General Tools');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
