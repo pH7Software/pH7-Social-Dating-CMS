@@ -21,7 +21,7 @@ class ScriptForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_script', '100%');
+        $oForm = new \PFBC\Form('form_script');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_script', 'form_script'));
         $oForm->addElement(new \PFBC\Element\Token('script'));

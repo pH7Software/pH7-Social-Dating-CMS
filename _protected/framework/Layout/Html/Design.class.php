@@ -230,7 +230,7 @@ class Design
     public function url($sModule, $sController, $sAction, $sVars = null, $bClear = true)
     {
         $sUrl = Uri::get($sModule, $sController, $sAction, $sVars, $bClear);
-        echo Url::clean($sUrl); // For the parameters in the URL to make a valid HTML code
+        echo Url::clean($sUrl); // For the URL parameters to avoid invalid HTML code
     }
 
     /**

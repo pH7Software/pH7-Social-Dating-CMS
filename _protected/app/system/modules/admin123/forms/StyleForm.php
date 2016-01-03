@@ -21,7 +21,7 @@ class StyleForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_style', '100%');
+        $oForm = new \PFBC\Form('form_style');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_style', 'form_style'));
         $oForm->addElement(new \PFBC\Element\Token('style'));

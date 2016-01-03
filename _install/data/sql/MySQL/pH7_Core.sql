@@ -926,16 +926,20 @@ CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
 
 INSERT INTO pH7_SysModsEnabled (folderName, enabled) VALUES
 ('connect', '0'),
-('gane', '1'),
+('affiliate', '1'),
+('game', '1'),
 ('chat', '1'),
 ('chatroulette', '1'),
 ('picture', '1'),
 ('video', '1'),
-('hot-or-not', '1'),
-('picture', '1'),
+('hotornot', '1'),
 ('forum', '1'),
 ('note', '1'),
-('blog', '1');
+('blog', '1'),
+('newsletter', '1'),
+('invite', '1'),
+('webcam', '1'),
+('love-calculator', '1');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (

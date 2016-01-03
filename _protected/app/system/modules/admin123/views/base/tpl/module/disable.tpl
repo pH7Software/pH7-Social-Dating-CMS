@@ -1,1 +1,3 @@
-{{ DisableModuleForm::display() }}
+<div class="center">
+    {{ DisableModuleForm::display() }}
+</div>
