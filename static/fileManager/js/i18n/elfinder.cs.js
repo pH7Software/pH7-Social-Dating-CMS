@@ -1,19 +1,22 @@
 /**
  * Czech translation
- * @author <gridley.jay@gmail.com>
- * @version 2011-07-27
+ * @author Jay Gridley <gridley.jay@hotmail.com>
+ * @version 2014-12-19
  */
 if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object') {
     elFinder.prototype.i18.cs = {
-        translator : '&lt;gridley.jay@gmail.com&gt;',
-        language   : 'český',
+        translator : 'Jay Gridley &lt;gridley.jay@hotmail.com&gt;',
+        language   : 'čeština',
         direction  : 'ltr',
+        dateFormat : 'd. m. Y H:i',
+        fancyDateFormat : '$1 H:i',
         messages   : {
+
             /********************************** errors **********************************/
             'error'                : 'Chyba',
             'errUnknown'           : 'Neznámá chyba.',
             'errUnknownCmd'        : 'Neznámý příkaz.',
-            'errJqui'              : 'Nedostačující konfigurace jQuery UI. Musí být zahrnuty komponenty Selectable, draggable a droppable.',
+            'errJqui'              : 'Nedostačující konfigurace jQuery UI. Musí být zahrnuty komponenty Selectable, Draggable a Droppable.',
             'errNode'              : 'elFinder vyžaduje vytvořený DOM Element.',
             'errURL'               : 'Chybná konfigurace elFinderu! Není nastavena hodnota URL.',
             'errAccess'            : 'Přístup zamítnut.',
@@ -23,7 +26,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errNotFound'          : 'Backend nenalezen.',
             'errResponse'          : 'Nesprávná odpověď backendu.',
             'errConf'              : 'Nepsrávná konfigurace backendu.',
-            'errJSON'              : 'JSON PHP modul není nainstalován.',
+            'errJSON'              : 'PHP modul JSON není nainstalován.',
             'errNoVolumes'         : 'Není dostupný čitelný oddíl.',
             'errCmdParams'         : 'Nesprávné parametry příkazu "$1".',
             'errDataNotJSON'       : 'Data nejsou ve formátu JSON.',
@@ -36,7 +39,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errWrite'             : 'Chyba při zápisu do "$1".',
             'errPerm'              : 'Přístup odepřen.',
             'errLocked'            : '"$1" je uzamčený a nemůže být přejmenován, přesunut nebo smazán.',
-            'errExists'            : 'Název souboru "$1" již existuje.',
+            'errExists'            : 'Soubor s názvem "$1" již existuje.',
             'errInvName'           : 'Nesprávný název souboru.',
             'errFolderNotFound'    : 'Složka nenalezena.',
             'errFileNotFound'      : 'Soubor nenalezen.',
@@ -47,18 +50,21 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errRename'            : 'Nepodařilo se přejmenovat "$1".',
             'errCopyFrom'          : 'Kopírování souborů z oddílu "$1" není povoleno.',
             'errCopyTo'            : 'Kopírování souborů do oddílu "$1" není povoleno.',
-            'errUploadCommon'      : 'Chyba nahrávání.',
-            'errUpload'            : 'Nepodařilo se nahrát "$1".',
+            'errUpload'            : 'Chyba nahrávání.',  // old name - errUploadCommon
+            'errUploadFile'        : 'Nepodařilo se nahrát "$1".', // old name - errUpload
             'errUploadNoFiles'     : 'Nejsou vybrány žádné soubory k nahrání.',
-            'errMaxSize'           : 'Překročena maximální povolená velikost dat.',
-            'errFileMaxSize'       : 'Překročena maximální povolená velikost souboru.',
+            'errUploadTotalSize'   : 'Překročena maximální povolená velikost dat.', // old name - errMaxSize
+            'errUploadFileSize'    : 'Překročena maximální povolená velikost souboru.', //  old name - errFileMaxSize
             'errUploadMime'        : 'Nepovolený typ souboru.',
             'errUploadTransfer'    : '"$1" chyba přenosu.',
+            'errNotReplace'        : 'Object "$1" already exists at this location and can not be replaced by object with another type.', // new
+            'errReplace'           : 'Unable to replace "$1".',
             'errSave'              : '"$1" nelze uložit.',
             'errCopy'              : '"$1" nelze zkopírovat.',
             'errMove'              : '"$1" nelze přemístit.',
-            'errCopyInItself'      : '"$1" nelze zkopírovat do sama sebe.',
+            'errCopyInItself'      : '"$1" nelze zkopírovat do sebe sama.',
             'errRm'                : '"$1" nelze odstranit.',
+            'errRmSrc'             : 'Unable remove source file(s).',
             'errExtract'           : 'Nelze extrahovat soubory z "$1".',
             'errArchive'           : 'Nelze vytvořit archív.',
             'errArcType'           : 'Nepodporovaný typ archívu.',
@@ -67,6 +73,24 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errReplByChild'       : 'Složka "$1" nemůže být nahrazena souborem, který sama obsahuje.',
             'errArcSymlinks'       : 'Z bezpečnostních důvodů je zakázáno rozbalit archívy obsahující symlinky.',
             'errArcMaxSize'        : 'Soubory archívu překračují maximální povolenou velikost.',
+            'errResize'            : 'Nepodařilo se změnit velikost obrázku "$1".',
+            'errResizeDegree'      : 'Invalid rotate degree.',  // added 7.3.2013
+            'errResizeRotate'      : 'Unable to rotate image.',  // added 7.3.2013
+            'errResizeSize'        : 'Invalid image size.',  // added 7.3.2013
+            'errResizeNoChange'    : 'Image size not changed.',  // added 7.3.2013
+            'errUsupportType'      : 'Nepodporovaný typ souboru.',
+            'errNotUTF8Content'    : 'File "$1" is not in UTF-8 and cannot be edited.',  // added 9.11.2011
+            'errNetMount'          : 'Unable to mount "$1".', // added 17.04.2012
+            'errNetMountNoDriver'  : 'Unsupported protocol.',     // added 17.04.2012
+            'errNetMountFailed'    : 'Mount failed.',         // added 17.04.2012
+            'errNetMountHostReq'   : 'Host required.', // added 18.04.2012
+            'errSessionExpires'    : 'Your session has expired due to inactivity.',
+            'errCreatingTempDir'   : 'Unable to create temporary directory: "$1"',
+            'errFtpDownloadFile'   : 'Unable to download file from FTP: "$1"',
+            'errFtpUploadFile'     : 'Unable to upload file to FTP: "$1"',
+            'errFtpMkdir'          : 'Unable to create remote directory on FTP: "$1"',
+            'errArchiveExec'       : 'Error while archiving files: "$1"',
+            'errExtractExec'       : 'Error while extracting files: "$1"',
 
             /******************************* commands names ********************************/
             'cmdarchive'   : 'Vytvořit archív',
@@ -94,61 +118,103 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'cmdup'        : 'Přejít do nadřazené složky',
             'cmdupload'    : 'Nahrát soubor(y)',
             'cmdview'      : 'Zobrazit',
+            'cmdresize'    : 'Změnit velikost',
+            'cmdsort'      : 'Seřadit',
+            'cmdnetmount'  : 'Mount network volume', // added 18.04.2012
 
             /*********************************** buttons ***********************************/
             'btnClose'  : 'Zavřít',
             'btnSave'   : 'Uložit',
             'btnRm'     : 'Odstranit',
+            'btnApply'  : 'Použít',
             'btnCancel' : 'Zrušit',
             'btnNo'     : 'Ne',
             'btnYes'    : 'Ano',
+            'btnMount'  : 'Mount',  // added 18.04.2012
 
             /******************************** notifications ********************************/
-            'ntfopen'     : 'Otevřít složku',
-            'ntffile'     : 'Otevřít soubor',
-            'ntfreload'   : 'Obnovit obsah složky',
+            'ntfopen'     : 'Otevírání složky',
+            'ntffile'     : 'Otevírání souboru',
+            'ntfreload'   : 'Obnovování obsahu složky',
             'ntfmkdir'    : 'Vytváření složky',
             'ntfmkfile'   : 'Vytváření souborů',
-            'ntfrm'       : 'Smazat soubory',
-            'ntfcopy'     : 'Kopírovat soubory',
-            'ntfmove'     : 'Přesunout soubory',
+            'ntfrm'       : 'Mazání souborů',
+            'ntfcopy'     : 'Kopírování souborů',
+            'ntfmove'     : 'Přesunování souborů',
             'ntfprepare'  : 'Příprava ke kopírování souborů',
-            'ntfrename'   : 'Přejmenovat soubory',
+            'ntfrename'   : 'Přejmenovávání souborů',
             'ntfupload'   : 'Nahrávání souborů',
             'ntfdownload' : 'Stahování souborů',
-            'ntfsave'     : 'Uložit soubory',
+            'ntfsave'     : 'Ukládání souborů',
             'ntfarchive'  : 'Vytváření archívu',
             'ntfextract'  : 'Rozbalování souborů z archívu',
             'ntfsearch'   : 'Vyhledávání souborů',
+            'ntfresize'   : 'Resizing images',
             'ntfsmth'     : 'Čekejte prosím...',
+            'ntfloadimg'  : 'Načítání obrázků',
+            'ntfnetmount' : 'Mounting network volume', // added 18.04.2012
+            'ntfdim'      : 'Acquiring image dimension', // added 20.05.2013
 
             /************************************ dates **********************************/
             'dateUnknown' : 'neznámý',
             'Today'       : 'Dnes',
             'Yesterday'   : 'Včera',
-            'Jan'         : 'Led',
-            'Feb'         : 'Úno',
-            'Mar'         : 'Bře',
-            'Apr'         : 'Dub',
-            'May'         : 'Kvě',
-            'Jun'         : 'Čer',
-            'Jul'         : 'Čec',
-            'Aug'         : 'Srp',
-            'Sep'         : 'Zář',
-            'Oct'         : 'Říj',
-            'Nov'         : 'Lis',
-            'Dec'         : 'Pro',
+            'msJan'       : 'Led',
+            'msFeb'       : 'Úno',
+            'msMar'       : 'Bře',
+            'msApr'       : 'Dub',
+            'msMay'       : 'Kvě',
+            'msJun'       : 'Čer',
+            'msJul'       : 'Čec',
+            'msAug'       : 'Srp',
+            'msSep'       : 'Zář',
+            'msOct'       : 'Říj',
+            'msNov'       : 'Lis',
+            'msDec'       : 'Pro',
+            'January'     : 'January',
+            'February'    : 'February',
+            'March'       : 'March',
+            'April'       : 'April',
+            'May'         : 'May',
+            'June'        : 'June',
+            'July'        : 'July',
+            'August'      : 'August',
+            'September'   : 'September',
+            'October'     : 'October',
+            'November'    : 'November',
+            'December'    : 'December',
+            'Sunday'      : 'Sunday',
+            'Monday'      : 'Monday',
+            'Tuesday'     : 'Tuesday',
+            'Wednesday'   : 'Wednesday',
+            'Thursday'    : 'Thursday',
+            'Friday'      : 'Friday',
+            'Saturday'    : 'Saturday',
+            'Sun'         : 'Sun',
+            'Mon'         : 'Mon',
+            'Tue'         : 'Tue',
+            'Wed'         : 'Wed',
+            'Thu'         : 'Thu',
+            'Fri'         : 'Fri',
+            'Sat'         : 'Sat',
+
+            /******************************** sort variants ********************************/
+            'sortname'          : 'dle jména',
+            'sortkind'          : 'dle typu',
+            'sortsize'          : 'dle velikosti',
+            'sortdate'          : 'dle data',
+            'sortFoldersFirst'  : 'Napřed složky',
 
             /********************************** messages **********************************/
             'confirmReq'      : 'Požadováno potvržení',
-            'confirmRm'       : 'Opravdu chcete odstranit tyto soubory?<br/>Změna nelze vrátit!',
+            'confirmRm'       : 'Opravdu chcete odstranit tyto soubory?<br/>Operace nelze vrátit!',
             'confirmRepl'     : 'Nahradit staré soubory novými?',
             'apllyAll'        : 'Všem',
             'name'            : 'Název',
             'size'            : 'Velikost',
             'perms'           : 'Práva',
             'modify'          : 'Upravený',
-            'kind'            : 'Druh',
+            'kind'            : 'Typ',
             'read'            : 'čtení',
             'write'           : 'zápis',
             'noaccess'        : 'přístup nepovolen',
@@ -174,17 +240,17 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'link'            : 'Odkaz',
             'searcresult'     : 'Výsledky hledání',
             'selected'        : 'vybrané položky',
-            'about'           : 'O',
+            'about'           : 'O softwaru',
             'shortcuts'       : 'Zástupci',
             'help'            : 'Nápověda',
             'webfm'           : 'Webový správce souborů',
             'ver'             : 'Verze',
-            'protocol'        : 'verze protokolu',
+            'protocolver'     : 'verze protokolu',
             'homepage'        : 'Domovská stránka projektu',
             'docs'            : 'Dokumentace',
             'github'          : 'Fork us on Github',
-            'twitter'         : 'Follow us on twitter',
-            'facebook'        : 'Join us on facebook',
+            'twitter'         : 'Follow us on Twitter',
+            'facebook'        : 'Join us on Facebook',
             'team'            : 'Tým',
             'chiefdev'        : 'séf vývojářů',
             'developer'       : 'vývojár',
@@ -200,8 +266,22 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'moveFiles'       : 'Přesunout sobory',
             'copyFiles'       : 'Zkupírovat soubory',
             'rmFromPlaces'    : 'Odstranit z míst',
-            'untitled folder' : 'bez názvu',
-            'untitled file.txt' : 'nepojmenovaný soubor.txt',
+            'aspectRatio'     : 'Poměr stran',
+            'scale'           : 'Měřítko',
+            'width'           : 'Šířka',
+            'height'          : 'Výška',
+            'resize'          : 'Změnit vel.',
+            'crop'            : 'Ožezat',
+            'rotate'          : 'Otočit',
+            'rotate-cw'       : 'Otočit o +90 stupňů',
+            'rotate-ccw'      : 'Otočit o -90 stupňů',
+            'degree'          : ' stupňů',
+            'netMountDialogTitle' : 'Mount network volume', // added 18.04.2012
+            'protocol'            : 'Protocol', // added 18.04.2012
+            'host'                : 'Host', // added 18.04.2012
+            'port'                : 'Port', // added 18.04.2012
+            'user'                : 'User', // added 18.04.2012
+            'pass'                : 'Password', // added 18.04.2012
 
             /********************************** mimetypes **********************************/
             'kindUnknown'     : 'Neznámý',
@@ -223,6 +303,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'kindTAR'         : 'Archív TAR',
             'kindGZIP'        : 'Archív GZIP',
             'kindBZIP'        : 'Archív BZIP',
+            'kindXZ'          : 'Archív XZ',
             'kindZIP'         : 'Archív ZIP',
             'kindRAR'         : 'Archív RAR',
             'kindJAR'         : 'Soubor Java JAR',
@@ -281,5 +362,6 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'kindVideoMKV'    : 'Matroska video',
             'kindVideoOGG'    : 'Ogg video'
         }
-    }
+    };
 }
+

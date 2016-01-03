@@ -24,8 +24,8 @@ class FileController extends Controller
     public function display($sDir = '')
     {
         /* Add Css Style and JavaScript for the Elfinder File Manager */
-        $this->design->addCss(PH7_STATIC . 'fileManager/css/', 'elFinder.css,theme.css');
-        $this->design->addJs(PH7_STATIC . 'fileManager/js/', 'elFinder.js');
+        $this->design->addCss(PH7_STATIC . 'fileManager/css/', 'elfinder.css,theme.css');
+        $this->design->addJs(PH7_STATIC . 'fileManager/js/', 'elfinder.js');
 
         $sIsDirTxt = ($sDir == 'protected') ? t('Protected') : t('Public');
         $this->sTitle = t('File Manager System | %0%', $sIsDirTxt);
