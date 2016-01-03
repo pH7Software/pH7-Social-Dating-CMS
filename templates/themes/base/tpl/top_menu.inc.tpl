@@ -10,9 +10,9 @@
 
 
     {* For LoginUserAs of Admin Panel *}
-      {if $is_admin_auth && $oSession->exists('login_user_as') }
+      {if $is_admin_auth AND $oSession->exists('login_user_as') }
         <p class="bold center"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to admin panel.{/lang}</a></p>
-      {elseif $is_admin_auth && $oSession->exists('login_affiliate_as') }
+      {elseif $is_admin_auth AND $oSession->exists('login_affiliate_as') }
         <p class="bold center"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to admin panel.{/lang}</a></p>
       {/if}
 
@@ -38,7 +38,7 @@
 
     {* Guest Menu *}
 
-      {if !$is_user_auth && !$is_aff_auth && !$is_admin_auth}
+      {if !$is_user_auth AND !$is_aff_auth AND !$is_admin_auth}
 
         <li class="bold"><a href="{{ $design->url('user','signup','step1') }}" title="{lang 'Join Now!'}">{lang 'Join Now!'}</a></li>
         <li><a href="{{ $design->url('user', 'main','login') }}" title="{lang 'Login'}" data-load="ajax">{lang 'Login'}</a></li>
@@ -78,57 +78,76 @@
 
     {* Menu Guest, Member and LoginUserAs of Admin Panel *}
 
-      {if ( !$is_aff_auth && !$is_admin_auth ) || $oSession->exists('login_user_as') }
+      {if ( !$is_aff_auth AND !$is_admin_auth ) OR $oSession->exists('login_user_as') }
 
-        <li class="dropdown"><a href="{{ $design->url('chat','home','index') }}" title="{lang 'The Free Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Chat'} <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{lang 'Video Chat'}" data-load="ajax">{lang 'Chat'}</a></li>
-            <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{lang 'Chat Roulette'}">{lang 'Chatroulette'}</a></li>
-          </ul>
-        </li>
+        {if $is_chat_enabled OR $is_chatroulette_enabled}
+          <li class="dropdown"><a href="{{ $design->url('chat','home','index') }}" title="{lang 'The Free Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Chat'} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              {if $is_chat_enabled}
+                <li><a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{lang 'Video Chat'}" data-load="ajax">{lang 'Chat'}</a></li>
+              {/if}
 
-        <li class="dropdown"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Picture'} <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('picture','main','index') }}" rel="nofollow" title="{lang 'Photo Gallery'}" data-load="ajax">{lang 'Pictures'}</a></li>
-            <li><a href="{{ $design->url('hotornot','main','rating') }}" title="{lang 'Hot Or Not'}" data-load="ajax">{lang 'Hot Or Not'}</a></li>
-            <li><a href="{{ $design->url('picture','main','search') }}" title="{lang 'Search a Picture'}" data-load="ajax">{lang 'Search'}</a></li>
-          </ul>
-        </li>
+              {if $is_chatroulette_enabled}
+                <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{lang 'Chat Roulette'}">{lang 'Chatroulette'}</a></li>
+              {/if}
+            </ul>
+          </li>
+        {/if}
 
-        <li class="dropdown"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Video Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Video'} <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('video','main','index') }}" rel="nofollow" title="{lang 'Video Gallery'}" data-load="ajax">{lang 'Videos'}</a></li>
-            <li><a href="{{ $design->url('video','main','search') }}" title="{lang 'Search a Video'}" data-load="ajax">{lang 'Search'}</a></li>
-          </ul>
-        </li>
+        {if $is_picture_enabled}
+          <li class="dropdown"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Picture'} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{{ $design->url('picture','main','index') }}" rel="nofollow" title="{lang 'Photo Gallery'}" data-load="ajax">{lang 'Pictures'}</a></li>
+              {if $is_hotornot_enabled}
+                <li><a href="{{ $design->url('hotornot','main','rating') }}" title="{lang 'Hot Or Not'}" data-load="ajax">{lang 'Hot Or Not'}</a></li>
+              {/if}
+              <li><a href="{{ $design->url('picture','main','search') }}" title="{lang 'Search a Picture'}" data-load="ajax">{lang 'Search'}</a></li>
+            </ul>
+          </li>
+        {/if}
 
-        <li class="dropdown"><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Game'} <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{lang 'Games Zone'}" data-load="ajax">{lang 'Game'}</a></li>
-            <li><a href="{{ $design->url('game','main','search') }}" title="{lang 'Search a Game'}" data-load="ajax">{lang 'Search'}</a></li>
-          </ul>
-        </li>
+        {if $is_video_enabled}
+          <li class="dropdown"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Video Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Video'} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{{ $design->url('video','main','index') }}" rel="nofollow" title="{lang 'Video Gallery'}" data-load="ajax">{lang 'Videos'}</a></li>
+              <li><a href="{{ $design->url('video','main','search') }}" title="{lang 'Search a Video'}" data-load="ajax">{lang 'Search'}</a></li>
+            </ul>
+          </li>
+        {/if}
 
-        <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Forum'} <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-           <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Forums'}" data-load="ajax">{lang 'Forum'}</a></li>
-            <li><a href="{{ $design->url('forum','forum','search') }}" title="{lang 'Search a Topic'}" data-load="ajax">{lang 'Search'}</a></li>
-          </ul>
-        </li>
+        {if $is_game_enabled}
+          <li class="dropdown"><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Game'} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{lang 'Games Zone'}" data-load="ajax">{lang 'Game'}</a></li>
+              <li><a href="{{ $design->url('game','main','search') }}" title="{lang 'Search a Game'}" data-load="ajax">{lang 'Search'}</a></li>
+            </ul>
+          </li>
+        {/if}
 
-        <li class="dropdown"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Community Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Note'} <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('note','main','index') }}" rel="nofollow" title="{lang 'Community Notes'}" data-load="ajax">{lang 'Notes'}</a></li>
-            <li><a href="{{ $design->url('note','main','search') }}" title="{lang 'Search a Note'}" data-load="ajax">{lang 'Search'}</a></li>
-          </ul>
-        </li>
+        {if $is_forum_enabled}
+          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Forum'} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Forums'}" data-load="ajax">{lang 'Forum'}</a></li>
+              <li><a href="{{ $design->url('forum','forum','search') }}" title="{lang 'Search a Topic'}" data-load="ajax">{lang 'Search'}</a></li>
+            </ul>
+          </li>
+        {/if}
+
+        {if $is_note_enabled}
+          <li class="dropdown"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Community Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Note'} <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{{ $design->url('note','main','index') }}" rel="nofollow" title="{lang 'Community Notes'}" data-load="ajax">{lang 'Notes'}</a></li>
+              <li><a href="{{ $design->url('note','main','search') }}" title="{lang 'Search a Note'}" data-load="ajax">{lang 'Search'}</a></li>
+            </ul>
+          </li>
+        {/if}
 
       {/if}
 
 
     {* Member Menu *}
 
-        {if $is_user_auth && ( !$is_aff_auth && !$is_admin_auth ) || $oSession->exists('login_user_as') }
+        {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $oSession->exists('login_user_as') }
 
           <li class="dropdown"><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o fa-fw"></i> {lang 'Mail'} <span class="badge">{count_unread_mail}</span> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -164,19 +183,23 @@
                 </ul>
               </li>
 
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Videos Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Videos Gallery'}</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('video','main','addalbum') }}" title="{lang 'Add an Album'}">{lang 'Add an Album'}</a></li>
-                  <li><a href="{{ $design->url('video','main','albums', $oSession->get('member_username')) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
-                </ul>
-              </li>
+              {if $is_video_enabled}
+                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Videos Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Videos Gallery'}</a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ $design->url('video','main','addalbum') }}" title="{lang 'Add an Album'}">{lang 'Add an Album'}</a></li>
+                    <li><a href="{{ $design->url('video','main','albums', $oSession->get('member_username')) }}" title="{lang 'My Albums'}" data-load="ajax">{lang 'My Albums'}</a></li>
+                  </ul>
+                </li>
+              {/if}
 
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Note'}</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('note','main','add') }}" title="{lang 'Add a Note'}">{lang 'Add a Note'}</a></li>
-                  <li><a href="{{ $design->url('note','main','author', $oSession->get('member_username')) }}" title="{lang 'My Notes'}">{lang 'My Notes'}</a></li>
-                </ul>
-              </li>
+              {if $is_note_enabled}
+                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Note'}</a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ $design->url('note','main','add') }}" title="{lang 'Add a Note'}">{lang 'Add a Note'}</a></li>
+                    <li><a href="{{ $design->url('note','main','author', $oSession->get('member_username')) }}" title="{lang 'My Notes'}">{lang 'My Notes'}</a></li>
+                  </ul>
+                </li>
+              {/if}
 
               <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','friend','index') }}" title="{lang 'Friends Management'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Friends Management'} <span class="badge">{count_pen_friend_request}</span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -201,7 +224,7 @@
 
     {* Affiliate Menu *}
 
-      {if $is_aff_auth && ( !$is_user_auth && !$is_admin_auth || $oSession->exists('login_affiliate_as') ) }
+      {if $is_aff_auth AND ( !$is_user_auth AND !$is_admin_auth OR $oSession->exists('login_affiliate_as') ) }
 
         <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Gets Banners'}">{lang 'Banners'}</a></li>
 
@@ -219,7 +242,7 @@
 
     {* Admin Menu *}
 
-      {if $is_admin_auth && ( !$is_user_auth && !$is_aff_auth ) }
+      {if $is_admin_auth AND ( !$is_user_auth AND !$is_aff_auth ) }
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{lang 'Users/Admins'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {lang 'Users'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -263,49 +286,61 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Mods'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','disable') }}" title="{lang 'Enable/Disable System Modules'}">{lang 'Enable/Disable System Modules'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','disable') }}" title="{lang 'Enable/Disable System Modules'}">{lang 'Enable/Disable Modules'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Third-party Modules Manager'}">{lang 'Third-party Mods Manager'}</a></li>
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Newsletters'}</a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}">{lang 'Newsletters'}</a></li>
-                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Subscribers'}</a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}">{lang 'Browse'}</a></li>
-                    <li><a href="{{ $design->url('newsletter', 'admin', 'search') }}" title="{lang 'Search Subscribers'}">{lang 'Search'}</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
+            {if $is_newsletter_enabled}
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Newsletters'}</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}">{lang 'Newsletters'}</a></li>
+                  <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Subscribers'}</a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}">{lang 'Browse'}</a></li>
+                      <li><a href="{{ $design->url('newsletter', 'admin', 'search') }}" title="{lang 'Search Subscribers'}">{lang 'Search'}</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            {/if}
 
-            <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Forum Admin'}">{lang 'Forum'}</a></li>
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Blog'}">{lang 'Blog'}</a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Blog Admin'}">{lang 'Blog Admin'}</a></li>
-                <li><a href="{{ $design->url('blog','admin','add') }}" title="{lang 'Add a Blog Post'}">{lang 'Add a Post'}</a></li>
-              </ul>
-            </li>
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Game'}</a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}">{lang 'Admin Game'}</a></li>
-                <li><a href="{{ $design->url('game','admin','add') }}" title="{lang 'Add a Game'}">{lang 'Add a Game'}</a></li>
-              </ul>
-            </li>
+            {if $is_forum_enabled}
+              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Forum Admin'}">{lang 'Forum'}</a></li>
+            {/if}
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('affiliate','admin','index') }}" title="{lang 'Affiliate Admin Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Affiliate'}</a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('affiliate','admin','banner') }}" title="{lang 'Banners Manager'}">{lang 'Banners'}</a></li>
-                <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}">{lang 'Browse Affiliates'}</a></li>
-                <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}">{lang 'Search an Affiliate'}</a></li>
-                <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add Affiliate'}">{lang 'Add Affiliate'}</a></li>
-                <li><a href="{{ $design->url('affiliate','admin','config') }}" title="{lang 'Affiliate Settings'}">{lang 'Settings'}</a></li>
-                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Affiliate Fields'}</a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Fields List'}">{lang 'Fields List'}</a></li>
-                    <li><a href="{{ $design->url('field','field','add','aff') }}" title="{lang 'Add a Field'}">{lang 'Add a Field'}</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
+            {if $is_blog_enabled}
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Blog'}">{lang 'Blog'}</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Blog Admin'}">{lang 'Blog Admin'}</a></li>
+                  <li><a href="{{ $design->url('blog','admin','add') }}" title="{lang 'Add a Blog Post'}">{lang 'Add a Post'}</a></li>
+                </ul>
+              </li>
+            {/if}
+
+            {if $is_game_enabled}
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Game'}</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}">{lang 'Admin Game'}</a></li>
+                  <li><a href="{{ $design->url('game','admin','add') }}" title="{lang 'Add a Game'}">{lang 'Add a Game'}</a></li>
+                </ul>
+              </li>
+            {/if}
+
+            {if $is_affiliate_enabled}
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('affiliate','admin','index') }}" title="{lang 'Affiliate Admin Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Affiliate'}</a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{{ $design->url('affiliate','admin','banner') }}" title="{lang 'Banners Manager'}">{lang 'Banners'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}">{lang 'Browse Affiliates'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}">{lang 'Search an Affiliate'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add Affiliate'}">{lang 'Add Affiliate'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','config') }}" title="{lang 'Affiliate Settings'}">{lang 'Settings'}</a></li>
+                  <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Affiliate Fields'}</a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Fields List'}">{lang 'Fields List'}</a></li>
+                      <li><a href="{{ $design->url('field','field','add','aff') }}" title="{lang 'Add a Field'}">{lang 'Add a Field'}</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            {/if}
 
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('payment','admin','index') }}" title="{lang 'Payment System'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Payment'}</a>
               <ul class="dropdown-menu" role="menu">
@@ -322,8 +357,9 @@
               </ul>
             </li>
 
-            <li><a href="{{ $design->url('connect', 'admin', 'config') }}">{lang 'Universal Login Config'}</a></li>
-
+            {if $is_connect_enabled}
+              <li><a href="{{ $design->url('connect', 'admin', 'config') }}">{lang 'Universal Login Config'}</a></li>
+            {/if}
           </ul>
         </li>
 
@@ -351,13 +387,17 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Avatars'}">{lang 'Avatar'} <span class="badge">{count_moderate_total_avatar}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}">{lang 'Profile Background'} <span class="badge">{count_moderate_total_background}</span></a></li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Notes'} <span class="badge">{count_moderate_total_note}</span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{lang 'Moderate the Note Posts'}">{lang 'Note Posts'} <span class="badge">{count_moderate_total_note}</span></a></li>
-              </ul>
-            </li>
+            {if $is_note_enabled}
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Notes'} <span class="badge">{count_moderate_total_note}</span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{lang 'Moderate the Note Posts'}">{lang 'Note Posts'} <span class="badge">{count_moderate_total_note}</span></a></li>
+                </ul>
+              </li>
+            {/if}
 
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{lang 'Moderate the Pictures Webcam'}">{lang 'Pictures Webcam'}</a></li>
+            {if $is_webcam_enabled}
+              <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{lang 'Moderate the Pictures Webcam'}">{lang 'Pictures Webcam'}</a></li>
+            {/if}
           </ul>
         </li>
 

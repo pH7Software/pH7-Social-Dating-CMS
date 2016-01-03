@@ -1,8 +1,6 @@
 <form method="post" action="{{ $design->url('affiliate','admin','browse') }}">
   {{ $designSecurity->inputToken('aff_action') }}
 
-  <div class="panel panel-default">
-  <div class="panel-heading bold">{lang 'Affiliates Manager'}</div>
   <table class="table center">
 
     <thead>
@@ -85,7 +83,6 @@
     </tbody>
 
   </table>
-  </div>
 
 </form>
 

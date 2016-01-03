@@ -95,7 +95,7 @@
     <div role="main" class="container" id="content">
 
       {* If we aren't on the the splash page, then display the menu *}
-      {if !(!$is_user_auth && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index')}
+      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
         {main_include 'top_menu.inc.tpl'}
       {/if}
 
@@ -115,7 +115,7 @@
         {/if}
       </div>
       {* Don't display the top middle banner on the the splash page *}
-      {if !(!$is_user_auth && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index')}
+      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
           <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
       {/if}
 
@@ -154,7 +154,7 @@
       {{ $design->link() }}
 
       {* To avoid scammers *}
-      {if $is_user_auth && $current_url != $url_root}
+      {if $is_user_auth AND $current_url != $url_root}
         <div class="warning_block center"><p>{lang}<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br />
         People who is really interested in you will never ask for money.<br />
         Be careful, don\'t send the money to anybody!{/lang}</p></div>
