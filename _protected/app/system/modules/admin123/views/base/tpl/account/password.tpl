@@ -1,1 +1,3 @@
-{{ ChangePasswordCoreForm::display() }}
+<div class="center">
+    {{ ChangePasswordCoreForm::display() }}
+</div>

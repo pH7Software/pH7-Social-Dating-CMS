@@ -31,7 +31,7 @@ class EditForm
 
         $oAdmin = (new AdminModel)->readProfile($iProfileId, 'Admins');
 
-        $oForm = new \PFBC\Form('form_admin_edit_account', 500);
+        $oForm = new \PFBC\Form('form_admin_edit_account');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_admin_edit_account', 'form_admin_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
