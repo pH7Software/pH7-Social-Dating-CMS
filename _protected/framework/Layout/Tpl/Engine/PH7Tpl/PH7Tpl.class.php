@@ -411,7 +411,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
 
         if (!empty($_bInclude))
         {
-            $bCaching = (bool) $this->config->values['cache']['enable.html.tpl'];
+            $bCaching = (bool) $this->config->values['cache']['enable.html.tpl.cache'];
 
             if ($this->isEnableCache() === true && $bCaching === true && !$this->isMainCompilePage())
             {
