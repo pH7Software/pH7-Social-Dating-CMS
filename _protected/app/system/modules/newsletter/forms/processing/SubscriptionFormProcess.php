@@ -46,8 +46,8 @@ class SubscriptionFormProcess extends Form
 
                     $sActivateLink = Uri::get('newsletter','home','activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
 
-                    $this->view->content = t('Hi %0%!') . '<br />' .
-                    t('Welcome to %site_name% Subscription!', $aData['name']) . '<br />' .
+                    $this->view->content = t('Hi %0%!', $aData['name']) . '<br />' .
+                    t("Welcome to %site_name%'s Subscription!") . '<br />' .
                     t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
                     $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $aData['email']) . '<br />' .
                     t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
