@@ -1,6 +1,6 @@
 <?php
 defined('PH7') or exit('Restricted access');
-if(!\PH7\Admin::auth()) exit('Restricted access'); // Only for the Admins
+if (!\PH7\Admin::auth()) exit('Restricted access'); // Accessible only for the Admin users
 
 error_reporting(0); // Set E_ALL for debuging
 
