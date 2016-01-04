@@ -233,7 +233,7 @@
         <li class="dropdown"><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My account'}">{lang 'Account'}</a></li>
-            <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{lang 'Edit account'}">{lang 'Edit Account'}</a></li>
+            <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{lang 'Edit my account'}">{lang 'Edit my account'}</a></li>
             <li><a href="{{ $design->url('affiliate','account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
             <li><a href="{{ $design->url('affiliate','home','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
           </ul>
@@ -449,9 +449,9 @@
           </ul>
         </li>
 
-        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'account','index') }}" title="{lang 'Your Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'account','index') }}" title="{lang 'my account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{lang 'Edit your Account'}"><i class="fa fa-pencil fa-fw"></i> {lang 'Edit Account'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{lang 'Edit my account'}"><i class="fa fa-pencil fa-fw"></i> {lang 'Edit ny account'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
           </ul>
