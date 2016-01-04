@@ -23,7 +23,7 @@ class PublicFileForm
 
         $rData = file_get_contents(PH7_PATH_ROOT . $_GET['file']);
 
-        $oForm = new \PFBC\Form('form_file', '100%');
+        $oForm = new \PFBC\Form('form_file');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_file', 'form_file'));
         $oForm->addElement(new \PFBC\Element\Token('file'));
