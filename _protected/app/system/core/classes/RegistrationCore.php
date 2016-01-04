@@ -53,7 +53,7 @@ abstract class RegistrationCore extends Core
                 $sEmailMsg = '';
         }
 
-        $sPwdMsg = ($bIsUniversalLogin) ? t('Password: %0% (please change it next time you login).', $aInfo['password']) : t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', Uri::get('user','main','forgot'));
+        $sPwdMsg = ($bIsUniversalLogin) ? t('Password: %0% (please change it next time you login).', $aInfo['password']) : t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', Uri::get('lost-password','main','forgot','user'));
 
         $this->view->content = t('Welcome to %site_name%, %0%!', $aInfo['first_name']) . '<br />' .
         t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $aInfo['first_name']) . '<br />' .
