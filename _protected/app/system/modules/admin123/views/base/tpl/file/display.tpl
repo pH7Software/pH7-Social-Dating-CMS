@@ -7,3 +7,5 @@ $(function() { // $(document).ready()
 </script>
 
 <div id="elfinder"></div>
+{* Include elFinder in a simple "script src" instead of Design::addCss() because it has some issues when elfinder.js is compressed and/or has gzip compression  *}
+<script src="{url_static}fileManager/js/elfinder.js"></script> 
