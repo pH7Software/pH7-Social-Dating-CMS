@@ -1,4 +1,4 @@
-<!-- Last Update: 01/05/2016 by Pierre-Henry Soria -->
+<!-- Last Update: 01/06/2016 by Pierre-Henry Soria -->
 
 <h1>pH7CMS Tree</h1>
 
@@ -880,13 +880,25 @@
 │   │           │   │           ├── elFinder.class.php
 │   │           │   │           ├── elFinderConnector.class.php
 │   │           │   │           ├── elFinderVolumeDriver.class.php
+│   │           │   │           ├── elFinderVolumeDropbox.class.php
+│   │           │   │           ├── elFinderVolumeFTP.class.php
 │   │           │   │           ├── elFinderVolumeLocalFileSystem.class.php
 │   │           │   │           ├── elFinderVolumeMySQL.class.php
+│   │           │   │           ├── elFinderVolumeS3.class.php
 │   │           │   │           ├── mime.types
-│   │           │   │           ├── MySQLStorage.sql
+│   │           │   │           ├── plugins
+│   │           │   │           │   ├── AutoResize
+│   │           │   │           │   │   └── plugin.php
+│   │           │   │           │   ├── Normalizer
+│   │           │   │           │   │   └── plugin.php
+│   │           │   │           │   ├── Sanitizer
+│   │           │   │           │   │   └── plugin.php
+│   │           │   │           │   └── Watermark
+│   │           │   │           │       ├── logo.png
+│   │           │   │           │       └── plugin.php
 │   │           │   │           ├── protectedConnectorAjax.php
 │   │           │   │           ├── publicConnectorAjax.php
-│   │           │   │           └── README.txt
+│   │           │   │           └── README.md
 │   │           │   ├── config
 │   │           │   │   ├── config.ini
 │   │           │   │   └── Permission.php
@@ -907,6 +919,7 @@
 │   │           │   │   ├── AddUserForm.php
 │   │           │   │   ├── AdsForm.php
 │   │           │   │   ├── AnalyticsApiForm.php
+│   │           │   │   ├── DisableModuleForm.php
 │   │           │   │   ├── EditForm.php
 │   │           │   │   ├── ImportUserForm.php
 │   │           │   │   ├── LicenseForm.php
@@ -918,6 +931,7 @@
 │   │           │   │   │   ├── AddUserFormProcess.php
 │   │           │   │   │   ├── AdsFormProcess.php
 │   │           │   │   │   ├── AnalyticsApiFormProcess.php
+│   │           │   │   │   ├── DisableModuleFormProcess.php
 │   │           │   │   │   ├── EditFormProcess.php
 │   │           │   │   │   ├── ImportUserFormProcess.php
 │   │           │   │   │   ├── LicenseFormProcess.php
@@ -986,6 +1000,7 @@
 │   │           │               │   ├── picture.tpl
 │   │           │               │   └── video.tpl
 │   │           │               ├── module
+│   │           │               │   ├── disable.tpl
 │   │           │               │   ├── index.tpl
 │   │           │               │   ├── install.tpl
 │   │           │               │   ├── to_install.inc.tpl
@@ -1207,7 +1222,6 @@
 │   │           │                   ├── post.tpl
 │   │           │                   └── read.tpl
 │   │           ├── connect
-│   │           │   ├── Bootstrap.php
 │   │           │   ├── config
 │   │           │   │   ├── config.ini
 │   │           │   │   └── Permission.php
@@ -2313,7 +2327,8 @@
 │   │   │   ├── Integration
 │   │   │   ├── Mixer.interface.php
 │   │   │   ├── Module.class.php
-│   │   │   └── README_DEVELOPING.txt
+│   │   │   ├── README_DEVELOPING.txt
+│   │   │   └── Various.class.php
 │   │   ├── Mvc
 │   │   │   ├── Action
 │   │   │   ├── Controller
@@ -2338,6 +2353,7 @@
 │   │   │   │   │       └── Various.class.php
 │   │   │   │   ├── Lang.class.php
 │   │   │   │   ├── License.class.php
+│   │   │   │   ├── Module.class.php
 │   │   │   │   ├── Security.class.php
 │   │   │   │   ├── Spam.class.php
 │   │   │   │   └── Statistic.class.php
@@ -3475,8 +3491,9 @@
 │   │               │   └── ui-icons_cd0a0a_256x240.png
 │   │               └── jquery-ui.css
 │   ├── fileManager
+│   │   ├── Changelog
 │   │   ├── css
-│   │   │   ├── elFinder.css
+│   │   │   ├── elfinder.css
 │   │   │   └── theme.css
 │   │   ├── img
 │   │   │   ├── arrows-active.png
@@ -3491,29 +3508,52 @@
 │   │   │   ├── quicklook-icons.png
 │   │   │   ├── resize.png
 │   │   │   ├── spinner-mini.gif
-│   │   │   └── toolbar.png
+│   │   │   ├── toolbar.png
+│   │   │   ├── volume_icon_dropbox.png
+│   │   │   ├── volume_icon_ftp.png
+│   │   │   ├── volume_icon_local.png
+│   │   │   └── volume_icon_sql.png
 │   │   ├── js
-│   │   │   ├── elFinder.js
+│   │   │   ├── elfinder.js
 │   │   │   ├── i18n
 │   │   │   │   ├── elfinder.ar.js
 │   │   │   │   ├── elfinder.bg.js
 │   │   │   │   ├── elfinder.ca.js
 │   │   │   │   ├── elfinder.cs.js
+│   │   │   │   ├── elfinder.da.js
 │   │   │   │   ├── elfinder.de.js
+│   │   │   │   ├── elfinder.el.js
 │   │   │   │   ├── elfinder.es.js
+│   │   │   │   ├── elfinder.fa.js
+│   │   │   │   ├── elfinder.fo.js
 │   │   │   │   ├── elfinder.fr.js
+│   │   │   │   ├── elfinder.he.js
 │   │   │   │   ├── elfinder.hu.js
+│   │   │   │   ├── elfinder.id.js
+│   │   │   │   ├── elfinder.it.js
 │   │   │   │   ├── elfinder.jp.js
+│   │   │   │   ├── elfinder.ko.js
 │   │   │   │   ├── elfinder.LANG.js
 │   │   │   │   ├── elfinder.nl.js
 │   │   │   │   ├── elfinder.no.js
 │   │   │   │   ├── elfinder.pl.js
 │   │   │   │   ├── elfinder.pt_BR.js
+│   │   │   │   ├── elfinder.ro.js
 │   │   │   │   ├── elfinder.ru.js
-│   │   │   │   └── elfinder.zh_CN.js
+│   │   │   │   ├── elfinder.sk.js
+│   │   │   │   ├── elfinder.sl.js
+│   │   │   │   ├── elfinder.sr.js
+│   │   │   │   ├── elfinder.sv.js
+│   │   │   │   ├── elfinder.tr.js
+│   │   │   │   ├── elfinder.uk.js
+│   │   │   │   ├── elfinder.vi.js
+│   │   │   │   ├── elfinder.zh_CN.js
+│   │   │   │   └── elfinder.zh_TW.js
 │   │   │   └── proxy
 │   │   │       └── elFinderSupportVer1.js
-│   │   └── README.txt
+│   │   ├── README.md
+│   │   └── sounds
+│   │       └── rm.wav
 │   ├── fonts
 │   │   ├── FontAwesome.otf
 │   │   ├── fontawesome-webfont.eot
@@ -5168,4 +5208,4 @@
 
 </pre>
 
-<p>Statistics: 1470 directories, 3690 files.</p>
+<p>Statistics: 1476 directories, 3724 files.</p>
