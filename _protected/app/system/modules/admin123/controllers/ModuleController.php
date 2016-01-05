@@ -63,7 +63,7 @@ class ModuleController extends Controller
 
     private function _install()
     {
-        $this->_sTitle = t('Installing Module');
+        $this->_sTitle = t('Install Module Finished');
         $this->view->page_title = $this->_sTitle;
         $this->view->h1_title = $this->_sTitle;
 
@@ -79,7 +79,7 @@ class ModuleController extends Controller
 
     private function _unInstall()
     {
-        $this->_sTitle = t('Uninstalling Module');
+        $this->_sTitle = t('Uninstall Module Finished');
         $this->view->page_title = $this->_sTitle;
         $this->view->h1_title = $this->_sTitle;
 
