@@ -26,7 +26,7 @@ class JoinForm
             Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_join_aff', 400);
+        $oForm = new \PFBC\Form('form_join_aff');
         $oForm->configure(array('action'=> ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_aff', 'form_join_aff'));
         $oForm->addElement(new \PFBC\Element\Token('join'));
