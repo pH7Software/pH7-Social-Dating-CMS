@@ -9,7 +9,8 @@
   {{ LoginSplashForm::display(290) }}
 </div>
 
-<div class="right animated fadeInRight">
+
+<div class="col-md-4 right animated fadeInRight">
   <h1 class="pink2 italic underline">{lang 'Be on the best place to meet people!'}</h1>
 
   {* For small devices, will be activated in "/templates/themes/base/css/splash.css" when the screen resolution is smaller *}
@@ -20,9 +21,10 @@
   {{ JoinForm::step1() }}
 </div>
 
+
 {if !$is_mobapp}
-    <div class="animated fadeInLeft">
-      <h1 class="pink2 italic underline left s_bMarg">{slogan}</h1>
+    <div class="col-md-8 left animated fadeInLeft">
+      <h1 class="pink2 italic underline s_bMarg">{slogan}</h1>
       <div class="center profiles_window thumb">
         {{ $userDesignModel->profiles() }}
       </div>
