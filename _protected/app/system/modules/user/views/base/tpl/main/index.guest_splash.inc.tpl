@@ -11,7 +11,7 @@
 
 
 <div class="col-md-4 right animated fadeInRight">
-  <h1 class="pink2 italic underline">{lang 'Be on the best place to meet people!'}</h1>
+  <h1 class="pink2 italic underline">{lang 'Be on the best e-place!'}</h1>
 
   {* For small devices, will be activated in "/templates/themes/base/css/splash.css" when the screen resolution is smaller *}
   <div class="login_button hidden center">
