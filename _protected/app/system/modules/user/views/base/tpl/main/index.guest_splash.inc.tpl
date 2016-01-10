@@ -21,15 +21,13 @@
 </div>
 
 {if !$is_mobapp}
-    <div class="left animated fadeInLeft">
-      <h1 class="pink2 italic underline s_bMarg">{slogan}</h1>
+    <div class="animated fadeInLeft">
+      <h1 class="pink2 italic underline left s_bMarg">{slogan}</h1>
       <div class="center profiles_window thumb">
         {{ $userDesignModel->profiles() }}
       </div>
 
-
-
-      <div class="center s_tMarg">
+      <div class="s_tMarg">
         <h2>{lang 'Meet people in %0% with %site_name%!', $design->geoIp(false)}</h2>
         {promo_text}
       </div>
