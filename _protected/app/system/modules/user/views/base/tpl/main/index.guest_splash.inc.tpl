@@ -10,7 +10,7 @@
 </div>
 
 
-<div class="col-md-4 right animated fadeInRight">
+<div class="right col-md-4 animated fadeInRight">
   <h1 class="pink2 italic underline">{lang 'Be on the best e-place!'}</h1>
 
   {* For small devices, will be activated in "/templates/themes/base/css/splash.css" when the screen resolution is smaller *}
@@ -23,7 +23,7 @@
 
 
 {if !$is_mobapp}
-    <div class="col-md-8 left animated fadeInLeft">
+    <div class="left col-md-8 animated fadeInLeft">
       <h1 class="pink2 italic underline s_bMarg">{slogan}</h1>
       <div class="center profiles_window thumb">
         {{ $userDesignModel->profiles() }}
