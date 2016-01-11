@@ -8,7 +8,7 @@
     <div class="counter center">{{ $userDesign->counterUsers() }}</div>
 </div>
 
-<div class="col-md-8 left">
+<div class="left col-md-8">
   <div class="folio_block">
     <h1 class="pink2 italic underline">{slogan}</h1>
 
