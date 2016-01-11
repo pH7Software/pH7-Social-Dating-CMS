@@ -1,3 +1,9 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
 #logo{float:left}
 
 .folio_block {
@@ -7,16 +13,15 @@
     margin-top:30px;
 }
 
-/*--Main Container--*/
 .splash_slideshow {
     float: left;
     margin-top:22px;
 }
-/*--Window/Masking Styles--*/
+
 .window, .profiles_window {
     border:1px solid #999;
     border-radius: 5px;
-    overflow: hidden; /*--Hides anything outside of the set width/height--*/
+    overflow: hidden;
     position: relative;
 }
 h1:hover{color:#1877D5;cursor:default}
@@ -27,16 +32,15 @@ h1:hover{color:#1877D5;cursor:default}
     left: 0;
 }
 
-/*--Paging Styles--*/
 .paging {
     position: absolute;
     bottom: 30px; right: -7px;
     width: 178px; height:47px;
-    z-index: 100; /*--Assures the paging stays on the top layer--*/
+    z-index: 100;
     text-align: center;
     line-height: 40px;
     background: url(../img/paging_bg2.png) no-repeat;
-    display: none; /*--Hidden by default, will be later shown with jQuery--*/
+    display: none;
 }
 .paging a {
     padding: 5px;
