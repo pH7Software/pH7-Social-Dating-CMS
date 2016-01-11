@@ -1,4 +1,4 @@
-<div class="right animated fadeInRight">
+<div class="right col-md-4 animated fadeInRight">
     <h1 class="pink2 italic underline">{lang 'Be on the best place to meet people!'}</h1>
     <div class="center">
         <a href="{{ $design->url('user','main','login') }}" class="btn btn-primary btn-lg"><strong>{lang 'Login'}</strong></a>
@@ -8,7 +8,7 @@
     <div class="counter center">{{ $userDesign->counterUsers() }}</div>
 </div>
 
-<div class="left">
+<div class="col-md-8 left">
   <div class="folio_block">
     <h1 class="pink2 italic underline">{slogan}</h1>
 
