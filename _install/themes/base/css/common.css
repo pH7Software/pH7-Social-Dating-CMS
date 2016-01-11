@@ -32,6 +32,6 @@ footer{padding:10px;margin-top:25px;font-size:.9em;text-align:center;border-top:
 .success,.error,.warning,.mandatory,.bold,.err_msg{font-weight:bold;font-size:13px}
 .err_msg{text-align:center;color:#F00;text-transform:uppercase}
 .gray{color:#999}
-.button{text-decoration:none;color:#333;display:inline-block;text-align:center;padding:6px 10px;background:-webkit-linear-gradient(top,#fff,#ddd);background:-moz-linear-gradient(top,#fff,#ddd);background:linear-gradient(top,#fff,#ddd);text-shadow:0 1px 1px rgba(255,255,255,1);line-height:1}
+.button{text-decoration:none;color:#333;display:inline-block;text-align:center;padding:6px 10px;background:-webkit-linear-gradient(top,#fff,#ddd);background:-moz-linear-gradient(top,#fff,#ddd);background:linear-gradient(top,#fff,#ddd);text-shadow:0 1px 1px rgba(255,255,255,1);line-height:1;width:100%}
 .button:hover{border:solid 1px #000;background:-webkit-linear-gradient(top,#fff,#c8c8c8);background:-moz-linear-gradient(top,#fff,#c8c8c8);background:linear-gradient(top,#fff,#c8c8c8)}
 .clear{clear:both}
