@@ -24,7 +24,7 @@ class ProtectedFileForm
         }
 
         if(!$rData = @file_get_contents(PH7_PATH_PROTECTED . $_GET['file'])) {
-            throw new Except(t('The file requested was not found: %0%', PH7_PATH_PROTECTED . $_GET['file']));
+            throw new Except(t('The requested file was not found: %0%', PH7_PATH_PROTECTED . $_GET['file']));
         }
 
         $oForm = new \PFBC\Form('form_file');
