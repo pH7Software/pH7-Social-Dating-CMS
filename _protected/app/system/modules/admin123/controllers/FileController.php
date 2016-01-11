@@ -74,7 +74,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Pages');
 
-        $this->_displayAction(PH7_PATH_SYS_MOD . 'page/' . PH7_VIEWS .PH7_TPL_NAME, '.tpl');
+        $this->_displayAction(PH7_PATH_SYS_MOD . 'page' . PH7_DS . PH7_VIEWS .PH7_TPL_NAME, '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }
