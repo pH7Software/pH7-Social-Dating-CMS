@@ -12,7 +12,7 @@
 
 {else}
 
-  <p>{lang 'Not Found Templates Files.'}</p>
+  <p>{lang 'Templates File Not Found!'}</p>
 
 {/if}
 
