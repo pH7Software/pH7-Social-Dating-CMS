@@ -11,7 +11,7 @@
 
 {else}
 
-  <p>{lang 'Not Found Files.'}</p>
+  <p>{lang 'File Not Found!'}</p>
 
 {/if}
 
