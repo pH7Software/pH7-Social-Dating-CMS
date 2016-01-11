@@ -90,6 +90,7 @@
               {if $is_chatroulette_enabled}
                 <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{lang 'Chat Roulette'}">{lang 'Chatroulette'}</a></li>
               {/if}
+
             </ul>
           </li>
         {/if}
@@ -98,9 +99,11 @@
           <li class="dropdown"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Picture'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('picture','main','index') }}" rel="nofollow" title="{lang 'Photo Gallery'}" data-load="ajax">{lang 'Pictures'}</a></li>
+
               {if $is_hotornot_enabled}
                 <li><a href="{{ $design->url('hotornot','main','rating') }}" title="{lang 'Hot Or Not'}" data-load="ajax">{lang 'Hot Or Not'}</a></li>
               {/if}
+
               <li><a href="{{ $design->url('picture','main','search') }}" title="{lang 'Search a Picture'}" data-load="ajax">{lang 'Search'}</a></li>
             </ul>
           </li>
@@ -176,6 +179,7 @@
               <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'Settings'}</a></li>
               <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See my Profile'}</a></li>
               <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change My Avatar'}">{lang 'Change my Avatar'}</a></li>
+
               {if $is_picture_enabled}
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Photo Gallery'}</a>
                   <ul class="dropdown-menu" role="menu">
@@ -290,6 +294,7 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','disable') }}" title="{lang 'Enable/Disable System Modules'}">{lang 'Enable/Disable Modules'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Third-party Modules Manager'}">{lang 'Third-party Mods Manager'}</a></li>
+
             {if $is_newsletter_enabled}
               <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Newsletters'}</a>
                 <ul class="dropdown-menu" role="menu">
@@ -362,6 +367,7 @@
             {if $is_connect_enabled}
               <li><a href="{{ $design->url('connect', 'admin', 'config') }}">{lang 'Universal Login Config'}</a></li>
             {/if}
+
           </ul>
         </li>
 
@@ -400,6 +406,7 @@
             {if $is_webcam_enabled}
               <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{lang 'Moderate the Pictures Webcam'}">{lang 'Pictures Webcam'}</a></li>
             {/if}
+
           </ul>
         </li>
 
