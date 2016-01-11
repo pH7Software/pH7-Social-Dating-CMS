@@ -21,7 +21,7 @@ class ContactForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_contact', 400);
+        $oForm = new \PFBC\Form('form_contact');
         $oForm->configure(array('action'=> '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_contact', 'form_contact'));
         $oForm->addElement(new \PFBC\Element\Token('contact'));
