@@ -6,7 +6,7 @@
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form
- * @version        1.2
+ * @version        1.5
  */
 namespace PH7;
 
@@ -19,21 +19,36 @@ PH7\Framework\Mvc\Router\Uri;
 
 class SearchUserCoreForm
 {
+    /**
+     * Defaut field attriutes.
+     */
+    private static $aSexOption = ['required' => 1];
+    private static $aMatchSexOption = ['required' => 1];
+    private static $aAgeOption = null;
+    private static $aCountryOption = ['id' => 'str_country'];
+    private static $aCityOption = ['id' => 'str_city'];
+    private static $aStateOption = ['id' => 'str_state'];
 
-    public static function quick($iWidth = 500)
+    /**
+     * @param integer $iWidth Width of the form in pixel. Default: 500
+     * @param boolean $bSetDevVals Set default values in the form fields, or not... Default: TRUE
+     * @return void HTML output.
+     */
+    public static function quick($iWidth = 500, $bSetDevVals = true)
     {
-        $oSession = new Session;
-        $oUserModel = new UserCoreModel;
+        if ($bSetDevVals) {
+            static::setAttrVals($bSetDevVals);
+        }
 
          // Generate the Quick Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
-        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), array('value' => static::getGenderVals($oUserModel, $oSession)['user_sex'], 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => static::getGenderVals($oUserModel, $oSession)['match_sex'], 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Age(array('value' => static::getAgeVals($oUserModel, $oSession))));
-        $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id' => 'str_country', 'value' => Geo::getCountryCode())));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city', 'value'=> Geo::getCity())));
+        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', ['male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')], self::$aSexOption));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', ['female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')], self::$aMatchSexOption));
+        $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
+        $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', self::$aCountryOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'latest', array('1' => '<span class="bold">' . t('Latest members') . '</span>')));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', array('1' => '<span class="bold">' . t('Only with Avatar') . '</span>')));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', array('1' => '<span class="bold green2">' . t('Only Online') . '</span>')));
@@ -42,21 +57,27 @@ class SearchUserCoreForm
         $oForm->render();
     }
 
-    public static function advanced($iWidth = 500)
+    /**
+     * @param integer $iWidth Width of the form in pixel. Default: 500
+     * @param boolean $bSetDevVals Set default values in the form fields, or not... Default: TRUE
+     * @return void HTML output.
+     */
+    public static function advanced($iWidth = 500, $bSetDevVals = true)
     {
-        $oSession = new Session;
-        $oUserModel = new UserCoreModel;
+        if ($bSetDevVals) {
+            static::setAttrVals($bSetDevVals);
+        }
 
          // Generate the Advanced Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
-        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), array('value' => static::getGenderVals($oUserModel, $oSession)['user_sex'], 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), array('value' => static::getGenderVals($oUserModel, $oSession)['match_sex'], 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Age(array('value' => static::getAgeVals($oUserModel, $oSession))));
-        $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id' => 'str_country', 'value' => Geo::getCountryCode())));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city', 'value'=> Geo::getCity())));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('State or Province:'), 'state', array('id' => 'str_state', 'value'=> Geo::getState())));
+        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), self::$aSexOption));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), self::$aMatchSexOption));
+        $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
+        $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', self::$aCountryOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('State or Province:'), 'state', self::$aStateOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), 'zip_code', array('id' => 'str_zip_code')));
         $oForm->addElement(new \PFBC\Element\Email(t('Email Address:'), 'mail'));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', array('1' => '<span class="bold">' . t('Only with Avatar') . '</span>')));
@@ -113,4 +134,21 @@ class SearchUserCoreForm
         return ['min_age' => $iMinAge, 'max_age' => $iMaxAge];
     }
 
+    /**
+     * Set the default values for the fields in search forms.
+     *
+     * @param return void
+     */
+    protected static function setAttrVals()
+    {
+        $oSession = new Session;
+        $oUserModel = new UserCoreModel;
+
+        self::$aSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['user_sex']];
+        self::$aMatchSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['match_sex']];
+        self::$aAgeOption = ['value' => static::getAgeVals($oUserModel, $oSession)];
+        self::$aCountryOption += ['value' => Geo::getCountryCode()];
+        self::$aCityOption += ['value' => Geo::getCity()];
+        self::$aStateOption += ['value'=> Geo::getState()];
+    }
 }
