@@ -18,7 +18,6 @@ namespace PH7\Framework\Translate
 
  class Lang
  {
-
      const COOKIE_NAME = 'pHSLang';
 
      private $_oConfig, $_sDefaultLang, $_sUserLang, $_sLangName;
@@ -44,8 +43,6 @@ namespace PH7\Framework\Translate
          }
 
          unset($oCookie);
-
-         $this->_loading();
      }
 
      /**
@@ -100,7 +97,7 @@ namespace PH7\Framework\Translate
       * @static
       * @param string $sPath The path.
       * @param string $sFileName The language name. Default is the constant: 'PH7_LANG_CODE'
-      * @return Valid file name (with the extension).
+      * @return string Valid file name (with the extension).
       * @throws \PH7\Framework\Translate\Exception If the language file is not found.
       */
      public static function getJsFile($sPath, $sFileName = PH7_LANG_CODE)
@@ -124,22 +121,24 @@ namespace PH7\Framework\Translate
       *
       * @param string $sFileName The language path.
       * @param string $sPath If you want to change the default path (the path to the current module), you can specify the path. Default NULL
-      * @return void
+      * @return object $this
       */
      public function load($sFileName, $sPath = null)
      {
          textdomain($sFileName);
          bindtextdomain($sFileName, (empty($sPath) ? \PH7\Framework\Registry\Registry::getInstance()->path_module_lang : $sPath) );
          bind_textdomain_codeset($sFileName, PH7_ENCODING);
+
+         return $this;
      }
 
      /**
       * Loading language files.
       *
-      * @return void
+      * @return object $this
       * @throws \PH7\Framework\Translate\Exception If the language file is not found.
       */
-     private function _loading()
+     public function init()
      {
          if (!empty($this->_sUserLang) && $this->_oConfig->load(PH7_PATH_APP_LANG . $this->_sUserLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . $this->_sUserLang . '/language.php' ))
          {
@@ -163,13 +162,29 @@ namespace PH7\Framework\Translate
          {
              throw new Exception('Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' and/or Language file \'' . PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . 'language.php\' not found.');
          }
+
+         // Set the encoding for the specific language set.
+         $this->_setEncoding();
+
+         return $this;
      }
 
-     public function __destruct()
-     {
-         unset($this->_oConfig, $this->_sDefaultLang, $this->_sUserLang, $this->_sLangName);
-     }
+    /**
+     * Set the correct charset to the site.
+     *
+     * @return void
+     */
+    private function _setEncoding()
+    {
+        if (!defined('PH7_ENCODING'))
+            define( 'PH7_ENCODING', $this->_oConfig->values['language']['charset'] );
 
+        mb_internal_encoding(PH7_ENCODING);
+        mb_http_output(PH7_ENCODING);
+        mb_http_input(PH7_ENCODING);
+        mb_language('uni');
+        mb_regex_encoding(PH7_ENCODING);
+    }
  }
 
 }
