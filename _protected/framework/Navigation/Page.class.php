@@ -88,7 +88,7 @@ class Page
 
         if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl))
         {
-            $sUrlSlug = (strpos($sCurrentUrl, '&amp;')) ? strstr(strrchr($sCurrentUrl, '?'), '&amp;', true) : strrchr($sCurrentUrl, '?');
+            $sUrlSlug = (strpos($sCurrentUrl, '&amp;')) ? strrchr($sCurrentUrl, '?') : strrchr($sCurrentUrl, '?');
             $sPageUrl = $sUrl . $sUrlSlug . '&amp;' . $sVar . '=';
         }
         else
