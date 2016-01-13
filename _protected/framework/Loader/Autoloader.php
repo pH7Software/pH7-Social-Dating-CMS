@@ -87,7 +87,7 @@ final class Autoloader
 
             /***** To include third-party library that does not have the same naming convention that our CMS *****/
 
-            // To include PFBC library
+            // Include PFBC (PHP Form Builder Class) library
             case is_file(PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php'):
                 $sFile = PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php';
             break;
