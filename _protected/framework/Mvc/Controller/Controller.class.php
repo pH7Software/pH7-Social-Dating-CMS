@@ -42,11 +42,6 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->registry->site_name = M\DbConfig::getSetting('siteName');
 
 
-        /***** Internationalization *****/
-        // Default path language
-        $this->lang->load('global', PH7_PATH_APP_LANG);
-
-
         /***** PH7Tpl Template Engine initialization *****/
         /*** Assign the global variables ***/
 
