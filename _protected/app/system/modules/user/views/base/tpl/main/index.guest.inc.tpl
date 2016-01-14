@@ -15,9 +15,7 @@
     <div class="splash_slideshow">
       <div class="window">
         <div class="img_reel">
-          {* For PHP 5.5+, keep just only the following *} {* {for $i in [1,2,3,4,5]} *}
-          {{ $num = [1,2,3,4,5] }}
-          {for $i in $num}
+          {for $i in [1,2,3,4,5]}
             <a href="{url_root}"><img src="{url_tpl_img}slideshow/{i}.jpg" alt="{lang 'Social Dating Web App'}" /></a>
           {/for}
         </div>

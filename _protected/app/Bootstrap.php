@@ -123,16 +123,9 @@ catch (\Exception $oE)
 {
     Except\PH7Exception::launch($oE);
 }
-
-/* Soon in pH7CMS 2.0 version (when it will accept only PHP 5.5 or higher)
 finally
 {
     if ('' !== session_id()) session_write_close();
     ob_end_flush();
     exit(0);
-}*/
-
-# Finally Block Emulator because PHP does not support finally block.
-if ('' !== session_id()) session_write_close();
-ob_end_flush();
-exit(0);
+}
