@@ -663,17 +663,14 @@ class File
     public function readDirs($sPath = './')
     {
         if (!($rHandle = opendir($sPath))) return false;
-        $aRet = array();//remove it for yield
 
         while (false !== ($sFolder = readdir($rHandle)))
         {
             if ('.' == $sFolder || '..' == $sFolder || !is_dir($sPath . $sFolder))
                 continue;
-            //yield $sFolder; // PHP 5.5
-            $aRet[] = $sFolder;//remove it for yield
+            yield $sFolder; // PHP 5.5
         }
         closedir($rHandle);
-        return $aRet;//remove it for yield
     }
 
     /**

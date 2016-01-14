@@ -15,9 +15,6 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Util\Various;
 
-if (version_compare(PHP_VERSION, '5.5.0', '<'))
-    require __DIR__ . PH7_DS . 'crypt.inc.php';
-
 final class Security
 {
     const
