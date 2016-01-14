@@ -1,9 +1,12 @@
 # pH7 Social Dating CMS
 
+### The Most Secure and Powerful Professional Dating Web App Builder
+
+
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?s=79700cb86e25e0f125926f2f52984dd3ebacd81d)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/)
 
 
-**pH7 Social Dating CMS** is a **Professional** & **Open Source** Social Dating CMS, low-resource-intensive, powerful and very secure.
+**pH7 Social Dating CMS** is a **Professional** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
 
 pH7CMS is included with 30 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
 
@@ -49,7 +52,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Activity Streams
 * Member approval system
 * Advanced Admin Panel
-* Full Membership System
+* Complete Membership System
 * Payment Gateways Integration, PayPal, Stripe, Bitcoin, 2CheckOut
 * Statistics & Analytics System
 * Live Notification System
@@ -68,9 +71,9 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Multilingual URLs
 * Check that all UGC (User-Generated Content) is Unique (to avoid spam and malicious users)
 * RSS Feed
-* Full API for integration from an external app (iOS/Android, ...), website, program, ...
+* Fully API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
-* Full Responsive Templates
+* Fully Responsive Templates
 * Multiple-Themes and many customization possible
 * Message templates
 * Multi Themes and many personalizable
