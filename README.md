@@ -16,7 +16,7 @@ pH7CMS is included with 30 modules and based on its homemade framework (pH7Frame
 
 ## Overview
 
-**pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*) with a **MVC** architecture (Model-View-Controller).
+**pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and optimised for PHP 7+ based on **MVC** architecture (Model-View-Controller).
 
 It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (not duplicate code).
 
