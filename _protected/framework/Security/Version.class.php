@@ -29,10 +29,6 @@ final class Version
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
     const KERNEL_SERVER_NAME = 'pH7WS/1.0.0'; // pH7 Web Server
 
-    /***** Form PFBC *****/
-    const PFBC_VERSION = '2.3';
-    const PFBC_RELASE_DATE = '2011-09-22';
-
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
