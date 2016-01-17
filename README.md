@@ -171,6 +171,6 @@ If you want, we also offer a *Premium Commercial* support at *[HiZup Support Dep
 
 ## License
 
-**pH7CMS** is under **Open Source** License.
+**pH7CMS** is under **Open Source Free** License.
 
 License: [General Public License 3](http://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.
