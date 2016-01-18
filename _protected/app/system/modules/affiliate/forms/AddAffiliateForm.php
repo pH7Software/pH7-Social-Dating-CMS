@@ -29,8 +29,8 @@ class AddAffiliateForm
         $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('required'=>1, 'validation'=>new \PFBC\Validation\Username('Affiliates'))));
         $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', array('required'=>1, 'validation' => new \PFBC\Validation\CEmail('guest', 'Affiliates'))));
         $oForm->addElement(new \PFBC\Element\Password(t('Password:'), 'password', array('required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('required'=>1, 'validation'=>new \PFBC\Validation\Str(2,20))));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('required'=>1, 'validation'=>new \PFBC\Validation\Str(2,20))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('required'=>1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('required'=>1, 'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), 'middle_name', array('validation'=>new \PFBC\Validation\Str(2,20))));
         $oForm->addElement(new \PFBC\Element\Radio(t('Sex:'), 'sex', array('female'=>t('Female'), 'male'=>t('Male'), 'couple'=>t('Couple')), array('value'=>'female', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('placeholder'=>t('Month/Day/Year'), 'title'=>t('Please specify the birth date using the calendar or with this format: Month/Day/Year.'), 'required'=>1, 'validation'=>new \PFBC\Validation\BirthDate)));
