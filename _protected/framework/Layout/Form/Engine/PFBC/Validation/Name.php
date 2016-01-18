@@ -9,7 +9,7 @@ class Name extends \PFBC\Validation
     public function __construct()
     {
         parent::__construct();
-        $this->message = t("Error: %element% must contain a valid name. The name entered doesn't seem correct.");
+        $this->message = t("Error: %element% must be a valid name. The name entered doesn't seem correct.");
     }
 
     public function isValid($sValue)
