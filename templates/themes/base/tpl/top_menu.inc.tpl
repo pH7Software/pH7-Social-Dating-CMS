@@ -11,9 +11,9 @@
 
     {* For LoginUserAs of Admin Panel *}
       {if $is_admin_auth AND $oSession->exists('login_user_as') }
-        <p class="bold center"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to admin panel.{/lang}</a></p>
+        <p class="bold center"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
       {elseif $is_admin_auth AND $oSession->exists('login_affiliate_as') }
-        <p class="bold center"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to admin panel.{/lang}</a></p>
+        <p class="bold center"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
       {/if}
 
 
