@@ -41,8 +41,8 @@ class JoinForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center"><a href="' . Uri::get('connect', 'main', 'index') . '" target="_blank" class="btn btn-primary">' . t('Universal Login') . '</a></div>'));
         }
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'str_first_name', 'onblur' =>'CValid(this.value,this.id,2,20)', 'title'=>t('Enter your first name.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Str(2,20))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_first_name"></span>'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'name_first', 'onblur' =>'CValid(this.value,this.id)', 'title'=>t('Enter your first name.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
         $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('description'=>PH7_URL_ROOT.'<strong><span class="your-user-name">'.t('your-user-name').'</span><span class="username"></span></strong>'.PH7_PAGE_EXT, 'id'=>'username', 'title'=>t('This username will be used for your site url.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Username)));
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur' =>'CValid(this.value, this.id,\'guest\')', 'title'=>t('Enter your valid email address.'), 'required'=> 1, 'validation' => new \PFBC\Validation\CEmail('guest'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));

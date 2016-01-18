@@ -53,6 +53,10 @@ class ValidateCoreAjax
         {   // Check Text
             $this->txt($sInputVal, $sParam1, $sParam2);
         }
+        elseif (strstr($sFieldId, 'name_'))
+        {
+            $this->name($sInputVal);
+        }
         elseif (strstr($sFieldId, 'email'))
         {   // Check email address.
              $this->email($sInputVal, $sParam1, $sParam2);
@@ -241,6 +245,26 @@ class ValidateCoreAjax
         else
         {
           $this->_sMsg = t('This field is required!');
+        }
+    }
+
+    /**
+     * Validation of names.
+     *
+     * @access protected
+     * @param string $sValue
+     * @return void
+     */
+    protected function name($sValue)
+    {
+        if (!$this->_oValidate->name($sValue))
+        {
+            $this->_sMsg = t("Your name doesn't seem to be correct.");
+        }
+        else
+        {
+            $this->_iStatus = 1;
+            $this->_sMsg = t('OK!');
         }
     }
 
