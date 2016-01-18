@@ -25,10 +25,10 @@ class ContactForm
         $oForm->configure(array('action'=> '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_contact', 'form_contact'));
         $oForm->addElement(new \PFBC\Element\Token('contact'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'str_first_name', 'onblur'=>'CValid(this.value, this.id,2,20)', 'title'=>t('Enter your first name.'),'required'=> 1, 'validation'=>new \PFBC\Validation\Str(2,20))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_first_name"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'str_last_name', 'onblur'=>'CValid(this.value, this.id,2,20)', 'title'=>t('Enter your last name.'), 'required'=> 1, 'validation'=>new \PFBC\Validation\Str(2,20))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_last_name"></span>'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'name_first', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter your first name.'),'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'name_last', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter your last name.'), 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter your valid email address.'), 'required'=> 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
         $oForm->addElement(new \PFBC\Element\Phone(t('Your Phone Number:'), 'phone', array('id'=>'phone', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter full phone number with area code.'))));

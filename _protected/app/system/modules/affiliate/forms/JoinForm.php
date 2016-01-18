@@ -30,10 +30,10 @@ class JoinForm
         $oForm->configure(array('action'=> ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_aff', 'form_join_aff'));
         $oForm->addElement(new \PFBC\Element\Token('join'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'str_first_name', 'onblur'=>'CValid(this.value,this.id,2,20)', 'title'=>t('Enter your first name.'), 'required'=> 1,'validation'=>new \PFBC\Validation\Str(2,20))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_first_name"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'str_last_name', 'onblur'=>'CValid(this.value, this.id,2,20)', 'title'=>t('Enter your last name.'), 'required'=> 1, 'validation'=>new \PFBC\Validation\Str(2,20))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_last_name"></span>'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'name_first', 'onblur'=>'CValid(this.value,this.id)', 'title'=>t('Enter your first name.'), 'required'=> 1,'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'name_last', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter your last name.'), 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
         $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('id'=>'username', 'onkeyup'=>'CValid(this.value, this.id,\'Affiliates\')', 'title'=>t('Your username will be your unique ID reference for advertisements.'), 'required'=>1, 'validation'=>new \PFBC\Validation\Username('Affiliates'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error username"></span>'));
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur'=>'CValid(this.value, this.id,\'guest\',\'Affiliates\')', 'title'=>t('Enter your valid email address.'), 'required'=>1, 'validation'=> new \PFBC\Validation\CEmail('guest', 'Affiliates'))));

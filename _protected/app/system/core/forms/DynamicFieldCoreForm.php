@@ -60,8 +60,8 @@ class DynamicFieldCoreForm
             break;
 
             case 'middleName':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,20)', 'value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,20))));
-                $this->addCheckErrSpan('str');
+                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Middle Name:'), $this->_sColumn, array('id'=>$this->getFieldId('name'), 'onblur' =>'CValid(this.value,this.id)', 'value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Name)));
+                $this->addCheckErrSpan('name');
             break;
 
             case 'height':
