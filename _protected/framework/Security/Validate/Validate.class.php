@@ -326,16 +326,12 @@ class Validate
      */
     public function name($sName, $iMin = 2, $iMax = 20)
     {
-        // Name cannot be only numeric
-        if ($this->numeric($sName))
-            return false;
-
         // Check the length
         if ($this->_oStr->length($sName) < $iMin || $this->_oStr->length($sName) > $iMax)
             return false;
 
         // Check the name pattern
-        if(preg_match('`(?:[\|<>"\=\]\[\}\{\\$£€@%~^#!\?\:;*])|(?:(?:https?|ftps?)://)`', $sName))
+        if(preg_match('`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#:;!\?\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`', $sName))
             return false;
 
         return true;
