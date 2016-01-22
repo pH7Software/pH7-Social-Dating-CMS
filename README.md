@@ -124,6 +124,43 @@ Thank you so much in advance!
 **Minimum Web Space** 2.0 GB
 
 
+## Nginx Configuration
+
+In order to get pH7CMS working on nginx server, you need to add some custom nginx configuration.
+
+Create /etc/nginx/ph7cms.conf and add the following:
+
+```
+location / {
+    try_files $uri $uri/ /index.php?$args;
+    index index.php;
+}
+```
+
+*Please note that the above code is the strict minimum and obviously you can add more by comparing with the [main Apache .htaccess file](https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/.htaccess).*
+
+
+Now in your nginx server configuration you will have to include `ph7cms.conf` file to complete the configuration like below:
+
+*In file, e.g., `/etc/nginx/sites-enabled/yoursite`*
+
+```
+server {
+    listen 80;
+    root /var/www/yoursite;
+    server_name www.yoursite.com;
+
+    error_log /var/log/nginx/yoursite.error.log;
+    access_log /var/log/nginx/yoursite.access.log;
+
+    # Include ph7cms.conf. You can also directly add the "location" rule instead of including the conf file
+    include /etc/nginx/ph7cms.conf;
+}
+```
+
+For more information, please refer to the nginx documentation.
+
+
 ## Hosting
 
 Recommended Hosting for **pH7CMS**
