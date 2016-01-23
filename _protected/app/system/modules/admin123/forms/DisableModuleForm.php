@@ -25,14 +25,21 @@ class DisableModuleForm
         $oModuleData = (new ModuleModel)->get();
         $aModuleNames = [];
         $aSelectedMods = [];
-        foreach ($oModuleData as $oId)
+        foreach ($oModuleData as $oData)
         {
-            if ((int)$oId->enabled === 1) {
-                $aSelectedMods[] = $oId->moduleId;
+            if ((int)$oData->enabled === 1) {
+                $aSelectedMods[] = $oData->moduleId;
             }
 
-            $aModuleNames[$oId->moduleId] = ucwords(str_replace(['-','_'], ' ', $oId->folderName));
+            $sPremiumText = '';
+            if ((int)$oData->premiumMod === 1)
+            {
+                $sPremiumText = ' &nbsp; (<a class="italic darkred" href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Premium Module') . '</a>)';
+            }
+
+            $aModuleNames[$oData->moduleId] = ucwords(str_replace(['-','_'], ' ', $oData->folderName)) . $sPremiumText;
         }
+        unset($oModuleData);
 
         $oForm = new \PFBC\Form('form_module');
         $oForm->configure(array('action' => ''));
