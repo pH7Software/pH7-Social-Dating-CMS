@@ -142,7 +142,7 @@ location / {
 
 Now in your nginx server configuration you will have to include `ph7cms.conf` file to complete the configuration like below:
 
-*In file, e.g., `/etc/nginx/sites-enabled/yoursite.conf`* for Debian servers or `/etc/nginx/conf.d/yoursite.conf` for CentOS servers.
+In file, e.g., *`/etc/nginx/sites-enabled/yoursite.conf`* for Ubuntu and other OS based on Debian or `/etc/nginx/conf.d/yoursite.conf` for CentOS and other OS based on Red Hat.
 
 ```
 server {
