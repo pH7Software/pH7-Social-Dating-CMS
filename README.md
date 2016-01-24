@@ -128,7 +128,7 @@ Thank you so much in advance!
 
 In order to get pH7CMS working on nginx server, you need to add some custom nginx configuration.
 
-Create /etc/nginx/ph7cms.conf and add the following:
+Create `/etc/nginx/ph7cms.conf` and add the following:
 
 ```
 location / {
@@ -142,7 +142,7 @@ location / {
 
 Now in your nginx server configuration you will have to include `ph7cms.conf` file to complete the configuration like below:
 
-*In file, e.g., `/etc/nginx/sites-enabled/yoursite.conf`*
+*In file, e.g., `/etc/nginx/sites-enabled/yoursite.conf`* for Debian servers or `/etc/nginx/conf.d/yoursite.conf` for CentOS servers.
 
 ```
 server {
