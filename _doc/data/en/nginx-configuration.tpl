@@ -13,7 +13,7 @@ location / {
 </code>
 </pre>
 
-<p>Please note that the above code is the strict minimum and obviously you can add more by comparing with the <a href="http://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/.htaccess">main Apache .htaccess file</a></p>
+<p><em>Please note that the above code is the strict minimum and obviously you can add more by comparing with the <a href="http://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/.htaccess">main Apache .htaccess file</a></em></p>
 
 <p>Now in your nginx server configuration you will have to include `ph7cms.conf` file to complete the configuration like below:</p>
 
