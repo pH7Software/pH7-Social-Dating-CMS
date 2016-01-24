@@ -146,11 +146,13 @@ Now in your nginx server configuration you will have to include `ph7cms.conf` fi
 
 ```
 server {
+    # Port number. In most cases, 80 for HTTP and 443 for HTTPS
     listen 80;
+
     server_name www.yoursite.com;
-    index index.php; # or index.ph7; for hidding the *.php ...
+    root /var/www/ph7cms_public_root;
+    index index.php; #you can use index.ph7; for hidding the *.php ...
     client_max_body_size 50M;
-    root /var/www/yoursite;
 
     error_log /var/log/nginx/yoursite.error.log;
     access_log /var/log/nginx/yoursite.access.log;
