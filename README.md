@@ -142,13 +142,15 @@ location / {
 
 Now in your nginx server configuration you will have to include `ph7cms.conf` file to complete the configuration like below:
 
-*In file, e.g., `/etc/nginx/sites-enabled/yoursite`*
+*In file, e.g., `/etc/nginx/sites-enabled/yoursite.conf`*
 
 ```
 server {
     listen 80;
-    root /var/www/yoursite;
     server_name www.yoursite.com;
+    index index.php; # or index.ph7; for hidding the *.php ...
+    client_max_body_size 50M;
+    root /var/www/yoursite;
 
     error_log /var/log/nginx/yoursite.error.log;
     access_log /var/log/nginx/yoursite.access.log;
