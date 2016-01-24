@@ -5,7 +5,7 @@
   <h3>{% $game->name %}</h3>
 
   {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'flash.js') }}
-  <script>pH7DisplayFlash("{url_data_sys_mod}game/file/{% $game->file %}",730,550);</script>
+  <script>pH7DisplayFlash("{url_data_sys_mod}game/file/{% $game->file %}",'100%',550);</script>
 
   <p>{% $game->description %}</p>
 
