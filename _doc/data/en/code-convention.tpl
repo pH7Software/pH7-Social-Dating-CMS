@@ -98,7 +98,7 @@ function my_function() {}
 
 <p class="italic underline">Example:</p>
 
-<pre><code>$GLOBALS['my_values'];</code></pre>
+<pre><code class="php">$GLOBALS['my_values'];</code></pre>
 
 <p>Arrays: lowercase and each word must be separated by underscore.</p>
 <p class="italic underline">Example:</p>
