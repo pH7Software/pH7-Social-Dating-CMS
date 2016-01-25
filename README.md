@@ -130,7 +130,7 @@ In order to get pH7CMS working on nginx server, you need to add some custom ngin
 
 Create `/etc/nginx/ph7cms.conf` and add the following:
 
-```
+```nginx
 location / {
     try_files $uri $uri/ /index.php?$args;
     index index.php;
@@ -144,7 +144,7 @@ Now in your nginx server configuration you will have to include `ph7cms.conf` fi
 
 In file, e.g., *`/etc/nginx/sites-enabled/yoursite.conf`* for Ubuntu and other OS based on Debian or `/etc/nginx/conf.d/yoursite.conf` for CentOS and other OS based on Red Hat.
 
-```
+```nginx
 server {
     # Port number. In most cases, 80 for HTTP and 443 for HTTPS
     listen 80;
