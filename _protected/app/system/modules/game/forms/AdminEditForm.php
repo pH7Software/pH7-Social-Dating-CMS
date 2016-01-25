@@ -41,7 +41,7 @@ class AdminEditForm
 
         if (!empty($oGame) && (new Str)->equals($iGameId, $oGame->gameId))
         {
-            $oForm = new \PFBC\Form('form_edit', 650);
+            $oForm = new \PFBC\Form('form_edit');
             $oForm->configure(array('action' => '' ));
             $oForm->addElement(new \PFBC\Element\Hidden('submit_edit', 'form_edit'));
             $oForm->addElement(new \PFBC\Element\Token('edit'));
