@@ -10,7 +10,7 @@ Constant Name: ALL_CAPS and alphanumeric only with the underscores to separate w
 <p class="italic underline">Example:</p>
 
 <pre>
-<code>
+<code class="php">
 class MyClass
 {
 
@@ -61,7 +61,7 @@ m = Mixed
 <p class="italic underline">Example:</p>
 
 <pre>
-<code>
+<code class="php">
 touch('isSunday.txt'); // Creating an empty file
 $sFile = realpath('isSunday.txt');
 
@@ -89,7 +89,7 @@ Function: lowercase and each word must be separated by underscore.
 <p class="italic underline">Example:</p>
 
 <pre>
-<code>
+<code class="php">
 function my_function() {}
 </code>
 </pre>
@@ -104,7 +104,7 @@ function my_function() {}
 <p class="italic underline">Example:</p>
 
 <pre>
-<code>
+<code class="php">
 $aValues = array(
    'my_key' => 'Value',
    'my_key2' => 'Value 2'
@@ -115,7 +115,7 @@ $aValues = array(
 or with PHP 5.4 or higher:
 
 <pre>
-<code>
+<code class="php">
 $aValues = [
    'my_key' => 'Value',
    'my_key2' => 'Value 2'
