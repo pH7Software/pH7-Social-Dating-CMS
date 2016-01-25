@@ -11,7 +11,9 @@
 
   </div>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="{static_url}js/jquery.js"></script>
 <script src="{static_url}js/ajph.js"></script>
+<script src="{static_url}highlight/highlight.js"></script>
+<script>$(document).ready(function(){hljs.initHighlightingOnLoad()});</script>
 </body>
 </html>

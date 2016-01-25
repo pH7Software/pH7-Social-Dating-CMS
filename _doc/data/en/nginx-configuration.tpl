@@ -5,7 +5,7 @@
 <p>Create "<em>/etc/nginx/ph7cms.conf</em>" and add the following:</p>
 
 <pre>
-<code>
+<code class="nginx">
 location / {
     try_files $uri $uri/ /index.php?$args;
     index index.php;
@@ -20,7 +20,7 @@ location / {
 <p>In file, e.g., "<em>/etc/nginx/sites-enabled/yoursite.conf</em>" for Ubuntu and other OS based on Debian or "<em>/etc/nginx/conf.d/yoursite.conf</em>" for CentOS and other OS based on Red Hat.</p>
 
 <pre>
-<code>
+<code class="nginx">
 server {
     # Port number. In most cases, 80 for HTTP and 443 for HTTPS
     listen 80;
