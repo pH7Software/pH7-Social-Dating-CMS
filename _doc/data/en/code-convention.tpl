@@ -94,7 +94,7 @@ function my_function() {}
 </code>
 </pre>
 
-<p>Global variables (Session, Cookie, Global, ...): lowercase and each word must be separated by underscore.</p>
+<p>Global variables (Session, Cookie, <abbr title="\PH7\Framework\Registry\Registry class">Registry</abbr>/Global variables, ...): lowercase and each word must be separated by underscore.</p>
 
 <p class="italic underline">Example:</p>
 
