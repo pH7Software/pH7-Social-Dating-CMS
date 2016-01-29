@@ -13,7 +13,10 @@
 namespace PH7\Framework\Loader;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\File, PH7\Framework\Date\Various as VDate;
+use
+PH7\Framework\File\File,
+PH7\Framework\Registry\Registry,
+PH7\Framework\Date\Various as VDate;
 
 /**
  * We include the Singleton trait before use, because at this stage the class can not load the trait automatically.
@@ -53,6 +56,23 @@ final class Autoloader
         $this->_loadFile('Core/Kernel.class.php');
         // Include Composer libraries (GeoIp2, Swift, ...)
         require_once PH7_PATH_PROTECTED . 'vendor/autoload.php';
+    }
+
+    /**
+     * Display a message if the server isn't connected to the Internet.
+     *
+     * @return void Display an error message and exit the script if there is no Internet, otherwise doing nothing.
+     */
+    public function launchInternetCheck()
+    {
+        if (!\PH7\is_internet())
+        {
+            $sMsg = '<p class="warning">No Internet Connection</p>
+            <p>Whoops! Your server has to be connect to the Internet in order to get your website working.</p>';
+
+            echo \PH7\html_body('Enable your Internet connection', $sMsg);
+            exit;
+        }
     }
 
     /**
@@ -100,17 +120,6 @@ final class Autoloader
     }
 
     /**
-     * For all classes, hack to remove the namespace, slash and backslash.
-     *
-     * @param string The class name to clean.
-     * @return string The class cleaned.
-     */
-    private function _clean($sClass)
-    {
-        return str_replace(array('PH7\Framework', '\\', '//'), array('/', '/', ''), $sClass);
-    }
-
-    /**
      * Check and load the files if necessary.
      *
      * @param string $sFileNamePath A pH7Framework filename path.
@@ -126,10 +135,20 @@ final class Autoloader
 
         if (!$bFileExists || $bIsTooSmallFile || $bIsExpiredFile)
         {
+            /**
+             * First off, check if the server is connected to the Internet in order to be able to download the remote files.
+             */
+            Registry::getInstance()->is_internet_needed = true;
+            $this->launchInternetCheck();
+
             if ($bFileExists) // Delete the file if it already exists
                 $oFile->deleteFile($sFullPath);
 
             $this->_downloadFile($sFileNamePath, $oFile);
+        }
+        else
+        {
+            Registry::getInstance()->is_internet_needed = false;
         }
         unset($oFile);
     }
@@ -157,6 +176,17 @@ final class Autoloader
     private function _getServerFileName($sFileNamePath)
     {
         return md5(strtolower(str_replace(array('/', '.class', '.php'), '', $sFileNamePath))) . '.dwld';
+    }
+
+    /**
+     * For all classes, hack to remove the namespace, slash and backslash.
+     *
+     * @param string The class name to clean.
+     * @return string The class cleaned.
+     */
+    private function _clean($sClass)
+    {
+        return str_replace(array('PH7\Framework', '\\', '//'), array('/', '/', ''), $sClass);
     }
 
 }

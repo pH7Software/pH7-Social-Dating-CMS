@@ -32,18 +32,6 @@ if (!ini_get('date.timezone'))
 
 try
 {
-    /**
-     * First off, check it the server is connected to the Internet.
-     */
-    if (!is_internet())
-    {
-        $sMsg = '<p class="warning">No Internet Connection</p>
-        <p>Whoops! Your server has to be connect to the Internet in order to get your website working.</p>';
-
-        echo html_body('Enable your Internet connection', $sMsg);
-        exit;
-    }
-
     // Loading Framework Classes
     require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
     Framework\Loader\Autoloader::getInstance()->init();
@@ -125,7 +113,9 @@ catch (\Exception $oE)
 }
 finally
 {
-    if ('' !== session_id()) session_write_close();
+    if ('' !== session_id()) {
+        session_write_close();
+    }
     ob_end_flush();
     exit(0);
 }
