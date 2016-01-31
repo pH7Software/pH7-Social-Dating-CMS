@@ -42,7 +42,3 @@ class Module implements Mixer
     }
 
 }
-
-
-
-
