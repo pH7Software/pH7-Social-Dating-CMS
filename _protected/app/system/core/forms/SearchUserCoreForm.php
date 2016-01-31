@@ -77,7 +77,7 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', self::$aCountryOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('State or Province:'), 'state', self::$aStateOption));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', self::$aStateOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), 'zip_code', array('id' => 'str_zip_code')));
         $oForm->addElement(new \PFBC\Element\Email(t('Email Address:'), 'mail'));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', array('1' => '<span class="bold">' . t('Only with Avatar') . '</span>')));
@@ -148,7 +148,7 @@ class SearchUserCoreForm
         self::$aMatchSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['match_sex']];
         self::$aAgeOption = ['value' => static::getAgeVals($oUserModel, $oSession)];
         self::$aCountryOption += ['value' => Geo::getCountryCode()];
-        self::$aCityOption += ['value' => Geo::getCity()];
-        self::$aStateOption += ['value'=> Geo::getState()];
+        self::$aCityOption += ['value' => Geo::getCity(), 'onfocus' => "if('" . Geo::getCity() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getCity() . "';"];
+        self::$aStateOption += ['value'=> Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
     }
 }
