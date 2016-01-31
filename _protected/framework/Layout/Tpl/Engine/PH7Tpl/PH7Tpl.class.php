@@ -32,7 +32,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     AUTHOR = 'Pierre-Henry Soria',
     VERSION = '1.3.0',
     LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/',
-    ERR_MSG = 'FATAL ERROR!',
+    ERR_MSG = 'FATAL LICENSE ERROR!<br /> It seems you need to upgrade your site to <a href="' . self::SOFTWARE_LICENSE_KEY_URL . '">pH7CMSPro</a><br /> or if you hold <a href="' . self::SOFTWARE_LICENSE_KEY_URL . '">pH7CMSPro</a>, please contact the ticket support in order to solve the problem.',
 
     /**
      * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
