@@ -166,12 +166,12 @@ class Module
     {
         if($sSwitch == static::INSTALL)
         {
-            $this->_oFile->renameMost(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sModsDirModFolder, PH7_PATH_MOD); // Files of module
+            $this->_oFile->systemRename(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sModsDirModFolder, PH7_PATH_MOD); // Files of module
             $this->_oFile->chmod(PH7_PATH_MOD . $this->_sModsDirModFolder, 0777);
         }
         else
         {
-            $this->_oFile->renameMost(PH7_PATH_MOD . $this->_sModsDirModFolder, PH7_PATH_REPOSITORY . static::DIR . PH7_DS); // Files of module
+            $this->_oFile->systemRename(PH7_PATH_MOD . $this->_sModsDirModFolder, PH7_PATH_REPOSITORY . static::DIR . PH7_DS); // Files of module
             $this->_oFile->chmod(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sModsDirModFolder, 0777);
         }
     }

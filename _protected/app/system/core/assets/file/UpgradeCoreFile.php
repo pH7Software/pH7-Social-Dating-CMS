@@ -216,14 +216,14 @@ class UpgradeCore extends Kernel
         $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR . PH7_DS;
         if(is_dir($sPathPublicDir))
         {
-            $this->_oFile->renameMost($sPathPublicDir, PH7_PATH_ROOT);
+            $this->_oFile->systemRename($sPathPublicDir, PH7_PATH_ROOT);
             $this->_oFile->chmod(PH7_PATH_ROOT, 0777);
         }
 
         $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR . PH7_DS;
         if(is_dir($sPathProtectedDir))
         {
-            $this->_oFile->renameMost($sPathProtectedDir, PH7_PATH_PROTECTED);
+            $this->_oFile->systemRename($sPathProtectedDir, PH7_PATH_PROTECTED);
             $this->_oFile->chmod(PH7_PATH_PROTECTED, 0777);
         }
     }
