@@ -323,7 +323,7 @@ class File
      * @param string $sTo File or directory.
      * @return mixed (integer | boolean) Returns the last line on success, and FALSE on failure.
      */
-    public function copyMost($sFrom, $sTo)
+    public function systemCopy($sFrom, $sTo)
     {
         if (file_exists($sFrom))
             return system("cp -r $sFrom $sTo");
@@ -365,7 +365,7 @@ class File
      * @param string $sTo File or directory.
      * @return mixed (integer | boolean) Returns the last line on success, and FALSE on failure.
      */
-    public function renameMost($sFrom, $sTo)
+    public function systemRename($sFrom, $sTo)
     {
         if (file_exists($sFrom))
             return system("mv $sFrom $sTo");
