@@ -2,6 +2,7 @@
 {if $is_bg_video && !$browser->isMobile()}
     <video autoplay loop muted poster="{url_tpl_img}splash_vid.jpg" id="bgvid">
         <source src="{url_tpl}file/splash.webm" type="video/webm" />
+        <source src="{url_tpl}file/splash.mp4" type="video/mp4" />
     </video>
 {/if}
 
