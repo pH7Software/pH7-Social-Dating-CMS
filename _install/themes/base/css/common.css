@@ -16,7 +16,7 @@ h2{font-size:1.5em}
 .right{float:right;margin-right:10px}
 .left{float:left;margin-left:10px}
 .left,.right{width:400px}
-.b_bMarg{margin-bottom:200px} /* Big Bottom Margin */
+.s_tPadd{padding-top:12px} /* Small Top Padding */
 .small{font-size:x-small}
 .success{color:green}
 .error,.warning,.mandatory{color:red}
@@ -36,3 +36,5 @@ footer{padding:10px;margin-top:25px;font-size:.9em;text-align:center;border-top:
 .button:hover{border:solid 1px #000;background:-webkit-linear-gradient(top,#fff,#c8c8c8);background:-moz-linear-gradient(top,#fff,#c8c8c8);background:linear-gradient(top,#fff,#c8c8c8)}
 .clear{clear:both}
 .img_thumb{display:block;padding:4px;margin-right:12px;line-height:1;border:1px solid #ddd;border-radius:4px;box-shadow:0 1px 1px rgba(0, 0, 0, 0.075)}
+.img_thumb:hover{border-color:#08c;box-shadow:0 1px 4px rgba(0, 105, 214, 0.25)}
+.img_thumb > img{max-width: 100%;margin-right:auto;margin-left:auto}

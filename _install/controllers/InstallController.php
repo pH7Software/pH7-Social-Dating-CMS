@@ -441,7 +441,7 @@ class InstallController extends Controller
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['niche_submit']))
                 {
-                    $bUpdateNeeded = false;
+                    $bUpdateNeeded = false; // Value by default. Don't need to update the DB for the Social/Dating Niche
 
                     switch ($_POST['niche_submit'])
                     {
@@ -481,6 +481,9 @@ class InstallController extends Controller
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
                     }
+                    $_SESSION['step5'] = 1;
+
+                    redirect(PH7_URL_SLUG_INSTALL . 'service');
                 }
             }
             else
@@ -490,7 +493,7 @@ class InstallController extends Controller
         }
         else
         {
-            redirect(PH7_URL_SLUG_INSTALL . 'niche');
+            redirect(PH7_URL_SLUG_INSTALL . 'service');
         }
 
         $this->oView->assign('sept_number', 5);
@@ -598,10 +601,10 @@ class InstallController extends Controller
     }
 
     /**
-     * Update the module status (enabled/disabled).
+     * Update module status (enabled/disabled).
      *
      * @param string $sModName Module Name.
-     * @param integer $sStatus '1' = Enabled | '0' = Disabled (need to be string because in DB it is an "enum").
+     * @param string $sStatus '1' = Enabled | '0' = Disabled (need to be string because in DB it is an "enum").
      * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
      */
     private function _updateMods($sModName, $sStatus)
