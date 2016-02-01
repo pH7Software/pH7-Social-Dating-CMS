@@ -126,6 +126,8 @@ $LANG = array (
     'go_social_dating' => 'Rencontre Sociale',
     'go_social' => 'Portail Social',
     'go_dating' => 'Rencontre',
+    'recommended' => 'Recommandée',
+    'recommended_desc' => 'Choisissez cette niche si vous ne savez pas quelle niche choisir',
     'note_able_to_change_niche_settings_later' => 'Veuillez noter que vous pourrez changer le thème et activer/désactiver les modules par la suite dans votre panneau d\'administration.',
     'looking_hosting' =>'À la recherche d\'un hébergement Web ? Regardez <a href="' . Controller::SOFTWARE_HOSTING_LIST_FR_URL . '" target="_blank">notre Liste d\'Hébergeurs</a> ?',
     'warning_no_js' => 'Cette page Web est incompatible sans l\'activation de JavaScript.<br />
