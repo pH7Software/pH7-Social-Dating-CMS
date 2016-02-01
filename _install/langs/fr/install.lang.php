@@ -66,6 +66,7 @@ $LANG = array (
     'db_encoding' => 'Encodage',
     'desc_db_encoding' => 'Encodage de la base de données. Généralement UTF8 pour un encodage internationale.',
     'db_port' => 'Numéro de port de votre base de données',
+    'desc_db_port' => 'Veuillez laisser la valeur à "3306" si vous ne savez pas.',
     'ffmpeg_path' => 'Le chemin vers l\'exécutable FFmpeg (si vous ne le savez pas où il se trouve, veuillez vous renseigner auprès de votre hébergeur)',
     'bug_report_email' => 'E-mail de rapport de bogues',
     'admin_first_name' => 'Votre prénom',
