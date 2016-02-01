@@ -14,7 +14,7 @@
     <input type="text" name="db_hostname" id="db_hostname" onfocus="if ('localhost' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'localhost';" value="{$smarty.session.db.hostname|escape}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="db_name">{$LANG.db_name} :</label><br />
-    <input type="text" name="db_name" id="db_name" onfocus="if ('PHS-SOFTWARE' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'PHS-SOFTWARE';" value="{$smarty.session.db.name|escape}" required="required" /></p>
+    <input type="text" name="db_name" id="db_name" onfocus="if ('ph7cms' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'ph7cms';" value="{$smarty.session.db.name|escape}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="db_username">{$LANG.db_username} :</label><br />
     <input type="text" name="db_username" id="db_username" onfocus="if ('root' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'root';" value="{$smarty.session.db.username|escape}" required="required" /></p>

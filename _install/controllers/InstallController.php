@@ -134,7 +134,7 @@ class InstallController extends Controller
                 $_SESSION['db']['type_name'] = 'MySQL';
                 $_SESSION['db']['type'] = 'mysql';
                 $_SESSION['db']['hostname'] = 'localhost';
-                $_SESSION['db']['name'] = 'PHS-SOFTWARE';
+                $_SESSION['db']['name'] = 'ph7cms';
                 $_SESSION['db']['username'] = 'root';
                 $_SESSION['db']['prefix'] = 'PH7_';
                 $_SESSION['db']['port'] = '3306';
@@ -470,7 +470,7 @@ class InstallController extends Controller
                             require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
 
                             foreach ($aModUpdated as $sModName => $sStatus)
-                                $this->_updateMods($sModName, $sStatus);
+                                $this->_updateMods($DB, $sModName, $sStatus);
 
                             $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
                             $rStmt = $DB->prepare($sSql);
@@ -603,14 +603,15 @@ class InstallController extends Controller
     /**
      * Update module status (enabled/disabled).
      *
+     * @param object \PH7\Db $oDb
      * @param string $sModName Module Name.
      * @param string $sStatus '1' = Enabled | '0' = Disabled (need to be string because in DB it is an "enum").
      * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
      */
-    private function _updateMods($sModName, $sStatus)
+    private function _updateMods(Db $oDb, $sModName, $sStatus)
     {
         $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'SysModsEnabled SET enabled = :status WHERE folderName = :modName LIMIT 1';
-        $rStmt = $DB->prepare($sSql);
+        $rStmt = $oDb->prepare($sSql);
         return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
     }
 
