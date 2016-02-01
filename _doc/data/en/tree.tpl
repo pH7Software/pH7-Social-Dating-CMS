@@ -1,4 +1,4 @@
-<!-- Last Update: 01/06/2016 by Pierre-Henry Soria -->
+<!-- Last Update: 02/03/2016 by Pierre-Henry Soria -->
 
 <h1>pH7CMS Tree</h1>
 
@@ -135,6 +135,7 @@
 │   │   │   ├── install.tpl
 │   │   │   ├── introduction.tpl
 │   │   │   ├── JS_DOC.help.txt
+│   │   │   ├── nginx-configuration.tpl
 │   │   │   ├── pH.tpl
 │   │   │   ├── rename-the-admin-folder.tpl
 │   │   │   ├── requirements.tpl
@@ -166,6 +167,78 @@
 │   ├── LICENSE
 │   ├── README
 │   ├── static
+│   │   ├── highlight
+│   │   │   ├── highlight.js
+│   │   │   └── styles
+│   │   │       ├── agate.css
+│   │   │       ├── androidstudio.css
+│   │   │       ├── arduino-light.css
+│   │   │       ├── arta.css
+│   │   │       ├── ascetic.css
+│   │   │       ├── atelier-cave-dark.css
+│   │   │       ├── atelier-cave-light.css
+│   │   │       ├── atelier-dune-dark.css
+│   │   │       ├── atelier-dune-light.css
+│   │   │       ├── atelier-estuary-dark.css
+│   │   │       ├── atelier-estuary-light.css
+│   │   │       ├── atelier-forest-dark.css
+│   │   │       ├── atelier-forest-light.css
+│   │   │       ├── atelier-heath-dark.css
+│   │   │       ├── atelier-heath-light.css
+│   │   │       ├── atelier-lakeside-dark.css
+│   │   │       ├── atelier-lakeside-light.css
+│   │   │       ├── atelier-plateau-dark.css
+│   │   │       ├── atelier-plateau-light.css
+│   │   │       ├── atelier-savanna-dark.css
+│   │   │       ├── atelier-savanna-light.css
+│   │   │       ├── atelier-seaside-dark.css
+│   │   │       ├── atelier-seaside-light.css
+│   │   │       ├── atelier-sulphurpool-dark.css
+│   │   │       ├── atelier-sulphurpool-light.css
+│   │   │       ├── brown-paper.css
+│   │   │       ├── brown-papersq.png
+│   │   │       ├── codepen-embed.css
+│   │   │       ├── color-brewer.css
+│   │   │       ├── dark.css
+│   │   │       ├── darkula.css
+│   │   │       ├── default.css
+│   │   │       ├── docco.css
+│   │   │       ├── far.css
+│   │   │       ├── foundation.css
+│   │   │       ├── github.css
+│   │   │       ├── github-gist.css
+│   │   │       ├── googlecode.css
+│   │   │       ├── grayscale.css
+│   │   │       ├── hopscotch.css
+│   │   │       ├── hybrid.css
+│   │   │       ├── idea.css
+│   │   │       ├── ir-black.css
+│   │   │       ├── kimbie.dark.css
+│   │   │       ├── kimbie.light.css
+│   │   │       ├── magula.css
+│   │   │       ├── mono-blue.css
+│   │   │       ├── monokai.css
+│   │   │       ├── monokai-sublime.css
+│   │   │       ├── obsidian.css
+│   │   │       ├── paraiso-dark.css
+│   │   │       ├── paraiso-light.css
+│   │   │       ├── pojoaque.css
+│   │   │       ├── pojoaque.jpg
+│   │   │       ├── railscasts.css
+│   │   │       ├── rainbow.css
+│   │   │       ├── school-book.css
+│   │   │       ├── school-book.png
+│   │   │       ├── solarized-dark.css
+│   │   │       ├── solarized-light.css
+│   │   │       ├── sunburst.css
+│   │   │       ├── tomorrow.css
+│   │   │       ├── tomorrow-night-blue.css
+│   │   │       ├── tomorrow-night-bright.css
+│   │   │       ├── tomorrow-night.css
+│   │   │       ├── tomorrow-night-eighties.css
+│   │   │       ├── vs.css
+│   │   │       ├── xcode.css
+│   │   │       └── zenburn.css
 │   │   ├── img
 │   │   │   ├── flags
 │   │   │   │   ├── ad.gif
@@ -425,7 +498,8 @@
 │   │   │   ├── pH.png
 │   │   │   └── seo_tags.png
 │   │   └── js
-│   │       └── ajph.js
+│   │       ├── ajph.js
+│   │       └── jquery.js
 │   └── themes
 │       └── base
 │           ├── css
@@ -639,6 +713,7 @@
 │           │   └── header.tpl
 │           ├── index.tpl
 │           ├── license.tpl
+│           ├── niche.tpl
 │           └── service.tpl
 ├── installation_instructions.txt
 ├── PH7.COPYRIGHT.txt
@@ -2268,6 +2343,7 @@
 │   │   │   │   │       │   ├── CEmail.php
 │   │   │   │   │       │   ├── Date.php
 │   │   │   │   │       │   ├── Email.php
+│   │   │   │   │       │   ├── Name.php
 │   │   │   │   │       │   ├── Numeric.php
 │   │   │   │   │       │   ├── Password.php
 │   │   │   │   │       │   ├── Phone.php
@@ -2402,7 +2478,6 @@
 │   │   ├── Security
 │   │   │   ├── Ban
 │   │   │   │   └── Ban.class.php
-│   │   │   ├── crypt.inc.php
 │   │   │   ├── CSRF
 │   │   │   │   └── Token.class.php
 │   │   │   ├── DDoS
@@ -4953,6 +5028,7 @@
 │       │   │   ├── tooltip.css
 │       │   │   └── zoomer.css
 │       │   ├── file
+│       │   │   ├── splash.mp4
 │       │   │   ├── splash_video.copyright.txt
 │       │   │   └── splash.webm
 │       │   ├── img
@@ -5092,7 +5168,119 @@
 │       │       ├── loading.inc.tpl
 │       │       ├── page_nav.inc.tpl
 │       │       └── top_menu.inc.tpl
-│       └── datelove
+│       ├── datelove
+│       │   ├── config
+│       │   │   └── config.ini
+│       │   ├── css
+│       │   │   ├── browse.css
+│       │   │   ├── color.css
+│       │   │   ├── common.css
+│       │   │   ├── form.css
+│       │   │   ├── _inc
+│       │   │   │   ├── common.custom.css
+│       │   │   │   └── keyframes.css
+│       │   │   ├── js
+│       │   │   │   ├── ajph.css
+│       │   │   │   └── jquery
+│       │   │   │       ├── apprise.css
+│       │   │   │       ├── carousel.css
+│       │   │   │       ├── rating.css
+│       │   │   │       └── tipTip.css
+│       │   │   ├── layout.css
+│       │   │   ├── like.css
+│       │   │   ├── menu.css
+│       │   │   ├── rollover.css
+│       │   │   ├── splash.css
+│       │   │   ├── style.css
+│       │   │   ├── tabs.css
+│       │   │   ├── tooltip.css
+│       │   │   └── zoomer.css
+│       │   ├── file
+│       │   │   ├── splash.mp4
+│       │   │   ├── splash_video.copyright.txt
+│       │   │   └── splash.webm
+│       │   ├── img
+│       │   │   ├── arrow.gif
+│       │   │   ├── dropdown_after.png
+│       │   │   ├── dropdown_before.png
+│       │   │   ├── header2.png
+│       │   │   ├── icon
+│       │   │   │   ├── admin_no_picture-100.jpg
+│       │   │   │   ├── admin_no_picture-150.jpg
+│       │   │   │   ├── admin_no_picture-200.jpg
+│       │   │   │   ├── admin_no_picture-32.jpg
+│       │   │   │   ├── admin_no_picture-400.jpg
+│       │   │   │   ├── admin_no_picture-64.jpg
+│       │   │   │   ├── admin_no_picture.jpg
+│       │   │   │   ├── away.png
+│       │   │   │   ├── busy.png
+│       │   │   │   ├── couple_no_picture-100.jpg
+│       │   │   │   ├── couple_no_picture-150.jpg
+│       │   │   │   ├── couple_no_picture-200.jpg
+│       │   │   │   ├── couple_no_picture-32.jpg
+│       │   │   │   ├── couple_no_picture-400.jpg
+│       │   │   │   ├── couple_no_picture-64.jpg
+│       │   │   │   ├── couple_no_picture.jpg
+│       │   │   │   ├── female_no_picture-100.jpg
+│       │   │   │   ├── female_no_picture-150.jpg
+│       │   │   │   ├── female_no_picture-200.jpg
+│       │   │   │   ├── female_no_picture-32.jpg
+│       │   │   │   ├── female_no_picture-400.jpg
+│       │   │   │   ├── female_no_picture-64.jpg
+│       │   │   │   ├── female_no_picture.jpg
+│       │   │   │   ├── loading2.gif
+│       │   │   │   ├── loading.gif
+│       │   │   │   ├── male_no_picture-100.jpg
+│       │   │   │   ├── male_no_picture-150.jpg
+│       │   │   │   ├── male_no_picture-200.jpg
+│       │   │   │   ├── male_no_picture-32.jpg
+│       │   │   │   ├── male_no_picture-400.jpg
+│       │   │   │   ├── male_no_picture-64.jpg
+│       │   │   │   ├── male_no_picture.jpg
+│       │   │   │   ├── new.gif
+│       │   │   │   ├── none.jpg
+│       │   │   │   ├── offline.png
+│       │   │   │   ├── online.png
+│       │   │   │   ├── pending-100.jpg
+│       │   │   │   ├── pending-150.jpg
+│       │   │   │   ├── pending-200.jpg
+│       │   │   │   ├── pending-32.jpg
+│       │   │   │   ├── pending-400.jpg
+│       │   │   │   ├── pending-64.jpg
+│       │   │   │   ├── pending.jpg
+│       │   │   │   ├── quote_left.jpg
+│       │   │   │   ├── quote_right.jpg
+│       │   │   │   ├── visitor_no_picture-100.jpg
+│       │   │   │   ├── visitor_no_picture-150.jpg
+│       │   │   │   ├── visitor_no_picture-200.jpg
+│       │   │   │   ├── visitor_no_picture-32.jpg
+│       │   │   │   ├── visitor_no_picture-400.jpg
+│       │   │   │   ├── visitor_no_picture-64.jpg
+│       │   │   │   └── visitor_no_picture.jpg
+│       │   │   ├── logo.png
+│       │   │   ├── paging_bg2.png
+│       │   │   ├── preview.png
+│       │   │   ├── slideshow
+│       │   │   │   ├── 1.jpg
+│       │   │   │   ├── 2.jpg
+│       │   │   │   ├── 3.jpg
+│       │   │   │   ├── 4.jpg
+│       │   │   │   └── 5.jpg
+│       │   │   ├── splash_vid.jpg
+│       │   │   └── tabs.gif
+│       │   ├── js
+│       │   │   ├── global.js
+│       │   │   └── splash.js
+│       │   └── tpl
+│       │       ├── bottom_menu.inc.tpl
+│       │       ├── browse_user.inc.tpl
+│       │       ├── error.inc.tpl
+│       │       ├── favicon_alert.inc.tpl
+│       │       ├── layout.tpl
+│       │       ├── loading.inc.tpl
+│       │       ├── page_nav.inc.tpl
+│       │       └── top_menu.inc.tpl
+│       └── zendate
 │           ├── config
 │           │   └── config.ini
 │           ├── css
@@ -5119,6 +5307,10 @@
 │           │   ├── tabs.css
 │           │   ├── tooltip.css
 │           │   └── zoomer.css
+│           ├── file
+│           │   ├── splash.mp4
+│           │   ├── splash_video.copyright.txt
+│           │   └── splash.webm
 │           ├── img
 │           │   ├── arrow.gif
 │           │   ├── dropdown_after.png
@@ -5180,12 +5372,14 @@
 │           │   ├── logo.png
 │           │   ├── paging_bg2.png
 │           │   ├── preview.png
-│           │   └── slideshow
-│           │       ├── 1.jpg
-│           │       ├── 2.jpg
-│           │       ├── 3.jpg
-│           │       ├── 4.jpg
-│           │       └── 5.jpg
+│           │   ├── slideshow
+│           │   │   ├── 1.jpg
+│           │   │   ├── 2.jpg
+│           │   │   ├── 3.jpg
+│           │   │   ├── 4.jpg
+│           │   │   └── 5.jpg
+│           │   ├── splash_vid.jpg
+│           │   └── tabs.gif
 │           ├── js
 │           │   ├── global.js
 │           │   └── splash.js
@@ -5208,4 +5402,4 @@
 
 </pre>
 
-<p>Statistics: 1476 directories, 3724 files.</p>
+<p>Statistics: 1491 directories, 3903 files.</p>
