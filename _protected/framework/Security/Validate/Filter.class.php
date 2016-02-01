@@ -916,7 +916,8 @@ class Filter {
             }
         }
 
-        return $_config[0] =& $config;
+        $_config[0] =& $config;
+        return $_config[0];
     }
 
 /**
