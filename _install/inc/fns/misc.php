@@ -200,11 +200,11 @@ function delete_dir($sPath)
 /**
  * Executes SQL queries.
  *
- * @param object PDO
+     * @param object \PH7\Db $oDb
  * @param string $sSqlFile SQL File.
  * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
  */
-function exec_query_file($oDb, $sSqlFile)
+function exec_query_file(Db $oDb, $sSqlFile)
 {
     if (!is_file($sSqlFile)) return false;
 

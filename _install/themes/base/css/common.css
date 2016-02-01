@@ -19,7 +19,8 @@ h2{font-size:1.5em}
 .s_tPadd{padding-top:12px} /* Small Top Padding */
 .small{font-size:x-small}
 .success{color:green}
-.error,.warning,.mandatory{color:red}
+.red,.error,.warning,.mandatory{color:#F00}
+.darkred{color:#8B0000}
 .italic{font-style:italic}
 .underline{text-decoration:underline}
 button,input,select{font-size:17px}
