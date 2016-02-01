@@ -347,7 +347,7 @@ class Design
                 ['title' => 'Flirt Naughty Girls', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],
                 ['title' => 'Learn Languages Online', 'link' => 'http://newayup.com'],
-                ['title' => 'Web Hosting Service', 'link' => 'http://hosting.ph7cms.com']
+                ['title' => 'Web Hosting Service', 'link' => 'http://hosting.hizup.net']
             ];
         }
 
