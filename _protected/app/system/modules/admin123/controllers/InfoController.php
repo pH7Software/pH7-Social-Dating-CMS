@@ -9,7 +9,6 @@ namespace PH7;
 
 class InfoController extends Controller
 {
-
     private $sTitle;
 
     public function index()
@@ -19,7 +18,7 @@ class InfoController extends Controller
 
     public function language()
     {
-        $this->sTitle = t('Php Information');
+        $this->sTitle = t('PHP Information');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
         $this->output();
@@ -33,10 +32,4 @@ class InfoController extends Controller
         $this->view->release_date = $this->dateTime->get(Framework\Security\Version::KERNEL_RELASE_DATE)->date();
         $this->output();
     }
-
-    public function __destruct()
-    {
-        unset($this->sTitle);
-    }
-
 }
