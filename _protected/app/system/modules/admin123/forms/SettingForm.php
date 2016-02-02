@@ -153,8 +153,9 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding a User Post Note:'), 'is_captcha_note', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaNote'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Pruning:') . '</h3>'));
-        $oForm->addElement(new \PFBC\Element\Number(t('Delete older messages:'), 'clean_msg', array('description' => t('Delete messages older than days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMsg'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Number(t('Delete older comments:'), 'clean_comment', array('description' => t('Delete comments older than days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanComment'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Delete old Messages:'), 'clean_msg', array('description' => t('Delete messages older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMsg'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Delete old Comments:'), 'clean_comment', array('description' => t('Delete comments older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanComment'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Delete old IM Messages:'), 'clean_messenger', array('description' => t('Delete IM messages older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMessenger'), 'required' => 1)));
 
         /********** Api **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="api"><h2 class="underline">' . t('Api:') . '</h2>'));
