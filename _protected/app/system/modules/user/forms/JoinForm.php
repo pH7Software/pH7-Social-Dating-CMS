@@ -41,17 +41,17 @@ class JoinForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center"><a href="' . Uri::get('connect', 'main', 'index') . '" target="_blank" class="btn btn-primary">' . t('Universal Login') . '</a></div>'));
         }
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'name_first', 'onblur' =>'CValid(this.value,this.id)', 'title'=>t('Enter your first name.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('placeholder' => t('First Name'), 'id'=>'name_first', 'onblur' =>'CValid(this.value,this.id)', 'title'=>t('Enter your first name.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
-        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('description'=>PH7_URL_ROOT.'<strong><span class="your-user-name">'.t('your-user-name').'</span><span class="username"></span></strong>'.PH7_PAGE_EXT, 'id'=>'username', 'title'=>t('This username will be used for your site url.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Username)));
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur' =>'CValid(this.value, this.id,\'guest\')', 'title'=>t('Enter your valid email address.'), 'required'=> 1, 'validation' => new \PFBC\Validation\CEmail('guest'))));
+        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('placeholder' => t('Username'), 'description'=>PH7_URL_ROOT.'<strong><span class="your-user-name">'.t('your-user-name').'</span><span class="username"></span></strong>'.PH7_PAGE_EXT, 'id'=>'username', 'title'=>t('This username will be used for your site url.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Username)));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('placeholder' => t('Email'), 'id'=>'email', 'onblur' =>'CValid(this.value, this.id,\'guest\')', 'title'=>t('Enter your valid email address.'), 'required'=> 1, 'validation' => new \PFBC\Validation\CEmail('guest'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
-        $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('id'=>'password', 'onkeyup'=>'checkPassword(this.value)', 'onblur' =>'CValid(this.value, this.id)', 'title'=>t('Your password. It will be used for logging in to the site. This storage is secure, because we are using an encrypted format.'), 'required' => 1, 'validation' => new \PFBC\Validation\Password)));
+        $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('placeholder' => t('Password'), 'id'=>'password', 'onkeyup'=>'checkPassword(this.value)', 'onblur' =>'CValid(this.value, this.id)', 'title'=>t('Your password. It will be used for logging in to the site. This storage is secure, because we are using an encrypted format.'), 'required' => 1, 'validation' => new \PFBC\Validation\Password)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error password"></span>'));
 
         if (DbConfig::getSetting('isCaptchaUserSignup'))
         {
-          $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description'=>t('Enter the code above:'))));
+          $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('placeholder' => t('Captcha'), 'id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description'=>t('Enter the code above:'))));
           $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
