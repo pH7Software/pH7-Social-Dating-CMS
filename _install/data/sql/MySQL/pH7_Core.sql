@@ -1048,6 +1048,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('isSiteValidated', 0,  '0 = site not validated | 1 = site validated',  'security'),
 ('cleanMsg', 0, 'Delete messages older than X days. 0 = Disable', 'pruning'),
 ('cleanComment', 0, 'Delete comments older than X days. 0 = Disable', 'pruning'),
+('cleanMessenger', 0, 'Delete IM messages older than X days. 0 = Disable', 'pruning'),
 ('cronSecurityHash', 'change_this_secret_cron_word_by_yours', 'The secret word for the URL of the cron', 'automation'),
 ('userTimeout', 1, 'User inactivity timeout. The number of minutes that a member becomes inactive (offline).', 'automation'),
 ('ipApi', @sIpApiUrl, 'IP Api URL', 'api'),
