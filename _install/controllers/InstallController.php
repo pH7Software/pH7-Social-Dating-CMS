@@ -268,7 +268,7 @@ class InstallController extends Controller
 
                 if (empty($_SESSION['val']))
                 {
-                    $_SESSION['val']['site_name'] = 'My Own Social/Dating Site!';
+                    $_SESSION['val']['site_name'] = 'My Social Dating Site';
                     $_SESSION['val']['admin_login_email'] = '';
                     $_SESSION['val']['admin_email'] = '';
                     $_SESSION['val']['admin_feedback_email'] = '';
