@@ -19,7 +19,7 @@ class MainController extends Controller
     {
         $this->view->header = '<meta name="robots" content="noindex" />';
         $this->view->page_title = t('Sign in to Admin Panel');
-        $this->view->page_h1 = t('Sign in');
+        $this->view->h1_title = t('Admin Panel - Login');
         $this->output();
     }
 
