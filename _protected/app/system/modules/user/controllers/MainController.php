@@ -88,7 +88,7 @@ class MainController extends Controller
     public function login()
     {
         // Display Sign In page
-        $this->sTitle = t('Sign In to %site_name%!');
+        $this->sTitle = t('Sign In to %site_name%');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
         $this->output();
