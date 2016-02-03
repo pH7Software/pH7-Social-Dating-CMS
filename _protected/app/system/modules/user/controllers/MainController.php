@@ -27,15 +27,18 @@ class MainController extends Controller
         // Only visitors
         if (!UserCore::auth())
         {
+            $bIsBgVideo = (bool) DbConfig::getSetting('bgSplashVideo');
+            $sIsCssVidSplashFile = ($bIsBgVideo) ? 'video_splash.css,' : '';
+
             // Set CSS and JS files
-            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'splash.css,tooltip.css,js/jquery/carousel.css');
+            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, $sIsCssVidSplashFile . 'splash.css,tooltip.css,js/jquery/carousel.css');
             $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'jquery/carouFredSel.js,' . PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS . 'splash.js');
 
             // Assigns the promo text to the view
             $this->view->promo_text = DbConfig::getMetaMain(PH7_LANG_NAME)->promoText;
 
             // Assign the background video option
-            $this->view->is_bg_video = DbConfig::getSetting('bgSplashVideo');
+            $this->view->is_bg_video = $bIsBgVideo;
 
             // To check if the site is called by a mobile native app
             $bMobApp = $this->view->is_mobapp = MobApp::is();
