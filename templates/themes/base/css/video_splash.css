@@ -4,8 +4,9 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-/** Change the color text to a more visible one (darker) when the background video on the splash homepage is enabled **/
-body {color:#333}
+/** Change the color text to a more visible one (darker/whiter) when the background video on the splash homepage is enabled **/
+body {color:#333 !important}
 .ft_dm a.dropdown_item {color:#333 !important}
 a.dropdown_item {color:#333 !important}
 footer a {color: #333 !important}
+#promo_text, #form_join_user em {color:#EEE !important}
