@@ -1,0 +1,11 @@
+/*
+ * Author:        Pierre-Henry Soria <hello@ph7cms.com>
+ * Copyright:     (c) 2016, Pierre-Henry Soria. All Rights Reserved.
+ * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ */
+
+/** Change the color text to a more visible one (darker) when the background video on the splash homepage is enabled **/
+body {color:#333}
+.ft_dm a.dropdown_item {color:#333 !important}
+a.dropdown_item {color:#333 !important}
+footer a {color: #333 !important}
