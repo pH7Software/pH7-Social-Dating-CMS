@@ -31,16 +31,15 @@ class MainController extends Controller
         // Only visitors
         if (!UserCore::auth())
         {
+            // To check if the site is called by a mobile native app
+            $this->_bIsMobApp = $this->view->is_mobapp = MobApp::is();
+
             if ($this->_getGuestTplPage() === static::GUEST_SPLASH_FILE)
             {
                 $bIsBgVideo = (bool) DbConfig::getSetting('bgSplashVideo');
 
-                /*** These tpl vars are only available in 'index.guest_splash.tpl' ***/
-                // Assign the background video option
+                // Assign the background video option (this tpl var is only available in index.guest_splash.tpl)
                 $this->view->is_bg_video = $bIsBgVideo;
-
-                // To check if the site is called by a mobile native app
-                $this->_bIsMobApp = $this->view->is_mobapp = MobApp::is();
             }
 
             $sIsCssVidSplashFile = (!empty($bIsBgVideo) && $bIsBgVideo) ? 'video_splash.css,' : '';
