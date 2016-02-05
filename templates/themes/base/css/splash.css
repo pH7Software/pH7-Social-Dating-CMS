@@ -57,6 +57,10 @@ h1:hover{color:#1877D5;cursor:default}
 .block_txt{margin:380px 80px 5px 10px}
 .counter{margin:15px 2px 4px 1px}
 
+/** Buttons (links) **/
+.bt_login_remember{margin-top:-1.5%}
+.bt_login_forgot{margin-top:-2px}
+
 
 video#bgvid {
   position: fixed;
