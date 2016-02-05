@@ -44,22 +44,7 @@ class SubscriptionFormProcess extends Form
                         'affiliated_id' => (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME)
                     ];
 
-                    $sActivateLink = Uri::get('newsletter','home','activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
-
-                    $this->view->content = t('Hi %0%!', $aData['name']) . '<br />' .
-                    t("Welcome to %site_name%'s Subscription!") . '<br />' .
-                    t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
-                    $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $aData['email']) . '<br />' .
-                    t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
-
-                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/newsletter/registration.tpl', $sEmail);
-
-                    $aInfo = [
-                        'subject' => t('Confirm you email address!'),
-                        'to' => $sEmail
-                    ];
-
-                    if ( (new Mail)->send($aInfo, $sMessageHtml) )
+                    if ($this->sendMail($aData))
                     {
                         \PFBC\Form::setSuccess('form_subscription', t('Please activate your subscription by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam.'));
                         $oSubscriptionModel->add($aData);
@@ -95,6 +80,32 @@ class SubscriptionFormProcess extends Form
                 exit('Bad Request Error!');
         }
         unset($oSubscriptionModel);
+    }
+
+    /**
+     * Send confirm email.
+     *
+     * @param array $aData The data details.
+     * @return integer Number of recipients who were accepted for delivery.
+     */
+    protected function sendMail(array $aData)
+    {
+        $sActivateLink = Uri::get('newsletter','home','activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
+
+        $this->view->content = t('Hi %0%!', $aData['name']) . '<br />' .
+        t("Welcome to %site_name%'s Subscription!") . '<br />' .
+        t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
+        $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $aData['email']) . '<br />' .
+        t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
+
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/newsletter/registration.tpl', $aData['email']);
+
+        $aInfo = [
+            'subject' => t('Confirm you email address!'),
+            'to' => $aData['email']
+        ];
+
+        return (new Mail)->send($aInfo, $sMessageHtml);
     }
 
 }
