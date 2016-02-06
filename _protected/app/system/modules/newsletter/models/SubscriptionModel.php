@@ -12,6 +12,9 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class SubscriptionModel extends UserCoreModel
 {
 
+    /**
+     * Get all Active Subscribers (it is required by the law to send emails only to the confirmed opt-in subscribers).
+     */
     public function getSubscribers()
     {
         $rStmt = Db::getInstance()->prepare('SELECT email, name AS firstName FROM' . Db::prefix('Subscribers') . 'WHERE active = 1');

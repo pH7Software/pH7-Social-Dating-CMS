@@ -27,6 +27,7 @@ class InviteFormProcess extends Form
         }
         else
         {
+            $oMail = new Mail;
             foreach ($aTo as $sMail)
             {
                 if (!(new Validate)->email($sMail))
@@ -35,13 +36,14 @@ class InviteFormProcess extends Form
                 }
                 else
                 {
-                    if (!$this->sendMail($sMail))
+                    if (!$this->sendMail($sMail, $oMail))
                         \PFBC\Form::setError('form_invite', Form::errorSendingEmail());
                     else
                      \PFBC\Form::setSuccess('form_invite', t('Cool! We have sent that.'));
                     ;
                 }
             }
+            unset($oMail);
         }
     }
 
@@ -49,9 +51,10 @@ class InviteFormProcess extends Form
      * Send the confirm email.
      *
      * @param string $sMail The user email.
+     * @param object \PH7\Framework\Mail\Mail $oMail
      * @return integer Number of recipients who were accepted for delivery.
      */
-    protected function sendMail($sMail)
+    protected function sendMail($sMail, Mail $oMail)
     {
         $this->view->content = t('Hello!') . '<br />' .
         t('You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%') . '<br />' .
@@ -66,7 +69,7 @@ class InviteFormProcess extends Form
             'subject' => t('Privilege on the invitation from your friend for the new generation community platform - %site_name%')
         ];
 
-        return (new Mail)->send($aInfo, $sMessageHtml);
+        return $oMail->send($aInfo, $sMessageHtml);
     }
 
 }

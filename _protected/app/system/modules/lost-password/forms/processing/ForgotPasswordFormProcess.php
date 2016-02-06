@@ -56,8 +56,8 @@ class ForgotPasswordFormProcess extends Form
         /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
         $sResetUrl = Uri::get('lost-password', 'main', 'reset', $this->httpRequest->get('mod')) . PH7_SH . $oData->email . PH7_SH . $oData->hashValidation;
 
-        $this->view->content = t('Hello %0%!') . '<br />' .
-        t('Somebody (from the IP address %1%) has requested a new password for their account.', $oData->username, Ip::get()) . '<br />' .
+        $this->view->content = t('Hello %0%!', $oData->username) . '<br />' .
+        t('Somebody (from the IP address %0%) has requested a new password for their account.', Ip::get()) . '<br />' .
         t('If you requested for this, click on the link below, otherwise ignore this email and your password will remain unchanged.') .
         '<br /><a href="' . $sResetUrl . '">' . $sResetUrl . '</a>';
 
