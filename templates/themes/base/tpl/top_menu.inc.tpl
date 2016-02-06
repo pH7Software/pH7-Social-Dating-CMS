@@ -351,6 +351,7 @@
 
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('payment','admin','index') }}" title="{lang 'Payment System'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Payment'}</a>
               <ul class="dropdown-menu" role="menu">
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','general') }}#p=registration" title="{lang 'Set the Default Membership Group for new Users'}">{lang 'Default Membership Group'}</a></li>
                 <li><a href="{{ $design->url('payment','admin','membershiplist') }}" title="{lang 'Memberships List'}">{lang 'Memberships List'}</a></li>
                 <li><a href="{{ $design->url('payment','admin','addmembership') }}" title="{lang 'Membership Management'}">{lang 'Add a new Membership'}</a></li>
                 <li><a href="{{ $design->url('payment','admin','config') }}" title="{lang 'Payment Gateway Config'}">{lang 'Gateway Config'}</a></li>
