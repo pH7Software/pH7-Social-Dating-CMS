@@ -43,7 +43,7 @@ if (!$sData = $oCache->get())
         })
     });';
 
-    if (Config::getInstance()->values['cache']['enable.static.compressor'])
+    if (Config::getInstance()->values['cache']['enable.static.minify'])
     {
         // Compression of JavaScript Code
         $sData = (new Compress)->parseJs($sData);
