@@ -80,6 +80,15 @@ class ToolController extends Controller
         $this->output();
     }
 
+    public function envMode()
+    {
+        $this->sTitle = t('Environment Mode');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
+
+        $this->output();
+    }
+
     public function backup()
     {
         $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
