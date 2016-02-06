@@ -272,7 +272,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      */
     final private function _ddosProtection()
     {
-        if (!isDebug() && M\DbConfig::getSetting('DDoS'))
+        if (!isDebug() && (bool)M\DbConfig::getSetting('DDoS'))
         {
             $oDDoS = new \PH7\Framework\Security\DDoS\Stop;
             if ($oDDoS->cookie() || $oDDoS->session()) {
