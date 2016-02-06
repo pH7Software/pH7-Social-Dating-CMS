@@ -90,8 +90,8 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         // Enable (true) or Disables (false) html comments in the source code of the site that shows information conernant template engine such as name, version, ...
         $this->bLicense = PH7_VALID_LICENSE;
 
-        $this->bHtmlCompressor = (bool) $this->config->values['cache']['enable.static.compressor'];
-        $this->bPhpCompressor = (bool) $this->config->values['cache']['enable.static.compressor'];
+        $this->bHtmlCompressor = (bool) $this->config->values['cache']['enable.static.minify'];
+        $this->bPhpCompressor = (bool) $this->config->values['cache']['enable.static.minify'];
     }
 
     /**
