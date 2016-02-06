@@ -59,7 +59,7 @@ abstract class PermissionCore extends Framework\Core\Core
 
     public function signInMsg()
     {
-        return t('Please you logged!');
+        return t('Please login!');
     }
 
     public function adminSignInMsg()

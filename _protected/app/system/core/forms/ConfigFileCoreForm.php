@@ -50,6 +50,8 @@ class ConfigFileCoreForm
                 $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array(1 => t('Enable'), 0 => t('Disable')), array('value' => $sVal)));
             elseif (false !== strpos($sKey, 'email'))
                 $oForm->addElement(new \PFBC\Element\Email($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
+            elseif (false !== strpos($sKey, 'environment'))
+                $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array('production' => t('Production'), 'development' => t('Development')), array('description' => t('If you see "Internal Server Error" message, please set to "development" mode in order to see the details of the error. If your site in on production server (and visible by everyone) please set the production mode.'), 'value' => $sVal)));
             elseif (ctype_digit($sVal))
                 $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', array('step' => 'any', 'value' => $sVal)));
             else
