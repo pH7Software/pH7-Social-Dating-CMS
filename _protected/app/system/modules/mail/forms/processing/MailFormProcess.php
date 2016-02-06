@@ -66,7 +66,7 @@ class MailFormProcess extends Form
                 // If the notification is accepted and the message recipient isn't connected NOW, we send a message.
                 if (!$oUserModel->isNotification($iRecipientId, 'newMsg') && $oUserModel->isOnline($iRecipientId, 0))
                 {
-                    $this->sendMail($iRecipientId, $mSendMsg);
+                    $this->sendMail($iRecipientId, $mSendMsg, $oUserModel);
                 }
 
                 $sUrl = ($bIsAdmin ? Uri::get(PH7_ADMIN_MOD, 'user', 'browse') : Uri::get('mail', 'main', 'index'));
@@ -77,7 +77,7 @@ class MailFormProcess extends Form
         }
     }
 
-    protected function sendMail($iRecipientId, $iMsgId)
+    protected function sendMail($iRecipientId, $iMsgId, UserCoreModel $oUserModel)
     {
         $this->view->content = t('Hello %0%!', $this->httpRequest->post('recipient')) . '<br />' .
         t('You received a new message from %0%', $this->session->get('member_username')) . '<br />' .
