@@ -51,8 +51,8 @@ class Gzip
         $this->_oHttpRequest = new HttpRequest;
 
         $this->_bCaching = (bool) Config::getInstance()->values['cache']['enable.static.cache'];
-        $this->_bCompressor = (bool) Config::getInstance()->values['cache']['enable.static.compressor'];
-        $this->_bGzipContent = (bool) Config::getInstance()->values['cache']['enable.static.gzip'];
+        $this->_bCompressor = (bool) Config::getInstance()->values['cache']['enable.static.minify'];
+        $this->_bGzipContent = (bool) Config::getInstance()->values['cache']['enable.static.gzip_compress'];
         $this->_bDataUri = (bool) Config::getInstance()->values['cache']['enable.static.data_uri'];
 
         $this->_bIsGzip = $this->isGzip();
