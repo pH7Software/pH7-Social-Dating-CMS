@@ -53,7 +53,7 @@ use PH7\Framework\Config\Config;
      */
     public static function is()
     {
-        return (Config::getInstance()->values['application']['environment'] === 'development');
+        return (Config::getInstance()->values['mode']['environment'] === 'development');
     }
 
     /**
