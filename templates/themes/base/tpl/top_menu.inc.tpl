@@ -234,10 +234,10 @@
 
         <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Gets Banners'}">{lang 'Banners'}</a></li>
 
-        <li class="dropdown"><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My account'}">{lang 'Account'}</a></li>
-            <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{lang 'Edit my account'}">{lang 'Edit my account'}</a></li>
+            <li><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My Account'}">{lang 'Account'}</a></li>
+            <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{lang 'Edit my Account'}">{lang 'Edit my account'}</a></li>
             <li><a href="{{ $design->url('affiliate','account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
             <li><a href="{{ $design->url('affiliate','home','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
           </ul>
