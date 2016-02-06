@@ -5,18 +5,18 @@
           <a rel="nofollow" href="{{ $design->url('page','main','about') }}" class="dropdown_item" data-load="ajax">{lang 'About %site_name%'}</a>
         </span>
         <ul class="show_dropdown">
-          <li><a href="{{ $design->url('page','main','about') }}" title="{lang 'About Us'}" data-load="ajax">{lang 'About Us'}</a></li>
-          <li><a href="{{ $design->url('page','main','helpus') }}" title="{lang 'Help Us'}" data-load="ajax">{lang 'Help Us'}</a></li>
+          <li><a href="{{ $design->url('page','main','about') }}" title="{lang 'About Us'}" data-load="ajax">{lang 'About'}</a></li>
+          <li><a href="{{ $design->url('page','main','helpus') }}" title="{lang 'Help Us'}" data-load="ajax">{lang 'Help'}</a></li>
 
           {if $is_blog_enabled}
-            <li><a href="{{ $design->url('blog','main','index') }}" title="{lang 'Our Blog'}" data-load="ajax">{lang 'Blog'}</a></li>
+            <li><a href="{{ $design->url('blog','main','index') }}" title="{lang 'Company Blog | News'}" data-load="ajax">{lang 'Blog'}</a></li>
           {/if}
 
           {if $is_affiliate_enabled}
             <li><a href="{{ $design->url('affiliate','home','index') }}" title="{lang 'Become an Affiliate'}">{lang 'Affiliate'}</a></li>
           {/if}
 
-          <li><a href="{{ $design->url('contact','contact','index') }}" title="{lang 'Contact us'}">{lang 'Contact us'}</a></li>
+          <li><a href="{{ $design->url('contact','contact','index') }}" title="{lang 'Contact Us'}">{lang 'Contact'}</a></li>
           <li><a href="{{ $design->url('page','main','partner') }}" title="{lang 'Our Partners'}" data-load="ajax">{lang 'Partners'}</a></li>
           <li><a href="{{ $design->url('page','main','link') }}" title="{lang 'Links'}" data-load="ajax">{lang 'Links'}</a></li>
           <li><a href="{{ $design->url('page','main','job') }}" title="{lang 'Jobs | Careers'}" data-load="ajax">{lang 'Jobs'}</a></li>
