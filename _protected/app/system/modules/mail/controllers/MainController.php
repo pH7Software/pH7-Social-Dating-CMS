@@ -88,10 +88,10 @@ class MainController extends Controller
 
             if (empty($oMail))
             {
-                $this->sTitle = t('Sorry!');
+                $this->sTitle = t('No message in your inbox');
                 $this->_notFound();
                 // We modified the default error message.
-                $this->view->error = t('Sorry %0%, you do not have any messages.', '<em>' . $this->session->get('member_first_name') . '</em>');
+                $this->view->error = t('Sorry %0%, you do not have any messages in your inbox.', '<em>' . $this->session->get('member_first_name') . '</em>');
             }
             else
             {
