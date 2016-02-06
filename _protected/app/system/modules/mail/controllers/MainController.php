@@ -35,7 +35,7 @@ class MainController extends Controller
 
         $this->view->member_id = $this->_iProfileId;
 
-        // Adding Css Style Content and JavaScript for Mail and Form
+        // Add Css Style Content and JavaScript for Mail and Form functions
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'mail.css');
         $this->design->addJs(PH7_DOT, PH7_STATIC . PH7_JS . 'form.js,' . PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'mail.js');
     }
@@ -47,7 +47,7 @@ class MainController extends Controller
 
     public function compose()
     {
-        // Added JS file for the Ajax autocomplete usernames list.
+        // Add JS file for the Ajax autocomplete usernames list.
         $this->design->addJs(PH7_STATIC . PH7_JS, 'autocompleteUsername.js');
         $this->view->page_title = t('MailBox : Compose a new message');
         $this->view->h2_title = t('Compose a new message');
@@ -90,7 +90,7 @@ class MainController extends Controller
             {
                 $this->sTitle = t('No message in your inbox');
                 $this->_notFound();
-                // We modified the default error message.
+                // We modify the default error message
                 $this->view->error = t('Sorry %0%, you do not have any messages in your inbox.', '<em>' . $this->session->get('member_first_name') . '</em>');
             }
             else
@@ -138,7 +138,7 @@ class MainController extends Controller
             {
                 $this->sTitle = t('Sorry!');
                 $this->_notFound();
-                // We modified the default error message.
+                // We modify the default error message
                 $this->view->error = t('No message found.');
             }
             else
@@ -187,7 +187,7 @@ class MainController extends Controller
             {
                 $this->sTitle = t('Sorry!');
                 $this->_notFound();
-                // We modified the default error message.
+                // We modify the default 404 error message
                 $this->view->error = t('No trash was found.');
             }
             else
