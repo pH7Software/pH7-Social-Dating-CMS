@@ -36,7 +36,7 @@ class Suggestion
     public static function email()
     {
         self::$_sFile = static::EMAIL_FILE;
-        return self::_gets();
+        return self::_get();
     }
 
    /**
@@ -46,7 +46,7 @@ class Suggestion
     * @static
     * @return string The transform words.
     */
-   private static function _gets()
+   private static function _get()
    {
        $aSuggestions = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
 
