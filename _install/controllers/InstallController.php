@@ -141,7 +141,7 @@ class InstallController extends Controller
                 $_SESSION['db']['charset'] = 'UTF8';
 
                 $_SESSION['val']['bug_report_email'] = '';
-                $_SESSION['val']['ffmpeg_path'] = (is_windows()) ? 'C:\ffmpeg\ffmpeg.exe' : '/usr/bin/ffmpeg';
+                $_SESSION['val']['ffmpeg_path'] = (is_windows() ? 'C:\ffmpeg\ffmpeg.exe' : (is_file('/usr/local/bin/ffmpeg') ? '/usr/local/bin/ffmpeg' : '/usr/bin/ffmpeg'));
             }
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_system_submit']))
