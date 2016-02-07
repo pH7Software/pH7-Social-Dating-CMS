@@ -115,7 +115,7 @@ class FileController extends Controller
      */
     private function _displayAction($sFile, $mExt = null)
     {
-        if (empty($this->sTitle)) 
+        if (empty($this->sTitle))
             $this->sTitle = t('File Management');
 
         $this->view->page_title = $this->sTitle;
