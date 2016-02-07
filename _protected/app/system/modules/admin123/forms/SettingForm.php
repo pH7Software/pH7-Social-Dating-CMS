@@ -88,7 +88,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image:') . '</h3>'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark text:'), 'watermark_text_image', array('value' => DbConfig::getSetting('watermarkTextImage'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Number(t('Size Watermark Text:'), 'size_watermark_text_image', array('description' => t('Between 0 to 5.'), 'pattern' => '[0-5]', 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Size Watermark Text:'), 'size_watermark_text_image', array('description' => t('Between 0 to 5.'), 'min' => 0, 'max' => 5, 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Video:') . '</h3>'));
         $oForm->addElement(new \PFBC\Element\Url(t('Default video:'), 'default_video', array('description' => t('Video by default if no video is found.'), 'value' => DbConfig::getSetting('defaultVideo'), 'required' => 1)));
