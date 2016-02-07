@@ -23,7 +23,7 @@ final class Version
     const KERNEL_VERSION_NAME = 'p[H]'; // 1.0 and 1.1 branches were "pOH", 1.2 branch is "pOW" and the new one will be "p[H]"
     const KERNEL_VERSION = '1.3.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2016-02-05';
+    const KERNEL_RELASE_DATE = '2016-02-09';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
