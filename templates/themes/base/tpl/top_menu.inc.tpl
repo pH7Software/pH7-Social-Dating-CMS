@@ -158,7 +158,7 @@
               <li><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'Inbox'}">{lang 'Inbox'}</a></li>
               <li><a href="{{ $design->url('mail','main','outbox') }}" title="{lang 'Outbox'}">{lang 'Outbox'}</a></li>
               <li><a href="{{ $design->url('mail','main','trash') }}" title="{lang 'Trash'}">{lang 'Trash'}</a></li>
-              <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search'}">{lang 'Search'}</a></li>
+              <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Find Messages'}">{lang 'Search'}</a></li>
             </ul>
           </li>
 
@@ -174,11 +174,11 @@
             </li>
           </noscript>
 
-          <li class="dropdown"><a href="{{ $design->url('user','account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('user','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'Settings'}</a></li>
-              <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See my Profile'}</a></li>
-              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change My Avatar'}">{lang 'Change my Avatar'}</a></li>
+              <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'My Settings'}</a></li>
+              <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See My Profile'}</a></li>
+              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change My Avatar'}">{lang 'Change My Avatar'}</a></li>
 
               {if $is_picture_enabled}
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Photo Gallery'}</a>
@@ -217,7 +217,7 @@
               <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Who See Me'}</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('user','visitor','index') }}" title="{lang 'Who Visited My Profile'}">{lang 'Who See Me'}</a></li>
-                  <li><a href="{{ $design->url('user','visitor','search') }}" title="{lang 'Find someone who has visited my profile'}">{lang 'Find some Visitor(s)'}</a></li>
+                  <li><a href="{{ $design->url('user','visitor','search') }}" title="{lang 'Find who visited my profile'}">{lang 'Find Visitor(s)'}</a></li>
                 </ul>
               </li>
 
