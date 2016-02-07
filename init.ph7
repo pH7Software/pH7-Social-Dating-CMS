@@ -21,7 +21,7 @@ define('PH7_REQUIRE_SERVER_VERSION', '5.5.0');
 define('PH7_REQUIRE_SQL_VERSION', '5.0');
 
 if (version_compare(PHP_VERSION, PH7_REQUIRE_SERVER_VERSION, '<'))
-    exit('ERROR: Your PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.');
+    exit('ERROR: Your current PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.');
 
 // If no system settings, go install
 if (!is_file(__DIR__ . '/_constants.php'))
