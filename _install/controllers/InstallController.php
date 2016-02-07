@@ -57,7 +57,7 @@ class InstallController extends Controller
     public function index ()
     {
         $aLangs = get_dir_list(PH7_ROOT_INSTALL . 'langs/');
-        $aLangsList = include(PH7_ROOT_INSTALL . 'inc/lang_list.inc.php');
+        $aLangsList = include PH7_ROOT_INSTALL . 'inc/lang_list.inc.php';
         $sLangSelect = '';
 
         foreach ($aLangs as $sLang)
@@ -158,9 +158,9 @@ class InstallController extends Controller
                     {
                         try
                         {
-                            require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
-                            @require_once(PH7_ROOT_PUBLIC . '_constants.php');
-                            @require_once(PH7_PATH_APP . 'configs/constants.php');
+                            require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
+                            @require_once PH7_ROOT_PUBLIC . '_constants.php';
+                            @require_once PH7_PATH_APP . 'configs/constants.php';
 
                             // Config File
                             @chmod(PH7_PATH_APP_CONFIG, 0777);
@@ -299,16 +299,17 @@ class InstallController extends Controller
                                             {
                                                 if (validate_name($_SESSION['val']['admin_last_name']))
                                                 {
-                                                    @require_once(PH7_ROOT_PUBLIC . '_constants.php');
-                                                    @require_once(PH7_PATH_APP . 'configs/constants.php');
+                                                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
+                                                    @require_once PH7_PATH_APP . 'configs/constants.php';
+                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
 
-                                                    require(PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php');
+                                                    require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
                                                     // To load "Security" class.
                                                     Framework\Loader\Autoloader::getInstance()->init();
 
                                                     try
                                                     {
-                                                        require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
+                                                        require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                                                         // SQL EXECUTE
                                                         $rStmt = $DB->prepare('INSERT INTO ' . $_SESSION['db']['prefix'] . 'Admins
@@ -462,12 +463,12 @@ class InstallController extends Controller
 
                     if ($bUpdateNeeded)
                     {
-                        @require_once(PH7_ROOT_PUBLIC . '_constants.php');
-                        @require_once(PH7_PATH_APP . 'configs/constants.php');
+                        @require_once PH7_ROOT_PUBLIC . '_constants.php';
+                        @require_once PH7_PATH_APP . 'configs/constants.php';
 
                         try
                         {
-                            require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
+                            require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                             foreach ($aModUpdated as $sModName => $sStatus)
                                 $this->_updateMods($DB, $sModName, $sStatus);
@@ -524,12 +525,12 @@ class InstallController extends Controller
                 $sKey = trim($_POST['license']);
                 if (check_license($sKey))
                 {
-                    @require_once(PH7_ROOT_PUBLIC . '_constants.php');
-                    @require_once(PH7_PATH_APP . 'configs/constants.php');
+                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
+                    @require_once PH7_PATH_APP . 'configs/constants.php';
 
                     try
                     {
-                        require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
+                        require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                         $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'License SET licenseKey = :key WHERE licenseId = 1');
                         $rStmt->execute(['key' => $sKey]);
@@ -563,7 +564,7 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        @require_once(PH7_ROOT_PUBLIC . '_constants.php');
+        @require_once PH7_ROOT_PUBLIC . '_constants.php';
 
         if (!empty($_SESSION['val']['admin_login_email']))
         {
