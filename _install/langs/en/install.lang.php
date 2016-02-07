@@ -19,7 +19,7 @@ $LANG = array (
     Thank you for choosing our CMS and we hope it will please you.</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
     'requirements_desc' => 'WARNING! Please be sure that your server has the necessary <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">requirements</a> to run pH7CMS.',
-    'requirements2_desc' => 'First all, please create a MySQL database and assign a user to it with full privileges. Once you have created the MySQL database and its user, make sure to write down the database name, database username and password, because you will need them for installation.',
+    'requirements2_desc' => 'First off, please create a MySQL database and assign a user to it with full privileges. Once you have created the MySQL database and its user, make sure to write down the database name, database username and password, because you will need them for installation.',
     'config_path' => '&quot;protected&quot; directory path',
     'desc_config_path' => 'Please specify the full path to your &quot;protected&quot; folder.<br />
     It is wise and advisable (but in any case not mandatory) to put this directory outside the public root of the your Web server.',
