@@ -35,7 +35,7 @@ abstract class Emoticon
      * @static
      * @return array
      */
-    protected static function gets()
+    protected static function get()
     {
         return include PH7_PATH_APP_CONFIG . 'emoticon.php';
     }
