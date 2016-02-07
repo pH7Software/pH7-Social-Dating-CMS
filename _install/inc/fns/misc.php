@@ -278,6 +278,21 @@ function generate_hash($iLength = 80)
 }
 
 /**
+ * Try to find and get the FFmpeg path if it is installed (note I don't use system command like "which ffmpeg" for portability reason).
+ *
+ * @return string The appropriate FFmpeg path.
+ */
+function ffmpeg_path()
+{
+    if (is_windows())
+        $sPath = (is_file('C:\ffmpeg\bin\ffmpeg.exe')) ? 'C:\ffmpeg\bin\ffmpeg.exe' : 'C:\ffmpeg\ffmpeg.exe';
+    else
+        $sPath = (is_file('/usr/local/bin/ffmpeg')) ? '/usr/local/bin/ffmpeg' : '/usr/bin/ffmpeg';
+
+    return $sPath;
+}
+
+/**
  * Check if Apache's mod_rewrite is installed.
  *
  * @return boolean
