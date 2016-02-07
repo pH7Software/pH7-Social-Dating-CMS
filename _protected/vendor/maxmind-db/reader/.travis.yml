@@ -5,6 +5,7 @@ php:
   - 5.4
   - 5.5
   - 5.6
+  - 7.0
   - hhvm
 
 before_install:
@@ -24,7 +25,7 @@ after_script:
 notifications:
   email:
     recipients:
-      - dev@maxmind.com
+      - dev-ci@maxmind.com
     on_success: change
     on_failure: always
 
@@ -37,6 +38,6 @@ addons:
     project:
       name: "maxmind/MaxMind-DB-Reader-php"
       description: "Build submitted via Travis CI"
-    notification_email: dev@maxmind.com
+    notification_email: dev-ci@maxmind.com
     build_command:   "./.travis-build.sh"
     branch_pattern: .*coverity.*
