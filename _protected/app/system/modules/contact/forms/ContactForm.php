@@ -31,7 +31,7 @@ class ContactForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter your valid email address.'), 'required'=> 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
-        $oForm->addElement(new \PFBC\Element\Phone(t('Your Phone Number:'), 'phone', array('id'=>'phone', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter full phone number with area code.'))));
+        $oForm->addElement(new \PFBC\Element\Phone(t('Your Phone Number:'), 'phone', array('id'=>'phone', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter full phone number with area code (e.g., +44768374890).'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
         $oForm->addElement(new \PFBC\Element\Url(t('Your Website:'), 'website', array('id'=>'url', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('If you have a website, please enter your site address.'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error url"></span>'));

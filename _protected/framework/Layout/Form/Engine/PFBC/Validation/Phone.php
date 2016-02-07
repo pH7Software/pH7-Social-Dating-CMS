@@ -11,7 +11,7 @@ class Phone extends \PFBC\Validation
     public function __construct()
     {
         parent::__construct();
-        $this->message = t('Error: Your phone number is incorrect. Please enter full phone number with area code.');
+        $this->message = t('Error: Your phone number is incorrect. Please enter full phone number with area code (e.g., +44768374890).');
     }
 
     public function isValid($sValue)
