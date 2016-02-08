@@ -64,7 +64,7 @@ class Design
 
         foreach ($aLangs as $sLang)
         {
-            if ($sLang === PH7_LANG_NAME) continue;
+            if ($sLang === PH7_LANG_NAME) continue; // Skip the current lang
 
                 // Retrieve only the first two characters
                 $sAbbrLang = substr($sLang,0,2);
