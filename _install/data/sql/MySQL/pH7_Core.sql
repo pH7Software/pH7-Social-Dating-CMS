@@ -663,7 +663,7 @@ CREATE TABLE IF NOT EXISTS pH7_LanguagesInfo (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_LanguagesInfo (langId, name, charset, active, direction, author, website, email) VALUES
-('en_US', 'English', 'UTF-8', '1', 'ltr', 'Pierre-Henry Soria', 'http://hizup.com', 'phs@hizup.com');
+('en_US', 'English', 'UTF-8', '1', 'ltr', 'Pierre-Henry Soria', 'http://hizup.com', 'phs@hizup.net');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Likes (
