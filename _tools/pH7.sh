@@ -170,8 +170,8 @@ function backup() {
 
 # Clean coding-style. Set PSR-* Ident Style (http://cs.sensiolabs.org)
 function _clean-indent() {
-    indents=indentation,function_declaration,function_call_space,
-function_typehint_space,line_after_namespace,linefeed,trailing_spaces,eof_ending,php_closing_tag,multiple_use,parenthesis,extra_empty_lines,short_tag,php4_constructor,phpdoc_scalar,
+    indents=indentation,function_declaration,function_typehint_space,
+method_argument_space,line_after_namespace,empty_return,linefeed,trailing_spaces,eof_ending,php_closing_tag,multiple_use,parenthesis,extra_empty_lines,short_tag,php4_constructor,phpdoc_scalar,
 lowercase_keywords,lowercase_constants,array_element_no_space_before_comma,array_element_white_space_after_comma,
 extra_empty_lines ,encoding
     cs_script="./_tools/php-cs-fixer.phar"
