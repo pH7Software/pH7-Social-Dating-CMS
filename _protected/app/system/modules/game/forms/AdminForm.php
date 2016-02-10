@@ -30,7 +30,7 @@ class AdminForm
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
-        $oForm = new \PFBC\Form('form_game', 650);
+        $oForm = new \PFBC\Form('form_game');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_game', 'form_game'));
         $oForm->addElement(new \PFBC\Element\Token('game'));

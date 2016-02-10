@@ -44,57 +44,6 @@
         "homepage": "https://github.com/maxmind/mm-web-service-api-php"
     },
     {
-        "name": "maxmind-db/reader",
-        "version": "v1.0.3",
-        "version_normalized": "1.0.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
-            "reference": "07f211ab596ba60f9663d9984b888f76ee1beac9"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/07f211ab596ba60f9663d9984b888f76ee1beac9",
-            "reference": "07f211ab596ba60f9663d9984b888f76ee1beac9",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.1"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.2.*",
-            "satooshi/php-coveralls": "dev-master"
-        },
-        "time": "2015-03-13 22:35:13",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "MaxMind": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Gregory J. Oschwald",
-                "email": "goschwald@maxmind.com",
-                "homepage": "http://www.maxmind.com/"
-            }
-        ],
-        "description": "MaxMind DB Reader API",
-        "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
-        "keywords": [
-            "database",
-            "geoip",
-            "geoip2",
-            "geolocation",
-            "maxmind"
-        ]
-    },
-    {
         "name": "geoip2/geoip2",
         "version": "v2.3.3",
         "version_normalized": "2.3.3.0",
@@ -148,17 +97,17 @@
     },
     {
         "name": "stripe/stripe-php",
-        "version": "v3.5.0",
-        "version_normalized": "3.5.0.0",
+        "version": "v3.7.1",
+        "version_normalized": "3.7.1.0",
         "source": {
             "type": "git",
             "url": "https://github.com/stripe/stripe-php.git",
-            "reference": "0ec0ce46278db7d9d35df72a236c3490b713f028"
+            "reference": "c3f6e545060b1f679c7fb1d06753dedca1dcfb02"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/0ec0ce46278db7d9d35df72a236c3490b713f028",
-            "reference": "0ec0ce46278db7d9d35df72a236c3490b713f028",
+            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/c3f6e545060b1f679c7fb1d06753dedca1dcfb02",
+            "reference": "c3f6e545060b1f679c7fb1d06753dedca1dcfb02",
             "shasum": ""
         },
         "require": {
@@ -172,7 +121,7 @@
             "satooshi/php-coveralls": "~0.6.1",
             "squizlabs/php_codesniffer": "~2.0"
         },
-        "time": "2015-12-02 00:11:27",
+        "time": "2016-02-01 14:58:59",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -201,6 +150,58 @@
             "api",
             "payment processing",
             "stripe"
+        ]
+    },
+    {
+        "name": "maxmind-db/reader",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
+            "reference": "1383655533aa2f13a990b27b075fdde8b7bdd5ff"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/1383655533aa2f13a990b27b075fdde8b7bdd5ff",
+            "reference": "1383655533aa2f13a990b27b075fdde8b7bdd5ff",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.2.*",
+            "satooshi/php-coveralls": "dev-master",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2016-01-04 15:38:11",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "MaxMind": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Gregory J. Oschwald",
+                "email": "goschwald@maxmind.com",
+                "homepage": "http://www.maxmind.com/"
+            }
+        ],
+        "description": "MaxMind DB Reader API",
+        "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
+        "keywords": [
+            "database",
+            "geoip",
+            "geoip2",
+            "geolocation",
+            "maxmind"
         ]
     }
 ]

@@ -1,4 +1,4 @@
-<div class="right animated fadeInRight">
+<div class="right col-md-4 animated fadeInRight">
     <h1 class="pink2 italic underline">{lang 'Be on the best place to meet people!'}</h1>
     <div class="center">
         <a href="{{ $design->url('user','main','login') }}" class="btn btn-primary btn-lg"><strong>{lang 'Login'}</strong></a>
@@ -8,16 +8,14 @@
     <div class="counter center">{{ $userDesign->counterUsers() }}</div>
 </div>
 
-<div class="left">
+<div class="left col-md-8">
   <div class="folio_block">
     <h1 class="pink2 italic underline">{slogan}</h1>
 
     <div class="splash_slideshow">
       <div class="window">
         <div class="img_reel">
-          {* For PHP 5.5+, keep just only the following *} {* {for $i in [1,2,3,4,5]} *}
-          {{ $num = [1,2,3,4,5] }}
-          {for $i in $num}
+          {for $i in [1,2,3,4,5]}
             <a href="{url_root}"><img src="{url_tpl_img}slideshow/{i}.jpg" alt="{lang 'Social Dating Web App'}" /></a>
           {/for}
         </div>

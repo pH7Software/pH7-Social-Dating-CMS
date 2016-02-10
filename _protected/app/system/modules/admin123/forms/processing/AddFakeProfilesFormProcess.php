@@ -78,10 +78,11 @@ class AddFakeProfilesFormProcess extends Form
     {
         if ($rFile = $this->file->getUrlContents($aData['avatar']))
         {
+            // Create a temporary file before creating the avatar images
             $sTmpFile = PH7_PATH_TMP . PH7_DS . uniqid() . sha1($aData['avatar']) . '.tmp';
             $this->file->putFile($sTmpFile, $rFile);
-            $oUser->setAvatar($aData['profile_id'], $aData['username'], $sTmpFile, 1);
-            $this->file->deleteFile($sTmpFile);
+            $oUser->setAvatar($aData['profile_id'], $aData['username'], $sTmpFile, 1); // Create the different avatar sizes and set the avatar
+            $this->file->deleteFile($sTmpFile);// remove the temporary file as we don't need anymore
         }
     }
 

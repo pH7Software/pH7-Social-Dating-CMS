@@ -1,7 +1,7 @@
 /**
  * Russian translation
  * @author Dmitry "dio" Levashov <dio@std42.ru>
- * @version 2011-07-15
+ * @version 2014-12-19
  */
 if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object') {
     elFinder.prototype.i18.ru = {
@@ -50,28 +50,47 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errRename'            : 'Ошибка переименования "$1".',
             'errCopyFrom'          : 'Копирование из корневой директории "$1" запрещено.',
             'errCopyTo'            : 'Копирование в корневую директорию "$1" запрещено.',
-            'errUploadCommon'      : 'Ошибка загрузки файлов.',
-            'errUpload'            : 'Ошибка загрузки "$1".',
+            'errUpload'            : 'Ошибка загрузки файлов.',
+            'errUploadFile'        : 'Невозможно загрузить файл "$1"',
             'errUploadNoFiles'     : 'Отсутствуют загруженые файлы.',
-            'errMaxSize'           : 'Превышен допустимый размер загружаемых файлов.',
-            'errFileMaxSize'       : 'Размер файла превышает допустимый.',
+            'errUploadTotalSize'   : 'Превышен допустимый размер загружаемых файлов.',
+            'errUploadFileSize'    : 'Размер файла превышает допустимый.',
             'errUploadMime'        : 'Недопустимый тип файла.',
             'errUploadTransfer'    : 'Ошибка передачи файла "$1".',
+            'errNotReplace'        : 'Object "$1" already exists at this location and can not be replaced by object with another type.',
+            'errReplace'           : 'Unable to replace "$1".',
             'errSave'              : 'Ошибка сохранения "$1".',
             'errCopy'              : 'Ошибка копирования "$1".',
             'errMove'              : 'Ошибка перемещения "$1".',
             'errCopyInItself'      : 'Невозможно скопировать "$1" в самого себя.',
             'errRm'                : 'Ошибка удаления "$1".',
+            'errRmSrc'             : 'Unable remove source file(s).',
             'errExtract'           : 'Ошибка извлечения файлов из архива "$1".',
             'errArchive'           : 'Ошибка создания архива.',
             'errArcType'           : 'Неподдерживаемый тип архива.',
             'errNoArchive'         : 'Файл не является архивом допустимого типа.',
             'errCmdNoSupport'      : 'Сервер не поддерживает эту комманду.',
             'errReplByChild'       : 'Невозможно заменить папку "$1" содержащимся в ней объектом.',
-            'errArcSymlinks'       : 'По соображениям безопасности запрещена распаковка архивов, содержащих ссылки (symlinks).',
+            'errArcSymlinks'       : 'По соображениям безопасности запрещена распаковка архивов, содержащих ссылки (symlinks) или файлы с недопустимыми именами.', // edited 24.06.2012
             'errArcMaxSize'        : 'Размер файлов в архиве превышает максимально разрешенный.',
             'errResize'            : 'Не удалось изменить размер "$1".',
+            'errResizeDegree'      : 'Invalid rotate degree.',
+            'errResizeRotate'      : 'Unable to rotate image.',
+            'errResizeSize'        : 'Invalid image size.',
+            'errResizeNoChange'    : 'Image size not changed.',
             'errUsupportType'      : 'Неподдерживаемый тип файла.',
+            'errNotUTF8Content'    : 'Файл "$1" содержит текст в кодировке отличной от UTF-8 и не может быть отредактирован.',  // added 9.11.2011
+            'errNetMount'          : 'Не удалось подключить "$1".',    // added 17.04.2012
+            'errNetMountNoDriver'  : 'Неподдерживаемый протокол.',     // added 17.04.2012
+            'errNetMountFailed'    : 'Ошибка монтирования.',           // added 17.04.2012
+            'errNetMountHostReq'   : 'Host required.', // added 18.04.2012
+            'errSessionExpires'    : 'Сессия была завершена так как превышено время отсутствия активности',
+            'errCreatingTempDir'   : 'Ошибка при создании временной директории: "$1"',
+            'errFtpDownloadFile'   : 'Ошибка при скачивании файла с FTP: "$1"',
+            'errFtpUploadFile'     : 'Ошибка при загрузке файла на FTP: "$1"',
+            'errFtpMkdir'          : 'Ошибка при создании директории на FTP: "$1"',
+            'errArchiveExec'       : 'Ошибка при выполнении архивации: "$1"',
+            'errExtractExec'       : 'Ошибка при выполнении распаковки: "$1"',
 
             /******************************* commands names ********************************/
             'cmdarchive'   : 'Создать архив',
@@ -101,15 +120,17 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'cmdview'      : 'Вид',
             'cmdresize'    : 'Размер изображения',
             'cmdsort'      : 'Сортировать',
+            'cmdnetmount'  : 'Mount network volume',
 
             /*********************************** buttons ***********************************/
             'btnClose'  : 'Закрыть',
             'btnSave'   : 'Сохранить',
             'btnRm'     : 'Удалить',
-            'btnCancel' : 'Отмена',
             'btnApply'  : 'Применить',
+            'btnCancel' : 'Отмена',
             'btnNo'     : 'Нет',
             'btnYes'    : 'Да',
+            'btnMount'  : 'Подключить',  // added 18.04.2012
 
             /******************************** notifications ********************************/
             'ntfopen'     : 'Открытие папки',
@@ -128,24 +149,28 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'ntfarchive'  : 'Создание архива',
             'ntfextract'  : 'Распаковка архива',
             'ntfsearch'   : 'Поиск файлов',
-            'ntfsmth'     : 'Занят важным делом desu >_<',
+            'ntfresize'   : 'Resizing images',
+            'ntfsmth'     : 'Занят важным делом',
+            'ntfloadimg'  : 'Loading image',
+            'ntfnetmount' : 'Монтирую сетевой диск', // added 18.04.2012
+            'ntfdim'      : 'Acquiring image dimension',
 
             /************************************ dates **********************************/
             'dateUnknown' : 'Незвестно',
             'Today'       : 'Сегодня',
             'Yesterday'   : 'Вчера',
-            'Jan'         : 'Янв',
-            'Feb'         : 'Фев',
-            'Mar'         : 'Мар',
-            'Apr'         : 'Апр',
-            'May'         : 'Май',
-            'Jun'         : 'Июнь',
-            'Jul'         : 'Июль',
-            'Aug'         : 'Авг',
-            'Sep'         : 'Сен',
-            'Oct'         : 'Окт',
-            'Nov'         : 'Ноя',
-            'Dec'         : 'Дек',
+            'msJan'       : 'Янв',
+            'msFeb'       : 'Фев',
+            'msMar'       : 'Мар',
+            'msApr'       : 'Апр',
+            'msMay'       : 'Май',
+            'msJun'       : 'Июнь',
+            'msJul'       : 'Июль',
+            'msAug'       : 'Авг',
+            'msSep'       : 'Сен',
+            'msOct'       : 'Окт',
+            'msNov'       : 'Ноя',
+            'msDec'       : 'Дек',
             'January'     : 'Январь',
             'February'    : 'Февраль',
             'March'       : 'Март',
@@ -174,14 +199,11 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'Sat'         : 'Сбт',
 
             /******************************** sort variants ********************************/
-            'sortnameDirsFirst' : 'по имени (папки в начале)',
-            'sortkindDirsFirst' : 'по типу (папки в начале)',
-            'sortsizeDirsFirst' : 'по размеру (папки в начале)',
-            'sortdateDirsFirst' : 'по дате (папки в начале)',
             'sortname'          : 'по имени',
             'sortkind'          : 'по типу',
             'sortsize'          : 'по размеру',
             'sortdate'          : 'по дате',
+            'sortFoldersFirst'  : 'Папки в начале',
 
             /********************************** messages **********************************/
             'confirmReq'      : 'Необходимо подтверждение.',
@@ -223,7 +245,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'help'            : 'Помощь',
             'webfm'           : 'Файловый менеджер для web',
             'ver'             : 'Версия',
-            'protocol'        : 'версия протокола',
+            'protocolver'     : 'версия протокола',
             'homepage'        : 'Сайт проекта',
             'docs'            : 'Документация',
             'github'          : 'Fork us on Github',
@@ -244,8 +266,6 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'moveFiles'       : 'Перемещение файлов',
             'copyFiles'       : 'Копирование файлов',
             'rmFromPlaces'    : 'Удалить из избранного',
-            'untitled folder' : 'новая папка',
-            'untitled file.txt' : 'новый файл.txt',
             'aspectRatio'     : 'Сохранять пропорции',
             'scale'           : 'Масштаб',
             'width'           : 'Ширина',
@@ -256,6 +276,12 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'rotate-cw'       : 'Поворот на 90 градусов по часовой стрелке',
             'rotate-ccw'      : 'Поворот на 90 градусов против часовой стрелке',
             'degree'          : '°',
+            'netMountDialogTitle' : 'Подключить сетевой диск', // added 18.04.2012
+            'protocol'            : 'Протокол', // added 18.04.2012
+            'host'                : 'Хост', // added 18.04.2012
+            'port'                : 'Порт', // added 18.04.2012
+            'user'                : 'Пользователь', // added 18.04.2012
+            'pass'                : 'Пароль', // added 18.04.2012
 
             /********************************** mimetypes **********************************/
             'kindUnknown'     : 'Неизвестный',
@@ -277,6 +303,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'kindTAR'         : 'Архив TAR',
             'kindGZIP'        : 'Архив GZIP',
             'kindBZIP'        : 'Архив BZIP',
+            'kindXZ'          : 'Архив XZ',
             'kindZIP'         : 'Архив ZIP',
             'kindRAR'         : 'Архив RAR',
             'kindJAR'         : 'Файл Java JAR',
@@ -334,11 +361,6 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'kindVideoFlash'  : 'Видео Flash',
             'kindVideoMKV'    : 'Видео Matroska',
             'kindVideoOGG'    : 'Видео Ogg'
-
         }
-    }
+    };
 }
-
-
-
-

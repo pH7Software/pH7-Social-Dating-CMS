@@ -1,6 +1,7 @@
 <?php
 /*
- * Notice: This file has been slightly modified by the pH7CMS development team <http://software.hizup.com>.
+ * Notice: This file has been modified by the pH7CMS development team (well by Pierre-Henry Soria) <http://software.hizup.com>.
+ * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with the new PHP version).
  */
 defined('PH7') or exit('Restricted access');
 
@@ -103,7 +104,7 @@ class gettext_reader {
    * @param object Reader the StreamReader object
    * @param boolean enable_cache Enable or disable caching of strings (default on)
    */
-  function gettext_reader($Reader, $enable_cache = true) {
+  public function __construct($Reader, $enable_cache = true) {
     // If there isn't a StreamReader, turn on short circuit mode.
     if (! $Reader || isset($Reader->error) ) {
       $this->short_circuit = true;
@@ -355,6 +356,10 @@ class gettext_reader {
    * @return int array index of the right plural form
    */
   function select_string($n) {
+    if (!is_int($n)) {
+      throw new InvalidArgumentException(
+        "Select_string only accepts integers: " . $n);
+    }
     $string = $this->get_plural_forms();
     $string = str_replace('nplurals',"\$total",$string);
     $string = str_replace("n",$n,$string);

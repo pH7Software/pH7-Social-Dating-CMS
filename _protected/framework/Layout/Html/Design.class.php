@@ -64,7 +64,7 @@ class Design
 
         foreach ($aLangs as $sLang)
         {
-            if ($sLang === PH7_LANG_NAME) continue;
+            if ($sLang === PH7_LANG_NAME) continue; // Skip the current lang
 
                 // Retrieve only the first two characters
                 $sAbbrLang = substr($sLang,0,2);
@@ -230,7 +230,7 @@ class Design
     public function url($sModule, $sController, $sAction, $sVars = null, $bClear = true)
     {
         $sUrl = Uri::get($sModule, $sController, $sAction, $sVars, $bClear);
-        echo Url::clean($sUrl); // For the parameters in the URL to make a valid HTML code
+        echo Url::clean($sUrl); // For the URL parameters to avoid invalid HTML code
     }
 
     /**
@@ -338,7 +338,7 @@ class Design
                 ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
                 ['title' => 'Site de Tchat 100% Gratuit', 'link' => 'http://01tchat.com'],
                 ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => ' Site de Rencontre bourgeois', 'link' => 'http://bourgeoisie.club']
+                ['title' => ' Site de Rencontre Bourgeois', 'link' => 'http://bourgeoisie.club']
             ];
         } else { // Default links, set to English
             $aSites = [
@@ -346,7 +346,8 @@ class Design
                 ['title' => 'Flirt Hot Girls', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Flirt Naughty Girls', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],
-                ['title' => 'Learn Languages Online', 'link' => 'http://newayup.com']
+                ['title' => 'Learn Languages Online', 'link' => 'http://newayup.com'],
+                ['title' => 'Web Hosting Service', 'link' => 'http://hosting.hizup.net']
             ];
         }
 
@@ -676,7 +677,7 @@ class Design
     {
         $sReportLink = (\PH7\UserCore::auth()) ?
             Uri::get('report', 'main', 'abuse', '?spammer=' . $iId . '&amp;url=' . $this->oHttpRequest->currentUrl() . '&amp;type=' . Registry::getInstance()->module, false) . '" data-popup="block-page' :
-            Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(['msg' => t('You must register to report this person.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex]), false);
+            Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(['msg' => t('You must be registered to report contents.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex]), false);
 
         echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
     }

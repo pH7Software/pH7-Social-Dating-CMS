@@ -1,4 +1,4 @@
-<!-- Last Update: 12/15/2015 by Pierre-Henry Soria -->
+<!-- Last Update: 02/03/2016 by Pierre-Henry Soria -->
 
 <h1>pH7CMS Tree</h1>
 
@@ -135,6 +135,7 @@
 │   │   │   ├── install.tpl
 │   │   │   ├── introduction.tpl
 │   │   │   ├── JS_DOC.help.txt
+│   │   │   ├── nginx-configuration.tpl
 │   │   │   ├── pH.tpl
 │   │   │   ├── rename-the-admin-folder.tpl
 │   │   │   ├── requirements.tpl
@@ -166,6 +167,78 @@
 │   ├── LICENSE
 │   ├── README
 │   ├── static
+│   │   ├── highlight
+│   │   │   ├── highlight.js
+│   │   │   └── styles
+│   │   │       ├── agate.css
+│   │   │       ├── androidstudio.css
+│   │   │       ├── arduino-light.css
+│   │   │       ├── arta.css
+│   │   │       ├── ascetic.css
+│   │   │       ├── atelier-cave-dark.css
+│   │   │       ├── atelier-cave-light.css
+│   │   │       ├── atelier-dune-dark.css
+│   │   │       ├── atelier-dune-light.css
+│   │   │       ├── atelier-estuary-dark.css
+│   │   │       ├── atelier-estuary-light.css
+│   │   │       ├── atelier-forest-dark.css
+│   │   │       ├── atelier-forest-light.css
+│   │   │       ├── atelier-heath-dark.css
+│   │   │       ├── atelier-heath-light.css
+│   │   │       ├── atelier-lakeside-dark.css
+│   │   │       ├── atelier-lakeside-light.css
+│   │   │       ├── atelier-plateau-dark.css
+│   │   │       ├── atelier-plateau-light.css
+│   │   │       ├── atelier-savanna-dark.css
+│   │   │       ├── atelier-savanna-light.css
+│   │   │       ├── atelier-seaside-dark.css
+│   │   │       ├── atelier-seaside-light.css
+│   │   │       ├── atelier-sulphurpool-dark.css
+│   │   │       ├── atelier-sulphurpool-light.css
+│   │   │       ├── brown-paper.css
+│   │   │       ├── brown-papersq.png
+│   │   │       ├── codepen-embed.css
+│   │   │       ├── color-brewer.css
+│   │   │       ├── dark.css
+│   │   │       ├── darkula.css
+│   │   │       ├── default.css
+│   │   │       ├── docco.css
+│   │   │       ├── far.css
+│   │   │       ├── foundation.css
+│   │   │       ├── github.css
+│   │   │       ├── github-gist.css
+│   │   │       ├── googlecode.css
+│   │   │       ├── grayscale.css
+│   │   │       ├── hopscotch.css
+│   │   │       ├── hybrid.css
+│   │   │       ├── idea.css
+│   │   │       ├── ir-black.css
+│   │   │       ├── kimbie.dark.css
+│   │   │       ├── kimbie.light.css
+│   │   │       ├── magula.css
+│   │   │       ├── mono-blue.css
+│   │   │       ├── monokai.css
+│   │   │       ├── monokai-sublime.css
+│   │   │       ├── obsidian.css
+│   │   │       ├── paraiso-dark.css
+│   │   │       ├── paraiso-light.css
+│   │   │       ├── pojoaque.css
+│   │   │       ├── pojoaque.jpg
+│   │   │       ├── railscasts.css
+│   │   │       ├── rainbow.css
+│   │   │       ├── school-book.css
+│   │   │       ├── school-book.png
+│   │   │       ├── solarized-dark.css
+│   │   │       ├── solarized-light.css
+│   │   │       ├── sunburst.css
+│   │   │       ├── tomorrow.css
+│   │   │       ├── tomorrow-night-blue.css
+│   │   │       ├── tomorrow-night-bright.css
+│   │   │       ├── tomorrow-night.css
+│   │   │       ├── tomorrow-night-eighties.css
+│   │   │       ├── vs.css
+│   │   │       ├── xcode.css
+│   │   │       └── zenburn.css
 │   │   ├── img
 │   │   │   ├── flags
 │   │   │   │   ├── ad.gif
@@ -425,7 +498,8 @@
 │   │   │   ├── pH.png
 │   │   │   └── seo_tags.png
 │   │   └── js
-│   │       └── ajph.js
+│   │       ├── ajph.js
+│   │       └── jquery.js
 │   └── themes
 │       └── base
 │           ├── css
@@ -639,6 +713,7 @@
 │           │   └── header.tpl
 │           ├── index.tpl
 │           ├── license.tpl
+│           ├── niche.tpl
 │           └── service.tpl
 ├── installation_instructions.txt
 ├── PH7.COPYRIGHT.txt
@@ -780,6 +855,7 @@
 │   │       │   │   ├── RegistrationCore.php
 │   │       │   │   ├── Security.php
 │   │       │   │   ├── UserCore.php
+│   │       │   │   ├── ValidateSiteCore.php
 │   │       │   │   ├── VideoCore.php
 │   │       │   │   └── WriteCore.php
 │   │       │   ├── forms
@@ -824,6 +900,7 @@
 │   │       │       ├── StatisticCoreModel.php
 │   │       │       ├── UpgradeCoreModel.php
 │   │       │       ├── UserCoreModel.php
+│   │       │       ├── ValidateSiteCoreModel.php
 │   │       │       └── VideoCoreModel.php
 │   │       ├── global
 │   │       │   └── views
@@ -878,13 +955,25 @@
 │   │           │   │           ├── elFinder.class.php
 │   │           │   │           ├── elFinderConnector.class.php
 │   │           │   │           ├── elFinderVolumeDriver.class.php
+│   │           │   │           ├── elFinderVolumeDropbox.class.php
+│   │           │   │           ├── elFinderVolumeFTP.class.php
 │   │           │   │           ├── elFinderVolumeLocalFileSystem.class.php
 │   │           │   │           ├── elFinderVolumeMySQL.class.php
+│   │           │   │           ├── elFinderVolumeS3.class.php
 │   │           │   │           ├── mime.types
-│   │           │   │           ├── MySQLStorage.sql
+│   │           │   │           ├── plugins
+│   │           │   │           │   ├── AutoResize
+│   │           │   │           │   │   └── plugin.php
+│   │           │   │           │   ├── Normalizer
+│   │           │   │           │   │   └── plugin.php
+│   │           │   │           │   ├── Sanitizer
+│   │           │   │           │   │   └── plugin.php
+│   │           │   │           │   └── Watermark
+│   │           │   │           │       ├── logo.png
+│   │           │   │           │       └── plugin.php
 │   │           │   │           ├── protectedConnectorAjax.php
 │   │           │   │           ├── publicConnectorAjax.php
-│   │           │   │           └── README.txt
+│   │           │   │           └── README.md
 │   │           │   ├── config
 │   │           │   │   ├── config.ini
 │   │           │   │   └── Permission.php
@@ -905,6 +994,7 @@
 │   │           │   │   ├── AddUserForm.php
 │   │           │   │   ├── AdsForm.php
 │   │           │   │   ├── AnalyticsApiForm.php
+│   │           │   │   ├── DisableModuleForm.php
 │   │           │   │   ├── EditForm.php
 │   │           │   │   ├── ImportUserForm.php
 │   │           │   │   ├── LicenseForm.php
@@ -916,6 +1006,7 @@
 │   │           │   │   │   ├── AddUserFormProcess.php
 │   │           │   │   │   ├── AdsFormProcess.php
 │   │           │   │   │   ├── AnalyticsApiFormProcess.php
+│   │           │   │   │   ├── DisableModuleFormProcess.php
 │   │           │   │   │   ├── EditFormProcess.php
 │   │           │   │   │   ├── ImportUserFormProcess.php
 │   │           │   │   │   ├── LicenseFormProcess.php
@@ -984,6 +1075,7 @@
 │   │           │               │   ├── picture.tpl
 │   │           │               │   └── video.tpl
 │   │           │               ├── module
+│   │           │               │   ├── disable.tpl
 │   │           │               │   ├── index.tpl
 │   │           │               │   ├── install.tpl
 │   │           │               │   ├── to_install.inc.tpl
@@ -1205,7 +1297,6 @@
 │   │           │                   ├── post.tpl
 │   │           │                   └── read.tpl
 │   │           ├── connect
-│   │           │   ├── Bootstrap.php
 │   │           │   ├── config
 │   │           │   │   ├── config.ini
 │   │           │   │   └── Permission.php
@@ -1879,6 +1970,29 @@
 │   │           │               └── visitor
 │   │           │                   ├── index.tpl
 │   │           │                   └── search.tpl
+│   │           ├── validate-site
+│   │           │   ├── config
+│   │           │   │   ├── config.ini
+│   │           │   │   └── Permission.php
+│   │           │   ├── controllers
+│   │           │   │   └── MainController.php
+│   │           │   ├── forms
+│   │           │   │   └── ValidationForm.php
+│   │           │   ├── lang
+│   │           │   │   ├── en_US
+│   │           │   │   │   └── LC_MESSAGES
+│   │           │   │   └── fr_FR
+│   │           │   │       └── LC_MESSAGES
+│   │           │   ├── models
+│   │           │   │   └── ValidateSiteModel.php
+│   │           │   └── views
+│   │           │       └── base
+│   │           │           ├── config
+│   │           │           │   └── config.ini
+│   │           │           └── tpl
+│   │           │               └── main
+│   │           │                   ├── pending.tpl
+│   │           │                   └── validationbox.tpl
 │   │           ├── video
 │   │           │   ├── config
 │   │           │   │   ├── config.ini
@@ -2229,6 +2343,7 @@
 │   │   │   │   │       │   ├── CEmail.php
 │   │   │   │   │       │   ├── Date.php
 │   │   │   │   │       │   ├── Email.php
+│   │   │   │   │       │   ├── Name.php
 │   │   │   │   │       │   ├── Numeric.php
 │   │   │   │   │       │   ├── Password.php
 │   │   │   │   │       │   ├── Phone.php
@@ -2288,7 +2403,8 @@
 │   │   │   ├── Integration
 │   │   │   ├── Mixer.interface.php
 │   │   │   ├── Module.class.php
-│   │   │   └── README_DEVELOPING.txt
+│   │   │   ├── README_DEVELOPING.txt
+│   │   │   └── Various.class.php
 │   │   ├── Mvc
 │   │   │   ├── Action
 │   │   │   ├── Controller
@@ -2313,6 +2429,7 @@
 │   │   │   │   │       └── Various.class.php
 │   │   │   │   ├── Lang.class.php
 │   │   │   │   ├── License.class.php
+│   │   │   │   ├── Module.class.php
 │   │   │   │   ├── Security.class.php
 │   │   │   │   ├── Spam.class.php
 │   │   │   │   └── Statistic.class.php
@@ -2361,7 +2478,6 @@
 │   │   ├── Security
 │   │   │   ├── Ban
 │   │   │   │   └── Ban.class.php
-│   │   │   ├── crypt.inc.php
 │   │   │   ├── CSRF
 │   │   │   │   └── Token.class.php
 │   │   │   ├── DDoS
@@ -3450,8 +3566,9 @@
 │   │               │   └── ui-icons_cd0a0a_256x240.png
 │   │               └── jquery-ui.css
 │   ├── fileManager
+│   │   ├── Changelog
 │   │   ├── css
-│   │   │   ├── elFinder.css
+│   │   │   ├── elfinder.css
 │   │   │   └── theme.css
 │   │   ├── img
 │   │   │   ├── arrows-active.png
@@ -3466,29 +3583,52 @@
 │   │   │   ├── quicklook-icons.png
 │   │   │   ├── resize.png
 │   │   │   ├── spinner-mini.gif
-│   │   │   └── toolbar.png
+│   │   │   ├── toolbar.png
+│   │   │   ├── volume_icon_dropbox.png
+│   │   │   ├── volume_icon_ftp.png
+│   │   │   ├── volume_icon_local.png
+│   │   │   └── volume_icon_sql.png
 │   │   ├── js
-│   │   │   ├── elFinder.js
+│   │   │   ├── elfinder.js
 │   │   │   ├── i18n
 │   │   │   │   ├── elfinder.ar.js
 │   │   │   │   ├── elfinder.bg.js
 │   │   │   │   ├── elfinder.ca.js
 │   │   │   │   ├── elfinder.cs.js
+│   │   │   │   ├── elfinder.da.js
 │   │   │   │   ├── elfinder.de.js
+│   │   │   │   ├── elfinder.el.js
 │   │   │   │   ├── elfinder.es.js
+│   │   │   │   ├── elfinder.fa.js
+│   │   │   │   ├── elfinder.fo.js
 │   │   │   │   ├── elfinder.fr.js
+│   │   │   │   ├── elfinder.he.js
 │   │   │   │   ├── elfinder.hu.js
+│   │   │   │   ├── elfinder.id.js
+│   │   │   │   ├── elfinder.it.js
 │   │   │   │   ├── elfinder.jp.js
+│   │   │   │   ├── elfinder.ko.js
 │   │   │   │   ├── elfinder.LANG.js
 │   │   │   │   ├── elfinder.nl.js
 │   │   │   │   ├── elfinder.no.js
 │   │   │   │   ├── elfinder.pl.js
 │   │   │   │   ├── elfinder.pt_BR.js
+│   │   │   │   ├── elfinder.ro.js
 │   │   │   │   ├── elfinder.ru.js
-│   │   │   │   └── elfinder.zh_CN.js
+│   │   │   │   ├── elfinder.sk.js
+│   │   │   │   ├── elfinder.sl.js
+│   │   │   │   ├── elfinder.sr.js
+│   │   │   │   ├── elfinder.sv.js
+│   │   │   │   ├── elfinder.tr.js
+│   │   │   │   ├── elfinder.uk.js
+│   │   │   │   ├── elfinder.vi.js
+│   │   │   │   ├── elfinder.zh_CN.js
+│   │   │   │   └── elfinder.zh_TW.js
 │   │   │   └── proxy
 │   │   │       └── elFinderSupportVer1.js
-│   │   └── README.txt
+│   │   ├── README.md
+│   │   └── sounds
+│   │       └── rm.wav
 │   ├── fonts
 │   │   ├── FontAwesome.otf
 │   │   ├── fontawesome-webfont.eot
@@ -4816,6 +4956,13 @@
 │   │       │               ├── common.js
 │   │       │               ├── friend.js
 │   │       │               └── signup_popup.js
+│   │       ├── validate-site
+│   │       │   └── themes
+│   │       │       └── base
+│   │       │           ├── config
+│   │       │           │   └── config.ini
+│   │       │           └── js
+│   │       │               └── validationbox.js
 │   │       ├── video
 │   │       │   └── themes
 │   │       │       └── base
@@ -4881,6 +5028,7 @@
 │       │   │   ├── tooltip.css
 │       │   │   └── zoomer.css
 │       │   ├── file
+│       │   │   ├── splash.mp4
 │       │   │   ├── splash_video.copyright.txt
 │       │   │   └── splash.webm
 │       │   ├── img
@@ -5020,7 +5168,119 @@
 │       │       ├── loading.inc.tpl
 │       │       ├── page_nav.inc.tpl
 │       │       └── top_menu.inc.tpl
-│       └── datelove
+│       ├── datelove
+│       │   ├── config
+│       │   │   └── config.ini
+│       │   ├── css
+│       │   │   ├── browse.css
+│       │   │   ├── color.css
+│       │   │   ├── common.css
+│       │   │   ├── form.css
+│       │   │   ├── _inc
+│       │   │   │   ├── common.custom.css
+│       │   │   │   └── keyframes.css
+│       │   │   ├── js
+│       │   │   │   ├── ajph.css
+│       │   │   │   └── jquery
+│       │   │   │       ├── apprise.css
+│       │   │   │       ├── carousel.css
+│       │   │   │       ├── rating.css
+│       │   │   │       └── tipTip.css
+│       │   │   ├── layout.css
+│       │   │   ├── like.css
+│       │   │   ├── menu.css
+│       │   │   ├── rollover.css
+│       │   │   ├── splash.css
+│       │   │   ├── style.css
+│       │   │   ├── tabs.css
+│       │   │   ├── tooltip.css
+│       │   │   └── zoomer.css
+│       │   ├── file
+│       │   │   ├── splash.mp4
+│       │   │   ├── splash_video.copyright.txt
+│       │   │   └── splash.webm
+│       │   ├── img
+│       │   │   ├── arrow.gif
+│       │   │   ├── dropdown_after.png
+│       │   │   ├── dropdown_before.png
+│       │   │   ├── header2.png
+│       │   │   ├── icon
+│       │   │   │   ├── admin_no_picture-100.jpg
+│       │   │   │   ├── admin_no_picture-150.jpg
+│       │   │   │   ├── admin_no_picture-200.jpg
+│       │   │   │   ├── admin_no_picture-32.jpg
+│       │   │   │   ├── admin_no_picture-400.jpg
+│       │   │   │   ├── admin_no_picture-64.jpg
+│       │   │   │   ├── admin_no_picture.jpg
+│       │   │   │   ├── away.png
+│       │   │   │   ├── busy.png
+│       │   │   │   ├── couple_no_picture-100.jpg
+│       │   │   │   ├── couple_no_picture-150.jpg
+│       │   │   │   ├── couple_no_picture-200.jpg
+│       │   │   │   ├── couple_no_picture-32.jpg
+│       │   │   │   ├── couple_no_picture-400.jpg
+│       │   │   │   ├── couple_no_picture-64.jpg
+│       │   │   │   ├── couple_no_picture.jpg
+│       │   │   │   ├── female_no_picture-100.jpg
+│       │   │   │   ├── female_no_picture-150.jpg
+│       │   │   │   ├── female_no_picture-200.jpg
+│       │   │   │   ├── female_no_picture-32.jpg
+│       │   │   │   ├── female_no_picture-400.jpg
+│       │   │   │   ├── female_no_picture-64.jpg
+│       │   │   │   ├── female_no_picture.jpg
+│       │   │   │   ├── loading2.gif
+│       │   │   │   ├── loading.gif
+│       │   │   │   ├── male_no_picture-100.jpg
+│       │   │   │   ├── male_no_picture-150.jpg
+│       │   │   │   ├── male_no_picture-200.jpg
+│       │   │   │   ├── male_no_picture-32.jpg
+│       │   │   │   ├── male_no_picture-400.jpg
+│       │   │   │   ├── male_no_picture-64.jpg
+│       │   │   │   ├── male_no_picture.jpg
+│       │   │   │   ├── new.gif
+│       │   │   │   ├── none.jpg
+│       │   │   │   ├── offline.png
+│       │   │   │   ├── online.png
+│       │   │   │   ├── pending-100.jpg
+│       │   │   │   ├── pending-150.jpg
+│       │   │   │   ├── pending-200.jpg
+│       │   │   │   ├── pending-32.jpg
+│       │   │   │   ├── pending-400.jpg
+│       │   │   │   ├── pending-64.jpg
+│       │   │   │   ├── pending.jpg
+│       │   │   │   ├── quote_left.jpg
+│       │   │   │   ├── quote_right.jpg
+│       │   │   │   ├── visitor_no_picture-100.jpg
+│       │   │   │   ├── visitor_no_picture-150.jpg
+│       │   │   │   ├── visitor_no_picture-200.jpg
+│       │   │   │   ├── visitor_no_picture-32.jpg
+│       │   │   │   ├── visitor_no_picture-400.jpg
+│       │   │   │   ├── visitor_no_picture-64.jpg
+│       │   │   │   └── visitor_no_picture.jpg
+│       │   │   ├── logo.png
+│       │   │   ├── paging_bg2.png
+│       │   │   ├── preview.png
+│       │   │   ├── slideshow
+│       │   │   │   ├── 1.jpg
+│       │   │   │   ├── 2.jpg
+│       │   │   │   ├── 3.jpg
+│       │   │   │   ├── 4.jpg
+│       │   │   │   └── 5.jpg
+│       │   │   ├── splash_vid.jpg
+│       │   │   └── tabs.gif
+│       │   ├── js
+│       │   │   ├── global.js
+│       │   │   └── splash.js
+│       │   └── tpl
+│       │       ├── bottom_menu.inc.tpl
+│       │       ├── browse_user.inc.tpl
+│       │       ├── error.inc.tpl
+│       │       ├── favicon_alert.inc.tpl
+│       │       ├── layout.tpl
+│       │       ├── loading.inc.tpl
+│       │       ├── page_nav.inc.tpl
+│       │       └── top_menu.inc.tpl
+│       └── zendate
 │           ├── config
 │           │   └── config.ini
 │           ├── css
@@ -5047,6 +5307,10 @@
 │           │   ├── tabs.css
 │           │   ├── tooltip.css
 │           │   └── zoomer.css
+│           ├── file
+│           │   ├── splash.mp4
+│           │   ├── splash_video.copyright.txt
+│           │   └── splash.webm
 │           ├── img
 │           │   ├── arrow.gif
 │           │   ├── dropdown_after.png
@@ -5108,12 +5372,14 @@
 │           │   ├── logo.png
 │           │   ├── paging_bg2.png
 │           │   ├── preview.png
-│           │   └── slideshow
-│           │       ├── 1.jpg
-│           │       ├── 2.jpg
-│           │       ├── 3.jpg
-│           │       ├── 4.jpg
-│           │       └── 5.jpg
+│           │   ├── slideshow
+│           │   │   ├── 1.jpg
+│           │   │   ├── 2.jpg
+│           │   │   ├── 3.jpg
+│           │   │   ├── 4.jpg
+│           │   │   └── 5.jpg
+│           │   ├── splash_vid.jpg
+│           │   └── tabs.gif
 │           ├── js
 │           │   ├── global.js
 │           │   └── splash.js
@@ -5126,7 +5392,7 @@
 │               ├── loading.inc.tpl
 │               ├── page_nav.inc.tpl
 │               └── top_menu.inc.tpl
-├── _test
+├── _tests
 │   └── Unit
 └── _tools
     ├── deployment.sh
@@ -5136,4 +5402,4 @@
 
 </pre>
 
-<p>Statistics: 1450 directories, 3678 files.</p>
+<p>Statistics: 1491 directories, 3903 files.</p>

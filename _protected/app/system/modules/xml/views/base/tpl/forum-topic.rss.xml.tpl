@@ -4,7 +4,7 @@
 <channel>
   <title>{lang 'Latest Forum Topics'}</title>
   <link>{{ $design->url('forum','forum','index') }}</link>
-  <description>>{lang 'Latest Forum Topics of %site_name%'}</description>
+  <description>{lang 'Latest Forum Topics of %site_name%'}</description>
 
   {each $topic in $forums_topics}
     <item>

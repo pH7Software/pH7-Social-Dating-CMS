@@ -9,6 +9,9 @@
  */
 
 namespace PH7;
+defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Registry\Registry;
 
 /**
  * Display a basic HTML body page.
@@ -26,12 +29,11 @@ function html_body($sTitle, $sMsg)
  * Check Internet Connection.
  *
  * @param string $sCheckHost Default: www.google.com
- * @param boolean $bEnable If FALSE, it disables the checking and force pH7CMS running without an Internet connection. Default: TRUE
  * @return boolean Returns TRUE if the Internet connection is enabled, FALSE otherwise.
  */
-function is_internet($sCheckHost = 'www.google.com', $bEnable = PH7_INTERNET_NEEDED)
+function is_internet($sCheckHost = 'www.google.com')
 {
-    if (!$bEnable)
+    if (false === Registry::getInstance()->is_internet_needed)
         return true;
 
     return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);

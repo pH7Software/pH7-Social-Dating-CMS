@@ -4,7 +4,7 @@
 <channel>
   <title>{lang 'Latest Forum Topic Posts'}</title>
   <link>{current_url}</link>
-  <description>>{lang 'Latest Forum Topic Posts of %site_name%'}</description>
+  <description>{lang 'Latest Forum Topic Posts of %site_name%'}</description>
 
   {each $msg in $forums_messages}
     <item>

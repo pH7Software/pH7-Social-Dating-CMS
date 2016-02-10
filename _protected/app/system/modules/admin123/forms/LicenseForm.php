@@ -24,7 +24,7 @@ class LicenseForm
         }
 
         $sStatusColor = (PH7_VALID_LICENSE ? 'success' : 'danger');
-        $sLicLink = '<a href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Buy a License') . '</a>';
+        $sLicLink = '<a href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Buy your License Key') . '</a>';
         $sStatusTxt = '<span class="label label-' . $sStatusColor . '">' . (PH7_VALID_LICENSE ? t('Active') : t('Inactive')) . '</span>';
         $sLicTypeTxt = '<span class="italic">' . PH7_LICENSE_NAME . '</span>' . (PH7_LICENSE_NAME != 'Trial' ?: ' <span class="label label-warning">' . t('%0% to get Premium Features!', $sLicLink) . '</span>');
 

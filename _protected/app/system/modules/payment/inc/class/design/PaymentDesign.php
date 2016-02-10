@@ -21,7 +21,7 @@ class PaymentDesign extends Framework\Core\Core
      */
     public function buttonPayPal($oMembership)
     {
-        $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enable']);
+        $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
 
         $oPayPal->param('business', $this->config->values['module.setting']['paypal.email'])
             ->param('custom', $this->session->get('member_id'))
@@ -84,7 +84,7 @@ class PaymentDesign extends Framework\Core\Core
      */
     public function button2CheckOut($oMembership)
     {
-        $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enable']);
+        $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enabled']);
 
         $o2CO->param('sid', $this->config->values['module.setting']['2co.vendor_id'])
             ->param('id_type', 1)

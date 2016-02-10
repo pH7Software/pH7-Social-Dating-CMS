@@ -78,7 +78,7 @@ class CommentController extends Controller
 
         if (!empty($oComment))
         {
-            $this->sTitle = t('Read this comment of <span class="pH1">%0%</span>', $oComment->firstName);
+            $this->sTitle = t("Read the <span class='pH1'>%0%</span>'s comment", $oComment->firstName);
             $this->view->page_title = $this->sTitle;
             $this->view->meta_description = t('Read comment of %0%, %1%. %2%', $oComment->firstName, $oComment->username, substr(Ban::filterWord($oComment->comment, false), 0, 150));
             $this->view->meta_keywords = t('comment,%0%', str_replace(' ', ',', substr(Ban::filterWord($oComment->comment, false), 0, 250)));

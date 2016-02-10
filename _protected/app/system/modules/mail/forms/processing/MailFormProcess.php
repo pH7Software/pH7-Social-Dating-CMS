@@ -66,18 +66,7 @@ class MailFormProcess extends Form
                 // If the notification is accepted and the message recipient isn't connected NOW, we send a message.
                 if (!$oUserModel->isNotification($iRecipientId, 'newMsg') && $oUserModel->isOnline($iRecipientId, 0))
                 {
-                    $this->view->content = t('Hello %0%!<br />You have received a new message from <strong>%1%</strong>.<br /> <a href="%2%">Click here</a> to read your message.', $this->httpRequest->post('recipient'), $this->session->get('member_username'), Uri::get('mail', 'main', 'inbox', $mSendMsg));
-
-                    $sRecipientEmail = $oUserModel->getEmail($iRecipientId);
-
-                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/mail/new_msg.tpl', $sRecipientEmail);
-
-                    $aInfo = [
-                        'to' => $sRecipientEmail,
-                        'subject' => t('New private message from %0% on %site_name%', $this->session->get('member_first_name'))
-                    ];
-
-                    (new Mail)->send($aInfo, $sMessageHtml);
+                    $this->sendMail($iRecipientId, $mSendMsg, $oUserModel);
                 }
 
                 $sUrl = ($bIsAdmin ? Uri::get(PH7_ADMIN_MOD, 'user', 'browse') : Uri::get('mail', 'main', 'index'));
@@ -86,6 +75,24 @@ class MailFormProcess extends Form
 
             unset($oUserModel, $oMailModel);
         }
+    }
+
+    protected function sendMail($iRecipientId, $iMsgId, UserCoreModel $oUserModel)
+    {
+        $this->view->content = t('Hello %0%!', $this->httpRequest->post('recipient')) . '<br />' .
+        t('You received a new message from %0%', $this->session->get('member_username')) . '<br />' .
+        '<a href="' . Uri::get('mail', 'main', 'inbox', $iMsgId) . '">' . t('Click here') . '</a>' . t('to read your message.');
+
+        $sRecipientEmail = $oUserModel->getEmail($iRecipientId);
+
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/mail/new_msg.tpl', $sRecipientEmail);
+
+        $aInfo = [
+            'to' => $sRecipientEmail,
+            'subject' => t('New private message from %0% on %site_name%', $this->session->get('member_first_name'))
+        ];
+
+        (new Mail)->send($aInfo, $sMessageHtml);
     }
 
 }

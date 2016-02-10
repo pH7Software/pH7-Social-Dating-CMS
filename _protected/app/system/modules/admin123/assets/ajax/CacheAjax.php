@@ -16,7 +16,7 @@ class CacheAjax extends Framework\Core\Kernel
         parent::__construct();
 
         if (!(new Framework\Security\CSRF\Token)->check('cache'))
-        exit(jsonMsg(0, Form::errorTokenMsg()));
+            exit(jsonMsg(0, Form::errorTokenMsg()));
 
         $this->clearCache();
     }

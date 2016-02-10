@@ -22,7 +22,7 @@ class ToolController extends Controller
 
     public function index()
     {
-        $this->sTitle = t('Tools');
+        $this->sTitle = t('General Tools');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
@@ -76,6 +76,15 @@ class ToolController extends Controller
             ['title' => t('Protected Root'), 'size' => $this->file->getDirFreeSpace(PH7_PATH_PROTECTED)],
             ['title' => t('Protected data'), 'size' => $this->file->getDirFreeSpace(PH7_PATH_DATA)]
         ];
+
+        $this->output();
+    }
+
+    public function envMode()
+    {
+        $this->sTitle = t('Environment Mode');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
 
         $this->output();
     }

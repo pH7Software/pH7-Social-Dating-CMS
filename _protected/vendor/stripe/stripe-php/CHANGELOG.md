@@ -1,3 +1,15 @@
+### 3.7.1 2016-02-01
+
+* Update bundled CA certs
+
+### 3.7.0 2016-01-27
+
+* Support deleting Relay products and SKUs
+
+### 3.6.0 2016-01-05
+
+* Allow configuration of HTTP client timeouts
+
 ### 3.5.0 2015-12-01
 
 * Add a verification routine for external accounts

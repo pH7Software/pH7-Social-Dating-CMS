@@ -24,6 +24,14 @@ class ModuleController extends Controller
         $this->view->oModule = $this->_oModule;
     }
 
+    public function disable()
+    {
+        $this->_sTitle = t('Enable/Disable System Modules');
+        $this->view->page_title = $this->_sTitle;
+        $this->view->h1_title = $this->_sTitle;
+        $this->output();
+    }
+
     public function index()
     {
         if ($this->httpRequest->postExists('submit_mod_install'))
@@ -55,7 +63,7 @@ class ModuleController extends Controller
 
     private function _install()
     {
-        $this->_sTitle = t('Installing Module');
+        $this->_sTitle = t('Install Module Finished');
         $this->view->page_title = $this->_sTitle;
         $this->view->h1_title = $this->_sTitle;
 
@@ -71,7 +79,7 @@ class ModuleController extends Controller
 
     private function _unInstall()
     {
-        $this->_sTitle = t('Uninstalling Module');
+        $this->_sTitle = t('Uninstall Module Finished');
         $this->view->page_title = $this->_sTitle;
         $this->view->h1_title = $this->_sTitle;
 

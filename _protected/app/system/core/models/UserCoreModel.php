@@ -38,15 +38,15 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if (!$oSession->exists('member_group_id'))
         {
             $oSession->regenerateId();
-            $oSession->set('member_group_id', '1'); // Visitor's group
+            $oSession->set('member_group_id', '1'); // By default, it's the Visitor's group (ID 1)
         }
-        unset($oSession);
 
         $rStmt = Db::getInstance()->prepare('SELECT permissions FROM' . Db::prefix('Memberships') . 'WHERE groupId = :groupId LIMIT 1');
-        $rStmt->bindParam(':groupId', $_SESSION[Framework\Config\Config::getInstance()->values['session']['prefix'] . 'member_group_id'], \PDO::PARAM_INT);
+        $rStmt->bindValue(':groupId', $oSession->get('member_group_id'), \PDO::PARAM_INT);
         $rStmt->execute();
         $oFetch = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+        unset($oSession);
         return Framework\CArray\ObjArr::toObject(unserialize($oFetch->permissions));
     }
 
@@ -568,6 +568,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function add(array $aData)
     {
+        $sHashValidation = (!empty($aData['hash_validation']) ? $aData['hash_validation'] : null);
+
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Members') . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, joinDate, lastActivity, groupId)
             VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity, :groupId)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
@@ -580,7 +582,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':birthDate', $aData['birth_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':active', (!empty($aData['is_active']) ? $aData['is_active'] : 1), \PDO::PARAM_INT);
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
-        $rStmt->bindParam(':hashValidation', (!empty($aData['hash_validation']) ? $aData['hash_validation'] : null), \PDO::PARAM_STR, 40);
+        $rStmt->bindParam(':hashValidation', $sHashValidation, \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':groupId', (int) DbConfig::getSetting('defaultMembershipGroupId'), \PDO::PARAM_INT);
@@ -1131,6 +1133,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
    }
 
     /**
+     * Get Gender (sex) of a user.
+     *
      * @param integer $iProfileId Default NULL
      * @param string $sUsername Default NULL
      * @param string $sTable Default 'Members'
@@ -1159,6 +1163,31 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $sData = @$oRow->sex;
+            unset($oRow);
+            $this->cache->put($sData);
+        }
+
+        return $sData;
+    }
+
+    /**
+     * Get Match sex for a member (so only from the Members table, because Affiliates and Admins don't have match sex).
+     *
+     * @param integer $iProfileId
+     * @return string The User's birthdate.
+     */
+    public function getMatchSex($iProfileId)
+    {
+        $this->cache->start(self::CACHE_GROUP, 'matchsex' . $iProfileId, static::CACHE_TIME);
+
+        if (!$sData = $this->cache->get())
+        {
+            $rStmt = Db::getInstance()->prepare('SELECT matchSex FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId LIMIT 1');
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->execute();
+            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $sData = $oRow->matchSex;
             unset($oRow);
             $this->cache->put($sData);
         }

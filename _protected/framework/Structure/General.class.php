@@ -57,7 +57,7 @@ namespace {
     /**
      * Alias for \PH7\Framework\Structure\General::emit()
      */
-    function emit($sVar, $sOr = '')
+    function emit()
     {
         return PH7\Framework\Structure\General::emit();
     }

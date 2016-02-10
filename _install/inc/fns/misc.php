@@ -200,11 +200,11 @@ function delete_dir($sPath)
 /**
  * Executes SQL queries.
  *
- * @param object PDO
+     * @param object \PH7\Db $oDb
  * @param string $sSqlFile SQL File.
  * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
  */
-function exec_query_file($oDb, $sSqlFile)
+function exec_query_file(Db $oDb, $sSqlFile)
 {
     if (!is_file($sSqlFile)) return false;
 
@@ -275,6 +275,21 @@ function clean_string($sVal)
 function generate_hash($iLength = 80)
 {
     return substr(hash('whirlpool', time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid(mt_rand(), true) . microtime(true)*999999999999)), 0, $iLength);
+}
+
+/**
+ * Try to find and get the FFmpeg path if it is installed (note I don't use system command like "which ffmpeg" for portability reason).
+ *
+ * @return string The appropriate FFmpeg path.
+ */
+function ffmpeg_path()
+{
+    if (is_windows())
+        $sPath = (is_file('C:\ffmpeg\bin\ffmpeg.exe')) ? 'C:\ffmpeg\bin\ffmpeg.exe' : 'C:\ffmpeg\ffmpeg.exe';
+    else
+        $sPath = (is_file('/usr/local/bin/ffmpeg')) ? '/usr/local/bin/ffmpeg' : '/usr/bin/ffmpeg';
+
+    return $sPath;
 }
 
 /**

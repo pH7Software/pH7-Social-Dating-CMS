@@ -115,7 +115,7 @@ class Validate
     }
 
     /**
-     * Validate Is Integer.
+     * Validate if it's Integer.
      *
      * @param integer $iInt
      * @param integer $iMin Default 0
@@ -130,7 +130,7 @@ class Validate
     }
 
     /**
-     * Validate Is Numeric.
+     * Validate if it's Numeric.
      *
      * @param mixed (numeric string | integer) $mNumeric
      * @return boolean
@@ -141,7 +141,7 @@ class Validate
     }
 
     /**
-     * Validate Is Digit Character.
+     * Validate if it's Digit Character.
      *
      * @param string (numeric string) $sDigit
      * @return boolean
@@ -152,7 +152,7 @@ class Validate
     }
 
     /**
-     * Validate Is Float.
+     * Validate if it's Float type.
      *
      * @param float $fFloat
      * @param mixed (float | integer) $mMin Default 0
@@ -166,7 +166,7 @@ class Validate
     }
 
     /*
-     * Validate Is Boolean.
+     * Validate if it's Boolean type.
      *
      * @param boolean $bBool
      * @return boolean
@@ -314,6 +314,27 @@ class Validate
     public function phone($sNumber)
     {
         return preg_match('#^'.\PH7\Framework\Config\Config::getInstance()->values['validate']['phone.pattern'].'$#', $sNumber);
+    }
+
+    /**
+     * Validate Name.
+     *
+     * @param string $sName
+     * @param integer $iMin Default 2
+     * @param integer $iMax Default 20
+     * @return boolean
+     */
+    public function name($sName, $iMin = 2, $iMax = 20)
+    {
+        // Check the length
+        if ($this->_oStr->length($sName) < $iMin || $this->_oStr->length($sName) > $iMax)
+            return false;
+
+        // Check the name pattern
+        if(preg_match('`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;!\?\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`', $sName))
+            return false;
+
+        return true;
     }
 
     /*

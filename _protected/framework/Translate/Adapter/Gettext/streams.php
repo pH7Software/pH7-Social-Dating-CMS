@@ -1,6 +1,7 @@
 <?php
 /*
- * Notice: This file has been slightly modified by the pH7CMS development team <http://software.hizup.com>.
+ * Notice: This file has been modified by the pH7CMS development team, Pierre-Henry Soria <http://software.hizup.com>.
+ *  * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with the new PHP version).
  */
 namespace PH7\Framework\Translate\Adapter\Gettext;
 defined('PH7') or exit('Restricted access');
@@ -49,13 +50,13 @@ class StreamReader {
   function length() {
     return false;
   }
-};
+}
 
 class StringReader {
   var $_pos;
   var $_str;
 
-  function StringReader($str='') {
+  public function __construct($str='') {
     $this->_str = $str;
     $this->_pos = 0;
   }
@@ -83,8 +84,7 @@ class StringReader {
   function length() {
     return strlen($this->_str);
   }
-
-};
+}
 
 
 class FileReader {
@@ -92,7 +92,7 @@ class FileReader {
   var $_fd;
   var $_length;
 
-  function FileReader($filename) {
+  public function __construct($filename) {
     if (file_exists($filename)) {
 
       $this->_length=filesize($filename);
@@ -144,12 +144,12 @@ class FileReader {
     fclose($this->_fd);
   }
 
-};
+}
 
 // Preloads entire file in memory first, then creates a StringReader
 // over it (it assumes knowledge of StringReader internals)
 class CachedFileReader extends StringReader {
-  function CachedFileReader($filename) {
+  public function __construct($filename) {
     if (file_exists($filename)) {
 
       $length=filesize($filename);
@@ -167,4 +167,4 @@ class CachedFileReader extends StringReader {
       return false;
     }
   }
-};
+}

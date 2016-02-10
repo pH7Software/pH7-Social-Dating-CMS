@@ -17,7 +17,7 @@ SET @sAdminEmail = 'admin@yoursite.com';
 SET @sFeedbackEmail = 'feedback@yoursite.com';
 SET @sNoReplyEmail = 'noreply@yoursite.com';
 SET @sIpApiUrl = 'http://whatismyipaddress.com/ip/';
-SET @sDefaultVideoUrl = 'http://www.youtube.com/watch?v=pHWeb';
+SET @sDefaultVideoUrl = 'http://www.youtube.com/watch?v=Y77CDJu4JyA';
 SET @sChatApiUrl = 'http://addons.hizup.com/chat/?name=%site_name%&url=%site_url%&skin=4';
 SET @sChatrouletteApiUrl = 'http://addons.hizup.com/chatroulette/?name=%site_name%&url=%site_url%&skin=1';
 
@@ -663,21 +663,7 @@ CREATE TABLE IF NOT EXISTS pH7_LanguagesInfo (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_LanguagesInfo (langId, name, charset, active, direction, author, website, email) VALUES
-('en_US', 'English', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'ph7software@gmail.com'),
-('fr_FR', 'Français', 'UTF-8', '1', 'ltr', 'Pierre-Henry', 'http://hizup.com', 'ph7software@gmail.com');
-
-
-CREATE TABLE IF NOT EXISTS pH7_LanguagesPhrases (
-  phraseId int(10) unsigned NOT NULL AUTO_INCREMENT,
-  langId varchar(5) NOT NULL,
-  moduleName varchar(40) NOT NULL,
-  vendorName varchar(40) NOT NULL,
-  token varchar(120) NOT NULL,
-  text mediumtext,
-  added int(10) unsigned DEFAULT NULL,
-  PRIMARY KEY (phraseId),
-  FOREIGN KEY (langId) REFERENCES pH7_LanguagesInfo(langId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+('en_US', 'English', 'UTF-8', '1', 'ltr', 'Pierre-Henry Soria', 'http://hizup.com', 'phs@hizup.net');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Likes (
@@ -913,8 +899,33 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
-('fr_FR', 'Accueil', 'Le CMS pour la création de site de rencontre en ligne', 'script, CMS, clone rencontre, PHP, script rencontre, logiciel rencontre site, reseau social, cms communautaire', 'Le meilleur endroit pour rencontrer des gens sympa !', 'Ce <a href="http://ph7cms.com">logiciel de rencontre</a> est le premier CMS spécialisé dans la création de sites de rencontre en ligne !', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. Tous droits réservés.', 'general', 'global', 'rencontre'),
 ('en_US', 'Home', 'The Best Dating software for creating online dating site or online community, social network,', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'The Best place to Meet Nice People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like this one with the <a href="http://ph7cms.com">Dating Site Builder</a>. It is Professional, modern, Free, Open Source, and gives you the best way to create a dating business...', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
+
+
+CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
+  moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
+  folderName varchar(20) NOT NULL,
+  premiumMod enum('0','1') NOT NULL DEFAULT '0', -- If the module required pH7CMSPro (http://ph7cms.com/pro/)
+  enabled enum('0','1') NOT NULL DEFAULT '1',
+  PRIMARY KEY (moduleId)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO pH7_SysModsEnabled (folderName, premiumMod, enabled) VALUES
+('connect', '0', '0'),
+('affiliate', '0', '1'),
+('game', '0', '1'),
+('chat', '1', '1'),
+('chatroulette', '1', '1'),
+('picture', '0', '1'),
+('video', '0', '1'),
+('hotornot', '0', '1'),
+('forum', '0', '1'),
+('note', '0', '1'),
+('blog', '0', '1'),
+('newsletter', '0', '1'),
+('invite', '0', '1'),
+('webcam', '0', '1'),
+('love-calculator', '0', '1');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (
@@ -929,8 +940,8 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
-/* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.2.1', 1);
+/* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
+('pH7CMS', 'SQL System Schema', '1.2.3', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -956,7 +967,7 @@ CREATE TABLE IF NOT EXISTS pH7_Settings (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
-('siteName', 'My Social/Dating App!', '', 'general'),
+('siteName', 'My Social Dating App', '', 'general'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', 'base', '', 'design'),
@@ -1005,7 +1016,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('pictureManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('videoManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('webcamPictureManualApproval', 0, '0 to disable or 1 to enable', 'moderation'),
-('defaultVideo', @sDefaultVideoUrl, 'Video by default if no video found', 'video'),
+('defaultVideo', @sDefaultVideoUrl, 'Video by default if no video is found', 'video'),
 ('autoplayVideo', 1, '1 = Autoplay is enabled, 0 = Autoplay is disabled', 'video'),
 ('returnEmail', @sNoReplyEmail, 'Generally noreply@yoursite.com', 'email'),
 ('sendReportMail', 1, 'Send the Report by eMail (1 = enable, 0 = disable)', 'security'),
@@ -1022,6 +1033,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('isSiteValidated', 0,  '0 = site not validated | 1 = site validated',  'security'),
 ('cleanMsg', 0, 'Delete messages older than X days. 0 = Disable', 'pruning'),
 ('cleanComment', 0, 'Delete comments older than X days. 0 = Disable', 'pruning'),
+('cleanMessenger', 0, 'Delete IM messages older than X days. 0 = Disable', 'pruning'),
 ('cronSecurityHash', 'change_this_secret_cron_word_by_yours', 'The secret word for the URL of the cron', 'automation'),
 ('userTimeout', 1, 'User inactivity timeout. The number of minutes that a member becomes inactive (offline).', 'automation'),
 ('ipApi', @sIpApiUrl, 'IP Api URL', 'api'),
@@ -1100,3 +1112,7 @@ CREATE TABLE IF NOT EXISTS pH7_CustomCode (
   code text,
   codeType enum('css', 'js') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+INSERT INTO pH7_CustomCode VALUES
+('/* Your custom CSS code here */\r\n', 'css'),
+('/* Your custom JS code here */\r\n', 'js');
