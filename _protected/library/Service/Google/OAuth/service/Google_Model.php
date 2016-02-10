@@ -23,7 +23,7 @@
  *
  */
 class Google_Model {
-  public function __construct( /* polymorphic */ ) {
+  public function __construct(/* polymorphic */) {
     if (func_num_args() ==  1 && is_array(func_get_arg(0))) {
       // Initialize the model with the array's contents.
       $array = func_get_arg(0);

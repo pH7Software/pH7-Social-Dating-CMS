@@ -99,7 +99,7 @@ class ToolController extends Controller
 
         $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, array('.sql', '.gz'));
         // Removing the path
-        $aDumpList = array_map(function($sValue) { return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue); }, $aDumpList);
+        $aDumpList = array_map(function ($sValue) { return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue); }, $aDumpList);
         $this->view->aDumpList = $aDumpList;
 
 
