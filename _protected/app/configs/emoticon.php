@@ -20,11 +20,11 @@ return array(
 
 /** smiley (image name without extension)      |      code        |       alt    **/
 
-    'grin'             =>    array( array(':-d', ':d', 'xd', '=d'), 'Grin'),
-    'lol'              =>    array( array('^^', ':lol:'), 'LOL'),
+    'grin'             =>    array(array(':-d', ':d', 'xd', '=d'), 'Grin'),
+    'lol'              =>    array(array('^^', ':lol:'), 'LOL'),
     'cheese'           =>    array(':cheese:',    'Cheese'),
-    'smile'            =>    array( array(':)', ':-)', ':]', '=)'), 'Smile'),
-    'wink'             =>    array( array(';)', ';-)'), 'Wink'),
+    'smile'            =>    array(array(':)', ':-)', ':]', '=)'), 'Smile'),
+    'wink'             =>    array(array(';)', ';-)'), 'Wink'),
     'smirk'            =>    array(':smirk:', 'Smirk'),
     'roll'             =>    array(':rolling:', 'Rolleyes'),
     'confused'         =>    array(':-S', 'Confused'),
@@ -33,7 +33,7 @@ return array(
     'tongue_laugh'     =>    array(':-P', 'Tongue Laugh'),
     'tongue_rolleye'   =>    array('%-P', 'Tongue Rolleye'),
     'tongue_wink'      =>    array(';-p', 'Tongue Wink'),
-    'rasberry'         =>    array( array(':-p', ':p', '=p'), 'Rasberry'),
+    'rasberry'         =>    array(array(':-p', ':p', '=p'), 'Rasberry'),
     'blank'            =>    array(':blank:', 'Blank Stare'),
     'longface'         =>    array(':long:', 'Long Face'),
     'ohh'              =>    array(':ohh:', 'Ohh'),
@@ -48,7 +48,7 @@ return array(
     'mad'              =>    array('>:(', 'Mad'),
     'angry'            =>    array('>:-(', 'Angry'),
     'zip'              =>    array(':zip:', 'Zipper'),
-    'kiss'             =>    array( array(':-* :*', ':kiss:'), 'Kiss'),
+    'kiss'             =>    array(array(':-* :*', ':kiss:'), 'Kiss'),
     'shock'            =>    array(':ahhh:', 'Shock'),
     'shade_smile'      =>    array(':coolsmile:', 'Cool smile'),
     'shade_smirk'      =>    array(':coolsmirk:', 'Cool smirk'),
@@ -57,9 +57,9 @@ return array(
     'shade_mad'        =>    array(':coolmad:', 'Cool mad'),
     'shade_cheese'     =>    array(':coolcheese:', 'Cool cheese'),
     'vampire'          =>    array(':vampire:', 'Vampire'),
-    'snake'            =>    array( array('°°', ':snake:'), 'Snake'),
+    'snake'            =>    array(array('°°', ':snake:'), 'Snake'),
     'exclaim'          =>    array(':exclaim:', 'Excaim'),
     'vampire'          =>    array(':vampire:', 'Vampire'),
-    'question'         =>    array( array(':ask:', ':question:'), 'Question')
+    'question'         =>    array(array(':ask:', ':question:'), 'Question')
 
 );
