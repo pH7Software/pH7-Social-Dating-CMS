@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+1.1.0 (2016-01-04)
+------------------
+
+* The MaxMind DB extension now supports PHP 7. Pull request by John Boehr.
+  GitHub #27.
+
 1.0.3 (2015-03-13)
 ------------------
 

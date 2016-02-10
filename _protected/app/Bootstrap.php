@@ -22,8 +22,7 @@ PH7\Framework\Config\Config,
 PH7\Framework\File\Import,
 PH7\Framework\Error\CException as Except;
 
-/***** Begin Loading Files *****/
-
+/*** Begin Loading Files ***/
 require 'configs/constants.php';
 require 'includes/helpers/misc.php';
 
@@ -33,18 +32,6 @@ if (!ini_get('date.timezone'))
 
 try
 {
-    /**
-     * First off, check it the server is connected to the Internet.
-     */
-    if (!is_internet())
-    {
-        $sMsg = '<p class="warning">No Internet Connection</p>
-        <p>Whoops! Your server has to be connect to the Internet in order to get your website working.</p>';
-
-        echo html_body('Enable your Internet connection', $sMsg);
-        exit;
-    }
-
     // Loading Framework Classes
     require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
     Framework\Loader\Autoloader::getInstance()->init();
@@ -53,7 +40,7 @@ try
     // For All environment
     Import::file(PH7_PATH_APP . 'configs/environment/all.env');
     // Specific to the current environment
-    Import::file(PH7_PATH_APP . 'configs/environment/' . Config::getInstance()->values['application']['environment'] . '.env');
+    Import::file(PH7_PATH_APP . 'configs/environment/' . Config::getInstance()->values['mode']['environment'] . '.env');
 
     // Loading Class ~/protected/app/includes/classes/*
     Import::pH7App('includes.classes.Loader.Autoloader');
@@ -65,10 +52,11 @@ try
     // Loading String Class
     Import::pH7FwkClass('Str.Str');
 
-    // We expect that this function is simply used // Import::pH7FwkClass('Structure.General');
-
+    /* Structure/General.class.php functions are not currently used */
+    // Import::pH7FwkClass('Structure.General');
 
     /*** End Loading Files ***/
+
 
     //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
     if (!Server::isRewriteMod())
@@ -93,6 +81,7 @@ try
      */
     //ini_set('zlib.output_compression', 2048);
     //ini_set('zlib.output_compression_level', 6);
+
     ob_start();
 
     new Server; // Start Server
@@ -122,16 +111,11 @@ catch (\Exception $oE)
 {
     Except\PH7Exception::launch($oE);
 }
-
-/* Soon in pH7CMS 2.0 version (when it will accept only PHP 5.5 or higher)
 finally
 {
-    if ('' !== session_id()) session_write_close();
+    if ('' !== session_id()) {
+        session_write_close();
+    }
     ob_end_flush();
     exit(0);
-}*/
-
-# Finally Block Emulator because PHP does not support finally block.
-if ('' !== session_id()) session_write_close();
-ob_end_flush();
-exit(0);
+}

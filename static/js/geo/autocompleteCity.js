@@ -1,6 +1,6 @@
 ﻿/*
  * Author:        Pierre-Henry Soria <ph7software@gmail.com>
- * Copyright:     (c) 2012-2015, Pierre-Henry Soria. All Rights Reserved.
+ * Copyright:     (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
@@ -44,8 +44,7 @@ function autocompleteCityInit(sGeonamesUsername)
                             $('#str_zip_code').val(oItem.postalcode);
                         });
 
-                        return
-                        {
+                        return {
                             label: oItem.name + (oItem.adminName1 ? ', ' + oItem.adminName1 : '') + (sCountry ? '' : ', ' + oItem.countryName),
                             value: oItem.name
                         }

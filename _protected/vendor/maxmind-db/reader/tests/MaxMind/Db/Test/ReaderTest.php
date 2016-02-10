@@ -59,6 +59,8 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         // For the C extension, which returns a hexadecimal
         if (extension_loaded('gmp')) {
             $uint128 = gmp_strval($uint128);
+        } else {
+            $this->markTestIncomplete('Requires gmp extension to check value of uint128');
         }
 
         $this->assertEquals(
@@ -85,7 +87,14 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(0, $record['uint16']);
         $this->assertEquals(0, $record['uint32']);
         $this->assertEquals(0, $record['uint64']);
-        $this->assertEquals(0, $record['uint128']);
+
+        $uint128 = $record['uint128'];
+        if (extension_loaded('gmp')) {
+            $uint128 = gmp_strval($uint128);
+        } else {
+            $this->markTestIncomplete('Requires gmp extension to check value of uint128');
+        }
+        $this->assertEquals('0', $uint128);
     }
 
     public function testNoIpV4SearchTree()

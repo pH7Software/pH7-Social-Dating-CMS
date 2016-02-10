@@ -6,14 +6,13 @@ set -x
 git submodule update --init --recursive
 composer self-update
 composer install --dev -n --prefer-source
-if [ "hhvm" != "$(phpenv version-name)" ]
+if [ "hhvm" != "$TRAVIS_PHP_VERSION" ]
 then
+  mkdir -p "$HOME/libmaxminddb"
   git clone --recursive git://github.com/maxmind/libmaxminddb
   cd libmaxminddb
   ./bootstrap
-  ./configure
+  ./configure --prefix="$HOME/libmaxminddb"
   make
-  sudo make install
-  sudo ldconfig
-  pyrus install pear/PHP_CodeSniffer
+  make install
 fi

@@ -323,7 +323,7 @@ class File
      * @param string $sTo File or directory.
      * @return mixed (integer | boolean) Returns the last line on success, and FALSE on failure.
      */
-    public function copyMost($sFrom, $sTo)
+    public function systemCopy($sFrom, $sTo)
     {
         if (file_exists($sFrom))
             return system("cp -r $sFrom $sTo");
@@ -365,7 +365,7 @@ class File
      * @param string $sTo File or directory.
      * @return mixed (integer | boolean) Returns the last line on success, and FALSE on failure.
      */
-    public function renameMost($sFrom, $sTo)
+    public function systemRename($sFrom, $sTo)
     {
         if (file_exists($sFrom))
             return system("mv $sFrom $sTo");
@@ -662,14 +662,14 @@ class File
      */
     public function readDirs($sPath = './')
     {
-        if (!($rHandle = opendir($sPath))) return false;
+        if (!($rHandle = opendir($sPath))) return false; // Return when yield is used will be OK with PHP 7
         $aRet = array();//remove it for yield
 
         while (false !== ($sFolder = readdir($rHandle)))
         {
             if ('.' == $sFolder || '..' == $sFolder || !is_dir($sPath . $sFolder))
                 continue;
-            //yield $sFolder; // PHP 5.5
+            //yield $sFolder; // PHP 7
             $aRet[] = $sFolder;//remove it for yield
         }
         closedir($rHandle);

@@ -360,26 +360,20 @@ final class FrontController
     public function _languageInitialize()
     {
         if (!defined('PH7_PREF_LANG'))
-            define('PH7_PREF_LANG', DbConfig::getSetting('defaultLanguage'));
+            define( 'PH7_PREF_LANG', DbConfig::getSetting('defaultLanguage') );
 
-        if (!defined('PH7_LANG_NAME'))
-            define('PH7_LANG_NAME', (new Lang)->setDefaultLang(PH7_PREF_LANG)->getLang());
+        if (!defined('PH7_LANG_NAME')) {
+            // Set the default language of the site and load the default language path
+            define( 'PH7_LANG_NAME', (new Lang)->setDefaultLang(PH7_PREF_LANG)->init()->load('global', PH7_PATH_APP_LANG)->getLang() );
+        }
 
-        /*** Get the ISO language code ***/
-        define('PH7_DEFAULT_LANG_CODE', substr(PH7_DEFAULT_LANG, 0, 2));
-        define('PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2));
+        /*** Get the ISO language code (the two first letters) ***/
+        define( 'PH7_DEFAULT_LANG_CODE', substr(PH7_DEFAULT_LANG, 0, 2) );
+        define( 'PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2) );
 
-        if (!defined('PH7_ENCODING'))
-            define('PH7_ENCODING', $this->oConfig->values['language']['charset']);
-
+        /*** Set locale environment variables for gettext ***/
         putenv('LC_ALL=' . PH7_LANG_NAME);
         setlocale(LC_ALL, PH7_LANG_NAME);
-
-        mb_internal_encoding(PH7_ENCODING);
-        mb_http_output(PH7_ENCODING);
-        mb_http_input(PH7_ENCODING);
-        mb_language('uni');
-        mb_regex_encoding(PH7_ENCODING);
     }
 
     /**
@@ -393,8 +387,8 @@ final class FrontController
         $oLoadTpl = (new LoadTemplate)->setDefaultTpl(DbConfig::getSetting('defaultTemplate'));
         $oLoadTpl->tpl();
         $oLoadTpl->modTpl();
-        define('PH7_TPL_NAME', $oLoadTpl->getTpl());
-        define('PH7_TPL_MOD_NAME', $oLoadTpl->getModTpl());
+        define( 'PH7_TPL_NAME', $oLoadTpl->getTpl() );
+        define( 'PH7_TPL_MOD_NAME', $oLoadTpl->getModTpl() );
         unset($oLoadTpl);
     }
 
@@ -553,7 +547,7 @@ final class FrontController
 
         /***** FOR FILE CONFIG .INI OF MODULE *****/
         $this->oConfig->load($this->oRegistry->path_module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
-        define('PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme']);
+        define( 'PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme'] );
 
         $this->_templateInitialize();
 

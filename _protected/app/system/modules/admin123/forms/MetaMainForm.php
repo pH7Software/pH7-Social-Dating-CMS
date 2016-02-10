@@ -29,7 +29,7 @@ class MetaMainForm
         $sWhereLang = (new Http)->get('meta_lang');
         $oMeta = DbConfig::getMetaMain($sWhereLang);
 
-        $oForm = new \PFBC\Form('form_meta', 500);
+        $oForm = new \PFBC\Form('form_meta');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_meta', 'form_meta'));
         $oForm->addElement(new \PFBC\Element\Token('admin_meta'));

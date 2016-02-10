@@ -19,7 +19,7 @@
 <h2>PHP:</h2>
    <h3>Minimum:</h3>
            <ul>
-                <li>Version - 5.4.0.</li>
+                <li>Version - 5.5.0.</li>
                 <li>PDO extension.</li>
                 <li>exec() PHP (system program execution) must be allowed.</li>
                 <li>GD complied with your PHP Build.</li>
@@ -39,7 +39,7 @@
 
    <h3>Recommended:</h3>
      <ul>
-       <li>PHP 5.4.15 or higher.</li>
+       <li>PHP 5.5.9 or higher.</li>
      </ul>
 
    <h3>Recommended Extensions:</h3>

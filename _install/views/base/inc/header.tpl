@@ -37,11 +37,11 @@
                 </noscript>
 
                 {if !empty($sept_number)}
-                    <h1>{$LANG.welcome_to_installer} {$software_name} - {$LANG.step} {$sept_number}/7</h1>
+                    <h1>{$LANG.welcome_to_installer} {$software_name} - {$LANG.step} {$sept_number}/8</h1>
                 {/if}
             </header>
             <!-- End Header -->
 
             <div class="progress">
-                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{$sept_number*14}%">{$sept_number*14}%</div>
+                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width:{$sept_number*14}%">{$sept_number*12.5}%</div>
             </div>

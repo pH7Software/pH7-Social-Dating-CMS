@@ -1,9 +1,9 @@
 <div class="center">
 
-  {{ $is_paypal = $config->values['module.setting']['paypal.enable'] }}
-  {{ $is_stripe = $config->values['module.setting']['stripe.enable'] }}
-  {{ $is_2co = $config->values['module.setting']['2co.enable'] }}
-  {{ $is_ccbill = $config->values['module.setting']['ccbill.enable'] }}
+  {{ $is_paypal = $config->values['module.setting']['paypal.enabled'] }}
+  {{ $is_stripe = $config->values['module.setting']['stripe.enabled'] }}
+  {{ $is_2co = $config->values['module.setting']['2co.enabled'] }}
+  {{ $is_ccbill = $config->values['module.setting']['ccbill.enabled'] }}
 
   {if !$is_paypal && !$is_stripe && !$is_2co && !$is_ccbill}
       <p class="err_msg">{lang 'No Payment System Enabled!'}</p>

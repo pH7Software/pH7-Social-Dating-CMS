@@ -51,7 +51,7 @@ class ConfigFileCoreFormProcess extends Form
         else
             Header::redirect($sRedirectUrl, t('The file content could not be saved!'), 'error');
 
-        // Check and correct the file permission if necessary.
+        // Check again and correct the file permission if necessary.
         $this->file->chmod($sIniFile, 0644);
     }
 

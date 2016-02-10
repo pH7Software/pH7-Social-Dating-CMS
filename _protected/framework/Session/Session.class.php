@@ -37,7 +37,7 @@ class Session
          */
         if (!(new \PH7\Framework\Server\Server)->isLocalHost())
         {
-            $iTime = (int) time() + Config::getInstance()->values['session']['expiration'];
+            $iTime = (int) Config::getInstance()->values['session']['expiration'];
             session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], $bSecure, true);
         }
 

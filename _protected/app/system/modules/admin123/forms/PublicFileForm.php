@@ -8,6 +8,8 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Error\CException\UserException as Except; // Add User Exception
+
 class PublicFileForm
 {
 
@@ -21,9 +23,11 @@ class PublicFileForm
             Framework\Url\Header::redirect();
         }
 
-        $rData = file_get_contents(PH7_PATH_ROOT . $_GET['file']);
+        if(!$rData = @file_get_contents(PH7_PATH_ROOT . $_GET['file'])) {
+            throw new Except(t('The requested file was not found: %0%', PH7_PATH_ROOT . $_GET['file']));
+        }
 
-        $oForm = new \PFBC\Form('form_file', '100%');
+        $oForm = new \PFBC\Form('form_file');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_file', 'form_file'));
         $oForm->addElement(new \PFBC\Element\Token('file'));

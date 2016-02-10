@@ -26,7 +26,7 @@ class SettingForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_setting', 700);
+        $oForm = new \PFBC\Form('form_setting');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_setting', 'form_setting'));
         $oForm->addElement(new \PFBC\Element\Token('setting'));
@@ -54,17 +54,17 @@ class SettingForm
         unset($oFile, $aTplsId, $aLangsId, $aTpls, $aLangs);
 
         $oForm->addElement(new \PFBC\Element\Select(t('Map Type:'), 'map_type', array('roadmap' => t('Roadmap (default)'), 'hybrid' => t('Hybrid'), 'terrain' => t('Terrain'), 'satellite' => t('Satellite')), array('value' => DbConfig::getSetting('mapType'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Splash Page:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page for the visitors, otherwise it will classic page that will be used.'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Enable or Disable the "Animated Video" on the Splash Page.'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Homepage Splash Page:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page for the visitors (not logged), otherwise the classic page will be used.'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Enable/Disable the "Animated Video" on the splash homepage. <strong>If you hold <a href="http://ph7cms.com/order">pH7CMSPro</a>, we can provide professional splash videos for your niche and setting-up the video on your site</strong>.'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Ajax Site with AjPH:'), 'full_ajax_site', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t("Be careful! 'Full Ajax Navigation' feature is still in Beta and may not be working properly on all pages."), 'value' => DbConfig::getSetting('fullAjaxSite'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Site Status:'), 'site_status', array(DbConfig::ENABLE_SITE => t('Enable'), DbConfig::MAINTENANCE_SITE => t('Maintenance')), array('value' => DbConfig::getSetting('siteStatus'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Adult Disclaimer:'), 'disclaimer', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show an Adult Warning to enter to the site. This is useful for sites with adult content.'), 'value' => DbConfig::getSetting('disclaimer'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable a Cookie Consent Bar to prevent your users that your site uses cookies. This is required for EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show the Latest News on the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show the Latest News about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1)));
 
         /********** Logo Settings **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="logotype"><h2 class="underline">' . t('Logo:') . '</h2>'));
-        $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo', array('accept' => 'image/*')));
+        $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo', array('description' => t('Add your small logo/icon that represents/distinguishes your site/concept/brand the best.'), 'accept' => 'image/*')));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'logo.png?v=' . File::version(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png') . '" alt="' . t('Logo') . '" title="' . t('The current logo of your site.') . '" /></p>'));
 
@@ -88,10 +88,10 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image:') . '</h3>'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark text:'), 'watermark_text_image', array('value' => DbConfig::getSetting('watermarkTextImage'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Number(t('Size Watermark Text:'), 'size_watermark_text_image', array('description' => t('Between 0 to 5.'), 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Size Watermark Text:'), 'size_watermark_text_image', array('description' => t('Between 0 to 5.'), 'min' => 0, 'max' => 5, 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Video:') . '</h3>'));
-        $oForm->addElement(new \PFBC\Element\Url(t('Default video:'), 'default_video', array('description' => t('Video by default if no video found.'), 'value' => DbConfig::getSetting('defaultVideo'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Url(t('Default video:'), 'default_video', array('description' => t('Video by default if no video is found.'), 'value' => DbConfig::getSetting('defaultVideo'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Autoplay Video:'), 'autoplay_video', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('autoplayVideo'), 'required' => 1)));
 
         /********** Moderation **********/
@@ -101,14 +101,14 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Select(t('Note Post Manual Approval:'), 'note_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('noteManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Pictures Manual Approval:'), 'picture_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('pictureManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Videos Manual Approval:'), 'video_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('videoManualApproval'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Webcam Pictures Manual Approval:'), 'webcam_picture_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('This mode is experimental approval, do not use it in production.'), 'value' => DbConfig::getSetting('webcamPictureManualApproval'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Webcam Pictures Manual Approval:'), 'webcam_picture_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('This approval mode is experimental, do not use it in production.'), 'value' => DbConfig::getSetting('webcamPictureManualApproval'), 'required' => 1)));
 
         /********** Email **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="email"><h2 class="underline">' . t('Email Parameters:') . '</h2>'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Email Name:'), 'email_name', array('value' => DbConfig::getSetting('emailName'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Email(t('Admin Email:'), 'admin_email', array('value' => DbConfig::getSetting('adminEmail'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Email(t('Feedback Email:'), 'feedback_email', array('value' => DbConfig::getSetting('feedbackEmail'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Email(t('Return Email:'), 'return_email', array('description' => 'Generally noreply@yoursite.com', 'value' => DbConfig::getSetting('returnEmail'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Email(t('Return Email:'), 'return_email', array('description' => 'Usually noreply@yoursite.com', 'value' => DbConfig::getSetting('returnEmail'), 'required' => 1)));
 
         /********** Security **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="security"><h2 class="underline">' . t('Security:') . '</h2>'));
@@ -127,7 +127,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Admin:'), 'login_admin_attempt_time', array('description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginAdminAttemptTime'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Various:') . '</h3>'));
         $oForm->addElement(new \PFBC\Element\Select(t('Send Abuse Reports by email:'), 'send_report_mail', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('sendReportMail'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Security IP connection for Admin Panel:'), 'ip_login', array('description' => t('Enter <a href="%0%" title="Get your IP here!">your IP address</a> and an even higher security and exclude all other persons and bots that tried to connect with another IP address even if the login is correct! Leave blank to disable this feature.', Ip::api()), 'value' => DbConfig::getSetting('ipLogin'))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Security IP connection for Admin Panel:'), 'ip_login', array('description' => t('By entering <a href="%0%" title="Get your IP here!">your IP address</a>, you will even get a higher security and exclude all other persons and bots that tried to connect with another IP address even if the login is correct! Leave blank to disable this feature. Be careful, for using this feature you need to have a static IP (not dynamic). If you are not sure, please contact your ISP.', Ip::api()), 'value' => DbConfig::getSetting('ipLogin'))));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Indicate a word that will replace the banned word in the <a href="%0%">list</a>.', Uri::get(PH7_ADMIN_MOD, 'file', 'protectededit', 'app/configs/bans/word.txt', false)), 'ban_word_replace', array('value' => DbConfig::getSetting('banWordReplace'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Enable or Disable the CSRF security tokens in forms:'), 'security_token', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Sometime this protection can be annoying for users if there are not fast enough to fulfill the forms. However, if disabled, your site can be vulnerable on CSRF attacks in forms.'), 'value' => DbConfig::getSetting('securityToken'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Number(t('CSRF token lifetime:'), 'security_token_lifetime', array('description' => t('Time in seconds.'), 'value' => DbConfig::getSetting('securityTokenLifetime'), 'required' => 1)));
@@ -153,8 +153,9 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding a User Post Note:'), 'is_captcha_note', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaNote'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Pruning:') . '</h3>'));
-        $oForm->addElement(new \PFBC\Element\Number(t('Delete older messages:'), 'clean_msg', array('description' => t('Delete messages older than days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMsg'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Number(t('Delete older comments:'), 'clean_comment', array('description' => t('Delete comments older than days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanComment'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Delete old Messages:'), 'clean_msg', array('description' => t('Delete messages older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMsg'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Delete old Comments:'), 'clean_comment', array('description' => t('Delete comments older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanComment'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Delete old IM Messages:'), 'clean_messenger', array('description' => t('Delete IM messages older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMessenger'), 'required' => 1)));
 
         /********** Api **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="api"><h2 class="underline">' . t('Api:') . '</h2>'));
@@ -164,7 +165,7 @@ class SettingForm
 
         /********** Automation **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="content" id="automation"><h2 class="underline">' . t('Automation:') . '</h2>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Secret word for the URL cron:'), 'cron_security_hash', array('description' => t('Your very secret word for the cron URL. It will be used for running automated cron job.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(1, 64))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Secret word for the cron URL:'), 'cron_security_hash', array('description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(1, 64))));
         $oForm->addElement(new \PFBC\Element\Number(t('User inactivity timeout:'), 'user_timeout', array('description' => t('The number of minutes that a member becomes inactive (offline).'), 'value' => DbConfig::getSetting('userTimeout'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><script src="' . PH7_URL_STATIC . PH7_JS . 'tabs.js"></script><script>tabs(\'p\', [\'general\',\'logotype\',\'registration\',\'pic_vid\',\'moderation\',\'email\',\'security\',\'spam\',\'api\',\'automation\']);</script>'));

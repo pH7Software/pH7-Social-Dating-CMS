@@ -22,7 +22,7 @@ class ChangePasswordCoreForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_change_password', 500);
+        $oForm = new \PFBC\Form('form_change_password');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_change_password', 'form_change_password'));
         $oForm->addElement(new \PFBC\Element\Token('change_password'));

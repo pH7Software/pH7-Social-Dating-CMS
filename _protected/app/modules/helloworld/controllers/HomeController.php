@@ -7,6 +7,8 @@
  */
 namespace PH7;
 
+use PH7\Framework\Translate\Lang;
+
 class HomeController extends Controller
 {
 
@@ -16,7 +18,7 @@ class HomeController extends Controller
     public function index($sFirstName = '', $sLastName = '')
     {
         // Loading hello_world language...
-        $this->lang->load('hello_world');
+        (new Lang)->load('hello_world');
 
         // Meta Tags
         $this->view->page_title = t('Hello World');

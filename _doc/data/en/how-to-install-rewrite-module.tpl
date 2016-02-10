@@ -1,4 +1,4 @@
-<h2>How to install rewrite module on your Web server</h2>
+<h2>How to install Apache "mod_rewrite" on your Web server</h2>
 
 <p>Once you have successfully installed the Apache server and the "mod_rewrite" module, you have to edit the Apache configuration file.</p>
 <p>The Apache configuration file depends on your operating system.<br />
@@ -10,3 +10,5 @@ For Ubuntu and other OS based on Debian, the Web server configuration file will 
 
 <p>I hope this help will be useful and will save you much time.</p>
 <p>P.S., Normally, all shared hosts are already configured to work with Apache mod_rewrite and allow configuration via .htaccess</p>
+<p>&nbsp;</p>
+<p>For checking if everything is OK and pH7CMS will be able to work, you can <a href="http://github.com/pH7Software/Rewrite-Mod-Test">use this test rewriting script</a>.</p>

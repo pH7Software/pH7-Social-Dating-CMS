@@ -98,7 +98,7 @@ class MainController extends Controller
         {
             case 'paypal':
             {
-                $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enable']);
+                $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
                 if ($oPayPal->valid() && $this->httpRequest->postExists('item_number') && $this->httpRequest->postExists('custom'))
                 {
                     if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->httpRequest->post('custom', 'int'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
@@ -135,7 +135,7 @@ class MainController extends Controller
 
             case '2co':
             {
-                $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enable']);
+                $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enabled']);
                 $sVendorId = $this->config->values['module.setting']['2co.vendor_id'];
                 $sSecretWord = $this->config->values['module.setting']['2co.secret_word'];
 
@@ -249,7 +249,7 @@ class MainController extends Controller
      */
     protected function log(Framework\Payment\Gateway\Api\Api $oProvider, $sMsg)
     {
-        if ($this->config->values['module.setting']['log_file.enable'])
+        if ($this->config->values['module.setting']['log_file.enabled'])
         {
             $sLogTxt = $sMsg . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL;
             $oProvider->saveLog($sLogTxt . print_r($_POST, true), $this->registry);

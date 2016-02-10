@@ -28,7 +28,7 @@ class Emoticon extends \PH7\Framework\Service\Emoticon
      */
     public static function init($sContents, $bIsDataUri = true)
     {
-        $aEmoticons = static::gets();
+        $aEmoticons = static::get();
 
         foreach ($aEmoticons as $sEmoticonKey => $aEmoticon)
             if ($bIsDataUri)

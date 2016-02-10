@@ -59,7 +59,10 @@ class LoginFormProcess extends Form
                     $oSecurityModel->addLoginAttempt();
 
                 $this->session->set('captcha_enabled',1); // Enable Captcha
-                \PFBC\Form::setError('form_login_user', t('Oops! This password you entered is incorrect.<br /> Please try again (make sure your caps lock is off).<br /> Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('user','main','forgot')));
+                $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
+                $sWrongPwdTxt .= t('Please try again (make sure your caps lock is off).') . '<br />';
+                $sWrongPwdTxt .= t('Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('lost-password','main','forgot','user'));
+                \PFBC\Form::setError('form_login_user', $sWrongPwdTxt);
             }
         }
         else

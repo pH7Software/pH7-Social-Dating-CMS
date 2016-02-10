@@ -32,7 +32,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     AUTHOR = 'Pierre-Henry Soria',
     VERSION = '1.3.0',
     LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/',
-    ERR_MSG = 'FATAL ERROR!',
+    ERR_MSG = 'FATAL LICENSE ERROR!<br /> It seems you need to upgrade your site to <a href="http://ph7cms.com/order">pH7CMSPro</a><br /> or if you hold <a href="http://ph7cms.com/pro">pH7CMSPro</a>, please contact the ticket support in order to solve the problem.',
 
     /**
      * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
@@ -90,8 +90,8 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         // Enable (true) or Disables (false) html comments in the source code of the site that shows information conernant template engine such as name, version, ...
         $this->bLicense = PH7_VALID_LICENSE;
 
-        $this->bHtmlCompressor = (bool) $this->config->values['cache']['enable.static.compressor'];
-        $this->bPhpCompressor = (bool) $this->config->values['cache']['enable.static.compressor'];
+        $this->bHtmlCompressor = (bool) $this->config->values['cache']['enable.static.minify'];
+        $this->bPhpCompressor = (bool) $this->config->values['cache']['enable.static.minify'];
     }
 
     /**
@@ -391,8 +391,11 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
 
         $this->file->createDir($this->sCompileDir);
 
-        $this->sCompileDir2 = ($this->isMainDir($sDirPath)) ? $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS
-        : $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $this->getCurrentController();
+        if ($this->isMainDir($sDirPath)) {
+            $this->sCompileDir2 = $this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS;
+        } else {
+            $this->sCompileDir2 = $this->sCompileDir . $this->registry->module . '_' . md5($this->registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . $this->getCurrentController();
+        }
 
         $this->sCompileDirFile = ($this->isMainDir($sDirPath)) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2 .
                 str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
@@ -408,7 +411,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
 
         if (!empty($_bInclude))
         {
-            $bCaching = (bool) $this->config->values['cache']['enable.html.tpl'];
+            $bCaching = (bool) $this->config->values['cache']['enable.html.tpl.cache'];
 
             if ($this->isEnableCache() === true && $bCaching === true && !$this->isMainCompilePage())
             {

@@ -125,7 +125,7 @@ class MapAPI
 
     public function __construct()
     {
-        $this->bCompressor = (bool)Config::getInstance()->values['cache']['enable.static.compressor'];
+        $this->bCompressor = (bool)Config::getInstance()->values['cache']['enable.static.minify'];
     }
 
     /**

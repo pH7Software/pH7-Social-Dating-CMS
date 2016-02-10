@@ -1,15 +1,15 @@
 /**
  * Dutch translation
  * @author Barry vd. Heuvel <barry@fruitcakestudio.nl>
- * @version 2012-04-02
+ * @version 2015-12-01
  */
 if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object') {
     elFinder.prototype.i18.nl = {
         translator : 'Barry vd. Heuvel &lt;barry@fruitcakestudio.nl&gt;',
         language   : 'Nederlands',
         direction  : 'ltr',
-        dateFormat : 'd-m-Y H:i',
-        fancyDateFormat : '$1 H:i',
+        dateFormat : 'd-m-Y H:i', // Mar 13, 2012 05:27 PM
+        fancyDateFormat : '$1 H:i', // will produce smth like: Today 12:25 PM
         messages   : {
 
             /********************************** errors **********************************/
@@ -50,28 +50,52 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errRename'            : 'Kan "$1" niet hernoemen.',
             'errCopyFrom'          : 'Bestanden kopiëren van "$1" is niet toegestaan.',
             'errCopyTo'            : 'Bestanden kopiëren naar "$1" is niet toegestaan.',
-            'errUploadCommon'      : 'Upload fout.',
-            'errUpload'            : 'Kan "$1" niet uploaden.',
+            'errMkOutLink'         : 'Kan geen link maken buiten de hoofdmap.', // from v2.1 added 03.10.2015
+            'errUpload'            : 'Upload fout.',  // old name - errUploadCommon
+            'errUploadFile'        : 'Kan "$1" niet uploaden.', // old name - errUpload
             'errUploadNoFiles'     : 'Geen bestanden gevonden om te uploaden.',
-            'errMaxSize'           : 'Data overschrijdt de maximale grootte.',
-            'errFileMaxSize'       : 'Bestand overschrijdt de maximale grootte.',
+            'errUploadTotalSize'   : 'Data overschrijdt de maximale grootte.', // old name - errMaxSize
+            'errUploadFileSize'    : 'Bestand overschrijdt de maximale grootte.', //  old name - errFileMaxSize
             'errUploadMime'        : 'Bestandstype niet toegestaan.',
             'errUploadTransfer'    : '"$1" overdrachtsfout.',
+            'errUploadTemp'        : 'Kan geen tijdelijk bestand voor de upload maken.', // from v2.1 added 26.09.2015
+            'errNotReplace'        : 'Object "$1" bestaat al op deze locatie en kan niet vervangen worden door een ander type object.', // new
+            'errReplace'           : 'Kan "$1" niet vervangen.',
             'errSave'              : 'Kan "$1" niet opslaan.',
             'errCopy'              : 'Kan "$1" niet kopiëren.',
             'errMove'              : 'Kan "$1" niet verplaatsen.',
             'errCopyInItself'      : 'Kan "$1" niet in zichzelf kopiëren.',
             'errRm'                : 'Kan "$1" niet verwijderen.',
+            'errRmSrc'             : 'Kan bronbestanden niet verwijderen.',
             'errExtract'           : 'Kan de bestanden van "$1" niet uitpakken.',
             'errArchive'           : 'Kan het archief niet maken.',
             'errArcType'           : 'Archief type is niet ondersteund.',
             'errNoArchive'         : 'Bestand is geen archief of geen ondersteund archief type.',
             'errCmdNoSupport'      : 'Backend ondersteund dit commando niet.',
             'errReplByChild'       : 'De map "$1" kan niet vervangen worden door een item uit die map.',
-            'errArcSymlinks'       : 'Om veiligheidsredenen kan een bestand met symlinks niet worden uitgepakt .',
+            'errArcSymlinks'       : 'Om veiligheidsredenen kan een bestand met symlinks of bestanden met niet toegestane namen niet worden uitgepakt .', // edited 24.06.2012
             'errArcMaxSize'        : 'Archief overschrijdt de maximale bestandsgrootte.',
             'errResize'            : 'Kan het formaat van "$1" niet wijzigen.',
-                'errUsupportType'      : 'Bestandstype wordt niet ondersteund.',
+            'errResizeDegree'      : 'Ongeldig aantal graden om te draaien.',  // added 7.3.2013
+            'errResizeRotate'      : 'Afbeelding kan niet gedraaid worden.',  // added 7.3.2013
+            'errResizeSize'        : 'Ongeldig afbeelding formaat.',  // added 7.3.2013
+            'errResizeNoChange'    : 'Afbeelding formaat is niet veranderd.',  // added 7.3.2013
+            'errUsupportType'      : 'Bestandstype wordt niet ondersteund.',
+            'errNotUTF8Content'    : 'Bestand "$1" is niet in UTF-8 and kan niet aangepast worden.',  // added 9.11.2011
+            'errNetMount'          : 'Kan "$1" niet mounten.', // added 17.04.2012
+            'errNetMountNoDriver'  : 'Niet ondersteund protocol.',     // added 17.04.2012
+            'errNetMountFailed'    : 'Mount mislukt.',         // added 17.04.2012
+            'errNetMountHostReq'   : 'Host is verplicht.', // added 18.04.2012
+            'errSessionExpires'    : 'Uw sessie is verlopen vanwege inactiviteit.',
+            'errCreatingTempDir'   : 'Kan de tijdelijke map niet aanmaken: "$1" ',
+            'errFtpDownloadFile'   : 'Kan het bestand niet downloaden vanaf FTP: "$1"',
+            'errFtpUploadFile'     : 'Kan het bestand niet uploaden naar FTP: "$1"',
+            'errFtpMkdir'          : 'Kan het externe map niet aanmaken op de FTP-server: "$1"',
+            'errArchiveExec'       : 'Er is een fout opgetreden bij het archivering van de bestanden: "$1" ',
+            'errExtractExec'       : 'Er is een fout opgetreden bij het uitpakken van de bestanden: "$1" ',
+            'errNetUnMount'        : 'Kan niet unmounten', // from v2.1 added 30.04.2012
+            'errConvUTF8'          : 'Kan niet converteren naar UTF-8', // from v2.1 added 08.04.2014
+            'errFolderUpload'      : 'Probeer Google Chrome, als je de map wil uploaden.', // from v2.1 added 26.6.2015
 
             /******************************* commands names ********************************/
             'cmdarchive'   : 'Maak archief',
@@ -101,6 +125,10 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'cmdview'      : 'Bekijk',
             'cmdresize'    : 'Formaat wijzigen',
             'cmdsort'      : 'Sorteren',
+            'cmdnetmount'  : 'Mount netwerk volume', // added 18.04.2012
+            'cmdnetunmount': 'Unmount', // from v2.1 added 30.04.2012
+            'cmdplaces'    : 'Naar Plaatsen', // added 28.12.2014
+            'cmdchmod'     : 'Wijzig modus', // from v2.1 added 20.6.2015
 
             /*********************************** buttons ***********************************/
             'btnClose'  : 'Sluit',
@@ -110,43 +138,62 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'btnCancel' : 'Annuleren',
             'btnNo'     : 'Nee',
             'btnYes'    : 'Ja',
+            'btnMount'  : 'Mount',  // added 18.04.2012
+            'btnApprove': 'Ga naar $1 & keur goed', // from v2.1 added 26.04.2012
+            'btnUnmount': 'Unmount', // from v2.1 added 30.04.2012
+            'btnConv'   : 'Converteer', // from v2.1 added 08.04.2014
+            'btnCwd'    : 'Hier',      // from v2.1 added 22.5.2015
+            'btnVolume' : 'Volume',    // from v2.1 added 22.5.2015
+            'btnAll'    : 'Alles',       // from v2.1 added 22.5.2015
+            'btnMime'   : 'MIME Type', // from v2.1 added 22.5.2015
+            'btnFileName':'Bestandsnaam',  // from v2.1 added 22.5.2015
+            'btnSaveClose': 'Opslaan & Sluiten', // from v2.1 added 12.6.2015
+            'btnBackup' : 'Back-up', // fromv2.1 added 28.11.2015
 
             /******************************** notifications ********************************/
             'ntfopen'     : 'Bezig met openen van map',
             'ntffile'     : 'Bezig met openen bestand',
-            'ntfreload'   : 'Bezig met inhoud map vernieuwen',
+            'ntfreload'   : 'Herladen map inhoud',
             'ntfmkdir'    : 'Bezig met map maken',
             'ntfmkfile'   : 'Bezig met Bestanden maken',
-            'ntfrm'       : 'Bezig met verwijderen bestanden',
+            'ntfrm'       : 'Verwijderen bestanden',
             'ntfcopy'     : 'Kopieer bestanden',
             'ntfmove'     : 'Verplaats bestanden',
-            'ntfprepare'  : 'Voorbereiden om bestanden te kopiëren',
+            'ntfprepare'  : 'Voorbereiden kopiëren',
             'ntfrename'   : 'Hernoem bestanden',
-            'ntfupload'   : 'Bezig met uploaden bestanden',
-            'ntfdownload' : 'Bezig met downloaden bestanden',
+            'ntfupload'   : 'Bestanden uploaden actief',
+            'ntfdownload' : 'Bestanden downloaden actief',
             'ntfsave'     : 'Bestanden opslaan',
             'ntfarchive'  : 'Archief aan het maken',
-            'ntfextract'  : 'Bestanden uit het archief aan het uitpakken',
+            'ntfextract'  : 'Bestanden uitpakken actief',
             'ntfsearch'   : 'Zoeken naar bestanden',
-            'ntfsmth'     : 'Iets aan het doen >_<',
+            'ntfresize'   : 'Formaat wijzigen van afbeeldingen',
+            'ntfsmth'     : 'Iets aan het doen',
             'ntfloadimg'  : 'Laden van plaatje',
+            'ntfnetmount' : 'Mounten van netwerk volume', // added 18.04.2012
+            'ntfnetunmount': 'Unmounten van netwerk volume', // from v2.1 added 30.04.2012
+            'ntfdim'      : 'Opvragen afbeeldingen dimensies', // added 20.05.2013
+            'ntfreaddir'  : 'Map informatie lezen', // from v2.1 added 01.07.2013
+            'ntfurl'      : 'URL van link ophalen', // from v2.1 added 11.03.2014
+            'ntfchmod'    : 'Bestandsmodus wijzigen', // from v2.1 added 20.6.2015
+            'ntfpreupload': 'Upload bestandsnaam verifiëren', // from v2.1 added 31.11.2015
 
             /************************************ dates **********************************/
             'dateUnknown' : 'onbekend',
             'Today'       : 'Vandaag',
             'Yesterday'   : 'Gisteren',
-            'Jan'         : 'Jan',
-            'Feb'         : 'Feb',
-            'Mar'         : 'Mar',
-            'Apr'         : 'Apr',
-            'May'         : 'Mei',
-            'Jun'         : 'Jun',
-            'Jul'         : 'Jul',
-            'Aug'         : 'Aug',
-            'Sep'         : 'Sep',
-            'Oct'         : 'Okt',
-            'Nov'         : 'Nov',
-            'Dec'         : 'Dec',
+            'msJan'       : 'Jan',
+            'msFeb'       : 'Feb',
+            'msMar'       : 'Mar',
+            'msApr'       : 'Apr',
+            'msMay'       : 'Mei',
+            'msJun'       : 'Jun',
+            'msJul'       : 'Jul',
+            'msAug'       : 'Aug',
+            'msSep'       : 'Sep',
+            'msOct'       : 'Okt',
+            'msNov'       : 'Nov',
+            'msDec'       : 'Dec',
             'January'     : 'Januari',
             'February'    : 'Februari',
             'March'       : 'Maart',
@@ -175,19 +222,23 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'Sat'         : 'Za',
 
             /******************************** sort variants ********************************/
-            'sortnameDirsFirst' : 'op naam (mappen eerst)',
-            'sortkindDirsFirst' : 'op type (mappen eerst)',
-            'sortsizeDirsFirst' : 'op grootte (mappen eerst)',
-            'sortdateDirsFirst' : 'op datum (mappen eerst)',
             'sortname'          : 'op naam',
             'sortkind'          : 'op type',
             'sortsize'          : 'op grootte',
             'sortdate'          : 'op datum',
+            'sortFoldersFirst'  : 'Mappen eerst',
+
+            /********************************** new items **********************************/
+            'untitled file.txt' : 'NieuwBestand.txt', // added 10.11.2015
+            'untitled folder'   : 'NieuweMap',   // added 10.11.2015
+            'Archive'           : 'NieuwArchief',  // from v2.1 added 10.11.2015
 
             /********************************** messages **********************************/
             'confirmReq'      : 'Bevestiging nodig',
             'confirmRm'       : 'Weet u zeker dat u deze bestanden wil verwijderen?<br/>Deze actie kan niet ongedaan gemaakt worden!',
             'confirmRepl'     : 'Oud bestand vervangen door het nieuwe bestand?',
+            'confirmConvUTF8' : 'Niet in UTF-8<br/>Converteren naar UTF-8?<br/>De inhoud wordt UTF-8 door op te slaan na de conversie.', // from v2.1 added 08.04.2014
+            'confirmNotSave'  : 'Het is aangepast.<br/>Wijzigingen gaan verloren als je niet opslaat.', // from v2.1 added 15.7.2015
             'apllyAll'        : 'Toepassen op alles',
             'name'            : 'Naam',
             'size'            : 'Grootte',
@@ -224,7 +275,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'help'            : 'Help',
             'webfm'           : 'Web bestandsmanager',
             'ver'             : 'Versie',
-            'protocol'        : 'protocol versie',
+            'protocolver'     : 'protocol versie',
             'homepage'        : 'Project home',
             'docs'            : 'Documentatie',
             'github'          : 'Fork ons op Github',
@@ -245,19 +296,35 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'moveFiles'       : 'Verplaats bestanden',
             'copyFiles'       : 'Kopieer bestanden',
             'rmFromPlaces'    : 'Verwijder uit Plaatsen',
-            'untitled folder' : 'Nieuwe map',
-            'untitled file.txt' : 'nieuw bestand.txt',
             'aspectRatio'     : 'Aspect ratio',
             'scale'           : 'Schaal',
             'width'           : 'Breedte',
             'height'          : 'Hoogte',
-            'mode'          : 'Modus',
-            'resize'      : 'Verkleinen', //Or: Vergroten/verkleinen
-            'crop'          : 'Bijsnijden',
-            'rotate'      : 'Draaien',
-            'rotate-cw'      : 'Draai 90 graden rechtsom',
+            'resize'          : 'Verkleinen',
+            'crop'            : 'Bijsnijden',
+            'rotate'          : 'Draaien',
+            'rotate-cw'       : 'Draai 90 graden rechtsom',
             'rotate-ccw'      : 'Draai 90 graden linksom',
-            'degree'      : '°',
+            'degree'          : '°',
+            'netMountDialogTitle' : 'Mount netwerk volume', // added 18.04.2012
+            'protocol'            : 'Protocol', // added 18.04.2012
+            'host'                : 'Host', // added 18.04.2012
+            'port'                : 'Poort', // added 18.04.2012
+            'user'                : 'Gebruikersnaams', // added 18.04.2012
+            'pass'                : 'Wachtwoord', // added 18.04.2012
+            'confirmUnmount'      : 'Weet u zeker dat u $1 wil unmounten?',  // from v2.1 added 30.04.2012
+            'dropFilesBrowser': 'Sleep of plak bestanden vanuit de browser', // from v2.1 added 30.05.2012
+            'dropPasteFiles'  : 'Sleep of plak bestanden hier', // from v2.1 added 07.04.2014
+            'encoding'        : 'Encodering', // from v2.1 added 19.12.2014
+            'locale'          : 'Locale',   // from v2.1 added 19.12.2014
+            'searchTarget'    : 'Doel: $1',                // from v2.1 added 22.5.2015
+            'searchMime'      : 'Zoek op invoer MIME Type', // from v2.1 added 22.5.2015
+            'owner'           : 'Eigenaar', // from v2.1 added 20.6.2015
+            'group'           : 'Groep', // from v2.1 added 20.6.2015
+            'other'           : 'Overig', // from v2.1 added 20.6.2015
+            'execute'         : 'Uitvoeren', // from v2.1 added 20.6.2015
+            'perm'            : 'Rechten', // from v2.1 added 20.6.2015
+            'mode'            : 'Modus', // from v2.1 added 20.6.2015
 
             /********************************** mimetypes **********************************/
             'kindUnknown'     : 'Onbekend',
@@ -279,6 +346,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'kindTAR'         : 'TAR archief',
             'kindGZIP'        : 'GZIP archief',
             'kindBZIP'        : 'BZIP archief',
+            'kindXZ'          : 'XZ archief',
             'kindZIP'         : 'ZIP archief',
             'kindRAR'         : 'RAR archief',
             'kindJAR'         : 'Java JAR bestand',
@@ -307,6 +375,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'kindAWK'         : 'AWK bronbestand',
             'kindCSV'         : 'Komma gescheiden waardes',
             'kindDOCBOOK'     : 'Docbook XML document',
+            'kindMarkdown'    : 'Markdown tekst', // added 20.7.2015
             // images
             'kindImage'       : 'Afbeelding',
             'kindBMP'         : 'BMP afbeelding',
@@ -337,6 +406,6 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'kindVideoMKV'    : 'Matroska video',
             'kindVideoOGG'    : 'Ogg video'
         }
-    }
+    };
 }
 

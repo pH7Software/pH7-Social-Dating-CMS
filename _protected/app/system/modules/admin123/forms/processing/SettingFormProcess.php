@@ -300,6 +300,9 @@ class SettingFormProcess extends Form
         if(!$this->str->equals($this->httpRequest->post('clean_comment'), DbConfig::getSetting('cleanComment')))
             DbConfig::setSetting($this->httpRequest->post('clean_comment'), 'cleanComment');
 
+        if(!$this->str->equals($this->httpRequest->post('clean_messenger'), DbConfig::getSetting('cleanMessenger')))
+            DbConfig::setSetting($this->httpRequest->post('clean_messenger'), 'cleanMessenger');
+
 
         /********** Api **********/
 

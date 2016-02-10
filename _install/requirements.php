@@ -21,7 +21,7 @@ defined('PH7') or exit('Restricted access');
 $aErrors = array();
 
 if (version_compare(PHP_VERSION, PH7_REQUIRE_SERVER_VERSION, '<'))
-    $aErrors[] = 'Your PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.';
+    $aErrors[] = 'Your current PHP version is ' . PHP_VERSION . '. pH7CMS requires PHP ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.<br /> Please ask your Web host to upgrade PHP to ' . PH7_REQUIRE_SERVER_VERSION . ' or newer.';
 
 if (!extension_loaded ('pdo_mysql'))
     $aErrors[] = 'Please install "PDO" PHP extension with MySQL driver.';
