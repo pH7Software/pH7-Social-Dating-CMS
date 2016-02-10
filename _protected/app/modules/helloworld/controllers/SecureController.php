@@ -12,7 +12,7 @@ use PH7\Framework\Http\Http;
 class SecureController extends Controller
 {
 
-    public function index ()
+    public function index()
     {
         // Loading Gettext Language File ...
         $this->lang->load('hello_world');

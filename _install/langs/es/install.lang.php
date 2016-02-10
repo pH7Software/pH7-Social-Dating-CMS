@@ -10,7 +10,7 @@
 
 namespace PH7;
 
-$LANG = array (
+$LANG = array(
     'lang' => 'es',
     'charset' => 'utf-8',
     'lang_name' => 'Español',

@@ -33,7 +33,7 @@ class Google_CacheParser {
    * @return bool True if the request is cacheable.
    * False if the request is uncacheable.
    */
-  public static function isRequestCacheable (Google_HttpRequest $resp) {
+  public static function isRequestCacheable(Google_HttpRequest $resp) {
     $method = $resp->getRequestMethod();
     if (! in_array($method, self::$CACHEABLE_HTTP_METHODS)) {
       return false;
@@ -58,7 +58,7 @@ class Google_CacheParser {
    * @return bool True if the response is cacheable.
    * False if the response is un-cacheable.
    */
-  public static function isResponseCacheable (Google_HttpRequest $resp) {
+  public static function isResponseCacheable(Google_HttpRequest $resp) {
     // First, check if the HTTP request was cacheable before inspecting the
     // HTTP response.
     if (false == self::isRequestCacheable($resp)) {

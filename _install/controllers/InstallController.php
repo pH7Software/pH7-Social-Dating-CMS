@@ -19,7 +19,7 @@ class InstallController extends Controller
 {
 
     /********************* STEP 1 *********************/
-    public function index ()
+    public function index()
     {
         $aLangs = get_dir_list(PH7_ROOT_INSTALL . 'langs/');
         $aLangsList = include(PH7_ROOT_INSTALL . 'inc/lang_list.inc.php');
@@ -37,7 +37,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 2 *********************/
-    public function config_path ()
+    public function config_path()
     {
         global $LANG;
 
@@ -86,7 +86,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 3 *********************/
-    public function config_system ()
+    public function config_system()
     {
         global $LANG;
 
@@ -402,14 +402,14 @@ class InstallController extends Controller
     }
 
     /********************* STEP 5 *********************/
-    public function service ()
+    public function service()
     {
         $this->oView->assign('sept_number', 5);
         $this->oView->display('service.tpl');
     }
 
     /********************* STEP 6 *********************/
-    public function license ()
+    public function license()
     {
         global $LANG;
 
@@ -460,7 +460,7 @@ class InstallController extends Controller
     }
 
     /********************* STEP 7 *********************/
-    public function finish ()
+    public function finish()
     {
         global $LANG;
 

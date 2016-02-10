@@ -390,7 +390,7 @@ class elFinder {
      * @return string
      * @author Dmitry (dio) Levashov
      **/
-    public function realpath($hash)    {
+    public function realpath($hash) {
         if (($volume = $this->volume($hash)) == false) {
             return false;
         }
