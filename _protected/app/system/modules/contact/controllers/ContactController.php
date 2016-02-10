@@ -9,7 +9,7 @@ namespace PH7;
 class ContactController extends Controller
 {
 
-    public function index ()
+    public function index()
     {
         $this->view->page_title = t('Contact Us');
         $this->view->h1_title = t('Contact %site_name%');
