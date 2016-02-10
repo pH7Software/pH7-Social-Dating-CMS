@@ -37,12 +37,10 @@ abstract class Base
                     /*If the appropriate class has a "set" method for the property provided, then
                     it is called instead or setting the property directly.*/
                     if(isset($method_reference['set' . $property])) {
-                        $methodName = $method_reference['set' . $property];
-                        $this->$methodName($value);
+                        $this->{$method_reference['set' . $property]}($value);
                     }
                     elseif(isset($property_reference[$property])) {
-                        $methodName = $property_reference[$property];
-                        $this->$methodName = $value;
+                        $this->{$property_reference[$property]} = $value;
                     }
                     /*Entries that don't match an available class property are stored in the attributes
                     property if applicable.  Typically, these entries will be element attributes such as

@@ -14,7 +14,7 @@ defined('PH7') or exit('Restricted access');
 abstract class Upload
 {
     /**
-     * @internal Protected access because those attributes are used in \PH7\Framework\Video\Video class
+     * @internal Protected access because these attributes are used in \PH7\Framework\Video\Video class
      */
     protected $sMaxSize, $iFileSize;
 

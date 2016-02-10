@@ -1,6 +1,7 @@
 <?php
 /*
- * Notice: This file has been slightly modified by the pH7CMS development team <http://software.hizup.com>.
+ * Notice: This file has been modified by the pH7CMS development team (well by Pierre-Henry Soria) <http://software.hizup.com>.
+ * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with the new PHP version).
  */
 defined('PH7') or exit('Restricted access');
 
@@ -64,7 +65,7 @@ $EMULATEGETTEXT = 0;
 $CURRENTLOCALE = '';
 
 /* Class to hold a single domain included in $text_domains. */
-class _gettext_domain {
+class domain {
   var $l10n;
   var $path;
   var $codeset;
@@ -147,7 +148,7 @@ function _get_reader($domain=null, $category=5, $enable_cache=true) {
 
         if (!array_key_exists($domain, $text_domains)) {
           // Initialize an empty domain object.
-          $text_domains[$domain] = new _gettext_domain();
+          $text_domains[$domain] = new domain();
         }
         $text_domains[$domain]->l10n = new gettext_reader($input,
                                                           $enable_cache);
@@ -186,14 +187,13 @@ function _get_codeset($domain=null) {
  * Convert the given string to the encoding set by bind_textdomain_codeset.
  */
 function _encode($text) {
+  $target_encoding = _get_codeset();
+  if (function_exists("mb_detect_encoding")) {
     $source_encoding = mb_detect_encoding($text);
-    $target_encoding = _get_codeset();
-    if ($source_encoding != $target_encoding) {
-        return mb_convert_encoding($text, $target_encoding, $source_encoding);
-    }
-    else {
-        return $text;
-    }
+    if ($source_encoding != $target_encoding)
+      $text = mb_convert_encoding($text, $target_encoding, $source_encoding);
+  }
+  return $text;
 }
 
 
@@ -262,7 +262,7 @@ function _bindtextdomain($domain, $path) {
     }
     if (!array_key_exists($domain, $text_domains)) {
       // Initialize an empty domain object.
-      $text_domains[$domain] = new _gettext_domain();
+      $text_domains[$domain] = new domain();
     }
     $text_domains[$domain]->path = $path;
 }

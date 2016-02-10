@@ -25,11 +25,11 @@ $aMeta = [
 <!-- Begin Content -->
 <div id="content" class="center s_padd">
 <br />
-<h1 class="err_msg"><?php echo t('Sorry, your IP or your location is banned!') ?></h1>
+<h1 class="err_msg"><?php echo t('Your IP or your location is banned!') ?></h1>
 <p>
-<?php echo t('We are sorry, your IP address or your location is banned.') ?>
+<?php echo t('Sorry, your IP address or your location is banned for this site.') ?>
 <br /><br />
-<span class="small italic"><?php echo t('Kind regards, The Team.') ?></span></p>
+<span class="small italic"><?php echo t("Regards, %site_name%'s Team.") ?></span></p>
 </div>
 <!-- End Content -->
 

@@ -7,7 +7,6 @@
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Security
- * @version          1.0
  */
 
 namespace PH7\Framework\Security;
@@ -21,19 +20,14 @@ final class Version
     const LATEST_VERSION_URL = 'http://ph7cms.com/xml/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /***** Framework Kernel *****/
-    /** "Xmas" Version is a really "special" one as it will be released on the 24th with some unexpected features!!! Happy Christmas guys! **/
-    const KERNEL_VERSION_NAME = 'Xmas'; // 1.0 and 1.1 branches were "pOH", 1.2 branch is now "pOW" and the new one should be "p[H]"
-    const KERNEL_VERSION = '1.2.7';
+    const KERNEL_VERSION_NAME = 'p[H]'; // 1.0 and 1.1 branches were "pOH", 1.2 branch is "pOW" and the new one will be "p[H]"
+    const KERNEL_VERSION = '1.3.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2015-12-24';
+    const KERNEL_RELASE_DATE = '2016-02-09';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
     const KERNEL_SERVER_NAME = 'pH7WS/1.0.0'; // pH7 Web Server
-
-    /***** Form PFBC *****/
-    const PFBC_VERSION = '2.3';
-    const PFBC_RELASE_DATE = '2011-09-22';
 
 
     /**

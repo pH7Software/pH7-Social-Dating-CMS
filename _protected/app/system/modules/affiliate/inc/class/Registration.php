@@ -46,7 +46,7 @@ class Registration extends RegistrationCore
         '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
         t('Email: %0%.', $aInfo['email']) . '<br />' .
         t('Username: %0%.', $aInfo['username']) . '<br />' .
-        t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', Uri::get('affiliate','home','forgot')) . '</em>';
+        t('Password: ****** (This field is hidden to protect against theft of your account. If you have forgotten your password, please request a new one <a href="%0%">here</a>).', Uri::get('lost-password','main','forgot','affiliate')) . '</em>';
         $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
         t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 

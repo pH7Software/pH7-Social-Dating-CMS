@@ -23,9 +23,8 @@ class FileController extends Controller
 
     public function display($sDir = '')
     {
-        /* Add Css Style and JavaScript for the Elfinder File Manager */
-        $this->design->addCss(PH7_STATIC . 'fileManager/css/', 'elFinder.css,theme.css');
-        $this->design->addJs(PH7_STATIC . 'fileManager/js/', 'elFinder.js');
+        /* Add the stylesheet files for the Elfinder File Manager */
+        $this->design->addCss(PH7_STATIC . 'fileManager/css/', 'elfinder.css,theme.css');
 
         $sIsDirTxt = ($sDir == 'protected') ? t('Protected') : t('Public');
         $this->sTitle = t('File Manager System | %0%', $sIsDirTxt);
@@ -48,7 +47,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Email Templates');
 
-        $this->_displayAction(PH7_PATH_SYS . 'global/' . PH7_VIEWS .PH7_TPL_NAME . '/mail/', '.tpl');
+        $this->_displayAction(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS .PH7_TPL_NAME . PH7_DS . 'mail' . PH7_DS, '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }
@@ -75,7 +74,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Pages');
 
-        $this->_displayAction(PH7_PATH_SYS_MOD . 'page/' . PH7_VIEWS .PH7_TPL_NAME, '.tpl');
+        $this->_displayAction(PH7_PATH_SYS_MOD . 'page' . PH7_DS . PH7_VIEWS .PH7_TPL_NAME, '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }
@@ -116,7 +115,8 @@ class FileController extends Controller
      */
     private function _displayAction($sFile, $mExt = null)
     {
-        if (empty($this->sTitle)) $this->sTitle = t('File Management');
+        if (empty($this->sTitle))
+            $this->sTitle = t('File Management');
 
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;

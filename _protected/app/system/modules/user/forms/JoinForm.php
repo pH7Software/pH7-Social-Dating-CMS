@@ -9,7 +9,7 @@ namespace PH7;
 
 use
 PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Config\Config,
+PH7\Framework\Module\Various as SysMod,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Router\Uri,
@@ -36,22 +36,22 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user', 'form_join_user'));
         $oForm->addElement(new \PFBC\Element\Token('join'));
 
-        // Load the Connect config file
-        Config::getInstance()->load(PH7_PATH_SYS_MOD . 'connect' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
-        if (Config::getInstance()->values['module.setting']['enable'])
+        // Check if the Connect module is enabled
+        if (SysMod::isEnabled('connect')) {
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center"><a href="' . Uri::get('connect', 'main', 'index') . '" target="_blank" class="btn btn-primary">' . t('Universal Login') . '</a></div>'));
+        }
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'str_first_name', 'onblur' =>'CValid(this.value,this.id,2,20)', 'title'=>t('Enter your first name.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Str(2,20))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_first_name"></span>'));
-        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('description'=>PH7_URL_ROOT.'<strong><span class="your-user-name">'.t('your-user-name').'</span><span class="username"></span></strong>'.PH7_PAGE_EXT, 'id'=>'username', 'title'=>t('This username will be used for your site url.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Username)));
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur' =>'CValid(this.value, this.id,\'guest\')', 'title'=>t('Enter your valid email address.'), 'required'=> 1, 'validation' => new \PFBC\Validation\CEmail('guest'))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('placeholder' => t('First Name'), 'id'=>'name_first', 'onblur' =>'CValid(this.value,this.id)', 'title'=>t('Enter your first name.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
+        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('placeholder' => t('Username'), 'description'=>PH7_URL_ROOT.'<strong><span class="your-user-name">'.t('your-user-name').'</span><span class="username"></span></strong>'.PH7_PAGE_EXT, 'id'=>'username', 'title'=>t('This username will be used for your site url.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Username)));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('placeholder' => t('Email'), 'id'=>'email', 'onblur' =>'CValid(this.value, this.id,\'guest\')', 'title'=>t('Enter your valid email address.'), 'required'=> 1, 'validation' => new \PFBC\Validation\CEmail('guest'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
-        $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('id'=>'password', 'onkeyup'=>'checkPassword(this.value)', 'onblur' =>'CValid(this.value, this.id)', 'title'=>t('Your password. It will be used for logging in to the site. This storage is secure, because we are using an encrypted format.'), 'required' => 1, 'validation' => new \PFBC\Validation\Password)));
+        $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('placeholder' => t('Password'), 'id'=>'password', 'onkeyup'=>'checkPassword(this.value)', 'onblur' =>'CValid(this.value, this.id)', 'title'=>t('Your password. It will be used for logging in to the site. This storage is secure, because we are using an encrypted format.'), 'required' => 1, 'validation' => new \PFBC\Validation\Password)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error password"></span>'));
 
         if (DbConfig::getSetting('isCaptchaUserSignup'))
         {
-          $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description'=>t('Enter the code above:'))));
+          $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('placeholder' => t('Captcha'), 'id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description'=>t('Enter the code above:'))));
           $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
@@ -80,7 +80,7 @@ class JoinForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_join_user2', '100%');
+        $oForm = new \PFBC\Form('form_join_user2');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
         $oForm->addElement(new \PFBC\Element\Token('join2'));
@@ -113,7 +113,7 @@ class JoinForm
             Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_join_user3', '100%');
+        $oForm = new \PFBC\Form('form_join_user3');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user3', 'form_join_user3'));
         $oForm->addElement(new \PFBC\Element\Token('join3'));

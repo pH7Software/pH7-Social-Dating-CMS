@@ -1,1 +1,3 @@
-{{ EditForm::display() }}
+<div class="center">
+    {{ EditForm::display() }}
+</div>

@@ -38,17 +38,17 @@ class EditNoteForm
 
         if (!empty($oPost) && (new Str)->equals($iNoteId, $oPost->noteId))
         {
-            $oCategoriesData = $oNoteModel->getCategory(null, 0, 300);
+            $oCategoryData = $oNoteModel->getCategory(null, 0, 300);
 
-            $aCategoriesName = array();
-            foreach ($oCategoriesData as $oId)
-                $aCategoriesName[$oId->categoryId] = $oId->name;
+            $aCategoryNames = array();
+            foreach ($oCategoryData as $oId)
+                $aCategoryNames[$oId->categoryId] = $oId->name;
 
             $aSelectedCategories = array();
-            $oCategoryId = $oNoteModel->getCategory($iNoteId, 0, 300);
+            $oCategoryIds = $oNoteModel->getCategory($iNoteId, 0, 300);
             unset($oNoteModel);
 
-            foreach ($oCategoryId as $iId)
+            foreach ($oCategoryIds as $iId)
                 $aSelectedCategories[] = $iId->categoryId;
 
             $oForm = new \PFBC\Form('form_note', 650);
@@ -58,10 +58,10 @@ class EditNoteForm
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title of article:'), 'title', array('value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('value' => $oPost->postId, 'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')).'/<strong><span class="your-address">'.$oPost->postId.'</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the url.'), 'data-profile_id' => $iProfileId, 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
-            $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoriesName, array('description' => t('Select a category that best fits your article. You can select up to three different categories'), 'value' => $aSelectedCategories, 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, array('description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'value' => $aSelectedCategories, 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
             $oForm->addElement(new \PFBC\Element\CKEditor(t('Contents:'), 'content', array('value' => $oPost->content, 'description' => t('Content of the article'), 'validation' => new \PFBC\Validation\Str(30), 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('The language of your post:'), 'lang_id', array('value' => $oPost->langId, 'description' => t('EX: "en", "fr", "es", "js"'), 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('The language of your post:'), 'lang_id', array('value' => $oPost->langId, 'description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(2, 200))));
             $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', array('accept' => 'image/*')));
 

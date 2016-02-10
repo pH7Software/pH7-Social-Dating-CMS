@@ -17,7 +17,6 @@ use PH7\Framework\Mvc\Request\Http;
 
 class Page
 {
-
     private $_oHttpRequest, $_iTotalPages, $_iTotalItems, $_iNbItemsByPage, $_iCurrentPage, $_iFirstItem;
 
     public function __construct()
@@ -88,7 +87,7 @@ class Page
 
         if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl))
         {
-            $sUrlSlug = (strpos($sCurrentUrl, '&amp;')) ? strstr(strrchr($sCurrentUrl, '?'), '&amp;', true) : strrchr($sCurrentUrl, '?');
+            $sUrlSlug = (strpos($sCurrentUrl, '&amp;')) ? strrchr($sCurrentUrl, '?') : strrchr($sCurrentUrl, '?');
             $sPageUrl = $sUrl . $sUrlSlug . '&amp;' . $sVar . '=';
         }
         else
@@ -99,17 +98,4 @@ class Page
 
         return $sPageUrl;
     }
-
-    public function __destruct()
-    {
-        unset(
-            $this->_oHttpRequest,
-            $this->_iTotalPages,
-            $this->_iTotalItems,
-            $this->_iNbItemsByPage,
-            $this->_iCurrentPage,
-            $this->_iFirstItem
-        );
-    }
-
 }

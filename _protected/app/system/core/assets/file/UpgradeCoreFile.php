@@ -20,9 +20,6 @@ PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Security\Version,
 PH7\Framework\File as F;
 
-/**
- * This is usually necessary to import data from remote server.
- */
 @set_time_limit(0);
 @ini_set('memory_limit', '528M');
 
@@ -219,14 +216,14 @@ class UpgradeCore extends Kernel
         $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR . PH7_DS;
         if(is_dir($sPathPublicDir))
         {
-            $this->_oFile->renameMost($sPathPublicDir, PH7_PATH_ROOT);
+            $this->_oFile->systemRename($sPathPublicDir, PH7_PATH_ROOT);
             $this->_oFile->chmod(PH7_PATH_ROOT, 0777);
         }
 
         $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR . PH7_DS;
         if(is_dir($sPathProtectedDir))
         {
-            $this->_oFile->renameMost($sPathProtectedDir, PH7_PATH_PROTECTED);
+            $this->_oFile->systemRename($sPathProtectedDir, PH7_PATH_PROTECTED);
             $this->_oFile->chmod(PH7_PATH_PROTECTED, 0777);
         }
     }
@@ -386,24 +383,13 @@ class UpgradeCore extends Kernel
      */
     private function _readInstruction($sInstFile)
     {
-        $mInstruction = F\Import::file(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . $sInstFile);
-        return (!$mInstruction) ? '<p class="error">' . t('Instruction file not found!') . '</p>' : $mInstruction;
-    }
-
-    public function __destruct()
-    {
-        unset(
-          $this->_oHttpRequest,
-          $this->_oFile,
-          $this->_oConfig,
-          $this->_sHtml,
-          $this->_sUpgradesDirUpgradeFolder,
-          $this->_sVerName,
-          $this->_sVerNumber,
-          $this->_iVerBuild,
-          $this->_bAutoRemoveUpgradeDir,
-          $this->_aErrors
-        );
+      try {
+        return F\Import::file(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . $sInstFile);
+      }
+      catch (Framework\File\Exception $e)
+      {
+        return '<p class="error">' . t('Instruction file not found!') . '</p>';
+      }
     }
 
 }

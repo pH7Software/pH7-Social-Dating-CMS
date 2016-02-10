@@ -18,11 +18,46 @@ defined('PH7') or exit('Restricted access');
 class InstallController extends Controller
 {
 
+    private $_aSocialMods = [
+        'affiliate' => '0',
+        'game' => '1',
+        'chat' => '0',
+        'chatroulette' => '0',
+        'picture' => '1',
+        'video' => '1',
+        'hotornot' => '0',
+        'forum' => '1',
+        'note' => '1',
+        'blog' => '1',
+        'newsletter' => '0',
+        'invite' => '1',
+        'webcam' => '1',
+        'love-calculator' => '0'
+    ];
+
+    private $_aDatingMods = [
+        'affiliate' => '1',
+        'game' => '0',
+        'chat' => '1',
+        'chatroulette' => '1',
+        'picture' => '1',
+        'video' => '0',
+        'hotornot' => '1',
+        'forum' => '0',
+        'note' => '0',
+        'blog' => '1',
+        'newsletter' => '1',
+        'invite' => '1',
+        'webcam' => '1',
+        'love-calculator' => '1'
+    ];
+
+
     /********************* STEP 1 *********************/
     public function index()
     {
         $aLangs = get_dir_list(PH7_ROOT_INSTALL . 'langs/');
-        $aLangsList = include(PH7_ROOT_INSTALL . 'inc/lang_list.inc.php');
+        $aLangsList = include PH7_ROOT_INSTALL . 'inc/lang_list.inc.php';
         $sLangSelect = '';
 
         foreach ($aLangs as $sLang)
@@ -99,14 +134,14 @@ class InstallController extends Controller
                 $_SESSION['db']['type_name'] = 'MySQL';
                 $_SESSION['db']['type'] = 'mysql';
                 $_SESSION['db']['hostname'] = 'localhost';
-                $_SESSION['db']['name'] = 'PHS-SOFTWARE';
+                $_SESSION['db']['name'] = 'ph7cms';
                 $_SESSION['db']['username'] = 'root';
                 $_SESSION['db']['prefix'] = 'PH7_';
                 $_SESSION['db']['port'] = '3306';
                 $_SESSION['db']['charset'] = 'UTF8';
 
                 $_SESSION['val']['bug_report_email'] = '';
-                $_SESSION['val']['ffmpeg_path'] = (is_windows()) ? 'C:\ffmpeg\ffmpeg.exe' : '/usr/bin/ffmpeg';
+                $_SESSION['val']['ffmpeg_path'] = ffmpeg_path();
             }
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_system_submit']))
@@ -123,9 +158,9 @@ class InstallController extends Controller
                     {
                         try
                         {
-                            require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
-                            @require_once(PH7_ROOT_PUBLIC . '_constants.php');
-                            @require_once(PH7_PATH_APP . 'configs/constants.php');
+                            require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
+                            @require_once PH7_ROOT_PUBLIC . '_constants.php';
+                            @require_once PH7_PATH_APP . 'configs/constants.php';
 
                             // Config File
                             @chmod(PH7_PATH_APP_CONFIG, 0777);
@@ -159,7 +194,7 @@ class InstallController extends Controller
                                 }
                                 else
                                 {
-                                    $aDumps = array(
+                                    $aDumps = [
                                         /*** Game ***/
                                         // We need to install the Game before the Core SQL for "foreign keys" that work are correct.
                                         'pH7_SchemaGame',
@@ -179,7 +214,7 @@ class InstallController extends Controller
                                         'pH7_GeoState',
                                         // --- Execute this file if there is something --- //
                                         'pH7_SampleData'
-                                    );
+                                    ];
 
                                     for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++)
                                         exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$i] . '.sql');
@@ -233,7 +268,7 @@ class InstallController extends Controller
 
                 if (empty($_SESSION['val']))
                 {
-                    $_SESSION['val']['site_name'] = 'My Own Social/Dating Site!';
+                    $_SESSION['val']['site_name'] = 'My Social Dating Site';
                     $_SESSION['val']['admin_login_email'] = '';
                     $_SESSION['val']['admin_email'] = '';
                     $_SESSION['val']['admin_feedback_email'] = '';
@@ -264,24 +299,25 @@ class InstallController extends Controller
                                             {
                                                 if (validate_name($_SESSION['val']['admin_last_name']))
                                                 {
-                                                    @require_once(PH7_ROOT_PUBLIC . '_constants.php');
-                                                    @require_once(PH7_PATH_APP . 'configs/constants.php');
+                                                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
+                                                    @require_once PH7_PATH_APP . 'configs/constants.php';
+                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
 
-                                                    require(PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php');
+                                                    require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
                                                     // To load "Security" class.
                                                     Framework\Loader\Autoloader::getInstance()->init();
 
                                                     try
                                                     {
-                                                        require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
+                                                        require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                                                         // SQL EXECUTE
-                                                        $oSqlQuery = $DB->prepare('INSERT INTO ' . $_SESSION['db']['prefix'] . 'Admins
+                                                        $rStmt = $DB->prepare('INSERT INTO ' . $_SESSION['db']['prefix'] . 'Admins
                                                         (profileId , username, password, email, firstName, lastName, joinDate, lastActivity, ip)
                                                         VALUES (1, :username, :password, :email, :firstName, :lastName, :joinDate, :lastActivity, :ip)');
 
                                                         $sCurrentDate = date('Y-m-d H:i:s');
-                                                        $oSqlQuery->execute(array(
+                                                        $rStmt->execute([
                                                             'username' => $_SESSION['val']['admin_username'],
                                                             'password' => Framework\Security\Security::hashPwd($_SESSION['val']['admin_password']),
                                                             'email' => $_SESSION['val']['admin_login_email'],
@@ -290,34 +326,26 @@ class InstallController extends Controller
                                                             'joinDate'=> $sCurrentDate,
                                                             'lastActivity' => $sCurrentDate,
                                                             'ip' => client_ip()
-                                                        ));
+                                                        ]);
 
-                                                        $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :siteName WHERE name = \'siteName\'');
-                                                        $oSqlQuery->execute(array(
-                                                            'siteName' => $_SESSION['val']['site_name']
-                                                        ));
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :siteName WHERE name = \'siteName\' LIMIT 1');
+                                                        $rStmt->execute(['siteName' => $_SESSION['val']['site_name']]);
 
-                                                        $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :adminEmail WHERE name = \'adminEmail\'');
-                                                        $oSqlQuery->execute(array(
-                                                            'adminEmail' => $_SESSION['val']['admin_email']
-                                                        ));
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :adminEmail WHERE name = \'adminEmail\'  LIMIT 1');
+                                                        $rStmt->execute(['adminEmail' => $_SESSION['val']['admin_email']]);
 
-                                                        $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :feedbackEmail WHERE name = \'feedbackEmail\'');
-                                                        $oSqlQuery->execute(array(
-                                                            'feedbackEmail' => $_SESSION['val']['admin_feedback_email']
-                                                        ));
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :feedbackEmail WHERE name = \'feedbackEmail\'  LIMIT 1');
+                                                        $rStmt->execute(['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]);
 
-                                                        $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :returnEmail WHERE name = \'returnEmail\'');
-                                                        $oSqlQuery->execute(array(
-                                                            'returnEmail' => $_SESSION['val']['admin_return_email']
-                                                        ));
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :returnEmail WHERE name = \'returnEmail\'  LIMIT 1');
+                                                        $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
                                                         // We finalise by putting the correct permission to the config files
                                                         $this->_chmodConfigFiles();
 
                                                         $_SESSION['step4'] = 1;
 
-                                                        redirect(PH7_URL_SLUG_INSTALL . 'service');
+                                                        redirect(PH7_URL_SLUG_INSTALL . 'niche');
                                                     }
                                                     catch (\PDOException $oE)
                                                     {
@@ -392,7 +420,7 @@ class InstallController extends Controller
         }
         else
         {
-            redirect(PH7_URL_SLUG_INSTALL . 'service');
+            redirect(PH7_URL_SLUG_INSTALL . 'niche');
         }
 
         $this->oView->assign('sept_number', 4);
@@ -402,18 +430,92 @@ class InstallController extends Controller
     }
 
     /********************* STEP 5 *********************/
-    public function service()
+    public function niche()
     {
+        global $LANG;
+
+        if (empty($_SESSION['step5']))
+        {
+            if (!empty($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
+            {
+                session_regenerate_id(true);
+
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['niche_submit']))
+                {
+                    $bUpdateNeeded = false; // Value by default. Don't need to update the DB for the Social/Dating Niche
+
+                    switch ($_POST['niche_submit'])
+                    {
+                        case 'zendate':
+                            $bUpdateNeeded = true;
+                            $sTheme = 'zendate';
+                            $aModUpdated = $this->_aSocialMods;
+                        break;
+
+                        case 'datelove':
+                            $bUpdateNeeded = true;
+                            $sTheme = 'datelove';
+                            $aModUpdated = $this->_aDatingMods;
+                        break;
+
+                        // Or for 'base', don't do anything. Just use the default settings already setup in the database
+                    }
+
+                    if ($bUpdateNeeded)
+                    {
+                        @require_once PH7_ROOT_PUBLIC . '_constants.php';
+                        @require_once PH7_PATH_APP . 'configs/constants.php';
+
+                        try
+                        {
+                            require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
+
+                            foreach ($aModUpdated as $sModName => $sStatus)
+                                $this->_updateMods($DB, $sModName, $sStatus);
+
+                            $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
+                            $rStmt = $DB->prepare($sSql);
+                            $rStmt->execute(['theme' => $sTheme]);
+                        }
+                        catch (\PDOException $oE)
+                        {
+                            $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
+                        }
+                    }
+                    $_SESSION['step5'] = 1;
+
+                    redirect(PH7_URL_SLUG_INSTALL . 'service');
+                }
+            }
+            else
+            {
+                redirect(PH7_URL_SLUG_INSTALL . 'config_site');
+            }
+        }
+        else
+        {
+            redirect(PH7_URL_SLUG_INSTALL . 'service');
+        }
+
         $this->oView->assign('sept_number', 5);
-        $this->oView->display('service.tpl');
+        $this->oView->assign('errors', @$aErrors);
+        unset($aErrors);
+        $this->oView->display('niche.tpl');
     }
 
     /********************* STEP 6 *********************/
+    public function service()
+    {
+        $this->oView->assign('sept_number', 6);
+        $this->oView->display('service.tpl');
+    }
+
+    /********************* STEP 7 *********************/
     public function license()
     {
         global $LANG;
 
-        if (!empty($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
+        if (!empty($_SESSION['step5']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
         {
             if (empty($_SESSION['val']['license']))
                 $_SESSION['val']['license'] = '';
@@ -423,17 +525,15 @@ class InstallController extends Controller
                 $sKey = trim($_POST['license']);
                 if (check_license($sKey))
                 {
-                    @require_once(PH7_ROOT_PUBLIC . '_constants.php');
-                    @require_once(PH7_PATH_APP . 'configs/constants.php');
+                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
+                    @require_once PH7_PATH_APP . 'configs/constants.php';
 
                     try
                     {
-                        require_once(PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php');
+                        require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
-                        $oSqlQuery = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'License SET licenseKey = :key WHERE licenseId = 1');
-                        $oSqlQuery->execute(array(
-                            'key' => $sKey
-                        ));
+                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'License SET licenseKey = :key WHERE licenseId = 1');
+                        $rStmt->execute(['key' => $sKey]);
 
                         redirect(PH7_URL_SLUG_INSTALL . 'finish');
                     }
@@ -450,34 +550,34 @@ class InstallController extends Controller
         }
         else
         {
-            redirect(PH7_URL_SLUG_INSTALL . 'config_site');
+            redirect(PH7_URL_SLUG_INSTALL . 'niche');
         }
 
-        $this->oView->assign('sept_number', 6);
+        $this->oView->assign('sept_number', 7);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
         $this->oView->display('license.tpl');
     }
 
-    /********************* STEP 7 *********************/
+    /********************* STEP 8 *********************/
     public function finish()
     {
         global $LANG;
 
-        @require_once(PH7_ROOT_PUBLIC . '_constants.php');
+        @require_once PH7_ROOT_PUBLIC . '_constants.php';
 
-        if (!empty($_SESSION['val']))
+        if (!empty($_SESSION['val']['admin_login_email']))
         {
             // Send an email to say the installation is now done, and give some information...
-            $aParams = array(
+            $aParams = [
                 'to' => $_SESSION['val']['admin_login_email'],
                 'subject' => $LANG['title_email_finish_install'],
                 'body' => $LANG['content_email_finish_install']
-            );
+            ];
             send_mail($aParams);
         }
 
-        $_SESSION = array();
+        $_SESSION = [];
         // Remove the sessions
         session_unset();
         session_destroy();
@@ -497,8 +597,23 @@ class InstallController extends Controller
             exit(header('Location: ' . PH7_URL_ROOT));
         }
 
-        $this->oView->assign('sept_number', 7);
+        $this->oView->assign('sept_number', 8);
         $this->oView->display('finish.tpl');
+    }
+
+    /**
+     * Update module status (enabled/disabled).
+     *
+     * @param object \PH7\Db $oDb
+     * @param string $sModName Module Name.
+     * @param string $sStatus '1' = Enabled | '0' = Disabled (need to be string because in DB it is an "enum").
+     * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
+     */
+    private function _updateMods(Db $oDb, $sModName, $sStatus)
+    {
+        $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'SysModsEnabled SET enabled = :status WHERE folderName = :modName LIMIT 1';
+        $rStmt = $oDb->prepare($sSql);
+        return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
     }
 
     /***** Get the loading image *****/

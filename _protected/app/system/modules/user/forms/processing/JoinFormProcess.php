@@ -86,7 +86,7 @@ class JoinFormProcess extends Form
         $iProfileId = $this->oUserModel->getId($this->session->get('mail_step1'));
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
 
-        // WARNING FOT "matchSex" FIELD: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant otherwise the post method of the HttpRequest class removes the tags special
+        // WARNING FOT "matchSex" FIELD: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Request\Http::post() method removes the special tags
         // and damages the SET function SQL for entry into the database
         $aData1 = [
             'sex' => $this->httpRequest->post('sex'),

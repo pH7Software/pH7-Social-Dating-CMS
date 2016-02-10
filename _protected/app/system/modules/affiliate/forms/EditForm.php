@@ -38,7 +38,7 @@ class EditForm
         // Birth date with the date format for the date picker
         $sBirthDate = (new CDateTime)->get($oAff->birthDate)->date('m/d/Y');
 
-        $oForm = new \PFBC\Form('form_aff_edit_account', 500);
+        $oForm = new \PFBC\Form('form_aff_edit_account');
         $oForm->configure(array('action'=> '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_aff_edit_account', 'form_aff_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
@@ -51,10 +51,10 @@ class EditForm
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2 class="underline">'.t('Global Information:').'</h2>'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="error">' . t('Attention all your information must be complete, candid and valid.') . '</p>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'str_first_name', 'onblur'=>'CValid(this.value,this.id,2,20)', 'value'=>$oAff->firstName, 'required'=>1, 'validation'=>new \PFBC\Validation\Str(2,20))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_first_name"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'str_last_name', 'onblur'=>'CValid(this.value,this.id,2,20)', 'value'=>$oAff->lastName, 'required'=>1, 'validation'=>new \PFBC\Validation\Str(2,20))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_last_name"></span>'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'name_first', 'onblur'=>'CValid(this.value,this.id)', 'value'=>$oAff->firstName, 'required'=>1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'name_last', 'onblur'=>'CValid(this.value,this.id)', 'value'=>$oAff->lastName, 'required'=>1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', array('description'=>t('For site security, you cannot change your username.'), 'disabled'=>'disabled', 'value'=>$oAff->username)));
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('description'=>t('For site security and to avoid spam, you cannot change your email address.'), 'disabled'=>'disabled', 'value'=>$oAff->email)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));

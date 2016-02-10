@@ -49,8 +49,6 @@ class User
      */
     protected static function getAtUsernames($sContents)
     {
-        $aUsername = array();//remove it for yield
-
         if (preg_match_all('#' . static::AT . '('.PH7_USERNAME_PATTERN.'{'.DbConfig::getSetting('minUsernameLength').','.DbConfig::getSetting('maxUsernameLength').'})#u', $sContents, $aMatches, PREG_PATTERN_ORDER))
         {
             $aMatches[1] = array_unique($aMatches[1]); // Delete duplicate usernames.
@@ -58,13 +56,10 @@ class User
             {
                 if ((new \PH7\ExistsCoreModel)->username($sUsername))
                 {
-                    //yield $sUsername; // PHP 5.5
-                    $aUsername[] = $sUsername;//remove it for yield
+                    yield $sUsername; // PHP 5.5
                 }
             }
         }
-
-        return $aUsername;//remove it for yield
     }
 
 }

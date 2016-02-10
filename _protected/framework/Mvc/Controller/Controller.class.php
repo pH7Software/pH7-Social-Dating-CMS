@@ -19,6 +19,7 @@ PH7\Framework\Ip\Ip,
 PH7\Framework\Geo\Ip\Geo,
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Module\Various as SysMod,
 PH7\Framework\Mvc\Model as M;
 
 abstract class Controller extends \PH7\Framework\Core\Core
@@ -28,15 +29,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
     {
         parent::__construct();
 
-        /***** Securing the server for DDoS attack only! Not for the attacks DoS *****/
-        if (!isDebug() && M\DbConfig::getSetting('DDoS'))
-        {
-            $oDDoS = new \PH7\Framework\Security\DDoS\Stop;
-            if ($oDDoS->cookie() || $oDDoS->session())
-                sleep(PH7_DDOS_DELAY_SLEEP);
-
-            unset($oDDoS);
-        }
+        $this->_ddosProtection();
 
         /***** Assign the values for Registry Class *****/
 
@@ -47,11 +40,6 @@ abstract class Controller extends \PH7\Framework\Core\Core
 
         // Site Name
         $this->registry->site_name = M\DbConfig::getSetting('siteName');
-
-
-        /***** Internationalization *****/
-        // Default path language
-        $this->lang->load('global', PH7_PATH_APP_LANG);
 
 
         /***** PH7Tpl Template Engine initialization *****/
@@ -83,9 +71,27 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'country' => Geo::getCountry(),
             'city' => Geo::getCity()
         ];
+
         $this->view->assigns($aMetaVars);
 
-        unset($oInfo);
+        $aModsEnabled = [
+            'is_connect_enabled' => SysMod::isEnabled('connect'),
+            'is_affiliate_enabled' => SysMod::isEnabled('affiliate'),
+            'is_game_enabled' => SysMod::isEnabled('game'),
+            'is_chat_enabled' => SysMod::isEnabled('chat'),
+            'is_chatroulette_enabled' => SysMod::isEnabled('chatroulette'),
+            'is_picture_enabled' => SysMod::isEnabled('picture'),
+            'is_video_enabled' => SysMod::isEnabled('video'),
+            'is_hotornot_enabled' => SysMod::isEnabled('hotornot'),
+            'is_forum_enabled' => SysMod::isEnabled('forum'),
+            'is_note_enabled' => SysMod::isEnabled('note'),
+            'is_blog_enabled' => SysMod::isEnabled('blog'),
+            'is_newsletter_enabled' => SysMod::isEnabled('newsletter'),
+            'is_invite_enabled' => SysMod::isEnabled('invite'),
+            'is_webcam_enabled' => SysMod::isEnabled('webcam')
+        ];
+        $this->view->assigns($aModsEnabled);
+        unset($oInfo, $aMetaVars, $aModsEnabled);
 
         /**
          * This below PHP condition is not necessary because if there is no session,
@@ -101,25 +107,10 @@ abstract class Controller extends \PH7\Framework\Core\Core
 
         /***** End Template Engine PH7Tpl *****/
 
-        // For permission the modules
-        if (is_file($this->registry->path_module_config . 'Permission.php'))
-        {
-            require $this->registry->path_module_config . 'Permission.php';
-            new \PH7\Permission;
-        }
-
-        // It displays the banishment page if a banned IP address is found.
-        if (Ban::isIp(Ip::get()))
-        {
-            \PH7\Framework\Page\Page::banned();
-        }
-
-        // The maintenance page is not displayed for the "Admin" module and if the administrator is logged.
-        if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE
-            && !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD)
-        {
-            \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
-        }
+        $this->_checkPerms();
+        $this->_checkModStatus();
+        $this->_checkBanStatus();
+        $this->_checkSiteStatus();
     }
 
     /**
@@ -219,6 +210,76 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->view->pOH_not_found = 1;
         $this->output();
         exit;
+    }
+
+    /**
+     * Check if the module is not disabled, otherwise we displayed a Not Found page.
+     *
+     * @return void If the module is disabled, displays the Not Found page and exit the script.
+     */
+    final private function _checkModStatus()
+    {
+        if (!SysMod::isEnabled($this->registry->module))
+            $this->displayPageNotFound();
+    }
+
+    /**
+     * Add permissions if the Permission file of the module exists.
+     *
+     * @return void
+     */
+    final private function _checkPerms()
+    {
+        if (is_file($this->registry->path_module_config . 'Permission.php'))
+        {
+            require $this->registry->path_module_config . 'Permission.php';
+            new \PH7\Permission;
+        }
+    }
+
+    /**
+     * Check if the site has been banned for the visitor.
+     * Displays the banishment page if a banned IP address is found.
+     *
+     * @return void If banned, exit the script after displaying the ban page.
+     */
+    final private function _checkBanStatus()
+    {
+        if (Ban::isIp(Ip::get()))
+        {
+            \PH7\Framework\Page\Page::banned();
+        }
+    }
+
+    /**
+     * The maintenance page is not displayed for the "Admin" module and if the administrator is logged.
+     *
+     * @return void If the status if maintenance, exit the script after displaying the maintenance page.
+     */
+    final private function _checkSiteStatus()
+    {
+        if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE
+            && !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD)
+        {
+            \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
+        }
+    }
+
+    /**
+     *  Securing the server for DDoS attack only! Not for the attacks DoS.
+     *
+     * @return void
+     */
+    final private function _ddosProtection()
+    {
+        if (!isDebug() && (bool)M\DbConfig::getSetting('DDoS'))
+        {
+            $oDDoS = new \PH7\Framework\Security\DDoS\Stop;
+            if ($oDDoS->cookie() || $oDDoS->session()) {
+                $oDDoS->wait();
+            }
+            unset($oDDoS);
+        }
     }
 
 }

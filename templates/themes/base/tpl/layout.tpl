@@ -80,7 +80,9 @@
         <div class="err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
       </noscript>
 
-      <div role="banner" id="logo"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
+      <div class="row">
+        <div role="banner" id="logo" class="col-md-8"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
+      </div>
 
     </header>
     <!-- End Header -->
@@ -95,7 +97,7 @@
     <div role="main" class="container" id="content">
 
       {* If we aren't on the the splash page, then display the menu *}
-      {if !(!$is_user_auth && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index')}
+      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
         {main_include 'top_menu.inc.tpl'}
       {/if}
 
@@ -115,7 +117,7 @@
         {/if}
       </div>
       {* Don't display the top middle banner on the the splash page *}
-      {if !(!$is_user_auth && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index')}
+      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
           <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
       {/if}
 
@@ -154,7 +156,7 @@
       {{ $design->link() }}
 
       {* To avoid scammers *}
-      {if $is_user_auth && $current_url != $url_root}
+      {if $is_user_auth AND $current_url != $url_root}
         <div class="warning_block center"><p>{lang}<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br />
         People who is really interested in you will never ask for money.<br />
         Be careful, don\'t send the money to anybody!{/lang}</p></div>
@@ -168,8 +170,8 @@
       {if isDebug()}
         <div class="ft">
           <p>{{ $design->stat() }}</p>
-          <p class="red">{lang 'WARNING: Your site is in development mode!'}</p>
         </div>
+        <p class="small red">{lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="red">{lang 'here'}</a>.</p>
       {/if}
       <div class="right"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow">http://www.maxmind.com</a></small></div>
     </footer>

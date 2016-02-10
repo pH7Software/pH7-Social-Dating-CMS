@@ -60,7 +60,10 @@ class LoginFormProcess extends Form
                     $oSecurityModel->addLoginAttempt('Affiliates');
 
                 $this->session->set('captcha_enabled',1); // Enable Captcha
-                \PFBC\Form::setError('form_login_aff', t('Oops! This password you entered is incorrect.<br /> Please try again (make sure your caps lock is off).<br /> Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('affiliate','home','forgot')));
+                $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
+                $sWrongPwdTxt .= t('Please try again (make sure your caps lock is off).') . '<br />';
+                $sWrongPwdTxt .= t('Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('lost-password','main','forgot','affiliate'));
+                \PFBC\Form::setError('form_login_aff', $sWrongPwdTxt);
             }
         }
         else

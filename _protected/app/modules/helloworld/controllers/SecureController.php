@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Http\Http;
+use PH7\Framework\Http\Http, PH7\Framework\Translate\Lang;
 
 class SecureController extends Controller
 {
@@ -15,7 +15,7 @@ class SecureController extends Controller
     public function index()
     {
         // Loading Gettext Language File ...
-        $this->lang->load('hello_world');
+        (new Lang)->load('hello_world');
 
         $sUsr = $this->config->values['module.setting']['user'];
         $sPwd = $this->config->values['module.setting']['password'];

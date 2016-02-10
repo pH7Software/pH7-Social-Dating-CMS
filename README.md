@@ -1,10 +1,22 @@
 # pH7 Social Dating CMS
 
+### The Most Secure and Powerful Professional Dating Web App Builder
+
+
 [![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?s=79700cb86e25e0f125926f2f52984dd3ebacd81d)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/)
+
+
+**pH7 Social Dating CMS** is a **Professional** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
+
+pH7CMS is included with 30 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
+
+
+![Professional PHP Social Networking Dating CMS](https://cloud.githubusercontent.com/assets/1325411/12043273/747be578-ae7b-11e5-84cb-f1724ebc969d.png)
+
 
 ## Overview
 
-**pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*) with a **MVC** architecture (Model-View-Controller).
+**pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and optimised for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
 
 It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (not duplicate code).
 
@@ -40,7 +52,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Activity Streams
 * Member approval system
 * Advanced Admin Panel
-* Full Membership System
+* Complete Membership System
 * Payment Gateways Integration, PayPal, Stripe, Bitcoin, 2CheckOut
 * Statistics & Analytics System
 * Live Notification System
@@ -59,9 +71,9 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Multilingual URLs
 * Check that all UGC (User-Generated Content) is Unique (to avoid spam and malicious users)
 * RSS Feed
-* Full API for integration from an external app (iOS/Android, ...), website, program, ...
+* Fully API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
-* Full Responsive Templates
+* Fully Responsive Templates
 * Multiple-Themes and many customization possible
 * Message templates
 * Multi Themes and many personalizable
@@ -97,7 +109,7 @@ Thank you so much in advance!
 
 ## Requirements
 
-**Application Server** PHP 5.4.0 or higher.
+**Application Server** PHP 5.5.0 or higher.
 
 **Database** MySQL/MariaDB 5.0.15 or higher.
 
@@ -110,6 +122,47 @@ Thank you so much in advance!
 **Video** [FFmpeg](http://ffmpeg.org)
 
 **Minimum Web Space** 2.0 GB
+
+
+## Nginx Configuration
+
+In order to get pH7CMS working on nginx server, you need to add some custom nginx configuration.
+
+Create `/etc/nginx/ph7cms.conf` and add the following:
+
+```nginx
+location / {
+    try_files $uri $uri/ /index.php?$args;
+    index index.php;
+}
+```
+
+*Please note that the above code is the strict minimum and obviously you can add more by comparing with the [main Apache .htaccess file](https://github.com/pH7Software/pH7-Social-Dating-CMS/blob/master/.htaccess).*
+
+
+Now in your nginx server configuration you will have to include `ph7cms.conf` file to complete the configuration like below:
+
+In file, e.g., *`/etc/nginx/sites-enabled/yoursite.conf`* for Ubuntu and other OS based on Debian or `/etc/nginx/conf.d/yoursite.conf` for CentOS and other OS based on Red Hat.
+
+```nginx
+server {
+    # Port number. In most cases, 80 for HTTP and 443 for HTTPS
+    listen 80;
+
+    server_name www.yoursite.com;
+    root /var/www/ph7cms_public_root;
+    index index.php; #you can use index.ph7; for hidding the *.php ...
+    client_max_body_size 50M;
+
+    error_log /var/log/nginx/yoursite.error.log;
+    access_log /var/log/nginx/yoursite.access.log;
+
+    # Include ph7cms.conf. You can also directly add the "location" rule instead of including the conf file
+    include /etc/nginx/ph7cms.conf;
+}
+```
+
+For more information, please refer to the nginx documentation.
 
 
 ## Hosting
@@ -159,6 +212,6 @@ If you want, we also offer a *Premium Commercial* support at *[HiZup Support Dep
 
 ## License
 
-**pH7CMS** is under **Open Source** License.
+**pH7CMS** is under **Open Source Free** License.
 
 License: [General Public License 3](http://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.

@@ -44,7 +44,7 @@ class VisitorController extends Controller
         /**
          *  Predefined meta_description.
          */
-        $this->view->meta_description = t('The Last Visitors of %0%. Meet new people and make new visitors on your social profile, Make new Visitors and Friends with %site_name%', $this->sUsername);
+        $this->view->meta_description = t("The Last %0%'s visitors. Meet new people and make new visitors on your social profile. Make new Visitors and Friends with %site_name%", $this->sUsername);
 
         /**
          *  Predefined meta_keywords tags.
@@ -64,10 +64,10 @@ class VisitorController extends Controller
 
         if (empty($oVisitor))
         {
-            $this->sTitle = t('No Visitors found for the profile of "%0%"', $this->sUsername);
+            $this->sTitle = t('No one has seen "%0%"', $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->error = t('Not found visitor.');
+            $this->view->error = t('No one has visited the profile.');
         }
         else
         {
@@ -84,7 +84,7 @@ class VisitorController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Find someone who has visited the profile of %0%', $this->sUsername);
+        $this->sTitle = t("Find someone who has visited the %0%'s profile", $this->sUsername);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();

@@ -58,11 +58,8 @@ class DatabaseCoreCron extends Cron
         // Clean data
         $this->cleanData();
 
-        // Remove temporary messages
-        $this->removeTmpMsg();
-
-        // Delete temporary Data
-        $this->removeTmpData();
+        // Remove deleted messages
+        $this->removeDeletedMsg();
 
         // Optimization tables
         $this->optimize();
@@ -136,13 +133,7 @@ class DatabaseCoreCron extends Cron
         echo t('Repair of the Database... Ok!') . '<br />';
     }
 
-    protected function removeTmpData()
-    {
-        if (Db::getInstance()->exec('TRUNCATE TABLE ' . Db::prefix('Messenger')))
-            echo t('Deleting Temporary Data... OK!') . '<br />';
-    }
-
-    protected function removeTmpMsg()
+    protected function removeDeletedMsg()
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Messages') . 'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)');
 
@@ -169,33 +160,58 @@ class DatabaseCoreCron extends Cron
         echo t('Deleting Log... OK!') . '<br />';
     }
 
+    /**
+     * Pruning the old data (messages, comments and instant messenger contents).
+     *
+     * @return void
+     */
     protected function cleanData()
     {
-        $iCleanMsg = (int) DbConfig::getSetting('cleanMsg');
         $iCleanComment = (int) DbConfig::getSetting('cleanComment');
+        $iCleanMsg = (int) DbConfig::getSetting('cleanMsg');
+        $iCleanMessenger = (int) DbConfig::getSetting('cleanMessenger');
 
-        // If the option is enabled
-        if ($iCleanMsg > 0)
-        {
-            $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Messages') . 'WHERE (sendDate < NOW() - INTERVAL :cleanMsg DAY)');
-            $rStmt->bindValue(':cleanMsg', $iCleanMsg, \PDO::PARAM_INT);
-
-            if ($rStmt->execute())
-                echo nt('Deleted %n% message... OK!', 'Deleted %n% messages... OK!', $rStmt->rowCount()) . '<br />';
-        }
-
-        // If the option is enabled
-        if ($iCleanComment > 0)
-        {
+        // If the option is enabled for Comments
+        if ($iCleanComment > 0) {
             $aCommentMod = ['Blog', 'Note', 'Picture', 'Video', 'Game', 'Profile'];
-            foreach ($aCommentMod as $sSuffixTable)
-            {
-                $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sSuffixTable) . 'WHERE (updatedDate < NOW() - INTERVAL :cleanComment DAY)');
-                $rStmt->bindValue(':cleanComment', $iCleanComment, \PDO::PARAM_INT);
-                if ($rStmt->execute())
-                    echo t('Deleted %0% %1% comment(s) ... OK!', $rStmt->rowCount(), $sSuffixTable) . '<br />';
+            foreach ($aCommentMod as $sSuffixTable) {
+                if ($iRow = $this->pruningDb($iCleanComment, 'Comments' . $sSuffixTable, 'updatedDate') > 0) {
+                    echo t('Deleted %0% %1% comment(s) ... OK!', $iRow, $sSuffixTable) . '<br />';
+                }
             }
         }
+
+        // If the option is enabled for Messages
+        if ($iCleanMsg > 0) {
+            if ($iRow = $this->pruningDb($iCleanMsg, 'Messages', 'sendDate') > 0) {
+                echo nt('Deleted %n% message... OK!', 'Deleted %n% messages... OK!', $iRow) . '<br />';
+            }
+        }
+
+        // If the option is enabled for Messenger
+        if ($iCleanMessenger > 0) {
+            if ($iRow = $this->pruningDb($iCleanMessenger, 'Messenger', 'sent') > 0) {
+                echo nt('Deleted %n% IM message... OK!', 'Deleted %n% IM messages... OK!', $iRow) . '<br />';
+            }
+        }
+    }
+
+    /**
+     * @param integer $iOlderThanXDay Delete data older than X days (e.g., 365 for data older than 1 year).
+     * @param string $sTable Table name. Choose between 'Comments<TYPE>', 'Messages' and 'Messenger'
+     * @param string $sDateColumn The DB column that indicates when the data has been created/updated (e.g., sendDate, updatedDate).
+     * @return integer Returns the number of rows.
+     */
+    protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
+    {
+        if (strstr($sTable, 'Comments') === false && $sTable !== 'Messages' && $sTable !== 'Messenger') {
+            Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
+        }
+
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE (' . $sDateColumn . ' < NOW() - INTERVAL :dayNumber DAY)');
+        $rStmt->bindValue(':dayNumber', $iOlderThanXDay, \PDO::PARAM_INT);
+        $rStmt->execute();
+        return $rStmt->rowCount();
     }
 
 }
