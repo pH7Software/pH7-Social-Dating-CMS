@@ -13,7 +13,7 @@ class HomeController extends Controller
     /**
      * Example URL: http://your-domain.com/m/helloworld/home/index/Pierre-Henry/Soria
      */
-    public function index ($sFirstName = '', $sLastName = '')
+    public function index($sFirstName = '', $sLastName = '')
     {
         // Loading hello_world language...
         $this->lang->load('hello_world');
