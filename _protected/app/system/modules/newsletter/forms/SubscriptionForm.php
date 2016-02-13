@@ -24,7 +24,7 @@ class SubscriptionForm
             Framework\Url\Header::redirect($sActUrl);
         }
 
-        $oForm = new \PFBC\Form('form_subscription', 350);
+        $oForm = new \PFBC\Form('form_subscription');
         $oForm->configure(array('action'=> $sActUrl));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_subscription', 'form_subscription'));
         $oForm->addElement(new \PFBC\Element\Token('subscription'));

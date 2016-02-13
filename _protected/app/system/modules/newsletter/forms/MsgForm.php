@@ -20,7 +20,7 @@ class MsgForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_msg', 650);
+        $oForm = new \PFBC\Form('form_msg');
         $oForm->configure(array('action'=> '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_msg', 'form_msg'));
         $oForm->addElement(new \PFBC\Element\Token('msg'));
