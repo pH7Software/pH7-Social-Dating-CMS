@@ -34,9 +34,11 @@ class MainController extends Controller
             // To check if the site is called by a mobile native app
             $this->_bIsMobApp = $this->view->is_mobapp = MobApp::is();
 
+            // Background video is used only for the Splash page
             if ($this->_getGuestTplPage() === static::GUEST_SPLASH_FILE)
             {
-                $bIsBgVideo = (bool) DbConfig::getSetting('bgSplashVideo');
+                // Enable the Splash Background Video if it's enabled and if visitors aren't from a mobile devices (for performance optimization)
+                $bIsBgVideo = (bool) (DbConfig::getSetting('bgSplashVideo') && !$this->browser->isMobile());
 
                 // Assign the background video option (this tpl var is only available in index.guest_splash.tpl)
                 $this->view->is_bg_video = $bIsBgVideo;
