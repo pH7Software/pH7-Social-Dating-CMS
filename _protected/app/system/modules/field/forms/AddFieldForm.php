@@ -24,7 +24,7 @@ class AddFieldForm
 
         $sFieldPattern = Config::getInstance()->values['module.setting']['field.pattern'];
 
-        $oForm = new \PFBC\Form('form_add_field', 550);
+        $oForm = new \PFBC\Form('form_add_field');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_add_field', 'form_add_field'));
         $oForm->addElement(new \PFBC\Element\Token('add_field'));

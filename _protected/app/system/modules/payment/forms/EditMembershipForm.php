@@ -28,7 +28,7 @@ class EditMembershipForm
 
         $oMembership = (new PaymentModel)->getMemberships( (new Http)->get('group_id', 'int') );
 
-        $oForm = new \PFBC\Form('form_edit_membership', 600);
+        $oForm = new \PFBC\Form('form_edit_membership');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_membership', 'form_edit_membership'));
         $oForm->addElement(new \PFBC\Element\Token('membership'));

@@ -22,7 +22,7 @@ class MembershipForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_membership', 600);
+        $oForm = new \PFBC\Form('form_membership');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_membership', 'form_membership'));
         $oForm->addElement(new \PFBC\Element\Token('membership'));

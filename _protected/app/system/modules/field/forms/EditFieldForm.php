@@ -24,7 +24,7 @@ class EditFieldForm
 
         $sFieldPattern = Config::getInstance()->values['module.setting']['field.pattern'];
 
-        $oForm = new \PFBC\Form('form_edit_field', 550);
+        $oForm = new \PFBC\Form('form_edit_field');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_field', 'form_edit_field'));
         $oForm->addElement(new \PFBC\Element\Token('edit_field'));

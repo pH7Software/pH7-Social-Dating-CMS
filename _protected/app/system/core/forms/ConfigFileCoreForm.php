@@ -36,7 +36,7 @@ class ConfigFileCoreForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_config', 600);
+        $oForm = new \PFBC\Form('form_config');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_config', 'form_config'));
         $oForm->addElement(new \PFBC\Element\Token('config'));
