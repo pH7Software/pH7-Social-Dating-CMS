@@ -9,12 +9,12 @@ var Like = {
 
     evenements: function ()
     {
-        $('a.like').click(this.click);
+        $('a#like').click(this.click);
     },
 
     precharger: function ()
     {
-        var aLikes = $('a.like');
+        var aLikes = $('a#like');
         for(var i = 0, l = aLikes.length; i < l; i++) {
             $.ajax({
                 context: aLikes[i],
@@ -52,7 +52,7 @@ var Like = {
                  $(this).addClass('like_voted');
                 var iVotes = parseInt(oData.votes);
                 if (isNaN(iVotes)) {iVotes = '-1';}
-                    $(this).html(iVotes + ' ' + oData.txt);
+                    $(this).html(oData.txt);
                 $(this).animate({'opacity':1}, {'duration':'slow'});
             },
             error: function () {

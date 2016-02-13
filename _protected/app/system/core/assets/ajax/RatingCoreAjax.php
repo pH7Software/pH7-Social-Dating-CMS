@@ -12,10 +12,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Cookie\Cookie,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Cookie\Cookie;
 
 class RatingCoreAjax
 {
@@ -48,6 +45,17 @@ class RatingCoreAjax
             Framework\Http\Http::setHeadersByCode(400);
             exit('Bad Request Error!');
         }
+    }
+
+    /**
+     * Displays the votes.
+     *
+     * @access public
+     * @return string
+     */
+    public function show()
+    {
+        return jsonMsg($this->_iStatus, $this->_sTxt);
     }
 
     /**
@@ -124,30 +132,6 @@ class RatingCoreAjax
     {
         $this->_oRatingModel->updateVotes($this->_iId, $this->_sTable);
         $this->_oRatingModel->updateScore($this->_fScore, $this->_iId, $this->_sTable);
-    }
-
-    /**
-     * Displays the votes.
-     *
-     * @access public
-     * @return string
-     */
-    public function show()
-    {
-        return jsonMsg($this->_iStatus, $this->_sTxt);
-    }
-
-    public function __destruct()
-    {
-        unset(
-           $this->_oHttpRequest,
-           $this->_oRatingModel,
-           $this->_sTxt,
-           $this->_sTable,
-           $this->_iStatus,
-           $this->_iId,
-           $this->_fScore
-        );
     }
 
 }
