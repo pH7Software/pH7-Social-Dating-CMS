@@ -16,7 +16,7 @@ class SearchMailForm
     {
         $bAdminLogged = (AdminCore::auth() && !UserCore::auth());
 
-        $oForm = new \PFBC\Form('form_search', 500);
+        $oForm = new \PFBC\Form('form_search');
         $sUrl = ($bAdminLogged) ? Uri::get('mail', 'admin', 'msglist') : Uri::get('mail', 'main', 'result');
         $oForm->configure(array('action' => $sUrl . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Search(t('Search a message:'), 'looking', array('title' => t('Enter a keyword in the Subject, Contents, Author (username, first name, last name) or message ID.'))));
