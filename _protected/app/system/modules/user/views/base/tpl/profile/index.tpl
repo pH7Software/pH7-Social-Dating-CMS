@@ -207,6 +207,12 @@
 
   <script src="{url_static_js}tabs.js"></script>
   <script>tabs('p', ['general','map','friend',{if $is_logged AND !$is_himself_profile}'mutual_friend',{/if}'picture','video','forum','note','visitor']);</script>
+  <script>
+  /* Google Map has issues with the map size when it isn't loaded when visible, so just refresh the page to see the whole map */
+  $('ol#toc li a[href=#map]').click(function() {
+      location.reload();
+  });
+  </script>
 
   {* Signup Popup *}
   {if !$is_logged AND !AdminCore::auth()}
