@@ -22,7 +22,7 @@ class EditVideoForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_edit_video', 500);
+        $oForm = new \PFBC\Form('form_edit_video');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_video', 'form_edit_video'));
         $oForm->addElement(new \PFBC\Element\Token('edit_video'));

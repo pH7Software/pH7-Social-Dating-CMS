@@ -24,7 +24,7 @@ class EditAlbumForm
 
         $oAlbum = (new PictureModel)->album((new Session)->get('member_id'), (new Http)->get('album_id'), 1, 0, 1);
 
-        $oForm = new \PFBC\Form('form_edit_picture_album', 500);
+        $oForm = new \PFBC\Form('form_edit_picture_album');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_picture_album', 'form_edit_picture_album'));
         $oForm->addElement(new \PFBC\Element\Token('edit_album'));

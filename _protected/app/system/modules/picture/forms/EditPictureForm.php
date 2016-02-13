@@ -21,7 +21,7 @@ class EditPictureForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_edit_picture', 500);
+        $oForm = new \PFBC\Form('form_edit_picture');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_picture', 'form_edit_picture'));
         $oForm->addElement(new \PFBC\Element\Token('edit_picture'));
