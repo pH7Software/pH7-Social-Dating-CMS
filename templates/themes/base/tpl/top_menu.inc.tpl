@@ -447,14 +447,14 @@
 
         <li class="bold dropdown"><a href="{software_help_url}" title="{lang "Need some Helps? We're here for you!"}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-life-ring"></i> {lang 'Help'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{software_help_url}" title="{lang 'Individual Ticket Support'}"><i class="fa fa-life-ring"></i> {lang 'Support'}</a></li>
+            <li><a href="{software_help_url}" title="{lang 'Need Technical Support...?'}"><i class="fa fa-life-ring"></i> {lang 'Professional Support'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
             <li><a href="http://ph7cms.com/how-to-report-bugs" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
             {* Coming soon ...
             <li><a href="{software_faq_url}" title="{lang 'Frequently Asked Questions'}">{lang 'Faq'}</a></li>
             <li><a href="{software_forum_url}" title="{lang 'Support Forum'}">{lang 'Forum'}</a></li>
             *}
-            <li><a href="{software_license_url}" title="{lang 'Buy a License Key'}"><i class="fa fa-key"></i> {lang 'You Need a License'}</a></li>
+            <li><a href="{software_license_url}" title="{lang 'Buy a License Key'}"><i class="fa fa-key"></i> {lang 'Need a License?'}</a></li>
           </ul>
         </li>
 
