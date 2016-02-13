@@ -19,8 +19,7 @@ function disable_button()
 }
 
 var sInputAgree = 'input[name="agree[]"]';
-$(sInputAgree).click(function()
-{
+$(sInputAgree).click(function() {
     $(sInputAgree+':checked').val()==1?enable_button():disable_button();
 });
 
@@ -44,12 +43,10 @@ function checkChecked(bIsConfirmAlert)
         iCountChecked += $(this).is(':checked');
     });
 
-    if (iCountChecked == 0)
-    {
+    if (iCountChecked == 0) {
         alert(pH7LangCore.select_least_one);
         return false;
-    }
-    else if (bIsConfirmAlert)
+    } else if (bIsConfirmAlert)
         return confirm(pH7LangCore.warning_irreversible_action);
 
     return true;
