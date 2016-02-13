@@ -35,7 +35,7 @@ class VideoForm
         $aAlbumName = array();
         foreach ($oAlbumId as $iId) $aAlbumName[$iId->albumId] = $iId->name;
 
-        $oForm = new \PFBC\Form('form_video', 500);
+        $oForm = new \PFBC\Form('form_video');
         $oForm->configure(array('action' =>''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_video', 'form_video'));
         $oForm->addElement(new \PFBC\Element\Token('video'));

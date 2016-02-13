@@ -34,7 +34,7 @@ class PictureForm
         $aAlbumName = array();
         foreach ($oAlbumId as $iId) $aAlbumName[$iId->albumId] = $iId->name;
 
-        $oForm = new \PFBC\Form('form_picture', 500);
+        $oForm = new \PFBC\Form('form_picture');
         $oForm->configure(array('action' =>''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_picture', 'form_picture'));
         $oForm->addElement(new \PFBC\Element\Token('picture'));
