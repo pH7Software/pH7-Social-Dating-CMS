@@ -58,7 +58,7 @@ class GoogleKeywordsRankAPI
           * @return void
           */
 
-        public function setMaxPages ($maxPages)
+        public function setMaxPages($maxPages)
         {
                 if ($maxPages>0) {
                         $this->maxPages = $maxPages;
@@ -73,7 +73,7 @@ class GoogleKeywordsRankAPI
           * @return int maxPages
           */
 
-        public function getMaxPages ()
+        public function getMaxPages()
         {
                 return $this->maxPages;
         }
@@ -112,7 +112,7 @@ class GoogleKeywordsRankAPI
           */
 
 
-        public function getKeywordsRank ($keywords)
+        public function getKeywordsRank($keywords)
         {
 
                 if (isset($this->url) && isset($keywords)) {
@@ -162,7 +162,7 @@ class GoogleKeywordsRankAPI
           */
 
 
-        public function getKeywordsArrayRank ($keywords)
+        public function getKeywordsArrayRank($keywords)
         {
                 $keywords_rank = array();
 

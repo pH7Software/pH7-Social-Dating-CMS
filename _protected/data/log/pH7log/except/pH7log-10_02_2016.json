@@ -1,0 +1,3 @@
+{"Time":"02-10-2016 13:41:54","IP":"127.0.0.1","UserAgent":"Mozilla\/5.0 (X11; Ubuntu; Linux x86_64; rv:40.0) Gecko\/20100101 Firefox\/40.0","UrlPag":"http:\/\/localhost\/pH7CMS\/","Query":"NO QUERY STRING","Message":"'\/var\/www\/html\/pH7CMS\/_protected\/app\/configs\/environment\/.env.php' not found!","Level":0,"File":"\/var\/www\/html\/pH7CMS\/_protected\/framework\/File\/Import.class.php","Line":126}
+
+
