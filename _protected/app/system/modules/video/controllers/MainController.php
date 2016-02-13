@@ -216,7 +216,7 @@ class MainController extends Controller
             $this->sTitle = t('Dating Social Video - Your search returned');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Video Result!', '%n% Videos Result!', $this->iTotalVideos);
+            $this->view->h3_title = nt('%n% video result!', '%n% video results!', $this->iTotalVideos);
             $this->view->meta_description = t('Search - %site_name% is a Dating Social Video Community!');
             $this->view->meta_keywords = t('search,video,dating,social network,community,music,movie,news,video sharing');
             $this->view->album = $oSearch;

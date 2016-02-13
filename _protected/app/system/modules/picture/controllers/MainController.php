@@ -204,7 +204,7 @@ class MainController extends Controller
         {
             $this->sTitle = t('Dating Social Picture - Your search returned');
             $this->view->page_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Picture Result!', '%n% Pictures Result!', $this->iTotalPictures);
+            $this->view->h3_title = nt('%n% picture result!', '%n% picture results!', $this->iTotalPictures);
             $this->view->meta_description = t('Search - %site_name% is a Dating Social Photo Community!');
             $this->view->meta_keywords = t('search,picture,photo, photo gallery,dating,social network,community,music,movie,news,picture sharing');
             $this->view->h2_title = $this->sTitle;
