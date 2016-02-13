@@ -1179,7 +1179,7 @@ class elFinder {
     * @retval false  error
     * @author Naoki Sawada
     **/
-    protected function get_remote_contents( &$url, $timeout = 30, $redirect_max = 5, $ua = 'Mozilla/5.0', $fp = null ) {
+    protected function get_remote_contents(&$url, $timeout = 30, $redirect_max = 5, $ua = 'Mozilla/5.0', $fp = null) {
         $method = (function_exists('curl_exec') && !ini_get('safe_mode'))? 'curl_get_contents' : 'fsock_get_contents';
         return $this->$method( $url, $timeout, $redirect_max, $ua, $fp );
     }
@@ -1197,7 +1197,7 @@ class elFinder {
      * @retval false  error
      * @author Naoki Sawada
      **/
-     protected function curl_get_contents( &$url, $timeout, $redirect_max, $ua, $outfp ){
+     protected function curl_get_contents(&$url, $timeout, $redirect_max, $ua, $outfp) {
         $ch = curl_init();
         curl_setopt( $ch, CURLOPT_URL, $url );
         curl_setopt( $ch, CURLOPT_HEADER, false );
@@ -1232,7 +1232,7 @@ class elFinder {
      * @retval false  error
      * @author Naoki Sawada
      */
-    protected function fsock_get_contents( &$url, $timeout, $redirect_max, $ua, $outfp ) {
+    protected function fsock_get_contents(&$url, $timeout, $redirect_max, $ua, $outfp) {
 
         $connect_timeout = 3;
         $connect_try = 3;
@@ -1365,7 +1365,7 @@ class elFinder {
      * @return array
      * @author Naoki Sawada
      */
-    protected function parse_data_scheme( $str, $extTable ) {
+    protected function parse_data_scheme($str, $extTable) {
         $data = $name = '';
         if ($fp = fopen('data://'.substr($str, 5), 'rb')) {
             if ($data = stream_get_contents($fp)) {
