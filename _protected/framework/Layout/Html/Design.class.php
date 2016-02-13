@@ -219,7 +219,9 @@ class Design
      */
     public function homePageUrl()
     {
-        if (\PH7\AdminCore::auth())
+        if (\PH7\UserCore::auth())
+            $this->url('user', 'browse', 'index');
+        elseif (\PH7\AdminCore::auth())
             $this->url(PH7_ADMIN_MOD, 'main', 'index');
         elseif (\PH7\AffiliateCore::auth())
             $this->url('affiliate', 'account', 'index');
@@ -620,7 +622,7 @@ class Design
     public function like($sUsername, $sFirstName, $sSex, $sForceUrlKey = null)
     {
         $aHttpParams = [
-            'msg' => t('Free registration for the feature Like.'),
+            'msg' => t('Please join for free to vote that'),
             'ref' => $this->oHttpRequest->currentController(),
             'a' => 'like',
             'u' => $sUsername,
@@ -628,10 +630,12 @@ class Design
             's' => $sSex
         ];
 
-        $sLikeLink = (\PH7\UserCore::auth()) ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+        $bIsLogged = \PH7\UserCore::auth();
+        $sLikeLink = ($bIsLogged) ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+        $sLikeId = ($bIsLogged) ? ' id="like"' : '';
 
         $sUrlKey = (empty($sForceUrlKey)) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
-        echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like">', t('Like %0%', $sFirstName), '</a>';
+        echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'Like.js');
     }
 

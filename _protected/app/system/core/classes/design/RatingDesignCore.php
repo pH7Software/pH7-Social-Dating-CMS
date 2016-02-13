@@ -50,7 +50,7 @@ class RatingDesignCore
          */
         if(!UserCore::auth())
         {
-            $sUrl = Framework\Mvc\Router\Uri::get('user','signup','step1','?msg=' . t('Please register for free in order to vote.'), false);
+            $sUrl = Framework\Mvc\Router\Uri::get('user','signup','step1','?msg=' . t('Please join for free to vote that'), false);
             echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'', $sUrl, '\'});</script>';
         }
     }

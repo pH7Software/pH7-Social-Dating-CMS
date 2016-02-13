@@ -17,7 +17,7 @@ use PH7\Framework\Mvc\Request\Http, PH7\Framework\Ip\Ip;
 class LikeCoreAjax
 {
 
-    private $_oHttpRequest, $_oLikeModel, $_sTxt, $_sKey, $_iVote, $_fLastIp, $_fLastIpVoted;
+    private $_oHttpRequest, $_oLikeModel, $_sKey, $_iVote, $_fLastIp, $_fLastIpVoted;
     private static $_iVotesLike = 0;
 
     public function __construct()
@@ -25,6 +25,18 @@ class LikeCoreAjax
         $this->_oHttpRequest = new Http;
 
         ($this->_oHttpRequest->postExists('key') ? $this->initialize() : exit('-1'));
+    }
+
+    /**
+     * Showing votes.
+     *
+     * @access public
+     * @return string
+     */
+    public function show()
+    {
+        $sTxt = (static::$_iVotesLike > 1) ? nt('You and one other have voted for this!', 'You and %n% other people have voted for this!', static::$_iVotesLike-1) : t('Congrats! You are the first to like it');
+        return '{"votes":' . static::$_iVotesLike . ',"txt":"' . $sTxt . '"}';
     }
 
     /**
@@ -43,7 +55,7 @@ class LikeCoreAjax
     }
 
     /**
-     * Gets the votes in the database and inserts the new vote if otherwise updates the vote.
+     * Gets the likes and insert it into the DB if it's the first like, otherwise update the like.
      *
      * @access protected
      * @return void
@@ -69,24 +81,18 @@ class LikeCoreAjax
     }
 
     /**
-     * Check the permissions so only members can vote, but you can disable this check so that even visitors vote page.
+     * Check the permissions so only members can like, but you can disable this check so even visitors will be able to like pages.
      *
      * @access protected
      * @return boolean Returns true if the user is connected, false otherwise.
      */
     protected function checkPerm()
     {
-        // Only for members
-        if(!UserCore::auth())
-        {
-            $this->_sTxt = t('Please <b>register</b> or <b>login</b> to vote this.');
-            return false;
-        }
-        return true;
+        return (UserCore::auth()) ? true : false;
     }
 
     /**
-     * Adds voting in the database and increment the static attribute to vote.
+     * Adds voting into the database and increment the static vote attribute.
      *
      * @access protected
      * @return void
@@ -98,7 +104,7 @@ class LikeCoreAjax
     }
 
     /**
-     * Updates the vote in the database.
+     * Updates the like into the database.
      *
      * @access protected
      * @return void
@@ -110,31 +116,6 @@ class LikeCoreAjax
             static::$_iVotesLike++;
             $this->_oLikeModel->update($this->_sKey, $this->_fLastIp);
         }
-    }
-
-    /**
-     * Showing votes.
-     *
-     * @access public
-     * @return string
-     */
-    public function show()
-    {
-        $sTxt = (!empty($this->_sTxt) ? $this->_sTxt : ((static::$_iVotesLike > 1) ? t('peoples have voted for this!') : t('people have voted for this!')));
-        return '{"votes":' . static::$_iVotesLike . ',"txt":"' . $sTxt . '"}';
-    }
-
-    public function __destruct()
-    {
-        unset(
-           $this->_oHttpRequest,
-           $this->_oLikeModel,
-           $this->_sTxt,
-           $this->_sKey,
-           $this->_iVote,
-           $this->_fLastIp,
-           $this->_fLastIpVoted
-        );
     }
 
 }
