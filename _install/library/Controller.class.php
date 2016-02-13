@@ -38,7 +38,7 @@ abstract class Controller implements IController
 
     protected $oView, $sCurrentLang;
 
-    public function __construct ()
+    public function __construct()
     {
         global $LANG;
 
