@@ -4057,7 +4057,7 @@ abstract class elFinderVolumeDriver {
      * @param string $mime
      * @return gd image resource identifier
      */
-    protected function gdImageCreate($path,$mime){
+    protected function gdImageCreate($path,$mime) {
         switch($mime){
             case 'image/jpeg':
             return imagecreatefromjpeg($path);
@@ -4082,7 +4082,7 @@ abstract class elFinderVolumeDriver {
      * @param string $destformat The Image type to use for $filename
      * @param string $mime The original image mime type
      */
-    protected function gdImage($image, $filename, $destformat, $mime ){
+    protected function gdImage($image, $filename, $destformat, $mime) {
 
         if ($destformat == 'jpg' || ($destformat == null && $mime == 'image/jpeg')) {
             return imagejpeg($image, $filename, 100);
@@ -4101,7 +4101,7 @@ abstract class elFinderVolumeDriver {
      * @param resource $image gd image resource
      * @param string $bgcolor background color in #rrggbb format
      */
-    protected function gdImageBackground($image, $bgcolor){
+    protected function gdImageBackground($image, $bgcolor) {
 
         if( $bgcolor == 'transparent' ){
             imagesavealpha($image,true);
