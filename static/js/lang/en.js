@@ -15,7 +15,7 @@ var pH7LangCore = {
     very_very_strong : "Very Very Strong",
     join_now : "Join Now!",
     unable_retrive_feeds : "Oops! There is no news feed available.",
-    warning_irreversible_action : "Warning! This will delete all selected items! (Action Irreversible)",
+    warning_irreversible_action : "Warning! This will delete all selected items! (Irreversible Action)",
     select_least_one : "Please select at least one.",
     misloading : "Oops! An error occurred, please to reload the page.",
     loading : "Loading...",
