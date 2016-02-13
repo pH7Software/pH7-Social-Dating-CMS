@@ -28,7 +28,7 @@ class AdminBlogForm
         foreach ($oCategoryData as $oId)
             $aCategoryNames[$oId->categoryId] = $oId->name;
 
-        $oForm = new \PFBC\Form('form_blog', 650);
+        $oForm = new \PFBC\Form('form_blog');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_blog', 'form_blog'));
         $oForm->addElement(new \PFBC\Element\Token('blog'));
