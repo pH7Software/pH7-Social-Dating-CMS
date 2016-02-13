@@ -20,7 +20,7 @@ class AlbumForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_picture_album', 500);
+        $oForm = new \PFBC\Form('form_picture_album');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_picture_album', 'form_picture_album'));
         $oForm->addElement(new \PFBC\Element\Token('album'));
