@@ -30,11 +30,11 @@ class SearchUserCoreForm
     private static $aStateOption = ['id' => 'str_state'];
 
     /**
-     * @param integer $iWidth Width of the form in pixel. Default: 500
+     * @param integer $iWidth Width of the form in pixel. Default: NULL (so will be 100%)
      * @param boolean $bSetDevVals Set default values in the form fields, or not... Default: TRUE
      * @return void HTML output.
      */
-    public static function quick($iWidth = 500, $bSetDevVals = true)
+    public static function quick($iWidth = null, $bSetDevVals = true)
     {
         if ($bSetDevVals) {
             static::setAttrVals($bSetDevVals);
@@ -58,11 +58,11 @@ class SearchUserCoreForm
     }
 
     /**
-     * @param integer $iWidth Width of the form in pixel. Default: 500
+     * @param integer $iWidth Width of the form in pixel. Default: NULL (so will be 100%)
      * @param boolean $bSetDevVals Set default values in the form fields, or not... Default: TRUE
      * @return void HTML output.
      */
-    public static function advanced($iWidth = 500, $bSetDevVals = true)
+    public static function advanced($iWidth = null, $bSetDevVals = true)
     {
         if ($bSetDevVals) {
             static::setAttrVals($bSetDevVals);

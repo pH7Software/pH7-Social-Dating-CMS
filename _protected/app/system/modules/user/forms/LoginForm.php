@@ -12,7 +12,7 @@ use PH7\Framework\Session\Session;
 class LoginForm
 {
 
-    public static function display($iWidth = 450)
+    public static function display()
     {
         if (isset($_POST['submit_login_user']))
         {
@@ -22,7 +22,7 @@ class LoginForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_login_user', $iWidth);
+        $oForm = new \PFBC\Form('form_login_user');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_login_user', 'form_login_user'));
         $oForm->addElement(new \PFBC\Element\Token('login'));

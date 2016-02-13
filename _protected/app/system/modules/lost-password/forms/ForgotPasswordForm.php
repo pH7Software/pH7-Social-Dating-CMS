@@ -24,7 +24,7 @@ class ForgotPasswordForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_forgot_password', 500);
+        $oForm = new \PFBC\Form('form_forgot_password');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_forgot_password', 'form_forgot_password'));
         $oForm->addElement(new \PFBC\Element\Token('forgot_password'));

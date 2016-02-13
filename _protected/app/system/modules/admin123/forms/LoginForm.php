@@ -22,7 +22,7 @@ class LoginForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_admin_login', 500);
+        $oForm = new \PFBC\Form('form_admin_login');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_admin_login', 'form_admin_login'));
         $oForm->addElement(new \PFBC\Element\Token('login'));

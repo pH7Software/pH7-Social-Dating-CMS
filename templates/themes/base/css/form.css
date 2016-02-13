@@ -41,7 +41,7 @@ input:focus, textarea:focus, select:focus {
     outline:0;
     border-color:rgba(82,168,236,.8);
     box-shadow:1px 1px 4px #aaa inset,0 0 8px rgba(82,168,236,.6);
-    padding-right:30px;
+    padding-right:15px;
 }
 
 input, textarea{padding:7px}
