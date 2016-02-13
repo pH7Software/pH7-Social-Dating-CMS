@@ -28,7 +28,7 @@ class ResendActivationCoreForm
                 Framework\Url\Header::redirect();
             }
 
-            $oForm = new \PFBC\Form('form_resend_activation', 500);
+            $oForm = new \PFBC\Form('form_resend_activation');
             $oForm->configure(array('action' => '' ));
             $oForm->addElement(new \PFBC\Element\Hidden('submit_resend_activation', 'form_resend_activation'));
             $oForm->addElement(new \PFBC\Element\Token('resend_activation'));
