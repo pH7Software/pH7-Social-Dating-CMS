@@ -32,7 +32,7 @@ class EditWallForm
 
         $oWallData = (new WallModel)->get((new Session)->get('member_id'), (new Http)->get('wall_id'), 0, 1);
 
-        $oForm = new \PFBC\Form('form_edit_wall', 500);
+        $oForm = new \PFBC\Form('form_edit_wall');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_wall', 'form_edit_wall'));
         $oForm->addElement(new \PFBC\Element\Token('edit_wall'));

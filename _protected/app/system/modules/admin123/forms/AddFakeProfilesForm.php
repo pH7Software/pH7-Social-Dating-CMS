@@ -22,7 +22,7 @@ class AddFakeProfilesForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_add_fake_profiles',550);
+        $oForm = new \PFBC\Form('form_add_fake_profiles');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_add_fake_profiles', 'form_add_fake_profiles'));
         $oForm->addElement(new \PFBC\Element\Token('fake_profiles'));

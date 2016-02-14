@@ -22,7 +22,7 @@ class DeleteUserCoreForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_delete_account', 500);
+        $oForm = new \PFBC\Form('form_delete_account');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_delete_account', 'form_delete_account'));
         $oForm->addElement(new \PFBC\Element\Token('delete_account'));

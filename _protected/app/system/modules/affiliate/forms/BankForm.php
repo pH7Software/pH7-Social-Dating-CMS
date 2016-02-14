@@ -29,7 +29,7 @@ class BankForm
         $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id')) ? $oHR->get('profile_id', 'int') : (new Session)->get('affiliate_id');
         $oAff = (new AffiliateModel)->readProfile($iProfileId, 'Affiliates');
 
-        $oForm = new \PFBC\Form('form_bank_account', 500);
+        $oForm = new \PFBC\Form('form_bank_account');
         $oForm->configure(array('action'=> '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_bank_account', 'form_bank_account'));
         $oForm->addElement(new \PFBC\Element\Token('bank_account'));

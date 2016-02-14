@@ -22,7 +22,7 @@ class AvatarForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_avatar', 500);
+        $oForm = new \PFBC\Form('form_avatar');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_avatar', 'form_avatar'));
         $oForm->addElement(new \PFBC\Element\Token('avatar'));

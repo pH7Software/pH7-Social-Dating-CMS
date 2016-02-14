@@ -26,7 +26,7 @@ class NotificationForm
 
         $oNotification = $oUserModel->getNotification($iProfileId);
 
-        $oForm = new \PFBC\Form('form_notification', 650);
+        $oForm = new \PFBC\Form('form_notification');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_notification', 'form_notification'));
         $oForm->addElement(new \PFBC\Element\Token('notification'));

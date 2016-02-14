@@ -34,7 +34,7 @@ class UpdateAdsForm
 
         foreach ($oAds as $oRow)
         {
-            $oForm = new \PFBC\Form('form_update_ads', 500);
+            $oForm = new \PFBC\Form('form_update_ads');
             $oForm->configure(array('action' => ''));
             $oForm->addElement(new \PFBC\Element\Hidden('submit_update_ads', 'form_update_ads'));
             $oForm->addElement(new \PFBC\Element\Token('update_ads'));

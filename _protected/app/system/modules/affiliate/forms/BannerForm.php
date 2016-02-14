@@ -14,12 +14,10 @@ class BannerForm
 
     public static function display()
     {
-        $oForm = new \PFBC\Form('form_update_admin_ads', 500);
-        $oForm->configure(array('action' => ''));
-        $oForm = new \PFBC\Form('form_banner_ads', 500);
-
+        $oForm = new \PFBC\Form('form_banner_ads');
         $oPage = new Page;
         $oAdsModel = new AdsCoreModel;
+
         $oPage->getTotalPages($oAdsModel->total('AdsAffiliates'), 10);
         $oAds = $oAdsModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsByPage(), 'AdsAffiliates');
         unset($oPage, $oAdsModel);

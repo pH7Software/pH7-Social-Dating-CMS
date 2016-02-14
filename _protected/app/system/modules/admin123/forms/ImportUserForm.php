@@ -22,7 +22,7 @@ class ImportUserForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_import_user',550);
+        $oForm = new \PFBC\Form('form_import_user');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<p>' . t('Import members into your site from a <strong><abbr title="Comma Separated Values">CSV</abbr></strong> file. You can find database users <strong><a href="%0%">here</a></strong>.', 'http://www.saledatingprofiles.com/?from=ph7cms.com') . '</p>'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_import_user', 'form_import_user'));

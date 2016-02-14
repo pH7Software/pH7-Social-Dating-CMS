@@ -24,7 +24,7 @@ class AdsForm
 
         $aAdSizes = Import::file(PH7_PATH_APP_CONFIG . 'ad_sizes');
 
-        $oForm = new \PFBC\Form('form_ads', 500);
+        $oForm = new \PFBC\Form('form_ads');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_ads', 'form_ads'));
         $oForm->addElement(new \PFBC\Element\Token('ads'));
