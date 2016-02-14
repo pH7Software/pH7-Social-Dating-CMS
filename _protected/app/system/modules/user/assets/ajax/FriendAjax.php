@@ -62,7 +62,7 @@ class FriendAjax extends Core
 
             if ($this->_mStatus == 'error')
             {
-                $this->_sMsg = jsonMsg(0, t('Unable to add to friends list, please try later.'));
+                $this->_sMsg = jsonMsg(0, t('Unable to add to friends list. Please try later.'));
             }
             elseif ($this->_mStatus == 'friend_exists')
             {
@@ -95,11 +95,11 @@ class FriendAjax extends Core
 
         if (!$this->_mStatus)
         {
-            $this->_sMsg = jsonMsg(0, t('Cannot approve friend, please try later.'));
+            $this->_sMsg = jsonMsg(0, t('Cannot approve the friend. Please try later.'));
         }
         else
         {
-            $this->_sMsg = jsonMsg(1, t('The friends has been approved.'));
+            $this->_sMsg = jsonMsg(1, t('The friend has been approved.'));
         }
 
         echo $this->_sMsg;
@@ -111,11 +111,11 @@ class FriendAjax extends Core
 
         if (!$this->_mStatus)
         {
-            $this->_sMsg = jsonMsg(0, t('Cannot remove friend, please try later.'));
+            $this->_sMsg = jsonMsg(0, t('Cannot remove the friend. Please try later.'));
         }
         else
         {
-            $this->_sMsg = jsonMsg(1, t('The friends we been deleted.'));
+            $this->_sMsg = jsonMsg(1, t('The friend has been removed.'));
         }
 
         echo $this->_sMsg;
@@ -143,7 +143,9 @@ class FriendAjax extends Core
          */
         $sSiteName = Framework\Mvc\Model\DbConfig::getSetting('siteName');
 
-        $this->view->content = t('Hello %0%!<br /><strong>%1%</strong> sent you a friendship request on %2%.<br /> <a href="%3%">Click here</a> to see your friend request.', $sFriendUsername, $this->session->get('member_username'), $sSiteName, Framework\Mvc\Router\Uri::get('user', 'friend', 'index'));
+        $this->view->content = t('Hello %0%!', $sFriendUsername) . '<br />' .
+        t('<strong>%0%</strong> sent you a friendship request on %1%.', $this->session->get('member_username'), $sSiteName) . '<br />' .
+        t('<a href="%0%">Click here</a> to see your friend request.', Framework\Mvc\Router\Uri::get('user', 'friend', 'index'));
 
         /* Because we work in Ajax, the constant "PH7_TPL_NAME" is not yet defined.
          * So we use the constant "PH7_DEFAULT_THEME" is already defined.

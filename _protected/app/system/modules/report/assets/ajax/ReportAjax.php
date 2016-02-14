@@ -37,7 +37,7 @@ class ReportAjax
     protected function delete()
     {
         $this->_bStatus = $this->_oReportModel->delete($this->_oHttpRequest->post('reportId'));
-        echo ($this->_bStatus) ? jsonMsg(1, t('The Report we been deleted.')) : jsonMsg(0, t('Cannot remove Report, please try later.'));
+        echo ($this->_bStatus) ? jsonMsg(1, t('The report has been deleted.')) : jsonMsg(0, t('Cannot remove the report. Please try later.'));
     }
 
     public function __destruct()

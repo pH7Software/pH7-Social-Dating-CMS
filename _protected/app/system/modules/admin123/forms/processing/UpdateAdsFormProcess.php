@@ -23,7 +23,7 @@ class UpdateAdsFormProcess extends Form
         /* Clean Model\Design for STATIC data */
         (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear();
 
-        \PFBC\Form::setSuccess('form_update_ads', t('The Advertisements was saved successfully!'));
+        \PFBC\Form::setSuccess('form_update_ads', t('The banner has been saved!'));
     }
 
 }

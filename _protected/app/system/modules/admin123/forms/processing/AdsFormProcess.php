@@ -1,4 +1,4 @@
-<?php
+    <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
@@ -36,7 +36,7 @@ class AdsFormProcess extends Form
         ->start(AdsCoreModel::CACHE_GROUP, 'totalAds' . ($iIsAff ? 'Affiliates' : ''), null)->clear();
 
         $sSlug = ($iIsAff) ? 'affiliate' : '';
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The Advertisement has been successfully added!'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The banner has been added!'));
     }
 
 }
