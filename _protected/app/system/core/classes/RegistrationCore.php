@@ -15,7 +15,11 @@ use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Mvc\Router\Uri;
 abstract class RegistrationCore extends Core
 {
 
-    private $iActiveType;
+    /**
+     * @var integer $iActiveType
+     * @internal Set protected visibility because this attribute is used in child classes.
+     */
+    protected $iActiveType;
 
     public function __construct()
     {
