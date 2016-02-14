@@ -174,6 +174,11 @@ Recommended Hosting for **pH7CMS**
 <p><a href="http://ph7cms.com/web/faction"><img src="http://ph7cms.com/web/factionimg" width="250" height="250" alt="WebFaction: Recommended for pH7CMS" title="WebFaction: Recommended for pH7CMS"></a> &nbsp; <a href="http://ph7cms.com/web/rackhost"><img src="http://ph7cms.com/web/rackhostimg" width="250" height="250" alt="RackSpace: Recommended for pH7CMS" title="RackSpace: Recommended for pH7CMS"></a></p>
 
 
+## Translations
+
+You can find and add other languages on the [I18N repo](https://github.com/pH7Software/pH7-Internationalization).
+
+
 ## Author
 
 Pierre-Henry Soria
