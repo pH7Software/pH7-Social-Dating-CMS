@@ -15,16 +15,16 @@ use PH7\Framework\Str\Str, PH7\Framework\Registry\Registry;
 class ConfigFileCoreForm
 {
 
+    const CONFIG_FILE = 'config.ini';
+
     /**
-     * @param string $sConfigVar Specify the variable in the INI file where module options. Default module.setting
-     * @param string $sConfigPath Specify the path of INI file configuration WITHOUT "config.ini". The default value is the current configuration file module. Default NULL
+     * @param string $sConfigVar Specify the variable in the INI file where module options. Default: module.setting
+     * @param string $sConfigPath Specify the path of INI file configuration WITHOUT "config.ini". The default value is the current configuration module file. Default: NULL
      * @return void
      */
     public static function display($sConfigVar = 'module.setting', $sConfigPath = null)
     {
-        $sConfigFile = 'config.ini';
-
-        $sIniFile = (empty($sConfigPath)) ? Registry::getInstance()->path_module_config . $sConfigFile : $sConfigPath . $sConfigFile;
+        $sIniFile = (empty($sConfigPath)) ? Registry::getInstance()->path_module_config . static::CONFIG_FILE : $sConfigPath . static::CONFIG_FILE;
         $aData = parse_ini_file($sIniFile, true);
         $rData = file_get_contents($sIniFile);
 
