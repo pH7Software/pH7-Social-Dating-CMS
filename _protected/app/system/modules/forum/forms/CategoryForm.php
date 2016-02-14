@@ -24,7 +24,7 @@ class CategoryForm
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
-        $oForm = new \PFBC\Form('form_category', '100%');
+        $oForm = new \PFBC\Form('form_category');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_category', 'form_category'));
         $oForm->addElement(new \PFBC\Element\Token('category'));

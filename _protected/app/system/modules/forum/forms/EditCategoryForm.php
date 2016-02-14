@@ -25,7 +25,7 @@ class EditCategoryForm
         $oCategoryData = (new ForumModel)->getCategory((new Http)->get('category_id'), 0, 1);
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
-        $oForm = new \PFBC\Form('form_category_edit', '100%');
+        $oForm = new \PFBC\Form('form_category_edit');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_category_edit', 'form_category_edit'));
         $oForm->addElement(new \PFBC\Element\Token('category_edit'));

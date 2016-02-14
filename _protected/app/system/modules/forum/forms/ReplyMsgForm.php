@@ -22,7 +22,7 @@ class ReplyMsgForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_reply', '100%');
+        $oForm = new \PFBC\Form('form_reply');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_reply', 'form_reply'));
         $oForm->addElement(new \PFBC\Element\Token('reply'));

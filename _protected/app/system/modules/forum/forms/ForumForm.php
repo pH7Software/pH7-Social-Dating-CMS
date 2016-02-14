@@ -30,7 +30,7 @@ class ForumForm
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
-        $oForm = new \PFBC\Form('form_forum', '100%');
+        $oForm = new \PFBC\Form('form_forum');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_forum', 'form_forum'));
         $oForm->addElement(new \PFBC\Element\Token('forum'));
