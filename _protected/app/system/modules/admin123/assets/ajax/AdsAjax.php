@@ -52,11 +52,11 @@ class AdsAjax
         if ($this->_bStatus)
         {
             (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
-            $this->_sMsg = jsonMsg(1, t('The Advertisement we been activate.'));
+            $this->_sMsg = jsonMsg(1, t('The banner has been activated.'));
         }
         else
         {
-            $this->_sMsg = jsonMsg(0, t('Cannot activate Advertisement, please try later.'));
+            $this->_sMsg = jsonMsg(0, t('Cannot activate the banner. Please try later.'));
         }
         echo $this->_sMsg;
     }
@@ -70,11 +70,11 @@ class AdsAjax
         if ($this->_bStatus)
         {
             (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
-            $this->_sMsg = jsonMsg(1, t('The deactivate we been deleted.'));
+            $this->_sMsg = jsonMsg(1, t('The banner has been deactivated.'));
         }
         else
         {
-            $this->_sMsg = jsonMsg(0, t('Cannot deactivate Advertisement, please try later.'));
+            $this->_sMsg = jsonMsg(0, t('Cannot deactivate the banner. Please try later.'));
         }
         echo $this->_sMsg;
     }
@@ -92,11 +92,11 @@ class AdsAjax
                     ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
                     ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
 
-            $this->_sMsg = jsonMsg(1, t('The Advertisement we been deleted.'));
+            $this->_sMsg = jsonMsg(1, t('The banner has been deleted.'));
         }
         else
         {
-            $this->_sMsg = jsonMsg(0, t('Cannot remove Advertisement, please try later.'));
+            $this->_sMsg = jsonMsg(0, t('Cannot remove the banner. Please try later.'));
         }
         echo $this->_sMsg;
     }
