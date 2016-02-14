@@ -31,7 +31,7 @@ class EditMsgForm
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
-        $oForm = new \PFBC\Form('form_edit_msg', '100%');
+        $oForm = new \PFBC\Form('form_edit_msg');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_msg', 'form_edit_msg'));
         $oForm->addElement(new \PFBC\Element\Token('edit_msg'));

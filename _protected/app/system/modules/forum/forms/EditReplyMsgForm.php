@@ -26,7 +26,7 @@ class EditReplyMsgForm
         $oMsg = (new ForumModel)->getMessage($oHttpRequest->get('topic_id'), $oHttpRequest->get('message_id'), (new Session)->get('member_id'), 1, 0, 1);
         unset($oHttpRequest);
 
-        $oForm = new \PFBC\Form('form_edit_reply_msg', '100%');
+        $oForm = new \PFBC\Form('form_edit_reply_msg');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_reply_msg', 'form_edit_reply_msg'));
         $oForm->addElement(new \PFBC\Element\Token('edit_reply_msg'));
