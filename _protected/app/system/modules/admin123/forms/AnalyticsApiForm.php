@@ -21,7 +21,7 @@ class AnalyticsApiForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_analytics', 500);
+        $oForm = new \PFBC\Form('form_analytics');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_analytics', 'form_analytics'));
         $oForm->addElement(new \PFBC\Element\Token('analytics'));

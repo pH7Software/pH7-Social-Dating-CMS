@@ -20,7 +20,7 @@ class AddAdminForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_add_admin', 550);
+        $oForm = new \PFBC\Form('form_add_admin');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_add_admin', 'form_add_admin'));
         $oForm->addElement(new \PFBC\Element\Token('add_admin'));

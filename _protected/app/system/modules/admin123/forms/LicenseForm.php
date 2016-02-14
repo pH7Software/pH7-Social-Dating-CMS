@@ -28,7 +28,7 @@ class LicenseForm
         $sStatusTxt = '<span class="label label-' . $sStatusColor . '">' . (PH7_VALID_LICENSE ? t('Active') : t('Inactive')) . '</span>';
         $sLicTypeTxt = '<span class="italic">' . PH7_LICENSE_NAME . '</span>' . (PH7_LICENSE_NAME != 'Trial' ?: ' <span class="label label-warning">' . t('%0% to get Premium Features!', $sLicLink) . '</span>');
 
-        $oForm = new \PFBC\Form('form_license', 500);
+        $oForm = new \PFBC\Form('form_license');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_license', 'form_license'));
         $oForm->addElement(new \PFBC\Element\Token('license'));

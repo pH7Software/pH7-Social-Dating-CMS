@@ -27,7 +27,7 @@ class PrivacyForm
 
         $oPrivacy = $oUserModel->getPrivacySetting($iProfileId);
 
-        $oForm = new \PFBC\Form('form_privacy_account', 500);
+        $oForm = new \PFBC\Form('form_privacy_account');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_privacy_account', 'form_privacy_account'));
         $oForm->addElement(new \PFBC\Element\Token('privacy_account'));

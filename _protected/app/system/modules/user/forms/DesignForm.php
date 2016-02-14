@@ -22,7 +22,7 @@ class DesignForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_design', 500);
+        $oForm = new \PFBC\Form('form_design');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_design', 'form_design'));
         $oForm->addElement(new \PFBC\Element\Token('design'));

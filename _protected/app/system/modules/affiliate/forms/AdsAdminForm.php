@@ -20,7 +20,7 @@ class AdsAdminForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_admin_ads', 500);
+        $oForm = new \PFBC\Form('form_admin_ads');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_admin_ads', 'form_admin_ads'));
         $oForm->addElement(new \PFBC\Element\Token('admin_ads'));

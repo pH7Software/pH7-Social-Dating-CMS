@@ -22,7 +22,7 @@ class AddAffiliateForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_add_aff',550);
+        $oForm = new \PFBC\Form('form_add_aff');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_add_aff', 'form_add_aff'));
         $oForm->addElement(new \PFBC\Element\Token('add_aff'));

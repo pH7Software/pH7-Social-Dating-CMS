@@ -24,7 +24,7 @@ class AddUserForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_add_user',550);
+        $oForm = new \PFBC\Form('form_add_user');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_add_user', 'form_add_user'));
         $oForm->addElement(new \PFBC\Element\Token('add_user'));
