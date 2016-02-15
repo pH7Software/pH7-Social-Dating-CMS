@@ -91,7 +91,7 @@ function clean-code() {
         eval "$exec 's/\s+$/\n/'"
         eval "$exec 's/\t/    /g'"
 
-        _clean-indent
+        #_clean-indent
         echo "The code has been cleaned!"
     fi
 }
