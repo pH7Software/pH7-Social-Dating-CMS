@@ -12,11 +12,11 @@ use PH7\Framework\Mvc\Router\Uri;
 class SearchNoteForm
 {
 
-    public static function display($iWidth = 500)
+    public static function display($iWidth = null)
     {
         $aOptions = ['title' => t('Enter Name, Keyword of post, Author (username, first name, last name) or ID of a Note.')];
         if (!empty($iWidth)) {
-            $aOptions += ['style' => 'width:' . ($iWidth*1.1) . 'px'];
+            $aOptions += ['style' => 'width:' . ($iWidth*1.09) . 'px'];
         }
 
         $oForm = new \PFBC\Form('form_search', $iWidth);
