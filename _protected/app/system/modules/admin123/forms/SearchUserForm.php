@@ -19,7 +19,7 @@ class SearchUserForm
         $aGroupName = array();
         foreach ($oGroupId as $iId) $aGroupName[$iId->groupId] = $iId->name;
 
-        $oForm = new \PFBC\Form('form_user_search', 500);
+        $oForm = new \PFBC\Form('form_user_search');
         $oForm->configure(array('action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_user_search', 'form_user_search'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Search for:'), 'what'));

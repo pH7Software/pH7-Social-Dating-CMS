@@ -24,7 +24,7 @@ class EditAlbumForm
 
         $oAlbum = (new VideoModel)->album((new Session)->get('member_id'), (new Http)->get('album_id'), 1, 0, 1);
 
-        $oForm = new \PFBC\Form('form_edit_video_album', 500);
+        $oForm = new \PFBC\Form('form_edit_video_album');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_video_album', 'form_edit_video_album'));
         $oForm->addElement(new \PFBC\Element\Token('edit_album'));
