@@ -14,7 +14,7 @@ class SearchAdminForm
 
     public static function display()
     {
-        $oForm = new \PFBC\Form('form_admin_search', 500);
+        $oForm = new \PFBC\Form('form_admin_search');
         $oForm->configure(array('action' => Uri::get(PH7_ADMIN_MOD, 'admin', 'browse') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Search(t('Search an Admin:'), 'looking', array('description' => t('Enter their ID, First Name, Last Name, Username, Email, Sex or IP address.'))));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email'), SearchCoreModel::LATEST => t('Latest Admins'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::LAST_EDIT => t('Last Account Edit'))));

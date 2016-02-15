@@ -14,7 +14,7 @@ class SearchVideoForm
 
     public static function display()
     {
-        $oForm = new \PFBC\Form('form_search', 500);
+        $oForm = new \PFBC\Form('form_search');
         $oForm->configure(array('action' => Uri::get('video','main','result') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Search(t('ID or Name of Video:'), 'looking'));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::TITLE => t('Title'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated'), SearchCoreModel::CREATED => t('Created Date'), SearchCoreModel::UPDATED => t('Updated Date'))));
