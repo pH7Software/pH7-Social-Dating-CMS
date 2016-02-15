@@ -1,43 +1,37 @@
 <div class="center">
+    {if empty($error)}
+        {each $com in $comment}
+            <div id="{% $com->commentId %}">
+                {{ $absolute_url = Framework\Mvc\Router\Uri::get('comment','comment','post',"$table,$com->commentId") }}
+                {{ $relative_url = Framework\Mvc\Router\Uri::get('comment','comment','read',"$table,$com->recipient") . '#' . $com->commentId }}
 
-  {if empty($error)}
-    {each $com in $comment}
+                {{ $avatarDesign->get($com->username, $com->firstName, $com->sex, 32) }}
+                {{ $comment = nl2br(Framework\Parse\User::atUsernameToLink(Framework\Parse\Emoticon::init(escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($com->comment)), true)))) }}
 
-      <div id="{% $com->commentId %}">
+                <p><span class="com_txt">{comment}</span><br />
+                <a href="{absolute_url}">{lang 'See more'}</a></p>
 
-        {{ $absolute_url = Framework\Mvc\Router\Uri::get('comment','comment','post',"$table,$com->commentId") }}
-        {{ $relative_url = Framework\Mvc\Router\Uri::get('comment','comment','read',"$table,$com->recipient") . '#' . $com->commentId }}
+                <div class="post-ident">
+                    <p class="small italic"><a href="{relative_url}">#</a> | {lang 'Posted on'}
+                        {% Framework\Date\Various::textTimeStamp($com->createdDate) %}
+                        {if !empty($com->updatedDate)}
+                            | <span class="post-edit">{lang 'Last Edited'} {% Framework\Date\Various::textTimeStamp($com->updatedDate) %}</span>
+                        {/if}
+                    </p>
+                    <p class="center">{{ $design->like($com->username,$com->firstName,$com->sex,$absolute_url) }} | {{ $design->report($com->sender,$com->username,$com->firstName,$com->sex) }}</p>
+                </div>
 
-        {{ $avatarDesign->get($com->username, $com->firstName, $com->sex, 32) }}
-        {{ $comment = nl2br(Framework\Parse\User::atUsernameToLink(Framework\Parse\Emoticon::init(escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($com->comment)), true)))) }}
+                {if UserCore::auth() && ($member_id == $com->sender || $member_id == $com->recipient)}
+                    <p><a class="s_bMarg button_medium" href="{{ $design->url('comment','comment','edit',"$table,$com->recipient,$com->sender,$com->commentId") }}">{lang 'Edit'}</a> |
+                    <a class="button_medium" href="javascript:void(0)" onclick="comment('delete',{% $com->commentId %},{% $com->recipient %},{% $com->sender %},'{table}','{csrf_token}')">{lang 'Delete'}</a></p>
+                {/if}
+            </div>
+        {/each}
 
-        <p><span class="com_txt">{comment}</span><br />
-        <a href="{absolute_url}">{lang 'See more'}</a></p>
+        <p class="s_tMarg bold italic"><a href="{{ $design->url('comment','comment','add',"$table,$com->recipient") }}">{lang 'Add a comment'}</a> &nbsp; <a href="{{ $design->url('xml','rss','xmlrouter',"comment-$table,$com->recipient") }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
 
-        <div class="post-ident">
-          <p class="small italic"><a href="{relative_url}">#</a> | {lang 'Posted on'} {% Framework\Date\Various::textTimeStamp($com->createdDate) %}
-          {if !empty($com->updatedDate)} | <span class="post-edit">{lang 'Last Edited'} {% Framework\Date\Various::textTimeStamp($com->updatedDate) %}</span>{/if}</p>
-          <p class="center">{{ $design->like($com->username,$com->firstName,$com->sex,$absolute_url) }} | {{ $design->report($com->sender,$com->username,$com->firstName,$com->sex) }}</p>
-        </div>
-
-        {if UserCore::auth() && ($member_id == $com->sender || $member_id == $com->recipient)}
-          <p><a class="button_medium" href="{{ $design->url('comment','comment','edit',"$table,$com->recipient,$com->sender,$com->commentId") }}">{lang 'Edit'}</a> |
-          <a class="button_medium" href="javascript:void(0)" onclick="comment('delete',{% $com->commentId %},{% $com->recipient %},{% $com->sender %},'{table}','{csrf_token}')">{lang 'Delete'}</a></p><br />
-        {/if}
-
-        <br />
-        </div>
-
-    {/each}
-
-    <p><br /><em class="bold italic"><a href="{{ $design->url('comment','comment','add',"$table,$com->recipient") }}">{lang 'Add a comment'}</a></em> &nbsp; <a href="{{ $design->url('xml','rss','xmlrouter',"comment-$table,$com->recipient") }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
-
-    {main_include 'page_nav.inc.tpl'}
-
-  {else}
-
-    <p>{error}</p>
-
-  {/if}
-
+        {main_include 'page_nav.inc.tpl'}
+    {else}
+        <p>{error}</p>
+    {/if}
 </div>
