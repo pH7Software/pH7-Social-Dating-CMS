@@ -14,9 +14,14 @@ class SearchNoteForm
 
     public static function display($iWidth = 500)
     {
+        $aOptions = ['title' => t('Enter Name, Keyword of post, Author (username, first name, last name) or ID of a Note.')];
+        if (!empty($iWidth)) {
+            $aOptions += ['style' => 'width:' . ($iWidth*1.1) . 'px'];
+        }
+
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => Uri::get('note', 'main', 'result') . PH7_SH, 'method' => 'get'));
-        $oForm->addElement(new \PFBC\Element\Search(t('Search Note Post:'), 'looking', array('title' => t('Enter Name, Keyword of post, Author (username, first name, last name) or ID of a Note.'), 'style' => 'width:' . ($iWidth*1.1) . 'px')));
+        $oForm->addElement(new \PFBC\Element\Search(t('Search Note Post:'), 'looking', $aOptions));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::TITLE => t('Title'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated'), SearchCoreModel::CREATED => t('Created Date'), SearchCoreModel::UPDATED => t('Updated Date'))));
         $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array(SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending'))));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
