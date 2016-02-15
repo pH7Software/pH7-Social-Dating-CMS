@@ -22,7 +22,7 @@ class CommentForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_comment', 600);
+        $oForm = new \PFBC\Form('form_comment');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_comment', 'form_comment'));
         $oForm->addElement(new \PFBC\Element\Token('comment'));

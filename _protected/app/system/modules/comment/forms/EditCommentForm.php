@@ -24,7 +24,7 @@ class EditCommentForm
 
         $oHttpRequest = new Http;
 
-        $oForm = new \PFBC\Form('form_edit_comment', 500);
+        $oForm = new \PFBC\Form('form_edit_comment');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_comment', 'form_edit_comment'));
         $oForm->addElement(new \PFBC\Element\Token('edit_comment'));
