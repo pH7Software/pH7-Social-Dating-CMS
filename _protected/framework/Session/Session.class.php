@@ -48,7 +48,7 @@ class Session
 
     /**
      * @desc Set a PHP Session.
-     * @param mixed (array or string) $mName Name of the session.
+     * @param mixed (array | string) $mName Name of the session.
      * @param string $sValue Value of the session, Optional if the session data is in a array.
      * @return void
      */
@@ -78,8 +78,8 @@ class Session
     }
 
     /**
-     * @desc Returns a boolean informing of whether or not the requested session variable.
-     * @param mixed (array or string) $mName Name of the session.
+     * @desc Returns a boolean informing if the session exists or not.
+     * @param mixed (array | string) $mName Name of the session.
      * @return boolean
      */
     public function exists($mName)
@@ -101,7 +101,7 @@ class Session
 
     /**
      * @desc Delete the session(s) key if the session exists.
-     * @param mixed (array or string) $mName Name of the session to delete.
+     * @param mixed (array | string) $mName Name of the session to delete.
      * @return void
      */
     public function remove($mName)
