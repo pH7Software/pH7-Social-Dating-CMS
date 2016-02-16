@@ -24,17 +24,13 @@ class MobApp
      *
      * @return boolean
      */
-    final public static function is()
+    final public static function is(Http $oHttp, Session $oSession)
     {
-        $oSession = new Session;
-
-        if ((new Http)->getExists(static::VAR_NAME)) {
+        if ($oHttp->getExists(static::VAR_NAME)) {
             $oSession->set(static::VAR_NAME, 1);
         }
 
-        $bRet = $oSession->exists(static::VAR_NAME);
-        unset($oSession);
-        return $bRet;
+        return $oSession->exists(static::VAR_NAME);
     }
 
 }

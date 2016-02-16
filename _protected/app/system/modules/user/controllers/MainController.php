@@ -32,7 +32,7 @@ class MainController extends Controller
         if (!UserCore::auth())
         {
             // To check if the site is called by a mobile native app
-            $this->_bIsMobApp = $this->view->is_mobapp = MobApp::is();
+            $this->_bIsMobApp = $this->view->is_mobapp = MobApp::is($this->httpRequest, $this->session);
 
             // Background video is used only for the Splash page
             if ($this->_getGuestTplPage() === static::GUEST_SPLASH_FILE)
