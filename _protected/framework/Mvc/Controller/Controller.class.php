@@ -19,6 +19,7 @@ PH7\Framework\Ip\Ip,
 PH7\Framework\Geo\Ip\Geo,
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Mobile\MobApp,
 PH7\Framework\Module\Various as SysMod,
 PH7\Framework\Mvc\Model as M;
 
@@ -42,56 +43,16 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->registry->site_name = M\DbConfig::getSetting('siteName');
 
 
-        /***** PH7Tpl Template Engine initialization *****/
-        /*** Assign the global variables ***/
+        /** PH7Tpl Template Engine initialization **/
+        /* Assign the global variables */
 
-        /*** Objects ***/
+        // Set config and design objects to the template
         $this->view->config = $this->config;
         $this->view->design = $this->design;
 
-        /***** Info *****/
-        $oInfo = M\DbConfig::getMetaMain(PH7_LANG_NAME);
-
-        $aMetaVars = [
-            'site_name' => $this->registry->site_name,
-            'page_title' => $oInfo->pageTitle,
-            'slogan' => $oInfo->slogan,
-            'meta_description' => $oInfo->metaDescription,
-            'meta_keywords' => $oInfo->metaKeywords,
-            'meta_author' => $oInfo->metaAuthor,
-            'meta_robots' => $oInfo->metaRobots,
-            'meta_copyright' => $oInfo->metaCopyright,
-            'meta_rating' => $oInfo->metaRating,
-            'meta_distribution' => $oInfo->metaDistribution,
-            'meta_category' => $oInfo->metaCategory,
-            'header' => 0, // Default value of header contents
-            'is_disclaimer' => (bool) M\DbConfig::getSetting('disclaimer'), // Displays a disclaimer to enter to the site. This is useful for sites with adult content
-            'is_cookie_consent_bar' => (bool) M\DbConfig::getSetting('cookieConsentBar'), // Displays a header cookie information bar
-            /* Put user's Geo details (country/city) into the template variables */
-            'country' => Geo::getCountry(),
-            'city' => Geo::getCity()
-        ];
-
-        $this->view->assigns($aMetaVars);
-
-        $aModsEnabled = [
-            'is_connect_enabled' => SysMod::isEnabled('connect'),
-            'is_affiliate_enabled' => SysMod::isEnabled('affiliate'),
-            'is_game_enabled' => SysMod::isEnabled('game'),
-            'is_chat_enabled' => SysMod::isEnabled('chat'),
-            'is_chatroulette_enabled' => SysMod::isEnabled('chatroulette'),
-            'is_picture_enabled' => SysMod::isEnabled('picture'),
-            'is_video_enabled' => SysMod::isEnabled('video'),
-            'is_hotornot_enabled' => SysMod::isEnabled('hotornot'),
-            'is_forum_enabled' => SysMod::isEnabled('forum'),
-            'is_note_enabled' => SysMod::isEnabled('note'),
-            'is_blog_enabled' => SysMod::isEnabled('blog'),
-            'is_newsletter_enabled' => SysMod::isEnabled('newsletter'),
-            'is_invite_enabled' => SysMod::isEnabled('invite'),
-            'is_webcam_enabled' => SysMod::isEnabled('webcam')
-        ];
-        $this->view->assigns($aModsEnabled);
-        unset($oInfo, $aMetaVars, $aModsEnabled);
+        // Set other variables
+        $this->_setMetaTplVars();
+        $this->_setModsStatusTplVars();
 
         /**
          * This below PHP condition is not necessary because if there is no session,
@@ -210,6 +171,63 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->view->pOH_not_found = 1;
         $this->output();
         exit;
+    }
+
+    /**
+     * Assign Meta and Info vars to the template engine.
+     *
+     * @return void
+     */
+    final private function _setMetaTplVars()
+    {
+        $oInfo = M\DbConfig::getMetaMain(PH7_LANG_NAME);
+
+        $bIsMobApp = MobApp::is($this->httpRequest, $this->session);
+        $aMetaVars = [
+            'site_name' => $this->registry->site_name,
+            'page_title' => $oInfo->pageTitle,
+            'slogan' => $oInfo->slogan,
+            'meta_description' => $oInfo->metaDescription,
+            'meta_keywords' => $oInfo->metaKeywords,
+            'meta_author' => $oInfo->metaAuthor,
+            'meta_robots' => $oInfo->metaRobots,
+            'meta_copyright' => $oInfo->metaCopyright,
+            'meta_rating' => $oInfo->metaRating,
+            'meta_distribution' => $oInfo->metaDistribution,
+            'meta_category' => $oInfo->metaCategory,
+            'header' => 0, // Default value of header contents
+            'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'), // Displays a disclaimer to enter to the site. This is useful for sites with adult content
+            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'), // Displays a header cookie information bar
+            /* Put user's Geo details (country/city) into the template variables */
+            'country' => Geo::getCountry(),
+            'city' => Geo::getCity()
+        ];
+
+        $this->view->assigns($aMetaVars);
+        unset($bIsMobApp, $oInfo, $aMetaVars);
+    }
+
+    final private function _setModsStatusTplVars()
+    {
+        $aModsEnabled = [
+            'is_connect_enabled' => SysMod::isEnabled('connect'),
+            'is_affiliate_enabled' => SysMod::isEnabled('affiliate'),
+            'is_game_enabled' => SysMod::isEnabled('game'),
+            'is_chat_enabled' => SysMod::isEnabled('chat'),
+            'is_chatroulette_enabled' => SysMod::isEnabled('chatroulette'),
+            'is_picture_enabled' => SysMod::isEnabled('picture'),
+            'is_video_enabled' => SysMod::isEnabled('video'),
+            'is_hotornot_enabled' => SysMod::isEnabled('hotornot'),
+            'is_forum_enabled' => SysMod::isEnabled('forum'),
+            'is_note_enabled' => SysMod::isEnabled('note'),
+            'is_blog_enabled' => SysMod::isEnabled('blog'),
+            'is_newsletter_enabled' => SysMod::isEnabled('newsletter'),
+            'is_invite_enabled' => SysMod::isEnabled('invite'),
+            'is_webcam_enabled' => SysMod::isEnabled('webcam')
+        ];
+
+        $this->view->assigns($aModsEnabled);
+        unset($aModsEnabled);
     }
 
     /**
