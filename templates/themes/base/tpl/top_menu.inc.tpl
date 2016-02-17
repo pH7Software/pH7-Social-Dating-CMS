@@ -178,7 +178,7 @@
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'My Settings'}</a></li>
               <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See My Profile'}</a></li>
-              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change My Avatar'}">{lang 'Change My Avatar'}</a></li>
+              <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change My Profile Photo'}">{lang 'Change My Profile Photo'}</a></li>
 
               {if $is_picture_enabled}
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('picture','main','index') }}" title="{lang 'Photo Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Photo Gallery'}</a>
