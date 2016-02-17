@@ -422,7 +422,7 @@ class Image
      */
     public function getType()
     {
-        return @exif_imagetype($this->sFile);
+        return exif_imagetype($this->sFile);
     }
 
     /**
