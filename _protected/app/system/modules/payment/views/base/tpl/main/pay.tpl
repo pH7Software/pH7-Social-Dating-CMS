@@ -4,7 +4,7 @@
   {{ $is_stripe = $config->values['module.setting']['stripe.enabled'] }}
   {{ $is_2co = $config->values['module.setting']['2co.enabled'] }}
   {*
-      Still in development. Fork the project on https://github.com/pH7Software/pH7-Social-Dating-CMS/ and contribute to it 
+      Still in development. Fork the project on https://github.com/pH7Software/pH7-Social-Dating-CMS/ and contribute to it
       {{ $is_ccbill = $config->values['module.setting']['ccbill.enabled'] }}
   *}
 
