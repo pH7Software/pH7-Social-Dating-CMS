@@ -30,7 +30,7 @@ class AvatarForm
         {
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
         }
-        $oForm->addElement(new \PFBC\Element\File(t('Your Avatar'), 'avatar', array('accept'=>'image/*', 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', array('accept'=>'image/*', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

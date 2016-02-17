@@ -113,7 +113,7 @@ class EditNoteFormProcess extends Form
         /* Clean NoteModel Cache */
         (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
-        $sMsg = ($iApproved == '0') ? t('Your Note has been received! But it will not be visible until it is approved by our moderators. Please do not send a new not.') : t('Post created successfully!');
+        $sMsg = ($iApproved == '0') ? t('Your Note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post created successfully!');
         Header::redirect(Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId), $sMsg);
     }
 
