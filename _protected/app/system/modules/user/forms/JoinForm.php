@@ -18,10 +18,10 @@ PH7\Framework\Url\Header;
 class JoinForm
 {
 
-   public static function step1($iWidth = 300)
-   {
+    public static function step1($iWidth = 300)
+    {
         if ((new Session)->exists('mail_step1'))
-         Header::redirect(Uri::get('user', 'signup', 'step2'));
+            Header::redirect(Uri::get('user', 'signup', 'step2'));
 
         if (isset($_POST['submit_join_user']))
         {
@@ -102,8 +102,12 @@ class JoinForm
 
     public static function step3()
     {
-        if (!(new Session)->exists('mail_step2'))
-            Header::redirect(Uri::get('user', 'signup', 'step2'));
+        $oSession = new Session;
+        if (!$oSession->exists('mail_step2'))
+            Framework\Url\Header::redirect(Uri::get('user', 'signup', 'step2'));
+        elseif ($oSession->exists('mail_step4'))
+            Header::redirect(Uri::get('user', 'signup', 'step4'));
+        unset($oSession);
 
         if (isset($_POST['submit_join_user3']))
         {
@@ -121,6 +125,28 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
+        $oForm->render();
+    }
+
+    public static function step4())
+    {
+        if (!(new Session)->exists('mail_step3'))
+            Header::redirect(Uri::get('user', 'signup', 'step3'));
+
+        if (isset($_POST['submit_join_user4']))
+        {
+            if (\PFBC\Form::isValid($_POST['submit_join_user4']))
+                (new JoinFormProcess)->step4();
+
+            Header::redirect();
+        }
+
+        $oForm = new \PFBC\Form('form_join_user4');
+        $oForm->configure(array('action' => '' ));
+        $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user4', 'form_join_user4'));
+        $oForm->addElement(new \PFBC\Element\Token('join4'));
+        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', array('accept' => 'image/*', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
 

@@ -135,12 +135,17 @@ class JoinFormProcess extends Form
         }
         else
         {
-            $this->session->destroy(); // Remove all sessions created pending registration
-
-            Header::redirect(Uri::get('user','main','login'), t('You have now been registered! %0%', $this->oRegistration->getMsg()));
+            // Register successfully in database for step 3!
+            $this->session->set('mail_step3', $this->session->get('mail_step1'));
+            Header::redirect(Uri::get('user','signup','step4'), t('Your account has just been created!'));
         }
     }
 
+    public function step4()
+    {
+            $this->session->destroy(); // Remove all sessions created pending registration
+            Header::redirect(Uri::get('user','main','login'), $this->oRegistration->getMsg());
+    }
     public function __destruct()
     {
         unset($this->oUserModel, $this->iActiveType);
