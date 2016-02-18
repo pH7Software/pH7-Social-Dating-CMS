@@ -148,7 +148,7 @@ class JoinFormProcess extends Form
 
     public function step4()
     {
-        $iApproved = DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+        $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
         $bAvatar = (new UserCore)->setAvatar($this->session->get('profile_id'), $this->session->get('username'), $_FILES['avatar']['tmp_name'], $iApproved);
 
         if (!$bAvatar) 
@@ -159,7 +159,7 @@ class JoinFormProcess extends Form
         {
             $this->session->destroy(); // Remove all sessions created pending registration
 
-            $sAvatarModerationTxt = ($iApproved == '0') ? ('Your profile photo will not be visible until it is approved by our moderators.') . ' ' : '';
+            $sAvatarModerationTxt = ($iApproved == '0' ? t('Your profile photo will not be visible until it is approved by our moderators.') . ' ' : '');
             Header::redirect(Uri::get('user','main','login'), $sAvatarModerationTxt . $this->oRegistration->getMsg());
         }
     }
