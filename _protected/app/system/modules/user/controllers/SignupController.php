@@ -13,6 +13,8 @@ namespace PH7;
 class SignupController extends Controller
 {
 
+    private $sTitle;
+
     public function step1()
     {
         // Add CSS and JavaScript files for the left profiles block
@@ -37,11 +39,11 @@ class SignupController extends Controller
             $sSex = $this->httpRequest->get('s'); // For the statistics and user image block
 
             $sSessContents = $sRefTxt . ' | ' . t('Action: %0%', $sAction) . ' | ' . t('Sex: %0%', $sSex) . ' | ' . t('Username: %0%', $sUsername);
-            $this->session->set('joinRef', $sSessContents);
+            $this->session->set('join_ref', $sSessContents);
         }
         elseif ($bRef)
         {
-            $this->session->set('joinRef', $sRefTxt);
+            $this->session->set('join_ref', $sRefTxt);
         }
 
         if ($bUserRef)
@@ -61,26 +63,40 @@ class SignupController extends Controller
         }
 
         $this->view->page_title = ($bUserRef) ? t('Register for free to meet %0% on %site_name%. The Real Social Dating app!',  $sFirstName) : t('Free Sign Up to Meet Lovely People!');
-        $sH1Txt = ($bUserRef)
-            ? t('Register for Free to Meet <span class="pink2">%0%</span> (<span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername))
-            : t('Sign Up on %site_name%!');
+        
+        if ($bUserRef) {
+            $sH1Txt = t('Register for Free to Meet <span class="pink2">%0%</span> (<span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername));
+        } else {
+            $sH1Txt = t('Sign Up on %site_name%!');
+        }
+        
         $this->view->h1_title = '<div class="animated fadeInDown">' . $sH1Txt . '</div>';
-        $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blogs, rating, hot or not, video chat rooms, ...');
+        $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blogs, rating, hot or not, video chat rooms');
 
         $this->output();
     }
 
     public function step2()
     {
-        $this->view->page_title = t('Sign Up for Free Online Dating - STEP 2/3');
-        $this->view->h1_title = t('Sign up - Step 2/3');
+        $this->sTitle = t('Sign up - Step 2/3');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
     public function step3()
     {
-        $this->view->page_title = t('Sign Up for Free Online Dating - STEP 3/3');
-        $this->view->h1_title = t('Sign up - Step 3/3');
+        $this->sTitle = t('Sign up - Step 3/3');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
+        $this->output();
+    }
+
+    public function step4()
+    {
+        $this->sTitle = t('Now, Upload a Profile Photo of you!');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 

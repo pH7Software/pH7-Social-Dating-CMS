@@ -27,7 +27,7 @@ class UserModel extends UserCoreModel
      * Join Step 1
      *
      * @param array $aData
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return integer Returns the user's ID
      */
     public function join(array $aData)
     {
@@ -44,11 +44,12 @@ class UserModel extends UserCoreModel
         $rStmt->bindValue(':group_id', $aData['group_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':affiliated_id', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();
-        $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the user's ID
+        $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the user's ID
         Db::free($rStmt);
         $this->setInfoFields(array());
         $this->setDefaultPrivacySetting();
-        return $this->setDefaultNotification();
+        $this->setDefaultNotification();
+        return $this->getKeyId();
     }
 
     /**

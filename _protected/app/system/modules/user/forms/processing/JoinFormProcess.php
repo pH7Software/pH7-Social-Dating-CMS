@@ -36,8 +36,8 @@ class JoinFormProcess extends Form
     public function step1()
     {
         $iAffId = (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME);
-        $sRef = ($this->session->exists('joinRef')) ? $this->session->get('joinRef') : t('No reference'); // Statistics
-        $this->session->remove('joinRef');
+        $sRef = ($this->session->exists('join_ref')) ? $this->session->get('join_ref') : t('No reference'); // Statistics
+        $this->session->remove('join_ref');
 
         $aData = [
             'email' => $this->httpRequest->post('mail'),
@@ -58,7 +58,7 @@ class JoinFormProcess extends Form
         {
             \PFBC\Form::setError('form_join_user', Form::waitRegistrationMsg($iTimeDelay));
         }
-        elseif (!$this->oUserModel->join($aData))
+        elseif (!$iProfileId = $this->oUserModel->join($aData))
         {
             \PFBC\Form::setError('form_join_user',
                 t('An error occurred during registration!') . '<br />' .
@@ -76,7 +76,13 @@ class JoinFormProcess extends Form
             // Send email
             $this->oRegistration->sendMail($aData);
 
-            $this->session->set('mail_step1', $this->httpRequest->post('mail'));
+            $aSessData = [
+                'mail_step1' => $aData['email'],
+                'username' => $aData['username'],
+                'profile_id' => $iProfileId
+            ];
+            $this->session->set($aSessData);
+
             Header::redirect(Uri::get('user','signup','step2'));
         }
     }
@@ -120,7 +126,6 @@ class JoinFormProcess extends Form
 
     public function step3()
     {
-
         $aData = [
             'description' => $this->httpRequest->post('description', Http::ONLY_XSS_CLEAN),
             'profile_id' => $this->oUserModel->getId($this->session->get('mail_step2'))
@@ -143,12 +148,20 @@ class JoinFormProcess extends Form
 
     public function step4()
     {
+        $iApproved = DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+        $bAvatar = (new UserCore)->setAvatar($this->session->get('profile_id'), $this->session->get('username'), $_FILES['avatar']['tmp_name'], $iApproved);
+
+        if (!$bAvatar) 
+        {
+            \PFBC\Form::setError('form_join_user4', Form::wrongImgFileTypeMsg());
+        }
+        else
+        {
             $this->session->destroy(); // Remove all sessions created pending registration
-            Header::redirect(Uri::get('user','main','login'), $this->oRegistration->getMsg());
-    }
-    public function __destruct()
-    {
-        unset($this->oUserModel, $this->iActiveType);
+
+            $sAvatarModerationTxt = ($iApproved == '0') ? ('Your profile photo will not be visible until it is approved by our moderators.') . ' ' : '';
+            Header::redirect(Uri::get('user','main','login'), $sAvatarModerationTxt . $this->oRegistration->getMsg());
+        }
     }
 
 }

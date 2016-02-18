@@ -614,7 +614,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Set the default privacy settings.
      *
-     * @return Returns TRUE on success or FALSE on failure.
+     * @return boolean Returns TRUE on success or FALSE on failure.
      */
     public function setDefaultPrivacySetting()
     {
@@ -627,7 +627,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Set the default notifications.
      *
-     * @return Returns TRUE on success or FALSE on failure.
+     * @return boolean Returns TRUE on success or FALSE on failure.
      */
     public function setDefaultNotification()
     {
