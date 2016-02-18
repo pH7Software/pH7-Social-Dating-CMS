@@ -67,7 +67,7 @@ class JoinForm
     {
         $oSession = new Session;
         if (!$oSession->exists('mail_step1'))
-            Framework\Url\Header::redirect(Uri::get('user', 'signup', 'step1'));
+            Header::redirect(Uri::get('user', 'signup', 'step1'));
         elseif ($oSession->exists('mail_step2'))
             Header::redirect(Uri::get('user', 'signup', 'step3'));
         unset($oSession);
@@ -77,7 +77,7 @@ class JoinForm
             if (\PFBC\Form::isValid($_POST['submit_join_user2']))
                 (new JoinFormProcess)->step2();
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_join_user2');
@@ -104,8 +104,8 @@ class JoinForm
     {
         $oSession = new Session;
         if (!$oSession->exists('mail_step2'))
-            Framework\Url\Header::redirect(Uri::get('user', 'signup', 'step2'));
-        elseif ($oSession->exists('mail_step4'))
+            Header::redirect(Uri::get('user', 'signup', 'step2'));
+        elseif ($oSession->exists('mail_step3'))
             Header::redirect(Uri::get('user', 'signup', 'step4'));
         unset($oSession);
 
@@ -128,7 +128,7 @@ class JoinForm
         $oForm->render();
     }
 
-    public static function step4())
+    public static function step4()
     {
         if (!(new Session)->exists('mail_step3'))
             Header::redirect(Uri::get('user', 'signup', 'step3'));
