@@ -1,4 +1,4 @@
-<div class="left col-md-7">
+<div class="col-md-8">
     <p>{lang 'Not registered yet?'}<br />
         {lang 'Come quickly'} <a href="{{ $design->url('user','signup','step1') }}"><strong>{lang 'register!'}</strong></a>
     </p>
@@ -11,7 +11,4 @@
     </p>
 </div>
 
-<div class="right col-md-5">
-    {* Show promotional images (you can change the images in the "/static/img/promo/" folder *}
-    <p class="pic thumb"><img src="{url_static_img}promo/login{% mt_rand(1,2) %}_400x280.jpg" alt="{lang 'Free Online Dating Site'}" title="{lang 'Free Online Dating Site'}"></p>
-</div>
+<div class="col-md-4 ad_336_280">{{ $designModel->ad(336,280) }}</div>
