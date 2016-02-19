@@ -1,4 +1,5 @@
-<div class="left col-md-8">
+<div class="left col-md-4">
     {{ JoinForm::step4() }}
-    <p><a class="bold btn btn-primary" rel="nofollow" href="{{ $design->url('user', 'signup', 'step4', '?no_avatar') }}">{lang 'SKIP'}</a></p>
 </div>
+
+<div class="right col-md-4 ad_336_280">{{ $designModel->ad(336,280) }}</div>

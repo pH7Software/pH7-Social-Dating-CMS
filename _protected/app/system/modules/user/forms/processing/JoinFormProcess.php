@@ -22,14 +22,13 @@ PH7\Framework\Url\Header;
 class JoinFormProcess extends Form
 {
 
-    private $oUserModel, $oRegistration, $iActiveType;
+    private $oUserModel, $iActiveType;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->oUserModel = new UserModel;
-        $this->oRegistration = new Registration;
         $this->iActiveType = DbConfig::getSetting('userActivationType');
     }
 
@@ -74,7 +73,7 @@ class JoinFormProcess extends Form
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
 
             // Send email
-            $this->oRegistration->sendMail($aData);
+            (new Registration)->sendMail($aData);
 
             $aSessData = [
                 'mail_step1' => $aData['email'],
@@ -148,19 +147,19 @@ class JoinFormProcess extends Form
 
     public function step4()
     {
+        // If no photo added from the form, automatically skip this step
+        if (empty($_FILES['avatar']['tmp_name'])) {
+            Header::redirect(Uri::get('user','signup','done'));
+        }
+
         $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
         $bAvatar = (new UserCore)->setAvatar($this->session->get('profile_id'), $this->session->get('username'), $_FILES['avatar']['tmp_name'], $iApproved);
 
-        if (!$bAvatar) 
-        {
+        if (!$bAvatar) {
             \PFBC\Form::setError('form_join_user4', Form::wrongImgFileTypeMsg());
         }
-        else
-        {
-            $this->session->destroy(); // Remove all sessions created pending registration
-
-            $sAvatarModerationTxt = ($iApproved == '0' ? t('Your profile photo will not be visible until it is approved by our moderators.') . ' ' : '');
-            Header::redirect(Uri::get('user','main','login'), $sAvatarModerationTxt . $this->oRegistration->getMsg());
+        else {
+            Header::redirect(Uri::get('user','signup','done'));
         }
     }
 
