@@ -99,6 +99,7 @@ class SignupController extends Controller
         $this->sTitle = t('Now, Upload a Profile Photo of you!');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+        $this->view->avatarDesign = new AvatarDesignCore; // Add AvatarDesign Class for displaying the avatar lightBox
         $this->output();
     }
 
