@@ -145,8 +145,9 @@ class JoinForm
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user4', 'form_join_user4'));
         $oForm->addElement(new \PFBC\Element\Token('join4'));
-        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', array('accept' => 'image/*', 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Button);
+        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', array('accept' => 'image/*')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Add My Photo')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Skip'), 'submit', array('formaction' => Uri::get('user','signup','done'))));
         $oForm->render();
     }
 
