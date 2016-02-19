@@ -26,6 +26,9 @@ class MetaMainFormProcess extends Form
         if(!$this->str->equals($this->httpRequest->post('page_title'), $oMeta->pageTitle))
             DbConfig::setMetaMain('pageTitle', $this->httpRequest->post('page_title'), $sWhereLang);
 
+        if(!$this->str->equals($this->httpRequest->post('headline'), $oMeta->headline))
+            DbConfig::setMetaMain('headline', $this->httpRequest->post('headline'), $sWhereLang);
+
         if(!$this->str->equals($this->httpRequest->post('slogan'), $oMeta->slogan))
             DbConfig::setMetaMain('slogan', $this->httpRequest->post('slogan'), $sWhereLang);
 

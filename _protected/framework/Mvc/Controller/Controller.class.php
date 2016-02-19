@@ -187,6 +187,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'site_name' => $this->registry->site_name,
             'page_title' => $oInfo->pageTitle,
             'slogan' => $oInfo->slogan,
+            'headline' => $oInfo->headline,
             'meta_description' => $oInfo->metaDescription,
             'meta_keywords' => $oInfo->metaKeywords,
             'meta_author' => $oInfo->metaAuthor,
