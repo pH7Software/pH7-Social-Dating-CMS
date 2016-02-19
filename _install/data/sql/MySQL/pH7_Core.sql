@@ -887,6 +887,7 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
   pageTitle varchar(100) NOT NULL,
   metaDescription varchar(255) NOT NULL,
   metaKeywords varchar(255) NOT NULL,
+  headline varchar(50) NOT NULL,
   slogan varchar(200) NOT NULL,
   promoText text DEFAULT NULL,
   metaRobots varchar(50) NOT NULL DEFAULT '',
@@ -898,8 +899,8 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
   PRIMARY KEY (langId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
-('en_US', 'Home', 'The Best Dating software for creating online dating site or online community, social network,', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'The Best place to Meet Nice People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating App/Website like this one with this <a href="http://ph7cms.com">Dating Site Builder</a>. It''s Professional, Modern, Free, Open Source, and gives you the Best Way to Create any Social/Dating Businesses...!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
+INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, headline, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
+('en_US', 'Home', 'The Best Dating software for creating online dating site or online community, social network,', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'Be on the best e-place!', 'The Best place to Meet Nice People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating App/Website like this one with this <a href="http://ph7cms.com">Dating Site Builder</a>. It''s Professional, Modern, Free, Open Source, and gives you the Best Way to Create any Social/Dating Businesses...!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
 
 
 CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
