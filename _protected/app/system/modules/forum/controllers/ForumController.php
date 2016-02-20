@@ -137,7 +137,7 @@ class ForumController extends Controller
         $oTopics = $this->oForumModel->getPostByProfile($iId, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
         if (empty($oTopics))
         {
-            $this->sTitle = t('No found the forum post of %0%.', $sUsername);
+            $this->sTitle = t("%0% doesn't have any posts yet.", $sUsername);
             $this->_notFound(false); // Because the Ajax blocks profile, we can not put HTTP error code 404, so the attribute is "false"
         }
         else

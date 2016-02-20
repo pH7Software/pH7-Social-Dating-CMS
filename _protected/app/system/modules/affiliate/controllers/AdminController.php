@@ -240,7 +240,7 @@ class AdminController extends Controller
                 $this->oAffModel->ban($iId, 1, 'Affiliates');
                 $this->oAff->clearReadProfileCache($iId, 'Affiliates');
             }
-            $this->sMsg = t('The affiliate(s) has been banned.');
+            $this->sMsg = t('The affiliate(s) has/have been banned.');
         }
 
         Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
@@ -261,7 +261,7 @@ class AdminController extends Controller
                 $this->oAffModel->ban($iId, 0, 'Affiliates');
                 $this->oAff->clearReadProfileCache($iId, 'Affiliates');
             }
-            $this->sMsg = t('The affiliate(s) has been unbanned.');
+            $this->sMsg = t('The affiliate(s) has/have been unbanned.');
         }
 
         Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);
@@ -283,7 +283,7 @@ class AdminController extends Controller
 
                 $this->oAff->delete($iId, $sUsername);
             }
-            $this->sMsg = t('The affiliate(s) has been deleted.');
+            $this->sMsg = t('The affiliate(s) has/have been deleted.');
         }
 
         Header::redirect(Uri::get('affiliate', 'admin', 'browse'), $this->sMsg);

@@ -110,7 +110,7 @@ class AdminController extends Controller
 
                 (new Admin)->delete($iId, $sUsername);
             }
-            $this->sMsg = t('The admin(s) has been deleted.');
+            $this->sMsg = t('The admin(s) has/have been deleted.');
         }
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), $this->sMsg);
