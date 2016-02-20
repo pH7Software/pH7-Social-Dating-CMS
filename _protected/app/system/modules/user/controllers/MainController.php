@@ -15,7 +15,7 @@ class MainController extends Controller
     const GUEST_SPLASH_FILE = 'index.guest_splash', GUEST_FILE = 'index.guest';
 
 
-    private $_sTitle, $_bIsMobApp;
+    private $_sTitle, $_bIsMobile;
 
     /**
      * Displaying the main homepage of the website.
@@ -31,8 +31,8 @@ class MainController extends Controller
         // Only visitors
         if (!UserCore::auth())
         {
-            // To check if the site is called by a mobile native app
-            $this->_bIsMobApp = $this->view->is_mobapp = MobApp::is($this->httpRequest, $this->session);
+            // To check if the site is called by a Mobile or Mobile Native App
+            $this->_bIsMobile = $this->view->is_mobile = (MobApp::is($this->httpRequest, $this->session) || $this->browser->isMobile());
 
             // Background video is used only for the Splash page
             if ($this->_getGuestTplPage() === static::GUEST_SPLASH_FILE)
@@ -131,7 +131,7 @@ class MainController extends Controller
                     exit('You can only choose between "classic" or "splash"');
             }
         }
-        elseif ((!empty($this->_bIsMobApp) && $this->_bIsMobApp) || $this->browser->isMobile())
+        elseif ((!empty($this->_bIsMobile) && $this->_bIsMobile) || $this->browser->isMobile())
         {
             /* 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default */
             $sPage = static::GUEST_SPLASH_FILE;

@@ -9,17 +9,9 @@
   {{ LoginSplashForm::display(280) }}
 </div>
 
-{if !$is_mobapp}
+{if !$is_mobile}
     <div class="col-md-8 animated fadeInLeft">
-      <h1 class="pink2 italic underline s_bMarg">{slogan}</h1>
-      <div class="profiles_window thumb">
-        {{ $userDesignModel->profiles() }}
-      </div>
-
-      <div id="promo_text">
-        <h2>{lang 'Meet people in %0% with %site_name%!', $design->geoIp(false)}</h2>
-        {promo_text}
-      </div>
+        {manual_include 'user_promo_block.inc.tpl'}
     </div>
 {/if}
 
@@ -32,4 +24,8 @@
   </div>
 
   {{ JoinForm::step1() }}
+
+  {if $is_mobile}
+      {manual_include 'user_promo_block.inc.tpl'}
+  {/if}
 </div>
