@@ -33,7 +33,7 @@ class CDateTime
      */
     public function get($mTime = null)
     {
-        $sSetTime = (!empty($mTime)) ? date('Y-m-d', (!is_numeric($mTime) ? strtotime($mTime) : $mTime) ) : 'now';
+        $sSetTime = (!empty($mTime)) ? date('Y-m-d H:i:s', (!is_numeric($mTime) ? strtotime($mTime) : $mTime) ) : 'now';
         $this->_oDateTime = new \DateTime($sSetTime, new \DateTimeZone($this->_oConfig->values['language.application']['timezone']));
         return $this;
     }
