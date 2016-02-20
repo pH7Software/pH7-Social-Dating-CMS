@@ -11,7 +11,7 @@
                 <p><span class="com_txt">{comment}</span><br />
                 <a href="{absolute_url}">{lang 'See more'}</a></p>
 
-                <div class="post-ident">
+                <div class="center post-ident">
                     <p class="small italic"><a href="{relative_url}">#</a> | {lang 'Posted on'}
                         {% Framework\Date\Various::textTimeStamp($com->createdDate) %}
                         {if !empty($com->updatedDate)}

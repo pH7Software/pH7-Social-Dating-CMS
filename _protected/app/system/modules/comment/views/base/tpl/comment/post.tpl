@@ -5,7 +5,7 @@
 
         <p class="com_txt center">{comment}</p>
         <br /><hr />
-        <div class="post-ident">
+        <div class="center post-ident">
             <p class="small italic">{lang 'Posted on'} {% Framework\Date\Various::textTimeStamp($com->createdDate) %}
                 {if !empty($com->updatedDate)}
                     | <span class="post-edit">{lang 'Last Edited'} {% Framework\Date\Various::textTimeStamp($com->updatedDate) %}</span>

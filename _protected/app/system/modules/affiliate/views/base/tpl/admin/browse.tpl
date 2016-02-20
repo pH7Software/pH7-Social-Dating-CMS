@@ -1,7 +1,8 @@
 <form method="post" action="{{ $design->url('affiliate','admin','browse') }}">
   {{ $designSecurity->inputToken('aff_action') }}
 
-  <table class="table center">
+<div class="container-fluid">
+  <table class="table">
 
     <thead>
       <tr>
@@ -83,6 +84,7 @@
     </tbody>
 
   </table>
+</div>
 
 </form>
 
