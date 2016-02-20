@@ -5,14 +5,14 @@
   {* Post *}
 
   <div class="left">{{ $avatarDesign->get($post->username, $post->firstName, $post->sex, 64) }}<br />
-    <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$post->username) }}" data-load="ajax">{lang 'Show Post of'} {% $post->username %}</a></p>
+    <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$post->username) }}" data-load="ajax">{lang "See %0%'s Topics", $post->username}</a></p>
   </div>
 
   <p>{% Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($post->message)) %}</p>
 
   <div class="post-ident">
-    <p class="small italic">{lang 'Posted on'} {% $dateTime->get($post->createdDate)->dateTime() %}
-    {if !empty($post->updatedDate)} | <span class="post-edit">{lang 'Last Edited'} {% $dateTime->get($post->updatedDate)->dateTime() %}</span>{/if}</p>
+    <p class="small italic">{lang 'Posted on %0%', $dateTime->get($post->createdDate)->dateTime()}
+    {if !empty($post->updatedDate)} | <span class="post-edit">{lang 'Last Edited %0%', $dateTime->get($post->updatedDate)->dateTime()}</span>{/if}</p>
 
     <p>{{ $design->like($post->username, $post->firstName, $post->sex) }} | {{ $design->report($post->profileId, $post->username, $post->firstName, $post->sex) }}</p>
   </div>
@@ -38,14 +38,14 @@
       <div class="msg_content" id="{% $msg->messageId %}">
 
         <div class="left">{{ $avatarDesign->get($msg->username, $msg->firstName, $msg->sex, 64) }}<br />
-          <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$msg->username) }}" data-load="ajax">{lang 'Show Post of'} {% $msg->username %}</a></p>
+          <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$msg->username) }}" data-load="ajax">{lang "See %0%'s Topics", $msg->username}</a></p>
         </div>
 
         <p>{% Framework\Parse\User::atUsernameToLink(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($msg->message))) %}</p>
 
         <div class="post-ident">
-          <p class="small italic"><a href="{relative_url}">#</a> | {lang 'Posted on'} {% $dateTime->get($msg->createdDate)->dateTime() %}
-          {if !empty($msg->updatedDate)} | <span class="post-edit">{lang 'Last Edited'} {% $dateTime->get($msg->updatedDate)->dateTime() %}</span>{/if}</p>
+          <p class="small italic"><a href="{relative_url}">#</a> | {lang 'Posted on %0%', $dateTime->get($msg->createdDate)->dateTime()}
+          {if !empty($msg->updatedDate)} | <span class="post-edit">{lang 'Last Edited %0%', $dateTime->get($msg->updatedDate)->dateTime()}</span>{/if}</p>
 
           <p>{{ $design->like($msg->username, $msg->firstName, $msg->sex) }} | {{ $design->report($msg->profileId, $msg->username, $msg->firstName, $msg->sex) }}</p>
         </div>
