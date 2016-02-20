@@ -29,13 +29,13 @@ class MainController extends Controller
         $this->view->meta_description = t('Meet new people and have meetings near you with %site_name%, the new online dating free site  new generation with webcam chat!');
         $this->view->meta_keywords = t('dating, free dating, online dating, people, meeting, romance, woman, man, dating site, flirt, chat, chat room, webcam, video chat, %site_name%');
         $this->view->h1_title = t('Free Online Dating with %site_name%!');
-        $this->view->h2_title = t('Welcome to we Web Dating Site!');
+        $this->view->h2_title = t('Innovative Online Dating Platform');
         $this->output();
     }
 
     public function about()
     {
-        $this->sTitle = t('About this web site %site_name%');
+        $this->sTitle = t('About this website %site_name%');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
@@ -138,7 +138,7 @@ class MainController extends Controller
 
     public function team()
     {
-        $this->sTitle = t('%site_name%\'s Team');
+        $this->sTitle = t("%site_name%'s Team");
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
