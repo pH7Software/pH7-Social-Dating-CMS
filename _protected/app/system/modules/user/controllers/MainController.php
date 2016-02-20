@@ -131,7 +131,7 @@ class MainController extends Controller
                     exit('You can only choose between "classic" or "splash"');
             }
         }
-        elseif ((!empty($this->_bIsMobile) && $this->_bIsMobile) || $this->browser->isMobile())
+        elseif ($this->_bIsMobile || $this->browser->isMobile())
         {
             /* 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default */
             $sPage = static::GUEST_SPLASH_FILE;

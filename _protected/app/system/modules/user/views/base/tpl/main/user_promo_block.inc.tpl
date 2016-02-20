@@ -1,5 +1,5 @@
 <h1 class="pink2 italic underline s_bMarg">{slogan}</h1>
-<div class="profiles_window thumb">
+<div class="center profiles_window thumb">
     {{ $userDesignModel->profiles() }}
 </div>
 

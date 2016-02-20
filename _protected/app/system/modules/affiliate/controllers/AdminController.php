@@ -61,8 +61,7 @@ class AdminController extends Controller
         }
         else
         {
-            // Adding the static files
-            $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'browse.css');
+            // Add the js file necessary for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
             // Assigns variables for views

@@ -1,7 +1,8 @@
 <form method="post" action="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}">
   {{ $designSecurity->inputToken('user_action') }}
 
-  <table class="table center">
+<div class="container-fluid">
+  <table class="table">
 
     <thead>
       <tr>
@@ -87,6 +88,7 @@
     </tbody>
 
   </table>
+</div>
 
 </form>
 

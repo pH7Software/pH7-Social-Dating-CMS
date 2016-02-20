@@ -1,7 +1,9 @@
 <form method="post" action="{{ $design->url('newsletter','admin','browse') }}">
   {{ $designSecurity->inputToken('subscriber_action') }}
 
-  <table class="center">
+  <div class="table-responsive panel panel-default">
+  <div class="panel-heading bold">{lang 'Subscribers Manager'}</div>
+  <table class="table">
 
     <thead>
       <tr>
@@ -42,6 +44,7 @@
     {/each}
 
   </table>
+</div>
 
 </form>
 

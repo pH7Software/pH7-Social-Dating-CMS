@@ -1,9 +1,9 @@
 <form method="post" action="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}">
   {{ $designSecurity->inputToken('admin_action') }}
 
-  <div class="panel panel-default">
+  <div class="table-responsive panel panel-default">
   <div class="panel-heading bold">{lang 'Admins Manager'}</div>
-  <table class="table center">
+  <table class="table">
 
     <thead>
       <tr>
