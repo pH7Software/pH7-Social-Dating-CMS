@@ -85,7 +85,7 @@ class AdminController extends Controller
             foreach ($this->httpRequest->post('action') as $sEmail)
                 $this->oSubscriptionModel->unsubscribe($sEmail);
 
-            $this->sMsg = t('The subscribers(s) has been deleted.');
+            $this->sMsg = t('The subscribers(s) has/have been deleted.');
         }
 
         Header::redirect(Uri::get('newsletter', 'admin', 'browse'), $this->sMsg);

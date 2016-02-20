@@ -260,7 +260,7 @@ class MainController extends Controller
                     $iId = (int) $iId;
                     $this->oMailModel->setTo($this->_iProfileId, $iId, 'trash');
                 }
-                $this->sMsg = t('Your message(s) has been moved to your trash bin.');
+                $this->sMsg = t('Your message(s) has/have been moved to your trash bin.');
             }
         }
 
@@ -291,7 +291,7 @@ class MainController extends Controller
                     $iId = (int) $iId;
                     $this->oMailModel->setTo($this->_iProfileId, $iId, 'restor');
                 }
-                $this->sMsg = t('Your message(s) has been moved to your inbox.');
+                $this->sMsg = t('Your message(s) has/have been moved to your inbox.');
             }
         }
 
@@ -331,7 +331,7 @@ class MainController extends Controller
                     else
                         $this->oMailModel->setTo($this->_iProfileId, $iId, 'delete');
                 }
-                $this->sMsg = t('Your message(s) has been deleted successfully!');
+                $this->sMsg = t('Your message(s) has/have been deleted successfully!');
             }
         }
 

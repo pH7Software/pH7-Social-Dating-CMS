@@ -296,7 +296,7 @@ class UserController extends Controller
 
                 $this->oAdmin->clearReadProfileCache($iId);
             }
-            $this->sMsg = t('The profile(s) has been banned.');
+            $this->sMsg = t('The profile(s) has/have been banned.');
         }
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
@@ -317,7 +317,7 @@ class UserController extends Controller
                 $this->oAdminModel->ban($iId, 0);
                 $this->oAdmin->clearReadProfileCache($iId);
             }
-            $this->sMsg = t('The profile(s) has been unbanned.');
+            $this->sMsg = t('The profile(s) has/have been unbanned.');
         }
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
@@ -339,7 +339,7 @@ class UserController extends Controller
 
                 $this->oAdmin->delete($iId, $sUsername);
             }
-            $this->sMsg = t('The profile(s) has been deleted.');
+            $this->sMsg = t('The profile(s) has/have been deleted.');
         }
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->sMsg);
