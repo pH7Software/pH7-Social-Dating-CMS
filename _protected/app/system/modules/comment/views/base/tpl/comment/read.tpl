@@ -12,10 +12,9 @@
                 <a href="{absolute_url}">{lang 'See more'}</a></p>
 
                 <div class="center post-ident">
-                    <p class="small italic"><a href="{relative_url}">#</a> | {lang 'Posted on'}
-                        {% Framework\Date\Various::textTimeStamp($com->createdDate) %}
+                    <p class="small italic"><a href="{relative_url}">#</a> | {lang 'Posted on %0%', Framework\Date\Various::textTimeStamp($com->createdDate)}
                         {if !empty($com->updatedDate)}
-                            | <span class="post-edit">{lang 'Last Edited'} {% Framework\Date\Various::textTimeStamp($com->updatedDate) %}</span>
+                            | <span class="post-edit">{lang 'Last Edited %0%', Framework\Date\Various::textTimeStamp($com->updatedDate)}</span>
                         {/if}
                     </p>
                     <p class="center">{{ $design->like($com->username,$com->firstName,$com->sex,$absolute_url) }} | {{ $design->report($com->sender,$com->username,$com->firstName,$com->sex) }}</p>
