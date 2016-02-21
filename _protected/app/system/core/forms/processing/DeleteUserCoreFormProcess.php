@@ -23,6 +23,11 @@ class DeleteUserCoreFormProcess extends Form
     {
         parent::__construct();
 
+        if (PH7_DEMOMODE) { // Stop this action if it is on Demo mode
+            \PFBC\Form::setError('form_delete_account', t("You can't delete your account on Demo"));
+            return;
+        }
+
         $this->sSessPrefix = ($this->registry->module == 'user') ? 'member' : 'affiliate';
         $sTable = ($this->registry->module == 'user') ? 'Members' : 'Affiliates';
 

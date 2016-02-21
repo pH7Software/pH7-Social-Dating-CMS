@@ -18,6 +18,11 @@ class ChangePasswordCoreFormProcess extends Form
     {
         parent::__construct();
 
+        if (PH7_DEMOMODE) { // Stop this action if it is on Demo mode
+            \PFBC\Form::setError('form_change_password', t("You can't change the password on Demo"));
+            return;
+        }
+
         // PH7\UserCoreModel::login() method of the UserCoreModel Class works only for "user" and "affiliate" module.
         $oPasswordModel = ($this->registry->module == PH7_ADMIN_MOD) ? new AdminModel : new UserCoreModel;
 
