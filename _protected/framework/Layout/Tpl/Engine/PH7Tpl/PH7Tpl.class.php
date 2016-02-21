@@ -910,16 +910,16 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isMarkCopyright()
     {
+        // Skip this step if it's not the base template (because there is no "smartLink()" and "link()" in layout.tpl of other templates as it includes the "base" one)
+        if ($this->notBaseTheme())
+            return true;
+
         // "design->smartLink()" can be removed ONLY if you bought a license
         if (!$this->bLicense && false === strpos($this->sCode, 'design->smartLink()'))
             return false;
 
         // "design->link()" can never be removed. Copyright notices won't be displayed if you bought a license
-        return
-        (
-            (false !== strpos($this->sCode, 'design->link()')) ||
-            (false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) && false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)'))
-        );
+        return false !== strpos($this->sCode, 'design->link()');
     }
 
     /**
@@ -931,6 +931,17 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     final private function isSmallMarkCopyright()
     {
         return (false !== strpos($this->sCode, 'design->smallLink()'));
+    }
+
+    /**
+     * Check if it's not the base theme.
+     *
+     * @access private
+     * @return boolean Returns TRUE if it's not the base theme, FALSE otherwise.
+     */
+    final private function notBaseTheme()
+    {
+        return (false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) && false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)'));
     }
 
     /**
