@@ -158,6 +158,8 @@ label#percent{position:absolute;padding-left:115px;padding-top:6px;font-size:80%
 
 img, video, iframe {
     max-width: 100%;
+}
+img, iframe {
     max-height: 100%;
 }
 
