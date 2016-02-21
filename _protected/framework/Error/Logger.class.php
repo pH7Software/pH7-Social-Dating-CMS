@@ -33,7 +33,7 @@ class Logger extends \PH7\Framework\Core\Core
     public function __construct()
     {
         $this->sDir = PH7_PATH_LOG . static::LOG_DIR;
-        $this->sFileName = 'pH7log-'.date('d_m_Y');
+        $this->sFileName = 'pH7log-' . date('d_m_Y');
 
         parent::__construct();
     }
