@@ -156,7 +156,12 @@ label#percent{position:absolute;padding-left:115px;padding-top:6px;font-size:80%
     border: 1px solid #999;
 }
 
-/*----- Advertising Available -----*/
+img, video, iframe {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/*--- Advertising Available ---*/
 .ad_728_90 {}
 .ad_200_200 {}
 .ad_250_250 {}
