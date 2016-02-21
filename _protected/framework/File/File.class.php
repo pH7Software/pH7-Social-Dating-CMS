@@ -215,11 +215,11 @@ class File
         {
             while (false !== ($sF = readdir($rHandle)))
             {
-                if ($sF != '.' && $sF != '..')
+                if ($sF !== '.' && $sF !== '..')
                 {
                     if (is_dir($sDir . $sF))
                     {
-                        $aTree = array_merge($aTree, $this->getFileList($sDir . $sF));
+                        $aTree = array_merge($aTree, $this->getFileList($sDir . $sF, $mExt));
                     }
                     else
                     {
