@@ -14,6 +14,11 @@ defined('PH7') or exit(header('Location: ./'));
 
 ################################### VARIABLES ###################################
 
+#################### OTHER ####################
+
+// Determine if we are on demo mode or not
+$bIs_demo = (strpos($_SERVER['SERVER_NAME'], 'demo') !== false);
+
 #################### PATH ####################
 
 #################### URL ####################
@@ -40,6 +45,7 @@ define('PH7_PS', PATH_SEPARATOR);
 define('PH7_SH', '/'); // SlasH
 define('PH7_SELF', (substr($sPhp_self, -1) !== PH7_SH) ? $sPhp_self . PH7_SH : $sPhp_self);
 define('PH7_RELATIVE', PH7_SELF);
+define('PH7_DEMOMODE', $bIs_demo);
 
 #################### PATH ####################
 
