@@ -16,10 +16,10 @@ class ShareEmbedCoreForm
      * @param string $sFileUrl
      * @param integer $iEmbedWidth Width of the embed code. Default: 580
      * @param integer $iEmbedHeight Height of the embed code. Default: 450
-     * @param integer $iWidth Width of the form. Default: 350
+     * @param integer $iWidth Width of the form in pixel. Default: NULL
      * @return void
      */
-    public static function display($sFileUrl, $iEmbedWidth = 580, $iEmbedHeight = 450, $iWidth = 350)
+    public static function display($sFileUrl, $iEmbedWidth = 580, $iEmbedHeight = 450, $iWidth = null)
     {
         $sEmbedCode = '<object codebase="http://www.adobe.com/go/getflashplayer" width="' . $iEmbedWidth . '" height="' . $iEmbedHeight . '" align="middle">
         <param name="movie" value="' . $sFileUrl . '" /><param name="quality" value="high" />
