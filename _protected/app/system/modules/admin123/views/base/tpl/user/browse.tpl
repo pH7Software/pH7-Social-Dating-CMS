@@ -65,7 +65,7 @@
             <a href="{{ $design->url('user','setting','avatar',"$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit User's Avatar"}">{lang 'Edit Avatar'}</a> |
             <a href="{{ $design->url('user','setting','design',"$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit User's Wallpaper"}">{lang 'Edit Wallpaper'}</a> |
             <a href="{{ $design->url('mail','main','compose',$user->username) }}" title="{lang 'Send a message to this member'}">{lang 'Send mail'}</a> |
-            <a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$user->profileId) }}" title="{lang 'Login As a member (to all edit this user account).'}">{lang 'Login as'}</a> |
+            <a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$user->profileId) }}" title="{lang 'Login as a user (to edit all this user account).'}">{lang 'Login as'}</a> |
 
             {if $user->ban == 0}
               {{ $design->popupLinkConfirm(t('Ban'), PH7_ADMIN_MOD, 'user', 'ban', $user->profileId) }}

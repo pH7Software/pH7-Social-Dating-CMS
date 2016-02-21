@@ -62,7 +62,7 @@
           <td>{if !empty($aff->lastEdit)} {% $dateTime->get($aff->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>
           <td class="small">
             <a href="{{ $design->url('affiliate','account','edit',$aff->profileId) }}" title="{lang "Edit Affiliate's Account"}">{lang 'Edit'}</a> |
-            <a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{lang 'Login As a member (to all edit this user account).'}">{lang 'Login as User'}</a> |
+            <a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{lang 'Login as a user (to edit all this user account).'}">{lang 'Login as'}</a> |
 
             {if $aff->ban == 0}
               {{ $design->popupLinkConfirm(t('Ban'), 'affiliate', 'admin', 'ban', $aff->profileId) }}
