@@ -338,7 +338,7 @@ class AdminController extends Controller
                 }
                 else
                 {
-                    $sOutputMsg = t('Error! Bad argument in the url.');
+                    $sOutputMsg = t('Error! Bad argument in the URL.');
                 }
             }
             else
@@ -348,7 +348,7 @@ class AdminController extends Controller
         }
         else
         {
-            $sOutputMsg = t('Error! Missing argument in the url.');
+            $sOutputMsg = t('Error! Missing argument in the URL.');
         }
 
         return $sOutputMsg;
