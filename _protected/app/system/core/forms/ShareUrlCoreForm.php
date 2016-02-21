@@ -14,10 +14,10 @@ class ShareUrlCoreForm
 
     /**
      * @param $sUrl The URL to share. If you enter nothing, it will be the current URL. Default: NULL
-     * @param integer $iWidth Default: 350
+     * @param integer $iWidth Width of the form in pixel. Default: NULL
      * @return void
      */
-    public static function display($sUrl = null, $iWidth = 350)
+    public static function display($sUrl = null, $iWidth = null)
     {
         $sUrl = (!empty($sUrl)) ? $sUrl : (new Http)->currentUrl();
 

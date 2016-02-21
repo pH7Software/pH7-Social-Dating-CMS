@@ -34,12 +34,12 @@ class VideoDesignCore
      * Generates HTML contents Video.
      *
      * @param object $oData
-     * @param string $sMedia Type of the media ('preview' or 'movie'). Default value is 'movie'.
-     * @param integer $iWidth Default 600
-     * @param integer $iHeight Default 400
+     * @param string $sMedia Type of the media ('preview' or 'movie'). Default: 'movie'
+     * @param integer $iWidth Default: 680
+     * @param integer $iHeight Default: 400
      * @return void
      */
-    public static function generate($oData, $sMedia = 'movie', $iWidth = 600, $iHeight = 400)
+    public static function generate($oData, $sMedia = 'movie', $iWidth = 680, $iHeight = 400)
     {
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
 
