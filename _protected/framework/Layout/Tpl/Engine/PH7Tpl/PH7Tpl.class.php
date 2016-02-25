@@ -32,7 +32,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     AUTHOR = 'Pierre-Henry Soria',
     VERSION = '1.3.0',
     LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/',
-    ERR_MSG = 'It seems you have removed some copyright links/notice in the software. If you want to remove them, first you should upgrade your site to <a href="http://ph7cms.com/order">pH7CMSPro</a><br /> or if you hold <a href="http://ph7cms.com/pro">pH7CMSPro</a>, please contact the support to get the problem fixed.',
+    ERR_MSG = 'It seems you have removed some copyright links/notice in the software. If you want to remove them, first you should upgrade your site to <a href="http://ph7cms.com/order">pH7CMSPro</a><br /> or if you hold <a href="http://ph7cms.com/pro">pH7CMSPro</a>, please contact the support to get it fixed.',
 
     /**
      * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
