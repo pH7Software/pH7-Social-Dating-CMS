@@ -7,7 +7,6 @@
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Session
- * @version          1.0
  */
 
 namespace PH7\Framework\Session;
@@ -29,8 +28,6 @@ class Session
 
         session_name(Config::getInstance()->values['session']['cookie_name']);
 
-        $bSecure = (substr(PH7_URL_PROT, 0, 5) === 'https') ? true : false;
-
         /**
          * In localhost mode, security session_set_cookie_params causing problems in the sessions, so we disable this if we are in localhost mode.
          * Otherwise if we are in production mode, we activate this.
@@ -38,7 +35,7 @@ class Session
         if (!(new \PH7\Framework\Server\Server)->isLocalHost())
         {
             $iTime = (int) Config::getInstance()->values['session']['expiration'];
-            session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], $bSecure, true);
+            session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], (substr(PH7_URL_PROT, 0, 5) === 'https'), true);
         }
 
         // Session initialization
