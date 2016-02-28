@@ -12,7 +12,7 @@
 
 var sGeonamesUsername = 'ph7cms'; // Remplace "ph7cms" by your username!
 
-
+/* TODO: Replace this API by GoogleMap Service instead: https://developers.google.com/maps/documentation/javascript/places-autocomplete */
 function autocompleteCityInit(sGeonamesUsername)
 {
     // Set the variables
