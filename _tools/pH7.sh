@@ -21,9 +21,10 @@ function init() {
     echo "8) count php file"
     echo "9) count dir"
     echo "10) show empty file"
-    echo "11) file permissions"
-    echo "12) file strict permissions"
-    echo "13) backup"
+    echo "11) show empty dir"
+    echo "12) file permissions"
+    echo "13) file strict permissions"
+    echo "14) backup"
 
 
     read option
@@ -38,6 +39,7 @@ function init() {
       "count php file") count-php-file;;
       "count dir") count-dir;;
       "show empty file") show-empty-file;;
+      "show empty dir") show-empty-dir;;
       "file permissions") file-permissions;;
       "file strict permissions") file-strict-permissions;;
       "backup") backup;;
@@ -124,6 +126,11 @@ function count-dir() {
 # Display all empty files (0 bytes)
 function show-empty-file() {
     find . -type f -size 0
+}
+
+# Display all empty directories (useful for knowing what will be ignored by Git)
+function show-empty-dir() {
+    find . -type d -empty
 }
 
 # Check and correct file permissions (CHMOD)
