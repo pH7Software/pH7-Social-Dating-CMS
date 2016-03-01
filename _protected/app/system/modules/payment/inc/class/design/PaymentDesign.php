@@ -68,7 +68,7 @@ class PaymentDesign extends Framework\Core\Core
                 data-key="', $this->config->values['module.setting']['stripe.publishable_key'], '"
                 data-name="', $this->registry->site_name, '"
                 data-description="', $oMembership->name, '"
-                data-amount="', str_replace('.', '', $oMembership->price), '"
+                data-amount="', Stripe::getAmount($oMembership->price), '"
                 data-currency="', $this->config->values['module.setting']['currency'], '"
                 data-allow-remember-me="true"
                 data-bitcoin="true">

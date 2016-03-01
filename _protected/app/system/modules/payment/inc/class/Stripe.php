@@ -13,4 +13,13 @@ namespace PH7;
 class Stripe extends Framework\Payment\Gateway\Api\Stripe
 {
     use Api; // Import the Api trait
+
+    /**
+     * @param string $sPrice Normal price format (e.g., 19.95).
+     * @return integer Returns amount in cents (without points) to be validated for Stripe.
+     */
+    public static function getAmount($sPrice)
+    {
+        return str_replace('.', '', $sPrice);
+    }
 }

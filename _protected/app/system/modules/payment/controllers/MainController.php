@@ -116,18 +116,26 @@ class MainController extends Controller
                 if ($this->httpRequest->postExists('stripeToken'))
                 {
                     \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
+                    $sAmount = $this->httpRequest->post('amount');
 
-                     $oCharge = \Stripe\Charge::create(
-                        array(
-                            'source' => $this->httpRequest->post('stripeToken'),
-                            'email'    => $this->httpRequest->post('stripeEmail')
-                        )
-                    );
+                    try {
+                        $oCharge = \Stripe\Charge::create(
+                            [
+                                'amount' => Stripe::getAmount($sAmount),
+                                'currency' => $this->config->values['module.setting']['currency'],
+                                'source' => $this->httpRequest->post('stripeToken'),
+                                'description'    => 'Membership charged for ' . $this->httpRequest->post('stripeEmail')
+                            ]
+                        );
 
-                    if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->httpRequest->post('member_id', 'int'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
-                    {
-                        $this->_bStatus = true; // Status is OK
-                        $this->notification('Stripe'); // Add info into the log file
+                        if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->httpRequest->post('member_id', 'int'), $sAmount, $this->dateTime->dateTime('Y-m-d H:i:s')))
+                        {
+                            $this->_bStatus = true; // Status is OK
+                            $this->notification('Stripe'); // Add info into the log file
+                        }
+                    } catch (\Stripe\Error\Card $oE) {
+                        // The card has been declined
+                        // Do nothing here as "$this->_bStatus" is by default FALSE and so it will display "Error occurred" msg later
                     }
                 }
             }
