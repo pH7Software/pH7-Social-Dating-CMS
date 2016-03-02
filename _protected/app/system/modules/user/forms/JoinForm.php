@@ -18,7 +18,7 @@ PH7\Framework\Url\Header;
 class JoinForm
 {
 
-    public static function step1($iWidth = 300)
+    public static function step1()
     {
         if ((new Session)->exists('mail_step1'))
             Header::redirect(Uri::get('user', 'signup', 'step2'));
@@ -31,7 +31,7 @@ class JoinForm
             Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_join_user', $iWidth);
+        $oForm = new \PFBC\Form('form_join_user');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user', 'form_join_user'));
         $oForm->addElement(new \PFBC\Element\Token('join'));
