@@ -118,7 +118,8 @@ class MainController extends Controller
                     \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
                     $sAmount = $this->httpRequest->post('amount');
 
-                    try {
+                    try
+                    {
                         $oCharge = \Stripe\Charge::create(
                             [
                                 'amount' => Stripe::getAmount($sAmount),
@@ -133,9 +134,15 @@ class MainController extends Controller
                             $this->_bStatus = true; // Status is OK
                             $this->notification('Stripe'); // Add info into the log file
                         }
-                    } catch (\Stripe\Error\Card $oE) {
+                    }
+                    catch (\Stripe\Error\Card $oE)
+                    {
                         // The card has been declined
                         // Do nothing here as "$this->_bStatus" is by default FALSE and so it will display "Error occurred" msg later
+                    }
+                    catch (\Stripe\Error\Base $oE)
+                    {
+                        $this->design->setMessage( $this->str->escape($oE->getMessage(), true) );
                     }
                 }
             }
