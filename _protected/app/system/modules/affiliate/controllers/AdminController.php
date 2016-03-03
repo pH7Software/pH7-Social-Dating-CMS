@@ -28,7 +28,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        Framework\Url\Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('Welcome to the administration of Ad Affiliate'));
+        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('Welcome to the administration of Ad Affiliate'));
     }
 
     public function config()
@@ -41,7 +41,7 @@ class AdminController extends Controller
 
     public function banner()
     {
-        Framework\Url\Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'));
     }
 
     public function browse()
