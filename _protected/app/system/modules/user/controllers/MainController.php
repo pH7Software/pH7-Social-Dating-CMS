@@ -22,7 +22,7 @@ class MainController extends Controller
      */
     public function index()
     {
-        // We must not put the title as this is the homepage, so this is the default title is used.
+        // We don't have to put the title here as it's the homepage, so it's the default title that is used.
 
         // For Profiles Carousel
         $this->view->userDesignModel = new UserDesignCoreModel;
