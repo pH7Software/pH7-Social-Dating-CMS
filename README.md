@@ -39,13 +39,13 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Love Calculator
 * Geolocation
 * Photo Albums
-* Videos
+* Videos (and possibility to upload videos from YouTube, Vimeo, Metacafe and Dailymotion)
 * Forums
 * Content Moderation
 * Watermark Branding
 * Chat Rooms
 * Chatroulette
-* Games
+* Games (with high quality and viral games installed)
 * Webcam Shot
 * Affiliate
 * Newsletter
@@ -53,7 +53,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Member approval system
 * Advanced Admin Panel
 * Complete Membership System
-* Payment Gateways Integration, PayPal, Stripe, Bitcoin, 2CheckOut
+* Payment Gateways Integration for PayPal, Stripe, Bitcoin and 2CheckOut
 * Statistics & Analytics System
 * Live Notification System
 * Registration delay (to avoid spam)
