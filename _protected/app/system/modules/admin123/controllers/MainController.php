@@ -10,7 +10,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Layout\Html\Meta;
 
 class MainController extends Controller
 {
@@ -48,8 +48,8 @@ class MainController extends Controller
 
     public function login()
     {
-        // Prohibit the referencing in search engines of admin page
-        $this->view->header = '<meta name="robots" content="noindex" />';
+        // Prohibit the referencing in search engines of the admin panel
+        $this->view->header = Meta::NOINDEX;
 
         $this->view->page_title = t('Sign in to Admin Panel');
         $this->view->h1_title = t('Admin Panel - Login');

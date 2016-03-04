@@ -11,6 +11,7 @@ use
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel,
 PH7\Framework\Mail\Mail,
+PH7\Framework\Layout\Html\Meta,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
 
@@ -21,6 +22,9 @@ class MainController extends Controller
 
     public function forgot($sMod = '')
     {
+        // For better SEO, exclude not interesting pages from search engines
+        $this->view->header = Meta::NOINDEX;
+
         $this->checkMod($sMod);
 
         $this->view->page_title = t('Forgot your password?');

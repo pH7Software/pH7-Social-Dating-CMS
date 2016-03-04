@@ -178,7 +178,7 @@ class ProfileController extends Controller
         if ($oPrivacyViewsUser->searchProfile == 'no')
         {
             // Exclude profile of search engines
-            $this->view->header = '<meta name="robots" content="noindex" />';
+            $this->view->header = Framework\Layout\Html\Meta::NOINDEX;
         }
 
         if (!$this->sUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members')
