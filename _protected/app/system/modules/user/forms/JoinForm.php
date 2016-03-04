@@ -38,7 +38,7 @@ class JoinForm
 
         // Check if the Connect module is enabled
         if (SysMod::isEnabled('connect')) {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center"><a href="' . Uri::get('connect', 'main', 'index') . '" target="_blank" class="btn btn-primary">' . t('Universal Login') . '</a></div>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center"><a href="' . Uri::get('connect', 'main', 'index') . '" class="btn btn-primary">' . t('Universal Login') . '</a></div>'));
         }
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('placeholder' => t('First Name'), 'id'=>'name_first', 'onblur' =>'CValid(this.value,this.id)', 'title'=>t('Enter your first name.'), 'required' => 1, 'validation'=>new \PFBC\Validation\Name)));
