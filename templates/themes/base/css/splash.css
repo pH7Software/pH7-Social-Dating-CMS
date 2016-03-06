@@ -18,13 +18,38 @@
     margin-top:22px;
 }
 
+/** Avatar Profiles Block **/
+.pic_block {
+  margin:5px 0 15px;
+}
+.pic_block:hover a {
+  opacity:0.5;
+  transition:opacity .35s ease-in-out;
+  -webkit-transition:opacity .35s ease-in-out;
+  -moz-transition:opacity .35s ease-in-out;
+  -o-transition:opacity .35s ease-in-out;
+  -ms-transition:opacity .35s ease-in-out;
+  -khtml-transition:opacity .35s ease-in-out;
+}
+.pic_block a:hover {
+  opacity:1;
+}
+.pic img:hover {
+  opacity:1 !important; /* Rewrite the .pic class for splash page (already defined in style.css) */
+}
+
+
 .window, .profiles_window {
     border:1px solid #999;
     border-radius: 5px;
     overflow: hidden;
     position: relative;
 }
-h1:hover{color:#1877D5;cursor:default}
+
+h1:hover {
+  color:#1877D5;
+  cursor:default;
+}
 
 .img_reel {
     position: absolute;
