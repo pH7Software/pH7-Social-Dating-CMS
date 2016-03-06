@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS pH7_Admins (
   lastActivity datetime DEFAULT NULL,
   lastEdit datetime DEFAULT NULL,
   ban enum('0','1') DEFAULT '0',
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   hashValidation varchar(40) DEFAULT NULL,
   PRIMARY KEY (profileId),
   UNIQUE KEY username (username),
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   birthDate date NOT NULL DEFAULT '0000-00-00',
   sex enum('male','female','couple') NOT NULL DEFAULT 'female',
   matchSex set('male','female','couple') NOT NULL DEFAULT 'male',
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   bankAccount varchar(150) DEFAULT NULL,
   groupId tinyint(2) unsigned NOT NULL DEFAULT 2,
   membershipDate datetime DEFAULT NULL,
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliates (
   email varchar(120) NOT NULL,
   sex enum('male','female') NOT NULL DEFAULT 'male',
   birthDate date NOT NULL DEFAULT '0000-00-00',
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   bankAccount varchar(150) DEFAULT NULL,
   amount decimal(8,2) NOT NULL DEFAULT '0.00',
   totalPayment decimal(8,2) NOT NULL DEFAULT '0.00',
@@ -212,9 +212,11 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesInfo (
 
 
 CREATE TABLE IF NOT EXISTS pH7_BlockIp (
-  ip int(10) unsigned NOT NULL DEFAULT '0',
-  expires int(10) unsigned NOT NULL,
-  PRIMARY KEY (ip)
+  ipId smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  ip varchar(45) NOT NULL,
+  expiration smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (ip),
+  KEY ipId (ipId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 
@@ -670,7 +672,7 @@ CREATE TABLE IF NOT EXISTS pH7_Likes (
   keyId varchar(255) NOT NULL,
   votes int(10) unsigned NOT NULL,
   lastVote datetime NOT NULL,
-  lastIp varchar(20) NOT NULL,
+  lastIp varchar(45) NOT NULL,
   UNIQUE KEY keyId (keyId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -684,25 +686,31 @@ CREATE TABLE IF NOT EXISTS pH7_LogError (
 
 
 CREATE TABLE IF NOT EXISTS pH7_AdminsAttemptsLogin (
-  ip varchar(20) NOT NULL DEFAULT '',
+  attemptsId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL,
+  PRIMARY KEY (attemptsId),
   UNIQUE KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersAttemptsLogin (
-  ip varchar(20) NOT NULL DEFAULT '',
+  attemptsId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL,
+  PRIMARY KEY (attemptsId),
   UNIQUE KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_AffiliatesAttemptsLogin (
-  ip varchar(20) NOT NULL DEFAULT '',
+  attemptsId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL,
+  PRIMARY KEY (attemptsId),
   UNIQUE KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -713,7 +721,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogLogin (
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
   status varchar(60) NOT NULL DEFAULT '',
-  ip varchar(20) NOT NULL DEFAULT '',
+  ip varchar(45) NOT NULL DEFAULT '',
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (logId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -725,7 +733,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogLogin (
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
   status varchar(60) NOT NULL DEFAULT '',
-  ip varchar(20) NOT NULL DEFAULT '',
+  ip varchar(45) NOT NULL DEFAULT '',
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (logId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -737,7 +745,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogLogin (
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
   status varchar(60) NOT NULL DEFAULT '',
-  ip varchar(20) NOT NULL DEFAULT '',
+  ip varchar(45) NOT NULL DEFAULT '',
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (logId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -754,7 +762,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogSess (
   idHash char(32) NOT NULL,
   lastActivity int(10) unsigned NOT NULL,
   location varchar(255) DEFAULT NULL,
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   userAgent varchar(100) NOT NULL,
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -776,7 +784,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogSess (
   idHash char(32) NOT NULL,
   lastActivity int(10) unsigned NOT NULL,
   location varchar(255) DEFAULT NULL,
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   userAgent varchar(100) NOT NULL,
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -798,7 +806,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogSess (
   idHash char(32) NOT NULL,
   lastActivity int(10) unsigned NOT NULL,
   location varchar(255) DEFAULT NULL,
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   userAgent varchar(100) NOT NULL,
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -1051,7 +1059,7 @@ CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   email varchar(120) NOT NULL,
   joinDate datetime DEFAULT NULL,
   active tinyint(1) unsigned NOT NULL DEFAULT 2, -- 1 = Active Account, 2 = Pending Account
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   hashValidation varchar(40) DEFAULT NULL,
   affiliatedId int(10) unsigned NOT NULL DEFAULT 0,
   INDEX (profileId),
