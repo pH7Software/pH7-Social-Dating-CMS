@@ -12,15 +12,15 @@
 
 namespace PH7;
 
+use PH7\Framework\Layout\Html\Meta;
+
 class MainController extends Controller
 {
-
     public function login()
     {
-        $this->view->header = '<meta name="robots" content="noindex" />';
+        $this->view->header = Meta::NOINDEX;
         $this->view->page_title = t('Sign in to Admin Panel');
         $this->view->h1_title = t('Admin Panel - Login');
         $this->output();
     }
-
 }
