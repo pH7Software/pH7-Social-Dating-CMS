@@ -199,7 +199,9 @@ class Various
             break;
 
             /** Check Ads Tables **/
-            \PH7\AdsCore::checkTable($sTable);
+            case \PH7\AdsCore::checkTable($sTable):
+                return $sTable;
+            break;
 
             default:
                 static::launchErr($sTable);
