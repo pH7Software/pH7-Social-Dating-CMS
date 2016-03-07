@@ -4,6 +4,7 @@
 require(dirname(__FILE__) . '/lib/Stripe.php');
 
 // Utilities
+require(dirname(__FILE__) . '/lib/Util/AutoPagingIterator.php');
 require(dirname(__FILE__) . '/lib/Util/RequestOptions.php');
 require(dirname(__FILE__) . '/lib/Util/Set.php');
 require(dirname(__FILE__) . '/lib/Util/Util.php');
@@ -44,6 +45,7 @@ require(dirname(__FILE__) . '/lib/BitcoinTransaction.php');
 require(dirname(__FILE__) . '/lib/Card.php');
 require(dirname(__FILE__) . '/lib/Charge.php');
 require(dirname(__FILE__) . '/lib/Collection.php');
+require(dirname(__FILE__) . '/lib/CountrySpec.php');
 require(dirname(__FILE__) . '/lib/Coupon.php');
 require(dirname(__FILE__) . '/lib/Customer.php');
 require(dirname(__FILE__) . '/lib/Dispute.php');

@@ -16,10 +16,13 @@ class Stripe
     // @var string|null The version of the Stripe API to use for requests.
     public static $apiVersion = null;
 
+    // @var string|null The account ID for connected accounts requests.
+    public static $accountId = null;
+
     // @var boolean Defaults to true.
     public static $verifySslCerts = true;
 
-    const VERSION = '3.7.1';
+    const VERSION = '3.9.1';
 
     /**
      * @return string The API key used for requests.
@@ -70,5 +73,23 @@ class Stripe
     public static function setVerifySslCerts($verify)
     {
         self::$verifySslCerts = $verify;
+    }
+
+    /**
+     * @return string | null The Stripe account ID for connected account
+     *   requests.
+     */
+    public static function getAccountId()
+    {
+        return self::$accountId;
+    }
+
+    /**
+     * @param string $accountId The Stripe account ID to set for connected
+     *   account requests.
+     */
+    public static function setAccountId($accountId)
+    {
+        self::$accountId = $accountId;
     }
 }
