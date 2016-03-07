@@ -45,7 +45,7 @@ class Security
         if ($rStmt->rowCount() == 0) // Not Found IP
         {
             $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('BlockIp'). 'VALUES (:ip, :expiration)');
-            $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR;
+            $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
             $rStmt->bindValue(':expiration', $iExpir, \PDO::PARAM_INT);
             $rStmt->execute();
             return true;
