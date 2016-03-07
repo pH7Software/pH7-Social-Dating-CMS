@@ -78,7 +78,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Message templates
 * Multi Themes and many personalizable
 * Includes top HTML5 features
-* Facebook, Google, Twitter connect
+* Allow to sign in to your site with Facebook, Google and Twitter thanks pH7CMS's Connect module
 * Invite Friends
 * Social Bookmark
 * Anti-spam system

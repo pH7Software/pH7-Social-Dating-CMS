@@ -56,7 +56,7 @@ final class Autoloader
         $this->_loadFile('Core/License.class.php');
         $this->_loadFile('Core/Kernel.class.php');
 
-        // Include Composer libraries (GeoIp2, Swift, ...)
+        // Include Composer libraries (GeoIp2, Swift, Stripe, ...)
         require_once PH7_PATH_PROTECTED . 'vendor/autoload.php';
     }
 
