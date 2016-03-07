@@ -307,8 +307,8 @@ class Http extends \PH7\Framework\Http\Http
      */
     protected function setType(&$aType, $sKey, $sType)
     {
-        if (!empty($sParam) && $sParam !== self::ONLY_XSS_CLEAN)
-            settype($aType[$sKey], $sParam);
+        if (!empty($sType) && $sType !== self::ONLY_XSS_CLEAN)
+            settype($aType[$sKey], $sType);
     }
 
     /**
