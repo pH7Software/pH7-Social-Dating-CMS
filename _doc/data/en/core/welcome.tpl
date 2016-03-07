@@ -1,1 +1,1 @@
-<h1>Welcome to the &quot;{site_name}&quot; software documentation!</h1>
+<h1>Welcome to the &quot;{site_name}&quot; documentation!</h1>
