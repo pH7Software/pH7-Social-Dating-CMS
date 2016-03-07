@@ -57,8 +57,8 @@ class ForgotPasswordFormProcess extends Form
         $sResetUrl = Uri::get('lost-password', 'main', 'reset', $this->httpRequest->get('mod')) . PH7_SH . $oData->email . PH7_SH . $oData->hashValidation;
 
         $this->view->content = t('Hello %0%!', $oData->username) . '<br />' .
-        t('Somebody (from the IP address %0%) has requested a new password for their account.', Ip::get()) . '<br />' .
-        t('If you requested for this, click on the link below, otherwise ignore this email and your password will remain unchanged.') .
+        t('Someone (from IP address %0%) has requested a new password for this account.', Ip::get()) . '<br />' .
+        t('If you requested this, click on the link below, otherwise ignore this email and your password will remain unchanged.') .
         '<br /><a href="' . $sResetUrl . '">' . $sResetUrl . '</a>';
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/lost-password/confirm-lost-password.tpl', $oData->email);
