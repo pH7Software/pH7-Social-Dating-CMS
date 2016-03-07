@@ -40,7 +40,7 @@ class LoginFormProcess extends Form
         $iMaxAttempts = (int) DbConfig::getSetting('maxAdminLoginAttempts');
         $iTimeDelay = (int) DbConfig::getSetting('loginAdminAttemptTime');
 
-        if($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Admins'))
+        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Admins'))
         {
             \PFBC\Form::setError('form_admin_login', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
@@ -50,21 +50,21 @@ class LoginFormProcess extends Form
         $bIsLogged = $oAdminModel->adminLogin($sEmail, $sUsername, $sPassword);
         $bIsIpBanned = !empty($sIpLogin) && $sIpLogin !== $sIp;
 
-        if(!$bIsLogged || $bIsIpBanned) // If the login is failed or if the IP address is banned
+        if (!$bIsLogged || $bIsIpBanned) // If the login is failed or if the IP address is banned
         {
             sleep(2); // Security against brute-force attack to avoid drowning the server and the database
 
-            if(!$bIsLogged)
+            if (!$bIsLogged)
             {
                 $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', 'Admins');
 
-                if($bIsLoginAttempt)
+                if ($bIsLoginAttempt)
                     $oSecurityModel->addLoginAttempt('Admins');
 
                 $this->session->set('captcha_admin_enabled',1); // Enable Captcha
                 \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is Incorrect'));
             }
-            elseif($bIsIpBanned)
+            elseif ($bIsIpBanned)
             {
                 $this->session->set('captcha_admin_enabled',1); // Enable Captcha
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
@@ -77,7 +77,8 @@ class LoginFormProcess extends Form
             $this->session->remove('captcha_admin_enabled');
 
             // Is disconnected if the user is logged on as "user" or "affiliate".
-            if(UserCore::auth() || AffiliateCore::auth()) $this->session->destroy();
+            if (UserCore::auth() || AffiliateCore::auth())
+                $this->session->destroy();
 
             $iId = $oAdminModel->getId($sEmail, null, 'Admins');
             $oAdminData = $oAdminModel->readProfile($iId, 'Admins');
@@ -85,7 +86,7 @@ class LoginFormProcess extends Form
             // Regenerate the session ID to prevent the session fixation
             $this->session->regenerateId();
 
-            $aSessionData = array(
+            $aSessionData = [
                'admin_id' => $oAdminData->profileId,
                'admin_email' => $oAdminData->email,
                'admin_username' => $oAdminData->username,
@@ -93,8 +94,7 @@ class LoginFormProcess extends Form
                'admin_ip' => $sIp,
                'admin_http_user_agent' => $this->browser->getUserAgent(),
                'admin_token' => Various::genRnd($oAdminData->email),
-            );
-
+            ];
             $this->session->set($aSessionData);
             $oSecurityModel->addLoginLog($sEmail, $sUsername, '*****', 'Logged in!', 'Admins');
             $oAdminModel->setLastActivity($oAdminData->profileId, 'Admins');
