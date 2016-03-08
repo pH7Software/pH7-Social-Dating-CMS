@@ -47,7 +47,7 @@ class ConfigFileCoreFormProcess extends Form
 
         $sRedirectUrl = $this->httpRequest->previousPage();
         if ($this->file->save($sIniFile, $sData))
-            Header::redirect($sRedirectUrl, ('The file content was saved successfully!'));
+            Header::redirect($sRedirectUrl, ('The file content has been saved successfully!'));
         else
             Header::redirect($sRedirectUrl, t('The file content could not be saved!'), 'error');
 

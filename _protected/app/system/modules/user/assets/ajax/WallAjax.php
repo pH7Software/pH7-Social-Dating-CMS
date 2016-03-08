@@ -98,7 +98,7 @@ class WallAjax extends Core
         if (!$this->_bStatus)
             $this->_sMsg = jsonMsg(0, t('Oops, your post could not be sent. Please try again later.'));
         else
-            $this->_sMsg = jsonMsg(1, t('Your post was sent successfully!'));
+            $this->_sMsg = jsonMsg(1, t('Your post has been sent successfully!'));
 
 
         echo $this->_sMsg;
@@ -110,7 +110,7 @@ class WallAjax extends Core
         if (!$this->_bStatus)
             $this->_sMsg = jsonMsg(0, t('Oops, your post could not be saved. Please try again later.'));
         else
-            $this->_sMsg = jsonMsg(1, t('Your post was saved successfully!'));
+            $this->_sMsg = jsonMsg(1, t('Your post has been saved successfully!'));
 
 
         echo $this->_sMsg;

@@ -328,7 +328,7 @@ class SettingFormProcess extends Form
         (new Framework\Cache\Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
 
         if(!$this->bIsErr)
-            \PFBC\Form::setSuccess('form_setting', t('The configuration was saved successfully!'));
+            \PFBC\Form::setSuccess('form_setting', t('The configuration has been saved successfully!'));
     }
 
 }

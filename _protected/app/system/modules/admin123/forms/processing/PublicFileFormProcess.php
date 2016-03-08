@@ -18,7 +18,7 @@ class PublicFileFormProcess extends Form
         parent::__construct();
 
         $bStatus = $this->file->save(PH7_PATH_ROOT . $this->httpRequest->get('file'), $this->httpRequest->post('content', Http::NO_CLEAN));
-        $sMsg = ($bStatus) ? t('The file content was saved successfully!') : t('The file content could not be saved!');
+        $sMsg = ($bStatus) ? t('The file content has been saved successfully!') : t('The file content could not be saved!');
         $sMsgType = ($bStatus) ? 'success' : 'error';
 
         Header::redirect($this->httpRequest->previousPage(), $sMsg, $sMsgType);

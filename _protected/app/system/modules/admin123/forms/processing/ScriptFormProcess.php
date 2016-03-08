@@ -24,7 +24,7 @@ class ScriptFormProcess extends Form
             /* Clean Model\Design for STATIC / customCodejs data */
             (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, 'customCodejs', null)->clear();
         }
-        \PFBC\Form::setSuccess('form_script', t('Your JS code was saved successfully!'));
+        \PFBC\Form::setSuccess('form_script', t('The JS code has been saved successfully!'));
     }
 
 }

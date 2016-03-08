@@ -24,7 +24,7 @@ class AnalyticsApiFormProcess extends Form
             /* Clean Model\Design for STATIC / analyticsApi data */
             (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, 'analyticsApi', null)->clear();
         }
-        \PFBC\Form::setSuccess('form_analytics', t('The code Analytics Api was saved successfully!'));
+        \PFBC\Form::setSuccess('form_analytics', t('The code Analytics Api has been saved successfully!'));
     }
 
 }
