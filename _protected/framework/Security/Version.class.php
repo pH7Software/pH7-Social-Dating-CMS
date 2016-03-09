@@ -54,6 +54,7 @@ final class Version
             {
                 foreach($oSoft->getElementsByTagName('social-dating-cms') as $oInfo)
                 {
+                    // "Validate::boll()" returns TRUE for "1", "true", "on" and "yes"
                     $bIsAlert = (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
                     $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
                     $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
