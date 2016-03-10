@@ -1,5 +1,6 @@
 {* Store "UserCore::auth()" function in a variable in order to optimize the script and call this function only once in the file *}
 {{ $is_user_auth = UserCore::auth() }}
+{{ $is_guest_homepage = (!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index') }}
 
 {{ $design->htmlHeader() }}
 <html lang="{% $config->values['language']['lang'] %}">
@@ -75,18 +76,10 @@
 
     <!-- Begin Header -->
     <header>
-      <div class="row">
-        <div role="banner" id="logo" class="col-md-8"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
-      </div>
-
       {* If we aren't on the the splash page, then display the menu *}
-      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
+      {if !$is_guest_homepage}
         {main_include 'top_menu.inc.tpl'}
       {/if}
-
-      <noscript>
-        <div class="err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
-      </noscript>
     </header>
     <!-- End Header -->
 
@@ -98,8 +91,16 @@
 
     <!-- Begin Content -->
     <div role="main" class="container" id="content">
+      {main_include 'noscript.inc.tpl'}
+
+      {if $is_guest_homepage}
+        <div class="row">
+          <div role="banner" id="logo" class="col-md-8"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
+        </div>
+      {/if}
+
       {* Headings group *}
-      <div id="headings" class="center">
+      <div class="center">
         {if !empty($h1_title )}
           <h1>{h1_title}</h1>
         {/if}
@@ -114,7 +115,7 @@
         {/if}
       </div>
       {* Don't display the top middle banner on the the splash page *}
-      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
+      {if !$is_guest_homepage}
           <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
       {/if}
 

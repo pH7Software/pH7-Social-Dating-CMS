@@ -28,7 +28,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ $design->homePageUrl() }}" title="{lang 'Home'}"><i class="fa fa-home"></i></a>
+            <div role="banner" id="logo" class="navbar-brand"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
           </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
