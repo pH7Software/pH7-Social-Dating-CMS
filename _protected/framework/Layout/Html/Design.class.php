@@ -785,7 +785,7 @@ class Design
             $sName = (!empty($sSiteName)) ? $sSiteName : Kernel::SOFTWARE_NAME;
 
             echo '<header>
-            <div id="logo"><h1><a href="', PH7_URL_ROOT, '" title="', $sName, ' — ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '">', $sName, '</a></h1></div>
+            <div role="banner" id="logo"><h1><a href="', PH7_URL_ROOT, '" title="', $sName, ' — ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '">', $sName, '</a></h1></div>
             </header>';
         }
         echo $this->flashMsg(),

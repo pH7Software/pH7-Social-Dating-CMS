@@ -4,8 +4,8 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-#logo{float:left}
-header{margin-bottom:20px;}
+#logo{float:left;margin-top:20px;}
+#headings,.noscript{margin-top:0;}
 
 .folio_block {
     position: absolute;
@@ -103,7 +103,7 @@ video#bgvid {
   background-size: cover;
 }
 
-.login_block{margin:-45px 0 0 45%}
+.login_block{margin:-50px 0 0 45%}
 
 /* Slideshow */
 .window {height:300px;width:590px}

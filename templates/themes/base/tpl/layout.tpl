@@ -80,18 +80,10 @@
       {if !$is_guest_homepage}
         {main_include 'top_menu.inc.tpl'}
       {/if}
-    </header>
-    <!-- End Header -->
 
-    <!-- Begin Popups -->
-    <div id="box">
-      <p></p>
-    </div>
-    <!-- End Popups -->
-
-    <!-- Begin Content -->
-    <div role="main" class="container" id="content">
-      {main_include 'noscript.inc.tpl'}
+      <noscript>
+          <div class="noscript err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
+      </noscript>
 
       {if $is_guest_homepage}
         <div class="row">
@@ -100,7 +92,7 @@
       {/if}
 
       {* Headings group *}
-      <div class="center">
+      <div class="center" id="headings">
         {if !empty($h1_title )}
           <h1>{h1_title}</h1>
         {/if}
@@ -120,7 +112,17 @@
       {/if}
 
       <div class="clear"></div>
+    </header>
+    <!-- End Header -->
 
+    <!-- Begin Popups -->
+    <div id="box">
+      <p></p>
+    </div>
+    <!-- End Popups -->
+
+    <!-- Begin Content -->
+    <div role="main" class="container" id="content">
       {* Alert Message *}
       {{ $design->flashMsg() }}
       <div class="msg"></div>
