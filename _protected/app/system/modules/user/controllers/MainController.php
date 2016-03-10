@@ -22,7 +22,6 @@ class MainController extends Controller
      */
     public function index()
     {
-        throw new \Exception('ddd');
         // We don't have to put the title here as it's the homepage, so it's the default title that is used.
 
         // For Profiles Carousel
