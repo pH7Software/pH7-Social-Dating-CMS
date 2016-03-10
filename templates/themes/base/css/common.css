@@ -25,12 +25,10 @@ body {background: white url(../img/body_bg.jpg) repeat-x;}
     white-space: nowrap;
     margin-left: 0.25em;
 }
-#logo{padding-left:50px;background:url('../img/logo.png') no-repeat;margin-top:20px;overflow:hidden}
+#logo{padding-left:50px;background:url('../img/logo.png') no-repeat;margin-top:50px;overflow:hidden}
 #logo h1{font-size:2em}
 #logo h1:first-letter{text-transform:none} /* Allowing logo name starting by a lowercase like "pH7" */
 header{padding:10px 0 10px;background: url(../img/header2.png) repeat-x top;}
-header ul{margin:0;padding:0;}
-header li{list-style-type: none;float:left;padding-right: 20px;font-style:italic;}
 header, #content{margin-left:auto; margin-right:auto;padding-left:12px;padding-right:12px;}
 #content:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 footer{padding:10px;margin:10px 20px;font-size:.9em;text-align:center;border-top:1px solid #C8C8C8;}

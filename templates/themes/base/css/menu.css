@@ -20,3 +20,6 @@
     font-size:13px;
     color:#08c;
 }
+/* Rewrite some CSS classes for Bootstrap fixed menu for better render in pH7CMS desin */
+.navbar-default{border-color:#ccc !important}
+.navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse{max-height:none;}

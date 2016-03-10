@@ -75,15 +75,18 @@
 
     <!-- Begin Header -->
     <header>
-
-      <noscript>
-        <div class="err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
-      </noscript>
-
       <div class="row">
         <div role="banner" id="logo" class="col-md-8"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
       </div>
 
+      {* If we aren't on the the splash page, then display the menu *}
+      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
+        {main_include 'top_menu.inc.tpl'}
+      {/if}
+
+      <noscript>
+        <div class="err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
+      </noscript>
     </header>
     <!-- End Header -->
 
@@ -95,12 +98,6 @@
 
     <!-- Begin Content -->
     <div role="main" class="container" id="content">
-
-      {* If we aren't on the the splash page, then display the menu *}
-      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
-        {main_include 'top_menu.inc.tpl'}
-      {/if}
-
       {* Headings group *}
       <div id="headings" class="center">
         {if !empty($h1_title )}
