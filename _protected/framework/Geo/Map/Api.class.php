@@ -21,7 +21,7 @@ use PH7\Framework\Config\Config;
 *
 * @author          Pierre-Henry SORIA <ph7software@gmail.com>
 * @copyright       (c) 2011-2016, Pierre-Henry SORIA, All Rights Reserved.
-* @version         Last update 03/13/2016
+* @version         Last update 03/14/2016
 * @package         pH7CMS
 */
 
@@ -31,7 +31,7 @@ use PH7\Framework\Config\Config;
  *
  * @author Yohann CERDAN <cerdanyohann@yahoo.fr>
  */
-class MapAPI
+class Api
 {
     /** GoogleMap ID for the HTML DIV and identifier for all the methods (to have several gmaps) **/
     protected $googleMapId = 'googlemapapi';
@@ -697,7 +697,7 @@ class MapAPI
         $this->content .= "\t\t\t\t" . 'if (status == google.maps.GeocoderStatus.OK) {' . "\n";
         $this->content .= "\t\t\t\t" . 'map' . $this->googleMapId . '.setCenter(results[0].geometry.location);' . "\n";
         $this->content .= "\t\t\t\t" . '} else {' . "\n";
-        $this->content .= "\t\t\t\t" . 'alert("Geocode was not successful for the following reason: " + status);' . "\n";
+        $this->content .= "\t\t\t\t" . 'alert("' . t('Oops! Geo Map was not successful for the following reason:') . '" + status);' . "\n";
         $this->content .= "\t\t\t\t" . '}' . "\n";
         $this->content .= "\t\t\t" . '});' . "\n";
         $this->content .= "\t\t" . '}' . "\n";
