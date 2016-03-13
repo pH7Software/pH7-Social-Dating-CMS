@@ -125,8 +125,6 @@ dd{margin-bottom:4px}
     padding: 4px;
     margin-right:12px;
     line-height: 1;
-    border: 1px solid #ddd;
-    border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
@@ -142,4 +140,9 @@ dd{margin-bottom:4px}
   width: 100%;
   vertical-align:bottom;
   float:left;
+}
+
+.thumb, #country_map, #profile_map {
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }

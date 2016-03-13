@@ -126,7 +126,7 @@ class ProfileController extends Controller
             $oMap = new Map;
             $oMap->setCenter($sCity . ' ' . $sState . ' ' . t($sCountry));
             $oMap->setSize('600px', '300px');
-            $oMap->setDivId('profileMap');
+            $oMap->setDivId('profile_map');
             $oMap->setZoom(12);
             $oMap->addMarkerByAddress($sCity . ' ' . $sState . ' ' . t($sCountry), t('Meet %0% near here!', $oUser->username));
             $oMap->generate();

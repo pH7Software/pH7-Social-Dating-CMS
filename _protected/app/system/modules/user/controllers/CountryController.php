@@ -26,7 +26,7 @@ class CountryController extends Controller
             $oMap = new Map;
             $oMap->setCenter($this->registry->country . ' ' . $this->registry->city);
             $oMap->setSize('800px', '690px');
-            $oMap->setDivId('map');
+            $oMap->setDivId('country_map');
             $oMap->setZoom(12);
             $oMap->addMarkerByAddress($this->registry->country . ' ' . $this->registry->city, t('Meet new people here!'));
             $oMap->generate();
