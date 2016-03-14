@@ -31,7 +31,7 @@ abstract class Controller implements IController
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'p[H]', // 1.0 and 1.1 branches were "pOH", 1.2 branch was "pOW" and 1.3 is now "p[H]"
-    SOFTWARE_VERSION = '1.3.5',
+    SOFTWARE_VERSION = '1.3.6',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
