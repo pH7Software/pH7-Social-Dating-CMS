@@ -203,7 +203,6 @@
   <p class="center">{{ $design->like($username, $first_name, $sex) }} | {{ $design->report($id, $username, $first_name, $sex) }}</p>
   {{ $design->likeApi() }}
 
-  <p>----------------------------------------</p>
   {{ CommentDesignCore::link($id, 'Profile') }}
 
   <script src="{url_static_js}tabs.js"></script>
