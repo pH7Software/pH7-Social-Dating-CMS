@@ -149,9 +149,9 @@ CREATE TABLE IF NOT EXISTS pH7_MembersNotifications (
 
 -- GHOST User. Do not remove ghost default member!
 INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, sex, matchSex, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
-(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '', '', '127.0.0.1', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
+(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '', '', '00.000.00.00', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
 INSERT INTO pH7_MembersInfo (profileId, description, address, street, city, state, zipCode, country) VALUES
-(1, 'This profile no longer exists, so I''m a ghost who replaces him during this time', 'The Ghost City', 'Ghost street', 'Ghost town', 'Ghost state', '000000', 'US');
+(1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Street', 'Ghost Town', 'Ghost State', '000000', 'US');
 -- Privacy settings
 INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES (1, 'all', 'yes', 'yes');
 -- Notifications
