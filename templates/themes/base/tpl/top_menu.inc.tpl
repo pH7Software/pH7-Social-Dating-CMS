@@ -8,15 +8,6 @@
     {* Creating Objects *}
       {{ $oSession = new Framework\Session\Session() }}
 
-
-    {* For LoginUserAs of Admin Panel *}
-      {if $is_admin_auth AND $oSession->exists('login_user_as') }
-        <p class="bold center"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
-      {elseif $is_admin_auth AND $oSession->exists('login_affiliate_as') }
-        <p class="bold center"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
-      {/if}
-
-
     {* Menu for All *}
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
@@ -249,7 +240,7 @@
 
       {if $is_admin_auth AND ( !$is_user_auth AND !$is_aff_auth ) }
 
-        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{lang 'Users/Admins'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {lang 'Users'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{lang 'Users/Admins Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {lang 'Users/Admins'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{lang 'Browse Users'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Users'}</a>
               <ul class="dropdown-menu" role="menu">
@@ -471,6 +462,13 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+
+{* For LoginUserAs of Admin Panel *}
+  {if $is_admin_auth AND $oSession->exists('login_user_as') }
+    <p class="center bold loginas"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
+  {elseif $is_admin_auth AND $oSession->exists('login_affiliate_as') }
+    <p class="center bold loginas"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
+  {/if}
 
     {* Destroy the varaibles *}
       {{

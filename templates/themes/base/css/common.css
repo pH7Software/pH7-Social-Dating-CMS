@@ -32,7 +32,8 @@ body {background: white url(../img/body_bg.jpg) repeat-x;}
 #logo h1:first-letter{text-transform:none} /* Allowing logo name starting by a lowercase like "pH7" */
 header{padding:10px 0 10px;background: url(../img/header2.png) repeat-x top;}
 header, #content{margin-left:auto; margin-right:auto;padding-left:12px;padding-right:12px;}
-#headings, .noscript{margin-top:60px;}
+#headings, .loginas, .noscript{margin-top:60px;}
+.loginas{margin-bottom:-40px;}
 #content:after{content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 footer{padding:10px;margin:10px 20px;font-size:.9em;text-align:center;border-top:1px solid #C8C8C8;}
 footer a{color:#666;}
