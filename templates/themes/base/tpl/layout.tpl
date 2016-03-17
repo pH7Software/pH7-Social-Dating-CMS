@@ -175,6 +175,7 @@
       {/if}
     </footer>
     <!-- Required for the free version of MaxMind Geo DB -->
+    <div class="clear"></div>
     <div class="right vs_marg"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow">http://www.maxmind.com</a></small></div>
     <!-- End Footer -->
 

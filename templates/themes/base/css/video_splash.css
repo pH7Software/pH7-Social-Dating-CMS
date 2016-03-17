@@ -7,7 +7,7 @@
 /** Change the color text to a more visible one (darker/whiter) when the background video on the splash homepage is enabled **/
 body {color:#333 !important}
 #form_login_user label, #promo_text, #form_join_user em {color:#FFF !important}
-footer a {color: #EEE} /* Not !important for this one, otherwise color link will be overwritten as well */
+footer a, footer p{color: #EEE} /* Not !important for this one, otherwise color link will be overwritten as well */
 .ft_dm a.dropdown_item {color:#EEE !important}
 #form_join_user label, nav.bottom_nav {color:#EEE !important}
 .show_dropdown li a {color:#333 !important}
