@@ -2,11 +2,11 @@
 /**
  * @title          Profile Controller
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
- * @version        1.4
+ * @version        1.5
  */
 namespace PH7;
 
@@ -151,7 +151,7 @@ class ProfileController extends Controller
             $this->view->last_activity = VDate::textTimeStamp($oUser->lastActivity);
             $this->view->fields = $oFields;
             $this->view->is_logged = $this->sUserAuth;
-            $this->view->is_himself_profile = $this->str->equals($this->iVisitorId, $this->iProfileId);
+            $this->view->is_himself_profile = $this->_himselfProfile();
 
             // Stat Profile
             Statistic::setView($this->iProfileId, 'Members');
@@ -186,7 +186,7 @@ class ProfileController extends Controller
             $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
                 $this->sUsername, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
         }
-        elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->str->equals($this->iProfileId, $this->iVisitorId))
+        elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->_himselfProfile())
         {
             $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $this->sUsername);
         }
@@ -196,7 +196,7 @@ class ProfileController extends Controller
         {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->str->equals($this->iProfileId, $this->iVisitorId))
+            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->_himselfProfile())
             {
                 $oVisitorModel = new VisitorModel($this->iProfileId, $this->iVisitorId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
 
@@ -214,6 +214,14 @@ class ProfileController extends Controller
             }
         }
         unset($oPrivacyViewsUser, $oPrivacyViewsVisitor);
+    }
+
+    /**
+     * @return boolean Returns TRUE if the user is on his/her profile, FALSE otherwise.
+     */
+    private function _himselfProfile()
+    {
+        return $this->str->equals($this->iVisitorId, $this->iProfileId);
     }
 
     /**
