@@ -171,12 +171,12 @@
         <div class="ft">
           <p>{{ $design->stat() }}</p>
         </div>
-        <p class="small red">{lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="red">{lang 'here'}</a>.</p>
+        <p class="small darkred">{lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="darkred">{lang 'here'}</a>.</p>
       {/if}
     </footer>
     <!-- Required for the free version of MaxMind Geo DB -->
     <div class="clear"></div>
-    <div class="right vs_marg"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow">http://www.maxmind.com</a></small></div>
+    <div class="right vs_marg"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow" class="gray">http://www.maxmind.com</a></small></div>
     <!-- End Footer -->
 
     <!-- Begin Footer JavaScript -->

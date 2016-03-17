@@ -3,7 +3,7 @@
   <ul>
     <li><a href="http://flirtme.biz" title="{lang 'Dating & Flirt Online'}">{lang 'Flirt Me!'}</a></li>
     <li><a href="http://newayup.com" title="{lang 'Language Exchange International'}">{lang 'Language Exchange'}</a></li>
-    <li><a href="http://meetlovelypeople.com" title="{lang 'Free Local Dating Site'}">{lang 'Local Dating Site'}</a>{lang} is the local dating service is our confidence in our software development and asked to be one of our featured partners.{/lang}</li>
+    <li><a href="http://meetlovelypeople.com" title="{lang 'Free Local Dating Site'}">{lang 'Local Dating Site'}</a>{lang} is the Irish local dating service and also our trusted partner in our <a href="http://ph7cms.com/dating-business-by-steps/">dating software development</a>.{/lang}</li>
     <li class="underline vs_marg">{lang 'Your Advertising here!'}</li>
   </ul>
 
