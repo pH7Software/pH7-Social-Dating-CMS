@@ -74,6 +74,10 @@ var Messenger = {
             this.createBox(sUser);
             $("#chatbox_" + sUser + " .chatboxtextarea").focus();
         }
+        else
+        {
+            $('.msg').addClass('alert alert-danger').text(pH7LangIM.cannot_chat_yourself).fadeOut(5000);
+        }
     },
 
     createBox: function (sBoxTitle, iMinimizeBox)
@@ -419,9 +423,7 @@ var Messenger = {
 
     _check: function (sUser)
     {
-        if (sUser == this.sUsername)
-        {
-            $('.msg').addClass('alert alert-danger').text(pH7LangIM.cannot_chat_yourself).fadeOut(5000);
+        if (sUser == this.sUsername) {
             return false;
         }
         return true;
