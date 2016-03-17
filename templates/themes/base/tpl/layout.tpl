@@ -173,8 +173,9 @@
         </div>
         <p class="small red">{lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="red">{lang 'here'}</a>.</p>
       {/if}
-      <div class="right"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow">http://www.maxmind.com</a></small></div>
     </footer>
+    <!-- Required for the free version of MaxMind Geo DB -->
+    <div class="right vs_marg"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow">http://www.maxmind.com</a></small></div>
     <!-- End Footer -->
 
     <!-- Begin Footer JavaScript -->
