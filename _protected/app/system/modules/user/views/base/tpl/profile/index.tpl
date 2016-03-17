@@ -207,6 +207,12 @@
 
   <script src="{url_static_js}tabs.js"></script>
   <script>tabs('p', ['general','map','friend',{if $is_logged AND !$is_himself_profile}'mutual_friend',{/if}'picture','video','forum','note','visitor']);</script>
+  <script>
+  /* Google Map has issues with the screen map (it displays only gray screen) when it isn't visible when loaded (through profile ajax tabs), so just refresh the page to see correctly the map */
+  $('ol#toc li a[href=#map]').click(function() {
+      location.reload();
+  });
+  </script>
 
   {* Signup Popup *}
   {if !$is_logged AND !AdminCore::auth()}
