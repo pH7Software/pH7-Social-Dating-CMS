@@ -9,7 +9,6 @@
 {/if}
 
 {if empty($error)}
-
   <ol id="toc">
     <li><a href="#general"><span>{lang 'Info'}</span></a></li>
     <li><a href="#map"><span>{lang 'Map'}</span></a></li>
@@ -163,34 +162,41 @@
     </div>
   {/if}
 
-  <div class="content" id="picture">
-    <script>
-      var url_picture_block = '{{ $design->url('picture','main','albums',$username) }}';
-      $('#picture').load(url_picture_block + ' #picture_block');
-    </script>
-  </div>
+  {if $is_picture_enabled}
+    <div class="content" id="picture">
+      <script>
+        var url_picture_block = '{{ $design->url('picture','main','albums',$username) }}';
+        $('#picture').load(url_picture_block + ' #picture_block');
+      </script>
+    </div>
+  {/if}
 
-  <div class="content" id="video">
-    <script>
-      var url_video_block = '{{ $design->url('video','main','albums',$username) }}';
-      $('#video').load(url_video_block + ' #video_block');
-    </script>
-  </div>
+  {if $is_video_enabled}
+    <div class="content" id="video">
+      <script>
+        var url_video_block = '{{ $design->url('video','main','albums',$username) }}';
+        $('#video').load(url_video_block + ' #video_block');
+      </script>
+    </div>
+  {/if}
 
-  <div class="content" id="forum">
-    <script>
-      var url_forum_block = '{{ $design->url('forum','forum','showpostbyprofile',$username) }}';
-      $('#forum').load(url_forum_block + ' #forum_block');
-    </script>
-  </div>
+  {if $is_forum_enabled}
+    <div class="content" id="forum">
+      <script>
+        var url_forum_block = '{{ $design->url('forum','forum','showpostbyprofile',$username) }}';
+        $('#forum').load(url_forum_block + ' #forum_block');
+      </script>
+    </div>
+  {/if}
 
-  <div class="content" id="note">
-    <script>
-      var url_note_block = '{{ $design->url('note','main','author',$username) }}';
-      $('#note').load(url_note_block + ' #note_block');
-    </script>
-  </div>
-
+  {if $is_note_enabled}
+    <div class="content" id="note">
+      <script>
+        var url_note_block = '{{ $design->url('note','main','author',$username) }}';
+        $('#note').load(url_note_block + ' #note_block');
+      </script>
+    </div>
+  {/if}
 
   <div class="content" id="visitor">
     <script>
@@ -205,13 +211,27 @@
 
   {{ CommentDesignCore::link($id, 'Profile') }}
 
+  {* Setup the profile tabs *}
   <script src="{url_static_js}tabs.js"></script>
-  <script>tabs('p', ['general','map','friend',{if $is_logged AND !$is_himself_profile}'mutual_friend',{/if}'picture','video','forum','note','visitor']);</script>
   <script>
-  /* Google Map has issues with the screen map (it displays only gray screen) when it isn't visible when loaded (through profile ajax tabs), so just refresh the page to see correctly the map */
-  $('ol#toc li a[href=#map]').click(function() {
+    tabs('p', [
+          'general',
+          'map',
+          'friend',
+          {if $is_logged AND !$is_himself_profile}'mutual_friend',{/if}
+          {if $is_picture_enabled}'picture',{/if}
+          {if $is_video_enabled}'video',{/if}
+          {if $is_forum_enabled}'forum',{/if}
+          {if $is_note_enabled}'note',{/if}
+          'visitor'
+        ]);
+  </script>
+
+  <script>
+    /* Google Map has issues with the screen map (it displays only gray screen) when it isn't visible when loaded (through profile ajax tabs), so just refresh the page to see correctly the map */
+    $('ol#toc li a[href=#map]').click(function() {
       location.reload();
-  });
+    });
   </script>
 
   {* Signup Popup *}
@@ -220,7 +240,5 @@
   {/if}
 
 {else}
-
   <p class="center">{error}</p>
-
 {/if}
