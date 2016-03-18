@@ -18,7 +18,7 @@ use PH7\Framework\Url\Url, PH7\Framework\File\File;
 class QRCode
 {
 
-    const API_URL = 'http://chart.apis.google.com/chart?chs=';
+    const API_URL = 'https://chart.googleapis.com/chart?chs=';
 
     private $_sData;
 
@@ -323,6 +323,7 @@ class QRCode
     public function finish()
     {
         $this->_sData .= 'END:VCARD';
+        $this->_sData = Url::encode($this->_sData);
         return $this;
     }
 
@@ -336,7 +337,6 @@ class QRCode
      */
     public function get($iSize = 150, $cECLevel = 'L', $iMargin = 1)
     {
-        $this->_sData = Url::encode($this->_sData);
         return static::API_URL . $iSize . 'x' . $iSize . '&cht=qr&chld=' . $cECLevel . '|' . $iMargin . '&chl=' . $this->_sData;
     }
 
