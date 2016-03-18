@@ -55,8 +55,8 @@ class Video extends F\Upload
 
         if (!file_exists($this->sFfmpegPath))
         {
-            $sMsg = t('FFmpeg is not installed on your server or the path cannot be found. Please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini"');
-            exit($sMsg);
+            $sMsg = t('FFmpeg is not installed on the server or the path cannot be found. Please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini"');
+            throw new F\Exception($sMsg);
         }
 
         $this->aFile = $aFile;
