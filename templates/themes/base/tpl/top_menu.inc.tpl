@@ -44,7 +44,7 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url('user', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax">{lang 'People'}</a></li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','search', 'index') }}" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Search'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','search', 'index') }}" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('user', 'search', 'quick') }}" title="{lang 'Quick Search'}" data-load="ajax">{lang 'Quick Search'}</a></li>
                 <li><a href="{{ $design->url('user', 'search', 'advanced') }}" title="{lang 'Advanced Search'}" data-load="ajax">{lang 'Advanced Search'}</a></li>
@@ -100,7 +100,7 @@
         {/if}
 
         {if $is_video_enabled}
-          <li class="dropdown"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Video Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Video'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('video','main','index') }}" title="{lang 'Video Gallery'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-youtube-play"></i> {lang 'Video'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('video','main','index') }}" rel="nofollow" title="{lang 'Video Gallery'}" data-load="ajax">{lang 'Videos'}</a></li>
               <li><a href="{{ $design->url('video','main','search') }}" title="{lang 'Search Videos'}" data-load="ajax">{lang 'Search'}</a></li>
@@ -127,7 +127,7 @@
         {/if}
 
         {if $is_note_enabled}
-          <li class="dropdown"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Community Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Note'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Community Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-commenting-o"></i> {lang 'Note'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('note','main','index') }}" rel="nofollow" title="{lang 'Community Notes'}" data-load="ajax">{lang 'Notes'}</a></li>
               <li><a href="{{ $design->url('note','main','search') }}" title="{lang 'Search Notes'}" data-load="ajax">{lang 'Search'}</a></li>
@@ -164,7 +164,7 @@
             </li>
           </noscript>
 
-          <li class="dropdown"><a href="{{ $design->url('user','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('user','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'My Settings'}</a></li>
               <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See My Profile'}</a></li>
@@ -224,7 +224,7 @@
 
         <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Gets Banners'}">{lang 'Banners'}</a></li>
 
-        <li class="dropdown"><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My Account'}">{lang 'Account'}</a></li>
             <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{lang 'Edit my Account'}">{lang 'Edit my account'}</a></li>
@@ -242,15 +242,15 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{lang 'Users/Admins Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> {lang 'Users/Admins'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{lang 'Browse Users'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Users'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{lang 'Browse Users'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user"></i> {lang 'Users'}</a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{lang 'Browse Users'}">{lang 'Browse'}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','search') }}" title="{lang 'Search Users'}">{lang 'Search'}</a></li>
-                <li><a href="{{ $design->url('report','admin','index') }}" title="{lang 'Report'}">{lang 'Report'}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','add') }}" title="{lang 'Add a User'}">{lang 'Add User'}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{lang 'Import Users'}">{lang 'Import Users'}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','addfakeprofiles') }}" title="{lang 'Fake Profiles Automatic Generator'}">{lang 'Fake Profile Generator'}</a></li>
-                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','user') }}" title="{lang 'User Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'User Fields'}</a>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}" title="{lang 'Browse Users'}"><i class="fa fa-users"></i> {lang 'Browse'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','search') }}" title="{lang 'Search Users'}"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
+                <li><a href="{{ $design->url('report','admin','index') }}" title="{lang 'Report'}"><i class="fa fa-question"></i> {lang 'Report'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','add') }}" title="{lang 'Add a User'}"><i class="fa fa-user-plus"></i> {lang 'Add User'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','import') }}" title="{lang 'Import Users'}"><i class="fa fa-user-plus"></i> {lang 'Import Users'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'user','addfakeprofiles') }}" title="{lang 'Fake Profiles Automatic Generator'}"><i class="fa fa-user-plus"></i> {lang 'Fake Profile Generator'}</a></li>
+                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','user') }}" title="{lang 'User Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-check-circle-o"></i> {lang 'User Fields'}</a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{{ $design->url('field','field','all','user') }}" title="{lang 'Fields List'}">{lang 'Fields List'}</a></li>
                     <li><a href="{{ $design->url('field','field','add','user') }}" title="{lang 'Add Fields'}">{lang 'Add Fields'}</a></li>
@@ -258,11 +258,11 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}" title="{lang 'Browse Admins'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Admins'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}" title="{lang 'Browse Admins'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user"></i> {lang 'Admins'}</a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}" title="{lang 'Browse Admins'}">{lang 'Browse'}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','search') }}" title="{lang 'Search an Admin'}">{lang 'Search'}</a></li>
-                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','add') }}" title="{lang 'Add an Admin'}">{lang 'Add Admin'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','browse') }}" title="{lang 'Browse Admins'}"><i class="fa fa-users"></i> {lang 'Browse'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','search') }}" title="{lang 'Search an Admin'}"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
+                <li><a href="{{ $design->url(PH7_ADMIN_MOD,'admin','add') }}" title="{lang 'Add an Admin'}"><i class="fa fa-user-plus"></i> {lang 'Add Admin'}</a></li>
               </ul>
             </li>
           </ul>
@@ -280,19 +280,19 @@
           </ul>
         </li>
 
-        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Mods'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Modules Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-puzzle-piece"></i> {lang 'Mods'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','disable') }}" title="{lang 'Enable/Disable System Modules'}">{lang 'Enable/Disable Modules'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'module','index') }}" title="{lang 'Third-party Modules Manager'}">{lang 'Third-party Mods Manager'}</a></li>
 
             {if $is_newsletter_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Newsletters'}</a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Newsletters'}</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}">{lang 'Newsletters'}</a></li>
                   <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Subscribers'}</a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}">{lang 'Browse'}</a></li>
-                      <li><a href="{{ $design->url('newsletter', 'admin', 'search') }}" title="{lang 'Search Subscribers'}">{lang 'Search'}</a></li>
+                      <li><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}"><i class="fa fa-users"></i> {lang 'Browse'}</a></li>
+                      <li><a href="{{ $design->url('newsletter', 'admin', 'search') }}" title="{lang 'Search Subscribers'}"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -304,7 +304,7 @@
             {/if}
 
             {if $is_blog_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Blog'}">{lang 'Blog'}</a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Admin Blog'}"><i class="fa fa-commenting-o"></i> {lang 'Blog'}</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('blog','admin','index') }}" title="{lang 'Blog Admin'}">{lang 'Blog Admin'}</a></li>
                   <li><a href="{{ $design->url('blog','admin','add') }}" title="{lang 'Add a Blog Post'}">{lang 'Add a Post'}</a></li>
@@ -325,11 +325,11 @@
               <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('affiliate','admin','index') }}" title="{lang 'Affiliate Admin Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Affiliate'}</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('affiliate','admin','banner') }}" title="{lang 'Banners Manager'}">{lang 'Banners'}</a></li>
-                  <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}">{lang 'Browse Affiliates'}</a></li>
-                  <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}">{lang 'Search an Affiliate'}</a></li>
-                  <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add an Affiliate'}">{lang 'Add Affiliate'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}"><i class="fa fa-users"></i> {lang 'Browse Affiliates'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}"><i class="fa fa-search"></i> {lang 'Search an Affiliate'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add an Affiliate'}"><i class="fa fa-user-plus"></i> {lang 'Add Affiliate'}</a></li>
                   <li><a href="{{ $design->url('affiliate','admin','config') }}" title="{lang 'Affiliate Settings'}">{lang 'Settings'}</a></li>
-                  <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Affiliate Fields'}</a>
+                  <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-check-circle-o"></i> {lang 'Affiliate Fields'}</a>
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Fields List'}">{lang 'Fields List'}</a></li>
                       <li><a href="{{ $design->url('field','field','add','aff') }}" title="{lang 'Add Fields'}">{lang 'Add Fields'}</a></li>
@@ -339,7 +339,7 @@
               </li>
             {/if}
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('payment','admin','index') }}" title="{lang 'Payment System'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Payment'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('payment','admin','index') }}" title="{lang 'Payment System'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-credit-card"></i> {lang 'Billing'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','general') }}#p=registration" title="{lang 'Set the Default Membership Group for new Users'}">{lang 'Default Membership Group'}</a></li>
                 <li><a href="{{ $design->url('payment','admin','membershiplist') }}" title="{lang 'Memberships List'}">{lang 'Memberships List'}</a></li>
@@ -348,15 +348,15 @@
               </ul>
             </li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('mail','admin','index') }}" title="{lang 'Email Management'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Email Management'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('mail','admin','index') }}" title="{lang 'Email Management'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o"></i> {lang 'Email Management'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('mail','admin','msglist') }}" title="{lang 'Messages Monitor'}">{lang 'Messages Monitor'}</a></li>
-                <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search Email'}">{lang 'Search Message'}</a></li>
+                <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search Email'}"><i class="fa fa-search"></i> {lang 'Search Message'}</a></li>
               </ul>
             </li>
 
             {if $is_connect_enabled}
-              <li><a href="{{ $design->url('connect', 'admin', 'config') }}">{lang 'Universal Login Config'}</a></li>
+              <li><a href="{{ $design->url('connect', 'admin', 'config') }}"><i class="fa fa-share-alt-square"></i> {lang 'Universal Login Config'}</a></li>
             {/if}
 
           </ul>
@@ -377,7 +377,7 @@
             unset($oModeratorModel);
           }}
 
-        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','index') }}" title="{lang 'User Moderation'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Moderation'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','index') }}" title="{lang 'User Moderation'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user-secret"></i> {lang 'Moderation'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumpicture') }}" title="{lang 'Moderate Albums'}">{lang 'Picture Album'} <span class="badge">{count_moderate_total_album_picture}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}">{lang 'Picture'} <span class="badge">{count_moderate_total_picture}</span></a></li>
@@ -401,7 +401,7 @@
           </ul>
         </li>
 
-        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'file','index') }}" title="{lang 'File Management/CMS'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Files'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'file','index') }}" title="{lang 'File Management/CMS'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-file"></i> {lang 'Files'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display') }}" title="{lang 'Public File Management'}">{lang 'Public Files'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display','protected') }}" title="{lang 'Protected File Management'}">{lang 'Protected Files'}</a></li>
@@ -448,7 +448,7 @@
           </ul>
         </li>
 
-        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Account'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{lang 'Edit my account'}"><i class="fa fa-pencil fa-fw"></i> {lang 'Edit ny account'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
