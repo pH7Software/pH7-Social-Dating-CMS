@@ -71,14 +71,14 @@
       {if ( !$is_aff_auth AND !$is_admin_auth ) OR $oSession->exists('login_user_as') }
 
         {if $is_chat_enabled OR $is_chatroulette_enabled}
-          <li class="dropdown"><a href="{{ $design->url('chat','home','index') }}" title="{lang 'The Free Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Chat'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('chat','home','index') }}" title="{lang 'The Free Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               {if $is_chat_enabled}
-                <li><a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{lang 'Video Chat'}" data-load="ajax">{lang 'Chat'}</a></li>
+                <li><a href="{{ $design->url('chat','home','index') }}" rel="nofollow" title="{lang 'Video Chat'}" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'}</a></li>
               {/if}
 
               {if $is_chatroulette_enabled}
-                <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{lang 'Chat Roulette'}">{lang 'Chatroulette'}</a></li>
+                <li><a href="{{ $design->url('chatroulette','home','index') }}" title="{lang 'Chat Roulette'}"><i class="fa fa-star-half-o"></i> {lang 'Chatroulette'}</a></li>
               {/if}
 
             </ul>
@@ -109,18 +109,18 @@
         {/if}
 
         {if $is_game_enabled}
-          <li class="dropdown"><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Game'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-gamepad"></i> {lang 'Game'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{lang 'Games Zone'}" data-load="ajax">{lang 'Game'}</a></li>
+              <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{lang 'Games Zone'}" data-load="ajax"><i class="fa fa-gamepad"></i> {lang 'Game'}</a></li>
               <li><a href="{{ $design->url('game','main','search') }}" title="{lang 'Search Games'}" data-load="ajax">{lang 'Search'}</a></li>
             </ul>
           </li>
         {/if}
 
         {if $is_forum_enabled}
-          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Forum'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Forums'}" data-load="ajax">{lang 'Forum'}</a></li>
+              <li><a href="{{ $design->url('forum','forum','index') }}" rel="nofollow" title="{lang 'Forums'}" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
               <li><a href="{{ $design->url('forum','forum','search') }}" title="{lang 'Search Topics'}" data-load="ajax">{lang 'Search'}</a></li>
             </ul>
           </li>
@@ -270,7 +270,7 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog fa-fw"></i> {lang 'Settings'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{lang 'General Settings'}">{lang 'General'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{lang 'General Settings'}"><i class="fa fa-tachometer"></i> {lang 'General'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting','metamain') }}" title="{lang 'Settings'}">{lang 'Meta Tags'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','ads') }}" title="{lang 'Add Banners on the best click-through-rate locations'}">{lang 'Advertisement'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{lang 'Analytics Code'}">{lang 'Analytics Code'}</a></li>
@@ -300,7 +300,7 @@
             {/if}
 
             {if $is_forum_enabled}
-              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Forum Admin'}">{lang 'Forum'}</a></li>
+              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Forum Admin'}"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
             {/if}
 
             {if $is_blog_enabled}
@@ -313,7 +313,7 @@
             {/if}
 
             {if $is_game_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Game'}</a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-gamepad"></i> {lang 'Game'}</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}">{lang 'Admin Game'}</a></li>
                   <li><a href="{{ $design->url('game','admin','add') }}" title="{lang 'Add a Game'}">{lang 'Add a Game'}</a></li>
@@ -415,16 +415,16 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','index') }}" title="{lang 'Tool'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-wrench"></i> {lang 'Tools'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','index') }}" title="{lang 'General Tools'}">{lang 'Tools'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','index') }}" title="{lang 'General Tools'}"><i class="fa fa-database"></i> {lang 'Tools'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}"><i class="fa fa-eye"></i> {lang 'Environment Mode'}</a></li>
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{lang 'Caches Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Caches Manager'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{lang 'Caches Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-tachometer"></i> {lang 'Caches Manager'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{lang 'Caches Controls'}">{lang 'Caches Manager'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cacheconfig') }}" title="{lang 'Cache Settings'}">{lang 'Cache Setting'}</a></li>
               </ul>
             </li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','backup') }}" title="{lang 'Backup Manager'}">{lang 'Backup Manager'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','freeSpace') }}" title="{lang 'Free Space Server'}">{lang 'Free Space Server'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','backup') }}" title="{lang 'Backup Manager'}"><i class="fa fa-floppy-o"></i> {lang 'Backup Manager'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','freeSpace') }}" title="{lang 'Free Space Server'}"><i class="fa fa-refresh"></i> {lang 'Free Space Server'}</a></li>
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'info','index') }}" title="{lang 'Information'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-info-circle"></i> {lang 'Info'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','stat') }}" title="{lang 'Site Statistics'}">{lang 'Site Stats'}</a></li>
