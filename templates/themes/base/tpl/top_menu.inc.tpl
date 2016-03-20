@@ -42,7 +42,7 @@
 
         <li class="dropdown"><a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-user fa-fw"></i> {lang 'People'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('user', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax">{lang 'People'}</a></li>
+            <li><a href="{{ $design->url('user', 'browse', 'index') }}" rel="nofollow" title="{lang 'Members'}" data-load="ajax"><i class="fa fa-users"></i> {lang 'People'}</a></li>
 
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user','search', 'index') }}" title="{lang 'Search the members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a>
               <ul class="dropdown-menu" role="menu">
@@ -53,7 +53,7 @@
 
             <li><a href="{{ $design->url('user','country','index',$country.PH7_SH.$city) }}" title="{lang 'Users in %0% through the Map!',$city}"><i class="fa fa-map-marker"></i> {lang 'Users in your Area'}</a></li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user', 'birthday', 'index') }}" title="{lang 'Users Birthday'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">{lang 'Birthday'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('user', 'birthday', 'index') }}" title="{lang 'Users Birthday'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-birthday-cake"></i> {lang 'Birthday'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('user', 'birthday', 'index', 'all') }}" rel="nofollow" title="{lang 'All Birthday'}" data-load="ajax">{lang 'All Birthday'}</a></li>
                 <li><a href="{{ $design->url('user', 'birthday', 'index', 'male') }}" title="{lang 'Men Birthday'}" data-load="ajax">{lang 'Men Birthday'}</a></li>
@@ -127,7 +127,7 @@
         {/if}
 
         {if $is_note_enabled}
-          <li class="dropdown"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Community Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-commenting-o"></i> {lang 'Note'} <span class="caret"></span></a>
+          <li class="dropdown"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Community Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-newspaper-o"></i> {lang 'Note'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('note','main','index') }}" rel="nofollow" title="{lang 'Community Notes'}" data-load="ajax">{lang 'Notes'}</a></li>
               <li><a href="{{ $design->url('note','main','search') }}" title="{lang 'Search Notes'}" data-load="ajax">{lang 'Search'}</a></li>
@@ -189,7 +189,7 @@
               {/if}
 
               {if $is_note_enabled}
-                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Note'}</a>
+                <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{{ $design->url('note','main','add') }}" title="{lang 'Add a Note'}">{lang 'Add a Note'}</a></li>
                     <li><a href="{{ $design->url('note','main','author', $oSession->get('member_username')) }}" title="{lang 'My Notes'}">{lang 'My Notes'}</a></li>
@@ -387,7 +387,7 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}">{lang 'Profile Background'} <span class="badge">{count_moderate_total_background}</span></a></li>
 
             {if $is_note_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Notes'} <span class="badge">{count_moderate_total_note}</span></a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Notes'} <span class="badge">{count_moderate_total_note}</span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{lang 'Moderate the Note Posts'}">{lang 'Note Posts'} <span class="badge">{count_moderate_total_note}</span></a></li>
                 </ul>
@@ -401,7 +401,7 @@
           </ul>
         </li>
 
-        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'file','index') }}" title="{lang 'File/Page Manager/CMS'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-file"></i> {lang 'File/Page'} <span class="caret"></span></a>
+        <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'file','index') }}" title="{lang 'File/Page CMS'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-file"></i> {lang 'File/Page'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display') }}" title="{lang 'Public File Manager'}">{lang 'Public Files'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display','protected') }}" title="{lang 'Protected File Manager'}">{lang 'Protected Files'}</a></li>
