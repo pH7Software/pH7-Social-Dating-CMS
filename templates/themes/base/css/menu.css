@@ -19,7 +19,12 @@
 .dropdown-menu > li > a:focus {
     font-size:13px;
     color:#08c;
+    text-align:center;
 }
 /* Rewrite some CSS classes for Bootstrap fixed menu for better render in pH7CMS desin */
 .navbar-default{border-color:#ccc !important}
 .navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse{max-height:none;}
+
+/* Change the padding space between each drop-down menu */
+.nav>li>a{padding: 10px 9px;}
+
