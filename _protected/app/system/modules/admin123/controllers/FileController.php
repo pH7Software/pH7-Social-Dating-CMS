@@ -29,8 +29,7 @@ class FileController extends Controller
         $sIsDirTxt = ($sDir == 'protected') ? t('Protected') : t('Public');
         $this->sTitle = t('File Manager System | %0%', $sIsDirTxt);
         $this->view->type = ($sDir == 'protected') ? 'protected' : 'public';
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->output();
     }
 
@@ -88,21 +87,17 @@ class FileController extends Controller
 
     public function publicEdit()
     {
-        $this->sTitle = t('Public Files');
-
         $this->sTitle = t('Edit Public Files');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->output();
     }
 
     public function protectedEdit()
     {
-        $this->sTitle = t('Protected Files');
-
         $this->sTitle = t('Edit Protected Files');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->output();
     }
 
@@ -116,10 +111,9 @@ class FileController extends Controller
     private function _displayAction($sFile, $mExt = null)
     {
         if (empty($this->sTitle))
-            $this->sTitle = t('File Management');
+            $this->sTitle = t('File Manager');
 
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         $this->view->filesList = $this->file->getFileList($sFile, $mExt);
     }
