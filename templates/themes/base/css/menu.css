@@ -19,8 +19,17 @@
 .dropdown-menu > li > a:focus {
     font-size:13px;
     color:#08c;
-    text-align:center;
 }
+
+/* Align the text to center only when the menu is toggled */
+@media screen and (max-width: 767px)
+{
+    .navbar-default .navbar-nav > li > a,
+    .dropdown-menu > li > a {
+        text-align:center;
+    }
+}
+
 /* Rewrite some CSS classes for Bootstrap fixed menu for better render in pH7CMS desin */
 .navbar-default{border-color:#ccc !important}
 .navbar-fixed-bottom .navbar-collapse, .navbar-fixed-top .navbar-collapse{max-height:none;}
