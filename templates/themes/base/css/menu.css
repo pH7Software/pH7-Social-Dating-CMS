@@ -28,6 +28,10 @@
     .dropdown-menu > li > a {
         text-align:center;
     }
+    /* Add gray stripes to separate each main drop-down menu */
+    .navbar-default .navbar-nav > li {
+        border-top:1px solid #dfdfdf;
+    }
 }
 
 /* Rewrite some CSS classes for Bootstrap fixed menu for better render in pH7CMS desin */
@@ -36,4 +40,3 @@
 
 /* Change the padding space between each drop-down menu */
 .nav>li>a{padding: 10px 9px;}
-
