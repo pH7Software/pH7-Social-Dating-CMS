@@ -329,7 +329,7 @@ class Http extends \PH7\Framework\Http\Http
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN)
             return (new \PH7\Framework\Security\Validate\Filter)->xssClean($aType[$sKey]);
 
-        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey], true);
+        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey]);
     }
 
     /**
