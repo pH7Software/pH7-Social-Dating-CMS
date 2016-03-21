@@ -291,8 +291,8 @@
                   <li><a href="{{ $design->url('newsletter', 'admin', 'index') }}" title="{lang 'Mass Mailer'}">{lang 'Newsletters'}</a></li>
                   <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Subscribers'}</a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}"><i class="fa fa-users"></i> {lang 'Browse'}</a></li>
-                      <li><a href="{{ $design->url('newsletter', 'admin', 'search') }}" title="{lang 'Search Subscribers'}"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
+                      <li><a href="{{ $design->url('newsletter', 'admin', 'browse') }}" title="{lang 'Browse Subscribers'}">{lang 'Browse'}</a></li>
+                      <li><a href="{{ $design->url('newsletter', 'admin', 'search') }}" title="{lang 'Search Subscribers'}">{lang 'Search'}</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -325,11 +325,11 @@
               <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('affiliate','admin','index') }}" title="{lang 'Affiliate Admin Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-money"></i> {lang 'Affiliate'}</a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('affiliate','admin','banner') }}" title="{lang 'Banners Manager'}">{lang 'Banners'}</a></li>
-                  <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}"><i class="fa fa-users"></i> {lang 'Browse Affiliates'}</a></li>
-                  <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}"><i class="fa fa-search"></i> {lang 'Search an Affiliate'}</a></li>
-                  <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add an Affiliate'}"><i class="fa fa-user-plus"></i> {lang 'Add Affiliate'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','browse') }}" title="{lang 'Affiliates List'}">{lang 'Browse Affiliates'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','search') }}" title="{lang 'Search an Affiliate'}">{lang 'Search an Affiliate'}</a></li>
+                  <li><a href="{{ $design->url('affiliate','admin','add') }}" title="{lang 'Add an Affiliate'}">{lang 'Add Affiliate'}</a></li>
                   <li><a href="{{ $design->url('affiliate','admin','config') }}" title="{lang 'Affiliate Settings'}">{lang 'Settings'}</a></li>
-                  <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-check-circle-o"></i> {lang 'Affiliate Fields'}</a>
+                  <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Affiliate Fields'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Affiliate Fields'}</a>
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="{{ $design->url('field','field','all','aff') }}" title="{lang 'Fields List'}">{lang 'Fields List'}</a></li>
                       <li><a href="{{ $design->url('field','field','add','aff') }}" title="{lang 'Add Fields'}">{lang 'Add Fields'}</a></li>
@@ -351,7 +351,7 @@
             <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('mail','admin','index') }}" title="{lang 'Email Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o"></i> {lang 'Email Manager'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('mail','admin','msglist') }}" title="{lang 'Messages Monitor'}">{lang 'Messages Monitor'}</a></li>
-                <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search Email'}"><i class="fa fa-search"></i> {lang 'Search Message'}</a></li>
+                <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search Email'}">{lang 'Search Message'}</a></li>
               </ul>
             </li>
 
