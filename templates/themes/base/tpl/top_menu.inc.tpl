@@ -403,13 +403,13 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'file','index') }}" title="{lang 'File/Page CMS'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-file"></i> {lang 'File/Page'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display') }}" title="{lang 'Public File Manager'}">{lang 'Public Files'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display','protected') }}" title="{lang 'Protected File Manager'}">{lang 'Protected Files'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','pagedisplay') }}" title="{lang 'Display Page of Module'}">{lang 'Page Module'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','maildisplay') }}" title="{lang 'Display Email Template'}">{lang 'Email Template'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','themedisplay') }}" title="{lang 'Display the all Templates Files'}">{lang 'Templates Files'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','suggestiondisplay') }}" title="{lang 'Suggestion List'}">{lang 'Suggestion List'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','bandisplay') }}" title="{lang 'Ban Options'}">{lang 'Ban Options'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display') }}" title="{lang 'Public File Manager'}"><i class="fa fa-file"></i> {lang 'Public Files'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','display','protected') }}" title="{lang 'Protected File Manager'}"><i class="fa fa-file"></i> {lang 'Protected Files'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','pagedisplay') }}" title="{lang 'Display Page of Module'}"><i class="fa fa-pencil-square-o"></i> {lang 'Page Module'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','maildisplay') }}" title="{lang 'Display Email Template'}"><i class="fa fa-pencil"></i> {lang 'Email Template'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','themedisplay') }}" title="{lang 'Display all Templates Files'}"><i class="fa fa-paint-brush"></i> {lang 'Templates Files'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','suggestiondisplay') }}" title="{lang 'Suggestion List'}"><i class="fa fa-plus-circle"></i> {lang 'Suggestion List'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'file','bandisplay') }}" title="{lang 'Ban Options'}"><i class="fa fa-ban"></i> {lang 'Ban Options'}</a></li>
           </ul>
         </li>
 
