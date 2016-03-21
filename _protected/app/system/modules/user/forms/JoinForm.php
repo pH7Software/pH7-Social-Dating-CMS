@@ -84,8 +84,8 @@ class JoinForm
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user2', 'form_join_user2'));
         $oForm->addElement(new \PFBC\Element\Token('join2'));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('female'=>t('Female') . ' &#9792;', 'male'=>t('Male') . ' &#9794;', 'couple'=>t('Couple')), array('value'=>'female', 'title'=>t('Please specify your gender.'), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Interested in:'), 'match_sex', array('male'=>t('Male') . ' &#9794;', 'female'=>t('Female') . ' &#9792;', 'couple'=>t('Couple')), array('value'=>'male', 'title'=>t('Please specify whom you are looking for'), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('female'=>t('Female') . ' <i class="fa fa-venus"></i>', 'male'=>t('Male') . ' <i class="fa fa-mars"></i>', 'couple'=>t('Couple') . ' <i class="fa fa-venus-mars"></i>'), array('value'=>'female', 'title'=>t('Please specify your gender.'), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Interested in:'), 'match_sex', array('male'=>t('Male') . ' <i class="fa fa-mars"></i>', 'female'=>t('Female') . ' <i class="fa fa-venus"></i>', 'couple'=>t('Couple') . ' <i class="fa fa-venus-mars"></i>'), array('value'=>'male', 'title'=>t('Please specify whom you are looking for'), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Date(t('Your Date of birth:'), 'birth_date', array('placeholder'=>t('Month/Day/Year'), 'id'=>'birth_date', 'title'=>t('Please specify your birth date using the calendar or with this format: Month/Day/Year.'), 'onblur'=>'CValid(this.value, this.id)', 'validation'=> new \PFBC\Validation\BirthDate, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
         $oForm->addElement(new \PFBC\Element\Country(t('Your Country:'), 'country', array('id'=>'str_country', 'value'=> Geo::getCountryCode(), 'title'=>t('Select the country where you live.'), 'required'=>1)));
