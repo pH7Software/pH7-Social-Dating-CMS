@@ -26,8 +26,15 @@ PH7\Framework\File as F;
 class UpgradeCore extends Kernel
 {
 
+    /**
+     * Remote update URL.
+     */
+    const REMOTE_URL = 'http://update.hizup.com';
+
     const
     /**
+     * Internal update folders.
+     *
      * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
      */
     DIR = 'upgrade',
