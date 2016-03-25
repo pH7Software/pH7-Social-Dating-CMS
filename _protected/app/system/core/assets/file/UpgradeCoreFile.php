@@ -174,8 +174,8 @@ class UpgradeCore extends Kernel
                             if(!$this->_displayIfIsErr())
                             {
                                 /**
-                                 It resets the HTML variable ($this->_sHtml) to not display versions upgrade available.
-                                 The user can refresh the page to réaficher the upgrade available.
+                                 * It resets the HTML variable ($this->_sHtml) to not display versions upgrade available.
+                                 * The user can refresh the page to réaficher the upgrade available.
                                 */
                                 $this->_sHtml = '<h3 class="success">' . t('Your update ran successfully!') . '</h3>';
 
@@ -274,6 +274,24 @@ class UpgradeCore extends Kernel
              '"<code>environment = production ; production or development</code>"<br />' .
              t('4) Change the permission of the file to write only for users and reading for the other groups (0644 in octal).');
         }
+    }
+
+    /**
+     * Download the new version path from HiZup remote server to the client server.
+     * Then, extract the file to "_repository" folder to set it available for the next update.
+     * Then, remove zip archive file as we don't need it anymore.
+     *
+     * @param string $sNewVersion Version number (e.g. "1.3.6")
+     */
+    private function _downloadDate($sNewVersion)
+    {
+        $sZipFileName = $sNewVersion '.zip';
+        $sDestinationPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS;
+
+        $rFile = $this->_oFile->getUrlContents(self::REMOTE_URL . $sZipFileName);
+        $oFile->putFile($sDestinationPath . PH7_TMP . $sZipFileName, $rFile);
+        $oFile->zipExtract($sDestinationPath . PH7_TMP . $sZipFileName, $Destination);
+        $oFile->deleteFile($sDestinationPath . PH7_TMP . $sZipFileName);
     }
 
     /**
