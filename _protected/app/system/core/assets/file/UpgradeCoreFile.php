@@ -82,18 +82,46 @@ class UpgradeCore extends Kernel
         echo '</div></body></html>';
     }
 
+    /**
+     * @return array Returns all version numbers.
+     */
+    public function getVersions()
+    {
+        return file(static::REMOTE_URL . 'all_versions.txt');
+    }
+
+    /**
+     * Checks and returns the correct needed version for the current pH7CMS installation.
+     *
+     * @return mixed (string | boolean) The version needed number for the current pH7CMS installation.
+     */
+    public function versionNeeded()
+    {
+        $aVersions = $this->getVersions();
+
+        if ($iKey = array_search(($aVersions,  Kernel::SOFTWARE_VERSION))
+        {
+            return $aVersions[$iKey+1];
+        }
+        else
+        {
+            // If no next version is found, just returns the current one.
+            return Kernel::SOFTWARE_VERSION;
+        }
+    }
+
     private function _prepare()
     {
-        if(!AdminCore::auth())
+        if (!AdminCore::auth())
         {
             // Checking if the administrator is connected
             $this->_aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 
-        if(!$this->_displayIfIsErr())
+        if (!$this->_displayIfIsErr())
         {
             // If not found error
-            if(!$this->_showAvailableUpgrades())
+            if (!$this->_showAvailableUpgrades())
             {
                 $this->_sHtml .= '<h2>' . t('No upgrade path for %software_name%!') . '</h2>';
             }
@@ -114,11 +142,11 @@ class UpgradeCore extends Kernel
                     $iVerBuild = $this->_oConfig->values['upgrade.version']['build'];
                     $sDesc = $this->_oConfig->values['upgrade.information']['description'];
 
-                    if($this->_checkUpgradeFolder($this->_sUpgradesDirUpgradeFolder))
+                    if ($this->_checkUpgradeFolder($this->_sUpgradesDirUpgradeFolder))
                     {
                         $this->_sHtml .= '<p class="underline italic">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVerName, $sVerNumber, $iVerBuild) . '</p>';
 
-                        if($this->_checkVersion($sVerName, $sVerNumber, $iVerBuild))
+                        if ($this->_checkVersion($sVerName, $sVerNumber, $iVerBuild))
                         {
                               $this->_sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->_sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVerName . ' ' . $sVerNumber . ' Build ' . $iVerBuild . '</span>') . '</button>';
 
@@ -147,9 +175,9 @@ class UpgradeCore extends Kernel
 
                 $this->_sHtml .= '</form>';
 
-                if($this->_oHttpRequest->postExists('submit_upgrade'))
+                if ($this->_oHttpRequest->postExists('submit_upgrade'))
                 {
-                    if($this->_checkUpgradeFolder($this->_oHttpRequest->post('submit_upgrade')))
+                    if ($this->_checkUpgradeFolder($this->_oHttpRequest->post('submit_upgrade')))
                     {
                         $this->_sUpgradesDirUpgradeFolder = $this->_oHttpRequest->post('submit_upgrade'); // Upgrade Directory Path
 
@@ -166,12 +194,12 @@ class UpgradeCore extends Kernel
                         $this->_check(); // Checking
 
                         // If not found error
-                        if(!$this->_displayIfIsErr())
+                        if (!$this->_displayIfIsErr())
                         {
                             $this->_run(); // Run Upgrade!
 
                             // If no error
-                            if(!$this->_displayIfIsErr())
+                            if (!$this->_displayIfIsErr())
                             {
                                 /**
                                  * It resets the HTML variable ($this->_sHtml) to not display versions upgrade available.
@@ -179,9 +207,9 @@ class UpgradeCore extends Kernel
                                 */
                                 $this->_sHtml = '<h3 class="success">' . t('Your update ran successfully!') . '</h3>';
 
-                                if($this->_bAutoRemoveUpgradeDir)
+                                if ($this->_bAutoRemoveUpgradeDir)
                                 {
-                                    if($this->_removeUpgradeDir())
+                                    if ($this->_removeUpgradeDir())
                                     {
                                         $this->_sHtml .= '<p class="success">' . t('The upgrade directory <em>(~%0%)</em> has been deleted!', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder) . '</p>';
                                         $this->_sHtml .= '<p class="success">' . t('Status... OK!') . '</p>';
@@ -221,14 +249,14 @@ class UpgradeCore extends Kernel
     private function _file()
     {
         $sPathPublicDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PUBLIC_DIR . PH7_DS;
-        if(is_dir($sPathPublicDir))
+        if (is_dir($sPathPublicDir))
         {
             $this->_oFile->systemRename($sPathPublicDir, PH7_PATH_ROOT);
             $this->_oFile->chmod(PH7_PATH_ROOT, 0777);
         }
 
         $sPathProtectedDir = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::FILE_DIR . PH7_DS . static::PROTECTED_DIR . PH7_DS;
-        if(is_dir($sPathProtectedDir))
+        if (is_dir($sPathProtectedDir))
         {
             $this->_oFile->systemRename($sPathProtectedDir, PH7_PATH_PROTECTED);
             $this->_oFile->chmod(PH7_PATH_PROTECTED, 0777);
@@ -239,28 +267,28 @@ class UpgradeCore extends Kernel
     {
        $sPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $this->_oConfig->values['database']['type_name'] . PH7_DS . static::UPGRADE_FILE . PH7_DS;
 
-       if(is_file($sPath) && filesize($sPath) > 12)
+       if (is_file($sPath) && filesize($sPath) > 12)
        {
            $mQuery = (new UpgradeCoreModel)->run($sPath);
 
-           if($mQuery !== true) $this->_aErrors[] = t('Unable to execute the upgrade of the database SQL.<br />Error Message: %0%', '<pre>' . print_r($mQuery) . '</pre>');
+           if ($mQuery !== true) $this->_aErrors[] = t('Unable to execute the upgrade of the database SQL.<br />Error Message: %0%', '<pre>' . print_r($mQuery) . '</pre>');
        }
     }
 
     private function _check()
     {
-        if(!AdminCore::auth())
+        if (!AdminCore::auth())
         {
             // It rechecks if the administrator is always connected
             $this->_aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 
-        if(DbConfig::getSetting('siteStatus') !== DbConfig::MAINTENANCE_SITE)
+        if (DbConfig::getSetting('siteStatus') !== DbConfig::MAINTENANCE_SITE)
         {
             $this->_aErrors[] = t('Your site must be in maintenance mode to begin the upgrade.');
         }
 
-        if(!isDebug())
+        if (!isDebug())
         {
             $this->_aErrors[] = t('You must put your site in development mode in order to launch the upgrade of your site!') . '<br />' .
             t('1) Please change the permission of the ~%0% file for writing for all groups (0666 in octal).', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
@@ -311,13 +339,13 @@ class UpgradeCore extends Kernel
      */
     private function _displayIfIsErr()
     {
-        if($this->_isErr())
+        if ($this->_isErr())
         {
            $iErrors = count($this->_aErrors);
 
            $this->_sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
 
-           for($i=0; $i < $iErrors; $i++)
+           for ($i=0; $i < $iErrors; $i++)
                $this->_sHtml .= '<p class="error">' . t('%0%) %1%', $i+1, $this->_aErrors[$i]) . '</p>';
 
            return true;
@@ -378,14 +406,14 @@ class UpgradeCore extends Kernel
      */
     private function _checkVersion($sName, $sNumber, $iBuild)
     {
-        if(!is_string($sName) || !preg_match('#^' . Version::PATTERN . '$#', $sNumber)) return false;
+        if (!is_string($sName) || !preg_match('#^' . Version::PATTERN . '$#', $sNumber)) return false;
 
-        if(version_compare($sNumber, Kernel::SOFTWARE_VERSION, '<')) return false;
+        if (version_compare($sNumber, Kernel::SOFTWARE_VERSION, '<')) return false;
 
-        if(version_compare($sNumber, Kernel::SOFTWARE_VERSION, '=='))
+        if (version_compare($sNumber, Kernel::SOFTWARE_VERSION, '=='))
             return version_compare($iBuild, Kernel::SOFTWARE_BUILD, '>');
         else
-            if(version_compare($sNumber, Kernel::SOFTWARE_VERSION, '>')) return true;
+            if (version_compare($sNumber, Kernel::SOFTWARE_VERSION, '>')) return true;
 
         return false;
     }
