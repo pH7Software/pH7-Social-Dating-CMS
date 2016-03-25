@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Asset / File
- * @version          1.2
+ * @version          1.3
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
@@ -29,7 +29,7 @@ class UpgradeCore extends Kernel
     /**
      * Remote update URL.
      */
-    const REMOTE_URL = 'http://update.hizup.com';
+    const REMOTE_URL = 'http://update.hizup.com/';
 
     const
     /**
@@ -87,7 +87,7 @@ class UpgradeCore extends Kernel
      */
     public function getVersions()
     {
-        return file(static::REMOTE_URL . 'all_versions.txt');
+        return @file(static::REMOTE_URL . 'all_versions.txt');
     }
 
     /**
@@ -95,11 +95,11 @@ class UpgradeCore extends Kernel
      *
      * @return mixed (string | boolean) The version needed number for the current pH7CMS installation.
      */
-    public function versionNeeded()
+    public function getNextVersion()
     {
         $aVersions = $this->getVersions();
 
-        if ($iKey = array_search(($aVersions,  Kernel::SOFTWARE_VERSION))
+        if ($iKey = array_search(Kernel::SOFTWARE_VERSION, $aVersions))
         {
             return $aVersions[$iKey+1];
         }
@@ -118,8 +118,11 @@ class UpgradeCore extends Kernel
             $this->_aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 
-        if (!$this->_displayIfIsErr())
+        if (!$this->_displayIfErr())
         {
+            // Download the next upgrade patch to "~/_repository/" folder
+            $this->_downloadDate($this->getNextVersion());
+
             // If not found error
             if (!$this->_showAvailableUpgrades())
             {
@@ -194,12 +197,12 @@ class UpgradeCore extends Kernel
                         $this->_check(); // Checking
 
                         // If not found error
-                        if (!$this->_displayIfIsErr())
+                        if (!$this->_displayIfErr())
                         {
                             $this->_run(); // Run Upgrade!
 
                             // If no error
-                            if (!$this->_displayIfIsErr())
+                            if (!$this->_displayIfErr())
                             {
                                 /**
                                  * It resets the HTML variable ($this->_sHtml) to not display versions upgrade available.
@@ -313,13 +316,13 @@ class UpgradeCore extends Kernel
      */
     private function _downloadDate($sNewVersion)
     {
-        $sZipFileName = $sNewVersion '.zip';
+        $sZipFileName = $sNewVersion . '.zip';
         $sDestinationPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS;
 
         $rFile = $this->_oFile->getUrlContents(self::REMOTE_URL . $sZipFileName);
-        $oFile->putFile($sDestinationPath . PH7_TMP . $sZipFileName, $rFile);
-        $oFile->zipExtract($sDestinationPath . PH7_TMP . $sZipFileName, $Destination);
-        $oFile->deleteFile($sDestinationPath . PH7_TMP . $sZipFileName);
+        $this->_oFile->putFile($sDestinationPath . PH7_TMP . $sZipFileName, $rFile);
+        $this->_oFile->zipExtract($sDestinationPath . PH7_TMP . $sZipFileName, $sDestinationPath);
+        $this->_oFile->deleteFile($sDestinationPath . PH7_TMP . $sZipFileName);
     }
 
     /**
@@ -337,7 +340,7 @@ class UpgradeCore extends Kernel
      *
      * @return boolean TRUE if there are errors else FALSE
      */
-    private function _displayIfIsErr()
+    private function _displayIfErr()
     {
         if ($this->_isErr())
         {
