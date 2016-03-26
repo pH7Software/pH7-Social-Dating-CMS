@@ -87,7 +87,7 @@ class UpgradeCore extends Kernel
      */
     public function getVersions()
     {
-        return @file(static::REMOTE_URL . 'all_versions.txt');
+        return file(static::REMOTE_URL . 'all_versions.txt');
     }
 
     /**
