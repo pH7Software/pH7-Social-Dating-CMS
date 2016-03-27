@@ -34,14 +34,14 @@ class VideoFormProcess extends Form
          * This can cause minor errors (eg if a user sent a file that is not a video).
          * So we hide the errors if we are not in development mode.
          */
-        if(!isDebug()) error_reporting(0);
+        if (!isDebug()) error_reporting(0);
 
         /**
          * Check if the video album ID is valid. The value must be numeric.
          * This test is necessary because when the selection exists but that no option is available (this can when a user wants to add a video but he has no album)
          * the return value is of type "string" and the value is "1".
          */
-        if(!is_numeric($this->httpRequest->post('album_id')))
+        if (!is_numeric($this->httpRequest->post('album_id')))
         {
             \PFBC\Form::setError('form_video', t('Please add a category before you add a video.'));
             return; // Stop execution of the method.
@@ -53,19 +53,28 @@ class VideoFormProcess extends Form
         /** Default URL Thumbnail **/
         $sThumb = '';
 
-        if($this->httpRequest->postExists('embed_code'))
+        if ($this->httpRequest->postExists('embed_code'))
         {
             $sEmbedUrl = $this->httpRequest->post('embed_code');
 
-            if(!$sFile = (new V\Api)->getVideo($sEmbedUrl))
+            if (!$sFile = (new V\Api)->getVideo($sEmbedUrl))
             {
                 \PFBC\Form::setError('form_video', t('Oops, the link of the video looks bad? Check that the link is correct.'));
                 return;
             }
 
-            if(!$oInfo = (new V\Api)->getInfo($sEmbedUrl))
+            try
             {
-                \PFBC\Form::setError('form_video', t('Unable to retrieve information from the video. Are you sure that the URL of the video is correct?'));
+                if (!$oInfo = (new V\Api)->getInfo($sEmbedUrl))
+                {
+                    \PFBC\Form::setError('form_video', t('Unable to retrieve information from the video. Are you sure that the URL of the video is correct?'));
+                    return;
+                }
+            }
+            catch (Framework\Video\Api\Exception $oE)
+            {
+                // Problem with the API service from the video platform...? Display the error message.
+                \PFBC\Form::setError('form_video', $oE->getMessage());
                 return;
             }
 
@@ -73,13 +82,13 @@ class VideoFormProcess extends Form
             $sDescription = ($this->httpRequest->postExists('description') ? $this->httpRequest->post('description') : ($oInfo->getDescription() ? $oInfo->getDescription() : ''));
             $sDuration = ($oInfo->getDuration() ? $oInfo->getDuration() : '0'); // Time in seconds
 
-            if(!$sFile)
+            if (!$sFile)
             {
                 \PFBC\Form::setError('form_video', t('Invalid Api Video Type! Choose from Youtube, Vimeo, Dailymotion and Metacafe.'));
                 return;
             }
         }
-        elseif(!empty($_FILES['video']['tmp_name']))
+        elseif (!empty($_FILES['video']['tmp_name']))
         {
             try
             {
@@ -91,12 +100,12 @@ class VideoFormProcess extends Form
                 return;
             }
 
-            if(!$oVideo->validate())
+            if (!$oVideo->validate())
             {
                 \PFBC\Form::setError('form_video', Form::wrongVideoFileTypeMsg());
                 return;
             }
-            elseif(!$oVideo->check())
+            elseif (!$oVideo->check())
             {
                  \PFBC\Form::setError('form_video', t('File exceeds maximum allowed video filesize of %0%!', F\Various::bytesToSize($oVideo->getMaxSize())));
                  return;

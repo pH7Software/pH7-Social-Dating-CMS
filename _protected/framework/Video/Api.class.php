@@ -60,7 +60,7 @@ class Api
     }
 
     /**
-     * @param string $sUrl
+     * @param string $sUrl The URL video.
      * @return object The Video API class (e.g., "Api\Youtube", "Api\Vimeo" class).
      * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the Api Video is invalid.
      */

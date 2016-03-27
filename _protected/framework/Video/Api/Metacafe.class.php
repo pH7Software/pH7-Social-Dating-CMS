@@ -71,7 +71,7 @@ class Metacafe extends Api implements IApi
      * We redefine this method to the specific needs of the Metacafe API.
      *
      * @see \PH7\Framework\Video\Api\Metacafe::getInfo();
-     * @return mixed (integer | boolean) The duration video if found otherwise returns false.
+     * @return mixed (integer | boolean) The video duration if found, FALSE otherwise.
      */
     public function getDuration()
     {
