@@ -40,7 +40,7 @@
 
    <h3>Recommended:</h3>
      <ul>
-       <li>PHP 5.5.9 or higher.</li>
+       <li><span class="bold">PHP 7.0.4</span> or higher.</li>
      </ul>
 
    <h3>Recommended Extensions:</h3>
