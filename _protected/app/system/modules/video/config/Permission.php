@@ -32,6 +32,12 @@ class Permission extends PermissionCore
             {
                 $this->paymentRedirect();
             }
+
+            if ($this->registry->controller === 'AdminController')
+            {
+                // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
+                Header::redirect(Uri::get('user','main','login'), $this->adminSignInMsg(), 'error');
+            }
         }
     }
 

@@ -21,13 +21,24 @@ PH7\Framework\Mvc\Model\DbConfig;
 abstract class Api
 {
 
-    protected $oStr, $oData, $bDefaultVideo, $bAutoplay;
+    protected $oStr, $oData, $sApiKey, $bDefaultVideo, $bAutoplay;
 
     public function __construct()
     {
         $this->oStr = new Str;
         $this->sDefaultVideo = DbConfig::getSetting('defaultVideo');
         $this->bAutoplay = DbConfig::getSetting('autoplayVideo');
+    }
+
+    /**
+     * Set API key (currentyl required only by Youtube API class).
+     *
+     * @param string $sApiKey
+     * @return void
+     */
+    public function setKey($sApiKey)
+    {
+        $this->sApiKey = $sApiKey;
     }
 
     /**

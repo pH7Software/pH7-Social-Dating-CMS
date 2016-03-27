@@ -348,12 +348,16 @@
               </ul>
             </li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('mail','admin','index') }}" title="{lang 'Email Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o"></i> {lang 'Email Manager'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('mail','admin','index') }}" title="{lang 'Members Email Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o"></i> {lang 'Email Manager'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('mail','admin','msglist') }}" title="{lang 'Messages Monitor'}">{lang 'Messages Monitor'}</a></li>
                 <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search Email'}">{lang 'Search Message'}</a></li>
               </ul>
             </li>
+
+            {if $is_video_enabled}
+              <li><a href="{{ $design->url('video', 'admin', 'config') }}"><i class="fa fa-youtube-play"></i> {lang 'Video Youtube API key'}</a></li>
+            {/if}
 
             {if $is_connect_enabled}
               <li><a href="{{ $design->url('connect', 'admin', 'config') }}"><i class="fa fa-share-alt-square"></i> {lang 'Universal Login Config'}</a></li>
