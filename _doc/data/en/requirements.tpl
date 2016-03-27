@@ -40,7 +40,7 @@
 
    <h3>Recommended:</h3>
      <ul>
-       <li><span class="bold">PHP 7.0.4</span> or higher.</li>
+       <li><span class="bold">PHP 7.0.4</span> or higher <small>(pH7CMS has been especially optimized for PHP 7+ and is about over 2x faster than older versions. Please note your server configuration can also change a lot your site performance).</small></li>
      </ul>
 
    <h3>Recommended Extensions:</h3>
