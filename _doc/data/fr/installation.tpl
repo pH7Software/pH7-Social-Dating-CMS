@@ -28,4 +28,4 @@ Si vous voulez le permettre, vous devez mettre en valeurs numériques <em>777</e
 
 <h3>Lancez l'installateur</h3>
 <p><p>Vous devez simplement vous rendre à l'URL suivante et suivre attentivement les instructions : <em>http://www.VOTRE-SITE.com/<strong>_install</strong>/</em><br />
-<iframe width="560" height="315" src="//www.youtube.com/embed/PlgxdLIdmoA?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
+<iframe width="560" height="315" src="//www.youtube.com/embed/5TNIIIFSpRY?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
