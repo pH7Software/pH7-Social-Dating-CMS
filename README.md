@@ -194,15 +194,19 @@ Pierre-Henry Soria
 [pH7CMS Documentation](http://ph7cms.com/doc/)
 
 
-## Contribute!
+## Contributing
 
-Everyone can contribute on the **[pH7CMS GitHub](http://github.com/pH7Software/pH7-Social-Dating-CMS)** repository.
+[![I Love Open Source](http://www.iloveopensource.io/images/logo-lightbg.png)](http://www.iloveopensource.io/projects/56f92658305414c957000002)
+
+Everyone can contribute on **[pH7CMS GitHub](http://github.com/pH7Software/pH7-Social-Dating-CMS)** repository.
+
+Finding bugs, improving the CMS/doc or adding translations. Any contribution is welcome and highly appreciated.
 
 Just clone the repository, make your changes and then make a push ;-)
 
-*WARNING, your code/modification must be of excellent quality.*
+*WARNING, your code/modification must be of excellent quality and follow the [Code Convention](http://ph7cms.com/doc/en/code-convention).* We manually validate all the improvements and changes.
 
---We manually validate all the improvements and changes.--
+You will also be eligible to [pH7CMS VIP members](http://ph7cms.com/get-one-tine-license-for-free/) and get all premium contents.
 
 
 ## Contact
