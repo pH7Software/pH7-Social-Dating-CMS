@@ -11,7 +11,7 @@
 pH7CMS is included with 30 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
 
 
-![Professional PHP Social Networking Dating CMS](https://cloud.githubusercontent.com/assets/1325411/12043273/747be578-ae7b-11e5-84cb-f1724ebc969d.png)
+![Professional PHP Social Networking Dating CMS](https://cloud.githubusercontent.com/assets/1325411/14080218/84d2f9b8-f4fb-11e5-90e2-36c139f0eb66.png)
 
 
 ## Overview
