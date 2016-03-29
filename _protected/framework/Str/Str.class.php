@@ -259,7 +259,7 @@ defined('PH7') or exit('Restricted access');
       * Escape function, uses the PHP native htmlspecialchars but improved.
       *
       * @param mixed (array | string) $mText
-      * @param boolean $bStrip Default: FALSE
+      * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
       * @return mixed (array | string) The escaped string.
       */
      public function escape($mText, $bStrip = false)

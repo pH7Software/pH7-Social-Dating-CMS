@@ -188,7 +188,7 @@ class SettingFormProcess extends Form
                             $this->bIsErr = true;
                         }
                         else
-                            DbConfig::setSetting($this->httpRequest->post('min_age_registration'), 'minAgeRegistration');   
+                            DbConfig::setSetting($this->httpRequest->post('min_age_registration'), 'minAgeRegistration');
                     } break;
 
                     case 'size_watermark_text_image':
@@ -197,20 +197,12 @@ class SettingFormProcess extends Form
                             DbConfig::setSetting($this->httpRequest->post('size_watermark_text_image'), 'sizeWatermarkTextImage');
                     } break;
 
-                    case 'site_status': {
-                        $sMethod = 'setSiteMode';
-                    }
-                    break;
-
-                    case 'social_media_widgets':
-                        $sMethod = 'setSocialWidgets';
-                    break;
-
                     default:
-                        $sMethod = 'setSetting';
+                    {
+                        $sMethod = ($sKey == 'site_status' ? 'setSiteMode' : ($sKey == 'social_media_widgets' ? 'setSocialWidgets' : 'setSetting'));
+                        DbConfig::$sMethod($this->httpRequest->post($sKey, null, true), $sVal);
+                    }
                 }
-
-                DbConfig::$sMethod($this->httpRequest->post($sKey), $sVal);
             }
         }
 

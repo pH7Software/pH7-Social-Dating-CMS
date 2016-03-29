@@ -189,9 +189,10 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
      * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
-    public function get($sKey, $sParam = null)
+    public function get($sKey, $sParam = null, $bStrip = false)
     {
         //if ($this->_sMethod !== self::METHOD_GET) throw new Exception('GET');
 
@@ -209,7 +210,7 @@ class Http extends \PH7\Framework\Http\Http
 
         $this->setType($this->_aGet, $sKey, $sParam);
 
-        return $this->cleanData($this->_aGet, $sKey, $sParam);
+        return $this->cleanData($this->_aGet, $sKey, $sParam, $bStrip);
     }
 
     /**
@@ -217,10 +218,11 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
      * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      * @throws \PH7\Framework\Mvc\Request\Exception If the request is not POST.
      */
-    public function post($sKey, $sParam = null)
+    public function post($sKey, $sParam = null, $bStrip = false)
     {
         if ($this->_sMethod !== self::METHOD_POST) throw new Exception('POST');
 
@@ -232,7 +234,7 @@ class Http extends \PH7\Framework\Http\Http
 
         $this->setType($this->_aPost, $sKey, $sParam);
 
-        return $this->cleanData($this->_aPost, $sKey, $sParam);
+        return $this->cleanData($this->_aPost, $sKey, $sParam, $bStrip);
     }
 
     /**
@@ -318,9 +320,10 @@ class Http extends \PH7\Framework\Http\Http
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sParam Optional self::ONLY_XSS_CLEAN To delete only the XSS vulnerability.
+     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure.
      * @return string
      */
-    protected function cleanData(&$aType, $sKey, $sParam)
+    protected function cleanData(&$aType, $sKey, $sParam, $bStrip)
     {
         // For space and other in address bar
         if ($this->_sMethod === self::METHOD_GET)
@@ -329,7 +332,7 @@ class Http extends \PH7\Framework\Http\Http
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN)
             return (new \PH7\Framework\Security\Validate\Filter)->xssClean($aType[$sKey]);
 
-        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey]);
+        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey], $bStrip);
     }
 
     /**
