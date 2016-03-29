@@ -47,7 +47,7 @@ class MetaMainForm
         unset($aLangs);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', array('value' => $oMeta->langId, 'description' => t('EX: "en", "fr", "es", "jp"'), 'validation' => new \PFBC\Validation\Str(5, 5), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', array('disabled'=>'disabled', 'value' => $oMeta->langId)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Home page title:'), 'page_title', array('value' => $oMeta->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Headline:'), 'headline', array('description' => t('Right headline mainly displaying on the visitors homepage'), 'value' => $oMeta->headline, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('description' => t('Left slogan (headline) mainly displaying on the visitors homepage'), 'value' => $oMeta->slogan, 'validation' => new \PFBC\Validation\Str(2, 200), 'required' => 1)));

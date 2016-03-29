@@ -14,7 +14,6 @@ class MetaMainFormProcess extends Form
 {
 
     private $aMetaFields = [
-        'lang_id' => 'langId',
         'page_title' => 'pageTitle',
         'headline' => 'headline',
         'slogan' => 'slogan',
