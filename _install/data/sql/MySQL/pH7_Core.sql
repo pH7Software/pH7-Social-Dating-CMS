@@ -950,7 +950,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.2.5', 1);
+('pH7CMS', 'SQL System Schema', '1.2.6', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -1048,6 +1048,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('ipApi', @sIpApiUrl, 'IP Api URL', 'api'),
 ('chatApi', @sChatApiUrl, 'Chat Api URL', 'api'),
 ('chatrouletteApi', @sChatrouletteApiUrl, 'Chatroulette Api URL', 'api'),
+('socialMediaWidgets', 0, 'Enable the Social Media Widgets such as Like and Sharing buttons. 0 = Disable | 1 = Enable', 'general'),
 ('disclaimer', 0, 'Enable a disclaimer to enter to the site. This is useful for sites with adult content. 0 = Disable | 1 = Enable', 'general'),
 ('cookieConsentBar', 0, 'Enable the cookie consent bar to prevent your users that your site uses cookies. 0 = Disable | 1 = Enable', 'general'),
 ('isSoftwareNewsFeed', 1, 'Enable the news feed. 0 = Disable | 1 = Enable', 'general');

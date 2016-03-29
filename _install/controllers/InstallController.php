@@ -52,6 +52,13 @@ class InstallController extends Controller
         'love-calculator' => '1'
     ];
 
+    private $_aSocialSettings = [
+        'socialMediaWidgets' => '1'
+    ];
+    private $_aDatingSettings = [
+        'socialMediaWidgets' => '0'
+    ];
+
 
     /********************* STEP 1 *********************/
     public function index()
@@ -301,10 +308,10 @@ class InstallController extends Controller
                                                 {
                                                     @require_once PH7_ROOT_PUBLIC . '_constants.php';
                                                     @require_once PH7_PATH_APP . 'configs/constants.php';
-                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
 
+                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
                                                     require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-                                                    // To load "Security" class.
+                                                    // To load "\PH7\Framework\Security\Security" class
                                                     Framework\Loader\Autoloader::getInstance()->init();
 
                                                     try
@@ -449,13 +456,16 @@ class InstallController extends Controller
                         case 'zendate':
                             $bUpdateNeeded = true;
                             $sTheme = 'zendate';
-                            $aModUpdated = $this->_aSocialMods;
+                            $aModUpdate = $this->_aSocialMods;
+                            $aSettingUpdate = $this->_aSocialSettings;
                         break;
 
                         case 'datelove':
                             $bUpdateNeeded = true;
                             $sTheme = 'datelove';
-                            $aModUpdated = $this->_aDatingMods;
+                            $aModUpdate = $this->_aDatingMods;
+                            $aSettingUpdate = $this->_aDatingSettings;
+                            setSocialWidgets
                         break;
 
                         // Or for 'base', don't do anything. Just use the default settings already setup in the database
@@ -466,13 +476,23 @@ class InstallController extends Controller
                         @require_once PH7_ROOT_PUBLIC . '_constants.php';
                         @require_once PH7_PATH_APP . 'configs/constants.php';
 
+                        require PH7_PATH_APP . 'includes/helpers/misc.php';
+                        require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+                        // To load "PH7\Framework\Mvc\Model\DbConfig" class
+                        Framework\Loader\Autoloader::getInstance()->init();
+
                         try
                         {
                             require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
-                            foreach ($aModUpdated as $sModName => $sStatus)
+                            // Enable/Disable the modules according to the choosen niche
+                            foreach ($aModUpdate as $sModName => $sStatus)
                                 $this->_updateMods($DB, $sModName, $sStatus);
 
+                            // Enable/Disable Social Media Widgets according to the choosen niche
+                            Framework\Mvc\Model\DbConfig::setSocialWidgets($aSettingUpdate);
+
+                            // Set the theme for the choosen niche
                             $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
                             $rStmt = $DB->prepare($sSql);
                             $rStmt->execute(['theme' => $sTheme]);

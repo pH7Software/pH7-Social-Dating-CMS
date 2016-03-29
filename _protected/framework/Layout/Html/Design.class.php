@@ -639,11 +639,10 @@ class Design
     }
 
     /**
-     * Add Normal size Media Social Widgets.
+     * Add Normal size Social Media Widgets.
      *
+     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
      * @param boolean $bDisable Disable or Enable it.
-     * AddThis JS file makes the site very slow (and nowadays social widgets like those are a bit old fashioned). So it's by default deactivated and the JS file in the database as well -> 'pH7_StaticFiles' table.
-     *
      * @return void HTML output.
      */
     public function likeApi($bDisable = true)
@@ -653,11 +652,10 @@ class Design
     }
 
     /**
-     * Add Small size Media Social Widgets.
+     * Add Small size Social Media Widgets.
      *
+     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
      * @param boolean $bDisable Disable or Enable it.
-     * AddThis JS file makes the site very slow (and nowadays social widgets like those are a bit old fashioned). So it's by default deactivated and the JS file in the database as well -> 'pH7_StaticFiles' table.
-     *
      * @return void HTML output.
      */
     public function littleLikeApi($bDisable = true)

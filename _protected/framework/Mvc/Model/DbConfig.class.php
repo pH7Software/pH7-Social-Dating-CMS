@@ -42,7 +42,7 @@ final class DbConfig
         {
             if (!$sData = $oCache->get())
             {
-                $rStmt = Engine\Db::getInstance()->prepare('SELECT value FROM' . Engine\Db::prefix('Settings') . 'WHERE name=:setting');
+                $rStmt = Engine\Db::getInstance()->prepare('SELECT value FROM' . Engine\Db::prefix('Settings') . 'WHERE name = :setting');
                 $rStmt->bindParam(':setting', $sSetting, \PDO::PARAM_STR);
                 $rStmt->execute();
                 $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -136,6 +136,21 @@ final class DbConfig
     public static function setMetaMain($sSection, $sValue, $sLangId)
     {
         Engine\Record::getInstance()->update('MetaMain', $sSection, $sValue, 'langId', $sLangId);
+    }
+
+    /**
+     * @param string '0' = Disable | '1' = Enable. (need to be string because in DB it is an "enum").
+     * @return boolean Returns TRUE on success or FALSE on failure.
+     */
+    public static function setSocialWidgets($sStatus)
+    {
+        $sStatus = (string) $sStatus; // Cast into string to be sure as in DB it's an "enum" type
+
+        self::setSetting($iStatus, 'socialMediaWidgets');
+
+        // addthis JS file's staticID is '1'
+        $rStmt = Engine\Db::getInstance()->prepare('UPDATE' . Db::prefix('StaticFiles') . 'SET active = :status WHERE staticId 1 AND fileType = \'js\' LIMIT 1');
+        return $rStmt->execute(['status' => $sStatus]);
     }
 
     /**
