@@ -48,7 +48,7 @@ class Http extends \PH7\Framework\Http\Http
     ONLY_XSS_CLEAN = 'XSS_CLEAN',
     NO_CLEAN = 'NO_CLEAN';
 
-    private $_sRequestUri, $_sMethod, $_aRequest, $_aGet, $_aPost;
+    private $_sRequestUri, $_sMethod, $_aRequest, $_aGet, $_aPost, $_bStrip = false;
 
     public function __construct()
     {
@@ -208,9 +208,10 @@ class Http extends \PH7\Framework\Http\Http
         if ($sParam === self::NO_CLEAN)
             return $this->_aGet[$sKey];
 
+        $this->_bStrip = $bStrip;
         $this->setType($this->_aGet, $sKey, $sParam);
 
-        return $this->cleanData($this->_aGet, $sKey, $sParam, $bStrip);
+        return $this->cleanData($this->_aGet, $sKey, $sParam);
     }
 
     /**
@@ -232,9 +233,10 @@ class Http extends \PH7\Framework\Http\Http
         if ($sParam === self::NO_CLEAN)
             return $this->_aPost[$sKey];
 
+        $this->_bStrip = $bStrip;
         $this->setType($this->_aPost, $sKey, $sParam);
 
-        return $this->cleanData($this->_aPost, $sKey, $sParam, $bStrip);
+        return $this->cleanData($this->_aPost, $sKey, $sParam);
     }
 
     /**
@@ -320,10 +322,9 @@ class Http extends \PH7\Framework\Http\Http
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sParam Optional self::ONLY_XSS_CLEAN To delete only the XSS vulnerability.
-     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure.
      * @return string
      */
-    protected function cleanData(&$aType, $sKey, $sParam, $bStrip)
+    protected function cleanData(&$aType, $sKey, $sParam)
     {
         // For space and other in address bar
         if ($this->_sMethod === self::METHOD_GET)
@@ -332,7 +333,7 @@ class Http extends \PH7\Framework\Http\Http
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN)
             return (new \PH7\Framework\Security\Validate\Filter)->xssClean($aType[$sKey]);
 
-        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey], $bStrip);
+        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey], $this->_bStrip);
     }
 
     /**
