@@ -17,7 +17,7 @@ class DesignFormProcess extends Form
     {
         parent::__construct();
 
-        $iApproved = (AdminCore::auth() || DbConfig::getSetting('profileBackgroundManualApproval') == 0) ? '1' : '0';
+        $iApproved = (AdminCore::auth() || DbConfig::getSetting('bgProfileManualApproval') == 0) ? '1' : '0';
 
         if (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists( array('profile_id', 'username') ))
         {

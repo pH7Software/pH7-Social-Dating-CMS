@@ -1020,7 +1020,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('loginAffiliateAttemptTime', 60, 'Time before a new connection attempt, in minutes!', 'security'),
 ('loginAdminAttemptTime', 120, 'Time before a new connection attempt, in minutes!', 'security'),
 ('avatarManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
-('profileBackgroundManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
+('bgProfileManualApproval', 0, 'Background Profile Manual Approval. 0 to disable or 1 to enable ', 'moderation'),
 ('noteManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('pictureManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('videoManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),

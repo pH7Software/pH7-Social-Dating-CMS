@@ -164,7 +164,7 @@ class Design extends \PH7\Framework\Layout\Html\Design
             $this->_oCache->put($oData);
         }
 
-        if (!empty($oData) && is_string($oData))
+        if (!empty($oData))
         {
             while ($oData)
             {

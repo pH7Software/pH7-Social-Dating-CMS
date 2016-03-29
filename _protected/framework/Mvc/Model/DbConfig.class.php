@@ -140,17 +140,20 @@ final class DbConfig
 
     /**
      * @param string '0' = Disable | '1' = Enable. (need to be string because in DB it is an "enum").
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return void
      */
     public static function setSocialWidgets($sStatus)
     {
         $sStatus = (string) $sStatus; // Cast into string to be sure as in DB it's an "enum" type
 
-        self::setSetting($iStatus, 'socialMediaWidgets');
+        self::setSetting($sStatus, 'socialMediaWidgets');
 
         // addthis JS file's staticID is '1'
-        $rStmt = Engine\Db::getInstance()->prepare('UPDATE' . Db::prefix('StaticFiles') . 'SET active = :status WHERE staticId 1 AND fileType = \'js\' LIMIT 1');
-        return $rStmt->execute(['status' => $sStatus]);
+        $rStmt = Engine\Db::getInstance()->prepare('UPDATE' . Engine\Db::prefix('StaticFiles') . 'SET active = :status WHERE staticId = 1 AND fileType = \'js\' LIMIT 1');
+        $rStmt->execute(['status' => $sStatus]);
+
+        // Clear static "db/design/static" cache (don't need to clear DbConfig config as this method will always be called in SettingFormProcess class which will clear the cache anyway).
+        (new Cache)->start(Design::CACHE_STATIC_GROUP, 'filesjs1', null)->clear();
     }
 
     /**
@@ -163,7 +166,7 @@ final class DbConfig
 
         self::setSetting($sStatus, 'siteStatus');
 
-        /* Clean DbConfig Cache */
+        /* Clear DbConfig Cache (this method is not always called in SettingFormProcess class, so clear the cache to be sure */
         (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
     }
 

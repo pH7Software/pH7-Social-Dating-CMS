@@ -485,14 +485,14 @@ class InstallController extends Controller
                         {
                             require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
-                            // Enable/Disable the modules according to the choosen niche
+                            // Enable/Disable the modules according to the chosen niche
                             foreach ($aModUpdate as $sModName => $sStatus)
                                 $this->_updateMods($DB, $sModName, $sStatus);
 
-                            // Enable/Disable Social Media Widgets according to the choosen niche
+                            // Enable/Disable Social Media Widgets according to the chosen niche
                             Framework\Mvc\Model\DbConfig::setSocialWidgets($aSettingUpdate);
 
-                            // Set the theme for the choosen niche
+                            // Set the theme for the chosen niche
                             $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
                             $rStmt = $DB->prepare($sSql);
                             $rStmt->execute(['theme' => $sTheme]);
