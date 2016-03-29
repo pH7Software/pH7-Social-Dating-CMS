@@ -1,7 +1,7 @@
 <div class="col-md-8">
     {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
 
-    {if AdminCore::auth() && !UserCore::auth()}
+    {if $is_admin_auth && !$is_user_auth}
         {{ LinkCoreForm::display(t('Remove this avatar?'), null, null, null, array('del'=>1)) }}
     {else}
         {{ LinkCoreForm::display(t('Remove this avatar?'), 'user', 'setting', 'avatar', array('del'=>1)) }}

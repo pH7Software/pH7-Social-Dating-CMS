@@ -17,13 +17,13 @@
     <p>{{ $design->like($post->username, $post->firstName, $post->sex) }} | {{ $design->report($post->profileId, $post->username, $post->firstName, $post->sex) }}</p>
   </div>
 
-  {if AdminCore::auth() && !(new Framework\Session\Session)->exists('login_user_as')}
+  {if $is_admin_auth && !(new Framework\Session\Session)->exists('login_user_as')}
     <p><a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$post->profileId) }}" title="{lang 'Login As this User to edit his post'}">{lang 'Login as this User'}</a></p>
   {/if}
 
   <a class="m_button" rel="nofollow" href="{{ $design->url('forum', 'forum', 'reply', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Reply on the Message'}">{lang 'Reply'}</a>
 
-  {if UserCore::auth() && $member_id == $post->profileId}
+  {if $is_user_auth && $member_id == $post->profileId}
     | <a class="m_button" href="{{ $design->url('forum', 'forum', 'edittopic', "$post->name,$post->forumId,$post->title,$post->topicId") }}">{lang 'Edit your post'}</a> |  {{ $design->popupLinkConfirm(t('Delete your topic'), 'forum', 'forum', 'deletetopic', $post->topicId.'_'.$post->forumId.'_'.$post->name, 'm_button') }}
   {/if}
 
@@ -50,11 +50,11 @@
           <p>{{ $design->like($msg->username, $msg->firstName, $msg->sex) }} | {{ $design->report($msg->profileId, $msg->username, $msg->firstName, $msg->sex) }}</p>
         </div>
 
-        {if UserCore::auth() && $member_id == $msg->profileId}
+        {if $is_user_auth && $member_id == $msg->profileId}
           <a class="m_button" href="{{ $design->url('forum', 'forum', 'editmessage', "$post->name,$post->forumId,$post->title,$msg->topicId,$msg->messageId") }}">{lang 'Edit your post'}</a> | {{ $design->popupLinkConfirm(t('Delete your message'), 'forum', 'forum', 'deletemessage', $msg->messageId.'_'.$msg->topicId.'_'.$post->forumId.'_'.$post->title.'_'.$post->name, 'm_button') }}
         {/if}
 
-        {if AdminCore::auth()}
+        {if $is_admin_auth}
           <p><a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$msg->profileId) }}" title="{lang 'Login As this User to edit his post'}">{lang 'Login as this User'}</a></p>
         {/if}
 

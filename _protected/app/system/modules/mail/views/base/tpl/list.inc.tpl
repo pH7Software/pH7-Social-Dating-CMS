@@ -10,7 +10,7 @@
     </div>
 
     {* Set Variables *}
-    {{ $is_admin = (AdminCore::auth() && !UserCore::auth()) }}
+    {{ $is_admin = ($is_admin_auth && !$is_user_auth) }}
     {{ $ctrl = ($is_admin) ? 'admin' : 'main' }}
 
     {if $is_admin}<div class="divShow">{/if}
