@@ -159,16 +159,16 @@ class Design extends \PH7\Framework\Layout\Html\Design
             $rStmt = Db::getInstance()->prepare('SELECT file FROM ' . Db::prefix('StaticFiles') . 'WHERE fileType = :type' . $sSqlWhere);
             $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
-            $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->_oCache->put($oData);
         }
 
         if (!empty($oData))
         {
-            while ($oData)
+            foreach ($oData as $oFile)
             {
-                $sFullPath = (new SysVar)->parse($oData->file);
+                $sFullPath = (new SysVar)->parse($oFile->file);
                 $sMethodName = 'external' . ($sType == 'js' ? 'Js' : 'Css') . 'File';
                 $this->$sMethodName($sFullPath);
             }

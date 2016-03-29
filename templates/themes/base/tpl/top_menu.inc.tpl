@@ -1,10 +1,3 @@
-    {* Get the frequently used functions in a variable in order to optimize the script and call this function only once in the file *}
-      {{
-        $is_admin_auth = AdminCore::auth();
-        $is_user_auth = UserCore::auth();
-        $is_aff_auth = AffiliateCore::auth()
-      }}
-
     {* Creating Objects *}
       {{ $oSession = new Framework\Session\Session() }}
 
@@ -478,9 +471,6 @@
       {{
         unset(
           $oSession,
-          $is_admin_auth,
-          $is_user_auth,
-          $is_aff_auth,
           $count_moderate_total_album_picture,
           $count_moderate_total_picture,
           $count_moderate_total_album_video,
