@@ -32,7 +32,8 @@ class MetaMainFormProcess extends Form
     {
         parent::__construct();
 
-        $this->updateFields($this->httpRequest->get('meta_lang'), DbConfig::getMetaMain($sWhereLang));
+        $oMetaData = DbConfig::getMetaMain($this->httpRequest->get('meta_lang'));
+        $this->updateFields($oMetaData);
 
         /* Clean DbConfig Cache */
         (new Framework\Cache\Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
@@ -43,15 +44,19 @@ class MetaMainFormProcess extends Form
     /**
      * Update the fields in the DB (in modified only).
      *
-     * @param string $sWhereLang Lang ID (e.g. en_US, fr_FR, nl_NL, ...).
      * @param object $oMeta Meta Main DB data.
      * @return void
      */
-    private function updateFields($sWhereLang, $oMeta)
+    private function updateFields($oMeta)
     {
         foreach ($this->aMetaFields as $sKey => $sVal)
-            if (!$this->str->equals($this->httpRequest->post($sKey), $oMeta->langId))
-                DbConfig::setMetaMain($sVal, $this->httpRequest->post($sKey), $sWhereLang);
+        {
+            if (!$this->str->equals($this->httpRequest->post($sKey), $oMeta->$sVal))
+            {
+                $sParam = ($sKey == 'promo_text') ? Http::ONLY_XSS_CLEAN : null;
+                DbConfig::setMetaMain($sVal, $this->httpRequest->post($sKey, $sParam), $oMeta->langId);
+            }
+        }
     }
 
 }
