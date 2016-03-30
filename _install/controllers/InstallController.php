@@ -18,6 +18,7 @@ defined('PH7') or exit('Restricted access');
 class InstallController extends Controller
 {
 
+    /*** Enable/Disable Modules according to the chosen niche ***/
     private $_aSocialMods = [
         'affiliate' => '0',
         'game' => '1',
@@ -52,6 +53,7 @@ class InstallController extends Controller
         'love-calculator' => '1'
     ];
 
+    /*** Enable/Disable Site Settings according to the chosen niche ***/
     private $_aSocialSettings = [
         'socialMediaWidgets' => '1'
     ];
