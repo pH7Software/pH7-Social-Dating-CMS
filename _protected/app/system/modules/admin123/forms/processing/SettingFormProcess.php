@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
@@ -110,33 +110,23 @@ class SettingFormProcess extends Form
     {
         parent::__construct();
 
-        if (!empty($_FILES['logo']['tmp_name']))
-        {
-            $oLogo = new Framework\Image\Image($_FILES['logo']['tmp_name']);
-            if (!$oLogo->validate())
-            {
-                \PFBC\Form::setError('form_setting', Form::wrongImgFileTypeMsg());
-                $this->bIsErr = true;
-            }
-            else
-            {
-                /*
-                 * The method deleteFile first test if the file exists, if so it delete the file.
-                 */
-                $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png';
-                $this->file->deleteFile($sPathName); // It erases the old logo.
-                $oLogo->dynamicResize(250,60);
-                $oLogo->save($sPathName);
+        $this->updateLogo();
+        $this->updateGenericFields();
 
-                // Clear CSS cache, because the logo is storaged with data URI in the CSS cache file
-                $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Gzip\Gzip::CACHE_DIR);
+        /* Clean DbConfig Cache */
+        (new Framework\Cache\Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
 
-                // Clear the Web browser cache
-                (new Framework\Navigation\Browser)->noCache();
-            }
-        }
+        if(!$this->bIsErr)
+            \PFBC\Form::setSuccess('form_setting', t('The configuration has been saved successfully!'));
+    }
 
-        // Update the other "generic" fields
+    /**
+     * Update the other "generic" fields.
+     *
+     * @return void
+     */
+    private function updateGenericFields()
+    {
         foreach ($this->aSettingFields as $sKey => $sVal)
         {
             if ($sKey == 'security_token_lifetime')
@@ -205,12 +195,40 @@ class SettingFormProcess extends Form
                 }
             }
         }
+    }
 
-        /* Clean DbConfig Cache */
-        (new Framework\Cache\Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
+    /**
+     * Update Logo (if modified only).
+     *
+     * @return void
+     */
+    private function updateLogo()
+    {
+        if (!empty($_FILES['logo']['tmp_name']))
+        {
+            $oLogo = new Framework\Image\Image($_FILES['logo']['tmp_name']);
+            if (!$oLogo->validate())
+            {
+                \PFBC\Form::setError('form_setting', Form::wrongImgFileTypeMsg());
+                $this->bIsErr = true;
+            }
+            else
+            {
+                /*
+                 * The method deleteFile first test if the file exists, if so it delete the file.
+                 */
+                $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png';
+                $this->file->deleteFile($sPathName); // It erases the old logo.
+                $oLogo->dynamicResize(250,60);
+                $oLogo->save($sPathName);
 
-        if(!$this->bIsErr)
-            \PFBC\Form::setSuccess('form_setting', t('The configuration has been saved successfully!'));
+                // Clear CSS cache, because the logo is storaged with data URI in the CSS cache file
+                $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Gzip\Gzip::CACHE_DIR);
+
+                // Clear the Web browser cache
+                (new Framework\Navigation\Browser)->noCache();
+            }
+        }
     }
 
 }

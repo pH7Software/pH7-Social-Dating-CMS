@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
@@ -32,17 +32,26 @@ class MetaMainFormProcess extends Form
     {
         parent::__construct();
 
-        $sWhereLang = $this->httpRequest->get('meta_lang');
-        $oMeta = DbConfig::getMetaMain($sWhereLang);
-
-        foreach ($this->aMetaFields as $sKey => $sVal)
-            if (!$this->str->equals($this->httpRequest->post($sKey), $oMeta->langId))
-                DbConfig::setMetaMain($sVal, $this->httpRequest->post($sKey), $sWhereLang);
+        $this->updateFields($this->httpRequest->get('meta_lang'), DbConfig::getMetaMain($sWhereLang));
 
         /* Clean DbConfig Cache */
         (new Framework\Cache\Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
 
         \PFBC\Form::setSuccess('form_meta', t('The Meta Tags has been saved successfully!'));
+    }
+
+    /**
+     * Update the fields in the DB (in modified only).
+     *
+     * @param string $sWhereLang Lang ID (e.g. en_US, fr_FR, nl_NL, ...).
+     * @param object $oMeta Meta Main DB data.
+     * @return void
+     */
+    private function updateFields($sWhereLang, $oMeta)
+    {
+        foreach ($this->aMetaFields as $sKey => $sVal)
+            if (!$this->str->equals($this->httpRequest->post($sKey), $oMeta->langId))
+                DbConfig::setMetaMain($sVal, $this->httpRequest->post($sKey), $sWhereLang);
     }
 
 }
