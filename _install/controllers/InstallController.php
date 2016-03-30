@@ -467,7 +467,6 @@ class InstallController extends Controller
                             $sTheme = 'datelove';
                             $aModUpdate = $this->_aDatingMods;
                             $aSettingUpdate = $this->_aDatingSettings;
-                            setSocialWidgets
                         break;
 
                         // Or for 'base', don't do anything. Just use the default settings already setup in the database
