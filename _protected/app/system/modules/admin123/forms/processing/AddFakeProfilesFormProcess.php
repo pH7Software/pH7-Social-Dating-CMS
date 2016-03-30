@@ -76,14 +76,17 @@ class AddFakeProfilesFormProcess extends Form
      */
     private function _addAvatar(array $aData, UserCore $oUser)
     {
-        if ($rFile = $this->file->getUrlContents($aData['avatar']))
-        {
-            // Create a temporary file before creating the avatar images
-            $sTmpFile = PH7_PATH_TMP . PH7_DS . uniqid() . sha1($aData['avatar']) . '.tmp';
-            $this->file->putFile($sTmpFile, $rFile);
-            $oUser->setAvatar($aData['profile_id'], $aData['username'], $sTmpFile, 1); // Create the different avatar sizes and set the avatar
-            $this->file->deleteFile($sTmpFile);// remove the temporary file as we don't need anymore
+        // Sometime, cURL returns FALSE and doesn't work at all under Windowns server or some other specific server config, so use file_get_contents() instead as it will work.
+        if (!$rFile = $this->file->getUrlContents($aData['avatar'])) {
+            $rFile = $this->file->getFile($aData['avatar']);
         }
+
+        // Create a temporary file before creating the avatar images
+        $sTmpFile = PH7_PATH_TMP . PH7_DS . uniqid() . sha1($aData['avatar']) . '.tmp';
+        $this->file->putFile($sTmpFile, $rFile);
+
+        $oUser->setAvatar($aData['profile_id'], $aData['username'], $sTmpFile, 1); // Create the different avatar sizes and set the avatar
+        $this->file->deleteFile($sTmpFile);// Remove the temporary file as we don't need it anymore
     }
 
 }
