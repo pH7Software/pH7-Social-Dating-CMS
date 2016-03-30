@@ -80,7 +80,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Includes top HTML5 features
 * Allow to sign in to your site with Facebook, Google and Twitter thanks pH7CMS's Connect module
 * Invite Friends
-* Social Bookmark
+* Social Bookmark (Social Media Sharing Buttons)
 * Anti-spam system
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
 * Everyone can easily contribute to this great innovative project with our [GitHub repository](http://github.com/pH7Software/pH7-Social-Dating-CMS)
