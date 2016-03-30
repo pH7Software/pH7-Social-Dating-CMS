@@ -55,10 +55,10 @@ class InstallController extends Controller
 
     /*** Enable/Disable Site Settings according to the chosen niche ***/
     private $_aSocialSettings = [
-        'socialMediaWidgets' => '1'
+        'social_media_widgets' => '1'
     ];
     private $_aDatingSettings = [
-        'socialMediaWidgets' => '0'
+        'social_media_widgets' => '0'
     ];
 
 
@@ -491,7 +491,7 @@ class InstallController extends Controller
                                 $this->_updateMods($DB, $sModName, $sStatus);
 
                             // Enable/Disable Social Media Widgets according to the chosen niche
-                            Framework\Mvc\Model\DbConfig::setSocialWidgets($aSettingUpdate);
+                            Framework\Mvc\Model\DbConfig::setSocialWidgets($aSettingUpdate['social_media_widgets']);
 
                             // Set the theme for the chosen niche
                             $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
