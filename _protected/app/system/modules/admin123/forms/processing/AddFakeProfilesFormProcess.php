@@ -25,9 +25,10 @@ class AddFakeProfilesFormProcess extends Form
         $oExistsModel = new ExistsCoreModel;
         $oValidate = new Validate;
 
-        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/?results=' . $this->httpRequest->post('num')), true);
+        $iUserNum = $this->httpRequest->post('num');
+        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/?results=' . $iUserNum), true);
 
-        foreach($aUserData['results'] as $aUser)
+        foreach ($aUserData['results'] as $aUser)
         {
             $aUser = $aUser['user'];
 
@@ -58,7 +59,7 @@ class AddFakeProfilesFormProcess extends Form
 
         unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aUser, $aData, $aUserData);
 
-        \PFBC\Form::setSuccess('form_add_fake_profiles', t('Users has been successfully added.'));
+        \PFBC\Form::setSuccess('form_add_fake_profiles', nt('%n% user has successfully been added.', '%n% users have successfully been added.', $iUserNum));
     }
 
     /**
