@@ -490,8 +490,7 @@ class InstallController extends Controller
                             foreach ($aModUpdate as $sModName => $sStatus)
                                 $this->_updateMods($DB, $sModName, $sStatus);
 
-                            // Enable/Disable Social Media Widgets according to the chosen niche
-                            Framework\Mvc\Model\DbConfig::setSocialWidgets($aSettingUpdate['social_media_widgets']);
+                            $this->_updateSettings($aSettingUpdate);
 
                             // Set the theme for the chosen niche
                             $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
@@ -635,6 +634,21 @@ class InstallController extends Controller
         $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'SysModsEnabled SET enabled = :status WHERE folderName = :modName LIMIT 1';
         $rStmt = $oDb->prepare($sSql);
         return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
+    }
+
+    /**
+     * Update Settings.
+     *
+     * @param array $aParams
+     * @return void
+     */
+    private function _updateSettings(array $aParams)
+    {
+        // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
+        Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
+
+        // Enable/Disable Social Media Widgets according to the chosen niche
+        Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
     }
 
     /***** Get the loading image *****/
