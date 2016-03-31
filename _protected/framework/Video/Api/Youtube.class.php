@@ -36,7 +36,9 @@ class Youtube extends Api implements IApi
     public function getInfo($sUrl)
     {
         $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '&key=' . $this->sApiKey . '&part=snippet,contentDetails,statistics,status';
-        if ($oData = $this->getData($sDataUrl))
+
+        // Use Youtube's API to get the Youtube video's data only if the API key is set, otherwise it won't work
+        if ($oData = $this->getData($sDataUrl) && !empty($this->sApiKey) && strlen($this->sApiKey) > 10)
         {
             if (!empty($oData->error->errors[0]->message))
             {
