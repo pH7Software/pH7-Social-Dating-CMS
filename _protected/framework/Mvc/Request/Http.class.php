@@ -48,7 +48,7 @@ class Http extends \PH7\Framework\Http\Http
     ONLY_XSS_CLEAN = 'XSS_CLEAN',
     NO_CLEAN = 'NO_CLEAN';
 
-    private $_sRequestUri, $_sMethod, $_aRequest, $_aGet, $_aPost;
+    private $_sRequestUri, $_sMethod, $_aRequest, $_aGet, $_aPost, $_bStrip = false;
 
     public function __construct()
     {
@@ -189,9 +189,10 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
      * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
-    public function get($sKey, $sParam = null)
+    public function get($sKey, $sParam = null, $bStrip = false)
     {
         //if ($this->_sMethod !== self::METHOD_GET) throw new Exception('GET');
 
@@ -207,6 +208,7 @@ class Http extends \PH7\Framework\Http\Http
         if ($sParam === self::NO_CLEAN)
             return $this->_aGet[$sKey];
 
+        $this->_bStrip = $bStrip;
         $this->setType($this->_aGet, $sKey, $sParam);
 
         return $this->cleanData($this->_aGet, $sKey, $sParam);
@@ -217,10 +219,11 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
      * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      * @throws \PH7\Framework\Mvc\Request\Exception If the request is not POST.
      */
-    public function post($sKey, $sParam = null)
+    public function post($sKey, $sParam = null, $bStrip = false)
     {
         if ($this->_sMethod !== self::METHOD_POST) throw new Exception('POST');
 
@@ -230,6 +233,7 @@ class Http extends \PH7\Framework\Http\Http
         if ($sParam === self::NO_CLEAN)
             return $this->_aPost[$sKey];
 
+        $this->_bStrip = $bStrip;
         $this->setType($this->_aPost, $sKey, $sParam);
 
         return $this->cleanData($this->_aPost, $sKey, $sParam);
@@ -329,7 +333,7 @@ class Http extends \PH7\Framework\Http\Http
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN)
             return (new \PH7\Framework\Security\Validate\Filter)->xssClean($aType[$sKey]);
 
-        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey]);
+        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey], $this->_bStrip);
     }
 
     /**

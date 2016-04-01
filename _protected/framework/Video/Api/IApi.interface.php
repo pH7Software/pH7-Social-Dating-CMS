@@ -24,25 +24,25 @@ interface IApi
 
     /**
      * @param string $sUrl
-     * @return mixed (object | boolean) FALSE if unable to open the url, otherwise the this object.
+     * @return mixed (object | boolean) Returns the info object or FALSE if unable to open the URL.
      */
     public function getInfo($sUrl);
 
     /**
      * @see \PH7\Framework\Video\Api\Api::getInfo();
-     * @return mixed (string | boolean) The title with escape function if found otherwise returns false.
+     * @return mixed (string | boolean) The title with escape function if found, otherwise returns FALSE.
      */
     public function getTitle();
 
     /**
      * @see \PH7\Framework\Video\Api\Api::getInfo();
-     * @return mixed (string | boolean) The description with escape function if found otherwise returns false.
+     * @return mixed (string | boolean) The description with escape function if found, otherwise returns FALSE.
      */
     public function getDescription();
 
     /**
      * @see \PH7\Framework\Video\Api\Api::getInfo();
-     * @return mixed (integer | boolean) The duration video if found otherwise returns false.
+     * @return mixed (integer | boolean) The duration video if found, otherwise returns FALSE.
      */
     public function getDuration();
 
@@ -57,7 +57,7 @@ interface IApi
 
     /**
      * @param string $sUrl
-     * @return mixed (string | boolean) The embed URL if id is valid, false otherwise.
+     * @return mixed (string | boolean) The embed URL if id is valid, FALSE otherwise.
      */
     public function getEmbedUrl($sUrl);
 

@@ -697,6 +697,27 @@ class File
     }
 
     /**
+     * Extract Zip archive.
+     *
+     * @param string $sFile Zip file.
+     * @param string $sDir Destination to extract the file.
+     * @return boolean
+     */
+    public function zipExtract($sFile, $sDir)
+    {
+        $oZip = new \ZipArchive;
+        $mRes = $oZip->open($sFile);
+
+        if ($mRes === true) {
+            $oZip->extractTo($sDir);
+            $oZip->close();
+            return true;
+        }
+
+        return false; // Return error value
+    }
+
+    /**
      * Check if the file is binary.
      *
      * @param string $sFile

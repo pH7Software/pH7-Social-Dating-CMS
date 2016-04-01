@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
@@ -85,7 +85,7 @@ class SettingController extends Controller
 
     public function metaMain()
     {
-        // divShow.js for the Change Language Menu
+        // divShow.js for the Language Menu List
         $this->design->addJs(PH7_STATIC . PH7_JS, 'divShow.js');
 
         $this->sTitle = t('Meta Tags - Settings');

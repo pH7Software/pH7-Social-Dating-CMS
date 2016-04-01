@@ -14,7 +14,7 @@
             <p class="center">{{ $design->like($com->username,$com->firstName,$com->sex) }} | {{ $design->report($com->sender,$com->username,$com->firstName,$com->sex) }}</p>
         </div>
 
-        {if (UserCore::auth() && ($member_id == $com->sender || $member_id == $com->recipient)) || AdminCore::auth()}
+        {if ($is_user_auth && ($member_id == $com->sender || $member_id == $com->recipient)) || $is_admin_auth}
             <div><a href="{{ $design->url('comment','comment','edit',"$table,$com->recipient,$com->sender,$com->commentId") }}">{lang 'Edit'}</a> |
             {{ LinkCoreForm::display(t('Delete'), 'comment', 'comment', 'delete', array('table'=>$table, 'recipient_id'=>$com->recipient, 'sender_id'=>$com->sender, 'id'=>$com->commentId)) }}</div>
         {/if}

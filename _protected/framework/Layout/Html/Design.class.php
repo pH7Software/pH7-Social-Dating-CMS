@@ -17,6 +17,7 @@ use
 PH7\Framework\Core\Kernel,
 PH7\Framework\Registry\Registry,
 PH7\Framework\Mvc\Model\Engine\Db,
+PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Url\Url,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Geo\Ip\Geo,
@@ -639,30 +640,26 @@ class Design
     }
 
     /**
-     * Add Normal size Media Social Widgets.
+     * Add Normal size Social Media Widgets.
      *
-     * @param boolean $bDisable Disable or Enable it.
-     * AddThis JS file makes the site very slow (and nowadays social widgets like those are a bit old fashioned). So it's by default deactivated and the JS file in the database as well -> 'pH7_StaticFiles' table.
-     *
+     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
      * @return void HTML output.
      */
-    public function likeApi($bDisable = true)
+    public function likeApi()
     {
-        if ($bDisable === false)
+        if ((bool) DbConfig::getSetting('socialMediaWidgets'))
             echo  '<br /><br /><div class="center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_counter addthis_pill_style"></a></div>';
     }
 
     /**
-     * Add Small size Media Social Widgets.
+     * Add Small size Social Media Widgets.
      *
-     * @param boolean $bDisable Disable or Enable it.
-     * AddThis JS file makes the site very slow (and nowadays social widgets like those are a bit old fashioned). So it's by default deactivated and the JS file in the database as well -> 'pH7_StaticFiles' table.
-     *
+     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
      * @return void HTML output.
      */
-    public function littleLikeApi($bDisable = true)
+    public function littleLikeApi()
     {
-        if ($bDisable === false)
+        if ((bool) DbConfig::getSetting('socialMediaWidgets'))
             echo  '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
     }
 

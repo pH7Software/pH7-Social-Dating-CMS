@@ -1,10 +1,3 @@
-    {* Get the frequently used functions in a variable in order to optimize the script and call this function only once in the file *}
-      {{
-        $is_admin_auth = AdminCore::auth();
-        $is_user_auth = UserCore::auth();
-        $is_aff_auth = AffiliateCore::auth()
-      }}
-
     {* Creating Objects *}
       {{ $oSession = new Framework\Session\Session() }}
 
@@ -271,7 +264,7 @@
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{lang 'Settings'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog fa-fw"></i> {lang 'Settings'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','index') }}" title="{lang 'General Settings'}"><i class="fa fa-tachometer"></i> {lang 'General'}</a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting','metamain') }}" title="{lang 'Settings'}"><i class="fa fa-tag"></i> {lang 'Meta Tags'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD, 'setting','metamain') }}" title="{lang 'Meta Tags/Homepage Texts'}"><i class="fa fa-tag"></i> {lang 'Meta Tags/Homepage Texts'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','ads') }}" title="{lang 'Add Banners on the best click-through-rate locations'}"><i class="fa fa-money"></i> {lang 'Advertisement'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{lang 'Analytics Code'}"><i class="fa fa-eye"></i> {lang 'Analytics Code'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{lang 'Custom CSS Style'}"><i class="fa fa-code"></i> {lang 'CSS Style'}</a></li>
@@ -348,12 +341,16 @@
               </ul>
             </li>
 
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('mail','admin','index') }}" title="{lang 'Email Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o"></i> {lang 'Email Manager'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('mail','admin','index') }}" title="{lang 'Members Email Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o"></i> {lang 'Email Manager'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url('mail','admin','msglist') }}" title="{lang 'Messages Monitor'}">{lang 'Messages Monitor'}</a></li>
                 <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search Email'}">{lang 'Search Message'}</a></li>
               </ul>
             </li>
+
+            {if $is_video_enabled}
+              <li><a href="{{ $design->url('video', 'admin', 'config') }}"><i class="fa fa-youtube-play"></i> {lang 'Video Youtube API key'}</a></li>
+            {/if}
 
             {if $is_connect_enabled}
               <li><a href="{{ $design->url('connect', 'admin', 'config') }}"><i class="fa fa-share-alt-square"></i> {lang 'Universal Login Config'}</a></li>
@@ -474,9 +471,6 @@
       {{
         unset(
           $oSession,
-          $is_admin_auth,
-          $is_user_auth,
-          $is_aff_auth,
           $count_moderate_total_album_picture,
           $count_moderate_total_picture,
           $count_moderate_total_album_video,

@@ -1,5 +1,3 @@
-{* Store "UserCore::auth()" function in a variable in order to optimize the script and call this function only once in the file *}
-{{ $is_user_auth = UserCore::auth() }}
 {{ $is_guest_homepage = (!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index') }}
 
 {{ $design->htmlHeader() }}
@@ -56,7 +54,7 @@
 
     <!-- Begin Header JavaScript -->
     <script>var pH7Url={base:'{url_root}',relative:'{url_relative}',tpl:'{url_tpl}',stic:'{url_static}',tplImg:'{url_tpl_img}',tplJs:'{url_tpl_js}',tplMod:'{url_tpl_mod}',data:'{url_data}'};</script>
-    {if AdminCore::auth()}<script>pH7Url.admin_mod = '{url_admin_mod}';</script>{/if}
+    {if $is_admin_auth}<script>pH7Url.admin_mod = '{url_admin_mod}';</script>{/if}
     {{ $design->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery.js') }}
     <!-- End Header JavaScript -->
 
@@ -210,13 +208,9 @@
     <!-- Common Dialog -->
     {{ $design->message() }}
     {{ $design->error() }}
-    {if $is_disclaimer}
+    {if $is_disclaimer AND !$is_admin_auth}
       {main_include 'disclaimer.inc.tpl'}
     {/if}
-
     <!-- End Footer JavaScript -->
-
-{* Destroy the variable *}
-{{ unset($is_user_auth) }}
 
 {{ $design->htmlFooter() }}

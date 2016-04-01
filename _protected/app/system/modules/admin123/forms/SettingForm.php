@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
@@ -58,6 +58,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Enable/Disable the "Animated Video" on the splash homepage. <strong>If you hold <a href="http://ph7cms.com/order">pH7CMSPro</a>, we can provide professional splash videos for your niche and setting-up the video on your site</strong>.'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Ajax Site with AjPH:'), 'full_ajax_site', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t("Be careful! 'Full Ajax Navigation' feature is still in Beta and may not be working properly on all pages."), 'value' => DbConfig::getSetting('fullAjaxSite'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Site Status:'), 'site_status', array(DbConfig::ENABLE_SITE => t('Enable'), DbConfig::MAINTENANCE_SITE => t('Maintenance')), array('value' => DbConfig::getSetting('siteStatus'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Social Media Widgets:'), 'social_media_widgets', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable the Social Media Sharing such as Like and Sharing buttons.'), 'value' => DbConfig::getSetting('socialMediaWidgets'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Adult Disclaimer:'), 'disclaimer', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show an Adult Warning to enter to the site. This is useful for sites with adult content.'), 'value' => DbConfig::getSetting('disclaimer'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable a Cookie Consent Bar to prevent your users that your site uses cookies. This is required for EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show the Latest News about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1)));
@@ -97,7 +98,7 @@ class SettingForm
         /********** Moderation **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="moderation"><div class="col-md-10"><h2 class="underline">' . t('Moderation:') . '</h2>'));
         $oForm->addElement(new \PFBC\Element\Select(t('Avatar Manual Approval:'), 'avatar_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('avatarManualApproval'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Profile Background Manual Approval:'), 'profile_background_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('profileBackgroundManualApproval'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Background Profile Manual Approval:'), 'bg_profile_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('bgProfileManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Note Post Manual Approval:'), 'note_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('noteManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Pictures Manual Approval:'), 'picture_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('pictureManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Videos Manual Approval:'), 'video_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('videoManualApproval'), 'required' => 1)));

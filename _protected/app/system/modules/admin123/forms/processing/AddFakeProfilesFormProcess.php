@@ -11,12 +11,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Util\Various,
-PH7\Framework\Security\Validate\Validate,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Security\Validate\Validate, PH7\Framework\Ip\Ip;
 
 class AddFakeProfilesFormProcess extends Form
 {
@@ -30,9 +25,10 @@ class AddFakeProfilesFormProcess extends Form
         $oExistsModel = new ExistsCoreModel;
         $oValidate = new Validate;
 
-        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/?results=' . $this->httpRequest->post('num')), true);
+        $iUserNum = $this->httpRequest->post('num');
+        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/?results=' . $iUserNum), true);
 
-        foreach($aUserData['results'] as $aUser)
+        foreach ($aUserData['results'] as $aUser)
         {
             $aUser = $aUser['user'];
 
@@ -63,7 +59,7 @@ class AddFakeProfilesFormProcess extends Form
 
         unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aUser, $aData, $aUserData);
 
-        \PFBC\Form::setSuccess('form_add_fake_profiles', t('Users has been successfully added.'));
+        \PFBC\Form::setSuccess('form_add_fake_profiles', nt('%n% user has successfully been added.', '%n% users have successfully been added.', $iUserNum));
     }
 
     /**
@@ -76,14 +72,17 @@ class AddFakeProfilesFormProcess extends Form
      */
     private function _addAvatar(array $aData, UserCore $oUser)
     {
-        if ($rFile = $this->file->getUrlContents($aData['avatar']))
-        {
-            // Create a temporary file before creating the avatar images
-            $sTmpFile = PH7_PATH_TMP . PH7_DS . uniqid() . sha1($aData['avatar']) . '.tmp';
-            $this->file->putFile($sTmpFile, $rFile);
-            $oUser->setAvatar($aData['profile_id'], $aData['username'], $sTmpFile, 1); // Create the different avatar sizes and set the avatar
-            $this->file->deleteFile($sTmpFile);// remove the temporary file as we don't need anymore
+        // Sometime, cURL returns FALSE and doesn't work at all under Windowns server or some other specific server config, so use file_get_contents() instead as it will work.
+        if (!$rFile = $this->file->getUrlContents($aData['avatar'])) {
+            $rFile = $this->file->getFile($aData['avatar']);
         }
+
+        // Create a temporary file before creating the avatar images
+        $sTmpFile = PH7_PATH_TMP . PH7_DS . uniqid() . sha1($aData['avatar']) . '.tmp';
+        $this->file->putFile($sTmpFile, $rFile);
+
+        $oUser->setAvatar($aData['profile_id'], $aData['username'], $sTmpFile, 1); // Create the different avatar sizes and set the avatar
+        $this->file->deleteFile($sTmpFile);// Remove the temporary file as we don't need it anymore
     }
 
 }

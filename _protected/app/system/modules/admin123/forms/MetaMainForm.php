@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
@@ -47,7 +47,7 @@ class MetaMainForm
         unset($aLangs);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', array('value' => $oMeta->langId, 'description' => t('EX: "en", "fr", "es", "jp"'), 'validation' => new \PFBC\Validation\Str(5, 5), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', array('disabled'=>'disabled', 'value' => $oMeta->langId)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Home page title:'), 'page_title', array('value' => $oMeta->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Headline:'), 'headline', array('description' => t('Right headline mainly displaying on the visitors homepage'), 'value' => $oMeta->headline, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('description' => t('Left slogan (headline) mainly displaying on the visitors homepage'), 'value' => $oMeta->slogan, 'validation' => new \PFBC\Validation\Str(2, 200), 'required' => 1)));

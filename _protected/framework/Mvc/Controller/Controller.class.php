@@ -50,6 +50,13 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->view->config = $this->config;
         $this->view->design = $this->design;
 
+        $aAuthVars = [
+            'is_admin_auth' => \PH7\AdminCore::auth(),
+            'is_user_auth' => \PH7\UserCore::auth(),
+            'is_aff_auth' => \PH7\AffiliateCore::auth()
+        ];
+        $this->view->assigns($aAuthVars);
+
         // Set other variables
         $this->_setMetaTplVars();
         $this->_setModsStatusTplVars();

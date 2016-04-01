@@ -11,12 +11,12 @@
 pH7CMS is included with 30 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
 
 
-![Professional PHP Social Networking Dating CMS](https://cloud.githubusercontent.com/assets/1325411/12043273/747be578-ae7b-11e5-84cb-f1724ebc969d.png)
+![Professional PHP Social Networking Dating CMS](https://cloud.githubusercontent.com/assets/1325411/14080218/84d2f9b8-f4fb-11e5-90e2-36c139f0eb66.png)
 
 
 ## Overview
 
-**pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and optimised for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
+**pH7 Dating CMS** is a **Social/Dating CMS** written in **Object-Oriented** PHP (*OOP*), fully compatible and highly optimised for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
 
 It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (not duplicate code).
 
@@ -80,7 +80,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Includes top HTML5 features
 * Allow to sign in to your site with Facebook, Google and Twitter thanks pH7CMS's Connect module
 * Invite Friends
-* Social Bookmark
+* Social Bookmark (Social Media Sharing Buttons)
 * Anti-spam system
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
 * Everyone can easily contribute to this great innovative project with our [GitHub repository](http://github.com/pH7Software/pH7-Social-Dating-CMS)
@@ -109,7 +109,7 @@ Thank you so much in advance!
 
 ## Requirements
 
-**Application Server** PHP 5.5.0 or higher.
+**Application Server** PHP 5.5.0 or higher (Recommended Version: **PHP 7.0.4** or higher).
 
 **Database** MySQL/MariaDB 5.0.15 or higher.
 
@@ -194,15 +194,19 @@ Pierre-Henry Soria
 [pH7CMS Documentation](http://ph7cms.com/doc/)
 
 
-## Contribute!
+## Contributing
 
-Everyone can contribute on the **[pH7CMS GitHub](http://github.com/pH7Software/pH7-Social-Dating-CMS)** repository.
+[![I Love Open Source](http://www.iloveopensource.io/images/logo-lightbg.png)](http://www.iloveopensource.io/projects/56f92658305414c957000002)
+
+Everyone can contribute on **[pH7CMS GitHub](http://github.com/pH7Software/pH7-Social-Dating-CMS)** repository.
+
+Finding bugs, improving the CMS/doc or adding translations. Any contribution is welcome and highly appreciated.
 
 Just clone the repository, make your changes and then make a push ;-)
 
-*WARNING, your code/modification must be of excellent quality.*
+*WARNING, your code/modification must be of excellent quality and follow the [Code Convention](http://ph7cms.com/doc/en/code-convention).* We manually validate all the improvements and changes.
 
---We manually validate all the improvements and changes.--
+You will also be eligible to [pH7CMS VIP members](http://ph7cms.com/get-one-tine-license-for-free/) and get all premium contents.
 
 
 ## Contact

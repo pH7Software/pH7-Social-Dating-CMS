@@ -18,6 +18,7 @@ defined('PH7') or exit('Restricted access');
 class InstallController extends Controller
 {
 
+    /*** Enable/Disable Modules according to the chosen niche ***/
     private $_aSocialMods = [
         'affiliate' => '0',
         'game' => '1',
@@ -50,6 +51,14 @@ class InstallController extends Controller
         'invite' => '1',
         'webcam' => '1',
         'love-calculator' => '1'
+    ];
+
+    /*** Enable/Disable Site Settings according to the chosen niche ***/
+    private $_aSocialSettings = [
+        'social_media_widgets' => '1'
+    ];
+    private $_aDatingSettings = [
+        'social_media_widgets' => '0'
     ];
 
 
@@ -301,10 +310,10 @@ class InstallController extends Controller
                                                 {
                                                     @require_once PH7_ROOT_PUBLIC . '_constants.php';
                                                     @require_once PH7_PATH_APP . 'configs/constants.php';
-                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
 
+                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
                                                     require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-                                                    // To load "Security" class.
+                                                    // To load "\PH7\Framework\Security\Security" class
                                                     Framework\Loader\Autoloader::getInstance()->init();
 
                                                     try
@@ -449,13 +458,15 @@ class InstallController extends Controller
                         case 'zendate':
                             $bUpdateNeeded = true;
                             $sTheme = 'zendate';
-                            $aModUpdated = $this->_aSocialMods;
+                            $aModUpdate = $this->_aSocialMods;
+                            $aSettingUpdate = $this->_aSocialSettings;
                         break;
 
                         case 'datelove':
                             $bUpdateNeeded = true;
                             $sTheme = 'datelove';
-                            $aModUpdated = $this->_aDatingMods;
+                            $aModUpdate = $this->_aDatingMods;
+                            $aSettingUpdate = $this->_aDatingSettings;
                         break;
 
                         // Or for 'base', don't do anything. Just use the default settings already setup in the database
@@ -466,13 +477,22 @@ class InstallController extends Controller
                         @require_once PH7_ROOT_PUBLIC . '_constants.php';
                         @require_once PH7_PATH_APP . 'configs/constants.php';
 
+                        require PH7_PATH_APP . 'includes/helpers/misc.php';
+                        require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+                        // To load "PH7\Framework\Mvc\Model\DbConfig" class
+                        Framework\Loader\Autoloader::getInstance()->init();
+
                         try
                         {
                             require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
-                            foreach ($aModUpdated as $sModName => $sStatus)
+                            // Enable/Disable the modules according to the chosen niche
+                            foreach ($aModUpdate as $sModName => $sStatus)
                                 $this->_updateMods($DB, $sModName, $sStatus);
 
+                            $this->_updateSettings($aSettingUpdate);
+
+                            // Set the theme for the chosen niche
                             $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
                             $rStmt = $DB->prepare($sSql);
                             $rStmt->execute(['theme' => $sTheme]);
@@ -614,6 +634,21 @@ class InstallController extends Controller
         $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'SysModsEnabled SET enabled = :status WHERE folderName = :modName LIMIT 1';
         $rStmt = $oDb->prepare($sSql);
         return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
+    }
+
+    /**
+     * Update Settings.
+     *
+     * @param array $aParams
+     * @return void
+     */
+    private function _updateSettings(array $aParams)
+    {
+        // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
+        Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
+
+        // Enable/Disable Social Media Widgets according to the chosen niche
+        Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
     }
 
     /***** Get the loading image *****/

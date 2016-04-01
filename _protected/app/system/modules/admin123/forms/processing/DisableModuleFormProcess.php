@@ -18,12 +18,12 @@ class DisableModuleFormProcess extends Form
 
         $oModuleModel = new ModuleModel;
 
-        // First, disable all mods
+        // First, disable all mods as uncheckboxes elements aren't send throughth the form
         $this->disableMods($oModuleModel);
 
         // Then, enable the mods selected to be enabled
         foreach($this->httpRequest->post('module_id') as $iModId) {
-            $oModuleModel->update($iModId, '1');
+            $oModuleModel->update($iModId, '1'); // Need to be string because in DB it's an "enum" type
         }
         unset($oModuleModel);
 
@@ -36,9 +36,7 @@ class DisableModuleFormProcess extends Form
     protected function disableMods(ModuleModel $oModuleModel)
     {
         foreach ($oModuleModel->get() as $oMod)
-        {
-            $oModuleModel->update($oMod->moduleId, '0');
-        }
+            $oModuleModel->update($oMod->moduleId, '0'); // Need to be string because in DB it's an "enum" type
     }
 
 }

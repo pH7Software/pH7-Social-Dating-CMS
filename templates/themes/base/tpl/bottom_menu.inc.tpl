@@ -39,7 +39,7 @@
         </ul>
       </div> |
 
-      {if !UserCore::auth() AND $is_newsletter_enabled}
+      {if !$is_user_auth AND $is_newsletter_enabled}
         <a href="{{ $design->url('newsletter','home','subscription') }}" title="{lang 'Subscribe to our newsletter!'}" data-popup="block-page">{lang 'Newsletter'}</a> |
       {/if}
       {if $is_invite_enabled}

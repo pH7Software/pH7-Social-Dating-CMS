@@ -13,7 +13,7 @@
 namespace PH7\Framework\Video;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Http\Http;
+use PH7\Framework\Http\Http, PH7\Framework\Config\Config;
 
 class Api
 {
@@ -28,7 +28,7 @@ class Api
 
     /**
      * @param string $sUrl
-     * @return object Class
+     * @return string Returns the video embed URL.
      */
     public function getVideo($sUrl)
     {
@@ -60,8 +60,8 @@ class Api
     }
 
     /**
-     * @param string $sUrl
-     * @return object Class
+     * @param string $sUrl The URL video.
+     * @return object The Video API class (e.g., "Api\Youtube", "Api\Vimeo" class).
      * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the Api Video is invalid.
      */
     public function getInfo($sUrl)
@@ -72,19 +72,23 @@ class Api
         {
             case 'youtube':
             case 'youtu':
-                $sClass = (new Api\Youtube)->getInfo($sUrl);
+                $sKey = Config::getInstance()->values['module.api']['youtube.key'];
+                $oYoutube = new Api\Youtube;
+                $oYoutube->setKey( (!empty($sKey) ? $sKey : 'INVALID_KEY') ); // Youtube's API v3+ requires an API key
+                $oClass = $oYoutube->getInfo($sUrl);
+                unset($oYoutube);
             break;
 
             case 'vimeo':
-                $sClass = (new Api\Vimeo)->getInfo($sUrl);
+                $oClass = (new Api\Vimeo)->getInfo($sUrl);
             break;
 
             case 'dailymotion':
-                $sClass = (new Api\Dailymotion)->getInfo($sUrl);
+                $oClass = (new Api\Dailymotion)->getInfo($sUrl);
             break;
 
             case 'metacafe':
-                $sClass = (new Api\Metacafe)->getInfo($sUrl);
+                $oClass = (new Api\Metacafe)->getInfo($sUrl);
             break;
 
             default:
@@ -92,7 +96,7 @@ class Api
                 return; // Stop it
         }
 
-        return $sClass;
+        return $oClass;
     }
 
     /**
@@ -100,7 +104,7 @@ class Api
      * @param string $sMedia (preview or movie)
      * @param integer $iWidth
      * @param integer $iHeight
-     * @return object Class
+     * @return string The HTML video integration code.
      * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the Video Api is invalid.
      */
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
