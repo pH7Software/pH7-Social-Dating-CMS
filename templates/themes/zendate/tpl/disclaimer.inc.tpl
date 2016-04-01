@@ -1,1 +1,1 @@
-{{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'disclaimer.js') }}
+{def_main_auto_include}
