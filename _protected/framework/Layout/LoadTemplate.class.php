@@ -158,7 +158,7 @@ class LoadTemplate
         }
         else
         {
-            throw new Exception('Mail template file not found! File: \'' . (PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . '\' doesn\'t exist.');
+            throw new Exception('Mail template file not found! File: \'' . PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . '\' doesn\'t exist.');
         }
 
         return $this;
