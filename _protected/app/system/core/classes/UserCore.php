@@ -297,7 +297,7 @@ class UserCore
         // Is disconnected if the user is logged on as "affiliate" or "administrator".
         if (AffiliateCore::auth() || AdminCore::auth()) $oSession->destroy();
 
-        // Regenerate the session ID to prevent the session fixation
+        // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
 
         // Now we connect the member

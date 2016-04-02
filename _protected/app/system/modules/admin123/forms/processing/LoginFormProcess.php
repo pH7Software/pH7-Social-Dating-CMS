@@ -83,7 +83,7 @@ class LoginFormProcess extends Form
             $iId = $oAdminModel->getId($sEmail, null, 'Admins');
             $oAdminData = $oAdminModel->readProfile($iId, 'Admins');
 
-            // Regenerate the session ID to prevent the session fixation
+            // Regenerate the session ID to prevent session fixation attack
             $this->session->regenerateId();
 
             $aSessionData = [
