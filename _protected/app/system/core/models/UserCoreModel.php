@@ -1297,14 +1297,14 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      * Update the membership group of a user.
      *
      * @param integer $iNewGroupId The new ID of membership group.
-     * @param integer $iProfileId The ID of user.
-     * @param integer $iPrice Default NULL
+     * @param integer $iProfileId The user ID.
+     * @param float $fPrice Price of the membership (e.g. 19.90) Default NULL
      * @param string $sDateTime In date format: 0000-00-00 00:00:00 Default NULL
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
-    public function updateMembership($iNewGroupId, $iProfileId, $iPrice = null, $sDateTime = null)
+    public function updateMembership($iNewGroupId, $iProfileId, $fPrice = null, $sDateTime = null)
     {
-        $bIsPrice = !empty($iPrice);
+        $bIsPrice = !empty($fPrice);
         $bIsTime = !empty($sDateTime);
 
         $sSqlPrice = ($bIsPrice) ? ' AND pay.price = :price' : '';
@@ -1313,7 +1313,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlPrice);
         $rStmt->bindValue(':groupId', $iNewGroupId, \PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        if ($bIsPrice) $rStmt->bindValue(':price', $iPrice, \PDO::PARAM_INT);
+        if ($bIsPrice) $rStmt->bindValue(':price', $fPrice, \PDO::PARAM_STR); // Price can be float too (not always int), so set \PDO::PARAM_STR instead
         if ($bIsTime) $rStmt->bindValue(':dateTime', $sDateTime, \PDO::PARAM_STR);
         return $rStmt->execute();
     }

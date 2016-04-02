@@ -99,9 +99,13 @@ class MainController extends Controller
             case 'paypal':
             {
                 $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
-                if ($oPayPal->valid() && $this->httpRequest->postExists('item_number') && $this->httpRequest->postExists('custom'))
+                if ($oPayPal->valid() && $this->httpRequest->postExists('custom'))
                 {
-                    if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->httpRequest->post('custom', 'int'), $this->httpRequest->post('amount'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    $aData = explode('|', $this->httpRequest->post('custom'));
+                    $iProfileId = (int) $aData[0];
+                    $iItemNumber = (int) $aData[1];
+                    $fPrice = $aData[2];
+                    if ($this->oUserModel->updateMembership($iItemNumber, $iProfileId, $fPrice, $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
                         $this->_bStatus = true; // Status is OK
                         // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
