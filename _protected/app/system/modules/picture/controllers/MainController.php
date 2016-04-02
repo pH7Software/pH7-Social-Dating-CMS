@@ -85,7 +85,7 @@ class MainController extends Controller
 
         if (empty($oAlbums))
         {
-            $this->sTitle = t('Empty Photo Album.');
+            $this->sTitle = t('No Photo Albums Found.');
             $this->_notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
         }
         else

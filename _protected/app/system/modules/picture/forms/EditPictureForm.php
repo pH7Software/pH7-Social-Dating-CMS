@@ -7,7 +7,10 @@
  */
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\Http;
+use
+PH7\Framework\Config\Config,
+PH7\Framework\Session\Session,
+PH7\Framework\Mvc\Request\Http;
 
 class EditPictureForm
 {
@@ -21,6 +24,8 @@ class EditPictureForm
             Framework\Url\Header::redirect();
         }
 
+        $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
+
         $oForm = new \PFBC\Form('form_edit_picture');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_picture', 'form_edit_picture'));
@@ -30,7 +35,7 @@ class EditPictureForm
         $oPhoto = (new PictureModel)->photo((new Session)->get('member_id'), $oHttpRequest->get('album_id'), $oHttpRequest->get('picture_id'), 1, 0, 1);
         unset($oHttpRequest);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Name of your photo:'), 'title', array('value'=>$oPhoto->title, 'required'=>1, 'validation'=>new \PFBC\Validation\Str(2,40))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Name of your photo:'), 'title', array('value'=>$oPhoto->title, 'required'=>1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description of your photo:'), 'description', array('value'=>$oPhoto->description, 'validation'=>new \PFBC\Validation\Str(2,200))));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();

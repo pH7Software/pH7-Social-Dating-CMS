@@ -81,7 +81,7 @@ class MainController extends Controller
             // Adding the stylesheet for Gatway Logo
             $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
 
-            // Regenerate the session ID to prevent the session fixation
+            // Regenerate the session ID to prevent the session fixation attack
             $this->session->regenerateId();
 
             $this->sTitle = t('Pay!');
@@ -241,7 +241,7 @@ class MainController extends Controller
         $sTo = DbConfig::getSetting('adminEmail');
         $sBuyer = $this->session->get('member_first_name') . ' (' . $this->session->get('member_username') . ')';
 
-        $this->view->intro = t('Hello!') . '<br />' . t('You have received a new Payment from %0%', $sBuyer);
+        $this->view->intro = t('Hello!') . '<br />' . t('You received a new Payment from %0%', $sBuyer);
         $this->view->date = t('Date of the payment: %0%', $this->dateTime->get()->date());
         $this->view->browser_info = t('User Browser info: %0%', $this->browser->getUserAgent());
         $this->view->ip = t('Ip of the buyer: %0%', $this->design->ip(null, false));

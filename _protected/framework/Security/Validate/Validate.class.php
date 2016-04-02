@@ -330,8 +330,8 @@ class Validate
         if ($this->_oStr->length($sName) < $iMin || $this->_oStr->length($sName) > $iMax)
             return false;
 
-        // Check the name pattern
-        if(preg_match('`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;!\?\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`', $sName))
+        // Check the name pattern. Name cannot contain any of the below characters
+        if(preg_match('`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;!¿¡\?\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`', $sName))
             return false;
 
         return true;

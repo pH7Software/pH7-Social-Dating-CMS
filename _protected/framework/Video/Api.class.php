@@ -74,7 +74,7 @@ class Api
             case 'youtu':
                 $sKey = Config::getInstance()->values['module.api']['youtube.key'];
                 $oYoutube = new Api\Youtube;
-                $oYoutube->setKey( (!empty($sKey) ? $sKey : 'INVALID_KEY') ); // Youtube's API v3+ requires an API key
+                $oYoutube->setKey($sKey); // Youtube's API v3+ requires an API key
                 $oClass = $oYoutube->getInfo($sUrl);
                 unset($oYoutube);
             break;

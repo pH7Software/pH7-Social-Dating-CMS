@@ -23,6 +23,10 @@ class Youtube extends Api implements IApi
 
     private $_oContentDetails;
 
+    /**
+     * @param string $sUrl
+     * @return mixed (string | boolean) Returns the embed video URL if found, FALSE otherwise.
+     */
     public function getVideo($sUrl)
     {
         return $this->getEmbedUrl($sUrl);
@@ -30,26 +34,29 @@ class Youtube extends Api implements IApi
 
     /**
      * @param string $sUrl URL video (e.g., http://www.youtube.com/watch?v=Y77CDJu4JyA).
-     * @return mixed (string | boolean) Returns the video embed URL if it was found, FALSE otherwise.
+     * @return mixed (object | boolean) FALSE if unable to open the API URL, otherwise $this object.
      * @throws \PH7\Framework\Video\Api\Exception If the is a problem with Youtube API service.
      */
     public function getInfo($sUrl)
     {
         $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '&key=' . $this->sApiKey . '&part=snippet,contentDetails,statistics,status';
 
-        // Use Youtube's API to get the Youtube video's data only if the API key is set, otherwise it won't work
-        if ($oData = $this->getData($sDataUrl) && !empty($this->sApiKey) && strlen($this->sApiKey) > 10)
+        if ($oData = $this->getData($sDataUrl))
         {
-            if (!empty($oData->error->errors[0]->message))
+            // Use Youtube's API to get the Youtube video's data only if the API key has been set, otherwise it won't work
+            if (!empty($this->sApiKey) && strlen($this->sApiKey) > 10)
             {
-                throw new Exception($oData->error->errors[0]->message);
+                if (!empty($oData->error->errors[0]->message))
+                {
+                    throw new Exception('YouTube API: ' . $oData->error->errors[0]->message);
+                }
+                else
+                {
+                    $this->oData = $oData->items[0]->snippet;
+                    $this->_oContentDetails = $oData->items[0]->contentDetails; // Need only for getting the video duration
+                }
             }
-            else
-            {
-                $this->oData = $oData->items[0]->snippet;
-                $this->_oContentDetails = $oData->items[0]->contentDetails; // Need only to get the video duration
-                return $this;
-            }
+            return $this;
         }
 
         return false;

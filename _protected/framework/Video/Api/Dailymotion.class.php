@@ -31,7 +31,7 @@ class Dailymotion extends Api implements IApi
 
     /**
      * @param string $sUrl
-     * @return mixed (object | boolean) FALSE if unable to open the url, otherwise the this object.
+     * @return mixed (object | boolean) FALSE if unable to open the URL, otherwise $this object.
      */
     public function getInfo($sUrl)
     {

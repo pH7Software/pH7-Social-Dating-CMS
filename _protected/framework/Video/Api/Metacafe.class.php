@@ -22,7 +22,7 @@ class Metacafe extends Api implements IApi
 
     /**
      * @param string $sUrl
-     * @return mixed (string | boolean) Returns the video embed URL if it was found, FALSE otherwise.
+     * @return mixed (string | boolean) Returns the embed video URL if found, FALSE otherwise.
      */
     public function getVideo($sUrl)
     {
