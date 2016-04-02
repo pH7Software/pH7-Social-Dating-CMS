@@ -2,11 +2,10 @@
 /**
  * @title            Page Class
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Page
- * @version          1.0
  */
 
 namespace PH7\Framework\Page;
@@ -41,7 +40,7 @@ class Page
         (new Browser)->noCache();
 
         // Inclusion of the HTML Maintenance page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/other/maintenance.html.php';
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/other/maintenance.html.php';
 
         // Stop script
         exit;
@@ -58,7 +57,7 @@ class Page
     public static function message($sMsg)
     {
         // Inclusion of the HTML Message page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/other/msg.html.php';
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/other/msg.html.php';
 
         // Stop script
         exit;
@@ -77,7 +76,7 @@ class Page
         Http::setHeadersByCode(403);
 
         // Inclusion of the HTML IP Banned page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/other/banned.html.php';
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/other/banned.html.php';
 
         // Stop script
         exit;
@@ -100,7 +99,7 @@ class Page
         (new Browser)->noCache();
 
         // Inclusion of the HTML Exception page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/error/except.html.php';
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/error/except.html.php';
     }
 
     /**
@@ -119,7 +118,7 @@ class Page
         (new Browser)->noCache();
 
         // Inclusion of the HTML Internal Server Error page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/error/500.html.php';
+        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/error/500.html.php';
 
         // Stop script
         exit;
