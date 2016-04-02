@@ -42,7 +42,7 @@ class MetaMainFormProcess extends Form
     }
 
     /**
-     * Update the fields in the DB (in modified only).
+     * Update the fields in the DB (if modified only).
      *
      * @param object $oMeta Meta Main DB data.
      * @return void

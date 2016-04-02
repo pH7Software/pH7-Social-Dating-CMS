@@ -121,7 +121,7 @@ class SettingFormProcess extends Form
     }
 
     /**
-     * Update the other "generic" fields.
+     * Update the other "generic" fields (if modified only).
      *
      * @return void
      */
@@ -198,7 +198,7 @@ class SettingFormProcess extends Form
     }
 
     /**
-     * Update Logo (if modified only).
+     * Update Logo (if a new one if uploaded only).
      *
      * @return void
      */
