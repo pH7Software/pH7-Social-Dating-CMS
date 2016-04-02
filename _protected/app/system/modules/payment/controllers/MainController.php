@@ -159,7 +159,7 @@ class MainController extends Controller
 
                 if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id'))
                 {
-                    if ($this->oUserModel->updateMembership($this->httpRequest->post('sale_id'), $this->iProfileId, $this->httpRequest->post('price'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    if ($this->oUserModel->updateMembership($this->httpRequest->post('cart_order_id'), $this->iProfileId, $this->httpRequest->post('total'), $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
                         $this->_bStatus = true; // Status is OK
                         $this->notification('TwoCO'); // Add info into the log file
