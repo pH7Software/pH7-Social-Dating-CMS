@@ -140,7 +140,7 @@ class VideoFormProcess extends Form
         }
         else
         {
-            \PFBC\Form::setError('form_video', t('You must choose a type of video!'));
+            \PFBC\Form::setError('form_video', t('You have to choose video type.'));
             return;
         }
 

@@ -158,7 +158,7 @@ class MainController extends Controller
         {
             $this->sTitle = t('None "%0%" author was found!', $sAuthorTxt);
             $this->notFound(false); // For the Ajax profile blocks, we can not put HTTP error code 404, so the attribute is "false"
-            $this->view->error = t("No %0%'s post was found.", $sAuthor); // We change the error message
+            $this->view->error = t("No %0%'s posts found.", $sAuthor); // We change the error message
         }
         else
         {
