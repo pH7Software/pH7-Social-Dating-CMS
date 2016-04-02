@@ -16,31 +16,23 @@ PH7\Framework\Mvc\Router\Uri;
 class EditMembershipFormProcess extends Form
 {
 
+    private $aFields = [
+        'name' => 'name',
+        'description' => 'description',
+        'price' => 'price',
+        'expiration_days' => 'expirationDays',
+        'enable' => 'enable'
+    ];
+
     public function __construct()
     {
         parent::__construct();
 
-        $iGroupId = $this->httpRequest->get('group_id', 'int');
         $oPayModel = new PaymentModel;
-        $oMembership = $oPayModel->getMemberships($iGroupId);
+        $iGroupId = $this->httpRequest->get('group_id', 'int');
 
-        if (!$this->str->equals($this->httpRequest->post('name'), $oMembership->name))
-            $oPayModel->updateMembershipGroup('name', $this->httpRequest->post('name'), $iGroupId);
-
-        if (!$this->str->equals($this->httpRequest->post('description'), $oMembership->description))
-            $oPayModel->updateMembershipGroup('description', $this->httpRequest->post('description'), $iGroupId);
-
-        $aPerms = serialize($this->httpRequest->post('perms'));
-        $oPayModel->updateMembershipGroup('permissions', $aPerms, $iGroupId);
-
-        if (!$this->str->equals($this->httpRequest->post('price'), $oMembership->price))
-            $oPayModel->updateMembershipGroup('price', $this->httpRequest->post('price'), $iGroupId);
-
-        if (!$this->str->equals($this->httpRequest->post('expiration_days'), $oMembership->expirationDays))
-            $oPayModel->updateMembershipGroup('expirationDays', $this->httpRequest->post('expiration_days'), $iGroupId);
-
-        if (!$this->str->equals($this->httpRequest->post('enable'), $oMembership->enable))
-            $oPayModel->updateMembershipGroup('enable', $this->httpRequest->post('enable'), $iGroupId);
+        $this->updateTextFields($oPayModel, $iGroupId);
+        $this->updatePermsFields($oPayModel, $iGroupId);
 
         unset($oPayModel);
 
@@ -48,6 +40,35 @@ class EditMembershipFormProcess extends Form
         (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
         Header::redirect(Uri::get('payment','admin','membershiplist'), t('The Membership has been saved successfully!'));
+    }
+
+    /**
+     * Update fields into the DB (the modified ones only).
+     *
+     * @param PaymentModel $oPayModel
+     * @param integer $iGroupId
+     * @return void
+     */
+    private function updateTextFields(PaymentModel $oPayModel, $iGroupId)
+    {
+        $oMembership = $oPayModel->getMemberships($iGroupId);
+
+        foreach ($this->aFields as $sKey => $sVal)
+            if (!$this->str->equals($this->httpRequest->post($sKey), $oMembership->$sVal))
+                $oPayModel->updateMembershipGroup($sVal, $this->httpRequest->post($sKey), $oMembership->groupId);
+    }
+
+    /**
+     * Update serialized permission data.
+     *
+     * @param PaymentModel $oPayModel
+     * @param integer $iGroupId
+     * @return void
+     */
+    private function updatePermsFields(PaymentModel $oPayModel, $iGroupId)
+    {
+        $aPerms = serialize($this->httpRequest->post('perms'));
+        $oPayModel->updateMembershipGroup('permissions', $aPerms, $iGroupId);
     }
 
 }
