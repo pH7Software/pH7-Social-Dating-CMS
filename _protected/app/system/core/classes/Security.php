@@ -41,7 +41,7 @@ class Security
         t('We also recommend that you change the password of your emailbox, because it is with this emalbox we send a potential new password in case you forget it.') . '</li></ol><br /><hr />' .
         t('Have a nice day!');
 
-        $sMessageHtml = $oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/core/alert_login_attempt.tpl', $sTo);
+        $sMessageHtml = $oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/alert_login_attempt.tpl', $sTo);
 
         $aInfo = [
             'to' => $sTo,

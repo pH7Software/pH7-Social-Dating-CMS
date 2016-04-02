@@ -64,7 +64,7 @@ class Newsletter extends Core
     {
         $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 
-        $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
+        $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
 
         $aInfo = [
             'subject' => $this->httpRequest->post('subject'),

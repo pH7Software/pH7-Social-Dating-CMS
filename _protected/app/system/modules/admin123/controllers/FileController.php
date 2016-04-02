@@ -46,7 +46,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Email Templates');
 
-        $this->_displayAction(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS .PH7_TPL_NAME . PH7_DS . 'mail' . PH7_DS, '.tpl');
+        $this->_displayAction(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_TPL_MAIL_NAME . PH7_DS . 'tpl' . PH7_DS . 'mail' . PH7_DS, '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }
@@ -73,7 +73,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Pages');
 
-        $this->_displayAction(PH7_PATH_SYS_MOD . 'page' . PH7_DS . PH7_VIEWS .PH7_TPL_NAME, '.tpl');
+        $this->_displayAction(PH7_PATH_SYS_MOD . 'page' . PH7_DS . PH7_VIEWS . PH7_TPL_MOD_NAME, '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
         $this->output();
     }

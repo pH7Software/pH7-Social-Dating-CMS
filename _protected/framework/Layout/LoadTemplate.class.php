@@ -18,7 +18,7 @@ use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
 class LoadTemplate
 {
 
-    private $_oConfig, $_sDefaultTpl, $_sUserTpl, $_sTplName, $_sModTplName;
+    private $_oConfig, $_sDefaultTpl, $_sUserTpl, $_sTplName, $_sModTplName, $_sMailTplName;
 
     public function __construct()
     {
@@ -73,6 +73,16 @@ class LoadTemplate
     }
 
     /**
+     * Get the current mail template name.
+     *
+     * @return string The mail template name.
+     */
+    public function getMailTpl()
+    {
+        return $this->_sMailTplName;
+    }
+
+    /**
      * @return object $this
      * @throws \PH7\Framework\Layout\Exception If the template file is not found.
      */
@@ -100,7 +110,7 @@ class LoadTemplate
 
     /**
      * @return object $this
-     * @throws \PH7\Framework\Layout\Exception If the template module file is not found.
+     * @throws \PH7\Framework\Layout\Exception If the module template file is not found.
      */
     public function modTpl()
     {
@@ -120,7 +130,7 @@ class LoadTemplate
         }
         else
         {
-            throw new Exception('Template module file not found! File: \'' . $oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
+            throw new Exception('Module template file not found! File: \'' . $oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
         }
 
         unset($oRegistry);
@@ -128,9 +138,30 @@ class LoadTemplate
         return $this;
     }
 
-    public function __destruct()
+    /**
+     * @return object $this
+     * @throws \PH7\Framework\Layout\Exception If the mail template file is not found.
+     */
+    public function mailTpl()
     {
-        unset($this->_oConfig, $this->_sDefaultTpl, $this->_sUserTpl, $this->_sTplName, $this->_sModTplName);
+        if ($this->_oConfig->load(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . $this->_sUserTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
+        {
+            $this->_sMailTplName = $this->_sUserTpl;
+        }
+        else if ($this->_oConfig->load(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . $this->_sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
+        {
+            $this->_sMailTplName = $this->_sDefaultTpl;
+        }
+        else if ($this->_oConfig->load(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
+        {
+            $this->_sMailTplName = PH7_DEFAULT_THEME;
+        }
+        else
+        {
+            throw new Exception('Mail template file not found! File: \'' . PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
+        }
+
+        return $this;
     }
 
 }

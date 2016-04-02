@@ -387,8 +387,10 @@ final class FrontController
         $oLoadTpl = (new LoadTemplate)->setDefaultTpl(DbConfig::getSetting('defaultTemplate'));
         $oLoadTpl->tpl();
         $oLoadTpl->modTpl();
+        $oLoadTpl->mailTpl();
         define( 'PH7_TPL_NAME', $oLoadTpl->getTpl() );
         define( 'PH7_TPL_MOD_NAME', $oLoadTpl->getModTpl() );
+        define( 'PH7_TPL_MAIL_NAME', $oLoadTpl->getMailTpl() );
         unset($oLoadTpl);
     }
 

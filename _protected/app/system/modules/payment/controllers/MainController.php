@@ -245,7 +245,7 @@ class MainController extends Controller
         $this->view->details_text = t('Please find all other details below');
         $this->view->details_data = print_r($_POST, true);
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/payment/ipn.tpl', $sTo);
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/payment/ipn.tpl', $sTo);
 
         $aInfo = [
             'to' => $sTo,
