@@ -24,7 +24,7 @@ class PaymentDesign extends Framework\Core\Core
         $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
 
         $oPayPal->param('business', $this->config->values['module.setting']['paypal.email'])
-            ->param('custom', $this->session->get('member_id') . '|' . $oMembership->groupId . '|' . $oMembership->price)
+            ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price)) // Use base64_encode() to discourage curious people
             ->param('amount', $oMembership->price)
             ->param('item_number', $oMembership->groupId)
             ->param('item_name', $this->registry->site_name . ' ' . $oMembership->name)
@@ -57,7 +57,6 @@ class PaymentDesign extends Framework\Core\Core
         $oStripe = new Stripe;
 
         $oStripe->param('item_number', $oMembership->groupId)
-            ->param('member_id', $this->session->get('member_id'))
             ->param('amount', $oMembership->price);
 
         echo

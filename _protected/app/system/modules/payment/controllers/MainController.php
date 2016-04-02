@@ -6,7 +6,7 @@
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Payment / Controller
- * @version        1.0
+ * @version        1.1
  */
 namespace PH7;
 
@@ -101,11 +101,10 @@ class MainController extends Controller
                 $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
                 if ($oPayPal->valid() && $this->httpRequest->postExists('custom'))
                 {
-                    $aData = explode('|', $this->httpRequest->post('custom'));
-                    $iProfileId = (int) $aData[0];
-                    $iItemNumber = (int) $aData[1];
-                    $fPrice = $aData[2];
-                    if ($this->oUserModel->updateMembership($iItemNumber, $iProfileId, $fPrice, $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
+                    $iItemNumber = (int) $aData[0];
+                    $fPrice = $aData[1];
+                    if ($this->oUserModel->updateMembership($iItemNumber, $this->iProfileId, $fPrice, $this->dateTime->dateTime('Y-m-d H:i:s')))
                     {
                         $this->_bStatus = true; // Status is OK
                         // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
@@ -133,7 +132,7 @@ class MainController extends Controller
                             ]
                         );
 
-                        if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->httpRequest->post('member_id', 'int'), $sAmount, $this->dateTime->dateTime('Y-m-d H:i:s')))
+                        if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->iProfileId, $sAmount, $this->dateTime->dateTime('Y-m-d H:i:s')))
                         {
                             $this->_bStatus = true; // Status is OK
                             $this->notification('Stripe'); // Add info into the log file
