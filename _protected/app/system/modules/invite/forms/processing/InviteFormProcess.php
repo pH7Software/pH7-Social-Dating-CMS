@@ -62,7 +62,7 @@ class InviteFormProcess extends Form
         t('Message left by your friend:') . '<br />"<em>' . $this->httpRequest->post('message') . '</em>"';
         $this->view->footer = t('You are receiving this message because "%0%" you know has entered your email address in the form of invitation of friends to our site. This is not spam!', $this->httpRequest->post('first_name'));
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/mail/sys/mod/invite/invitation.tpl', $sMail);
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/invite/invitation.tpl', $sMail);
 
         $aInfo = [
             'to' => $sMail,

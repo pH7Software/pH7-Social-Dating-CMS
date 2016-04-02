@@ -32,7 +32,7 @@ class BirthdayCore extends Core
             t("All %site_name%'s team wish you a very happy birthday!") . '<br />' .
             t('Enjoy it well and enjoy yourself!');
 
-            $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/mail/sys/mod/user/birthday.tpl', $oBirth->email);
+            $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/user/birthday.tpl', $oBirth->email);
 
             $aInfo = [
                 'subject' => t('Happy Birthday %0%!', $oBirth->firstName),

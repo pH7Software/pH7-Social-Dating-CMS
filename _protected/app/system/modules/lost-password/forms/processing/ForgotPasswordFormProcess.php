@@ -61,7 +61,7 @@ class ForgotPasswordFormProcess extends Form
         t('If you requested this, click on the link below, otherwise ignore this email and your password will remain unchanged.') .
         '<br /><a href="' . $sResetUrl . '">' . $sResetUrl . '</a>';
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/mail/sys/mod/lost-password/confirm-lost-password.tpl', $oData->email);
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/confirm-lost-password.tpl', $oData->email);
 
         $aInfo = [
             'to' => $oData->email,
