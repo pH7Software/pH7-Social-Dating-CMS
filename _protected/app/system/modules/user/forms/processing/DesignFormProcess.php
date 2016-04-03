@@ -40,7 +40,7 @@ class DesignFormProcess extends Form
         {
             $sModerationText = t('Your Wallpaper has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
             $sText =  t('Your Wallpaper has been updated successfully!');
-            $sMsg = (DbConfig::getSetting('profileBackgroundManualApproval')) ? $sModerationText : $sText;
+            $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
             \PFBC\Form::setSuccess('form_design', $sMsg);
         }
     }
