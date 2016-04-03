@@ -70,7 +70,7 @@ final class Autoloader
         if (!\PH7\is_internet())
         {
             $sMsg = '<p class="warning">No Internet Connection</p>
-            <p>Whoops! Your server has to be connect to the Internet in order to get your website working.</p>';
+            <p>Whoops! Your server has to be connected to the Internet in order to get your website working.</p>';
 
             echo \PH7\html_body('Enable your Internet connection', $sMsg);
             exit;
