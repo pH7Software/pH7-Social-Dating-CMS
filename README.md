@@ -121,6 +121,8 @@ Thank you so much in advance!
 
 **Video** [FFmpeg](http://ffmpeg.org)
 
+**Specific Requirements** Server has to be connected to Internet.
+
 **Minimum Web Space** 2.0 GB
 
 
