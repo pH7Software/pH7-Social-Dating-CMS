@@ -152,13 +152,13 @@ function file-strict-permissions() {
 
 # Backup. Create a compressed archive of the project
 function backup() {
-    echo "Specify the path ending with a SLASH where the archive will be stored"
+    echo "Specify the path ending with a SLASH where you want the archive will be stored"
     read path
     if [ ! -d $path ]; then
         echo "The path is not a valid directory."
         exit 1
     fi
-    file="PH7CMS-backup-project.tar.bz2"
+    file="PH7CMS-backup.tar.bz2"
     full_path=$path$file
     if [ -e  $full_path ]; then
         _confirm "A backup already exists in this directory, do you want to delete it?"
