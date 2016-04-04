@@ -27,6 +27,9 @@ function run() {
             eval "$exec 's/\s+$/\n/'"
             eval "$exec 's/\t/    /g'"
 
+            # Optimize Composer
+            php ./composer.phar dumpautoload -o
+
             ## Caches
             # public
             rm -rf ./_install/data/caches/smarty_compile/*
@@ -70,9 +73,6 @@ function run() {
             rm -rf ./_protected/.quarantine/
             rm -rf ./_protected/.tmb/
             rm -rf ./_protected/vendor/cache/
-
-            # Optimize Composer
-            php ./composer.phar dumpautoload -o
 
             echo "Done!"
             echo "Remove \"_tools/\" folder (containing this file) before packaging pH7CMS"
