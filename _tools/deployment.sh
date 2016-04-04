@@ -69,6 +69,7 @@ function run() {
             rm -rf ./.tmb/
             rm -rf ./_protected/.quarantine/
             rm -rf ./_protected/.tmb/
+            rm -rf ./_protected/vendor/cache/
 
             # Optimize Composer
             php ./composer.phar dumpautoload -o
