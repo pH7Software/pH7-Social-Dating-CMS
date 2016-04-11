@@ -1,13 +1,7 @@
-<div class="col-md-8">
-    <p>{lang 'Membership Name:', $info->membershipName}</p>
-
-    <p>{lang 'Expiration Date:'}
-    {if $info->expirationDays == 0}
-      {lang 'Unlimited'}
-    {else}
-      {% date_sub($info->membershipDate, date_interval_create_from_date_string($info->expirationDays . ' day')) %}
-    {/if}
-    </p>
-
+<div class="center">
+    <ul>
+        <li class="bold">{lang 'Membership Name: %0%', '<span class="italic">' . $membershipName . '</span>'}</li>
+        <li  class="bold">{lang 'Expiration Date: %0%', '<span class="italic">' . $expirationDate . '</span>'}</li>
+    </ul>
     <p><a class="btn btn-primary btn-md" href="{{ $design->url('payment', 'main', 'membership') }}">{lang 'Renew your membership'}</a></p>
 </div>
