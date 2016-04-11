@@ -1278,6 +1278,30 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
+     * Get the membership details of a user.
+     *
+     * @param integer $profileId
+     * @return object The membership detais.
+     */
+    public function getMembershipDetails($iProfileId)
+    {
+        $this->cache->start(self::CACHE_GROUP, 'membershipdetails' . $iProfileId, static::CACHE_TIME);
+
+        if (!$oData = $this->cache->get())
+        {
+            $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members'). 'AS m INNER JOIN ' . Db::prefix('Memberships') . 'AS g ON m.groupId = g.groupId WHERE profileId = :profileId LIMIT 1';
+            $rStmt = Db::getInstance()->prepare($sSql);
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->execute();
+            $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $this->cache->put($oData);
+        }
+
+        return $oData;
+    }
+
+    /**
      * Check if membership is expired.
      *
      * @param integer $iProfileId

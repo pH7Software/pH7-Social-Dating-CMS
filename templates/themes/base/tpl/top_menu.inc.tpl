@@ -152,6 +152,7 @@
                 <li><a href="{{ $design->url('user','setting','design') }}">{lang 'Design Profile'}</a></li>
                 <li><a href="{{ $design->url('user','setting','notification') }}">{lang 'Notifications'}</a></li>
                 <li><a href="{{ $design->url('user','setting','privacy') }}">{lang 'Privacy Setting'}</a></li>
+                <li><a href="{{ $design->url('payment','main','info') }}">{lang 'Membership Details'}</a></li>
                 <li><a href="{{ $design->url('user','setting','password') }}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
               </ul>
             </li>

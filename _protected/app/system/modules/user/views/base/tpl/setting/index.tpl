@@ -4,6 +4,7 @@
   <li><a href="#design"><span>{lang 'Wallpaper'}</span></a></li>
   <li><a href="#notification"><span>{lang 'Notifications'}</span></a></li>
   <li><a href="#privacy"><span>{lang 'Privacy'}</span></a></li>
+  <li><a href="{{ $design->url('payment','main','info') }}"><span>{lang 'Membership Details'}</span></a></li>
   <li><a href="#pwd"><span>{lang 'Change Password'}</span></a></li>
 </ol>
 

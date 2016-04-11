@@ -55,7 +55,7 @@
           <td><a href="{url_root}{% $user->username %}{page_ext}" target="_blank">{% $user->username %}{page_ext}</a></td>
           <td>{{ $avatarDesign->get($user->username, $user->firstName, null, 32) }}</td>
           <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($user->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}</td>
-          <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of Group Membership *}
+          <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of the Membership Group *}
           <td>{% $dateTime->get($user->joinDate)->dateTime() %}</td>
           <td>{if !empty($user->lastActivity)} {% $dateTime->get($user->lastActivity)->dateTime() %} {else} {lang 'No last login'} {/if}</td>
           <td>{if !empty($user->lastEdit)} {% $dateTime->get($user->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>

@@ -43,8 +43,7 @@ class MainController extends Controller
     public function index()
     {
         $this->sTitle = t('Payment Zone');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->output();
     }
 
@@ -59,8 +58,7 @@ class MainController extends Controller
         else
         {
             $this->sTitle = t('Memberships List');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->memberships = $oMembershipModel;
             $this->output();
         }
@@ -85,8 +83,7 @@ class MainController extends Controller
             $this->session->regenerateId();
 
             $this->sTitle = t('Pay!');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->membership = $oMembershipModel;
             $this->output();
         }
@@ -182,8 +179,7 @@ class MainController extends Controller
 
         // Set the page titles
         $this->sTitle = ($this->_bStatus) ? t('Thank you!') : t('Error occurred!');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         if ($this->_bStatus)
         {
@@ -209,6 +205,14 @@ class MainController extends Controller
 
         // Send a notification email
         $this->sendNotifyMail();
+    }
+
+    public function info()
+    {
+        $this->sTitle = t('Details of the membership');
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
+        $this->view->info = $this->oUserModel->getMembershipDetails($this->iProfileId);
+        $this->output();
     }
 
     /**
