@@ -23,7 +23,7 @@ abstract class PermissionCore extends Framework\Core\Core
     }
 
     /**
-     * Checks whether the user membership is still valid.
+     * Checks whether the user membership is still valid or not.
      *
      * @return boolean
      */
