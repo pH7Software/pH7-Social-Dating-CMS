@@ -212,17 +212,17 @@ class MainController extends Controller
         $this->sTitle = t('Details of the membership');
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
-        $info = $this->oUserModel->getMembershipDetails($this->iProfileId);
-        if ($info->expirationDays != 0 && !empty($info->membershipDate)) {
-            $oDate = new \DateTime($info->membershipDate);
-            $oDate->sub(new \DateInterval( sprintf('P%dD', $info->expirationDays)) );
+        $oInfo = $this->oUserModel->getMembershipDetails($this->iProfileId);
+        if ($oInfo->expirationDays != 0 && !empty($oInfo->membershipDate)) {
+            $oDate = new \DateTime($oInfo->membershipDate);
+            $oDate->sub(new \DateInterval( sprintf('P%dD', $oInfo->expirationDays)) );
             $this->view->expirationDate = $oDate->format($this->config->values['language.application']['timezone']);
             unset($oDate);
         } else {
             $this->view->expirationDate = t('Unlimited');
         }
-        $this->view->membershipName = $info->membershipName;
-        unset($info);
+        $oInfo->view->membershipName = $oInfo->membershipName;
+        unset($oInfo);
 
         $this->output();
     }
