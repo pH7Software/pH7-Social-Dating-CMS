@@ -221,7 +221,7 @@ class MainController extends Controller
         } else {
             $this->view->expirationDate = t('Unlimited');
         }
-        $oInfo->view->membershipName = $oInfo->membershipName;
+        $this->view->membershipName = $oInfo->membershipName;
         unset($oInfo);
 
         $this->output();
