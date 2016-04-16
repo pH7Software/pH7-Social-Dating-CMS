@@ -219,7 +219,7 @@ class MainController extends Controller
             $this->view->expirationDate = $oDate->format($this->config->values['language.application']['timezone']);
             unset($oDate);
         } else {
-            $this->view->expirationDate = t('Unlimited');
+            $this->view->expirationDate = t('Never');
         }
         $this->view->membershipName = $oInfo->membershipName;
         unset($oInfo);
