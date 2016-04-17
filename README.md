@@ -61,6 +61,8 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Dynamic Field Forms Management
 * Privacy Settings
 * Banner/Advertisement Management
+* Fake Profile Generator
+* CSV User Importer
 * Support for Multiple Languages, Internationalization and Localization (I18N)
 * American & European for the Time and Date formats
 * Cache system for the database, pH7Tpl (our template engine), static files (HTML, CSS, JS), string content, ...
@@ -69,7 +71,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Report
 * SEO-Friendly (Title, Content, Code, ...), Sitemap module, [hreflang](https://support.google.com/webmasters/answer/189077), possibility to translate each URL, ...
 * Multilingual URLs
-* Check that all UGC (User-Generated Content) is Unique (to avoid spam and malicious users)
+* Check that all UGC (User-Generated Content) are Unique (to avoid spam and malicious users)
 * RSS Feed
 * Fully API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
@@ -88,7 +90,10 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 
 **It's not a hazard that pH7CMS is considered to be the first choice for creating enterprise level Dating Apps/Service or Social Networking Sites**
 
-*If you need, [here is some features](http://ph7cms.com/social-dating-features/) included in pH7CMS (and obviously in [pH7CMS Pro](http://ph7cms.com/pro/) as well) that may interest you!*
+*If you want more, [here are other great features](http://ph7cms.com/social-dating-features/) included in pH7CMS (and obviously in [pH7CMS Pro](http://ph7cms.com/pro/) as well) that may interest you!*
+
+![Build a Social Dating Website with pH7CMS](https://cloud.githubusercontent.com/assets/1325411/14080217/84ca02c2-f4fb-11e5-941d-dedc0354dafd.png)
+
 
 ## Help Us to Grow Up
 
