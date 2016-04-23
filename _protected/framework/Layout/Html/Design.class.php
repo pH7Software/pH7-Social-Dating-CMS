@@ -514,7 +514,7 @@ class Design
      */
     public function getUserAvatar($sUsername, $sSex = '', $iSize = '')
     {
-        $oCache = (new \PH7\Framework\Cache\Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize, 60*24*30);
+        $oCache = (new \PH7\Framework\Cache\Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize, 3600);
 
         if (!$sUrl = $oCache->get())
         {

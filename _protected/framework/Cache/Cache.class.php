@@ -103,7 +103,7 @@ class Cache
      *
      * @param string $sGroup The Group Cache (This creates a folder).
      * @param string $sId (The ID for the file).
-     * @param integer $iTtl Cache lifetime. If NULL, the file never expires.
+     * @param integer $iTtl Cache lifetime in seconds. If NULL, the file never expires.
      * @return object this
      */
     public function start($sGroup, $sId, $iTtl)
