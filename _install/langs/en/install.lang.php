@@ -18,7 +18,7 @@ $LANG = array(
     'CMS_desc' => '<p>Welcome to ' . Controller::SOFTWARE_NAME . ' Installer.<br />
     Thank you for choosing <strong>pH7CMS</strong> and we hope it will please you.</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
-    'requirements_desc' => 'WARNING! Please make sure <abbr title="Your Server, on loca host it will be you (your computer)">you are</abbr> connected to the Internet and your server has the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">minimum requirements</a>.',
+    'requirements_desc' => 'WARNING! Please make sure <abbr title="Your Server. On loca host it will be you (your computer)">you are</abbr> connected to the Internet and your server has the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">minimum requirements</a>.',
     'requirements2_desc' => 'First off, please create a MySQL database and assign a user to it with full privileges. Once you have created the MySQL database and its user, make sure to write down the database name, database username and password, because you will need them for installation.',
     'config_path' => '&quot;protected&quot; directory path',
     'desc_config_path' => 'Please specify the full path to your &quot;protected&quot; folder.<br />
