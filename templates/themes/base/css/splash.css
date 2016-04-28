@@ -4,19 +4,24 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-#logo{float:left;margin-top:20px;margin-left:20px;}
-#headings,.noscript{margin-top:0;}
+#logo {
+    float: left;
+    margin-top: 20px;
+}
+#headings,.noscript {
+    margin-top: 0;
+}
 
 .folio_block {
     position: absolute;
 }
 .carousel {
-    margin-top:30px;
+    margin-top: 30px;
 }
 
 .splash_slideshow {
     float: left;
-    margin-top:22px;
+    margin-top: 22px;
 }
 
 /** Avatar Profiles Block **/
@@ -25,15 +30,15 @@
 }
 .pic_block:hover a {
   opacity:0.5;
-  transition:opacity .35s ease-in-out;
-  -webkit-transition:opacity .35s ease-in-out;
-  -moz-transition:opacity .35s ease-in-out;
-  -o-transition:opacity .35s ease-in-out;
-  -ms-transition:opacity .35s ease-in-out;
-  -khtml-transition:opacity .35s ease-in-out;
+  transition: opacity .35s ease-in-out;
+  -webkit-transition: opacity .35s ease-in-out;
+  -moz-transition: opacity .35s ease-in-out;
+  -o-transition: opacity .35s ease-in-out;
+  -ms-transition: opacity .35s ease-in-out;
+  -khtml-transition: opacity .35s ease-in-out;
 }
 .pic_block a:hover {
-  opacity:1;
+  opacity: 1;
 }
 .pic img:hover {
   opacity:1 !important; /* Rewrite the .pic class for splash page (already defined in style.css) */
