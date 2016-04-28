@@ -331,7 +331,7 @@ class Validate
             return false;
 
         // Check the name pattern. Name cannot contain any of the below characters
-        if(preg_match('`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;!¿¡\?\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`', $sName))
+        if(preg_match('`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;\?!¿¡\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`', $sName))
             return false;
 
         return true;
