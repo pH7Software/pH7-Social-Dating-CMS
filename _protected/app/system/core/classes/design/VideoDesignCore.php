@@ -62,8 +62,8 @@ class VideoDesignCore
             // If the video is not found on the server, we show a video that shows an appropriate message.
             if ( !(is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath1) && is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath2)) )
             {
-                $sVidPath1 = PH7_URL_DATA_SYS_MOD . 'video/not_found.webm';
-                $sVidPath2 = PH7_URL_DATA_SYS_MOD . 'video/not_found.mp4';
+                $sVidPath1 = 'video/not_found.webm';
+                $sVidPath2 = 'video/not_found.mp4';
             }
 
             if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $oData->thumb))
