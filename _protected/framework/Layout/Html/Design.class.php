@@ -550,8 +550,8 @@ class Design
                     // Get the User Email
                     $sEmail = $oUserModel->getEmail($iProfileId);
 
-                    $bSecureGravatar = \PH7\Framework\Http\Http::isSsl();
-                    $sUrl = $this->getGravatarUrl($sEmail, '404', $iSize, 'g', $bSecureGravatar);
+                    $bSecuredGravatar = \PH7\Framework\Http\Http::isSsl();
+                    $sUrl = $this->getGravatarUrl($sEmail, '404', $iSize, 'g', $bSecuredGravatar);
 
                     if (!(new \PH7\Framework\Security\Validate\Validate)->url($sUrl, true))
                     {
@@ -583,11 +583,11 @@ class Design
      * Get the Gravatar URL.
      *
      * @param string $sEmail The user email address.
-     * @param string $sType The default image type to show. Default wavatar
-     * @param integer $iSize  The size of the image. Default 80
-     * @param character $cRating The max image rating allowed. Default G (for all)
-     * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default FALSE
-     * @return string The Link Avatar.
+     * @param string $sType The default image type to show. Default: 'wavatar'
+     * @param integer $iSize  The size of the image. Default: 80
+     * @param character $cRating The max image rating allowed. Default: 'g' (for all)
+     * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
+     * @return string The Gravatar Link.
      */
     public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $cRating = 'g', $bSecure = false)
     {
