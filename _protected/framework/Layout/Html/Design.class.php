@@ -542,7 +542,7 @@ class Design
                 $sIcon = ($sSex == 'male' || $sSex == 'female' || $sSex == 'couple' || $sSex == PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
                 $sUrlTplName = (defined('PH7_TPL_NAME')) ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
-                /*** If the user does not have an avatar ***/
+                /*** If the user doesn't have an avatar ***/
                 if (!is_file($sPath))
                 {
                     /* The user has no avatar, we try to get a Gravatar */
@@ -670,7 +670,7 @@ class Design
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
-     * @internal We do not use \PH7\Framework\Url\Url::httpBuildQuery() method for the first condition otherwise the URL is distorted and it does not work.
+     * @internal We do not use \PH7\Framework\Url\Url::httpBuildQuery() method for the first condition otherwise the URL is distorted and it doesn't work.
      * @return void
      */
     public function report($iId, $sUsername, $sFirstName, $sSex)
@@ -798,7 +798,7 @@ class Design
     }
 
     /**
-     * The XML tag does not work in PHP files since it is the same "<?"
+     * The XML tag doesn't work in PHP files since it is the same "<?" language tag.
      * So this method can introduce the XML header without causing an error by the PHP interpreter.
      *
      * @return void
