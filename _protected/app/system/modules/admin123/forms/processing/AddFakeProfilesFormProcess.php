@@ -26,27 +26,25 @@ class AddFakeProfilesFormProcess extends Form
         $oValidate = new Validate;
 
         $iUserNum = $this->httpRequest->post('num');
-        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/?results=' . $iUserNum), true);
+        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/1.0/?results=' . $iUserNum), true);
 
         foreach ($aUserData['results'] as $aUser)
         {
-            $aUser = $aUser['user'];
-
             $sEmail = trim($aUser['email']);
-            $sUsername = trim($aUser['username']);
+            $sUsername = trim($aUser['login']['username']);
             if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail) && $oValidate->username($sUsername))
             {
                 $aData['username'] = $sUsername;
                 $aData['email'] = $sEmail;
                 $aData['first_name'] = $aUser['name']['first'];
                 $aData['last_name'] = $aUser['name']['last'];
-                $aData['password'] = $aUser['password'];
+                $aData['password'] = $aUser['login']['password'];
                 $aData['sex'] = $aUser['gender'];
                 $aData['match_sex'] = array($oUser->getMatchSex($aData['sex']));
-                $aData['country'] = 'US';
+                $aData['country'] = $aUser['nat'];
                 $aData['city'] = $aUser['location']['city'];
                 $aData['state'] = $aUser['location']['state'];
-                $aData['zip_code'] = $aUser['location']['zip'];
+                $aData['zip_code'] = $aUser['location']['postcode'];
                 $aData['birth_date'] = $this->dateTime->get($aUser['dob'])->date('Y-m-d');
                 $aData['avatar'] = $aUser['picture']['large'];
                 $aData['ip'] = Ip::get();
