@@ -13,6 +13,10 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Security\Validate\Validate, PH7\Framework\Ip\Ip;
 
+/** Reset the time limit and increase the memory **/
+@set_time_limit(0);
+@ini_set('memory_limit', '528M');
+
 class AddFakeProfilesFormProcess extends Form
 {
 
