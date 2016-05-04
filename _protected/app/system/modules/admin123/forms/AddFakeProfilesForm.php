@@ -41,22 +41,22 @@ class AddFakeProfilesForm
     {
         return [
             'ALL' => t('Random Nationalities'),
+            'US' => t('American'),
             'AU' => t('Australian'),
             'BR' => t('Brazilan'),
+            'GB' => t('British'),
             'CA' => t('Canadian'),
-            'CH' => t('Swiss'),
-            'DE' => t('German'),
             'DK' => t('Danish'),
-            'ES' => t('Spanish'),
+            'NL' => t('Dutch'),
             'FI' => t('Finish'),
             'FR' => t('Frensh'),
-            'GB' => t('British'),
-            'IE' => t('Irish'),
+            'DE' => t('German'),
             'IR' => t('Iranian'),
-            'NL' => t('Dutch'),
+            'IE' => t('Irish'),
             'NZ' => t('New Zealander'),
+            'ES' => t('Spanish'),
+            'CH' => t('Swiss'),
             'TR' => t('Turkish'),
-            'US' => t('American')
         ];
     }
 
