@@ -47,7 +47,7 @@ class AddFakeProfilesFormProcess extends Form
                 $aData['password'] = $aUser['login']['password'];
                 $aData['sex'] = $aUser['gender'];
                 $aData['match_sex'] = array($oUser->getMatchSex($aData['sex']));
-                $aData['country'] = $aUser['nat'];
+                $aData['country'] = str_replace('GB', 'UK', $aUser['nat']); // pH7CMS uses UK instead of GB for country data
                 $aData['city'] = $aUser['location']['city'];
                 $aData['state'] = $aUser['location']['state'];
                 $aData['zip_code'] = $aUser['location']['postcode'];
