@@ -133,7 +133,7 @@ video#bgvid {
 @media (max-width: 1230px)
 {
     .window {height:200px;width:393px}
-    .profiles_window{margin:2px;max-height:230px;max-width:393px}
+    .profiles_window{margin:2px;max-height:280px;max-width:393px}
     .img_reel img{float:left;height:200px;width:393px}
 }
 /* 925px or less */
@@ -145,4 +145,5 @@ video#bgvid {
         margin-right:auto;
         width:80%;
     }
+    .center{width:auto} /* Reset with property for small screens */
 }
