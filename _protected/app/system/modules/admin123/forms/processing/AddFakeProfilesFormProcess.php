@@ -31,7 +31,8 @@ class AddFakeProfilesFormProcess extends Form
 
         $iUserNum = $this->httpRequest->post('num');
         $sSex = $this->httpRequest->post('sex');
-        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/1.0/?results=' . $iUserNum . '&gender=' . $sSex), true);
+        $sNationality = $this->httpRequest->post('nat');
+        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/1.0/?results=' . $iUserNum . '&gender=' . $sSex . '&nat=' . $sNationality . '&noinfo=1'), true);
 
         foreach ($aUserData['results'] as $aUser)
         {

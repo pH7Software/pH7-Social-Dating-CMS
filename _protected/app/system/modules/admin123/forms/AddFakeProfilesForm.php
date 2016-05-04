@@ -11,7 +11,6 @@ namespace PH7;
 
 class AddFakeProfilesForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_add_fake_profiles']))
@@ -28,8 +27,37 @@ class AddFakeProfilesForm
         $oForm->addElement(new \PFBC\Element\Token('fake_profiles'));
         $oForm->addElement(new \PFBC\Element\Select(t('Number:'), 'num', array(1, 5, 10, 15, 25), array('description' => t('Number of fake profiles to add in the same time. Choosing 15 or 25 profiles might takes a few minutes.'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Gender:'), 'sex', array('both' => t('Gentlemen &amp; Ladies'), 'male' => t('Only Gentlemen'), 'female' => t('Only Ladies')), array('required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Nationality:'), 'nat', static::getNationalities(), array('required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button(t('Add Fake Profiles!')));
         $oForm->render();
+    }
+
+    /**
+     * Returns the available nationalities accepted by the API -> https://randomuser.me/documentation#nationalities
+     *
+     * @return array
+     */
+    private static function getNationalities()
+    {
+        return [
+            'ALL' => t('Random Nationalities'),
+            'AU' => t('Australian'),
+            'BR' => t('Brazilan'),
+            'CA' => t('Canadian'),
+            'CH' => t('Swiss'),
+            'DE' => t('German'),
+            'DK' => t('Danish'),
+            'ES' => t('Spanish'),
+            'FI' => t('Finish'),
+            'FR' => t('Frensh'),
+            'GB' => t('British'),
+            'IE' => t('Irish'),
+            'IR' => t('Iranian'),
+            'NL' => t('Dutch'),
+            'NZ' => t('New Zealander'),
+            'TR' => t('Turkish'),
+            'US' => t('American')
+        ];
     }
 
 }
