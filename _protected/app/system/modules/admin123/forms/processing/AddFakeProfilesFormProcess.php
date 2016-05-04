@@ -12,6 +12,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use
+PH7\Framework\Url\Url,
 PH7\Framework\Geo\Misc\Country,
 PH7\Framework\Security\Validate\Validate,
 PH7\Framework\Ip\Ip;
@@ -32,10 +33,13 @@ class AddFakeProfilesFormProcess extends Form
         $oExistsModel = new ExistsCoreModel;
         $oValidate = new Validate;
 
-        $iUserNum = $this->httpRequest->post('num');
-        $sSex = $this->httpRequest->post('sex');
-        $sNationality = $this->httpRequest->post('nat');
-        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/1.0/?results=' . $iUserNum . '&gender=' . $sSex . '&nat=' . $sNationality . '&noinfo=1'), true);
+        $aUrlParams = [
+            'results' => $this->httpRequest->post('num'),
+            'gender' => $this->httpRequest->post('sex'),
+            'nat' => $this->httpRequest->post('nat'),
+            'noinfo' => 1
+        ];
+        $aUserData = json_decode($this->file->getFile('http://api.randomuser.me/1.0/?' . Url::httpBuildQuery($aUrlParams, null, '&')), true);
 
         foreach ($aUserData['results'] as $aUser)
         {
@@ -64,7 +68,7 @@ class AddFakeProfilesFormProcess extends Form
             }
         }
 
-        unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aUser, $aData, $aUserData);
+        unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aUser, $aData, $aUserData, $aUrlParams);
 
         \PFBC\Form::setSuccess('form_add_fake_profiles', nt('%n% user has successfully been added.', '%n% users have successfully been added.', $iUserNum));
     }
