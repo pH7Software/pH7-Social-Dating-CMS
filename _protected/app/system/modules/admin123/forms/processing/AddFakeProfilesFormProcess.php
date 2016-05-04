@@ -33,8 +33,9 @@ class AddFakeProfilesFormProcess extends Form
         $oExistsModel = new ExistsCoreModel;
         $oValidate = new Validate;
 
+        $iUserNum = $this->httpRequest->post('num');
         $aUrlParams = [
-            'results' => $this->httpRequest->post('num'),
+            'results' => $iUserNum,
             'gender' => $this->httpRequest->post('sex'),
             'nat' => $this->httpRequest->post('nat'),
             'noinfo' => 1
