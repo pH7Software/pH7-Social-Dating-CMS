@@ -25,6 +25,7 @@ PH7\Framework\Str\Str,
 PH7\Framework\File\File,
 PH7\Framework\Session\Session,
 PH7\Framework\Navigation\Page,
+PH7\Framework\Geo\Misc\Country,
 PH7\Framework\Benchmark\Benchmark,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri;
@@ -481,7 +482,8 @@ class Design
     public function geoIp($bPrint = true)
     {
         $sCountry = Geo::getCountry();
-        $sCountryLang = t(str_replace('GB', 'UK', Geo::getCountryCode())); // Country name translated into the user language
+        $sCountryCode = Country::fixCode(Geo::getCountryCode());
+        $sCountryLang = t($sCountryCode); // Country name translated into the user language
         $sCity = Geo::getCity();
 
         $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People on %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCountryLang . ', ' . $sCity . '</a>';

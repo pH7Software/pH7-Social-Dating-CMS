@@ -11,7 +11,10 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Security\Validate\Validate, PH7\Framework\Ip\Ip;
+use
+PH7\Framework\Geo\Misc\Country,
+PH7\Framework\Security\Validate\Validate,
+PH7\Framework\Ip\Ip;
 
 /** Reset the time limit and increase the memory **/
 @set_time_limit(0);
@@ -47,7 +50,7 @@ class AddFakeProfilesFormProcess extends Form
                 $aData['password'] = $aUser['login']['password'];
                 $aData['sex'] = $aUser['gender'];
                 $aData['match_sex'] = array($oUser->getMatchSex($aData['sex']));
-                $aData['country'] = str_replace('GB', 'UK', $aUser['nat']); // pH7CMS uses UK instead of GB for country data
+                $aData['country'] = Country::fixCode($aUser['nat']);
                 $aData['city'] = $aUser['location']['city'];
                 $aData['state'] = $aUser['location']['state'];
                 $aData['zip_code'] = $aUser['location']['postcode'];
