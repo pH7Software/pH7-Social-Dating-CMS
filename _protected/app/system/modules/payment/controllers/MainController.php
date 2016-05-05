@@ -296,7 +296,7 @@ class MainController extends Controller
      *
      * @return void
      */
-    private function clearCache()
+    protected function clearCache()
     {
         (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $this->iProfileId, null)->clear();
     }
