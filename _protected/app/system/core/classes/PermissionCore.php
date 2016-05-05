@@ -25,7 +25,7 @@ abstract class PermissionCore extends Framework\Core\Core
     /**
      * Checks whether the user membership is still valid or not.
      *
-     * @return boolean
+     * @return boolean Returns TRUE if the membership is still valid (or user not logged), FALSE otherwise.
      */
     public function checkMembership()
     {

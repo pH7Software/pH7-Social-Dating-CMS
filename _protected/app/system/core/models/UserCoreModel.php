@@ -1333,8 +1333,9 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $sSqlPrice = ($bIsPrice) ? ' AND pay.price = :price' : '';
         $sSqlTime = ($bIsTime) ? ',m.membershipDate = :dateTime ' : ' ';
+        $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlPrice;
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlPrice);
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':groupId', $iNewGroupId, \PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         if ($bIsPrice) $rStmt->bindValue(':price', $fPrice, \PDO::PARAM_STR); // Price can be float too (not always int), so set \PDO::PARAM_STR instead

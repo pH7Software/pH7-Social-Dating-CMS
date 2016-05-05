@@ -6,7 +6,7 @@
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Payment / Controller
- * @version        1.1
+ * @version        1.4
  */
 namespace PH7;
 
@@ -101,7 +101,7 @@ class MainController extends Controller
                     $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
                     $iItemNumber = (int) $aData[0];
                     $fPrice = $aData[1];
-                    if ($this->oUserModel->updateMembership($iItemNumber, $this->iProfileId, $fPrice, $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    if ($this->oUserModel->updateMembership($iItemNumber, $this->iProfileId, $fPrice, $this->dateTime->get()->dateTime('Y-m-d H:i:s')))
                     {
                         $this->_bStatus = true; // Status is OK
                         // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
@@ -129,7 +129,7 @@ class MainController extends Controller
                             ]
                         );
 
-                        if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->iProfileId, $sAmount, $this->dateTime->dateTime('Y-m-d H:i:s')))
+                        if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->iProfileId, $sAmount, $this->dateTime->get()->dateTime('Y-m-d H:i:s')))
                         {
                             $this->_bStatus = true; // Status is OK
                             $this->notification('Stripe'); // Add info into the log file
@@ -156,7 +156,7 @@ class MainController extends Controller
 
                 if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id'))
                 {
-                    if ($this->oUserModel->updateMembership($this->httpRequest->post('cart_order_id'), $this->iProfileId, $this->httpRequest->post('total'), $this->dateTime->dateTime('Y-m-d H:i:s')))
+                    if ($this->oUserModel->updateMembership($this->httpRequest->post('cart_order_id'), $this->iProfileId, $this->httpRequest->post('total'), $this->dateTime->get()->dateTime('Y-m-d H:i:s')))
                     {
                         $this->_bStatus = true; // Status is OK
                         $this->notification('TwoCO'); // Add info into the log file
@@ -184,6 +184,7 @@ class MainController extends Controller
         if ($this->_bStatus)
         {
             $this->updateAffCom();
+            $this->clearCache();
         }
 
         // Set the valid page
@@ -288,6 +289,16 @@ class MainController extends Controller
             $sLogTxt = $sMsg . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL;
             $oProvider->saveLog($sLogTxt . print_r($_POST, true), $this->registry);
         }
+    }
+
+    /**
+     * Clear Membership cache.
+     *
+     * @return void
+     */
+    private function clearCache()
+    {
+        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $this->iProfileId, null)->clear();
     }
 
 }
