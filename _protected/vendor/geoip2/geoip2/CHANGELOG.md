@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+2.4.0 (2016-04-15)
+------------------
+
+* Added support for the GeoIP2 Enterprise database.
+
 2.3.3 (2015-09-24)
 ------------------
 

@@ -48,7 +48,7 @@ class Client implements ProviderInterface
     private $client;
     private static $basePath = '/geoip/v2.1';
 
-    const VERSION = 'v2.3.3';
+    const VERSION = 'v2.4.0';
 
     /**
      * Constructor.
@@ -225,7 +225,6 @@ class Client implements ProviderInterface
                 $ex->getUri(),
                 $ex
             );
-
         } catch (\MaxMind\Exception\WebServiceException $ex) {
             throw new GeoIp2Exception(
                 $ex->getMessage(),

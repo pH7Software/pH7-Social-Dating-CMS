@@ -1,3 +1,26 @@
+### 3.13.0 2016-05-04
+
+* Add `list`, `create`, `update`, `retrieve`, and `delete` methods to the Subscription class
+
+### 3.12.1 2016-04-07
+
+* Additional check on value arrays for some extra safety
+
+### 3.12.0 2016-03-31
+
+* Fix bug `refreshFrom` on `StripeObject` would not take an `$opts` array
+* Fix bug where `$opts` not passed to parent `save` method in `Account`
+* Fix bug where non-existent variable was referenced in `reverse` in `Transfer`
+* Update CA cert bundle for compatibility with OpenSSL versions below 1.0.1
+
+### 3.11.0 2016-03-22
+
+* Allow `CurlClient` to be initialized with default `CURLOPT_*` options
+
+### 3.10.1 2016-03-22
+
+* Fix bug where request params and options were ignored in `ApplicationFee`'s `refund.`
+
 ### 3.10.0 2016-03-15
 
 * Add `reject` on `Account` to support the new API feature
