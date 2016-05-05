@@ -323,7 +323,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId
             LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND searchProfile = \'yes\'
-            AND groupId = 2' . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
+            AND (groupId <> 1) AND (groupId <> 9)' . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
             $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit);
         if (!empty($aParams['match_sex'])) $rStmt->bindValue(':matchSex', '%' . $aParams['match_sex'] . '%', \PDO::PARAM_STR);
         if ($bIsFirstName) $rStmt->bindValue(':firstName', $aParams['first_name'], \PDO::PARAM_STR);
@@ -915,7 +915,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlLimit = ($bIsLimit ? 'LIMIT :offset, :limit' : '');
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId
             LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (searchProfile = \'yes\')
-            AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
+            AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9)' . $sOrder . $sSqlLimit);
 
         if ($bIsLimit)
         {
@@ -953,7 +953,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $sSqlCity = (!empty($sCity)) ?  'AND (city LIKE :city)' : '';
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')
-            AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId = 2)' . $sOrder . $sSqlLimit);
+            AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL) AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9)' . $sOrder . $sSqlLimit);
         $rStmt->bindParam(':country', $sCountry, \PDO::PARAM_STR, 2);
         (!empty($sCity)) ? $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR) : '';
 
