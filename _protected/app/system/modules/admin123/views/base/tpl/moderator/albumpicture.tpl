@@ -27,7 +27,7 @@
 
 {else}
 
-  <p>{lang 'No Picture Albums for the treatment of moderate.'}</p>
+  <p>{lang 'No Picture Albums found for the moderation treatment.'}</p>
 
 {/if}
 </div>

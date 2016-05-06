@@ -25,6 +25,6 @@
 
 {else}
 
-  <p class="center">{lang 'No Avatar for the treatment of moderate.'}</p>
+  <p class="center">{lang 'No Avatars found for the moderation treatment.'}</p>
 
 {/if}

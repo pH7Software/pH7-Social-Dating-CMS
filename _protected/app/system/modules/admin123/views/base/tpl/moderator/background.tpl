@@ -25,6 +25,6 @@
 
 {else}
 
-  <p class="center">{lang 'No Profile Background for the treatment of moderate.'}</p>
+  <p class="center">{lang 'No Profile Backgrounds found for the moderation treatment.'}</p>
 
 {/if}
