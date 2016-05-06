@@ -121,7 +121,7 @@ class UpgradeCore extends Kernel
         if (!$this->_displayIfErr())
         {
             // Download the next upgrade patch to "~/_repository/" folder
-            $this->_downloadDate($this->getNextVersion());
+            $this->_download($this->getNextVersion());
 
             // If not found error
             if (!$this->_showAvailableUpgrades())
@@ -314,15 +314,15 @@ class UpgradeCore extends Kernel
      *
      * @param string $sNewVersion Version number (e.g. "1.3.6")
      */
-    private function _downloadDate($sNewVersion)
+    private function _download($sNewVersion)
     {
         $sZipFileName = $sNewVersion . '.zip';
         $sDestinationPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS;
 
         $rFile = $this->_oFile->getUrlContents(self::REMOTE_URL . $sZipFileName);
-        $this->_oFile->putFile($sDestinationPath . PH7_TMP . $sZipFileName, $rFile);
-        $this->_oFile->zipExtract($sDestinationPath . PH7_TMP . $sZipFileName, $sDestinationPath);
-        $this->_oFile->deleteFile($sDestinationPath . PH7_TMP . $sZipFileName);
+        $this->_oFile->putFile(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $rFile);
+        $this->_oFile->zipExtract(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName, $sDestinationPath);
+        $this->_oFile->deleteFile(PH7_PATH_REPOSITORY . PH7_TMP . $sZipFileName);
     }
 
     /**
