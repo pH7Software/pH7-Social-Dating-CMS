@@ -22,7 +22,7 @@ class AdminController extends MainController
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts($this->iApproved), 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts('0'), 10);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oPosts = $this->oNoteModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), SearchCoreModel::CREATED, '0');
@@ -30,7 +30,7 @@ class AdminController extends MainController
 
         if(empty($oPosts))
         {
-            $this->sTitle = t('Not Note Posts for the treatment of moderate.');
+            $this->sTitle = t('No Notes found for the moderation treatment.');
             $this->notFound();
         }
         else
