@@ -24,15 +24,15 @@ class ModeratorController extends Controller
 
     public function index()
     {
-        $this->view->page_title = t('Moderation Panel');
-        $this->view->h2_title = t('Moderation Panel');
+        $this->view->page_title = $this->view->h2_title = t('Moderation Panel');
+
         $this->output();
     }
 
     public function albumPicture()
     {
-        $this->view->page_title = t('Albums Picture Moderation');
-        $this->view->h2_title = t('Albums Picture Moderation');
+        $this->view->page_title = $this->view->h2_title = t('Picture Albums Moderation');
+
         $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalAlbumsPicture(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->albums = $this->oModeratorModel->getAlbumsPicture($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
@@ -41,8 +41,8 @@ class ModeratorController extends Controller
 
     public function picture()
     {
-        $this->view->page_title = t('Pictures Moderation');
-        $this->view->h2_title = t('Pictures Moderation');
+        $this->view->page_title = $this->view->h2_title = t('Pictures Moderation');
+
         $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalPictures(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->pictures = $this->oModeratorModel->getPictures($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
@@ -51,8 +51,8 @@ class ModeratorController extends Controller
 
     public function albumVideo()
     {
-        $this->view->page_title = t('Albums Video Moderation');
-        $this->view->h2_title = t('Albums Video Moderation');
+        $this->view->page_title = $this->view->h2_title = t('Video Albums Moderation');
+
         $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalAlbumsVideo(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->albums = $this->oModeratorModel->getAlbumsVideo($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
@@ -63,8 +63,8 @@ class ModeratorController extends Controller
     {
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'video/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
 
-        $this->view->page_title = t('Videos Moderation');
-        $this->view->h2_title = t('Videos Moderation');
+        $this->view->page_title = $this->view->h2_title = t('Videos Moderation');
+
         $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalVideos(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->videos = $this->oModeratorModel->getVideos($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
@@ -73,8 +73,8 @@ class ModeratorController extends Controller
 
     public function avatar()
     {
-        $this->view->page_title = t('Avatar Moderation');
-        $this->view->h2_title = t('Avatar Moderation');
+        $this->view->page_title = $this->view->h2_title = t('Avatars Moderation');
+
         $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->
             totalAvatars(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
@@ -85,8 +85,8 @@ class ModeratorController extends Controller
 
     public function background()
     {
-        $this->view->page_title = t('Profile Background Moderation');
-        $this->view->h2_title = t('Profile Background Moderation');
+        $this->view->page_title = $this->view->h2_title = t('Profile Backgrounds Moderation');
+
         $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->
             totalBackgrounds(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
