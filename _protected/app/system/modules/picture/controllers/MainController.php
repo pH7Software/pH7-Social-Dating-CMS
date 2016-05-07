@@ -91,7 +91,7 @@ class MainController extends Controller
         else
         {
             // We can include HTML tags in the title since the template will erase them before display.
-            $this->sTitle = (!empty($profileId)) ? t("The <a href="%0%">%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Photo Gallery Community');
+            $this->sTitle = (!empty($profileId)) ? t("The <a href='%0%'>%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Photo Gallery Community');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->albums = $oAlbums;
@@ -116,7 +116,7 @@ class MainController extends Controller
         }
         else
         {
-            $this->sTitle = t("<a href="%0%">%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
+            $this->sTitle = t("<a href='%0%'>%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
             $this->view->page_title = t("%0%'s album", $this->str->upperFirst($this->sUsername));
             $this->view->meta_description = t('Browse Photos From %0% | Photo Album Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
             $this->view->h2_title = $this->sTitle;
@@ -139,7 +139,7 @@ class MainController extends Controller
         }
         else
         {
-            $this->sTitle = t("<a href="%0%">%1%</a>'s photo", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
+            $this->sTitle = t("<a href='%0%'>%1%</a>'s photo", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
 
             $sTitle = Ban::filterWord($oPicture->title, false);
             $this->view->page_title = t("%0%'s photo, %1%", $oPicture->firstName, $sTitle);

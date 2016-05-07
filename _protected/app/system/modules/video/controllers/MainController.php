@@ -93,7 +93,7 @@ class MainController extends Controller
         else
         {
             // We can include HTML tags in the title since the template will erase them before display.
-            $this->sTitle = (!empty($profileId)) ? t("The <a href="%0%">%1%</a>'s album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
+            $this->sTitle = (!empty($profileId)) ? t("The <a href='%0%'>%1%</a>'s album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
             $this->view->page_title = $this->sTitle;
             $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
             $this->view->h2_title = $this->sTitle;
@@ -123,7 +123,7 @@ class MainController extends Controller
         }
         else
         {
-            $this->sTitle = t("<a href="%0%">%1%</a>'s album", $this->sUsernameLink, $this->
+            $this->sTitle = t("<a href='%0%'>%1%</a>'s album", $this->sUsernameLink, $this->
                     str->upperFirst($this->sUsername));
             $this->view->page_title = t("%0%'s album", $this->str->upperFirst($this->
                             sUsername));
@@ -150,7 +150,7 @@ class MainController extends Controller
         }
         else
         {
-            $this->sTitle = t("Watch <a href="%0%">%1%</a>'s video", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
+            $this->sTitle = t("Watch <a href='%0%'>%1%</a>'s video", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
 
             $sTitle = Ban::filterWord($oVideo->title, false);
             $this->view->page_title = t("%0%'s video, %1%", $oVideo->firstName, $sTitle);
