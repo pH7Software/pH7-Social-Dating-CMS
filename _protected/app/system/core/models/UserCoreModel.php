@@ -585,13 +585,16 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindParam(':hashValidation', $sHashValidation, \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $this->sCurrentDate, \PDO::PARAM_STR);
-        $rStmt->bindValue(':groupId', (int) DbConfig::getSetting('defaultMembershipGroupId'), \PDO::PARAM_INT);
         $rStmt->execute();
         $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the user's ID
         Db::free($rStmt);
         $this->setInfoFields($aData);
         $this->setDefaultPrivacySetting();
         $this->setDefaultNotification();
+
+        // Last one, update the membership with the correct details
+        $this->updateMembership((int)DbConfig::getSetting('defaultMembershipGroupId'), $this->getKeyId(), null, $this->sCurrentDate);
+
         return $this->getKeyId();
     }
 
@@ -1331,9 +1334,9 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $bIsPrice = !empty($fPrice);
         $bIsTime = !empty($sDateTime);
 
-        $sSqlPrice = ($bIsPrice) ? ' AND pay.price = :price' : '';
+        $sSqlWherePrice = ($bIsPrice) ? ' AND pay.price = :price' : '';
         $sSqlTime = ($bIsTime) ? ',m.membershipDate = :dateTime ' : ' ';
-        $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlPrice;
+        $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlWherePrice;
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':groupId', $iNewGroupId, \PDO::PARAM_INT);
