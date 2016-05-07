@@ -1,3 +1,10 @@
+    {* Get the frequently used functions in variables to optimize the script and call those functions only once in the file *}
+    {{
+      $admin_logged_as_user = UserCore::isAdminLoggedAs();
+      $admin_logged_as_affiliate = AffiliateCore::isAdminLoggedAs()
+     }}
+
+
     {* Creating Objects *}
       {{ $oSession = new Framework\Session\Session() }}
 
@@ -61,7 +68,7 @@
 
     {* Menu Guest, Member and LoginUserAs of Admin Panel *}
 
-      {if ( !$is_aff_auth AND !$is_admin_auth ) OR $oSession->exists('login_user_as') }
+      {if ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
 
         {if $is_chat_enabled OR $is_chatroulette_enabled}
           <li class="dropdown"><a href="{{ $design->url('chat','home','index') }}" title="{lang 'The Free Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
@@ -133,7 +140,7 @@
 
     {* Member Menu *}
 
-        {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $oSession->exists('login_user_as') }
+        {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
 
           <li class="dropdown"><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o fa-fw"></i> {lang 'Mail'} <span class="badge">{count_unread_mail}</span> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -214,7 +221,7 @@
 
     {* Affiliate Menu *}
 
-      {if $is_aff_auth AND ( !$is_user_auth AND !$is_admin_auth OR $oSession->exists('login_affiliate_as') ) }
+      {if $is_aff_auth AND ( !$is_user_auth AND !$is_admin_auth OR $admin_logged_as_affiliate ) }
 
         <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Gets Banners'}">{lang 'Banners'}</a></li>
 
@@ -463,9 +470,9 @@
 </nav>
 
 {* For LoginUserAs of Admin Panel *}
-  {if $is_admin_auth AND $oSession->exists('login_user_as') }
+  {if $is_admin_auth AND $admin_logged_as_user }
     <p class="center bold loginas"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
-  {elseif $is_admin_auth AND $oSession->exists('login_affiliate_as') }
+  {elseif $is_admin_auth AND $admin_logged_as_affiliate }
     <p class="center bold loginas"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
   {/if}
 

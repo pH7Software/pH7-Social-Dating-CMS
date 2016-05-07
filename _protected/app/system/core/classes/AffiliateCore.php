@@ -6,7 +6,11 @@
  * @package        PH7 / App / System / Core / Class
  */
 namespace PH7;
-use PH7\Framework\Config\Config, PH7\Framework\Registry\Registry;
+use
+PH7\Framework\Session\Session,
+PH7\Framework\Navigation\Browser,
+PH7\Framework\Config\Config,
+PH7\Framework\Registry\Registry;
 
 // Abstract Class
 class AffiliateCore extends UserCore
@@ -21,8 +25,8 @@ class AffiliateCore extends UserCore
      */
     public static function auth()
     {
-        $oSession = new Framework\Session\Session;
-        $oBrowser = new Framework\Navigation\Browser;
+        $oSession = new Session;
+        $oBrowser = new Browser;
 
         $bIsConnect = (((int)$oSession->exists('affiliate_id')) && $oSession->get('affiliate_ip') === Framework\Ip\Ip::get() && $oSession->get('affiliate_http_user_agent') === $oBrowser->getUserAgent());
 

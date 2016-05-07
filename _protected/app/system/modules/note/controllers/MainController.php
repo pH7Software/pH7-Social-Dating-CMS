@@ -30,7 +30,7 @@ class MainController extends Controller
         parent::__construct();
         $this->oNoteModel = new NoteModel;
         $this->oPage = new Page;
-        $this->iApproved = (AdminCore::auth() && !$this->session->exists('login_user_as')) ? null : 1;
+        $this->iApproved = (AdminCore::auth() && !UserCore::isAdminLoggedAs()) ? null : 1;
 
         $this->view->member_id = $this->session->get('member_id');
     }

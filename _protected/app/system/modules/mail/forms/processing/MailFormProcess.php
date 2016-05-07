@@ -25,7 +25,7 @@ class MailFormProcess extends Form
         $oUserModel = new UserCoreModel;
         $oMailModel = new MailModel;
 
-        $bIsAdmin = (AdminCore::auth() && !UserCore::auth() && !$this->session->exists('login_user_as'));
+        $bIsAdmin = (AdminCore::auth() && !UserCore::auth() && !UserCore::isAdminLoggedAs());
         $sMessage = $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN);
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendMail');

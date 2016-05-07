@@ -32,7 +32,7 @@
         {{ CommentDesignCore::link($post->noteId,'Note') }}
       {/if}
 
-      {if $is_admin_auth && !(new Framework\Session\Session)->exists('login_user_as')}
+      {if $is_admin_auth && !UserCore::isAdminLoggedAs()}
         {{ $action = ($post->approved == 1) ? 'disapproved' : 'approved' }}
         {{ $text = ($post->approved == 1) ? t('Disapprove') : t('Approve') }}
         <fieldset class="s_tMarg">
