@@ -16,8 +16,8 @@ class ModeratorModel extends ModeratorCoreModel
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.*, p.title FROM' .
-            Db::prefix('AlbumsPictures') . 'AS a INNER JOIN' . Db::prefix('Pictures') . 'AS p ON a.albumId = p.albumId INNER JOIN' . Db::prefix('Members') .
+        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.* FROM' .
+            Db::prefix('AlbumsPictures') . 'AS a INNER JOIN' . Db::prefix('Members') .
             'AS m ON a.profileId = m.profileId WHERE a.approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -42,8 +42,8 @@ class ModeratorModel extends ModeratorCoreModel
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.*, v.title FROM' .
-            Db::prefix('AlbumsVideos') . 'AS a INNER JOIN' . Db::prefix('Videos') . 'AS v ON a.albumId = v.albumId INNER JOIN' . Db::prefix('Members') .
+        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.* FROM' .
+            Db::prefix('AlbumsVideos') . 'AS a INNER JOIN' . Db::prefix('Members') .
             'AS m ON a.profileId = m.profileId WHERE a.approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);

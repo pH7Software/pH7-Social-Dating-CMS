@@ -6,7 +6,7 @@
     {each $album in $albums}
 
       {{ $action = ($album->approved == 1) ? 'disapprovedvideoalbum' : 'approvedvideoalbum' }}
-      {{ $absolute_url = Framework\Mvc\Router\Uri::get('video','main','album',"$album->username,$album->title,$album->albumId") }}
+      {{ $absolute_url = Framework\Mvc\Router\Uri::get('video','main','album',"$album->username,$album->name,$album->albumId") }}
 
       <div class="thumb_photo">
         <a href="{absolute_url}" target="_blank"><img src="{url_data_sys_mod}video/file/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" alt="{% $album->name %}" title="{% $album->name %}" /></a>
