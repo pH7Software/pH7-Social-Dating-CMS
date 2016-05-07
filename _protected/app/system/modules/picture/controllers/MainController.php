@@ -34,7 +34,7 @@ class MainController extends Controller
         $this->iProfileId = (new UserCoreModel)->getId(null, $this->sUsername);
 
         // Predefined meta_keywords tags
-        $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,picture dating');
+        $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,photo album,picture album,gallery,picture dating');
     }
 
     public function index()
@@ -53,7 +53,7 @@ class MainController extends Controller
 
     public function addPhoto()
     {
-        $this->sTitle = t('Add some new Pictures');
+        $this->sTitle = t('Add some new Photos');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();
@@ -118,7 +118,7 @@ class MainController extends Controller
         {
             $this->sTitle = t("<a href="%0%">%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
             $this->view->page_title = t("%0%'s album", $this->str->upperFirst($this->sUsername));
-            $this->view->meta_description = t('Browse Photos From %0% | Picture Album Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
+            $this->view->meta_description = t('Browse Photos From %0% | Photo Album Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
             $this->view->h2_title = $this->sTitle;
             $this->view->album = $oAlbum;
 
@@ -144,7 +144,7 @@ class MainController extends Controller
             $sTitle = Ban::filterWord($oPicture->title, false);
             $this->view->page_title = t("%0%'s photo, %1%", $oPicture->firstName, $sTitle);
             $this->view->meta_description = t("%0%'s photo, %1%, %2%", $oPicture->firstName, $sTitle, substr(Ban::filterWord($oPicture->description, false), 0, 100));
-            $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,%0%,%1%,%2%', str_replace(' ', ',', $sTitle), $oPicture->firstName, $oPicture->username);
+            $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,photo album,picture album,gallery,%0%,%1%,%2%', str_replace(' ', ',', $sTitle), $oPicture->firstName, $oPicture->username);
             $this->view->h1_title = $this->sTitle;
             $this->view->picture = $oPicture;
 
