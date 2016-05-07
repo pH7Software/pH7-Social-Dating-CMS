@@ -89,7 +89,7 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function approvedAlbumPicture($iAlbumId, $iStatus = 1)
+    public function approvedPictureAlbum($iAlbumId, $iStatus = 1)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('AlbumsPictures') .
             'SET approved = :status  WHERE albumId = :albumId');
@@ -107,7 +107,7 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
-    public function approvedAlbumVideo($iAlbumId, $iStatus = 1)
+    public function approvedVideoAlbum($iAlbumId, $iStatus = 1)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('AlbumsVideos') .
             'SET approved = :status  WHERE albumId = :albumId');
@@ -143,7 +143,7 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
-    public function deleteAlbumPicture($iAlbumId)
+    public function deletePictureAlbum($iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsPictures') .
             'WHERE albumId=:albumId');
@@ -151,7 +151,7 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
-    public function deleteAlbumVideo($iAlbumId)
+    public function deleteVideoAlbum($iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsVideos') .
             'WHERE albumId=:albumId');

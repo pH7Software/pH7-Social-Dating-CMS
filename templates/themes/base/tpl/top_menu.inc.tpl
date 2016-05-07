@@ -364,9 +364,9 @@
           {{
             $oModeratorModel = new ModeratorCoreModel();
 
-            $count_moderate_total_album_picture = $oModeratorModel->totalAlbumsPicture();
+            $count_moderate_total_picture_album = $oModeratorModel->totalPictureAlbums();
             $count_moderate_total_picture = $oModeratorModel->totalPictures();
-            $count_moderate_total_album_video = $oModeratorModel->totalAlbumsVideo();
+            $count_moderate_total_video_album = $oModeratorModel->totalVideoAlbums();
             $count_moderate_total_video = $oModeratorModel->totalVideos();
             $count_moderate_total_avatar = $oModeratorModel->totalAvatars();
             $count_moderate_total_background = $oModeratorModel->totalBackgrounds();
@@ -377,9 +377,9 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','index') }}" title="{lang 'User Moderation'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user-secret"></i> {lang 'Moderation'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumpicture') }}" title="{lang 'Moderate Albums'}">{lang 'Picture Album'} <span class="badge">{count_moderate_total_album_picture}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturealbum') }}" title="{lang 'Moderate Photo Albums'}">{lang 'Photo Album'} <span class="badge">{count_moderate_total_picture_album}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}">{lang 'Picture'} <span class="badge">{count_moderate_total_picture}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumvideo') }}" title="{lang 'Moderate Albums'}">{lang 'Video Album'} <span class="badge">{count_moderate_total_album_video}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','videoalbum') }}" title="{lang 'Moderate Video Albums'}">{lang 'Video Album'} <span class="badge">{count_moderate_total_video_album}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}">{lang 'Video'} <span class="badge">{count_moderate_total_video}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Avatars'}">{lang 'Avatar'} <span class="badge">{count_moderate_total_avatar}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}">{lang 'Profile Background'} <span class="badge">{count_moderate_total_background}</span></a></li>
@@ -473,9 +473,9 @@
       {{
         unset(
           $oSession,
-          $count_moderate_total_album_picture,
+          $count_moderate_total_picture_album,
           $count_moderate_total_picture,
-          $count_moderate_total_album_video,
+          $count_moderate_total_video_album,
           $count_moderate_total_video,
           $count_moderate_total_avatar,
           $count_moderate_total_background,

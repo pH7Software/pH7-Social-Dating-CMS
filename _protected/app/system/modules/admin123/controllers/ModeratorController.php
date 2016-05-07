@@ -29,11 +29,11 @@ class ModeratorController extends Controller
         $this->output();
     }
 
-    public function albumPicture()
+    public function pictureAlbum()
     {
-        $this->view->page_title = $this->view->h2_title = t('Picture Albums Moderation');
+        $this->view->page_title = $this->view->h2_title = t('Photo Albums Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalAlbumsPicture(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalPictureAlbums(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->albums = $this->oModeratorModel->getAlbumsPicture($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
         $this->output();
@@ -49,11 +49,11 @@ class ModeratorController extends Controller
         $this->output();
     }
 
-    public function albumVideo()
+    public function videoAlbum()
     {
         $this->view->page_title = $this->view->h2_title = t('Video Albums Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalAlbumsVideo(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalVideoAlbums(), 20);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->albums = $this->oModeratorModel->getAlbumsVideo($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
         $this->output();
@@ -99,21 +99,21 @@ class ModeratorController extends Controller
         Header::redirect(Uri::get('webcam', 'webcam', 'picture'), t('Welcome to the Picture Webcam in "administrator mode"'));
     }
 
-    public function approvedAlbumPicture()
+    public function approvedPictureAlbum()
     {
-        if ($this->oModeratorModel->approvedAlbumPicture($this->httpRequest->post('album_id')))
+        if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id')))
         {
             /* Clean PictureCoreModel Cache */
             (new Framework\Cache\Cache)->start(PictureCoreModel::CACHE_GROUP, null, null)->clear();
 
-            $this->sMsg = t('The picture album has been approved!');
+            $this->sMsg = t('The photo album has been approved!');
         }
         else
         {
-            $this->sMsg = t('Oops! The picture album could not be approved!');
+            $this->sMsg = t('Oops! The photo album could not be approved!');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumpicture'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'), $this->sMsg);
     }
 
     public function approvedPhoto()
@@ -133,9 +133,9 @@ class ModeratorController extends Controller
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
     }
 
-    public function approvedAlbumVideo()
+    public function approvedVideoAlbum()
     {
-        if ($this->oModeratorModel->approvedAlbumVideo($this->httpRequest->post('album_id')))
+        if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id')))
         {
             /* Clean VideoCoreModel Cache */
             (new Framework\Cache\Cache)->start(VideoCoreModel::CACHE_GROUP, null, null)->
@@ -148,7 +148,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The video album could not be approved!');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumvideo'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'videoalbum'), $this->sMsg);
     }
 
     public function approvedVideo()
@@ -202,21 +202,21 @@ class ModeratorController extends Controller
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
     }
 
-    public function disapprovedAlbumPicture()
+    public function disapprovedPictureAlbum()
     {
-        if ($this->oModeratorModel->approvedAlbumPicture($this->httpRequest->post('album_id'), '0'))
+        if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'), '0'))
         {
             /* Clean PictureCoreModel Cache */
             (new Framework\Cache\Cache)->start(PictureCoreModel::CACHE_GROUP, null, null)->clear();
 
-            $this->sMsg = t('The picture album has been disapproved!');
+            $this->sMsg = t('The photo album has been disapproved!');
         }
         else
         {
-            $this->sMsg = t('Oops! The picture album could not be disapproved!');
+            $this->sMsg = t('Oops! The photo album could not be disapproved!');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumpicture'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'), $this->sMsg);
     }
 
     public function disapprovedPhoto()
@@ -236,9 +236,9 @@ class ModeratorController extends Controller
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
     }
 
-    public function disapprovedAlbumVideo()
+    public function disapprovedVideoAlbum()
     {
-        if ($this->oModeratorModel->approvedAlbumVideo($this->httpRequest->post('album_id'), '0'))
+        if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'), '0'))
         {
             /* Clean VideoCoreModel Cache */
             (new Framework\Cache\Cache)->start(VideoCoreModel::CACHE_GROUP, null, null)->
@@ -251,7 +251,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The video album could not be disapproved!');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumvideo'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'videoalbum'), $this->sMsg);
     }
 
     public function disapprovedVideo()
@@ -305,9 +305,9 @@ class ModeratorController extends Controller
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
     }
 
-    public function deleteAlbumPicture()
+    public function deletePictureAlbum()
     {
-        if ($this->oModeratorModel->deleteAlbumPicture($this->httpRequest->post('album_id')) && (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id')))
+        if ($this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id')) && (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id')))
         {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
@@ -315,14 +315,14 @@ class ModeratorController extends Controller
             /* Clean PictureCoreModel Cache */
             (new Framework\Cache\Cache)->start(PictureCoreModel::CACHE_GROUP, null, null)->clear();
 
-            $this->sMsg = t('The picture album has been deleted!');
+            $this->sMsg = t('The photo album has been deleted!');
         }
         else
         {
-            $this->sMsg = t('Oops! The picture album could not be deleted');
+            $this->sMsg = t('Oops! The photo album could not be deleted');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumpicture'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picturealbum'), $this->sMsg);
     }
 
     public function deletePhoto()
@@ -346,9 +346,9 @@ class ModeratorController extends Controller
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'picture'), $this->sMsg);
     }
 
-    public function deleteAlbumVideo()
+    public function deleteVideoAlbum()
     {
-        if ($this->oModeratorModel->deleteAlbumVideo($this->httpRequest->post('album_id')) && (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id')))
+        if ($this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id')) && (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id')))
         {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
@@ -363,7 +363,7 @@ class ModeratorController extends Controller
             $this->sMsg = t('Oops! The video album could not be deleted');
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'albumvideo'), $this->sMsg);
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'videoalbum'), $this->sMsg);
     }
 
     public function deleteVideo()
