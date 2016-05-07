@@ -570,8 +570,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         $sHashValidation = (!empty($aData['hash_validation']) ? $aData['hash_validation'] : null);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Members') . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, joinDate, lastActivity, groupId)
-            VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity, :groupId)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Members') . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, joinDate, lastActivity)
+            VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity)');
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
         $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
