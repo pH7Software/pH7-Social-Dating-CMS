@@ -77,7 +77,7 @@ class MainController extends Controller
 
     public function albums()
     {
-        $this->view->meta_description = t('%0%\'s Albums | Picture Albums of the Dating Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
+        $this->view->meta_description = t("%0%'s Albums | Photo Albums of the Dating Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
         $profileId = ($this->httpRequest->getExists('username')) ? $this->iProfileId : null;
         $this->view->total_pages = $this->oPage->getTotalPages($this->oPictureModel->totalAlbums($profileId), 16);
         $this->view->current_page = $this->oPage->getCurrentPage();
@@ -91,7 +91,7 @@ class MainController extends Controller
         else
         {
             // We can include HTML tags in the title since the template will erase them before display.
-            $this->sTitle = (!empty($profileId)) ? t('The Album of <a href="%0%">%1%</a>', $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Photo Gallery Community');
+            $this->sTitle = (!empty($profileId)) ? t("The <a href="%0%">%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Photo Gallery Community');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->albums = $oAlbums;
@@ -116,8 +116,8 @@ class MainController extends Controller
         }
         else
         {
-            $this->sTitle = t('Album of <a href="%0%">%1%</a>', $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
-            $this->view->page_title = t('Album of %0%', $this->str->upperFirst($this->sUsername));
+            $this->sTitle = t("<a href="%0%">%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
+            $this->view->page_title = t("%0%'s album", $this->str->upperFirst($this->sUsername));
             $this->view->meta_description = t('Browse Photos From %0% | Picture Album Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
             $this->view->h2_title = $this->sTitle;
             $this->view->album = $oAlbum;
@@ -139,11 +139,11 @@ class MainController extends Controller
         }
         else
         {
-            $this->sTitle = t('Photo of <a href="%0%">%1%</a>', $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
+            $this->sTitle = t("<a href="%0%">%1%</a>'s photo", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
 
             $sTitle = Ban::filterWord($oPicture->title, false);
-            $this->view->page_title = t('Photo of %0%, %1%', $oPicture->firstName, $sTitle);
-            $this->view->meta_description = t('Photo of %0%, %1%, %2%', $oPicture->firstName, $sTitle, substr(Ban::filterWord($oPicture->description, false), 0, 100));
+            $this->view->page_title = t("%0%'s photo, %1%", $oPicture->firstName, $sTitle);
+            $this->view->meta_description = t("%0%'s photo, %1%, %2%", $oPicture->firstName, $sTitle, substr(Ban::filterWord($oPicture->description, false), 0, 100));
             $this->view->meta_keywords = t('picture,photo,pictures,photos,album,albums,picture album,photo album,gallery,%0%,%1%,%2%', str_replace(' ', ',', $sTitle), $oPicture->firstName, $oPicture->username);
             $this->view->h1_title = $this->sTitle;
             $this->view->picture = $oPicture;
