@@ -11,7 +11,6 @@ use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri, PH7\Framework\Naviga
 
 class ModeratorController extends Controller
 {
-
     private $oModeratorModel, $sPage, $sMsg;
 
     public function __construct()
@@ -400,10 +399,4 @@ class ModeratorController extends Controller
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
     }
-
-    public function __destruct()
-    {
-        unset($this->oPage, $this->oModeratorModel, $this->sMsg);
-    }
-
 }
