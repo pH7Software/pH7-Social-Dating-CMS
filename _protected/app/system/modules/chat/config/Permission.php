@@ -15,7 +15,7 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) // If the admin is not logged (but can be if the admin use "login as a user" feature)
+        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) // If the admin is not logged (but can be if the admin use "login as user" feature)
         {
             if (!$this->checkMembership() || !$this->group->chat)
             {
