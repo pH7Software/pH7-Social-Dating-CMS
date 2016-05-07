@@ -18,26 +18,14 @@ class AdminController extends MainController
 
     public function unmoderated()
     {
-        $this->sTitle = t('Unmoderated Notes');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Notes Moderation');
 
         $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts('0'), 10);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oPosts = $this->oNoteModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), SearchCoreModel::CREATED, '0');
+        $this->view->posts = $oPosts;
         $this->setMenuVars();
-
-        if(empty($oPosts))
-        {
-            $this->sTitle = t('No Notes found for the moderation treatment.');
-            $this->notFound();
-        }
-        else
-        {
-            $this->view->posts = $oPosts;
-        }
-
         $this->output();
     }
 
