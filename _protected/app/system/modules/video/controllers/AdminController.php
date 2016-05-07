@@ -12,9 +12,7 @@ class AdminController extends MainController
 
     public function config()
     {
-        $this->sTitle = t('Youtube API Key - Setting');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Youtube API Key - Setting');
         $this->output();
     }
 

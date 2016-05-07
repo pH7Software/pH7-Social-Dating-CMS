@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Picture / Controller
  */
 namespace PH7;
+
 use
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Navigation\Page,
@@ -45,39 +46,30 @@ class MainController extends Controller
 
     public function addAlbum()
     {
-        $this->sTitle = t('Add a new Album');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Add a new Album');
         $this->output();
     }
 
     public function addPhoto()
     {
-        $this->sTitle = t('Add some new Photos');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Add some new Photos');
         $this->output();
     }
 
     public function editAlbum()
     {
-        $this->sTitle = t('Edit Album');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Edit Album');
         $this->output();
     }
 
     public function editPhoto()
     {
-        $this->sTitle = t('Edit Picture');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Edit Picture');
         $this->output();
     }
 
     public function albums()
     {
-        $this->view->meta_description = t("%0%'s Albums | Photo Albums of the Dating Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
         $profileId = ($this->httpRequest->getExists('username')) ? $this->iProfileId : null;
         $this->view->total_pages = $this->oPage->getTotalPages($this->oPictureModel->totalAlbums($profileId), 16);
         $this->view->current_page = $this->oPage->getCurrentPage();
@@ -90,10 +82,10 @@ class MainController extends Controller
         }
         else
         {
-            // We can include HTML tags in the title since the template will erase them before display.
+            // We can include HTML tags in the title since the template will erase them before displaying
             $this->sTitle = (!empty($profileId)) ? t("The <a href='%0%'>%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Photo Gallery Community');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
+            $this->view->meta_description = t("%0%'s Albums | Photo Albums of the Dating Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
             $this->view->albums = $oAlbums;
         }
         if (empty($profileId))
@@ -117,9 +109,8 @@ class MainController extends Controller
         else
         {
             $this->sTitle = t("<a href='%0%'>%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
-            $this->view->page_title = t("%0%'s album", $this->str->upperFirst($this->sUsername));
-            $this->view->meta_description = t('Browse Photos From %0% | Photo Album Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle; // We can include HTML tags in the title since the template will erase them before displaying
+            $this->view->meta_description = t("Browse %0%'s Photos | Photo Album Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
             $this->view->album = $oAlbum;
 
             // Set Picture Album Statistics since it needs the foreach loop and it is unnecessary to do both, we have placed in the file album.tpl
@@ -182,9 +173,7 @@ class MainController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search Picture - Looking a picture');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Search Picture - Looking a picture');
         $this->output();
     }
 
@@ -224,12 +213,13 @@ class MainController extends Controller
      */
     private function _notFound($b404Status = true)
     {
-        if ($b404Status === true)
+        if ($b404Status === true) {
             Framework\Http\Http::setHeadersByCode(404);
+        }
+
         $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add a new picture</a> in this album.', 'javascript:history.back();', Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id'))) : '';
 
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->view->error = $this->sTitle . $sErrMsg;
     }
 

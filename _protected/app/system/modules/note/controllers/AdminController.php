@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Note / Controller
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class AdminController extends MainController
@@ -35,7 +36,7 @@ class AdminController extends MainController
         $sPostId = $this->httpRequest->post('post_id');
         $iProfileId = $this->httpRequest->post('profile_id', 'int');
 
-        if(isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId))
+        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId))
         {
             /* Clean NoteModel Cache */
             (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
@@ -56,7 +57,7 @@ class AdminController extends MainController
         $sPostId = $this->httpRequest->post('post_id');
         $iProfileId = $this->httpRequest->post('profile_id', 'int');
 
-        if(isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId, '0'))
+        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId, '0'))
         {
             /* Clean NoteModel Cache */
             (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();

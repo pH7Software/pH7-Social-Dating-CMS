@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Video / Controller
  */
 namespace PH7;
+
 use
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Navigation\Page,
@@ -45,9 +46,7 @@ class MainController extends Controller
 
     public function addAlbum()
     {
-        $this->sTitle = t('Add a new Album');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Add a new Album');
         $this->output();
     }
 
@@ -56,25 +55,19 @@ class MainController extends Controller
         // Add JS file to choose the type of video (regular | embed)
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
 
-        $this->sTitle = t('Add a new Video');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Add a new Video');
         $this->output();
     }
 
     public function editAlbum()
     {
-        $this->sTitle = t('Edit Album');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Edit Album');
         $this->output();
     }
 
     public function editVideo()
     {
-        $this->sTitle = t('Edit Video');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Edit Video');
         $this->output();
     }
 
@@ -92,8 +85,8 @@ class MainController extends Controller
         }
         else
         {
-            // We can include HTML tags in the title since the template will erase them before display.
-            $this->sTitle = (!empty($profileId)) ? t("The <a href='%0%'>%1%</a>'s album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
+            // We can include HTML tags in the title since the template will erase them before displaying
+            $this->sTitle = (!empty($profileId)) ? t("The <a href='%0%'>%1%</a>'s albums", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
             $this->view->page_title = $this->sTitle;
             $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
             $this->view->h2_title = $this->sTitle;
@@ -111,7 +104,6 @@ class MainController extends Controller
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'Video.js');
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
 
-        $this->view->meta_description = t('Browse Videos From %0% | Video Album Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
         $this->view->total_pages = $this->oPage->getTotalPages($this->oVideoModel->totalVideos($this->iProfileId), 26);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbum = $this->oVideoModel->video($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
@@ -123,11 +115,10 @@ class MainController extends Controller
         }
         else
         {
-            $this->sTitle = t("<a href='%0%'>%1%</a>'s album", $this->sUsernameLink, $this->
-                    str->upperFirst($this->sUsername));
-            $this->view->page_title = t("%0%'s album", $this->str->upperFirst($this->
-                            sUsername));
+            $this->sTitle = t("<a href='%0%'>%1%</a>'s video album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
+            $this->view->page_title = $this->sTitle; // We can include HTML tags in the title since the template will erase them before displaying
             $this->view->h2_title = $this->sTitle;
+            $this->view->meta_description = t('Browse Videos From %0% | Video Album Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
             $this->view->album = $oAlbum;
 
             // Set Video Album Statistics since it needs the foreach loop and it is unnecessary to do both, we have placed in the file album.tpl
@@ -193,9 +184,7 @@ class MainController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search Video - Looking a video');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Search Video - Looking a video');
         $this->output();
     }
 
@@ -216,8 +205,7 @@ class MainController extends Controller
         else
         {
             $this->sTitle = t('Dating Social Video - Your search returned');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% video result!', '%n% video results!', $this->iTotalVideos);
             $this->view->meta_description = t('Search - %site_name% is a Dating Social Video Community!');
             $this->view->meta_keywords = t('search,video,dating,social network,community,music,movie,news,video sharing');
@@ -236,12 +224,13 @@ class MainController extends Controller
      */
     private function _notFound($b404Status = true)
     {
-        if ($b404Status === true)
+        if ($b404Status === true) {
             Framework\Http\Http::setHeadersByCode(404);
+        }
+
         $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add a new video</a> in this album.', 'javascript:history.back();', Uri::get('video', 'main', 'addvideo', $this->httpRequest->get('album_id'))) : '';
 
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->view->error = $this->sTitle . $sErrMsg;
     }
 
