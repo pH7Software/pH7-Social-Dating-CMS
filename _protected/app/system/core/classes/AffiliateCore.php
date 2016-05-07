@@ -33,6 +33,16 @@ class AffiliateCore extends UserCore
     }
 
     /**
+     * Check if an admin is logged as an affiliate.
+     *
+     * @return boolean
+     */
+    public static function isAdminLoggedAs()
+    {
+        return (new Session)->exists('login_affiliate_as');
+    }
+
+    /**
      * Update the Affiliate Commission.
      *
      * @param integer $iAffId Affiliate ID

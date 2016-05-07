@@ -43,6 +43,16 @@ class UserCore
     }
 
     /**
+     * Check if an admin is logged as a user.
+     *
+     * @return boolean
+     */
+    public static function isAdminLoggedAs()
+    {
+        return (new Session)->exists('login_user_as');
+    }
+
+    /**
      * Delete User.
      *
      * @param integer $iProfileId
