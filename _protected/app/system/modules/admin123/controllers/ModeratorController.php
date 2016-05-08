@@ -171,8 +171,8 @@ class ModeratorController extends Controller
     {
         if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id')))
         {
-            /* Clean User Avatar Cache */
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'avatar' . $this->httpRequest->post('id'), null)->clear();
+            /* Clean User Data Cache */
+            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
             $this->sMsg = t('The avatar has been approved!');
         }
@@ -240,8 +240,7 @@ class ModeratorController extends Controller
         if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'), '0'))
         {
             /* Clean VideoCoreModel Cache */
-            (new Framework\Cache\Cache)->start(VideoCoreModel::CACHE_GROUP, null, null)->
-                clear();
+            (new Framework\Cache\Cache)->start(VideoCoreModel::CACHE_GROUP, null, null)->clear();
 
             $this->sMsg = t('The video album has been disapproved!');
         }
@@ -274,8 +273,8 @@ class ModeratorController extends Controller
     {
         if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'), '0'))
         {
-            /* Clean User Avatar Cache */
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'avatar' . $this->httpRequest->post('id'), null)->clear();
+            /* Clean User Data Cache */
+            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
             $this->sMsg = t('The avatar has been disapproved!');
         }
