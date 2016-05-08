@@ -9,13 +9,17 @@
  * Please remplace "ph7cms" by your username by registering on: http://www.geonames.org/login
  * After, you will need to enable the Free Web Services here: http://www.geonames.org/manageaccount
  */
-var sGeonamesUsername = 'ph7cms'; // Remplace "ph7cms" by your username!
+$(document).ready(function() {
+    autocompleteCityInit('ph7cms'); // Remplace "ph7cms" by your username!
+});
 
-function autocompleteCityInit()
+function autocompleteCityInit(sGeonamesUsername)
 {
-    // Set the variables
-    var sCountry = $('#str_country').val();
-    var sUrlSlug = (typeof sCountry != 'undefined' ? '?country=' + sCountry : '');
+    // Set "country" API parameter
+    var sUrlSlug = '';
+    $('#str_city').click(function() {
+        sUrlSlug = '&country=' + $('#str_country').val();
+    });
 
     $('#str_city').autocomplete(
     {
@@ -23,7 +27,7 @@ function autocompleteCityInit()
         {
             $.ajax(
             {
-                url: 'http://ws.geonames.org/searchJSON' + sUrlSlug + '&username=' + sGeonamesUsername,
+                url: 'http://ws.geonames.org/searchJSON?username=' + sGeonamesUsername + sUrlSlug,
                 dataType: 'jsonp',
                 data:
                 {
@@ -45,14 +49,14 @@ function autocompleteCityInit()
                     {
                         oResponse($.map(oData.geonames, function(oItem)
                         {
-                            $('#str_city').click(function()
+                            $('#str_city').mousemove(function()
                             {
                                 $('#str_state').val((oItem.adminName1 ? oItem.adminName1 : ''));
                                 $('#str_zip_code').val(oItem.postalcode);
                             });
 
                             return {
-                                label: oItem.name + (oItem.adminName1 ? ', ' + oItem.adminName1 : '') + (sCountry ? '' : ', ' + oItem.countryName),
+                                label: oItem.name + (oItem.adminName1 ? ', ' + oItem.adminName1 : '') + (sUrlSlug.trim() ? '' : ', ' + oItem.countryName),
                                 value: oItem.name
                             }
                         }));
@@ -62,9 +66,3 @@ function autocompleteCityInit()
         }
     })
 }
-
-
-$(document).ready(function()
-{
-    autocompleteCityInit();
-});
