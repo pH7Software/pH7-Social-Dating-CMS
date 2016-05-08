@@ -6,14 +6,12 @@
 
 /*
  * ATTENTION!
- * Please remplace "ph7cms" by your username by registering here: http://www.geonames.org/login
- * After, you will need to enable the Web service here: http://www.geonames.org/manageaccount
+ * Please remplace "ph7cms" by your username by registering on: http://www.geonames.org/login
+ * After, you will need to enable the Free Web Services here: http://www.geonames.org/manageaccount
  */
-
 var sGeonamesUsername = 'ph7cms'; // Remplace "ph7cms" by your username!
 
-/* TODO: Replace this API by GoogleMap Service instead: https://developers.google.com/maps/documentation/javascript/places-autocomplete */
-function autocompleteCityInit(sGeonamesUsername)
+function autocompleteCityInit()
 {
     // Set the variables
     var sCountry = $('#str_country').val();
@@ -36,19 +34,29 @@ function autocompleteCityInit(sGeonamesUsername)
                 },
                 success: function(oData)
                 {
-                    oResponse($.map(oData.geonames, function(oItem)
+                    // Check if "geonames" exists. When the API returns an error message, it won't return "geonames"
+                    if (!oData.geonames)
                     {
-                        $('#str_city').click(function()
-                        {
-                            $('#str_state').val((oItem.adminName1 ? oItem.adminName1 : ''));
-                            $('#str_zip_code').val(oItem.postalcode);
-                        });
-
-                        return {
-                            label: oItem.name + (oItem.adminName1 ? ', ' + oItem.adminName1 : '') + (sCountry ? '' : ', ' + oItem.countryName),
-                            value: oItem.name
+                        if (oData.status.message) {
+                            console.error(oData.status.message); // Display the error message from the API into the browser's log
                         }
-                    }))
+                    }
+                    else
+                    {
+                        oResponse($.map(oData.geonames, function(oItem)
+                        {
+                            $('#str_city').click(function()
+                            {
+                                $('#str_state').val((oItem.adminName1 ? oItem.adminName1 : ''));
+                                $('#str_zip_code').val(oItem.postalcode);
+                            });
+
+                            return {
+                                label: oItem.name + (oItem.adminName1 ? ', ' + oItem.adminName1 : '') + (sCountry ? '' : ', ' + oItem.countryName),
+                                value: oItem.name
+                            }
+                        }));
+                    }
                 }
             })
         }
