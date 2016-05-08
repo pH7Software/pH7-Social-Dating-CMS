@@ -305,7 +305,7 @@ class ModeratorController extends Controller
 
     public function deletePictureAlbum()
     {
-        if ($this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id')) && (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id')))
+        if ((new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) && $this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id')))
         {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
@@ -346,7 +346,7 @@ class ModeratorController extends Controller
 
     public function deleteVideoAlbum()
     {
-        if ($this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id')) && (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id')))
+        if ((new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) && $this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id')))
         {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
