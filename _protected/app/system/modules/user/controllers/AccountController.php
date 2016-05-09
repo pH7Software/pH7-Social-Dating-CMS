@@ -7,6 +7,8 @@
  */
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+
 class AccountController extends Controller
 {
 
@@ -14,11 +16,7 @@ class AccountController extends Controller
 
     public function index()
     {
-        $this->sTitle = t('Hello <em>%0%</em>, welcome to %site_name%!', $this->session->get('member_first_name'));
-        $this->view->page_title = $this->sTitle; // Note: HTML tags are automatically deleted in the title tag of the header.
-        $this->view->h1_title = $this->sTitle;
-        $this->view->h3_title = t('How are you today?');
-        $this->output();
+        Header::redirect(Uri::get('user', 'main', 'index'));
     }
 
     public function activate($sMail, $sHash)
