@@ -160,10 +160,10 @@ class PictureModel extends PictureCoreModel
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(p.pictureId) AS totalPictures';
+        $sSqlSelect = (!$bCount) ? 'p.*' : 'COUNT(p.pictureId) AS totalPictures';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE p.pictureId = :looking' : ' WHERE p.title LIKE :looking OR p.description LIKE :looking';
 
-        $rStmt = Db::getInstance()->prepare('SELECT p.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN'
+        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN'
                 . Db::prefix('AlbumsPictures') . 'AS a ON p.albumId = a.albumId INNER JOIN' . Db::prefix('Members') . 'AS m ON p.profileId = m.profileId' . $sSqlWhere . ' AND p.approved=:approved' . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
