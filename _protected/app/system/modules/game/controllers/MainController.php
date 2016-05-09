@@ -35,8 +35,8 @@ class MainController extends Controller
     {
         $this->view->total_pages = $this->oPage->getTotalPages($this->oGameModel->totalGames(), 10);
         $this->view->current_page = $this->oPage->getCurrentPage();
-
         $oGames = $this->oGameModel->get(null, null, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+
         $this->setMenuVars();
 
         if (empty($oGames))

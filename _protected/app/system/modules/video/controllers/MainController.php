@@ -10,6 +10,7 @@ namespace PH7;
 use
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Navigation\Page,
+PH7\Framework\Cache\Cache,
 PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
@@ -32,7 +33,6 @@ class MainController extends Controller
         unset($oUser);
 
         $this->view->member_id = $this->session->get('member_id');
-
         $this->iProfileId = (new UserCoreModel)->getId(null, $this->sUsername);
 
         // Predefined meta_keywords tags
@@ -73,10 +73,10 @@ class MainController extends Controller
 
     public function albums()
     {
-        $profileId = ($this->httpRequest->getExists('username')) ? $this->iProfileId : null;
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oVideoModel->totalAlbums($profileId), 14);
+        $iProfileId = ($this->httpRequest->getExists('username')) ? $this->iProfileId : null;
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oVideoModel->totalAlbums($iProfileId), 14);
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oAlbums = $this->oVideoModel->album($profileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oAlbums = $this->oVideoModel->album($iProfileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
         if (empty($oAlbums))
         {
@@ -86,13 +86,12 @@ class MainController extends Controller
         else
         {
             // We can include HTML tags in the title since the template will erase them before displaying
-            $this->sTitle = (!empty($profileId)) ? t("The <a href='%0%'>%1%</a>'s albums", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
-            $this->view->page_title = $this->sTitle;
+            $this->sTitle = (!empty($iProfileId)) ? t("The <a href='%0%'>%1%</a>'s albums", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
-            $this->view->h2_title = $this->sTitle;
             $this->view->albums = $oAlbums;
         }
-        if (empty($profileId))
+        if (empty($iProfileId))
             $this->manualTplInclude('index.tpl');
 
         $this->output();
@@ -165,7 +164,7 @@ class MainController extends Controller
         (new Video)->deleteVideo($this->httpRequest->post('album_id'), $this->session->get('member_username'), $this->httpRequest->post('video_link'));
 
         /* Clean VideoModel Cache */
-        (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
 
         Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your video has been deleted!'));
     }
@@ -178,7 +177,7 @@ class MainController extends Controller
         $this->file->deleteDir($sDir);
 
         /* Clean VideoModel Cache */
-        (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
         Header::redirect(Uri::get('video', 'main', 'albums'), t('Your album has been deleted!'));
     }
 

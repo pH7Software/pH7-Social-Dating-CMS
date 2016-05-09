@@ -34,10 +34,10 @@ class MainController extends Controller
 
     public function index()
     {
+        $this->view->page_title = t('The Blog of %site_name%');
+
         $this->view->total_pages = $this->oPage->getTotalPages($this->oBlogModel->totalPosts(), 5);
         $this->view->current_page = $this->oPage->getCurrentPage();
-
-        $this->view->page_title = t('The Blog of %site_name%');
         $oPosts = $this->oBlogModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
         $this->setMenuVars();
 

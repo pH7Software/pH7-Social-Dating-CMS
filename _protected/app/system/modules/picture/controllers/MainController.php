@@ -10,6 +10,7 @@ namespace PH7;
 use
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Navigation\Page,
+PH7\Framework\Cache\Cache,
 PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
@@ -70,10 +71,10 @@ class MainController extends Controller
 
     public function albums()
     {
-        $profileId = ($this->httpRequest->getExists('username')) ? $this->iProfileId : null;
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oPictureModel->totalAlbums($profileId), 16);
+        $iProfileId = ($this->httpRequest->getExists('username')) ? $this->iProfileId : null;
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oPictureModel->totalAlbums($iProfileId), 16);
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oAlbums = $this->oPictureModel->album($profileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oAlbums = $this->oPictureModel->album($iProfileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
         if (empty($oAlbums))
         {
@@ -83,12 +84,12 @@ class MainController extends Controller
         else
         {
             // We can include HTML tags in the title since the template will erase them before displaying
-            $this->sTitle = (!empty($profileId)) ? t("The <a href='%0%'>%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Photo Gallery Community');
+            $this->sTitle = (!empty($iProfileId)) ? t("The <a href='%0%'>%1%</a>'s photo album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Photo Gallery Community');
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->meta_description = t("%0%'s Albums | Photo Albums of the Dating Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
             $this->view->albums = $oAlbums;
         }
-        if (empty($profileId))
+        if (empty($iProfileId))
             $this->manualTplInclude('index.tpl');
 
         $this->output();
@@ -98,7 +99,6 @@ class MainController extends Controller
     {
         $this->view->total_pages = $this->oPage->getTotalPages($this->oPictureModel->totalPhotos($this->iProfileId), 26);
         $this->view->current_page = $this->oPage->getCurrentPage();
-
         $oAlbum = $this->oPictureModel->photo($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
         if (empty($oAlbum))
@@ -154,7 +154,7 @@ class MainController extends Controller
         (new Picture)->deletePhoto($this->httpRequest->post('album_id'), $this->session->get('member_username'), $this->httpRequest->post('picture_link'));
 
         /* Clean PictureModel Cache */
-        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
         Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your picture has been deleted!'));
     }
 
@@ -166,7 +166,7 @@ class MainController extends Controller
         $this->file->deleteDir($sDir);
 
         /* Clean PictureModel Cache */
-        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
 
         Header::redirect(Uri::get('picture', 'main', 'albums'), t('Your album has been deleted!'));
     }

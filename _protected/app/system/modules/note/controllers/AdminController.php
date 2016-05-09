@@ -7,7 +7,10 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+use
+PH7\Framework\Cache\Cache,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
@@ -23,7 +26,6 @@ class AdminController extends MainController
 
         $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts('0'), 10);
         $this->view->current_page = $this->oPage->getCurrentPage();
-
         $oPosts = $this->oNoteModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), SearchCoreModel::CREATED, '0');
         $this->view->posts = $oPosts;
         $this->setMenuVars();
@@ -39,7 +41,7 @@ class AdminController extends MainController
         if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId))
         {
             /* Clean NoteModel Cache */
-            (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+            (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
             $this->sMsg = t('The Note has been approved!');
         }
@@ -60,7 +62,7 @@ class AdminController extends MainController
         if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId, '0'))
         {
             /* Clean NoteModel Cache */
-            (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+            (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
             $this->sMsg = t('The Note has been approved!');
         }
