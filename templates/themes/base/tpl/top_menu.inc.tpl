@@ -145,8 +145,8 @@
           <li class="dropdown"><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o fa-fw"></i> {lang 'Mail'} <span class="badge">{count_unread_mail}</span> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('mail','main','compose') }}" title="{lang 'Compose'}"><i class="fa fa-pencil"></i> {lang 'Compose'}</a></li>
-              <li><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'Inbox'}"><i class="fa fa-inbox"></i> {lang 'Inbox'}</a></li>
-              <li><a href="{{ $design->url('mail','main','outbox') }}" title="{lang 'Outbox'}"><i class="fa fa-paper-plane-o"></i> {lang 'Outbox'}</a></li>
+              <li><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'Inbox - Messages Received'}"><i class="fa fa-inbox"></i> {lang 'Inbox'}</a></li>
+              <li><a href="{{ $design->url('mail','main','outbox') }}" title="{lang 'Messages Sent'}"><i class="fa fa-paper-plane-o"></i> {lang 'Sent'}</a></li>
               <li><a href="{{ $design->url('mail','main','trash') }}" title="{lang 'Trash'}"><i class="fa fa-trash-o"></i> {lang 'Trash'}</a></li>
               <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Find Messages'}"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
             </ul>
