@@ -4,10 +4,9 @@
  * @desc             Loading template files.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2011-2016, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2010-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout
- * @version          1.0
  */
 
 namespace PH7\Framework\Layout;

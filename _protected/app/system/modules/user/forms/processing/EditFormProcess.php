@@ -26,7 +26,7 @@ class EditFormProcess extends Form
         {
             if (!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId))
             {
-                $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId);
+                $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId, null, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
 
                 (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $iProfileId, null)->clear();
             }
@@ -79,7 +79,7 @@ class EditFormProcess extends Form
         // Destroy objects
         unset($oUserModel, $oUser, $oUserCache);
 
-        \PFBC\Form::setSuccess('form_user_edit_account', t('Your profile has been saved successfully!'));
+        \PFBC\Form::setSuccess('form_user_edit_account', t('Profile has been saved successfully!'));
     }
 
 }

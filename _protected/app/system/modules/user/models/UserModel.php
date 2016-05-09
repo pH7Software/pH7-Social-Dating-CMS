@@ -41,14 +41,18 @@ class UserModel extends UserCoreModel
         $rStmt->bindValue(':ip', $aData['ip'], \PDO::PARAM_STR);
         $rStmt->bindParam(':hash_validation', $aData['hash_validation'], \PDO::PARAM_STR, 40);
         $rStmt->bindValue(':current_date', $aData['current_date'], \PDO::PARAM_STR);
-        $rStmt->bindValue(':group_id', $aData['group_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':affiliated_id', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();
         $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the user's ID
         Db::free($rStmt);
+
         $this->setInfoFields(array());
         $this->setDefaultPrivacySetting();
         $this->setDefaultNotification();
+
+        // Last thing, update the membership with the correct details
+        $this->updateMembership($aData['group_id'], $this->getKeyId(), null, $this->sCurrentDate);
+
         return $this->getKeyId();
     }
 

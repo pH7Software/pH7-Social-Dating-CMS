@@ -23,7 +23,7 @@ class Permission extends PermissionCore
             $this->signUpRedirect();
         }
 
-        if (!$bAdminAuth)
+        if (!$bAdminAuth || UserCore::isAdminLoggedAs())
         {
             if (!$this->checkMembership() || ($this->registry->action === 'read' && !$this->group->read_notes))
             {

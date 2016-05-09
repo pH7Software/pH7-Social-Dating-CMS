@@ -22,7 +22,7 @@ class Permission extends PermissionCore
             $this->signInRedirect();
         }
 
-        if (!AdminCore::auth()) // If the administrator is not logged
+        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) // If the admin is not logged (but can be if the admin use "login as user" feature)
         {
             if (!$this->checkMembership() || !$this->group->view_pictures)
             {

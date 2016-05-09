@@ -38,7 +38,7 @@ abstract class Api
      */
     public function setKey($sApiKey)
     {
-        $this->sApiKey = $sApiKey;
+        $this->sApiKey = trim($sApiKey);
     }
 
     /**

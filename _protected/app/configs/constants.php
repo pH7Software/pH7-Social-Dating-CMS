@@ -63,7 +63,7 @@ define('PH7_MAX_URL_LENGTH', 120);
 
 /***** DESIGN *****/
 
-define('PH7_WIDTH_SEARCH_FORM', 160);
+define('PH7_WIDTH_SEARCH_FORM', 156);
 
 /***** SECURITY *****/
 

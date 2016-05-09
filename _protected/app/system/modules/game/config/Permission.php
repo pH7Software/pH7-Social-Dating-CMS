@@ -17,7 +17,7 @@ class Permission extends PermissionCore
 
         $bAdminAuth = AdminCore::auth();
 
-        if (!$bAdminAuth)
+        if (!$bAdminAuth || UserCore::isAdminLoggedAs())
         {
             if (!$this->checkMembership() || !$this->group->games_access)
             {

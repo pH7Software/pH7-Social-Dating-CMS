@@ -10,6 +10,7 @@ namespace PH7;
 use
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Navigation\Page,
+PH7\Framework\Cache\Cache,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
 
@@ -30,21 +31,21 @@ class MainController extends Controller
         parent::__construct();
         $this->oNoteModel = new NoteModel;
         $this->oPage = new Page;
-        $this->iApproved = (AdminCore::auth() && !$this->session->exists('login_user_as')) ? null : 1;
+        $this->iApproved = (AdminCore::auth() && !UserCore::isAdminLoggedAs()) ? null : 1;
 
         $this->view->member_id = $this->session->get('member_id');
     }
 
     public function index()
     {
+        $this->view->page_title = t('The Notes of %site_name%');
+
         $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts($this->iApproved), 5);
         $this->view->current_page = $this->oPage->getCurrentPage();
-
-        $this->view->page_title = t('The Notes of %site_name%');
         $oPosts = $this->oNoteModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), SearchCoreModel::UPDATED, $this->iApproved);
         $this->setMenuVars();
 
-        if(empty($oPosts))
+        if (empty($oPosts))
         {
             $this->sTitle = t('Empty Note');
             $this->notFound(false); // We disable the HTTP error code 404 for Ajax requests running
@@ -60,12 +61,12 @@ class MainController extends Controller
 
     public function read($sUsername, $sPostId)
     {
-        if(isset($sUsername, $sPostId))
+        if (isset($sUsername, $sPostId))
         {
             $iProfileId = (new UserCoreModel)->getId(null, $sUsername);
             $oPost = $this->oNoteModel->readPost($sPostId, $iProfileId, $this->iApproved);
 
-            if(!empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId))
+            if (!empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId))
             {
                 $aVars = [
                     /***** META TAGS *****/
@@ -119,7 +120,7 @@ class MainController extends Controller
         $this->setMenuVars();
 
         $sCategoryTxt = substr($sCategory,0,60);
-        if(empty($oSearch))
+        if (empty($oSearch))
         {
             $this->sTitle = t('Not "%0%" category found!', $sCategoryTxt);
             $this->notFound();
@@ -127,8 +128,7 @@ class MainController extends Controller
         else
         {
             $this->sTitle = t('Search by Category: "%0%" Note', $sCategoryTxt);
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Note Result!', '%n% Notes Result!', $this->iTotalNotes);
             $this->view->meta_description = t('Search Note Post by Category %0% - Dating Social Community Note', $sCategoryTxt);
             $this->view->meta_keywords = t('search,post,blog,note,dating,social network,community,news');
@@ -154,7 +154,7 @@ class MainController extends Controller
         $this->setMenuVars();
 
         $sAuthorTxt = substr($sAuthor,0,60);
-        if(empty($oSearch))
+        if (empty($oSearch))
         {
             $this->sTitle = t('None "%0%" author was found!', $sAuthorTxt);
             $this->notFound(false); // For the Ajax profile blocks, we can not put HTTP error code 404, so the attribute is "false"
@@ -163,8 +163,7 @@ class MainController extends Controller
         else
         {
             $this->sTitle = t('Search by Author: "%0%" Note', $sAuthorTxt);
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title =  $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Note Result!', '%n% Notes Result!', $this->iTotalNotes);
             $this->view->meta_description = t('Search Note Post by Author %0% - Dating Social Community Note', $sAuthorTxt);
             $this->view->meta_keywords = t('author,search,post,blog,note,dating,social network,community,news');
@@ -178,9 +177,7 @@ class MainController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search Note - Looking a post');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Search Note - Looking a post');
         $this->output();
     }
 
@@ -193,7 +190,7 @@ class MainController extends Controller
         $oSearch = $this->oNoteModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->iApproved);
         $this->setMenuVars();
 
-        if(empty($oSearch))
+        if (empty($oSearch))
         {
             $this->sTitle = t('Sorry, Your search returned no results!');
             $this->notFound();
@@ -201,8 +198,7 @@ class MainController extends Controller
         else
         {
             $this->sTitle = t('Dating Social Note - Your search returned');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Note Result!', '%n% Notes Result!', $this->iTotalNotes);
             $this->view->meta_description = t('Search - Dating Social Community Note');
             $this->view->meta_keywords = t('search,note,dating,social network,community,news');
@@ -216,18 +212,13 @@ class MainController extends Controller
 
     public function add()
     {
-        $this->sTitle = t('Add a Note');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Add a Note');
         $this->output();
     }
 
     public function edit()
     {
-        $this->sTitle = t('Edit the Note');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
-
+        $this->view->page_title = $this->view->h1_title = t('Edit the Note');
         $this->output();
     }
 
@@ -243,14 +234,16 @@ class MainController extends Controller
         $this->oNoteModel->deletePost($iId, $iProfileId);
 
         /* Clean NoteModel Cache */
-        (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+
         Header::redirect(Uri::get('note', 'main', 'index'), t('Your post has been deleted!'));
     }
 
     public function removeThumb($iId)
     {
-        if(!(new Framework\Security\CSRF\Token)->checkUrl())
+        if (!(new Framework\Security\CSRF\Token)->checkUrl()) {
             exit(Form::errorTokenMsg());
+        }
 
         $iProfileId = $this->session->get('member_id');
 
@@ -258,7 +251,7 @@ class MainController extends Controller
         $this->oNoteModel->deleteThumb($iId, $iProfileId);
 
         /* Clean BlogModel Cache */
-        (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
         Header::redirect(Uri::get('note','main','edit', $iId), t('The thumbnail has been deleted successfully!'));
     }
@@ -286,9 +279,12 @@ class MainController extends Controller
      */
     protected function notFound($b404Status = true)
     {
-        if($b404Status) Framework\Http\Http::setHeadersByCode(404);
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        if ($b404Status) {
+            Framework\Http\Http::setHeadersByCode(404);
+        }
+
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
+
         $this->view->error = t('Sorry, we weren\'t able to find the page you requested.<br />
                 May we suggest <a href="%0%">exploring some tags</a> or <a href="%1%">creating a new search</a>.', Uri::get('note','main','index'), Uri::get('note','main','search'));
     }

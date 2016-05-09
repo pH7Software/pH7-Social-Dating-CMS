@@ -21,9 +21,10 @@
     color:#08c;
 }
 
-/* Align the text to center only when the menu is toggled */
+/* Do some changes when the menu is toggled */
 @media screen and (max-width: 767px)
 {
+    /* Align the text to center only */
     .navbar-default .navbar-nav > li > a,
     .dropdown-menu > li > a {
         text-align:center;
@@ -31,6 +32,10 @@
     /* Add gray stripes to separate each main drop-down menu */
     .navbar-default .navbar-nav > li {
         border-top:1px solid #dfdfdf;
+    }
+    /* Change size for the sub-sub drop-down menus for better distinction */
+    .navbar-default .navbar-nav .open .dropdown-menu > li > ul > li > a {
+        font-size:11px;
     }
 }
 

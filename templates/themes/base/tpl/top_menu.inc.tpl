@@ -1,3 +1,10 @@
+    {* Get the frequently used functions in variables to optimize the script and call those functions only once in the file *}
+    {{
+      $admin_logged_as_user = UserCore::isAdminLoggedAs();
+      $admin_logged_as_affiliate = AffiliateCore::isAdminLoggedAs()
+     }}
+
+
     {* Creating Objects *}
       {{ $oSession = new Framework\Session\Session() }}
 
@@ -61,7 +68,7 @@
 
     {* Menu Guest, Member and LoginUserAs of Admin Panel *}
 
-      {if ( !$is_aff_auth AND !$is_admin_auth ) OR $oSession->exists('login_user_as') }
+      {if ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
 
         {if $is_chat_enabled OR $is_chatroulette_enabled}
           <li class="dropdown"><a href="{{ $design->url('chat','home','index') }}" title="{lang 'The Free Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
@@ -133,13 +140,13 @@
 
     {* Member Menu *}
 
-        {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $oSession->exists('login_user_as') }
+        {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
 
           <li class="dropdown"><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Emails'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o fa-fw"></i> {lang 'Mail'} <span class="badge">{count_unread_mail}</span> <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ $design->url('mail','main','compose') }}" title="{lang 'Compose'}"><i class="fa fa-pencil"></i> {lang 'Compose'}</a></li>
-              <li><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'Inbox'}"><i class="fa fa-inbox"></i> {lang 'Inbox'}</a></li>
-              <li><a href="{{ $design->url('mail','main','outbox') }}" title="{lang 'Outbox'}"><i class="fa fa-paper-plane-o"></i> {lang 'Outbox'}</a></li>
+              <li><a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'Inbox - Messages Received'}"><i class="fa fa-inbox"></i> {lang 'Inbox'}</a></li>
+              <li><a href="{{ $design->url('mail','main','outbox') }}" title="{lang 'Messages Sent'}"><i class="fa fa-paper-plane-o"></i> {lang 'Sent'}</a></li>
               <li><a href="{{ $design->url('mail','main','trash') }}" title="{lang 'Trash'}"><i class="fa fa-trash-o"></i> {lang 'Trash'}</a></li>
               <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Find Messages'}"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
             </ul>
@@ -214,7 +221,7 @@
 
     {* Affiliate Menu *}
 
-      {if $is_aff_auth AND ( !$is_user_auth AND !$is_admin_auth OR $oSession->exists('login_affiliate_as') ) }
+      {if $is_aff_auth AND ( !$is_user_auth AND !$is_admin_auth OR $admin_logged_as_affiliate ) }
 
         <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Gets Banners'}">{lang 'Banners'}</a></li>
 
@@ -364,9 +371,9 @@
           {{
             $oModeratorModel = new ModeratorCoreModel();
 
-            $count_moderate_total_album_picture = $oModeratorModel->totalAlbumsPicture();
+            $count_moderate_total_picture_album = $oModeratorModel->totalPictureAlbums();
             $count_moderate_total_picture = $oModeratorModel->totalPictures();
-            $count_moderate_total_album_video = $oModeratorModel->totalAlbumsVideo();
+            $count_moderate_total_video_album = $oModeratorModel->totalVideoAlbums();
             $count_moderate_total_video = $oModeratorModel->totalVideos();
             $count_moderate_total_avatar = $oModeratorModel->totalAvatars();
             $count_moderate_total_background = $oModeratorModel->totalBackgrounds();
@@ -377,9 +384,9 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','index') }}" title="{lang 'User Moderation'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user-secret"></i> {lang 'Moderation'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumpicture') }}" title="{lang 'Moderate Albums'}">{lang 'Picture Album'} <span class="badge">{count_moderate_total_album_picture}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturealbum') }}" title="{lang 'Moderate Photo Albums'}">{lang 'Photo Album'} <span class="badge">{count_moderate_total_picture_album}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}">{lang 'Picture'} <span class="badge">{count_moderate_total_picture}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','albumvideo') }}" title="{lang 'Moderate Albums'}">{lang 'Video Album'} <span class="badge">{count_moderate_total_album_video}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','videoalbum') }}" title="{lang 'Moderate Video Albums'}">{lang 'Video Album'} <span class="badge">{count_moderate_total_video_album}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}">{lang 'Video'} <span class="badge">{count_moderate_total_video}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Avatars'}">{lang 'Avatar'} <span class="badge">{count_moderate_total_avatar}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}">{lang 'Profile Background'} <span class="badge">{count_moderate_total_background}</span></a></li>
@@ -463,9 +470,9 @@
 </nav>
 
 {* For LoginUserAs of Admin Panel *}
-  {if $is_admin_auth AND $oSession->exists('login_user_as') }
+  {if $is_admin_auth AND $admin_logged_as_user }
     <p class="center bold loginas"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
-  {elseif $is_admin_auth AND $oSession->exists('login_affiliate_as') }
+  {elseif $is_admin_auth AND $admin_logged_as_affiliate }
     <p class="center bold loginas"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
   {/if}
 
@@ -473,9 +480,9 @@
       {{
         unset(
           $oSession,
-          $count_moderate_total_album_picture,
+          $count_moderate_total_picture_album,
           $count_moderate_total_picture,
-          $count_moderate_total_album_video,
+          $count_moderate_total_video_album,
           $count_moderate_total_video,
           $count_moderate_total_avatar,
           $count_moderate_total_background,

@@ -5,8 +5,8 @@
 
     {each $album in $albums}
 
-      {{ $action = ($album->approved == 1) ? 'disapprovedalbumpicture' : 'approvedalbumpicture' }}
-      {{ $absolute_url = Framework\Mvc\Router\Uri::get('picture','main','album',"$album->username,$album->title,$album->albumId") }}
+      {{ $action = ($album->approved == 1) ? 'disapprovedpicturealbum' : 'approvedpicturealbum' }}
+      {{ $absolute_url = Framework\Mvc\Router\Uri::get('picture','main','album',"$album->username,$album->name,$album->albumId") }}
 
       <div class="thumb_photo">
         <a href="{absolute_url}" target="_blank"><img src="{url_data_sys_mod}picture/img/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" /></a>
@@ -15,7 +15,7 @@
         <div>
           {{ $text = ($album->approved == 1) ? t('Disapproved') : t('Approved') }}
           {{ LinkCoreForm::display($text, PH7_ADMIN_MOD, 'moderator', $action, array('album_id'=>$album->albumId)) }} |
-          {{ LinkCoreForm::display(t('Delete'), PH7_ADMIN_MOD, 'moderator', 'deletealbumpicture', array('album_id'=>$album->albumId, 'id'=>$album->profileId, 'username'=>$album->username)) }}
+          {{ LinkCoreForm::display(t('Delete'), PH7_ADMIN_MOD, 'moderator', 'deletepicturealbum', array('album_id'=>$album->albumId, 'id'=>$album->profileId, 'username'=>$album->username)) }}
         </div>
       </div>
 
