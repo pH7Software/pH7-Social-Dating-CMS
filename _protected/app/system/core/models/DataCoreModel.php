@@ -12,7 +12,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 {
 
-    const TB_PICTURE = 'Pictures', TB_VIDEO = 'Videos', MAX_ITEMS = 800;
+    const TB_PICTURE = 'Pictures', TB_VIDEO = 'Videos', MAX_ITEMS = 1000;
 
     public function getPicsVids($sTable, $sOrder, $iOffset, $iLimit)
     {
