@@ -11,11 +11,9 @@ use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class AccountController extends Controller
 {
-
-    private $sTitle;
-
     public function index()
     {
+        // Redirect this page to the user homepage
         Header::redirect(Uri::get('user', 'main', 'index'));
     }
 
@@ -23,5 +21,4 @@ class AccountController extends Controller
     {
         (new UserCore)->activateAccount($sMail, $sHash, $this->config, $this->registry);
     }
-
 }
