@@ -39,7 +39,7 @@ class Permission extends PermissionCore
         }
 
         // Options and Memberships ...
-        if (!$bAdminAuth) // If the administrator is not logged
+        if (!$bAdminAuth || User::isAdminLoggedAs()) // If the admin is not logged (but can be if the admin use "login as user" feature)
         {
             if (!$this->checkMembership() || ($bUserAuth && !$this->group->member_site_access))
             {

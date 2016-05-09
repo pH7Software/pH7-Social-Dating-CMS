@@ -68,7 +68,7 @@ class JoinFormProcess extends Form
         {
             // Successful registration in the database for step 1!
 
-            /** Update the Affiliate Commission **/
+            /* Update the Affiliate Commission */
             if ($this->iActiveType == 0) // Only if the user's account is already activated.
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
 

@@ -66,7 +66,7 @@
           <p><a class="s_button" href="{{ $design->url('note','main','edit',$post->noteId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'note','main','delete', $post->noteId, 's_button') }}</p>
         {/if}
 
-        {if $is_admin_auth && !(new Framework\Session\Session)->exists('login_user_as')}
+        {if $is_admin_auth && !UserCore::isAdminLoggedAs()}
           {{ $action = ($post->approved == 1) ? 'disapproved' : 'approved' }}
           {{ $text = ($post->approved == 1) ? t('Disapprove') : t('Approve') }}
           <fieldset class="s_tMarg">

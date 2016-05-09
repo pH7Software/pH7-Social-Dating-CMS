@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Blog / Controller
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class AdminController extends MainController
@@ -18,17 +19,13 @@ class AdminController extends MainController
 
     public function add()
     {
-        $this->sTitle = t('Add a Post');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Add a Post');
         $this->output();
     }
 
     public function edit()
     {
-        $this->sTitle = t('Edit the Post');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Edit the Post');
 
         $this->output();
     }
@@ -50,8 +47,9 @@ class AdminController extends MainController
 
     private function removeThumb($iId)
     {
-        if(!(new Framework\Security\CSRF\Token)->checkUrl())
+        if (!(new Framework\Security\CSRF\Token)->checkUrl()) {
             exit(Form::errorTokenMsg());
+        }
 
         (new Blog)->deleteThumb($iId, 'blog', $this->file);
 

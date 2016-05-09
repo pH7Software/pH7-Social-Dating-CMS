@@ -6,7 +6,12 @@
  * @package        PH7 / App / System / Module / Blog / Controller
  */
 namespace PH7;
-use PH7\Framework\Parse\Emoticon, PH7\Framework\Navigation\Page;
+
+use
+PH7\Framework\Parse\Emoticon,
+PH7\Framework\Navigation\Page,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
@@ -29,13 +34,11 @@ class MainController extends Controller
 
     public function index()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oBlogModel->
-            totalPosts(), 5);
-        $this->view->current_page = $this->oPage->getCurrentPage();
-
         $this->view->page_title = t('The Blog of %site_name%');
-        $oPosts = $this->oBlogModel->getPosts($this->oPage->getFirstItem(), $this->
-            oPage->getNbItemsByPage());
+
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oBlogModel->totalPosts(), 5);
+        $this->view->current_page = $this->oPage->getCurrentPage();
+        $oPosts = $this->oBlogModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
         $this->setMenuVars();
 
         if (empty($oPosts))
@@ -96,7 +99,7 @@ class MainController extends Controller
         }
         else
         {
-            Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('blog', 'main', 'index'));
+            Header::redirect(Uri::get('blog', 'main', 'index'));
         }
 
         $this->output();
@@ -125,11 +128,9 @@ class MainController extends Controller
         else
         {
             $this->sTitle = t('Search by Category: "%0%" Blog', $sCategoryTxt);
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Blog Result!', '%n% Blogs Result!', $this->iTotalBlogs);
-            $this->view->meta_description = t('Search Blog Post by Category %0% - Dating Social Community Blog',
-                $sCategoryTxt);
+            $this->view->meta_description = t('Search Blog Post by Category %0% - Dating Social Community Blog', $sCategoryTxt);
             $this->view->meta_keywords = t('search,post,blog,dating,social network,community,news');
 
             $this->view->posts = $oSearch;
@@ -141,9 +142,7 @@ class MainController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search Blog - Looking a post');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Search Blog - Looking a post');
         $this->output();
     }
 
@@ -151,12 +150,14 @@ class MainController extends Controller
     {
         $this->iTotalBlogs = $this->oBlogModel->search($this->httpRequest->get('looking'), true,
             $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+
         $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalBlogs, 10);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oBlogModel->search($this->httpRequest->get('looking'), false,
             $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->
             getFirstItem(), $this->oPage->getNbItemsByPage());
+
         $this->setMenuVars();
 
         if (empty($oSearch))
@@ -167,8 +168,7 @@ class MainController extends Controller
         else
         {
             $this->sTitle = t('Dating Social Blog - Your search returned');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Blog Result!', '%n% Blogs Result!', $this->iTotalBlogs);
             $this->view->meta_description = t('Search - Dating Social Community Blog');
             $this->view->meta_keywords = t('search,blog,dating,social network,community,news');
@@ -204,14 +204,15 @@ class MainController extends Controller
      */
     protected function notFound($b404Status = true)
     {
-        if ($b404Status)
+        if ($b404Status) {
             Framework\Http\Http::setHeadersByCode(404);
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        }
+
+        $this->view->page_title = $this->view->h2_title = $this->sTitle;
+
         $this->view->error = t('Sorry, we weren\'t able to find the page you requested.<br />
         May we suggest <a href="%0%">exploring some tags</a> or <a href="%1%">creating a new search</a>.',
-            Framework\Mvc\Router\Uri::get('blog', 'main', 'index'), Framework\Mvc\Router\Uri::
-            get('blog', 'main', 'search'));
+            Uri::get('blog', 'main', 'index'), Uri::get('blog', 'main', 'search'));
     }
 
     public function __destruct()

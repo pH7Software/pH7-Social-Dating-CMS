@@ -17,7 +17,7 @@
     <p>{{ $design->like($post->username, $post->firstName, $post->sex) }} | {{ $design->report($post->profileId, $post->username, $post->firstName, $post->sex) }}</p>
   </div>
 
-  {if $is_admin_auth && !(new Framework\Session\Session)->exists('login_user_as')}
+  {if $is_admin_auth && !UserCore::isAdminLoggedAs()}
     <p><a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$post->profileId) }}" title="{lang 'Login As this User to edit his post'}">{lang 'Login as this User'}</a></p>
   {/if}
 

@@ -22,9 +22,8 @@ class PictureCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         $this->cache->start(self::CACHE_GROUP, 'album' . $iProfileId . $iAlbumId . $iApproved . $iOffset . $iLimit . $sOrder, static::CACHE_TIME);
 
-        if(!$oData = $this->cache->get())
+        if (!$oData = $this->cache->get())
         {
-
             $iOffset = (int) $iOffset;
             $iLimit = (int) $iLimit;
 
@@ -52,7 +51,9 @@ class PictureCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt = Db::getInstance()->prepare('DELETE FROM'.Db::prefix('Pictures').'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlPictureId);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
-        (!empty($iPictureId)) ? $rStmt->bindValue(':pictureId', $iPictureId, \PDO::PARAM_INT) : '';
+        if (!empty($iPictureId))
+            $rStmt->bindValue(':pictureId', $iPictureId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 

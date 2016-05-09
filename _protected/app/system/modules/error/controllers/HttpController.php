@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Error / Controller
  */
 namespace PH7;
+
 use PH7\Framework\Http\Http, PH7\Framework\Mvc\Router\Uri;
 
 class HttpController extends Controller

@@ -216,7 +216,7 @@ class MainController extends Controller
         $oInfo = $this->oUserModel->getMembershipDetails($this->iProfileId);
         if ($oInfo->expirationDays != 0 && !empty($oInfo->membershipDate)) {
             $oDate = new \DateTime($oInfo->membershipDate);
-            $oDate->sub(new \DateInterval( sprintf('P%dD', $oInfo->expirationDays)) );
+            $oDate->add(new \DateInterval( sprintf('P%dD', $oInfo->expirationDays)) );
             $this->view->expirationDate = $oDate->format($this->config->values['language.application']['date_time_format']);
             unset($oDate);
         } else {

@@ -22,7 +22,7 @@ class Permission extends PermissionCore
             $this->signInRedirect();
         }
 
-        if (!$bAdminAuth)
+        if (!$bAdminAuth || UserCore::isAdminLoggedAs())
         {
             if (!$this->checkMembership() || !$this->group->view_comments)
             {

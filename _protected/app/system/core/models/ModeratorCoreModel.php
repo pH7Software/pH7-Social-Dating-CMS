@@ -12,7 +12,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class ModeratorCoreModel extends AdminCoreModel
 {
 
-    public function totalAlbumsPicture()
+    public function totalPictureAlbums()
     {
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix('AlbumsPictures') . 'WHERE approved = \'0\'');
         $rStmt->execute();
@@ -30,7 +30,7 @@ class ModeratorCoreModel extends AdminCoreModel
         return (int)$oRow->totalPictures;
     }
 
-    public function totalAlbumsVideo()
+    public function totalVideoAlbums()
     {
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix('AlbumsVideos') . 'WHERE approved = \'0\'');
         $rStmt->execute();
