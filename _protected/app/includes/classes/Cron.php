@@ -26,8 +26,10 @@ class Cron extends Framework\Cron\Run\Cron
      */
     public function isAlreadyExec()
     {
-        if (!$this->checkDelay())
+        if (!$this->checkDelay()) {
+            Framework\Http\Http::setHeadersByCode(403);
             exit(t('This cron has already been executed.'));
+        }
     }
 
 }
