@@ -16,12 +16,12 @@
     {if !$is_user_auth}{{ $design->regionalUrls() }}{/if}
     <link rel="author" href="{url_root}humans.txt" />
     <meta name="robots" content="{meta_robots}" />
-    <meta name="author" content="{meta_author}"/>
+    <meta name="author" content="{meta_author}" />
     <meta name="copyright" content="{meta_copyright}" />
     <meta name="revisit-after" content="7 days" />
     <meta name="category" content="{meta_category}" />
-    <meta name="rating" content="{meta_rating}"/>
-    <meta name="distribution" content="{meta_distribution}"/>
+    <meta name="rating" content="{meta_rating}" />
+    <meta name="distribution" content="{meta_distribution}" />
     {if $header}{header}{/if}
 
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
