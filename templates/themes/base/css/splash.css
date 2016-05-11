@@ -108,7 +108,7 @@ video#bgvid {
   background-size: cover;
 }
 
-.login_block{margin:-50px 0 0 45%}
+.login_block{margin:-50px 0 0 480px}
 
 /* Slideshow */
 .window {height:300px;width:590px}
