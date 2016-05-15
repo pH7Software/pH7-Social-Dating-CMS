@@ -49,7 +49,7 @@ class UpdateAdsForm
 
             // ID textarea form was generated with "mt_rand" because it is faster than "uniqid"
             // See also this discussion we asked: http://stackoverflow.com/questions/9152600/uniqid-versus-mt-rand-php-function
-            $oForm->addElement(new \PFBC\Element\Textarea(t('Banner:'), 'code', array('id' => mt_rand(), 'value' => $oSysVar->parse($oRow->code), 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Textarea(t('Banner (%0%px):', $oRow->width . 'x' . $oRow->height), 'code', array('id' => mt_rand(), 'value' => $oSysVar->parse($oRow->code), 'required' => 1)));
             // mt_rand() function for generate an ID different if it causes problems in the display.
             $oForm->addElement(new \PFBC\Element\Button(t('Update'), 'submit', array('id' => mt_rand())));
 
