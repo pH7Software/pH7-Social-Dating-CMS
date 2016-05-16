@@ -121,7 +121,7 @@ class JoinForm
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user3', 'form_join_user3'));
         $oForm->addElement(new \PFBC\Element\Token('join3'));
-        $oForm->addElement(new \PFBC\Element\CKEditor(t('About Me:'), 'description', array('id' => 'str_description', 'description' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'title' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'onblur' =>'CValid(this.value,this.id,10,2000)', 'validation' => new \PFBC\Validation\Str(20,4000), 'required' =>1)));
+        $oForm->addElement(new \PFBC\Element\CKEditor(t('About Me:'), 'description', array('id' => 'str_description', 'description' => t('Describe yourself in a few words. Your description should be at least 20 characters long.'), 'onblur' =>'CValid(this.value,this.id,10,2000)', 'validation' => new \PFBC\Validation\Str(20,4000), 'required' =>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_description"></span>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
