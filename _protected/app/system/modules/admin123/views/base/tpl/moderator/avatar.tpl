@@ -12,7 +12,7 @@
 
         <div>
           {{ $text = ($avatar->approvedAvatar == 1) ? t('Disapproved') : t('Approved') }}
-          {{ LinkCoreForm::display($text, PH7_ADMIN_MOD, 'moderator', $action, array('id'=>$avatar->profileId)) }} |
+          {{ LinkCoreForm::display($text, PH7_ADMIN_MOD, 'moderator', $action, array('id'=>$avatar->profileId, 'username'=>$avatar->username)) }} |
           {{ LinkCoreForm::display(t('Delete'), PH7_ADMIN_MOD, 'moderator', 'deleteavatar', array('id'=>$avatar->profileId, 'username'=>$avatar->username)) }}
         </div>
       </div>
