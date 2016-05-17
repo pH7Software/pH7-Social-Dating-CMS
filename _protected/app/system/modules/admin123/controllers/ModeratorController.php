@@ -390,17 +390,19 @@ class ModeratorController extends Controller
     }
 
     /**
-     * Clear Design Avatar Cache
+     * Clear "Design Avatar" & "UserCoreModel Avatar" Cache
      *
      * @return void
      */
     private function _clearAvatarCache()
     {
-        (new Cache)->start(Design::CACHE_AVATAR_GROUP . $this->httpRequest->post('username'), null, null)->clear();
+        (new Cache)
+            ->start(Design::CACHE_AVATAR_GROUP . $this->httpRequest->post('username'), null, null)->clear()
+            ->start(UserCoreModel::CACHE_GROUP, 'avatar' . $this->httpRequest->post('id'), null)->clear();
     }
 
     /**
-     * Clear User Background Cache
+     * Clear UserCoreModel Background Cache
      *
      * @return void
      */
