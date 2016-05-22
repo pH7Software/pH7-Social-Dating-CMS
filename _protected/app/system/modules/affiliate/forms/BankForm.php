@@ -42,7 +42,7 @@ class BankForm
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2 class="underline">'.t('Bank Information:').'</h2>'));
         $sHtmlPayPalIcon = '<a href="http://paypal.com" target="_blank"><img src="'.PH7_URL_STATIC.PH7_IMG.'icon/paypal_small.gif" alt="PayPal" title="PayPal"></a><br />';
-        $oForm->addElement(new \PFBC\Element\Email($sHtmlPayPalIcon . t('Your Bank Account:'), 'bank_account', array('id'=>'email_paypal', 'onblur'=>'CValid(this.value,this.id)', 'description'=>t('Your Bank Account (PayPal Email Address).'), 'title'=>t('Your Bank Account.'), 'value'=>$oAff->bankAccount, 'validation'=>new \PFBC\Validation\BankAccount, 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Email($sHtmlPayPalIcon . t('Your Bank Account:'), 'bank_account', array('id'=>'email_paypal', 'onblur'=>'CValid(this.value,this.id)', 'description'=>t('Your Bank Account (PayPal Email Address).'), 'value'=>$oAff->bankAccount, 'validation'=>new \PFBC\Validation\BankAccount, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HtmlExternal('<span class="input_error email_paypal"></span>'));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
