@@ -18,7 +18,7 @@ class SearchBlogForm
 
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => Uri::get('blog', 'main', 'result') . PH7_SH, 'method' => 'get'));
-        $oForm->addElement(new \PFBC\Element\Search(t('Name, Keyword of post, or ID of Blog Post:'), 'looking', $aOptions));
+        $oForm->addElement(new \PFBC\Element\Search(t('Name, Keyword of posts, or ID of a blog post:'), 'looking', $aOptions));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::TITLE => t('Title'), SearchCoreModel::VIEWS => t('Popular'), SearchCoreModel::RATING => t('Rated'), SearchCoreModel::CREATED => t('Created Date'), SearchCoreModel::UPDATED => t('Updated Date'))));
         $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array(SearchCoreModel::ASC => t('Ascending'), SearchCoreModel::DESC => t('Descending'))));
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
