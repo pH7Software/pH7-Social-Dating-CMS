@@ -61,7 +61,7 @@ class SettingController extends Controller
 
     public function analyticsApi()
     {
-        $this->sTitle = t('Analytics Api Code');
+        $this->sTitle = t('Analytics API Code');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
         $this->output();
