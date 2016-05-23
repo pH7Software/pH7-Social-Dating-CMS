@@ -287,7 +287,8 @@ class Design
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) return;
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE)
+            return;
 
         ($bLink ? $bSoftwareName = true : '');
 
@@ -317,7 +318,8 @@ class Design
      */
     final public function smallLink()
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) return;
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE)
+            return;
 
         echo '<p><strong>', t('Powered By'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong></p>';
     }
@@ -329,7 +331,8 @@ class Design
      */
     final public function smartLink()
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) return;
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE)
+            return;
 
         // Get Client's Language Code
         $sLangCode = (new \PH7\Framework\Navigation\Browser)->getLanguage(true);
