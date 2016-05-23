@@ -329,6 +329,8 @@ class Design
      */
     final public function smartLink()
     {
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) return;
+
         // Get Client's Language Code
         $sLangCode = (new \PH7\Framework\Navigation\Browser)->getLanguage(true);
 
