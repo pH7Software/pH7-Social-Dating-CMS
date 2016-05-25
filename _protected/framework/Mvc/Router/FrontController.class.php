@@ -360,16 +360,16 @@ final class FrontController
     public function _languageInitialize()
     {
         if (!defined('PH7_PREF_LANG'))
-            define( 'PH7_PREF_LANG', DbConfig::getSetting('defaultLanguage') );
+            define('PH7_PREF_LANG', DbConfig::getSetting('defaultLanguage'));
 
         if (!defined('PH7_LANG_NAME')) {
             // Set the default language of the site and load the default language path
-            define( 'PH7_LANG_NAME', (new Lang)->setDefaultLang(PH7_PREF_LANG)->init()->load('global', PH7_PATH_APP_LANG)->getLang() );
+            define('PH7_LANG_NAME', (new Lang)->setDefaultLang(PH7_PREF_LANG)->init()->load('global', PH7_PATH_APP_LANG)->getLang());
         }
 
         /*** Get the ISO language code (the two first letters) ***/
-        define( 'PH7_DEFAULT_LANG_CODE', substr(PH7_DEFAULT_LANG, 0, 2) );
-        define( 'PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2) );
+        define('PH7_DEFAULT_LANG_CODE', substr(PH7_DEFAULT_LANG, 0, 2));
+        define('PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2));
 
         /*** Set locale environment variables for gettext ***/
         putenv('LC_ALL=' . PH7_LANG_NAME);
@@ -388,9 +388,9 @@ final class FrontController
         $oLoadTpl->tpl();
         $oLoadTpl->modTpl();
         $oLoadTpl->mailTpl();
-        define( 'PH7_TPL_NAME', $oLoadTpl->getTpl() );
-        define( 'PH7_TPL_MOD_NAME', $oLoadTpl->getModTpl() );
-        define( 'PH7_TPL_MAIL_NAME', $oLoadTpl->getMailTpl() );
+        define('PH7_TPL_NAME', $oLoadTpl->getTpl());
+        define('PH7_TPL_MOD_NAME', $oLoadTpl->getModTpl());
+        define('PH7_TPL_MAIL_NAME', $oLoadTpl->getMailTpl());
         unset($oLoadTpl);
     }
 
@@ -549,7 +549,7 @@ final class FrontController
 
         /***** FOR FILE CONFIG .INI OF MODULE *****/
         $this->oConfig->load($this->oRegistry->path_module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
-        define( 'PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme'] );
+        define('PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme']);
 
         $this->_templateInitialize();
 

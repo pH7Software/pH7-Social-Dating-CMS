@@ -118,7 +118,7 @@ namespace PH7\Framework\Translate
      /**
       * Load the language file.
       *
-      * @param string $sFileName The language path.
+      * @param string $sFileName The language filename (e.g., "global").
       * @param string $sPath If you want to change the default path (the path to the current module), you can specify the path. Default NULL
       * @return object $this
       */
@@ -176,7 +176,7 @@ namespace PH7\Framework\Translate
     private function _setEncoding()
     {
         if (!defined('PH7_ENCODING'))
-            define( 'PH7_ENCODING', $this->_oConfig->values['language']['charset'] );
+            define('PH7_ENCODING', $this->_oConfig->values['language']['charset']);
 
         mb_internal_encoding(PH7_ENCODING);
         mb_http_output(PH7_ENCODING);
