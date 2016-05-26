@@ -45,11 +45,11 @@ class BirthdayController extends Controller
         $this->iTotalBirths = $this->oBirthModel->get($sGender, true, SearchCoreModel::LAST_ACTIVITY, SearchCoreModel::DESC, null, null);
         $oBirths = $this->oBirthModel->get($sGender, false, SearchCoreModel::LAST_ACTIVITY, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
-        $this->sTitle = t('Users Birthday (%0%)', '<span class="pH3">' . $this->sCurrentDate . '</span>');
+        $sHtmlCurrentDate = ' &ndash; <span class="pH3">' . $this->sCurrentDate . '</span>';
+        $this->sTitle = nt('%n% birthday', '%n% birthdays', $this->iTotalBirths) . $sHtmlCurrentDate;
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         if ($sGender != BirthdayModel::ALL) $this->view->h3_title = '<span class="pH0">' . t($sGender) . '</span>';
-        $this->view->total_births = $this->iTotalBirths;
         $this->view->births = $oBirths;
 
         $this->output();
