@@ -26,12 +26,12 @@ abstract class Controller implements IController
     SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements',
     SOFTWARE_HOSTING_LIST_URL = 'http://ph7cms.com/hosting',
     SOFTWARE_HOSTING_LIST_FR_URL = 'http://ph7cms.com/doc/fr/h%C3%A9bergement-web',
-    SOFTWARE_EMAIL = 'ph7software@gmail.com',
+    SOFTWARE_EMAIL = 'hello@ph7cms.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.',
-    SOFTWARE_VERSION_NAME = 'p[H]', // 1.0 and 1.1 branches were "pOH", 1.2 branch was "pOW" and 1.3 is now "p[H]"
-    SOFTWARE_VERSION = '1.3.9',
+    SOFTWARE_VERSION_NAME = 'p[H]', // 1.0 and 1.1 branches were "pOH", 1.2 branch was "pOW" and 1.3, 1.4 is "p[H]"
+    SOFTWARE_VERSION = '1.4.0',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
