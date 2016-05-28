@@ -28,8 +28,8 @@ class BirthdayCore extends Core
             // Do not send any emails at the same time to avoid overloading the mail server.
             if (self::$_iTotalSent > 300) sleep(10);
 
-            $this->view->content = t('Hello %0%!', $oBirth->firstName) . '<br />' .
-            t("All %site_name%'s team wish you a very happy birthday!") . '<br />' .
+            $this->view->content = t('Hi %0%!', $oBirth->firstName) . '<br />' .
+            t("The %site_name%'s team wish you a very happy birthday!") . '<br />' .
             t('Enjoy it well and enjoy yourself!');
 
             $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/user/birthday.tpl', $oBirth->email);
