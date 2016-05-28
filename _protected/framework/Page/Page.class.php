@@ -40,7 +40,7 @@ class Page
         (new Browser)->noCache();
 
         // Inclusion of the HTML Maintenance page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/other/maintenance.html.php';
+        include PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/other/maintenance.html.php';
 
         // Stop script
         exit;
@@ -57,7 +57,7 @@ class Page
     public static function message($sMsg)
     {
         // Inclusion of the HTML Message page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/other/msg.html.php';
+        include PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/other/msg.html.php';
 
         // Stop script
         exit;
@@ -76,7 +76,7 @@ class Page
         Http::setHeadersByCode(403);
 
         // Inclusion of the HTML IP Banned page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/other/banned.html.php';
+        include PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/other/banned.html.php';
 
         // Stop script
         exit;
@@ -99,7 +99,7 @@ class Page
         (new Browser)->noCache();
 
         // Inclusion of the HTML Exception page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/error/except.html.php';
+        include PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/error/except.html.php';
     }
 
     /**
@@ -118,7 +118,7 @@ class Page
         (new Browser)->noCache();
 
         // Inclusion of the HTML Internal Server Error page
-        include PH7_PATH_SYS . 'global/views/' . PH7_DEFAULT_THEME . '/tpl/error/500.html.php';
+        include PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/error/500.html.php';
 
         // Stop script
         exit;
