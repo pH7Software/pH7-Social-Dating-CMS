@@ -37,8 +37,8 @@ class MainController extends Controller
             // Background video is used only for the Splash page
             if ($this->_getGuestTplPage() === static::GUEST_SPLASH_FILE)
             {
-                // Enable the Splash Background Video if it's enabled and if visitors aren't from a mobile devices (for performance optimization)
-                $bIsBgVideo = (bool) (DbConfig::getSetting('bgSplashVideo') && !$this->browser->isMobile());
+                // Enable the Splash Video Background if enabled
+                $bIsBgVideo = (bool) DbConfig::getSetting('bgSplashVideo');
 
                 // Assign the background video option (this tpl var is only available in index.guest_splash.tpl)
                 $this->view->is_bg_video = $bIsBgVideo;

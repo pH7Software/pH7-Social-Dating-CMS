@@ -1,8 +1,21 @@
+{* If Splash Video Background if enabled in the admin panel *}
 {if $is_bg_video}
-    <video autoplay loop muted poster="{url_tpl_img}splash_vid.jpg" id="bgvid">
-        <source src="{url_tpl}file/splash.webm" type="video/webm" />
-        <source src="{url_tpl}file/splash.mp4" type="video/mp4" />
-    </video>
+    {* Enable the video only if visitors aren't from a mobile devices (for performance optimization) *}
+    {if !$browser->isMobile()}
+        <video autoplay loop muted poster="{url_tpl_img}splash_vid.jpg" id="bgvid">
+            <source src="{url_tpl}file/splash.webm" type="video/webm" />
+            <source src="{url_tpl}file/splash.mp4" type="video/mp4" />
+        </video>
+    {else}
+        <style scoped="scoped">
+            body {
+                background-image: url('{url_tpl_img}splash_vid.jpg');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+            }
+        </style>
+    {/if}
 {/if}
 
 <div class="col-md-8 login_block animated fadeInDown">
