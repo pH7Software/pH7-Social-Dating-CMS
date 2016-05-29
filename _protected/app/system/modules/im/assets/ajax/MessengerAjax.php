@@ -64,10 +64,7 @@ class MessengerAjax
 
     protected function heartbeat()
     {
-        // Default values
         $sFrom = $_SESSION['messenger_username'];
-        $sSent = '';
-
 
         $oQuery = $this->_oMessengerModel->select($sFrom);
         $sItems = '';
@@ -75,6 +72,7 @@ class MessengerAjax
         foreach ($oQuery as $oData)
         {
             $sFrom = escape($oData->fromUser, true);
+            $sTo = escape($oData->toUser, true);
             $sSent = escape($oData->sent, true);
             $sMsg = $this->sanitize($oData->message);
             $sMsg = Emoticon::init($sMsg, false);
@@ -95,13 +93,11 @@ class MessengerAjax
 
         if (!empty($_SESSION['messenger_openBoxes']))
         {
-            foreach ($_SESSION['messenger_openBoxes'] as $sBox => $iTime)
+            foreach ($_SESSION['messenger_openBoxes'] as $sBox => $sTime)
             {
                 if (!isset($_SESSION['messenger_boxes'][$sBox]))
                 {
-                    $iNow = time() - strtotime($iTime);
-                    $sTime = date('g:iA M dS', strtotime($iTime));
-
+                    $iNow = time() - strtotime($sTime);
                     $sMsg = t('Sent at %0%', Framework\Date\Various::textTimeStamp($sTime));
                     if ($iNow > 180)
                     {
@@ -119,8 +115,6 @@ class MessengerAjax
 
         if (!$this->isOnline($sFrom))
             $sItems = t('You must have the ONLINE status in order to speak instantaneous.');
-        elseif (!$this->isOnline($sSent))
-            $sItems = '<small><em>' . t('%0% is offline. Send a <a href=\'%1%\'>Private Message</a> instead.', $sSent, Uri::get('mail','main','compose', $sSent)) . '</em></small>';
         else
             $this->_oMessengerModel->update($sFrom);
 

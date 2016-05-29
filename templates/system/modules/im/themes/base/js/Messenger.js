@@ -233,6 +233,7 @@ var Messenger = {
             type: 'POST',
             cache: false,
             dataType: "json",
+
             success: function (oData)
             {
                 $.each(oData.items, function (i, oItem)
@@ -248,7 +249,9 @@ var Messenger = {
                         oMe.restructureBoxes();
                     }
 
-                    if (oItem.status == 1) oItem.user = oMe.sUsername;
+                    if (oItem.status == 1) {
+                        oItem.user = oMe.sUsername;
+                    }
 
                     if (oItem.status == 2)
                     {
@@ -261,8 +264,7 @@ var Messenger = {
                         $("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">' + oItem.user + ':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">' + oItem.msg + '</span></div>');
                     }
 
-                    $("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent")
-                        .scrollTop($("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent")[0].scrollHeight);
+                    $("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent").scrollTop($("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent")[0].scrollHeight);
                     iItemsFound += 1;
                 });
 
@@ -392,15 +394,20 @@ var Messenger = {
                 {
                     oMe.sBoxTitle = oItem.user;
 
-                    if ($("#chatbox_" + oMe.sBoxTitle).length <= 0)
+                    if ($("#chatbox_" + oMe.sBoxTitle).length <= 0) {
                         oMe.createBox(oMe.sBoxTitle, 1);
+                    }
 
-                    if (oItem.status == 1) oItem.user = oMe.sUsername;
+                    if (oItem.status == 1) {
+                        oItem.user = oMe.sUsername;
+                    }
 
-                    if (oItem.status == 2) {
+                    if (oItem.status == 2)
+                    {
                         $("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxinfo">' + oItem.msg + '</span></div>');
                     }
-                    else {
+                    else
+                    {
                         $("#chatbox_" + oMe.sBoxTitle + " .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">' + oItem.user + ':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">' + oItem.msg + '</span></div>');
                     }
                 });

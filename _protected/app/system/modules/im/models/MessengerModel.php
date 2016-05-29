@@ -17,14 +17,14 @@ class MessengerModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Select Data of content messenger.
      *
-     * @param string $sTo Username
+     * @param string $sFrom Username
      * @return object SQL content
      */
-    public function select($sTo)
+    public function select($sFrom)
     {
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Messenger') .
-            'WHERE (toUser = :to AND recd = 0) ORDER BY messengerId ASC');
-        $rStmt->bindValue(':to', $sTo, \PDO::PARAM_STR);
+            'WHERE (fromUser = :from AND recd = 0) ORDER BY messengerId ASC');
+        $rStmt->bindValue(':from', $sFrom, \PDO::PARAM_STR);
         $rStmt->execute();
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
@@ -32,14 +32,14 @@ class MessengerModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Update Message.
      *
-     * @param string $sTo Username
+     * @param string $sFrom Username
      * @return boolean Returns TRUE on success or FALSE on failure
      */
-    public function update($sTo)
+    public function update($sFrom)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Messenger') .
-            'SET recd = 1 WHERE toUser = :to AND recd = 0');
-        $rStmt->bindValue(':to', $sTo, \PDO::PARAM_STR);
+            'SET recd = 1 WHERE fromUser = :from AND recd = 0');
+        $rStmt->bindValue(':from', $sFrom, \PDO::PARAM_STR);
         return $rStmt->execute();
     }
 
