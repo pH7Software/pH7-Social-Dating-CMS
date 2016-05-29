@@ -41,7 +41,7 @@ if (!function_exists('curl_init'))
 if (!extension_loaded('mbstring'))
     $aErrors[] = 'Please install "mbstring" PHP extension.';
 
-if (!function_exists('exif_imagetype'))
+if (!extension_loaded('exif') || !function_exists('exif_imagetype'))
     $aErrors[] = 'Please install "exif" PHP extension.';
 
 $iErrors = (!empty($aErrors)) ? count($aErrors) : 0;
