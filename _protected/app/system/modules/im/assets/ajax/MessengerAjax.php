@@ -72,7 +72,6 @@ class MessengerAjax
         foreach ($oQuery as $oData)
         {
             $sFrom = escape($oData->fromUser, true);
-            $sTo = escape($oData->toUser, true);
             $sSent = escape($oData->sent, true);
             $sMsg = $this->sanitize($oData->message);
             $sMsg = Emoticon::init($sMsg, false);
