@@ -6,7 +6,7 @@
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / IM / Asset / Ajax
- * @version        1.4
+ * @version        1.6
  * @required       PHP 5.4 or higher.
  */
 namespace PH7;
@@ -65,6 +65,7 @@ class MessengerAjax
     protected function heartbeat()
     {
         $sFrom = $_SESSION['messenger_username'];
+        $sTo = !empty($_SESSION['messenger_username_to']) ? $_SESSION['messenger_username_to'] : 0;
 
         $oQuery = $this->_oMessengerModel->select($sFrom);
         $sItems = '';
@@ -114,6 +115,8 @@ class MessengerAjax
 
         if (!$this->isOnline($sFrom))
             $sItems = t('You must have the ONLINE status in order to speak instantaneous.');
+        elseif ($sTo !== 0 && !$this->isOnline($sTo))
+            $sItems = '<small><em>' . t('%0% is offline. Send a <a href=\'%1%\'>Private Message</a> instead.', $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
         else
             $this->_oMessengerModel->update($sFrom);
 
@@ -122,7 +125,7 @@ class MessengerAjax
 
         Http::setContentType('application/json');
         echo '{"items": [' . $sItems . ']}';
-        exit(0);
+        exit;
     }
 
     protected function boxSession($sBox)
@@ -150,14 +153,13 @@ class MessengerAjax
             "user": "' . $_SESSION['messenger_username'] . '",
             "items": [' . $sItems . ']
         }';
-
-        exit(0);
+        exit;
     }
 
     protected function send()
     {
         $sFrom = $_SESSION['messenger_username'];
-        $sTo = $this->_oHttpRequest->post('to');
+        $sTo = $_SESSION['messenger_username_to'] = $this->_oHttpRequest->post('to');
         $sMsg = $this->_oHttpRequest->post('message');
 
         $_SESSION['messenger_openBoxes'][$this->_oHttpRequest->post('to')] = date('Y-m-d H:i:s', time());
@@ -182,14 +184,13 @@ class MessengerAjax
 
         Http::setContentType('application/json');
         echo $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsgTransform], false);
-        exit(0);
+        exit;
     }
 
     protected function close()
     {
         unset($_SESSION['messenger_openBoxes'][$this->_oHttpRequest->post('box')]);
-        echo '1';
-        exit(0);
+        exit('1');
     }
 
     protected function setJsonContent(array $aData, $bEndComma = true)
