@@ -20,13 +20,15 @@ PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Request\Http as HttpRequest;
 
-class MessengerAjax
+class MessengerAjax extends PermissionCore
 {
 
     private $_oHttpRequest, $_oMessengerModel;
 
     public function __construct()
     {
+        parent::__construct();
+
         Import::pH7App(PH7_SYS . PH7_MOD . 'im.models.MessengerModel');
 
         $this->_oHttpRequest = new HttpRequest;
@@ -116,7 +118,7 @@ class MessengerAjax
         if (!$this->isOnline($sFrom))
             $sItems = t('You must have the ONLINE status in order to speak instantaneous.');
         elseif ($sTo !== 0 && !$this->isOnline($sTo))
-            $sItems = '<small><em>' . t('%0% is offline. Send a <a href=\'%1%\'>Private Message</a> instead.', $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
+            $sItems = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
         else
             $this->_oMessengerModel->update($sFrom, $sTo);
 
@@ -170,10 +172,12 @@ class MessengerAjax
         if (!isset($_SESSION['messenger_history'][$this->_oHttpRequest->post('to')]))
             $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] = '';
 
-        if (!$this->isOnline($sFrom))
-            $sMsgTransform = t('You must have the ONLINE status in order to chat with other members.');
+        if (!$this->checkMembership() || !$this->group->instant_messaging)
+            $sMsgTransform = t("You need to <a href='%0%'>upgrade your membership</a> to be able to chat.", Uri::get('payment','main','index'));
+        elseif (!$this->isOnline($sFrom))
+            $sMsgTransform = t('You must have the ONLINE status in order to chat with other users.');
         elseif (!$this->isOnline($sTo))
-            $sMsgTransform = '<small><em>' . t('%0% is offline. Send a <a href=\'%1%\'>Private Message</a> instead.', $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
+            $sMsgTransform = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
         else
             $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new \PH7\Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s'));
 
@@ -211,7 +215,7 @@ class MessengerAjax
             "msg": "{$aData['msg']}"
         }
 EOD;
-        return ($bEndComma) ? $sJsonData . ',' : $sJsonData;
+        return $bEndComma ? $sJsonData . ',' : $sJsonData;
     }
 
     protected function isOnline($sUsername)

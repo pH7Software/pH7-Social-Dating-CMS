@@ -24,7 +24,7 @@ return array(
     'upload_pictures' => 1,
     'view_videos' => 1,
     'upload_videos' => 1,
-    //'im' => 1, // Instant Messaging
+    'instant_messaging' => 1,
     'chat' => 1,
     'chatroulette' => 1,
     'hot_or_not' => 1,
