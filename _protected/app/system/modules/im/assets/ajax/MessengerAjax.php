@@ -118,7 +118,7 @@ class MessengerAjax
         elseif ($sTo !== 0 && !$this->isOnline($sTo))
             $sItems = '<small><em>' . t('%0% is offline. Send a <a href=\'%1%\'>Private Message</a> instead.', $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
         else
-            $this->_oMessengerModel->update($sFrom);
+            $this->_oMessengerModel->update($sFrom, $sTo);
 
         if ($sItems != '')
             $sItems = substr($sItems, 0, -1);
@@ -178,7 +178,6 @@ class MessengerAjax
             $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new \PH7\Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s'));
 
         $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] .= $this->setJsonContent(['status' => '1', 'user' => $sTo, 'msg' => $sMsgTransform]);
-
 
         unset($_SESSION['messenger_boxes'][$this->_oHttpRequest->post('to')]);
 
