@@ -15,6 +15,10 @@
 namespace PH7\Framework\Mvc\Request;
 defined('PH7') or exit('Restricted access');
 
+use
+PH7\Framework\Registry\Registry,
+PH7\Framework\Security as Secty;
+
 /**
  * Small example of using this class.
  *
@@ -272,7 +276,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentController()
     {
-       return str_replace('controller', '', strtolower(\PH7\Framework\Registry\Registry::getInstance()->controller));
+       return str_replace('controller', '', strtolower(Registry::getInstance()->controller));
     }
 
     /**
@@ -295,7 +299,7 @@ class Http extends \PH7\Framework\Http\Http
     protected function validate(&$aType, $sKey, $sParam)
     {
         if (!empty($sParam))
-            if (!\PH7\Framework\Security\Validate::type($aType[$sKey], $sParam)) return false;
+            if (!Secty\Validate\Validate::type($aType[$sKey], $sParam)) return false;
 
         return true;
     }
@@ -331,9 +335,9 @@ class Http extends \PH7\Framework\Http\Http
             $aType[$sKey] = str_replace(array('%20','%27','%C3','%A9','%C3','%A9','%C3','%A9'), '', $aType[$sKey]);
 
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN)
-            return (new \PH7\Framework\Security\Validate\Filter)->xssClean($aType[$sKey]);
+            return (new Secty\Validate\Filter)->xssClean($aType[$sKey]);
 
-        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey], $this->_bStrip);
+        return escape($aType[$sKey], $this->_bStrip);
     }
 
     /**
@@ -360,7 +364,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     private function _clearCSRFToken(&$aType, $sKey)
     {
-        return preg_replace('#(\?|&)' . \PH7\Framework\Security\CSRF\Token::VAR_NAME . '\=[^/]+$#', '', $aType[$sKey]);
+        return preg_replace('#(\?|&)' . Secty\CSRF\Token::VAR_NAME . '\=[^/]+$#', '', $aType[$sKey]);
     }
 
     public function __destruct()
