@@ -229,7 +229,7 @@ EOD;
 
     protected function sanitize($sText)
     {
-        $sText = escape($sText);
+        $sText = escape($sText, true);
         $sText = str_replace("\n\r", "\n", $sText);
         $sText = str_replace("\r\n", "\n", $sText);
         $sText = str_replace("\n", "<br>", $sText);
