@@ -89,8 +89,16 @@ h1:hover {
 .counter{margin:15px 2px 4px 1px}
 
 /** Buttons (links) **/
-.bt_login_remember{margin-top:-1.5%}
-.bt_login_forgot{margin-top:-2px}
+.bt_login_remember, .bt_login_forgot {
+  width: 200px;
+  margin-left: 5px;
+}
+.bt_login_remember {
+  margin-top: -5px;
+}
+.bt_login_forgot{
+  margin-top: -2px;
+}
 
 
 video#bgvid {
@@ -108,7 +116,10 @@ video#bgvid {
   background-size: cover;
 }
 
-.login_block{margin:-52px 0 0 52%}
+.login_block {
+  margin:-52px 0 0 52%;
+  width: 550px;
+}
 
 /* Slideshow */
 .window {height:300px;width:590px}
