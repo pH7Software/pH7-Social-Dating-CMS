@@ -345,7 +345,6 @@ class Design
             $aSites = [
                 ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
-                ['title' => 'Site de Tchat 100% Gratuit', 'link' => 'http://01tchat.com'],
                 ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net'],
                 ['title' => ' Site de Rencontre Bourgeois', 'link' => 'http://bourgeoisie.club']
             ];
