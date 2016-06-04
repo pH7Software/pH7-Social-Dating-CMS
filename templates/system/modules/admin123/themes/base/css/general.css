@@ -5,18 +5,22 @@
  */
 
 #cache_chart {
-    height:400px;
-    width:600px;
+    height: 400px;
+    width: 600px;
 }
 
 #free_space_chart {
-    height:420px;
-    width:620px;
+    height: 420px;
+    width: 620px;
 }
 
 #user_chart {
     height: 300px;
     width: 100%;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
 }
 
-table, td, th{border:1px solid gray}
+table, td, th {
+    border: 1px solid gray;
+}
