@@ -15,8 +15,6 @@
 
   {else}
 
-    <h3 class="center">{lang 'Total Users: %0%', $total_users}</h3>
-
     {each $user in $users}
 
       {{ $country_name = t($user->country) }}

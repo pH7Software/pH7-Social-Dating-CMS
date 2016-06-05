@@ -24,7 +24,6 @@ class BrowseController extends Controller
     public function index()
     {
         $this->iTotalUsers = $this->oUserModel->search($_GET, true, null, null);
-        $this->view->total_users = $this->iTotalUsers;
         $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalUsers, 24);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oUsers = $this->oUserModel->search($_GET, false, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
@@ -45,10 +44,4 @@ class BrowseController extends Controller
             $this->output();
         }
     }
-
-    public function __destruct()
-    {
-        unset($this->oUserModel, $this->oPage, $this->iTotalUsers);
-    }
-
 }
