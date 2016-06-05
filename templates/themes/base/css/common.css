@@ -68,7 +68,7 @@ footer a{color:#666;}
 .break {border-bottom: 1px dotted #BBB;padding:4px 0 4px 0;margin-bottom:5px;width:25%}
 .br {border-bottom:1px dashed black; display:block;}
 hr {border:0;color:#9E9E9E;background-color:#9E9E9E;height:1px;margin:5px auto 5px auto;width:100%}
-.bold, .err_msg{font-weight:bold;font-size:13px;}
+.bold, .err_msg{font-weight:bold !important;font-size:13px;}
 .err_msg{text-align:center;color:#F00;text-transform:uppercase;}
 .msg{text-align:center;margin:3px auto 3px;font-style:italic;}
 label#percent{position:absolute;padding-left:115px;padding-top:6px;font-size:80%;font-weight:bold;}
