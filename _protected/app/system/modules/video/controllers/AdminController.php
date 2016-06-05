@@ -9,11 +9,9 @@ namespace PH7;
 
 class AdminController extends MainController
 {
-
     public function config()
     {
         $this->view->page_title = $this->view->h2_title = t('Youtube API Key - Setting');
         $this->output();
     }
-
 }

@@ -16,7 +16,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
-
     private $oPictureModel, $oPage, $sUsername, $sUsernameLink, $iProfileId, $sTitle, $iTotalPictures;
 
     public function __construct()
@@ -222,11 +221,4 @@ class MainController extends Controller
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->view->error = $this->sTitle . $sErrMsg;
     }
-
-    public function __destruct()
-    {
-        // Destruction
-        unset($this->oPictureModel, $this->oPage, $this->sUsername, $this->sUsernameLink, $this->iProfileId, $this->sTitle, $this->iTotalPictures);
-    }
-
 }

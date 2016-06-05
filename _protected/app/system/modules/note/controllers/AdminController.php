@@ -14,7 +14,6 @@ PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
-
     public function index()
     {
         Header::redirect(Uri::get('note', 'main', 'index'), t('Welcome to the Note administrator mode.'));
@@ -73,5 +72,4 @@ class AdminController extends MainController
 
         Header::redirect(Uri::get('note', 'main', 'index'), $this->sMsg);
     }
-
 }

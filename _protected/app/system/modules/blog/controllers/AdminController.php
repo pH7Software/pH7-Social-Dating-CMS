@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
-
     public function index()
     {
         Header::redirect(Uri::get('blog', 'main', 'index'), t('Welcome to the Blog administrator mode.'));
@@ -55,5 +54,4 @@ class AdminController extends MainController
 
         Header::redirect(Uri::get('blog', 'admin', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
     }
-
 }

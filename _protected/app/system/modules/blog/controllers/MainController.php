@@ -15,7 +15,6 @@ PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-
     /**
      * @access protected Protected access because AdminController class is derived from this class and will use these attributes.
      * @var object $oBlogModel
@@ -219,5 +218,4 @@ class MainController extends Controller
     {
         unset($this->oBlogModel, $this->oPage, $this->sTitle, $this->iTotalBlogs);
     }
-
 }

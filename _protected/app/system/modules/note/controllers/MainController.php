@@ -16,7 +16,6 @@ PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-
     /**
      * @access Protected access because AdminController class is derived from this class and will use these attributes.
      * @var object $oNoteModel
@@ -300,10 +299,4 @@ class MainController extends Controller
         $oFile = $this->oNoteModel->readPost($this->oNoteModel->getPostId($iId), $iProfileId, null);
         return (new Note)->deleteThumb($this->session->get('member_username') . PH7_DS . $oFile->thumb, 'note', $this->file);
     }
-
-    public function __destruct()
-    {
-        unset($this->oNoteModel, $this->oPage, $this->sTitle, $this->iTotalNotes, $this->iApproved);
-    }
-
 }
