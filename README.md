@@ -3,7 +3,7 @@
 ### The Most Secure and Powerful Professional Dating Web App Builder
 
 
-[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?s=79700cb86e25e0f125926f2f52984dd3ebacd81d)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/) [![PayPal donate button](http://img.shields.io/badge/paypal-donate-orange.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XWLDYLFKCLEJQ "Help keep me off the streets! ;)")
+[![Scrutinizer Quality Score](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?s=79700cb86e25e0f125926f2f52984dd3ebacd81d)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/) [![PayPal donate button](http://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XWLDYLFKCLEJQ "Help keep me off the streets! ;)")
 
 
 **pH7 Social Dating CMS** is a **Professional** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
@@ -85,7 +85,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Social Bookmark (Social Media Sharing Buttons)
 * Anti-spam system
 * Full Security system against XSS, CSRF, SQL injection, authentication hacking, session fixation, brute-force, ... and protect even against some DDoS attacks!
-* Admin Login - Two-factor authentication Option
+* **Two-Factor Authentication Option**
 * Admin Panel - Block Access with IP Restriction
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
 * Everyone can easily contribute to this great innovative project with our [GitHub repository](http://github.com/pH7Software/pH7-Social-Dating-CMS)
