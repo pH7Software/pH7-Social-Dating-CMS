@@ -15,7 +15,7 @@ PH7\Framework\Mvc\Router\Uri;
 class UserController extends Controller
 {
 
-    private $oAdmin, $oAdminModel, $sTitle, $sMsg, $iTotalUsers;
+    private $oAdmin, $oAdminModel, $sMsg, $iTotalUsers;
 
     public function __construct()
     {
@@ -55,9 +55,7 @@ class UserController extends Controller
             // Add the JS file for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
-            $this->sTitle = t('Browse Users');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h1_title = $this->sTitle;
+            $this->view->page_title = $this->view->h1_title = t('Browse Users');
             $this->view->h3_title = t('Total Users: %0%', $this->iTotalUsers);
 
             $this->view->browse = $oBrowse;
@@ -67,33 +65,25 @@ class UserController extends Controller
 
     public function add()
     {
-        $this->sTitle = t('Add a User');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Add a User');
         $this->output();
     }
 
     public function import()
     {
-        $this->sTitle = t('Import Users');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Import Users');
         $this->output();
     }
 
     public function addFakeProfiles()
     {
-        $this->sTitle = t('Add Fake Profiles');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Add Fake Profiles');
         $this->output();
     }
 
     public function search()
     {
-        $this->sTitle = t('Search Users');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Search Users');
         $this->output();
     }
 
@@ -135,10 +125,8 @@ class UserController extends Controller
                 // Add the JS file for the browse form
                 $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
-                $this->sTitle = t('Users - Your search returned');
-                $this->view->page_title = $this->sTitle;
-                $this->view->h1_title = $this->sTitle;
-                $this->view->h3_title = nt('%n% User Result!', '%n% Users Result!', $this->iTotalUsers);
+                $this->view->page_title = $this->view->h1_title = t('Users - Your search returned');
+                $this->view->h3_title = nt('%n% User Result!', '%n% User Results!', $this->iTotalUsers);
                 $this->view->browse = $oSearch;
             }
 
@@ -407,11 +395,6 @@ class UserController extends Controller
         }
 
         return $sOutputMsg;
-    }
-
-    public function __destruct()
-    {
-        unset($this->oAdmin, $this->oAdminModel, $this->sTitle, $this->sMsg, $this->iTotalUsers);
     }
 
 }
