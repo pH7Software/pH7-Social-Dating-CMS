@@ -228,7 +228,7 @@ class MainController extends Controller
             $this->sTitle = t('Mail | Message - Your search returned');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Mail Result!', '%n% Mails Result!', $this->iTotalMails);
+            $this->view->h3_title = nt('%n% Mail Result!', '%n% Mail Results!', $this->iTotalMails);
             $this->view->msgs = $oSearch;
         }
 

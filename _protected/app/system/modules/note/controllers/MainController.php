@@ -129,7 +129,7 @@ class MainController extends Controller
         {
             $this->sTitle = t('Search by Category: "%0%" Note', $sCategoryTxt);
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Note Result!', '%n% Notes Result!', $this->iTotalNotes);
+            $this->view->h3_title = nt('%n% Note Result!', '%n% Note Results!', $this->iTotalNotes);
             $this->view->meta_description = t('Search Note Post by Category %0% - Dating Social Community Note', $sCategoryTxt);
             $this->view->meta_keywords = t('search,post,blog,note,dating,social network,community,news');
 
@@ -164,7 +164,7 @@ class MainController extends Controller
         {
             $this->sTitle = t('Search by Author: "%0%" Note', $sAuthorTxt);
             $this->view->page_title =  $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Note Result!', '%n% Notes Result!', $this->iTotalNotes);
+            $this->view->h3_title = nt('%n% Note Result!', '%n% Note Results!', $this->iTotalNotes);
             $this->view->meta_description = t('Search Note Post by Author %0% - Dating Social Community Note', $sAuthorTxt);
             $this->view->meta_keywords = t('author,search,post,blog,note,dating,social network,community,news');
 
@@ -199,7 +199,7 @@ class MainController extends Controller
         {
             $this->sTitle = t('Dating Social Note - Your search returned');
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Note Result!', '%n% Notes Result!', $this->iTotalNotes);
+            $this->view->h3_title = nt('%n% Note Result!', '%n% Note Results!', $this->iTotalNotes);
             $this->view->meta_description = t('Search - Dating Social Community Note');
             $this->view->meta_keywords = t('search,note,dating,social network,community,news');
 
