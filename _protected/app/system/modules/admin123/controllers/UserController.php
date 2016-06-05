@@ -14,7 +14,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class UserController extends Controller
 {
-
     private $oAdmin, $oAdminModel, $sMsg, $iTotalUsers;
 
     public function __construct()
@@ -105,7 +104,6 @@ class UserController extends Controller
         {
             $this->iTotalUsers = $this->oAdminModel->searchUser($sWhat, $sWhere, $iGroupId, $iBan, true,
                 $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
-            $this->view->total_users = $this->iTotalUsers;
 
             $oPage = new Page;
             $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 15);
@@ -396,5 +394,4 @@ class UserController extends Controller
 
         return $sOutputMsg;
     }
-
 }
