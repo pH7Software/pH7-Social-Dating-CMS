@@ -72,6 +72,7 @@ class SettingFormProcess extends Form
         'login_admin_attempt_time' => 'loginAdminAttemptTime',
         'send_report_mail' => 'sendReportMail',
         'ip_login' => 'ipLogin',
+        '2factor_auth' => '2FactorAuth',
         'ban_word_replace' => 'banWordReplace',
         'security_token' => 'securityToken',
         'stop_DDoS' => 'DDoS',
