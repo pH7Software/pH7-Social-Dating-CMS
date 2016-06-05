@@ -149,63 +149,6 @@
         ]
     },
     {
-        "name": "stripe/stripe-php",
-        "version": "v3.13.0",
-        "version_normalized": "3.13.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/stripe/stripe-php.git",
-            "reference": "7ba7ff9765e3ba530bf4801a8ffc841a1cc1f77d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/7ba7ff9765e3ba530bf4801a8ffc841a1cc1f77d",
-            "reference": "7ba7ff9765e3ba530bf4801a8ffc841a1cc1f77d",
-            "shasum": ""
-        },
-        "require": {
-            "ext-curl": "*",
-            "ext-json": "*",
-            "ext-mbstring": "*",
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0",
-            "satooshi/php-coveralls": "~0.6.1",
-            "squizlabs/php_codesniffer": "~2.0"
-        },
-        "time": "2016-05-04 22:02:14",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.0-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Stripe\\": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Stripe and contributors",
-                "homepage": "https://github.com/stripe/stripe-php/contributors"
-            }
-        ],
-        "description": "Stripe PHP Library",
-        "homepage": "https://stripe.com/",
-        "keywords": [
-            "api",
-            "payment processing",
-            "stripe"
-        ]
-    },
-    {
         "name": "swiftmailer/swiftmailer",
         "version": "v5.4.2",
         "version_normalized": "5.4.2.0",
@@ -258,6 +201,144 @@
             "email",
             "mail",
             "mailer"
+        ]
+    },
+    {
+        "name": "phpgangsta/googleauthenticator",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPGangsta/GoogleAuthenticator.git",
+            "reference": "b64898d6da9d06dda03a0a82b00c02316d9cd4c8"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/PHPGangsta/GoogleAuthenticator/zipball/b64898d6da9d06dda03a0a82b00c02316d9cd4c8",
+            "reference": "b64898d6da9d06dda03a0a82b00c02316d9cd4c8",
+            "shasum": ""
+        },
+        "time": "2015-04-16 21:44:34",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "classmap": [
+                "PHPGangsta/GoogleAuthenticator.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "BSD-4-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Michael Kliewe"
+            }
+        ],
+        "description": "Google Authenticator 2-factor authentication",
+        "keywords": [
+            "googleauthenticator"
+        ]
+    },
+    {
+        "name": "ph-7/qrcode-generator-php-class",
+        "version": "2.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pH-7/QRCode-Generator-PHP-Class.git",
+            "reference": "ef8b38fc57a1fe55cf5fe07d016b8942dc5bb83e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pH-7/QRCode-Generator-PHP-Class/zipball/ef8b38fc57a1fe55cf5fe07d016b8942dc5bb83e",
+            "reference": "ef8b38fc57a1fe55cf5fe07d016b8942dc5bb83e",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.4"
+        },
+        "time": "2016-04-03 23:43:48",
+        "type": "library",
+        "installation-source": "dist",
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-3.0+"
+        ],
+        "authors": [
+            {
+                "name": "Pierre-Henry Soria",
+                "email": "phy@hizup.uk",
+                "homepage": "http://hizup.uk",
+                "role": "Web Engineer"
+            }
+        ],
+        "description": "Light QRCode PHP class (library). QR Code Generator using vCard 4.0 and the Google Chart AP",
+        "homepage": "http://hizup.uk",
+        "keywords": [
+            "class",
+            "library",
+            "qr code",
+            "qr code class",
+            "qr code library",
+            "vCard"
+        ]
+    },
+    {
+        "name": "stripe/stripe-php",
+        "version": "v3.14.2",
+        "version_normalized": "3.14.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/stripe/stripe-php.git",
+            "reference": "e379140cf77debaa6a45e32b93543269851a144f"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/e379140cf77debaa6a45e32b93543269851a144f",
+            "reference": "e379140cf77debaa6a45e32b93543269851a144f",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "ext-json": "*",
+            "ext-mbstring": "*",
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0",
+            "satooshi/php-coveralls": "~0.6.1",
+            "squizlabs/php_codesniffer": "~2.0"
+        },
+        "time": "2016-06-03 22:06:06",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Stripe\\": "lib/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Stripe and contributors",
+                "homepage": "https://github.com/stripe/stripe-php/contributors"
+            }
+        ],
+        "description": "Stripe PHP Library",
+        "homepage": "https://stripe.com/",
+        "keywords": [
+            "api",
+            "payment processing",
+            "stripe"
         ]
     }
 ]

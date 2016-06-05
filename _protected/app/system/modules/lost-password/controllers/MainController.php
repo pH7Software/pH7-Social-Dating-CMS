@@ -17,9 +17,6 @@ PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-
-    private $sTitle;
-
     public function forgot($sMod = '')
     {
         // For better SEO, exclude not interesting pages from search engines
@@ -99,5 +96,4 @@ class MainController extends Controller
         if ($sMod !== 'user' && $sMod !== 'affiliate' && $sMod !== PH7_ADMIN_MOD)
             Header::redirect($this->registry->site_url, t('No module found!'), 'error');
     }
-
 }

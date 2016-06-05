@@ -1,0 +1,19 @@
+{
+    "name": "ph-7/qrcode-generator-php-class",
+    "description": "Light QRCode PHP class (library). QR Code Generator using vCard 4.0 and the Google Chart AP",
+    "keywords": ["qr code","qr code library","library","qr code class","class","vCard"],
+    "type": "library",
+    "homepage": "http://hizup.uk",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Pierre-Henry Soria",
+            "email": "phy@hizup.uk",
+            "homepage": "http://hizup.uk",
+            "role": "Web Engineer"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.4"
+    }
+}
