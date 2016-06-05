@@ -15,7 +15,6 @@ PH7\Framework\Url\Header;
 
 class ForumController extends Controller
 {
-
     private $oForumModel, $oPage, $sTitle, $sMsg, $iTotalTopics;
 
     public function __construct()
@@ -176,7 +175,7 @@ class ForumController extends Controller
         {
             $this->sTitle = t('Forums - Your search returned');
             $this->view->page_title = $this->sTitle;
-            $this->view->h3_title = t('%0% Forum Result!', $this->iTotalTopics);
+            $this->view->h3_title = nt('%n% Result', '%n% Results', $this->iTotalTopics);
             $this->view->meta_description = t('Search - Discussion Forum');
             $this->view->meta_keywords = t('search,forum,forums,discussion forum');
             $this->view->h2_title = $this->sTitle;
@@ -269,10 +268,4 @@ class ForumController extends Controller
         $this->view->h2_title = $this->sTitle;
         $this->view->error = $this->sTitle . $sErrMsg;
     }
-
-    public function __destruct()
-    {
-        unset($this->oForumModel, $this->oPage, $this->sTitle, $this->sMsg, $this->iTotalTopics);
-    }
-
 }
