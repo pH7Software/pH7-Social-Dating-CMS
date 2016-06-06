@@ -17,7 +17,8 @@ class DynamicFieldCoreForm
 
     /**
      * @param object \PFBC\Form $oForm
-     * @param string $sValue Column name.
+     * @param string $sValue Column name
+     * @param string $sValue Field value
      */
     public function __construct(\PFBC\Form $oForm, $sColumn, $sValue)
     {
@@ -108,6 +109,11 @@ class DynamicFieldCoreForm
         $this->_oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ' . $this->getFieldId($sType) . '"></span>'));
     }
 
+    /**
+     * Generate other PFBC fields according to the Field Type.
+     *
+     * @return string PFBC Form Type
+     */
     protected function getFieldType()
     {
         if (strstr($this->_sColumn, 'textarea'))
