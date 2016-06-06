@@ -82,6 +82,7 @@ class LoginFormProcess extends Form
             {
                 // Store the admin ID for 2FA
                 $this->session->set('2fa_profile_id', $iId);
+
                 Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', PH7_ADMIN_MOD));
             }
             else

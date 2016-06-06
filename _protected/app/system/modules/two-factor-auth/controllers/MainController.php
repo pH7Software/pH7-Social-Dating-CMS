@@ -12,7 +12,7 @@ use PH7\Framework\Parse\Url, PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    private $o2FactorModel, $sMod, $iProfileId;
+    private $o2FactorModel, $sMod, $iIsEnabled, $iProfileId;
 
     public function verificationCode($sMod = '')
     {
@@ -34,12 +34,12 @@ class MainController extends Controller
         $this->view->page_title = $this->view->h2_title = t('Two-Factor Authentication');
         $this->view->mod = $this->sMod;
 
-        $this->view->is_enabled = $bIsEnabled = (int) $this->o2FactorModel->isEnabled($this->iProfileId);
-
+        $this->iIsEnabled = (int) $this->o2FactorModel->isEnabled($this->iProfileId);
         if ($this->httpRequest->postExists('status')) {
-            $bIsEnabled = ($bIsEnabled == 1 ? 0 : 1); // Get the opposite value (if 1 so 0 | if 0 so 1)
-            $this->o2FactorModel->setStatus($bIsEnabled, $this->iProfileId);
+            $this->update2FaStatus();
         }
+        // Assign to the template after "update2FaStatus()" to get the accurate status in case it has been updated just now
+        $this->view->is_enabled = $this->iIsEnabled;
 
         $oAuthenticator = new \PHPGangsta_GoogleAuthenticator;
         $sSecret = $this->o2FactorModel->getSecret($this->iProfileId);
@@ -78,6 +78,17 @@ class MainController extends Controller
             default:
                 throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Wrong "' . $this->sMod . '" module!');
         }
+    }
+
+    /**
+     * Turn on/off Two-Factor authentication.
+     *
+     * @return void
+     */
+    protected function update2FaStatus()
+    {
+        $this->iIsEnabled = ($this->iIsEnabled == 1 ? 0 : 1); // Get the opposite value (if 1 so 0 | if 0 so 1)
+        $this->o2FactorModel->setStatus($this->iIsEnabled, $this->iProfileId);
     }
 
     /**
