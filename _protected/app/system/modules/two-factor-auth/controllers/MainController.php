@@ -37,7 +37,7 @@ class MainController extends Controller
         $this->view->is_enabled = $bIsEnabled = (int) $this->o2FactorModel->isEnabled($this->iProfileId);
 
         if ($this->httpRequest->postExists('status')) {
-            $bIsEnabled = (int)!$bIsEnabled; // Get the opposite value (if 1 so 0 | if 0 so 1)
+            $bIsEnabled = ($bIsEnabled == 1 ? 0 : 1); // Get the opposite value (if 1 so 0 | if 0 so 1)
             $this->o2FactorModel->setStatus($bIsEnabled, $this->iProfileId);
         }
 
