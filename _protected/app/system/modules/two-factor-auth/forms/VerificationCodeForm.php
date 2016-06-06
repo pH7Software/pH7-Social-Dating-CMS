@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Request\Http;
 
 class VerificationCodeForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_verification_code'])) {
@@ -30,5 +29,4 @@ class VerificationCodeForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

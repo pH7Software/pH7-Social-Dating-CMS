@@ -28,5 +28,4 @@ class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->execute();
         return ($rStmt->fetchColumn() == 1);
     }
-
 }

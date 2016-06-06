@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class TwoFactorAuthDesignCore
 {
-
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
      *
@@ -32,5 +31,4 @@ class TwoFactorAuthDesignCore
             <a class="s_marg btn btn-primary" href="' . Uri::get('two-factor-auth', 'main', 'setup', $sMod) . '">' . t('Two-Factor Authentication') . '</a>
         </p>';
     }
-
 }

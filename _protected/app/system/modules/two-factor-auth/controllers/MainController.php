@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-use PH7\Framework\Url\Header;
+use PH7\Framework\Parse\Url, PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
@@ -42,10 +42,15 @@ class MainController extends Controller
         }
 
         $oAuthenticator = new \PHPGangsta_GoogleAuthenticator;
-        $sSecret = $oAuthenticator->createSecret();
-        $this->o2FactorModel->setSecret($sSecret, $this->iProfileId);
+        $sSecret = $this->o2FactorModel->getSecret($this->iProfileId);
 
-        $this->view->qr_core = $oAuthenticator->getQRCodeGoogleUrl('pH7CMS', $sSecret, $this->registry->site_url);
+        // If not setup yet, create a new 2FA secret code for the profile.
+        if (empty($sSecret) || strlen($sSecret) < 10) {
+            $sSecret = $oAuthenticator->createSecret();
+            $this->o2FactorModel->setSecret($sSecret, $this->iProfileId);
+        }
+
+        $this->view->qr_core = $oAuthenticator->getQRCodeGoogleUrl($this->getAuthenticatorName(), $sSecret, $this->registry->site_url);
 
         $this->output();
     }
@@ -75,10 +80,20 @@ class MainController extends Controller
         }
     }
 
+    /**
+     * Generate an Authenticator Name for the QR code.
+     * Note: I don't use the site name because it might include invalid characters.
+     *
+     * @return string Unique Authenticator Name for the site.
+     */
+    private function getAuthenticatorName()
+    {
+        return str_replace('/', '-', Url::name($this->registry->site_url)) . '-' . $this->sMod;
+    }
+
     private function checkMod()
     {
         if ($this->sMod !== 'user' && $this->sMod !== 'affiliate' && $this->sMod !== PH7_ADMIN_MOD)
             Header::redirect($this->registry->site_url, t('No module found!'), 'error');
     }
-
 }

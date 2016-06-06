@@ -15,7 +15,7 @@ PH7\Framework\Mvc\Router\Uri;
 
 class VerificationCodeFormProcess extends Form
 {
-     /**
+    /**
       * Every OPT is valid for 30 sec.
       * If somebody provides OTP at 29th sec, by the time it reaches the server OTP is expired.
       * So we can give OTP_TOLERANCE=1, it will check current  & previous OTP.
@@ -83,5 +83,4 @@ class VerificationCodeFormProcess extends Form
         // Need to use the fully qualified name (with namespace) as we create the class name dynamically
         return 'PH7\\' . $oClass;
     }
-
 }
