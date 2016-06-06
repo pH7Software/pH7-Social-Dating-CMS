@@ -27,7 +27,10 @@ class TwoFactorAuthDesignCore
      */
     public static function link($sMod)
     {
-        echo '<a class="btn btn-primary" href="' . Uri::get('two-factor-auth','main','setup',$sMod) . '">' . t('Two-Factor Authentication Settings') . '</a>';
+        echo 
+        '<p class="center">
+            <a class="s_marg btn btn-primary" href="' . Uri::get('two-factor-auth', 'main', 'setup', $sMod) . '">' . t('Two-Factor Authentication') . '</a>
+        </p>';
     }
 
 }

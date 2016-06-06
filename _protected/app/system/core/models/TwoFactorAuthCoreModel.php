@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Model\Engine\Db, PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
 {
@@ -16,6 +16,8 @@ class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function __construct($sMod)
     {
+        parent::__construct();
+        
         $this->sTable = Various::convertModToTable($sMod);
     }
 

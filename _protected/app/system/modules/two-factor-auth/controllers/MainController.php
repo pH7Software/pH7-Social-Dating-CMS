@@ -14,15 +14,11 @@ class MainController extends Controller
 {
 	private $o2FactorModel, $sMod, $iProfileId;
 
-	public function __construct()
-	{
-		parent::__construct();
-
-		$this->iProfileId = $this->session->get('member_id');
-	}
-
     public function verificationCode($sMod = '')
     {
+        $this->sMod = $sMod;
+        $this->checkMod();
+
         $this->view->page_title = $this->view->h2_title = t('Verification Code');
         $this->output();
     }
@@ -30,27 +26,53 @@ class MainController extends Controller
     public function setup($sMod = '')
     {
     	$this->sMod = $sMod;
-
-        $this->o2FactorModel = new TwoFactorAuthModel($this->sMod);
-
         $this->checkMod();
+
+        $this->iProfileId = $this->getProfileId();
+        $this->o2FactorModel = new TwoFactorAuthModel($this->sMod);
 
         $this->view->page_title = $this->view->h2_title = t('Two-Factor Authentication');
         $this->view->mod = $this->sMod;
 
-        $this->view->is_enabled = $bIsEnabled = $this->o2FactorModel->isEnabled($this->iProfileId);
+        $this->view->is_enabled = $bIsEnabled = (int) $this->o2FactorModel->isEnabled($this->iProfileId);
 
         if ($this->httpRequest->postExists('status')) {
-            $this->o2FactorModel->setStatus( (int)$bIsEnabled );
+            $bIsEnabled = (int)!$bIsEnabled; // Get the opposite value (if 1 so 0 | if 0 so 1)
+            $this->o2FactorModel->setStatus($bIsEnabled, $this->iProfileId);
         }
 
         $oAuthenticator = new \PHPGangsta_GoogleAuthenticator();
         $sSecret = $oAuthenticator->createSecret();
-        $this->o2FactorModel->setSecret($sSecret);
+        $this->o2FactorModel->setSecret($sSecret, $this->iProfileId);
 
         $this->view->qr_core = $oAuthenticator->getQRCodeGoogleUrl($this->registry->site_name, $sSecret, $this->registry->site_url);
 
         $this->output();
+    }
+
+    /**
+     * Get Session Profile ID.
+     *
+     * @return integer
+     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message if the specified module is wrong.
+     */
+    protected function getProfileId()
+    {
+        switch ($this->sMod)
+        {
+            case 'user':
+                return  $this->session->get('member_id');
+            break;
+            case 'affiliate':
+                return  $this->session->get('admin_id');
+            break;
+            case PH7_ADMIN_MOD:
+                return  $this->session->get('affiliate_id');
+            break;
+
+            default:
+                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Wrong "' . $this->sMod . '" module!');
+        }
     }
 
     private function checkMod()

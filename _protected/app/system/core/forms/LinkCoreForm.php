@@ -31,7 +31,7 @@ class LinkCoreForm
         $oForm->addElement(new \PFBC\Element\Token(substr($sUrl, -14, -6))); // Create a name token and generate a random token
 
         foreach($aParams as $sKey => $sVal)
-            $oForm->addElement(new \PFBC\Element\Hidden($sKey, $sVal));
+            $oForm->addElement(new \PFBC\Element\Hidden($sKey, settype($sVal, 'string')));
 
         $oForm->addElement(new \PFBC\Element\Submit($sLabel));
         $oForm->render();

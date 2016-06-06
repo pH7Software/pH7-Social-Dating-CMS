@@ -75,6 +75,7 @@ class LoginFormProcess extends Form
             $oSecurityModel->clearLoginAttempts('Admins');
             $this->session->remove('captcha_admin_enabled');
             $iId = $oAdminModel->getId($sEmail, null, 'Admins');
+            $oAdminData = $oAdminModel->readProfile($iId, 'Admins');
 
             $o2FactorModel = new TwoFactorAuthCoreModel(PH7_ADMIN_MOD);
             if ($o2FactorModel->isEnabled($iId))
@@ -85,11 +86,11 @@ class LoginFormProcess extends Form
             }
             else
             {
-                (new AdminCore)->setAuth($iId, $oAdminModel, $this->session, $oSecurityModel);
+                (new AdminCore)->setAuth($oAdminData, $oAdminModel, $this->session, $oSecurityModel);
             }
 
             /** Destroy the objects to minimize the CPU resources **/
-            unset($oAdminModel, $oSecurityModel);
+            unset($oAdminModel, $oAdminData, $oSecurityModel);
 
             Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('You are successfully logged!'));
         }

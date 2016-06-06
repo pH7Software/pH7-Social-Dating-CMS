@@ -12,24 +12,28 @@ class TwoFactorAuthModel extends TwoFactorAuthCoreModel
 {
 	/**
 	 * @param integer $iIsEnabled 1 = Enabled | 0 = Disabled
+     * @param integer $iProfileId Profile ID.
 	 * @return integer|boolean Returns the number of rows on success or FALSE on failure.
 	 */
-    public function setStatus($iIsEnabled)
+    public function setStatus($iIsEnabled, $iProfileId)
     {
-        return $this->orm->update($this->sTable, 'isTwoFactorAuth', $iIsEnabled);
+        $iIsEnabled = (string) $iIsEnabled; // Need to be string because in DB it's an "enum" type
+
+        return $this->orm->update($this->sTable, 'isTwoFactorAuth', $iIsEnabled, 'profileId', $iProfileId);
     }
 
     /**
 	 * @param string $sSecret 2FA secret code.
+     * @param integer $iProfileId Profile ID.
 	 * @return integer|boolean Returns the number of rows on success or FALSE on failure.
 	 */
-    public function setSecret($sSecret)
+    public function setSecret($sSecret, $iProfileId)
     {
-        return $this->orm->update($this->sTable, 'twoFactorAuthSecret', $sSecret);
+        return $this->orm->update($this->sTable, 'twoFactorAuthSecret', $sSecret, 'profileId', $iProfileId);
     }
 
     /**
-	 * @param integer $iProfileId
+	 * @param integer $iProfileId Profile ID.
 	 * @return string The 2FA secret code.
 	 */
     public function getSecret($iProfileId)

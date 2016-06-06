@@ -15,16 +15,16 @@ class VerificationCodeForm
 
     public static function display()
     {
-        if (isset($_POST['submit_code'])) {
-            if (\PFBC\Form::isValid($_POST['submit_code']))
+        if (isset($_POST['submit_verification_code'])) {
+            if (\PFBC\Form::isValid($_POST['submit_verification_code']))
                 new VerificationCodeFormProcess( (new Http)->get('mod') );
 
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_code');
+        $oForm = new \PFBC\Form('form_verification_code');
         $oForm->configure(array('action' => ''));
-        $oForm->addElement(new \PFBC\Element\Hidden('submit_code', 'form_code'));
+        $oForm->addElement(new \PFBC\Element\Hidden('submit_verification_code', 'form_verification_code'));
         $oForm->addElement(new \PFBC\Element\Token('verification_code'));
         $oForm->addElement(new \PFBC\Element\Email(t('Verification Code:'), 'verification_code', array('required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);

@@ -17,7 +17,8 @@ PH7\Framework\Ip\Ip,
 PH7\Framework\File\File,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+PH7\Framework\Url\Header,
+PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 // Abstract Class
 class UserCore
@@ -297,9 +298,10 @@ class UserCore
      * @param object $oUserData User database object.
      * @param object \PH7\UserCoreModel $oUserModel
      * @param object \PH7\Framework\Session\Session $oSession
+     * @param object \PH7\Framework\Mvc\Model\Security $oSecurityModel
      * @return void
      */
-    public function setAuth($oUserData, UserCoreModel $oUserModel, Session $oSession)
+    public function setAuth($oUserData, UserCoreModel $oUserModel, Session $oSession, SecurityModel $oSecurityModel)
     {
         // Remove the session if the user is logged on as "affiliate" or "administrator".
         if (AffiliateCore::auth() || AdminCore::auth())
@@ -323,10 +325,8 @@ class UserCore
 
         $oSession->set($aSessionData);
 
-        (new Framework\Mvc\Model\Security)->addLoginLog($oUserData->email, $oUserData->username, '*****', 'Logged in!');
+        $oSecurityModel->addLoginLog($oUserData->email, $oUserData->username, '*****', 'Logged in!');
         $oUserModel->setLastActivity($oUserData->profileId);
-
-        unset($oUserModel, $oUserData);
     }
 
     /**

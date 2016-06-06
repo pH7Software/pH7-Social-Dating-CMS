@@ -22,7 +22,7 @@ class Permission extends PermissionCore
         	Header::redirect($this->registry->site_url);
         }
         
-        if (!UserCore::auth() || !AffiliateCore::auth() || !AdminCore::auth() && $this->registry->action == 'setup')
+        if (!UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth() && $this->registry->action == 'setup')
         {
         	Header::redirect($this->registry->site_url);
         }

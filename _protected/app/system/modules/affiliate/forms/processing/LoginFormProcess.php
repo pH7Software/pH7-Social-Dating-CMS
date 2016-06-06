@@ -72,33 +72,28 @@ class LoginFormProcess extends Form
             $this->session->remove('captcha_aff_enabled');
             $iId = $oAffModel->getId($sEmail, null, 'Affiliates');
             $oAffData = $oAffModel->readProfile($iId, 'Affiliates');
+            $oAffiliate = new AffiliateCore;
 
-            if(true !== ($mStatus = (new AffiliateCore)->checkAccountStatus($oAffData)))
+            if(true !== ($mStatus = $oAffiliate->checkAccountStatus($oAffData)))
             {
                 \PFBC\Form::setError('form_login_aff', $mStatus);
             }
             else
             {
-                // Is disconnected if the user is logged on as "user" or "administrator".
-                if(UserCore::auth() || AdminCore::auth()) $this->session->destroy();
+	           	$o2FactorModel = new TwoFactorAuthCoreModel('affiliate');
+	            if ($o2FactorModel->isEnabled($iId))
+	            {
+	                // Store the affiliate ID for 2FA
+	                $this->session->set('2fa_profile_id', $iId);
+	                Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'affiliate'));
+	            }
+	            else
+	            {
+                	$oAffiliate->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
+	            }
 
-                // Regenerate the session ID to prevent the session fixation
-                $this->session->regenerateId();
-
-                $aSessionData = [
-                    'affiliate_id' => $oAffData->profileId,
-                    'affiliate_email' => $oAffData->email,
-                    'affiliate_username' => $oAffData->username,
-                    'affiliate_first_name' => $oAffData->firstName,
-                    'affiliate_sex' => $oAffData->sex,
-                    'affiliate_ip' => Ip::get(),
-                    'affiliate_http_user_agent' => $this->browser->getUserAgent(),
-                    'affiliate_token' => Various::genRnd($oAffData->email)
-                ];
-
-                $this->session->set($aSessionData);
-                $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
-                $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
+                /** Destroy the objects to minimize the CPU resources **/
+                unset($oAffiliate, $oAffModel, $oAffData, $oSecurityModel);
 
                 Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged!'));
             }
