@@ -48,7 +48,7 @@ class LoginFormProcess extends Form
 
             if($sLogin === 'email_does_not_exist')
             {
-                $this->session->set('captcha_enabled',1); // Enable Captcha
+                $this->session->set('captcha_aff_enabled',1); // Enable Captcha
                 \PFBC\Form::setError('form_login_aff', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
                 $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username', 'Affiliates');
             }
@@ -59,7 +59,7 @@ class LoginFormProcess extends Form
                 if($bIsLoginAttempt)
                     $oSecurityModel->addLoginAttempt('Affiliates');
 
-                $this->session->set('captcha_enabled',1); // Enable Captcha
+                $this->session->set('captcha_aff_enabled',1); // Enable Captcha
                 $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
                 $sWrongPwdTxt .= t('Please try again (make sure your caps lock is off).') . '<br />';
                 $sWrongPwdTxt .= t('Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('lost-password','main','forgot','affiliate'));
@@ -69,36 +69,32 @@ class LoginFormProcess extends Form
         else
         {
             $oSecurityModel->clearLoginAttempts('Affiliates');
-            $this->session->remove('captcha_enabled');
+            $this->session->remove('captcha_aff_enabled');
             $iId = $oAffModel->getId($sEmail, null, 'Affiliates');
             $oAffData = $oAffModel->readProfile($iId, 'Affiliates');
+            $oAff = new AffiliateCore;
 
-            if(true !== ($mStatus = (new AffiliateCore)->checkAccountStatus($oAffData)))
+            if(true !== ($mStatus = $oAff->checkAccountStatus($oAffData)))
             {
                 \PFBC\Form::setError('form_login_aff', $mStatus);
             }
             else
             {
-                // Is disconnected if the user is logged on as "user" or "administrator".
-                if(UserCore::auth() || AdminCore::auth()) $this->session->destroy();
+                $o2FactorModel = new TwoFactorAuthCoreModel('affiliate');
+                if ($o2FactorModel->isEnabled($iId))
+                {
+                    // Store the affiliate ID for 2FA
+                    $this->session->set('2fa_profile_id', $iId);
 
-                // Regenerate the session ID to prevent the session fixation
-                $this->session->regenerateId();
+                    Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'affiliate'));
+                }
+                else
+                {
+                    $oAff->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
+                }
 
-                $aSessionData = [
-                    'affiliate_id' => $oAffData->profileId,
-                    'affiliate_email' => $oAffData->email,
-                    'affiliate_username' => $oAffData->username,
-                    'affiliate_first_name' => $oAffData->firstName,
-                    'affiliate_sex' => $oAffData->sex,
-                    'affiliate_ip' => Ip::get(),
-                    'affiliate_http_user_agent' => $this->browser->getUserAgent(),
-                    'affiliate_token' => Various::genRnd($oAffData->email)
-                ];
-
-                $this->session->set($aSessionData);
-                $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
-                $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
+                /** Destroy the objects to minimize the CPU resources **/
+                unset($oAff, $oAffModel, $oAffData, $oSecurityModel);
 
                 Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged!'));
             }

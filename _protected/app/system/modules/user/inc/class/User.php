@@ -8,6 +8,7 @@
 namespace PH7;
 use
 PH7\Framework\Session\Session,
+PH7\Framework\Cookie\Cookie,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
 
@@ -22,6 +23,12 @@ class User extends UserCore
     public function logout()
     {
         (new Session)->destroy();
+
+        $oCookie = new Cookie; // If "Remember Me" checkbox has been checked
+        $aRememberMeCookies = ['member_remember', 'member_id'];
+        if ($oCookie->exists($aRememberMeCookies)) {
+            $oCookie->remove($aRememberMeCookies);
+        }
 
         Header::redirect(Uri::get('user','main','soon'), t('You are successfully logged out. See you soon!'));
     }

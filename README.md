@@ -76,6 +76,10 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Fully API for integration from an external app (iOS/Android, ...), website, program, ...
 * Feedback
 * Fully Responsive Templates
+* CSV User Importer
+* Fake Profile Generator
+* Memberships/Groups Manager
+* Publishable easily into Android/iPhone/iOS webview mobile app thanks its Mobile-Optimized Templates.
 * Multiple-Themes and many customization possible
 * Message templates
 * Multi Themes and many personalizable

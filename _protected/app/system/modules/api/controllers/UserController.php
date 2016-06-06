@@ -112,7 +112,7 @@ class UserController extends MainController
             {
                 $iId = $this->oUserModel->getId($aReqs['email']);
                 $oUserData = $this->oUserModel->readProfile($iId);
-                $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session);
+                $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session, new Framework\Mvc\Model\Security);
 
                 $this->oRest->response($this->set($aReqs));
             }

@@ -117,7 +117,7 @@ class JoinFormProcess extends Form
         }
         else
         {
-            // Register successfully in database for step 2!
+            // Registered successfully in database for step 2!
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
             Header::redirect(Uri::get('user','signup','step3'));
         }
@@ -139,7 +139,7 @@ class JoinFormProcess extends Form
         }
         else
         {
-            // Register successfully in database for step 3!
+            // Registered successfully in database for step 3!
             $this->session->set('mail_step3', $this->session->get('mail_step1'));
             Header::redirect(Uri::get('user','signup','step4'), t('Your account has just been created!'));
         }

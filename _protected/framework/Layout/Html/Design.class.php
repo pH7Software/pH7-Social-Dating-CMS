@@ -350,7 +350,6 @@ class Design
             ];
         } else { // Default links, set to English
             $aSites = [
-                ['title' => 'Friend New Fun Date', 'link' => 'http://sofun.co'],
                 ['title' => 'Flirt Hot Girls', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Flirt Naughty Girls', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],

@@ -20,7 +20,7 @@ class LostPwdDesignCore
     private function __construct() {}
 
     /**
-     * Get the link "forgot password".
+     * Get the "forgot password" link.
      *
      * @param string $sMod
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
