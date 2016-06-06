@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS pH7_Admins (
   ban enum('0','1') DEFAULT '0',
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   isTwoFactorAuth enum('1','0') DEFAULT '0',
-  twoFactorAuthCode varchar(40) DEFAULT NULL,
+  twoFactorAuthSecret varchar(40) DEFAULT NULL,
   hashValidation varchar(40) DEFAULT NULL,
   PRIMARY KEY (profileId),
   UNIQUE KEY username (username),

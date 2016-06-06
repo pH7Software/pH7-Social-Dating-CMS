@@ -30,7 +30,7 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email_login"></span>'));
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('required' => 1 )));
 
-        if ((new Session)->exists('captcha_enabled'))
+        if ((new Session)->exists('captcha_aff_enabled'))
         {
             $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha','onkeyup'=>'CValid(this.value, this.id)','description'=>t('Enter the code above:'))));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));

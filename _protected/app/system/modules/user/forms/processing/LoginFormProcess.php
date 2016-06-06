@@ -47,7 +47,7 @@ class LoginFormProcess extends Form
 
             if ($sLogin === 'email_does_not_exist')
             {
-                $this->session->set('captcha_enabled',1); // Enable Captcha
+                $this->session->set('captcha_user_enabled',1); // Enable Captcha
                 \PFBC\Form::setError('form_login_user', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
                 $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username');
             }
@@ -58,7 +58,7 @@ class LoginFormProcess extends Form
                 if ($bIsLoginAttempt)
                     $oSecurityModel->addLoginAttempt();
 
-                $this->session->set('captcha_enabled',1); // Enable Captcha
+                $this->session->set('captcha_user_enabled',1); // Enable Captcha
                 $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
                 $sWrongPwdTxt .= t('Please try again (make sure your caps lock is off).') . '<br />';
                 $sWrongPwdTxt .= t('Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('lost-password','main','forgot','user'));
@@ -68,7 +68,7 @@ class LoginFormProcess extends Form
         else
         {
             $oSecurityModel->clearLoginAttempts();
-            $this->session->remove('captcha_enabled');
+            $this->session->remove('captcha_user_enabled');
             $iId = $oUserModel->getId($sEmail);
             $oUserData = $oUserModel->readProfile($iId);
 

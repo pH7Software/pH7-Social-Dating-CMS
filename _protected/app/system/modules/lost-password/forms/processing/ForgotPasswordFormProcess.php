@@ -53,7 +53,7 @@ class ForgotPasswordFormProcess extends Form
     {
         $oData = $this->oUserModel->readProfile($iProfileId, $sTable);
 
-        /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
+        /** We place the text outside of Uri::get(), otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
         $sResetUrl = Uri::get('lost-password', 'main', 'reset', $this->httpRequest->get('mod')) . PH7_SH . $oData->email . PH7_SH . $oData->hashValidation;
 
         $this->view->content = t('Hello %0%!', $oData->username) . '<br />' .
