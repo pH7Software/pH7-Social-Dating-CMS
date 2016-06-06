@@ -72,9 +72,9 @@ class LoginFormProcess extends Form
             $this->session->remove('captcha_aff_enabled');
             $iId = $oAffModel->getId($sEmail, null, 'Affiliates');
             $oAffData = $oAffModel->readProfile($iId, 'Affiliates');
-            $oAffiliate = new AffiliateCore;
+            $oAff = new AffiliateCore;
 
-            if(true !== ($mStatus = $oAffiliate->checkAccountStatus($oAffData)))
+            if(true !== ($mStatus = $oAff->checkAccountStatus($oAffData)))
             {
                 \PFBC\Form::setError('form_login_aff', $mStatus);
             }
@@ -89,11 +89,11 @@ class LoginFormProcess extends Form
                 }
                 else
                 {
-                    $oAffiliate->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
+                    $oAff->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
                 }
 
                 /** Destroy the objects to minimize the CPU resources **/
-                unset($oAffiliate, $oAffModel, $oAffData, $oSecurityModel);
+                unset($oAff, $oAffModel, $oAffData, $oSecurityModel);
 
                 Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged!'));
             }

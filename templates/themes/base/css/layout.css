@@ -168,6 +168,11 @@
     float: right;
     width: 700px;
 }
+.icon-wrap i {
+    font-size:80px;
+    color: #428bca;
+    line-height: 100px;
+}
 /*** Overwrite with media queries for small devices ***/
 /* 1200px or less */
 @media (max-width: 1200px)

@@ -38,6 +38,6 @@ class TwoFactorAuthModel extends TwoFactorAuthCoreModel
      */
     public function getSecret($iProfileId)
     {
-        return $this->orm->getOne($this->sTable, 'profileId', $iProfileId, 'twoFactorAuthSecret')->licenseKey;
+        return $this->orm->getOne($this->sTable, 'profileId', $iProfileId, 'twoFactorAuthSecret')->twoFactorAuthSecret;
     }
 }
