@@ -7,8 +7,8 @@
  */
 namespace PH7;
 
-use 
-PH7\Framework\Session\Session, 
+use
+PH7\Framework\Session\Session,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Util\Various,
 PH7\Framework\Navigation\Browser,

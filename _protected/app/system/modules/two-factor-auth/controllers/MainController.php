@@ -12,7 +12,7 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-	private $o2FactorModel, $sMod, $iProfileId;
+    private $o2FactorModel, $sMod, $iProfileId;
 
     public function verificationCode($sMod = '')
     {
@@ -25,7 +25,7 @@ class MainController extends Controller
 
     public function setup($sMod = '')
     {
-    	$this->sMod = $sMod;
+        $this->sMod = $sMod;
         $this->checkMod();
 
         $this->iProfileId = $this->getProfileId();

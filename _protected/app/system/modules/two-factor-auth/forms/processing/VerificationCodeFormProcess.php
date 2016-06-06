@@ -21,17 +21,17 @@ class ValidationCodeFormProcess extends Form
         $sSecret = $o2FactorModel->getSecret($iProfileId);
         $sCode = $this->httprequest->post('verification_code');
 
-        $bCheck = $oAuthenticator->verifyCode($sSecret, $sCode, 0); 
+        $bCheck = $oAuthenticator->verifyCode($sSecret, $sCode, 0);
 
         if ($bCheck)
         {
-        	$sCoreClass = $this->getClassName($sMod);
-        	$sCoreModelClass = $sCoreClass . 'Model';
+            $sCoreClass = $this->getClassName($sMod);
+            $sCoreModelClass = $sCoreClass . 'Model';
             $oUserData = $sCoreModelClass->readProfile($iProfileId, Various::convertModToTable($sMod));
-        	(new $sCoreClass)->setAuth($oUserData, $sCoreModelClass, $this->session, new PH7\Framework\Mvc\Model\Security);
+            (new $sCoreClass)->setAuth($oUserData, $sCoreModelClass, $this->session, new PH7\Framework\Mvc\Model\Security);
 
             $sUrl = ($sMod == PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : $Uri::get($sMod, 'account', 'index');
-        	Framework\Url\Header::redirect($sUrl, t('You are successfully logged!'));
+            Framework\Url\Header::redirect($sUrl, t('You are successfully logged!'));
         }
         else
         {
@@ -48,25 +48,25 @@ class ValidationCodeFormProcess extends Form
      */
     protected function getClassName($sMod)
     {
-    	switch ($sMod)
-    	{
-    		case 'user':
-    			$oClass = 'UserCore';
-    		break;
+        switch ($sMod)
+        {
+            case 'user':
+                $oClass = 'UserCore';
+            break;
 
-    		case 'affiliate':
-    		 	$oClass = 'AffiliateCore';
-    		break;
+            case 'affiliate':
+                 $oClass = 'AffiliateCore';
+            break;
 
             case PH7_ADMIN_MOD:
                 $oClass = 'AdminCore';
             break;
-            
-    		default:
-    			throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Wrong "' . $sMod . '" module specified to get the class name');
-    	}
 
-    	return $sMod;
+            default:
+                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Wrong "' . $sMod . '" module specified to get the class name');
+        }
+
+        return $sMod;
     }
 
 }

@@ -65,7 +65,7 @@ class LoginFormProcess extends Form
             }
             elseif ($bIpNotAllowed)
             {
-                $this->enableCaptcha();   
+                $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
                 $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Wrong IP address', 'Admins');
             }

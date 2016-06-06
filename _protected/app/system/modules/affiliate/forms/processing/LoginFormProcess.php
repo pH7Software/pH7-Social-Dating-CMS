@@ -80,17 +80,17 @@ class LoginFormProcess extends Form
             }
             else
             {
-	           	$o2FactorModel = new TwoFactorAuthCoreModel('affiliate');
-	            if ($o2FactorModel->isEnabled($iId))
-	            {
-	                // Store the affiliate ID for 2FA
-	                $this->session->set('2fa_profile_id', $iId);
-	                Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'affiliate'));
-	            }
-	            else
-	            {
-                	$oAffiliate->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
-	            }
+                   $o2FactorModel = new TwoFactorAuthCoreModel('affiliate');
+                if ($o2FactorModel->isEnabled($iId))
+                {
+                    // Store the affiliate ID for 2FA
+                    $this->session->set('2fa_profile_id', $iId);
+                    Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'affiliate'));
+                }
+                else
+                {
+                    $oAffiliate->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
+                }
 
                 /** Destroy the objects to minimize the CPU resources **/
                 unset($oAffiliate, $oAffModel, $oAffData, $oSecurityModel);

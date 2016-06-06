@@ -17,7 +17,7 @@ class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
     public function __construct($sMod)
     {
         parent::__construct();
-        
+
         $this->sTable = Various::convertModToTable($sMod);
     }
 

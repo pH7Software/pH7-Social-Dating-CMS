@@ -10,11 +10,11 @@ namespace PH7;
 
 class TwoFactorAuthModel extends TwoFactorAuthCoreModel
 {
-	/**
-	 * @param integer $iIsEnabled 1 = Enabled | 0 = Disabled
+    /**
+     * @param integer $iIsEnabled 1 = Enabled | 0 = Disabled
      * @param integer $iProfileId Profile ID.
-	 * @return integer|boolean Returns the number of rows on success or FALSE on failure.
-	 */
+     * @return integer|boolean Returns the number of rows on success or FALSE on failure.
+     */
     public function setStatus($iIsEnabled, $iProfileId)
     {
         $iIsEnabled = (string) $iIsEnabled; // Need to be string because in DB it's an "enum" type
@@ -23,19 +23,19 @@ class TwoFactorAuthModel extends TwoFactorAuthCoreModel
     }
 
     /**
-	 * @param string $sSecret 2FA secret code.
+     * @param string $sSecret 2FA secret code.
      * @param integer $iProfileId Profile ID.
-	 * @return integer|boolean Returns the number of rows on success or FALSE on failure.
-	 */
+     * @return integer|boolean Returns the number of rows on success or FALSE on failure.
+     */
     public function setSecret($sSecret, $iProfileId)
     {
         return $this->orm->update($this->sTable, 'twoFactorAuthSecret', $sSecret, 'profileId', $iProfileId);
     }
 
     /**
-	 * @param integer $iProfileId Profile ID.
-	 * @return string The 2FA secret code.
-	 */
+     * @param integer $iProfileId Profile ID.
+     * @return string The 2FA secret code.
+     */
     public function getSecret($iProfileId)
     {
         return $this->orm->getOne($this->sTable, 'profileId', $iProfileId, 'twoFactorAuthSecret')->licenseKey;

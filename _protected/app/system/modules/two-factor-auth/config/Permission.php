@@ -19,12 +19,12 @@ class Permission extends PermissionCore
 
         if (!$this->session->exists('2fa_profile_id') && $this->registry->action == 'verificationcode')
         {
-        	Header::redirect($this->registry->site_url);
+            Header::redirect($this->registry->site_url);
         }
-        
+
         if (!UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth() && $this->registry->action == 'setup')
         {
-        	Header::redirect($this->registry->site_url);
+            Header::redirect($this->registry->site_url);
         }
     }
 
