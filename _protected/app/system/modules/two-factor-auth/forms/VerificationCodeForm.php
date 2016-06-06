@@ -26,7 +26,7 @@ class VerificationCodeForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_verification_code', 'form_verification_code'));
         $oForm->addElement(new \PFBC\Element\Token('verification_code'));
-        $oForm->addElement(new \PFBC\Element\Email(t('Verification Code:'), 'verification_code', array('required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Verification Code:'), 'verification_code', array('maxlength' => 6, 'autocomplete' => 'off', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

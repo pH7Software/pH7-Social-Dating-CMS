@@ -8,34 +8,39 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-class ValidationCodeFormProcess extends Form
+use
+PH7\Framework\Mvc\Model\Engine\Util\Various,
+PH7\Framework\Url\Header,
+PH7\Framework\Mvc\Router\Uri;
+
+class VerificationCodeFormProcess extends Form
 {
     public function __construct($sMod)
     {
         parent::__construct();
 
-        $oAuthenticator = new \PHPGangsta_GoogleAuthenticator();
+        $oAuthenticator = new \PHPGangsta_GoogleAuthenticator;
 
         $iProfileId = $this->session->get('2fa_profile_id');
-        $o2FactorModel = new TwoFactorAuthModel($sMod);
-        $sSecret = $o2FactorModel->getSecret($iProfileId);
-        $sCode = $this->httprequest->post('verification_code');
+        $sSecret = (new TwoFactorAuthModel($sMod))->getSecret($iProfileId);
+        $sCode = $this->httpRequest->post('verification_code');
 
         $bCheck = $oAuthenticator->verifyCode($sSecret, $sCode, 0);
 
         if ($bCheck)
         {
-            $sCoreClass = $this->getClassName($sMod);
-            $sCoreModelClass = $sCoreClass . 'Model';
+            $sCoreClassName = $this->getClassName($sMod);
+            $sCoreModelClassName = $sCoreClassName . 'Model';
+            $sCoreModelClass = new $sCoreModelClassName;
             $oUserData = $sCoreModelClass->readProfile($iProfileId, Various::convertModToTable($sMod));
-            (new $sCoreClass)->setAuth($oUserData, $sCoreModelClass, $this->session, new PH7\Framework\Mvc\Model\Security);
+            (new $sCoreClassName)->setAuth($oUserData, $sCoreModelClass, $this->session, new Framework\Mvc\Model\Security);
 
-            $sUrl = ($sMod == PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : $Uri::get($sMod, 'account', 'index');
-            Framework\Url\Header::redirect($sUrl, t('You are successfully logged!'));
+            $sUrl = ($sMod == PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : Uri::get($sMod, 'account', 'index');
+            Header::redirect($sUrl, t('You are successfully logged!'));
         }
         else
         {
-            \PFBC\Form::setError('form_verification_code', t('Oops! The Verification Code is incorrect. Please try again.')));
+            \PFBC\Form::setError('form_verification_code', t('Oops! The Verification Code is incorrect. Please try again.'));
         }
     }
 
@@ -66,7 +71,8 @@ class ValidationCodeFormProcess extends Form
                 throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Wrong "' . $sMod . '" module specified to get the class name');
         }
 
-        return $sMod;
+        // Need to use the fully qualified name (with namespace) as we create the class name dynamically
+        return 'PH7\\' . $oClass;
     }
 
 }

@@ -19,7 +19,7 @@ class MainController extends Controller
         $this->sMod = $sMod;
         $this->checkMod();
 
-        $this->view->page_title = $this->view->h2_title = t('Verification Code');
+        $this->view->page_title = $this->view->h2_title = t('Verification Code - Two-Factor Authentication');
         $this->output();
     }
 
@@ -41,11 +41,11 @@ class MainController extends Controller
             $this->o2FactorModel->setStatus($bIsEnabled, $this->iProfileId);
         }
 
-        $oAuthenticator = new \PHPGangsta_GoogleAuthenticator();
+        $oAuthenticator = new \PHPGangsta_GoogleAuthenticator;
         $sSecret = $oAuthenticator->createSecret();
         $this->o2FactorModel->setSecret($sSecret, $this->iProfileId);
 
-        $this->view->qr_core = $oAuthenticator->getQRCodeGoogleUrl($this->registry->site_name, $sSecret, $this->registry->site_url);
+        $this->view->qr_core = $oAuthenticator->getQRCodeGoogleUrl('pH7CMS', $sSecret, $this->registry->site_url);
 
         $this->output();
     }
@@ -61,13 +61,13 @@ class MainController extends Controller
         switch ($this->sMod)
         {
             case 'user':
-                return  $this->session->get('member_id');
+                return $this->session->get('member_id');
             break;
             case 'affiliate':
-                return  $this->session->get('admin_id');
+                return $this->session->get('affiliate_id');
             break;
             case PH7_ADMIN_MOD:
-                return  $this->session->get('affiliate_id');
+                return $this->session->get('admin_id');
             break;
 
             default:
