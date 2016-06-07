@@ -80,9 +80,10 @@ class MainController extends Controller
 
         echo t('BACKUP VERIFICATION CODE - %site_url% | %0% area', $this->sMod) . "\r\n\r\n";
         echo $this->oAuthenticator->getCode($sSecret) . "\r\n\r\n";
+        echo t('Date: %0%', $this->dateTime->get()->dateTime()) . "\r\n\r\n";
         echo t('Print it and keep it in a safe place, like your wallet.') . "\r\n\r\n";
         echo t('Regards, %site_name%') . "\r\n\r\n";
-        echo '-----';
+        echo '-----' . "\r\n\r\n\r\n";
         echo t('Powered by "pH7CMS.com" software.') . "\r\n";
     }
 
