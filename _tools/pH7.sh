@@ -63,7 +63,7 @@ function clear-cache() {
         rm -rf ./_protected/data/cache/pH7tpl_cache/*
         rm -rf ./_protected/data/cache/pH7_static/*
         rm -rf ./_protected/data/cache/pH7_cache/*
-        echo "The Caches have been removed!"
+        echo "Caches have been removed!"
     fi
 }
 
@@ -95,7 +95,7 @@ function clean-code() {
         eval "$exec 's/\t/    /g'"
 
         #_clean-indent
-        echo "The code has been cleaned!"
+        echo "Code has been cleaned!"
     fi
 }
 
@@ -147,7 +147,7 @@ function file-permissions() {
 function file-strict-permissions() {
     _permissions 644 755
     _cache-permissions
-    echo "Permissions Strict have been changed!"
+    echo "Strict Permissions have been changed!"
 }
 
 # Backup. Create a compressed archive of the project
