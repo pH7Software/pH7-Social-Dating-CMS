@@ -535,8 +535,8 @@ class File
     /**
      * For download file.
      *
-     * @param string $sFile file in download.
-     * @param string $sName if file in download.
+     * @param string $sFile File to download.
+     * @param string $sName A name for the file to download.
      * @param string $sMimeType Optional, default value is NULL.
      * @return void
      */
