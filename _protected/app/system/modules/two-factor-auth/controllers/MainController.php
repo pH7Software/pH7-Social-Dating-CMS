@@ -12,7 +12,15 @@ use PH7\Framework\Parse\Url, PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    private $o2FactorModel, $sMod, $iIsEnabled, $iProfileId;
+    private $o2FactorModel, $oAuthenticator, $sMod, $iIsEnabled, $iProfileId;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->oAuthenticator =  new \PHPGangsta_GoogleAuthenticator;
+
+    }
 
     public function verificationCode($sMod = '')
     {
@@ -41,18 +49,41 @@ class MainController extends Controller
         // Assign to the template after "update2FaStatus()" to get the accurate status in case it has been updated just now
         $this->view->is_enabled = $this->iIsEnabled;
 
-        $oAuthenticator = new \PHPGangsta_GoogleAuthenticator;
         $sSecret = $this->o2FactorModel->getSecret($this->iProfileId);
 
         // If not setup yet, create a new 2FA secret code for the profile.
         if (empty($sSecret) || strlen($sSecret) < 10) {
-            $sSecret = $oAuthenticator->createSecret();
+            $sSecret = $this->oAuthenticator->createSecret();
             $this->o2FactorModel->setSecret($sSecret, $this->iProfileId);
         }
 
-        $this->view->qr_core = $oAuthenticator->getQRCodeGoogleUrl($this->getAuthenticatorName(), $sSecret, $this->registry->site_url);
+        if ($this->httpRequest->postExists('get_backup_code')) {
+            $this->download($sSecret);
+            exit;
+        }
+
+        $this->view->qr_core = $this->oAuthenticator->getQRCodeGoogleUrl($this->getAuthenticatorName(), $sSecret, $this->registry->site_url);
 
         $this->output();
+    }
+
+    /**
+     * Download the backup 2FA code (text file).
+     *
+     * @param string The 2FA secret.
+     * @return void
+     */
+    protected function download($sSecret)
+    {
+        $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Framework\Parse\Url::clean($this->registry->site_name) . '.txt';
+        header('Content-Disposition: attachment; filename=" ' . $sFileName . '"');
+
+        echo t('BACKUP VERIFICATION CODE - %site_url% | %0% area', $this->sMod) . "\r\n\r\n";
+        echo $this->oAuthenticator->getCode($sSecret) . "\r\n\r\n";
+        echo t('Print it and keep it in a safe place, like your wallet.') . "\r\n\r\n";
+        echo t('Regards, %site_name%') . "\r\n\r\n";
+        echo '-----';
+        echo t('Powered by "pH7CMS.com" software.') . "\r\n";
     }
 
     /**

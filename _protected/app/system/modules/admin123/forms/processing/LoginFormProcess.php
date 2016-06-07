@@ -81,19 +81,16 @@ class LoginFormProcess extends Form
             if ($o2FactorModel->isEnabled($iId))
             {
                 // Store the admin ID for 2FA
-                $this->session->set('2fa_profile_id', $iId);
+                $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
                 Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', PH7_ADMIN_MOD));
             }
             else
             {
                 (new AdminCore)->setAuth($oAdminData, $oAdminModel, $this->session, $oSecurityModel);
+
+                Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('You are successfully logged!'));
             }
-
-            /** Destroy the objects to minimize the CPU resources **/
-            unset($oAdminModel, $oAdminData, $oSecurityModel);
-
-            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('You are successfully logged!'));
         }
     }
 

@@ -10,8 +10,6 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
@@ -84,19 +82,16 @@ class LoginFormProcess extends Form
                 if ($o2FactorModel->isEnabled($iId))
                 {
                     // Store the affiliate ID for 2FA
-                    $this->session->set('2fa_profile_id', $iId);
+                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
                     Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'affiliate'));
                 }
                 else
                 {
                     $oAff->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
+
+                    Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged!'));
                 }
-
-                /** Destroy the objects to minimize the CPU resources **/
-                unset($oAff, $oAffModel, $oAffData, $oSecurityModel);
-
-                Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged!'));
             }
         }
     }

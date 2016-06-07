@@ -8,6 +8,7 @@
 namespace PH7;
 use
 PH7\Framework\Session\Session,
+PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Navigation\Browser,
 PH7\Framework\Config\Config,
@@ -50,7 +51,7 @@ class AffiliateCore extends UserCore
             $oSession->destroy();
 
         // Regenerate the session ID to prevent session fixation attack
-        $this->session->regenerateId();
+        $oSession->regenerateId();
 
         $aSessionData = [
             'affiliate_id' => $oAffData->profileId,
@@ -59,11 +60,11 @@ class AffiliateCore extends UserCore
             'affiliate_first_name' => $oAffData->firstName,
             'affiliate_sex' => $oAffData->sex,
             'affiliate_ip' => Ip::get(),
-            'affiliate_http_user_agent' => $this->browser->getUserAgent(),
+            'affiliate_http_user_agent' => (new Browser)->getUserAgent(),
             'affiliate_token' => Various::genRnd($oAffData->email)
         ];
 
-        $this->session->set($aSessionData);
+        $oSession->set($aSessionData);
         $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
         $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
     }
