@@ -17,7 +17,7 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!$this->session->exists('2fa_profile_id') && $this->registry->action == 'verificationcode')
+        if (!$this->session->exists(TwoFactorAuthCore::PROFILE_ID_SESS_NAME) && $this->registry->action == 'verificationcode')
         {
             Header::redirect($this->registry->site_url);
         }

@@ -30,7 +30,7 @@ class VerificationCodeFormProcess extends Form
 
         $oAuthenticator = new \PHPGangsta_GoogleAuthenticator;
 
-        $iProfileId = $this->session->get('2fa_profile_id');
+        $iProfileId = $this->session->get(TwoFactorAuthCore::PROFILE_ID_SESS_NAME);
         $sSecret = (new TwoFactorAuthModel($sMod))->getSecret($iProfileId);
         $sCode = $this->httpRequest->post('verification_code');
 
