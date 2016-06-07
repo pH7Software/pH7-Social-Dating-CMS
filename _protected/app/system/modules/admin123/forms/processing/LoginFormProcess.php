@@ -17,7 +17,6 @@ PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 class LoginFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -103,5 +102,4 @@ class LoginFormProcess extends Form
     {
         $this->session->set('captcha_admin_enabled',1);
     }
-
 }
