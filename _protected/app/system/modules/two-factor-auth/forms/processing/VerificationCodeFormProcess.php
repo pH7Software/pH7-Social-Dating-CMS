@@ -9,6 +9,7 @@ namespace PH7;
 defined('PH7') or die('Restricted access');
 
 use
+RobThree\Auth\TwoFactorAuth,
 PH7\Framework\Mvc\Model\Engine\Util\Various,
 PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
@@ -28,12 +29,11 @@ class VerificationCodeFormProcess extends Form
     {
         parent::__construct();
 
-        $oAuthenticator = new \PHPGangsta_GoogleAuthenticator;
+        $oAuthenticator = new TwoFactorAuth;
 
         $iProfileId = $this->session->get(TwoFactorAuthCore::PROFILE_ID_SESS_NAME);
         $sSecret = (new TwoFactorAuthModel($sMod))->getSecret($iProfileId);
         $sCode = $this->httpRequest->post('verification_code');
-
         $bCheck = $oAuthenticator->verifyCode($sSecret, $sCode, self::OTP_TOLERANCE);
 
         if ($bCheck)

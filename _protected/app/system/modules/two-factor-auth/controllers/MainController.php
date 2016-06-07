@@ -8,7 +8,10 @@
 
 namespace PH7;
 
-use PH7\Framework\Parse\Url, PH7\Framework\Url\Header;
+use
+RobThree\Auth\TwoFactorAuth,
+PH7\Framework\Parse\Url,
+PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
@@ -18,7 +21,7 @@ class MainController extends Controller
     {
         parent::__construct();
 
-        $this->oAuthenticator =  new \PHPGangsta_GoogleAuthenticator;
+        $this->oAuthenticator = new TwoFactorAuth($this->registry->site_url);
 
     }
 
@@ -62,7 +65,7 @@ class MainController extends Controller
             exit;
         }
 
-        $this->view->qr_core = $this->oAuthenticator->getQRCodeGoogleUrl($this->getAuthenticatorName(), $sSecret, $this->registry->site_url);
+        $this->view->qr_core = $this->oAuthenticator->getQRCodeImageAsDataUri($this->getAuthenticatorName(), $sSecret);
 
         $this->output();
     }
