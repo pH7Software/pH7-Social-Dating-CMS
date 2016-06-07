@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname(dirname($vendorDir));
 
 return array(
-    'PHPGangsta_GoogleAuthenticator' => $vendorDir . '/phpgangsta/googleauthenticator/PHPGangsta/GoogleAuthenticator.php',
     'RobThree\\Auth\\Providers\\Qr\\BaseHTTPQRCodeProvider' => $vendorDir . '/robthree/twofactorauth/lib/Providers/Qr/BaseHTTPQRCodeProvider.php',
     'RobThree\\Auth\\Providers\\Qr\\GoogleQRCodeProvider' => $vendorDir . '/robthree/twofactorauth/lib/Providers/Qr/GoogleQRCodeProvider.php',
     'RobThree\\Auth\\Providers\\Qr\\IQRCodeProvider' => $vendorDir . '/robthree/twofactorauth/lib/Providers/Qr/IQRCodeProvider.php',

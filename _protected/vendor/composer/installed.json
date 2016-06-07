@@ -204,43 +204,6 @@
         ]
     },
     {
-        "name": "phpgangsta/googleauthenticator",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/PHPGangsta/GoogleAuthenticator.git",
-            "reference": "b64898d6da9d06dda03a0a82b00c02316d9cd4c8"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/PHPGangsta/GoogleAuthenticator/zipball/b64898d6da9d06dda03a0a82b00c02316d9cd4c8",
-            "reference": "b64898d6da9d06dda03a0a82b00c02316d9cd4c8",
-            "shasum": ""
-        },
-        "time": "2015-04-16 21:44:34",
-        "type": "library",
-        "installation-source": "source",
-        "autoload": {
-            "classmap": [
-                "PHPGangsta/GoogleAuthenticator.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-4-Clause"
-        ],
-        "authors": [
-            {
-                "name": "Michael Kliewe"
-            }
-        ],
-        "description": "Google Authenticator 2-factor authentication",
-        "keywords": [
-            "googleauthenticator"
-        ]
-    },
-    {
         "name": "ph-7/qrcode-generator-php-class",
         "version": "2.0",
         "version_normalized": "2.0.0.0",
