@@ -1,6 +1,5 @@
 .chatbox {
     position: fixed;
-    // position:expression("absolute");
     width: 225px;
     display:none;
     z-index:10009;
