@@ -20,6 +20,8 @@ ol#toc li {
 }
 ol#toc li a.active span, ol#toc span:hover {
     background-color: #2d99e5;
+}
+ol#toc li a.active span {
     font-weight: bold;
 }
 ol#toc a {
@@ -30,6 +32,9 @@ ol#toc a {
     line-height: 2em;
 }
 ol#toc span {
+    border-top: #2d99e5 solid 1px;
+    border-left: #2d99e5 solid 1px;
+    border-right: #2d99e5 solid 1px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     background-color: #3af;
