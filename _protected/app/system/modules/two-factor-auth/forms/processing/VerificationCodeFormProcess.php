@@ -9,10 +9,10 @@ namespace PH7;
 defined('PH7') or die('Restricted access');
 
 use
-RobThree\Auth\TwoFactorAuth,
 PH7\Framework\Mvc\Model\Engine\Util\Various,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Router\Uri;
+RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class VerificationCodeFormProcess extends Form
 {
@@ -29,7 +29,7 @@ class VerificationCodeFormProcess extends Form
     {
         parent::__construct();
 
-        $oAuthenticator = new TwoFactorAuth;
+        $oAuthenticator = new Authenticator;
 
         $iProfileId = $this->session->get(TwoFactorAuthCore::PROFILE_ID_SESS_NAME);
         $sSecret = (new TwoFactorAuthModel($sMod))->getSecret($iProfileId);

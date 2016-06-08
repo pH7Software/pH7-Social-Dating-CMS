@@ -9,9 +9,9 @@
 namespace PH7;
 
 use
-RobThree\Auth\TwoFactorAuth,
+PH7\Framework\Url\Header,
 PH7\Framework\Parse\Url,
-PH7\Framework\Url\Header;
+RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
 {
@@ -21,7 +21,7 @@ class MainController extends Controller
     {
         parent::__construct();
 
-        $this->oAuthenticator = new TwoFactorAuth($this->registry->site_url);
+        $this->oAuthenticator = new Authenticator($this->registry->site_url);
 
     }
 
@@ -65,7 +65,7 @@ class MainController extends Controller
             exit;
         }
 
-        $this->view->qr_core = $this->oAuthenticator->getQRCodeImageAsDataUri($this->getAuthenticatorName(), $sSecret);
+        $this->view->qr_core = $this->oAuthenticator->getQRCodeImageAsDataUri($this->getAuthenticatorName(), $sSecret, 220);
 
         $this->output();
     }

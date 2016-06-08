@@ -12,7 +12,6 @@ use PH7\Framework\Url\Header;
 
 class Permission extends PermissionCore
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -27,5 +26,4 @@ class Permission extends PermissionCore
             Header::redirect($this->registry->site_url);
         }
     }
-
 }
