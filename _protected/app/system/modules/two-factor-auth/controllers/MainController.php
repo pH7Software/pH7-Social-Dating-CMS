@@ -65,7 +65,7 @@ class MainController extends Controller
             exit;
         }
 
-        $this->view->qr_core = $this->oAuthenticator->getQRCodeImageAsDataUri($this->getAuthenticatorName(), $sSecret, 220);
+        $this->view->qr_core = $this->oAuthenticator->getQRCodeImageAsDataUri($this->getAuthenticatorName(), $sSecret, 240);
 
         $this->output();
     }
