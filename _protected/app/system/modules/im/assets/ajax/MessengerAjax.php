@@ -243,7 +243,7 @@ EOD;
 
 }
 
-// Go only is the member id connected
+// Go only if the user is logged
 if (UserCore::auth())
 {
     $oSession = new Session; // Go start_session() function.
