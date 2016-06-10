@@ -64,7 +64,7 @@ class MailFormProcess extends Form
             else
             {
                 // If the notification is accepted and the message recipient isn't connected NOW, we send a message.
-                if (!$oUserModel->isNotification($iRecipientId, 'newMsg') && $oUserModel->isOnline($iRecipientId, 0))
+                if (!$oUserModel->isNotification($iRecipientId, 'newMsg') && !$oUserModel->isOnline($iRecipientId))
                 {
                     $this->sendMail($iRecipientId, $mSendMsg, $oUserModel);
                 }
