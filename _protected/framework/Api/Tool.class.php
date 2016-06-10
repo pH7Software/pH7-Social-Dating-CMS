@@ -24,7 +24,7 @@ class Tool
      *
      * @param \PH7\Framework\Config\Config $oConfig
      * @param \PH7\Framework\Mvc\Request\Http $oRequest
-     * @return boolean TRUE is the app has access, FALSE otherwise.
+     * @return boolean Returns TRUE if the app has access, FALSE otherwise.
      */
     public static function checkAccess(Config $oConfig, Http $oRequest)
     {
