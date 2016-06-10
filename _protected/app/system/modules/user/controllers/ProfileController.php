@@ -103,7 +103,7 @@ class ProfileController extends Controller
                 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\''.(new Token)->generate('friend').'\')' :
                 Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(array('msg' => t('Free Sign up for %site_name% to become friend with %0%.', $sFirstName), 'ref' => 'profile', 'a' => 'befriend&', 'u' => $oUser->username, 'f_n' => $sFirstName, 's' => $oUser->sex)), false);
 
-            $this->view->page_title = t('Meet %0%, A beautiful %1% looking some %2% - %3% years - %4% - %5% %6%',
+            $this->view->page_title = t('Meet %0%, A %1% looking for %2% - %3% years - %4% - %5% %6%',
                 $sFirstName, t($oUser->sex), t($oUser->matchSex), $iAge, t($sCountry), $sCity, $sState);
             $this->view->meta_description = t('Meet %0% %1% | %2% - %3%', $sFirstName, $sLastName,
                 $oUser->username, substr($sDescription, 0, 100));
