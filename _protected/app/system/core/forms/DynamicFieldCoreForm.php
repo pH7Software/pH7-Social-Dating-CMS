@@ -37,7 +37,7 @@ class DynamicFieldCoreForm
         switch ($this->_sColumn)
         {
             case 'description':
-                $this->_oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,10,2000)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(20,4000), 'required'=>1)));
+                $this->_oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), $this->_sColumn, array('id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,10,2000)','value' => $this->_sVal, 'validation' => new \PFBC\Validation\Str(20,4000), 'basic' => 1, 'required' => 1)));
                 $this->addCheckErrSpan('str');
             break;
 
