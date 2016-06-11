@@ -124,7 +124,9 @@ class Session
      */
     public function regenerateId()
     {
-        session_regenerate_id(true);
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_regenerate_id(true);
+        }
     }
 
     /**
