@@ -42,8 +42,9 @@ abstract class Controller implements IController
     {
         global $LANG;
 
-        // PHP session initialization
-        if (empty($_SESSION))
+        // Initialize PHP session
+        // First off, check if the session already exists thanks "session_status()" PHP >= 5.4 func
+        if (session_status() !== PHP_SESSION_ACTIVE)
             @session_start();
 
         // Verify and correct the time zone if necessary
