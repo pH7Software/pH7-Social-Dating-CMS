@@ -38,8 +38,8 @@ class Session
             session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], (substr(PH7_URL_PROT, 0, 5) === 'https'), true);
         }
 
-        // Session initialization
-        if ('' === session_id()) // Yoda condition
+        // Initialize PHP session
+        if (session_status() !== PHP_SESSION_ACTIVE)
             @session_start();
     }
 
