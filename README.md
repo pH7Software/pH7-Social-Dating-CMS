@@ -218,7 +218,7 @@ You will also be eligible to [pH7CMS VIP members](http://ph7cms.com/get-one-tine
 
 * **Poedit** for translating the Gettext files
 
-**FileZilla** for FTP client
+* **FileZilla** for FTP client
 
 * **Git** for the version control system
 
