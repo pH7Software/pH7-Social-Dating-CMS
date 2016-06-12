@@ -140,7 +140,7 @@ class MailModel extends MailCoreModel
         switch ($sType)
         {
             case self::INBOX:
-                $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
+                $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.trash)) AND';
             break;
 
             case self::OUTBOX:
