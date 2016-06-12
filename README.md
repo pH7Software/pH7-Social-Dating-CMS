@@ -102,40 +102,23 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 ![Build a Social Dating Website with pH7CMS](https://cloud.githubusercontent.com/assets/1325411/14080217/84ca02c2-f4fb-11e5-941d-dedc0354dafd.png)
 
 
-## Help Us to Grow Up
-
-**It's 100% Open Source & Free**
-
-**It's an Awesome Project.**
-
-**We want You to Make It the Best!**
-
-
-If you want to work on an Innovative and Exciting Project with a Beautiful PHP code using the latest PHP features while collaborating with nice people, ... So You Have to **Join Us**!
-
-Send an email at: *hello {AT} ph7cms {D0T} com* and Start a Wonderful Adventure!
-
-
-Thank you so much in advance!
-
-
 ## Requirements
 
-**Application Server** PHP 5.5.0 or higher (Recommended Version: **PHP 7.0.4** or higher).
+* **Application Server** PHP 5.5.0 or higher (Recommended Version: **PHP 7.0.4** or higher).
 
-**Database** MySQL/MariaDB 5.0.15 or higher.
+* **Database** MySQL/MariaDB 5.0.15 or higher.
 
-**Operating System** Linux/Unix (Red Hat, CentOS, Debian, FreeBSD, Mandrake, Mac OS, etc.), Windows.
+* **Operating System** Linux/Unix (Red Hat, CentOS, Debian, FreeBSD, Mandrake, Mac OS, etc.), Windows.
 
-**Web Server** Apache with mod_php or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work you should change some pieces of code and change the url rewriting to make it work).
+* **Web Server** Apache with mod_php or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work you should change some pieces of code and change the url rewriting to make it work).
 
-**URL rewriting extension module** Apache, nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
+* **URL rewriting extension module** Apache, nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
 
-**Video** [FFmpeg](http://ffmpeg.org)
+* **Video** [FFmpeg](http://ffmpeg.org)
 
-**Specific Requirement** Server has to be connected to Internet.
+* **Specific Requirement** Server has to be connected to Internet.
 
-**Minimum Web Space** 2.0 GB
+* **Minimum Web Space** 2.0 GB
 
 
 ## Nginx Configuration
@@ -181,7 +164,7 @@ For more information, please refer to the nginx documentation.
 
 ## Hosting
 
-Recommended Hosting for **pH7CMS**
+Recommended Web Hosting for **pH7CMS**
 
 <p><a href="http://ph7cms.com/web/arvandixe"><img src="http://ph7cms.com/web/arvandixeimg" width="250" height="250" alt="Arvixe: Recommended for pH7CMS" title="Arvixe: Recommended for pH7CMS"></a> &nbsp; <a href="http://ph7cms.com/web/hostupon"><img src="http://ph7cms.com/web/hostuponimg" width="250" height="250" alt="HostUpon: Recommended for pH7CMS" title="HostUpon: Recommended for pH7CMS"></a></p>
 <p><a href="http://ph7cms.com/web/tmdhost"><img src="http://ph7cms.com/web/tmdhostimg" width="250" height="250" alt="TMD Hosting: Recommended for pH7CMS" title="TMD Hosting: Recommended for pH7CMS"></a> &nbsp; &nbsp; <a href="http://ph7cms.com/web/hostforweb"><img src="http://ph7cms.com/web/hostforwebimg" width="250" height="250" alt="HostForWeb: Recommended for pH7CMS" title="HostForWeb: Recommended for pH7CMS"></a></p>
@@ -214,13 +197,30 @@ Pierre-Henry Soria
 
 Everyone can contribute on **[pH7CMS GitHub](http://github.com/pH7Software/pH7-Social-Dating-CMS)** repository.
 
-Finding bugs, improving the CMS/doc or adding translations. Any contribution is welcome and highly appreciated.
+Finding bugs, improving the CMS/doc or adding translations. Any contribution is welcome and highly appreciated!
 
 Just clone the repository, make your changes and then make a push ;-)
 
-*WARNING, your code/modification must be of excellent quality and follow the [Code Convention](http://ph7cms.com/doc/en/code-convention).* We manually validate all the improvements and changes.
+*WARNING, your code/modification must be of excellent quality and follow the [Code Convention](http://ph7cms.com/doc/en/code-convention).* I manually validate all the improvements and changes.
 
 You will also be eligible to [pH7CMS VIP members](http://ph7cms.com/get-one-tine-license-for-free/) and get all premium contents.
+
+
+## Tools/Software Used to Develop pH7CMS
+
+* LAMP on **Fedora/Ubuntu** (and Windows with WampServer or MAMP for testing purpose)
+
+* **Geany &amp; Sublime Text** for coding the whole project. That's It
+
+* **GIMP** for editing the assets, etc.
+
+* **Trimage** (and ImageOptim when developing on Mac) for compressing &amp; optimizing the images
+
+* **Poedit** for translating the Gettext files
+
+**FileZilla** for FTP client
+
+* **Git** for the version control system
 
 
 ## Contact
@@ -230,7 +230,7 @@ You can send email for any suggestions or comments at: *hello {AT} ph7cms {D0T} 
 
 ## Help & Modifications
 
-If you want, we also offer a *Premium Commercial* support at *[HiZup Support Department](http://clients.hizup.com/support)*
+If you need, you can get a **Premium Commercial Support** at *[HiZup Support Department](http://clients.hizup.com/support)*
 
 
 ## License
