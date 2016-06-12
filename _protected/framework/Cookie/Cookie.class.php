@@ -32,8 +32,8 @@ class Cookie
 
         if (is_array($mName))
         {
-            foreach ($mName as $sN => $sV)
-                $this->set($sN, $sV, $iTime, $bSecure); // Recursive method
+            foreach ($mName as $sName => $sVal)
+                $this->set($sName, $sVal, $iTime, $bSecure); // Recursive method
         }
         else
         {
@@ -75,7 +75,7 @@ class Cookie
         }
         else
         {
-            $bExists = (!empty($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName])) ? true : false;
+            $bExists = !empty($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName]);
         }
 
         return $bExists;
@@ -90,8 +90,8 @@ class Cookie
     {
         if (is_array($mName))
         {
-            foreach ($mName as $sN)
-                $this->remove($sN); // Recursive method
+            foreach ($mName as $sName)
+                $this->remove($sName); // Recursive method
         }
         else
         {
