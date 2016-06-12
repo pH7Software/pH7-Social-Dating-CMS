@@ -90,7 +90,7 @@ class Session
         }
         else
         {
-            $bExists = (!empty($_SESSION[Config::getInstance()->values['session']['prefix'] . $mName])) ? true : false;
+            $bExists = !empty($_SESSION[Config::getInstance()->values['session']['prefix'] . $mName]);
         }
 
         return $bExists;
