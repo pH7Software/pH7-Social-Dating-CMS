@@ -1,6 +1,6 @@
 {if empty($msg)}
 
-  <p class="bold">{lang 'Sorry, this message was not found.'}</p>
+  <p class="center bold">{lang 'Sorry, this message was not found.'}</p>
 
 {else}
 
