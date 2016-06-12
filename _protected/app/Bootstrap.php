@@ -114,7 +114,7 @@ catch (\Exception $oE)
 }
 finally
 {
-    if ('' !== session_id()) {
+    if (session_status() === PHP_SESSION_ACTIVE) {
         session_write_close();
     }
     ob_end_flush();
