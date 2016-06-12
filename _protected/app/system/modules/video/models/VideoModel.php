@@ -15,7 +15,8 @@ class VideoModel extends VideoCoreModel
     public function addAlbum($iProfileId, $sTitle, $sDescription, $sThumb, $sCreatedDate, $iApproved = 1)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AlbumsVideos') . '(profileId, name, description, thumb, createdDate, approved)
-       VALUES (:profileId, :name, :description, :thumb, :createdDate, :approved)');
+            VALUES (:profileId, :name, :description, :thumb, :createdDate, :approved)');
+
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $sTitle, \PDO::PARAM_STR);
         $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
@@ -28,7 +29,8 @@ class VideoModel extends VideoCoreModel
     public function addVideo($iProfileId, $iAlbumId, $sTitle, $sDescription, $sFile, $sThumb, $sDuration, $sCreatedDate, $iApproved = 1)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Videos') . '(profileId, albumId, title, description, file, thumb, duration, createdDate, approved)
-       VALUES (:profileId, :albumId, :title, :description, :file, :thumb, :duration, :createdDate, :approved)');
+            VALUES (:profileId, :albumId, :title, :description, :file, :thumb, :duration, :createdDate, :approved)');
+
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
@@ -77,7 +79,9 @@ class VideoModel extends VideoCoreModel
 
             $sSqlVideoId = (!empty($iVideoId)) ? ' v.videoId=:videoId AND ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT v.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
-                    . Db::prefix('AlbumsVideos') . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix('Members') . 'AS m ON v.profileId = m.profileId WHERE v.profileId=:profileId AND v.albumId=:albumId AND' . $sSqlVideoId . 'v.approved=:approved LIMIT :offset, :limit');
+                . Db::prefix('AlbumsVideos') . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix('Members') .
+                'AS m ON v.profileId = m.profileId WHERE v.profileId=:profileId AND v.albumId=:albumId AND' . $sSqlVideoId . 'v.approved=:approved LIMIT :offset, :limit');
+
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
             (!empty($iVideoId)) ? $rStmt->bindValue(':videoId', $iVideoId, \PDO::PARAM_INT) : '';
@@ -132,7 +136,9 @@ class VideoModel extends VideoCoreModel
 
     public function updateAlbum($iProfileId, $iAlbumId, $sTitle, $sDescription, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('AlbumsVideos') . 'SET name =:name, description =:description, updatedDate =:updatedDate WHERE profileId=:profileId AND albumId=:albumId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('AlbumsVideos') . 'SET name =:name, description =:description, updatedDate =:updatedDate
+            WHERE profileId=:profileId AND albumId=:albumId');
+
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $sTitle, \PDO::PARAM_STR);
@@ -143,7 +149,9 @@ class VideoModel extends VideoCoreModel
 
     public function updateVideo($iProfileId, $iAlbumId, $iVideoId, $sTitle, $sDescription, $sUpdatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Videos') . 'SET title =:title, description =:description, updatedDate =:updatedDate WHERE profileId=:profileId AND albumId=:albumId AND videoId=:videoId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Videos') . 'SET title =:title, description =:description, updatedDate =:updatedDate
+            WHERE profileId=:profileId AND albumId=:albumId AND videoId=:videoId');
+
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         $rStmt->bindValue(':videoId', $iVideoId, \PDO::PARAM_INT);

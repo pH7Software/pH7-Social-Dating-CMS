@@ -1319,7 +1319,9 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         if (!$oData = $this->cache->get())
         {
-            $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members'). 'AS m INNER JOIN ' . Db::prefix('Memberships') . 'AS g ON m.groupId = g.groupId WHERE profileId = :profileId LIMIT 1';
+            $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members'). 'AS m INNER JOIN ' . Db::prefix('Memberships') .
+            'AS g ON m.groupId = g.groupId WHERE profileId = :profileId LIMIT 1';
+
             $rStmt = Db::getInstance()->prepare($sSql);
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -1340,7 +1342,10 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId WHERE (pay.expirationDays = 0 OR DATE_ADD(m.membershipDate, INTERVAL pay.expirationDays DAY) >= :currentTime) AND (m.profileId = :profileId) LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') .
+            'AS pay ON m.groupId = pay.groupId WHERE (pay.expirationDays = 0 OR DATE_ADD(m.membershipDate, INTERVAL pay.expirationDays DAY) >= :currentTime)
+             AND (m.profileId = :profileId) LIMIT 1');
+
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -1363,7 +1368,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $sSqlWherePrice = ($bIsPrice) ? ' AND pay.price = :price' : '';
         $sSqlTime = ($bIsTime) ? ',m.membershipDate = :dateTime ' : ' ';
-        $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') . 'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlWherePrice;
+        $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') .
+        'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlWherePrice;
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':groupId', $iNewGroupId, \PDO::PARAM_INT);

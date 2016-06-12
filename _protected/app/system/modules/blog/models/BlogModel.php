@@ -73,7 +73,7 @@ class BlogModel extends BlogCoreModel
     public function addPost($aData)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Blogs') . '(postId, langId, title, content, slogan, tags, pageTitle, metaDescription, metaKeywords, metaRobots, metaAuthor, metaCopyright, enableComment, createdDate)
-        VALUES (:postId, :langId, :title, :content, :slogan, :tags, :pageTitle, :metaDescription, :metaKeywords, :metaRobots, :metaAuthor, :metaCopyright, :enableComment, :createdDate)');
+            VALUES (:postId, :langId, :title, :content, :slogan, :tags, :pageTitle, :metaDescription, :metaKeywords, :metaRobots, :metaAuthor, :metaCopyright, :enableComment, :createdDate)');
         $rStmt->bindValue(':postId', $aData['post_id'], \PDO::PARAM_STR);
         $rStmt->bindValue(':langId', $aData['lang_id'], \PDO::PARAM_STR);
         $rStmt->bindValue(':title', $aData['title'], \PDO::PARAM_STR);
