@@ -10,7 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
-/** For "user", "affiliate" and "admin" module **/
+/** For "user", "affiliate" and "admin" modules **/
 class ChangePasswordCoreFormProcess extends Form
 {
 
@@ -51,9 +51,12 @@ class ChangePasswordCoreFormProcess extends Form
         }
         else
         {
-            // Update
+            // Regenerate the session ID to prevent session fixation attack
+            $this->session->regenerateId();
+
+            // Update the password
             $oPasswordModel->changePassword($sEmail, $this->httpRequest->post('new_password'), $sTable);
-            \PFBC\Form::setSuccess('form_change_password', t('Your password has been correctly updated.'));
+            \PFBC\Form::setSuccess('form_change_password', t('Your password has been successfully changed.'));
         }
     }
 

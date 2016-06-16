@@ -14,7 +14,7 @@ PH7\Framework\Mail\Mail,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
 
-/** For "user" and "affiliate" module **/
+/** For "user" and "affiliate" modules **/
 class DeleteUserCoreFormProcess extends Form
 {
     private $sSessPrefix;
@@ -30,7 +30,9 @@ class DeleteUserCoreFormProcess extends Form
         if ($mLogin === 'password_does_not_exist') {
             \PFBC\Form::setError('form_delete_account',t('Oops! This password you entered is incorrect.'));
         } else {
+            $this->session->regenerateId();
             $this->sendWarnEmail();
+            $this->removeAccount();
             $this->session->destroy();
             $this->goSoon();
         }
@@ -39,7 +41,7 @@ class DeleteUserCoreFormProcess extends Form
     /**
      * Send an email to the site administrator saying the reason why a user wanted to delete his account from the site.
      *
-     * @return void
+     * @return integer
      */
     protected function sendWarnEmail()
     {
@@ -67,8 +69,17 @@ class DeleteUserCoreFormProcess extends Form
         $aInfo = [
             'subject' => t('Unregister %0% - User: %1%', $sMembershipName, $sUsername)
         ];
-        (new Mail)->send($aInfo, $sMessageHtml);
 
+        return (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    /**
+     * Remove the user/affiliate account.
+     *
+     * @return void
+     */
+    protected function removeAccount()
+    {
         $oUserModel = ($this->registry->module == 'user') ? new UserCore : new AffiliateCore;
         $oUserModel->delete($this->session->get($this->sSessPrefix.'_id'), $sUsername);
         unset($oUserModel);
