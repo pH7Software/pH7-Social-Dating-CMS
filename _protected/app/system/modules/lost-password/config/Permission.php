@@ -17,12 +17,6 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        // Admin Security, if you have forgotten your admin password, comment this code below
-        if ($this->httpRequest->get('mod') == PH7_ADMIN_MOD && ($this->registry->action == 'forgot' || $this->registry->action == 'reset'))
-        {
-            Header::redirect(Uri::get(PH7_ADMIN_MOD,'main','login'), t('For security reasons, you do not have the right to generate a new password. To disable this security option, you must go to the Permission file of "lost-password" module'), 'error');
-        }
-
         if ((UserCore::auth() || AffiliateCore::auth() || AdminCore::auth()) && ($this->registry->action == 'forgot' || $this->registry->action == 'reset'))
         {
             Header::redirect(Uri::get('lost-password', 'main', 'account'), $this->alreadyConnectedMsg(), 'error');

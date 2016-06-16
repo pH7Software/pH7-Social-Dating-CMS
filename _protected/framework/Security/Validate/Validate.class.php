@@ -39,7 +39,7 @@ class Validate
     {
         $sType = strtolower($sType); // Case-insensitive type.
 
-        if (false === $bRequired && 0 === (new Str)->length($sValue)) // Yoga Condition ;-)
+        if (false === $bRequired && 0 === (new Str)->length($sValue)) // Yoda Condition ;-)
             return true;
 
         switch ($sType) {

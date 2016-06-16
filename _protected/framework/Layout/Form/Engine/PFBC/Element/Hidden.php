@@ -15,7 +15,7 @@ class Hidden extends \PFBC\Element
         if(!is_array($aProperties))
             $aProperties = array();
 
-        if(!empty($sValue))
+        if(isset($sValue))
             $aProperties['value'] = $sValue;
 
         // We remove the session of the hidden fields

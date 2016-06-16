@@ -14,23 +14,27 @@ PH7\Framework\Mail\Mail,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
 
-/** For "user" and "affiliate" module **/
+/** For "user" and "affiliate" modules **/
 class DeleteUserCoreFormProcess extends Form
 {
-    private $sSessPrefix;
+    private $sSessPrefix, $sUsername, $sEmail;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->sSessPrefix = ($this->registry->module == 'user') ? 'member' : 'affiliate';
+        $this->sUsername = $this->session->get($this->sSessPrefix.'_username');
+        $this->sEmail = $this->session->get($this->sSessPrefix.'_email');
         $sTable = ($this->registry->module == 'user') ? 'Members' : 'Affiliates';
 
-        $mLogin = (new UserCoreModel)->login($this->session->get($this->sSessPrefix.'_email'), $this->httpRequest->post('password'), $sTable);
+        $mLogin = (new UserCoreModel)->login($this->sEmail, $this->httpRequest->post('password'), $sTable);
         if ($mLogin === 'password_does_not_exist') {
             \PFBC\Form::setError('form_delete_account',t('Oops! This password you entered is incorrect.'));
         } else {
+            $this->session->regenerateId();
             $this->sendWarnEmail();
+            $this->removeAccount();
             $this->session->destroy();
             $this->goSoon();
         }
@@ -39,19 +43,18 @@ class DeleteUserCoreFormProcess extends Form
     /**
      * Send an email to the site administrator saying the reason why a user wanted to delete his account from the site.
      *
-     * @return void
+     * @return integer
      */
     protected function sendWarnEmail()
     {
-        $sUsername = $this->session->get($this->sSessPrefix.'_username');
         $sMembershipType = ($this->registry->module == 'affiliate') ? t('Affiliate') : t('Member');
 
         $this->view->membership = t('Type of Membership: %0%.', $sMembershipType);
         $this->view->message = nl2br($this->httpRequest->post('message'));
         $this->view->why_delete = t('Reason why the user wanted to leave: %0%', $this->httpRequest->post('why_delete'));
         $this->view->footer_title = t('User Information');
-        $this->view->email = t('Email: %0%', $this->session->get($this->sSessPrefix.'_email'));
-        $this->view->username = t('Username: %0%', $sUsername);
+        $this->view->email = t('Email: %0%', $this->sEmail);
+        $this->view->username = t('Username: %0%', $this->sUsername);
         $this->view->first_name = t('First Name: %0%', $this->session->get($this->sSessPrefix.'_first_name'));
         $this->view->sex = t('Sex: %0%', $this->session->get($this->sSessPrefix.'_sex'));
         $this->view->ip = t('User IP: %0%', $this->session->get($this->sSessPrefix.'_ip'));
@@ -65,12 +68,21 @@ class DeleteUserCoreFormProcess extends Form
          * Set the details for sending the email, then send it.
          */
         $aInfo = [
-            'subject' => t('Unregister %0% - User: %1%', $sMembershipName, $sUsername)
+            'subject' => t('Unregister %0% - User: %1%', $sMembershipName, $this->sUsername)
         ];
-        (new Mail)->send($aInfo, $sMessageHtml);
 
+        return (new Mail)->send($aInfo, $sMessageHtml);
+    }
+
+    /**
+     * Remove the user/affiliate account.
+     *
+     * @return void
+     */
+    protected function removeAccount()
+    {
         $oUserModel = ($this->registry->module == 'user') ? new UserCore : new AffiliateCore;
-        $oUserModel->delete($this->session->get($this->sSessPrefix.'_id'), $sUsername);
+        $oUserModel->delete($this->session->get($this->sSessPrefix.'_id'), $this->sUsername);
         unset($oUserModel);
     }
 

@@ -6,7 +6,9 @@
     <p><input type="checkbox" name="all_action" /></p>
 
     <div class="mb_nav">
-      <div class="user">{lang 'Author'}</div> <div class="subject">{lang 'Subject'}</div> <div class="message">{lang 'Message'}</div> <div class="date">{lang 'Date'}</div> <div class="action">{lang 'Action'}</div>
+      <div class="user">{lang 'Author'}</div>
+      <div class="subject">{lang 'Subject'}</div>
+      <div class="message">{lang 'Message'}</div>
     </div>
 
     {* Set Variables *}
@@ -41,8 +43,11 @@
         {/if}
             <div class="subject">{subject}</div>
             <div class="message">{% substr($message,0,50) %}</div>
-          </div>
-        <div class="date">{% $dateTime->get($msg->sendDate)->dateTime() %}</div>
+        {if $is_admin}
+          </a>
+        {/if}
+        </div>
+        <div class="date">{% Framework\Date\Various::textTimeStamp($msg->sendDate) %}</div>
         <div class="action"><a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | <a href="javascript:void(0)" onclick="mail('{move_to}',{% $msg->messageId %},'{csrf_token}')">{label_txt}</a>
         {if $is_trash} | <a href="javascript:void(0)" onclick="mail('restor',{% $msg->messageId %},'{csrf_token}')">{lang 'Restor'}</a>{/if}</div>
 

@@ -26,8 +26,6 @@ class MainController extends Controller
         $this->_iProfileId = $this->session->get('member_id');
         $this->_bAdminLogged = (AdminCore::auth() && !UserCore::auth());
 
-        $this->view->dateTime = $this->dateTime;
-
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
         $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
 

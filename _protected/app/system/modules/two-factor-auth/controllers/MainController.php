@@ -73,7 +73,7 @@ class MainController extends Controller
     /**
      * Download the backup 2FA code (text file).
      *
-     * @param string The 2FA secret.
+     * @param string $sSecret The 2FA secret.
      * @return void
      */
     protected function download($sSecret)

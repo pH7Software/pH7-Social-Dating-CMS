@@ -25,7 +25,7 @@ class CountryController extends Controller
             // Set parameters Google Map
             $oMap = new Map;
             $oMap->setCenter($this->registry->country . ' ' . $this->registry->city);
-            $oMap->setSize('100%', '690px');
+            $oMap->setSize('100%', '520px');
             $oMap->setDivId('country_map');
             $oMap->setZoom(12);
             $oMap->addMarkerByAddress($this->registry->country . ' ' . $this->registry->city, t('Meet new people here!'));

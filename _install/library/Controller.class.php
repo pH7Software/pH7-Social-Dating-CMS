@@ -31,7 +31,7 @@ abstract class Controller implements IController
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.',
     SOFTWARE_VERSION_NAME = 'p[H]', // 1.0 and 1.1 branches were "pOH", 1.2 branch was "pOW" and 1.3, 1.4 is "p[H]"
-    SOFTWARE_VERSION = '1.4.0',
+    SOFTWARE_VERSION = '1.4.1',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
@@ -42,8 +42,9 @@ abstract class Controller implements IController
     {
         global $LANG;
 
-        // PHP session initialization
-        if (empty($_SESSION))
+        // Initialize PHP session
+        // First off, check if the session already exists thanks "session_status()" PHP >= 5.4 func
+        if (session_status() !== PHP_SESSION_ACTIVE)
             @session_start();
 
         // Verify and correct the time zone if necessary

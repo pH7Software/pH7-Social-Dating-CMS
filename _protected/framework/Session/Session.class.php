@@ -38,8 +38,8 @@ class Session
             session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], (substr(PH7_URL_PROT, 0, 5) === 'https'), true);
         }
 
-        // Session initialization
-        if ('' === session_id()) // Yoda condition
+        // Initialize PHP session
+        if (session_status() !== PHP_SESSION_ACTIVE)
             @session_start();
     }
 
@@ -90,7 +90,7 @@ class Session
         }
         else
         {
-            $bExists = (!empty($_SESSION[Config::getInstance()->values['session']['prefix'] . $mName])) ? true : false;
+            $bExists = !empty($_SESSION[Config::getInstance()->values['session']['prefix'] . $mName]);
         }
 
         return $bExists;
@@ -124,7 +124,9 @@ class Session
      */
     public function regenerateId()
     {
-        session_regenerate_id(true);
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_regenerate_id(true);
+        }
     }
 
     /**

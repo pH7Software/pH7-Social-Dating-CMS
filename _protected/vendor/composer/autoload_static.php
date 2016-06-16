@@ -11,39 +11,39 @@ class ComposerStaticInitPH7
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'S' =>
         array (
             'Stripe\\' => 7,
         ),
-        'M' => 
+        'M' =>
         array (
             'MaxMind\\' => 8,
         ),
-        'G' => 
+        'G' =>
         array (
             'GeoIp2\\' => 7,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Stripe\\' => 
+        'Stripe\\' =>
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
-        'MaxMind\\' => 
+        'MaxMind\\' =>
         array (
             0 => __DIR__ . '/..' . '/maxmind/web-service-common/src',
         ),
-        'GeoIp2\\' => 
+        'GeoIp2\\' =>
         array (
             0 => __DIR__ . '/..' . '/geoip2/geoip2/src',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'M' => 
+        'M' =>
         array (
-            'MaxMind' => 
+            'MaxMind' =>
             array (
                 0 => __DIR__ . '/..' . '/maxmind-db/reader/src',
             ),

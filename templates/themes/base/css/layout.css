@@ -154,7 +154,7 @@
     right: -3px;
 }
 .warning_block {
-    background-color: #f17a7a; width:340px; color:#fff; margin-top:1px; margin-bottom:1px; padding:3px; text-align:center; border-radius:3px;
+    background-color: #f17a7a; max-width:340px; color:#fff; margin-top:1px; margin-bottom:1px; padding:3px; text-align:center; border-radius:3px;
 }
 .warning_block p {
     font-size: .8em;

@@ -97,7 +97,7 @@ class Http extends \PH7\Framework\Http\Http
         {
             if (!$this->validate($this->_aGet, $mKey, $sParam)) return false;
 
-            $bExists = !empty($this->_aGet[$mKey]);
+            $bExists = isset($this->_aGet[$mKey]);
         }
 
         return $bExists;
@@ -126,7 +126,7 @@ class Http extends \PH7\Framework\Http\Http
         {
             if (!$this->validate($this->_aPost, $mKey, $sParam)) return false;
 
-            $bExists = !empty($this->_aPost[$mKey]);
+            $bExists = isset($this->_aPost[$mKey]);
         }
 
         return $bExists;

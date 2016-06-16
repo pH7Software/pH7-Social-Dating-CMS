@@ -206,7 +206,7 @@ class Http
      * Check if HTTP SSL is used.
      *
      * @static
-     * @internal In this method, are some yoda conditions.
+     * @internal In this method, there are some yoda conditions.
      * @return boolean
      */
     public static function isSsl()

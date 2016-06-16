@@ -32,6 +32,18 @@ if (!ini_get('date.timezone'))
 
 try
 {
+    // Starting zlib-compressed output
+    /*
+       This "zlib output compression" compressthe pages.
+       This allows you to save your bandwidth and faster download of your pages.
+       WARNING: this function consumes CPU resources on your server.
+       So you can if you want to remove this function.
+     */
+    //ini_set('zlib.output_compression', 2048);
+    //ini_set('zlib.output_compression_level', 6);
+
+    ob_start();
+
     // Loading Framework Classes
     require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
     Framework\Loader\Autoloader::getInstance()->init();
@@ -73,18 +85,6 @@ try
     // Enable client browser cache
     (new Browser)->cache();
 
-    // Starting zlib-compressed output
-    /*
-       This "zlib output compression" compressthe pages.
-       This allows you to save your bandwidth and faster download of your pages.
-       WARNING: this function consumes CPU resources on your server.
-       So you can if you want to remove this function.
-     */
-    //ini_set('zlib.output_compression', 2048);
-    //ini_set('zlib.output_compression_level', 6);
-
-    ob_start();
-
     new Server; // Start Server
 
     Registry::getInstance()->start_time = microtime(true);
@@ -114,7 +114,7 @@ catch (\Exception $oE)
 }
 finally
 {
-    if ('' !== session_id()) {
+    if (session_status() === PHP_SESSION_ACTIVE) {
         session_write_close();
     }
     ob_end_flush();
