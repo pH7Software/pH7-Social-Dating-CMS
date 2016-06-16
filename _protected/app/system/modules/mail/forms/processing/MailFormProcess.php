@@ -77,6 +77,14 @@ class MailFormProcess extends Form
         }
     }
 
+    /**
+     * Send notification email.
+     *
+     * @param integer $iRecipientId
+     * @param integer $iMsgId
+     * @param UserCoreModel $oUserModel
+     * @return integer Number of recipients who were accepted for delivery.
+     */
     protected function sendMail($iRecipientId, $iMsgId, UserCoreModel $oUserModel)
     {
         $this->view->content = t('Hello %0%!', $this->httpRequest->post('recipient')) . '<br />' .
@@ -92,7 +100,7 @@ class MailFormProcess extends Form
             'subject' => t('New private message from %0% on %site_name%', $this->session->get('member_first_name'))
         ];
 
-        (new Mail)->send($aInfo, $sMessageHtml);
+        return (new Mail)->send($aInfo, $sMessageHtml);
     }
 
 }
