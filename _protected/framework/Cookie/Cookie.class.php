@@ -56,7 +56,7 @@ class Cookie
     public function get($sName, $bEscape = true)
     {
         $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $sName;
-        return (!empty($_COOKIE[$sCookieName]) ? ($bEscape ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
+        return (isset($_COOKIE[$sCookieName]) ? ($bEscape ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
     }
 
     /**
@@ -75,7 +75,7 @@ class Cookie
         }
         else
         {
-            $bExists = !empty($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName]);
+            $bExists = isset($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName]);
         }
 
         return $bExists;
