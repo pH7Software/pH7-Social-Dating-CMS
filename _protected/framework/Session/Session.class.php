@@ -66,7 +66,7 @@ class Session
      * @desc Get Session.
      * @param string $sName Name of the session.
      * @param boolean $bEscape Default TRUE
-     * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session does not exist.
+     * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */
     public function get($sName, $bEscape = true)
     {
