@@ -152,8 +152,8 @@ CREATE TABLE IF NOT EXISTS pH7_MembersNotifications (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- GHOST User. Do not remove ghost default member!
-INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, sex, matchSex, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
-(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '', '', '00.000.00.00', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
+INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
+(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '00.000.00.00', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
 INSERT INTO pH7_MembersInfo (profileId, description, address, street, city, state, zipCode, country) VALUES
 (1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Street', 'Ghost Town', 'Ghost State', '000000', 'US');
 -- Privacy settings
@@ -976,7 +976,7 @@ CREATE TABLE IF NOT EXISTS pH7_Report (
 CREATE TABLE IF NOT EXISTS pH7_Settings (
   `name` varchar(64) NOT NULL DEFAULT '',
   value varchar(150) NOT NULL,
-  `desc` varchar(100) NOT NULL DEFAULT '',
+  `desc` varchar(120) NOT NULL DEFAULT '',
   `group` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
