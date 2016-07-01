@@ -956,7 +956,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.2.7', 1);
+('pH7CMS', 'SQL System Schema', '1.2.8', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
