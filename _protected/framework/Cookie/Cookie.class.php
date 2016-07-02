@@ -51,12 +51,12 @@ class Cookie
      * @desc Get Cookie.
      * @param string $sName Name of the cookie.
      * @param boolean $bEscape Default TRUE
-     * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie does not exist.
+     * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
      */
     public function get($sName, $bEscape = true)
     {
         $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $sName;
-        return (!empty($_COOKIE[$sCookieName]) ? ($bEscape ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
+        return (isset($_COOKIE[$sCookieName]) ? ($bEscape ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
     }
 
     /**
@@ -75,7 +75,7 @@ class Cookie
         }
         else
         {
-            $bExists = !empty($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName]);
+            $bExists = isset($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName]);
         }
 
         return $bExists;

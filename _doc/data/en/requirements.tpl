@@ -58,6 +58,7 @@
            <ul>
                 <li>Version - 5.0.15.</li>
                 <li>InnoDB table support.</li>
+                <li>MySQL Strict Mode Disabled</li>
            </ul>
    <h3>Recommended:</h3>
            <ul>

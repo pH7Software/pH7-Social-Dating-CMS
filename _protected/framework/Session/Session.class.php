@@ -66,12 +66,12 @@ class Session
      * @desc Get Session.
      * @param string $sName Name of the session.
      * @param boolean $bEscape Default TRUE
-     * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session does not exist.
+     * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */
     public function get($sName, $bEscape = true)
     {
         $sSessionName = Config::getInstance()->values['session']['prefix'] . $sName;
-        return (!empty($_SESSION[$sSessionName]) ? ($bEscape ? escape($_SESSION[$sSessionName]) : $_SESSION[$sSessionName]) : '');
+        return (isset($_SESSION[$sSessionName]) ? ($bEscape ? escape($_SESSION[$sSessionName]) : $_SESSION[$sSessionName]) : '');
     }
 
     /**
@@ -90,7 +90,7 @@ class Session
         }
         else
         {
-            $bExists = !empty($_SESSION[Config::getInstance()->values['session']['prefix'] . $mName]);
+            $bExists = isset($_SESSION[Config::getInstance()->values['session']['prefix'] . $mName]);
         }
 
         return $bExists;

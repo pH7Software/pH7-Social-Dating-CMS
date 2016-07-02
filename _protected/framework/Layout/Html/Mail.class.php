@@ -89,14 +89,6 @@ class Mail
     }
 
     /**
-     * Provide a "Powered By" link for the email bottom.
-     */
-    final public function link()
-    {
-        (new Design)->link(true, true, true, true, true);
-    }
-
-    /**
      * @param string $sEmail The email address from a user to indicate in the privacy policy against spam.
      * @return string HTML Contents.
      */
@@ -121,6 +113,14 @@ class Mail
     public function footer()
     {
         return '</div></body></html>';
+    }
+
+    /**
+     * Provide a "Powered By" link for the email footer.
+     */
+    final protected function link()
+    {
+        (new Design)->link(true, true, true, true, true);
     }
 
 }

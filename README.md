@@ -106,7 +106,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 
 * **Application Server** PHP 5.5.0 or higher (Recommended Version: **PHP 7.0.4** or higher).
 
-* **Database** MySQL/MariaDB 5.0.15 or higher.
+* **Database** MySQL/MariaDB 5.0.15 or higher with Strict Mode disabled.
 
 * **Operating System** Linux/Unix (Red Hat, CentOS, Debian, FreeBSD, Mandrake, Mac OS, etc.), Windows.
 

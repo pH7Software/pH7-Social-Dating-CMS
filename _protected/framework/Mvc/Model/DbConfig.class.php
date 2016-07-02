@@ -139,12 +139,12 @@ final class DbConfig
     }
 
     /**
-     * @param string '0' = Disable | '1' = Enable. (need to be string because in DB it is an "enum").
+     * @param string $sStatus '0' = Disable | '1' = Enable. (need to be string because in DB it is an "enum").
      * @return void
      */
     public static function setSocialWidgets($sStatus)
     {
-        $sStatus = (string) $sStatus; // Cast into string to be sure as in DB it's an "enum" type
+        $sStatus = (string) $sStatus; // Cast into string to be sure it will work as in DB it's an "enum" type
 
         self::setSetting($sStatus, 'socialMediaWidgets');
 
@@ -157,7 +157,7 @@ final class DbConfig
     }
 
     /**
-     * @param string The constant 'DbConfig::ENABLE_SITE' or 'DbConfig::MAINTENANCE_SITE'
+     * @param string $sStatus The constant 'DbConfig::ENABLE_SITE' or 'DbConfig::MAINTENANCE_SITE'
      * @return void
      */
     public static function setSiteMode($sStatus)

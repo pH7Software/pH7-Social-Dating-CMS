@@ -200,7 +200,7 @@ class Http extends \PH7\Framework\Http\Http
     {
         //if ($this->_sMethod !== self::METHOD_GET) throw new Exception('GET');
 
-        if (empty($this->_aGet[$sKey]))
+        if (!isset($this->_aGet[$sKey]))
             return '';
 
         // Clear the CSRF token in the request variable
@@ -231,7 +231,7 @@ class Http extends \PH7\Framework\Http\Http
     {
         if ($this->_sMethod !== self::METHOD_POST) throw new Exception('POST');
 
-        if (empty($this->_aPost[$sKey]))
+        if (!isset($this->_aPost[$sKey]))
             return '';
 
         if ($sParam === self::NO_CLEAN)
