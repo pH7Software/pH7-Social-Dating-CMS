@@ -34,7 +34,7 @@
           <li><a href="{{ $design->url('page','main','faq') }}" title="{lang 'FAQ'}">{lang 'FAQ'}</a></li>
           <li><a href="{{ $design->url('page','main','terms') }}" title="{lang 'Terms of Use'}" data-load="ajax">{lang 'Terms of Use'}</a></li>
           <li><a href="{{ $design->url('page','main','privacy') }}" title="{lang 'Privacy'}" data-load="ajax">{lang 'Privacy'}</a></li>
-          <li><a href="{{ $design->url('page','main','imprint') }}" title="{lang 'Imprint'}" data-load="ajax">{lang 'Imprint'}</a></li>
+          <li><a href="{{ $design->url('page','main','legalnotice') }}" title="{lang 'Legal Notice'}" data-load="ajax">{lang 'Legal Notice'}</a></li>
           <li class="dm_self"><span class="dropdown_item">{lang 'Help'}</span><i></i></li>
         </ul>
       </div> |

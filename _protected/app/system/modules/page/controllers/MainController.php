@@ -91,11 +91,11 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function imprint()
+    public function legalNotice()
     {
-        $this->sTitle = t('Imprint');
+        $this->sTitle = t('Legal Notice');
         $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Imprint - %site_name%');
+        $this->view->meta_description = t('Legal Notice - %site_name%');
         $this->view->h1_title = $this->sTitle;
         $this->output();
     }

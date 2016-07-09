@@ -97,7 +97,7 @@
       <route url="legal/tos" path="system/modules" module="page" controller="main" action="terms" />
       <route url="legal/affiliate/tos" path="system/modules" module="page" controller="main" action="affiliateterms" />
       <route url="legal/privacy" path="system/modules" module="page" controller="main" action="privacy" />
-      <route url="legal/imprint" path="system/modules" module="page" controller="main" action="imprint" />
+      <route url="legal/legal-notice" path="system/modules" module="page" controller="main" action="legalnotice" />
       <route url="partners" path="system/modules" module="page" controller="main" action="partner" />
       <route url="links" path="system/modules" module="page" controller="main" action="link" />
       <route url="jobs" path="system/modules" module="page" controller="main" action="job" />
