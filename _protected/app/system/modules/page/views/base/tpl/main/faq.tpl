@@ -37,7 +37,7 @@
   <div class="faq"><a href="#divShow_6">{lang 'By who this Web App has been created?'}</a></div>
 
   <div class="hidden" id="divShow_6">
-    {lang}This whole social dating website has been developed by <a href="https://github.com/pH-7
-">Pierre-Henry Soria</a>. Now he is a Senior Software Engineer and continue to update his "baby". <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS">pH7CMS</a>, his first "big" project he made when he was still a student.{/lang}
+    This whole social dating website has been developed by <a href="https://github.com/pH-7
+">Pierre-Henry Soria</a>. Now he is a Senior Software Engineer and continues to update and develop his "<abbr title='pH7CMS; Formerly known as "pH7 Social Dating CMS"'>baby</abbr>" during his free time. <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS">pH7CMS</a>, his first "big" project he made when he was still a student.
   </div>
 </div>
