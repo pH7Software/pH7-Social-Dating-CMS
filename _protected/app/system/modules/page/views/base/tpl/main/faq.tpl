@@ -38,6 +38,6 @@
 
   <div class="hidden" id="divShow_6">
     This whole social dating website has been developed by <a href="https://github.com/pH-7
-">Pierre-Henry Soria</a>. Now he is a Senior Software Engineer and continues to update and develop his "<abbr title='pH7CMS; Formerly known as "pH7 Social Dating CMS"'>baby</abbr>" during his free time. <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS">pH7CMS</a>, his first "big" project he made when he was still a student.
+" title="The author of pH7CMS software">Pierre-Henry Soria</a>. Now he is a Senior Software Engineer and continues to update and develop his "<abbr title='pH7CMS; Formerly known as "pH7 Social Dating CMS"'>baby</abbr>" during his free time. <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS" title="pH7CMS is a Free and Open Source Social Dating App/Site Builder">pH7CMS</a>, his first "big" project he made when he was still a student.
   </div>
 </div>
