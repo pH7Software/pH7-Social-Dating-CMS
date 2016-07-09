@@ -34,4 +34,10 @@
     {lang}If someone is bothering or harassing you, blocking them is usually the best solution. Please report it via our contact form with the url of the profile of the person and the explanation of what the person has done wrong.{/lang}
   </div>
 
+  <div class="faq"><a href="#divShow_6">{lang 'By who this Web App has been created?'}</a></div>
+
+  <div class="hidden" id="divShow_6">
+    {lang}This whole social dating website has been developed by <a href="https://github.com/pH-7
+">Pierre-Henry Soria</a>. Now he is a Senior Software Engineer and continue to update his "baby". <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS">pH7CMS</a>, his first "big" project he made when he was still a student.{/lang}
+  </div>
 </div>
