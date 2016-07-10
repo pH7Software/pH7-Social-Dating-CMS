@@ -54,7 +54,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Login method for Members and Affiliate, but not for Admins, since another method PH7\AdminModel::adminLogin() there is even more secure.
      *
-     * @param string $sEmail
+     * @param string $sEmail Not case sensitive since on lot of mobile devices (such as iPhone), the first letter is uppercase.
      * @param string $sPassword
      * @param string $sTable Default 'Members'
      * @return mixed (boolean "true" or string "message")
@@ -72,7 +72,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sDbEmail = (!empty($oRow->email)) ? $oRow->email : '';
         $sDbPassword = (!empty($oRow->password)) ? $oRow->password : '';
 
-        if ($sEmail !== $sDbEmail)
+        if (strtolower($sEmail) !== strtolower($sDbEmail))
             return 'email_does_not_exist';
         elseif (!Security::checkPwd($sPassword, $sDbPassword))
             return 'password_does_not_exist';
