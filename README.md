@@ -8,7 +8,7 @@
 
 **pH7 Social Dating CMS** is a **Professional** & **Open Source** Social Dating CMS, fully responsive design, low-resource-intensive, powerful and very secure.
 
-pH7CMS is included with 30 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
+pH7CMS is included with 31 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
 
 
 ![Professional PHP Social Networking Dating CMS](https://cloud.githubusercontent.com/assets/1325411/14080218/84d2f9b8-f4fb-11e5-90e2-36c139f0eb66.png)
@@ -20,7 +20,7 @@ pH7CMS is included with 30 modules and based on its homemade framework (pH7Frame
 
 It is designed with the **KISS** principle in mind, and the all source code can be read and understood in minutes. For a better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (not duplicate code).
 
-This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 30 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
+This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 31 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
 To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best dating service** or **social networking** website on the World Wide Web!
 
