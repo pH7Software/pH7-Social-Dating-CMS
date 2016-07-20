@@ -4,7 +4,7 @@
            <h3>Minimum:</h3>
             <ul>
                 <li>Operating System - Linux/Unix (Red Hat, CentOS, Debian, FreeBSD, Mandrake, Mac OS, etc.), Windows.</li>
-                <li>Web Server - Apache with mod_php or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work you should change some pieces of code and change the url rewriting to make it work).</li>
+                <li>Web Server - Apache with mod_php enabled or with PHP in CGI, FastCGI mode (nginx, LiteSpeed and IIS should also work you should change some pieces of code and change the url rewriting to make it work).</li>
                 <li>URL rewriting extension module - Apache, nginx, LiteSpeed, IIS (for Web.config, you have a <a href="http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/">good tutorial here</a>).</li>
                 <li><a href="http://ffmpeg.org">FFmpeg</a>.</li>
                 <li>Minimum Web Space - 2.0 GB.</li>
@@ -14,6 +14,7 @@
             <h3>Recommended:</h3>
              <ul>
                <li>JRE (Java Runtime Environment) - 1.6 or higher (For compressing static files. This parameter is off by default and uses our compressor house, but you can install Java, it would be nice to activate this setting).</li>
+               <li>mod_security/mod_security2 disabled - pH7CMS may not work correctly if enabled so we advise to disable it for your domain (just ask your Web host or do it through cPanel).</li>
              </ul>
 
 
@@ -58,7 +59,6 @@
            <ul>
                 <li>Version - 5.0.15.</li>
                 <li>InnoDB table support.</li>
-                <li>MySQL Strict Mode Disabled</li>
            </ul>
    <h3>Recommended:</h3>
            <ul>
