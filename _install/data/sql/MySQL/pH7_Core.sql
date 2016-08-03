@@ -687,7 +687,7 @@ CREATE TABLE IF NOT EXISTS pH7_LogError (
   logId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
   logError longtext,
   PRIMARY KEY (logId),
-  FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB
+  FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB in MySQL < 5.6.4, so set MyISAM engine
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
@@ -976,7 +976,7 @@ CREATE TABLE IF NOT EXISTS pH7_Report (
 CREATE TABLE IF NOT EXISTS pH7_Settings (
   `name` varchar(64) NOT NULL DEFAULT '',
   value varchar(150) NOT NULL,
-  `desc` varchar(120) NOT NULL DEFAULT '',
+  `desc` varchar(120) NOT NULL DEFAULT '' COMMENT 'Informative desc about the setting',
   `group` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
