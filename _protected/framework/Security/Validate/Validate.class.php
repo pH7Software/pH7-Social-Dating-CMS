@@ -17,6 +17,7 @@ use PH7\Framework\Str\Str, PH7\Framework\Security\Ban\Ban;
 
 class Validate
 {
+    const MAX_INT_NUMBER = '999999999999';
 
     private $_oStr;
 
@@ -122,7 +123,7 @@ class Validate
      * @param integer $iMax Default 999999999999
      * @return boolean
      */
-    public function int($iInt, $iMin = 0, $iMax = 999999999999)
+    public function int($iInt, $iMin = 0, $iMax = self::MAX_INT_NUMBER)
     {
         $iInt = filter_var($iInt, FILTER_SANITIZE_NUMBER_INT);
         return (filter_var($iInt, FILTER_VALIDATE_INT, static::getFilterOption($iMin, $iMax)) !== false);
@@ -159,7 +160,7 @@ class Validate
      * @param mixed (float | integer) $mMax Default 999999999999
      * @return boolean
      */
-    public function float($fFloat, $mMin = 0, $mMax = 999999999999)
+    public function float($fFloat, $mMin = 0, $mMax = self::MAX_INT_NUMBER)
     {
         $fFloat = filter_var($fFloat, FILTER_SANITIZE_NUMBER_FLOAT);
         return (filter_var($fFloat, FILTER_VALIDATE_FLOAT, static::getFilterOption($mMin, $mMax)) !== false);
