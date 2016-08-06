@@ -17,7 +17,7 @@ use PH7\Framework\Str\Str, PH7\Framework\Security\Ban\Ban;
 
 class Validate
 {
-    const MAX_INT_NUMBER = '999999999999';
+    const MAX_INT_NUMBER = 999999999999;
 
     private $_oStr;
 
