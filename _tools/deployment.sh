@@ -27,6 +27,9 @@ function run() {
             eval "$exec 's/\s+$/\n/'"
             eval "$exec 's/\t/    /g'"
 
+            # Update the libraries to the latest version
+            # php ./composer.phar update
+
             # Optimize Composer
             php ./composer.phar dumpautoload -o
 
