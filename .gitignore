@@ -15,7 +15,6 @@ _protected/data/log/pH7log/*
 _protected/data/backup/*
 _protected/data/cache/*
 _protected/vendor/cache/*
-composer.lock
 composer.phar
 *.log
 *.tmp
@@ -36,6 +35,9 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
-# Mac OS 
+# Mac OS
 .DS_Store*
 ._*
+
+# PHPStorm IDE folder.
+/.idea
