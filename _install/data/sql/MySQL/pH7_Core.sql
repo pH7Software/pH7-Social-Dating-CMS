@@ -1031,6 +1031,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('pictureManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('videoManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('webcamPictureManualApproval', 0, '0 to disable or 1 to enable', 'moderation'),
+('nudityFilter', 0, '1 = enable | 0 = disable', 'moderation'),
 ('defaultVideo', @sDefaultVideoUrl, 'Video by default if no video is found', 'video'),
 ('autoplayVideo', 1, '1 = Autoplay is enabled, 0 = Autoplay is disabled', 'video'),
 ('returnEmail', @sNoReplyEmail, 'Generally noreply@yoursite.com', 'email'),
