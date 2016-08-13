@@ -18,7 +18,6 @@ PH7\Framework\Url\Header;
 
 class AlbumFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -41,7 +40,14 @@ class AlbumFormProcess extends Form
 
             $sFileName = Various::genRnd($oPicture->getFileName(), 1) . '-thumb.' . $oPicture->getExt();
 
-            (new VideoModel)->addAlbum($this->session->get('member_id'), $this->httpRequest->post('name'), $this->httpRequest->post('description'), $sFileName, $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $iApproved);
+            (new VideoModel)->addAlbum(
+                $this->session->get('member_id'),
+                $this->httpRequest->post('name'),
+                $this->httpRequest->post('description'),
+                $sFileName,
+                $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
+                $iApproved
+            );
             $iLastAlbumId = (int) Db::getInstance()->lastInsertId();
 
             $oPicture->square(200);
@@ -57,11 +63,14 @@ class AlbumFormProcess extends Form
 
             $oPicture->save($sPath . $sFileName);
 
-            /* Clean VideoModel Cache */
-            (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+            $this->clearCache();
 
             Header::redirect(Uri::get('video', 'main', 'addvideo', $iLastAlbumId));
         }
     }
 
+    private function clearCache()
+    {
+        (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+    }
 }

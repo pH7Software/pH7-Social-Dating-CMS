@@ -25,7 +25,6 @@ PH7\Framework\Video as V;
 
 class VideoFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -146,10 +145,19 @@ class VideoFormProcess extends Form
 
         $iApproved = (DbConfig::getSetting('videoManualApproval') == 0) ? '1' : '0';
 
-        (new VideoModel)->addVideo($this->session->get('member_id'), $iAlbumId, $sTitle, $sDescription, $sFile, $sThumb, $sDuration, $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $iApproved);
+        (new VideoModel)->addVideo(
+            $this->session->get('member_id'),
+            $iAlbumId,
+            $sTitle,
+            $sDescription,
+            $sFile,
+            $sThumb,
+            $sDuration,
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
+            $iApproved
+        );
 
-        /* Clean VideoModel Cache */
-        (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+        $this->clearCache();
 
         $sModerationText = t('Your video has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
         $sText =  t('Your video has been added successfully!');
@@ -157,4 +165,8 @@ class VideoFormProcess extends Form
         Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
     }
 
+    private function clearCache()
+    {
+        (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+    }
 }
