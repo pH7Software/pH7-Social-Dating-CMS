@@ -55,6 +55,7 @@ class SettingFormProcess extends Form
         'bg_profile_manual_approval' => 'bgProfileManualApproval',
         'note_manual_approval' => 'noteManualApproval',
         'picture_manual_approval' => 'pictureManualApproval',
+        'nudity_filter' => 'nudityFilter',
         'video_manual_approval' => 'videoManualApproval',
         'webcam_picture_manual_approval' => 'webcamPictureManualApproval',
 
