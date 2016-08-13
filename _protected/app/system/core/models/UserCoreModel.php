@@ -52,7 +52,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
-     * Login method for Members and Affiliate, but not for Admins, since another method PH7\AdminModel::adminLogin() there is even more secure.
+     * Login method for Members and Affiliate, but not for Admins since it has another method PH7\AdminModel::adminLogin() even more secure.
      *
      * @param string $sEmail Not case sensitive since on lot of mobile devices (such as iPhone), the first letter is uppercase.
      * @param string $sPassword
