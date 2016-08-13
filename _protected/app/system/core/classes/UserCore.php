@@ -16,6 +16,7 @@ PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Ip\Ip,
 PH7\Framework\File\File,
 PH7\Framework\Util\Various,
+PH7\Framework\Security\Moderation\Filter,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
@@ -133,6 +134,11 @@ class UserCore
         $sFile5 = $sFileName . '-150.' . $oAvatar5->getExt();
         $sFile6 = $sFileName . '-200.' . $oAvatar6->getExt();
         $sFile7 = $sFileName . '-400.' . $oAvatar7->getExt();
+
+        // The avatar seems to be suitable for adults only, so set for moderation
+        if (Filter::isNudity($sFile1)) {
+            $iApproved = 0;
+        }
 
         // Add the avatar
         (new UserCoreModel)->setAvatar($iProfileId, $sFile1, $iApproved);
