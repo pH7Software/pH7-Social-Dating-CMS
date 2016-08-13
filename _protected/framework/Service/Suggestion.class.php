@@ -23,7 +23,7 @@ class Suggestion
     private static $_sFile;
 
     /**
-     * Private constructor to prevent instantiation of class since it is a private class.
+     * Private constructor to prevent instantiation since it's a static class.
      *
      * @access private
      */
