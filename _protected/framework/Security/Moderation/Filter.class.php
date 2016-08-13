@@ -11,8 +11,13 @@
 namespace PH7\Framework\Security\Moderation;
 defined('PH7') or exit('Restricted access');
 
-class NudityFilter
+use PH7\Framework\File\Import;
+
+class Filter
 {
+  /*
+   * @return bool TRUE if it is a nude photo, FALSE otherwise.
+   */
   public static function isNudity($sPath)
   {
       self::importLibrary();
