@@ -16,7 +16,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminBlogFormProcess extends Form
 {
-
     private $sMsg;
 
     public function __construct()
@@ -26,12 +25,9 @@ class AdminBlogFormProcess extends Form
         $oBlog = new Blog;
         $oBlogModel = new BlogModel;
 
-        if (!$oBlog->checkPostId($this->httpRequest->post('post_id')))
-        {
+        if (!$oBlog->checkPostId($this->httpRequest->post('post_id'))) {
             \PFBC\Form::setError('form_blog', t('The ID of the article is invalid or incorrect.'));
-        }
-        else
-        {
+        } else {
             $aData = [
                 'post_id' => $this->httpRequest->post('post_id'),
                 'lang_id' => $this->httpRequest->post('lang_id'),
@@ -49,12 +45,9 @@ class AdminBlogFormProcess extends Form
                 'created_date' => $this->dateTime->get()->dateTime('Y-m-d H:i:s')
             ];
 
-            if (!$oBlogModel->addPost($aData))
-            {
+            if (!$oBlogModel->addPost($aData)) {
                 $this->sMsg = t('An error occurred while adding the article.');
-            }
-            else
-            {
+            } else {
                 /*** Set the categorie(s) ***/
                 /**
                  * WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Http::post() method
@@ -64,14 +57,11 @@ class AdminBlogFormProcess extends Form
                 foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
                     $oBlogModel->addCategory($iCategoryId, $iBlogId);
 
-
                 /*** Set the thumbnail if there's one ***/
                 $oPost = $oBlogModel->readPost($aData['post_id']);
                 $oBlog->setThumb($oPost, $this->file);
 
-
-                /* Clean BlogModel Cache */
-                (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
+                $this->clearCache();
 
                 $this->sMsg = t('Post created successfully!');
             }
@@ -80,4 +70,8 @@ class AdminBlogFormProcess extends Form
         }
     }
 
+    private function clearCache()
+    {
+        (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
+    }
 }

@@ -17,7 +17,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class NoteFormProcess extends Form
 {
-
     private $sMsg;
 
     public function __construct()
@@ -30,16 +29,11 @@ class NoteFormProcess extends Form
         $iProfileId = $this->session->get('member_id');
         $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendNote');
 
-        if(!$oNote->checkPostId($this->httpRequest->post('post_id'), $iProfileId))
-        {
+        if (!$oNote->checkPostId($this->httpRequest->post('post_id'), $iProfileId)) {
             \PFBC\Form::setError('form_note', t('The ID of the article is invalid or incorrect.'));
-        }
-        elseif(!$oNoteModel->checkWaitSend($this->session->get('member_id'), $iTimeDelay, $sCurrentTime))
-        {
+        } elseif (!$oNoteModel->checkWaitSend($this->session->get('member_id'), $iTimeDelay, $sCurrentTime)) {
             \PFBC\Form::setError('form_note', Form::waitWriteMsg($iTimeDelay));
-        }
-        else
-        {
+        } else {
             $iApproved = (DbConfig::getSetting('noteManualApproval') == 0) ? '1' : '0';
 
             $aData = [
@@ -61,35 +55,28 @@ class NoteFormProcess extends Form
                 'approved' =>  $iApproved
             ];
 
-            if(!$oNoteModel->addPost($aData))
-            {
+            if (!$oNoteModel->addPost($aData)) {
                 $this->sMsg = t('An error occurred while adding the article.');
-            }
-            else
-            {
+            } else {
                 /*** Set the categorie(s) ***/
                 /**
                  * WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Http::post() method
                  * removes the special tags and damages the SQL queries for entry into the database.
                  */
-                if(count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > 3)
-                {
+                if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > 3) {
                     \PFBC\Form::setError('form_note', t('You can not select more than 3 categories.'));
                     return; // Stop execution of the method.
                 }
 
                 $iNoteId = Db::getInstance()->lastInsertId();
-                foreach($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
+                foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
                     $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
-
 
                 /*** Set the thumbnail if there's one ***/
                 $oPost = $oNoteModel->readPost($aData['post_id'], $iProfileId, null);
                 $oNote->setThumb($oPost, $oNoteModel, $this->file);
 
-
-                /* Clean NoteModel Cache */
-                (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+                $this->clearCache();
 
                 $this->sMsg = ($iApproved == '0') ? t('Your Note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post created successfully!');
             }
@@ -98,5 +85,9 @@ class NoteFormProcess extends Form
         }
     }
 
+    private function clearCache()
+    {
+        (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+    }
 }
 

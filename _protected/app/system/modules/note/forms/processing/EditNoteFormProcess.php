@@ -16,7 +16,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class EditNoteFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -31,74 +30,68 @@ class EditNoteFormProcess extends Form
 
         /*** Updating the ID of the post if it has changed ***/
         $sPostId = $this->httpRequest->post('post_id');
-        if(!$this->str->equals($sPostId, $oPost->postId))
-        {
-            if($oNote->checkPostId($sPostId, $iProfileId))
-            {
+        if (!$this->str->equals($sPostId, $oPost->postId)) {
+            if ($oNote->checkPostId($sPostId, $iProfileId)) {
                 $oNoteModel->updatePost('postId', $sPostId, $iNoteId, $iProfileId);
                 /* Clean NoteModel Cache */
                 (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
-            }
-            else
-            {
+            } else {
                 \PFBC\Form::setError('form_note', t('ID Article must be unique!'));
             }
         }
 
         // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Request\Http::post() method removes the special tags
         // and damages the SET function SQL for entry into the database.
-        if(!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId))
-        {
-            if(count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > 3)
-            {
+        if (!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId)) {
+            if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > 3) {
                 \PFBC\Form::setError('form_note', t('You can not select more than 3 categories.'));
                 return; // Stop execution of the method.
             }
 
             $oNoteModel->deleteCategory($iNoteId);
 
-            foreach($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
+            foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
                 $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
         }
 
         // Thumbnail
         $oNote->setThumb($oPost, $oNoteModel, $this->file);
 
-        if(!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
+        if (!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oNoteModel->updatePost('title', $this->httpRequest->post('title'), $iNoteId, $iProfileId);
 
         // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN
-        if(!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content))
+        if (!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content))
             $oNoteModel->updatePost('content', $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('lang_id'), $oPost->langId))
+        if (!$this->str->equals($this->httpRequest->post('lang_id'), $oPost->langId))
             $oNoteModel->updatePost('langId', $this->httpRequest->post('lang_id'), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('slogan'), $oPost->slogan))
+        if (!$this->str->equals($this->httpRequest->post('slogan'), $oPost->slogan))
             $oNoteModel->updatePost('slogan', $this->httpRequest->post('slogan'), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('tags'), $oPost->tags))
+        if (!$this->str->equals($this->httpRequest->post('tags'), $oPost->tags))
             $oNoteModel->updatePost('tags', $this->httpRequest->post('tags'), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('page_title'), $oPost->pageTitle))
+        if (!$this->str->equals($this->httpRequest->post('page_title'), $oPost->pageTitle))
             $oNoteModel->updatePost('pageTitle', $this->httpRequest->post('page_title'), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('meta_description'), $oPost->metaDescription))
+        if (!$this->str->equals($this->httpRequest->post('meta_description'), $oPost->metaDescription))
             $oNoteModel->updatePost('metaDescription', $this->httpRequest->post('meta_description'), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('meta_keywords'), $oPost->metaKeywords))
+        if (!$this->str->equals($this->httpRequest->post('meta_keywords'), $oPost->metaKeywords))
             $oNoteModel->updatePost('metaKeywords', $this->httpRequest->post('meta_keywords'), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('meta_robots'), $oPost->metaRobots))
+        if (!$this->str->equals($this->httpRequest->post('meta_robots'), $oPost->metaRobots))
             $oNoteModel->updatePost('metaRobots', $this->httpRequest->post('meta_robots'), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('meta_author'), $oPost->metaAuthor))
+        if (!$this->str->equals($this->httpRequest->post('meta_author'), $oPost->metaAuthor))
             $oNoteModel->updatePost('metaAuthor', $this->httpRequest->post('meta_author'), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('meta_copyright'), $oPost->metaCopyright))
+        if (!$this->str->equals($this->httpRequest->post('meta_copyright'), $oPost->metaCopyright))
             $oNoteModel->updatePost('metaCopyright', $this->httpRequest->post('meta_copyright'), $iNoteId, $iProfileId);
 
-        if(!$this->str->equals($this->httpRequest->post('enable_comment'), $oPost->enableComment))
+        if (!$this->str->equals($this->httpRequest->post('enable_comment'), $oPost->enableComment))
             $oNoteModel->updatePost('enableComment', $this->httpRequest->post('enable_comment'), $iNoteId, $iProfileId);
 
         // Updated the approved status
@@ -110,11 +103,14 @@ class EditNoteFormProcess extends Form
 
         unset($oNote, $oNoteModel);
 
-        /* Clean NoteModel Cache */
-        (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+        $this->clearCache();
 
         $sMsg = ($iApproved == '0') ? t('Your Note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post created successfully!');
         Header::redirect(Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId), $sMsg);
     }
 
+    private function clearCache()
+    {
+        (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+    }
 }
