@@ -341,6 +341,10 @@ class Design
             $aSites = [
                 ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com']
             ];
+        } elseif ($sLangCode == 'en-gb') {
+          $aSites = [
+              ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com']
+          ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $aSites = [
                 ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
@@ -352,6 +356,8 @@ class Design
             $aSites = [
                 ['title' => 'Flirt Hot Girls', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Flirt Naughty Girls', 'link' => 'http://flirtme.biz'],
+                ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
+                ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],
                 ['title' => 'Learn Language Abroad', 'link' => 'http://newayup.com']
             ];
