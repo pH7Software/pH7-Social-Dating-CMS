@@ -11,6 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Image\Image,
+PH7\Framework\Security\Moderation\Filter,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\Uri,
@@ -18,6 +19,8 @@ PH7\Framework\Url\Header;
 
 class AlbumFormProcess extends Form
 {
+    private $iApproved;
+
     public function __construct()
     {
         parent::__construct();
@@ -36,7 +39,9 @@ class AlbumFormProcess extends Form
         }
         else
         {
-            $iApproved = (DbConfig::getSetting('videoManualApproval') == 0) ? '1' : '0';
+            $this->iApproved = (DbConfig::getSetting('videoManualApproval') == 0) ? '1' : '0';
+
+            $this->checkNudityFilter();
 
             $sFileName = Various::genRnd($oPicture->getFileName(), 1) . '-thumb.' . $oPicture->getExt();
 
@@ -46,7 +51,7 @@ class AlbumFormProcess extends Form
                 $this->httpRequest->post('description'),
                 $sFileName,
                 $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
-                $iApproved
+                $this->iApproved
             );
             $iLastAlbumId = (int) Db::getInstance()->lastInsertId();
 
@@ -66,6 +71,14 @@ class AlbumFormProcess extends Form
             $this->clearCache();
 
             Header::redirect(Uri::get('video', 'main', 'addvideo', $iLastAlbumId));
+        }
+    }
+
+    protected function checkNudityFilter()
+    {
+        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['album']['tmp_name'])) {
+            // The image doesn't seem suitable for everyone. Overwrite "$iApproved" and set the image for approval
+            $this->iApproved = '0';
         }
     }
 
