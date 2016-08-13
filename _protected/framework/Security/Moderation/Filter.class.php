@@ -21,7 +21,9 @@ class Filter
   public static function isNudity($sPath)
   {
       self::importLibrary();
-      return \Image_FleshSkinQuantifier($sPath)->isPorn())
+
+      $oNudityFilter = new \Image_FleshSkinQuantifier($sPath);
+      return $oNudityFilter->isPorn();
   }
 
   protected static function importLibrary()

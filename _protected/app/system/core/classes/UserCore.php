@@ -136,7 +136,7 @@ class UserCore
         $sFile7 = $sFileName . '-400.' . $oAvatar7->getExt();
 
         // The avatar seems to be suitable for adults only, so set for moderation
-        if (Filter::isNudity($sFile1)) {
+        if (Filter::isNudity($sFile)) {
             $iApproved = 0;
         }
 
