@@ -97,11 +97,11 @@ class SettingForm
 
         /********** Moderation **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="moderation"><div class="col-md-10"><h2 class="underline">' . t('Moderation:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\Select(t('Nudity Filter:'), 'nudity_filter', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Photos will be automatically pending approval if there are detected as "Nude/Adult Photos"'), 'value' => DbConfig::getSetting('nudityFilter'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Avatar Manual Approval:'), 'avatar_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('avatarManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Background Profile Manual Approval:'), 'bg_profile_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('bgProfileManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Note Post Manual Approval:'), 'note_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('noteManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Photos Manual Approval:'), 'picture_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('pictureManualApproval'), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Select(t('Nudity Filter:'), 'nudity_filter', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Photos will be automatically pending approval if there are detected as "Nude/Adult Photos"'), 'value' => DbConfig::getSetting('nudityFilter'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Videos Manual Approval:'), 'video_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('videoManualApproval'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Select(t('Webcam Pictures Manual Approval:'), 'webcam_picture_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('This approval mode is experimental, do not use it in production.'), 'value' => DbConfig::getSetting('webcamPictureManualApproval'), 'required' => 1)));
 
