@@ -260,7 +260,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentUrl()
     {
-        return PH7_URL_PROT . \PH7\Framework\Server\Server::getName() . $this->_sRequestUri;
+        return PH7_URL_PROT . PH7_DOMAIN . $this->_sRequestUri;
     }
 
     /**

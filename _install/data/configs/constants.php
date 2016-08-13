@@ -20,7 +20,7 @@ defined('PH7') or exit(header('Location: ./'));
 
 // Check the SSL protocol compatibility
 $sHttp = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://';
-// Determine the domain name with the port
+// Determine the domain name, with the port if necessary
 $sDomain = (($_SERVER['SERVER_PORT'] != '80') && ($_SERVER['SERVER_PORT'] != '443')) ?  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_NAME'];
 
 // Get the domain that the cookie and cookie session is available (Set-Cookie: domain=your_site_name.com)
@@ -52,5 +52,6 @@ define('PH7_PATH_LIBRARY', PH7_PATH_PROTECTED . 'library/');
 #################### URL (PUBLIC) ####################
 
 define('PH7_URL_PROT', $sHttp); // URL protocol
+define('PH7_DOMAIN', $sDomain); // URL domain
 define('PH7_DOMAIN_COOKIE', $sDomain_cookie);
 define('PH7_URL_ROOT', PH7_URL_PROT . $sDomain . PH7_SELF);
