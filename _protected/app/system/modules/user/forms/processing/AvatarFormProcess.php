@@ -49,11 +49,14 @@ class AvatarFormProcess extends Form
         }
     }
 
+    /**
+     * @return void
+     */
     protected function checkNudityFilter()
     {
         if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['avatar']['tmp_name'])) {
             // The avatar seems to be suitable for adults only, so set for moderation
-            $this->iApproved = 0;
+            $this->iApproved = '0';
         }
     }
 }

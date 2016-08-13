@@ -13,6 +13,7 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Image\Image,
+PH7\Framework\Security\Moderation\Filter,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\Uri,
@@ -20,6 +21,7 @@ PH7\Framework\Url\Header;
 
 class PictureFormProcess extends Form
 {
+    private $iApproved;
 
     public function __construct()
     {
@@ -99,20 +101,45 @@ class PictureFormProcess extends Form
             $oPicture5->save($sPath . $sFile5);
             $oPicture6->save($sPath . $sFile6);
 
-            $iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
+            $this->iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
+
+            $this->checkNudityFilter();
 
             // It creates a nice title if no title is specified.
             $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : $this->str->upperFirst(str_replace(array('-', '_'), ' ', str_ireplace(PH7_DOT . $oPicture1->getExt(), '', escape($_FILES['photos']['name'][$i], true))));
-            (new PictureModel)->addPhoto($this->session->get('member_id'), $iAlbumId, $sTitle, $this->httpRequest->post('description'), $sFile1, $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $iApproved);
+
+            (new PictureModel)->addPhoto(
+                $this->session->get('member_id'),
+                $iAlbumId,
+                $sTitle,
+                $this->httpRequest->post('description'),
+                $sFile1,
+                $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
+                $this->iApproved
+            );
         }
 
-        /* Clean PictureModel Cache */
-        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        $this->clearCache();
 
         $sModerationText = t('Your photo(s) has/have been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
         $sText =  t('Your photo(s) has/have been added successfully!');
-        $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
+        $sMsg = ($this->iApproved == '0') ? $sModerationText : $sText;
         Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
     }
 
+    /**
+     * @return void
+     */
+    protected function checkNudityFilter()
+    {
+        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['photos']['tmp_name'])) {
+            // The photo(s) seems to be suitable for adults only, so set for moderation
+            $this->iApproved = '0';
+        }
+    }
+
+    private function clearCache()
+    {
+        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+    }
 }

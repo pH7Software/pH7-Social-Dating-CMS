@@ -11,6 +11,7 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Image\Image,
+PH7\Framework\Security\Moderation\Filter,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\Uri,
@@ -18,6 +19,7 @@ PH7\Framework\Url\Header;
 
 class AlbumFormProcess extends Form
 {
+    private $iApproved;
 
     public function __construct()
     {
@@ -38,11 +40,20 @@ class AlbumFormProcess extends Form
         }
         else
         {
-            $iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
+            $this->iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
+
+            $this->checkNudityFilter();
 
             $sFileName = Various::genRnd($oPicture->getFileName(), 1) . '-thumb.' . $oPicture->getExt();
 
-            (new PictureModel)->addAlbum($this->session->get('member_id'), $this->httpRequest->post('name'), $this->httpRequest->post('description'), $sFileName, $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $iApproved);
+            (new PictureModel)->addAlbum(
+                $this->session->get('member_id'),
+                $this->httpRequest->post('name'),
+                $this->httpRequest->post('description'),
+                $sFileName,
+                $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
+                $this->iApproved
+            );
             $iLastAlbumId = (int) Db::getInstance()->lastInsertId();
 
             $oPicture->square(200);
@@ -58,11 +69,25 @@ class AlbumFormProcess extends Form
 
             $oPicture->save($sPath . $sFileName);
 
-            /* Clean PictureModel Cache */
-            (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+            $this->clearCache();
 
             Header::redirect(Uri::get('picture', 'main', 'addphoto', $iLastAlbumId));
         }
     }
 
+    /**
+     * @return void
+     */
+    protected function checkNudityFilter()
+    {
+        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['album']['tmp_name'])) {
+            // The photo seems to be suitable for adults only, so set for moderation
+            $this->iApproved = '0';
+        }
+    }
+
+    private function clearCache()
+    {
+        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+    }
 }
