@@ -81,7 +81,7 @@ class AlbumFormProcess extends Form
     protected function checkNudityFilter()
     {
         if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['album']['tmp_name'])) {
-            // The photo seems to be suitable for adults only, so set for moderation
+            // The photo doesn't seem suitable for everyone. Overwrite "$iApproved" and set for moderation
             $this->iApproved = '0';
         }
     }
