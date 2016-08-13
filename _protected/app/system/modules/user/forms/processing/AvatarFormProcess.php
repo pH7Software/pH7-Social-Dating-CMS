@@ -8,16 +8,19 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Mvc\Model\DbConfig;
+use
+PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Security\Moderation\Filter;
 
 class AvatarFormProcess extends Form
 {
+    private $iApproved;
 
     public function __construct()
     {
         parent::__construct();
 
-        $iApproved = (AdminCore::auth() || DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+        $this->iApproved = (AdminCore::auth() || DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
 
         if (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists( array('profile_id', 'username') ))
         {
@@ -30,7 +33,8 @@ class AvatarFormProcess extends Form
             $sUsername = $this->session->get('member_username');
         }
 
-        $bAvatar = (new UserCore)->setAvatar($iProfileId, $sUsername, $_FILES['avatar']['tmp_name'], $iApproved);
+        $this->checkNudityFilter();
+        $bAvatar = (new UserCore)->setAvatar($iProfileId, $sUsername, $_FILES['avatar']['tmp_name'], $this->iApproved);
 
         if (!$bAvatar)
         {
@@ -40,9 +44,16 @@ class AvatarFormProcess extends Form
         {
             $sModerationText = t('Your profile photo has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
             $sText =  t('Your profile photo has been updated successfully!');
-            $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
+            $sMsg = ($this->iApproved == '0') ? $sModerationText : $sText;
             \PFBC\Form::setSuccess('form_avatar', $sMsg);
         }
     }
 
+    protected function checkNudityFilter()
+    {
+        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['avatar']['tmp_name'])) {
+            // The avatar seems to be suitable for adults only, so set for moderation
+            $this->iApproved = 0;
+        }
+    }
 }
