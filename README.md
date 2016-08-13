@@ -42,6 +42,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Videos (and possibility to upload videos from API v3 YouTube, Vimeo, Metacafe and Dailymotion)
 * Forums
 * Full Moderation of all contents posted by your users
+* Nudity Filter Option for all images uploaded by users
 * Watermark Branding
 * Chat Rooms
 * Chatroulette
