@@ -45,7 +45,7 @@ class VerificationCodeFormProcess extends Form
             (new $sCoreClassName)->setAuth($oUserData, $sCoreModelClass, $this->session, new Framework\Mvc\Model\Security);
 
             $sUrl = ($sMod == PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : Uri::get($sMod, 'account', 'index');
-            Header::redirect($sUrl, t('You are successfully logged!'));
+            Header::redirect($sUrl, t('You are successfully logged in!'));
         }
         else
         {

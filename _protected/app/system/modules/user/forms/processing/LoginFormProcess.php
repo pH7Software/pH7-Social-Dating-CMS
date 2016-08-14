@@ -98,7 +98,7 @@ class LoginFormProcess extends Form
                 {
                     $oUser->setAuth($oUserData, $oUserModel, $this->session, $oSecurityModel);
 
-                    Header::redirect(Uri::get('user','account','index'), t('You are successfully logged!'));
+                    Header::redirect(Uri::get('user','account','index'), t('You are successfully logged in!'));
                 }
             }
         }

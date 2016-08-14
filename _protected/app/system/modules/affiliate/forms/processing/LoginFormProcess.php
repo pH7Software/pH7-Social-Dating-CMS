@@ -89,7 +89,7 @@ class LoginFormProcess extends Form
                 {
                     $oAff->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
 
-                    Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged!'));
+                    Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged in!'));
                 }
             }
         }

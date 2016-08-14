@@ -88,7 +88,7 @@ class LoginFormProcess extends Form
             {
                 (new AdminCore)->setAuth($oAdminData, $oAdminModel, $this->session, $oSecurityModel);
 
-                Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('You are successfully logged!'));
+                Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('You are successfully logged in!'));
             }
         }
     }
