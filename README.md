@@ -194,7 +194,7 @@ Pierre-Henry Soria
 
 ## Contributing
 
-[![I Love Open Source](static/img/logo-lightbg.png)
+![I Love Open Source](static/img/logo-lightbg.png)
 
 Everyone can contribute on **[pH7CMS GitHub](http://github.com/pH7Software/pH7-Social-Dating-CMS)** repository.
 
