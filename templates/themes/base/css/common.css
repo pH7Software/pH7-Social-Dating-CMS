@@ -32,7 +32,7 @@ body {background: white url(../img/body_bg.jpg) repeat-x;}
     margin-left: 20px;
 }
 #logo h1{font-size:2em}
-.navbar #logo{margin-top:2px;overflow:hidden}
+.navbar #logo{margin-top:3px;overflow:hidden}
 .navbar #logo h1{font-size:1.5rem;margin-top:-5px;}
 #logo h1:first-letter{text-transform:none} /* Allowing logo name starting by a lowercase like "pH7" */
 header{padding:10px 0 10px;background: url(../img/header2.png) repeat-x top;}

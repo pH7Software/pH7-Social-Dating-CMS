@@ -45,3 +45,8 @@
 
 /* Change the padding space between each drop-down menu */
 .nav>li>a{padding: 10px 9px;}
+
+/* Change the default minimum height of the navbar */
+.navbar{
+  min-height:45px !important;
+}
