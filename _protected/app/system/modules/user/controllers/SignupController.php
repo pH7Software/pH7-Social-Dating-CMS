@@ -81,27 +81,21 @@ class SignupController extends Controller
 
     public function step2()
     {
-        $this->sTitle = t('Sign up - Step 2/3');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->setTitle(t('Sign up - Step 2/3'));
         $this->setupProgressbar(2, 66);
         $this->output();
     }
 
     public function step3()
     {
-        $this->sTitle = t('Sign up - Step 3/3');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->setTitle(t('Sign up - Step 3/3'));
         $this->setupProgressbar(3, 99);
         $this->output();
     }
 
     public function step4()
     {
-        $this->sTitle = t('Now, Upload a Profile Photo of you!');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->setTitle(t('Now, Upload a Profile Photo of you!'));
         $this->view->avatarDesign = new AvatarDesignCore; // Add AvatarDesign Class for displaying the avatar lightBox
         $this->output();
     }
@@ -124,5 +118,16 @@ class SignupController extends Controller
     {
         $this->view->progressbar_percentage = $iPercentage;
         $this->view->progressbar_step = $iStep;
+    }
+
+    /**
+     * Set title and heading.
+     *
+     * @param string $sTitle
+     * @return void
+     */
+    private function setTitle($sTitle)
+    {
+        $this->view->page_title = $this->view->h1_title = $sTitle;
     }
 }
