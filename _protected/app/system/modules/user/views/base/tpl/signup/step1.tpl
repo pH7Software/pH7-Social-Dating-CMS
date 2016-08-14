@@ -1,7 +1,5 @@
 <div class="col-md-6">
-    <div class="progress">
-        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:33%">33% - STEP 1/3</div>
-    </div>
+    {include 'progressbar.inc.tpl'}
     {{ JoinForm::step1() }}
 </div>
 
