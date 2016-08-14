@@ -14,7 +14,6 @@ defined('PH7') or exit('Restricted access');
 
 trait Singleton
 {
-
     use Base;
 
     /**
@@ -47,6 +46,4 @@ trait Singleton
      */
     private function __wakeup() {}
     private function __sleep() {}
-
 }
-

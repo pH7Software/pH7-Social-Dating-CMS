@@ -13,7 +13,6 @@ defined('PH7') or exit('Restricted access');
 
 trait Base
 {
-
     /**
      * Class constructor.
      * Marked as private so this constructor cannot be called from outside.
@@ -30,6 +29,4 @@ trait Base
      * @final
      */
     final private function __clone() {}
-
 }
-
