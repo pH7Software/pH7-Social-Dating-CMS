@@ -15,7 +15,8 @@ use PH7\Framework\File\Import;
 
 class Filter
 {
-  /*
+  /**
+   * @param string $sPath File path (e.g. $_FILES['file']['tmp_name'] ).
    * @return bool TRUE if it is a nude photo, FALSE otherwise.
    */
   public static function isNudity($sPath)
