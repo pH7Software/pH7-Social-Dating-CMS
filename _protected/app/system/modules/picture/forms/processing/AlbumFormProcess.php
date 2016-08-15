@@ -29,12 +29,12 @@ class AlbumFormProcess extends Form
          * This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if(!isDebug()) error_reporting(0);
+        if (!isDebug()) error_reporting(0);
 
         // Resizing and saving the thumbnail
         $oPicture = new Image($_FILES['album']['tmp_name']);
 
-        if(!$oPicture->validate())
+        if (!$oPicture->validate())
         {
             \PFBC\Form::setError('form_picture_album', Form::wrongImgFileTypeMsg());
         }
