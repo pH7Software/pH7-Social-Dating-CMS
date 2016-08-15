@@ -63,7 +63,7 @@ class AdminBlogFormProcess extends Form
 
                 $this->clearCache();
 
-                $this->sMsg = t('Post created successfully!');
+                $this->sMsg = t('Post successfully added!');
             }
 
             Header::redirect(Uri::get('blog', 'main', 'read', $this->httpRequest->post('post_id')), $this->sMsg);
