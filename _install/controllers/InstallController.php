@@ -143,8 +143,8 @@ class InstallController extends Controller
                 $_SESSION['db']['type_name'] = 'MySQL';
                 $_SESSION['db']['type'] = 'mysql';
                 $_SESSION['db']['hostname'] = 'localhost';
-                $_SESSION['db']['name'] = 'ph7cms';
                 $_SESSION['db']['username'] = 'root';
+                $_SESSION['db']['name'] = 'ph7cms';
                 $_SESSION['db']['prefix'] = 'PH7_';
                 $_SESSION['db']['port'] = '3306';
                 $_SESSION['db']['charset'] = 'UTF8';
@@ -181,9 +181,9 @@ class InstallController extends Controller
                             $sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
                             $sConfigContent = str_replace('%db_type%', $_SESSION['db']['type'], $sConfigContent);
                             $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['hostname'], $sConfigContent);
-                            $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
                             $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['username']), $sConfigContent);
                             $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['password']), $sConfigContent);
+                            $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
                             $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['prefix']), $sConfigContent);
                             $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['charset'], $sConfigContent);
                             $sConfigContent = str_replace('%db_port%', $_SESSION['db']['port'], $sConfigContent);
