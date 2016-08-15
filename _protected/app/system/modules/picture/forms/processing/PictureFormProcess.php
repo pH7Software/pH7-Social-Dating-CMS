@@ -31,7 +31,7 @@ class PictureFormProcess extends Form
          * @desc This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if(!isDebug()) error_reporting(0);
+        if (!isDebug()) error_reporting(0);
 
         /**
          * @desc
@@ -39,7 +39,7 @@ class PictureFormProcess extends Form
          * This test is necessary because when the selection exists but that no option is available (this can when a user wants to add photos but he has no album)
          * the return value is of type "string" and the value is "1".
          */
-        if(!is_numeric($this->httpRequest->post('album_id')))
+        if (!is_numeric($this->httpRequest->post('album_id')))
         {
             \PFBC\Form::setError('form_picture', t('Please add a category before you add some photos.'));
             return; // Stop execution of the method.
@@ -49,10 +49,10 @@ class PictureFormProcess extends Form
          * @desc Resizing and saving some photos
          */
         $aPhotos = $_FILES['photos']['tmp_name'];
-        for($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++)
+        for ($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++)
         {
             $oPicture1 = new Image($aPhotos[$i], 2500, 2500);
-            if(!$oPicture1->validate())
+            if (!$oPicture1->validate())
             {
                 \PFBC\Form::setError('form_picture', Form::wrongImgFileTypeMsg());
                 return; // Stop execution of the method.
@@ -103,7 +103,7 @@ class PictureFormProcess extends Form
 
             $this->iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
 
-            $this->checkNudityFilter();
+            $this->checkNudityFilter($aPhotos[$i]);
 
             // It creates a nice title if no title is specified.
             $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : $this->str->upperFirst(str_replace(array('-', '_'), ' ', str_ireplace(PH7_DOT . $oPicture1->getExt(), '', escape($_FILES['photos']['name'][$i], true))));
@@ -128,11 +128,12 @@ class PictureFormProcess extends Form
     }
 
     /**
+     * @param string $sFile File path.
      * @return void
      */
-    protected function checkNudityFilter()
+    protected function checkNudityFilter($sFile)
     {
-        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['photos']['tmp_name'])) {
+        if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($sFile)) {
             // The photo(s) seems to be suitable for adults only, so set for moderation
             $this->iApproved = '0';
         }
