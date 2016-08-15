@@ -93,7 +93,7 @@ class EditAdminBlogFormProcess extends Form
 
         $this->clearCache();
 
-        Header::redirect(Uri::get('blog', 'main', 'read', $sPostId),  t('Your post has been saved successfully!'));
+        Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), t('Post successfully updated!'));
     }
 
     private function clearCache()

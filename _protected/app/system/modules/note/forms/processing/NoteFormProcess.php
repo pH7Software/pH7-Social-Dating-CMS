@@ -78,7 +78,7 @@ class NoteFormProcess extends Form
 
                 $this->clearCache();
 
-                $this->sMsg = ($iApproved == '0') ? t('Your Note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post created successfully!');
+                $this->sMsg = ($iApproved == '0') ? t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post successfully created!');
             }
 
             Header::redirect(Uri::get('note','main','read',$this->session->get('member_username') .','. $this->httpRequest->post('post_id')), $this->sMsg);
@@ -90,4 +90,3 @@ class NoteFormProcess extends Form
         (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
     }
 }
-
