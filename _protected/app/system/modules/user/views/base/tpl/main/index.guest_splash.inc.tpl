@@ -1,18 +1,23 @@
 {* If Splash Video Background if enabled in the admin panel *}
 {if $is_bg_video}
+    {* Count the number of different splash videos *}
+    {{ $total_videos = count(glob(PH7_PATH_TPL . PH7_TPL_NAME . '/file/splash/*_vid.jpg')) }}
+    {{ $i = mt_rand(1,$total_videos) }}
+
     {* Enable the video only if visitors aren't from a mobile devices (for performance optimization) *}
     {if !$browser->isMobile()}
-        <video autoplay loop muted poster="{url_tpl_img}splash_vid.jpg" id="bgvid">
-            <source src="{url_tpl}file/splash.webm" type="video/webm" />
-            <source src="{url_tpl}file/splash.mp4" type="video/mp4" />
+        <style scoped="scoped">video#bgvid{background: url({url_tpl}file/splash/{i}_vid.jpg) no-repeat}</style>
+        <video autoplay loop muted poster="{url_tpl}file/splash/{i}_vid.jpg" id="bgvid">
+            <source src="{url_tpl}file/splash/{i}_vid.webm" type="video/webm" />
+            <source src="{url_tpl}file/splash/{i}_vid.mp4" type="video/mp4" />
         </video>
     {else}
         <style scoped="scoped">
             body {
-                background-image: url('{url_tpl_img}splash_vid.jpg');
-                background-repeat: no-repeat;
-                background-position: center;
+                background: url('{url_tpl}file/splash/{i}_vid.jpg') repeat-y;
                 background-size: cover;
+                top: 50%;
+                left: 50%;
             }
         </style>
     {/if}
