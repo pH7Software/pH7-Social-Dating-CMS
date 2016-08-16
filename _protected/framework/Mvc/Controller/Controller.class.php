@@ -278,7 +278,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
     }
 
     /**
-     * The maintenance page is not displayed for the "Admin" module and if the administrator is logged.
+     * The maintenance page is not displayed for the "Admin" module and if the administrator is logged in.
      *
      * @return void If the status if maintenance, exit the script after displaying the maintenance page.
      */

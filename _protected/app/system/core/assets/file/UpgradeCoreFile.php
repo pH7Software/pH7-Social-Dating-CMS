@@ -114,7 +114,7 @@ class UpgradeCore extends Kernel
     {
         if (!AdminCore::auth())
         {
-            // Checking if the administrator is connected
+            // Checking if the administrator is logged in
             $this->_aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 
@@ -282,7 +282,7 @@ class UpgradeCore extends Kernel
     {
         if (!AdminCore::auth())
         {
-            // It rechecks if the administrator is always connected
+            // Recheck if the administrator is still logged in
             $this->_aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 

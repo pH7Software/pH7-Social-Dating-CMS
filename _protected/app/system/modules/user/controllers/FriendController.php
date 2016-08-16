@@ -32,7 +32,7 @@ class FriendController extends Controller
         $this->iMemberId = $this->session->get('member_id');
 
         /**
-         *  If the user is connected, we get his session 'member_username' otherwise we get the username of the url.
+         *  If the user is logged in, we get his session 'member_username' otherwise we get the username of the url.
          */
         $this->sUsername = (!$this->httpRequest->getExists('username')) ? $this->session->get('member_username') : $this->httpRequest->get('username');
 

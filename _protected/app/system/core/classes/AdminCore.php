@@ -43,7 +43,7 @@ class AdminCore extends UserCore
      */
     public function setAuth($oAdminData, UserCoreModel $oAdminModel, Session $oSession, SecurityModel $oSecurityModel)
     {
-        // Remove the session if the admin is logged on as "user" or "affiliate".
+        // Remove the session if the admin is logged in as "user" or "affiliate".
         if (UserCore::auth() || AffiliateCore::auth())
             $oSession->destroy();
 
