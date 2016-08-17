@@ -10,11 +10,12 @@
  */
 
 namespace PH7\Framework\Pattern;
+
 defined('PH7') or exit('Restricted access');
 
 trait Factory
 {
-    use Base;
+    use Statik;
 
     /**
      * Loading a class.
