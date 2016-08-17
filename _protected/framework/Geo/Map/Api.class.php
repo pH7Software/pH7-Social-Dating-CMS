@@ -286,7 +286,7 @@ class Api
     }
 
     /**
-     * Set the Google Map key
+     * Set the Google Maps key
      * Ref: http://googlegeodevelopers.blogspot.ie/2016/06/building-for-scale-updates-to-google.html
      *
      * @param string $key

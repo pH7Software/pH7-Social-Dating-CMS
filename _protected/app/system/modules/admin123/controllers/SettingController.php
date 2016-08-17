@@ -90,7 +90,7 @@ class SettingController extends Controller
 
     public function googleApiKey()
     {
-        $this->view->page_title = $this->view->h2_title = t('Google Map API Key');
+        $this->view->page_title = $this->view->h2_title = t('Google Maps API Key');
         $this->output();
     }
 
