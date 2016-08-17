@@ -21,12 +21,11 @@ PH7\Framework\Date\Various as VDate;
 /**
  * We include the Singleton trait before use, because at this stage the class can not load the trait automatically.
  */
-require_once PH7_PATH_FRAMEWORK . 'Pattern/Base.trait.php';
+require_once PH7_PATH_FRAMEWORK . 'Pattern/Statik.trait.php';
 require_once PH7_PATH_FRAMEWORK . 'Pattern/Singleton.trait.php';
 
 final class Autoloader
 {
-
     const DOWNLOAD_URL = 'http://download.hizup.com/files/';
 
 
@@ -190,5 +189,4 @@ final class Autoloader
     {
         return str_replace(array('PH7\Framework', '\\', '//'), array('/', '/', ''), $sClass);
     }
-
 }
