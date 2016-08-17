@@ -21,7 +21,7 @@ use PH7\Framework\Config\Config;
 *
 * @author          Pierre-Henry SORIA <ph7software@gmail.com>
 * @copyright       (c) 2011-2016, Pierre-Henry SORIA, All Rights Reserved.
-* @version         Last update 03/14/2016
+* @version         Last update 07/17/2016
 * @package         pH7CMS
 */
 
@@ -71,6 +71,9 @@ class Api
 
     /** Lang of the gmap **/
     protected $lang = 'en';
+
+    /** Google Map Key **/
+    protected $key = '';
 
     /**Center of the gmap **/
     protected $center = 'New York United States';
@@ -136,6 +139,7 @@ class Api
     public function __construct()
     {
         $this->bCompressor = (bool)Config::getInstance()->values['cache']['enable.static.minify'];
+        $this->setKey(Config::getInstance()->values['service.api']['google_map.key']);
     }
 
     /**
@@ -272,13 +276,26 @@ class Api
     /**
      * Set the lang of the gmap
      *
-     * @param string $lang GoogleMap  lang : fr,en,..
+     * @param string $lang GoogleMap lang: fr, en, nl, ...
      *
      * @return void
      */
     public function setLang($lang)
     {
         $this->lang = $lang;
+    }
+
+    /**
+     * Set the Google Map key
+     * Ref: http://googlegeodevelopers.blogspot.ie/2016/06/building-for-scale-updates-to-google.html
+     *
+     * @param string $key
+     *
+     * @return void
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
     }
 
     /**
@@ -433,7 +450,7 @@ class Api
      */
     public function geocoding($address)
     {
-        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&amp;sensor=true';
+        $url = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . urlencode($address) . '&amp;sensor=true&amp;key=' . $this->key;
 
         if (function_exists('curl_init')) {
             $data = $this->getContent($url);
@@ -589,7 +606,8 @@ class Api
 
         if ($this->includeJs === true) {
             // Google map JS
-            $this->content .= '<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;language=' . $this->lang . '">';
+            $this->content .= '<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false&amp;key=' .
+                $this->key . '&amp;language=' . $this->lang . '">';
             $this->content .= '</script>' . "\n";
 
             // Clusterer JS

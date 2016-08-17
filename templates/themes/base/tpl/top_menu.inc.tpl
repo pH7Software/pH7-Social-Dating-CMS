@@ -277,6 +277,7 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting','analyticsapi') }}" title="{lang 'Analytics Code'}"><i class="fa fa-bar-chart"></i> {lang 'Analytics Code'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'style') }}" title="{lang 'Custom CSS Style'}"><i class="fa fa-code"></i> {lang 'CSS Style'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'script') }}" title="{lang 'JavaScript Injection'}"><i class="fa fa-code"></i> {lang 'Script'}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'googleapikey') }}" title="{lang 'Google Map API Key'}"><i class="fa fa-map-marker"></i> {lang 'Google Map API'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'setting', 'license') }}" title="{lang 'License Key'}"><i class="fa fa-key"></i> {lang 'License'}</a></li>
           </ul>
         </li>
