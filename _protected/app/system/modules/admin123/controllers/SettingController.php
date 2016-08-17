@@ -7,7 +7,10 @@
  */
 namespace PH7;
 
-use PH7\Framework\Navigation\Page, PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
+use
+PH7\Framework\Navigation\Page,
+PH7\Framework\Url\Header,
+PH7\Framework\Mvc\Router\Uri;
 
 class SettingController extends Controller
 {
@@ -82,6 +85,12 @@ class SettingController extends Controller
         }
         unset($aLangs);
 
+        $this->output();
+    }
+
+    public function googleApiKey()
+    {
+        $this->view->page_title = $this->view->h2_title = t('Google Map API Key');
         $this->output();
     }
 
