@@ -9,31 +9,36 @@
  */
 
 namespace PH7\Framework\Security\Moderation;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\Import;
+use
+PH7\Framework\File\Import,
+PH7\Framework\Pattern\Statik;
 
 class Filter
 {
-  /**
-   * @param string $sPath File path (e.g. $_FILES['file']['tmp_name'] ).
-   * @return bool TRUE if it is a nude photo, FALSE otherwise.
-   */
-  public static function isNudity($sPath)
-  {
-      self::importLibrary();
+    /**
+     * Import the trait to set the class static.
+     *
+     * The trait set private constructor & cloning to prevent instantiation.
+     */
+    use Statik;
 
-      $oNudityFilter = new \Image_FleshSkinQuantifier($sPath);
-      return $oNudityFilter->isPorn();
-  }
+    /**
+     * @param string $sPath File path (e.g. $_FILES['file']['tmp_name'] ).
+     * @return bool TRUE if it is a nude photo, FALSE otherwise.
+     */
+    public static function isNudity($sPath)
+    {
+        self::importLibrary();
 
-  protected static function importLibrary()
-  {
-      Import::lib('FreebieStock.NudityDetector.Autoloader');
-  }
+        $oNudityFilter = new \Image_FleshSkinQuantifier($sPath);
+        return $oNudityFilter->isPorn();
+    }
 
-  /**
-   * Private constructor to prevent instantiation since it is a static class.
-   */
-  private function __construct() {}
+    protected static function importLibrary()
+    {
+        Import::lib('FreebieStock.NudityDetector.Autoloader');
+    }
 }

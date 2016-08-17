@@ -13,17 +13,16 @@
 namespace PH7\Framework\Analytics;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc;
+use PH7\Framework\Mvc, PH7\Framework\Pattern\Statik;
 
 class Statistic
 {
-
     /**
-     * Private constructor to prevent instantiation of class since it is a static class.
+     * Import the trait to set the class static.
      *
-     * @access private
+     * The trait set private constructor & cloning to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
 
     /**
@@ -47,5 +46,4 @@ class Statistic
 
         unset($oSession);
     }
-
 }
