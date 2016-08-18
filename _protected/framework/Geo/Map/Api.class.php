@@ -21,7 +21,7 @@ use PH7\Framework\Config\Config;
 *
 * @author          Pierre-Henry SORIA <ph7software@gmail.com>
 * @copyright       (c) 2011-2016, Pierre-Henry SORIA, All Rights Reserved.
-* @version         Last update 07/17/2016
+* @version         Last update 07/18/2016
 * @package         pH7CMS
 */
 
@@ -139,7 +139,6 @@ class Api
     public function __construct()
     {
         $this->bCompressor = (bool)Config::getInstance()->values['cache']['enable.static.minify'];
-        $this->setKey(Config::getInstance()->values['service.api']['google_map.key']);
     }
 
     /**
@@ -618,6 +617,9 @@ class Api
 
         $this->content .= '<script>' . "\n";
 
+        if (empty($this->key)) {
+            $this->content .= 'alert("' . t('Oops! You need to get a Google Maps API key to get it working. Please go to your pH7CMS Admin Panel -> Settings -> Api -> Google Maps API Key') . '");' . "\n";
+        }
 
         $this->content .= 'function addLoadEvent(func) { ' . "\n";
         $this->content .= 'var oldonload = window.onload; ' . "\n";
