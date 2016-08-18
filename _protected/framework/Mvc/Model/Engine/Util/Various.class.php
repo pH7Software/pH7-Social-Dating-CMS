@@ -13,17 +13,17 @@
 namespace PH7\Framework\Mvc\Model\Engine\Util;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Db, PH7\Framework\Pattern\Statik;
 
 class Various
 {
-
     /**
-     * Private constructor to prevent instantiation of class since it's a static class.
+     * Import the trait to set the class static.
      *
-     * @access private
+     * The trait set private constructor & cloning to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
+
 
     /**
      * Executes SQL queries.
@@ -247,12 +247,4 @@ class Various
         throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Bad data table: "' . $sTable . '"!');
         exit(1);
     }
-
-    /**
-     * Block cloning.
-     *
-     * @access private
-     */
-    private function __clone() {}
-
 }

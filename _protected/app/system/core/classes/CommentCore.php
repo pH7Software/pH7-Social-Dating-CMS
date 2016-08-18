@@ -7,14 +7,17 @@
  */
 namespace PH7;
 
+use PH7\Framework\Pattern\Statik;
+
 class CommentCore
 {
-
     /**
-     * @desc Block constructing.
-     * @access private
+     * Import the trait to set the class static.
+     *
+     * The trait set private constructor & cloning to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
+
 
     /**
      * Check table.
@@ -55,5 +58,4 @@ class CommentCore
         $iCommentNumber = (new CommentCoreModel)->total($iId, $sTable);
         return nt('%n% Comment', '%n% Comments', $iCommentNumber);
     }
-
 }
