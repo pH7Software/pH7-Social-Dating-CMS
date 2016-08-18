@@ -6,24 +6,24 @@
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
- * @version        1.5
+ * @version        1.6
  */
 namespace PH7;
 
 use
-PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Analytics\Statistic,
 PH7\Framework\Parse\Emoticon,
 PH7\Framework\Security\Ban\Ban,
 PH7\Framework\Math\Measure\Year,
 PH7\Framework\Security\CSRF\Token,
-PH7\Framework\Url\Url,
 PH7\Framework\Geo\Map\Map,
+PH7\Framework\Url\Url,
+PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Date\Various as VDate;
 
 class ProfileController extends Controller
 {
-
     private $sUserAuth, $sUsername, $sTitle, $iProfileId, $iVisitorId;
 
     public function __construct()
@@ -55,7 +55,7 @@ class ProfileController extends Controller
         {
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth())
-                $this->_initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
+                $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
 
             // Gets the Profile background
             $this->view->img_background = $oUserModel->getBackground($this->iProfileId, 1);
@@ -123,15 +123,7 @@ class ProfileController extends Controller
             $this->view->befriend_link = $sBefriendLink;
 
             // Set parameters Google Map
-            $oMap = new Map;
-            $oMap->setCenter($sCity . ' ' . $sState . ' ' . t($sCountry));
-            $oMap->setSize('100%', '300px');
-            $oMap->setDivId('profile_map');
-            $oMap->setZoom(12);
-            $oMap->addMarkerByAddress($sCity . ' ' . $sState . ' ' . t($sCountry), t('Meet %0% near here!', $oUser->username));
-            $oMap->generate();
-            $this->view->map = $oMap->getMap();
-            unset($oMap);
+            $this->view->map = $this->getMap($sCity, $sState, $sCountry, $oUser);
 
             $this->view->id = $this->iProfileId;
             $this->view->username = $oUser->username;
@@ -151,17 +143,42 @@ class ProfileController extends Controller
             $this->view->last_activity = VDate::textTimeStamp($oUser->lastActivity);
             $this->view->fields = $oFields;
             $this->view->is_logged = $this->sUserAuth;
-            $this->view->is_himself_profile = $this->_himselfProfile();
+            $this->view->is_himself_profile = $this->himselfProfile();
 
             // Stat Profile
             Statistic::setView($this->iProfileId, 'Members');
         }
         else
         {
-            $this->_notFound();
+            $this->notFound();
         }
 
         $this->output();
+    }
+
+    /**
+     * Get the Google Map.
+     *
+     * @param string $sCity
+     * @param string $sState
+     * @param string $sCountry
+     * @param object \PH7\User $oUser
+     * @return string The Google Maps code.
+     */
+    private function getMap($sCity, $sState, $sCountry, $oUser)
+    {
+        $oMap = new Map;
+        $oMap->setKey(DbConfig::getSetting('googleApiKey'));
+        $oMap->setCenter($sCity . ' ' . $sState . ' ' . t($sCountry));
+        $oMap->setSize('100%', '300px');
+        $oMap->setDivId('profile_map');
+        $oMap->setZoom(12);
+        $oMap->addMarkerByAddress($sCity . ' ' . $sState . ' ' . t($sCountry), t('Meet %0% near here!', $oUser->username));
+        $oMap->generate();
+        $map = $oMap->getMap();
+        unset($oMap);
+
+        return $map;
     }
 
     /**
@@ -170,7 +187,7 @@ class ProfileController extends Controller
      * @param object \PH7\UserModel $oUserModel
      * @return void
      */
-    private function _initPrivacy(UserModel $oUserModel)
+    private function initPrivacy(UserModel $oUserModel)
     {
         // Check Privacy Profile
         $oPrivacyViewsUser = $oUserModel->getPrivacySetting($this->iProfileId);
@@ -186,7 +203,7 @@ class ProfileController extends Controller
             $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
                 $this->sUsername, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
         }
-        elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->_himselfProfile())
+        elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->himselfProfile())
         {
             $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $this->sUsername);
         }
@@ -196,7 +213,7 @@ class ProfileController extends Controller
         {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->_himselfProfile())
+            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->himselfProfile())
             {
                 $oVisitorModel = new VisitorModel($this->iProfileId, $this->iVisitorId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
 
@@ -219,7 +236,7 @@ class ProfileController extends Controller
     /**
      * @return boolean Returns TRUE if the user is on his/her profile, FALSE otherwise.
      */
-    private function _himselfProfile()
+    private function himselfProfile()
     {
         return $this->str->equals($this->iVisitorId, $this->iProfileId);
     }
@@ -229,7 +246,7 @@ class ProfileController extends Controller
      *
      * @return void
      */
-    private function _notFound()
+    private function notFound()
     {
         Framework\Http\Http::setHeadersByCode(404);
 
@@ -243,5 +260,4 @@ class ProfileController extends Controller
         <a href="' . $this->registry->site_url . '">' . t('Return home') . '</a><br />
         <a href="javascript:history.back();">' . t('Go back to the previous page') . '</a><br />';
     }
-
 }
