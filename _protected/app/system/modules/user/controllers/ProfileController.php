@@ -162,7 +162,7 @@ class ProfileController extends Controller
      * @param string $sCity
      * @param string $sState
      * @param string $sCountry
-     * @param object \PH7\User $oUser
+     * @param object $oUser
      * @return string The Google Maps code.
      */
     private function getMap($sCity, $sState, $sCountry, $oUser)
@@ -184,7 +184,7 @@ class ProfileController extends Controller
     /**
      * Privacy Profile.
      *
-     * @param object \PH7\UserModel $oUserModel
+     * @param \PH7\UserModel $oUserModel
      * @return void
      */
     private function initPrivacy(UserModel $oUserModel)
