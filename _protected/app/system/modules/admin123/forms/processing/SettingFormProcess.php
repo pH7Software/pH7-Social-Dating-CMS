@@ -98,6 +98,7 @@ class SettingFormProcess extends Form
         'clean_messenger' => 'cleanMessenger',
 
         // Api
+        'google_api_key' => 'googleApiKey',
         'ip_api' => 'ipApi',
         'chat_api' => 'chatApi',
         'chatroulette_api' => 'chatrouletteApi',
