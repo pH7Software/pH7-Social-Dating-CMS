@@ -25,7 +25,7 @@ class MainController extends Controller
         $this->checkMod($sMod);
 
         $this->view->page_title = t('Forgot your password?');
-        $this->view->h2_title = t('Password Reset');
+        $this->view->h1_title = t('Password Reset');
         $this->output();
     }
 
