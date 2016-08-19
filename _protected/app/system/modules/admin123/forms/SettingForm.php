@@ -15,7 +15,6 @@ PH7\Framework\Ip\Ip;
 
 class SettingForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_setting']))
@@ -84,7 +83,6 @@ class SettingForm
 
 
         /********** Registration **********/
-
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="registration"><div class="col-md-10"><h2 class="underline">' . t('Registration:') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Members:'), 'user_activation_type', array('1' => t('No activation required'), '2' => t('Self activation via email'), '3' => t('Manual activation by administrator')), array('value' => DbConfig::getSetting('userActivationType'), 'required' => 1)));
@@ -114,6 +112,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image:') . '</h3>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark text:'), 'watermark_text_image', array('value' => DbConfig::getSetting('watermarkTextImage'), 'required' => 1)));
+
         $oForm->addElement(new \PFBC\Element\Number(t('Size Watermark Text:'), 'size_watermark_text_image', array('description' => t('Between 0 to 5.'), 'min' => 0, 'max' => 5, 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Video:') . '</h3>'));
@@ -142,7 +141,6 @@ class SettingForm
 
 
         /********** Email **********/
-
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="email"><div class="col-md-10"><h2 class="underline">' . t('Email Parameters:') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Email Name:'), 'email_name', array('value' => DbConfig::getSetting('emailName'), 'required' => 1)));
@@ -264,7 +262,7 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><script src="' . PH7_URL_STATIC . PH7_JS . 'tabs.js"></script><script>tabs(\'p\', [\'general\',\'logotype\',\'registration\',\'pic_vid\',\'moderation\',\'email\',\'security\',\'spam\',\'api\',\'automation\']);</script>'));
 
         $oForm->addElement(new \PFBC\Element\Button);
+
         $oForm->render();
     }
-
 }
