@@ -173,7 +173,7 @@ abstract class Element extends Base
         if(isset($this->attributes['value']) && is_array($this->attributes['value']))
             $this->attributes['value'] = '';
            $sHtml = '<input' . $this->getAttributes();
-            if($this->isRequired()) $sHtml .= ' required="required"';
+            $sHtml .= $this->getHtmlRequiredIfApplicable();
         echo $sHtml, ' />';
     }
 
@@ -237,5 +237,15 @@ abstract class Element extends Base
             if($object instanceof Validation)
                 $this->validation[] = $object;
         }
+    }
+
+    protected function getHtmlRequiredIfApplicable()
+    {
+        $sCode = '';
+
+        if($this->isRequired()) {
+            $sCode .= ' required="required"';
+        }
+        return $sCode;
     }
 }
