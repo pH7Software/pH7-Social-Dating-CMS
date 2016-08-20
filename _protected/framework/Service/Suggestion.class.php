@@ -13,21 +13,20 @@
 namespace PH7\Framework\Service;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Pattern\Statik;
+
 class Suggestion
 {
+    /**
+     * The trait sets private constructor & cloning since it's a static class
+     */
+    use Statik;
 
     const
     DIR = 'suggestions/',
     EMAIL_FILE = 'email.txt';
 
     private static $_sFile;
-
-    /**
-     * Private constructor to prevent instantiation since it's a static class.
-     *
-     * @access private
-     */
-    private function __construct() {}
 
     /**
      * @static
@@ -39,28 +38,20 @@ class Suggestion
         return self::_get();
     }
 
-   /**
-    * Generic method to to pick and translate words.
-    *
-    * @access private
-    * @static
-    * @return string The transform words.
-    */
-   private static function _get()
-   {
-       $aSuggestions = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
-
-       // It removes all spaces, line breaks, ...
-       $aSuggestions = array_map('trim', $aSuggestions);
-
-       return implode('\',\'', $aSuggestions);
-   }
-
     /**
-     * Block cloning.
+     * Generic method to to pick and translate words.
      *
      * @access private
+     * @static
+     * @return string The transform words.
      */
-    private function __clone() {}
+    private static function _get()
+    {
+        $aSuggestions = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
 
+        // It removes all spaces, line breaks, ...
+        $aSuggestions = array_map('trim', $aSuggestions);
+
+        return implode('\',\'', $aSuggestions);
+    }
 }

@@ -19,9 +19,7 @@ PH7\Framework\Pattern\Statik;
 class Filter
 {
     /**
-     * Import the trait to set the class static.
-     *
-     * The trait set private constructor & cloning to prevent instantiation.
+     * The trait sets private constructor & cloning since it's a static class
      */
     use Statik;
 

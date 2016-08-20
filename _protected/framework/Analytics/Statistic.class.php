@@ -20,7 +20,7 @@ class Statistic
     /**
      * Import the trait to set the class static.
      *
-     * The trait set private constructor & cloning to prevent instantiation.
+     * The trait sets constructor & cloning private to prevent instantiation.
      */
     use Statik;
 

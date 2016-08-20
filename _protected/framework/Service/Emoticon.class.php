@@ -18,15 +18,7 @@ defined('PH7') or exit('Restricted access');
  */
 abstract class Emoticon
 {
-
     const DIR = 'smile/', EXT = '.gif';
-
-    /**
-     * Private constructor to prevent instantiation of class since it is a private class.
-     *
-     * @access private
-     */
-    private function __construct() {}
 
     /**
      * Gets the list of emoticons.
@@ -91,12 +83,4 @@ abstract class Emoticon
     {
         return $aVal[0];
     }
-
-    /**
-     * Block cloning.
-     *
-     * @access private
-     */
-    private function __clone() {}
-
 }
