@@ -46,9 +46,9 @@ class MainController extends Controller
 
         if (empty($oPosts))
         {
-            $this->sTitle = t('Empty Note');
+            $this->sTitle = t('No Notes');
             $this->notFound(false); // We disable the HTTP error code 404 for Ajax requests running
-            $this->view->error = t('Oops! Empty Note...'); // We change the error message
+            $this->view->error = t('Oops! There are no notes at the moment.'); // We change the error message
         }
         else
         {

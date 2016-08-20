@@ -108,7 +108,7 @@ class MainController extends Controller
 
         if (empty($oAlbum))
         {
-            $this->sTitle = t('No album found or is still in pending approval.');
+            $this->sTitle = t('Album not found or is still in pending approval.');
             $this->_notFound();
         }
         else
@@ -134,7 +134,7 @@ class MainController extends Controller
 
         if (empty($oVideo))
         {
-            $this->sTitle = t('No video found or is still in pending approval.');
+            $this->sTitle = t('Video not found or is still in pending approval.');
             $this->_notFound();
         }
         else

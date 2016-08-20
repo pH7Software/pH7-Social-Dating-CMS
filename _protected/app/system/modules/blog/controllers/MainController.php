@@ -42,9 +42,9 @@ class MainController extends Controller
 
         if (empty($oPosts))
         {
-            $this->sTitle = t('Empty Blog');
+            $this->sTitle = t('No Posts');
             $this->notFound(false); // We disable the HTTP error code 404 for Ajax requests running
-            $this->view->error = t('Oops! Empty Blog...'); // We change the error message
+            $this->view->error = t('Oops! There are no posts at the moment. Please come back soon ;-)'); // We change the error message
         }
         else
         {
