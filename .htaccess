@@ -760,6 +760,7 @@ RewriteRule ^.* - [F,L]
 #AddType video/ogg .ogg
 AddType video/webm .webm
 AddType video/mp4 .mp4
+AddType application/rss+xml .xml
 
 # Personal pH7CMS extension file
 #AddType application/x-httpd-php .ph7

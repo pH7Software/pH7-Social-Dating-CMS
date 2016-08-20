@@ -15,9 +15,9 @@ Options +FollowSymLinks
     RewriteEngine On
     ## Uncomment "#RewriteBase /" line below (remove "#") if pH7CMS is installed in a folder and so add the folder name after the slash "/"
     ## Example: If pH7CMS is installed in "/public_html/ph7cms/", then it should be "RewriteBase /ph7cms/", however it may depends of your Apache configuration.
-    
+
     #RewriteBase /
-</IfModule>    
+</IfModule>
 
 
 <IfModule mod_php5.c>
@@ -760,6 +760,7 @@ RewriteRule ^.* - [F,L]
 #AddType video/ogg .ogg
 AddType video/webm .webm
 AddType video/mp4 .mp4
+AddType application/rss+xml .xml
 
 # Personal pH7CMS extension file
 #AddType application/x-httpd-php .ph7
