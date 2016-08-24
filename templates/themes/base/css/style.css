@@ -12,7 +12,7 @@ h1{font-size:18px}
 h2{font-size:16px}
 h3{font-size:15px}
 h4{font-size:14px}
-h1:first-letter, h2:first-letter{text-transform:capitalize}
+h1::first-letter, h2::first-letter{text-transform:capitalize}
 h1,h2,h3,h4{margin-top:2px;font-weight:bold}
 
 p{margin:0 0 0}
@@ -40,8 +40,8 @@ h2.first {margin: 0 0 10px}
 /** Table **/
 table{border-spacing: 0; border-collapse:collapse}
 
-.quote:before {content:url('../img/icon/quote_left.jpg')}
-.quote:after {content:url('../img/icon/quote_right.jpg')}
+.quote::before {content:url('../img/icon/quote_left.jpg')}
+.quote::after {content:url('../img/icon/quote_right.jpg')}
 .italic{font-style:italic}
 .small{font-size:x-small}
 .border{margin:2px;border:1px solid #999}

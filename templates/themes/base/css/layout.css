@@ -52,7 +52,7 @@
     top: -6px;
     left: -11px;
 }
-.show_dropdown:before {
+.show_dropdown::before {
     position: absolute;
     bottom: -4px;
     left: 0;
@@ -60,7 +60,7 @@
     height: 3px;
     background-image: url(../img/dropdown_before.png);
     content: ''}
-.show_dropdown:after {
+.show_dropdown::after {
     position: absolute;
     top: 0;
     bottom: -1px;
