@@ -4,21 +4,16 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-#cache_chart {
-    height: 400px;
-    width: 600px;
-}
-
-#free_space_chart {
-    height: 420px;
-    width: 620px;
-}
-
-#user_chart {
-    height: 300px;
+#cache_chart, #free_space_chart, #user_chart {
     width: 100%;
     margin-bottom: 8px;
     border: 1px solid #ccc;
+}
+#cache_chart, #free_space_chart {
+    height: 350px;
+}
+#user_chart {
+    height: 300px;
 }
 
 table, td, th {
