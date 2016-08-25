@@ -28,12 +28,12 @@
 </div>
 
 {if !$is_mobile}
-    <div class="col-md-8 animated fadeInLeft">
+    <div class="left col-md-8 animated fadeInLeft">
         {manual_include 'user_promo_block.inc.tpl'}
     </div>
 {/if}
 
-<div class="col-md-4 animated fadeInRight">
+<div class="left col-md-4 animated fadeInRight">
   <h1 class="pink2 italic underline">{headline}</h1>
 
   {* For small devices, the following will be activated through /templates/themes/base/css/splash.css *}
