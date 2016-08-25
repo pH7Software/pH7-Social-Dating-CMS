@@ -43,10 +43,10 @@ class ToolController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $this->view->aChartData = [
-            ['title' => t('Database and other data'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Cache\Cache::CACHE_DIR)],
-            ['title' => t('Compile template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl::COMPILE_DIR)],
+            ['title' => t('Database and Other Data'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Cache\Cache::CACHE_DIR)],
+            ['title' => t('Server Code Template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl::COMPILE_DIR)],
             ['title' => t('HTML Template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl::CACHE_DIR)],
-            ['title' => t('Static files'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Gzip\Gzip::CACHE_DIR)]
+            ['title' => t('Static Files'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Gzip\Gzip::CACHE_DIR)]
         ];
 
         $this->output();
