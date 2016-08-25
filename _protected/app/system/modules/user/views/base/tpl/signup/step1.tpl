@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="left col-md-6">
     {include 'progressbar.inc.tpl'}
     {{ JoinForm::step1() }}
 </div>
