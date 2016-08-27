@@ -23,7 +23,7 @@ PH7\Framework\Ip\Ip;
 
 class AddFakeProfilesFormProcess extends Form
 {
-    const API_URL = 'https://api.randomuser.me';
+    const API_URL = 'http://api.randomuser.me';
     const API_VER = '1.1';
 
     public function __construct()
