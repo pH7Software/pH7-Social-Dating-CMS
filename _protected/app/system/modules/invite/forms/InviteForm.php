@@ -23,7 +23,7 @@ class InviteForm
             Framework\Url\Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_invite', 310);
+        $oForm = new \PFBC\Form('form_invite', '310px');
         $oForm->configure(array('action' => Uri::get('invite', 'home', 'invitation')));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_invite', 'form_invite'));
         $oForm->addElement(new \PFBC\Element\Token('invite'));
