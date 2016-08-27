@@ -7,11 +7,12 @@
 var $validationBox = (function() {
     $.get(pH7Url.base + 'validate-site/main/validationbox', function(oData) {
         $.colorbox({
-            width      :  '450px',
+            width      :  '100%',
+            maxWidth   :  '450px',
             maxHeight  :  '85%',
-            speed      : 500,
-            scrolling  : false,
-            html       : $(oData).find('#box_block')
+            speed      :  500,
+            scrolling  :  false,
+            html       :  $(oData).find('#box_block')
         })
    })
 });
