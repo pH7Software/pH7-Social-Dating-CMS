@@ -24,7 +24,7 @@
 {/if}
 
 <div class="col-md-8 login_block animated fadeInDown">
-  {{ LoginSplashForm::display(280) }}
+  {{ LoginSplashForm::display() }}
 </div>
 
 {if !$is_mobile}
