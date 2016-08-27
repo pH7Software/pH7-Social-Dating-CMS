@@ -15,7 +15,7 @@ class ValidationForm extends Form
     {
         parent::__construct();
 
-        $oForm = new \PFBC\Form('form_validation', '400px');
+        $oForm = new \PFBC\Form('form_validation', '350px');
         $oForm->configure(array('action' => $this->config->values['module.setting']['remote_url']));
         $oForm->addElement(new \PFBC\Element\Hidden('ph7cmsurl', PH7_URL_ROOT));
         $oForm->addElement(new \PFBC\Element\Hidden('ph7cmspendingurl', Uri::get('validate-site', 'main', 'pending')));
