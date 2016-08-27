@@ -31,7 +31,8 @@ var $goBox = (function()
 
     // Box Popup (iframe)
     $("a[data-popup=frame]").colorbox({
-        width           : '600px',
+        width           : '100%',
+        maxWidth        : '600px',
         height          : '680px',
         iframe          :  true,
         close           :  'esc'
@@ -42,7 +43,8 @@ var $goBox = (function()
         oEvent.preventDefault();
         $.get($(this).attr("href"), function(oData) {
             $.colorbox({
-                width      :  '450px',
+                width      :  '100%',
+                maxWidth   :  '450px',
                 maxHeight  :  '85%',
                 html       :  $(oData).find('#block_page')
             })
