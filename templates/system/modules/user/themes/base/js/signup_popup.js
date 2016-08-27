@@ -16,7 +16,7 @@ $(document).ready(function()
         closeOnEscape: false,
         modal: true,
         height: 685,
-        width: 500,
+        width: 400,
         resizable: false,
         show: 'slide',
         hide: 'puff',
