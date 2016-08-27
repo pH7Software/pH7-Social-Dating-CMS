@@ -44,7 +44,7 @@ var $goBox = (function()
         $.get($(this).attr("href"), function(oData) {
             $.colorbox({
                 width      :  '100%',
-                maxWidth   :  '450px',
+                maxWidth   :  '400px',
                 maxHeight  :  '85%',
                 html       :  $(oData).find('#block_page')
             })
