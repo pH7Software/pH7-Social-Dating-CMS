@@ -20,11 +20,13 @@ PH7\Framework\Ip\Ip,
 PH7\Framework\File\File,
 PH7\Framework\Util\Various,
 PH7\Framework\Geo\Ip\Geo,
+PH7\Framework\Error\CException\PH7Exception,
 Facebook\Facebook,
 Facebook\FacebookResponse,
 Facebook\FacebookRedirectLoginHelper,
 Facebook\GraphNodes\GraphUser,
 Facebook\GraphNodes\GraphLocation,
+Facebook\Exceptions\FacebookSDKException,
 Facebook\Exceptions\FacebookResponseException,
 PH7\Framework\Mvc\Router\Uri;
 
@@ -49,17 +51,29 @@ class Facebook extends Api implements IApi
         ]);
 
         $oHelper = $oFb->getCanvasHelper();
-        $oFb->setDefaultAccessToken($oHelper->getAccessToken());
+
+        try {
+            $sAccessToken = $oHelper->getAccessToken();
+        } catch(FacebookSDKException $oE) {
+            PH7Exception::launch($oE);
+        }
+
+        if (empty($sAccessToken)) {
+            // First off, set the login URL
+            $this->setLoginUrl($oFb->getRedirectLoginHelper());
+            return; // Stop method
+        }
+
+        // Set the FB access token for the app
+        $oFb->setDefaultAccessToken($sAccessToken);
 
         try {
             $oResponse = $oFb->get('/me');
             $this->initClassAttrs($oResponse);
         } catch(FacebookResponseException $oE) {
-            Framework\Error\CException\PH7Exception::launch($oE);
+            PH7Exception::launch($oE);
         }
 
-        // First off, set the login URL
-        $this->setLoginUrl($oFb->getRedirectLoginHelper());
 
         // If we have GraphUser object
         if (!empty($this->oProfile)) {
