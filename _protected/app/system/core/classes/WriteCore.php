@@ -22,7 +22,7 @@ abstract class WriteCore
         self::checkMod($sMod);
 
         if ($sMod === 'blog') {
-            $mId .= PH7_SH . static::THUMBNAIL_FILENAME;
+            $mId .= PH7_DS . static::THUMBNAIL_FILENAME;
         }
 
         return $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sMod . PH7_DS . PH7_IMG . $mId);
