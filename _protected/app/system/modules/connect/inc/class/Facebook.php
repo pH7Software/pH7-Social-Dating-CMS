@@ -23,7 +23,7 @@ PH7\Framework\Geo\Ip\Geo,
 PH7\Framework\Error\CException\PH7Exception,
 Facebook\Facebook,
 Facebook\FacebookResponse,
-Facebook\FacebookRedirectLoginHelper,
+Facebook\Helpers\FacebookRedirectLoginHelper,
 Facebook\GraphNodes\GraphUser,
 Facebook\GraphNodes\GraphLocation,
 Facebook\Exceptions\FacebookSDKException,
@@ -163,6 +163,12 @@ class Facebook extends Api implements IApi
          (new File)->deleteFile($this->sAvatarFile);
     }
 
+    /**
+     * Set the FB Login URL.
+     *
+     * @param \Facebook\Helpers\FacebookRedirectLoginHelper $oHelper
+     * @return void
+     */
     protected function setLoginUrl(FacebookRedirectLoginHelper $oHelper)
     {
         $this->sUrl = $oHelper->getLoginUrl([
