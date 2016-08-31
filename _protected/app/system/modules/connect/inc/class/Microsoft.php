@@ -110,7 +110,7 @@ class Microsoft extends Api
     {
         $oUser = new UserCore;
         $sBirthDate = (isset($oProfile->birth_month, $oProfile->birth_day, $oProfile->birth_year)) ? $oProfile->birth_month . '/' . $oProfile->birth_day . '/' . $oProfile->birth_year : date('m/d/Y', strtotime('-30 year'));
-        $sSex = ($oProfile->gender != 'male' && $oProfile->gender != 'female' && $oProfile->gender != 'couple') ? 'female' : $oProfile->gender; // Default 'female'
+        $sSex = $this->checkGender($oProfile->gender);
         $sMatchSex = $oUser->getMatchSex($sSex);
         $this->_sUsername = $oUser->findUsername($oProfile->name, $oProfile->first_name, $oProfile->last_name);
         unset($oUser);

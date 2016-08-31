@@ -339,18 +339,19 @@ class Design
 
         if ($sLangCode == 'en-ie') {
             $aSites = [
-                ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com']
+                ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com'],
+                ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://dublin.meetlovelypeople.com']
             ];
         } elseif ($sLangCode == 'en-gb') {
           $aSites = [
-              ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com']
+              ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
+              ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com']
           ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $aSites = [
                 ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
-                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => ' Site de Rencontre Bourgeois', 'link' => 'http://bourgeoisie.club']
+                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
             ];
         } else { // Default links, set to English
             $aSites = [
@@ -359,6 +360,7 @@ class Design
                 ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],
+                ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
                 ['title' => 'Learn Language Abroad', 'link' => 'http://newayup.com']
             ];
         }

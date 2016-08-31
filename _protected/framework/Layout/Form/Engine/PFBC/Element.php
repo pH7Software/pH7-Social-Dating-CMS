@@ -243,7 +243,8 @@ abstract class Element extends Base
     {
         $sCode = '';
 
-        if($this->isRequired()) {
+        // 'required' attr won't work with CKEditor editor, so ignore it if class called by 'CKEditor'
+        if($this->isRequired() && static::class !== 'PFBC\Element\CKEditor') {
             $sCode .= ' required="required"';
         }
         return $sCode;

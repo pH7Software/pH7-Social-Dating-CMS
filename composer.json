@@ -25,6 +25,7 @@
         "stripe/stripe-php": "^3.5",
         "swiftmailer/swiftmailer": "^5.4",
         "ph-7/qrcode-generator-php-class": "^2.0",
-        "robthree/twofactorauth": "^1.4"
+        "robthree/twofactorauth": "^1.4",
+        "facebook/graph-sdk": "^5.3"
     }
 }
