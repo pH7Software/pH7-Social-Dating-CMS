@@ -2,6 +2,11 @@
 
 namespace Stripe;
 
+/**
+ * Class Order
+ *
+ * @package Stripe
+ */
 class Order extends ApiResource
 {
     /**
@@ -24,6 +29,18 @@ class Order extends ApiResource
     public static function create($params = null, $opts = null)
     {
         return self::_create($params, $opts);
+    }
+
+    /**
+     * @param string $id The ID of the order to update.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return Order The updated order.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
     }
 
     /**

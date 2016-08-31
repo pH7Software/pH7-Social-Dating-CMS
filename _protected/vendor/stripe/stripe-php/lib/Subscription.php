@@ -2,8 +2,24 @@
 
 namespace Stripe;
 
+/**
+ * Class Subscription
+ *
+ * @package Stripe
+ */
 class Subscription extends ApiResource
 {
+    /**
+     * These constants are possible representations of the status field.
+     *
+     * @link https://stripe.com/docs/api#subscription_object-status
+     */
+    const STATUS_ACTIVE = 'active';
+    const STATUS_CANCELED = 'canceled';
+    const STATUS_PAST_DUE = 'past_due';
+    const STATUS_TRIALING = 'trialing';
+    const STATUS_UNPAID = 'unpaid';
+
     /**
      * @param string $id The ID of the subscription to retrieve.
      * @param array|string|null $opts
@@ -35,6 +51,18 @@ class Subscription extends ApiResource
     public static function create($params = null, $opts = null)
     {
         return self::_create($params, $opts);
+    }
+
+    /**
+     * @param string $id The ID of the subscription to retrieve.
+     * @param array|null $params
+     * @param array|string|null $options
+     *
+     * @return Subscription The updated subscription.
+     */
+    public static function update($id, $params = null, $options = null)
+    {
+        return self::_update($id, $params, $options);
     }
 
     /**
