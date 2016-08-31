@@ -44,7 +44,7 @@ class AdminController extends MainController
         Header::redirect(Uri::get('blog', 'main', 'index'), t('Your post has been deleted!'));
     }
 
-    private function removeThumb($iId)
+    public function removeThumb($iId)
     {
         if (!(new Framework\Security\CSRF\Token)->checkUrl()) {
             exit(Form::errorTokenMsg());

@@ -65,11 +65,10 @@ class EditNoteForm
             $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(2, 200))));
             $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', array('accept' => 'image/*')));
 
-            if (!empty($oPost->thumb))
+            if (!empty($oPost->thumb)) {
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><br /><img src="' . PH7_URL_DATA_SYS_MOD . 'note/' . PH7_IMG . $oPost->username . PH7_SH . $oPost->thumb . '" alt="' . t('Thumbnail') . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'));
-
-            if (!empty($oPost->thumb))
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="' . Uri::get('note', 'main', 'removethumb', $oPost->noteId . (new Token)->url(), false) . '">' . t('Remove this thumbnail?') . '</a>'));
+            }
 
             $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', array('value' => $oPost->tags, 'description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 200))));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title (meta tag):'), 'page_title', array('value' => $oPost->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));

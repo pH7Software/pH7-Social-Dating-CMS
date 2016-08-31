@@ -64,8 +64,11 @@ class EditAdminBlogForm
 
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><br /><img src="' . Blog::getThumb($oPost->blogId) . '" alt="' . t('Thumbnail') . '" title="' . t('The current thumbnail of your post.') . '" class="avatar" /></p>'));
 
-            if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog/' . PH7_IMG . $iBlogId . '/thumb.png'))
-                $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="' . Uri::get('note', 'main', 'removethumb', $oPost->blogId . (new Token)->url(), false) . '">' . t('Remove this thumbnail?') . '</a>'));
+            if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_SH . PH7_IMG . $iBlogId . PH7_DS . Blog::THUMBNAIL_FILENAME)) {
+                $oForm->addElement(new \PFBC\Element\HTMLExternal(
+                    '<a href="' . Uri::get('blog', 'admin', 'removethumb', $oPost->blogId . ',' . (new Token)->url(), false) . '">' . t('Remove this thumbnail?') . '</a>'
+                ));
+            }
 
             $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', array('value' => $oPost->tags, 'description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 200))));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Title (meta tag):'), 'page_title', array('value' => $oPost->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 200), 'required' => 1)));
@@ -84,4 +87,3 @@ class EditAdminBlogForm
     }
 
 }
-

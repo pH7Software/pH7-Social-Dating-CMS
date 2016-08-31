@@ -9,6 +9,7 @@ namespace PH7;
 
 abstract class WriteCore
 {
+    const THUMBNAIL_FILENAME = 'thumb.png';
 
     /**
      * @param mixed (integer | string) $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
@@ -19,6 +20,10 @@ abstract class WriteCore
     public function deleteThumb($mId, $sMod, Framework\File\File $oFile)
     {
         self::checkMod($sMod);
+
+        if ($sMod === 'blog') {
+            $mId .= PH7_SH . static::THUMBNAIL_FILENAME;
+        }
 
         return $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sMod . PH7_DS . PH7_IMG . $mId);
     }
