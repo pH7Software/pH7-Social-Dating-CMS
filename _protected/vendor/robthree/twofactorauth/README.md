@@ -12,7 +12,7 @@ PHP library for [two-factor (or multi-factor) authentication](http://en.wikipedi
 
 * Tested on PHP 5.3, 5.4, 5.5 and 5.6, 7 and HHVM
 * [cURL](http://php.net/manual/en/book.curl.php) when using the provided `GoogleQRCodeProvider` (default), `QRServerProvider` or `QRicketProvider` but you can also provide your own QR-code provider.
-* [MCrypt](http://php.net/manual/en/book.mcrypt.php), [OpenSSL](http://php.net/manual/en/book.openssl.php) or [Hash](http://php.net/manual/en/book.hash.php) depending on which built-in RNG you use (TwoFactorAuth will try to 'autodetect' and use the best available); however: feel free to provide your own (CS)RNG.
+* [random_bytes()](http://php.net/manual/en/function.random-bytes.php), [MCrypt](http://php.net/manual/en/book.mcrypt.php), [OpenSSL](http://php.net/manual/en/book.openssl.php) or [Hash](http://php.net/manual/en/book.hash.php) depending on which built-in RNG you use (TwoFactorAuth will try to 'autodetect' and use the best available); however: feel free to provide your own (CS)RNG.
 
 ## Installation
 
@@ -166,9 +166,13 @@ Voilà. Couldn't make it any simpler.
 
 ### RNG providers
 
-This library also comes with three 'built-in' RNG providers ([Random Number Generator](https://en.wikipedia.org/wiki/Random_number_generation)). The RNG provider generates a number of random bytes and returns these bytes as a string. These values are then used to create the secret. By default (no RNG provider specified) TwoFactorAuth will try to determine the best available RNG provider to use. It will, by default, try to use the [`MCryptRNGProvider`](lib/Providers/Rng/MCryptRNGProvider.php), if this is not available/supported for any reason it will try to use the [`OpenSSLRNGProvider`](lib/Providers/Rng/OpenSSLRNGProvider.php) and if that is also not available/supported it will try to use the final RNG provider: [`HashRNGProvider`](lib/Providers/Rng/HashRNGProvider.php). Each of these providers use their own method of generating a random sequence of bytes. The first two (`OpenSSLRNGProvider` and `MCryptRNGProvider`) return a [cryptographically secure](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator) sequence of random bytes whereas the `HashRNGProvider` returns a **non-cryptographically secure** sequence.
+This library also comes with three 'built-in' RNG providers ([Random Number Generator](https://en.wikipedia.org/wiki/Random_number_generation)). The RNG provider generates a number of random bytes and returns these bytes as a string. These values are then used to create the secret. By default (no RNG provider specified) TwoFactorAuth will try to determine the best available RNG provider to use. It will, by default, try to use the [`CSRNGProvider`](lib/Providers/Rng/CSRNGProvider.php) for PHP7+ or the [`MCryptRNGProvider`](lib/Providers/Rng/MCryptRNGProvider.php); if this is not available/supported for any reason it will try to use the [`OpenSSLRNGProvider`](lib/Providers/Rng/OpenSSLRNGProvider.php) and if that is also not available/supported it will try to use the final RNG provider: [`HashRNGProvider`](lib/Providers/Rng/HashRNGProvider.php). Each of these providers use their own method of generating a random sequence of bytes. The first three (`CSRNGProvider`, `OpenSSLRNGProvider` and `MCryptRNGProvider`) return a [cryptographically secure](https://en.wikipedia.org/wiki/Cryptographically_secure_pseudorandom_number_generator) sequence of random bytes whereas the `HashRNGProvider` returns a **non-cryptographically secure** sequence.
 
 You can easily implement your own `RNGProvider` by simply implementing the `IRNGProvider` interface. Each of the 'built-in' RNG providers have some constructor parameters that allow you to 'tweak' some of the settings to use when creating the random bytes such as which source to use (`MCryptRNGProvider`) or which hashing algorithm (`HashRNGProvider`). I encourage you to have a look at some of the ['built-in' RNG providers](lib/Providers/Rng) for details and the [`IRNGProvider` interface](lib/Providers/Rng/IRNGProvider.php).
+
+## Integrations
+
+- [CakePHP 3](https://github.com/andrej-griniuk/cakephp-two-factor-auth)
 
 ## License
 

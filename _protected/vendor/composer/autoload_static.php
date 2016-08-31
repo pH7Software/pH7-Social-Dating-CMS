@@ -8,42 +8,59 @@ class ComposerStaticInitPH7
 {
     public static $files = array (
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        'c65d09b6820da036953a371c8c73a9b1' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/polyfills.php',
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' =>
+        'S' => 
         array (
             'Stripe\\' => 7,
         ),
-        'M' =>
+        'M' => 
         array (
             'MaxMind\\' => 8,
         ),
-        'G' =>
+        'G' => 
         array (
             'GeoIp2\\' => 7,
+        ),
+        'F' => 
+        array (
+            'Facebook\\' => 9,
+        ),
+        'C' => 
+        array (
+            'Composer\\CaBundle\\' => 18,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Stripe\\' =>
+        'Stripe\\' => 
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
-        'MaxMind\\' =>
+        'MaxMind\\' => 
         array (
             0 => __DIR__ . '/..' . '/maxmind/web-service-common/src',
         ),
-        'GeoIp2\\' =>
+        'GeoIp2\\' => 
         array (
             0 => __DIR__ . '/..' . '/geoip2/geoip2/src',
+        ),
+        'Facebook\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
+        ),
+        'Composer\\CaBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'M' =>
+        'M' => 
         array (
-            'MaxMind' =>
+            'MaxMind' => 
             array (
                 0 => __DIR__ . '/..' . '/maxmind-db/reader/src',
             ),
@@ -51,6 +68,80 @@ class ComposerStaticInitPH7
     );
 
     public static $classMap = array (
+        'Composer\\CaBundle\\CaBundle' => __DIR__ . '/..' . '/composer/ca-bundle/src/CaBundle.php',
+        'Facebook\\Authentication\\AccessToken' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Authentication/AccessToken.php',
+        'Facebook\\Authentication\\AccessTokenMetadata' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Authentication/AccessTokenMetadata.php',
+        'Facebook\\Authentication\\OAuth2Client' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Authentication/OAuth2Client.php',
+        'Facebook\\Exceptions\\FacebookAuthenticationException' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Exceptions/FacebookAuthenticationException.php',
+        'Facebook\\Exceptions\\FacebookAuthorizationException' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Exceptions/FacebookAuthorizationException.php',
+        'Facebook\\Exceptions\\FacebookClientException' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Exceptions/FacebookClientException.php',
+        'Facebook\\Exceptions\\FacebookOtherException' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Exceptions/FacebookOtherException.php',
+        'Facebook\\Exceptions\\FacebookResponseException' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Exceptions/FacebookResponseException.php',
+        'Facebook\\Exceptions\\FacebookResumableUploadException' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Exceptions/FacebookResumableUploadException.php',
+        'Facebook\\Exceptions\\FacebookSDKException' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Exceptions/FacebookSDKException.php',
+        'Facebook\\Exceptions\\FacebookServerException' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Exceptions/FacebookServerException.php',
+        'Facebook\\Exceptions\\FacebookThrottleException' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Exceptions/FacebookThrottleException.php',
+        'Facebook\\Facebook' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Facebook.php',
+        'Facebook\\FacebookApp' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FacebookApp.php',
+        'Facebook\\FacebookBatchRequest' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FacebookBatchRequest.php',
+        'Facebook\\FacebookBatchResponse' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FacebookBatchResponse.php',
+        'Facebook\\FacebookClient' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FacebookClient.php',
+        'Facebook\\FacebookRequest' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FacebookRequest.php',
+        'Facebook\\FacebookResponse' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FacebookResponse.php',
+        'Facebook\\FileUpload\\FacebookFile' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FileUpload/FacebookFile.php',
+        'Facebook\\FileUpload\\FacebookResumableUploader' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FileUpload/FacebookResumableUploader.php',
+        'Facebook\\FileUpload\\FacebookTransferChunk' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FileUpload/FacebookTransferChunk.php',
+        'Facebook\\FileUpload\\FacebookVideo' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FileUpload/FacebookVideo.php',
+        'Facebook\\FileUpload\\Mimetypes' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/FileUpload/Mimetypes.php',
+        'Facebook\\GraphNodes\\Birthday' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/Birthday.php',
+        'Facebook\\GraphNodes\\Collection' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/Collection.php',
+        'Facebook\\GraphNodes\\GraphAchievement' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphAchievement.php',
+        'Facebook\\GraphNodes\\GraphAlbum' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphAlbum.php',
+        'Facebook\\GraphNodes\\GraphApplication' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphApplication.php',
+        'Facebook\\GraphNodes\\GraphCoverPhoto' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphCoverPhoto.php',
+        'Facebook\\GraphNodes\\GraphEdge' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphEdge.php',
+        'Facebook\\GraphNodes\\GraphEvent' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphEvent.php',
+        'Facebook\\GraphNodes\\GraphGroup' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphGroup.php',
+        'Facebook\\GraphNodes\\GraphList' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphList.php',
+        'Facebook\\GraphNodes\\GraphLocation' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphLocation.php',
+        'Facebook\\GraphNodes\\GraphNode' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphNode.php',
+        'Facebook\\GraphNodes\\GraphNodeFactory' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphNodeFactory.php',
+        'Facebook\\GraphNodes\\GraphObject' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphObject.php',
+        'Facebook\\GraphNodes\\GraphObjectFactory' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphObjectFactory.php',
+        'Facebook\\GraphNodes\\GraphPage' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphPage.php',
+        'Facebook\\GraphNodes\\GraphPicture' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphPicture.php',
+        'Facebook\\GraphNodes\\GraphSessionInfo' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphSessionInfo.php',
+        'Facebook\\GraphNodes\\GraphUser' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/GraphNodes/GraphUser.php',
+        'Facebook\\Helpers\\FacebookCanvasHelper' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Helpers/FacebookCanvasHelper.php',
+        'Facebook\\Helpers\\FacebookJavaScriptHelper' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Helpers/FacebookJavaScriptHelper.php',
+        'Facebook\\Helpers\\FacebookPageTabHelper' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Helpers/FacebookPageTabHelper.php',
+        'Facebook\\Helpers\\FacebookRedirectLoginHelper' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Helpers/FacebookRedirectLoginHelper.php',
+        'Facebook\\Helpers\\FacebookSignedRequestFromInputHelper' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Helpers/FacebookSignedRequestFromInputHelper.php',
+        'Facebook\\HttpClients\\FacebookCurl' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/HttpClients/FacebookCurl.php',
+        'Facebook\\HttpClients\\FacebookCurlHttpClient' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/HttpClients/FacebookCurlHttpClient.php',
+        'Facebook\\HttpClients\\FacebookGuzzleHttpClient' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/HttpClients/FacebookGuzzleHttpClient.php',
+        'Facebook\\HttpClients\\FacebookHttpClientInterface' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/HttpClients/FacebookHttpClientInterface.php',
+        'Facebook\\HttpClients\\FacebookStream' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/HttpClients/FacebookStream.php',
+        'Facebook\\HttpClients\\FacebookStreamHttpClient' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/HttpClients/FacebookStreamHttpClient.php',
+        'Facebook\\HttpClients\\HttpClientsFactory' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/HttpClients/HttpClientsFactory.php',
+        'Facebook\\Http\\GraphRawResponse' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Http/GraphRawResponse.php',
+        'Facebook\\Http\\RequestBodyInterface' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Http/RequestBodyInterface.php',
+        'Facebook\\Http\\RequestBodyMultipart' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Http/RequestBodyMultipart.php',
+        'Facebook\\Http\\RequestBodyUrlEncoded' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Http/RequestBodyUrlEncoded.php',
+        'Facebook\\PersistentData\\FacebookMemoryPersistentDataHandler' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PersistentData/FacebookMemoryPersistentDataHandler.php',
+        'Facebook\\PersistentData\\FacebookSessionPersistentDataHandler' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PersistentData/FacebookSessionPersistentDataHandler.php',
+        'Facebook\\PersistentData\\PersistentDataFactory' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PersistentData/PersistentDataFactory.php',
+        'Facebook\\PersistentData\\PersistentDataInterface' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PersistentData/PersistentDataInterface.php',
+        'Facebook\\PseudoRandomString\\McryptPseudoRandomStringGenerator' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/McryptPseudoRandomStringGenerator.php',
+        'Facebook\\PseudoRandomString\\OpenSslPseudoRandomStringGenerator' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/OpenSslPseudoRandomStringGenerator.php',
+        'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorFactory' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorFactory.php',
+        'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorInterface' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorInterface.php',
+        'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorTrait' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorTrait.php',
+        'Facebook\\PseudoRandomString\\UrandomPseudoRandomStringGenerator' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/UrandomPseudoRandomStringGenerator.php',
+        'Facebook\\SignedRequest' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/SignedRequest.php',
+        'Facebook\\Url\\FacebookUrlDetectionHandler' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Url/FacebookUrlDetectionHandler.php',
+        'Facebook\\Url\\FacebookUrlManipulator' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Url/FacebookUrlManipulator.php',
+        'Facebook\\Url\\UrlDetectionInterface' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Url/UrlDetectionInterface.php',
         'GeoIp2\\Compat\\JsonSerializable' => __DIR__ . '/..' . '/geoip2/geoip2/src/Compat/JsonSerializable.php',
         'GeoIp2\\Database\\Reader' => __DIR__ . '/..' . '/geoip2/geoip2/src/Database/Reader.php',
         'GeoIp2\\Exception\\AddressNotFoundException' => __DIR__ . '/..' . '/geoip2/geoip2/src/Exception/AddressNotFoundException.php',
@@ -92,6 +183,7 @@ class ComposerStaticInitPH7
         'MaxMind\\Exception\\InvalidInputException' => __DIR__ . '/..' . '/maxmind/web-service-common/src/Exception/InvalidInputException.php',
         'MaxMind\\Exception\\InvalidRequestException' => __DIR__ . '/..' . '/maxmind/web-service-common/src/Exception/InvalidRequestException.php',
         'MaxMind\\Exception\\IpAddressNotFoundException' => __DIR__ . '/..' . '/maxmind/web-service-common/src/Exception/IpAddressNotFoundException.php',
+        'MaxMind\\Exception\\PermissionRequiredException' => __DIR__ . '/..' . '/maxmind/web-service-common/src/Exception/PermissionRequiredException.php',
         'MaxMind\\Exception\\WebServiceException' => __DIR__ . '/..' . '/maxmind/web-service-common/src/Exception/WebServiceException.php',
         'MaxMind\\WebService\\Client' => __DIR__ . '/..' . '/maxmind/web-service-common/src/WebService/Client.php',
         'MaxMind\\WebService\\Http\\CurlRequest' => __DIR__ . '/..' . '/maxmind/web-service-common/src/WebService/Http/CurlRequest.php',
@@ -157,6 +249,7 @@ class ComposerStaticInitPH7
         'Stripe\\Stripe' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Stripe.php',
         'Stripe\\StripeObject' => __DIR__ . '/..' . '/stripe/stripe-php/lib/StripeObject.php',
         'Stripe\\Subscription' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Subscription.php',
+        'Stripe\\ThreeDSecure' => __DIR__ . '/..' . '/stripe/stripe-php/lib/ThreeDSecure.php',
         'Stripe\\Token' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Token.php',
         'Stripe\\Transfer' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Transfer.php',
         'Stripe\\TransferReversal' => __DIR__ . '/..' . '/stripe/stripe-php/lib/TransferReversal.php',
