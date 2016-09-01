@@ -35,8 +35,8 @@ abstract class WriteCore
      */
     public static function checkMod($sMod)
     {
-        if ($sMod !== 'blog' && $sMod !== 'note')
+        if ($sMod !== 'blog' && $sMod !== 'note') {
             Framework\Error\CException\PH7InvalidArgumentException('Bad module: ' . $sMod);
+        }
     }
-
 }
