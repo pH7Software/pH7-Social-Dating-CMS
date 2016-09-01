@@ -25,11 +25,12 @@ class AdminBlogFormProcess extends Form
         $oBlog = new Blog;
         $oBlogModel = new BlogModel;
 
-        if (!$oBlog->checkPostId($this->httpRequest->post('post_id'))) {
+        $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
+        if (!$oBlog->checkPostId($sPostId)) {
             \PFBC\Form::setError('form_blog', t('The ID of the article is invalid or incorrect.'));
         } else {
             $aData = [
-                'post_id' => $this->httpRequest->post('post_id'),
+                'post_id' => $sPostId,
                 'lang_id' => $this->httpRequest->post('lang_id'),
                 'title' => $this->httpRequest->post('title'),
                 'content' => $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN
@@ -66,7 +67,7 @@ class AdminBlogFormProcess extends Form
                 $this->sMsg = t('Post successfully created!');
             }
 
-            Header::redirect(Uri::get('blog', 'main', 'read', $this->httpRequest->post('post_id')), $this->sMsg);
+            Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), $this->sMsg);
         }
     }
 
