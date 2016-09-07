@@ -26,13 +26,11 @@ class EditAdminBlogFormProcess extends Form
         $oPost = $oBlogModel->readPost($sPostId);
 
         /*** Updating the ID of the post if it has changed ***/
-        $sPostId = $this->httpRequest->post('post_id');
+        $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
 
         if (!$this->str->equals($sPostId, $oPost->postId)) {
             if ($oBlog->checkPostId($sPostId)) {
                 $oBlogModel->updatePost('postId', $sPostId, $iBlogId);
-                /* Clean BlogModel Cache */
-                (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
             } else {
                 \PFBC\Form::setError('form_blog', t('The ID of the article is invalid or incorrect.'));
             }

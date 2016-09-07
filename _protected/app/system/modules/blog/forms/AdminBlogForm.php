@@ -37,7 +37,7 @@ class AdminBlogForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, array('description' => t('Select a category that fits the best for your article.'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
-        $oForm->addElement(new \PFBC\Element\CKEditor(t('Contents:'), 'content', array('description' => t('Content of the article'), 'validation' => new \PFBC\Validation\Str(30), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', array('description' => t('Content of the article'), 'validation' => new \PFBC\Validation\Str(30), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('The language of your article:'), 'lang_id', array('description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('validation' => new \PFBC\Validation\Str(2, 200))));
         $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', array('accept' => 'image/*')));

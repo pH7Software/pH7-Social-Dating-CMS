@@ -29,7 +29,8 @@ class NoteFormProcess extends Form
         $iProfileId = $this->session->get('member_id');
         $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendNote');
 
-        if (!$oNote->checkPostId($this->httpRequest->post('post_id'), $iProfileId)) {
+        $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
+        if (!$oNote->checkPostId($sPostId, $iProfileId)) {
             \PFBC\Form::setError('form_note', t('The ID of the article is invalid or incorrect.'));
         } elseif (!$oNoteModel->checkWaitSend($this->session->get('member_id'), $iTimeDelay, $sCurrentTime)) {
             \PFBC\Form::setError('form_note', Form::waitWriteMsg($iTimeDelay));
@@ -38,7 +39,7 @@ class NoteFormProcess extends Form
 
             $aData = [
                 'profile_id' => $iProfileId,
-                'post_id' => $this->httpRequest->post('post_id'),
+                'post_id' => $sPostId,
                 'lang_id' => $this->httpRequest->post('lang_id'),
                 'title' => $this->httpRequest->post('title'),
                 'content' => $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN
@@ -81,7 +82,7 @@ class NoteFormProcess extends Form
                 $this->sMsg = ($iApproved == '0') ? t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post successfully created!');
             }
 
-            Header::redirect(Uri::get('note','main','read',$this->session->get('member_username') .','. $this->httpRequest->post('post_id')), $this->sMsg);
+            Header::redirect(Uri::get('note','main','read',$this->session->get('member_username') .','. $sPostId), $this->sMsg);
         }
     }
 

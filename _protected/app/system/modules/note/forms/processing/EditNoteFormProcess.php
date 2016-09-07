@@ -29,12 +29,10 @@ class EditNoteFormProcess extends Form
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);
 
         /*** Updating the ID of the post if it has changed ***/
-        $sPostId = $this->httpRequest->post('post_id');
+        $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
         if (!$this->str->equals($sPostId, $oPost->postId)) {
             if ($oNote->checkPostId($sPostId, $iProfileId)) {
                 $oNoteModel->updatePost('postId', $sPostId, $iNoteId, $iProfileId);
-                /* Clean NoteModel Cache */
-                (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
             } else {
                 \PFBC\Form::setError('form_note', t('ID Article must be unique!'));
             }
