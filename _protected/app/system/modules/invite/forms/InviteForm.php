@@ -35,7 +35,7 @@ class InviteForm
         $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id' => 'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description' => t('Enter the code above:'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         $oForm->addElement(new \PFBC\Element\Button(t('Invite your friends!'),'submit'));
-        $oForm->addElement(new \PFBC\Element\Button(t('Cancel'), 'cancel', array('onclick'=>'parent.$.colorbox.close()')));
+        $oForm->addElement(new \PFBC\Element\Button(t('Cancel'), 'cancel', array('onclick'=>'parent.$.colorbox.close();return false')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script><script src="'.PH7_URL_STATIC.PH7_JS.'str.js"></script>'));
         $oForm->render();
     }
