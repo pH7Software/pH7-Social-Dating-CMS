@@ -1,9 +1,11 @@
-<div class="left col-md-10" id="block_page">
-  <h1>{lang 'Invite your Friends'}</h1>
-  {{ InviteForm::display() }}
+<div class="left col-md-8">
+    <div id="block_page">
+        <h1>{lang 'Invite your Friends'}</h1>
+        {{ InviteForm::display() }}
+    </div>
 </div>
 
-<div class="right col-md-2">
-  <div class="ad_160_600">{{ $designModel->ad(160,600) }}</div>
+<div class="right col-md-4">
+  <div class="ad_336_280">{{ $designModel->ad(336,280) }}</div>
   {{ $design->likeApi() }}
 </div>
