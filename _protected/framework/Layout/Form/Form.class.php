@@ -54,7 +54,7 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     public static function wrongRequestMethodMsg($sMethodName)
     {
-        return t('This HTTP parameter must be a %0% type!', $sMethodName);
+        return t('The HTTP parameter must be a %0% type!', $sMethodName);
     }
 
     /**
