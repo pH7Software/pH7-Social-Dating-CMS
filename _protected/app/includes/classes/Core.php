@@ -8,4 +8,4 @@
 
 namespace PH7;
 
-class Core extends Framework\Core\Core {}
+abstract class Core extends Framework\Core\Core {}

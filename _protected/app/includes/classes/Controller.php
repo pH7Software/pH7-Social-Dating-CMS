@@ -9,4 +9,4 @@
 namespace PH7;
 use PH7\Framework\Mvc\Controller as FwkCtrl;
 
-class Controller extends FwkCtrl\Controller implements FwkCtrl\IController {}
+abstract class Controller extends FwkCtrl\Controller implements FwkCtrl\IController {}

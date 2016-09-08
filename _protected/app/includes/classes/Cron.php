@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-class Cron extends Framework\Cron\Run\Cron
+abstract class Cron extends Framework\Cron\Run\Cron
 {
 
     public function __construct()
