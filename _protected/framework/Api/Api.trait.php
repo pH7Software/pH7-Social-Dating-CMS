@@ -19,14 +19,16 @@ trait Api
     }
 
     /**
-     * Set the Json Output data.
+     * Encode the data to JSON
      *
-     * @return string
+     * @return string|bool Returns the data encoded to JSON or FALSE if the data is invalid.
      */
     public function set($mData)
     {
         if (is_array($mData))
             return json_encode($mData);
+
+        return false;
     }
 
 }
