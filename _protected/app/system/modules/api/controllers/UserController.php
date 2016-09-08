@@ -123,12 +123,40 @@ class UserController extends MainController
         }
     }
 
-    public function getUser($iId)
+    /**
+     * Get User Data.
+     *
+     * @param int $iId Profile ID
+     * @return void
+     */
+    public function user($iId = null)
     {
-
+        if ($this->oRest->getRequestMethod() != 'GET')
+        {
+            $this->oRest->response('', 406);
+        }
+        else
+        {
+            if (empty($iId))
+            {
+                $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('Profile ID Empty'))), 400);
+            }
+            else
+            {
+                $oUser = $this->oUserModel->readProfile($iId);
+                if (!empty($oUser->profileId) && $iId === $oUser->profileId)
+                {
+                    $this->oRest->response($this->set([$oUser]));
+                }
+                else
+                {
+                    $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('Profile Not Found'))), 404);
+                }
+            }
+        }
     }
 
-    public function getUsers()
+    public function users()
     {
 
     }
