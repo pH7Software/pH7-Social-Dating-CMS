@@ -1,5 +1,7 @@
 <?php
 /**
+ * This module is just an example to show how easy you can create modules with pH7CMS
+ *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
@@ -22,11 +24,11 @@ class HomeController extends Controller
 
         // Meta Tags
         $this->view->page_title = t('Hello World');
-        $this->view->meta_description = t('This module is a test for create simple module');
+        $this->view->meta_description = t('This module is just an example to show how easy you can create modules with pH7CMS');
         $this->view->meta_keywords = t('hello world, test, developpers, CMS, Dating CMS, CMS Dating, Social CMS, pH7, pH7 CMS, Dating Script, Social Dating Script, Dating Software, Social Network Software, Social Networking Software');
 
         /* H TITLE html tag H1 to H4 */
-        $this->view->h1_title = t('Example of simple module that displays hello world for the CMS');
+        $this->view->h1_title = t('Example of a simple module that displays "Hello World"');
         $this->view->h3_title = t('H3 title example');
         $this->view->desc = t('Hello world %0% %1%, how are you on %2%?', $this->str->upperFirst($sFirstName), $this->str->upperFirst($sLastName), $this->dateTime->get()->date('Y-m-d'));
 
