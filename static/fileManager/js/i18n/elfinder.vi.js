@@ -57,15 +57,15 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         'errUploadFileSize'    : 'Tập tin vượt quá kích thước tối đa cho phép.',
         'errUploadMime'        : 'Kiểu tập tin không được phép.',
         'errUploadTransfer'    : 'Lỗi khi truyền "$1".',
-            'errNotReplace'        : 'Object "$1" already exists at this location and can not be replaced by object with another type.',
-            'errReplace'           : 'Unable to replace "$1".',
-            'errSave'              : 'Không thể lưu "$1".',
+			'errNotReplace'        : 'Object "$1" already exists at this location and can not be replaced by object with another type.',
+			'errReplace'           : 'Unable to replace "$1".',
+			'errSave'              : 'Không thể lưu "$1".',
         'errCopy'              : 'Không thể sao chép "$1".',
         'errMove'              : 'Không thể chuyển "$1".',
         'errCopyInItself'      : 'Không thể sao chép "$1" vào chính nó.',
         'errRm'                : 'Không thể xóa "$1".',
         'errRmSrc'             : 'Unable remove source file(s).',
-            'errExtract'           : 'Không thể giải nén các tập tin từ"$1".',
+			'errExtract'           : 'Không thể giải nén các tập tin từ"$1".',
         'errArchive'           : 'Không thể tạo ra lưu trữ.',
         'errArcType'           : 'Loại lưu trữ không được hỗ trợ.',
         'errNoArchive'         : 'Tập tin không phải là lưu trữ hoặc có kiểu lưu trữ không được hỗ trợ.',
@@ -74,23 +74,23 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         'errArcSymlinks'       : 'Vì lý do bảo mật, từ chối giải nén tập tin lưu trữ có chứa liên kết mềm.',
         'errArcMaxSize'        : 'Tập tin lưu trữ vượt quá kích thước tối đa cho phép.',
         'errResize'            : 'Không thể thay đổi kích thước "$1".',
-            'errResizeDegree'      : 'Invalid rotate degree.',
-            'errResizeRotate'      : 'Unable to rotate image.',
-            'errResizeSize'        : 'Invalid image size.',
-            'errResizeNoChange'    : 'Image size not changed.',
+			'errResizeDegree'      : 'Invalid rotate degree.',
+			'errResizeRotate'      : 'Unable to rotate image.',
+			'errResizeSize'        : 'Invalid image size.',
+			'errResizeNoChange'    : 'Image size not changed.',
         'errUsupportType'      : 'Loại tập tin không được hỗ trợ.',
-            'errNotUTF8Content'    : 'File "$1" is not in UTF-8 and cannot be edited.',  // added 9.11.2011
-            'errNetMount'          : 'Unable to mount "$1".', // added 17.04.2012
-            'errNetMountNoDriver'  : 'Unsupported protocol.',     // added 17.04.2012
-            'errNetMountFailed'    : 'Mount failed.',         // added 17.04.2012
-            'errNetMountHostReq'   : 'Host required.', // added 18.04.2012
-            'errSessionExpires'    : 'Your session has expired due to inactivity.',
-            'errCreatingTempDir'   : 'Unable to create temporary directory: "$1"',
-            'errFtpDownloadFile'   : 'Unable to download file from FTP: "$1"',
-            'errFtpUploadFile'     : 'Unable to upload file to FTP: "$1"',
-            'errFtpMkdir'          : 'Unable to create remote directory on FTP: "$1"',
-            'errArchiveExec'       : 'Error while archiving files: "$1"',
-            'errExtractExec'       : 'Error while extracting files: "$1"',
+			'errNotUTF8Content'    : 'File "$1" is not in UTF-8 and cannot be edited.',  // added 9.11.2011
+			'errNetMount'          : 'Unable to mount "$1".', // added 17.04.2012
+			'errNetMountNoDriver'  : 'Unsupported protocol.',     // added 17.04.2012
+			'errNetMountFailed'    : 'Mount failed.',         // added 17.04.2012
+			'errNetMountHostReq'   : 'Host required.', // added 18.04.2012
+			'errSessionExpires'    : 'Your session has expired due to inactivity.',
+			'errCreatingTempDir'   : 'Unable to create temporary directory: "$1"',
+			'errFtpDownloadFile'   : 'Unable to download file from FTP: "$1"',
+			'errFtpUploadFile'     : 'Unable to upload file to FTP: "$1"',
+			'errFtpMkdir'          : 'Unable to create remote directory on FTP: "$1"',
+			'errArchiveExec'       : 'Error while archiving files: "$1"',
+			'errExtractExec'       : 'Error while extracting files: "$1"',
 
         /******************************* commands names ********************************/
         'cmdarchive'   : 'Tạo tập tin nén',
@@ -120,9 +120,9 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         'cmdview'      : 'Xem',
         'cmdresize'    : 'Resize image',
         'cmdsort'      : 'Sắp xếp',
-            'cmdnetmount'  : 'Mount network volume',
+			'cmdnetmount'  : 'Mount network volume',
 
-        /*********************************** buttons ***********************************/
+        /*********************************** buttons ***********************************/ 
         'btnClose'  : 'Đóng',
         'btnSave'   : 'Lưu',
         'btnRm'     : 'Gỡ bỏ',
@@ -130,7 +130,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         'btnCancel' : 'Hủy bỏ',
         'btnNo'     : 'Không',
         'btnYes'    : 'Đồng ý',
-            'btnMount'  : 'Mount',
+			'btnMount'  : 'Mount',
 
         /******************************** notifications ********************************/
         'ntfopen'     : 'Mở thư mục',
@@ -149,11 +149,11 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         'ntfarchive'  : 'Tạo tập tin nén',
         'ntfextract'  : 'Giải nén tập tin',
         'ntfsearch'   : 'Tìm kiếm tập tin',
-            'ntfresize'   : 'Resizing images',
+			'ntfresize'   : 'Resizing images',
         'ntfsmth'     : 'Doing something >_<',
         'ntfloadimg'  : 'Đang tải hình ảnh',
-            'ntfnetmount' : 'Mounting network volume', // added 18.04.2012
-            'ntfdim'      : 'Acquiring image dimension', // added 20.05.2013
+			'ntfnetmount' : 'Mounting network volume', // added 18.04.2012
+			'ntfdim'      : 'Acquiring image dimension', // added 20.05.2013
 
         /************************************ dates **********************************/
         'dateUnknown' : 'Chưa biết',
@@ -183,27 +183,27 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         'October'     : 'October',
         'November'    : 'November',
         'December'    : 'December',
-        'Sunday'      : 'Sunday',
-        'Monday'      : 'Monday',
-        'Tuesday'     : 'Tuesday',
-        'Wednesday'   : 'Wednesday',
-        'Thursday'    : 'Thursday',
-        'Friday'      : 'Friday',
+        'Sunday'      : 'Sunday', 
+        'Monday'      : 'Monday', 
+        'Tuesday'     : 'Tuesday', 
+        'Wednesday'   : 'Wednesday', 
+        'Thursday'    : 'Thursday', 
+        'Friday'      : 'Friday', 
         'Saturday'    : 'Saturday',
-        'Sun'         : 'Sun',
-        'Mon'         : 'Mon',
-        'Tue'         : 'Tue',
-        'Wed'         : 'Wed',
-        'Thu'         : 'Thu',
-        'Fri'         : 'Fri',
+        'Sun'         : 'Sun', 
+        'Mon'         : 'Mon', 
+        'Tue'         : 'Tue', 
+        'Wed'         : 'Wed', 
+        'Thu'         : 'Thu', 
+        'Fri'         : 'Fri', 
         'Sat'         : 'Sat',
-
+        
         /******************************** sort variants ********************************/
-        'sortname'          : 'by name',
-        'sortkind'          : 'by kind',
+        'sortname'          : 'by name', 
+        'sortkind'          : 'by kind', 
         'sortsize'          : 'by size',
         'sortdate'          : 'by date',
-            'sortFoldersFirst'  : 'Folders first',
+			'sortFoldersFirst'  : 'Folders first',
 
         /********************************** messages **********************************/
         'confirmReq'      : 'Confirmation required',
@@ -227,7 +227,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         'viewlist'        : 'List view',
         'viewicons'       : 'Icons view',
         'places'          : 'Places',
-        'calc'            : 'Calculate',
+        'calc'            : 'Calculate', 
         'path'            : 'Path',
         'aliasfor'        : 'Alias for',
         'locked'          : 'Locked',
@@ -238,7 +238,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         'yes'             : 'yes',
         'no'              : 'no',
         'link'            : 'Link',
-        'searcresult'     : 'Search results',
+        'searcresult'     : 'Search results',  
         'selected'        : 'selected items',
         'about'           : 'About',
         'shortcuts'       : 'Shortcuts',
@@ -276,12 +276,12 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
         'rotate-cw'       : 'Rotate 90 degrees CW',
         'rotate-ccw'      : 'Rotate 90 degrees CCW',
         'degree'          : 'Degree',
-            'netMountDialogTitle' : 'Mount network volume', // added 18.04.2012
-            'protocol'            : 'Protocol', // added 18.04.2012
-            'host'                : 'Host', // added 18.04.2012
-            'port'                : 'Port', // added 18.04.2012
-            'user'                : 'User', // added 18.04.2012
-            'pass'                : 'Password', // added 18.04.2012
+			'netMountDialogTitle' : 'Mount network volume', // added 18.04.2012
+			'protocol'            : 'Protocol', // added 18.04.2012
+			'host'                : 'Host', // added 18.04.2012
+			'port'                : 'Port', // added 18.04.2012
+			'user'                : 'User', // added 18.04.2012
+			'pass'                : 'Password', // added 18.04.2012
 
         /********************************** mimetypes **********************************/
         'kindUnknown'     : 'Unknown',

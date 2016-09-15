@@ -5,6 +5,13 @@
  * @author Dmitry (dio) Levashov
  **/
 
+/* input textarea */
+.elfinder input,
+.elfinder textarea {
+	color: #000;
+	background-color: #FFF;
+}
+
 /* dialogs */
 .std42-dialog, .std42-dialog .ui-widget-content { background-color:#ededed; background-image:none; background-clip: content-box; }
 
@@ -16,6 +23,8 @@
 /* disabled elfinder */
 .elfinder-disabled .elfinder-navbar .ui-state-active { background: #dadada; border-color:#aaa; color:#fff; }
 
+/* workzone */
+.elfinder-workzone { background:#fff; }
 
 /* current directory */
 /* selected file in "icons" view */
@@ -25,8 +34,8 @@
 .elfinder-cwd table thead td.ui-state-hover { background:#ddd; }
 .elfinder-cwd table tr:nth-child(odd) { background-color:#edf3fe; }
 .elfinder-cwd table tr {
-    border: 1px solid transparent;
-    border-top:1px solid #fff;
+	border: 1px solid transparent;
+	border-top:1px solid #fff;
 }
 .elfinder-cwd .elfinder-droppable-active td { background:#A7C6E5 !important; }
 
@@ -47,11 +56,13 @@
 .std42-dialog .elfinder-help, .std42-dialog .elfinder-help .ui-widget-content { background:#fff;}
 
 /* contextmenu */
+.elfinder-contextmenu .ui-state-active { background: #6293df; color:#fff; }
 .elfinder-contextmenu .ui-state-hover { background: #3875d7; color:#fff; }
 .elfinder-contextmenu .ui-state-hover .elfinder-contextmenu-arrow { background-image:url('../img/arrows-active.png'); }
 
-
-
-
-
-
+/* dialog */
+.elfinder .ui-dialog input:text.ui-state-hover,
+.elfinder .ui-dialog textarea.ui-state-hover {
+	background-image: none;
+	background-color: inherit;
+}
