@@ -1,21 +1,26 @@
 elFinder
 ========
-
 <pre>
-      _ ______ _           _
-     | |  ____(_)         | |
-  ___| | |__   _ _ __   __| | ___ _ __
+      _ ______ _           _           
+     | |  ____(_)         | |          
+  ___| | |__   _ _ __   __| | ___ _ __ 
  / _ \ |  __| | | '_ \ / _` |/ _ \ '__|
-|  __/ | |    | | | | | (_| |  __/ |
- \___|_|_|    |_|_| |_|\__,_|\___|_|
+|  __/ | |    | | | | | (_| |  __/ |   
+ \___|_|_|    |_|_| |_|\__,_|\___|_|   
 </pre>
 
 elFinder is an open-source file manager for web, written in JavaScript using
 jQuery UI. Creation is inspired by simplicity and convenience of Finder program
 used in Mac OS X operating system.
 
+[![Download now!](http://studio-42.github.io/elFinder/images/download-icon.png)](https://github.com/Studio-42/elFinder/releases/latest)
+[![Packagist License](https://poser.pugx.org/studio-42/elfinder/license.png)](http://choosealicense.com/licenses/bsd-3-clause/)
+[![Latest Stable Version](https://poser.pugx.org/studio-42/elfinder/version.png)](https://packagist.org/packages/studio-42/elfinder)
+[![Total Downloads](https://poser.pugx.org/studio-42/elfinder/d/total.png)](https://packagist.org/packages/studio-42/elfinder)
+
 Contents
 --------
+* [Branches](#branches)
 * [Features](#features)
 * [Requirements](#requirements)
 * [Installation](#installation)
@@ -28,6 +33,14 @@ Contents
 * [Support](#support)
 * [Authors](#authors)
 * [License](#license)
+
+Branches
+--------
+-  [master](https://github.com/Studio-42/elFinder/tree/master) - Main development branch
+-  [2.1-src](https://github.com/Studio-42/elFinder/tree/2.1-src) - 2.1 development branch, auto build to 2.1 on commit
+-  [2.0-src](https://github.com/Studio-42/elFinder/tree/2.0-src) - 2.0 development branch (Security fix only), auto build to 2.0 on commit
+-  [2.1](https://github.com/Studio-42/elFinder/tree/2.1) - 2.1 nightly build branch
+-  [2.0](https://github.com/Studio-42/elFinder/tree/2.0) - 2.0 nightly build branch
 
 Features
 --------
@@ -58,6 +71,7 @@ Features
 **2.1.x**
  * More High performance server backend and light client UI
  * Connector plugin
+     * [AutoRotate](https://github.com/Studio-42/elFinder/blob/2.1-src/php/plugins/AutoRotate/plugin.php) : Auto rotation on file upload of JPEG file by EXIF Orientation.
      * [AutoResize](https://github.com/Studio-42/elFinder/blob/2.1-src/php/plugins/AutoResize/plugin.php) : Auto resize on file upload.
      * [Normalizer](https://github.com/Studio-42/elFinder/blob/2.1-src/php/plugins/Normalizer/plugin.php) : UTF-8 Normalizer of file-name and file-path etc.
      * [Sanitizer](https://github.com/Studio-42/elFinder/blob/2.1-src/php/plugins/Sanitizer/plugin.php) : Sanitizer of file-name and file-path etc.
@@ -72,9 +86,15 @@ Features
  * Supports custom information in info dialog
  * Configuable columns of list view
  * Supports custom CSS class function of tree view
+ * For more details, see the [Changelog](https://github.com/Studio-42/elFinder/blob/master/Changelog)
 
 Requirements
 ------------
+### jQuery / jQuery UI
+ * jQuery 1.8.0+
+ * jQuery UI 1.9.0+
+
+**However, we recommend newest version.**
 
 ### Client
  * Modern browser. elFinder was tested in Firefox 12, Internet Explorer 8+,
@@ -82,7 +102,7 @@ Requirements
 
 ### Server
  * Any web server
- * PHP 5.2+ (for thumbnails - mogrify utility or GD/Imagick module)
+ * PHP 5.2+ (Recommend PHP 5.4 or higher) And for thumbnails - GD / Imagick module / convert(imagemagick) require
 
 Installation
 ------------
@@ -101,15 +121,18 @@ Installation
  2. Rename `/php/connector.minimal.php-dist` to `/php/connector.minimal.php`
  3. Load `/elfinder.src.html` in your browser to run elFinder
 
+### Installer
+ - [Setup elFinder 2.1.x nightly with Composer](https://github.com/Studio-42/elFinder/tree/gh-pages/tools/installer/setup_with_composer)
+
 Downloads
 ------------
-**Stable releases**
- + [elFinder 2.1.5](https://github.com/Studio-42/elFinder/archive/2.1.5.zip)
- + [elFinder 2.0.5](https://github.com/Studio-42/elFinder/archive/2.0.5.zip)
+**Stable releases** ([Changelog](https://github.com/Studio-42/elFinder/blob/master/Changelog))
+ + [elFinder 2.1.15](https://github.com/Studio-42/elFinder/archive/2.1.15.zip)
+ + [elFinder 2.0.7](https://github.com/Studio-42/elFinder/archive/2.0.7.zip)
 
 **Nightly builds**
- + [elFinder 2.1.x (Nightly)](https://github.com/Studio-42/elFinder/archive/2.1-src.zip)
- + [elFinder 2.0.x (Nightly)](https://github.com/Studio-42/elFinder/archive/2.0-src.zip)
+ + [elFinder 2.1.x (Nightly)](https://github.com/Studio-42/elFinder/archive/2.1.zip)
+ + [elFinder 2.0.x (Nightly)](https://github.com/Studio-42/elFinder/archive/2.0.zip)
 
 Demo sites
 ------------
@@ -124,9 +147,9 @@ Demo sites
 FAQs
 ------------
 ### Which version of elFinder should I use?
-* **2.0.x** if you want to use 2.0 with legacy connectors.
+* **2.0.x** if you do not need 2.1 of the advanced features.
 
-* **2.1.x** if you want to try the experimental (*bleeding edge, but connector is PHP only*).
+* **2.1.x** if you want to try the experimental (*bleeding edge, but API 2.1 connector is PHP only*). It is also available from the connector on the API 1.x and 2.0.
 
 ### Should I use elFinder builds (compressed) or source (uncompressed)?
 
@@ -144,10 +167,11 @@ You can create or modify the language file to use translation tool. Please refer
 
 3rd party connectors
 --------------------
+ * [ASP.NET](https://github.com/leniel/elFinder.Net)
+ * [Java Servlet](https://github.com/trustsystems/elfinder-java-connector)
  * [Python](https://github.com/Studio-42/elfinder-python)
- * [Django](https://github.com/mikery/django-elfinder)
  * [Ruby/Rails](https://github.com/phallstrom/el_finder)
- * [Java Servlet](https://github.com/Studio-42/elfinder-servlet)
+ * [Django](https://github.com/mikery/django-elfinder)
  * [Laravel](https://github.com/barryvdh/laravel-elfinder)
 
 3rd party Volume Drivers
@@ -158,6 +182,7 @@ You can create or modify the language file to use translation tool. Please refer
 --------------------
  * [lokothodida/elfinder-theme-moono](https://github.com/lokothodida/elfinder-theme-moono)
  * [lokothodida/elfinder-theme-windows-10](https://github.com/lokothodida/elfinder-theme-windows-10)
+ * [StudioJunkyard/elfinder-boostrap-theme](https://github.com/StudioJunkyard/LibreICONS/tree/master/themes/elFinder)
 
 Support
 -------
@@ -165,7 +190,6 @@ Support
  * [Homepage](http://elfinder.org)
  * [Wiki](https://github.com/Studio-42/elFinder/wiki)
  * [Issues](https://github.com/Studio-42/elFinder/issues)
- * [Forum](http://elfinder.org/forum/)
  * <dev@std42.ru>
 
 
@@ -186,7 +210,7 @@ License
 elFinder is issued under a 3-clauses BSD license.
 
 <pre>
-Copyright (c) 2009-2012, Studio 42
+Copyright (c) 2009-2016, Studio 42
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

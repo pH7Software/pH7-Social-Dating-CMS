@@ -1,18 +1,13 @@
 <?php
 defined('PH7') or exit('Restricted access');
-if (!\PH7\Admin::auth()) exit('Restricted access'); // Accessible only for the Admin users
+if (!\PH7\Admin::auth()) exit('Restricted access'); // Accessible only for admins
 
 error_reporting(0); // Set E_ALL for debuging
 
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderConnector.class.php';
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinder.class.php';
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeDriver.class.php';
-include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeLocalFileSystem.class.php';
-// Required for MySQL storage connector
-// include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeMySQL.class.php';
-// Required for FTP connector support
-// include_once dirname(__FILE__).DIRECTORY_SEPARATOR.'elFinderVolumeFTP.class.php';
-
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'elFinderConnector.class.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'elFinder.class.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'elFinderVolumeDriver.class.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'elFinderVolumeLocalFileSystem.class.php';
 
 /**
  * Simple function to demonstrate how to control file access using "accessControl" callback.
