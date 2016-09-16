@@ -18,7 +18,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.* FROM' .
             Db::prefix('AlbumsPictures') . 'AS a INNER JOIN' . Db::prefix('Members') .
-            'AS m ON a.profileId = m.profileId WHERE a.approved = \'0\' LIMIT :offset, :limit');
+            'AS USING(profileId) WHERE a.approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -31,7 +31,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, p.* FROM' .
             Db::prefix('Pictures') . 'AS p INNER JOIN' . Db::prefix('Members') .
-            'AS m ON p.profileId = m.profileId WHERE approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -44,7 +44,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.* FROM' .
             Db::prefix('AlbumsVideos') . 'AS a INNER JOIN' . Db::prefix('Members') .
-            'AS m ON a.profileId = m.profileId WHERE a.approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE a.approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -57,7 +57,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, v.* FROM' .
             Db::prefix('Videos') . 'AS v INNER JOIN' . Db::prefix('Members') .
-            'AS m ON v.profileId = m.profileId WHERE approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -82,7 +82,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, b.* FROM' .
             Db::prefix('MembersBackground') . 'AS b INNER JOIN' . Db::prefix('Members') .
-            'AS m ON b.profileId = m.profileId WHERE approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
