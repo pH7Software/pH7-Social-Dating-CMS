@@ -37,6 +37,18 @@ class Facebook extends Api implements IApi
 
     private $oProfile, $oLocation, $sAvatarFile, $sUsername, $iProfileId, $aUserInfo;
 
+    private $aPermissions = [
+        'email',
+        'user_birthday',
+        'user_relationships',
+        'user_relationship_details',
+        'user_hometown',
+        'user_location',
+        'user_about_me',
+        'user_likes',
+        'user_website'
+    ];
+
     /**
      * @return void
      */
@@ -171,8 +183,8 @@ class Facebook extends Api implements IApi
      */
     protected function setLoginUrl(FacebookRedirectLoginHelper $oHelper)
     {
-        $aPerms = ['email,user_birthday,user_relationships,user_relationship_details,user_hometown,user_location,user_about_me,user_likes,user_website'];
-        $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect','main','home'), $aPerms);
+
+        $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect','main','home'), $this->aPermissions);
     }
 
     private function initClassAttrs(FacebookResponse $oResponse)
