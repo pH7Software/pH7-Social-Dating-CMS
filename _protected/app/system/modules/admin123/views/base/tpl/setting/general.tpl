@@ -7,7 +7,7 @@
   <li><a href="#email"><span>{lang 'Email'}</span></a></li>
   <li><a href="#security"><span>{lang 'Security'}</span></a></li>
   <li><a href="#spam"><span>{lang 'Spam'}</span></a></li>
-  <li><a href="#api"><span>{lang 'Api'}</span></a></li>
+  <li><a href="#api"><span>{lang 'API'}</span></a></li>
   <li><a href="#automation"><span>{lang 'Automation'}</span></a></li>
 </ol>
 {{ SettingForm::display() }}

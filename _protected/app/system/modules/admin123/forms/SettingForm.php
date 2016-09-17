@@ -238,18 +238,18 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Number(t('Delete old IM Messages:'), 'clean_messenger', array('description' => t('Delete IM messages older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMessenger'), 'required' => 1)));
 
 
-        /********** Api **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="api"><div class="col-md-10"><h2 class="underline">' . t('Api:') . '</h2>'));
+        /********** API **********/
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="api"><div class="col-md-10"><h2 class="underline">' . t('API:') . '</h2>'));
 
         $sGoogleApiKeyDesc = t('You can get your key <a href="%0%">here</a>. Then, select "<strong>Google Maps JavaScript API</strong>" for "<em>Which API are you using</em>" and "<strong>Web browser (Javascript)</strong>" for "<em>Where will you be calling the API from</em>", then you will get your API key to paste here. ', 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true');
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Google Maps API Key:'), 'google_api_key', array('description' => $sGoogleApiKeyDesc, 'value' => DbConfig::getSetting('googleApiKey'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Url(t('IP Api:'), 'ip_api', array('description' => t('The URL must end with a slash.'), 'value' => DbConfig::getSetting('ipApi'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Url(t('IP API:'), 'ip_api', array('description' => t('The URL must end with a slash.'), 'value' => DbConfig::getSetting('ipApi'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Url(t('Chat Api:'), 'chat_api', array('description' => t('Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).', '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatApi'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Url(t('Chat API:'), 'chat_api', array('description' => t('Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).', '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatApi'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Url(t('Chatroulette Api:'), 'chatroulette_api', array('description' => t('Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).', '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatrouletteApi'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Url(t('Chatroulette API:'), 'chatroulette_api', array('description' => t('Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).', '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatrouletteApi'), 'required' => 1)));
 
 
         /********** Automation **********/
