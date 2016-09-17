@@ -30,10 +30,10 @@ class FriendModel extends FriendCoreModel
         $iProfileId = (int) $iProfileId;
         $iFriendId = (int) $iFriendId;
 
-        $sSqlPending = ($mPending !== 'all') ? 'AND pending=:pending' : '';
+        $sSqlPending = ($mPending !== 'all') ? 'AND pending = :pending' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('MembersFriends') .
-          'WHERE profileId=:profileId AND friendId=:friendId ' . $sSqlPending . ' LIMIT 1');
+          'WHERE profileId = :profileId AND friendId = :friendId ' . $sSqlPending . ' LIMIT 1');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
@@ -105,7 +105,8 @@ class FriendModel extends FriendCoreModel
         $iProfileId = (int) $iProfileId;
         $iFriendId = (int) $iFriendId;
 
-        $rStmt = Db::getInstance()->prepare('UPDATE'.Db::prefix('MembersFriends') . 'SET pending=0 WHERE profileId=:friendId AND friendId=:profileId');
+        $rStmt = Db::getInstance()->prepare('UPDATE'.Db::prefix('MembersFriends') .
+            'SET pending = 0 WHERE profileId = :friendId AND friendId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         return $rStmt->execute();
@@ -123,7 +124,8 @@ class FriendModel extends FriendCoreModel
         $iProfileId = (int) $iProfileId;
         $iFriendId = (int) $iFriendId;
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM'.Db::prefix('MembersFriends') . 'WHERE (profileId=:profileId AND friendId=:friendId) OR (friendId=:profileId AND profileId=:friendId)');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('MembersFriends') .
+            'WHERE (profileId = :profileId AND friendId = :friendId) OR (friendId = :profileId AND profileId = :friendId)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         return $rStmt->execute();
@@ -166,7 +168,11 @@ class FriendModel extends FriendCoreModel
         $sSqlSearchWhere = (ctype_digit($mLooking)) ? '(m.profileId = :profileId AND f.friendId= :profileId) OR (m.profileId = :friendId OR f.friendId= :friendId)' : '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
-        $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('MembersFriends') . 'AS f INNER JOIN' . Db::prefix('Members') . 'AS m ON m.profileId = (f.profileId + f.friendId - :profileId) WHERE ' . $sSqlWhere . ' AND ' . $sSqlSearchWhere . $sSqlOrder . $sSqlLimit);
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('MembersFriends') . 'AS f INNER JOIN' . Db::prefix('Members') .
+            'AS m ON m.profileId = (f.profileId + f.friendId - :profileId) WHERE ' . $sSqlWhere . ' AND ' . $sSqlSearchWhere .
+            $sSqlOrder . $sSqlLimit
+        );
 
         $rStmt->bindValue(':profileId', $iIdProfileId, \PDO::PARAM_INT);
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);

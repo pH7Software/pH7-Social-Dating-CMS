@@ -146,7 +146,7 @@ class ModeratorModel extends ModeratorCoreModel
     public function deletePictureAlbum($iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsPictures') .
-            'WHERE albumId=:albumId');
+            'WHERE albumId = :albumId');
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
@@ -154,7 +154,7 @@ class ModeratorModel extends ModeratorCoreModel
     public function deleteVideoAlbum($iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsVideos') .
-            'WHERE albumId=:albumId');
+            'WHERE albumId = :albumId');
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
