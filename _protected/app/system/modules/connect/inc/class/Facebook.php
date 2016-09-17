@@ -62,7 +62,7 @@ class Facebook extends Api implements IApi
             'default_graph_version' => 'v2.7',
         ]);
 
-        $oHelper = $oFb->getCanvasHelper();
+        $oHelper = $oFb->getRedirectLoginHelper();
 
         try {
             $sAccessToken = $oHelper->getAccessToken();
@@ -72,7 +72,7 @@ class Facebook extends Api implements IApi
 
         if (empty($sAccessToken)) {
             // First off, set the login URL
-            $this->setLoginUrl($oFb->getRedirectLoginHelper());
+            $this->setLoginUrl($oHelper);
             return; // Stop method
         }
 
