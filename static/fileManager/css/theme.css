@@ -8,8 +8,8 @@
 /* input textarea */
 .elfinder input,
 .elfinder textarea {
-	color: #000;
-	background-color: #FFF;
+    color: #000;
+    background-color: #FFF;
 }
 
 /* dialogs */
@@ -34,8 +34,8 @@
 .elfinder-cwd table thead td.ui-state-hover { background:#ddd; }
 .elfinder-cwd table tr:nth-child(odd) { background-color:#edf3fe; }
 .elfinder-cwd table tr {
-	border: 1px solid transparent;
-	border-top:1px solid #fff;
+    border: 1px solid transparent;
+    border-top:1px solid #fff;
 }
 .elfinder-cwd .elfinder-droppable-active td { background:#A7C6E5 !important; }
 
@@ -63,6 +63,6 @@
 /* dialog */
 .elfinder .ui-dialog input:text.ui-state-hover,
 .elfinder .ui-dialog textarea.ui-state-hover {
-	background-image: none;
-	background-color: inherit;
+    background-image: none;
+    background-color: inherit;
 }
