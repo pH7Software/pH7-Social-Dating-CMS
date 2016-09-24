@@ -28,13 +28,16 @@ function html_body($sTitle, $sMsg)
 /**
  * Check Internet Connection.
  *
- * @param string $sCheckHost Default: www.google.com
  * @return boolean Returns TRUE if the Internet connection is enabled, FALSE otherwise.
  */
-function is_internet($sCheckHost = 'www.google.com')
+function is_internet()
 {
+    // Sometimes, hosts ban a domain name, so check with several random domain name in case this happened
+    $aRandomHosts = ['www.google.com', 'www.bing.com', 'www.yahoo.com', 'www.facebook.com', 'twitter.com'];
+
     if (false === Registry::getInstance()->is_internet_needed)
         return true;
 
-    return (bool) @fsockopen($sCheckHost, 80, $iErrno, $sErrStr, 5);
+    // Use random domain from the array to avoid a loop (it's fine for this usage. At worst the user will have to reload twice the page)
+    return (bool) @fsockopen($aRandomHosts[mt_rand(0,4)], 80, $iErrno, $sErrStr, 5);
 }
