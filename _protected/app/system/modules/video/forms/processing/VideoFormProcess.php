@@ -58,7 +58,7 @@ class VideoFormProcess extends Form
 
             if (!$sFile = (new V\Api)->getVideo($sEmbedUrl))
             {
-                \PFBC\Form::setError('form_video', t('Oops, the link of the video looks bad? Check that the link is correct.'));
+                \PFBC\Form::setError('form_video', t('Oops! The embed video link looks incorrect? Please make sure that the link is correct.'));
                 return;
             }
 
