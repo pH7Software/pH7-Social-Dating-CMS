@@ -22,9 +22,9 @@ final class Version
     /***** Framework Kernel *****/
     // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]" and 2.* is "H2O"
     const KERNEL_VERSION_NAME = 'H2O';
-    const KERNEL_VERSION = '2.0.8';
+    const KERNEL_VERSION = '2.0.9';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2016-09-01';
+    const KERNEL_RELASE_DATE = '2016-10-03';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology

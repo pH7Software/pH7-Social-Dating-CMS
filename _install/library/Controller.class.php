@@ -32,7 +32,7 @@ abstract class Controller implements IController
     SOFTWARE_COPYRIGHT = '© (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.',
     // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]" and 2.* is "H2O"
     SOFTWARE_VERSION_NAME = 'H2O',
-    SOFTWARE_VERSION = '2.0.8',
+    SOFTWARE_VERSION = '2.0.9',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
