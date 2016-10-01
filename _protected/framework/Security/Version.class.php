@@ -75,7 +75,7 @@ final class Version
      *
      * @return boolean Returns TRUE if a new update is available, FALSE otherwise.
      */
-    public static function isUpdates()
+    public static function isUpdateEligible()
     {
         if (!$aLatestInfo = self::getLatestInfo()) {
             return false;
