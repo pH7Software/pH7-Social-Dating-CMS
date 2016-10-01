@@ -1,3 +1,15 @@
+### 3.23.0 2016-09-15
+
+* Add support for Apple Pay domains
+
+### 3.22.0 2016-09-13
+
+* Add `Stripe::setAppInfo` to allow plugins to register user agent information
+
+### 3.21.0 2016-08-25
+
+* Add `Source` model for generic payment sources
+
 ### 3.20.0 2016-08-08
 
 * Add `getDeclineCode` to card errors

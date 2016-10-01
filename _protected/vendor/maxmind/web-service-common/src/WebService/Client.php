@@ -413,6 +413,13 @@ class Client
 
     private function getCaBundle()
     {
+        $curlVersion = curl_version();
+
+        // On OS X, when the SSL version is "SecureTransport", the system's
+        // keychain will be used.
+        if ($curlVersion['ssl_version'] ==='SecureTransport') {
+            return;
+        }
         $cert = CaBundle::getSystemCaRootBundlePath();
 
         // Check if the cert is inside a phar. If so, we need to copy the cert

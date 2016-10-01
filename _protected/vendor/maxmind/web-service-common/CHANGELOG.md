@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+0.3.1 (2016-08-10)
+------------------
+
+* On Mac OS X when using a curl built against SecureTransport, the certs
+  in the system's keychain will now be used instead of the CA bundle on
+  the file system.
+
 0.3.0 (2016-08-09)
 ------------------
 
