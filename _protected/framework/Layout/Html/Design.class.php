@@ -357,9 +357,9 @@ class Design
             $aSites = [
                 ['title' => 'Flirt Hot Girls', 'link' => 'http://flirtme.biz'],
                 ['title' => 'Flirt Naughty Girls', 'link' => 'http://flirtme.biz'],
+                ['title' => 'The MOBILE Dating Service', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],
                 ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
                 ['title' => 'Learn Language Abroad', 'link' => 'http://newayup.com']
             ];
