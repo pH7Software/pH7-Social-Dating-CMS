@@ -12,7 +12,7 @@
 namespace PH7\Framework\Security;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel, PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Security\Validate\Validate;
 
 final class Version
 {
@@ -91,12 +91,12 @@ final class Version
             return false;
         }
 
-        if (version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '==')) {
-            if (version_compare(Kernel::SOFTWARE_BUILD, $sLastBuild, '<')) {
+        if (version_compare(self::KERNEL_VERSION, $sLastVer, '==')) {
+            if (version_compare(self::KERNEL_BUILD, $sLastBuild, '<')) {
                 return true;
             }
         } else {
-            if (version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '<')) {
+            if (version_compare(self::KERNEL_VERSION, $sLastVer, '<')) {
                 return true;
             }
         }
