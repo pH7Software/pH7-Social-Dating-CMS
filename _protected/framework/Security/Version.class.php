@@ -92,8 +92,9 @@ final class Version
         }
 
         if (version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '==')) {
-            if (version_compare(Kernel::SOFTWARE_BUILD, $sLastBuild, '<'))
+            if (version_compare(Kernel::SOFTWARE_BUILD, $sLastBuild, '<')) {
                 return true;
+            }
         } else {
             if (version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '<')) {
                 return true;
