@@ -10,7 +10,11 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Layout\Html\Meta;
+use
+PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Layout\Html\Meta,
+PH7\Framework\Core\Kernel,
+PH7\Framework\Security\Version;
 
 class MainController extends Controller
 {
@@ -307,12 +311,12 @@ class MainController extends Controller
 
     protected function checkUpdates()
     {
-        if (Framework\Security\Version::isUpdateEligible())
+        if (Version::isUpdateEligible())
         {
-            $aLatestVerInfo = Framework\Security\Version::getLatestInfo();
+            $aLatestVerInfo = Version::getLatestInfo();
             $sLatestVer = t('%0% build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
 
-            $this->design->setMessage(t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it now</a> and keep your site safe and stable.', $sLatestVer, Framework\Core\Kernel::SOFTWARE_LICENSE_KEY_URL));
+            $this->design->setMessage(t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it today</a> to keep your site safe and stable.', $sLatestVer, Kernel::SOFTWARE_LICENSE_KEY_URL));
         }
     }
 
