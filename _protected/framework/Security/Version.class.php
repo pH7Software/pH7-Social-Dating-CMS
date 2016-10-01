@@ -16,7 +16,6 @@ use PH7\Framework\Core\Kernel, PH7\Framework\Security\Validate\Validate;
 
 final class Version
 {
-
     const LATEST_VERSION_URL = 'http://ph7cms.com/xml/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /***** Framework Kernel *****/
@@ -46,15 +45,14 @@ final class Version
     public static function getLatestInfo()
     {
         $oCache = (new \PH7\Framework\Cache\Cache)->start('str/security', 'version-info', 3600*24); // Stored for 1 day
-        if(!$mData = $oCache->get())
-        {
+        if (!$mData = $oCache->get()) {
             $oDom = new \DOMDocument;
-            if(!@$oDom->load(self::LATEST_VERSION_URL)) return false;
+            if (!@$oDom->load(self::LATEST_VERSION_URL)) {
+                return false;
+            }
 
-            foreach($oDom->getElementsByTagName('ph7') as $oSoft)
-            {
-                foreach($oSoft->getElementsByTagName('social-dating-cms') as $oInfo)
-                {
+            foreach ($oDom->getElementsByTagName('ph7') as $oSoft) {
+                foreach ($oSoft->getElementsByTagName('social-dating-cms') as $oInfo) {
                     // "Validate::boll()" returns TRUE for "1", "true", "on" and "yes"
                     $bIsAlert = (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
                     $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
@@ -79,7 +77,9 @@ final class Version
      */
     public static function isUpdates()
     {
-        if(!$aLatestInfo = self::getLatestInfo()) return false;
+        if (!$aLatestInfo = self::getLatestInfo()) {
+            return false;
+        }
 
         $bIsAlert = $aLatestInfo['is_alert'];
         $sLastName = $aLatestInfo['name'];
@@ -87,19 +87,18 @@ final class Version
         $sLastBuild = $aLatestInfo['build'];
         unset($aLatestInfo);
 
-        if(!$bIsAlert || !is_string($sLastName) || !preg_match('#^' . self::PATTERN . '$#', $sLastVer)) return false;
-
-        if(version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '=='))
-        {
-            if(version_compare(Kernel::SOFTWARE_BUILD, $sLastBuild, '<'))
-                return true;
+        if (!$bIsAlert || !is_string($sLastName) || !preg_match('#^' . self::PATTERN . '$#', $sLastVer)) {
+            return false;
         }
-        else
-        {
-            if(version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '<'))
+
+        if (version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '==')) {
+            if (version_compare(Kernel::SOFTWARE_BUILD, $sLastBuild, '<'))
                 return true;
+        } else {
+            if (version_compare(Kernel::SOFTWARE_VERSION, $sLastVer, '<')) {
+                return true;
+            }
         }
         return false;
     }
-
 }
