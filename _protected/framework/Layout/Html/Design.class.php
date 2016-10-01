@@ -355,8 +355,8 @@ class Design
             ];
         } else { // Default links, set to English
             $aSites = [
-                ['title' => 'Flirt Hot Girls', 'link' => 'http://flirtme.biz'],
-                ['title' => 'Flirt Naughty Girls', 'link' => 'http://flirtme.biz'],
+                ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
+                ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'The MOBILE Dating Service', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
