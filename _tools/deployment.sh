@@ -28,10 +28,10 @@ function run() {
             eval "$exec 's/\t/    /g'"
 
             # Update the libraries to their latest versions
-            # php ./composer.phar update
+            # php ./composer.phar update --no-dev
 
             # Optimize Composer
-            php ./composer.phar dumpautoload -o
+            php ./composer.phar dump-autoload --optimize --no-dev
 
             ## Caches
             # public
