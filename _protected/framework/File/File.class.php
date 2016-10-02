@@ -291,7 +291,7 @@ class File
     }
 
     /**
-     * Copies files and checks if the "from file" exists.
+     * Copy files and checks if the "from file" exists.
      *
      * @param string $sFrom File.
      * @param string $sTo File.
@@ -309,7 +309,7 @@ class File
      *
      * @param string $sFrom Old directory.
      * @param string $sTo New directory.
-     * @return boolean Returns true if everything went well except if the file / directory from does not exist or if the copy went wrong.
+     * @return boolean TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be copied.
      */
     public function copyDir($sFrom, $sTo)
     {
@@ -332,7 +332,7 @@ class File
     }
 
     /**
-     * Renames a file or directory and checks if the "from file" or directory exists with file_exists() function
+     * Rename a file or directory and checks if the "from file" or directory exists with file_exists() function
      * since it checks the existance of a file or directory (because, as in the Unix OS, a directory is a file).
      *
      * @param string $sFrom File or directory.
@@ -347,11 +347,11 @@ class File
     }
 
     /**
-     * Renames the contents of a directory into another.
+     * Rename the contents of a directory into another.
      *
      * @param string $sFrom Old directory.
      * @param string $sTo New directory.
-     * @return boolean Returns true if everything went well except if the file / directory from does not exist or if the copy went wrong.
+     * @return boolean TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be renamed.
      */
     public function renameDir($sFrom, $sTo)
     {
@@ -359,7 +359,7 @@ class File
     }
 
     /**
-     * Renames a file or directory with the Unix mv command.
+     * Rename a file or directory with the Unix mv command.
      *
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
@@ -607,7 +607,7 @@ class File
 
     /**
      * Writes and saves the contents to a file.
-     * It also creates a temporary file does not delete the original file if something goes wrong during the recording file.
+     * It also creates a temporary file to not delete the original file if something goes wrong during the recording file.
      *
      * @param string $sFile
      * @param string $sData
