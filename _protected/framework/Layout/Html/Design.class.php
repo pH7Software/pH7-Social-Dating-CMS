@@ -27,6 +27,7 @@ PH7\Framework\Session\Session,
 PH7\Framework\Navigation\Page,
 PH7\Framework\Geo\Misc\Country,
 PH7\Framework\Benchmark\Benchmark,
+PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri;
 
@@ -367,6 +368,23 @@ class Design
 
         $iRand = mt_rand(0,count($aSites)-1);
         echo '<a href="', $aSites[$iRand]['link'], '">', $aSites[$iRand]['title'], '</a>';
+    }
+
+    final public function smartAppBanner(PH7Tpl $oView)
+    {
+        if (
+            (!defined('PH7_VALID_LICENSE') || !PH7_VALID_LICENSE)
+            && ((new \PH7\AdminCoreModel)->getRootIp() !== Ip::get())
+            && !\PH7\AdminCore::auth()
+        ) {
+            $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742">';
+
+            if (empty($oView->header)) {
+                $oView->header = $sIOSBanner;
+            } else {
+                $oView->header .= $sIOSBanner;
+            }
+        }
     }
 
     /**

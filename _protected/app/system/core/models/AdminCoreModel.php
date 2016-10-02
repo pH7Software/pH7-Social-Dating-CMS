@@ -7,11 +7,15 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Engine\Db, PH7\Framework\Mvc\Model\Engine\Util\Various;
+use
+PH7\Framework\Mvc\Model\Engine\Db,
+PH7\Framework\Mvc\Model\Engine\Record,
+PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 // Abstract Class
 class AdminCoreModel extends UserCoreModel
 {
+    const CACHE_GROUP = 'db/sys/mod/admin';
 
     public function browse($iOffset, $iLimit, $sTable = 'Members')
     {
@@ -83,4 +87,19 @@ class AdminCoreModel extends UserCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * Get the Root Admin IP address.
+     *
+     * @return string
+     */
+    public function getRootIp()
+    {
+        $this->cache->start(self::CACHE_GROUP, 'rootip', 10368000);
+
+        if (!$sIp = $this->cache->get()) {
+            $sIp = $this->orm->getOne('Admins', 'profileId', 1, 'ip')->ip;
+            $this->cache->put($sIp);
+        }
+        return $sIp;
+    }
 }
