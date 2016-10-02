@@ -20,7 +20,6 @@ PH7\Framework\Security\Security;
 // Abstract Class
 class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 {
-
     const CACHE_GROUP = 'db/sys/mod/user', CACHE_TIME = 604800;
 
     protected $sCurrentDate, $iProfileId;
@@ -1418,5 +1417,4 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      * @access private
      */
     private function __clone() {}
-
 }
