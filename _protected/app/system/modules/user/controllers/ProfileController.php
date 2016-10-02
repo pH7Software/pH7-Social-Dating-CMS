@@ -150,7 +150,7 @@ class ProfileController extends Controller
             $this->view->last_activity = VDate::textTimeStamp($oUser->lastActivity);
             $this->view->fields = $oFields;
             $this->view->is_logged = $this->sUserAuth;
-            $this->view->is_himself_profile = $this->himselfProfile();
+            $this->view->is_own_profile = $this->isOwnProfile();
 
             // Stat Profile
             Statistic::setView($this->iProfileId, 'Members');
@@ -210,7 +210,7 @@ class ProfileController extends Controller
             $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
                 $this->sUsername, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
         }
-        elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->himselfProfile())
+        elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->isOwnProfile())
         {
             $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $this->sUsername);
         }
@@ -220,7 +220,7 @@ class ProfileController extends Controller
         {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->himselfProfile())
+            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->isOwnProfile())
             {
                 $oVisitorModel = new VisitorModel($this->iProfileId, $this->iVisitorId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
 
@@ -241,9 +241,9 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return boolean Returns TRUE if the user is on his/her profile, FALSE otherwise.
+     * @return boolean Returns TRUE if the user is on their own profile, FALSE otherwise.
      */
-    private function himselfProfile()
+    private function isOwnProfile()
     {
         return $this->str->equals($this->iVisitorId, $this->iProfileId);
     }

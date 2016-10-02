@@ -13,7 +13,7 @@
     <li><a href="#general"><span>{lang 'Info'}</span></a></li>
     <li><a href="#map"><span>{lang 'Map'}</span></a></li>
     <li><a href="#friend"><span>{friend_link}</span></a></li>
-    {if $is_logged AND !$is_himself_profile}
+    {if $is_logged AND !$is_own_profile}
       <li><a href="#mutual_friend"><span>{mutual_friend_link}</span></a></li>
     {/if}
     {if $is_picture_enabled}
@@ -29,16 +29,16 @@
       <li><a href="#note"><span>{lang 'Notes'}</span></a></li>
     {/if}
     <li><a href="#visitor"><span>{lang 'Recently Viewed'}</span></a></li>
-    {if $is_logged AND !$is_himself_profile}
+    {if $is_logged AND !$is_own_profile}
       <li><a rel="nofollow" href="{mail_link}"><span>{lang 'Send Message'}</span></a></li>
     {/if}
-    {if $is_logged AND !$is_himself_profile}
+    {if $is_logged AND !$is_own_profile}
       <li><a rel="nofollow" href="{messenger_link}"><span>{lang 'Live Chat'}</span></a></li>
     {/if}
-    {if $is_logged AND !$is_himself_profile}
+    {if $is_logged AND !$is_own_profile}
       <li><a ref="nofollow" href="{befriend_link}"><span>{lang 'Add Friend'}</span></a></li>
     {/if}
-    {if $is_logged AND !$is_himself_profile AND Framework\Module\Various::isEnabled('love-calculator')}
+    {if $is_logged AND !$is_own_profile AND Framework\Module\Various::isEnabled('love-calculator')}
       <li><a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Love Calculator'}"><span>{lang 'Match'} <b class="pink2">&hearts;</b></span></a></li>
     {/if}
   </ol>
@@ -153,7 +153,7 @@
     </script>
   </div>
 
-  {if $is_logged AND !$is_himself_profile}
+  {if $is_logged AND !$is_own_profile}
     <div class="content" id="mutual_friend">
       <script>
         var url_mutual_friend_block = '{{ $design->url('user','friend','mutual',$username) }}';
@@ -218,7 +218,7 @@
           'general',
           'map',
           'friend',
-          {if $is_logged AND !$is_himself_profile}'mutual_friend',{/if}
+          {if $is_logged AND !$is_own_profile}'mutual_friend',{/if}
           {if $is_picture_enabled}'picture',{/if}
           {if $is_video_enabled}'video',{/if}
           {if $is_forum_enabled}'forum',{/if}
