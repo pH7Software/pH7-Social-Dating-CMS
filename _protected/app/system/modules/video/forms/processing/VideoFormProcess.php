@@ -49,13 +49,12 @@ class VideoFormProcess extends Form
         $sAlbumTitle = $this->httpRequest->post('album_title');
         $iAlbumId = (int) $this->httpRequest->post('album_id');
 
-        /** Default URL Thumbnail **/
+        // Default URL Thumbnail
         $sThumb = '';
 
-        if ($this->httpRequest->postExists('embed_code'))
+        $sEmbedUrl = $this->httpRequest->post('embed_code');
+        if (!empty($sEmbedUrl))
         {
-            $sEmbedUrl = $this->httpRequest->post('embed_code');
-
             if (!$sFile = (new V\Api)->getVideo($sEmbedUrl))
             {
                 \PFBC\Form::setError('form_video', t('Oops! The embed video link looks incorrect? Please make sure that the link is correct.'));
