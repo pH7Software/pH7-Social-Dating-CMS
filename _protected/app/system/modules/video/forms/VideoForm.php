@@ -47,7 +47,7 @@ class VideoForm
 
         $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$iId->name)); // Bad title! Thanks for finding a solution and commit it on http://github.com/pH7Software/pH7-Social-Dating-CMS or send it by email
         $oForm->addElement(new \PFBC\Element\Textbox(t('Name of your video(s):'), 'title', array('pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
-        $oForm->addElement(new \PFBC\Element\Select('Video type:', 'type', array(t('Choose...'), 'embed'=>t('Embed Code'), 'regular'=>t('Regular')), array('required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Select('Video type:', 'type', array(t('Choose...'), 'embed' => t('Embed Code'), 'regular' => t('Regular')), array('id' => 'video-type', 'required'=>1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="hidden" id="regular">'));
         $oForm->addElement(new \PFBC\Element\File(t('Video:'), 'video', array('description'=>'<span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading video, this may take time (especially if you download a long video).') . '</em>', 'multiple'=>'multiple', 'accept'=>'video/*')));
