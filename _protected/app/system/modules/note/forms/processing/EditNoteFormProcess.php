@@ -35,6 +35,7 @@ class EditNoteFormProcess extends Form
                 $oNoteModel->updatePost('postId', $sPostId, $iNoteId, $iProfileId);
             } else {
                 \PFBC\Form::setError('form_note', t('ID Article must be unique!'));
+                return;
             }
         }
 
