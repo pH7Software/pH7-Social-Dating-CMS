@@ -29,19 +29,19 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function reset($sMod = '', $sMail = '', $sHash = '')
+    public function reset($sMod = '', $sEmail = '', $sHash = '')
     {
         $this->checkMod($sMod);
 
         $sTable = VariousModel::convertModToTable($sMod);
 
-        if (!(new UserCoreModel)->checkHashValidation($sMail, $sHash, $sTable))
+        if (!(new UserCoreModel)->checkHashValidation($sEmail, $sHash, $sTable))
         {
             Header::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), 'error');
         }
         else
         {
-            if (!$this->sendMail($sTable, $sMail))
+            if (!$this->sendMail($sTable, $sEmail))
                 Header::redirect($this->registry->site_url, Form::errorSendingEmail(), 'error');
             else
                 Header::redirect($this->registry->site_url, t('Your new password has been emailed to you.'));
@@ -68,23 +68,23 @@ class MainController extends Controller
      * Send the new password by email.
      *
      * @param string $sTable DB table name.
-     * @param string $sMail The user email address.
+     * @param string $sEmail The user email address.
      * @return integer Number of recipients who were accepted for delivery.
      */
-    protected function sendMail($sTable, $sMail)
+    protected function sendMail($sTable, $sEmail)
     {
         $sNewPassword = Various::genRndWord(8,40);
 
-        (new UserCoreModel)->changePassword($sMail, $sNewPassword, $sTable);
+        (new UserCoreModel)->changePassword($sEmail, $sNewPassword, $sTable);
 
         $this->view->content = t('Hello!') . '<br />' .
         t('Your password has been changed to %0%', '<em>"' . $sNewPassword . '"</em>') . '<br />' .
         t('Please change it next time you login.');
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/recover_password.tpl', $sMail);
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/recover_password.tpl', $sEmail);
 
         $aInfo = [
-            'to' => $sMail,
+            'to' => $sEmail,
             'subject' => t('Your new password - %site_name%')
         ];
 

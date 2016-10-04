@@ -24,12 +24,12 @@ class ForgotPasswordFormProcess extends Form
         parent::__construct();
 
         $this->oUserModel = new UserCoreModel;
-        $sMail = $this->httpRequest->post('mail');
+        $sEmail = $this->httpRequest->post('mail');
 
-        if (!$iProfileId = $this->oUserModel->getId($sMail, null, $sTable))
+        if (!$iProfileId = $this->oUserModel->getId($sEmail, null, $sTable))
         {
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
-            \PFBC\Form::setError('form_forgot_password', t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sMail,0,PH7_MAX_EMAIL_LENGTH))));
+            \PFBC\Form::setError('form_forgot_password', t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
         }
         else
         {
