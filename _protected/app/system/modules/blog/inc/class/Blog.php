@@ -10,7 +10,6 @@ use PH7\Framework\File\File, PH7\Framework\Config\Config;
 
 class Blog extends WriteCore
 {
-
     /**
      * Sets the Blog Thumbnail.
      *
@@ -68,5 +67,4 @@ class Blog extends WriteCore
     {
         return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !(new BlogModel)->postIdExists($sPostId));
     }
-
 }
