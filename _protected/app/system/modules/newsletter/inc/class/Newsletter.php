@@ -24,7 +24,6 @@ class Newsletter extends Core
     public function __construct()
     {
         parent::__construct();
-
         $this->_oSubscriptionModel = new SubscriptionModel;
     }
 
@@ -42,12 +41,15 @@ class Newsletter extends Core
         $oSubscribers = $this->_oSubscriptionModel->$sSubscribersMethod();
 
         $oMail = new Mail;
-        foreach ($oSubscribers as $oSubscriber)
-        {
-            if (!$iRes = $this->sendMail($oSubscriber, $oMail)) break;
+        foreach ($oSubscribers as $oSubscriber) {
+            if (!$iRes = $this->sendMail($oSubscriber, $oMail)) {
+                break;
+            }
 
             // Do not send all emails at the same time to avoid overloading the mail server.
-            if (++self::$_iTotalSent > self::MAX_BULK_EMAIL_NUMBER) sleep(self::SLEEP_SEC);
+            if (++self::$_iTotalSent > self::MAX_BULK_EMAIL_NUMBER) {
+                sleep(self::SLEEP_SEC);
+            }
         }
         unset($oMail, $oSubscribers);
 
@@ -58,7 +60,7 @@ class Newsletter extends Core
      * Send the newsletter to the subscribers.
      *
      * @param object $oSubscriber Subscriber data fron the DB.
-     * @param object \PH7\Framework\Mail\Mail $oMail
+     * @param \PH7\Framework\Mail\Mail $oMail
      * @return integer Number of recipients who were accepted for delivery.
      */
     protected function sendMail($oSubscriber, Mail $oMail)
