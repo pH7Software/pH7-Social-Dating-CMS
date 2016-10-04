@@ -100,12 +100,13 @@ class EditNoteFormProcess extends Form
     }
 
     /**
-     * Update categories
+     * Update categories.
      *
      * @param integer $iNoteId
      * @param integer $iProfileId
      * @param object $oPost Post data from the database
      * @param \PH7\NoteModel $oNoteModel
+     * @return boolean FALSE if the maximal number of categories allowed has been reached, FALSE otherwise.
      *
      * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
      * otherwise the Request\Http::post() method removes the special tags and damages the SET function SQL for entry into the database.

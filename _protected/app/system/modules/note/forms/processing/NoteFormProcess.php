@@ -78,6 +78,7 @@ class NoteFormProcess extends Form
      *
      * @param integer $iProfileId
      * @param \PH7\NoteModel $oNoteModel
+     * @return void
      *
      * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
      * otherwise the Http::post() method removes the special tags and damages the SQL queries for entry into the database.
