@@ -64,7 +64,7 @@ class NoteFormProcess extends Form
                  * WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Http::post() method
                  * removes the special tags and damages the SQL queries for entry into the database.
                  */
-                if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > 3) {
+                if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > Note::MAX_CATEGORIES) {
                     \PFBC\Form::setError('form_note', t('You can not select more than 3 categories.'));
                     return; // Stop execution of the method.
                 }

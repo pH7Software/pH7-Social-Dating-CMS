@@ -10,7 +10,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class NoteDesign extends WriteDesignCoreModel
 {
-
     /**
      * @param object $oNoteModel
      * @return void Output the URL of the thumbnail.
@@ -26,5 +25,4 @@ class NoteDesign extends WriteDesignCoreModel
 
         echo '</div>';
     }
-
 }
