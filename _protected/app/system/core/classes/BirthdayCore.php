@@ -10,6 +10,7 @@ use PH7\Framework\Mail\Mail;
 
 class BirthdayCore extends Core
 {
+    const MAX_BULK_EMAIL_NUMBER 300, SLEEP_SEC = 10;
 
     private static $_iTotalSent = 0;
 
@@ -26,7 +27,7 @@ class BirthdayCore extends Core
         foreach ($oBirths as $oBirth)
         {
             // Do not send any emails at the same time to avoid overloading the mail server.
-            if (self::$_iTotalSent > 300) sleep(10);
+            if (self::$_iTotalSent > self::MAX_BULK_EMAIL_NUMBER) sleep(self::SLEEP_SEC);
 
             $this->view->content = t('Hi %0%!', $oBirth->firstName) . '<br />' .
             t("The %site_name%'s team wish you a very happy birthday!") . '<br />' .
@@ -46,5 +47,4 @@ class BirthdayCore extends Core
 
         return self::$_iTotalSent;
     }
-
 }

@@ -16,6 +16,7 @@ use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mail\Mail;
 
 class Newsletter extends Core
 {
+    const MAX_BULK_EMAIL_NUMBER 250, SLEEP_SEC = 10;
 
     private $_oSubscriptionModel;
     private static $_iTotalSent = 0;
@@ -43,10 +44,10 @@ class Newsletter extends Core
         $oMail = new Mail;
         foreach ($oSubscribers as $oSubscriber)
         {
-            if (!$this->sendMail($oSubscriber, $oMail)) break;
+            if (!$iRes = $this->sendMail($oSubscriber, $oMail)) break;
 
             // Do not send all emails at the same time to avoid overloading the mail server.
-            if (++self::$_iTotalSent > 250) sleep(10);
+            if (++self::$_iTotalSent > self::MAX_BULK_EMAIL_NUMBER) sleep(self::SLEEP_SEC);
         }
         unset($oMail, $oSubscribers);
 
@@ -74,5 +75,4 @@ class Newsletter extends Core
 
         return $oMail->send($aInfo, $sMsgHtml);
     }
-
 }
