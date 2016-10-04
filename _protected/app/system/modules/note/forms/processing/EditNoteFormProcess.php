@@ -34,7 +34,7 @@ class EditNoteFormProcess extends Form
             if ($oNote->checkPostId($sPostId, $iProfileId)) {
                 $oNoteModel->updatePost('postId', $sPostId, $iNoteId, $iProfileId);
             } else {
-                \PFBC\Form::setError('form_note', t('ID Article must be unique!'));
+                \PFBC\Form::setError('form_note', t('The post ID already exists or is incorrect.'));
                 return;
             }
         }
@@ -43,7 +43,7 @@ class EditNoteFormProcess extends Form
         // and damages the SET function SQL for entry into the database.
         if (!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId)) {
             if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > 3) {
-                \PFBC\Form::setError('form_note', t('You can not select more than 3 categories.'));
+                \PFBC\Form::setError('form_note', t('You cannot select more than 3 categories.'));
                 return; // Stop execution of the method.
             }
 

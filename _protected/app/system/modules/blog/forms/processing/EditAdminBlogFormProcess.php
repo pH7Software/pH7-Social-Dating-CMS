@@ -32,7 +32,7 @@ class EditAdminBlogFormProcess extends Form
             if ($oBlog->checkPostId($sPostId)) {
                 $oBlogModel->updatePost('postId', $sPostId, $iBlogId);
             } else {
-                \PFBC\Form::setError('form_blog', t('The ID of the article is invalid or incorrect.'));
+                \PFBC\Form::setError('form_blog', t('The post ID already exists or is incorrect.'));
                 return;
             }
         }
