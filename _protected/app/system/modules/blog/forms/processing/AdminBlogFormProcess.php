@@ -16,8 +16,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminBlogFormProcess extends Form
 {
-    private $sMsg;
-
     public function __construct()
     {
         parent::__construct();
@@ -27,7 +25,7 @@ class AdminBlogFormProcess extends Form
 
         $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
         if (!$oBlog->checkPostId($sPostId)) {
-            \PFBC\Form::setError('form_blog', t('The ID of the article is invalid or incorrect.'));
+            \PFBC\Form::setError('form_blog', t('The post ID already exists or is incorrect.'));
         } else {
             $aData = [
                 'post_id' => $sPostId,
@@ -47,16 +45,9 @@ class AdminBlogFormProcess extends Form
             ];
 
             if (!$oBlogModel->addPost($aData)) {
-                $this->sMsg = t('An error occurred while adding the article.');
+                \PFBC\Form::setError('form_blog', t('An error occurred while adding the article.'));
             } else {
-                /*** Set the categorie(s) ***/
-                /**
-                 * WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Http::post() method
-                 * removes the special tags and damages the SQL queries for entry into the database.
-                 */
-                $iBlogId = Db::getInstance()->lastInsertId();
-                foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
-                    $oBlogModel->addCategory($iCategoryId, $iBlogId);
+                $this->setCategories($oBlogModel);
 
                 /*** Set the thumbnail if there's one ***/
                 $oPost = $oBlogModel->readPost($aData['post_id']);
@@ -64,10 +55,25 @@ class AdminBlogFormProcess extends Form
 
                 $this->clearCache();
 
-                $this->sMsg = t('Post successfully created!');
+                Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), t('Post successfully created!'));
             }
+        }
+    }
 
-            Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), $this->sMsg);
+    /**
+     * Set the categorie(s).
+     *
+     * @param \PH7\BlogModel $oBlogModel
+     *
+     * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
+     * otherwise the Http::post() method removes the special tags and damages the SQL queries for entry into the database.
+     */
+    protected function setCategories(BlogModel $oBlogModel)
+    {
+        $iBlogId = Db::getInstance()->lastInsertId();
+
+        foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
+            $oBlogModel->addCategory($iCategoryId, $iBlogId);
         }
     }
 

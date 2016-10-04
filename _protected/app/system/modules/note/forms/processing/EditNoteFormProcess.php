@@ -39,18 +39,9 @@ class EditNoteFormProcess extends Form
             }
         }
 
-        // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Request\Http::post() method removes the special tags
-        // and damages the SET function SQL for entry into the database.
-        if (!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId)) {
-            if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > Note::MAX_CATEGORY_ALLOWED) {
-                \PFBC\Form::setError('form_note', t('You cannot select more than 3 categories.'));
-                return; // Stop execution of the method.
-            }
-
-            $oNoteModel->deleteCategory($iNoteId);
-
-            foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
-                $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
+        if (!$this->updateCategories($iNoteId, $iProfileId, $oPost, $oNoteModel)) {
+            \PFBC\Form::setError('form_note', t('You cannot select more than 3 categories.'));
+            return; // Stop execution of the method
         }
 
         // Thumbnail
@@ -106,6 +97,33 @@ class EditNoteFormProcess extends Form
 
         $sMsg = ($iApproved == '0') ? t('Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post successfully updated!');
         Header::redirect(Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId), $sMsg);
+    }
+
+    /**
+     * Update categories
+     *
+     * @param integer $iNoteId
+     * @param integer $iProfileId
+     * @param object $oPost Post data from the database
+     * @param \PH7\NoteModel $oNoteModel
+     *
+     * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
+     * otherwise the Request\Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
+     */
+    protected function updateCategories($iNoteId, $iProfileId, $oPost, NoteModel $oNoteModel)
+    {
+        if (!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId)) {
+            if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > Note::MAX_CATEGORY_ALLOWED) {
+                return false;
+            }
+
+            $oNoteModel->deleteCategory($iNoteId);
+
+            foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
+                $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
+            }
+        }
+        return true;
     }
 
     private function clearCache()

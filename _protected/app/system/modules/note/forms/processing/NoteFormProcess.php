@@ -17,8 +17,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class NoteFormProcess extends Form
 {
-    private $sMsg;
-
     public function __construct()
     {
         parent::__construct();
@@ -31,7 +29,7 @@ class NoteFormProcess extends Form
 
         $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
         if (!$oNote->checkPostId($sPostId, $iProfileId)) {
-            \PFBC\Form::setError('form_note', t('The ID of the article is invalid or incorrect.'));
+            \PFBC\Form::setError('form_note', t('The post ID already exists or is incorrect.'));
         } elseif (!$oNoteModel->checkWaitSend($this->session->get('member_id'), $iTimeDelay, $sCurrentTime)) {
             \PFBC\Form::setError('form_note', Form::waitWriteMsg($iTimeDelay));
         } else {
@@ -56,22 +54,12 @@ class NoteFormProcess extends Form
                 'approved' =>  $iApproved
             ];
 
-            if (!$oNoteModel->addPost($aData)) {
-                $this->sMsg = t('An error occurred while adding the article.');
+            if (count($this->httpRequest->post('category_id')) > Note::MAX_CATEGORY_ALLOWED) {
+                \PFBC\Form::setError('form_note', t('You cannot select more than 3 categories.'));
+            } elseif (!$oNoteModel->addPost($aData)) {
+                \PFBC\Form::setError('form_note', t('An error occurred while adding the article.'));
             } else {
-                /*** Set the categorie(s) ***/
-                /**
-                 * WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Http::post() method
-                 * removes the special tags and damages the SQL queries for entry into the database.
-                 */
-                if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > Note::MAX_CATEGORY_ALLOWED) {
-                    \PFBC\Form::setError('form_note', t('You cannot select more than 3 categories.'));
-                    return; // Stop execution of the method.
-                }
-
-                $iNoteId = Db::getInstance()->lastInsertId();
-                foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
-                    $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
+                $this->setCategories($iProfileId, $oNoteModel);
 
                 /*** Set the thumbnail if there's one ***/
                 $oPost = $oNoteModel->readPost($aData['post_id'], $iProfileId, null);
@@ -79,10 +67,27 @@ class NoteFormProcess extends Form
 
                 $this->clearCache();
 
-                $this->sMsg = ($iApproved == '0') ? t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post successfully created!');
+                $sMsg = ($iApproved == '0') ? t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post successfully created!');
+                Header::redirect(Uri::get('note','main','read',$this->session->get('member_username') .','. $sPostId), $sMsg);
             }
+        }
+    }
 
-            Header::redirect(Uri::get('note','main','read',$this->session->get('member_username') .','. $sPostId), $this->sMsg);
+    /**
+     * Set the categorie(s).
+     *
+     * @param integer $iProfileId
+     * @param \PH7\NoteModel $oNoteModel
+     *
+     * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
+     * otherwise the Http::post() method removes the special tags and damages the SQL queries for entry into the database.
+     */
+    protected function setCategories($iProfileId, NoteModel $oNoteModel)
+    {
+        $iNoteId = Db::getInstance()->lastInsertId();
+
+        foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
+            $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
         }
     }
 

@@ -28,6 +28,8 @@ class EditAdminBlogFormProcess extends Form
         /*** Updating the ID of the post if it has changed ***/
         $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
 
+        $this->updateCategories($iBlogId, $oPost, $oBlogModel);
+
         if (!$this->str->equals($sPostId, $oPost->postId)) {
             if ($oBlog->checkPostId($sPostId)) {
                 $oBlogModel->updatePost('postId', $sPostId, $iBlogId);
@@ -35,15 +37,6 @@ class EditAdminBlogFormProcess extends Form
                 \PFBC\Form::setError('form_blog', t('The post ID already exists or is incorrect.'));
                 return;
             }
-        }
-
-        // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Request\Http::post() method removes the special tags
-        // and damages the SET function SQL for entry into the database.
-        if (!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId)) {
-            $oBlogModel->deleteCategory($iBlogId);
-
-            foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId)
-                $oBlogModel->addCategory($iCategoryId, $iBlogId);
         }
 
         // Thumbnail
@@ -93,6 +86,27 @@ class EditAdminBlogFormProcess extends Form
         $this->clearCache();
 
         Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), t('Post successfully updated!'));
+    }
+
+    /**
+     * Update categories
+     *
+     * @param integer $iBlogId
+     * @param object $oPost Post data from the database
+     * @param \PH7\BlogModel $oBlogModel
+     *
+     * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
+     * otherwise the Request\Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
+     */
+    protected function updateCategories($iBlogId, $oPost, BlogModel $oBlogModel)
+    {
+        if (!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId)) {
+            $oBlogModel->deleteCategory($iBlogId);
+
+            foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
+                $oBlogModel->addCategory($iCategoryId, $iBlogId);
+            }
+        }
     }
 
     private function clearCache()
