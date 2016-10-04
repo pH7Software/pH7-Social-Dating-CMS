@@ -344,7 +344,7 @@ class NoteModel extends NoteCoreModel
      * To prevent spam!
      *
      * @param integer $iProfileId
-     * @param integer $iWaitTime In minutes!
+     * @param integer $iWaitTime In minutes
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      * @return boolean Return TRUE if the weather was fine, otherwise FALSE
      */

@@ -65,7 +65,7 @@ class NoteFormProcess extends Form
                  * removes the special tags and damages the SQL queries for entry into the database.
                  */
                 if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > Note::MAX_CATEGORY_ALLOWED) {
-                    \PFBC\Form::setError('form_note', t('You can not select more than 3 categories.'));
+                    \PFBC\Form::setError('form_note', t('You cannot select more than 3 categories.'));
                     return; // Stop execution of the method.
                 }
 
