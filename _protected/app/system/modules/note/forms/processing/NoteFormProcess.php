@@ -57,7 +57,7 @@ class NoteFormProcess extends Form
             if (count($this->httpRequest->post('category_id')) > Note::MAX_CATEGORY_ALLOWED) {
                 \PFBC\Form::setError('form_note', t('You cannot select more than 3 categories.'));
             } elseif (!$oNoteModel->addPost($aData)) {
-                \PFBC\Form::setError('form_note', t('An error occurred while adding the article.'));
+                \PFBC\Form::setError('form_note', t('An error occurred while adding the post.'));
             } else {
                 $this->setCategories($iProfileId, $oNoteModel);
 

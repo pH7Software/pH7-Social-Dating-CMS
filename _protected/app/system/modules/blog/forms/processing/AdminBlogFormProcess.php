@@ -45,7 +45,7 @@ class AdminBlogFormProcess extends Form
             ];
 
             if (!$oBlogModel->addPost($aData)) {
-                \PFBC\Form::setError('form_blog', t('An error occurred while adding the article.'));
+                \PFBC\Form::setError('form_blog', t('An error occurred while adding the post.'));
             } else {
                 $this->setCategories($oBlogModel);
 
