@@ -363,6 +363,7 @@ class Design
                 ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
+                ['title' => 'Dating App for Dating Singles', 'link' => 'http://dating-app.co'],
                 ['title' => 'Learn Language Abroad', 'link' => 'http://newayup.com']
             ];
         }
@@ -378,7 +379,7 @@ class Design
             && (new \PH7\AdminCoreModel)->getRootIp() !== Ip::get()
             && !\PH7\AdminCore::auth()
         ) {
-            $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742">';
+            $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742" />';
 
             if (empty($oView->header)) {
                 $oView->header = $sIOSBanner;
