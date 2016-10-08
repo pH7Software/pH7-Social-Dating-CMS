@@ -1,8 +1,9 @@
 <div class="center">
 
   <ul>
-    <li><a href="http://meetlovelypeople.com" title="{lang 'Free Local Dating Site'}">{lang 'Local Dating Site'}</a>{lang} is the Irish local dating service and also our trusted partner in our <a href="http://ph7cms.com/dating-business-by-steps/">dating software development</a>.{/lang}</li>
-    <li><a href="http://newayup.com" title="{lang 'Language Exchange International'}">{lang 'Language Exchange'}</a></li>
+    <li>The <a href="http://dating-app.co" title="{lang 'Free London Dating App'}">{lang 'Hot Dating App'}</a> for dating singles in your city.</li>
+    <li><a href="http://newayup.com" title="{lang 'Language Exchange International'}">{lang 'Language Exchange'}</a> - A community for motivated and open-minded men/women living abroad and wanted to learn the local language by meeting native people.</li>
+    <li><a href="http://meetlovelypeople.com" title="{lang 'Free Local Dating Site'}">{lang 'Local Dating Site'}</a>{lang} is one of the most promising Local Dating Service and also our trusted partner for our <a href="http://ph7cms.com/dating-business-by-steps/">dating software development</a>.{/lang}</li>
     <li class="underline vs_marg">{lang 'Your Advertising Here!'}</li>
   </ul>
 
@@ -10,6 +11,6 @@
   <div class="break center"></div>
   <br />
 
-  <p class="italic">{lang}Please{/lang} <a href="{{ $design->url('contact','contact','index') }}">{lang}contact us{/lang}</a> {lang}if you want to partner of %site_name%{/lang}.</p>
+  <p class="italic">{lang}Please{/lang} <a href="{{ $design->url('contact','contact','index') }}">{lang}contact us{/lang}</a> {lang}if you want to be partner of %site_name%{/lang}.</p>
 
 </div>
