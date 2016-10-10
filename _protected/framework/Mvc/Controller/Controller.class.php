@@ -58,7 +58,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'is_aff_auth' => \PH7\AffiliateCore::auth()
         ];
         $aGlobalViewVars = [
-            'is_guest_homepage' => $this->_isGuestHomepage($aAuthViewVars['is_user_auth']),
+            'is_guest_homepage' => $this->_isGuestOnHomepage($aAuthViewVars['is_user_auth']),
             'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'),
             'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'),
             'country' => Geo::getCountry(),
@@ -248,7 +248,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      * @param boolean $bIsUserLogged
      * @return boolean TRUE if visitor is on the homepage (index).
      */
-    private function _isGuestHomepage($bIsUserLogged)
+    private function _isGuestOnHomepage($bIsUserLogged)
     {
         return (!$bIsUserLogged && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index');
     }
