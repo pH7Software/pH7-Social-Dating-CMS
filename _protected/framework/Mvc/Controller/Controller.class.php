@@ -50,12 +50,22 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->view->config = $this->config;
         $this->view->design = $this->design;
 
-        $aAuthVars = [
+        $aAuthViewVars = [
             'is_admin_auth' => \PH7\AdminCore::auth(),
             'is_user_auth' => \PH7\UserCore::auth(),
             'is_aff_auth' => \PH7\AffiliateCore::auth()
         ];
-        $this->view->assigns($aAuthVars);
+        $this->view->assigns($aAuthViewVars);
+
+        $bIsMobApp = MobApp::is($this->httpRequest, $this->session);
+        $aGlobalViewVars = [
+            'is_guest_homepage' => $this->_isGuestHomepage($aAuthViewVars['is_user_auth']),
+            'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'),
+            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'),
+            'country' => Geo::getCountry(),
+            'city' => Geo::getCity()
+        ];
+        $this->view->assigns($aGlobalViewVars);
 
         // Set other variables
         $this->_setMetaTplVars();
@@ -189,8 +199,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
     {
         $oInfo = M\DbConfig::getMetaMain(PH7_LANG_NAME);
 
-        $bIsMobApp = MobApp::is($this->httpRequest, $this->session);
-        $aMetaVars = [
+        $aMetaViewVars = [
             'site_name' => $this->registry->site_name,
             'page_title' => $oInfo->pageTitle,
             'slogan' => $oInfo->slogan,
@@ -203,16 +212,11 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'meta_rating' => $oInfo->metaRating,
             'meta_distribution' => $oInfo->metaDistribution,
             'meta_category' => $oInfo->metaCategory,
-            'header' => 0, // Default value of header contents
-            'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'), // Displays a disclaimer to enter to the site. This is useful for sites with adult content
-            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'), // Displays a header cookie information bar
-            /* Put user's Geo details (country/city) into the template variables */
-            'country' => Geo::getCountry(),
-            'city' => Geo::getCity()
+            'header' => 0 // Default value of header contents
         ];
 
-        $this->view->assigns($aMetaVars);
-        unset($bIsMobApp, $oInfo, $aMetaVars);
+        $this->view->assigns($aMetaViewVars);
+        unset($bIsMobApp, $oInfo, $aMetaViewVars);
     }
 
     final private function _setModsStatusTplVars()
@@ -236,6 +240,15 @@ abstract class Controller extends \PH7\Framework\Core\Core
 
         $this->view->assigns($aModsEnabled);
         unset($aModsEnabled);
+    }
+
+    /**
+     * @param boolean $bIsUserLogged
+     * @return boolean TRUE if visitor is on the homepage (index).
+     */
+    final private function _isGuestHomepage($bIsUserLogged)
+    {
+        return (!$bIsUserLogged && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index');
     }
 
     /**
