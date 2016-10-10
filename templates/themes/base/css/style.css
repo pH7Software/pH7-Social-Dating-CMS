@@ -4,7 +4,12 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-pre{border: 1px solid #3366CC;background-color: #E5ECF9;padding: 0.5em;font-family: Courier New, monospace;}
+pre{
+    border: 1px solid #3366CC;
+    background-color: #E5ECF9;
+    padding: 0.5em;
+    font-family: 'Courier New', Courier, monospace, sans-serif;
+}
 code{white-space: nowrap;}
 
 /** TITLE (h1, h2, h3, h4) **/
@@ -55,7 +60,7 @@ table{border-spacing: 0; border-collapse:collapse}
   text-decoration:none;
   text-align:center;
   line-height:20px;
-  font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;
+  font-family: 'Helvetica Neue', 'Open Sans', Helvetica, sans-serif;
   border-color:#a8a8a8 #888 #888 #a8a8a8;
   border-style:solid;
   border-width:1px;
