@@ -6,9 +6,9 @@
 
 *{margin:0}
 body, td, pre {
-    font-family: 'Open Sans', Arial, sans-serif;
-    font-size:12px;
-    color:#666;
+    font-family: 'Open Sans', Verdana, Arial, sans-serif;
+    font-size: 12px;
+    color: #666;
 }
 body {background: white url(../img/body_bg.jpg) repeat-x;}
 
