@@ -118,7 +118,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
 
         // header('Content-type: text/html; charset=' . PH7_ENCODING);
         $this->view->display($sFile, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS);
-        $this->view->clean();  // Clean Template Data
+        unset($this->view); // Clean Template Data
     }
 
     /**

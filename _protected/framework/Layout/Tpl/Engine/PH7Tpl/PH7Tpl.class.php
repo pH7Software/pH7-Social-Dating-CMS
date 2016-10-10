@@ -968,8 +968,9 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
 
     public function __destruct()
     {
-        parent::__destruct();
+        $this->clean();
 
+        parent::__destruct();
         unset(
           $this->designModel,
           $this->sTplFile,
