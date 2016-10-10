@@ -24,7 +24,6 @@ PH7\Framework\Ip\Ip;
 class AddFakeProfilesFormProcess extends Form
 {
     const API_URL = 'http://api.randomuser.me';
-    const API_VER = '1.1';
 
     public function __construct()
     {
@@ -43,7 +42,7 @@ class AddFakeProfilesFormProcess extends Form
             'noinfo' => 1
         ];
 
-        $sApiUrl = static::API_URL . PH7_SH . static::API_VER . PH7_SH . '?' . Url::httpBuildQuery($aUrlParams, null, '&');
+        $sApiUrl = static::API_URL . PH7_SH . '?' . Url::httpBuildQuery($aUrlParams, null, '&');
         $aUserData = json_decode($this->file->getFile($sApiUrl), true);
 
         foreach ($aUserData['results'] as $aUser)
