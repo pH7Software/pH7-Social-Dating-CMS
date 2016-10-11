@@ -62,7 +62,7 @@ class AddFakeProfilesFormProcess extends Form
             }
         }
 
-        unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aUser, $aData, $aUserData);
+        unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aUser, $aData);
 
         \PFBC\Form::setSuccess('form_add_fake_profiles', nt('%n% user has successfully been added.', '%n% users have successfully been added.', $this->getUserNumber()));
     }
