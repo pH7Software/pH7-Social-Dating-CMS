@@ -10,7 +10,7 @@ use PH7\Framework\Mail\Mail;
 
 class BirthdayCore extends Core
 {
-    const MAX_BULK_EMAIL_NUMBER 300, SLEEP_SEC = 10;
+    const MAX_BULK_EMAIL_NUMBER = 300, SLEEP_SEC = 10;
 
     private static $_iTotalSent = 0;
 

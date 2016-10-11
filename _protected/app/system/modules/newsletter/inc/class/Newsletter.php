@@ -16,7 +16,7 @@ use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mail\Mail;
 
 class Newsletter extends Core
 {
-    const MAX_BULK_EMAIL_NUMBER 250, SLEEP_SEC = 10;
+    const MAX_BULK_EMAIL_NUMBER = 250, SLEEP_SEC = 10;
 
     private $_oSubscriptionModel;
     private static $_iTotalSent = 0;
