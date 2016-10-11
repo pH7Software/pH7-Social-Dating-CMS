@@ -2,7 +2,7 @@
 
 {if empty($reports)}
 
-  <p class="bold">{lang 'Empty Report'}</p>
+  <p class="bold">{lang 'No Reports Found'}</p>
 
 {else}
 
