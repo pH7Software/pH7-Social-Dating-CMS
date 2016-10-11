@@ -24,6 +24,7 @@ PH7\Framework\Ip\Ip;
 class AddFakeProfilesFormProcess extends Form
 {
     const API_URL = 'http://api.randomuser.me';
+    const API_VER = '1.1';
 
     public function __construct()
     {
@@ -34,18 +35,7 @@ class AddFakeProfilesFormProcess extends Form
         $oExistsModel = new ExistsCoreModel;
         $oValidate = new Validate;
 
-        $iUserNum = $this->httpRequest->post('num');
-        $aUrlParams = [
-            'results' => $iUserNum,
-            'gender' => $this->httpRequest->post('sex'),
-            'nat' => $this->httpRequest->post('nat'),
-            'noinfo' => 1
-        ];
-
-        $sApiUrl = static::API_URL . PH7_SH . '?' . Url::httpBuildQuery($aUrlParams, null, '&');
-        $aUserData = json_decode($this->file->getFile($sApiUrl), true);
-
-        foreach ($aUserData['results'] as $aUser)
+        foreach ($this->getApiClient()['results'] as $aUser)
         {
             $sEmail = trim($aUser['email']);
             $sUsername = trim($aUser['login']['username']);
@@ -68,13 +58,55 @@ class AddFakeProfilesFormProcess extends Form
 
                 $aData['profile_id'] = $oUserModel->add(escape($aData, true));
 
-                $this->_addAvatar($aData, $oUser);
+                $this->addAvatar($aData, $oUser);
             }
         }
 
-        unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aUser, $aData, $aUserData, $aUrlParams);
+        unset($oUser, $oUserModel, $oExistsModel, $oValidate, $aUser, $aData, $aUserData);
 
-        \PFBC\Form::setSuccess('form_add_fake_profiles', nt('%n% user has successfully been added.', '%n% users have successfully been added.', $iUserNum));
+        \PFBC\Form::setSuccess('form_add_fake_profiles', nt('%n% user has successfully been added.', '%n% users have successfully been added.', $this->getUserNumber()));
+    }
+
+    protected function getUserNumber()
+    {
+        return $this->httpRequest->post('num');
+    }
+
+    protected function getApiClient()
+    {
+        $sApiUrl = static::API_URL;
+        $sApiParms = '?' . Url::httpBuildQuery($this->getApiParameters(), null, '&');
+        $sApiVer = static::API_VER;
+        $rUserData = $this->getApiResults($sApiUrl, $sApiParms, $sApiVer);
+        return json_decode($rUserData, true);
+    }
+
+    private function getApiParameters()
+    {
+        return [
+            'results' => $this->getUserNumber(),
+            'gender' => $this->httpRequest->post('sex'),
+            'nat' => $this->httpRequest->post('nat'),
+            'noinfo' => 1
+        ];
+    }
+
+    /**
+     * Get Data from the third-party API.
+     *
+     * @param string $sApiUrl API URL.
+     * @param string $sApiParms Parameters to send to the API.
+     * @param string $sApiVersion API version. If fails from the API server, it will ignore it.
+     *
+     * @return void
+     */
+    private function getApiResults($sApiUrl, $sApiParms, $sApiVersion)
+    {
+        if ($rData = $this->file->getFile($sApiUrl . PH7_SH . $sApiVersion . PH7_SH . $sApiParms)) {
+            return $rData;
+        } else {
+            return $this->file->getFile($sApiUrl . PH7_SH . $sApiParms);
+        }
     }
 
     /**
@@ -85,7 +117,7 @@ class AddFakeProfilesFormProcess extends Form
      *
      * @return void
      */
-    private function _addAvatar(array $aData, UserCore $oUser)
+    private function addAvatar(array $aData, UserCore $oUser)
     {
         // Sometime, cURL returns FALSE and doesn't work at all under Windowns server or some other specific server config, so use file_get_contents() instead as it will work.
         if (!$rFile = $this->file->getUrlContents($aData['avatar'])) {
@@ -99,5 +131,4 @@ class AddFakeProfilesFormProcess extends Form
         $oUser->setAvatar($aData['profile_id'], $aData['username'], $sTmpFile, 1); // Create the different avatar sizes and set the avatar
         $this->file->deleteFile($sTmpFile);// Remove the temporary file as we don't need it anymore
     }
-
 }
