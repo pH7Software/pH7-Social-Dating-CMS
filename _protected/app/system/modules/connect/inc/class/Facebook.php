@@ -21,7 +21,7 @@ PH7\Framework\File\File,
 PH7\Framework\Util\Various,
 PH7\Framework\Geo\Ip\Geo,
 PH7\Framework\Error\CException\PH7Exception,
-Facebook\Facebook,
+Facebook\Facebook as FB,
 Facebook\FacebookResponse,
 Facebook\Helpers\FacebookRedirectLoginHelper,
 Facebook\GraphNodes\GraphUser,
@@ -56,7 +56,7 @@ class Facebook extends Api implements IApi
     {
         parent::__construct();
 
-        $oFb = new Facebook([
+        $oFb = new FB([
             'app_id' => Config::getInstance()->values['module.api']['facebook.id'],
             'app_secret' => Config::getInstance()->values['module.api']['facebook.secret_key'],
             'default_graph_version' => 'v2.7',
