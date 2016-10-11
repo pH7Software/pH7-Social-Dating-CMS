@@ -96,7 +96,7 @@ class AddFakeProfilesFormProcess extends Form
      *
      * @param string $sApiUrl API URL.
      * @param string $sApiParms Parameters to send to the API.
-     * @param string $sApiVersion API version. If fails from the API server, it will ignore it.
+     * @param string $sApiVersion Version of the API it will use. If fails from the API server, it will ignore it.
      *
      * @return void
      */
