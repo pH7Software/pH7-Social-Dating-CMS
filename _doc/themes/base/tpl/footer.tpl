@@ -12,7 +12,6 @@
   </div>
 
 <script src="{static_url}js/jquery.js"></script>
-<script src="{static_url}js/ajph.js"></script>
 <script src="{static_url}highlight/highlight.js"></script>
 <script>$(document).ready(function(){hljs.initHighlightingOnLoad()});</script>
 </body>

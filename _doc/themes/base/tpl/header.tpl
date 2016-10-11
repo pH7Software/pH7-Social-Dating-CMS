@@ -9,7 +9,6 @@
   <title>{page_name} - {site_name}</title>
   <meta name="author" content="Pierre-Henry Soria" />
   <link rel="stylesheet" href="{site_url}themes/{tpl_name}/css/common.css" />
-  <link rel="stylesheet" href="{site_url}themes/{tpl_name}/css/js/ajph.css" />
   <link rel="stylesheet" href="{static_url}highlight/styles/default.css" />
 </head>
 
