@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS pH7_Admins (
   PRIMARY KEY (profileId),
   UNIQUE KEY username (username),
   UNIQUE KEY email (email)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_Memberships (
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS pH7_Memberships (
   enable enum('1','0') DEFAULT '1',
   orderId tinyint(2) unsigned NOT NULL,
   PRIMARY KEY (groupId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_Memberships (groupId, name, description, permissions, price, expirationDays, enable, orderId) VALUES
 (1, 'Visitor', 'This subscription is offered to all visitors who visit the site.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"0";}', 0.00, 0, '1', 1),
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   UNIQUE KEY (username),
   UNIQUE KEY (email),
   KEY birthDate (birthDate)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
@@ -336,7 +336,7 @@ CREATE TABLE IF NOT EXISTS pH7_Pictures (
   PRIMARY KEY (pictureId),
   FOREIGN KEY (albumId) REFERENCES pH7_AlbumsPictures(albumId),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_Videos (
@@ -518,7 +518,7 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsBlog (
   -- Maybe we'll let the comments of the members even if they are deleted or we will allow administrator to leave a comment, so we comment on this line.
   -- FOREIGN KEY (sender) REFERENCES pH7_Members(profileId),
   FOREIGN KEY (recipient) REFERENCES pH7_Blogs(blogId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsNote (
@@ -548,7 +548,7 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsPicture (
   -- Maybe we'll let the comments of the members even if they are deleted.
   -- FOREIGN KEY (sender) pH7_Members(profileId),
   FOREIGN KEY (recipient) REFERENCES pH7_Pictures(pictureId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsVideo (
@@ -578,7 +578,7 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsGame (
   -- Maybe we'll let the comments of the members even if they are deleted.
   -- FOREIGN KEY (sender) pH7_Members(profileId),
   FOREIGN KEY (recipient) REFERENCES pH7_Games(gameId) -- Warning: You must first download the file "pH7_Game.sql" for this table can be inserted because it uses a foreign key.
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsProfile (
@@ -593,7 +593,7 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsProfile (
   -- Maybe we'll let the comments of the members even if they are deleted.
   -- FOREIGN KEY (sender) pH7_Members(profileId),
   FOREIGN KEY (recipient) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_ForumsCategories (
@@ -601,7 +601,7 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsCategories (
   title varchar(60) DEFAULT NULL,
   PRIMARY KEY (categoryId),
   UNIQUE KEY (title)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_ForumsCategories (categoryId, title) VALUES
 (1, 'General'),
@@ -618,7 +618,7 @@ CREATE TABLE IF NOT EXISTS pH7_Forums (
   updatedDate datetime DEFAULT NULL,
   PRIMARY KEY (forumId),
   FOREIGN KEY (categoryId) REFERENCES pH7_ForumsCategories(categoryId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_Forums (forumId, name, description, categoryId) VALUES
 (1, 'Hello', 'Free dating site', 1),
@@ -640,7 +640,7 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
   -- FOREIGN KEY (profileId) pH7_Members(profileId),
   FOREIGN KEY (forumId) REFERENCES pH7_Forums(forumId),
   PRIMARY KEY (topicId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
@@ -655,7 +655,7 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
   -- FOREIGN KEY (profileId) pH7_Members(profileId),
   FOREIGN KEY (topicId) REFERENCES pH7_ForumsTopics(topicId),
   PRIMARY KEY (messageId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_LanguagesInfo (
@@ -863,7 +863,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersWall (
   updatedDate datetime DEFAULT NULL,
   PRIMARY KEY (wallId),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_Messages (
