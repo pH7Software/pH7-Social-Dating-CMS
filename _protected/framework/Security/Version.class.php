@@ -19,11 +19,11 @@ final class Version
     const LATEST_VERSION_URL = 'http://ph7cms.com/xml/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /***** Framework Kernel *****/
-    // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]" and 2.* is "H2O"
-    const KERNEL_VERSION_NAME = 'H2O';
-    const KERNEL_VERSION = '2.0.9';
+    // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O" and 3.* is H3O
+    const KERNEL_VERSION_NAME = 'H3O';
+    const KERNEL_VERSION = '3.0.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2016-10-03';
+    const KERNEL_RELASE_DATE = '2016-10-17';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
