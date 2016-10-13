@@ -1,5 +1,5 @@
 <div class="center">
-    <div class="col-md-4" height="140">
+    <div class="col-md-4">
       {{ $avatarDesign->get($username, $first_name, $sex, 200) }}
     </div>
 
@@ -8,7 +8,7 @@
       <p class="love_txt bold pink2">{lang 'Love!'}</p>
     </div>
 
-    <div class="col-md-4" height="140">
+    <div class="col-md-4">
       {{ $avatarDesign->get($second_username, $second_first_name, $second_sex, 200) }}
     </div>
 </div>
