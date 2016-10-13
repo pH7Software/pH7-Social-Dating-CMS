@@ -6,8 +6,8 @@
 
 *{margin:0}
 body, td, pre {
-    font-family: 'Segoe UI', 'Open Sans', Verdana, Arial, sans-serif;
-    font-size: 12px;
+    font-family: 'Open Sans', Verdana, Arial, sans-serif;
+    font-size: 13px;
     color: #666;
 }
 body {background: white url(../img/body_bg.jpg) repeat-x;}
