@@ -25,7 +25,7 @@ class StyleFormProcess extends Form
             /* Clean Model\Design for STATIC / customCodecss data */
             (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, 'customCodecss', null)->clear();
         }
-        \PFBC\Form::setSuccess('form_style', t('The CSS code has been saved successfully!'));
+        \PFBC\Form::setSuccess('form_style', t('The CSS code has been updated successfully!'));
     }
 
 }

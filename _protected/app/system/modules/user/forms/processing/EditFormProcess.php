@@ -79,7 +79,7 @@ class EditFormProcess extends Form
         // Destroy objects
         unset($oUserModel, $oUser, $oUserCache);
 
-        \PFBC\Form::setSuccess('form_user_edit_account', t('Profile has been saved successfully!'));
+        \PFBC\Form::setSuccess('form_user_edit_account', t('Profile has been successfully updated!'));
     }
 
 }

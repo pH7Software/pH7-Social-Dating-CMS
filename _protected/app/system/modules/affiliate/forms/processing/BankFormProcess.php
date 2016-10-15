@@ -27,7 +27,7 @@ class BankFormProcess extends Form
         /* Clean Affiliate UserCoreModel / readProfile Cache */
         (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'readProfile' . $iProfileId . 'Affiliates', null)->clear();
 
-        \PFBC\Form::setSuccess('form_bank_account', t('Your bank information has been saved successfully!'));
+        \PFBC\Form::setSuccess('form_bank_account', t('Your bank information has been successfully updated!'));
     }
 
 }

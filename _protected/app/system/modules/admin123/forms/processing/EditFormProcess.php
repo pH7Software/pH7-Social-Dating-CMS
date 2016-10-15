@@ -91,7 +91,7 @@ class EditFormProcess extends Form
         (new Admin)->clearReadProfileCache($iProfileId, 'Admins');
 
         if (!$this->bIsErr)
-            \PFBC\Form::setSuccess('form_admin_edit_account', t('Your profile has been saved successfully!'));
+            \PFBC\Form::setSuccess('form_admin_edit_account', t('Profile successfully updated!'));
     }
 
 }
