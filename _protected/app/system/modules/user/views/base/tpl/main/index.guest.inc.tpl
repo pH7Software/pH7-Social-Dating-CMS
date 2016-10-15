@@ -1,18 +1,18 @@
 <div class="right col-md-4 animated fadeInRight">
-    <h1 class="pink2 italic underline">{headline}</h1>
+    <h1 class="red3 italic underline">{headline}</h1>
     <div class="center">
         <a href="{{ $design->url('user','main','login') }}" class="btn btn-primary btn-lg"><strong>{lang 'Login'}</strong></a>
     </div>
     {{ JoinForm::step1() }}
 
     <div class="counter center">
-    <h2 class="pH1">{lang 'People love us! Realtime users using our service'}</h2>
+    <h2 class="red3">{lang 'People love us! Realtime users using our service'}</h2>
     {{ $userDesign->counterUsers() }}</div>
 </div>
 
 <div class="left col-md-8">
   <div class="folio_block">
-    <h1 class="pink2 italic underline">{slogan}</h1>
+    <h1 class="red3 italic underline">{slogan}</h1>
 
     <div class="splash_slideshow">
       <div class="window">

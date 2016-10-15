@@ -34,7 +34,7 @@
 {/if}
 
 <div class="left col-md-4 animated fadeInRight">
-  <h1 class="pink2 italic underline">{headline}</h1>
+  <h1 class="red2 italic underline">{headline}</h1>
 
   {* For small devices, the following will be activated through /templates/themes/base/css/splash.css *}
   <div class="login_button hidden center">
