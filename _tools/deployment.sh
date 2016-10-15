@@ -3,7 +3,7 @@
 ##
 # Title:           Deployment Automation
 # Description:     pH7CMS Deployment Automation. It is used to clean the script before distribution to customers.
-#                  To work correctly, you have to execute this script when you're in the root of the project in your terminal
+#                  To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 # Author:          Pierre-Henry Soria <ph7software@gmail.com>
 # Copyright:       (c) 2014-2016, Pierre-Henry Soria. All Rights Reserved.

@@ -2,7 +2,7 @@
 
 ##
 # Title:           Useful Unix functions
-# Description:     To work correctly, you have to execute this script when you're in the root of the project in your terminal
+# Description:     To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 #
 # Author:          Pierre-Henry Soria <ph7software@gmail.com>
@@ -152,7 +152,7 @@ function file-strict-permissions() {
 
 # Backup. Create a compressed archive of the project
 function backup() {
-    echo "Specify the path ending with a SLASH where you want the archive will be stored"
+    echo "Specify the full path ending with a SLASH where you want the archive will be stored"
     read path
     if [ ! -d $path ]; then
         echo "The path is not a valid directory."
@@ -169,7 +169,7 @@ function backup() {
             exit 2
         fi
     fi
-    tar -jcvf $full_path  ../
+    tar -jcvf $full_path .
     echo "Backup project successfully created into: $full_path"
 }
 
