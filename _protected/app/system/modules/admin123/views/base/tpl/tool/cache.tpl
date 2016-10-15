@@ -8,7 +8,7 @@
   <a href="javascript:void(0)" onclick="cache('static','{csrf_token}')">{lang 'Static Files'}</a>
 </div>
 
-  <div class="border s_marg">
+  <div class="s_marg">
   <script src="https://www.google.com/jsapi"></script>
   <script>
     google.load("visualization", "1", {packages:["corechart"]});
