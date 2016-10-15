@@ -618,7 +618,7 @@ class Api
         $this->content .= '<script>' . "\n";
 
         if (empty($this->key)) {
-            $this->content .= 'alert("' . t('Oops! You need to get a Google Maps API key to get it working. Please go to your pH7CMS Admin Panel -> Settings -> Api -> Google Maps API Key') . '");' . "\n";
+            $this->content .= 'alert("' . t('Oops! You need to get a Google Maps API key to get it working. Please go to your pH7CMS Admin Panel -> Settings -> General -> API -> Google Maps API Key') . '");' . "\n";
         }
 
         $this->content .= 'function addLoadEvent(func) { ' . "\n";
