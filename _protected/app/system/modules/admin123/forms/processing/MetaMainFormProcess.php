@@ -38,7 +38,7 @@ class MetaMainFormProcess extends Form
         /* Clean DbConfig Cache */
         (new Framework\Cache\Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
 
-        \PFBC\Form::setSuccess('form_meta', t('The Meta Tags has been saved successfully!'));
+        \PFBC\Form::setSuccess('form_meta', t('Meta Tags successfully updated!'));
     }
 
     /**
