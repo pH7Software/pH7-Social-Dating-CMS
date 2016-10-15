@@ -1,4 +1,4 @@
-<h1 class="red2 italic underline s_bMarg">{slogan}</h1>
+<h1 class="red3 italic underline s_bMarg">{slogan}</h1>
 <div class="center profiles_window thumb pic_block">
     {{ $userDesignModel->profiles() }}
 </div>
