@@ -127,7 +127,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         echo '</ul>';
     }
 
-    public function profiles($iOffset = 0, $iLimit = 36)
+    public function profiles($iOffset = 0, $iLimit = 44)
     {
         $oUser = $this->oUserModel->getProfiles(SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUser)) return;
