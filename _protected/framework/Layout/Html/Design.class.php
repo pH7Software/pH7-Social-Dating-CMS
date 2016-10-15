@@ -506,7 +506,7 @@ class Design
     }
 
     /**
-     * Show the geolocation of the user.
+     * Show the geolocation of the user (with link that points to the Country controller).
      *
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      * @return mixed (string | void)
