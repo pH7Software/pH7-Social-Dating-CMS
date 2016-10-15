@@ -6,7 +6,7 @@
     {{ JoinForm::step1() }}
 
     <div class="counter center">
-    <h2 class="pH1">{lang 'People love us! Realtime users using our service'}</h2>
+    <h2 class="red3">{lang 'People love us! Realtime users using our service'}</h2>
     {{ $userDesign->counterUsers() }}</div>
 </div>
 
