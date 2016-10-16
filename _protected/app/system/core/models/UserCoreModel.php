@@ -324,8 +324,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         }
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId
-            LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND searchProfile = \'yes\'
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
+            LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId) WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND searchProfile = \'yes\'
             AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
             $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
         );
@@ -926,8 +926,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p ON m.profileId = p.profileId
-            LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (searchProfile = \'yes\')
+            'SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
+            LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId) WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (searchProfile = \'yes\')
             AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
             AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sSqlHideLoggedProfile . $sOrder . $sSqlLimit
         );
@@ -974,7 +974,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlCity = !empty($sCity) ?  'AND (city LIKE :city)' : '';
 
         $rStmt = Db::getInstance()->prepare(
-            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId
+            'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId)
             WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (country = :country) ' . $sSqlCity . ' AND (username IS NOT NULL)
             AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
             AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sOrder . $sSqlLimit
@@ -1319,7 +1319,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if (!$oData = $this->cache->get())
         {
             $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members'). 'AS m INNER JOIN ' . Db::prefix('Memberships') .
-            'AS g ON m.groupId = g.groupId WHERE profileId = :profileId LIMIT 1';
+            'AS g USING(groupId) WHERE profileId = :profileId LIMIT 1';
 
             $rStmt = Db::getInstance()->prepare($sSql);
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -1342,7 +1342,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
     {
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId FROM' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') .
-            'AS pay ON m.groupId = pay.groupId WHERE (pay.expirationDays = 0 OR DATE_ADD(m.membershipDate, INTERVAL pay.expirationDays DAY) >= :currentTime)
+            'AS pay USING(groupId) WHERE (pay.expirationDays = 0 OR DATE_ADD(m.membershipDate, INTERVAL pay.expirationDays DAY) >= :currentTime)
              AND (m.profileId = :profileId) LIMIT 1');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
