@@ -3,7 +3,7 @@
  * @title            Version Class
  * @desc             Version Information for the security of packaged software.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Security
@@ -21,9 +21,9 @@ final class Version
     /***** Framework Kernel *****/
     // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O" and 3.* is H3O
     const KERNEL_VERSION_NAME = 'H3O';
-    const KERNEL_VERSION = '3.0.0';
+    const KERNEL_VERSION = '3.1.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2016-10-17';
+    const KERNEL_RELASE_DATE = '2016-10-24';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
