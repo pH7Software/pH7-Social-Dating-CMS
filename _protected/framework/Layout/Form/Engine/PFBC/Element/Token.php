@@ -5,8 +5,8 @@
 namespace PFBC\Element;
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PFBC\Validation\Token,
-PH7\Framework\Security\CSRF\Token as T;
+PH7\Framework\Security\CSRF\Token as T,
+PFBC\Validation\Token;
 
 class Token extends Hidden
 {
