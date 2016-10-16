@@ -2,8 +2,8 @@
 /**
  * @title          Development Environment File
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @link           http://software.hizup.com
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @link           http://ph7cms.com
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / Config / Environment
