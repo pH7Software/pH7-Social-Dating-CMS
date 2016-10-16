@@ -11,7 +11,7 @@
 pH7CMS is included with 31 modules and based on its homemade framework (pH7Framework). It is also the first Professional, free and open source European Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or social networking sites.
 
 
-![Professional PHP Social Networking Dating CMS](https://cloud.githubusercontent.com/assets/1325411/14080218/84d2f9b8-f4fb-11e5-90e2-36c139f0eb66.png)
+![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
 
 
 ## Overview
@@ -100,7 +100,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 
 *If you want more, [here are other great features](http://ph7cms.com/social-dating-features/) included in pH7CMS (and obviously in [pH7CMS Pro](http://ph7cms.com/pro/) as well) that may interest you!*
 
-![Build a Social Dating Website with pH7CMS](https://cloud.githubusercontent.com/assets/1325411/14080217/84ca02c2-f4fb-11e5-941d-dedc0354dafd.png)
+![Build a Social Dating Web App with pH7CMS](https://cloud.githubusercontent.com/assets/1325411/19419481/657386a4-93d0-11e6-8eee-95deba2d30a0.png)
 
 
 ## Requirements
@@ -161,6 +161,9 @@ server {
 ```
 
 For more information, please refer to the nginx documentation.
+
+
+![Create Your Own Niche Dating Service in New York City](https://cloud.githubusercontent.com/assets/1325411/19419480/65738a1e-93d0-11e6-9fbe-a48fa36fc53a.png)
 
 
 ## Translations
@@ -233,4 +236,4 @@ License: [General Public License 3](http://www.gnu.org/licenses/gpl.html) or lat
 
 
 ![Admin Panel, Browse Users](https://cloud.githubusercontent.com/assets/1325411/14080251/b476e5c6-f4fb-11e5-825e-ddc992ba1055.png)
-![DateLove Template, Social Users](https://cloud.githubusercontent.com/assets/1325411/14080219/84d3ad5e-f4fb-11e5-972c-e7c9dd229b52.png)
+![pH7CMS allows anyone to start a web dating app like Tinder/Bumble or Badoo](https://cloud.githubusercontent.com/assets/1325411/19419477/5476b45c-93d0-11e6-823d-d293f186c0f7.png)
