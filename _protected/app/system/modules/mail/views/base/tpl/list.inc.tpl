@@ -60,8 +60,11 @@
     {/each}
     {if $is_admin}</div>{/if}
 
-    <p><input type="checkbox" name="all_action" /> <button type="submit" onclick="return checkChecked()" formaction="{{ $design->url('mail',$ctrl,'set'.$move_to.'all') }}">{label_txt}</button>
-    {if $is_trash} | <button type="submit" onclick="return checkChecked(false)" formaction="{{ $design->url('mail',$ctrl,'setrestorall') }}">{lang 'Move to Inbox'}</button>{/if}</p>
+    <p>
+        <input type="checkbox" name="all_action" />
+        <button class="btn btn-default btn-tiny" type="submit" onclick="return checkChecked()" formaction="{{ $design->url('mail',$ctrl,'set'.$move_to.'all') }}">{label_txt}</button>
+        {if $is_trash} | <button class="btn btn-default btn-tiny" type="submit" onclick="return checkChecked(false)" formaction="{{ $design->url('mail',$ctrl,'setrestorall') }}">{lang 'Move to Inbox'}</button>{/if}
+    </p>
 
   </form>
 
