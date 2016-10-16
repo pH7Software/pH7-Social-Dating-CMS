@@ -23,7 +23,14 @@
     <tfoot>
       <tr>
         <th><input type="checkbox" name="all_action" /></th>
-        <th><button type="submit" onclick="return checkChecked()" formaction="{{ $design->url(PH7_ADMIN_MOD,'admin','deleteall') }}" class="red">{lang 'Delete'}</button></th>
+        <th>
+            <button
+                class="red btn btn-default btn-tiny"
+                type="submit" onclick="return checkChecked()"
+                formaction="{{ $design->url(PH7_ADMIN_MOD,'admin','deleteall') }}"
+            >{lang 'Delete'}
+            </button>
+        </th>
         <th> </th>
         <th> </th>
         <th> </th>

@@ -26,11 +26,47 @@
     <tfoot>
       <tr>
         <th><input type="checkbox" name="all_action" /></th>
-        <th><button type="submit" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','banall') }}">{lang 'Ban'}</button></th>
-        <th><button type="submit" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','unbanall') }}">{lang 'UnBan'}</button></th>
-        <th><button type="submit" onclick="return checkChecked()" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','deleteall') }}" class="red">{lang 'Delete'}</button></th>
-        <th><button type="submit" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','approveall') }}">{lang 'Approve'}</button></th>
-        <th><button type="submit" formaction="{{ $design->url(PH7_ADMIN_MOD,'user','disapproveall') }}">{lang 'Disapprove'}</button></th>
+        <th>
+            <button
+                class="btn btn-default btn-tiny"
+                type="submit"
+                formaction="{{ $design->url(PH7_ADMIN_MOD,'user','banall') }}"
+            >{lang 'Ban'}
+            </button>
+        </th>
+        <th>
+            <button
+                class="btn btn-default btn-tiny"
+                type="submit"
+                formaction="{{ $design->url(PH7_ADMIN_MOD,'user','unbanall') }}"
+            >{lang 'UnBan'}
+            </button>
+        </th>
+        <th>
+            <button
+                class="red btn btn-default btn-tiny"
+                type="submit"
+                onclick="return checkChecked()"
+                formaction="{{ $design->url(PH7_ADMIN_MOD,'user','deleteall') }}"
+            >{lang 'Delete'}
+            </button>
+        </th>
+        <th>
+            <button
+                class="btn btn-default btn-tiny"
+                type="submit"
+                formaction="{{ $design->url(PH7_ADMIN_MOD,'user','approveall') }}"
+            >{lang 'Approve'}
+            </button>
+        </th>
+        <th>
+            <button
+                class="btn btn-default btn-tiny"
+                type="submit"
+                formaction="{{ $design->url(PH7_ADMIN_MOD,'user','disapproveall') }}"
+            >{lang 'Disapprove'}
+            </button>
+        </th>
         <th> </th>
         <th> </th>
         <th> </th>
