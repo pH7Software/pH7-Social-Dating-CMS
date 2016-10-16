@@ -1,10 +1,12 @@
 <?php
 /**
- * This code has been made by pH7 (Pierre-Henry SORIA).
+ * This file has been made by pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Validation;
 
-use PH7\Framework\Layout\Form\Form as F, PH7\Framework\Security\CSRF\Token as T;
+use
+PH7\Framework\Layout\Form\Form as F,
+PH7\Framework\Security\CSRF\Token as T;
 
 class Token extends \PFBC\Validation
 {

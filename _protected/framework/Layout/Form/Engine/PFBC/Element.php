@@ -1,7 +1,7 @@
 <?php
 /**
- * We made many changes in this code.
- * By pH7 (Pierre-Henry SORIA).
+ * Many changes have been made in this file.
+ * By Pierre-Henry SORIA.
  */
 namespace PFBC;
 
