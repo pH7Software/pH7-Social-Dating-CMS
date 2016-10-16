@@ -31,7 +31,7 @@
                 class="btn btn-default btn-tiny"
                 type="submit"
                 formaction="{{ $design->url(PH7_ADMIN_MOD,'user','banall') }}"
-            >{lang 'Ban'}
+                >{lang 'Ban'}
             </button>
         </th>
         <th>
@@ -39,7 +39,7 @@
                 class="btn btn-default btn-tiny"
                 type="submit"
                 formaction="{{ $design->url(PH7_ADMIN_MOD,'user','unbanall') }}"
-            >{lang 'UnBan'}
+                >{lang 'UnBan'}
             </button>
         </th>
         <th>
@@ -48,7 +48,7 @@
                 type="submit"
                 onclick="return checkChecked()"
                 formaction="{{ $design->url(PH7_ADMIN_MOD,'user','deleteall') }}"
-            >{lang 'Delete'}
+                >{lang 'Delete'}
             </button>
         </th>
         <th>
@@ -56,7 +56,7 @@
                 class="btn btn-default btn-tiny"
                 type="submit"
                 formaction="{{ $design->url(PH7_ADMIN_MOD,'user','approveall') }}"
-            >{lang 'Approve'}
+                >{lang 'Approve'}
             </button>
         </th>
         <th>
@@ -64,7 +64,7 @@
                 class="btn btn-default btn-tiny"
                 type="submit"
                 formaction="{{ $design->url(PH7_ADMIN_MOD,'user','disapproveall') }}"
-            >{lang 'Disapprove'}
+                >{lang 'Disapprove'}
             </button>
         </th>
         <th> </th>

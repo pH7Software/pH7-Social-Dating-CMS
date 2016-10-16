@@ -30,7 +30,7 @@
                class="btn btn-default btn-tiny"
                 type="submit"
                 formaction="{{ $design->url('affiliate','admin','banall') }}"
-            >{lang 'Ban'}
+                >{lang 'Ban'}
             </button>
         </th>
         <th>
@@ -38,7 +38,7 @@
                 class="btn btn-default btn-tiny"
                 type="submit"
                 formaction="{{ $design->url('affiliate','admin','unbanall') }}"
-            >{lang 'UnBan'}
+                >{lang 'UnBan'}
             </button>
         </th>
         <th>
@@ -47,7 +47,7 @@
                 type="submit"
                 onclick="return checkChecked()"
                 formaction="{{ $design->url('affiliate','admin','deleteall') }}"
-            >{lang 'Delete'}
+                >{lang 'Delete'}
             </button>
         </th>
         <th>
@@ -55,7 +55,7 @@
                 class="btn btn-default btn-tiny"
                 type="submit"
                 formaction="{{ $design->url('affiliate','admin','approveall') }}"
-            >{lang 'Approve'}
+                >{lang 'Approve'}
             </button>
         </th>
         <th>
@@ -63,7 +63,7 @@
                 class="btn btn-default btn-tiny"
                 type="submit"
                 formaction="{{ $design->url('affiliate','admin','disapproveall') }}"
-            >{lang 'Disapprove'}
+                >{lang 'Disapprove'}
             </button>
         </th>
         <th> </th>

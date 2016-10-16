@@ -28,7 +28,7 @@
                 class="red btn btn-default btn-tiny"
                 type="submit" onclick="return checkChecked()"
                 formaction="{{ $design->url(PH7_ADMIN_MOD,'admin','deleteall') }}"
-            >{lang 'Delete'}
+                >{lang 'Delete'}
             </button>
         </th>
         <th> </th>
