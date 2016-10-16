@@ -162,7 +162,7 @@ server {
 
 For more information, please refer to the nginx documentation.
 
-
+<br />
 ![Create Your Own Niche Dating Service in New York City](https://cloud.githubusercontent.com/assets/1325411/19419480/65738a1e-93d0-11e6-9fbe-a48fa36fc53a.png)
 
 
