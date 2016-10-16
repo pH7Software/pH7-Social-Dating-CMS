@@ -26,7 +26,6 @@
                 type="submit"
                 onclick="return checkChecked()"
                 formaction="{{ $design->url('newsletter','admin','deleteall') }}"
-
             >{lang 'Delete'}
             </button>
         </th>
