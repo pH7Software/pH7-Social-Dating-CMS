@@ -90,10 +90,10 @@ class VideoDesignCore
                 ' . t('Your browser is obsolete. Please use a browser that supports HTML5.') . '
             </video>
             <div class="center">
-                <button class="bold" onclick="Video.playPause()">' . t('Play/Pause') . '</button>
-                <button onclick="Video.bigSize()">' . t('Big') . '</button>
-                <button onclick="Video.normalSize()">' . t('Normal') . '</button>
-                <button onclick="Video.smallSize()">' . t('Small') . '</button>
+                <button class="bold btn btn-default btn-tiny" onclick="Video.playPause()">' . t('Play/Pause') . '</button>
+                <button class="btn btn-default btn-tiny" onclick="Video.bigSize()">' . t('Big') . '</button>
+                <button class="btn btn-default btn-tiny" onclick="Video.normalSize()">' . t('Normal') . '</button>
+                <button class="btn btn-default btn-tiny" onclick="Video.smallSize()">' . t('Small') . '</button>
             </div>';
 
             if ($sMedia == 'preview')
