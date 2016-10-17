@@ -18,7 +18,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
     const
     GEO_PROFILE_LIMIT = 14,
     CAROUSEL_PROFILE_LIMIT = 25,
-    PROFILE_BLOCK_LIMIT = 8;
+    PROFILE_BLOCK_LIMIT = 8,
     PROFILE_LIMIT = 44;
 
     private $oUser, $oUserModel;
