@@ -956,7 +956,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.2.9', 1);
+('pH7CMS', 'SQL System Schema', '1.3.0', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -1071,7 +1071,6 @@ CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   hashValidation varchar(40) DEFAULT NULL,
   affiliatedId int(10) unsigned NOT NULL DEFAULT 0,
-  INDEX (profileId),
   PRIMARY KEY (profileId),
   UNIQUE KEY (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
