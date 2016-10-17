@@ -151,24 +151,27 @@ class UpgradeCore extends Kernel
 
                         if ($this->_checkVersion($sVerName, $sVerNumber, $iVerBuild))
                         {
-                              $this->_sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->_sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVerName . ' ' . $sVerNumber . ' Build ' . $iVerBuild . '</span>') . '</button>';
+                            $sMsg = t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVerName . ' ' . $sVerNumber . ' Build ' . $iVerBuild . '</span>');
+                            $this->_sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->_sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . $sMsg . '</button>';
 
-                              // Description upgrade path
-                              $this->_sHtml .= '<p class="underline">' . t('Description of the upgrade patch:') . '</p>';
-                              $this->_sHtml .= $sDesc;
+                            // Description upgrade path
+                            $this->_sHtml .= '<p class="underline">' . t('Description of the upgrade patch:') . '</p>';
+                            $this->_sHtml .= $sDesc;
 
-                              // Introduction file
-                              $this->_sHtml .= '<p class="bold underline">' . t('Introductory instruction:') . '</p>';
-                              $this->_sHtml .= $this->_readInstruction(static::INST_INTRO_FILE);
+                            // Introduction file
+                            $this->_sHtml .= '<p class="bold underline">' . t('Introductory instruction:') . '</p>';
+                            $this->_sHtml .= $this->_readInstruction(static::INST_INTRO_FILE);
                         }
                         else
                         {
-                            $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . t('Bad "version name, version number or version build" of upgrade path!') . '</button>';
+                            $sMsg = t('Bad "version name, version number or version build" of upgrade path!');
+                            $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                         }
                     }
                     else
                     {
-                        $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . t('Upgrade path is not valid!') . '</button>';
+                        $sMsg = t('Upgrade path is not valid!');
+                        $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                     }
 
                     $this->_sHtml .= '<br /><hr /><br />';
