@@ -6,7 +6,7 @@
 
 <p>{$LANG.choose_install_lang}</p>
 
-<select name="l" onchange="document.location.href=this.value">
+<select name="l" onchange="document.location.href=this.value" class="center form-control">
     {$lang_select}
 </select>
 
