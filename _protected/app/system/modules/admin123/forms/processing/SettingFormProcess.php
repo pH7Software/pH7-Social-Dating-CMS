@@ -23,6 +23,7 @@ class SettingFormProcess extends Form
         'map_type' => 'mapType',
         'splash_page' => 'splashPage',
         'bg_splash_vid' => 'bgSplashVideo',
+        'number_profile_splash_page' => 'numberProfileSplashPage',
         'full_ajax_site' => 'fullAjaxSite',
         'site_status' => 'siteStatus',
         'social_media_widgets' => 'socialMediaWidgets',
@@ -97,7 +98,7 @@ class SettingFormProcess extends Form
         'clean_comment' => 'cleanComment',
         'clean_messenger' => 'cleanMessenger',
 
-        // Api
+        // API
         'google_api_key' => 'googleApiKey',
         'ip_api' => 'ipApi',
         'chat_api' => 'chatApi',

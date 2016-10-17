@@ -48,18 +48,20 @@ class SettingForm
             $aLangs[$sLang] = t($sAbbrLang) . ' (' . $sLang . ')';
         }
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Site Name:'), 'site_name', array('value' => DbConfig::getSetting('siteName'), 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Site Name:'), 'site_name', array('value' => DbConfig::getSetting('siteName'), 'validation' => new \PFBC\Validation\Str(2,50), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Theme by default:'), 'default_template', $aTpls, array('value' => DbConfig::getSetting('defaultTemplate'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Language by default:'), 'default_language', $aLangs, array('value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5, 5), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Language by default:'), 'default_language', $aLangs, array('value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5,5), 'required' => 1)));
         unset($oFile, $aTplsId, $aLangsId, $aTpls, $aLangs);
 
         $oForm->addElement(new \PFBC\Element\Select(t('Map Type:'), 'map_type', array('roadmap' => t('Roadmap (default)'), 'hybrid' => t('Hybrid'), 'terrain' => t('Terrain'), 'satellite' => t('Satellite')), array('value' => DbConfig::getSetting('mapType'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Homepage Splash Page:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page for the visitors (not logged), otherwise the classic page will be used.'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Splash Homepage:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page (recommended) for visitors (not logged), otherwise the classic page will be used.'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Enable/Disable the "Animated Video" on the splash homepage. <strong>If you hold <a href="http://ph7cms.com/order">pH7CMSPro</a>, we can provide professional splash videos for your specific niche and setting-up the video for you</strong>.'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Enable/Disable the "Animated Video" on the Splash Homepage. <strong>If you hold <a href="http://ph7cms.com/order">pH7CMSPro</a>, we can provide professional splash videos for your specific niche and setting-up the video for you</strong>.'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1)));
+
+        $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', array('description' => t('The number of profiles displayed on the profiles block of the Splash Homepage.'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Ajax Site with AjPH:'), 'full_ajax_site', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t("Be careful! 'Full Ajax Navigation' feature is still in Beta and may not be working properly on all pages."), 'value' => DbConfig::getSetting('fullAjaxSite'), 'required' => 1)));
 
@@ -93,9 +95,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Maximum username length:'), 'max_username_length', array('value' => DbConfig::getSetting('maxUsernameLength'), 'min' => DbConfig::getSetting('minUsernameLength')+1, 'max' => PH7_MAX_USERNAME_LENGTH, 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Minimum age for registration:'), 'min_age_registration', array('value' => DbConfig::getSetting('minAgeRegistration'), 'max' => DbConfig::getSetting('maxAgeRegistration')-1, 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Minimum age for registration:'), 'min_age_registration', array('value' => DbConfig::getSetting('minAgeRegistration'), 'max' => DbConfig::getSetting('maxAgeRegistration')-1, 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration')+1, 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration')+1, 'validation' => new \PFBC\Validation\Str(1,3), 'required' => 1)));
 
         $oGroupId = (new AdminCoreModel)->getMemberships();
         $aGroupName = array();
@@ -255,11 +257,12 @@ class SettingForm
         /********** Automation **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="automation"><div class="col-md-10"><h2 class="underline">' . t('Automation:') . '</h2>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Secret word for the cron URL:'), 'cron_security_hash', array('description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(1, 64))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Secret word for the cron URL:'), 'cron_security_hash', array('description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(1,64))));
 
         $oForm->addElement(new \PFBC\Element\Number(t('User inactivity timeout:'), 'user_timeout', array('description' => t('The number of minutes that a member becomes inactive (offline).'), 'value' => DbConfig::getSetting('userTimeout'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><script src="' . PH7_URL_STATIC . PH7_JS . 'tabs.js"></script><script>tabs(\'p\', [\'general\',\'logotype\',\'registration\',\'pic_vid\',\'moderation\',\'email\',\'security\',\'spam\',\'api\',\'automation\']);</script>'));
+
 
         $oForm->addElement(new \PFBC\Element\Button);
 

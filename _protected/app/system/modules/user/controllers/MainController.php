@@ -42,6 +42,9 @@ class MainController extends Controller
 
                 // Assign the background video option (this tpl var is only available in index.guest_splash.tpl)
                 $this->view->is_bg_video = $bIsBgVideo;
+
+                // Number of profiles to display on the profiles block
+                $this->view->number_profiles = DbConfig::getSetting('numberProfileSplashPage');
             }
 
             $sIsCssVidSplashFile = (!empty($bIsBgVideo) && $bIsBgVideo) ? 'video_splash.css,' : '';

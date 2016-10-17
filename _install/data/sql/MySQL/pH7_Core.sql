@@ -990,6 +990,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('splashPage', 1, 'Use Splash Page | enable = 1 or disable = 0', 'general'),
 ('bgSplashVideo', 1, '0 to disable or 1 to enable the background splash video', 'general'),
+('numberProfileSplashPage', 44, 'Number of profiles to display on the splash homepage', 'general'),
 ('fullAjaxSite', 0, 'enable = 1 or disable = 0', 'general'),
 ('ipLogin', '', '', 'security'),
 ('timeDelayUserRegistration', 1440, '1440 minutes = 24 hours (in minutes!)', 'spam'),
