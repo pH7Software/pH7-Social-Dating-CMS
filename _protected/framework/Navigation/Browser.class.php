@@ -44,9 +44,9 @@ class Browser
      */
     public function cache()
     {
-        header('Cache-Control: no-cache, must-revalidate');
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600 * 24 * 30) . ' GMT');
-        header('Pragma: public');
+        header('Cache-Control: no-cache, must-revalidate');
+        header('Pragma: public'); // HTTP 1.0
         //header ('Not Modified', true, 304);
 
         return $this;
@@ -65,7 +65,7 @@ class Browser
         unset($sNow);
         header('Cache-Control: no-store, no-cache, must-revalidate');
         header('Cache-Control: post-check=0, pre-check=0', false);
-        header('Pragma: no-cache');
+        header('Pragma: no-cache'); // HTTP 1.0
 
         return $this;
     }
