@@ -73,7 +73,7 @@ class MainController extends Controller
         $oStatModel = new StatisticCoreModel;
 
         // Get the since date of the website
-        $this->view->since_date = $this->dateTime->get(StatisticCoreModel::getSiteSinceDate())->date();
+        $this->view->since_date = $this->dateTime->get(StatisticCoreModel::getDateOfCreation())->date();
 
 
         //---------- Number of Logins Members ----------//

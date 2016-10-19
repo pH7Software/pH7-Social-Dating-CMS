@@ -20,7 +20,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
      *
      * @return string The date.
      */
-    public static function getSiteSinceDate()
+    public static function getDateOfCreation()
     {
         $rStmt = Db::getInstance()->prepare('SELECT joinDate AS sinceDate FROM' . Db::prefix('Admins') . 'WHERE profileId = 1');
         $rStmt->execute();
