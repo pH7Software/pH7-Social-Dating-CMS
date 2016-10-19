@@ -199,7 +199,7 @@ class Cache
         return 'defined(\'PH7\') or exit(\'Restricted access\');
 /*
 Created on ' . gmdate('Y-m-d H:i:s') . '
-ID file: ' . $this->_sId . '
+File ID: ' . $this->_sId . '
 */
 /***************************************************************************
  *     ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_COMPANY . '
