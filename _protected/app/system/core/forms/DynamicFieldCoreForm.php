@@ -51,12 +51,12 @@ class DynamicFieldCoreForm
             break;
 
             case 'state':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Your State/Province:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,150)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
+                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Your State/Province:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,150)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,150))));
                 $this->addCheckErrSpan('str');
             break;
 
             case 'zipCode':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,15)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,15), 'required'=>1)));
+                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,15)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,15))));
                 $this->addCheckErrSpan('str');
             break;
 

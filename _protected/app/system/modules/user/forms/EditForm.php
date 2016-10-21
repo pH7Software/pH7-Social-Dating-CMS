@@ -61,12 +61,18 @@ class EditForm
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('id'=>'name_first','onblur' =>'CValid(this.value,this.id,)','value'=>$oUser->firstName,'required'=>1,'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
+
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('id'=>'name_last','onblur' =>'CValid(this.value,this.id)','value'=>$oUser->lastName,'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
+
         $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', array('description'=>t('For site security, you cannot change your username.'),'disabled'=>'disabled','value'=>$oUser->username)));
+
         $oForm->addElement(new \PFBC\Element\Email(t('Email:'), 'mail', array('description'=>t('For site security and to avoid spam, you cannot change your email address.'), 'disabled'=>'disabled','value'=>$oUser->email)));
+
         $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('female'=>t('Female'), 'male'=>t('Male'), 'couple'=>t('Couple')), array('value' => $oUser->sex,'required'=>1)));
+
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Interested in:'), 'match_sex', array('male'=>t('Male'), 'female'=>t('Female'), 'couple'=>t('Couple')), array('value'=>Form::getVal($oUser->matchSex), 'required'=>1)));
+
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('id'=>'birth_date', 'onblur'=>'CValid(this.value, this.id)', 'value'=>$sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
 
