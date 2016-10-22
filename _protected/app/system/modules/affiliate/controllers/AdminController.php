@@ -95,27 +95,34 @@ class AdminController extends Controller
         $this->output();
     }
 
-    public function loginUserAs($iId)
+    public function loginUserAs($iId = null)
     {
-        $aSessionData = [
-            'login_affiliate_as' => 1,
-            'affiliate_id' => $iId,
-            'affiliate_email' => $this->oAffModel->getEmail($iId, 'Affiliates'),
-            'affiliate_username' => $this->oAffModel->getUsername($iId, 'Affiliates'),
-            'affiliate_first_name' => $this->oAffModel->getFirstName($iId, 'Affiliates'),
-            'affiliate_sex' => $this->oAffModel->getSex($iId, null, 'Affiliates'),
-            'affiliate_ip' => Framework\Ip\Ip::get(),
-            'affiliate_http_user_agent' => $this->browser->getUserAgent(),
-            'affiliate_token' => Framework\Util\Various::genRnd()
-        ];
+        if ($oUser = $this->oAffModel->readProfile($iId, 'Affiliates'))
+        {
+            $aSessionData = [
+                'login_affiliate_as' => 1,
+                'affiliate_id' => $oUser->profileId,
+                'affiliate_email' => $oUser->email,
+                'affiliate_username' => $oUser->username,
+                'affiliate_first_name' => $oUser->firstName,
+                'affiliate_sex' => $oUser->sex,
+                'affiliate_ip' => Framework\Ip\Ip::get(),
+                'affiliate_http_user_agent' => $this->browser->getUserAgent(),
+                'affiliate_token' => Framework\Util\Various::genRnd($oUser->email)
+            ];
 
-        $this->session->set($aSessionData);
-        Header::redirect(Uri::get('affiliate', 'account', 'index'), t('You are now logged in as affiliate: %0%!', $this->session->get('affiliate_username')));
+            $this->session->set($aSessionData);
+            Header::redirect(Uri::get('affiliate', 'account', 'index'), t('You are now logged in as affiliate: %0%!', $oUser->username));
+        }
+        else
+        {
+            Header::redirect($this->httpRequest->previousPage(), t("This affiliate doesn't exist."));
+        }
     }
 
     public function logoutUserAs()
     {
-        $this->sMsg = t('You are now  logged out in as an affiliate: %0%!', $this->
+        $this->sMsg = t('You are now logged out as affiliate: %0%!', $this->
             session->get('affiliate_username'));
 
         $aSessionData = [
