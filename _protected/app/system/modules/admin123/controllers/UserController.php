@@ -152,7 +152,7 @@ class UserController extends Controller
 
             $this->session->set($aSessionData);
             Header::redirect($this->registry->site_url, t('You are now logged in as member: %0%!',
-                $this->session->get('member_username')));
+                $oUser->username));
         }
         else
         {
@@ -162,7 +162,7 @@ class UserController extends Controller
 
     public function logoutUserAs()
     {
-        $this->sMsg = t('You are now  logged out in as a member: %0%!', $this->session->
+        $this->sMsg = t('You are now logged out as member: %0%!', $this->session->
             get('member_username'));
 
         $aSessionData = [
