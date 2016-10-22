@@ -37,10 +37,10 @@ class FriendController extends Controller
         $this->sUsername = (!$this->httpRequest->getExists('username')) ? $this->session->get('member_username') : $this->httpRequest->get('username');
 
         /**
-         * FIRST UPPER FOR THE USERNAME
+         * FIRST USERNAME LETTER IN UPPERCASE
          * We can do this because the SQL search is case insensitive.
-         * Be careful not to do this if you need this user name in the method \PH7\Framework\Layout\Html::getUserAvatar()
-         * since it can not find the folder of the user because it is not case insensitive.
+         * Be careful not to do this if you need this username in the method \PH7\Framework\Layout\Html::getUserAvatar()
+         * since it won't find the user folder because it is case-sensitive.
          */
         $this->sUsername = $this->str->upperFirst($this->sUsername);
 
@@ -54,7 +54,7 @@ class FriendController extends Controller
         /**
          *  Predefined meta_description.
          */
-        $this->view->meta_description = t('The Hot Friend of %0%. Meet new people and make new friends, sex friends, hot friends for Flirt, Speed Dating or social relationship with %site_name%', $this->sUsername);
+        $this->view->meta_description = t("%0%'s friends. Meet new people and make new friends, sex friends, hot friends for Flirt, Speed Dating or social relationship with %site_name%", $this->sUsername);
 
         /**
          *  Predefined meta_keywords tags.
@@ -73,12 +73,12 @@ class FriendController extends Controller
             getFirstItem(), $this->oPage->getNbItemsByPage());
 
         if (empty($oFriend)) {
-            $this->sTitle = t('No Friend found on the profile of "%0%"', $this->sUsername);
+            $this->sTitle = t("No Friend found on %0%'s profile", $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->error = t('No friends found.');
         } else {
-            $this->sTitle = t('%0%\'s Friends:', $this->sUsername);
+            $this->sTitle = t("%0%'s Friends:", $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->friend_number = nt('%n% Friend', '%n% Friends', $this->iTotalFriends);
@@ -99,12 +99,12 @@ class FriendController extends Controller
         $oFriend = $this->oFriendModel->get($this->iMemberId, $this->iId, $this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
         if (empty($oFriend)) {
-            $this->sTitle = t('No Mutual Friend found on the profile of "%0%"', $this->sUsername);
+            $this->sTitle = t("No Mutual Friend found on %0%'s profile", $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->error = t('No mutual friends found.');
         } else {
-            $this->sTitle = t('%0%\'s Mutual Friends:', $this->sUsername);
+            $this->sTitle = t("%0%'s Mutual Friends:", $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $this->view->friend_number = nt('%n% Mutual Friend', '%n% Mutuals Friends', $this->iTotalFriends);
@@ -118,7 +118,7 @@ class FriendController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search a Friend on the profile of %0%', $this->sUsername);
+        $this->sTitle = t("Search %0%'s friends", $this->sUsername);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();

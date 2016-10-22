@@ -24,10 +24,10 @@ class VisitorController extends Controller
         $this->sUsername = (!$this->httpRequest->getExists('username')) ? $this->session->get('member_username') : $this->httpRequest->get('username');
 
         /**
-         * FIRST UPPER FOR THE USERNAME
+         * FIRST USERNAME LETTER IN UPPERCASE
          * We can do this because the SQL search is case insensitive.
-         * Be careful not to do this if you need this user name in the method \PH7\Framework\Layout\Html::getUserAvatar()
-         * since it can not find the folder of the user because it is not case insensitive.
+         * Be careful not to do this if you need this username in the method \PH7\Framework\Layout\Html::getUserAvatar()
+         * since it won't find the user folder because it is case-sensitive.
          */
         $this->sUsername = $this->str->upperFirst($this->sUsername);
 
@@ -71,7 +71,7 @@ class VisitorController extends Controller
         }
         else
         {
-            $this->sTitle = t('%0%\'s Visitors:', $this->sUsername);
+            $this->sTitle = t("%0%'s Visitors:", $this->sUsername);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
             $sVisitorTxt = nt('%n% Visitor', '%n% Visitors', $this->iTotalVisitors);
@@ -84,7 +84,7 @@ class VisitorController extends Controller
 
     public function search()
     {
-        $this->sTitle = t("Find someone who has visited the %0%'s profile", $this->sUsername);
+        $this->sTitle = t("Find someone who has visited %0%'s profile", $this->sUsername);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();
