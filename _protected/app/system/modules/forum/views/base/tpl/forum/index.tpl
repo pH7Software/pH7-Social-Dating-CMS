@@ -1,38 +1,29 @@
 <div class="center">
-  {if empty($error)}
+    {if empty($error)}
+        {each $category in $categories}
+            <h2 class="s_tMarg underline">{% $category->title %}</h2>
+            {if AdminCore::auth()}
+                <a class="m_button" href="{{ $design->url('forum', 'admin', 'editcategory', $category->categoryId) }}">{lang 'Edit'}</a> | {{ $design->popupLinkConfirm(t('Delete'), 'forum', 'admin', 'deletecategory', $category->categoryId, 'm_button') }}<br /><br />
+            {/if}
 
-    {each $category in $categories}
-      <h2 class="s_tMarg underline">{% $category->title %}</h2>
-      {if AdminCore::auth()}
-        <a class="m_button" href="{{ $design->url('forum', 'admin', 'editcategory', $category->categoryId) }}">{lang 'Edit'}</a> | {{ $design->popupLinkConfirm(t('Delete'), 'forum', 'admin', 'deletecategory', $category->categoryId, 'm_button') }}<br /><br />
-      {/if}
+            {each $forum in $forums}
+                {if $category->categoryId == $forum->categoryId}
+                    <h3 class="italic"><a href="{{ $design->url('forum', 'forum', 'topic', "$forum->name,$forum->forumId") }}">{% escape($forum->name, true) %}</a></h3>
+                    <p>{% escape($forum->description, true) %}</p>
 
-      {each $forum in $forums}
+                    {if AdminCore::auth()}
+                        <a class="s_button" href="{{ $design->url('forum', 'admin', 'editforum', $forum->forumId) }}">{lang 'Edit'}</a> | {{ $design->popupLinkConfirm(t('Delete'), 'forum', 'admin', 'deleteforum', $forum->forumId, 's_button') }}<br />
+                    {/if}
+                {/if}
+            {/each}
+        {/each}
 
-        {if $category->categoryId == $forum->categoryId}
+        {main_include 'page_nav.inc.tpl'}
+    {else}
+        <p>{error}</p>
+    {/if}
 
-          <h4 class="italic"><a href="{{ $design->url('forum', 'forum', 'topic', "$forum->name,$forum->forumId") }}">{% escape($forum->name, true) %}</a></h4>
-          <p>{% escape($forum->description, true) %}</p>
-
-          {if AdminCore::auth()}
-            <a class="s_button" href="{{ $design->url('forum', 'admin', 'editforum', $forum->forumId) }}">{lang 'Edit'}</a> | {{ $design->popupLinkConfirm(t('Delete'), 'forum', 'admin', 'deleteforum', $forum->forumId, 's_button') }}<br />
-          {/if}
-
-        {/if}
-
-      {/each}
-
-    {/each}
-
-    {main_include 'page_nav.inc.tpl'}
-
-  {else}
-
-    <p>{error}</p>
-
-  {/if}
-
-  {if AdminCore::auth()}
-    <br /><hr /><p><a class="btn btn-default btn-tiny" href="{{ $design->url('forum', 'admin', 'addcategory') }}">{lang 'Add Category'}</a> <a class="btn btn-default btn-tiny" href="{{ $design->url('forum', 'admin', 'addforum') }}">{lang 'Add Forum'}</a></p>
-  {/if}
+    {if AdminCore::auth()}
+        <br /><hr /><p><a class="btn btn-default btn-tiny" href="{{ $design->url('forum', 'admin', 'addcategory') }}">{lang 'Add Category'}</a> <a class="btn btn-default btn-tiny" href="{{ $design->url('forum', 'admin', 'addforum') }}">{lang 'Add Forum'}</a></p>
+    {/if}
 </div>
