@@ -5,8 +5,8 @@
 {else}
 
   {* Set Variables *}
-  {{ $usernameSender = (empty($msg->username)) ? 'admin' : escape($msg->username) }}
-  {{ $firstNameSender = (empty($msg->firstName)) ? 'admin' : escape($msg->firstName) }}
+  {{ $usernameSender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : escape($msg->username) }}
+  {{ $firstNameSender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : escape($msg->firstName) }}
   {{ $subject = escape(Framework\Security\Ban\Ban::filterWord($msg->title)) }}
   {{ $message = Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($msg->message)) }}
   {{ $is_outbox = ($msg->sender == $member_id) }}

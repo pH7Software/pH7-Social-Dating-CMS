@@ -20,8 +20,8 @@
     {each $msg in $msgs}
 
       {* Set Variables *}
-      {{ $usernameSender = (empty($msg->username)) ? 'admin' : $msg->username }}
-      {{ $firstNameSender = (empty($msg->firstName)) ? 'admin' : $msg->firstName }}
+      {{ $usernameSender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : $msg->username }}
+      {{ $firstNameSender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : $msg->firstName }}
       {{ $subject = escape(substr(Framework\Security\Ban\Ban::filterWord($msg->title, false),0,20), true) }}
       {{ $message = escape(Framework\Security\Ban\Ban::filterWord($msg->message), true) }}
       {{ $is_outbox = ($msg->sender == $member_id) }}
