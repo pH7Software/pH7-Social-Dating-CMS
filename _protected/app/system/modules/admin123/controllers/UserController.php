@@ -133,24 +133,31 @@ class UserController extends Controller
         }
     }
 
-    public function loginUserAs($iId)
+    public function loginUserAs($iId = null)
     {
-        $aSessionData = [
-            'login_user_as' => 1,
-            'member_id' => $iId,
-            'member_email' => $this->oAdminModel->getEmail($iId),
-            'member_username' => $this->oAdminModel->getUsername($iId),
-            'member_first_name' => $this->oAdminModel->getFirstName($iId),
-            'member_sex' => $this->oAdminModel->getSex($iId),
-            'member_group_id' => $this->oAdminModel->getGroupId($iId),
-            'member_ip' => Framework\Ip\Ip::get(),
-            'member_http_user_agent' => $this->browser->getUserAgent(),
-            'member_token' => Framework\Util\Various::genRnd()
-        ];
+        if ($oUser = $this->oAdminModel->readProfile($iId))
+        {
+            $aSessionData = [
+                'login_user_as' => 1,
+                'member_id' => $oUser->profileId,
+                'member_email' => $oUser->email,
+                'member_username' => $oUser->username,
+                'member_first_name' => $oUser->firstName,
+                'member_sex' => $oUser->sex,
+                'member_group_id' => $oUser->groupId,
+                'member_ip' => Framework\Ip\Ip::get(),
+                'member_http_user_agent' => $this->browser->getUserAgent(),
+                'member_token' => Framework\Util\Various::genRnd($oUser->email)
+            ];
 
-        $this->session->set($aSessionData);
-        Header::redirect($this->registry->site_url, t('You are now logged in as member: %0%!',
-            $this->session->get('member_username')));
+            $this->session->set($aSessionData);
+            Header::redirect($this->registry->site_url, t('You are now logged in as member: %0%!',
+                $this->session->get('member_username')));
+        }
+        else
+        {
+            Header::redirect($this->httpRequest->previousPage(), t("This user doesn't exist."));
+        }
     }
 
     public function logoutUserAs()
