@@ -54,7 +54,7 @@ class WallAjax extends Core
         $this->_mContents = $this->_oWallModel->get($this->session->get('member_id'), null, 0, 20);
         if (!$this->_mContents)
         {
-            echo '<p class="alert alert-danger">', t('Oops! There is no news feed available.'), '</p>';
+            echo '<p class="alert alert-danger">', t('Oops! There is no news feed available at the moment.'), '</p>';
         }
         else
         {
@@ -75,7 +75,7 @@ class WallAjax extends Core
         $this->_mContents = $this->_oWallModel->getCommentProfile(null, 0, 20);
         if (!$this->_mContents)
         {
-            echo '<p class="alert alert-danger">', t('Oops! There is no news feed available.'), '</p>';
+            echo '<p class="alert alert-danger">', t('Oops! There is no news feed available at the moment.'), '</p>';
         }
         else
         {
