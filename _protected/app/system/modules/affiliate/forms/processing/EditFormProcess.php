@@ -61,7 +61,7 @@ class EditFormProcess extends Form
 
         unset($oAffModel, $oAff, $oAffCache);
 
-        \PFBC\Form::setSuccess('form_aff_edit_account', t('Profile has been saved successfully!'));
+        \PFBC\Form::setSuccess('form_aff_edit_account', t('The profile has been successfully updated'));
     }
 
 }
