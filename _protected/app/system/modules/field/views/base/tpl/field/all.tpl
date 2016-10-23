@@ -15,7 +15,6 @@
                 <tbody>
                     {each $field in $fields}
                         {{ $unmodifiable = Field::unmodifiable($field) }}
-
                         <tr>
                             <td>{% $field %}</td>
                             <td>
