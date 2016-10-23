@@ -47,11 +47,13 @@ footer a{color:#666;}
     height:1px;
     overflow:hidden;
 }
-.center {
-    text-align:center;
+.center, .middle {
     margin-left:auto;
     margin-right:auto;
     width:80%;
+}
+.center {
+    text-align:center;
 }
 .link {
     background-color:#f3f3f3;
