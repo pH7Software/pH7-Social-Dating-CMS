@@ -54,10 +54,24 @@
           <td>{{ if(!empty($admin->name)) echo $admin->name }} &nbsp; {% $admin->firstName %}</td>
           <td>{{ $design->ip($admin->ip) }}</td>
           <td class="small">{% $dateTime->get($admin->joinDate)->dateTime() %}</td>
-          <td class="small">{if !empty($admin->lastActivity)} {% $dateTime->get($admin->lastActivity)->dateTime() %} {else} {lang 'No last login'} {/if}</td>
-          <td class="small">{if !empty($admin->lastEdit)} {% $dateTime->get($admin->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>
-          <td class="small"><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit',$admin->profileId) }}" title="{lang 'Edit this Admin'}">{lang 'Edit'}</a> |
-          {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), PH7_ADMIN_MOD, 'admin', 'delete', $admin->profileId.'_'.$admin->username) }}</td>
+          <td class="small">
+              {if !empty($admin->lastActivity)}
+                  {% $dateTime->get($admin->lastActivity)->dateTime() %}
+              {else}
+                  {lang 'No login'}
+              {/if}
+          </td>
+          <td class="small">
+              {if !empty($admin->lastEdit)}
+                  {% $dateTime->get($admin->lastEdit)->dateTime() %}
+              {else}
+                  {lang 'No editing'}
+              {/if}
+          </td>
+          <td class="small">
+              <a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit',$admin->profileId) }}" title="{lang 'Edit this Admin'}">{lang 'Edit'}</a> |
+              {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), PH7_ADMIN_MOD, 'admin', 'delete', $admin->profileId.'_'.$admin->username) }}
+          </td>
         </tr>
 
       {/each}

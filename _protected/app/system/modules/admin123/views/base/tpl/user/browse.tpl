@@ -90,8 +90,20 @@
           <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($user->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}</td>
           <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of the Membership Group *}
           <td class="small">{% $dateTime->get($user->joinDate)->dateTime() %}</td>
-          <td class="small">{if !empty($user->lastActivity)} {% $dateTime->get($user->lastActivity)->dateTime() %} {else} {lang 'No last login'} {/if}</td>
-          <td class="small">{if !empty($user->lastEdit)} {% $dateTime->get($user->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>
+          <td class="small">
+              {if !empty($user->lastActivity)}
+                  {% $dateTime->get($user->lastActivity)->dateTime() %}
+              {else}
+                  {lang 'No login'}
+              {/if}
+          </td>
+          <td class="small">
+              {if !empty($user->lastEdit)}
+                  {% $dateTime->get($user->lastEdit)->dateTime() %}
+              {else}
+                  {lang 'No editing'}
+              {/if}
+          </td>
           <td class="small">{% $user->reference %}</td>
           <td class="small">
             <a href="{{ $design->url('user','setting','edit',$user->profileId) }}" title="{lang "Edit User's Profile"}">{lang 'Edit'}</a> |

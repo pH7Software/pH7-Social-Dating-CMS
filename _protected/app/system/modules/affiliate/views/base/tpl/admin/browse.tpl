@@ -94,8 +94,20 @@
           <td>{% $aff->bankAccount %}</td>
           <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($aff->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($aff->ip) }}</td>
           <td class="small">{% $dateTime->get($aff->joinDate)->dateTime() %}</td>
-          <td class="small">{if !empty($aff->lastActivity)} {% $dateTime->get($aff->lastActivity)->dateTime() %} {else} {lang 'No last login'} {/if}</td>
-          <td class="small">{if !empty($aff->lastEdit)} {% $dateTime->get($aff->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>
+          <td class="small">
+              {if !empty($aff->lastActivity)}
+                  {% $dateTime->get($aff->lastActivity)->dateTime() %}
+              {else}
+                  {lang 'No login'}
+              {/if}
+          </td>
+          <td class="small">
+              {if !empty($aff->lastEdit)}
+                  {% $dateTime->get($aff->lastEdit)->dateTime() %}
+              {else}
+                  {lang 'No editing'}
+              {/if}
+          </td>
           <td class="small">
             <a href="{{ $design->url('affiliate','account','edit',$aff->profileId) }}" title="{lang "Edit Affiliate's Account"}">{lang 'Edit'}</a> |
             <a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{lang 'Login as a user (to edit all this user account).'}">{lang 'Login as'}</a> |
