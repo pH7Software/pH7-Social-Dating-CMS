@@ -46,7 +46,13 @@
         <td>{% $user->name %}</td>
         <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($user->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}</td>
         <td>{% $dateTime->get($user->joinDate)->dateTime() %}</td>
-        <td>{if $user->active == 1}<span class="green1">{lang 'Active Account'}</span>{else}<span class="red">{lang 'Inactive Account'}</span>{/if}</td>
+        <td>
+            {if $user->active == 1}
+                <span class="green1">{lang 'Active Account'}</span>
+            {else}
+                <span class="red">{lang 'Inactive Account'}</span>
+            {/if}
+        </td>
       </tr>
 
     {/each}
