@@ -14,7 +14,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
-
     private $oAff, $oAffModel, $sMsg, $sTitle, $iTotalUsers;
 
     public function __construct()
@@ -110,13 +109,15 @@ class AdminController extends Controller
                 'affiliate_http_user_agent' => $this->browser->getUserAgent(),
                 'affiliate_token' => Framework\Util\Various::genRnd($oUser->email)
             ];
-
             $this->session->set($aSessionData);
-            Header::redirect(Uri::get('affiliate', 'account', 'index'), t('You are now logged in as affiliate: %0%!', $oUser->username));
+            $this->sMsg = t('You are now logged in as affiliate: %0%!', $oUser->username);
+            unset($oUser, $aSessionData);
+
+            Header::redirect(Uri::get('affiliate', 'account', 'index'), $this->sMsg);
         }
         else
         {
-            Header::redirect($this->httpRequest->previousPage(), t("This affiliate doesn't exist."));
+            Header::redirect($this->httpRequest->previousPage(), t("This affiliate doesn't exist."), 'error');
         }
     }
 
@@ -360,10 +361,4 @@ class AdminController extends Controller
 
         return $sOutputMsg;
     }
-
-    public function __destruct()
-    {
-        unset($this->oAff, $this->oAffModel, $this->sMsg, $this->sTitle, $this->iTotalUsers);
-    }
-
 }

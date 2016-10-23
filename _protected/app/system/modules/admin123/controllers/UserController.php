@@ -149,14 +149,15 @@ class UserController extends Controller
                 'member_http_user_agent' => $this->browser->getUserAgent(),
                 'member_token' => Framework\Util\Various::genRnd($oUser->email)
             ];
-
             $this->session->set($aSessionData);
-            Header::redirect($this->registry->site_url, t('You are now logged in as member: %0%!',
-                $oUser->username));
+            $this->sMsg = t('You are now logged in as member: %0%!', $oUser->username);
+            unset($oUser, $aSessionData);
+
+            Header::redirect($this->registry->site_url, $this->sMsg);
         }
         else
         {
-            Header::redirect($this->httpRequest->previousPage(), t("This user doesn't exist."));
+            Header::redirect($this->httpRequest->previousPage(), t("This user doesn't exist."), 'error');
         }
     }
 
