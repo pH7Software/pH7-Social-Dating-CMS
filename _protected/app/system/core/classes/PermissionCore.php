@@ -64,7 +64,7 @@ abstract class PermissionCore extends Framework\Core\Core
 
     public function adminSignInMsg()
     {
-        return t('Please go to the administrative part of the site and log in as administrator.');
+        return t('Please go to the admin panel of the site and log in as administrator.');
     }
 
     public function alreadyConnectedMsg()
