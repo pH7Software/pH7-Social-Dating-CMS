@@ -46,7 +46,6 @@ h2.first {margin: 0 0 10px}
 table{border-spacing: 0; border-collapse:collapse}
 
 .quote::before, .quote::after {
-    font-size: 15px;
     font-weight: bold;
 }
 .quote::before {
