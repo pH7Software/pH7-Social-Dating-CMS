@@ -167,7 +167,7 @@
 
           <li class="dropdown"><a href="{{ $design->url('user','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'My Settings'}</a></li>
+              <li><a href="{{ $design->url('user','setting','index') }}" title="{lang 'My Settings'}"><i class="fa fa-cog fa-fw"></i> {lang 'Edit My Profile'}</a></li>
               <li><a href="{% (new UserCore)->getProfileLink($oSession->get('member_username')) %}" title="{lang 'See My Profile'}"><i class="fa fa-user fa-fw"></i> {lang 'See My Profile'}</a></li>
               <li><a href="{{ $design->url('user','setting','avatar') }}" title="{lang 'Change My Profile Image'}"><i class="fa fa-upload"></i> {lang 'Change My Profile Image'}</a></li>
 
