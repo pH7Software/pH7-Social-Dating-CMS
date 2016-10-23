@@ -11,7 +11,6 @@
         <th>{lang 'Email Address'}</th>
         <th>{lang 'Username'}</th>
         <th>{lang 'First Name'}</th>
-        <th>{lang 'URL'}</th>
         <th>{lang 'Avatar'}</th>
         <th>{lang 'IP'}</th>
         <th>{lang 'Membership Group + ID'}</th>
@@ -74,7 +73,6 @@
         <th> </th>
         <th> </th>
         <th> </th>
-        <th> </th>
       </tr>
     </tfoot>
 
@@ -86,16 +84,15 @@
           <td><input type="checkbox" name="action[]" value="{% $user->profileId %}_{% $user->username %}" /></td>
           <td>{% $user->profileId %}</td>
           <td>{% $user->email %}</td>
-          <td>{% $user->username %}</td>
+          <td><a href="{url_root}{% $user->username %}{page_ext}" target="_blank">{% $user->username %}</a></td>
           <td>{{ if(!empty($user->name)) echo $user->name }} &nbsp; {% $user->firstName %}</td>
-          <td><a href="{url_root}{% $user->username %}{page_ext}" target="_blank">{% $user->username %}{page_ext}</a></td>
           <td>{{ $avatarDesign->get($user->username, $user->firstName, null, 32) }}</td>
           <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($user->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}</td>
           <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of the Membership Group *}
-          <td>{% $dateTime->get($user->joinDate)->dateTime() %}</td>
-          <td>{if !empty($user->lastActivity)} {% $dateTime->get($user->lastActivity)->dateTime() %} {else} {lang 'No last login'} {/if}</td>
-          <td>{if !empty($user->lastEdit)} {% $dateTime->get($user->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>
-          <td>{% $user->reference %}</td>
+          <td class="small">{% $dateTime->get($user->joinDate)->dateTime() %}</td>
+          <td class="small">{if !empty($user->lastActivity)} {% $dateTime->get($user->lastActivity)->dateTime() %} {else} {lang 'No last login'} {/if}</td>
+          <td class="small">{if !empty($user->lastEdit)} {% $dateTime->get($user->lastEdit)->dateTime() %} {else} {lang 'No last editing'} {/if}</td>
+          <td class="small">{% $user->reference %}</td>
           <td class="small">
             <a href="{{ $design->url('user','setting','edit',$user->profileId) }}" title="{lang "Edit User's Profile"}">{lang 'Edit'}</a> |
             <a href="{{ $design->url('user','setting','avatar',"$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit User's Avatar"}">{lang 'Edit Avatar'}</a> |

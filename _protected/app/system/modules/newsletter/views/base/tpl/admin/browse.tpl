@@ -8,12 +8,12 @@
     <thead>
       <tr>
         <th><input type="checkbox" name="all_action" /></th>
-        <th>{lang 'Subscribers ID#'}</th>
+        <th>{lang 'ID#'}</th>
         <th>{lang 'Email Address'}</th>
         <th>{lang 'Name'}</th>
-        <th>{lang 'IP'}</th>
+        <th>{lang 'IP Details'}</th>
         <th>{lang 'Registration Date'}</th>
-        <th>{lang 'Action'}</th>
+        <th>{lang 'Status'}</th>
       </tr>
     </thead>
 
