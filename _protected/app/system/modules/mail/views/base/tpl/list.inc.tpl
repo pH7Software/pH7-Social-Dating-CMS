@@ -1,45 +1,55 @@
 {if empty($error)}
 
-  <form method="post" action="{{ $design->url('mail','main','inbox') }}">
-    {{ $designSecurity->inputToken('mail_action') }}
+    <form method="post" action="{{ $design->url('mail','main','inbox') }}">
+        {{ $designSecurity->inputToken('mail_action') }}
 
-    <p><input type="checkbox" name="all_action" /></p>
+        <div class="table-responsive">
+            <table class="table table-striped">
 
-    <div class="mb_nav">
-      <div class="user">{lang 'Author'}</div>
-      <div class="subject">{lang 'Subject'}</div>
-      <div class="message">{lang 'Message'}</div>
-    </div>
+                <thead>
+                  <tr>
+                    <th><input type="checkbox" name="all_action" /></th>
+                    <th>{lang 'Author'}</th>
+                    <th>{lang 'Subject'}</th>
+                    <th>{lang 'Message'}</th>
+                  </tr>
+                </thead>
 
-    {* Set Variables *}
-    {{ $is_admin = ($is_admin_auth && !$is_user_auth) }}
-    {{ $ctrl = ($is_admin) ? 'admin' : 'main' }}
+                {* Set Variables *}
+                {{ $is_admin = ($is_admin_auth && !$is_user_auth) }}
+                {{ $ctrl = ($is_admin) ? 'admin' : 'main' }}
 
-    {if $is_admin}<div class="divShow">{/if}
+                {if $is_admin}<div class="divShow">{/if}
 
-    {each $msg in $msgs}
+                <tbody>
+                    {each $msg in $msgs}
 
-      {* Set Variables *}
-      {{ $usernameSender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : $msg->username }}
-      {{ $firstNameSender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : $msg->firstName }}
-      {{ $subject = escape(substr(Framework\Security\Ban\Ban::filterWord($msg->title, false),0,20), true) }}
-      {{ $message = escape(Framework\Security\Ban\Ban::filterWord($msg->message), true) }}
-      {{ $is_outbox = ($msg->sender == $member_id) }}
-      {{ $is_trash = (($msg->sender == $member_id && $msg->trash == 'sender') || ($msg->recipient == $member_id && $msg->trash == 'recipient') && !$is_outbox && !$is_admin) }}
-      {{ $slug_url = ($is_trash ? 'trash' : ($is_outbox ? 'outbox' : 'inbox')) }}
-      {{ $is_delete = ($is_outbox || $is_trash || $is_admin) }}
-      {{ $move_to = ($is_delete) ? 'delete' : 'trash' }}
-      {{ $label_txt = ($is_delete) ? t('Delete') : t('Trash') }}
+                        {* Set Variables *}
+                        {{ $usernameSender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : $msg->username }}
+                        {{ $firstNameSender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : $msg->firstName }}
+                        {{ $subject = escape(substr(Framework\Security\Ban\Ban::filterWord($msg->title, false),0,20), true) }}
+                        {{ $message = escape(Framework\Security\Ban\Ban::filterWord($msg->message), true) }}
+                        {{ $is_outbox = ($msg->sender == $member_id) }}
+                        {{ $is_trash = (($msg->sender == $member_id && $msg->trash == 'sender') || ($msg->recipient == $member_id && $msg->trash == 'recipient') && !$is_outbox && !$is_admin) }}
+                        {{ $slug_url = ($is_trash ? 'trash' : ($is_outbox ? 'outbox' : 'inbox')) }}
+                        {{ $is_delete = ($is_outbox || $is_trash || $is_admin) }}
+                        {{ $move_to = ($is_delete) ? 'delete' : 'trash' }}
+                        {{ $label_txt = ($is_delete) ? t('Delete') : t('Trash') }}
 
-      <div class="msg_content" id="mail_{% $msg->messageId %}">
-        <div class="left"><input type="checkbox" name="action[]" value="{% $msg->messageId %}" /></div>
-        {if $msg->status == 1}<img src="{url_tpl_img}icon/new.gif" alt="{lang 'New Message'}" title="{lang 'Unread'}" />{/if}
-        <div class="user">{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</div>
+                <div class="msg_content" id="mail_{% $msg->messageId %}">
 
-        {if $is_admin}
-          <div class="content" title="{lang 'See more'}"><a href="#divShow_{% $msg->messageId %}">
-        {else}
-          <div class="content" title="{lang 'See more'}" onclick="window.location='{{ $design->url('mail','main',$slug_url,$msg->messageId) }}'">
+                  <tr>
+                      <td>
+                          <input type="checkbox" name="action[]" value="{% $msg->messageId %}" />
+                          {if $msg->status == 1}<img src="{url_tpl_img}icon/new.gif" alt="{lang 'New Message'}" title="{lang 'Unread'}" />{/if}
+                      <td>
+                      <td><input type="checkbox" name="action[]" value="{% $msg->messageId %}" /></td>
+                      <td>{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</td>
+
+                      {if $is_admin}
+                          <div class="content" title="{lang 'See more'}"><a href="#divShow_{% $msg->messageId %}">
+                      {else}
+                <div class="content" title="{lang 'See more'}" onclick="window.location='{{ $design->url('mail','main',$slug_url,$msg->messageId) }}'">
         {/if}
             <div class="subject">{subject}</div>
             <div class="message">{% substr($message,0,50) %}</div>
