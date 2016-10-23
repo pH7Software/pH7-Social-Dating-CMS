@@ -3,7 +3,7 @@
 
   <div class="table-responsive panel panel-default">
   <div class="panel-heading bold">{lang 'Subscribers Manager'}</div>
-  <table class="table">
+  <table class="table table-striped">
 
     <thead>
       <tr>

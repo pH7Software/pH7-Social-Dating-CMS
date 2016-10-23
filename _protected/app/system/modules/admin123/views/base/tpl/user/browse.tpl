@@ -1,8 +1,8 @@
 <form method="post" action="{{ $design->url(PH7_ADMIN_MOD,'user','browse') }}">
   {{ $designSecurity->inputToken('user_action') }}
 
-<div class="container-fluid">
-  <table class="table">
+<div class="table-responsive">
+  <table class="table table-striped">
 
     <thead>
       <tr>
