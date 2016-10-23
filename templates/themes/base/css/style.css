@@ -45,8 +45,17 @@ h2.first {margin: 0 0 10px}
 /** Table **/
 table{border-spacing: 0; border-collapse:collapse}
 
-.quote::before {content:url('../img/icon/quote_left.jpg')}
-.quote::after {content:url('../img/icon/quote_right.jpg')}
+.quote::before, .quote::after {
+    font-size: 15px;
+    font-weight: bold;
+}
+.quote::before {
+    content: "« ";
+}
+.quote::after {
+    content: " »";
+}
+
 .italic{font-style:italic}
 .small{font-size:x-small}
 .border{margin:2px;border:1px solid #ccc}
