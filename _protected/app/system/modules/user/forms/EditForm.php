@@ -69,9 +69,9 @@ class EditForm
 
         $oForm->addElement(new \PFBC\Element\Email(t('Email:'), 'mail', array('description'=>t('For site security and to avoid spam, you cannot change your email address.'), 'disabled'=>'disabled','value'=>$oUser->email)));
 
-        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('female'=>t('Female'), 'male'=>t('Male'), 'couple'=>t('Couple')), array('value' => $oUser->sex,'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('female'=>t('Woman'), 'male'=>t('Man'), 'couple'=>t('Couple')), array('value' => $oUser->sex,'required'=>1)));
 
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Interested in:'), 'match_sex', array('male'=>t('Male'), 'female'=>t('Female'), 'couple'=>t('Couple')), array('value'=>Form::getVal($oUser->matchSex), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for a:'), 'match_sex', array('male'=>t('Man'), 'female'=>t('Woman'), 'couple'=>t('Couple')), array('value'=>Form::getVal($oUser->matchSex), 'required'=>1)));
 
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('id'=>'birth_date', 'onblur'=>'CValid(this.value, this.id)', 'value'=>$sBirthDate, 'validation' => new \PFBC\Validation\BirthDate, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));

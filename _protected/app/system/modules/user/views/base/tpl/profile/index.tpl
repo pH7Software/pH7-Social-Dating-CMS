@@ -47,11 +47,11 @@
     {{ UserDesignCoreModel::userStatus($id) }}
     {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
 
-    <p><span class="bold">{lang 'I am:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span></p>
+    <p><span class="bold">{lang 'I am a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span></p>
     <div class="break"></div>
 
     {if !empty($match_sex)}
-      <p><span class="bold">{lang 'Seeking a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span></p>
+      <p><span class="bold">{lang 'Looking for a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span></p>
       <div class="break"></div>
     {/if}
 
