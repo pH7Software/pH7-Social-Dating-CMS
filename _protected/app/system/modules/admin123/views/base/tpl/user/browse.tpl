@@ -85,7 +85,7 @@
           <td>{% $user->profileId %}</td>
           <td>{% $user->email %}</td>
           <td><a href="{url_root}{% $user->username %}{page_ext}" target="_blank">{% $user->username %}</a></td>
-          <td>{{ if(!empty($user->name)) echo $user->name }} &nbsp; {% $user->firstName %}</td>
+          <td>{% $user->firstName %}</td>
           <td>{{ $avatarDesign->get($user->username, $user->firstName, null, 32) }}</td>
           <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($user->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}</td>
           <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of the Membership Group *}

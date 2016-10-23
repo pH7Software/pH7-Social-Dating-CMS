@@ -51,7 +51,7 @@
           <td>{% $admin->profileId %}</td>
           <td>{% $admin->email %}</td>
           <td>{% $admin->username %}</td>
-          <td>{{ if(!empty($admin->name)) echo $admin->name }} &nbsp; {% $admin->firstName %}</td>
+          <td>{% $admin->firstName %}</td>
           <td>{{ $design->ip($admin->ip) }}</td>
           <td class="small">{% $dateTime->get($admin->joinDate)->dateTime() %}</td>
           <td class="small">
