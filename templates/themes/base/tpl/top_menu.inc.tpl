@@ -384,15 +384,15 @@
 
         <li class="dropdown"><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','index') }}" title="{lang 'User Moderation'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-user-secret"></i> {lang 'Moderation'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturealbum') }}" title="{lang 'Moderate Photo Albums'}">{lang 'Photo Album'} <span class="badge">{count_moderate_total_picture_album}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}">{lang 'Picture'} <span class="badge">{count_moderate_total_picture}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','videoalbum') }}" title="{lang 'Moderate Video Albums'}">{lang 'Video Album'} <span class="badge">{count_moderate_total_video_album}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}">{lang 'Video'} <span class="badge">{count_moderate_total_video}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Avatars'}">{lang 'Avatar'} <span class="badge">{count_moderate_total_avatar}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}">{lang 'Profile Background'} <span class="badge">{count_moderate_total_background}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturealbum') }}" title="{lang 'Moderate Photo Albums'}"><i class="fa fa-picture-o"></i> {lang 'Photo Album'} <span class="badge">{count_moderate_total_picture_album}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}"><i class="fa fa-picture-o"></i> {lang 'Picture'} <span class="badge">{count_moderate_total_picture}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','videoalbum') }}" title="{lang 'Moderate Video Albums'}"><i class="fa fa-youtube-play"></i> {lang 'Video Album'} <span class="badge">{count_moderate_total_video_album}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}"><i class="fa fa-youtube-play"></i> {lang 'Video'} <span class="badge">{count_moderate_total_video}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Avatars'}"><i class="fa fa-picture-o"></i> {lang 'Avatar'} <span class="badge">{count_moderate_total_avatar}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}"><i class="fa fa-picture-o"></i> {lang 'Profile Background'} <span class="badge">{count_moderate_total_background}</span></a></li>
 
             {if $is_note_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">{lang 'Notes'} <span class="badge">{count_moderate_total_note}</span></a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Notes'} <span class="badge">{count_moderate_total_note}</span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{{ $design->url('note','admin','unmoderated') }}" title="{lang 'Unmoderated Note Posts'}">{lang 'Unmoderated Notes'} <span class="badge">{count_moderate_total_note}</span></a></li>
                   <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Posts'}">{lang 'All Notes'}</a></li>
@@ -401,7 +401,7 @@
             {/if}
 
             {if $is_webcam_enabled}
-              <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{lang 'Moderate the Webcam Pictures'}">{lang 'Webcam Pictures'}</a></li>
+              <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{lang 'Moderate the Webcam Pictures'}"><i class="fa fa-camera"></i> {lang 'Webcam Pictures'}</a></li>
             {/if}
 
           </ul>
