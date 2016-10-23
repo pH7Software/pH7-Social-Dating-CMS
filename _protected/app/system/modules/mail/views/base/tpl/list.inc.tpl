@@ -10,52 +10,50 @@
             {if $is_admin}<div class="divShow">{/if}
 
             {each $msg in $msgs}
+                {* Set Variables *}
+                {{ $usernameSender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : $msg->username }}
+                {{ $firstNameSender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : $msg->firstName }}
+                {{ $subject = escape(substr(Framework\Security\Ban\Ban::filterWord($msg->title, false),0,20), true) }}
+                {{ $message = escape(Framework\Security\Ban\Ban::filterWord($msg->message), true) }}
+                {{ $is_outbox = ($msg->sender == $member_id) }}
+                {{ $is_trash = (($msg->sender == $member_id && $msg->trash == 'sender') || ($msg->recipient == $member_id && $msg->trash == 'recipient') && !$is_outbox && !$is_admin) }}
+                {{ $slug_url = ($is_trash ? 'trash' : ($is_outbox ? 'outbox' : 'inbox')) }}
+                {{ $is_delete = ($is_outbox || $is_trash || $is_admin) }}
+                {{ $move_to = ($is_delete) ? 'delete' : 'trash' }}
+                {{ $label_txt = ($is_delete) ? t('Delete') : t('Trash') }}
 
-              {* Set Variables *}
-              {{ $usernameSender = (empty($msg->username)) ? PH7_ADMIN_USERNAME : $msg->username }}
-              {{ $firstNameSender = (empty($msg->firstName)) ? PH7_ADMIN_USERNAME : $msg->firstName }}
-              {{ $subject = escape(substr(Framework\Security\Ban\Ban::filterWord($msg->title, false),0,20), true) }}
-              {{ $message = escape(Framework\Security\Ban\Ban::filterWord($msg->message), true) }}
-              {{ $is_outbox = ($msg->sender == $member_id) }}
-              {{ $is_trash = (($msg->sender == $member_id && $msg->trash == 'sender') || ($msg->recipient == $member_id && $msg->trash == 'recipient') && !$is_outbox && !$is_admin) }}
-              {{ $slug_url = ($is_trash ? 'trash' : ($is_outbox ? 'outbox' : 'inbox')) }}
-              {{ $is_delete = ($is_outbox || $is_trash || $is_admin) }}
-              {{ $move_to = ($is_delete) ? 'delete' : 'trash' }}
-              {{ $label_txt = ($is_delete) ? t('Delete') : t('Trash') }}
+                <div class="msg_content" id="mail_{% $msg->messageId %}">
+                  <div class="left"><input type="checkbox" name="action[]" value="{% $msg->messageId %}" /></div>
+                  {if $msg->status == 1}
+                      <img src="{url_tpl_img}icon/new.gif" alt="{lang 'New Message'}" title="{lang 'Unread'}" />
+                  {/if}
+                  <div class="user">{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</div>
 
-              <div class="msg_content" id="mail_{% $msg->messageId %}">
-                <div class="left"><input type="checkbox" name="action[]" value="{% $msg->messageId %}" /></div>
-                {if $msg->status == 1}
-                    <img src="{url_tpl_img}icon/new.gif" alt="{lang 'New Message'}" title="{lang 'Unread'}" />
-                {/if}
-                <div class="user">{{ $avatarDesign->get($usernameSender, $firstNameSender, null, 32) }}</div>
+                  {if $is_admin}
+                    <div class="content" title="{lang 'See more'}"><a href="#divShow_{% $msg->messageId %}">
+                  {else}
+                    <div class="content" title="{lang 'See more'}" onclick="window.location='{{ $design->url('mail','main',$slug_url,$msg->messageId) }}'">
+                  {/if}
+                      <div class="subject">{subject}</div>
+                      <div class="message">{% substr($message,0,50) %}</div>
+                  {if $is_admin}
+                    </a>
+                  {/if}
+                  </div>
+                  <div class="date italic small">{% Framework\Date\Various::textTimeStamp($msg->sendDate) %}</div>
 
-                {if $is_admin}
-                  <div class="content" title="{lang 'See more'}"><a href="#divShow_{% $msg->messageId %}">
-                {else}
-                  <div class="content" title="{lang 'See more'}" onclick="window.location='{{ $design->url('mail','main',$slug_url,$msg->messageId) }}'">
-                {/if}
-                    <div class="subject">{subject}</div>
-                    <div class="message">{% substr($message,0,50) %}</div>
-                {if $is_admin}
-                  </a>
-                {/if}
+                  {if $is_admin}
+                    {*  Hide the message *}
+                    <div class="hidden center" id="divShow_{% $msg->messageId %}">{message}</div>
+                  {/if}
+
+                  <div class="action">
+                      <a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | <a href="javascript:void(0)" onclick="mail('{move_to}',{% $msg->messageId %},'{csrf_token}')">{label_txt}</a>
+                      {if $is_trash}
+                          | <a href="javascript:void(0)" onclick="mail('restor',{% $msg->messageId %},'{csrf_token}')">{lang 'Restor'}</a>
+                      {/if}
+                  </div>
                 </div>
-                <div class="date italic small">{% Framework\Date\Various::textTimeStamp($msg->sendDate) %}</div>
-
-                {if $is_admin}
-                  {*  Hide the message *}
-                  <div class="hidden center" id="divShow_{% $msg->messageId %}">{message}</div>
-                {/if}
-
-                <div class="action">
-                    <a href="{{ $design->url('mail','main','compose',"$usernameSender,$subject") }}">{lang 'Reply'}</a> | <a href="javascript:void(0)" onclick="mail('{move_to}',{% $msg->messageId %},'{csrf_token}')">{label_txt}</a>
-                    {if $is_trash}
-                        | <a href="javascript:void(0)" onclick="mail('restor',{% $msg->messageId %},'{csrf_token}')">{lang 'Restor'}</a>
-                    {/if}
-                </div>
-              </div>
-
             {/each}
             {if $is_admin}</div>{/if}
 
