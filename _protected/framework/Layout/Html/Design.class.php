@@ -347,7 +347,7 @@ class Design
           $aSites = [
               ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
               ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com'],
-              ['title' => 'Date Londoners with Simple App', 'link' => 'http://dating-app.co']
+              ['title' => 'Date Londoners', 'link' => 'http://dating-app.co']
           ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $aSites = [
