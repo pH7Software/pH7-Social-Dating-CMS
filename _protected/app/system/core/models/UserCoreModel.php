@@ -518,7 +518,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      * Approve a profile.
      *
      * @param integer $iProfileId
-     * @param integer $iStatus
+     * @param integer $iStatus 1 = apprved | 0 = not approved
      * @param string $sTable Default 'Members'
      * @return void
      */
