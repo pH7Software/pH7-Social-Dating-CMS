@@ -38,27 +38,28 @@
         </tfoot>
 
         <tbody>
-            {each $user in $browse}
-                <tr>
-                    <td><input type="checkbox" name="action[]" value="{% $user->email %}" /></td>
-                    <td>{% $user->profileId %}</td>
-                    <td>{% $user->email %}</td>
-                    <td>{% $user->name %}</td>
-                    <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($user->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}</td>
-                    <td>{% $dateTime->get($user->joinDate)->dateTime() %}</td>
-                    <td>
-                        {if $user->active == 1}
-                            <span class="green1">{lang 'Active Account'}</span>
-                        {else}
-                            <span class="red">{lang 'Inactive Account'}</span>
-                        {/if}
-                    </td>
-                </tr>
-            {/each}
+          {each $user in $browse}
+            <tr>
+              <td><input type="checkbox" name="action[]" value="{% $user->email %}" /></td>
+              <td>{% $user->profileId %}</td>
+              <td>{% $user->email %}</td>
+              <td>{% $user->name %}</td>
+              <td>
+                <img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($user->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}
+              </td>
+              <td>{% $dateTime->get($user->joinDate)->dateTime() %}</td>
+              <td>
+                {if $user->active == 1}
+                  <span class="green1">{lang 'Active Account'}</span>
+                {else}
+                  <span class="red">{lang 'Inactive Account'}</span>
+                {/if}
+              </td>
+            </tr>
+          {/each}
         </tbody>
       </table>
-  </div>
-
+    </div>
 </form>
 
 {main_include 'page_nav.inc.tpl'}
