@@ -49,7 +49,7 @@ class InstallController extends Controller
         'blog' => '1',
         'newsletter' => '1',
         'invite' => '1',
-        'webcam' => '1',
+        'webcam' => '0',
         'love-calculator' => '1'
     ];
 
