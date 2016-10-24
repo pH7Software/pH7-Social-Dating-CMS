@@ -347,13 +347,16 @@ class UserController extends Controller
             {
                 if ($iStatus == 0)
                 {
-                    // We leave the user in disapproval, after we can ban or delete it.
+                    // Set user not active
+                    $this->oAdminModel->approve($oUser->profileId, 0);
+
+                    // We leave the user in disapproval (but send an email). After we can ban or delete it
                     $sSubject = t('Your membership account has been declined');
                     $this->sMsg = t('Sorry, Your membership account has been declined.');
                 }
                 elseif ($iStatus == 1)
                 {
-                    // Approve User
+                    // Approve user
                     $this->oAdminModel->approve($oUser->profileId, 1);
 
                     /** Update the Affiliate Commission **/
