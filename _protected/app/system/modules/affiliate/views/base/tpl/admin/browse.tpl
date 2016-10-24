@@ -113,7 +113,7 @@
 
                             {if $aff->active != 1}
                                 | {{ $design->popupLinkConfirm(t('Approve'), 'affiliate', 'admin', 'approve', $aff->profileId) }}
-                                or {{ $design->popupLinkConfirm(t('Disapprove (This ONLY notified user by email).'), 'affiliate', 'admin', 'disapprove', $aff->profileId) }}
+                                or {{ $design->popupLinkConfirm(t('Disapprove (notified user by email)'), 'affiliate', 'admin', 'disapprove', $aff->profileId) }}
                             {/if}
                             | {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), 'affiliate', 'admin', 'delete', $aff->profileId.'_'.$aff->username) }}
                         </td>
