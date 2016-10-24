@@ -9,8 +9,7 @@
                   <th><input type="checkbox" name="all_action" /></th>
                   <th>{lang 'Admin ID#'}</th>
                   <th>{lang 'Email Address'}</th>
-                  <th>{lang 'Username'}</th>
-                  <th>{lang 'First Name'}</th>
+                  <th>{lang 'User'}</th>
                   <th>{lang 'IP'}</th>
                   <th>{lang 'Join Date'}</th>
                   <th>{lang 'Last Activity'}</th>
@@ -37,7 +36,6 @@
                   <th> </th>
                   <th> </th>
                   <th> </th>
-                  <th> </th>
                 </tr>
             </tfoot>
 
@@ -47,8 +45,10 @@
                       <td><input type="checkbox" name="action[]" value="{% $admin->profileId %}_{% $admin->username %}" /></td>
                       <td>{% $admin->profileId %}</td>
                       <td>{% $admin->email %}</td>
-                      <td>{% $admin->username %}</td>
-                      <td>{% $admin->firstName %}</td>
+                      <td>
+                          {% $admin->username %}<br />
+                          <span class="gray">{% $admin->firstName %}</span>
+                      </td>
                       <td>{{ $design->ip($admin->ip) }}</td>
                       <td class="small">{% $dateTime->get($admin->joinDate)->dateTime() %}</td>
                       <td class="small">

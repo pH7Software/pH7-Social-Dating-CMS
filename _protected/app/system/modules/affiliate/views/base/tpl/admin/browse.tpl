@@ -8,8 +8,7 @@
                     <th><input type="checkbox" name="all_action" /></th>
                     <th>{lang 'User ID#'}</th>
                     <th>{lang 'Email Address'}</th>
-                    <th>{lang 'Username'}</th>
-                    <th>{lang 'Name'}</th>
+                    <th>{lang 'User'}</th>
                     <th>{lang 'Refers'}</th>
                     <th>{lang 'Bank Account'}</th>
                     <th>{lang 'IP'}</th>
@@ -69,7 +68,6 @@
                   <th> </th>
                   <th> </th>
                   <th> </th>
-                  <th> </th>
                 </tr>
             </tfoot>
 
@@ -79,8 +77,10 @@
                         <td><input type="checkbox" name="action[]" value="{% $aff->profileId %}_{% $aff->username %}" /></td>
                         <td>{% $aff->profileId %}</td>
                         <td>{% $aff->email %}</td>
-                        <td>{% $aff->username %}</td>
-                        <td>{% $aff->lastName %} {% $aff->firstName %}</td>
+                        <td>
+                            {% $aff->username %}<br />
+                            <span class="small gray">{% $aff->firstName %} {% $aff->lastName %}</span>
+                        </td>
                         <td>{% $aff->refer %}</td>
                         <td>{% $aff->bankAccount %}</td>
                         <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($aff->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($aff->ip) }}</td>
