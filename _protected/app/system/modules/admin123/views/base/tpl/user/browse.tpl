@@ -84,7 +84,7 @@
                         </td>
                         <td>{{ $avatarDesign->get($user->username, $user->firstName, null, 32) }}</td>
                         <td>
-                          <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($user->ip)) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}
+                            <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($user->ip)) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($user->ip) }}
                         </td>
                         <td>{% $user->membershipName %} ({% $user->groupId %})</td> {* Name of the Membership Group *}
                         <td class="small">{% $dateTime->get($user->joinDate)->dateTime() %}</td>
@@ -111,14 +111,14 @@
                             <a href="{{ $design->url(PH7_ADMIN_MOD,'user','loginuseras',$user->profileId) }}" title="{lang 'Login as a user (to edit all this user account).'}">{lang 'Login as'}</a> |
 
                             {if $user->ban == 0}
-                              {{ $design->popupLinkConfirm(t('Ban'), PH7_ADMIN_MOD, 'user', 'ban', $user->profileId) }}
+                                {{ $design->popupLinkConfirm(t('Ban'), PH7_ADMIN_MOD, 'user', 'ban', $user->profileId) }}
                             {else}
-                              {{ $design->popupLinkConfirm(t('UnBan'), PH7_ADMIN_MOD, 'user', 'unban', $user->profileId) }}
+                                {{ $design->popupLinkConfirm(t('UnBan'), PH7_ADMIN_MOD, 'user', 'unban', $user->profileId) }}
                             {/if}
 
                             {if $user->active != 1}
-                              | {{ $design->popupLinkConfirm(t('Approve'), PH7_ADMIN_MOD, 'user', 'approve', $user->profileId) }}
-                              or {{ $design->popupLinkConfirm(t('Disapprove (This ONLY notified user by email)'), PH7_ADMIN_MOD, 'user', 'disapprove', $user->profileId) }}
+                                | {{ $design->popupLinkConfirm(t('Approve'), PH7_ADMIN_MOD, 'user', 'approve', $user->profileId) }}
+                                or {{ $design->popupLinkConfirm(t('Disapprove (This ONLY notified user by email)'), PH7_ADMIN_MOD, 'user', 'disapprove', $user->profileId) }}
                             {/if}
 
                             | {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), PH7_ADMIN_MOD, 'user', 'delete', $user->profileId.'_'.$user->username) }}

@@ -42,7 +42,9 @@
             <tbody>
                 {each $admin in $browse}
                     <tr>
-                      <td><input type="checkbox" name="action[]" value="{% $admin->profileId %}_{% $admin->username %}" /></td>
+                      <td>
+                          <input type="checkbox" name="action[]" value="{% $admin->profileId %}_{% $admin->username %}" />
+                      </td>
                       <td>{% $admin->profileId %}</td>
                       <td>{% $admin->email %}</td>
                       <td>

@@ -83,7 +83,9 @@
                         </td>
                         <td>{% $aff->refer %}</td>
                         <td>{% $aff->bankAccount %}</td>
-                        <td><img src="{{ $design->getSmallFlagIcon( Framework\Geo\Ip\Geo::getCountryCode($aff->ip) ) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($aff->ip) }}</td>
+                        <td>
+                            <img src="{{ $design->getSmallFlagIcon(Framework\Geo\Ip\Geo::getCountryCode($aff->ip)) }}" title="{lang 'IP Country'}" alt="{lang 'IP Country'}" /> {{ $design->ip($aff->ip) }}
+                        </td>
                         <td class="small">{% $dateTime->get($aff->joinDate)->dateTime() %}</td>
                         <td class="small">
                             {if !empty($aff->lastActivity)}
@@ -100,20 +102,20 @@
                             {/if}
                         </td>
                         <td class="small">
-                          <a href="{{ $design->url('affiliate','account','edit',$aff->profileId) }}" title="{lang "Edit Affiliate's Account"}">{lang 'Edit'}</a> |
-                          <a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{lang 'Login as a user (to edit all this user account).'}">{lang 'Login as'}</a> |
+                            <a href="{{ $design->url('affiliate','account','edit',$aff->profileId) }}" title="{lang "Edit Affiliate's Account"}">{lang 'Edit'}</a> |
+                            <a href="{{ $design->url('affiliate','admin','loginuseras',$aff->profileId) }}" title="{lang 'Login as a user (to edit all this user account).'}">{lang 'Login as'}</a> |
 
-                          {if $aff->ban == 0}
-                            {{ $design->popupLinkConfirm(t('Ban'), 'affiliate', 'admin', 'ban', $aff->profileId) }}
-                          {else}
-                            {{ $design->popupLinkConfirm(t('UnBan'), 'affiliate', 'admin', 'unban', $aff->profileId) }}
-                          {/if}
+                            {if $aff->ban == 0}
+                                {{ $design->popupLinkConfirm(t('Ban'), 'affiliate', 'admin', 'ban', $aff->profileId) }}
+                            {else}
+                                {{ $design->popupLinkConfirm(t('UnBan'), 'affiliate', 'admin', 'unban', $aff->profileId) }}
+                            {/if}
 
-                          {if $aff->active != 1}
-                            | {{ $design->popupLinkConfirm(t('Approve'), 'affiliate', 'admin', 'approve', $aff->profileId) }}
-                            or {{ $design->popupLinkConfirm(t('Disapprove (This ONLY notified user by email).'), 'affiliate', 'admin', 'disapprove', $aff->profileId) }}
-                          {/if}
-                          | {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), 'affiliate', 'admin', 'delete', $aff->profileId.'_'.$aff->username) }}
+                            {if $aff->active != 1}
+                                | {{ $design->popupLinkConfirm(t('Approve'), 'affiliate', 'admin', 'approve', $aff->profileId) }}
+                                or {{ $design->popupLinkConfirm(t('Disapprove (This ONLY notified user by email).'), 'affiliate', 'admin', 'disapprove', $aff->profileId) }}
+                            {/if}
+                            | {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), 'affiliate', 'admin', 'delete', $aff->profileId.'_'.$aff->username) }}
                         </td>
                     </tr>
                 {/each}
