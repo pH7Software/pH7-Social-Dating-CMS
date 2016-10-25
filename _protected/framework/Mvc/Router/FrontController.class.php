@@ -544,32 +544,31 @@ final class FrontController
     {
         $this->_pathInitialize();
 
-        /***** FULL PATH OF MODULE FILE *****/
-        $this->oRegistry->path_module_controller = $this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php';
-
         /***** FOR FILE CONFIG .INI OF MODULE *****/
         $this->oConfig->load($this->oRegistry->path_module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
         define('PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme']);
 
         $this->_templateInitialize();
 
-        if (is_file($this->oRegistry->path_module_controller))
+        if (is_file($this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php'))
         {
             // For additional options modules
             if (is_file($this->oRegistry->path_module . 'Bootstrap.php'))
                 require_once $this->oRegistry->path_module . 'Bootstrap.php'; // Include Bootstrap Module if there exists
 
-            require_once $this->oRegistry->path_module_controller;
             $sController = 'PH7\\' . $this->oRegistry->controller;
-            $oCtrl = new $sController;
-
-            if ((new \ReflectionClass($sController))->hasMethod($this->oRegistry->action))
+            if (class_exists($sController) && (new \ReflectionClass($sController))->hasMethod($this->oRegistry->action))
             {
                 $oMvc = new \ReflectionMethod($sController, $this->oRegistry->action);
                 if ($oMvc->isPublic())
                 {
+                    $oCtrl = new $sController;
+
                     // And finally we perform the controller's action
                     $oMvc->invokeArgs($oCtrl, $this->getRequestParameter());
+
+                    // Destruct the object to minimize CPU resources
+                    unset($oCtrl);
                 }
                 else
                 {
@@ -580,8 +579,6 @@ final class FrontController
             {
                 $this->notFound('The <b>' . $this->oRegistry->action . '</b> method of the <b>' . $this->oRegistry->controller . '</b> controller does not exist.', 1);
             }
-
-            unset($oCtrl); // Destruction of the object and minimize CPU resources
         }
         else
         {
