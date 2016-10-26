@@ -203,7 +203,7 @@ You will also be eligible to [pH7CMS VIP members](http://ph7cms.com/get-one-tine
 
 ## Tools/Software Used to Develop pH7CMS
 
-* LAMP on **Fedora/Ubuntu** (and Windows with WampServer or MAMP for testing purpose)
+* LAMP on **Fedora/Ubuntu** (and Windows/Mac with WampServer/MAMP for testing purpose)
 
 * **Geany &amp; Sublime Text** for coding the whole project. That's It
 
