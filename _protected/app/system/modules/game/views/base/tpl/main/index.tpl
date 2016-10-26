@@ -60,7 +60,7 @@
       <p>{% $game->description %}</p>
 
       {if AdminCore::auth()}
-        <div><a class="m_button" href="{{ $design->url('game','admin','edit',"$game->title,$game->gameId") }}">{lang 'Edit this Game'}</a> | <div class="m_button inline">{{ LinkCoreForm::display(t('Delete this Game'), 'game', 'admin', 'delete', array('id'=>$game->gameId, 'thumb'=>$game->thumb, 'file'=>$game->file)) }}</div></div>
+        <div><a class="m_button" href="{{ $design->url('game','admin','edit',"$game->title,$game->gameId") }}">{lang 'Edit Game'}</a> &bull; <div class="m_button inline">{{ LinkCoreForm::display(t('Delete Game'), 'game', 'admin', 'delete', array('id'=>$game->gameId, 'thumb'=>$game->thumb, 'file'=>$game->file)) }}</div></div>
       {/if}
 
       <hr />
