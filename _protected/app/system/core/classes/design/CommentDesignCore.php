@@ -32,7 +32,7 @@ class CommentDesignCore
         $iCommentNumber = $oCommentModel->total($iId, $sTable);
         unset($oCommentModel);
 
-        echo '<p class="s_marg italic s_marg"><a href="', Uri::get('comment','comment','add',"$sTable,$iId"), '">', t('Add a comment'), '</a>';
+        echo '<p class="s_marg underline"><a href="', Uri::get('comment','comment','add',"$sTable,$iId"), '">', t('Add a comment'), '</a>';
 
         if ($iCommentNumber > 0) {
             $sCommentTxt = nt('Read Comment', 'Read the Comments', $iCommentNumber);
