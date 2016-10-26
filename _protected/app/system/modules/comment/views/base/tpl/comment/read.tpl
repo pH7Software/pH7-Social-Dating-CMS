@@ -27,7 +27,12 @@
             </div>
         {/each}
 
-        <p class="s_tMarg bold italic"><a href="{{ $design->url('comment','comment','add',"$table,$com->recipient") }}">{lang 'Add a comment'}</a> &nbsp; <a href="{{ $design->url('xml','rss','xmlrouter',"comment-$table,$com->recipient") }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
+        <p class="s_tMarg bold italic">
+            <a href="{{ $design->url('comment','comment','add',"$table,$com->recipient") }}">{lang 'Add a comment'}</a> &nbsp;
+            <a href="{{ $design->url('xml','rss','xmlrouter',"comment-$table,$com->recipient") }}">
+                <img src="{url_static_img}icon/feed.png" alt="{lang 'RSS Feed'}" />
+            </a>
+        </p>
 
         {main_include 'page_nav.inc.tpl'}
     {else}

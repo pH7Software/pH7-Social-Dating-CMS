@@ -19,7 +19,9 @@
             {{ LinkCoreForm::display(t('Delete'), 'comment', 'comment', 'delete', array('table'=>$table, 'recipient_id'=>$com->recipient, 'sender_id'=>$com->sender, 'id'=>$com->commentId)) }}</div>
         {/if}
 
-        <p class="bold italic s_tMarg"><a href="{{ $design->url('comment','comment','add',"$table,$com->recipient") }}">{lang 'Add a comment'}</a></p>
+        <p class="bold italic s_tMarg">
+            <a href="{{ $design->url('comment','comment','add',"$table,$com->recipient") }}">{lang 'Add a comment'}</a>
+        </p>
     {else}
         <p>{error}</p>
     {/if}
