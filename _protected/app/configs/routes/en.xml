@@ -89,7 +89,6 @@
 
     <!-- Page -->
       <route url="free-online-dating" path="system/modules" module="page" controller="main" action="index" />
-      <route url="help" path="system/modules" module="page" controller="main" action="help" />
       <route url="help-us" path="system/modules" module="page" controller="main" action="helpus" />
       <route url="share-site" path="system/modules" module="page" controller="main" action="sharesite" />
       <route url="help/about" path="system/modules" module="page" controller="main" action="about" />
@@ -101,7 +100,6 @@
       <route url="partners" path="system/modules" module="page" controller="main" action="partner" />
       <route url="links" path="system/modules" module="page" controller="main" action="link" />
       <route url="jobs" path="system/modules" module="page" controller="main" action="job" />
-      <route url="about/team" path="system/modules" module="page" controller="main" action="team" />
 
     <!-- Error -->
       <route url="error/([0-9]+)" path="system/modules" module="error" controller="http" action="index" vars="code" />

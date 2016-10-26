@@ -42,15 +42,6 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function help()
-    {
-        $this->sTitle = t('Help');
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Help about of %site_name%');
-        $this->view->h1_title = $this->sTitle;
-        $this->output();
-    }
-
     public function faq()
     {
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'faq.css');
@@ -133,15 +124,6 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = t('Careers, Jobs and Internships at %site_name%');
-        $this->output();
-    }
-
-    public function team()
-    {
-        $this->sTitle = t("%site_name%'s Team");
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
