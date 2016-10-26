@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Page / Controller
@@ -10,16 +10,15 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class MainController extends Controller
 {
-
     private $sTitle;
 
     public function __construct()
     {
           parent::__construct();
-          // Enable caching for all pages of this module
+          // Enable caching for all template pages of this module
           $this->view->setCaching(true);
 
-          // Global variables for all template pages of the module
+          // Global variable for all template pages of this module
           $this->view->admin_email = DbConfig::getSetting('adminEmail');
     }
 
@@ -135,5 +134,4 @@ class MainController extends Controller
         $this->view->h1_title = $this->sTitle;
         $this->output();
     }
-
 }
