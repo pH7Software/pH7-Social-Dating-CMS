@@ -36,6 +36,7 @@ ol#toc span {
     height: 2em;
     padding-left: 6px;
 }
+
 /* 1230px or more */
 @media (min-width: 1230px) {
     ol#toc span {
