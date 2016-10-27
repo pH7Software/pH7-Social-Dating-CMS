@@ -15,7 +15,6 @@ PH7\Framework\Url\Header;
 
 class JoinForm
 {
-
     public static function step1()
     {
         if (isset($_POST['submit_join_aff']))
@@ -75,5 +74,4 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script><script src="'.PH7_URL_STATIC.PH7_JS.'geo/autocompleteCity.js"></script>'));
         $oForm->render();
     }
-
 }

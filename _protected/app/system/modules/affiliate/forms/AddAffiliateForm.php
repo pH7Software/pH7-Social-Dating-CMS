@@ -46,5 +46,4 @@ class AddAffiliateForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }
