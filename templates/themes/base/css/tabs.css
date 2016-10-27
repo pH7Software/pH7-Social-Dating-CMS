@@ -16,7 +16,6 @@ ol#toc {
 }
 ol#toc li {
     float: left;
-    margin: 0 1px 0 0;
 }
 ol#toc li a.active span, ol#toc span:hover {
     background-color: #2d99e5;
@@ -32,14 +31,28 @@ ol#toc a {
     line-height: 2em;
 }
 ol#toc span {
-    border-top: #2d99e5 solid 1px;
-    border-left: #2d99e5 solid 1px;
-    border-right: #2d99e5 solid 1px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
     background-color: #3af;
     display: block;
     padding-right: 6px;
     height: 2em;
     padding-left: 6px;
+}
+/* 960px or more */
+@media (min-width: 960px) {
+    ol#toc span {
+        border-top: #2d99e5 solid 1px;
+        border-left: #2d99e5 solid 1px;
+        border-right: #2d99e5 solid 1px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+    ol#toc li {
+        margin: 0 1px 0 0;
+    }
+}
+/* 960px or less */
+@media (max-width: 960px) {
+    ol#toc span {
+        border: #2d99e5 solid 1.5px;
+    }
 }
