@@ -9,7 +9,6 @@ div.content.inactive {
     display: none;
 }
 ol#toc {
-    height: 2em;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -37,12 +36,9 @@ ol#toc span {
     height: 2em;
     padding-left: 6px;
 }
-/* 960px or more */
-@media (min-width: 960px) {
+/* 1230px or more */
+@media (min-width: 1230px) {
     ol#toc span {
-        border-top: #2d99e5 solid 1px;
-        border-left: #2d99e5 solid 1px;
-        border-right: #2d99e5 solid 1px;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
@@ -50,9 +46,9 @@ ol#toc span {
         margin: 0 1px 0 0;
     }
 }
-/* 960px or less */
-@media (max-width: 960px) {
+/* 1229px or less */
+@media (max-width: 1229px) {
     ol#toc span {
-        border: #2d99e5 solid 1.5px;
+        border: #2d99e5 solid .5px;
     }
 }
