@@ -103,7 +103,6 @@ class JoinFormProcess extends Form
         $aData2 = [
             'country' => $this->httpRequest->post('country'),
             'city' => $this->httpRequest->post('city'),
-            'state' => $this->httpRequest->post('state'),
             'zip_code' => $this->httpRequest->post('zip_code'),
             'profile_id' => $iProfileId
         ];

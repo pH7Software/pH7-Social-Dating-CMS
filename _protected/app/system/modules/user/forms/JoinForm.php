@@ -101,9 +101,6 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your City:'), 'city', array('id' => 'str_city', 'value' => Geo::getCity(), 'onblur' =>'CValid(this.value,this.id,2,150)', 'description' => t('Select the city where you live/where you want to meet people.'), 'validation' => new \PFBC\Validation\Str(2,150), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_city"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your State or Province:'), 'state', array('id' => 'str_state', 'value' => Geo::getState(), 'onblur' =>'CValid(this.value,this.id,2,150)', 'validation' => new \PFBC\Validation\Str(2,150))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_state"></span>'));
-
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Postal Code:'), 'zip_code', array('id' => 'str_zip_code', 'value' => Geo::getZipCode(), 'onblur' =>'CValid(this.value,this.id,2,15)', 'validation' => new \PFBC\Validation\Str(2,15))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
 
