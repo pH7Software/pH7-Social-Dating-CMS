@@ -187,8 +187,8 @@ img, video, iframe {
     header, #content {width:78%}
     .picture_block {width:90%}
 }
-/* 980px or less */
-@media (max-width: 980px)
+/* 979px or less */
+@media (max-width: 979px)
 {
     body{overflow-x:auto;overflow-y:auto}
     header, #content {width:auto;float:none}
