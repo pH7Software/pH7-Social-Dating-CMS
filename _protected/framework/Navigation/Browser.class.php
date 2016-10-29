@@ -91,9 +91,9 @@ class Browser
     }
 
     /**
-     * Check if the user is from a mobile device or not.
+     * Check if the user is from a mobile device or desktop.
      *
-     * @return boolean
+     * @return boolean TRUE if mobile device, FALSE otherwise.
      */
     public function isMobile()
     {
@@ -112,7 +112,16 @@ class Browser
         $sUserAgent = self::getUserAgent();
         if (null !== $sUserAgent)
         {
+            // For most mobile/tablet browsers
             if (false !== strpos($sUserAgent, 'Mobile'))
+                return true;
+
+            // Mainly for (i)Phone
+            if (false !== strpos($sUserAgent, 'Phone'))
+                return true;
+
+            // For Android
+            if (false !== strpos($sUserAgent, 'Android'))
                 return true;
 
             if (false !== strpos($sUserAgent, 'Opera Mini'))
