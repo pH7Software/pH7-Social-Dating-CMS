@@ -58,8 +58,8 @@ class SettingController extends Controller
 
     public function avatar()
     {
-        $this->view->page_title = t('Photo of profile');
-        $this->view->h2_title = t('Change your Avatar');
+        $this->view->page_title = t('Profile Photo');
+        $this->view->h2_title = t('Change your Profile Photo');
 
         if ($this->httpRequest->postExists('del'))
             $this->_removeAvatar();
