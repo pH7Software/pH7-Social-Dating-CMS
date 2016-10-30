@@ -223,12 +223,12 @@
 
       {if $is_aff_auth AND ( !$is_user_auth AND !$is_admin_auth OR $admin_logged_as_affiliate ) }
 
-        <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Get Ad Banners'}">{lang 'Banners'}</a></li>
+        <li><a href="{{ $design->url('affiliate','ads','index') }}" title="{lang 'Get Ad Banners'}"><i class="fa fa-money"></i> {lang 'Banners'}</a></li>
 
         <li class="dropdown"><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My Account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My Account'}">{lang 'Account'}</a></li>
-            <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{lang 'Edit My Account'}">{lang 'Edit My Account'}</a></li>
+            <li><a href="{{ $design->url('affiliate','account','index') }}" title="{lang 'My Account'}"><i class="fa fa-tachometer"></i> {lang 'Dashboard'}</a></li>
+            <li><a href="{{ $design->url('affiliate','account','edit') }}" title="{lang 'Edit My Account'}"><i class="fa fa-cog"></i> {lang 'Edit My Account'}</a></li>
             <li><a href="{{ $design->url('affiliate','account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
             <li><a href="{{ $design->url('affiliate','home','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
           </ul>
