@@ -8,7 +8,7 @@
     {else}
         <p class="bold red">{lang 'Are you really sure you want to delete your account?'}</p>
         <ul>
-               <li>
+            <li>
                 <a class="bold" href="{{ $design->url('user','setting','delete','nodelete') }}">{lang 'No I changed my mind and I stay with you!'}</a>
             </li>
             <li>

@@ -81,5 +81,4 @@ class AccountController extends Controller
     {
         (new UserCore)->activateAccount($sMail, $sHash, $this->config, $this->registry, 'affiliate');
     }
-
 }
