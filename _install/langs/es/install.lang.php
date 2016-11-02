@@ -97,7 +97,7 @@ $LANG = array(
     'content_email_finish_install' => '<p><strong>¡Enhorabuena, tu sitio web está instalado correctamente!</strong></p>
     <p>¡Esperamos que usted disfrute de <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
     <p>La URL de su propio sitio web es: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-    <p></p>Tu Panel de Administración URL es: <a href="' . PH7_URL_ROOT . 'admin123/">' . PH7_URL_ROOT . 'admin123/</a></p>
+    <p></p>Tu Panel de Administración URL es: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
     <p>No se olvide de mostrar al mostrar su nuevo sitio de citas para todos sus amigos, sus colegas y compañeros de su Facebook (e incluso a sus enemigos ... o no).</p>
     <p>Por último, si no lo has hecho todavía, es un muy buen momento para comprar hoy una clave de licencia, simplemente <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visitando nuestra página web</a> con el fin de obtener las características premium, quite todos los enlaces y notas de copyright en su sitio web e incluso el acceso a la ilimitada ticket de soporte.</p>
     <p>&nbps;</p>

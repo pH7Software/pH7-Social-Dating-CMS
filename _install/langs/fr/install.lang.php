@@ -97,7 +97,7 @@ $LANG = array(
     'content_email_finish_install' => '<p><strong>Félicitations, votre site Web est maintenant installé avec succès !</strong></p>
     <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
     <p>L\'URL de VOTRE Site de Rencontre est : <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-    <p>L\'URL du panneau d\'administration est : <a href="' . PH7_URL_ROOT . 'admin123/">' . PH7_URL_ROOT . 'admin123/</a></p>
+    <p>L\'URL du panneau d\'administration est : <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
     <p>N\'oubliez pas de vous la frimer en montrant votre nouveau site de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
     <p>Enfin, si cela n\'est pas encore fait, c\'est une excellent idée pour acheter aujourd\'hui une clé de licence en vous rendant simplement sur <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">notre site Web</a> afin d\'obtenir les fonctionnalités Premium, la suppression des liens et les mentions de copyright sur votre site et même l\'accès au support de ticket illimité.</p>
     <p>&nbsp;</p>

@@ -97,7 +97,7 @@ $LANG = array(
     'content_email_finish_install' => '<p><strong>Congratulations, your website is now successfully installed!</strong></p>
     <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
     <p>The URL of Your OWN Social/Dating website is: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-    <p>Your Admin Panel URL is: <a href="' . PH7_URL_ROOT . 'admin123/">' . PH7_URL_ROOT . 'admin123/</a></p>
+    <p>Your Admin Panel URL is: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
     <p>Don\'t forget to show off by showing YOUR new Social/Dating Site to all your friends, your colleagues and your Facebook\'s mates (and even to your enemies... or not).</p>
     <p>Finally, if you haven\'t done it yet, it\'s a really good time to buy a license today by simply <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visiting our website</a> in order to get all Premium Modules/Features, Remove all Links and Copyright Notice on your Website and even get access to the Unlimited Support Ticket.</p>
     <p>&nbps;</p>
