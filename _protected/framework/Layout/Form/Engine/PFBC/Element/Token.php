@@ -5,8 +5,8 @@
 namespace PFBC\Element;
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Security\CSRF\Token as T,
-PFBC\Validation\Token;
+PH7\Framework\Security\CSRF\Token as SecurityToken,
+PFBC\Validation\Token as ValidationToken;
 
 class Token extends Hidden
 {
@@ -19,7 +19,7 @@ class Token extends Hidden
             return; // If it's disabled, we stop the execution of the class
 
         $this->sName = $sName;
-        parent::__construct('security_token', (new T)->generate($this->sName));
+        parent::__construct('security_token', (new SecurityToken)->generate($this->sName));
     }
 
     public function render()
@@ -27,7 +27,7 @@ class Token extends Hidden
         if (!$this->_isEnabled())
             return; // If it's disabled, we stop the execution of the class
 
-        $this->validation[] = new Token($this->sName);
+        $this->validation[] = new ValidationToken($this->sName);
         parent::render();
     }
 
