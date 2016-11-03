@@ -10,7 +10,7 @@
     <input type="text" name="site_name" id="site_name" onfocus="if('My Social Dating Site' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'My Social Dating Site';" value="{$smarty.session.val.site_name|escape}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="admin_username">{$LANG.admin_username}:</label><br />
-    <span class="small italic">{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}</span><br />
+    <span class="small italic">{$smarty.const.PH7_URL_ROOT}<strong>{$smarty.const.PH7_ADMIN_MOD}</strong></span><br />
     <input type="text" name="admin_username" id="admin_username" onfocus="if('administrator' == this.value) this.value='';" onblur="if ('' == this.value) this.value = 'administrator';" value="{$smarty.session.val.admin_username|escape}" required="required" /></p>
 
     <p><span class="mandatory">*</span> <label for="admin_email">{$LANG.admin_login_email}:</label><br />
