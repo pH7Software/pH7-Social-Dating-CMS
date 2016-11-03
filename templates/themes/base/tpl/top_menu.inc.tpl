@@ -451,7 +451,7 @@
             <li><a href="{software_forum_url}" title="{lang 'Support Forum'}">{lang 'Forum'}</a></li>
             *}
             {if !$is_valid_license}
-                <li><a class="bold" href="{software_license_url}" title="{lang 'Buy a License Key'}"><i class="fa fa-key"></i> {lang 'Switch to pH7CMSPro'}</a></li>
+                <li><a class="bold underline" href="{software_license_url}" title="{lang 'Buy a License Key'}"><i class="fa fa-key"></i> {lang 'Switch to pH7CMSPro'}</a></li>
             {/if}
           </ul>
         </li>
