@@ -11,7 +11,6 @@ use PH7\Framework\File\File;
 
 class ModuleController extends Controller
 {
-
     private $_oModule, $_sModsDirModFolder, $_sTitle;
 
     public function __construct()
@@ -44,7 +43,6 @@ class ModuleController extends Controller
         }
         elseif ($this->httpRequest->postExists('submit_mod_uninstall'))
         {
-
             if ($this->_oModule->checkModFolder(Module::UNINSTALL, $this->httpRequest->post('submit_mod_uninstall')))
             {
                 $this->_sModsDirModFolder = $this->httpRequest->post('submit_mod_uninstall'); // Module Directory Path
@@ -91,10 +89,4 @@ class ModuleController extends Controller
         $this->manualTplInclude('uninstall.tpl');
         $this->output();
     }
-
-    public function __destruct()
-    {
-        unset($this->_oModule, $this->_sModsDirModFolder, $this->_sTitle);
-    }
-
 }
