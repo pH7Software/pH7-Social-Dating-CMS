@@ -938,7 +938,7 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Forum', 'forum', '0', '1'),
 ('Note (blog system for users)', 'note', '0', '1'),
 ('Blog (company blog)', 'blog', '0', '1'),
-('newsletter', 'newsletter', '0', '1'),
+('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
 ('Webcam', 'webcam', '0', '1'),
 ('Love Calculator', 'love-calculator', '0', '1'),
