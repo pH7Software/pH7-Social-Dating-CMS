@@ -919,28 +919,31 @@ INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, head
 
 CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
   moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
+  moduleName varchar(20) NOT NULL,
   folderName varchar(20) NOT NULL,
   premiumMod enum('0','1') NOT NULL DEFAULT '0', -- If the module required pH7CMSPro (http://ph7cms.com/pro/)
   enabled enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY (moduleId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-INSERT INTO pH7_SysModsEnabled (folderName, premiumMod, enabled) VALUES
-('connect', '0', '0'),
-('affiliate', '0', '1'),
-('game', '0', '1'),
-('chat', '1', '0'),
-('chatroulette', '1', '0'),
-('picture', '0', '1'),
-('video', '0', '1'),
-('hotornot', '0', '1'),
-('forum', '0', '1'),
-('note', '0', '1'),
-('blog', '0', '1'),
-('newsletter', '0', '1'),
-('invite', '0', '1'),
-('webcam', '0', '1'),
-('love-calculator', '0', '1');
+INSERT INTO pH7_SysModsEnabled (moduleName, folderName, premiumMod, enabled) VALUES
+('Connect', 'connect', '0', '0'),
+('Affiliate', 'affiliate', '0', '1'),
+('Game', 'game', '0', '1'),
+('Chat', 'chat', '1', '0'),
+('Chatroulette', 'chatroulette', '1', '0'),
+('Picture', 'picture', '0', '1'),
+('Video', 'video', '0', '1'),
+('Hot or Not', 'hotornot', '0', '1'),
+('Forum', 'forum', '0', '1'),
+('Note (blog system for users)', 'note', '0', '1'),
+('Blog (company blog)', 'blog', '0', '1'),
+('newsletter', 'newsletter', '0', '1'),
+('Invite Friends', 'invite', '0', '1'),
+('Webcam', 'webcam', '0', '1'),
+('Love Calculator', 'love-calculator', '0', '1'),
+('Mail', 'mail', '0', '1'),
+('Instant Messaging (IM)', 'im', '0', '1');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (
