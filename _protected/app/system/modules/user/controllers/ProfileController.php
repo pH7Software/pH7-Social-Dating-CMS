@@ -54,8 +54,9 @@ class ProfileController extends Controller
         if (!empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username))
         {
             // The administrators can view all profiles and profile visits are not saved.
-            if (!AdminCore::auth())
+            if (!AdminCore::auth()) {
                 $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
+            }
 
             // Gets the Profile background
             $this->view->img_background = $oUserModel->getBackground($this->iProfileId, 1);
@@ -84,26 +85,11 @@ class ProfileController extends Controller
             $sFriendTxt = ($iNbFriend <= 1) ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') :
                 t('Friends:');
 
-            if ($this->sUserAuth)
-            {
+            if ($this->sUserAuth) {
                 $iNbMutFriend = (new FriendModel)->get($this->iVisitorId, $this->iProfileId, null, true, null, null, null, null);
                 $sNbMutFriend = ($iNbMutFriend > 0) ? ' (' . $iNbMutFriend . ')' : '';
                 $sMutFriendTxt = ($iNbMutFriend <= 1) ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
             }
-
-            $sMailLink = ($this->sUserAuth) ?
-                Uri::get('mail', 'main', 'compose', $oUser->username) :
-                Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(array('msg' => t('You need to free register for send a message to %0%.', $sFirstName),
-                'ref' => 'profile', 'a' => 'mail', 'u' => $oUser->username, 'f_n' => $sFirstName, 's' => $oUser->sex)), false);
-
-            $sMessengerLink = ($this->sUserAuth) ?
-                'javascript:void(0)" onclick="Messenger.chatWith(\'' . $oUser->username . '\')' :
-                Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(array('msg' => t('You need to free register for talk to %0%.', $sFirstName),
-                'ref' => 'profile', 'a' => 'messenger', 'u' => $oUser->username, 'f_n' => $sFirstName, 's' => $oUser->sex)), false);
-
-            $sBefriendLink = ($this->sUserAuth) ?
-                'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\''.(new Token)->generate('friend').'\')' :
-                Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(array('msg' => t('Free Sign up for %site_name% to become friend with %0%.', $sFirstName), 'ref' => 'profile', 'a' => 'befriend&', 'u' => $oUser->username, 'f_n' => $sFirstName, 's' => $oUser->sex)), false);
 
             $this->view->page_title = t('Meet %0%, A %1% looking for %2% - %3% years - %4% - %5% %6%',
                 $sFirstName, t($oUser->sex), t($oUser->matchSex), $iAge, t($sCountry), $sCity, $sState);
@@ -124,10 +110,12 @@ class ProfileController extends Controller
 
             // Member Menubar
             $this->view->friend_link = $sFriendTxt . $sNbFriend;
-            if ($this->sUserAuth) $this->view->mutual_friend_link = $sMutFriendTxt . $sNbMutFriend;
-            $this->view->mail_link = $sMailLink;
-            $this->view->messenger_link = $sMessengerLink;
-            $this->view->befriend_link = $sBefriendLink;
+            if ($this->sUserAuth) {
+                $this->view->mutual_friend_link = $sMutFriendTxt . $sNbMutFriend;
+            }
+            $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
+            $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
+            $this->view->befriend_link = $this->getFriendLink($sFirstName, $oUser);
 
             // Set parameters Google Map
             $this->view->map = $this->getMap($sCity, $sState, $sCountry, $oUser);
@@ -241,11 +229,95 @@ class ProfileController extends Controller
     }
 
     /**
-     * @return boolean Returns TRUE if the user is on their own profile, FALSE otherwise.
+     * @return boolean TRUE if the user is on their own profile, FALSE otherwise.
      */
     private function isOwnProfile()
     {
         return $this->str->equals($this->iVisitorId, $this->iProfileId);
+    }
+
+    /**
+     *
+     * @param string $sFirstName  User's first name.
+     * @param object $oUser       User data from the DB.
+     * @return string             The anchor for the link.
+     */
+    private function getMailLink($sFirstName, $oUser)
+    {
+        if ($this->sUserAuth)
+        {
+            $sMailLink = Uri::get('mail', 'main', 'compose', $oUser->username);
+        }
+        else
+        {
+            $aUrlParms = [
+                'msg' => t('You need to free register for send a message to %0%.', $sFirstName),
+                'ref' => 'profile',
+                'a' => 'mail',
+                'u' => $oUser->username,
+                'f_n' => $sFirstName,
+                's' => $oUser->sex
+            ];
+            $sMailLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms), false);
+        }
+
+        return $sMailLink;
+    }
+
+    /**
+     *
+     * @param string $sFirstName  User's first name.
+     * @param object $oUser       User data from the DB.
+     * @return string             The anchor for the link.
+     */
+    private function getMessengerLink($sFirstName, $oUser)
+    {
+        if ($this->sUserAuth)
+        {
+            $sMessengerLink = 'javascript:void(0)" onclick="Messenger.chatWith(\'' . $oUser->username . '\')';
+        }
+        else
+        {
+            $aUrlParms = [
+                'msg' => t('You need to free register for talk to %0%.', $sFirstName),
+                'ref' => 'profile',
+                'a' => 'messenger',
+                'u' => $oUser->username,
+                'f_n' => $sFirstName,
+                's' => $oUser->sex
+            ];
+            $sMessengerLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms), false);
+        }
+
+        return $sMessengerLink;
+    }
+
+    /**
+     *
+     * @param string $sFirstName  User's first name.
+     * @param object $oUser       User data from the DB.
+     * @return string             The anchor for the link.
+     */
+    private function getFriendLink($sFirstName, $oUser)
+    {
+        if ($this->sUserAuth)
+        {
+            $sBefriendLink = 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\''.(new Token)->generate('friend').'\')';
+        }
+        else
+        {
+            $aUrlParms = [
+                'msg' => t('Free Sign up for %site_name% to become friend with %0%.', $sFirstName),
+                'ref' => 'profile',
+                'a' => 'befriend',
+                'u' => $oUser->username,
+                'f_n' => $sFirstName,
+                's' => $oUser->sex
+            ];
+            $sBefriendLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms), false);
+        }
+
+        return $sBefriendLink;
     }
 
     /**
