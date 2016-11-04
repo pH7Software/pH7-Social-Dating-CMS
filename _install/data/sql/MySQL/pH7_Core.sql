@@ -919,14 +919,14 @@ INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, head
 
 CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
   moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
-  moduleName varchar(20) NOT NULL,
+  moduleTitle varchar(20) NOT NULL,
   folderName varchar(20) NOT NULL,
   premiumMod enum('0','1') NOT NULL DEFAULT '0', -- If the module required pH7CMSPro (http://ph7cms.com/pro/)
   enabled enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY (moduleId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-INSERT INTO pH7_SysModsEnabled (moduleName, folderName, premiumMod, enabled) VALUES
+INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('Connect', 'connect', '0', '0'),
 ('Affiliate', 'affiliate', '0', '1'),
 ('Game', 'game', '0', '1'),
