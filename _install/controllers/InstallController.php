@@ -19,6 +19,7 @@ class InstallController extends Controller
 
     /*** Enable/Disable Modules according to the chosen niche ***/
     private $_aSocialMods = [
+        'connect' => '0',
         'affiliate' => '0',
         'game' => '1',
         'chat' => '0',
@@ -32,10 +33,13 @@ class InstallController extends Controller
         'newsletter' => '0',
         'invite' => '1',
         'webcam' => '1',
-        'love-calculator' => '0'
+        'love-calculator' => '0',
+        'mail' => '1',
+        'im' => '1'
     ];
 
     private $_aDatingMods = [
+        'connect' => '0',
         'affiliate' => '1',
         'game' => '0',
         'chat' => '1',
@@ -49,7 +53,9 @@ class InstallController extends Controller
         'newsletter' => '1',
         'invite' => '0',
         'webcam' => '0',
-        'love-calculator' => '1'
+        'love-calculator' => '1',
+        'mail' => '1',
+        'im' => '1'
     ];
 
     /*** Enable/Disable Site Settings according to the chosen niche ***/

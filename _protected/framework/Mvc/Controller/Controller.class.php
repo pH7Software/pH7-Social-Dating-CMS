@@ -226,7 +226,9 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'is_blog_enabled' => SysMod::isEnabled('blog'),
             'is_newsletter_enabled' => SysMod::isEnabled('newsletter'),
             'is_invite_enabled' => SysMod::isEnabled('invite'),
-            'is_webcam_enabled' => SysMod::isEnabled('webcam')
+            'is_webcam_enabled' => SysMod::isEnabled('webcam'),
+            'is_mail_enabled' => SysMod::isEnabled('mail'),
+            'is_im_enabled' => SysMod::isEnabled('im')
         ];
 
         $this->view->assigns($aModsEnabled);

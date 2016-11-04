@@ -38,7 +38,7 @@ class DisableModuleForm
                 $sPremiumText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default API service by yours') . '</a>';
             }
 
-            $aModuleNames[$oData->moduleId] = ucwords(str_replace(['-','_'], ' ', $oData->folderName)) . $sPremiumText;
+            $aModuleNames[$oData->moduleId] = $oData->moduleTitle . $sPremiumText;
         }
         unset($oModuleData);
 
