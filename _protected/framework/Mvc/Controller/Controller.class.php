@@ -221,6 +221,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'is_picture_enabled' => SysMod::isEnabled('picture'),
             'is_video_enabled' => SysMod::isEnabled('video'),
             'is_hotornot_enabled' => SysMod::isEnabled('hotornot'),
+            'is_lovecalculator_enabled' => SysMod::isEnabled('love-calculator'),
             'is_forum_enabled' => SysMod::isEnabled('forum'),
             'is_note_enabled' => SysMod::isEnabled('note'),
             'is_blog_enabled' => SysMod::isEnabled('blog'),
