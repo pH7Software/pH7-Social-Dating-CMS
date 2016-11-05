@@ -17,6 +17,10 @@ defined('PH7') or exit('Restricted access');
 class InstallController extends Controller
 {
 
+    /**
+     * @internal
+     * When pH7CMS will require PHP >= 5.6, whould be good to change these array attributes to array constants.
+     */
     /*** Enable/Disable Modules according to the chosen niche ***/
     private $_aSocialMods = [
         'connect' => '0',
