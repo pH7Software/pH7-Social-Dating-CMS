@@ -6,14 +6,16 @@
 
 .heart {
     background: url(../img/heart.png) no-repeat;
-    font: 50px Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font: 55px Verdana, Geneva, Arial, Helvetica, sans-serif;
     color: yellow;
-    text-align: center;
-    height: 120px;
+    height: 140px;
     width: 250px;
     font-weight: bold;
-    padding-top: 82px;
+    padding-top: 65px;
     box-sizing: content-box;
+}
+.calculator-wrapper {
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
 }
