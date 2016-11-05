@@ -44,6 +44,7 @@
   {{ JoinForm::step1() }}
 
   {if $is_mobile}
+      <div class="s_tMarg"></div>
       {manual_include 'user_promo_block.inc.tpl'}
   {/if}
 </div>
