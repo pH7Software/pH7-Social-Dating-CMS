@@ -15,14 +15,16 @@ $LANG = array(
     'charset' => 'utf-8',
     'lang_name' => 'Español',
     'version' => 'versión',
+    'welcome_voice' => 'Hola y bienvenidos a la instalación de ' . Controller::SOFTWARE_NAME . ', ' . Controller::SOFTWARE_VERSION . '. ' .
+        'Espero que te gusta su nueva aplicación web para la reunión social. ¡Buena suerte!',
     'CMS_desc' => '<p>Bienvenido a la instalación de ' . Controller::SOFTWARE_NAME . '.<br />
-    Gracias por elegir nuestro CMS y esperamos que sea de su agrado usted.</p>',
+        Gracias por elegir nuestro CMS y esperamos que sea de su agrado usted.</p>',
     'choose_install_lang' => 'Por favor, elija su idioma para comenzar la instalación',
     'requirements_desc' => '¡ADVERTENCIA! Por favor, asegúrese que <abbr title ="El servidor remoto o el ordenador si no está localhost">usted es</abbr> conectado a Internet y de que el servidor tiene la <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">necesaria requisitos</a> para funcionar pH7CMS.',
     'requirements2_desc' => 'En primer lugar, cree una base de datos MySQL y asignar a un usuario con privilegios completos. Una vez creada la base de datos MySQL y el usuario, asegúrese de escribir el nombre de la base de datos, el nombre de usuario y contraseña, ya que necesitará para la instalación.',
     'config_path' => 'Ruta del directorio &laquo;protected&raquo;',
     'desc_config_path' => 'Por favor, especifique la ruta completa a la carpeta de &laquo;protected&raquo;.<br />
-    Es prudente y aconsejable (pero en cualquier caso no es obligatorio) colocar este directorio fuera de la raíz pública del servidor de la Web.',
+        Es prudente y aconsejable (pero en cualquier caso no es obligatorio) colocar este directorio fuera de la raíz pública del servidor de la Web.',
     'need_frame' => '¡Debe utilizar un navegador Web que soporte marcos en línea!',
     'path_protected' => 'Ruta de la carpeta &laquo;protected&raquo;',
     'next' => 'Próximo',

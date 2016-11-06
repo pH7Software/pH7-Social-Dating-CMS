@@ -15,7 +15,14 @@
 
 <p><button type="button" onclick="window.location='{$smarty.const.PH7_URL_SLUG_INSTALL}config_system'" class="btn btn-primary btn-lg">{$LANG.go}</button></p>
 
-<!-- Add a welcome sound -->
-<audio style="display:none" autoplay="autoplay" src="{$smarty.const.PH7_URL_ROOT}static/sound/welcome.mp3"></audio>
+<!-- Add a real welcome voice! -->
+<script src="{$smarty.const.PH7_URL_INSTALL}static/js/artyom.js"></script>
+<script>
+artyom.initialize({
+    lang: "{$LANG.lang}",
+    speed: 0.9 // Slower the speed voice
+});
+</script>
+<script>artyom.say("{$LANG.welcome_voice}");</script>
 
 {include file="inc/footer.tpl"}

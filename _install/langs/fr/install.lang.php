@@ -15,14 +15,16 @@ $LANG = array(
     'charset' => 'utf-8',
     'lang_name' => 'Français',
     'version' => 'version',
+    'welcome_voice' => 'Salut et bienvenue  sur l\'installation de ' . Controller::SOFTWARE_NAME . ', version ' . Controller::SOFTWARE_VERSION . '. ' .
+        'J\'espère que tu vas aimer ta nouvelle web app de rencontre sociale. Bonne chance!',
     'CMS_desc' => '<p>Bienvenue à l\'installation de ' . Controller::SOFTWARE_NAME . '.<br />
-    Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>',
+        Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>',
     'choose_install_lang' => 'Veuillez choisir votre langue pour commencer l\'installation',
     'requirements_desc' => 'ATTENTION ! Veuillez être sûr que <abbr title="Votre serveur distant ou votre machine/PC si vous êtes en localhost">vous êtes</abbr> connecté à Internet et que votre serveur a les <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">exigences nécessaires</a> pour faire fonctionner pH7CMS.',
     'requirements2_desc' => 'Avant toute chose, veuillez créer une base de données MySQL et affecter un utilisateur à elle avec tous les privilèges. Une fois que vous avez créé la base de données MySQL et son utilisateur, assurez-vous d\'écrire le nom de la base de données, le nom d\'utilisateur et le mot de passe, car vous en aurez besoin pour l\'installation.',
     'config_path' => 'Chemin du répertoire &laquo; protected &raquo;',
     'desc_config_path' => 'Veuillez indiquer le chemin complet de votre répertoire &laquo; protected &raquo;<br />
-    Il est préférable et conseillé (mais en aucun cas pas obligatoire) de le mettre ce répertoire en dehors de la racine publique de votre site Web.',
+        Il est préférable et conseillé (mais en aucun cas pas obligatoire) de le mettre ce répertoire en dehors de la racine publique de votre site Web.',
     'need_frame' => 'Vous devez utiliser un navigateur Web qui accepte les iframes !',
     'path_protected' => 'Chemin du répertoire &laquo; protected &raquo;',
     'next' => 'Suivant',
