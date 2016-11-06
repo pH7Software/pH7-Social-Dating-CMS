@@ -27,8 +27,8 @@ class InviteForm
         $oForm->configure(array('action' => Uri::get('invite', 'home', 'invitation')));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_invite', 'form_invite'));
         $oForm->addElement(new \PFBC\Element\Token('invite'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your name:'), 'first_name', array('id'=>'str_first_name','onblur'=>'CValid(this.value,this.id,2,20)', 'required'=>1,'validation'=>new \PFBC\Validation\Str('2','20'))));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_first_name"></span>'));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your name:'), 'first_name', array('id'=>'name_first', 'onblur'=>'CValid(this.value, this.id)', 'required'=>1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
         $oForm->addElement(new \PFBC\Element\Textarea(t('To:'), 'to', array('description'=>t('Upto 10 email addresses separated by commas.'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Message:'), 'message', array('id'=>'str_msg', 'onblur'=>'CValid(this.value,this.id,4)','required'=>1,'validation'=>new \PFBC\Validation\Str('4'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_msg"></span>'));
