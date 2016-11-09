@@ -275,7 +275,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlFirstName = $bIsFirstName ? ' AND firstName = :firstName' : '';
         $sSqlMiddleName = $bIsMiddleName ? ' AND middleName = :middleName' : '';
         $sSqlLastName = $bIsLastName ? ' AND lastName = :lastName' : '';
-        $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :year ' : '';
+        $sSqlSingleAge = $bIsSingleAge ? ' AND birthDate LIKE :birthDate ' : '';
         $sSqlAge = $bIsAge ? ' AND birthDate BETWEEN DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age2 YEAR) AND DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL :age1 YEAR) ' : '';
         $sSqlHeight = $bIsHeight ? ' AND height = :height ' : '';
         $sSqlWeight = $bIsWeight ? ' AND weight = :weight ' : '';
@@ -334,7 +334,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if ($bIsFirstName) $rStmt->bindValue(':firstName', $aParams['first_name'], \PDO::PARAM_STR);
         if ($bIsMiddleName) $rStmt->bindValue(':middleName', $aParams['middle_name'], \PDO::PARAM_STR);
         if ($bIsLastName) $rStmt->bindValue(':lastName', $aParams['last_name'], \PDO::PARAM_STR);
-        if ($bIsSingleAge) $rStmt->bindValue(':year', '%' . (date('Y') - $aParams['age']) . '%', \PDO::PARAM_INT);
+        if ($bIsSingleAge) $rStmt->bindValue(':birthDate', '%' . $aParams['age'] . '%', \PDO::PARAM_STR);
         if ($bIsAge) $rStmt->bindValue(':age1', $aParams['age1'], \PDO::PARAM_INT);
         if ($bIsAge) $rStmt->bindValue(':age2', $aParams['age2'], \PDO::PARAM_INT);
         if ($bIsHeight) $rStmt->bindValue(':height', $aParams['height'], \PDO::PARAM_INT);

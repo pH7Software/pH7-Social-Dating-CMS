@@ -69,7 +69,7 @@
     {/if}
 
     {if !empty($age)}
-      <p><span class="bold">{lang 'Age:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$age) }}">{age}</a> <span class="gray">({birth_date})</span></span></p>
+      <p><span class="bold">{lang 'Age:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">{age}</a> <span class="gray">({birth_date_formatted})</span></span></p>
       <div class="break"></div>
     {/if}
 

@@ -75,7 +75,8 @@ class ProfileController extends Controller
             $sDescription = (!empty($oFields->description)) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
 
             // Age
-            $this->view->birth_date = $this->dateTime->get($oUser->birthDate)->date();
+            $this->view->birth_date = $oUser->birthDate;
+            $this->view->birth_date_formatted = $this->dateTime->get($oUser->birthDate)->date();
             $aAge = explode('-', $oUser->birthDate);
             $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
 
