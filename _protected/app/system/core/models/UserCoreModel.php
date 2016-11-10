@@ -269,6 +269,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $bIsMail = !empty($aParams['mail']);
         $bIsSex = !empty($aParams['sex']);
         $bHideUserLogged = !empty($this->iProfileId);
+        $bIsMatchSex = !empty($aParams['match_sex']);
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId) AS totalUsers';
@@ -292,11 +293,11 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if (empty($aParams['sort'])) $aParams['sort'] =  SearchCoreModel::ASC; // Default is "ascending"
         $sSqlOrder = SearchCoreModel::order($aParams['order'], $aParams['sort']);
 
-        $sSqlMatchSex = (!empty($aParams['match_sex'])) ? ' AND matchSex LIKE :matchSex ' : '';
+        $sSqlMatchSex = $bIsMatchSex ? ' AND matchSex LIKE :matchSex ' : '';
 
-        $sGender = '';
         if ($bIsSex)
         {
+            $sGender = '';
             $aSex = $aParams['sex'];
             foreach ($aSex as $sSex)
             {
@@ -316,7 +317,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
                 }
             }
 
-            $sSqlSex = ($bIsSex) ? ' AND sex IN (' . substr($sGender, 0, -1) . ') ' : '';
+            $sSqlSex = ' AND sex IN (' . substr($sGender, 0, -1) . ') ';
         }
         else
         {
@@ -326,11 +327,11 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId) WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND searchProfile = \'yes\'
-            AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex .  $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
+            AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sSqlHideLoggedProfile . $sSqlFirstName . $sSqlMiddleName . $sSqlLastName . $sSqlMatchSex . $sSqlSex . $sSqlSingleAge . $sSqlAge . $sSqlCountry . $sSqlCity . $sSqlState .
             $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
         );
 
-        if (!empty($aParams['match_sex'])) $rStmt->bindValue(':matchSex', '%' . $aParams['match_sex'] . '%', \PDO::PARAM_STR);
+        if ($bIsMatchSex) $rStmt->bindValue(':matchSex', '%' . $aParams['match_sex'] . '%', \PDO::PARAM_STR);
         if ($bIsFirstName) $rStmt->bindValue(':firstName', $aParams['first_name'], \PDO::PARAM_STR);
         if ($bIsMiddleName) $rStmt->bindValue(':middleName', $aParams['middle_name'], \PDO::PARAM_STR);
         if ($bIsLastName) $rStmt->bindValue(':lastName', $aParams['last_name'], \PDO::PARAM_STR);
@@ -340,8 +341,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         if ($bIsHeight) $rStmt->bindValue(':height', $aParams['height'], \PDO::PARAM_INT);
         if ($bIsWeight) $rStmt->bindValue(':weight', $aParams['weight'], \PDO::PARAM_INT);
         if ($bIsCountry) $rStmt->bindParam(':country', $aParams['country'], \PDO::PARAM_STR, 2);
-        if ($bIsCity) $rStmt->bindValue(':city', '%' . $aParams['city'] . '%', \PDO::PARAM_STR);
-        if ($bIsState) $rStmt->bindValue(':state', '%' . $aParams['state'] . '%', \PDO::PARAM_STR);
+        if ($bIsCity) $rStmt->bindValue(':city', '%' . str_replace('-', ' ', $aParams['city']) . '%', \PDO::PARAM_STR);
+        if ($bIsState) $rStmt->bindValue(':state', '%' . str_replace('-', ' ', $aParams['state']) . '%', \PDO::PARAM_STR);
         if ($bIsZipCode) $rStmt->bindValue(':zipCode', '%' . $aParams['zip_code'] . '%', \PDO::PARAM_STR);
         if ($bIsMail) $rStmt->bindValue(':email', '%' . $aParams['mail'] . '%', \PDO::PARAM_STR);
         if ($bHideUserLogged) $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
