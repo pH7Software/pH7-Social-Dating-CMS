@@ -171,10 +171,11 @@ class SearchUserCoreForm
         }
 
         if ($oHttpRequest->getExists('city')) {
-            self::$aCityOption += ['value' => $oHttpRequest->get('city'), 'onfocus' => "if('" . $oHttpRequest->get('city') . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . $oHttpRequest->get('city') . "';"];
+            $sCity = $oHttpRequest->get('city');
         } else {
-            self::$aCityOption += ['value' => Geo::getCity(), 'onfocus' => "if('" . Geo::getCity() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getCity() . "';"];
+            $sCity = Geo::getCity();
         }
+        self::$aCityOption += ['value' => Geo::getCity(), 'onfocus' => "if('" . $sCity . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . $sCity . "';"];
 
         self::$aStateOption += ['value'=> Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
     }
