@@ -158,8 +158,8 @@ class SearchUserCoreForm
             self::$aMatchSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['match_sex']];
         }
 
-        if ($oHttpRequest->getExists(['min_age', 'max_age'])) {
-            self::$aAgeOption = ['value' => ['min_age' => $oHttpRequest->get('min_age'), 'max_age' => $oHttpRequest->get('max_age')]];
+        if ($oHttpRequest->getExists(['age1', 'age2'])) {
+            self::$aAgeOption = ['value' => ['min_age' => $oHttpRequest->get('age1'), 'max_age' => $oHttpRequest->get('age2')]];
         } else {
             self::$aAgeOption = ['value' => static::getAgeVals($oUserModel, $oSession)];
         }
