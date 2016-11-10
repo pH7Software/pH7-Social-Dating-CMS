@@ -13,6 +13,7 @@ use
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Model\Engine\Util\Various,
+PH7\Framework\Str\Str,
 PH7\Framework\Date\CDateTime,
 PH7\Framework\Session\Session,
 PH7\Framework\Security\Security;
@@ -255,18 +256,18 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $bIsFirstName = !empty($aParams['first_name']);
-        $bIsMiddleName = !empty($aParams['middle_name']);
-        $bIsLastName = !empty($aParams['last_name']);
+        $bIsFirstName = !empty($aParams['first_name']) && Str::noSpaces($aParams['first_name']);
+        $bIsMiddleName = !empty($aParams['middle_name']) && Str::noSpaces($aParams['middle_name']);
+        $bIsLastName = !empty($aParams['last_name']) && Str::noSpaces($aParams['last_name']);
         $bIsSingleAge = !empty($aParams['age']);
         $bIsAge = empty($aParams['age']) && !empty($aParams['age1']) && !empty($aParams['age2']);
         $bIsHeight = !empty($aParams['height']);
         $bIsWeight = !empty($aParams['weight']);
-        $bIsCountry = !empty($aParams['country']);
-        $bIsCity = !empty($aParams['city']);
-        $bIsState = !empty($aParams['state']);
-        $bIsZipCode = !empty($aParams['zip_code']);
-        $bIsMail = !empty($aParams['mail']);
+        $bIsCountry = !empty($aParams['country']) && Str::noSpaces($aParams['country']);
+        $bIsCity = !empty($aParams['city']) && Str::noSpaces($aParams['city']);
+        $bIsState = !empty($aParams['state']) && Str::noSpaces($aParams['state']);
+        $bIsZipCode = !empty($aParams['zip_code']) && Str::noSpaces($aParams['zip_code']);
+        $bIsMail = !empty($aParams['mail']) && Str::noSpaces($aParams['mail']);
         $bIsSex = !empty($aParams['sex']);
         $bHideUserLogged = !empty($this->iProfileId);
         $bIsMatchSex = !empty($aParams['match_sex']);
