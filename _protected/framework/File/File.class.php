@@ -385,7 +385,7 @@ class File
         if (is_array($mFile))
             foreach ($mFile as $sF) $this->deleteFile($sF);
         else
-            if (is_file($mFile)) unlink($mFile);
+            if (is_file($mFile)) @unlink($mFile);
     }
 
     /**
