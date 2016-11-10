@@ -13,6 +13,7 @@ namespace PH7;
 use
 PH7\Framework\Math\Measure\Year,
 PH7\Framework\Geo\Ip\Geo,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Router\Uri;
@@ -141,14 +142,40 @@ class SearchUserCoreForm
      */
     protected static function setAttrVals()
     {
+        $oHttpRequest = new Http;
         $oSession = new Session;
         $oUserModel = new UserCoreModel;
 
-        self::$aSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['user_sex']];
-        self::$aMatchSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['match_sex']];
-        self::$aAgeOption = ['value' => static::getAgeVals($oUserModel, $oSession)];
-        self::$aCountryOption += ['value' => Geo::getCountryCode()];
-        self::$aCityOption += ['value' => Geo::getCity(), 'onfocus' => "if('" . Geo::getCity() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getCity() . "';"];
+        if ($oHttpRequest->getExists('match_sex')) {
+            self::$aSexOption += ['value' => $oHttpRequest->get('match_sex')];
+        } else {
+            self::$aSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['user_sex']];
+        }
+
+        if ($oHttpRequest->getExists('sex')) {
+            self::$aMatchSexOption += ['value' => $oHttpRequest->get('sex')];
+        } else {
+            self::$aMatchSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['match_sex']];
+        }
+
+        if ($oHttpRequest->getExists(['min_age', 'max_age'])) {
+            self::$aAgeOption = ['value' => ['min_age' => $oHttpRequest->get('min_age'), 'max_age' => $oHttpRequest->get('max_age')]];
+        } else {
+            self::$aAgeOption = ['value' => static::getAgeVals($oUserModel, $oSession)];
+        }
+
+        if ($oHttpRequest->getExists('country')) {
+            self::$aCountryOption += ['value' => $oHttpRequest->get('country')];
+        } else {
+            self::$aCountryOption += ['value' => Geo::getCountryCode()];
+        }
+
+        if ($oHttpRequest->getExists('city')) {
+            self::$aCityOption += ['value' => $oHttpRequest->get('city'), 'onfocus' => "if('" . $oHttpRequest->get('city') . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . $oHttpRequest->get('city') . "';"];
+        } else {
+            self::$aCityOption += ['value' => Geo::getCity(), 'onfocus' => "if('" . Geo::getCity() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getCity() . "';"];
+        }
+
         self::$aStateOption += ['value'=> Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
     }
 }
