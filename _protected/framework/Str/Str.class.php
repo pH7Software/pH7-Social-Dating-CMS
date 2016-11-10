@@ -259,7 +259,7 @@ defined('PH7') or exit('Restricted access');
       * Check if the string doesn't have any blank spaces.
       *
       * @param string $sValue
-      * @return boolean TRUE if it isn't empty, FALSE otherwise.
+      * @return boolean
       */
      public static function noSpaces($sValue)
      {
