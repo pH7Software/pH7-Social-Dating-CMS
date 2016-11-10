@@ -175,7 +175,7 @@ class SearchUserCoreForm
         } else {
             $sCity = Geo::getCity();
         }
-        self::$aCityOption += ['value' => Geo::getCity(), 'onfocus' => "if('" . $sCity . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . $sCity . "';"];
+        self::$aCityOption += ['value' => $sCity, 'onfocus' => "if('" . $sCity . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . $sCity . "';"];
 
         self::$aStateOption += ['value'=> Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
     }
