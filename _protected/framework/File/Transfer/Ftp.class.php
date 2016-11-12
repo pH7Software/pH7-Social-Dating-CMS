@@ -62,13 +62,13 @@ class Ftp extends \PH7\Framework\File\File
     /**
      * Connect to FTP server.
      *
-     * @param $bSsh For a SSL-FTP connection. Default: FALSE
+     * @param $bSsl For a SSL-FTP connection. Default: FALSE
      * @return boolean Returns TRUE on success or FALSE on failure.
      * @throws \PH7\Framework\File\Transfer\Exception If the host is incorrect.
      */
-    public function connect($bSsh = false)
+    public function connect($bSsl = false)
     {
-        $sConnFunc = ($bSsh) ? 'ftp_ssl_connect' : 'ftp_connect';
+        $sConnFunc = ($bSsl) ? 'ftp_ssl_connect' : 'ftp_connect';
 
         if (!$this->_rStream = $sConnFunc($this->_sHost))
             Exception('Couldn\'t connect to \'' . $this->_sHost . '\'!');
