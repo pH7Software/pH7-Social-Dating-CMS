@@ -15,7 +15,6 @@ PH7\Framework\Mvc\Model\DbConfig;
 
 class Report
 {
-
     private $_oView, $_mStatus = false;
 
     /**
@@ -36,33 +35,9 @@ class Report
     {
         $this->_mStatus = (new ReportModel)->add($aData);
 
-        if ($this->_mStatus == true)
-        {
-            if (DbConfig::getSetting('sendReportMail'))
-            {
-                $oUser = new UserCore;
-                $oUserModel = new UserCoreModel;
-                $sReporterUsername = $oUserModel->getUsername($aData['reporter_id']);
-                $sSpammerUsername = $oUserModel->getUsername($aData['spammer_id']);
-                $sDate = (new CDateTime)->get($aData['date'])->dateTime();
-
-                $this->_oView->content =
-                t('Reporter:') . ' <b><a href="' . $oUser->getProfileLink($sReporterUsername) . '">' . $sReporterUsername . '</a></b><br /><br /> ' .
-                t('Spammer:') . ' <b><a href="' . $oUser->getProfileLink($sSpammerUsername) . '">' . $sSpammerUsername . '</a></b><br /><br /> ' .
-                t('Contant Type:') . ' <b>' . $aData['type'] . '</b><br /><br /> ' .
-                t('URL:') . ' <b>' . $aData['url'] . '</b><br /><br /> ' .
-                t('Description of report:') . ' <b>' . $aData['desc'] . '</b><br /><br /> '.
-                t('Date:') . ' <b>' . $sDate . '</b><br /><br />';
-
-                unset($oUser, $oUserModel);
-
-                $sMessageHtml = $this->_oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/report/abuse.tpl', DbConfig::getSetting('adminEmail'));
-
-                $aInfo = [
-                   'subject' => t('Spam report from %site_name%')
-                ];
-
-                (new Mail)->send($aInfo, $sMessageHtml);
+        if ($this->_mStatus === true) {
+            if (DbConfig::getSetting('sendReportMail')) {
+                $this->sendMail($aData);
             }
         }
 
@@ -79,4 +54,34 @@ class Report
         return $this->_mStatus;
     }
 
+    /**
+     * @param array $aData Report's details.
+     * @return integer Number of recipients who were accepted for delivery.
+     */
+    protected function sendMail(array $aData)
+    {
+        $oUser = new UserCore;
+        $oUserModel = new UserCoreModel;
+        $sReporterUsername = $oUserModel->getUsername($aData['reporter_id']);
+        $sSpammerUsername = $oUserModel->getUsername($aData['spammer_id']);
+        $sDate = (new CDateTime)->get($aData['date'])->dateTime();
+
+        $this->_oView->content =
+        t('Reporter:') . ' <b><a href="' . $oUser->getProfileLink($sReporterUsername) . '">' . $sReporterUsername . '</a></b><br /><br /> ' .
+        t('Spammer:') . ' <b><a href="' . $oUser->getProfileLink($sSpammerUsername) . '">' . $sSpammerUsername . '</a></b><br /><br /> ' .
+        t('Contant Type:') . ' <b>' . $aData['type'] . '</b><br /><br /> ' .
+        t('URL:') . ' <b>' . $aData['url'] . '</b><br /><br /> ' .
+        t('Description of report:') . ' <b>' . $aData['desc'] . '</b><br /><br /> '.
+        t('Date:') . ' <b>' . $sDate . '</b><br /><br />';
+
+        unset($oUser, $oUserModel);
+
+        $sHtmlMessage = $this->_oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/report/abuse.tpl', DbConfig::getSetting('adminEmail'));
+
+        $aInfo = [
+           'subject' => t('Spam report from %site_name%')
+        ];
+
+        return (new Mail)->send($aInfo, $sHtmlMessage);
+    }
 }
