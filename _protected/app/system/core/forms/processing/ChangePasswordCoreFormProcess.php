@@ -19,7 +19,8 @@ class ChangePasswordCoreFormProcess extends Form
         parent::__construct();
 
         // PH7\UserCoreModel::login() method of the UserCoreModel Class works only for "user" and "affiliate" module.
-        $oPasswordModel = ($this->registry->module == PH7_ADMIN_MOD) ? new AdminModel : new UserCoreModel;
+        $sClassName = ($this->registry->module == PH7_ADMIN_MOD) ? AdminModel::class : UserCoreModel::class;
+        $oPasswordModel = new $sClassName;
 
         $sEmail = ($this->registry->module == PH7_ADMIN_MOD ? $this->session->get('admin_email') : ($this->registry->module == 'user' ? $this->session->get('member_email') : $this->session->get('affiliate_email')));
         $sTable = ($this->registry->module == PH7_ADMIN_MOD ? 'Admins' : ($this->registry->module == 'user' ? 'Members' : 'Affiliates'));
