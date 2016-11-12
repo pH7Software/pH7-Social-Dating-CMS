@@ -914,7 +914,7 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, headline, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
-('en_US', 'Home', 'The Best Dating software for creating online dating site or online community, social network,', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'Be on the best e-place!', 'The Best place to Meet Nice People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating Business App or Website like this one with the #1 <a href="http://ph7cms.com">Dating Web App Builder</a>. It''s Professional, Modern, Open Source, and gives you the Best Way to Create any Social/Dating Businesses...!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
+('en_US', 'Home', 'The Best Dating software for creating online dating site or online community, social network,', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'Be on the best e-place!', 'The Best place to Meet Nice People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating Business App or Website like this one with the #1 <a href="http://ph7cms.com">Dating Web App Builder</a>. It''s Professional, Modern, Open Source, and gives you the Best Way to launch a new Social/Dating Business!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
 
 
 CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
@@ -959,7 +959,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.3.1', 1);
+('pH7CMS', 'SQL System Schema', '1.3.2', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
