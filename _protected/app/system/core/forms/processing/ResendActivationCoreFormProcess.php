@@ -32,8 +32,11 @@ class ResendActivationCoreFormProcess extends Form
             else
             {
                 $iRet = $this->sendMail($mHash, $sTable);
-                $sFormMsg = ($iRet) ? Form::errorSendingEmail() : ('Your hash validation has been emailed to you.');
-                \PFBC\Form::setError('form_resend_activation', $sFormMsg);
+
+                if ($iRet)
+                    \PFBC\Form::setSuccess('form_resend_activation', t('Your activation link has been emailed to you.'));
+                else
+                    \PFBC\Form::setError('form_resend_activation', Form::errorSendingEmail());
             }
         }
     }
