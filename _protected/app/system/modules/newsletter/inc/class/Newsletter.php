@@ -59,7 +59,7 @@ class Newsletter extends Core
     /**
      * Send the newsletter to the subscribers.
      *
-     * @param object $oSubscriber Subscriber data fron the DB.
+     * @param object $oSubscriber Subscriber data from the DB.
      * @param \PH7\Framework\Mail\Mail $oMail
      * @return integer Number of recipients who were accepted for delivery.
      */
@@ -67,7 +67,7 @@ class Newsletter extends Core
     {
         $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 
-        $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
+        $sHtmlMsg = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
 
         $aInfo = [
             'subject' => $this->httpRequest->post('subject'),
@@ -75,6 +75,6 @@ class Newsletter extends Core
             'to_name' => $oSubscriber->firstName
         ];
 
-        return $oMail->send($aInfo, $sMsgHtml);
+        return $oMail->send($aInfo, $sHtmlMsg);
     }
 }

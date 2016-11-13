@@ -42,7 +42,7 @@ class BirthdayCore extends Core
     /**
      * Send birthday emails to users.
      *
-     * @param object $oUser User data fron the DB.
+     * @param object $oUser User data from the DB.
      * @param \PH7\Framework\Mail\Mail $oMail
      * @return integer Number of recipients who were accepted for delivery.
      */
@@ -52,13 +52,13 @@ class BirthdayCore extends Core
             t("The %site_name%'s team wish you a very happy birthday!") . '<br />' .
             t('Enjoy it well and enjoy yourself!');
 
-        $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/user/birthday.tpl', $oUser->email);
+        $sHtmlMsg = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/user/birthday.tpl', $oUser->email);
 
         $aInfo = [
             'subject' => t('Happy Birthday %0%!', $oUser->firstName),
             'to' => $oUser->email
         ];
 
-        return $oMail->send($aInfo, $sMsgHtml);
+        return $oMail->send($aInfo, $sHtmlMsg);
     }
 }
