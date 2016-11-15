@@ -30,6 +30,8 @@
     <li>Zlib compression PHP module</li>
     <li>mbstring PHP module</li>
     <li>exif PHP extension</li>
+    <li>dom PHP extension</li>
+    <li>xml PHP extension</li>
     <li>Send Mail PHP activated</li>
     <li>memory_limit - 128M or higher</li>
     <li>file_uploads - On</li>
