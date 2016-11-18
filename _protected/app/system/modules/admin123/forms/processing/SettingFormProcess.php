@@ -75,7 +75,7 @@ class SettingFormProcess extends Form
         'send_report_mail' => 'sendReportMail',
         'ip_login' => 'ipLogin',
         'ban_word_replace' => 'banWordReplace',
-        'security_token' => 'securityToken',
+        'security_token_forms' => 'securityToken',
         'stop_DDoS' => 'DDoS',
 
         // Spam
