@@ -113,6 +113,7 @@ final class Token
                                 $this->_oSession->remove($aCheckSession);
                                 return true;
                             }
+
         // Delete the token and data sessions expired
         $this->_oSession->remove($aCheckSession);
         return false;

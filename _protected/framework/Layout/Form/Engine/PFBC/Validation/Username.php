@@ -8,7 +8,6 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Username extends \PFBC\Validation
 {
-
     protected $sTable, $iMin, $iMax;
 
     /**
@@ -19,6 +18,7 @@ class Username extends \PFBC\Validation
     public function __construct($sTable = 'Members')
     {
         parent::__construct();
+
         $this->sTable = $sTable;
         $this->iMin = DbConfig::getSetting('minUsernameLength');
         $this->iMax = DbConfig::getSetting('maxUsernameLength');
@@ -29,5 +29,4 @@ class Username extends \PFBC\Validation
     {
         return $this->oValidate->username($sValue, $this->iMin, $this->iMax, $this->sTable);
     }
-
 }

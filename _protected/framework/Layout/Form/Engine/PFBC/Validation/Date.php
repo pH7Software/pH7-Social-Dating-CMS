@@ -5,14 +5,16 @@
  */
 namespace PFBC\Validation;
 
-class Date extends \PFBC\Validation {
-
-    public function __construct() {
+class Date extends \PFBC\Validation
+{
+    public function __construct()
+    {
         parent::__construct();
         $this->message = t('Error: %element% must contain a valid date.');
     }
 
-    public function isValid($sValue) {
+    public function isValid($sValue)
+    {
         return $this->oValidate->date($sValue);
     }
 }

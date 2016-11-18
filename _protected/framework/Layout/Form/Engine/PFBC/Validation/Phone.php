@@ -7,7 +7,6 @@ namespace PFBC\Validation;
 
 class Phone extends \PFBC\Validation
 {
-
     public function __construct()
     {
         parent::__construct();

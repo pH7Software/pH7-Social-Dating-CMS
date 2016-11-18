@@ -7,7 +7,6 @@ namespace PFBC\Validation;
 
 class RegExp extends \PFBC\Validation
 {
-
     protected $pattern;
 
     public function __construct($sPattern, $sMsg = '')

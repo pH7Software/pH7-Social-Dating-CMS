@@ -10,7 +10,6 @@ PH7\Framework\Security\CSRF\Token as SecurityToken;
 
 class Token extends \PFBC\Validation
 {
-
     private $sName;
 
     public function __construct($sName)

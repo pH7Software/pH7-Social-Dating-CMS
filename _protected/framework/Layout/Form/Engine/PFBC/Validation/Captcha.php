@@ -12,7 +12,8 @@ class Captcha extends \PFBC\Validation
     public function __construct($privateKey, $message = '')
     {
         $this->privateKey = $privateKey;
-        if(!empty($message))
+
+        if (!empty($message))
             $this->message = t('The code of Captcha entered was incorrect. Please re-try.');
     }
 
@@ -20,6 +21,7 @@ class Captcha extends \PFBC\Validation
     {
         require_once(__DIR__ . '/../Resources/recaptchalib.php');
         $resp = recaptcha_check_answer ($this->privateKey, $_SERVER['REMOTE_ADDR'], $_POST['recaptcha_challenge_field'], $_POST['recaptcha_response_field']);
+
         return ($resp->is_valid) ? true : false;
     }
 }
