@@ -927,7 +927,6 @@ CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
-('Connect', 'connect', '0', '0'),
 ('Affiliate', 'affiliate', '0', '1'),
 ('Game', 'game', '0', '1'),
 ('Chat', 'chat', '1', '0'),
@@ -940,6 +939,7 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Blog (company blog)', 'blog', '0', '1'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
+('Connect', 'connect', '0', '0'),
 ('Webcam', 'webcam', '0', '1'),
 ('Love Calculator', 'love-calculator', '0', '1'),
 ('Mail', 'mail', '0', '1'),
