@@ -106,7 +106,7 @@ final class FrontController
         {
             if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->requestUri(), $aMatches))
             {
-                $this->bIsRouterRewritten = true;
+                $this->setRewritingRouter();
 
                 $sPathModule = $oRoute->getAttribute('path') . PH7_SH;
 
@@ -303,6 +303,17 @@ final class FrontController
 
         /** Request Parameter for the Simple Module Router mode. **/
         $this->aRequestParameter = $this->oUri->segments(4);
+    }
+
+    /**
+     * If the action is rewriting by the XML route file, set the correct router to be used.
+     *
+     * @access private
+     * @return void
+     */
+    private function setRewritingRouter()
+    {
+        $this->bIsRouterRewritten = true;
     }
 
     /**
