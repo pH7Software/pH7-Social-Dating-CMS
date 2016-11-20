@@ -73,9 +73,9 @@ final class FrontController
 
         $this->_assetsInitialize();
 
-        $this->rewrittenRouter();
+        $this->launchRewritingRouter();
 
-        $this->nonRewrittenRouters();
+        $this->launchNonRewritingRouters();
     }
 
     /**
@@ -83,7 +83,7 @@ final class FrontController
      *
      * @access private
      */
-    private function nonRewrittenRouters()
+    private function launchNonRewritingRouters()
     {
         if (!$this->bIsRouterRewritten)
         {
@@ -99,7 +99,7 @@ final class FrontController
      *
      * @access private
      */
-    private function rewrittenRouter()
+    private function launchRewritingRouter()
     {
         $oUrl = UriRoute::loadFile(new \DomDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute)
