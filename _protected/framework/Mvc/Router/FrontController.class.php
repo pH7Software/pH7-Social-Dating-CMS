@@ -34,7 +34,7 @@ final class FrontController
 
     const INDEX_FILE = 'index.php';
 
-    private $oConfig, $oRegistry, $oHttpRequest, $oUri, $aRequestParameter, $bRouterRewriting = false;
+    private $oConfig, $oRegistry, $oHttpRequest, $oUri, $aRequestParameter, $bIsRouterRewritten = false;
 
     use \PH7\Framework\Pattern\Singleton; // Import the Singleton trait
 
@@ -73,12 +73,40 @@ final class FrontController
 
         $this->_assetsInitialize();
 
+        $this->rewrittenRouter();
+
+        $this->nonRewrittenRouters();
+    }
+
+    /**
+     *  If the module action isn't rewriting, we launch the basic router.
+     *
+     * @access private
+     */
+    private function nonRewrittenRouters()
+    {
+        if (!$this->bIsRouterRewritten)
+        {
+            if ($this->oUri->fragment(0) === 'm')
+                $this->simpleModuleRouter();
+            else
+                $this->simpleRouter();
+        }
+    }
+
+    /**
+     *  Router for the modules that are rewriting through the custom XML route file.
+     *
+     * @access private
+     */
+    private function rewrittenRouter()
+    {
         $oUrl = UriRoute::loadFile(new \DomDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute)
         {
             if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->requestUri(), $aMatches))
             {
-                $this->bRouterRewriting = true;
+                $this->bIsRouterRewritten = true;
 
                 $sPathModule = $oRoute->getAttribute('path') . PH7_SH;
 
@@ -132,14 +160,6 @@ final class FrontController
             }
         }
         unset($oUrl);
-
-        if (empty($this->bRouterRewriting))
-        {
-            if ($this->oUri->fragment(0) === 'm')
-                $this->simpleModuleRouter();
-            else
-                $this->simpleRouter();
-        }
     }
 
     /**
@@ -735,7 +755,7 @@ final class FrontController
 
     public function __destruct()
     {
-        unset($this->oConfig, $this->oRegistry, $this->oHttpRequest, $this->oUri, $this->bRouterRewriting);
+        unset($this->oConfig, $this->oRegistry, $this->oHttpRequest, $this->oUri, $this->bIsRouterRewritten);
     }
 
 }
