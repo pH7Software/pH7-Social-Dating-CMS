@@ -2,8 +2,8 @@
 /**
  * @title Front Controller Class
  *
- * This class is used to instantiate the Controller and the action with the MVC pattern, in short it is the heart of our software.
- * It can also retrieve the URL roads, the instantiation of languages​​, themes, database, ...
+ * This class is used to instantiate the Controller and the action with the MVC pattern, in short it is the heart of pH7CMS's software.
+ * It can also retrieve the URL roads, initialize the languages​​, themes, database, etc.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2011-2016, Pierre-Henry Soria. All Rights Reserved.
@@ -61,50 +61,17 @@ final class FrontController
         }
 
         /**
-         * @internal We initialize the database after compression of static files (\PH7\Framework\Mvc\Router\FrontController::gzipRouter() method),
+         * @internal We initialize the database after the compression of static files (\PH7\Framework\Mvc\Router\FrontController::gzipRouter() method),
          * so we can always display static files even if there are problems with the database.
          */
         $this->_databaseInitialize();
+
         /**
-         * @internal This method must be declared before the rest of the code, because it initializes essential language constants for the rest of the code.
+         * @internal "_languageInitialize()" method must be declared before the rest of the code, because it initializes the main language constants for the rest of the code.
          */
         $this->_languageInitialize();
 
-        // For the resources of the assets folders
-        if ($this->oUri->fragment(0) === 'asset')
-        {
-            switch ($this->oUri->fragment(1))
-            {
-                case 'ajax':
-                    // Loading Asynchronous Ajax files
-                    $this->ajaxRouter();
-                break;
-
-                case 'file':
-                    // Loading files
-                    $this->fileRouter();
-                break;
-
-                case 'cron':
-                    // Loading Cron Jobs files
-                    $this->cronRouter();
-                break;
-
-                case 'css':
-                    // Loading Style sheet files
-                    $this->cssRouter();
-                break;
-
-                case 'js':
-                    // Loading JavaScript files
-                    $this->jsRouter();
-                break;
-
-                default:
-                    $this->notFound('Not found Asset file!', 1);
-            }
-            exit;
-        }
+        $this->_assetsInitialize();
 
         $oUrl = UriRoute::loadFile(new \DomDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute)
@@ -410,6 +377,50 @@ final class FrontController
         $this->oRegistry->path_module_inc = $this->oRegistry->path_module . PH7_INC;
         $this->oRegistry->path_module_config = $this->oRegistry->path_module . PH7_CONFIG;
         $this->oRegistry->path_module_lang = $this->oRegistry->path_module . PH7_LANG;
+    }
+
+    /**
+     * Initialize the resources of the assets folders.
+     *
+     * @access public
+     * @return void
+     */
+    public function _assetsInitialize()
+    {
+        if ($this->oUri->fragment(0) === 'asset')
+        {
+            switch ($this->oUri->fragment(1))
+            {
+                case 'ajax':
+                    // Loading Asynchronous Ajax files
+                    $this->ajaxRouter();
+                break;
+
+                case 'file':
+                    // Loading files
+                    $this->fileRouter();
+                break;
+
+                case 'cron':
+                    // Loading Cron Jobs files
+                    $this->cronRouter();
+                break;
+
+                case 'css':
+                    // Loading Style sheet files
+                    $this->cssRouter();
+                break;
+
+                case 'js':
+                    // Loading JavaScript files
+                    $this->jsRouter();
+                break;
+
+                default:
+                    $this->notFound('Not found Asset file!', 1);
+            }
+            exit;
+        }
     }
 
     /**
