@@ -28,14 +28,13 @@ final class Autoloader
 {
     const DOWNLOAD_URL = 'http://download.hizup.com/files/';
 
-
     /**
-     * We use this class with the singleton pattern.
+     * Make the class singleton by importing the appropriate trait.
      */
     use \PH7\Framework\Pattern\Singleton;
 
     /**
-     * We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
+     * We do not put a "__construct" and "__clone" "private" because it is already done in the \PH7\Framework\Pattern\Statik trait which is included in the \PH7\Framework\Pattern\Singleton trait.
      */
 
 

@@ -17,14 +17,13 @@ use \PH7\Framework\Registry\Registry;
 
 final class Autoloader
 {
-
     /**
-     * We use this class with the singleton pattern.
+     * It's a singleton class, so include the singleton trait.
      */
     use \PH7\Framework\Pattern\Singleton;
 
     /**
-     * We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
+     * We do not put a "__construct" and "__clone" "private" because it is already done in the \PH7\Framework\Pattern\Statik trait which is included in the \PH7\Framework\Pattern\Singleton trait.
      */
 
 
@@ -153,5 +152,4 @@ final class Autoloader
     {
         return str_replace('PH7\\', '', $sClass);
     }
-
 }
