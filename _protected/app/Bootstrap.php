@@ -20,103 +20,148 @@ PH7\Framework\Registry\Registry,
 PH7\Framework\Mvc\Router\FrontController,
 PH7\Framework\Config\Config,
 PH7\Framework\File\Import,
+PH7\Framework\Core\Kernel,
+PH7\Framework\Loader\Autoloader as FrameworkLoader,
+PH7\App\Includes\Classes\Loader\Autoloader as AppLoader,
 PH7\Framework\Error\CException as Except;
 
 /*** Begin Loading Files ***/
 require 'configs/constants.php';
 require 'includes/helpers/misc.php';
 
-// Set a default timezone if it is not already configured
-if (!ini_get('date.timezone'))
-    ini_set('date.timezone', PH7_DEFAULT_TIMEZONE);
-
-try
+class Bootstrap
 {
-    // Starting zlib-compressed output
-    /*
-       This "zlib output compression" compressthe pages.
-       This allows you to save your bandwidth and faster download of your pages.
-       WARNING: this function consumes CPU resources on your server.
-       So you can if you want to remove this function.
+    /**
+     * @staticvar object $_oInstance
      */
-    //ini_set('zlib.output_compression', 2048);
-    //ini_set('zlib.output_compression_level', 6);
+    private static $oInstance = null;
 
-    ob_start();
+    /**
+     * Set private since it's a singleton class.
+     */
+    private function __construct() {}
 
-    // Loading Framework Classes
-    require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-    Framework\Loader\Autoloader::getInstance()->init();
-
-    /** Loading configuration files environments **/
-    // For All environment
-    Import::file(PH7_PATH_APP . 'configs/environment/all.env');
-    // Specific to the current environment
-    Import::file(PH7_PATH_APP . 'configs/environment/' . Config::getInstance()->values['mode']['environment'] . '.env');
-
-    // Loading Class ~/protected/app/includes/classes/*
-    Import::pH7App('includes.classes.Loader.Autoloader');
-    App\Includes\Classes\Loader\Autoloader::getInstance()->init();
-
-    // Loading Debug class
-    Import::pH7FwkClass('Error.Debug');
-
-    // Loading String Class
-    Import::pH7FwkClass('Str.Str');
-
-    /* Structure/General.class.php functions are not currently used */
-    // Import::pH7FwkClass('Structure.General');
-
-    /*** End Loading Files ***/
-
-
-    //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
-    if (!Server::isRewriteMod())
+    /**
+     * Get instance of class.
+     *
+     * @return object Returns the instance class or create initial instance of the class.
+     */
+    public static function getInstance()
     {
-        $sMsg = '<p class="warning"><a href="' . Framework\Core\Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</p>
+        return (null === static::$oInstance) ? static::$oInstance = new static : static::$oInstance;
+    }
+
+    /**
+     * Set a default timezone if it is not already configured in environment.
+     *
+     * @return void
+     */
+    public function setTimezoneIfNotSet()
+    {
+        if (!ini_get('date.timezone'))
+            ini_set('date.timezone', PH7_DEFAULT_TIMEZONE);
+    }
+
+    public function run()
+    {
+        try
+        {
+            // Starting zlib-compressed output
+            /*
+               This "zlib output compression" compressthe pages.
+               This allows you to save your bandwidth and faster download of your pages.
+               WARNING: this function consumes CPU resources on your server.
+               So you can if you want to remove this function.
+             */
+            //ini_set('zlib.output_compression', 2048);
+            //ini_set('zlib.output_compression_level', 6);
+
+            ob_start();
+
+            // Loading Framework Classes
+            require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+            FrameworkLoader::getInstance()->init();
+
+            /** Loading configuration files environments **/
+            // For All environment
+            Import::file(PH7_PATH_APP . 'configs/environment/all.env');
+            // Specific to the current environment
+            Import::file(PH7_PATH_APP . 'configs/environment/' . Config::getInstance()->values['mode']['environment'] . '.env');
+
+            // Loading Class ~/protected/app/includes/classes/*
+            Import::pH7App('includes.classes.Loader.Autoloader');
+            AppLoader::getInstance()->init();
+
+            // Loading Debug class
+            Import::pH7FwkClass('Error.Debug');
+
+            // Loading String Class
+            Import::pH7FwkClass('Str.Str');
+
+            /* Structure/General.class.php functions are not currently used */
+            // Import::pH7FwkClass('Structure.General');
+
+            /*** End Loading Files ***/
+
+
+            //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
+            if (!Server::isRewriteMod())
+            {
+                $this->notRewriteModEnabledError();
+                exit;
+            }  //*/
+
+            // Enable client browser cache
+            (new Browser)->cache();
+
+            new Server; // Start Server
+
+            Registry::getInstance()->start_time = microtime(true);
+
+            /**
+             * Initialize the FrontController, we are asking the front controller to process the HTTP request
+             */
+            FrontController::getInstance()->runRouter();
+        }
+        # \PH7\Framework\Error\CException\UserException
+        catch (Except\UserException $oE)
+        {
+            echo $oE->getMessage(); // Simple User Error with Exception
+        }
+
+        # \PH7\Framework\Error\CException\PH7Exception
+        catch (Except\PH7Exception $oE)
+        {
+            Except\PH7Exception::launch($oE);
+        }
+
+        # \Exception and other...
+        catch (\Exception $oE)
+        {
+            Except\PH7Exception::launch($oE);
+        }
+        finally
+        {
+            if (session_status() === PHP_SESSION_ACTIVE) {
+                session_write_close();
+            }
+            ob_end_flush();
+            exit(0);
+        }
+    }
+
+    /**
+     * Display an error message if the Apache mod_rewrite is not enabled.
+     *
+     * @return void HTML output.
+     */
+    protected function notRewriteModEnabledError()
+    {
+        $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</p>
         <p>Firstly, please <strong>make sure the ".htaccess" file has been uploaded to the root directory where pH7CMS is installed</strong>. If not, use your FTP client (such as Filezilla) and upload it again from pH7CMS unziped package and try again.<br />
         Secondly, please <strong>make sure "mod_rewrite" is correctly installed</strong>.<br /> Click <a href="http://ph7cms.com/doc/en/how-to-install-rewrite-module" target="_blank">here</a> if you want to get more information on how to install the rewrite module.<br /><br />
         After that, please <a href="' . PH7_URL_ROOT . '">retry</a>.</p>';
 
         echo html_body("Apache's mod_rewrite is required", $sMsg);
-        exit;
-    }  //*/
-
-    // Enable client browser cache
-    (new Browser)->cache();
-
-    new Server; // Start Server
-
-    Registry::getInstance()->start_time = microtime(true);
-
-    /**
-     * Initialize the FrontController, we are asking the front controller to process the HTTP request
-     */
-    FrontController::getInstance()->runRouter();
-}
-
-# \PH7\Framework\Error\CException\UserException
-catch (Except\UserException $oE)
-{
-    echo $oE->getMessage(); // Simple User Error with Exception
-}
-
-# \PH7\Framework\Error\CException\PH7Exception
-catch (Except\PH7Exception $oE)
-{
-    Except\PH7Exception::launch($oE);
-}
-
-# \Exception and other...
-catch (\Exception $oE)
-{
-    Except\PH7Exception::launch($oE);
-}
-finally
-{
-    if (session_status() === PHP_SESSION_ACTIVE) {
-        session_write_close();
     }
-    ob_end_flush();
-    exit(0);
 }
