@@ -7,7 +7,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link           http://ph7cms.com
  * @package        PH7 / App / Core
- * @version        1.4
+ * @version        2.0
  */
 
 namespace PH7;
