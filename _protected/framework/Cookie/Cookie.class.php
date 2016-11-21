@@ -18,7 +18,8 @@ class Cookie
 {
 
     /**
-     * @desc Set a PHP Cookie.
+     * Set a PHP cookie.
+     *
      * @param mixed (array | string) $mName Name of the cookie.
      * @param string $sValue value of the cookie, Optional if the cookie data is in a array.
      * @param int $iTime The time the cookie expires. This is a Unix timestamp.
@@ -48,7 +49,8 @@ class Cookie
     }
 
     /**
-     * @desc Get Cookie.
+     * Get the cookie value by giving its name.
+     *
      * @param string $sName Name of the cookie.
      * @param boolean $bEscape Default TRUE
      * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
@@ -60,7 +62,8 @@ class Cookie
     }
 
     /**
-     * @desc Returns a boolean informing if the cookie exists or not.
+     * Returns a boolean informing if the cookie exists or not.
+     *
      * @param mixed (array | string) $mName Name of the cookie.
      * @return boolean
      */
@@ -82,7 +85,8 @@ class Cookie
     }
 
     /**
-     * @desc Delete the cookie(s) key if the cookie exists.
+     * Delete the cookie(s) key if the cookie exists.
+     *
      * @param mixed (array | string) $mName Name of the cookie to delete.
      * @return void
      */

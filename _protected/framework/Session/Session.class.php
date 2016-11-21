@@ -18,7 +18,6 @@ class Session
 {
 
     /**
-     * @desc Constructor to initialize PHP's session.
      * @param boolean $bDisableSessCache Disable PHP's session cache. Default FALSE
      */
     public function __construct($bDisableSessCache = false)
@@ -38,13 +37,12 @@ class Session
             session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], (substr(PH7_URL_PROT, 0, 5) === 'https'), true);
         }
 
-        // Initialize PHP session
-        if (session_status() !== PHP_SESSION_ACTIVE)
-            @session_start();
+        $this->initializePHPSession();
     }
 
     /**
-     * @desc Set a PHP Session.
+     * Set a PHP session.
+     *
      * @param mixed (array | string) $mName Name of the session.
      * @param string $sValue Value of the session, Optional if the session data is in a array.
      * @return void
@@ -63,7 +61,8 @@ class Session
     }
 
     /**
-     * @desc Get Session.
+     * Get a session value by giving its name.
+     *
      * @param string $sName Name of the session.
      * @param boolean $bEscape Default TRUE
      * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
@@ -75,7 +74,8 @@ class Session
     }
 
     /**
-     * @desc Returns a boolean informing if the session exists or not.
+     * Returns a boolean informing if the session exists or not.
+     *
      * @param mixed (array | string) $mName Name of the session.
      * @return boolean
      */
@@ -97,7 +97,8 @@ class Session
     }
 
     /**
-     * @desc Delete the session(s) key if the session exists.
+     * Delete the session(s) if the session exists.
+     *
      * @param mixed (array | string) $mName Name of the session to delete.
      * @return void
      */
@@ -119,7 +120,8 @@ class Session
     }
 
     /**
-     * @desc Session regenerate ID.
+     * Session regenerate ID.
+     *
      * @return void
      */
     public function regenerateId()
@@ -130,7 +132,7 @@ class Session
     }
 
     /**
-     * @desc Destroy all PHP's sessions.
+     * Destroy all PHP's sessions.
      */
     public function destroy()
     {
