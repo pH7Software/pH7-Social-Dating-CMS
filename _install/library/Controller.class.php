@@ -43,13 +43,10 @@ abstract class Controller implements IController
         global $LANG;
 
         // Initialize PHP session
-        // First off, check if the session already exists thanks "session_status()" PHP >= 5.4 func
-        if (session_status() !== PHP_SESSION_ACTIVE)
-            @session_start();
+        $this->initializePHPSession();
 
         // Verify and correct the time zone if necessary
-        if (!ini_get('date.timezone'))
-            date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
+        $this->checkTimezone();
 
         // Language initialization
         $this->sCurrentLang = (new Language)->get();
@@ -78,5 +75,28 @@ abstract class Controller implements IController
         $this->oView->assign('software_email', self::SOFTWARE_EMAIL);
         $this->oView->assign('tpl_name', self::DEFAULT_THEME);
         $this->oView->assign('current_lang', $this->sCurrentLang);
+    }
+
+    /**
+     * Check if the session is already initialized (thanks "session_status()" PHP >= 5.4)
+     * And initialize it if it isn't the case.
+     *
+     * @return void
+     */
+    protected function initializePHPSession()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE)
+            @session_start();
+    }
+
+    /**
+     * Set a default timezone if it is not already configured.
+     *
+     * @return void
+     */
+    protected function checkTimezone()
+    {
+        if (!ini_get('date.timezone'))
+            date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
     }
 }

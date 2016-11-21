@@ -142,6 +142,17 @@ class Session
         }
     }
 
+    /**
+     * Check if the session is already initialized and initialize it if it isn't the case.
+     *
+     * @return void
+     */
+    protected function initializePHPSession()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE)
+            @session_start();
+    }
+
     protected function close()
     {
         session_write_close();
