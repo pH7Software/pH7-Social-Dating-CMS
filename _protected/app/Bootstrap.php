@@ -66,62 +66,7 @@ class Bootstrap
     {
         try
         {
-            // Starting zlib-compressed output
-            /*
-               This "zlib output compression" compressthe pages.
-               This allows you to save your bandwidth and faster download of your pages.
-               WARNING: this function consumes CPU resources on your server.
-               So you can if you want to remove this function.
-             */
-            //ini_set('zlib.output_compression', 2048);
-            //ini_set('zlib.output_compression_level', 6);
-
-            ob_start();
-
-            // Loading Framework Classes
-            require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-            FrameworkLoader::getInstance()->init();
-
-            /** Loading configuration files environments **/
-            // For All environment
-            Import::file(PH7_PATH_APP . 'configs/environment/all.env');
-            // Specific to the current environment
-            Import::file(PH7_PATH_APP . 'configs/environment/' . Config::getInstance()->values['mode']['environment'] . '.env');
-
-            // Loading Class ~/protected/app/includes/classes/*
-            Import::pH7App('includes.classes.Loader.Autoloader');
-            AppLoader::getInstance()->init();
-
-            // Loading Debug class
-            Import::pH7FwkClass('Error.Debug');
-
-            // Loading String Class
-            Import::pH7FwkClass('Str.Str');
-
-            /* Structure/General.class.php functions are not currently used */
-            // Import::pH7FwkClass('Structure.General');
-
-            /*** End Loading Files ***/
-
-
-            //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
-            if (!Server::isRewriteMod())
-            {
-                $this->notRewriteModEnabledError();
-                exit;
-            }  //*/
-
-            // Enable client browser cache
-            (new Browser)->cache();
-
-            new Server; // Start Server
-
-            Registry::getInstance()->start_time = microtime(true);
-
-            /**
-             * Initialize the FrontController, we are asking the front controller to process the HTTP request
-             */
-            FrontController::getInstance()->runRouter();
+            $this->loadInitFiles();
         }
         # \PH7\Framework\Error\CException\UserException
         catch (Except\UserException $oE)
@@ -148,6 +93,65 @@ class Bootstrap
             ob_end_flush();
             exit(0);
         }
+    }
+
+    protected function loadInitFiles()
+    {
+        // Starting zlib-compressed output
+        /*
+            This "zlib output compression" compressthe pages.
+            This allows you to save your bandwidth and faster download of your pages.
+            WARNING: this function consumes CPU resources on your server.
+            So you can if you want to remove this function.
+         */
+        //ini_set('zlib.output_compression', 2048);
+        //ini_set('zlib.output_compression_level', 6);
+
+        ob_start();
+
+        // Loading Framework Classes
+        require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+        FrameworkLoader::getInstance()->init();
+
+        /** Loading configuration files environments **/
+        // For All environment
+        Import::file(PH7_PATH_APP . 'configs/environment/all.env');
+        // Specific to the current environment
+        Import::file(PH7_PATH_APP . 'configs/environment/' . Config::getInstance()->values['mode']['environment'] . '.env');
+
+        // Loading Class ~/protected/app/includes/classes/*
+        Import::pH7App('includes.classes.Loader.Autoloader');
+        AppLoader::getInstance()->init();
+
+        // Loading Debug class
+        Import::pH7FwkClass('Error.Debug');
+
+        // Loading String Class
+        Import::pH7FwkClass('Str.Str');
+
+        /* Structure/General.class.php functions are not currently used */
+        // Import::pH7FwkClass('Structure.General');
+
+        /*** End Loading Files ***/
+
+
+        //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
+        if (!Server::isRewriteMod()) {
+            $this->notRewriteModEnabledError();
+            exit;
+        }  //*/
+
+        // Enable client browser cache
+        (new Browser)->cache();
+
+        new Server; // Start Server
+
+        Registry::getInstance()->start_time = microtime(true);
+
+        /**
+          * Initialize the FrontController, we are asking the front controller to process the HTTP request
+         */
+        FrontController::getInstance()->runRouter();
     }
 
     /**
