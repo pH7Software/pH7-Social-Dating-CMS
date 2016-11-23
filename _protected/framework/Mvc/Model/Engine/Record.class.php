@@ -310,7 +310,7 @@ class Record
                 foreach ($mTable as $sTable)
                     $sTable .= Db::prefix($sTable, true) . ',';
 
-                $sTable = substr($sTable, 0, -1);
+                $sTable = rtrim($sTable, ',');
             }
             else
             {

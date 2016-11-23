@@ -318,7 +318,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
                 }
             }
 
-            $sSqlSex = ' AND sex IN (' . substr($sGender, 0, -1) . ') ';
+            $sSqlSex = ' AND sex IN (' . rtrim($sGender, ',') . ') ';
         }
         else
         {

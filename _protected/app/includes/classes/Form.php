@@ -44,7 +44,7 @@ class Form extends Framework\Layout\Form\Form
         foreach ($aValue as $sValue)
             $sVal .= $sValue . ',';
 
-        return substr($sVal, 0, -1); // Removes the last comma
+        return rtrim($sVal, ','); // Removes the last comma
     }
 
 }
