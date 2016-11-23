@@ -42,4 +42,7 @@ require PH7_PATH_APP  . 'Bootstrap.php';
 
 $oApp = Bootstrap::getInstance();
 $oApp->setTimezoneIfNotSet();
+
+ob_start();
 $oApp->run();
+ob_end_flush();

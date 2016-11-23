@@ -32,7 +32,7 @@ require 'includes/helpers/misc.php';
 class Bootstrap
 {
     /**
-     * @staticvar object $_oInstance
+     * @staticvar object $oInstance
      */
     private static $oInstance = null;
 
@@ -62,11 +62,54 @@ class Bootstrap
             ini_set('date.timezone', PH7_DEFAULT_TIMEZONE);
     }
 
+    /**
+     * zlib-compressed output.
+     *
+     * This "zlib output compression" compressthe pages.
+     * This allows you to save your bandwidth and faster download of your pages.
+     * WARNING: this function consumes CPU resources on your server.
+     * So you can if you want to remove this function.
+     *
+     * @return void
+     */
+    public function zlipCompression()
+    {
+        ini_set('zlib.output_compression', 2048);
+        ini_set('zlib.output_compression_level', 6);
+    }
+
+    /**
+     * Initialize the app, load the files and launch the main FrontController router.
+     *
+     * @return void
+     *
+     * @throws Except\UserException
+     * @throws Except\PH7Exception
+     * @throws \Exception
+     */
     public function run()
     {
         try
         {
             $this->loadInitFiles();
+
+            //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
+            if (!Server::isRewriteMod()) {
+                $this->notRewriteModEnabledError();
+                exit;
+            }  //*/
+
+            // Enable client browser cache
+            (new Browser)->cache();
+
+            new Server; // Start Server
+
+            Registry::getInstance()->start_time = microtime(true);
+
+            /**
+              * Initialize the FrontController, we are asking the front controller to process the HTTP request
+             */
+            FrontController::getInstance()->runRouter();
         }
         # \PH7\Framework\Error\CException\UserException
         catch (Except\UserException $oE)
@@ -90,25 +133,11 @@ class Bootstrap
             if (session_status() === PHP_SESSION_ACTIVE) {
                 session_write_close();
             }
-            ob_end_flush();
-            exit(0);
         }
     }
 
     protected function loadInitFiles()
     {
-        // Starting zlib-compressed output
-        /*
-            This "zlib output compression" compressthe pages.
-            This allows you to save your bandwidth and faster download of your pages.
-            WARNING: this function consumes CPU resources on your server.
-            So you can if you want to remove this function.
-         */
-        //ini_set('zlib.output_compression', 2048);
-        //ini_set('zlib.output_compression_level', 6);
-
-        ob_start();
-
         // Loading Framework Classes
         require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
         FrameworkLoader::getInstance()->init();
@@ -131,27 +160,6 @@ class Bootstrap
 
         /* Structure/General.class.php functions are not currently used */
         // Import::pH7FwkClass('Structure.General');
-
-        /*** End Loading Files ***/
-
-
-        //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
-        if (!Server::isRewriteMod()) {
-            $this->notRewriteModEnabledError();
-            exit;
-        }  //*/
-
-        // Enable client browser cache
-        (new Browser)->cache();
-
-        new Server; // Start Server
-
-        Registry::getInstance()->start_time = microtime(true);
-
-        /**
-          * Initialize the FrontController, we are asking the front controller to process the HTTP request
-         */
-        FrontController::getInstance()->runRouter();
     }
 
     /**
