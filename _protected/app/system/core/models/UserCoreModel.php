@@ -1370,7 +1370,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlWherePrice = ($bIsPrice) ? ' AND pay.price = :price' : '';
         $sSqlTime = ($bIsTime) ? ',m.membershipDate = :dateTime ' : ' ';
         $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') .
-        'AS pay ON m.groupId = pay.groupId SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlWherePrice;
+        'AS pay USING(groupId) SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlWherePrice;
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':groupId', $iNewGroupId, \PDO::PARAM_INT);
