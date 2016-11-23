@@ -92,10 +92,20 @@ class Page
         }
         else
         {
-            $sIsSlash = (substr($sUrl, -1) !== PH7_SH && !strstr($sUrl, PH7_PAGE_EXT)) ? PH7_SH : '';
-            $sPageUrl = $sUrl . $sIsSlash . '?' . $sVar . '=';
+            $sPageUrl = $sUrl . $this->trailingSlash($sUrl) . '?' . $sVar . '=';
         }
 
         return $sPageUrl;
+    }
+
+    /**
+     * Returns a trailing slash if needed.
+     *
+     * @param  string $sUrl
+     * @return string
+     */
+    protected function trailingSlash($sUrl)
+    {
+        return (substr($sUrl, -1) !== PH7_SH && !strstr($sUrl, PH7_PAGE_EXT)) ? PH7_SH : '';
     }
 }
