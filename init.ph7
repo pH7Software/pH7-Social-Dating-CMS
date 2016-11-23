@@ -40,6 +40,6 @@ if (!is_file(__DIR__ . '/_constants.php')) {
 require __DIR__ . '/_constants.php';
 require PH7_PATH_APP  . 'Bootstrap.php';
 
-$oBootstrap = Bootstrap::getInstance();
-$oBootstrap->setTimezoneIfNotSet();
-$oBootstrap->run();
+$oApp = Bootstrap::getInstance();
+$oApp->setTimezoneIfNotSet();
+$oApp->run();
