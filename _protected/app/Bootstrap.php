@@ -66,10 +66,10 @@ class Bootstrap
     /**
      * zlib-compressed output.
      *
-     * This "zlib output compression" compressthe pages.
-     * This allows you to save your bandwidth and faster download of your pages.
-     * WARNING: this function consumes CPU resources on your server.
-     * So you can if you want to remove this function.
+     * These "zlib output compression" compress the pages.
+     * It save your bandwidth and gives faster download of the pages.
+     * WARNING: It can consume high CPU resources on the server.
+     * So it might be wise not to use this method if the server isn't so powerful.
      *
      * @return void
      */
