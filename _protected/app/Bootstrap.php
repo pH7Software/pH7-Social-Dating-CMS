@@ -37,14 +37,15 @@ class Bootstrap
     private static $oInstance = null;
 
     /**
-     * Set private since it's a singleton class.
+     * Set constructor/cloning to private since it's a singleton class.
      */
     private function __construct() {}
+    private function __clone() {}
 
     /**
      * Get instance of class.
      *
-     * @return object Returns the instance class or create initial instance of the class.
+     * @return Bootstrap Returns the instance class or create initial instance of the class.
      */
     public static function getInstance()
     {
@@ -136,6 +137,11 @@ class Bootstrap
         }
     }
 
+    /**
+     * Load all necessary files for running the app.
+     *
+     * @return void
+     */
     private function loadInitFiles()
     {
         // Loading Framework Classes
