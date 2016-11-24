@@ -136,7 +136,7 @@ class Bootstrap
         }
     }
 
-    protected function loadInitFiles()
+    private function loadInitFiles()
     {
         // Loading Framework Classes
         require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
@@ -167,7 +167,7 @@ class Bootstrap
      *
      * @return void HTML output.
      */
-    protected function notRewriteModEnabledError()
+    private function notRewriteModEnabledError()
     {
         $sMsg = '<p class="warning"><a href="' . Kernel::SOFTWARE_WEBSITE . '">pH7CMS</a> requires Apache "mod_rewrite".</p>
         <p>Firstly, please <strong>make sure the ".htaccess" file has been uploaded to the root directory where pH7CMS is installed</strong>. If not, use your FTP client (such as Filezilla) and upload it again from pH7CMS unziped package and try again.<br />
