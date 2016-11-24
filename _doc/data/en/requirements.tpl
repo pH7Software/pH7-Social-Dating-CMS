@@ -8,12 +8,12 @@
     <li>URL rewriting extension module - Apache, nginx, lighttpd, LiteSpeed, IIS (for Web.config, you have a <a href="http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/">good tutorial here</a>).</li>
     <li>Minimum Web Space - 2.0 GB</li>
     <li>Specific Requirement - Server has to be connected to Internet</li>
-    <li>Video Module Requirements - <a href="http://ffmpeg.org">FFmpeg</a></li>
+    <li>"Video" Module Requirement (only if enabled) - <a href="http://ffmpeg.org">FFmpeg</a></li>
 </ul>
 
 <h3>Recommended:</h3>
   <ul>
-    <li>JRE (Java Runtime Environment) - 1.6 or higher (For compressing static files. This parameter is off by default and uses our compressor house, but you can install Java, it would be nice to activate this setting).</li>
+    <li>JRE (Java Runtime Environment) - 1.6 or higher (used for compressing static files. The option is disabled by default and uses our homemade compressor instead. However, if you have Java installed on your server, it would be nicer to enable that option).</li>
     <li>mod_security/mod_security2 disabled - pH7CMS may not work correctly if enabled so we advise to disable it for your domain (just ask your Web host or do it through cPanel).</li>
 </ul>
 
