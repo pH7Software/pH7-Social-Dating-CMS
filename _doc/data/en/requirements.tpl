@@ -8,7 +8,7 @@
     <li>URL rewriting extension module - Apache, nginx, lighttpd, LiteSpeed, IIS (for Web.config, you have a <a href="http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/">good tutorial here</a>).</li>
     <li>Minimum Web Space - 2.0 GB</li>
     <li>Specific Requirement - Server has to be connected to Internet</li>
-    <li>"Video" Module Requirement (only if enabled) - <a href="http://ffmpeg.org">FFmpeg</a></li>
+    <li>Video Module Requirement (only if enabled) - <a href="http://ffmpeg.org">FFmpeg</a></li>
 </ul>
 
 <h3>Recommended:</h3>
