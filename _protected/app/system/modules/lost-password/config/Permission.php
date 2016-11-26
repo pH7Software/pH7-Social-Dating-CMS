@@ -17,6 +17,11 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
+        if (PH7_DEMOMODE)
+        {     // Don't allow this module if demo mode is on
+            Header::redirect($this->registry->site_url, t('Not available on Demo Mode'), 'error');
+        }
+
         if ((UserCore::auth() || AffiliateCore::auth() || AdminCore::auth()) && ($this->registry->action == 'forgot' || $this->registry->action == 'reset'))
         {
             Header::redirect(Uri::get('lost-password', 'main', 'account'), $this->alreadyConnectedMsg(), 'error');
