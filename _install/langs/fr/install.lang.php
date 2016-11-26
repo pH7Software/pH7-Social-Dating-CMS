@@ -15,14 +15,16 @@ $LANG = array(
     'charset' => 'utf-8',
     'lang_name' => 'Français',
     'version' => 'version',
+    'welcome_voice' => 'Salut et bienvenue  sur l\'installation de ' . Controller::SOFTWARE_NAME . ', version ' . Controller::SOFTWARE_VERSION . '. ' .
+        'J\'espère que tu vas aimer ta nouvelle web app de rencontre sociale. Bonne chance!',
     'CMS_desc' => '<p>Bienvenue à l\'installation de ' . Controller::SOFTWARE_NAME . '.<br />
-    Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>',
+        Nous vous remercions d\'avoir choisis notre CMS et nous espérons qu\'il va vous plaire.</p>',
     'choose_install_lang' => 'Veuillez choisir votre langue pour commencer l\'installation',
-    'requirements_desc' => 'ATTENTION ! Veuillez être sûr que votre serveur a les <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">exigences</a> nécessaires pour faire fonctionner correctement pH7CMS.',
+    'requirements_desc' => 'ATTENTION ! Veuillez être sûr que <abbr title="Votre serveur distant ou votre machine/PC si vous êtes en localhost">vous êtes</abbr> connecté à Internet et que votre serveur a les <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">exigences nécessaires</a> pour faire fonctionner pH7CMS.',
     'requirements2_desc' => 'Avant toute chose, veuillez créer une base de données MySQL et affecter un utilisateur à elle avec tous les privilèges. Une fois que vous avez créé la base de données MySQL et son utilisateur, assurez-vous d\'écrire le nom de la base de données, le nom d\'utilisateur et le mot de passe, car vous en aurez besoin pour l\'installation.',
     'config_path' => 'Chemin du répertoire &laquo; protected &raquo;',
     'desc_config_path' => 'Veuillez indiquer le chemin complet de votre répertoire &laquo; protected &raquo;<br />
-    Il est préférable et conseillé (mais en aucun cas pas obligatoire) de le mettre ce répertoire en dehors de la racine publique de votre site Web.',
+        Il est préférable et conseillé (mais en aucun cas pas obligatoire) de le mettre ce répertoire en dehors de la racine publique de votre site Web.',
     'need_frame' => 'Vous devez utiliser un navigateur Web qui accepte les iframes !',
     'path_protected' => 'Chemin du répertoire &laquo; protected &raquo;',
     'next' => 'Suivant',
@@ -80,11 +82,11 @@ $LANG = array(
     'admin_passwords' => 'Veuillez confirmer votre mot de passe',
     'bad_email' => 'E-mail incorrecte',
     'bad_username' => 'Votre pseudo est incorrect',
-    'username_too_short' => 'Votre pseudo est trop court, minimum 4 caractères',
-    'username_too_long' => 'Votre pseudo est trop long, maximum 40 caractères',
+    'username_too_short' => 'Votre pseudo est trop court, minimum 3 caractères',
+    'username_too_long' => 'Votre pseudo est trop long, maximum 30 caractères',
     'password_no_number' => 'Votre mot de passe doit contenir au moins un chiffre',
     'password_no_upper' => 'Votre mot de passe doit contenir au moins une majuscule',
-    'password_too_short' => 'Votre mot de passe est trop court',
+    'password_too_short' => 'Votre mot de passe est trop court. 6 caractères minimum',
     'password_too_long' => 'Votre mot de passe est trop long',
     'passwords_different' => 'Le mot de passe de confirmation ne correspond pas au mot de passe initial',
     'bad_first_name' => 'Veuillez entrer votre prénom, il doit également être compris entre 2 et 20 caractères.',
@@ -97,7 +99,7 @@ $LANG = array(
     'content_email_finish_install' => '<p><strong>Félicitations, votre site Web est maintenant installé avec succès !</strong></p>
     <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
     <p>L\'URL de VOTRE Site de Rencontre est : <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-    <p>L\'URL du panneau d\'administration est : <a href="' . PH7_URL_ROOT . 'admin123/">' . PH7_URL_ROOT . 'admin123/</a></p>
+    <p>L\'URL du panneau d\'administration est : <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
     <p>N\'oubliez pas de vous la frimer en montrant votre nouveau site de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
     <p>Enfin, si cela n\'est pas encore fait, c\'est une excellent idée pour acheter aujourd\'hui une clé de licence en vous rendant simplement sur <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">notre site Web</a> afin d\'obtenir les fonctionnalités Premium, la suppression des liens et les mentions de copyright sur votre site et même l\'accès au support de ticket illimité.</p>
     <p>&nbsp;</p>
@@ -121,7 +123,7 @@ $LANG = array(
     'social_dating_niche' => 'Niche de Rencontre Sociale',
     'social_niche' => 'Niche de Réseautage Sociale',
     'dating_niche' => 'Niche Rencontre',
-    'base_niche_desc' => 'En choisissant cette niche, tous les modules seront activés et le thème de basque (rencontre/portail social) sera activé par défaut.',
+    'base_niche_desc' => 'En choisissant cette niche, tous les modules seront activés et le thème générique (rencontre/portail social) sera activé par défaut.',
     'zendate_niche_desc' => 'En choisissant cette niche, uniquement les modules sociaux seront activés et le thème social sera activé par défaut.',
     'datelove_niche_desc' => 'En choisissant cette niche, uniquement les modules &laquo; Rencontre &raquo; seront activés et le thème Rencontre sera activé par défaut.',
     'go_social_dating' => 'Rencontre Sociale',

@@ -15,9 +15,6 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
 
-// To include SwiftMailer library
-require_once PH7_PATH_PROTECTED . 'vendor/swiftmailer/swiftmailer/lib/swift_required.php';
-
 class Mail
 {
 

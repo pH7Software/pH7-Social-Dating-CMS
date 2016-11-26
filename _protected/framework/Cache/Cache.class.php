@@ -4,7 +4,7 @@
  * @desc             Handler Cache.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Cache
  * @version          1.3
@@ -103,7 +103,7 @@ class Cache
      *
      * @param string $sGroup The Group Cache (This creates a folder).
      * @param string $sId (The ID for the file).
-     * @param integer $iTtl Cache lifetime. If NULL, the file never expires.
+     * @param integer $iTtl Cache lifetime in seconds. If NULL, the file never expires.
      * @return object this
      */
     public function start($sGroup, $sId, $iTtl)
@@ -199,7 +199,7 @@ class Cache
         return 'defined(\'PH7\') or exit(\'Restricted access\');
 /*
 Created on ' . gmdate('Y-m-d H:i:s') . '
-ID file: ' . $this->_sId . '
+File ID: ' . $this->_sId . '
 */
 /***************************************************************************
  *     ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_COMPANY . '

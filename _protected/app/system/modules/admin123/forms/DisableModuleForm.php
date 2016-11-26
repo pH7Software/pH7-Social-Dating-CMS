@@ -7,7 +7,7 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Module as ModuleModel;
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Mvc\Model\Module as ModuleModel;
 
 class DisableModuleForm
 {
@@ -34,10 +34,11 @@ class DisableModuleForm
             $sPremiumText = '';
             if ((int)$oData->premiumMod === 1)
             {
-                $sPremiumText = ' &nbsp; (<a class="italic darkred" href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Premium Module') . '</a>)';
+                $sPremiumText = ' – (<a class="italic darkred" href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Premium Module') . '</a>)';
+                $sPremiumText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default API service by yours') . '</a>';
             }
 
-            $aModuleNames[$oData->moduleId] = ucwords(str_replace(['-','_'], ' ', $oData->folderName)) . $sPremiumText;
+            $aModuleNames[$oData->moduleId] = $oData->moduleTitle . $sPremiumText;
         }
         unset($oModuleData);
 

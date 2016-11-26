@@ -10,7 +10,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
-/** For "user", "affiliate" and "admin" module **/
+/** For "user", "affiliate" and "admin" modules **/
 class ChangePasswordCoreFormProcess extends Form
 {
 
@@ -24,7 +24,8 @@ class ChangePasswordCoreFormProcess extends Form
         }
 
         // PH7\UserCoreModel::login() method of the UserCoreModel Class works only for "user" and "affiliate" module.
-        $oPasswordModel = ($this->registry->module == PH7_ADMIN_MOD) ? new AdminModel : new UserCoreModel;
+        $sClassName = ($this->registry->module == PH7_ADMIN_MOD) ? AdminModel::class : UserCoreModel::class;
+        $oPasswordModel = new $sClassName;
 
         $sEmail = ($this->registry->module == PH7_ADMIN_MOD ? $this->session->get('admin_email') : ($this->registry->module == 'user' ? $this->session->get('member_email') : $this->session->get('affiliate_email')));
         $sTable = ($this->registry->module == PH7_ADMIN_MOD ? 'Admins' : ($this->registry->module == 'user' ? 'Members' : 'Affiliates'));
@@ -56,9 +57,12 @@ class ChangePasswordCoreFormProcess extends Form
         }
         else
         {
-            // Update
+            // Regenerate the session ID to prevent session fixation attack
+            $this->session->regenerateId();
+
+            // Update the password
             $oPasswordModel->changePassword($sEmail, $this->httpRequest->post('new_password'), $sTable);
-            \PFBC\Form::setSuccess('form_change_password', t('Your password has been correctly updated.'));
+            \PFBC\Form::setSuccess('form_change_password', t('Your password has been successfully changed.'));
         }
     }
 

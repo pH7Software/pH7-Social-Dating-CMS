@@ -48,7 +48,7 @@ class Swift_CharacterReader_GenericFixedWidthReader implements Swift_CharacterRe
         $strlen = strlen($string);
         // % and / are CPU intensive, so, maybe find a better way
         $ignored = $strlen % $this->_width;
-        $ignoredChars = substr($string, -$ignored);
+        $ignoredChars = $ignored ? substr($string, -$ignored) : '';
         $currentMap = $this->_width;
 
         return ($strlen - $ignored) / $this->_width;
@@ -82,7 +82,7 @@ class Swift_CharacterReader_GenericFixedWidthReader implements Swift_CharacterRe
     {
         $needed = $this->_width - $size;
 
-        return ($needed > -1) ? $needed : -1;
+        return $needed > -1 ? $needed : -1;
     }
 
     /**

@@ -1,9 +1,11 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2015-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Api / Controller
+ * @link           http://ph7cms.com
+ * @link           http://github.com/pH7Software/pH7CMS-HTTP-REST-Push-Data
  */
 namespace PH7;
 
@@ -110,7 +112,7 @@ class UserController extends MainController
             {
                 $iId = $this->oUserModel->getId($aReqs['email']);
                 $oUserData = $this->oUserModel->readProfile($iId);
-                $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session);
+                $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session, new Framework\Mvc\Model\Security);
 
                 $this->oRest->response($this->set($aReqs));
             }
@@ -121,12 +123,40 @@ class UserController extends MainController
         }
     }
 
-    public function getUser($iId)
+    /**
+     * Get User Data.
+     *
+     * @param int $iId Profile ID
+     * @return void
+     */
+    public function user($iId = null)
     {
-
+        if ($this->oRest->getRequestMethod() != 'GET')
+        {
+            $this->oRest->response('', 406);
+        }
+        else
+        {
+            if (empty($iId))
+            {
+                $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('Profile ID Empty'))), 400);
+            }
+            else
+            {
+                $oUser = $this->oUserModel->readProfile($iId);
+                if (!empty($oUser->profileId) && $iId === $oUser->profileId)
+                {
+                    $this->oRest->response($this->set([$oUser]));
+                }
+                else
+                {
+                    $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('Profile Not Found'))), 404);
+                }
+            }
+        }
     }
 
-    public function getUsers()
+    public function users()
     {
 
     }

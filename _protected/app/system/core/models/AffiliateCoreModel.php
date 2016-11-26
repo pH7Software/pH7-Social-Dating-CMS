@@ -51,7 +51,7 @@ class AffiliateCoreModel extends AdminCoreModel
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->affiliatedId;
+            $iData = (int) @$oRow->affiliatedId;
             unset($oRow);
             $this->cache->put($iData);
         }

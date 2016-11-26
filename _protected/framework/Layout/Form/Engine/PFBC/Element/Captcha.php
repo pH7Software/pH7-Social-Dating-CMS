@@ -1,6 +1,7 @@
 <?php
 namespace PFBC\Element;
-use \CmsCompany\Framework\Mvc\Model\DbConfig;
+
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class Captcha extends \PFBC\Element {
 

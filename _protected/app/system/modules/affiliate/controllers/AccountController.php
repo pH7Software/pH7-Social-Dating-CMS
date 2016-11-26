@@ -58,20 +58,12 @@ class AccountController extends Controller
         }
         elseif ($this->httpRequest->get('delete_status') == 'nodelete')
         {
-            $this->view->content = '<span class="bold green1">' . t('Excellent choice!') . '<br />' .
-            t('You will see, you will not regret that!') . '<br />' .
-            t('At %site_name%, we are working hard to give you one of the best affiliate service!') . '</span>';
+            $this->view->delete_status = false;
             $this->design->setRedirect(Uri::get('affiliate', 'home', 'index'), null, null, 4);
         }
         else
         {
-            $this->view->content = '<span class="bold red">' . t('WARNING: If you delete your account you will not receive your money.') .
-                '<br />' . t('Are you really sure you want to delete your account?') . '</span><br /><br />
-                <a class="bold" href="' . Uri::get('affiliate', 'account',
-                'delete', 'nodelete') . '">' . t('No I changed my mind and I stay with you!') .
-                '</a> &nbsp; ' . t('OR') . ' &nbsp; <a href="' . Uri::get('affiliate',
-                'account', 'delete', 'yesdelete') . '">' . t('Yes I really want to delete my account') .
-                '</a>';
+            $this->view->delete_status = true;
         }
 
         $this->output();
@@ -89,5 +81,4 @@ class AccountController extends Controller
     {
         (new UserCore)->activateAccount($sMail, $sHash, $this->config, $this->registry, 'affiliate');
     }
-
 }

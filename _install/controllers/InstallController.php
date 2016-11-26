@@ -2,11 +2,10 @@
 /**
  * @title            InstallController Class
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Controller
- * @version          1.3
  */
 
 namespace PH7;
@@ -18,7 +17,13 @@ defined('PH7') or exit('Restricted access');
 class InstallController extends Controller
 {
 
+    /**
+     * @internal
+     * When pH7CMS will require PHP >= 5.6, whould be good to change these array attributes to array constants.
+     */
+    /*** Enable/Disable Modules according to the chosen niche ***/
     private $_aSocialMods = [
+        'connect' => '0',
         'affiliate' => '0',
         'game' => '1',
         'chat' => '0',
@@ -32,10 +37,13 @@ class InstallController extends Controller
         'newsletter' => '0',
         'invite' => '1',
         'webcam' => '1',
-        'love-calculator' => '0'
+        'love-calculator' => '0',
+        'mail' => '1',
+        'im' => '1'
     ];
 
     private $_aDatingMods = [
+        'connect' => '0',
         'affiliate' => '1',
         'game' => '0',
         'chat' => '1',
@@ -47,9 +55,19 @@ class InstallController extends Controller
         'note' => '0',
         'blog' => '1',
         'newsletter' => '1',
-        'invite' => '1',
-        'webcam' => '1',
-        'love-calculator' => '1'
+        'invite' => '0',
+        'webcam' => '0',
+        'love-calculator' => '1',
+        'mail' => '1',
+        'im' => '1'
+    ];
+
+    /*** Enable/Disable Site Settings according to the chosen niche ***/
+    private $_aSocialSettings = [
+        'social_media_widgets' => '1'
+    ];
+    private $_aDatingSettings = [
+        'social_media_widgets' => '0'
     ];
 
 
@@ -134,8 +152,8 @@ class InstallController extends Controller
                 $_SESSION['db']['type_name'] = 'MySQL';
                 $_SESSION['db']['type'] = 'mysql';
                 $_SESSION['db']['hostname'] = 'localhost';
-                $_SESSION['db']['name'] = 'ph7cms';
                 $_SESSION['db']['username'] = 'root';
+                $_SESSION['db']['name'] = 'ph7cms';
                 $_SESSION['db']['prefix'] = 'PH7_';
                 $_SESSION['db']['port'] = '3306';
                 $_SESSION['db']['charset'] = 'UTF8';
@@ -172,9 +190,9 @@ class InstallController extends Controller
                             $sConfigContent = str_replace('%db_type_name%', $_SESSION['db']['type_name'], $sConfigContent);
                             $sConfigContent = str_replace('%db_type%', $_SESSION['db']['type'], $sConfigContent);
                             $sConfigContent = str_replace('%db_hostname%', $_SESSION['db']['hostname'], $sConfigContent);
-                            $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
                             $sConfigContent = str_replace('%db_username%', clean_string($_SESSION['db']['username']), $sConfigContent);
                             $sConfigContent = str_replace('%db_password%', clean_string($_SESSION['db']['password']), $sConfigContent);
+                            $sConfigContent = str_replace('%db_name%', clean_string($_SESSION['db']['name']), $sConfigContent);
                             $sConfigContent = str_replace('%db_prefix%', clean_string($_SESSION['db']['prefix']), $sConfigContent);
                             $sConfigContent = str_replace('%db_charset%', $_SESSION['db']['charset'], $sConfigContent);
                             $sConfigContent = str_replace('%db_port%', $_SESSION['db']['port'], $sConfigContent);
@@ -301,10 +319,10 @@ class InstallController extends Controller
                                                 {
                                                     @require_once PH7_ROOT_PUBLIC . '_constants.php';
                                                     @require_once PH7_PATH_APP . 'configs/constants.php';
-                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
 
+                                                    require PH7_PATH_APP . 'includes/helpers/misc.php';
                                                     require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
-                                                    // To load "Security" class.
+                                                    // To load "\PH7\Framework\Security\Security" class
                                                     Framework\Loader\Autoloader::getInstance()->init();
 
                                                     try
@@ -449,13 +467,15 @@ class InstallController extends Controller
                         case 'zendate':
                             $bUpdateNeeded = true;
                             $sTheme = 'zendate';
-                            $aModUpdated = $this->_aSocialMods;
+                            $aModUpdate = $this->_aSocialMods;
+                            $aSettingUpdate = $this->_aSocialSettings;
                         break;
 
                         case 'datelove':
                             $bUpdateNeeded = true;
                             $sTheme = 'datelove';
-                            $aModUpdated = $this->_aDatingMods;
+                            $aModUpdate = $this->_aDatingMods;
+                            $aSettingUpdate = $this->_aDatingSettings;
                         break;
 
                         // Or for 'base', don't do anything. Just use the default settings already setup in the database
@@ -466,13 +486,22 @@ class InstallController extends Controller
                         @require_once PH7_ROOT_PUBLIC . '_constants.php';
                         @require_once PH7_PATH_APP . 'configs/constants.php';
 
+                        require PH7_PATH_APP . 'includes/helpers/misc.php';
+                        require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
+                        // To load "PH7\Framework\Mvc\Model\DbConfig" class
+                        Framework\Loader\Autoloader::getInstance()->init();
+
                         try
                         {
                             require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
-                            foreach ($aModUpdated as $sModName => $sStatus)
+                            // Enable/Disable the modules according to the chosen niche
+                            foreach ($aModUpdate as $sModName => $sStatus)
                                 $this->_updateMods($DB, $sModName, $sStatus);
 
+                            $this->_updateSettings($aSettingUpdate);
+
+                            // Set the theme for the chosen niche
                             $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
                             $rStmt = $DB->prepare($sSql);
                             $rStmt->execute(['theme' => $sTheme]);
@@ -614,6 +643,21 @@ class InstallController extends Controller
         $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'SysModsEnabled SET enabled = :status WHERE folderName = :modName LIMIT 1';
         $rStmt = $oDb->prepare($sSql);
         return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
+    }
+
+    /**
+     * Update Settings.
+     *
+     * @param array $aParams
+     * @return void
+     */
+    private function _updateSettings(array $aParams)
+    {
+        // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
+        Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
+
+        // Enable/Disable Social Media Widgets according to the chosen niche
+        Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
     }
 
     /***** Get the loading image *****/

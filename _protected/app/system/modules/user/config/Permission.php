@@ -39,7 +39,11 @@ class Permission extends PermissionCore
         }
 
         // Options and Memberships ...
-        if (!$bAdminAuth) // If the administrator is not logged
+        /*
+         * If the admin is not logged (but can be if the admin use "login as user" feature)
+         * and not redirect to payment page if the user wants to logout
+        */
+        if ((!$bAdminAuth || User::isAdminLoggedAs()) && $this->registry->action !== 'logout')
         {
             if (!$this->checkMembership() || ($bUserAuth && !$this->group->member_site_access))
             {

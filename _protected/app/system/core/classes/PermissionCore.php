@@ -23,9 +23,9 @@ abstract class PermissionCore extends Framework\Core\Core
     }
 
     /**
-     * Checks whether the user membership is still valid.
+     * Checks whether the user membership is still valid or not.
      *
-     * @return boolean
+     * @return boolean Returns TRUE if the membership is still valid (or user not logged), FALSE otherwise.
      */
     public function checkMembership()
     {
@@ -59,12 +59,12 @@ abstract class PermissionCore extends Framework\Core\Core
 
     public function signInMsg()
     {
-        return t('Please login!');
+        return t('Please sign in first');
     }
 
     public function adminSignInMsg()
     {
-        return t('Please go to the administrative part of the site and log in as administrator.');
+        return t('Please go to the admin panel of the site and log in as administrator.');
     }
 
     public function alreadyConnectedMsg()

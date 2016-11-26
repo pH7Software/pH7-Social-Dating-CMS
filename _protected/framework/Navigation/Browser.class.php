@@ -44,9 +44,9 @@ class Browser
      */
     public function cache()
     {
-        header('Cache-Control: no-cache, must-revalidate');
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600 * 24 * 30) . ' GMT');
-        header('Pragma: public');
+        header('Cache-Control: no-cache, must-revalidate');
+        header('Pragma: public'); // HTTP 1.0
         //header ('Not Modified', true, 304);
 
         return $this;
@@ -65,7 +65,7 @@ class Browser
         unset($sNow);
         header('Cache-Control: no-store, no-cache, must-revalidate');
         header('Cache-Control: post-check=0, pre-check=0', false);
-        header('Pragma: no-cache');
+        header('Pragma: no-cache'); // HTTP 1.0
 
         return $this;
     }
@@ -91,9 +91,9 @@ class Browser
     }
 
     /**
-     * Check if the user is from a mobile device or not.
+     * Check if the user is from a mobile device or desktop.
      *
-     * @return boolean
+     * @return boolean TRUE if mobile device, FALSE otherwise.
      */
     public function isMobile()
     {
@@ -112,7 +112,16 @@ class Browser
         $sUserAgent = self::getUserAgent();
         if (null !== $sUserAgent)
         {
+            // For most mobile/tablet browsers
             if (false !== strpos($sUserAgent, 'Mobile'))
+                return true;
+
+            // Mainly for (i)Phone
+            if (false !== strpos($sUserAgent, 'Phone'))
+                return true;
+
+            // For Android
+            if (false !== strpos($sUserAgent, 'Android'))
                 return true;
 
             if (false !== strpos($sUserAgent, 'Opera Mini'))

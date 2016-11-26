@@ -1,6 +1,6 @@
 <?php
 /**
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / Include / Class
@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-class Cron extends Framework\Cron\Run\Cron
+abstract class Cron extends Framework\Cron\Run\Cron
 {
 
     public function __construct()
@@ -26,8 +26,10 @@ class Cron extends Framework\Cron\Run\Cron
      */
     public function isAlreadyExec()
     {
-        if (!$this->checkDelay())
+        if (!$this->checkDelay()) {
+            Framework\Http\Http::setHeadersByCode(403);
             exit(t('This cron has already been executed.'));
+        }
     }
 
 }

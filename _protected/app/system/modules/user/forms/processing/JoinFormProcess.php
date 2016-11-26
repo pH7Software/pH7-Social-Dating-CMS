@@ -68,7 +68,7 @@ class JoinFormProcess extends Form
         {
             // Successful registration in the database for step 1!
 
-            /** Update the Affiliate Commission **/
+            /* Update the Affiliate Commission */
             if ($this->iActiveType == 0) // Only if the user's account is already activated.
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
 
@@ -103,7 +103,6 @@ class JoinFormProcess extends Form
         $aData2 = [
             'country' => $this->httpRequest->post('country'),
             'city' => $this->httpRequest->post('city'),
-            'state' => $this->httpRequest->post('state'),
             'zip_code' => $this->httpRequest->post('zip_code'),
             'profile_id' => $iProfileId
         ];
@@ -117,7 +116,7 @@ class JoinFormProcess extends Form
         }
         else
         {
-            // Register successfully in database for step 2!
+            // Registered successfully in database for step 2!
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
             Header::redirect(Uri::get('user','signup','step3'));
         }
@@ -139,7 +138,7 @@ class JoinFormProcess extends Form
         }
         else
         {
-            // Register successfully in database for step 3!
+            // Registered successfully in database for step 3!
             $this->session->set('mail_step3', $this->session->get('mail_step1'));
             Header::redirect(Uri::get('user','signup','step4'), t('Your account has just been created!'));
         }
@@ -155,12 +154,10 @@ class JoinFormProcess extends Form
         $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
         $bAvatar = (new UserCore)->setAvatar($this->session->get('profile_id'), $this->session->get('username'), $_FILES['avatar']['tmp_name'], $iApproved);
 
-        if (!$bAvatar) {
+        if (!$bAvatar)
             \PFBC\Form::setError('form_join_user4', Form::wrongImgFileTypeMsg());
-        }
-        else {
+        else
             Header::redirect(Uri::get('user','signup','done'));
-        }
     }
 
 }

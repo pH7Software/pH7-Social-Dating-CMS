@@ -11,36 +11,37 @@ use
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel,
 PH7\Framework\Mail\Mail,
+PH7\Framework\Layout\Html\Meta,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-
-    private $sTitle;
-
     public function forgot($sMod = '')
     {
+        // For better SEO, exclude not interesting pages from search engines
+        $this->view->header = Meta::NOINDEX;
+
         $this->checkMod($sMod);
 
-        $this->view->page_title = t('Forgot your password?');
-        $this->view->h2_title = t('Password Reset');
+        $this->view->page_title = t('Forgot your Password?');
+        $this->view->h1_title = t('Password Reset');
         $this->output();
     }
 
-    public function reset($sMod = '', $sMail = '', $sHash = '')
+    public function reset($sMod = '', $sEmail = '', $sHash = '')
     {
         $this->checkMod($sMod);
 
         $sTable = VariousModel::convertModToTable($sMod);
 
-        if (!(new UserCoreModel)->checkHashValidation($sMail, $sHash, $sTable))
+        if (!(new UserCoreModel)->checkHashValidation($sEmail, $sHash, $sTable))
         {
             Header::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), 'error');
         }
         else
         {
-            if (!$this->sendMail($sTable, $sMail))
+            if (!$this->sendMail($sTable, $sEmail))
                 Header::redirect($this->registry->site_url, Form::errorSendingEmail(), 'error');
             else
                 Header::redirect($this->registry->site_url, t('Your new password has been emailed to you.'));
@@ -67,23 +68,23 @@ class MainController extends Controller
      * Send the new password by email.
      *
      * @param string $sTable DB table name.
-     * @param string $sMail The user email address.
+     * @param string $sEmail The user email address.
      * @return integer Number of recipients who were accepted for delivery.
      */
-    protected function sendMail($sTable, $sMail)
+    protected function sendMail($sTable, $sEmail)
     {
         $sNewPassword = Various::genRndWord(8,40);
 
-        (new UserCoreModel)->changePassword($sMail, $sNewPassword, $sTable);
+        (new UserCoreModel)->changePassword($sEmail, $sNewPassword, $sTable);
 
-        $this->view->content = t('Hello!') . '<br />' .
-        t('Your password has been changed to %0%', '<em>"' . $sNewPassword . '"</em>') . '<br />' .
-        t('Please change it next time you login.');
+        $this->view->content = t('Hello,') . '<br />' .
+        t('Your new password is %0%', '<em>"' . $sNewPassword . '"</em>') . '<br />' .
+        t("Please change it when you're logged in (Account -> Edit Profile -> Change Password).");
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/lost-password/recover_password.tpl', $sMail);
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/recover_password.tpl', $sEmail);
 
         $aInfo = [
-            'to' => $sMail,
+            'to' => $sEmail,
             'subject' => t('Your new password - %site_name%')
         ];
 
@@ -95,5 +96,4 @@ class MainController extends Controller
         if ($sMod !== 'user' && $sMod !== 'affiliate' && $sMod !== PH7_ADMIN_MOD)
             Header::redirect($this->registry->site_url, t('No module found!'), 'error');
     }
-
 }

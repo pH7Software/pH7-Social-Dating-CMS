@@ -15,14 +15,16 @@ $LANG = array(
     'charset' => 'utf-8',
     'lang_name' => 'English',
     'version' => 'version',
+    'welcome_voice' => 'Hi and welcome to ' . Controller::SOFTWARE_NAME . ' installer, version ' . Controller::SOFTWARE_VERSION . '. ' .
+        'I really hope you will enjoy your new social dating web app.',
     'CMS_desc' => '<p>Welcome to ' . Controller::SOFTWARE_NAME . ' Installer.<br />
-    Thank you for choosing our CMS and we hope it will please you.</p>',
+        Thank you for choosing <strong>pH7CMS</strong> and we hope it will please you.</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
-    'requirements_desc' => 'WARNING! Please be sure that your server has the necessary <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">requirements</a> to run pH7CMS.',
+    'requirements_desc' => 'WARNING! Please make sure <abbr title="Your Server. On loca host it will be you (your computer)">you are</abbr> connected to the Internet and your server has the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">minimum requirements</a>.',
     'requirements2_desc' => 'First off, please create a MySQL database and assign a user to it with full privileges. Once you have created the MySQL database and its user, make sure to write down the database name, database username and password, because you will need them for installation.',
     'config_path' => '&quot;protected&quot; directory path',
     'desc_config_path' => 'Please specify the full path to your &quot;protected&quot; folder.<br />
-    It is wise and advisable (but in any case not mandatory) to put this directory outside the public root of the your Web server.',
+        It is wise and advisable (but in any case not mandatory) to put this directory outside the public root of the your Web server.',
     'need_frame' => 'You must use a Web browser that supports inline frames!',
     'path_protected' => 'Path of the &quot;protected&quot; folder',
     'next' => 'Next',
@@ -73,20 +75,20 @@ $LANG = array(
     'admin_last_name' => 'Your last name',
     'admin_username' => 'Your username (to login into the admin panel)',
     'admin_login_email' => 'Your email to login into the admin panel',
-    'admin_email' => 'Admin email address for the site',
+    'admin_email' => 'Admin email address for your site',
     'admin_return_email' => 'No-reply email address (usually noreply@yoursite.com)',
-    'admin_feedback_email' => 'Email address for the contact form of the site',
+    'admin_feedback_email' => 'Email address for the contact form of your site',
     'admin_password' => 'Your password (to login into the admin panel)',
     'admin_passwords' => 'Please confirm your password',
     'bad_email' => 'Incorrect email',
     'bad_username' => 'Your username is incorrect',
-    'username_too_short' => 'Your username is too short, at least 4 characters',
-    'username_too_long' => 'Your username is too long, maximum 40 characters',
+    'username_too_short' => 'Your username is too short, at least 3 characters',
+    'username_too_long' => 'Your username is too long, maximum 30 characters',
     'password_no_number' => 'Your password must contain at least one number',
-    'password_no_upper' => 'Your password must contain at least one uppercase',
-    'password_too_short' => 'Your password is too short',
+    'password_no_upper' => 'Your password must contain at least one uppercase letter',
+    'password_too_short' => 'Your password is too short. Must be at least 6 characters',
     'password_too_long' => 'Your password is too long',
-    'passwords_different' => 'The password confirmation doesn\'t match with the initial password',
+    'passwords_different' => 'The confirmation password doesn\'t match with the initial one',
     'bad_first_name' => 'Please enter your first name, it must also be between 2 and 20 characters.',
     'bad_last_name'=> 'Please enter your last name, it must also be between 2 and 20 characters.',
     'insecure_password' => 'For your security, your password must be different than your personal information (username, first and last name).',
@@ -97,7 +99,7 @@ $LANG = array(
     'content_email_finish_install' => '<p><strong>Congratulations, your website is now successfully installed!</strong></p>
     <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
     <p>The URL of Your OWN Social/Dating website is: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-    <p>Your Admin Panel URL is: <a href="' . PH7_URL_ROOT . 'admin123/">' . PH7_URL_ROOT . 'admin123/</a></p>
+    <p>Your Admin Panel URL is: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
     <p>Don\'t forget to show off by showing YOUR new Social/Dating Site to all your friends, your colleagues and your Facebook\'s mates (and even to your enemies... or not).</p>
     <p>Finally, if you haven\'t done it yet, it\'s a really good time to buy a license today by simply <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visiting our website</a> in order to get all Premium Modules/Features, Remove all Links and Copyright Notice on your Website and even get access to the Unlimited Support Ticket.</p>
     <p>&nbps;</p>
@@ -121,7 +123,7 @@ $LANG = array(
     'social_dating_niche' => 'Social Dating Niche',
     'social_niche' => 'Social Networking Niche',
     'dating_niche' => 'Dating Niche',
-    'base_niche_desc' => 'By choosing this niche, all modules will be enabled and the uniniche base theme will be enabled by default.',
+    'base_niche_desc' => 'By choosing this niche, the main modules will be enabled and the generic template (social dating community theme) will be enabled by default.',
     'zendate_niche_desc' => 'By choosing the Social niche, only Social modules will be enabled and the Social theme will be enabled by default.',
     'datelove_niche_desc' => 'By choosing the Dating niche, only Dating modules will be enabled on your site and the Dating theme will be enabled by default.',
     'go_social_dating' => 'Go for Social Dating!',

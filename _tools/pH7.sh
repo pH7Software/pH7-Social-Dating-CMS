@@ -2,8 +2,9 @@
 
 ##
 # Title:           Useful Unix functions
-# Description:     To work correctly, you have to execute this script when you're in the root of the project in your terminal
+# Description:     To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
+#
 # Author:          Pierre-Henry Soria <ph7software@gmail.com>
 # Copyright:       (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
@@ -21,9 +22,10 @@ function init() {
     echo "8) count php file"
     echo "9) count dir"
     echo "10) show empty file"
-    echo "11) file permissions"
-    echo "12) file strict permissions"
-    echo "13) backup"
+    echo "11) show empty dir"
+    echo "12) file permissions"
+    echo "13) file strict permissions"
+    echo "14) backup"
 
 
     read option
@@ -38,6 +40,7 @@ function init() {
       "count php file") count-php-file;;
       "count dir") count-dir;;
       "show empty file") show-empty-file;;
+      "show empty dir") show-empty-dir;;
       "file permissions") file-permissions;;
       "file strict permissions") file-strict-permissions;;
       "backup") backup;;
@@ -60,7 +63,7 @@ function clear-cache() {
         rm -rf ./_protected/data/cache/pH7tpl_cache/*
         rm -rf ./_protected/data/cache/pH7_static/*
         rm -rf ./_protected/data/cache/pH7_cache/*
-        echo "The Caches have been removed!"
+        echo "Caches have been removed!"
     fi
 }
 
@@ -92,7 +95,7 @@ function clean-code() {
         eval "$exec 's/\t/    /g'"
 
         #_clean-indent
-        echo "The code has been cleaned!"
+        echo "Code has been cleaned!"
     fi
 }
 
@@ -126,6 +129,11 @@ function show-empty-file() {
     find . -type f -size 0
 }
 
+# Display all empty directories (useful for knowing what will be ignored by Git)
+function show-empty-dir() {
+    find . -type d -empty
+}
+
 # Check and correct file permissions (CHMOD)
 # These permissions allow editing and creating files in the File Management admin module.
 function file-permissions() {
@@ -139,18 +147,18 @@ function file-permissions() {
 function file-strict-permissions() {
     _permissions 644 755
     _cache-permissions
-    echo "Permissions Strict have been changed!"
+    echo "Strict Permissions have been changed!"
 }
 
 # Backup. Create a compressed archive of the project
 function backup() {
-    echo "Specify the path ending with a SLASH where the archive will be stored"
+    echo "Specify the full path ending with a SLASH where you want the archive will be stored"
     read path
     if [ ! -d $path ]; then
         echo "The path is not a valid directory."
         exit 1
     fi
-    file="PH7CMS-backup-project.tar.bz2"
+    file="PH7CMS-backup.tar.bz2"
     full_path=$path$file
     if [ -e  $full_path ]; then
         _confirm "A backup already exists in this directory, do you want to delete it?"
@@ -161,7 +169,7 @@ function backup() {
             exit 2
         fi
     fi
-    tar -jcvf $full_path  ../
+    tar -jcvf $full_path .
     echo "Backup project successfully created into: $full_path"
 }
 

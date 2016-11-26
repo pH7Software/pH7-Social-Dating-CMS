@@ -10,22 +10,31 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Engine\Db;
+use
+PH7\Framework\Mvc\Model\Engine\Db,
+PH7\Framework\Mvc\Model\Engine\Record,
+PH7\Framework\Cache\Cache;
 
 class StatisticCoreModel extends Framework\Mvc\Model\Statistic
 {
+    const CACHE_GROUP = 'db/sys/core/statistic';
 
     /**
      * Get the date since the website has been created.
      *
      * @return string The date.
      */
-    public static function getSiteSinceDate()
+    public static function getDateOfCreation()
     {
-        $rStmt = Db::getInstance()->prepare('SELECT joinDate AS sinceDate FROM' . Db::prefix('Admins') . 'WHERE profileId = 1');
-        $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-        return $oRow->sinceDate;
+        $oCache = (new Cache)->start(self::CACHE_GROUP, 'dateofcreation', 10368000);
+
+        if (!$sSinceDate = $oCache->get()) {
+            $sSinceDate = Record::getInstance()->getOne('Admins', 'profileId', 1, 'joinDate')->joinDate;
+            $oCache->put($sSinceDate);
+        }
+        unset($oCache);
+
+        return $sSinceDate;
     }
 
     /**

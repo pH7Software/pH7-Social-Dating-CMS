@@ -125,10 +125,10 @@ class Swift_Transport_MailTransport implements Swift_Transport
         $toHeader = $message->getHeaders()->get('To');
         $subjectHeader = $message->getHeaders()->get('Subject');
 
-        if (!$toHeader) {
+        if (0 === $count) {
             $this->_throwException(new Swift_TransportException('Cannot send message without a recipient'));
         }
-        $to = $toHeader->getFieldBody();
+        $to = $toHeader ? $toHeader->getFieldBody() : '';
         $subject = $subjectHeader ? $subjectHeader->getFieldBody() : '';
 
         $reversePath = $this->_getReversePath($message);
@@ -139,7 +139,9 @@ class Swift_Transport_MailTransport implements Swift_Transport
 
         $messageStr = $message->toString();
 
-        $message->getHeaders()->set($toHeader);
+        if ($toHeader) {
+            $message->getHeaders()->set($toHeader);
+        }
         $message->getHeaders()->set($subjectHeader);
 
         // Separate headers from body
@@ -156,15 +158,16 @@ class Swift_Transport_MailTransport implements Swift_Transport
         if ("\r\n" != PHP_EOL) {
             // Non-windows (not using SMTP)
             $headers = str_replace("\r\n", PHP_EOL, $headers);
+            $subject = str_replace("\r\n", PHP_EOL, $subject);
             $body = str_replace("\r\n", PHP_EOL, $body);
         } else {
             // Windows, using SMTP
             $headers = str_replace("\r\n.", "\r\n..", $headers);
+            $subject = str_replace("\r\n.", "\r\n..", $subject);
             $body = str_replace("\r\n.", "\r\n..", $body);
         }
 
-        if ($this->_invoker->mail($to, $subject, $body, $headers,
-            sprintf($this->_extraParams, $reversePath))) {
+        if ($this->_invoker->mail($to, $subject, $body, $headers, $this->_formatExtraParams($this->_extraParams, $reversePath))) {
             if ($evt) {
                 $evt->setResult(Swift_Events_SendEvent::RESULT_SUCCESS);
                 $evt->setFailedRecipients($failedRecipients);
@@ -233,5 +236,22 @@ class Swift_Transport_MailTransport implements Swift_Transport
         }
 
         return $path;
+    }
+
+    /**
+     * Return php mail extra params to use for invoker->mail.
+     *
+     * @param $extraParams
+     * @param $reversePath
+     *
+     * @return string|null
+     */
+    private function _formatExtraParams($extraParams, $reversePath)
+    {
+        if (false !== strpos($extraParams, '-f%s')) {
+            $extraParams = empty($reversePath) ? str_replace('-f%s', '', $extraParams) : sprintf($extraParams, escapeshellarg($reversePath));
+        }
+
+        return !empty($extraParams) ? $extraParams : null;
     }
 }

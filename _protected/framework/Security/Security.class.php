@@ -54,7 +54,7 @@ final class Security
     }
 
     /**
-     * Checks if the given hash matches the given options
+     * Checks if the given hash matches the given options.
      *
      * @param string $sPwd
      * @param string $sHash
@@ -65,9 +65,9 @@ final class Security
     {
         if (password_needs_rehash($sHash, self::PWD_ALGORITHM, self::$_aPwdOptions))
             return self::hashPwd($sPwd);
+
         return false;
     }
-
 
     /**
      * Generate a hash for Cookie Password encryption.
@@ -109,5 +109,4 @@ final class Security
         $sSalt = self::PREFIX_SALT . \PH7\Framework\Ip\Ip::get() . self::SUFFIX_SALT . (new \PH7\Framework\Navigation\Browser)->getUserAgent();
         return hash_pbkdf2($sAlgo, $sVal, $sSalt, 10000, $iLength);
     }
-
 }

@@ -7,11 +7,10 @@ namespace PFBC\Validation;
 
 class Url extends \PFBC\Validation
 {
-
     public function __construct()
     {
         parent::__construct();
-        $this->message = t('Error: %element% must contain a URL (e.g., <a href="http://flirtme.biz">http://www.flirtme.biz</a>).');
+        $this->message = t('Error: %element% must contain a URL (e.g., <a href="http://meetlovelypeople.com">http://www.meetlovelypeople.com</a>).');
     }
 
     public function isValid($sValue)

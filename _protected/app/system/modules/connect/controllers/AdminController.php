@@ -12,7 +12,7 @@ class AdminController extends MainController
 
     public function config()
     {
-        $this->sTitle = t('Config Universal Login');
+        $this->sTitle = t('Config Universal Login - API Keys');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();

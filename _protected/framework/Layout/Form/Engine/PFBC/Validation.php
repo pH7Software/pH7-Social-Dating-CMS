@@ -1,7 +1,7 @@
 <?php
 /**
- * We made many changes in this code.
- * By pH7.
+ * Many changes have been made in this file.
+ * By Pierre-Henry SORIA.
  */
 namespace PFBC;
 use PH7\Framework\Security\Validate\Validate;

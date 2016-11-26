@@ -21,13 +21,24 @@ PH7\Framework\Mvc\Model\DbConfig;
 abstract class Api
 {
 
-    protected $oStr, $oData, $bDefaultVideo, $bAutoplay;
+    protected $oStr, $oData, $sApiKey, $bDefaultVideo, $bAutoplay;
 
     public function __construct()
     {
         $this->oStr = new Str;
         $this->sDefaultVideo = DbConfig::getSetting('defaultVideo');
         $this->bAutoplay = DbConfig::getSetting('autoplayVideo');
+    }
+
+    /**
+     * Set API key (currentyl required only by Youtube API class).
+     *
+     * @param string $sApiKey
+     * @return void
+     */
+    public function setKey($sApiKey)
+    {
+        $this->sApiKey = trim($sApiKey);
     }
 
     /**
@@ -42,7 +53,7 @@ abstract class Api
     }
 
     /**
-     * Gets Description (it can be redefined if the recovery of the data information is more specific).
+     * Gets description (it can be redefined if the recovery of the data information is more specific).
      *
      * @see \PH7\Framework\Video\Api::getInfo();
      * @return mixed (string | boolean) The description with escape function if found otherwise returns false.
@@ -53,10 +64,10 @@ abstract class Api
     }
 
     /**
-     * Gets Duration video (it can be redefined if the recovery of the data information is more specific).
+     * Gets video duration (it can be redefined if the recovery of the data information is more specific).
      *
      * @see \PH7\Framework\Video\Api::getInfo();
-     * @return mixed (integer | boolean) The duration video if found otherwise returns false.
+     * @return mixed (integer | boolean) The video duration if found, FALSE otherwise.
      */
     public function getDuration()
     {
@@ -84,7 +95,7 @@ abstract class Api
     public function getVideoId($sUrl)
     {
         $aData = parse_url($sUrl);
-        $sUrl = str_replace(array('://', '?', '=', '//', $aData['scheme'], $aData['host'], 'v', 'watch', 'feature', 'player_embedded'), '', $sUrl);
+        $sUrl = str_replace(array('://', 'v=', 'v/', '?', '=', '//', $aData['scheme'], $aData['host'], 'watch', 'feature', 'player_embedded'), '', $sUrl);
         $sUrl = preg_replace('#^/#', '', $sUrl);
         $sUrl = preg_replace('#^([^/&=\?]+)(?:.+)?$#i', '$1', $sUrl);
         $sUrl = str_replace(array('&', '/'), '', $sUrl); // To finish the cleaning
@@ -96,7 +107,7 @@ abstract class Api
      *
      * @access protected
      * @param string $sUrl
-     * @return mixed Returns OBJECT JSON on success or FALSE on failure.
+     * @return mixed (object | boolean) Returns data object on success or FALSE on failure.
      */
     protected function getData($sUrl)
     {

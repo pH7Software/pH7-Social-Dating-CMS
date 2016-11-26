@@ -1,11 +1,12 @@
 <?php
 /**
- * @title            Tool Class
+ * @title            API Tool Class
  *
- * @author           Pierre-Henry SORIA <ph7software@gmail.com>
+ * @author           Pierre-Henry SORIA <hello@ph7cms.com>
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Api
+ * @link             http://ph7cms.com
  */
 
 namespace PH7\Framework\Api;
@@ -23,13 +24,13 @@ class Tool
      *
      * @param \PH7\Framework\Config\Config $oConfig
      * @param \PH7\Framework\Mvc\Request\Http $oRequest
-     * @return boolean TRUE is the app has access, FALSE otherwise.
+     * @return boolean Returns TRUE if the app has access, FALSE otherwise.
      */
     public static function checkAccess(Config $oConfig, Http $oRequest)
     {
-        if (strcmp($oRequest->post('private_api_key'), $oConfig->values['api']['private_key']) === 0)
+        if (strcmp($oRequest->gets('private_api_key'), $oConfig->values['ph7cms.api']['private_key']) === 0)
         {
-            return in_array($oRequest->post('url'), $oConfig->values['api']['allow_domains']);
+            return in_array($oRequest->gets('url'), $oConfig->values['ph7cms.api']['allow_domains']);
         }
         return false;
     }

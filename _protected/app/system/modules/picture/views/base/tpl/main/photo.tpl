@@ -12,7 +12,7 @@
     <p class="italic">{lang 'Album created on %0%.', $picture->createdDate} {if !empty($picture->updatedDate)} <br>{lang 'Modified on %0%.', $picture->updatedDate} {/if}</p>
     <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($picture->pictureId,'Pictures') %}</p>
 
-    {if UserCore::auth() && $member_id == $picture->profileId}
+    {if $is_user_auth && $member_id == $picture->profileId}
       <div class="small">
         <a href="{{ $design->url('picture', 'main', 'editphoto', "$picture->albumId,$picture->title,$picture->pictureId") }}">{lang 'Edit'}</a> |
         {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletephoto', array('album_title'=>$picture->name, 'album_id'=>$picture->albumId, 'picture_id'=>$picture->pictureId, 'picture_link'=>$picture->file)) }}

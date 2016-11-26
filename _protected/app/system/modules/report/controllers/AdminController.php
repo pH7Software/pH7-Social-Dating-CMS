@@ -39,7 +39,7 @@ class AdminController extends Controller
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
         $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
-        $this->sTitle = t('Report');
+        $this->sTitle = t('Reports');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
@@ -56,7 +56,7 @@ class AdminController extends Controller
     {
         $iId = (int) $iId;
 
-        $this->sTitle = t('Watching Report');
+        $this->sTitle = t('Report #%0%', $iId);
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
         $this->view->dateTime = $this->dateTime;
@@ -84,7 +84,7 @@ class AdminController extends Controller
                 $iId = (int) $iId;
                 $this->oReportModel->delete($iId);
             }
-            $this->sMsg = t('The report has been deleted.');
+            $this->sMsg = t('Report successfully deleted.');
         }
 
         Header::redirect(Uri::get('report', 'admin', 'index'), $this->sMsg);

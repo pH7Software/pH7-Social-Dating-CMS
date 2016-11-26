@@ -14,8 +14,7 @@ PH7\Framework\Mvc\Router\Uri;
 
 class UserController extends Controller
 {
-
-    private $oAdmin, $oAdminModel, $sTitle, $sMsg, $iTotalUsers;
+    private $oAdmin, $oAdminModel, $sMsg, $iTotalUsers;
 
     public function __construct()
     {
@@ -55,9 +54,7 @@ class UserController extends Controller
             // Add the JS file for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
-            $this->sTitle = t('Browse Users');
-            $this->view->page_title = $this->sTitle;
-            $this->view->h1_title = $this->sTitle;
+            $this->view->page_title = $this->view->h1_title = t('Browse Users');
             $this->view->h3_title = t('Total Users: %0%', $this->iTotalUsers);
 
             $this->view->browse = $oBrowse;
@@ -67,33 +64,25 @@ class UserController extends Controller
 
     public function add()
     {
-        $this->sTitle = t('Add a User');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Add a User');
         $this->output();
     }
 
     public function import()
     {
-        $this->sTitle = t('Import Users');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Import Users');
         $this->output();
     }
 
     public function addFakeProfiles()
     {
-        $this->sTitle = t('Add Fake Profiles');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Add Fake Profiles');
         $this->output();
     }
 
     public function search()
     {
-        $this->sTitle = t('Search Users');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Search Users');
         $this->output();
     }
 
@@ -115,7 +104,6 @@ class UserController extends Controller
         {
             $this->iTotalUsers = $this->oAdminModel->searchUser($sWhat, $sWhere, $iGroupId, $iBan, true,
                 $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
-            $this->view->total_users = $this->iTotalUsers;
 
             $oPage = new Page;
             $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 15);
@@ -135,10 +123,8 @@ class UserController extends Controller
                 // Add the JS file for the browse form
                 $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
-                $this->sTitle = t('Users - Your search returned');
-                $this->view->page_title = $this->sTitle;
-                $this->view->h1_title = $this->sTitle;
-                $this->view->h3_title = nt('%n% User Result!', '%n% Users Result!', $this->iTotalUsers);
+                $this->view->page_title = $this->view->h1_title = t('Users - Your search returned');
+                $this->view->h3_title = nt('%n% User Result!', '%n% User Results!', $this->iTotalUsers);
                 $this->view->browse = $oSearch;
             }
 
@@ -147,29 +133,37 @@ class UserController extends Controller
         }
     }
 
-    public function loginUserAs($iId)
+    public function loginUserAs($iId = null)
     {
-        $aSessionData = [
-            'login_user_as' => 1,
-            'member_id' => $iId,
-            'member_email' => $this->oAdminModel->getEmail($iId),
-            'member_username' => $this->oAdminModel->getUsername($iId),
-            'member_first_name' => $this->oAdminModel->getFirstName($iId),
-            'member_sex' => $this->oAdminModel->getSex($iId),
-            'member_group_id' => $this->oAdminModel->getGroupId($iId),
-            'member_ip' => Framework\Ip\Ip::get(),
-            'member_http_user_agent' => $this->browser->getUserAgent(),
-            'member_token' => Framework\Util\Various::genRnd()
-        ];
+        if ($oUser = $this->oAdminModel->readProfile($iId))
+        {
+            $aSessionData = [
+                'login_user_as' => 1,
+                'member_id' => $oUser->profileId,
+                'member_email' => $oUser->email,
+                'member_username' => $oUser->username,
+                'member_first_name' => $oUser->firstName,
+                'member_sex' => $oUser->sex,
+                'member_group_id' => $oUser->groupId,
+                'member_ip' => Framework\Ip\Ip::get(),
+                'member_http_user_agent' => $this->browser->getUserAgent(),
+                'member_token' => Framework\Util\Various::genRnd($oUser->email)
+            ];
+            $this->session->set($aSessionData);
+            $this->sMsg = t('You are now logged in as member: %0%!', $oUser->username);
+            unset($oUser, $aSessionData);
 
-        $this->session->set($aSessionData);
-        Header::redirect($this->registry->site_url, t('You are now logged in as member: %0%!',
-            $this->session->get('member_username')));
+            Header::redirect($this->registry->site_url, $this->sMsg);
+        }
+        else
+        {
+            Header::redirect($this->httpRequest->previousPage(), t("This user doesn't exist."), 'error');
+        }
     }
 
     public function logoutUserAs()
     {
-        $this->sMsg = t('You are now  logged out in as a member: %0%!', $this->session->
+        $this->sMsg = t('You are now logged out as member: %0%!', $this->session->
             get('member_username'));
 
         $aSessionData = [
@@ -353,13 +347,16 @@ class UserController extends Controller
             {
                 if ($iStatus == 0)
                 {
-                    // We leave the user in disapproval, after we can ban or delete it.
+                    // Set user not active
+                    $this->oAdminModel->approve($oUser->profileId, 0);
+
+                    // We leave the user in disapproval (but send an email). After we can ban or delete it
                     $sSubject = t('Your membership account has been declined');
                     $this->sMsg = t('Sorry, Your membership account has been declined.');
                 }
                 elseif ($iStatus == 1)
                 {
-                    // Approve User
+                    // Approve user
                     $this->oAdminModel->approve($oUser->profileId, 1);
 
                     /** Update the Affiliate Commission **/
@@ -383,7 +380,7 @@ class UserController extends Controller
                     t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
                     // Send email
-                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/core/moderate_registration.tpl', $oUser->email);
+                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl', $oUser->email);
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
                     (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
 
@@ -393,7 +390,7 @@ class UserController extends Controller
                 }
                 else
                 {
-                    $sOutputMsg = t('Error! Bad argument in the url.');
+                    $sOutputMsg = t('Error! Bad argument in the URL.');
                 }
             }
             else
@@ -403,15 +400,9 @@ class UserController extends Controller
         }
         else
         {
-            $sOutputMsg = t('Error! Missing argument in the url.');
+            $sOutputMsg = t('Error! Missing argument in the URL.');
         }
 
         return $sOutputMsg;
     }
-
-    public function __destruct()
-    {
-        unset($this->oAdmin, $this->oAdminModel, $this->sTitle, $this->sMsg, $this->iTotalUsers);
-    }
-
 }

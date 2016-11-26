@@ -1,7 +1,6 @@
 .chatbox {
     position: fixed;
-    // position:expression("absolute");
-    width: 225px;
+    width: 220px;
     display:none;
     z-index:10009;
 }
@@ -13,6 +12,8 @@
 
     border-right:1px solid #f99d39;
     border-left:1px solid #f99d39;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 .chatboxblink {
@@ -26,7 +27,6 @@
     font-size: 13px;
     color: #333333;
     height:200px;
-    width:209px;
     overflow-y:auto;
     overflow-x:auto;
     padding:7px;

@@ -7,12 +7,14 @@
       Still in development. Fork the project on https://github.com/pH7Software/pH7-Social-Dating-CMS/ and contribute to it
       {{ $is_ccbill = $config->values['module.setting']['ccbill.enabled'] }}
   *}
+  {{ $is_ccbill = false }} {* Has to be removed once ccbill will be totally integrated *}
 
-  {if !$is_paypal && !$is_stripe && !$is_2co && !$is_ccbill}
+
+  {if !$is_paypal AND !$is_stripe AND !$is_2co AND !$is_ccbill}
       <p class="err_msg">{lang 'No Payment System Enabled!'}</p>
   {else}
 
-      {if $membership->enable == 1 && $membership->price != 0}
+      {if $membership->enable == 1 AND $membership->price != 0}
           {{ $oDesign = new PaymentDesign }}
 
           {if $is_paypal}

@@ -25,7 +25,7 @@ class MailFormProcess extends Form
         $oUserModel = new UserCoreModel;
         $oMailModel = new MailModel;
 
-        $bIsAdmin = (AdminCore::auth() && !UserCore::auth() && !$this->session->exists('login_user_as'));
+        $bIsAdmin = (AdminCore::auth() && !UserCore::auth() && !UserCore::isAdminLoggedAs());
         $sMessage = $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN);
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendMail');
@@ -63,8 +63,8 @@ class MailFormProcess extends Form
             }
             else
             {
-                // If the notification is accepted and the message recipient isn't connected NOW, we send a message.
-                if (!$oUserModel->isNotification($iRecipientId, 'newMsg') && $oUserModel->isOnline($iRecipientId, 0))
+                // If the notification is accepted and if the recipient isn't online, we send a notification email
+                if (!$oUserModel->isNotification($iRecipientId, 'newMsg') && !$oUserModel->isOnline($iRecipientId))
                 {
                     $this->sendMail($iRecipientId, $mSendMsg, $oUserModel);
                 }
@@ -77,6 +77,14 @@ class MailFormProcess extends Form
         }
     }
 
+    /**
+     * Send notification email.
+     *
+     * @param integer $iRecipientId
+     * @param integer $iMsgId
+     * @param UserCoreModel $oUserModel
+     * @return integer Number of recipients who were accepted for delivery.
+     */
     protected function sendMail($iRecipientId, $iMsgId, UserCoreModel $oUserModel)
     {
         $this->view->content = t('Hello %0%!', $this->httpRequest->post('recipient')) . '<br />' .
@@ -85,14 +93,14 @@ class MailFormProcess extends Form
 
         $sRecipientEmail = $oUserModel->getEmail($iRecipientId);
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/mail/new_msg.tpl', $sRecipientEmail);
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/mail/new_msg.tpl', $sRecipientEmail);
 
         $aInfo = [
             'to' => $sRecipientEmail,
             'subject' => t('New private message from %0% on %site_name%', $this->session->get('member_first_name'))
         ];
 
-        (new Mail)->send($aInfo, $sMessageHtml);
+        return (new Mail)->send($aInfo, $sMessageHtml);
     }
 
 }

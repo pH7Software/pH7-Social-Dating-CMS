@@ -130,7 +130,7 @@ class DatabaseCoreCron extends Cron
     {
         Db::repair();
 
-        echo t('Repair of the Database... Ok!') . '<br />';
+        echo t('Repair Database... Ok!') . '<br />';
     }
 
     protected function removeDeletedMsg()

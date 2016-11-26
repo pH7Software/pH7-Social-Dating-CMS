@@ -32,7 +32,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     AUTHOR = 'Pierre-Henry Soria',
     VERSION = '1.3.0',
     LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/',
-    ERR_MSG = 'FATAL LICENSE ERROR!<br /> It seems you need to upgrade your site to <a href="http://ph7cms.com/order">pH7CMSPro</a><br /> or if you hold <a href="http://ph7cms.com/pro">pH7CMSPro</a>, please contact the ticket support in order to solve the problem.',
+    ERR_MSG = 'It seems you have removed some copyright links/notice in the software. If you want to remove them, first you should upgrade your site to <a href="http://ph7cms.com/order">pH7CMSPro</a><br /> or if you hold <a href="http://ph7cms.com/pro">pH7CMSPro</a>, please contact the support to get it fixed.',
 
     /**
      * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
@@ -910,16 +910,16 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isMarkCopyright()
     {
+        // Skip this step if it's not the base template (because there is no "smartLink()" and "link()" in layout.tpl of other templates as it includes the "base" one)
+        if ($this->notBaseTheme())
+            return true;
+
         // "design->smartLink()" can be removed ONLY if you bought a license
         if (!$this->bLicense && false === strpos($this->sCode, 'design->smartLink()'))
             return false;
 
         // "design->link()" can never be removed. Copyright notices won't be displayed if you bought a license
-        return
-        (
-            (false !== strpos($this->sCode, 'design->link()')) ||
-            (false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) && false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)'))
-        );
+        return false !== strpos($this->sCode, 'design->link()');
     }
 
     /**
@@ -931,6 +931,17 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     final private function isSmallMarkCopyright()
     {
         return (false !== strpos($this->sCode, 'design->smallLink()'));
+    }
+
+    /**
+     * Check if it's not the base theme.
+     *
+     * @access private
+     * @return boolean Returns TRUE if it's not the base theme, FALSE otherwise.
+     */
+    final private function notBaseTheme()
+    {
+        return (false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) && false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)'));
     }
 
     /**
@@ -957,8 +968,9 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
 
     public function __destruct()
     {
-        parent::__destruct();
+        $this->clean();
 
+        parent::__destruct();
         unset(
           $this->designModel,
           $this->sTplFile,

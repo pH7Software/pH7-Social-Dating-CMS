@@ -1,18 +1,19 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 namespace PH7;
 
-use PH7\Framework\Navigation\Page, PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
+use
+PH7\Framework\Navigation\Page,
+PH7\Framework\Url\Header,
+PH7\Framework\Mvc\Router\Uri;
 
 class SettingController extends Controller
 {
-
-    private $sTitle;
 
     public function index()
     {
@@ -24,9 +25,7 @@ class SettingController extends Controller
         // Add Css Style for Tabs
         $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'tabs.css');
 
-        $this->sTitle = t('General Settings');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('General Settings');
         $this->output();
     }
 
@@ -43,54 +42,42 @@ class SettingController extends Controller
         // Add JS file for the ads form
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
 
-        $this->sTitle = t('Advertisement Settings');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
-        $this->view->h4_title = t('%0% Banners', $iTotalAds);
+        $this->view->page_title = $this->view->h1_title = t('Banner Settings');
+        $this->view->h4_title = nt('%n% Banner', '%n% Banners', $iTotalAds);
         $this->output();
 
     }
 
     public function addAds()
     {
-        $this->sTitle = t('Set Advertisement');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Add a New Banner');
         $this->output();
     }
 
     public function analyticsApi()
     {
-        $this->sTitle = t('Analytics Api Code');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Analytics API Code');
         $this->output();
     }
 
     public function style()
     {
-        $this->sTitle = t('Style code injection');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Style Code Injection');
         $this->output();
     }
 
     public function script()
     {
-        $this->sTitle = t('JavaScript code injection');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('JavaScript Code Injection');
         $this->output();
     }
 
     public function metaMain()
     {
-        // divShow.js for the Change Language Menu
+        // divShow.js for the Language Menu List
         $this->design->addJs(PH7_STATIC . PH7_JS, 'divShow.js');
 
-        $this->sTitle = t('Meta Tags - Settings');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Meta Tags - Settings');
 
         $aLangs = $this->file->getDirList(PH7_PATH_APP_LANG);
         if (!in_array(substr($this->httpRequest->currentUrl(), -5), $aLangs)) {
@@ -103,9 +90,7 @@ class SettingController extends Controller
 
     public function license()
     {
-        $this->sTitle = t('License Key');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('License Key');
 
         if ($this->httpRequest->getExists('set_msg'))
         {
@@ -129,7 +114,7 @@ class SettingController extends Controller
         switch (PH7_LICENSE_STATUS)
         {
             case 'active':
-                $sMsg = t('Hurrah! Your License Key was saved successfully.');
+                $sMsg = t('Hurrah! Your License Key has been saved successfully.');
                 $bIsErr = false;
             break;
 

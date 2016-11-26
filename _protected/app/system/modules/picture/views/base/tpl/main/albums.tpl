@@ -13,7 +13,7 @@
         <p>{% nl2br(Framework\Security\Ban\Ban::filterWord($album->description)) %}</p>
         <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($album->albumId,'AlbumsPictures') %}</p>
 
-        {if UserCore::auth() && $member_id == $album->profileId}
+        {if $is_user_auth && $member_id == $album->profileId}
           <div class="small">
             <a href="{{ $design->url('picture', 'main', 'editalbum', $album->albumId) }}">{lang 'Edit'}</a> |
             {{ LinkCoreForm::display(t('Delete'), 'picture', 'main', 'deletealbum', array('album_id'=>$album->albumId)) }}

@@ -14,7 +14,6 @@ use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class SignupController extends Controller
 {
-
     private $sTitle;
 
     public function step1()
@@ -75,30 +74,28 @@ class SignupController extends Controller
         $this->view->h1_title = '<div class="animated fadeInDown">' . $sH1Txt . '</div>';
         $this->view->meta_description = t('Sign Up today to meet friends, sex friends, singles, families, neighbors and many others people near or far from you! %site_name% is a free social dating with profiles, blogs, rating, hot or not, video chat rooms');
 
+        $this->setupProgressbar(1, 33);
+
         $this->output();
     }
 
     public function step2()
     {
-        $this->sTitle = t('Sign up - Step 2/3');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->setTitle(t('Sign up - Step 2/3'));
+        $this->setupProgressbar(2, 66);
         $this->output();
     }
 
     public function step3()
     {
-        $this->sTitle = t('Sign up - Step 3/3');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->setTitle(t('Sign up - Step 3/3'));
+        $this->setupProgressbar(3, 99);
         $this->output();
     }
 
     public function step4()
     {
-        $this->sTitle = t('Now, Upload a Profile Photo of you!');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->setTitle(t('Now, Upload a Profile Photo of you!'));
         $this->view->avatarDesign = new AvatarDesignCore; // Add AvatarDesign Class for displaying the avatar lightBox
         $this->output();
     }
@@ -112,4 +109,25 @@ class SignupController extends Controller
         Header::redirect(Uri::get('user','main','login'), (new Registration)->getMsg());
     }
 
+    /**
+     * @param int $iStep Number of the current step (e.g. 1, 2, 3).
+     * @param int $iPercentage Percentage of progression.
+     * @return void
+     */
+    protected function setupProgressbar($iStep, $iPercentage)
+    {
+        $this->view->progressbar_percentage = $iPercentage;
+        $this->view->progressbar_step = $iStep;
+    }
+
+    /**
+     * Set title and heading.
+     *
+     * @param string $sTitle
+     * @return void
+     */
+    private function setTitle($sTitle)
+    {
+        $this->view->page_title = $this->view->h1_title = $sTitle;
+    }
 }

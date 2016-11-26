@@ -1,5 +1,4 @@
 <div class="center">
-
     <p class="bold">{lang 'Your affiliate URL is: <em><a href="%affiliate_url%">%affiliate_url%</a></em>'}</p>
     <p>&nbsp;</p>
 
@@ -9,5 +8,4 @@
     {else}
         <p>{lang 'Unfortunately, you cannot request a payment at this time. You must have a minimum of %1%%0%.', $min_withdrawal, $currency_sign}</p>
     {/if}
-
 </div>

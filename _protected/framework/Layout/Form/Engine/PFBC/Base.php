@@ -1,6 +1,6 @@
 <?php
 /**
- * We made many changes in this code.
+ * Many changes have been made in this file.
  * By pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC;

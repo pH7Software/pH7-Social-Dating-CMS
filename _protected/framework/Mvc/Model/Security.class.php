@@ -31,24 +31,22 @@ class Security
     /**
      * Block user IP
      *
-     * @param $mIp mixed
-     * @param $iExpirationInSec integer
+     * @param string $sIp IP address.
+     * @param integer $iExpir Expiration in seconds. Default 86400
      * @return boolean Returns TRUE if no IP has been found (and the new IP has been added to the block list), otherwise FALSE.
      */
-    public function blockIp($mIp, $iExpirationInSec = 86400)
+    public function blockIp($sIp, $iExpir = 86400)
     {
-        $iIp = (preg_match('/^[0-9]+$/', $mIp)) ? $mIp : sprintf('%u', ip2long($mIp));
-
-        $iExpirationInSec = time() + (int) $iExpirationInSec;
+        $iExpir = time() + (int) $iExpir;
         $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix('BlockIp') . 'WHERE ip = :ip LIMIT 1');
-        $rStmt->bindValue(':ip', $iIp, \PDO::PARAM_INT);
+        $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
         $rStmt->execute();
 
         if ($rStmt->rowCount() == 0) // Not Found IP
         {
-            $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('BlockIp'). 'VALUES (:ip, :expires)');
-            $rStmt->bindValue(':ip', $iIp, \PDO::PARAM_INT);
-            $rStmt->bindValue(':expires', $iExpirationInSec, \PDO::PARAM_INT);
+            $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('BlockIp'). 'VALUES (:ip, :expiration)');
+            $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
+            $rStmt->bindValue(':expiration', $iExpir, \PDO::PARAM_INT);
             $rStmt->execute();
             return true;
         }

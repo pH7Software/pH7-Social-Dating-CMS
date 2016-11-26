@@ -7,7 +7,6 @@
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Cookie
- * @version          1.0
  */
 
 namespace PH7\Framework\Cookie;
@@ -19,7 +18,8 @@ class Cookie
 {
 
     /**
-     * @desc Set a PHP Cookie.
+     * Set a PHP cookie.
+     *
      * @param mixed (array | string) $mName Name of the cookie.
      * @param string $sValue value of the cookie, Optional if the cookie data is in a array.
      * @param int $iTime The time the cookie expires. This is a Unix timestamp.
@@ -29,12 +29,12 @@ class Cookie
     public function set($mName, $sValue = null, $iTime = null, $bSecure = null)
     {
         $iTime = time() + ((int) !empty($iTime) ? $iTime : Config::getInstance()->values['cookie']['expiration']);
-        $bSecure = (!empty($bSecure) && is_bool($bSecure)) ? $bSecure : (substr(PH7_URL_PROT, 0, 5) === 'https') ? true : false;
+        $bSecure = (!empty($bSecure) && is_bool($bSecure)) ? $bSecure : (substr(PH7_URL_PROT, 0, 5) === 'https');
 
         if (is_array($mName))
         {
-            foreach ($mName as $sN => $sV)
-                $this->set($sN, $sV, $iTime, $bSecure); // Recursive method
+            foreach ($mName as $sName => $sVal)
+                $this->set($sName, $sVal, $iTime, $bSecure); // Recursive method
         }
         else
         {
@@ -49,19 +49,21 @@ class Cookie
     }
 
     /**
-     * @desc Get Cookie.
+     * Get the cookie value by giving its name.
+     *
      * @param string $sName Name of the cookie.
      * @param boolean $bEscape Default TRUE
-     * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie does not exist.
+     * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
      */
     public function get($sName, $bEscape = true)
     {
         $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $sName;
-        return (!empty($_COOKIE[$sCookieName]) ? ($bEscape ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
+        return (isset($_COOKIE[$sCookieName]) ? ($bEscape ? escape($_COOKIE[$sCookieName]) : $_COOKIE[$sCookieName]) : '');
     }
 
     /**
-     * @desc Returns a boolean informing if the cookie exists or not.
+     * Returns a boolean informing if the cookie exists or not.
+     *
      * @param mixed (array | string) $mName Name of the cookie.
      * @return boolean
      */
@@ -76,14 +78,15 @@ class Cookie
         }
         else
         {
-            $bExists = (!empty($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName])) ? true : false;
+            $bExists = isset($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName]);
         }
 
         return $bExists;
     }
 
     /**
-     * @desc Delete the cookie(s) key if the cookie exists.
+     * Delete the cookie(s) key if the cookie exists.
+     *
      * @param mixed (array | string) $mName Name of the cookie to delete.
      * @return void
      */
@@ -91,8 +94,8 @@ class Cookie
     {
         if (is_array($mName))
         {
-            foreach ($mName as $sN)
-                $this->remove($sN); // Recursive method
+            foreach ($mName as $sName)
+                $this->remove($sName); // Recursive method
         }
         else
         {

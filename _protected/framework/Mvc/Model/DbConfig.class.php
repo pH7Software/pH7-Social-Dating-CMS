@@ -42,7 +42,7 @@ final class DbConfig
         {
             if (!$sData = $oCache->get())
             {
-                $rStmt = Engine\Db::getInstance()->prepare('SELECT value FROM' . Engine\Db::prefix('Settings') . 'WHERE name=:setting');
+                $rStmt = Engine\Db::getInstance()->prepare('SELECT value FROM' . Engine\Db::prefix('Settings') . 'WHERE name = :setting');
                 $rStmt->bindParam(':setting', $sSetting, \PDO::PARAM_STR);
                 $rStmt->execute();
                 $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -139,7 +139,25 @@ final class DbConfig
     }
 
     /**
-     * @param string The constant 'DbConfig::ENABLE_SITE' or 'DbConfig::MAINTENANCE_SITE'
+     * @param string $sStatus '0' = Disable | '1' = Enable. (need to be string because in DB it is an "enum").
+     * @return void
+     */
+    public static function setSocialWidgets($sStatus)
+    {
+        $sStatus = (string) $sStatus; // Cast into string to be sure it will work as in DB it's an "enum" type
+
+        self::setSetting($sStatus, 'socialMediaWidgets');
+
+        // addthis JS file's staticID is '1'
+        $rStmt = Engine\Db::getInstance()->prepare('UPDATE' . Engine\Db::prefix('StaticFiles') . 'SET active = :status WHERE staticId = 1 AND fileType = \'js\' LIMIT 1');
+        $rStmt->execute(['status' => $sStatus]);
+
+        // Clear "db/design/static" cache. '1' matches with TRUE in Design::files(); (note, don't need to clear DbConfig as it'll always be called in SettingFormProcess class which clears the cache anyway)
+        (new Cache)->start(Design::CACHE_STATIC_GROUP, 'filesjs1', null)->clear();
+    }
+
+    /**
+     * @param string $sStatus The constant 'DbConfig::ENABLE_SITE' or 'DbConfig::MAINTENANCE_SITE'
      * @return void
      */
     public static function setSiteMode($sStatus)
@@ -148,7 +166,7 @@ final class DbConfig
 
         self::setSetting($sStatus, 'siteStatus');
 
-        /* Clean DbConfig Cache */
+        /* Clear DbConfig Cache (this method is not always called in SettingFormProcess class, so clear the cache to be sure */
         (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
     }
 

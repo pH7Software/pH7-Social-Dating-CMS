@@ -8,7 +8,10 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Security\Validate\Validate, PH7\Framework\Mvc\Model\DbConfig;
+use
+PH7\Framework\Cache\Cache,
+PH7\Framework\Security\Validate\Validate,
+PH7\Framework\Mvc\Model\DbConfig;
 
 class EditFormProcess extends Form
 {
@@ -21,8 +24,10 @@ class EditFormProcess extends Form
 
         $oValidate = new Validate;
         $oAdminModel = new AdminModel;
+
         // Prohibit other administrators to edit the Root Administrator (ID 1)
         $iProfileId = ($this->httpRequest->getExists('profile_id') && $this->httpRequest->get('profile_id', 'int') !== 1) ? $this->httpRequest->get('profile_id', 'int') : $this->session->get('admin_id');
+
         $oAdmin = $oAdminModel->readProfile($iProfileId, 'Admins');
 
         if (!$this->str->equals($this->httpRequest->post('username'), $oAdmin->username))
@@ -40,7 +45,7 @@ class EditFormProcess extends Form
                 $oAdminModel->updateProfile('username', $this->httpRequest->post('username'), $iProfileId, 'Admins');
                 $this->session->set('admin_username', $this->httpRequest->post('username'));
 
-                (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'username' . $iProfileId . 'Admins', null)->clear();
+                (new Cache)->start(UserCoreModel::CACHE_GROUP, 'username' . $iProfileId . 'Admins', null)->clear();
             }
         }
 
@@ -63,7 +68,7 @@ class EditFormProcess extends Form
             $oAdminModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, 'Admins');
             $this->session->set('admin_first_name', $this->httpRequest->post('first_name'));
 
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Admins', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Admins', null)->clear();
         }
 
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oAdmin->lastName))
@@ -73,7 +78,7 @@ class EditFormProcess extends Form
         {
             $oAdminModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, 'Admins');
 
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Admins', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Admins', null)->clear();
         }
 
         if (!$this->str->equals($this->httpRequest->post('time_zone'), $oAdmin->timeZone))
@@ -86,7 +91,7 @@ class EditFormProcess extends Form
         (new Admin)->clearReadProfileCache($iProfileId, 'Admins');
 
         if (!$this->bIsErr)
-            \PFBC\Form::setSuccess('form_admin_edit_account', t('Your profile has been saved successfully!'));
+            \PFBC\Form::setSuccess('form_admin_edit_account', t('Profile successfully updated!'));
     }
 
 }

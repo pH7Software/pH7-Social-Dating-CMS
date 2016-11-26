@@ -14,7 +14,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
-
     private $oAff, $oAffModel, $sMsg, $sTitle, $iTotalUsers;
 
     public function __construct()
@@ -28,7 +27,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        Framework\Url\Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('Welcome to the administration of Ad Affiliate'));
+        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('Welcome to the administration of Ad Affiliate'));
     }
 
     public function config()
@@ -41,7 +40,7 @@ class AdminController extends Controller
 
     public function banner()
     {
-        Framework\Url\Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', 'affiliate'));
     }
 
     public function browse()
@@ -95,27 +94,36 @@ class AdminController extends Controller
         $this->output();
     }
 
-    public function loginUserAs($iId)
+    public function loginUserAs($iId = null)
     {
-        $aSessionData = [
-            'login_affiliate_as' => 1,
-            'affiliate_id' => $iId,
-            'affiliate_email' => $this->oAffModel->getEmail($iId, 'Affiliates'),
-            'affiliate_username' => $this->oAffModel->getUsername($iId, 'Affiliates'),
-            'affiliate_first_name' => $this->oAffModel->getFirstName($iId, 'Affiliates'),
-            'affiliate_sex' => $this->oAffModel->getSex($iId, null, 'Affiliates'),
-            'affiliate_ip' => Framework\Ip\Ip::get(),
-            'affiliate_http_user_agent' => $this->browser->getUserAgent(),
-            'affiliate_token' => Framework\Util\Various::genRnd()
-        ];
+        if ($oUser = $this->oAffModel->readProfile($iId, 'Affiliates'))
+        {
+            $aSessionData = [
+                'login_affiliate_as' => 1,
+                'affiliate_id' => $oUser->profileId,
+                'affiliate_email' => $oUser->email,
+                'affiliate_username' => $oUser->username,
+                'affiliate_first_name' => $oUser->firstName,
+                'affiliate_sex' => $oUser->sex,
+                'affiliate_ip' => Framework\Ip\Ip::get(),
+                'affiliate_http_user_agent' => $this->browser->getUserAgent(),
+                'affiliate_token' => Framework\Util\Various::genRnd($oUser->email)
+            ];
+            $this->session->set($aSessionData);
+            $this->sMsg = t('You are now logged in as affiliate: %0%!', $oUser->username);
+            unset($oUser, $aSessionData);
 
-        $this->session->set($aSessionData);
-        Header::redirect(Uri::get('affiliate', 'account', 'index'), t('You are now logged in as affiliate: %0%!', $this->session->get('affiliate_username')));
+            Header::redirect(Uri::get('affiliate', 'account', 'index'), $this->sMsg);
+        }
+        else
+        {
+            Header::redirect($this->httpRequest->previousPage(), t("This affiliate doesn't exist."), 'error');
+        }
     }
 
     public function logoutUserAs()
     {
-        $this->sMsg = t('You are now  logged out in as an affiliate: %0%!', $this->
+        $this->sMsg = t('You are now logged out as affiliate: %0%!', $this->
             session->get('affiliate_username'));
 
         $aSessionData = [
@@ -297,13 +305,16 @@ class AdminController extends Controller
             {
                 if ($iStatus == 0)
                 {
-                    // We leave the user in disapproval, after we can ban or delete it.
+                    // Set user not active
+                    $this->oAffModel->approve($oUser->profileId, 0, 'Affiliates');
+
+                    // We leave the user in disapproval (but send an email). After we can ban or delete it.
                     $sSubject = t('Your membership account has been declined');
                     $this->sMsg = t('Sorry, Your membership account has been declined.');
                 }
                 elseif ($iStatus == 1)
                 {
-                    // Approve User
+                    // Approve user
                     $this->oAffModel->approve($oUser->profileId, 1, 'Affiliates');
 
                     /** Update the Affiliate Commission **/
@@ -328,7 +339,7 @@ class AdminController extends Controller
                     t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
                     // Send email
-                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/core/moderate_registration.tpl', $oUser->email);
+                    $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl', $oUser->email);
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
                     (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
 
@@ -338,7 +349,7 @@ class AdminController extends Controller
                 }
                 else
                 {
-                    $sOutputMsg = t('Error! Bad argument in the url.');
+                    $sOutputMsg = t('Error! Bad argument in the URL.');
                 }
             }
             else
@@ -348,15 +359,9 @@ class AdminController extends Controller
         }
         else
         {
-            $sOutputMsg = t('Error! Missing argument in the url.');
+            $sOutputMsg = t('Error! Missing argument in the URL.');
         }
 
         return $sOutputMsg;
     }
-
-    public function __destruct()
-    {
-        unset($this->oAff, $this->oAffModel, $this->sMsg, $this->sTitle, $this->iTotalUsers);
-    }
-
 }

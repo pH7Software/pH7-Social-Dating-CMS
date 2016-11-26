@@ -7,7 +7,6 @@ namespace PFBC\Validation;
 
 class Email extends \PFBC\Validation
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -18,5 +17,4 @@ class Email extends \PFBC\Validation
     {
         return ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue));
     }
-
 }

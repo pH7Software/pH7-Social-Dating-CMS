@@ -62,11 +62,11 @@
         {content}
         <p><a href="{{ $design->url('note','main','read',"$post->username,$post->postId") }}" data-load="ajax">{lang 'See more'}</a></p>
 
-        {if UserCore::auth() && $member_id === $post->profileId}
+        {if $is_user_auth && $member_id === $post->profileId}
           <p><a class="s_button" href="{{ $design->url('note','main','edit',$post->noteId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'note','main','delete', $post->noteId, 's_button') }}</p>
         {/if}
 
-        {if AdminCore::auth() && !(new Framework\Session\Session)->exists('login_user_as')}
+        {if $is_admin_auth && !UserCore::isAdminLoggedAs()}
           {{ $action = ($post->approved == 1) ? 'disapproved' : 'approved' }}
           {{ $text = ($post->approved == 1) ? t('Disapprove') : t('Approve') }}
           <fieldset class="s_tMarg">

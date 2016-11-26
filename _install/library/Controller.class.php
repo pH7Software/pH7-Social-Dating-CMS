@@ -14,7 +14,6 @@ defined('PH7') or die('Restricted access');
 
 abstract class Controller implements IController
 {
-
     const
     SOFTWARE_NAME = 'pH7CMS',
     SOFTWARE_PREFIX_COOKIE_NAME = 'pH7',
@@ -26,12 +25,13 @@ abstract class Controller implements IController
     SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements',
     SOFTWARE_HOSTING_LIST_URL = 'http://ph7cms.com/hosting',
     SOFTWARE_HOSTING_LIST_FR_URL = 'http://ph7cms.com/doc/fr/h%C3%A9bergement-web',
-    SOFTWARE_EMAIL = 'ph7software@gmail.com',
+    SOFTWARE_EMAIL = 'hello@ph7cms.com',
     SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
     SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
     SOFTWARE_COPYRIGHT = '© (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.',
-    SOFTWARE_VERSION_NAME = 'p[H]', // 1.0 and 1.1 branches were "pOH", 1.2 branch was "pOW" and 1.3 is now "p[H]"
-    SOFTWARE_VERSION = '1.3.4',
+    // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O" and 4.* is "HCO"
+    SOFTWARE_VERSION_NAME = 'HCO',
+    SOFTWARE_VERSION = '4.0.0',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
@@ -42,13 +42,11 @@ abstract class Controller implements IController
     {
         global $LANG;
 
-        // PHP session initialization
-        if (empty($_SESSION))
-            @session_start();
+        // Initialize PHP session
+        $this->initializePHPSession();
 
         // Verify and correct the time zone if necessary
-        if (!ini_get('date.timezone'))
-            date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
+        $this->checkTimezone();
 
         // Language initialization
         $this->sCurrentLang = (new Language)->get();
@@ -79,4 +77,26 @@ abstract class Controller implements IController
         $this->oView->assign('current_lang', $this->sCurrentLang);
     }
 
+    /**
+     * Check if the session is already initialized (thanks "session_status()" PHP >= 5.4)
+     * And initialize it if it isn't the case.
+     *
+     * @return void
+     */
+    protected function initializePHPSession()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE)
+            @session_start();
+    }
+
+    /**
+     * Set a default timezone if it is not already configured.
+     *
+     * @return void
+     */
+    protected function checkTimezone()
+    {
+        if (!ini_get('date.timezone'))
+            date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
+    }
 }

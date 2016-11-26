@@ -38,14 +38,4 @@ interface IApi
      * @return string The Avatar
      */
      public function getAvatar($sUrl);
-
-    /**
-     * Add User.
-     *
-     * @param array $aData
-     * @param object \PH7\UserCoreModel $oUserModel
-     * @return void
-     */
-    public function add(array $aData, UserCoreModel $oUserModel);
-
 }

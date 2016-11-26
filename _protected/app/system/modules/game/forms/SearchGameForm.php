@@ -14,7 +14,7 @@ class SearchGameForm
 
     public static function display($iWidth = null)
     {
-        $aOptions = ['title' => t('Enter Name, Description, Keyword or ID of a Game.')];
+        $aOptions = ['description' => t('Enter Name, Description, Keyword or ID of a Game.')];
         if (!empty($iWidth)) {
             $aOptions = ['style' => 'width:' . ($iWidth*1.09) . 'px'];
         }

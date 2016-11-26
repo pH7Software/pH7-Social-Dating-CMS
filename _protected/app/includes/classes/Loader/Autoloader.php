@@ -3,7 +3,7 @@
  * @title            Autoloader Class
  * @desc             Loading classes to include additional.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / Include / Class / Loader
@@ -17,14 +17,13 @@ use \PH7\Framework\Registry\Registry;
 
 final class Autoloader
 {
-
     /**
-     * We use this class with the singleton pattern.
+     * It's a singleton class, so include the singleton trait.
      */
     use \PH7\Framework\Pattern\Singleton;
 
     /**
-     * We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
+     * We do not put a "__construct" and "__clone" "private" because it is already done in the \PH7\Framework\Pattern\Statik trait which is included in the \PH7\Framework\Pattern\Singleton trait.
      */
 
 
@@ -153,5 +152,4 @@ final class Autoloader
     {
         return str_replace('PH7\\', '', $sClass);
     }
-
 }

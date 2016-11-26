@@ -4,7 +4,7 @@
  * @desc             We define variables.
  *                   Predefined variables can save considerable resources and speeds up the code with respect to variables assigned by through the object's template engine (PH7Tpl).
  *
- * @updated          Last Update 09/24/13 01:12
+ * @updated          Last Update 07/02/16 11:02
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @category         PH7 Template Engine
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
@@ -36,6 +36,7 @@ class Variable extends Predefined
         $this->addVar('software_forum_url', 'self::SOFTWARE_FORUM_URL');
         $this->addVar('software_license_url', 'self::SOFTWARE_LICENSE_KEY_URL');
         $this->addVar('software_version', 'self::SOFTWARE_VERSION');
+        $this->addVar('is_valid_license', 'PH7_VALID_LICENSE');
 
         /***** URL *****/
         $this->addVar('url_root', '$this->registry->site_url');

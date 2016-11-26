@@ -41,7 +41,7 @@ class NewsFeedCore
         if (!$this->_aData = $this->_oCache->get())
         {
             if (!@$this->_oXml->load(static::NEWS_URL))
-                throw new Framework\Error\CException\PH7Exception('Unable to retrieve news feeds at the URL: "' . static::NEWS_URL . '"');
+                throw new Framework\Error\CException\PH7Exception('Unable to retrieve news feeds for the URL: "' . static::NEWS_URL . '"');
 
             $iCount = 0;
             foreach ($this->_oXml->getElementsByTagName('item') as $oItem)

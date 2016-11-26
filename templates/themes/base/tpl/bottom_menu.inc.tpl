@@ -20,26 +20,24 @@
           <li><a href="{{ $design->url('page','main','partner') }}" title="{lang 'Our Partners'}" data-load="ajax">{lang 'Partners'}</a></li>
           <li><a href="{{ $design->url('page','main','link') }}" title="{lang 'Links'}" data-load="ajax">{lang 'Links'}</a></li>
           <li><a href="{{ $design->url('page','main','job') }}" title="{lang 'Jobs | Careers'}" data-load="ajax">{lang 'Jobs'}</a></li>
-          <li><a href="{{ $design->url('page','main','team') }}" title="{lang 'Our Team'}" data-load="ajax">{lang 'Team'}</a></li>
           <li class="dm_self"><span class="dropdown_item">{lang 'About'}</span><i></i></li>
         </ul>
       </div> |
 
       <div role="listbox" class="dropdown_menu ft_dm">
         <span class="dropdown_item_css">
-          <a rel="nofollow" href="{{ $design->url('page','main','help') }}" class="dropdown_item" data-load="ajax">{lang 'Help'}</a>
+          <a rel="nofollow" href="{{ $design->url('page','main','faq') }}" class="dropdown_item" data-load="ajax">{lang 'Help'}</a>
         </span>
         <ul class="show_dropdown">
-          <li><a href="{{ $design->url('page','main','help') }}" title="{lang 'Help'}" data-load="ajax">{lang 'Help'}</a></li>
-          <li><a href="{{ $design->url('page','main','faq') }}" title="{lang 'FAQ'}">{lang 'FAQ'}</a></li>
+          <li><a href="{{ $design->url('page','main','faq') }}" title="{lang 'Frequently Asked Questions'}">{lang 'FAQ'}</a></li>
           <li><a href="{{ $design->url('page','main','terms') }}" title="{lang 'Terms of Use'}" data-load="ajax">{lang 'Terms of Use'}</a></li>
-          <li><a href="{{ $design->url('page','main','privacy') }}" title="{lang 'Privacy'}" data-load="ajax">{lang 'Privacy'}</a></li>
-          <li><a href="{{ $design->url('page','main','imprint') }}" title="{lang 'Imprint'}" data-load="ajax">{lang 'Imprint'}</a></li>
+          <li><a href="{{ $design->url('page','main','privacy') }}" title="{lang 'Privacy Policy'}" data-load="ajax">{lang 'Privacy'}</a></li>
+          <li><a href="{{ $design->url('page','main','legalnotice') }}" title="{lang 'Legal Notice'}" data-load="ajax">{lang 'Legal Notice'}</a></li>
           <li class="dm_self"><span class="dropdown_item">{lang 'Help'}</span><i></i></li>
         </ul>
       </div> |
 
-      {if !UserCore::auth() AND $is_newsletter_enabled}
+      {if !$is_user_auth AND $is_newsletter_enabled}
         <a href="{{ $design->url('newsletter','home','subscription') }}" title="{lang 'Subscribe to our newsletter!'}" data-popup="block-page">{lang 'Newsletter'}</a> |
       {/if}
       {if $is_invite_enabled}

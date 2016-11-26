@@ -50,7 +50,7 @@ class Contact extends Core
          <p>' . t('User Browser info: %0%', $this->browser->getUserAgent()) . '</p>
          <p>' . t('User come from: %0%', '<a href="' . $this->httpRequest->currentUrl() . '">' . t('URL Page') . '</a>') . '</p>';
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/contact/contact_form.tpl', $this->sFeedbackEmail);
+        $sHtmlMessage = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/contact/contact_form.tpl', $this->sFeedbackEmail);
 
         $aInfo = [
           'from' => $this->httpRequest->post('mail'),
@@ -59,7 +59,7 @@ class Contact extends Core
           'to' => $this->sFeedbackEmail
         ];
 
-        return (new Mail)->send($aInfo, $sMessageHtml);
+        return (new Mail)->send($aInfo, $sHtmlMessage);
     }
 
 }

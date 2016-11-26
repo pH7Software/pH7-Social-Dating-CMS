@@ -2,8 +2,8 @@
 /**
  * @title Front Controller Class
  *
- * This class is used to instantiate the Controller and the action with the MVC pattern, in short it is the heart of our software.
- * It can also retrieve the URL roads, the instantiation of languages​​, themes, database, ...
+ * This class is used to instantiate the Controller and the action with the MVC pattern, in short it is the heart of pH7CMS's software.
+ * It can also retrieve the URL roads, initialize the languages​​, themes, database, etc.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2011-2016, Pierre-Henry Soria. All Rights Reserved.
@@ -34,7 +34,7 @@ final class FrontController
 
     const INDEX_FILE = 'index.php';
 
-    private $oConfig, $oRegistry, $oHttpRequest, $oUri, $aRequestParameter, $bRouterRewriting = false;
+    private $oConfig, $oRegistry, $oHttpRequest, $oUri, $aRequestParameter, $bIsRouterRewritten = false;
 
     use \PH7\Framework\Pattern\Singleton; // Import the Singleton trait
 
@@ -61,57 +61,52 @@ final class FrontController
         }
 
         /**
-         * @internal We initialize the database after compression of static files (\PH7\Framework\Mvc\Router\FrontController::gzipRouter() method),
+         * @internal We initialize the database after the compression of static files (\PH7\Framework\Mvc\Router\FrontController::gzipRouter() method),
          * so we can always display static files even if there are problems with the database.
          */
         $this->_databaseInitialize();
+
         /**
-         * @internal This method must be declared before the rest of the code, because it initializes essential language constants for the rest of the code.
+         * @internal "_languageInitialize()" method must be declared before the rest of the code, because it initializes the main language constants for the rest of the code.
          */
         $this->_languageInitialize();
 
-        // For the resources of the assets folders
-        if ($this->oUri->fragment(0) === 'asset')
+        $this->_assetsInitialize();
+
+        $this->launchRewritingRouter();
+
+        $this->launchNonRewritingRouters();
+    }
+
+    /**
+     *  If the module action isn't rewriting, we launch the basic router.
+     *
+     * @access private
+     */
+    private function launchNonRewritingRouters()
+    {
+        if (!$this->bIsRouterRewritten)
         {
-            switch ($this->oUri->fragment(1))
-            {
-                case 'ajax':
-                    // Loading Asynchronous Ajax files
-                    $this->ajaxRouter();
-                break;
-
-                case 'file':
-                    // Loading files
-                    $this->fileRouter();
-                break;
-
-                case 'cron':
-                    // Loading Cron Jobs files
-                    $this->cronRouter();
-                break;
-
-                case 'css':
-                    // Loading Style sheet files
-                    $this->cssRouter();
-                break;
-
-                case 'js':
-                    // Loading JavaScript files
-                    $this->jsRouter();
-                break;
-
-                default:
-                    $this->notFound('Not found Asset file!', 1);
-            }
-            exit;
+            if ($this->oUri->fragment(0) === 'm')
+                $this->simpleModuleRouter();
+            else
+                $this->simpleRouter();
         }
+    }
 
+    /**
+     *  Router for the modules that are rewriting through the custom XML route file.
+     *
+     * @access private
+     */
+    private function launchRewritingRouter()
+    {
         $oUrl = UriRoute::loadFile(new \DomDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute)
         {
             if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->requestUri(), $aMatches))
             {
-                $this->bRouterRewriting = true;
+                $this->setRewritingRouter();
 
                 $sPathModule = $oRoute->getAttribute('path') . PH7_SH;
 
@@ -165,14 +160,6 @@ final class FrontController
             }
         }
         unset($oUrl);
-
-        if (empty($this->bRouterRewriting))
-        {
-            if ($this->oUri->fragment(0) === 'm')
-                $this->simpleModuleRouter();
-            else
-                $this->simpleRouter();
-        }
     }
 
     /**
@@ -319,6 +306,17 @@ final class FrontController
     }
 
     /**
+     * If the action is rewriting by the XML route file, set the correct router to be used.
+     *
+     * @access private
+     * @return void
+     */
+    private function setRewritingRouter()
+    {
+        $this->bIsRouterRewritten = true;
+    }
+
+    /**
      * @access public
      * @return void
      */
@@ -360,16 +358,16 @@ final class FrontController
     public function _languageInitialize()
     {
         if (!defined('PH7_PREF_LANG'))
-            define( 'PH7_PREF_LANG', DbConfig::getSetting('defaultLanguage') );
+            define('PH7_PREF_LANG', DbConfig::getSetting('defaultLanguage'));
 
         if (!defined('PH7_LANG_NAME')) {
             // Set the default language of the site and load the default language path
-            define( 'PH7_LANG_NAME', (new Lang)->setDefaultLang(PH7_PREF_LANG)->init()->load('global', PH7_PATH_APP_LANG)->getLang() );
+            define('PH7_LANG_NAME', (new Lang)->setDefaultLang(PH7_PREF_LANG)->init()->load('global', PH7_PATH_APP_LANG)->getLang());
         }
 
         /*** Get the ISO language code (the two first letters) ***/
-        define( 'PH7_DEFAULT_LANG_CODE', substr(PH7_DEFAULT_LANG, 0, 2) );
-        define( 'PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2) );
+        define('PH7_DEFAULT_LANG_CODE', substr(PH7_DEFAULT_LANG, 0, 2));
+        define('PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2));
 
         /*** Set locale environment variables for gettext ***/
         putenv('LC_ALL=' . PH7_LANG_NAME);
@@ -387,8 +385,10 @@ final class FrontController
         $oLoadTpl = (new LoadTemplate)->setDefaultTpl(DbConfig::getSetting('defaultTemplate'));
         $oLoadTpl->tpl();
         $oLoadTpl->modTpl();
-        define( 'PH7_TPL_NAME', $oLoadTpl->getTpl() );
-        define( 'PH7_TPL_MOD_NAME', $oLoadTpl->getModTpl() );
+        $oLoadTpl->mailTpl();
+        define('PH7_TPL_NAME', $oLoadTpl->getTpl());
+        define('PH7_TPL_MOD_NAME', $oLoadTpl->getModTpl());
+        define('PH7_TPL_MAIL_NAME', $oLoadTpl->getMailTpl());
         unset($oLoadTpl);
     }
 
@@ -408,6 +408,50 @@ final class FrontController
         $this->oRegistry->path_module_inc = $this->oRegistry->path_module . PH7_INC;
         $this->oRegistry->path_module_config = $this->oRegistry->path_module . PH7_CONFIG;
         $this->oRegistry->path_module_lang = $this->oRegistry->path_module . PH7_LANG;
+    }
+
+    /**
+     * Initialize the resources of the assets folders.
+     *
+     * @access public
+     * @return void
+     */
+    public function _assetsInitialize()
+    {
+        if ($this->oUri->fragment(0) === 'asset')
+        {
+            switch ($this->oUri->fragment(1))
+            {
+                case 'ajax':
+                    // Loading Asynchronous Ajax files
+                    $this->ajaxRouter();
+                break;
+
+                case 'file':
+                    // Loading files
+                    $this->fileRouter();
+                break;
+
+                case 'cron':
+                    // Loading Cron Jobs files
+                    $this->cronRouter();
+                break;
+
+                case 'css':
+                    // Loading Style sheet files
+                    $this->cssRouter();
+                break;
+
+                case 'js':
+                    // Loading JavaScript files
+                    $this->jsRouter();
+                break;
+
+                default:
+                    $this->notFound('Not found Asset file!', 1);
+            }
+            exit;
+        }
     }
 
     /**
@@ -542,32 +586,31 @@ final class FrontController
     {
         $this->_pathInitialize();
 
-        /***** FULL PATH OF MODULE FILE *****/
-        $this->oRegistry->path_module_controller = $this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php';
-
         /***** FOR FILE CONFIG .INI OF MODULE *****/
         $this->oConfig->load($this->oRegistry->path_module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
-        define( 'PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme'] );
+        define('PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme']);
 
         $this->_templateInitialize();
 
-        if (is_file($this->oRegistry->path_module_controller))
+        if (is_file($this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php'))
         {
             // For additional options modules
             if (is_file($this->oRegistry->path_module . 'Bootstrap.php'))
                 require_once $this->oRegistry->path_module . 'Bootstrap.php'; // Include Bootstrap Module if there exists
 
-            require_once $this->oRegistry->path_module_controller;
             $sController = 'PH7\\' . $this->oRegistry->controller;
-            $oCtrl = new $sController;
-
-            if ((new \ReflectionClass($sController))->hasMethod($this->oRegistry->action))
+            if (class_exists($sController) && (new \ReflectionClass($sController))->hasMethod($this->oRegistry->action))
             {
                 $oMvc = new \ReflectionMethod($sController, $this->oRegistry->action);
                 if ($oMvc->isPublic())
                 {
+                    $oCtrl = new $sController;
+
                     // And finally we perform the controller's action
                     $oMvc->invokeArgs($oCtrl, $this->getRequestParameter());
+
+                    // Destruct the object to minimize CPU resources
+                    unset($oCtrl);
                 }
                 else
                 {
@@ -578,8 +621,6 @@ final class FrontController
             {
                 $this->notFound('The <b>' . $this->oRegistry->action . '</b> method of the <b>' . $this->oRegistry->controller . '</b> controller does not exist.', 1);
             }
-
-            unset($oCtrl); // Destruction of the object and minimize CPU resources
         }
         else
         {
@@ -725,7 +766,7 @@ final class FrontController
 
     public function __destruct()
     {
-        unset($this->oConfig, $this->oRegistry, $this->oHttpRequest, $this->oUri, $this->bRouterRewriting);
+        unset($this->oConfig, $this->oRegistry, $this->oHttpRequest, $this->oUri, $this->bIsRouterRewritten);
     }
 
 }

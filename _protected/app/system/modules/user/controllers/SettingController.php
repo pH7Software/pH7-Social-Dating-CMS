@@ -11,7 +11,6 @@ use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class SettingController extends Controller
 {
-
     private $_sUsername, $_sFirstName, $_sSex, $_sTitle, $_iProfileId, $_bAdminLogged;
 
     public function __construct()
@@ -58,8 +57,8 @@ class SettingController extends Controller
 
     public function avatar()
     {
-        $this->view->page_title = t('Photo of profile');
-        $this->view->h2_title = t('Change your Avatar');
+        $this->view->page_title = t('Profile Photo');
+        $this->view->h2_title = t('Change your Profile Photo');
 
         if ($this->httpRequest->postExists('del'))
             $this->_removeAvatar();
@@ -116,17 +115,12 @@ class SettingController extends Controller
         }
         elseif ($this->httpRequest->get('delete_status') == 'nodelete')
         {
-            $this->view->content = '<span class="bold green1">' . t('Excellent choice!') . '<br />' .
-            t('You will see, you will not regret that!') . '<br />' .
-            t('At %site_name%, we are working hard to give you one of the best social service!') . '</span>';
+            $this->view->delete_status = false;
             $this->design->setRedirect(Uri::get('user', 'main', 'index'), null, null, 4);
         }
         else
         {
-            $this->view->content = '<span class="bold red">' . t('Are you really sure you want to delete your account?') . '</span><br /><br />
-                <a class="bold" href="' . Uri::get('user', 'setting', 'delete', 'nodelete') . '">' . t('No I changed my mind and I stay with you!') .
-                '</a> &nbsp; ' . t('OR') . ' &nbsp; <a href="' . Uri::get('user',
-                'setting', 'delete', 'yesdelete') . '">' . t('Yes I really want to delete my account') . '</a>';
+            $this->view->delete_status = true;
         }
 
         $this->output();
@@ -144,7 +138,7 @@ class SettingController extends Controller
     private function _removeAvatar()
     {
         (new UserCore)->deleteAvatar($this->_iProfileId, $this->_sUsername);
-        Header::redirect(null, t('Your avatar has been deleted successfully!'));
+        Header::redirect(null, t('Profile photo successfully deleted'));
     }
 
     private function _getWallpaper()
@@ -160,5 +154,4 @@ class SettingController extends Controller
         (new UserCore)->deleteBackground($this->_iProfileId, $this->_sUsername);
         Header::redirect(null, t('Your wallpaper has been deleted successfully!'));
     }
-
 }

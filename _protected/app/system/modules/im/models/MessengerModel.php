@@ -6,7 +6,6 @@
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7/ App / System / Module / IM / Model
- * @version        1.2
  */
 namespace PH7;
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -32,13 +31,15 @@ class MessengerModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Update Message.
      *
-     * @param string $sTo Username
+     * @param string $sFrom The 'from' username
+     * @param string $sTo The 'to' username
      * @return boolean Returns TRUE on success or FALSE on failure
      */
-    public function update($sTo)
+    public function update($sFrom, $sTo)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Messenger') .
-            'SET recd = 1 WHERE toUser = :to AND recd = 0');
+            'SET recd = 1 WHERE (fromUser = :from OR toUser = :to) AND recd = 0');
+        $rStmt->bindValue(':from', $sFrom, \PDO::PARAM_STR);
         $rStmt->bindValue(':to', $sTo, \PDO::PARAM_STR);
         return $rStmt->execute();
     }

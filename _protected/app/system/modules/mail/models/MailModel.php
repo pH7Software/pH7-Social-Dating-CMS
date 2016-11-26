@@ -16,8 +16,12 @@ class MailModel extends MailCoreModel
 
     public function readMsg($iRecipient, $iMessageId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') .
-            'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.sender = m.profileId WHERE msg.recipient = :recipient AND msg.messageId = :messageId AND NOT FIND_IN_SET(\'recipient\', msg.trash) LIMIT 1');
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') .
+            'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.sender = m.profileId
+            WHERE msg.recipient = :recipient AND msg.messageId = :messageId AND NOT FIND_IN_SET(\'recipient\', msg.trash) LIMIT 1'
+        );
+
         $rStmt->bindValue(':recipient', $iRecipient, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -26,8 +30,12 @@ class MailModel extends MailCoreModel
 
     public function readSentMsg($iSender, $iMessageId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') .
-            'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.recipient = m.profileId WHERE msg.sender = :sender AND msg.messageId = :messageId AND NOT FIND_IN_SET(\'sender\', msg.toDelete) LIMIT 1');
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') .
+            'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.recipient = m.profileId
+            WHERE msg.sender = :sender AND msg.messageId = :messageId AND NOT FIND_IN_SET(\'sender\', msg.toDelete) LIMIT 1'
+        );
+
         $rStmt->bindValue(':sender', $iSender, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -36,8 +44,13 @@ class MailModel extends MailCoreModel
 
     public function readTrashMsg($iProfileId, $iMessageId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members') .
-            'AS m ON msg.sender = m.profileId WHERE msg.recipient = :profileId AND FIND_IN_SET(\'recipient\', msg.trash) AND NOT FIND_IN_SET(\'recipient\', msg.toDelete) LIMIT 1');
+        $rStmt = Db::getInstance()->prepare(
+            'SELECT msg.*, m.profileId, m.username, m.firstName FROM' . Db::prefix('Messages') .
+            'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON msg.sender = m.profileId
+            WHERE msg.recipient = :profileId AND msg.messageId = :messageId AND FIND_IN_SET(\'recipient\', msg.trash)
+            AND NOT FIND_IN_SET(\'recipient\', msg.toDelete) LIMIT 1'
+        );
+
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -56,8 +69,10 @@ class MailModel extends MailCoreModel
      */
     public function sendMsg($iSender, $iRecipient, $sTitle, $sMessage, $sCreatedDate)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Messages') . '(sender, recipient, title, message, sendDate, status)
-            VALUES (:sender, :recipient, :title, :message, :sendDate, \'1\')');
+        $rStmt = Db::getInstance()->prepare(
+            'INSERT INTO' . Db::prefix('Messages') . '(sender, recipient, title, message, sendDate, status)
+            VALUES (:sender, :recipient, :title, :message, :sendDate, \'1\')'
+        );
         $rStmt->bindValue(':sender', $iSender, \PDO::PARAM_INT);
         $rStmt->bindValue(':recipient', $iRecipient, \PDO::PARAM_INT);
         $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
@@ -140,7 +155,7 @@ class MailModel extends MailCoreModel
         switch ($sType)
         {
             case self::INBOX:
-                $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
+                $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.trash)) AND';
             break;
 
             case self::OUTBOX:
@@ -148,7 +163,8 @@ class MailModel extends MailCoreModel
             break;
 
             case self::TRASH:
-                $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (FIND_IN_SET(\'recipient\', msg.trash)) AND (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
+                $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (FIND_IN_SET(\'recipient\', msg.trash)) AND
+                (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
             break;
 
             default:

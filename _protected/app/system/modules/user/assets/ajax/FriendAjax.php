@@ -77,9 +77,9 @@ class FriendAjax extends Core
                 $this->_sMsg = jsonMsg(1, t('This profile has been successfully added to your friends list.'));
 
                 $oUserModel = new UserCoreModel;
-                if (!$oUserModel->isNotification($iFriendId, 'friendRequest') && $oUserModel->isOnline($iFriendId, 0))
+                if (!$oUserModel->isNotification($iFriendId, 'friendRequest') && !$oUserModel->isOnline($iFriendId))
                 {
-                    // Send mail if the notification is accepted and the user isn't connected NOW.
+                    // Send email if the notification is accepted and if the user isn't online
                     $this->sendMail($iFriendId, $oUserModel);
                 }
                 unset($oUserModel);
@@ -150,7 +150,7 @@ class FriendAjax extends Core
         /* Because we work in Ajax, the constant "PH7_TPL_NAME" is not yet defined.
          * So we use the constant "PH7_DEFAULT_THEME" is already defined.
          */
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/mail/sys/mod/user/friend_request.tpl', $sFriendEmail);
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/user/friend_request.tpl', $sFriendEmail);
 
         $aInfo = [
             'to' => $sFriendEmail,

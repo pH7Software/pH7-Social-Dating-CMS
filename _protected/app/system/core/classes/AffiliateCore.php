@@ -6,7 +6,14 @@
  * @package        PH7 / App / System / Core / Class
  */
 namespace PH7;
-use PH7\Framework\Config\Config, PH7\Framework\Registry\Registry;
+use
+PH7\Framework\Session\Session,
+PH7\Framework\Util\Various,
+PH7\Framework\Ip\Ip,
+PH7\Framework\Navigation\Browser,
+PH7\Framework\Config\Config,
+PH7\Framework\Registry\Registry,
+PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 // Abstract Class
 class AffiliateCore extends UserCore
@@ -21,15 +28,55 @@ class AffiliateCore extends UserCore
      */
     public static function auth()
     {
-        $oSession = new Framework\Session\Session;
-        $oBrowser = new Framework\Navigation\Browser;
+        $oSession = new Session;
+        $bIsConnected = (((int)$oSession->exists('affiliate_id')) && $oSession->get('affiliate_ip') === Ip::get() && $oSession->get('affiliate_http_user_agent') === (new Browser)->getUserAgent());
+        unset($oSession);
 
-        $bIsConnect = (((int)$oSession->exists('affiliate_id')) && $oSession->get('affiliate_ip') === Framework\Ip\Ip::get() && $oSession->get('affiliate_http_user_agent') === $oBrowser->getUserAgent());
+        return $bIsConnected;
+    }
 
-        /** Destruction of the object and minimize CPU resources **/
-        unset($oSession, $oBrowser);
+    /**
+     * Set an affiliate authentication.
+     *
+     * @param integer object $oAffData User database object.
+     * @param object \PH7\UserCoreModel $oAffModel
+     * @param object \PH7\Framework\Session\Session $oSession
+     * @param object \PH7\Framework\Mvc\Model\Security $oSecurityModel
+     * @return void
+     */
+    public function setAuth($oAffData, UserCoreModel $oAffModel, Session $oSession, SecurityModel $oSecurityModel)
+    {
+        // Remove the session if the affiliate is logged on as "user" or "affiliate".
+        if(UserCore::auth() || AdminCore::auth())
+            $oSession->destroy();
 
-        return $bIsConnect;
+        // Regenerate the session ID to prevent session fixation attack
+        $oSession->regenerateId();
+
+        $aSessionData = [
+            'affiliate_id' => $oAffData->profileId,
+            'affiliate_email' => $oAffData->email,
+            'affiliate_username' => $oAffData->username,
+            'affiliate_first_name' => $oAffData->firstName,
+            'affiliate_sex' => $oAffData->sex,
+            'affiliate_ip' => Ip::get(),
+            'affiliate_http_user_agent' => (new Browser)->getUserAgent(),
+            'affiliate_token' => Various::genRnd($oAffData->email)
+        ];
+
+        $oSession->set($aSessionData);
+        $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
+        $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
+    }
+
+    /**
+     * Check if an admin is logged as an affiliate.
+     *
+     * @return boolean
+     */
+    public static function isAdminLoggedAs()
+    {
+        return (new Session)->exists('login_affiliate_as');
     }
 
     /**

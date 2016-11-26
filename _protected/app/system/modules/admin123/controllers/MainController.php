@@ -10,7 +10,11 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig;
+use
+PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Layout\Html\Meta,
+PH7\Framework\Core\Kernel,
+PH7\Framework\Security\Version;
 
 class MainController extends Controller
 {
@@ -24,7 +28,7 @@ class MainController extends Controller
 
         $this->view->page_title = t('Admin Panel');
         $this->view->h1_title = t('Dashboard');
-        $this->view->h2_title = t('Hello <em>%0%</em>, welcome to your site!', $this->session->get('admin_first_name'));
+        $this->view->h2_title = t('Hi <em>%0%</em>! Welcome back to your site!', $this->session->get('admin_first_name'));
         $this->view->h3_title = t('How are you today?');
 
         $this->view->is_news_feed = (bool) DbConfig::getSetting('isSoftwareNewsFeed');
@@ -48,8 +52,8 @@ class MainController extends Controller
 
     public function login()
     {
-        // Prohibit the referencing in search engines of admin page
-        $this->view->header = '<meta name="robots" content="noindex" />';
+        // Prohibit the referencing in search engines of the admin panel
+        $this->view->header = Meta::NOINDEX;
 
         $this->view->page_title = t('Sign in to Admin Panel');
         $this->view->h1_title = t('Admin Panel - Login');
@@ -69,7 +73,7 @@ class MainController extends Controller
         $oStatModel = new StatisticCoreModel;
 
         // Get the since date of the website
-        $this->view->since_date = $this->dateTime->get(StatisticCoreModel::getSiteSinceDate())->date();
+        $this->view->since_date = $this->dateTime->get(StatisticCoreModel::getDateOfCreation())->date();
 
 
         //---------- Number of Logins Members ----------//
@@ -307,12 +311,12 @@ class MainController extends Controller
 
     protected function checkUpdates()
     {
-        if (Framework\Security\Version::isUpdates())
+        if (Version::isUpdateEligible())
         {
-            $aLatestVerInfo = Framework\Security\Version::getLatestInfo();
+            $aLatestVerInfo = Version::getLatestInfo();
             $sLatestVer = t('%0% build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
 
-            $this->design->setMessage(t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it now</a> and keep your site safe and stable.', $sLatestVer, Framework\Core\Kernel::SOFTWARE_LICENSE_KEY_URL));
+            $this->design->setMessage(t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it today</a> to keep your site safe and stable.', $sLatestVer, Kernel::SOFTWARE_LICENSE_KEY_URL));
         }
     }
 

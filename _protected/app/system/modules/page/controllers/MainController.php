@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Page / Controller
@@ -10,16 +10,15 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class MainController extends Controller
 {
-
     private $sTitle;
 
     public function __construct()
     {
           parent::__construct();
-          // Enable caching for all pages of this module
+          // Enable caching for all template pages of this module
           $this->view->setCaching(true);
 
-          // Global variables for all template pages of the module
+          // Global variable for all template pages of this module
           $this->view->admin_email = DbConfig::getSetting('adminEmail');
     }
 
@@ -38,15 +37,6 @@ class MainController extends Controller
         $this->sTitle = t('About this website %site_name%');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
-        $this->output();
-    }
-
-    public function help()
-    {
-        $this->sTitle = t('Help');
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Help about of %site_name%');
         $this->view->h1_title = $this->sTitle;
         $this->output();
     }
@@ -91,11 +81,11 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function imprint()
+    public function legalNotice()
     {
-        $this->sTitle = t('Imprint');
+        $this->sTitle = t('Legal Notice');
         $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Imprint - %site_name%');
+        $this->view->meta_description = t('Legal Notice - %site_name%');
         $this->view->h1_title = $this->sTitle;
         $this->output();
     }
@@ -136,15 +126,6 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function team()
-    {
-        $this->sTitle = t("%site_name%'s Team");
-        $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
-        $this->output();
-    }
-
     public function link()
     {
         $this->sTitle = t('Links and Partners of %site_name%');
@@ -153,5 +134,4 @@ class MainController extends Controller
         $this->view->h1_title = $this->sTitle;
         $this->output();
     }
-
 }

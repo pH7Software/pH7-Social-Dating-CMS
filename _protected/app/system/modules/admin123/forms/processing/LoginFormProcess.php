@@ -11,14 +11,12 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Ip\Ip,
-PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 class LoginFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -40,7 +38,7 @@ class LoginFormProcess extends Form
         $iMaxAttempts = (int) DbConfig::getSetting('maxAdminLoginAttempts');
         $iTimeDelay = (int) DbConfig::getSetting('loginAdminAttemptTime');
 
-        if($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Admins'))
+        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Admins'))
         {
             \PFBC\Form::setError('form_admin_login', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
@@ -48,59 +46,60 @@ class LoginFormProcess extends Form
 
         /*** Check Login ***/
         $bIsLogged = $oAdminModel->adminLogin($sEmail, $sUsername, $sPassword);
-        $bIsIpBanned = !empty($sIpLogin) && $sIpLogin !== $sIp;
+        $bIpNotAllowed = !empty($sIpLogin) && $sIpLogin !== $sIp;
 
-        if(!$bIsLogged || $bIsIpBanned) // If the login is failed or if the IP address is banned
+        if (!$bIsLogged || $bIpNotAllowed) // If the login is failed or if the IP address is not allowed
         {
             sleep(2); // Security against brute-force attack to avoid drowning the server and the database
 
-            if(!$bIsLogged)
+            if (!$bIsLogged)
             {
                 $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', 'Admins');
 
-                if($bIsLoginAttempt)
+                if ($bIsLoginAttempt)
                     $oSecurityModel->addLoginAttempt('Admins');
 
-                $this->session->set('captcha_admin_enabled',1); // Enable Captcha
+                $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is Incorrect'));
             }
-            elseif($bIsIpBanned)
+            elseif ($bIpNotAllowed)
             {
-                $this->session->set('captcha_admin_enabled',1); // Enable Captcha
+                $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
-                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Bad Ip adress', 'Admins');
+                $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Wrong IP address', 'Admins');
             }
         }
         else
         {
             $oSecurityModel->clearLoginAttempts('Admins');
             $this->session->remove('captcha_admin_enabled');
-
-            // Is disconnected if the user is logged on as "user" or "affiliate".
-            if(UserCore::auth() || AffiliateCore::auth()) $this->session->destroy();
-
             $iId = $oAdminModel->getId($sEmail, null, 'Admins');
             $oAdminData = $oAdminModel->readProfile($iId, 'Admins');
 
-            // Regenerate the session ID to prevent the session fixation
-            $this->session->regenerateId();
+            $o2FactorModel = new TwoFactorAuthCoreModel(PH7_ADMIN_MOD);
+            if ($o2FactorModel->isEnabled($iId))
+            {
+                // Store the admin ID for 2FA
+                $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
-            $aSessionData = array(
-               'admin_id' => $oAdminData->profileId,
-               'admin_email' => $oAdminData->email,
-               'admin_username' => $oAdminData->username,
-               'admin_first_name' => $oAdminData->firstName,
-               'admin_ip' => $sIp,
-               'admin_http_user_agent' => $this->browser->getUserAgent(),
-               'admin_token' => Various::genRnd($oAdminData->email),
-            );
+                Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', PH7_ADMIN_MOD));
+            }
+            else
+            {
+                (new AdminCore)->setAuth($oAdminData, $oAdminModel, $this->session, $oSecurityModel);
 
-            $this->session->set($aSessionData);
-            $oSecurityModel->addLoginLog($sEmail, $sUsername, '*****', 'Logged in!', 'Admins');
-            $oAdminModel->setLastActivity($oAdminData->profileId, 'Admins');
-
-            Header::redirect(Uri::get(PH7_ADMIN_MOD,'main','index'), t('You are successfully logged!'));
+                Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('You are successfully logged in!'));
+            }
         }
     }
 
+    /**
+     * Enable the Captcha on the login form.
+     *
+     * @return void
+     */
+    protected function enableCaptcha()
+    {
+        $this->session->set('captcha_admin_enabled',1);
+    }
 }

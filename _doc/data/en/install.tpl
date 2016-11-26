@@ -1,10 +1,10 @@
 <h2>Installing the software in just 5 steps!</h2>
 
 <h3>1. Extract the pH7CMS archive</h3>
-<p>Extract the Zip archive using a file archiver software such <a href="http://sourceforge.net/projects/sevenzip/">7-Zip</a>.</p>
+<p>Extract the Zip archive using a file archiver software such as <a href="http://www.7-zip.org/download.html">7-Zip</a>.</p>
 
 <h3>2. Upload files to your server</h3>
-<p>Using an FTP client such <a href="http://filezilla-project.org" title="FileZilla Client">FileZilla</a> or cPanel File Manager.<br />
+<p>Using an FTP client such as <a href="https://filezilla-project.org/download.php?type=client" title="FileZilla Client">FileZilla</a> or cPanel File Manager.<br />
 You must transfer ALL files and folders (even license files and empty folders and files).</p>
 
 <h3>3. For optimal security</h3>
@@ -23,9 +23,10 @@ Warning, the following folders must have <em>777</em> permissions:</p>
 <pre>~/YOUR-PROTECTED-FOLDER/data/backup/*</pre>
 <pre>~/YOUR-PROTECTED-FOLDER/data/tmp/*</pre>
 <pre>~/YOUR-PROTECTED-FOLDER/data/log/*</pre>
+<pre>~/YOUR-PROTECTED-FOLDER/framework/Core/*</pre>
 <p><span class="warning">Warning, these permissions don't allow editing and creating files in the File Management admin module.</span><br />
 If you want to allow it, you need to set in numerical values <em>777</em> for all folders and <em>666</em> for all files.</p>
 
 <h3>5. Run the installation wizard</h3>
-<p>You just need to go to the following URL and follow the instructions carefully: <em>http://www.YOUR-SITE.com/<strong>_install</strong>/</em><br />
-<iframe width="560" height="315" src="//www.youtube.com/embed/PlgxdLIdmoA?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
+<p>You just need to go to the following URL and follow the instructions carefully: <em>http://www.YOUR-SITE.com/<strong>_install</strong>/</em></p>
+<p><iframe width="560" height="315" src="//www.youtube.com/embed/MrCbfnS2O4s?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>

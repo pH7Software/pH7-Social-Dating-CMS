@@ -15,6 +15,10 @@
 namespace PH7\Framework\Mvc\Request;
 defined('PH7') or exit('Restricted access');
 
+use
+PH7\Framework\Registry\Registry,
+PH7\Framework\Security as Secty;
+
 /**
  * Small example of using this class.
  *
@@ -48,7 +52,7 @@ class Http extends \PH7\Framework\Http\Http
     ONLY_XSS_CLEAN = 'XSS_CLEAN',
     NO_CLEAN = 'NO_CLEAN';
 
-    private $_sRequestUri, $_sMethod, $_aRequest, $_aGet, $_aPost;
+    private $_sRequestUri, $_sMethod, $_aRequest, $_aGet, $_aPost, $_bStrip = false;
 
     public function __construct()
     {
@@ -93,7 +97,7 @@ class Http extends \PH7\Framework\Http\Http
         {
             if (!$this->validate($this->_aGet, $mKey, $sParam)) return false;
 
-            $bExists = (!empty($this->_aGet[$mKey])) ? true : false;
+            $bExists = isset($this->_aGet[$mKey]);
         }
 
         return $bExists;
@@ -122,7 +126,7 @@ class Http extends \PH7\Framework\Http\Http
         {
             if (!$this->validate($this->_aPost, $mKey, $sParam)) return false;
 
-            $bExists = (!empty($this->_aPost[$mKey])) ? true : false;
+            $bExists = isset($this->_aPost[$mKey]);
         }
 
         return $bExists;
@@ -189,13 +193,14 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
      * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
-    public function get($sKey, $sParam = null)
+    public function get($sKey, $sParam = null, $bStrip = false)
     {
         //if ($this->_sMethod !== self::METHOD_GET) throw new Exception('GET');
 
-        if (empty($this->_aGet[$sKey]))
+        if (!isset($this->_aGet[$sKey]))
             return '';
 
         // Clear the CSRF token in the request variable
@@ -207,6 +212,7 @@ class Http extends \PH7\Framework\Http\Http
         if ($sParam === self::NO_CLEAN)
             return $this->_aGet[$sKey];
 
+        $this->_bStrip = $bStrip;
         $this->setType($this->_aGet, $sKey, $sParam);
 
         return $this->cleanData($this->_aGet, $sKey, $sParam);
@@ -217,19 +223,21 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
      * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      * @throws \PH7\Framework\Mvc\Request\Exception If the request is not POST.
      */
-    public function post($sKey, $sParam = null)
+    public function post($sKey, $sParam = null, $bStrip = false)
     {
         if ($this->_sMethod !== self::METHOD_POST) throw new Exception('POST');
 
-        if (empty($this->_aPost[$sKey]))
+        if (!isset($this->_aPost[$sKey]))
             return '';
 
         if ($sParam === self::NO_CLEAN)
             return $this->_aPost[$sKey];
 
+        $this->_bStrip = $bStrip;
         $this->setType($this->_aPost, $sKey, $sParam);
 
         return $this->cleanData($this->_aPost, $sKey, $sParam);
@@ -252,7 +260,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentUrl()
     {
-        return PH7_URL_PROT . \PH7\Framework\Server\Server::getName() . $this->_sRequestUri;
+        return PH7_URL_PROT . PH7_DOMAIN . $this->_sRequestUri;
     }
 
     /**
@@ -268,7 +276,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentController()
     {
-       return str_replace('controller', '', strtolower(\PH7\Framework\Registry\Registry::getInstance()->controller));
+       return str_replace('controller', '', strtolower(Registry::getInstance()->controller));
     }
 
     /**
@@ -291,7 +299,7 @@ class Http extends \PH7\Framework\Http\Http
     protected function validate(&$aType, $sKey, $sParam)
     {
         if (!empty($sParam))
-            if (!\PH7\Framework\Security\Validate::type($aType[$sKey], $sParam)) return false;
+            if (!Secty\Validate\Validate::type($aType[$sKey], $sParam)) return false;
 
         return true;
     }
@@ -307,8 +315,8 @@ class Http extends \PH7\Framework\Http\Http
      */
     protected function setType(&$aType, $sKey, $sType)
     {
-        if (!empty($sParam) && $sParam !== self::ONLY_XSS_CLEAN)
-            settype($aType[$sKey], $sParam);
+        if (!empty($sType) && $sType !== self::ONLY_XSS_CLEAN)
+            settype($aType[$sKey], $sType);
     }
 
     /**
@@ -327,9 +335,9 @@ class Http extends \PH7\Framework\Http\Http
             $aType[$sKey] = str_replace(array('%20','%27','%C3','%A9','%C3','%A9','%C3','%A9'), '', $aType[$sKey]);
 
         if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN)
-            return (new \PH7\Framework\Security\Validate\Filter)->xssClean($aType[$sKey]);
+            return (new Secty\Validate\Filter)->xssClean($aType[$sKey]);
 
-        return (new \PH7\Framework\Str\Str)->escape($aType[$sKey], true);
+        return escape($aType[$sKey], $this->_bStrip);
     }
 
     /**
@@ -356,7 +364,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     private function _clearCSRFToken(&$aType, $sKey)
     {
-        return preg_replace('#(\?|&)' . \PH7\Framework\Security\CSRF\Token::VAR_NAME . '\=[^/]+$#', '', $aType[$sKey]);
+        return preg_replace('#(\?|&)' . Secty\CSRF\Token::VAR_NAME . '\=[^/]+$#', '', $aType[$sKey]);
     }
 
     public function __destruct()

@@ -9,7 +9,6 @@ namespace PH7;
 
 class AdminController extends MainController
 {
-
     public function index()
     {
         Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('mail', 'admin', 'msglist'));
@@ -33,12 +32,11 @@ class AdminController extends MainController
             $this->sTitle = t('Email List');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Mail Result!', '%n% Mails Result!', $this->iTotalMails);
+            $this->view->h3_title = nt('%n% Mail Result!', '%n% Mail Results!', $this->iTotalMails);
             $this->view->msgs = $oAllMsg;
 
             $this->output();
         }
     }
-
 }
 

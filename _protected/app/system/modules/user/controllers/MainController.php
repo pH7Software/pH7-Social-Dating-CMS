@@ -22,7 +22,7 @@ class MainController extends Controller
      */
     public function index()
     {
-        // We must not put the title as this is the homepage, so this is the default title is used.
+        // We don't have to put the title here as it's the homepage, so it's the default title that is used.
 
         // For Profiles Carousel
         $this->view->userDesignModel = new UserDesignCoreModel;
@@ -37,11 +37,14 @@ class MainController extends Controller
             // Background video is used only for the Splash page
             if ($this->_getGuestTplPage() === static::GUEST_SPLASH_FILE)
             {
-                // Enable the Splash Background Video if it's enabled and if visitors aren't from a mobile devices (for performance optimization)
-                $bIsBgVideo = (bool) (DbConfig::getSetting('bgSplashVideo') && !$this->browser->isMobile());
+                // Enable the Splash Video Background if enabled
+                $bIsBgVideo = (bool) DbConfig::getSetting('bgSplashVideo');
 
                 // Assign the background video option (this tpl var is only available in index.guest_splash.tpl)
                 $this->view->is_bg_video = $bIsBgVideo;
+
+                // Number of profiles to display on the profiles block
+                $this->view->number_profiles = DbConfig::getSetting('numberProfileSplashPage');
             }
 
             $sIsCssVidSplashFile = (!empty($bIsBgVideo) && $bIsBgVideo) ? 'video_splash.css,' : '';

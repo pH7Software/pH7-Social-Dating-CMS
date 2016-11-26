@@ -51,7 +51,7 @@ class ConfigFileCoreForm
             elseif (false !== strpos($sKey, 'email'))
                 $oForm->addElement(new \PFBC\Element\Email($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
             elseif (false !== strpos($sKey, 'environment'))
-                $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array('production' => t('Production'), 'development' => t('Development')), array('description' => t('If you see "Internal Server Error" message in your site, please set to "development" mode in order to see the details of the error. If your site is on production server (and visible by everyone) please set to the production mode for security reason.'), 'value' => $sVal)));
+                $oForm->addElement(new \PFBC\Element\Select($sLabel, 'config[' . $sKey . ']', array('production' => t('Production'), 'development' => t('Development')), array('description' => t('If you see "Internal Server Error" message on your site, please set to "development" mode in order to see the details of the error. If your site is on production (and visible by everyone) please set it to the production mode for security reason.'), 'value' => $sVal)));
             elseif (ctype_digit($sVal))
                 $oForm->addElement(new \PFBC\Element\Number($sLabel, 'config[' . $sKey . ']', array('step' => 'any', 'value' => $sVal)));
             else

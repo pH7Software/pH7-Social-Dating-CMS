@@ -4,19 +4,46 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-#logo{float:left}
+#logo {
+    float: left;
+    margin-top: 20px;
+}
+#headings,.noscript {
+    margin-top: 0;
+}
 
 .folio_block {
     position: absolute;
 }
 .carousel {
-    margin-top:30px;
+    margin-top: 30px;
 }
 
 .splash_slideshow {
     float: left;
-    margin-top:22px;
+    margin-top: 22px;
 }
+
+/** Avatar Profiles Block **/
+.pic_block {
+  margin:5px 0 15px;
+}
+.pic_block:hover a {
+  opacity:0.5;
+  transition: opacity .35s ease-in-out;
+  -webkit-transition: opacity .35s ease-in-out;
+  -moz-transition: opacity .35s ease-in-out;
+  -o-transition: opacity .35s ease-in-out;
+  -ms-transition: opacity .35s ease-in-out;
+  -khtml-transition: opacity .35s ease-in-out;
+}
+.pic_block a:hover {
+  opacity: 1;
+}
+.pic img:hover {
+  opacity:1 !important; /* Rewrite the .pic class for splash page (already defined in style.css) */
+}
+
 
 .window, .profiles_window {
     border:1px solid #999;
@@ -24,7 +51,11 @@
     overflow: hidden;
     position: relative;
 }
-h1:hover{color:#1877D5;cursor:default}
+
+h1:hover {
+  color:#1877D5;
+  cursor:default;
+}
 
 .img_reel {
     position: absolute;
@@ -58,8 +89,16 @@ h1:hover{color:#1877D5;cursor:default}
 .counter{margin:15px 2px 4px 1px}
 
 /** Buttons (links) **/
-.bt_login_remember{margin-top:-1.5%}
-.bt_login_forgot{margin-top:-2px}
+.bt_login_remember, .bt_login_forgot {
+  width: 200px;
+  margin-left: 5px;
+}
+.bt_login_remember {
+  margin-top: -8px;
+}
+.bt_login_forgot{
+  margin-top: -2px;
+}
 
 
 video#bgvid {
@@ -73,11 +112,13 @@ video#bgvid {
   z-index: -100;
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
-  background: url('../img/splash_vid.jpg') no-repeat;
   background-size: cover;
 }
 
-.login_block{margin:-45px 0 0 45%}
+.login_block {
+  margin:-52px 0 10px 52%;
+  width: 580px;
+}
 
 /* Slideshow */
 .window {height:300px;width:590px}
@@ -102,7 +143,7 @@ video#bgvid {
 @media (max-width: 1230px)
 {
     .window {height:200px;width:393px}
-    .profiles_window{margin:2px;max-height:230px;max-width:393px}
+    .profiles_window{margin:2px;max-height:280px;max-width:393px}
     .img_reel img{float:left;height:200px;width:393px}
 }
 /* 925px or less */
@@ -114,4 +155,5 @@ video#bgvid {
         margin-right:auto;
         width:80%;
     }
+    .center{width:auto} /* Reset with property for small screens */
 }

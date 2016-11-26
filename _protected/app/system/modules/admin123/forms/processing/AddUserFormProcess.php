@@ -11,7 +11,6 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use
-PH7\Framework\Util\Various,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
@@ -46,8 +45,9 @@ class AddUserFormProcess extends Form
         ];
 
         $iProfileId = (new UserCoreModel)->add($aData);
-        if (!empty($_FILES['avatar']['tmp_name']))
+        if (!empty($_FILES['avatar']['tmp_name'])) {
             (new UserCore)->setAvatar($iProfileId, $aData['username'], $_FILES['avatar']['tmp_name'], 1);
+        }
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The user has been successfully added.'));
     }

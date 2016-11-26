@@ -2,7 +2,7 @@
  * Japanese translation
  * @author Tomoaki Yoshida <info@yoshida-studio.jp>
  * @author Naoki Sawada <hypweb@gmail.com>
- * @version 2015-12-30
+ * @version 2016-09-10
  */
 if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object') {
     elFinder.prototype.i18.jp = {
@@ -54,7 +54,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errMkOutLink'         : 'ボリュームルート外へのリンクを作成することはできません', // from v2.1 added 03.10.2015
             'errUpload'            : 'アップロードエラー',  // old name - errUploadCommon
             'errUploadFile'        : '"$1"がアップロードできません', // old name - errUpload
-            'errUploadNoFiles'     : 'アップロードされたファイルがありません',
+            'errUploadNoFiles'     : 'アップロードされたファイルはありません',
             'errUploadTotalSize'   : 'データが許容サイズを超えています', // old name - errMaxSize
             'errUploadFileSize'    : 'ファイルが許容サイズを超えています', //  old name - errFileMaxSize
             'errUploadMime'        : '許可されていないファイル形式です',
@@ -80,7 +80,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errResizeDegree'      : 'イメージの回転角度が不正です',  // added 7.3.2013
             'errResizeRotate'      : 'イメージを回転できません',  // added 7.3.2013
             'errResizeSize'        : '指定されたイメージサイズが不正です',  // added 7.3.2013
-            'errResizeNoChange'    : 'イメージサイズなどの変更がありません',  // added 7.3.2013
+            'errResizeNoChange'    : 'イメージサイズなどの変更点がありません',  // added 7.3.2013
             'errUsupportType'      : 'このファイルタイプはサポートされません',
             'errNotUTF8Content'    : 'ファイル "$1" には UTF-8 以外の文字が含まれているので編集できません',  // added 9.11.2011
             'errNetMount'          : '"$1"をマウントできません', // added 17.04.2012
@@ -97,6 +97,8 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errNetUnMount'        : 'アンマウントできません', // from v2.1 added 30.04.2012
             'errConvUTF8'          : 'UTF-8 に変換できませんでした', // from v2.1 added 08.04.2014
             'errFolderUpload'      : 'フォルダをアップロードしたいのであれば、Google Chrome を使用してください', // from v2.1 added 26.6.2015
+            'errSearchTimeout'     : '"$1"を検索中にタイムアウトしました。検索結果は部分的です。', // from v2.1 added 12.1.2016
+            'errReauthRequire'     : '再認可が必要です', // from v2.1.10 added 3.24.2016
 
             /******************************* commands names ********************************/
             'cmdarchive'   : 'アーカイブ作成',
@@ -113,6 +115,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'cmdhome'      : 'ホーム',
             'cmdinfo'      : '情報',
             'cmdmkdir'     : '新規フォルダー',
+            'cmdmkdirin'   : '新規フォルダーへ', // from v2.1.7 added 19.2.2016
             'cmdmkfile'    : '新規テキストファイル',
             'cmdopen'      : '開く',
             'cmdpaste'     : 'ペースト',
@@ -130,6 +133,10 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'cmdnetunmount': 'アンマウント', // from v2.1 added 30.04.2012
             'cmdplaces'    : 'お気に入りへ', // added 28.12.2014
             'cmdchmod'     : '属性変更', // from v2.1 added 20.6.2015
+            'cmdopendir'   : 'フォルダを開く', // from v2.1 added 13.1.2016
+            'cmdcolwidth'  : '列幅リセット', // from v2.1.13 added 12.06.2016
+            'cmdfullscreen': 'フルスクリーン', // from v2.1.15 added 03.08.2016
+            'cmdmove'      : '移動', // from v2.1.15 added 21.08.2016
 
             /*********************************** buttons ***********************************/
             'btnClose'  : '閉じる',
@@ -178,6 +185,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'ntfurl'      : 'リンクURLを取得しています', // from v2.1 added 11.03.2014
             'ntfchmod'    : 'ファイル属性を変更しています', // from v2.1 added 20.6.2015
             'ntfpreupload': 'アップロードファイル名を検証しています', // from v2.1 added 31.11.2015
+            'ntfzipdl'    : 'ダウンロード用ファイルを作成しています', // from v2.1.7 added 23.1.2016
 
             /************************************ dates **********************************/
             'dateUnknown' : '不明',
@@ -228,6 +236,11 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'sortsize'          : 'サイズ順',
             'sortdate'          : '日付順',
             'sortFoldersFirst'  : 'フォルダ優先',
+            'sortperm'          : '権限順',      // from v2.1.13 added 13.06.2016
+            'sortmode'          : '属性順',      // from v2.1.13 added 13.06.2016
+            'sortowner'         : 'オーナー順',  // from v2.1.13 added 13.06.2016
+            'sortgroup'         : 'グループ順',  // from v2.1.13 added 13.06.2016
+            'sortAlsoTreeview'  : 'ツリービューも',  // from v2.1.15 added 01.08.2016
 
             /********************************** new items **********************************/
             'untitled file.txt' : '新規ファイル.txt', // added 10.11.2015
@@ -329,6 +342,26 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'emptyFolder'     : '空のフォルダ', // from v2.1.6 added 30.12.2015
             'emptyFolderDrop' : '空のフォルダ\\Aアイテムを追加するにはここへドロップ', // from v2.1.6 added 30.12.2015
             'emptyFolderLTap' : '空のフォルダ\\Aアイテムを追加するにはここをロングタップ', // from v2.1.6 added 30.12.2015
+            'quality'         : '品質', // from v2.1.6 added 5.1.2016
+            'autoSync'        : '自動更新',  // from v2.1.6 added 10.1.2016
+            'moveUp'          : '上へ移動',  // from v2.1.6 added 18.1.2016
+            'getLink'         : 'リンクURLを取得', // from v2.1.7 added 9.2.2016
+            'selectedItems'   : '選択アイテム ($1)', // from v2.1.7 added 2.19.2016
+            'folderId'        : 'フォルダID', // from v2.1.10 added 3.25.2016
+            'offlineAccess'   : 'オフライン アクセスを可能にする', // from v2.1.10 added 3.25.2016
+            'reAuth'          : '再認証する', // from v2.1.10 added 3.25.2016
+            'nowLoading'      : '読み込んでいます...', // from v2.1.12 added 4.26.2016
+            'openMulti'       : '複数ファイルオープン', // from v2.1.12 added 5.14.2016
+            'openMultiConfirm': '$1 個のファイルを開こうとしています。このままブラウザで開きますか？', // from v2.1.12 added 5.14.2016
+            'emptySearch'     : '検索対象に該当するアイテムはありません', // from v2.1.12 added 5.16.2016
+            'editingFile'     : 'ファイルを編集中です', // from v2.1.13 added 6.3.2016
+            'hasSelected'     : '$1 個のアイテムを選択中です', // from v2.1.13 added 6.3.2016
+            'hasClipboard'    : '$1 個のアイテムがクリップボードに入っています', // from v2.1.13 added 6.3.2016
+            'incSearchOnly'   : '逐次検索対象は現在のビューのみです', // from v2.1.13 added 6.30.2016
+            'reinstate'       : '元に戻す', // from v2.1.15 added 3.8.2016
+            'complete'        : '$1 完了', // from v2.1.15 added 21.8.2016
+            'contextmenu'     : 'コンテキストメニュー', // from v2.1.15 added 9.9.2016
+            'pageTurning'     : 'ページめくり', // from v2.1.15 added 9.10.2016
 
             /********************************** mimetypes **********************************/
             'kindUnknown'     : '不明',

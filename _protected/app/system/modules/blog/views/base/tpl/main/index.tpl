@@ -47,9 +47,9 @@
 
       <h1><a href="{{ $design->url('blog','main','read',$post->postId) }}" title="{% $post->title %}" data-load="ajax">{% escape($post->title) %}</a></h1>
 
-      <div class="left"><a href="{{ $design->url('blog','main','read',$post->postId) }}" class="m_pic thumb" data-load="ajax"><img src="{% Blog::getThumb($post->blogId) %}" alt="{% $post->pageTitle %}" title="{% $post->pageTitle %}" /></a></div>
+      <div class="left"><a href="{{ $design->url('blog','main','read',$post->postId) }}" class="pic thumb" data-load="ajax"><img src="{% Blog::getThumb($post->blogId) %}" alt="{% $post->pageTitle %}" title="{% $post->pageTitle %}" /></a></div>
 
-      {* We do not screen the words with \PH7\Framework\Security\Ban\Ban::filterWord() method since this blog is allowed only to administrators *}
+      {* Don't check the post with \PH7\Framework\Security\Ban\Ban::filterWord() since this blog is only allowed for administrators *}
       {% escape($this->str->extract($post->content,0,400), true) %}
       <p><a href="{{ $design->url('blog','main','read',$post->postId) }}" data-load="ajax">{lang 'See more'}</a></p>
 

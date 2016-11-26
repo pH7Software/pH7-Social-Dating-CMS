@@ -25,7 +25,7 @@ class ValidateSiteCore
     public static function needInject(Framework\Session\Session $oSess)
     {
         $oVSModel = new ValidateSiteCoreModel;
-        $iSinceSiteCreated = VDate::getTime(StatisticCoreModel::getSiteSinceDate());
+        $iSinceSiteCreated = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
         // After over 2 months, the site is still not validated, maybe the validation box doesn't really work, so we redirected to the page form
         if (!$oVSModel->is() && VDate::setTime('-2 months') > $iSinceSiteCreated && !$oSess->exists(self::SESS_IS_VISITED)) {

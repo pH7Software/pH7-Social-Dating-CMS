@@ -26,8 +26,6 @@ class MainController extends Controller
         $this->_iProfileId = $this->session->get('member_id');
         $this->_bAdminLogged = (AdminCore::auth() && !UserCore::auth());
 
-        $this->view->dateTime = $this->dateTime;
-
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
         $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
 
@@ -106,7 +104,7 @@ class MainController extends Controller
 
     public function outbox()
     {
-        $this->view->page_title = t('MailBox : Outbox');
+        $this->view->page_title = t('MailBox : Messages Sent');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
@@ -228,7 +226,7 @@ class MainController extends Controller
             $this->sTitle = t('Mail | Message - Your search returned');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Mail Result!', '%n% Mails Result!', $this->iTotalMails);
+            $this->view->h3_title = nt('%n% Mail Result!', '%n% Mail Results!', $this->iTotalMails);
             $this->view->msgs = $oSearch;
         }
 

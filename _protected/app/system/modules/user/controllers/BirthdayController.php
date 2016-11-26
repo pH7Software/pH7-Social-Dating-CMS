@@ -11,7 +11,6 @@ use PH7\Framework\Navigation\Page;
 
 class BirthdayController extends Controller
 {
-
     private $oBirthModel, $oPage, $sTitle, $sCurrentDate, $iTotalBirths;
 
     public function __construct()
@@ -27,7 +26,7 @@ class BirthdayController extends Controller
         /**
          *  Predefined meta_description.
          */
-        $this->view->meta_description = t('Users Birthday %0%', $this->sCurrentDate);
+        $this->view->meta_description = t("Users' Birthdays %0%", $this->sCurrentDate);
 
         /**
          *  Predefined meta_keywords tags.
@@ -45,11 +44,13 @@ class BirthdayController extends Controller
         $this->iTotalBirths = $this->oBirthModel->get($sGender, true, SearchCoreModel::LAST_ACTIVITY, SearchCoreModel::DESC, null, null);
         $oBirths = $this->oBirthModel->get($sGender, false, SearchCoreModel::LAST_ACTIVITY, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
-        $this->sTitle = t('Users Birthday (<span class="pH3">%0%</span>)', $this->sCurrentDate);
-        $this->view->page_title = $this->sTitle;
-        $this->view->h2_title = $this->sTitle;
-        if ($sGender != BirthdayModel::ALL) $this->view->h3_title = '<span class="pH0">' . t($sGender) . '</span>';
-        $this->view->total_births = $this->iTotalBirths;
+        $sHtmlCurrentDate = ' &ndash; <span class="pH3">' . $this->sCurrentDate . '</span>';
+        $this->sTitle = nt('%n% Birthday', '%n% Birthdays', $this->iTotalBirths) . $sHtmlCurrentDate;
+        $this->view->page_title = $this->view->h1_title = $this->sTitle;
+
+        if ($sGender != BirthdayModel::ALL)
+            $this->view->h3_title = '<span class="pH0">' . t($sGender) . '</span>';
+
         $this->view->births = $oBirths;
 
         $this->output();
@@ -70,5 +71,4 @@ class BirthdayController extends Controller
                 $this->displayPageNotFound();
         }
     }
-
 }

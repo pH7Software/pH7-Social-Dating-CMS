@@ -36,8 +36,8 @@ class AddAffiliateForm
         $oForm->addElement(new \PFBC\Element\Date(t('Date of birth:'), 'birth_date', array('placeholder'=>t('Month/Day/Year'), 'title'=>t('Please specify the birth date using the calendar or with this format: Month/Day/Year.'), 'required'=>1, 'validation'=>new \PFBC\Validation\BirthDate)));
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', array('id'=>'str_country', 'value'=>Geo::getCountryCode(), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', array('id'=>'str_city', 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('State:'), 'state', array('id'=>'str_state', 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), 'zip_code', array('id'=>'str_zip_code', 'validation'=>new \PFBC\Validation\Str(2,15), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', array('id'=>'str_state', 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', array('id'=>'str_zip_code', 'validation'=>new \PFBC\Validation\Str(2,15), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), 'phone', array('description'=>t('Enter full phone number with area code (e.g., +44768374890).'), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', array('description'=>t("Description of the affiliate's site(s)."), 'validation'=>new \PFBC\Validation\Str(10,2000), 'required' =>1)));
         $oForm->addElement(new \PFBC\Element\Url(t('Website:'), 'website', array('description'=>t('Main website where the affiliate is the owner.'), 'required'=>1)));
@@ -46,5 +46,4 @@ class AddAffiliateForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

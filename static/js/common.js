@@ -83,3 +83,7 @@ function pH7Include(mFile)
         }
     })
 })();
+
+// Only if you hold a valid Pro License (http://ph7cms.com/pro), you can remove the following
+console.log('This Web App has been made with http://pH7CMS.com | The Social App Builder'
+    + "\r\n" + 'GitHub: http://github.com/pH7Software/pH7-Social-Dating-CMS');

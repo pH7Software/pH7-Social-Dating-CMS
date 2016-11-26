@@ -7,7 +7,10 @@
  */
 namespace PH7;
 
-use PH7\Framework\Navigation\Page, PH7\Framework\Geo\Map\Map;
+use
+PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Navigation\Page,
+PH7\Framework\Geo\Map\Map;
 
 class CountryController extends Controller
 {
@@ -24,9 +27,10 @@ class CountryController extends Controller
 
             // Set parameters Google Map
             $oMap = new Map;
+            $oMap->setKey(DbConfig::getSetting('googleApiKey'));
             $oMap->setCenter($this->registry->country . ' ' . $this->registry->city);
-            $oMap->setSize('800px', '690px');
-            $oMap->setDivId('map');
+            $oMap->setSize('100%', '520px');
+            $oMap->setDivId('country_map');
             $oMap->setZoom(12);
             $oMap->addMarkerByAddress($this->registry->country . ' ' . $this->registry->city, t('Meet new people here!'));
             $oMap->generate();

@@ -6,7 +6,7 @@
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Connect / Inc / Class
- * @version        1.2
+ * @version        2.0
  */
 namespace PH7;
 defined('PH7') or exit('Restricted access');
@@ -20,6 +20,14 @@ PH7\Framework\Ip\Ip,
 PH7\Framework\File\File,
 PH7\Framework\Util\Various,
 PH7\Framework\Geo\Ip\Geo,
+PH7\Framework\Error\CException\PH7Exception,
+Facebook\Facebook as FB,
+Facebook\FacebookResponse,
+Facebook\Helpers\FacebookRedirectLoginHelper,
+Facebook\GraphNodes\GraphUser,
+Facebook\GraphNodes\GraphLocation,
+Facebook\Exceptions\FacebookSDKException,
+Facebook\Exceptions\FacebookResponseException,
 PH7\Framework\Mvc\Router\Uri;
 
 class Facebook extends Api implements IApi
@@ -27,7 +35,19 @@ class Facebook extends Api implements IApi
 
     const GRAPH_URL = 'https://graph.facebook.com/';
 
-    private $_sAvatarFile, $_sUsername, $_iProfileId, $_aUserInfo;
+    private $oProfile, $oLocation, $sAvatarFile, $sUsername, $iProfileId, $aUserInfo;
+
+    private $aPermissions = [
+        'email',
+        'user_birthday',
+        'user_relationships',
+        'user_relationship_details',
+        'user_hometown',
+        'user_location',
+        'user_about_me',
+        'user_likes',
+        'user_website'
+    ];
 
     /**
      * @return void
@@ -36,101 +56,96 @@ class Facebook extends Api implements IApi
     {
         parent::__construct();
 
-        Import::lib('Service.Facebook.Facebook'); // Import the library
+        $oFb = new FB([
+            'app_id' => Config::getInstance()->values['module.api']['facebook.id'],
+            'app_secret' => Config::getInstance()->values['module.api']['facebook.secret_key'],
+            'default_graph_version' => 'v2.7',
+        ]);
 
-        $oFb = new \Facebook(
-            array(
-              'appId' => Config::getInstance()->values['module.api']['facebook.id'],
-              'secret' => Config::getInstance()->values['module.api']['facebook.secret_key']
-            )
-        );
+        $oHelper = $oFb->getRedirectLoginHelper();
 
-        $sUserId = $oFb->getUser();
-        if($sUserId)
-        {
-            try {
-                // Proceed knowing you have a logged in user who's authenticated.
-                $aProfile = $oFb->api('/me');
-            } catch(\FacebookApiException $oE) {
-                Framework\Error\CException\PH7Exception::launch($oE);
-                $sUserId = null;
-            }
-
-            if($aProfile)
-            {
-                // User info is ok? Here we will be connect the user and/or adding the login and registering routines...
-                $oUserModel = new UserCoreModel;
-
-                if(!$iId = $oUserModel->getId($aProfile['email']))
-                {
-                    // Add User if it does not exist in our database
-                    $this->add(escape($aProfile, true), $oUserModel);
-
-                    // Add User Avatar
-                    $this->setAvatar($sUserId);
-
-                    $this->oDesign->setFlashMsg( t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
-                    $this->sUrl = Uri::get('connect','main','register');
-                }
-                else
-                {   // Login
-                    $this->setLogin($iId, $oUserModel);
-                    $this->sUrl = Uri::get('connect','main','home');
-                }
-
-                unset($oUserModel);
-            }
-            else
-            {
-                // For testing purposes, if there was an error, let's kill the script
-                $this->oDesign->setFlashMsg(t('Oops! An error has occurred. Please try again later.'));
-                $this->sUrl = Uri::get('connect','main','index');
-            }
+        try {
+            $sAccessToken = $oHelper->getAccessToken();
+        } catch(FacebookSDKException $oE) {
+            PH7Exception::launch($oE);
         }
-        else
-        {
-            // There's no active session, let's generate one
-            $this->sUrl = $oFb->getLoginUrl(array('scope' => 'email,user_birthday,user_relationships,user_relationship_details,user_hometown,user_location,user_interests,user_about_me,user_likes,user_website'));
+
+        if (empty($sAccessToken)) {
+            // First off, set the login URL
+            $this->setLoginUrl($oHelper);
+            return; // Stop method
+        }
+
+        // Set the FB access token for the app
+        $oFb->setDefaultAccessToken($sAccessToken);
+
+        try {
+            $oResponse = $oFb->get('/me');
+            $this->initClassAttrs($oResponse);
+        } catch(FacebookResponseException $oE) {
+            PH7Exception::launch($oE);
+        }
+
+
+        // If we have GraphUser object
+        if (!empty($this->oProfile)) {
+            // User info is ok? Here we will be connect the user and/or adding the login and registering routines...
+            $oUserModel = new UserCoreModel;
+
+            if (!$iId = $oUserModel->getId($this->oProfile->getEmail())) {
+                // Add User if it does not exist in our database
+                $this->add($oUserModel);
+
+                // Add User Avatar
+                $this->setAvatar($this->oProfile->getId());
+
+                $this->oDesign->setFlashMsg( t('You have now been registered! %0%', (new Registration)->sendMail($this->aUserInfo, true)->getMsg()) );
+                $this->sUrl = Uri::get('connect','main','register');
+            } else {
+                // Login
+                $this->setLogin($iId, $oUserModel);
+                $this->sUrl = Uri::get('connect','main','home');
+            }
+
+            unset($oUserModel);
+        } else {
+            // For testing purposes, if there was an error, let's kill the script
+            $this->oDesign->setFlashMsg(t('Oops! An error has occurred. Please try again later.'));
+            $this->sUrl = Uri::get('connect','main','index');
         }
 
         unset($oFb);
     }
 
     /**
-     * @param array $aProfile
-     * @param object \PH7\UserCoreModel $oUserModel
+     * @param \PH7\UserCoreModel $oUserModel
      * @return void
      */
-    public function add(array $aProfile, UserCoreModel $oUserModel)
+    public function add(UserCoreModel $oUserModel)
     {
         $oUser = new UserCore;
-        $sBirthDate = (!empty($aProfile['birthday'])) ? $aProfile['birthday'] : date('m/d/Y', strtotime('-30 year'));
-        $sLocation = ((!empty($aProfile['location']['name'])) ? $aProfile['location']['name'] : (!empty($aProfile['hometown']['name']) ? $aProfile['hometown']['name'] : ''));
-        $aLocation = @explode(',', $sLocation);
-        $sSex = ($aProfile['gender'] != 'male' && $aProfile['gender'] != 'female' && $aProfile['gender'] != 'couple') ? 'female' : $aProfile['gender']; // Default 'female'
+        $sBirthDate = !empty($this->oProfile->getBirthday()) ? $this->oProfile->getBirthday() : date('m/d/Y', strtotime('-30 year'));
+        $sSex = $this->checkGender($this->oProfile->getGender());
         $sMatchSex = $oUser->getMatchSex($sSex);
-        $this->_sUsername = $oUser->findUsername($aProfile['username'], $aProfile['first_name'], $aProfile['last_name']);
-        $sSite = (!empty($aProfile['link'])) ? explode(' ', $aProfile['link'])[0] : '';
-        $sSocialNetworkSite = (!empty($aProfile['username'])) ? 'http://facebook.com/' . $aProfile['username'] : '';
+        $this->sUsername = $oUser->findUsername($this->oProfile->getId(), $this->oProfile->getFirstName(), $this->oProfile->getLastName());
         unset($oUser);
 
-        $this->_aUserInfo = [
-            'email' => $aProfile['email'],
-            'username' => $this->_sUsername,
+        $this->aUserInfo = [
+            'email' => $this->oProfile->getEmail(),
+            'username' => $this->sUsername,
             'password' => Various::genRndWord(8,30),
-            'first_name' => (!empty($aProfile['first_name'])) ? $aProfile['first_name'] : '',
-            'last_name' => (!empty($aProfile['last_name'])) ? $aProfile['last_name'] : '',
-            'middle_name' => (!empty($aProfile['middle_name'])) ? $aProfile['middle_name'] : '',
+            'first_name' => $this->oProfile->getFirstName(),
+            'last_name' => $this->oProfile->getLastName(),
+            'middle_name' => $this->oProfile->getMiddleName(),
             'sex' => $sSex,
             'match_sex' => array($sMatchSex),
             'birth_date' => (new CDateTime)->get($sBirthDate)->date('Y-m-d'),
-            'country' => (!empty($aLocation[1])) ? trim($aLocation[1]) : Geo::getCountryCode(),
-            'city' => (!empty($aLocation[0])) ? trim($aLocation[0]) : Geo::getCity(),
-            'state' => (!empty($aProfile['locale'])) ? $aProfile['locale'] : Geo::getState(),
-            'zip_code' => (!empty($aProfile['hometown_location']['zip'])) ? $aProfile['hometown_location']['zip'] : Geo::getZipCode(),
-            'description' => (!empty($aProfile['bio'])) ? $aProfile['bio'] : '',
-            'website' => $sSite,
-            'social_network_site' => $sSocialNetworkSite,
+            'country' => Geo::getCountryCode(),
+            'city' =>  !empty($this->oLocation->getCity()) ? $this->oLocation->getCity() : Geo::getCity(),
+            'state' => !empty($this->oLocation->getState()) ? $this->oLocation->getState() : Geo::getState(),
+            'zip_code' => !empty($this->oLocation->getZip()) ? $this->oLocation->getZip() : Geo::getZipCode(),
+            'description' => $this->oProfile->getDescription(),
+            'social_network_site' => $oProfie->getLink(),
             'ip' => Ip::get(),
             'prefix_salt' => Various::genRnd(),
             'suffix_salt' => Various::genRnd(),
@@ -138,27 +153,43 @@ class Facebook extends Api implements IApi
             'is_active' => DbConfig::getSetting('userActivationType')
         ];
 
-        $this->_iProfileId = $oUserModel->add($this->_aUserInfo);
+        $this->iProfileId = $oUserModel->add($this->aUserInfo);
     }
 
     /**
      * Set Avatar.
      *
-     * @param string $sUserId
+     * @param string $sUserId FB user ID.
      * @return void
      */
     public function setAvatar($sUserId)
     {
-        $this->_sAvatarFile = $this->getAvatar(static::GRAPH_URL . $sUserId . '/picture?type=large');
+        $this->sAvatarFile = $this->getAvatar(static::GRAPH_URL . $sUserId . '/picture?type=large');
 
-         if($this->_sAvatarFile)
-         {
+         if ($this->sAvatarFile) {
              $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
-             (new UserCore)->setAvatar($this->_iProfileId, $this->_sUsername, $this->_sAvatarFile, $iApproved);
+             (new UserCore)->setAvatar($this->iProfileId, $this->sUsername, $this->sAvatarFile, $iApproved);
          }
 
          // Remove the temporary avatar
-         (new File)->deleteFile($this->_sAvatarFile);
+         (new File)->deleteFile($this->sAvatarFile);
     }
 
+    /**
+     * Set the FB Login URL.
+     *
+     * @param \Facebook\Helpers\FacebookRedirectLoginHelper $oHelper
+     * @return void
+     */
+    protected function setLoginUrl(FacebookRedirectLoginHelper $oHelper)
+    {
+
+        $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect','main','home'), $this->aPermissions);
+    }
+
+    private function initClassAttrs(FacebookResponse $oResponse)
+    {
+        $this->oProfile = $oResponse->getGraphObject(GraphUser::className());
+        $this->oLocation = $oResponse->getGraphObject(GraphLocation::className());
+    }
 }

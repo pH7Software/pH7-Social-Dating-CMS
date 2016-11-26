@@ -15,28 +15,27 @@ defined('PH7') or exit('Restricted access');
 /*** We define the URL if overwrite mode is enabled (to enable it. Htaccess must be present in the current directory) ***/
 define( 'PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . (!is_url_rewrite() ? '?a=' : '') );
 
-$sNS = 'PH7\\';
-$sMainCtrl = $sNS . 'MainController';
-$sCtrl = ucfirst((!empty($_GET['c']) ? $_GET['c'] : 'install')) . 'Controller';
+$sCtrlName = ucfirst((!empty($_GET['c']) ? $_GET['c'] : 'install')) . 'Controller';
+$sCtrlClass = 'PH7\\' . $sCtrlName;
+$sMainCtrlClass = MainController::class;
 $sAction = (!empty($_GET['a'])) ? $_GET['a'] : 'index';
 
-if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && $sCtrl == 'InstallController' && $sAction == 'index')
+if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && $sCtrlName == 'InstallController' && $sAction == 'index')
     exit('Your site is already installed.<br />If you want to redo a clean install, please delete your "_constants.php" file and delete all the content of your database.');
 
 try
 {
-    if (is_file(PH7_ROOT_INSTALL . 'controllers/' . $sCtrl . '.php'))
+    if (is_file(PH7_ROOT_INSTALL . 'controllers/' . $sCtrlName . '.php') && class_exists($sCtrlClass))
     {
-        $sCtrl = $sNS . $sCtrl;
-        $oCtrl = new $sCtrl;
+        $oCtrl = new $sCtrlClass;
 
         if (method_exists($oCtrl, $sAction))
             call_user_func(array($oCtrl, $sAction));
         else
-            (new $sMainCtrl)->error_404();
+            (new $sMainCtrlClass)->error_404();
     }
     else
-        (new $sMainCtrl)->error_404();
+        (new $sMainCtrlClass)->error_404();
 }
 catch (\Exception $oE)
 {

@@ -15,6 +15,11 @@ PH7\Framework\Url\Url;
 
 class UserDesignCoreModel extends Framework\Mvc\Model\Design
 {
+    const
+    GEO_PROFILE_LIMIT = 14,
+    CAROUSEL_PROFILE_LIMIT = 25,
+    PROFILE_BLOCK_LIMIT = 8,
+    PROFILE_LIMIT = 44;
 
     private $oUser, $oUserModel;
 
@@ -35,7 +40,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
      * @param integer $iLimit Optional. Default 14
      * @return void HTML output.
      */
-    public function geoProfiles($sCountryCode = '', $sCity = '', $iOffset = 0, $iLimit = 14)
+    public function geoProfiles($sCountryCode = '', $sCity = '', $iOffset = 0, $iLimit = self::GEO_PROFILE_LIMIT)
     {
         $oUserGeo = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUserGeo)) return;
@@ -69,7 +74,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         }
     }
 
-    public function carouselProfiles($iOffset = 0, $iLimit = 25)
+    public function carouselProfiles($iOffset = 0, $iLimit = self::CAROUSEL_PROFILE_LIMIT)
     {
         $oUser = $this->oUserModel->getProfiles(SearchCoreModel::LATEST, $iOffset, $iLimit);
         if (empty($oUser)) return;
@@ -109,7 +114,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         echo '</div><div class="clearfix"></div></div></div>';
     }
 
-    public function profilesBlock($iOffset = 0, $iLimit = 8)
+    public function profilesBlock($iOffset = 0, $iLimit = self::PROFILE_BLOCK_LIMIT)
     {
         $oUser = $this->oUserModel->getProfiles(SearchCoreModel::LATEST, $iOffset, $iLimit);
         if (empty($oUser)) return;
@@ -127,7 +132,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         echo '</ul>';
     }
 
-    public function profiles($iOffset = 0, $iLimit = 36)
+    public function profiles($iOffset = 0, $iLimit = self::PROFILE_LIMIT)
     {
         $oUser = $this->oUserModel->getProfiles(SearchCoreModel::LAST_ACTIVITY, $iOffset, $iLimit);
         if (empty($oUser)) return;
@@ -158,11 +163,4 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
 
         unset($oUserModel);
     }
-
-    public function __destruct()
-    {
-        parent::__destruct();
-        unset($this->oUser, $this->oUserModel);
-    }
-
 }

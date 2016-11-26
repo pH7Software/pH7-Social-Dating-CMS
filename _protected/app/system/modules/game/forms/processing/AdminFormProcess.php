@@ -46,7 +46,7 @@ class AdminFormProcess extends Form
 
         if (!@move_uploaded_file($_FILES['file']['tmp_name'], $sGameDir . $sGameFile))
         {
-            \PFBC\Form::setError('form_game', t('Impossible to upload the game. If you are the administrator, please check if the folder of games data has the write permission (CHMOD 755).'));
+            \PFBC\Form::setError('form_game', t('Impossible to upload the game. Please check if the folder "%0%" has the write permission (CHMOD 755) or contact your host to check it.', PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/'));
         }
         else
         {
@@ -70,4 +70,3 @@ class AdminFormProcess extends Form
     }
 
 }
-

@@ -39,7 +39,7 @@ class Rest extends \PH7\Framework\Http\Http
      * @param integer $iStatus Status Code. Default 200
      * @return void
      */
-    public function response($aData, $iStatus = 200)
+    public function response(array $aData, $iStatus = 200)
     {
         $this->_aData = $aData;
 

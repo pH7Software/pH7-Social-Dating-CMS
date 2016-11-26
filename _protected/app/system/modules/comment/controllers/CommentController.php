@@ -51,7 +51,7 @@ class CommentController extends Controller
 
         $this->view->h4_title = CommentCore::count($this->iId, $this->sTable);
 
-        $oPage = new Page();
+        $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages($this->oCommentModel->total($this->iId, $this->sTable), 15);
         $this->view->current_page = $oPage->getCurrentPage();
         $oComment = $this->oCommentModel->read($this->iId, 1, $oPage->getFirstItem(), $oPage->getNbItemsByPage(), $this->sTable);

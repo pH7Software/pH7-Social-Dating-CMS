@@ -8,9 +8,10 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+
 class Permission extends PermissionCore
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -22,7 +23,7 @@ class Permission extends PermissionCore
             $this->signInRedirect();
         }
 
-        if (!AdminCore::auth()) // If the administrator is not logged
+        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) // If the admin is not logged (but can be if the admin use "login as user" feature)
         {
             if (!$this->checkMembership() || !$this->group->view_videos)
             {
@@ -32,7 +33,12 @@ class Permission extends PermissionCore
             {
                 $this->paymentRedirect();
             }
+
+            if ($this->registry->controller === 'AdminController')
+            {
+                // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
+                Header::redirect(Uri::get('user','main','login'), $this->adminSignInMsg(), 'error');
+            }
         }
     }
-
 }

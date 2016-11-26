@@ -5,7 +5,7 @@
  */
 if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object') {
     elFinder.prototype.i18.fr = {
-        translator : 'Régis Guyomarch &lt;regisg@gmail.com&gt;Benoit Delachaux &lt;benorde33@gmail.com&gt;',
+        translator : 'Régis Guyomarch &lt;regisg@gmail.com&gt;, Benoit Delachaux &lt;benorde33@gmail.com&gt;',
         language   : 'française',
         direction  : 'ltr',
         dateFormat : 'd M, Y H:i',
@@ -64,7 +64,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errMove'              : 'Impossible de déplacer "$1".',
             'errCopyInItself'      : 'Impossible de copier "$1" sur lui-même.',
             'errRm'                : 'Impossible de supprimer "$1".',
-            'errRmSrc'             : 'Unable remove source file(s).',
+            'errRmSrc'             : 'Impossible de supprimer le(s) fichier(s) source(s).',
             'errExtract'           : 'Imbossible d\'extraire les fichiers à partir de "$1".', // added 11.08.2012
             'errArchive'           : 'Impossible de créer l\'archive.',
             'errArcType'           : 'Type d\'archive non supporté.',
@@ -91,6 +91,10 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'errFtpMkdir'          : 'Impossible de créer un répertoire distant sur l\'accès FTP :"$1"',
             'errArchiveExec'       : 'Erreur lors de l\'archivage des fichiers : "$1"',
             'errExtractExec'       : 'Erreur lors de l\'extraction des fichiers : "$1"',
+            'errNetUnMount'        : 'Impossible de démonter', // from v2.1 added 30.04.2012
+            'errConvUTF8'          : 'Conversion en UTF-8 impossible', // from v2.1 added 08.04.2014
+            'errFolderUpload'      : 'Essayez Google Chrome, si voulez envoyer le dossier.', // from v2.1 added 26.6.2015
+            'errSearchTimeout'     : 'Délai d’attente dépassé pour la recherche "$1". Le résultat de la recherche est partiel.', // from v2.1 added 12.1.2016
 
             /******************************* commands names ********************************/
             'cmdarchive'   : 'Créer une archive',
@@ -107,6 +111,7 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'cmdhome'      : 'Accueil',
             'cmdinfo'      : 'Informations',
             'cmdmkdir'     : 'Nouveau dossier',
+            'cmdmkdirin'   : 'Dans un nouveau dossier', // from v2.1.7 added 19.2.2016
             'cmdmkfile'    : 'Nouveau fichier texte',
             'cmdopen'      : 'Ouvrir',
             'cmdpaste'     : 'Coller',
@@ -120,7 +125,11 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'cmdview'      : 'Vue',
             'cmdresize'    : 'Redimensionner l\'image',
             'cmdsort'      : 'Trier',
-            'cmdnetmount'  : 'Monter un volume réseau',
+            'cmdnetmount'  : 'Monter un volume réseau', // added 18.04.2012
+            'cmdnetunmount': 'Démonter', // from v2.1 added 30.04.2012
+            'cmdplaces'    : 'Vers Places', // added 28.12.2014
+            'cmdchmod'     : 'Changer de mode', // from v2.1 added 20.6.2015
+            'cmdopendir'   : 'Ouvrir un dossier', // from v2.1 added 13.1.2016
 
             /*********************************** buttons ***********************************/
             'btnClose'  : 'Fermer',
@@ -131,6 +140,16 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'btnNo'     : 'Non',
             'btnYes'    : 'Oui',
             'btnMount'  : 'Monter',  // added 18.04.2012
+            'btnApprove': 'Aller à $1 & approuver', // from v2.1 added 26.04.2012
+            'btnUnmount': 'Démonter', // from v2.1 added 30.04.2012
+            'btnConv'   : 'Convertir', // from v2.1 added 08.04.2014
+            'btnCwd'    : 'Ici',      // from v2.1 added 22.5.2015
+            'btnVolume' : 'Volume',    // from v2.1 added 22.5.2015
+            'btnAll'    : 'Tous',       // from v2.1 added 22.5.2015
+            'btnMime'   : 'Type MIME', // from v2.1 added 22.5.2015
+            'btnFileName':'Nom du fichier',  // from v2.1 added 22.5.2015
+            'btnSaveClose': 'Enregistrer & Ferme', // from v2.1 added 12.6.2015
+            'btnBackup' : 'Sauvegarde', // fromv2.1 added 28.11.2015
 
             /******************************** notifications ********************************/
             'ntfopen'     : 'Ouvrir le dossier',
@@ -149,11 +168,16 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'ntfarchive'  : 'Création de l\'archive',
             'ntfextract'  : 'Extraction des fichiers de l\'archive',
             'ntfsearch'   : 'Recherche des fichiers',
-            'ntfresize'   : 'Resizing images',
+            'ntfresize'   : 'Re-tailler les images',
             'ntfsmth'     : 'Fait quelque chose',
             'ntfloadimg'  : 'Chargement de l\' image',
             'ntfnetmount' : 'Monte le volume réseau', // added 18.04.2012
-            'ntfdim'      : 'Calcule la dimension de l\'image', // added 11.08.2013
+            'ntfdim'      : 'Calcule la dimension de l\'image', // added 20.05.2013
+            'ntfreaddir'  : 'Lecture des informations du dossier', // from v2.1 added 01.07.2013
+            'ntfurl'      : 'Récupération de l’URL du lien', // from v2.1 added 11.03.2014
+            'ntfchmod'    : 'Changement de mode', // from v2.1 added 20.6.2015
+            'ntfpreupload': 'Vérification du nom du fichier envoyé', // from v2.1 added 31.11.2015
+            'ntfzipdl'    : 'Création d’un fichier pour le téléchargement', // from v2.1.7 added 23.1.2016
 
             /************************************ dates **********************************/
             'dateUnknown' : 'Inconnue',
@@ -171,32 +195,32 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'msOct'       : 'Oct',
             'msNov'       : 'Nov',
             'msDec'       : 'Déc',
-            'January'     : 'January',
-            'February'    : 'February',
-            'March'       : 'March',
-            'April'       : 'April',
-            'May'         : 'May',
-            'June'        : 'June',
-            'July'        : 'July',
-            'August'      : 'August',
-            'September'   : 'September',
-            'October'     : 'October',
-            'November'    : 'November',
-            'December'    : 'December',
-            'Sunday'      : 'Sunday',
-            'Monday'      : 'Monday',
-            'Tuesday'     : 'Tuesday',
-            'Wednesday'   : 'Wednesday',
-            'Thursday'    : 'Thursday',
-            'Friday'      : 'Friday',
-            'Saturday'    : 'Saturday',
-            'Sun'         : 'Sun',
-            'Mon'         : 'Mon',
-            'Tue'         : 'Tue',
-            'Wed'         : 'Wed',
-            'Thu'         : 'Thu',
-            'Fri'         : 'Fri',
-            'Sat'         : 'Sat',
+            'January'     : 'Janvier',
+            'February'    : 'Février',
+            'March'       : 'Mars',
+            'April'       : 'Avril',
+            'May'         : 'Mai',
+            'June'        : 'Juin',
+            'July'        : 'Huillet',
+            'August'      : 'Août',
+            'September'   : 'Septembre',
+            'October'     : 'Octobre',
+            'November'    : 'Novembre',
+            'December'    : 'Décembre',
+            'Sunday'      : 'Dimanche',
+            'Monday'      : 'Lundi',
+            'Tuesday'     : 'Mardi',
+            'Wednesday'   : 'Mercredi',
+            'Thursday'    : 'Jeudi',
+            'Friday'      : 'Vendredi',
+            'Saturday'    : 'Samedi',
+            'Sun'         : 'Dim',
+            'Mon'         : 'Lun',
+            'Tue'         : 'Mar',
+            'Wed'         : 'Mer',
+            'Thu'         : 'Jeu',
+            'Fri'         : 'Ven',
+            'Sat'         : 'Sam',
 
             /******************************** sort variants ********************************/
             'sortname'          : 'par nom',
@@ -265,8 +289,8 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'selectForUpload' : 'Sélectionner les fichiers à envoyer',
             'moveFiles'       : 'Déplacer les fichiers',
             'copyFiles'       : 'Copier les fichiers',
-            'rmFromPlaces'    : 'Remove from places',
-            'aspectRatio'     : 'Aspect ratio',
+            'rmFromPlaces'    : 'Retirer de Places',
+            'aspectRatio'     : 'Ratio d’affichage',
             'scale'           : 'Mise à l\'échelle',
             'width'           : 'Largeur',
             'height'          : 'Hauteur',
@@ -282,6 +306,27 @@ if (elFinder && elFinder.prototype && typeof(elFinder.prototype.i18) == 'object'
             'port'                : 'Port', // added 18.04.2012
             'user'                : 'Utilisateur', // added 18.04.2012
             'pass'                : 'Mot de passe', // added 18.04.2012
+            'confirmUnmount'      : 'Démonter $1?',  // from v2.1 added 30.04.2012
+            'dropFilesBrowser': 'Glissez-déposez depuis le navigateur de fichier', // from v2.1 added 30.05.2012
+            'dropPasteFiles'  : 'Glissez-déposez les fichiers ici', // from v2.1 added 07.04.2014
+            'encoding'        : 'Encodage', // from v2.1 added 19.12.2014
+            'locale'          : 'Encodage régional',   // from v2.1 added 19.12.2014
+            'searchTarget'    : 'Destination: $1',                // from v2.1 added 22.5.2015
+            'searchMime'      : 'Recherche par type MIME', // from v2.1 added 22.5.2015
+            'owner'           : 'Propriétaire', // from v2.1 added 20.6.2015
+            'group'           : 'Groupe', // from v2.1 added 20.6.2015
+            'other'           : 'Autre', // from v2.1 added 20.6.2015
+            'execute'         : 'Exécuter', // from v2.1 added 20.6.2015
+            'perm'            : 'Permission', // from v2.1 added 20.6.2015
+            'mode'            : 'Mode', // from v2.1 added 20.6.2015
+            'emptyFolder'     : 'Le dossier est vide', // from v2.1.6 added 30.12.2015
+            'emptyFolderDrop' : 'Le dossier est vide.\\ Glissez-déposez pour ajouter des éléments.', // from v2.1.6 added 30.12.2015
+            'emptyFolderLTap' : 'Le dossier est vide.\\ Un appui long pour ajouter des éléments.', // from v2.1.6 added 30.12.2015
+            'quality'         : 'Qualité', // from v2.1.6 added 5.1.2016
+            'autoSync'        : 'Synchronisation automatique',  // from v2.1.6 added 10.1.2016
+            'moveUp'          : 'Déplacer vers le haut',  // from v2.1.6 added 18.1.2016
+            'getLink'         : 'Obtenir le lien d’URL', // from v2.1.7 added 9.2.2016
+            'selectedItems'   : 'Éléments sélectionnés ($1)', // from v2.1.7 added 2.19.2016
 
             /********************************** mimetypes **********************************/
             'kindUnknown'     : 'Inconnu',

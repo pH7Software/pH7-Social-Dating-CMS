@@ -27,7 +27,7 @@ class Image
 
     /**
      * @constructor
-     * @param string $sFile
+     * @param string $sFile Full path to the image file.
      * @param integer $iMaxWidth Default value 3000.
      * @param integer $iMaxHeight Default value 3000.
      */
@@ -315,13 +315,14 @@ class Image
          $rBlack = imagecolorallocate($this->rImage, 0, 0, 0);
          $rGray = imagecolorallocate($this->rImage, 127, 127, 127);
 
-         if ($iWidthText > 0 && $iHeightText > 0)
-         {
-             if (imagecolorat($this->rImage, $iWidthText, $iHeightText) > $rGray) $rColor = $rBlack;
-                 if (imagecolorat($this->rImage, $iWidthText, $iHeightText) < $rGray) $rColor = $rWhite;
-         }
-         else
-         {
+         if ($iWidthText > 0 && $iHeightText > 0) {
+             if (imagecolorat($this->rImage, $iWidthText, $iHeightText) > $rGray) {
+                 $rColor = $rBlack;
+             }
+             if (imagecolorat($this->rImage, $iWidthText, $iHeightText) < $rGray) {
+                 $rColor = $rWhite;
+             }
+         } else {
              $rColor = $rWhite;
          }
 

@@ -10,7 +10,7 @@
     <p class="italic">{lang 'Album created on %0%.', $video->createdDate} {if !empty($video->updatedDate)} <br>{lang 'Modified on %0%.', $video->updatedDate} {/if}</p>
     <p class="italic">{lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($video->videoId,'Videos') %}</p>
 
-    {if UserCore::auth() && $member_id == $video->profileId}
+    {if $is_user_auth && $member_id == $video->profileId}
       <div class="small">
         <a href="{{ $design->url('video', 'main', 'editvideo', "$video->albumId,$video->title,$video->videoId") }}">{lang 'Edit'}</a> |
         {{ LinkCoreForm::display(t('Delete'), 'video', 'main', 'deletevideo', array('album_title'=>$video->name, 'album_id'=>$video->albumId, 'video_id'=>$video->videoId, 'video_link'=>$video->file)) }}

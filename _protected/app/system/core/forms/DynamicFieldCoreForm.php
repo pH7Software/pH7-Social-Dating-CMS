@@ -17,7 +17,8 @@ class DynamicFieldCoreForm
 
     /**
      * @param object \PFBC\Form $oForm
-     * @param string $sValue Column name.
+     * @param string $sValue Column name
+     * @param string $sValue Field value
      */
     public function __construct(\PFBC\Form $oForm, $sColumn, $sValue)
     {
@@ -36,7 +37,7 @@ class DynamicFieldCoreForm
         switch ($this->_sColumn)
         {
             case 'description':
-                $this->_oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,10,2000)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(20,4000), 'required'=>1)));
+                $this->_oForm->addElement(new \PFBC\Element\Textarea(t('Description:'), $this->_sColumn, array('id' => $this->getFieldId('str'), 'onblur' => 'CValid(this.value,this.id,10,2000)','value' => $this->_sVal, 'validation' => new \PFBC\Validation\Str(20,4000), 'required' => 1)));
                 $this->addCheckErrSpan('str');
             break;
 
@@ -50,12 +51,12 @@ class DynamicFieldCoreForm
             break;
 
             case 'state':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Your State/Province:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,150)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
+                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Your State/Province:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,150)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,150))));
                 $this->addCheckErrSpan('str');
             break;
 
             case 'zipCode':
-                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,15)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,15), 'required'=>1)));
+                $this->_oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), $this->_sColumn, array('id'=>$this->getFieldId('str'), 'onblur' =>'CValid(this.value,this.id,2,15)','value' => $this->_sVal, 'validation'=>new \PFBC\Validation\Str(2,15))));
                 $this->addCheckErrSpan('str');
             break;
 
@@ -74,8 +75,8 @@ class DynamicFieldCoreForm
 
             case 'website':
             case 'socialNetworkSite':
-                $sLang = ($this->_sColumn == 'socialNetworkSite') ? t('Social Network Site:') : t('Your Website:');
-                $sDesc = ($this->_sColumn == 'socialNetworkSite') ? t('The url of your profile Facebook, Twitter, Google+, etc.') : t('Your Website/Blog');
+                $sLang = ($this->_sColumn == 'socialNetworkSite') ? t('Social Media Profile:') : t('Your Website:');
+                $sDesc = ($this->_sColumn == 'socialNetworkSite') ? t('The URL of your social profile like Facebook, Snapchat, Instagram, Google+, etc.') : t('Your Personal Website/Blog (any promotional/affiliated contents will be banned)');
                 $this->_oForm->addElement(new \PFBC\Element\Url($sLang, $this->_sColumn, array('id'=>$this->getFieldId('url'), 'onblur'=>'CValid(this.value,this.id)', 'description'=>$sDesc, 'value' => $this->_sVal)));
                 $this->addCheckErrSpan('url');
             break;
@@ -108,6 +109,11 @@ class DynamicFieldCoreForm
         $this->_oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ' . $this->getFieldId($sType) . '"></span>'));
     }
 
+    /**
+     * Generate other PFBC fields according to the Field Type.
+     *
+     * @return string PFBC Form Type
+     */
     protected function getFieldType()
     {
         if (strstr($this->_sColumn, 'textarea'))

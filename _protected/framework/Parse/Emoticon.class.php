@@ -17,7 +17,6 @@ use PH7\Framework\Layout\Optimization;
 
 class Emoticon extends \PH7\Framework\Service\Emoticon
 {
-
     /**
      * Parse the contents.
      *
@@ -30,13 +29,15 @@ class Emoticon extends \PH7\Framework\Service\Emoticon
     {
         $aEmoticons = static::get();
 
-        foreach ($aEmoticons as $sEmoticonKey => $aEmoticon)
-            if ($bIsDataUri)
-                $sContents = str_ireplace(static::getCode($aEmoticon), '<img src=\'' . Optimization::dataUri(static::getPath($sEmoticonKey)) . '\' alt=\'' . static::getName($aEmoticon) . '\' />', $sContents);
-            else
-                $sContents = str_ireplace(static::getCode($aEmoticon), '<img src=\'' . static::getUrl($sEmoticonKey) . '\' alt=\'' . static::getName($aEmoticon) . '\' />', $sContents);
+        foreach ($aEmoticons as $sEmoticonKey => $aEmoticon) {
+            if ($bIsDataUri) {
+                $sSrcImg = Optimization::dataUri(static::getPath($sEmoticonKey));
+            } else {
+                $sSrcImg = static::getUrl($sEmoticonKey);
+            }
+            $sContents = str_ireplace(static::getCode($aEmoticon), '<img src=\'' . $sSrcImg . '\' alt=\'' . static::getName($aEmoticon) . '\' />', $sContents);
+        }
 
         return $sContents;
     }
-
 }

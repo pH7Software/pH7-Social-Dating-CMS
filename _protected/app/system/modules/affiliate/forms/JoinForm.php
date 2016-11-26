@@ -15,7 +15,6 @@ PH7\Framework\Url\Header;
 
 class JoinForm
 {
-
     public static function step1()
     {
         if (isset($_POST['submit_join_aff']))
@@ -30,25 +29,36 @@ class JoinForm
         $oForm->configure(array('action'=> ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_aff', 'form_join_aff'));
         $oForm->addElement(new \PFBC\Element\Token('join'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'name_first', 'onblur'=>'CValid(this.value,this.id)', 'title'=>t('Enter your first name.'), 'required'=> 1,'validation'=>new \PFBC\Validation\Name)));
+
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'name_first', 'onblur'=>'CValid(this.value,this.id)', 'required'=> 1,'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'name_last', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Enter your last name.'), 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
+
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'name_last', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
-        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('id'=>'username', 'onkeyup'=>'CValid(this.value, this.id,\'Affiliates\')', 'title'=>t('Your username will be your unique ID reference for advertisements.'), 'required'=>1, 'validation'=>new \PFBC\Validation\Username('Affiliates'))));
+
+        $oForm->addElement(new \PFBC\Element\Username(t('Username:'), 'username', array('id'=>'username', 'onkeyup'=>'CValid(this.value, this.id,\'Affiliates\')', 'description'=>t('Your username will be your unique advertiser ID.'), 'required'=>1, 'validation'=>new \PFBC\Validation\Username('Affiliates'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error username"></span>'));
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur'=>'CValid(this.value, this.id,\'guest\',\'Affiliates\')', 'title'=>t('Enter your valid email address.'), 'required'=>1, 'validation'=> new \PFBC\Validation\CEmail('guest', 'Affiliates'))));
+
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur'=>'CValid(this.value, this.id,\'guest\',\'Affiliates\')', 'description'=>t('Your Professional Valid Email.'), 'required'=>1, 'validation'=> new \PFBC\Validation\CEmail('guest', 'Affiliates'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
-        $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('id'=>'password', 'onkeyup'=>'checkPassword(this.value)', 'onblur'=>'CValid(this.value, this.id)', 'title'=>t('Your password. It will be used for logging in to the site. This storage is secure, because we are using an encrypted format.'), 'required'=> 1, 'validation'=> new \PFBC\Validation\Password)));
+
+        $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('id'=>'password', 'onkeyup'=>'checkPassword(this.value)', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1, 'validation'=> new \PFBC\Validation\Password)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error password"></span>'));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Your Sex:'), 'sex', array('male'=>t('Male'), 'female'=>t('Female')), array('value'=>'male', 'title'=>t('Please specify your gender.'), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Date(t('Your Date of birth:'), 'birth_date', array('placeholder'=>t('Month/Day/Year'), 'id'=>'birth_date', 'title'=>t('Please specify your birth date using the calendar or with this format: Month/Day/Year.'), 'onblur'=>'CValid(this.value, this.id)', 'required'=>1, 'validation'=>new \PFBC\Validation\BirthDate)));
+
+        $oForm->addElement(new \PFBC\Element\Radio(t('Your Gender:'), 'sex', array('male'=>t('Male'), 'female'=>t('Female')), array('value'=>'male', 'required'=>1)));
+
+        $oForm->addElement(new \PFBC\Element\Date(t('Your Date of birth:'), 'birth_date', array('placeholder'=>t('Month/Day/Year'), 'id'=>'birth_date', 'description' => t('Please specify your birth date using the calendar or with this format: Month/Day/Year. <strong>It is imperative to finish by the DAY</strong>.'), 'onblur'=>'CValid(this.value, this.id)', 'required'=>1, 'validation'=>new \PFBC\Validation\BirthDate)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
-        $oForm->addElement(new \PFBC\Element\Country(t('Your Country:'), 'country', array('id'=>'str_country', 'value'=>Geo::getCountryCode(), 'title'=>t('Select the country where you live.'), 'required'=>1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your City:'), 'city', array('id'=>'str_city', 'value'=>Geo::getCity(), 'onblur'=>'CValid(this.value,this.id,2,150)', 'title'=>t('Specify the city where you live.'), 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
+
+        $oForm->addElement(new \PFBC\Element\Country(t('Your Country:'), 'country', array('id'=>'str_country', 'value'=>Geo::getCountryCode(), 'description'=>t('Select the country where you are legally resident.'), 'required'=>1)));
+
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your City:'), 'city', array('id'=>'str_city', 'value'=>Geo::getCity(), 'onblur'=>'CValid(this.value,this.id,2,150)', 'description'=>t('Specify the city where you currently live.'), 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_city"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your State:'), 'state', array('id'=>'str_state', 'value'=>Geo::getState(), 'onblur'=>'CValid(this.value,this.id,2,150)', 'title'=>t('Specify your state.'), 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
+
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your State/Province:'), 'state', array('id'=>'str_state', 'value'=>Geo::getState(), 'onblur'=>'CValid(this.value,this.id,2,150)', 'validation'=>new \PFBC\Validation\Str(2,150), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_state"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your ZIP/Postal Code:'), 'zip_code', array('id'=>'str_zip_code', 'value'=>Geo::getZipCode(), 'onblur'=>'CValid(this.value,this.id,2,15)', 'title'=>t('Enter your post code (Zip).'), 'validation'=>new \PFBC\Validation\Str(2,15), 'required'=>1)));
+
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Postal Code:'), 'zip_code', array('id'=>'str_zip_code', 'value'=>Geo::getZipCode(), 'onblur'=>'CValid(this.value,this.id,2,15)', 'validation'=>new \PFBC\Validation\Str(2,15), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
 
         if (DbConfig::getSetting('isCaptchaAffiliateSignup'))
@@ -59,9 +69,9 @@ class JoinForm
 
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Terms of Service'), 'terms', array(1=>'<em>' . t('I have read and agree to the %0%.', '<a href="' . Uri::get('page','main','affiliateterms') . '" rel="nofollow" target="_blank">' . t('Terms of Service') . '</a>') . '</em>'), array('id'=>'terms', 'onblur'=>'CValid(this.checked, this.id)', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error terms-0"></span>'));
+
         $oForm->addElement(new \PFBC\Element\Button(t('Become an Affiliate!'),'submit', array('icon'=>'cart')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script><script src="'.PH7_URL_STATIC.PH7_JS.'geo/autocompleteCity.js"></script>'));
         $oForm->render();
     }
-
 }

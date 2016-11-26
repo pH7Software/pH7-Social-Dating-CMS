@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Cache\Cache, PH7\Framework\Mvc\Request\Http;
 
 class EditFormProcess extends Form
 {
@@ -25,7 +25,11 @@ class EditFormProcess extends Form
         if ((AdminCore::auth() && !User::auth() && $this->httpRequest->getExists('profile_id')))
         {
             if (!$this->str->equals($this->httpRequest->post('group_id'), $oUser->groupId))
-                $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId);
+            {
+                $oUserModel->updateMembership($this->httpRequest->post('group_id'), $iProfileId, null, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
+
+                (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $iProfileId, null)->clear();
+            }
         }
 
         if (!$this->str->equals($this->httpRequest->post('first_name'), $oUser->firstName))
@@ -33,7 +37,7 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId);
             $this->session->set('member_first_name', $this->httpRequest->post('first_name'));
 
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Members', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Members', null)->clear();
         }
 
         if (!$this->str->equals($this->httpRequest->post('last_name'), $oUser->lastName))
@@ -44,7 +48,7 @@ class EditFormProcess extends Form
             $oUserModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId);
             $this->session->set('member_sex', $this->httpRequest->post('sex'));
 
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Members', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Members', null)->clear();
         }
 
         // WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Request\Http::post() method removes the special tags
@@ -75,7 +79,7 @@ class EditFormProcess extends Form
         // Destroy objects
         unset($oUserModel, $oUser, $oUserCache);
 
-        \PFBC\Form::setSuccess('form_user_edit_account', t('Your profile has been saved successfully!'));
+        \PFBC\Form::setSuccess('form_user_edit_account', t('The profile has been successfully updated'));
     }
 
 }

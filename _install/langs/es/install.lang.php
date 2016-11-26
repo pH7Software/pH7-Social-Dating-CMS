@@ -15,14 +15,16 @@ $LANG = array(
     'charset' => 'utf-8',
     'lang_name' => 'Español',
     'version' => 'versión',
+    'welcome_voice' => 'Hola y bienvenidos a la instalación de ' . Controller::SOFTWARE_NAME . ', ' . Controller::SOFTWARE_VERSION . '. ' .
+        'Espero que te gusta su nueva aplicación web para la reunión social. ¡Buena suerte!',
     'CMS_desc' => '<p>Bienvenido a la instalación de ' . Controller::SOFTWARE_NAME . '.<br />
-    Gracias por elegir nuestro CMS y esperamos que sea de su agrado usted.</p>',
+        Gracias por elegir nuestro CMS y esperamos que sea de su agrado usted.</p>',
     'choose_install_lang' => 'Por favor, elija su idioma para comenzar la instalación',
-    'requirements_desc' => '¡ADVERTENCIA! Por favor, asegúrese de que el servidor tiene la necesaria <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">requisitos</a> para funcionar correctamente pH7CMS.',
+    'requirements_desc' => '¡ADVERTENCIA! Por favor, asegúrese que <abbr title ="El servidor remoto o el ordenador si no está localhost">usted es</abbr> conectado a Internet y de que el servidor tiene la <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">necesaria requisitos</a> para funcionar pH7CMS.',
     'requirements2_desc' => 'En primer lugar, cree una base de datos MySQL y asignar a un usuario con privilegios completos. Una vez creada la base de datos MySQL y el usuario, asegúrese de escribir el nombre de la base de datos, el nombre de usuario y contraseña, ya que necesitará para la instalación.',
     'config_path' => 'Ruta del directorio &laquo;protected&raquo;',
     'desc_config_path' => 'Por favor, especifique la ruta completa a la carpeta de &laquo;protected&raquo;.<br />
-    Es prudente y aconsejable (pero en cualquier caso no es obligatorio) colocar este directorio fuera de la raíz pública del servidor de la Web.',
+        Es prudente y aconsejable (pero en cualquier caso no es obligatorio) colocar este directorio fuera de la raíz pública del servidor de la Web.',
     'need_frame' => '¡Debe utilizar un navegador Web que soporte marcos en línea!',
     'path_protected' => 'Ruta de la carpeta &laquo;protected&raquo;',
     'next' => 'Próximo',
@@ -80,11 +82,11 @@ $LANG = array(
     'admin_passwords' => 'Por favor, confirme su contraseña',
     'bad_email' => 'E-mail incorrecta',
     'bad_username' => 'Su nombre de usuario es incorrecto',
-    'username_too_short' => 'Su apodo es demasiado corto, por lo menos 4 caracteres',
-    'username_too_long' => 'Su nombre es muy largo, con un máximo de 40 caracteres',
-    'password_no_number' => 'La contraseña debe contener al menos un número de',
+    'username_too_short' => 'Su apodo es demasiado corto, por lo menos 3 caracteres',
+    'username_too_long' => 'Su nombre es muy largo, con un máximo de 30 caracteres',
+    'password_no_number' => 'Su contraseña debe contener al menos un número',
     'password_no_upper' => 'La contraseña debe contener al menos una mayúscula',
-    'password_too_short' => 'Su contraseña es demasiado corta',
+    'password_too_short' => 'Su contraseña es demasiado corta. 6 caractères mínimo',
     'password_too_long' => 'Su contraseña es demasiado larga',
     'passwords_different' => 'La confirmación de contraseña no coincide con la contraseña inicial',
     'bad_first_name' => 'or favor, introduzca su nombre, debe ser de entre 2 y 20 caracteres.',
@@ -97,7 +99,7 @@ $LANG = array(
     'content_email_finish_install' => '<p><strong>¡Enhorabuena, tu sitio web está instalado correctamente!</strong></p>
     <p>¡Esperamos que usted disfrute de <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
     <p>La URL de su propio sitio web es: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-    <p></p>Tu Panel de Administración URL es: <a href="' . PH7_URL_ROOT . 'admin123/">' . PH7_URL_ROOT . 'admin123/</a></p>
+    <p></p>Tu Panel de Administración URL es: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
     <p>No se olvide de mostrar al mostrar su nuevo sitio de citas para todos sus amigos, sus colegas y compañeros de su Facebook (e incluso a sus enemigos ... o no).</p>
     <p>Por último, si no lo has hecho todavía, es un muy buen momento para comprar hoy una clave de licencia, simplemente <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visitando nuestra página web</a> con el fin de obtener las características premium, quite todos los enlaces y notas de copyright en su sitio web e incluso el acceso a la ilimitada ticket de soporte.</p>
     <p>&nbps;</p>
@@ -121,9 +123,9 @@ $LANG = array(
     'social_dating_niche' => 'Nicho de citas sociales',
     'social_niche' => 'Nicho de redes sociales',
     'dating_niche' => 'Citas nicho',
-    'base_niche_desc' => 'Al elegir este nicho, todos los módulos están habilitados y el tema del euskera (social/citas) serán activadas por defecto.',
+    'base_niche_desc' => 'Al elegir este nicho, todos los módulos están habilitados y el tema genérico (social/citas) serán activadas por defecto.',
     'zendate_niche_desc' => 'Al elegir este nicho, módulos sólo sociales se activan y el tema social, serán activadas por defecto.',
-    'datelove_niche_desc' => 'Al elegir este nicho, sólo los módulos citas se activará y el tema de la citas será activada de forma predeterminada.',
+    'datelove_niche_desc' => 'Al elegir este nicho, sólo los módulos &laquo;citas&raquo; se activará y el tema de la citas será activada de forma predeterminada.',
     'go_social_dating' => '¡Ir de citas sociales!',
     'go_social' => '¡Ir de social!',
     'go_dating' => '¡Ir de citas!',

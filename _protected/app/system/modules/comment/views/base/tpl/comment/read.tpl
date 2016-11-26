@@ -20,14 +20,19 @@
                     <p class="center">{{ $design->like($com->username,$com->firstName,$com->sex,$absolute_url) }} | {{ $design->report($com->sender,$com->username,$com->firstName,$com->sex) }}</p>
                 </div>
 
-                {if UserCore::auth() && ($member_id == $com->sender || $member_id == $com->recipient)}
+                {if $is_user_auth && ($member_id == $com->sender || $member_id == $com->recipient)}
                     <p><a class="s_bMarg button_medium" href="{{ $design->url('comment','comment','edit',"$table,$com->recipient,$com->sender,$com->commentId") }}">{lang 'Edit'}</a> |
                     <a class="button_medium" href="javascript:void(0)" onclick="comment('delete',{% $com->commentId %},{% $com->recipient %},{% $com->sender %},'{table}','{csrf_token}')">{lang 'Delete'}</a></p>
                 {/if}
             </div>
         {/each}
 
-        <p class="s_tMarg bold italic"><a href="{{ $design->url('comment','comment','add',"$table,$com->recipient") }}">{lang 'Add a comment'}</a> &nbsp; <a href="{{ $design->url('xml','rss','xmlrouter',"comment-$table,$com->recipient") }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
+        <p class="s_tMarg bold italic">
+            <a href="{{ $design->url('comment','comment','add',"$table,$com->recipient") }}">{lang 'Add a comment'}</a> &nbsp;
+            <a href="{{ $design->url('xml','rss','xmlrouter',"comment-$table,$com->recipient") }}">
+                <img src="{url_static_img}icon/feed.png" alt="{lang 'RSS Feed'}" />
+            </a>
+        </p>
 
         {main_include 'page_nav.inc.tpl'}
     {else}

@@ -17,7 +17,6 @@ PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 class LoginFormProcess extends Form
 {
-
    public function __construct()
    {
         parent::__construct();
@@ -47,7 +46,7 @@ class LoginFormProcess extends Form
 
             if ($sLogin === 'email_does_not_exist')
             {
-                $this->session->set('captcha_enabled',1); // Enable Captcha
+                $this->enableCaptcha();
                 \PFBC\Form::setError('form_login_user', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
                 $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username');
             }
@@ -58,7 +57,7 @@ class LoginFormProcess extends Form
                 if ($bIsLoginAttempt)
                     $oSecurityModel->addLoginAttempt();
 
-                $this->session->set('captcha_enabled',1); // Enable Captcha
+                $this->enableCaptcha();
                 $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
                 $sWrongPwdTxt .= t('Please try again (make sure your caps lock is off).') . '<br />';
                 $sWrongPwdTxt .= t('Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('lost-password','main','forgot','user'));
@@ -68,7 +67,7 @@ class LoginFormProcess extends Form
         else
         {
             $oSecurityModel->clearLoginAttempts();
-            $this->session->remove('captcha_enabled');
+            $this->session->remove('captcha_user_enabled');
             $iId = $oUserModel->getId($sEmail);
             $oUserData = $oUserModel->readProfile($iId);
 
@@ -87,10 +86,31 @@ class LoginFormProcess extends Form
             }
             else
             {
-                $oUser->setAuth($oUserData, $oUserModel, $this->session);
-                Header::redirect(Uri::get('user','account','index'), t('You are successfully logged!'));
+                $o2FactorModel = new TwoFactorAuthCoreModel('user');
+                if ($o2FactorModel->isEnabled($iId))
+                {
+                    // Store the user ID for 2FA
+                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
+
+                    Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'user'));
+                }
+                else
+                {
+                    $oUser->setAuth($oUserData, $oUserModel, $this->session, $oSecurityModel);
+
+                    Header::redirect(Uri::get('user','account','index'), t('You are successfully logged in!'));
+                }
             }
         }
     }
 
+    /**
+     * Enable the Captcha on the login form.
+     *
+     * @return void
+     */
+    protected function enableCaptcha()
+    {
+        $this->session->set('captcha_user_enabled',1);
+    }
 }

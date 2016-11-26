@@ -6,18 +6,20 @@
 
 /*
  * ATTENTION!
- * Please remplace "ph7cms" by your username by registering here: http://www.geonames.org/login
- * After, you will need to enable the Web service here: http://www.geonames.org/manageaccount
+ * Please remplace "ph7cms" by your username by registering on: http://www.geonames.org/login
+ * After, you will need to enable the Free Web Services here: http://www.geonames.org/manageaccount
  */
-
-var sGeonamesUsername = 'ph7cms'; // Remplace "ph7cms" by your username!
-
+$(document).ready(function() {
+    autocompleteCityInit('ph7cms'); // Remplace "ph7cms" by your username!
+});
 
 function autocompleteCityInit(sGeonamesUsername)
 {
-    // Set the variables
-    var sCountry = $('#str_country').val();
-    var sUrlSlug = (typeof sCountry != 'undefined' ? '?country=' + sCountry : '');
+    // Set "country" API parameter
+    var sUrlSlug = '';
+    $('#str_city').click(function() {
+        sUrlSlug = '&country=' + $('#str_country').val();
+    });
 
     $('#str_city').autocomplete(
     {
@@ -25,7 +27,7 @@ function autocompleteCityInit(sGeonamesUsername)
         {
             $.ajax(
             {
-                url: 'http://ws.geonames.org/searchJSON' + sUrlSlug + '&username=' + sGeonamesUsername,
+                url: 'http://ws.geonames.org/searchJSON?username=' + sGeonamesUsername + sUrlSlug,
                 dataType: 'jsonp',
                 data:
                 {
@@ -36,27 +38,31 @@ function autocompleteCityInit(sGeonamesUsername)
                 },
                 success: function(oData)
                 {
-                    oResponse($.map(oData.geonames, function(oItem)
+                    // Check if "geonames" exists. When the API returns an error message, it won't return "geonames"
+                    if (!oData.geonames)
                     {
-                        $('#str_city').click(function()
-                        {
-                            $('#str_state').val((oItem.adminName1 ? oItem.adminName1 : ''));
-                            $('#str_zip_code').val(oItem.postalcode);
-                        });
-
-                        return {
-                            label: oItem.name + (oItem.adminName1 ? ', ' + oItem.adminName1 : '') + (sCountry ? '' : ', ' + oItem.countryName),
-                            value: oItem.name
+                        if (oData.status.message) {
+                            console.error(oData.status.message); // Display the error message from the API into the browser's log
                         }
-                    }))
+                    }
+                    else
+                    {
+                        oResponse($.map(oData.geonames, function(oItem)
+                        {
+                            $('#str_city').mousemove(function()
+                            {
+                                $('#str_state').val((oItem.adminName1 ? oItem.adminName1 : ''));
+                                $('#str_zip_code').val(oItem.postalcode);
+                            });
+
+                            return {
+                                label: oItem.name + (oItem.adminName1 ? ', ' + oItem.adminName1 : '') + (sUrlSlug.trim() ? '' : ', ' + oItem.countryName),
+                                value: oItem.name
+                            }
+                        }));
+                    }
                 }
             })
         }
     })
 }
-
-
-$(document).ready(function()
-{
-    autocompleteCityInit();
-});

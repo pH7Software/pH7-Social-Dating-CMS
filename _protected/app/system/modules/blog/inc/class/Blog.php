@@ -10,7 +10,6 @@ use PH7\Framework\File\File, PH7\Framework\Config\Config;
 
 class Blog extends WriteCore
 {
-
     /**
      * Sets the Blog Thumbnail.
      *
@@ -32,11 +31,11 @@ class Blog extends WriteCore
                 /**
                  * The method deleteFile first test if the file exists, if so it delete the file.
                  */
-                $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog/' . PH7_IMG . $oPost->blogId;
+                $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_DS . PH7_IMG . $oPost->blogId;
                 $oFile->deleteFile($sPathName); // It erases the old thumbnail
                 $oFile->createDir($sPathName);
                 $oImage->square(100);
-                $oImage->save($sPathName . '/thumb.png');
+                $oImage->save($sPathName . PH7_DS . static::THUMBNAIL_FILENAME);
 
                 // Clear the Web browser cache
                 (new Framework\Navigation\Browser)->noCache();
@@ -53,10 +52,9 @@ class Blog extends WriteCore
      */
     public static function getThumb($iBlogId)
     {
-        $sUrl = PH7_URL_DATA_SYS_MOD . 'blog/' . PH7_IMG;
-        $sFullPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog/' . PH7_IMG . $iBlogId . '/thumb.png';
-        $sThumb = (is_file($sFullPath)) ? $iBlogId . '/thumb.png?v=' . File::version($sFullPath) : 'default_thumb.jpg';
-        return $sUrl . $sThumb;
+        $sFullPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_DS . PH7_IMG . $iBlogId . PH7_DS . static::THUMBNAIL_FILENAME;
+        $sThumb = (is_file($sFullPath)) ? $iBlogId . PH7_SH . static::THUMBNAIL_FILENAME . '?v=' . File::version($sFullPath) : 'default_thumb.jpg';
+        return PH7_URL_DATA_SYS_MOD . 'blog' . PH7_SH . PH7_IMG . $sThumb;
     }
 
     /**
@@ -69,5 +67,4 @@ class Blog extends WriteCore
     {
         return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !(new BlogModel)->postIdExists($sPostId));
     }
-
 }

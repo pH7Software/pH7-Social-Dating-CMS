@@ -7,7 +7,6 @@
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Session
- * @version          1.0
  */
 
 namespace PH7\Framework\Session;
@@ -19,7 +18,6 @@ class Session
 {
 
     /**
-     * @desc Constructor to initialize PHP's session.
      * @param boolean $bDisableSessCache Disable PHP's session cache. Default FALSE
      */
     public function __construct($bDisableSessCache = false)
@@ -29,8 +27,6 @@ class Session
 
         session_name(Config::getInstance()->values['session']['cookie_name']);
 
-        $bSecure = (substr(PH7_URL_PROT, 0, 5) === 'https') ? true : false;
-
         /**
          * In localhost mode, security session_set_cookie_params causing problems in the sessions, so we disable this if we are in localhost mode.
          * Otherwise if we are in production mode, we activate this.
@@ -38,16 +34,15 @@ class Session
         if (!(new \PH7\Framework\Server\Server)->isLocalHost())
         {
             $iTime = (int) Config::getInstance()->values['session']['expiration'];
-            session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], $bSecure, true);
+            session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], (substr(PH7_URL_PROT, 0, 5) === 'https'), true);
         }
 
-        // Session initialization
-        if ('' === session_id()) // Yoda condition
-            @session_start();
+        $this->initializePHPSession();
     }
 
     /**
-     * @desc Set a PHP Session.
+     * Set a PHP session.
+     *
      * @param mixed (array | string) $mName Name of the session.
      * @param string $sValue Value of the session, Optional if the session data is in a array.
      * @return void
@@ -66,19 +61,21 @@ class Session
     }
 
     /**
-     * @desc Get Session.
+     * Get a session value by giving its name.
+     *
      * @param string $sName Name of the session.
      * @param boolean $bEscape Default TRUE
-     * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session does not exist.
+     * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */
     public function get($sName, $bEscape = true)
     {
         $sSessionName = Config::getInstance()->values['session']['prefix'] . $sName;
-        return (!empty($_SESSION[$sSessionName]) ? ($bEscape ? escape($_SESSION[$sSessionName]) : $_SESSION[$sSessionName]) : '');
+        return (isset($_SESSION[$sSessionName]) ? ($bEscape ? escape($_SESSION[$sSessionName]) : $_SESSION[$sSessionName]) : '');
     }
 
     /**
-     * @desc Returns a boolean informing if the session exists or not.
+     * Returns a boolean informing if the session exists or not.
+     *
      * @param mixed (array | string) $mName Name of the session.
      * @return boolean
      */
@@ -93,14 +90,15 @@ class Session
         }
         else
         {
-            $bExists = (!empty($_SESSION[Config::getInstance()->values['session']['prefix'] . $mName])) ? true : false;
+            $bExists = isset($_SESSION[Config::getInstance()->values['session']['prefix'] . $mName]);
         }
 
         return $bExists;
     }
 
     /**
-     * @desc Delete the session(s) key if the session exists.
+     * Delete the session(s) if the session exists.
+     *
      * @param mixed (array | string) $mName Name of the session to delete.
      * @return void
      */
@@ -122,16 +120,19 @@ class Session
     }
 
     /**
-     * @desc Session regenerate ID.
+     * Session regenerate ID.
+     *
      * @return void
      */
     public function regenerateId()
     {
-        session_regenerate_id(true);
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_regenerate_id(true);
+        }
     }
 
     /**
-     * @desc Destroy all PHP's sessions.
+     * Destroy all PHP's sessions.
      */
     public function destroy()
     {
@@ -141,6 +142,17 @@ class Session
             session_unset();
             session_destroy();
         }
+    }
+
+    /**
+     * Check if the session is already initialized and initialize it if it isn't the case.
+     *
+     * @return void
+     */
+    protected function initializePHPSession()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE)
+            @session_start();
     }
 
     protected function close()

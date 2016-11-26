@@ -7,6 +7,8 @@
  */
 namespace PH7;
 
+use PH7\Framework\Config\Config;
+
 class AlbumForm
 {
 
@@ -20,13 +22,15 @@ class AlbumForm
             Framework\Url\Header::redirect();
         }
 
+        $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
+
         $oForm = new \PFBC\Form('form_picture_album');
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_picture_album', 'form_picture_album'));
         $oForm->addElement(new \PFBC\Element\Token('album'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Name of your album:'), 'name', array('required'=>1, 'validation' => new \PFBC\Validation\Str(2, 40))));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Description of your album:'), 'description', array('validation' => new \PFBC\Validation\Str(2, 200))));
-        $oForm->addElement(new \PFBC\Element\File(t('Thumb of the your album'), 'album', array('accept' => 'image/*', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Name of your Album Cover:'), 'name', array('required'=>1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Description of your Album Cover:'), 'description', array('validation' => new \PFBC\Validation\Str(2, 200))));
+        $oForm->addElement(new \PFBC\Element\File(t('Thumb for the Album Cover:'), 'album', array('accept' => 'image/*', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

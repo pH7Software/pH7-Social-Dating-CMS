@@ -8,7 +8,7 @@
 
     <p><label for="license">{$LANG.your_license}</label><br />
     {$LANG.registration_for_license}<br />
-    <input type="text" name="license" onkeypress="return checkInput(event)" id="license" value="{$smarty.session.val.license|escape}" autocomplete="off" required="required" /></p>
+    <input type="text" name="license" onkeypress="return checkInput(event)" id="license" value="{$smarty.session.val.license|escape}" autocomplete="off" placeholder="{$LANG.your_license}" required="required" /></p>
     <div id="txtLic"></div>
     <p><button type="submit" class="btn btn-primary btn-lg">{$LANG.register}</button></p>
 </form>

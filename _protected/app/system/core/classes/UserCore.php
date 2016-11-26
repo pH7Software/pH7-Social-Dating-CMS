@@ -6,7 +6,6 @@
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
- * @version        1.1
  */
 namespace PH7;
 
@@ -18,7 +17,8 @@ PH7\Framework\Ip\Ip,
 PH7\Framework\File\File,
 PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+PH7\Framework\Url\Header,
+PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 // Abstract Class
 class UserCore
@@ -32,14 +32,22 @@ class UserCore
     public static function auth()
     {
         $oSession = new Session;
-        $oBrowser = new Browser;
+        $bIsConnected = (((int)$oSession->exists('member_id')) && $oSession->get('member_ip') === Ip::get() && $oSession->get('member_http_user_agent') === (new Browser)->getUserAgent());
 
-        $bIsConnect = (((int)$oSession->exists('member_id')) && $oSession->get('member_ip') === Ip::get() && $oSession->get('member_http_user_agent') === $oBrowser->getUserAgent());
+        /** Destroy the object to minimize the CPU resources **/
+        unset($oSession);
 
-        /** Destruction of the object and minimize CPU resources **/
-        unset($oSession, $oBrowser);
+        return $bIsConnected;
+    }
 
-        return $bIsConnect;
+    /**
+     * Check if an admin is logged as a user.
+     *
+     * @return boolean
+     */
+    public static function isAdminLoggedAs()
+    {
+        return (new Session)->exists('login_user_as');
     }
 
     /**
@@ -290,14 +298,16 @@ class UserCore
      * @param object $oUserData User database object.
      * @param object \PH7\UserCoreModel $oUserModel
      * @param object \PH7\Framework\Session\Session $oSession
+     * @param object \PH7\Framework\Mvc\Model\Security $oSecurityModel
      * @return void
      */
-    public function setAuth($oUserData, UserCoreModel $oUserModel, Session $oSession)
+    public function setAuth($oUserData, UserCoreModel $oUserModel, Session $oSession, SecurityModel $oSecurityModel)
     {
-        // Is disconnected if the user is logged on as "affiliate" or "administrator".
-        if (AffiliateCore::auth() || AdminCore::auth()) $oSession->destroy();
+        // Remove the session if the user is logged on as "affiliate" or "administrator".
+        if (AffiliateCore::auth() || AdminCore::auth())
+            $oSession->destroy();
 
-        // Regenerate the session ID to prevent the session fixation
+        // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
 
         // Now we connect the member
@@ -315,10 +325,8 @@ class UserCore
 
         $oSession->set($aSessionData);
 
-        (new Framework\Mvc\Model\Security)->addLoginLog($oUserData->email, $oUserData->username, '*****', 'Logged in!');
+        $oSecurityModel->addLoginLog($oUserData->email, $oUserData->username, '*****', 'Logged in!');
         $oUserModel->setLastActivity($oUserData->profileId);
-
-        unset($oUserModel, $oUserData);
     }
 
     /**

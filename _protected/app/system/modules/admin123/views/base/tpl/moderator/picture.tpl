@@ -24,6 +24,6 @@
 
 {else}
 
-  <p class="center">{lang 'No Pictures for the treatment of moderate.'}</p>
+  <p class="center">{lang 'No Pictures found for the moderation treatment.'}</p>
 
 {/if}

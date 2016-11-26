@@ -11,7 +11,16 @@
  * @author Dmitry (dio) Levashov
  **/
 window.elFinderSupportVer1 = function(upload) {
-    var self = this;
+    var self = this,
+        dateObj, today, yesterday,
+        getDateString = function(date) {
+            return date.replace('Today', today).replace('Yesterday', yesterday);
+        };
+
+    dateObj = new Date();
+    today = dateObj.getFullYear() + '/' + (dateObj.getMonth() + 1) + '/' + dateObj.getDate();
+    dateObj = new Date(Date.now() - 86400000);
+    yesterday = dateObj.getFullYear() + '/' + (dateObj.getMonth() + 1) + '/' + dateObj.getDate();
 
     this.upload = upload || 'auto';
 
@@ -25,7 +34,7 @@ window.elFinderSupportVer1 = function(upload) {
             }
 
             try {
-                data = $.parseJSON(text);
+                data = JSON.parse(text);
             } catch (e) {
                 return {error : ['errResponse', 'errDataNotJSON']}
             }
@@ -46,7 +55,10 @@ window.elFinderSupportVer1 = function(upload) {
             xhr;
 
         dfrd.abort = function() {
-            xhr.state() == 'pending' && xhr.abort();
+            if (xhr.state() == 'pending') {
+                xhr.quiet = true;
+                xhr.abort();
+            }
         }
 
         switch (cmd) {
@@ -99,7 +111,15 @@ window.elFinderSupportVer1 = function(upload) {
                 opts.data.current = opts.data.target;
                 break;
             case 'paste':
-                opts.data.current = opts.data.dst
+                opts.data.current = opts.data.dst;
+                if (! opts.data.tree) {
+                    $.each(opts.data.targets, function(i, h) {
+                        if (fm.file(h) && fm.file(h).mime === 'directory') {
+                            opts.data.tree = '1';
+                            return false;
+                        }
+                    });
+                }
                 break;
 
             case 'size':
@@ -109,6 +129,10 @@ window.elFinderSupportVer1 = function(upload) {
                 return dfrd.resolve({error : fm.res('error', 'cmdsupport')});
                 break;
 
+            case 'file':
+                opts.data.cmd = 'open';
+                opts.data.current = fm.file(opts.data.target).phash;
+                break;
         }
         // cmd = opts.data.cmd
 
@@ -119,19 +143,18 @@ window.elFinderSupportVer1 = function(upload) {
             .done(function(raw) {
                 data = self.normalize(cmd, raw);
 
-                // cmd != 'open' && self.fm.log(data);
-
-                if (cmd == 'paste' && !data.error) {
-                    fm.sync();
-                    dfrd.resolve({});
-                } else {
-                    dfrd.resolve(data);
+                if (cmd == 'paste') {
+                    if (! data.error && ! data.added.length && ! data.removed.length && ! data.changed.length) {
+                        data.error = [opts.data.cut? 'errMove' : 'errCopy', fm.i18n('items'), 'errExists', fm.file(opts.data.targets[0]).name];
+                    }
+                    if (! data.error) {
+                        fm.sync();
+                    }
                 }
+                dfrd.resolve(data);
             })
 
         return dfrd;
-
-        return $.ajax(opts);
     }
 
     // fix old connectors errors messages as possible
@@ -152,9 +175,36 @@ window.elFinderSupportVer1 = function(upload) {
 
     this.normalize = function(cmd, data) {
         var self = this,
+            fm   = this.fm,
             files = {},
             filter = function(file) { return file && file.hash && file.name && file.mime ? file : null; },
-            phash;
+            getDirs = function(items) {
+                return $.map(items, function(i) {
+                    return i && i.mime && i.mime === 'directory'? i : null;
+                });
+            },
+            getTreeDiff = function(files) {
+                var dirs = getDirs(files);
+                treeDiff = fm.diff(dirs, null, ['date', 'ts']);
+                if (treeDiff.added.length) {
+                    treeDiff.added = getDirs(treeDiff.added);
+                }
+                if (treeDiff.changed.length) {
+                    treeDiff.changed = getDirs(treeDiff.changed);
+                }
+                if (treeDiff.removed.length) {
+                    var removed = [];
+                    $.each(treeDiff.removed, function(i, h) {
+                        var item;
+                        if ((item = fm.file(h)) && item.mime === 'directory') {
+                            removed.push(h);
+                        }
+                    });
+                    treeDiff.removed = removed;
+                }
+                return treeDiff;
+            },
+            phash, diff, isCwd, treeDiff;
 
         if ((cmd == 'tmb' || cmd == 'get')) {
             return data;
@@ -180,11 +230,13 @@ window.elFinderSupportVer1 = function(upload) {
 
         if (cmd == 'put') {
 
-            phash = this.fm.file(data.target.hash).phash;
+            phash = fm.file(data.target.hash).phash;
             return {changed : [this.normalizeFile(data.target, phash)]};
         }
 
         phash = data.cwd.hash;
+
+        isCwd = (phash == fm.cwd().hash);
 
         if (data.tree) {
             $.each(this.normalizeTree(data.tree), function(i, file) {
@@ -193,10 +245,18 @@ window.elFinderSupportVer1 = function(upload) {
         }
 
         $.each(data.cdc||[], function(i, file) {
-            var hash = file.hash;
+            var hash = file.hash,
+                mcts;
 
             if (files[hash]) {
-                files[hash].date   = file.date;
+                if (file.date) {
+                    mcts = Date.parse(getDateString(file.date));
+                    if (mcts && !isNaN(mcts)) {
+                        files[hash].ts = Math.floor(mcts / 1000);
+                    } else {
+                        files[hash].date = file.date || fm.formatDate(file);
+                    }
+                }
                 files[hash].locked = file.hash == phash ? true : file.rm === void(0) ? false : !file.rm;
             } else {
                 files[hash] = self.normalizeFile(file, phash, data.tmb);
@@ -204,7 +264,7 @@ window.elFinderSupportVer1 = function(upload) {
         });
 
         if (!data.tree) {
-            $.each(this.fm.files(), function(hash, file) {
+            $.each(fm.files(), function(hash, file) {
                 if (!files[hash] && file.phash != phash && file.mime == 'directory') {
                     files[hash] = file;
                 }
@@ -221,14 +281,26 @@ window.elFinderSupportVer1 = function(upload) {
                 };
         }
 
-
+        if (isCwd) {
+            diff = fm.diff($.map(files, filter));
+        } else {
+            if (data.tree) {
+                diff = getTreeDiff(files);
+            } else {
+                diff = {
+                    added   : [],
+                    removed : [],
+                    changed : []
+                };
+            }
+        }
 
         return $.extend({
             current : data.cwd.hash,
             error   : data.error,
             warning : data.warning,
             options : {tmb : !!data.tmb}
-        }, this.fm.diff($.map(files, filter)));
+        }, diff);
 
     }
 
@@ -266,22 +338,32 @@ window.elFinderSupportVer1 = function(upload) {
     this.normalizeFile = function(file, phash, tmb) {
         var mime = file.mime || 'directory',
             size = mime == 'directory' && !file.linkTo ? 0 : file.size,
+            mcts = file.date? Date.parse(getDateString(file.date)) : void 0,
             info = {
                 url    : file.url,
                 hash   : file.hash,
                 phash  : phash,
                 name   : file.name,
                 mime   : mime,
-                date   : file.date || 'unknown',
+                ts     : file.ts,
                 size   : size,
                 read   : file.read,
                 write  : file.write,
                 locked : !phash ? true : file.rm === void(0) ? false : !file.rm
             };
 
-        if (file.mime == 'application/x-empty') {
+        if (! info.ts) {
+            if (mcts && !isNaN(mcts)) {
+                info.ts = Math.floor(mcts / 1000);
+            } else {
+                info.date = file.date || this.fm.formatDate(file);
+            }
+        }
+
+        if (file.mime == 'application/x-empty' || file.mime == 'inode/x-empty') {
             info.mime = 'text/plain';
         }
+
         if (file.linkTo) {
             info.alias = file.linkTo;
         }
@@ -312,7 +394,7 @@ window.elFinderSupportVer1 = function(upload) {
     this.normalizeOptions = function(data) {
         var opts = {
                 path          : data.cwd.rel,
-                disabled      : data.disabled || [],
+                disabled      : $.merge((data.disabled || []), [ 'search', 'netmount', 'zipdl' ]),
                 tmb           : !!data.tmb,
                 copyOverwrite : true
             };
@@ -335,4 +417,4 @@ window.elFinderSupportVer1 = function(upload) {
     }
 
 
-}
+};

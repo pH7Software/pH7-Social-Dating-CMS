@@ -90,8 +90,8 @@ function validate_name($sName, $iMin = 2, $iMax = 20)
  * Validate username.
  *
  * @param string $sUsername
- * @param integer $iMin Default 4
- * @param integer $iMax Default 40
+ * @param integer $iMin Default 3
+ * @param integer $iMax Default 30
  * @return integer (0 = OK | 1 = too short | 2 = too long | 3 = bad username).
  */
 function validate_username($sUsername, $iMin = 3, $iMax = 30)

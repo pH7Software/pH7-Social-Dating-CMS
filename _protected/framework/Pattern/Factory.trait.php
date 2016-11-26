@@ -10,12 +10,12 @@
  */
 
 namespace PH7\Framework\Pattern;
+
 defined('PH7') or exit('Restricted access');
 
 trait Factory
 {
-
-    use Base;
+    use Statik;
 
     /**
      * Loading a class.
@@ -30,11 +30,12 @@ trait Factory
         $sClass = static::class;
         $aArgs = func_get_args();
 
-        if (class_exists($sClass))
+        if (class_exists($sClass)) {
             return (new \ReflectionClass($sClass))->newInstanceArgs($aArgs);
-        else
-            throw new \PH7\Framework\Error\CException\PH7RuntimeException('The "' . $sClass . '" was not found or is not defined.');
+        } else {
+            throw new \PH7\Framework\Error\CException\PH7RuntimeException(
+                'The "' . $sClass . '" was not found or is not defined.'
+            );
+        }
     }
-
 }
-

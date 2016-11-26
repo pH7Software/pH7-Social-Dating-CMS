@@ -15,7 +15,7 @@ class HotOrNotModel extends Framework\Mvc\Model\Engine\Model
      * Get random picture.
      *
      * @param integer $iProfileId Default NULL
-     * If the user is connected, you need the ID of the user in this parameter to not display the avatar of the user since the user can not vote for himself.
+     * If the user is logged in, you need to set the ID of that user in this parameter to not display the avatar of the user since the user cannot vote for himself.
      *
      * @param integer $iApproved Default 1
      * @param integer $iOffset Default 0

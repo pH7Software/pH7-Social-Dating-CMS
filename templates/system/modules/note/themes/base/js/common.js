@@ -7,7 +7,7 @@
 $('#post_id').keyup(function()
 {
     $('.your-address').hide();
-    var iProfileId = $('data-profile_id').val();
+    var iProfileId = $(this).data('profile_id');
     var iPostId = $('#post_id').val();
 
     $.ajax({

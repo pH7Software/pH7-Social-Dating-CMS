@@ -18,7 +18,7 @@ class Permission extends PermissionCore
         // Level for Blogs
         $bAdminAuth = AdminCore::auth();
 
-        if (!$bAdminAuth)
+        if (!$bAdminAuth || UserCore::isAdminLoggedAs())
         {
             if (!$this->checkMembership() || ($this->registry->action === 'read' && !$this->group->read_blog_posts))
             {

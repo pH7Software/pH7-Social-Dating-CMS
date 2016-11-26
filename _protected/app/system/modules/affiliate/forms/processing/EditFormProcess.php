@@ -8,7 +8,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Cache\Cache, PH7\Framework\Mvc\Request\Http;
 
 class EditFormProcess extends Form
 {
@@ -26,7 +26,7 @@ class EditFormProcess extends Form
             $oAffModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, 'Affiliates');
             $this->session->set('affiliate_first_name', $this->httpRequest->post('first_name'));
 
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Affiliates', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'firstName' . $iProfileId . 'Affiliates', null)->clear();
         }
 
         if(!$this->str->equals($this->httpRequest->post('last_name'), $oAff->lastName))
@@ -37,7 +37,7 @@ class EditFormProcess extends Form
             $oAffModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, 'Affiliates');
             $this->session->set('affiliate_sex', $this->httpRequest->post('sex'));
 
-            (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Affiliates', null)->clear();
+            (new Cache)->start(UserCoreModel::CACHE_GROUP, 'sex' . $iProfileId . 'Affiliates', null)->clear();
         }
 
         if(!$this->str->equals($this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d'), $oAff->birthDate))
@@ -61,7 +61,7 @@ class EditFormProcess extends Form
 
         unset($oAffModel, $oAff, $oAffCache);
 
-        \PFBC\Form::setSuccess('form_aff_edit_account', t('Your profile has been saved successfully!'));
+        \PFBC\Form::setSuccess('form_aff_edit_account', t('The profile has been successfully updated'));
     }
 
 }

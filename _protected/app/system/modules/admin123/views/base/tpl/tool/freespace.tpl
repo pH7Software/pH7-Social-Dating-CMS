@@ -1,6 +1,6 @@
 <div class="center">
 
-  <div class="border s_marg">
+  <div class="s_marg">
   <script src="https://www.google.com/jsapi"></script>
   <script>
     google.load("visualization", "1", {packages:["corechart"]});

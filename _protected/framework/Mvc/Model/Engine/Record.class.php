@@ -40,7 +40,7 @@ class Record
     use \PH7\Framework\Pattern\Singleton;
 
     /**
-     * We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
+     * We do not put a "__construct" and "__clone" "private" because it is already included in the \PH7\Framework\Pattern\Statik trait that is included in the \PH7\Framework\Pattern\Singleton trait.
      */
 
     /**
@@ -310,7 +310,7 @@ class Record
                 foreach ($mTable as $sTable)
                     $sTable .= Db::prefix($sTable, true) . ',';
 
-                $sTable = substr($sTable, 0, -1);
+                $sTable = rtrim($sTable, ',');
             }
             else
             {

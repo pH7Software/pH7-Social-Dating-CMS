@@ -1,6 +1,3 @@
-{* Store "UserCore::auth()" function in a variable in order to optimize the script and call this function only once in the file *}
-{{ $is_user_auth = UserCore::auth() }}
-
 {{ $design->htmlHeader() }}
 <html lang="{% $config->values['language']['lang'] %}">
   <head>
@@ -17,12 +14,12 @@
     {if !$is_user_auth}{{ $design->regionalUrls() }}{/if}
     <link rel="author" href="{url_root}humans.txt" />
     <meta name="robots" content="{meta_robots}" />
-    <meta name="author" content="{meta_author}"/>
+    <meta name="author" content="{meta_author}" />
     <meta name="copyright" content="{meta_copyright}" />
     <meta name="revisit-after" content="7 days" />
     <meta name="category" content="{meta_category}" />
-    <meta name="rating" content="{meta_rating}"/>
-    <meta name="distribution" content="{meta_distribution}"/>
+    <meta name="rating" content="{meta_rating}" />
+    <meta name="distribution" content="{meta_distribution}" />
     {if $header}{header}{/if}
 
     <!-- Begin Copyright pH7 Dating/Social CMS by Pierre-Henry SORIA, All Rights Reserved -->
@@ -40,11 +37,12 @@
     {{ $design->staticFiles('css', PH7_STATIC . PH7_JS . 'jquery/box/', 'box.css') }} {* We have to include box CSS alone because it includes images in its folder *}
     {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS, 'bootstrap.css,bootstrap_customize.css,animate.css') }}
     {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'common.css,style.css,layout.css,menu.css,like.css,color.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
     {* Custom CSS code *}
     {{ $design->externalCssFile(PH7_RELATIVE.'asset/css/style.css') }}
 
-    {if $is_user_auth}
+    {if $is_user_auth AND $is_im_enabled}
       {{ $design->staticFiles('css', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'messenger.css') }}
     {/if}
 
@@ -55,7 +53,7 @@
 
     <!-- Begin Header JavaScript -->
     <script>var pH7Url={base:'{url_root}',relative:'{url_relative}',tpl:'{url_tpl}',stic:'{url_static}',tplImg:'{url_tpl_img}',tplJs:'{url_tpl_js}',tplMod:'{url_tpl_mod}',data:'{url_data}'};</script>
-    {if AdminCore::auth()}<script>pH7Url.admin_mod = '{url_admin_mod}';</script>{/if}
+    {if $is_admin_auth}<script>pH7Url.admin_mod = '{url_admin_mod}';</script>{/if}
     {{ $design->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery.js') }}
     <!-- End Header JavaScript -->
 
@@ -75,34 +73,23 @@
 
     <!-- Begin Header -->
     <header>
-
-      <noscript>
-        <div class="err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
-      </noscript>
-
-      <div class="row">
-        <div role="banner" id="logo" class="col-md-8"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
-      </div>
-
-    </header>
-    <!-- End Header -->
-
-    <!-- Begin Popups -->
-    <div id="box">
-      <p></p>
-    </div>
-    <!-- End Popups -->
-
-    <!-- Begin Content -->
-    <div role="main" class="container" id="content">
-
       {* If we aren't on the the splash page, then display the menu *}
-      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
+      {if !$is_guest_homepage}
         {main_include 'top_menu.inc.tpl'}
       {/if}
 
+      <noscript>
+          <div class="noscript err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
+      </noscript>
+
+      {if $is_guest_homepage}
+        <div class="row">
+          <div role="banner" id="logo" class="col-md-8"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
+        </div>
+      {/if}
+
       {* Headings group *}
-      <div id="headings" class="center">
+      <div class="center" id="headings">
         {if !empty($h1_title )}
           <h1>{h1_title}</h1>
         {/if}
@@ -117,12 +104,22 @@
         {/if}
       </div>
       {* Don't display the top middle banner on the the splash page *}
-      {if !(!$is_user_auth AND $this->registry->module == 'user' AND $this->registry->controller == 'MainController' AND $this->registry->action == 'index')}
+      {if !$is_guest_homepage}
           <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
       {/if}
 
       <div class="clear"></div>
+    </header>
+    <!-- End Header -->
 
+    <!-- Begin Popups -->
+    <div id="box">
+      <p></p>
+    </div>
+    <!-- End Popups -->
+
+    <!-- Begin Content -->
+    <div role="main" class="container" id="content">
       {* Alert Message *}
       {{ $design->flashMsg() }}
       <div class="msg"></div>
@@ -158,12 +155,12 @@
       {* To avoid scammers *}
       {if $is_user_auth AND $current_url != $url_root}
         <div class="warning_block center"><p>{lang}<strong>Attention!</strong> Some of the women (or men) profiles you see on dating sites might be scams to collect money.<br />
-        People who is really interested in you will never ask for money.<br />
+        People who are really interested in you will never ask for money.<br />
         Be careful, don\'t send the money to anybody!{/lang}</p></div>
       {/if}
 
       <div role="contentinfo">
-        <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /> &bull; {{ $design->smartLink() }}</p> {{ $design->littleLikeApi() }}</div>{{ $design->langList() }}
+        <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /> {{ $design->smartLink() }}</p> {{ $design->littleLikeApi() }}</div>{{ $design->langList() }}
         {main_include 'bottom_menu.inc.tpl'}
       </div>
 
@@ -171,10 +168,12 @@
         <div class="ft">
           <p>{{ $design->stat() }}</p>
         </div>
-        <p class="small red">{lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="red">{lang 'here'}</a>.</p>
+        <p class="small darkred">{lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="darkred">{lang 'here'}</a>.</p>
       {/if}
-      <div class="right"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow">http://www.maxmind.com</a></small></div>
     </footer>
+    <!-- Required for the free version of MaxMind Geo DB -->
+    <div class="clear"></div>
+    <div class="right vs_marg"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow" class="gray">http://www.maxmind.com</a></small></div>
     <!-- End Footer -->
 
     <!-- Begin Footer JavaScript -->
@@ -182,11 +181,14 @@
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS, 'global.js') }}
     {{ $design->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery-ui.js') }} {* UI must be the last here, otherwise the jQueryUI buttons won't work *}
 
-    {* SetUserActivity & User Chat *}
+    {* SetUserActivity and User Chat *}
     {if $is_user_auth}
       {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'setUserActivity.js,jquery/sound.js') }}
-      {{ $lang_file = Framework\Translate\Lang::getJsFile(PH7_PATH_TPL_SYS_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS . PH7_LANG) }}
-      {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, PH7_LANG . $lang_file . ',jquery.cookie.js,Messenger.js') }}
+
+      {if $is_im_enabled}
+        {{ $lang_file = Framework\Translate\Lang::getJsFile(PH7_PATH_TPL_SYS_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_JS . PH7_LANG) }}
+        {{ $design->staticFiles('js', PH7_LAYOUT . PH7_SYS . PH7_MOD . 'im/' . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_JS, PH7_LANG . $lang_file . ',jquery.cookie.js,Messenger.js') }}
+      {/if}
     {/if}
 
     {* Cookie info bar *}
@@ -208,13 +210,9 @@
     <!-- Common Dialog -->
     {{ $design->message() }}
     {{ $design->error() }}
-    {if $is_disclaimer}
+    {if $is_disclaimer AND !$is_admin_auth}
       {main_include 'disclaimer.inc.tpl'}
     {/if}
-
     <!-- End Footer JavaScript -->
-
-{* Destroy the variable *}
-{{ unset($is_user_auth) }}
 
 {{ $design->htmlFooter() }}

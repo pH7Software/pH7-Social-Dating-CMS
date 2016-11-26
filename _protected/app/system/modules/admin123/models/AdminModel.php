@@ -13,7 +13,7 @@ class AdminModel extends AdminCoreModel
 {
 
     /**
-     * It recreates an admin method more complicated and more secure than the classical PH7\UserCoreModel::login() method.
+     * It recreates an admin method more complicated and more secure than the classic one PH7\UserCoreModel::login()
      *
      * @param string $sEmail
      * @param string $sUsername
@@ -22,7 +22,7 @@ class AdminModel extends AdminCoreModel
      */
     public function adminLogin($sEmail, $sUsername, $sPassword)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT email, username, password FROM' .
+        $rStmt = Db::getInstance()->prepare('SELECT password FROM' .
             Db::prefix('Admins') . 'WHERE email = :email AND username = :username LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);

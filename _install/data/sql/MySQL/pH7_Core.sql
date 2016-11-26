@@ -39,12 +39,14 @@ CREATE TABLE IF NOT EXISTS pH7_Admins (
   lastActivity datetime DEFAULT NULL,
   lastEdit datetime DEFAULT NULL,
   ban enum('0','1') DEFAULT '0',
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
+  isTwoFactorAuth enum('1','0') DEFAULT '0',
+  twoFactorAuthSecret varchar(40) DEFAULT NULL,
   hashValidation varchar(40) DEFAULT NULL,
   PRIMARY KEY (profileId),
   UNIQUE KEY username (username),
   UNIQUE KEY email (email)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_Memberships (
@@ -57,15 +59,15 @@ CREATE TABLE IF NOT EXISTS pH7_Memberships (
   enable enum('1','0') DEFAULT '1',
   orderId tinyint(2) unsigned NOT NULL,
   PRIMARY KEY (groupId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_Memberships (groupId, name, description, permissions, price, expirationDays, enable, orderId) VALUES
-(1, 'Visitor', 'This subscription is offered to all visitors who visit the site.', 'a:23:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"0";}', 0.00, 0, '1', 1),
-(9, 'Pending', 'Pending subscription provisional migration to a different subscription.', 'a:23:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"0";}', 0.00, 15, '0', 2),
-(2, 'Regular (Free)', 'Free Membership.', 'a:23:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 0.00, 0, '1', 3),
-(4, 'Platinum', 'The membership for the small budget.', 'a:23:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 9.99, 5, '1', 4),
-(5, 'Silver', 'The premium membership!', 'a:23:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 19.99, 10, '1', 5),
-(6, 'Gold', 'The must membership! The Gold!!!', 'a:23:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 29.99, 30, '1', 6);
+(1, 'Visitor', 'This subscription is offered to all visitors who visit the site.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"0";}', 0.00, 0, '1', 1),
+(9, 'Pending', 'Pending subscription provisional migration to a different subscription.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"0";}', 0.00, 15, '0', 2),
+(2, 'Regular (Free)', 'Free Membership.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 0.00, 0, '1', 3),
+(4, 'Platinum', 'The membership for the small budget.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 9.99, 5, '1', 4),
+(5, 'Silver', 'The premium membership!', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 19.99, 10, '1', 5),
+(6, 'Gold', 'The must membership! The Gold!!!', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 29.99, 30, '1', 6);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Members (
@@ -78,7 +80,7 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   birthDate date NOT NULL DEFAULT '0000-00-00',
   sex enum('male','female','couple') NOT NULL DEFAULT 'female',
   matchSex set('male','female','couple') NOT NULL DEFAULT 'male',
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   bankAccount varchar(150) DEFAULT NULL,
   groupId tinyint(2) unsigned NOT NULL DEFAULT 2,
   membershipDate datetime DEFAULT NULL,
@@ -91,6 +93,8 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   featured tinyint(1) unsigned NOT NULL DEFAULT 0,
   lang varchar(5) NOT NULL DEFAULT 'en_US',
   hashValidation varchar(40) DEFAULT NULL,
+  isTwoFactorAuth enum('1','0') DEFAULT '0',
+  twoFactorAuthSecret varchar(40) DEFAULT NULL,
   views int(11) NOT NULL DEFAULT 0,
   reference varchar(255) DEFAULT NULL,
   votes int(11) DEFAULT 0,
@@ -104,7 +108,7 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   UNIQUE KEY (username),
   UNIQUE KEY (email),
   KEY birthDate (birthDate)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersInfo (
@@ -148,10 +152,10 @@ CREATE TABLE IF NOT EXISTS pH7_MembersNotifications (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- GHOST User. Do not remove ghost default member!
-INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, sex, matchSex, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
-(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '', '', '127.0.0.1', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
+INSERT INTO pH7_Members (profileId, email, username, password, firstName, lastName, birthDate, ip, lastActivity, featured, active, userStatus, groupId, joinDate) VALUES
+(1, 'ghost@ghost', 'ghost', @sPassword, 'Ghost', 'The Ghost', '1001-01-01', '00.000.00.00', @sCurrentDate, 0, 1, 1, 2, @sCurrentDate);
 INSERT INTO pH7_MembersInfo (profileId, description, address, street, city, state, zipCode, country) VALUES
-(1, 'This profile no longer exists, so I''m a ghost who replaces him during this time', 'The Ghost City', 'Ghost street', 'Ghost town', 'Ghost state', '000000', 'US');
+(1, 'This profile doesn''t exist anymore. So I''m the ghost who replaces him/her during this time', 'The Ghost City', 'Ghost Street', 'Ghost Town', 'Ghost State', '000000', 'US');
 -- Privacy settings
 INSERT INTO pH7_MembersPrivacy (profileId, privacyProfile, searchProfile, userSaveViews) VALUES (1, 'all', 'yes', 'yes');
 -- Notifications
@@ -167,7 +171,7 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliates (
   email varchar(120) NOT NULL,
   sex enum('male','female') NOT NULL DEFAULT 'male',
   birthDate date NOT NULL DEFAULT '0000-00-00',
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   bankAccount varchar(150) DEFAULT NULL,
   amount decimal(8,2) NOT NULL DEFAULT '0.00',
   totalPayment decimal(8,2) NOT NULL DEFAULT '0.00',
@@ -175,6 +179,8 @@ CREATE TABLE IF NOT EXISTS pH7_Affiliates (
   lastPaymentDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   lang varchar(5) NOT NULL DEFAULT 'en_US',
   hashValidation varchar(40) DEFAULT NULL,
+  isTwoFactorAuth enum('1','0') DEFAULT '0',
+  twoFactorAuthSecret varchar(40) DEFAULT NULL,
   refer int(10) unsigned DEFAULT 0,
   joinDate datetime DEFAULT NULL,
   lastActivity datetime DEFAULT NULL,
@@ -212,9 +218,11 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesInfo (
 
 
 CREATE TABLE IF NOT EXISTS pH7_BlockIp (
-  ip int(10) unsigned NOT NULL DEFAULT '0',
-  expires int(10) unsigned NOT NULL,
-  PRIMARY KEY (ip)
+  ipId smallint(5) unsigned NOT NULL AUTO_INCREMENT,
+  ip varchar(45) NOT NULL,
+  expiration smallint(5) unsigned NOT NULL,
+  PRIMARY KEY (ip),
+  KEY ipId (ipId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 
@@ -317,32 +325,32 @@ CREATE TABLE IF NOT EXISTS pH7_Pictures (
   profileId int(10) unsigned NOT NULL,
   albumId int(10) unsigned NOT NULL,
   title varchar(80) NOT NULL,
+  description varchar(255) DEFAULT NULL,
   file varchar(40) NOT NULL,
   approved enum('1','0') DEFAULT '1',
   votes int(9) unsigned DEFAULT '0',
   score float(9) unsigned DEFAULT '0',
   views int(10) unsigned DEFAULT '0',
-  description varchar(255) DEFAULT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
   PRIMARY KEY (pictureId),
   FOREIGN KEY (albumId) REFERENCES pH7_AlbumsPictures(albumId),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_Videos (
   videoId int(10) unsigned NOT NULL AUTO_INCREMENT,
   profileId int(10) unsigned NOT NULL,
   albumId int(10) unsigned NOT NULL,
+  title varchar(80) DEFAULT NULL,
+  description varchar(255) DEFAULT NULL,
   file varchar(255) DEFAULT NULL, -- e.g. http://youtu.be/4fplAZfO9KY or local file server.
   thumb varchar(255) DEFAULT NULL, -- e.g. http://img.youtube.com/vi/4fplAZfO9KY/default.jpg or local file server.
   approved enum('1','0') NOT NULL DEFAULT '1',
   votes int(9) unsigned DEFAULT '0',
   score float(9) unsigned DEFAULT '0',
   views int(10) unsigned DEFAULT '0',
-  description varchar(255) DEFAULT NULL,
-  title varchar(80) DEFAULT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
   duration int(9) NOT NULL,
@@ -510,7 +518,7 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsBlog (
   -- Maybe we'll let the comments of the members even if they are deleted or we will allow administrator to leave a comment, so we comment on this line.
   -- FOREIGN KEY (sender) REFERENCES pH7_Members(profileId),
   FOREIGN KEY (recipient) REFERENCES pH7_Blogs(blogId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsNote (
@@ -540,7 +548,7 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsPicture (
   -- Maybe we'll let the comments of the members even if they are deleted.
   -- FOREIGN KEY (sender) pH7_Members(profileId),
   FOREIGN KEY (recipient) REFERENCES pH7_Pictures(pictureId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsVideo (
@@ -570,7 +578,7 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsGame (
   -- Maybe we'll let the comments of the members even if they are deleted.
   -- FOREIGN KEY (sender) pH7_Members(profileId),
   FOREIGN KEY (recipient) REFERENCES pH7_Games(gameId) -- Warning: You must first download the file "pH7_Game.sql" for this table can be inserted because it uses a foreign key.
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_CommentsProfile (
@@ -585,7 +593,7 @@ CREATE TABLE IF NOT EXISTS pH7_CommentsProfile (
   -- Maybe we'll let the comments of the members even if they are deleted.
   -- FOREIGN KEY (sender) pH7_Members(profileId),
   FOREIGN KEY (recipient) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_ForumsCategories (
@@ -593,7 +601,7 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsCategories (
   title varchar(60) DEFAULT NULL,
   PRIMARY KEY (categoryId),
   UNIQUE KEY (title)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_ForumsCategories (categoryId, title) VALUES
 (1, 'General'),
@@ -603,14 +611,14 @@ INSERT INTO pH7_ForumsCategories (categoryId, title) VALUES
 
 CREATE TABLE IF NOT EXISTS pH7_Forums (
   forumId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
-  name varchar(80) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'New forum',
-  description varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  name varchar(80) NOT NULL DEFAULT 'New forum',
+  description varchar(255) NOT NULL,
   categoryId smallint(4) unsigned DEFAULT NULL,
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
   PRIMARY KEY (forumId),
   FOREIGN KEY (categoryId) REFERENCES pH7_ForumsCategories(categoryId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 INSERT INTO pH7_Forums (forumId, name, description, categoryId) VALUES
 (1, 'Hello', 'Free dating site', 1),
@@ -622,9 +630,9 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
   topicId int(10) unsigned NOT NULL AUTO_INCREMENT,
   forumId mediumint(10) unsigned DEFAULT NULL,
   profileId int(10) unsigned NOT NULL,
-  title varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  message text COLLATE utf8_unicode_ci,
-  approved enum('1','0') COLLATE utf8_unicode_ci DEFAULT '1',
+  title varchar(100) NOT NULL,
+  message text NOT NULL,
+  approved enum('1','0') DEFAULT '1',
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
   views int(11) NOT NULL DEFAULT '0',
@@ -632,22 +640,22 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
   -- FOREIGN KEY (profileId) pH7_Members(profileId),
   FOREIGN KEY (forumId) REFERENCES pH7_Forums(forumId),
   PRIMARY KEY (topicId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_ForumsMessages (
   messageId int(10) unsigned NOT NULL AUTO_INCREMENT,
   topicId int(10) unsigned NOT NULL,
   profileId int(10) unsigned NOT NULL,
-  message text COLLATE utf8_unicode_ci,
-  approved enum('1','0') COLLATE utf8_unicode_ci DEFAULT '1',
+  message text NOT NULL,
+  approved enum('1','0') DEFAULT '1',
   createdDate datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   updatedDate datetime DEFAULT NULL,
   -- Maybe we'll let the topic of member even if the member is deleted
   -- FOREIGN KEY (profileId) pH7_Members(profileId),
   FOREIGN KEY (topicId) REFERENCES pH7_ForumsTopics(topicId),
   PRIMARY KEY (messageId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_LanguagesInfo (
@@ -670,7 +678,7 @@ CREATE TABLE IF NOT EXISTS pH7_Likes (
   keyId varchar(255) NOT NULL,
   votes int(10) unsigned NOT NULL,
   lastVote datetime NOT NULL,
-  lastIp varchar(20) NOT NULL,
+  lastIp varchar(45) NOT NULL,
   UNIQUE KEY keyId (keyId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -679,30 +687,36 @@ CREATE TABLE IF NOT EXISTS pH7_LogError (
   logId mediumint(10) unsigned NOT NULL AUTO_INCREMENT,
   logError longtext,
   PRIMARY KEY (logId),
-  FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB
+  FULLTEXT KEY logError (logError) -- FULLTEXT is not supported by InnoDB in MySQL < 5.6.4, so set MyISAM engine
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_AdminsAttemptsLogin (
-  ip varchar(20) NOT NULL DEFAULT '',
+  attemptsId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL,
+  PRIMARY KEY (attemptsId),
   UNIQUE KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_MembersAttemptsLogin (
-  ip varchar(20) NOT NULL DEFAULT '',
+  attemptsId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL,
+  PRIMARY KEY (attemptsId),
   UNIQUE KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS pH7_AffiliatesAttemptsLogin (
-  ip varchar(20) NOT NULL DEFAULT '',
+  attemptsId int(10) unsigned NOT NULL AUTO_INCREMENT,
+  ip varchar(45) NOT NULL DEFAULT '',
   attempts smallint(5) unsigned NOT NULL ,
   lastLogin DATETIME NOT NULL,
+  PRIMARY KEY (attemptsId),
   UNIQUE KEY (ip)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -713,7 +727,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogLogin (
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
   status varchar(60) NOT NULL DEFAULT '',
-  ip varchar(20) NOT NULL DEFAULT '',
+  ip varchar(45) NOT NULL DEFAULT '',
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (logId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -725,7 +739,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogLogin (
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
   status varchar(60) NOT NULL DEFAULT '',
-  ip varchar(20) NOT NULL DEFAULT '',
+  ip varchar(45) NOT NULL DEFAULT '',
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (logId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -737,7 +751,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogLogin (
   username varchar(64) NOT NULL DEFAULT '',
   password varchar(40) DEFAULT NULL,
   status varchar(60) NOT NULL DEFAULT '',
-  ip varchar(20) NOT NULL DEFAULT '',
+  ip varchar(45) NOT NULL DEFAULT '',
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (logId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
@@ -754,7 +768,7 @@ CREATE TABLE IF NOT EXISTS pH7_AdminsLogSess (
   idHash char(32) NOT NULL,
   lastActivity int(10) unsigned NOT NULL,
   location varchar(255) DEFAULT NULL,
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   userAgent varchar(100) NOT NULL,
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -776,7 +790,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersLogSess (
   idHash char(32) NOT NULL,
   lastActivity int(10) unsigned NOT NULL,
   location varchar(255) DEFAULT NULL,
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   userAgent varchar(100) NOT NULL,
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -798,7 +812,7 @@ CREATE TABLE IF NOT EXISTS pH7_AffiliatesLogSess (
   idHash char(32) NOT NULL,
   lastActivity int(10) unsigned NOT NULL,
   location varchar(255) DEFAULT NULL,
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   userAgent varchar(100) NOT NULL,
   guest smallint(4) unsigned NOT NULL DEFAULT 1,
   dateTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -849,7 +863,7 @@ CREATE TABLE IF NOT EXISTS pH7_MembersWall (
   updatedDate datetime DEFAULT NULL,
   PRIMARY KEY (wallId),
   FOREIGN KEY (profileId) REFERENCES pH7_Members(profileId)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 
 CREATE TABLE IF NOT EXISTS pH7_Messages (
@@ -900,33 +914,36 @@ CREATE TABLE IF NOT EXISTS pH7_MetaMain (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, headline, slogan, promoText, metaRobots, metaAuthor, metaCopyright, metaRating, metaDistribution, metaCategory) VALUES
-('en_US', 'Home', 'The Best Dating software for creating online dating site or online community, social network,', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'Be on the best e-place!', 'The Best place to Meet Nice People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating App/Website like this one with this <a href="http://ph7cms.com">Dating Site Builder</a>. It''s Professional, Modern, Free, Open Source, and gives you the Best Way to Create any Social/Dating Businesses...!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
+('en_US', 'Home', 'The Best Dating Software for creating online dating web apps, dating websites and online social communities', 'script, CMS, PHP, dating script, dating software, social networking software, social networking script, social network script, free, open source, match clone, friend finder clone, adult friend finder clone', 'Be on the best e-place!', 'The Best place to Meet Nice People', 'You''re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Social Dating Business App or Website like this one with the #1 <a href="http://ph7cms.com">Dating Web App Builder</a>. It''s Professional, Modern, Open Source, and gives you the Best Way to launch a new Social/Dating Business!', 'index, follow, all', 'Pierre-Henry Soria', 'Copyright Pierre-Henry Soria. All Rights Reserved.', 'general', 'global', 'dating');
 
 
 CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
   moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
+  moduleTitle varchar(40) NOT NULL,
   folderName varchar(20) NOT NULL,
   premiumMod enum('0','1') NOT NULL DEFAULT '0', -- If the module required pH7CMSPro (http://ph7cms.com/pro/)
   enabled enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY (moduleId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-INSERT INTO pH7_SysModsEnabled (folderName, premiumMod, enabled) VALUES
-('connect', '0', '0'),
-('affiliate', '0', '1'),
-('game', '0', '1'),
-('chat', '1', '1'),
-('chatroulette', '1', '1'),
-('picture', '0', '1'),
-('video', '0', '1'),
-('hotornot', '0', '1'),
-('forum', '0', '1'),
-('note', '0', '1'),
-('blog', '0', '1'),
-('newsletter', '0', '1'),
-('invite', '0', '1'),
-('webcam', '0', '1'),
-('love-calculator', '0', '1');
+INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
+('Affiliate', 'affiliate', '0', '1'),
+('Game', 'game', '0', '1'),
+('Chat', 'chat', '1', '0'),
+('Chatroulette', 'chatroulette', '1', '0'),
+('Picture', 'picture', '0', '1'),
+('Video', 'video', '0', '1'),
+('Hot or Not', 'hotornot', '0', '1'),
+('Forum', 'forum', '0', '1'),
+('Note (blog system for users)', 'note', '0', '1'),
+('Blog (company blog)', 'blog', '0', '1'),
+('Newsletter', 'newsletter', '0', '1'),
+('Invite Friends', 'invite', '0', '1'),
+('Connect', 'connect', '0', '0'),
+('Webcam', 'webcam', '0', '1'),
+('Love Calculator', 'love-calculator', '0', '1'),
+('Mail', 'mail', '0', '1'),
+('Instant Messaging (IM)', 'im', '0', '1');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (
@@ -942,7 +959,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.2.4', 1);
+('pH7CMS', 'SQL System Schema', '1.3.2', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -962,7 +979,7 @@ CREATE TABLE IF NOT EXISTS pH7_Report (
 CREATE TABLE IF NOT EXISTS pH7_Settings (
   `name` varchar(64) NOT NULL DEFAULT '',
   value varchar(150) NOT NULL,
-  `desc` varchar(100) NOT NULL DEFAULT '',
+  `desc` varchar(120) NOT NULL DEFAULT '' COMMENT 'Informative desc about the setting',
   `group` varchar(12) DEFAULT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -976,6 +993,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('splashPage', 1, 'Use Splash Page | enable = 1 or disable = 0', 'general'),
 ('bgSplashVideo', 1, '0 to disable or 1 to enable the background splash video', 'general'),
+('numberProfileSplashPage', 44, 'Number of profiles to display on the splash homepage', 'general'),
 ('fullAjaxSite', 0, 'enable = 1 or disable = 0', 'general'),
 ('ipLogin', '', '', 'security'),
 ('timeDelayUserRegistration', 1440, '1440 minutes = 24 hours (in minutes!)', 'spam'),
@@ -1012,11 +1030,12 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('loginAffiliateAttemptTime', 60, 'Time before a new connection attempt, in minutes!', 'security'),
 ('loginAdminAttemptTime', 120, 'Time before a new connection attempt, in minutes!', 'security'),
 ('avatarManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
-('profileBackgroundManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
+('bgProfileManualApproval', 0, 'Background Profile Manual Approval. 0 to disable or 1 to enable ', 'moderation'),
 ('noteManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('pictureManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('videoManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('webcamPictureManualApproval', 0, '0 to disable or 1 to enable', 'moderation'),
+('nudityFilter', 0, '1 = enable | 0 = disable', 'moderation'),
 ('defaultVideo', @sDefaultVideoUrl, 'Video by default if no video is found', 'video'),
 ('autoplayVideo', 1, '1 = Autoplay is enabled, 0 = Autoplay is disabled', 'video'),
 ('returnEmail', @sNoReplyEmail, 'Generally noreply@yoursite.com', 'email'),
@@ -1040,6 +1059,8 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('ipApi', @sIpApiUrl, 'IP Api URL', 'api'),
 ('chatApi', @sChatApiUrl, 'Chat Api URL', 'api'),
 ('chatrouletteApi', @sChatrouletteApiUrl, 'Chatroulette Api URL', 'api'),
+('googleApiKey', '', 'Google Maps API key https://developers.google.com/maps/documentation/javascript/get-api-key', 'api'),
+('socialMediaWidgets', 0, 'Enable the Social Media Widgets such as Like and Sharing buttons. 0 = Disable | 1 = Enable', 'general'),
 ('disclaimer', 0, 'Enable a disclaimer to enter to the site. This is useful for sites with adult content. 0 = Disable | 1 = Enable', 'general'),
 ('cookieConsentBar', 0, 'Enable the cookie consent bar to prevent your users that your site uses cookies. 0 = Disable | 1 = Enable', 'general'),
 ('isSoftwareNewsFeed', 1, 'Enable the news feed. 0 = Disable | 1 = Enable', 'general');
@@ -1051,10 +1072,9 @@ CREATE TABLE IF NOT EXISTS pH7_Subscribers (
   email varchar(120) NOT NULL,
   joinDate datetime DEFAULT NULL,
   active tinyint(1) unsigned NOT NULL DEFAULT 2, -- 1 = Active Account, 2 = Pending Account
-  ip varchar(20) NOT NULL DEFAULT '127.0.0.1',
+  ip varchar(45) NOT NULL DEFAULT '127.0.0.1',
   hashValidation varchar(40) DEFAULT NULL,
   affiliatedId int(10) unsigned NOT NULL DEFAULT 0,
-  INDEX (profileId),
   PRIMARY KEY (profileId),
   UNIQUE KEY (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;

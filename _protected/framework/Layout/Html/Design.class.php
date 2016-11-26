@@ -17,6 +17,7 @@ use
 PH7\Framework\Core\Kernel,
 PH7\Framework\Registry\Registry,
 PH7\Framework\Mvc\Model\Engine\Db,
+PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Url\Url,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Geo\Ip\Geo,
@@ -24,7 +25,9 @@ PH7\Framework\Str\Str,
 PH7\Framework\File\File,
 PH7\Framework\Session\Session,
 PH7\Framework\Navigation\Page,
+PH7\Framework\Geo\Misc\Country,
 PH7\Framework\Benchmark\Benchmark,
+PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri;
 
@@ -285,7 +288,8 @@ class Design
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) return;
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE)
+            return;
 
         ($bLink ? $bSoftwareName = true : '');
 
@@ -303,7 +307,7 @@ class Design
             You can never claim that you took, developed, or helped in any other way in this software if it is wrong! -->';
         }
 
-        echo ($bSoftwareName ?  '<p><strong>' . t('Powered By') : ''), ' ', ($bLink ? '<a href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bLink ? '</a> ' : ' '), ($bVersion ? Kernel::SOFTWARE_VERSION : ''), ($bSoftwareName ? '</strong></p>' : ''),
+        echo ($bSoftwareName ?  '<p><strong>' . t('Powered By') : ''), ' ', ($bLink ? '<a href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong></p>' : ''),
 
         '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
     }
@@ -315,7 +319,8 @@ class Design
      */
     final public function smallLink()
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) return;
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE)
+            return;
 
         echo '<p><strong>', t('Powered By'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong></p>';
     }
@@ -327,34 +332,62 @@ class Design
      */
     final public function smartLink()
     {
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE)
+            return;
+
         // Get Client's Language Code
         $sLangCode = (new \PH7\Framework\Navigation\Browser)->getLanguage(true);
 
         if ($sLangCode == 'en-ie') {
             $aSites = [
-                ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com']
+                ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com'],
+                ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://dublin.meetlovelypeople.com']
             ];
+        } elseif ($sLangCode == 'en-gb') {
+          $aSites = [
+              ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
+              ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com'],
+              ['title' => 'Date Londoners', 'link' => 'http://dating-app.co']
+          ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $aSites = [
                 ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
-                ['title' => 'Site de Tchat 100% Gratuit', 'link' => 'http://01tchat.com'],
                 ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => ' Site de Rencontre Bourgeois', 'link' => 'http://bourgeoisie.club']
+                ['title' => 'Rencontre à Paris Gratuite', 'link' => 'http://coolonweb.com']
             ];
         } else { // Default links, set to English
             $aSites = [
-                ['title' => 'Friend New Fun Date', 'link' => 'http://sofun.co'],
-                ['title' => 'Flirt Hot Girls', 'link' => 'http://flirtme.biz'],
-                ['title' => 'Flirt Naughty Girls', 'link' => 'http://flirtme.biz'],
-                ['title' => 'Swingers Dating Site', 'link' => 'http://swinger.flirtme.biz'],
-                ['title' => 'Learn Languages Online', 'link' => 'http://newayup.com'],
-                ['title' => 'Web Hosting Service', 'link' => 'http://hosting.hizup.net']
+                ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
+                ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
+                ['title' => 'The MOBILE Dating App', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
+                ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
+                ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
+                ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
+                ['title' => 'Dating App for Dating Singles', 'link' => 'http://dating-app.co'],
+                ['title' => 'Learn Language Abroad', 'link' => 'http://newayup.com']
             ];
         }
 
         $iRand = mt_rand(0,count($aSites)-1);
         echo '<a href="', $aSites[$iRand]['link'], '">', $aSites[$iRand]['title'], '</a>';
+    }
+
+    final public function smartAppBanner(PH7Tpl $oView)
+    {
+        if (
+            (!defined('PH7_VALID_LICENSE') || !PH7_VALID_LICENSE)
+            && (new \PH7\AdminCoreModel)->getRootIp() !== Ip::get()
+            && !\PH7\AdminCore::auth()
+        ) {
+            $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742" />';
+
+            if (empty($oView->header)) {
+                $oView->header = $sIOSBanner;
+            } else {
+                $oView->header .= $sIOSBanner;
+            }
+        }
     }
 
     /**
@@ -473,7 +506,7 @@ class Design
     }
 
     /**
-     * Show the geolocation of the user.
+     * Show the geolocation of the user (with link that points to the Country controller).
      *
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      * @return mixed (string | void)
@@ -481,7 +514,8 @@ class Design
     public function geoIp($bPrint = true)
     {
         $sCountry = Geo::getCountry();
-        $sCountryLang = t(str_replace('GB', 'UK', Geo::getCountryCode())); // Country name translated into the user language
+        $sCountryCode = Country::fixCode(Geo::getCountryCode());
+        $sCountryLang = t($sCountryCode); // Country name translated into the user language
         $sCity = Geo::getCity();
 
         $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People on %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCountryLang . ', ' . $sCity . '</a>';
@@ -514,7 +548,7 @@ class Design
      */
     public function getUserAvatar($sUsername, $sSex = '', $iSize = '')
     {
-        $oCache = (new \PH7\Framework\Cache\Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize, 60*24*30);
+        $oCache = (new \PH7\Framework\Cache\Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize, 3600);
 
         if (!$sUrl = $oCache->get())
         {
@@ -542,7 +576,7 @@ class Design
                 $sIcon = ($sSex == 'male' || $sSex == 'female' || $sSex == 'couple' || $sSex == PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
                 $sUrlTplName = (defined('PH7_TPL_NAME')) ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
-                /*** If the user does not have an avatar ***/
+                /*** If the user doesn't have an avatar ***/
                 if (!is_file($sPath))
                 {
                     /* The user has no avatar, we try to get a Gravatar */
@@ -550,8 +584,8 @@ class Design
                     // Get the User Email
                     $sEmail = $oUserModel->getEmail($iProfileId);
 
-                    $bSecureGravatar = \PH7\Framework\Http\Http::isSsl();
-                    $sUrl = $this->getGravatarUrl($sEmail, '404', $iSize, 'g', $bSecureGravatar);
+                    $bSecuredGravatar = \PH7\Framework\Http\Http::isSsl();
+                    $sUrl = $this->getGravatarUrl($sEmail, '404', $iSize, 'g', $bSecuredGravatar);
 
                     if (!(new \PH7\Framework\Security\Validate\Validate)->url($sUrl, true))
                     {
@@ -583,11 +617,11 @@ class Design
      * Get the Gravatar URL.
      *
      * @param string $sEmail The user email address.
-     * @param string $sType The default image type to show. Default wavatar
-     * @param integer $iSize  The size of the image. Default 80
-     * @param character $cRating The max image rating allowed. Default G (for all)
-     * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default FALSE
-     * @return string The Link Avatar.
+     * @param string $sType The default image type to show. Default: 'wavatar'
+     * @param integer $iSize  The size of the image. Default: 80
+     * @param character $cRating The max image rating allowed. Default: 'g' (for all)
+     * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
+     * @return string The Gravatar Link.
      */
     public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $cRating = 'g', $bSecure = false)
     {
@@ -640,30 +674,26 @@ class Design
     }
 
     /**
-     * Add Normal size Media Social Widgets.
+     * Add Normal size Social Media Widgets.
      *
-     * @param boolean $bDisable Disable or Enable it.
-     * AddThis JS file makes the site very slow (and nowadays social widgets like those are a bit old fashioned). So it's by default deactivated and the JS file in the database as well -> 'pH7_StaticFiles' table.
-     *
+     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
      * @return void HTML output.
      */
-    public function likeApi($bDisable = true)
+    public function likeApi()
     {
-        if ($bDisable === false)
+        if ((bool) DbConfig::getSetting('socialMediaWidgets'))
             echo  '<br /><br /><div class="center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_counter addthis_pill_style"></a></div>';
     }
 
     /**
-     * Add Small size Media Social Widgets.
+     * Add Small size Social Media Widgets.
      *
-     * @param boolean $bDisable Disable or Enable it.
-     * AddThis JS file makes the site very slow (and nowadays social widgets like those are a bit old fashioned). So it's by default deactivated and the JS file in the database as well -> 'pH7_StaticFiles' table.
-     *
+     * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
      * @return void HTML output.
      */
-    public function littleLikeApi($bDisable = true)
+    public function littleLikeApi()
     {
-        if ($bDisable === false)
+        if ((bool) DbConfig::getSetting('socialMediaWidgets'))
             echo  '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
     }
 
@@ -674,7 +704,7 @@ class Design
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
-     * @internal We do not use \PH7\Framework\Url\Url::httpBuildQuery() method for the first condition otherwise the URL is distorted and it does not work.
+     * @internal We do not use \PH7\Framework\Url\Url::httpBuildQuery() method for the first condition otherwise the URL is distorted and it doesn't work.
      * @return void
      */
     public function report($iId, $sUsername, $sFirstName, $sSex)
@@ -786,7 +816,7 @@ class Design
             $sName = (!empty($sSiteName)) ? $sSiteName : Kernel::SOFTWARE_NAME;
 
             echo '<header>
-            <div id="logo"><h1><a href="', PH7_URL_ROOT, '" title="', $sName, ' — ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '">', $sName, '</a></h1></div>
+            <div role="banner" id="logo"><h1><a href="', PH7_URL_ROOT, '" title="', $sName, ' — ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '">', $sName, '</a></h1></div>
             </header>';
         }
         echo $this->flashMsg(),
@@ -802,7 +832,7 @@ class Design
     }
 
     /**
-     * The XML tag does not work in PHP files since it is the same "<?"
+     * The XML tag doesn't work in PHP files since it is the same "<?" language tag.
      * So this method can introduce the XML header without causing an error by the PHP interpreter.
      *
      * @return void

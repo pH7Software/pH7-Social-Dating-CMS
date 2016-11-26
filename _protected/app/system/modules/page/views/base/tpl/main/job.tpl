@@ -1,6 +1,3 @@
 <div class="center">
-
-  {{ $content = Framework\Parse\Emoticon::init(t('Currently we have no job for you. Come back later ;-)')) }}
-  <p>{content}</p>
-
+    <p>{lang "Currently we don't have any jobs available. Come back later 😉"}</p>
 </div>

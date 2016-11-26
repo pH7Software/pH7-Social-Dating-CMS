@@ -6,7 +6,7 @@
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / IM / Asset / Ajax
- * @version        1.4
+ * @version        1.6
  * @required       PHP 5.4 or higher.
  */
 namespace PH7;
@@ -20,13 +20,15 @@ PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Request\Http as HttpRequest;
 
-class MessengerAjax
+class MessengerAjax extends PermissionCore
 {
 
     private $_oHttpRequest, $_oMessengerModel;
 
     public function __construct()
     {
+        parent::__construct();
+
         Import::pH7App(PH7_SYS . PH7_MOD . 'im.models.MessengerModel');
 
         $this->_oHttpRequest = new HttpRequest;
@@ -64,10 +66,8 @@ class MessengerAjax
 
     protected function heartbeat()
     {
-        // Default values
         $sFrom = $_SESSION['messenger_username'];
-        $sSent = '';
-
+        $sTo = !empty($_SESSION['messenger_username_to']) ? $_SESSION['messenger_username_to'] : 0;
 
         $oQuery = $this->_oMessengerModel->select($sFrom);
         $sItems = '';
@@ -95,13 +95,11 @@ class MessengerAjax
 
         if (!empty($_SESSION['messenger_openBoxes']))
         {
-            foreach ($_SESSION['messenger_openBoxes'] as $sBox => $iTime)
+            foreach ($_SESSION['messenger_openBoxes'] as $sBox => $sTime)
             {
                 if (!isset($_SESSION['messenger_boxes'][$sBox]))
                 {
-                    $iNow = time() - strtotime($iTime);
-                    $sTime = date('g:iA M dS', strtotime($iTime));
-
+                    $iNow = time() - strtotime($sTime);
                     $sMsg = t('Sent at %0%', Framework\Date\Various::textTimeStamp($sTime));
                     if ($iNow > 180)
                     {
@@ -119,17 +117,17 @@ class MessengerAjax
 
         if (!$this->isOnline($sFrom))
             $sItems = t('You must have the ONLINE status in order to speak instantaneous.');
-        elseif (!$this->isOnline($sSent))
-            $sItems = '<small><em>' . t('%0% is offline. Send a <a href=\'%1%\'>Private Message</a> instead.', $sSent, Uri::get('mail','main','compose', $sSent)) . '</em></small>';
+        elseif ($sTo !== 0 && !$this->isOnline($sTo))
+            $sItems = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
         else
-            $this->_oMessengerModel->update($sFrom);
+            $this->_oMessengerModel->update($sFrom, $sTo);
 
         if ($sItems != '')
             $sItems = substr($sItems, 0, -1);
 
         Http::setContentType('application/json');
         echo '{"items": [' . $sItems . ']}';
-        exit(0);
+        exit;
     }
 
     protected function boxSession($sBox)
@@ -157,14 +155,13 @@ class MessengerAjax
             "user": "' . $_SESSION['messenger_username'] . '",
             "items": [' . $sItems . ']
         }';
-
-        exit(0);
+        exit;
     }
 
     protected function send()
     {
         $sFrom = $_SESSION['messenger_username'];
-        $sTo = $this->_oHttpRequest->post('to');
+        $sTo = $_SESSION['messenger_username_to'] = $this->_oHttpRequest->post('to');
         $sMsg = $this->_oHttpRequest->post('message');
 
         $_SESSION['messenger_openBoxes'][$this->_oHttpRequest->post('to')] = date('Y-m-d H:i:s', time());
@@ -175,28 +172,28 @@ class MessengerAjax
         if (!isset($_SESSION['messenger_history'][$this->_oHttpRequest->post('to')]))
             $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] = '';
 
-        if (!$this->isOnline($sFrom))
-            $sMsgTransform = t('You must have the ONLINE status in order to chat with other members.');
+        if (!$this->checkMembership() || !$this->group->instant_messaging)
+            $sMsgTransform = t("You need to <a href='%0%'>upgrade your membership</a> to be able to chat.", Uri::get('payment','main','index'));
+        elseif (!$this->isOnline($sFrom))
+            $sMsgTransform = t('You must have the ONLINE status in order to chat with other users.');
         elseif (!$this->isOnline($sTo))
-            $sMsgTransform = '<small><em>' . t('%0% is offline. Send a <a href=\'%1%\'>Private Message</a> instead.', $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
+            $sMsgTransform = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
         else
             $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new \PH7\Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s'));
 
         $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] .= $this->setJsonContent(['status' => '1', 'user' => $sTo, 'msg' => $sMsgTransform]);
 
-
         unset($_SESSION['messenger_boxes'][$this->_oHttpRequest->post('to')]);
 
         Http::setContentType('application/json');
         echo $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsgTransform], false);
-        exit(0);
+        exit;
     }
 
     protected function close()
     {
         unset($_SESSION['messenger_openBoxes'][$this->_oHttpRequest->post('box')]);
-        echo '1';
-        exit(0);
+        exit('1');
     }
 
     protected function setJsonContent(array $aData, $bEndComma = true)
@@ -218,7 +215,7 @@ class MessengerAjax
             "msg": "{$aData['msg']}"
         }
 EOD;
-        return ($bEndComma) ? $sJsonData . ',' : $sJsonData;
+        return $bEndComma ? $sJsonData . ',' : $sJsonData;
     }
 
     protected function isOnline($sUsername)
@@ -232,7 +229,7 @@ EOD;
 
     protected function sanitize($sText)
     {
-        $sText = escape($sText);
+        $sText = escape($sText, true);
         $sText = str_replace("\n\r", "\n", $sText);
         $sText = str_replace("\r\n", "\n", $sText);
         $sText = str_replace("\n", "<br>", $sText);
@@ -246,7 +243,7 @@ EOD;
 
 }
 
-// Go only is the member id connected
+// Go only if the user is logged
 if (UserCore::auth())
 {
     $oSession = new Session; // Go start_session() function.

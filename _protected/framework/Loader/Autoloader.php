@@ -21,22 +21,20 @@ PH7\Framework\Date\Various as VDate;
 /**
  * We include the Singleton trait before use, because at this stage the class can not load the trait automatically.
  */
-require_once PH7_PATH_FRAMEWORK . 'Pattern/Base.trait.php';
+require_once PH7_PATH_FRAMEWORK . 'Pattern/Statik.trait.php';
 require_once PH7_PATH_FRAMEWORK . 'Pattern/Singleton.trait.php';
 
 final class Autoloader
 {
-
     const DOWNLOAD_URL = 'http://download.hizup.com/files/';
 
-
     /**
-     * We use this class with the singleton pattern.
+     * Make the class singleton by importing the appropriate trait.
      */
     use \PH7\Framework\Pattern\Singleton;
 
     /**
-     * We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
+     * We do not put a "__construct" and "__clone" "private" because it is already done in the \PH7\Framework\Pattern\Statik trait which is included in the \PH7\Framework\Pattern\Singleton trait.
      */
 
 
@@ -49,12 +47,14 @@ final class Autoloader
     {
         // Specify the extensions that may be loaded
         spl_autoload_extensions('.class.php, .interface.php, .trait.php');
+
         // Register the loader methods
         spl_autoload_register(array(__CLASS__, '_loadClass'));
 
         $this->_loadFile('Core/License.class.php');
         $this->_loadFile('Core/Kernel.class.php');
-        // Include Composer libraries (GeoIp2, Swift, ...)
+
+        // Include Composer libraries (GeoIp2, Swift, Stripe, ...)
         require_once PH7_PATH_PROTECTED . 'vendor/autoload.php';
     }
 
@@ -68,7 +68,7 @@ final class Autoloader
         if (!\PH7\is_internet())
         {
             $sMsg = '<p class="warning">No Internet Connection</p>
-            <p>Whoops! Your server has to be connect to the Internet in order to get your website working.</p>';
+            <p>Whoops! Your server has to be connected to the Internet in order to get your website working.</p>';
 
             echo \PH7\html_body('Enable your Internet connection', $sMsg);
             exit;
@@ -188,5 +188,4 @@ final class Autoloader
     {
         return str_replace(array('PH7\Framework', '\\', '//'), array('/', '/', ''), $sClass);
     }
-
 }

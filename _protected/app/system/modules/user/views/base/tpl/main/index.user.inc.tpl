@@ -1,6 +1,5 @@
-<h2>{lang 'Hello'} <em>{first_name}</em>, {lang 'How are you today?'}</h2>
-<h3>{lang}We are delighted that you have chosen to become a part of our inexpensive online social dating experince!{/lang}</h3>
-<br />
-<p class="italic bold underline">{lang 'Wall'} <span class="small">&quot;{lang 'The last news in live'}&quot;</span></p><br />
-<div class="left" id="wall"></div>
-<div class="right">{{ $userDesignModel->profilesBlock() }}</div>
+<h2>{lang 'Hi <em>%0%</em>! How are you today?', $first_name}</h2>
+<h3 class="s_bMarg">{lang}Say hi to the new people and meet them!{/lang}</h3>
+<h5 class="underline vs_marg">{lang 'Wall'} <span class="italic">&quot;{lang 'The last news'}&quot;</span></h5>
+<div class="left col-md-7" id="wall"></div>
+<div class="right col-md-5">{{ $userDesignModel->profilesBlock() }}</div>

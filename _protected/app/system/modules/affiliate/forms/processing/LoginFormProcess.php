@@ -10,15 +10,12 @@ defined('PH7') or exit('Restricted access');
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Util\Various,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
 class LoginFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -34,7 +31,7 @@ class LoginFormProcess extends Form
         $iMaxAttempts = (int) DbConfig::getSetting('maxAffiliateLoginAttempts');
         $iTimeDelay = (int) DbConfig::getSetting('loginAffiliateAttemptTime');
 
-        if($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Affiliates'))
+        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Affiliates'))
         {
             \PFBC\Form::setError('form_login_aff', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
@@ -42,24 +39,24 @@ class LoginFormProcess extends Form
 
         // Check Login
         $sLogin = $oAffModel->login($sEmail, $sPassword, 'Affiliates');
-        if($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist')
+        if ($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist')
         {
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
 
-            if($sLogin === 'email_does_not_exist')
+            if ($sLogin === 'email_does_not_exist')
             {
-                $this->session->set('captcha_enabled',1); // Enable Captcha
+                $this->enableCaptcha();
                 \PFBC\Form::setError('form_login_aff', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
                 $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username', 'Affiliates');
             }
-            elseif($sLogin === 'password_does_not_exist')
+            elseif ($sLogin === 'password_does_not_exist')
             {
                 $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password', 'Affiliates');
 
-                if($bIsLoginAttempt)
+                if ($bIsLoginAttempt)
                     $oSecurityModel->addLoginAttempt('Affiliates');
 
-                $this->session->set('captcha_enabled',1); // Enable Captcha
+                $this->enableCaptcha();
                 $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
                 $sWrongPwdTxt .= t('Please try again (make sure your caps lock is off).') . '<br />';
                 $sWrongPwdTxt .= t('Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('lost-password','main','forgot','affiliate'));
@@ -69,40 +66,42 @@ class LoginFormProcess extends Form
         else
         {
             $oSecurityModel->clearLoginAttempts('Affiliates');
-            $this->session->remove('captcha_enabled');
+            $this->session->remove('captcha_aff_enabled');
             $iId = $oAffModel->getId($sEmail, null, 'Affiliates');
             $oAffData = $oAffModel->readProfile($iId, 'Affiliates');
+            $oAff = new AffiliateCore;
 
-            if(true !== ($mStatus = (new AffiliateCore)->checkAccountStatus($oAffData)))
+            if (true !== ($mStatus = $oAff->checkAccountStatus($oAffData)))
             {
                 \PFBC\Form::setError('form_login_aff', $mStatus);
             }
             else
             {
-                // Is disconnected if the user is logged on as "user" or "administrator".
-                if(UserCore::auth() || AdminCore::auth()) $this->session->destroy();
+                $o2FactorModel = new TwoFactorAuthCoreModel('affiliate');
+                if ($o2FactorModel->isEnabled($iId))
+                {
+                    // Store the affiliate ID for 2FA
+                    $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
-                // Regenerate the session ID to prevent the session fixation
-                $this->session->regenerateId();
+                    Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'affiliate'));
+                }
+                else
+                {
+                    $oAff->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
 
-                $aSessionData = [
-                    'affiliate_id' => $oAffData->profileId,
-                    'affiliate_email' => $oAffData->email,
-                    'affiliate_username' => $oAffData->username,
-                    'affiliate_first_name' => $oAffData->firstName,
-                    'affiliate_sex' => $oAffData->sex,
-                    'affiliate_ip' => Ip::get(),
-                    'affiliate_http_user_agent' => $this->browser->getUserAgent(),
-                    'affiliate_token' => Various::genRnd($oAffData->email)
-                ];
-
-                $this->session->set($aSessionData);
-                $oSecurityModel->addLoginLog($oAffData->email, $oAffData->username, '*****', 'Logged in!', 'Affiliates');
-                $oAffModel->setLastActivity($oAffData->profileId, 'Affiliates');
-
-                Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged!'));
+                    Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged in!'));
+                }
             }
         }
     }
 
+    /**
+     * Enable the Captcha on the login form.
+     *
+     * @return void
+     */
+    protected function enableCaptcha()
+    {
+        $this->session->set('captcha_aff_enabled',1);
+    }
 }

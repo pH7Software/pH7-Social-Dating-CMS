@@ -31,14 +31,14 @@ class Vimeo extends Api implements IApi
 
     /**
      * @param string $sUrl
-     * @return mixed (object | boolean) FALSE if unable to open the url, otherwise the this object.
+     * @return mixed (object | boolean) FALSE if unable to open the url, otherwise $this object.
      */
     public function getInfo($sUrl)
     {
         $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '.json';
-        if ($oData = $this->getData($sDataUrl))
+        if ($aData = $this->getData($sDataUrl))
         {
-            $this->oData = $oData[0];
+            $this->oData = $aData[0];
             return $this;
         }
 

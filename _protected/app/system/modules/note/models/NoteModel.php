@@ -101,7 +101,7 @@ class NoteModel extends NoteCoreModel
     public function addPost($aData)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Notes') . '(profileId, postId, langId, title, content, slogan, tags, pageTitle, metaDescription, metaKeywords, metaRobots, metaAuthor, metaCopyright, enableComment, createdDate, approved)
-                VALUES (:profileId, :postId, :langId, :title, :content, :slogan, :tags, :pageTitle, :metaDescription, :metaKeywords, :metaRobots, :metaAuthor, :metaCopyright, :enableComment, :createdDate, :approved)');
+            VALUES (:profileId, :postId, :langId, :title, :content, :slogan, :tags, :pageTitle, :metaDescription, :metaKeywords, :metaRobots, :metaAuthor, :metaCopyright, :enableComment, :createdDate, :approved)');
         $rStmt->bindValue(':profileId', $aData['profile_id'], \PDO::PARAM_INT);
         $rStmt->bindValue(':postId', $aData['post_id'], \PDO::PARAM_STR);
         $rStmt->bindValue(':langId', $aData['lang_id'], \PDO::PARAM_STR);
@@ -344,13 +344,14 @@ class NoteModel extends NoteCoreModel
      * To prevent spam!
      *
      * @param integer $iProfileId
-     * @param integer $iWaitTime In minutes!
+     * @param integer $iWaitTime In minutes
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      * @return boolean Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitSend($iProfileId, $iWaitTime, $sCurrentTime)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT noteId FROM' . Db::prefix('Notes') . 'WHERE profileId = :profileId AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT noteId FROM' . Db::prefix('Notes') .
+            'WHERE profileId = :profileId AND DATE_ADD(createdDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);

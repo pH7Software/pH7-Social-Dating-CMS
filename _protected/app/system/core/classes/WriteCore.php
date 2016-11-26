@@ -9,6 +9,7 @@ namespace PH7;
 
 abstract class WriteCore
 {
+    const THUMBNAIL_FILENAME = 'thumb.png';
 
     /**
      * @param mixed (integer | string) $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
@@ -20,6 +21,10 @@ abstract class WriteCore
     {
         self::checkMod($sMod);
 
+        if ($sMod === 'blog') {
+            $mId .= PH7_DS . static::THUMBNAIL_FILENAME;
+        }
+
         return $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sMod . PH7_DS . PH7_IMG . $mId);
     }
 
@@ -30,8 +35,8 @@ abstract class WriteCore
      */
     public static function checkMod($sMod)
     {
-        if ($sMod !== 'blog' && $sMod !== 'note')
+        if ($sMod !== 'blog' && $sMod !== 'note') {
             Framework\Error\CException\PH7InvalidArgumentException('Bad module: ' . $sMod);
+        }
     }
-
 }

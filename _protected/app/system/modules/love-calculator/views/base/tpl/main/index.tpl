@@ -1,21 +1,16 @@
-<table class="center">
-
-  <tr>
-    <td width="126" height="140">
+<div class="calculator-wrapper">
+    <div class="col-md-4">
       {{ $avatarDesign->get($username, $first_name, $sex, 200) }}
-    </td>
+    </div>
 
-    <td width="300">
-      <div class="heart"><span>0</span>%</div>
+    <div class="col-md-4">
+      <div class="center heart"><span>0</span>%</div>
       <p class="love_txt bold pink2">{lang 'Love!'}</p>
-    </td>
+    </div>
 
-    <td width="126" height="140">
+    <div class="col-md-4">
       {{ $avatarDesign->get($second_username, $second_first_name, $second_sex, 200) }}
-    </td>
-
-  </tr>
-
-</table>
+    </div>
+</div>
 
 <script>$(function(){ loveCounter(0, {amount_love}) });</script>

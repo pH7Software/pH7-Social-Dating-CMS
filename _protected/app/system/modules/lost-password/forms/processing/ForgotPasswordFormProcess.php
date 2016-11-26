@@ -24,12 +24,12 @@ class ForgotPasswordFormProcess extends Form
         parent::__construct();
 
         $this->oUserModel = new UserCoreModel;
-        $sMail = $this->httpRequest->post('mail');
+        $sEmail = $this->httpRequest->post('mail');
 
-        if (!$iProfileId = $this->oUserModel->getId($sMail, null, $sTable))
+        if (!$iProfileId = $this->oUserModel->getId($sEmail, null, $sTable))
         {
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
-            \PFBC\Form::setError('form_forgot_password', t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sMail,0,PH7_MAX_EMAIL_LENGTH))));
+            \PFBC\Form::setError('form_forgot_password', t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
         }
         else
         {
@@ -53,15 +53,15 @@ class ForgotPasswordFormProcess extends Form
     {
         $oData = $this->oUserModel->readProfile($iProfileId, $sTable);
 
-        /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
+        /** We place the text outside of Uri::get(), otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
         $sResetUrl = Uri::get('lost-password', 'main', 'reset', $this->httpRequest->get('mod')) . PH7_SH . $oData->email . PH7_SH . $oData->hashValidation;
 
         $this->view->content = t('Hello %0%!', $oData->username) . '<br />' .
-        t('Somebody (from the IP address %0%) has requested a new password for their account.', Ip::get()) . '<br />' .
-        t('If you requested for this, click on the link below, otherwise ignore this email and your password will remain unchanged.') .
+        t('Someone (from IP address %0%) has requested a new password for this account.', Ip::get()) . '<br />' .
+        t('If you requested this, click on the link below, otherwise ignore this email and your password will remain unchanged.') .
         '<br /><a href="' . $sResetUrl . '">' . $sResetUrl . '</a>';
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/lost-password/confirm-lost-password.tpl', $oData->email);
+        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/confirm-lost-password.tpl', $oData->email);
 
         $aInfo = [
             'to' => $oData->email,

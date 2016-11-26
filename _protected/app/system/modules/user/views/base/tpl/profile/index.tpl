@@ -2,18 +2,18 @@
   {* Sets The Profile Background *}
   <script>
     document.body.style.backgroundImage="url('{url_data_sys_mod}user/background/img/{username}/{img_background}')";
-    document.body.style.backgroundRepeat='repeat';
-    document.body.style.backgroundPosition='top center';
+    document.body.style.backgroundRepeat='no-repeat';
+    document.body.style.backgroundPosition='center';
+    document.body.style.backgroundSize='cover';
   </script>
 {/if}
 
 {if empty($error)}
-
   <ol id="toc">
     <li><a href="#general"><span>{lang 'Info'}</span></a></li>
     <li><a href="#map"><span>{lang 'Map'}</span></a></li>
     <li><a href="#friend"><span>{friend_link}</span></a></li>
-    {if $is_logged AND !$is_himself_profile}
+    {if $is_logged AND !$is_own_profile}
       <li><a href="#mutual_friend"><span>{mutual_friend_link}</span></a></li>
     {/if}
     {if $is_picture_enabled}
@@ -29,16 +29,16 @@
       <li><a href="#note"><span>{lang 'Notes'}</span></a></li>
     {/if}
     <li><a href="#visitor"><span>{lang 'Recently Viewed'}</span></a></li>
-    {if $is_logged AND !$is_himself_profile}
+    {if $is_logged AND !$is_own_profile AND $is_mail_enabled}
       <li><a rel="nofollow" href="{mail_link}"><span>{lang 'Send Message'}</span></a></li>
     {/if}
-    {if $is_logged AND !$is_himself_profile}
+    {if $is_logged AND !$is_own_profile AND $is_im_enabled}
       <li><a rel="nofollow" href="{messenger_link}"><span>{lang 'Live Chat'}</span></a></li>
     {/if}
-    {if $is_logged AND !$is_himself_profile}
+    {if $is_logged AND !$is_own_profile}
       <li><a ref="nofollow" href="{befriend_link}"><span>{lang 'Add Friend'}</span></a></li>
     {/if}
-    {if $is_logged AND !$is_himself_profile AND Framework\Module\Various::isEnabled('love-calculator')}
+    {if $is_logged AND !$is_own_profile AND $is_lovecalculator_enabled}
       <li><a href="{{ $design->url('love-calculator','main','index',$username) }}" title="{lang 'Love Calculator'}"><span>{lang 'Match'} <b class="pink2">&hearts;</b></span></a></li>
     {/if}
   </ol>
@@ -47,11 +47,11 @@
     {{ UserDesignCoreModel::userStatus($id) }}
     {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
 
-    <p><span class="bold">{lang 'I am:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span></p>
+    <p><span class="bold">{lang 'I am a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&match_sex='.$sex) }}">{lang $sex}</a></span></p>
     <div class="break"></div>
 
     {if !empty($match_sex)}
-      <p><span class="bold">{lang 'Seeking a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span></p>
+      <p><span class="bold">{lang 'Looking for a:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}{match_sex_search}">{lang $match_sex}</a></span></p>
       <div class="break"></div>
     {/if}
 
@@ -69,7 +69,7 @@
     {/if}
 
     {if !empty($age)}
-      <p><span class="bold">{lang 'Age:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$age) }}">{age}</a> <span class="gray">({birth_date})</span></span></p>
+      <p><span class="bold">{lang 'Age:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&age='.$birth_date) }}">{age}</a> <span class="gray">({birth_date_formatted})</span></span></p>
       <div class="break"></div>
     {/if}
 
@@ -83,25 +83,25 @@
           <p><span class="bold">{lang 'Height:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&height='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span></p>
 
         {elseif $key == 'weight'}
-          <p><span class="bold">{lang 'Weight:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">{{ (new Framework\Math\Measure\Height($val))->display(true) }}</a></span></p>
+          <p><span class="bold">{lang 'Weight:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&weight='.$val) }}">{{ (new Framework\Math\Measure\Weight($val))->display(true) }}</a></span></p>
 
         {elseif $key == 'country'}
           <p><span class="bold">{lang 'Country:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code) }}">{country}</a></span>&nbsp;&nbsp;<img src="{{ $design->getSmallFlagIcon($country_code) }}" title="{country}" alt="{country}" /></p>
 
         {elseif $key == 'city'}
-          <p><span class="bold">{lang 'City / Town:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">{city}</a></span></p>
+          <p><span class="bold">{lang 'City/Town:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&city='.$city) }}">{city}</a></span></p>
 
         {elseif $key == 'state'}
-          <p><span class="bold">{lang 'State:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span></p>
+          <p><span class="bold">{lang 'State/Province:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&state='.$state) }}">{state}</a></span></p>
 
         {elseif $key == 'zipCode'}
-          <p><span class="bold">{lang 'ZIP/Postal Code:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">{val}</a></span></p>
+          <p><span class="bold">{lang 'Postal Code:'}</span> <span class="italic"><a href="{{ $design->url('user','browse','index', '?country='.$country_code.'&zip_code='.$val) }}">{val}</a></span></p>
 
         {elseif $key == 'website'}
-          <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site / Blog:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
+          <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Site/Blog:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
 
         {elseif $key == 'socialNetworkSite'}
-          <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Network Profile:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
+          <p>{{ $design->favicon($val) }}&nbsp;&nbsp;<span class="bold">{lang 'Social Profile:'}</span> <span class="italic">{{ $design->urlTag($val) }}</span></p>
 
         {else}
           {{ $lang_key = strtolower($key) }}
@@ -153,7 +153,7 @@
     </script>
   </div>
 
-  {if $is_logged AND !$is_himself_profile}
+  {if $is_logged AND !$is_own_profile}
     <div class="content" id="mutual_friend">
       <script>
         var url_mutual_friend_block = '{{ $design->url('user','friend','mutual',$username) }}';
@@ -162,34 +162,41 @@
     </div>
   {/if}
 
-  <div class="content" id="picture">
-    <script>
-      var url_picture_block = '{{ $design->url('picture','main','albums',$username) }}';
-      $('#picture').load(url_picture_block + ' #picture_block');
-    </script>
-  </div>
+  {if $is_picture_enabled}
+    <div class="content" id="picture">
+      <script>
+        var url_picture_block = '{{ $design->url('picture','main','albums',$username) }}';
+        $('#picture').load(url_picture_block + ' #picture_block');
+      </script>
+    </div>
+  {/if}
 
-  <div class="content" id="video">
-    <script>
-      var url_video_block = '{{ $design->url('video','main','albums',$username) }}';
-      $('#video').load(url_video_block + ' #video_block');
-    </script>
-  </div>
+  {if $is_video_enabled}
+    <div class="content" id="video">
+      <script>
+        var url_video_block = '{{ $design->url('video','main','albums',$username) }}';
+        $('#video').load(url_video_block + ' #video_block');
+      </script>
+    </div>
+  {/if}
 
-  <div class="content" id="forum">
-    <script>
-      var url_forum_block = '{{ $design->url('forum','forum','showpostbyprofile',$username) }}';
-      $('#forum').load(url_forum_block + ' #forum_block');
-    </script>
-  </div>
+  {if $is_forum_enabled}
+    <div class="content" id="forum">
+      <script>
+        var url_forum_block = '{{ $design->url('forum','forum','showpostbyprofile',$username) }}';
+        $('#forum').load(url_forum_block + ' #forum_block');
+      </script>
+    </div>
+  {/if}
 
-  <div class="content" id="note">
-    <script>
-      var url_note_block = '{{ $design->url('note','main','author',$username) }}';
-      $('#note').load(url_note_block + ' #note_block');
-    </script>
-  </div>
-
+  {if $is_note_enabled}
+    <div class="content" id="note">
+      <script>
+        var url_note_block = '{{ $design->url('note','main','author',$username) }}';
+        $('#note').load(url_note_block + ' #note_block');
+      </script>
+    </div>
+  {/if}
 
   <div class="content" id="visitor">
     <script>
@@ -202,16 +209,29 @@
   <p class="center">{{ $design->like($username, $first_name, $sex) }} | {{ $design->report($id, $username, $first_name, $sex) }}</p>
   {{ $design->likeApi() }}
 
-  <p>----------------------------------------</p>
   {{ CommentDesignCore::link($id, 'Profile') }}
 
+  {* Setup the profile tabs *}
   <script src="{url_static_js}tabs.js"></script>
-  <script>tabs('p', ['general','map','friend',{if $is_logged AND !$is_himself_profile}'mutual_friend',{/if}'picture','video','forum','note','visitor']);</script>
   <script>
-  /* Google Map has issues with the map size when it isn't loaded when visible, so just refresh the page to see the whole map */
-  $('ol#toc li a[href=#map]').click(function() {
+    tabs('p', [
+          'general',
+          'map',
+          'friend',
+          {if $is_logged AND !$is_own_profile}'mutual_friend',{/if}
+          {if $is_picture_enabled}'picture',{/if}
+          {if $is_video_enabled}'video',{/if}
+          {if $is_forum_enabled}'forum',{/if}
+          {if $is_note_enabled}'note',{/if}
+          'visitor'
+        ]);
+  </script>
+
+  <script>
+    /* Google Map has issues with the screen map (it displays only gray screen) when it isn't visible when loaded (through profile ajax tabs), so just refresh the page to see correctly the map */
+    $('ol#toc li a[href=#map]').click(function() {
       location.reload();
-  });
+    });
   </script>
 
   {* Signup Popup *}
@@ -220,7 +240,5 @@
   {/if}
 
 {else}
-
   <p class="center">{error}</p>
-
 {/if}

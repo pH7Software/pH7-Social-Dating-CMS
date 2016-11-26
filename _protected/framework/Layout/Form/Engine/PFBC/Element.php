@@ -1,7 +1,7 @@
 <?php
 /**
- * We made many changes in this code.
- * By pH7 (Pierre-Henry SORIA).
+ * Many changes have been made in this file.
+ * By Pierre-Henry SORIA.
  */
 namespace PFBC;
 
@@ -173,7 +173,7 @@ abstract class Element extends Base
         if(isset($this->attributes['value']) && is_array($this->attributes['value']))
             $this->attributes['value'] = '';
            $sHtml = '<input' . $this->getAttributes();
-            if($this->isRequired()) $sHtml .= ' required="required"';
+            $sHtml .= $this->getHtmlRequiredIfApplicable();
         echo $sHtml, ' />';
     }
 
@@ -237,5 +237,16 @@ abstract class Element extends Base
             if($object instanceof Validation)
                 $this->validation[] = $object;
         }
+    }
+
+    protected function getHtmlRequiredIfApplicable()
+    {
+        $sCode = '';
+
+        // 'required' attr won't work with CKEditor editor, so ignore it if class called by 'CKEditor'
+        if($this->isRequired() && static::class !== 'PFBC\Element\CKEditor') {
+            $sCode .= ' required="required"';
+        }
+        return $sCode;
     }
 }

@@ -256,10 +256,21 @@ defined('PH7') or exit('Restricted access');
      }
 
      /**
+      * Check if the string doesn't have any blank spaces.
+      *
+      * @param string $sValue
+      * @return boolean
+      */
+     public static function noSpaces($sValue)
+     {
+         return strlen(trim($sValue)) > 0;
+     }
+
+     /**
       * Escape function, uses the PHP native htmlspecialchars but improved.
       *
       * @param mixed (array | string) $mText
-      * @param boolean $bStrip Default: FALSE
+      * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
       * @return mixed (array | string) The escaped string.
       */
      public function escape($mText, $bStrip = false)
@@ -287,7 +298,7 @@ defined('PH7') or exit('Restricted access');
       * @access protected
       * @param string $sText
       * @param boolean $bStrip
-      * @return The text parsed by Str::stripTags() method if $bStrip parameter is TRUE, otherwise by Str::htmlSpecialChars method.
+      * @return The text parsed with Str::stripTags() method if $bStrip parameter is TRUE, otherwise with Str::htmlSpecialChars method.
       */
      protected function cEscape($sText, $bStrip)
      {
@@ -297,7 +308,7 @@ defined('PH7') or exit('Restricted access');
      /**
       * @access protected
       * @param string $sText
-      * @return string The text parsed by strip_tag() function
+      * @return string The text parsed with strip_tag() function
       */
      protected function stripTags($sText)
      {
@@ -307,7 +318,7 @@ defined('PH7') or exit('Restricted access');
      /**
       * @access protected
       * @param string $sText
-      * @return string The text parsed by htmlspecialchars() function
+      * @return string The text parsed with htmlspecialchars() function
       */
      protected function htmlSpecialChars($sText)
      {

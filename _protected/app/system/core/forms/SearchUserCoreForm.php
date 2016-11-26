@@ -13,6 +13,7 @@ namespace PH7;
 use
 PH7\Framework\Math\Measure\Year,
 PH7\Framework\Geo\Ip\Geo,
+PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Router\Uri;
@@ -44,8 +45,8 @@ class SearchUserCoreForm
         $oForm = new \PFBC\Form('form_search', $iWidth);
         $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
-        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', ['male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')], self::$aSexOption));
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', ['female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')], self::$aMatchSexOption));
+        $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', ['male' => t('Man'), 'female' => t('Woman'), 'couple' => t('Couple')], self::$aSexOption));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for a:'), 'sex', ['female' => t('Woman'), 'male' => t('Man'), 'couple' => t('Couple')], self::$aMatchSexOption));
         $oForm->addElement(new \PFBC\Element\Age(self::$aAgeOption));
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', self::$aCountryOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
@@ -78,7 +79,7 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Country(t('Country:'), 'country', self::$aCountryOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('City:'), 'city', self::$aCityOption));
         $oForm->addElement(new \PFBC\Element\Textbox(t('State/Province:'), 'state', self::$aStateOption));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('ZIP/Postal Code:'), 'zip_code', array('id' => 'str_zip_code')));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', array('id' => 'str_zip_code')));
         $oForm->addElement(new \PFBC\Element\Email(t('Email Address:'), 'mail'));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', array('1' => '<span class="bold">' . t('Only with Avatar') . '</span>')));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', array('1' => '<span class="bold green2">' . t('Only Online') . '</span>')));
@@ -141,14 +142,41 @@ class SearchUserCoreForm
      */
     protected static function setAttrVals()
     {
+        $oHttpRequest = new Http;
         $oSession = new Session;
         $oUserModel = new UserCoreModel;
 
-        self::$aSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['user_sex']];
-        self::$aMatchSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['match_sex']];
-        self::$aAgeOption = ['value' => static::getAgeVals($oUserModel, $oSession)];
-        self::$aCountryOption += ['value' => Geo::getCountryCode()];
-        self::$aCityOption += ['value' => Geo::getCity(), 'onfocus' => "if('" . Geo::getCity() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getCity() . "';"];
+        if ($oHttpRequest->getExists('match_sex')) {
+            self::$aSexOption += ['value' => $oHttpRequest->get('match_sex')];
+        } else {
+            self::$aSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['user_sex']];
+        }
+
+        if ($oHttpRequest->getExists('sex')) {
+            self::$aMatchSexOption += ['value' => $oHttpRequest->get('sex')];
+        } else {
+            self::$aMatchSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['match_sex']];
+        }
+
+        if ($oHttpRequest->getExists(['age1', 'age2'])) {
+            self::$aAgeOption = ['value' => ['min_age' => $oHttpRequest->get('age1'), 'max_age' => $oHttpRequest->get('age2')]];
+        } else {
+            self::$aAgeOption = ['value' => static::getAgeVals($oUserModel, $oSession)];
+        }
+
+        if ($oHttpRequest->getExists('country')) {
+            self::$aCountryOption += ['value' => $oHttpRequest->get('country')];
+        } else {
+            self::$aCountryOption += ['value' => Geo::getCountryCode()];
+        }
+
+        if ($oHttpRequest->getExists('city')) {
+            $sCity = $oHttpRequest->get('city');
+        } else {
+            $sCity = Geo::getCity();
+        }
+        self::$aCityOption += ['value' => $sCity, 'onfocus' => "if('" . $sCity . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . $sCity . "';"];
+
         self::$aStateOption += ['value'=> Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
     }
 }

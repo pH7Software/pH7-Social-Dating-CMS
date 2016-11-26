@@ -6,11 +6,14 @@
  * @package        PH7 / App / System / Module / Note / Controller
  */
 namespace PH7;
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+
+use
+PH7\Framework\Cache\Cache,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
-
     public function index()
     {
         Header::redirect(Uri::get('note', 'main', 'index'), t('Welcome to the Note administrator mode.'));
@@ -18,26 +21,13 @@ class AdminController extends MainController
 
     public function unmoderated()
     {
-        $this->sTitle = t('Unmoderated Notes');
-        $this->view->page_title = $this->sTitle;
-        $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h2_title = t('Notes Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts($this->iApproved), 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts('0'), 10);
         $this->view->current_page = $this->oPage->getCurrentPage();
-
         $oPosts = $this->oNoteModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), SearchCoreModel::CREATED, '0');
+        $this->view->posts = $oPosts;
         $this->setMenuVars();
-
-        if(empty($oPosts))
-        {
-            $this->sTitle = t('Not Note Posts for the treatment of moderate.');
-            $this->notFound();
-        }
-        else
-        {
-            $this->view->posts = $oPosts;
-        }
-
         $this->output();
     }
 
@@ -47,10 +37,10 @@ class AdminController extends MainController
         $sPostId = $this->httpRequest->post('post_id');
         $iProfileId = $this->httpRequest->post('profile_id', 'int');
 
-        if(isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId))
+        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId))
         {
             /* Clean NoteModel Cache */
-            (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+            (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
             $this->sMsg = t('The Note has been approved!');
         }
@@ -68,10 +58,10 @@ class AdminController extends MainController
         $sPostId = $this->httpRequest->post('post_id');
         $iProfileId = $this->httpRequest->post('profile_id', 'int');
 
-        if(isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId, '0'))
+        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId, '0'))
         {
             /* Clean NoteModel Cache */
-            (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+            (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
             $this->sMsg = t('The Note has been approved!');
         }
@@ -82,5 +72,4 @@ class AdminController extends MainController
 
         Header::redirect(Uri::get('note', 'main', 'index'), $this->sMsg);
     }
-
 }

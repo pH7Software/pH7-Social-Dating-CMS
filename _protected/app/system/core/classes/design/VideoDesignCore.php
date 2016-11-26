@@ -35,11 +35,11 @@ class VideoDesignCore
      *
      * @param object $oData
      * @param string $sMedia Type of the media ('preview' or 'movie'). Default: 'movie'
-     * @param integer $iWidth Default: 680
+     * @param integer $iWidth Default: 600
      * @param integer $iHeight Default: 400
      * @return void
      */
-    public static function generate($oData, $sMedia = 'movie', $iWidth = 680, $iHeight = 400)
+    public static function generate($oData, $sMedia = 'movie', $iWidth = 600, $iHeight = 400)
     {
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
 
@@ -62,8 +62,8 @@ class VideoDesignCore
             // If the video is not found on the server, we show a video that shows an appropriate message.
             if ( !(is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath1) && is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath2)) )
             {
-                $sVidPath1 = PH7_URL_DATA_SYS_MOD . 'video/not_found.webm';
-                $sVidPath2 = PH7_URL_DATA_SYS_MOD . 'video/not_found.mp4';
+                $sVidPath1 = 'video/not_found.webm';
+                $sVidPath2 = 'video/not_found.mp4';
             }
 
             if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $oData->thumb))
@@ -90,10 +90,10 @@ class VideoDesignCore
                 ' . t('Your browser is obsolete. Please use a browser that supports HTML5.') . '
             </video>
             <div class="center">
-                <button class="bold" onclick="Video.playPause()">' . t('Play/Pause') . '</button>
-                <button onclick="Video.bigSize()">' . t('Big') . '</button>
-                <button onclick="Video.normalSize()">' . t('Normal') . '</button>
-                <button onclick="Video.smallSize()">' . t('Small') . '</button>
+                <button class="bold btn btn-default btn-tiny" onclick="Video.playPause()">' . t('Play/Pause') . '</button>
+                <button class="btn btn-default btn-tiny" onclick="Video.bigSize()">' . t('Big') . '</button>
+                <button class="btn btn-default btn-tiny" onclick="Video.normalSize()">' . t('Normal') . '</button>
+                <button class="btn btn-default btn-tiny" onclick="Video.smallSize()">' . t('Small') . '</button>
             </div>';
 
             if ($sMedia == 'preview')

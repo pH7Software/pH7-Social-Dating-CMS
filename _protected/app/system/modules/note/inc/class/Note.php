@@ -10,6 +10,7 @@ use PH7\Framework\Util\Various, PH7\Framework\Config\Config;
 
 class Note extends WriteCore
 {
+    const MAX_CATEGORY_ALLOWED = 3;
 
     /**
      * Sets the Note Thumbnail.
@@ -56,5 +57,4 @@ class Note extends WriteCore
     {
         return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !(new NoteModel)->postIdExists($sPostId, $iProfileId));
     }
-
 }

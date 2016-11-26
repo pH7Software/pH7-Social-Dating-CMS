@@ -2,8 +2,8 @@
 /**
  * @title          Constants File
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @link           http://software.hizup.com
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
+ * @link           http://ph7cms.com
  * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / Config
@@ -11,13 +11,6 @@
 
 namespace PH7;
 defined('PH7') or exit('Restricted access');
-
-################################### VARIABLES ###################################
-
-#################### PATH ####################
-
-#################### URL ####################
-
 
 ################################### CONSTANTS ###################################
 
@@ -58,12 +51,13 @@ define('PH7_GHOST_USERNAME', 'ghost'); // Don't change it please, without the pe
 /***** MAXIMUM LENGTH VALUE (for the username, email and URL) *****/
 
 define('PH7_MAX_USERNAME_LENGTH', 40); // Warning: don't change it because the number of the username is based on the length field (varchar(40)) of the database
+define('PH7_MAX_USERNAME_LENGTH_SHOWN', 10); // Used on browse users page (to be sure it displays well on small devices as well)
 define('PH7_MAX_EMAIL_LENGTH', 120);
 define('PH7_MAX_URL_LENGTH', 120);
 
 /***** DESIGN *****/
 
-define('PH7_WIDTH_SEARCH_FORM', 160);
+define('PH7_WIDTH_SEARCH_FORM', '156px');
 
 /***** SECURITY *****/
 

@@ -3,7 +3,7 @@
 ##
 # Title:           Deployment Automation
 # Description:     pH7CMS Deployment Automation. It is used to clean the script before distribution to customers.
-#                  To work correctly, you have to execute this script when you're in the root of the project in your terminal
+#                  To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 # Author:          Pierre-Henry Soria <ph7software@gmail.com>
 # Copyright:       (c) 2014-2016, Pierre-Henry Soria. All Rights Reserved.
@@ -26,6 +26,12 @@ function run() {
             exec="find . -type f \( $params \) -print0 | xargs -0 perl -wi -pe"
             eval "$exec 's/\s+$/\n/'"
             eval "$exec 's/\t/    /g'"
+
+            # Update the libraries to their latest versions
+            # php ./composer.phar update --no-dev
+
+            # Optimize Composer
+            php ./composer.phar dump-autoload --optimize --no-dev
 
             ## Caches
             # public
@@ -65,13 +71,13 @@ function run() {
             rm -rf ./.git/
 
             ## TMP folders
+            # elFinder cache folders
             rm -rf ./.quarantine/
             rm -rf ./.tmb/
             rm -rf ./_protected/.quarantine/
             rm -rf ./_protected/.tmb/
-
-            # Optimize Composer
-            php ./composer.phar dumpautoload -o
+            # Composer cache folder
+            rm -rf ./_protected/vendor/cache/
 
             echo "Done!"
             echo "Remove \"_tools/\" folder (containing this file) before packaging pH7CMS"

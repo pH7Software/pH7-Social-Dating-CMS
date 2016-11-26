@@ -67,20 +67,28 @@ class XmlDesignCore
      */
     public static function softwareNews($iNum)
     {
-        $aNews = (new NewsFeedCore)->getSoftware($iNum);
-
-        if (sizeof($aNews) > 0)
+        try
         {
-            foreach($aNews as $aItems)
+            $aNews = (new NewsFeedCore)->getSoftware($iNum);
+
+            if (sizeof($aNews) > 0)
             {
-                echo '<h4><a href="', $aItems['link'], '" target="_blank">', escape($aItems['title'], true), '</a></h4>';
-                echo '<p>', escape($aItems['description'], true), '</p>';
+                foreach($aNews as $aItems)
+                {
+                    echo '<h4><a href="', $aItems['link'], '" target="_blank">', escape($aItems['title'], true), '</a></h4>';
+                    echo '<p>', escape($aItems['description'], true), '</p>';
+                }
+            }
+            else
+            {
+                echo '<p>', t('No News Software.'), '</p>';
             }
         }
-        else
+        catch (Framework\Error\CException\PH7Exception $oE)
         {
-            echo '<p>', t('No News Software.'), '</p>';
+            (new Framework\Layout\Html\Design)->setFlashMsg(t("It seems you don't have Internet connection or the remote URL is temporarily unavailable. Some features on the admin panel won't be available."), 'error');
         }
+
     }
 
 }

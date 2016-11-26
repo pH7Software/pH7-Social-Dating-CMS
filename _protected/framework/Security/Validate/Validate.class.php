@@ -17,6 +17,7 @@ use PH7\Framework\Str\Str, PH7\Framework\Security\Ban\Ban;
 
 class Validate
 {
+    const MAX_INT_NUMBER = 999999999999;
 
     private $_oStr;
 
@@ -39,7 +40,7 @@ class Validate
     {
         $sType = strtolower($sType); // Case-insensitive type.
 
-        if (false === $bRequired && 0 === (new Str)->length($sValue)) // Yoga Condition ;-)
+        if (false === $bRequired && 0 === (new Str)->length($sValue)) // Yoda Condition ;-)
             return true;
 
         switch ($sType) {
@@ -122,7 +123,7 @@ class Validate
      * @param integer $iMax Default 999999999999
      * @return boolean
      */
-    public function int($iInt, $iMin = 0, $iMax = 999999999999)
+    public function int($iInt, $iMin = 0, $iMax = self::MAX_INT_NUMBER)
     {
         $iInt = filter_var($iInt, FILTER_SANITIZE_NUMBER_INT);
         return (filter_var($iInt, FILTER_VALIDATE_INT, static::getFilterOption($iMin, $iMax)) !== false);
@@ -159,7 +160,7 @@ class Validate
      * @param mixed (float | integer) $mMax Default 999999999999
      * @return boolean
      */
-    public function float($fFloat, $mMin = 0, $mMax = 999999999999)
+    public function float($fFloat, $mMin = 0, $mMax = self::MAX_INT_NUMBER)
     {
         $fFloat = filter_var($fFloat, FILTER_SANITIZE_NUMBER_FLOAT);
         return (filter_var($fFloat, FILTER_VALIDATE_FLOAT, static::getFilterOption($mMin, $mMax)) !== false);
@@ -217,11 +218,10 @@ class Validate
     {
         $sEmail = filter_var($sEmail, FILTER_SANITIZE_EMAIL);
 
-        if($bRealHost)
-        {
+        if ($bRealHost) {
             $sEmailHost = substr(strrchr($sEmail, '@'), 1);
             // This function now works with Windows since version PHP 5.3, so we mustn't include the PEAR NET_DNS library.
-            if( !(checkdnsrr($sEmailHost, 'MX') && checkdnsrr($sEmailHost, 'A')) ) return false;
+            if ( !(checkdnsrr($sEmailHost, 'MX') && checkdnsrr($sEmailHost, 'A')) ) return false;
         }
         return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false && $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail));
     }
@@ -237,10 +237,10 @@ class Validate
      */
     public function birthDate($sValue, $iMin = 18, $iMax = 99)
     {
-        if(empty($sValue) || !preg_match('#^\d\d/\d\d/\d\d\d\d$#', $sValue)) return false;
+        if (empty($sValue) || !preg_match('#^\d\d/\d\d/\d\d\d\d$#', $sValue)) return false;
 
         $aBirthDate = explode('/', $sValue); // Format is "mm/dd/yyyy"
-        if(!checkdate($aBirthDate[0], $aBirthDate[1], $aBirthDate[2])) return false;
+        if (!checkdate($aBirthDate[0], $aBirthDate[1], $aBirthDate[2])) return false;
 
         $iUserAge = (new \PH7\Framework\Math\Measure\Year($aBirthDate[2], $aBirthDate[0], $aBirthDate[1]))->get(); // Get the current user's age
         return ($iUserAge >= $iMin && $iUserAge <= $iMax);
@@ -276,8 +276,7 @@ class Validate
         if (filter_var($sUrl, FILTER_VALIDATE_URL) === false || $this->_oStr->length($sUrl) >= PH7_MAX_URL_LENGTH)
             return false;
 
-        if($bRealUrl)
-        {
+        if ($bRealUrl) {
             /**
              * Checks if the URL is valid and contains the HTTP status code '200 OK', '301 Moved Permanently' or '302 Found'
              */
@@ -287,9 +286,7 @@ class Validate
             $iResponse = (int) curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
             curl_close($rCurl);
             return ($iResponse === 200 || $iResponse === 301 || $iResponse === 302);
-        }
-        else
-        {
+        } else {
             return true;
         }
     }
@@ -330,8 +327,8 @@ class Validate
         if ($this->_oStr->length($sName) < $iMin || $this->_oStr->length($sName) > $iMax)
             return false;
 
-        // Check the name pattern
-        if(preg_match('`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;!\?\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`', $sName))
+        // Check the name pattern. Name cannot contain any of the below characters
+        if (preg_match('`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;\?!¿¡\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`', $sName))
             return false;
 
         return true;
@@ -347,20 +344,20 @@ class Validate
     public function emailHost($sEmail)
     {
         // The email address must be properly formatted
-        if(!$this->email($sEmail))
+        if (!$this->email($sEmail))
             return false;
 
         // It gets domain
         list(, $sDomain ) = explode('@', $sEmail);
         // We look for MX records in DNS
-        if(getmxrr($sDomain, $aMxHost))
+        if (getmxrr($sDomain, $aMxHost))
             $sConnectAddress = $aMxHost[0];
         else
             $sConnectAddress = $sDomain;
         // We created the connection on SMTP port (25)
-        if($rConnect = @fsockopen($sConnectAddress, 25, $iErrno, $sErrStr))
+        if ($rConnect = @fsockopen($sConnectAddress, 25, $iErrno, $sErrStr))
         {
-            if(preg_match("/^220/", $sOut = fgets($rConnect, 1024)))
+            if (preg_match("/^220/", $sOut = fgets($rConnect, 1024)))
             {
                 fputs($rConnect, "HELO {$_SERVER['HTTP_HOST']}\r\n");
                 $sOut = fgets($rConnect, 1024);
@@ -372,7 +369,7 @@ class Validate
                 fclose($rConnect);
                 // If the code returned by the RCPT TO is 250 or 251 (cf: RFC)
                 // Then the address exists
-                if(!preg_match("/^250/", $sTo) && !preg_match("/^251/", $sTo))
+                if (!preg_match("/^250/", $sTo) && !preg_match("/^251/", $sTo))
                 // Address rejected by the serve
                     return false;
                 else

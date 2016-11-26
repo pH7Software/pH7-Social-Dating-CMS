@@ -59,16 +59,23 @@ abstract class Api
         $oUser = new UserCore;
 
         if(true === ($sErrMsg = $oUser->checkAccountStatus($oUserData)))
-            $oUser->setAuth($oUserData, $oUserModel, new Framework\Session\Session);
+            $oUser->setAuth($oUserData, $oUserModel, new Framework\Session\Session, new Framework\Mvc\Model\Security);
 
         unset($oUser, $oUserModel);
 
         (true !== $sErrMsg) ? $this->oDesign->setFlashMsg($sErrMsg) : t('Hi %0%, welcome to %site_name%', '<em>' . $oUserData->firstName . '</em>');
     }
 
-    public function __destruct()
+    /**
+     * Check if gender value is correct.
+     *
+     * @param string $sGender The gender (sex).
+     * @return string
+     */
+    protected function checkGender($sGender)
     {
-        unset($this->oDesign, $this->sUrl);
+        // Default 'female'
+        return ($sGender != 'male' && $sGender != 'female' && $sGender != 'couple') ? 'female' : $sGender;
     }
 
 }

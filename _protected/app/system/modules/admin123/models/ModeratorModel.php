@@ -16,9 +16,9 @@ class ModeratorModel extends ModeratorCoreModel
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.*, p.title FROM' .
-            Db::prefix('AlbumsPictures') . 'AS a INNER JOIN' . Db::prefix('Pictures') . 'AS p ON a.albumId = p.albumId INNER JOIN' . Db::prefix('Members') .
-            'AS m ON a.profileId = m.profileId WHERE a.approved = \'0\' LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.* FROM' .
+            Db::prefix('AlbumsPictures') . 'AS a INNER JOIN' . Db::prefix('Members') .
+            'AS m USING(profileId) WHERE a.approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -31,7 +31,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, p.* FROM' .
             Db::prefix('Pictures') . 'AS p INNER JOIN' . Db::prefix('Members') .
-            'AS m ON p.profileId = m.profileId WHERE approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -42,9 +42,9 @@ class ModeratorModel extends ModeratorCoreModel
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.*, v.title FROM' .
-            Db::prefix('AlbumsVideos') . 'AS a INNER JOIN' . Db::prefix('Videos') . 'AS v ON a.albumId = v.albumId INNER JOIN' . Db::prefix('Members') .
-            'AS m ON a.profileId = m.profileId WHERE a.approved = \'0\' LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.* FROM' .
+            Db::prefix('AlbumsVideos') . 'AS a INNER JOIN' . Db::prefix('Members') .
+            'AS m USING(profileId) WHERE a.approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -57,7 +57,7 @@ class ModeratorModel extends ModeratorCoreModel
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, v.* FROM' .
             Db::prefix('Videos') . 'AS v INNER JOIN' . Db::prefix('Members') .
-            'AS m ON v.profileId = m.profileId WHERE approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -82,14 +82,14 @@ class ModeratorModel extends ModeratorCoreModel
         $iLimit = (int)$iLimit;
         $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, b.* FROM' .
             Db::prefix('MembersBackground') . 'AS b INNER JOIN' . Db::prefix('Members') .
-            'AS m ON b.profileId = m.profileId WHERE approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE approved = \'0\' LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
-    public function approvedAlbumPicture($iAlbumId, $iStatus = 1)
+    public function approvedPictureAlbum($iAlbumId, $iStatus = 1)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('AlbumsPictures') .
             'SET approved = :status  WHERE albumId = :albumId');
@@ -107,7 +107,7 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
-    public function approvedAlbumVideo($iAlbumId, $iStatus = 1)
+    public function approvedVideoAlbum($iAlbumId, $iStatus = 1)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('AlbumsVideos') .
             'SET approved = :status  WHERE albumId = :albumId');
@@ -143,18 +143,18 @@ class ModeratorModel extends ModeratorCoreModel
         return $rStmt->execute();
     }
 
-    public function deleteAlbumPicture($iAlbumId)
+    public function deletePictureAlbum($iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsPictures') .
-            'WHERE albumId=:albumId');
+            'WHERE albumId = :albumId');
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
 
-    public function deleteAlbumVideo($iAlbumId)
+    public function deleteVideoAlbum($iAlbumId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsVideos') .
-            'WHERE albumId=:albumId');
+            'WHERE albumId = :albumId');
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }

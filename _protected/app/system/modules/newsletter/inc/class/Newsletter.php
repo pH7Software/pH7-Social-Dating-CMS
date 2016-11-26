@@ -16,6 +16,7 @@ use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mail\Mail;
 
 class Newsletter extends Core
 {
+    const MAX_BULK_EMAIL_NUMBER = 250, SLEEP_SEC = 10;
 
     private $_oSubscriptionModel;
     private static $_iTotalSent = 0;
@@ -23,7 +24,6 @@ class Newsletter extends Core
     public function __construct()
     {
         parent::__construct();
-
         $this->_oSubscriptionModel = new SubscriptionModel;
     }
 
@@ -41,12 +41,15 @@ class Newsletter extends Core
         $oSubscribers = $this->_oSubscriptionModel->$sSubscribersMethod();
 
         $oMail = new Mail;
-        foreach ($oSubscribers as $oSubscriber)
-        {
-            if (!$this->sendMail($oSubscriber, $oMail)) break;
+        foreach ($oSubscribers as $oSubscriber) {
+            if (!$iRes = $this->sendMail($oSubscriber, $oMail)) {
+                break;
+            }
 
             // Do not send all emails at the same time to avoid overloading the mail server.
-            if (++self::$_iTotalSent > 250) sleep(10);
+            if (++self::$_iTotalSent > self::MAX_BULK_EMAIL_NUMBER) {
+                sleep(self::SLEEP_SEC);
+            }
         }
         unset($oMail, $oSubscribers);
 
@@ -56,15 +59,15 @@ class Newsletter extends Core
     /**
      * Send the newsletter to the subscribers.
      *
-     * @param object $oSubscriber Subscriber data fron the DB.
-     * @param object \PH7\Framework\Mail\Mail $oMail
+     * @param object $oSubscriber Subscriber data from the DB.
+     * @param \PH7\Framework\Mail\Mail $oMail
      * @return integer Number of recipients who were accepted for delivery.
      */
     protected function sendMail($oSubscriber, Mail $oMail)
     {
         $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 
-        $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_NAME . '/mail/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
+        $sHtmlMsg = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/newsletter/msg.tpl', $oSubscriber->email);
 
         $aInfo = [
             'subject' => $this->httpRequest->post('subject'),
@@ -72,7 +75,6 @@ class Newsletter extends Core
             'to_name' => $oSubscriber->firstName
         ];
 
-        return $oMail->send($aInfo, $sMsgHtml);
+        return $oMail->send($aInfo, $sHtmlMsg);
     }
-
 }

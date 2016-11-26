@@ -50,18 +50,28 @@ abstract class Controller extends \PH7\Framework\Core\Core
         $this->view->config = $this->config;
         $this->view->design = $this->design;
 
+        $bIsMobApp = MobApp::is($this->httpRequest, $this->session);
+
+        $aAuthViewVars = [
+            'is_admin_auth' => \PH7\AdminCore::auth(),
+            'is_user_auth' => \PH7\UserCore::auth(),
+            'is_aff_auth' => \PH7\AffiliateCore::auth()
+        ];
+        $aGlobalViewVars = [
+            'is_guest_homepage' => $this->_isGuestOnHomepage($aAuthViewVars['is_user_auth']),
+            'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'),
+            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'),
+            'country' => Geo::getCountry(),
+            'city' => Geo::getCity()
+        ];
+
+        $this->view->assigns($aAuthViewVars);
+        $this->view->assigns($aGlobalViewVars);
+
         // Set other variables
         $this->_setMetaTplVars();
         $this->_setModsStatusTplVars();
-
-        /**
-         * This below PHP condition is not necessary because if there is no session,
-         * the get() method of the \PH7\Framework\Session\Session object an empty value and revisit this avoids having undefined variables in some modules (such as the "connect" module).
-         */
-        //if (\PH7\UserCore::auth()) {
-            $this->view->count_unread_mail = \PH7\MailCoreModel::countUnreadMsg($this->session->get('member_id'));
-            $this->view->count_pen_friend_request = \PH7\FriendCoreModel::getPending($this->session->get('member_id'));
-        //}
+        $this->_setUserNotifications();
 
         /***** Display *****/
         $this->view->setTemplateDir($this->registry->path_module_views . PH7_TPL_MOD_NAME);
@@ -101,7 +111,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
 
         // header('Content-type: text/html; charset=' . PH7_ENCODING);
         $this->view->display($sFile, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS);
-        $this->view->clean();  // Clean Template Data
+        unset($this->view); // Clean Template Data
     }
 
     /**
@@ -120,12 +130,11 @@ abstract class Controller extends \PH7\Framework\Core\Core
     /**
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
-     * @final
      * @param string $sMsg Default is empty ('')
      * @param boolean $b404Status For the Ajax blocks and others, we cannot put the HTTP 404 error code, so the attribute must be set to FALSE. Default TRUE
      * @return void Quits the page with the exit() function
      */
-    final public function displayPageNotFound($sMsg = '', $b404Status = true)
+    public function displayPageNotFound($sMsg = '', $b404Status = true)
     {
         if ($b404Status) Http::setHeadersByCode(404);
 
@@ -155,11 +164,10 @@ abstract class Controller extends \PH7\Framework\Core\Core
     /**
      * Set an Access Denied page.
      *
-     * @final
      * @param boolean $b403Status Set the Forbidden status. For the Ajax blocks and others, we cannot put the HTTP 403 error code, so the attribute must be set to FALSE. Default TRUE
      * @return void Quits the page with the exit() function
      */
-    final public function displayPageDenied($b403Status = true)
+    public function displayPageDenied($b403Status = true)
     {
         if ($b403Status) Http::setHeadersByCode(403);
 
@@ -182,7 +190,6 @@ abstract class Controller extends \PH7\Framework\Core\Core
     {
         $oInfo = M\DbConfig::getMetaMain(PH7_LANG_NAME);
 
-        $bIsMobApp = MobApp::is($this->httpRequest, $this->session);
         $aMetaVars = [
             'site_name' => $this->registry->site_name,
             'page_title' => $oInfo->pageTitle,
@@ -196,19 +203,14 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'meta_rating' => $oInfo->metaRating,
             'meta_distribution' => $oInfo->metaDistribution,
             'meta_category' => $oInfo->metaCategory,
-            'header' => 0, // Default value of header contents
-            'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'), // Displays a disclaimer to enter to the site. This is useful for sites with adult content
-            'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'), // Displays a header cookie information bar
-            /* Put user's Geo details (country/city) into the template variables */
-            'country' => Geo::getCountry(),
-            'city' => Geo::getCity()
+            'header' => 0 // Default value of header contents
         ];
 
         $this->view->assigns($aMetaVars);
-        unset($bIsMobApp, $oInfo, $aMetaVars);
+        unset($oInfo, $aMetaVars);
     }
 
-    final private function _setModsStatusTplVars()
+    private function _setModsStatusTplVars()
     {
         $aModsEnabled = [
             'is_connect_enabled' => SysMod::isEnabled('connect'),
@@ -219,16 +221,39 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'is_picture_enabled' => SysMod::isEnabled('picture'),
             'is_video_enabled' => SysMod::isEnabled('video'),
             'is_hotornot_enabled' => SysMod::isEnabled('hotornot'),
+            'is_lovecalculator_enabled' => SysMod::isEnabled('love-calculator'),
             'is_forum_enabled' => SysMod::isEnabled('forum'),
             'is_note_enabled' => SysMod::isEnabled('note'),
             'is_blog_enabled' => SysMod::isEnabled('blog'),
             'is_newsletter_enabled' => SysMod::isEnabled('newsletter'),
             'is_invite_enabled' => SysMod::isEnabled('invite'),
-            'is_webcam_enabled' => SysMod::isEnabled('webcam')
+            'is_webcam_enabled' => SysMod::isEnabled('webcam'),
+            'is_mail_enabled' => SysMod::isEnabled('mail'),
+            'is_im_enabled' => SysMod::isEnabled('im')
         ];
 
         $this->view->assigns($aModsEnabled);
         unset($aModsEnabled);
+    }
+
+    private function _setUserNotifications()
+    {
+        $aNotificationCounter = [
+            'count_unread_mail' => \PH7\MailCoreModel::countUnreadMsg($this->session->get('member_id')),
+            'count_pen_friend_request' => \PH7\FriendCoreModel::getPending($this->session->get('member_id'))
+        ];
+
+        $this->view->assigns($aNotificationCounter);
+        unset($aNotificationCounter);
+    }
+
+    /**
+     * @param boolean $bIsUserLogged
+     * @return boolean TRUE if visitor is on the homepage (index).
+     */
+    private function _isGuestOnHomepage($bIsUserLogged)
+    {
+        return (!$bIsUserLogged && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index');
     }
 
     /**
@@ -236,7 +261,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      *
      * @return void If the module is disabled, displays the Not Found page and exit the script.
      */
-    final private function _checkModStatus()
+    private function _checkModStatus()
     {
         if (!SysMod::isEnabled($this->registry->module))
             $this->displayPageNotFound();
@@ -247,7 +272,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      *
      * @return void
      */
-    final private function _checkPerms()
+    private function _checkPerms()
     {
         if (is_file($this->registry->path_module_config . 'Permission.php'))
         {
@@ -262,7 +287,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      *
      * @return void If banned, exit the script after displaying the ban page.
      */
-    final private function _checkBanStatus()
+    private function _checkBanStatus()
     {
         if (Ban::isIp(Ip::get()))
         {
@@ -271,11 +296,11 @@ abstract class Controller extends \PH7\Framework\Core\Core
     }
 
     /**
-     * The maintenance page is not displayed for the "Admin" module and if the administrator is logged.
+     * The maintenance page is not displayed for the "Admin" module and if the administrator is logged in.
      *
      * @return void If the status if maintenance, exit the script after displaying the maintenance page.
      */
-    final private function _checkSiteStatus()
+    private function _checkSiteStatus()
     {
         if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE
             && !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD)
@@ -289,7 +314,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      *
      * @return void
      */
-    final private function _ddosProtection()
+    private function _ddosProtection()
     {
         if (!isDebug() && (bool)M\DbConfig::getSetting('DDoS'))
         {

@@ -25,6 +25,6 @@
 
 {else}
 
-  <p class="center">{lang 'No Videos for the treatment of moderate.'}</p>
+  <p class="center">{lang 'No Videos found for the moderation treatment.'}</p>
 
 {/if}

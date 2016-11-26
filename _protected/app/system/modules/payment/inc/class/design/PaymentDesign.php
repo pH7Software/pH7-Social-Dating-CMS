@@ -24,7 +24,7 @@ class PaymentDesign extends Framework\Core\Core
         $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
 
         $oPayPal->param('business', $this->config->values['module.setting']['paypal.email'])
-            ->param('custom', $this->session->get('member_id'))
+            ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price)) // Use base64_encode() to discourage curious people
             ->param('amount', $oMembership->price)
             ->param('item_number', $oMembership->groupId)
             ->param('item_name', $this->registry->site_name . ' ' . $oMembership->name)
@@ -35,12 +35,12 @@ class PaymentDesign extends Framework\Core\Core
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
             ->param('rm', 2) // Auto redirection in POST data
             ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PayPal'))
-            ->param('cancel_return', Uri::get('payment', 'main', 'pay', '?msg=' . t('The payment was aborted, no changes have been made to your account.'), false));
+            ->param('cancel_return', Uri::get('payment', 'main', 'pay', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
 
         echo
         '<form action="', $oPayPal->getUrl(), '" method="post">',
             $oPayPal->generate(),
-            '<button type="submit" name="submit">', static::buyTxt($oMembership->name, 'PayPal'), '</button>
+            '<button class="btn btn-primary btn-lg" type="submit" name="submit">', static::buyTxt($oMembership->name, 'PayPal'), '</button>
         </form>';
 
         unset($oPayPal, $oMembership);
@@ -57,7 +57,6 @@ class PaymentDesign extends Framework\Core\Core
         $oStripe = new Stripe;
 
         $oStripe->param('item_number', $oMembership->groupId)
-            ->param('member_id', $this->session->get('member_id'))
             ->param('amount', $oMembership->price);
 
         echo
@@ -68,7 +67,7 @@ class PaymentDesign extends Framework\Core\Core
                 data-key="', $this->config->values['module.setting']['stripe.publishable_key'], '"
                 data-name="', $this->registry->site_name, '"
                 data-description="', $oMembership->name, '"
-                data-amount="', str_replace('.', '', $oMembership->price), '"
+                data-amount="', Stripe::getAmount($oMembership->price), '"
                 data-currency="', $this->config->values['module.setting']['currency'], '"
                 data-allow-remember-me="true"
                 data-bitcoin="true">
@@ -101,7 +100,7 @@ class PaymentDesign extends Framework\Core\Core
         echo
         '<form action="', $o2CO->getUrl(), '" method="post">',
             $o2CO->generate(),
-            '<button type="submit" name="submit">', static::buyTxt($oMembership->name, '2CO'), '</button>
+            '<button class="btn btn-primary btn-lg" type="submit" name="submit">', static::buyTxt($oMembership->name, '2CO'), '</button>
         </form>';
 
         unset($o2CO);
