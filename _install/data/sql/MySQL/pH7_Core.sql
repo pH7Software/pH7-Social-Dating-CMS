@@ -939,7 +939,7 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Blog (company blog)', 'blog', '0', '1'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
-('Connect', 'connect', '0', '0'),
+('Social Media Authentication (connect module)', 'connect', '0', '0'),
 ('Webcam', 'webcam', '0', '1'),
 ('Love Calculator', 'love-calculator', '0', '1'),
 ('Mail', 'mail', '0', '1'),
@@ -960,7 +960,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.3.2', 1);
+('pH7CMS', 'SQL System Schema', '1.3.3', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
