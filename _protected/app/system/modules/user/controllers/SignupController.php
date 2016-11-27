@@ -20,7 +20,6 @@ class SignupController extends Controller
     {
         // Add CSS and JavaScript files for the left profiles block
         $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'zoomer.css');
-        //$this->design->addJs(PH7_STATIC . PH7_JS, 'zoomer.js');
 
         /*** Display Sign Up page ***/
 
