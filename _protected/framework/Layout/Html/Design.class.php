@@ -28,6 +28,7 @@ PH7\Framework\Navigation\Page,
 PH7\Framework\Geo\Misc\Country,
 PH7\Framework\Benchmark\Benchmark,
 PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl,
+PH7\Framework\Module\Various as SysMod,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri;
 
@@ -222,14 +223,19 @@ class Design
      */
     public function homePageUrl()
     {
-        if (\PH7\UserCore::auth())
-            $this->url('user', 'browse', 'index');
-        elseif (\PH7\AdminCore::auth())
+        if (\PH7\UserCore::auth()) {
+            if (SysMod::isEnabled('user-dashboard')) {
+                $this->url('user-dashboard', 'main', 'index');
+            } else {
+                $this->url('user', 'browse', 'index');
+            }
+        } elseif (\PH7\AdminCore::auth()) {
             $this->url(PH7_ADMIN_MOD, 'main', 'index');
-        elseif (\PH7\AffiliateCore::auth())
+        } elseif (\PH7\AffiliateCore::auth()) {
             $this->url('affiliate', 'account', 'index');
-        else
+        } else {
             echo PH7_URL_ROOT;
+        }
     }
 
     public function url($sModule, $sController, $sAction, $sVars = null, $bClear = true)
