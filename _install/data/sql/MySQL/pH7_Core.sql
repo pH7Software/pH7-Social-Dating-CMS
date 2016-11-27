@@ -919,7 +919,7 @@ INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, head
 
 CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
   moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
-  moduleTitle varchar(40) NOT NULL,
+  moduleTitle varchar(50) NOT NULL,
   folderName varchar(20) NOT NULL,
   premiumMod enum('0','1') NOT NULL DEFAULT '0', -- If the module required pH7CMSPro (http://ph7cms.com/pro/)
   enabled enum('0','1') NOT NULL DEFAULT '1',
