@@ -39,7 +39,8 @@ class InstallController extends Controller
         'webcam' => '1',
         'love-calculator' => '0',
         'mail' => '1',
-        'im' => '1'
+        'im' => '1',
+        'user-dashboard' => '0'
     ];
 
     private $_aDatingMods = [
@@ -59,7 +60,8 @@ class InstallController extends Controller
         'webcam' => '0',
         'love-calculator' => '1',
         'mail' => '1',
-        'im' => '1'
+        'im' => '1',
+        'user-dashboard' => '1'
     ];
 
     /*** Enable/Disable Site Settings according to the chosen niche ***/

@@ -943,7 +943,8 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Webcam', 'webcam', '0', '1'),
 ('Love Calculator', 'love-calculator', '0', '1'),
 ('Mail', 'mail', '0', '1'),
-('Instant Messaging (IM)', 'im', '0', '1');
+('Instant Messaging (IM)', 'im', '0', '1'),
+('User Dashboard', 'user-dashboard', '0', '1');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (
