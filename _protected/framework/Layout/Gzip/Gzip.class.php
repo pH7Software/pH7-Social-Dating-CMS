@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Gzip
- * @version          1.4
+ * @version          1.6
  */
 
 namespace PH7\Framework\Layout\Gzip;
@@ -23,7 +23,6 @@ PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Gzip
 {
-
     const CACHE_DIR = 'pH7_static/';
 
     private
@@ -341,7 +340,7 @@ class Gzip
      */
     protected function getImgInCssFile()
     {
-        preg_match_all('/url\([\'"]*(.+?\.)(gif|png|jpg|otf|ttf|woff)[\'"]*\)/msi', $this->_sContents, $aHit, PREG_PATTERN_ORDER);
+        preg_match_all('/url\([\'"]*(.+?\.)(gif|png|jpg|jpeg|otf|eot|ttf|woff|svg)[\'"]*\)*/msi', $this->_sContents, $aHit, PREG_PATTERN_ORDER);
 
         for ($i = 0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++)
         {
@@ -388,28 +387,4 @@ class Gzip
     {
         return str_replace(array('\\', '//'), '/', $sPath);
     }
-
-    public function __destruct()
-    {
-        unset(
-          $this->_oFile,
-          $this->_oHttpRequest,
-          $this->_sBase,
-          $this->_sBaseUrl,
-          $this->_sType,
-          $this->_sDir,
-          $this->_sFiles,
-          $this->_aElements,
-          $this->_sContents,
-          $this->_iIfModified,
-          $this->_sCacheDir,
-          $this->_bCaching,
-          $this->_bCompressor,
-          $this->_bDataUri,
-          $this->_bGzipContent,
-          $this->_bIsGzip,
-          $this->_mEncoding
-        );
-    }
-
 }
