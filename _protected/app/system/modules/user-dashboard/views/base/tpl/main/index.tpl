@@ -29,7 +29,7 @@
 
     <div class="left col-md-6">
         <h3 class="center underline">{lang 'The latest users'}</h3>
-        {{ $userDesignModel->profilesBlock(0,36) }}
+        {{ $userDesignModel->profilesBlock() }}
 
         <h3 class="center underline">{lang 'Visitors who visited my profile'}</h3>
         <div class="content" id="visitor">
