@@ -17,10 +17,12 @@ class AccountController extends Controller
     public function index()
     {
         // Redirect this page to the user homepage
-        if (SysMod::isEnabled('user-dashboard')) {
-            Header::redirect(Uri::get('user-dashboard', 'main', 'index'));
+        if (SysMod::isEnabled('user-dashboard'))
+            $sUrl = Uri::get('user-dashboard', 'main', 'index');
         else
-            Header::redirect(Uri::get('user', 'main', 'index'));
+            $sUrl = Uri::get('user', 'main', 'index');
+
+        Header::redirect($sUrl);
     }
 
     public function activate($sMail, $sHash)
