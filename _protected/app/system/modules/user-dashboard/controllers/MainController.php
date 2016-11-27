@@ -21,7 +21,7 @@ class MainController extends Controller
         $this->view->first_name = $this->session->get('member_first_name');
         $this->view->sex = $this->session->get('member_sex');
         $this->view->avatarDesign = new AvatarDesignCore; // For the avatar lightBox
-        $this->view->userDesignModel = new UserDesignCoreModel; // For the profilesBlock
+        $this->view->userDesignModel = new UserDesignModel; // For the profilesBlock
 
         $this->output();
     }
