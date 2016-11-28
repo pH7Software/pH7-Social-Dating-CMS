@@ -48,9 +48,9 @@ class ForumController extends Controller
         }
         else
         {
-            $this->view->page_title = t('Discussions Forums - %site_name%');
-            $this->view->meta_description = t('Discussions Forums, Social Network Site - %site_name%');
-            $this->view->h1_title = t('Discussions Forums, Social Network Site');
+            $this->view->page_title = t('Discussion Forums - %site_name%');
+            $this->view->meta_description = t('Discussion Forums, Social Network Site - %site_name%');
+            $this->view->h1_title = t('Discussion Forums, Social Network Site');
 
             $this->view->categories = $oCategories;
             $this->view->forums = $oForums;
@@ -76,7 +76,7 @@ class ForumController extends Controller
         else
         {
             $this->view->page_title = t('%0% - Forums', $this->str->upperFirst($this->httpRequest->get('forum_name')));
-            $this->view->meta_description = t('%0% - Topics - Discussions Forums', $this->httpRequest->get('forum_name'));
+            $this->view->meta_description = t('%0% - Topics - Discussion Forums', $this->httpRequest->get('forum_name'));
             $this->view->meta_keywords = t('%0%,forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum', str_replace(' ', ',', $this->httpRequest->get('forum_name')));
             $this->view->h1_title = $this->str->upperFirst($this->httpRequest->get('forum_name'));
             $this->view->topics = $oTopics;
@@ -103,7 +103,7 @@ class ForumController extends Controller
             $this->view->header = '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Posts') . '" href="' . Uri::get('xml', 'rss', 'xmlrouter', 'forum-post,' . $oPost->topicId) . '" />';
             $this->sTitle = t('%0% | %1% - Forum', $this->str->upperFirst($this->httpRequest->get('forum_name')), $this->str->escape(Ban::filterWord($oPost->title), true));
             $this->view->page_title = $this->sTitle;
-            $this->view->meta_description = t('%0% Topics - Discussions Forums', substr($this->str->escape(Ban::filterWord($oPost->message), true), 0, 150));
+            $this->view->meta_description = t('%0% Topics - Discussion Forums', substr($this->str->escape(Ban::filterWord($oPost->message), true), 0, 150));
 
             // Generates beautiful meta keywords for good SEO
             $this->view->meta_keywords = t('%0%,%1%,forum,discussion,dating forum,social forum', str_replace(' ', ',', $this->httpRequest->get('forum_name')), substr(str_replace(' ', ',', Ban::filterWord($oPost->title, false)), 0, 250));
