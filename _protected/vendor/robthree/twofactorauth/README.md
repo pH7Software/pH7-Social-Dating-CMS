@@ -35,7 +35,7 @@ $tfa = new RobThree\Auth\TwoFactorAuth('My Company');
 
 The TwoFactorAuth class constructor accepts 6 parameters (all optional):
 
-Parameter         | Default value | Use 
+Parameter         | Default value | Use
 ------------------|---------------|--------------------------------------------------
 `$issuer`         | `null`        | Will be displayed in the app as issuer name
 `$digits`         | `6`           | The number of digits the resulting codes will be
@@ -138,7 +138,7 @@ class MyProvider implements IQRCodeProvider {
   public function getMimeType() {
     return 'image/png';                             // This provider only returns PNG's
   }
-  
+
   public function getQRCodeImage($qrtext, $size) {
     ob_start();                                     // 'Catch' QRCode's output
     QRCode::png($qrtext, null, QR_ECLEVEL_L, 3, 4); // We ignore $size and set it to 3
@@ -172,7 +172,7 @@ You can easily implement your own `RNGProvider` by simply implementing the `IRNG
 
 ## Integrations
 
-- [CakePHP 3](https://github.com/andrej-griniuk/cakephp-two-factor-auth) 
+- [CakePHP 3](https://github.com/andrej-griniuk/cakephp-two-factor-auth)
 
 ## License
 

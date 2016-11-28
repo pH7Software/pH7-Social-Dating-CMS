@@ -12,72 +12,72 @@ class ComposerStaticInitPH7
     );
 
     public static $prefixLengthsPsr4 = array (
-        'S' => 
+        'S' =>
         array (
             'Stripe\\' => 7,
         ),
-        'R' => 
+        'R' =>
         array (
             'RobThree\\Auth\\' => 14,
         ),
-        'P' => 
+        'P' =>
         array (
             'PH7\\Test\\Unit\\' => 14,
             'PH7\\Framework\\' => 14,
         ),
-        'M' => 
+        'M' =>
         array (
             'MaxMind\\Db\\' => 11,
             'MaxMind\\' => 8,
         ),
-        'G' => 
+        'G' =>
         array (
             'GeoIp2\\' => 7,
         ),
-        'F' => 
+        'F' =>
         array (
             'Facebook\\' => 9,
         ),
-        'C' => 
+        'C' =>
         array (
             'Composer\\CaBundle\\' => 18,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Stripe\\' => 
+        'Stripe\\' =>
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
-        'RobThree\\Auth\\' => 
+        'RobThree\\Auth\\' =>
         array (
             0 => __DIR__ . '/..' . '/robthree/twofactorauth/lib',
         ),
-        'PH7\\Test\\Unit\\' => 
+        'PH7\\Test\\Unit\\' =>
         array (
             0 => __DIR__ . '/../../..' . '/_tests/Unit',
         ),
-        'PH7\\Framework\\' => 
+        'PH7\\Framework\\' =>
         array (
             0 => __DIR__ . '/../../..' . '/_protected/framework',
         ),
-        'MaxMind\\Db\\' => 
+        'MaxMind\\Db\\' =>
         array (
             0 => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db',
         ),
-        'MaxMind\\' => 
+        'MaxMind\\' =>
         array (
             0 => __DIR__ . '/..' . '/maxmind/web-service-common/src',
         ),
-        'GeoIp2\\' => 
+        'GeoIp2\\' =>
         array (
             0 => __DIR__ . '/..' . '/geoip2/geoip2/src',
         ),
-        'Facebook\\' => 
+        'Facebook\\' =>
         array (
             0 => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook',
         ),
-        'Composer\\CaBundle\\' => 
+        'Composer\\CaBundle\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
         ),
