@@ -31,6 +31,15 @@
         <h3 class="center underline">{lang 'The latest users'}</h3>
         {{ $userDesignModel->profilesBlock() }}
 
+        <h3 class="center underline">{lang 'My friends'}</h3>
+        <div class="content" id="friend">
+            <script>
+                var url_friend_block = '{{ $design->url('user','friend','index',$username) }}';
+                $('#friend').load(url_friend_block + ' #friend_block');
+            </script>
+        </div>
+        <div class="clear"></div>
+
         <h3 class="center underline">{lang 'Visitors who visited my profile'}</h3>
         <div class="content" id="visitor">
             <script>
@@ -38,6 +47,50 @@
                 $('#visitor').load(url_visitor_block + ' #visitor_block');
             </script>
         </div>
+        <div class="clear"></div>
+
+        {if $is_picture_enabled}
+            <h3 class="center underline">{lang 'My photo albums'}</h3>
+            <div class="content" id="picture">
+                <script>
+                    var url_picture_block = '{{ $design->url('picture','main','albums',$username) }}';
+                    $('#picture').load(url_picture_block + ' #picture_block');
+                </script>
+            </div>
+            <div class="clear"></div>
+        {/if}
+
+        {if $is_video_enabled}
+            <h3 class="center underline">{lang 'My video albums'}</h3>
+            <div class="content" id="video">
+                <script>
+                    var url_video_block = '{{ $design->url('video','main','albums',$username) }}';
+                    $('#video').load(url_video_block + ' #video_block');
+                </script>
+            </div>
+            <div class="clear"></div>
+        {/if}
+
+        {if $is_forum_enabled}
+            <h3 class="center underline">{lang 'My discussions'}</h3>
+            <div class="content" id="forum">
+                <script>
+                    var url_forum_block = '{{ $design->url('forum','forum','showpostbyprofile',$username) }}';
+                    $('#forum').load(url_forum_block + ' #forum_block');
+                </script>
+            </div>
+            <div class="clear"></div>
+        {/if}
+
+        {if $is_note_enabled}
+            <div class="content" id="note">
+                <script>
+                    var url_note_block = '{{ $design->url('note','main','author',$username) }}';
+                    $('#note').load(url_note_block + ' #note_block');
+                </script>
+            </div>
+            <div class="clear"></div>
+        {/if}
     </div>
 
     <div class="left col-md-3">
