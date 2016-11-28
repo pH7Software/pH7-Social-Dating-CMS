@@ -12,6 +12,7 @@ class MainController extends Controller
     public function index()
     {
         $this->view->page_title = $this->view->h1_title = t('My Dashboard');
+
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL .
             PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'style.css');
         $this->design->addCss(PH7_STATIC . PH7_CSS . PH7_JS . 'jquery/slick/', 'slick.css,slick-theme.css');
