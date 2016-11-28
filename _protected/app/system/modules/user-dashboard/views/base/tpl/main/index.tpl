@@ -83,6 +83,7 @@
         {/if}
 
         {if $is_note_enabled}
+            <h3 class="center underline">{lang 'My notes'}</h3>
             <div class="content" id="note">
                 <script>
                     var url_note_block = '{{ $design->url('note','main','author',$username) }}';
@@ -92,7 +93,7 @@
             <div class="clear"></div>
         {/if}
 
-        <h3 class="center underline">{lang 'Quick Search'}</h3>
+        <h2 class="center underline italic s_tMarg">{lang 'Quick User Search'}</h2>
         {{ SearchUserCoreForm::quick() }}
     </div>
 
