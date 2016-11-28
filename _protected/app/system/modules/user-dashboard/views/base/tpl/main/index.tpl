@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="left col-md-3">
+    <div class="left col-xs-12 col-sm-4 col-md-3">
         <h3>{lang 'My Profile Photo'}</h3>
         {{ $avatarDesign->lightBox($username, $first_name, $sex, 400) }}
 
@@ -27,7 +27,7 @@
         </ul>
     </div>
 
-    <div class="left col-md-6">
+    <div class="left col-xs-12 col-sm-6 col-md-6">
         <h3 class="center underline">{lang 'The latest users'}</h3>
         {{ $userDesignModel->profilesBlock() }}
 
@@ -93,7 +93,7 @@
         {/if}
     </div>
 
-    <div class="left col-md-3">
+    <div class="left col-xs-12 col-sm-2 col-md-3">
         <h3>{lang 'The latest news'}</h3>
         <div id="wall"></div>
     </div>
