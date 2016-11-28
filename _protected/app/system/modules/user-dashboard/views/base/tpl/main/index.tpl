@@ -91,6 +91,9 @@
             </div>
             <div class="clear"></div>
         {/if}
+
+        <h3 class="center underline">{lang 'Quick Search'}</h3>
+        {{ SearchUserCoreForm::quick() }}
     </div>
 
     <div class="left col-xs-12 col-sm-2 col-md-3">
