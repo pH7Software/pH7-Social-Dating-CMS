@@ -16,6 +16,10 @@ class ComposerStaticInitPH7
         array (
             'Stripe\\' => 7,
         ),
+        'R' => 
+        array (
+            'RobThree\\Auth\\' => 14,
+        ),
         'P' => 
         array (
             'PH7\\Test\\Unit\\' => 14,
@@ -23,6 +27,7 @@ class ComposerStaticInitPH7
         ),
         'M' => 
         array (
+            'MaxMind\\Db\\' => 11,
             'MaxMind\\' => 8,
         ),
         'G' => 
@@ -44,6 +49,10 @@ class ComposerStaticInitPH7
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
+        'RobThree\\Auth\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/robthree/twofactorauth/lib',
+        ),
         'PH7\\Test\\Unit\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/_tests/Unit',
@@ -51,6 +60,10 @@ class ComposerStaticInitPH7
         'PH7\\Framework\\' => 
         array (
             0 => __DIR__ . '/../../..' . '/_protected/framework',
+        ),
+        'MaxMind\\Db\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db',
         ),
         'MaxMind\\' => 
         array (
@@ -70,40 +83,11 @@ class ComposerStaticInitPH7
         ),
     );
 
-    public static $prefixesPsr0 = array (
-        'M' => 
-        array (
-            'MaxMind' => 
-            array (
-                0 => __DIR__ . '/..' . '/maxmind-db/reader/src',
-            ),
-        ),
-    );
-
-    public static $classMap = array (
-        'RobThree\\Auth\\Providers\\Qr\\BaseHTTPQRCodeProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Qr/BaseHTTPQRCodeProvider.php',
-        'RobThree\\Auth\\Providers\\Qr\\GoogleQRCodeProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Qr/GoogleQRCodeProvider.php',
-        'RobThree\\Auth\\Providers\\Qr\\IQRCodeProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Qr/IQRCodeProvider.php',
-        'RobThree\\Auth\\Providers\\Qr\\QRException' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Qr/QRException.php',
-        'RobThree\\Auth\\Providers\\Qr\\QRServerProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Qr/QRServerProvider.php',
-        'RobThree\\Auth\\Providers\\Qr\\QRicketProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Qr/QRicketProvider.php',
-        'RobThree\\Auth\\Providers\\Rng\\CSRNGProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Rng/CSRNGProvider.php',
-        'RobThree\\Auth\\Providers\\Rng\\HashRNGProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Rng/HashRNGProvider.php',
-        'RobThree\\Auth\\Providers\\Rng\\IRNGProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Rng/IRNGProvider.php',
-        'RobThree\\Auth\\Providers\\Rng\\MCryptRNGProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Rng/MCryptRNGProvider.php',
-        'RobThree\\Auth\\Providers\\Rng\\OpenSSLRNGProvider' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Rng/OpenSSLRNGProvider.php',
-        'RobThree\\Auth\\Providers\\Rng\\RNGException' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/Providers/Rng/RNGException.php',
-        'RobThree\\Auth\\TwoFactorAuth' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/TwoFactorAuth.php',
-        'RobThree\\Auth\\TwoFactorAuthException' => __DIR__ . '/..' . '/robthree/twofactorauth/lib/TwoFactorAuthException.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitPH7::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitPH7::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitPH7::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitPH7::$classMap;
 
         }, null, ClassLoader::class);
     }

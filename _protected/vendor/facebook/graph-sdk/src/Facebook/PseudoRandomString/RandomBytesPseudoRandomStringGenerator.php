@@ -21,52 +21,39 @@
  * DEALINGS IN THE SOFTWARE.
  *
  */
-namespace Facebook\GraphNodes;
+namespace Facebook\PseudoRandomString;
 
-/**
- * Class GraphCoverPhoto
- *
- * @package Facebook
- */
-class GraphCoverPhoto extends GraphNode
+use Facebook\Exceptions\FacebookSDKException;
+
+class RandomBytesPseudoRandomStringGenerator implements PseudoRandomStringGeneratorInterface
 {
+    use PseudoRandomStringGeneratorTrait;
+
     /**
-     * Returns the id of cover if it exists
-     *
-     * @return int|null
+     * @const string The error message when generating the string fails.
      */
-    public function getId()
-    {
-        return $this->getField('id');
-    }
-    
+    const ERROR_MESSAGE = 'Unable to generate a cryptographically secure pseudo-random string from random_bytes(). ';
+
     /**
-     * Returns the source of cover if it exists
-     *
-     * @return string|null
+     * @throws FacebookSDKException
      */
-    public function getSource()
+    public function __construct()
     {
-        return $this->getField('source');
+        if (!function_exists('random_bytes')) {
+            throw new FacebookSDKException(
+                static::ERROR_MESSAGE .
+                'The function random_bytes() does not exist.'
+            );
+        }
     }
 
     /**
-     * Returns the offset_x of cover if it exists
-     *
-     * @return int|null
+     * @inheritdoc
      */
-    public function getOffsetX()
+    public function getPseudoRandomString($length)
     {
-        return $this->getField('offset_x');
-    }
+        $this->validateLength($length);
 
-    /**
-     * Returns the offset_y of cover if it exists
-     *
-     * @return int|null
-     */
-    public function getOffsetY()
-    {
-        return $this->getField('offset_y');
+        return $this->binToHex(random_bytes($length), $length);
     }
 }

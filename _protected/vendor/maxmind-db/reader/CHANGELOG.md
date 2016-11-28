@@ -1,6 +1,18 @@
 CHANGELOG
 =========
 
+1.1.3 (2016-11-21)
+------------------
+
+* Suggest relevant extensions when installing with Composer. GitHub #37.
+
+1.1.2 (2016-10-05)
+------------------
+
+* Searching for database metadata only occurs within the last 128KB
+  (128 * 1024 bytes) of the file, speeding detection of corrupt
+  datafiles. Reported by Eric Teubert. GitHub #42.
+
 1.1.1 (2016-09-15)
 ------------------
 

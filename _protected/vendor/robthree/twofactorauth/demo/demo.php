@@ -8,7 +8,7 @@
         <?php
         require_once 'loader.php';
         Loader::register('../lib','RobThree\\Auth');
-
+        
         use \RobThree\Auth\TwoFactorAuth;
 
         $tfa = new TwoFactorAuth('MyApp');
