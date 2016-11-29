@@ -14,6 +14,8 @@ class SubscriptionModel extends UserCoreModel
 
     /**
      * Get all Active Subscribers (it is required by the law to send emails only to the confirmed opt-in subscribers).
+     *
+     * @return object
      */
     public function getSubscribers()
     {
