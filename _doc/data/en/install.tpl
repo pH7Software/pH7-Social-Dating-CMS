@@ -29,4 +29,5 @@ If you want to allow it, you need to set in numerical values <em>777</em> for al
 
 <h3>5. Run the installation wizard</h3>
 <p>You just need to go to the following URL and follow the instructions carefully: <em>http://www.YOUR-SITE.com/<strong>_install</strong>/</em></p>
-<p><iframe width="560" height="315" src="//www.youtube.com/embed/MrCbfnS2O4s?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
+
+<p><iframe height="400" src="//www.youtube.com/embed/MrCbfnS2O4s?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
