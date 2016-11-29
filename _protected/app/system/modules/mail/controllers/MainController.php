@@ -201,7 +201,7 @@ class MainController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search Mail - Look for a message');
+        $this->sTitle = t('Mail Search - Look for a message');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();
@@ -226,7 +226,7 @@ class MainController extends Controller
             $this->sTitle = t('Mail | Message - Your search returned');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Mail Result!', '%n% Mail Results!', $this->iTotalMails);
+            $this->view->h3_title = nt('%n% message found!', '%n% messages found!', $this->iTotalMails);
             $this->view->msgs = $oSearch;
         }
 

@@ -64,7 +64,7 @@ class MainController extends Controller
 
     public function editPhoto()
     {
-        $this->view->page_title = $this->view->h2_title = t('Edit Picture');
+        $this->view->page_title = $this->view->h2_title = t('Edit Photo');
         $this->output();
     }
 
@@ -154,7 +154,7 @@ class MainController extends Controller
 
         /* Clean PictureModel Cache */
         (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
-        Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your picture has been deleted!'));
+        Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your photo has been removed!'));
     }
 
     public function deleteAlbum()
@@ -172,7 +172,7 @@ class MainController extends Controller
 
     public function search()
     {
-        $this->view->page_title = $this->view->h2_title = t('Search Picture - Looking a picture');
+        $this->view->page_title = $this->view->h2_title = t('Photo Search - Looking for a photo');
         $this->output();
     }
 
@@ -192,7 +192,7 @@ class MainController extends Controller
         {
             $this->sTitle = t('Dating Social Picture - Your search returned');
             $this->view->page_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% picture result!', '%n% picture results!', $this->iTotalPictures);
+            $this->view->h3_title = nt('%n% photo found!', '%n% photos found!', $this->iTotalPictures);
             $this->view->meta_description = t('Search - %site_name% is a Dating Social Photo Community!');
             $this->view->meta_keywords = t('search,picture,photo, photo gallery,dating,social network,community,music,movie,news,picture sharing');
             $this->view->h2_title = $this->sTitle;

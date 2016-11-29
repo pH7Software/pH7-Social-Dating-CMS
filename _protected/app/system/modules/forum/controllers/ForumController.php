@@ -151,9 +151,9 @@ class ForumController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search Forum - Looking a Forum Post | %site_name%');
+        $this->sTitle = t('Forum Search - Looking for a Forum Post | %site_name%');
         $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Search Topic - Discussion Forum - %site_name%');
+        $this->view->meta_description = t('Topic Search - Discussion Forum - %site_name%');
         $this->view->h2_title = $this->sTitle;
         $this->output();
     }
