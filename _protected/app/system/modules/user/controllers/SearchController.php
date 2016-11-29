@@ -17,15 +17,13 @@ class SearchController extends Controller
 
     public function quick()
     {
-        $this->view->page_title = t('Search Quick Profiles');
-        $this->view->h1_title = t('The Search Members | Quick Search');
+        $this->view->page_title = $this->view->h1_title = t('Quick Search');
         $this->output();
     }
 
     public function advanced()
     {
-        $this->view->page_title = t('Search Advanced Profiles');
-        $this->view->h1_title = t('The Search Members | Advanced Search');
+        $this->view->page_title = $this->view->h1_title = t('Advanced Search');
         $this->output();
     }
 

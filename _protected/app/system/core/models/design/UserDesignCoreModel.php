@@ -19,9 +19,13 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
     GEO_PROFILE_LIMIT = 14,
     CAROUSEL_PROFILE_LIMIT = 25,
     PROFILE_BLOCK_LIMIT = 8,
-    PROFILE_LIMIT = 44;
+    PROFILE_LIMIT = 44,
+    GEO_PROFILE_AVATAR_SIZE = 150,
+    CAROUSEL_PROFILE_AVATAR_SIZE = 150,
+    PROFILE_BLOCK_AVATAR_SIZE = 150,
+    PROFILE_AVATAR_SIZE = 64;
 
-    private $oUser, $oUserModel;
+    protected $oUser, $oUserModel;
 
     public function __construct()
     {
@@ -63,11 +67,11 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
                     's' => $oRow->sex
                 ];
 
-                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">'. $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, 150, 'Members'), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
+                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">'. $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, self::GEO_PROFILE_AVATAR_SIZE, 'Members'), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
             }
             else
             {
-                echo t('Meet %0% on %site_name%!', $sFirstName), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a href="', $this->oUser->getProfileLink($oRow->username), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, 150, 'Members'), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
+                echo t('Meet %0% on %site_name%!', $sFirstName), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a href="', $this->oUser->getProfileLink($oRow->username), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, self::GEO_PROFILE_AVATAR_SIZE, 'Members'), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
             }
 
             echo '</div>';
@@ -100,11 +104,11 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
                     's' => $oRow->sex
                 ];
 
-                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">' . $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, 150, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oRow->username), '" class="splash_avatar" /></a>';
+                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">' . $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, self::CAROUSEL_PROFILE_AVATAR_SIZE, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oRow->username), '" class="splash_avatar" /></a>';
             }
             else
             {
-                echo t('Meet %0% on %site_name%!', $sFirstName), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a href="', $this->oUser->getProfileLink($oRow->username), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, 150, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oRow->username), '" class="splash_avatar" /></a>';
+                echo t('Meet %0% on %site_name%!', $sFirstName), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a href="', $this->oUser->getProfileLink($oRow->username), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, self::CAROUSEL_PROFILE_AVATAR_SIZE, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oRow->username), '" class="splash_avatar" /></a>';
             }
 
             echo '</div>';
@@ -126,7 +130,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
             $sFirstName = $this->oStr->upperFirst($oRow->firstName);
             $sCity = $this->oStr->upperFirst($oRow->city);
 
-            echo '<li><a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oRow->username, $sFirstName, $oRow->sex), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, 150, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oRow->username), '" /></a></li>';
+            echo '<li><a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oRow->username, $sFirstName, $oRow->sex), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, self::PROFILE_BLOCK_AVATAR_SIZE, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oRow->username), '" /></a></li>';
         }
 
         echo '</ul>';
@@ -138,7 +142,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         if (empty($oUser)) return;
 
         foreach ($oUser as $oRow)
-            (new AvatarDesignCore)->get($oRow->username, $oRow->firstName, $oRow->sex, 64);
+            (new AvatarDesignCore)->get($oRow->username, $oRow->firstName, $oRow->sex, self::PROFILE_AVATAR_SIZE);
 
     }
 

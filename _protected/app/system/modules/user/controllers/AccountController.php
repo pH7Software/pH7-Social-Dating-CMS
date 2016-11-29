@@ -7,14 +7,22 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+use
+PH7\Framework\Module\Various as SysMod,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class AccountController extends Controller
 {
     public function index()
     {
         // Redirect this page to the user homepage
-        Header::redirect(Uri::get('user', 'main', 'index'));
+        if (SysMod::isEnabled('user-dashboard'))
+            $sUrl = Uri::get('user-dashboard', 'main', 'index');
+        else
+            $sUrl = Uri::get('user', 'main', 'index');
+
+        Header::redirect($sUrl);
     }
 
     public function activate($sMail, $sHash)

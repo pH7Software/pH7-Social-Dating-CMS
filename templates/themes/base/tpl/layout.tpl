@@ -34,7 +34,7 @@
     <!-- Begin Sheet CSS -->
     {{ $design->externalCssFile(PH7_URL_STATIC. PH7_CSS . 'js/jquery/smoothness/jquery-ui.css') }}
     {{ $design->externalCssFile(PH7_URL_STATIC. PH7_CSS . 'font-awesome.css') }}
-    {{ $design->staticFiles('css', PH7_STATIC . PH7_JS . 'jquery/box/', 'box.css') }} {* We have to include box CSS alone because it includes images in its folder *}
+    {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS . 'js/jquery/box/', 'box.css') }} {* We have to include box CSS alone because it includes images in its folder *}
     {{ $design->staticFiles('css', PH7_STATIC . PH7_CSS, 'bootstrap.css,bootstrap_customize.css,animate.css') }}
     {{ $design->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'common.css,style.css,layout.css,menu.css,like.css,color.css,form.css,js/jquery/rating.css,js/jquery/apprise.css,js/jquery/tipTip.css') }}
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans" />
@@ -177,7 +177,7 @@
     <!-- End Footer -->
 
     <!-- Begin Footer JavaScript -->
-    {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/box/box.js,jquery/tipTip.js,bootstrap.js,common.js,str.js,holder.js') }}
+    {{ $design->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/box.js,jquery/tipTip.js,bootstrap.js,common.js,str.js,holder.js') }}
     {{ $design->staticFiles('js', PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_JS, 'global.js') }}
     {{ $design->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery-ui.js') }} {* UI must be the last here, otherwise the jQueryUI buttons won't work *}
 

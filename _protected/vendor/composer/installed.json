@@ -44,230 +44,6 @@
         ]
     },
     {
-        "name": "swiftmailer/swiftmailer",
-        "version": "v5.4.3",
-        "version_normalized": "5.4.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/swiftmailer/swiftmailer.git",
-            "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
-            "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "require-dev": {
-            "mockery/mockery": "~0.9.1"
-        },
-        "time": "2016-07-08 11:51:25",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.4-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/swift_required.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Chris Corbyn"
-            },
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "Swiftmailer, free feature-rich PHP mailer",
-        "homepage": "http://swiftmailer.org",
-        "keywords": [
-            "email",
-            "mail",
-            "mailer"
-        ]
-    },
-    {
-        "name": "robthree/twofactorauth",
-        "version": "1.5.1",
-        "version_normalized": "1.5.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/RobThree/TwoFactorAuth.git",
-            "reference": "fa781c14e34b512c1492d6c34379ef71d4ef9b9b"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/RobThree/TwoFactorAuth/zipball/fa781c14e34b512c1492d6c34379ef71d4ef9b9b",
-            "reference": "fa781c14e34b512c1492d6c34379ef71d4ef9b9b",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2016-06-24 15:52:02",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "classmap": [
-                "lib/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Rob Janssen",
-                "homepage": "http://robiii.me",
-                "role": "Developer"
-            }
-        ],
-        "description": "Two Factor Authentication",
-        "homepage": "https://github.com/RobThree/TwoFactorAuth",
-        "keywords": [
-            "Authentication",
-            "MFA",
-            "Multi Factor Authentication",
-            "Two Factor Authentication",
-            "authenticator",
-            "authy",
-            "php",
-            "tfa"
-        ]
-    },
-    {
-        "name": "facebook/graph-sdk",
-        "version": "5.3.1",
-        "version_normalized": "5.3.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/facebook/php-graph-sdk.git",
-            "reference": "7ed1ecdae6a5b2f8b8f60e132d06594b39b16fb1"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/7ed1ecdae6a5b2f8b8f60e132d06594b39b16fb1",
-            "reference": "7ed1ecdae6a5b2f8b8f60e132d06594b39b16fb1",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^5.4|^7.0"
-        },
-        "require-dev": {
-            "guzzlehttp/guzzle": "~5.0",
-            "mockery/mockery": "~0.8",
-            "phpunit/phpunit": "~4.0"
-        },
-        "suggest": {
-            "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client"
-        },
-        "time": "2016-08-09 11:32:26",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Facebook\\": "src/Facebook/"
-            },
-            "files": [
-                "src/Facebook/polyfills.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Facebook Platform"
-        ],
-        "authors": [
-            {
-                "name": "Facebook",
-                "homepage": "https://github.com/facebook/facebook-php-sdk-v4/contributors"
-            }
-        ],
-        "description": "Facebook SDK for PHP",
-        "homepage": "https://github.com/facebook/facebook-php-sdk-v4",
-        "keywords": [
-            "facebook",
-            "sdk"
-        ]
-    },
-    {
-        "name": "composer/ca-bundle",
-        "version": "1.0.4",
-        "version_normalized": "1.0.4.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/composer/ca-bundle.git",
-            "reference": "ec21a59414b99501e723b63fd664aa8ead9c5680"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/composer/ca-bundle/zipball/ec21a59414b99501e723b63fd664aa8ead9c5680",
-            "reference": "ec21a59414b99501e723b63fd664aa8ead9c5680",
-            "shasum": ""
-        },
-        "require": {
-            "ext-openssl": "*",
-            "ext-pcre": "*",
-            "php": "^5.3.2 || ^7.0"
-        },
-        "require-dev": {
-            "psr/log": "^1.0",
-            "symfony/process": "^2.5 || ^3.0"
-        },
-        "suggest": {
-            "symfony/process": "This is necessary to reliably check whether openssl_x509_parse is vulnerable on older php versions, but can be ignored on PHP 5.5.6+"
-        },
-        "time": "2016-09-04 19:00:06",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Composer\\CaBundle\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Jordi Boggiano",
-                "email": "j.boggiano@seld.be",
-                "homepage": "http://seld.be"
-            }
-        ],
-        "description": "Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.",
-        "keywords": [
-            "cabundle",
-            "cacert",
-            "certificate",
-            "ssl",
-            "tls"
-        ]
-    },
-    {
         "name": "maxmind/web-service-common",
         "version": "v0.3.1",
         "version_normalized": "0.3.1.0",
@@ -312,111 +88,6 @@
         ],
         "description": "Internal MaxMind Web Service API",
         "homepage": "https://github.com/maxmind/mm-web-service-api-php"
-    },
-    {
-        "name": "maxmind-db/reader",
-        "version": "v1.1.1",
-        "version_normalized": "1.1.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
-            "reference": "8da3b4fcd439779d4b16bba0a4ba98365f78d788"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/8da3b4fcd439779d4b16bba0a4ba98365f78d788",
-            "reference": "8da3b4fcd439779d4b16bba0a4ba98365f78d788",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.1"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.2.*",
-            "satooshi/php-coveralls": "1.0.*",
-            "squizlabs/php_codesniffer": "2.*"
-        },
-        "time": "2016-09-15 21:26:50",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "MaxMind": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Gregory J. Oschwald",
-                "email": "goschwald@maxmind.com",
-                "homepage": "http://www.maxmind.com/"
-            }
-        ],
-        "description": "MaxMind DB Reader API",
-        "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
-        "keywords": [
-            "database",
-            "geoip",
-            "geoip2",
-            "geolocation",
-            "maxmind"
-        ]
-    },
-    {
-        "name": "geoip2/geoip2",
-        "version": "v2.4.2",
-        "version_normalized": "2.4.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/maxmind/GeoIP2-php.git",
-            "reference": "24b278b0195d7067e930b844c44faf8fae5bdbc7"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/24b278b0195d7067e930b844c44faf8fae5bdbc7",
-            "reference": "24b278b0195d7067e930b844c44faf8fae5bdbc7",
-            "shasum": ""
-        },
-        "require": {
-            "maxmind-db/reader": "~1.0",
-            "maxmind/web-service-common": "~0.3",
-            "php": ">=5.3.1"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.2.*",
-            "squizlabs/php_codesniffer": "2.*"
-        },
-        "time": "2016-08-17 20:42:55",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "GeoIp2\\": "src"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "Apache-2.0"
-        ],
-        "authors": [
-            {
-                "name": "Gregory J. Oschwald",
-                "email": "goschwald@maxmind.com",
-                "homepage": "http://www.maxmind.com/"
-            }
-        ],
-        "description": "MaxMind GeoIP2 PHP API",
-        "homepage": "https://github.com/maxmind/GeoIP2-php",
-        "keywords": [
-            "IP",
-            "geoip",
-            "geoip2",
-            "geolocation",
-            "maxmind"
-        ]
     },
     {
         "name": "stripe/stripe-php",
@@ -473,6 +144,344 @@
             "api",
             "payment processing",
             "stripe"
+        ]
+    },
+    {
+        "name": "composer/ca-bundle",
+        "version": "1.0.6",
+        "version_normalized": "1.0.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/composer/ca-bundle.git",
+            "reference": "a795611394b3c05164fd0eb291b492b39339cba4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/composer/ca-bundle/zipball/a795611394b3c05164fd0eb291b492b39339cba4",
+            "reference": "a795611394b3c05164fd0eb291b492b39339cba4",
+            "shasum": ""
+        },
+        "require": {
+            "ext-openssl": "*",
+            "ext-pcre": "*",
+            "php": "^5.3.2 || ^7.0"
+        },
+        "require-dev": {
+            "psr/log": "^1.0",
+            "symfony/process": "^2.5 || ^3.0"
+        },
+        "suggest": {
+            "symfony/process": "This is necessary to reliably check whether openssl_x509_parse is vulnerable on older php versions, but can be ignored on PHP 5.5.6+"
+        },
+        "time": "2016-11-02 18:11:27",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Composer\\CaBundle\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jordi Boggiano",
+                "email": "j.boggiano@seld.be",
+                "homepage": "http://seld.be"
+            }
+        ],
+        "description": "Lets you find a path to the system CA bundle, and includes a fallback to the Mozilla CA bundle.",
+        "keywords": [
+            "cabundle",
+            "cacert",
+            "certificate",
+            "ssl",
+            "tls"
+        ]
+    },
+    {
+        "name": "maxmind-db/reader",
+        "version": "v1.1.2",
+        "version_normalized": "1.1.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
+            "reference": "571279051c3339414dc91b422fb61af540c3431d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/571279051c3339414dc91b422fb61af540c3431d",
+            "reference": "571279051c3339414dc91b422fb61af540c3431d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.2.*",
+            "satooshi/php-coveralls": "1.0.*",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "suggest": {
+            "ext-bcmath": "bcmath or gmp is requred for decoding larger integers with the pure PHP decoder",
+            "ext-gmp": "bcmath or gmp is requred for decoding larger integers with the pure PHP decoder",
+            "ext-maxminddb": "A C-based database decoder that provides significantly faster lookups"
+        },
+        "time": "2016-11-21 21:33:24",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "MaxMind\\Db\\": "src/MaxMind/Db"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Gregory J. Oschwald",
+                "email": "goschwald@maxmind.com",
+                "homepage": "http://www.maxmind.com/"
+            }
+        ],
+        "description": "MaxMind DB Reader API",
+        "homepage": "https://github.com/maxmind/MaxMind-DB-Reader-php",
+        "keywords": [
+            "database",
+            "geoip",
+            "geoip2",
+            "geolocation",
+            "maxmind"
+        ]
+    },
+    {
+        "name": "geoip2/geoip2",
+        "version": "v2.4.4",
+        "version_normalized": "2.4.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/maxmind/GeoIP2-php.git",
+            "reference": "57e0384a83d0935db4c4cdb3f411aa131481ae80"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/maxmind/GeoIP2-php/zipball/57e0384a83d0935db4c4cdb3f411aa131481ae80",
+            "reference": "57e0384a83d0935db4c4cdb3f411aa131481ae80",
+            "shasum": ""
+        },
+        "require": {
+            "maxmind-db/reader": "~1.0",
+            "maxmind/web-service-common": "~0.3",
+            "php": ">=5.3.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.2.*",
+            "squizlabs/php_codesniffer": "2.*"
+        },
+        "time": "2016-10-11 21:58:42",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "GeoIp2\\": "src"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Gregory J. Oschwald",
+                "email": "goschwald@maxmind.com",
+                "homepage": "http://www.maxmind.com/"
+            }
+        ],
+        "description": "MaxMind GeoIP2 PHP API",
+        "homepage": "https://github.com/maxmind/GeoIP2-php",
+        "keywords": [
+            "IP",
+            "geoip",
+            "geoip2",
+            "geolocation",
+            "maxmind"
+        ]
+    },
+    {
+        "name": "swiftmailer/swiftmailer",
+        "version": "v5.4.4",
+        "version_normalized": "5.4.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/swiftmailer/swiftmailer.git",
+            "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/545ce9136690cea74f98f86fbb9c92dd9ab1a756",
+            "reference": "545ce9136690cea74f98f86fbb9c92dd9ab1a756",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "mockery/mockery": "~0.9.1"
+        },
+        "time": "2016-11-24 01:01:23",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.4-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/swift_required.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Chris Corbyn"
+            },
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "Swiftmailer, free feature-rich PHP mailer",
+        "homepage": "http://swiftmailer.org",
+        "keywords": [
+            "email",
+            "mail",
+            "mailer"
+        ]
+    },
+    {
+        "name": "robthree/twofactorauth",
+        "version": "1.5.2",
+        "version_normalized": "1.5.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/RobThree/TwoFactorAuth.git",
+            "reference": "0b5d455b277386899b1499fbe0cf198fd3a727b7"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/RobThree/TwoFactorAuth/zipball/0b5d455b277386899b1499fbe0cf198fd3a727b7",
+            "reference": "0b5d455b277386899b1499fbe0cf198fd3a727b7",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "@stable"
+        },
+        "time": "2016-10-30 21:47:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "RobThree\\Auth\\": "lib"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Rob Janssen",
+                "homepage": "http://robiii.me",
+                "role": "Developer"
+            }
+        ],
+        "description": "Two Factor Authentication",
+        "homepage": "https://github.com/RobThree/TwoFactorAuth",
+        "keywords": [
+            "Authentication",
+            "MFA",
+            "Multi Factor Authentication",
+            "Two Factor Authentication",
+            "authenticator",
+            "authy",
+            "php",
+            "tfa"
+        ]
+    },
+    {
+        "name": "facebook/graph-sdk",
+        "version": "5.4.2",
+        "version_normalized": "5.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/facebook/php-graph-sdk.git",
+            "reference": "2839246e971aef150650196acbb46d47e5207370"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/2839246e971aef150650196acbb46d47e5207370",
+            "reference": "2839246e971aef150650196acbb46d47e5207370",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.4|^7.0"
+        },
+        "require-dev": {
+            "guzzlehttp/guzzle": "~5.0",
+            "mockery/mockery": "~0.8",
+            "phpunit/phpunit": "~4.0"
+        },
+        "suggest": {
+            "guzzlehttp/guzzle": "Allows for implementation of the Guzzle HTTP client",
+            "paragonie/random_compat": "Provides a better CSPRNG option in PHP 5"
+        },
+        "time": "2016-11-15 14:34:16",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Facebook\\": "src/Facebook/"
+            },
+            "files": [
+                "src/Facebook/polyfills.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Facebook Platform"
+        ],
+        "authors": [
+            {
+                "name": "Facebook",
+                "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
+            }
+        ],
+        "description": "Facebook SDK for PHP",
+        "homepage": "https://github.com/facebook/php-graph-sdk",
+        "keywords": [
+            "facebook",
+            "sdk"
         ]
     }
 ]

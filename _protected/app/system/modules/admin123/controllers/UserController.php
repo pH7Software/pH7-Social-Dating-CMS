@@ -82,7 +82,7 @@ class UserController extends Controller
 
     public function search()
     {
-        $this->view->page_title = $this->view->h1_title = t('Search Users');
+        $this->view->page_title = $this->view->h1_title = t('User Search');
         $this->output();
     }
 
@@ -116,7 +116,7 @@ class UserController extends Controller
             if (empty($oSearch))
             {
                 $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
-                $this->displayPageNotFound('Empty search result. Please try again with wider or new search parameters.');
+                $this->displayPageNotFound('No results found. Please try again with wider/new search parameters.');
             }
             else
             {
@@ -124,7 +124,7 @@ class UserController extends Controller
                 $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
                 $this->view->page_title = $this->view->h1_title = t('Users - Your search returned');
-                $this->view->h3_title = nt('%n% User Result!', '%n% User Results!', $this->iTotalUsers);
+                $this->view->h3_title = nt('%n% user found!', '%n% users found!', $this->iTotalUsers);
                 $this->view->browse = $oSearch;
             }
 

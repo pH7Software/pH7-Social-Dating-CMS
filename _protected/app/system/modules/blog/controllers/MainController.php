@@ -128,7 +128,7 @@ class MainController extends Controller
         {
             $this->sTitle = t('Search by Category: "%0%" Blog', $sCategoryTxt);
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Post Result!', '%n% Post Results!', $this->iTotalBlogs);
+            $this->view->h3_title = nt('%n% Post Found!', '%n% Posts Found!', $this->iTotalBlogs);
             $this->view->meta_description = t('Search Blog Post by Category %0% - Dating Social Community Blog', $sCategoryTxt);
             $this->view->meta_keywords = t('search,post,blog,dating,social network,community,news');
 
@@ -141,7 +141,7 @@ class MainController extends Controller
 
     public function search()
     {
-        $this->view->page_title = $this->view->h2_title = t('Search Blog - Looking a post');
+        $this->view->page_title = $this->view->h2_title = t('Blog Search - Looking for a post');
         $this->output();
     }
 
@@ -168,7 +168,7 @@ class MainController extends Controller
         {
             $this->sTitle = t('Dating Social Blog - Your search returned');
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Post Result!', '%n% Post Results!', $this->iTotalBlogs);
+            $this->view->h3_title = nt('%n% Post Found!', '%n% Posts Found!', $this->iTotalBlogs);
             $this->view->meta_description = t('Search - Dating Social Community Blog');
             $this->view->meta_keywords = t('search,blog,dating,social network,community,news');
 

@@ -8,7 +8,7 @@
 {/if}
 
 {if $is_forum_enabled}
-  <link title="{lang 'Discussions Forums'}" url="{{ $design->url('forum','forum','index') }}" />
+  <link title="{lang 'Discussion Forums'}" url="{{ $design->url('forum','forum','index') }}" />
 {/if}
 
 {if $is_picture_enabled}

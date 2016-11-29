@@ -25,3 +25,5 @@
     <img src="{site_url}static/img/get-google-api-key.png" alt="Generate Google API key on Console.Developers.Google.com" title="Generate Google API key on Console.Developers.Google.com" />
     <figcaption>Generate Google API key on <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">https://developers.google.com/maps/documentation/javascript/get-api-key</a> and select "Google Maps JavaScript API" and "Web browser (Javascript)"<figcaption>
 </figure>
+
+<p><iframe height="400" src="//www.youtube.com/embed/45uVP_C-ZCk?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>

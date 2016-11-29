@@ -16,6 +16,10 @@ class ComposerStaticInitPH7
         array (
             'Stripe\\' => 7,
         ),
+        'R' =>
+        array (
+            'RobThree\\Auth\\' => 14,
+        ),
         'P' =>
         array (
             'PH7\\Test\\Unit\\' => 14,
@@ -23,6 +27,7 @@ class ComposerStaticInitPH7
         ),
         'M' =>
         array (
+            'MaxMind\\Db\\' => 11,
             'MaxMind\\' => 8,
         ),
         'G' =>
@@ -44,6 +49,10 @@ class ComposerStaticInitPH7
         array (
             0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
+        'RobThree\\Auth\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/robthree/twofactorauth/lib',
+        ),
         'PH7\\Test\\Unit\\' =>
         array (
             0 => __DIR__ . '/../../..' . '/_tests/Unit',
@@ -51,6 +60,10 @@ class ComposerStaticInitPH7
         'PH7\\Framework\\' =>
         array (
             0 => __DIR__ . '/../../..' . '/_protected/framework',
+        ),
+        'MaxMind\\Db\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db',
         ),
         'MaxMind\\' =>
         array (
@@ -67,16 +80,6 @@ class ComposerStaticInitPH7
         'Composer\\CaBundle\\' =>
         array (
             0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
-        ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'M' =>
-        array (
-            'MaxMind' =>
-            array (
-                0 => __DIR__ . '/..' . '/maxmind-db/reader/src',
-            ),
         ),
     );
 
@@ -150,6 +153,7 @@ class ComposerStaticInitPH7
         'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorFactory' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorFactory.php',
         'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorInterface' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorInterface.php',
         'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorTrait' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorTrait.php',
+        'Facebook\\PseudoRandomString\\RandomBytesPseudoRandomStringGenerator' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/RandomBytesPseudoRandomStringGenerator.php',
         'Facebook\\PseudoRandomString\\UrandomPseudoRandomStringGenerator' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/UrandomPseudoRandomStringGenerator.php',
         'Facebook\\SignedRequest' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/SignedRequest.php',
         'Facebook\\Url\\FacebookUrlDetectionHandler' => __DIR__ . '/..' . '/facebook/graph-sdk/src/Facebook/Url/FacebookUrlDetectionHandler.php',
@@ -465,7 +469,6 @@ class ComposerStaticInitPH7
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitPH7::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitPH7::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitPH7::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitPH7::$classMap;
 
         }, null, ClassLoader::class);

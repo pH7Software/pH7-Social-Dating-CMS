@@ -108,7 +108,7 @@ class MainController extends Controller
             $this->sTitle = t('Search by Category: "%0%" Game', $sCategoryTxt);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Game Result!', '%n% Games Result!', $this->iTotalGames);
+            $this->view->h3_title = nt('%n% Game Found!', '%n% Games Found!', $this->iTotalGames);
             $this->view->meta_description = t('Search the Flash Game in the Category %0% - Community Dating Social Games', $sCategoryTxt);
 
             $this->view->games = $oSearch;
@@ -146,7 +146,7 @@ class MainController extends Controller
             $this->sTitle = t('Game - Your search returned');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Game Result!', '%n% Games Result!', $this->iTotalGames);
+            $this->view->h3_title = nt('%n% Game Found!', '%n% Games Found!', $this->iTotalGames);
             $this->view->meta_description = t('Search - Free Games for Gamers, Flash Games, Free Online Games');
             $this->view->meta_keywords = t('search,game,free,flash,game site,flash game,games,gaming,online game');
 

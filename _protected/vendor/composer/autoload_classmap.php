@@ -75,6 +75,7 @@ return array(
     'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorFactory' => $vendorDir . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorFactory.php',
     'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorInterface' => $vendorDir . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorInterface.php',
     'Facebook\\PseudoRandomString\\PseudoRandomStringGeneratorTrait' => $vendorDir . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/PseudoRandomStringGeneratorTrait.php',
+    'Facebook\\PseudoRandomString\\RandomBytesPseudoRandomStringGenerator' => $vendorDir . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/RandomBytesPseudoRandomStringGenerator.php',
     'Facebook\\PseudoRandomString\\UrandomPseudoRandomStringGenerator' => $vendorDir . '/facebook/graph-sdk/src/Facebook/PseudoRandomString/UrandomPseudoRandomStringGenerator.php',
     'Facebook\\SignedRequest' => $vendorDir . '/facebook/graph-sdk/src/Facebook/SignedRequest.php',
     'Facebook\\Url\\FacebookUrlDetectionHandler' => $vendorDir . '/facebook/graph-sdk/src/Facebook/Url/FacebookUrlDetectionHandler.php',

@@ -919,7 +919,7 @@ INSERT INTO pH7_MetaMain (langId, pageTitle, metaDescription, metaKeywords, head
 
 CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
   moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
-  moduleTitle varchar(40) NOT NULL,
+  moduleTitle varchar(50) NOT NULL,
   folderName varchar(20) NOT NULL,
   premiumMod enum('0','1') NOT NULL DEFAULT '0', -- If the module required pH7CMSPro (http://ph7cms.com/pro/)
   enabled enum('0','1') NOT NULL DEFAULT '1',
@@ -939,11 +939,12 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Blog (company blog)', 'blog', '0', '1'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
-('Connect', 'connect', '0', '0'),
+('Social Media Authentication (connect module)', 'connect', '0', '0'),
 ('Webcam', 'webcam', '0', '1'),
 ('Love Calculator', 'love-calculator', '0', '1'),
 ('Mail', 'mail', '0', '1'),
-('Instant Messaging (IM)', 'im', '0', '1');
+('Instant Messaging (IM)', 'im', '0', '1'),
+('User Dashboard', 'user-dashboard', '0', '1');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (
@@ -959,7 +960,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.3.2', 1);
+('pH7CMS', 'SQL System Schema', '1.3.3', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
