@@ -70,7 +70,7 @@ class AdminController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search Admin - Looking an Admin');
+        $this->sTitle = t('Admin Search');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();

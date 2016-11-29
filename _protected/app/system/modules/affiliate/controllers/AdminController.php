@@ -80,7 +80,7 @@ class AdminController extends Controller
 
     public function search()
     {
-        $this->sTitle = t('Search Affiliate - Looking a new Affiliate');
+        $this->sTitle = t('Affiliate Search');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->output();
