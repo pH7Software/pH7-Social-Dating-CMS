@@ -107,7 +107,7 @@
     $(document).ready(function() {
         $('ul.zoomer_pic').slick({
             dots: true,
-            infinite: true,
+            infinite: false,
             slidesToShow: 6,
             adaptiveHeight: true
         })
