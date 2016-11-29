@@ -68,7 +68,7 @@ class AdminController extends Controller
             $this->sTitle = t('Browse Subscribers');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
-            $this->view->h3_title = nt('%n% Subscriber', '%n% Subscribers', $iTotal);
+            $this->view->h3_title = nt('%n% subscriber found', '%n% subscribers found', $iTotal);
 
             $this->view->browse = $oBrowse;
         }
@@ -85,7 +85,7 @@ class AdminController extends Controller
             foreach ($this->httpRequest->post('action') as $sEmail)
                 $this->oSubscriptionModel->unsubscribe($sEmail);
 
-            $this->sMsg = t('The subscribers(s) has/have been deleted.');
+            $this->sMsg = t('The subscribers(s) has/have been removed.');
         }
 
         Header::redirect(Uri::get('newsletter', 'admin', 'browse'), $this->sMsg);
