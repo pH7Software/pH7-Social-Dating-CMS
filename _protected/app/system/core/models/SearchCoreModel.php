@@ -27,7 +27,7 @@ class SearchCoreModel
     LAST_EDIT = 'lastEdit',
     LAST_VISIT = 'lastVisit',
     PENDING_APPROVAL = 'active',
-    EMAIL = 'mail',
+    EMAIL = 'email',
     USERNAME = 'username',
     FIRST_NAME = 'firstName',
     LAST_NAME = 'lastName',
