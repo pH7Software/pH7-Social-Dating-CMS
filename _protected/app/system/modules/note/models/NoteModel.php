@@ -226,8 +226,8 @@ class NoteModel extends NoteCoreModel
         if (ctype_digit($mLooking)) {
             $sSqlWhere = ' WHERE (noteId = :looking)';
         } else {
-            $sSqlWhere = ' WHERE (postId LIKE :looking OR pageTitle LIKE :looking OR
-                title LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
+            $sSqlWhere = ' WHERE (postId LIKE :looking OR title LIKE :looking OR
+                pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
         }
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Notes') . 'AS n INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId' . $sSqlWhere . $sSqlApproved . $sSqlOrder . $sSqlLimit);
