@@ -120,7 +120,13 @@ class GameModel extends GameCoreModel
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(gameId) AS totalGames';
-        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE gameId = :looking' : ' WHERE title LIKE :looking OR name LIKE :looking OR description LIKE :looking OR keywords LIKE :looking';
+
+        if (ctype_digit($mLooking)) {
+            $sSqlWhere = ' WHERE gameId = :looking';
+        } else {
+            $sSqlWhere = ' WHERE title LIKE :looking OR name LIKE :looking OR description LIKE :looking OR keywords LIKE :looking';
+        }
+
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Games') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
@@ -233,4 +239,3 @@ class GameModel extends GameCoreModel
     }
 
 }
-
