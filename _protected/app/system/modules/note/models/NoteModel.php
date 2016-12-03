@@ -222,7 +222,13 @@ class NoteModel extends NoteCoreModel
 
         $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ?  'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId) AS totalNotes';
-        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE (noteId = :looking)' : ' WHERE (postId LIKE :looking OR pageTitle LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
+
+        if (ctype_digit($mLooking)) {
+            $sSqlWhere = ' WHERE (noteId = :looking)';
+        } else {
+            $sSqlWhere = ' WHERE (postId LIKE :looking OR pageTitle LIKE :looking OR
+                title LIKE :looking OR content LIKE :looking OR tags LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)';
+        }
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Notes') . 'AS n INNER JOIN' . Db::prefix('Members') . 'AS m ON n.profileId = m.profileId' . $sSqlWhere . $sSqlApproved . $sSqlOrder . $sSqlLimit);
 
