@@ -1,4 +1,4 @@
-/*
+/*!
  * Title:           Play Sound
  * Description:     HTML5 Audio with <embed> fallback (this embed tag is in any case necessary for IE7 and 8). | jQuery plugin
  *

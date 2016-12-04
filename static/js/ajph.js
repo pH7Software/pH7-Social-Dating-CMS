@@ -1,4 +1,4 @@
-/*
+/*!
  * Title:           AjPH
  * Description:     Loading pages in Ajax with HTML5 pushState.
  *
