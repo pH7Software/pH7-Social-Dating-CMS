@@ -414,7 +414,7 @@ class File
     }
 
     /**
-     * Get the modification time of a file in the Unix timestamp.
+     * Get the creation/modification time of a file in the Unix timestamp.
      *
      * @param string Full path of the file.
      * @return mixed (integer | boolean) Returns the time the file was last modified, or FALSE if it not found.
