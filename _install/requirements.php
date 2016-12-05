@@ -47,9 +47,12 @@ if (!extension_loaded('exif') || !function_exists('exif_imagetype'))
 if (!class_exists('DOMDocument'))
     $aErrors[] = 'Please install "dom" PHP extension.';
 
-// FILTER_VALIDATE_BOOLEAN filter returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
-if (filter_var(ini_get('allow_url_fopen'), FILTER_VALIDATE_BOOLEAN) === false)
-    $aErrors[] = 'allow_url_fopen PHP directive needs to be enabled.';
+$aPhpDirectivesNeeded = array('file_uploads', 'allow_url_fopen');
+foreach ($aPhpDirectivesNeeded as $sDirective) {
+   // FILTER_VALIDATE_BOOLEAN filter returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
+    if (filter_var(ini_get($sDirective), FILTER_VALIDATE_BOOLEAN) === false)
+    $aErrors[] = $sDirective . ' PHP directive needs to be enabled.';
+}
 
 $iErrors = (!empty($aErrors)) ? count($aErrors) : 0;
 
