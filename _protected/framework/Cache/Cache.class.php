@@ -188,6 +188,17 @@ class Cache
          return $this;
     }
 
+
+    /**
+     * Get the creation/modification time of the current cache file.
+     *
+     * @return mixed (integer | boolean) Time the file was last modified/created as a Unix timestamp, or FALSE on failure.
+     */
+    public function getTimeOfCacheFile()
+    {
+        return $this->_oFile->getModifTime($this->_getFile());
+    }
+
     /**
      * Get the header content to put in the file.
      *
