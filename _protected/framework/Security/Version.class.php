@@ -12,8 +12,6 @@
 namespace PH7\Framework\Security;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Security\Validate\Validate;
-
 final class Version
 {
     const LATEST_VERSION_URL = 'http://ph7cms.com/xml/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
@@ -53,8 +51,8 @@ final class Version
 
             foreach ($oDom->getElementsByTagName('ph7') as $oSoft) {
                 foreach ($oSoft->getElementsByTagName('social-dating-cms') as $oInfo) {
-                    // "Validate::boll()" returns TRUE for "1", "true", "on" and "yes"
-                    $bIsAlert = (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
+                    // "Validate::bool()" returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
+                    $bIsAlert = (new Validate\Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
                     $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
                     $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
                     $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
