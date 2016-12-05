@@ -109,6 +109,7 @@
             dots: true,
             infinite: false,
             slidesToShow: 6,
+            slidesToScroll: 6,
             adaptiveHeight: true
         })
     });
