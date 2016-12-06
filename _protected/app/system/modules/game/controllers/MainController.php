@@ -8,6 +8,7 @@
 namespace PH7;
 
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Mvc\Model\Statistic as Stat;
 
 class MainController extends Controller
 {
@@ -74,11 +75,12 @@ class MainController extends Controller
             $this->view->meta_description = t('Flash Game - %0%', $this->sTitle);
             $this->view->meta_keywords = $oGame->keywords . $this->sMetaKeywords;
             $this->view->h2_title = $this->sTitle;
-            $this->view->downloads = $this->oGameModel->getDownloadStat($oGame->gameId);
+            $this->view->stat_text = t('%0% was played %1% and download %2% time(s).', '<strong>'.$oGame->title.'</strong>', '<strong>'.Stat::getView($oGame->gameId,'Games').'</strong>', '<strong>'.$this->oGameModel->getDownloadStat($oGame->gameId).'</strong>');
+
             $this->view->game = $oGame;
 
             //Set Game Statistics
-            Framework\Analytics\Statistic::setView($oGame->gameId, 'Games');
+            Stat::setView($oGame->gameId, 'Games');
         }
 
         $this->output();
@@ -180,6 +182,7 @@ class MainController extends Controller
 
         $this->sTitle = t('Wrong download ID specified!');
         $this->_notFound();
+        $this->manualTplInclude('game.tpl');
         $this->output();
     }
 
