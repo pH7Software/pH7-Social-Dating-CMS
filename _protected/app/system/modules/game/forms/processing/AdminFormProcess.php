@@ -17,7 +17,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -68,5 +67,4 @@ class AdminFormProcess extends Form
             Header::redirect(Uri::get('game', 'main', 'game', $aData['title'].','.Db::getInstance()->lastInsertId()), t('The game has been successfully added!'));
         }
     }
-
 }

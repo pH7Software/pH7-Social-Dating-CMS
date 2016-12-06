@@ -6,11 +6,11 @@
  * @package        PH7 / App / System / Module / Game / Controller
  */
 namespace PH7;
+
 use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
-
     public function index()
     {
         Header::redirect(Uri::get('game', 'main', 'index'), t('Welcome to the Game administrator mode.'));
@@ -57,5 +57,4 @@ class AdminController extends MainController
 
         Header::redirect(Uri::get('game', 'admin', 'index'), $sMsg);
     }
-
 }

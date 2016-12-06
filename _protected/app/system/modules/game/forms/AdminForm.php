@@ -11,7 +11,6 @@ use PH7\Framework\Config\Config, PH7\Framework\Mvc\Router\Uri;
 
 class AdminForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_game']))
@@ -44,6 +43,4 @@ class AdminForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }
-

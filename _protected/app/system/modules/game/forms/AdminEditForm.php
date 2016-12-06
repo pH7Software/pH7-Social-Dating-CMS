@@ -15,7 +15,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminEditForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_edit']))
@@ -58,6 +57,4 @@ class AdminEditForm
             echo '<p class="center bold">' . t('Game Not Found!') . '</p>';
         }
     }
-
 }
-

@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Model\Statistic as Stat;
 
 class MainController extends Controller
 {
-
     /**
      * @access protected Protected access for the AdminController class derived from this class.
      * @var object $oGameModel
@@ -212,11 +211,4 @@ class MainController extends Controller
         $this->view->h2_title = $this->sTitle;
         $this->view->error = $this->sTitle . '<br />' . t('Please return to the <a href="%0%">main game page</a> or <a href="%1%">the previous page</a>.', Framework\Mvc\Router\Uri::get('game','main','index'), 'javascript:history.back();');
     }
-
-
-    public function __destruct()
-    {
-        unset($this->oGameModel, $this->oPage, $this->sTitle, $this->sMetaKeywords, $this->iTotalGames);
-    }
-
 }

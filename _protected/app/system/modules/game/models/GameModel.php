@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class GameModel extends GameCoreModel
 {
-
     public function getCategory($iCategoryId = null, $iOffset, $iLimit, $bCount = false)
     {
         $this->cache->start(static::CACHE_GROUP, 'category' . $iCategoryId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
@@ -237,5 +236,4 @@ class GameModel extends GameCoreModel
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
-
 }

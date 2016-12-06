@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchGameForm
 {
-
     public static function display($iWidth = null)
     {
         $aOptions = ['description' => t('Enter Name, Description, Keyword or ID of a Game.')];
@@ -27,5 +26,4 @@ class SearchGameForm
         $oForm->addElement(new \PFBC\Element\Button(t('Search'),'submit', array('icon' => 'search')));
         $oForm->render();
     }
-
 }

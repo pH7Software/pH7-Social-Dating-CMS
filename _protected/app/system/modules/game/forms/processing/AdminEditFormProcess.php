@@ -12,7 +12,6 @@ use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
 
 class AdminEditFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -32,7 +31,5 @@ class AdminEditFormProcess extends Form
         (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
 
          Header::redirect(Uri::get('game', 'main', 'index'), t('The game has been successfully updated'));
-
     }
-
 }
