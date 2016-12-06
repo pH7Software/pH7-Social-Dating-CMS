@@ -129,11 +129,13 @@ class Http
      *
      * @static
      * @param mixed (string | array) $mHeaders Headers to send.
+     * @throws \PH7\Framework\Http\Exception
      */
     public static function setHeaders($mHeaders)
     {
         // Header already sent
-        if (static::_isSent()) throw new Exception('Headers were already sent.');
+        if (static::_isSent())
+            throw new Exception('Headers were already sent.');
 
         // Loop elements and set header
         foreach ((array) $mHeaders as $sHeader)
@@ -148,7 +150,9 @@ class Http
      */
     public static function setHeadersByCode($iCode = 200)
     {
-        if (!static::getStatusCodes($iCode)) $iCode = 200;
+        if (!static::getStatusCodes($iCode))
+            $iCode = 200;
+
         // Set header
         static::setHeaders(static::getProtocol() . ' ' . static::getStatusCodes($iCode));
     }
@@ -217,12 +221,15 @@ class Http
         {
              $sHttps = strtolower($sHttps);
 
-             if ('on' == $sHttps) return true;
-             elseif ('1' == $sHttps) return true;
+             if ('on' == $sHttps)
+                return true;
+             elseif ('1' == $sHttps)
+                return true;
              else
              {
                  $iPort = Server::getVar(Server::SERVER_PORT);
-                 if ('443' == $iPort) return true;
+                 if ('443' == $iPort)
+                    return true;
              }
         }
         return false;
