@@ -19,7 +19,7 @@ class Youtube extends Api implements IApi
 
     const
     API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=',
-    PLAYER_URL = 'http://youtube.com/v/';
+    PLAYER_URL = 'https://youtube.com/v/';
 
     private $_oContentDetails;
 
@@ -33,7 +33,7 @@ class Youtube extends Api implements IApi
     }
 
     /**
-     * @param string $sUrl URL video (e.g., http://www.youtube.com/watch?v=Y77CDJu4JyA).
+     * @param string $sUrl URL video (e.g., https://www.youtube.com/watch?v=q-1eHnBOg4A).
      * @return mixed (object | boolean) FALSE if unable to open the API URL, otherwise $this object.
      * @throws \PH7\Framework\Video\Api\Exception If the is a problem with Youtube API service.
      */
@@ -80,12 +80,12 @@ class Youtube extends Api implements IApi
         {
             $aThumb = ['default', 1, 2, 3];
             shuffle($aThumb);
-            return 'http://i' . mt_rand(1,4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
+            return 'https://i' . mt_rand(1,4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
         }
         else
         {
-            $sParam = ($this->bAutoplay) ? '?autoplay=1' : '';
-            return '<iframe width="' . $iWidth . '" height="' . $iHeight . '" src="' . $this->getEmbedUrl($sUrl) .$sParam . '&amp;rel=0" frameborder="0" allowfullscreen></iframe>';
+            $sParam = ($this->bAutoplay) ? '?autoplay=1&amp;' : '?';
+            return '<iframe width="' . $iWidth . '" height="' . $iHeight . '" src="' . $this->getEmbedUrl($sUrl) . $sParam . 'rel=0" frameborder="0" allowfullscreen></iframe>';
         }
     }
 

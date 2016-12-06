@@ -18,7 +18,7 @@ class Dailymotion extends Api implements IApi
 
     const
     API_URL = 'https://api.dailymotion.com/video/',
-    PLAYER_URL = 'http://dailymotion.com/embed/video/';
+    PLAYER_URL = 'https://www.dailymotion.com/embed/video/';
 
     /**
      * @param string $sUrl
@@ -44,7 +44,7 @@ class Dailymotion extends Api implements IApi
 
         if ($sMedia == 'preview')
         {
-            return 'http://dailymotion.com/thumbnail/160x120/video/' . $this->getVideoId($sUrl);
+            return 'https://dailymotion.com/thumbnail/160x120/video/' . $this->getVideoId($sUrl);
         }
         else
         {
