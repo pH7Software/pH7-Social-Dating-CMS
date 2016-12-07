@@ -6,8 +6,9 @@
     <xsl:template match="/">
           <html xmlns="http://www.w3.org/1999/xhtml">
             <head>
-                <title>{lang 'XML Sitemap - %site_name%'}</title>
                 <meta charset="utf-8" />
+                <title>{lang 'XML Sitemap - %site_name%'}</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
                 <link rel="stylesheet" href="{url_tpl_mod_css}style.css" />
             </head>
            <body>
@@ -16,7 +17,7 @@
               </header>
                 <section>
                     <table>
-                        <tr style="border-bottom:1px black solid;">
+                        <tr class="border-bottom">
                             <th>{lang 'URL'}</th>
                             <th>{lang 'Priority'}</th>
                             <th>{lang 'Change Frequency'}</th>
@@ -28,7 +29,6 @@
 
                         <xsl:sort select="sitemap:priority" order="descending" />
                         <xsl:sort select="sitemap:lastmod" order="descending" />
-
                             <tr>
                                 <xsl:if test="position() mod 2 != 1">
                                     <xsl:attribute  name="class">high</xsl:attribute>
