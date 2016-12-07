@@ -5,7 +5,7 @@
  */
 
 #make_money {
-    background: url(../img/make-money.jpg);
+    background: url(../img/make-money.jpg) no-repeat;
     margin: 20px;
     width: 300px;
     height: 291px;
