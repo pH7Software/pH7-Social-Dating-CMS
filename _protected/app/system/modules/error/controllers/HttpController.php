@@ -108,7 +108,9 @@ class HttpController extends Controller
             break;
 
             default:
-                // 404 Status Code
+                // Add an image for 404 not found page, so we need to include a stylesheet file
+                $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'style.css');
+
                 $this->displayPageNotFound();
         }
 
