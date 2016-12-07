@@ -136,8 +136,8 @@ function checkPassword(sPwd)
 function CValid(sInputVal, sFieldId, sParam1, sParam2)
 {
     // Default Values
-    if(typeof sParam1 == "undefined") var sParam1 = 4;
-    if(typeof sParam2 == "undefined") var sParam2 = 2000;
+    if(typeof sParam1 === "undefined") var sParam1 = 4;
+    if(typeof sParam2 === "undefined") var sParam2 = 2000;
     $('.' + sFieldId).hide();
 
     // The data to be send to the server via POST
@@ -150,14 +150,14 @@ function CValid(sInputVal, sFieldId, sParam1, sParam2)
             $('.' + sFieldId).fadeIn();
             $('#' + sField).css("border", "solid #00cc00 1px");
             $('.' + sField).css("color", "#149541");
-            if(typeof sMsg != "undefined") $('.' + sField).text(sMsg);
+            if(typeof sMsg !== "undefined") $('.' + sField).text(sMsg);
         }
         else
         {
             $('.' + sFieldId).fadeIn();
             $('#' + sField).css("border", "1px solid #cc0000");
             $('.' + sField).css("color", "#F55");
-            if(typeof sMsg != "undefined") $('.' + sField).text(sMsg.substring(0,150));
+            if(typeof sMsg !== "undefined") $('.' + sField).text(sMsg.substring(0,150));
         }
     }, 'json');
 }
