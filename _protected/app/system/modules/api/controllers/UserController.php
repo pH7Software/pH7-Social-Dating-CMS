@@ -126,7 +126,7 @@ class UserController extends MainController
     /**
      * Get User Data.
      *
-     * @param int $iId Profile ID
+     * @param int $iId Profile ID (ID has to end with a trailing slash "/")
      * @return void
      */
     public function user($iId = null)
