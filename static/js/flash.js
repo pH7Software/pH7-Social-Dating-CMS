@@ -108,7 +108,7 @@ function isFlash()
         if(oActiveX) bIsFlash = true;
     }
     catch(oE) {
-        if(typeof navigator.mimeTypes["application/x-shockwave-flash"] != 'undefined') bIsFlash = true;
+        if(typeof navigator.mimeTypes["application/x-shockwave-flash"] !== 'undefined') bIsFlash = true;
     }
 
     return bIsFlash;
