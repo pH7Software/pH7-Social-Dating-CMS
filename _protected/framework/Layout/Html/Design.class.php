@@ -358,7 +358,7 @@ class Design
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $aSites = [
                 ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
-                ['title' => 'Échanges Linguistiques en Ligne', 'link' => 'http://newayup.com'],
+                ['title' => 'Rencontre d\'un soir', 'link' => 'http://flirt-rencontre.net'],
                 ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net'],
                 ['title' => 'Rencontre à Paris Gratuite', 'link' => 'http://coolonweb.com']
             ];
