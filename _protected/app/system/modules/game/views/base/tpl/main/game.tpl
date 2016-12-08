@@ -11,7 +11,7 @@
 
   <p><a class="m_button" href="{{ $design->url('game','main','download',$game->gameId) }}">{lang 'Download this game'}</a></p>
 
-  <p class="italic">{stat_text}</p>
+  <p class="italic">{lang '%0% was played %1% and download %2% time(s).', '<strong>'.$game->title.'</strong>', '<strong>'.$views.'</strong>', '<strong>'.$downloads.'</strong>'}</p>
 
   {{ RatingDesignCore::voting($game->gameId,'Games','center') }}
   {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('game','main','game',"$game->title,$game->gameId")) }}

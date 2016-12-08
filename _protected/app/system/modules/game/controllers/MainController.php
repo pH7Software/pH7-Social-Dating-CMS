@@ -9,6 +9,7 @@ namespace PH7;
 
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Mvc\Model\Statistic as Stat;
+use PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
@@ -74,7 +75,8 @@ class MainController extends Controller
             $this->view->meta_description = t('Flash Game - %0%', $this->sTitle);
             $this->view->meta_keywords = $oGame->keywords . $this->sMetaKeywords;
             $this->view->h2_title = $this->sTitle;
-            $this->view->stat_text = t('%0% was played %1% and download %2% time(s).', '<strong>'.$oGame->title.'</strong>', '<strong>'.Stat::getView($oGame->gameId,'Games').'</strong>', '<strong>'.$this->oGameModel->getDownloadStat($oGame->gameId).'</strong>');
+            $this->view->downloads = $this->oGameModel->getDownloadStat($oGame->gameId);
+            $this->view->views = Stat::getView($oGame->gameId, 'Games');
 
             $this->view->game = $oGame;
 
@@ -209,6 +211,6 @@ class MainController extends Controller
         Framework\Http\Http::setHeadersByCode(404);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
-        $this->view->error = $this->sTitle . '<br />' . t('Please return to the <a href="%0%">main game page</a> or <a href="%1%">the previous page</a>.', Framework\Mvc\Router\Uri::get('game','main','index'), 'javascript:history.back();');
+        $this->view->error = $this->sTitle . '<br />' . t('Please return to the <a href="%0%">main game page</a> or <a href="%1%">the previous page</a>.', Uri::get('game','main','index'), 'javascript:history.back();');
     }
 }
