@@ -14,7 +14,7 @@ use PH7\Framework\Security\Validate\Validate, PH7\Framework\Mvc\Model\DbConfig;
 class UserController extends MainController
 {
 
-    protected $oUser,  $oUserModel, $oValidate;
+    protected $oUser, $oUserModel, $oValidate;
 
     public function __construct()
     {
