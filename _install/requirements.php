@@ -58,7 +58,7 @@ $iErrors = (!empty($aErrors)) ? count($aErrors) : 0;
 
 if ($iErrors > 0)
 {
-    echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Requirements - Installation of pH7CMS</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.error{color:red;font-size:13px}.success{color:green}.success,.error{font-weight:bold}.italic{font-style:italic}.underline{text-decoration:underline}</style></head><body><div class="center">';
+    echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Requirements - pH7CMS Installation</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.error{color:red;font-size:13px}.success{color:green}.success,.error{font-weight:bold}.italic{font-style:italic}.underline{text-decoration:underline}</style></head><body><div class="center">';
 
     printf('<h3 class="error underline italic">You have %d error(s):</h3>', $iErrors);
 
