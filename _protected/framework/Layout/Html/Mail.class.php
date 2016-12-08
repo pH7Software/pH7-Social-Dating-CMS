@@ -30,6 +30,8 @@ class Mail
         return '<!DOCTYPE html><html>
             <head><meta charset="utf-8" />
             <title>' . Registry::getInstance()->site_name . '</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <style>
               * {margin:0; padding:0;}
               body {font-family:Helvetica Neue, Helvetica, Arial, Verdana, sans-serif; background-color:#eee;}
