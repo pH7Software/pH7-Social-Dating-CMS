@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Http / Rest
- * @version          1.1
+ * @version          1.2
  */
 
 namespace PH7\Framework\Http\Rest;
@@ -21,7 +21,7 @@ class Rest extends \PH7\Framework\Http\Http
     private
     $_sContentType,
     $_iCode,
-    $_aData,
+    $_sData,
     $_aRequest;
 
 
@@ -35,13 +35,13 @@ class Rest extends \PH7\Framework\Http\Http
     }
 
     /**
-     * @param array $aData The data from a request
+     * @param string $sData The data from a request
      * @param integer $iStatus Status Code. Default 200
      * @return void
      */
-    public function response(array $aData, $iStatus = 200)
+    public function response($sData, $iStatus = 200)
     {
-        $this->_aData = $aData;
+        $this->_sData = $sData;
 
         /**
          * @internal \PH7\Framework\Http\Http::getStatusCodes() returns FLASE when it doesn't find a GTTP status code.
@@ -120,7 +120,7 @@ class Rest extends \PH7\Framework\Http\Http
     {
         static::setHeadersByCode($this->_iCode);
         static::setContentType($this->_sContentType);
-        echo $this->_aData;
+        echo $this->_sData;
         exit; // Stop the Script
     }
 
