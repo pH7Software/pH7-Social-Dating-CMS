@@ -2,7 +2,6 @@
 
   <ul>
     <li>The <a href="http://dating-app.co" title="{lang 'Free London Dating App'}">{lang 'Hot Dating App'}</a> {lang}for dating singles in your city.{/lang}</li>
-    <li><a href="http://newayup.com" title="{lang 'Language Exchange International'}">{lang 'Language Exchange'}</a> - {lang}A community for motivated and open-minded men/women living abroad and wanting to learn local languages by meeting native people.{/lang}</li>
     <li><a href="http://meetlovelypeople.com" title="{lang 'Free Local Dating Site'}">{lang 'Local Dating Site'}</a> {lang}is one of the most promising Local Dating Service and also our trusted partner for our <a href="http://ph7cms.com/dating-business-by-steps/">dating software development</a>.{/lang}</li>
     <li class="underline vs_marg">{lang 'Your Advertising Here!'}</li>
   </ul>
