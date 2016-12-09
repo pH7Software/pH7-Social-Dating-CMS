@@ -21,7 +21,7 @@ final class Version
     const KERNEL_VERSION_NAME = 'pCO';
     const KERNEL_VERSION = '5.0.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2016-12-19';
+    const KERNEL_RELASE_DATE = '2016-12-12';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
