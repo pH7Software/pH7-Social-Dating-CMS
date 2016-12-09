@@ -1,7 +1,5 @@
 <div class="center">
-
-  <ul>
-    <li>{{ $design->smartLink() }}</li>
-  </ul>
-
+    <ul>
+        <li>{{ $design->smartLink() }}</li>
+    </ul>
 </div>

@@ -10,7 +10,6 @@ Please read this agreement carefully before registering and using the {site_name
 <br />
 If you have any questions, please don't hesitate to let us know. We are strong believers in straight-forward and honest communication. For quickest results please <a href="{{ $design->url('contact','contact','index') }}" title="Contact Us">contact us here</a>.<br />
 <br />
- <br />
 <br />
 AFFILIATE AGREEMENT<br />
 <br />
@@ -131,3 +130,5 @@ All confidential information, including, but not limited to, any business, techn
 15.7. If any provision of this Agreement is held to be invalid or unenforceable, that provision shall be eliminated or limited to the minimum extent necessary such that the intent of the parties is effectuated, and the remainder of this agreement shall have full force and effect.<br /><br />
 </p>
 <p class="bold red">I HAVE READ THIS AGREEMENT AND AGREE TO ALL OF THE PROVISIONS CONTAINED ABOVE.</p>
+
+</div>

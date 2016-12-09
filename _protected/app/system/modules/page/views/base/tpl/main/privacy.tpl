@@ -1,6 +1,5 @@
 <div class="center">
 
-
 <p>This Privacy Policy governs the manner in which {site_name} collects, uses, maintains and discloses information collected from users (each, a "User") of the <a href="{url_root}">{url_root}</a> website ("Site"). This privacy policy applies to the Site and all products and services offered by {site_name}.</p>
 <p>&nbsp;</p>
 
@@ -67,8 +66,6 @@ If you do not agree to this policy, please do not use our Site. Your continued u
 <p>If you have any questions about this policy<br />
 privacy practices of this site, please contact us via our &quot;<a href="{{ $design->url('contact','contact','index') }}" title="Contact Us">contact form</a>&quot;.</p>
 <p>&nbsp;</p>
-
 <p>This document was last updated on December 18, 2015.</p>
-
 
 </div>

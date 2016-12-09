@@ -1,6 +1,5 @@
 <div class="center">
 
-
 <p><strong><a href="{url_root}">{site_name}</a></strong> (URL address is {url_root}) is a dating social site service that allows members to create unique personal profiles online in order to find and communicate with old and new friends. The service is operated by {site_name}. By using the {site_name} Website you agree to be bound by these Terms of Use (this &quot;Agreement&quot;), whether or not you register as a member (&quot;Member&quot;). If you wish to become a Member, communicate with other Members and make use of the {site_name} services (the &quot;Service&quot;), please read this Agreement and indicate your acceptance by following the instructions in the Registration process.</p>
 <p>&nbsp;</p>
 <p>This Agreement sets out the legally binding terms for your use of the Website and your Membership in the Service.<br />
@@ -111,6 +110,5 @@ and its licensors. Except for that information which is in the public domain or 
 <p>&nbsp;</p>
 <p class="bold red">I HAVE READ THIS AGREEMENT AND AGREE TO ALL OF THE PROVISIONS CONTAINED ABOVE.</p>
 <p class="small">Last updated on December 18, 2015.</p>
-
 
 </div>
