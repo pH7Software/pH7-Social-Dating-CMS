@@ -178,7 +178,7 @@ final class FrontController
         else
         {
             // Get system module
-            $this->oRegistry->module = $this->oConfig->values['system']['default_module'];
+            $this->oRegistry->module = DbConfig::getSetting('defaultSystemModule');
         }
 
         // Check if file exist
