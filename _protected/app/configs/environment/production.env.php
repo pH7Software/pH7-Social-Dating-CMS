@@ -33,6 +33,10 @@ if (is_dir(PH7_PATH_ROOT .'_install/'))
      <code>sudo rm -rf /YOUR-PUBLIC-SERVER-PATH/YOUR-WEBSITE/_install/</code></p>
      <p>After doing this, please <a href="' . PH7_URL_ROOT . '">reload pH7CMS</a></p>';
 
+     // Send headers to not cache this page since it's a dynamic one
+     header('Cache-Control: no-store, no-cache, must-revalidate');
+     header('Expires: Thu, 01 Jan 1970 00:00:00 GMT');
+
      echo html_body('SECURITY ALERT : Please remove "_install" folder', $sMsg);
      exit;
 }
