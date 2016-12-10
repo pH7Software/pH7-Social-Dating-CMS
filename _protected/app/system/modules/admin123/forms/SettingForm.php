@@ -280,7 +280,7 @@ class SettingForm
         $aLangIds = $oFile->getDirList(PH7_PATH_APP_LANG);
         foreach ($aLangIds as $sLang)
         {
-            $sAbbrLang = substr($sLang,0,2);
+            $sAbbrLang = substr($sLang, 0, 2);
             $aLangs[$sLang] = t($sAbbrLang) . ' (' . $sLang . ')';
         }
 
