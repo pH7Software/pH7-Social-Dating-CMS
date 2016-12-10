@@ -9,9 +9,10 @@ namespace PH7;
 
 use
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\File\File,
-PH7\Framework\Ip\Ip;
+PH7\Framework\Ip\Ip,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Module\Various as SysMod;
 
 class SettingForm
 {
@@ -35,25 +36,14 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="content" id="general"><div class="col-md-10"><h2 class="underline">' . t('Global Settings:') . '</h2>'));
 
         $oFile = new File;
-        $aTplsId = $oFile->getDirList(PH7_PATH_TPL);
-        $aLangsId = $oFile->getDirList(PH7_PATH_APP_LANG);
-
-        $aTpls = array();
-        foreach ($aTplsId as $sTpl) $aTpls[$sTpl] = ucfirst($sTpl);
-
-        $aLangs = array();
-        foreach ($aLangsId as $sLang)
-        {
-            $sAbbrLang = substr($sLang,0,2);
-            $aLangs[$sLang] = t($sAbbrLang) . ' (' . $sLang . ')';
-        }
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Site Name:'), 'site_name', array('value' => DbConfig::getSetting('siteName'), 'validation' => new \PFBC\Validation\Str(2,50), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Theme by default:'), 'default_template', $aTpls, array('value' => DbConfig::getSetting('defaultTemplate'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Theme by default:'), 'default_template', self::getTpls($oFile), array('value' => DbConfig::getSetting('defaultTemplate'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Language by default:'), 'default_language', $aLangs, array('value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5,5), 'required' => 1)));
-        unset($oFile, $aTplsId, $aLangsId, $aTpls, $aLangs);
+        $oForm->addElement(new \PFBC\Element\Select(t('Module by default:'), 'default_sys_module', self::getDefMods(), array('description' => t('The default module running by default on the index page. Recommended to keep the "user" module.'), 'value' => DbConfig::getSetting('defaultSysModule'), 'required' => 1)));
+
+        $oForm->addElement(new \PFBC\Element\Select(t('Language by default:'), 'default_language', self::getLangs($oFile), array('value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5,5), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Map Type:'), 'map_type', array('roadmap' => t('Roadmap (default)'), 'hybrid' => t('Hybrid'), 'terrain' => t('Terrain'), 'satellite' => t('Satellite')), array('value' => DbConfig::getSetting('mapType'), 'required' => 1)));
 
@@ -99,13 +89,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration')+1, 'validation' => new \PFBC\Validation\Str(1,3), 'required' => 1)));
 
-        $oGroupId = (new AdminCoreModel)->getMemberships();
-        $aGroupName = array();
-        foreach ($oGroupId as $iId)
-            $aGroupName[$iId->groupId] = $iId->name;
-
-        $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', $aGroupName, array('value'=>DbConfig::getSetting('defaultMembershipGroupId'), 'required'=>1)));
-        unset($aGroupName);
+        $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), array('value'=>DbConfig::getSetting('defaultMembershipGroupId'), 'required'=>1)));
 
 
         /********** Picture and Video **********/
@@ -267,5 +251,96 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Button);
 
         $oForm->render();
+    }
+
+    /**
+     * @param File $oFile
+     * @return array
+     */
+    private static function getTpls(File $oFile)
+    {
+        $aTpls = array();
+
+        $aTplIds = $oFile->getDirList(PH7_PATH_TPL);
+        foreach ($aTplIds as $sTpl) {
+            $aTpls[$sTpl] = ucfirst($sTpl);
+        }
+
+        return $aTpls;
+    }
+
+    /**
+     * @param File $oFile
+     * @return array
+     */
+    private static function getLangs(File $oFile)
+    {
+        $aLangs = array();
+
+        $aLangIds = $oFile->getDirList(PH7_PATH_APP_LANG);
+        foreach ($aLangIds as $sLang)
+        {
+            $sAbbrLang = substr($sLang, 0, 2);
+            $aLangs[$sLang] = t($sAbbrLang) . ' (' . $sLang . ')';
+        }
+
+        return $aLangs;
+    }
+
+    /**
+     * @return array
+     */
+    private static function getDefMods()
+    {
+        $aMods = array();
+
+        foreach (self::getActivatableDefMods() as $sMod)
+        {
+            // Skip the disable module (would be impossible to set a disabled module as the default one)
+            if (!SysMod::isEnabled($sMod)) {
+                continue;
+            }
+
+            $aMods[$sMod] = ucfirst($sMod);
+        }
+
+        return $aMods;
+    }
+
+    /**
+     * @return array
+     */
+    private static function getMembershipGroups()
+    {
+        $aGroupNames = array();
+
+        $oGroupIds = (new AdminCoreModel)->getMemberships();
+        foreach ($oGroupIds as $iId) {
+            $aGroupNames[$iId->groupId] = $iId->name;
+        }
+
+        return $aGroupNames;
+    }
+
+    /**
+     * Get the list of modules that are possible to enable as the default system module.
+     *
+     * @return array
+     */
+    private static function getActivatableDefMods()
+    {
+        return [
+            'user',
+            'affiliate',
+            'blog',
+            'note',
+            'chat',
+            'chatroulette',
+            'forum',
+            'game',
+            'hotornot',
+            'picture',
+            'video'
+        ];
     }
 }

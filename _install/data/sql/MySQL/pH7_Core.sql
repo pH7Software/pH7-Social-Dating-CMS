@@ -990,6 +990,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', 'base', '', 'design'),
+('defaultSysModule', 'user', 'The default module running by default on the index page. Recommended to keep the "user" module.', 'general'),
 ('emailName', 'pH7CMS', '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('splashPage', 1, 'Use Splash Page | enable = 1 or disable = 0', 'general'),

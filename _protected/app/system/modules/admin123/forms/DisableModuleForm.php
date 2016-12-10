@@ -7,7 +7,10 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Mvc\Model\Module as ModuleModel;
+use
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Mvc\Model\Module as ModuleModel;
 
 class DisableModuleForm
 {
@@ -25,8 +28,14 @@ class DisableModuleForm
         $oModuleData = (new ModuleModel)->get();
         $aModuleNames = [];
         $aSelectedMods = [];
+        $sDefaultCoreMod = DbConfig::getSetting('defaultSysModule');
+
         foreach ($oModuleData as $oData)
         {
+            // Ignore the default core module (since it cannot be disabled)
+            if ($oData->folderName === $sDefaultCoreMod)
+                continue;
+
             if ((int)$oData->enabled === 1) {
                 $aSelectedMods[] = $oData->moduleId;
             }
