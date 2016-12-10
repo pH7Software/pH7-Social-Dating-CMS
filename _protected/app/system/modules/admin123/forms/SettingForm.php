@@ -41,7 +41,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Theme by default:'), 'default_template', self::getTpls($oFile), array('value' => DbConfig::getSetting('defaultTemplate'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Module by default:'), 'default_sys_module', self::getDefMods(), array('description' => t('The default module running by default on the index page. Recommended to keep the "user" module.'), 'value' => DbConfig::getSetting('defaultSysModule'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Module by default:'), 'default_sys_module', self::getDefMods(), array('description' => t('The default module is the one running by default on the homepage (recommended to keep the "user" module).'), 'value' => DbConfig::getSetting('defaultSysModule'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Language by default:'), 'default_language', self::getLangs($oFile), array('value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5,5), 'required' => 1)));
 
