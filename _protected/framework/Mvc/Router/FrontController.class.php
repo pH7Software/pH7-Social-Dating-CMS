@@ -249,11 +249,6 @@ final class FrontController
             // Set module
             $this->oRegistry->module = $this->oUri->fragment(1);
         }
-        else
-        {
-            // Get default module
-            $this->oRegistry->module = $this->oConfig->values['system']['default_module'];
-        }
 
         // Check if file exist
         if (!$this->oConfig->load(PH7_PATH_MOD . $this->oRegistry->module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE))
