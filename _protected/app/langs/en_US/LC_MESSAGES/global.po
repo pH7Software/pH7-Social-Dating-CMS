@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pH7CMS\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-16 11:40+0100\n"
-"PO-Revision-Date: 2016-10-16 11:41+0100\n"
+"POT-Creation-Date: 2016-12-11 06:01+0100\n"
+"PO-Revision-Date: 2016-12-11 06:01+0100\n"
 "Last-Translator: Pierre-Henry Soria <hello@ph7cms.com>\n"
 "Language-Team: ¡pH7! - Pierre-Henry Soria <ph7software@gmail.com>\n"
 "Language: en_US\n"
@@ -69,11 +69,11 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/ResendActivationCoreForm.php:35
 #: /var/www/html/pH7CMS/_protected/app/system/modules/contact/forms/ContactForm.php:32
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/LoginForm.php:29
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:59
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:39
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:63
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:42
 #: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/forms/ForgotPasswordForm.php:31
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/LoginForm.php:29
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:47
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:49
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/LoginForm.php:29
 msgid "Your Email:"
 msgstr ""
@@ -86,9 +86,9 @@ msgstr ""
 #: /var/www/html/pH7CMS/_repository/module/fake-admin-panel/forms/LoginForm.php:35
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DeleteUserCoreForm.php:29
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/LoginForm.php:31
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:41
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:45
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/LoginForm.php:31
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:49
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:52
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/LoginForm.php:31
 msgid "Your Password:"
 msgstr ""
@@ -99,18 +99,18 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/contact/forms/ContactForm.php:42
 #: /var/www/html/pH7CMS/_protected/app/system/modules/invite/forms/InviteForm.php:35
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/LoginForm.php:35
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:56
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:66
 #: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/forms/ForgotPasswordForm.php:33
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/LoginForm.php:36
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:54
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:57
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/MsgForm.php:45
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/ReplyMsgForm.php:32
 #: /var/www/html/pH7CMS/_protected/app/system/modules/mail/forms/MailForm.php:41
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:57
 #: /var/www/html/pH7CMS/_protected/app/system/modules/comment/forms/CommentForm.php:33
-#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:35
+#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:38
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/LoginForm.php:35
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:218
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:206
 msgid "Captcha:"
 msgstr ""
 
@@ -118,16 +118,16 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/ResendActivationCoreForm.php:37
 #: /var/www/html/pH7CMS/_protected/app/system/modules/invite/forms/InviteForm.php:35
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/LoginForm.php:35
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:56
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:66
 #: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/forms/ForgotPasswordForm.php:33
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/LoginForm.php:36
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:54
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:57
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/MsgForm.php:45
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/ReplyMsgForm.php:32
 #: /var/www/html/pH7CMS/_protected/app/system/modules/mail/forms/MailForm.php:41
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:57
 #: /var/www/html/pH7CMS/_protected/app/system/modules/comment/forms/CommentForm.php:33
-#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:35
+#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:38
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/LoginForm.php:35
 msgid "Enter the code above:"
 msgstr ""
@@ -162,8 +162,8 @@ msgstr ""
 #: /var/www/html/pH7CMS/_repository/upgrade/0.1.6-0.1.7/info/conclusion.php:16
 #: /var/www/html/pH7CMS/_protected/app/system/core/assets/cron/96h/GeneralCoreCron.php:24
 #: /var/www/html/pH7CMS/_protected/app/system/core/assets/cron/96h/DatabaseCoreCron.php:67
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:337
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:378
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:348
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:389
 msgid "Done!"
 msgstr ""
 
@@ -254,7 +254,7 @@ msgid ""
 "saying the problem."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Http/Http.class.php:198
+#: /var/www/html/pH7CMS/_protected/framework/Http/Http.class.php:202
 msgid "You must enter a valid login ID and password to access this resource."
 msgstr ""
 
@@ -312,8 +312,8 @@ msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/framework/Geo/Map/Api.class.php:621
 msgid ""
-"Oops! You need to get a Google Maps API key to get it working. Please go to "
-"your pH7CMS Admin Panel -> Settings -> General -> API -> Google Maps API Key"
+"You need to get a Google Maps API key to get it working. Please go to your "
+"pH7CMS Admin Panel -> Settings -> General -> API -> Google Maps API Key"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/framework/Geo/Map/Api.class.php:720
@@ -342,79 +342,79 @@ msgstr ""
 msgid "Your server must be connected to the Internet to work properly."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Mail.class.php:79
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Mail.class.php:81
 msgid "Best regards,<br />The %0% Team."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Mail.class.php:88
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Mail.class.php:90
 msgid ""
 "This message was sent to %0%.<br /> You are receiving this message because "
 "you have registered on %1%.<br /> You can change the e-mail alerts by "
 "visiting your account."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:132
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:171
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:137
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:176
 msgid "You have"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:132
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:137
 msgid "message:"
 msgid_plural "messages:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:171
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:176
 msgid "error:"
 msgid_plural "errors:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:209
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:214
 msgid "Query"
 msgid_plural "Queries"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:215
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:220
 msgid "Queries time: %0% | %1% %2% | Generated in %3% | Memory allocated: %4%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:297
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:307
 msgid "Need to remove the link below?"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:310
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:325
-msgid "Powered By"
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:320
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:335
+msgid "Proudly Powered by"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:500
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:510
 msgid "See info of this IP, %0%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:521
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:531
 msgid "Meet New People on %0%, %1% with %site_name%!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:659
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:669
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/design/RatingDesignCore.php:53
 msgid "Please join for free to vote that"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:672
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:682
 msgid "Like %0%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:714
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:724
 msgid "You must be registered to report contents."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:716
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:726
 msgid "Report Abuse"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:716
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Html/Design.class.php:726
 msgid "Report"
 msgstr ""
 
@@ -512,28 +512,28 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Url.php:14
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Url.php:13
 msgid ""
 "Error: %element% must contain a URL (e.g., <a href=\"http://meetlovelypeople."
 "com\">http://www.meetlovelypeople.com</a>)."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Phone.php:14
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Phone.php:13
 msgid ""
 "Error: Your phone number is incorrect. Please enter full phone number with "
 "area code (e.g., +44768374890)."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Password.php:16
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Password.php:19
 msgid "Error: Your password has to contain from %0% to %1% characters."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/CEmail.php:19
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/CEmail.php:18
 msgid ""
 "Error: Invalid email address or this email is already used by another member."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/BirthDate.php:17
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/BirthDate.php:18
 #: /var/www/html/pH7CMS/_protected/app/system/modules/api/controllers/UserController.php:66
 msgid "You must be %0% to %1% years to register on the site."
 msgstr ""
@@ -560,7 +560,7 @@ msgstr ""
 msgid "Error: You must accept our %element%."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Email.php:14
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Email.php:13
 msgid "Error: %element% must contain an email address."
 msgstr ""
 
@@ -568,7 +568,7 @@ msgstr ""
 msgid "Error: %element% is a required field."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Numeric.php:14
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Numeric.php:13
 msgid "Error: %element% must be numeric."
 msgstr ""
 
@@ -586,11 +586,11 @@ msgstr ""
 msgid "Error: Your bank account is incorrect!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Date.php:12
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Date.php:13
 msgid "Error: %element% must contain a valid date."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Captcha.php:16
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/Captcha.php:17
 #: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/CCaptcha.php:12
 msgid "The code of Captcha entered was incorrect. Please re-try."
 msgstr ""
@@ -607,7 +607,7 @@ msgid ""
 "username is not available or it is already used by other member."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/RegExp.php:16
+#: /var/www/html/pH7CMS/_protected/framework/Layout/Form/Engine/PFBC/Validation/RegExp.php:15
 msgid ""
 "Error: %element% contains invalid characters. Here is the rule to be "
 "followed: \"%0%\""
@@ -633,12 +633,12 @@ msgid ""
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/framework/Mvc/Controller/Controller.class.php:145
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:266
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:339
 msgid "Suggestions:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/framework/Mvc/Controller/Controller.class.php:146
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:267
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:340
 msgid "Return home"
 msgstr ""
 
@@ -647,7 +647,7 @@ msgid "Join Now"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/framework/Mvc/Controller/Controller.class.php:155
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:268
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:341
 msgid "Go back to the previous page"
 msgstr ""
 
@@ -790,7 +790,7 @@ msgid "Upgrade %software_name% - %software_company% | Version %0%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:118
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:286
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:289
 msgid "You must be logged in as administrator to upgrade your site."
 msgstr ""
 
@@ -807,78 +807,78 @@ msgid "Version Name: %0%, Version Number: %1%, Version Build: %2%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:154
-msgid "Have you made a backup of your website files, folders and database?"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:154
 msgid ""
 "Upgrade <span class=\"bold italic\">%software_version_name% %software_version"
 "% Build %software_build%</span> to version <span class=\"bold italic\">%0%</"
 "span>"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:157
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:155
+msgid "Have you made a backup of your website files, folders and database?"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:158
 msgid "Description of the upgrade patch:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:161
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:162
 msgid "Introductory instruction:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:166
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:167
 msgid "Bad \"version name, version number or version build\" of upgrade path!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:171
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:173
 msgid "Upgrade path is not valid!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:211
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:214
 msgid "Your update ran successfully!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:217
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:220
 msgid "The upgrade directory <em>(~%0%)</em> has been deleted!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:218
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:221
 msgid "Status... OK!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:222
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:225
 msgid ""
 "The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it "
 "manually using an FTP client or SSH."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:223
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:226
 msgid "Status... Failure!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:228
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:231
 msgid "Please delete the upgrade file using an FTP client or SSH."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:232
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:235
 msgid "Conclusion of Instruction:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:277
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:280
 msgid ""
 "Unable to execute the upgrade of the database SQL.<br />Error Message: %0%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:291
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:294
 msgid "Your site must be in maintenance mode to begin the upgrade."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:296
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:299
 msgid ""
 "You must put your site in development mode in order to launch the upgrade of "
 "your site!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:297
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:300
 msgid ""
 "1) Please change the permission of the ~%0% file for writing for all groups "
 "(0666 in octal)."
@@ -886,20 +886,20 @@ msgstr ""
 "1) Please change the permission of the ~%0% file for writing for all groups "
 "(chmod 666)."
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:298
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:301
 msgid "2) Edit ~%0% file and find the code:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:300
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:304
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:303
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:307
 msgid "and replace it with the code:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:302
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:305
 msgid "3) After installation, please edit ~%0% file and find the code:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:306
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:309
 msgid ""
 "4) Change the permission of the file to write only for users and reading for "
 "the other groups (0644 in octal)."
@@ -907,15 +907,15 @@ msgstr ""
 "4) Change the permission of the file to write only for users and reading for "
 "the other groups (chmod 666)."
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:349
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:352
 msgid "You have %0% error(s):"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:352
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:355
 msgid "%0%) %1%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:447
+#: /var/www/html/pH7CMS/_protected/app/system/core/assets/file/UpgradeCoreFile.php:450
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/inc/class/Module.php:143
 msgid "Instruction file not found!"
 msgstr ""
@@ -1116,86 +1116,83 @@ msgstr ""
 msgid "Send Activation"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:47
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:75
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:48
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:76
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:92
 msgid "I am a:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:47
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:48
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:75
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:76
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:61
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:43
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:35
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:68
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:69
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:87
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:88
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:37
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:38
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/EditForm.php:49
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddAdminForm.php:32
-msgid "Male"
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:49
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:72
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:92
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:94
+msgid "Man"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:47
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:48
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:75
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:49
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:76
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:77
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:72
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:92
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:94
 msgid "Woman"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:47
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:48
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:75
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:49
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:76
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:77
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:35
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:68
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:69
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:87
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:88
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:72
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:92
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:94
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:37
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:38
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddAdminForm.php:32
 msgid "Couple"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:48
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:76
-msgid "Looking for:"
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:49
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:94
+msgid "Looking for a:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:50
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:78
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:51
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:79
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:37
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:40
 msgid "Country:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:51
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:79
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:52
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:80
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:38
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:41
 msgid "City:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:52
-msgid "Latest members"
-msgstr ""
-
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:53
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:83
-msgid "Only with Avatar"
+msgid "Latest members"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:54
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:84
-msgid "Only Online"
+msgid "Only with Avatar"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:55
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:87
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+msgid "Only Online"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:56
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:88
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/forms/SearchPictureForm.php:22
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/SearchBlogForm.php:24
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:22
@@ -1206,30 +1203,46 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/SearchNoteForm.php:27
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/forms/SearchVideoForm.php:22
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:22
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:27
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:26
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:34
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchAdminForm.php:22
 msgid "Search"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:80
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:76
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:77
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:48
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:35
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:37
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:38
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/EditForm.php:49
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddAdminForm.php:32
+msgid "Male"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:77
+msgid "Looking for:"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:81
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:39
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:42
 msgid "State/Province:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:81
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:82
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DynamicFieldCoreForm.php:59
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:40
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:43
 msgid "Postal Code:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:82
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:83
 msgid "Email Address:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/forms/SearchPictureForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/SearchBlogForm.php:22
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:20
@@ -1240,18 +1253,18 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/SearchNoteForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/forms/SearchVideoForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:20
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:25
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:24
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:32
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchAdminForm.php:20
 msgid "Browse By:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:32
 msgid "Latest Members"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchFriendForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchVisitorForm.php:22
@@ -1260,18 +1273,18 @@ msgstr ""
 msgid "Last Activity"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
 msgid "Most Popular"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
 msgid "Top Rated"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchFriendForm.php:25
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:46
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:47
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchVisitorForm.php:22
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:26
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:32
@@ -1279,7 +1292,7 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchFriendForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:44
@@ -1290,7 +1303,7 @@ msgstr ""
 msgid "First Name"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchFriendForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchVisitorForm.php:22
@@ -1300,10 +1313,10 @@ msgstr ""
 msgid "Last Name"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchFriendForm.php:25
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:47
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:49
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchVisitorForm.php:22
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:26
@@ -1312,7 +1325,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:87
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/forms/SearchPictureForm.php:21
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/SearchBlogForm.php:23
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:21
@@ -1323,13 +1336,13 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/SearchNoteForm.php:26
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/forms/SearchVideoForm.php:21
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:21
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:26
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:33
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchAdminForm.php:21
 msgid "Direction:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:87
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/forms/SearchPictureForm.php:21
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/SearchBlogForm.php:23
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:21
@@ -1340,13 +1353,13 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/SearchNoteForm.php:26
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/forms/SearchVideoForm.php:21
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:21
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:26
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:33
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchAdminForm.php:21
 msgid "Descending"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:86
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/SearchUserCoreForm.php:87
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/forms/SearchPictureForm.php:21
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/SearchBlogForm.php:23
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/SearchAffiliateForm.php:21
@@ -1357,7 +1370,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/SearchNoteForm.php:26
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/forms/SearchVideoForm.php:21
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:21
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:26
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:33
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchAdminForm.php:21
 msgid "Ascending"
@@ -1418,26 +1431,26 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/NotificationForm.php:33
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:54
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/EditNoteForm.php:80
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:50
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:52
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:56
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:58
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:60
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:62
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:64
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:66
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:68
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:70
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:72
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:110
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:116
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:118
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:120
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:122
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:124
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:126
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:128
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:130
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:132
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:134
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:136
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:138
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:140
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:166
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:168
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:170
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:192
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:154
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:156
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:158
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:180
 msgid "Enable"
 msgstr ""
 
@@ -1447,25 +1460,25 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/NotificationForm.php:33
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:54
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/EditNoteForm.php:80
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:50
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:52
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:56
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:60
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:62
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:64
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:68
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:70
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:72
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:110
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:116
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:118
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:120
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:122
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:124
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:126
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:128
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:130
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:132
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:134
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:136
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:138
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:140
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:166
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:168
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:170
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:192
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:154
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:156
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:158
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:180
 msgid "Disable"
 msgstr ""
 
@@ -1491,26 +1504,26 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/EditForumForm.php:43
 #: /var/www/html/pH7CMS/_protected/app/system/modules/payment/forms/EditMembershipForm.php:36
 #: /var/www/html/pH7CMS/_protected/app/system/modules/payment/forms/MembershipForm.php:30
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:51
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:40
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:50
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:39
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:44
 msgid "Description:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DynamicFieldCoreForm.php:45
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:46
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:91
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:53
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:99
 msgid "Your Country:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DynamicFieldCoreForm.php:49
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:47
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:92
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:55
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:101
 msgid "Your City:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DynamicFieldCoreForm.php:54
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:49
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:58
 msgid "Your State/Province:"
 msgstr ""
 
@@ -1529,9 +1542,9 @@ msgid "Weight:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DynamicFieldCoreForm.php:78
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:47
-msgid "Social Network Site:"
-msgstr ""
+#, fuzzy
+msgid "Social Media Profile:"
+msgstr "Edit the Comment"
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DynamicFieldCoreForm.php:78
 #: /var/www/html/pH7CMS/_protected/app/system/modules/contact/forms/ContactForm.php:36
@@ -1540,12 +1553,15 @@ msgid "Your Website:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DynamicFieldCoreForm.php:79
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:47
-msgid "The url of your profile Facebook, Twitter, Google+, etc."
+msgid ""
+"The URL of your social profile like Facebook, Snapchat, Instagram, Google+, "
+"etc."
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DynamicFieldCoreForm.php:79
-msgid "Your Website/Blog"
+msgid ""
+"Your Personal Website/Blog (any promotional/affiliated contents will be "
+"banned)"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DynamicFieldCoreForm.php:86
@@ -1577,99 +1593,105 @@ msgstr ""
 msgid "Change Password!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:42
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:43
 msgid "The passwords do not match."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:46
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:47
 msgid ""
 "The old and new passwords are identical. So why do you change your password?"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:50
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:51
 msgid "The old password is not correct."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:59
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ChangePasswordCoreFormProcess.php:60
 #, fuzzy
 msgid "Your password has been successfully changed."
 msgstr "The Advertisements were added successfully!"
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:25
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:24
 #: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/forms/processing/ForgotPasswordFormProcess.php:32
 msgid ""
 "Oops, this \"%0%\" is not associated with any %site_name% account. Please, "
 "make sure that you entered the e-mail address used in creating your account."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:31
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:30
 msgid "Oops! Your account is already activated."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:39
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:37
+#, fuzzy
+msgid "Your activation link has been emailed to you."
+msgstr "Your message could not be moved to Inbox because it doesn't exist."
+
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:56
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:62
 msgid "Welcome to %site_name%, %0%!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:40
-msgid "Hello %0% - We are proud to welcome you as a member of %site_name%!"
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:57
+#: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:63
+msgid "Hi %0%! We are proud to welcome you as a member of %site_name%!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:41
-msgid "Your hash validation is <em>\"%0%\"</em>."
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:58
+msgid "Your activation link is <em>\"%0%\"</em>."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:42
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:59
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:65
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:46
 msgid "Please save the following information for future refenrence:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:43
-msgid "Email: "
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:60
+#: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:47
+msgid "Email: %0%."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:44
-msgid "Username: "
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:61
+#: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:67
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:48
+msgid "Username: %0%."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:45
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:62
 msgid ""
-"Password: ***** (This field is hidden to protect against theft of your "
+"Password: ***** (this field is hidden to protect against theft of your "
 "account)."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:47
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:64
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:69
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:327
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:338
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:50
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:98
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:368
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:379
 msgid ""
 "You are receiving this mail because we received an application for "
 "registration with the email \"%0%\" has been provided in the form of "
 "%site_name% (%site_url%)."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:48
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:65
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:70
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:328
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:339
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:51
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/processing/SubscriptionFormProcess.php:99
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:369
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:380
 msgid ""
 "If you think someone has used your email address without your knowledge to "
 "create an account on %site_name%, please contact us using our contact form "
 "available on our website."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:54
+#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:71
 #: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/controllers/MainController.php:88
 msgid "Your new password - %site_name%"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/ResendActivationCoreFormProcess.php:60
-msgid "Your hash validation has been emailed to you."
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/DeleteUserCoreFormProcess.php:33
@@ -1707,7 +1729,7 @@ msgid "Email: %0%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/DeleteUserCoreFormProcess.php:57
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:42
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:41
 msgid "Username: %0%"
 msgstr ""
 
@@ -1717,7 +1739,7 @@ msgid "First Name: %0%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/processing/DeleteUserCoreFormProcess.php:59
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:42
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:41
 msgid "Sex: %0%"
 msgstr ""
 
@@ -1745,59 +1767,60 @@ msgid ""
 "be in  write mode)"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/UserCoreModel.php:1115
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/UserCoreModel.php:1117
 msgid "Administration of %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:61
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:65
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:98
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:102
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:70
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:107
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:111
 msgid "Meet %0% on %site_name%!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:61
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:65
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:98
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:102
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:70
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:107
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:111
 msgid "I am a %0% and I am looking %1%."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:61
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:65
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:98
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:102
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:70
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:107
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:111
 msgid "I from %0%, %1%."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:61
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:65
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:98
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:102
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:124
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:70
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:107
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:111
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:133
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user-dashboard/models/UserDesignModel.php:28
 msgid "Meet %0% on %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:147
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:156
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/PrivacyForm.php:41
 msgid "Online"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:147
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:156
 msgid "Is Online!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:153
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:162
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/PrivacyForm.php:41
 msgid "Busy"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:153
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:162
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/PrivacyForm.php:41
 msgid "Away"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:153
+#: /var/www/html/pH7CMS/_protected/app/system/core/models/design/UserDesignCoreModel.php:162
 msgid "Offline"
 msgstr ""
 
@@ -1855,9 +1878,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:43
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:314
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:325
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:26
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:356
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:367
 msgid "log in"
 msgstr ""
 
@@ -1888,20 +1911,6 @@ msgid ""
 "Password: ****** (This field is hidden to protect against theft of your "
 "account. If you have forgotten your password, please request a new one <a "
 "href=\"%0%\">here</a>)."
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:63
-msgid "Hi %0%! We are proud to welcome you as a member of %site_name%!"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:66
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:47
-msgid "Email: %0%."
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:67
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/inc/class/Registration.php:48
-msgid "Username: %0%."
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/RegistrationCore.php:77
@@ -1943,12 +1952,11 @@ msgid "Happy Birthday %0%!"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/PermissionCore.php:62
-msgid "Please sign in first to continue"
+msgid "Please sign in first"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/PermissionCore.php:67
-msgid ""
-"Please go to the administrative part of the site and log in as administrator."
+msgid "Please go to the admin panel of the site and log in as administrator."
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/classes/PermissionCore.php:72
@@ -2103,13 +2111,7 @@ msgid_plural "Read the Comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/core/classes/design/CommentDesignCore.php:39
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:72
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:128
-msgid "OR"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/core/classes/design/CommentDesignCore.php:39
+#: /var/www/html/pH7CMS/_protected/app/system/core/classes/design/CommentDesignCore.php:41
 msgid "RSS Feed"
 msgstr ""
 
@@ -2163,8 +2165,9 @@ msgid "Edit Album"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/controllers/MainController.php:67
-msgid "Edit Picture"
-msgstr ""
+#, fuzzy
+msgid "Edit Photo"
+msgstr "Edit the Comment"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/controllers/MainController.php:80
 #, fuzzy
@@ -2219,8 +2222,9 @@ msgid ""
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/controllers/MainController.php:157
-msgid "Your picture has been deleted!"
-msgstr ""
+#, fuzzy
+msgid "Your photo has been removed!"
+msgstr "The friends we've been deleted."
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/controllers/MainController.php:170
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/controllers/MainController.php:180
@@ -2228,17 +2232,18 @@ msgid "Your album has been deleted!"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/controllers/MainController.php:175
-msgid "Search Picture - Looking a picture"
-msgstr ""
+#, fuzzy
+msgid "Photo Search - Looking for a photo"
+msgstr "Search a Subscriber:"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/controllers/MainController.php:188
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/controllers/MainController.php:164
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:60
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:59
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:171
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/controllers/MainController.php:194
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/controllers/MainController.php:200
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/controllers/AdminController.php:57
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:141
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:144
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/AdminController.php:50
 msgid "Sorry, Your search returned no results!"
 msgstr ""
@@ -2248,10 +2253,11 @@ msgid "Dating Social Picture - Your search returned"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/controllers/MainController.php:195
-msgid "%n% picture result!"
-msgid_plural "%n% picture results!"
-msgstr[0] ""
-msgstr[1] ""
+#, fuzzy
+msgid "%n% photo found!"
+msgid_plural "%n% photos found!"
+msgstr[0] "Provider Not Found!"
+msgstr[1] "Provider Not Found!"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/picture/controllers/MainController.php:196
 msgid "Search - %site_name% is a Dating Social Photo Community!"
@@ -2278,7 +2284,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/SearchTopicForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/SearchNoteForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/forms/SearchVideoForm.php:20
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:25
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:24
 msgid "Title"
 msgstr ""
 
@@ -2289,7 +2295,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/SearchTopicForm.php:20
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/SearchNoteForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/forms/SearchVideoForm.php:20
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:25
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:24
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:32
 msgid "Popular"
 msgstr ""
@@ -2300,7 +2306,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchVisitorForm.php:22
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/SearchNoteForm.php:25
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/forms/SearchVideoForm.php:20
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:25
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:24
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SearchUserForm.php:32
 msgid "Rated"
 msgstr ""
@@ -2445,31 +2451,31 @@ msgstr "The Advertisements were added successfully!"
 msgid "Cannot remove the report. Please try later."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:50
+#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:70
 msgid "Reporter:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:51
+#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:71
 msgid "Spammer:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:52
+#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:72
 msgid "Contant Type:"
 msgstr "Content Type:"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:53
+#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:73
 msgid "URL:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:54
+#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:74
 msgid "Description of report:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:55
+#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:75
 msgid "Date:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:62
+#: /var/www/html/pH7CMS/_protected/app/system/modules/report/inc/class/Report.php:82
 msgid "Spam report from %site_name%"
 msgstr ""
 
@@ -2596,15 +2602,15 @@ msgid "Message from contact form %0%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/contact/forms/ContactForm.php:28
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:54
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:55
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:33
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:44
 msgid "Your First Name:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/contact/forms/ContactForm.php:30
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:56
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:35
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:36
 msgid "Your Last Name:"
 msgstr ""
 
@@ -2797,10 +2803,11 @@ msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/controllers/MainController.php:131
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/controllers/MainController.php:171
-msgid "%n% Post Result!"
-msgid_plural "%n% Post Results!"
-msgstr[0] ""
-msgstr[1] ""
+#, fuzzy
+msgid "%n% Post Found!"
+msgid_plural "%n% Posts Found!"
+msgstr[0] "Provider Not Found!"
+msgstr[1] "Provider Not Found!"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/controllers/MainController.php:132
 msgid "Search Blog Post by Category %0% - Dating Social Community Blog"
@@ -2811,8 +2818,9 @@ msgid "search,post,blog,dating,social network,community,news"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/controllers/MainController.php:144
-msgid "Search Blog - Looking a post"
-msgstr ""
+#, fuzzy
+msgid "Blog Search - Looking for a post"
+msgstr "Search a Subscriber:"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/controllers/MainController.php:169
 msgid "Dating Social Blog - Your search returned"
@@ -2914,7 +2922,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:62
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:45
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/EditNoteForm.php:65
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:53
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:61
 msgid "Slogan:"
 msgstr ""
 
@@ -2952,7 +2960,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:75
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:49
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/EditNoteForm.php:75
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:55
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:65
 msgid "Description (meta tag):"
 msgstr ""
 
@@ -2960,13 +2968,13 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:76
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:50
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/EditNoteForm.php:76
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:56
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:67
 msgid "Keywords (meta tag):"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/AdminBlogForm.php:47
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:76
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:56
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:67
 msgid "Separate keywords by commas."
 msgstr ""
 
@@ -2974,7 +2982,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:77
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:51
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/EditNoteForm.php:77
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:57
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:69
 msgid "Robots (meta tag):"
 msgstr ""
 
@@ -2982,7 +2990,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:78
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:52
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/EditNoteForm.php:78
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:71
 msgid "Author (meta tag):"
 msgstr ""
 
@@ -2990,7 +2998,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/blog/forms/EditAdminBlogForm.php:79
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/NoteForm.php:53
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/forms/EditNoteForm.php:79
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:59
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:73
 msgid "Copyright (meta tag):"
 msgstr ""
 
@@ -3215,118 +3223,106 @@ msgid ""
 "The server does not support the HTTP protocol version used in the request."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:28
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:27
 msgid "Online Dating Sie for Single!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:29
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:28
 msgid ""
 "Meet new people and have meetings near you with %site_name%, the new online "
 "dating free site  new generation with webcam chat!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:30
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:29
 msgid ""
 "dating, free dating, online dating, people, meeting, romance, woman, man, "
 "dating site, flirt, chat, chat room, webcam, video chat, %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:31
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:30
 msgid "Free Online Dating with %site_name%!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:32
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:31
 #, fuzzy
 msgid "Innovative Online Dating Platform"
 msgstr "Hot Or Not - Free Online Dating Site"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:38
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:37
 msgid "About this website %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:47
-msgid "Help"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:49
-msgid "Help about of %site_name%"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:60
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:50
 msgid "FAQ"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:61
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:51
 msgid "Frequently asked questions of %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:69
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:59
 msgid "Terms and Conditions of Use"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:71
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:61
 msgid "Terms and Conditions of Use, Terms of Use - %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:78
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:68
 msgid "Affiliate Terms and Conditions of Use"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:80
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:70
 msgid "Affiliate Terms and Conditions of Use, Terms of Use - %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:87
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:77
 msgid "Privacy Policy"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:89
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:79
 msgid "Privacy Policy - %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:96
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:86
 msgid "Legal Notice"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:98
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:88
 msgid "Legal Notice - %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:105
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:95
 msgid "Help Us"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:107
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:97
 msgid "Help US - %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:114
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:104
 msgid "Share this site with others!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:116
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:106
 msgid ""
 "Do you like %site_name% and want it even more popular, then share this site "
 "on your website, blog, discussion forum, etc..."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:123
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:113
 msgid "Partners of %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:132
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:122
 msgid "Jobs - Careers @ %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:135
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:125
 msgid "Careers, Jobs and Internships at %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:141
-msgid "%site_name%'s Team"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:150
+#: /var/www/html/pH7CMS/_protected/app/system/modules/page/controllers/MainController.php:131
 msgid "Links and Partners of %site_name%"
 msgstr ""
 
@@ -3359,7 +3355,7 @@ msgid "Message:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/invite/forms/InviteForm.php:37
-msgid "Invite your friends!"
+msgid "Invite your Friends!"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:26
@@ -3375,7 +3371,6 @@ msgid "Cool! We have sent that."
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/invite/forms/processing/InviteFormProcess.php:59
-#: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/controllers/MainController.php:80
 #: /var/www/html/pH7CMS/_protected/app/system/modules/payment/controllers/MainController.php:261
 msgid "Hello!"
 msgstr ""
@@ -3470,7 +3465,7 @@ msgid "Login Affiliate"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/HomeController.php:49
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/MainController.php:84
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/MainController.php:87
 msgid "Resend activation email"
 msgstr ""
 
@@ -3483,7 +3478,7 @@ msgid "Edit your profile"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:42
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:100
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:99
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/AccountController.php:23
 msgid "Change Password"
 msgstr ""
@@ -3492,64 +3487,30 @@ msgstr ""
 msgid "Delete Affiliate Account"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:61
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:119
-msgid "Excellent choice!"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:62
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:120
-msgid "You will see, you will not regret that!"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:63
-msgid ""
-"At %site_name%, we are working hard to give you one of the best affiliate "
-"service!"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:68
-msgid "WARNING: If you delete your account you will not receive your money."
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:69
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:126
-msgid "Are you really sure you want to delete your account?"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:71
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:127
-msgid "No I changed my mind and I stay with you!"
-msgstr "No, I changed my mind and I stay with you!"
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AccountController.php:73
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:129
-msgid "Yes I really want to delete my account"
-msgstr "Yes, I really want to delete my account"
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:31
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:30
 msgid "Welcome to the administration of Ad Affiliate"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:36
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:35
 msgid "Affiliate Settings"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:71
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:70
 msgid "Browse Affiliates"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:73
 msgid "%n% Affiliate"
 msgid_plural "%n% Affiliates"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:84
-msgid "Search Affiliate - Looking a new Affiliate"
-msgstr ""
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:83
+#, fuzzy
+msgid "Affiliate Search"
+msgstr "Search a Subscriber:"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:92
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:91
 msgid "Add an Affiliate"
 msgstr ""
 
@@ -3557,82 +3518,86 @@ msgstr ""
 msgid "You are now logged in as affiliate: %0%!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:118
-msgid "You are now  logged out in as an affiliate: %0%!"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:120
+msgid "This affiliate doesn't exist."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:191
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:126
+msgid "You are now logged out as affiliate: %0%!"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:199
 msgid "The affiliate has been banned."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:195
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:203
 msgid "Oops! An error has occurred while banishment the affiliate."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:208
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:216
 msgid "The affiliate has been unbanned."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:212
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:220
 msgid "Oops! An error has occurred while unban the affiliate."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:225
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:233
 msgid "The affiliate has been deleted."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:243
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:251
 msgid "The affiliate(s) has/have been banned."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:264
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:272
 msgid "The affiliate(s) has/have been unbanned."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:286
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:294
 #, fuzzy
 msgid "The affiliate(s) has/have been deleted."
 msgstr "The friends we've been deleted."
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:301
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:343
-msgid "Your membership account has been declined"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:302
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:344
-msgid "Sorry, Your membership account has been declined."
-msgstr ""
-
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:312
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:354
-msgid "Your membership account has been activated"
+msgid "Your membership account has been declined"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:313
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:355
+msgid "Sorry, Your membership account has been declined."
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:323
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:365
+msgid "Your membership account has been activated"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:324
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:366
 msgid ""
 "Congratulations! Your account has been approved by our team of "
 "administrators.<br />You can now %0% to meeting new people!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:326
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:367
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:337
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:378
 msgid "Dear %0%,"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:341
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:382
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:352
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:393
 msgid "Error! Bad argument in the URL."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:346
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:387
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:357
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:398
 msgid "The user is not found!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:351
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:392
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/controllers/AdminController.php:362
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:403
 msgid "Error! Missing argument in the URL."
 msgstr ""
 
@@ -3711,39 +3676,35 @@ msgstr ""
 msgid "Attention all your information must be complete, candid and valid."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:58
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:37
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:61
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:39
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:29
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:66
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:46
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:68
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:47
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:31
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/EditForm.php:45
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddAdminForm.php:27
 msgid "Username:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:58
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:61
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:68
 msgid "For site security, you cannot change your username."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:59
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:67
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:63
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:70
 msgid ""
 "For site security and to avoid spam, you cannot change your email address."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:61
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:66
 msgid "Your Sex:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:61
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:43
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:48
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:35
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:68
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:69
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:87
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:88
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:37
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:38
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/EditForm.php:49
@@ -3751,61 +3712,61 @@ msgstr ""
 msgid "Female"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:62
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:44
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/EditForm.php:68
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:50
 msgid "Your Date of birth:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:37
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:39
 msgid "Your username will be your unique advertiser ID."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:39
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:42
 msgid "Your Professional Valid Email."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:43
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:48
 msgid "Your Gender:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:44
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:50
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:36
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:89
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:96
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:39
 msgid "Month/Day/Year"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:44
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:89
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:50
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:96
 msgid ""
 "Please specify your birth date using the calendar or with this format: Month/"
 "Day/Year. <strong>It is imperative to finish by the DAY</strong>."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:46
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:53
 msgid "Select the country where you are legally resident."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:47
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:55
 msgid "Specify the city where you currently live."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:51
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:96
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:61
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:104
 msgid "Your Postal Code:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:60
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:70
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:61
 msgid "Terms of Service"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:60
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:70
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:61
 msgid "I have read and agree to the %0%."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:62
+#: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/JoinForm.php:73
 #, fuzzy
 msgid "Become an Affiliate!"
 msgstr "Search a Subscriber:"
@@ -3835,7 +3796,7 @@ msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:31
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:33
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:158
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:146
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddAdminForm.php:29
 msgid "Password:"
 msgstr ""
@@ -3849,7 +3810,7 @@ msgid "First Name:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:33
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:64
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:65
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:35
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/EditForm.php:48
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddAdminForm.php:31
@@ -3864,7 +3825,7 @@ msgid "Sex:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/AddAffiliateForm.php:36
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:70
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:76
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:39
 msgid "Date of birth:"
 msgstr ""
@@ -3930,15 +3891,15 @@ msgstr "The Advertisements were added successfully!"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/processing/JoinFormProcess.php:65
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:63
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:114
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:136
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:113
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:135
 msgid "An error occurred during registration!"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/processing/JoinFormProcess.php:66
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:64
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:115
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:137
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:114
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:136
 msgid ""
 "Please try again with new information in the form fields or come back later."
 msgstr ""
@@ -3948,8 +3909,9 @@ msgid "Your affiliate account has been created! %0%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/affiliate/forms/processing/EditFormProcess.php:64
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/EditFormProcess.php:82
 #, fuzzy
-msgid "Profile has been saved successfully!"
+msgid "The profile has been successfully updated"
 msgstr "Your notifications settings has been saved successfully!"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/controllers/MainController.php:27
@@ -3968,12 +3930,18 @@ msgstr ""
 msgid "Your new password has been emailed to you."
 msgstr ""
 
+#: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/controllers/MainController.php:80
+msgid "Hello,"
+msgstr ""
+
 #: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/controllers/MainController.php:81
-msgid "Your password has been changed to %0%"
+msgid "Your new password is %0%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/controllers/MainController.php:82
-msgid "Please change it next time you login."
+msgid ""
+"Please change it when you're logged in (Account -> Edit Profile -> Change "
+"Password)."
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/lost-password/forms/ForgotPasswordForm.php:35
@@ -4005,130 +3973,126 @@ msgstr ""
 msgid "Request for new password - %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/MainController.php:75
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/MainController.php:78
 msgid "Sign In to %site_name%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/MainController.php:95
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/MainController.php:98
 msgid "See you soon!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:45
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:44
 msgid "Account Settings"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:53
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:52
 msgid "Edit Your Profile"
 msgstr ""
 
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:60
+#, fuzzy
+msgid "Profile Photo"
+msgstr "Provider Not Found!"
+
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:61
-msgid "Photo of profile"
+msgid "Change your Profile Photo"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:62
-msgid "Change your Avatar"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:72
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:71
 msgid "Your Wallpaper"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:84
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:83
 msgid "Notifications"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:92
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:91
 msgid "Privacy Settings"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:108
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:107
 msgid "Delete Account"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:121
-msgid ""
-"At %site_name%, we are working hard to give you one of the best social "
-"service!"
-msgstr ""
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:141
+#, fuzzy
+msgid "Profile photo successfully deleted"
+msgstr "The Advertisements were added successfully!"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:147
-msgid "Your avatar has been deleted successfully!"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:161
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SettingController.php:155
 msgid "Your wallpaper has been deleted successfully!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:84
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:86
 msgid "Friend:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:84
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:86
 msgid "No Friends"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:85
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:87
 msgid "Friends:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:91
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:92
 msgid "Mutual Friend:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:91
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:92
 msgid "No Mutual Friends"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:91
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:92
 msgid "Mutuals Friends:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:96
-msgid "You need to free register for send a message to %0%."
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:101
-msgid "You need to free register for talk to %0%."
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:106
-msgid "Free Sign up for %site_name% to become friend with %0%."
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:108
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:95
 msgid "Meet %0%, A %1% looking for %2% - %3% years - %4% - %5% %6%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:111
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:98
 msgid "Meet %0% %1% | %2% - %3%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:116
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:103
 msgid ""
 "Meet <span class=\"pH1\">%0%</span> on <span class=\"pH0\">%site_name%</span>"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:119
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:106
 msgid ""
 "A <span class=\"pH1\">%0%</span> of <span class=\"pH3\">%1% years</span>, "
 "from <span class=\"pH2\">%2%, %3% %4%</span>"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:183
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:172
 msgid "Meet %0% near here!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:210
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:199
 msgid ""
 "Whoops! The \"%0%\" profile is only visible to members. Please <a href=\"%1%"
 "\">login</a> or <a href=\"%2%\">register</a> to see this profile."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:215
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:204
 msgid "Whoops! The \"%0%\" profile is not available to you."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:263
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:255
+msgid "You need to free register for send a message to %0%."
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:283
+msgid "You need to free register for talk to %0%."
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:311
+msgid "Free Sign up for %site_name% to become friend with %0%."
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/ProfileController.php:336
 msgid "Whoops! The \"%0%\" profile is not found."
 msgstr ""
 
@@ -4177,24 +4141,16 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/VisitorController.php:87
-msgid "Find someone who has visited the %0%'s profile"
+msgid "Find someone who has visited %0%'s profile"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SearchController.php:20
-msgid "Search Quick Profiles"
+msgid "Quick Search"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SearchController.php:21
-msgid "The Search Members | Quick Search"
-msgstr "Search Members | Quick Search"
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SearchController.php:27
-msgid "Search Advanced Profiles"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SearchController.php:26
+msgid "Advanced Search"
 msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SearchController.php:28
-msgid "The Search Members | Advanced Search"
-msgstr "Search Members | Advanced Search"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/BrowseController.php:33
 msgid ""
@@ -4260,8 +4216,8 @@ msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/FriendController.php:57
 msgid ""
-"The Hot Friend of %0%. Meet new people and make new friends, sex friends, "
-"hot friends for Flirt, Speed Dating or social relationship with %site_name%"
+"%0%'s friends. Meet new people and make new friends, sex friends, hot "
+"friends for Flirt, Speed Dating or social relationship with %site_name%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/FriendController.php:62
@@ -4271,7 +4227,7 @@ msgid ""
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/FriendController.php:76
-msgid "No Friend found on the profile of \"%0%\""
+msgid "No Friend found on %0%'s profile"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/FriendController.php:79
@@ -4290,7 +4246,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/FriendController.php:102
-msgid "No Mutual Friend found on the profile of \"%0%\""
+msgid "No Mutual Friend found on %0%'s profile"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/FriendController.php:105
@@ -4308,52 +4264,53 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/FriendController.php:121
-msgid "Search a Friend on the profile of %0%"
-msgstr ""
+#, fuzzy
+msgid "Search %0%'s friends"
+msgstr "Search a Subscriber:"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:33
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:32
 msgid "Reference: %0%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:42
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:41
 msgid "Action: %0%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:65
 msgid ""
 "Register for free to meet %0% on %site_name%. The Real Social Dating app!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:65
 msgid "Free Sign Up to Meet Lovely People!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:69
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:68
 msgid ""
 "Register for Free to Meet <span class=\"pink2\">%0%</span> (<span class="
 "\"pink1\">%1%</span>) on <span class=\"pink2\">%site_name%</span>!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:71
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:70
 msgid "Sign Up on %site_name%!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:75
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:74
 msgid ""
 "Sign Up today to meet friends, sex friends, singles, families, neighbors and "
 "many others people near or far from you! %site_name% is a free social dating "
 "with profiles, blogs, rating, hot or not, video chat rooms"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:84
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:83
 msgid "Sign up - Step 2/3"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:91
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:90
 msgid "Sign up - Step 3/3"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:98
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/controllers/SignupController.php:97
 msgid "Now, Upload a Profile Photo of you!"
 msgstr ""
 
@@ -4409,7 +4366,7 @@ msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/assets/ajax/WallAjax.php:57
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/assets/ajax/WallAjax.php:78
-msgid "Oops! There is no news feed available."
+msgid "Oops! There is no news feed available at the moment."
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/assets/ajax/WallAjax.php:66
@@ -4501,19 +4458,13 @@ msgstr ""
 msgid "Membership Group:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:67
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:70
 msgid "Email:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:68
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:87
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:72
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddFakeProfilesForm.php:29
 msgid "Gender:"
-msgstr ""
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/EditForm.php:69
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:88
-msgid "Interested in:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/SearchFriendForm.php:24
@@ -4529,54 +4480,55 @@ msgstr ""
 msgid "Universal Login"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:46
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:47
 msgid "your-user-name"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:49
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:52
 msgid "Password"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:54
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:57
 msgid "Captcha"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:60
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:64
 msgid "Join for free!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:89
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:96
 msgid "Your Date of Birth:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:92
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:101
 msgid "Select the city where you live/where you want to meet people."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:94
-msgid "Your State or Province:"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:107
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:137
+msgid "Next"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:124
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:134
 msgid "About Me:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:124
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:134
 msgid ""
 "Describe yourself in a few words. Your description should be at least 20 "
 "characters long."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:148
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:159
 #: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/AvatarForm.php:33
 msgid "Your Profile Photo"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:149
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:160
 msgid "Add My Photo"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:150
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/JoinForm.php:161
 msgid "Skip"
 msgstr ""
 
@@ -4706,14 +4658,9 @@ msgstr "Your notifications settings has been saved successfully!"
 msgid "No reference"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:144
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/JoinFormProcess.php:143
 #, fuzzy
 msgid "Your account has just been created!"
-msgstr "Your notifications settings has been saved successfully!"
-
-#: /var/www/html/pH7CMS/_protected/app/system/modules/user/forms/processing/EditFormProcess.php:82
-#, fuzzy
-msgid "Profile has been successfully updated!"
 msgstr "Your notifications settings has been saved successfully!"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:30
@@ -4727,15 +4674,15 @@ msgid "No Forums found."
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:51
-msgid "Discussions Forums - %site_name%"
+msgid "Discussion Forums - %site_name%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:52
-msgid "Discussions Forums, Social Network Site - %site_name%"
+msgid "Discussion Forums, Social Network Site - %site_name%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:53
-msgid "Discussions Forums, Social Network Site"
+msgid "Discussion Forums, Social Network Site"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:73
@@ -4747,7 +4694,7 @@ msgid "%0% - Forums"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:79
-msgid "%0% - Topics - Discussions Forums"
+msgid "%0% - Topics - Discussion Forums"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:80
@@ -4769,7 +4716,7 @@ msgid "%0% | %1% - Forum"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:106
-msgid "%0% Topics - Discussions Forums"
+msgid "%0% Topics - Discussion Forums"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:109
@@ -4791,11 +4738,11 @@ msgid "%0%'s Forum Posts"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:154
-msgid "Search Forum - Looking a Forum Post | %site_name%"
+msgid "Forum Search - Looking for a Forum Post | %site_name%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:156
-msgid "Search Topic - Discussion Forum - %site_name%"
+msgid "Topic Search - Discussion Forum - %site_name%"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/controllers/ForumController.php:176
@@ -4894,8 +4841,8 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/EditForumForm.php:40
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/EditCategoryForm.php:32
 #: /var/www/html/pH7CMS/_protected/app/system/modules/forum/forms/CategoryForm.php:31
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:48
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:37
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:47
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:36
 msgid "Category Name:"
 msgstr ""
 
@@ -5141,7 +5088,7 @@ msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/mail/controllers/MainController.php:204
 #, fuzzy
-msgid "Search Mail - Look for a message"
+msgid "Mail Search - Look for a message"
 msgstr "Search a Subscriber:"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/mail/controllers/MainController.php:221
@@ -5154,8 +5101,8 @@ msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/mail/controllers/MainController.php:229
 #: /var/www/html/pH7CMS/_protected/app/system/modules/mail/controllers/AdminController.php:35
-msgid "%n% Mail Result!"
-msgid_plural "%n% Mail Results!"
+msgid "%n% message found!"
+msgid_plural "%n% messages found!"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -5380,10 +5327,11 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/controllers/MainController.php:131
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/controllers/MainController.php:166
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/controllers/MainController.php:201
-msgid "%n% Note Result!"
-msgid_plural "%n% Note Results!"
-msgstr[0] ""
-msgstr[1] ""
+#, fuzzy
+msgid "%n% Note Found!"
+msgid_plural "%n% Notes Found!"
+msgstr[0] "Provider Not Found!"
+msgstr[1] "Provider Not Found!"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/controllers/MainController.php:132
 msgid "Search Note Post by Category %0% - Dating Social Community Note"
@@ -5415,8 +5363,9 @@ msgid "author,search,post,blog,note,dating,social network,community,news"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/controllers/MainController.php:179
-msgid "Search Note - Looking a post"
-msgstr ""
+#, fuzzy
+msgid "Note Search - Looking for a post"
+msgstr "Search a Subscriber:"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/note/controllers/MainController.php:199
 msgid "Dating Social Note - Your search returned"
@@ -5680,18 +5629,20 @@ msgid "Your video has been deleted!"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/controllers/MainController.php:185
-msgid "Search Video - Looking a video"
-msgstr ""
+#, fuzzy
+msgid "Video Search - Looking for a video"
+msgstr "Search a Subscriber:"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/controllers/MainController.php:205
 msgid "Dating Social Video - Your search returned"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/controllers/MainController.php:207
-msgid "%n% video result!"
-msgid_plural "%n% video results!"
-msgstr[0] ""
-msgstr[1] ""
+#, fuzzy
+msgid "%n% video found!"
+msgid_plural "%n% videos found!"
+msgstr[0] "Provider Not Found!"
+msgstr[1] "Provider Not Found!"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/controllers/MainController.php:208
 msgid "Search - %site_name% is a Dating Social Video Community!"
@@ -5729,7 +5680,7 @@ msgid "Regular"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/video/forms/VideoForm.php:53
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:118
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:106
 msgid "Video:"
 msgstr ""
 
@@ -5984,14 +5935,14 @@ msgid "Browse Subscribers"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/controllers/AdminController.php:71
-msgid "%n% Subscriber"
-msgid_plural "%n% Subscribers"
+msgid "%n% subscriber found"
+msgid_plural "%n% subscribers found"
 msgstr[0] ""
 msgstr[1] ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/controllers/AdminController.php:88
 #, fuzzy
-msgid "The subscribers(s) has/have been deleted."
+msgid "The subscribers(s) has/have been removed."
 msgstr "The friends we've been deleted."
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SearchSubscriberForm.php:19
@@ -6022,19 +5973,19 @@ msgstr ""
 msgid "Send!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:31
+#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:32
 msgid "Your full name:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:33
+#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:35
 msgid "Your email:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:38
+#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:42
 msgid "Subscribe"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:39
+#: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:43
 msgid "Unsubscribe"
 msgstr ""
 
@@ -6071,80 +6022,80 @@ msgid_plural "%n% newsletter has been sent successfully"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:30
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:31
 msgid "game,free,flash,game site,flash game,games,gaming,online game"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:44
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:45
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:67
 msgid "No Games Found!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:49
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:50
 msgid "Games Zone - Free Games"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:50
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:51
 msgid "Games Zone Party"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:51
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:52
 msgid "Free Games for Gamers, Flash Games, Free Online Games"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:71
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:72
 msgid "Game - %0%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:72
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:73
 msgid "%0% Games Zone - %1%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:75
 msgid "Flash Game - %0%"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:103
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:106
 msgid "No \"%0%\" category found."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:108
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:111
 msgid "Search by Category: \"%0%\" Game"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:111
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:149
-msgid "%n% Game Result!"
-msgid_plural "%n% Games Result!"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:114
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:152
+msgid "%n% Game Found!"
+msgid_plural "%n% Games Found!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:112
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:115
 msgid ""
 "Search the Flash Game in the Category %0% - Community Dating Social Games"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:123
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:126
 msgid "Search Game - Looking a new Game"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:146
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:149
 msgid "Game - Your search returned"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:150
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:153
 msgid "Search - Free Games for Gamers, Flash Games, Free Online Games"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:151
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:154
 msgid "search,game,free,flash,game site,flash game,games,gaming,online game"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:181
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:184
 msgid "Wrong download ID specified!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:210
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/controllers/MainController.php:214
 msgid ""
 "Please return to the <a href=\"%0%\">main game page</a> or <a href=\"%1%"
 "\">the previous page</a>."
@@ -6170,59 +6121,64 @@ msgstr ""
 msgid "The game could not be removed."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:49
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:38
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:48
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:37
 msgid "Name of the Game:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:50
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:39
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:49
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:38
 msgid "Title of the Game:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:52
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:41
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:51
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:40
 msgid "Keywords:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminEditForm.php:57
 msgid "Game Not Found!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:17
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:16
 msgid "Enter Name, Description, Keyword or ID of a Game."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:24
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:23
 msgid "Search Games"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:25
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/SearchGameForm.php:24
 msgid "Downloaded"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:42
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:41
 msgid "Thumbnail of the Game:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:43
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/AdminForm.php:42
 msgid "File of the Game:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/processing/AdminEditFormProcess.php:34
-msgid "The game has been updated successfully!"
-msgstr ""
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/processing/AdminEditFormProcess.php:33
+#, fuzzy
+msgid "The game has been successfully updated"
+msgstr "The Advertisements were added successfully!"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/processing/AdminFormProcess.php:49
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/processing/AdminFormProcess.php:48
 msgid ""
 "Impossible to upload the game. Please check if the folder \"%0%\" has the "
 "write permission (CHMOD 755) or contact your host to check it."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/processing/AdminFormProcess.php:68
+#: /var/www/html/pH7CMS/_protected/app/system/modules/game/forms/processing/AdminFormProcess.php:67
 #, fuzzy
 msgid "The game has been successfully added!"
 msgstr "The Advertisements were added successfully!"
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/user-dashboard/controllers/MainController.php:14
+msgid "My Dashboard"
+msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/MainController.php:29
 msgid "Admin Panel"
@@ -6284,7 +6240,7 @@ msgid "Add Fake Profiles"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:85
-msgid "Search Users"
+msgid "User Search"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:126
@@ -6292,48 +6248,52 @@ msgid "Users - Your search returned"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:127
-msgid "%n% User Result!"
-msgid_plural "%n% User Results!"
+msgid "%n% user found!"
+msgid_plural "%n% users found!"
 msgstr[0] ""
 msgstr[1] ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:152
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:153
 msgid "You are now logged in as member: %0%!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:158
-msgid "You are now  logged out in as a member: %0%!"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:160
+msgid "This user doesn't exist."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:232
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:166
+msgid "You are now logged out as member: %0%!"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:240
 msgid "The profile has been banned."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:236
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:244
 msgid "Oops! An error has occurred while banishment the profile."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:249
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:257
 msgid "The profile has been unbanned."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:253
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:261
 msgid "Oops! An error has occurred while unban the profile."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:266
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:274
 msgid "The profile has been deleted."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:285
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:293
 msgid "The profile(s) has/have been banned."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:306
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:314
 msgid "The profile(s) has/have been unbanned."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:328
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/UserController.php:336
 #, fuzzy
 msgid "The profile(s) has/have been deleted."
 msgstr "The friends we've been deleted."
@@ -6417,8 +6377,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/AdminController.php:73
-msgid "Search Admin - Looking an Admin"
-msgstr ""
+#, fuzzy
+msgid "Admin Search"
+msgstr "Edit the Comment"
 
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/AdminController.php:81
 msgid "Add an Admin"
@@ -6599,19 +6560,19 @@ msgstr ""
 msgid "Oops! The video could not be deleted!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/ModuleController.php:29
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/ModuleController.php:28
 msgid "Enable/Disable System Modules"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/ModuleController.php:56
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/ModuleController.php:54
 msgid "Module Manager"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/ModuleController.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/ModuleController.php:64
 msgid "Install Module Finished"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/ModuleController.php:82
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/controllers/ModuleController.php:80
 msgid "Uninstall Module Finished"
 msgstr ""
 
@@ -6821,6 +6782,14 @@ msgstr ""
 msgid "Match Sex:"
 msgstr ""
 
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:47
+msgid "Social Network Site:"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/AddUserForm.php:47
+msgid "The url of your profile Facebook, Twitter, Google+, etc."
+msgstr ""
+
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/ProtectedFileForm.php:26
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/PublicFileForm.php:26
 #, fuzzy
@@ -7003,108 +6972,130 @@ msgstr ""
 msgid "Your custon JavaScript code"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:35
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:36
 msgid "Global Settings:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:51
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:40
 msgid "Site Name:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:53
-msgid "Theme by default:"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:42
+msgid "Default Theme:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:55
-msgid "Language by default:"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:44
+msgid "Default Module:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:44
+msgid ""
+"The default module is the one running by default on the homepage "
+"(recommended to keep the \"user\" module)."
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:46
+msgid "Default Language:"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:48
 msgid "Map Type:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:48
 msgid "Roadmap (default)"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:48
 msgid "Hybrid"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:48
 msgid "Terrain"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:58
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:48
 msgid "Satellite"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:60
-msgid "Homepage Splash Page:"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:50
+msgid "Splash Homepage:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:60
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:50
 #, fuzzy
 msgid ""
-"Use the Splash Page for the visitors (not logged), otherwise the classic "
-"page will be used."
+"Use the Splash Page (recommended) for visitors (not logged), otherwise the "
+"classic page will be used. <br /><em>Available only if \"User\" is the "
+"Default Module.</em>"
 msgstr ""
 "Use the Splash Page for the visitors, otherwise it will be the classic page "
 "that will be used."
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:62
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:52
 msgid "Background Splash Video:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:62
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:52
 msgid ""
-"Enable/Disable the \"Animated Video\" on the splash homepage. <strong>If you "
+"Enable/Disable the \"Animated Video\" on the Splash Homepage. <strong>If you "
 "hold <a href=\"http://ph7cms.com/order\">pH7CMSPro</a>, we can provide "
 "professional splash videos for your specific niche and setting-up the video "
-"for you</strong>."
+"for you</strong>. <br /><em>Available only if \"User\" is the Default Module."
+"</em>"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:64
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:54
+msgid "Number of Profiles on Splash Page:"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:54
+msgid ""
+"The number of profiles displayed on the profiles block of the Splash "
+"Homepage. <br /><em>Available only if \"User\" is the Default Module.</em>"
+msgstr ""
+
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:56
 msgid "Ajax Site with AjPH:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:64
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:56
 msgid ""
 "Be careful! 'Full Ajax Navigation' feature is still in Beta and may not be "
 "working properly on all pages."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:58
 msgid "Site Status:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:66
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:58
 msgid "Maintenance"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:68
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:60
 msgid "Social Media Widgets:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:68
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:60
 msgid "Enable the Social Media Sharing such as Like and Sharing buttons."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:70
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:62
 msgid "Adult Disclaimer:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:70
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:62
 msgid ""
 "Show an Adult Warning to enter to the site. This is useful for sites with "
 "adult content."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:72
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:64
 msgid "Cookie Consent Bar:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:72
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:64
 msgid ""
 "Enable a Cookie Consent Bar to prevent your users that your site uses "
 "cookies. This is required for EU Law (if you have visitors from EU "
@@ -7112,273 +7103,274 @@ msgid ""
 "EU."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:66
 msgid "Show the News Feed:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:74
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:66
 msgid ""
 "Show the Latest News about the software in the admin dashboard (recommend)."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:78
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:80
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:72
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:74
 msgid "Logo:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:80
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:74
 msgid ""
 "Add your small logo/icon that represents/distinguishes your site/concept/"
 "brand the best."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:82
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:76
 msgid "Logo"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:82
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:76
 msgid "The current logo of your site."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:86
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:80
 msgid "Registration:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:88
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:82
 msgid "Account activation type for Members:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:88
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:90
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:82
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:84
 msgid "No activation required"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:88
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:90
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:82
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:84
 msgid "Self activation via email"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:88
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:90
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:82
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:84
 msgid "Manual activation by administrator"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:90
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:84
 msgid "Account activation type for Affiliates:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:92
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:86
 msgid "Minimum username length:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:94
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:88
 msgid "Maximum username length:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:96
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:90
 msgid "Minimum age for registration:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:98
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:92
 msgid "Maximum age for registration:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:105
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:94
 msgid "Default Membership Group:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:110
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:98
 msgid "Picture and Video:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:112
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:100
 msgid "Image:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:114
-msgid "Watermark text:"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:102
+msgid "Watermark Text:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:116
-msgid "Size Watermark Text:"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:104
+msgid "Watermark Size:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:116
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:104
 msgid "Between 0 to 5."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:120
-msgid "Default video:"
-msgstr ""
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:108
+#, fuzzy
+msgid "Default Video:"
+msgstr "Search a Subscriber:"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:120
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:108
 msgid "Video by default if no video is found."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:122
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:110
 msgid "Autoplay Video:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:126
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:114
 msgid "Moderation:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:128
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:116
 msgid "Nudity Filter:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:128
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:116
 msgid ""
 "Photos will be automatically pending approval if there are detected as "
 "\"Nude/Adult Photos\""
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:130
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:118
 #, fuzzy
 msgid "Avatar Manual Approval:"
 msgstr "Avatar Manual Approval:"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:132
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:120
 #, fuzzy
 msgid "Background Profile Manual Approval:"
 msgstr "Avatar Manual Approval:"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:134
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:122
 msgid "Note Post Manual Approval:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:136
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:124
 #, fuzzy
 msgid "Photos Manual Approval:"
 msgstr "Avatar Manual Approval:"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:138
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:126
 msgid "Videos Manual Approval:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:140
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:128
 msgid "Webcam Pictures Manual Approval:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:140
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:128
 msgid "This approval mode is experimental, do not use it in production."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:144
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:132
 msgid "Email Parameters:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:146
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:134
 msgid "Email Name:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:148
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:136
 msgid "Admin Email:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:150
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:138
 msgid "Feedback Email:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:152
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:140
 msgid "Return Email:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:156
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:144
 msgid "Security:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:160
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:148
 msgid "Minimum password length:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:162
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:150
 msgid "Maximum password length:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:164
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:152
 msgid "Blocking login attempts exceeded:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:166
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:154
 msgid "Enable blocking for User:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:168
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:156
 msgid "Enable blocking for Affiliate:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:170
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:158
 msgid "Enable blocking for Admin:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:172
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:160
 msgid "Max login attempts before blocking for User:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:174
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:162
 msgid "Max login attempts before blocking for Affiliate:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:176
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:164
 msgid "Max login attempts before blocking for Admin:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:178
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:166
 msgid "Time interval blocking for User:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:178
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:180
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:182
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:166
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:168
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:170
 msgid "Time in minutes."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:180
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:168
 msgid "Time interval blocking for Affiliate:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:182
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:170
 msgid "Time interval blocking for Admin:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:184
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:172
 msgid "Various:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:186
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:174
 msgid "Send Abuse Reports by email:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:186
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:196
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:220
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:222
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:224
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:226
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:228
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:230
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:174
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:184
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:208
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:210
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:212
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:214
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:216
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:218
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/UpdateAdsForm.php:64
 msgid "Activate"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:186
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:196
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:220
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:222
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:224
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:226
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:228
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:230
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:174
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:184
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:208
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:210
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:212
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:214
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:216
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:218
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/UpdateAdsForm.php:62
 msgid "Deactivate"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:188
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:176
 msgid "IP Restriction for Admin Panel Access:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:188
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:176
 msgid ""
 "By entering <a href=\"%0%\" title=\"Get your current IP address\">your IP</"
 "a>, you will get a higher security and exclude all other people and bots "
@@ -7388,158 +7380,158 @@ msgid ""
 "contact your ISP."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:190
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:178
 msgid ""
 "Indicate a word that will replace the banned word in the <a href=\"%0%"
 "\">list</a>."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:192
-msgid "Enable or Disable the CSRF security tokens in forms:"
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:180
+msgid "Enable/Disable the CSRF security tokens for forms:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:192
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:180
 msgid ""
-"Sometime this protection can be annoying for users if there are not fast "
+"Sometimes this protection can be annoying for users if there are not fast "
 "enough to fulfill the forms. However, if disabled, your site can be "
 "vulnerable on CSRF attacks in forms."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:194
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:182
 msgid "CSRF token lifetime:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:194
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:182
 msgid "Time in seconds."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:196
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:184
 msgid "System against the DDoS attacks:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:200
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:188
 msgid "Spam:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:202
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:190
 msgid "Time Delay:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:204
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:192
 msgid "Registration delay for User"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:204
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:206
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:192
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:194
 msgid "Number of minutes for a new registration with the same IP address."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:206
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:194
 msgid "Registration delay for Affiliate"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:208
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:196
 msgid "Send Note delay"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:208
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:196
 msgid "Number of minutes for the same user to post a new note."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:210
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:198
 msgid "Send Mail delay"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:210
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:198
 msgid "Number of minutes for the same user can send a new email."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:212
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:200
 msgid "Send Comment delay"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:212
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:200
 msgid "Number of minutes for the same user can send a new comment."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:214
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:202
 msgid "Send Forum Topic delay"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:214
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:202
 msgid "Number of minutes for the same user can send a new topic in the forum."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:216
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:204
 msgid "Send Forum Message delay"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:216
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:204
 msgid ""
 "Number of minutes for the same user can send a reply message in the same "
 "topic."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:220
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:208
 msgid "Captcha for User Signup Form:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:222
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:210
 msgid "Captcha for Affiliate Signup Form:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:224
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:212
 msgid "Captcha for sending Messages between users:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:226
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:214
 msgid "Captcha for adding a Comment:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:228
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:216
 msgid "Captcha for adding or reply a message in the Forum:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:230
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:218
 msgid "Captcha for adding a User Post Note:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:232
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:220
 msgid "Pruning:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:234
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:222
 #, fuzzy
 msgid "Delete old Messages:"
 msgstr "Search a Subscriber:"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:234
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:222
 msgid "Delete messages older than X days. 0 to disable."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:236
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:224
 #, fuzzy
 msgid "Delete old Comments:"
 msgstr "Edit the Comment"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:236
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:224
 msgid "Delete comments older than X days. 0 to disable."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:238
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:226
 #, fuzzy
 msgid "Delete old IM Messages:"
 msgstr "Search a Subscriber:"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:238
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:226
 msgid "Delete IM messages older than X days. 0 to disable."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:242
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:230
 msgid "API:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:244
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:232
 msgid ""
 "You can get your key <a href=\"%0%\">here</a>. Then, select \"<strong>Google "
 "Maps JavaScript API</strong>\" for \"<em>Which API are you using</em>\" and "
@@ -7547,52 +7539,52 @@ msgid ""
 "calling the API from</em>\", then you will get your API key to paste here. "
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:246
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:234
 msgid "Google Maps API Key:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:248
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:236
 msgid "IP API:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:248
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:236
 msgid "The URL must end with a slash."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:250
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:238
 msgid "Chat API:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:250
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:252
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:238
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:240
 msgid ""
 "Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url="
 "%0%&name=%1%!#)."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:252
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:240
 msgid "Chatroulette API:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:256
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:244
 msgid "Automation:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:258
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:246
 msgid "Secret word for the cron URL:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:258
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:246
 msgid ""
 "Your very secret word for the cron URL. It will be used for running "
 "automated cron jobs."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:260
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:248
 msgid "User inactivity timeout:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:260
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/SettingForm.php:248
 msgid "The number of minutes that a member becomes inactive (offline)."
 msgstr ""
 
@@ -7650,15 +7642,15 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/DisableModuleForm.php:37
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/DisableModuleForm.php:46
 msgid "Premium Module"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/DisableModuleForm.php:38
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/DisableModuleForm.php:47
 msgid "Change the default API service by yours"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/DisableModuleForm.php:50
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/DisableModuleForm.php:59
 msgid "Save"
 msgstr ""
 
@@ -7668,51 +7660,51 @@ msgid ""
 "you easily."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:39
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:40
 msgid "Click here to show/hide the languages"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:39
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:40
 msgid "Change language for the Meta Tags"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:50
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:55
 msgid "Language:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:51
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:57
 msgid "Home page title:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:52
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:59
 msgid "Headline:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:52
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:59
 msgid "Right headline mainly displaying on the visitors homepage"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:53
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:61
 msgid "Left slogan (headline) mainly displaying on the visitors homepage"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:54
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:63
 msgid "SEO text:"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:54
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:63
 msgid "Promotional text displaying on the visitors homepage."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:60
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:75
 msgid "Rating (meta tag):"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:61
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:77
 msgid "Distribution (meta tag):"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:62
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/MetaMainForm.php:79
 msgid "Category (meta tag):"
 msgstr ""
 
@@ -7737,24 +7729,24 @@ msgstr ""
 msgid "Incorrect Login!"
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:122
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:126
 #, fuzzy
 msgid "Configurations successfully updated!"
 msgstr "Your notifications settings has been saved successfully!"
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:141
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:145
 msgid "The token lifetime cannot be below 10 seconds."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:157
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:161
 msgid "The minimum length of the username cannot exceed %0% characters."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:168
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:172
 msgid "The maximum length of the username cannot exceed %0% characters."
 msgstr ""
 
-#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:179
+#: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/processing/SettingFormProcess.php:183
 msgid "You cannot specify a minimum age higher than the maximum age."
 msgstr "You can't specify a minimum age higher than the maximum age."
 
@@ -7881,6 +7873,22 @@ msgstr ""
 msgid "secure,CMS,PHP,framework,MVC,page,HTTP"
 msgstr ""
 
+#~ msgid "No I changed my mind and I stay with you!"
+#~ msgstr "No, I changed my mind and I stay with you!"
+
+#~ msgid "Yes I really want to delete my account"
+#~ msgstr "Yes, I really want to delete my account"
+
+#, fuzzy
+#~ msgid "Profile has been saved successfully!"
+#~ msgstr "Your notifications settings has been saved successfully!"
+
+#~ msgid "The Search Members | Quick Search"
+#~ msgstr "Search Members | Quick Search"
+
+#~ msgid "The Search Members | Advanced Search"
+#~ msgstr "Search Members | Advanced Search"
+
 #, fuzzy
 #~ msgid "Become an Affiliate"
 #~ msgstr "Search a Subscriber:"
@@ -7934,10 +7942,6 @@ msgstr ""
 #~ msgstr "Search a Subscriber:"
 
 #, fuzzy
-#~ msgid "Edit Profile"
-#~ msgstr "Edit the Comment"
-
-#, fuzzy
 #~ msgid "Design Profile"
 #~ msgstr "Edit the Comment"
 
@@ -7974,10 +7978,6 @@ msgstr ""
 #~ msgstr "Search a Subscriber:"
 
 #, fuzzy
-#~ msgid "Admin Forum"
-#~ msgstr "Edit the Comment"
-
-#, fuzzy
 #~ msgid "Admin Blog"
 #~ msgstr "Search a Subscriber:"
 
@@ -7999,10 +7999,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Add Affiliate"
-#~ msgstr "Search a Subscriber:"
-
-#, fuzzy
-#~ msgid "Affiliate Fields"
 #~ msgstr "Search a Subscriber:"
 
 #, fuzzy
@@ -8043,10 +8039,6 @@ msgstr ""
 
 #, fuzzy
 #~ msgid "Moderate Video Albums"
-#~ msgstr "Search a Subscriber:"
-
-#, fuzzy
-#~ msgid "Moderate Videos"
 #~ msgstr "Search a Subscriber:"
 
 #, fuzzy
@@ -8127,10 +8119,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Add a new album"
 #~ msgstr "Add a new Comment"
-
-#, fuzzy
-#~ msgid "See %0%'s Topics"
-#~ msgstr "Search a Subscriber:"
 
 #, fuzzy
 #~ msgid "Reply on the Message"
