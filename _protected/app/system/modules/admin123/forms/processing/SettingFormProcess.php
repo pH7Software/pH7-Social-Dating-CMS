@@ -77,6 +77,7 @@ class SettingFormProcess extends Form
         'ip_login' => 'ipLogin',
         'ban_word_replace' => 'banWordReplace',
         'security_token_forms' => 'securityToken',
+        'security_token_lifetime' => 'securityTokenLifetime',
         'stop_DDoS' => 'DDoS',
 
         // Spam
