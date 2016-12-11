@@ -49,6 +49,7 @@ class SettingFormProcess extends Form
 
         // Picture and Video
         'watermark_text_image' => 'watermarkTextImage',
+        'size_watermark_text_image' => 'sizeWatermarkTextImage',
         'default_video' => 'defaultVideo',
         'autoplay_video' => 'autoplayVideo',
 
