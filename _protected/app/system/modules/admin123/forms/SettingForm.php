@@ -65,6 +65,8 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show the Latest News about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1)));
 
+        unset($oFile);
+
 
         /********** Logo Settings **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="logotype"><div class="col-md-10"><h2 class="underline">' . t('Logo:') . '</h2>'));
