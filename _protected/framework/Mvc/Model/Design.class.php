@@ -38,7 +38,11 @@ class Design extends \PH7\Framework\Layout\Html\Design
 
         foreach ($oLangs as $sLang)
         {
-            if ($sLang->langId === PH7_LANG_NAME) continue;
+            if ($sLang->langId === PH7_LANG_NAME)
+            {
+                // Skip the current lang
+                continue;
+            }
 
             // Retrieve only the first two characters
             $sAbbrLang = substr($sLang->langId,0,2);

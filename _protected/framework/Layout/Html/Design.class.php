@@ -68,15 +68,19 @@ class Design
 
         foreach ($aLangs as $sLang)
         {
-            if ($sLang === PH7_LANG_NAME) continue; // Skip the current lang
+            if ($sLang === PH7_LANG_NAME)
+            {
+                // Skip the current lang
+                continue;
+            }
 
-                // Retrieve only the first two characters
-                $sAbbrLang = substr($sLang,0,2);
+            // Retrieve only the first two characters
+            $sAbbrLang = substr($sLang,0,2);
 
-                echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
+            echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
 
-        unset($aLangs, $sCurrentPage);
+        unset($aLangs);
     }
 
     /**

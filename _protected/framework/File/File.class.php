@@ -669,6 +669,7 @@ class File
         {
             if ('.' == $sFolder || '..' == $sFolder || !is_dir($sPath . $sFolder))
                 continue;
+
             //yield $sFolder; // PHP 7
             $aRet[] = $sFolder;//remove it for yield
         }
