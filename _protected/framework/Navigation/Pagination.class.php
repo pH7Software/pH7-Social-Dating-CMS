@@ -114,16 +114,4 @@ class Pagination
             $this->_sHtmlOutput .= '</ul></nav>';
         }
     }
-
-    public function __destruct()
-    {
-        unset(
-            $this->_sPageName,
-            $this->_iTotalPages,
-            $this->_iCurrentPage,
-            $this->_iShowItems,
-            $this->_sHtmlOutput
-        );
-    }
-
 }
