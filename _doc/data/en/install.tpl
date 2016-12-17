@@ -10,9 +10,9 @@ You must transfer ALL files and folders (even license files and empty folders an
 <h3>3. For optimal security</h3>
 <p>Rename the "_protected" folder or move it outside the root of your server.</p>
 
-<h3>4. File Permissions</h3>
-<p>If your OS server is a Unix-like, you must check if the file permissions (CHMOD) are correctly configured.<br />
-In numerical values ​​that must be <em>755</em> for all folders and <em>644</em> for all files.<br />
+<h3>4. File permissions (optional)</h3>
+<p>If your OS server is a Unix-like, please check if the file permissions (CHMOD) are correctly configured.<br />
+In numerical values that must be <em>755</em> for all folders and <em>644</em> for all files.<br />
 Warning, the following folders must have <em>777</em> permissions:</p>
 <pre>~/YOUR-PUBLIC-FOLDER/</pre>
 <pre>~/YOUR-PUBLIC-FOLDER/_install/*</pre>
@@ -28,6 +28,6 @@ Warning, the following folders must have <em>777</em> permissions:</p>
 If you want to allow it, you need to set in numerical values <em>777</em> for all folders and <em>666</em> for all files.</p>
 
 <h3>5. Run the installation wizard</h3>
-<p>You just need to go to the following URL and follow the instructions carefully: <em>http://www.YOUR-SITE.com/<strong>_install</strong>/</em></p>
+<p>Go to your website URL, <em>http://YOUR-WEBSITE.com/<strong>_install</strong>/</em> and follow the instructions carefully.</p>
 
 <p><iframe height="400" src="//www.youtube.com/embed/MrCbfnS2O4s?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe></p>
