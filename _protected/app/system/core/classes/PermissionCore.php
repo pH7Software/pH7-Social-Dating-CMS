@@ -64,7 +64,7 @@ abstract class PermissionCore extends Framework\Core\Core
 
     public function adminSignInMsg()
     {
-        return t('Please go to the admin panel of the site and log in as administrator.');
+        return t('Please go to the admin panel and log in as administrator.');
     }
 
     public function alreadyConnectedMsg()
@@ -74,7 +74,7 @@ abstract class PermissionCore extends Framework\Core\Core
 
     public function signUpMsg()
     {
-        return t('Please register or login to use this service.');
+        return t('Please register or login to continue.');
     }
 
     public function upgradeMembershipMsg()
