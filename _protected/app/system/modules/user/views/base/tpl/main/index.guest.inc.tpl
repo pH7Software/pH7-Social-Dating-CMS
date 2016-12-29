@@ -7,7 +7,7 @@
 
     <div class="counter center">
     <h2 class="red3">{lang 'People love us! Realtime users using our service'}</h2>
-    {{ $userDesign->counterUsers() }}</div>
+    {{ $userDesign->userCounter() }}</div>
 </div>
 
 <div class="left col-md-8">

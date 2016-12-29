@@ -11,11 +11,11 @@ class UserDesignCore extends Framework\Layout\Html\Design
 {
 
     /**
-     * Ajax counter of the number of users registered on the site.
+     * Ajax counter endpoint to count the number of users registered on the site.
      *
      * @return void
      */
-    public function counterUsers()
+    public function userCounter()
     {
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/counter.js,Stat.js');
         echo '<div class="stat_total_users"></div>';
