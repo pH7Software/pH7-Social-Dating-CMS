@@ -46,7 +46,7 @@ The email address Users provide for order processing, will only be used to send 
 <p>&nbsp;</p>
 
 <p><strong>Google Adsense</strong></p>
-<p>Some of the ads may be served by Google. Google's use of the DART cookie enables it to serve ads to Users based on their visit to our Site and other sites on the Internet. DART uses "non personally identifiable information" and does NOT track personal information about you, such as your name, email address, physical address, etc. You may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy at <a href="http://www.google.com/privacy_ads.html">http://www.google.com/privacy_ads.html</a></p>
+<p>Some of the ads may be served by Google. Google's use of the DART cookie enables it to serve ads to Users based on their visit to our Site and other sites on the Internet. DART uses "non personally identifiable information" and does NOT track personal information about you, such as your name, email address, physical address, etc. You may opt out of the use of the DART cookie by visiting the Google ad and content network privacy policy at <a href="https://www.google.com/policies/technologies/ads/">https://www.google.com/policies/technologies/ads/</a></p>
 <p>&nbsp;</p>
 
 <p><strong>Compliance with children's online privacy protection act</strong></p>
