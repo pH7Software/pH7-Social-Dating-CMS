@@ -172,7 +172,7 @@ class Browser
      */
     public static function favicon($sUrl)
     {
-        $sApiUrl = 'http://www.google.com/s2/favicons?domain=';
+        $sApiUrl = 'https://www.google.com/s2/favicons?domain=';
         $sDomainName = \PH7\Framework\Http\Http::getHostName($sUrl);
 
         return $sApiUrl . $sDomainName;
