@@ -49,7 +49,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Splash Homepage:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page (recommended) for visitors (not logged), otherwise the classic page will be used. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Profile Photos on the homepage:'), 'users_block', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Display or not the newest users on the homepage. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Display Users on Homepage:'), 'users_block', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Display or not the newest users on the homepage. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', array('description' => t('The number of profiles displayed on the profiles block of the Splash Homepage. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
 
