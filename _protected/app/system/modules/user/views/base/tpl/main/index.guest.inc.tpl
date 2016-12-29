@@ -11,31 +11,33 @@
 </div>
 
 <div class="left col-md-8">
-  <div class="folio_block">
-    <h1 class="red3 italic underline">{slogan}</h1>
+    <div class="folio_block">
+        <h1 class="red3 italic underline">{slogan}</h1>
 
-    <div class="splash_slideshow">
-      <div class="window">
-        <div class="img_reel">
-          {for $i in [1,2,3,4,5]}
-            <a href="{url_root}"><img src="{url_tpl_img}slideshow/{i}.jpg" alt="{lang 'Social Dating Web App'}" /></a>
-          {/for}
+        <div class="splash_slideshow">
+            <div class="window">
+                <div class="img_reel">
+                    {for $i in [1,2,3,4,5]}
+                        <a href="{url_root}"><img src="{url_tpl_img}slideshow/{i}.jpg" alt="{lang 'Social Dating Web App'}" /></a>
+                    {/for}
+                </div>
+            </div>
+            <div class="paging">
+                <a href="#" rel="1">1</a>
+                <a href="#" rel="2">2</a>
+                <a href="#" rel="3">3</a>
+                <a href="#" rel="4">4</a>
+                <a href="#" rel="5">5</a>
+            </div>
         </div>
-      </div>
-      <div class="paging">
-        <a href="#" rel="1">1</a>
-        <a href="#" rel="2">2</a>
-        <a href="#" rel="3">3</a>
-        <a href="#" rel="4">4</a>
-        <a href="#" rel="5">5</a>
-      </div>
     </div>
-  </div>
 
-  <div class="block_txt">
-    <h2>{lang 'Meet people in %0% with %site_name%!', $design->geoIp(false)}</h2>
-    {promo_text}
-  </div>
+    <div class="block_txt">
+        <h2>{lang 'Meet people in %0% with %site_name%!', $design->geoIp(false)}</h2>
+        {promo_text}
+    </div>
 
-  <div class="carousel">{{ $userDesignModel->carouselProfiles() }}</div>
+    {if $is_users_block}
+        <div class="carousel">{{ $userDesignModel->carouselProfiles() }}</div>
+    {/if}
 </div>

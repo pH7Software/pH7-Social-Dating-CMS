@@ -26,6 +26,8 @@ class MainController extends Controller
 
         // For Profiles Carousel
         $this->view->userDesignModel = new UserDesignCoreModel;
+
+        // For user counter
         $this->view->userDesign = new UserDesignCore;
 
         // Only visitors
@@ -33,6 +35,8 @@ class MainController extends Controller
         {
             // To check if the site is called by a Mobile or Mobile Native App
             $this->_bIsMobile = $this->view->is_mobile = (MobApp::is($this->httpRequest, $this->session) || $this->browser->isMobile());
+
+            $this->view->is_users_block = DbConfig::getSetting('usersBlock');
 
             // Background video is used only for the Splash page
             if ($this->_getGuestTplPage() === static::GUEST_SPLASH_FILE)
