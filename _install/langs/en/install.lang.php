@@ -64,7 +64,8 @@ $LANG = array(
     'db_username' => 'Database username',
     'db_password' => 'Database password',
     'db_prefix' => 'Prefix for tables in database',
-    'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7CMS on the same database. We recommend that you change the default values ​​in order to increase the security.',
+    'desc_db_prefix' => 'This option is useful when you have multiple installations of pH7CMS on the same database.
+        We recommend that you change the default values ​​in order to increase the security of your website.',
     'db_encoding' => 'Encoding',
     'desc_db_encoding' => 'Database encoding. Usually UTF8 encoding for international.',
     'db_port' => 'Database host port number',
@@ -134,7 +135,7 @@ $LANG = array(
     'note_able_to_change_niche_settings_later' => 'Please note that you will be able to change the template and enable/disable the modules later in your admin panel.',
     'looking_hosting' =>'Looking for a Web host compatible with pH7CMS? See <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">our Web Hosting List</a>!',
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
-    Please enable JavaScript via the options of your Web browser in order to use this website.',
+        Please enable JavaScript via the options of your Web browser in order to use this website.',
     'powered' => 'Powered by',
     'loading' => 'Loading...',
 );
