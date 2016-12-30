@@ -427,7 +427,7 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','index') }}" title="{lang 'General Tools'}"><i class="fa fa-database"></i> {lang 'Tools'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}"><i class="fa fa-eye"></i> {lang 'Environment Mode'}</a></li>
-            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{lang 'Caches Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-tachometer"></i> {lang 'Caches Manager'}</a>
+            <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{lang 'Caches Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-tachometer"></i> {lang 'Caches'}</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cache') }}" title="{lang 'Caches Controls'}">{lang 'Caches Manager'}</a></li>
                 <li><a href="{{ $design->url(PH7_ADMIN_MOD,'tool','cacheconfig') }}" title="{lang 'Cache Settings'}">{lang 'Cache Setting'}</a></li>
