@@ -4,6 +4,7 @@ div.content {
     padding: 1em;
     float: left;
     width:100%;
+    background-color: #fff;
 }
 div.content.inactive {
     display: none;
