@@ -12,7 +12,7 @@
  * @license        Lesser General Public License (LGPL) (http://www.gnu.org/copyleft/lesser.html)
  * @language       (PHP) and (HTML5 + CSS)
  * @since          2011/10/25
- * @version        Last revision: 2013/09/14
+ * @version        Last revision: 2016/12/08
  */
 
 defined('PH7') or exit('Restricted access');
