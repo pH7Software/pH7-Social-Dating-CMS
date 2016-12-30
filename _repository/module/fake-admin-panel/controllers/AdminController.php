@@ -4,7 +4,7 @@
  * @desc           Configuring the honeypot and viewing log.
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License <http://www.gnu.org/licenses/gpl.html>
  * @package        PH7 / App / Module / Fake Admin Panel / Controller
  * @version        1.1.0
