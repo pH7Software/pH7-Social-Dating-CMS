@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2016, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
@@ -47,7 +47,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Map Type:'), 'map_type', array('roadmap' => t('Roadmap (default)'), 'hybrid' => t('Hybrid'), 'terrain' => t('Terrain'), 'satellite' => t('Satellite')), array('value' => DbConfig::getSetting('mapType'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Display Users on Homepage:'), 'users_block', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Display or not the newest users on the homepage. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Display Users on Guest Homepage:'), 'users_block', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Display or not the newest users on the homepage for visitors. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', array('description' => t('The number of profiles displayed on the profiles block of the Splash Homepage. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
 
@@ -61,9 +61,9 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Social Media Widgets:'), 'social_media_widgets', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable the Social Media Sharing such as Like and Sharing buttons.'), 'value' => DbConfig::getSetting('socialMediaWidgets'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Adult Disclaimer:'), 'disclaimer', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show an Adult Warning to enter to the site. This is useful for sites with adult content.'), 'value' => DbConfig::getSetting('disclaimer'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Adult Disclaimer:'), 'disclaimer', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show an Adult Warning to enter to your website. This is useful for websites with adult content. <br /><strong>Note: this disclaimer offered by a third-party provider may sometimes open a new tab promoting a third-party adult website.</strong>'), 'value' => DbConfig::getSetting('disclaimer'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable a Cookie Consent Bar to prevent your users that your site uses cookies. This is required for EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Cookie Consent Bar:'), 'cookie_consent_bar', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Enable a Cookie Consent Bar to prevent your users that your website uses cookies. This is required for EU Law (if you have visitors from EU countries). The Cookie Bar will only be displayed if the visitor is in the EU.'), 'value' => DbConfig::getSetting('cookieConsentBar'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Show the News Feed:'), 'is_software_news_feed', array(1 => t('Enable'), 0 => t('Disable')), array('description' => t('Show the Latest News about the software in the admin dashboard (recommend).'), 'value' => DbConfig::getSetting('isSoftwareNewsFeed'), 'required' => 1)));
 
@@ -75,7 +75,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo', array('description' => t('Add your small logo/icon that represents/distinguishes your site/concept/brand the best.'), 'accept' => 'image/*')));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'logo.png?v=' . File::version(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png') . '" alt="' . t('Logo') . '" title="' . t('The current logo of your site.') . '" /></p>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'logo.png?v=' . File::version(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png') . '" alt="' . t('Logo') . '" title="' . t('The current logo of your website.') . '" /></p>'));
 
 
         /********** Registration **********/
@@ -179,7 +179,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Indicate a word that will replace the banned word in the <a href="%0%">list</a>.', Uri::get(PH7_ADMIN_MOD, 'file', 'protectededit', 'app/configs/bans/word.txt', false)), 'ban_word_replace', array('value' => DbConfig::getSetting('banWordReplace'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Enable/Disable the CSRF security tokens for forms:'), 'security_token_forms', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Sometimes this protection can be annoying for users if there are not fast enough to fulfill the forms. However, if disabled, your site can be vulnerable on CSRF attacks in forms.'), 'value' => DbConfig::getSetting('securityToken'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Enable/Disable the CSRF security tokens for forms:'), 'security_token_forms', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Sometimes this protection can be annoying for users if there are not fast enough to fulfill the forms. However, if disabled, your website can be vulnerable on CSRF attacks in forms.'), 'value' => DbConfig::getSetting('securityToken'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('CSRF token lifetime:'), 'security_token_lifetime', array('description' => t('Time in seconds.'), 'value' => DbConfig::getSetting('securityTokenLifetime'), 'required' => 1)));
 
