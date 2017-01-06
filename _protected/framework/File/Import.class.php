@@ -1,7 +1,6 @@
 <?php
 /**
- * @title            Import Class
- * @desc             Importing files.
+ * Helper to importing files.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
@@ -12,15 +11,15 @@
 namespace PH7\Framework\File;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Pattern\Statik;
+
 class Import
 {
-
     /**
-     * Private constructor to prevent instantiation of class since it is a private class.
-     *
-     * @access private
+     * Import the trait to set the class static.
+     * The trait sets constructor/clone private to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
     /**
      * Import only Class or Interface of the "pH7Framework" (without dot).
@@ -125,12 +124,4 @@ class Import
         else
             throw new Exception('\'' . $sFile . '\' not found!');
     }
-
-    /**
-     * Block cloning.
-     *
-     * @access private
-     */
-    private function __clone() {}
-
 }

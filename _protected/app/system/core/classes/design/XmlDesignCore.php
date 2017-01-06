@@ -7,16 +7,15 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Pattern\Statik, PH7\Framework\Mvc\Router\Uri;
 
 class XmlDesignCore
 {
     /**
-     * @constructor
-     * @desc Private constructor to prevent instantiation of class since it's a static class.
-     * @access private
+     * Import the trait to set the class static.
+     * The trait sets constructor/clone private to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
     public static function xslHeader()
     {
@@ -72,7 +71,7 @@ class XmlDesignCore
 
             if (sizeof($aNews) > 0)
             {
-                foreach($aNews as $aItems)
+                foreach ($aNews as $aItems)
                 {
                     echo '<h4><a href="', $aItems['link'], '" target="_blank">', escape($aItems['title'], true), '</a></h4>';
                     echo '<p>', escape($aItems['description'], true), '</p>';
@@ -85,8 +84,11 @@ class XmlDesignCore
         }
         catch (Framework\Error\CException\PH7Exception $oE)
         {
-            (new Framework\Layout\Html\Design)->setFlashMsg(t("It seems you don't have Internet connection or the remote URL is temporarily unavailable. Some features on the admin panel won't be available."), 'error');
+            (new Framework\Layout\Html\Design)
+            ->setFlashMsg(
+                t("It seems you don't have Internet connection or the remote URL is temporarily unavailable. Some features on the admin panel won't be available."),
+                'error'
+            );
         }
-
     }
 }

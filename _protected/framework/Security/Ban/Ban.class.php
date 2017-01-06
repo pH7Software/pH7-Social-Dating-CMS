@@ -1,7 +1,6 @@
 <?php
 /**
- * @title            Ban Class
- * @desc             Method for managing the banishment of pH7CMS.
+ * Method for managing the banishment of pH7CMS.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
@@ -13,9 +12,10 @@
 namespace PH7\Framework\Security\Ban;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Pattern\Statik;
+
 class Ban
 {
-
     const
     DIR = 'bans/',
     USERNAME_FILE = 'username.txt',
@@ -27,11 +27,10 @@ class Ban
     private static $_sFile, $_sVal, $_bIsEmail = false;
 
     /**
-     * Private constructor to prevent instantiation of class since it is a private class.
-     *
-     * @access private
+     * Import the trait to set the class static.
+     * The trait sets constructor/clone private to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
     /**
      * Checks if the username is not a banned username.
@@ -142,5 +141,4 @@ class Ban
 
         return in_array($sVal, array_map('trim', $aBans));
     }
-
 }

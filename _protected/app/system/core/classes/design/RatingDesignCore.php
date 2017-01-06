@@ -7,18 +7,19 @@
  */
 namespace PH7;
 
-use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Layout\Html\Design, PH7\Framework\Pattern\Statik;
 
 class RatingDesignCore
 {
     /**
-     * @desc Block constructing to prevent instantiation of class since it's a static class.
-     * @access private
+     * Import the trait to set the class static.
+     * The trait sets constructor/clone private to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
     /**
-     * @desc Generates design the voting system.
+     * Generates design the voting system.
+     *
      * @param integer $iId Unique ID of the column of the table. EX: ID of 'profileId' column for the 'Members' table.
      * @param string $sTable See the list of data tables available in the class: PH7\Framework\Mvc\Model\Engine\Util\Various::checkTable().
      * @param string $sCssClass Default value is empty. You can add the name of a CSS class (attention, only its name) e.g. 'center'.
@@ -44,10 +45,10 @@ class RatingDesignCore
               <script>$(".', $sPHSClass, '").pHRating({length:5,decimalLength:1,rateMax:5});</script>';
 
         /**
-         * Redirectionne the member to the registration page if not logged.
-         * For security, a check on the server side ajax is already present, but javascript code allows this purpose the visitor to enter more Easily.
+         * Redirectionne the member to the registration page if not logged in.
+         * For security, a check on to ajax server side is already present, but this JS code allows the visitor to login easier.
          */
-        if(!UserCore::auth())
+        if (!UserCore::auth())
         {
             $sUrl = Framework\Mvc\Router\Uri::get('user','signup','step1','?msg=' . t('Please join for free to vote that'), false);
             echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'', $sUrl, '\'});</script>';

@@ -7,21 +7,20 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Url
- * @version          1.0
  */
 
 namespace PH7\Framework\Url;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Pattern\Statik;
+
 class Url
 {
-
     /**
-     * Private constructor to prevent instantiation of class since it is a private class.
-     *
-     * @access private
+     * Import the trait to set the class static.
+     * The trait sets constructor/clone private to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
     /**
      * URL-encodes string.
@@ -75,5 +74,4 @@ class Url
     {
         return http_build_query($aParams, $sNumericPrefix, $sArgSeparator, $iEncType);
     }
-
 }
