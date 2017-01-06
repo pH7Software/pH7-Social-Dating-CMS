@@ -24,7 +24,7 @@ abstract class WriteDesignCoreModel
 
         $sContents = '';
 
-        echo '<p>', t('Categories:'), '<span class="small italic">';
+        echo '<p class="small">', t('Categories:'), ' <span class="italic">';
 
         foreach ($oCategories as $oCategory)
             $sContents .= '<a href="' . Uri::get($sMod, 'main', 'category', $oCategory->name, ',title,asc') . '" data-load="ajax">' . $oCategory->name . '</a> &bull; ';
