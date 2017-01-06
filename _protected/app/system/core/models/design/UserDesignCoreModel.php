@@ -157,7 +157,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
         }
         else
         {
-            $iStatus =  $oUserModel->getUserStatus($iProfileId);
+            $iStatus = $oUserModel->getUserStatus($iProfileId);
             $sImgName = ($iStatus == 2 ? 'busy' : ($iStatus == 3 ? 'away' : 'offline'));
             $sTxt = ($iStatus == 2 ? t('Busy') : ($iStatus == 3 ? t('Away') : t('Offline')));
 
