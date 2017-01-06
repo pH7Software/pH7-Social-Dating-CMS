@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 abstract class WriteDesignCoreModel
 {
-
     /**
      * Generate the categories links.
      *
@@ -38,5 +37,4 @@ abstract class WriteDesignCoreModel
         echo $sContents;
         echo '</span></p>';
     }
-
 }

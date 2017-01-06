@@ -9,7 +9,6 @@ namespace PH7;
 
 class UserDesignCore extends Framework\Layout\Html\Design
 {
-
     /**
      * Ajax counter endpoint to count the number of users registered on the site.
      *
@@ -20,5 +19,4 @@ class UserDesignCore extends Framework\Layout\Html\Design
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/counter.js,Stat.js');
         echo '<div class="stat_total_users"></div>';
     }
-
 }

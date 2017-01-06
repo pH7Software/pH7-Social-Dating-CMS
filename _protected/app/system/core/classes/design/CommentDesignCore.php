@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class CommentDesignCore
 {
-
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
      *
@@ -43,5 +42,4 @@ class CommentDesignCore
         }
         echo '</p>';
     }
-
 }

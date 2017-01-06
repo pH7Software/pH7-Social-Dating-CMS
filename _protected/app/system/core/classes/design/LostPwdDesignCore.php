@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class LostPwdDesignCore
 {
-
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
      *
@@ -35,5 +34,4 @@ class LostPwdDesignCore
         else
             return $sHtml;
     }
-
 }

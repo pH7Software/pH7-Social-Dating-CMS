@@ -22,9 +22,8 @@ PH7\Framework\File\File;
 
 class VideoDesignCore
 {
-
     /**
-     * Block constructing.
+     * Static class, block constructor.
      *
      * @access private
      */
@@ -102,7 +101,5 @@ class VideoDesignCore
             else
                 echo $sVideoTag;
         }
-
     }
-
 }

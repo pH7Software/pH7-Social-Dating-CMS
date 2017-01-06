@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class XmlDesignCore
 {
-
     /**
      * @constructor
      * @desc Private constructor to prevent instantiation of class since it's a static class.
@@ -90,5 +89,4 @@ class XmlDesignCore
         }
 
     }
-
 }

@@ -11,9 +11,8 @@ use PH7\Framework\Layout\Html\Design;
 
 class RatingDesignCore
 {
-
     /**
-     * @desc Block constructing to prevent instantiation of class since it is a private class.
+     * @desc Block constructing to prevent instantiation of class since it's a static class.
      * @access private
      */
     private function __construct() {}
@@ -54,5 +53,4 @@ class RatingDesignCore
             echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'', $sUrl, '\'});</script>';
         }
     }
-
 }
