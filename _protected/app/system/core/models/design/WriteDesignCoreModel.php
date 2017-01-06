@@ -32,7 +32,10 @@ abstract class WriteDesignCoreModel
 
         unset($oCategories);
 
-        echo substr($sContents, 0, -8);
+        // Remove the last " &bull; " since not needed for the last category
+        $sContents = rtrim($sContents, ' &bull; ');
+
+        echo $sContents;
         echo '</span></p>';
     }
 
