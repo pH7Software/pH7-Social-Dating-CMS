@@ -18,7 +18,6 @@ class CommentCore
      */
     use Statik;
 
-
     /**
      * Check table.
      *

@@ -12,7 +12,6 @@ namespace PH7;
 
 class AvatarDesignCore extends Framework\Layout\Html\Design
 {
-
     private $_oUser;
 
     public function __construct()
@@ -78,11 +77,4 @@ class AvatarDesignCore extends Framework\Layout\Html\Design
         }
         echo '<div class="picture_block"><a href="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" title="', ucfirst($sUsername), '" data-popup="image"><img src="', $this->getUserAvatar($sUsername, $sSex, $iSize / 2), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" class="img_picture" /></a></div>';
     }
-
-    public function __destruct()
-    {
-        parent::__destruct();
-        unset($this->_oUser);
-    }
-
 }

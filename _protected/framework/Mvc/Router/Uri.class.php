@@ -1,34 +1,30 @@
 <?php
 /**
- * @title            Uri Router Class
- * @desc             Uri Router for the URL rewrite
+ * Uri Router for URLs rewrite.
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Router
- * @version          1.0
  */
 
 namespace PH7\Framework\Mvc\Router;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Parse\Url;
+use PH7\Framework\Pattern\Statik, PH7\Framework\Parse\Url;
 
 class Uri
 {
-
     /**
      * @staticvar boolean $_bFullClean If you need to completely clean URL.
      */
     private static $_bFullClean;
 
     /**
-     * Private constructor to prevent instantiation of class since it is a private class.
-     *
-     * @access private
+     * Import the trait to set the class static.
+     * The trait sets constructor/clone private to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
     /**
      * Load route file.
@@ -139,5 +135,4 @@ class Uri
 
         return $sContents;
     }
-
 }

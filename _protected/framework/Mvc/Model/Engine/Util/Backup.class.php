@@ -23,7 +23,6 @@ PH7\Framework\Mvc\Model\Engine\Db;
 
 class Backup
 {
-
     private $_sPathName, $_sSql;
 
     /**
@@ -240,5 +239,4 @@ class Backup
         echo $sBuffer;
         exit;
     }
-
 }

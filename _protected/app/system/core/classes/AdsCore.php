@@ -7,15 +7,15 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http, PH7\Framework\Pattern\Statik;
 
 class AdsCore extends Framework\Ads\Ads
 {
-
     /**
-     * Block constructing to prevent instantiation of class since it's a private class.
+     * Import the trait to set the class static.
+     * The trait sets constructor/clone private to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
     /**
      * Gets Ads Table.
@@ -72,5 +72,4 @@ class AdsCore extends Framework\Ads\Ads
 
         return $sId;
     }
-
 }

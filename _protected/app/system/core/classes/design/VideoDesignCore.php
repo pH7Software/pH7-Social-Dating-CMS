@@ -18,17 +18,16 @@ use
 PH7\Framework\Date\Various,
 PH7\Framework\Video\Api,
 PH7\Framework\Mvc\Model\DbConfig,
+PH7\Framework\Pattern\Statik,
 PH7\Framework\File\File;
 
 class VideoDesignCore
 {
-
     /**
-     * Block constructing.
-     *
-     * @access private
+     * Import the trait to set the class static.
+     * The trait sets constructor/clone private to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
     /**
      * Generates HTML contents Video.
@@ -102,7 +101,5 @@ class VideoDesignCore
             else
                 echo $sVideoTag;
         }
-
     }
-
 }

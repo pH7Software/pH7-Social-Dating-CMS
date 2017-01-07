@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 abstract class WriteDesignCoreModel
 {
-
     /**
      * Generate the categories links.
      *
@@ -25,15 +24,17 @@ abstract class WriteDesignCoreModel
 
         $sContents = '';
 
-        echo '<p>', t('Categories:'), '<span class="small italic">';
+        echo '<p class="small">', t('Categories:'), ' <span class="italic">';
 
         foreach ($oCategories as $oCategory)
             $sContents .= '<a href="' . Uri::get($sMod, 'main', 'category', $oCategory->name, ',title,asc') . '" data-load="ajax">' . $oCategory->name . '</a> &bull; ';
 
         unset($oCategories);
 
-        echo substr($sContents, 0, -8);
+        // Remove the last " &bull; " since not needed for the last category
+        $sContents = rtrim($sContents, ' &bull; ');
+
+        echo $sContents;
         echo '</span></p>';
     }
-
 }

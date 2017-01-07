@@ -7,17 +7,15 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Pattern\Statik, PH7\Framework\Mvc\Router\Uri;
 
 class LostPwdDesignCore
 {
-
     /**
-     * Private constructor to prevent instantiation of class since it's a static class.
-     *
-     * @access private
+     * Import the trait to set the class static.
+     * The trait sets constructor/clone private to prevent instantiation.
      */
-    private function __construct() {}
+    use Statik;
 
     /**
      * Get the "forgot password" link.
@@ -35,5 +33,4 @@ class LostPwdDesignCore
         else
             return $sHtml;
     }
-
 }
