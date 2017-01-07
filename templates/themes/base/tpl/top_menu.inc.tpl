@@ -352,10 +352,10 @@
             </li>
 
             {if $is_mail_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('mail','admin','index') }}" title="{lang 'Member Email Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o"></i> {lang 'Email Manager'}</a>
+              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('mail','admin','index') }}" title="{lang 'Member Mails Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-envelope-o"></i> {lang 'Mail Manager'}</a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('mail','admin','msglist') }}" title="{lang 'Messages Monitor'}">{lang 'Messages Monitor'}</a></li>
-                  <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search Email'}">{lang 'Search Message'}</a></li>
+                  <li><a href="{{ $design->url('mail','admin','msglist') }}" title="{lang 'Member Messages Monitor'}">{lang 'Messages Monitor'}</a></li>
+                  <li><a href="{{ $design->url('mail','main','search') }}" title="{lang 'Search Member Messages'}">{lang 'Search Messages'}</a></li>
                 </ul>
               </li>
             {/if}
