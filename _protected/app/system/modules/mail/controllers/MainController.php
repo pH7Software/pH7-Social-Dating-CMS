@@ -297,7 +297,7 @@ class MainController extends Controller
             $this->sMsg = t('Your message does not exist anymore.');
         }
 
-        $sUrl = ($this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage());
+        $sUrl = $this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage();
         Header::redirect($sUrl, $this->sMsg, $this->_getStatusType());
     }
 
@@ -320,7 +320,7 @@ class MainController extends Controller
             }
         }
 
-        $sUrl = ($this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage());
+        $sUrl = $this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage();
         Header::redirect($sUrl, $this->sMsg);
     }
 
@@ -343,6 +343,6 @@ class MainController extends Controller
      */
     private function _getStatusType()
     {
-        return ($this->_bStatus) ? self::SUCCESS_TYPE : self::ERROR_TYPE;
+        return $this->_bStatus ? self::SUCCESS_TYPE : self::ERROR_TYPE;
     }
 }
