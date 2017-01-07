@@ -153,27 +153,27 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Login Attempt Protection') . '</h3>'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for User:'), 'is_user_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isUserLoginAttempt'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Users:'), 'is_user_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isUserLoginAttempt'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Affiliate:'), 'is_affiliate_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Affiliates:'), 'is_affiliate_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Admin:'), 'is_admin_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isAdminLoginAttempt'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Admins:'), 'is_admin_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isAdminLoginAttempt'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for User:'), 'max_user_login_attempts', array('value' => DbConfig::getSetting('maxUserLoginAttempts'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Users:'), 'max_user_login_attempts', array('value' => DbConfig::getSetting('maxUserLoginAttempts'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Affiliate:'), 'max_affiliate_login_attempts', array('value' => DbConfig::getSetting('maxAffiliateLoginAttempts'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Affiliates:'), 'max_affiliate_login_attempts', array('value' => DbConfig::getSetting('maxAffiliateLoginAttempts'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Admin:'), 'max_admin_login_attempts', array('value' => DbConfig::getSetting('maxAdminLoginAttempts'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Admins:'), 'max_admin_login_attempts', array('value' => DbConfig::getSetting('maxAdminLoginAttempts'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for User:'), 'login_user_attempt_time', array('description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginUserAttemptTime'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Users:'), 'login_user_attempt_time', array('description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginUserAttemptTime'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Affiliate:'), 'login_affiliate_attempt_time', array('description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginAffiliateAttemptTime'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Affiliates:'), 'login_affiliate_attempt_time', array('description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginAffiliateAttemptTime'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Admin:'), 'login_admin_attempt_time', array('description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginAdminAttemptTime'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Admins:'), 'login_admin_attempt_time', array('description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginAdminAttemptTime'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Various') . '</h3>'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Send Abuse Reports by email:'), 'send_report_mail', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('sendReportMail'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Send Abuse Reports by email:'), 'send_report_mail', array('1' => t('Yes'), '0' => t('No')), array('value' => DbConfig::getSetting('sendReportMail'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('IP Restriction for Admin Panel Access:'), 'ip_login', array('description' => t('By entering <a href="%0%" title="Get your current IP address">your IP</a>, you will get a higher security and exclude all other people and bots that tried to login with another IP address even if the login is correct! Leave blank to disable this feature. Be careful, for using this feature you need to have a static IP (not a dynamic one). If you are not sure, please contact your ISP.', Ip::api()), 'value' => DbConfig::getSetting('ipLogin'))));
 
@@ -191,19 +191,19 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Time Delay') . '</h3>'));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for User'), 'time_delay_user_registration', array('description' => t('Number of minutes for a new registration with the same IP address.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Users:'), 'time_delay_user_registration', array('description' => t('Number of minutes for a new registration with the same IP address.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Affiliate'), 'time_delay_aff_registration', array('description' => t('Number of minutes for a new registration with the same IP address.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for Affiliates:'), 'time_delay_aff_registration', array('description' => t('Number of minutes for a new registration with the same IP address.'), 'value' => DbConfig::getSetting('timeDelayAffRegistration'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Send Note delay'), 'time_delay_send_note', array('description' => t('Number of minutes for the same user to post a new note.'), 'value' => DbConfig::getSetting('timeDelaySendNote'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Send Note delay:'), 'time_delay_send_note', array('description' => t('Number of minutes for the same user to post a new note.'), 'value' => DbConfig::getSetting('timeDelaySendNote'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Send Mail delay'), 'time_delay_send_mail', array('description' => t('Number of minutes for the same user can send a new email.'), 'value' => DbConfig::getSetting('timeDelaySendMail'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Send Mail delay:'), 'time_delay_send_mail', array('description' => t('Number of minutes for the same user can send a new email.'), 'value' => DbConfig::getSetting('timeDelaySendMail'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Send Comment delay'), 'time_delay_send_comment', array('description' => t('Number of minutes for the same user can send a new comment.'), 'value' => DbConfig::getSetting('timeDelaySendComment'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Send Comment delay:'), 'time_delay_send_comment', array('description' => t('Number of minutes for the same user can send a new comment.'), 'value' => DbConfig::getSetting('timeDelaySendComment'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Send Forum Topic delay'), 'time_delay_send_forum_topic', array('description' => t('Number of minutes for the same user can send a new topic in the forum.'), 'value' => DbConfig::getSetting('timeDelaySendForumTopic'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Send Forum Topic delay:'), 'time_delay_send_forum_topic', array('description' => t('Number of minutes for the same user can send a new topic in the forum.'), 'value' => DbConfig::getSetting('timeDelaySendForumTopic'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Send Forum Message delay'), 'time_delay_send_forum_msg', array('description' => t('Number of minutes for the same user can send a reply message in the same topic.'), 'value' => DbConfig::getSetting('timeDelaySendForumMsg'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Send Forum Message delay:'), 'time_delay_send_forum_msg', array('description' => t('Number of minutes for the same user can send a reply message in the same topic.'), 'value' => DbConfig::getSetting('timeDelaySendForumMsg'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Captcha') . '</h3>'));
 
