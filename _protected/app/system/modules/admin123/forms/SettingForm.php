@@ -33,7 +33,7 @@ class SettingForm
 
 
         /********** General Settings **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="content" id="general"><div class="col-md-10"><h2 class="underline">' . t('Global Settings:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="content" id="general"><div class="col-md-10"><h2 class="underline">' . t('Global Settings') . '</h2>'));
 
         $oFile = new File;
 
@@ -71,7 +71,7 @@ class SettingForm
 
 
         /********** Logo Settings **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="logotype"><div class="col-md-10"><h2 class="underline">' . t('Logo:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="logotype"><div class="col-md-10"><h2 class="underline">' . t('Logo') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo', array('description' => t('Add your small logo/icon that represents/distinguishes your site/concept/brand the best.'), 'accept' => 'image/*')));
 
@@ -79,7 +79,7 @@ class SettingForm
 
 
         /********** Registration **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="registration"><div class="col-md-10"><h2 class="underline">' . t('Registration:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="registration"><div class="col-md-10"><h2 class="underline">' . t('Registration') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Members:'), 'user_activation_type', array('1' => t('No activation required'), '2' => t('Self activation via email'), '3' => t('Manual activation by administrator')), array('value' => DbConfig::getSetting('userActivationType'), 'required' => 1)));
 
@@ -97,15 +97,15 @@ class SettingForm
 
 
         /********** Picture and Video **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="pic_vid"><div class="col-md-10"><h2 class="underline">' . t('Picture and Video:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="pic_vid"><div class="col-md-10"><h2 class="underline">' . t('Picture and Video') . '</h2>'));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image:') . '</h3>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Image') . '</h3>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Watermark Text:'), 'watermark_text_image', array('value' => DbConfig::getSetting('watermarkTextImage'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Watermark Size:'), 'size_watermark_text_image', array('description' => t('Between 0 to 5.'), 'min' => 0, 'max' => 5, 'value' => DbConfig::getSetting('sizeWatermarkTextImage'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Video:') . '</h3>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Video') . '</h3>'));
 
         $oForm->addElement(new \PFBC\Element\Url(t('Default Video:'), 'default_video', array('description' => t('Video by default if no video is found.'), 'value' => DbConfig::getSetting('defaultVideo'), 'required' => 1)));
 
@@ -113,7 +113,7 @@ class SettingForm
 
 
         /********** Moderation **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="moderation"><div class="col-md-10"><h2 class="underline">' . t('Moderation:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="moderation"><div class="col-md-10"><h2 class="underline">' . t('Moderation') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Nudity Filter:'), 'nudity_filter', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Photos will be automatically pending approval if there are detected as "Nude/Adult Photos"'), 'value' => DbConfig::getSetting('nudityFilter'), 'required' => 1)));
 
@@ -131,7 +131,7 @@ class SettingForm
 
 
         /********** Email **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="email"><div class="col-md-10"><h2 class="underline">' . t('Email Parameters:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="email"><div class="col-md-10"><h2 class="underline">' . t('Email Parameters') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Email Name:'), 'email_name', array('value' => DbConfig::getSetting('emailName'), 'required' => 1)));
 
@@ -143,27 +143,27 @@ class SettingForm
 
 
         /********** Security **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="security"><div class="col-md-10"><h2 class="underline">' . t('Security:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="security"><div class="col-md-10"><h2 class="underline">' . t('Security') . '</h2>'));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Password:') . '</h3>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Password') . '</h3>'));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Minimum password length:'), 'min_password_length', array('value' => DbConfig::getSetting('minPasswordLength'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Maximum password length:'), 'max_password_length', array('value' => DbConfig::getSetting('maxPasswordLength'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Blocking login attempts exceeded:') . '</h3>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Login Attempt Protection') . '</h3>'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Enable blocking for User:'), 'is_user_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isUserLoginAttempt'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for User:'), 'is_user_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isUserLoginAttempt'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Enable blocking for Affiliate:'), 'is_affiliate_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Affiliate:'), 'is_affiliate_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isAffiliateLoginAttempt'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Enable blocking for Admin:'), 'is_admin_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isAdminLoginAttempt'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Blocking login attempts exceeded for Admin:'), 'is_admin_login_attempt', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('isAdminLoginAttempt'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Max login attempts before blocking for User:'), 'max_user_login_attempts', array('value' => DbConfig::getSetting('maxUserLoginAttempts'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for User:'), 'max_user_login_attempts', array('value' => DbConfig::getSetting('maxUserLoginAttempts'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Max login attempts before blocking for Affiliate:'), 'max_affiliate_login_attempts', array('value' => DbConfig::getSetting('maxAffiliateLoginAttempts'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Affiliate:'), 'max_affiliate_login_attempts', array('value' => DbConfig::getSetting('maxAffiliateLoginAttempts'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Max login attempts before blocking for Admin:'), 'max_admin_login_attempts', array('value' => DbConfig::getSetting('maxAdminLoginAttempts'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Max number of login attempts before blocking for Admin:'), 'max_admin_login_attempts', array('value' => DbConfig::getSetting('maxAdminLoginAttempts'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for User:'), 'login_user_attempt_time', array('description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginUserAttemptTime'), 'required' => 1)));
 
@@ -171,7 +171,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Time interval blocking for Admin:'), 'login_admin_attempt_time', array('description' => t('Time in minutes.'), 'value' => DbConfig::getSetting('loginAdminAttemptTime'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Various:') . '</h3>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Various') . '</h3>'));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Send Abuse Reports by email:'), 'send_report_mail', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('sendReportMail'), 'required' => 1)));
 
@@ -187,9 +187,9 @@ class SettingForm
 
 
         /********** Spam **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="spam"><div class="col-md-10"><h2 class="underline">' . t('Spam:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="spam"><div class="col-md-10"><h2 class="underline">' . t('Spam') . '</h2>'));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Time Delay:') . '</h3>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Time Delay') . '</h3>'));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Registration delay for User'), 'time_delay_user_registration', array('description' => t('Number of minutes for a new registration with the same IP address.'), 'value' => DbConfig::getSetting('timeDelayUserRegistration'), 'required' => 1)));
 
@@ -205,7 +205,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Send Forum Message delay'), 'time_delay_send_forum_msg', array('description' => t('Number of minutes for the same user can send a reply message in the same topic.'), 'value' => DbConfig::getSetting('timeDelaySendForumMsg'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Captcha:') . '</h3>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Captcha') . '</h3>'));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for User Signup Form:'), 'is_captcha_user_signup', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaUserSignup'), 'required' => 1)));
 
@@ -219,7 +219,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Captcha for adding a User Post Note:'), 'is_captcha_note', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('isCaptchaNote'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Pruning:') . '</h3>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><h3 class="underline">' . t('Pruning') . '</h3>'));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Delete old Messages:'), 'clean_msg', array('description' => t('Delete messages older than X days. 0 to disable.'), 'value' => DbConfig::getSetting('cleanMsg'), 'required' => 1)));
 
@@ -229,7 +229,7 @@ class SettingForm
 
 
         /********** API **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="api"><div class="col-md-10"><h2 class="underline">' . t('API:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="api"><div class="col-md-10"><h2 class="underline">' . t('API') . '</h2>'));
 
         $sGoogleApiKeyDesc = t('You can get your key <a href="%0%">here</a>. Then, select "<strong>Google Maps JavaScript API</strong>" for "<em>Which API are you using</em>" and "<strong>Web browser (Javascript)</strong>" for "<em>Where will you be calling the API from</em>", then you will get your API key to paste here. ', 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true');
 
@@ -243,7 +243,7 @@ class SettingForm
 
 
         /********** Automation **********/
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="automation"><div class="col-md-10"><h2 class="underline">' . t('Automation:') . '</h2>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="automation"><div class="col-md-10"><h2 class="underline">' . t('Automation') . '</h2>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Secret word for the cron URL:'), 'cron_security_hash', array('description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(1,64))));
 
