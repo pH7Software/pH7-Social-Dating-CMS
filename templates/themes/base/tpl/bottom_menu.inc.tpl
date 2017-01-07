@@ -1,4 +1,4 @@
-    <nav class="bottom_nav" role="navigation">
+    <nav class="bottom_nav">
 
       <div role="listbox" class="dropdown_menu ft_dm">
         <span class="dropdown_item_css">
