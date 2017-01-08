@@ -1037,6 +1037,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     }
 
     /**
+     * Get the Profile ID of a user.
+     *
      * @param string $sEmail Default NULL
      * @param string $sUsername Default NULL
      * @param string $sTable Default 'Members'

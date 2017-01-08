@@ -21,7 +21,7 @@ class Security
      * @param integer $iMaxAttempts
      * @param integer $iAttemptTime
      * @param string $sIp IP address
-     * @param string $sTo Email address to send the message.
+     * @param string $sTo Email address of the user to send the message.
      * @param object \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl $oView
      * @param string $sTable Default 'Members'
      * @return void
