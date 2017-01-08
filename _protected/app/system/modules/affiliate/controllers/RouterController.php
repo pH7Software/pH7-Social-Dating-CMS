@@ -9,7 +9,6 @@ namespace PH7;
 
 class RouterController extends Controller
 {
-
     /**
      * Set the reference to the visitor.
      *
@@ -17,11 +16,12 @@ class RouterController extends Controller
      */
     public function refer()
     {
-        if ($this->httpRequest->getExists('aff'))
-            if ((new ExistsCoreModel)->username($this->httpRequest->get('aff'), 'Affiliates'))
+        if ($this->httpRequest->getExists('aff')) {
+            if ((new ExistsCoreModel)->username($this->httpRequest->get('aff'), 'Affiliates')) {
                 (new Affiliate)->addRefer($this->httpRequest->get('aff'));
+            }
+        }
 
         Framework\Url\Header::redirect($this->registry->site_url . $this->httpRequest->get('action'));
     }
-
 }

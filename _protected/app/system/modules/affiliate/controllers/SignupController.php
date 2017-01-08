@@ -9,7 +9,6 @@ namespace PH7;
 
 class SignupController extends Controller
 {
-
     private $sTitle;
 
     public function step1()
@@ -21,5 +20,4 @@ class SignupController extends Controller
 
         $this->output();
     }
-
 }

@@ -6,11 +6,11 @@
  * @package        PH7 / App / System / Module / Affiliate / Controller
  */
 namespace PH7;
+
 use PH7\Framework\Navigation\Page;
 
 class AdsController extends Controller
 {
-
     private $sTitle;
 
     public function index()
@@ -28,5 +28,4 @@ class AdsController extends Controller
         $this->view->h3_title = nt('%n% Banner', '%n% Banners', $iTotalAds);
         $this->output();
     }
-
 }

@@ -9,7 +9,6 @@ namespace PH7;
 
 class HomeController extends Controller
 {
-
     private $sTitle;
 
     public function __construct()
@@ -26,11 +25,13 @@ class HomeController extends Controller
         $this->view->page_title = t('Affiliate Platform with %site_name%! Dating Social Affiliate');
         $this->view->h1_title = t('Affiliate Platform - %site_name%');
 
-        if (Affiliate::auth())
+        if (Affiliate::auth()) {
             $this->view->h3_title = t('Hi <em>%0%</em>. Welcome back to your affiliate area!', $this->session->get('affiliate_first_name'));
+        }
 
-        if (!Affiliate::auth())
+        if (!Affiliate::auth()) {
             $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'style.css');
+        }
 
         $this->output();
     }
@@ -56,5 +57,4 @@ class HomeController extends Controller
     {
         (new Affiliate)->logout();
     }
-
 }

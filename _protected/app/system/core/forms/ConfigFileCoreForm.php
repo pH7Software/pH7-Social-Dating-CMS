@@ -14,7 +14,6 @@ use PH7\Framework\Str\Str, PH7\Framework\Registry\Registry;
 
 class ConfigFileCoreForm
 {
-
     const CONFIG_FILE = 'config.ini';
 
     /**
@@ -61,5 +60,4 @@ class ConfigFileCoreForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

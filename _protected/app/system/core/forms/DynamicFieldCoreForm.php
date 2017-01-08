@@ -12,7 +12,6 @@ defined('PH7') or exit('Restricted access');
 
 class DynamicFieldCoreForm
 {
-
     private $_oForm, $_sColumn, $_sVal;
 
     /**
@@ -145,5 +144,4 @@ class DynamicFieldCoreForm
 
         return $sType;
     }
-
 }

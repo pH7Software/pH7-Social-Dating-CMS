@@ -11,7 +11,6 @@ defined('PH7') or exit('Restricted access');
 /** For "user" and "affiliate" module **/
 class DeleteUserCoreForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_delete_account']))
@@ -33,5 +32,4 @@ class DeleteUserCoreForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

@@ -13,7 +13,6 @@ use PH7\Framework\Mvc\Model\DbConfig;
 /** For "user" and "affiliate" module **/
 class ResendActivationCoreForm
 {
-
     public static function display($sTable = 'Members')
     {
         // Show the form only if the activation mode is activated by email
@@ -41,5 +40,4 @@ class ResendActivationCoreForm
             $oForm->render();
         }
     }
-
 }

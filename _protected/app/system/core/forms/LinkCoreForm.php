@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mvc\Router\Uri;
 
 class LinkCoreForm
 {
-
    /**
     * @param string $sLabel Link name of submit form
     * @param string $sModule
@@ -36,5 +35,4 @@ class LinkCoreForm
         $oForm->addElement(new \PFBC\Element\Submit($sLabel));
         $oForm->render();
     }
-
 }
