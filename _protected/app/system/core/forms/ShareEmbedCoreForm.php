@@ -9,14 +9,13 @@ namespace PH7;
 
 class ShareEmbedCoreForm
 {
-
     /**
      * Embed code
      *
      * @param string $sFileUrl
-     * @param integer $iEmbedWidth Width of the embed code. Default: 580
-     * @param integer $iEmbedHeight Height of the embed code. Default: 450
-     * @param integer $iWidth Width of the form in pixel. Default: NULL
+     * @param integer $iEmbedWidth Width of the embed code.
+     * @param integer $iEmbedHeight Height of the embed code.
+     * @param integer $iWidth Width of the form in pixel.
      * @return void
      */
     public static function display($sFileUrl, $iEmbedWidth = 580, $iEmbedHeight = 450, $iWidth = null)
