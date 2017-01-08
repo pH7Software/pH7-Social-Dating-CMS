@@ -14,13 +14,13 @@ class ShareUrlCoreForm
     /**
      * @param $sUrl The URL to share. If you enter nothing, it will be the current URL.
      * @param integer $iWidth Width of the form in pixel.
-     * @param boolean $bIsShareUrlLabel If TURE, it shows 'Share URL:' label beside the field.
+     * @param boolean $bShowShareUrlLabel If TURE, it shows 'Share URL:' label beside the field.
      * @return void
      */
-    public static function display($sUrl = null, $iWidth = null, $bIsShareUrlLabel = true)
+    public static function display($sUrl = null, $iWidth = null, $bShowShareUrlLabel = true)
     {
         $sUrl = !empty($sUrl) ? $sUrl : (new Http)->currentUrl();
-        $sLabel = $bIsShareUrlLabel ? t('Share URL:') : '';
+        $sLabel = $bShowShareUrlLabel ? t('Share URL:') : '';
 
         $oForm = new \PFBC\Form('form_share_url', $iWidth);
         $oForm->configure(array('class' => 'center'));
