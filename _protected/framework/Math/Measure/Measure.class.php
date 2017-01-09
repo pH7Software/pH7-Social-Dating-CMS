@@ -14,7 +14,6 @@ defined('PH7') or exit('Restricted access');
 
 abstract class Measure
 {
-
     protected $iUnit;
 
     /**
@@ -26,5 +25,4 @@ abstract class Measure
     {
         $this->iUnit = $iUnit;
     }
-
 }

@@ -14,7 +14,6 @@ defined('PH7') or exit('Restricted access');
 
 class Year implements IMeasure
 {
-
     protected $iYear, $iMonth, $iDay, $iTimestamp;
 
     /**
@@ -23,7 +22,7 @@ class Year implements IMeasure
      * @param integer $iBirthYear
      * @param integer $iBirthMonth
      * @param integer $iBirthDay
-     * @param integer $iTimestamp Optional, You can set another date for the calculation of his age. By default age is checked against the current date.
+     * @param integer $iTimestamp You can optionally set another date for the calculation of the age. By default age is checked against the current date.
      */
     public function __construct($iBirthYear, $iBirthMonth, $iBirthDay, $iTimestamp = null)
     {
@@ -51,5 +50,4 @@ class Year implements IMeasure
 
         return (int) $iAge;
     }
-
 }

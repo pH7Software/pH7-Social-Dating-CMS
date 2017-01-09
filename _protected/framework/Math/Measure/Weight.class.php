@@ -14,7 +14,6 @@ defined('PH7') or exit('Restricted access');
 
 class Weight extends Measure implements IMeasure
 {
-
     /**
      * Converts a weight value given in kilograms to stones / pounds.
      *
@@ -45,5 +44,4 @@ class Weight extends Measure implements IMeasure
         else
             return $sWeightTxt;
     }
-
 }

@@ -14,12 +14,10 @@ defined('PH7') or exit('Restricted access');
 
 interface IMeasure
 {
-
     /**
      * Get measure.
      *
      * @return integer
      */
     public function get();
-
 }

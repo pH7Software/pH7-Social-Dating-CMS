@@ -14,7 +14,6 @@ defined('PH7') or exit('Restricted access');
 
 class Height extends Measure implements IMeasure
 {
-
     /**
      * Converts a height value given in centimeters to feet / inches.
      *
@@ -47,5 +46,4 @@ class Height extends Measure implements IMeasure
         else
             return $sHeightTxt;
     }
-
 }
