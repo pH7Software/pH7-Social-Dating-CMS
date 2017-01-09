@@ -19,7 +19,7 @@ class VisitorController extends Controller
         parent::__construct();
 
         /**
-         *  If the user is connected, we get his session 'member_username' otherwise we get the username of the url.
+         *  If the user is logged in, we get their 'member_username' session, otherwise we get the username from the URL
          */
         $this->sUsername = (!$this->httpRequest->getExists('username')) ? $this->session->get('member_username') : $this->httpRequest->get('username');
 

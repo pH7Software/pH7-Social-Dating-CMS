@@ -87,7 +87,7 @@ class UserController extends MainController
                 // Add 'profile_id' key into the array
                 $aData['profile_id'] = $this->oUserModel->add($aData);
 
-                // Displays the new user info and his ID
+                // Display the new user's details and ID
                 $this->oRest->response($this->set($aData));
             }
         }

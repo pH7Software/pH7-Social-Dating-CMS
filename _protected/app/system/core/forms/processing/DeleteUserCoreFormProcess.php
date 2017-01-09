@@ -41,7 +41,7 @@ class DeleteUserCoreFormProcess extends Form
     }
 
     /**
-     * Send an email to the site administrator saying the reason why a user wanted to delete his account from the site.
+     * Send an email to the admin saying the reason why a user wanted to delete their account.
      *
      * @return integer
      */
