@@ -272,7 +272,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      */
     public function __isset($sKey)
     {
-        return (isset($this->_aVars[$sKey]));
+        return isset($this->_aVars[$sKey]);
     }
 
     /**
@@ -570,7 +570,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      */
     public function getVar($sVarName)
     {
-        return (isset($this->_aVars[$sVarName]) ? $this->_aVars[$sVarName] : '');
+        return isset($this->_aVars[$sVarName]) ? $this->_aVars[$sVarName] : '';
     }
 
     /**
@@ -899,7 +899,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function checkDesignInstance()
     {
-        return (!empty($this->_aVars['design']) && $this->_aVars['design'] instanceof \PH7\Framework\Layout\Html\Design);
+        return !empty($this->_aVars['design']) && $this->_aVars['design'] instanceof \PH7\Framework\Layout\Html\Design;
     }
 
     /**
@@ -930,7 +930,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isSmallMarkCopyright()
     {
-        return (false !== strpos($this->sCode, 'design->smallLink()'));
+        return false !== strpos($this->sCode, 'design->smallLink()');
     }
 
     /**
@@ -941,7 +941,8 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function notBaseTheme()
     {
-        return (false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) && false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)'));
+        return false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) &&
+          false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)');
     }
 
     /**
