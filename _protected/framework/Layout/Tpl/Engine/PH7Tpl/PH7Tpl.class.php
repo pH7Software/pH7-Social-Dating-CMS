@@ -942,7 +942,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     final private function notBaseTheme()
     {
         return false === strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) &&
-          false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)');
+            false !== strpos($this->sCode, '$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)');
     }
 
     /**
