@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="_tests/Unit/bootstrap.php" colors="true">
+    <testsuites>
+        <testsuite name="pH7CMS Protected">
+            <directory>_tests/Unit</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">_protected</directory>
+            <exclude>
+                <directory>_protected/library</directory>
+                <directory>_protected/vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="coverage"/>
+    </logging>
+</phpunit>
