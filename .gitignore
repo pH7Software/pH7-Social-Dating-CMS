@@ -1,4 +1,3 @@
-_tests/*
 _install/_license-key.txt
 _install/data/caches/smarty_cache/*
 _install/data/caches/smarty_compile/*
