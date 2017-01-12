@@ -15,6 +15,7 @@ _protected/data/backup/*
 _protected/data/cache/*
 _protected/vendor/cache/*
 composer.phar
+phpunit.phar
 *.log
 *.tmp
 
