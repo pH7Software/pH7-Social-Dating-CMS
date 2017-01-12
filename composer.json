@@ -34,8 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "PH7\\Test\\Unit\\": "_tests/Unit",
-            "PH7\\Framework\\": "_protected/framework"
+            "PH7\\Test\\": "_tests"
         }
     }
 }

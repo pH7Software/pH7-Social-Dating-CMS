@@ -54,6 +54,8 @@ function run() {
             rm ./.travis.yml
             rm ./composer.lock
             rm ./composer.phar
+            rm ./phpunit.phar
+            rm ./phpunit.xml.dist
             rm ./_install/_license-key.txt
             rm ./_protected/app/configs/config.ini
 
