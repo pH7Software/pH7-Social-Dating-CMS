@@ -8,7 +8,10 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Session\Session;
+use
+PH7\Framework\Security\CSRF\Token,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Session\Session;
 
 class Comment
 {
@@ -16,7 +19,7 @@ class Comment
 
     public function __construct()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('comment'))
+        if (!(new Token)->check('comment'))
             exit(jsonMsg(0, Form::errorTokenMsg()));
 
         /** Instance objects for the class * */
