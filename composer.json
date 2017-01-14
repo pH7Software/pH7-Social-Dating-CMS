@@ -26,7 +26,18 @@
         "swiftmailer/swiftmailer": "^5.4",
         "ph-7/qrcode-generator-php-class": "^2.0",
         "robthree/twofactorauth": "^1.4",
-        "facebook/graph-sdk": "^5.3"
+        "facebook/graph-sdk": "^5.3",
+        "ext-curl": "*",
+        "ext-zip": "*",
+        "ext-zlib": "*",
+        "ext-mbstring": "*",
+        "ext-exif": "*",
+        "ext-dom": "*",
+        "ext-xml": "*",
+        "ext-json": "*",
+        "ext-gd": "*",
+        "ext-hash": "*",
+        "ext-pdo_mysql": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.5",
