@@ -14,12 +14,17 @@ namespace PH7\Framework\Security;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Util\Various;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 final class Security
 {
     const PWD_ALGORITHM = PASSWORD_BCRYPT;
+    const SHA512_ALGORITHM = 'sha512';
+    const WHIRLPOOL_ALGORITHM = 'whirlpool';
 
-    /*** Our salts. Never change these values​​, otherwise all passwords and other strings will be incorrect ***/
+    /*** Our salts. Never change these values, otherwise all passwords and other strings will be incorrect ***/
     const PREFIX_SALT = 'c好，你今Здраврыве ты ў паітаньне е54йте天rt&eh好嗎_dمرحبا أنت بخير ال好嗎attú^u5atá inniu4a,?478привіなたは大丈夫今日はтивпряьоהעלאai54ng_scси днесpt';
     const SUFFIX_SALT = '*éà12_you_è§§=≃ù%µµ££$);&,?µp{èàùf*sxdslut_waruआप नमस्क你好，你今ार ठΓει好嗎α σαςb안녕하세oi요 괜찮은 o नमस्कार ठीnjre;,?*-<καλά σήμεραीक आजсегодняm_54tjהעלאdgezsядкمرحبا';
 
@@ -33,38 +38,39 @@ final class Security
     /**
      * Generate Random Salt for Password encryption.
      *
-     * @param string $sPwd
+     * @param string $sPassword
      * @return string The Hash Password
      */
-    public static function hashPwd($sPwd)
+    public static function hashPwd($sPassword)
     {
-        return password_hash($sPwd , self::PWD_ALGORITHM, self::$_aPwdOptions);
+        return password_hash($sPassword , self::PWD_ALGORITHM, self::$_aPwdOptions);
     }
 
     /**
      * Check the password.
      *
-     * @param string $sPwd
+     * @param string $sPassword
      * @param string $sHash
      * @return boolean
      */
-    public static function checkPwd($sPwd, $sHash)
+    public static function checkPwd($sPassword, $sHash)
     {
-        return password_verify($sPwd, $sHash);
+        return password_verify($sPassword, $sHash);
     }
 
     /**
      * Checks if the given hash matches the given options.
      *
-     * @param string $sPwd
+     * @param string $sPassword
      * @param string $sHash
      *
-     * @return mixed (string | boolean) Returns the new password if the password needs to be rehash, otherwise FALSE
+     * @return string|boolean Returns the new password if the password needs to be rehash, otherwise FALSE
      */
-    public static function pwdNeedsRehash($sPwd, $sHash)
+    public static function pwdNeedsRehash($sPassword, $sHash)
     {
-        if (password_needs_rehash($sHash, self::PWD_ALGORITHM, self::$_aPwdOptions))
-            return self::hashPwd($sPwd);
+        if (password_needs_rehash($sHash, self::PWD_ALGORITHM, self::$_aPwdOptions)) {
+            return self::hashPwd($sPassword);
+        }
 
         return false;
     }
@@ -74,11 +80,11 @@ final class Security
      *
      * @param string $sPassword
      * @param integer $iLength Default: 40
-     * @return string The Password Hash
+     * @return string The password hashed.
      */
-    public static function hashCookie($sPwd, $iLength = 40)
+    public static function hashCookie($sPassword, $iLength = 40)
     {
-        return self::userHash($sPwd, $iLength);
+        return self::userHash($sPassword, $iLength);
     }
 
     /**
@@ -90,23 +96,28 @@ final class Security
      */
     public static function hash($sVal, $iLength = 80)
     {
-        return Various::padStr(hash('whirlpool', hash('sha512', self::PREFIX_SALT . hash('whirlpool', self::PREFIX_SALT)) . hash('whirlpool', $sVal) . hash('sha512', hash('whirlpool', self::SUFFIX_SALT) . self::SUFFIX_SALT)), $iLength);
+        return Various::padStr(
+            hash(self::WHIRLPOOL_ALGORITHM, hash(self::SHA512_ALGORITHM, self::PREFIX_SALT . hash(self::WHIRLPOOL_ALGORITHM, self::PREFIX_SALT)) . hash(self::WHIRLPOOL_ALGORITHM, $sVal) . hash(self::SHA512_ALGORITHM, hash(self::WHIRLPOOL_ALGORITHM, self::SUFFIX_SALT) . self::SUFFIX_SALT)),
+             $iLength
+         );
     }
 
     /**
      * Generate a user hash.
      *
-     * @param string $sPassword
+     * @param string $sVal
      * @param integer $iLength
-     * @param string $sAlgo The algorithm. Only 'whirlpool' or 'sha512' is accepted.
+     * @param string $sAlgo The algorithm. Only 'whirlpool' or 'sha512' are accepted.
      * @return string
+     * @throws PH7InvalidArgumentException
      */
-    public static function userHash($sVal, $iLength, $sAlgo = 'whirlpool')
+    public static function userHash($sVal, $iLength, $sAlgo = self::WHIRLPOOL_ALGORITHM)
     {
-        if ($sAlgo !== 'whirlpool' && $sAlgo !== 'sha512')
-            exit('Wrong algorithm! Please choose between "whirlpool" or "sha512"');
+        if ($sAlgo !== self::WHIRLPOOL_ALGORITHM && $sAlgo !== self::SHA512_ALGORITHM) {
+            throw new PH7InvalidArgumentException('Wrong algorithm! Please choose between "whirlpool" or "sha512"');
+        }
 
-        $sSalt = self::PREFIX_SALT . \PH7\Framework\Ip\Ip::get() . self::SUFFIX_SALT . (new \PH7\Framework\Navigation\Browser)->getUserAgent();
+        $sSalt = self::PREFIX_SALT . Ip::get() . self::SUFFIX_SALT . (new Browser)->getUserAgent();
         return hash_pbkdf2($sAlgo, $sVal, $sSalt, 10000, $iLength);
     }
 }
