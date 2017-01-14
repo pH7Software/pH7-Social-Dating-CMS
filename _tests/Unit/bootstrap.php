@@ -17,7 +17,7 @@ if (!ini_get('date.timezone')) {
 
 define('PH7_ENCODING', 'utf-8');
 define('PH7_PATH_PROTECTED', dirname(dirname(__DIR__)) . '/_protected/');
-define('PH7_PATH_FRAMEWORK', PH7_PATH_PROTECTED . '/framework/');
+define('PH7_PATH_FRAMEWORK', PH7_PATH_PROTECTED . 'framework/');
 
 require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
 
