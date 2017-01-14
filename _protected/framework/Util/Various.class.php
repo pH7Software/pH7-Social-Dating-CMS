@@ -13,8 +13,13 @@
 namespace PH7\Framework\Util;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Str\Str;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Navigation\Browser;
+
 class Various
 {
+    const MAX_LENGTH = 40;
 
     /**
      * Generate Random.
@@ -24,10 +29,10 @@ class Various
      * @param integer $iLength Default is 40 Characters.
      * @return string
      */
-    public static function genRnd($sStr = null, $iLength = 40)
+    public static function genRnd($sStr = null, $iLength = self::MAX_LENGTH)
     {
         $sStr = (!empty($sStr)) ? (string) $sStr : '';
-        $sChars = hash('whirlpool', hash('whirlpool', uniqid(mt_rand(), true) . $sStr . \PH7\Framework\Ip\Ip::get() . time()) . hash('sha512', (new \PH7\Framework\Navigation\Browser)->getUserAgent() . microtime(true)*9999));
+        $sChars = hash('whirlpool', hash('whirlpool', uniqid(mt_rand(), true) . $sStr . Ip::get() . time()) . hash('sha512', (new Browser)->getUserAgent() . microtime(true)*9999));
         return self::padStr($sChars, $iLength);
     }
 
@@ -39,10 +44,10 @@ class Various
      * @param integer $iLength
      * @return string
      */
-    public static function padStr($sStr, $iLength = 40)
+    public static function padStr($sStr, $iLength = self::MAX_LENGTH)
     {
         $iLength = (int) $iLength;
-        return ((new \PH7\Framework\Str\Str)->length($sStr) >= $iLength) ? substr($sStr, 0, $iLength) : str_pad($sStr, $iLength, $sStr);
+        return ((new Str)->length($sStr) >= $iLength) ? substr($sStr, 0, $iLength) : str_pad($sStr, $iLength, $sStr);
     }
 
     /**
@@ -73,7 +78,7 @@ class Various
         // Get the next whole word of the right length in the file
         do
         {
-            $iWordLength = (new \PH7\Framework\Str\Str)->length($sWord);
+            $iWordLength = (new Str)->length($sWord);
 
             if (feof($rHandle)) fseek($rHandle, 0); // if at end, go to start
 
@@ -90,5 +95,4 @@ class Various
         $iRandNumber = mt_rand(0, 999);
         return $sWord . $iRandNumber;
     }
-
 }
