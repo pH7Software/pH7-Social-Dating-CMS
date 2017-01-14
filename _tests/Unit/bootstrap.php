@@ -10,6 +10,12 @@ use PH7\Framework\Loader\Autoloader as FrameworkLoader;
 
 define('PH7', 1);
 
+define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');
+if (!ini_get('date.timezone')) {
+    date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
+}
+
+define('PH7_ENCODING', 'utf-8');
 define('PH7_PATH_PROTECTED', dirname(dirname(__DIR__)) . '/_protected/');
 define('PH7_PATH_FRAMEWORK', PH7_PATH_PROTECTED . '/framework/');
 
