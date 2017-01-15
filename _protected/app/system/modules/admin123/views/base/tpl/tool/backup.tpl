@@ -5,7 +5,7 @@
 
     {if !empty($msg_success)}
       <tr>
-        <td><p class="green1 bold">{msg_success}</p></td>
+        <td class="green1 bold">{msg_success}</td>
       </tr>
     {/if}
 
@@ -89,8 +89,8 @@
 
     <tr>
       <td class="border vs_padd">
-        <label for="sql_file">{lang 'Please select a SQL file (extension ".sql" or compressed archive ".gz")'}
-        <input type="file" name="sql_file" id="sql_file" accept=".sql,.gz" /></label>
+        <label for="sql_file">{lang 'Please select a SQL file (extension ".sql" or compressed archive ".gz")'}</label>
+        <input type="file" name="sql_file" id="sql_file" accept=".sql,.gz" class="center"/>
 
         <input type="submit" name="restore_sql_file" value="{lang 'Restore'}" />
       </td>
