@@ -39,7 +39,7 @@ class FriendModel extends FriendCoreModel
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         if ($mPending !== 'all') $rStmt->bindValue(':pending', $mPending, \PDO::PARAM_INT);
         $rStmt->execute();
-        return ($rStmt->fetchColumn() > 0) ? true : false;
+        return $rStmt->fetchColumn() > 0;
     }
 
     /**
