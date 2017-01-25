@@ -84,7 +84,7 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
         $rExists = Db::getInstance()->prepare('SELECT COUNT(' . $sColumn . ') FROM' . Db::prefix($sTable) . 'WHERE ' . $sColumn . ' = :column ' . $sParam . ' LIMIT 1');
         $rExists->bindValue(':column', $sValue, $sType);
         $rExists->execute();
-        return ($rExists->fetchColumn() == 1);
+        return $rExists->fetchColumn() === 1;
     }
 
 }

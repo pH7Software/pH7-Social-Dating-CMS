@@ -82,7 +82,7 @@ class CommentModel extends CommentCoreModel
            $rStmt = Db::getInstance()->prepare('SELECT COUNT(' . lcfirst($sTable) . 'Id) FROM' . Db::prefix($sNewTable) . 'WHERE ' . lcfirst($sTable)  . 'Id = :id LIMIT 1');
            $rStmt->bindValue(':id',$iId, \PDO::PARAM_INT);
            $rStmt->execute();
-           $bData = ($rStmt->fetchColumn()==1);
+           $bData = ($rStmt->fetchColumn() === 1);
            Db::free($rStmt);
            $this->cache->put($bData);
        }
@@ -122,7 +122,7 @@ class CommentModel extends CommentCoreModel
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
-        return ($rStmt->rowCount() === 0);
+        return $rStmt->rowCount() === 0;
     }
 
 }

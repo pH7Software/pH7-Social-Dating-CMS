@@ -26,6 +26,6 @@ class TwoFactorAuthCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt = Db::getInstance()->prepare('SELECT isTwoFactorAuth FROM' . Db::prefix($this->sTable) . 'WHERE profileId = :profileId AND isTwoFactorAuth = \'1\' LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
-        return ($rStmt->fetchColumn() == 1);
+        return $rStmt->fetchColumn() === 1;
     }
 }
