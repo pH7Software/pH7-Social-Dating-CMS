@@ -98,7 +98,7 @@ function validate_username($sUsername, $iMin = 3, $iMax = 30)
 {
     if (mb_strlen($sUsername) < $iMin) return 1;
     elseif (mb_strlen($sUsername) > $iMax) return 2;
-    elseif (preg_match('/[^\w]+$/', $sUsername)) return 3;
+    elseif (!preg_match('/^[\w-]+$/', $sUsername)) return 3;
     else return 0;
 }
 
