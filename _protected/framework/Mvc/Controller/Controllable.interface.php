@@ -11,7 +11,7 @@ namespace PH7\Framework\Mvc\Controller;
 defined('PH7') or exit('Restricted access');
 
 // The prototypes of the methods
-interface IController
+interface Controllable
 {
 
     /**

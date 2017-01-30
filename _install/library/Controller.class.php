@@ -12,7 +12,7 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-abstract class Controller implements IController
+abstract class Controller implements Controllable
 {
     const
     SOFTWARE_NAME = 'pH7CMS',
