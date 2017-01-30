@@ -13,28 +13,26 @@
 namespace PH7\Framework\Config;
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+
 /**
  * @class Singleton Class
  */
-class Config implements IConfig
+class Config implements Configurable
 {
-
     const DEVELOPMENT_MODE = 'development', PRODUCTION_MODE = 'production';
 
     /**
-     * @access public
      * @var array $values;
      */
     public $values = array();
 
    /**
-    * @access private
     * @var string $_sConfigAppFilePath
     */
     private $_sConfigAppFilePath;
 
     /**
-     * @access private
      * @var string $_sConfigAppFilePath
      */
     private $_sConfigSysFilePath;
@@ -46,8 +44,6 @@ class Config implements IConfig
 
     /**
      * Set to private so nobody can create a new instance using new.
-     *
-     * @access private
      */
     private function __construct()
     {
@@ -60,7 +56,6 @@ class Config implements IConfig
     /**
      * Load ini file.
      *
-     * @access public
      * @param string $sFile
      * @return boolean Returne FALSE if the file doesn't exist, TRUE otherwise.
      */
@@ -76,7 +71,6 @@ class Config implements IConfig
     /**
      * Get a config option by key.
      *
-     * @access public
      * @param string $sKey The configuration setting key.
      * @return string
      */
@@ -86,9 +80,25 @@ class Config implements IConfig
     }
 
     /**
+     * Set dynamically a value to config data.
+     *
+     * @param string $sKey A unique config key.
+     * @param string $sValue The value to add.
+     * @return void
+     * @throws PH7InvalidArgumentException
+     */
+    public function setValue($sKey, $sValue)
+    {
+        if (!array_key_exists($sKey, $this->values)) {
+            $this->values[$sKey] = $sValue;
+        } else {
+            throw new PH7InvalidArgumentException(sprintf('%s already exists. You cannot reassign a config key.', $sKey));
+        }
+    }
+
+    /**
      * Set Production Mode site.
      *
-     * @access public
      * @return void
      */
     public function setProductionMode()
@@ -99,7 +109,6 @@ class Config implements IConfig
     /**
      * Set Development Mode site.
      *
-     * @access public
      * @return void
      */
     public function setDevelopmentMode()
@@ -110,7 +119,6 @@ class Config implements IConfig
     /**
      * Set a Mode (Generic method).
      *
-     * @access private
      * @param string $sReplace The Mode site.
      * @see PH7\Framework\Config\Config::setProductionMode()
      * @see PH7\Framework\Config\Config::setDevelopmentMode()
@@ -138,7 +146,6 @@ class Config implements IConfig
     /**
      * Read Config File.
      *
-     * @access private
      * @return void
      */
     private function _read()
@@ -154,13 +161,4 @@ class Config implements IConfig
         define('PH7_DEFAULT_THEME', $this->values['application']['default_theme']);
         define('PH7_DEFAULT_LANG', $this->values['application']['default_lang']);
     }
-
-    /**
-     * @access public
-     */
-    public function __destruct()
-    {
-        unset($this->values, $this->_sConfigAppFilePath, $this->_sConfigSysFilePath);
-    }
-
 }

@@ -9,11 +9,13 @@
 namespace PH7\Framework\Config;
 
 // The prototypes of the methods
-interface IConfig
+interface Configurable
 {
 
     public function load($sFile);
 
     public function getValue($sKey);
+
+    public function setValue($sKey, $sValue);
 
 }
