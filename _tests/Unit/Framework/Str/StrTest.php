@@ -14,7 +14,7 @@ class StrTest extends \PHPUnit_Framework_TestCase
 {
     private $oStr;
 
-    public function setUp()
+    protected function setUp()
     {
         $this->oStr = new Str;
     }
