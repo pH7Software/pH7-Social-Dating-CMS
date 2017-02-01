@@ -15,7 +15,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class EditAdminBlogForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_edit_blog']))
@@ -32,21 +31,21 @@ class EditAdminBlogForm
         $sPostId = $oBlogModel->getPostId($iBlogId);
         $oPost = $oBlogModel->readPost($sPostId);
 
-        if (!empty($oPost) && (new Str)->equals($iBlogId, $oPost->blogId))
-        {
+        if (!empty($oPost) && (new Str)->equals($iBlogId, $oPost->blogId)) {
             $oCategoryData = $oBlogModel->getCategory(null, 0, 300);
 
             $aCategoryNames = array();
-            foreach ($oCategoryData as $oId)
+            foreach ($oCategoryData as $oId) {
                 $aCategoryNames[$oId->categoryId] = $oId->name;
+            }
 
             $aSelectedCategories = array();
             $oCategoryIds = $oBlogModel->getCategory($iBlogId, 0, 300);
             unset($oBlogModel);
 
-            foreach ($oCategoryIds as $oId)
+            foreach ($oCategoryIds as $oId) {
                 $aSelectedCategories[] = $oId->categoryId;
-
+            }
 
             $oForm = new \PFBC\Form('form_blog');
             $oForm->configure(array('action' => ''));
@@ -85,5 +84,4 @@ class EditAdminBlogForm
         else
             echo '<p class="center bold">' . t('Post Not Found!') . '</p>';
     }
-
 }

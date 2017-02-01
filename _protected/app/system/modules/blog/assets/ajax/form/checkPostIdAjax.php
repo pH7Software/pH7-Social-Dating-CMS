@@ -14,7 +14,8 @@ $oHttpRequest = new Http;
 $iStatus = 0; // Error Default Value
 
 if ($oHttpRequest->postExists('post_id')) {
-    $iStatus = ((new Blog)->checkPostId($oHttpRequest->post('post_id'))) ? 1 : 0;
+    $iPostId = $oHttpRequest->post('post_id');
+    $iStatus = (new Blog)->checkPostId($iPostId, new BlogModel) ? 1 : 0;
 }
 
 echo json_encode(array('status' => $iStatus));

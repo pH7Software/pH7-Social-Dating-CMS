@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class AdminBlogForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_blog']))
@@ -25,8 +24,9 @@ class AdminBlogForm
         $oCategoryData = (new BlogModel)->getCategory(null, 0, 300);
 
         $aCategoryNames = array();
-        foreach ($oCategoryData as $oId)
+        foreach ($oCategoryData as $oId) {
             $aCategoryNames[$oId->categoryId] = $oId->name;
+        }
 
         $oForm = new \PFBC\Form('form_blog');
         $oForm->configure(array('action' => ''));
@@ -53,5 +53,4 @@ class AdminBlogForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_TPL_SYS_MOD . 'blog/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'));
         $oForm->render();
     }
-
 }

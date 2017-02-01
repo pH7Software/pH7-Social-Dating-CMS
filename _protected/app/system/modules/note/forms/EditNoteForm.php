@@ -16,10 +16,8 @@ PH7\Framework\Mvc\Router\Uri;
 
 class EditNoteForm
 {
-
     public static function display()
     {
-
         if (isset($_POST['submit_edit_note']))
         {
             if (\PFBC\Form::isValid($_POST['submit_edit_note']))
@@ -36,20 +34,21 @@ class EditNoteForm
         $sPostId = $oNoteModel->getPostId($iNoteId);
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);
 
-        if (!empty($oPost) && (new Str)->equals($iNoteId, $oPost->noteId))
-        {
+        if (!empty($oPost) && (new Str)->equals($iNoteId, $oPost->noteId)) {
             $oCategoryData = $oNoteModel->getCategory(null, 0, 300);
 
             $aCategoryNames = array();
-            foreach ($oCategoryData as $oId)
+            foreach ($oCategoryData as $oId) {
                 $aCategoryNames[$oId->categoryId] = $oId->name;
+            }
 
             $aSelectedCategories = array();
             $oCategoryIds = $oNoteModel->getCategory($iNoteId, 0, 300);
             unset($oNoteModel);
 
-            foreach ($oCategoryIds as $iId)
+            foreach ($oCategoryIds as $iId) {
                 $aSelectedCategories[] = $iId->categoryId;
+            }
 
             $oForm = new \PFBC\Form('form_note');
             $oForm->configure(array('action' => ''));

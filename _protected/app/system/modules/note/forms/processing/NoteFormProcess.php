@@ -28,7 +28,7 @@ class NoteFormProcess extends Form
         $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendNote');
 
         $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
-        if (!$oNote->checkPostId($sPostId, $iProfileId)) {
+        if (!$oNote->checkPostId($sPostId, $iProfileId, $oNoteModel)) {
             \PFBC\Form::setError('form_note', t('The post ID already exists or is incorrect.'));
         } elseif (!$oNoteModel->checkWaitSend($this->session->get('member_id'), $iTimeDelay, $sCurrentTime)) {
             \PFBC\Form::setError('form_note', Form::waitWriteMsg($iTimeDelay));
@@ -64,10 +64,14 @@ class NoteFormProcess extends Form
                 /*** Set the thumbnail if there's one ***/
                 $oPost = $oNoteModel->readPost($aData['post_id'], $iProfileId, null);
                 $oNote->setThumb($oPost, $oNoteModel, $this->file);
+                $oNote->clearCache();
 
-                $this->clearCache();
+                if ($iApproved == '0') {
+                    $sMsg = t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
+                } else {
+                    $sMsg = t('Post successfully created!');
+                }
 
-                $sMsg = ($iApproved == '0') ? t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post successfully created!');
                 Header::redirect(Uri::get('note','main','read',$this->session->get('member_username') .','. $sPostId), $sMsg);
             }
         }
@@ -90,10 +94,5 @@ class NoteFormProcess extends Form
         foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
             $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
         }
-    }
-
-    private function clearCache()
-    {
-        (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
     }
 }
