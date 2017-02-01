@@ -59,7 +59,7 @@ class Note extends WriteCore
         return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !$oNoteModel->postIdExists($sPostId, $iProfileId));
     }
 
-    public function clearCache()
+    public static function clearCache()
     {
         (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
     }

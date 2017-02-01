@@ -64,7 +64,7 @@ class NoteFormProcess extends Form
                 /*** Set the thumbnail if there's one ***/
                 $oPost = $oNoteModel->readPost($aData['post_id'], $iProfileId, null);
                 $oNote->setThumb($oPost, $oNoteModel, $this->file);
-                $oNote->clearCache();
+                Note::clearCache();
 
                 if ($iApproved == '0') {
                     $sMsg = t('Your note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');

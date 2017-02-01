@@ -69,7 +69,7 @@ class Blog extends WriteCore
         return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !$oBlogModel->postIdExists($sPostId));
     }
 
-    public function clearCache()
+    public static function clearCache()
     {
         (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
     }

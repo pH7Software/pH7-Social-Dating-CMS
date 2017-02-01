@@ -52,8 +52,8 @@ class AdminBlogFormProcess extends Form
                 /*** Set the thumbnail if there's one ***/
                 $oPost = $oBlogModel->readPost($aData['post_id']);
                 $oBlog->setThumb($oPost, $this->file);
-                $oBlog->clearCache();
 
+                Blog::clearCache();
                 Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), t('Post successfully created!'));
             }
         }

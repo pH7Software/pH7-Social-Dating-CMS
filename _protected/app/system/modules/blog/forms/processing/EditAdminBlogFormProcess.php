@@ -81,8 +81,9 @@ class EditAdminBlogFormProcess extends Form
 
         // Updated the modification Date
         $oBlogModel->updatePost('updatedDate', $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $sPostId);
-        $oBlog->clearCache();
         unset($oBlog, $oBlogModel);
+
+        Blog::clearCache();
 
         Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), t('Post successfully updated!'));
     }

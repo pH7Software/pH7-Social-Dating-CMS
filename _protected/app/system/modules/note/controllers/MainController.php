@@ -232,9 +232,7 @@ class MainController extends Controller
         $this->_deleteThumbFile($iId, $iProfileId);
         $this->oNoteModel->deletePost($iId, $iProfileId);
 
-        /* Clean NoteModel Cache */
-        (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
-
+        Note::clearCache();
         Header::redirect(Uri::get('note', 'main', 'index'), t('Your post has been deleted!'));
     }
 
@@ -249,9 +247,7 @@ class MainController extends Controller
         $this->_deleteThumbFile($iId, $iProfileId);
         $this->oNoteModel->deleteThumb($iId, $iProfileId);
 
-        /* Clean BlogModel Cache */
-        (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
-
+        Note::clearCache();
         Header::redirect(Uri::get('note','main','edit', $iId), t('The thumbnail has been deleted successfully!'));
     }
 

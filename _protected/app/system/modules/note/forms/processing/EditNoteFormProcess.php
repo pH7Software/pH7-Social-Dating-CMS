@@ -90,8 +90,9 @@ class EditNoteFormProcess extends Form
 
         // Updated the modification Date
         $oNoteModel->updatePost('updatedDate', $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $iNoteId, $iProfileId);
-        $oNote->clearCache();
         unset($oNote, $oNoteModel);
+
+        Note::clearCache();
 
         if ($iApproved == '0') {
             $sMsg = t('Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
