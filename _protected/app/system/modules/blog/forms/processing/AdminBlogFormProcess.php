@@ -24,7 +24,7 @@ class AdminBlogFormProcess extends Form
         $oBlogModel = new BlogModel;
 
         $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
-        if (!$oBlog->checkPostId($sPostId)) {
+        if (!$oBlog->checkPostId($sPostId, $oBlogModel)) {
             \PFBC\Form::setError('form_blog', t('The post ID already exists or is incorrect.'));
         } else {
             $aData = [
@@ -52,8 +52,7 @@ class AdminBlogFormProcess extends Form
                 /*** Set the thumbnail if there's one ***/
                 $oPost = $oBlogModel->readPost($aData['post_id']);
                 $oBlog->setThumb($oPost, $this->file);
-
-                $this->clearCache();
+                $oBlog->clearCache();
 
                 Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), t('Post successfully created!'));
             }
@@ -76,10 +75,5 @@ class AdminBlogFormProcess extends Form
         foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
             $oBlogModel->addCategory($iCategoryId, $iBlogId);
         }
-    }
-
-    private function clearCache()
-    {
-        (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
     }
 }

@@ -31,7 +31,7 @@ class EditNoteFormProcess extends Form
         /*** Updating the ID of the post if it has changed ***/
         $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
         if (!$this->str->equals($sPostId, $oPost->postId)) {
-            if ($oNote->checkPostId($sPostId, $iProfileId)) {
+            if ($oNote->checkPostId($sPostId, $iProfileId, $oNoteModel)) {
                 $oNoteModel->updatePost('postId', $sPostId, $iNoteId, $iProfileId);
             } else {
                 \PFBC\Form::setError('form_note', t('The post ID already exists or is incorrect.'));
@@ -90,12 +90,15 @@ class EditNoteFormProcess extends Form
 
         // Updated the modification Date
         $oNoteModel->updatePost('updatedDate', $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $iNoteId, $iProfileId);
-
+        $oNote->clearCache();
         unset($oNote, $oNoteModel);
 
-        $this->clearCache();
+        if ($iApproved == '0') {
+            $sMsg = t('Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
+        } else {
+            $sMsg = t('Post successfully updated!');
+        }
 
-        $sMsg = ($iApproved == '0') ? t('Your updated note has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.') : t('Post successfully updated!');
         Header::redirect(Uri::get('note', 'main', 'read', $sUsername . ',' . $sPostId), $sMsg);
     }
 
@@ -125,10 +128,5 @@ class EditNoteFormProcess extends Form
             }
         }
         return true;
-    }
-
-    private function clearCache()
-    {
-        (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
     }
 }

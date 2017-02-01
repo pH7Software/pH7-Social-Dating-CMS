@@ -213,9 +213,4 @@ class MainController extends Controller
         May we suggest <a href="%0%">exploring some tags</a> or <a href="%1%">creating a new search</a>.',
             Uri::get('blog', 'main', 'index'), Uri::get('blog', 'main', 'search'));
     }
-
-    public function __destruct()
-    {
-        unset($this->oBlogModel, $this->oPage, $this->sTitle, $this->iTotalBlogs);
-    }
 }

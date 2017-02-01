@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchNoteForm
 {
-
     public static function display($iWidth = null)
     {
         $aOptions = ['description' => t('Enter Name, Keyword of posts, Author (username, first name, last name) or ID of a note.')];
@@ -27,5 +26,4 @@ class SearchNoteForm
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
         $oForm->render();
     }
-
 }

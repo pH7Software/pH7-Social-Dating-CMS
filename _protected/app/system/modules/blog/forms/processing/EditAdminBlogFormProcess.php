@@ -31,7 +31,7 @@ class EditAdminBlogFormProcess extends Form
         $this->updateCategories($iBlogId, $oPost, $oBlogModel);
 
         if (!$this->str->equals($sPostId, $oPost->postId)) {
-            if ($oBlog->checkPostId($sPostId)) {
+            if ($oBlog->checkPostId($sPostId, $oBlogModel)) {
                 $oBlogModel->updatePost('postId', $sPostId, $iBlogId);
             } else {
                 \PFBC\Form::setError('form_blog', t('The post ID already exists or is incorrect.'));
@@ -81,9 +81,8 @@ class EditAdminBlogFormProcess extends Form
 
         // Updated the modification Date
         $oBlogModel->updatePost('updatedDate', $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $sPostId);
-        unset($oBlogModel);
-
-        $this->clearCache();
+        $oBlog->clearCache();
+        unset($oBlog, $oBlogModel);
 
         Header::redirect(Uri::get('blog', 'main', 'read', $sPostId), t('Post successfully updated!'));
     }
@@ -108,10 +107,5 @@ class EditAdminBlogFormProcess extends Form
                 $oBlogModel->addCategory($iCategoryId, $iBlogId);
             }
         }
-    }
-
-    private function clearCache()
-    {
-        (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
     }
 }

@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchBlogForm
 {
-
     public static function display($iWidth = null)
     {
         $aOptions = (!empty($iWidth)) ? ['style' => 'width:' . ($iWidth*1.09) . 'px'] : null;
@@ -24,5 +23,4 @@ class SearchBlogForm
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
         $oForm->render();
     }
-
 }
