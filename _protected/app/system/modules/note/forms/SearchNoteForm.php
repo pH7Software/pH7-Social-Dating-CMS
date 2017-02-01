@@ -15,7 +15,7 @@ class SearchNoteForm
     {
         $aOptions = ['description' => t('Enter Name, Keyword of posts, Author (username, first name, last name) or ID of a note.')];
         if (!empty($iWidth)) {
-            $aOptions += ['style' => 'width:' . ($iWidth*1.09) . 'px'];
+            $aOptions += ['style' => 'width:' . ((int)$iWidth*1.09) . 'px'];
         }
 
         $oForm = new \PFBC\Form('form_search', $iWidth);

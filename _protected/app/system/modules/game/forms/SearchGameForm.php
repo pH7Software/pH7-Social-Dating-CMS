@@ -15,7 +15,7 @@ class SearchGameForm
     {
         $aOptions = ['description' => t('Enter Name, Description, Keyword or ID of a Game.')];
         if (!empty($iWidth)) {
-            $aOptions = ['style' => 'width:' . ($iWidth*1.09) . 'px'];
+            $aOptions = ['style' => 'width:' . ((int)$iWidth*1.09) . 'px'];
         }
 
         $oForm = new \PFBC\Form('form_search', $iWidth);
