@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class EditVideoFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -27,5 +26,4 @@ class EditVideoFormProcess extends Form
 
         Header::redirect(Uri::get('video', 'main', 'video', $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sVideoTitle . ',' . $iVideoId), t('Your video has been updated successfully!'));
     }
-
 }

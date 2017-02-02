@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class EditPictureFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -27,5 +26,4 @@ class EditPictureFormProcess extends Form
 
         Header::redirect(Uri::get('picture', 'main', 'photo', $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sPictureTitle . ',' . $iPictureId), t('Your photo has been updated successfully!'));
     }
-
 }

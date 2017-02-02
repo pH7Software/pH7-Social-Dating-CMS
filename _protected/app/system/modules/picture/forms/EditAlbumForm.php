@@ -14,7 +14,6 @@ PH7\Framework\Mvc\Request\Http;
 
 class EditAlbumForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_edit_picture_album']))
@@ -37,5 +36,4 @@ class EditAlbumForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

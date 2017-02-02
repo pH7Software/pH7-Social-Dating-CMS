@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
 
 class EditAlbumFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -25,5 +24,4 @@ class EditAlbumFormProcess extends Form
 
         Header::redirect(Uri::get('picture', 'main', 'albums', $this->session->get('member_username'), $iAlbumId), t('Your album has been updated successfully!'));
     }
-
 }

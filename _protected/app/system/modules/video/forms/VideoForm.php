@@ -16,7 +16,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class VideoForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_video']))
@@ -61,5 +60,4 @@ class VideoForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'form.js"></script>'));
         $oForm->render();
     }
-
 }

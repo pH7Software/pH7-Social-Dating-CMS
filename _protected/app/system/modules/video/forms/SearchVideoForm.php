@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchVideoForm
 {
-
     public static function display()
     {
         $oForm = new \PFBC\Form('form_search');
@@ -22,5 +21,4 @@ class SearchVideoForm
         $oForm->addElement(new \PFBC\Element\Button(t('Search'),'submit', array('icon' => 'search')));
         $oForm->render();
     }
-
 }

@@ -15,7 +15,6 @@ PH7\Framework\Mvc\Router\Uri;
 
 class PictureForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_picture']))
@@ -52,5 +51,4 @@ class PictureForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

@@ -11,7 +11,6 @@ use PH7\Framework\Config\Config;
 
 class AlbumForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_picture_album']))
@@ -34,5 +33,4 @@ class AlbumForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

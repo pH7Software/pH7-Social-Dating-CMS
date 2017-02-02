@@ -14,7 +14,6 @@ PH7\Framework\Mvc\Request\Http;
 
 class EditVideoForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_edit_video']))
@@ -41,5 +40,4 @@ class EditVideoForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }
