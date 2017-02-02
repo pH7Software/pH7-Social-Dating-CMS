@@ -40,5 +40,4 @@ class EditPictureForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }
