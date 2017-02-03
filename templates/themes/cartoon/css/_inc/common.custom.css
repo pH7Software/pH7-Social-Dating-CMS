@@ -5,6 +5,9 @@
  */
 
 body {
-	background-color: #DEFEC8;
-	background-image: none;
+    background-color: #DEFEC8;
+    background-image: none;
+}
+h1.red3 {
+    color: #448AFF;
 }
