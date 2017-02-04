@@ -8,7 +8,6 @@
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  * @link             http://software.hizup.com
  * @package          PH7 / Framework / Core
- * @version          5.0.0
  */
 
 namespace PH7\Framework\Core;
