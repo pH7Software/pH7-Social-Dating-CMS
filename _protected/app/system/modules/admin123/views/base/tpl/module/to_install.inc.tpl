@@ -1,15 +1,13 @@
 {if !$oModule->showAvailableMods(Module::INSTALL)}
-    <h2 class="underline">{lang 'No module available in the repository for %software_name%'}</h2>
+    <h2 class="underline">{lang 'No modules available in your %software_name% repository'}</h2>
 {else}
-    <h2 class="underline">{lang 'Module available for %software_name%:'}</h2><br />
+    <h2 class="underline">{lang 'Module(s) available for %software_name%:'}</h2><br />
 
     <form method="post">
         {each $sFolder in $oModule->showAvailableMods(Module::INSTALL)}
-
             {{ $sModsDirModFolder = $oFile->checkExtDir($sFolder) }}
 
             {if $oModule->checkModFolder(Module::INSTALL, $sModsDirModFolder)}
-
                 {{ $oModule->readConfig(Module::INSTALL, $sModsDirModFolder) }}
 
                 <p class="underline italic"><a href="{% $config->values['module.information']['website'] %}" title="{lang 'Website of module'}">{% $config->values['module.information']['name'] %}</a> {lang 'version'} {% $config->values['module.information']['version'] %} {lang 'by'} <a href="mailto:{% $config->values['module.information']['email'] %}" title="{lang 'Contact Author'}">{% $config->values['module.information']['author'] %}</a></p>

@@ -1,10 +1,10 @@
 {if !$oModule->showAvailableMods(Module::UNINSTALL)}
-    <h2 class="underline">{lang 'No module available in the repository for %software_name%'}</h2>
+    <h2 class="underline">{lang 'No modules available in your %software_name% repository'}</h2>
 {else}
-    <h2 class="underline">{lang 'Module installed on the %software_name% software:'}</h2><br />
+    <h2 class="underline">{lang 'Module(s) installed on your website:'}</h2><br />
+
     <form method="post">
         {each $sFolder in $oModule->showAvailableMods(Module::UNINSTALL)}
-
             {{ $sModsDirModFolder = $oFile->checkExtDir($sFolder) }}
 
             {if $oModule->checkModFolder(Module::UNINSTALL, $sModsDirModFolder)}
