@@ -39,7 +39,7 @@ class MainController extends Controller
         $this->view->page_title = t('You are successfully registered!');
         $this->view->h4_title = t('Loading...');
 
-        $this->design->setRedirect($this->_sUrl, null, 'success', 5);
+        $this->design->setRedirect($this->_sUrl, null, null, 5);
 
         $this->manualTplInclude('waiting.inc.tpl');
         $this->output();
