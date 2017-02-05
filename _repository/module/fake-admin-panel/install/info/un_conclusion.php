@@ -26,7 +26,7 @@ EOS;
 /*** Begin Contents ***/
 
 $sHtml .= '<p>' . t('Uninstallation completed!') . '</p>';
-$sHtml .= '<p class="underline">' . t('Please remove the module link in the menu file.') . '</p>';
+$sHtml .= '<p class="underline">' . t('Please remove the module link from the menu file.') . '</p>';
 $sHtml .= '<p>' . t('1) Open the "%0%" file.', '<em>~/templates/themes/base/tpl/top_menu.inc.tpl</em>') . '</p>';
 $sHtml .= '<p>' . t('2) Remove the following code.') . '</p>';
 $sHtml .= '<textarea cols="65" rows="7" readonly="readonly" onclick="this.focus(); this.select();">' . $sCode . '</textarea>';
