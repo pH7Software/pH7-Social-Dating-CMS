@@ -68,8 +68,7 @@ class Design
 
         foreach ($aLangs as $sLang)
         {
-            if ($sLang === PH7_LANG_NAME)
-            {
+            if ($sLang === PH7_LANG_NAME) {
                 // Skip the current lang
                 continue;
             }
@@ -195,8 +194,9 @@ class Design
     */
     public function setRedirect($sUrl = null, $sMsg = null, $sType = 'success', $iTime = 3)
     {
-        if ($sMsg)
+        if (!empty($sMsg)) {
             $this->setFlashMsg($sMsg, $sType);
+        }
 
         $sUrl = (!empty($sUrl)) ? $sUrl : $this->oHttpRequest->currentUrl();
 
@@ -409,10 +409,11 @@ class Design
      */
     public function staticFiles($sType, $sDir, $sFiles, $sCssMedia = 'all')
     {
-        if ($sType == 'js')
+        if ($sType == 'js') {
             echo $this->externalJsFile(PH7_RELATIVE . 'asset/gzip/?t=js&amp;d=' . $sDir . '&amp;f=' . $sFiles);
-        else
+        } else {
             echo $this->externalCssFile(PH7_RELATIVE . 'asset/gzip/?t=css&amp;d=' . $sDir . '&amp;f=' . $sFiles, $sCssMedia);
+        }
     }
 
     /**
@@ -756,8 +757,9 @@ class Design
     {
         $aDefAttrs = ['src' => $sImg, 'alt' => $sAlt];
 
-        if (!empty($aAttrs))
+        if (!empty($aAttrs)) {
             $aDefAttrs += $aAttrs; // Update the attributes if necessary
+        }
 
         $this->htmlTag('img',  $aDefAttrs);
     }
@@ -775,10 +777,10 @@ class Design
     {
         $sAttrs = '';
 
-        if (!empty($aAttrs))
-        {
-            foreach ($aAttrs as $sName => $sValue)
+        if (!empty($aAttrs)) {
+            foreach ($aAttrs as $sName => $sValue) {
                 $sAttrs .= ' ' . $sName . '="' . $sValue . '"';
+            }
         }
 
         echo ($bPair ? '<' . $sTag . $sAttrs . '>' . ($sText === null ? '' : $sText) . '</' . $sTag . '>' : '<' . $sTag . $sAttrs . ' />');
@@ -805,8 +807,12 @@ class Design
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>', (!empty($aMeta['title']) ? $aMeta['title'] : ''), '</title>';
-        if (!empty($aMeta['description'])) echo '<meta name="description" content="', $aMeta['description'], '" />';
-        if (!empty($aMeta['keywords'])) echo '<meta name="keywords" content="', $aMeta['keywords'], '" />';
+        if (!empty($aMeta['description'])) {
+            echo '<meta name="description" content="', $aMeta['description'], '" />';
+        }
+        if (!empty($aMeta['keywords'])) {
+            echo '<meta name="keywords" content="', $aMeta['keywords'], '" />';
+        }
         echo '<meta name="author" content="', Kernel::SOFTWARE_COMPANY, '" />
         <meta name="copyright" content="', Kernel::SOFTWARE_COPYRIGHT, '" />
         <meta name="creator" content="', Kernel::SOFTWARE_NAME, '" />
@@ -817,8 +823,7 @@ class Design
         $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery.js');
         $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery-ui.js');
         echo '<script>var pH7Url={base:\'', PH7_URL_ROOT, '\'}</script></head><body>';
-        if ($bLogo)
-        {
+        if ($bLogo) {
             // Website's name
             $sSiteName = Registry::getInstance()->site_name;
 
