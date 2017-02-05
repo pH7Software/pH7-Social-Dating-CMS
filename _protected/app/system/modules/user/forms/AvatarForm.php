@@ -26,9 +26,8 @@ class AvatarForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_avatar', 'form_avatar'));
         $oForm->addElement(new \PFBC\Element\Token('avatar'));
-        if (AdminCore::auth() && !User::auth())
-        {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
+        if (AdminCore::auth() && !User::auth()) {
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><a class="s_tMarg bold btn btn-default btn-tiny" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>'));
         }
         $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', array('accept'=>'image/*', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Button);
