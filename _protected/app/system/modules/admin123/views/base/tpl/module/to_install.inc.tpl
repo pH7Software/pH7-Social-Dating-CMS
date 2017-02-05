@@ -1,7 +1,7 @@
 {if !$oModule->showAvailableMods(Module::INSTALL)}
     <h2 class="underline">{lang 'No modules available in your %software_name% repository'}</h2>
 {else}
-    <h2 class="underline">{lang 'Module(s) available for %software_name%:'}</h2><br />
+    <h2 class="underline">{lang 'Module(s) available to install:'}</h2><br />
 
     <form method="post">
         {each $sFolder in $oModule->showAvailableMods(Module::INSTALL)}
