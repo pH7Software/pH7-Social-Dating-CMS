@@ -26,22 +26,22 @@
 
 /** Avatar Profiles Block **/
 .pic_block {
-  margin:5px 0 15px;
+    margin:5px 0 15px;
 }
 .pic_block:hover a {
-  opacity:0.5;
-  transition: opacity .35s ease-in-out;
-  -webkit-transition: opacity .35s ease-in-out;
-  -moz-transition: opacity .35s ease-in-out;
-  -o-transition: opacity .35s ease-in-out;
-  -ms-transition: opacity .35s ease-in-out;
-  -khtml-transition: opacity .35s ease-in-out;
+    opacity:0.5;
+    transition: opacity .35s ease-in-out;
+    -webkit-transition: opacity .35s ease-in-out;
+    -moz-transition: opacity .35s ease-in-out;
+    -o-transition: opacity .35s ease-in-out;
+    -ms-transition: opacity .35s ease-in-out;
+    -khtml-transition: opacity .35s ease-in-out;
 }
 .pic_block a:hover {
-  opacity: 1;
+    opacity: 1;
 }
 .pic img:hover {
-  opacity:1 !important; /* Rewrite the .pic class for splash page (already defined in style.css) */
+    opacity:1 !important; /* Rewrite the .pic class for splash page (already defined in style.css) */
 }
 
 
@@ -90,34 +90,37 @@ h1:hover {
 
 /** Buttons (links) **/
 .bt_login_remember, .bt_login_forgot {
-  width: 200px;
-  margin-left: 5px;
+    width: 200px;
+    margin-left: 5px;
 }
 .bt_login_remember {
-  margin-top: -8px;
+    margin-top: -8px;
 }
 .bt_login_forgot{
-  margin-top: -2px;
+    margin-top: -2px;
 }
 
+#form_join_user .pfbc-label strong {
+    color: #F55959 !important
+}
 
 video#bgvid {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  z-index: -100;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  background-size: cover;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
 }
 
 .login_block {
-  margin:-52px 0 10px 52%;
-  width: 580px;
+    margin:-52px 0 10px 52%;
+    width: 580px;
 }
 
 /* Slideshow */
