@@ -9,13 +9,18 @@
  *
  * @return {Void}
  */
+var RED_COLOR = '#F44336';
+var GREEN_COLOR = '#8BC34A';
+var DARK_RED_COLOR = '#cc0000';
+var DARK_GREEN_COLOR = '#00cc00';
+
 function checkMail()
 {
     var sReg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
     if(sReg.test($("#email").val()) == false)
-        $("#email").css("border", "solid #cc0000 1px");
+        $("#email").css("border", 'solid ' + DARK_RED_COLOR + ' 1px');
     else
-        $("#email").css("border", "solid #00cc00 1px");
+        $("#email").css("border", 'solid ' + DARK_GREEN_COLOR + ' 1px');
 }
 
 /**
@@ -29,9 +34,9 @@ function checkPassword(sPwd)
     var iPwdLength = sPwd.length, iValSecure = 0;
 
     if(iPwdLength<6 || iPwdLength>60)
-        $("#password").css("border", "solid #cc0000 1px");
+        $("#password").css("border", 'solid ' + DARK_RED_COLOR + ' 1px');
     else
-        $("#password").css("border", "solid #00cc00 1px");
+        $("#password").css("border", 'solid ' + DARK_GREEN_COLOR + ' 1px');
 
     // PASSWORD LENGTH
 
@@ -96,32 +101,32 @@ function checkPassword(sPwd)
     // CHECK LEVEL
     if(iValSecure <4)
     {
-        $('.password').css("color", "#F55");
+        $('.password').css("color", RED_COLOR);
         $('.password').text(pH7LangCore.very_weak + ' (' + pH7LangCore.level + iValSecure + ')');
     }
     else if(iValSecure <8)
     {
-        $('.password').css("color", "#F55");
+        $('.password').css("color", RED_COLOR);
         $('.password').text(pH7LangCore.weak + ' (' + pH7LangCore.level + iValSecure + ')');
     }
     else if(iValSecure <12)
     {
-        $('.password').css("color", "#F55");
+        $('.password').css("color", RED_COLOR);
         $('.password').text(pH7LangCore.average + ' (' + pH7LangCore.level + iValSecure + ')');
     }
     else if(iValSecure <16)
     {
-        $('.password').css("color", "#149541");
+        $('.password').css("color", GREEN_COLOR);
         $('.password').text(pH7LangCore.strong + ' (' + pH7LangCore.level + iValSecure + ')');
     }
     else if(iValSecure <20)
     {
-        $('.password').css("color", "#149541");
+        $('.password').css("color", GREEN_COLOR);
         $('.password').text(pH7LangCore.very_strong + ' (' + pH7LangCore.level + iValSecure + ')');
     }
     else if(iValSecure >=20)
     {
-        $('.password').css("color", "#149541");
+        $('.password').css("color", "GREEN_COLOR");
         $('.password').text(pH7LangCore.very_very_string + ' (' + pH7LangCore.level + iValSecure + ')');
     }
 }
@@ -148,15 +153,15 @@ function CValid(sInputVal, sFieldId, sParam1, sParam2)
         if(oData.status == 1)
         {
             $('.' + sFieldId).fadeIn();
-            $('#' + sField).css("border", "solid #00cc00 1px");
-            $('.' + sField).css("color", "#149541");
+            $('#' + sField).css("border", 'solid ' + DARK_GREEN_COLOR + ' 1px');
+            $('.' + sField).css("color", GREEN_COLOR);
             if(typeof sMsg !== "undefined") $('.' + sField).text(sMsg);
         }
         else
         {
             $('.' + sFieldId).fadeIn();
-            $('#' + sField).css("border", "1px solid #cc0000");
-            $('.' + sField).css("color", "#F55");
+            $('#' + sField).css("border", '1px solid ' + DARK_RED_COLOR);
+            $('.' + sField).css("color", RED_COLOR);
             if(typeof sMsg !== "undefined") $('.' + sField).text(sMsg.substring(0,150));
         }
     }, 'json');
