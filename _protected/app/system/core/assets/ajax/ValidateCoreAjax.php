@@ -20,7 +20,6 @@ PH7\Framework\Mvc\Request\Http;
 
 class ValidateCoreAjax
 {
-
     private
     $_oStr, // String Object
     $_oValidate,   // Validate object
@@ -179,7 +178,7 @@ class ValidateCoreAjax
         else
         {
             $this->_iStatus = 1;
-            $this->_sMsg = t('Password is correct!');
+            $this->_sMsg = t('Correct Password!');
         }
     }
 
@@ -342,15 +341,6 @@ class ValidateCoreAjax
         else
             $this->_iStatus = 1;
     }
-
-    /**
-     * Destruction of objects to optimize the resources of RAM.
-     */
-    public function __destruct()
-    {
-        unset($this->_oStr, $this->_oValidate, $this->_oExistsModel, $this->_sMsg, $this->_iStatus);
-    }
-
 }
 
 
