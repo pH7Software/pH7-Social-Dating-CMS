@@ -583,6 +583,8 @@ final class FrontController
 
         /***** FOR FILE CONFIG .INI OF MODULE *****/
         $this->oConfig->load($this->oRegistry->path_module . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
+
+        // PH7_DEFAULT_TPL_MOD constant has to be defined before calling "_templateInitialize()"
         define('PH7_DEFAULT_TPL_MOD', $this->oConfig->values['module']['default_theme']);
 
         $this->_templateInitialize();
