@@ -289,7 +289,7 @@ class NoteModel extends NoteCoreModel
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $bData = ($rStmt->fetchColumn() === 1);
+            $bData = ($rStmt->fetchColumn() == 1);
             Db::free($rStmt);
             $this->cache->put($bData);
         }

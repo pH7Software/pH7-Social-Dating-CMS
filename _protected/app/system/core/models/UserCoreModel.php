@@ -238,7 +238,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
         $rStmt->execute();
-        return $rStmt->fetchColumn() === 1;
+        return $rStmt->fetchColumn() == 1;
     }
 
     /**
