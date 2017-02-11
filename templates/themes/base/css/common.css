@@ -10,7 +10,9 @@ body, td, pre {
     font-size: 13px;
     color: #666;
 }
-body {background: white url(../img/body_bg.jpg) repeat-x;}
+body {
+    background: white url(../img/body_bg.jpg) repeat-x;
+}
 
 #links {
     float: right;
