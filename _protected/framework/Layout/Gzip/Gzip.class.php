@@ -239,8 +239,9 @@ class Gzip
     protected function getContents()
     {
         $this->_sContents = '';
-        foreach ($this->_aElements as $sElement)
+        foreach ($this->_aElements as $sElement) {
             $this->_sContents .= File::EOL . $this->_oFile->getUrlContents(PH7_URL_ROOT . $this->_sBaseUrl . $sElement);
+        }
 
         if ($this->_sType == 'css')
         {
@@ -296,8 +297,16 @@ class Gzip
      */
     protected function parseVariable()
     {
+        $sBaseUrl = $this->_sBaseUrl;
+        $getCurrentTplName = function () use ($sBaseUrl) {
+            $aDirs = explode('/', $sBaseUrl);
+            return $aDirs[2];
+        };
+
         $this->_setVariables( include('variables.inc.php') );
     }
+
+
 
     /**
      * Get the sub CSS files.
