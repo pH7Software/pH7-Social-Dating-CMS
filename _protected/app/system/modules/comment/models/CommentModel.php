@@ -70,7 +70,7 @@ class CommentModel extends CommentCoreModel
     }
 
     /**
-     * Check if the user ID exists in the table.
+     * Check if the recipient ID exists in the table.
      *
      * @param  integer $iId
      * @param  string $sTable
