@@ -69,6 +69,13 @@ class CommentModel extends CommentCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * Check if the user ID exists in the table.
+     *
+     * @param  integer $iId
+     * @param  string $sTable
+     * @return boolean
+     */
     public function idExists($iId, $sTable)
     {
        $this->cache->start(static::CACHE_GROUP, 'idExists' . $iId . $sTable, static::CACHE_TIME);
@@ -77,12 +84,13 @@ class CommentModel extends CommentCoreModel
        {
            $iId = (int)$iId;
            $sTable = CommentCore::checkTable($sTable);
-           $sNewTable = Comment::getTable($sTable);
+           $sRealTable = Comment::getTable($sTable);
+           $sProfileIdColumn = lcfirst($sTable) . 'Id';
 
-           $rStmt = Db::getInstance()->prepare('SELECT COUNT(' . lcfirst($sTable) . 'Id) FROM' . Db::prefix($sNewTable) . 'WHERE ' . lcfirst($sTable)  . 'Id = :id LIMIT 1');
+           $rStmt = Db::getInstance()->prepare('SELECT COUNT(' . $sProfileIdColumn . ') FROM' . Db::prefix($sRealTable) . 'WHERE ' . $sProfileIdColumn . ' = :id LIMIT 1');
            $rStmt->bindValue(':id',$iId, \PDO::PARAM_INT);
            $rStmt->execute();
-           $bData = ($rStmt->fetchColumn() === 1);
+           $bData = ($rStmt->fetchColumn() == 1);
            Db::free($rStmt);
            $this->cache->put($bData);
        }
