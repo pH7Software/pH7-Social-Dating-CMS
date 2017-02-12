@@ -10,17 +10,18 @@ namespace PH7;
 use
 PH7\Framework\Session\Session,
 PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\Uri;
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class NoteForm
 {
     public static function display()
     {
         if (isset($_POST['submit_note'])) {
-            if (\PFBC\Form::isValid($_POST['submit_note']))
+            if (\PFBC\Form::isValid($_POST['submit_note'])) {
                 new NoteFormProcess();
-
-            Framework\Url\Header::redirect();
+            }
+            Header::redirect();
         }
 
         $oCategoryData = (new NoteModel)->getCategory(null, 0, 300);
@@ -34,13 +35,13 @@ class NoteForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_note', 'form_note'));
         $oForm->addElement(new \PFBC\Element\Token('note'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Title of article:'), 'title', array('validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')).'/<strong><span class="your-address">'.t('your-address').'</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'data-profile_id' => (new Session)->get('member_id'), 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', array('validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')).'/<strong><span class="your-address">'.t('your-address').'</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'data-profile_id' => (new Session)->get('member_id'), 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, array('description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
-        $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', array('description' => t('Content of the article'), 'validation' => new \PFBC\Validation\Str(30), 'required' => 1)));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('The language of your post:'), 'lang_id', array('description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', array('validation' => new \PFBC\Validation\Str(30), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('The language of the post:'), 'lang_id', array('description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('validation' => new \PFBC\Validation\Str(2, 200))));
         $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', array('accept' => 'image/*')));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Tags:'), 'tags', array('description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new \PFBC\Validation\Str(2, 200))));
@@ -62,4 +63,3 @@ class NoteForm
         $oForm->render();
     }
 }
-

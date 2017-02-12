@@ -12,18 +12,18 @@ PH7\Framework\Str\Str,
 PH7\Framework\Session\Session,
 PH7\Framework\Security\CSRF\Token,
 PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Mvc\Router\Uri;
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class EditNoteForm
 {
     public static function display()
     {
-        if (isset($_POST['submit_edit_note']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_edit_note']))
+        if (isset($_POST['submit_edit_note'])) {
+            if (\PFBC\Form::isValid($_POST['submit_edit_note'])) {
                 new EditNoteFormProcess();
-
-            Framework\Url\Header::redirect();
+            }
+            Header::redirect();
         }
 
         // Generate edit form post of the note
@@ -54,12 +54,12 @@ class EditNoteForm
             $oForm->configure(array('action' => ''));
             $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_note', 'form_note'));
             $oForm->addElement(new \PFBC\Element\Token('edit_note'));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Title of article:'), 'title', array('value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
-            $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('value' => $oPost->postId, 'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')).'/<strong><span class="your-address">'.$oPost->postId.'</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the url.'), 'data-profile_id' => $iProfileId, 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 60), 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Article name:'), 'title', array('value' => $oPost->title, 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\Textbox(t('Article ID:'), 'post_id', array('value' => $oPost->postId, 'description' => Uri::get('note', 'main', 'read', (new Session)->get('member_username')).'/<strong><span class="your-address">'.$oPost->postId.'</span><span class="post_id"></span></strong>', 'title' => t('Article ID will be the name of the URL.'), 'data-profile_id' => $iProfileId, 'id' => 'post_id', 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="label_flow">'));
             $oForm->addElement(new \PFBC\Element\Checkbox(t('Categories:'), 'category_id', $aCategoryNames, array('description' => t('Select a category that fits the best for your article. You can select up to three different categories'), 'value' => $aSelectedCategories, 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
-            $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', array('value' => $oPost->content, 'description' => t('Content of the article'), 'validation' => new \PFBC\Validation\Str(30), 'required' => 1)));
+            $oForm->addElement(new \PFBC\Element\CKEditor(t('Body:'), 'content', array('value' => $oPost->content, 'validation' => new \PFBC\Validation\Str(30), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\Textbox(t('The language of your post:'), 'lang_id', array('value' => $oPost->langId, 'description' => t('e.g., "en", "fr", "es", "js"'), 'pattern' => '[a-z]{2}', 'validation' => new \PFBC\Validation\Str(2, 2), 'required' => 1)));
             $oForm->addElement(new \PFBC\Element\Textbox(t('Slogan:'), 'slogan', array('value' => $oPost->slogan, 'validation' => new \PFBC\Validation\Str(2, 200))));
             $oForm->addElement(new \PFBC\Element\File(t('Thumbnail:'), 'thumb', array('accept' => 'image/*')));
@@ -84,6 +84,4 @@ class EditNoteForm
         else
             echo '<p class="center bold">' . t('Post Not Found!') . '</p>';
     }
-
 }
-
