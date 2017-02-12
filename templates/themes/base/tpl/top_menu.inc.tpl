@@ -477,13 +477,13 @@
 
 {* For LoginUserAs of Admin Panel *}
   {if $is_admin_auth AND $admin_logged_as_user }
-    <p class="center bold loginas"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
+    <p class="center bold loginas"><a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'logoutuseras') }}">{lang}Switch back to the Admin Panel{/lang}</a></p>
   {elseif $is_admin_auth AND $admin_logged_as_affiliate }
-    <p class="center bold loginas"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Click here to switch back to the Admin Panel{/lang}</a></p>
+    <p class="center bold loginas"><a href="{{ $design->url('affiliate', 'admin', 'logoutuseras') }}">{lang}Switch back to the Admin Panel{/lang}</a></p>
   {/if}
 
-    {* Destroy the varaibles *}
-      {{
+  {* Destroy the varaibles *}
+    {{
         unset(
           $oSession,
           $count_moderate_total_picture_album,
@@ -494,4 +494,4 @@
           $count_moderate_total_background,
           $count_moderate_total_note
         )
-      }}
+    }}
