@@ -40,7 +40,7 @@ class ForgotPasswordFormProcess extends Form
             if (!$this->sendMail($sTable, $iProfileId))
                 \PFBC\Form::setError('form_forgot_password', Form::errorSendingEmail());
             else
-                \PFBC\Form::setSuccess('form_forgot_password', t('Successfully requested a new password, email sent!'));
+                \PFBC\Form::setSuccess('form_forgot_password', t('Password reset instructions sent to %0%', $sEmail));
         }
     }
 
@@ -58,7 +58,7 @@ class ForgotPasswordFormProcess extends Form
 
         $this->view->content = t('Hello %0%!', $oData->username) . '<br />' .
         t('Someone (from IP address %0%) has requested a new password for this account.', Ip::get()) . '<br />' .
-        t('If you requested this, click on the link below, otherwise ignore this email and your password will remain unchanged.') .
+        t('If you requested it, click on the link below, otherwise please ignore this email and your password will remain unchanged.') .
         '<br /><a href="' . $sResetUrl . '">' . $sResetUrl . '</a>';
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/confirm-lost-password.tpl', $oData->email);
