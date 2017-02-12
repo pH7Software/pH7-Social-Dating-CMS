@@ -304,7 +304,7 @@ class Design
         ($bLink ? $bSoftwareName = true : '');
 
         if (!$bEmail && \PH7\AdminCore::auth())
-            echo '<p class="underline"><strong><em><a class="red" href="', Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), '">', t('Need to remove the link below?'), '</a></em></strong></p>';
+            echo '<p class="s_bMarg underline"><strong><em><a class="red" href="', Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), '">', t('Need to remove the link below?'), '</a></em></strong><br /><em class="small">' . t('(... and get rid of all other promo notices)') . '</em></p>';
 
         if ($bComment)
         {
