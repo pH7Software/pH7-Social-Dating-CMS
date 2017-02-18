@@ -680,13 +680,13 @@ class File
     /**
      * Get the URL contents (For URLs, it is better to use CURL because it is faster than file_get_contents function).
      *
-     * @param string $sFile URL to be read contents.
+     * @param string $sUrl URL to be read contents.
      * @return mixed (string | boolean) Return the result content on success, FALSE on failure.
      */
-    public function getUrlContents($sFile)
+    public function getUrlContents($sUrl)
     {
         $rCh = curl_init();
-        curl_setopt($rCh, CURLOPT_URL, $sFile);
+        curl_setopt($rCh, CURLOPT_URL, $sUrl);
         curl_setopt($rCh, CURLOPT_HEADER, 0);
         curl_setopt($rCh, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($rCh, CURLOPT_FOLLOWLOCATION, 1);
