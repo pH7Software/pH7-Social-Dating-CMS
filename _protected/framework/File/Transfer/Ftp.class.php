@@ -13,11 +13,11 @@
  */
 
 namespace PH7\Framework\File\Transfer;
+
 defined('PH7') or exit('Restricted access');
 
 class Ftp extends \PH7\Framework\File\File
 {
-
     /*** Alias ***/
     const
     ASCII = FTP_ASCII,
@@ -49,8 +49,9 @@ class Ftp extends \PH7\Framework\File\File
      */
     public function __construct($sHost, $sUsername, $sPassword, $sPath = '/')
     {
-        if (!extension_loaded('ftp'))
+        if (!extension_loaded('ftp')) {
             throw new \PH7\Framework\Error\CException\PH7RuntimeException('FTP PHP extension is not installed!');
+        }
 
         // Attribute assignments
         $this->_sHost = $sHost;
@@ -70,8 +71,9 @@ class Ftp extends \PH7\Framework\File\File
     {
         $sConnFunc = ($bSsl) ? 'ftp_ssl_connect' : 'ftp_connect';
 
-        if (!$this->_rStream = $sConnFunc($this->_sHost))
-            Exception('Couldn\'t connect to \'' . $this->_sHost . '\'!');
+        if (!$this->_rStream = $sConnFunc($this->_sHost)) {
+            Exception('Couldn\'t connect to \'' . $this->_sHost);
+        }
 
         return ftp_login($this->_rStream, $this->_sUsername, $this->_sPassword);
     }
@@ -92,17 +94,15 @@ class Ftp extends \PH7\Framework\File\File
      *
      * @param $sDir string
      * @return boolean
+     * @throws Exception
      */
     public function existDir($sDir)
     {
         $sCurrent = $this->getCurrentDir();
 
-        try
-        {
+        try {
             $this->changeDir($sDir);
-        }
-        catch (Exception $oE)
-        {
+        } catch (Exception $oE) {
         }
 
         $this->changeDir($sCurrent);
@@ -117,22 +117,20 @@ class Ftp extends \PH7\Framework\File\File
      * @param mixed (string | array) $mDir
      * @param integer (octal) $iMode Default: 0755
      * @return void
-     * @throws \PH7\Framework\File\Transfer\Exception If the file cannot be created.
+     * @throws Exception If the file cannot be created.
      */
     public function createDir($mDir, $iMode = 0755)
     {
-        if (is_array($mDir))
-        {
+        if (is_array($mDir)) {
             foreach ($mDir as $sD) $this->createDir($sD);
-        }
-        else
-        {
-            if (!$this->existDir($mDir))
-            {
-                if (@ftp_mkdir($this->_rStream, $mDir))
+        } else {
+            if (!$this->existDir($mDir)) {
+                if (@ftp_mkdir($this->_rStream, $mDir)) {
                     $this->chmod($mDir, $iMode); // For Unix OS
-                else
+                } else {
                     throw new Exception('Error to create file: \'' . $mDir . '\'<br /> Please verify that the directory permission is in writing mode.');
+                }
+            }
         }
     }
 
@@ -149,7 +147,7 @@ class Ftp extends \PH7\Framework\File\File
         $iType = $this->getFileMode($sTo);
 
         if (!@ftp_get($this->_rStream, $sFrom, $sTo, $iType))
-            throw new Exception('There was a problem while uploading \'' . $sFrom . '\'!');
+            throw new Exception('There was a problem while uploading \'' . $sFrom);
     }
 
     /**
@@ -165,10 +163,11 @@ class Ftp extends \PH7\Framework\File\File
     {
         $iType = $this->getFileMode($sTo);
 
-        if (@ftp_put($this->_rStream, $sTo, $sFrom, $iType))
+        if (@ftp_put($this->_rStream, $sTo, $sFrom, $iType)) {
             $this->chmod($sTo, $iMode); // For Unix OS
-        else
-            throw new Exception('There was a problem while uploading \'' . $sFrom . '\'!');
+        } else {
+            throw new Exception('There was a problem while uploading \'' . $sFrom);
+        }
     }
 
     /**
@@ -180,7 +179,9 @@ class Ftp extends \PH7\Framework\File\File
      */
     public function rename($sFrom, $sTo)
     {
-        if (!$this->existFile($sFrom)) return false;
+        if (!$this->existFile($sFrom)) {
+            return false;
+        }
 
         return ftp_rename($this->_rStream, $sFrom, $sTo);
     }
@@ -194,10 +195,15 @@ class Ftp extends \PH7\Framework\File\File
      */
     public function deleteFile($mFile)
     {
-        if (is_array($mFile))
-            foreach ($mFile as $sF) $this->deleteFile($sF);
-        else
-            if ($this->existFile($mFile)) ftp_delete($this->_rStream, $mFile);
+        if (is_array($mFile)) {
+            foreach ($mFile as $sF) {
+                $this->deleteFile($sF);
+            }
+        } else {
+            if ($this->existFile($mFile)) {
+                ftp_delete($this->_rStream, $mFile);
+            }
+        }
     }
 
     /**
@@ -219,7 +225,7 @@ class Ftp extends \PH7\Framework\File\File
      */
     public function alloc($sFile)
     {
-        return (!ftp_alloc($this->_rStream, $this->size($sFile), $sRes)) ? $sRes : true;
+        return !ftp_alloc($this->_rStream, $this->size($sFile), $sRes) ? $sRes : true;
     }
 
     /**
@@ -273,8 +279,9 @@ class Ftp extends \PH7\Framework\File\File
      */
     public function close()
     {
-        if (!empty($this->_rStream) && $this->_rStream !== false)
+        if (!empty($this->_rStream) && $this->_rStream !== false) {
             ftp_close($this->_rStream);
+        }
     }
 
     /**
@@ -314,5 +321,4 @@ class Ftp extends \PH7\Framework\File\File
             $this->_rStream
         );
     }
-
 }
