@@ -18,11 +18,9 @@ class InstallController extends Controller
 {
 
     /**
-     * @internal
-     * When pH7CMS will require PHP >= 5.6, whould be good to change these array attributes to array constants.
+     * Enable/Disable Modules according to the chosen niche
      */
-    /*** Enable/Disable Modules according to the chosen niche ***/
-    private $_aSocialMods = [
+    const SOCIAL_MODS = [
         'connect' => '0',
         'affiliate' => '0',
         'game' => '1',
@@ -43,7 +41,7 @@ class InstallController extends Controller
         'user-dashboard' => '0'
     ];
 
-    private $_aDatingMods = [
+    const DATING_MODS = [
         'connect' => '0',
         'affiliate' => '1',
         'game' => '0',
@@ -64,11 +62,14 @@ class InstallController extends Controller
         'user-dashboard' => '1'
     ];
 
-    /*** Enable/Disable Site Settings according to the chosen niche ***/
-    private $_aSocialSettings = [
+    /**
+     * Enable/Disable Site Settings according to the chosen niche
+     */
+    const SOCIAL_SETTINGS = [
         'social_media_widgets' => '1'
     ];
-    private $_aDatingSettings = [
+
+    const DATING_SETTINGS = [
         'social_media_widgets' => '0'
     ];
 
@@ -469,15 +470,15 @@ class InstallController extends Controller
                         case 'zendate':
                             $bUpdateNeeded = true;
                             $sTheme = 'zendate';
-                            $aModUpdate = $this->_aSocialMods;
-                            $aSettingUpdate = $this->_aSocialSettings;
+                            $aModUpdate = self::SOCIAL_MODS;
+                            $aSettingUpdate = self::SOCIAL_SETTINGS;
                         break;
 
                         case 'datelove':
                             $bUpdateNeeded = true;
                             $sTheme = 'datelove';
-                            $aModUpdate = $this->_aDatingMods;
-                            $aSettingUpdate = $this->_aDatingSettings;
+                            $aModUpdate = self::DATING_MODS;
+                            $aSettingUpdate = self::DATING_SETTINGS;
                         break;
 
                         // Or for 'base', don't do anything. Just use the default settings already setup in the database
