@@ -7,7 +7,6 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  * @package          PH7 / Framework / Layout / Html
- * @version          1.6
  */
 
 namespace PH7\Framework\Layout\Html;
