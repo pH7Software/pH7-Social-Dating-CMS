@@ -34,10 +34,22 @@ PH7\Framework\Mvc\Router\Uri;
 
 class Design
 {
-
     const
     CACHE_GROUP = 'str/design',
     CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
+
+    const
+    SUCCESS_TYPE = 'success',
+    ERROR_TYPE = 'error',
+    WARNING_TYPE = 'warning',
+    INFO_TYPE = 'info';
+
+    const MESSAGE_TYPES = [
+        self::SUCCESS_TYPE,
+        self::ERROR_TYPE,
+        self::WARNING_TYPE,
+        self::INFO_TYPE
+    ];
 
     protected
     $bIsDiv = false,
@@ -192,7 +204,7 @@ class Design
     * @param integer $iTime Optional, a time. Default: "3" seconds.
     * @return void
     */
-    public function setRedirect($sUrl = null, $sMsg = null, $sType = 'success', $iTime = 3)
+    public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = 3)
     {
         if (!empty($sMsg)) {
             $this->setFlashMsg($sMsg, $sType);
@@ -466,14 +478,14 @@ class Design
      * Set flash message.
      *
      * @param string $sMessage
-     * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
+     * @param string $sType Type of message: "Design::SUCCESS_TYPE", "Design::INFO_TYPE", "Design::WARNING_TYPE" or "Design::ERROR_TYPE"
      * @return void
      */
-    public function setFlashMsg($sMessage, $sType = '')
+    public function setFlashMsg($sMessage, $sType = self::SUCCESS_TYPE)
     {
         /*** Check the type of message, otherwise it is the default ***/
-        $sType = ($sType == 'success' || $sType == 'info' || $sType == 'warning' || $sType == 'error') ? $sType : 'success';
-        $sType = ($sType == 'error' ? 'danger' : $sType); // Now the "error" CSS class has become "danger", so we have to convert it
+        $sType = in_array($sType, self::MESSAGE_TYPES) ? $sType : self::SUCCESS_TYPE;
+        $sType = ($sType == self::ERROR_TYPE ? 'danger' : $sType); // Now the "error" CSS class has become "danger", so we have to convert it
         $this->oSession->set(
             [
                 'flash_msg'=> $sMessage,
@@ -890,5 +902,4 @@ class Design
           $this->oHttpRequest
         );
     }
-
 }

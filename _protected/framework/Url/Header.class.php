@@ -14,6 +14,7 @@ namespace PH7\Framework\Url;
 defined('PH7') or exit('Restricted access');
 
 use
+PH7\Framework\Layout\Html\Design,
 PH7\Framework\Http\Http,
 PH7\Framework\Mvc\Request\Http as HttpRequest;
 
@@ -26,11 +27,11 @@ class Header
      * @static
      * @param string $sUrl Default NULL, so it's the current URL.
      * @param string $sMessage Default NULL, so no message.
-     * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
+     * @param string $sType Type of message: "Design::SUCCESS_TYPE", "Design::INFO_TYPE", "Design::WARNING_TYPE" or "Design::ERROR_TYPE"
      * @param integer $iRedirectCode Default NULL, so the redirect code will be "301".
      * @return void
      */
-    public static function redirect($sUrl = null, $sMessage = null, $sType = 'success', $iRedirectCode = null)
+    public static function redirect($sUrl = null, $sMessage = null, $sType = Design::SUCCESS_TYPE, $iRedirectCode = null)
     {
         if (!Http::getStatusCodes($iRedirectCode)) $iRedirectCode = 301;
         Http::setHeadersByCode(Http::getStatusCodes($iRedirectCode));

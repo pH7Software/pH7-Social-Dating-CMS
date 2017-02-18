@@ -4,6 +4,8 @@
  */
 namespace PFBC;
 
+use PH7\Framework\Layout\Html\Design;
+
 /*This project's namespace structure is leveraged to autoload requested classes at runtime.*/
 function Load($class)
 {
@@ -481,21 +483,22 @@ JS;
 
     /*Valldation errors are saved in the session after the form submission, and will be displayed to the user
     when redirected back to the form.*/
-    public static function setError($id, $errors, $element = '')
+    public static function setError($id, $messages, $element = '')
     {
-        if(!is_array($errors))
-            $errors = array($errors);
-        if(empty($_SESSION['pfbc'][$id]['errors'][$element]))
+        if (!is_array($messages))
+            $messages = array($messages);
+
+        if (empty($_SESSION['pfbc'][$id]['errors'][$element]))
             $_SESSION['pfbc'][$id]['errors'][$element] = array();
 
-        foreach($errors as $error)
-            $_SESSION['pfbc'][$id]['errors'][$element][] = $error;
+        foreach ($messages as $message)
+            $_SESSION['pfbc'][$id]['errors'][$element][] = $message;
     }
 
     /*setSuccess*/
-    public static function setSuccess($id, $success, $element = '')
+    public static function setSuccess($id, $message, $element = '')
     {
-         return (new \PH7\Framework\Layout\Html\Design)->setFlashMsg($success);
+         return (new Design)->setFlashMsg($message, Design::SUCCESS_TYPE);
     }
 
     public static function setSessionValue($id, $element, $value)
