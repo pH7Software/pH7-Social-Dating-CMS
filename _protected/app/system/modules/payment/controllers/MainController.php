@@ -98,7 +98,7 @@ class MainController extends Controller
                 $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
                 if ($oPayPal->valid() && $this->httpRequest->postExists('custom'))
                 {
-                    $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
+                    $aData = explode('.', base64_decode($this->httpRequest->post('custom')));
                     $iItemNumber = (int) $aData[0];
                     $fPrice = $aData[1];
                     if ($this->oUserModel->updateMembership($iItemNumber, $this->iProfileId, $fPrice, $this->dateTime->get()->dateTime('Y-m-d H:i:s')))

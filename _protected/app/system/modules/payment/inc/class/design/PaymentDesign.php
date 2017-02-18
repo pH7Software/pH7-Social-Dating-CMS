@@ -14,7 +14,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class PaymentDesign extends Framework\Core\Core
 {
-
     /**
      * @param object $oMembership The Object Membership Model.
      * @return void
@@ -24,7 +23,7 @@ class PaymentDesign extends Framework\Core\Core
         $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
 
         $oPayPal->param('business', $this->config->values['module.setting']['paypal.email'])
-            ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price)) // Use base64_encode() to discourage curious people
+            ->param('custom', base64_encode($oMembership->groupId . '.' . $oMembership->price)) // Use base64_encode() to discourage curious people
             ->param('amount', $oMembership->price)
             ->param('item_number', $oMembership->groupId)
             ->param('item_name', $this->registry->site_name . ' ' . $oMembership->name)
@@ -126,5 +125,4 @@ class PaymentDesign extends Framework\Core\Core
     {
         return t('Buy %0% with %1%!', $sMembershipName, '<b>' . $sProvider . '</b>');
     }
-
 }
