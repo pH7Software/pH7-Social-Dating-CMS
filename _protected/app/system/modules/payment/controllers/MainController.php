@@ -16,7 +16,6 @@ PH7\Framework\Mail\Mail;
 
 class MainController extends Controller
 {
-
     /**
      * @access protected Protected access because the AdminController class is derived from this class and used these attributes.
      * @var object $oUserModel
@@ -300,5 +299,4 @@ class MainController extends Controller
     {
         (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $this->iProfileId, null)->clear();
     }
-
 }

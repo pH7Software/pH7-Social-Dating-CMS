@@ -122,6 +122,18 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * **Minimum Web Space** 2.0 GB
 
 
+## Installation
+
+You can install by cloning pH7CMS from [Github](https://github.com/pH7Software/pH7-Social-Dating-CMS), via [composer](https://packagist.org/packages/ph7software/ph7cms), or via [Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
+  * Github:
+    * `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
+    * From a command line open in the folder, run `composer install`.
+  * Composer:
+    * `composer create-project pH7Software/pH7-Social-Dating-CMS --prefer-dist website`
+  * Sourceforge:
+    * Directly download the latest stable version [from Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
+
+
 ## Nginx Configuration
 
 In order to get pH7CMS working on nginx server, you need to add some custom nginx configuration.
