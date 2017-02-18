@@ -1,4 +1,3 @@
-
 <?php
 /**
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
