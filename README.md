@@ -130,8 +130,8 @@ You can install by cloning pH7CMS from [Github](https://github.com/pH7Software/p
     * From a command line open in the folder, run `composer install`.
   * Composer:
     * `composer create-project pH7Software/pH7-Social-Dating-CMS --prefer-dist website`
-    * Sourceforge:
-      * Directly download the latest stable version [from Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
+  * Sourceforge:
+    * Directly download the latest stable version [from Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
 
 
 ## Nginx Configuration
