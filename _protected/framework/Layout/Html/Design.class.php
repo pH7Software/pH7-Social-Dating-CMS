@@ -387,7 +387,7 @@ class Design
                 ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
                 ['title' => 'Dating App for Dating Singles', 'link' => 'http://dating-app.co'],
-                ['title' => 'Learn Language Abroad', 'link' => 'http://newayup.com']
+                ['title' => 'Android London Dating App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
             ];
         }
 
