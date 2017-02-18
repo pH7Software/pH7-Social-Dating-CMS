@@ -6,9 +6,11 @@
  * @package        PH7 / App / System / Module / Game / Config
  */
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 use
+PH7\Framework\Layout\Html\Design,
 PH7\Framework\Url\Header,
 PH7\Framework\Mvc\Router\Uri;
 
@@ -31,7 +33,11 @@ class Permission extends PermissionCore
         if (!$bAdminAuth && $this->registry->controller === 'AdminController')
         {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            Header::redirect(Uri::get('game','main','index'), $this->adminSignInMsg(), 'error');
+            Header::redirect(
+                Uri::get('game','main','index'),
+                $this->adminSignInMsg(),
+                Design::ERROR_TYPE
+            );
         }
     }
 }

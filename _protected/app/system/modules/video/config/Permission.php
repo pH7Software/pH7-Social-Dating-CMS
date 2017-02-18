@@ -6,9 +6,13 @@
  * @package        PH7 / App / System / Module / Video / Config
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+use
+PH7\Framework\Layout\Html\Design,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class Permission extends PermissionCore
 {
@@ -23,21 +27,21 @@ class Permission extends PermissionCore
             $this->signInRedirect();
         }
 
-        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) // If the admin is not logged (but can be if the admin use "login as user" feature)
-        {
-            if (!$this->checkMembership() || !$this->group->view_videos)
-            {
+         // If the admin is not logged (but can be if the admin use "login as user" feature)
+        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
+            if (!$this->checkMembership() || !$this->group->view_videos) {
                 $this->paymentRedirect();
-            }
-            elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addvideo') && !$this->group->upload_videos)
-            {
+            } elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addvideo') && !$this->group->upload_videos) {
                 $this->paymentRedirect();
             }
 
-            if ($this->registry->controller === 'AdminController')
-            {
+            if ($this->registry->controller === 'AdminController') {
                 // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-                Header::redirect(Uri::get('user','main','login'), $this->adminSignInMsg(), 'error');
+                Header::redirect(
+                    Uri::get('user','main','login'),
+                    $this->adminSignInMsg(),
+                    Design::ERROR_TYPE
+                );
             }
         }
     }

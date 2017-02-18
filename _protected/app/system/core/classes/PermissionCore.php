@@ -6,13 +6,16 @@
  * @package        PH7 / App / System / Core / Class
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
+use
+PH7\Framework\Layout\Html\Design,
+PH7\Framework\Url\Header,
+PH7\Framework\Mvc\Router\Uri;
 
 abstract class PermissionCore extends Framework\Core\Core
 {
-
     protected $group;
 
     public function __construct()
@@ -29,22 +32,41 @@ abstract class PermissionCore extends Framework\Core\Core
      */
     public function checkMembership()
     {
-        return (UserCore::auth()) ? (new UserCoreModel)->checkMembershipExpiration($this->session->get('member_id'), $this->dateTime->get()->dateTime('Y-m-d H:i:s')) : true;
+        if (UserCore::auth()) {
+            return (new UserCoreModel)->checkMembershipExpiration(
+                $this->session->get('member_id'),
+                $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+            );
+        } else {
+            return true;
+        }
     }
 
     public function signUpRedirect()
     {
-        Header::redirect(Uri::get('user','signup','step1'), $this->signUpMsg(), 'error');
+        Header::redirect(
+            Uri::get('user','signup','step1'),
+            $this->signUpMsg(),
+            Design::ERROR_TYPE
+        );
     }
 
     public function signInRedirect()
     {
-        Header::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
+        Header::redirect(
+            Uri::get('user','main','login'),
+            $this->signInMsg(),
+            Design::ERROR_TYPE
+        );
     }
 
     public function alreadyConnectedRedirect()
     {
-        Header::redirect(Uri::get('user','account','index'), $this->alreadyConnectedMsg(), 'error');
+        Header::redirect(
+            Uri::get('user','account','index'),
+            $this->alreadyConnectedMsg(),
+            Design::ERROR_TYPE
+        );
     }
 
     /**
@@ -54,7 +76,11 @@ abstract class PermissionCore extends Framework\Core\Core
      */
     public function paymentRedirect()
     {
-        Header::redirect(Uri::get('payment','main','index'), $this->upgradeMembershipMsg(), 'warning');
+        Header::redirect(
+            Uri::get('payment','main','index'),
+            $this->upgradeMembershipMsg(),
+            Design::WARNING_TYPE
+        );
     }
 
     public function signInMsg()
@@ -81,5 +107,4 @@ abstract class PermissionCore extends Framework\Core\Core
     {
         return t('Please upgrade your membership!');
     }
-
 }

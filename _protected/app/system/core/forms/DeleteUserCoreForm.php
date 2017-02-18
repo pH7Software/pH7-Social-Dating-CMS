@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Core / Form
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 /** For "user" and "affiliate" module **/
@@ -13,10 +14,10 @@ class DeleteUserCoreForm
 {
     public static function display()
     {
-        if (isset($_POST['submit_delete_account']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_delete_account']))
+        if (isset($_POST['submit_delete_account'])) {
+            if (\PFBC\Form::isValid($_POST['submit_delete_account'])) {
                 new DeleteUserCoreFormProcess();
+            }
 
             Framework\Url\Header::redirect();
         }

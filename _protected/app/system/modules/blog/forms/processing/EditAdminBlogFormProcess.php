@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Blog / Form / Processing
  */
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 use

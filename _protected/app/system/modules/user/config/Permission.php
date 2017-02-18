@@ -6,11 +6,11 @@
  * @package        PH7 / App / System / Module / User / Config
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class Permission extends PermissionCore
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -58,5 +58,4 @@ class Permission extends PermissionCore
             }
         }
     }
-
 }

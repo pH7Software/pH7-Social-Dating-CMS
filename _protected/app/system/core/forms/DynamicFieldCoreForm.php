@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Core / Form
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class DynamicFieldCoreForm

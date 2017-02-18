@@ -8,11 +8,13 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
+use
+PH7\Framework\Layout\Html\Design,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class Permission extends PermissionCore
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -22,11 +24,13 @@ class Permission extends PermissionCore
          * pH7CMS includes this file only if it exists.
          *
          * Example of Code:
-         * if (!UserCore::auth() && ($this->registry->controller === 'HelloWorldController'))
-         * {
-         *     Header::redirect(Uri::get('user','main','login'), $this->signInMsg(), 'error');
+         * if (!UserCore::auth() && ($this->registry->controller === 'HelloWorldController')) {
+         *     Header::redirect(
+         *         Uri::get('user','main','login'),
+         *         $this->signInMsg(),
+         *         Design::ERROR_TYPE
+         *     );
          * }
          */
     }
-
 }

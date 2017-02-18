@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Core / Form
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;

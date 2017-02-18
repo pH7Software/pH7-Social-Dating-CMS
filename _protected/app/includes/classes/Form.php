@@ -13,7 +13,6 @@ namespace PH7;
 
 class Form extends Framework\Layout\Form\Form
 {
-
     /**
      * To get Value Data from the database.
      *
@@ -46,5 +45,4 @@ class Form extends Framework\Layout\Form\Form
 
         return rtrim($sVal, ','); // Removes the last comma
     }
-
 }

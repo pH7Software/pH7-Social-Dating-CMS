@@ -8,6 +8,7 @@
 namespace PH7;
 
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Layout\Html\Security;
 use PH7\Framework\Url\Header;
@@ -15,9 +16,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
-    const SUCCESS_TYPE = 'success';
-    const ERROR_TYPE = 'error';
-
     protected $oMailModel;
     protected $oPage;
     protected $sTitle;
@@ -343,6 +341,6 @@ class MainController extends Controller
      */
     private function _getStatusType()
     {
-        return $this->_bStatus ? self::SUCCESS_TYPE : self::ERROR_TYPE;
+        return $this->_bStatus ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
     }
 }

@@ -37,15 +37,12 @@ class AdminController extends MainController
         $sPostId = $this->httpRequest->post('post_id');
         $iProfileId = $this->httpRequest->post('profile_id', 'int');
 
-        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId))
-        {
+        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId)) {
             /* Clean NoteModel Cache */
             (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
             $this->sMsg = t('The Note has been approved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The Note could not be approved!');
         }
 
@@ -58,15 +55,12 @@ class AdminController extends MainController
         $sPostId = $this->httpRequest->post('post_id');
         $iProfileId = $this->httpRequest->post('profile_id', 'int');
 
-        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId, '0'))
-        {
+        if (isset($iNoteId, $iProfileId, $sPostId) && $this->oNoteModel->approved($iNoteId, '0')) {
             /* Clean NoteModel Cache */
             (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
 
             $this->sMsg = t('The Note has been approved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The Note could not be approved!');
         }
 

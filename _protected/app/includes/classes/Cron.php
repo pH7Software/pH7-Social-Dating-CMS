@@ -10,7 +10,6 @@ namespace PH7;
 
 abstract class Cron extends Framework\Cron\Run\Cron
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -31,5 +30,4 @@ abstract class Cron extends Framework\Cron\Run\Cron
             exit(t('This cron has already been executed.'));
         }
     }
-
 }
