@@ -127,11 +127,15 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 You can install by cloning pH7CMS from [Github](https://github.com/pH7Software/pH7-Social-Dating-CMS), via [composer](https://packagist.org/packages/ph7software/ph7cms), or via [Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
   * Github:
     * `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
-    * From a command line open in the folder, run `composer install`.
+    * Install Composer (https://getcomposer.org)
+    * From a command line open in the folder, run `composer install`
   * Composer:
+    * Install Composer (https://getcomposer.org)
     * `composer create-project pH7Software/pH7-Social-Dating-CMS --prefer-dist website`
   * Sourceforge:
-    * Directly download the latest stable version [from Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
+    * Directly download the latest stable version [from Sourceforge](https://sourceforge.net/projects/ph7socialdating/)
+  * Softaculous:
+    * If your Web host offers Softaculous, you might be able to install [pH7CMS in one-click with Softaculous](http://www.softaculous.com/softwares/socialnetworking/pH7CMS)
 
 
 ## Nginx Configuration
