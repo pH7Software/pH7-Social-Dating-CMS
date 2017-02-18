@@ -21,7 +21,7 @@
 <h2>PHP:</h2>
 <h3>Minimum:</h3>
 <ul>
-    <li>Version - 5.5 or higher</li>
+    <li>Version - 5.6 or higher</li>
     <li>PDO extension</li>
     <li>exec() PHP (system program execution) must be allowed</li>
     <li>GD complied with your PHP Build</li>

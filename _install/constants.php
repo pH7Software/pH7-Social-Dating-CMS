@@ -27,7 +27,7 @@ $sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF']
 
 //------------ Other ----------------//
 define('PH7_ADMIN_MOD', 'admin123');
-define('PH7_REQUIRE_SERVER_VERSION', '5.5.0');
+define('PH7_REQUIRE_SERVER_VERSION', '5.6.0');
 define('PH7_REQUIRE_SQL_VERSION', '5.0');
 define('PH7_ENCODING', 'utf-8');
 define('PH7_DEFAULT_TIMEZONE', 'America/Chicago');

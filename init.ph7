@@ -17,7 +17,7 @@ namespace PH7;
 
 define('PH7', 1);
 
-define('PH7_REQUIRE_SERVER_VERSION', '5.5.0');
+define('PH7_REQUIRE_SERVER_VERSION', '5.6.0');
 define('PH7_REQUIRE_SQL_VERSION', '5.0');
 
 if (version_compare(PHP_VERSION, PH7_REQUIRE_SERVER_VERSION, '<')) {
