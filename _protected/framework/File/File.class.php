@@ -618,7 +618,7 @@ class File
         $sTmpFile = $this->getFileWithoutExt($sFile) . '.tmp.' . $this->getFileExt($sFile);
         $iWritten = (new \SplFileObject($sTmpFile, 'wb'))->fwrite($sData);
 
-        if ($iWritten != null) {
+        if ($iWritten !== null) {
             // Copy of the temporary file to the original file if no problem occurred.
             copy($sTmpFile, $sFile);
         }
