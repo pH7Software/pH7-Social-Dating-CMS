@@ -124,9 +124,8 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 
 ## Installation
 
-You can install by cloning pH7CMS from [Github](https://github.com/pH7Software/pH7-Social-Dating-CMS), via [composer](https://packagist.org/packages/ph7software/ph7cms), or via [Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
   * Github:
-    * `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
+    * Clone pH7CMS from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
     * Install Composer (https://getcomposer.org)
     * From a command line open in the folder, run `composer install`
   * Composer:
