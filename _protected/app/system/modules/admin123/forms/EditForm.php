@@ -24,7 +24,7 @@ class EditForm
         }
 
         $oHR = new Http;
-        // Prohibit other administrators to edit the Root Administrator (ID 1)
+        // Prohibit other admins to edit the Root Administrator (ID 1)
         $iProfileId = ($oHR->getExists('profile_id') && !AdminCore::isRootProfileId($oHR->get('profile_id', 'int'))) ? $oHR->get('profile_id', 'int') : (new Session)->get('admin_id');
 
         $oAdmin = (new AdminModel)->readProfile($iProfileId, 'Admins');
