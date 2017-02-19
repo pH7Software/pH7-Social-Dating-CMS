@@ -6,24 +6,36 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http;
+use
+PH7\Framework\Cache\Cache,
+PH7\Framework\Mvc\Model\Design,
+PH7\Framework\Mvc\Request\Http;
 
 class UpdateAdsFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
 
         $sTable = AdsCore::getTable();
-        (new AdsCoreModel)->update($this->httpRequest->post('id_ads'), $this->httpRequest->post('title'), $this->httpRequest->post('code', Http::NO_CLEAN), $sTable);
 
-        /* Clean Model\Design for STATIC data */
-        (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear();
+        (new AdsCoreModel)->update(
+            $this->httpRequest->post('id_ads'),
+            $this->httpRequest->post('title'),
+            $this->httpRequest->post('code', Http::NO_CLEAN),
+            $sTable
+        );
+
+        $this->clearCache();
 
         \PFBC\Form::setSuccess('form_update_ads', t('The banner has been saved!'));
     }
 
+    private function clearCache()
+    {
+        (new Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
+    }
 }

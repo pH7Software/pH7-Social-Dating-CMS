@@ -6,22 +6,24 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Url\Header;
+use
+PH7\Framework\Layout\Html\Design,
+PH7\Framework\Mvc\Request\Http,
+PH7\Framework\Url\Header;
 
 class ProtectedFileFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
 
         $bStatus = $this->file->save(PH7_PATH_PROTECTED . $this->httpRequest->get('file'), $this->httpRequest->post('content', Http::NO_CLEAN));
         $sMsg = ($bStatus) ? t('Changes saved!') : t('The file could not be saved. Please check your file permissions (must be in  write mode)');
-        $sMsgType = ($bStatus) ? 'success' : 'error';
+        $sMsgType = ($bStatus) ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
 
         Header::redirect($this->httpRequest->previousPage(), $sMsg, $sMsgType);
     }
-
 }

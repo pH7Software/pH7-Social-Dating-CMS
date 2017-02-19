@@ -55,8 +55,7 @@ class MainController extends Controller
             // Set the site to "validated" status
             $this->oValidateModel->set();
 
-            // Clean DbConfig Cache
-            (new Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
+            DbConfig::clearCache();
 
             Header::redirect(
                 PH7_ADMIN_MOD,

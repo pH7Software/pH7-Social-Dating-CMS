@@ -6,26 +6,32 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mvc\Model\Design;
+use
+PH7\Framework\Cache\Cache,
+PH7\Framework\Mvc\Model\Design,
+PH7\Framework\Mvc\Request\Http;
 
 class StyleFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
 
         $sCode = $this->httpRequest->post('code', Http::NO_CLEAN);
-        if (!$this->str->equals($sCode, (new Design)->customCode('css')))
-        {
+
+        if (!$this->str->equals($sCode, (new Design)->customCode('css'))) {
             (new AdminModel)->updateCustomCode($sCode, 'css');
 
-            /* Clean Model\Design for STATIC / customCodecss data */
-            (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, 'customCodecss', null)->clear();
+            $this->clearCache();
         }
         \PFBC\Form::setSuccess('form_style', t('The CSS code has been updated successfully!'));
     }
 
+    private function clearCache()
+    {
+        (new Cache)->start(Design::CACHE_STATIC_GROUP, 'customCodecss', null)->clear();
+    }
 }

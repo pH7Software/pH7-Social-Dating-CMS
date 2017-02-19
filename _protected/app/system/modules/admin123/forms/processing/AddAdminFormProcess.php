@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use
@@ -15,7 +16,6 @@ PH7\Framework\Url\Header;
 
 class AddAdminFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -33,7 +33,6 @@ class AddAdminFormProcess extends Form
 
         (new AdminModel)->add($aData);
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The administrator has been successfully added.'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('Administrator successfully added.'));
     }
-
 }

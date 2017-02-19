@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use
@@ -17,7 +18,6 @@ PH7\Framework\Url\Header;
 
 class AddUserFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -49,7 +49,6 @@ class AddUserFormProcess extends Form
             (new UserCore)->setAvatar($iProfileId, $aData['username'], $_FILES['avatar']['tmp_name'], 1);
         }
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The user has been successfully added.'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('User successfully added.'));
     }
-
 }

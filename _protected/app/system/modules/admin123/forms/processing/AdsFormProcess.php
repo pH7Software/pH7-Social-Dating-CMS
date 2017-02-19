@@ -6,16 +6,17 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use
+PH7\Framework\Cache\Cache,
 PH7\Framework\Mvc\Request\Http,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
 
 class AdsFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -31,12 +32,20 @@ class AdsFormProcess extends Form
 
         (new AdsCoreModel)->add($sTitle, $sCode, $iWidth, $iHeight, $sTable);
 
-        /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
-        (new Framework\Cache\Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear()
-        ->start(AdsCoreModel::CACHE_GROUP, 'totalAds' . ($iIsAff ? 'Affiliates' : ''), null)->clear();
+        $this->clearCache();
 
         $sSlug = ($iIsAff) ? 'affiliate' : '';
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'ads', $sSlug), t('The banner has been added!'));
     }
 
+    /**
+     * Clean AdminCoreModel Ads and Model\Design for STATIC data.
+     *
+     * @return void
+     */
+    private function clearCache()
+    {
+        (new Cache)->start(Framework\Mvc\Model\Design::CACHE_STATIC_GROUP, null, null)->clear()
+            ->start(AdsCoreModel::CACHE_GROUP, 'totalAds' . ($iIsAff ? 'Affiliates' : ''), null)->clear();
+    }
 }

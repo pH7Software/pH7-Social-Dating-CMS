@@ -6,13 +6,13 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Mvc\Request\Http;
 
 class MetaMainFormProcess extends Form
 {
-
     private $aMetaFields = [
         'page_title' => 'pageTitle',
         'headline' => 'headline',
@@ -35,8 +35,7 @@ class MetaMainFormProcess extends Form
         $oMetaData = DbConfig::getMetaMain($this->httpRequest->get('meta_lang'));
         $this->updateFields($oMetaData);
 
-        /* Clean DbConfig Cache */
-        (new Framework\Cache\Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
+        DbConfig::clearCache();
 
         \PFBC\Form::setSuccess('form_meta', t('Meta Tags successfully updated!'));
     }
@@ -49,14 +48,11 @@ class MetaMainFormProcess extends Form
      */
     private function updateFields($oMeta)
     {
-        foreach ($this->aMetaFields as $sKey => $sVal)
-        {
-            if (!$this->str->equals($this->httpRequest->post($sKey), $oMeta->$sVal))
-            {
+        foreach ($this->aMetaFields as $sKey => $sVal) {
+            if (!$this->str->equals($this->httpRequest->post($sKey), $oMeta->$sVal)) {
                 $sParam = ($sKey == 'promo_text') ? Http::ONLY_XSS_CLEAN : null;
                 DbConfig::setMetaMain($sVal, $this->httpRequest->post($sKey, $sParam), $oMeta->langId);
             }
         }
     }
-
 }

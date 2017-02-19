@@ -6,13 +6,17 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\DbConfig;
+use
+PH7\Framework\Cache\Cache,
+PH7\Framework\Layout\Gzip\Gzip,
+PH7\Framework\Navigation\Browser,
+PH7\Framework\Mvc\Model\DbConfig;
 
 class SettingFormProcess extends Form
 {
-
     private $bIsErr = false;
 
     private $aSettingFields = [
@@ -120,11 +124,11 @@ class SettingFormProcess extends Form
         $this->updateLogo();
         $this->updateGenericFields();
 
-        /* Clean DbConfig Cache */
-        (new Framework\Cache\Cache)->start(DbConfig::CACHE_GROUP, null, null)->clear();
+        DbConfig::clearCache();
 
-        if (!$this->bIsErr)
+        if (!$this->bIsErr) {
             \PFBC\Form::setSuccess('form_setting', t('Configurations successfully updated!'));
+        }
     }
 
     /**
@@ -230,12 +234,11 @@ class SettingFormProcess extends Form
                 $oLogo->save($sPathName);
 
                 // Clear CSS cache, because the logo is storaged with data URI in the CSS cache file
-                $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Gzip\Gzip::CACHE_DIR);
+                $this->file->deleteDir(PH7_PATH_CACHE . Gzip::CACHE_DIR);
 
                 // Clear the Web browser cache
-                (new Framework\Navigation\Browser)->noCache();
+                (new Browser)->noCache();
             }
         }
     }
-
 }

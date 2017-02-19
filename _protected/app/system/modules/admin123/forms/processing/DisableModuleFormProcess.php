@@ -6,9 +6,12 @@
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\Module as ModuleModel;
+use
+PH7\Framework\Cache\Cache,
+PH7\Framework\Mvc\Model\Module as ModuleModel;
 
 class DisableModuleFormProcess extends Form
 {
@@ -27,16 +30,21 @@ class DisableModuleFormProcess extends Form
         }
         unset($oModuleModel);
 
-        /* Clear the cache */
-        (new Framework\Cache\Cache)->start(ModuleModel::CACHE_GROUP, null, null)->clear();
+        $this->clearCache();
 
         \PFBC\Form::setSuccess('form_module', t('Module Status have been saved!'));
     }
 
     protected function disableMods(ModuleModel $oModuleModel)
     {
-        foreach ($oModuleModel->get() as $oMod)
-            $oModuleModel->update($oMod->moduleId, '0'); // Need to be string because in DB it's an "enum" type
+        foreach ($oModuleModel->get() as $oMod) {
+            // Need to be string because in DB it's an "enum" type
+            $oModuleModel->update($oMod->moduleId, '0');
+        }
     }
 
+    private function clearCache()
+    {
+        (new Cache)->start(ModuleModel::CACHE_GROUP, null, null)->clear();
+    }
 }

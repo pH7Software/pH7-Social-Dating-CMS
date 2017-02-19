@@ -170,4 +170,13 @@ final class DbConfig
         (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
     }
 
+    /**
+     * Clean the entire DbConfig group Cache.
+     *
+     * @return void
+     */
+    public static function clearCache()
+    {
+        (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
+    }
 }
