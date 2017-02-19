@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Payment / Config
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 /**
@@ -14,7 +15,6 @@ defined('PH7') or exit('Restricted access');
  *
  * 1 = Yes | 0 = No
  */
-
 return array(
     'quick_search_profiles' => 1,
     'advanced_search_profiles' => 1,
