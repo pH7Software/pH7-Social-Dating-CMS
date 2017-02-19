@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Model\Design;
 
 class AnalyticsApiForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_analytics']))
@@ -25,9 +24,8 @@ class AnalyticsApiForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_analytics', 'form_analytics'));
         $oForm->addElement(new \PFBC\Element\Token('analytics'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your analytics code (e.g., Google Analytics)'), 'code', array('value' => (new Design)->analyticsApi(false, false))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your analytics code (e.g., Google Analytics)'), 'code', array('value' => (new Design)->analyticsApi(false))));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }
