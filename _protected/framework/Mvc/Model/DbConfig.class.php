@@ -11,13 +11,13 @@
  */
 
 namespace PH7\Framework\Mvc\Model;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
 
 final class DbConfig
 {
-
     const
     CACHE_GROUP = 'db/config',
     CACHE_TIME = 999000,
@@ -38,10 +38,8 @@ final class DbConfig
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'setting' . $sSetting, self::CACHE_TIME);
 
         // @return value of config the database
-        if (!empty($sSetting))
-        {
-            if (!$sData = $oCache->get())
-            {
+        if (!empty($sSetting)) {
+            if (!$sData = $oCache->get()) {
                 $rStmt = Engine\Db::getInstance()->prepare('SELECT value FROM' . Engine\Db::prefix('Settings') . 'WHERE name = :setting');
                 $rStmt->bindParam(':setting', $sSetting, \PDO::PARAM_STR);
                 $rStmt->execute();
@@ -52,11 +50,8 @@ final class DbConfig
                 $oCache->put($sData);
             }
             $mData = $sData;
-        }
-        else
-        {
-            if (!$oData = $oCache->get())
-            {
+        } else {
+            if (!$oData = $oCache->get()) {
                 $rStmt = Engine\Db::getInstance()->prepare('SELECT * FROM' . Engine\Db::prefix('Settings'));
                 $rStmt->execute();
                 $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -67,7 +62,7 @@ final class DbConfig
         }
 
         unset($oCache);
-        return (empty($mData)) ? 0 : $mData;
+        return empty($mData) ? 0 : $mData;
     }
 
     /**
@@ -85,8 +80,7 @@ final class DbConfig
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'metaMain' . $sLangId, self::CACHE_TIME);
 
         // @return value of meta tags the database
-        if (!$oData = $oCache->get())
-        {
+        if (!$oData = $oCache->get()) {
             $sSql = 'SELECT * FROM' . Engine\Db::prefix('MetaMain') . 'WHERE langId = :langId';
 
             // Get meta data with the current language if it exists in the "MetaMain" table ...
@@ -96,8 +90,7 @@ final class DbConfig
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
 
             // If the current language doesn't exist in the "MetaMain" table, we create a new table for the new language with default value
-            if (empty($oData))
-            {
+            if (empty($oData)) {
                 $aData = [
                     'langId' => $sLangId, // The new language key (e.g., de_DE)
                     'pageTitle' => 'Home',
@@ -162,12 +155,14 @@ final class DbConfig
      */
     public static function setSiteMode($sStatus)
     {
-        if ($sStatus != self::MAINTENANCE_SITE && $sStatus != self::ENABLE_SITE) exit('Wrong maintenance mode type!');
+        if ($sStatus != self::MAINTENANCE_SITE && $sStatus != self::ENABLE_SITE) {
+            exit('Wrong maintenance mode type!');
+        }
 
         self::setSetting($sStatus, 'siteStatus');
 
-        /* Clear DbConfig Cache (this method is not always called in SettingFormProcess class, so clear the cache to be sure */
-        (new Cache)->start(self::CACHE_GROUP, null, null)->clear();
+        /* Clear DbConfig Cache (this method is not always called in SettingFormProcess class, so clear the cache to be sure) */
+        self::clearCache();
     }
 
     /**
