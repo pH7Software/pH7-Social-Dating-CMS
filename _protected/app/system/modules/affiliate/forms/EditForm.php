@@ -18,11 +18,10 @@ class EditForm
 
     public static function display()
     {
-        if (isset($_POST['submit_aff_edit_account']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_aff_edit_account']))
-                new EditFormProcess();
-
+        if (isset($_POST['submit_aff_edit_account'])) {
+            if (\PFBC\Form::isValid($_POST['submit_aff_edit_account'])) {
+                new EditFormProcess;
+            }
             Framework\Url\Header::redirect();
         }
 
@@ -43,9 +42,10 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_aff_edit_account', 'form_aff_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
-        if ($bAdminLogged && $oHR->getExists('profile_id'))
-        {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="m_button" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Back to Browse Affiliates') . '</a></p>'));
+        if ($bAdminLogged && $oHR->getExists('profile_id')) {
+            $oForm->addElement(
+                new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-tiny" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Back to Browse Affiliates') . '</a></p>')
+            );
         }
         unset($oHR);
 
