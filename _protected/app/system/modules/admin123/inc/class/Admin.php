@@ -11,7 +11,6 @@ use PH7\Framework\Session\Session, PH7\Framework\Url\Header, PH7\Framework\Mvc\R
 
 class Admin extends AdminCore
 {
-
     /**
      * Logout function for admins.
      *
@@ -35,8 +34,10 @@ class Admin extends AdminCore
     {
         $iProfileId = (int) $iProfileId;
 
-        if($iProfileId === 1) exit('You cannot delete the Root Administrator!');
-        (new AdminModel)->delete($iProfileId, $sUsername);
+        if (AdminCore::isRootProfileId($iProfileId)) {
+            exit('You cannot delete the Root Administrator!');
+        } else {
+            (new AdminModel)->delete($iProfileId, $sUsername);
+        }
     }
-
 }

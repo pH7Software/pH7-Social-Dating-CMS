@@ -17,6 +17,7 @@ PH7\Framework\Mvc\Model\Security as SecurityModel;
 // Abstract Class
 class AdminCore extends UserCore
 {
+    const ROOT_PROILE_ID = 1;
 
     /**
      * Admins'levels.
@@ -64,4 +65,14 @@ class AdminCore extends UserCore
         $oAdminModel->setLastActivity($oAdminData->profileId, 'Admins');
     }
 
+    /**
+     * Determines if the ID is from Root Admin (main admin).
+     *
+     * @param  integer $iProfileId
+     * @return boolean
+     */
+    public static function isRootProfileId($iProfileId)
+    {
+        return $iProfileId === static::ROOT_PROILE_ID;
+    }
 }

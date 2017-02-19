@@ -11,7 +11,6 @@ use PH7\Framework\Security\Security, PH7\Framework\Mvc\Model\Engine\Db;
 
 class AdminModel extends AdminCoreModel
 {
-
     /**
      * It recreates an admin method more complicated and more secure than the classic one PH7\UserCoreModel::login()
      *
@@ -72,8 +71,9 @@ class AdminModel extends AdminCoreModel
     {
         $iProfileId = (int) $iProfileId;
 
-        if ($iProfileId === 1)
+        if (AdminCore::isRootProfileId($iProfileId)) {
             exit('You cannot delete the Root Administrator!');
+        }
 
         $oDb = Db::getInstance();
         $oDb->exec('DELETE FROM' . Db::prefix('Admins') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
@@ -131,5 +131,4 @@ class AdminModel extends AdminCoreModel
     {
         return $this->orm->update('CustomCode', 'code', $sCode, 'codeType', $sType);
     }
-
 }

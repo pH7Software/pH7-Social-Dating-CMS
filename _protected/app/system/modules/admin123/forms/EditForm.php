@@ -25,7 +25,7 @@ class EditForm
 
         $oHR = new Http;
         // Prohibit other administrators to edit the Root Administrator (ID 1)
-        $iProfileId = ($oHR->getExists('profile_id') && $oHR->get('profile_id', 'int') !== 1) ? $oHR->get('profile_id', 'int') : (new Session)->get('admin_id');
+        $iProfileId = ($oHR->getExists('profile_id') && !AdminCore::isRootProfileId($oHR->get('profile_id', 'int'))) ? $oHR->get('profile_id', 'int') : (new Session)->get('admin_id');
 
         $oAdmin = (new AdminModel)->readProfile($iProfileId, 'Admins');
 
@@ -34,7 +34,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_admin_edit_account', 'form_admin_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
-        if ($oHR->getExists('profile_id') && $oHR->get('profile_id', 'int') !== 1) {
+        if ($oHR->getExists('profile_id') && !AdminCore::isRootProfileId($oHR->get('profile_id', 'int'))) {
             $oForm->addElement(
                 new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-tiny" href="' . Uri::get(PH7_ADMIN_MOD, 'admin', 'browse') . '">' . t('Back to Browse Admins') . '</a></p>')
             );
