@@ -30,7 +30,6 @@ class AddAdminFormProcess extends Form
             'time_zone' => $this->httpRequest->post('time_zone'),
             'ip' => Ip::get()
         ];
-
         (new AdminModel)->add($aData);
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('Administrator successfully added.'));

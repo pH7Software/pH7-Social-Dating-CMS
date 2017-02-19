@@ -13,14 +13,12 @@ use PH7\Framework\Geo\Ip\Geo;
 
 class AddUserForm
 {
-
     public static function display()
     {
-        if (isset($_POST['submit_add_user']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_add_user']))
+        if (isset($_POST['submit_add_user'])) {
+            if (\PFBC\Form::isValid($_POST['submit_add_user'])) {
                 new AddUserFormProcess;
-
+            }
             Framework\Url\Header::redirect();
         }
 
@@ -49,5 +47,4 @@ class AddUserForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

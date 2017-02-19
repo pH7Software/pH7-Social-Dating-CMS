@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use
@@ -15,7 +16,6 @@ PH7\Framework\Url\Header;
 
 class AddAffiliateFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -41,10 +41,8 @@ class AddAffiliateFormProcess extends Form
             'bank_account' => $this->httpRequest->post('bank_account'),
             'ip' => Ip::get()
         ];
-
         (new AffiliateModel)->add($aData);
 
-        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('The affiliate has been successfully added.'));
+        Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('Affiliate successfully added.'));
     }
-
 }

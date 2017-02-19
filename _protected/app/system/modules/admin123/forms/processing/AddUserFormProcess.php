@@ -43,8 +43,8 @@ class AddUserFormProcess extends Form
             'social_network_site' => $this->httpRequest->post('social_network_site'),
             'ip' => Ip::get()
         ];
-
         $iProfileId = (new UserCoreModel)->add($aData);
+
         if (!empty($_FILES['avatar']['tmp_name'])) {
             (new UserCore)->setAvatar($iProfileId, $aData['username'], $_FILES['avatar']['tmp_name'], 1);
         }
