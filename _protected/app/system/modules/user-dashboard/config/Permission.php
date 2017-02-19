@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / User Dashboard / Config
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class Permission extends PermissionCore
@@ -14,8 +15,7 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!UserCore::auth())
-        {
+        if (!UserCore::auth()) {
             $this->signUpRedirect();
         }
     }

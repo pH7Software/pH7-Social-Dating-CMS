@@ -6,21 +6,25 @@
  * @package        PH7 / App / System / Module / Lost Password / Config
  */
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
+use
+PH7\Framework\Layout\Html\Design,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class Permission extends PermissionCore
 {
-
     public function __construct()
     {
         parent::__construct();
 
-        if ((UserCore::auth() || AffiliateCore::auth() || AdminCore::auth()) && ($this->registry->action == 'forgot' || $this->registry->action == 'reset'))
-        {
-            Header::redirect(Uri::get('lost-password', 'main', 'account'), $this->alreadyConnectedMsg(), 'error');
+        if ((UserCore::auth() || AffiliateCore::auth() || AdminCore::auth()) && ($this->registry->action == 'forgot' || $this->registry->action == 'reset')) {
+            Header::redirect(Uri::get('lost-password', 'main', 'account'),
+                $this->alreadyConnectedMsg(),
+                Design::ERROR_TYPE
+            );
         }
     }
-
 }

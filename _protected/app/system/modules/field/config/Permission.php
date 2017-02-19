@@ -6,20 +6,27 @@
  * @package        PH7 / App / System / Module / Field / Config
  */
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
+
+use
+PH7\Framework\Layout\Html\Design,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class Permission extends PermissionCore
 {
-
     public function __construct()
     {
         parent::__construct();
 
-        if (!AdminCore::auth())
-        {
-             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
-            Framework\Url\Header::redirect(PH7_URL_ROOT, $this->adminSignInMsg(), 'error');
+        if (!AdminCore::auth()) {
+            // For security reasons, we don't redirect the user to the admin panel URL
+            Header::redirect(
+                PH7_URL_ROOT,
+                $this->adminSignInMsg(),
+                Design::ERROR_TYPE
+            );
         }
     }
-
 }

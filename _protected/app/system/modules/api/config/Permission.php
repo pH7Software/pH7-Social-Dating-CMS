@@ -8,20 +8,19 @@
  * @link           http://github.com/pH7Software/pH7CMS-HTTP-REST-Push-Data
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class Permission extends PermissionCore
 {
-
     public function __construct()
     {
         parent::__construct();
 
-        if (!Framework\Api\Tool::checkAccess($this->config, $this->httpRequest))
-        {
+        if (!Framework\Api\Tool::checkAccess($this->config, $this->httpRequest)) {
             Framework\Http\Http::setHeadersByCode(403);
-            exit('Your API key and/or the URL of your external application don\'t match with the one in your pH7CMS\'s configuration system!');
+            t("Your API key and/or the URL of your external application don't match with the one in your pH7CMS's configuration system!");
+            exit;
         }
     }
-
 }

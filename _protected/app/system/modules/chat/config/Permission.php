@@ -6,22 +6,20 @@
  * @package        PH7 / App / System / Module / Chat / Config
  */
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 class Permission extends PermissionCore
 {
-
     public function __construct()
     {
         parent::__construct();
 
-        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) // If the admin is not logged (but can be if the admin use "login as user" feature)
-        {
-            if (!$this->checkMembership() || !$this->group->chat)
-            {
+        // If the admin is not logged (but can be if the admin use "login as user" feature)
+        if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
+            if (!$this->checkMembership() || !$this->group->chat) {
                 $this->paymentRedirect();
             }
         }
     }
-
 }

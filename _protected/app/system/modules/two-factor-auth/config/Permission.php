@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Module / Two-Factor Auth / Config
  */
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 use PH7\Framework\Url\Header;
@@ -16,13 +17,11 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!$this->session->exists(TwoFactorAuthCore::PROFILE_ID_SESS_NAME) && $this->registry->action == 'verificationcode')
-        {
+        if (!$this->session->exists(TwoFactorAuthCore::PROFILE_ID_SESS_NAME) && $this->registry->action == 'verificationcode') {
             Header::redirect($this->registry->site_url);
         }
 
-        if (!UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth() && $this->registry->action == 'setup')
-        {
+        if (!UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth() && $this->registry->action == 'setup') {
             Header::redirect($this->registry->site_url);
         }
     }

@@ -6,23 +6,19 @@
  * @package        PH7 / App / System / Module / Love Calculator / Config
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class Permission extends PermissionCore
 {
-
     public function __construct()
     {
         parent::__construct();
 
-        if (!UserCore::auth())
-        {
+        if (!UserCore::auth()) {
             $this->signUpRedirect();
-        }
-        elseif (!$this->checkMembership() || !$this->group->love_calculator)
-        {
+        } elseif (!$this->checkMembership() || !$this->group->love_calculator) {
             $this->paymentRedirect();
         }
     }
-
 }
