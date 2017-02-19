@@ -21,13 +21,23 @@ class AnalyticsApiFormProcess extends Form
     {
         parent::__construct();
 
-        if (!$this->str->equals($this->httpRequest->post('code', Http::NO_CLEAN), (new Design)->analyticsApi(false)))
-        {
+        if (!$this->str->equals(
+            $this->httpRequest->post('code', Http::NO_CLEAN),
+            (new Design)->analyticsApi(false))
+        ) {
             (new Analytics)->updateApi($this->httpRequest->post('code', Http::NO_CLEAN));
-
-            /* Clean Model\Design for STATIC / analyticsApi data */
-            (new Cache)->start(Design::CACHE_STATIC_GROUP, 'analyticsApi1', null)->clear();
+            $this->clearCache();
         }
-        \PFBC\Form::setSuccess('form_analytics', t('The code Analytics Api has been successfully updated!'));
+        \PFBC\Form::setSuccess('form_analytics', t('Analytics Code updated!'));
+    }
+
+    /**
+     * Clear the 'active' "analyticsApi" data
+     *
+     * @return void
+     */
+    private function clearCache()
+    {
+        (new Cache)->start(Design::CACHE_STATIC_GROUP, 'analyticsApi1', null)->clear();
     }
 }
