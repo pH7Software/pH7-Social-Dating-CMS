@@ -303,7 +303,7 @@
             {/if}
 
             {if $is_forum_enabled}
-              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Admin Forum'}"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
+              <li><a href="{{ $design->url('forum','admin','index') }}" title="{lang 'Forum - Admin Mode'}"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
             {/if}
 
             {if $is_blog_enabled}
