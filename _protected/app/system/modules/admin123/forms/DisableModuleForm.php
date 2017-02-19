@@ -45,7 +45,7 @@ class DisableModuleForm
             }
 
             if ($oData->folderName === 'connect') {
-                $sAdditionalText .= '<span class="small"> • <a href="http://ph7cms.com/better-not-enable-connect-mod/">' . t('not recommended to enable it') . '</a></span>';
+                $sAdditionalText .= '<span class="small"> • <a class="underline" href="http://ph7cms.com/better-not-enable-connect-mod/">' . t('not recommended to enable it') . '</a></span>';
             }
 
             $aModuleNames[$oData->moduleId] = $oData->moduleTitle . $sAdditionalText;
