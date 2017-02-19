@@ -14,14 +14,12 @@ PH7\Framework\Mvc\Model\Module as ModuleModel;
 
 class DisableModuleForm
 {
-
     public static function display()
     {
-        if (isset($_POST['submit_module']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_module']))
+        if (isset($_POST['submit_module'])) {
+            if (\PFBC\Form::isValid($_POST['submit_module'])) {
                 new DisableModuleFormProcess;
-
+            }
             Framework\Url\Header::redirect();
         }
 
@@ -40,14 +38,17 @@ class DisableModuleForm
                 $aSelectedMods[] = $oData->moduleId;
             }
 
-            $sPremiumText = '';
-            if ((int)$oData->premiumMod === 1)
-            {
-                $sPremiumText = ' – (<a class="italic darkred" href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Premium Module') . '</a>)';
-                $sPremiumText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default API service by yours') . '</a>';
+            $sAdditionalText = '';
+            if ((int)$oData->premiumMod === 1) {
+                $sAdditionalText .= ' – (<a class="italic darkred" href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Premium Module') . '</a>)';
+                $sAdditionalText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default API service by yours') . '</a>';
             }
 
-            $aModuleNames[$oData->moduleId] = $oData->moduleTitle . $sPremiumText;
+            if ($oData->folderName === 'connect') {
+                $sAdditionalText .= '<span class="small"> • <a href="http://ph7cms.com/better-not-enable-connect-mod/">' . t('not recommended to enable it') . '</a></span>';
+            }
+
+            $aModuleNames[$oData->moduleId] = $oData->moduleTitle . $sAdditionalText;
         }
         unset($oModuleData);
 
@@ -59,5 +60,4 @@ class DisableModuleForm
         $oForm->addElement(new \PFBC\Element\Button(t('Save')));
         $oForm->render();
     }
-
 }
