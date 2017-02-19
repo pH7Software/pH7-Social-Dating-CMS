@@ -928,7 +928,6 @@ CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
 
 INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('Affiliate', 'affiliate', '0', '1'),
-('Game', 'game', '0', '1'),
 ('Chat', 'chat', '1', '0'),
 ('Chatroulette', 'chatroulette', '1', '0'),
 ('Picture', 'picture', '0', '1'),
@@ -937,14 +936,15 @@ INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('Forum', 'forum', '0', '1'),
 ('Note (blog system for users)', 'note', '0', '1'),
 ('Blog (company blog)', 'blog', '0', '1'),
-('Newsletter', 'newsletter', '0', '1'),
-('Invite Friends', 'invite', '0', '1'),
-('Social Media Authentication (connect module)', 'connect', '0', '0'),
-('Webcam', 'webcam', '0', '1'),
 ('Love Calculator', 'love-calculator', '0', '1'),
 ('Mail', 'mail', '0', '1'),
 ('Instant Messaging (IM)', 'im', '0', '1'),
-('User Dashboard', 'user-dashboard', '0', '1');
+('User Dashboard', 'user-dashboard', '0', '1'),
+('Game', 'game', '0', '1'),
+('Newsletter', 'newsletter', '0', '1'),
+('Invite Friends', 'invite', '0', '1'),
+('Social Media Authentication (connect module)', 'connect', '0', '0'),
+('Webcam', 'webcam', '0', '1');
 
 
 CREATE TABLE IF NOT EXISTS pH7_Modules (
