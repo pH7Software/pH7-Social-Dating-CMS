@@ -593,6 +593,10 @@ SetEnv HTTP_MOD_REWRITE On
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
+# Force your domain name to https (only if you have a SSL certificate)
+# RewriteCond %{HTTP:X-Forwarded-SSL} !on
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
 ### For pH7CMS's URL router (DO NOT REMOVE THESE FOLLOWING CODE) ###
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
