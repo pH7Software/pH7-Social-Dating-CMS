@@ -368,7 +368,7 @@ class Design
           $aSites = [
               ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
               ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com'],
-              ['title' => 'Date Londoners', 'link' => 'http://dating-app.co']
+              ['title' => 'Date Londoners', 'link' => 'http://flirt-dating.london']
           ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $aSites = [
@@ -381,11 +381,11 @@ class Design
             $aSites = [
                 ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'The MOBILE Dating App', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
+                ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
                 ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
-                ['title' => 'Dating App for Dating Singles', 'link' => 'http://dating-app.co'],
+                ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
                 ['title' => 'Android London Dating App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
             ];
         }
