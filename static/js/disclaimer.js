@@ -4,4 +4,4 @@
  * Contact form: http://clients.hizup.com/contact
  */
 
-document.write('<script src="//addons.hizup.com/disclaimer/init.js"></script>');
+document.write('<script src="//ph7cms.com/addons/disclaimer/init.js"></script>');
