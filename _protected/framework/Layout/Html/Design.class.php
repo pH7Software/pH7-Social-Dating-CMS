@@ -50,6 +50,10 @@ class Design
         self::INFO_TYPE
     ];
 
+    const
+    FLASH_MSG = 'flash_msg',
+    FLASH_TYPE = 'flash_type';
+
     protected
     $bIsDiv = false,
     $oStr,
@@ -487,8 +491,8 @@ class Design
         $sType = ($sType == self::ERROR_TYPE ? 'danger' : $sType); // Now the "error" CSS class has become "danger", so we have to convert it
         $this->oSession->set(
             [
-                'flash_msg'=> $sMessage,
-                'flash_type'=> $sType
+                self::FLASH_MSG => $sMessage,
+                self::FLASH_TYPE => $sType
             ]
         );
     }
@@ -500,11 +504,16 @@ class Design
      */
     public function flashMsg()
     {
-        if ($this->oSession->exists('flash_msg'))
-        {
-            echo '<div class="center bold alert alert-', $this->oSession->get('flash_type'), '" role="alert">', $this->oSession->get('flash_msg'), '</div>';
+        $aFlashData = [
+            self::FLASH_MSG,
+            self::FLASH_TYPE
+        ];
 
-            $this->oSession->remove('flash_msg'); // Remove the flash_msg session
+        if ($this->oSession->exists($aFlashData))
+        {
+            echo '<div class="center bold alert alert-', $this->oSession->get(self::FLASH_TYPE), '" role="alert">', $this->oSession->get(self::FLASH_MSG), '</div>';
+
+            $this->oSession->remove($aFlashData);
         }
     }
 
