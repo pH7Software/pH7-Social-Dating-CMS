@@ -207,12 +207,12 @@ namespace
   */
  function t(...$aTokens)
  {
-     $sToken = $aToken[1];
+     $sToken = $aTokens[0];
+     $sToken = (Registry::getInstance()->lang !== '' && array_key_exists($sToken, Registry::getInstance()->lang) ? Registry::getInstance()->lang[$sToken] : gettext($sToken));
 
-     $sToken = (Registry::getInstance()->lang !== '' && array_key_exists($sToken, Registry::getInstance()->lang)) ? Registry::getInstance()->lang[$sToken] : gettext($sToken);
-
-     for ($i = 1, $iFuncArgs = count($aTokens); $i < $iFuncArgs; $i++)
+     for ($i = 1, $iFuncArgs = count($aTokens); $i < $iFuncArgs; $i++) {
          $sToken = str_replace('%'. ($i-1) . '%', $aTokens[$i], $sToken);
+     }
 
      return (new SysVar)->parse($sToken);
  }
