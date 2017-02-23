@@ -25,10 +25,9 @@ trait Factory
      * @return object Return the instance of the class.
      * @throws \PH7\Framework\Error\CException\PH7RuntimeException If the class is not found or if it has not been defined.
      */
-    public static function load()
+    public static function load(...$aArgs)
     {
         $sClass = static::class;
-        $aArgs = func_get_args();
 
         if (class_exists($sClass)) {
             return (new \ReflectionClass($sClass))->newInstanceArgs($aArgs);

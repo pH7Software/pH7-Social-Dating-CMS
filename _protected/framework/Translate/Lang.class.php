@@ -205,14 +205,14 @@ namespace
   * @param string $sVar [, string $... ]
   * @return string Returns the text with gettext function or language in an array (this depends on whether a key language was found in the language table).
   */
- function t()
+ function t(...$aTokens)
  {
-     $sToken = func_get_arg(0);
+     $sToken = $aToken[1];
 
      $sToken = (Registry::getInstance()->lang !== '' && array_key_exists($sToken, Registry::getInstance()->lang)) ? Registry::getInstance()->lang[$sToken] : gettext($sToken);
 
-     for ($i = 1, $iFuncArgs = func_num_args(); $i < $iFuncArgs; $i++)
-         $sToken = str_replace('%'. ($i-1) . '%', func_get_arg($i), $sToken);
+     for ($i = 1, $iFuncArgs = count($aTokens); $i < $iFuncArgs; $i++)
+         $sToken = str_replace('%'. ($i-1) . '%', $aTokens[$i], $sToken);
 
      return (new SysVar)->parse($sToken);
  }
