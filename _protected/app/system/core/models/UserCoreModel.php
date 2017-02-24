@@ -256,21 +256,21 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $bIsFirstName = !empty($aParams['first_name']) && Str::noSpaces($aParams['first_name']);
-        $bIsMiddleName = !empty($aParams['middle_name']) && Str::noSpaces($aParams['middle_name']);
-        $bIsLastName = !empty($aParams['last_name']) && Str::noSpaces($aParams['last_name']);
-        $bIsSingleAge = !empty($aParams['age']);
-        $bIsAge = empty($aParams['age']) && !empty($aParams['age1']) && !empty($aParams['age2']);
-        $bIsHeight = !empty($aParams['height']);
-        $bIsWeight = !empty($aParams['weight']);
-        $bIsCountry = !empty($aParams['country']) && Str::noSpaces($aParams['country']);
-        $bIsCity = !empty($aParams['city']) && Str::noSpaces($aParams['city']);
-        $bIsState = !empty($aParams['state']) && Str::noSpaces($aParams['state']);
-        $bIsZipCode = !empty($aParams['zip_code']) && Str::noSpaces($aParams['zip_code']);
-        $bIsMail = !empty($aParams['mail']) && Str::noSpaces($aParams['mail']);
-        $bIsSex = !empty($aParams['sex']);
+        $bIsFirstName = !empty($aParams[SearchQueryCore::FIRST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::FIRST_NAME]);
+        $bIsMiddleName = !empty($aParams[SearchQueryCore::MIDDLE_NAME]) && Str::noSpaces($aParams[SearchQueryCore::MIDDLE_NAME]);
+        $bIsLastName = !empty($aParams[SearchQueryCore::LAST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::LAST_NAME]);
+        $bIsSingleAge = !empty($aParams[SearchQueryCore::AGE]);
+        $bIsAge = empty($aParams[SearchQueryCore::AGE]) && !empty($aParams[SearchQueryCore::MIN_AGE]) && !empty($aParams[SearchQueryCore::MAX_AGE]);
+        $bIsHeight = !empty($aParams[SearchQueryCore::HEIGHT]);
+        $bIsWeight = !empty($aParams[SearchQueryCore::WEIGHT]);
+        $bIsCountry = !empty($aParams[SearchQueryCore::COUNTRY]) && Str::noSpaces($aParams[SearchQueryCore::COUNTRY]);
+        $bIsCity = !empty($aParams[SearchQueryCore::CITY]) && Str::noSpaces($aParams[SearchQueryCore::CITY]);
+        $bIsState = !empty($aParams[SearchQueryCore::STATE]) && Str::noSpaces($aParams[SearchQueryCore::STATE]);
+        $bIsZipCode = !empty($aParams[SearchQueryCore::ZIP_CODE]) && Str::noSpaces($aParams[SearchQueryCore::ZIP_CODE]);
+        $bIsMail = !empty($aParams[SearchQueryCore::EMAIL]) && Str::noSpaces($aParams[SearchQueryCore::EMAIL]);
+        $bIsSex = !empty($aParams[SearchQueryCore::SEX]);
         $bHideUserLogged = !empty($this->iProfileId);
-        $bIsMatchSex = !empty($aParams['match_sex']);
+        $bIsMatchSex = !empty($aParams[SearchQueryCore::MATCH_SEX]);
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId) AS totalUsers';
@@ -290,16 +290,16 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlAvatar = !empty($aParams['avatar']) ? ' AND avatar IS NOT NULL AND approvedAvatar = 1 ' : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
 
-        if (empty($aParams['order'])) $aParams['order'] = SearchCoreModel::LATEST; // Default is "ORDER BY joinDate"
-        if (empty($aParams['sort'])) $aParams['sort'] =  SearchCoreModel::ASC; // Default is "ascending"
-        $sSqlOrder = SearchCoreModel::order($aParams['order'], $aParams['sort']);
+        if (empty($aParams[SearchQueryCore::ORDER])) $aParams[SearchQueryCore::ORDER] = SearchCoreModel::LATEST; // Default is "ORDER BY joinDate"
+        if (empty($aParams[SearchQueryCore::SORT])) $aParams[SearchQueryCore::SORT] =  SearchCoreModel::ASC; // Default is "ascending"
+        $sSqlOrder = SearchCoreModel::order($aParams[SearchQueryCore::ORDER], $aParams[SearchQueryCore::SORT]);
 
         $sSqlMatchSex = $bIsMatchSex ? ' AND matchSex LIKE :matchSex ' : '';
 
         if ($bIsSex)
         {
             $sGender = '';
-            $aSex = $aParams['sex'];
+            $aSex = $aParams[SearchQueryCore::SEX];
             foreach ($aSex as $sSex)
             {
                 if ($sSex === 'male')
@@ -332,20 +332,20 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
             $sSqlZipCode . $sSqlHeight . $sSqlWeight . $sSqlEmail . $sSqlOnline . $sSqlAvatar . $sSqlOrder . $sSqlLimit
         );
 
-        if ($bIsMatchSex) $rStmt->bindValue(':matchSex', '%' . $aParams['match_sex'] . '%', \PDO::PARAM_STR);
-        if ($bIsFirstName) $rStmt->bindValue(':firstName', $aParams['first_name'], \PDO::PARAM_STR);
-        if ($bIsMiddleName) $rStmt->bindValue(':middleName', $aParams['middle_name'], \PDO::PARAM_STR);
-        if ($bIsLastName) $rStmt->bindValue(':lastName', $aParams['last_name'], \PDO::PARAM_STR);
-        if ($bIsSingleAge) $rStmt->bindValue(':birthDate', '%' . $aParams['age'] . '%', \PDO::PARAM_STR);
-        if ($bIsAge) $rStmt->bindValue(':age1', $aParams['age1'], \PDO::PARAM_INT);
-        if ($bIsAge) $rStmt->bindValue(':age2', $aParams['age2'], \PDO::PARAM_INT);
-        if ($bIsHeight) $rStmt->bindValue(':height', $aParams['height'], \PDO::PARAM_INT);
-        if ($bIsWeight) $rStmt->bindValue(':weight', $aParams['weight'], \PDO::PARAM_INT);
-        if ($bIsCountry) $rStmt->bindParam(':country', $aParams['country'], \PDO::PARAM_STR, 2);
-        if ($bIsCity) $rStmt->bindValue(':city', '%' . str_replace('-', ' ', $aParams['city']) . '%', \PDO::PARAM_STR);
-        if ($bIsState) $rStmt->bindValue(':state', '%' . str_replace('-', ' ', $aParams['state']) . '%', \PDO::PARAM_STR);
-        if ($bIsZipCode) $rStmt->bindValue(':zipCode', '%' . $aParams['zip_code'] . '%', \PDO::PARAM_STR);
-        if ($bIsMail) $rStmt->bindValue(':email', '%' . $aParams['mail'] . '%', \PDO::PARAM_STR);
+        if ($bIsMatchSex) $rStmt->bindValue(':matchSex', '%' . $aParams[SearchQueryCore::MATCH_SEX] . '%', \PDO::PARAM_STR);
+        if ($bIsFirstName) $rStmt->bindValue(':firstName', $aParams[SearchQueryCore::FIRST_NAME], \PDO::PARAM_STR);
+        if ($bIsMiddleName) $rStmt->bindValue(':middleName', $aParams[SearchQueryCore::MIDDLE_NAME], \PDO::PARAM_STR);
+        if ($bIsLastName) $rStmt->bindValue(':lastName', $aParams[SearchQueryCore::LAST_NAME], \PDO::PARAM_STR);
+        if ($bIsSingleAge) $rStmt->bindValue(':birthDate', '%' . $aParams[SearchQueryCore::AGE] . '%', \PDO::PARAM_STR);
+        if ($bIsAge) $rStmt->bindValue(':age1', $aParams[SearchQueryCore::MIN_AGE], \PDO::PARAM_INT);
+        if ($bIsAge) $rStmt->bindValue(':age2', $aParams[SearchQueryCore::MAX_AGE], \PDO::PARAM_INT);
+        if ($bIsHeight) $rStmt->bindValue(':height', $aParams[SearchQueryCore::HEIGHT], \PDO::PARAM_INT);
+        if ($bIsWeight) $rStmt->bindValue(':weight', $aParams[SearchQueryCore::WEIGHT], \PDO::PARAM_INT);
+        if ($bIsCountry) $rStmt->bindParam(':country', $aParams[SearchQueryCore::COUNTRY], \PDO::PARAM_STR, 2);
+        if ($bIsCity) $rStmt->bindValue(':city', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::CITY]) . '%', \PDO::PARAM_STR);
+        if ($bIsState) $rStmt->bindValue(':state', '%' . str_replace('-', ' ', $aParams[SearchQueryCore::STATE]) . '%', \PDO::PARAM_STR);
+        if ($bIsZipCode) $rStmt->bindValue(':zipCode', '%' . $aParams[SearchQueryCore::ZIP_CODE] . '%', \PDO::PARAM_STR);
+        if ($bIsMail) $rStmt->bindValue(':email', '%' . $aParams[SearchQueryCore::EMAIL] . '%', \PDO::PARAM_STR);
         if ($bHideUserLogged) $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
 
         if (!$bCount)
