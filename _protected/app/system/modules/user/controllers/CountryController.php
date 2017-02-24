@@ -14,6 +14,7 @@ PH7\Framework\Geo\Map\Map;
 
 class CountryController extends Controller
 {
+    const MAX_PROFILE_PER_PAGE = 20;
 
     public function index()
     {
@@ -47,7 +48,7 @@ class CountryController extends Controller
             // Pagination
             $oPage = new Page;
             $iTotalUsers = (new UserCoreModel)->getGeoProfiles($sCountryCode, $this->registry->city, true, null, null, null);
-            $this->view->total_pages = $oPage->getTotalPages($iTotalUsers, 20);
+            $this->view->total_pages = $oPage->getTotalPages($iTotalUsers, self::MAX_PROFILE_PER_PAGE);
             $this->view->current_page = $oPage->getCurrentPage();
             $this->view->first_user = $oPage->getFirstItem();
             $this->view->nb_user_by_page = $oPage->getNbItemsByPage();

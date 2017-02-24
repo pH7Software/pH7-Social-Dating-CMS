@@ -7,10 +7,15 @@
  */
 namespace PH7;
 
-use PH7\Framework\Navigation\Page, PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+use
+PH7\Framework\Navigation\Page,
+PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Url\Header;
 
 class BrowseController extends Controller
 {
+    const MAX_PROFILE_PER_PAGE = 24;
+
     private $oUserModel, $oPage, $iTotalUsers;
 
     public function __construct()
@@ -24,7 +29,7 @@ class BrowseController extends Controller
     public function index()
     {
         $this->iTotalUsers = $this->oUserModel->search($_GET, true, null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalUsers, 24);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalUsers, self::MAX_PROFILE_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oUsers = $this->oUserModel->search($_GET, false, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 

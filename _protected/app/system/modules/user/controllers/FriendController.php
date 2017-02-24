@@ -11,6 +11,7 @@ use PH7\Framework\Navigation\Page;
 
 class FriendController extends Controller
 {
+    const MAX_FRIEND_PER_PAGE = 10, MAX_MUTUAL_FRIEND_PER_PAGE = 10;
 
     private $oUserModel, $oFriendModel, $oPage, $sUsername, $sTitle, $iId, $iMemberId, $iTotalFriends;
 
@@ -65,7 +66,7 @@ class FriendController extends Controller
     public function index()
     {
         $this->iTotalFriends = $this->oFriendModel->get($this->iId, null, $this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalFriends, 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalFriends, self::MAX_FRIEND_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oFriend = $this->oFriendModel->get($this->iId, null, $this->httpRequest->get('looking'), false,
@@ -93,7 +94,7 @@ class FriendController extends Controller
     public function mutual()
     {
         $this->iTotalFriends = $this->oFriendModel->get($this->iMemberId, $this->iId, $this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalFriends, 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalFriends, self::MAX_MUTUAL_FRIEND_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oFriend = $this->oFriendModel->get($this->iMemberId, $this->iId, $this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
@@ -123,5 +124,4 @@ class FriendController extends Controller
         $this->view->h2_title = $this->sTitle;
         $this->output();
     }
-
 }

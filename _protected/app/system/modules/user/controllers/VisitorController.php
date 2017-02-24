@@ -11,6 +11,7 @@ use PH7\Framework\Navigation\Page;
 
 class VisitorController extends Controller
 {
+    const MAX_PROFILE_PER_PAGE = 10;
 
     private $oUserModel, $oVisitorModel, $oPage, $sUsername, $sTitle, $iId, $iTotalVisitors;
 
@@ -54,7 +55,7 @@ class VisitorController extends Controller
 
     public function index()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalVisitors, 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalVisitors, self::MAX_PROFILE_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $this->iTotalVisitors = $this->oVisitorModel->get($this->httpRequest->get('looking'), true, SearchCoreModel::LAST_VISIT, SearchCoreModel::DESC, null, null);
@@ -89,5 +90,4 @@ class VisitorController extends Controller
         $this->view->h2_title = $this->sTitle;
         $this->output();
     }
-
 }
