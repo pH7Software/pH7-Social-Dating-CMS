@@ -115,11 +115,11 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 
 * **URL rewriting extension module** Apache, nginx, LiteSpeed, IIS (for Web.config, you have a [good tutorial here](http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/)).
 
-* **Video** [FFmpeg](http://ffmpeg.org)
-
 * **Specific Requirement** Server has to be connected to Internet.
 
 * **Minimum Web Space** 2.0 GB
+
+* **pH7CMS's Video Module Requirement (only if enabled)** [FFmpeg](http://ffmpeg.org)
 
 
 ## Installation
