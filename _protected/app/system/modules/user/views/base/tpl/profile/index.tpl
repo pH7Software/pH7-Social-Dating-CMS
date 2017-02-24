@@ -12,6 +12,7 @@
   <ol id="toc">
     <li><a href="#general"><span>{lang 'Info'}</span></a></li>
     <li><a href="#map"><span>{lang 'Map'}</span></a></li>
+    <li><a href="#related_profile"><span>{lang 'Similar Profiles'}</span></a></li>
     <li><a href="#friend"><span>{friend_link}</span></a></li>
     {if $is_logged AND !$is_own_profile}
       <li><a href="#mutual_friend"><span>{mutual_friend_link}</span></a></li>
@@ -226,6 +227,7 @@
     tabs('p', [
           'general',
           'map',
+          {if $is_relatedprofile_enabled}'related_profile',{/if}
           'friend',
           {if $is_logged AND !$is_own_profile}'mutual_friend',{/if}
           {if $is_picture_enabled}'picture',{/if}
