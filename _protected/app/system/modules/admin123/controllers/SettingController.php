@@ -114,7 +114,7 @@ class SettingController extends Controller
         switch (PH7_LICENSE_STATUS)
         {
             case 'active':
-                $sMsg = t('Hurrah! Your License Key has been saved successfully.');
+                $sMsg = t('Hurrah! Your License Key has been successfully enabled!');
                 $bIsErr = false;
             break;
 
