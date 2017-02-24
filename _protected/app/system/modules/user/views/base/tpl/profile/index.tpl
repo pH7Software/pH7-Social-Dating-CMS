@@ -146,6 +146,15 @@
     <span class="bold">{lang 'Profile Map:'}</span>{map}
   </div>
 
+  {if $is_relatedprofile_enabled}
+    <div class="content" id="related_profile">
+      <script>
+        var url_related_profile_block = '{{ $design->url('related-profile','main','index',$id) }}';
+        $('#related_profile').load(url_related_profile_block + ' #related_profile_block');
+      </script>
+    </div>
+  {/if}
+
   <div class="content" id="friend">
     <script>
       var url_friend_block = '{{ $design->url('user','friend','index',$username) }}';
