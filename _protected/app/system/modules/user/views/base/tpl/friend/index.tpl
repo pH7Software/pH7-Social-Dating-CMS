@@ -10,8 +10,8 @@
 
         {{ $avatarDesign->get($f->username, $f->firstName, $f->sex, 64, true) }}
 
-        {if User::auth() && $sess_member_id == $member_id}
-          {if $sess_member_id == $f->friendId && $f->pending == 1}
+        {if User::auth() AND $sess_member_id == $member_id}
+          {if $sess_member_id == $f->friendId AND $f->pending == 1}
             <small>{lang 'Pending...'}</small> <a href="javascript:void(0)" onclick="friend('approval',{% $f->fdId %},'{csrf_token}')">{lang 'Approve'}</a>
           {/if}
 
