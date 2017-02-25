@@ -50,8 +50,7 @@ class MainController extends Controller
     private function relatedProdiles(stdClass $oProfile)
     {
         $aParams = [
-            SearchQueryCore::MIN_AGE => $oProfile->age-5,
-            SearchQueryCore::MAX_AGE => $oProfile->age=5,
+            $aParams[SearchQueryCore::AGE] => $oProfile->birthDate,
             SearchQueryCore::COUNTRY => $oProfile->country,
             SearchQueryCore::CITY => $oProfile->city,
             SearchQueryCore::MATCH_SEX => $oProfile->match_sex
