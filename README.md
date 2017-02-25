@@ -32,7 +32,8 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Blogs
 * Notes
 * Pages Management
-* Friends, Visit, Messages, Instant messaging, Views, Like, Rating, Smileys, Geo Map, Avatar, Wallpaper, ...
+* Friends/Mutual Friends, Visit, Messages, Instant messaging, Views, Like, Rating, Smileys, Geo Map, Avatar, Wallpaper, ...
+* Related Profiles (for better user experience and faster match)
 * Custom Profile (Background profile)
 * Comments
 * Hot or Not
