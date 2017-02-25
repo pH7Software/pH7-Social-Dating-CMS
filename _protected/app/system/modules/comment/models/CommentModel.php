@@ -11,7 +11,6 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class CommentModel extends CommentCoreModel
 {
-
     public function get($iCommentId, $iApproved, $sTable)
     {
         $this->cache->start(static::CACHE_GROUP, 'get' . $iCommentId . $iApproved . $sTable, static::CACHE_TIME);
@@ -132,5 +131,4 @@ class CommentModel extends CommentCoreModel
         $rStmt->execute();
         return $rStmt->rowCount() === 0;
     }
-
 }
