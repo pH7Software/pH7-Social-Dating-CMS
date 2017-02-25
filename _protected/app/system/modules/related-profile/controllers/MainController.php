@@ -35,7 +35,12 @@ class MainController extends Controller
                 return true;
             }
         }
-        $this->displayPageNotFound('', false);
+        $this->notFound();
+    }
+
+    protected function notFound()
+    {
+        $this->view->error = t('There are no similar profiles.');
     }
 
     /**
