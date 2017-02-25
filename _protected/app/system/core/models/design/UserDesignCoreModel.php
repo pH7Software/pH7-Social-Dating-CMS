@@ -126,7 +126,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
 
         foreach ($oUsers as $oUser)
         {
-            $sFirstName = $this->oStr->upperFirst($$oUser->firstName);
+            $sFirstName = $this->oStr->upperFirst($oUser->firstName);
             $sCity = $this->oStr->upperFirst($oUser->city);
 
             echo '<li><a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oUser->username, $sFirstName, $oUser->sex), '"><img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::PROFILE_BLOCK_AVATAR_SIZE, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oUser->username), '" /></a></li>';
