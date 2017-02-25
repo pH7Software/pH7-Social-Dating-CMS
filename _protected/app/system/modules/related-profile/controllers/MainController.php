@@ -36,6 +36,7 @@ class MainController extends Controller
             if (!empty($oRelatedProfiles)) {
                 $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
                 $this->view->related_profiles = $oRelatedProfiles;
+                $this->view->id = $iProfileId;
                 $this->output();
                 return true;
             }
@@ -46,7 +47,7 @@ class MainController extends Controller
 
     protected function notFound()
     {
-        $this->view->error = t('There are no similar profiles.');
+        $this->view->error = t('No related profiles found.');
     }
 
     /**
