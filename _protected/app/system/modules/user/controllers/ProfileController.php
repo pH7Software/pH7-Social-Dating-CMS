@@ -58,7 +58,7 @@ class ProfileController extends Controller
         if (!empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username))
         {
             // The administrators can view all profiles and profile visits are not saved.
-            if (!AdminCore::auth()) {
+            if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
                 $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
             }
 
