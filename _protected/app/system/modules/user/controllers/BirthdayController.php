@@ -11,6 +11,8 @@ use PH7\Framework\Navigation\Page;
 
 class BirthdayController extends Controller
 {
+    const MAX_PROFILE_PER_PAGE = 20;
+
     private $oBirthModel, $oPage, $sTitle, $sCurrentDate, $iTotalBirths;
 
     public function __construct()
@@ -38,7 +40,7 @@ class BirthdayController extends Controller
     {
         $this->checkType($sGender);
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalBirths, 20);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalBirths, self::MAX_PROFILE_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $this->iTotalBirths = $this->oBirthModel->get($sGender, true, SearchCoreModel::LAST_ACTIVITY, SearchCoreModel::DESC, null, null);
