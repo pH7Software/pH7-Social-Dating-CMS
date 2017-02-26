@@ -207,22 +207,27 @@ class ProfileController extends Controller
 
             if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->isOwnProfile())
             {
-                $oVisitorModel = new VisitorModel($this->iProfileId, $this->iVisitorId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-
-                if (!$oVisitorModel->already())
-                {
-                    // Add a new visit
-                    $oVisitorModel->set();
-                }
-                else
-                {
-                    // Update the date of last visit
-                    $oVisitorModel->update();
-                }
-                unset($oVisitorModel);
+                $this->updateVisitorViews();
             }
         }
         unset($oPrivacyViewsUser, $oPrivacyViewsVisitor);
+    }
+
+    /**
+     * @return void
+     */
+    private function updateVisitorViews()
+    {
+        $oVisitorModel = new VisitorModel($this->iProfileId, $this->iVisitorId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
+
+        if (!$oVisitorModel->already()) {
+            // Add a new visit
+            $oVisitorModel->set();
+        } else {
+            // Update the date of last visit
+            $oVisitorModel->update();
+        }
+        unset($oVisitorModel);
     }
 
     /**
