@@ -41,13 +41,7 @@ class MainController extends Controller
                 return true;
             }
         }
-        $this->notFound();
         $this->output();
-    }
-
-    protected function notFound()
-    {
-        $this->view->error = t('No related profiles found.');
     }
 
     /**
