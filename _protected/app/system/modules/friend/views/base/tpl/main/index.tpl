@@ -21,7 +21,7 @@
         {main_include 'page_nav.inc.tpl'}
         <br />
         <p class="center bottom">
-            <a class="m_button" href="{{ $design->url('friend','main','search',"$username,$action") }}">{lang 'Search for a friend of %0%', $usesrname}</a>
+            <a class="m_button" href="{{ $design->url('friend','main','search',"$username,$action") }}">{lang 'Search for a friend of %0%', $username}</a>
         </p>
     {else}
         <p>{error}</p>
