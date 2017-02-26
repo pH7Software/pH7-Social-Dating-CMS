@@ -10,7 +10,10 @@
  */
 
 namespace PH7\Framework\Security;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Cache\Cache;
 
 final class Version
 {
@@ -30,8 +33,6 @@ final class Version
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
-     *
-     * @access private
      */
     private function __construct() {}
 
@@ -42,7 +43,7 @@ final class Version
      */
     public static function getLatestInfo()
     {
-        $oCache = (new \PH7\Framework\Cache\Cache)->start('str/security', 'version-info', 3600*24); // Stored for 1 day
+        $oCache = (new Cache)->start('str/security', 'version-info', 3600*24); // Stored for 1 day
         if (!$mData = $oCache->get()) {
             $oDom = new \DOMDocument;
             if (!@$oDom->load(self::LATEST_VERSION_URL)) {
