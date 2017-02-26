@@ -203,8 +203,8 @@
               {if $is_friend_enabled}
                   <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('friend','main','index') }}" title="{lang 'Friends Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-users"></i> {lang 'Friends Manager'} <span class="badge">{count_pen_friend_request}</span></a>
                   <ul class="dropdown-menu" role="menu">
-                      <li><a href="{{ $design->url('user','friend','index') }}" title="{lang 'Friends List'}">{lang 'Friends List'}</a></li>
-                    <li><a href="{{ $design->url('user','friend','search',$oSession->get('member_username')) }}" title="{lang 'Find a friend in my list'}">{lang 'Find a Friend'}</a></li>
+                      <li><a href="{{ $design->url('friend','main','index') }}" title="{lang 'Friends List'}">{lang 'Friends List'}</a></li>
+                    <li><a href="{{ $design->url('friend','main','search',$oSession->get('member_username')) }}" title="{lang 'Find a friend in my list'}">{lang 'Find a Friend'}</a></li>
                   </ul>
                 </li>
               {/if}
