@@ -106,10 +106,10 @@ class ProfileController extends Controller
             $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
 
             if (SysMod::isEnabled('friend')) {
-                $this->view->friend_link = $this->getFriendLink();
+                $this->view->friend_link = $this->getFriendLinkName();
 
                 if ($this->sUserAuth) {
-                    $this->view->mutual_friend_link = $this->getMutualFriendLink();
+                    $this->view->mutual_friend_link = $this->getMutualFriendLinkName();
                 }
                 $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
             }
@@ -320,7 +320,7 @@ class ProfileController extends Controller
     /**
      * @return string
      */
-    private function getFriendLink()
+    private function getFriendLinkName()
     {
         $iNbFriend = FriendCoreModel::total($this->iProfileId);
         $sNbFriend = ($iNbFriend > 0) ? ' (' . $iNbFriend . ')' : '';
@@ -332,7 +332,7 @@ class ProfileController extends Controller
     /**
      * @return string
      */
-    private function getMutualFriendLink()
+    private function getMutualFriendLinkName()
     {
         $iNbMutFriend = (new FriendCoreModel)->get($this->iVisitorId, $this->iProfileId, null, true, null, null, null, null);
         $sNbMutFriend = ($iNbMutFriend > 0) ? ' (' . $iNbMutFriend . ')' : '';
