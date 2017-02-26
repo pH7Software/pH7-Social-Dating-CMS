@@ -735,7 +735,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param integer $iProfileId
      * @param integer $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
-     * @return boolean
+     * @return string
      */
     public function getBackground($iProfileId, $iApproved = null)
     {
