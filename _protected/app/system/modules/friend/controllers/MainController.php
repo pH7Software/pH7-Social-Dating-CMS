@@ -1,15 +1,17 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @package        PH7 / App / System / Module / User / Controller
+ * @package        PH7 / App / System / Module / Friend / Controller
  */
 namespace PH7;
 
+use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Layout\Html\Meta;
 
-class FriendController extends Controller
+class MainController extends Controller
 {
     const MAX_FRIEND_PER_PAGE = 10, MAX_MUTUAL_FRIEND_PER_PAGE = 10;
 
@@ -18,7 +20,8 @@ class FriendController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->oUserModel = new UserModel;
+
+        $this->oUserModel = new UserCoreModel;
         $this->oFriendModel = new FriendModel;
         $this->oPage = new Page;
 
@@ -49,8 +52,9 @@ class FriendController extends Controller
         $this->view->username = $this->sUsername;
         $this->view->sess_member_id = $this->iMemberId;
         $this->view->member_id = $this->iId;
-        $this->view->csrf_token = (new Framework\Security\CSRF\Token)->generate('friend');
+        $this->view->csrf_token = (new Token)->generate('friend');
         $this->view->avatarDesign = new AvatarDesignCore;
+        $this->view->header = Meta::NOINDEX;
 
         /**
          *  Predefined meta_description.
