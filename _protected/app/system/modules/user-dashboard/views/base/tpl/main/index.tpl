@@ -34,7 +34,7 @@
         <h3 class="center underline">{lang 'My friends'}</h3>
         <div class="content" id="friend">
             <script>
-                var url_friend_block = '{{ $design->url('user','friend','index',$username) }}';
+                var url_friend_block = '{{ $design->url('friend','main','index',$username) }}';
                 $('#friend').load(url_friend_block + ' #friend_block');
             </script>
         </div>

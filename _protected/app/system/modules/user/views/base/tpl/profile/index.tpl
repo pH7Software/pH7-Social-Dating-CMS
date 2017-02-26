@@ -13,9 +13,11 @@
     <li><a href="#general"><span>{lang 'Info'}</span></a></li>
     <li><a href="#map"><span>{lang 'Map'}</span></a></li>
     <li><a href="#related_profile"><span>{lang 'Similar Profiles'}</span></a></li>
-    <li><a href="#friend"><span>{friend_link}</span></a></li>
-    {if $is_logged AND !$is_own_profile}
-      <li><a href="#mutual_friend"><span>{mutual_friend_link}</span></a></li>
+    {if $is_friend_enabled}
+      <li><a href="#friend"><span>{friend_link}</span></a></li>
+      {if $is_logged AND !$is_own_profile}
+        <li><a href="#mutual_friend"><span>{mutual_friend_link}</span></a></li>
+      {/if}
     {/if}
     {if $is_picture_enabled}
       <li><a href="#picture"><span>{lang 'Photos'}</span></a></li>
@@ -36,7 +38,7 @@
     {if $is_logged AND !$is_own_profile AND $is_im_enabled}
       <li><a rel="nofollow" href="{messenger_link}"><span>{lang 'Live Chat'}</span></a></li>
     {/if}
-    {if $is_logged AND !$is_own_profile}
+    {if $is_friend_enabled AND $is_logged AND !$is_own_profile}
       <li><a ref="nofollow" href="{befriend_link}"><span>{lang 'Add Friend'}</span></a></li>
     {/if}
     {if $is_logged AND !$is_own_profile AND $is_lovecalculator_enabled}
@@ -156,17 +158,19 @@
     </div>
   {/if}
 
-  <div class="content" id="friend">
-    <script>
-      var url_friend_block = '{{ $design->url('user','friend','index',$username) }}';
-      $('#friend').load(url_friend_block + ' #friend_block');
-    </script>
-  </div>
+  {if $is_friend_enabled}
+    <div class="content" id="friend">
+      <script>
+        var url_friend_block = '{{ $design->url('friend','main','index',$username) }}';
+        $('#friend').load(url_friend_block + ' #friend_block');
+      </script>
+    </div>
+  {/if}
 
-  {if $is_logged AND !$is_own_profile}
+  {if $is_friend_enabled AND $is_logged AND !$is_own_profile}
     <div class="content" id="mutual_friend">
       <script>
-        var url_mutual_friend_block = '{{ $design->url('user','friend','mutual',$username) }}';
+        var url_mutual_friend_block = '{{ $design->url('friend','main','mutual',$username) }}';
         $('#mutual_friend').load(url_mutual_friend_block + ' #friend_block');
       </script>
     </div>
@@ -228,8 +232,10 @@
           'general',
           'map',
           {if $is_relatedprofile_enabled}'related_profile',{/if}
-          'friend',
-          {if $is_logged AND !$is_own_profile}'mutual_friend',{/if}
+          {if $is_friend_enabled}
+            'friend',
+            {if $is_logged AND !$is_own_profile}'mutual_friend',{/if}
+          {/if}
           {if $is_picture_enabled}'picture',{/if}
           {if $is_video_enabled}'video',{/if}
           {if $is_forum_enabled}'forum',{/if}

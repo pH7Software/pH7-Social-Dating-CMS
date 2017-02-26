@@ -20,6 +20,7 @@ PH7\Framework\Security\CSRF\Token,
 PH7\Framework\Geo\Map\Map,
 PH7\Framework\Url\Url,
 PH7\Framework\Mvc\Router\Uri,
+PH7\Framework\Module\Various as SysMod,
 PH7\Framework\Date\Various as VDate;
 
 class ProfileController extends Controller
@@ -38,8 +39,11 @@ class ProfileController extends Controller
 
         // Add the General and Tabs Menu stylesheets
         $this->design->addCss(PH7_LAYOUT, PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS . 'tabs.css,' . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS . 'general.css');
-        // Add the JavaScript file for the Ajax Friend
-        $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'friend.js');
+
+        if (SysMod::isEnabled('friend')) {
+            // Add the JavaScript file for the Ajax Friend
+            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'friend.js');
+        }
 
         // Set the Profile username
         $this->sUsername = $this->httpRequest->get('username', 'string');
@@ -80,18 +84,6 @@ class ProfileController extends Controller
             $aAge = explode('-', $oUser->birthDate);
             $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
 
-            // Links of the Menubar
-            $iNbFriend = FriendModel::total($this->iProfileId);
-            $sNbFriend = ($iNbFriend > 0) ? ' (' . $iNbFriend . ')' : '';
-            $sFriendTxt = ($iNbFriend <= 1) ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') :
-                t('Friends:');
-
-            if ($this->sUserAuth) {
-                $iNbMutFriend = (new FriendModel)->get($this->iVisitorId, $this->iProfileId, null, true, null, null, null, null);
-                $sNbMutFriend = ($iNbMutFriend > 0) ? ' (' . $iNbMutFriend . ')' : '';
-                $sMutFriendTxt = ($iNbMutFriend <= 1) ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
-            }
-
             $this->view->page_title = t('Meet %0%, A %1% looking for %2% - %3% years - %4% - %5% %6%',
                 $sFirstName, t($oUser->sex), t($oUser->matchSex), $iAge, t($sCountry), $sCity, $sState);
 
@@ -110,13 +102,17 @@ class ProfileController extends Controller
             $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
 
             // Member Menubar
-            $this->view->friend_link = $sFriendTxt . $sNbFriend;
-            if ($this->sUserAuth) {
-                $this->view->mutual_friend_link = $sMutFriendTxt . $sNbMutFriend;
-            }
             $this->view->mail_link = $this->getMailLink($sFirstName, $oUser);
             $this->view->messenger_link = $this->getMessengerLink($sFirstName, $oUser);
-            $this->view->befriend_link = $this->getFriendLink($sFirstName, $oUser);
+
+            if (SysMod::isEnabled('friend')) {
+                $this->view->friend_link = $this->getFriendLink();
+
+                if ($this->sUserAuth) {
+                    $this->view->mutual_friend_link = $this->getMutualFriendLink();
+                }
+                $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
+            }
 
             // Set parameters Google Map
             $this->view->map = $this->getMap($sCity, $sState, $sCountry, $oUser);
@@ -299,7 +295,7 @@ class ProfileController extends Controller
      * @param object $oUser       User data from the DB.
      * @return string             The anchor for the link.
      */
-    private function getFriendLink($sFirstName, $oUser)
+    private function getBeFriendLink($sFirstName, $oUser)
     {
         if ($this->sUserAuth)
         {
@@ -319,6 +315,30 @@ class ProfileController extends Controller
         }
 
         return $sBefriendLink;
+    }
+
+    /**
+     * @return string
+     */
+    private function getFriendLink()
+    {
+        $iNbFriend = FriendCoreModel::total($this->iProfileId);
+        $sNbFriend = ($iNbFriend > 0) ? ' (' . $iNbFriend . ')' : '';
+        $sFriendTxt = ($iNbFriend <= 1) ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') : t('Friends:');
+
+        return $sFriendTxt . $sNbFriend;
+    }
+
+    /**
+     * @return string
+     */
+    private function getMutualFriendLink()
+    {
+        $iNbMutFriend = (new FriendCoreModel)->get($this->iVisitorId, $this->iProfileId, null, true, null, null, null, null);
+        $sNbMutFriend = ($iNbMutFriend > 0) ? ' (' . $iNbMutFriend . ')' : '';
+        $sMutFriendTxt = ($iNbMutFriend <= 1) ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
+
+        return $sMutFriendTxt . $sNbMutFriend;
     }
 
     /**

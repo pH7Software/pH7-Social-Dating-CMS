@@ -230,7 +230,8 @@ abstract class Controller extends \PH7\Framework\Core\Core
             'is_webcam_enabled' => SysMod::isEnabled('webcam'),
             'is_mail_enabled' => SysMod::isEnabled('mail'),
             'is_im_enabled' => SysMod::isEnabled('im'),
-            'is_relatedprofile_enabled' => SysMod::isEnabled('related-profile')
+            'is_relatedprofile_enabled' => SysMod::isEnabled('related-profile'),
+            'is_friend_enabled' => SysMod::isEnabled('friend')
         ];
 
         $this->view->assigns($aModsEnabled);
