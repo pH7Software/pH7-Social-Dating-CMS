@@ -300,7 +300,7 @@ class Gzip
         $sBaseUrl = $this->_sBaseUrl;
         $getCurrentTplName = function () use ($sBaseUrl) {
             $aDirs = explode('/', $sBaseUrl);
-            return $aDirs[2];
+            return !empty($aDirs[2]) ? $aDirs[2] : PH7_DEFAULT_THEME;
         };
 
         $this->_setVariables( include('variables.inc.php') );
