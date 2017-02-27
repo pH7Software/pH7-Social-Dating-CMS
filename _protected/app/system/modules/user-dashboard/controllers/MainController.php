@@ -7,6 +7,8 @@
  */
 namespace PH7;
 
+use PH7\Framework\Module\Various as SysMod;
+
 class MainController extends Controller
 {
     public function index()
@@ -16,7 +18,12 @@ class MainController extends Controller
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL .
             PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'style.css');
         $this->design->addCss(PH7_STATIC . PH7_CSS . PH7_JS . 'jquery/slick/', 'slick.css,slick-theme.css');
+
         $this->design->addJs(PH7_STATIC . PH7_JS, 'Wall.js,jquery/slick.js');
+        if (SysMod::isEnabled('friend')) {
+            // Add the JavaScript file for the Ajax Friend block
+            $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . 'friend' . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'friend.js');
+        }
 
         $this->view->username = $this->session->get('member_username');
         $this->view->first_name = $this->session->get('member_first_name');
