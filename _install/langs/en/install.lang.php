@@ -18,13 +18,13 @@ $LANG = array(
     'welcome_voice' => 'Hi and welcome to ' . Controller::SOFTWARE_NAME . ' installer, version ' . Controller::SOFTWARE_VERSION . '. ' .
         'I really hope you will enjoy your new social dating web app.',
     'CMS_desc' => '<p>Welcome to ' . Controller::SOFTWARE_NAME . ' Installer.<br />
-        Thank you for choosing <strong>pH7CMS</strong> and we hope it will please you.</p>',
+        Thank you for choosing <strong>pH7CMS</strong>, and we hope you will love it!</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
     'requirements_desc' => 'WARNING! Please make sure <abbr title="Your Server. On loca host it will be you (your computer)">you are</abbr> connected to the Internet and your server has the <a href="' . Controller::SOFTWARE_REQUIREMENTS_URL . '" target="_blank">minimum requirements</a>.',
-    'requirements2_desc' => 'First off, please create a MySQL database and assign a user to it with full privileges. Once you have created the MySQL database and its user, make sure to write down the database name, database username and password, because you will need them for installation.',
+    'requirements2_desc' => 'Before to continue, please create a MySQL database and assign a user to it with full privileges. Once you created the MySQL database and its user, make sure to write down the database name, username and password since you will need them for installation.',
     'config_path' => '&quot;protected&quot; directory path',
-    'desc_config_path' => 'Please specify the full path to your &quot;protected&quot; folder.<br />
-        It is wise and advisable (but in any case not mandatory) to put this directory outside the public root of the your Web server.',
+    'desc_config_path' => 'Please specify the full path of your &quot;protected&quot; folder.<br />
+        It is wise and advisable (but not mandatory in any case) to put this directory outside of the public directory of the Web server.',
     'need_frame' => 'You must use a Web browser that supports inline frames!',
     'path_protected' => 'Path of the &quot;protected&quot; folder',
     'next' => 'Next',
@@ -39,9 +39,9 @@ $LANG = array(
     'agree_license' => 'I have read and agree to the above Terms.',
     'step' => 'Step',
     'welcome' => 'Welcome to the installation of',
-    'welcome_to_installer' => 'Install of',
+    'welcome_to_installer' => 'Installation of',
     'config_site' => 'Configure your website!',
-    'config_system' => 'Configure the CMS system!',
+    'config_system' => 'Database/System Configuration',
     'finish' => 'Congrats! The installation is finished and your site is alive!',
     'go_your_site' => 'Go to your new website!',
     'go_your_admin_panel' => 'Go to your admin panel!',
@@ -93,7 +93,7 @@ $LANG = array(
     'bad_first_name' => 'Please enter your first name, it must also be between 2 and 20 characters.',
     'bad_last_name'=> 'Please enter your last name, it must also be between 2 and 20 characters.',
     'insecure_password' => 'For your security, your password must be different than your personal information (username, first and last name).',
-    'remove_install_folder' => 'Please remove the &quot;_install&quot; folder from your server before using your website.',
+    'remove_install_folder' => 'For security reasons, please remove the &quot;_install&quot; folder from your server before using your website.',
     'remove_install_folder_auto' => 'Automatically delete the &quot;install&quot; directory (this requires access rights to delete the &quot;install&quot; directory).',
     'confirm_remove_install_folder_auto' => 'WARNING, All files in the /_install/ folder will be removed.',
     'title_email_finish_install' => 'About your installation: Information',
