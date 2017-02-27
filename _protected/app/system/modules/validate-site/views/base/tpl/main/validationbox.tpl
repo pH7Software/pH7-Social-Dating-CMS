@@ -1,5 +1,5 @@
 <div id="box_block">
-    <h1 class="center">{lang "It's time to Validate your Site!"}</h1>
+    <h1 class="center">{lang "It's time to Confirm your Site!"}</h1>
     {{ new ValidationForm }}
     <p>
         {lang 'Validate your site by entering your valid email address and confirm it through your emailbox.'}<br />
