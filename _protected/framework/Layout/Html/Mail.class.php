@@ -119,10 +119,17 @@ class Mail
 
     /**
      * Provide a "Powered By" link for the email footer.
+     *
+     * @return string
      */
     final protected function link()
     {
+        ob_start();
         (new Design)->link(true, true, true, true, true);
+        $sOutputLink = ob_get_contents();
+        ob_end_clean();
+
+        return $sOutputLink;
     }
 
 }
