@@ -70,7 +70,7 @@ class FriendAjax extends Core
             } elseif ($this->_mStatus == 'id_does_not_exist') {
                 $this->_sMsg = jsonMsg(0, t('Profile ID does not exist.')); // Should never happen unless someone changes the source code with firebug or other
             } elseif ($this->_mStatus == 'success') {
-                $this->_sMsg = jsonMsg(1, t('This profile has been successfully added to your friends list.'));
+                $this->_sMsg = jsonMsg(1, t('Profile successfully added to your friends list.'));
 
                 $oUserModel = new UserCoreModel;
                 if (!$oUserModel->isNotification($iFriendId, 'friendRequest') && !$oUserModel->isOnline($iFriendId)) {
