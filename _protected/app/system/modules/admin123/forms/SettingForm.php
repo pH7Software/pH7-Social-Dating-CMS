@@ -75,7 +75,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\File(t('Logo:'), 'logo', array('description' => t('Add your small logo/icon that represents/distinguishes your site/concept/brand the best.'), 'accept' => 'image/*')));
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'logo.png?v=' . File::version(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png') . '" alt="' . t('Logo') . '" title="' . t('The current logo of your website.') . '" /></p>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="vs_marg"><img src="' . PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'logo.png?v=' . File::version(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png') . '" alt="' . t('Logo') . '" title="' . t('The current logo of your website.') . '" /></div>'));
 
 
         /********** Registration **********/
