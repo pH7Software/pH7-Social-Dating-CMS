@@ -28,15 +28,14 @@ class ValidateSiteCore
         $iSinceSiteCreated = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
         // After over 2 months, the site is still not validated, maybe the validation box doesn't really work, so we redirected to the page form
-        if (!$oVSModel->is() && VDate::setTime('-2 months') > $iSinceSiteCreated && !$oSess->exists(self::SESS_IS_VISITED)) {
+        if (!$oVSModel->is() && VDate::setTime('-2 months') >= $iSinceSiteCreated && !$oSess->exists(self::SESS_IS_VISITED)) {
             Header::redirect(Uri::get('validate-site', 'main', 'validationbox'));
         }
 
-        if (!$oVSModel->is() && VDate::setTime('-2 days') > $iSinceSiteCreated) {
+        if (!$oVSModel->is() && VDate::setTime('-2 days') >= $iSinceSiteCreated) {
             // OK for adding the validation colorbox
             return true;
         }
         return false;
     }
-
 }
