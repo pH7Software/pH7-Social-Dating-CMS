@@ -35,22 +35,20 @@ class MetaMainForm
         $oForm->addElement(new \PFBC\Element\Token('admin_meta'));
 
         // Generate the list of languages
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center divShow">'));
-
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3 class="underline"><a href="#showDiv_listLang" title="' . t('Click here to show/hide the languages') . '">' . t('Change language for the Meta Tags') . '</a></h3>'));
-
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<ul class="hidden" id="showDiv_listLang">'));
-
         $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
-        for ($i=0, $iLength = count($aLangs); $i < $iLength; $i++)
-        {
-            $sAbbrLang = substr($aLangs[$i],0,2);
+        $iTotalLangs = count($aLangs);
+        if ($iTotalLangs > 1) {
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<div class="center divShow">'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3 class="underline"><a href="#showDiv_listLang" title="' . t('Click here to show/hide the languages') . '">' . t('Change language for the Meta Tags') . '</a></h3>'));
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<ul class="hidden" id="showDiv_listLang">'));
 
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($i+1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$i], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$i] . ')</a></li>'));
+            for ($i=0; $i < $iTotalLangs; $i++) {
+                $sAbbrLang = substr($aLangs[$i], 0, 2);
+                $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($i+1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$i], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$i] . ')</a></li>'));
+            }
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
         }
         unset($aLangs);
-
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', array('disabled'=>'disabled', 'value' => $oMeta->langId)));
 
