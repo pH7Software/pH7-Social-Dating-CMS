@@ -12,13 +12,13 @@
  */
 
 namespace PH7\Framework\Video;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Date\Various,
-PH7\Framework\Config\Config,
-PH7\Framework\Error\CException\PH7BadMethodCallException,
-PH7\Framework\File as F;
+use PH7\Framework\Date\Various,
+use PH7\Framework\Config\Config;
+use PH7\Framework\Error\CException\PH7BadMethodCallException;
+use PH7\Framework\File as F;
 
 class Video extends F\Upload
 {

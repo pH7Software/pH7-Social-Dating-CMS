@@ -13,6 +13,7 @@
  */
 
 namespace PH7\Framework\Image;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\File;
