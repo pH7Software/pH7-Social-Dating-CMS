@@ -17,12 +17,11 @@ defined('PH7') or exit('Restricted access');
 use
 PH7\Framework\Date\Various,
 PH7\Framework\Config\Config,
+PH7\Framework\Error\CException\PH7BadMethodCallException,
 PH7\Framework\File as F;
 
 class Video extends F\Upload
 {
-
-
     private $oFile, $sType, $sFfmpegPath, $aFile;
 
     /**
@@ -70,21 +69,19 @@ class Video extends F\Upload
     /**
      * Video Validate.
      *
-     * @return boolean
-     * @throws \PH7\Framework\Error\CException\PH7BadMethodCallException If the video file is not found.
+     * @return bool
+     * @throws PH7BadMethodCallException If the video file is not found.
      */
     public function validate()
     {
-        if (!is_uploaded_file($this->aFile['tmp_name']))
-        {
-            if (!isDebug())
+        if (!is_uploaded_file($this->aFile['tmp_name'])) {
+            if (!isDebug()) {
                 return false;
-            else
-                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
-        }
-        else
-        {
-            return (in_array($this->sType, $this->aAllowedTypes));
+            } else {
+                throw new PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
+            }
+        } else {
+            return in_array($this->sType, $this->aAllowedTypes);
         }
     }
 
@@ -92,16 +89,14 @@ class Video extends F\Upload
      * Save Video.
      *
      * @param string $sFile
-     * @return boolean
+     * @return bool
      */
     public function save($sFile)
     {
-        return (move_uploaded_file($this->aFile['tmp_name'], $sFile));
+        return move_uploaded_file($this->aFile['tmp_name'], $sFile);
     }
 
     /**
-     * Get File Name.
-     *
      * @return string
      */
     public function getFileName()

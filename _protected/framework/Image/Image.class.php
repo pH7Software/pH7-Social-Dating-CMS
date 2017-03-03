@@ -16,20 +16,49 @@ namespace PH7\Framework\Image;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\File;
+use PH7\Framework\Error\CException\PH7BadMethodCallException;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class Image
 {
-
     /*** Alias ***/
-    const JPG = IMAGETYPE_JPEG, PNG = IMAGETYPE_PNG, GIF = IMAGETYPE_GIF, WEBP = 'image/webp';
+    const JPG = IMAGETYPE_JPEG;
+    const PNG = IMAGETYPE_PNG;
+    const GIF = IMAGETYPE_GIF;
+    const WEBP = 'image/webp';
 
-    private $sFile, $sType, $rImage, $iWidth, $iHeight, $iMaxWidth, $iMaxHeight, $iQuality = 100, $iCompression = 4;
+    /** @var string */
+    private $sFile;
+
+    /** @var string */
+    private $sType;
+
+    /** @var resource */
+    private $rImage;
+
+    /** @var int */
+    private $iWidth;
+
+    /** @var int */
+    private $iHeight;
+
+    /** @var int */
+    private $iMaxWidth;
+
+    /** @var int */
+    private $iMaxHeight;
+
+    /** @var int */
+    private $iQuality = 100;
+
+    /** @var int */
+    private $iCompression = 4;
+
 
     /**
-     * @constructor
      * @param string $sFile Full path to the image file.
-     * @param integer $iMaxWidth Default value 3000.
-     * @param integer $iMaxHeight Default value 3000.
+     * @param int $iMaxWidth Default value 3000.
+     * @param int $iMaxHeight Default value 3000.
      */
     public function __construct($sFile, $iMaxWidth = 3000, $iMaxHeight = 3000)
     {
@@ -39,25 +68,21 @@ class Image
     }
 
     /**
-     * @desc Image Validate.
-     * @return boolean
-     * @throws \PH7\Framework\Error\CException\PH7BadMethodCallException If the image file is not found.
+     * @return bool
+     * @throws PH7BadMethodCallException If the image file is not found.
      */
     public function validate()
     {
         $mImgType = $this->getType();
 
-        if (!is_file($this->sFile) || !$mImgType)
-        {
-            if (isDebug())
-                throw new \PH7\Framework\Error\CException\PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
-            else
+        if (!is_file($this->sFile) || !$mImgType) {
+            if (isDebug()) {
+                throw new PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
+            } else {
                 return false;
-        }
-        else
-        {
-            switch ($mImgType)
-            {
+            }
+        } else {
+            switch ($mImgType) {
                 // JPG
                 case static::JPG:
                     $this->rImage = imagecreatefromjpeg($this->sFile);
@@ -90,17 +115,17 @@ class Image
             $this->iHeight = imagesy($this->rImage);
 
             // Automatic resizing if the image is too large
-            if ($this->iWidth > $this->iMaxWidth OR $this->iHeight > $this->iMaxHeight)
+            if ($this->iWidth > $this->iMaxWidth OR $this->iHeight > $this->iMaxHeight) {
                 $this->dynamicResize($this->iMaxWidth, $this->iMaxHeight);
+            }
 
             return true;
         }
     }
 
     /**
-     * @desc Image Quality.
-     * @param integer $iQ Devault value 100.
-     * @return object $this
+     * @param int $iQ Devault value 100.
+     * @return self
      */
     public function quality($iQ = 100)
     {
@@ -109,9 +134,8 @@ class Image
     }
 
     /**
-     * @desc Image Compression.
-     * @param integer $iC Devault value 4.
-     * @return object $this
+     * @param int $iC Devault value 4.
+     * @return self
      */
     public function compression($iC = 4)
     {
@@ -120,27 +144,23 @@ class Image
     }
 
     /**
-     * @desc Resize
-     * @param integer $iX Default value null
-     * @param integer $iY Default value null
-     * @return object $this
+     * @param int $iX Default value null
+     * @param int $iY Default value null
+     * @return self
      */
     public function resize($iX = null, $iY = null)
     {
-        // Width not given
-        if (!$iX)
-        {
+        if (!$iX) {
+            // Width not given
             $iX = $this->iWidth * ($iY / $this->iHeight);
-        }
-        // Height not given
-        elseif (!$iY)
-        {
+        } elseif (!$iY) {
+            // Height not given
             $iY = $this->iHeight * ($iX / $this->iWidth);
         }
 
         $rTmp = imagecreatetruecolor($iX, $iY);
         imagecopyresampled($rTmp, $this->rImage, 0, 0, 0, 0, $iX, $iY, $this->iWidth, $this->iHeight);
-        $this->rImage =& $rTmp;
+        $this->rImage = &$rTmp;
 
         $this->iWidth = $iX;
         $this->iHeight = $iY;
@@ -149,19 +169,17 @@ class Image
     }
 
     /**
-     * @desc Crop.
-     * @param integer $iX Default value 0.
-     * @param integer $iY Default value 0.
-     * @param integer $iWidth Default valie 1.
-     * @param integer $iHeight Default value 1.
-     * @return object $this
+     * @param int $iX Default value 0.
+     * @param int $iY Default value 0.
+     * @param int $iWidth Default valie 1.
+     * @param int $iHeight Default value 1.
+     * @return self
      */
     public function crop($iX = 0, $iY = 0, $iWidth = 1, $iHeight = 1)
     {
-
         $rTmp = imagecreatetruecolor($iWidth, $iHeight);
         imagecopyresampled($rTmp, $this->rImage, 0, 0, $iX, $iY, $iWidth, $iHeight, $iWidth, $iHeight);
-        $this->rImage =& $rTmp;
+        $this->rImage = &$rTmp;
 
         $this->iWidth = $iWidth;
         $this->iHeight = $iHeight;
@@ -170,24 +188,20 @@ class Image
     }
 
     /**
-     * @desc Dynamic Resize.
-     * @param integer $iNewWidth
-     * @param integer $iNewHeight
-     * @return object $this
+     * @param int $iNewWidth
+     * @param int $iNewHeight
+     * @return self
      */
     public function dynamicResize($iNewWidth, $iNewHeight)
     {
-        // Taller image
-        if ($iNewHeight > $iNewWidth OR ($iNewHeight == $iNewWidth AND $this->iHeight < $this->iWidth))
-        {
+        if ($iNewHeight > $iNewWidth OR ($iNewHeight == $iNewWidth AND $this->iHeight < $this->iWidth)) {
+            // Taller image
             $this->resize(NULL, $iNewHeight);
 
             $iW = ($iNewWidth - $this->iWidth) / -2;
             $this->crop($iW, 0, $iNewWidth, $iNewHeight);
-        }
-        // Wider image
-        else
-        {
+        } else {
+            // Wider image
             $this->resize($iNewWidth, NULL);
 
             $iY = ($iNewHeight - $this->iHeight) / -2;
@@ -201,10 +215,9 @@ class Image
     }
 
     /**
-     * @desc Square.
-     * @param integer $iSize
+     * @param int $iSize
      * @see \PH7\Framework\Image\Image::dynamicResize() The method that is returned by this method.
-     * @return object $this
+     * @return self
      */
     public function square($iSize)
     {
@@ -212,19 +225,16 @@ class Image
     }
 
     /**
-     * @desc Zone Crop.
-     * @param integer $iWidth
-     * @param integer $iHeight
+     * @param int $iWidth
+     * @param int $iHeight
      * @param string $sZone Default value is center.
      * @see \PH7\Framework\Image\Image::crop() The method that is returned by this method.
-     * @return object $this
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the image crop is invalid.
+     * @return self
+     * @throws PH7InvalidArgumentException If the image crop is invalid.
      */
     public function zoneCrop($iWidth, $iHeight, $sZone = 'center')
     {
-
-        switch ($sZone)
-        {
+        switch ($sZone) {
             // Center
             case 'center':
                 $iX = ($iWidth - $this->iWidth) / -2;
@@ -281,30 +291,29 @@ class Image
 
             // Invalid Zone
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid image crop zone ' . $sZone . ' given for image helper zoneCrop().');
+                throw new PH7InvalidArgumentException('Invalid image crop zone ' . $sZone . ' given for image helper zoneCrop().');
         }
 
         return $this->crop($iX, $iY, $iWidth, $iHeight);
     }
 
     /**
-     * @desc Rotate.
-     * @param integer $iDeg Default value 0.
-     * @param integer $iBg Default value 0.
-     * @return object $this
+     * @param int $iDeg Default value 0.
+     * @param int $iBg Default value 0.
+     * @return self
      */
     public function rotate($iDeg = 0, $iBg = 0)
     {
         $this->rImage = imagerotate($this->rImage, $iDeg, $iBg);
-
         return $this;
     }
 
     /**
-     * @desc Create a Watermark text.
+     * Create a Watermark text.
+     *
      * @param string $sText Text of watermark.
-     * @param integer $iSize The size of text. Between 0 to 5.
-     * @return object $this
+     * @param int $iSize The size of text. Between 0 to 5.
+     * @return self
      */
      public function watermarkText($sText, $iSize)
      {
@@ -340,15 +349,15 @@ class Image
      }
 
     /**
-     * @desc Save Image.
+     * Save an image.
+     *
      * @param string $sFile
-     * @return object $this
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the image format is invalid.
+     * @return self
+     * @throws PH7InvalidArgumentException If the image format is invalid.
      */
     public function save($sFile)
     {
-        switch ($this->sType)
-        {
+        switch ($this->sType) {
             // JPG
             case 'jpg':
                 imagejpeg($this->rImage, $sFile, $this->iQuality);
@@ -366,21 +375,21 @@ class Image
 
             // Invalid Zone
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid format Image in method ' . __METHOD__ . ' of class ' . __CLASS__);
+                throw new PH7InvalidArgumentException('Invalid format Image in method ' . __METHOD__ . ' of class ' . __CLASS__);
         }
 
         return $this;
     }
 
     /**
-     * @desc Show Image.
-     * @return object $this
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the image format is invalid.
+     * Show an image.
+     *
+     * @return self
+     * @throws PH7InvalidArgumentException If the image format is invalid.
      */
     public function show()
     {
-        switch ($this->sType)
-        {
+        switch ($this->sType) {
             // JPG
             case 'jpg':
                 header('Content-type: image/jpeg');
@@ -401,14 +410,13 @@ class Image
 
             // Invalid Zone
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid format image in method ' . __METHOD__ . ' of class ' . __CLASS__);
+                throw new PH7InvalidArgumentException('Invalid format image in method ' . __METHOD__ . ' of class ' . __CLASS__);
         }
 
         return $this;
     }
 
     /**
-     * @desc Get File Name.
      * @return string
      */
     public function getFileName()
@@ -419,7 +427,7 @@ class Image
     /**
      * Determine and get the type of the image (even an unallowed image type) by reading the first bytes and checking its signature.
      *
-     * @return mixed (string | boolean) When a correct signature is found, returns the appropriate value, FALSE otherwise.
+     * @return string|bool When a correct signature is found, returns the appropriate value, FALSE otherwise.
      */
     public function getType()
     {
@@ -427,7 +435,8 @@ class Image
     }
 
     /**
-     * @desc Get image extension.
+     * Get the image extension.
+     *
      * @return string The extension of the image without the dot.
      */
     public function getExt()
@@ -436,7 +445,7 @@ class Image
     }
 
     /**
-     * @desc Remove the attributes, temporary file and memory resources.
+     * Remove the attributes, temporary file and memory resources.
      */
     public function __destruct()
     {
@@ -458,5 +467,4 @@ class Image
             $this->iCompression
         );
     }
-
 }
