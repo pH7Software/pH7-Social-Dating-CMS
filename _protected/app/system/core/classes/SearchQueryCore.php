@@ -24,8 +24,9 @@ class SearchQueryCore
     const FIRST_NAME = 'first_name';
     const LAST_NAME = 'last_name';
     const MIDDLE_NAME = 'middle_name';
-    const PROFILE_ID = 'profile_id';
     const EMAIL = 'mail';
+    const ONLINE = 'online';
+    const AVATAR = 'avatar';
     const ORDER = 'order';
     const SORT = 'sort';
 }

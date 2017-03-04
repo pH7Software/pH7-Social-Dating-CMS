@@ -286,8 +286,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $sSqlState = $bIsState ? ' AND state LIKE :state ' : '';
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
         $sSqlEmail = $bIsMail ? ' AND email LIKE :email ' : '';
-        $sSqlOnline = !empty($aParams['online']) ? ' AND userStatus = 1 AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
-        $sSqlAvatar = !empty($aParams['avatar']) ? ' AND avatar IS NOT NULL AND approvedAvatar = 1 ' : '';
+        $sSqlOnline = !empty($aParams[SearchQueryCore::ONLINE]) ? ' AND userStatus = 1 AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
+        $sSqlAvatar = !empty($aParams[SearchQueryCore::AVATAR]) ? ' AND avatar IS NOT NULL AND approvedAvatar = 1 ' : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
 
         if (empty($aParams[SearchQueryCore::ORDER])) $aParams[SearchQueryCore::ORDER] = SearchCoreModel::LATEST; // Default is "ORDER BY joinDate"
