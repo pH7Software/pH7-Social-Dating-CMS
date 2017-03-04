@@ -111,10 +111,9 @@ final class Autoloader
         if (is_file(PH7_PATH_SYS . 'core/' . PH7_MODELS . 'design/' . $sClass . '.php'))
             require_once PH7_PATH_SYS . 'core/' . PH7_MODELS . 'design/' . $sClass . '.php';
 
-        // For the Core Designs Models of the modules
-        /**
-         * @internal It is rare that you would need to use a Designs Model Class in your module, so we're not going to load it here.
-         */
+        // For the Designs Models of the modules
+        if (is_file(Registry::getInstance()->path_module_models . 'design/' . $sClass . '.php'))
+            require_once Registry::getInstance()->path_module_models . 'design/' . $sClass . '.php';
     }
 
     /**
