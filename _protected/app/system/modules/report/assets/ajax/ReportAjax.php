@@ -6,12 +6,13 @@
  * @package        PH7 / App / System / Module / Report / Asset / Ajax
  */
 namespace PH7;
-use PH7\Framework\Mvc\Request\Http;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Mvc\Request\Http;
 
 class ReportAjax
 {
-
     private $_oHttpRequest, $_oReportModel, $_bStatus;
 
     public function __construct()
@@ -44,7 +45,6 @@ class ReportAjax
     {
         unset($this->_oHttpRequest, $this->_oReportModel, $this->_bStatus);
     }
-
 }
 
 // Only for Admins
