@@ -7,23 +7,27 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Session\Session,
-PH7\Framework\Navigation\Browser,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Ip\Ip,
-PH7\Framework\File\File,
-PH7\Framework\Util\Various,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\File\File;
+use PH7\Framework\Util\Various;
+use PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use stdClass;
 
 // Abstract Class
 class UserCore
 {
-
     /**
      * Users'levels.
      *
@@ -72,7 +76,7 @@ class UserCore
         (new UserCoreModel)->delete($iProfileId, $sUsername);
 
         /* Clean UserCoreModel and Avatar Cache */
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear()
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear()
         ->start(Framework\Layout\Html\Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear();
     }
 
@@ -186,7 +190,7 @@ class UserCore
         (new UserCoreModel)->deleteAvatar($iProfileId);
 
         /* Clean User Avatar Cache */
-        (new Framework\Cache\Cache)->start(Framework\Layout\Html\Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear()
+        (new Cache)->start(Framework\Layout\Html\Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear()
         ->start(UserCoreModel::CACHE_GROUP, 'avatar' . $iProfileId, null)->clear();
     }
 
@@ -246,7 +250,7 @@ class UserCore
         (new UserCoreModel)->deleteBackground($iProfileId);
 
         /* Clean User Background Cache */
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'background' . $iProfileId, null)->clear();
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, 'background' . $iProfileId, null)->clear();
     }
 
     /**
@@ -276,7 +280,7 @@ class UserCore
         {
             $aHttpParams = [
                 'ref' => (new Framework\Mvc\Request\Http)->currentController(),
-                'a' => Framework\Registry\Registry::getInstance()->action,
+                'a' => Registry::getInstance()->action,
                 'u' => $sUsername,
                 'f_n' => $sFirstName,
                 's' => $sSex
@@ -295,13 +299,13 @@ class UserCore
     /**
      * Set a user authentication.
      *
-     * @param object $oUserData User database object.
-     * @param object \PH7\UserCoreModel $oUserModel
-     * @param object \PH7\Framework\Session\Session $oSession
-     * @param object \PH7\Framework\Mvc\Model\Security $oSecurityModel
+     * @param stdClass $oUserData User database object.
+     * @param UserCoreModel $oUserModel
+     * @param Session $oSession
+     * @param SecurityModel $oSecurityModel
      * @return void
      */
-    public function setAuth($oUserData, UserCoreModel $oUserModel, Session $oSession, SecurityModel $oSecurityModel)
+    public function setAuth(stdClass $oUserData, UserCoreModel $oUserModel, Session $oSession, SecurityModel $oSecurityModel)
     {
         // Remove the session if the user is logged on as "affiliate" or "administrator".
         if (AffiliateCore::auth() || AdminCore::auth())
@@ -373,10 +377,10 @@ class UserCore
     /**
      * Check account status of profile.
      *
-     * @param object $oDbProfileData User database object.
-     * @return mixed (boolean | string) Returns a boolean TRUE if the account status is correct, otherwise returns an error message.
+     * @param stdClass $oDbProfileData User database object.
+     * @return boolean|string Returns a boolean TRUE if the account status is correct, otherwise returns an error message.
      */
-    public function checkAccountStatus($oDbProfileData)
+    public function checkAccountStatus(stdClass $oDbProfileData)
     {
         $mRet = true; // Default value
 
@@ -408,14 +412,14 @@ class UserCore
      *
      * @param string $sEmail
      * @param string $sHash
-     * @param object \PH7\Framework\Config\Config $oConfig
-     * @param object \PH7\Framework\Registry\Registry $oRegistry
+     * @param Config $oConfig
+     * @param Registry $oRegistry
      * @param string $sMod (user, affiliate, newsletter). Default 'user'
      * @return void
      */
-    public function activateAccount($sEmail, $sHash, Framework\Config\Config $oConfig, Framework\Registry\Registry $oRegistry, $sMod = 'user')
+    public function activateAccount($sEmail, $sHash, Config $oConfig, Registry $oRegistry, $sMod = 'user')
     {
-        $sTable = Framework\Mvc\Model\Engine\Util\Various::convertModToTable($sMod);
+        $sTable = VariousModel::convertModToTable($sMod);
         $sRedirectLoginUrl = ($sMod == 'newsletter' ? PH7_URL_ROOT : ($sMod == 'affiliate' ? Uri::get('affiliate', 'home', 'login') : Uri::get('user', 'main', 'login')));
         $sRedirectIndexUrl = ($sMod == 'newsletter' ? PH7_URL_ROOT : ($sMod == 'affiliate' ? Uri::get('affiliate', 'home', 'index') : Uri::get('user', 'main', 'index')));
         $sSuccessMsg = ($sMod == 'newsletter' ? t('Your subscription to our newsletters has been successfully validated!') : t('Your account has been successfully validated. You can now login!'));
@@ -494,16 +498,13 @@ class UserCore
      */
     private function _clearCache($sId, $iId, $sTable)
     {
-        Framework\Mvc\Model\Engine\Util\Various::checkModelTable($sTable);
+        VariousModel::checkModelTable($sTable);
 
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, $sId . $iId . $sTable, null)->clear();
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, $sId . $iId . $sTable, null)->clear();
     }
 
     /**
      * Clone is set to private to stop cloning.
-     * @clone
-     * @access private
      */
     private function __clone() {}
-
 }

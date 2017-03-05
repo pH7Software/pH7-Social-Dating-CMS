@@ -5,20 +5,21 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
 namespace PH7;
-use
-PH7\Framework\Session\Session,
-PH7\Framework\Util\Various,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Navigation\Browser,
-PH7\Framework\Config\Config,
-PH7\Framework\Registry\Registry,
-PH7\Framework\Mvc\Model\Security as SecurityModel;
+
+use PH7\Framework\Session\Session;
+use PH7\Framework\Util\Various;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use stdClass;
 
 // Abstract Class
 class AffiliateCore extends UserCore
 {
-
     const COOKIE_NAME = 'pHSAff';
 
     /**
@@ -38,13 +39,13 @@ class AffiliateCore extends UserCore
     /**
      * Set an affiliate authentication.
      *
-     * @param integer object $oAffData User database object.
-     * @param object \PH7\UserCoreModel $oAffModel
-     * @param object \PH7\Framework\Session\Session $oSession
-     * @param object \PH7\Framework\Mvc\Model\Security $oSecurityModel
+     * @param stdClass $oAffData User database object.
+     * @param UserCoreModel $oAffModel
+     * @param Session $oSession
+     * @param SecurityModel $oSecurityModel
      * @return void
      */
-    public function setAuth($oAffData, UserCoreModel $oAffModel, Session $oSession, SecurityModel $oSecurityModel)
+    public function setAuth(stdClass $oAffData, UserCoreModel $oAffModel, Session $oSession, SecurityModel $oSecurityModel)
     {
         // Remove the session if the affiliate is logged on as "user" or "affiliate".
         if(UserCore::auth() || AdminCore::auth())
@@ -83,8 +84,8 @@ class AffiliateCore extends UserCore
      * Update the Affiliate Commission.
      *
      * @param integer $iAffId Affiliate ID
-     * @param object \PH7\Framework\Config\Config $oConfig
-     * @param object \PH7\Framework\Registry\Registry $oRegistry
+     * @param Config $oConfig
+     * @param Registry $oRegistry
      * @return void
      */
     public static function updateJoinCom($iAffId, Config $oConfig, Registry $oRegistry)
@@ -112,5 +113,4 @@ class AffiliateCore extends UserCore
     {
         (new AffiliateCoreModel)->delete($iProfileId, $sUsername);
     }
-
 }

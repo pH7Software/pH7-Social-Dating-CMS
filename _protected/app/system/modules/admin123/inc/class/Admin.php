@@ -5,9 +5,12 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  */
+
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Router\Uri;
 
 class Admin extends AdminCore
 {

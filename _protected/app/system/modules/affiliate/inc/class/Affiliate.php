@@ -5,16 +5,16 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Inc / Class
  */
+
 namespace PH7;
-use
-PH7\Framework\Session\Session,
-PH7\Framework\Cookie\Cookie,
-PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Router\Uri;
+
+use PH7\Framework\Session\Session;
+use PH7\Framework\Cookie\Cookie;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Router\Uri;
 
 class Affiliate extends AffiliateCore
 {
-
     /**
      * Logout function for affiliate.
      *
@@ -58,12 +58,11 @@ class Affiliate extends AffiliateCore
      * Set an Affiliate Cookie.
      *
      * @param integer $iAffId
-     * @param object \PH7\Framework\Cookie\Cookie $oCookie
+     * @param Cookie $oCookie
      * @return void
      */
     private function _setCookie($iAffId, Cookie $oCookie)
     {
         $oCookie->set(static::COOKIE_NAME, $iAffId, 3600*24*7);
     }
-
 }

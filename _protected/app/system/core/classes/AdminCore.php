@@ -5,14 +5,15 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Session\Session,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Util\Various,
-PH7\Framework\Navigation\Browser,
-PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Util\Various;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use stdClass;
 
 // Abstract Class
 class AdminCore extends UserCore
@@ -36,13 +37,13 @@ class AdminCore extends UserCore
     /**
      * Set an admin authentication.
      *
-     * @param integer object $oAdminData User database object.
-     * @param object \PH7\UserCoreModel $oAdminModel
-     * @param object \PH7\Framework\Session\Session $oSession
-     * @param object \PH7\Framework\Mvc\Model\Security $oSecurityModel
+     * @param stdClass $oAdminData User database object.
+     * @param UserCoreModel $oAdminModel
+     * @param Session $oSession
+     * @param SecurityModel $oSecurityModel
      * @return void
      */
-    public function setAuth($oAdminData, UserCoreModel $oAdminModel, Session $oSession, SecurityModel $oSecurityModel)
+    public function setAuth(stdClass $oAdminData, UserCoreModel $oAdminModel, Session $oSession, SecurityModel $oSecurityModel)
     {
         // Remove the session if the admin is logged in as "user" or "affiliate".
         if (UserCore::auth() || AffiliateCore::auth())
