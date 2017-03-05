@@ -14,6 +14,7 @@ namespace PH7\Framework\Cookie;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
+use PH7\Framework\Server\Server;
 
 class Cookie
 {
@@ -31,20 +32,19 @@ class Cookie
         $iTime = time() + ((int) !empty($iTime) ? $iTime : Config::getInstance()->values['cookie']['expiration']);
         $bSecure = (!empty($bSecure) && is_bool($bSecure)) ? $bSecure : (substr(PH7_URL_PROT, 0, 5) === 'https');
 
-        if (is_array($mName))
-        {
-            foreach ($mName as $sName => $sVal)
-                $this->set($sName, $sVal, $iTime, $bSecure); // Recursive method
-        }
-        else
-        {
+        if (is_array($mName)) {
+            foreach ($mName as $sName => $sVal) {
+                $this->set($sName, $sVal, $iTime, $bSecure);
+            }
+        } else {
             $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $mName;
 
             /* Check if we are not in localhost mode, otherwise may not work. */
-            if (!(new \PH7\Framework\Server\Server)->isLocalHost())
+            if (!(new Server)->isLocalHost()) {
                 setcookie($sCookieName, $sValue, $iTime, Config::getInstance()->values['cookie']['path'], Config::getInstance()->values['cookie']['domain'], $bSecure, true);
-            else
+            } else {
                 setcookie($sCookieName, $sValue, $iTime, PH7_SH);
+            }
         }
     }
 
@@ -71,13 +71,13 @@ class Cookie
     {
         $bExists = false; // Default value
 
-        if (is_array($mName))
-        {
-            foreach ($mName as $sName)
-                if (!$bExists = $this->exists($sName)) break; // Recursive method
-        }
-        else
-        {
+        if (is_array($mName)) {
+            foreach ($mName as $sName) {
+                if (!$bExists = $this->exists($sName)) {
+                    break;
+                }
+            }
+        } else {
             $bExists = isset($_COOKIE[Config::getInstance()->values['cookie']['prefix'] . $mName]);
         }
 
@@ -92,13 +92,11 @@ class Cookie
      */
     public function remove($mName)
     {
-        if (is_array($mName))
-        {
-            foreach ($mName as $sName)
-                $this->remove($sName); // Recursive method
-        }
-        else
-        {
+        if (is_array($mName)) {
+            foreach ($mName as $sName) {
+                $this->remove($sName);
+            }
+        } else {
             $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $mName;
 
             // We put the cookie in a table so if the cookie is in the form of multi-dimensional array, it is clear how much is destroyed
@@ -110,9 +108,6 @@ class Cookie
         }
     }
 
-    /*
-     * @__clone
-     */
     private function __clone()
     {
     }
