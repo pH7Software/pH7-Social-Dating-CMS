@@ -104,7 +104,7 @@ class Cookie
             // We put the cookie in a table so if the cookie is in the form of multi-dimensional array, it is clear how much is destroyed
             $_COOKIE[$sCookieName] = array();
             // We are asking the browser to delete the cookie
-            setcookie($sCookieName);
+            setcookie($sCookieName, 0, 0);
             // and we delete the cookie value locally to avoid using it by mistake in following our script
             unset($_COOKIE[$sCookieName]);
         }
