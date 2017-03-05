@@ -30,6 +30,6 @@ class User extends UserCore
             $oCookie->remove($aRememberMeCookies);
         }
 
-        Header::redirect(Uri::get('user','main','soon'), t('You are successfully logged out. See you soon!'));
+        Header::redirect(Uri::get('user','main','soon'), t('You are now logged out. Hope to see you again very soon!'));
     }
 }
