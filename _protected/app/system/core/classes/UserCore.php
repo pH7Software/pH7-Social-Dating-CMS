@@ -388,11 +388,11 @@ class UserCore
         {
             if ($oDbProfileData->active == 2)
             {
-                $mRet = t('Sorry, your account has not yet been activated. Please activate it by clicking the activation link that was emailed.');
+                $mRet = t('Sorry, your account has not been activated yet. Please activate it by clicking the activation link that was emailed.');
             }
             elseif ($oDbProfileData->active == 3)
             {
-                $mRet = t('Sorry, your account has not yet been activated. An administrator must validate your account.');
+                $mRet = t('Sorry, your account has not been activated yet. An administrator must validate your account.');
             }
             else
             {
