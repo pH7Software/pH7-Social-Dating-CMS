@@ -16,7 +16,6 @@ defined('PH7') or exit('Restricted access');
 
 class InstallController extends Controller
 {
-
     /**
      * Enable/Disable Modules according to the chosen niche
      */
@@ -613,18 +612,8 @@ class InstallController extends Controller
             send_mail($aParams);
         }
 
-        $_SESSION = [];
-        // Remove the sessions
-        session_unset();
-        session_destroy();
-
-        // Remove the cookie
-        $sCookieName = Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
-
-        // We are asking the browser to delete the cookie.
-        setcookie($sCookieName);
-        // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
-        unset($_COOKIE[$sCookieName]);
+        $this->_removeSessions();
+        $this->_removeCookies();
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['confirm_remove_install']))
         {
@@ -684,4 +673,19 @@ class InstallController extends Controller
         @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
     }
 
+    private function _removeSessions()
+    {
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
+    }
+
+    private function _removeCookies()
+    {
+        $sCookieName = Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
+        // We are asking the browser to delete the cookie.
+        setcookie($sCookieName);
+        // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
+        unset($_COOKIE[$sCookieName]);
+    }
 }
