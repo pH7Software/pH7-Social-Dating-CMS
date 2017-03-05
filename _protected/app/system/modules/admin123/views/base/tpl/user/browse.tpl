@@ -123,7 +123,7 @@
                                 or {{ $design->popupLinkConfirm(t('Disapprove (notified user by email)'), PH7_ADMIN_MOD, 'user', 'disapprove', $user->profileId) }}
                             {/if}
 
-                            | {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), PH7_ADMIN_MOD, 'user', 'delete', $user->profileId.'_'.$user->username) }}
+                            | {{ $design->popupLinkConfirm(t('Delete'), PH7_ADMIN_MOD, 'user', 'delete', $user->profileId.'_'.$user->username) }}
                         </td>
                     </tr>
                 {/each}
