@@ -10,17 +10,17 @@
  */
 
 namespace PH7\Framework\Cookie;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
 
 class Cookie
 {
-
     /**
      * Set a PHP cookie.
      *
-     * @param mixed (array | string) $mName Name of the cookie.
+     * @param array|string $mName Name of the cookie.
      * @param string $sValue value of the cookie, Optional if the cookie data is in a array.
      * @param int $iTime The time the cookie expires. This is a Unix timestamp.
      * @param bool $bSecure If TRUE cookie will only be sent over a secure HTTPS connection from the client.
@@ -64,7 +64,7 @@ class Cookie
     /**
      * Returns a boolean informing if the cookie exists or not.
      *
-     * @param mixed (array | string) $mName Name of the cookie.
+     * @param array|string $mName Name of the cookie.
      * @return boolean
      */
     public function exists($mName)
@@ -87,7 +87,7 @@ class Cookie
     /**
      * Delete the cookie(s) key if the cookie exists.
      *
-     * @param mixed (array | string) $mName Name of the cookie to delete.
+     * @param array|string $mName Name of the cookie to delete.
      * @return void
      */
     public function remove($mName)
@@ -112,10 +112,8 @@ class Cookie
 
     /*
      * @__clone
-     * @access private
      */
     private function __clone()
     {
     }
-
 }
