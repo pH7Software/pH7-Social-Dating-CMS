@@ -68,8 +68,10 @@
                           {/if}
                       </td>
                       <td class="small">
-                          <a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit',$admin->profileId) }}" title="{lang 'Edit this Admin'}">{lang 'Edit'}</a> |
-                          {{ $design->popupLinkConfirm(t('Delete (Irreversible!)'), PH7_ADMIN_MOD, 'admin', 'delete', $admin->profileId.'_'.$admin->username) }}
+                          <a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit',$admin->profileId) }}" title="{lang 'Edit this Admin'}">{lang 'Edit'}</a>
+                          {if !AdminCore::isRootProfileId($admin->profileId) }
+                              | {{ $design->popupLinkConfirm(t('Delete'), PH7_ADMIN_MOD, 'admin', 'delete', $admin->profileId.'_'.$admin->username) }}
+                          {/if}
                       </td>
                     </tr>
                 {/each}
