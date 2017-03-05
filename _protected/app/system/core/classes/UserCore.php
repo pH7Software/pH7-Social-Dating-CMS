@@ -87,7 +87,7 @@ class UserCore
      * @param integer $sUsername
      * @param string $sFile
      * @param integer $iApproved (1 = approved 0 = pending) Default 1
-     * @return boolean TRUE if succes, FALSE if the extension is wrong.
+     * @return boolean TRUE if success, FALSE if the extension is wrong.
      */
     public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1)
     {
@@ -201,7 +201,7 @@ class UserCore
      * @param string $sUsername
      * @param string $sFile
      * @param integer $iApproved (1 = approved 0 = pending) Default 1
-     * @return boolean TRUE if succes, FALSE if the extension is wrong.
+     * @return boolean TRUE if success, FALSE if the extension is wrong.
      */
     public function setBackground($iProfileId, $sUsername, $sFile, $iApproved = 1)
     {
