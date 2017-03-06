@@ -14,6 +14,8 @@ PH7\Framework\Mvc\Router\Uri;
 
 class UserController extends Controller
 {
+    const PROFILES_PER_PAGE = 15;
+
     private $oAdmin, $oAdminModel, $sMsg, $iTotalUsers;
 
     public function __construct()
@@ -39,7 +41,7 @@ class UserController extends Controller
         $this->iTotalUsers = $this->oAdminModel->total();
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 15);
+        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
         $oBrowse = $this->oAdminModel->browse($oPage->getFirstItem(), $oPage->getNbItemsByPage());
         unset($oPage);
@@ -106,7 +108,7 @@ class UserController extends Controller
                 $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
 
             $oPage = new Page;
-            $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 15);
+            $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
             $this->view->current_page = $oPage->getCurrentPage();
             $oSearch = $this->oAdminModel->searchUser($sWhat, $sWhere, $iGroupId, $iBan, false,
                 $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->

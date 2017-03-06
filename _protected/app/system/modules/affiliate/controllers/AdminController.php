@@ -14,6 +14,8 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
+    const PROFILES_PER_PAGE = 15;
+
     private $oAff, $oAffModel, $sMsg, $sTitle, $iTotalUsers;
 
     public function __construct()
@@ -48,7 +50,7 @@ class AdminController extends Controller
         $this->iTotalUsers = $this->oAffModel->searchAff($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, 15);
+        $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
         $oSearch = $this->oAffModel->searchAff($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->getFirstItem(), $oPage->getNbItemsByPage());
         unset($oPage);

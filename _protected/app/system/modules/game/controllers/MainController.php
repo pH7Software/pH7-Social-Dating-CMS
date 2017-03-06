@@ -13,8 +13,11 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
+    const GAMES_PER_PAGE = 10, CATEGORIES_PER_PAGE = 10;
+
     /**
-     * @access protected Protected access for the AdminController class derived from this class.
+     * @internal Protected access because AdminController derived class uses these attributes
+     *
      * @var object $oGameModel
      * @var object $sTitle
      * @var string $$sMetaKeywords
@@ -34,7 +37,7 @@ class MainController extends Controller
 
     public function index()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oGameModel->totalGames(), 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->oGameModel->totalGames(), self::GAMES_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oGames = $this->oGameModel->get(null, null, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
@@ -94,7 +97,7 @@ class MainController extends Controller
         $sSort = $this->httpRequest->get('sort');
 
         $this->iTotalGames = $this->oGameModel->category($sCategory, true, $sOrder, $sSort, null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalGames, 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalGames, self::CATEGORIES_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oGameModel->category($sCategory, false, $sOrder, $sSort, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
@@ -133,7 +136,7 @@ class MainController extends Controller
     {
         $this->iTotalGames = $this->oGameModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalGames, 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalGames, self::GAMES_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oGameModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());

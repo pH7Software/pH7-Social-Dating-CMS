@@ -16,6 +16,7 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
+    const PROFILES_PER_PAGE = 15;
 
     private $oAdminModel, $sTitle, $sMsg, $iTotalAdmins;
 
@@ -37,7 +38,7 @@ class AdminController extends Controller
             $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->iTotalAdmins, 15);
+        $this->view->total_pages = $oPage->getTotalPages($this->iTotalAdmins, self::PROFILES_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
         $oSearch = $this->oAdminModel->searchAdmin($this->httpRequest->get('looking'), false,
             $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->
@@ -115,10 +116,4 @@ class AdminController extends Controller
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), $this->sMsg);
     }
-
-    public function __destruct()
-    {
-        unset($this->oAdminModel, $this->sTitle, $this->sMsg, $this->iTotalAdmins);
-    }
-
 }
