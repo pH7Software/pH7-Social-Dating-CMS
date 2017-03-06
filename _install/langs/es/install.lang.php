@@ -15,8 +15,8 @@ $LANG = array(
     'charset' => 'utf-8',
     'lang_name' => 'Español',
     'version' => 'versión',
-    'welcome_voice' => 'Hola y bienvenidos a la instalación de ' . Controller::SOFTWARE_NAME . ', ' . Controller::SOFTWARE_VERSION . '. ' .
-        'Espero que te gusta su nueva aplicación web para la reunión social. ¡Buena suerte!',
+    'welcome_voice' => 'Bienvenidos a la instalación de ' . Controller::SOFTWARE_NAME . ', ' . Controller::SOFTWARE_VERSION . '. ' .
+        'Espero que te gusta su nueva aplicación web para la reunión social.',
     'CMS_desc' => '<p>Bienvenido a la instalación de ' . Controller::SOFTWARE_NAME . '.<br />
         Gracias por elegir nuestro CMS y esperamos que sea de su agrado usted.</p>',
     'choose_install_lang' => 'Por favor, elija su idioma para comenzar la instalación',

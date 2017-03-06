@@ -15,8 +15,8 @@ $LANG = array(
     'charset' => 'utf-8',
     'lang_name' => 'English',
     'version' => 'version',
-    'welcome_voice' => 'Hi and welcome to ' . Controller::SOFTWARE_NAME . ' installer, version ' . Controller::SOFTWARE_VERSION . '. ' .
-        'I really hope you will enjoy your new social dating web app.',
+    'welcome_voice' => 'Welcome to ' . Controller::SOFTWARE_NAME . ', version ' . Controller::SOFTWARE_VERSION . '. ' .
+        'I hope you will enjoy your new social web app.',
     'CMS_desc' => '<p>Welcome to ' . Controller::SOFTWARE_NAME . ' Installer.<br />
         Thank you for choosing <strong>pH7CMS</strong>, and we hope you will love it!</p>',
     'choose_install_lang' => 'Please choose your language to begin the installation',
