@@ -43,6 +43,6 @@ class BannerForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><hr /><br />'));
         }
         $oForm->render();
+        unset($oSysVar);
     }
-    unset($oSysVar);
 }
