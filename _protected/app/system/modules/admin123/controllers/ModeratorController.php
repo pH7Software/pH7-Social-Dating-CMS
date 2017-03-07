@@ -16,6 +16,8 @@ PH7\Framework\Mvc\Router\Uri;
 
 class ModeratorController extends Controller
 {
+    const ITEMS_PER_PAGE = 20;
+
     private $oModeratorModel, $sPage, $sMsg;
 
     public function __construct()
@@ -37,9 +39,13 @@ class ModeratorController extends Controller
     {
         $this->view->page_title = $this->view->h2_title = t('Photo Albums Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalPictureAlbums(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oModeratorModel->totalPictureAlbums(), self::ITEMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $this->view->albums = $this->oModeratorModel->getAlbumsPicture($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $this->view->albums = $this->oModeratorModel->getAlbumsPicture(
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+        );
         $this->output();
     }
 
@@ -47,9 +53,13 @@ class ModeratorController extends Controller
     {
         $this->view->page_title = $this->view->h2_title = t('Pictures Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalPictures(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oModeratorModel->totalPictures(), self::ITEMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $this->view->pictures = $this->oModeratorModel->getPictures($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $this->view->pictures = $this->oModeratorModel->getPictures(
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+        );
         $this->output();
     }
 
@@ -57,9 +67,13 @@ class ModeratorController extends Controller
     {
         $this->view->page_title = $this->view->h2_title = t('Video Albums Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalVideoAlbums(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oModeratorModel->totalVideoAlbums(), self::ITEMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $this->view->albums = $this->oModeratorModel->getAlbumsVideo($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $this->view->albums = $this->oModeratorModel->getAlbumsVideo(
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+        );
         $this->output();
     }
 
@@ -69,9 +83,13 @@ class ModeratorController extends Controller
 
         $this->view->page_title = $this->view->h2_title = t('Videos Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->totalVideos(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oModeratorModel->totalVideos(), self::ITEMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $this->view->videos = $this->oModeratorModel->getVideos($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $this->view->videos = $this->oModeratorModel->getVideos(
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+        );
         $this->output();
     }
 
@@ -79,10 +97,13 @@ class ModeratorController extends Controller
     {
         $this->view->page_title = $this->view->h2_title = t('Avatars Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->
-            totalAvatars(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oModeratorModel->totalAvatars(), self::ITEMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $this->view->avatars = $this->oModeratorModel->getAvatars($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $this->view->avatars = $this->oModeratorModel->getAvatars(
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+        );
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
         $this->output();
     }
@@ -91,16 +112,22 @@ class ModeratorController extends Controller
     {
         $this->view->page_title = $this->view->h2_title = t('Profile Backgrounds Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oModeratorModel->
-            totalBackgrounds(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oModeratorModel->totalBackgrounds(), self::ITEMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $this->view->backgrounds = $this->oModeratorModel->getBackgrounds($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $this->view->backgrounds = $this->oModeratorModel->getBackgrounds(
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+        );
         $this->output();
     }
 
     public function pictureWebcam()
     {
-        Header::redirect(Uri::get('webcam', 'webcam', 'picture'), t('Welcome to the Picture Webcam in "administrator mode"'));
+        Header::redirect(
+            Uri::get('webcam', 'webcam', 'picture'),
+            t('Welcome to the Picture Webcam in "administrator mode"')
+        );
     }
 
     public function approvedPictureAlbum()

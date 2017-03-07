@@ -11,14 +11,14 @@ use PH7\Framework\Parse\SysVar, PH7\Framework\Navigation\Page;
 
 class UpdateAdsForm
 {
+    const ADS_PER_PAGE = 10;
 
     public static function display()
     {
-        if (isset($_POST['submit_update_ads']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_update_ads']))
+        if (isset($_POST['submit_update_ads'])) {
+            if (\PFBC\Form::isValid($_POST['submit_update_ads'])) {
                 new UpdateAdsFormProcess;
-
+            }
             Framework\Url\Header::redirect();
         }
 
@@ -26,14 +26,12 @@ class UpdateAdsForm
         $oAdsModel = new AdsCoreModel;
         $sTable = AdsCore::getTable();
         $sCSRFToken = (new Framework\Security\CSRF\Token)->generate('ads');
-        $oPage->getTotalPages($oAdsModel->total($sTable), 10);
+        $oPage->getTotalPages($oAdsModel->total($sTable), self::ADS_PER_PAGE);
         $oAds = $oAdsModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsByPage(), $sTable);
         unset($oPage, $oAdsModel);
 
         $oSysVar = new SysVar;
-
-        foreach ($oAds as $oRow)
-        {
+        foreach ($oAds as $oRow) {
             $oForm = new \PFBC\Form('form_update_ads');
             $oForm->configure(array('action' => ''));
             $oForm->addElement(new \PFBC\Element\Hidden('submit_update_ads', 'form_update_ads'));
@@ -58,16 +56,17 @@ class UpdateAdsForm
 
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<a class="medium_button" href="javascript:void(0)" onclick="ads(\'delete\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Delete') . '</a> | '));
 
-            if ($oRow->active == 1)
+            if ($oRow->active == 1) {
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<a class="medium_button" href="javascript:void(0)" onclick="ads(\'deactivate\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Deactivate') . '</a>'));
-            else
+            } else {
                 $oForm->addElement(new \PFBC\Element\HTMLExternal('<a class="medium_button" href="javascript:void(0)" onclick="ads(\'activate\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Activate') . '</a>'));
+            }
 
             // End ads div tags
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
 
             $oForm->render();
         }
+        unset($oSysVar);
     }
-
 }

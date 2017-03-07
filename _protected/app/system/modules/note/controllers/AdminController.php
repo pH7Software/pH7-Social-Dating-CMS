@@ -7,13 +7,14 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Cache\Cache,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
+    const POSTS_PER_PAGE = 10;
+
     public function index()
     {
         Header::redirect(Uri::get('note', 'main', 'index'), t('Welcome to the Note administrator mode.'));
@@ -23,9 +24,16 @@ class AdminController extends MainController
     {
         $this->view->page_title = $this->view->h2_title = t('Notes Moderation');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts('0'), 10);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oNoteModel->totalPosts('0'), self::POSTS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oPosts = $this->oNoteModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), SearchCoreModel::CREATED, '0');
+        $oPosts = $this->oNoteModel->getPosts(
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage(),
+            SearchCoreModel::CREATED,
+            '0'
+        );
         $this->view->posts = $oPosts;
         $this->setMenuVars();
         $this->output();

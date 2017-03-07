@@ -40,7 +40,9 @@ class BirthdayController extends Controller
     {
         $this->checkType($sGender);
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalBirths, self::MAX_PROFILE_PER_PAGE);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalBirths, self::MAX_PROFILE_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $this->iTotalBirths = $this->oBirthModel->get($sGender, true, SearchCoreModel::LAST_ACTIVITY, SearchCoreModel::DESC, null, null);

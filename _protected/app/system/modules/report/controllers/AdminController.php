@@ -14,6 +14,7 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
+    const REPORTS_PER_PAGE = 15;
 
     private $oReportModel, $sTitle, $sMsg, $bStatus;
 
@@ -44,7 +45,8 @@ class AdminController extends Controller
         $this->view->h2_title = $this->sTitle;
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->oReportModel->totalReports(), 15);
+        $this->view->total_pages = $oPage->getTotalPages($this->oReportModel->totalReports(),
+            self::REPORTS_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
         $this->view->reports = $this->oReportModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsByPage());
         unset($oPage);
@@ -89,5 +91,4 @@ class AdminController extends Controller
 
         Header::redirect(Uri::get('report', 'admin', 'index'), $this->sMsg);
     }
-
 }

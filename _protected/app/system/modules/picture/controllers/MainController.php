@@ -16,7 +16,17 @@ PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
-    private $oPictureModel, $oPage, $sUsername, $sUsernameLink, $iProfileId, $sTitle, $iTotalPictures;
+    const ALBUMS_PER_PAGE = 16;
+    const PHOTOS_PER_PAGE = 10;
+
+    private
+    $oPictureModel,
+    $oPage,
+    $sUsername,
+    $sUsernameLink,
+    $iProfileId,
+    $sTitle,
+    $iTotalPictures;
 
     public function __construct()
     {
@@ -71,7 +81,9 @@ class MainController extends Controller
     public function albums()
     {
         $iProfileId = ($this->httpRequest->getExists('username')) ? $this->iProfileId : null;
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oPictureModel->totalAlbums($iProfileId), 16);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oPictureModel->totalAlbums($iProfileId), self::ALBUMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbums = $this->oPictureModel->album($iProfileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
@@ -96,7 +108,9 @@ class MainController extends Controller
 
     public function album()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oPictureModel->totalPhotos($this->iProfileId), 26);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oPictureModel->totalPhotos($this->iProfileId), self::ALBUMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbum = $this->oPictureModel->photo($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
@@ -179,7 +193,9 @@ class MainController extends Controller
     public function result()
     {
         $this->iTotalPictures = $this->oPictureModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalPictures, 10);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalPictures, self::PHOTOS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oSearch = $this->oPictureModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 

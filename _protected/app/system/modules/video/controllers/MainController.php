@@ -16,6 +16,9 @@ PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
+    const ALBUMS_PER_PAGE = 14;
+    const VIDEOS_PER_PAGE = 10;
+
     private $oVideoModel, $oPage, $sUsername, $sUsernameLink, $iProfileId, $sTitle, $iTotalVideos;
 
     public function __construct()
@@ -73,7 +76,9 @@ class MainController extends Controller
     public function albums()
     {
         $iProfileId = ($this->httpRequest->getExists('username')) ? $this->iProfileId : null;
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oVideoModel->totalAlbums($iProfileId), 14);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oVideoModel->totalAlbums($iProfileId), self::ALBUMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbums = $this->oVideoModel->album($iProfileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
@@ -102,7 +107,9 @@ class MainController extends Controller
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'Video.js');
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oVideoModel->totalVideos($this->iProfileId), 26);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oVideoModel->totalVideos($this->iProfileId), self::ALBUMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oAlbum = $this->oVideoModel->video($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
 
@@ -188,12 +195,27 @@ class MainController extends Controller
 
     public function result()
     {
-        $this->iTotalVideos = $this->oVideoModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalVideos, 10);
+        $this->iTotalVideos = $this->oVideoModel->search(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
+        );
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalVideos, self::VIDEOS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oSearch = $this->oVideoModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->
-                        getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oVideoModel->search(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
 
         if (empty($oSearch))
         {

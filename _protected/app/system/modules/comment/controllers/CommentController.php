@@ -15,6 +15,7 @@ PH7\Framework\Mvc\Router\Uri;
 
 class CommentController extends Controller
 {
+    const COMMENTS_PER_PAGE = 15;
 
     private $oComment, $oCommentModel, $sTable, $sTitle, $sMsg, $iId;
 
@@ -52,7 +53,9 @@ class CommentController extends Controller
         $this->view->h4_title = CommentCore::count($this->iId, $this->sTable);
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($this->oCommentModel->total($this->iId, $this->sTable), 15);
+        $this->view->total_pages = $oPage->getTotalPages(
+            $this->oCommentModel->total($this->iId, $this->sTable), self::COMMENTS_PER_PAGE
+        );
         $this->view->current_page = $oPage->getCurrentPage();
         $oComment = $this->oCommentModel->read($this->iId, 1, $oPage->getFirstItem(), $oPage->getNbItemsByPage(), $this->sTable);
         unset($oPage);
@@ -147,10 +150,4 @@ class CommentController extends Controller
         $this->view->page_title = t('Comment Not Found');
         $this->view->error = t('No comments yet, <a class="bold" href="%0%">add one</a>!', Uri::get('comment', 'comment', 'add', $this->sTable . ',' . $this->str->escape($this->httpRequest->get('id'))));
     }
-
-    public function __destruct()
-    {
-        unset($this->oComment, $this->oCommentModel, $this->sTable, $this->sTitle, $this->sMsg, $this->iId);
-    }
-
 }

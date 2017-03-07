@@ -10,13 +10,20 @@ namespace PH7;
 use
 PH7\Framework\Parse\Emoticon,
 PH7\Framework\Navigation\Page,
+PH7\Framework\Analytics\Statistic,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
+    const POSTS_PER_PAGE = 10;
+    const CATEGORIES_PER_PAGE = 10;
+    const ITEMS_MENU_TOP_VIEWS = 5;
+    const ITEMS_MENU_TOP_RATING = 5;
+    const ITEMS_MENU_CATEGORIES = 10;
+
     /**
-     * @access protected Protected access because AdminController class is derived from this class and will use these attributes.
+     * @internal Protected access because AdminController derived class uses these attributes
      * @var object $oBlogModel
      * @var object $oPage
      * @var string $sTitle
@@ -35,9 +42,13 @@ class MainController extends Controller
     {
         $this->view->page_title = t('The Blog of %site_name%');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oBlogModel->totalPosts(), 5);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oBlogModel->totalPosts(), self::POSTS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oPosts = $this->oBlogModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oPosts = $this->oBlogModel->getPosts(
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+        );
         $this->setMenuVars();
 
         if (empty($oPosts))
@@ -88,7 +99,7 @@ class MainController extends Controller
                 $this->view->assigns($aVars);
 
                 // Set Blogs Post Views Statistics
-                Framework\Analytics\Statistic::setView($oPost->blogId, 'Blogs');
+                Statistic::setView($oPost->blogId, 'Blogs');
             }
             else
             {
@@ -111,7 +122,7 @@ class MainController extends Controller
         $sSort = $this->httpRequest->get('sort');
 
         $this->iTotalBlogs = $this->oBlogModel->category($sCategory, true, $sOrder, $sSort, null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalBlogs, 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalBlogs, self::CATEGORIES_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oBlogModel->category($sCategory, false, $sOrder, $sSort, $this->
@@ -147,15 +158,26 @@ class MainController extends Controller
 
     public function result()
     {
-        $this->iTotalBlogs = $this->oBlogModel->search($this->httpRequest->get('looking'), true,
-            $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $this->iTotalBlogs = $this->oBlogModel->search(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
+        );
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalBlogs, 10);
+        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalBlogs, self::POSTS_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oSearch = $this->oBlogModel->search($this->httpRequest->get('looking'), false,
-            $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->
-            getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oBlogModel->search(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
 
         $this->setMenuVars();
 
@@ -187,11 +209,15 @@ class MainController extends Controller
      */
     protected function setMenuVars()
     {
-        $this->view->top_views = $this->oBlogModel->getPosts(0, 5, SearchCoreModel::
-            VIEWS);
-        $this->view->top_rating = $this->oBlogModel->getPosts(0, 5, SearchCoreModel::
-            RATING);
-        $this->view->categories = $this->oBlogModel->getCategory(null, 0, 50, true);
+        $this->view->top_views = $this->oBlogModel->getPosts(
+            0, self::ITEMS_MENU_TOP_VIEWS, SearchCoreModel::VIEWS
+        );
+        $this->view->top_rating = $this->oBlogModel->getPosts(
+            0, self::ITEMS_MENU_TOP_RATING, SearchCoreModel::RATING
+        );
+        $this->view->categories = $this->oBlogModel->getCategory(
+            null, 0, self::ITEMS_MENU_CATEGORIES, true
+        );
     }
 
     /**

@@ -29,16 +29,23 @@ class BrowseController extends Controller
     public function index()
     {
         $this->iTotalUsers = $this->oUserModel->search($_GET, true, null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalUsers, self::MAX_PROFILE_PER_PAGE);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalUsers, self::MAX_PROFILE_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oUsers = $this->oUserModel->search($_GET, false, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oUsers = $this->oUserModel->search(
+            $_GET,
+            false,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
 
-        if (empty($oUsers))
-        {
-            Header::redirect(Uri::get('user', 'search', 'index'), t('Empty search result. Please try again with wider or new search parameters.'));
-        }
-        else
-        {
+        if (empty($oUsers)) {
+            Header::redirect(
+                Uri::get('user', 'search', 'index'),
+                t('Empty search result. Please try again with wider or new search parameters.')
+            );
+        } else {
             // We can put HTML tags in the <title> tag as our template engine will remove all HTML tags present in the title tag, ...
             $this->view->page_title = t('Browse Members');
             $this->view->h1_title = '<span class="pH1">' . t('Browse Members') . '</span>';

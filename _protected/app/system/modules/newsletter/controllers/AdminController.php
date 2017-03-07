@@ -14,6 +14,8 @@ PH7\Framework\Mvc\Router\Uri;
 
 class AdminController extends Controller
 {
+    const SUBSCRIBERS_PER_PAGE = 30;
+
     private $oSubscriptionModel, $sTitle;
 
     public function __construct()
@@ -43,12 +45,26 @@ class AdminController extends Controller
     {
         $oSubscriptionModel = new SubscriptionModel;
 
-        $iTotal = $this->oSubscriptionModel->browse($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $iTotal = $this->oSubscriptionModel->browse(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
+        );
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($iTotal, 30);
+        $this->view->total_pages = $oPage->getTotalPages($iTotal, self::SUBSCRIBERS_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
-        $oBrowse = $this->oSubscriptionModel->browse($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->getFirstItem(), $oPage->getNbItemsByPage());
+        $oBrowse = $this->oSubscriptionModel->browse(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $oPage->getFirstItem(),
+            $oPage->getNbItemsByPage()
+        );
         unset($oPage);
 
         if (empty($oBrowse))

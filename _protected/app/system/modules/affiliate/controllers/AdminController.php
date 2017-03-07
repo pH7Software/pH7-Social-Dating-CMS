@@ -52,7 +52,14 @@ class AdminController extends Controller
         $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
-        $oSearch = $this->oAffModel->searchAff($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->getFirstItem(), $oPage->getNbItemsByPage());
+        $oSearch = $this->oAffModel->searchAff(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $oPage->getFirstItem(),
+            $oPage->getNbItemsByPage()
+        );
         unset($oPage);
 
         if (empty($oSearch))

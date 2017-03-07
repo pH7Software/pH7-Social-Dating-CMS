@@ -17,6 +17,8 @@ use PH7\Framework\Mvc\Request\Http;
 
 class Page
 {
+    const DEFAULT_NUMBER_ITEMS = 10;
+
     private $_oHttpRequest, $_iTotalPages, $_iTotalItems, $_iNbItemsByPage, $_iCurrentPage, $_iFirstItem;
 
     public function __construct()
@@ -47,7 +49,7 @@ class Page
      * @param integer $iNbItemsByPage Default 10
      * @return integer The number of pages.
      */
-    public function getTotalPages($iTotalItems, $iNbItemsByPage = 10)
+    public function getTotalPages($iTotalItems, $iNbItemsByPage = self::DEFAULT_NUMBER_ITEMS)
     {
         $this->totalPages($iTotalItems, $iNbItemsByPage);
         return ($this->_iTotalPages < 1) ? 1 : $this->_iTotalPages;

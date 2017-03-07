@@ -13,7 +13,12 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
-    const GAMES_PER_PAGE = 10, CATEGORIES_PER_PAGE = 10;
+    const GAMES_PER_PAGE = 10;
+    const CATEGORIES_PER_PAGE = 10;
+    const ITEMS_MENU_TOP_VIEWS = 5;
+    const ITEMS_MENU_TOP_RATING = 5;
+    const ITEMS_MENU_LATEST = 5;
+    const ITEMS_MENU_CATEGORIES = 10;
 
     /**
      * @internal Protected access because AdminController derived class uses these attributes
@@ -37,9 +42,16 @@ class MainController extends Controller
 
     public function index()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oGameModel->totalGames(), self::GAMES_PER_PAGE);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oGameModel->totalGames(), self::GAMES_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oGames = $this->oGameModel->get(null, null, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oGames = $this->oGameModel->get(
+            null,
+            null,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
 
         $this->setMenuVars();
 
@@ -63,7 +75,12 @@ class MainController extends Controller
 
     public function game()
     {
-        $oGame = $this->oGameModel->get(strstr($this->httpRequest->get('title'), '-', true), $this->httpRequest->get('id'), 0, 1);
+        $oGame = $this->oGameModel->get(
+            strstr($this->httpRequest->get('title'), '-', true),
+            $this->httpRequest->get('id'),
+            0,
+            1
+        );
 
         if (empty($oGame))
         {
@@ -96,11 +113,27 @@ class MainController extends Controller
         $sOrder = $this->httpRequest->get('order');
         $sSort = $this->httpRequest->get('sort');
 
-        $this->iTotalGames = $this->oGameModel->category($sCategory, true, $sOrder, $sSort, null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalGames, self::CATEGORIES_PER_PAGE);
+        $this->iTotalGames = $this->oGameModel->category(
+            $sCategory,
+            true,
+            $sOrder,
+            $sSort,
+            null,
+            null
+        );
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalGames, self::CATEGORIES_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oSearch = $this->oGameModel->category($sCategory, false, $sOrder, $sSort, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oGameModel->category(
+            $sCategory,
+            false,
+            $sOrder,
+            $sSort,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
         $this->setMenuVars();
 
         $sCategoryTxt = substr($sCategory,0,60);
@@ -134,12 +167,28 @@ class MainController extends Controller
 
     public function result()
     {
-        $this->iTotalGames = $this->oGameModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $this->iTotalGames = $this->oGameModel->search(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
+        );
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalGames, self::GAMES_PER_PAGE);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalGames, self::GAMES_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oSearch = $this->oGameModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oGameModel->search(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
         $this->setMenuVars();
 
         if (empty($oSearch))
@@ -198,10 +247,18 @@ class MainController extends Controller
      */
     protected function setMenuVars()
     {
-        $this->view->top_views = $this->oGameModel->get(null, null, 0, 5, SearchCoreModel::VIEWS);
-        $this->view->top_rating = $this->oGameModel->get(null, null, 0, 5, SearchCoreModel::RATING);
-        $this->view->latest = $this->oGameModel->get(null, null, 0, 5, SearchCoreModel::ADDED_DATE);
-        $this->view->categories = $this->oGameModel->getCategory(null, 0, 50, true);
+        $this->view->top_views = $this->oGameModel->get(
+            null, null, 0, self::ITEMS_MENU_TOP_VIEWS, SearchCoreModel::VIEWS
+        );
+        $this->view->top_rating = $this->oGameModel->get(
+            null, null, 0, self::ITEMS_MENU_TOP_RATING, SearchCoreModel::RATING
+        );
+        $this->view->latest = $this->oGameModel->get(
+            null, null, 0, self::ITEMS_MENU_LATEST, SearchCoreModel::ADDED_DATE
+        );
+        $this->view->categories = $this->oGameModel->getCategory(
+            null, 0, self::ITEMS_MENU_CATEGORIES, true
+        );
     }
 
     /**

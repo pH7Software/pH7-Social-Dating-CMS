@@ -10,11 +10,16 @@ namespace PH7;
 use
 PH7\Framework\Navigation\Page,
 PH7\Framework\Security\Ban\Ban,
+PH7\Framework\Analytics\Statistic,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header;
 
 class ForumController extends Controller
 {
+    const TOPICS_PER_PAGE = 20;
+    const FORUMS_PER_PAGE = 20;
+    const POSTS_PER_PAGE = 10;
+
     private $oForumModel, $oPage, $sTitle, $sMsg, $iTotalTopics;
 
     public function __construct()
@@ -35,11 +40,17 @@ class ForumController extends Controller
 
     public function index()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oForumModel->totalForums(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oForumModel->totalForums(), self::FORUMS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oCategories = $this->oForumModel->getCategory();
-        $oForums = $this->oForumModel->getForum(null, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oForums = $this->oForumModel->getForum(
+            null,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
 
         if (empty($oCategories) && empty($oForums))
         {
@@ -61,9 +72,20 @@ class ForumController extends Controller
 
     public function topic()
     {
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oForumModel->totalTopics(), 20);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oForumModel->totalTopics(), self::TOPICS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oTopics = $this->oForumModel->getTopic(strstr($this->httpRequest->get('forum_name'), '-', true), $this->httpRequest->get('forum_id', 'int'), null, null, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oTopics = $this->oForumModel->getTopic(
+            strstr($this->httpRequest->get('forum_name'), '-', true),
+            $this->httpRequest->get('forum_id', 'int'),
+            null,
+            null,
+            null,
+            1,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
 
         $this->view->forum_name = $this->httpRequest->get('forum_name');
         $this->view->forum_id = $this->httpRequest->get('forum_id', 'int');
@@ -86,11 +108,33 @@ class ForumController extends Controller
 
     public function post()
     {
-        $oPost = $this->oForumModel->getTopic(strstr($this->httpRequest->get('forum_name'), '-', true), $this->httpRequest->get('forum_id', 'int'), strstr($this->httpRequest->get('topic_name'), '-', true), $this->httpRequest->get('topic_id', 'int'), null, 1, 0, 1);
+        $oPost = $this->oForumModel->getTopic(
+            strstr($this->httpRequest->get('forum_name'), '-', true),
+            $this->httpRequest->get('forum_id', 'int'),
+            strstr($this->httpRequest->get('topic_name'), '-', true),
+            $this->httpRequest->get('topic_id', 'int'),
+            null,
+            1,
+            0,
+            1
+        );
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oForumModel->totalMessages($this->httpRequest->get('topic_id', 'int')), 10);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oForumModel->totalMessages(
+                $this->httpRequest->get('topic_id', 'int')
+            ),
+            self::POSTS_PER_PAGE
+        );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oMessages = $this->oForumModel->getMessage($this->httpRequest->get('topic_id', 'int'), null, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oMessages = $this->oForumModel->getMessage(
+            $this->httpRequest->get('topic_id', 'int'),
+            null,
+            null,
+            1,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
 
         if (empty($oPost))
         {
@@ -114,7 +158,7 @@ class ForumController extends Controller
             $this->view->messages = $oMessages;
 
             // Set Topics Views Statistics
-            Framework\Analytics\Statistic::setView($oPost->topicId, 'ForumsTopics');
+            Statistic::setView($oPost->topicId, 'ForumsTopics');
         }
 
         $this->output();
@@ -128,12 +172,19 @@ class ForumController extends Controller
         $iId = (new UserCoreModel)->getId(null, $sUsername);
 
         $this->iTotalTopics = $this->oForumModel->totalTopics(null, $iId);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalTopics, 20);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalTopics, self::TOPICS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $this->view->topic_number = nt('%n% Topic:', '%n% Topics:', $this->iTotalTopics);
 
-        $oTopics = $this->oForumModel->getPostByProfile($iId, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oTopics = $this->oForumModel->getPostByProfile(
+            $iId,
+            1,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
         if (empty($oTopics))
         {
             $this->sTitle = t("%0% doesn't have any posts yet.", $sUsername);
@@ -160,11 +211,28 @@ class ForumController extends Controller
 
     public function result()
     {
-        $this->iTotalTopics = $this->oForumModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalTopics, 10);
+        $this->iTotalTopics = $this->oForumModel->search(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
+        );
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalTopics, self::POSTS_PER_PAGE
+        );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oSearch = $this->oForumModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oForumModel->search(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
 
         if (empty($oSearch))
         {

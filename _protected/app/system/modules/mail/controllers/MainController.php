@@ -16,6 +16,8 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
+    const EMAILS_PER_PAGE = 10;
+
     protected $oMailModel;
     protected $oPage;
     protected $sTitle;
@@ -85,10 +87,30 @@ class MainController extends Controller
 
             $this->manualTplInclude('msg.inc.tpl');
         } else {
-            $this->iTotalMails = $this->oMailModel->search(null, true, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, null, null, $this->_iProfileId, MailModel::INBOX);
-            $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 10);
+            $this->iTotalMails = $this->oMailModel->search(
+                null,
+                true,
+                SearchCoreModel::SEND_DATE,
+                SearchCoreModel::DESC,
+                null,
+                null,
+                $this->_iProfileId,
+                MailModel::INBOX
+            );
+            $this->view->total_pages = $this->oPage->getTotalPages(
+                $this->iTotalMails, self::EMAILS_PER_PAGE
+            );
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->search(null, false, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->_iProfileId, MailModel::INBOX);
+            $oMail = $this->oMailModel->search(
+                null,
+                false,
+                SearchCoreModel::SEND_DATE,
+                SearchCoreModel::DESC,
+                $this->oPage->getFirstItem(),
+                $this->oPage->getNbItemsByPage(),
+                $this->_iProfileId,
+                MailModel::INBOX
+            );
 
             if (empty($oMail)) {
                 $this->sTitle = t('No message in your inbox');
@@ -124,10 +146,30 @@ class MainController extends Controller
 
             $this->manualTplInclude('msg.inc.tpl');
         } else {
-            $this->iTotalMails = $this->oMailModel->search(null, true, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, null, null, $this->_iProfileId, MailModel::OUTBOX);
-            $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 10);
+            $this->iTotalMails = $this->oMailModel->search(
+                null,
+                true,
+                SearchCoreModel::SEND_DATE,
+                SearchCoreModel::DESC,
+                null,
+                null,
+                $this->_iProfileId,
+                MailModel::OUTBOX
+            );
+            $this->view->total_pages = $this->oPage->getTotalPages(
+                $this->iTotalMails, self::EMAILS_PER_PAGE
+            );
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->search(null, false, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->_iProfileId, MailModel::OUTBOX);
+            $oMail = $this->oMailModel->search(
+                null,
+                false,
+                SearchCoreModel::SEND_DATE,
+                SearchCoreModel::DESC,
+                $this->oPage->getFirstItem(),
+                $this->oPage->getNbItemsByPage(),
+                $this->_iProfileId,
+                MailModel::OUTBOX
+            );
 
             if (empty($oMail)) {
                 $this->sTitle = t('Sorry!');
@@ -167,10 +209,30 @@ class MainController extends Controller
 
             $this->manualTplInclude('msg.inc.tpl');
         } else {
-            $this->iTotalMails = $this->oMailModel->search(null, true, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, null, null, $this->_iProfileId, MailModel::TRASH);
-            $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 10);
+            $this->iTotalMails = $this->oMailModel->search(
+                null,
+                true,
+                SearchCoreModel::SEND_DATE,
+                SearchCoreModel::DESC,
+                null,
+                null,
+                $this->_iProfileId,
+                MailModel::TRASH
+            );
+            $this->view->total_pages = $this->oPage->getTotalPages(
+                $this->iTotalMails, self::EMAILS_PER_PAGE
+            );
             $this->view->current_page = $this->oPage->getCurrentPage();
-            $oMail = $this->oMailModel->search(null, false, SearchCoreModel::SEND_DATE, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->_iProfileId, MailModel::TRASH);
+            $oMail = $this->oMailModel->search(
+                null,
+                false,
+                SearchCoreModel::SEND_DATE,
+                SearchCoreModel::DESC,
+                $this->oPage->getFirstItem(),
+                $this->oPage->getNbItemsByPage(),
+                $this->_iProfileId,
+                MailModel::TRASH
+            );
 
             if (empty($oMail)) {
                 $this->sTitle = t('Sorry!');
@@ -199,10 +261,30 @@ class MainController extends Controller
     {
         $sType = $this->httpRequest->get('where');
 
-        $this->iTotalMails = $this->oMailModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null, $this->_iProfileId, $sType);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalMails, 10);
+        $this->iTotalMails = $this->oMailModel->search(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null,
+            $this->_iProfileId,
+            $sType
+        );
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalMails, self::EMAILS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oSearch = $this->oMailModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->_iProfileId, $sType);
+        $oSearch = $this->oMailModel->search(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $this->oPage->getFirstItem(),
+             $this->oPage->getNbItemsByPage(),
+             $this->_iProfileId,
+             $sType
+         );
 
         if (empty($oSearch)) {
             $this->sTitle = t('Your search did not match any of your messages.');

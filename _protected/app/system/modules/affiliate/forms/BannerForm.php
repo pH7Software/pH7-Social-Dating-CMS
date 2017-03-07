@@ -11,6 +11,7 @@ use PH7\Framework\Parse\SysVar, PH7\Framework\Navigation\Page;
 
 class BannerForm
 {
+    const ADS_PER_PAGE = 10;
 
     public static function display()
     {
@@ -18,13 +19,17 @@ class BannerForm
         $oPage = new Page;
         $oAdsModel = new AdsCoreModel;
 
-        $oPage->getTotalPages($oAdsModel->total('AdsAffiliates'), 10);
-        $oAds = $oAdsModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsByPage(), 'AdsAffiliates');
+        $oPage->getTotalPages($oAdsModel->total('AdsAffiliates'), self::ADS_PER_PAGE);
+        $oAds = $oAdsModel->get(
+            null,
+            $oPage->getFirstItem(),
+            $oPage->getNbItemsByPage(),
+            'AdsAffiliates'
+        );
         unset($oPage, $oAdsModel);
 
         $oSysVar = new SysVar;
-        foreach ($oAds as $oRow)
-        {
+        foreach ($oAds as $oRow) {
             // Begin ads div tags
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div id="ad_' . $oRow->adsId . '">'));
 
@@ -39,5 +44,5 @@ class BannerForm
         }
         $oForm->render();
     }
-
+    unset($oSysVar);
 }

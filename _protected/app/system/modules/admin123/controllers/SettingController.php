@@ -14,6 +14,7 @@ PH7\Framework\Mvc\Router\Uri;
 
 class SettingController extends Controller
 {
+    const ADS_PER_PAGE = 10;
 
     public function index()
     {
@@ -35,7 +36,7 @@ class SettingController extends Controller
         $sTable = AdsCore::getTable();
         $iTotalAds = (new AdsCoreModel)->total($sTable);
 
-        $this->view->total_pages = $oPage->getTotalPages($iTotalAds, 10);
+        $this->view->total_pages = $oPage->getTotalPages($iTotalAds, self::ADS_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
         unset($oPage, $sTable);
 
@@ -136,5 +137,4 @@ class SettingController extends Controller
 
         return ['is_err' => $bIsErr, 'msg' => $sMsg];
     }
-
 }

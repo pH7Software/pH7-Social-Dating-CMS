@@ -104,15 +104,32 @@ class UserController extends Controller
         }
         else
         {
-            $this->iTotalUsers = $this->oAdminModel->searchUser($sWhat, $sWhere, $iGroupId, $iBan, true,
-                $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+            $this->iTotalUsers = $this->oAdminModel->searchUser(
+                $sWhat,
+                $sWhere,
+                $iGroupId,
+                $iBan,
+                true,
+                $this->httpRequest->get('order'),
+                $this->httpRequest->get('sort'),
+                null,
+                null
+            );
 
             $oPage = new Page;
             $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
             $this->view->current_page = $oPage->getCurrentPage();
-            $oSearch = $this->oAdminModel->searchUser($sWhat, $sWhere, $iGroupId, $iBan, false,
-                $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->
-                getFirstItem(), $oPage->getNbItemsByPage());
+            $oSearch = $this->oAdminModel->searchUser(
+                $sWhat,
+                $sWhere,
+                $iGroupId,
+                $iBan,
+                false,
+                $this->httpRequest->get('order'),
+                $this->httpRequest->get('sort'),
+                $oPage->getFirstItem(),
+                $oPage->getNbItemsByPage()
+            );
             unset($oPage);
 
             if (empty($oSearch))

@@ -7,17 +7,26 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Security\Ban\Ban,
-PH7\Framework\Navigation\Page,
-PH7\Framework\Cache\Cache,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Analytics\Statistic;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
+    const POSTS_PER_PAGE = 10;
+    const CATEGORIES_PER_PAGE = 10;
+    const AUTHORS_PER_PAGE = 10;
+    const ITEMS_MENU_TOP_VIEWS = 5;
+    const ITEMS_MENU_TOP_RATING = 5;
+    const ITEMS_MENU_AUTHORS = 5;
+    const ITEMS_MENU_CATEGORIES = 10;
+
     /**
-     * @access Protected access because AdminController class is derived from this class and will use these attributes.
+     * @internal Protected access because AdminController derived class uses these attributes
      * @var object $oNoteModel
      * @var object $oPage
      * @var string $sTitle
@@ -39,9 +48,16 @@ class MainController extends Controller
     {
         $this->view->page_title = t('The Notes of %site_name%');
 
-        $this->view->total_pages = $this->oPage->getTotalPages($this->oNoteModel->totalPosts($this->iApproved), 5);
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->oNoteModel->totalPosts($this->iApproved), self::POSTS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oPosts = $this->oNoteModel->getPosts($this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), SearchCoreModel::UPDATED, $this->iApproved);
+        $oPosts = $this->oNoteModel->getPosts(
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage(),
+            SearchCoreModel::UPDATED,
+            $this->iApproved
+        );
         $this->setMenuVars();
 
         if (empty($oPosts))
@@ -89,7 +105,7 @@ class MainController extends Controller
                 $this->view->assigns($aVars);
 
                 // Set Notes Post Views Statistics
-                Framework\Analytics\Statistic::setView($oPost->noteId, 'Notes');
+                Statistic::setView($oPost->noteId, 'Notes');
             }
             else
             {
@@ -111,11 +127,27 @@ class MainController extends Controller
         $sOrder = $this->httpRequest->get('order');
         $sSort = $this->httpRequest->get('sort');
 
-        $this->iTotalNotes = $this->oNoteModel->category($sCategory, true, $sOrder, $sSort, null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalNotes, 10);
+        $this->iTotalNotes = $this->oNoteModel->category(
+            $sCategory,
+            true,
+            $sOrder,
+            $sSort,
+            null,
+            null
+        );
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalNotes, self::CATEGORIES_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oSearch = $this->oNoteModel->category($sCategory, false, $sOrder, $sSort, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oNoteModel->category(
+            $sCategory,
+            false,
+            $sOrder,
+            $sSort,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
         $this->setMenuVars();
 
         $sCategoryTxt = substr($sCategory,0,60);
@@ -145,14 +177,30 @@ class MainController extends Controller
         $sOrder = $this->httpRequest->get('order');
         $sSort = $this->httpRequest->get('sort');
 
-        $this->iTotalNotes = $this->oNoteModel->author($sAuthor, true, $sOrder, $sSort, null, null);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalNotes, 10);
+        $this->iTotalNotes = $this->oNoteModel->author(
+            $sAuthor,
+            true,
+            $sOrder,
+            $sSort,
+            null,
+            null
+        );
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalNotes, self::AUTHORS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oSearch = $this->oNoteModel->author($sAuthor, false, $sOrder, $sSort, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oNoteModel->author(
+            $sAuthor,
+            false,
+            $sOrder,
+            $sSort,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage()
+        );
         $this->setMenuVars();
 
-        $sAuthorTxt = substr($sAuthor,0,60);
+        $sAuthorTxt = substr($sAuthor, 0, 60);
         if (empty($oSearch))
         {
             $this->sTitle = t('None "%0%" author was found!', $sAuthorTxt);
@@ -182,11 +230,29 @@ class MainController extends Controller
 
     public function result()
     {
-        $this->iTotalNotes = $this->oNoteModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null, $this->iApproved);
-        $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalNotes, 10);
+        $this->iTotalNotes = $this->oNoteModel->search(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null,
+            $this->iApproved
+        );
+        $this->view->total_pages = $this->oPage->getTotalPages(
+            $this->iTotalNotes, self::POSTS_PER_PAGE
+        );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oSearch = $this->oNoteModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage(), $this->iApproved);
+        $oSearch = $this->oNoteModel->search(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsByPage(),
+            $this->iApproved
+        );
         $this->setMenuVars();
 
         if (empty($oSearch))
@@ -238,7 +304,7 @@ class MainController extends Controller
 
     public function removeThumb($iId)
     {
-        if (!(new Framework\Security\CSRF\Token)->checkUrl()) {
+        if (!(new SecurityToken)->checkUrl()) {
             exit(Form::errorTokenMsg());
         }
 
@@ -259,10 +325,18 @@ class MainController extends Controller
      */
     protected function setMenuVars()
     {
-        $this->view->top_views = $this->oNoteModel->getPosts(0, 5, SearchCoreModel::VIEWS, $this->iApproved);
-        $this->view->top_rating = $this->oNoteModel->getPosts(0, 5, SearchCoreModel::RATING, $this->iApproved);
-        $this->view->authors = $this->oNoteModel->getAuthor(0, 5, true);
-        $this->view->categories = $this->oNoteModel->getCategory(null, 0, 50, true);
+        $this->view->top_views = $this->oNoteModel->getPosts(
+            0, self::ITEMS_MENU_TOP_VIEWS, SearchCoreModel::VIEWS, $this->iApproved
+        );
+        $this->view->top_rating = $this->oNoteModel->getPosts(
+            0, self::ITEMS_MENU_TOP_RATING, SearchCoreModel::RATING, $this->iApproved
+        );
+        $this->view->authors = $this->oNoteModel->getAuthor(
+            0, self::ITEMS_MENU_AUTHORS, true
+        );
+        $this->view->categories = $this->oNoteModel->getCategory(
+            null, 0, self::ITEMS_MENU_CATEGORIES, true
+        );
     }
 
     /**

@@ -11,6 +11,8 @@ use PH7\Framework\Navigation\Page;
 
 class AdsController extends Controller
 {
+    const ADS_PER_PAGE = 10;
+
     private $sTitle;
 
     public function index()
@@ -18,7 +20,7 @@ class AdsController extends Controller
         $iTotalAds = (new AdsCoreModel)->total('AdsAffiliates');
 
         $oPage = new Page;
-        $this->view->total_pages = $oPage->getTotalPages($iTotalAds, 10);
+        $this->view->total_pages = $oPage->getTotalPages($iTotalAds, self::ADS_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
         unset($oPage);
 
