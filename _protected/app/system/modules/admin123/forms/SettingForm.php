@@ -93,7 +93,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration')+1, 'validation' => new \PFBC\Validation\Str(1,3), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Require photo to be uploaded:'), 'require_registration_avatar', array('1' => t('Yes'), '0' => t('No')), array('description' => t('Require Members to Upload a profile photo During sign up.'), 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Require photo to be uploaded:'), 'require_registration_avatar', array('1' => t('Yes'), '0' => t('No')), array('description' => t('Require Members to upload a profile photo during sign up.'), 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), array('value'=>DbConfig::getSetting('defaultMembershipGroupId'), 'required'=>1)));
 
@@ -119,7 +119,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Nudity Filter:'), 'nudity_filter', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Photos will be automatically pending approval if there are detected as "Nude/Adult Photos"'), 'value' => DbConfig::getSetting('nudityFilter'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Avatar Manual Approval:'), 'avatar_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('avatarManualApproval'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Profile Photo Manual Approval:'), 'avatar_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('avatarManualApproval'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Background Profile Manual Approval:'), 'bg_profile_manual_approval', array('1' => t('Enable'), '0' => t('Disable')), array('value' => DbConfig::getSetting('bgProfileManualApproval'), 'required' => 1)));
 

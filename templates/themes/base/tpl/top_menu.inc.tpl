@@ -394,7 +394,7 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picture') }}" title="{lang 'Moderate Pictures'}"><i class="fa fa-picture-o"></i> {lang 'Picture'} <span class="badge">{count_moderate_total_picture}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','videoalbum') }}" title="{lang 'Moderate Video Albums'}"><i class="fa fa-youtube-play"></i> {lang 'Video Album'} <span class="badge">{count_moderate_total_video_album}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}"><i class="fa fa-youtube-play"></i> {lang 'Video'} <span class="badge">{count_moderate_total_video}</span></a></li>
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Avatars'}"><i class="fa fa-picture-o"></i> {lang 'Avatar'} <span class="badge">{count_moderate_total_avatar}</span></a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photo'} <span class="badge">{count_moderate_total_avatar}</span></a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}"><i class="fa fa-picture-o"></i> {lang 'Profile Background'} <span class="badge">{count_moderate_total_background}</span></a></li>
 
             {if $is_note_enabled}
