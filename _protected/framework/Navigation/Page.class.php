@@ -11,6 +11,7 @@
  */
 
 namespace PH7\Framework\Navigation;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Request\Http;
@@ -26,11 +27,7 @@ class Page
         $this->_oHttpRequest = new Http;
     }
 
-
-    /***** Methods for preparing the paging system *****/
-
     /**
-     * @access protected
      * @param integer $iTotalItems
      * @param integer $iNbItemsPerPage
      * @return void
@@ -40,7 +37,10 @@ class Page
         $this->_iTotalItems = (int) $iTotalItems;
         $this->_iNbItemsPerPage = (int) $iNbItemsPerPage; // or intval() function, but it is slower than the cast
         $this->_iCurrentPage = (int) ($this->_oHttpRequest->getExists('p')) ? $this->_oHttpRequest->get('p') : 1;
-        $this->_iTotalPages = (int) ($this->_iTotalItems !== 0 && $this->_iNbItemsPerPage !== 0) ? ceil($this->_iTotalItems / $this->_iNbItemsPerPage) : 0; // Ternary condition to prevent division by zero
+
+        // Ternary condition to prevent division by zero
+        $this->_iTotalPages = (int) ($this->_iTotalItems !== 0 && $this->_iNbItemsPerPage !== 0) ? ceil($this->_iTotalItems / $this->_iNbItemsPerPage) : 0;
+
         $this->_iFirstItem = (int) ($this->_iCurrentPage-1) * $this->_iNbItemsPerPage;
     }
 
@@ -78,7 +78,6 @@ class Page
     /**
      * Clean a Dynamic URL for some features CMS.
      *
-     * @static
      * @param string $sVar The Query URL (e.g. www.pierre-henry-soria.com/my-mod/?query=value).
      * @return string $sPageUrl The new clean URL.
      */
@@ -103,7 +102,6 @@ class Page
     /**
      * Returns a trailing slash if needed.
      *
-     * @static
      * @param  string $sUrl
      * @return string
      */
