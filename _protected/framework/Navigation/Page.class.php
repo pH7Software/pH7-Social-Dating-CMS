@@ -19,7 +19,7 @@ class Page
 {
     const DEFAULT_NUMBER_ITEMS = 10;
 
-    private $_oHttpRequest, $_iTotalPages, $_iTotalItems, $_iNbItemsByPage, $_iCurrentPage, $_iFirstItem;
+    private $_oHttpRequest, $_iTotalPages, $_iTotalItems, $_iNbItemsPerPage, $_iCurrentPage, $_iFirstItem;
 
     public function __construct()
     {
@@ -32,26 +32,26 @@ class Page
     /**
      * @access protected
      * @param integer $iTotalItems
-     * @param integer $iNbItemsByPage
+     * @param integer $iNbItemsPerPage
      * @return void
      */
-    protected function totalPages($iTotalItems, $iNbItemsByPage)
+    protected function totalPages($iTotalItems, $iNbItemsPerPage)
     {
         $this->_iTotalItems = (int) $iTotalItems;
-        $this->_iNbItemsByPage = (int) $iNbItemsByPage; // or intval() function, but it is slower than the cast
+        $this->_iNbItemsPerPage = (int) $iNbItemsPerPage; // or intval() function, but it is slower than the cast
         $this->_iCurrentPage = (int) ($this->_oHttpRequest->getExists('p')) ? $this->_oHttpRequest->get('p') : 1;
-        $this->_iTotalPages = (int) ($this->_iTotalItems !== 0 && $this->_iNbItemsByPage !== 0) ? ceil($this->_iTotalItems / $this->_iNbItemsByPage) : 0; // Ternary condition to prevent division by zero
-        $this->_iFirstItem = (int) ($this->_iCurrentPage-1) * $this->_iNbItemsByPage;
+        $this->_iTotalPages = (int) ($this->_iTotalItems !== 0 && $this->_iNbItemsPerPage !== 0) ? ceil($this->_iTotalItems / $this->_iNbItemsPerPage) : 0; // Ternary condition to prevent division by zero
+        $this->_iFirstItem = (int) ($this->_iCurrentPage-1) * $this->_iNbItemsPerPage;
     }
 
     /**
      * @param integer $iTotalItems
-     * @param integer $iNbItemsByPage Default 10
+     * @param integer $iNbItemsPerPage Default 10
      * @return integer The number of pages.
      */
-    public function getTotalPages($iTotalItems, $iNbItemsByPage = self::DEFAULT_NUMBER_ITEMS)
+    public function getTotalPages($iTotalItems, $iNbItemsPerPage = self::DEFAULT_NUMBER_ITEMS)
     {
-        $this->totalPages($iTotalItems, $iNbItemsByPage);
+        $this->totalPages($iTotalItems, $iNbItemsPerPage);
         return ($this->_iTotalPages < 1) ? 1 : $this->_iTotalPages;
     }
 
