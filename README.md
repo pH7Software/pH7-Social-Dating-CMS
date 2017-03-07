@@ -189,7 +189,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 ## Author
 
-Pierre-Henry Soria
+[Pierre-Henry Soria](http://ph7.me)
 
 
 ## Website
