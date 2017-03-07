@@ -42,7 +42,7 @@ class AdminController extends Controller
         $this->view->current_page = $oPage->getCurrentPage();
         $oSearch = $this->oAdminModel->searchAdmin($this->httpRequest->get('looking'), false,
             $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $oPage->
-            getFirstItem(), $oPage->getNbItemsByPage());
+            getFirstItem(), $oPage->getNbItemsPerPage());
         unset($oPage);
 
         if (empty($oSearch))

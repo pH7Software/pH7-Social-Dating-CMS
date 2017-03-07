@@ -63,7 +63,7 @@ class AdminController extends Controller
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
             $oPage->getFirstItem(),
-            $oPage->getNbItemsByPage()
+            $oPage->getNbItemsPerPage()
         );
         unset($oPage);
 

@@ -48,7 +48,7 @@ class AdminController extends Controller
         $this->view->total_pages = $oPage->getTotalPages($this->oReportModel->totalReports(),
             self::REPORTS_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
-        $this->view->reports = $this->oReportModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsByPage());
+        $this->view->reports = $this->oReportModel->get(null, $oPage->getFirstItem(), $oPage->getNbItemsPerPage());
         unset($oPage);
 
         $this->output();

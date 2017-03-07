@@ -85,7 +85,7 @@ class MainController extends Controller
             $this->oPictureModel->totalAlbums($iProfileId), self::ALBUMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oAlbums = $this->oPictureModel->album($iProfileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oAlbums = $this->oPictureModel->album($iProfileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
 
         if (empty($oAlbums))
         {
@@ -112,7 +112,7 @@ class MainController extends Controller
             $this->oPictureModel->totalPhotos($this->iProfileId), self::ALBUMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oAlbum = $this->oPictureModel->photo($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oAlbum = $this->oPictureModel->photo($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
 
         if (empty($oAlbum))
         {
@@ -197,7 +197,7 @@ class MainController extends Controller
             $this->iTotalPictures, self::PHOTOS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oSearch = $this->oPictureModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oSearch = $this->oPictureModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
 
         if (empty($oSearch))
         {

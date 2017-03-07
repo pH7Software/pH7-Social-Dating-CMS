@@ -65,9 +65,9 @@ class Page
         return ($this->_iFirstItem < 0) ? 0 : $this->_iFirstItem;
     }
 
-    public function getNbItemsByPage()
+    public function getNbItemsPerPage()
     {
-        return $this->_iNbItemsByPage;
+        return $this->_iNbItemsPerPage;
     }
 
     public function getCurrentPage()

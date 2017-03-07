@@ -77,7 +77,7 @@ class MainController extends Controller
 
         $oFriend = $this->oFriendModel->get($this->iId, null, $this->httpRequest->get('looking'), false,
             $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->
-            getFirstItem(), $this->oPage->getNbItemsByPage());
+            getFirstItem(), $this->oPage->getNbItemsPerPage());
 
         if (empty($oFriend)) {
             $this->sTitle = t("No Friend found on %0%'s profile", $this->sUsername);
@@ -105,7 +105,7 @@ class MainController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oFriend = $this->oFriendModel->get($this->iMemberId, $this->iId, $this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oFriend = $this->oFriendModel->get($this->iMemberId, $this->iId, $this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
 
         if (empty($oFriend)) {
             $this->sTitle = t("No Mutual Friend found on %0%'s profile", $this->sUsername);

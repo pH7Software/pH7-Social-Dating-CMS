@@ -23,7 +23,7 @@ class BannerForm
         $oAds = $oAdsModel->get(
             null,
             $oPage->getFirstItem(),
-            $oPage->getNbItemsByPage(),
+            $oPage->getNbItemsPerPage(),
             'AdsAffiliates'
         );
         unset($oPage, $oAdsModel);

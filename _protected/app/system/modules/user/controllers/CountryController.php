@@ -51,7 +51,7 @@ class CountryController extends Controller
             $this->view->total_pages = $oPage->getTotalPages($iTotalUsers, self::MAX_PROFILE_PER_PAGE);
             $this->view->current_page = $oPage->getCurrentPage();
             $this->view->first_user = $oPage->getFirstItem();
-            $this->view->nb_user_by_page = $oPage->getNbItemsByPage();
+            $this->view->nb_user_by_page = $oPage->getNbItemsPerPage();
 
             // SEO Meta
             $this->view->page_title = t('Free online dating in %0% %1%, meet people, find friends. Single men & women in %2% %3%', $this->registry->country, $this->registry->city, $this->registry->country, $this->registry->city);

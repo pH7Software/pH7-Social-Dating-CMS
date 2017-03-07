@@ -43,7 +43,7 @@ class UserController extends Controller
         $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages($this->iTotalUsers, self::PROFILES_PER_PAGE);
         $this->view->current_page = $oPage->getCurrentPage();
-        $oBrowse = $this->oAdminModel->browse($oPage->getFirstItem(), $oPage->getNbItemsByPage());
+        $oBrowse = $this->oAdminModel->browse($oPage->getFirstItem(), $oPage->getNbItemsPerPage());
         unset($oPage);
 
         if (empty($oBrowse))
@@ -128,7 +128,7 @@ class UserController extends Controller
                 $this->httpRequest->get('order'),
                 $this->httpRequest->get('sort'),
                 $oPage->getFirstItem(),
-                $oPage->getNbItemsByPage()
+                $oPage->getNbItemsPerPage()
             );
             unset($oPage);
 

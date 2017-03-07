@@ -37,7 +37,7 @@ class BrowseController extends Controller
             $_GET,
             false,
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
 
         if (empty($oUsers)) {

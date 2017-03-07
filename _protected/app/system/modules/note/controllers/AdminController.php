@@ -30,7 +30,7 @@ class AdminController extends MainController
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oPosts = $this->oNoteModel->getPosts(
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage(),
+            $this->oPage->getNbItemsPerPage(),
             SearchCoreModel::CREATED,
             '0'
         );

@@ -38,7 +38,7 @@ class AdminController extends MainController
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
 
         if (empty($oAllMsg)) {

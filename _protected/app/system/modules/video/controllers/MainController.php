@@ -80,7 +80,7 @@ class MainController extends Controller
             $this->oVideoModel->totalAlbums($iProfileId), self::ALBUMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oAlbums = $this->oVideoModel->album($iProfileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oAlbums = $this->oVideoModel->album($iProfileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
 
         if (empty($oAlbums))
         {
@@ -111,7 +111,7 @@ class MainController extends Controller
             $this->oVideoModel->totalVideos($this->iProfileId), self::ALBUMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oAlbum = $this->oVideoModel->video($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oAlbum = $this->oVideoModel->video($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
 
         if (empty($oAlbum))
         {
@@ -214,7 +214,7 @@ class MainController extends Controller
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
 
         if (empty($oSearch))

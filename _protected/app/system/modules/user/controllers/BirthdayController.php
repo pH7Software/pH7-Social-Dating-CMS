@@ -46,7 +46,7 @@ class BirthdayController extends Controller
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $this->iTotalBirths = $this->oBirthModel->get($sGender, true, SearchCoreModel::LAST_ACTIVITY, SearchCoreModel::DESC, null, null);
-        $oBirths = $this->oBirthModel->get($sGender, false, SearchCoreModel::LAST_ACTIVITY, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oBirths = $this->oBirthModel->get($sGender, false, SearchCoreModel::LAST_ACTIVITY, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
 
         $sHtmlCurrentDate = ' &ndash; <span class="pH3">' . $this->sCurrentDate . '</span>';
         $this->sTitle = nt('%n% Birthday', '%n% Birthdays', $this->iTotalBirths) . $sHtmlCurrentDate;

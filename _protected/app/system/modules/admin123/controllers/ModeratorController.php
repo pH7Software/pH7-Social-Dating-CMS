@@ -44,7 +44,7 @@ class ModeratorController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->albums = $this->oModeratorModel->getAlbumsPicture(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
         $this->output();
     }
@@ -58,7 +58,7 @@ class ModeratorController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->pictures = $this->oModeratorModel->getPictures(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
         $this->output();
     }
@@ -72,7 +72,7 @@ class ModeratorController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->albums = $this->oModeratorModel->getAlbumsVideo(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
         $this->output();
     }
@@ -88,7 +88,7 @@ class ModeratorController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->videos = $this->oModeratorModel->getVideos(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
         $this->output();
     }
@@ -102,7 +102,7 @@ class ModeratorController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->avatars = $this->oModeratorModel->getAvatars(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
         $this->output();
@@ -117,7 +117,7 @@ class ModeratorController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $this->view->backgrounds = $this->oModeratorModel->getBackgrounds(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
         $this->output();
     }

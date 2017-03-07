@@ -47,7 +47,7 @@ class MainController extends Controller
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oPosts = $this->oBlogModel->getPosts(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage()
+            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
         $this->setMenuVars();
 
@@ -126,7 +126,7 @@ class MainController extends Controller
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $oSearch = $this->oBlogModel->category($sCategory, false, $sOrder, $sSort, $this->
-            oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+            oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
         $this->setMenuVars();
 
         $sCategoryTxt = substr($sCategory, 0, 60);
@@ -176,7 +176,7 @@ class MainController extends Controller
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
 
         $this->setMenuVars();

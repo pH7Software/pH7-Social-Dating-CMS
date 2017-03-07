@@ -59,7 +59,7 @@ class VisitorController extends Controller
         $this->view->current_page = $this->oPage->getCurrentPage();
 
         $this->iTotalVisitors = $this->oVisitorModel->get($this->httpRequest->get('looking'), true, SearchCoreModel::LAST_VISIT, SearchCoreModel::DESC, null, null);
-        $oVisitor = $this->oVisitorModel->get($this->httpRequest->get('looking'), false, SearchCoreModel::LAST_VISIT, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsByPage());
+        $oVisitor = $this->oVisitorModel->get($this->httpRequest->get('looking'), false, SearchCoreModel::LAST_VISIT, SearchCoreModel::DESC, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
 
         $this->view->user_views_setting = (UserCore::auth()) ? $this->oUserModel->getPrivacySetting($this->session->get('member_id'))->userSaveViews : '';
 

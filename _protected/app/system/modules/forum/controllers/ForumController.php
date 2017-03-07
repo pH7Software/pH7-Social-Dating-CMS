@@ -49,7 +49,7 @@ class ForumController extends Controller
         $oForums = $this->oForumModel->getForum(
             null,
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
 
         if (empty($oCategories) && empty($oForums))
@@ -84,7 +84,7 @@ class ForumController extends Controller
             null,
             1,
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
 
         $this->view->forum_name = $this->httpRequest->get('forum_name');
@@ -133,7 +133,7 @@ class ForumController extends Controller
             null,
             1,
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
 
         if (empty($oPost))
@@ -183,7 +183,7 @@ class ForumController extends Controller
             $iId,
             1,
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
         if (empty($oTopics))
         {
@@ -231,7 +231,7 @@ class ForumController extends Controller
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
 
         if (empty($oSearch))

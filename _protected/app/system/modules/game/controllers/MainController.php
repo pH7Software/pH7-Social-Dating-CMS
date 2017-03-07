@@ -50,7 +50,7 @@ class MainController extends Controller
             null,
             null,
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
 
         $this->setMenuVars();
@@ -132,7 +132,7 @@ class MainController extends Controller
             $sOrder,
             $sSort,
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
         $this->setMenuVars();
 
@@ -187,7 +187,7 @@ class MainController extends Controller
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
             $this->oPage->getFirstItem(),
-            $this->oPage->getNbItemsByPage()
+            $this->oPage->getNbItemsPerPage()
         );
         $this->setMenuVars();
 
