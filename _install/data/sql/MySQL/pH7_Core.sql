@@ -1020,6 +1020,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('minAgeRegistration', 18, '', 'registration'),
 ('minUsernameLength', 3, '', 'registration'),
 ('maxUsernameLength', 30, '', 'registration'),
+('requireRegistrationAvatar', 0, '', 'registration'),
 ('userActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('affActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('defaultMembershipGroupId', 2, 'Default Membership Group', 'registration'),

@@ -93,6 +93,8 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration')+1, 'validation' => new \PFBC\Validation\Str(1,3), 'required' => 1)));
 
+        $oForm->addElement(new \PFBC\Element\Select(t('Require photo to be uploaded:'), 'require_registration_avatar', array('1' => t('Yes'), '0' => t('No')), array('description' => t('Require Members to Upload a profile photo During sign up.'), 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1)));
+
         $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), array('value'=>DbConfig::getSetting('defaultMembershipGroupId'), 'required'=>1)));
 
 

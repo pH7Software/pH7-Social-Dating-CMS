@@ -52,8 +52,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Password(t('Your Password:'), 'password', array('placeholder' => t('Password'), 'id' => 'password', 'onkeyup' => 'checkPassword(this.value)', 'onblur' =>'CValid(this.value, this.id)', 'required' => 1, 'validation' => new \PFBC\Validation\Password)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error password"></span>'));
 
-        if (DbConfig::getSetting('isCaptchaUserSignup'))
-        {
+        if (DbConfig::getSetting('isCaptchaUserSignup')) {
           $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('placeholder' => t('Captcha'), 'id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the code above:'))));
           $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
@@ -152,13 +151,21 @@ class JoinForm
             Header::redirect();
         }
 
+        $aAvatarFieldOption = ['accept' => 'image/*'];
+        if (DbConfig::getSetting('requireRegistrationAvatar')) {
+            $aAvatarFieldOption += ['required' => 1];
+        }
+
         $oForm = new \PFBC\Form('form_join_user4');
         $oForm->configure(array('action' => '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_join_user4', 'form_join_user4'));
         $oForm->addElement(new \PFBC\Element\Token('join4'));
-        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', array('accept' => 'image/*')));
+        $oForm->addElement(new \PFBC\Element\File(t('Your Profile Photo'), 'avatar', $aAvatarFieldOption));
         $oForm->addElement(new \PFBC\Element\Button(t('Add My Photo')));
-        $oForm->addElement(new \PFBC\Element\Button(t('Skip'), 'submit', array('formaction' => Uri::get('user','signup','done'))));
+
+        if (!DbConfig::getSetting('requireRegistrationAvatar')) {
+            $oForm->addElement(new \PFBC\Element\Button(t('Skip'), 'submit', array('formaction' => Uri::get('user', 'signup', 'done'))));
+        }
         $oForm->render();
     }
 
