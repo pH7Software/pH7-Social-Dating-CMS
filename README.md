@@ -221,7 +221,7 @@ You will also be eligible to [pH7CMS VIP members](http://ph7cms.com/get-one-tine
 
 * LAMP on **Fedora/Ubuntu** (and Windows/Mac with WampServer/MAMP for testing purpose)
 
-* **Geany &amp; Sublime Text** for coding the whole project. That's It
+* **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7CMS 5.0, PhpStorm is used as well.
 
 * **GIMP** for editing the assets, etc.
 
