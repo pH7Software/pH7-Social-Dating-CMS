@@ -24,11 +24,11 @@ Contact: <a href="mailto:{admin_email}" rel="nofollow">{admin_email}</a>.</p>
 <p>&nbsp;</p>
 
 <p><strong>Site Hosting</strong></p>
-<p>YOUR HOSTING INFORMATION HERE</p>
+<p>HOSTING INFORMATION HERE</p>
 <p>&nbsp;</p>
 
 <p><strong>About Us</strong></p>
-<p>YOUR INFORMATION ON YOU HERE</p>
+<p>INFORMATION ON YOU HERE</p>
 <p>&nbsp;</p>
 <p>For other questions, please <a href="{{ $design->url('contact','contact','index') }}" title="Contact Us">Contact us</a>.</p>
 
