@@ -1,7 +1,7 @@
 # Contact us at ph7software@gmail.com if you find that some host email should be added or deleted. #
 # Please indicate each the email addresses to ban or domain name on a new line. You can use a wild card to ban whole domains such as @spam_email.com #
 @mytrashmail.com
-@mailinator.com 
+@mailinator.com
 @vomoto.com
 @pwrby.com
 @imgof.com
@@ -38,3 +38,4 @@
 @maildrop.cc
 @leeching.net
 @thraml.com
+@mvrht.com
