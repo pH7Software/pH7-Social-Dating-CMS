@@ -58,7 +58,7 @@ class EditForm
         }
         unset($oHR);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('id'=>'name_first','onblur' =>'CValid(this.value,this.id,)','value'=>$oUser->firstName,'required'=>1,'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('id'=>'name_first','onblur' =>'CValid(this.value,this.id)','value'=>$oUser->firstName,'required'=>1,'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('id'=>'name_last','onblur' =>'CValid(this.value,this.id)','value'=>$oUser->lastName,'validation'=>new \PFBC\Validation\Name)));
