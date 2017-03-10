@@ -257,7 +257,7 @@ class MainController extends Controller
 
         if (empty($oSearch))
         {
-            $this->sTitle = t('Sorry, Your search returned no results!');
+            $this->sTitle = t('Sorry, your search returned no results!');
             $this->notFound();
         }
         else
@@ -352,8 +352,10 @@ class MainController extends Controller
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
-        $this->view->error = t('Sorry, we weren\'t able to find the page you requested.<br />
-                May we suggest <a href="%0%">exploring some tags</a> or <a href="%1%">creating a new search</a>.', Uri::get('note','main','index'), Uri::get('note','main','search'));
+        $this->view->error = t("Sorry, we weren't able to find the page you requested.") . '<br />' .
+            t('You can go back on the <a href="%0%">note homepage</a> or <a href="%1%">search with different keywords</a>.',
+                Uri::get('note','main','index'), Uri::get('note','main','search')
+            );
     }
 
     /**
