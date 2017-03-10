@@ -15,8 +15,6 @@ class MainController extends Controller
     public function __construct()
     {
           parent::__construct();
-          // Enable caching for all template pages of this module
-          $this->view->setCaching(true);
 
           // Global variable for all template pages of this module
           $this->view->admin_email = DbConfig::getSetting('adminEmail');
