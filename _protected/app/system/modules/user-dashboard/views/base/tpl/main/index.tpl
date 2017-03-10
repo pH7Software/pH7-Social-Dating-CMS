@@ -31,7 +31,7 @@
     {/if}
 
     <div class="left col-xs-12 col-sm-6 col-md-6">
-        <h2 class="center underline">{lang 'The latest users'}</h2>
+        <h2 class="center underline">{lang 'The Latest Users'}</h2>
         {{ $userDesignModel->profilesBlock() }}
 
         <h2 class="center underline">{lang 'My friends'}</h2>
@@ -101,7 +101,7 @@
     </div>
 
     <div class="left col-xs-12 col-sm-2 col-md-3">
-        <h2>{lang 'The latest news'}</h2>
+        <h2>{lang 'The Latest News'}</h2>
         <div id="wall"></div>
     </div>
 </div>
