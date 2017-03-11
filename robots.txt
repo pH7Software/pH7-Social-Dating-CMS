@@ -17,5 +17,8 @@ Disallow:
 # User-agent: ia_archiver
 # Disallow: /
 
+# Don't index the different themes
+Disallow: /*?*tpl=*
+
 
 Sitemap: /site-map-xml
