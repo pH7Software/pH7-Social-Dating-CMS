@@ -5,23 +5,23 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\File\File,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\File\File;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Module\Various as SysMod;
 
 class SettingForm
 {
     public static function display()
     {
-        if (isset($_POST['submit_setting']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_setting']))
+        if (isset($_POST['submit_setting'])) {
+            if (\PFBC\Form::isValid($_POST['submit_setting'])) {
                 new SettingFormProcess;
+            }
 
             Framework\Url\Header::redirect();
         }
@@ -284,8 +284,7 @@ class SettingForm
         $aLangs = array();
 
         $aLangIds = $oFile->getDirList(PH7_PATH_APP_LANG);
-        foreach ($aLangIds as $sLang)
-        {
+        foreach ($aLangIds as $sLang) {
             $sAbbrLang = substr($sLang, 0, 2);
             $aLangs[$sLang] = t($sAbbrLang) . ' (' . $sLang . ')';
         }
@@ -300,8 +299,7 @@ class SettingForm
     {
         $aMods = array();
 
-        foreach (self::getActivatableDefMods() as $sMod)
-        {
+        foreach (self::getActivatableDefMods() as $sMod) {
             // Skip the disable module (would be impossible to set a disabled module as the default one)
             if (!SysMod::isEnabled($sMod)) {
                 continue;
