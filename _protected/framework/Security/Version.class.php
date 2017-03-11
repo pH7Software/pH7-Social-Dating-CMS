@@ -17,7 +17,8 @@ use PH7\Framework\Cache\Cache;
 
 final class Version
 {
-    const LATEST_VERSION_URL = 'http://xml.ph7cms.com/software-info.xml', PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
+    const LATEST_VERSION_URL = 'http://xml.ph7cms.com/software-info.xml';
+    const PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /***** Framework Kernel *****/
     // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO", 5.* was "pCO" and 6.* is "WoW"
