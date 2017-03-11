@@ -5,28 +5,27 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Picture / Controller
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Security\Ban\Ban,
-PH7\Framework\Navigation\Page,
-PH7\Framework\Cache\Cache,
-PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Router\Uri;
 
 class MainController extends Controller
 {
     const ALBUMS_PER_PAGE = 16;
     const PHOTOS_PER_PAGE = 10;
 
-    private
-    $oPictureModel,
-    $oPage,
-    $sUsername,
-    $sUsernameLink,
-    $iProfileId,
-    $sTitle,
-    $iTotalPictures;
+    private $oPictureModel;
+    private $oPage;
+    private $sUsername;
+    private $sUsernameLink;
+    private $iProfileId;
+    private $sTitle;
+    private $iTotalPictures;
 
     public function __construct()
     {
@@ -85,12 +84,18 @@ class MainController extends Controller
             $this->oPictureModel->totalAlbums($iProfileId), self::ALBUMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oAlbums = $this->oPictureModel->album($iProfileId, null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
+        $oAlbums = $this->oPictureModel->album(
+            $iProfileId,
+            null,
+            1,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
+        );
 
         if (empty($oAlbums))
         {
             $this->sTitle = t('No photo albums found.');
-            $this->_notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
+            $this->notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
         }
         else
         {
@@ -112,12 +117,19 @@ class MainController extends Controller
             $this->oPictureModel->totalPhotos($this->iProfileId), self::ALBUMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oAlbum = $this->oPictureModel->photo($this->iProfileId, $this->httpRequest->get('album_id', 'int'), null, 1, $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
+        $oAlbum = $this->oPictureModel->photo(
+            $this->iProfileId,
+            $this->httpRequest->get('album_id', 'int'),
+            null,
+            1,
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
+        );
 
         if (empty($oAlbum))
         {
             $this->sTitle = t('Album not found or still in pending approval.');
-            $this->_notFound();
+            $this->notFound();
         }
         else
         {
@@ -134,12 +146,19 @@ class MainController extends Controller
 
     public function photo()
     {
-        $oPicture = $this->oPictureModel->photo($this->iProfileId, $this->httpRequest->get('album_id', 'int'), $this->httpRequest->get('picture_id', 'int'), 1, 0, 1);
+        $oPicture = $this->oPictureModel->photo(
+            $this->iProfileId,
+            $this->httpRequest->get('album_id', 'int'),
+            $this->httpRequest->get('picture_id', 'int'),
+            1,
+            0,
+            1
+        );
 
         if (empty($oPicture))
         {
             $this->sTitle = t('Photo not found or still in pending approval.');
-            $this->_notFound();
+            $this->notFound();
         }
         else
         {
@@ -162,12 +181,23 @@ class MainController extends Controller
     public function deletePhoto()
     {
         $iPictureId = $this->httpRequest->post('picture_id', 'int');
-        CommentCoreModel::deleteRecipient($iPictureId, 'Picture');
-        $this->oPictureModel->deletePhoto($this->session->get('member_id'), $this->httpRequest->post('album_id', 'int'), $iPictureId);
-        (new Picture)->deletePhoto($this->httpRequest->post('album_id'), $this->session->get('member_username'), $this->httpRequest->post('picture_link'));
 
-        /* Clean PictureModel Cache */
-        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        CommentCoreModel::deleteRecipient($iPictureId, 'Picture');
+
+        $this->oPictureModel->deletePhoto(
+            $this->session->get('member_id'),
+            $this->httpRequest->post('album_id', 'int'),
+            $iPictureId
+        );
+
+        (new Picture)->deletePhoto(
+            $this->httpRequest->post('album_id'),
+            $this->session->get('member_username'),
+            $this->httpRequest->post('picture_link')
+        );
+
+        $this->clearCache();
+
         Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your photo has been removed!'));
     }
 
@@ -178,8 +208,7 @@ class MainController extends Controller
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->session->get('member_username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
         $this->file->deleteDir($sDir);
 
-        /* Clean PictureModel Cache */
-        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        $this->clearCache();
 
         Header::redirect(Uri::get('picture', 'main', 'albums'), t('Your album has been deleted!'));
     }
@@ -192,17 +221,31 @@ class MainController extends Controller
 
     public function result()
     {
-        $this->iTotalPictures = $this->oPictureModel->search($this->httpRequest->get('looking'), true, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), null, null);
+        $this->iTotalPictures = $this->oPictureModel->search(
+            $this->httpRequest->get('looking'),
+            true,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            null,
+            null
+        );
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->iTotalPictures, self::PHOTOS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
-        $oSearch = $this->oPictureModel->search($this->httpRequest->get('looking'), false, $this->httpRequest->get('order'), $this->httpRequest->get('sort'), $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
+        $oSearch = $this->oPictureModel->search(
+            $this->httpRequest->get('looking'),
+            false,
+            $this->httpRequest->get('order'),
+            $this->httpRequest->get('sort'),
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
+        );
 
         if (empty($oSearch))
         {
             $this->sTitle = t('Sorry, Your search returned no results!');
-            $this->_notFound();
+            $this->notFound();
         }
         else
         {
@@ -226,15 +269,26 @@ class MainController extends Controller
      * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false". Default TRUE
      * @return void
      */
-    private function _notFound($b404Status = true)
+    private function notFound($b404Status = true)
     {
         if ($b404Status === true) {
             Framework\Http\Http::setHeadersByCode(404);
         }
 
-        $sErrMsg = ($b404Status === true) ? '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add a new picture</a> in this album.', 'javascript:history.back();', Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id'))) : '';
+        $sErrMsg = '';
+        if ($b404Status === true) {
+            $sErrMsg = '<br />' . t('Please return to <a href="%1%">the previous page</a> or <a href="%1%">add a new picture</a> in this album.', 'javascript:history.back();', Uri::get('picture', 'main', 'addphoto', $this->httpRequest->get('album_id')));
+        }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->view->error = $this->sTitle . $sErrMsg;
+    }
+
+    /**
+     * @return void
+     */
+    private function clearCache()
+    {
+        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
     }
 }
