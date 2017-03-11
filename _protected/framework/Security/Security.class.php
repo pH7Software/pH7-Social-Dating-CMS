@@ -11,6 +11,7 @@
  */
 
 namespace PH7\Framework\Security;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Util\Various;

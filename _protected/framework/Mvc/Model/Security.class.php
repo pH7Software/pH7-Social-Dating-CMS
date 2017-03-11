@@ -10,16 +10,15 @@
  */
 
 namespace PH7\Framework\Mvc\Model;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Mvc\Model\Engine\Db,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class Security
 {
-
     private $_sIp, $_sCurrentTime;
 
     public function __construct()
@@ -175,5 +174,4 @@ class Security
         $rStmt->execute();
         Db::free($rStmt);
     }
-
 }
