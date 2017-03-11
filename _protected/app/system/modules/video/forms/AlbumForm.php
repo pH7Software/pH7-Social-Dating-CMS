@@ -29,7 +29,7 @@ class AlbumForm
         $oForm->addElement(new \PFBC\Element\Token('album'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Name of your Album Cover:'), 'name', array('required'=>1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description of your Album Cover:'), 'description', array('validation' => new \PFBC\Validation\Str(2, 200))));
-        $oForm->addElement(new \PFBC\Element\File(t('Thumb for the Album Cover:'), 'album', array('accept' => 'image/*', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\File(t('Thumbnail for the Album Cover:'), 'album', array('accept' => 'image/*', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

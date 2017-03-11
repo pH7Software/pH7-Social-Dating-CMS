@@ -45,7 +45,7 @@ class PictureForm
 
         $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$iId->name)); // Bad title! Thanks for finding a solution and commit it on http://github.com/pH7Software/pH7-Social-Dating-CMS or send it by email
         $oForm->addElement(new \PFBC\Element\Textbox(t('Name for your photo(s):'), 'title', array('pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
-        $oForm->addElement(new \PFBC\Element\File(t('Your picture(s)'), 'photos[]', array('description'=>'<span class="bold">' . t('Tip:') . '</span> ' . t('You can select multiple photos at once by clicking multiple files while holding down the "CTRL" key.'), 'multiple'=>'multiple', 'accept'=>'image/*', 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\File(t('Your photo(s):'), 'photos[]', array('description'=>'<span class="bold">' . t('Tip:') . '</span> ' . t('You can select multiple photos at once by clicking multiple files while holding down the "CTRL" key.'), 'multiple'=>'multiple', 'accept'=>'image/*', 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="pfbc-label"><em><span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading pictures, this may take time (especially if you download a lot of photos at once).') . '</em></p>'));
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description for your photo(s):'), 'description', array('validation'=>new \PFBC\Validation\Str(2,200))));
         $oForm->addElement(new \PFBC\Element\Button);

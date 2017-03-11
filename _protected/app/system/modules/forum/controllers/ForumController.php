@@ -283,7 +283,7 @@ class ForumController extends Controller
         $sForumName = (string) $aData[2];
 
         if ($this->oForumModel->deleteTopic($this->session->get('member_id'), $iTopicId)) {
-            $this->sMsg = t('Your topic has been deleted!');
+            $this->sMsg = t('Your topic has been deleted.');
         } else {
             $this->sMsg = t('Oops! Your topic could not be deleted');
         }
@@ -302,12 +302,14 @@ class ForumController extends Controller
         unset($aData);
 
         if ($this->oForumModel->deleteMessage($this->session->get('member_id', 'int'), $iMessageId)) {
-            $this->sMsg = t('Your message has been deleted!');
+            $this->sMsg = t('Your message has been deleted.');
         } else {
             $this->sMsg = t('Oops! Your message could not be deleted');
         }
 
-        Header::redirect(Uri::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId), $this->sMsg);
+        Header::redirect(Uri::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId),
+            $this->sMsg
+        );
     }
 
     /**
