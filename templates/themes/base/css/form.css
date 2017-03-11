@@ -90,3 +90,8 @@ input:focus:invalid:not([type=submit]):not([type=radio]):not([type=file]), texta
     text-decoration:underline;
     text-shadow: 0 0 5px #fff,0 0 8px rgba(255,255,255,.6);
 }
+
+input[type=text]:disabled {
+    background: #ddd;
+    cursor: not-allowed;
+}
