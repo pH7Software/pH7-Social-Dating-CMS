@@ -43,7 +43,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Default Module:'), 'default_sys_module', self::getDefMods(), array('description' => t('The default module is the one running by default on the homepage (recommended to keep the "user" module).'), 'value' => DbConfig::getSetting('defaultSysModule'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Default Language:'), 'default_language', self::getLangs($oFile), array('value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5,5), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Default Language:'), 'default_language', self::getLangs($oFile), array('description' => t('Documentation: <a href="%0%">Translate your site to another language</a>.', 'http://ph7cms.com/doc/en/how-to-translate-to-another-language'), 'value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5,5), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Map Type:'), 'map_type', array('roadmap' => t('Roadmap (default)'), 'hybrid' => t('Hybrid'), 'terrain' => t('Terrain'), 'satellite' => t('Satellite')), array('value' => DbConfig::getSetting('mapType'), 'required' => 1)));
 
