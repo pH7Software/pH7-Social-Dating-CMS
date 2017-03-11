@@ -34,7 +34,7 @@
           {{ $sex_ico = '' }}
         {/if}
 
-        {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 100, true) }}
+        {{ $avatarDesign->get($user->username, $user->firstName, $user->sex, 64, true) }}
         <p class="cy_ico">
             <a href="{url_root}{% $user->username %}{page_ext}" title="{lang 'First name: %0%', $user->firstName}<br> {lang 'Sex: %0% %1%', t($user->sex), $sex_ico}<br> {lang 'Seeking %0%', t($user->matchSex)}<br> {lang 'Age: %0%', $age}<br> {lang 'From %0%', $country_name}<br> {lang 'City %0%', $this->str->upperFirst($user->city)}<br> {lang 'State %0%', $this->str->upperFirst($user->state)}">
                 <strong>{% $this->str->extract($user->username,0,PH7_MAX_USERNAME_LENGTH_SHOWN, '') %}</strong>
