@@ -5,24 +5,32 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Navigation\Page,
-PH7\Framework\Layout\Html\Design,
-PH7\Framework\Cache\Cache,
-PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Router\Uri;
 
 class ModeratorController extends Controller
 {
     const ITEMS_PER_PAGE = 20;
 
-    private $oModeratorModel, $sPage, $sMsg;
+    /** @var ModeratorModel */
+    private $oModeratorModel;
+
+    /** @var Page */
+    private $oPage;
+
+    /** @var string */
+    private $sMsg;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->oPage = new Page();
         $this->oModeratorModel = new ModeratorModel;
         $this->view->oUser = new UserCore;
@@ -46,6 +54,7 @@ class ModeratorController extends Controller
         $this->view->albums = $this->oModeratorModel->getAlbumsPicture(
             $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
+
         $this->output();
     }
 
@@ -60,6 +69,7 @@ class ModeratorController extends Controller
         $this->view->pictures = $this->oModeratorModel->getPictures(
             $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
+
         $this->output();
     }
 
@@ -74,6 +84,7 @@ class ModeratorController extends Controller
         $this->view->albums = $this->oModeratorModel->getAlbumsVideo(
             $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
+
         $this->output();
     }
 
@@ -90,6 +101,7 @@ class ModeratorController extends Controller
         $this->view->videos = $this->oModeratorModel->getVideos(
             $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
+
         $this->output();
     }
 
@@ -105,6 +117,7 @@ class ModeratorController extends Controller
             $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
+
         $this->output();
     }
 
@@ -119,6 +132,7 @@ class ModeratorController extends Controller
         $this->view->backgrounds = $this->oModeratorModel->getBackgrounds(
             $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
         );
+
         $this->output();
     }
 
@@ -132,13 +146,10 @@ class ModeratorController extends Controller
 
     public function approvedPictureAlbum()
     {
-        if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id')))
-        {
-            $this->_clearPictureCache();
+        if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'))) {
+            $this->clearPictureCache();
             $this->sMsg = t('The photo album has been approved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The photo album could not be approved!');
         }
 
@@ -147,13 +158,10 @@ class ModeratorController extends Controller
 
     public function approvedPhoto()
     {
-        if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id')))
-        {
-            $this->_clearPictureCache();
+        if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id'))) {
+            $this->clearPictureCache();
             $this->sMsg = t('The picture has been approved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The picture could not be approved!');
         }
 
@@ -162,13 +170,10 @@ class ModeratorController extends Controller
 
     public function approvedVideoAlbum()
     {
-        if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id')))
-        {
-            $this->_clearVideoCache();
+        if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'))) {
+            $this->clearVideoCache();
             $this->sMsg = t('The video album has been approved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The video album could not be approved!');
         }
 
@@ -177,13 +182,10 @@ class ModeratorController extends Controller
 
     public function approvedVideo()
     {
-        if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id')))
-        {
-            $this->_clearVideoCache();
+        if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id'))) {
+            $this->clearVideoCache();
             $this->sMsg = t('The video has been approved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The video could not be approved!');
         }
 
@@ -192,13 +194,10 @@ class ModeratorController extends Controller
 
     public function approvedAvatar()
     {
-        if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id')))
-        {
-            $this->_clearAvatarCache();
+        if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'))) {
+            $this->clearAvatarCache();
             $this->sMsg = t('The avatar has been approved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The avatar could not be approved!');
         }
 
@@ -207,13 +206,10 @@ class ModeratorController extends Controller
 
     public function approvedBackground()
     {
-        if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id')))
-        {
-            $this->_clearUserBgCache();
+        if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id'))) {
+            $this->clearUserBgCache();
             $this->sMsg = t('The wallpaper has been approved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The wallpaper could not be approved!');
         }
 
@@ -222,13 +218,10 @@ class ModeratorController extends Controller
 
     public function disapprovedPictureAlbum()
     {
-        if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'), '0'))
-        {
-            $this->_clearPictureCache();
+        if ($this->oModeratorModel->approvedPictureAlbum($this->httpRequest->post('album_id'), '0')) {
+            $this->clearPictureCache();
             $this->sMsg = t('The photo album has been disapproved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The photo album could not be disapproved!');
         }
 
@@ -237,13 +230,10 @@ class ModeratorController extends Controller
 
     public function disapprovedPhoto()
     {
-        if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id'), '0'))
-        {
-            $this->_clearPictureCache();
+        if ($this->oModeratorModel->approvedPicture($this->httpRequest->post('picture_id'), '0')) {
+            $this->clearPictureCache();
             $this->sMsg = t('The picture has been disapproved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The picture could not be disapproved!');
         }
 
@@ -252,13 +242,10 @@ class ModeratorController extends Controller
 
     public function disapprovedVideoAlbum()
     {
-        if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'), '0'))
-        {
-            $this->_clearVideoCache();
+        if ($this->oModeratorModel->approvedVideoAlbum($this->httpRequest->post('album_id'), '0')) {
+            $this->clearVideoCache();
             $this->sMsg = t('The video album has been disapproved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The video album could not be disapproved!');
         }
 
@@ -267,13 +254,10 @@ class ModeratorController extends Controller
 
     public function disapprovedVideo()
     {
-        if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id'), '0'))
-        {
-            $this->_clearVideoCache();
+        if ($this->oModeratorModel->approvedVideo($this->httpRequest->post('video_id'), '0')) {
+            $this->clearVideoCache();
             $this->sMsg = t('The video has been disapproved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The video could not be disapproved!');
         }
 
@@ -282,13 +266,10 @@ class ModeratorController extends Controller
 
     public function disapprovedAvatar()
     {
-        if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'), '0'))
-        {
-            $this->_clearAvatarCache();
+        if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'), '0')) {
+            $this->clearAvatarCache();
             $this->sMsg = t('The avatar has been disapproved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The avatar could not be disapprove!');
         }
 
@@ -297,13 +278,10 @@ class ModeratorController extends Controller
 
     public function disapprovedBackground()
     {
-        if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id'), '0'))
-        {
-            $this->_clearUserBgCache();
+        if ($this->oModeratorModel->approvedBackground($this->httpRequest->post('id'), '0')) {
+            $this->clearUserBgCache();
             $this->sMsg = t('The wallpaper has been disapproved!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The wallpaper could not be disapprove!');
         }
 
@@ -312,15 +290,13 @@ class ModeratorController extends Controller
 
     public function deletePictureAlbum()
     {
-        if ((new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) && $this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id')))
-        {
+        if ((new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id'))
+            && $this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id'))) {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
-            $this->_clearPictureCache();
+            $this->clearPictureCache();
             $this->sMsg = t('The photo album has been deleted!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The photo album could not be deleted');
         }
 
@@ -331,14 +307,11 @@ class ModeratorController extends Controller
     {
         $bPicture = (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id'), $this->httpRequest->post('picture_id'));
 
-        if ($bPicture)
-        {
+        if ($bPicture) {
             (new PictureCore)->deletePhoto($this->httpRequest->post('album_id'), $this->httpRequest->post('username'), $this->httpRequest->post('picture_link'));
-            $this->_clearPictureCache();
+            $this->clearPictureCache();
             $this->sMsg = t('The picture has been deleted!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The picture could not be deleted!');
         }
 
@@ -347,15 +320,13 @@ class ModeratorController extends Controller
 
     public function deleteVideoAlbum()
     {
-        if ((new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id')) && $this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id')))
-        {
+        if ((new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id'))
+            && $this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id'))) {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
-            $this->_clearVideoCache();
+            $this->clearVideoCache();
             $this->sMsg = t('The video album has been deleted!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The video album could not be deleted');
         }
 
@@ -366,14 +337,11 @@ class ModeratorController extends Controller
     {
         $bVideo = (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id'), $this->httpRequest->post('video_id'));
 
-        if ($bVideo)
-        {
+        if ($bVideo) {
             (new VideoCore)->deleteVideo($this->httpRequest->post('album_id'), $this->httpRequest->post('username'), $this->httpRequest->post('video_link'));
-            $this->_clearVideoCache();
+            $this->clearVideoCache();
             $this->sMsg = t('The video has been deleted!');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! The video could not be deleted!');
         }
 
@@ -383,7 +351,7 @@ class ModeratorController extends Controller
     public function deleteAvatar()
     {
         (new Admin)->deleteAvatar($this->httpRequest->post('id'), $this->httpRequest->post('username'));
-        $this->_clearAvatarCache();
+        $this->clearAvatarCache();
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
     }
@@ -391,7 +359,7 @@ class ModeratorController extends Controller
     public function deleteBackground()
     {
         (new Admin)->deleteBackground($this->httpRequest->post('id'), $this->httpRequest->post('username'));
-        $this->_clearUserBgCache();
+        $this->clearUserBgCache();
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'background'), $this->sMsg);
     }
@@ -401,7 +369,7 @@ class ModeratorController extends Controller
      *
      * @return void
      */
-    private function _clearPictureCache()
+    private function clearPictureCache()
     {
         (new Cache)->start(PictureCoreModel::CACHE_GROUP, null, null)->clear();
     }
@@ -411,7 +379,7 @@ class ModeratorController extends Controller
      *
      * @return void
      */
-    private function _clearVideoCache()
+    private function clearVideoCache()
     {
         (new Cache)->start(VideoCoreModel::CACHE_GROUP, null, null)->clear();
     }
@@ -421,7 +389,7 @@ class ModeratorController extends Controller
      *
      * @return void
      */
-    private function _clearAvatarCache()
+    private function clearAvatarCache()
     {
         (new Cache)
             ->start(Design::CACHE_AVATAR_GROUP . $this->httpRequest->post('username'), null, null)->clear()
@@ -433,7 +401,7 @@ class ModeratorController extends Controller
      *
      * @return void
      */
-    private function _clearUserBgCache()
+    private function clearUserBgCache()
     {
         (new Cache)->start(UserCoreModel::CACHE_GROUP, 'background' . $this->httpRequest->post('id'), null)->clear();
     }
