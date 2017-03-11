@@ -11,6 +11,7 @@ namespace PH7;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Cache\Cache;
+use PH7\Framework\Analytics\Statistic;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Mvc\Router\Uri;
 
@@ -30,6 +31,7 @@ class MainController extends Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->oVideoModel = new VideoModel;
         $this->oPage = new Page;
 
@@ -94,21 +96,20 @@ class MainController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
-        if (empty($oAlbums))
-        {
+        if (empty($oAlbums)) {
             $this->sTitle = t('No video albums found.');
             $this->notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
-        }
-        else
-        {
+        } else {
             // We can include HTML tags in the title since the template will erase them before displaying
             $this->sTitle = (!empty($iProfileId)) ? t("The <a href='%0%'>%1%</a>'s albums", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
             $this->view->albums = $oAlbums;
         }
-        if (empty($iProfileId))
+
+        if (empty($iProfileId)) {
             $this->manualTplInclude('index.tpl');
+        }
 
         $this->output();
     }
@@ -132,13 +133,10 @@ class MainController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
-        if (empty($oAlbum))
-        {
+        if (empty($oAlbum)) {
             $this->sTitle = t('Album not found or is still in pending approval.');
             $this->notFound();
-        }
-        else
-        {
+        } else {
             $this->sTitle = t("<a href='%0%'>%1%</a>'s video album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
             $this->view->page_title = $this->sTitle; // We can include HTML tags in the title since the template will erase them before displaying
             $this->view->h2_title = $this->sTitle;
@@ -165,13 +163,10 @@ class MainController extends Controller
             1
         );
 
-        if (empty($oVideo))
-        {
+        if (empty($oVideo)) {
             $this->sTitle = t('Video not found or is still in pending approval.');
             $this->notFound();
-        }
-        else
-        {
+        } else {
             $this->sTitle = t("Watch <a href='%0%'>%1%</a>'s video", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
 
             $sTitle = Ban::filterWord($oVideo->title, false);
@@ -182,7 +177,7 @@ class MainController extends Controller
             $this->view->video = $oVideo;
 
             //Set Video Statistics
-            Framework\Analytics\Statistic::setView($oVideo->videoId, 'Videos');
+            Statistic::setView($oVideo->videoId, 'Videos');
         }
 
         $this->output();
@@ -209,7 +204,9 @@ class MainController extends Controller
         $this->clearCache();
 
 
-        Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')), t('Your video has been deleted!'));
+        Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')),
+            t('Your video has been removed.')
+        );
     }
 
     public function deleteAlbum()
@@ -221,7 +218,7 @@ class MainController extends Controller
 
         $this->clearCache();
 
-        Header::redirect(Uri::get('video', 'main', 'albums'), t('Your album has been deleted!'));
+        Header::redirect(Uri::get('video', 'main', 'albums'), t('Your album has been removed.'));
     }
 
     public function search()
@@ -254,13 +251,10 @@ class MainController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
-        if (empty($oSearch))
-        {
+        if (empty($oSearch)) {
             $this->sTitle = t('Sorry, Your search returned no results!');
             $this->notFound();
-        }
-        else
-        {
+        } else {
             $this->sTitle = t('Dating Social Video - Your search returned');
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% video found!', '%n% videos found!', $this->iTotalVideos);
