@@ -7,17 +7,17 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
 
 class MailForm
 {
-
     public static function display()
     {
-        if (isset($_POST['submit_compose_mail']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_compose_mail']))
-                new MailFormProcess();
+        if (isset($_POST['submit_compose_mail'])) {
+            if (\PFBC\Form::isValid($_POST['submit_compose_mail'])) {
+                new MailFormProcess;
+            }
 
             Framework\Url\Header::redirect();
         }
@@ -36,8 +36,7 @@ class MailForm
 
         unset($oHttpRequest);
 
-        if (!AdminCore::auth() && DbConfig::getSetting('isCaptchaMail'))
-        {
+        if (!AdminCore::auth() && DbConfig::getSetting('isCaptchaMail')) {
             $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id' => 'ccaptcha','onkeyup' => 'CValid(this.value, this.id)','description' => t('Enter the code above:'))));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
@@ -46,5 +45,4 @@ class MailForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script><script src="'.PH7_URL_STATIC.PH7_JS.'autocompleteUsername.js"></script>'));
         $oForm->render();
     }
-
 }
