@@ -27,6 +27,9 @@ function run() {
             eval "$exec 's/\s+$/\n/'"
             eval "$exec 's/\t/    /g'"
 
+            # Install dependencies for production only (without dev packages)
+            php ./composer.phar install --no-dev
+
             # Update the libraries to their latest versions
             # php ./composer.phar update --no-dev
 
