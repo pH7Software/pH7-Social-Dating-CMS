@@ -980,10 +980,10 @@ CREATE TABLE IF NOT EXISTS pH7_Report (
 
 
 CREATE TABLE IF NOT EXISTS pH7_Settings (
-  `name` varchar(64) NOT NULL DEFAULT '',
-  value varchar(150) NOT NULL,
-  `desc` varchar(120) NOT NULL DEFAULT '' COMMENT 'Informative desc about the setting',
-  `group` varchar(12) DEFAULT NULL,
+  `name` varchar(64) NOT NULL,
+  value varchar(150) DEFAULT '',
+  `desc` varchar(120) DEFAULT '' COMMENT 'Informative desc about the setting',
+  `group` varchar(12) NOT NULL,
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

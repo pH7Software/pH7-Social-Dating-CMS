@@ -12,10 +12,10 @@
 
 CREATE TABLE IF NOT EXISTS pH7_Games (
   gameId int(10) unsigned NOT NULL AUTO_INCREMENT,
-  name varchar(120) NOT NULL,
+  name varchar(120) DEFAULT '',
   title varchar(120) NOT NULL,
   description varchar(255) NOT NULL,
-  keywords varchar(255) NOT NULL,
+  keywords varchar(255) DEFAULT '',
   thumb varchar(200) NOT NULL,
   file varchar(200) NOT NULL,
   categoryId tinyint(4) unsigned NOT NULL DEFAULT '0',
