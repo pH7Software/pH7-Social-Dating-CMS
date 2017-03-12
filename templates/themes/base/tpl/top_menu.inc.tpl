@@ -452,7 +452,7 @@
             {if !$is_valid_license}
                 <li><a class="bold underline" href="{software_license_url}" title="{lang 'Buy a License Key'}"><i class="fa fa-key"></i> {lang 'Switch to pH7CMSPro'}</a></li>
             {/if}
-            <li><a href="https://clients.hizup.com/" title="{lang 'Need Customization/New Feature?'}"><i class="fa fa-cog fa-"></i> {lang 'Customization/New Feature'}</a></li>
+            <li><a href="https://clients.hizup.com/buy-custom-development" title="{lang 'Need Customization/New Feature?'}"><i class="fa fa-wrench"></i> {lang 'Customization/New Feature'}</a></li>
             <li><a href="{software_help_url}" title="{lang 'Need Professional Technical Supports?'}"><i class="fa fa-life-ring"></i> {lang 'Technical Support'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
             <li><a href="{software_faq_url}" title="{lang 'Frequently Asked Questions'}"><i class="fa fa-question"></i> {lang 'FAQ'}</a></li>
