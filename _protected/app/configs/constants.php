@@ -51,7 +51,7 @@ define('PH7_GHOST_USERNAME', 'ghost'); // Don't change it please, without the pe
 /***** MAXIMUM LENGTH VALUE (for the username, email and URL) *****/
 
 define('PH7_MAX_USERNAME_LENGTH', 40); // Warning: don't change it because the number of the username is based on the length field (varchar(40)) of the database
-define('PH7_MAX_USERNAME_LENGTH_SHOWN', 10); // Used on browse users page (to be sure it displays well on small devices as well)
+define('PH7_MAX_USERNAME_LENGTH_SHOWN', 8); // Used on browse users page (to be sure it displays well on small devices as well)
 define('PH7_MAX_EMAIL_LENGTH', 120);
 define('PH7_MAX_URL_LENGTH', 120);
 

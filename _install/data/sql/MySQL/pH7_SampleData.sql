@@ -32,7 +32,7 @@ INSERT INTO pH7_Members (email, username, password, firstName, lastName, birthDa
 ('demo10@demo.cow', 'Tom4', @sPassword, 'Tomy', 'Pittsburgh', '1992-12-21', 'male', 'female', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
 ('demo11@demo.cow', 'rachO0O', @sPassword, 'Rachel', 'Žarko', '1968-02-10', 'female', 'male', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
 ('demo12@demo.cow', 'Stive', @sPassword, 'Stive', 'Upton', '1988-12-21', 'male', 'male,female', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
-('demo13@demo.cow', 'EmmaROK', @sPassword, 'Emma', 'Solon', '1992-06-16', 'female', 'male,female,couple', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
+('demo13@demo.cow', 'EmmaR', @sPassword, 'Emma', 'Solon', '1992-06-16', 'female', 'male,female,couple', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
 ('demo14@demo.cow', 'scarlaaa', @sPassword, 'Scarlett', 'Stewart', '1990-05-26', 'female', 'male', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
 ('demo15@demo.cow', 'lolo22', @sPassword, 'Lola', 'Weisz', '1991-06-09', 'female', 'male,female', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
 ('demo16@demo.cow', 'bartys', @sPassword, 'Bart', 'San', '1978-11-01', 'male', 'female', @sDefIp, @sCurrentDate, 0, 1, @iUserStatus, @iGroupId, @sCurrentDate),
