@@ -594,7 +594,7 @@ SetEnv HTTP_MOD_REWRITE On
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
-# Force your domain name to https (only if you have a SSL certificate)
+# Force the URL to be https (only if you have an SSL certificate)
 # RewriteCond %{HTTP:X-Forwarded-SSL} !on
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
