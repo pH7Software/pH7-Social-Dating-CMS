@@ -5,10 +5,14 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Mail / Asset / Ajax
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Session\Session, PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 
 class Mail
 {
@@ -16,7 +20,7 @@ class Mail
 
     public function __construct()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('mail'))
+        if (!(new SecurityToken)->check('mail'))
             exit(jsonMsg(0, Form::errorTokenMsg()));
 
         /** Instance objects for the class * */

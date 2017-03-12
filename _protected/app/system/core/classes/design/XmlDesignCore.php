@@ -5,9 +5,13 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class / Design
  */
+
 namespace PH7;
 
-use PH7\Framework\Pattern\Statik, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Pattern\Statik;
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Error\CException\PH7Exception;
+use PH7\Framework\Mvc\Router\Uri;
 
 class XmlDesignCore
 {
@@ -59,33 +63,26 @@ class XmlDesignCore
     /**
      * Show the software news.
      *
-     * @static
      * @param integet $iNum Number of news to display.
+     *
      * @return void HTML contents.
      */
     public static function softwareNews($iNum)
     {
-        try
-        {
+        try {
             $aNews = (new NewsFeedCore)->getSoftware($iNum);
 
-            if (sizeof($aNews) > 0)
-            {
-                foreach ($aNews as $aItems)
-                {
+            if (sizeof($aNews) > 0) {
+                foreach ($aNews as $aItems) {
                     echo '<h4><a href="', $aItems['link'], '" target="_blank">', escape($aItems['title'], true), '</a></h4>';
                     echo '<p>', escape($aItems['description'], true), '</p>';
                 }
-            }
-            else
-            {
+            } else {
                 echo '<p>', t('No News Software.'), '</p>';
             }
         }
-        catch (Framework\Error\CException\PH7Exception $oE)
-        {
-            (new Framework\Layout\Html\Design)
-            ->setFlashMsg(
+        catch (PH7Exception $oE) {
+            (new Design)->setFlashMsg(
                 t("It seems you don't have Internet connection or the remote URL is temporarily unavailable. Some features on the admin panel won't be available."),
                 'error'
             );
