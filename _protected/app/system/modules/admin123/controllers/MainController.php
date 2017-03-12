@@ -8,17 +8,15 @@
  * @package        PH7 / App / System / Module / Admin / Controller
  * @version        1.0
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Layout\Html\Meta,
-PH7\Framework\Core\Kernel,
-PH7\Framework\Security\Version;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Layout\Html\Meta;
+use PH7\Framework\Security\Version;
 
 class MainController extends Controller
 {
-
     public function index()
     {
         // Add Validate-Site JS file if needed
@@ -311,13 +309,11 @@ class MainController extends Controller
 
     protected function checkUpdates()
     {
-        if (Version::isUpdateEligible())
-        {
+        if (Version::isUpdateEligible()) {
             $aLatestVerInfo = Version::getLatestInfo();
             $sLatestVer = t('%0% build %1%', $aLatestVerInfo['version'], $aLatestVerInfo['build']);
 
-            $this->design->setMessage(t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it today</a> to keep your site safe and stable.', $sLatestVer, Kernel::SOFTWARE_LICENSE_KEY_URL));
+            $this->design->setMessage(t('%software_name% <strong>%0%</strong> is available! Please <a href="%1%" target="_blank">update it today</a> to keep your site safe and stable.', $sLatestVer, Core::SOFTWARE_LICENSE_KEY_URL));
         }
     }
-
 }

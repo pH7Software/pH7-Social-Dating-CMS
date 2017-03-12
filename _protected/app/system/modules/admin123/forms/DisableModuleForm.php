@@ -41,7 +41,7 @@ class DisableModuleForm
             $sAdditionalText = '';
             if ((int)$oData->premiumMod === 1) {
                 $sAdditionalText .= ' – (<a class="italic darkred" href="' . Core::SOFTWARE_LICENSE_KEY_URL . '">' . t('Premium Module') . '</a>)';
-                $sAdditionalText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default API service by yours') . '</a>';
+                $sAdditionalText .= ' • <a class="small" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'general') . '#p=api">' . t('Change the default Chat by yours') . '</a>';
             }
 
             if ($oData->folderName === 'connect') {

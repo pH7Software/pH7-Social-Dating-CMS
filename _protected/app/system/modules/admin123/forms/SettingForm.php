@@ -16,6 +16,10 @@ use PH7\Framework\Module\Various as SysMod;
 
 class SettingForm
 {
+    const CHANGE_CHAT_DOC_URL = 'http://ph7cms.com/how-to-change-chat/';
+    const I18N_DOC_URL = 'http://ph7cms.com/doc/en/how-to-translate-to-another-language';
+    const GOOGLE_API_KEY_URL = 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true';
+
     public static function display()
     {
         if (isset($_POST['submit_setting'])) {
@@ -43,7 +47,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Default Module:'), 'default_sys_module', self::getDefMods(), array('description' => t('The default module is the one running by default on the homepage (recommended to keep the "user" module).'), 'value' => DbConfig::getSetting('defaultSysModule'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Default Language:'), 'default_language', self::getLangs($oFile), array('description' => t('Documentation: <a href="%0%">Translate your site to another language</a>.', 'http://ph7cms.com/doc/en/how-to-translate-to-another-language'), 'value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5,5), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Default Language:'), 'default_language', self::getLangs($oFile), array('description' => t('Documentation: <a href="%0%">Translate your site to another language</a>.', self::I18N_DOC_URL), 'value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5,5), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Map Type:'), 'map_type', array('roadmap' => t('Roadmap (default)'), 'hybrid' => t('Hybrid'), 'terrain' => t('Terrain'), 'satellite' => t('Satellite')), array('value' => DbConfig::getSetting('mapType'), 'required' => 1)));
 
@@ -53,7 +57,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Splash Homepage:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page (recommended) for visitors (not logged), otherwise the classic page will be used. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Enable/Disable the "Animated Video" on the Splash Homepage. <strong>If you hold <a href="http://ph7cms.com/order">pH7CMSPro</a>, we can provide professional splash videos for your specific niche and setting-up the video for you</strong>. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Background Splash Video:'), 'bg_splash_vid', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Enable/Disable the "Animated Video" on the Splash Homepage. <strong>If you hold <a href="%0%">pH7CMSPro</a>, we can provide professional splash videos for your specific niche and setting-up the video for you</strong>. <br /><em>Available only if "User" is the Default Module.</em>', Core::SOFTWARE_LICENSE_KEY_URL), 'value' => DbConfig::getSetting('bgSplashVideo'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Ajax Site with AjPH:'), 'full_ajax_site', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t("Be careful! 'Full Ajax Navigation' feature is still in <strong>Beta version</strong> and may not be working properly on all pages."), 'value' => DbConfig::getSetting('fullAjaxSite'), 'required' => 1)));
 
@@ -233,15 +237,15 @@ class SettingForm
         /********** API **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="api"><div class="col-md-10"><h2 class="underline">' . t('API') . '</h2>'));
 
-        $sGoogleApiKeyDesc = t('You can get your key <a href="%0%">here</a>. Then, select "<strong>Google Maps JavaScript API</strong>" for "<em>Which API are you using</em>" and "<strong>Web browser (Javascript)</strong>" for "<em>Where will you be calling the API from</em>", then you will get your API key to paste here. ', 'https://console.developers.google.com/flows/enableapi?apiid=maps_backend,geocoding_backend,directions_backend,distance_matrix_backend,elevation_backend,places_backend&amp;keyType=CLIENT_SIDE&amp;reusekey=true');
+        $sGoogleApiKeyDesc = t('You can get your key <a href="%0%">here</a>. Then, select "<strong>Google Maps JavaScript API</strong>" for "<em>Which API are you using</em>" and "<strong>Web browser (Javascript)</strong>" for "<em>Where will you be calling the API from</em>", then you will get your API key to paste here. ', self::GOOGLE_API_KEY_URL);
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Google Maps API Key:'), 'google_api_key', array('description' => $sGoogleApiKeyDesc, 'value' => DbConfig::getSetting('googleApiKey'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Url(t('IP API:'), 'ip_api', array('description' => t('The URL must end with a slash.'), 'value' => DbConfig::getSetting('ipApi'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Url(t('Chat API:'), 'chat_api', array('description' => t('Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).', '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatApi'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Url(t('Chat API:'), 'chat_api', array('description' => t('Documentation: <a href="%0%">Change the default chat service by your real one</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>', self::CHANGE_CHAT_DOC_URL, '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatApi'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Url(t('Chatroulette API:'), 'chatroulette_api', array('description' => t('Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).', '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatrouletteApi'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Url(t('Chatroulette API:'), 'chatroulette_api', array('description' => t('Documentation: <a href="%0%">Change the default chatroulette provider by yours</a>.<br /> <small>Parsing tags are permitted (e.g. #!http://api.your-service-chat.com/?url=%0%&name=%1%!#).</small>', self::CHANGE_CHAT_DOC_URL, '<strong>%site_url%</strong>', '<strong>%site_name%</strong>'), 'value' => DbConfig::getSetting('chatrouletteApi'), 'required' => 1)));
 
 
         /********** Automation **********/
