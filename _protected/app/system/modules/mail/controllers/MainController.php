@@ -13,6 +13,7 @@ use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Layout\Html\Security;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Mvc\Router\Uri;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -77,9 +78,7 @@ class MainController extends Controller
                 $this->sTitle = t('No Message Found!');
                 $this->_notFound();
             } else {
-                if ($oMsg->status == 1) {
-                    $this->oMailModel->setReadMsg($oMsg->messageId);
-                }
+                $this->_setRead($oMsg);
 
                 $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
@@ -199,9 +198,7 @@ class MainController extends Controller
                 $this->sTitle = t('Empty!');
                 $this->_notFound();
             } else {
-                if ($oMsg->status == 1) {
-                    $this->oMailModel->setReadMsg($oMsg->messageId);
-                }
+                $this->_setRead($oMsg);
 
                 $this->view->page_title = $oMsg->title . ' - ' . $this->view->page_title;
                 $this->view->msg = $oMsg;
@@ -427,5 +424,15 @@ class MainController extends Controller
     private function _getStatusType()
     {
         return $this->_bStatus ? Design::SUCCESS_TYPE : Design::ERROR_TYPE;
+    }
+
+    /**
+    * @return stdClass $oMsg
+    */
+    private function _setRead(stdClass $oMsg)
+    {
+        if ($oMsg->status == 1) {
+            $this->oMailModel->setReadMsg($oMsg->messageId);
+        }
     }
 }
