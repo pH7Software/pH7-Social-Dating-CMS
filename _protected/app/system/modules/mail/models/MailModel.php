@@ -7,11 +7,12 @@
  */
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Spam as SpamModel;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class MailModel extends MailCoreModel
 {
-
     const INBOX = 1, OUTBOX = 2, TRASH = 3;
 
     public function readMsg($iRecipient, $iMessageId)
@@ -123,7 +124,7 @@ class MailModel extends MailCoreModel
     public function setTo($iProfileId, $iMessageId, $sMode)
     {
         if ($sMode !== 'trash' && $sMode !== 'restor' && $sMode !== 'delete')
-            Framework\Error\CException\PH7InvalidArgumentException('Bad set mode: "' . $sMode . '"!');
+            PH7InvalidArgumentException('Bad set mode: "' . $sMode . '"!');
 
         $oData = $this->getMsg($iMessageId);
         $sFieldId = ($oData->sender == $iProfileId) ? 'sender' : 'recipient';
@@ -213,7 +214,7 @@ class MailModel extends MailCoreModel
      */
     public function isDuplicateContent($iSenderId, $sMsg)
     {
-        return Framework\Mvc\Model\Spam::detectDuplicate($sMsg, 'message', 'sender', $iSenderId, 'Messages', 'AND NOT FIND_IN_SET(\'recipient\', toDelete)');
+        return SpamModel::detectDuplicate($sMsg, 'message', 'sender', $iSenderId, 'Messages', 'AND NOT FIND_IN_SET(\'recipient\', toDelete)');
     }
 
     /**
@@ -233,5 +234,4 @@ class MailModel extends MailCoreModel
         $rStmt->execute();
         return ($rStmt->rowCount() === 0);
     }
-
 }
