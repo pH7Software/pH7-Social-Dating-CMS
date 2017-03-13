@@ -10,9 +10,11 @@
  */
 
 namespace PH7\Framework\Payment\Gateway\Api;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\Stream, PH7\Framework\Url\Url;
+use PH7\Framework\File\Stream;
+use PH7\Framework\Url\Url;
 
 /**
  * PayPal class using PayPal's API
@@ -21,27 +23,40 @@ use PH7\Framework\File\Stream, PH7\Framework\Url\Url;
  */
 class Paypal extends Provider implements Api
 {
+    const SANDBOX_PAYMENT_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+    const PAYMENT_URL = 'https://www.paypal.com/cgi-bin/webscr';
 
-    private
-    $_sUrl = 'https://www.paypal.com/cgi-bin/webscr',
-    $_sRequest = 'cmd=_notify-validate',
-    $_sMsg,
-    $_bValid = null;
+    /** @var string */
+    private $_sUrl;
+
+    /** @var string */
+    private $_sRequest = 'cmd=_notify-validate';
+
+    /** @var string */
+    private $_sMsg;
+
+    /** @var string|null */
+    private $_bValid = null;
 
 
     /**
      * @param boolean $bSandbox Default FALSE
-     * @return void
      */
     public function __construct($bSandbox = false)
     {
-        if ($bSandbox) $this->_sUrl = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
+        if ($bSandbox) {
+            $this->_sUrl = self::SANDBOX_PAYMENT_URL;
+        } else {
+            $this->_sUrl = self::PAYMENT_URL;
+        }
 
         $this->param('cmd', '_xclick');
     }
 
     /**
      * Get Checkout URL.
+     *
+     * @param string $sParam
      *
      * @return string
      * @internal We added an empty parameter for the method only to be compatible with the API interface.
@@ -64,41 +79,38 @@ class Paypal extends Provider implements Api
     /**
      * Check if the transaction is valid.
      *
+     * @param string $sParam1
+     * @param string $sParam2
+     *
      * @return boolean
      * @internal We added two empty parameters for the method only to be compatible with the API interface.
      */
     public function valid($sParam1 = '', $sParam2 = '')
     {
         // If already validated, just return last result
-        if (true === $this->_bValid || false === $this->_bValid) return $this->_bValid;
+        if (true === $this->_bValid || false === $this->_bValid) {
+            return $this->_bValid;
+        }
 
         $this->setParams();
 
         $mStatus = $this->getStatus();
 
-        // Valid
-        if (0 == strcmp('VERIFIED', $mStatus))
-        {
-            if ($_POST['payment_status'] == 'Completed')
-            {
+        if (0 == strcmp('VERIFIED', $mStatus)) {
+            // Valid
+            if ($_POST['payment_status'] == 'Completed') {
                 $this->_bValid = true;
                 $this->_sMsg = t('Transaction valid and completed.');
-            }
-            else
-            {
+            } else {
                 $this->_bValid = false;
                 $this->_sMsg = t('Transaction valid but not completed.');
             }
-        }
-        // Invalid
-        elseif (0 == strcmp('INVALID', $mStatus))
-        {
+        } elseif (0 == strcmp('INVALID', $mStatus)) {
+            // Bad Connection
             $this->_bValid = false;
             $this->_sMsg = t('Invalid transaction.');
-        }
-        // Bad Connection
-        else
-        {
+        } else {
+            // Bad Connection
             $this->_bValid = false;
             $this->_sMsg = t('Connection to PayPal failed.');
         }
@@ -109,7 +121,7 @@ class Paypal extends Provider implements Api
     /**
      * Connect to Paypal.
      *
-     * @return mixed (boolean | string) Message from the transaction status on success or FALSE on failure.
+     * @return boolean|string Message from the transaction status on success or FALSE on failure.
      */
      protected function getStatus()
      {
@@ -130,12 +142,13 @@ class Paypal extends Provider implements Api
     /**
      * Set the data parameters POST from PayPal system.
      *
-     * @return object this
+     * @return self
      */
      protected function setParams()
      {
-         foreach ($this->getPostDatas() as $sKey => $sValue)
+         foreach ($this->getPostDatas() as $sKey => $sValue) {
              $this->setUrlData($sKey, $sValue);
+         }
 
          return $this;
      }
@@ -145,7 +158,8 @@ class Paypal extends Provider implements Api
      *
      * @param string $sName
      * @param string $sValue
-     * @return object this
+     *
+     * @return self
      */
     protected function setUrlData($sName, $sValue)
     {
@@ -164,16 +178,15 @@ class Paypal extends Provider implements Api
         $aRawPost = explode('&', $rRawPost);
         $aPostData = array();
 
-        foreach ($aRawPost as $sKeyVal)
-        {
+        foreach ($aRawPost as $sKeyVal) {
             $aKeyVal = explode ('=', $sKeyVal);
-            if (count($aKeyVal) == 2)
+            if (count($aKeyVal) == 2) {
                 $aPostData[$aKeyVal[0]] = Url::encode($aKeyVal[1]);
+            }
             unset($aKeyVal);
         }
         unset($aRawPost);
 
         return $aPostData;
     }
-
 }
