@@ -8,29 +8,43 @@
  * @package        PH7 / App / System / Module / User / Controller
  * @version        1.6
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Analytics\Statistic,
-PH7\Framework\Parse\Emoticon,
-PH7\Framework\Security\Ban\Ban,
-PH7\Framework\Math\Measure\Year,
-PH7\Framework\Security\CSRF\Token,
-PH7\Framework\Geo\Map\Map,
-PH7\Framework\Url\Url,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Module\Various as SysMod,
-PH7\Framework\Date\Various as VDate;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Analytics\Statistic;
+use PH7\Framework\Parse\Emoticon;
+use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Math\Measure\Year;
+use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Geo\Map\Map;
+use PH7\Framework\Url\Url;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Date\Various as VDate;
+use stdClass;
 
 class ProfileController extends Controller
 {
-    private $sUserAuth, $sUsername, $sTitle, $iProfileId, $iVisitorId;
+    /** @var bool */
+    private $bUserAuth;
+
+    /** @var string */
+    private $sUsername;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var integer */
+    private $iProfileId;
+
+    /** @var integer */
+    private $iVisitorId;
 
     public function __construct()
     {
         parent::__construct();
-        $this->sUserAuth = User::auth();
+        $this->bUserAuth = User::auth();
     }
 
     public function index()
@@ -108,7 +122,7 @@ class ProfileController extends Controller
             if (SysMod::isEnabled('friend')) {
                 $this->view->friend_link = $this->getFriendLinkName();
 
-                if ($this->sUserAuth) {
+                if ($this->bUserAuth) {
                     $this->view->mutual_friend_link = $this->getMutualFriendLinkName();
                 }
                 $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
@@ -134,7 +148,7 @@ class ProfileController extends Controller
             $this->view->join_date = VDate::textTimeStamp($oUser->joinDate);
             $this->view->last_activity = VDate::textTimeStamp($oUser->lastActivity);
             $this->view->fields = $oFields;
-            $this->view->is_logged = $this->sUserAuth;
+            $this->view->is_logged = $this->bUserAuth;
             $this->view->is_own_profile = $this->isOwnProfile();
 
             // Stat Profile
@@ -190,7 +204,7 @@ class ProfileController extends Controller
             $this->view->header = Framework\Layout\Html\Meta::NOINDEX;
         }
 
-        if (!$this->sUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members')
+        if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members')
         {
             $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
                 $this->sUsername, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
@@ -201,7 +215,7 @@ class ProfileController extends Controller
         }
 
         // Update the "Who's Viewed Your Profile"
-        if ($this->sUserAuth)
+        if ($this->bUserAuth)
         {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
@@ -239,14 +253,14 @@ class ProfileController extends Controller
     }
 
     /**
-     *
      * @param string $sFirstName  User's first name.
-     * @param object $oUser       User data from the DB.
+     * @param stdClass $oUser     User data from the DB.
+     *
      * @return string             The anchor for the link.
      */
-    private function getMailLink($sFirstName, $oUser)
+    private function getMailLink($sFirstName, stdClass $oUser)
     {
-        if ($this->sUserAuth)
+        if ($this->bUserAuth)
         {
             $sMailLink = Uri::get('mail', 'main', 'compose', $oUser->username);
         }
@@ -267,14 +281,14 @@ class ProfileController extends Controller
     }
 
     /**
-     *
      * @param string $sFirstName  User's first name.
-     * @param object $oUser       User data from the DB.
+     * @param stdClass $oUser     User data from the DB.
+     *
      * @return string             The anchor for the link.
      */
-    private function getMessengerLink($sFirstName, $oUser)
+    private function getMessengerLink($sFirstName, stdClass $oUser)
     {
-        if ($this->sUserAuth)
+        if ($this->bUserAuth)
         {
             $sMessengerLink = 'javascript:void(0)" onclick="Messenger.chatWith(\'' . $oUser->username . '\')';
         }
@@ -295,19 +309,16 @@ class ProfileController extends Controller
     }
 
     /**
-     *
      * @param string $sFirstName  User's first name.
-     * @param object $oUser       User data from the DB.
+     * @param stdClass $oUser     User data from the DB.
+     *
      * @return string             The anchor for the link.
      */
-    private function getBeFriendLink($sFirstName, $oUser)
+    private function getBeFriendLink($sFirstName, stdClass $oUser)
     {
-        if ($this->sUserAuth)
-        {
+        if ($this->bUserAuth) {
             $sBefriendLink = 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\''.(new Token)->generate('friend').'\')';
-        }
-        else
-        {
+        } else {
             $aUrlParms = [
                 'msg' => t('Free Sign up for %site_name% to become friend with %0%.', $sFirstName),
                 'ref' => 'profile',

@@ -19,14 +19,28 @@ class MainController extends Controller
 {
     const EMAILS_PER_PAGE = 10;
 
+    /** @var MailModel */
     protected $oMailModel;
+
+    /** @var Page */
     protected $oPage;
+
+    /** @var  string */
     protected $sTitle;
+
+    /** @var string */
     protected $sMsg;
+
+    /** @var integer */
     protected $iTotalMails;
 
+    /** @var integer */
     private $_iProfileId;
+
+    /** @var bool */
     private $_bAdminLogged;
+
+    /** @var bool */
     private $_bStatus;
 
     public function __construct()
@@ -427,7 +441,9 @@ class MainController extends Controller
     }
 
     /**
-    * @return stdClass $oMsg
+    * @param stdClass $oMsg
+    *
+    * @return void
     */
     private function _setRead(stdClass $oMsg)
     {
