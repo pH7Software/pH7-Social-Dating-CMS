@@ -23,7 +23,7 @@ class PaymentDesign extends Framework\Core\Core
         $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
 
         $oPayPal->param('business', $this->config->values['module.setting']['paypal.email'])
-            ->param('custom', base64_encode($oMembership->groupId . '.' . $oMembership->price)) // Use base64_encode() to discourage curious people
+            ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price)) // Use base64_encode() to discourage curious people
             ->param('amount', $oMembership->price)
             ->param('item_number', $oMembership->groupId)
             ->param('item_name', $this->registry->site_name . ' ' . $oMembership->name)
@@ -34,7 +34,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
             ->param('rm', 2) // Auto redirection in POST data
             ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PayPal'))
-            ->param('cancel_return', Uri::get('payment', 'main', 'pay', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
+            ->param('cancel_return', Uri::get('payment', 'main', 'membership', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
 
         echo
         '<form action="', $oPayPal->getUrl(), '" method="post">',
