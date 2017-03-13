@@ -18,6 +18,8 @@ use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Math\Measure\Year;
 use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Geo\Map\Map;
+use PH7\Framework\Layout\Html\Meta;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Url\Url;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Module\Various as SysMod;
@@ -165,10 +167,10 @@ class ProfileController extends Controller
      * @param string $sCity
      * @param string $sState
      * @param string $sCountry
-     * @param object $oUser
+     * @param stdClass $oUser
      * @return string The Google Maps code.
      */
-    private function getMap($sCity, $sState, $sCountry, $oUser)
+    private function getMap($sCity, $sState, $sCountry, stdClass $oUser)
     {
         $oMap = new Map;
         $oMap->setKey(DbConfig::getSetting('googleApiKey'));
@@ -197,7 +199,7 @@ class ProfileController extends Controller
 
         if ($oPrivacyViewsUser->searchProfile == 'no') {
             // Exclude profile of search engines
-            $this->view->header = Framework\Layout\Html\Meta::NOINDEX;
+            $this->view->header = Meta::NOINDEX;
         }
 
         if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members') {
@@ -349,7 +351,7 @@ class ProfileController extends Controller
      */
     private function notFound()
     {
-        Framework\Http\Http::setHeadersByCode(404);
+        Http::setHeadersByCode(404);
 
         /**
          * @internal We can include HTML tags in the title since the template will erase them before display.
