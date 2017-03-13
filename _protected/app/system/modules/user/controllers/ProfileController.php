@@ -69,8 +69,7 @@ class ProfileController extends Controller
         // Read the Profile information
         $oUser = $oUserModel->readProfile($this->iProfileId);
 
-        if (!empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username))
-        {
+        if (!empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username)) {
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
                 $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
@@ -153,9 +152,7 @@ class ProfileController extends Controller
 
             // Stat Profile
             Statistic::setView($this->iProfileId, 'Members');
-        }
-        else
-        {
+        } else {
             $this->notFound();
         }
 
@@ -198,29 +195,23 @@ class ProfileController extends Controller
         // Check Privacy Profile
         $oPrivacyViewsUser = $oUserModel->getPrivacySetting($this->iProfileId);
 
-        if ($oPrivacyViewsUser->searchProfile == 'no')
-        {
+        if ($oPrivacyViewsUser->searchProfile == 'no') {
             // Exclude profile of search engines
             $this->view->header = Framework\Layout\Html\Meta::NOINDEX;
         }
 
-        if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members')
-        {
+        if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members') {
             $this->view->error = t('Whoops! The "%0%" profile is only visible to members. Please <a href="%1%">login</a> or <a href="%2%">register</a> to see this profile.',
                 $this->sUsername, Uri::get('user', 'main', 'login'), Uri::get('user', 'signup', 'step1'));
-        }
-        elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->isOwnProfile())
-        {
+        } elseif ($oPrivacyViewsUser->privacyProfile == 'only_me' && !$this->isOwnProfile()) {
             $this->view->error = t('Whoops! The "%0%" profile is not available to you.', $this->sUsername);
         }
 
         // Update the "Who's Viewed Your Profile"
-        if ($this->bUserAuth)
-        {
+        if ($this->bUserAuth) {
             $oPrivacyViewsVisitor = $oUserModel->getPrivacySetting($this->iVisitorId);
 
-            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->isOwnProfile())
-            {
+            if ($oPrivacyViewsUser->userSaveViews == 'yes' && $oPrivacyViewsVisitor->userSaveViews == 'yes' && !$this->isOwnProfile()) {
                 $this->updateVisitorViews();
             }
         }
@@ -260,12 +251,9 @@ class ProfileController extends Controller
      */
     private function getMailLink($sFirstName, stdClass $oUser)
     {
-        if ($this->bUserAuth)
-        {
+        if ($this->bUserAuth) {
             $sMailLink = Uri::get('mail', 'main', 'compose', $oUser->username);
-        }
-        else
-        {
+        } else {
             $aUrlParms = [
                 'msg' => t('You need to free register for send a message to %0%.', $sFirstName),
                 'ref' => 'profile',
@@ -288,12 +276,9 @@ class ProfileController extends Controller
      */
     private function getMessengerLink($sFirstName, stdClass $oUser)
     {
-        if ($this->bUserAuth)
-        {
+        if ($this->bUserAuth) {
             $sMessengerLink = 'javascript:void(0)" onclick="Messenger.chatWith(\'' . $oUser->username . '\')';
-        }
-        else
-        {
+        } else {
             $aUrlParms = [
                 'msg' => t('You need to free register for talk to %0%.', $sFirstName),
                 'ref' => 'profile',
