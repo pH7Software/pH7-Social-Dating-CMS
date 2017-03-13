@@ -8,27 +8,29 @@
  * @package        PH7 / App / System / Module / Payment / Controller
  * @version        1.4
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mail\Mail;
 
 class MainController extends Controller
 {
-    /**
-     * @access protected Protected access because the AdminController class is derived from this class and used these attributes.
-     * @var object $oUserModel
-     * @var object $oPayModel
-     * @var string $sTitle
-     */
-    protected $oUserModel, $oPayModel, $sTitle, $iProfileId;
+    /** @var AffiliateCoreModel */
+    protected $oUserModel;
 
-    /**
-     * @access private
-     * @var boolean $_bStatus Payment status. Default is failure (FALSE).
-     */
+    /** @var PaymentModel */
+    protected $oPayModel;
+
+    /** @var string */
+    protected $sTitle;
+
+    /** @var int */
+    protected $iProfileId;
+
+    /** @var bool Payment status. Default is failure (FALSE) */
     private $_bStatus = false;
+
 
     public function __construct()
     {
