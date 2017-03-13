@@ -306,7 +306,7 @@ class ProfileController extends Controller
     private function getBeFriendLink($sFirstName, stdClass $oUser)
     {
         if ($this->bUserAuth) {
-            $sBefriendLink = 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\''.(new Token)->generate('friend').'\')';
+            $sBefriendLink = 'javascript:void(0)" onclick="friend(\'add\',' . $this->iProfileId . ',\'' . (new Token)->generate('friend') . '\')';
         } else {
             $aUrlParms = [
                 'msg' => t('Free Sign up for %site_name% to become friend with %0%.', $sFirstName),
