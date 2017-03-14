@@ -13,6 +13,7 @@ namespace PH7\Framework\Payment\Gateway\Api;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Server\Server;
 use PH7\Framework\File\Stream;
 use PH7\Framework\Url\Url;
 
@@ -134,6 +135,9 @@ class Paypal extends Provider implements Api
          curl_setopt($rCh, CURLOPT_POSTFIELDS, $this->_sRequest);
          curl_setopt($rCh, CURLOPT_SSL_VERIFYPEER, 1);
          curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, 2);
+         if (!(new Server)->isLocalHost()) {
+             curl_setopt($rCh, CURLOPT_CAINFO, __DIR__ . '/cert/paypal_api_chain.crt');
+         }
          curl_setopt($rCh, CURLOPT_HTTPHEADER, array('Host: www.paypal.com'));
          $mRes = curl_exec($rCh);
          curl_close($rCh);
