@@ -8,13 +8,13 @@
  * @package        PH7 / App / System / Module / Payment / Inc / Class
  * @version        0.9
  */
+
 namespace PH7;
 
 use PH7\Framework\Registry\Registry, PH7\Framework\Ip\Ip;
 
 trait Api
 {
-
     /**
      * Save log message.
      *
@@ -26,5 +26,4 @@ trait Api
     {
         return file_put_contents($oRegistry->path_module_inc . '_log/' . Ip::get() . '.log', $mData, FILE_APPEND);
     }
-
 }

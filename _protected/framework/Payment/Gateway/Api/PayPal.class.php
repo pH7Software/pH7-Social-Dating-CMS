@@ -26,6 +26,9 @@ class Paypal extends Provider implements Api
     const SANDBOX_PAYMENT_URL = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
     const PAYMENT_URL = 'https://www.paypal.com/cgi-bin/webscr';
 
+    /* Should we accept valid transactions but hasn't been completed yet? */
+    const ACCEPT_VALID_PAYMENT_NOT_COMPLETED = true;
+
     /** @var string */
     private $_sUrl;
 
@@ -96,16 +99,16 @@ class Paypal extends Provider implements Api
 
         $mStatus = $this->getStatus();
 
-        if (0 == strcmp('VERIFIED', $mStatus)) {
+        if (0 === strcmp('VERIFIED', $mStatus)) {
             // Valid
             if ($_POST['payment_status'] == 'Completed') {
                 $this->_bValid = true;
                 $this->_sMsg = t('Transaction valid and completed.');
             } else {
-                $this->_bValid = false;
+                $this->_bValid = self::ACCEPT_VALID_PAYMENT_NOT_COMPLETED;
                 $this->_sMsg = t('Transaction valid but not completed.');
             }
-        } elseif (0 == strcmp('INVALID', $mStatus)) {
+        } elseif (0 === strcmp('INVALID', $mStatus)) {
             // Bad Connection
             $this->_bValid = false;
             $this->_sMsg = t('Invalid transaction.');

@@ -13,6 +13,9 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mail\Mail;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
+use PH7\Framework\File\File;
 
 class MainController extends Controller
 {
@@ -43,8 +46,7 @@ class MainController extends Controller
 
     public function index()
     {
-        $this->sTitle = t('Payment Zone');
-        $this->view->page_title = $this->view->h1_title = $this->sTitle;
+        $this->view->page_title = $this->view->h1_title = t('Payment Zone');
         $this->output();
     }
 
@@ -52,14 +54,10 @@ class MainController extends Controller
     {
         $oMembershipModel = $this->oPayModel->getMemberships();
 
-        if (empty($oMembershipModel))
-        {
+        if (empty($oMembershipModel)) {
             $this->displayPageNotFound(t('No membership found!'));
-        }
-        else
-        {
-            $this->sTitle = t('Memberships List');
-            $this->view->page_title = $this->view->h2_title = $this->sTitle;
+        } else {
+            $this->view->page_title = $this->view->h2_title = t('Memberships List');
             $this->view->memberships = $oMembershipModel;
             $this->output();
         }
@@ -71,20 +69,16 @@ class MainController extends Controller
 
         $oMembershipModel = $this->oPayModel->getMemberships($iMembershipId);
 
-        if (empty($iMembershipId) || empty($oMembershipModel))
-        {
+        if (empty($iMembershipId) || empty($oMembershipModel)) {
             $this->displayPageNotFound(t('No membership found!'));
-        }
-        else
-        {
+        } else {
             // Adding the stylesheet for Gatway Logo
             $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'common.css');
 
             // Regenerate the session ID to prevent the session fixation attack
             $this->session->regenerateId();
 
-            $this->sTitle = t('Pay!');
-            $this->view->page_title = $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = t('Pay!');
             $this->view->membership = $oMembershipModel;
             $this->output();
         }
@@ -92,18 +86,20 @@ class MainController extends Controller
 
     public function process($sProvider = '')
     {
-        switch ($sProvider)
-        {
+        switch ($sProvider) {
             case 'paypal':
             {
                 $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
-                if ($oPayPal->valid() && $this->httpRequest->postExists('custom'))
-                {
+                if ($oPayPal->valid() && $this->httpRequest->postExists('custom')) {
                     $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
                     $iItemNumber = (int) $aData[0];
                     $fPrice = $aData[1];
-                    if ($this->oUserModel->updateMembership($iItemNumber, $this->iProfileId, $fPrice, $this->dateTime->get()->dateTime('Y-m-d H:i:s')))
-                    {
+                    if ($this->oUserModel->updateMembership(
+                        $iItemNumber,
+                        $this->iProfileId,
+                        $fPrice,
+                        $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
+                    ) {
                         $this->_bStatus = true; // Status is OK
                         // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
                     }
@@ -114,13 +110,11 @@ class MainController extends Controller
 
             case 'stripe':
             {
-                if ($this->httpRequest->postExists('stripeToken'))
-                {
+                if ($this->httpRequest->postExists('stripeToken')) {
                     \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
                     $sAmount = $this->httpRequest->post('amount');
 
-                    try
-                    {
+                    try {
                         $oCharge = \Stripe\Charge::create(
                             [
                                 'amount' => Stripe::getAmount($sAmount),
@@ -130,19 +124,20 @@ class MainController extends Controller
                             ]
                         );
 
-                        if ($this->oUserModel->updateMembership($this->httpRequest->post('item_number'), $this->iProfileId, $sAmount, $this->dateTime->get()->dateTime('Y-m-d H:i:s')))
-                        {
+                        if ($this->oUserModel->updateMembership(
+                            $this->httpRequest->post('item_number'),
+                            $this->iProfileId, $sAmount,
+                            $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
+                        ) {
                             $this->_bStatus = true; // Status is OK
                             $this->notification('Stripe'); // Add info into the log file
                         }
                     }
-                    catch (\Stripe\Error\Card $oE)
-                    {
+                    catch (\Stripe\Error\Card $oE) {
                         // The card has been declined
                         // Do nothing here as "$this->_bStatus" is by default FALSE and so it will display "Error occurred" msg later
                     }
-                    catch (\Stripe\Error\Base $oE)
-                    {
+                    catch (\Stripe\Error\Base $oE) {
                         $this->design->setMessage( $this->str->escape($oE->getMessage(), true) );
                     }
                 }
@@ -155,10 +150,13 @@ class MainController extends Controller
                 $sVendorId = $this->config->values['module.setting']['2co.vendor_id'];
                 $sSecretWord = $this->config->values['module.setting']['2co.secret_word'];
 
-                if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id'))
-                {
-                    if ($this->oUserModel->updateMembership($this->httpRequest->post('cart_order_id'), $this->iProfileId, $this->httpRequest->post('total'), $this->dateTime->get()->dateTime('Y-m-d H:i:s')))
-                    {
+                if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id')) {
+                    if ($this->oUserModel->updateMembership(
+                        $this->httpRequest->post('cart_order_id'),
+                        $this->iProfileId,
+                        $this->httpRequest->post('total'),
+                        $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
+                    ) {
                         $this->_bStatus = true; // Status is OK
                         $this->notification('TwoCO'); // Add info into the log file
                     }
@@ -182,8 +180,7 @@ class MainController extends Controller
         $this->sTitle = ($this->_bStatus) ? t('Thank you!') : t('Error occurred!');
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
-        if ($this->_bStatus)
-        {
+        if ($this->_bStatus) {
             $this->updateAffCom();
             $this->clearCache();
         }
@@ -199,8 +196,7 @@ class MainController extends Controller
     public function notification($sGatewayName = '')
     {
         // Save buyer information to a log file
-        if ($sGatewayName == 'PayPal' || $sGatewayName == 'Stripe' || $sGatewayName == 'TwoCO' || $sGatewayName == 'CCBill')
-        {
+        if ($sGatewayName == 'PayPal' || $sGatewayName == 'Stripe' || $sGatewayName == 'TwoCO' || $sGatewayName == 'CCBill') {
             $sGatewayName = 'PH7\\' . $sGatewayName;
             $this->log(new $sGatewayName(false), t('%0% payment was made with the following information:', $sGatewayName));
         }
@@ -240,13 +236,17 @@ class MainController extends Controller
         $this->config->load(PH7_PATH_SYS_MOD . 'affiliate' . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE);
 
         $iAffId = $this->oUserModel->getAffiliatedId($this->iProfileId);
-        if ($iAffId < 1) return; // If there is no valid ID, we stop the method.
+        if ($iAffId < 1) {
+            // If there is no valid ID, we stop the method
+            return;
+        }
 
         $iAmount = $this->oUserModel->readProfile($this->iProfileId)->price;
         $iAffCom = ($iAmount*$this->config->values['module.setting']['rate.user_membership_payment']/100);
 
-        if ($iAffCom > 0)
+        if ($iAffCom > 0) {
             $this->oUserModel->updateUserJoinCom($iAffId, $iAffCom);
+        }
     }
 
     /**
@@ -279,15 +279,15 @@ class MainController extends Controller
     /**
      * Create a Payment Log file.
      *
-     * @param \PH7\Framework\Payment\Gateway\Api\Api $oProvider A provider class.
+     * @param ApiInterface $oProvider A provider class.
      * @param string $sMsg
+     *
      * @return void
      */
-    protected function log(Framework\Payment\Gateway\Api\Api $oProvider, $sMsg)
+    protected function log(ApiInterface $oProvider, $sMsg)
     {
-        if ($this->config->values['module.setting']['log_file.enabled'])
-        {
-            $sLogTxt = $sMsg . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL . Framework\File\File::EOL;
+        if ($this->config->values['module.setting']['log_file.enabled']) {
+            $sLogTxt = $sMsg . File::EOL . File::EOL . File::EOL;
             $oProvider->saveLog($sLogTxt . print_r($_POST, true), $this->registry);
         }
     }
@@ -299,6 +299,6 @@ class MainController extends Controller
      */
     protected function clearCache()
     {
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $this->iProfileId, null)->clear();
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $this->iProfileId, null)->clear();
     }
 }

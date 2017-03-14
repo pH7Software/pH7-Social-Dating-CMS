@@ -10,6 +10,7 @@
  */
 
 namespace PH7\Framework\Payment\Gateway\Api;
+
 defined('PH7') or exit('Restricted access');
 
 interface Api

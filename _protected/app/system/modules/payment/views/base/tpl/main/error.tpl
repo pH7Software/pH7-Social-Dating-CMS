@@ -1,4 +1,4 @@
 <div class="center">
-    <p class="err_msg">{lang 'An error has occured during the transaction. The payment has been stopped.'}</p>
+    <p class="red">{lang 'The purchase failed. The payment status of your purchase might be just pending, in progress or invalid.'}</p>
     <p>{lang 'If the problem persists, please <a href="%0%">contact us</a>.', Framework\Mvc\Router\Uri::get('contact', 'contact', 'index')}</p>
 </div>
