@@ -13,7 +13,6 @@ namespace PH7\Framework\Payment\Gateway\Api;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Server\Server;
 use PH7\Framework\File\Stream;
 use PH7\Framework\Url\Url;
 
@@ -99,6 +98,7 @@ class Paypal extends Provider implements Api
         $this->setParams();
 
         $mStatus = $this->getStatus();
+        $mStatus = trim($mStatus);
 
         if (0 === strcmp('VERIFIED', $mStatus)) {
             // Valid
@@ -135,11 +135,15 @@ class Paypal extends Provider implements Api
          curl_setopt($rCh, CURLOPT_POSTFIELDS, $this->_sRequest);
          curl_setopt($rCh, CURLOPT_SSL_VERIFYPEER, 1);
          curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, 2);
-         if (!(new Server)->isLocalHost()) {
-             curl_setopt($rCh, CURLOPT_CAINFO, __DIR__ . '/cert/paypal_api_chain.crt');
-         }
          curl_setopt($rCh, CURLOPT_HTTPHEADER, array('Host: www.paypal.com'));
          $mRes = curl_exec($rCh);
+
+         if (curl_errno($rCh) == 60) {
+             // CURLE_SSL_CACERT
+             curl_setopt($rCh, CURLOPT_CAINFO, __DIR__ . '/cert/paypal_api_chain.crt');
+             $mRes = curl_exec($rCh);
+         }
+
          curl_close($rCh);
          unset($rCh);
 
@@ -188,9 +192,8 @@ class Paypal extends Provider implements Api
         foreach ($aRawPost as $sKeyVal) {
             $aKeyVal = explode ('=', $sKeyVal);
             if (count($aKeyVal) == 2) {
-                $aPostData[$aKeyVal[0]] = Url::encode($aKeyVal[1]);
+                $aPostData[$aKeyVal[0]] = Url::decode($aKeyVal[1]);
             }
-            unset($aKeyVal);
         }
         unset($aRawPost);
 
