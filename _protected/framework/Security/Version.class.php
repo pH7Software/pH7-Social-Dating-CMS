@@ -23,9 +23,9 @@ final class Version
     /***** Framework Kernel *****/
     // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO", 5.* was "pCO" and 6.* is "WoW"
     const KERNEL_VERSION_NAME = 'WoW';
-    const KERNEL_VERSION = '6.0.0';
+    const KERNEL_VERSION = '6.0.1';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2017-03-13';
+    const KERNEL_RELASE_DATE = '2017-03-16';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
