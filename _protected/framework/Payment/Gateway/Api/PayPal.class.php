@@ -38,7 +38,7 @@ class Paypal extends Provider implements Api
     /** @var string */
     private $_sMsg;
 
-    /** @var string|null */
+    /** @var bool|null */
     private $_bValid = null;
 
 
