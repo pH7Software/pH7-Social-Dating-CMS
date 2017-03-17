@@ -7,14 +7,16 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Layout\Html\Design,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Cache\Cache,
-PH7\Framework\Url\Header;
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
+    const HASH_VALIDATION = '681cd81b17b71c746e9ab7ac0445d3a3c960c329';
+
+    /** @var ValidateSiteModel */
     private $oValidateModel;
 
     public function __construct()
@@ -73,6 +75,6 @@ class MainController extends Controller
 
     protected function checkHash($sHash)
     {
-        return ('681cd81b17b71c746e9ab7ac0445d3a3c960c329' === sha1(substr($sHash,3,24)));
+        return (self::HASH_VALIDATION === sha1(substr($sHash,3,24)));
     }
 }
