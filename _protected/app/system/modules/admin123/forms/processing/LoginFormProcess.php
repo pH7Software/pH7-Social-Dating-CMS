@@ -14,16 +14,19 @@ PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header,
+PH7\Framework\Security\Security,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
-class LoginFormProcess extends Form
+class LoginFormProcess extends Form implements LoginableForm
 {
+    private $oAdminModel;
+
     public function __construct()
     {
         parent::__construct();
 
         $sIp = Ip::get();
-        $oAdminModel = new AdminModel;
+        $this->oAdminModel = new AdminModel;
         $oSecurityModel = new SecurityModel;
 
         $sEmail = $this->httpRequest->post('mail');
@@ -46,7 +49,7 @@ class LoginFormProcess extends Form
         }
 
         /*** Check Login ***/
-        $bIsLogged = $oAdminModel->adminLogin($sEmail, $sUsername, $sPassword);
+        $bIsLogged = $this->oAdminModel->adminLogin($sEmail, $sUsername, $sPassword);
         $bIpNotAllowed = !empty($sIpLogin) && $sIpLogin !== $sIp;
 
         if (!$bIsLogged || $bIpNotAllowed) // If the login is failed or if the IP address is not allowed
@@ -57,8 +60,9 @@ class LoginFormProcess extends Form
             {
                 $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', 'Admins');
 
-                if ($bIsLoginAttempt)
+                if ($bIsLoginAttempt) {
                     $oSecurityModel->addLoginAttempt('Admins');
+                }
 
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is Incorrect'));
@@ -74,8 +78,10 @@ class LoginFormProcess extends Form
         {
             $oSecurityModel->clearLoginAttempts('Admins');
             $this->session->remove('captcha_admin_enabled');
-            $iId = $oAdminModel->getId($sEmail, null, 'Admins');
-            $oAdminData = $oAdminModel->readProfile($iId, 'Admins');
+            $iId = $this->oAdminModel->getId($sEmail, null, 'Admins');
+            $oAdminData = $this->oAdminModel->readProfile($iId, 'Admins');
+
+            $this->updatePwdHashIfNeeded($sPassword, $oAdminData->password, $sEmail);
 
             $o2FactorModel = new TwoFactorAuthCoreModel(PH7_ADMIN_MOD);
             if ($o2FactorModel->isEnabled($iId))
@@ -87,7 +93,7 @@ class LoginFormProcess extends Form
             }
             else
             {
-                (new AdminCore)->setAuth($oAdminData, $oAdminModel, $this->session, $oSecurityModel);
+                (new AdminCore)->setAuth($oAdminData, $this->oAdminModel, $this->session, $oSecurityModel);
 
                 Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('You are successfully logged in!'));
             }
@@ -95,12 +101,24 @@ class LoginFormProcess extends Form
     }
 
     /**
-     * Enable the Captcha on the login form.
+     * @param string $sPassword
+     * @param string $sUserPasswordHash
+     * @param string $sEmail
      *
      * @return void
      */
-    protected function enableCaptcha()
+    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
     {
-        $this->session->set('captcha_admin_enabled',1);
+        if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
+            $this->oUserModel->changePassword($sEmail, $sNewPwdHash, 'Admins');
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function enableCaptcha()
+    {
+        $this->session->set('captcha_admin_enabled', 1);
     }
 }

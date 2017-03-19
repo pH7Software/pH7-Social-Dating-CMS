@@ -15,13 +15,15 @@ PH7\Framework\Url\Header,
 PH7\Framework\Security\Security,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
-class LoginFormProcess extends Form
+class LoginFormProcess extends Form implements LoginableForm
 {
-   public function __construct()
-   {
+    private $oUserModel;
+
+    public function __construct()
+    {
         parent::__construct();
 
-        $oUserModel = new UserCoreModel;
+        $this->oUserModel = new UserCoreModel;
         $oSecurityModel = new SecurityModel;
 
         $sEmail = $this->httpRequest->post('mail');
@@ -39,7 +41,7 @@ class LoginFormProcess extends Form
         }
 
         // Check Login
-        $sLogin = $oUserModel->login($sEmail, $sPassword);
+        $sLogin = $this->oUserModel->login($sEmail, $sPassword);
         if ($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist')
         {
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
@@ -54,8 +56,9 @@ class LoginFormProcess extends Form
             {
                 $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password');
 
-                if ($bIsLoginAttempt)
+                if ($bIsLoginAttempt) {
                     $oSecurityModel->addLoginAttempt();
+                }
 
                 $this->enableCaptcha();
                 $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
@@ -68,11 +71,12 @@ class LoginFormProcess extends Form
         {
             $oSecurityModel->clearLoginAttempts();
             $this->session->remove('captcha_user_enabled');
-            $iId = $oUserModel->getId($sEmail);
-            $oUserData = $oUserModel->readProfile($iId);
+            $iId = $this->oUserModel->getId($sEmail);
+            $oUserData = $this->oUserModel->readProfile($iId);
 
-            if ($this->httpRequest->postExists('remember'))
-            {
+            $this->updatePwdHashIfNeeded($sPassword, $oUserData->password, $sEmail);
+
+            if ($this->httpRequest->postExists('remember')) {
                 // We hash again the password
                 (new Framework\Cookie\Cookie)->set(
                     array('member_remember' => Security::hashCookie($oUserData->password), 'member_id' => $oUserData->profileId)
@@ -96,7 +100,7 @@ class LoginFormProcess extends Form
                 }
                 else
                 {
-                    $oUser->setAuth($oUserData, $oUserModel, $this->session, $oSecurityModel);
+                    $oUser->setAuth($oUserData, $this->oUserModel, $this->session, $oSecurityModel);
 
                     Header::redirect(Uri::get('user','account','index'), t('You are successfully logged in!'));
                 }
@@ -105,12 +109,24 @@ class LoginFormProcess extends Form
     }
 
     /**
-     * Enable the Captcha on the login form.
+     * @param string $sPassword
+     * @param string $sUserPasswordHash
+     * @param string $sEmail
      *
      * @return void
      */
-    protected function enableCaptcha()
+    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
     {
-        $this->session->set('captcha_user_enabled',1);
+        if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
+            $this->oUserModel->changePassword($sEmail, $sNewPwdHash, 'Members');
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function enableCaptcha()
+    {
+        $this->session->set('captcha_user_enabled', 1);
     }
 }

@@ -12,15 +12,18 @@ use
 PH7\Framework\Mvc\Model\DbConfig,
 PH7\Framework\Mvc\Router\Uri,
 PH7\Framework\Url\Header,
+PH7\Framework\Security\Security,
 PH7\Framework\Mvc\Model\Security as SecurityModel;
 
-class LoginFormProcess extends Form
+class LoginFormProcess extends Form implements LoginableForm
 {
+    private $oAffModel;
+
     public function __construct()
     {
         parent::__construct();
 
-        $oAffModel = new AffiliateModel;
+        $this->oAffModel = new AffiliateModel;
         $oSecurityModel = new SecurityModel;
 
         $sEmail = $this->httpRequest->post('mail');
@@ -38,7 +41,7 @@ class LoginFormProcess extends Form
         }
 
         // Check Login
-        $sLogin = $oAffModel->login($sEmail, $sPassword, 'Affiliates');
+        $sLogin = $this->oAffModel->login($sEmail, $sPassword, 'Affiliates');
         if ($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist')
         {
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
@@ -53,8 +56,9 @@ class LoginFormProcess extends Form
             {
                 $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password', 'Affiliates');
 
-                if ($bIsLoginAttempt)
+                if ($bIsLoginAttempt) {
                     $oSecurityModel->addLoginAttempt('Affiliates');
+                }
 
                 $this->enableCaptcha();
                 $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
@@ -67,10 +71,12 @@ class LoginFormProcess extends Form
         {
             $oSecurityModel->clearLoginAttempts('Affiliates');
             $this->session->remove('captcha_aff_enabled');
-            $iId = $oAffModel->getId($sEmail, null, 'Affiliates');
-            $oAffData = $oAffModel->readProfile($iId, 'Affiliates');
-            $oAff = new AffiliateCore;
+            $iId = $this->oAffModel->getId($sEmail, null, 'Affiliates');
+            $oAffData = $this->oAffModel->readProfile($iId, 'Affiliates');
 
+            $this->updatePwdHashIfNeeded($sPassword, $oAffData->password, $sEmail);
+
+            $oAff = new AffiliateCore;
             if (true !== ($mStatus = $oAff->checkAccountStatus($oAffData)))
             {
                 \PFBC\Form::setError('form_login_aff', $mStatus);
@@ -87,7 +93,7 @@ class LoginFormProcess extends Form
                 }
                 else
                 {
-                    $oAff->setAuth($oAffData, $oAffModel, $this->session, $oSecurityModel);
+                    $oAff->setAuth($oAffData, $this->oAffModel, $this->session, $oSecurityModel);
 
                     Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged in!'));
                 }
@@ -96,12 +102,24 @@ class LoginFormProcess extends Form
     }
 
     /**
-     * Enable the Captcha on the login form.
+     * @param string $sPassword
+     * @param string $sUserPasswordHash
+     * @param string $sEmail
      *
      * @return void
      */
-    protected function enableCaptcha()
+    public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
     {
-        $this->session->set('captcha_aff_enabled',1);
+        if ($sNewPwdHash = Security::pwdNeedsRehash($sPassword, $sUserPasswordHash)) {
+            $this->oUserModel->changePassword($sEmail, $sNewPwdHash, 'Affiliates');
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function enableCaptcha()
+    {
+        $this->session->set('captcha_aff_enabled', 1);
     }
 }
