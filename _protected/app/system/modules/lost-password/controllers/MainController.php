@@ -73,8 +73,8 @@ class MainController extends Controller
      */
     protected function sendMail($sTable, $sEmail)
     {
+        // Get new password and change it in DB
         $sNewPassword = Various::genRndWord(8,40);
-
         (new UserCoreModel)->changePassword($sEmail, $sNewPassword, $sTable);
 
         $this->view->content = t('Hello,') . '<br />' .
