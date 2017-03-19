@@ -13,7 +13,7 @@ interface LoginableForm
     /**
      * Check if the existing password hash in the user record is outdated
      * with the current algorithm and password hashing options.
-     * If so, we create and save the new password to match with the new password hashing options.
+     * If so, we create and save the new password to match with the new algorithm and options.
      *
      * @param string $sPassword
      * @param string $sUserPasswordHash
