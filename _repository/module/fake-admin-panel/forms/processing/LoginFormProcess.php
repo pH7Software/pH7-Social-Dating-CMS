@@ -13,7 +13,6 @@ namespace PH7;
 
 class LoginFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -24,5 +23,4 @@ class LoginFormProcess extends Form
         $this->session->set('captcha_admin_enabled', 1); // Enable Captcha
         \PFBC\Form::setError('form_login', t('"Email", "Username" or "Password" is Incorrect'));
     }
-
 }
