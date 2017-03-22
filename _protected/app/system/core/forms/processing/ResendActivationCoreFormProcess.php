@@ -61,7 +61,7 @@ class ResendActivationCoreFormProcess extends Form
             t('Username: %0%.', $oHash->username) . '<br />' .
             t('Password: ***** (this field is hidden to protect against theft of your account).') . '</em>';
 
-        $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $oHash->email) . '<br />' .
+        $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $oHash->email) . '<br />' .
                 t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
         $sHtmlMessage = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/resend_activation.tpl', $oHash->email);

@@ -95,7 +95,7 @@ class SubscriptionFormProcess extends Form
         $this->view->content = t('Hi %0%!', $aData['name']) . '<br />' .
         t("Welcome to %site_name%'s Subscription!") . '<br />' .
         t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
-        $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $aData['email']) . '<br />' .
+        $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aData['email']) . '<br />' .
         t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/newsletter/registration.tpl', $aData['email']);

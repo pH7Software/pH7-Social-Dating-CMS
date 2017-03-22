@@ -395,7 +395,7 @@ class UserController extends Controller
                 {
                     // Set message
                     $this->view->content = t('Dear %0%,', $oUser->firstName) . '<br />' . $this->sMsg;
-                    $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $oUser->email) . '<br />' .
+                    $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $oUser->email) . '<br />' .
                     t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
                     // Send email

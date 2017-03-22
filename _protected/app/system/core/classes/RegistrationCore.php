@@ -66,7 +66,7 @@ abstract class RegistrationCore extends Core
         t('Email: %0%.', $aInfo['email']) . '<br />' .
         t('Username: %0%.', $aInfo['username']) . '<br />' .
         $sPwdMsg . '</em>';
-        $this->view->footer = t('You are receiving this mail because we received an application for registration with the email "%0%" has been provided in the form of %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
+        $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
         t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
         $sTplName = (defined('PH7_TPL_MAIL_NAME')) ? PH7_TPL_MAIL_NAME : PH7_DEFAULT_THEME;
