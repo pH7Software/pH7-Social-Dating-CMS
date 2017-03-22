@@ -5,31 +5,35 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Contact / Form
  */
+
 namespace PH7;
+
+use PH7\Framework\Session\Session;
 
 class ContactForm
 {
-
     public static function display()
     {
         // Display the contact form on the template
-        if (isset($_POST['submit_contact']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_contact']))
+        if (isset($_POST['submit_contact'])) {
+            if (\PFBC\Form::isValid($_POST['submit_contact'])) {
                 new ContactFormProcess();
+            }
 
             Framework\Url\Header::redirect();
         }
+
+        $oSession = new Session;
 
         $oForm = new \PFBC\Form('form_contact');
         $oForm->configure(array('action'=> '' ));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_contact', 'form_contact'));
         $oForm->addElement(new \PFBC\Element\Token('contact'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'name_first', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('value' => $oSession->get('member_first_name'), 'id'=>'name_first', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'name_last', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('value' => $oSession->get('member_last_name'), 'id'=>'name_last', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('id'=>'email', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1)));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('value' => $oSession->get('member_email'), 'id'=>'email', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
         $oForm->addElement(new \PFBC\Element\Phone(t('Your Phone Number:'), 'phone', array('id'=>'phone', 'onblur'=>'CValid(this.value, this.id)', 'description'=>t('Enter the full phone number including its country calling codes (e.g., +44768374890).'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
@@ -42,8 +46,9 @@ class ContactForm
         $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         $oForm->addElement(new \PFBC\Element\Button(t('Contact US'),'submit', array('icon'=>'contact')));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
-    }
 
+        unset($oSession);
+    }
 }
