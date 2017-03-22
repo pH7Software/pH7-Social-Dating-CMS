@@ -31,7 +31,7 @@ class ContactForm
         $oForm->addElement(new \PFBC\Element\Token('contact'));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('value' => $oSession->get('member_first_name'), 'id'=>'name_first', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('value' => $oSession->get('member_last_name'), 'id'=>'name_last', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'name_last', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('value' => $oSession->get('member_email'), 'id'=>'email', 'onblur'=>'CValid(this.value, this.id)', 'required'=> 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
