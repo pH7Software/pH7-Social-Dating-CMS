@@ -53,9 +53,11 @@ class EditMembershipFormProcess extends Form
     {
         $oMembership = $oPayModel->getMemberships($iGroupId);
 
-        foreach ($this->aFields as $sKey => $sVal)
-            if (!$this->str->equals($this->httpRequest->post($sKey), $oMembership->$sVal))
+        foreach ($this->aFields as $sKey => $sVal) {
+            if (!$this->str->equals($this->httpRequest->post($sKey), $oMembership->$sVal)) {
                 $oPayModel->updateMembershipGroup($sVal, $this->httpRequest->post($sKey), $oMembership->groupId);
+            }
+        }
     }
 
     /**
