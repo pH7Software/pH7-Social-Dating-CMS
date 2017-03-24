@@ -16,6 +16,8 @@ PH7\Framework\Mvc\Router\Uri;
 
 abstract class PermissionCore extends Framework\Core\Core
 {
+    const VISITOR_GROUP_ID = 1;
+
     protected $group;
 
     public function __construct()

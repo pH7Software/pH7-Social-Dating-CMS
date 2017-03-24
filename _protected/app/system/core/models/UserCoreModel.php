@@ -37,10 +37,9 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     public static function checkGroup()
     {
         $oSession = new Session;
-        if (!$oSession->exists('member_group_id'))
-        {
+        if (!$oSession->exists('member_group_id')) {
             $oSession->regenerateId();
-            $oSession->set('member_group_id', '1'); // By default, it's the Visitor's group (ID 1)
+            $oSession->set('member_group_id', PermissionCore::VISITOR_GROUP_ID);
         }
 
         $rStmt = Db::getInstance()->prepare('SELECT permissions FROM' . Db::prefix('Memberships') . 'WHERE groupId = :groupId LIMIT 1');
@@ -49,6 +48,7 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $oFetch = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
         unset($oSession);
+
         return Framework\CArray\ObjArr::toObject(unserialize($oFetch->permissions));
     }
 
