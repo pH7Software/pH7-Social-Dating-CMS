@@ -99,6 +99,7 @@ class MainController extends Controller
                         $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                     ) {
                         $this->_bStatus = true; // Status is OK
+                        $this->updateUserGroupId($iItemNumber);
                         // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
                     }
                 }
@@ -122,12 +123,14 @@ class MainController extends Controller
                             ]
                         );
 
+                        $iItemNumber = $this->httpRequest->post('item_number');
                         if ($this->oUserModel->updateMembership(
-                            $this->httpRequest->post('item_number'),
+                            $iItemNumber,
                             $this->iProfileId,
                             $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                         ) {
                             $this->_bStatus = true; // Status is OK
+                            $this->updateUserGroupId($iItemNumber);
                             $this->notification('Stripe'); // Add info into the log file
                         }
                     }
@@ -148,13 +151,15 @@ class MainController extends Controller
                 $sVendorId = $this->config->values['module.setting']['2co.vendor_id'];
                 $sSecretWord = $this->config->values['module.setting']['2co.secret_word'];
 
+                $iItemNumber = $this->httpRequest->post('cart_order_id');
                 if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id')) {
                     if ($this->oUserModel->updateMembership(
-                        $this->httpRequest->post('cart_order_id'),
+                        $iItemNumber,
                         $this->iProfileId,
                         $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                     ) {
                         $this->_bStatus = true; // Status is OK
+                        $this->updateUserGroupId($iItemNumber);
                         $this->notification('TwoCO'); // Add info into the log file
                     }
                 }
@@ -297,5 +302,15 @@ class MainController extends Controller
     protected function clearCache()
     {
         (new Cache)->start(UserCoreModel::CACHE_GROUP, 'membershipdetails' . $this->iProfileId, null)->clear();
+    }
+
+    /**
+     * @param int $iItemNumber
+     *
+     * @return void
+     */
+    private function updateUserGroupId($iItemNumber)
+    {
+        $this->session->set('member_group_id', $iItemNumber);
     }
 }
