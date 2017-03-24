@@ -93,11 +93,9 @@ class MainController extends Controller
                 if ($oPayPal->valid() && $this->httpRequest->postExists('custom')) {
                     $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
                     $iItemNumber = (int) $aData[0];
-                    $fPrice = $aData[1];
                     if ($this->oUserModel->updateMembership(
                         $iItemNumber,
                         $this->iProfileId,
-                        $fPrice,
                         $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                     ) {
                         $this->_bStatus = true; // Status is OK
@@ -126,7 +124,7 @@ class MainController extends Controller
 
                         if ($this->oUserModel->updateMembership(
                             $this->httpRequest->post('item_number'),
-                            $this->iProfileId, $sAmount,
+                            $this->iProfileId,
                             $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                         ) {
                             $this->_bStatus = true; // Status is OK
@@ -154,7 +152,6 @@ class MainController extends Controller
                     if ($this->oUserModel->updateMembership(
                         $this->httpRequest->post('cart_order_id'),
                         $this->iProfileId,
-                        $this->httpRequest->post('total'),
                         $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                     ) {
                         $this->_bStatus = true; // Status is OK

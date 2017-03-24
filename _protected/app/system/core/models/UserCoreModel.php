@@ -7,6 +7,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
 use
@@ -601,7 +602,11 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
         $this->setDefaultNotification();
 
         // Last one, update the membership with the correct details
-        $this->updateMembership((int)DbConfig::getSetting('defaultMembershipGroupId'), $this->getKeyId(), null, $this->sCurrentDate);
+        $this->updateMembership(
+            (int)DbConfig::getSetting('defaultMembershipGroupId'),
+            $this->getKeyId(),
+            $this->sCurrentDate
+        );
 
         return $this->getKeyId();
     }
@@ -1360,24 +1365,20 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param integer $iNewGroupId The new ID of membership group.
      * @param integer $iProfileId The user ID.
-     * @param float $fPrice Price of the membership (e.g. 19.90) Default NULL
      * @param string $sDateTime In date format: 0000-00-00 00:00:00 Default NULL
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
-    public function updateMembership($iNewGroupId, $iProfileId, $fPrice = null, $sDateTime = null)
+    public function updateMembership($iNewGroupId, $iProfileId, $sDateTime = null)
     {
-        $bIsPrice = !empty($fPrice);
         $bIsTime = !empty($sDateTime);
 
-        $sSqlWherePrice = ($bIsPrice) ? ' AND pay.price = :price' : '';
-        $sSqlTime = ($bIsTime) ? ',m.membershipDate = :dateTime ' : ' ';
-        $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'AS m INNER JOIN' . Db::prefix('Memberships') .
-        'AS pay USING(groupId) SET m.groupId = :groupId' . $sSqlTime . 'WHERE m.profileId = :profileId' . $sSqlWherePrice;
+        $sSqlTime = ($bIsTime) ? ',membershipDate = :dateTime ' : ' ';
+        $sSqlQuery = 'UPDATE' . Db::prefix('Members') . 'SET groupId = :groupId' .
+            $sSqlTime . 'WHERE profileId = :profileId LIMIT 1';
 
         $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':groupId', $iNewGroupId, \PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        if ($bIsPrice) $rStmt->bindValue(':price', $fPrice, \PDO::PARAM_STR); // Price can be float too (not always int), so set \PDO::PARAM_STR instead
         if ($bIsTime) $rStmt->bindValue(':dateTime', $sDateTime, \PDO::PARAM_STR);
         return $rStmt->execute();
     }

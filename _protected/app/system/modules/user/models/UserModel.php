@@ -51,7 +51,7 @@ class UserModel extends UserCoreModel
         $this->setDefaultNotification();
 
         // Last thing, update the membership with the correct details
-        $this->updateMembership($aData['group_id'], $this->getKeyId(), null, $this->sCurrentDate);
+        $this->updateMembership($aData['group_id'], $this->getKeyId(), $this->sCurrentDate);
 
         return $this->getKeyId();
     }
