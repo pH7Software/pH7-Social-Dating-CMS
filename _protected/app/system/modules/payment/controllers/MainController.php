@@ -268,14 +268,13 @@ class MainController extends Controller
      */
     protected function sendNotifyMail($iMembershipId)
     {
-        $oUser = new UserCore;
         $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
 
         $sTo = DbConfig::getSetting('adminEmail');
 
         $sUsername = $this->session->get('member_username');
-        $sProfileUrl = ' (<a href="' . (new UserCore)->getProfileLink($sUsername) . '" target="_blank">"' . $sUsername . '</a>)';
-        $sBuyer = $this->session->get('member_first_name') . $sProfileUrl;
+        $sProfileLink = ' (<a href="' . (new UserCore)->getProfileLink($sUsername) . '" target="_blank">"' . $sUsername . '</a>)';
+        $sBuyer = $this->session->get('member_first_name') . $sProfileLink;
 
         $this->view->intro = t('Hello!') . '<br />' . t('Congratulation! You received a new payment from %0%', $sBuyer);
         $this->view->date = t('Date of the payment: %0%', $this->dateTime->get()->date());
