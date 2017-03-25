@@ -388,6 +388,7 @@ class Design
                 ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
+                ['title' => 'Kik or Not', 'link' => 'http://kikornot.com'],
                 ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
