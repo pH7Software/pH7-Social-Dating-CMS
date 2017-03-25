@@ -131,7 +131,7 @@ class MainController extends Controller
                         ) {
                             $this->_bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
-                            $this->notification('Stripe'); // Add info into the log file
+                            $this->notification('Stripe', $iItemNumber); // Add info into the log file
                         }
                     }
                     catch (\Stripe\Error\Card $oE) {
@@ -160,7 +160,7 @@ class MainController extends Controller
                     ) {
                         $this->_bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
-                        $this->notification('TwoCO'); // Add info into the log file
+                        $this->notification('TwoCO', $iItemNumber); // Add info into the log file
                     }
                 }
                 unset($o2CO);
@@ -195,7 +195,13 @@ class MainController extends Controller
         $this->output();
     }
 
-    public function notification($sGatewayName = '')
+    /**
+     * @param  string  $sGatewayName
+     * @param  integer $iItemNumber
+     *
+     * @return void
+     */
+    public function notification($sGatewayName = '', $iItemNumber = 0)
     {
         // Save buyer information to a log file
         if ($sGatewayName == 'PayPal' || $sGatewayName == 'Stripe' || $sGatewayName == 'TwoCO' || $sGatewayName == 'CCBill') {
@@ -204,7 +210,9 @@ class MainController extends Controller
         }
 
         // Send a notification email
-        $this->sendNotifyMail();
+        if (!empty($iItemNumber)) {
+            $this->sendNotifyMail($iItemNumber);
+        }
     }
 
     public function info()
@@ -254,19 +262,24 @@ class MainController extends Controller
     /**
      * Send a notification email to the admin about the payment (IPN -> Instant Payment Notification).
      *
+     * @param integer $iMembershipId
+     *
      * @return integer Number of recipients who were accepted for delivery.
      */
-    protected function sendNotifyMail()
+    protected function sendNotifyMail($iMembershipId)
     {
+        $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
+
         $sTo = DbConfig::getSetting('adminEmail');
         $sBuyer = $this->session->get('member_first_name') . ' (' . $this->session->get('member_username') . ')';
 
-        $this->view->intro = t('Hello!') . '<br />' . t('You received a new Payment from %0%', $sBuyer);
+        $this->view->intro = t('Hello!') . '<br />' . t('You received a new payment from %0%', $sBuyer);
         $this->view->date = t('Date of the payment: %0%', $this->dateTime->get()->date());
-        $this->view->browser_info = t('User Browser info: %0%', $this->browser->getUserAgent());
-        $this->view->ip = t('Ip of the buyer: %0%', $this->design->ip(null, false));
-        $this->view->details_text = t('Please find all other details below');
-        $this->view->details_data = print_r($_POST, true);
+        $this->view->membership_name = t('Membership name: %0%', $oMembershipData->name);
+        $this->view->membership_price = t('Amount: %0%', $oMembershipData->price);
+        $this->view->membership_duration = nt('Membership duration: %n% day', 'Membership duration: %n% days', $oMembershipData->expirationDays);
+        $this->view->browser_info = t('User Web browser info: %0%', $this->browser->getUserAgent());
+        $this->view->ip = t('Buyer IP address: %0%', $this->design->ip(null, false));
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/payment/ipn.tpl', $sTo);
 
