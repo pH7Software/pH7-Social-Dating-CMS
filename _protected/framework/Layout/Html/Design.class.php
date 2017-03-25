@@ -17,6 +17,7 @@ PH7\Framework\Core\Kernel,
 PH7\Framework\Registry\Registry,
 PH7\Framework\Mvc\Model\Engine\Db,
 PH7\Framework\Mvc\Model\DbConfig,
+PH7\UserCore,
 PH7\Framework\Url\Url,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Geo\Ip\Geo,
@@ -244,7 +245,7 @@ class Design
      */
     public function homePageUrl()
     {
-        if (\PH7\UserCore::auth()) {
+        if (UserCore::auth()) {
             if (SysMod::isEnabled('user-dashboard')) {
                 $this->url('user-dashboard', 'main', 'index');
             } else {
@@ -646,6 +647,16 @@ class Design
         echo $sUrl;
     }
 
+    /**
+     * Get the user profile link.
+     *
+     * @param string $sUsername
+     * @return string The absolute user profile link.
+     */
+    public function getProfileLink($sUsername)
+    {
+        return (new UserCore)->getProfileLink($sUsername);
+    }
 
     /**
      * Get the Gravatar URL.
@@ -698,7 +709,7 @@ class Design
             's' => $sSex
         ];
 
-        $bIsLogged = \PH7\UserCore::auth();
+        $bIsLogged = UserCore::auth();
         $sLikeLink = ($bIsLogged) ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
         $sLikeId = ($bIsLogged) ? ' id="like"' : '';
 
@@ -743,7 +754,7 @@ class Design
      */
     public function report($iId, $sUsername, $sFirstName, $sSex)
     {
-        $sReportLink = (\PH7\UserCore::auth()) ?
+        $sReportLink = (UserCore::auth()) ?
             Uri::get('report', 'main', 'abuse', '?spammer=' . $iId . '&amp;url=' . $this->oHttpRequest->currentUrl() . '&amp;type=' . Registry::getInstance()->module, false) . '" data-popup="block-page' :
             Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(['msg' => t('You must be registered to report contents.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex]), false);
 
