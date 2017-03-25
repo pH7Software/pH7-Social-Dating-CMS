@@ -524,7 +524,7 @@ class Design
      * Show the user IP address with a link to get the IP information.
      *
      * @internal If it's an IPv6, show only the beginning, otherwise it would be too long in the template.
-     * @param string $sIp IP address. Default NULL
+     * @param string $sIp Allows to speciy another IP address than the client one.
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      * @return mixed (string | void)
      */

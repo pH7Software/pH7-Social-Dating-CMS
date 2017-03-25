@@ -20,21 +20,15 @@ class Ip
     /**
      * Get IP address.
      *
-     * @static
+     * @param string $sIp Allows to speciy another IP address than the client one.
+     *
      * @return string IP address. If the IP format is invalid, returns '0.0.0.0'
      */
-    public static function get()
+    public static function get($sIp = null)
     {
-        $sIp = ''; // Default IP address value.
-        $aVars = [Server::HTTP_CLIENT_IP, Server::HTTP_X_FORWARDED_FOR, Server::REMOTE_ADDR];
-
-        foreach ($aVars as $sVar) {
-            if (null !== Server::getVar($sVar)) {
-                $sIp = Server::getVar($sVar);
-                break;
-            }
+        if (empty($sIp)) {
+            $sIp = static::getClientIp();
         }
-        unset($aVars);
 
         if (static::isPrivate($sIp))
             $sIp = '127.0.0.1'; // Avoid invalid local IP for GeoIp
@@ -45,8 +39,8 @@ class Ip
     /**
      * Returns the API IP with the IP address.
      *
-     * @static
-     * @param string $sIp IP address. Default NULL
+     * @param string $sIp IP address. Allows to speciy a specific IP.
+     *
      * @return string API URL with the IP address.
      */
     public static function api($sIp = null)
@@ -59,10 +53,30 @@ class Ip
      * Check if it's a local machine IP or not.
      *
      * @param string $sIp The IP address.
+     *
      * @return boolean Returns TRUE is it's a private IP, FALSE otherwite.
      */
     public static function isPrivate($sIp)
     {
         return filter_var($sIp, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6 | FILTER_FLAG_NO_PRIV_RANGE |  FILTER_FLAG_NO_RES_RANGE) ? false : true;
+    }
+
+    /**
+     * @return string Client IP address.
+     */
+    private static function getClientIp()
+    {
+        $sIp = ''; // Default IP address value.
+
+        $aVars = [Server::HTTP_CLIENT_IP, Server::HTTP_X_FORWARDED_FOR, Server::REMOTE_ADDR];
+        foreach ($aVars as $sVar) {
+            if (null !== Server::getVar($sVar)) {
+                $sIp = Server::getVar($sVar);
+                break;
+            }
+        }
+        unset($aVars);
+
+        return $sIp;
     }
 }
