@@ -591,8 +591,8 @@ ErrorDocument 505 /error/http/index?code=505
 SetEnv HTTP_MOD_REWRITE On
 
 # Remove www subdomain in the URL
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+# RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+# RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
 # Force the URL to be https (only if you have an SSL certificate)
 # RewriteCond %{HTTP:X-Forwarded-SSL} !on
