@@ -22,7 +22,7 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 final class Security
 {
     const PWD_ALGORITHM = PASSWORD_BCRYPT;
-    const PWD_WORK_FACTOR = 15;
+    const PWD_WORK_FACTOR = 12;
 
     const SHA512_ALGORITHM = 'sha512';
     const WHIRLPOOL_ALGORITHM = 'whirlpool';
