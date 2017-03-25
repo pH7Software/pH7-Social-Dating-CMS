@@ -279,7 +279,7 @@ class MainController extends Controller
         $this->view->intro = t('Hello!') . '<br />' . t('Congratulation! You received a new payment from %0%', $sBuyer);
         $this->view->date = t('Date of the payment: %0%', $this->dateTime->get()->date());
         $this->view->membership_name = t('Membership name: %0%', $oMembershipData->name);
-        $this->view->membership_price = t('Amount: %1%%0%', $oMembershipData->price, $this->config->values['module.setting']['currency']);
+        $this->view->membership_price = t('Amount: %1%%0%', $oMembershipData->price, $this->config->values['module.setting']['currency_sign']);
         $this->view->membership_duration = nt('Membership duration: %n% day', 'Membership duration: %n% days', $oMembershipData->expirationDays);
         $this->view->browser_info = t('User Web browser info: %0%', $this->browser->getUserAgent());
         $this->view->ip = t('Buyer IP address: %0%', $this->design->ip(null, false));
