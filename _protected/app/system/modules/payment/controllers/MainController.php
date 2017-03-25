@@ -52,13 +52,13 @@ class MainController extends Controller
 
     public function membership()
     {
-        $oMembershipModel = $this->oPayModel->getMemberships();
+        $oMembershipData = $this->oPayModel->getMemberships();
 
-        if (empty($oMembershipModel)) {
+        if (empty($oMembershipData)) {
             $this->displayPageNotFound(t('No membership found!'));
         } else {
             $this->view->page_title = $this->view->h2_title = t('Memberships List');
-            $this->view->memberships = $oMembershipModel;
+            $this->view->memberships = $oMembershipData;
             $this->output();
         }
     }
@@ -67,9 +67,9 @@ class MainController extends Controller
     {
         $iMembershipId = (int) $iMembershipId;
 
-        $oMembershipModel = $this->oPayModel->getMemberships($iMembershipId);
+        $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
 
-        if (empty($iMembershipId) || empty($oMembershipModel)) {
+        if (empty($iMembershipId) || empty($oMembershipData)) {
             $this->displayPageNotFound(t('No membership found!'));
         } else {
             // Adding the stylesheet for Gatway Logo
@@ -79,7 +79,7 @@ class MainController extends Controller
             $this->session->regenerateId();
 
             $this->view->page_title = $this->view->h2_title = t('Pay!');
-            $this->view->membership = $oMembershipModel;
+            $this->view->membership = $oMembershipData;
             $this->output();
         }
     }
