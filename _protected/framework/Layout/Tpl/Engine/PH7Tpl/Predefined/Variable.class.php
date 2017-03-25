@@ -56,9 +56,6 @@ class Variable extends Predefined
         $this->addVar('url_data_sys_mod', 'PH7_URL_DATA_SYS_MOD');
         $this->addVar('url_data_mod', 'PH7_URL_DATA_MOD');
 
-        /***** EXTENSION *****/
-        $this->addVar('page_ext', 'PH7_PAGE_EXT');
-
         /***** SYSTEM TEMPLATE *****/
         $this->addVar('url_tpl', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_SH');
         $this->addVar('url_tpl_css', 'PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS');

@@ -44,7 +44,6 @@ class SysVar
         $sVar = str_replace('%url_relative%', PH7_RELATIVE, $sVar);
         $sVar = str_replace(array('%site_url%','%url_root%'), $oRegistry->site_url, $sVar);
         $sVar = str_replace('%url_static%', PH7_URL_STATIC , $sVar);
-        $sVar = str_replace('%page_ext%', PH7_PAGE_EXT, $sVar);
         unset($oRegistry);
 
         /***** Affiliate Variables *****/

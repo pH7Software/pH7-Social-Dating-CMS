@@ -37,7 +37,6 @@ abstract class Controller extends \PH7\Framework\Core\Core
         // URL
         $this->registry->site_url = PH7_URL_ROOT;
         $this->registry->url_relative = PH7_RELATIVE;
-        $this->registry->page_ext = PH7_PAGE_EXT;
 
         // Site Name
         $this->registry->site_name = M\DbConfig::getSetting('siteName');
