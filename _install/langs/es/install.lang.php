@@ -102,7 +102,7 @@ $LANG = array(
     <p></p>Tu Panel de Administración URL es: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
     <p>No se olvide de mostrar al mostrar su nuevo sitio de citas para todos sus amigos, sus colegas y compañeros de su Facebook (e incluso a sus enemigos ... o no).</p>
     <p>Por último, si no lo has hecho todavía, es un muy buen momento para comprar hoy una clave de licencia, simplemente <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visitando nuestra página web</a> con el fin de obtener las características premium, quite todos los enlaces y notas de copyright en su sitio web e incluso el acceso a la ilimitada ticket de soporte.</p>
-    <p>&nbps;</p>
+    <p>&nbsp;</p>
     <p>P.D. Para informes de errores, sugerencias, colaboración, participación en el desarrollo y / o traducción de software, etc,
     por favor visite nuestro <a href="' . Controller::SOFTWARE_WEBSITE . '">sitio web</a>.</p>
     <p>---</p>

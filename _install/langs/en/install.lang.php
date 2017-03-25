@@ -103,7 +103,7 @@ $LANG = array(
     <p>Your Admin Panel URL is: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
     <p>Don\'t forget to show off by showing YOUR new Social/Dating Site to all your friends, your colleagues and your Facebook\'s mates (and even to your enemies... or not).</p>
     <p>Finally, if you haven\'t done it yet, it\'s a really good time to buy a license today by simply <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visiting our website</a> in order to get all Premium Modules/Features, Remove all Links and Copyright Notice on your Website and even get access to the Unlimited Support Ticket.</p>
-    <p>&nbps;</p>
+    <p>&nbsp;</p>
     <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
     please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
     <p>---</p>
