@@ -119,7 +119,7 @@ class PaymentDesign extends Framework\Core\Core
      *
      * @return string
      */
-    protected function displayGatewayForm(PaymentApi $oPaymentProvider, $sMembershipName, $sProviderName)
+    private function displayGatewayForm(PaymentApi $oPaymentProvider, $sMembershipName, $sProviderName)
     {
         echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">',
             $oPaymentProvider->generate(),
