@@ -39,7 +39,7 @@ class PaymentDesign extends Framework\Core\Core
         echo
         '<form action="', $oPayPal->getUrl(), '" method="post">',
             $oPayPal->generate(),
-            '<button class="btn btn-primary btn-lg" type="submit" name="submit">', static::buyTxt($oMembership->name, 'PayPal'), '</button>
+            '<button class="btn btn-primary btn-md" type="submit" name="submit">', static::buyTxt($oMembership->name, 'PayPal'), '</button>
         </form>';
 
         unset($oPayPal, $oMembership);
