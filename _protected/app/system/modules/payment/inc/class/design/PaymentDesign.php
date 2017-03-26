@@ -6,19 +6,21 @@
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Payment / Inc / Class / Design
- * @version        0.9
  */
 namespace PH7;
 
+use PH7\Framework\Payment\Gateway\Api\Api as PaymentApi;
 use PH7\Framework\Mvc\Router\Uri;
+use stdClass;
 
 class PaymentDesign extends Framework\Core\Core
 {
     /**
-     * @param object $oMembership The Object Membership Model.
+     * @param stdClass $oMembership
+     *
      * @return void
      */
-    public function buttonPayPal($oMembership)
+    public function buttonPayPal(stdClass $oMembership)
     {
         $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
 
@@ -36,11 +38,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PayPal,' . $oMembership->groupId))
             ->param('cancel_return', Uri::get('payment', 'main', 'membership', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
 
-        echo
-        '<form action="', $oPayPal->getUrl(), '" method="post">',
-            $oPayPal->generate(),
-            '<button class="btn btn-primary btn-md" type="submit" name="submit">', static::buyTxt($oMembership->name, 'PayPal'), '</button>
-        </form>';
+        echo static::displayGatewayForm($oPayPal, $oMembership->name, 'PayPal');
 
         unset($oPayPal, $oMembership);
     }
@@ -48,10 +46,11 @@ class PaymentDesign extends Framework\Core\Core
     /**
      * Generates Stripe Payment form thanks the Stripe API.
      *
-     * @param object $oMembership The Object Membership Model.
+     * @param stdClass $oMembership
+     *
      * @return void
      */
-    public function buttonStripe($oMembership)
+    public function buttonStripe(stdClass $oMembership)
     {
         $oStripe = new Stripe;
 
@@ -77,10 +76,11 @@ class PaymentDesign extends Framework\Core\Core
     }
 
     /**
-     * @param object $oMembership The Object Membership Model.
+     * @param stdClass $oMembership
+     *
      * @return void
      */
-    public function button2CheckOut($oMembership)
+    public function button2CheckOut(stdClass $oMembership)
     {
         $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enabled']);
 
@@ -96,33 +96,47 @@ class PaymentDesign extends Framework\Core\Core
             ->param('c_tangible', 'N')
             ->param('x_receipt_link_url', Uri::get('payment', 'main', 'process', '2co'));
 
-        echo
-        '<form action="', $o2CO->getUrl(), '" method="post">',
-            $o2CO->generate(),
-            '<button class="btn btn-primary btn-lg" type="submit" name="submit">', static::buyTxt($oMembership->name, '2CO'), '</button>
-        </form>';
+        echo static::displayGatewayForm($o2CO, $oMembership->name, '2CO');
 
         unset($o2CO);
     }
 
     /**
-     * @param object $oMembership The Object Membership Model.
+     * @param stdClass $oMembership
+     *
      * @return void
      */
-    public function buttonCCBill($oMembership)
+    public function buttonCCBill(stdClass $oMembership)
     {
+        // Not implemented yet.
+        // Feel free to contribute on our open source repo: https://github.com/pH7Software/pH7-Social-Dating-CMS
+    }
 
+    /**
+     * @param PaymentApi $oPaymentProvider
+     * @param string $sMembershipName
+     * @param string $sProviderName
+     *
+     * @return string
+     */
+    protected function displayGatewayForm(PaymentApi $oPaymentProvider, $sMembershipName, $sProviderName)
+    {
+        echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">',
+            $oPaymentProvider->generate(),
+            '<button class="btn btn-primary btn-md" type="submit" name="submit">', static::buyTxt($sMembershipName, $sProviderName), '</button>
+        </form>';
     }
 
     /**
      * Build a "buy message".
      *
      * @param string $sMembershipName Membership name (e.g., Platinum, Silver, ...).
-     * @param string $sProvider Provider name (e.g., PayPal, 2CO, ...).
+     * @param string $sProviderName Provider name (e.g., PayPal, 2CO, ...).
+     *
      * @return string
      */
-    protected static function buyTxt($sMembershipName, $sProvider)
+    private static function buyTxt($sMembershipName, $sProviderName)
     {
-        return t('Buy %0% with %1%!', $sMembershipName, '<b>' . $sProvider . '</b>');
+        return t('Buy %0% with %1%!', $sMembershipName, '<b>' . $sProviderName . '</b>');
     }
 }
