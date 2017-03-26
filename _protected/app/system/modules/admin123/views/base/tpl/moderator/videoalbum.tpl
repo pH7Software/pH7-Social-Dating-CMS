@@ -10,7 +10,7 @@
 
       <div class="thumb_photo">
         <a href="{absolute_url}" target="_blank"><img src="{url_data_sys_mod}video/file/{% $album->username %}/{% $album->albumId %}/{% $album->thumb %}" alt="{% $album->name %}" title="{% $album->name %}" /></a>
-        <p class="italic">{lang 'Posted by'} <a href="{% $oUser->getProfileLink($album->username) %}" target="_blank">{% $album->username %}</a></p>
+        <p class="italic">{lang 'Posted by'} {{ $design->getProfileLink($album->username) }}</p>
 
         <div>
           {{ $text = ($album->approved == 1) ? t('Disapproved') : t('Approved') }}

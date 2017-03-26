@@ -8,7 +8,7 @@
 
       <div class="thumb_photo">
         <a href="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{%  $file = str_replace('original', '1000',  $picture->file) %}" title="{% $picture->title %}" data-popup="image"><img src="{url_data_sys_mod}picture/img/{% $picture->username %}/{% $picture->albumId %}/{%  $file = str_replace('original', '400',  $picture->file) %}" alt="{% $picture->title %}" title="{% $picture->title %}" /></a>
-        <p class="italic">{lang 'Posted by'} <a href="{% $oUser->getProfileLink($picture->username) %}" target="_blank">{% $picture->username %}</a></p>
+        <p class="italic">{lang 'Posted by'} {{ $design->getProfileLink($picture->username) }}</p>
         <div>
           {{ $text = ($picture->approved == 1) ? t('Disapproved') : t('Approved') }}
           {{ LinkCoreForm::display($text, PH7_ADMIN_MOD,'moderator', $action, array('picture_id'=>$picture->pictureId)) }} |

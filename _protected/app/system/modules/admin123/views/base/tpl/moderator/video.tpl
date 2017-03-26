@@ -8,7 +8,7 @@
 
       <div class="m_video">
         {{ VideoDesignCore::generate($video, 'preview', 200, 200) }}
-        <p class="italic">{lang 'Posted by'} <a href="{% $oUser->getProfileLink($video->username) %}" target="_blank">{% $video->username %}</a></p>
+        <p class="italic">{lang 'Posted by'} {{ $design->getProfileLink($video->username) }}</p>
 
         <div>
           {{ $text = ($video->approved == 1) ? t('Disapproved') : t('Approved') }}

@@ -79,7 +79,7 @@
                         <td>{% $user->profileId %}</td>
                         <td>{% $user->email %}</td>
                         <td>
-                            <a href="{{ $design->getProfileLink($user->username) }}" target="_blank">{% $user->username %}</a><br />
+                            {{ $design->getProfileLink($user->username) }}<br />
                             <span class="gray">{% $user->firstName %}</span>
                         </td>
                         <td>{{ $avatarDesign->get($user->username, $user->firstName, null, 32) }}</td>

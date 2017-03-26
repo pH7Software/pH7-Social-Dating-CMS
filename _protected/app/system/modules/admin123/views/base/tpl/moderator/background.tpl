@@ -8,7 +8,7 @@
 
       <div class="thumb_photo">
         <a href="{url_data_sys_mod}user/background/img/{% $background->username %}/{% $background->file %}" title="{lang 'Wallpaper of'} {% $background->username %}" data-popup="image"><img src="{url_data_sys_mod}user/background/img/{% $background->username %}/{% $background->file %}" alt="{lang 'Wallpaper'}" title="{lang 'Wallpaper of'} {% $background->username %}" /></a>
-        <p class="italic">{lang 'Posted by'} <a href="{% $oUser->getProfileLink($background->username) %}" target="_blank">{% $background->username %}</a></p>
+        <p class="italic">{lang 'Posted by'} {{ $design->getProfileLink($background->username) }}</p>
 
         <div>
           {{ $text = ($background->approved == 1) ? t('Disapproved') : t('Approved') }}

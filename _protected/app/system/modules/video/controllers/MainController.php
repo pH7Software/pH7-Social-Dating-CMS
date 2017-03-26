@@ -23,7 +23,6 @@ class MainController extends Controller
     private $oVideoModel;
     private $oPage;
     private $sUsername;
-    private $sUsernameLink;
     private $iProfileId;
     private $sTitle;
     private $iTotalVideos;
@@ -34,13 +33,7 @@ class MainController extends Controller
 
         $this->oVideoModel = new VideoModel;
         $this->oPage = new Page;
-
         $this->sUsername = $this->httpRequest->get('username');
-
-        $oUser = new UserCore;
-        $this->sUsernameLink = $oUser->getProfileLink($this->sUsername);
-        $this->view->oUser = $oUser;
-        unset($oUser);
 
         $this->view->member_id = $this->session->get('member_id');
         $this->iProfileId = (new UserCoreModel)->getId(null, $this->sUsername);
@@ -101,9 +94,9 @@ class MainController extends Controller
             $this->notFound(false); // Because the Ajax blocks profile, we cannot put HTTP error code 404, so the attribute is FALSE
         } else {
             // We can include HTML tags in the title since the template will erase them before displaying
-            $this->sTitle = (!empty($iProfileId)) ? t("The <a href='%0%'>%1%</a>'s albums", $this->sUsernameLink, $this->str->upperFirst($this->sUsername)) : t('Video Gallery Community');
+            $this->sTitle = (!empty($iProfileId)) ? t("The %0%'s albums", $this->design->getProfileLink($this->sUsername, false)) : t('Video Gallery Community');
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
-            $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->str->upperFirst($this->sUsername));
+            $this->view->meta_description = t("%0%'s Albums | Video Albums of the Dating Social Community - %site_name%", $this->sUsername);
             $this->view->albums = $oAlbums;
         }
 
@@ -137,10 +130,10 @@ class MainController extends Controller
             $this->sTitle = t('Album not found or is still in pending approval.');
             $this->notFound();
         } else {
-            $this->sTitle = t("<a href='%0%'>%1%</a>'s video album", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
+            $this->sTitle = t("%0%s video album", $this->design->getProfileLink($this->sUsername, false));
             $this->view->page_title = $this->sTitle; // We can include HTML tags in the title since the template will erase them before displaying
             $this->view->h2_title = $this->sTitle;
-            $this->view->meta_description = t('Browse Videos From %0% | Video Album Social Community - %site_name%', $this->str->upperFirst($this->sUsername));
+            $this->view->meta_description = t('Browse Videos From %0% | Video Album Social Community - %site_name%', $this->sUsername);
             $this->view->album = $oAlbum;
 
             // Set Video Album Statistics since it needs the foreach loop and it is unnecessary to do both, we have placed in the file album.tpl
@@ -167,7 +160,7 @@ class MainController extends Controller
             $this->sTitle = t('Video not found or is still in pending approval.');
             $this->notFound();
         } else {
-            $this->sTitle = t("Watch <a href='%0%'>%1%</a>'s video", $this->sUsernameLink, $this->str->upperFirst($this->sUsername));
+            $this->sTitle = t("Watch %0%'s video", $this->design->getProfileLink($this->sUsername, false));
 
             $sTitle = Ban::filterWord($oVideo->title, false);
             $this->view->page_title = t("%0%'s video, %1%", $oVideo->firstName, $sTitle);

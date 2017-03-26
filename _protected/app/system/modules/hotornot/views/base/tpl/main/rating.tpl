@@ -13,7 +13,7 @@
     <p><a class="bold btn btn-primary" rel="nofollow" href="{{ $design->url('hotornot', 'main', 'rating') }}">{lang 'SKIP'}</a></p>
 
     <br /><hr /><br />
-    <p class="center">{{ $design->like($data->username, $data->firstName, $data->sex,(new UserCore)->getProfileLink($data->username)) }} | {{ $design->report($data->profileId, $data->username, $data->firstName, $data->sex) }}</p>
+    <p class="center">{{ $design->like($data->username, $data->firstName, $data->sex, (new UserCore)->getProfileLink($data->username)) }} | {{ $design->report($data->profileId, $data->username, $data->firstName, $data->sex) }}</p>
     {{ $design->likeApi() }}
 
   {else}

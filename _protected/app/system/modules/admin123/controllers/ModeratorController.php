@@ -33,7 +33,6 @@ class ModeratorController extends Controller
 
         $this->oPage = new Page();
         $this->oModeratorModel = new ModeratorModel;
-        $this->view->oUser = new UserCore;
     }
 
     public function index()

@@ -5,7 +5,7 @@
 
             <div class="thumb_photo">
                 {{ $avatarDesign->lightBox($avatar->username, $avatar->firstName, $avatar->sex, 300) }}
-                <p class="italic">{lang 'Posted by'} <a href="{% $oUser->getProfileLink($avatar->username) %}" target="_blank">{% $avatar->username %}</a></p>
+                <p class="italic">{lang 'Posted by'} {{ $design->getProfileLink($avatar->username) }}</p>
 
                 <div>
                   {{ $text = ($avatar->approvedAvatar == 1) ? t('Disapproved') : t('Approved') }}

@@ -651,11 +651,20 @@ class Design
      * Get the user profile link.
      *
      * @param string $sUsername
+     * @param boolean $bPrint Print or Return the HTML code.
+     *
      * @return string The absolute user profile link.
      */
-    public function getProfileLink($sUsername)
+    public function getProfileLink($sUsername, $bPrint = true)
     {
-        return (new UserCore)->getProfileLink($sUsername);
+        $sHtml = '<a href="';
+        $sHtml .= (new UserCore)->getProfileLink($sUsername);
+        $sHtml .= '" title="' . t("%0%'s profile", $sUsername) . '">' . $sUsername . '</a>';
+
+        if ($bPrint)
+            echo $sHtml;
+        else
+            return $sHtml;
     }
 
     /**

@@ -273,7 +273,7 @@ class MainController extends Controller
         $sTo = DbConfig::getSetting('adminEmail');
 
         $sUsername = $this->session->get('member_username');
-        $sProfileLink = ' (<a href="' . (new UserCore)->getProfileLink($sUsername) . '" target="_blank">' . $sUsername . '</a>)';
+        $sProfileLink = ' (' . $this->design->getProfileLink($sUsername, false) . ')';
         $sBuyer = $this->session->get('member_first_name') . $sProfileLink;
 
         $this->view->intro = t('Hello!') . '<br />' . t('Congratulation! You received a new payment from %0%', $sBuyer);
