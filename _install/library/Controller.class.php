@@ -31,7 +31,7 @@ abstract class Controller implements Controllable
     SOFTWARE_COPYRIGHT = '© (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.',
     // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO", 5.* was "pCO" and 6.* is "WoW"
     SOFTWARE_VERSION_NAME = 'WoW',
-    SOFTWARE_VERSION = '6.0.1',
+    SOFTWARE_VERSION = '6.0.8',
     SOFTWARE_BUILD = '1',
     DEFAULT_LANG = 'en',
     DEFAULT_THEME = 'base';
