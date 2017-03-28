@@ -128,9 +128,8 @@ class File
 
         if (is_array($mFile))
         {
-            foreach ($mFile as $sFile)
-            {
-                if (!$this->existFile($sFile)) {
+            foreach ($mFile as $sFile) {
+                if (!$bExists = $this->existFile($sFile)) {
                     return false;
                 }
             }
@@ -155,9 +154,8 @@ class File
 
         if (is_array($mDir))
         {
-            foreach ($mDir as $sDir)
-            {
-                if (!$this->existDir($sDir)) {
+            foreach ($mDir as $sDir) {
+                if (!$bExists = $this->existDir($sDir)) {
                     return false;
                 }
             }
@@ -788,15 +786,16 @@ class File
             return false;
         }
 
-        $bRet = false;
+        $bRet = false; // Default value
         $oIterator = new \RecursiveIteratorIterator($this->getDirIterator($sFrom), \RecursiveIteratorIterator::SELF_FIRST);
+
         foreach ($oIterator as $sFromFile) {
             $sDest = $sTo . PH7_DS . $oIterator->getSubPathName();
 
             if ($sFromFile->isDir()) {
                 $this->createDir($sDest);
             } else {
-                if (!$this->$sFuncName($sFromFile, $sDest)) {
+                if (!$bRet = $this->$sFuncName($sFromFile, $sDest)) {
                     return false;
                 }
             }
