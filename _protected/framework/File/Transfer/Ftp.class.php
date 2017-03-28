@@ -16,6 +16,8 @@ namespace PH7\Framework\File\Transfer;
 
 defined('PH7') or exit('Restricted access');
 
+use RuntimeException;
+
 class Ftp extends \PH7\Framework\File\File
 {
     /*** Alias ***/
@@ -45,12 +47,12 @@ class Ftp extends \PH7\Framework\File\File
      * @param string $sUsername
      * @param string $sPassword
      * @param string $sPath Default: '/'
-     * @throws \PH7\Framework\Error\CException\PH7RuntimeException If FTP PHP extension is not installed.
+     * @throws MissingExtensionException If FTP PHP extension is not installed.
      */
     public function __construct($sHost, $sUsername, $sPassword, $sPath = '/')
     {
         if (!extension_loaded('ftp')) {
-            throw new \PH7\Framework\Error\CException\PH7RuntimeException('FTP PHP extension is not installed!');
+            throw new MissingExtensionException('FTP PHP extension is not installed!');
         }
 
         // Attribute assignments
@@ -65,14 +67,14 @@ class Ftp extends \PH7\Framework\File\File
      *
      * @param $bSsl For a SSL-FTP connection. Default: FALSE
      * @return boolean Returns TRUE on success or FALSE on failure.
-     * @throws \PH7\Framework\File\Transfer\Exception If the host is incorrect.
+     * @throws RuntimeException If the host is incorrect.
      */
     public function connect($bSsl = false)
     {
         $sConnFunc = ($bSsl) ? 'ftp_ssl_connect' : 'ftp_connect';
 
         if (!$this->_rStream = $sConnFunc($this->_sHost)) {
-            Exception('Couldn\'t connect to \'' . $this->_sHost);
+            throw new RuntimeException('Couldn\'t connect to \'' . $this->_sHost);
         }
 
         return ftp_login($this->_rStream, $this->_sUsername, $this->_sPassword);
@@ -94,20 +96,18 @@ class Ftp extends \PH7\Framework\File\File
      *
      * @param $sDir string
      * @return boolean
-     * @throws Exception
      */
     public function existDir($sDir)
     {
-        $sCurrent = $this->getCurrentDir();
+        $sCurrentDir= $this->getCurrentDir();
 
-        try {
+        if ($this->changeDir($sCurrentDir)) {
             $this->changeDir($sDir);
-        } catch (Exception $oE) {
+            $sNewDir = $this->getCurrentDir();
+            return empty($sNewDir);
         }
 
-        $this->changeDir($sCurrent);
-
-        return empty($oE);
+        return false;
     }
 
     /**
@@ -117,7 +117,7 @@ class Ftp extends \PH7\Framework\File\File
      * @param mixed (string | array) $mDir
      * @param integer (octal) $iMode Default: 0755
      * @return void
-     * @throws Exception If the file cannot be created.
+     * @throws PermissionException If the file cannot be created.
      */
     public function createDir($mDir, $iMode = 0755)
     {
@@ -128,7 +128,7 @@ class Ftp extends \PH7\Framework\File\File
                 if (@ftp_mkdir($this->_rStream, $mDir)) {
                     $this->chmod($mDir, $iMode); // For Unix OS
                 } else {
-                    throw new Exception('Error to create file: \'' . $mDir . '\'<br /> Please verify that the directory permission is in writing mode.');
+                    throw new PermissionException('Error to create file: \'' . $mDir . '\'<br /> Please verify that the directory permission is in writing mode.');
                 }
             }
         }
@@ -140,14 +140,14 @@ class Ftp extends \PH7\Framework\File\File
      * @param string $sFrom Full path to the file on the server.
      * @param string $sTo Full path where the file will be placed on the computer.
      * @return void
-     * @throws \PH7\Framework\File\Transfer\Exception If the file cannot be transferred to the computer.
+     * @throws UploadingFileException If the file cannot be transferred to the computer.
      */
     public function get($sFrom, $sTo)
     {
         $iType = $this->getFileMode($sTo);
 
         if (!@ftp_get($this->_rStream, $sFrom, $sTo, $iType))
-            throw new Exception('There was a problem while uploading \'' . $sFrom);
+            throw new UploadingFileException('There was a problem while uploading \'' . $sFrom, RuntimeException::UPLOADING_FILE);
     }
 
     /**
@@ -157,7 +157,7 @@ class Ftp extends \PH7\Framework\File\File
      * @param string $sTo Full path where the file will be placed on the server.
      * @param integer (octal) $iMode Default: 0644
      * @return void
-     * @throws \PH7\Framework\File\Transfer\Exception If the file cannot be transferred to the server.
+     * @throws UploadingFileException If the file cannot be transferred to the server.
      */
     public function put($sFrom, $sTo, $iMode = 0644)
     {
@@ -166,7 +166,7 @@ class Ftp extends \PH7\Framework\File\File
         if (@ftp_put($this->_rStream, $sTo, $sFrom, $iType)) {
             $this->chmod($sTo, $iMode); // For Unix OS
         } else {
-            throw new Exception('There was a problem while uploading \'' . $sFrom);
+            throw new UploadingFileException('There was a problem while uploading \'' . $sFrom, RuntimeException::UPLOADING_FILE);
         }
     }
 
