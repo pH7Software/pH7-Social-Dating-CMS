@@ -38,7 +38,7 @@ class SearchUserCoreForm
     public static function quick($iWidth = null, $bSetDevVals = true)
     {
         if ($bSetDevVals) {
-            static::setAttrVals($bSetDevVals);
+            self::setAttrVals($bSetDevVals);
         }
 
          // Generate the Quick Search form
@@ -66,7 +66,7 @@ class SearchUserCoreForm
     public static function advanced($iWidth = null, $bSetDevVals = true)
     {
         if ($bSetDevVals) {
-            static::setAttrVals($bSetDevVals);
+            self::setAttrVals($bSetDevVals);
         }
 
          // Generate the Advanced Search form
@@ -149,19 +149,19 @@ class SearchUserCoreForm
         if ($oHttpRequest->getExists('match_sex')) {
             self::$aSexOption += ['value' => $oHttpRequest->get('match_sex')];
         } else {
-            self::$aSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['user_sex']];
+            self::$aSexOption += ['value' => self::getGenderVals($oUserModel, $oSession)['user_sex']];
         }
 
         if ($oHttpRequest->getExists('sex')) {
             self::$aMatchSexOption += ['value' => $oHttpRequest->get('sex')];
         } else {
-            self::$aMatchSexOption += ['value' => static::getGenderVals($oUserModel, $oSession)['match_sex']];
+            self::$aMatchSexOption += ['value' => self::getGenderVals($oUserModel, $oSession)['match_sex']];
         }
 
         if ($oHttpRequest->getExists(['age1', 'age2'])) {
             self::$aAgeOption = ['value' => ['min_age' => $oHttpRequest->get('age1'), 'max_age' => $oHttpRequest->get('age2')]];
         } else {
-            self::$aAgeOption = ['value' => static::getAgeVals($oUserModel, $oSession)];
+            self::$aAgeOption = ['value' => self::getAgeVals($oUserModel, $oSession)];
         }
 
         if ($oHttpRequest->getExists('country')) {
