@@ -24,7 +24,7 @@ class Required extends \PFBC\Validation
         if (!is_null($mValue)) {
             if (is_array($mValue)) {
                 foreach ($mValue as $sItem) {
-                    if (!$this->isValid($sItem)) {
+                    if (!$bValid = $this->isValid($sItem)) {
                         return false;
                       }
                 }
@@ -32,6 +32,7 @@ class Required extends \PFBC\Validation
                 $bValid = ($mValue !== '');
             }
         }
+
         return $bValid;
     }
 }
