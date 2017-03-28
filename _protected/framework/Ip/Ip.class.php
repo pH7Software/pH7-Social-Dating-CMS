@@ -29,7 +29,7 @@ class Ip
     public static function get($sIp = null)
     {
         if (empty($sIp)) {
-            $sIp = static::getClientIp();
+            $sIp = self::getClientIp();
         }
 
         if (static::isPrivate($sIp)) {

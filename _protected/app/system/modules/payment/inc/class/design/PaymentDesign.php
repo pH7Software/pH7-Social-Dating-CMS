@@ -38,7 +38,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PayPal,' . $oMembership->groupId))
             ->param('cancel_return', Uri::get('payment', 'main', 'membership', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
 
-        echo static::displayGatewayForm($oPayPal, $oMembership->name, 'PayPal');
+        echo self::displayGatewayForm($oPayPal, $oMembership->name, 'PayPal');
 
         unset($oPayPal, $oMembership);
     }
@@ -96,7 +96,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('c_tangible', 'N')
             ->param('x_receipt_link_url', Uri::get('payment', 'main', 'process', '2co'));
 
-        echo static::displayGatewayForm($o2CO, $oMembership->name, '2CO');
+        echo self::displayGatewayForm($o2CO, $oMembership->name, '2CO');
 
         unset($o2CO);
     }
@@ -123,7 +123,7 @@ class PaymentDesign extends Framework\Core\Core
     {
         echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">',
             $oPaymentProvider->generate(),
-            '<button class="btn btn-primary btn-md" type="submit" name="submit">', static::buyTxt($sMembershipName, $sProviderName), '</button>
+            '<button class="btn btn-primary btn-md" type="submit" name="submit">', self::buyTxt($sMembershipName, $sProviderName), '</button>
         </form>';
     }
 
