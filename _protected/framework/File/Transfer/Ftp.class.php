@@ -147,7 +147,7 @@ class Ftp extends \PH7\Framework\File\File
         $iType = $this->getFileMode($sTo);
 
         if (!@ftp_get($this->_rStream, $sFrom, $sTo, $iType))
-            throw new UploadingFileException('There was a problem while uploading \'' . $sFrom, RuntimeException::UPLOADING_FILE);
+            throw new UploadingFileException('There was a problem while uploading \'' . $sFrom);
     }
 
     /**
@@ -166,7 +166,7 @@ class Ftp extends \PH7\Framework\File\File
         if (@ftp_put($this->_rStream, $sTo, $sFrom, $iType)) {
             $this->chmod($sTo, $iMode); // For Unix OS
         } else {
-            throw new UploadingFileException('There was a problem while uploading \'' . $sFrom, RuntimeException::UPLOADING_FILE);
+            throw new UploadingFileException('There was a problem while uploading \'' . $sFrom);
         }
     }
 
