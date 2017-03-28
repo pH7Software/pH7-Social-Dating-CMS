@@ -3,20 +3,22 @@
  * Many changes have been made in this file.
  * By Pierre-Henry SORIA.
  */
+
 namespace PFBC;
+
 use PH7\Framework\Security\Validate\Validate;
 
 abstract class Validation extends Base
 {
-
     protected $oValidate, $message;
 
     public function __construct($message = '')
     {
         $this->oValidate = new Validate;
 
-        if(!empty($message))
+        if (!empty($message)) {
             $this->message = t('%element% is invalid.');
+          }
     }
 
     public function getMessage()
@@ -30,10 +32,4 @@ abstract class Validation extends Base
     }
 
     public abstract function isValid($value);
-
-    public function __destruct()
-    {
-        unset($this->oValidate, $this->message);
-    }
-
 }

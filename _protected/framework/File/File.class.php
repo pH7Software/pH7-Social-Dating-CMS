@@ -7,22 +7,22 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / File
- * @version          1.3
  */
 
 namespace PH7\Framework\File;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class File
 {
-
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
 
     /**
      * Mime Types list.
      *
-     * @access private
      * @staticvar array $_aMimeTypes
      */
     private static $_aMimeTypes = [
@@ -128,10 +128,11 @@ class File
 
         if (is_array($mFile))
         {
-            foreach ($mFile as $sF)
+            foreach ($mFile as $sFile)
             {
-                if (!$bExists = $this->existFile($sF))
-                    break;
+                if (!$this->existFile($sFile)) {
+                    return false;
+                }
             }
         }
         else
@@ -154,10 +155,11 @@ class File
 
         if (is_array($mDir))
         {
-            foreach ($mDir as $sD)
+            foreach ($mDir as $sDir)
             {
-                if (!$bExists = $this->existDir($sD))
-                    break;
+                if (!$this->existDir($sDir)) {
+                    return false;
+                }
             }
         }
         else
@@ -428,7 +430,6 @@ class File
      * Get the version of a file based on the its latest modification.
      * Shortened form of self::getModifTime()
      *
-     * @static
      * @param string Full path of the file.
      * @return integer Returns the latest modification time of the file in Unix timestamp.
      */
@@ -509,6 +510,7 @@ class File
             }
         }
         closedir($rHandle);
+
         return $iSize;
     }
 
@@ -638,7 +640,8 @@ class File
      */
     public function readFiles($sPath = './', &$mFiles)
     {
-        if (!($rHandle = opendir($sPath))) return false;
+        if (!($rHandle = opendir($sPath)))
+            return false;
 
         while (false !== ($sFile = readdir($rHandle)))
         {
@@ -651,6 +654,7 @@ class File
             }
         }
         closedir($rHandle);
+
         return $mFiles;
     }
 
@@ -674,6 +678,7 @@ class File
             $aRet[] = $sFolder;//remove it for yield
         }
         closedir($rHandle);
+
         return $aRet;//remove it for yield
     }
 
@@ -729,10 +734,10 @@ class File
         if (file_exists($sFile))
         {
             if (!is_file($sFile))
-                return 0;
+                return false;
 
             if (preg_match('/^(.*?)\.(gif|jpg|jpeg|png|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i', $sFile))
-                return 1;
+                return true;
 
             $rHandle  = fopen($sFile, 'r');
             $sContents = fread($rHandle, 512); // Get 512 bytes of the file.
@@ -747,7 +752,8 @@ class File
                 or substr_count($sContents, "\x00") > 0
             );
         }
-        return 0;
+
+        return false;
     }
 
     /**
@@ -764,32 +770,38 @@ class File
     /**
      * Recursive Directory Iterator.
      *
-     * @access private
      * @param string $sFuncName The function name. Choose between 'copy' and 'rename'.
      * @param string $sFrom Directory.
      * @param string $sTo Directory.
+     *
      * @return boolean
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the type is bad.
+     *
+     * @throws PH7InvalidArgumentException If the type is bad.
      */
     private function _recursiveDirIterator($sFrom, $sTo, $sFuncName)
     {
-        if ($sFuncName !== 'copy' && $sFuncName !== 'rename')
-            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Bad function name: \'' . $sFuncName . '\'');
+        if ($sFuncName !== 'copy' && $sFuncName !== 'rename') {
+            throw new PH7InvalidArgumentException('Bad function name: \'' . $sFuncName . '\'');
+        }
 
-        if (!is_dir($sFrom)) return false;
+        if (!is_dir($sFrom)) {
+            return false;
+        }
 
         $bRet = false;
         $oIterator = new \RecursiveIteratorIterator($this->getDirIterator($sFrom), \RecursiveIteratorIterator::SELF_FIRST);
-        foreach ($oIterator as $sFromFile)
-        {
+        foreach ($oIterator as $sFromFile) {
             $sDest = $sTo . PH7_DS . $oIterator->getSubPathName();
 
-            if ($sFromFile->isDir())
+            if ($sFromFile->isDir()) {
                 $this->createDir($sDest);
-            else
-                if (!$bRet = $this->$sFuncName($sFromFile, $sDest)) break;
+            } else {
+                if (!$this->$sFuncName($sFromFile, $sDest)) {
+                    return false;
+                }
+            }
         }
+
         return $bRet;
     }
-
 }

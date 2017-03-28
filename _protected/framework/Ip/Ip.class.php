@@ -11,9 +11,11 @@
  */
 
 namespace PH7\Framework\Ip;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Server\Server, PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Server\Server;
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class Ip
 {
@@ -30,8 +32,9 @@ class Ip
             $sIp = static::getClientIp();
         }
 
-        if (static::isPrivate($sIp))
+        if (static::isPrivate($sIp)) {
             $sIp = '127.0.0.1'; // Avoid invalid local IP for GeoIp
+        }
 
         return preg_match('/^[a-z0-9:.]{7,}$/', $sIp) ? $sIp : '127.0.0.1';
     }
@@ -45,7 +48,7 @@ class Ip
      */
     public static function api($sIp = null)
     {
-        $sIp = (empty($sIp)) ? static::get() : $sIp;
+        $sIp = empty($sIp) ? static::get() : $sIp;
         return DbConfig::getSetting('ipApi') . $sIp;
     }
 
@@ -66,17 +69,13 @@ class Ip
      */
     private static function getClientIp()
     {
-        $sIp = ''; // Default IP address value.
-
         $aVars = [Server::HTTP_CLIENT_IP, Server::HTTP_X_FORWARDED_FOR, Server::REMOTE_ADDR];
         foreach ($aVars as $sVar) {
             if (null !== Server::getVar($sVar)) {
-                $sIp = Server::getVar($sVar);
-                break;
+                return Server::getVar($sVar);
             }
         }
-        unset($aVars);
 
-        return $sIp;
+        return ''; // Default IP address value.
     }
 }
