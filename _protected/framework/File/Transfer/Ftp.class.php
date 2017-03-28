@@ -65,7 +65,7 @@ class Ftp extends \PH7\Framework\File\File
     /**
      * Connect to FTP server.
      *
-     * @param $bSsl For a SSL-FTP connection. Default: FALSE
+     * @param boolean $bSsl For a SSL-FTP connection. Default: FALSE
      * @return boolean Returns TRUE on success or FALSE on failure.
      * @throws RuntimeException If the host is incorrect.
      */
