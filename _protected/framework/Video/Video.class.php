@@ -17,10 +17,12 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Date\Various;
 use PH7\Framework\Config\Config;
-use PH7\Framework\Error\CException\PH7BadMethodCallException;
-use PH7\Framework\File as F;
+use PH7\Framework\File\File;
+use PH7\Framework\File\Upload;
+use PH7\Framework\File\TooLargeException;
+use PH7\Framework\File\MissingProgramException;
 
-class Video extends F\Upload
+class Video extends Upload
 {
     private $oFile, $sType, $sFfmpegPath, $aFile;
 
@@ -45,23 +47,23 @@ class Video extends F\Upload
      * @constructor
      * @param array $aFile Example: $_FILES['video']
      * @return void
-     * @throws \PH7\Framework\File\Exception If FFmpeg is not installed.
+     * @throws MissingProgramException If FFmpeg is not installed.
      */
     public function __construct($aFile)
     {
-        $this->oFile = new F\File;
+        $this->oFile = new File;
         $this->sFfmpegPath = Config::getInstance()->values['video']['handle.ffmpeg_path'];
 
         if (!file_exists($this->sFfmpegPath))
         {
             $sMsg = t('FFmpeg is not installed on the server or the path cannot be found. Please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini" or contact the administrator of the site/server or Web host by saying the problem.');
-            throw new F\Exception($sMsg);
+            throw new MissingProgramException($sMsg);
         }
 
         $this->aFile = $aFile;
         $this->sType = $this->aFile['type'];
 
-        /** Attributes for PH7\Framework\File\Upload abstract class **/
+        /** Attributes from "Upload" abstract class **/
         $this->sMaxSize = Config::getInstance()->values['video']['upload.max_size'];
         $this->iFileSize = (int) $this->aFile['size'];
     }
@@ -70,7 +72,7 @@ class Video extends F\Upload
      * Video Validate.
      *
      * @return bool
-     * @throws PH7BadMethodCallException If the video file is not found.
+     * @throws TooLargeException If the video file is not found.
      */
     public function validate()
     {
@@ -78,7 +80,7 @@ class Video extends F\Upload
             if (!isDebug()) {
                 return false;
             } else {
-                throw new PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
+                throw new TooLargeException('The file could not be uploaded. Possibly too large.');
             }
         } else {
             return in_array($this->sType, $this->aAllowedTypes);
@@ -163,7 +165,7 @@ class Video extends F\Upload
     public function __destruct()
     {
         // If it exists, delete the temporary video
-        (new F\File)->deleteFile($this->aFile['tmp_name']);
+        (new File)->deleteFile($this->aFile['tmp_name']);
 
         unset(
             $this->oFile,

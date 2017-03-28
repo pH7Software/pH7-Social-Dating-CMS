@@ -17,8 +17,8 @@ namespace PH7\Framework\Image;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\File;
-use PH7\Framework\Error\CException\PH7BadMethodCallException;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use use PH7\Framework\File\TooLargeException;
 
 class Image
 {
@@ -70,7 +70,7 @@ class Image
 
     /**
      * @return bool
-     * @throws PH7BadMethodCallException If the image file is not found.
+     * @throws TooLargeException If the image file is not found.
      */
     public function validate()
     {
@@ -78,7 +78,7 @@ class Image
 
         if (!is_file($this->sFile) || !$mImgType) {
             if (isDebug()) {
-                throw new PH7BadMethodCallException('The file could not be uploaded. Possibly too large.');
+                throw new TooLargeException('The file could not be uploaded. Possibly too large.');
             } else {
                 return false;
             }
