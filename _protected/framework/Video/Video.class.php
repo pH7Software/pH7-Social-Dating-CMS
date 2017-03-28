@@ -174,5 +174,4 @@ class Video extends Upload
             $this->aFile
         );
     }
-
 }

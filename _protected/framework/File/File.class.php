@@ -13,6 +13,11 @@ namespace PH7\Framework\File;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Server\Server;
+use PH7\Framework\Url\Url;
+use PH7\Framework\Parse\Url as ParseUrl;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Registry\Registry;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class File
@@ -81,7 +86,7 @@ class File
      * Example 2 "my_file.inc.pl" The return value is "my_file.inc"
      * Example 3 "my_file.class.html.php" The return value is "my_file.class.html"
      *
-     * @see \PH7\Framework\File\File::getFileExt() To see the method that retrieves the file extension.
+     * @see File::getFileExt() To see the method that retrieves the file extension.
      * @param string $sFile
      * @return string
      */
@@ -256,7 +261,7 @@ class File
      */
     public function checkExtDir($sDir, $bStart = false, $bEnd = true)
     {
-        $bIsWindows = \PH7\Framework\Server\Server::isWindows();
+        $bIsWindows = Server::isWindows();
 
         if (!$bIsWindows && $bStart === true && substr($sDir, 0, 1) !== PH7_DS)
             $sDir = PH7_DS . $sDir;
@@ -274,7 +279,7 @@ class File
      * @param mixed (string | array) $mDir
      * @param integer (octal) $iMode Default: 0777
      * @return void
-     * @throws \PH7\Framework\File\Exception If the file cannot be created.
+     * @throws Exception If the file cannot be created.
      */
     public function createDir($mDir, $iMode = 0777)
     {
@@ -553,7 +558,7 @@ class File
 
         //if (!is_readable($sFile)) exit('File not found or inaccessible!');
 
-        $sName = \PH7\Framework\Url\Url::decode($sName); // Clean the name file
+        $sName = Url::decode($sName); // Clean the name file
 
         /* Figure out the MIME type (if not specified) */
 
@@ -572,11 +577,11 @@ class File
 
         @ob_end_clean(); // Turn off output buffering to decrease CPU usage
 
-        (new \PH7\Framework\Navigation\Browser)->nocache(); // No cache
+        (new Browser)->nocache(); // No cache
 
-        $sPrefix = \PH7\Framework\Registry\Registry::getInstance()->site_name . '_'; // the prefix
+        $sPrefix = Registry::getInstance()->site_name . '_'; // the prefix
         header('Content-Type: ' . $sMimeType);
-        header('Content-Disposition: attachment; filename=' . \PH7\Framework\Parse\Url::clean($sPrefix) . $sName);
+        header('Content-Disposition: attachment; filename=' . ParseUrl::clean($sPrefix) . $sName);
         header('Content-Transfer-Encoding: binary');
         header('Accept-Ranges: bytes');
         header('Content-Length: ' . $this->size($sFile));
