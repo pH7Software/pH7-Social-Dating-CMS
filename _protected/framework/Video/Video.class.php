@@ -165,7 +165,7 @@ class Video extends Upload
     public function __destruct()
     {
         // If it exists, delete the temporary video
-        (new File)->deleteFile($this->aFile['tmp_name']);
+        $this->oFile->deleteFile($this->aFile['tmp_name']);
 
         unset(
             $this->oFile,
