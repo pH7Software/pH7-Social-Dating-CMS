@@ -1,6 +1,7 @@
 <?php
 
 $aRules = [
+    '@PSR2' => true,
     '@Symfony' => true,
     'array_syntax' => ['syntax' => 'short'],
     'combine_consecutive_unsets' => true,
@@ -15,21 +16,22 @@ $aRules = [
     'no_useless_else' => true,
     'no_useless_return' => true,
     'ordered_class_elements' => true,
-    'ordered_imports' => true,
-    'php_unit_strict' => true,
     'phpdoc_add_missing_param_annotation' => true,
     'phpdoc_order' => true,
     'semicolon_after_instruction' => true,
     'psr4' => true,
     'strict_comparison' => true,
-    'strict_param' => true
+    'strict_param' => true,
+    'standardize_not_equals' => true
 ];
+
 return PhpCsFixer\Config::create()
     ->setRiskyAllowed(false)
     ->setRules($aRules)
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->exclude('_procted/vendor')
-            ->in(__DIR__)
+            ->exclude('vendor')
+            ->exclude('library')
+            ->in('_protected')
     )
 ;
