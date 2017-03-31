@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ruleset name="PHP_CodeSniffer">
+    <file>_protected</file>
+
+    <arg name="colors"/>
+    <arg name="report" value="full"/>
+
+    <rule ref="PSR2"/>
+</ruleset>
