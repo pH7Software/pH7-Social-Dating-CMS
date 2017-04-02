@@ -452,14 +452,14 @@
             {if !$is_valid_license}
                 <li><a class="bold underline" href="{software_license_url}" title="{lang 'Buy a License Key'}"><i class="fa fa-key"></i> {lang 'Switch to pH7CMSPro'}</a></li>
             {/if}
-            <li><a href="https://clients.hizup.com/buy-custom-development" title="{lang 'Need Customization/New Feature?'}"><i class="fa fa-wrench"></i> {lang 'Customization/New Feature'}</a></li>
             <li><a href="{software_help_url}" title="{lang 'Need Professional Technical Supports?'}"><i class="fa fa-life-ring"></i> {lang 'Technical Support'}</a></li>
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
             <li><a href="{software_faq_url}" title="{lang 'Frequently Asked Questions'}"><i class="fa fa-question"></i> {lang 'FAQ'}</a></li>
-            <li><a href="http://ph7cms.com/how-to-report-bugs" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
-            <li><a href="http://smartfreelancer.top" title="{lang 'Are you selling on Fiverr? Market and Boost your Gigs Today!'}"><i class="fa fa-star-o"></i> {lang 'Are you a Fiverr seller? Market your Gigs!'}</a></li>
+            <li><a href="https://github.com/pH7Software/pH7-Social-Dating-CMS/issues/" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
+            <li><a href="http://appninja.space" title="{lang 'Do you have Android Apps..? Boost them with a full marketing service!'}"><i class="fa fa-star"></i> {lang 'Market your Android Apps'}</a></li>
+            <li><a href="http://smartfreelancer.top" title="{lang 'Are you selling on Fiverr? Market and Boost your Gigs Today!'}"><i class="fa fa-star-o"></i> {lang 'Are you selling Fiverr? Market your Gigs!'}</a></li>
             {* Coming soon ...
-            <li><a href="{software_forum_url}" title="{lang 'Support Forum'}">{lang 'Forum'}</a></li>
+              <li><a href="{software_forum_url}" title="{lang 'Support Forum'}">{lang 'Forum'}</a></li>
             *}
           </ul>
         </li>

@@ -16,6 +16,8 @@ _protected/data/cache/*
 _protected/vendor/*
 composer.phar
 phpunit.phar
+.php_cs
+.php_cs.cache
 *.log
 *.tmp
 
