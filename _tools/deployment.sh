@@ -75,6 +75,12 @@ function run() {
             rm -rf ./_tests/
             rm -rf ./.git/
 
+            ## PHPCS
+            rm ./phpcs.xml.dist
+            rm ./.php_cs
+            rm ./.php_cs.cache
+            rm ./.php_cs.dist
+
             ## TMP folders
             # elFinder cache folders
             rm -rf ./.quarantine/
