@@ -6,8 +6,8 @@
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form
- * @version        1.5
  */
+
 namespace PH7;
 
 use
@@ -31,14 +31,15 @@ class SearchUserCoreForm
     private static $aStateOption = ['id' => 'str_state'];
 
     /**
-     * @param integer $iWidth Width of the form in pixel. Default: NULL (so will be 100%)
-     * @param boolean $bSetDevVals Set default values in the form fields, or not... Default: TRUE
+     * @param integer $iWidth Width of the form in pixel. If null, will be 100%
+     * @param boolean $bSetDefVals Set default values in the form fields, or not...
+     *
      * @return void HTML output.
      */
-    public static function quick($iWidth = null, $bSetDevVals = true)
+    public static function quick($iWidth = null, $bSetDefVals = true)
     {
-        if ($bSetDevVals) {
-            self::setAttrVals($bSetDevVals);
+        if ($bSetDefVals) {
+            self::setAttrVals();
         }
 
          // Generate the Quick Search form
@@ -59,14 +60,15 @@ class SearchUserCoreForm
     }
 
     /**
-     * @param integer $iWidth Width of the form in pixel. Default: NULL (so will be 100%)
-     * @param boolean $bSetDevVals Set default values in the form fields, or not... Default: TRUE
+     * @param integer $iWidth Width of the form in pixel. If null, will be 100%
+     * @param boolean $bSetDefVals Set default values in the form fields, or not...
+     *
      * @return void HTML output.
      */
-    public static function advanced($iWidth = null, $bSetDevVals = true)
+    public static function advanced($iWidth = null, $bSetDefVals = true)
     {
-        if ($bSetDevVals) {
-            self::setAttrVals($bSetDevVals);
+        if ($bSetDefVals) {
+            self::setAttrVals();
         }
 
          // Generate the Advanced Search form
@@ -93,8 +95,9 @@ class SearchUserCoreForm
     /**
      * If a user is logged, get the relative 'user_sex' and 'match_sex' for better and more intuitive search.
      *
-     * @param object \PH7\UserCoreModel $oUserModel
-     * @param object \PH7\Framework\Session\Session $oSession
+     * @param object UserCoreModel $oUserModel
+     * @param object Session $oSession
+     *
      * @return array The 'user_sex' and 'match_sex'
      */
     protected static function getGenderVals(UserCoreModel $oUserModel, Session $oSession)
@@ -114,8 +117,9 @@ class SearchUserCoreForm
     /**
      * If a user is logged, get "approximately" the relative age for better and more intuitive search.
      *
-     * @param object \PH7\UserCoreModel $oUserModel
-     * @param object \PH7\Framework\Session\Session $oSession
+     * @param object UserCoreModel $oUserModel
+     * @param object Session $oSession
+     *
      * @return array 'min_age' and 'max_age' which is the approximately age the user is looking for.
      */
     protected static function getAgeVals(UserCoreModel $oUserModel, Session $oSession)
