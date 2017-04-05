@@ -12,7 +12,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-/*** We define the URL if overwrite mode is enabled (to enable it. Htaccess must be present in the current directory) ***/
+/* We define the URL if mod_rewrite is enabled (to enable it, .htaccess has be present in the current directory) */
 define( 'PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . (!is_url_rewrite() ? '?a=' : '') );
 
 $sCtrlName = ucfirst((!empty($_GET['c']) ? $_GET['c'] : 'install')) . 'Controller';
