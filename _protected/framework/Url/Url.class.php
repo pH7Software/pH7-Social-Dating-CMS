@@ -10,6 +10,7 @@
  */
 
 namespace PH7\Framework\Url;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Pattern\Statik;

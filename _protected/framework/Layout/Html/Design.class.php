@@ -10,27 +10,33 @@
  */
 
 namespace PH7\Framework\Layout\Html;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Core\Kernel,
-PH7\Framework\Registry\Registry,
-PH7\Framework\Mvc\Model\Engine\Db,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\UserCore,
-PH7\Framework\Url\Url,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Str\Str,
-PH7\Framework\File\File,
-PH7\Framework\Session\Session,
-PH7\Framework\Navigation\Page,
-PH7\Framework\Geo\Misc\Country,
-PH7\Framework\Benchmark\Benchmark,
-PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl,
-PH7\Framework\Module\Various as SysMod,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\UserCore;
+use PH7\Framework\Parse\Url as UrlParser;
+use PH7\Framework\Url\Url;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Str\Str;
+use PH7\Framework\File\File;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Geo\Misc\Country;
+use PH7\Framework\Benchmark\Benchmark;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Navigation\Pagination;
+use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Router\Uri;
 
 class Design
 {
@@ -75,7 +81,7 @@ class Design
         /** Instance objects for the class **/
         $this->oStr = new Str;
         $this->oSession = new Session;
-        $this->oHttpRequest = new Http;
+        $this->oHttpRequest = new HttpRequest;
     }
 
     public function langList()
@@ -364,7 +370,7 @@ class Design
             return;
 
         // Get Client's Language Code
-        $sLangCode = (new \PH7\Framework\Navigation\Browser)->getLanguage(true);
+        $sLangCode = (new Browser)->getLanguage(true);
 
         if ($sLangCode == 'en-ie') {
             $aSites = [
@@ -570,7 +576,7 @@ class Design
      */
     public function pagination($iTotalPages, $iCurrentPage)
     {
-        echo (new \PH7\Framework\Navigation\Pagination($iTotalPages, $iCurrentPage))->getHtmlCode();
+        echo (new Pagination($iTotalPages, $iCurrentPage))->getHtmlCode();
     }
 
     /**
@@ -583,7 +589,7 @@ class Design
      */
     public function getUserAvatar($sUsername, $sSex = '', $iSize = '')
     {
-        $oCache = (new \PH7\Framework\Cache\Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize, 3600);
+        $oCache = (new Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize, 3600);
 
         if (!$sUrl = $oCache->get())
         {
@@ -619,10 +625,10 @@ class Design
                     // Get the User Email
                     $sEmail = $oUserModel->getEmail($iProfileId);
 
-                    $bSecuredGravatar = \PH7\Framework\Http\Http::isSsl();
+                    $bSecuredGravatar = Http::isSsl();
                     $sUrl = $this->getGravatarUrl($sEmail, '404', $iSize, 'g', $bSecuredGravatar);
 
-                    if (!(new \PH7\Framework\Security\Validate\Validate)->url($sUrl, true))
+                    if (!(new Validate)->url($sUrl, true))
                     {
                         // If there is no Gravatar, we set the default pH7CMS's avatar
                         $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/' . $sIcon . '_no_picture' . $sSize . self::AVATAR_IMG_EXT;
@@ -692,8 +698,8 @@ class Design
      */
     public function favicon($sUrl)
     {
-        $sImg = \PH7\Framework\Navigation\Browser::favicon($sUrl);
-        $sName = \PH7\Framework\Http\Http::getHostName($sUrl);
+        $sImg = Browser::favicon($sUrl);
+        $sName = Http::getHostName($sUrl);
 
         $this->imgTag($sImg, $sName, ['width'=>16, 'height'=>16]);
     }
@@ -758,7 +764,7 @@ class Design
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
-     * @internal We do not use \PH7\Framework\Url\Url::httpBuildQuery() method for the first condition otherwise the URL is distorted and it doesn't work.
+     * @internal We do not use Url::httpBuildQuery() method for the first condition otherwise the URL is distorted and it doesn't work.
      * @return void
      */
     public function report($iId, $sUsername, $sFirstName, $sSex)
@@ -779,7 +785,7 @@ class Design
      */
     public function urlTag($sLink, $bNoFollow = true)
     {
-        $sLinkName = \PH7\Framework\Parse\Url::name($sLink);
+        $sLinkName = UrlParser::name($sLink);
         $aDefAttrs = ['href' => $sLink, 'title' => $sLinkName];
 
         if ($bNoFollow)
