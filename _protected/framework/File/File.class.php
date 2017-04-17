@@ -425,7 +425,7 @@ class File
     /**
      * Get the creation/modification time of a file in the Unix timestamp.
      *
-     * @param string Full path of the file.
+     * @param string $sFile Full path of the file.
      * @return integer|boolean Returns the time the file was last modified, or FALSE if it not found.
      */
     public function getModifTime($sFile)
@@ -437,7 +437,7 @@ class File
      * Get the version of a file based on the its latest modification.
      * Shortened form of self::getModifTime()
      *
-     * @param string Full path of the file.
+     * @param string $sFile Full path of the file.
      * @return integer Returns the latest modification time of the file in Unix timestamp.
      */
     public static function version($sFile)
