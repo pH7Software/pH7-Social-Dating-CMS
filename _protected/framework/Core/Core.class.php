@@ -6,18 +6,18 @@
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
- * @link             http://software.hizup.com
+ * @link             http://ph7cms.com
  * @package          PH7 / Framework / Core
  */
 
 namespace PH7\Framework\Core;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Session\Session,
-PH7\Framework\Layout\Html\Design,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 
 abstract class Core extends Kernel
 {

@@ -7,17 +7,17 @@
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / Framework / Server
- * @version        1.0
  */
 
 namespace PH7\Framework\Server;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel, PH7\Framework\Url\Uri;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\Url\Uri;
 
 final class Server
 {
-
     const
     SERVER_PORT = 'SERVER_PORT',
     SERVER_PROTOCOL = 'SERVER_PROTOCOL',
@@ -164,5 +164,4 @@ final class Server
     {
         return \PH7\is_internet();
     }
-
 }
