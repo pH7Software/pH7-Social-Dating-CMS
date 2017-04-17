@@ -362,7 +362,7 @@ class Design
     /**
      * The below code MUST be present if you didn't pay a pH7CMS Pro License.
      *
-     * @return string Returns relevant link based on the client browser's language.
+     * @return void Output the relevant link based on the client browser's language.
      */
     final public function smartLink()
     {
