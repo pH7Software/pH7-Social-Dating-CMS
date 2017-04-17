@@ -11,21 +11,24 @@
  */
 
 namespace PH7\Framework\Navigation;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Str\Str, PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Server\Server;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Server\Server;
 
 /**
  * @internal In this class, there're some yoda conditions.
  */
 class Browser
 {
-
     /**
      * Detect the user's preferred language.
      *
-     * @param boollean $bFullLangCode If TRUE, returns the full lang code (e.g., en-us, en-gb, en-ie, en-au, fr-fr, fr-be, fr-ca, fr-ch, ...),
+     * @param boolean $bFullLangCode If TRUE, returns the full lang code (e.g., en-us, en-gb, en-ie, en-au, fr-fr, fr-be, fr-ca, fr-ch, ...),
      *     otherwise returns the two letters of the client browser's language (e.g., en, it, fr, ru, ...). Default: FALSE
+     *
      * @return string Client's Language Code.
      */
     public function getLanguage($bFullLangCode = false)
@@ -40,6 +43,7 @@ class Browser
 
     /**
      * Active browser cache.
+     *
      * @return object this
      */
     public function cache()
@@ -168,6 +172,7 @@ class Browser
      *
      * @static
      * @param string $sUrl
+     *
      * @return string The favicon image.
      */
     public static function favicon($sUrl)
@@ -177,5 +182,4 @@ class Browser
 
         return $sApiUrl . $sDomainName;
     }
-
 }
