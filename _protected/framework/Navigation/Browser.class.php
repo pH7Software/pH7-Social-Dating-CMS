@@ -44,7 +44,7 @@ class Browser
     /**
      * Active browser cache.
      *
-     * @return object this
+     * @return Browser
      */
     public function cache()
     {
@@ -59,7 +59,7 @@ class Browser
     /**
      * Prevent caching in the browser.
      *
-     * @return object this
+     * @return Browser
      */
     public function noCache()
     {
@@ -77,7 +77,7 @@ class Browser
     /**
      * Are we capable to receive gzipped data?
      *
-     * @return mixed (string | boolean) Returns the encoding if it is accepted, false otherwise. Maybe additional check for Mac OS...
+     * @return string|boolean Returns the encoding if it is accepted, false otherwise. Maybe additional check for Mac OS...
      */
     public function encoding()
     {
@@ -144,7 +144,7 @@ class Browser
     }
 
     /**
-     * @return mixed (string | null) The HTTP User Agent is it exists, otherwise the NULL value.
+     * @return string|null The HTTP User Agent is it exists, otherwise the NULL value.
      */
     public function getUserAgent()
     {
@@ -152,7 +152,7 @@ class Browser
     }
 
     /**
-     * @return mixed (string or null)  The HTTP Referer is it exists, otherwise the NULL value.
+     * @return string|null The HTTP Referer is it exists, otherwise the NULL value.
      */
     public function getHttpReferer()
     {

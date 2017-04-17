@@ -11,7 +11,8 @@
 
 namespace PH7;
 
-use PH7\Framework\Registry\Registry, PH7\Framework\Ip\Ip;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Ip\Ip;
 
 trait Api
 {

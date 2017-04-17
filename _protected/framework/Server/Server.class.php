@@ -99,6 +99,7 @@ final class Server
      * Get the IP address of server.
      *
      * @internal We use LOCAL_ADDR variable for compatibility with Windows servers.
+     *
      * @return string IP address.
      */
     public static function getIp()
@@ -123,7 +124,8 @@ final class Server
      *
      * @param string $sKey If NULL, returns the entire $_SERVER variable. Default NULL
      * @param mixed $sDefVal The value to use if server key is not found. Default NULL
-     * @return mixed (string | array | null)
+     *
+     * @return string|array|null
      */
     public static function getVar($sKey = null, $sDefVal = null)
     {

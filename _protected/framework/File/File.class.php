@@ -18,6 +18,10 @@ use PH7\Framework\Url\Url;
 use PH7\Framework\Parse\Url as ParseUrl;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Registry\Registry;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
+use SplFileObject;
+use ZipArchive;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class File
@@ -101,7 +105,7 @@ class File
      *
      * @param string $sFile File name.
      * @param boolean $bIncPath Default FALSE
-     * @return mixed (string | boolean) Returns the read data or FALSE on failure.
+     * @return string|boolean Returns the read data or FALSE on failure.
      */
     public function getFile($sFile, $bIncPath = false)
     {
@@ -114,7 +118,7 @@ class File
      * @param string $sFile File name.
      * @param string $sContents Contents file.
      * @param integer $iFlag Constant (see http://php.net/manual/function.file-put-contents.php). Default 0
-     * @return mixed (integer | boolean) Returns the number of bytes that were written to the file, or FALSE on failure.
+     * @return integer|boolean Returns the number of bytes that were written to the file, or FALSE on failure.
      */
     public function putFile($sFile, $sContents, $iFlag = 0)
     {
@@ -124,7 +128,7 @@ class File
     /**
      * Check if file exists.
      *
-     * @param mixed (array | string) $mFile
+     * @param array|string $mFile
      * @return boolean TRUE if file exists, FALSE otherwise.
      */
     public function existFile($mFile)
@@ -150,7 +154,7 @@ class File
     /**
      * Check if directory exists.
      *
-     * @param mixed (array | string) $mDir
+     * @param array|string $mDir
      * @return boolean TRUE if file exists, FALSE otherwise.
      */
     public function existDir($mDir)
@@ -208,7 +212,7 @@ class File
 
     /**
      * @param string $sDir
-     * @param mixed (string | array) $mExt Optional, retrieves only files with specific extensions. Default value is NULL.
+     * @param string|array $mExt Optional, retrieves only files with specific extensions. Default value is NULL.
      * @return array List of files sorted alphabetically.
      */
     public function getFileList($sDir, $mExt = null)
@@ -276,7 +280,7 @@ class File
      * Creates a directory if they are in an array. If it does not exist and
      * allows the creation of nested directories specified in the pathname.
      *
-     * @param mixed (string | array) $mDir
+     * @param string|array $mDir
      * @param integer (octal) $iMode Default: 0777
      * @return void
      * @throws Exception If the file cannot be created.
@@ -326,7 +330,7 @@ class File
      *
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
-     * @return mixed (integer | boolean) Returns the last line on success, and FALSE on failure.
+     * @return integer|boolean Returns the last line on success, and FALSE on failure.
      */
     public function systemCopy($sFrom, $sTo)
     {
@@ -368,7 +372,7 @@ class File
      *
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
-     * @return mixed (integer | boolean) Returns the last line on success, and FALSE on failure.
+     * @return integer|boolean Returns the last line on success, and FALSE on failure.
      */
     public function systemRename($sFrom, $sTo)
     {
@@ -382,7 +386,7 @@ class File
      * Deletes a file or files if they are in an array.
      * If the file does not exist, the function does nothing.
      *
-     * @param mixed (string | array) $mFile
+     * @param string|array $mFile
      * @return void
      */
     public function deleteFile($mFile)
@@ -413,7 +417,7 @@ class File
      */
     public function remove($sDir)
     {
-        $oIterator = new \RecursiveIteratorIterator($this->getDirIterator($sDir), \RecursiveIteratorIterator::CHILD_FIRST);
+        $oIterator = new RecursiveIteratorIterator($this->getDirIterator($sDir), RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($oIterator as $sPath) ($sPath->isFile()) ? unlink($sPath) : @rmdir($sPath);
         @rmdir($sDir);
     }
@@ -422,7 +426,7 @@ class File
      * Get the creation/modification time of a file in the Unix timestamp.
      *
      * @param string Full path of the file.
-     * @return mixed (integer | boolean) Returns the time the file was last modified, or FALSE if it not found.
+     * @return integer|boolean Returns the time the file was last modified, or FALSE if it not found.
      */
     public function getModifTime($sFile)
     {
@@ -445,7 +449,7 @@ class File
      * Delay script execution.
      *
      * @param integer $iSleep Halt time in seconds. Optional parameter, default value is 5.
-     * @return mixed (integer | boolean) Returns "0" on success, or "false" on error.
+     * @return integer|boolean Returns "0" on success, or "false" on error.
      */
     public function sleep($iSleep = null)
     {
@@ -530,7 +534,7 @@ class File
 
     /**
      * @param string $sData
-     * @return mixed (boolean, integer, float, string, array or object)
+     * @return boolean|integer|float|string|array|object
      */
     public function unpack($sData)
     {
@@ -621,7 +625,7 @@ class File
     public function save($sFile, $sData)
     {
         $sTmpFile = $this->getFileWithoutExt($sFile) . '.tmp.' . $this->getFileExt($sFile);
-        $iWritten = (new \SplFileObject($sTmpFile, 'wb'))->fwrite($sData);
+        $iWritten = (new SplFileObject($sTmpFile, 'wb'))->fwrite($sData);
 
         if ($iWritten !== null) {
             // Copy of the temporary file to the original file if no problem occurred.
@@ -638,8 +642,8 @@ class File
      * Reading Files.
      *
      * @param string $sPath
-     * @param mixed (array | string) $mFiles
-     * @return mixed (array | string) The Files.
+     * @param array|string $mFiles
+     * @return array|string The Files.
      */
     public function readFiles($sPath = './', &$mFiles)
     {
@@ -665,7 +669,7 @@ class File
      * Reading Directories.
      *
      * @param string $sPath
-     * @return mixed (array | boolean) Returns an ARRAY with the folders or FALSE if the folder could not be opened.
+     * @return array|boolean Returns an ARRAY with the folders or FALSE if the folder could not be opened.
      */
     public function readDirs($sPath = './')
     {
@@ -689,7 +693,7 @@ class File
      * Get the URL contents (For URLs, it is better to use CURL because it is faster than file_get_contents function).
      *
      * @param string $sUrl URL to be read contents.
-     * @return mixed (string | boolean) Return the result content on success, FALSE on failure.
+     * @return string|boolean Return the result content on success, FALSE on failure.
      */
     public function getUrlContents($sUrl)
     {
@@ -714,7 +718,7 @@ class File
      */
     public function zipExtract($sFile, $sDir)
     {
-        $oZip = new \ZipArchive;
+        $oZip = new ZipArchive;
         $mRes = $oZip->open($sFile);
 
         if ($mRes === true) {
@@ -763,11 +767,11 @@ class File
      * Create a recurive directory iterator for a given directory.
      *
      * @param string $sPath
-     * @return string The directory.
+     * @return RecursiveDirectoryIterator
      */
     public function getDirIterator($sPath)
     {
-        return (new \RecursiveDirectoryIterator($sPath));
+        return (new RecursiveDirectoryIterator($sPath));
     }
 
     /**
@@ -792,7 +796,7 @@ class File
         }
 
         $bRet = false; // Default value
-        $oIterator = new \RecursiveIteratorIterator($this->getDirIterator($sFrom), \RecursiveIteratorIterator::SELF_FIRST);
+        $oIterator = new RecursiveIteratorIterator($this->getDirIterator($sFrom), RecursiveIteratorIterator::SELF_FIRST);
 
         foreach ($oIterator as $sFromFile) {
             $sDest = $sTo . PH7_DS . $oIterator->getSubPathName();

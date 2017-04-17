@@ -5,11 +5,11 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Validate Site / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Cache\Cache;
 use PH7\Framework\Url\Header;
 
 class MainController extends Controller
