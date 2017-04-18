@@ -3,7 +3,7 @@
  * @title            DbConfig Class
  * @desc             Database Config Class.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model
@@ -96,8 +96,8 @@ final class DbConfig
                     'pageTitle' => 'Home',
                     'metaDescription' => 'The Dating Software for creating online dating service or online social community.',
                     'metaKeywords' => 'script,CMS,PHP,dating script,dating software,social networking software,social networking script,social network script,free,open source,match clone,friend finder clone,adult friend finder clone',
-                    'slogan' => 'Free Online Dating Community Site with Chat Rooms',
-                    'promoText' => 'You\'re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like that with the <a href="http://software.hizup.com">PHP Dating Script</a>. It is Professional, Free, Open Source, ...',
+                    'slogan' => 'Online Dating Community with Chat Rooms',
+                    'promoText' => 'You\'re on the best place for meeting new people nearby! Chat, Flirt, Socialize and have Fun!<br />Create any Dating Sites like that with <a href="http://ph7cms.com">pH7CMS</a>. It is Professional, Free, Open Source, ...',
                     'metaRobots' => 'index, follow, all',
                     'metaAuthor' => 'Pierre-Henry Soria',
                     'metaCopyright' => 'Copyright Pierre-Henry Soria. All Rights Reserved.',

@@ -169,8 +169,8 @@ class MainController extends Controller
 
             case 'ccbill':
             {
-                // In developing...
-                // Contact us at <hello@ph7cms.com> or <contact@hizup.net> if you want to help us by developing the payment system CCBill
+                // Still in developing...
+                // You are more than welcome to contribute on Github: https://github.com/pH7Software/pH7-Social-Dating-CMS
             }
             break;
 

@@ -2,13 +2,13 @@
 /**
  * @title            Exception Http Request
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Request
  * @version          1.1
  * @update           05/15/12
- * @link             http://hizup.com
+ * @link             http://ph7cms.com
  */
 
 namespace PH7\Framework\Mvc\Request;
