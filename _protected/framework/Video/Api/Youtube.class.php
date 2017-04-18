@@ -2,21 +2,21 @@
 /**
  * @title            Youtube Class
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video / Api
  * @version          1.2
- * @link             http://hizup.com
+ * @link             http://ph7cms.com
  * @history          28/03/2016 - Since pH7CMS 1.3.7, it's now compatible with Youtube API v3. Since Youtube API v3, it requires a Google API key. This is available through pH7CMS's admin panel.
  */
 
 namespace PH7\Framework\Video\Api;
+
 defined('PH7') or exit('Restricted access');
 
 class Youtube extends Api implements IApi
 {
-
     const
     API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=',
     PLAYER_URL = 'https://youtube.com/v/';
@@ -25,7 +25,8 @@ class Youtube extends Api implements IApi
 
     /**
      * @param string $sUrl
-     * @return mixed (string | boolean) Returns the embed video URL if found, FALSE otherwise.
+     *
+     * @return string|boolean Returns the embed video URL if found, FALSE otherwise.
      */
     public function getVideo($sUrl)
     {
@@ -34,8 +35,10 @@ class Youtube extends Api implements IApi
 
     /**
      * @param string $sUrl URL video (e.g., https://www.youtube.com/watch?v=q-1eHnBOg4A).
-     * @return mixed (object | boolean) FALSE if unable to open the API URL, otherwise $this object.
-     * @throws \PH7\Framework\Video\Api\Exception If the is a problem with Youtube API service.
+     *
+     * @throws Exception If the is a problem with Youtube API service.
+     *
+     * @return Youtube|boolean FALSE if unable to open the API URL, otherwise Youtube
      */
     public function getInfo($sUrl)
     {
@@ -65,17 +68,25 @@ class Youtube extends Api implements IApi
     /**
      * Redefine this method to the specific needs of Youtube API.
      *
-     * @see \PH7\Framework\Video\Api\Youtube::getInfo();
-     * @return mixed (integer | boolean) The video duration if found, FALSE otherwise.
+     * @see Youtube::getInfo();
+     *
+     * @return integer|boolean The video duration if found, FALSE otherwise.
      */
     public function getDuration()
     {
         return $this->getDurationTime($this->_oContentDetails->duration);
     }
 
+    /**
+     * @param string $sUrl
+     * @param string $sMedia
+     * @param integer $iWidth
+     * @param integer $iHeight
+     *
+     * @return string
+     */
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
     {
-
         if ($sMedia == 'preview')
         {
             $aThumb = ['default', 1, 2, 3];
@@ -91,8 +102,11 @@ class Youtube extends Api implements IApi
 
     /**
      * Get the Youtube duration time.
+     *
      * @author Yahia/Chris Z-S – I've been inspired by Yahia example <http://stackoverflow.com/a/26178914>
+     *
      * @param string $sDuration Youtube duration format (e.g., PT4M13S).
+     *
      * @return integer Youtube Duration in seconds.
      */
     protected function getDurationTime($sDuration)
@@ -122,6 +136,5 @@ class Youtube extends Api implements IApi
         }
         return $iDuration;
     }
-
 }
 

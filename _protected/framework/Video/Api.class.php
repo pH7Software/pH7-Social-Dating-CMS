@@ -2,23 +2,28 @@
 /**
  * @title            Video API Class
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video
- * @version          1.0
- * @link             http://hizup.com
+ * @link             http://ph7cms.com
  */
 
 namespace PH7\Framework\Video;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Http\Http, PH7\Framework\Config\Config;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class Api
 {
+    /** @var int */
+    protected $iWidth;
 
-    protected $iWidth, $iHeight;
+    /** @var int */
+    protected $iHeight;
 
     public function __construct()
     {
@@ -28,13 +33,14 @@ class Api
 
     /**
      * @param string $sUrl
+     *
      * @return string Returns the video embed URL.
      */
     public function getVideo($sUrl)
     {
         $sClass = $this->clear($sUrl);
-        switch ($sClass)
-        {
+
+        switch ($sClass) {
             case 'youtube':
             case 'youtu':
                 $sClass = (new Api\Youtube)->getVideo($sUrl);
@@ -61,15 +67,16 @@ class Api
 
     /**
      * @param string $sUrl The URL video.
+     *
+     * @throws PH7InvalidArgumentException If the Api Video is invalid.
+     *
      * @return object The Video API class (e.g., "Api\Youtube", "Api\Vimeo" class).
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the Api Video is invalid.
      */
     public function getInfo($sUrl)
     {
         $sClass = $this->clear($sUrl);
 
-        switch ($sClass)
-        {
+        switch ($sClass) {
             case 'youtube':
             case 'youtu':
                 $sKey = Config::getInstance()->values['module.api']['youtube.key'];
@@ -92,8 +99,7 @@ class Api
             break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \''  . $sClass . '\'');
-                return; // Stop it
+                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \''  . $sClass . '\'');
         }
 
         return $oClass;
@@ -104,8 +110,10 @@ class Api
      * @param string $sMedia (preview or movie)
      * @param integer $iWidth
      * @param integer $iHeight
+     *
+     * @throws PH7InvalidArgumentException If the Video Api is invalid.
+     *
      * @return string The HTML video integration code.
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the Video Api is invalid.
      */
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
     {
@@ -115,8 +123,7 @@ class Api
         $iWidth = ( isset($iWidth) ? $iWidth : $this->iWidth );
         $iHeight = (isset($iHeight) ? $iHeight : $this->iHeight );
 
-        switch ($sClass)
-        {
+        switch ($sClass) {
             case 'youtube':
             case 'youtu':
                 $sClass = (new Api\Youtube)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
@@ -135,22 +142,21 @@ class Api
             break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \''  . $sClass . '\'');
+                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \''  . $sClass . '\'');
         }
 
         return $sClass;
     }
 
     /**
-     * @access protected
      * @param string $sUrl
+     *
      * @return string
      */
     protected function clear($sUrl)
     {
         $oHttp = new Http;
-        if ($oHttp->detectSubdomain($sUrl))
-        {
+        if ($oHttp->detectSubdomain($sUrl)) {
             // Removes the subdomain with its dot (e.g. mysub.domain.com becomes domain.com).
             $sUrl = str_replace($oHttp->getSubdomain($sUrl) . PH7_DOT, '', $sUrl);
         }
@@ -158,5 +164,4 @@ class Api
 
         return preg_replace('#(^https?://|www\.|\.[a-z]{2,4}/?(.+)?$)#i', '', $sUrl);
     }
-
 }

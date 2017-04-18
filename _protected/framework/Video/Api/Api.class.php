@@ -2,25 +2,23 @@
 /**
  * @title            Abstract API class
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2013-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
+ * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video / Api
- * @version          1.0
- * @link             http://hizup.com
+ * @link             http://ph7cms.com
  */
 
 namespace PH7\Framework\Video\Api;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\File,
-PH7\Framework\Str\Str,
-PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\File\File;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Mvc\Model\DbConfig;
 
 abstract class Api
 {
-
     protected $oStr, $oData, $sApiKey, $bDefaultVideo, $bAutoplay;
 
     public function __construct()
@@ -34,6 +32,7 @@ abstract class Api
      * Set API key (currentyl required only by Youtube API class).
      *
      * @param string $sApiKey
+     *
      * @return void
      */
     public function setKey($sApiKey)
@@ -44,8 +43,9 @@ abstract class Api
     /**
      * Gets title (it can be redefined if the recovery of the data information is more specific).
      *
-     * @see \PH7\Framework\Video\Api::getInfo();
-     * @return mixed (string | boolean) The title with escape function if found otherwise returns false.
+     * @see Api::getInfo();
+     *
+     * @return string|boolean The title with escape function if found otherwise returns false.
      */
     public function getTitle()
     {
@@ -55,8 +55,9 @@ abstract class Api
     /**
      * Gets description (it can be redefined if the recovery of the data information is more specific).
      *
-     * @see \PH7\Framework\Video\Api::getInfo();
-     * @return mixed (string | boolean) The description with escape function if found otherwise returns false.
+     * @see Api::getInfo();
+     *
+     * @return string|boolean The description with escape function if found otherwise returns false.
      */
     public function getDescription()
     {
@@ -66,8 +67,9 @@ abstract class Api
     /**
      * Gets video duration (it can be redefined if the recovery of the data information is more specific).
      *
-     * @see \PH7\Framework\Video\Api::getInfo();
-     * @return mixed (integer | boolean) The video duration if found, FALSE otherwise.
+     * @see Api::getInfo();
+     *
+     * @return integer|boolean The video duration if found, FALSE otherwise.
      */
     public function getDuration()
     {
@@ -76,7 +78,8 @@ abstract class Api
 
     /**
      * @param string $sUrl
-     * @return mixed (string | boolean) The embed URL if id is valid, false otherwise.
+     *
+     * @return string|boolean The embed URL if id is valid, false otherwise.
      */
     public function getEmbedUrl($sUrl)
     {
@@ -90,6 +93,7 @@ abstract class Api
      * to retrieve the ID of the video. It can be redefined if the recovery of the video ID is more specific.
      *
      * @param string $sUrl
+     *
      * @return string string
      */
     public function getVideoId($sUrl)
@@ -105,9 +109,9 @@ abstract class Api
     /**
      * Retrieve information on the video site where it is hosted.
      *
-     * @access protected
      * @param string $sUrl
-     * @return mixed (object | boolean) Returns data object on success or FALSE on failure.
+     *
+     * @return \stdClass|boolean Returns data object on success or FALSE on failure.
      */
     protected function getData($sUrl)
     {
@@ -115,5 +119,4 @@ abstract class Api
         $oData = json_decode($sData);
         return $oData;
     }
-
 }

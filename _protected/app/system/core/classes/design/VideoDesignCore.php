@@ -12,19 +12,19 @@
  * @history        01/13/2013 -Removed support Ogg Theora Vorbis | We do not support Ogg more, because now the WebM format is preferable and is now compatible with almost all browsers.
  * @history        03/29/2013 -Adding "video not found", if the requested video is not found on the server.
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Date\Various,
-PH7\Framework\Video\Api,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Pattern\Statik,
-PH7\Framework\File\File;
+use PH7\Framework\Date\Various;
+use PH7\Framework\Video\Api as VideoApi;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Pattern\Statik;
+use PH7\Framework\File\File;
 
 class VideoDesignCore
 {
     /**
-     * Import the trait to set the class static.
+     * @internal Import the trait to set the class static.
      * The trait sets constructor/clone private to prevent instantiation.
      */
     use Statik;
@@ -44,7 +44,7 @@ class VideoDesignCore
 
         if ( (new VideoCore)->isApi($oData->file) )
         {
-            $oVideo = (new Api)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
+            $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
 
             if ($sMedia == 'preview')
 

@@ -7,8 +7,7 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Video
- * @version          0.4
- * @link             http://hizup.com
+ * @link             http://ph7cms.com
  */
 
 namespace PH7\Framework\Video;
@@ -44,9 +43,8 @@ class Video extends Upload
     ];
 
     /**
-     * @constructor
      * @param array $aFile Example: $_FILES['video']
-     * @return void
+     *
      * @throws MissingProgramException If FFmpeg is not installed.
      */
     public function __construct($aFile)
@@ -69,10 +67,9 @@ class Video extends Upload
     }
 
     /**
-     * Video Validate.
+     * @throws TooLargeException If the video file is not found.
      *
      * @return bool
-     * @throws TooLargeException If the video file is not found.
      */
     public function validate()
     {
@@ -88,9 +85,8 @@ class Video extends Upload
     }
 
     /**
-     * Save Video.
-     *
      * @param string $sFile
+     *
      * @return bool
      */
     public function save($sFile)
@@ -110,6 +106,7 @@ class Video extends Upload
      * Convert video file and the extension video type.
      *
      * @param string $sFile.
+     *
      * @return string The new name that you entered in the parameter of this method.
      */
     public function rename($sFile)
@@ -124,12 +121,13 @@ class Video extends Upload
         return $sFile;
     }
 
-    /*
+    /**
      * Generate a thumbnail with FFmpeg.
      *
      * @param string $sPicturePath
      * @param integer $iWidth
      * @param integer $iHeight
+     *
      * @return string The thumbnail file that you entered in the parameter of this method.
      */
     public function thumbnail($sPicturePath, $iSeconds, $iWidth, $iHeight)
