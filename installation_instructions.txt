@@ -2,12 +2,16 @@
 2. Installation: http://ph7cms.com/doc/en/install
 3. Once you finished the installation, your admin panel URL will be: http://YOUR-PH7CMS-SITE.com/admin123/
 
+--- Softaculous Installation ---
+If your web host offers Softaculous with pH7CMS enabled, you can install pH7CMS in one-click.
+Generally, through cPanel -> Softaculous icon -> search for "pH7CMS".
+
 --- Good Hosting ---
 http://ph7cms.com/hosting/
 
 --- Useful doc ---
-Documentation: http://ph7cms.com/doc/ 
-Knowledgebase: http://clients.hizup.com/knowledgebase.php
+Documentation: http://ph7cms.com/doc/
+Knowledge center: http://clients.hizup.com/knowledgebase.php
 
 --- If you hold pH7CMSPro (http://ph7cms.com/pro) ---
 Your member area is: http://clients.hizup.com/clientarea.php
