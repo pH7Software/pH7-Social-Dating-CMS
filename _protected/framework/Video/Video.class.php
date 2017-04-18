@@ -105,7 +105,7 @@ class Video extends Upload
     /**
      * Convert video file and the extension video type.
      *
-     * @param string $sFile.
+     * @param string $sFile
      *
      * @return string The new name that you entered in the parameter of this method.
      */
