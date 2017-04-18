@@ -1,0 +1,7 @@
+####################
+# Nav Doc Script (by Pierre-Henry Soria)
+# URL: https://github.com/pH-7/Nav-Doc-Script-V2
+####################
+
+# Don't index the get params to avoid duplicate pages due to the rewriting URLs.
+Disallow: /*?*
