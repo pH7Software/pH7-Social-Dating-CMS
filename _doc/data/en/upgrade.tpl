@@ -1,6 +1,9 @@
 <h2>Update/Upgrade Software</h2>
 
 
+<h3>Backup!</h3>
+<p>Before every update/upgrade, don't forget to backup your whole website and your database.</p>
+
 <h3>Extract the upgrade archive</h3>
 <p>Extract the update Zip archive using a file archiver software such <a href="http://sourceforge.net/projects/sevenzip/">7-Zip</a>.</p>
 
@@ -29,3 +32,7 @@ If you want to allow it, you need to set in numerical values <em>777</em> for al
 
 <h3>Clear caches</h3>
 <p>Clear all caches through <a href="{site_url}en/how-to-clear-caches">your admin panel</a>.</p>
+
+
+<h3>Put back your modifications</h3>
+<p>Put them back any modifications you did from your latest backup since they could have been erease from the update.</p>
