@@ -67,11 +67,11 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
                     's' => $oRow->sex
                 ];
 
-                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">'. $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, self::GEO_PROFILE_AVATAR_SIZE, 'Members'), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
+                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oRow->username) . '">'. $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, self::GEO_PROFILE_AVATAR_SIZE), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
             }
             else
             {
-                echo t('Meet %0% on %site_name%!', $sFirstName), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a href="', $this->oUser->getProfileLink($oRow->username), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, self::GEO_PROFILE_AVATAR_SIZE, 'Members'), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
+                echo t('Meet %0% on %site_name%!', $sFirstName), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oRow->sex, $oRow->matchSex), '<br />', t('I from %0%, %1%.', t($oRow->country), $sCity), '</em></p><a href="', $this->oUser->getProfileLink($oRow->username), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, self::GEO_PROFILE_AVATAR_SIZE), '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" /></a>';
             }
 
             echo '</div>';
@@ -104,11 +104,11 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
                     's' => $oUser->sex
                 ];
 
-                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oUser->username) . '">' . $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oUser->sex, $oUser->matchSex), '<br />', t('I from %0%, %1%.', t($oUser->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::CAROUSEL_PROFILE_AVATAR_SIZE, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oUser->username), '" class="splash_avatar" /></a>';
+                echo t('Meet %0% on %site_name%!', '<a href="' . $this->oUser->getProfileLink($oUser->username) . '">' . $sFirstName . '</a>'), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oUser->sex, $oUser->matchSex), '<br />', t('I from %0%, %1%.', t($oUser->country), $sCity), '</em></p><a rel="nofollow" href="', Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false), '"><img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::CAROUSEL_PROFILE_AVATAR_SIZE), '" alt="',t('Meet %0% on %site_name%', $oUser->username), '" class="splash_avatar" /></a>';
             }
             else
             {
-                echo t('Meet %0% on %site_name%!', $sFirstName), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oUser->sex, $oUser->matchSex), '<br />', t('I from %0%, %1%.', t($oUser->country), $sCity), '</em></p><a href="', $this->oUser->getProfileLink($oUser->username), '"><img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::CAROUSEL_PROFILE_AVATAR_SIZE, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oUser->username), '" class="splash_avatar" /></a>';
+                echo t('Meet %0% on %site_name%!', $sFirstName), '</strong><br /><em>', t('I am a %0% and I am looking %1%.', $oUser->sex, $oUser->matchSex), '<br />', t('I from %0%, %1%.', t($oUser->country), $sCity), '</em></p><a href="', $this->oUser->getProfileLink($oUser->username), '"><img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::CAROUSEL_PROFILE_AVATAR_SIZE), '" alt="',t('Meet %0% on %site_name%', $oUser->username), '" class="splash_avatar" /></a>';
             }
 
             echo '</div>';
@@ -129,7 +129,7 @@ class UserDesignCoreModel extends Framework\Mvc\Model\Design
             $sFirstName = $this->oStr->upperFirst($oUser->firstName);
             $sCity = $this->oStr->upperFirst($oUser->city);
 
-            echo '<li><a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oUser->username, $sFirstName, $oUser->sex), '"><img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::PROFILE_BLOCK_AVATAR_SIZE, 'Members'), '" alt="',t('Meet %0% on %site_name%', $oUser->username), '" /></a></li>';
+            echo '<li><a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oUser->username, $sFirstName, $oUser->sex), '"><img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::PROFILE_BLOCK_AVATAR_SIZE), '" alt="',t('Meet %0% on %site_name%', $oUser->username), '" /></a></li>';
         }
 
         echo '</ul>';
