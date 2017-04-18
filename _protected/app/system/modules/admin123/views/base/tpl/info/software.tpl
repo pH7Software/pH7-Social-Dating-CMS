@@ -3,7 +3,7 @@
   <h2 class="underline">{lang 'Software Information'}</h2>
   <div class="italic">
     <p>{lang 'Name: %0%', '<a href="%software_website%">%software_name%</a>'}</p>
-    <p>{lang 'Company: %0%', '<a href="http://hizup.uk">%software_company%</a>'}</p>
+    <p>Github: <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS">https://github.com/pH7Software/pH7-Social-Dating-CMS</a></p>
     <p>{lang 'Support Site: %0%', '<a href="%software_website%/order/">%software_name%</a>'}</p>
   </div>
 
