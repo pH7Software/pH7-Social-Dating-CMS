@@ -2,20 +2,22 @@
 /**
  * @title          Api Class
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Connect / Inc / Class
  * @version        1.3
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Layout\Html\Design, PH7\Framework\Util\Various;
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Util\Various;
 
 abstract class Api
 {
-
     protected $oDesign, $sUrl;
 
     public function __construct()
@@ -50,7 +52,7 @@ abstract class Api
      * Set an user authentication.
      *
      * @param integer $iId
-     * @param object \PH7\UserCoreModel $oUserModel
+     * @param UserCoreModel $oUserModel
      * @return void
      */
     public function setLogin($iId, UserCoreModel $oUserModel)
@@ -77,5 +79,4 @@ abstract class Api
         // Default 'female'
         return ($sGender != 'male' && $sGender != 'female' && $sGender != 'couple') ? 'female' : $sGender;
     }
-
 }

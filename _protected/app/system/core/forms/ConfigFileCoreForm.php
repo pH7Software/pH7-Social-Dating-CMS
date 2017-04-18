@@ -25,11 +25,8 @@ class ConfigFileCoreForm
     public static function display($sConfigVar = 'module.setting', $sConfigPath = null)
     {
         $sIniFile = (empty($sConfigPath)) ? Registry::getInstance()->path_module_config . static::CONFIG_FILE : $sConfigPath . static::CONFIG_FILE;
-        $aData = parse_ini_file($sIniFile, true);
-        $rData = file_get_contents($sIniFile);
 
-        if (isset($_POST['submit_config']))
-        {
+        if (isset($_POST['submit_config'])) {
             if (\PFBC\Form::isValid($_POST['submit_config']))
                 new ConfigFileCoreFormProcess($sConfigVar, $sIniFile);
 
@@ -41,8 +38,8 @@ class ConfigFileCoreForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_config', 'form_config'));
         $oForm->addElement(new \PFBC\Element\Token('config'));
 
-        foreach ($aData[$sConfigVar] as $sKey => $sVal)
-        {
+        $aData = parse_ini_file($sIniFile, true);
+        foreach ($aData[$sConfigVar] as $sKey => $sVal) {
             $sLabel = str_replace(array('.', '_'), ' ', $sKey);
             $sLabel = (new Str)->upperFirstWords($sLabel);
 
@@ -57,6 +54,7 @@ class ConfigFileCoreForm
             else
                 $oForm->addElement(new \PFBC\Element\Textbox($sLabel, 'config[' . $sKey . ']', array('value' => $sVal)));
         }
+        unset($aData);
 
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();

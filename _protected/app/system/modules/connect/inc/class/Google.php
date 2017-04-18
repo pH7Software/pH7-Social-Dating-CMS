@@ -2,13 +2,15 @@
 /**
  * @title          Google OAuth Class
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Connect / Inc / Class
  * @version        1.1
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use
@@ -27,16 +29,12 @@ PH7\Framework\Mvc\Router\Uri;
 
 class Google extends Api implements IApi
 {
-
     private $_sAvatarFile, $_sUsername, $_iProfileId, $_aUserInfo;
 
     /**
-     * Constructor.
-     *
-     * @param object \PH7\Framework\Session\Session $oSession
-     * @param object \PH7\Framework\Mvc\Request\Http $oHttpRequest
-     * @param object \PH7\Framework\Registry\Registry $oRegistry
-     * @return void
+     * @param Session $oSession
+     * @param HttpRequest $oHttpRequest
+     * @param Registry $oRegistry
      */
     public function __construct(Session $oSession, HttpRequest $oHttpRequest, Registry $oRegistry)
     {
@@ -163,7 +161,7 @@ class Google extends Api implements IApi
     /**
      * Set Configuration of OAuth API.
      *
-     * @param object \Google_Client $oClient
+     * @param \Google_Client $oClient
      * @return void
      */
     private function _setConfig(\Google_Client $oClient)
@@ -173,5 +171,4 @@ class Google extends Api implements IApi
         $oClient->setRedirectUri(Uri::get('connect','main','login','google'));
         $oClient->setDeveloperKey(Config::getInstance()->values['module.api']['google.developer_key']);
     }
-
 }

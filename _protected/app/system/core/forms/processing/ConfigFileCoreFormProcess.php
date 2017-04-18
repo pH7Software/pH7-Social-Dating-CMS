@@ -15,13 +15,9 @@ use PH7\Framework\Url\Header;
 
 class ConfigFileCoreFormProcess extends Form
 {
-
-    private $sMsg;
-
     /**
      * @param string $sConfigVar Specify the variable in the INI file where module options. Default module.setting
      * @param string $sIniFile The path of INI config file.
-     * @return void
      */
     public function __construct($sConfigVar, $sIniFile)
     {
@@ -30,8 +26,7 @@ class ConfigFileCoreFormProcess extends Form
         $aOldData = parse_ini_file($sIniFile, true);
         $sData = file_get_contents($sIniFile);
 
-        foreach ($this->httpRequest->post('config') as $sKey => $sVal)
-        {
+        foreach ($this->httpRequest->post('config') as $sKey => $sVal) {
             $sData = str_replace($sKey . ' = ' . $aOldData[$sConfigVar][$sKey], $sKey . ' = ' . $sVal,  $sData);
 
             /**
@@ -54,5 +49,4 @@ class ConfigFileCoreFormProcess extends Form
         // Check again and correct the file permission if necessary.
         $this->file->chmod($sIniFile, 0644);
     }
-
 }
