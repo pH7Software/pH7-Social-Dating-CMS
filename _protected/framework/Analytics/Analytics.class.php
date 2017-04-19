@@ -11,14 +11,21 @@
  */
 
 namespace PH7\Framework\Analytics;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Navigation\Browser;
 
 class Analytics extends StoreStats
 {
+    /** @var null|string */
+    private $_sUserAgent;
 
-    private $_sUserAgent, $_sReferer, $_sUserLang;
+    /** @var null|string */
+    private $_sReferer;
+
+    /** @var string */
+    private $_sUserLang;
 
     /**
      * OS list.
@@ -202,8 +209,12 @@ class Analytics extends StoreStats
     {
         $sOs = t('Unknown OS');
 
-        foreach (static::$_aOs as $sRegex => $sName)
-            if ($this->find($sRegex, $this->_sUserAgent)) $sOs = $sName; break;
+        foreach (static::$_aOs as $sRegex => $sName) {
+            if ($this->find($sRegex, $this->_sUserAgent)) {
+                $sOs = $sName;
+                break;
+            }
+        }
 
         return $sOs;
     }
@@ -217,8 +228,12 @@ class Analytics extends StoreStats
     {
         $sBrowser = t('Unknown Web Browser');
 
-        foreach (static::$_aWebBrowsers as $sRegex => $sName)
-            if ($this->find($sRegex, $this->_sUserAgent)) $sBrowser = $sName; break;
+        foreach (static::$_aWebBrowsers as $sRegex => $sName) {
+            if ($this->find($sRegex, $this->_sUserAgent)) {
+                $sBrowser = $sName;
+                break;
+            }
+        }
 
         return $sBrowser;
     }
@@ -232,8 +247,12 @@ class Analytics extends StoreStats
     {
         $sBot = t('Unknown Search Engine Bot');
 
-        foreach (static::$_aRobots as $sRegex => $sName)
-            if ($this->find($sRegex, $this->_sUserAgent)) $sBot = $sName; break;
+        foreach (static::$_aRobots as $sRegex => $sName) {
+            if ($this->find($sRegex, $this->_sUserAgent)) {
+                $sBot = $sName;
+                break;
+            }
+        }
 
         return $sBot;
     }
@@ -247,21 +266,29 @@ class Analytics extends StoreStats
     {
         $sIpBot = t('Unknown Search Engine Bot IP');
 
-        foreach (static::$_aIpRobots as $sRegex => $sName)
-            if ($this->find($sRegex, $this->_sUserAgent)) $sIpBot = $sName; break;
+        foreach (static::$_aIpRobots as $sRegex => $sName) {
+            if ($this->find($sRegex, $this->_sUserAgent)) {
+                $sIpBot = $sName;
+                break;
+            }
+        }
 
         return $sIpBot;
     }
 
     /**
-     * @return mixed (string | null) Returns the keyword else if neither keyword is used, returns NULL
+     * @return string|null Returns the keyword else if neither keyword is used, returns NULL
      */
     public function checkKeywords()
     {
         $sKeyword = null;
 
-        foreach (static::$_aKeywords as $sWord)
-            if ($this->find($sRegex, $this->_sReferer)) $sKeyword = $sWord; break;
+        foreach (static::$_aKeywords as $sWord) {
+            if ($this->find($sWord, $this->_sReferer)) {
+                $sKeyword = $sWord;
+                break;
+            }
+        }
 
         return $sKeyword;
     }
