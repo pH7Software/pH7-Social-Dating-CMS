@@ -86,6 +86,10 @@
     <div class="center">
         <p><a class="m_button" href="{{ $design->url('note','main','add') }}">{lang 'Add a new Article'}</a></p>
         <p><a class="m_button" href="{{ $design->url('note','main','search') }}">{lang 'Search a Note'}</a></p>
-        <p><a href="{{ $design->url('xml','rss','xmlrouter','note') }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
+        <p>
+            <a href="{{ $design->url('xml','rss','xmlrouter','note') }}">
+                <img src="{url_static_img}icon/feed.png" alt="RSS Feed" />
+            </a>
+        </p>
     </div>
 </div>

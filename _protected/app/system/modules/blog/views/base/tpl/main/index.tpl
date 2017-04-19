@@ -46,7 +46,9 @@
             <h1><a href="{{ $design->url('blog','main','read',$post->postId) }}" title="{% $post->title %}" data-load="ajax">{% escape($post->title) %}</a></h1>
 
             <div class="left">
-                <a href="{{ $design->url('blog','main','read',$post->postId) }}" class="pic thumb" data-load="ajax"><img src="{% Blog::getThumb($post->blogId) %}" alt="{% $post->pageTitle %}" title="{% $post->pageTitle %}" /></a>
+                <a href="{{ $design->url('blog','main','read',$post->postId) }}" class="pic thumb" data-load="ajax">
+                    <img src="{% Blog::getThumb($post->blogId) %}" alt="{% $post->pageTitle %}" title="{% $post->pageTitle %}" />
+                </a>
             </div>
 
             {* Don't check the post with \PH7\Framework\Security\Ban\Ban::filterWord() since this blog is only allowed for administrators *}
@@ -69,5 +71,9 @@
         </p>
     {/if}
     <p><a class="m_button" href="{{ $design->url('blog','main','search') }}">{lang 'Search for Blog Post'}</a></p>
-    <p><a href="{{ $design->url('xml','rss','xmlrouter','blog') }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
+    <p>
+        <a href="{{ $design->url('xml','rss','xmlrouter','blog') }}">
+            <img src="{url_static_img}icon/feed.png" alt="RSS Feed" />
+        </a>
+    </p>
 </div>
