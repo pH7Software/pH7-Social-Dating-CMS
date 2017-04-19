@@ -23,8 +23,8 @@ class Ads
     /**
      * Output Advertisement.
      *
-     * @static
      * @param object $oData Db query.
+     *
      * @return string
      */
     public static function output($oData)
