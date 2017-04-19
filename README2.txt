@@ -22,6 +22,6 @@ For license, please read the PH7.LICENSE.txt and PH7.COPYRIGHT.txt files.
 ==============================================
 
 Author: Soria Pierre-Henry
-Contact me at: phs [AT] hizup [D0T] net
+Contact me at: pierrehenrysoria [AT] gmail [D0T] com
 
 ==============================================
