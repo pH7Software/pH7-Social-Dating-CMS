@@ -19,6 +19,8 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class Ip
 {
+    const IP_PATTERN = '[a-z0-9:.]{7,}';
+
     /**
      * Get IP address.
      *
@@ -36,7 +38,7 @@ class Ip
             $sIp = '127.0.0.1'; // Avoid invalid local IP for GeoIp
         }
 
-        return preg_match('/^[a-z0-9:.]{7,}$/', $sIp) ? $sIp : '127.0.0.1';
+        return preg_match('/^' . static::IP_PATTERN . '$/', $sIp) ? $sIp : '127.0.0.1';
     }
 
     /**

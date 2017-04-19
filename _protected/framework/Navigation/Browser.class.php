@@ -17,6 +17,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Str\Str;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Server\Server;
+use PH7\Framework\Http\Http;
 
 /**
  * @internal In this class, there're some yoda conditions.
@@ -178,7 +179,7 @@ class Browser
     public static function favicon($sUrl)
     {
         $sApiUrl = 'https://www.google.com/s2/favicons?domain=';
-        $sDomainName = \PH7\Framework\Http\Http::getHostName($sUrl);
+        $sDomainName = Http::getHostName($sUrl);
 
         return $sApiUrl . $sDomainName;
     }

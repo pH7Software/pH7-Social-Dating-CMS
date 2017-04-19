@@ -19,6 +19,8 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class Api
 {
+    const URL_PATTERN = '(^https?://|www\.|\.[a-z]{2,4}/?(.+)?$)';
+
     /** @var int */
     protected $iWidth;
 
@@ -162,6 +164,6 @@ class Api
         }
         unset($oHttp);
 
-        return preg_replace('#(^https?://|www\.|\.[a-z]{2,4}/?(.+)?$)#i', '', $sUrl);
+        return preg_replace('#' . static::URL_PATTERN . '#i', '', $sUrl);
     }
 }
