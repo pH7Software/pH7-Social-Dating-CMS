@@ -3,7 +3,7 @@
  * @title            Analytics Class
  * @desc             Compute Stats of Site Referers.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Analytics
@@ -270,6 +270,7 @@ class Analytics extends StoreStats
      * Retrieve data cache.
      *
      * @param string $sFileName
+     *
      * @return array Analytics data.
      */
     public function get($sFileName)
@@ -282,6 +283,7 @@ class Analytics extends StoreStats
      *
      * @param string $sType File name.
      * @param string $sData
+     *
      * @return void
      */
     public function add($sType, $sData)
@@ -317,11 +319,11 @@ class Analytics extends StoreStats
      *
      * @param string $sToFind
      * @param string $sContents
+     *
      * @return boolean
      */
     protected function find($sToFind, $sContents)
     {
         return preg_match('/' . $sToFind . '/i', $sContents);
     }
-
 }
