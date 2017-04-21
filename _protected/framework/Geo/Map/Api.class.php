@@ -872,6 +872,5 @@ class Api
 
         //Fermeture du javascript
         $this->content .= '</script>' . "\n";
-
     }
 }
