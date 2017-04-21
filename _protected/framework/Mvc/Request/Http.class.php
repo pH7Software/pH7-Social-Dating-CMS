@@ -377,5 +377,4 @@ class Http extends \PH7\Framework\Http\Http
             $this->_aPost
         );
     }
-
 }

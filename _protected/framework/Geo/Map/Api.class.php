@@ -1,9 +1,4 @@
 <?php
-namespace PH7\Framework\Geo\Map;
-defined('PH7') or exit('Restricted access');
-
-use PH7\Framework\Config\Config;
-
 /**
  * Copyright notice
  *
@@ -16,15 +11,20 @@ use PH7\Framework\Config\Config;
  * GNU General Public License for more details.
  *
  * This copyright notice MUST APPEAR in all copies of the script!
-*
-* ----------------- Modified by Pierre-Henry SORIA ----------------- *
-*
-* @author          Pierre-Henry SORIA <ph7software@gmail.com>
-* @copyright       (c) 2011-2017, Pierre-Henry SORIA, All Rights Reserved.
-* @version         Last update 07/18/2016
-* @package         pH7CMS
-*/
+ *
+ * ----------------- Modified by Pierre-Henry SORIA ----------------- *
+ *
+ * @author          Pierre-Henry SORIA <ph7software@gmail.com>
+ * @copyright       (c) 2011-2017, Pierre-Henry SORIA, All Rights Reserved.
+ * @version         Last update 04/21/2017
+ * @package         pH7CMS
+ */
 
+namespace PH7\Framework\Geo\Map;
+
+defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Config\Config;
 
 /**
  * Class to use the Google Maps v3 API
@@ -874,5 +874,4 @@ class Api
         $this->content .= '</script>' . "\n";
 
     }
-
 }

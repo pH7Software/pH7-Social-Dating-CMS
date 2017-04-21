@@ -10,13 +10,13 @@
  */
 
 namespace PH7\Framework\Geo\Map;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Map extends Api
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -26,5 +26,4 @@ class Map extends Api
         $this->setMapType(DbConfig::getSetting('mapType'));
         $this->setLang(PH7_LANG_NAME);
     }
-
 }
