@@ -24,6 +24,6 @@
     {/if}
 
     {if AdminCore::auth()}
-        <br /><hr /><p><a class="btn btn-default btn-tiny" href="{{ $design->url('forum', 'admin', 'addcategory') }}">{lang 'Add Category'}</a> <a class="btn btn-default btn-tiny" href="{{ $design->url('forum', 'admin', 'addforum') }}">{lang 'Add Forum'}</a></p>
+        <br /><hr /><p><a class="btn btn-default btn-md" href="{{ $design->url('forum', 'admin', 'addcategory') }}">{lang 'Add Category'}</a> <a class="btn btn-default btn-md" href="{{ $design->url('forum', 'admin', 'addforum') }}">{lang 'Add Forum'}</a></p>
     {/if}
 </div>

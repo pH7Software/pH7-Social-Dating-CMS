@@ -36,7 +36,7 @@ class EditForm
 
         if ($oHR->getExists('profile_id') && !AdminCore::isRootProfileId($oHR->get('profile_id', 'int'))) {
             $oForm->addElement(
-                new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-tiny" href="' . Uri::get(PH7_ADMIN_MOD, 'admin', 'browse') . '">' . t('Back to Browse Admins') . '</a></p>')
+                new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'admin', 'browse') . '">' . t('Back to Browse Admins') . '</a></p>')
             );
         }
         unset($oHR);

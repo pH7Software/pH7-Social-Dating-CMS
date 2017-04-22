@@ -27,7 +27,7 @@ class DesignForm
 
         if (AdminCore::auth() && !User::auth()) {
             $oForm->addElement(
-                new \PFBC\Element\HTMLExternal('<p><a class="s_tMarg bold btn btn-default btn-tiny" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>')
+                new \PFBC\Element\HTMLExternal('<p><a class="s_tMarg bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>')
             );
         }
 

@@ -24,7 +24,7 @@
                   <th><input type="checkbox" name="all_action" /></th>
                   <th>
                       <button
-                         class="btn btn-default btn-tiny"
+                         class="btn btn-default btn-md"
                           type="submit"
                           formaction="{{ $design->url('affiliate','admin','banall') }}"
                           >{lang 'Ban'}
@@ -32,7 +32,7 @@
                   </th>
                   <th>
                       <button
-                          class="btn btn-default btn-tiny"
+                          class="btn btn-default btn-md"
                           type="submit"
                           formaction="{{ $design->url('affiliate','admin','unbanall') }}"
                           >{lang 'UnBan'}
@@ -40,7 +40,7 @@
                   </th>
                   <th>
                       <button
-                          class="red btn btn-default btn-tiny"
+                          class="red btn btn-default btn-md"
                           type="submit"
                           onclick="return checkChecked()"
                           formaction="{{ $design->url('affiliate','admin','deleteall') }}"
@@ -49,7 +49,7 @@
                   </th>
                   <th>
                       <button
-                          class="btn btn-default btn-tiny"
+                          class="btn btn-default btn-md"
                           type="submit"
                           formaction="{{ $design->url('affiliate','admin','approveall') }}"
                           >{lang 'Approve'}
@@ -57,7 +57,7 @@
                   </th>
                   <th>
                       <button
-                          class="btn btn-default btn-tiny"
+                          class="btn btn-default btn-md"
                           type="submit"
                           formaction="{{ $design->url('affiliate','admin','disapproveall') }}"
                           >{lang 'Disapprove'}

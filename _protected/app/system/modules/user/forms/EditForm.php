@@ -42,7 +42,7 @@ class EditForm
 
         if ($bAdminLogged && $oHR->getExists('profile_id')) {
             $oForm->addElement(
-                new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-tiny" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>')
+                new \PFBC\Element\HTMLExternal('<p class="center"><a class="bold btn btn-default btn-md" href="' . Uri::get(PH7_ADMIN_MOD, 'user', 'browse') . '">' . t('Back to Browse Users') . '</a></p>')
             );
 
             $oGroupId = (new AdminCoreModel)->getMemberships();

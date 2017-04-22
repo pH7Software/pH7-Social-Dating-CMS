@@ -40,5 +40,5 @@
         <p class="bold">{lang 'To see the users fields, you must add at least one user.'}</p>
     {/if}
 
-    <p class="center"><a class="btn btn-default btn-tiny" href="{{ $design->url('field','field','add',$mod) }}">{lang 'Add a Field'}</a></p>
+    <p class="center"><a class="btn btn-default btn-md" href="{{ $design->url('field','field','add',$mod) }}">{lang 'Add a Field'}</a></p>
 </div>

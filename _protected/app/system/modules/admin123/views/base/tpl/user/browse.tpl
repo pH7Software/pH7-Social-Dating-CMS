@@ -24,7 +24,7 @@
                   <th><input type="checkbox" name="all_action" /></th>
                   <th>
                       <button
-                          class="btn btn-default btn-tiny"
+                          class="btn btn-default btn-md"
                           type="submit"
                           formaction="{{ $design->url(PH7_ADMIN_MOD,'user','banall') }}"
                           >{lang 'Ban'}
@@ -32,7 +32,7 @@
                   </th>
                   <th>
                       <button
-                          class="btn btn-default btn-tiny"
+                          class="btn btn-default btn-md"
                           type="submit"
                           formaction="{{ $design->url(PH7_ADMIN_MOD,'user','unbanall') }}"
                           >{lang 'UnBan'}
@@ -40,7 +40,7 @@
                   </th>
                   <th>
                       <button
-                          class="red btn btn-default btn-tiny"
+                          class="red btn btn-default btn-md"
                           type="submit"
                           onclick="return checkChecked()"
                           formaction="{{ $design->url(PH7_ADMIN_MOD,'user','deleteall') }}"
@@ -49,7 +49,7 @@
                   </th>
                   <th>
                       <button
-                          class="btn btn-default btn-tiny"
+                          class="btn btn-default btn-md"
                           type="submit"
                           formaction="{{ $design->url(PH7_ADMIN_MOD,'user','approveall') }}"
                           >{lang 'Approve'}
@@ -57,7 +57,7 @@
                   </th>
                   <th>
                       <button
-                          class="btn btn-default btn-tiny"
+                          class="btn btn-default btn-md"
                           type="submit"
                           formaction="{{ $design->url(PH7_ADMIN_MOD,'user','disapproveall') }}"
                           >{lang 'Disapprove'}
