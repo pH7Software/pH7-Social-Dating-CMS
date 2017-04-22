@@ -56,7 +56,7 @@
             <p><a href="{{ $design->url('blog','main','read',$post->postId) }}" data-load="ajax">{lang 'See more'}</a></p>
 
             {if AdminCore::auth()}
-                <p><a class="s_button" href="{{ $design->url('blog', 'admin', 'edit', $post->blogId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'blog', 'admin', 'delete', $post->blogId, 's_button') }}</p>
+                <p><a class="btn btn-default btn-sm" href="{{ $design->url('blog', 'admin', 'edit', $post->blogId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'blog', 'admin', 'delete', $post->blogId, 'btn btn-default btn-sm') }}</p>
             {/if}
             {{ $design->likeApi() }}
             <hr /><br />
@@ -67,10 +67,10 @@
 
     {if AdminCore::auth()}
         <p>
-            <a class="m_button" href="{{ $design->url('blog', 'admin', 'add') }}">{lang 'Add a new Article'}</a>
+            <a class="btn btn-default btn-md" href="{{ $design->url('blog', 'admin', 'add') }}">{lang 'Add a new Article'}</a>
         </p>
     {/if}
-    <p><a class="m_button" href="{{ $design->url('blog','main','search') }}">{lang 'Search for Blog Post'}</a></p>
+    <p><a class="btn btn-default btn-md" href="{{ $design->url('blog','main','search') }}">{lang 'Search for Blog Post'}</a></p>
     <p>
         <a href="{{ $design->url('xml','rss','xmlrouter','blog') }}">
             <img src="{url_static_img}icon/feed.png" alt="RSS Feed" />

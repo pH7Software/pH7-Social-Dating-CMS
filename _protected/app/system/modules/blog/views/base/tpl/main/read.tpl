@@ -11,7 +11,7 @@
             </p>
             {if AdminCore::auth()}
                 <p>
-                    <a class="m_button" href="{{ $design->url('blog', 'admin', 'edit', $blog_id) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'blog', 'admin', 'delete', $blog_id, 'm_button') }}
+                    <a class="btn btn-default btn-sm" href="{{ $design->url('blog', 'admin', 'edit', $blog_id) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'blog', 'admin', 'delete', $blog_id, 'btn btn-default btn-sm') }}
                 </p>
             {/if}
 

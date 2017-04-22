@@ -61,7 +61,7 @@
 
                 {if $is_user_auth AND $member_id === $post->profileId}
                     <p>
-                        <a class="s_button" href="{{ $design->url('note','main','edit',$post->noteId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'note','main','delete', $post->noteId, 's_button') }}
+                        <a class="btn btn-default btn-sm" href="{{ $design->url('note','main','edit',$post->noteId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'note','main','delete', $post->noteId, 'btn btn-default btn-sm') }}
                     </p>
                 {/if}
 
@@ -84,8 +84,8 @@
     </div>
 
     <div class="center">
-        <p><a class="m_button" href="{{ $design->url('note','main','add') }}">{lang 'Add a new Article'}</a></p>
-        <p><a class="m_button" href="{{ $design->url('note','main','search') }}">{lang 'Search a Note'}</a></p>
+        <p><a class="btn btn-default btn-md" href="{{ $design->url('note','main','add') }}">{lang 'Add a new Article'}</a></p>
+        <p><a class="btn btn-default btn-md" href="{{ $design->url('note','main','search') }}">{lang 'Search a Note'}</a></p>
         <p>
             <a href="{{ $design->url('xml','rss','xmlrouter','note') }}">
                 <img src="{url_static_img}icon/feed.png" alt="RSS Feed" />

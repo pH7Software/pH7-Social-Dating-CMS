@@ -26,10 +26,10 @@
             </p>
         {/if}
 
-        <a class="m_button" rel="nofollow" href="{{ $design->url('forum', 'forum', 'reply', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Reply to the topic'}">{lang 'Reply'}</a>
+        <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'reply', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Reply to the topic'}">{lang 'Reply'}</a>
 
         {if $is_user_auth AND $member_id == $post->profileId}
-            | <a class="m_button" href="{{ $design->url('forum', 'forum', 'edittopic', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Edit your topic'}">{lang 'Edit'}</a> |  {{ $design->popupLinkConfirm(t('Delete Topic'), 'forum', 'forum', 'deletetopic', $post->topicId.'_'.$post->forumId.'_'.$post->name, 'm_button') }}
+            | <a class="btn btn-default btn-sm" href="{{ $design->url('forum', 'forum', 'edittopic', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Edit your topic'}">{lang 'Edit'}</a> |  {{ $design->popupLinkConfirm(t('Delete Topic'), 'forum', 'forum', 'deletetopic', $post->topicId.'_'.$post->forumId.'_'.$post->name, 'btn btn-default btn-sm') }}
         {/if}
 
         {* Reply *}
@@ -54,7 +54,7 @@
                     </div>
 
                     {if $is_user_auth AND $member_id == $msg->profileId}
-                        <a class="m_button" href="{{ $design->url('forum', 'forum', 'editmessage', "$post->name,$post->forumId,$post->title,$msg->topicId,$msg->messageId") }}" title="{lang 'Edit your post'}">{lang 'Edit'}</a> | {{ $design->popupLinkConfirm(t('Delete Post'), 'forum', 'forum', 'deletemessage', $msg->messageId.'_'.$msg->topicId.'_'.$post->forumId.'_'.$post->title.'_'.$post->name, 'm_button') }}
+                        <a class="btn btn-default btn-sm" href="{{ $design->url('forum', 'forum', 'editmessage', "$post->name,$post->forumId,$post->title,$msg->topicId,$msg->messageId") }}" title="{lang 'Edit your post'}">{lang 'Edit'}</a> | {{ $design->popupLinkConfirm(t('Delete Post'), 'forum', 'forum', 'deletemessage', $msg->messageId.'_'.$msg->topicId.'_'.$post->forumId.'_'.$post->title.'_'.$post->name, 'btn btn-default btn-sm') }}
                     {/if}
 
                     {if !empty($msg->profileId) AND $is_admin_auth AND !UserCore::isAdminLoggedAs()}
@@ -62,7 +62,7 @@
                     {/if}
                 </div>
             {/each}
-            <p><a class="m_button" rel="nofollow" href="{{ $design->url('forum', 'forum', 'reply', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Reply to the topic'}">{lang 'Reply'}</a></p>
+            <p><a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'reply', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Reply to the topic'}">{lang 'Reply'}</a></p>
         {/if}
 
         {if !empty($messages)}

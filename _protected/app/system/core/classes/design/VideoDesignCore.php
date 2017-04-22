@@ -3,7 +3,7 @@
  * @title          Video Design Core Class
  * @desc           Class supports the viewing of videos in HTML5.
  *
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class / Design
@@ -89,10 +89,10 @@ class VideoDesignCore
                 ' . t('Your browser is obsolete. Please use a browser that supports HTML5.') . '
             </video>
             <div class="center">
-                <button class="bold btn btn-default btn-tiny" onclick="Video.playPause()">' . t('Play/Pause') . '</button>
-                <button class="btn btn-default btn-tiny" onclick="Video.bigSize()">' . t('Big') . '</button>
-                <button class="btn btn-default btn-tiny" onclick="Video.normalSize()">' . t('Normal') . '</button>
-                <button class="btn btn-default btn-tiny" onclick="Video.smallSize()">' . t('Small') . '</button>
+                <button class="bold btn btn-default btn-sm" onclick="Video.playPause()">' . t('Play/Pause') . '</button>
+                <button class="btn btn-default btn-sm" onclick="Video.bigSize()">' . t('Big') . '</button>
+                <button class="btn btn-default btn-sm" onclick="Video.normalSize()">' . t('Normal') . '</button>
+                <button class="btn btn-default btn-sm" onclick="Video.smallSize()">' . t('Small') . '</button>
             </div>';
 
             if ($sMedia == 'preview')

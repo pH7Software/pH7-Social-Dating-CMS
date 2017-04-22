@@ -69,8 +69,8 @@
 
                 {if AdminCore::auth()}
                     <div>
-                        <a class="m_button" href="{{ $design->url('game','admin','edit',"$game->title,$game->gameId") }}">{lang 'Edit Game'}</a> &bull;
-                        <div class="m_button inline">
+                        <a class="btn btn-default btn-sm" href="{{ $design->url('game','admin','edit',"$game->title,$game->gameId") }}">{lang 'Edit Game'}</a> &bull;
+                        <div class="btn btn-default btn-sm inline">
                             {{ LinkCoreForm::display(t('Delete Game'), 'game', 'admin', 'delete', array('id'=>$game->gameId, 'thumb'=>$game->thumb, 'file'=>$game->file)) }}
                         </div>
                     </div>

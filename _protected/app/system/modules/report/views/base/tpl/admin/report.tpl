@@ -7,6 +7,6 @@
   <p><span class="bold">{lang 'Description of report'}</span> <span class="italic">{% $report->description %}</span></p>
   <p><span class="bold">{lang 'Date:'}</span><span class="italic">{% $dateTime->get($report->dateTime)->dateTime() %}</span></p>
 
-  <div class="m_button inline">{{ LinkCoreForm::display(t('Delete Report'), 'report', 'admin', 'delete', array('id'=>$report->reportId)) }}</div>
+  <div class="btn btn-default btn-md inline">{{ LinkCoreForm::display(t('Delete Report'), 'report', 'admin', 'delete', array('id'=>$report->reportId)) }}</div>
 
 </div>

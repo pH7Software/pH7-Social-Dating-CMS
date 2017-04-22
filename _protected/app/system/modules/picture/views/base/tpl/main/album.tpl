@@ -28,7 +28,7 @@
 
     {if $is_user_auth AND $member_id == $a->profileId}
         <p class="center bottom">
-            <a class="m_button" href="{{ $design->url('picture', 'main', 'addphoto', $a->albumId) }}">{lang 'Add new pictures'}</a>
+            <a class="btn btn-default btn-md" href="{{ $design->url('picture', 'main', 'addphoto', $a->albumId) }}">{lang 'Add new pictures'}</a>
         </p>
     {/if}
 {else}

@@ -16,7 +16,7 @@
             <p class="small italic">{lang 'Posted on:'} {% $dateTime->get($post->createdDate)->dateTime() %} {if !empty($post->updatedDate)} | {lang 'Updated Post:'}{% $dateTime->get($post->updatedDate)->dateTime() %}{/if} | {lang 'Views:'} {% Framework\Mvc\Model\Statistic::getView($post->noteId,'Notes') %}</p>
 
             {if $is_user_auth AND $member_id === $post->profileId}
-                <p><a class="m_button" href="{{ $design->url('note','main','edit',$post->noteId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'note', 'main', 'delete', $post->noteId, 'm_button') }}</p>
+                <p><a class="btn btn-default btn-sm" href="{{ $design->url('note','main','edit',$post->noteId) }}">{lang 'Edit Article'}</a> | {{ $design->popupLinkConfirm(t('Delete Article'), 'note', 'main', 'delete', $post->noteId, 'btn btn-default btn-sm') }}</p>
             {/if}
 
             {{ ShareUrlCoreForm::display(Framework\Mvc\Router\Uri::get('note','main','read',"$post->username,$post->postId")) }}

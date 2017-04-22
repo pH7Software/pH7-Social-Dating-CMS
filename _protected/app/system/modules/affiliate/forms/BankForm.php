@@ -34,9 +34,8 @@ class BankForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_bank_account', 'form_bank_account'));
         $oForm->addElement(new \PFBC\Element\Token('bank_account'));
 
-        if (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id'))
-        {
-            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="s_button" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Return to back affiliates browse') . '</a></p>'));
+        if (AdminCore::auth() && !Affiliate::auth() && $oHR->getExists('profile_id')) {
+            $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="center"><a class="btn btn-default btn-sm" href="' . Uri::get('affiliate', 'admin', 'browse') . '">' . t('Return to back affiliates browse') . '</a></p>'));
         }
         unset($oHR);
 

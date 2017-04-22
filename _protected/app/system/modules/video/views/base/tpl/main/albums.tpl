@@ -31,6 +31,6 @@
         <p>{error}</p>
     {/if}
     <p class="bottom">
-        <a class="m_button" href="{{ $design->url('video', 'main', 'addalbum') }}">{lang 'Add a new album'}</a>
+        <a class="btn btn-default btn-md" href="{{ $design->url('video', 'main', 'addalbum') }}">{lang 'Add a new album'}</a>
     </p>
 </div>
