@@ -151,8 +151,8 @@ dd{margin-bottom:4px}
 
 .bottom {
   width: 100%;
-  vertical-align:bottom;
-  float:left;
+  vertical-align: bottom;
+  float: left;
 }
 
 .thumb, #country_map, #profile_map {
