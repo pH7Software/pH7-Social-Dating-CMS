@@ -95,3 +95,8 @@ input[type=text]:disabled {
     background: #ddd;
     cursor: not-allowed;
 }
+
+/* Remove .form_link text decoration if bootstrap button is set */
+.btn input:hover {
+    text-decoration: none !important;
+}
