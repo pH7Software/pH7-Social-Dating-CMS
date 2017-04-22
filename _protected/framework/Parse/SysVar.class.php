@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Parse
- * @version          1.5
+ * @version          1.7
  */
 
 namespace PH7\Framework\Parse;
@@ -22,6 +22,8 @@ use PH7\Framework\Session\Session;
 
 class SysVar
 {
+    const REGEX_NOT_PARSING = '/#!.+!#/';
+
     /** @var string */
     private $sVar;
 
@@ -29,28 +31,28 @@ class SysVar
      * Parser for the System variables.
      *
      * @param string $sVar
+     *
      * @return The new parsed text
      */
     public function parse($sVar)
     {
-        /*** Not to parse a text ***/
-        if (preg_match('/#!.+!#/', $sVar)) {
-            $sVar = str_replace(array('#!', '!#'), '', $sVar);
-            return $sVar;
-        }
-
         $this->sVar = $sVar;
 
-        $this->siteVariables();
-        $this->affiliateVariables();
-        $this->globalVariables();
-        $this->kernelVariables();
+        if ($this->notParsingVars()) {
+            $this->removeNotParsingDelimiters();
+            return $this->sVar;
+        }
+
+        $this->parseSiteVars();
+        $this->parseAffiliateVars();
+        $this->parseGlobalVars();
+        $this->parseKernelVars();
 
         // Output
         return $this->sVar;
     }
 
-    private function siteVariables()
+    private function parseSiteVars()
     {
         $oRegistry = Registry::getInstance();
         $this->sVar = str_replace('%site_name%', $oRegistry->site_name, $this->sVar);
@@ -60,7 +62,7 @@ class SysVar
         unset($oRegistry);
     }
 
-    private function affiliateVariables()
+    private function parseAffiliateVars()
     {
         $oSession = new Session;
         $sAffUsername = ($oSession->exists('affiliate_username')) ? $oSession->get('affiliate_username') : 'aid';
@@ -68,12 +70,12 @@ class SysVar
         unset($oSession);
     }
 
-    private function globalVariables()
+    private function parseGlobalVars()
     {
         $this->sVar = str_replace('%ip%', Ip::get(), $this->sVar);
     }
 
-    private function kernelVariables()
+    private function parseKernelVars()
     {
         $this->sVar = str_replace('%software_name%', Kernel::SOFTWARE_NAME, $this->sVar);
         $this->sVar = str_replace('%software_author%', 'Pierre-Henry Soria', $this->sVar);
@@ -82,5 +84,18 @@ class SysVar
         $this->sVar = str_replace('%software_build%', Kernel::SOFTWARE_BUILD, $this->sVar);
         $this->sVar = str_replace('%software_email%', Kernel::SOFTWARE_EMAIL, $this->sVar);
         $this->sVar = str_replace('%software_website%', Kernel::SOFTWARE_WEBSITE, $this->sVar);
+    }
+
+    private function removeNotParsingDelimiters()
+    {
+        $this->sVar = str_replace(array('#!', '!#'), '', $this->sVar);
+    }
+
+    /**
+     * @return bool
+     */
+    private function notParsingVars()
+    {
+        return preg_match(self::REGEX_NOT_PARSING, $this->sVar);
     }
 }
