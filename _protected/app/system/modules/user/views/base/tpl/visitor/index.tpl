@@ -14,7 +14,9 @@
 
         {main_include 'page_nav.inc.tpl'}
         <br />
-        <p class="center bottom"><a class="btn btn-default btn-md" href="{{ $design->url('user','visitor','search',$username) }}">{lang 'Search for a visitor of %0%', $v->username}</a></p>
+        <p class="center bottom">
+            <a class="btn btn-default btn-md" href="{{ $design->url('user','visitor','search',$username) }}">{lang 'Search for a visitor of %0%', $v->username}</a>
+        </p>
     {else}
         <p>{error}</p>
     {/if}

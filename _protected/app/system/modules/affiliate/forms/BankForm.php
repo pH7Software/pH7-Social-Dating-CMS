@@ -1,28 +1,28 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Url\Header as UrlHeader;
+use PH7\Framework\Mvc\Router\Uri;
 
 class BankForm
 {
-
     public static function display()
     {
-        if (isset($_POST['submit_bank_account']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_bank_account']))
+        if (isset($_POST['submit_bank_account'])) {
+            if (\PFBC\Form::isValid($_POST['submit_bank_account'])) {
                 new BankFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            UrlHeader::redirect();
         }
 
         $oHR = new Http;
@@ -47,5 +47,4 @@ class BankForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
         $oForm->render();
     }
-
 }
