@@ -160,7 +160,7 @@ class Analytics extends StoreStats
         'fastcrawler' => 'FastCrawler',
         'lycos' => 'Lycos',
         'facebookexternalhit' => 'Facebook',
-        'ph7hizupcrawler' => 'pH7 HiZup.com',
+        'ph7hizupcrawler' => 'pH7Zup Crawler',
         'infoseek' => 'InfoSeek Robot 1.0',
     ];
 

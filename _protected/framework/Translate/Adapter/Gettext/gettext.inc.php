@@ -1,15 +1,14 @@
 <?php
 /*
- * Notice: This file has been modified by the pH7CMS development team (well by Pierre-Henry Soria) <http://software.hizup.com>.
+ * Notice: This file has been modified by the pH7CMS development team (well by Pierre-Henry Soria) <http://ph7cms.com>.
  * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with the new PHP version).
  */
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Translate\Adapter\Gettext\StreamReader,
-PH7\Framework\Translate\Adapter\Gettext\StringReader,
-PH7\Framework\Translate\Adapter\Gettext\FileReader,
-PH7\Framework\Translate\Adapter\Gettext\CachedFileReader;
+use PH7\Framework\Translate\Adapter\Gettext\StreamReader;
+use PH7\Framework\Translate\Adapter\Gettext\StringReader;
+use PH7\Framework\Translate\Adapter\Gettext\FileReader;
+use PH7\Framework\Translate\Adapter\Gettext\CachedFileReader;
 
 
 /*

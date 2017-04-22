@@ -170,8 +170,8 @@ class ImportUser extends Core
         $sFiveChars = Various::genRnd($this->_aFile['name'], 5);
 
         $this->_aTmpData = [
-            'email' => 'pierrehenrysoriasanz' . $sFiveChars . '@hizup' . $sFiveChars . '.com',
-            'username' => 'Hizup' . $sFiveChars,
+            'email' => 'pierrehenrysoriasanz' . $sFiveChars . '@ph7cms' . $sFiveChars . '.com',
+            'username' => 'pH7CMS' . $sFiveChars,
             'password' => Various::genRnd(),
             'first_name' => 'Alex' . $sFiveChars,
             'last_name' => 'Rolli' . $sFiveChars,

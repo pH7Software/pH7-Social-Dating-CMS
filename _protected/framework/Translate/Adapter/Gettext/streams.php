@@ -1,9 +1,11 @@
 <?php
 /*
- * Notice: This file has been modified by the pH7CMS development team, Pierre-Henry Soria <http://software.hizup.com>.
- *  * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with the new PHP version).
+ * Notice: This file has been modified by the pH7CMS development team => Pierre-Henry Soria <http://ph7cms.com>.
+ * Version now compatible with PHP 5+ and PHP 7+ (like PHP4 constructors have been move to PHP5 constructors because the old one wasn't working anymore with the new PHP version).
  */
+
 namespace PH7\Framework\Translate\Adapter\Gettext;
+
 defined('PH7') or exit('Restricted access');
 
 /*
