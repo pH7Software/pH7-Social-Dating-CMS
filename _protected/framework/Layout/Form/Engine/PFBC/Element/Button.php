@@ -1,13 +1,14 @@
 <?php
 /**
- * We made many changes in this code.
- * By pH7 (Pierre-Henry SORIA).
+ * By Pierre-Henry SORIA <http://ph7.me>
  */
+
 namespace PFBC\Element;
 
-class Button extends \PFBC\Element
-{
+use PFBC\Element;
 
+class Button extends Element
+{
     protected $attributes, $icon;
 
     public function __construct($sLabel = '', $sType = '', array $aProperties = null)
@@ -49,5 +50,4 @@ class Button extends \PFBC\Element
         button widget - specifically the icon option.*/
         echo '<button', $this->getAttributes(), '>', $this->label, '</button>';
     }
-
 }

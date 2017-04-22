@@ -1,14 +1,14 @@
 <?php
 /**
- * We made this code.
- * By pH7 (Pierre-Henry SORIA).
+ * @author Pierre-Henry SORIA <http://ph7.me>
  */
+
 namespace PFBC\Element;
+
 use PH7\Framework\Config\Config;
 
 class Phone extends Textbox
 {
-
     public function render()
     {
         $this->attributes['type'] = 'tel'; // Phone type
@@ -16,5 +16,4 @@ class Phone extends Textbox
         $this->validation[] = new \PFBC\Validation\Phone;
         parent::render();
     }
-
 }

@@ -9,18 +9,16 @@
 namespace PFBC\Element;
 
 use PH7\Framework\Mvc\Model\DbConfig;
+use PFBC\OptionElement;
 
-class Age extends \PFBC\OptionElement
+class Age extends OptionElement
 {
-
     const MIN_AGE = 'min_age', MAX_AGE = 'max_age';
 
     protected $sHtmlOutput, $iMinAge, $iMaxAge;
 
     /**
      * Generate the select field for age search.
-     *
-     * @return The field age with the default selected minimum and maximum registration age.
      */
     public function __construct($aProperties = null)
     {
@@ -42,6 +40,8 @@ class Age extends \PFBC\OptionElement
 
     /**
      * @param string $sType 'min_age' or 'max_age'
+     *
+     * @return string The field age with the default selected minimum and maximum registration age.
      */
     protected function getOptions($sType)
     {
@@ -64,5 +64,4 @@ class Age extends \PFBC\OptionElement
 
         return $sSelect;
     }
-
 }

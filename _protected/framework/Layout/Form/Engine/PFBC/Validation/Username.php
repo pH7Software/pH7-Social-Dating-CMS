@@ -1,19 +1,19 @@
 <?php
 /**
- * We made this code.
- * By pH7 (Pierre-Henry SORIA).
+ * By Pierre-Henry SORIA <http://ph7.me>
  */
-namespace PFBC\Validation;
-use PH7\Framework\Mvc\Model\DbConfig;
 
-class Username extends \PFBC\Validation
+namespace PFBC\Validation;
+
+use PH7\Framework\Mvc\Model\DbConfig;
+use PFBC\Validation;
+
+class Username extends Validation
 {
     protected $sTable, $iMin, $iMax;
 
     /**
-     * Constructor of class.
-     *
-     * @param string $sTable Default 'Members'
+     * @param string $sTable
      */
     public function __construct($sTable = 'Members')
     {
