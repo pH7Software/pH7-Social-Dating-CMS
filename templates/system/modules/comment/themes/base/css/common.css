@@ -4,7 +4,19 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-.post-edit{color:#999;}
-.post-ident{background:#F1F1F1;border-color:#DDE4EB;border-style:none none dashed none;border-width:1px;padding:.35em 0;max-width:320px;}
-hr{width:70%;}
-.com_txt{max-width:65%;}
+.post-edit {
+    color: #999;
+}
+.post-ident {
+    background: #F1F1F1;
+    border-color: #DDE4EB;
+    border-style: none none dashed none;
+    border-width: 1px;padding:.35em 0;
+    max-width:320px;
+}
+hr {
+    width: 70%;
+}
+.com_txt {
+    max-width: 65%;
+}
