@@ -1,16 +1,17 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Report / Form / Processing
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class ReportFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -31,18 +32,12 @@ class ReportFormProcess extends Form
         unset($aData);
 
 
-        if ($mReport === 'already_reported')
-        {
+        if ($mReport === 'already_reported') {
             \PFBC\Form::setError('form_report', t('You have already reported abuse about this profile.'));
-        }
-        elseif (!$mReport)
-        {
+        } elseif (!$mReport) {
             \PFBC\Form::setError('form_report', t('Unable to report abuse.'));
-        }
-        else
-        {
+        } else {
             \PFBC\Form::setSuccess('form_report', t('You have successfully reported abuse about this profile.'));
         }
     }
-
 }

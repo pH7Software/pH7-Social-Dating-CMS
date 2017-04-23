@@ -1,28 +1,30 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Report / Form
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Url\Header as HeaderUrl;
 use PH7\Framework\Mvc\Request\Http;
 
 class ReportForm
 {
-
     public static function display()
     {
         $oHttpRequest = new Http;
 
-        if ($oHttpRequest->postExists('submit_report'))
-        {
-            if (\PFBC\Form::isValid($oHttpRequest->post('submit_report')))
+        if ($oHttpRequest->postExists('submit_report')) {
+            if (\PFBC\Form::isValid($oHttpRequest->post('submit_report'))) {
                 new ReportFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            HeaderUrl::redirect();
         }
 
         $oForm = new \PFBC\Form('form_report', '310px');
@@ -39,5 +41,4 @@ class ReportForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'str.js"></script>'));
         $oForm->render();
     }
-
 }
