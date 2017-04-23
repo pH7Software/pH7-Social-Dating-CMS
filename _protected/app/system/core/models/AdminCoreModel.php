@@ -1,22 +1,28 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\Engine\Db,
-PH7\Framework\Mvc\Model\Engine\Record,
-PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 // Abstract Class
 class AdminCoreModel extends UserCoreModel
 {
     const CACHE_GROUP = 'db/sys/mod/admin';
 
+    /**
+     * @param integer $iOffset
+     * @param integer $iLimit
+     * @param string $sTable
+     *
+     * @return \stdClass
+     */
     public function browse($iOffset, $iLimit, $sTable = 'Members')
     {
         Various::checkModelTable($sTable);
@@ -52,16 +58,14 @@ class AdminCoreModel extends UserCoreModel
         $rStmt->bindValue(':what', '%' . $mWhat . '%', \PDO::PARAM_STR);
         $rStmt->bindParam(':groupId', $iGroupId, \PDO::PARAM_INT);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return $oRow;
@@ -74,6 +78,13 @@ class AdminCoreModel extends UserCoreModel
         }
     }
 
+    /**
+     * @param integer $iProfileId
+     * @param integer $iBan
+     * @param string $sTable
+     *
+     * @return boolean
+     */
     public function ban($iProfileId, $iBan, $sTable = 'Members')
     {
         Various::checkModelTable($sTable);
@@ -84,6 +95,7 @@ class AdminCoreModel extends UserCoreModel
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET ban = :ban WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':ban', $iBan, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
