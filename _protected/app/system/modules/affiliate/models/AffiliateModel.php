@@ -1,27 +1,31 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Model
  */
+
 namespace PH7;
 
-use PH7\Framework\Security\Security, PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Security\Security;
+use PH7\Framework\Mvc\Model\Engine\Db;
 
 class AffiliateModel extends AffiliateCoreModel
 {
-
     /**
      * Add a new affiliate.
      *
      * @param array $aData
+     *
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
     public function join(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, active, ip, hashValidation, joinDate, lastActivity, affiliatedId)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') .
+            '(email, username, password, firstName, lastName, sex, birthDate, active, ip, hashValidation, joinDate, lastActivity, affiliatedId)
             VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity, :affiliatedId)');
+
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
         $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
@@ -38,6 +42,7 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt->execute();
         $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the affiliate's ID
         Db::free($rStmt);
+
         return $this->join2($aData);
     }
 
@@ -45,6 +50,7 @@ class AffiliateModel extends AffiliateCoreModel
      * Join part 2.
      *
      * @param array $aData
+     *
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
     public function join2(array $aData)
@@ -55,6 +61,7 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
         $rStmt->bindValue(':state', $aData['state'], \PDO::PARAM_STR);
         $rStmt->bindValue(':zipCode', $aData['zip_code'], \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -62,6 +69,7 @@ class AffiliateModel extends AffiliateCoreModel
      * Add a reference affiliate.
      *
      * @param integer $iProfileId
+     *
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
     public function addRefer($iProfileId)
@@ -98,25 +106,22 @@ class AffiliateModel extends AffiliateCoreModel
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             $mData = (int) $oRow->totalUsers;
             unset($oRow);
         }
         Db::free($rStmt);
+
         return $mData;
     }
 
@@ -124,6 +129,7 @@ class AffiliateModel extends AffiliateCoreModel
      * Adding an Affiliate.
      *
      * @param array $aData
+     *
      * @return integer The ID of the Affiliate.
      */
     public function add(array $aData)
@@ -147,6 +153,7 @@ class AffiliateModel extends AffiliateCoreModel
         $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the affiliate's ID
         Db::free($rStmt);
         $this->setInfoFields($aData);
+
         return $this->getKeyId();
     }
 
@@ -163,6 +170,7 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt->bindValue(':description', $aData['description'], \PDO::PARAM_STR);
         $rStmt->bindValue(':phone', $aData['phone'], \PDO::PARAM_STR);
         $rStmt->bindValue(':website', trim($aData['website']), \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -170,7 +178,8 @@ class AffiliateModel extends AffiliateCoreModel
      * Get the Affiliate's Amount.
      *
      * @param integer $iProfileId
-     * @return mixed (integer | float) The amount.
+     *
+     * @return integer|float The amount
      */
     public function getAmount($iProfileId)
     {
@@ -179,7 +188,7 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oRow->amount;
     }
-
 }

@@ -1,13 +1,15 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Model
  */
+
 namespace PH7;
 
-use PH7\Framework\Security\Security, PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Security\Security;
+use PH7\Framework\Mvc\Model\Engine\Db;
 
 class AdminModel extends AdminCoreModel
 {
@@ -17,6 +19,7 @@ class AdminModel extends AdminCoreModel
      * @param string $sEmail
      * @param string $sUsername
      * @param string $sPassword
+     *
      * @return boolean Returns TRUE if successful otherwise FALSE
      */
     public function adminLogin($sEmail, $sUsername, $sPassword)
@@ -36,6 +39,7 @@ class AdminModel extends AdminCoreModel
      * Adding an Admin.
      *
      * @param array $aData
+     *
      * @return integer The ID of the Admin.
      */
     public function add(array $aData)
@@ -65,6 +69,7 @@ class AdminModel extends AdminCoreModel
      *
      * @param integer $iProfileId
      * @param string $sUsername
+     *
      * @return void
      */
     public function delete($iProfileId, $sUsername)
@@ -96,21 +101,17 @@ class AdminModel extends AdminCoreModel
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $mData = (int) $oRow->totalUsers;
@@ -124,8 +125,9 @@ class AdminModel extends AdminCoreModel
      * Update the custom code.
      *
      * @param string $sCode
-     * @param string $sType  Choose between 'css' and 'js'.
-     * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
+     * @param string $sType  Choose between 'css' and 'js'
+     *
+     * @return integer|boolean Returns the number of rows on success or FALSE on failure
      */
     public function updateCustomCode($sCode, $sType)
     {
