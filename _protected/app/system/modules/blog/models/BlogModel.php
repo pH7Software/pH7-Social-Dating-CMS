@@ -91,11 +91,21 @@ class BlogModel extends BlogCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param string $sCategoryName
+     * @param boolean $bCount
+     * @param string $sOrderBy
+     * @param boolean $sSort
+     * @param integer $iOffset
+     * @param integer $iLimit
+     * @return integer|object
+     */
     public function category($sCategoryName, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $sCategoryName = trim($sCategoryName);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
@@ -131,11 +141,21 @@ class BlogModel extends BlogCoreModel
         return $mData;
     }
 
+    /**
+     * @param integer|string $mLooking
+     * @param boolean $bCount
+     * @param string $sOrderBy
+     * @param string $sSort
+     * @param integer $iOffset
+     * @param integer $iLimit
+     * @return integer|object
+     */
     public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 

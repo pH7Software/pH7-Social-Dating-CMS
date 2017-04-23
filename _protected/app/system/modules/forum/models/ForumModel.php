@@ -236,19 +236,20 @@ class ForumModel extends ForumCoreModel
     /**
      * Search Topics.
      *
-     * @param mixed (integer for Topic ID or string for a keyword) $mLooking
+     * @param integer|string $mLooking (integer for Topic ID or string for a keyword)
      * @param boolean $bCount Put 'true' for count the topics or 'false' for the result of topics.
      * @param string $sOrderBy
      * @param string $sSort
      * @param integer $iOffset
      * @param integer $iLimit
-     * @return mixed (integer for the number topics returned or string for the topics list returned)
+     * @return integer|object (integer for the number topics returned or an object for the topics list)
      */
     public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 't');
 

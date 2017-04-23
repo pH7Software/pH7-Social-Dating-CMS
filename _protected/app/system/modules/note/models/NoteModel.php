@@ -121,11 +121,21 @@ class NoteModel extends NoteCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param string $sCategoryName
+     * @param boolean $bCount
+     * @param string $sOrderBy
+     * @param boolean $sSort
+     * @param integer $iOffset
+     * @param integer $iLimit
+     * @return integer|object
+     */
     public function category($sCategoryName, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $sCategoryName = trim($sCategoryName);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
 
@@ -161,11 +171,21 @@ class NoteModel extends NoteCoreModel
         return $mData;
     }
 
+    /**
+     * @param string $sAuthor
+     * @param boolean $bCount
+     * @param string $sOrderBy
+     * @param string $sSort
+     * @param integer $iOffset
+     * @param integer $iLimit
+     * @return integer|object
+     */
     public function author($sAuthor, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $sAuthor = trim($sAuthor);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
 
@@ -202,20 +222,21 @@ class NoteModel extends NoteCoreModel
     }
 
     /**
-     * @param mixed (integer for post ID or string for a keyword) $mLooking
+     * @param integer|string $mLooking(integer for post ID or string for a keyword)
      * @param boolean $bCount Put 'true' for count the notes or 'false' for the result of notes.
      * @param string $sOrderBy
      * @param string $sSort
      * @param integer $iOffset
      * @param integer $iLimit
      * @param integer $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
-     * @return mixed (integer for the number notes returned or string for the notes list returned)
+     * @return integer|object (integer for the number notes returned or an object containing the notes list)
      */
     public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iApproved = 1)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mLooking = trim($mLooking);
 
         $sSqlApproved = (isset($iApproved)) ? ' AND (approved = :approved)' : '';
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');

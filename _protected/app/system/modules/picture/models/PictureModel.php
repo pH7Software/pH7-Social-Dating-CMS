@@ -1,17 +1,17 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Picture / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class PictureModel extends PictureCoreModel
 {
-
     public function addAlbum($iProfileId, $sTitle, $sDescription, $sThumb, $sCreatedDate, $iApproved = 1)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AlbumsPictures') . '(profileId, name, description, thumb, createdDate, approved)
@@ -159,11 +159,22 @@ class PictureModel extends PictureCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param integer|string $mLooking
+     * @param boolean $bCount
+     * @param string $sOrderBy
+     * @param string $sSort
+     * @param integer $iOffset
+     * @param integer $iLimit
+     * @param integer $iApproved
+     * @return integer|object
+     */
     public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iApproved = 1)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
@@ -200,5 +211,4 @@ class PictureModel extends PictureCoreModel
         }
         return $mData;
     }
-
 }
