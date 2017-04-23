@@ -128,38 +128,56 @@ class MailModel extends MailCoreModel
     /**
      * Set message to 'trash' or 'toDelete'.
      *
-     * @param integer $iProfileId User ID.
-     * @param integer $iMessageId Message ID.
-     * @param string $sMode Set to this category. Choose between 'trash', 'restor' and 'delete'.
+     * @param integer $iProfileId User ID
+     * @param integer $iMessageId Message ID
+     * @param string $sMode Set to this category. Choose between 'trash', 'restor' and 'delete'
+     *
+     * @throws PH7InvalidArgumentException
+     *
      * @return void
      */
     public function setTo($iProfileId, $iMessageId, $sMode)
     {
-        if ($sMode !== 'trash' && $sMode !== 'restor' && $sMode !== 'delete')
-            PH7InvalidArgumentException('Bad set mode: "' . $sMode . '"!');
+        if (!in_array($sMode, self::MODES)) {
+            throw new PH7InvalidArgumentException('Bad set mode: "' . $sMode . '"!');
+        }
 
         $oData = $this->getMsg($iMessageId);
         $sFieldId = ($oData->sender == $iProfileId) ? 'sender' : 'recipient';
-        if ($sMode == 'restor') {
+        if ($sMode == self::RESTOR_MODE) {
             $sTrashVal = str_replace(array($sFieldId, ','), '', $oData->trash);
         } else {
             $sTrashVal = ($oData->sender == $oData->recipient) ? 'sender,recipient' : $sFieldId . (!empty($oData->trash) ? ',' . $oData->trash : '');
         }
         unset($oData);
 
-        $sField = ($sMode == 'delete') ? 'toDelete' : 'trash';
+        $sField = ($sMode == self::DELETE_MODE) ? 'toDelete' : 'trash';
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Messages') . 'SET ' . $sField . ' = :val WHERE ' . $sFieldId . ' = :profileId AND messageId = :messageId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->bindValue(':val', $sTrashVal, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
+    /**
+     * @param integer|string $mLooking
+     * @param boolean $bCount
+     * @param string $sOrderBy
+     * @param string $sSort
+     * @param integer $iOffset
+     * @param integer $iLimit
+     * @param integer|null $iProfileId
+     * @param string $sType
+     *
+     * @return integer|object
+     */
     public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iProfileId = null, $sType = 'all')
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(messageId) AS totalMails';
