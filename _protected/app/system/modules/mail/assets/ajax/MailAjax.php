@@ -49,7 +49,11 @@ class Mail
 
     protected function trash()
     {
-            $this->_bStatus = $this->_oMailModel->setTo($this->_oSession->get('member_id'), $this->_oHttpRequest->post('msg_id'), 'trash');
+            $this->_bStatus = $this->_oMailModel->setTo(
+                $this->_oSession->get('member_id'),
+                $this->_oHttpRequest->post('msg_id'),
+                MailModel::TRASH_MODE
+            );
 
         if (!$this->_bStatus)
             $this->_sMsg = jsonMsg(0, t('Your message does not exist anymore in your trash bin.'));
@@ -61,7 +65,11 @@ class Mail
 
     protected function restor()
     {
-            $this->_bStatus = $this->_oMailModel->setTo($this->_oSession->get('member_id'), $this->_oHttpRequest->post('msg_id'), 'restor');
+            $this->_bStatus = $this->_oMailModel->setTo(
+                $this->_oSession->get('member_id'),
+                $this->_oHttpRequest->post('msg_id'),
+                MailModel::RESTOR_MODE
+            );
 
         if (!$this->_bStatus)
             $this->_sMsg = jsonMsg(0, t('Your message does not exist anymore in your inbox.'));
@@ -76,7 +84,11 @@ class Mail
         if (AdminCore::auth() && !UserCore::auth())
             $this->_bStatus = $this->_oMailModel->adminDeleteMsg($this->_oHttpRequest->post('msg_id'));
         else
-            $this->_bStatus = $this->_oMailModel->setTo($this->_oSession->get('member_id'), $this->_oHttpRequest->post('msg_id'), 'delete');
+            $this->_bStatus = $this->_oMailModel->setTo(
+                $this->_oSession->get('member_id'),
+                $this->_oHttpRequest->post('msg_id'),
+                MailModel::DELETE_MODE
+            );
 
         if (!$this->_bStatus)
             $this->_sMsg = jsonMsg(0, t('Your message does not exist anymore.'));

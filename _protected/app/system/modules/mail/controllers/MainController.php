@@ -315,7 +315,11 @@ class MainController extends Controller
 
     public function setTrash()
     {
-        $this->_bStatus = $this->oMailModel->setTo($this->_iProfileId, $this->httpRequest->post('id', 'int'), 'trash');
+        $this->_bStatus = $this->oMailModel->setTo(
+            $this->_iProfileId,
+            $this->httpRequest->post('id', 'int'),
+            MailModel::TRASH_MODE
+        );
 
         if ($this->_bStatus) {
             $this->sMsg = t('Your message has been moved to your trash bin.');
@@ -334,7 +338,11 @@ class MainController extends Controller
             if (count($this->httpRequest->post('action')) > 0) {
                 foreach ($this->httpRequest->post('action') as $iId) {
                     $iId = (int) $iId;
-                    $this->oMailModel->setTo($this->_iProfileId, $iId, 'trash');
+                    $this->oMailModel->setTo(
+                        $this->_iProfileId,
+                        $iId,
+                        MailModel::TRASH_MODE
+                    );
                 }
                 $this->sMsg = t('Your message(s) has/have been moved to your trash bin.');
             }
@@ -345,7 +353,11 @@ class MainController extends Controller
 
     public function setRestor()
     {
-        $this->_bStatus = $this->oMailModel->setTo($this->_iProfileId, $this->httpRequest->post('id', 'int'), 'restor');
+        $this->_bStatus = $this->oMailModel->setTo(
+            $this->_iProfileId,
+            $this->httpRequest->post('id', 'int'),
+            MailModel::RESTOR_MODE
+        );
 
         if ($this->_bStatus) {
             $this->sMsg = t('Your message has been moved to your inbox.');
@@ -364,7 +376,11 @@ class MainController extends Controller
             if (count($this->httpRequest->post('action')) > 0) {
                 foreach ($this->httpRequest->post('action') as $iId) {
                     $iId = (int) $iId;
-                    $this->oMailModel->setTo($this->_iProfileId, $iId, 'restor');
+                    $this->oMailModel->setTo(
+                        $this->_iProfileId,
+                        $iId,
+                        MailModel::RESTOR_MODE
+                    );
                 }
                 $this->sMsg = t('Your message(s) has/have been moved to your inbox.');
             }
@@ -380,7 +396,11 @@ class MainController extends Controller
         if ($this->_bAdminLogged) {
             $this->_bStatus = $this->oMailModel->adminDeleteMsg($iId);
         } else {
-            $this->_bStatus = $this->oMailModel->setTo($this->_iProfileId, $iId, 'delete');
+            $this->_bStatus = $this->oMailModel->setTo(
+                $this->_iProfileId,
+                $iId,
+                MailModel::DELETE_MODE
+            );
         }
 
         if ($this->_bStatus) {
@@ -405,7 +425,11 @@ class MainController extends Controller
                     if ($this->_bAdminLogged) {
                         $this->oMailModel->adminDeleteMsg($iId);
                     } else {
-                        $this->oMailModel->setTo($this->_iProfileId, $iId, 'delete');
+                        $this->oMailModel->setTo(
+                            $this->_iProfileId,
+                            $iId,
+                            MailModel::DELETE_MODE
+                        );
                     }
                 }
                 $this->sMsg = t('Your message(s) has/have been deleted successfully!');

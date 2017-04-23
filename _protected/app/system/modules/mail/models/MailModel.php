@@ -16,6 +16,16 @@ class MailModel extends MailCoreModel
 {
     const INBOX = 1, OUTBOX = 2, TRASH = 3;
 
+    const TRASH_MODE = 'trash';
+    const RESTOR_MODE = 'restor';
+    const DELETE_MODE = 'delete';
+
+    const MODES = [
+        self::TRASH_MODE,
+        self::RESTOR_MODE,
+        self::DELETE_MODE
+    ];
+
     public function readMsg($iRecipient, $iMessageId)
     {
         $rStmt = Db::getInstance()->prepare(
