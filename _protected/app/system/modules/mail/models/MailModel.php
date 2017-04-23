@@ -1,10 +1,11 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Mail / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Spam as SpamModel;
@@ -65,8 +66,9 @@ class MailModel extends MailCoreModel
      * @param integer $iRecipient
      * @param string $sTitle
      * @param string $sMessage
-     * @param string $sCreateDate
-     * @return mixed (boolean | integer) Returns the ID of the message on success or FALSE on failure.
+     * @param string $sCreatedDate
+     *
+     * @return boolean|integer Returns the ID of the message on success or FALSE on failure.
      */
     public function sendMsg($iSender, $iRecipient, $sTitle, $sMessage, $sCreatedDate)
     {
@@ -208,13 +210,21 @@ class MailModel extends MailCoreModel
     /**
      * Check Duplicate Contents.
      *
-     * @param integer $iSenderId Sender's ID.
-     * @param string $sMsg Message content.
+     * @param integer $iSenderId Sender's ID
+     * @param string $sMsg Message content
+     *
      * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public function isDuplicateContent($iSenderId, $sMsg)
     {
-        return SpamModel::detectDuplicate($sMsg, 'message', 'sender', $iSenderId, 'Messages', 'AND NOT FIND_IN_SET(\'recipient\', toDelete)');
+        return SpamModel::detectDuplicate(
+            $sMsg,
+            'message',
+            'sender',
+            $iSenderId,
+            'Messages',
+            'AND NOT FIND_IN_SET(\'recipient\', toDelete)'
+        );
     }
 
     /**
@@ -223,6 +233,7 @@ class MailModel extends MailCoreModel
      * @param integer $iSenderId
      * @param integer $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
+     *
      * @return boolean Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitSend($iSenderId, $iWaitTime, $sCurrentTime)

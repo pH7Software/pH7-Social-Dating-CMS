@@ -634,7 +634,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function setDefaultPrivacySetting()
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersPrivacy') . '(profileId, privacyProfile, searchProfile, userSaveViews)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersPrivacy') .
+            '(profileId, privacyProfile, searchProfile, userSaveViews)
             VALUES (:profileId, \'all\', \'yes\', \'yes\')');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         return $rStmt->execute();
@@ -647,7 +648,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function setDefaultNotification()
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersNotifications') . '(profileId, enableNewsletters, newMsg, friendRequest)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersNotifications') .
+            '(profileId, enableNewsletters, newMsg, friendRequest)
             VALUES (:profileId, 0, 1, 1)');
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         return $rStmt->execute();
@@ -667,7 +669,8 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix($sTable) . 'WHERE ip = :ip AND DATE_ADD(joinDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix($sTable) .
+            'WHERE ip = :ip AND DATE_ADD(joinDate, INTERVAL :waitTime MINUTE) > :currentTime LIMIT 1');
         $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);

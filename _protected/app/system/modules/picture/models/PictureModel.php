@@ -167,6 +167,7 @@ class PictureModel extends PictureCoreModel
      * @param integer $iOffset
      * @param integer $iLimit
      * @param integer $iApproved
+     *
      * @return integer|object
      */
     public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iApproved = 1)
