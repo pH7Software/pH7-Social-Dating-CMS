@@ -1,17 +1,17 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class SubscriptionModel extends UserCoreModel
 {
-
     /**
      * Get all Active Subscribers (it is required by the law to send emails only to the confirmed opt-in subscribers).
      *
@@ -30,12 +30,14 @@ class SubscriptionModel extends UserCoreModel
      * Adding a Subscriber.
      *
      * @param array $aData
+     *
      * @return integer The ID of the Subscriber.
      */
     public function add(array $aData)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Subscribers') . '(name, email, joinDate, ip, hashValidation, active, affiliatedId)
             VALUES (:name, :email, :joinDate, :ip, :hashValidation, :active, :affiliatedId)');
+
         $rStmt->bindValue(':name', $aData['name'], \PDO::PARAM_STR);
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':joinDate', $aData['current_date'], \PDO::PARAM_STR);
@@ -44,6 +46,7 @@ class SubscriptionModel extends UserCoreModel
         $rStmt->bindValue(':active', $aData['active'], \PDO::PARAM_INT);
         $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();
+
         return (int) Db::getInstance()->lastInsertId();
     }
 
@@ -94,18 +97,15 @@ class SubscriptionModel extends UserCoreModel
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             $mData = (int) $oRow->totalUsers;
             unset($oRow);
         }
         Db::free($rStmt);
+
         return $mData;
     }
-
 }

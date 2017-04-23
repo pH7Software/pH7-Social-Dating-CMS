@@ -104,8 +104,13 @@ class AdminModel extends AdminCoreModel
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
-        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE profileId = :looking' :
-            ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
+
+        if (ctype_digit($mLooking)) {
+            $sSqlWhere = ' WHERE profileId = :looking';
+        } else {
+            $sSqlWhere = ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
+        }
+
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Admins') . $sSqlWhere . $sSqlOrder . $sSqlLimit);

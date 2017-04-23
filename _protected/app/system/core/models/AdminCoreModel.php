@@ -29,9 +29,11 @@ class AdminCoreModel extends UserCoreModel
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
 
-        $sSql = ($sTable != 'Members')
-            ? 'SELECT * FROM'.Db::prefix($sTable). 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit'
-            : 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable). 'AS m INNER JOIN ' . Db::prefix('Memberships') . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
+        if ($sTable !== 'Members') {
+            $sSql = 'SELECT * FROM'.Db::prefix($sTable). 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
+        } else {
+            $sSql = 'SELECT m.*, g.name AS membershipName FROM' . Db::prefix($sTable). 'AS m INNER JOIN ' . Db::prefix('Memberships') . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE username <> \'' . PH7_GHOST_USERNAME . '\' ORDER BY joinDate DESC LIMIT :offset, :limit';
+        }
 
         $rStmt = Db::getInstance()->prepare($sSql);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
@@ -65,7 +67,12 @@ class AdminCoreModel extends UserCoreModel
         $sSqlSelect = (!$bCount) ? 'm.*, g.name AS membershipName' : 'COUNT(m.profileId) AS totalUsers';
 
         $sSqlQuery = (!empty($iBanned)) ? '(ban = 1) AND ' : '';
-        $sSqlQuery .= ($sWhere === 'all') ? '(m.username LIKE :what OR m.email LIKE :what OR m.firstName LIKE :what OR m.lastName LIKE :what OR m.ip LIKE :what)' : '(m.' . $sWhere . ' LIKE :what)';
+        if ($sWhere === 'all') {
+            $sSqlQuery .= '(m.username LIKE :what OR m.email LIKE :what OR m.firstName LIKE :what OR m.lastName LIKE :what OR m.ip LIKE :what)';
+        } else {
+            $sSqlQuery .= '(m.' . $sWhere . ' LIKE :what)';
+        }
+
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m INNER JOIN ' . Db::prefix('Memberships') . 'AS g ON m.groupId = g.groupId LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i ON m.profileId = i.profileId WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (m.groupId = :groupId) AND ' . $sSqlQuery . $sSqlOrder . $sSqlLimit);

@@ -55,7 +55,9 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function join2(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliatesInfo') . '(profileId, country, city, state, zipCode) VALUES (:profileId, :country, :city, :state, :zipCode)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliatesInfo') .
+            '(profileId, country, city, state, zipCode) VALUES (:profileId, :country, :city, :state, :zipCode)');
+
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);
         $rStmt->bindValue(':city', $aData['city'], \PDO::PARAM_STR);
@@ -102,7 +104,13 @@ class AffiliateModel extends AffiliateCoreModel
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(a.profileId) AS totalUsers';
-        $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE a.profileId = :looking' : ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR bankAccount LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
+
+        if (ctype_digit($mLooking)) {
+            $sSqlWhere = ' WHERE a.profileId = :looking';
+        } else {
+            $sSqlWhere = ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR bankAccount LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
+        }
+
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Affiliates') . 'AS a LEFT JOIN' . Db::prefix('AffiliatesInfo') . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
@@ -141,6 +149,7 @@ class AffiliateModel extends AffiliateCoreModel
 
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, ip, joinDate, lastActivity)
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :ip, :joinDate, :lastActivity)');
+
         $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
         $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
@@ -164,6 +173,7 @@ class AffiliateModel extends AffiliateCoreModel
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('AffiliatesInfo') . '(profileId, middleName, country, city, state, zipCode, phone, description, website)
             VALUES (:profileId, :middleName, :country, :city, :state, :zipCode, :phone, :description, :website)');
+
         $rStmt->bindValue(':profileId', $this->getKeyId(), \PDO::PARAM_INT);
         $rStmt->bindValue(':middleName', $aData['middle_name'], \PDO::PARAM_STR);
         $rStmt->bindParam(':country', $aData['country'], \PDO::PARAM_STR, 2);
