@@ -160,20 +160,20 @@ class NoteModel extends NoteCoreModel
      * @param string $sCategoryName
      * @param boolean $bCount
      * @param string $sOrderBy
-     * @param boolean $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      *
      * @return integer|\stdClass
      */
-    public function category($sCategoryName, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function category($sCategoryName, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
         $sCategoryName = trim($sCategoryName);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
         $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ?  'n.*, c.*, d.*, m.username, m.firstName, m.sex' : 'COUNT(n.noteId) AS totalNotes';
@@ -207,20 +207,20 @@ class NoteModel extends NoteCoreModel
      * @param string $sAuthor
      * @param boolean $bCount
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      *
      * @return integer|\stdClass
      */
-    public function author($sAuthor, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function author($sAuthor, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
         $sAuthor = trim($sAuthor);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
         $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ?  'n.*, m.username, m.firstName, m.sex' : 'COUNT(m.profileId) AS totalAuthors';
@@ -254,14 +254,14 @@ class NoteModel extends NoteCoreModel
      * @param integer|string $mLooking Integer for post ID or string for a keyword
      * @param boolean $bCount Put 'true' for count the notes or 'false' for the result of notes.
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      * @param integer $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
      *
      * @return integer|\stdClass (integer for the number notes returned or an object containing the notes list)
      */
-    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iApproved = 1)
+    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iApproved = 1)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
@@ -269,7 +269,7 @@ class NoteModel extends NoteCoreModel
         $mLooking = trim($mLooking);
 
         $sSqlApproved = (isset($iApproved)) ? ' AND (approved = :approved)' : '';
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
 
         $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ?  'n.*, m.username, m.firstName, m.sex' : 'COUNT(noteId) AS totalNotes';

@@ -46,19 +46,19 @@ class GameModel extends GameCoreModel
      * @param string $sCategoryName
      * @param boolean $bCount
      * @param string $sOrderBy
-     * @param boolean $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      * @return integer|object
      */
-    public function category($sCategoryName, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function category($sCategoryName, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
         $sCategoryName = strim($sCategoryName);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 'n');
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
         $sSqlSelect = (!$bCount) ? 'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
 
@@ -116,19 +116,20 @@ class GameModel extends GameCoreModel
      * @param integer|string $mLooking (integer for game ID or string for a keyword)
      * @param boolean $bCount Put 'true' for count the games or 'false' for the result of games.
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
+     *
      * @return integer|object Returns integer for the number games returned or DB object containing the games list.
      */
-    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(gameId) AS totalGames';
 
         if (ctype_digit($mLooking)) {

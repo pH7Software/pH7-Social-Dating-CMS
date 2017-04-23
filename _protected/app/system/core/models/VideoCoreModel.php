@@ -5,13 +5,13 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class VideoCoreModel extends Framework\Mvc\Model\Engine\Model
 {
-
     const
     CACHE_GROUP = 'db/sys/mod/video',
     CACHE_TIME = 172800,
@@ -56,5 +56,4 @@ class VideoCoreModel extends Framework\Mvc\Model\Engine\Model
 
         return $rStmt->execute();
     }
-
 }

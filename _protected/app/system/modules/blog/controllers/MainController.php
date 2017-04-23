@@ -119,13 +119,13 @@ class MainController extends Controller
     {
         $sCategory = str_replace('-', ' ', $this->httpRequest->get('name'));
         $sOrder = $this->httpRequest->get('order');
-        $sSort = $this->httpRequest->get('sort');
+        $iSort = $this->httpRequest->get('sort');
 
-        $this->iTotalBlogs = $this->oBlogModel->category($sCategory, true, $sOrder, $sSort, null, null);
+        $this->iTotalBlogs = $this->oBlogModel->category($sCategory, true, $sOrder, $iSort, null, null);
         $this->view->total_pages = $this->oPage->getTotalPages($this->iTotalBlogs, self::CATEGORIES_PER_PAGE);
         $this->view->current_page = $this->oPage->getCurrentPage();
 
-        $oSearch = $this->oBlogModel->category($sCategory, false, $sOrder, $sSort, $this->
+        $oSearch = $this->oBlogModel->category($sCategory, false, $sOrder, $iSort, $this->
             oPage->getFirstItem(), $this->oPage->getNbItemsPerPage());
         $this->setMenuVars();
 

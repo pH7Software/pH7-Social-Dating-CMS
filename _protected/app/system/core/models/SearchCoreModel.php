@@ -9,13 +9,13 @@
  * @package        PH7 / App / System / Core / Model
  * @version        1.1
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class SearchCoreModel
 {
-
     const
     NAME = 'name',
     TITLE = 'title',
@@ -40,10 +40,7 @@ class SearchCoreModel
     DESC = 2;
 
     /**
-     * @constructor
      * Private constructor to prevent instantiation of class since it's a static class.
-     *
-     * @access private
      */
     private function __construct() {}
 
@@ -51,14 +48,14 @@ class SearchCoreModel
      * Order By method.
      *
      * @param string $sColumn Table Column
-     * @param integer $iSort \PH7\SearchCoreModel::ASC OR \PH7\SearchCoreModel::DESC Default: \PH7\SearchCoreModel::ASC
+     * @param integer $iSort SearchCoreModel::ASC OR SearchCoreModel::DESC Default: SearchCoreModel::ASC
      * @param string $sAsTable The Alias Table, this prevents the ambiguous clause. Default: NULL
+     *
      * @return string SQL order by query
      */
     public static function order($sColumn, $iSort = self::ASC, $sAsTable = null)
     {
-        switch ($sColumn)
-        {
+        switch ($sColumn) {
             case static::NAME:
             case static::TITLE:
             case static::VIEWS:
@@ -90,13 +87,12 @@ class SearchCoreModel
     }
 
     /**
-     * @access protected
      * @param integer $iSort
+     *
      * @return string
      */
     protected static function sort($iSort)
     {
         return ($iSort === static::DESC) ? ' DESC ' : ' ASC ';
     }
-
 }

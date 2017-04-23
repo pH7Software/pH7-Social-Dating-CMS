@@ -8,20 +8,20 @@
  * @package        PH7/ App / System / Module / User / Model
  * @version        1.1
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class VisitorModel
 {
-
     private $_iProfileId, $_iVisitorId, $_sDateVisit;
 
     /**
      * Assignment of attributes.
      *
      * @param integer $iProfileId Profile ID.
-     * @param integer $iVisitor ID User ID (visitor). Default NULL (this attribute is null only for the get method).
+     * @param integer $iVisitorId ID User ID (visitor). Default NULL (this attribute is null only for the get method).
      * @param string $sDateVisit The date of last visit. Default NULL (this attribute is null only for the get method).
      */
     public function __construct($iProfileId, $iVisitorId = null, $sDateVisit = null)
@@ -50,46 +50,50 @@ class VisitorModel
     /**
      * Gets Viewed Profile.
      *
-     * @param mixed (integer for visitor ID or string for a keyword) $mLooking
+     * @param integer|string $mLooking Integer for visitor ID or string for a keyword
      * @param boolean $bCount Put 'true' for count visitors or 'false' for the result of visitors.
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
-     * @return mixed (object | integer) object for the visitors list returned or integer for the total number visitors returned.
+     *
+     * @return integer|\stdClass An object for the visitors list or an integer for the total number visitors returned
      */
-    public function get($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function get($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(who.profileId) AS totalVisitors';
-        $sSqlWhere = (ctype_digit($mLooking)) ? '(who.visitorId = :looking)' : '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+
+        if (ctype_digit($mLooking)) {
+            $sSqlWhere = '(who.visitorId = :looking)';
+        } else {
+            $sSqlWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
+        }
+
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('MembersWhoViews') . 'AS who LEFT JOIN ' . Db::prefix('Members') .
             'AS m ON who.visitorId = m.profileId WHERE (who.profileId = :profileId) AND ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
         $rStmt->bindValue(':profileId', $this->_iProfileId, \PDO::PARAM_INT);
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return $oRow;
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return (int) $oRow->totalVisitors;

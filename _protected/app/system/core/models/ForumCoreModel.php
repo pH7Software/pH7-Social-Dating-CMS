@@ -43,17 +43,31 @@ class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $sSqlMessageId = (!empty($iMessageId)) ? ' AND msg.messageId = :messageId ' : '';
         $sSqlProfileId = (!empty($iProfileId)) ? ' AND msg.profileId = :profileId ' : '';
+
         $rStmt = Db::getInstance()->prepare('SELECT f.name, t.title, t.forumId, msg.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') .
-            'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId INNER JOIN ' . Db::prefix('ForumsMessages') . 'AS msg ON t.topicId = msg.topicId LEFT JOIN' . Db::prefix('Members') . 'AS m
-            ON msg.profileId = m.profileId WHERE msg.topicId = :topicId ' . $sSqlMessageId . $sSqlProfileId . ' AND msg.approved = :approved ORDER BY msg.createdDate ' . $sSort . ' LIMIT :offset, :limit');
+            'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId INNER JOIN ' . Db::prefix('ForumsMessages') .
+            'AS msg ON t.topicId = msg.topicId LEFT JOIN' . Db::prefix('Members') . 'AS m ON msg.profileId = m.profileId WHERE msg.topicId = :topicId ' .
+            $sSqlMessageId . $sSqlProfileId . ' AND msg.approved = :approved ORDER BY msg.createdDate ' . $sSort . ' LIMIT :offset, :limit');
+
         $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
-        if (!empty($iMessageId)) $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
-        if (!empty($iProfileId)) $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+
+        if (!empty($iMessageId)) {
+            $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
+        }
+
+        if (!empty($iProfileId)) {
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        }
+
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
-        return (!empty($iProfileId)) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
-    }
 
+        if (!empty($iProfileId)) {
+            return $rStmt->fetch(\PDO::FETCH_OBJ);
+        } else {
+            return $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        }
+    }
 }

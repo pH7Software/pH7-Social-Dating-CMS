@@ -89,13 +89,13 @@ class AdminModel extends AdminCoreModel
      * @param integer|string $mLooking
      * @param boolean $bCount
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param string $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      *
      * @return integer|object
      */
-    public function searchAdmin($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function searchAdmin($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
@@ -111,7 +111,7 @@ class AdminModel extends AdminCoreModel
             $sSqlWhere = ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
         }
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Admins') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 

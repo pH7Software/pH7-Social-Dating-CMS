@@ -89,13 +89,13 @@ class AffiliateModel extends AffiliateCoreModel
      * @param integer|string $mLooking (integer for profile ID or string for a keyword)
      * @param boolean $bCount Put 'true' for count the affiliates or 'false' for the result of affiliates.
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      *
      * @return object|integer Object for the affiliate list or Integer for the total number users returned.
      */
-    public function searchAff($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function searchAff($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
@@ -111,7 +111,7 @@ class AffiliateModel extends AffiliateCoreModel
             $sSqlWhere = ' WHERE username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking OR email LIKE :looking OR bankAccount LIKE :looking OR sex LIKE :looking OR ip LIKE :looking';
         }
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Affiliates') . 'AS a LEFT JOIN' . Db::prefix('AffiliatesInfo') . 'AS i ON a.profileId = i.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 

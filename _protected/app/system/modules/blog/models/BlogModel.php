@@ -119,20 +119,20 @@ class BlogModel extends BlogCoreModel
      * @param string $sCategoryName
      * @param boolean $bCount
      * @param string $sOrderBy
-     * @param boolean $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      *
      * @return integer|\stdClass
      */
-    public function category($sCategoryName, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function category($sCategoryName, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
         $sCategoryName = trim($sCategoryName);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ?  '*' : 'COUNT(b.blogId) AS totalBlogs';
@@ -166,20 +166,20 @@ class BlogModel extends BlogCoreModel
      * @param integer|string $mLooking
      * @param boolean $bCount
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      *
      * @return integer|\stdClass
      */
-    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ?  '*' : 'COUNT(blogId) AS totalBlogs';

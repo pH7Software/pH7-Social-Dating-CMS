@@ -23,12 +23,12 @@ class BirthdayCoreModel
      * @param string $sGender Constant (self::ALL, self::COUPLE, self::MALE, self::FEMALE). Default: self::ALL
      * @param boolean $bCount Put TRUE for count birthdays or FALSE for the result of birthdays. Default: TRUE
      * @param string $sOrderBy Default: SearchCoreModel::LAST_ACTIVITY
-     * @param string $sSort Default: SearchCoreModel::DESC
+     * @param integer $iSort Default: SearchCoreModel::DESC
      * @param integer $iOffset Default: NULL
      * @param integer $iLimit Default: NULL
      * @return mixed (object | integer) object for the birthdays list returned or integer for the total number birthdays returned.
      */
-    public function get($sGender = self::ALL, $bCount = false, $sOrderBy = SearchCoreModel::LAST_ACTIVITY, $sSort = SearchCoreModel::DESC, $iOffset = null, $iLimit = null)
+    public function get($sGender = self::ALL, $bCount = false, $sOrderBy = SearchCoreModel::LAST_ACTIVITY, $iSort = SearchCoreModel::DESC, $iOffset = null, $iLimit = null)
     {
         $bIsLimit = (null !== $iOffset && null !== $iLimit);
         $bIsSex = ($sGender !== self::ALL);
@@ -40,7 +40,7 @@ class BirthdayCoreModel
         $sSqlLimit = (!$bCount && $bIsLimit) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalBirths';
         $sSqlWhere = ($bIsSex) ? ' AND (sex = :sex) ' : '';
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (groupId <> 1) AND (groupId <> 9) AND (birthDate LIKE :date)' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
         $rStmt->bindValue(':date', '%' . (new CDateTime)->get()->date('-m-d'), \PDO::PARAM_STR);

@@ -239,19 +239,19 @@ class ForumModel extends ForumCoreModel
      * @param integer|string $mLooking (integer for Topic ID or string for a keyword)
      * @param boolean $bCount Put 'true' for count the topics or 'false' for the result of topics.
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      * @return integer|object (integer for the number topics returned or an object for the topics list)
      */
-    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort, 't');
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 't');
 
         $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ?  'f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId) AS totalTopics';

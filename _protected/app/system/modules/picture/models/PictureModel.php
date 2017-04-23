@@ -163,21 +163,21 @@ class PictureModel extends PictureCoreModel
      * @param integer|string $mLooking
      * @param boolean $bCount
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      * @param integer $iApproved
      *
      * @return integer|object
      */
-    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iApproved = 1)
+    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iApproved = 1)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? 'p.*' : 'COUNT(p.pictureId) AS totalPictures';

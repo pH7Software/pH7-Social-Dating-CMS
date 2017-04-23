@@ -71,13 +71,13 @@ class SubscriptionModel extends UserCoreModel
      * @param integer|string $mLooking Integer for profile ID or string for a keyword
      * @param boolean $bCount Put 'true' for count the subscribers or 'false' for the result of subscribers.
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      *
      * @return integer|object Integer for the number subscribers returned or string for the subscribers list returned
      */
-    public function browse($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
+    public function browse($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
@@ -87,7 +87,7 @@ class SubscriptionModel extends UserCoreModel
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE profileId = :looking' : ' WHERE name LIKE :looking OR email LIKE :looking OR ip LIKE :looking';
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Subscribers') . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 

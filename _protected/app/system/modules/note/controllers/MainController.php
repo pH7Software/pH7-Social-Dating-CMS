@@ -125,13 +125,13 @@ class MainController extends Controller
     {
         $sCategory = str_replace('-', ' ', $this->httpRequest->get('name'));
         $sOrder = $this->httpRequest->get('order');
-        $sSort = $this->httpRequest->get('sort');
+        $iSort = $this->httpRequest->get('sort');
 
         $this->iTotalNotes = $this->oNoteModel->category(
             $sCategory,
             true,
             $sOrder,
-            $sSort,
+            $iSort,
             null,
             null
         );
@@ -144,7 +144,7 @@ class MainController extends Controller
             $sCategory,
             false,
             $sOrder,
-            $sSort,
+            $iSort,
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );
@@ -175,13 +175,13 @@ class MainController extends Controller
     {
         $sAuthor = $this->httpRequest->get('author');
         $sOrder = $this->httpRequest->get('order');
-        $sSort = $this->httpRequest->get('sort');
+        $iSort = $this->httpRequest->get('sort');
 
         $this->iTotalNotes = $this->oNoteModel->author(
             $sAuthor,
             true,
             $sOrder,
-            $sSort,
+            $iSort,
             null,
             null
         );
@@ -194,7 +194,7 @@ class MainController extends Controller
             $sAuthor,
             false,
             $sOrder,
-            $sSort,
+            $iSort,
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );

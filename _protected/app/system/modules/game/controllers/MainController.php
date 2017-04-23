@@ -111,13 +111,13 @@ class MainController extends Controller
     {
         $sCategory = str_replace('-', ' ', $this->httpRequest->get('name'));
         $sOrder = $this->httpRequest->get('order');
-        $sSort = $this->httpRequest->get('sort');
+        $iSort = $this->httpRequest->get('sort');
 
         $this->iTotalGames = $this->oGameModel->category(
             $sCategory,
             true,
             $sOrder,
-            $sSort,
+            $iSort,
             null,
             null
         );
@@ -130,7 +130,7 @@ class MainController extends Controller
             $sCategory,
             false,
             $sOrder,
-            $sSort,
+            $iSort,
             $this->oPage->getFirstItem(),
             $this->oPage->getNbItemsPerPage()
         );

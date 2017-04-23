@@ -203,7 +203,7 @@ class MailModel extends MailCoreModel
      * @param integer|string $mLooking
      * @param boolean $bCount
      * @param string $sOrderBy
-     * @param string $sSort
+     * @param integer $iSort
      * @param integer $iOffset
      * @param integer $iLimit
      * @param integer|null $iProfileId
@@ -211,7 +211,7 @@ class MailModel extends MailCoreModel
      *
      * @return integer|\stdClass
      */
-    public function search($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit, $iProfileId = null, $sType = 'all')
+    public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iProfileId = null, $sType = 'all')
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
@@ -221,7 +221,7 @@ class MailModel extends MailCoreModel
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(messageId) AS totalMails';
         $sSqlFind = ' ' . (ctype_digit($mLooking) ? '(messageId = :looking)' : '(title LIKE :looking OR message LIKE :looking OR username LIKE :looking OR firstName LIKE :looking OR lastName LIKE :looking)');
-        $sSqlOrder = SearchCoreModel::order($sOrderBy, $sSort);
+        $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         switch ($sType) {
             case self::INBOX:
