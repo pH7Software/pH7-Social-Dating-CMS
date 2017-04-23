@@ -37,14 +37,29 @@ class AdminCoreModel extends UserCoreModel
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param integer|string $mWhat
+     * @param string $sWhere
+     * @param integer $iGroupId
+     * @param integer $iBanned
+     * @param boolean $bCount
+     * @param string $sOrderBy
+     * @param string $sSort
+     * @param integer $iOffset
+     * @param integer $iLimit
+     *
+     * @return integer|\stdClass
+     */
     public function searchUser($mWhat, $sWhere, $iGroupId, $iBanned, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mWhat = trim($mWhat);
 
         $sSqlLimit = (!$bCount) ?  ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? 'm.*, g.name AS membershipName' : 'COUNT(m.profileId) AS totalUsers';
