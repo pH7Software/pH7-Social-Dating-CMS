@@ -54,31 +54,35 @@ class SubscriptionModel extends UserCoreModel
      * Delete a Subscriber.
      *
      * @param integer $sEmail
+     *
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
     public function unsubscribe($sEmail)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Subscribers') . 'WHERE email = :email LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
     /**
      * Browse Subscribers.
      *
-     * @param mixed (integer for profile ID or string for a keyword) $mLooking
+     * @param integer|string $mLooking Integer for profile ID or string for a keyword
      * @param boolean $bCount Put 'true' for count the subscribers or 'false' for the result of subscribers.
      * @param string $sOrderBy
      * @param string $sSort
      * @param integer $iOffset
      * @param integer $iLimit
-     * @return mixed (integer for the number subscribers returned or string for the subscribers list returned)
+     *
+     * @return integer|object Integer for the number subscribers returned or string for the subscribers list returned
      */
     public function browse($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
