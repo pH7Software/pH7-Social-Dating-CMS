@@ -125,6 +125,7 @@ class Video extends Upload
      * Generate a thumbnail with FFmpeg.
      *
      * @param string $sPicturePath
+     * @param integer $iSeconds
      * @param integer $iWidth
      * @param integer $iHeight
      *

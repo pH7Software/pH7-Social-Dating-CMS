@@ -90,7 +90,7 @@ class AdminModel extends AdminCoreModel
      * @param boolean $bCount
      * @param string $sOrderBy
      * @param string $sSort
-     * @param integer$iOffset
+     * @param integer $iOffset
      * @param integer $iLimit
      *
      * @return integer|object
