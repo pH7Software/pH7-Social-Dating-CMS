@@ -77,25 +77,28 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Affiliates') . 'SET refer = refer+1 WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         Db::free($rStmt);
+
         return $rStmt->execute();
     }
 
     /**
      * Search an affiliate.
      *
-     * @param mixed (integer for profile ID or string for a keyword) $mLooking
+     * @param integer|string $mLooking (integer for profile ID or string for a keyword)
      * @param boolean $bCount Put 'true' for count the affiliates or 'false' for the result of affiliates.
      * @param string $sOrderBy
      * @param string $sSort
      * @param integer $iOffset
      * @param integer $iLimit
-     * @return mixed (object | integer) Object for the affiliate list returned or Integer for the total number users returned.
+     *
+     * @return object|integer Object for the affiliate list or Integer for the total number users returned.
      */
     public function searchAff($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(a.profileId) AS totalUsers';

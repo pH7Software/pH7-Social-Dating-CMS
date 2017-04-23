@@ -85,11 +85,22 @@ class AdminModel extends AdminCoreModel
         unset($oDb);
     }
 
+    /**
+     * @param integer|string $mLooking
+     * @param boolean $bCount
+     * @param string $sOrderBy
+     * @param string $sSort
+     * @param integer$iOffset
+     * @param integer $iLimit
+     *
+     * @return integer|object
+     */
     public function searchAdmin($mLooking, $bCount, $sOrderBy, $sSort, $iOffset, $iLimit)
     {
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
+        $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalUsers';
