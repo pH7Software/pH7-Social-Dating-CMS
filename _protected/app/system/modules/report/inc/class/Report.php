@@ -1,43 +1,49 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Report / Inc / Class
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Mail\Mail,
-PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mail\Mail;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class Report
 {
-    private $_oView, $_mStatus = false;
+    /** @var PH7Tpl */
+    private $_oView;
 
-    /**
-     * Initialization of method(s)
-     */
+    /** @var string|bool */
+    private $_mStatus = false;
+
     public function __construct()
     {
         $this->_oView = new PH7Tpl;
     }
 
     /**
-     * Add the fields in the database
+     * Add the fields in the database.
      *
      * @param array $aData The data to  add
-     * @return object this
+     *
+     * @return Report
      */
     public function add(array $aData)
     {
-        $this->_mStatus = (new ReportModel)->add($aData);
+        $oExistsModel = new ExistsCoreModel;
 
-        if ($this->_mStatus === true) {
-            if (DbConfig::getSetting('sendReportMail')) {
-                $this->sendMail($aData);
+        if ($oExistsModel->id($aData['reporter_id']) && $oExistsModel->id($aData['spammer_id'])) {
+            $this->_mStatus = (new ReportModel)->add($aData);
+
+            if ($this->_mStatus === true) {
+                if (DbConfig::getSetting('sendReportMail')) {
+                    $this->sendMail($aData);
+                }
             }
         }
 

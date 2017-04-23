@@ -769,11 +769,17 @@ class Design
      */
     public function report($iId, $sUsername, $sFirstName, $sSex)
     {
-        $sReportLink = (UserCore::auth()) ?
-            Uri::get('report', 'main', 'abuse', '?spammer=' . $iId . '&amp;url=' . $this->oHttpRequest->currentUrl() . '&amp;type=' . Registry::getInstance()->module, false) . '" data-popup="block-page' :
-            Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(['msg' => t('You must be registered to report contents.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex]), false);
+        $iId = (int) $iId;
 
-        echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
+        if ($iId > PH7_GHOST_ID) {
+            $sReportLink = (UserCore::auth()) ?
+                Uri::get('report', 'main', 'abuse', '?spammer=' . $iId . '&amp;url=' . $this->oHttpRequest->currentUrl() . '&amp;type=' . Registry::getInstance()->module, false) . '" data-popup="block-page' :
+                Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(['msg' => t('You must be registered to report contents.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex]), false);
+
+            echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
+        } else {
+            echo '<abbr title="' . t('Report feature is not available for this content since the user who posted that content has been deleted.') . '"">' . t('Report') . '</abbr>';
+        }
     }
 
     /**
