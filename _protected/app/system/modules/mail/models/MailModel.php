@@ -102,6 +102,9 @@ class MailModel extends MailCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param string $iMessageId
+     */
     public function adminDeleteMsg($iMessageId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Messages') . 'WHERE messageId = :messageId LIMIT 1');
@@ -117,6 +120,9 @@ class MailModel extends MailCoreModel
         Db::free($rStmt);
     }
 
+    /**
+     * @param integer $iMessageId
+     */
     public function getMsg($iMessageId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Messages') . 'WHERE messageId = :messageId LIMIT 1');
