@@ -16,10 +16,11 @@ class FriendModel extends FriendCoreModel
     /**
      * Check exists in the friends list
      *
-     * @param integer $iProfileId = user Id
-     * @param integer $iFriendId friend id
-     * @param mixed (integer or string) $mPending 'all' = select the friends that are approved and pending, 1 = approved or 0 = pending friend requests. Default value is 'all'
-     * @param boolean
+     * @param integer $iProfileId
+     * @param integer $iFriendId
+     * @param integer|string $mPending 'all' = select the friends that are approved and pending, 1 = approved or 0 = pending friend requests. Default value is 'all'
+     *
+     * @return boolean
      */
     public function inList($iProfileId, $iFriendId, $mPending = 'all')
     {
@@ -37,6 +38,7 @@ class FriendModel extends FriendCoreModel
             $rStmt->bindValue(':pending', $mPending, \PDO::PARAM_INT);
         }
         $rStmt->execute();
+
         return $rStmt->fetchColumn() > 0;
     }
 
