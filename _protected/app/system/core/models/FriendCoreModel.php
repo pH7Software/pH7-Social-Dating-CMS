@@ -1,6 +1,6 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
@@ -34,8 +34,12 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
         $iLimit = (int) $iLimit;
         $mLooking = trim($mLooking);
 
-        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ?  '(f.profileId + f.friendId - :profileId) AS fdId, f.*, m.username, m.firstName, m.sex' : 'COUNT(f.friendId) AS totalFriends';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        if (!$bCount) {
+            $sSqlSelect = '(f.profileId + f.friendId - :profileId) AS fdId, f.*, m.username, m.firstName, m.sex';
+        } else {
+            $sSqlSelect = 'COUNT(f.friendId) AS totalFriends';
+        }
 
         if (!empty($iFriendId)) {
             $sSqlWhere = 'f.profileId IN
@@ -50,7 +54,12 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
             $sSqlWhere = '(f.profileId = :profileId OR f.friendId = :profileId)';
         }
 
-        $sSqlSearchWhere = (ctype_digit($mLooking)) ? '(m.profileId = :profileId AND f.friendId= :profileId) OR (m.profileId = :friendId OR f.friendId= :friendId)' : '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
+        if (ctype_digit($mLooking)) {
+            $sSqlSearchWhere = '(m.profileId = :profileId AND f.friendId= :profileId) OR (m.profileId = :friendId OR f.friendId= :friendId)';
+        } else {
+            $sSqlSearchWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
+        }
+
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
         $rStmt = Db::getInstance()->prepare(
@@ -94,11 +103,14 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
      * Get Pending Friend.
      *
      * @param integer $iFriendId
+     *
      * @return integer
      */
     public static function getPending($iFriendId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pending) AS pendingFds FROM' . Db::prefix('MembersFriends') . 'WHERE friendId = :friendId AND pending = \'1\'');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(pending) AS pendingFds FROM' .
+            Db::prefix('MembersFriends') . 'WHERE friendId = :friendId AND pending = \'1\'');
+
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -111,11 +123,14 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
      * Count total friends.
      *
      * @param integer $iProfileId
+     *
      * @return integer
      */
     public static function total($iProfileId)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) AS totalFds FROM' . Db::prefix('MembersFriends') . 'WHERE (profileId = :profileId OR friendId= :profileId)');
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(friendId) AS totalFds FROM' . Db::prefix('MembersFriends') .
+            'WHERE (profileId = :profileId OR friendId= :profileId)');
+
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
@@ -123,5 +138,4 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
 
         return (int) $oRow->totalFds;
     }
-
 }

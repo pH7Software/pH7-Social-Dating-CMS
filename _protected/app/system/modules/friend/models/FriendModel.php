@@ -47,6 +47,7 @@ class FriendModel extends FriendCoreModel
      * @param integer $iFriendId friend id
      * @param string $sRequestDate Date of the Request Friend.
      * @param integer $iPending  1 = approved or 0 = pending friend requests. Default value is 1
+     *
      * @return string Status in word: 'error', 'id_does_not_exist', 'friend_exists' or 'success'
      */
     public function add($iProfileId, $iFriendId, $sRequestDate, $iPending = 1)
@@ -90,6 +91,7 @@ class FriendModel extends FriendCoreModel
      *
      * @param integer $iProfileId
      * @param integer $iFriendId
+     *
      * @return boolean
      */
     public function approval($iProfileId, $iFriendId)
@@ -101,6 +103,7 @@ class FriendModel extends FriendCoreModel
             'SET pending = 0 WHERE profileId = :friendId AND friendId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -109,6 +112,7 @@ class FriendModel extends FriendCoreModel
      *
      * @param integer $iProfileId
      * @param integer $iFriendId
+     *
      * @return boolean
      */
     public function delete($iProfileId, $iFriendId)
@@ -120,6 +124,7 @@ class FriendModel extends FriendCoreModel
             'WHERE (profileId = :profileId AND friendId = :friendId) OR (friendId = :profileId AND profileId = :friendId)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 }
