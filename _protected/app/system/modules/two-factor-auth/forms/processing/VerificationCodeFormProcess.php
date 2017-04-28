@@ -5,14 +5,16 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Two-Factor Auth / Form / Processing
  */
+
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
-use
-PH7\Framework\Mvc\Model\Engine\Util\Various,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header,
-RobThree\Auth\TwoFactorAuth as Authenticator;
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+use RobThree\Auth\TwoFactorAuth as Authenticator;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class VerificationCodeFormProcess extends Form
 {
@@ -36,8 +38,7 @@ class VerificationCodeFormProcess extends Form
         $sCode = $this->httpRequest->post('verification_code');
         $bCheck = $oAuthenticator->verifyCode($sSecret, $sCode, self::OTP_TOLERANCE);
 
-        if ($bCheck)
-        {
+        if ($bCheck) {
             $sCoreClassName = $this->getClassName($sMod);
             $sCoreModelClassName = $sCoreClassName . 'Model';
             $sCoreModelClass = new $sCoreModelClassName;
@@ -46,9 +47,7 @@ class VerificationCodeFormProcess extends Form
 
             $sUrl = ($sMod == PH7_ADMIN_MOD) ? Uri::get(PH7_ADMIN_MOD, 'main', 'index') : Uri::get($sMod, 'account', 'index');
             Header::redirect($sUrl, t('You are successfully logged in!'));
-        }
-        else
-        {
+        } else {
             \PFBC\Form::setError('form_verification_code', t('Oops! The Verification Code is incorrect. Please try again.'));
         }
     }
@@ -57,13 +56,14 @@ class VerificationCodeFormProcess extends Form
      * Get main user core class according to the module.
      *
      * @param string $sMod Module name.
+     *
      * @return string Correct class nlass name
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message if the specified module is wrong.
+     *
+     * @throws PH7InvalidArgumentException Explanatory message if the specified module is wrong.
      */
     protected function getClassName($sMod)
     {
-        switch ($sMod)
-        {
+        switch ($sMod) {
             case 'user':
                 $oClass = 'UserCore';
             break;
@@ -77,7 +77,7 @@ class VerificationCodeFormProcess extends Form
             break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Wrong "' . $sMod . '" module specified to get the class name');
+                throw new PH7InvalidArgumentException('Wrong "' . $sMod . '" module specified to get the class name');
         }
 
         // Need to use the fully qualified name (with namespace) as we create the class name dynamically
