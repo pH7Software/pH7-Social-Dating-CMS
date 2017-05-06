@@ -4,6 +4,15 @@
 
 <p class="bold">{$LANG.looking_hosting}</p>
 <p class="bold"><a href="{$smarty.const.PH7_URL_ROOT}" target="_blank">{$LANG.go_your_site}</a> &nbsp; | &nbsp; <a href="{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}" target="_blank">{$LANG.go_your_admin_panel} (<em>{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}</em>)</a></p>
+
+{if $smarty.session.val.admin_username}
+    <ul>
+        <li><a href="{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}" target="_blank">{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}</a></li>
+        <li>{$LANG.admin_login_email}: {$smarty.session.val.admin_login_email|escape}</li>
+        <li>{$LANG.admin_username}: {$smarty.session.val.admin_username|escape}</li>
+    </ul>
+{/if}
+
 <p>&nbsp;</p>
 
 <p>{$LANG.remove_install_folder}</p>
