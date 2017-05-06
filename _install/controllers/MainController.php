@@ -9,15 +9,14 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class MainController extends Controller
 {
-
     /********************* ERROR 404 *********************/
     public function error_404()
     {
         $this->oView->display('error_404.tpl');
     }
-
 }
