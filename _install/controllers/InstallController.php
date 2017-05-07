@@ -600,7 +600,7 @@ class InstallController extends Controller
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
 
-        if (!empty($_SESSION['val']['admin_login_email']))
+        if (!empty($_SESSION['val']['admin_login_email']) && !empty($_SESSION['val']['admin_username']))
         {
             $this->_sendWelcomeEmail();
 

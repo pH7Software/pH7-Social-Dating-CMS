@@ -100,7 +100,7 @@ $LANG = array(
         <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
         <p>L\'URL de VOTRE Site de Rencontre est : <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
         <p>L\'URL du panneau d\'administration est : <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
-            Votre adresse e-mail pour le panneau d\'administration est : <em>' . $_SESSION['val']['admin_email'] . '</em><br />
+            Votre adresse e-mail pour le panneau d\'administration est : <em>' . $_SESSION['val']['admin_login_email'] . '</em><br />
             Votre nom d\'utilisateur pour le panneau d\'administration est : <em>' . $_SESSION['val']['admin_username'] . '</em><br />
             Votre mot de passe est : <em>****** (caché pour des raisons de sécurité. C\'est celui choisi durant l\'installation).</em>
         </p>
