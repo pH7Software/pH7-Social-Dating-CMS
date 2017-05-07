@@ -99,11 +99,11 @@ $LANG = array(
     'title_email_finish_install' => 'About your installation: Information',
     'content_email_finish_install' => '<p><strong>Congratulations, your website is now successfully installed!</strong></p>
         <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
-        <p>The URL of Your OWN Social/Dating website is: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-        <p>Your Admin Panel URL is: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a><br />
-            Your Admin Login Email is: ' . $_SESSION['val']['admin_email'] . '<br />
-            Your Admin Login Username is: ' . $_SESSION['val']['admin_username'] . '<br />
-            Your Admin Login Password is: ****** (hidden for security reasons. It\'s the one you chose during the installation)
+        <p>The URL of Your OWN Social/Dating website is: <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
+        <p>Your Admin Panel URL is: <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
+            Your Admin Login Email is: <em>' . $_SESSION['val']['admin_email'] . '</em><br />
+            Your Admin Login Username is: <em>' . $_SESSION['val']['admin_username'] . '</em><br />
+            Your Admin Login Password is: <em>****** (hidden for security reasons. It\'s the one you chose during the installation).</em>
         </p>
         <p>Don\'t forget to show off by showing YOUR new Social/Dating Site to all your friends, your colleagues and your Facebook\'s mates (and even to your haters... or not :-) ).</p>
         <p>Finally, if you haven\'t done it yet, it\'s a really good time to buy a license today by simply <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visiting our website</a> in order to get all Premium Modules/Features, Remove all Links and Copyright Notice on your Website and even get access to the Unlimited Support Ticket.</p>
@@ -116,7 +116,7 @@ $LANG = array(
     'yes_dir' => 'The directory was found successfully!',
     'no_dir' => 'The directory does not exist.',
     'wait_importing_database' => 'Please wait while importing the database.<br />
-    This may take several minutes.',
+        This may take several minutes.',
     'service' => 'Useful additional services',
     'buy_copyright_license_title' => 'Buy a Copyright Removal License',
     'buy_copyright_license' => '<span class="gray">One-time Payment</span><br /> <span class="bold">Buy Now</span>',
@@ -140,6 +140,7 @@ $LANG = array(
     'looking_hosting' =>'Looking for a Web host compatible with pH7CMS? See <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">our Web Hosting List</a>!',
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
         Please enable JavaScript via the options of your Web browser in order to use this website.',
+    'admin_url' => 'Admin Panel URL',
     'powered' => 'Powered by',
     'loading' => 'Loading...',
 );

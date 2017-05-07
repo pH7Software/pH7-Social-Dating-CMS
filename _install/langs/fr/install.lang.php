@@ -98,11 +98,11 @@ $LANG = array(
     'title_email_finish_install' => 'À propos de l\'installation : Informations',
     'content_email_finish_install' => '<p><strong>Félicitations, votre site Web est maintenant installé avec succès !</strong></p>
         <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
-        <p>L\'URL de VOTRE Site de Rencontre est : <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-        <p>L\'URL du panneau d\'administration est : <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a><br />
-            Votre adresse e-mail pour le panneau d\'administration est : ' . $_SESSION['val']['admin_email'] . '<br />
-            Votre nom d\'utilisateur pour le panneau d\'administration est : ' . $_SESSION['val']['admin_username'] . '<br />
-            Votre mot de passe est : ****** (caché pour des raisons de sécurité. C\'est celui choisi durant l\'installation)
+        <p>L\'URL de VOTRE Site de Rencontre est : <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
+        <p>L\'URL du panneau d\'administration est : <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
+            Votre adresse e-mail pour le panneau d\'administration est : <em>' . $_SESSION['val']['admin_email'] . '</em><br />
+            Votre nom d\'utilisateur pour le panneau d\'administration est : <em>' . $_SESSION['val']['admin_username'] . '</em><br />
+            Votre mot de passe est : <em>****** (caché pour des raisons de sécurité. C\'est celui choisi durant l\'installation).</em>
         </p>
         <p>N\'oubliez pas de vous la frimer en montrant votre nouveau site de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
         <p>Enfin, si cela n\'est pas encore fait, c\'est une excellent idée pour acheter aujourd\'hui une clé de licence en vous rendant simplement sur <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">notre site Web</a> afin d\'obtenir les fonctionnalités Premium, la suppression des liens et les mentions de copyright sur votre site et même l\'accès au support de ticket illimité.</p>
@@ -115,7 +115,7 @@ $LANG = array(
     'yes_dir' => 'Le répertoire a été trouvé avec succès !',
     'no_dir' => 'Le répertoire n\'existe pas.',
     'wait_importing_database' => 'Veuillez patienter pendant l\'importation de la base de donnée.<br />
-    Cette opération peut prendre plusieurs minutes.',
+        Cette opération peut prendre plusieurs minutes.',
     'service' => 'Services additionnels utiles',
     'buy_copyright_license_title' => 'Acheter une licence',
     'buy_copyright_license' => '<span class="gray">Licence à vie</span><br /> <span class="bold">Acheter maintenant</span>',
@@ -138,7 +138,8 @@ $LANG = array(
     'note_able_to_change_niche_settings_later' => 'Veuillez noter que vous pourrez changer le thème et activer/désactiver les modules par la suite dans votre panneau d\'administration.',
     'looking_hosting' =>'À la recherche d\'un hébergement Web ? Regardez <a href="' . Controller::SOFTWARE_HOSTING_LIST_FR_URL . '" target="_blank">notre Liste d\'Hébergeurs</a> ?',
     'warning_no_js' => 'Cette page Web est incompatible sans l\'activation de JavaScript.<br />
-    Veuillez activer JavaScript via les options de votre navigateur Web.',
+        Veuillez activer JavaScript via les options de votre navigateur Web.',
+    'admin_url' => 'URL du panneau d\'administration',
     'powered' => 'Propulsé par',
     'loading' => 'Chargement en cours...',
 );

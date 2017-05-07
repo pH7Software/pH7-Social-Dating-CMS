@@ -111,7 +111,7 @@ $LANG = array(
     'yes_dir' => '¡El directorio se encuentra correctamente!',
     'no_dir' => 'El directorio no existe.',
     'wait_importing_database' => 'Espere al importar la base de datos por favor.<br />
-    Esto puede tardar varios minutos.',
+        Esto puede tardar varios minutos.',
     'service' => 'Servicios adicionales útiles',
     'buy_copyright_license_title' => 'Comprar una licencia',
     'buy_copyright_license' => '<span class="gray">Licencia de por vida</span><br /> <span class="bold">Compre ahora</span>',
@@ -134,7 +134,8 @@ $LANG = array(
     'note_able_to_change_niche_settings_later' => 'Por favor, tenga en cuenta que puede cambiar el tema y activar/desactivar los módulos más tarde en su panel de administración.',
     'looking_hosting' =>'¿Buscando un alojamiento web compatible con pH7CMS? ¡Vea <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">nuestra Lista de Alojamiento</a>!',
     'warning_no_js' => 'Esta página web no es compatible sin tener Javascript activado.<br />
-    Por favor, activa JavaScript en las opciones de su navegador web.',
+        Por favor, activa JavaScript en las opciones de su navegador web.',
+    'admin_url' => 'URL del panel de administración',
     'powered' => 'Desarrollado por',
     'loading' => 'Cargando ...',
 );
