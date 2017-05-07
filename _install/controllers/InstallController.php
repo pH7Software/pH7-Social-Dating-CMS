@@ -603,6 +603,9 @@ class InstallController extends Controller
         if (!empty($_SESSION['val']['admin_login_email']))
         {
             $this->_sendWelcomeEmail();
+
+            $this->oView->assign('admin_login_email', $_SESSION['val']['admin_login_email']);
+            $this->oView->assign('admin_username', $_SESSION['val']['admin_username']);
         }
 
         $this->_removeSessions();
