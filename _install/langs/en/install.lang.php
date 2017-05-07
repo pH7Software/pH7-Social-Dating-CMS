@@ -98,21 +98,21 @@ $LANG = array(
     'confirm_remove_install_folder_auto' => 'WARNING, All files in the /_install/ folder will be removed.',
     'title_email_finish_install' => 'About your installation: Information',
     'content_email_finish_install' => '<p><strong>Congratulations, your website is now successfully installed!</strong></p>
-    <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
-    <p>The URL of Your OWN Social/Dating website is: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-    <p>Your Admin Panel URL is: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a><br />
-        Your Login Admin Email is: ' . $_SESSION['val']['admin_email'] . '<br />
-        Your Login Admin Username: ' . $_SESSION['val']['admin_username'] . '<br />
-        Your Login Admin Password: ****** (hidden for security reasons)
-     </p>
-    <p>Don\'t forget to show off by showing YOUR new Social/Dating Site to all your friends, your colleagues and your Facebook\'s mates (and even to your haters... or not :-) ).</p>
-    <p>Finally, if you haven\'t done it yet, it\'s a really good time to buy a license today by simply <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visiting our website</a> in order to get all Premium Modules/Features, Remove all Links and Copyright Notice on your Website and even get access to the Unlimited Support Ticket.</p>
-    <p>&nbsp;</p>
-    <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
-    please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
-    <p>---</p>
-    <p>Kind regards,</p>
-    <p>The pH7CMS developers team.</p>',
+        <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
+        <p>The URL of Your OWN Social/Dating website is: <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
+        <p>Your Admin Panel URL is: <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a><br />
+            Your Admin Login Email is: ' . $_SESSION['val']['admin_email'] . '<br />
+            Your Admin Login Username is: ' . $_SESSION['val']['admin_username'] . '<br />
+            Your Admin Login Password is: ****** (hidden for security reasons. It\'s the one you chose during the installation)
+        </p>
+        <p>Don\'t forget to show off by showing YOUR new Social/Dating Site to all your friends, your colleagues and your Facebook\'s mates (and even to your haters... or not :-) ).</p>
+        <p>Finally, if you haven\'t done it yet, it\'s a really good time to buy a license today by simply <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visiting our website</a> in order to get all Premium Modules/Features, Remove all Links and Copyright Notice on your Website and even get access to the Unlimited Support Ticket.</p>
+        <p>&nbsp;</p>
+        <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
+        please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
+        <p>---</p>
+        <p>Kind regards,</p>
+        <p>The pH7CMS developers team.</p>',
     'yes_dir' => 'The directory was found successfully!',
     'no_dir' => 'The directory does not exist.',
     'wait_importing_database' => 'Please wait while importing the database.<br />

@@ -97,17 +97,21 @@ $LANG = array(
     'confirm_remove_install_folder_auto' => 'ATTENTION, tous les fichiers du dossiers /_install/ vont être supprimés.',
     'title_email_finish_install' => 'À propos de l\'installation : Informations',
     'content_email_finish_install' => '<p><strong>Félicitations, votre site Web est maintenant installé avec succès !</strong></p>
-    <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
-    <p>L\'URL de VOTRE Site de Rencontre est : <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
-    <p>L\'URL du panneau d\'administration est : <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></p>
-    <p>N\'oubliez pas de vous la frimer en montrant votre nouveau site de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
-    <p>Enfin, si cela n\'est pas encore fait, c\'est une excellent idée pour acheter aujourd\'hui une clé de licence en vous rendant simplement sur <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">notre site Web</a> afin d\'obtenir les fonctionnalités Premium, la suppression des liens et les mentions de copyright sur votre site et même l\'accès au support de ticket illimité.</p>
-    <p>&nbsp;</p>
-    <p>Pour tous rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
-    veuillez visiter notre <a href="' . Controller::SOFTWARE_WEBSITE . '">site Web</a>.</p>
-    <p>---</p>
-    <p>Cordialement,</p>
-    <p>L\'équipe de développement de pH7CMS.</p>',
+        <p>Nous espérons que vous allez avoir beaucoup de plaisir avec <em>' . Controller::SOFTWARE_NAME . '</em> !</p>
+        <p>L\'URL de VOTRE Site de Rencontre est : <a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></p>
+        <p>L\'URL du panneau d\'administration est : <a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a><br />
+            Votre adresse e-mail pour le panneau d\'administration est : ' . $_SESSION['val']['admin_email'] . '<br />
+            Votre nom d\'utilisateur pour le panneau d\'administration est : ' . $_SESSION['val']['admin_username'] . '<br />
+            Votre mot de passe est : ****** (caché pour des raisons de sécurité. C\'est celui choisi durant l\'installation)
+        </p>
+        <p>N\'oubliez pas de vous la frimer en montrant votre nouveau site de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
+        <p>Enfin, si cela n\'est pas encore fait, c\'est une excellent idée pour acheter aujourd\'hui une clé de licence en vous rendant simplement sur <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">notre site Web</a> afin d\'obtenir les fonctionnalités Premium, la suppression des liens et les mentions de copyright sur votre site et même l\'accès au support de ticket illimité.</p>
+        <p>&nbsp;</p>
+        <p>Pour tous rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
+        veuillez visiter notre <a href="' . Controller::SOFTWARE_WEBSITE . '">site Web</a>.</p>
+        <p>---</p>
+        <p>Cordialement,</p>
+        <p>L\'équipe de développement de pH7CMS.</p>',
     'yes_dir' => 'Le répertoire a été trouvé avec succès !',
     'no_dir' => 'Le répertoire n\'existe pas.',
     'wait_importing_database' => 'Veuillez patienter pendant l\'importation de la base de donnée.<br />
