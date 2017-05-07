@@ -101,8 +101,8 @@ $LANG = array(
         <p>We hope you\'ll enjoy using <em>' . Controller::SOFTWARE_NAME . '</em>!</p>
         <p>The URL of Your OWN Social/Dating website is: <em><a href="' . PH7_URL_ROOT . '">' . PH7_URL_ROOT . '</a></em></p>
         <p>Your Admin Panel URL is: <em><a href="' . PH7_URL_ROOT . PH7_ADMIN_MOD . '">' . PH7_URL_ROOT . PH7_ADMIN_MOD . '</a></em><br />
-            Your Admin Login Email is: <em>' . $_SESSION['val']['admin_login_email'] . '</em><br />
-            Your Admin Login Username is: <em>' . $_SESSION['val']['admin_username'] . '</em><br />
+            Your Admin Login Email is: <em>' . (!empty($_SESSION['val']['admin_login_email']) ? $_SESSION['val']['admin_login_email'] : '') . '</em><br />
+            Your Admin Login Username is: <em>' . (!empty($_SESSION['val']['admin_username']) ? $_SESSION['val']['admin_username'] : '') . '</em><br />
             Your Admin Login Password is: <em>****** (hidden for security reasons. It\'s the one you chose during the installation).</em>
         </p>
         <p>Don\'t forget to show off by showing YOUR new Social/Dating Site to all your friends, your colleagues and your Facebook\'s mates (and even to your haters... or not :-) ).</p>
