@@ -105,7 +105,7 @@ $LANG = array(
             Your Admin Login Username is: <em>' . (!empty($_SESSION['val']['admin_username']) ? $_SESSION['val']['admin_username'] : '') . '</em><br />
             Your Admin Login Password is: <em>****** (hidden for security reasons. It\'s the one you chose during the installation).</em>
         </p>
-        <p>Don\'t forget to show off by showing YOUR new Social/Dating Site to all your friends, your colleagues and your Facebook\'s mates (and even to your haters... or not :-) ).</p>
+        <p>Don\'t forget to show off by showing YOUR new Social Dating Business to all your friends, your colleagues and your Facebook\'s mates (and even to your haters... or not :-) ).</p>
         <p>Finally, if you haven\'t done it yet, it\'s a really good time to buy a license today by simply <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visiting our website</a> in order to get all Premium Modules/Features, Remove all Links and Copyright Notice on your Website and even get access to the Unlimited Support Ticket.</p>
         <p>&nbsp;</p>
         <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
