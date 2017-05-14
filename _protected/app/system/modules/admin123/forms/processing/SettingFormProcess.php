@@ -5,18 +5,19 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Cache\Cache,
-PH7\Framework\Layout\Gzip\Gzip,
-PH7\Framework\Navigation\Browser,
-PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Layout\Gzip\Gzip;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class SettingFormProcess extends Form
 {
+    const LOGO_FILENAME = 'logo.png';
+
     private $bIsErr = false;
 
     private $aSettingFields = [
@@ -225,7 +226,7 @@ class SettingFormProcess extends Form
                 /*
                  * The method deleteFile first test if the file exists, if so it delete the file.
                  */
-                $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . 'logo.png';
+                $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . self::LOGO_FILENAME;
                 $this->file->deleteFile($sPathName); // It erases the old logo.
                 $oLogo->dynamicResize(250,60);
                 $oLogo->save($sPathName);
