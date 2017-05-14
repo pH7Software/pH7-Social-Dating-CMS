@@ -5,11 +5,14 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
+use stdClass;
 
 class MetaMainFormProcess extends Form
 {
@@ -43,10 +46,9 @@ class MetaMainFormProcess extends Form
     /**
      * Update the fields in the DB (if modified only).
      *
-     * @param object $oMeta Meta Main DB data.
-     * @return void
+     * @param stdClass $oMeta Meta Main DB data.
      */
-    private function updateFields($oMeta)
+    private function updateFields(stdClass $oMeta)
     {
         foreach ($this->aMetaFields as $sKey => $sVal) {
             if (!$this->str->equals($this->httpRequest->post($sKey), $oMeta->$sVal)) {

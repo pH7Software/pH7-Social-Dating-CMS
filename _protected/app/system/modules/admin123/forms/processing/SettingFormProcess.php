@@ -134,8 +134,6 @@ class SettingFormProcess extends Form
 
     /**
      * Update the other "generic" fields (if modified only).
-     *
-     * @return void
      */
     private function updateGenericFields()
     {
@@ -211,8 +209,6 @@ class SettingFormProcess extends Form
 
     /**
      * Update Logo (if a new one if uploaded only).
-     *
-     * @return void
      */
     private function updateLogo()
     {
