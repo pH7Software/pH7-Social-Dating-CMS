@@ -1,6 +1,5 @@
 <div class="center">
 
-<p class="small">Last Updated On December 29th, 2016.<br /><br /></p>
 <p>To be an authorized affiliate of <strong><a href="{url_root}">{site_name}</a></strong> (URL address is {url_root}), you agree to abide by the terms and conditions contained in this agreement.<br />
 Please read this agreement carefully before registering and using the {site_name} service as an affiliate. By signing up for the {site_name} affiliate program, you indicate your acceptance of this agreement and its terms and conditions.</p>
 
@@ -130,5 +129,6 @@ All confidential information, including, but not limited to, any business, techn
 15.7. If any provision of this Agreement is held to be invalid or unenforceable, that provision shall be eliminated or limited to the minimum extent necessary such that the intent of the parties is effectuated, and the remainder of this agreement shall have full force and effect.<br /><br />
 </p>
 <p class="bold red">I HAVE READ THIS AGREEMENT AND AGREE TO ALL OF THE PROVISIONS CONTAINED ABOVE.</p>
+<p class="small text-muted">Last Updated On December 29th, 2016.</p>
 
 </div>
