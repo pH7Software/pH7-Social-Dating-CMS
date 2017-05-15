@@ -10,27 +10,27 @@
  */
 
 namespace PH7\Framework\Mvc\Model;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\Engine\Db, PH7\Framework\Cache\Cache;
 
 class Lang
 {
-
     const CACHE_GROUP = 'db/lang';
 
     /**
      * Get information about the language.
      *
-     * @param boolean $bOnlyActive Only active lang. Default: TRUE
-     * @return object Language data.
+     * @param boolean $bOnlyActive Only active lang
+     *
+     * @return \stdClass Language data.
      */
     public function getInfos($bOnlyActive = true)
     {
         $oCache = (new Cache)->start(self::CACHE_GROUP, 'list' . $bOnlyActive, 172800);
 
-        if (!$oData = $oCache->get())
-        {
+        if (!$oData = $oCache->get()) {
             $sSqlWhere = ($bOnlyActive) ? 'WHERE active=\'1\'' : '';
             $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . DB::prefix('LanguagesInfo') . $sSqlWhere . ' ORDER BY name ASC');
             $rStmt->execute();
@@ -42,5 +42,4 @@ class Lang
 
         return $oData;
     }
-
 }
