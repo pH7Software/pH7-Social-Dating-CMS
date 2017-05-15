@@ -160,7 +160,13 @@
       {/if}
 
       <div role="contentinfo">
-        <div class="ft_copy"><p><strong>{site_name}</strong> &copy; <ph:date value="Y" /> {{ $design->smartLink() }}</p> {{ $design->littleLikeApi() }}</div>{{ $design->langList() }}
+        <div class="ft_copy">
+          <p>
+            <strong>{site_name}</strong> &copy; <ph:date value="Y" /> {{ $design->smartLink() }}
+          </p>
+          {{ $design->littleLikeApi() }}
+        </div>
+        {{ $design->langList() }}
         {main_include 'bottom_menu.inc.tpl'}
       </div>
 
