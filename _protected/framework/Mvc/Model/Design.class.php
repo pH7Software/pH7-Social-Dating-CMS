@@ -61,7 +61,7 @@ class Design extends HtmlDesign
      * @param integer $iHeight
      * @param boolean $bOnlyActive
      *
-     * @return void
+     * @return boolean|void
      */
     public function ad($iWidth, $iHeight, $bOnlyActive = true)
     {
