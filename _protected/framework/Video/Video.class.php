@@ -52,8 +52,7 @@ class Video extends Upload
         $this->oFile = new File;
         $this->sFfmpegPath = Config::getInstance()->values['video']['handle.ffmpeg_path'];
 
-        if (!file_exists($this->sFfmpegPath))
-        {
+        if (!file_exists($this->sFfmpegPath)) {
             $sMsg = t('FFmpeg is not installed on the server or the path cannot be found. Please install and configure the path in "~/YOUR-PROTECTED-FOLDER/app/configs/config.ini" or contact the administrator of the site/server or Web host by saying the problem.');
             throw new MissingProgramException($sMsg);
         }
@@ -118,6 +117,7 @@ class Video extends Upload
             $sParams = '-c copy -copyts';
 
         exec("$this->sFfmpegPath -i {$this->aFile['tmp_name']} $sParams $sFile");
+
         return $sFile;
     }
 
