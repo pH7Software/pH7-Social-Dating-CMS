@@ -3,27 +3,21 @@
  * @title            Http Class
  * @desc             HTTP Management Class.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Http
- * @version          1.0
  */
 
 namespace PH7\Framework\Http;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Server\Server;
 
 class Http
 {
-
-    /**
-     * The HTTP response codes and messages.
-     *
-     * @staticvar array $aStatusCodes
-     */
-    protected static $aStatusCodes = [
+    const STATUS_CODE = [
         100 => '100 Continue',
         101 => '101 Switching Protocols',
         102 => '102 Processing',
@@ -89,20 +83,19 @@ class Http
 
 
     /**
-     * @static
-     * @param integer $iStatus The "code" for the HTTP status
-     * @return mixed (string | boolean) $iStatus Returns the "HTTP status code" if found otherwise returns "false"
+     * @param integer $iStatus The "code" for the HTTP status.
+     *
+     * @return string|boolean $iStatus Returns the "HTTP status code" if found otherwise returns "false"
      */
     public static function getStatusCodes($iStatus)
     {
         $iStatus = (int) $iStatus;
-        return (!empty(static::$aStatusCodes[$iStatus])) ? $iStatus : false;
+        return (!empty(static::STATUS_CODE[$iStatus])) ? $iStatus : false;
     }
 
     /**
      * Retrieve the list with headers that are sent or to be sent.
      *
-     * @static
      * @return array
      */
     public static function getHeadersList()
@@ -113,45 +106,48 @@ class Http
     /**
      * Get domain name from a URL.
      *
-     * @static
      * @param string $sUrl
+     *
      * @return string $sUrl Returns the URL to lower case and without the www. if present in the URL.
      */
     public static function getHostName($sUrl)
     {
         $sUrl = str_ireplace('www.', '', $sUrl);
         $sHost = parse_url($sUrl, PHP_URL_HOST);
+
         return $sHost;
     }
 
     /**
      * Set one or multiple headers.
      *
-     * @static
-     * @param mixed (string | array) $mHeaders Headers to send.
-     * @throws \PH7\Framework\Http\Exception
+     * @param string|array $mHeaders Headers to send.
+     *
+     * @throws Exception
      */
     public static function setHeaders($mHeaders)
     {
         // Header already sent
-        if (static::_isSent())
+        if (static::_isSent()) {
             throw new Exception('Headers were already sent.');
+        }
 
         // Loop elements and set header
-        foreach ((array) $mHeaders as $sHeader)
-            header((string) $sHeader);
+        foreach ((array) $mHeaders as $sHeader) {
+            header((string)$sHeader);
+        }
     }
 
     /**
      * Parse headers for a given status code.
      *
-     * @static
-     * @param int[optional] $iCode The code to use, possible values are: 200, 301, 302, 304, 307, 400, 401, 403, 404, 410, 500, 501, ... Default: 200
+     * @param integer $iCode The code to use, possible values are: 200, 301, 302, 304, 307, 400, 401, 403, 404, 410, 500, 501, ... Default: 200
      */
     public static function setHeadersByCode($iCode = 200)
     {
-        if (!static::getStatusCodes($iCode))
+        if (!static::getStatusCodes($iCode)) {
             $iCode = 200;
+        }
 
         // Set header
         static::setHeaders(static::getProtocol() . ' ' . static::getStatusCodes($iCode));
@@ -160,9 +156,7 @@ class Http
     /**
      * Set a HTTP Content Type.
      *
-     * @static
      * @param string $sType Example: "text/xml".
-     * @return void
      */
     public static function setContentType($sType)
     {
@@ -172,9 +166,7 @@ class Http
     /**
      * Set the HTTP status codes for the maintenance page.
      *
-     * @static
      * @param integer $iMaintenanceTime Time site will be down for (in seconds).
-     * @return void
      */
     public static function setMaintenanceCodes($iMaintenanceTime)
     {
@@ -185,9 +177,9 @@ class Http
     /**
      * Required HTTP Authentification.
      *
-     * @static
      * @param string $sUsr
      * @param string $sPwd
+     *
      * @return boolean TRUE if the authentication is correct, otherwise FALSE.
      */
     public static function requireAuth($sUsr, $sPwd)
@@ -195,43 +187,43 @@ class Http
         $sAuthUsr = Server::getVar(Server::AUTH_USER);
         $sAuthPwd = Server::getVar(Server::AUTH_PW);
 
-        if (!($sAuthUsr == $sUsr && $sAuthPwd == $sPwd))
-        {
+        if (!($sAuthUsr == $sUsr && $sAuthPwd == $sPwd)) {
             header('WWW-Authenticate: Basic realm="HTTP Basic Authentication"');
             static::setHeadersByCode(401);
             echo t('You must enter a valid login ID and password to access this resource.') . "\n";
             exit(false);
-        }
-        else
+        } else {
             return true;
+        }
     }
 
     /**
      * Check if HTTP SSL is used.
      *
-     * @static
      * @internal In this method, there are some yoda conditions.
+     *
      * @return boolean
      */
     public static function isSsl()
     {
         $sHttps = strtolower(Server::getVar(Server::HTTPS));
 
-        if (null !== $sHttps)
-        {
+        if (null !== $sHttps) {
              $sHttps = strtolower($sHttps);
 
-             if ('on' == $sHttps)
-                return true;
-             elseif ('1' == $sHttps)
-                return true;
-             else
-             {
+             if ('on' == $sHttps) {
+                 return true;
+             } elseif ('1' == $sHttps) {
+                 return true;
+             } else {
                  $iPort = Server::getVar(Server::SERVER_PORT);
-                 if ('443' == $iPort)
-                    return true;
+
+                 if ('443' == $iPort) {
+                     return true;
+                 }
              }
         }
+
         return false;
     }
 
@@ -239,6 +231,7 @@ class Http
      * Check if the URL is relative.
      *
      * @param string $sUrl
+     *
      * @return boolean
      */
     public function isRelativeUrl($sUrl)
@@ -250,28 +243,31 @@ class Http
      * Detects if the URL is a subdomain.
      *
      * @param string $sUrl URL
+     *
      * @return boolean
      */
     public function detectSubdomain($sUrl)
     {
-        return ($this->getSubdomain($sUrl) !== null) ? true : false;
+        return $this->getSubdomain($sUrl) !== null;
     }
 
     /**
      * Get the subdomain in a URL address.
      *
      * @param string $sUrl
-     * @return mixed (string | null) Returns the "subdomain" in the URL address if he has found a subdomain otherwise "null".
+     *
+     * @return string|null Returns the "subdomain" in the URL address if he has found a subdomain otherwise "null".
      */
     public function getSubdomain($sUrl)
     {
         $sHost = static::getHostName($sUrl);
         $aDomainParts = explode('.', $sHost);
+
         return (count($aDomainParts) > 2) ? $aDomainParts[0] : null;
     }
 
     /**
-     * @return mixed (string | null) The Request Method or the NULL value.
+     * @return string|null The Request Method or the NULL value.
      */
     public function getRequestMethod()
     {
@@ -287,7 +283,7 @@ class Http
     }
 
     /**
-     * @return mixed (string | null) The Query String or the NULL value.
+     * @return string|null The Query String or the NULL value.
      */
     public function getQueryString()
     {
@@ -295,7 +291,6 @@ class Http
     }
 
     /**
-     * @static
      * @return string The HTTP server protocol.
      */
      public static function getProtocol()
@@ -306,13 +301,10 @@ class Http
     /**
      * Checks if any headers were already sent.
      *
-     * @access private
-     * @static
      * @return boolean TRUE if the headers were sent, FALSE if not.
      */
     final private static function _isSent()
     {
         return headers_sent();
     }
-
 }
