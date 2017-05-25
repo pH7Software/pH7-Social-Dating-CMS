@@ -49,7 +49,6 @@ $aRequirementsNeeded = array(
         'file_uploads',
         'allow_url_fopen'
     )
-
 );
 
 foreach ($aRequirementsNeeded as $sType => $aRequirements) {
