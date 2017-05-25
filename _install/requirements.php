@@ -1,8 +1,9 @@
 <?php
 /**
- * This script computing requirements of the software.
+ * This script checks the server requirements for pH7CMS software.
+ *
  * It was written in order to be standarlone and can be used in different projects.
- * If you want to use in your project, please keep the license and contact the developer in writing in order to have permission from the redistribution of the script.
+ * If you want to use it in your project, please keep the license and the developer details below in order to have the right to distribute it.
  *
  * @package        Install
  * @file           requirements
