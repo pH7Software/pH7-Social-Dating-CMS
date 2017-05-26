@@ -160,7 +160,7 @@ function find($sText, $sWord)
  * @param array $aVars
  * @return boolean
  */
-function filled_out($aVars)
+function filled_out(array $aVars)
 {
     foreach ($aVars as $sKey => $sVal)
         if (empty($sKey) || trim($sVal) == '')
@@ -200,9 +200,9 @@ function delete_dir($sPath)
 /**
  * Executes SQL queries.
  *
-     * @param object \PH7\Db $oDb
+ * @param Db $oDb
  * @param string $sSqlFile SQL File.
- * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
+ * @return boolean|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
  */
 function exec_query_file(Db $oDb, $sSqlFile)
 {
@@ -331,7 +331,7 @@ function is_windows()
  * Get the URL contents with CURL.
  *
  * @param string $sFile
- * @return mixed (string | boolean) Return the result content on success, FALSE on failure.
+ * @return string|boolean Returns the result content on success, FALSE on failure.
  */
 function get_url_contents($sFile)
 {
@@ -373,7 +373,7 @@ function zip_extract($sFile, $sDir)
 /**
  * Checks if the URL is valid and contains the HTTP status code '200 OK', '301 Moved Permanently' or '302 Found'
  *
- * @return string $sUrl
+ * @param string $sUrl
  * @return boolean
  */
 function check_url($sUrl)
@@ -405,7 +405,7 @@ function check_license($sKey)
  * @param array $aParams The parameters information to send email.
  * @return boolean Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
  */
-function send_mail($aParams)
+function send_mail(array $aParams)
 {
     // Frontier to separate the text part and the HTML part.
     $sFrontier = "-----=" . md5(mt_rand());
