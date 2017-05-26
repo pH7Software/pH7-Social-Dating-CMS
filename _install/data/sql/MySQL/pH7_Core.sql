@@ -12,6 +12,7 @@
 --
 -- Set the variables --
 --
+SET @sDefaultSiteName = 'Social Dating App';
 SET @sAdminEmail = 'admin@yoursite.com';
 SET @sFeedbackEmail = 'feedback@yoursite.com';
 SET @sNoReplyEmail = 'noreply@yoursite.com';
@@ -987,7 +988,7 @@ CREATE TABLE IF NOT EXISTS pH7_Settings (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
-('siteName', 'Social Dating App', '', 'general'),
+('siteName', @sDefaultSiteName, '', 'general'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),
 ('defaultTemplate', 'base', '', 'design'),
