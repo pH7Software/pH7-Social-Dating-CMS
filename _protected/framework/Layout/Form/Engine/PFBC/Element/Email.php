@@ -1,13 +1,13 @@
 <?php
 /**
- * We made many changes in this code.
+ * Many changes have been made in this file.
  * By pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Element;
 
 class Email extends Textbox
 {
-
     private $_bMailCheck;
 
     public function __construct($sLabel, $sName, array $aProperties = null, $bMailCheck = true)
@@ -27,5 +27,4 @@ class Email extends Textbox
             <script src=' . PH7_RELATIVE . 'asset/js/mailcheck.js></script>';
         }
     }
-
 }
