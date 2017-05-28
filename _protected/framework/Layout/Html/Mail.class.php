@@ -3,21 +3,20 @@
  * @title            Mail Layout Class
  * @desc             Handler for the template emails.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Html
- * @version          1.0
  */
 
 namespace PH7\Framework\Layout\Html;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Registry\Registry;
 
 class Mail
 {
-
     /*** Headers ***/
 
     /**
@@ -83,6 +82,7 @@ class Mail
 
     /**
      * @param string $sEmail The email address from a user to indicate in the privacy policy against spam.
+     *
      * @return string HTML Contents.
      */
     public function privacyPolicyFooter($sEmail)
@@ -92,6 +92,7 @@ class Mail
 
     /**
      * @param string $sEmail The email address from a user to indicate in the privacy policy against spam.
+     *
      * @return string HTML Contents.
      */
     public function subFooter($sEmail)
@@ -131,5 +132,4 @@ class Mail
 
         return $sOutputLink;
     }
-
 }

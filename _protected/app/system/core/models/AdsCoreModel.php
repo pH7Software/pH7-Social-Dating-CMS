@@ -1,17 +1,17 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class AdsCoreModel extends Framework\Mvc\Model\Ads
 {
-
     const CACHE_GROUP = 'db/sys/core/ads';
 
     /**
@@ -105,5 +105,4 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
 
         return $iData;
     }
-
 }
