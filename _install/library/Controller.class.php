@@ -37,6 +37,7 @@ abstract class Controller implements Controllable
     const SOFTWARE_VERSION_NAME = 'WoW';
     const SOFTWARE_VERSION = '6.0.13';
     const SOFTWARE_BUILD = '1';
+
     const DEFAULT_LANG = 'en';
     const DEFAULT_THEME = 'base';
 
