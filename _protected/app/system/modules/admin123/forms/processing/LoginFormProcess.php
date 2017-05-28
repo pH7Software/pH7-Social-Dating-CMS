@@ -14,6 +14,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -31,7 +32,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
         $sEmail = $this->httpRequest->post('mail');
         $sUsername = $this->httpRequest->post('username');
-        $sPassword = $this->httpRequest->post('password');
+        $sPassword = $this->httpRequest->post('password', HttpRequest::ONLY_XSS_CLEAN);
 
 
         /*** Security IP Login ***/

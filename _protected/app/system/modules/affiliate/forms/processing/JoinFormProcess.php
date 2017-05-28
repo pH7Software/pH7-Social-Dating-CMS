@@ -14,7 +14,7 @@ PH7\Framework\Util\Various,
 PH7\Framework\Cookie\Cookie,
 PH7\Framework\Ip\Ip,
 PH7\Framework\Date\CDateTime,
-PH7\Framework\Mvc\Router\Uri;
+PH7\Framework\Mvc\Request\Http;
 
 class JoinFormProcess extends Form
 {
@@ -36,7 +36,7 @@ class JoinFormProcess extends Form
         $aData = [
             'email' => $this->httpRequest->post('mail'),
             'username' => $this->httpRequest->post('username'),
-            'password' => $this->httpRequest->post('password'),
+            'password' => $this->httpRequest->post('password', Http::ONLY_XSS_CLEAN),
             'first_name' => $this->httpRequest->post('first_name'),
             'last_name' => $this->httpRequest->post('last_name'),
             'sex' => $this->httpRequest->post('sex'),

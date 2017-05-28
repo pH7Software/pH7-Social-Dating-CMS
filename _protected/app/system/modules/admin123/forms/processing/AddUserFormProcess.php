@@ -28,7 +28,7 @@ class AddUserFormProcess extends Form
         $aData = [
             'email' => $this->httpRequest->post('mail'),
             'username' => $this->httpRequest->post('username'),
-            'password' => $this->httpRequest->post('password'),
+            'password' => $this->httpRequest->post('password', Http::ONLY_XSS_CLEAN),
             'first_name' => $this->httpRequest->post('first_name'),
             'last_name' => $this->httpRequest->post('last_name'),
             'middle_name' => $this->httpRequest->post('middle_name'),

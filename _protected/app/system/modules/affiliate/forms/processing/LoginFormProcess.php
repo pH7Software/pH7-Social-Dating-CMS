@@ -13,6 +13,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -28,7 +29,7 @@ class LoginFormProcess extends Form implements LoginableForm
         $oSecurityModel = new SecurityModel;
 
         $sEmail = $this->httpRequest->post('mail');
-        $sPassword = $this->httpRequest->post('password');
+        $sPassword = $this->httpRequest->post('password', HttpRequest::ONLY_XSS_CLEAN);
 
         /** Check if the connection is not locked **/
         $bIsLoginAttempt = (bool) DbConfig::getSetting('isAffiliateLoginAttempt');

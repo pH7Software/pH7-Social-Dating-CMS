@@ -50,7 +50,10 @@ class JoinFormProcess extends Form
             'group_id' => (int) DbConfig::getSetting('defaultMembershipGroupId'),
             'affiliated_id' => $iAffId
         ];
-        $aData += ['password' => Security::hashPwd($this->httpRequest->post('password'))];
+
+        // Need to use Http::ONLY_XSS_CLEAN since password might contains special character like "<" and will otherwise be converted to HTML entities
+        $sPassword = $this->httpRequest->post('password', Http::ONLY_XSS_CLEAN);
+        $aData += ['password' => Security::hashPwd($sPassword)];
 
         $iTimeDelay = (int) DbConfig::getSetting('timeDelayUserRegistration');
         if (!$this->oUserModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date']))
@@ -69,7 +72,7 @@ class JoinFormProcess extends Form
             // Successful registration in the database for step 1!
 
             /* Update the Affiliate Commission */
-            if ($this->iActiveType == 0) // Only if the user's account is already activated.
+            if ($this->iActiveType == 0) // Only if the user's account is already activated
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
 
             // Send email
@@ -91,7 +94,7 @@ class JoinFormProcess extends Form
         $iProfileId = $this->oUserModel->getId($this->session->get('mail_step1'));
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
 
-        // WARNING FOT "matchSex" FIELD: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant, otherwise the Request\Http::post() method removes the special tags
+        // WARNING FOT "matchSex" FIELD: Be careful, you should use the Http::ONLY_XSS_CLEAN constant, otherwise the Request\Http::post() method removes the special tags
         // and damages the SET function SQL for entry into the database
         $aData1 = [
             'sex' => $this->httpRequest->post('sex'),
