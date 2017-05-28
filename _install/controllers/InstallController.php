@@ -467,7 +467,7 @@ class InstallController extends Controller
 
                 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['niche_submit']))
                 {
-                    $bUpdateNeeded = false; // Value by default. Don't need to update the DB for the Social/Dating Niche
+                    $bUpdateNeeded = false; // Value by default. Don't need to update the DB for the Social-Dating Niche
 
                     switch ($_POST['niche_submit'])
                     {
