@@ -293,7 +293,7 @@ class InstallController extends Controller
 
                 if (empty($_SESSION['val']))
                 {
-                    $_SESSION['val']['site_name'] = 'Social Dating App';
+                    $_SESSION['val']['site_name'] = Controller::DEFAULT_SITE_NAME;
                     $_SESSION['val']['admin_login_email'] = '';
                     $_SESSION['val']['admin_email'] = '';
                     $_SESSION['val']['admin_feedback_email'] = '';
@@ -448,6 +448,7 @@ class InstallController extends Controller
             redirect(PH7_URL_SLUG_INSTALL . 'niche');
         }
 
+        $this->oView->assign('def_site_name', Controller::DEFAULT_SITE_NAME);
         $this->oView->assign('sept_number', 4);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
