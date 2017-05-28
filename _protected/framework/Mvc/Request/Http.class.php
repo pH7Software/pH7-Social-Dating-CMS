@@ -50,11 +50,22 @@ class Http extends \PH7\Framework\Http\Http
     const ONLY_XSS_CLEAN = 'XSS_CLEAN';
     const NO_CLEAN = 'NO_CLEAN';
 
+    /** @var string */
     private $_sRequestUri;
+
+    /** @var null|string */
     private $_sMethod;
+
+    /** @var array */
     private $_aRequest;
+
+    /** @var array */
     private $_aGet;
+
+    /** @var array */
     private $_aPost;
+
+    /** @var boolean */
     private $_bStrip = false;
 
     public function __construct()
@@ -142,7 +153,8 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey
      * @param string $sValue
-     * return void
+     *
+     * @return void
      */
     public function sets($sKey, $sValue)
     {
@@ -155,7 +167,8 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey
      * @param string $sValue
-     * return void
+     *
+     * @return void
      */
     public function setGet($sKey, $sValue)
     {
@@ -167,7 +180,8 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey
      * @param string $sValue
-     * return void
+     *
+     * @return void
      */
     public function setPost($sKey, $sValue)
     {

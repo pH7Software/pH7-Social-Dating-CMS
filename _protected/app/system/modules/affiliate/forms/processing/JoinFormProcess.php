@@ -1,24 +1,24 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Util\Various,
-PH7\Framework\Cookie\Cookie,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Util\Various;
+use PH7\Framework\Cookie\Cookie;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Mvc\Request\Http;
 
 class JoinFormProcess extends Form
 {
-
     private $iActiveType;
 
     public function __construct()
@@ -55,19 +55,14 @@ class JoinFormProcess extends Form
         $oAffModel = new AffiliateModel;
 
         $iTimeDelay = (int) DbConfig::getSetting('timeDelayUserRegistration');
-        if (!$oAffModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date'], 'Affiliates'))
-        {
+        if (!$oAffModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date'], 'Affiliates')) {
             \PFBC\Form::setError('form_join_aff', Form::waitRegistrationMsg($iTimeDelay));
-        }
-        elseif (!$oAffModel->join($aData))
-        {
+        } elseif (!$oAffModel->join($aData)) {
             \PFBC\Form::setError('form_join_aff',
                 t('An error occurred during registration!') . '<br />' .
                 t('Please try again with new information in the form fields or come back later.')
             );
-        }
-        else
-        {
+        } else {
             // Successful registration in the database!
 
             /** Update the Affiliate Commission **/
@@ -80,5 +75,4 @@ class JoinFormProcess extends Form
 
         unset($oAffModel);
     }
-
 }
