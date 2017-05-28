@@ -60,7 +60,7 @@ class Rest extends Http
     }
 
     /**
-     * @return array
+     * @return array|string
      */
     public function getRequest()
     {

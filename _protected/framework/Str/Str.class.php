@@ -11,17 +11,18 @@
  */
 
 namespace PH7\Framework\Str {
-defined('PH7') or exit('Restricted access');
+
+ defined('PH7') or exit('Restricted access');
 
  class Str
  {
-
      private static $_sRegexDelimiter = '#';
 
      /**
       * Make a string lowercase.
       *
       * @param string $sText
+      *
       * @return string
       */
      public function lower($sText)
@@ -33,6 +34,7 @@ defined('PH7') or exit('Restricted access');
       * Make a string uppercase.
       *
       * @param string $sText
+      *
       * @return string
       */
      public function upper($sText)
@@ -44,6 +46,7 @@ defined('PH7') or exit('Restricted access');
       * Make a string's first character lowercase.
       *
       * @param string $sText
+      *
       * @return string
       */
      public function lowerFirst($sText)
@@ -55,6 +58,7 @@ defined('PH7') or exit('Restricted access');
       * Make a string's first character uppercase.
       *
       * @param string $sText
+      *
       * @return string
       */
      public function upperFirst($sText)
@@ -66,6 +70,7 @@ defined('PH7') or exit('Restricted access');
       * Uppercase the first character of each word in a string.
       *
       * @param string $sText
+      *
       * @return string
       */
      public function upperFirstWords($sText)
@@ -77,6 +82,7 @@ defined('PH7') or exit('Restricted access');
       * Count the length of a string and supports the special characters (Asian, Latin, ...).
       *
       * @param string $sText
+      *
       * @return string
       */
      public function length($sText)
@@ -90,6 +96,7 @@ defined('PH7') or exit('Restricted access');
       * @param string $sText
       * @param string $sFilter Optionally, The some strings separated by a comma.
       * @param string $sFlag Optionally, a flag
+      *
       * @return string
       *
       */
@@ -115,8 +122,10 @@ defined('PH7') or exit('Restricted access');
       * Test the equality of two strings.
       *
       * @personal For the PHP AND C functions, strcmp and strcasecmp returns a positive or negative integer value if they are different and 0 if they are equal.
-      * @param string $text1
-      * @param string $text2
+      *
+      * @param string $sText1
+      * @param string $sText2
+      *
       * @return boolean
       */
      public function equals($sText1, $sText2)
@@ -130,6 +139,7 @@ defined('PH7') or exit('Restricted access');
       *
       * @param string $sText1
       * @param string $sText2
+      *
       * @return boolean
       */
      public function equalsIgnoreCase($sText1, $sText2)
@@ -146,6 +156,7 @@ defined('PH7') or exit('Restricted access');
       * @param string $sText The string to search in.
       * @param string $sFindText Value to search.
       * @param integer $iOffset Default: 0
+      *
       * @return integer The position of the first occurrence or -1 if the value to search is not found.
       */
      public function indexOf($sText, $sFindText, $iOffset = 0)
@@ -164,6 +175,7 @@ defined('PH7') or exit('Restricted access');
       * @param string $sText The string to search in.
       * @param string $sFindText Value to search.
       * @param integer $iOffset Default: 0
+      *
       * @return integer The position of the last occurrence or -1 if the value to search is not found.
       */
      public function lastIndexOf($sText, $sFindText, $iOffset = 0)
@@ -181,6 +193,7 @@ defined('PH7') or exit('Restricted access');
       *
       * @param string $sText
       * @param string $sCharList Default: " \t\n\r\0\x0B"
+      *
       * @return string
       */
      public function trim($sText, $sCharList = " \t\n\r\0\x0B")
@@ -226,6 +239,7 @@ defined('PH7') or exit('Restricted access');
       * Return the string if the variable is not empty else return empty string.
       *
       * @param string $sText
+      *
       * @return string
       */
      public function get($sText)
@@ -239,7 +253,7 @@ defined('PH7') or exit('Restricted access');
       * @param string $sText The string to search in.
       * @param string $sPattern The RegEx pattern to search for, as a string.
       *
-      * @return mixed (string | null)
+      * @return string|null
       */
      public static function match($sText, $sPattern)
      {
@@ -259,6 +273,7 @@ defined('PH7') or exit('Restricted access');
       * Check if the string doesn't have any blank spaces.
       *
       * @param string $sValue
+      *
       * @return boolean
       */
      public static function noSpaces($sValue)
@@ -269,9 +284,10 @@ defined('PH7') or exit('Restricted access');
      /**
       * Escape function, uses the PHP native htmlspecialchars but improved.
       *
-      * @param mixed (array | string) $mText
+      * @param array|string $mText
       * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
-      * @return mixed (array | string) The escaped string.
+      *
+      * @return array|string The escaped string.
       */
      public function escape($mText, $bStrip = false)
      {
@@ -281,9 +297,9 @@ defined('PH7') or exit('Restricted access');
      /**
       * Escape an array of any dimension.
       *
-      * @access protected
       * @param array $aData
       * @param boolean $bStrip
+      *
       * @return array The array escaped.
       */
      protected function arrayEscape(array $aData, $bStrip)
@@ -295,10 +311,10 @@ defined('PH7') or exit('Restricted access');
      }
 
      /**
-      * @access protected
       * @param string $sText
       * @param boolean $bStrip
-      * @return The text parsed with Str::stripTags() method if $bStrip parameter is TRUE, otherwise with Str::htmlSpecialChars method.
+      *
+      * @return string The text parsed with Str::stripTags() method if $bStrip parameter is TRUE, otherwise with Str::htmlSpecialChars method.
       */
      protected function cEscape($sText, $bStrip)
      {
@@ -306,8 +322,8 @@ defined('PH7') or exit('Restricted access');
      }
 
      /**
-      * @access protected
       * @param string $sText
+      *
       * @return string The text parsed with strip_tag() function
       */
      protected function stripTags($sText)
@@ -316,8 +332,8 @@ defined('PH7') or exit('Restricted access');
      }
 
      /**
-      * @access protected
       * @param string $sText
+      *
       * @return string The text parsed with htmlspecialchars() function
       */
      protected function htmlSpecialChars($sText)
@@ -329,13 +345,11 @@ defined('PH7') or exit('Restricted access');
      {
          return self::$_sRegexDelimiter . trim($sPattern, self::$_sRegexDelimiter) . self::$_sRegexDelimiter;
      }
-
  }
 
 }
 
 namespace {
-
       /**
        * Alias of the \PH7\Framework\Str\Str::escape() method.
        */
@@ -343,5 +357,4 @@ namespace {
     {
         return (new PH7\Framework\Str\Str)->escape($mText, $bStrip);
     }
-
 }
