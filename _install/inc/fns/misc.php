@@ -300,7 +300,8 @@ function ffmpeg_path()
  */
 function is_url_rewrite()
 {
-    if (!is_file(PH7_ROOT_INSTALL . '.htaccess')) return false;
+    if (!is_file(PH7_ROOT_INSTALL . '.htaccess'))
+        return false;
 
     // Check if mod_rewrite is installed and is configured to be used via .htaccess
     if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
@@ -392,12 +393,13 @@ function check_url($sUrl)
  * Check license key.
  *
  * @param string $sKey The License Key.
- * @return boolean
+ * @return integer
  */
 function check_license($sKey)
 {
     $sKey = trim(strtolower($sKey));
-    return (preg_match('/^ph7-[a-z0-9]{36}$/', $sKey));
+
+    return preg_match('/^ph7-[a-z0-9]{36}$/', $sKey);
 }
 
 /**
