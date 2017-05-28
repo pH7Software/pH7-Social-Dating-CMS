@@ -14,27 +14,28 @@ defined('PH7') or die('Restricted access');
 
 abstract class Controller implements Controllable
 {
-    const
-    SOFTWARE_NAME = 'pH7CMS',
-    SOFTWARE_PREFIX_COOKIE_NAME = 'pH7',
-    SOFTWARE_WEBSITE = 'http://ph7cms.com',
-    SOFTWARE_LICENSE_URL = 'http://ph7cms.com/legal/license',
-    SOFTWARE_HELP_URL = 'http://clients.hizup.com/support', // Help Desk URL
-    SOFTWARE_LICENSE_KEY_URL = 'http://ph7cms.com/web/buysinglelicense',
-    SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/',
-    SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements',
-    SOFTWARE_HOSTING_LIST_URL = 'http://ph7cms.com/hosting',
-    SOFTWARE_HOSTING_LIST_FR_URL = 'http://ph7cms.com/doc/fr/h%C3%A9bergement-web',
-    SOFTWARE_EMAIL = 'hello@ph7cms.com',
-    SOFTWARE_AUTHOR = 'Pierre-Henry Soria',
-    SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.',
-    SOFTWARE_COPYRIGHT = '© (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.',
+    const SOFTWARE_NAME = 'pH7CMS';
+    const DEFAULT_SITE_NAME = 'Social Dating App';
+    const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
+    const SOFTWARE_WEBSITE = 'http://ph7cms.com';
+    const SOFTWARE_LICENSE_URL = 'http://ph7cms.com/legal/license';
+    const SOFTWARE_HELP_URL = 'http://clients.hizup.com/support'; // Help Desk URL
+    const SOFTWARE_LICENSE_KEY_URL = 'http://ph7cms.com/web/buysinglelicense';
+    const SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/';
+    const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';
+    const SOFTWARE_HOSTING_LIST_URL = 'http://ph7cms.com/hosting';
+    const SOFTWARE_HOSTING_LIST_FR_URL = 'http://ph7cms.com/doc/fr/h%C3%A9bergement-web';
+    const SOFTWARE_EMAIL = 'hello@ph7cms.com';
+    const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
+    const SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
+    const SOFTWARE_COPYRIGHT = '© (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.';
+
     // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO", 5.* was "pCO" and 6.* is "WoW"
-    SOFTWARE_VERSION_NAME = 'WoW',
-    SOFTWARE_VERSION = '6.0.13',
-    SOFTWARE_BUILD = '1',
-    DEFAULT_LANG = 'en',
-    DEFAULT_THEME = 'base';
+    const SOFTWARE_VERSION_NAME = 'WoW';
+    const SOFTWARE_VERSION = '6.0.13';
+    const SOFTWARE_BUILD = '1';
+    const DEFAULT_LANG = 'en';
+    const DEFAULT_THEME = 'base';
 
     protected $oView, $sCurrentLang;
 
