@@ -3,27 +3,35 @@
  * @title            Rest Class
  * @desc             Rest (REpresentational State Transfer) Class.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Http / Rest
- * @version          1.2
+ * @version          1.3
  */
 
 namespace PH7\Framework\Http\Rest;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\Stream, PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\File\Stream;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
-class Rest extends \PH7\Framework\Http\Http
+class Rest extends Http
 {
+    /** @var string */
+    private $_sContentType;
 
-    private
-    $_sContentType,
-    $_iCode,
-    $_sData,
-    $_aRequest;
+    /** @var integer */
+    private $_iCode;
 
+    /** @var string */
+    private $_sData;
+
+    /** @var array */
+    private $_aRequest;
 
     /**
      * Calls Rest::_inputs() method and sets default values.
@@ -37,6 +45,7 @@ class Rest extends \PH7\Framework\Http\Http
     /**
      * @param string $sData The data from a request
      * @param integer $iStatus Status Code. Default 200
+     *
      * @return void
      */
     public function response($sData, $iStatus = 200)
@@ -44,15 +53,13 @@ class Rest extends \PH7\Framework\Http\Http
         $this->_sData = $sData;
 
         /**
-         * @internal \PH7\Framework\Http\Http::getStatusCodes() returns FLASE when it doesn't find a GTTP status code.
+         * @internal Http::getStatusCodes() returns FLASE when it doesn't find a GTTP status code.
          */
         $this->_iCode = (false !== static::getStatusCodes($iStatus)) ? $iStatus : 500; // If it finds nothing, then we put the 500 HTTP Status Code.
         $this->_output();
     }
 
     /**
-     * Get the request data.
-     *
      * @return array
      */
     public function getRequest()
@@ -65,8 +72,7 @@ class Rest extends \PH7\Framework\Http\Http
      */
     private function _inputs()
     {
-        switch ($this->getRequestMethod())
-        {
+        switch ($this->getRequestMethod()) {
             case HttpRequest::METHOD_POST:
                 $this->_aRequest = $this->_cleanInputs($_POST);
             break;
@@ -88,23 +94,20 @@ class Rest extends \PH7\Framework\Http\Http
     }
 
     /**
-     * Clean Inputs.
+     * @param array|string
      *
-     * @param mixed (array | string)
      * @return array
      */
     private function _cleanInputs($mData)
     {
         $aCleanInput = array();
 
-        if (is_array($mData))
-        {
-            foreach($mData as $sKey => $sValue)
-                $aCleanInput[$sKey] = $this->_cleanInputs($sValue); // Recursive method
-        }
-        else
-        {
-            $mData = (new \PH7\Framework\Str\Str)->escape($mData);
+        if (is_array($mData)) {
+            foreach($mData as $sKey => $sValue) {
+                $aCleanInput[$sKey] = $this->_cleanInputs($sValue);
+            }
+        } else {
+            $mData = (new Str)->escape($mData);
             $aCleanInput = trim($mData);
         }
 
@@ -123,5 +126,4 @@ class Rest extends \PH7\Framework\Http\Http
         echo $this->_sData;
         exit; // Stop the Script
     }
-
 }

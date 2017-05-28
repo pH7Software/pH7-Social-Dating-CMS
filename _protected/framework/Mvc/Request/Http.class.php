@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Request
- * @version          1.2
+ * @version          1.4
  * @link             http://ph7cms.com
  */
 
@@ -100,17 +100,16 @@ class Http extends \PH7\Framework\Http\Http
     {
         $bExists = false; // Default value
 
-        if (is_array($mKey))
-        {
-            foreach ($mKey as $sKey)
-            {
-                if (!$bExists = $this->getExists($sKey, $sParam)) // Recursive method
+        if (is_array($mKey)) {
+            foreach ($mKey as $sKey) {
+                if (!$bExists = $this->getExists($sKey, $sParam)) {
                     break;
+                }
             }
-        }
-        else
-        {
-            if (!$this->validate($this->_aGet, $mKey, $sParam)) return false;
+        } else {
+            if (!$this->validate($this->_aGet, $mKey, $sParam)) {
+                return false;
+            }
 
             $bExists = isset($this->_aGet[$mKey]);
         }
@@ -130,17 +129,16 @@ class Http extends \PH7\Framework\Http\Http
     {
         $bExists = false; // Default value
 
-        if (is_array($mKey))
-        {
-            foreach ($mKey as $sKey)
-            {
-                if (!$bExists = $this->postExists($sKey, $sParam)) // Recursive method
+        if (is_array($mKey)) {
+            foreach ($mKey as $sKey) {
+                if (!$bExists = $this->postExists($sKey, $sParam)) {
                     break;
+                }
             }
-        }
-        else
-        {
-            if (!$this->validate($this->_aPost, $mKey, $sParam)) return false;
+        } else {
+            if (!$this->validate($this->_aPost, $mKey, $sParam)) {
+                return false;
+            }
 
             $bExists = isset($this->_aPost[$mKey]);
         }
@@ -194,16 +192,15 @@ class Http extends \PH7\Framework\Http\Http
      * @param string $sKey
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      *
-     * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
+     * @return string|void Uses Str::escape() method to secure the data display unless you specified the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
     public function gets($sKey, $sParam = null)
     {
-        if ($this->getExists($sKey, $sParam))
-        {
+        if ($this->getExists($sKey, $sParam)) {
             return $this->get($sKey, $sParam);
         }
-        elseif ($this->postExists($sKey, $sParam))
-        {
+
+        if ($this->postExists($sKey, $sParam)) {
             return $this->post($sKey, $sParam);
         }
     }
@@ -221,8 +218,9 @@ class Http extends \PH7\Framework\Http\Http
     {
         //if ($this->_sMethod !== self::METHOD_GET) throw new Exception('GET');
 
-        if (!isset($this->_aGet[$sKey]))
+        if (!isset($this->_aGet[$sKey])) {
             return '';
+        }
 
         // Clear the CSRF token in the request variable
        /*
@@ -230,8 +228,9 @@ class Http extends \PH7\Framework\Http\Http
         $this->_aGet[$sKey] = $this->_clearCSRFToken($this->_aGet, $sKey);
         */
 
-        if ($sParam === self::NO_CLEAN)
+        if ($sParam === self::NO_CLEAN) {
             return $this->_aGet[$sKey];
+        }
 
         $this->_bStrip = $bStrip;
         $this->setType($this->_aGet, $sKey, $sParam);
@@ -252,13 +251,17 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function post($sKey, $sParam = null, $bStrip = false)
     {
-        if ($this->_sMethod !== self::METHOD_POST) throw new Exception('POST');
+        if ($this->_sMethod !== self::METHOD_POST) {
+            throw new Exception('POST');
+        }
 
-        if (!isset($this->_aPost[$sKey]))
+        if (!isset($this->_aPost[$sKey])) {
             return '';
+        }
 
-        if ($sParam === self::NO_CLEAN)
+        if ($sParam === self::NO_CLEAN) {
             return $this->_aPost[$sKey];
+        }
 
         $this->_bStrip = $bStrip;
         $this->setType($this->_aPost, $sKey, $sParam);
@@ -299,21 +302,22 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function currentController()
     {
-       return str_replace('controller', '', strtolower(Registry::getInstance()->controller));
+        return str_replace('controller', '', strtolower(Registry::getInstance()->controller));
     }
 
     /**
+     * @param string $sUrl
+     *
      * @return string The correct pH7's URL.
      */
     public function pH7Url($sUrl)
     {
-      return ($this->isRelativeUrl($sUrl)) ? PH7_URL_ROOT . $sUrl : $sUrl;
+        return ($this->isRelativeUrl($sUrl)) ? PH7_URL_ROOT . $sUrl : $sUrl;
     }
 
     /**
      * Check is a request variable is valid.
      *
-     * @access protected
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sParam
@@ -322,8 +326,11 @@ class Http extends \PH7\Framework\Http\Http
      */
     protected function validate(&$aType, $sKey, $sParam)
     {
-        if (!empty($sParam))
-            if (!Secty\Validate\Validate::type($aType[$sKey], $sParam)) return false;
+        if (!empty($sParam)) {
+            if (!Secty\Validate\Validate::type($aType[$sKey], $sParam)) {
+                return false;
+            }
+        }
 
         return true;
     }
@@ -331,7 +338,6 @@ class Http extends \PH7\Framework\Http\Http
     /**
      * Set the type of a request variable.
      *
-     * @access protected
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sType A PHP Type: "bool", "int", "float", "string", "array", "object" or "null".
@@ -340,14 +346,12 @@ class Http extends \PH7\Framework\Http\Http
      */
     protected function setType(&$aType, $sKey, $sType)
     {
-        if (!empty($sType) && $sType !== self::ONLY_XSS_CLEAN)
+        if (!empty($sType) && $sType !== self::ONLY_XSS_CLEAN) {
             settype($aType[$sKey], $sType);
+        }
     }
 
     /**
-     * Clean Data.
-     *
-     * @access protected
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sParam Optional self::ONLY_XSS_CLEAN To delete only the XSS vulnerability.
@@ -356,12 +360,14 @@ class Http extends \PH7\Framework\Http\Http
      */
     protected function cleanData(&$aType, $sKey, $sParam)
     {
-        // For space and other in address bar
-        if ($this->_sMethod === self::METHOD_GET)
-            $aType[$sKey] = str_replace(array('%20','%27','%C3','%A9','%C3','%A9','%C3','%A9'), '', $aType[$sKey]);
+        // For space and others in the address bar
+        if ($this->_sMethod === self::METHOD_GET) {
+            $aType[$sKey] = str_replace(['%20', '%27', '%C3', '%A9', '%C3', '%A9', '%C3', '%A9'], '', $aType[$sKey]);
+        }
 
-        if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN)
+        if (!empty($sParam) && $sParam === self::ONLY_XSS_CLEAN) {
             return (new Secty\Validate\Filter)->xssClean($aType[$sKey]);
+        }
 
         return escape($aType[$sKey], $this->_bStrip);
     }
@@ -369,7 +375,6 @@ class Http extends \PH7\Framework\Http\Http
     /**
      * Set the Request Variable.
      *
-     * @access private
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sValue
@@ -384,7 +389,6 @@ class Http extends \PH7\Framework\Http\Http
     /**
      * Clear the CSRF token in the request variable name.
      *
-     * @access private
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey The request variable to clean.
      *
