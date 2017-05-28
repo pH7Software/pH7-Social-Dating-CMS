@@ -19,7 +19,7 @@ use PH7\Framework\Registry\Registry;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Parse\SysVar;
 use PH7\Framework\Navigation\Page;
-use PH7\Framework\Ads\Ads;
+use PH7\Framework\Ads\Ads as Banner;
 
 class Design extends HtmlDesign
 {
@@ -86,8 +86,8 @@ class Design extends HtmlDesign
          * Don't display ads on the admin panel.
          */
         if (!(Registry::getInstance()->module === PH7_ADMIN_MOD) && $oData) {
-            echo '<div class="inline" onclick="$(\'#ad_' . $oData->adsId . '\').attr(\'src\',\'' . PH7_URL_ROOT . '?' . Ads::PARAM_URL . '=' . $oData->adsId . '\');return true;">';
-            echo Ads::output($oData);
+            echo '<div class="inline" onclick="$(\'#ad_' . $oData->adsId . '\').attr(\'src\',\'' . PH7_URL_ROOT . '?' . Banner::PARAM_URL . '=' . $oData->adsId . '\');return true;">';
+            echo Banner::output($oData);
             echo '<img src="' . PH7_URL_STATIC . PH7_IMG . 'useful/blank.gif" style="border:0;width:0px;height:0px;" alt="" id="ad_' . $oData->adsId . '" /></div>';
         }
         unset($oData);
