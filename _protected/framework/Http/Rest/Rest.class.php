@@ -96,22 +96,22 @@ class Rest extends Http
     /**
      * @param array|string
      *
-     * @return array
+     * @return array|string
      */
     private function _cleanInputs($mData)
     {
-        $aCleanInput = array();
-
         if (is_array($mData)) {
+            $aCleanInput = array();
+
             foreach($mData as $sKey => $sValue) {
                 $aCleanInput[$sKey] = $this->_cleanInputs($sValue);
             }
-        } else {
-            $mData = (new Str)->escape($mData);
-            $aCleanInput = trim($mData);
+
+            return $aCleanInput;
         }
 
-        return $aCleanInput;
+        $mData = (new Str)->escape($mData);
+        return trim($mData);
     }
 
     /**
