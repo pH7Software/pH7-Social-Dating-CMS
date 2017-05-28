@@ -104,8 +104,7 @@ namespace PH7\Framework\Str {
      {
          $sFlag = (!empty($sFlag)) ? (string) $sFlag : '';
 
-         if (!empty($sFilter))
-         {
+         if (!empty($sFilter)) {
              $aFilters = explode(',', $sFilter);
              foreach ($aFilters as $sF)
                  $sText = str_replace($sF, $sFlag, $sText);
@@ -208,16 +207,14 @@ namespace PH7\Framework\Str {
       * @param integer $iStart Default: 0
       * @param integer $iLength Default: 150
       * @param string $sTrimMarker Default: '...'
+      *
       * @return string
       */
      public function extract($sText, $iStart = 0, $iLength = 150, $sTrimMarker = '...')
      {
-         if (function_exists('mb_strimwidth'))
-         {
+         if (function_exists('mb_strimwidth')) {
              $sText = mb_strimwidth($sText, $iStart, $iLength, $sTrimMarker, PH7_ENCODING);
-         }
-         else
-         {
+         } else {
              // Recovers a portion of our content.
              $sExtract = substr($sText, $iStart, $iLength);
 
