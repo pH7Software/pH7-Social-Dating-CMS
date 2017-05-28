@@ -31,5 +31,4 @@ return PhpCsFixer\Config::create()
             ->exclude('vendor')
             ->exclude('library')
             ->in('_protected')
-    )
-;
+    );
