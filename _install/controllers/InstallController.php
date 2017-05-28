@@ -174,7 +174,9 @@ class InstallController extends Controller
                 if (filled_out($_POST))
                 {
                     foreach ($_POST as $sKey => $sVal)
+                    {
                         $_SESSION['db'][str_replace('db_', '', $sKey)] = trim($sVal);
+                    }
 
                     $_SESSION['val']['bug_report_email'] = trim($_POST['bug_report_email']);
                     $_SESSION['val']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
@@ -308,7 +310,9 @@ class InstallController extends Controller
                     if (filled_out($_POST))
                     {
                         foreach ($_POST as $sKey => $sVal)
+                        {
                             $_SESSION['val'][$sKey] = trim($sVal);
+                        }
 
                         if (validate_email($_SESSION['val']['admin_login_email']) && validate_email($_SESSION['val']['admin_email']) && validate_email($_SESSION['val']['admin_feedback_email']) && validate_email($_SESSION['val']['admin_return_email']))
                         {

@@ -1,32 +1,32 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Module\Various as SysMod,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class JoinForm
 {
-
     public static function step1()
     {
-        if ((new Session)->exists('mail_step1'))
+        if ((new Session)->exists('mail_step1')) {
             Header::redirect(Uri::get('user', 'signup', 'step2'));
+        }
 
-        if (isset($_POST['submit_join_user']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_join_user']))
+        if (isset($_POST['submit_join_user'])) {
+            if (\PFBC\Form::isValid($_POST['submit_join_user'])) {
                 (new JoinFormProcess)->step1();
+            }
 
             Header::redirect();
         }
@@ -69,16 +69,17 @@ class JoinForm
     public static function step2()
     {
         $oSession = new Session;
-        if (!$oSession->exists('mail_step1'))
+        if (!$oSession->exists('mail_step1')) {
             Header::redirect(Uri::get('user', 'signup', 'step1'));
-        elseif ($oSession->exists('mail_step2'))
+        } elseif ($oSession->exists('mail_step2')) {
             Header::redirect(Uri::get('user', 'signup', 'step3'));
+        }
         unset($oSession);
 
-        if (isset($_POST['submit_join_user2']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_join_user2']))
+        if (isset($_POST['submit_join_user2'])) {
+            if (\PFBC\Form::isValid($_POST['submit_join_user2'])) {
                 (new JoinFormProcess)->step2();
+            }
 
             Header::redirect();
         }
@@ -111,16 +112,17 @@ class JoinForm
     public static function step3()
     {
         $oSession = new Session;
-        if (!$oSession->exists('mail_step2'))
+        if (!$oSession->exists('mail_step2')) {
             Header::redirect(Uri::get('user', 'signup', 'step2'));
-        elseif ($oSession->exists('mail_step3'))
+        } elseif ($oSession->exists('mail_step3')) {
             Header::redirect(Uri::get('user', 'signup', 'step4'));
+        }
         unset($oSession);
 
-        if (isset($_POST['submit_join_user3']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_join_user3']))
+        if (isset($_POST['submit_join_user3'])) {
+            if (\PFBC\Form::isValid($_POST['submit_join_user3'])) {
                 (new JoinFormProcess)->step3();
+            }
 
             Header::redirect();
         }
@@ -140,13 +142,14 @@ class JoinForm
 
     public static function step4()
     {
-        if (!(new Session)->exists('mail_step3'))
+        if (!(new Session)->exists('mail_step3')) {
             Header::redirect(Uri::get('user', 'signup', 'step3'));
+        }
 
-        if (isset($_POST['submit_join_user4']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_join_user4']))
+        if (isset($_POST['submit_join_user4'])) {
+            if (\PFBC\Form::isValid($_POST['submit_join_user4'])) {
                 (new JoinFormProcess)->step4();
+            }
 
             Header::redirect();
         }
@@ -168,5 +171,4 @@ class JoinForm
         }
         $oForm->render();
     }
-
 }

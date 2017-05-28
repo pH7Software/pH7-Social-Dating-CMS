@@ -1,26 +1,26 @@
 <?php
 /**
- * @author         Pierre-Henry Soria <ph7software@gmail.com>
+ * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class JoinForm
 {
     public static function step1()
     {
-        if (isset($_POST['submit_join_aff']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_join_aff']))
+        if (isset($_POST['submit_join_aff'])) {
+            if (\PFBC\Form::isValid($_POST['submit_join_aff'])) {
                 (new JoinFormProcess)->step1();
+            }
 
             Header::redirect();
         }
@@ -61,8 +61,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Postal Code:'), 'zip_code', array('id'=>'str_zip_code', 'value'=>Geo::getZipCode(), 'onblur'=>'CValid(this.value,this.id,2,15)', 'validation'=>new \PFBC\Validation\Str(2,15), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_zip_code"></span>'));
 
-        if (DbConfig::getSetting('isCaptchaAffiliateSignup'))
-        {
+        if (DbConfig::getSetting('isCaptchaAffiliateSignup')) {
           $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description'=>t('Enter the code above:'))));
           $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }

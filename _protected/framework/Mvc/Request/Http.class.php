@@ -8,16 +8,16 @@
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Request
  * @version          1.2
- * @update           09/24/13
  * @link             http://ph7cms.com
  */
 
 namespace PH7\Framework\Mvc\Request;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Registry\Registry,
-PH7\Framework\Security as Secty;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Security as Secty;
 
 /**
  * Small example of using this class.
@@ -40,19 +40,22 @@ PH7\Framework\Security as Secty;
 
 class Http extends \PH7\Framework\Http\Http
 {
+    const METHOD_HEAD = 'HEAD';
+    const METHOD_GET = 'GET';
+    const METHOD_POST = 'POST';
+    const METHOD_PUT = 'PUT';
+    const METHOD_PATCH = 'PATCH';
+    const METHOD_DELETE = 'DELETE';
+    const METHOD_OPTIONS = 'OPTIONS';
+    const ONLY_XSS_CLEAN = 'XSS_CLEAN';
+    const NO_CLEAN = 'NO_CLEAN';
 
-    const
-    METHOD_HEAD = 'HEAD',
-    METHOD_GET = 'GET',
-    METHOD_POST = 'POST',
-    METHOD_PUT = 'PUT',
-    METHOD_PATCH = 'PATCH',
-    METHOD_DELETE = 'DELETE',
-    METHOD_OPTIONS = 'OPTIONS',
-    ONLY_XSS_CLEAN = 'XSS_CLEAN',
-    NO_CLEAN = 'NO_CLEAN';
-
-    private $_sRequestUri, $_sMethod, $_aRequest, $_aGet, $_aPost, $_bStrip = false;
+    private $_sRequestUri;
+    private $_sMethod;
+    private $_aRequest;
+    private $_aGet;
+    private $_aPost;
+    private $_bStrip = false;
 
     public function __construct()
     {
@@ -77,8 +80,9 @@ class Http extends \PH7\Framework\Http\Http
     /**
      * Check is the request method GET exists.
      *
-     * @param mixed (array or string) $mKey The key of the request or an array with the list of key of the variables request.
+     * @param array|string $mKey The key of the request or an array with the list of key of the variables request.
      * @param string $sParam Optional parameter, check the type of the request variable | Value type is: str, int, float, bool
+     *
      * @return boolean
      */
     public function getExists($mKey, $sParam = null)
@@ -106,8 +110,9 @@ class Http extends \PH7\Framework\Http\Http
     /**
      * Check is the POST request method exists.
      *
-     * @param mixed (array or string) $mKey The key of the request or an array with the list of key of the variables request.
+     * @param array|string $mKey The key of the request or an array with the list of key of the variables request.
      * @param string $sParam Optional parameter, check the type of the request variable | Value type is: str, int, float, bool
+     *
      * @return boolean
      */
     public function postExists($mKey, $sParam = null)
@@ -174,6 +179,7 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
+     *
      * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
     public function gets($sKey, $sParam = null)
@@ -194,6 +200,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
+     *
      * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
     public function get($sKey, $sParam = null, $bStrip = false)
@@ -224,8 +231,10 @@ class Http extends \PH7\Framework\Http\Http
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
      * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
+     *
      * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
-     * @throws \PH7\Framework\Mvc\Request\Exception If the request is not POST.
+     *
+     * @throws Exception If the request is not POST.
      */
     public function post($sKey, $sParam = null, $bStrip = false)
     {
@@ -268,7 +277,7 @@ class Http extends \PH7\Framework\Http\Http
      */
     public function previousPage()
     {
-        return (new \PH7\Framework\Navigation\Browser)->getHttpReferer();
+        return (new Browser)->getHttpReferer();
     }
 
     /**
@@ -294,6 +303,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sParam
+     *
      * @return boolean Returns TRUE if the type of the variable is valid, FALSE otherwise.
      */
     protected function validate(&$aType, $sKey, $sParam)
@@ -311,6 +321,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sType A PHP Type: "bool", "int", "float", "string", "array", "object" or "null".
+     *
      * @return void
      */
     protected function setType(&$aType, $sKey, $sType)
@@ -326,6 +337,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sParam Optional self::ONLY_XSS_CLEAN To delete only the XSS vulnerability.
+     *
      * @return string
      */
     protected function cleanData(&$aType, $sKey, $sParam)
@@ -347,6 +359,7 @@ class Http extends \PH7\Framework\Http\Http
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey
      * @param string $sValue
+     *
      * @return void
      */
     private function _setRequestVar(&$aType, $sKey, $sValue)
@@ -360,6 +373,7 @@ class Http extends \PH7\Framework\Http\Http
      * @access private
      * @param array $aType Request variable type ($_GET, $_POST, $_COOKIE, $_REQUEST).
      * @param string $sKey The request variable to clean.
+     *
      * @return string
      */
     private function _clearCSRFToken(&$aType, $sKey)

@@ -10,7 +10,10 @@
  */
 
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
+
+use Smarty;
 
 abstract class Controller implements Controllable
 {
@@ -37,7 +40,11 @@ abstract class Controller implements Controllable
     const DEFAULT_LANG = 'en';
     const DEFAULT_THEME = 'base';
 
-    protected $oView, $sCurrentLang;
+    /** @var Smarty */
+    protected $oView;
+
+    /** @var string */
+    protected $sCurrentLang;
 
     public function __construct()
     {
@@ -54,7 +61,7 @@ abstract class Controller implements Controllable
         include_once PH7_ROOT_INSTALL . 'langs/' . $this->sCurrentLang . '/install.lang.php';
 
         /* Smarty initialization */
-        $this->oView = new \Smarty;
+        $this->oView = new Smarty;
         $this->oView->use_sub_dirs = true;
         $this->oView->setTemplateDir(PH7_ROOT_INSTALL . 'views/' . self::DEFAULT_THEME);
         $this->oView->setCompileDir(PH7_ROOT_INSTALL . 'data/caches/smarty_compile');
