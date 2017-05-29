@@ -70,8 +70,9 @@ class EditForm
 
         // Generate dynamic fields
         $oFields = $oAffModel->getInfoFields($iProfileId, 'AffiliatesInfo');
-        foreach ($oFields as $sColumn => $sValue)
+        foreach ($oFields as $sColumn => $sValue) {
             $oForm = (new DynamicFieldCoreForm($oForm, $sColumn, $sValue))->generate();
+        }
 
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));

@@ -5,14 +5,16 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form / Processing
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Cache\Cache, PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Mvc\Request\Http;
 
 class EditFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -21,8 +23,7 @@ class EditFormProcess extends Form
         $iProfileId = (AdminCore::auth() && !Affiliate::auth() && $this->httpRequest->getExists('profile_id')) ? $this->httpRequest->get('profile_id', 'int') : $this->session->get('affiliate_id');
         $oAff = $oAffModel->readProfile($iProfileId, 'Affiliates');
 
-        if(!$this->str->equals($this->httpRequest->post('first_name'), $oAff->firstName))
-        {
+        if(!$this->str->equals($this->httpRequest->post('first_name'), $oAff->firstName)) {
             $oAffModel->updateProfile('firstName', $this->httpRequest->post('first_name'), $iProfileId, 'Affiliates');
             $this->session->set('affiliate_first_name', $this->httpRequest->post('first_name'));
 
@@ -32,8 +33,7 @@ class EditFormProcess extends Form
         if(!$this->str->equals($this->httpRequest->post('last_name'), $oAff->lastName))
             $oAffModel->updateProfile('lastName', $this->httpRequest->post('last_name'), $iProfileId, 'Affiliates');
 
-        if(!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex))
-        {
+        if(!$this->str->equals($this->httpRequest->post('sex'), $oAff->sex)) {
             $oAffModel->updateProfile('sex', $this->httpRequest->post('sex'), $iProfileId, 'Affiliates');
             $this->session->set('affiliate_sex', $this->httpRequest->post('sex'));
 
@@ -45,11 +45,11 @@ class EditFormProcess extends Form
 
         // Update dynamic fields.
         $oFields = $oAffModel->getInfoFields($iProfileId, 'AffiliatesInfo');
-        foreach($oFields as $sColumn => $sValue)
-        {
+        foreach($oFields as $sColumn => $sValue) {
             $sHRParam = ($sColumn == 'description') ? Http::ONLY_XSS_CLEAN : null;
-            if(!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue))
+            if(!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
                 $oAffModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'AffiliatesInfo');
+            }
         }
         unset($oFields);
 
@@ -63,5 +63,4 @@ class EditFormProcess extends Form
 
         \PFBC\Form::setSuccess('form_aff_edit_account', t('The profile has been successfully updated'));
     }
-
 }

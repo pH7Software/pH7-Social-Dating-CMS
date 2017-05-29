@@ -5,14 +5,15 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Form / Processing
  */
+
 namespace PH7;
 
 defined('PH7') or die('Restricted access');
 
-use
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Router\Uri;
+use stdClass;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Router\Uri;
 
 class EditAdminBlogFormProcess extends Form
 {
