@@ -50,7 +50,7 @@ class EditForm
         unset($oHR);
 
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2 class="underline">'.t('Global Information:').'</h2>'));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="error">' . t('Attention all your information must be complete, candid and valid.') . '</p>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="error">' . t('All your information must be accurate and valid.') . '</p>'));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your First Name:'), 'first_name', array('id'=>'name_first', 'onblur'=>'CValid(this.value,this.id)', 'value'=>$oAff->firstName, 'required'=>1, 'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_first"></span>'));
@@ -58,9 +58,9 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Your Last Name:'), 'last_name', array('id'=>'name_last', 'onblur'=>'CValid(this.value,this.id)', 'value'=>$oAff->lastName, 'required'=>1, 'validation'=>new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error name_last"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', array('description'=>t('For site security, you cannot change your username.'), 'disabled'=>'disabled', 'value'=>$oAff->username)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Username:'), 'username', array('description'=>t('For security reasons, you cannot change your username.'), 'disabled'=>'disabled', 'value'=>$oAff->username)));
 
-        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('description'=>t('For site security and to avoid spam, you cannot change your email address.'), 'disabled'=>'disabled', 'value'=>$oAff->email)));
+        $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('description'=>t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled'=>'disabled', 'value'=>$oAff->email)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
 
         $oForm->addElement(new \PFBC\Element\Radio(t('Your Sex:'), 'sex', array('male'=>t('Male'), 'female'=>t('Female')), array('value'=> $oAff->sex,'required'=>1)));
