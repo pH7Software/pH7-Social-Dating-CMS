@@ -46,7 +46,7 @@ class EditAdminBlogFormProcess extends Form
         if (!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oBlogModel->updatePost('title', $this->httpRequest->post('title'), $iBlogId);
 
-        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN
+        // HTML contents, So we use Http::ONLY_XSS_CLEAN constant
         if (!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content))
             $oBlogModel->updatePost('content', $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $iBlogId);
 

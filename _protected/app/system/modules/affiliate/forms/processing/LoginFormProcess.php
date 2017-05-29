@@ -29,7 +29,7 @@ class LoginFormProcess extends Form implements LoginableForm
         $oSecurityModel = new SecurityModel;
 
         $sEmail = $this->httpRequest->post('mail');
-        $sPassword = $this->httpRequest->post('password', HttpRequest::ONLY_XSS_CLEAN);
+        $sPassword = $this->httpRequest->post('password', HttpRequest::NO_CLEAN);
 
         /** Check if the connection is not locked **/
         $bIsLoginAttempt = (bool) DbConfig::getSetting('isAffiliateLoginAttempt');

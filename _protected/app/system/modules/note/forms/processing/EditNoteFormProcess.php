@@ -51,7 +51,7 @@ class EditNoteFormProcess extends Form
         if (!$this->str->equals($this->httpRequest->post('title'), $oPost->title))
             $oNoteModel->updatePost('title', $this->httpRequest->post('title'), $iNoteId, $iProfileId);
 
-        // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN
+        // HTML contents, So we use Http::ONLY_XSS_CLEAN constant
         if (!$this->str->equals($this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $oPost->content))
             $oNoteModel->updatePost('content', $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), $iNoteId, $iProfileId);
 
@@ -109,23 +109,23 @@ class EditNoteFormProcess extends Form
      *
      * @param integer $iNoteId
      * @param integer $iProfileId
-     * @param object $oPost Post data from the database
-     * @param \PH7\NoteModel $oNoteModel
+     * @param stdClass $oPost Post data from the database
+     * @param NoteModel $oNoteModel
      * @return boolean FALSE if the maximal number of categories allowed has been reached, FALSE otherwise.
      *
-     * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
-     * otherwise the Request\Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
+     * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
+     * otherwise Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
      */
-    protected function updateCategories($iNoteId, $iProfileId, $oPost, NoteModel $oNoteModel)
+    protected function updateCategories($iNoteId, $iProfileId, stdClass $oPost, NoteModel $oNoteModel)
     {
-        if (!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId)) {
-            if (count($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN)) > Note::MAX_CATEGORY_ALLOWED) {
+        if (!$this->str->equals($this->httpRequest->post('category_id', Http::NO_CLEAN), $oPost->categoryId)) {
+            if (count($this->httpRequest->post('category_id', Http::NO_CLEAN)) > Note::MAX_CATEGORY_ALLOWED) {
                 return false;
             }
 
             $oNoteModel->deleteCategory($iNoteId);
 
-            foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
+            foreach ($this->httpRequest->post('category_id', Http::NO_CLEAN) as $iCategoryId) {
                 $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
             }
         }

@@ -32,7 +32,7 @@ class LoginFormProcess extends Form implements LoginableForm
 
         $sEmail = $this->httpRequest->post('mail');
         $sUsername = $this->httpRequest->post('username');
-        $sPassword = $this->httpRequest->post('password', HttpRequest::ONLY_XSS_CLEAN);
+        $sPassword = $this->httpRequest->post('password', HttpRequest::NO_CLEAN);
 
 
         /*** Security IP Login ***/

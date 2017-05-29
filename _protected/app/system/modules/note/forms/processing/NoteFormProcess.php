@@ -82,17 +82,17 @@ class NoteFormProcess extends Form
      * Set the categorie(s).
      *
      * @param integer $iProfileId
-     * @param \PH7\NoteModel $oNoteModel
+     * @param NoteModel $oNoteModel
      * @return void
      *
-     * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
-     * otherwise the Http::post() method removes the special tags and damages the SQL queries for entry into the database.
+     * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
+     * otherwise Http::post() method removes the special tags and damages the SQL queries for entry into the database.
      */
     protected function setCategories($iProfileId, NoteModel $oNoteModel)
     {
         $iNoteId = Db::getInstance()->lastInsertId();
 
-        foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
+        foreach ($this->httpRequest->post('category_id', Http::NO_CLEAN) as $iCategoryId) {
             $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
         }
     }

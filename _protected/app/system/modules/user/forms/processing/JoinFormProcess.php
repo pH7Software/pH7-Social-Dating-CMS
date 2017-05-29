@@ -51,8 +51,8 @@ class JoinFormProcess extends Form
             'affiliated_id' => $iAffId
         ];
 
-        // Need to use Http::ONLY_XSS_CLEAN since password might contains special character like "<" and will otherwise be converted to HTML entities
-        $sPassword = $this->httpRequest->post('password', Http::ONLY_XSS_CLEAN);
+        // Need to use Http::NO_CLEAN since password might contains special character like "<" and will otherwise be converted to HTML entities
+        $sPassword = $this->httpRequest->post('password', Http::NO_CLEAN);
         $aData += ['password' => Security::hashPwd($sPassword)];
 
         $iTimeDelay = (int) DbConfig::getSetting('timeDelayUserRegistration');
@@ -89,11 +89,11 @@ class JoinFormProcess extends Form
         $iProfileId = $this->oUserModel->getId($this->session->get('mail_step1'));
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
 
-        // WARNING FOT "matchSex" FIELD: Be careful, you should use the Http::ONLY_XSS_CLEAN constant, otherwise Http::post() method removes the special tags
+        // WARNING FOT "matchSex" FIELD: Be careful, you should use the Http::NO_CLEAN constant, otherwise Http::post() method removes the special tags
         // and damages the SET function SQL for entry into the database
         $aData1 = [
             'sex' => $this->httpRequest->post('sex'),
-            'match_sex' => Form::setVal($this->httpRequest->post('match_sex', Http::ONLY_XSS_CLEAN)),
+            'match_sex' => Form::setVal($this->httpRequest->post('match_sex', Http::NO_CLEAN)),
             'birth_date' => $sBirthDate,
             'profile_id' => $iProfileId
         ];

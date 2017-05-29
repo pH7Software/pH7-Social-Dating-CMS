@@ -16,7 +16,7 @@ use PH7\Framework\Mvc\Request\Http;
 class ChangePasswordCoreFormProcess extends Form
 {
     /**
-     * @internal Need to use Http::ONLY_XSS_CLEAN arg in Http::post() since password might contains special character like "<" and will otherwise be converted to HTML entities
+     * @internal Need to use Http::NO_CLEAN arg in Http::post() since password might contains special character like "<" and will otherwise be converted to HTML entities
      */
     public function __construct()
     {
@@ -37,24 +37,24 @@ class ChangePasswordCoreFormProcess extends Form
             $mLogin = $oPasswordModel->adminLogin(
                 $sEmail,
                 $this->session->get('admin_username'),
-                $this->httpRequest->post('old_password', Http::ONLY_XSS_CLEAN)
+                $this->httpRequest->post('old_password', Http::NO_CLEAN)
             );
         }
         else
         {
             $mLogin = $oPasswordModel->login(
                 $sEmail,
-                $this->httpRequest->post('old_password', Http::ONLY_XSS_CLEAN),
+                $this->httpRequest->post('old_password', Http::NO_CLEAN),
                 $sTable
             );
         }
 
         // Check
-        if ($this->httpRequest->post('new_password', Http::ONLY_XSS_CLEAN) !== $this->httpRequest->post('new_password2', Http::ONLY_XSS_CLEAN))
+        if ($this->httpRequest->post('new_password', Http::NO_CLEAN) !== $this->httpRequest->post('new_password2', Http::NO_CLEAN))
         {
             \PFBC\Form::setError('form_change_password', t('The passwords do not match.'));
         }
-        elseif ($this->httpRequest->post('old_password', Http::ONLY_XSS_CLEAN) === $this->httpRequest->post('new_password', Http::ONLY_XSS_CLEAN))
+        elseif ($this->httpRequest->post('old_password', Http::NO_CLEAN) === $this->httpRequest->post('new_password', Http::NO_CLEAN))
         {
             \PFBC\Form::setError('form_change_password', t('The old and new passwords are identical. So why do you change your password?'));
         }
@@ -68,7 +68,7 @@ class ChangePasswordCoreFormProcess extends Form
             $this->session->regenerateId();
 
             // Update the password
-            $oPasswordModel->changePassword($sEmail, $this->httpRequest->post('new_password', Http::ONLY_XSS_CLEAN), $sTable);
+            $oPasswordModel->changePassword($sEmail, $this->httpRequest->post('new_password', Http::NO_CLEAN), $sTable);
             \PFBC\Form::setSuccess('form_change_password', t('Your password has been successfully changed.'));
         }
     }

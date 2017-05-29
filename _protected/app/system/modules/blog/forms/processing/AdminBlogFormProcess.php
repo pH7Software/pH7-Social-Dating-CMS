@@ -32,7 +32,7 @@ class AdminBlogFormProcess extends Form
                 'post_id' => $sPostId,
                 'lang_id' => $this->httpRequest->post('lang_id'),
                 'title' => $this->httpRequest->post('title'),
-                'content' => $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN
+                'content' => $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), // HTML contents, so we use Http::ONLY_XSS_CLEAN constant
                 'slogan' => $this->httpRequest->post('$slogan'),
                 'tags'=> $this->httpRequest->post('tags'),
                 'page_title' => $this->httpRequest->post('page_title'),
@@ -63,17 +63,17 @@ class AdminBlogFormProcess extends Form
     /**
      * Set the categorie(s).
      *
-     * @param \PH7\BlogModel $oBlogModel
+     * @param BlogModel $oBlogModel
      * @return void
      *
-     * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
-     * otherwise the Http::post() method removes the special tags and damages the SQL queries for entry into the database.
+     * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
+     * otherwise Http::post() method removes the special tags and damages the SQL queries for entry into the database.
      */
     protected function setCategories(BlogModel $oBlogModel)
     {
         $iBlogId = Db::getInstance()->lastInsertId();
 
-        foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
+        foreach ($this->httpRequest->post('category_id', Http::NO_CLEAN) as $iCategoryId) {
             $oBlogModel->addCategory($iCategoryId, $iBlogId);
         }
     }
