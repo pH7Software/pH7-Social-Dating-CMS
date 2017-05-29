@@ -2,10 +2,11 @@
 /**
  * @title            Benchmark Class
  *
- * @package          PH7 / Framework / Navigation
+ * @package          PH7 / Framework / Benchmark
  *
  * Copyright (c) 2012 Jeremy Perret
- * File Modified by Pierre-Henry Soria, Copyright (c) 2014
+ *
+ * File Modified by Pierre-Henry Soria, Copyright (c) 2014-2017
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,15 +28,18 @@
  */
 
 namespace PH7\Framework\Benchmark;
+
 defined('PH7') or exit('Restricted access');
 
 class Benchmark
 {
-
+    /** @var float */
     protected $fStartTime;
 
+    /** @var float */
     protected $fEndTime;
 
+    /** @var integer */
     protected $iMemoryUsage;
 
     /**
@@ -62,8 +66,9 @@ class Benchmark
     /**
      * Returns the elapsed time, readable or not
      *
-     * @param  boolean $readable Whether the result must be human readable
+     * @param  boolean $raw Whether the result must be human readable
      * @param  string  $format   The format to display (printf format)
+     *
      * @return string|float
      */
     public function getTime($raw = false, $format = null)
@@ -76,8 +81,9 @@ class Benchmark
     /**
      * Returns the memory usage at the end checkpoint
      *
-     * @param  boolean $readable Whether the result must be human readable
+     * @param  boolean $raw Whether the result must be human readable
      * @param  string  $format   The format to display (printf format)
+     *
      * @return string|float
      */
     public function getMemoryUsage($raw = false, $format = null)
@@ -88,8 +94,9 @@ class Benchmark
     /**
      * Returns the memory peak, readable or not
      *
-     * @param  boolean $readable Whether the result must be human readable
+     * @param  boolean $raw Whether the result must be human readable
      * @param  string  $format   The format to display (printf format)
+     *
      * @return string|float
      */
     public function getMemoryPeak($raw = false, $format = null)
@@ -105,6 +112,7 @@ class Benchmark
      * @param   int    $size
      * @param   string $format   The format to display (printf format)
      * @param   int    $round
+     *
      * @return  string
      */
     public static function readableSize($size, $format = null, $round = 3)
@@ -131,8 +139,10 @@ class Benchmark
     /**
      * Returns a human readable elapsed time
      *
-     * @param  float $microtime
+     * @param  float   $microtime
      * @param  string  $format   The format to display (printf format)
+     * @param  int $round
+     *
      * @return string
      */
     public static function readableElapsedTime($microtime, $format = null, $round = 3)
@@ -153,5 +163,4 @@ class Benchmark
 
         return sprintf($format, $time, $unit);
     }
-
 }
