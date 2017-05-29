@@ -94,19 +94,19 @@ class EditAdminBlogFormProcess extends Form
      * Update categories.
      *
      * @param integer $iBlogId
-     * @param object $oPost Post data from the database.
-     * @param \PH7\BlogModel $oBlogModel
+     * @param stdClass $oPost Post data from the database.
+     * @param BlogModel $oBlogModel
      * @return void
      *
-     * @internal WARNING: Be careful, you should use the \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN constant,
-     * otherwise the Request\Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
+     * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
+     * otherwise Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
      */
-    protected function updateCategories($iBlogId, $oPost, BlogModel $oBlogModel)
+    protected function updateCategories($iBlogId, stdClass $oPost, BlogModel $oBlogModel)
     {
-        if (!$this->str->equals($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN), $oPost->categoryId)) {
+        if (!$this->str->equals($this->httpRequest->post('category_id', Http::NO_CLEAN), $oPost->categoryId)) {
             $oBlogModel->deleteCategory($iBlogId);
 
-            foreach ($this->httpRequest->post('category_id', Http::ONLY_XSS_CLEAN) as $iCategoryId) {
+            foreach ($this->httpRequest->post('category_id', Http::NO_CLEAN) as $iCategoryId) {
                 $oBlogModel->addCategory($iCategoryId, $iBlogId);
             }
         }

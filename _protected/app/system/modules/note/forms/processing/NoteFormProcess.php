@@ -41,7 +41,7 @@ class NoteFormProcess extends Form
                 'post_id' => $sPostId,
                 'lang_id' => $this->httpRequest->post('lang_id'),
                 'title' => $this->httpRequest->post('title'),
-                'content' => $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), // HTML contents, So we use the constant: \PH7\Framework\Mvc\Request\Http::ONLY_XSS_CLEAN
+                'content' => $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), // HTML contents, so we use Http::ONLY_XSS_CLEAN constant
                 'slogan' => $this->httpRequest->post('slogan'),
                 'tags' => $this->httpRequest->post('tags'),
                 'page_title' => $this->httpRequest->post('page_title'),
