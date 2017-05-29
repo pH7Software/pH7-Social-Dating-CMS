@@ -39,7 +39,7 @@ class AddUserFormProcess extends Form
             'city' => $this->httpRequest->post('city'),
             'state' => $this->httpRequest->post('state'),
             'zip_code' => $this->httpRequest->post('zip_code'),
-            'description' => $this->httpRequest->post('description'),
+            'description' => $this->httpRequest->post('description', Http::ONLY_XSS_CLEAN),
             'website' => $this->httpRequest->post('website'),
             'social_network_site' => $this->httpRequest->post('social_network_site'),
             'ip' => Ip::get()

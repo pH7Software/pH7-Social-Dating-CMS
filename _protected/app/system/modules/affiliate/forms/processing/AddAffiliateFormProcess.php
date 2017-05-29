@@ -37,7 +37,7 @@ class AddAffiliateFormProcess extends Form
             'state' => $this->httpRequest->post('state'),
             'zip_code' => $this->httpRequest->post('zip_code'),
             'phone' => $this->httpRequest->post('phone'),
-            'description' => $this->httpRequest->post('description'),
+            'description' => $this->httpRequest->post('description', Http::ONLY_XSS_CLEAN),
             'website' => $this->httpRequest->post('website'),
             'bank_account' => $this->httpRequest->post('bank_account'),
             'ip' => Ip::get()
