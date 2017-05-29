@@ -13,6 +13,8 @@ namespace PH7\Framework\Date;
 
 defined('PH7') or exit('Restricted access');
 
+use DateTime;
+
 class Various
 {
     /**
@@ -24,7 +26,7 @@ class Various
      */
     public static function getTime($sTime = 'now')
     {
-        return (new \DateTime($sTime))->getTimestamp();
+        return (new DateTime($sTime))->getTimestamp();
     }
 
     /**
@@ -36,7 +38,7 @@ class Various
      */
     public static function setTime($sTime)
     {
-        $oDate = new \DateTime;
+        $oDate = new DateTime;
         $oDate->modify($sTime);
         $iNewTime = $oDate->getTimestamp();
         unset($oDate);
@@ -80,21 +82,21 @@ class Various
     }
 
     /**
-     * Creates the text of the time stamp.
+     * Creates the text of the timestamp.
      *
-     * @param integer|string Unix Timestamp or a simple Date string.
+     * @param integer|string Unix timestamp or string date format.
      *
      * @return string Returns the text of the time stamp.
      */
     public static function textTimeStamp($mTime)
     {
         if (is_string($mTime)) {
-            // Converting the date string format to TimeStamp.
+            // Converting the date string format into timeStamp
             $mTime = strtotime($mTime);
         }
 
-        $iTimeDiff = time() - $mTime;
-        $iSeconds =& $iTimeDiff;
+        $iSeconds = time() - $mTime;
+
         $iMinutes = round($iSeconds / 60);
         $iHours = round($iSeconds / 3600);
         $iDays = round($iSeconds / 86400);
@@ -102,23 +104,23 @@ class Various
         $iMonths = round($iSeconds / 2419200);
         $iYears = round($iSeconds / 29030400);
 
-        if ($iSeconds == 0)
+        if ($iSeconds === 0)
             $sTxt = t('%0% seconds ago.', 0.5);
         elseif ($iSeconds < 60)
             $sTxt = t('%0% seconds ago.', $iSeconds);
         elseif ($iMinutes < 60)
-            $sTxt = ($iMinutes == 1) ? t('one minute ago.') : t('%0% minutes ago.', $iMinutes);
+            $sTxt = $iMinutes === 1 ? t('one minute ago.') : t('%0% minutes ago.', $iMinutes);
         elseif ($iHours < 24)
-            $sTxt = ($iHours == 1) ? t('one hour ago.') : t('%0% hours ago.', $iHours);
+            $sTxt = $iHours === 1 ? t('one hour ago.') : t('%0% hours ago.', $iHours);
         else
             if ($iDays < 7)
-                $sTxt = ($iDays == 1) ? t('one day ago.') : t('%0% days ago.', $iDays);
+                $sTxt = $iDays === 1 ? t('one day ago.') : t('%0% days ago.', $iDays);
             elseif ($iWeeks < 4)
-                 $sTxt = ($iWeeks == 1) ? t('one week ago.') : t('%0% weeks ago.', $iWeeks);
+                 $sTxt = $iWeeks === 1 ? t('one week ago.') : t('%0% weeks ago.', $iWeeks);
             elseif ($iMonths < 12)
-                $sTxt = ($iMonths == 1) ? t('one month ago.') : t('%0% months ago.', $iMonths);
+                $sTxt = $iMonths === 1 ? t('one month ago.') : t('%0% months ago.', $iMonths);
             else
-                $sTxt = ($iYears == 1) ? t('one year ago.') : t('%0% years ago.', $iYears);
+                $sTxt = $iYears === 1 ? t('one year ago.') : t('%0% years ago.', $iYears);
 
         return $sTxt;
     }
@@ -128,10 +130,12 @@ class Various
      *
      * @see self::secToTime()
      *
+     * @param integer $iVal
+     *
      * @return integer
      */
     protected static function checkSecToTime($iVal)
     {
-        return (strlen($iVal) == 1) ? 0 . $iVal : $iVal;
+        return strlen($iVal) === 1 ? 0 . $iVal : $iVal;
     }
 }
