@@ -55,9 +55,9 @@ class Various
     {
         list($iH, $iM, $iS) = explode(':', $iHMS);
         $iSeconds = 0;
-        $iSeconds += (intval($iH) * 3600);
-        $iSeconds += (intval($iM) * 60);
-        $iSeconds += (intval($iS));
+        $iSeconds += ((int) $iH * 3600);
+        $iSeconds += ((int) $iM * 60);
+        $iSeconds += (int) $iS;
 
         return $iSeconds;
     }
@@ -71,7 +71,7 @@ class Various
      */
     public static function secToTime($iSeconds)
     {
-        $iSeconds = (int)$iSeconds;
+        $iSeconds = (int) $iSeconds;
 
         $iTime1 = floor($iSeconds / 60);
         $iTime2 = ($iSeconds % 60);

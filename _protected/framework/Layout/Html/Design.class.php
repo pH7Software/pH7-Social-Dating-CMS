@@ -224,7 +224,7 @@ class Design
 
         $sUrl = (!empty($sUrl)) ? $sUrl : $this->oHttpRequest->currentUrl();
 
-        header('Refresh: ' . intval($iTime) . '; URL=' . $this->oHttpRequest->pH7Url($sUrl));
+        header('Refresh: ' . $iTime . '; URL=' . $this->oHttpRequest->pH7Url($sUrl));
     }
 
     /**

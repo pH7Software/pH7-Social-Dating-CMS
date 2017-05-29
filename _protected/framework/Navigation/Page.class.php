@@ -35,8 +35,8 @@ class Page
     protected function totalPages($iTotalItems, $iNbItemsPerPage)
     {
         $this->_iTotalItems = (int) $iTotalItems;
-        $this->_iNbItemsPerPage = (int) $iNbItemsPerPage; // or intval() function, but it is slower than the cast
-        $this->_iCurrentPage = (int) ($this->_oHttpRequest->getExists('p')) ? $this->_oHttpRequest->get('p') : 1;
+        $this->_iNbItemsPerPage = (int) $iNbItemsPerPage; // or intval() function, but it is slower than casting
+        $this->_iCurrentPage = (int) $this->_oHttpRequest->getExists('p') ? $this->_oHttpRequest->get('p') : 1;
 
         // Ternary condition to prevent division by zero
         $this->_iTotalPages = (int) ($this->_iTotalItems !== 0 && $this->_iNbItemsPerPage !== 0) ? ceil($this->_iTotalItems / $this->_iNbItemsPerPage) : 0;
