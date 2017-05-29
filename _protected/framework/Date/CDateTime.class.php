@@ -20,6 +20,8 @@ use DateTimeZone;
 
 class CDateTime
 {
+    const DEFAULT_DATE_FORMAT = 'Y-m-d H:i:s';
+
     /** @var Config */
     private $_oConfig;
 
@@ -40,14 +42,14 @@ class CDateTime
      */
     public function get($mTime = null)
     {
-        $sSetTime = (!empty($mTime)) ? date('Y-m-d H:i:s', (!is_numeric($mTime) ? strtotime($mTime) : $mTime) ) : 'now';
+        $sSetTime = (!empty($mTime)) ? date(self::DEFAULT_DATE_FORMAT, (!is_numeric($mTime) ? strtotime($mTime) : $mTime) ) : 'now';
         $this->_oDateTime = new DateTime($sSetTime, new DateTimeZone($this->_oConfig->values['language.application']['timezone']));
 
         return $this;
     }
 
     /**
-     * Get Date Time.
+     * Get the date + time (e.g. 05-29-2017 10:25:00).
      *
      * @param string $sFormat
      *
@@ -61,7 +63,7 @@ class CDateTime
     }
 
     /**
-     * Get Date.
+     * Get the date (e.g. 05-29-2017).
      *
      * @param string $sFormat
      *
@@ -75,7 +77,7 @@ class CDateTime
     }
 
     /**
-     * Get Time.
+     * Get the time (e.g. 10:26:35).
      *
      * @param string $sFormat
      *

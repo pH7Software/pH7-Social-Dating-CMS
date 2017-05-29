@@ -126,7 +126,7 @@ class Various
     /**
      * Checks the value format 00:00 of the conversion of seconds to the time.
      *
-     * @see \PH7\Framework\Date\Various\secToTime
+     * @see self::secToTime()
      *
      * @return integer
      */
