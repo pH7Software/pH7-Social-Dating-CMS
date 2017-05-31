@@ -25,6 +25,7 @@ class Cookie
      * @param string $sValue value of the cookie, Optional if the cookie data is in a array.
      * @param int $iTime The time the cookie expires. This is a Unix timestamp.
      * @param bool $bSecure If TRUE cookie will only be sent over a secure HTTPS connection from the client.
+     *
      * @return void
      */
     public function set($mName, $sValue = null, $iTime = null, $bSecure = null)
@@ -53,6 +54,7 @@ class Cookie
      *
      * @param string $sName Name of the cookie.
      * @param boolean $bEscape Default TRUE
+     *
      * @return string If the cookie exists, returns the cookie with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the cookie doesn't exist.
      */
     public function get($sName, $bEscape = true)
@@ -65,6 +67,7 @@ class Cookie
      * Returns a boolean informing if the cookie exists or not.
      *
      * @param array|string $mName Name of the cookie.
+     *
      * @return boolean
      */
     public function exists($mName)
@@ -88,6 +91,7 @@ class Cookie
      * Delete the cookie(s) key if the cookie exists.
      *
      * @param array|string $mName Name of the cookie to delete.
+     *
      * @return void
      */
     public function remove($mName)

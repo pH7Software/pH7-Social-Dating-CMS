@@ -45,6 +45,7 @@ class Session
      *
      * @param array|string $mName Name of the session.
      * @param string $sValue Value of the session, Optional if the session data is in a array.
+     *
      * @return void
      */
     public function set($mName, $sValue = null)
@@ -63,6 +64,7 @@ class Session
      *
      * @param string $sName Name of the session.
      * @param boolean $bEscape Default TRUE
+     *
      * @return string If the session exists, returns the session with function escape() (htmlspecialchars) if escape is enabled. Empty string value if the session doesn't exist.
      */
     public function get($sName, $bEscape = true)
@@ -75,6 +77,7 @@ class Session
      * Returns a boolean informing if the session exists or not.
      *
      * @param array|string $mName Name of the session.
+     *
      * @return boolean
      */
     public function exists($mName)
@@ -98,6 +101,7 @@ class Session
      * Delete the session(s) if the session exists.
      *
      * @param array|string $mName Name of the session to delete.
+     *
      * @return void
      */
     public function remove($mName)

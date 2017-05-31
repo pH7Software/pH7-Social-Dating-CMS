@@ -51,6 +51,7 @@ final class Version
         $oCache = (new Cache)->start('str/security', 'version-info', 3600*24); // Stored for 1 day
         if (!$mData = $oCache->get()) {
             $oDom = new \DOMDocument;
+
             if (!@$oDom->load(self::LATEST_VERSION_URL)) {
                 return false;
             }
@@ -99,11 +100,12 @@ final class Version
             if (version_compare(self::KERNEL_BUILD, $sLastBuild, '<')) {
                 return true;
             }
-        } else {
-            if (version_compare(self::KERNEL_VERSION, $sLastVer, '<')) {
-                return true;
-            }
         }
+
+        if (version_compare(self::KERNEL_VERSION, $sLastVer, '<')) {
+            return true;
+        }
+
         return false;
     }
 }
