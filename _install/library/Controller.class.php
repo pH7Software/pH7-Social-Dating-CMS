@@ -33,9 +33,12 @@ abstract class Controller implements Controllable
     const SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
     const SOFTWARE_COPYRIGHT = '© (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.';
 
-    // 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO", 5.* was "pCO" and 6.* is "WoW"
-    const SOFTWARE_VERSION_NAME = 'WoW';
-    const SOFTWARE_VERSION = '6.0.13';
+    /**
+     * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
+     * 5.* was "pCO", 6.* was "WoW" and 7.* is NaOH
+     */
+    const SOFTWARE_VERSION_NAME = 'NaOH';
+    const SOFTWARE_VERSION = '7.0.0';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';
