@@ -26,8 +26,8 @@ class MainController extends Controller
     {
         $this->sTitle = t('Welcome to Universal Login');
         $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Universal Login, Use the service Facebook, Twitter, Yahoo, AOL, Windows Live, Microsoft Live, Google, or other account to login on the social dating site %site_name%');
-        $this->view->meta_keywords = t('connect, login, Register, universal login, Facebook, Twitter, Yahoo, AOL, Windows Live, Microsoft Live, Google, social network, dating site, email');
+        $this->view->meta_description = t('Universal Login, Use the service Facebook, Twitter, Outlook, Microsoft, Google, or other account to login on the social dating site %site_name%');
+        $this->view->meta_keywords = t('connect, login, Register, universal login, Facebook, Twitter, Outlook, Microsoft, Google, social network, dating site, email');
         $this->view->h1_title = $this->sTitle;
 
         $this->output();
