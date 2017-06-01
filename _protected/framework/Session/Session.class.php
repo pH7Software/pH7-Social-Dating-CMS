@@ -32,7 +32,7 @@ class Session
          * In localhost mode, security session_set_cookie_params causing problems in the sessions, so we disable this if we are in localhost mode.
          * Otherwise if we are in production mode, we activate this.
          */
-        if (!(new Server)->isLocalHost()) {
+        if (!Server::isLocalHost()) {
             $iTime = (int) Config::getInstance()->values['session']['expiration'];
             session_set_cookie_params($iTime, Config::getInstance()->values['session']['path'], Config::getInstance()->values['session']['domain'], (substr(PH7_URL_PROT, 0, 5) === 'https'), true);
         }

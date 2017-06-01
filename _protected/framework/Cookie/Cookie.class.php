@@ -41,7 +41,7 @@ class Cookie
             $sCookieName = Config::getInstance()->values['cookie']['prefix'] . $mName;
 
             /* Check if we are not in localhost mode, otherwise may not work. */
-            if (!(new Server)->isLocalHost()) {
+            if (!Server::isLocalHost()) {
                 setcookie($sCookieName, $sValue, $iTime, Config::getInstance()->values['cookie']['path'], Config::getInstance()->values['cookie']['domain'], $bSecure, true);
             } else {
                 setcookie($sCookieName, $sValue, $iTime, PH7_SH);

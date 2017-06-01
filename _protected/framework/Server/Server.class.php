@@ -112,7 +112,7 @@ final class Server
      *
      * @return boolean TRUE if it is in local mode, FALSE if not.
      */
-    public function isLocalHost()
+    public static function isLocalHost()
     {
         $sServerName = self::getName();
         $sHttpHost = self::getVar(self::HTTP_HOST);
