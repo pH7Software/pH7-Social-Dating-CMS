@@ -17,5 +17,5 @@
     </ul>
     {main_include 'page_nav.inc.tpl'}
 {else}
-    <p class="center">{lang 'No Avatars found for the moderation treatment.'}</p>
+    <p class="center">{lang 'No Profile Photos found for the moderation treatment.'}</p>
 {/if}

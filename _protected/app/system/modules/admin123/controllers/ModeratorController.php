@@ -218,9 +218,9 @@ class ModeratorController extends Controller
     {
         if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'))) {
             $this->clearAvatarCache();
-            $this->sMsg = t('The avatar has been approved!');
+            $this->sMsg = t('The profile photo has been approved!');
         } else {
-            $this->sMsg = t('Oops! The avatar could not be approved!');
+            $this->sMsg = t('Oops! The profile photo could not be approved!');
         }
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
@@ -290,9 +290,9 @@ class ModeratorController extends Controller
     {
         if ($this->oModeratorModel->approvedAvatar($this->httpRequest->post('id'), '0')) {
             $this->clearAvatarCache();
-            $this->sMsg = t('The avatar has been disapproved!');
+            $this->sMsg = t('The profile photo has been disapproved!');
         } else {
-            $this->sMsg = t('Oops! The avatar could not be disapprove!');
+            $this->sMsg = t('Oops! The profile photo could not be disapprove!');
         }
 
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'moderator', 'avatar'), $this->sMsg);
