@@ -928,7 +928,7 @@ CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
 
 INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('Affiliate', 'affiliate', '0', '1'),
-('Chat', 'chat', '1', '0'),
+('Chat', 'chat', '1', '1'),
 ('Chatroulette', 'chatroulette', '1', '0'),
 ('Picture', 'picture', '0', '1'),
 ('Video', 'video', '0', '1'),

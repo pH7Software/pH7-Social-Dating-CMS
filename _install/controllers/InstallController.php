@@ -37,7 +37,7 @@ class InstallController extends Controller
         'webcam' => '1',
         'love-calculator' => '0',
         'mail' => '1',
-        'im' => '1',
+        'im' => '0',
         'user-dashboard' => '0',
         'related-profile' => '1',
         'friend' => '1'
