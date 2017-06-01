@@ -587,8 +587,6 @@ class Design
     }
 
     /**
-     * Get the User Avatar.
-     *
      * @param string $sUsername
      * @param string $sSex
      * @param integer $iSize
