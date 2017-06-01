@@ -11,6 +11,8 @@
 namespace PH7;
 
 use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Server\Server;
 use PH7\Framework\Service\SearchImage\Google as GoogleImage;
 
 class AvatarDesignCore extends Design
@@ -60,20 +62,51 @@ class AvatarDesignCore extends Design
     /**
      * Display the lightbox avatar.
      *
-     * @param string $sUsername  Default ''
-     * @param string $sFirstName Default ''
-     * @param string $sSex Default NULL
-     * @param integer $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400). Default: 400
+     * @param string $sUsername
+     * @param string $sFirstName
+     * @param string $sSex
+     * @param integer $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
      */
     public function lightbox($sUsername = '', $sFirstName = '', $sSex = null, $iSize = 400)
     {
         // The profile does not exist, so it creates a fake profile = ghost
-        if (empty($sUsername))
-        {
+        if (empty($sUsername)) {
             $sUsername = PH7_GHOST_USERNAME;
             $sFirstName = t('Ghost');
             $sSex = PH7_GHOST_USERNAME;
         }
+
         echo '<div class="picture_block"><a href="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" title="', ucfirst($sUsername), '" data-popup="image"><img src="', $this->getUserAvatar($sUsername, $sSex, $iSize / 2), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" class="img_picture" /></a></div>';
+
+        /**
+         * @internal Google Search Image works only on non-local URLs, so check if we aren't on dev environments.
+         */
+        if (
+            AdminCore::auth()
+            && Registry::getInstance()->controller === 'ModeratorController'
+            && !Server::isLocalHost()
+        ) {
+            $sAvatarUrl = $this->getUserAvatar($sUsername, $sSex, null, false);
+
+            echo '<p>';
+            $this->showAvatarOnGoogleLink($sAvatarUrl);
+            echo '</p>';
+        }
+    }
+
+    /**
+     * @param string $sAvatarUrl
+     */
+    protected function showAvatarOnGoogleLink($sAvatarUrl)
+    {
+        $oSearchImage = new GoogleImage($sAvatarUrl);
+
+        $aLinkAttrs = [
+            'href' => $oSearchImage->getSearchImageUrl(),
+            'title' => t('See any matching images with this profile photo'),
+            'target' => '_blank',
+            'class' => 'italic btn btn-default btn-xs'
+        ];
+        $this->htmlTag('a', $aLinkAttrs, true, t('Check it on Google Images'));
     }
 }
