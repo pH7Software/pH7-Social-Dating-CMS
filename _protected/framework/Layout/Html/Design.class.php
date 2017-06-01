@@ -14,10 +14,14 @@ namespace PH7\Framework\Layout\Html;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Core\Kernel;
+use PH7\UserCore;
+use PH7\UserCoreModel;
+use PH7\AdminCore;
+use PH7\AdminCoreModel;
+use PH7\AffiliateCore;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\UserCore;
 use PH7\Framework\Parse\Url as UrlParser;
 use PH7\Framework\Url\Url;
 use PH7\Framework\Ip\Ip;
@@ -257,9 +261,9 @@ class Design
             } else {
                 $this->url('user', 'browse', 'index');
             }
-        } elseif (\PH7\AdminCore::auth()) {
+        } elseif (AdminCore::auth()) {
             $this->url(PH7_ADMIN_MOD, 'main', 'index');
-        } elseif (\PH7\AffiliateCore::auth()) {
+        } elseif (AffiliateCore::auth()) {
             $this->url('affiliate', 'account', 'index');
         } else {
             echo PH7_URL_ROOT;
@@ -415,8 +419,8 @@ class Design
     {
         if (
             (!defined('PH7_VALID_LICENSE') || !PH7_VALID_LICENSE)
-            && (new \PH7\AdminCoreModel)->getRootIp() !== Ip::get()
-            && !\PH7\AdminCore::auth()
+            && (new AdminCoreModel)->getRootIp() !== Ip::get()
+            && !AdminCore::auth()
         ) {
             $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742" />';
 
@@ -585,18 +589,19 @@ class Design
     /**
      * Get the User Avatar.
      *
-     * @param string $sUername
+     * @param string $sUsername
      * @param string $sSex
      * @param integer $iSize
+     * @param boolean $bPrint Print or Return the HTML code.
      * @return void Html contents. URL avatar default 150px or the user avatar.
      */
-    public function getUserAvatar($sUsername, $sSex = '', $iSize = '')
+    public function getUserAvatar($sUsername, $sSex = '', $iSize = null, $bPrint = true)
     {
         $oCache = (new Cache)->start(self::CACHE_AVATAR_GROUP . $sUsername, $sSex . $iSize, 3600);
 
         if (!$sUrl = $oCache->get())
         {
-            $oUserModel = new \PH7\UserCoreModel;
+            $oUserModel = new UserCoreModel;
 
             $iProfileId = $oUserModel->getId(null, $sUsername);
             $oGetAvatar = $oUserModel->getAvatar($iProfileId);
