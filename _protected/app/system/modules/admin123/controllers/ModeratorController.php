@@ -47,11 +47,15 @@ class ModeratorController extends Controller
         $this->view->page_title = $this->view->h2_title = t('Photo Albums Moderation');
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oModeratorModel->totalPictureAlbums(), self::ITEMS_PER_PAGE
+            $this->oModeratorModel->totalPictureAlbums(),
+            self::ITEMS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
+
         $this->view->albums = $this->oModeratorModel->getAlbumsPicture(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
         );
 
         $this->output();
@@ -62,11 +66,15 @@ class ModeratorController extends Controller
         $this->view->page_title = $this->view->h2_title = t('Pictures Moderation');
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oModeratorModel->totalPictures(), self::ITEMS_PER_PAGE
+            $this->oModeratorModel->totalPictures(),
+            self::ITEMS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
+
         $this->view->pictures = $this->oModeratorModel->getPictures(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
         );
 
         $this->output();
@@ -77,11 +85,15 @@ class ModeratorController extends Controller
         $this->view->page_title = $this->view->h2_title = t('Video Albums Moderation');
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oModeratorModel->totalVideoAlbums(), self::ITEMS_PER_PAGE
+            $this->oModeratorModel->totalVideoAlbums(),
+            self::ITEMS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
+
         $this->view->albums = $this->oModeratorModel->getAlbumsVideo(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
         );
 
         $this->output();
@@ -94,11 +106,15 @@ class ModeratorController extends Controller
         $this->view->page_title = $this->view->h2_title = t('Videos Moderation');
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oModeratorModel->totalVideos(), self::ITEMS_PER_PAGE
+            $this->oModeratorModel->totalVideos(),
+            self::ITEMS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
+
         $this->view->videos = $this->oModeratorModel->getVideos(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
         );
 
         $this->output();
@@ -106,15 +122,19 @@ class ModeratorController extends Controller
 
     public function avatar()
     {
-        $this->view->page_title = $this->view->h2_title = t('Avatars Moderation');
+        $this->view->page_title = $this->view->h2_title = t('Profile Photos Moderation');
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oModeratorModel->totalAvatars(), self::ITEMS_PER_PAGE
+            $this->oModeratorModel->totalAvatars(),
+            self::ITEMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
+
         $this->view->avatars = $this->oModeratorModel->getAvatars(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
         );
+
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
 
         $this->output();
@@ -125,11 +145,14 @@ class ModeratorController extends Controller
         $this->view->page_title = $this->view->h2_title = t('Profile Backgrounds Moderation');
 
         $this->view->total_pages = $this->oPage->getTotalPages(
-            $this->oModeratorModel->totalBackgrounds(), self::ITEMS_PER_PAGE
+            $this->oModeratorModel->totalBackgrounds(),
+            self::ITEMS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
+
         $this->view->backgrounds = $this->oModeratorModel->getBackgrounds(
-            $this->oPage->getFirstItem(), $this->oPage->getNbItemsPerPage()
+            $this->oPage->getFirstItem(),
+            $this->oPage->getNbItemsPerPage()
         );
 
         $this->output();
@@ -289,8 +312,10 @@ class ModeratorController extends Controller
 
     public function deletePictureAlbum()
     {
-        if ((new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id'))
-            && $this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id'))) {
+        if (
+            (new PictureCoreModel)->deletePhoto($this->httpRequest->post('id'), $this->httpRequest->post('album_id'))
+            && $this->oModeratorModel->deletePictureAlbum($this->httpRequest->post('album_id'))
+        ) {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'picture/img/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
             $this->clearPictureCache();
@@ -319,8 +344,10 @@ class ModeratorController extends Controller
 
     public function deleteVideoAlbum()
     {
-        if ((new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id'))
-            && $this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id'))) {
+        if (
+            (new VideoCoreModel)->deleteVideo($this->httpRequest->post('id'), $this->httpRequest->post('album_id'))
+            && $this->oModeratorModel->deleteVideoAlbum($this->httpRequest->post('album_id'))
+        ) {
             $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->httpRequest->post('username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
             $this->file->deleteDir($sDir);
             $this->clearVideoCache();

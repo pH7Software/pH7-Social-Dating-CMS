@@ -322,16 +322,19 @@ class Design
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE)
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) {
             return;
+        }
 
-        ($bLink ? $bSoftwareName = true : '');
+        if ($bLink) {
+            $bSoftwareName = true;
+        }
 
-        if (!$bEmail && \PH7\AdminCore::auth())
+        if (!$bEmail && AdminCore::auth()) {
             echo '<p class="s_bMarg underline"><strong><em><a class="red" href="', Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), '">', t('Need to remove the link below?'), '</a></em></strong><br /><em class="small">' . t('(... and get rid of all other promo notices)') . '</em></p>';
+        }
 
-        if ($bComment)
-        {
+        if ($bComment) {
             echo '
             <!-- ', Kernel::SOFTWARE_COPYRIGHT, ' -->
             <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
@@ -615,7 +618,7 @@ class Design
                 $sSex = (!empty($sSex)) ? $sSex : $oUserModel->getSex(null, $sUsername, 'Members');
                 $sSex = $this->oStr->lower($sSex);
                 $sIcon = ($sSex == 'male' || $sSex == 'female' || $sSex == 'couple' || $sSex == PH7_ADMIN_USERNAME) ? $sSex : 'visitor';
-                $sUrlTplName = (defined('PH7_TPL_NAME')) ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
+                $sUrlTplName = defined('PH7_TPL_NAME') ? PH7_TPL_NAME : PH7_DEFAULT_THEME;
 
                 /*** If the user doesn't have an avatar ***/
                 if (!is_file($sPath))
@@ -640,8 +643,8 @@ class Design
                     $sUrl = PH7_URL_TPL . $sUrlTplName . PH7_SH . PH7_IMG . 'icon/pending' . $sSize . self::AVATAR_IMG_EXT;
                 }
             }
-
             unset($oUserModel);
+
             /**
              * @internal Clean URL for parameters in Gravatar URL to make the HTML code valid.
              * If we set replace '&' by '&amp;' before checking the 404's Gravatar URL, it will always return '200 OK', that's why we need to clean the URL now.
@@ -650,7 +653,12 @@ class Design
         }
 
         unset($oCache);
-        echo $sUrl;
+
+        if ($bPrint) {
+            echo $sUrl;
+        } else {
+            return $sUrl;
+        }
     }
 
     /**
@@ -667,10 +675,11 @@ class Design
         $sHtml .= (new UserCore)->getProfileLink($sUsername);
         $sHtml .= '" title="' . t("%0%'s profile", $sUsername) . '">' . $sUsername . '</a>';
 
-        if ($bPrint)
+        if ($bPrint) {
             echo $sHtml;
-        else
+        } else {
             return $sHtml;
+        }
     }
 
     /**
