@@ -30,7 +30,7 @@ class Google implements Image
     /**
      * {@inheritdoc}
      */
-    public function getApiUrl()
+    public function getProviderUrl()
     {
         return static::SEARCH_IMAGE_LINK;
     }

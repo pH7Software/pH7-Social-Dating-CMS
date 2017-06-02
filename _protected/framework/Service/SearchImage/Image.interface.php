@@ -15,7 +15,7 @@ interface Image
     /**
      * @return string
      */
-    public function getApiUrl();
+    public function getProviderUrl();
 
     /**
      * @return string
