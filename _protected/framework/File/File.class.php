@@ -66,6 +66,7 @@ class File
 
     /**
      * @param string $sExt Extension File.
+     *
      * @return string (string | null) Returns the "mime type" if it is found, otherwise "null"
      */
     public function getMimeType($sExt)
@@ -77,6 +78,7 @@ class File
      * Get Extension file without the dot.
      *
      * @param string $sFile The File Name.
+     *
      * @return string
      */
     public function getFileExt($sFile)
@@ -93,7 +95,9 @@ class File
      * Example 3 "my_file.class.html.php" The return value is "my_file.class.html"
      *
      * @see File::getFileExt() To see the method that retrieves the file extension.
+     *
      * @param string $sFile
+     *
      * @return string
      */
     public function getFileWithoutExt($sFile)
@@ -107,6 +111,7 @@ class File
      *
      * @param string $sFile File name.
      * @param boolean $bIncPath Default FALSE
+     *
      * @return string|boolean Returns the read data or FALSE on failure.
      */
     public function getFile($sFile, $bIncPath = false)
@@ -119,7 +124,8 @@ class File
      *
      * @param string $sFile File name.
      * @param string $sContents Contents file.
-     * @param integer $iFlag Constant (see http://php.net/manual/function.file-put-contents.php). Default 0
+     * @param integer $iFlag Constant (see http://php.net/manual/function.file-put-contents.php).
+     *
      * @return integer|boolean Returns the number of bytes that were written to the file, or FALSE on failure.
      */
     public function putFile($sFile, $sContents, $iFlag = 0)
@@ -131,6 +137,7 @@ class File
      * Check if file exists.
      *
      * @param array|string $mFile
+     *
      * @return boolean TRUE if file exists, FALSE otherwise.
      */
     public function existFile($mFile)
@@ -157,6 +164,7 @@ class File
      * Check if directory exists.
      *
      * @param array|string $mDir
+     *
      * @return boolean TRUE if file exists, FALSE otherwise.
      */
     public function existDir($mDir)
@@ -181,6 +189,7 @@ class File
 
     /**
      * @param string $sDir The directory.
+     *
      * @return array The list of the folder that is in the directory.
      */
     public function getDirList($sDir)
@@ -205,6 +214,7 @@ class File
      * Get file size.
      *
      * @param string $sFile
+     *
      * @return integer The size of the file in bytes.
      */
     public function size($sFile)
@@ -215,6 +225,7 @@ class File
     /**
      * @param string $sDir
      * @param string|array $mExt Optional, retrieves only files with specific extensions. Default value is NULL.
+     *
      * @return array List of files sorted alphabetically.
      */
     public function getFileList($sDir, $mExt = null)
@@ -263,17 +274,20 @@ class File
      * @param string $sDir The directory.
      * @param bool $bStart for check extension directory start. Default FALSE
      * @param bool $bEnd for check extension end. Default TRUE
+     *
      * @return string $sDir Directory
      */
     public function checkExtDir($sDir, $bStart = false, $bEnd = true)
     {
         $bIsWindows = Server::isWindows();
 
-        if (!$bIsWindows && $bStart === true && substr($sDir, 0, 1) !== PH7_DS)
+        if (!$bIsWindows && $bStart === true && substr($sDir, 0, 1) !== PH7_DS) {
             $sDir = PH7_DS . $sDir;
+        }
 
-        if ($bEnd === true && substr($sDir, -1) !== PH7_DS)
+        if ($bEnd === true && substr($sDir, -1) !== PH7_DS) {
             $sDir .= PH7_DS;
+        }
 
         return $sDir;
     }
@@ -284,7 +298,9 @@ class File
      *
      * @param string|array $mDir
      * @param integer (octal) $iMode Default: 0777
+     *
      * @return void
+     *
      * @throws Exception If the file cannot be created.
      */
     public function createDir($mDir, $iMode = 0777)
@@ -307,11 +323,14 @@ class File
      *
      * @param string $sFrom File.
      * @param string $sTo File.
+     *
      * @return boolean
      */
     public function copy($sFrom, $sTo)
     {
-        if (!is_file($sFrom)) return false;
+        if (!is_file($sFrom)) {
+            return false;
+        }
 
         return @copy($sFrom, $sTo);
     }
@@ -321,6 +340,7 @@ class File
      *
      * @param string $sFrom Old directory.
      * @param string $sTo New directory.
+     *
      * @return boolean TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be copied.
      */
     public function copyDir($sFrom, $sTo)
@@ -333,12 +353,14 @@ class File
      *
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
+     *
      * @return integer|boolean Returns the last line on success, and FALSE on failure.
      */
     public function systemCopy($sFrom, $sTo)
     {
-        if (file_exists($sFrom))
+        if (file_exists($sFrom)) {
             return system("cp -r $sFrom $sTo");
+        }
 
         return false;
     }
@@ -349,11 +371,14 @@ class File
      *
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
+     *
      * @return boolean
      */
     public function rename($sFrom, $sTo)
     {
-        if (!file_exists($sFrom)) return false;
+        if (!file_exists($sFrom)) {
+            return false;
+        }
 
         return @rename($sFrom, $sTo);
     }
@@ -363,6 +388,7 @@ class File
      *
      * @param string $sFrom Old directory.
      * @param string $sTo New directory.
+     *
      * @return boolean TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be renamed.
      */
     public function renameDir($sFrom, $sTo)
@@ -375,12 +401,14 @@ class File
      *
      * @param string $sFrom File or directory.
      * @param string $sTo File or directory.
+     *
      * @return integer|boolean Returns the last line on success, and FALSE on failure.
      */
     public function systemRename($sFrom, $sTo)
     {
-        if (file_exists($sFrom))
+        if (file_exists($sFrom)) {
             return system("mv $sFrom $sTo");
+        }
 
         return false;
     }
@@ -390,14 +418,20 @@ class File
      * If the file does not exist, the function does nothing.
      *
      * @param string|array $mFile
+     *
      * @return void
      */
     public function deleteFile($mFile)
     {
-        if (is_array($mFile))
-            foreach ($mFile as $sF) $this->deleteFile($sF);
-        else
-            if (is_file($mFile)) @unlink($mFile);
+        if (is_array($mFile)) {
+            foreach ($mFile as $sF) {
+                $this->deleteFile($sF);
+            }
+        } else {
+            if (is_file($mFile)) {
+                @unlink($mFile);
+            }
+        }
     }
 
     /**
@@ -405,6 +439,7 @@ class File
      * A "rmdir" function improved PHP which also delete files in a directory.
      *
      * @param string $sPath The path
+     *
      * @return boolean
      */
     public function deleteDir($sPath)
@@ -416,12 +451,17 @@ class File
      * Remove the contents of a directory.
      *
      * @param string $sDir
+     *
      * @return void
      */
     public function remove($sDir)
     {
         $oIterator = new RecursiveIteratorIterator($this->getDirIterator($sDir), RecursiveIteratorIterator::CHILD_FIRST);
-        foreach ($oIterator as $sPath) ($sPath->isFile()) ? unlink($sPath) : @rmdir($sPath);
+
+        foreach ($oIterator as $sPath) {
+            $sPath->isFile() ? unlink($sPath) : @rmdir($sPath);
+        }
+
         @rmdir($sDir);
     }
 
@@ -429,11 +469,12 @@ class File
      * Get the creation/modification time of a file in the Unix timestamp.
      *
      * @param string $sFile Full path of the file.
+     *
      * @return integer|boolean Returns the time the file was last modified, or FALSE if it not found.
      */
     public function getModifTime($sFile)
     {
-        return (is_file($sFile)) ? filemtime($sFile) : false;
+        return is_file($sFile) ? filemtime($sFile) : false;
     }
 
     /**
@@ -441,6 +482,7 @@ class File
      * Shortened form of self::getModifTime()
      *
      * @param string $sFile Full path of the file.
+     *
      * @return integer Returns the latest modification time of the file in Unix timestamp.
      */
     public static function version($sFile)
@@ -452,6 +494,7 @@ class File
      * Delay script execution.
      *
      * @param integer $iSleep Halt time in seconds. Optional parameter, default value is 5.
+     *
      * @return integer|boolean Returns "0" on success, or "false" on error.
      */
     public function sleep($iSleep = null)
@@ -465,19 +508,22 @@ class File
      *
      * @param string $sFile
      * @param integer $iMode Octal Permission for the file.
+     *
      * @return boolean
      */
     public function chmod($sFile, $iMode)
     {
         // file_exists function verify the existence of a "file" or "folder"!
-        if (file_exists($sFile) && $this->getOctalAccess($sFile) !== $iMode)
+        if (file_exists($sFile) && $this->getOctalAccess($sFile) !== $iMode) {
             return @chmod($sFile, $iMode);
+        }
 
         return false;
     }
 
     /**
      * @param string $sFile
+     *
      * @return string Octal Permissions.
      */
     public function getOctalAccess($sFile)
@@ -488,6 +534,7 @@ class File
 
     /**
      * @param string $sData
+     *
      * @return string
      */
     public function pack($sData)
@@ -499,24 +546,29 @@ class File
      * Get the size of a directory.
      *
      * @param string $sPath
+     *
      * @return integer The size of the file in bytes.
      */
     public function getDirSize($sPath)
     {
-        if (!is_dir($sPath)) return 0;
-        if (!($rHandle = opendir($sPath))) return 0;
+        if (!is_dir($sPath)) {
+            return 0;
+        }
+
+        if (!($rHandle = opendir($sPath))) {
+            return 0;
+        }
 
         $iSize = 0;
-        while (false !== ($sFile = readdir($rHandle)))
-        {
-            if ($sFile != '.' && $sFile != '..')
-            {
+        while (false !== ($sFile = readdir($rHandle))) {
+            if ($sFile != '.' && $sFile != '..') {
                 $sFullPath = $sPath . PH7_DS . $sFile;
 
-                if (is_dir($sFullPath))
+                if (is_dir($sFullPath)) {
                     $iSize = $this->getDirSize($sFullPath);
-                else
+                } else {
                     $iSize += $this->size($sFullPath);
+                }
             }
         }
         closedir($rHandle);
@@ -528,6 +580,7 @@ class File
      * Get free space of a directory.
      *
      * @param string $sPath
+     *
      * @return float The number of available bytes as a float.
      */
     public function getDirFreeSpace($sPath)
@@ -537,6 +590,7 @@ class File
 
     /**
      * @param string $sData
+     *
      * @return boolean|integer|float|string|array|object
      */
     public function unpack($sData)
@@ -550,6 +604,7 @@ class File
      * @param string $sFile File to download.
      * @param string $sName A name for the file to download.
      * @param string $sMimeType Optional, default value is NULL.
+     *
      * @return void
      */
     public function download($sFile, $sName, $sMimeType = null)
@@ -600,6 +655,7 @@ class File
      *
      * @param string $sHeader Text to be shown in the headers
      * @param array $aFile
+     *
      * @return void
      */
     public function writeHeader($sHeader, $aFile = array())
@@ -623,6 +679,7 @@ class File
      *
      * @param string $sFile
      * @param string $sData
+     *
      * @return integer Returns the number of bytes written, or NULL on error.
      */
     public function save($sFile, $sData)
@@ -642,10 +699,9 @@ class File
     }
 
     /**
-     * Reading Files.
-     *
      * @param string $sPath
      * @param array|string $mFiles
+     *
      * @return array|string The Files.
      */
     public function readFiles($sPath = './', &$mFiles)
@@ -672,6 +728,7 @@ class File
      * Reading Directories.
      *
      * @param string $sPath
+     *
      * @return array|boolean Returns an ARRAY with the folders or FALSE if the folder could not be opened.
      */
     public function readDirs($sPath = './')
@@ -696,6 +753,7 @@ class File
      * Get the URL contents (For URLs, it is better to use CURL because it is faster than file_get_contents function).
      *
      * @param string $sUrl URL to be read contents.
+     *
      * @return string|boolean Return the result content on success, FALSE on failure.
      */
     public function getUrlContents($sUrl)
@@ -717,6 +775,7 @@ class File
      *
      * @param string $sFile Zip file.
      * @param string $sDir Destination to extract the file.
+     *
      * @return boolean
      */
     public function zipExtract($sFile, $sDir)
@@ -772,11 +831,12 @@ class File
      * Create a recurive directory iterator for a given directory.
      *
      * @param string $sPath
+     *
      * @return RecursiveDirectoryIterator
      */
     public function getDirIterator($sPath)
     {
-        return (new RecursiveDirectoryIterator($sPath));
+        return new RecursiveDirectoryIterator($sPath);
     }
 
     /**
