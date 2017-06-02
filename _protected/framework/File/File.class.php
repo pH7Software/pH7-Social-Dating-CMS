@@ -26,6 +26,8 @@ use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class File
 {
+    const REGEX_BINARY_FILE = '/^(.*?)\.(gif|jpg|jpeg|png|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i';
+
     // End Of Line relative to the operating system
     const EOL = PHP_EOL;
 
@@ -735,17 +737,19 @@ class File
      * Check if the file is binary.
      *
      * @param string $sFile
+     *
      * @return boolean
      */
     public function isBinary($sFile)
     {
-        if (file_exists($sFile))
-        {
-            if (!is_file($sFile))
+        if (file_exists($sFile)) {
+            if (!is_file($sFile)) {
                 return false;
+            }
 
-            if (preg_match('/^(.*?)\.(gif|jpg|jpeg|png|ico|mp3|mp4|mov|avi|flv|mpg|mpeg|wmv|ogg|ogv|webm|pdf|ttf|eot|woff|svg|swf)$/i', $sFile))
+            if (preg_match(self::REGEX_BINARY_FILE, $sFile)) {
                 return true;
+            }
 
             $rHandle  = fopen($sFile, 'r');
             $sContents = fread($rHandle, 512); // Get 512 bytes of the file.
