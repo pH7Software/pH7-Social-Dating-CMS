@@ -11,22 +11,20 @@
  */
 
 namespace PH7\Framework\Error\CException;
+
 defined('PH7') or exit('Restricted access');
 
 trait Escape
 {
-
     protected $sAllowTags = '<br><i><em><b><strong><u>';
 
     /**
      * Escape the exception message.
      *
      * @param string $sMsg
-     * @return void
      */
     protected function init($sMsg)
     {
         $this->message = strip_tags($sMsg, $this->sAllowTags);
     }
-
 }
