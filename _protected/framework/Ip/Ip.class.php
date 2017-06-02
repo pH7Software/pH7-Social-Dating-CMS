@@ -51,6 +51,7 @@ class Ip
     public static function api($sIp = null)
     {
         $sIp = empty($sIp) ? static::get() : $sIp;
+
         return DbConfig::getSetting('ipApi') . $sIp;
     }
 
@@ -78,6 +79,6 @@ class Ip
             }
         }
 
-        return ''; // Default IP address value.
+        return '';
     }
 }
