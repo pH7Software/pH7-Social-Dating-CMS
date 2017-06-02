@@ -3,46 +3,81 @@
  * @title            Gzip Class
  * @desc             Compression and optimization of static files.
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Layout / Gzip
- * @version          1.6
+ * @version          1.7
  */
 
 namespace PH7\Framework\Layout\Gzip;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\File,
-PH7\Framework\Config\Config,
-PH7\Framework\Layout\Optimization,
-PH7\Framework\Navigation\Browser,
-PH7\Framework\Http\Http,
-PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\File\File;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Compress\Compress;
+use PH7\Framework\Layout\Optimization;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class Gzip
 {
+    const REGEX_IMAGE_FORMAT = '/url\([\'"]*(.+?\.)(gif|png|jpg|jpeg|otf|eot|ttf|woff|svg)[\'"]*\)*/msi';
     const CACHE_DIR = 'pH7_static/';
 
-    private
-    $_oFile,
-    $_oHttpRequest,
-    $_sBase,
-    $_sBaseUrl,
-    $_sType,
-    $_sDir,
-    $_sFiles,
-    $_aElements,
-    $_sContents,
-    $_iIfModified,
-    $_sCacheDir,
-    $_bCaching,
-    $_bCompressor,
-    $_bDataUri,
-    $_bGzipContent,
-    $_bIsGzip,
-    $_mEncoding;
+    /** @var File */
+    private $_oFile;
+
+    /** @var HttpRequest */
+    private $_oHttpRequest;
+
+    /** @var string */
+    private $_sBase;
+
+    /** @var string */
+    private $_sBaseUrl;
+
+    /** @var string */
+    private $_sType;
+
+    /** @var string */
+    private $_sDir;
+
+    /** @var string */
+    private $_sFiles;
+
+    /** @var string */
+    private $_sContents;
+
+    /** @var string */
+    private $_sCacheDir;
+
+    /** @var array */
+    private $_aElements;
+
+    /** @var integer */
+    private $_iIfModified;
+
+    /** @var boolean */
+    private $_bCaching;
+
+    /** @var boolean */
+    private $_bCompressor;
+
+    /** @var boolean */
+    private $_bDataUri;
+
+    /** @var boolean */
+    private $_bGzipContent;
+
+    /** @var boolean */
+    private $_bIsGzip;
+
+    /** @var string|boolean */
+    private $_mEncoding;
 
     public function __construct()
     {
@@ -63,21 +98,27 @@ class Gzip
      * If you do not use this method, a default directory will be created.
      *
      * @param string $sCacheDir
+     *
      * @return void
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the cache directory does not exist.
+     *
+     * @throws PH7InvalidArgumentException If the cache directory does not exist.
      */
     public function setCacheDir($sCacheDir)
     {
         if (is_dir($sCacheDir))
             $this->_sCacheDir = $sCacheDir;
         else
-            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('"' . $sCacheDir . '" cache directory cannot be found!');
+            throw new PH7InvalidArgumentException('"' . $sCacheDir . '" cache directory cannot be found!');
     }
 
     /**
      * Displays compressed files.
      *
      * @return void
+     *
+     * @throws Exception If the cache file couldn't be written.
+     *
+     * @throws \PH7\Framework\File\Exception
      */
     public function run()
     {
@@ -140,8 +181,11 @@ class Gzip
     /**
      * Set Caching.
      *
-     * @return string The contents.
-     * @throws \PH7\Framework\Layout\Gzip\Exception If the cache file couldn't be written.
+     * @return string The cached contents.
+     *
+     * @throws Exception If the cache file couldn't be written.
+     *
+     * @throws \PH7\Framework\File\Exception If the file cannot be created.
      */
     public function cache()
     {
@@ -197,7 +241,7 @@ class Gzip
      */
     protected function makeCompress()
     {
-        $oCompress = new \PH7\Framework\Compress\Compress;
+        $oCompress = new Compress;
 
         switch ($this->_sType)
         {
@@ -264,8 +308,6 @@ class Gzip
     }
 
     /**
-     * Set Headers.
-     *
      * @return void
      */
      protected function setHeaders()
@@ -298,6 +340,10 @@ class Gzip
     protected function parseVariable()
     {
         $sBaseUrl = $this->_sBaseUrl;
+
+        /**
+         * $getCurrentTplName is used in "variables.inc.php" file
+         */
         $getCurrentTplName = function () use ($sBaseUrl) {
             $aDirs = explode('/', $sBaseUrl);
             return !empty($aDirs[2]) ? $aDirs[2] : PH7_DEFAULT_THEME;
@@ -306,11 +352,7 @@ class Gzip
         $this->_setVariables( include('variables.inc.php') );
     }
 
-
-
     /**
-     * Get the sub CSS files.
-     *
      * @return void
      */
     protected function getSubCssFile()
@@ -326,8 +368,6 @@ class Gzip
     }
 
     /**
-     * Get the sub JavaScript files.
-     *
      * @return void
      */
     protected function getSubJsFile()
@@ -390,6 +430,7 @@ class Gzip
      * Remove backslashes on Windows.
      *
      * @param string $sPath
+     *
      * @return string The path without backslashes and/or double slashes.
      */
     private function _clearUrl($sPath)
