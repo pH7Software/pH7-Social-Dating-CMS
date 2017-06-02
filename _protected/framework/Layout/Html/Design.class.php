@@ -270,6 +270,13 @@ class Design
         }
     }
 
+    /**
+     * @param string $sModule
+     * @param string $sController
+     * @param string $sAction
+     * @param null|string $sVars
+     * @param boolean $bClear
+     */
     public function url($sModule, $sController, $sAction, $sVars = null, $bClear = true)
     {
         $sUrl = Uri::get($sModule, $sController, $sAction, $sVars, $bClear);
