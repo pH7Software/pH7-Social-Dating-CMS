@@ -11,16 +11,21 @@
  */
 
 namespace PH7\Framework\Error\CException;
+
 defined('PH7') or exit('Restricted access');
 
-class PH7RuntimeException extends \RuntimeException
-{
+use RuntimeException;
 
+class PH7RuntimeException extends RuntimeException
+{
     use Escape;
 
+    /**
+     * @param string $sMsg
+     */
     public function __construct($sMsg)
     {
-        static::init($sMsg);
+        parent::__construct($sMsg);
+        $this->init($sMsg);
     }
-
 }

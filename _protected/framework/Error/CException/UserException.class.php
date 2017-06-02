@@ -13,12 +13,18 @@ namespace PH7\Framework\Error\CException;
 
 defined('PH7') or exit('Restricted access');
 
-class UserException extends \Exception
+use Exception;
+
+class UserException extends Exception
 {
     use Escape;
 
+    /**
+     * @param string $sMsg
+     */
     public function __construct($sMsg)
     {
-        static::init($sMsg);
+        parent::__construct($sMsg);
+        $this->init($sMsg);
     }
 }

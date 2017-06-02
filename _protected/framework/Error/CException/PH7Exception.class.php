@@ -11,41 +11,40 @@
  */
 
 namespace PH7\Framework\Error\CException;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Error\LoggerExcept,
-PH7\Framework\Error\Debug,
-PH7\Framework\Page\Page;
+use PH7\Framework\Error\LoggerExcept;
+use PH7\Framework\Error\Debug;
+use PH7\Framework\Page\Page;
+use Exception;
 
-class PH7Exception extends \Exception
+class PH7Exception extends Exception
 {
-
     use Escape;
 
+    /**
+     * @param string $sMsg
+     */
     public function __construct($sMsg)
     {
-        static::init($sMsg);
+        parent::__construct($sMsg);
+        $this->init($sMsg);
     }
 
     /**
      * Sends the exception data to the logger class.
      *
-     * @param object $oExcept \Exception object.
-     * @return void
+     * @param Exception $oExcept
      */
-    public static function launch(\Exception $oExcept)
+    public static function launch(Exception $oExcept)
     {
-        if (Debug::is())
-        {
+        if (Debug::is()) {
             Page::exception($oExcept);
-        }
-        else
-        {
+        } else {
             (new LoggerExcept)->except($oExcept); // Set Exception in Error Log
             Page::error500();
         }
     }
-
 }
 

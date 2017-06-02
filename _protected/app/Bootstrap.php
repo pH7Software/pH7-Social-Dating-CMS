@@ -14,17 +14,16 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Server\Server,
-PH7\Framework\Navigation\Browser,
-PH7\Framework\Registry\Registry,
-PH7\Framework\Mvc\Router\FrontController,
-PH7\Framework\Config\Config,
-PH7\Framework\File\Import,
-PH7\Framework\Core\Kernel,
-PH7\Framework\Loader\Autoloader as FrameworkLoader,
-PH7\App\Includes\Classes\Loader\Autoloader as AppLoader,
-PH7\Framework\Error\CException as Except;
+use PH7\Framework\Server\Server;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Mvc\Router\FrontController;
+use PH7\Framework\Config\Config;
+use PH7\Framework\File\Import;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\Loader\Autoloader as FrameworkLoader;
+use PH7\App\Includes\Classes\Loader\Autoloader as AppLoader;
+use PH7\Framework\Error\CException as Except;
 
 /*** Begin Loading Files ***/
 require 'configs/constants.php';

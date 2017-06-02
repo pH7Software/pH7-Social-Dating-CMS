@@ -13,12 +13,18 @@ namespace PH7\Framework\Error\CException;
 
 defined('PH7') or exit('Restricted access');
 
-class PH7InvalidArgumentException extends \InvalidArgumentException
+use InvalidArgumentException;
+
+class PH7InvalidArgumentException extends InvalidArgumentException
 {
     use Escape;
 
+    /**
+     * @param string $sMsg
+     */
     public function __construct($sMsg)
     {
-        static::init($sMsg);
+        parent::__construct($sMsg);
+        $this->init($sMsg);
     }
 }
