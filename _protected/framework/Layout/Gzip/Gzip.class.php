@@ -389,7 +389,7 @@ class Gzip
      */
     protected function getImgInCssFile()
     {
-        preg_match_all('/url\([\'"]*(.+?\.)(gif|png|jpg|jpeg|otf|eot|ttf|woff|svg)[\'"]*\)*/msi', $this->_sContents, $aHit, PREG_PATTERN_ORDER);
+        preg_match_all(self::REGEX_IMAGE_FORMAT, $this->_sContents, $aHit, PREG_PATTERN_ORDER);
 
         for ($i = 0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++)
         {
