@@ -12,7 +12,9 @@
   <ol id="toc">
     <li><a href="#general"><span>{lang 'Info'}</span></a></li>
     <li><a href="#map"><span>{lang 'Map'}</span></a></li>
-    <li><a href="#related_profile"><span>{lang 'Similar Profiles'}</span></a></li>
+    {if $is_relatedprofile_enabled}
+      <li><a href="#related_profile"><span>{lang 'Similar Profiles'}</span></a></li>
+    {/if}
     {if $is_friend_enabled}
       <li><a href="#friend"><span>{friend_link}</span></a></li>
       {if $is_logged AND !$is_own_profile}
