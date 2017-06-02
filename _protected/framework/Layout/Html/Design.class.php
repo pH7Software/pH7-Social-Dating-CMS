@@ -277,14 +277,14 @@ class Design
     }
 
     /**
-     * Create a link of to display a popup confirmation for an action CRUD (http://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
+     * Create a link of to display a popup confirmation for a CRUD action (http://en.wikipedia.org/wiki/Create,_read,_update_and_delete).
      *
      * @param string $sLabel
      * @param string $sMod
      * @param string $sCtrl
      * @param string $sAct
-     * @param mixed (integer | string) $mId
-     * @param string $sClass Add a CSS class. Default NULL
+     * @param integer|string $mId Content ID
+     * @param string $sClass Add a CSS class
      * @return void HTML output.
      */
     public function popupLinkConfirm($sLabel, $sMod, $sCtrl, $sAct, $mId, $sClass = null)
@@ -540,7 +540,7 @@ class Design
      * @internal If it's an IPv6, show only the beginning, otherwise it would be too long in the template.
      * @param string $sIp Allows to speciy another IP address than the client one.
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
-     * @return mixed (string | void)
+     * @return void|string
      */
     public function ip($sIp = null, $bPrint = true)
     {
@@ -557,7 +557,7 @@ class Design
      * Show the geolocation of the user (with link that points to the Country controller).
      *
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
-     * @return mixed (string | void)
+     * @return void|string
      */
     public function geoIp($bPrint = true)
     {
@@ -568,10 +568,11 @@ class Design
 
         $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCountryLang . ', ' . $sCity . '</a>';
 
-        if ($bPrint)
+        if ($bPrint) {
             echo $sHtml;
-        else
+        } else {
             return $sHtml;
+        }
     }
 
     /**
@@ -592,7 +593,7 @@ class Design
      * @param integer $iSize
      * @param boolean $bPrint Print or Return the HTML code.
      *
-     * @return void Html contents. URL avatar default 150px or the user avatar.
+     * @return void|string The default 150px avatar URL or the user avatar URL.
      */
     public function getUserAvatar($sUsername, $sSex = '', $iSize = null, $bPrint = true)
     {
@@ -665,7 +666,7 @@ class Design
      * @param string $sUsername
      * @param boolean $bPrint Print or Return the HTML code.
      *
-     * @return string The absolute user profile link.
+     * @return void|string The absolute user profile link.
      */
     public function getProfileLink($sUsername, $bPrint = true)
     {
