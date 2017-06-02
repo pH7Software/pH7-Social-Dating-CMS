@@ -287,15 +287,16 @@ class File
      */
     public function createDir($mDir, $iMode = 0777)
     {
-        if (is_array($mDir))
-        {
-            foreach ($mDir as $sD) $this->createDir($sD);
-        }
-        else
-        {
-            if (!is_dir($mDir))
-                if (!@mkdir($mDir, $iMode, true))
+        if (is_array($mDir)) {
+            foreach ($mDir as $sDir) {
+                $this->createDir($sDir);
+            }
+        } else {
+            if (!is_dir($mDir)) {
+                if (!@mkdir($mDir, $iMode, true)) {
                     throw new Exception('Error to create file: \'' . $mDir . '\'<br /> Please verify that the directory permission is in writing mode.');
+                }
+            }
         }
     }
 
