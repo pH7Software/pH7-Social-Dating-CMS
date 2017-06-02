@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Friend / Asset / Ajax
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -17,7 +18,11 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class FriendAjax extends Core
 {
-    private $_oFriendModel, $_sMsg;
+    /** @var FriendModel */
+    private $_oFriendModel;
+
+    /** @var string */
+    private $_sMsg;
 
     /**
      * @var boolean|string $mStatus
@@ -61,7 +66,11 @@ class FriendAjax extends Core
         if ($iMemberId == $iFriendId) {
             $this->_sMsg = jsonMsg(0, t('You cannot be your own friend.'));
         } else {
-            $this->_mStatus = $this->_oFriendModel->add($this->session->get('member_id'), $iFriendId, $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
+            $this->_mStatus = $this->_oFriendModel->add(
+                $this->session->get('member_id'),
+                $iFriendId,
+                $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+            );
 
             if ($this->_mStatus == 'error') {
                 $this->_sMsg = jsonMsg(0, t('Unable to add to friends list. Please try later.'));
@@ -73,7 +82,9 @@ class FriendAjax extends Core
                 $this->_sMsg = jsonMsg(1, t('Profile successfully added to your friends list.'));
 
                 $oUserModel = new UserCoreModel;
-                if (!$oUserModel->isNotification($iFriendId, 'friendRequest') && !$oUserModel->isOnline($iFriendId)) {
+                if (!$oUserModel->isNotification($iFriendId, 'friendRequest')
+                    && !$oUserModel->isOnline($iFriendId)
+                ) {
                     // Send email if the notification is accepted and if the user isn't online
                     $this->sendMail($iFriendId, $oUserModel);
                 }
@@ -86,7 +97,10 @@ class FriendAjax extends Core
 
     protected function approval()
     {
-        $this->_mStatus = $this->_oFriendModel->approval($this->session->get('member_id'), $this->httpRequest->post('friendId'));
+        $this->_mStatus = $this->_oFriendModel->approval(
+            $this->session->get('member_id'),
+            $this->httpRequest->post('friendId')
+        );
 
         if (!$this->_mStatus) {
             $this->_sMsg = jsonMsg(0, t('Cannot approve the friend. Please try later.'));
@@ -99,7 +113,10 @@ class FriendAjax extends Core
 
     protected function delete()
     {
-        $this->_mStatus = $this->_oFriendModel->delete($this->session->get('member_id'), $this->httpRequest->post('friendId'));
+        $this->_mStatus = $this->_oFriendModel->delete(
+            $this->session->get('member_id'),
+            $this->httpRequest->post('friendId')
+        );
 
         if (!$this->_mStatus) {
             $this->_sMsg = jsonMsg(0, t('Cannot remove the friend. Please try later.'));
@@ -114,8 +131,7 @@ class FriendAjax extends Core
      * Send an email to warn the friend request.
      *
      * @param int $iId friend ID
-     * @param object \PH7\UserCoreModel $oUserModel
-     * @return void
+     * @param UserCoreModel $oUserModel
      */
     protected function sendMail($iId, UserCoreModel $oUserModel)
     {
