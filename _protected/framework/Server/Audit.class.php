@@ -21,7 +21,7 @@ defined('PH7') or exit('Restricted access');
  * Thank you,
  * Pierre-Henry Soria
  */
-class Audit extends Server
+class Audit
 {
     public function __construct()
     {
