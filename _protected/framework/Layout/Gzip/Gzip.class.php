@@ -406,12 +406,13 @@ class Gzip
      * Set CSS/JS variables.
      *
      * @param array $aVars Variable names containing the values.
+     *
      * @return void
      */
-    private function _setVariables(array $aVals)
+    private function _setVariables(array $aVars)
     {
         // Replace the variable name by the content
-        foreach ($aVals as $sKey => $sVal)
+        foreach ($aVars as $sKey => $sVal)
             $this->_sContents = str_replace('[$' . $sKey . ']', $sVal, $this->_sContents);
     }
 
