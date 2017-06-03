@@ -240,11 +240,6 @@ You will also be eligible to [pH7CMS VIP members](http://ph7cms.com/get-one-tine
 You can send email for any suggestions or comments at: *hello {AT} ph7cms {D0T} com*
 
 
-## Help & Modifications
-
-If you need, you can get a **Premium Commercial Support** at *[HiZup Support Department](http://clients.hizup.com/support)*
-
-
 ## License
 
 **pH7CMS** is under **Open Source Free** License.
