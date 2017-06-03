@@ -210,7 +210,7 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
-     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
+     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure
      *
      * @return string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      */
@@ -243,13 +243,13 @@ class Http extends \PH7\Framework\Http\Http
      *
      * @param string $sKey The key of the request.
      * @param string $sParam Optional parameter, set a type of the request | Value type is: str, int, float, bool, self::ONLY_XSS_CLEAN, or self::NO_CLEAN
-     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities. Less secure. Default: FALSE
+     * @param boolean $bStrip If TRUE, strip only HTML tags instead of converting them into HTML entities, so less secure.
      *
      * @return string The string with the "Str::escape()" method to secure the data display unless you specify the constant "self::ONLY_XSS_CLEAN" or "self::NO_CLEAN"
      *
      * @throws Exception If the request is not POST.
      */
-    public function post($sKey, $sParam = null, $bStrip = false)
+    public function post($sKey, $sParam = null, $bStrip = true)
     {
         if ($this->_sMethod !== self::METHOD_POST) {
             throw new Exception('POST');
