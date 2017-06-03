@@ -56,7 +56,7 @@ class GameModel extends GameCoreModel
         $bCount = (bool) $bCount;
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
-        $sCategoryName = strim($sCategoryName);
+        $sCategoryName = trim($sCategoryName);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
         $sSqlSelect = (!$bCount) ? 'g.*, c.*' : 'COUNT(g.gameId) AS totalGames';
