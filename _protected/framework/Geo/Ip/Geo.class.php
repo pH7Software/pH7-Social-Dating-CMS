@@ -10,24 +10,26 @@
  */
 
 namespace PH7\Framework\Geo\Ip;
+
 defined('PH7') or exit('Restricted access');
 
-use GeoIp2\Database\Reader, PH7\Framework\Ip\Ip;
+use GeoIp2\Database\Reader;
+use PH7\Framework\Ip\Ip;
 
 class Geo
 {
+    const DEFAULT_VALID_IP = '128.101.101.101';
 
     /**
      * Static Class.
-     *
-     * @access private
      */
     private function __construct() {}
 
     /**
-     * Get Country ISO Code (e.g., en, it, es, ru, fr, ...).
+     * Get the country ISO Code (e.g., en, it, es, ru, fr, ...).
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     *
      * @return string Country Code.
      */
     public static function getCountryCode($sIpAddress = null)
@@ -36,9 +38,10 @@ class Geo
     }
 
     /**
-     * Get Zip Code (postal code).
+     * Get the Zip Code (postal code).
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     *
      * @return integer Zip Code.
      */
     public static function getZipCode($sIpAddress = null)
@@ -47,9 +50,10 @@ class Geo
     }
 
     /**
-     * Get Latitude.
+     * Get the latitude.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     *
      * @return float Latitude.
      */
     public static function getLatitude($sIpAddress = null)
@@ -58,9 +62,10 @@ class Geo
     }
 
     /**
-     * Get Longitude.
+     * Get the longitude.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     *
      * @return float Longitude.
      */
     public static function getLongitude($sIpAddress = null)
@@ -69,9 +74,10 @@ class Geo
     }
 
     /**
-     * Get Country Name.
+     * Get the country name.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     *
      * @return string Country Name.
      */
     public static function getCountry($sIpAddress = null)
@@ -81,9 +87,10 @@ class Geo
     }
 
     /**
-     * Get City Name.
+     * Get the city name.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     *
      * @return string City Name.
      */
     public static function getCity($sIpAddress = null)
@@ -93,9 +100,10 @@ class Geo
     }
 
     /**
-     * Get State (region) Name.
+     * Get the state (region) name.
      *
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default is NULL
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     *
      * @return string State Name.
      */
     public static function getState($sIpAddress = null)
@@ -107,25 +115,25 @@ class Geo
      * Get Geo Ip Data Information.
      *
      * @access protected
-     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site. Default: NULL
-     * @return object
+     * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
+     *
+     * @return string|\GeoIp2\Model\City
      */
     protected static function get($sIpAddress = null)
     {
         $sIpAddr = (!empty($sIpAddress) ? $sIpAddress : Ip::get());
+
         if ($sIpAddr == '127.0.0.1') {
             // Set a valid IP address, if it's the invalid local one
-            $sIpAddr = '128.101.101.101';
+            $sIpAddr = self::DEFAULT_VALID_IP;
         }
 
         $oReader = new Reader(__DIR__ . '/GeoLite2-City.mmdb');
-        return @$oReader->city( $sIpAddr );
+        return @$oReader->city($sIpAddr);
     }
 
     /**
      * Block cloning.
-     *
-     * @access private
      */
     private function __clone() {}
 
