@@ -169,6 +169,11 @@ function backup() {
             exit 2
         fi
     fi
+    # Remove cache data, tmp and log files before backing up the project
+    clear-cache
+    remove-tmp-file
+    remove-log-file
+
     tar -jcvf $full_path .
     echo "Backup project successfully created into: $full_path"
 }
