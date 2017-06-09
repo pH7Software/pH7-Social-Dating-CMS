@@ -809,8 +809,13 @@ class Design
         $sLinkName = UrlParser::name($sLink);
         $aDefAttrs = ['href' => $sLink, 'title' => $sLinkName];
 
-        if ($bNoFollow)
-            $aDefAttrs += ['rel' => 'nofollow']; // Add "nofollow" attribute if "$bNoFollow" is TURE
+        if ($bNoFollow) {
+            /**
+             * Add "nofollow" attribute if "$bNoFollow" is TURE
+             * If TRUE, this means we don't trust the link and might be opened on a new tab, so add "noopener noreferrer" to prevent Reverse Tabnabbing attacks.
+             */
+            $aDefAttrs += ['rel' => 'nofollow noopener noreferrer'];
+        }
 
         $this->htmlTag('a', $aDefAttrs, true, $sLinkName);
     }
