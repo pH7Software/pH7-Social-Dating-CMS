@@ -91,7 +91,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Invite Friends
 * Social Bookmark (Social Media Sharing Buttons)
 * Anti-spam system
-* Full Security system against XSS, CSRF, SQL injection, authentication hacking, session fixation, brute-force, ... and protect even against some DDoS attacks!
+* Full Security system against XSS, CSRF, SQL injection, authentication hacking, session fixation, brute-force, reverse tabnabbing phishing attacks, ... and can even prevent some DDoS attacks!
 * Two-Factor Authentication Option available for Admins, Users and Affiliates
 * Admin Panel - Block Access with IP Restriction
 * Beautiful Code: Very thoroughly commented about what's happening throughout the PHP code, beautiful indentation and very readable, even for non-programmers
