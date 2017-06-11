@@ -51,7 +51,7 @@ class DeleteUserCoreFormProcess extends Form
     {
         $sMembershipType = ($this->registry->module == 'affiliate') ? t('Affiliate') : t('Member');
 
-        $this->view->membership = t('Type of User: %0%.', $sMembershipType);
+        $this->view->membership = t('User Type: %0%.', $sMembershipType);
         $this->view->message = nl2br($this->httpRequest->post('message'));
         $this->view->why_delete = t('Reason why the user wanted to leave: %0%', $this->httpRequest->post('why_delete'));
         $this->view->footer_title = t('User Information');
@@ -70,7 +70,7 @@ class DeleteUserCoreFormProcess extends Form
          * Set the details for sending the email, then send it.
          */
         $aInfo = [
-            'subject' => t('Unregister %0% - User: %1%', $sMembershipName, $this->sUsername)
+            'subject' => t('Unsubscribe %0% - User: %1%', $sMembershipName, $this->sUsername)
         ];
 
         return (new Mail)->send($aInfo, $sMessageHtml);
