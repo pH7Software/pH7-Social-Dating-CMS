@@ -35,7 +35,7 @@ class SubscriptionForm
         $oForm->addElement(new \PFBC\Element\Email(t('Your email:'), 'email', array('id' => 'email',  'onblur'=>'CValid(this.value, this.id)', 'required' => 1), false));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error email"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('id' => 'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description' => t('Enter the code above:'))));
+        $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', array('id' => 'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)', 'description' => t('Enter the below code:'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
 
         $oForm->addElement(new \PFBC\Element\Hidden('direction', ''));

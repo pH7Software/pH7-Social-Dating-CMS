@@ -53,7 +53,7 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error password"></span>'));
 
         if (DbConfig::getSetting('isCaptchaUserSignup')) {
-          $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha:'), 'captcha', array('placeholder' => t('Captcha'), 'id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the code above:'))));
+          $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', array('placeholder' => t('Captcha'), 'id' => 'ccaptcha', 'onkeyup' => 'CValid(this.value, this.id)', 'description' => t('Enter the below code:'))));
           $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 

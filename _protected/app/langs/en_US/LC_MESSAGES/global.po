@@ -129,7 +129,7 @@ msgstr ""
 #: /var/www/html/pH7CMS/_protected/app/system/modules/comment/forms/CommentForm.php:33
 #: /var/www/html/pH7CMS/_protected/app/system/modules/newsletter/forms/SubscriptionForm.php:38
 #: /var/www/html/pH7CMS/_protected/app/system/modules/admin123/forms/LoginForm.php:35
-msgid "Enter the code above:"
+msgid "Enter the below code:"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_repository/module/fake-admin-panel/forms/LoginForm.php:43
@@ -1403,7 +1403,7 @@ msgid "Other, I put the answer in the message!"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/DeleteUserCoreForm.php:32
-msgid "Enter the code above"
+msgid "Enter the below code"
 msgstr ""
 
 #: /var/www/html/pH7CMS/_protected/app/system/core/forms/ShareEmbedCoreForm.php:31
