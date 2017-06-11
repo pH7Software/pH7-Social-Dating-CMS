@@ -5,21 +5,22 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Comment / Form
  */
+
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Url\Header;
 
 class CommentForm
 {
-
     public static function display()
     {
-        if (isset($_POST['submit_comment']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_comment']))
+        if (isset($_POST['submit_comment'])) {
+            if (\PFBC\Form::isValid($_POST['submit_comment'])) {
                 new CommentFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_comment');

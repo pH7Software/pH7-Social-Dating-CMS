@@ -12,21 +12,23 @@
 namespace PH7;
 
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class LoginForm
 {
+    const FORM_WIDTH = 500;
 
     public static function display()
     {
-        if (isset($_POST['submit_login']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_login']))
+        if (isset($_POST['submit_login'])) {
+            if (\PFBC\Form::isValid($_POST['submit_login'])) {
                 new LoginFormProcess;
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
-        $oForm = new \PFBC\Form('form_login', 500);
+        $oForm = new \PFBC\Form('form_login', self::FORM_WIDTH);
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_login', 'form_login'));
         $oForm->addElement(new \PFBC\Element\Token('login'));
@@ -43,5 +45,4 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
-
 }

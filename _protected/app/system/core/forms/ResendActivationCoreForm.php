@@ -10,6 +10,7 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Url\Header;
 
 /** For "user" and "affiliate" module **/
 class ResendActivationCoreForm
@@ -18,14 +19,13 @@ class ResendActivationCoreForm
     {
         // Show the form only if the activation mode is activated by email
         $sMod = ($sTable == 'Affiliates') ? 'aff' : 'user';
-        if (DbConfig::getSetting($sMod . 'ActivationType') == 2)
-        {
-            if (isset($_POST['submit_resend_activation']))
-            {
-                if (\PFBC\Form::isValid($_POST['submit_resend_activation']))
+        if (DbConfig::getSetting($sMod . 'ActivationType') == 2) {
+            if (isset($_POST['submit_resend_activation'])) {
+                if (\PFBC\Form::isValid($_POST['submit_resend_activation'])) {
                     new ResendActivationCoreFormProcess($sTable);
+                }
 
-                Framework\Url\Header::redirect();
+                Header::redirect();
             }
 
             $oForm = new \PFBC\Form('form_resend_activation');

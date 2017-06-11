@@ -5,21 +5,22 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class LoginForm
 {
-
     public static function display($iWidth = 500)
     {
-        if (isset($_POST['submit_login_aff']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_login_aff']))
+        if (isset($_POST['submit_login_aff'])) {
+            if (\PFBC\Form::isValid($_POST['submit_login_aff'])) {
                 new LoginFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_login_aff', $iWidth);
@@ -39,5 +40,4 @@ class LoginForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
         $oForm->render();
     }
-
 }

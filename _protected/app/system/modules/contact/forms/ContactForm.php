@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class ContactForm
 {
@@ -20,7 +21,7 @@ class ContactForm
                 new ContactFormProcess();
             }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oSession = new Session;

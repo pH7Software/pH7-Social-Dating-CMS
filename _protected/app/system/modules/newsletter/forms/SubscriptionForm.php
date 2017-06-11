@@ -5,23 +5,24 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class SubscriptionForm
 {
-
     public static function display()
     {
         $sActUrl = Uri::get('newsletter', 'home', 'subscription');
 
-        if (isset($_POST['submit_subscription']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_subscription']))
+        if (isset($_POST['submit_subscription'])) {
+            if (\PFBC\Form::isValid($_POST['submit_subscription'])) {
                 new SubscriptionFormProcess();
+            }
 
-            Framework\Url\Header::redirect($sActUrl);
+            Header::redirect($sActUrl);
         }
 
         $oForm = new \PFBC\Form('form_subscription', '310px');
@@ -44,5 +45,4 @@ class SubscriptionForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
-
 }

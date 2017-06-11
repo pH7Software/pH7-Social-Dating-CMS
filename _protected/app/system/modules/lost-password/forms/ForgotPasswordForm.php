@@ -5,23 +5,26 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Lost Password / Form
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Url\Header;
 
 class ForgotPasswordForm
 {
-
     public static function display()
     {
         $sTable = Various::convertModToTable( (new Http)->get('mod') );
 
         if (isset($_POST['submit_forgot_password'])) {
-            if (\PFBC\Form::isValid($_POST['submit_forgot_password']))
+            if (\PFBC\Form::isValid($_POST['submit_forgot_password'])) {
                 new ForgotPasswordFormProcess($sTable);
-
-            Framework\Url\Header::redirect();
+            }
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_forgot_password');

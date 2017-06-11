@@ -5,24 +5,24 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Forum / Form
  */
+
 namespace PH7;
 
-use
-PH7\Framework\Config\Config,
-PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Url\Header;
 
 class EditMsgForm
 {
-
     public static function display()
     {
-        if (isset($_POST['submit_edit_msg']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_edit_msg']))
+        if (isset($_POST['submit_edit_msg'])) {
+            if (\PFBC\Form::isValid($_POST['submit_edit_msg'])) {
                 new EditMsgFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oHttpRequest = new Http;
@@ -42,5 +42,4 @@ class EditMsgForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
         $oForm->render();
     }
-
 }

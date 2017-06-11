@@ -5,9 +5,12 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Url\Header;
 
 /** For "user" and "affiliate" module **/
 class DeleteUserCoreForm
@@ -19,7 +22,7 @@ class DeleteUserCoreForm
                 new DeleteUserCoreFormProcess();
             }
 
-            Framework\Url\Header::redirect();
+           Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_delete_account');
