@@ -25,7 +25,8 @@ function init() {
     echo "11) show empty dir"
     echo "12) file permissions"
     echo "13) file strict permissions"
-    echo "14) backup"
+    echo "14) save code"
+    echo "15) backup"
 
 
     read option
@@ -43,6 +44,7 @@ function init() {
       "show empty dir") show-empty-dir;;
       "file permissions") file-permissions;;
       "file strict permissions") file-strict-permissions;;
+      "save code") save-code;;
       "backup") backup;;
       *) _error
     esac
@@ -148,6 +150,21 @@ function file-strict-permissions() {
     _permissions 644 755
     _cache-permissions
     echo "Strict Permissions have been changed!"
+}
+
+# Push the project into GitHub and Bitbucket repos
+function save-code() {
+    # GitHub repo
+    git remote rm origin
+    git remote add origin git@github.com:pH7Software/pH7-Social-Dating-CMS.git
+    git push
+
+    # Bitbucket repo
+    git remote rm origin
+    git remote add origin git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
+    git push
+
+    echo "Yaaay! Changes successfully saved into remote repos!"
 }
 
 # Backup. Create a compressed archive of the project
