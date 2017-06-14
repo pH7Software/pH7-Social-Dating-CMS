@@ -38,27 +38,23 @@ class Youtube extends Api implements IApi
      *
      * @throws Exception If the is a problem with Youtube API service.
      *
-     * @return Youtube|boolean FALSE if unable to open the API URL, otherwise Youtube
+     * @return Youtube|self|boolean FALSE if unable to open the API URL, otherwise Youtube
      */
     public function getInfo($sUrl)
     {
         $sDataUrl = static::API_URL . $this->getVideoId($sUrl) . '&key=' . $this->sApiKey . '&part=snippet,contentDetails,statistics,status';
 
-        if ($oData = $this->getData($sDataUrl))
-        {
+        if ($oData = $this->getData($sDataUrl)) {
             // Use Youtube's API to get the Youtube video's data only if the API key has been set, otherwise it won't work
-            if (!empty($this->sApiKey) && strlen($this->sApiKey) > 10)
-            {
-                if (!empty($oData->error->errors[0]->message))
-                {
+            if (!empty($this->sApiKey) && strlen($this->sApiKey) > 10) {
+                if (!empty($oData->error->errors[0]->message)) {
                     throw new Exception('YouTube API: ' . $oData->error->errors[0]->message);
-                }
-                else
-                {
+                } else {
                     $this->oData = $oData->items[0]->snippet;
                     $this->_oContentDetails = $oData->items[0]->contentDetails; // Need only for getting the video duration
                 }
             }
+
             return $this;
         }
 
@@ -87,15 +83,14 @@ class Youtube extends Api implements IApi
      */
     public function getMeta($sUrl, $sMedia, $iWidth, $iHeight)
     {
-        if ($sMedia == 'preview')
-        {
+        if ($sMedia == 'preview') {
             $aThumb = ['default', 1, 2, 3];
             shuffle($aThumb);
+
             return 'https://i' . mt_rand(1,4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
-        }
-        else
-        {
+        } else {
             $sParam = ($this->bAutoplay) ? '?autoplay=1&amp;' : '?';
+
             return '<iframe width="' . $iWidth . '" height="' . $iHeight . '" src="' . $this->getEmbedUrl($sUrl) . $sParam . 'rel=0" frameborder="0" allowfullscreen></iframe>';
         }
     }
@@ -111,15 +106,12 @@ class Youtube extends Api implements IApi
      */
     protected function getDurationTime($sDuration)
     {
-        preg_match_all('/[0-9]+[HMS]/', $sDuration, $aMatches);
+        preg_match_all(self::REGEX_TIME_FORMAT, $sDuration, $aMatches);
         $iDuration = 0; // Default value
 
-        foreach ($aMatches as $aMatch)
-        {
-            foreach ($aMatch as $iPors)
-            {
-                switch( substr($iPors, strlen($iPors)-1) )
-                {
+        foreach ($aMatches as $aMatch) {
+            foreach ($aMatch as $iPors) {
+                switch(substr($iPors, strlen($iPors)-1)) {
                     case 'H':
                         $iDuration += substr($iPors, 0, strlen($iPors)-1)*60*60;
                     break;
@@ -134,6 +126,7 @@ class Youtube extends Api implements IApi
                 }
             }
         }
+
         return $iDuration;
     }
 }

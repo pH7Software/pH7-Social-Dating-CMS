@@ -135,6 +135,7 @@ class Design
      * Set an information message.
      *
      * @param string $sMsg
+     *
      * @return void
      */
     public function setMessage($sMsg)
@@ -154,8 +155,7 @@ class Design
 
         $iMsgNum = count($this->aMessages);
         /*** Check if there are any messages in the aMessages array ***/
-        if ($iMsgNum > 0)
-        {
+        if ($iMsgNum > 0) {
             $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
             echo '<script>$(function(){Apprise(\'';
@@ -176,6 +176,7 @@ class Design
      * Set an error message.
      *
      * @param string $sErr
+     *
      * @return void
      */
     public function setError($sErr)
@@ -190,13 +191,13 @@ class Design
      */
     public function error()
     {
-        if ($this->oHttpRequest->getExists('err'))
-            $this->aErrors[] = substr($this->oHttpRequest->get('err'),0,300);
+        if ($this->oHttpRequest->getExists('err')) {
+            $this->aErrors[] = substr($this->oHttpRequest->get('err'), 0, 300);
+        }
 
         $iErrNum = count($this->aErrors);
         /*** Check if there are any errors in the aErrors array ***/
-        if ($iErrNum > 0)
-        {
+        if ($iErrNum > 0) {
            $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
            echo '<script>$(function(){Apprise(\'';
@@ -218,6 +219,7 @@ class Design
     * @param string $sMsg, Optional, display a message after redirect of the page.
     * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
     * @param integer $iTime Optional, a time. Default: "3" seconds.
+    *
     * @return void
     */
     public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = 3)
@@ -276,6 +278,8 @@ class Design
      * @param string $sAction
      * @param null|string $sVars
      * @param boolean $bClear
+     *
+     * @return void
      */
     public function url($sModule, $sController, $sAction, $sVars = null, $bClear = true)
     {
@@ -292,6 +296,7 @@ class Design
      * @param string $sAct
      * @param integer|string $mId Content ID
      * @param string $sClass Add a CSS class
+     *
      * @return void HTML output.
      */
     public function popupLinkConfirm($sLabel, $sMod, $sCtrl, $sAct, $mId, $sClass = null)
@@ -311,6 +316,7 @@ class Design
 
     /**
      * @param string $sCountryCode The Country Code (e.g., US = United States).
+     *
      * @return void Output the Flag Icon Url.
      */
     public function getSmallFlagIcon($sCountryCode)
@@ -329,6 +335,7 @@ class Design
      * @param boolean $bVersion To include the version being used. Default TRUE
      * @param boolean $bComment HTML comment. Default TRUE
      * @param boolean $bEmail Is it for email content or not. Default FALSE
+      *
      * @return void
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
@@ -367,8 +374,9 @@ class Design
      */
     final public function smallLink()
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE)
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) {
             return;
+        }
 
         echo '<p><strong>', t('Proudly Powered by'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong></p>';
     }
@@ -380,8 +388,9 @@ class Design
      */
     final public function smartLink()
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE)
+        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) {
             return;
+        }
 
         // Get Client's Language Code
         $sLangCode = (new Browser)->getLanguage(true);
@@ -444,6 +453,7 @@ class Design
      * @param string $sDir
      * @param string $sFiles
      * @param string $sCssMedia Only works for CSS files. The CSS Media type (e.g., screen,handheld,tv,projection). Default "all". Leave blank ('' or null) not to use the media attribute.
+     *
      * @return void
      */
     public function staticFiles($sType, $sDir, $sFiles, $sCssMedia = 'all')
@@ -459,6 +469,7 @@ class Design
      * @param string $sDir The CSS folder.
      * @param string $sFiles The CSS files.
      * @param string $sCssMedia CSS Media type (e.g., screen,handheld,tv,projection). Default "all". Leave blank ('' or null) not to use the media attribute.
+     *
      * @return void
      */
     public function addCss($sDir, $sFiles, $sCssMedia = 'all')
@@ -471,6 +482,7 @@ class Design
     /**
      * @param string $sDir The JavaScript folder.
      * @param string $sFiles The JavaScript files.
+     *
      * @return void
      */
     public function addJs($sDir, $sFiles)
@@ -506,6 +518,7 @@ class Design
      *
      * @param string $sMessage
      * @param string $sType Type of message: "Design::SUCCESS_TYPE", "Design::INFO_TYPE", "Design::WARNING_TYPE" or "Design::ERROR_TYPE"
+     *
      * @return void
      */
     public function setFlashMsg($sMessage, $sType = self::SUCCESS_TYPE)
@@ -524,7 +537,7 @@ class Design
     /**
      * Flash displays the message defined in the method setFlash.
      *
-     * @var string $html The message text with CSS layout depending on the type of message.
+     * @return void The message text with CSS layout depending on the type of message.
      */
     public function flashMsg()
     {
@@ -533,8 +546,7 @@ class Design
             self::FLASH_TYPE
         ];
 
-        if ($this->oSession->exists($aFlashData))
-        {
+        if ($this->oSession->exists($aFlashData)) {
             echo '<div class="center bold alert alert-', $this->oSession->get(self::FLASH_TYPE), '" role="alert">', $this->oSession->get(self::FLASH_MSG), '</div>';
 
             $this->oSession->remove($aFlashData);
@@ -547,6 +559,7 @@ class Design
      * @internal If it's an IPv6, show only the beginning, otherwise it would be too long in the template.
      * @param string $sIp Allows to speciy another IP address than the client one.
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
+     *
      * @return void|string
      */
     public function ip($sIp = null, $bPrint = true)
@@ -564,6 +577,7 @@ class Design
      * Show the geolocation of the user (with link that points to the Country controller).
      *
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
+     *
      * @return void|string
      */
     public function geoIp($bPrint = true)
@@ -587,6 +601,7 @@ class Design
      *
      * @param integer $iTotalPages
      * @param integer  $iCurrentPage
+     *
      * @return void The HTML pagination code.
      */
     public function pagination($iTotalPages, $iCurrentPage)
@@ -696,6 +711,7 @@ class Design
      * @param integer $iSize  The size of the image. Default: 80
      * @param character $cRating The max image rating allowed. Default: 'g' (for all)
      * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
+     *
      * @return string The Gravatar Link.
      */
     public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $cRating = 'g', $bSecure = false)
@@ -709,6 +725,7 @@ class Design
      * Get favicon from a URL.
      *
      * @param string $sUrl
+     *
      * @return void The HTML favicon image.
      */
     public function favicon($sUrl)
@@ -726,6 +743,7 @@ class Design
      * @param string $sFirstName First name of member.
      * @param string $sSex Sex of member.
      * @param string $sForceUrlKey Specify a specific URL from the like. Default NULL (current URL).
+     *
      * @return void
      */
     public function like($sUsername, $sFirstName, $sSex, $sForceUrlKey = null)
@@ -752,6 +770,7 @@ class Design
      * Add Normal size Social Media Widgets.
      *
      * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
+     *
      * @return void HTML output.
      */
     public function likeApi()
@@ -764,6 +783,7 @@ class Design
      * Add Small size Social Media Widgets.
      *
      * @internal AddThis JS file will be included through 'pH7_StaticFiles' table.
+     *
      * @return void HTML output.
      */
     public function littleLikeApi()
@@ -780,6 +800,7 @@ class Design
      * @param string $sFirstName
      * @param string $sSex
      * @internal We do not use Url::httpBuildQuery() method for the first condition otherwise the URL is distorted and it doesn't work.
+     *
      * @return void
      */
     public function report($iId, $sUsername, $sFirstName, $sSex)
@@ -802,6 +823,7 @@ class Design
      *
      * @param string $sLink The link.
      * @param boolean $bNoFollow Set TRUE to set the link "nofollow", FALSE otherwise. Default TRUE
+     *
      * @return void The HTML link tag.
      */
     public function urlTag($sLink, $bNoFollow = true)
@@ -826,6 +848,7 @@ class Design
      * @param string $sImg The image.
      * @param string $sAlt Alternate text.
      * @param array $aAttrs Optional. Array containing the "name" and "value" HTML attributes. Default NULL
+     *
      * @return void The HTML image tag.
      */
     public function imgTag($sImg, $sAlt, array $aAttrs = null)
@@ -846,6 +869,7 @@ class Design
      * @param array $aAttrs Optional. Default NULL
      * @param boolean $bPair Optional. Default FALSE
      * @param string $sText Optional. Add text, available only for pair tag. Default NULL
+     *
      * @return string The custom HTML tag.
      */
     public function htmlTag($sTag, array $aAttrs = null, $bPair = false, $sText = null)
@@ -871,6 +895,7 @@ class Design
      *
      * @param array $aMeta Default NULL
      * @param boolean $bLogo Default FALSE
+     *
      * @return void
      */
     final public function usefulHtmlHeader(array $aMeta = null, $bLogo = false)
@@ -882,12 +907,15 @@ class Design
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>', (!empty($aMeta['title']) ? $aMeta['title'] : ''), '</title>';
+
         if (!empty($aMeta['description'])) {
             echo '<meta name="description" content="', $aMeta['description'], '" />';
         }
+
         if (!empty($aMeta['keywords'])) {
             echo '<meta name="keywords" content="', $aMeta['keywords'], '" />';
         }
+
         echo '<meta name="author" content="', Kernel::SOFTWARE_COMPANY, '" />
         <meta name="copyright" content="', Kernel::SOFTWARE_COPYRIGHT, '" />
         <meta name="creator" content="', Kernel::SOFTWARE_NAME, '" />
@@ -915,8 +943,9 @@ class Design
 
     public function htmlFooter()
     {
-        if ($this->bIsDiv)
+        if ($this->bIsDiv) {
             echo '</div>';
+        }
 
         echo '</body></html>';
     }
@@ -937,6 +966,7 @@ class Design
      *
      * @param string $sFile CSS file.
      * @param string $sCssMedia Only works for CSS files. The CSS Media type (e.g., screen,handheld,tv,projection). Default NULL
+     *
      * @return void HTML link tag.
      */
     public function externalCssFile($sFile, $sCssMedia = null)
@@ -949,6 +979,7 @@ class Design
      * Get an external JS file.
      *
      * @param string $sFile JS file.
+     *
      * @return void HTML script tag.
      */
     public function externalJsFile($sFile)

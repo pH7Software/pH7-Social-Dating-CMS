@@ -117,6 +117,7 @@ abstract class Api
     {
         $sData = (new File)->getUrlContents($sUrl);
         $oData = json_decode($sData);
+
         return $oData;
     }
 }

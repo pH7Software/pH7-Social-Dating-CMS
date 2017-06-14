@@ -31,6 +31,7 @@ class Security
      * Field Form CSRF.
      *
      * @param string $sName The name of token.
+     *
      * @return void
      */
     public function inputToken($sName)

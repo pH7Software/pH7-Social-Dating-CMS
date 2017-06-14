@@ -14,18 +14,26 @@
  ***************************************************************************/
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Predefined;
+
 defined('PH7') or exit('Restricted access');
 
 abstract class Predefined
 {
+    const PHP_OPEN = '<?php ';
+    const PHP_CLOSE = '?>';
+    const WRITE = 'echo ';
 
-    const PHP_OPEN = '<?php ', PHP_CLOSE = '?>', WRITE = 'echo ';
+    /** @var string */
+    protected $sCode;
 
-    protected $sCode, $sLeftDelim = '{', $sRightDelim = '}';
+    /** @var string */
+    protected $sLeftDelim = '{';
+
+    /** @var string */
+    protected $sRightDelim = '}';
 
     /**
      * @param string $sCode
-     * @return void
      */
     public function __construct($sCode)
     {
@@ -39,6 +47,7 @@ abstract class Predefined
      * @param string $sKey
      * @param string $sValue
      * @param boolean Print the variable. Default TRUE
+     *
      * @return void
      */
     protected function addVar($sKey, $sValue, $bPrint = true)
@@ -53,6 +62,7 @@ abstract class Predefined
      * @access protected
      * @param string $sKey
      * @param string $sValue
+     *
      * @return void
      */
     protected function addFunc($sKey, $sValue)

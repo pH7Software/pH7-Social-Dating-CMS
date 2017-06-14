@@ -118,6 +118,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * Set the template extension.
      *
      * @param string $sExt The extension with the dot.
+     *
      * @return void
      */
     public function setTplExt($sExt)
@@ -129,51 +130,60 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * Set the directory for the template.
      *
      * @param string $sDir
+     *
      * @return void
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException An explanatory message if the directory does not exist.
+     *
+     * @throws PH7InvalidArgumentException An explanatory message if the directory does not exist.
      */
     public function setTemplateDir($sDir)
     {
         if (is_dir($sDir))
             $this->sTemplateDir = $this->file->checkExtDir($sDir);
         else
-            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" template directory.');
+            throw new PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" template directory.');
     }
 
     /**
      * Set the directory for the compilation template.
      *
      * @param string $sDir
+     *
      * @return void
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException An explanatory message if the directory does not exist.
+     *
+     * @throws PH7InvalidArgumentException An explanatory message if the directory does not exist.
      */
     public function setCompileDir($sDir)
     {
-        if (is_dir($sDir))
+        if (is_dir($sDir)) {
             $this->sCompileDir = $this->file->checkExtDir($sDir);
-        else
-            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" compile directory.');
+        } else {
+            throw new PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" compile directory.');
+        }
     }
 
     /**
      * Set the directory for the cache template.
      *
      * @param string $sDir
+     *
      * @return void
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException An explanatory message if the directory does not exist.
+     *
+     * @throws PH7InvalidArgumentException An explanatory message if the directory does not exist.
      */
     public function setCacheDir($sDir)
     {
-        if (is_dir($sDir))
+        if (is_dir($sDir)) {
             $this->sCacheDir = $this->file->checkExtDir($sDir);
-        else
-            throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" cache directory.');
+        } else {
+            throw new PH7InvalidArgumentException('<strong>' . self::NAME . '</strong> Template Engine cannot found the "' . $sDir . '" cache directory.');
+        }
     }
 
     /**
      * Enabled the cache.
      *
      * @param boolean $bCaching
+     *
      * @return void
      */
     public function setCaching($bCaching)
@@ -195,6 +205,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * Set the HTML Compressor.
      *
      * @param boolean $bCompressor
+     *
      * @return void
      */
     public function setHtmlCompress($bCompressor)
@@ -206,6 +217,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * Set the PHP Compressor.
      *
      * @param boolean $bCompressor
+     *
      * @return void
      */
     public function setPhpCompress($bCompressor)
@@ -217,6 +229,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * Set the time of expire cache.
      *
      * @param integer $iLifeTime In seconds.
+     *
      * @return void
      */
     public function setCacheExpire($iLifeTime)
@@ -228,6 +241,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * Enable or Disable the alternate syntax (XML). Default is "false"
      *
      * @param boolean $bIsActive
+     *
      * @return void
      */
      public function setXmlSyntax($bIsActive)
@@ -244,6 +258,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      *
      * @param string $sName The variable name to use in the template
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
+     *
      * @return void
      */
     public function __set($sName, $mValue)
@@ -257,6 +272,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * @see getVar()
      *
      * @param string $sKey The variable name.
+     *
      * @return mixed The variable value.
      */
     public function __get($sKey)
@@ -268,6 +284,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * Allows testing with empty() and isset() to work.
      *
      * @param string $sKey
+     *
      * @return boolean
      */
     public function __isset($sKey)
@@ -278,17 +295,18 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Compiler template.
      *
-     * @access private
      * @return boolean
-     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception If the template file could not be recovered or cannot be written.
+     *
+     * @throws TplException If the template file could not be recovered or cannot be written.
      */
     final private function compile()
     {
         // Create compile folder
         $this->file->createDir($this->sCompileDir2);
 
-        if (!$this->sCode = $this->file->getFile($this->sTemplateDirFile))
-            throw new Exception('Template Fetch Error: \'' . $this->sTemplateDirFile . '\'');
+        if (!$this->sCode = $this->file->getFile($this->sTemplateDirFile)) {
+            throw new TplException('Template Fetch Error: \'' . $this->sTemplateDirFile . '\'');
+        }
 
         // Parser the predefined variables
         $this->sCode = (new Predefined\Variable($this->sCode))->assign()->get();
@@ -302,17 +320,20 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         $sPhpHeader = $this->getHeaderContents();
 
         // Check if the "$design" variable is actually part of the \PH7\Framework\Layout\Html\Design class
-        if (!$this->checkDesignInstance()) $this->setErrMsg();
+        if (!$this->checkDesignInstance()) {
+            $this->setErrMsg();
+        }
 
-        if ($this->isMainCompilePage())
-        {
-            if (!$this->bLicense)
+        if ($this->isMainCompilePage()) {
+            if (!$this->bLicense) {
                 $this->sCode = preg_replace('#<title>(.*?)</title>#is', '<title>$1 (<?php echo t(\'Powered by\') ?>' . ' ' . self::SOFTWARE_NAME . ')</title>', $this->sCode);
+            }
 
             // It is forbidden to violate the copyright!
             // Thought for those who have spent years for developing a professional, high-quality software and done their best to help developers!
-            if (!$this->isMarkCopyright())
+            if (!$this->isMarkCopyright()) {
                 $this->setErrMsg();
+            }
         }
 
         if ($this->isXmlSitemapCompilePage())
@@ -320,24 +341,23 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
                 $this->setErrMsg();
 
         if ($this->bPhpCompressor)
-            $this->sCode = (new \PH7\Framework\Compress\Compress)->parsePhp($this->sCode);
+            $this->sCode = (new Compress)->parsePhp($this->sCode);
 
         $this->sCode = '<?php ' . $sPhpHeader . '?>' . $this->sCode;
 
-        if ($rHandle = @fopen($this->sCompileDirFile, 'wb'))
-        {
+        if ($rHandle = @fopen($this->sCompileDirFile, 'wb')) {
             fwrite($rHandle, $this->sCode);
             fclose($rHandle);
             return true;
         }
-        throw new Exception('Could not write compiled file: \'' . $this->sCompileDirFile . '\'');
+
+        throw new TplException('Could not write compiled file: \'' . $this->sCompileDirFile . '\'');
         return false;
     }
 
     /**
      * Parse the general code for translating the template language.
      *
-     * @access private
      * @return void
      */
     private function parse()
@@ -376,16 +396,21 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      *
      * @param string $sTplFile Default NULL
      * @param string $sDirPath Default NULL
-     * @param string $_bInclude Default 1 (TRUE)
+     * @param integer $_bInclude Default 1 (TRUE)
+     *
      * @return string
-     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception If the template file does no exist.
+     *
+     * @throws TplException If the template file does no exist.
+     *
+     * @throws PH7InvalidArgumentException
      */
     public function display($sTplFile = null, $sDirPath = null, $_bInclude = 1)
     {
         $this->sTplFile = $sTplFile;
 
-        if (!empty($sDirPath))
+        if (!empty($sDirPath)) {
             $this->setTemplateDir($sDirPath);
+        }
 
         $this->sTemplateDirFile = $this->sTemplateDir . 'tpl' . PH7_DS . $this->sTplFile;
 
@@ -400,17 +425,18 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         $this->sCompileDirFile = ($this->isMainDir($sDirPath)) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2 .
                 str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
 
-        if (!$this->file->existFile($this->sTemplateDirFile))
-            throw new Exception('File \'' . $this->sTemplateDirFile . '\' does no exist');
+        if (!$this->file->existFile($this->sTemplateDirFile)) {
+            throw new TplException('File \'' . $this->sTemplateDirFile . '\' does no exist');
+        }
 
 
         /*** If the file does not exist or if the template has been modified, recompile the makefiles ***/
         if ($this->file->getModifTime($this->sTemplateDirFile) > $this->file->
-                        getModifTime($this->sCompileDirFile))
+                        getModifTime($this->sCompileDirFile)) {
             $this->compile();
+        }
 
-        if (!empty($_bInclude))
-        {
+        if (!empty($_bInclude)) {
             $bCaching = (bool) $this->config->values['cache']['enable.html.tpl.cache'];
 
             if ($this->isEnableCache() === true && $bCaching === true && !$this->isMainCompilePage())
@@ -435,35 +461,39 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      *
      * @param string $sMailTplFile
      * @param string $sEmailAddress It is used to create the privacy policy for lute against spam.
+     *
      * @return string The contents of the template parsed.
-     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception If the template file could not be opened.
+     *
+     * @throws TplException If the template file could not be opened.
      */
     public function parseMail($sMailTplFile, $sEmailAddress)
     {
         /**
          * If the template doesn't contain theme for emails, we retrieve the emails default themes.
          */
-        if (!is_file($sMailTplFile) && defined('PH7_TPL_NAME'))
+        if (!is_file($sMailTplFile) && defined('PH7_TPL_NAME')) {
             $sMailTplFile = str_replace(PH7_TPL_NAME, PH7_DEFAULT_THEME, $sMailTplFile);
+        }
 
-        if (!$sCode = $this->file->getFile($sMailTplFile))
-            throw new Exception('Can\'t open file: \'' . $sMailTplFile . '\'');
+        if (!$sCode = $this->file->getFile($sMailTplFile)) {
+            throw new TplException('Can\'t open file: \'' . $sMailTplFile . '\'');
+        }
 
         /***** Other variables in file "/framework/Parse/SysVar.class.php" with syntax %var% *****/
-        $sCode = (new \PH7\Framework\Parse\SysVar)->parse($sCode);
+        $sCode = (new SysVar)->parse($sCode);
 
-        foreach ($this->_aVars as $sKey => $sValue)
-        {
+        foreach ($this->_aVars as $sKey => $sValue) {
             /*** Variables ***/
 
             // We can't convert an object to a string with str_replace, which we tested the variables with is_object function
-            if (!is_object($sValue))
+            if (!is_object($sValue)) {
                 $sCode = str_replace('{' . $sKey . '}', $sValue, $sCode);
+            }
 
             // Email Address
             //$sCode = str_replace('{email}', $sEmailAddress, $sCode);
 
-            $oMailDesign = new \PH7\Framework\Layout\Html\Mail;
+            $oMailDesign = new MailLayout;
 
             /* Headers */
 
@@ -484,6 +514,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
             $sCode = str_replace('{inc_footer}', $oMailDesign->footer(), $sCode);
             unset($oMailDesign);
         }
+
         return $sCode;
     }
 
@@ -534,6 +565,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
      * @param boolean $bEscape Specify "true" if you want to protect your variables against XSS. Default value is "false"
      * @param boolean $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string. Default value is "false"
+     *
      * @return void
      */
     public function assign($sName, $mValue, $bEscape = false, $bEscapeStrip = false)
@@ -552,6 +584,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * @param array $aVars
      * @param boolean $bEscape Specify "true" if you want to protect your variables against XSS. Default value is "false"
      * @param boolean $bEscapeStrip If you use escape method, you can also set this parameter to "true" to strip HTML and PHP tags from a string. Default value is "false"
+     *
      * @return void
      */
     public function assigns(array $aVars, $bEscape = false, $bEscapeStrip = false)
@@ -566,6 +599,7 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * @see __get()
      *
      * @param $sVarName string Name of a variable that is to be retrieved.
+     *
      * @return mixed Value of that variable.
      */
     public function getVar($sVarName)
@@ -587,25 +621,26 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
      * Checks if the compile directory has been defined otherwise we create a default directory.
      *
      * If the folder compile does not exist, it creates a folder.
-     * @access private
-     * @return object this
+     *
+     * @return self
      */
     private function checkCompileDir()
     {
         $this->sCompileDir = (empty($this->sCompileDir)) ? PH7_PATH_CACHE . static::COMPILE_DIR . PH7_DS : $this->sCompileDir;
+
         return $this;
     }
 
     /**
      * Checks if the cache directory has been defined otherwise we create a default directory.
-     *
      * If the folder cache does not exist, it creates a folder.
-     * @access private
-     * @return object this
+     *
+     * @return self
      */
     private function checkCacheDir()
     {
         $this->sCacheDir = (empty($this->sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR . PH7_DS : $this->sCacheDir;
+
         return $this;
     }
 
@@ -622,9 +657,9 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Cache system for the static contents with support for different templates and languages!
      *
-     * @access protected
      * @return void
-     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception If the cache file could not be written.
+     *
+     * @throws TplException If the cache file could not be written.
      */
     protected function cache()
     {
@@ -650,15 +685,14 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
             ob_end_clean();
 
             if ($this->bHtmlCompressor)
-                $sOutput = (new \PH7\Framework\Compress\Compress)->parseHtml($sOutput);
+                $sOutput = (new Compress)->parseHtml($sOutput);
 
-            if (!$this->file->putFile($this->sCacheDirFile, $sOutput))
-                throw new Exception('Unable to write to cache file: \'' . $this->sCacheDirFile . '\'');
+            if (!$this->file->putFile($this->sCacheDirFile, $sOutput)) {
+                throw new TplException('Unable to write to cache file: \'' . $this->sCacheDirFile . '\'');
+            }
 
             echo $sOutput;
-        }
-        else
-        {
+        } else {
             readfile($this->sCacheDirFile);
         }
     }
@@ -666,7 +700,6 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Classic syntax.
      *
-     * @access protected
      * @return void
      */
     protected function classicSyntax()
@@ -675,10 +708,11 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
         $this->sCode = str_replace('{{', '<?php ', $this->sCode);
 
         /***** ?> *****/
-        if (!preg_match('#(;[\s]+}} | ;[\s]+%})#', $this->sCode))
+        if (!preg_match('#(;[\s]+}} | ;[\s]+%})#', $this->sCode)) {
             $this->sCode = str_replace(array('}}', '%}'), ';?>', $this->sCode);
-        else
+        } else {
             $this->sCode = str_replace(array('}}', '%}'), '?>', $this->sCode);
+        }
 
         /***** <?php echo *****/
         $this->sCode = str_replace('{%', '<?php echo ', $this->sCode);
@@ -720,7 +754,6 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Parse XML style syntax.
      *
-     * @access protected
      * @return void
      */
     protected function xmlSyntax()
@@ -797,7 +830,6 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Optimizes the code generated by the compiler php template.
      *
-     * @access protected
      * @return void
      */
     protected function optimization()
@@ -809,7 +841,6 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Get current controller of the pH7CMS.
      *
-     * @access protected
      * @return string The current controller
      */
     protected function getCurrentController()
@@ -820,7 +851,6 @@ class PH7Tpl extends \PH7\Framework\Core\Kernel
     /**
      * Get the header content to put in the file.
      *
-     * @access protected
      * @return string
      */
     final protected function getHeaderContents()
@@ -849,7 +879,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the template file in the $this->sTemplateDirFile attribute is the main page (layout.tpl).
      *
-     * @access private
      * @return boolean
      */
     private function isMainPage()
@@ -860,7 +889,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the compile file in the $this->sCompileDirFile attribute is the main page (layout.cpl.php).
      *
-     * @access private
      * @return boolean
      */
     final private function isMainCompilePage()
@@ -871,7 +899,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the compile file in the $this->sCompileDirFile attribute is the XML (with XSL layout) Sitemap page (mainlayout.xsl.cpl.php).
      *
-     * @access private
      * @return boolean
      */
     final private function isXmlSitemapCompilePage()
@@ -882,8 +909,8 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the directory passed by the argument of the method is the main directory.
      *
-     * @access private
      * @param string $sDirPath
+     *
      * @return boolean
      */
     final private function isMainDir($sDirPath)
@@ -892,20 +919,18 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     }
 
     /**
-     * Check that the variable "$design" is actually part of the \PH7\Framework\Layout\Html\Design class.
+     * Check that the variable "$design" is actually parts of the Design class.
      *
-     * @access private
      * @return boolean
      */
     final private function checkDesignInstance()
     {
-        return !empty($this->_aVars['design']) && $this->_aVars['design'] instanceof \PH7\Framework\Layout\Html\Design;
+        return !empty($this->_aVars['design']) && $this->_aVars['design'] instanceof Design;
     }
 
     /**
      * Checks if the marks licensing, copyright has not been removed.
      *
-     * @access private
      * @return boolean
      */
     final private function isMarkCopyright()
@@ -925,7 +950,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Checks if the small links copyright has not been removed.
      *
-     * @access private
      * @return boolean
      */
     final private function isSmallMarkCopyright()
@@ -936,7 +960,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Check if it's not the base theme.
      *
-     * @access private
      * @return boolean Returns TRUE if it's not the base theme, FALSE otherwise.
      */
     final private function notBaseTheme()
@@ -948,7 +971,8 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Add slashes to avoid errors with "preg_replace()" with Windows' backslashes in directories.
      *
-     * @param string $sStr String
+     * @param string $sStr
+     *
      * @return string Escaped string
      */
     private function addSlashes($sStr)
@@ -959,7 +983,6 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     /**
      * Set the error message.
      *
-     * @access private
      * @return void
      */
     final private function setErrMsg()
@@ -993,5 +1016,4 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
           $this->bXmlTags
         );
     }
-
 }

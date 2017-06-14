@@ -42,6 +42,7 @@ final class Security
      * Generate Random Salt for Password encryption.
      *
      * @param string $sPassword
+     *
      * @return string The Hash Password
      */
     public static function hashPwd($sPassword)
@@ -54,6 +55,7 @@ final class Security
      *
      * @param string $sPassword
      * @param string $sHash
+     *
      * @return boolean
      */
     public static function checkPwd($sPassword, $sHash)
@@ -95,6 +97,7 @@ final class Security
      *
      * @param string $sVal
      * @param integer $iLength Default 80
+     *
      * @return string
      */
     public static function hash($sVal, $iLength = 80)
@@ -111,7 +114,9 @@ final class Security
      * @param string $sVal
      * @param integer $iLength
      * @param string $sAlgo The algorithm. Only 'whirlpool' or 'sha512' are accepted.
+     *
      * @return string
+     *
      * @throws PH7InvalidArgumentException
      */
     public static function userHash($sVal, $iLength, $sAlgo = self::WHIRLPOOL_ALGORITHM)
