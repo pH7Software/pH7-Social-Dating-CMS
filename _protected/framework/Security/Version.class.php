@@ -27,14 +27,13 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW" and 7.* is NaOH
      */
     const KERNEL_VERSION_NAME = 'NaOH';
-    const KERNEL_VERSION = '7.0.0';
+    const KERNEL_VERSION = '7.0.3';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2017-06-05';
+    const KERNEL_RELASE_DATE = '2017-07-03';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
     const KERNEL_SERVER_NAME = 'pH7WS/1.0.0'; // pH7 Web Server
-
 
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
