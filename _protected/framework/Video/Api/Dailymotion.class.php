@@ -15,9 +15,8 @@ defined('PH7') or exit('Restricted access');
 
 class Dailymotion extends Api implements IApi
 {
-    const
-    API_URL = 'https://api.dailymotion.com/video/',
-    PLAYER_URL = 'https://www.dailymotion.com/embed/video/';
+    const API_URL = 'https://api.dailymotion.com/video/';
+    const PLAYER_URL = 'https://www.dailymotion.com/embed/video/';
 
     /**
      * @param string $sUrl

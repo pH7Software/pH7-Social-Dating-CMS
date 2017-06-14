@@ -85,7 +85,10 @@ final class Security
      *
      * @param string $sPassword
      * @param integer $iLength Default: 40
+     *
      * @return string The password hashed.
+     *
+     * @throws PH7InvalidArgumentException
      */
     public static function hashCookie($sPassword, $iLength = 40)
     {

@@ -43,7 +43,7 @@ final class Version
     /**
      * Gets information on the lastest software version.
      *
-     * @return mixed (array | boolean) Returns version information in an array or FALSE if an error occurred.
+     * @return array|boolean Returns version information in an array or FALSE if an error occurred.
      */
     public static function getLatestInfo()
     {

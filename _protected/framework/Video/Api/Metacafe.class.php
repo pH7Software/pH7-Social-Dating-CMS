@@ -15,9 +15,8 @@ defined('PH7') or exit('Restricted access');
 
 class Metacafe extends Api implements IApi
 {
-    const
-    API_URL = 'http://www.metacafe.com/api/item/',
-    PLAYER_URL = 'http://metacafe.com/fplayer/';
+    const API_URL = 'http://www.metacafe.com/api/item/';
+    const PLAYER_URL = 'http://metacafe.com/fplayer/';
 
     /**
      * @param string $sUrl

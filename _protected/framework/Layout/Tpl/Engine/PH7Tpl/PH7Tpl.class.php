@@ -20,13 +20,20 @@
  ***************************************************************************/
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\Design as DesignModel;
+use PH7\Framework\Layout\Html\Mail as MailLayout;
+use PH7\Framework\Compress\Compress;
+use PH7\Framework\Parse\SysVar;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception as TplException;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
-class PH7Tpl extends \PH7\Framework\Core\Kernel
+class PH7Tpl extends Kernel
 {
-
     const
     NAME = 'PH7Tpl',
     AUTHOR = 'Pierre-Henry Soria',

@@ -19,7 +19,20 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 abstract class Api
 {
-    protected $oStr, $oData, $sApiKey, $bDefaultVideo, $bAutoplay;
+    /** @var Str */
+    protected $oStr;
+
+    /** @var \stdClass */
+    protected $oData;
+
+    /** @var string */
+    protected $sApiKey;
+
+    /** @var string */
+    protected $bDefaultVideo;
+
+    /** @var boolean */
+    protected $bAutoplay;
 
     public function __construct()
     {
@@ -83,7 +96,9 @@ abstract class Api
      */
     public function getEmbedUrl($sUrl)
     {
-        if (!$this->getVideoId($sUrl)) return false;
+        if (!$this->getVideoId($sUrl)) {
+            return false;
+        }
 
         return static::PLAYER_URL . $this->getVideoId($sUrl);
     }
@@ -103,6 +118,7 @@ abstract class Api
         $sUrl = preg_replace('#^/#', '', $sUrl);
         $sUrl = preg_replace('#^([^/&=\?]+)(?:.+)?$#i', '$1', $sUrl);
         $sUrl = str_replace(array('&', '/'), '', $sUrl); // To finish the cleaning
+
         return $sUrl;
     }
 

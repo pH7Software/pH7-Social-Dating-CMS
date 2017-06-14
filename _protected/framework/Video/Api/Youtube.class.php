@@ -17,10 +17,11 @@ defined('PH7') or exit('Restricted access');
 
 class Youtube extends Api implements IApi
 {
-    const
-    API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=',
-    PLAYER_URL = 'https://youtube.com/v/';
+    const API_URL = 'https://www.googleapis.com/youtube/v3/videos?id=';
+    const PLAYER_URL = 'https://youtube.com/v/';
+    const REGEX_TIME_FORMAT = '/[0-9]+[HMS]/';
 
+    /** @var \stdClass */
     private $_oContentDetails;
 
     /**

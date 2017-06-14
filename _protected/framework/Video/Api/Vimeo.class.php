@@ -15,9 +15,8 @@ defined('PH7') or exit('Restricted access');
 
 class Vimeo extends Api implements IApi
 {
-    const
-    API_URL = 'https://vimeo.com/api/v2/video/',
-    PLAYER_URL = 'https://player.vimeo.com/video/';
+    const API_URL = 'https://vimeo.com/api/v2/video/';
+    const PLAYER_URL = 'https://player.vimeo.com/video/';
 
     /**
      * @param string $sUrl
