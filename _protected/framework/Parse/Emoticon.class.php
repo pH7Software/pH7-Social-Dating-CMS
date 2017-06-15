@@ -11,18 +11,21 @@
  */
 
 namespace PH7\Framework\Parse;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Layout\Optimization;
+use PH7\Framework\File\File;
+use PH7\Framework\Service\Emoticon as EmoticonService;
 
-class Emoticon extends \PH7\Framework\Service\Emoticon
+class Emoticon extends EmoticonService
 {
     /**
      * Parse the contents.
      *
-     * @static
      * @param string $sContents
-     * @param boolean $bIsDataUri Default: TRUE
+     * @param boolean $bIsDataUri
+     *
      * @return string Contents
      */
     public static function init($sContents, $bIsDataUri = true)
@@ -31,7 +34,7 @@ class Emoticon extends \PH7\Framework\Service\Emoticon
 
         foreach ($aEmoticons as $sEmoticonKey => $aEmoticon) {
             if ($bIsDataUri) {
-                $sSrcImg = Optimization::dataUri(static::getPath($sEmoticonKey));
+                $sSrcImg = Optimization::dataUri(static::getPath($sEmoticonKey), new File);
             } else {
                 $sSrcImg = static::getUrl($sEmoticonKey);
             }

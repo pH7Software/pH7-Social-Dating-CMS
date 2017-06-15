@@ -10,24 +10,26 @@
  */
 
 namespace PH7\Framework\Layout;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\File\File;
 
 class Optimization
 {
-
     /**
      * Data URI scheme - base64 encoding.
      *
      * @param string $sFile
+     * @param File $oFile
+     *
      * @return string Returns format: data:[<MIME-type>][;base64],<data>
      */
-    public static function dataUri($sFile)
+    public static function dataUri($sFile, File $oFile)
     {
-        $oFile = new \PH7\Framework\File\File();
         // Switch to right MIME-type
         $sExt = $oFile->getFileExt($sFile);
         $sMimeType = $oFile->getMimeType($sExt);
-        unset($oFile);
 
         $sBase64 = base64_encode(file_get_contents($sFile));
         return "data:$sMimeType;base64,$sBase64";
@@ -40,6 +42,7 @@ class Optimization
      *
      * @param string $sFile Contents to scan.
      * @param string $sDir Folder name to prepend.
+     *
      * @return string Content with adjusted paths.
      */
     public static function cssDataUriCleanup($sFile, $sDir)
@@ -49,8 +52,7 @@ class Optimization
 
         preg_match_all($sRegexUrl, $sFile, $aHit, PREG_PATTERN_ORDER);
 
-        for ($i=0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++)
-        {
+        for ($i=0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++) {
             $sSearch = $aHit[1][$i] . $aHit[2][$i] . $aHit[3][$i];
 
             $sReplace = $sDir . $aHit[1][$i];
@@ -63,9 +65,11 @@ class Optimization
                 substr(str_replace(array('"', "'"), '', $aHit[2][$i]),0,6) != 'mhtml:' &&
                 substr(str_replace(array('"', "'"), '', $aHit[2][$i]),0,1) != '/' &&
                 substr(str_replace(array('"', "'"), '', $aHit[2][$i]),strlen(str_replace(array('"',"'"),'', $aHit[2][$i])) - 4,4) != '.htc'
-            ) $sFile = str_replace($sSearch, $sReplace, $sFile);
+            ) {
+                $sFile = str_replace($sSearch, $sReplace, $sFile);
+            }
         }
+
         return $sFile;
     }
-
 }
