@@ -34,9 +34,9 @@ class File
     /**
      * Mime Types list.
      *
-     * @staticvar array $_aMimeTypes
+     * @staticvar array $aMimeTypes
      */
-    private static $_aMimeTypes = [
+    private static $aMimeTypes = [
         'pdf' => 'application/pdf',
         'txt' => 'text/plain',
         'html' => 'text/html',
@@ -71,7 +71,7 @@ class File
      */
     public function getMimeType($sExt)
     {
-        return (array_key_exists($sExt, static::$_aMimeTypes)) ? static::$_aMimeTypes[$sExt] : null;
+        return (array_key_exists($sExt, static::$aMimeTypes)) ? static::$aMimeTypes[$sExt] : null;
     }
 
     /**
@@ -342,10 +342,12 @@ class File
      * @param string $sTo New directory.
      *
      * @return boolean TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be copied.
+     *
+     * @throws PH7InvalidArgumentException
      */
     public function copyDir($sFrom, $sTo)
     {
-        return $this->_recursiveDirIterator($sFrom, $sTo, 'copy');
+        return $this->recursiveDirIterator($sFrom, $sTo, 'copy');
     }
 
     /**
@@ -390,10 +392,12 @@ class File
      * @param string $sTo New directory.
      *
      * @return boolean TRUE if everything went well, otherwise FALSE if the "from directory" couldn't be found or if it couldn't be renamed.
+     *
+     * @throws PH7InvalidArgumentException
      */
     public function renameDir($sFrom, $sTo)
     {
-        return $this->_recursiveDirIterator($sFrom, $sTo, 'rename');
+        return $this->recursiveDirIterator($sFrom, $sTo, 'rename');
     }
 
     /**
@@ -850,7 +854,7 @@ class File
      *
      * @throws PH7InvalidArgumentException If the type is bad.
      */
-    private function _recursiveDirIterator($sFrom, $sTo, $sFuncName)
+    private function recursiveDirIterator($sFrom, $sTo, $sFuncName)
     {
         if ($sFuncName !== 'copy' && $sFuncName !== 'rename') {
             throw new PH7InvalidArgumentException('Bad function name: \'' . $sFuncName . '\'');
