@@ -13,35 +13,53 @@
  */
 
 namespace PH7\Framework\Mvc\Router;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Translate\Lang,
-PH7\Framework\Layout\LoadTemplate,
-PH7\Framework\Mvc\Model\Engine\Db,
-PH7\Framework\Registry\Registry,
-PH7\Framework\Config\Config,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Url\Uri,
-PH7\Framework\Mvc\Router\Uri as UriRoute;
+use PH7\Framework\Translate\Lang;
+use PH7\Framework\Layout\LoadTemplate;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Config\Config;
+use PH7\Framework\File\Import as FileImporter;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Layout\Gzip\Gzip;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Url\Uri;
+use PH7\Framework\Mvc\Router\Uri as UriRoute;
+use PH7\Framework\Error\CException\PH7Exception;
+use PH7\Framework\Pattern\Singleton;
 
 /**
  * @class Singleton Class
  */
 final class FrontController
 {
-
     const INDEX_FILE = 'index.php';
 
-    private $oConfig, $oRegistry, $oHttpRequest, $oUri, $aRequestParameter, $bIsRouterRewritten = false;
+    /** @var Config */
+    private $oConfig;
 
-    use \PH7\Framework\Pattern\Singleton; // Import the Singleton trait
+    /** @var Registry */
+    private $oRegistry;
+
+    /** @var Http */
+    private $oHttpRequest;
+
+    /** @var Uri */
+    private $oUri;
+
+    /** @var array */
+    private $aRequestParameter;
+
+    /** @var boolean */
+    private $bIsRouterRewritten = false;
+
+    use Singleton; // Import the Singleton trait
 
     /**
      * Routing controllers.
-     *
-     * @access private
      */
     private function __construct()
     {
@@ -61,7 +79,7 @@ final class FrontController
         }
 
         /**
-         * @internal We initialize the database after the compression of static files (\PH7\Framework\Mvc\Router\FrontController::gzipRouter() method),
+         * @internal We initialize the database after the compression of static files (self::gzipRouter() method),
          * so we can always display static files even if there are problems with the database.
          */
         $this->_databaseInitialize();
@@ -80,8 +98,6 @@ final class FrontController
 
     /**
      *  If the module action isn't rewriting, we launch the basic router.
-     *
-     * @access private
      */
     private function launchNonRewritingRouters()
     {
@@ -96,8 +112,6 @@ final class FrontController
 
     /**
      *  Router for the modules that are rewriting through the custom XML route file.
-     *
-     * @access private
      */
     private function launchRewritingRouter()
     {
@@ -164,8 +178,7 @@ final class FrontController
 
     /**
      * Simple Router.
-     *
-     * @access private
+
      * @return void
      */
     private function simpleRouter()
@@ -239,7 +252,6 @@ final class FrontController
     /**
      * Simple Module Router.
      *
-     * @access private
      * @return void
      */
     private function simpleModuleRouter()
@@ -303,7 +315,6 @@ final class FrontController
     /**
      * If the action is rewriting by the XML route file, set the correct router to be used.
      *
-     * @access private
      * @return void
      */
     private function setRewritingRouter()
@@ -312,7 +323,6 @@ final class FrontController
     }
 
     /**
-     * @access public
      * @return void
      */
     public function _databaseInitialize()
@@ -336,7 +346,6 @@ final class FrontController
     /**
      * Removing the sensitive database information in the config object.
      *
-     * @access public
      * @return void
      */
     public function _removeDatabaseInfo()
@@ -347,7 +356,6 @@ final class FrontController
     /**
      * Internationalization with Gettext.
      *
-     * @access public
      * @return void
      */
     public function _languageInitialize()
@@ -370,7 +378,6 @@ final class FrontController
     }
 
     /**
-     * @access public
      * @return void
      */
     public function _templateInitialize()
@@ -388,7 +395,6 @@ final class FrontController
     }
 
     /**
-     * @access public
      * @return void
      */
     public function _pathInitialize()
@@ -408,7 +414,6 @@ final class FrontController
     /**
      * Initialize the resources of the assets folders.
      *
-     * @access public
      * @return void
      */
     public function _assetsInitialize()
@@ -450,21 +455,19 @@ final class FrontController
     }
 
     /**
-     * @access private
      * @return void
      */
     private function gzipRouter()
     {
-        (new \PH7\Framework\Layout\Gzip\Gzip)->run();
+        (new Gzip)->run();
     }
 
     /**
-     * @access private
      * @return void
      */
     private function ajaxRouter($sMod = null)
     {
-        \PH7\Framework\File\Import::pH7FwkClass('Ajax.Ajax');
+        FileImporter::pH7FwkClass('Ajax.Ajax');
 
         // Option for Content Type
         if ($this->oHttpRequest->getExists('option'))
@@ -506,7 +509,6 @@ final class FrontController
     }
 
     /**
-     * @access private
      * @return void
      */
     private function fileRouter()
@@ -518,7 +520,6 @@ final class FrontController
     }
 
     /**
-     * @access private
      * @return void
      */
     private function cronRouter()
@@ -532,13 +533,12 @@ final class FrontController
         }
         else
         {
-            \PH7\Framework\Http\Http::setHeadersByCode(403);
+            Http::setHeadersByCode(403);
             exit('Secret word is invalid for the cron hash!');
         }
     }
 
     /**
-     * @access private
      * @return void
      */
     private function cssRouter()
@@ -555,7 +555,6 @@ final class FrontController
     }
 
     /**
-     * @access private
      * @return void
      */
     private function jsRouter()
@@ -574,7 +573,6 @@ final class FrontController
     /**
      * Run Router!
      *
-     * @access public
      * @return void
      */
     public function runRouter()
@@ -629,7 +627,6 @@ final class FrontController
     /**
      * Get the Request Parameters.
      *
-     * @access private
      * @return array The Request Parameters if it exists, otherwise an empty array.
      */
     private function getRequestParameter()
@@ -659,8 +656,8 @@ final class FrontController
     /**
      * Clean the Slug Url.
      *
-     * @access private
      * @param string $sVal The request action name to clean.
+     *
      * @return string
      */
     private function cleanSlugUrl($sVal)
@@ -671,8 +668,8 @@ final class FrontController
     /**
      * Secures the Request Parameter.
      *
-     * @access private
      * @param string $sVar
+     *
      * @return string
      */
     private function secureRequestParameter($sVar)
@@ -698,7 +695,6 @@ final class FrontController
     /**
      * Remove the Request Parameter variable.
      *
-     * @access private
      * @return void
      */
     private function clearRequestParameter()
@@ -710,8 +706,8 @@ final class FrontController
      * We display an error page if it on the index file to indicate no file extension in order to avoid utilization of a security vulnerability  in the language.
      * Otherwise, if the URL rewrite extension is not enabled, we redirect the page to index.php file (then [URL]/index.php/[REQUEST]/ ).
      *
-     * @access private
-     * @see \PH7\Framework\Mvc\Router\FrontController\notFound()
+     * @see self::notFound()
+     *
      * @return void
      */
     private function indexFileRouter()
@@ -725,7 +721,7 @@ final class FrontController
         // The following code will be useful when pH7CMS will be able to work without mod_rewrite \\
         if (!\PH7\Framework\Server\Server::isRewriteMod() && false === strpos($this->oHttpRequest->currentUrl(), static::INDEX_FILE))
         {
-            \PH7\Framework\Url\Header::redirect(PH7_URL_ROOT . static::INDEX_FILE);
+            Header::redirect(PH7_URL_ROOT . static::INDEX_FILE);
         }
         elseif (\PH7\Framework\Server\Server::isRewriteMod() && false !== strpos($this->oHttpRequest->currentUrl(), static::INDEX_FILE))
         {
@@ -740,30 +736,23 @@ final class FrontController
      * 1. In production mode: Displays the page not found using the system module "error".
      * 2. In development mode: It throws an Exception with displaying an explanatory message that indicates why this page was not found.
      *
-     * @access private
      * @param string $sMsg
      * @param string $iRedirect 1 = redirect
+     *
      * @return void
-     * @throws \PH7\Framework\Error\CException\PH7Exception If the site is in development mode, displays an explanatory message that indicates why this page was not found.
+     *
+     * @throws PH7Exception If the site is in development mode, displays an explanatory message that indicates why this page was not found.
      */
     private function notFound($sMsg = null, $iRedirect = null)
     {
-        if (isDebug() && !empty($sMsg))
-        {
-            throw new \PH7\Framework\Error\CException\PH7Exception($sMsg);
-        }
-        else
-        {
-            if (empty($iRedirect))
+        if (isDebug() && !empty($sMsg)) {
+            throw new PH7Exception($sMsg);
+        } else {
+            if (empty($iRedirect)) {
                 $this->oRegistry->module = 'error';
-            else
-                \PH7\Framework\Url\Header::redirect(UriRoute::get('error', 'http', 'index'));
+            } else {
+                Header::redirect(UriRoute::get('error', 'http', 'index'));
+            }
         }
     }
-
-    public function __destruct()
-    {
-        unset($this->oConfig, $this->oRegistry, $this->oHttpRequest, $this->oUri, $this->bIsRouterRewritten);
-    }
-
 }
