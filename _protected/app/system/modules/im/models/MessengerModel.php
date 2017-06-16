@@ -7,12 +7,14 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7/ App / System / Module / IM / Model
  */
+
 namespace PH7;
+
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class MessengerModel extends Framework\Mvc\Model\Engine\Model
+class MessengerModel extends Model
 {
-
     /**
      * Select Data of content messenger.
      *
@@ -63,5 +65,4 @@ class MessengerModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':date', $sDate, \PDO::PARAM_STR);
         return $rStmt->execute();
     }
-
 }

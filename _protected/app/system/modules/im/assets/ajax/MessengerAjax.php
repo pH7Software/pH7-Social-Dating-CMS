@@ -9,21 +9,28 @@
  * @version        1.6
  * @required       PHP 5.4 or higher.
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Session\Session,
-PH7\Framework\File\Import,
-PH7\Framework\Parse\Emoticon,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Http\Http,
-PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Session\Session;
+use PH7\Framework\File\Import;
+use PH7\Framework\Parse\Emoticon;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Date\Various as VDate;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class MessengerAjax extends PermissionCore
 {
+    /** @var HttpRequest */
+    private $_oHttpRequest;
 
-    private $_oHttpRequest, $_oMessengerModel;
+    /** @var MessengerModel */
+    private $_oMessengerModel;
 
     public function __construct()
     {
@@ -53,7 +60,7 @@ class MessengerAjax extends PermissionCore
             break;
 
             default:
-                Framework\Http\Http::setHeadersByCode(400);
+                Http::setHeadersByCode(400);
                 exit('Bad Request Error!');
         }
 
@@ -100,7 +107,7 @@ class MessengerAjax extends PermissionCore
                 if (!isset($_SESSION['messenger_boxes'][$sBox]))
                 {
                     $iNow = time() - strtotime($sTime);
-                    $sMsg = t('Sent at %0%', Framework\Date\Various::textTimeStamp($sTime));
+                    $sMsg = t('Sent at %0%', VDate::textTimeStamp($sTime));
                     if ($iNow > 180)
                     {
                         $sItems .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg]);
@@ -179,7 +186,7 @@ class MessengerAjax extends PermissionCore
         elseif (!$this->isOnline($sTo))
             $sMsgTransform = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
         else
-            $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new \PH7\Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s'));
+            $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new CDateTime)->get()->dateTime('Y-m-d H:i:s'));
 
         $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] .= $this->setJsonContent(['status' => '1', 'user' => $sTo, 'msg' => $sMsgTransform]);
 
@@ -193,7 +200,7 @@ class MessengerAjax extends PermissionCore
     protected function close()
     {
         unset($_SESSION['messenger_openBoxes'][$this->_oHttpRequest->post('box')]);
-        exit('1');
+        exit(1);
     }
 
     protected function setJsonContent(array $aData, $bEndComma = true)
@@ -222,7 +229,7 @@ EOD;
     {
         $oUserModel = new UserCoreModel;
         $iProfileId = $oUserModel->getId(null, $sUsername);
-        $bIsOnline = $oUserModel->isOnline($iProfileId, Framework\Mvc\Model\DbConfig::getSetting('userTimeout'));
+        $bIsOnline = $oUserModel->isOnline($iProfileId, DbConfig::getSetting('userTimeout'));
         unset($oUserModel);
         return $bIsOnline;
     }
@@ -244,8 +251,7 @@ EOD;
 }
 
 // Go only if the user is logged
-if (UserCore::auth())
-{
+if (UserCore::auth()) {
     $oSession = new Session; // Go start_session() function.
     if (empty($_SESSION['messenger_username'])) {
         $_SESSION['messenger_username'] = $oSession->get('member_username');
