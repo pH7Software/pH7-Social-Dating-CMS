@@ -629,21 +629,20 @@ class File
         /* Figure out the MIME type (if not specified) */
 
 
-        if (empty($sMimeType))
-        {
+        if (empty($sMimeType)) {
             $sFileExtension = $this->getFileExt($sFile);
 
             $mGetMimeType = $this->getMimeType($sFileExtension);
 
-            if (!empty($mGetMimeType))
+            $sMimeType = 'application/force-download';
+            if (!empty($mGetMimeType)) {
                 $sMimeType = $mGetMimeType;
-            else
-                $sMimeType = 'application/force-download';
+            }
         }
 
         @ob_end_clean(); // Turn off output buffering to decrease CPU usage
 
-        (new Browser)->nocache(); // No cache
+        (new Browser)->noCache(); // No cache
 
         $sPrefix = Registry::getInstance()->site_name . '_'; // the prefix
         header('Content-Type: ' . $sMimeType);
@@ -664,13 +663,11 @@ class File
      */
     public function writeHeader($sHeader, $aFile = array())
     {
-        for ($i = 0, $iCountFiles = count($aFile); $i < $iCountFiles; $i++)
-        {
+        for ($i = 0, $iCountFiles = count($aFile); $i < $iCountFiles; $i++) {
             $rHandle = fopen($aFile[$i], 'wb+');
-            $sData = '';
-            if ($this->size($aFile[$i]) > 0)
-            {
-                $aData = fread($rHandle, $this->size($aFile[$i]));
+
+            if ($this->size($aFile[$i]) > 0) {
+                $sData = fread($rHandle, $this->size($aFile[$i]));
                 fwrite($rHandle, $sHeader . static::EOL . $sData);
             }
             fclose($rHandle);
@@ -710,17 +707,17 @@ class File
      */
     public function readFiles($sPath = './', &$mFiles)
     {
-        if (!($rHandle = opendir($sPath)))
+        if (!($rHandle = opendir($sPath))) {
             return false;
+        }
 
-        while (false !== ($sFile = readdir($rHandle)))
-        {
-            if ($sFile != '.' && $sFile != '..')
-            {
-                if (strpos($sFile, '.') === false)
+        while (false !== ($sFile = readdir($rHandle))) {
+            if ($sFile != '.' && $sFile != '..') {
+                if (strpos($sFile, '.') === false) {
                     $this->readFiles($sPath . PH7_DS . $sFile, $mFiles);
-                else
+                } else {
                     $mFiles[] = $sPath . PH7_DS . $sFile;
+                }
             }
         }
         closedir($rHandle);
@@ -737,13 +734,16 @@ class File
      */
     public function readDirs($sPath = './')
     {
-        if (!($rHandle = opendir($sPath))) return false; // Return when yield is used will be OK with PHP 7
+        if (!($rHandle = opendir($sPath))) {
+            return false; // Return when yield is used will be OK with PHP 7
+        }
+
         $aRet = array();//remove it for yield
 
-        while (false !== ($sFolder = readdir($rHandle)))
-        {
-            if ('.' == $sFolder || '..' == $sFolder || !is_dir($sPath . $sFolder))
+        while (false !== ($sFolder = readdir($rHandle))) {
+            if ('.' == $sFolder || '..' == $sFolder || !is_dir($sPath . $sFolder)) {
                 continue;
+            }
 
             //yield $sFolder; // PHP 7
             $aRet[] = $sFolder;//remove it for yield
@@ -838,7 +838,7 @@ class File
      *
      * @return RecursiveDirectoryIterator
      */
-    public function getDirIterator($sPath)
+    private function getDirIterator($sPath)
     {
         return new RecursiveDirectoryIterator($sPath);
     }
