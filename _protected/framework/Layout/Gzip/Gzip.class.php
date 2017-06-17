@@ -106,10 +106,11 @@ class Gzip
      */
     public function setCacheDir($sCacheDir)
     {
-        if (is_dir($sCacheDir))
+        if (is_dir($sCacheDir)) {
             $this->sCacheDir = $sCacheDir;
-        else
+        } else {
             throw new PH7InvalidArgumentException('"' . $sCacheDir . '" cache directory cannot be found!');
+        }
     }
 
     /**
@@ -124,17 +125,19 @@ class Gzip
     public function run()
     {
         // Determine the directory and type we should use
-        if (!$this->oHttpRequest->getExists('t') || ($this->oHttpRequest->get('t') !==
-            'html' && $this->oHttpRequest->get('t') !== 'css' && $this->oHttpRequest->get('t') !== 'js'))
-        {
+        if (
+            !$this->oHttpRequest->getExists('t') ||
+            ($this->oHttpRequest->get('t') !== 'html' && $this->oHttpRequest->get('t') !== 'css' &&
+                $this->oHttpRequest->get('t') !== 'js')
+        ) {
             Http::setHeadersByCode(503);
             exit('Invalid type file!');
         }
+
         $this->sType = ($this->oHttpRequest->get('t') === 'js') ? 'javascript' : $this->oHttpRequest->get('t');
 
         // Directory
-        if (!$this->oHttpRequest->getExists('d'))
-        {
+        if (!$this->oHttpRequest->getExists('d')) {
             Http::setHeadersByCode(503);
             exit('No directory specified!');
         }
@@ -144,8 +147,7 @@ class Gzip
         $this->sBaseUrl = $this->clearUrl($this->oFile->checkExtDir($this->sDir));
 
         // The Files
-        if (!$this->oHttpRequest->getExists('f'))
-        {
+        if (!$this->oHttpRequest->getExists('f')) {
             Http::setHeadersByCode(503);
             exit('No file specified!');
         }
@@ -153,16 +155,14 @@ class Gzip
         $this->sFiles = $this->oHttpRequest->get('f');
         $this->aElements = explode(',', $this->sFiles);
 
-        foreach ($this->aElements as $sElement)
-        {
+        foreach ($this->aElements as $sElement) {
             $sPath = realpath($this->sBase . $sElement);
 
             if (
                 ($this->sType == 'html' && substr($sPath, -5) != '.html') ||
                 ($this->sType == 'javascript' && substr($sPath, -3) != '.js') ||
                 ($this->sType == 'css' && substr($sPath, -4) != '.css')
-            )
-            {
+            ) {
                 Http::setHeadersByCode(403);
                 exit('Error file extension.');
             }
@@ -207,34 +207,34 @@ class Gzip
         $sExt = ($this->bIsGzip) ? 'gz' : 'cache';
         $sCacheFile = md5($this->sType . $this->sDir . $this->sFiles) . PH7_DOT . $sExt;
 
-        foreach ($this->aElements as $sElement)
-        {
+        foreach ($this->aElements as $sElement) {
             $sPath = realpath($this->sBase . $sElement);
 
-            if ($this->oFile->getModifTime($sPath) > $this->oFile->getModifTime($this->sCacheDir . $sCacheFile))
-            {
-                if (!empty($this->iIfModified) && $this->oFile->getModifTime($sPath) > $this->oFile->getModifTime($this->iIfModified))
+            if ($this->oFile->getModifTime($sPath) > $this->oFile->getModifTime($this->sCacheDir . $sCacheFile)) {
+                if (!empty($this->iIfModified) && $this->oFile->getModifTime($sPath) > $this->oFile->getModifTime($this->iIfModified)) {
                     $oBrowser->noCache();
+                }
 
                 // Get contents of the files
                 $this->getContents();
 
                 // Store the file in the cache
-                if (!$this->oFile->putFile($this->sCacheDir . $sCacheFile, $this->sContents))
+                if (!$this->oFile->putFile($this->sCacheDir . $sCacheFile, $this->sContents)) {
                     throw new Exception('Couldn\'t write cache file: \'' . $this->sCacheDir . $sCacheFile . '\'');
+                }
             }
         }
 
-        if ($this->oHttpRequest->getMethod() != 'HEAD')
-        {
+        if ($this->oHttpRequest->getMethod() != 'HEAD') {
             $oBrowser->cache();
             //header('Not Modified', true, 304); // Warning: It can causes problems (ERR_FILE_NOT_FOUND)
         }
 
         unset($oBrowser);
 
-        if (!$this->sContents = $this->oFile->getFile($this->sCacheDir . $sCacheFile))
+        if (!$this->sContents = $this->oFile->getFile($this->sCacheDir . $sCacheFile)) {
             throw new Exception('Couldn\'t read cache file: \'' . $this->sCacheDir . $sCacheFile . '\'');
+        }
     }
 
     /**
@@ -246,8 +246,7 @@ class Gzip
     {
         $oCompress = new Compress;
 
-        switch ($this->sType)
-        {
+        switch ($this->sType) {
             case 'html':
                 $this->sContents = $oCompress->parseHtml($this->sContents);
             break;
@@ -290,24 +289,28 @@ class Gzip
             $this->sContents .= File::EOL . $this->oFile->getUrlContents(PH7_URL_ROOT . $this->sBaseUrl . $sElement);
         }
 
-        if ($this->sType == 'css')
-        {
+        if ($this->sType == 'css') {
             $this->parseVariable();
             $this->getSubCssFile();
             $this->getImageIntoCss();
         }
 
-        if ($this->sType == 'javascript')
-        {
+        if ($this->sType == 'javascript') {
             $this->parseVariable();
             $this->getSubJsFile();
         }
 
-        if ($this->bCompressor) $this->makeCompress();
+        if ($this->bCompressor) {
+            $this->makeCompress();
+        }
 
-        if ($this->bCaching) $this->sContents = '/*Cached on ' . gmdate('d M Y H:i:s') . '*/' . File::EOL . $this->sContents;
+        if ($this->bCaching) {
+            $this->sContents = '/*Cached on ' . gmdate('d M Y H:i:s') . '*/' . File::EOL . $this->sContents;
+        }
 
-        if ($this->bIsGzip) $this->gzipContent();
+        if ($this->bIsGzip) {
+            $this->gzipContent();
+        }
     }
 
     /**
@@ -321,7 +324,9 @@ class Gzip
         header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600*24*10) . ' GMT'); // 10 days
 
         // Send compressed contents
-        if ($this->bIsGzip) header('Content-Encoding: ' . $this->mEncoding);
+        if ($this->bIsGzip) {
+            header('Content-Encoding: ' . $this->mEncoding);
+        }
     }
 
     /**
@@ -332,7 +337,8 @@ class Gzip
     protected function isGzip()
     {
         $this->mEncoding = (new Browser)->encoding();
-        return (!$this->bGzipContent ? false : ($this->mEncoding !== false ? true : false));
+
+        return (!$this->bGzipContent ? false : ($this->mEncoding !== false));
     }
 
     /**
@@ -377,8 +383,7 @@ class Gzip
         // We also collect the files included in the JavaScript files. So we can also cache and compressed.
         preg_match_all('/include\([\'"]*(.+?\.)(js)[\'"]*\)\s{0,};/msi', $this->sContents, $aHit, PREG_PATTERN_ORDER);
 
-        for ($i = 0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++)
-        {
+        for ($i = 0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++) {
             $this->sContents = str_replace($aHit[0][$i], '', $this->sContents);
             $this->sContents .= File::EOL . $this->oFile->getUrlContents($aHit[1][$i] . $aHit[2][$i]);
         }
@@ -416,8 +421,9 @@ class Gzip
     private function setVariables(array $aVars)
     {
         // Replace the variable name by the content
-        foreach ($aVars as $sKey => $sVal)
+        foreach ($aVars as $sKey => $sVal) {
             $this->sContents = str_replace('[$' . $sKey . ']', $sVal, $this->sContents);
+        }
     }
 
     /**
@@ -428,7 +434,7 @@ class Gzip
      */
     private function checkCacheDir()
     {
-        $this->sCacheDir = (empty($this->sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
+        $this->sCacheDir = empty($this->sCacheDir) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->sCacheDir;
     }
 
     /**
