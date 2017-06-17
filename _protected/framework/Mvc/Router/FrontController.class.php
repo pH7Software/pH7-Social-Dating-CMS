@@ -463,6 +463,8 @@ final class FrontController
     }
 
     /**
+     * @param string|null $sMod
+     *
      * @return void
      */
     private function ajaxRouter($sMod = null)
