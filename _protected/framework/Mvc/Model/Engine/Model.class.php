@@ -31,7 +31,8 @@ abstract class Model extends Entity
     /**
      * @param string $sFile SQL file name.
      * @param string $sPath Path to SQL file.
-     * @param array $aParams Default NULL
+     * @param array $aParams
+     *
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
     public function exec($sFile, $sPath, array $aParams = null)
@@ -47,6 +48,7 @@ abstract class Model extends Entity
      *
      * @param string $sFile SQL file name.
      * @param string $sPath Path to SQL file.
+     *
      * @return string The SQL query.
      */
     public function getQuery($sFile, $sPath)

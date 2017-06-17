@@ -9,6 +9,7 @@
  */
 
 namespace PH7\Framework\File;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Pattern\Statik;
@@ -24,11 +25,10 @@ class Import
     /**
      * Import only Class or Interface of the "pH7Framework" (without dot).
      *
-     * @access public
-     * @static
      * @param string $sClassName Class path.
-     * @param string $sNameSpace Namespace. Default NULL
-     * @param string $sExt Optional, the file extension without the dot. Default value is "php".
+     * @param string $sNameSpace Namespace.
+     * @param string $sExt Optional, the file extension without the dot.
+     *
      * @return mixed (resource, string, boolean, void, ...)
      */
     public static function pH7FwkClass($sClassName, $sNameSpace = null, $sExt = 'php')
@@ -41,11 +41,10 @@ class Import
     /**
      * Import only Class or Interface in the "app" directory (without dot).
      *
-     * @access public
-     * @static
      * @param string $sClassName Class path.
-     * @param string $sNameSpace Namespace. Default NULL
-     * @param string $sExt Optional, the file extension without the dot. Default value is "php".
+     * @param string $sNameSpace Namespace.
+     * @param string $sExt Optional, the file extension without the dot.
+     *
      * @return mixed (resource, string, boolean, void, ...)
      */
     public static function pH7App($sClassName, $sNameSpace = null, $sExt = 'php')
@@ -58,11 +57,10 @@ class Import
     /**
      * Import File.
      *
-     * @access public
-     * @static
      * @param string $sFile File path.
-     * @param string $sNameSpace Namespace. Default NULL
-     * @param string $sExt Optional, the file extension without the dot. Default "php".
+     * @param string $sNameSpace Namespace.
+     * @param string $sExt Optional, the file extension without the dot.
+     *
      * @return mixed (resource, string, boolean, void, ...)
      */
     public static function file($sFile, $sNameSpace = null, $sExt = 'php')
@@ -73,11 +71,10 @@ class Import
     /**
      * Import File of the Library (without dot).
      *
-     * @access public
-     * @static
      * @param string $sFile File path.
-     * @param string $sNameSpace Namespace. Default NULL
-     * @param string $sExt Optional, the file extension without the dot. Default "php".
+     * @param string $sNameSpace Namespace.
+     * @param string $sExt Optional, the file extension without the dot.
+     *
      * @return mixed (resource, string, boolean, void, ...)
      */
     public static function lib($sFile, $sNameSpace = null, $sExt = 'php')
@@ -90,9 +87,8 @@ class Import
     /**
      * Get path with slashes.
      *
-     * @access private
-     * @static
      * @param string $sFile The path.
+     *
      * @return string The path convert.
      */
     private static function _getSlashPath($sFile)
@@ -103,25 +99,27 @@ class Import
     /**
      * Generic method to load files.
      *
-     * @access private
-     * @static
      * @param string $sFile File path.
      * @param string $sExt The file extension without the dot.
      * @param string $sNameSpace The namespace.
+     *
      * @return mixed (resource, string, boolean, void, ...)
-     * @throws \PH7\Framework\Error\CException\PH7Exception If the file is not found.
+     *
+     * @throws Exception If the file is not found.
      */
     private static function _load($sFile, $sExt, $sNameSpace)
     {
         $sFile .= PH7_DOT . $sExt;
 
         // Hack to remove the backslash
-        if (!empty($sNameSpace))
+        if (!empty($sNameSpace)) {
             $sFile = str_replace($sFile . '\\', '', $sClassName);
+        }
 
-        if (is_file($sFile))
+        if (is_file($sFile)) {
             return require $sFile;
-        else
-            throw new Exception('\'' . $sFile . '\' not found!');
+        }
+
+        throw new Exception('\'' . $sFile . '\' not found!');
     }
 }
