@@ -12,7 +12,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Url\Url;
 
-class Google implements Image
+class Google implements Imageable
 {
     const SEARCH_IMAGE_LINK = 'https://www.google.com/searchbyimage?image_url=';
 

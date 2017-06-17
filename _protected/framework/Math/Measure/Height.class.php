@@ -10,9 +10,10 @@
  */
 
 namespace PH7\Framework\Math\Measure;
+
 defined('PH7') or exit('Restricted access');
 
-class Height extends Measure implements IMeasure
+class Height extends Measure implements Measurable
 {
     /**
      * Converts a height value given in centimeters to feet / inches.

@@ -12,7 +12,7 @@
 namespace PH7\Framework\Math\Measure;
 defined('PH7') or exit('Restricted access');
 
-interface IMeasure
+interface Measurable
 {
     /**
      * Get measure.

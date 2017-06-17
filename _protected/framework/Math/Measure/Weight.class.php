@@ -10,9 +10,10 @@
  */
 
 namespace PH7\Framework\Math\Measure;
+
 defined('PH7') or exit('Restricted access');
 
-class Weight extends Measure implements IMeasure
+class Weight extends Measure implements Measurable
 {
     /**
      * Converts a weight value given in kilograms to stones / pounds.

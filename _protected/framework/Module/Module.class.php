@@ -10,11 +10,12 @@
  */
 
 namespace PH7\Framework\Module;
+
 defined('PH7') or exit('Restricted access');
 
-class Module implements Mixer
+class Module implements Mixable
 {
-
+    /** @var string */
     private $_sModName;
 
     public function __construct()
@@ -37,8 +38,6 @@ class Module implements Mixer
         switch ($this->_sModName)
         {
 
-
         }
     }
-
 }

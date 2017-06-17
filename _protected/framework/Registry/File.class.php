@@ -11,6 +11,7 @@
  */
 
 namespace PH7\Framework\Registry;
+
 defined('PH7') or exit('Restricted access');
 
 /**

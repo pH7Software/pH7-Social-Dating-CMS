@@ -11,7 +11,7 @@
 
 namespace PH7\Framework\Registry;
 
-interface IHash
+interface Hashable
 {
 
     /**

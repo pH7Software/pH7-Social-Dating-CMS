@@ -10,7 +10,7 @@ namespace PH7\Framework\Service\SearchImage;
 
 defined('PH7') or exit('Restricted access');
 
-interface Image
+interface Imageable
 {
     /**
      * @return string

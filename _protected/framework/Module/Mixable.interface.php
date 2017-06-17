@@ -11,13 +11,11 @@
 
 namespace PH7\Framework\Module;
 
-interface Mixer
+interface Mixable
 {
-
     public function cms();
 
     public function framework();
 
     public function mixer();
-
 }
