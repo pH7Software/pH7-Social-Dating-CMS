@@ -157,8 +157,11 @@ class Gzip
         {
             $sPath = realpath($this->sBase . $sElement);
 
-            if (($this->sType == 'html' && substr($sPath, -5) != '.html') || ($this->
-                _sType == 'javascript' && substr($sPath, -3) != '.js') || ($this->sType == 'css' && substr($sPath, -4) != '.css'))
+            if (
+                ($this->sType == 'html' && substr($sPath, -5) != '.html') ||
+                ($this->sType == 'javascript' && substr($sPath, -3) != '.js') ||
+                ($this->sType == 'css' && substr($sPath, -4) != '.css')
+            )
             {
                 Http::setHeadersByCode(403);
                 exit('Error file extension.');
