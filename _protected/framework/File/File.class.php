@@ -71,7 +71,7 @@ class File
      */
     public function getMimeType($sExt)
     {
-        return (array_key_exists($sExt, static::$aMimeTypes)) ? static::$aMimeTypes[$sExt] : null;
+        return array_key_exists($sExt, self::$aMimeTypes) ? self::$aMimeTypes[$sExt] : null;
     }
 
     /**
