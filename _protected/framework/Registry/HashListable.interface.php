@@ -17,7 +17,7 @@ interface HashListable
      *
      * @param string $sName
      *
-     * @return boolean|integer|float|string|array|object Returns the converted value if successful otherwise returns false.
+     * @return string Returns the converted value if successful otherwise returns false.
      */
     public function get($sName);
 }
