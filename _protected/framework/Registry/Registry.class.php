@@ -31,7 +31,7 @@ final class Registry
     /**
      * Import the Singleton trait.
      */
-    use \PH7\Framework\Pattern\Singleton;
+    use Singleton;
     /**
      * @internal We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
      */
@@ -44,8 +44,9 @@ final class Registry
      */
     public function __get($sName)
     {
-        if (isset(self::$_aData[$sName]))
+        if (isset(self::$_aData[$sName])) {
             return self::$_aData[$sName];
+        }
 
         return null;
     }
