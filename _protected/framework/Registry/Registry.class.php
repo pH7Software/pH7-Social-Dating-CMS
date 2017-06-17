@@ -11,10 +11,12 @@
  */
 
 namespace PH7\Framework\Registry;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Pattern\Singleton;
+
 /**
- * @final
  * @class Singleton Class
  */
 final class Registry

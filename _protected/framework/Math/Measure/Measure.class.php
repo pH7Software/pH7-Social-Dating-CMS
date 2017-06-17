@@ -10,16 +10,16 @@
  */
 
 namespace PH7\Framework\Math\Measure;
+
 defined('PH7') or exit('Restricted access');
 
 abstract class Measure
 {
+    /** @var integer */
     protected $iUnit;
 
     /**
-     * Measure Constructor.
-     *
-     * @param integer Unit.
+     * @param integer
      */
     public function __construct($iUnit)
     {

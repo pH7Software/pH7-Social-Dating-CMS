@@ -19,14 +19,12 @@ defined('PH7') or exit('Restricted access');
  */
 abstract class File implements \Serializable
 {
+    /** @var string */
+    private $_sPath;
 
-    private $_sPath, $_rFile = null;
+    /** @var resource|null */
+    private $_rFile = null;
 
-    /**
-     * Constructor.
-     *
-     * @access public
-     */
     public function __construct()
     {
         $this->_sPath = PH7_PATH_TMP . 'hashList.tmp';
@@ -34,8 +32,8 @@ abstract class File implements \Serializable
     }
 
     /**
-     * @access public
      * @param mixed $mData
+     *
      * @return string Returns a string containing a byte-stream representation of the value.
      */
     public function serialize($mData)
@@ -44,9 +42,9 @@ abstract class File implements \Serializable
     }
 
     /**
-     * @access public
      * @param string $sData
-     * @return mixed (boolean | integer | float | string | array | object) Returns the converted value if successful otherwise returns false.
+     *
+     * @return boolean|integer|float|string|array|object Returns the converted value if successful otherwise returns false.
      */
     public function unserialize($sData)
     {
@@ -54,8 +52,7 @@ abstract class File implements \Serializable
     }
 
     /**
-     * @access public
-     * @return string
+     * @return void
      */
     public function __sleep()
     {
@@ -63,7 +60,6 @@ abstract class File implements \Serializable
     }
 
     /**
-     * @access public
      * @return void
      */
     public function __wakeup()
@@ -72,8 +68,7 @@ abstract class File implements \Serializable
     }
 
     /**
-     * @access public
-     * @return mixed (string | boolean) Returns the read string or FALSE on failure.
+     * @return string|boolean Returns the read string or FALSE on failure.
      */
     public function read()
     {
@@ -82,8 +77,8 @@ abstract class File implements \Serializable
     }
 
     /**
-     * @access public
      * @param string $sData
+     *
      * @return void
      */
     public function write($sData)
@@ -92,7 +87,6 @@ abstract class File implements \Serializable
     }
 
     /**
-     * @access private
      * @return void
      */
     private function _open()
@@ -101,26 +95,24 @@ abstract class File implements \Serializable
     }
 
     /**
-     * @access private
      * @return boolean
      */
     private function _close()
     {
-        if(null === $this->_rFile)
+        if (null === $this->_rFile) {
             return false;
+        }
 
         fclose($this->_rFile);
         $this->_rFile = null;
+
         return true;
     }
 
-    /**
-     * @access public
-     */
     public function __destruct()
     {
-        if(null !== $this->_rFile)
+        if (null !== $this->_rFile) {
             $this->_close();
+        }
     }
-
 }

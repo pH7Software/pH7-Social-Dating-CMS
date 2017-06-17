@@ -10,11 +10,22 @@
  */
 
 namespace PH7\Framework\Math\Measure;
+
 defined('PH7') or exit('Restricted access');
 
-class Year implements IMeasure
+class Year implements Measurable
 {
-    protected $iYear, $iMonth, $iDay, $iTimestamp;
+    /** @var integer */
+    protected $iYear;
+
+    /** @var integer */
+    protected $iMonth;
+
+    /** @var integer */
+    protected $iDay;
+
+    /** @var integer */
+    protected $iTimestamp;
 
     /**
      * Calculating the age of a user relative to their date of birth.
