@@ -32,19 +32,21 @@ class Height extends Measure implements Measurable
     /**
      * Display height (centimeters, feet and inches).
      *
-     * @see get()
+     * @see self::get()
      *
      * @param boolean $bPrint Default FALSE
-     * @return void
+     *
+     * @return void|string
      */
     public function display($bPrint = false)
     {
         $aData = $this->get();
         $sHeightTxt = t('%0% &prime; %1% &Prime; &ndash; %2% cm', $aData['ft'], $aData['in'], $aData['cm']);
 
-        if($bPrint)
-            echo $sHeightTxt;
-        else
+        if (!$bPrint) {
             return $sHeightTxt;
+        }
+
+        echo $sHeightTxt;
     }
 }
