@@ -496,8 +496,9 @@ class Design
      */
     public function css()
     {
-        for ($i = 0, $iCount = count($this->aCssDir); $i < $iCount; $i++)
+        for ($i = 0, $iCount = count($this->aCssDir); $i < $iCount; $i++) {
             $this->staticFiles('css', $this->aCssDir[$i], $this->aCssFiles[$i], $this->aCssMedia[$i]);
+        }
 
         unset($this->aCssDir, $this->aCssFiles, $this->aCssMedia);
     }
@@ -567,10 +568,11 @@ class Design
         $sIp = Ip::get($sIp);
         $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See info of this IP, %0%', $sIp) . '" target="_blank">' . $this->oStr->extract($sIp,0,15) . '</a>';
 
-        if ($bPrint)
-            echo $sHtml;
-        else
+        if (!$bPrint) {
             return $sHtml;
+        }
+
+        echo $sHtml;
     }
 
     /**
@@ -589,11 +591,11 @@ class Design
 
         $sHtml = '<a href="' . Uri::get('user', 'country', 'index', $sCountry . PH7_SH . $sCity) . '" title="' . t('Meet New People in %0%, %1% with %site_name%!', $sCountryLang, $sCity) . '">' . $sCountryLang . ', ' . $sCity . '</a>';
 
-        if ($bPrint) {
-            echo $sHtml;
-        } else {
+        if (!$bPrint) {
             return $sHtml;
         }
+
+        echo $sHtml;
     }
 
     /**
@@ -675,11 +677,11 @@ class Design
 
         unset($oCache);
 
-        if ($bPrint) {
-            echo $sUrl;
-        } else {
+        if (!$bPrint) {
             return $sUrl;
         }
+
+        echo $sUrl;
     }
 
     /**
@@ -696,11 +698,11 @@ class Design
         $sHtml .= (new UserCore)->getProfileLink($sUsername);
         $sHtml .= '" title="' . t("%0%'s profile", $sUsername) . '">' . $sUsername . '</a>';
 
-        if ($bPrint) {
-            echo $sHtml;
-        } else {
+        if (!$bPrint) {
             return $sHtml;
         }
+
+        echo $sHtml;
     }
 
     /**
@@ -716,8 +718,8 @@ class Design
      */
     public function getGravatarUrl($sEmail, $sType = 'wavatar', $iSize = 80, $cRating = 'g', $bSecure = false)
     {
-        $sProtocol = ($bSecure) ? 'https' : 'http';
-        $bSubDomain = ($bSecure) ? 'secure' : 'www';
+        $sProtocol = $bSecure ? 'https' : 'http';
+        $bSubDomain = $bSecure ? 'secure' : 'www';
         return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5( strtolower($sEmail) ) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $cRating;
     }
 
@@ -775,8 +777,9 @@ class Design
      */
     public function likeApi()
     {
-        if ((bool) DbConfig::getSetting('socialMediaWidgets'))
-            echo  '<br /><br /><div class="center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_counter addthis_pill_style"></a></div>';
+        if ((bool) DbConfig::getSetting('socialMediaWidgets')) {
+            echo '<br /><br /><div class="center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_counter addthis_pill_style"></a></div>';
+        }
     }
 
     /**
@@ -788,8 +791,9 @@ class Design
      */
     public function littleLikeApi()
     {
-        if ((bool) DbConfig::getSetting('socialMediaWidgets'))
-            echo  '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
+        if ((bool) DbConfig::getSetting('socialMediaWidgets')) {
+            echo '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
+        }
     }
 
     /**

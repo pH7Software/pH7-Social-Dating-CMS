@@ -116,11 +116,11 @@ class Design extends HtmlDesign
             $this->_oCache->put($sData);
         }
 
-        if ($bPrint) {
-            echo $sData;
-        } else {
+        if (!$bPrint) {
             return $sData;
         }
+
+        echo $sData;
     }
 
     /**

@@ -5,9 +5,11 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class / Design
  */
+
 namespace PH7;
 
-use PH7\Framework\Pattern\Statik, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Pattern\Statik;
+use PH7\Framework\Mvc\Router\Uri;
 
 class LostPwdDesignCore
 {
@@ -28,9 +30,10 @@ class LostPwdDesignCore
     {
         $sHtml = '<a rel="nofollow" href="' . Uri::get('lost-password','main','forgot',$sMod) . '">' . t('Forgot your password?') . '</a>';
 
-        if ($bPrint)
-            echo $sHtml;
-        else
+        if (!$bPrint) {
             return $sHtml;
+        }
+
+        echo $sHtml;
     }
 }
