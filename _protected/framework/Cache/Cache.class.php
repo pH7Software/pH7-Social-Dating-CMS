@@ -186,7 +186,7 @@ class Cache
      *
      * @param string $sData
      *
-     * @return string|null|self If the cache is disabled, returns null otherwise returns a this object.
+     * @return string|null|self If the cache is disabled, returns null, otherwise returns this class.
      */
     public function put($sData)
     {
