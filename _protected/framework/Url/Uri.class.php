@@ -7,49 +7,47 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Url
- * @version          1.0
  */
 
 namespace PH7\Framework\Url;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Pattern\Singleton;
 
 /**
  * @class Singleton Class
  */
 class Uri
 {
+    /**
+     * @var array $aFragments
+     */
+    private static $aFragments;
 
     /**
-     * @var array $_aFragments
+     * @var string $sUri
      */
-    private static $_aFragments;
-
-    /**
-     * @var string $_sUri
-     */
-    private $_sUri;
+    private $sUri;
 
     /**
      * Import the Singleton trait.
      */
-    use \PH7\Framework\Pattern\Singleton;
+    use Singleton;
 
     /**
      * Construct the query string URI.
-     *
-     * @access private
      */
     private function __construct()
     {
-        $this->_sUri = (new HttpRequest)->requestUri();
+        $this->sUri = (new HttpRequest)->requestUri();
 
         // Strip the trailing slash from the URL to avoid taking a wrong URL fragment
-        $this->_sUri = rtrim($this->_sUri, PH7_SH);
+        $this->sUri = rtrim($this->sUri, PH7_SH);
 
         /*** Here, we put the string into array ***/
-        self::$_aFragments = explode(PH7_SH, $this->_sUri);
+        self::$aFragments = explode(PH7_SH, $this->sUri);
     }
 
     /**
@@ -59,19 +57,21 @@ class Uri
      */
     public function totalFragment()
     {
-        return count(self::$_aFragments);
+        return count(self::$aFragments);
     }
 
     /**
      * Gets URI fragment.
      *
      * @param integer $iKey The uri key.
-     * @return mixed boolean|string Returns FALSE if key is not found, otherwise STRING of the URI fragment if success.
+     *
+     * @return boolean|string Returns FALSE if key is not found, otherwise STRING of the URI fragment if success.
      */
     public function fragment($iKey)
     {
-        if (array_key_exists($iKey, self::$_aFragments))
-            return self::$_aFragments[$iKey];
+        if (array_key_exists($iKey, self::$aFragments)) {
+            return self::$aFragments[$iKey];
+        }
 
         return false;
     }
@@ -80,11 +80,11 @@ class Uri
      * Gets URI segments.
      *
      * @param integer $iOffset The sequence will start at that offset in the array.
+     *
      * @return array Returns the slice segments URI.
      */
     public function segments($iOffset)
     {
-        return array_slice(self::$_aFragments, $iOffset);
+        return array_slice(self::$aFragments, $iOffset);
     }
-
 }

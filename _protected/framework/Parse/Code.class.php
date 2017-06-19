@@ -11,20 +11,16 @@
  */
 
 namespace PH7\Framework\Parse;
+
 defined('PH7') or exit('Restricted access');
 
 abstract class Code
 {
-
     /**
-     * @access protected
      * @var string $sText
      */
     protected $sText;
 
-    /**
-     * @access public
-     */
     public function __construct()
     {
         $this->sanitize();
@@ -33,7 +29,6 @@ abstract class Code
     }
 
     /**
-     * @access protected
      * @return void
      */
     protected function sanitize()
@@ -45,7 +40,6 @@ abstract class Code
     /**
      * Paragraph
      *
-     * @access protected
      * @return void
      */
     protected function paragraph()
@@ -56,7 +50,6 @@ abstract class Code
     /**
      * Convert the space
      *
-     * @access protected
      * @return void
      */
     protected function convert()
@@ -71,8 +64,6 @@ abstract class Code
     /**
      * Displaying the text
      *
-     * @access public
-     * @abstract
      * @return string The code parsed
      */
     abstract public function __toString();
@@ -80,8 +71,6 @@ abstract class Code
     /**
      * Run the parse methods
      *
-     * @access protected
-     * @abstract
      * @return void
      */
     abstract protected function run();

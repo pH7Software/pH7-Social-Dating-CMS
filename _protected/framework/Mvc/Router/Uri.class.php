@@ -9,9 +9,13 @@
  */
 
 namespace PH7\Framework\Mvc\Router;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Pattern\Statik, PH7\Framework\Parse\Url;
+use PH7\Framework\Pattern\Statik;
+use PH7\Framework\Parse\Url;
+use PH7\Framework\File\Exception as FileException;
+use DOMDocument;
 
 class Uri
 {
@@ -29,21 +33,24 @@ class Uri
     /**
      * Load route file.
      *
-     * @param string \DOMDocument $oDom
-     * @return object \DOMDocument
-     * @throws \PH7\Framework\File\Exception If the file is not found.
+     * @param DOMDocument $oDom
+     *
+     * @return DOMDocument
+     *
+     * @throws FileException If the file is not found.
      */
-    public static function loadFile(\DOMDocument $oDom)
+    public static function loadFile(DOMDocument $oDom)
     {
         $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . '.xml';
         $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . '.xml';
 
-        if (is_file($sPathLangName))
+        if (is_file($sPathLangName)) {
             $sRoutePath = $sPathLangName;
-        elseif (is_file($sPathDefaultLang))
+        } elseif (is_file($sPathDefaultLang)) {
             $sRoutePath = $sPathDefaultLang;
-        else
-            throw new \PH7\Framework\File\Exception('File route xml not found: ' . $sPathDefaultLang);
+        } else {
+            throw new FileException('File route xml not found: ' . $sPathDefaultLang);
+        }
 
         $sContents = file_get_contents($sRoutePath); // Get the XML contents
         $sContents = static::_parseVariable($sContents); // Parse the variables
@@ -58,6 +65,7 @@ class Uri
      * @param string $sAction
      * @param string $sVars Default NULL
      * @param boolean $bFullClean Default TRUE
+     *
      * @return string
      */
     public static function get($sModule, $sController, $sAction, $sVars = null, $bFullClean = true)
@@ -68,10 +76,11 @@ class Uri
     }
 
     /**
-     * @access private
      * @param array $aParams
+     *
      * @return string
-     * @throws \PH7\Framework\File\Exception If the XML file is not found.
+     *
+     * @throws FileException If the XML file is not found.
      */
     private static function _uri(array $aParams)
     {
@@ -80,30 +89,33 @@ class Uri
         $sAction = $aParams['action'];
         $sVars = ''; // Default value
 
-        if (!empty($aParams['vars']))
-        {
+        if (!empty($aParams['vars'])) {
             // Omit the commas which may be part of a sentence in the URL parameters
             $aParams['vars'] = str_replace(array(', ', ' ,'), '', $aParams['vars']);
 
             $aVars = explode(',', $aParams['vars']);
-            foreach ($aVars as $sVar)
+            foreach ($aVars as $sVar) {
                 $sVars .= PH7_SH . $sVar;
+            }
             unset($aVars);
 
             $sVars = Url::clean($sVars, static::$_bFullClean);
 
         }
 
-        $oUrl = static::loadFile(new \DOMDocument);
-        foreach ($oUrl->getElementsByTagName('route') as $oRoute)
-        {
-            if (preg_match('#^' . $oRoute->getAttribute('module') . '$#', $sModule) && preg_match('#^' . $oRoute->getAttribute('controller') . '$#', $sController) && preg_match('#^' . $oRoute->getAttribute('action') . '$#', $sAction))
-            {
+        $oUrl = static::loadFile(new DOMDocument);
+        foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
+            if (
+                preg_match('#^' . $oRoute->getAttribute('module') . '$#', $sModule) &&
+                preg_match('#^' . $oRoute->getAttribute('controller') . '$#', $sController) &&
+                preg_match('#^' . $oRoute->getAttribute('action') . '$#', $sAction)
+            ) {
                 // Strip the special characters
                 $sUri = $oRoute->getAttribute('url');
                 $sUri = str_replace('\\', '', $sUri);
                 $sUri = preg_replace('#\(.+\)#', '', $sUri);
                 $sUri = preg_replace('#([/\?]+)$#', '',$sUri);
+
                 return PH7_URL_ROOT . $sUri . $sVars;
             }
         }
@@ -115,8 +127,8 @@ class Uri
     /**
      * Parse the variables route.
      *
-     * @access private
      * @param string $sContents
+     *
      * @return string The contents parsed.
      */
     private static function _parseVariable($sContents)

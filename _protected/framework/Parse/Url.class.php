@@ -10,6 +10,7 @@
  */
 
 namespace PH7\Framework\Parse;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Str\Str;
@@ -20,9 +21,9 @@ class Url
     /**
      * Clean URL.
      *
-     * @static
      * @param string $sUrl
-     * @param boolean $bFullClean Also removes points, puts characters to lowercase, etc. Default TRUE
+     * @param boolean $bFullClean Also removes points, puts characters to lowercase, etc.
+     *
      * @return string The new clean URL
      */
     public static function clean($sUrl, $bFullClean = true)
@@ -30,8 +31,7 @@ class Url
         $sUrl = preg_replace( '/[\s]+/', '-', $sUrl);
         $sUrl = str_replace(array('«', '»', '"', '~', '#', '$', '@', '`', '§', '$', '£', 'µ', '\\', '[', ']', '<', '>', '%', '*', '{', '}'), '-', $sUrl);
 
-        if ($bFullClean)
-        {
+        if ($bFullClean) {
             $sUrl = str_replace(array('.', '^', ',', ':', ';', '!'), '', $sUrl);
             $oStr = new Str;
             $sUrl = $oStr->lower($sUrl);
@@ -45,8 +45,8 @@ class Url
     /**
      * Gets the name of a URL.
      *
-     * @static
      * @param string $sLink The link
+     *
      * @return string The name of the domain with the first letter capitalized.
      */
     public static function name($sLink)
