@@ -72,7 +72,7 @@ class Api
      *
      * @throws PH7InvalidArgumentException If the Api Video is invalid.
      *
-     * @return object The Video API class (e.g., "Api\Youtube", "Api\Vimeo" class).
+     * @return IApi The Video API class (e.g. Api\Youtube, Api\Vimeo, Api\Dailymotion).
      */
     public function getInfo($sUrl)
     {

@@ -7,6 +7,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 Framework\Registry\Registry::getInstance()->lang = array(

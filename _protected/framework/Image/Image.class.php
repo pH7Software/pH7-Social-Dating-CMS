@@ -70,6 +70,7 @@ class Image
 
     /**
      * @return bool
+     *
      * @throws TooLargeException If the image file is not found.
      */
     public function validate()
@@ -125,7 +126,8 @@ class Image
     }
 
     /**
-     * @param int $iQ Devault value 100.
+     * @param int $iQ
+     *
      * @return self
      */
     public function quality($iQ = 100)
@@ -135,7 +137,8 @@ class Image
     }
 
     /**
-     * @param int $iC Devault value 4.
+     * @param int $iC
+     *
      * @return self
      */
     public function compression($iC = 4)
@@ -145,8 +148,9 @@ class Image
     }
 
     /**
-     * @param int $iX Default value null
-     * @param int $iY Default value null
+     * @param int $iX
+     * @param int $iY
+     *
      * @return self
      */
     public function resize($iX = null, $iY = null)
@@ -170,10 +174,11 @@ class Image
     }
 
     /**
-     * @param int $iX Default value 0.
-     * @param int $iY Default value 0.
-     * @param int $iWidth Default valie 1.
-     * @param int $iHeight Default value 1.
+     * @param int $iX
+     * @param int $iY
+     * @param int $iWidth
+     * @param int $iHeight
+     *
      * @return self
      */
     public function crop($iX = 0, $iY = 0, $iWidth = 1, $iHeight = 1)
@@ -191,6 +196,7 @@ class Image
     /**
      * @param int $iNewWidth
      * @param int $iNewHeight
+     *
      * @return self
      */
     public function dynamicResize($iNewWidth, $iNewHeight)
@@ -217,7 +223,9 @@ class Image
 
     /**
      * @param int $iSize
-     * @see \PH7\Framework\Image\Image::dynamicResize() The method that is returned by this method.
+     *
+     * @see self::dynamicResize() The method that is returned by this method.
+     *
      * @return self
      */
     public function square($iSize)
@@ -229,8 +237,11 @@ class Image
      * @param int $iWidth
      * @param int $iHeight
      * @param string $sZone Default value is center.
-     * @see \PH7\Framework\Image\Image::crop() The method that is returned by this method.
+     *
+     * @see self::crop() The method that is returned by this method.
+     *
      * @return self
+     *
      * @throws PH7InvalidArgumentException If the image crop is invalid.
      */
     public function zoneCrop($iWidth, $iHeight, $sZone = 'center')
@@ -299,8 +310,9 @@ class Image
     }
 
     /**
-     * @param int $iDeg Default value 0.
-     * @param int $iBg Default value 0.
+     * @param int $iDeg
+     * @param int $iBg
+     *
      * @return self
      */
     public function rotate($iDeg = 0, $iBg = 0)
@@ -314,6 +326,7 @@ class Image
      *
      * @param string $sText Text of watermark.
      * @param int $iSize The size of text. Between 0 to 5.
+     *
      * @return self
      */
      public function watermarkText($sText, $iSize)
@@ -353,7 +366,9 @@ class Image
      * Save an image.
      *
      * @param string $sFile
+     *
      * @return self
+     *
      * @throws PH7InvalidArgumentException If the image format is invalid.
      */
     public function save($sFile)
@@ -386,6 +401,7 @@ class Image
      * Show an image.
      *
      * @return self
+     *
      * @throws PH7InvalidArgumentException If the image format is invalid.
      */
     public function show()
