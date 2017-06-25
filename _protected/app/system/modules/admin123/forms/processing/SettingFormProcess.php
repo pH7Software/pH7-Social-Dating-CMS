@@ -27,6 +27,7 @@ class SettingFormProcess extends Form
         'default_sys_module' => 'defaultSysModule',
         'default_language' => 'defaultLanguage',
         'map_type' => 'mapType',
+        'profile_with_avatars' => 'profileWithAvatarSet',
         'users_block' => 'usersBlock',
         'number_profile_splash_page' => 'numberProfileSplashPage',
         'splash_page' => 'splashPage',

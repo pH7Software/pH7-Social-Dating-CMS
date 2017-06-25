@@ -10,33 +10,45 @@
 
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\Engine\Db,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Model\Engine\Util\Various,
-PH7\Framework\Str\Str,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Session\Session,
-PH7\Framework\Security\Security;
+use PH7\Framework\Mvc\Model\Engine\Model;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Security\Security;
+use PH7\Framework\CArray\ObjArr;
+use PH7\Framework\Ip\Ip;
+use stdClass;
 
 // Abstract Class
-class UserCoreModel extends Framework\Mvc\Model\Engine\Model
+class UserCoreModel extends Model
 {
     const CACHE_GROUP = 'db/sys/mod/user', CACHE_TIME = 604800;
 
-    protected $sCurrentDate, $iProfileId;
+    /** @var string */
+    protected $sCurrentDate;
+
+    /** @var string */
+    protected $iProfileId;
+
+    /** @var boolean */
+    private $bOnlyAvatarsSet;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->sCurrentDate = (new Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s');
+        $this->sCurrentDate = (new CDateTime)->get()->dateTime('Y-m-d H:i:s');
         $this->iProfileId = (new Session)->get('member_id');
+        $this->bOnlyAvatarsSet = (bool) DbConfig::getSetting('profileWithAvatarSet');
     }
 
     public static function checkGroup()
     {
         $oSession = new Session;
+
         if (!$oSession->exists('member_group_id')) {
             $oSession->regenerateId();
             $oSession->set('member_group_id', PermissionCore::VISITOR_GROUP_ID);
@@ -934,21 +946,21 @@ class UserCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $sSqlLimit = $bIsLimit ? 'LIMIT :offset, :limit' : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
+        $sSqlShowOnlyWithAvatars = $this->bOnlyAvatarsSet ? ' AND avatar IS NOT NULL AND approvedAvatar = 1' : '';
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
             LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId) WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (searchProfile = \'yes\')
             AND (username IS NOT NULL) AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
-            AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sSqlHideLoggedProfile . $sOrder . $sSqlLimit
+            AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' .
+            $sSqlHideLoggedProfile . $sSqlShowOnlyWithAvatars . $sOrder . $sSqlLimit
         );
 
-        if ($bHideUserLogged)
-        {
+        if ($bHideUserLogged) {
             $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
         }
 
-        if ($bIsLimit)
-        {
+        if ($bIsLimit) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }

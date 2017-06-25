@@ -962,7 +962,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.3.6', 1);
+('pH7CMS', 'SQL System Schema', '1.3.7', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -996,7 +996,8 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('emailName', 'pH7CMS', '', 'email'),
 ('feedbackEmail', @sFeedbackEmail, '', 'email'),
 ('splashPage', 1, 'Use Splash Page | enable = 1 or disable = 0', 'homepage'),
-('usersBlock', 1, '0 to disable or 1 to enable the profile photos on the homepage', 'homepage'),
+('usersBlock', 1, '0 to disable | 1 to enable the profile photos on the homepage', 'homepage'),
+('profileWithAvatarSet', 0, '1 to display only the profiles with a profile photo.', 'homepage'),
 ('bgSplashVideo', 1, '0 to disable or 1 to enable the background splash video', 'homepage'),
 ('numberProfileSplashPage', 44, 'Number of profiles to display on the splash homepage', 'homepage'),
 ('fullAjaxSite', 0, 'enable = 1 or disable = 0', 'general'),
