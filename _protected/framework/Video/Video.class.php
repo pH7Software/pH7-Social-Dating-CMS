@@ -23,12 +23,22 @@ use PH7\Framework\File\MissingProgramException;
 
 class Video extends Upload
 {
-    private $oFile, $sType, $sFfmpegPath, $aFile;
+    /** @var File */
+    private $oFile;
+
+    /** @var string */
+    private $sType;
+
+    /** @var string */
+    private $sFfmpegPath;
+
+    /** @var array */
+    private $aFile;
 
     /**
-     * @var $aAllowedTypes File formats supported.
+     * @staticvar $aAllowedTypes File formats supported.
      */
-    private $aAllowedTypes = [
+    private static $aAllowedTypes = [
         'video/mov',
         'video/avi',
         'video/flv',
@@ -79,7 +89,7 @@ class Video extends Upload
                 throw new TooLargeException('The file could not be uploaded. Possibly too large.');
             }
         } else {
-            return in_array($this->sType, $this->aAllowedTypes);
+            return in_array($this->sType, self::$aAllowedTypes);
         }
     }
 
