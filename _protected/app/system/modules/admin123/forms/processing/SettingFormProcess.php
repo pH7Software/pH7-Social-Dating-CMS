@@ -154,10 +154,8 @@ class SettingFormProcess extends Form
                         DbConfig::setSetting($iSecTokenLifetime, 'securityTokenLifetime');
                 }
             }
-            elseif (!$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal)))
-            {
-                switch ($sKey)
-                {
+            elseif (!$this->str->equals($this->httpRequest->post($sKey), DbConfig::getSetting($sVal))) {
+                switch ($sKey) {
                     case 'min_username_length':
                     {
                         $iMaxUsernameLength = $this->httpRequest->post('max_username_length')-1;
@@ -213,16 +211,12 @@ class SettingFormProcess extends Form
      */
     private function updateLogo()
     {
-        if (!empty($_FILES['logo']['tmp_name']))
-        {
+        if (!empty($_FILES['logo']['tmp_name'])) {
             $oLogo = new Framework\Image\Image($_FILES['logo']['tmp_name']);
-            if (!$oLogo->validate())
-            {
+            if (!$oLogo->validate()) {
                 \PFBC\Form::setError('form_setting', Form::wrongImgFileTypeMsg());
                 $this->bIsErr = true;
-            }
-            else
-            {
+            } else {
                 /*
                  * The method deleteFile first test if the file exists, if so it delete the file.
                  */
