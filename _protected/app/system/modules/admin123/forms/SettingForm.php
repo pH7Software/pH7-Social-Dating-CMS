@@ -53,7 +53,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Profiles with a Photo only:'), 'profile_with_avatars', array('1' => t('Yes'), '0' => t('No')), array('description' => t('Display only the profiles with a profile photo on profile blocks (such as the homepage).'), 'value' => DbConfig::getSetting('profileWithAvatarSet'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Display Profiles on Guest Homepage:'), 'users_block', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Display or not the newest users on the homepage for visitors. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Display Profiles on Guest Homepage:'), 'users_block', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Display or not the newest users on the homepage for visitors. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', array('description' => t('The number of profiles to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
 
