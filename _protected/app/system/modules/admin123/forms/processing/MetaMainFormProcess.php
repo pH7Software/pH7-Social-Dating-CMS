@@ -16,7 +16,8 @@ use stdClass;
 
 class MetaMainFormProcess extends Form
 {
-    private $aMetaFields = [
+    /** @var array */
+    private static $aMetaFields = [
         'page_title' => 'pageTitle',
         'headline' => 'headline',
         'slogan' => 'slogan',
@@ -50,7 +51,7 @@ class MetaMainFormProcess extends Form
      */
     private function updateFields(stdClass $oMeta)
     {
-        foreach ($this->aMetaFields as $sKey => $sVal) {
+        foreach (self::$aMetaFields as $sKey => $sVal) {
             if (!$this->str->equals($this->httpRequest->post($sKey), $oMeta->$sVal)) {
                 $sParam = ($sKey == 'promo_text') ? Http::ONLY_XSS_CLEAN : null;
                 DbConfig::setMetaMain($sVal, $this->httpRequest->post($sKey, $sParam), $oMeta->langId);

@@ -18,9 +18,11 @@ class SettingFormProcess extends Form
 {
     const LOGO_FILENAME = 'logo.png';
 
+    /** @var boolean */
     private $bIsErr = false;
 
-    private $aSettingFields = [
+    /** @var array */
+    private static $aSettingFields = [
         // General Settings
         'site_name' => 'siteName',
         'default_template' => 'defaultTemplate',
@@ -139,15 +141,12 @@ class SettingFormProcess extends Form
      */
     private function updateGenericFields()
     {
-        foreach ($this->aSettingFields as $sKey => $sVal)
-        {
-            if ($sKey == 'security_token_lifetime')
-            {
+        foreach (self::$aSettingFields as $sKey => $sVal) {
+            if ($sKey == 'security_token_lifetime') {
                 $iSecTokenLifetime = (int) $this->httpRequest->post('security_token_lifetime');
-                if (!$this->str->equals($iSecTokenLifetime, DbConfig::getSetting('securityTokenLifetime')))
-                {
-                    if ($iSecTokenLifetime < 10)
-                    {
+
+                if (!$this->str->equals($iSecTokenLifetime, DbConfig::getSetting('securityTokenLifetime'))) {
+                    if ($iSecTokenLifetime < 10) {
                         \PFBC\Form::setError('form_setting', t('The token lifetime cannot be below 10 seconds.'));
                         $this->bIsErr = true;
                     }
