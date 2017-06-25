@@ -61,7 +61,7 @@ class UserCoreModel extends Model
         Db::free($rStmt);
         unset($oSession);
 
-        return Framework\CArray\ObjArr::toObject(unserialize($oFetch->permissions));
+        return ObjArr::toObject(unserialize($oFetch->permissions));
     }
 
     /**
@@ -70,6 +70,7 @@ class UserCoreModel extends Model
      * @param string $sEmail Not case sensitive since on lot of mobile devices (such as iPhone), the first letter is uppercase.
      * @param string $sPassword
      * @param string $sTable Default 'Members'
+     *
      * @return mixed (boolean "true" or string "message")
      */
     public function login($sEmail, $sPassword, $sTable = 'Members')
@@ -85,12 +86,14 @@ class UserCoreModel extends Model
         $sDbEmail = (!empty($oRow->email)) ? $oRow->email : '';
         $sDbPassword = (!empty($oRow->password)) ? $oRow->password : '';
 
-        if (strtolower($sEmail) !== strtolower($sDbEmail))
+        if (strtolower($sEmail) !== strtolower($sDbEmail)) {
             return 'email_does_not_exist';
-        elseif (!Security::checkPwd($sPassword, $sDbPassword))
+        }
+        if (!Security::checkPwd($sPassword, $sDbPassword)) {
             return 'password_does_not_exist';
-        else
-            return true;
+        }
+
+        return true;
     }
 
     /**
@@ -101,6 +104,7 @@ class UserCoreModel extends Model
      * @param string $sFirstName
      * @param string $sTable
      * @param string $sTable Default 'Members'
+     *
      * @return void
      */
     public function sessionLog($sEmail, $sUsername, $sFirstName, $sTable = 'Members')
@@ -112,7 +116,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
         $rStmt->bindValue(':firstName', $sFirstName, \PDO::PARAM_STR);
-        $rStmt->bindValue(':ip', Framework\Ip\Ip::get(), \PDO::PARAM_STR);
+        $rStmt->bindValue(':ip', Ip::get(), \PDO::PARAM_STR);
         $rStmt->execute();
         Db::free($rStmt);
     }
@@ -122,14 +126,14 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId The user ID
      * @param string $sTable Default 'Members'
-     * @return object The data of a member
+     *
+     * @return stdClass The data of a member
      */
     public function readProfile($iProfileId, $sTable = 'Members')
     {
         $this->cache->start(self::CACHE_GROUP, 'readProfile' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
@@ -149,6 +153,7 @@ class UserCoreModel extends Model
      * @param string $sTable Default 'Members'
      * @param integer $iDay Default '0'
      * @param string $sGenger Values ​​available 'all', 'male', 'female'. 'couple' is only available to Members. Default 'all'
+     *
      * @return integer Total Users
      */
     public function total($sTable = 'Members', $iDay = 0, $sGenger = 'all')
@@ -178,6 +183,7 @@ class UserCoreModel extends Model
      * @param string $sValue
      * @param integer $iProfileId Profile ID
      * @param string $sTable Default 'Members'
+     *
      * @return void
      */
     public function updateProfile($sSection, $sValue, $iProfileId, $sTable ='Members')
@@ -193,6 +199,7 @@ class UserCoreModel extends Model
      * @param string $sSection
      * @param string $sValue
      * @param integer $iProfileId Profile ID
+     *
      * @return void
      */
     public function updatePrivacySetting($sSection, $sValue, $iProfileId)
@@ -206,6 +213,7 @@ class UserCoreModel extends Model
      * @param string $sEmail
      * @param string $sNewPassword
      * @param string $sTable
+     *
      * @return boolean
      */
     public function changePassword($sEmail, $sNewPassword, $sTable)
@@ -215,6 +223,7 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET password = :newPassword WHERE email = :email LIMIT 1');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':newPassword', Security::hashPwd($sNewPassword), \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -224,6 +233,8 @@ class UserCoreModel extends Model
      * @param integer $iProfileId
      * @param string $sHash
      * @param string $sTable
+     *
+     * @return boolean
      */
     public function setNewHashValidation($iProfileId, $sHash, $sTable)
     {
@@ -232,6 +243,7 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET hashValidation = :hash WHERE profileId = :profileId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
+
         return $rStmt->execute();
     }
 
@@ -241,6 +253,7 @@ class UserCoreModel extends Model
      * @param string $sEmail
      * @param string $sHash
      * @param string $sTable
+     *
      * @return boolean
      */
     public function checkHashValidation($sEmail, $sHash, $sTable)
@@ -251,6 +264,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindParam(':hash', $sHash, \PDO::PARAM_STR, 40);
         $rStmt->execute();
+
         return $rStmt->fetchColumn() == 1;
     }
 
@@ -261,7 +275,8 @@ class UserCoreModel extends Model
      * @param boolean $bCount
      * @param integer $iOffset
      * @param integer $iLimit
-     * @return mixed (object | integer) Object for the users list returned or Integer for the total number users returned.
+     *
+     * @return stdClass|integer Object for the users list returned or Integer for the total number users returned.
      */
     public function search(array $aParams, $bCount, $iOffset, $iLimit)
     {
@@ -303,38 +318,37 @@ class UserCoreModel extends Model
         $sSqlAvatar = !empty($aParams[SearchQueryCore::AVATAR]) ? ' AND avatar IS NOT NULL AND approvedAvatar = 1 ' : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
 
-        if (empty($aParams[SearchQueryCore::ORDER])) $aParams[SearchQueryCore::ORDER] = SearchCoreModel::LATEST; // Default is "ORDER BY joinDate"
-        if (empty($aParams[SearchQueryCore::SORT])) $aParams[SearchQueryCore::SORT] =  SearchCoreModel::ASC; // Default is "ascending"
+        if (empty($aParams[SearchQueryCore::ORDER])) {
+            $aParams[SearchQueryCore::ORDER] = SearchCoreModel::LATEST; // Default is "ORDER BY joinDate"
+        }
+
+        if (empty($aParams[SearchQueryCore::SORT])) {
+            $aParams[SearchQueryCore::SORT] = SearchCoreModel::ASC; // Default is "ascending"
+        }
+
         $sSqlOrder = SearchCoreModel::order($aParams[SearchQueryCore::ORDER], $aParams[SearchQueryCore::SORT]);
 
         $sSqlMatchSex = $bIsMatchSex ? ' AND matchSex LIKE :matchSex ' : '';
 
-        if ($bIsSex)
-        {
+        if ($bIsSex) {
             $sGender = '';
             $aSex = $aParams[SearchQueryCore::SEX];
-            foreach ($aSex as $sSex)
-            {
-                if ($sSex === 'male')
-                {
+            foreach ($aSex as $sSex) {
+                if ($sSex === 'male') {
                     $sGender .= '\'male\',';
                 }
 
-                if ($sSex === 'female')
-                {
+                if ($sSex === 'female') {
                     $sGender .= '\'female\',';
                 }
 
-                if ($sSex === 'couple')
-                {
+                if ($sSex === 'couple') {
                     $sGender .= '\'couple\',';
                 }
             }
 
             $sSqlSex = ' AND sex IN (' . rtrim($sGender, ',') . ') ';
-        }
-        else
-        {
+        } else {
             $sSqlSex = '';
         }
 
@@ -361,22 +375,18 @@ class UserCoreModel extends Model
         if ($bIsMail) $rStmt->bindValue(':email', '%' . $aParams[SearchQueryCore::EMAIL] . '%', \PDO::PARAM_STR);
         if ($bHideUserLogged) $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return $oRow;
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return (int) $oRow->totalUsers;
@@ -388,6 +398,7 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param integer $iTime Number of minutes that a member becomes inactive (offline). Default 1 minute
+     *
      * @return boolean
      */
     public function isOnline($iProfileId, $iTime = 1)
@@ -409,6 +420,7 @@ class UserCoreModel extends Model
      *
      * @param integer iProfileId
      * @param integer $iStatus Values: 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
+     *
      * @return void
      */
     public function setUserStatus($iProfileId, $iStatus)
@@ -420,6 +432,7 @@ class UserCoreModel extends Model
      * Get the user status.
      *
      * @param integer $iProfileId
+     *
      * @return integer The user status. 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
      */
     public function getUserStatus($iProfileId)
@@ -447,6 +460,7 @@ class UserCoreModel extends Model
      * @param string $sSection
      * @param string $sValue
      * @param integer $iProfileId Profile ID
+     *
      * @return void
      */
     public function setNotification($sSection, $sValue, $iProfileId)
@@ -458,7 +472,8 @@ class UserCoreModel extends Model
      * Get the user notifications.
      *
      * @param integer $iProfileId
-     * @return object
+     *
+     * @return stdClass
      */
     public function getNotification($iProfileId)
     {
@@ -482,14 +497,14 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sNotiName Notification name.
+     *
      * @return boolean
      */
     public function isNotification($iProfileId, $sNotiName)
     {
         $this->cache->start(self::CACHE_GROUP, 'isNotification' . $iProfileId, static::CACHE_TIME);
 
-        if (!$bData = $this->cache->get())
-        {
+        if (!$bData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT ' . $sNotiName . ' FROM' . Db::prefix('MembersNotifications') . 'WHERE profileId = :profileId AND ' . $sNotiName . ' = 1 LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -506,6 +521,7 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sTable Default 'Members'
+     *
      * @return void
      */
     public function setLastActivity($iProfileId, $sTable = 'Members')
@@ -520,6 +536,7 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sTable Default 'Members'
+     *
      * @return void
      */
     public function setLastEdit($iProfileId, $sTable = 'Members')
@@ -535,6 +552,7 @@ class UserCoreModel extends Model
      * @param integer $iProfileId
      * @param integer $iStatus 1 = apprved | 0 = not approved
      * @param string $sTable Default 'Members'
+     *
      * @return void
      */
     public function approve($iProfileId, $iStatus, $sTable = 'Members')
@@ -549,7 +567,8 @@ class UserCoreModel extends Model
      *
      * @param string $sEmail User's email address.
      * @param string $sTable Default 'Members'
-     * @return mixed (object | boolean) Returns the data member (email, username, firstName, hashValidation) on success, otherwise returns false if there is an error.
+     *
+     * @return stdClass|boolean Returns the data member (email, username, firstName, hashValidation) on success, otherwise returns false if there is an error.
      */
     public function getHashValidation($sEmail, $sTable = 'Members')
     {
@@ -560,6 +579,7 @@ class UserCoreModel extends Model
         $rStmt->execute();
         $oRow =  $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oRow;
     }
 
@@ -569,6 +589,7 @@ class UserCoreModel extends Model
      * @param string $sEmail
      * @param string $sHash
      * @param string $sTable Default 'Members'
+     *
      * @return boolean
      */
     public function validateAccount($sEmail, $sHash, $sTable = 'Members')
@@ -585,6 +606,7 @@ class UserCoreModel extends Model
      * Adding a User.
      *
      * @param array $aData
+     *
      * @return integer The ID of the User.
      */
     public function add(array $aData)
@@ -623,6 +645,11 @@ class UserCoreModel extends Model
         return $this->getKeyId();
     }
 
+    /**
+     * @param array $aData
+     *
+     * @return boolean
+     */
     public function setInfoFields(array $aData)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersInfo') . '(profileId, middleName, country, city, state, zipCode, description, website, socialNetworkSite)
@@ -636,6 +663,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':description', (!empty($aData['description']) ? $aData['description'] : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':website', (!empty($aData['website']) ? trim($aData['website']) : ''), \PDO::PARAM_STR);
         $rStmt->bindValue(':socialNetworkSite', (!empty($aData['social_network_site']) ? trim($aData['social_network_site']) : ''), \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -675,7 +703,8 @@ class UserCoreModel extends Model
      * @param integer $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      * @param string $sTable Default 'Members'
-     * @return boolean Return TRUE if the weather was fine, otherwise FALSE
+     *
+     * @return boolean Return TRUE if the weather was fine, FALSE otherwise.
      */
     public function checkWaitJoin($sIp, $iWaitTime, $sCurrentTime, $sTable = 'Members')
     {
@@ -687,6 +716,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
+
         return $rStmt->rowCount() === 0;
     }
 
@@ -699,6 +729,7 @@ class UserCoreModel extends Model
      * @param integer $iProfileId
      * @param string $sAvatar
      * @param integer $iApproved
+     *
      * @return boolean
      */
     public function setAvatar($iProfileId, $sAvatar, $iApproved)
@@ -707,6 +738,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':avatar', $sAvatar, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -714,15 +746,15 @@ class UserCoreModel extends Model
      * Get avatar.
      *
      * @param integer $iProfileId
-     * @param integer $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
-     * @return object The Avatar (SQL alias is pic), profileId and approvedAvatar
+     * @param integer $iApproved (1 = approved | 0 = pending | NULL = approved and pending)
+     *
+     * @return stdClass The Avatar (SQL alias is pic), profileId and approvedAvatar
      */
     public function getAvatar($iProfileId, $iApproved = null)
     {
         $this->cache->start(self::CACHE_GROUP, 'avatar' . $iProfileId, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             $sSqlApproved = (isset($iApproved)) ? ' AND approvedAvatar = :approved ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT profileId, avatar AS pic, approvedAvatar FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -740,6 +772,7 @@ class UserCoreModel extends Model
      * Delete an avatar in the database.
      *
      * @param integer $iProfileId
+     *
      * @return boolean
      */
     public function deleteAvatar($iProfileId)
@@ -755,14 +788,14 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param integer $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
+     *
      * @return string
      */
     public function getBackground($iProfileId, $iApproved = null)
     {
         $this->cache->start(self::CACHE_GROUP, 'background' . $iProfileId, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get())
-        {
+        if (!$sData = $this->cache->get()) {
             $sSqlApproved = (isset($iApproved)) ? ' AND approved = :approved ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -783,7 +816,8 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sFile
-     * @param integer $iApproved Default 1
+     * @param integer $iApproved
+     *
      * @return boolean
      */
     public function addBackground($iProfileId, $sFile, $iApproved = 1)
@@ -792,6 +826,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':file', $sFile, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -799,6 +834,7 @@ class UserCoreModel extends Model
      * Delete profile background.
      *
      * @param integer $iProfileId
+     *
      * @return boolean
      */
     public function deleteBackground($iProfileId)
@@ -813,6 +849,7 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sUsername
+     *
      * @return void
      */
     public function delete($iProfileId, $sUsername)
@@ -820,7 +857,9 @@ class UserCoreModel extends Model
         $sUsername = (string) $sUsername;
         $iProfileId = (int) $iProfileId;
 
-        if ($sUsername == PH7_GHOST_USERNAME) exit('You cannot delete this profile!');
+        if ($sUsername === PH7_GHOST_USERNAME) {
+            exit('You cannot delete this profile!');
+        }
 
         $oDb = Db::getInstance();
 
@@ -912,7 +951,8 @@ class UserCoreModel extends Model
     /**
      * @param string $sUsernameSearch
      * @param string $sTable Default 'Members'
-     * @return object data of users (profileId, username, sex)
+     *
+     * @return stdClass data of users (profileId, username, sex)
      */
     public function getUsernameList($sUsernameSearch, $sTable = 'Members')
     {
@@ -929,14 +969,15 @@ class UserCoreModel extends Model
     /**
      * Get profiles data.
      *
-     * @param string $sOrder Default PH7\SearchCoreModel::LAST_ACTIVITY
-     * @param integer $iOffset Default NULL
-     * @param integer $iLimit Default NULL
-     * @return object Data of users
+     * @param string $sOrder
+     * @param integer $iOffset
+     * @param integer $iLimit
+     *
+     * @return stdClass Data of users
      */
     public function getProfiles($sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
-        $bIsLimit = null !== $iOffset && null !== $iLimit;
+        $bIsLimit = $iOffset !== null && $iLimit !== null;
         $bHideUserLogged = !empty($this->iProfileId);
 
         $iOffset = (int) $iOffset;
@@ -968,6 +1009,7 @@ class UserCoreModel extends Model
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oRow;
     }
 
@@ -980,7 +1022,8 @@ class UserCoreModel extends Model
      * @param string $sOrder
      * @param integer $iOffset
      * @param integer $iLimit
-     * @return mixed (object | integer) object for the users list returned or integer for the total number users returned.
+     *
+     * @return stdClass|integer Object with the users list returned or integer for the total number users returned.
      */
     public function getGeoProfiles($sCountry, $sCity, $bCount, $sOrder, $iOffset, $iLimit)
     {
@@ -1003,27 +1046,22 @@ class UserCoreModel extends Model
         );
         $rStmt->bindParam(':country', $sCountry, \PDO::PARAM_STR, 2);
 
-        if (!empty($sCity))
-        {
+        if (!empty($sCity)) {
             $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR);
         }
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return $oRow;
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return (int) $oRow->totalUsers;
@@ -1035,7 +1073,8 @@ class UserCoreModel extends Model
      * Updating the privacy settings.
      *
      * @param integer $iProfileId
-     * @return object
+     *
+     * @return stdClass
      */
     public function getPrivacySetting($iProfileId)
     {
@@ -1062,34 +1101,28 @@ class UserCoreModel extends Model
      * @param string $sEmail Default NULL
      * @param string $sUsername Default NULL
      * @param string $sTable Default 'Members'
-     * @return mixed (integer | boolean) The Member ID if it is found or FALSE if not found.
+     *
+     * @return integer|boolean The Member ID if it is found or FALSE if not found.
      */
     public function getId($sEmail = null, $sUsername = null, $sTable = 'Members')
     {
         $this->cache->start(self::CACHE_GROUP, 'id' . $sEmail . $sUsername . $sTable, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
-            if (!empty($sEmail))
-            {
+            if (!empty($sEmail)) {
                 $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix($sTable) . 'WHERE email = :email LIMIT 1');
                 $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
-            }
-            else
-            {
+            } else {
                 $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix($sTable) . 'WHERE username = :username LIMIT 1');
                 $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
             }
             $rStmt->execute();
 
-            if ($rStmt->rowCount() === 0)
-            {
+            if ($rStmt->rowCount() === 0) {
                 return false;
-            }
-            else
-            {
+            } else {
                $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
                Db::free($rStmt);
                $iData = (int) $oRow->profileId;
@@ -1104,14 +1137,14 @@ class UserCoreModel extends Model
     /**
      * @param integer $iProfileId
      * @param string $sTable Default 'Members'
+     *
      * @return string The email address of a member
      */
     public function getEmail($iProfileId, $sTable = 'Members')
     {
         $this->cache->start(self::CACHE_GROUP, 'email' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get())
-        {
+        if (!$sData = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT email FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
@@ -1132,16 +1165,18 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sTable Default 'Members'
+     *
      * @return string The Username of member
      */
     public function getUsername($iProfileId, $sTable = 'Members')
     {
-        if ($iProfileId === PH7_ADMIN_ID) return t('Administration of %site_name%');
+        if ($iProfileId === PH7_ADMIN_ID) {
+            return t('Administration of %site_name%');
+        }
 
         $this->cache->start(self::CACHE_GROUP, 'username' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get())
-        {
+        if (!$sData = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT username FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
@@ -1162,14 +1197,14 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sTable Default 'Members'
+     *
      * @return string The first name of member
      */
     public function getFirstName($iProfileId, $sTable = 'Members')
     {
         $this->cache->start(self::CACHE_GROUP, 'firstName' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get())
-        {
+        if (!$sData = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT firstName FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
@@ -1191,23 +1226,20 @@ class UserCoreModel extends Model
      * @param integer $iProfileId Default NULL
      * @param string $sUsername Default NULL
      * @param string $sTable Default 'Members'
+     *
      * @return string The sex of a member
      */
     public function getSex($iProfileId = null, $sUsername = null, $sTable = 'Members')
     {
         $this->cache->start(self::CACHE_GROUP, 'sex' . $iProfileId . $sUsername . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get())
-        {
+        if (!$sData = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
-            if (!empty($iProfileId))
-            {
+            if (!empty($iProfileId)) {
                 $rStmt = Db::getInstance()->prepare('SELECT sex FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
                 $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-            }
-            else
-            {
+            } else {
                 $rStmt = Db::getInstance()->prepare('SELECT sex FROM' . Db::prefix($sTable) . 'WHERE username=:username LIMIT 1');
                 $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
             }
@@ -1227,6 +1259,7 @@ class UserCoreModel extends Model
      * Get Match sex for a member (so only from the Members table, because Affiliates and Admins don't have match sex).
      *
      * @param integer $iProfileId
+     *
      * @return string The User's birthdate.
      */
     public function getMatchSex($iProfileId)
@@ -1253,6 +1286,7 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sTable Default 'Members'
+     *
      * @return string The User's birthdate.
      */
     public function getBirthDate($iProfileId, $sTable = 'Members')
@@ -1281,6 +1315,7 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string sTable Default 'Members'
+     *
      * @return integer The Group ID of a member
      */
     public function getGroupId($iProfileId, $sTable = 'Members')
@@ -1307,8 +1342,9 @@ class UserCoreModel extends Model
     /**
      * Get the membership(s) data.
      *
-     * @param integer $iGroupId Group ID. Select only the specific membership from a group ID. Default NULL
-     * @return object The membership(s) data.
+     * @param integer $iGroupId Group ID. Select only the specific membership from a group ID.
+     *
+     * @return stdClass The membership(s) data.
      */
     public function getMemberships($iGroupId = null)
     {
@@ -1333,15 +1369,15 @@ class UserCoreModel extends Model
     /**
      * Get the membership details of a user.
      *
-     * @param integer $profileId
-     * @return object The membership detais.
+     * @param integer $iProfileId
+     *
+     * @return stdClass The membership detais.
      */
     public function getMembershipDetails($iProfileId)
     {
         $this->cache->start(self::CACHE_GROUP, 'membershipdetails' . $iProfileId, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members'). 'AS m INNER JOIN ' . Db::prefix('Memberships') .
             'AS g USING(groupId) WHERE profileId = :profileId LIMIT 1';
 
@@ -1361,6 +1397,7 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
+     *
      * @return boolean
      */
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
@@ -1380,7 +1417,8 @@ class UserCoreModel extends Model
      *
      * @param integer $iNewGroupId The new ID of membership group.
      * @param integer $iProfileId The user ID.
-     * @param string $sDateTime In date format: 0000-00-00 00:00:00 Default NULL
+     * @param string $sDateTime In date format: 0000-00-00 00:00:00
+     *
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
     public function updateMembership($iNewGroupId, $iProfileId, $sDateTime = null)
@@ -1403,14 +1441,14 @@ class UserCoreModel extends Model
      *
      * @param integer $iProfileId
      * @param string $sTable Default 'MembersInfo'
-     * @return object
+     *
+     * @return stdClass
      */
     public function getInfoFields($iProfileId, $sTable = 'MembersInfo')
     {
         $this->cache->start(self::CACHE_GROUP, 'infoFields' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
@@ -1419,7 +1457,7 @@ class UserCoreModel extends Model
             $oColumns = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
 
-            $oData = new \stdClass;
+            $oData = new stdClass;
             foreach ($oColumns as $sColumn => $sValue)
             {
                 if ($sColumn != 'profileId')
@@ -1433,8 +1471,6 @@ class UserCoreModel extends Model
 
     /**
      * Clone is set to private to stop cloning.
-     *
-     * @access private
      */
     private function __clone() {}
 }

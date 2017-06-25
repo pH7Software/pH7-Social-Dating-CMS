@@ -11,31 +11,34 @@
  */
 
 namespace PH7\Framework\CArray;
+
 defined('PH7') or exit('Restricted access');
+
+use stdClass;
 
 class ObjArr
 {
-
-     /**
-      * Converting an Array to an Object.
-      *
-      * @static
-      * @param array $aArr The array to convert.
-      * @return object
-      */
+    /**
+     * Converting an Array to an Object.
+     *
+     * @param array $aArr The array to convert.
+     *
+     * @return stdClass
+     */
     public static function toObject(array $aArr)
     {
-        $oData = new \stdClass;
-        if (is_array($aArr))
-        {
-            foreach ($aArr as $sKey => $mVal)
-            {
-                if (is_array($mVal))
+        $oData = new stdClass;
+
+        if (is_array($aArr)) {
+            foreach ($aArr as $sKey => $mVal) {
+                if (is_array($mVal)) {
                     $oData->$sKey = self::toObject($mVal); // Recursive method
-                else
+                } else {
                     $oData->$sKey = $mVal;
+                }
             }
         }
+
         return $oData;
     }
 
@@ -43,19 +46,20 @@ class ObjArr
      * Converting an Object to an Array.
      *
      * @static
-     * @param object $oObj The object to convert.
+     * @param stdClass|array $oObj The object to convert.
+     *
      * @return array
      */
     public static function toArray($oObj)
     {
-        if (is_array($oObj) || is_object($oObj))
-        {
+        if (is_array($oObj) || is_object($oObj)) {
             $aRes = array();
-            foreach ($oObj as $sKey => $sVal)
+            foreach ($oObj as $sKey => $sVal) {
                 $aRes[$sKey] = self::toArray($sVal); // Recursive method
+            }
             return $aRes;
         }
+
         return $oObj;
     }
-
 }
