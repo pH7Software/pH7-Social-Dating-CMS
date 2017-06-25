@@ -33,16 +33,12 @@ class UserCoreModel extends Model
     /** @var string */
     protected $iProfileId;
 
-    /** @var boolean */
-    private $bOnlyAvatarsSet;
-
     public function __construct()
     {
         parent::__construct();
 
         $this->sCurrentDate = (new CDateTime)->get()->dateTime('Y-m-d H:i:s');
         $this->iProfileId = (new Session)->get('member_id');
-        $this->bOnlyAvatarsSet = (bool) DbConfig::getSetting('profileWithAvatarSet');
     }
 
     public static function checkGroup()
@@ -979,6 +975,7 @@ class UserCoreModel extends Model
     {
         $bIsLimit = $iOffset !== null && $iLimit !== null;
         $bHideUserLogged = !empty($this->iProfileId);
+        $bOnlyAvatarsSet = (bool) DbConfig::getSetting('profileWithAvatarSet');
 
         $iOffset = (int) $iOffset;
         $iLimit = (int) $iLimit;
@@ -987,7 +984,7 @@ class UserCoreModel extends Model
 
         $sSqlLimit = $bIsLimit ? 'LIMIT :offset, :limit' : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
-        $sSqlShowOnlyWithAvatars = $this->bOnlyAvatarsSet ? ' AND avatar IS NOT NULL AND approvedAvatar = 1' : '';
+        $sSqlShowOnlyWithAvatars = $bOnlyAvatarsSet ? ' AND avatar IS NOT NULL AND approvedAvatar = 1' : '';
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
