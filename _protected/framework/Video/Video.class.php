@@ -35,9 +35,7 @@ class Video extends Upload
     /** @var array */
     private $aFile;
 
-    /**
-     * @staticvar $aAllowedTypes File formats supported.
-     */
+    /** @var array File formats supported */
     private static $aAllowedTypes = [
         'video/mov',
         'video/avi',
@@ -76,9 +74,9 @@ class Video extends Upload
     }
 
     /**
-     * @throws TooLargeException If the video file is not found.
-     *
      * @return bool
+     *
+     * @throws TooLargeException If the video file is not found.
      */
     public function validate()
     {
