@@ -14,12 +14,31 @@ namespace PH7\Framework\Security\Validate;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Str\Str;
+use PH7\Framework\Math\Measure\Year as YearMeasure;
+use PH7\Framework\Config\Config;
+use PH7\ExistsCoreModel;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Security\Ban\Ban;
+use DateTime;
+use Exception;
 
 class Validate
 {
+    const REGEX_NOT_NAME_PATTERN = '`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;\?!¿¡\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`';
+    const REGEX_DATE_FORMAT = '`^\d\d/\d\d/\d\d\d\d$`';
+
     const MAX_INT_NUMBER = 999999999999;
 
+    const MIN_NAME_LENGTH = 2;
+    const MAX_NAME_LENGTH = 20;
+
+    const DEF_MIN_USERNAME_LENGTH = 3;
+    const DEF_MIN_PASS_LENGTH = 6;
+    const DEF_MAX_PASS_LENGTH = 60;
+    const DEF_MIN_AGE = 18;
+    const DEF_MAX_AGE = 99;
+
+    /** @var Str */
     private $_oStr;
 
     public function __construct()
@@ -192,13 +211,18 @@ class Validate
      * @param integer $iMin Default 3
      * @param integer $iMax Default 40
      * @param string $sTable Default 'Members'
+     *
      * @return boolean
      */
-    public function username($sUsername, $iMin = 3, $iMax = PH7_MAX_USERNAME_LENGTH, $sTable = 'Members')
+    public function username($sUsername, $iMin = self::DEF_MIN_USERNAME_LENGTH, $iMax = PH7_MAX_USERNAME_LENGTH, $sTable = 'Members')
     {
          $sUsername = trim($sUsername);
 
-         return (preg_match('#^'.PH7_USERNAME_PATTERN.'{'.$iMin.','.$iMax.'}$#', $sUsername) && !is_file(PH7_PATH_ROOT . $sUsername . PH7_PAGE_EXT) && !Ban::isUsername($sUsername) && !(new \PH7\ExistsCoreModel)->username($sUsername, $sTable));
+         return (
+             preg_match('#^'.PH7_USERNAME_PATTERN.'{'.$iMin.','.$iMax.'}$#', $sUsername) &&
+             !is_file(PH7_PATH_ROOT . $sUsername . PH7_PAGE_EXT) && !Ban::isUsername($sUsername) &&
+             !(new ExistsCoreModel)->username($sUsername, $sTable)
+         );
     }
 
     /**
@@ -207,11 +231,13 @@ class Validate
      * @param string $sPwd
      * @param integer $iMin Default 6
      * @param integer $iMax Default 60
+     *
      * @return boolean
      */
-    public function password($sPwd, $iMin = 6, $iMax = 60)
+    public function password($sPwd, $iMin = self::DEF_MIN_PASS_LENGTH, $iMax = self::DEF_MAX_PASS_LENGTH)
     {
         $iPwdLength = $this->_oStr->length($sPwd);
+
         return ($iPwdLength >= $iMin && $iPwdLength <= $iMax);
     }
 
@@ -242,16 +268,22 @@ class Validate
      * @param string $sValue The date format must be formatted like this: mm/dd/yyyy
      * @param integer $iMin Default 18
      * @param integer $iMax Default 99
+     *
      * @return boolean
      */
-    public function birthDate($sValue, $iMin = 18, $iMax = 99)
+    public function birthDate($sValue, $iMin = self::DEF_MIN_AGE, $iMax = self::DEF_MAX_AGE)
     {
-        if (empty($sValue) || !preg_match('#^\d\d/\d\d/\d\d\d\d$#', $sValue)) return false;
+        if (empty($sValue) || !preg_match(static::REGEX_DATE_FORMAT, $sValue)) {
+            return false;
+        }
 
         $aBirthDate = explode('/', $sValue); // Format is "mm/dd/yyyy"
-        if (!checkdate($aBirthDate[0], $aBirthDate[1], $aBirthDate[2])) return false;
+        if (!checkdate($aBirthDate[0], $aBirthDate[1], $aBirthDate[2])) {
+            return false;
+        }
 
-        $iUserAge = (new \PH7\Framework\Math\Measure\Year($aBirthDate[2], $aBirthDate[0], $aBirthDate[1]))->get(); // Get the current user's age
+        $iUserAge = (new YearMeasure($aBirthDate[2], $aBirthDate[0], $aBirthDate[1]))->get(); // Get the current user's age
+
         return ($iUserAge >= $iMin && $iUserAge <= $iMax);
     }
 
