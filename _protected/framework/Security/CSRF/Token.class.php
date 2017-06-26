@@ -35,6 +35,8 @@ final class Token
      * play a big role for safety because this variable can be changed by users (and the web browser).
      */
 
+    const VAR_NAME = 'pHST';
+
     /** @var Session */
     private $_oSession;
 
@@ -42,9 +44,7 @@ final class Token
     private $_sHttpReferer;
 
     /** @var null|string */
-    private$_sUserAgent;
-
-    const VAR_NAME = 'pHST';
+    private $_sUserAgent;
 
     public function __construct()
     {
