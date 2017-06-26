@@ -311,7 +311,7 @@ class UserCoreModel extends Model
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
         $sSqlEmail = $bIsMail ? ' AND email LIKE :email ' : '';
         $sSqlOnline = !empty($aParams[SearchQueryCore::ONLINE]) ? ' AND userStatus = 1 AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
-        $sSqlAvatar = !empty($aParams[SearchQueryCore::AVATAR]) ? ' AND avatar IS NOT NULL AND approvedAvatar = 1 ' : '';
+        $sSqlAvatar = !empty($aParams[SearchQueryCore::AVATAR]) ? $this->getUserWithAvatarOnlySql() : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
 
         if (empty($aParams[SearchQueryCore::ORDER])) {
@@ -984,7 +984,7 @@ class UserCoreModel extends Model
 
         $sSqlLimit = $bIsLimit ? 'LIMIT :offset, :limit' : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
-        $sSqlShowOnlyWithAvatars = $bOnlyAvatarsSet ? ' AND avatar IS NOT NULL AND approvedAvatar = 1' : '';
+        $sSqlShowOnlyWithAvatars = $bOnlyAvatarsSet ? $this->getUserWithAvatarOnlySql() : '';
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT * FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersPrivacy') . 'AS p USING(profileId)
@@ -1464,6 +1464,14 @@ class UserCoreModel extends Model
         }
 
         return $oData;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserWithAvatarOnlySql()
+    {
+        return ' AND avatar IS NOT NULL AND approvedAvatar = 1';
     }
 
     /**
