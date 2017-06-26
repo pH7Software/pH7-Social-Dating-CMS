@@ -72,13 +72,12 @@ class Contact extends Core
         $sHtmlMessage = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/contact/contact_form.tpl', $this->sFeedbackEmail);
 
         $aInfo = [
-          'from' => $this->httpRequest->post('mail'),
+          'from' => $this->sMail,
           'form_name' => $this->httpRequest->post('last_name') . ' ' . $this->httpRequest->post('first_name'),
-          'subject' => t('Message from contact form %0%', $this->httpRequest->post('subject')),
+          'subject' => t('Contact Form: %0%', $this->sSubject),
           'to' => $this->sFeedbackEmail
         ];
 
         return (new Mail)->send($aInfo, $sHtmlMessage);
     }
-
 }
