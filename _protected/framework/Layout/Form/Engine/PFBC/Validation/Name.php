@@ -2,6 +2,7 @@
 /**
  * Class made by pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Validation;
 
 class Name extends \PFBC\Validation

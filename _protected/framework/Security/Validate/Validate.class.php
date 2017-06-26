@@ -30,12 +30,13 @@ class Validate
     /**
      * Check the type of a value.
      *
-     * @static
      * @param string $sValue
      * @param string $sType Type whose value should be (case-insensitive).
      * @param boolean $bRequired Default TRUE
+     *
      * @return boolean
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the type doesn't exist.
+     *
+     * @throws PH7InvalidArgumentException If the type doesn't exist.
      */
     public static function type($sValue, $sType, $bRequired = true)
     {
@@ -85,7 +86,7 @@ class Validate
             break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Type is invalid!');
+                throw new PH7InvalidArgumentException('Invalid Type!');
         }
 
         return $bValid;
@@ -97,6 +98,7 @@ class Validate
      * @param $sValue
      * @param integer $iMin Default NULL
      * @param integer $iMax Default NULL
+     *
      * @return boolean
      */
     public function str($sValue, $iMin = null, $iMax = null)
@@ -122,6 +124,7 @@ class Validate
      * @param integer $iInt
      * @param integer $iMin Default 0
      * @param integer $iMax Default 999999999999
+     *
      * @return boolean
      */
     public function int($iInt, $iMin = 0, $iMax = self::MAX_INT_NUMBER)
@@ -135,6 +138,7 @@ class Validate
      * Validate if it's Numeric.
      *
      * @param mixed (numeric string | integer) $mNumeric
+     *
      * @return boolean
      */
     public function numeric($mNumeric)
@@ -146,6 +150,7 @@ class Validate
      * Validate if it's Digit Character.
      *
      * @param string (numeric string) $sDigit
+     *
      * @return boolean
      */
     public function digitChar($sDigit)
@@ -157,8 +162,9 @@ class Validate
      * Validate if it's Float type.
      *
      * @param float $fFloat
-     * @param mixed (float | integer) $mMin Default 0
-     * @param mixed (float | integer) $mMax Default 999999999999
+     * @param float|integer $mMin Default 0
+     * @param float|integer $mMax Default 999999999999
+     *
      * @return boolean
      */
     public function float($fFloat, $mMin = 0, $mMax = self::MAX_INT_NUMBER)
@@ -167,15 +173,16 @@ class Validate
         return (filter_var($fFloat, FILTER_VALIDATE_FLOAT, static::getFilterOption($mMin, $mMax)) !== false);
     }
 
-    /*
+    /**
      * Validate if it's Boolean type.
      *
      * @param boolean $bBool
+     *
      * @return boolean
      */
     public function bool($bBool)
     {
-        return (filter_var($bBool, FILTER_VALIDATE_BOOLEAN) !== false);
+        return filter_var($bBool, FILTER_VALIDATE_BOOLEAN) !== false;
     }
 
     /**
@@ -212,7 +219,8 @@ class Validate
      * Validate Email.
      *
      * @param string $sEmail
-     * @param boolean $bRealHost Checks whether the Email Host is valid. Default FALSE
+     * @param boolean $bRealHost Checks whether the Email Host is valid.
+     *
      * @return boolean
      */
     public function email($sEmail, $bRealHost = false)
@@ -251,14 +259,15 @@ class Validate
      * Validate Date.
      *
      * @param string $sValue
+     *
      * @return boolean
      */
     public function date($sValue)
     {
         try {
-            new \DateTime($sValue);
+            new DateTime($sValue);
             return true;
-        } catch(\Exception $oE) {
+        } catch(Exception $oE) {
             return false;
         }
     }
@@ -267,15 +276,17 @@ class Validate
      * Validate URL.
      *
      * @param string $sUrl
-     * @param boolean $bRealUrl Checks if the current URL exists. Default FALSE
+     * @param boolean $bRealUrl Checks if the current URL exists.
+     *
      * @return boolean
      */
     public function url($sUrl, $bRealUrl = false)
     {
         $sUrl = filter_var($sUrl, FILTER_SANITIZE_URL);
 
-        if (filter_var($sUrl, FILTER_VALIDATE_URL) === false || $this->_oStr->length($sUrl) >= PH7_MAX_URL_LENGTH)
+        if (filter_var($sUrl, FILTER_VALIDATE_URL) === false || $this->_oStr->length($sUrl) >= PH7_MAX_URL_LENGTH) {
             return false;
+        }
 
         if ($bRealUrl) {
             /**
@@ -286,16 +297,18 @@ class Validate
             curl_exec($rCurl);
             $iResponse = (int) curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
             curl_close($rCurl);
+
             return ($iResponse === 200 || $iResponse === 301 || $iResponse === 302);
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     /**
      * Validate IP address.
      *
      * @param string $sIp
+     *
      * @return boolean
      */
     public function ip($sIp)
@@ -307,11 +320,12 @@ class Validate
      * Validate international phone numbers in EPP format.
      *
      * @param string $sNumber
+     *
      * @return boolean
      */
     public function phone($sNumber)
     {
-        return preg_match('#^'.\PH7\Framework\Config\Config::getInstance()->values['validate']['phone.pattern'].'$#', $sNumber);
+        return preg_match('#^'. Config::getInstance()->values['validate']['phone.pattern'] . '$#', $sNumber);
     }
 
     /**
@@ -320,25 +334,30 @@ class Validate
      * @param string $sName
      * @param integer $iMin Default 2
      * @param integer $iMax Default 20
+     *
      * @return boolean
      */
-    public function name($sName, $iMin = 2, $iMax = 20)
+    public function name($sName, $iMin = self::MIN_NAME_LENGTH, $iMax = self::MAX_NAME_LENGTH)
     {
         // Check the length
-        if ($this->_oStr->length($sName) < $iMin || $this->_oStr->length($sName) > $iMax)
+        if ($this->_oStr->length($sName) < $iMin || $this->_oStr->length($sName) > $iMax) {
             return false;
+        }
 
         // Check the name pattern. Name cannot contain any of the below characters
-        if (preg_match('`(?:[\|<>"\=\]\[\}\{\\\\$£€@%~^#\(\):;\?!¿¡\*])|(?:(?:https?|ftps?)://)|(?:[0-9])`', $sName))
+        if (preg_match(static::REGEX_NOT_NAME_PATTERN, $sName)) {
             return false;
+        }
 
         return true;
     }
 
     /*
+    /**
      * Check Email with test for check if the host email is valid.
      *
      * @param string $sEmail
+     *
      * @return boolean
      */
     /*
@@ -391,13 +410,14 @@ class Validate
             return false;
         }
     }
-    */
+    //*/
 
     /**
      * Get option for some filter_var().
      *
-     * @param mixed (float | integer) $mMin Minimum range.
-     * @param mixed (float | integer) $mMax Maximum range.
+     * @param float|integer $mMin Minimum range.
+     * @param float|integer $mMax Maximum range.
+     *
      * @return array
      */
     protected static function getFilterOption($mMin, $mMax)
