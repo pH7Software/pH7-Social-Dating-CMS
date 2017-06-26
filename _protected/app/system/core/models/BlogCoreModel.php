@@ -5,13 +5,14 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Db;
 
-class BlogCoreModel extends Framework\Mvc\Model\Engine\Model
+class BlogCoreModel extends Model
 {
-
     const CACHE_GROUP = 'db/sys/mod/blog', CACHE_TIME = 999990;
 
     /**
@@ -20,6 +21,7 @@ class BlogCoreModel extends Framework\Mvc\Model\Engine\Model
      * @param integer $iOffset
      * @param integer $iLimit
      * @param string $sOrder A constant: SearchCoreModel::CREATED (default value) or SearchCoreModel::UPDATED
+     *
      * @return string
      */
     public function getPosts($iOffset, $iLimit, $sOrder = SearchCoreModel::CREATED)
@@ -49,7 +51,8 @@ class BlogCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Gets the total posts.
      *
-     * @param integer $iDay Default 0
+     * @param integer $iDay
+     *
      * @return integer
      */
     public function totalPosts($iDay = 0)
@@ -72,5 +75,4 @@ class BlogCoreModel extends Framework\Mvc\Model\Engine\Model
 
          return $iData;
     }
-
 }
