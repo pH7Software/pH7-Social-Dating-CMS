@@ -48,7 +48,7 @@ class Captcha
     private $_aBox;
 
     /** @var array */
-    private $_aMatrixBlur = [
+    private static $_aMatrixBlur = [
         [1, 1, 1],
         [1, 1, 1],
         [1, 1, 1]
@@ -125,9 +125,8 @@ class Captcha
         unset($this->_rBlack, $this->_rRed, $this->_rWhite);
 
 
-        imageconvolution($this->_rImg, $this->_aMatrixBlur, 9, 0);
-        imageconvolution($this->_rImg, $this->_aMatrixBlur, 9, 0);
-        unset($this->_aMatrixBlur);
+        imageconvolution($this->_rImg, self::$_aMatrixBlur, 9, 0);
+        imageconvolution($this->_rImg, self::$_aMatrixBlur, 9, 0);
 
         (new Browser)->noCache();
         header('Content-type: image/png');
