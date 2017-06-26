@@ -11,6 +11,7 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Url;
 
@@ -138,7 +139,6 @@ class UserDesignCoreModel extends Design
 
         foreach ($oUsers as $oUser) {
             $sFirstName = $this->oStr->upperFirst($oUser->firstName);
-            $sCity = $this->oStr->upperFirst($oUser->city);
 
             echo '<li><a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oUser->username, $sFirstName, $oUser->sex), '"><img src="', $this->getUserAvatar($oUser->username, $oUser->sex, self::PROFILE_BLOCK_AVATAR_SIZE), '" alt="',t('Meet %0% on %site_name%', $oUser->username), '" /></a></li>';
         }
@@ -167,10 +167,11 @@ class UserDesignCoreModel extends Design
      */
     public static function userStatus($iProfileId)
     {
-        $oUserModel = new \PH7\UserCoreModel;
+        $oUserModel = new UserCoreModel;
 
         echo '<div class="user_status">';
-        if ($oUserModel->isOnline($iProfileId, Framework\Mvc\Model\DbConfig::getSetting('userTimeout'))) {
+
+        if ($oUserModel->isOnline($iProfileId, DbConfig::getSetting('userTimeout'))) {
             echo '<img src="', PH7_URL_TPL, PH7_TPL_NAME, PH7_SH, PH7_IMG, 'icon/online.png" alt="', t('Online'), '" title="', t('Is Online!'), '" />';
         } else {
             $iStatus = $oUserModel->getUserStatus($iProfileId);
@@ -179,6 +180,7 @@ class UserDesignCoreModel extends Design
 
             echo '<img src="', PH7_URL_TPL, PH7_TPL_NAME, PH7_SH, PH7_IMG, 'icon/', $sImgName, '.png" alt="', $sTxt, '" title="', $sTxt, '" />';
         }
+
         echo '</div>';
 
         unset($oUserModel);
