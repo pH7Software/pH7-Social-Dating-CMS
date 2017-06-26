@@ -29,10 +29,10 @@ class Ban
     private static $_sFile;
 
     /** @var string */
-    private $_sVal;
+    private static $_sVal;
 
     /** @var boolean */
-    private$_bIsEmail = false;
+    private static $_bIsEmail = false;
 
     /**
      * Import the trait to set the class static.
