@@ -13,6 +13,7 @@ namespace PH7\Framework\Security\Ban;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Pattern\Statik;
 
 class Ban
@@ -134,7 +135,7 @@ class Ban
 
         foreach ($aBans as $sBan) {
             $sBan = trim($sBan);
-            $sWordReplace = ($bWordReplace) ? \PH7\Framework\Mvc\Model\DbConfig::getSetting('banWordReplace') : '';
+            $sWordReplace = $bWordReplace ? DbConfig::getSetting('banWordReplace') : '';
             self::$_sVal = str_ireplace($sBan, $sWordReplace, self::$_sVal);
         }
 
