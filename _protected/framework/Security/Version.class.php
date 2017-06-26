@@ -27,7 +27,7 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW" and 7.* is NaOH
      */
     const KERNEL_VERSION_NAME = 'NaOH';
-    const KERNEL_VERSION = '7.0.3';
+    const KERNEL_VERSION = '7.1.3';
     const KERNEL_BUILD = '1';
     const KERNEL_RELASE_DATE = '2017-07-03';
 

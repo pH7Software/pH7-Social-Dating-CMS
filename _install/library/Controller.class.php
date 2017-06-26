@@ -38,7 +38,7 @@ abstract class Controller implements Controllable
      * 5.* was "pCO", 6.* was "WoW" and 7.* is NaOH
      */
     const SOFTWARE_VERSION_NAME = 'NaOH';
-    const SOFTWARE_VERSION = '7.0.3';
+    const SOFTWARE_VERSION = '7.1.3';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';
