@@ -1,5 +1,7 @@
-<p>{lang 'Not yet registered on our affiliate program?'}<br />
-{lang 'Come quickly'} <a href="{{ $design->url('affiliate','signup','step1') }}">{lang 'register on affiliate platform!'}</a></p>
+<p>
+  {lang 'Not yet registered on our affiliate program?'}<br />
+  <strong><a href="{{ $design->url('affiliate','signup','step1') }}">{lang 'Join TODAY'}</a></strong> {lang 'and start making money!'}
+</p>
 
 {{ LoginForm::display() }}
 
