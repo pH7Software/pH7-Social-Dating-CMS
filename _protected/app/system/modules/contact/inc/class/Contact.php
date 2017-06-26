@@ -5,26 +5,43 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Contact / Inc / Class
  */
+
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig, PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mail\Mail;
 
 class Contact extends Core
 {
+    /** @var string */
+    private $sMail;
 
-  private $sMail, $sFeedbackEmail, $sPhone, $sUrl;
+    /** @var string */
+    private $sSubject;
+
+    /** @var string */
+    private $sFeedbackEmail;
+
+    /** @var string */
+    private $sPhone;
+
+    /** @var string */
+    private $sUrl;
 
     /**
      * Initialize the properties of the class, then send the feedback to the admin.
      *
      * @return integer Number of recipients who were accepted for delivery.
+     *
+     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     public function sendMessage()
     {
         $this->sFeedbackEmail = DbConfig::getSetting('feedbackEmail');
         $this->sMail = $this->httpRequest->post('mail');
-        $this->sPhone = ($this->httpRequest->postExists('phone')) ? $this->httpRequest->post('phone') : t('No Phone');
-        $this->sUrl = ($this->httpRequest->postExists('website')) ? $this->httpRequest->post('website') : t('No Site');
+        $this->sSubject = $this->httpRequest->post('subject');
+        $this->sPhone = $this->httpRequest->postExists('phone') ? $this->httpRequest->post('phone') : t('No Phone');
+        $this->sUrl = $this->httpRequest->postExists('website') ? $this->httpRequest->post('website') : t('No Site');
 
         return $this->goMail();
     }
@@ -33,6 +50,8 @@ class Contact extends Core
      * Send the email.
      *
      * @return integer Number of recipients who were accepted for delivery.
+     *
+     * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
     protected function goMail()
     {
@@ -41,7 +60,7 @@ class Contact extends Core
         $this->view->email = t('Email: %0%', '<a href="mailto:' . $this->sMail . '">' . $this->sMail . '</a>');
         $this->view->phone = t('Phone Number: %0%', '<a href="tel:' . $this->sPhone . '">' . $this->sPhone . '</a>');
         $this->view->website = t('Website: %0%', '<a href="' . $this->sUrl . '" target="_blank">' . $this->sUrl . '</a>');
-        $this->view->subject = t('Subject: %0%', $this->httpRequest->post('subject'));
+        $this->view->subject = t('Subject: %0%', $this->sSubject);
         $this->view->message = t('Message: %0%', nl2br($this->httpRequest->post('message')));
 
         $this->view->footer_title = t('User Information');

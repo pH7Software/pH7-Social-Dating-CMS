@@ -7,6 +7,7 @@
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  *
  ***************************************************************************/
+
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Tpl;
 
 class Exception extends \PH7\Framework\Layout\Exception {}
