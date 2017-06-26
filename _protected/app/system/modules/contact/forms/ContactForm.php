@@ -40,9 +40,9 @@ class ContactForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
         $oForm->addElement(new \PFBC\Element\Url(t('Your Website:'), 'website', array('id'=>'url', 'onblur'=>'CValid(this.value, this.id)', 'description'=>t("If you have a website (e.g., your company's website)."))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error url"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Subject:'), 'subject', array('id'=>'str_subject', 'onblur'=>'CValid(this.value, this.id,4,25)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Str(4,25))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your Subject:'), 'subject', array('id'=>'str_subject', 'onblur'=>'CValid(this.value, this.id,4,45)', 'required'=> 1, 'validation'=>new \PFBC\Validation\Str(4,45))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_subject"></span>'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Your Message:'), 'message', array('id'=>'str_message', 'onblur'=>'CValid(this.value, this.id,10,1500)', 'required'=>1, 'validation'=>new \PFBC\Validation\Str(10,1500))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Your Message:'), 'message', array('id'=>'str_message', 'onblur'=>'CValid(this.value, this.id,10,2000)', 'required'=>1, 'validation'=>new \PFBC\Validation\Str(10,2000))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error str_message"></span>'));
         $oForm->addElement(new \PFBC\Element\CCaptcha(t('Captcha'), 'captcha', array('description' => t('Enter the below code:'), 'id'=>'ccaptcha', 'onkeyup'=>'CValid(this.value, this.id)')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
