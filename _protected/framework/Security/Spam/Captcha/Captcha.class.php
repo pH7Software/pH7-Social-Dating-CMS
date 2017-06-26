@@ -14,30 +14,60 @@ namespace PH7\Framework\Security\Spam\Captcha;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Navigation\Browser,
-PH7\Framework\Session\Session,
-PH7\Framework\Util\Various;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Util\Various;
 
 class Captcha
 {
+    /** @var Session */
+    private $_oSession;
 
-    private
-    $_oSession,
-    $_sStr,
-    $_sFont,
-    $_iStringWidth,
-    $_iHeight,
-    $_iWidth,
-    $_iSize = 36,
-    $_iMargin = 25,
-    $_aBox,
-    $_aMatrixBlur = array(array(1, 1, 1), array(1, 1, 1), array(1, 1, 1)),
-    $_aColor = array(),
-    $_rImg,
-    $_rBlack,
-    $_rRed,
-    $_rWhite;
+    /** @var Str */
+    private $_sStr;
+
+    /** @var string */
+    private $_sFont;
+
+    /** @var int */
+    private $_iStringWidth;
+
+    /** @var int */
+    private $_iHeight;
+
+    /** @var int */
+    private $_iWidth;
+
+    /** @var int */
+    private $_iSize = 36;
+
+    /** @var int */
+    private $_iMargin = 25;
+
+    /** @var array */
+    private $_aBox;
+
+    /** @var array */
+    private $_aMatrixBlur = [
+        [1, 1, 1],
+        [1, 1, 1],
+        [1, 1, 1]
+    ];
+
+    /** @var array */
+    private $_aColor = [];
+
+    /** @var resource */
+    private $_rImg;
+
+    /** @var resource */
+    private $_rBlack;
+
+    /** @var resource */
+    private $_rRed;
+
+    /** @var resource */
+    private $_rWhite;
 
     public function __construct()
     {
@@ -47,15 +77,17 @@ class Captcha
     /**
      * Show the captcha image.
      *
-     * @param integer $iRandom
+     * @param int $iRandom
+     *
      * @return void
      */
     public function show($iRandom = null)
     {
-        if (!empty($iRandom))
+        if (!empty($iRandom)) {
             $this->_sStr = Various::genRnd($iRandom, 5);
-        else
+        } else {
             $this->_sStr = Various::genRnd('pH7_Pierre-Henry_Soria_Sanz_González_captcha', 5);
+        }
 
         $this->_oSession->set('rand_code', $this->_sStr);
 
@@ -71,13 +103,14 @@ class Captcha
 
         //$this->_rImg = imagecreatefrompng($sBackground);
         $this->_rImg = imagecreate($this->_iWidth + $this->_iMargin, $this->_iHeight + $this->_iMargin);
-        $this->_aColor = array(
-                          imagecolorallocate($this->_rImg, 0x99, 0x00, 0x66),
-                          imagecolorallocate($this->_rImg, 0xCC, 0x00, 0x00),
-                          imagecolorallocate($this->_rImg, 0x00, 0x00, 0xCC),
-                          imagecolorallocate($this->_rImg, 0x00, 0x00, 0xCC),
-                          imagecolorallocate($this->_rImg, 0xBB, 0x88, 0x77)
-                        );
+        $this->_aColor = [
+            imagecolorallocate($this->_rImg, 0x99, 0x00, 0x66),
+            imagecolorallocate($this->_rImg, 0xCC, 0x00, 0x00),
+            imagecolorallocate($this->_rImg, 0x00, 0x00, 0xCC),
+            imagecolorallocate($this->_rImg, 0x00, 0x00, 0xCC),
+            imagecolorallocate($this->_rImg, 0xBB, 0x88, 0x77)
+        ];
+
         $this->_rBlack = imagecolorallocate($this->_rImg, 0, 0, 0);
         $this->_rRed = imagecolorallocate($this->_rImg, 200, 100, 90);
         $this->_rWhite = imagecolorallocate($this->_rImg, 255, 255, 255);
@@ -104,14 +137,19 @@ class Captcha
 
     /**
      * @param string $sCode The random code.
-     * @return boolean
+     *
+     * @return bool
      */
     public function check($sCode)
     {
-        if ($sCode === null)
+        if ($sCode === null) {
             return false;
-        if ($sCode === $this->_oSession->get('rand_code'))
+        }
+
+        if ($sCode === $this->_oSession->get('rand_code')) {
             return true;
+        }
+
         return false;
     }
 
@@ -131,21 +169,28 @@ class Captcha
     }
 
     /**
-     * @access private
      * @return void
      */
     private function _mixing()
     {
-        for ($i = 0, $iLength = strlen($this->_sStr); $i < $iLength; ++$i)
-        {
+        for ($i = 0, $iLength = strlen($this->_sStr); $i < $iLength; ++$i) {
             $sText = $this->_sStr[$i]; // A string can be seen as an array
             $iAngle = mt_rand(-70, 70);
-            imagettftext($this->_rImg, mt_rand($this->_iSize / 2, $this->_iSize), $iAngle, ($i * $this->_iStringWidth) + $this->_iMargin, $this->_iHeight + mt_rand(1, $this->_iMargin / 2), $this->_aColor[array_rand($this->_aColor)], $this->_sFont, $sText);
+
+            imagettftext(
+                $this->_rImg,
+                mt_rand($this->_iSize / 2, $this->_iSize),
+                $iAngle,
+                ($i * $this->_iStringWidth) + $this->_iMargin,
+                $this->_iHeight + mt_rand(1, $this->_iMargin / 2),
+                $this->_aColor[array_rand($this->_aColor)],
+                $this->_sFont,
+                $sText
+            );
         }
     }
 
     /**
-     * @access private
      * @return string The font path of captcha.
      */
     private function _getFont()
@@ -154,21 +199,4 @@ class Captcha
         //return PH7_PATH_DATA . '/font/' . mt_rand(1,$count) . '.ttf';
         return PH7_PATH_DATA . '/font/4.ttf';
     }
-
-    public function __destruct()
-    {
-        unset(
-            $this->_oSession,
-            $this->_sStr,
-            $this->_sFont,
-            $this->_iStringWidth,
-            $this->_iHeight,
-            $this->_iWidth,
-            $this->_iSize,
-            $this->_iMargin,
-            $this->_aColor,
-            $this->_rImg
-        );
-    }
-
 }

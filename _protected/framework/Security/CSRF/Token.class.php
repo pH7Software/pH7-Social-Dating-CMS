@@ -11,15 +11,18 @@
  */
 
 namespace PH7\Framework\Security\CSRF;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Session\Session,
-PH7\Framework\Navigation\Browser,
-PH7\Framework\Util\Various,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Ip\Ip;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Util\Various;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Ip\Ip;
+use PH7\UserCore;
+use PH7\AdminCore;
+use PH7\AffiliateCore;
 
 /**
  * This class provides functions of numbers against the XSS (Cross-site scripting) vulnerability.
@@ -27,13 +30,19 @@ PH7\Framework\Ip\Ip;
  */
 final class Token
 {
-
     /**
-     * Note: We have commented on "security_token_http_referer_*" because it causes bugs and it doesn't
+     * @internal We have commented on "security_token_http_referer_*" because it causes bugs and it doesn't
      * play a big role for safety because this variable can be changed by users (and the web browser).
      */
 
-    private $_oSession, $_sHttpReferer, $_sUserAgent;
+    /** @var Session */
+    private $_oSession;
+
+    /** @var null|string */
+    private $_sHttpReferer;
+
+    /** @var null|string */
+    private$_sUserAgent;
 
     const VAR_NAME = 'pHST';
 
@@ -51,17 +60,15 @@ final class Token
      * Generate a random token.
      *
      * @param string $sName
+     *
      * @return string The Token generated random.
      */
     public function generate($sName)
     {
         // If the token is still valid, it returns the correct token
-        if ($this->_oSession->exists('security_token_' . $sName))
-        {
+        if ($this->_oSession->exists('security_token_' . $sName)) {
             return $this->_oSession->get('security_token_' . $sName);
-        }
-        else
-        {
+        } else {
             $sToken = Various::genRnd($sName);
 
             $aSessionData = [
@@ -146,32 +153,23 @@ final class Token
     /**
      * Gets The Current Session Token.
      *
-     * @access protected
-     * @return mixed (string | boolean) The "token" if a user is logged or "true" if no user is logged.
+     * @return string|boolean The "token" if a user is logged or "true" if no user is logged.
      */
     protected function currentSess()
     {
-        if (\PH7\UserCore::auth())
+        if (UserCore::auth())
             $sToken = $this->_oSession->get('member_token');
-        elseif (\PH7\AdminCore::auth())
+        elseif (AdminCore::auth())
             $sToken = $this->_oSession->get('admin_token');
-        elseif (\PH7\AffiliateCore::auth())
+        elseif (AffiliateCore::auth())
             $sToken = $this->_oSession->get('affiliate_token');
         else $sToken = true; // If nobody is logged on, we did not need to do this test, so it returns true
 
         return $sToken;
     }
 
-    public function __destruct()
-    {
-        unset($this->_oSession, $this->_sHttpReferer, $this->_sUserAgent);
-    }
-
     /**
      * Clone is set to private to stop cloning.
-     *
-     * @access private
      */
     private function __clone() {}
-
 }

@@ -12,9 +12,9 @@ namespace PH7\Framework\Security\Moderation;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\Import,
-PH7\Framework\Pattern\Statik;
+use PH7\Framework\File\Import;
+use PH7\Framework\Pattern\Statik;
+use Image_FleshSkinQuantifier;
 
 class Filter
 {
@@ -25,13 +25,14 @@ class Filter
 
     /**
      * @param string $sPath File path (e.g. $_FILES['file']['tmp_name'] ).
+     *
      * @return bool TRUE if it is a nude photo, FALSE otherwise.
      */
     public static function isNudity($sPath)
     {
         self::importLibrary();
 
-        $oNudityFilter = new \Image_FleshSkinQuantifier($sPath);
+        $oNudityFilter = new Image_FleshSkinQuantifier($sPath);
         return $oNudityFilter->isPorn();
     }
 

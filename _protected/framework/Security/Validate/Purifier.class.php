@@ -9,6 +9,7 @@
  */
 
 namespace PH7\Framework\Security\Validate;
+
 defined('PH7') or exit('Restricted access');
 
 /*
@@ -17,16 +18,15 @@ defined('PH7') or exit('Restricted access');
  */
 class Purifer extends Xss
 {
-
     /**
      * Clean a string against XSS vulnerabilities.
      *
-     * @param mixed (string | array) $sValue Value to clean.
-     * @return mixed (string | array) Value cleaned.
+     * @param string|array $mStr Value to clean.
+     *
+     * @return string|array Value cleaned.
      */
     public function xssClean($mStr)
     {
-        return (is_array($mStr)) ? $this->arrayClean($mStr) : $this->clean($mStr);
+        return is_array($mStr) ? $this->arrayClean($mStr) : $this->clean($mStr);
     }
-
 }

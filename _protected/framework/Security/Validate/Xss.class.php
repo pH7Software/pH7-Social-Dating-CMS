@@ -9,15 +9,16 @@
  */
 
 namespace PH7\Framework\Security\Validate;
+
 defined('PH7') or exit('Restricted access');
 
 abstract class Xss
 {
-
     /**
      * XSS Clean.
      *
      * @param string $sValue Value to purify.
+     *
      * @return string Value purified.
      */
     protected function clean($sValue)
@@ -29,14 +30,15 @@ abstract class Xss
      * Purify an array of any dimension.
      *
      * @param array $aValues Values to purify.
+     *
      * @return array Values purified.
      */
     protected function arrayClean(array $aValues)
     {
-         foreach ($aValues as $sKey => $mVal)
-             $aValues[$sKey] = (is_array($mVal)) ? $this->arrayClean($mVal) : $this->clean($mVal);
+         foreach ($aValues as $sKey => $mVal) {
+             $aValues[$sKey] = is_array($mVal) ? $this->arrayClean($mVal) : $this->clean($mVal);
+         }
 
          return $aValues;
     }
-
 }

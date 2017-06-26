@@ -5,9 +5,12 @@
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Asset / File
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Security\Spam\Captcha\Captcha, PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Security\Spam\Captcha\Captcha;
+use PH7\Framework\Mvc\Request\Http;
 
 (new Captcha)->show( (new Http)->getExists('r') );
