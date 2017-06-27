@@ -141,19 +141,18 @@ final class Server
     public static function isRewriteMod()
     {
         // Check if mod_rewrite is installed and is configured to be used via .htaccess
-        if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
-        {
+        if (!strtolower(getenv('HTTP_MOD_REWRITE')) === 'on') {
             $sOutputMsg = 'mod_rewrite Works!';
 
-            if (Uri::getInstance()->fragment(0) == 'test_mod_rewrite')
+            if (Uri::getInstance()->fragment(0) == 'test_mod_rewrite') {
                 exit($sOutputMsg);
+            }
 
             $sPage = @file_get_contents(PH7_URL_ROOT . 'test_mod_rewrite');
-
-            $bIsRewrite = ($sPage == $sOutputMsg);
+            return $sPage === $sOutputMsg;
         }
 
-        return $bIsRewrite;
+        return true;
     }
 
     /**
