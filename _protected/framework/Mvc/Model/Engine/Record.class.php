@@ -11,14 +11,20 @@
  */
 
 namespace PH7\Framework\Mvc\Model\Engine;
+
 defined('PH7') or exit('Restricted access');
+
+use ArrayIterator;
+use CachingIterator;
+use PH7\Framework\Pattern\Singleton;
+use PDO;
+use stdClass;
 
 /**
  * @class Singleton Class
  */
 class Record
 {
-
     /**
      * @var array $_aErrors
      */
@@ -37,10 +43,10 @@ class Record
     /**
      * Import the Singleton trait.
      */
-    use \PH7\Framework\Pattern\Singleton;
+    use Singleton;
 
     /**
-     * We do not put a "__construct" and "__clone" "private" because it is already included in the \PH7\Framework\Pattern\Statik trait that is included in the \PH7\Framework\Pattern\Singleton trait.
+     * We do not put a "__construct" and "__clone" "private" because it is already included in the \PH7\Framework\Pattern\Statik trait that is included in the Singleton trait.
      */
 
     /**
@@ -48,7 +54,8 @@ class Record
      *
      * @param string $sKey the array key
      * @param string $sValue The value
-     * @return object this
+     *
+     * @return self
      */
     public function addValue($sKey, $sValue)
     {
@@ -89,12 +96,12 @@ class Record
      * @param string $sTable The table name
      * @param string $sField
      * @param string $sId
+     *
      * @return boolean Returns TRUE on success or FALSE on failure.
      */
     public function delete($sTable, $sField, $sId)
     {
-        try
-        {
+        try {
             $oDb = Db::getInstance();
 
             // We start the transaction.
@@ -109,10 +116,9 @@ class Record
             $oDb->commit();
 
             Db::free($rStmt);
+
             return $bStatus;
-        }
-        catch (Exception $oE)
-        {
+        } catch (Exception $oE) {
             $this->_aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
@@ -160,13 +166,12 @@ class Record
 
             Db::free($rStmt);
             return $oDb->lastInsertId();
-        }
-        catch (Exception $oE)
-        {
+        } catch (Exception $oE) {
             $this->_aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
+
             return false;
         }
     }
@@ -179,12 +184,12 @@ class Record
      * @param string $sValue The new value
      * @param string $sPk The primary key. Default: NULL
      * @param string $sId The id. Default: NULL
-     * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
+     *
+     * @return integer|boolean Returns the number of rows on success or FALSE on failure.
      */
     public function update($sTable, $sField, $sValue, $sPk = null, $sId = null)
     {
-        try
-        {
+        try {
             $oDb = Db::getInstance();
 
             // We start the transaction.
@@ -194,12 +199,15 @@ class Record
 
             $this->_sSql = 'UPDATE' . Db::prefix($sTable) . "SET $sField = :value";
 
-            if ($bIsWhere)
+            if ($bIsWhere) {
                 $this->_sSql .= " WHERE $sPk = :id";
+            }
 
             $rStmt = $oDb->prepare($this->_sSql);
             $rStmt->bindParam(':value', $sValue);
-            if ($bIsWhere) $rStmt->bindParam(':id', $sId);
+            if ($bIsWhere) {
+                $rStmt->bindParam(':id', $sId);
+            }
             $rStmt->execute();
             $iRow = $rStmt->rowCount();
 
@@ -207,14 +215,14 @@ class Record
             $oDb->commit();
 
             Db::free($rStmt);
+
             return $iRow;
-        }
-        catch (Exception $oE)
-        {
+        } catch (Exception $oE) {
             $this->_aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
+
             return false;
         }
     }
@@ -223,13 +231,13 @@ class Record
      * SQL Query.
      *
      * @param string $sSql
-     * @return mixed (object | boolean) Returns the object on success or FALSE on failure.
+     *
+     * @return stdClass|boolean Returns stdClass on success or FALSE on failure.
      *
      */
     public function query($sSql)
     {
-        try
-        {
+        try {
             $oDb = Db::getInstance();
 
             // We start the transaction.
@@ -237,16 +245,14 @@ class Record
 
             $rStmt = $oDb->prepare($sSql);
             $rStmt->execute();
-            $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $oRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
 
             // If all goes well, we commit the transaction.
             $oDb->commit();
 
             Db::free($rStmt);
             return $oRow;
-        }
-        catch (Exception $oE)
-        {
+        } catch (Exception $oE) {
             $this->_aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
@@ -258,7 +264,7 @@ class Record
     /**
      * Execute a Record query.
      *
-     * @return mixed (object | boolean) Returns a PDOStatement object, or FALSE on failure.
+     * @return stdClass|boolean Returns a PDOStatement object, or FALSE on failure.
      */
     public function execute()
     {
@@ -282,6 +288,7 @@ class Record
      * Escape.
      *
      * @param string $sValue
+     *
      * @return string
      */
     public function escape($sValue)
@@ -292,54 +299,60 @@ class Record
     /**
      * Select "All In One" in a SQL's query.
      *
-     * @param mixed (array | string) $mTable
+     * @param array|string $mTable
      * @param string $sField Default: NULL
      * @param string $sId Default: NULL
-     * @param mixed (array | string) $mWhat Default: '*'
+     * @param array|string $mWhat Default: '*'
      * @param array $aJoin Default: NULL
      * @param string $sOptions Default: NULL
-     * @return mixed (object | boolean) Object on success or throw PDOException on failure.
+     *
+     * @return stdClass|boolean Returns stdClass on success or throw PDOException on failure.
      */
     public function getAllInOne($mTable, $sField = null, $sId = null, $mWhat = '*', array $aJoin = null, $sOptions = null)
     {
         try
         {
-            if (is_array($mTable))
-            {
+            if (is_array($mTable)) {
                 $sTable = '';
-                foreach ($mTable as $sTable)
+                foreach ($mTable as $sTable) {
                     $sTable .= Db::prefix($sTable, true) . ',';
+                }
 
                 $sTable = rtrim($sTable, ',');
-            }
-            else
-            {
+            } else {
                 $sTable = Db::prefix($mTable, true);
             }
 
-            if (is_array($mWhat))
+            if (is_array($mWhat)) {
                 $sWhat = (count($mWhat)) ? implode(',', $mWhat) : '*';
-            else
+            } else {
                 $sWhat = $mWhat;
+            }
 
             $bIsWhere = isset($sField, $sId);
 
             $this->_sSql = "SELECT $sWhat FROM " . $sTable;
 
-            if (!empty($aJoin) && count($aJoin) == 2)
+            if (!empty($aJoin) && count($aJoin) == 2) {
                 $this->_sSql .= " LEFT JOIN $aJoin[0] ON $sTable.$aJoin[1] = $aJoin[0].$aJoin[1]";
+            }
 
-            if ($bIsWhere)
+            if ($bIsWhere) {
                 $this->_sSql .= " WHERE $sField = :id";
+            }
 
-            if (!empty($sOptions))
+            if (!empty($sOptions)) {
                 $this->_sSql .= " $sOptions";
+            }
 
             $rStmt = Db::getInstance()->prepare($this->_sSql);
-            if ($bIsWhere) $rStmt->bindParam(':id', $sId);
+            if ($bIsWhere) {
+                $rStmt->bindParam(':id', $sId);
+            }
             $rStmt->execute();
-            $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $oRow = $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
+
             return $oRow;
         }
         catch (Exception $oE)
@@ -356,34 +369,34 @@ class Record
      * @param string $sId Default: NULL
      * @param string $sWhat Default: '*'
      * @param string $sOptions Default: NULL
-     * @return mixed (string | object | boolean) SQL query on success (returns strong or object value) or throw PDOException on failure (returns a false boolean).
+     *
+     * @return string|stdClass|boolean SQL query on success (returns string or stdClass values) or throw PDOException on failure (returns a false boolean).
      *
      */
     public function getOne($sTable, $sField = null, $sId = null, $sWhat = '*', $sOptions = null)
     {
-        try
-        {
+        try {
             $bIsWhere = isset($sField, $sId);
 
             $this->_sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
 
-            if ($bIsWhere)
+            if ($bIsWhere) {
                 $this->_sSql .= "WHERE $sField = :id ";
+            }
 
-            if (!empty($sOptions))
+            if (!empty($sOptions)) {
                 $this->_sSql .= " $sOptions ";
+            }
 
             $this->_sSql .= 'LIMIT 0,1'; // Get only one column
 
             $rStmt = Db::getInstance()->prepare($this->_sSql);
             if ($bIsWhere) $rStmt->bindParam(':id', $sId);
             $rStmt->execute();
-            $mRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $mRow = $rStmt->fetch(PDO::FETCH_OBJ);
             Db::free($rStmt);
             return $mRow;
-        }
-        catch (Exception $oE)
-        {
+        } catch (Exception $oE) {
             $this->_aErrors[] = $oE->getMessage();
         }
     }
@@ -418,7 +431,8 @@ class Record
      *
      * @param string $sTable
      * @param string $sWhat Default: '*'
-     * @return object this
+     *
+     * @return self
      *
      */
     public function select($sTable, $sWhat = '*')
@@ -430,11 +444,12 @@ class Record
     /**
      * Find in SQL column(s) (with where clause).
      *
-     * @see \PH7\Framework\Mvc\Model\Engine\Record::where()
+     * @see self::where()
      *
      * @param string $sField
      * @param string $sValue
-     * @return object this
+     *
+     * @return self
      *
      */
     public function find($sField, $sValue)
@@ -446,11 +461,12 @@ class Record
     /**
      * AND for Find.
      *
-     * @see \PH7\Framework\Mvc\Model\Engine\Record::andClause()
+     * @see self::andClause()
      *
      * @param string $sField
      * @param string $sValue
-     * @return object this
+     *
+     * @return self
      *
      */
     public function andFind($sField, $sValue)
@@ -462,11 +478,12 @@ class Record
     /**
      * OR for Find.
      *
-     * @see \PH7\Framework\Mvc\Model\Engine\Record::orClause()
+     * @see self::orClause()
      *
      * @param string $sField
      * @param string $sValue
-     * @return object this
+     *
+     * @return self
      *
      */
     public function orFind($sField, $sValue)
@@ -478,11 +495,12 @@ class Record
     /**
      * HAVING for find.
      *
-     * @see \PH7\Framework\Mvc\Model\Engine\Record::having()
+     * @see self::having()
      *
      * @param string $sField
      * @param string $sValue
-     * @return object this
+     *
+     * @return self
      */
     public function havingFind($sField, $sValue)
     {
@@ -496,7 +514,8 @@ class Record
      * @param string $sField
      * @param string $sValue
      * @param string $sOperator Default: '='
-     * @return object this
+     *
+     * @return self
      *
      */
     public function where($sField, $sValue, $sOperator = '=')
@@ -511,7 +530,8 @@ class Record
      * @param string $sField
      * @param string $sValue
      * @param string $sOperator Default: '='
-     * @return object this
+     *
+     * @return self
      */
     public function andClause($sField, $sValue, $sOperator = '=')
     {
@@ -525,7 +545,8 @@ class Record
      * @param string $sField
      * @param string $sValue
      * @param string $sOperator Default: '='
-     * @return object this
+     *
+     * @return self
      */
     public function orClause($sField, $sValue, $sOperator = '=')
     {
@@ -538,7 +559,8 @@ class Record
      *
      * @param integer $iOffset
      * @param integer $iLimit
-     * @return object this
+     *
+     * @return self
      */
     public function limit($iOffset, $iLimit)
     {
@@ -551,7 +573,8 @@ class Record
      *
      * @param string $sField
      * @param string $sOrder Default: 'ASC'
-     * @return object this
+     *
+     * @return self
      */
     public function orderBy($sField, $sOrder = Db::ASC)
     {
@@ -563,7 +586,8 @@ class Record
      * Add a GROUP BY clause.
      *
      * @param string $sGroup
-     * @return object this
+     *
+     * @return self
      */
     public function groupBy($sGroup)
     {
@@ -577,7 +601,8 @@ class Record
      * @param string $sField
      * @param string $sValue
      * @param string $sOperator Default: '='
-     * @return object this
+     *
+     * @return self
      */
     public function having($sField, $sValue, $sOperator = '=')
     {
@@ -590,7 +615,8 @@ class Record
      *
      * @param string $sClsName Clause operator.
      * @param string $sVal Value.
-     * @return object this
+     *
+     * @return self
      */
     protected function clause($sClsName, $sVal)
     {
@@ -605,13 +631,14 @@ class Record
      * @param string $sField Field
      * @param string $sVal Value.
      * @param string $sOpt Operator.
-     * @return object this
+     *
+     * @return self
      */
     protected function optClause($sClsName, $sField, $sVal, $sOpt)
     {
         $sVal = $this->escape($sVal);
         $this->_sSql .= " $sClsName $sField $sOpt $sVal";
+
         return $this;
     }
-
 }

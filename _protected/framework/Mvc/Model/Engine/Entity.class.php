@@ -10,11 +10,11 @@
  */
 
 namespace PH7\Framework\Mvc\Model\Engine;
+
 defined('PH7') or exit('Restricted access');
 
 abstract class Entity
 {
-
     /**
      * @var integer
      */
@@ -36,6 +36,8 @@ abstract class Entity
      * Set the primary key.
      *
      * @param integer $iId
+     *
+     * @return void
      */
     public function setKeyId($iId)
     {
@@ -45,14 +47,14 @@ abstract class Entity
     /**
      * Check if the $_iId attribute is not empty, otherwise we set the last insert ID.
      *
-     * @see \PH7\Framework\Mvc\Model\Engine\Db::lastInsertId()
+     * @see Db::lastInsertId()
      *
      * @return void
      */
     protected function checkKeyId()
     {
-        if (empty($this->_iId))
-            $this->setKeyId( Db::getInstance()->lastInsertId() );
+        if (empty($this->_iId)) {
+            $this->setKeyId(Db::getInstance()->lastInsertId());
+        }
     }
-
 }

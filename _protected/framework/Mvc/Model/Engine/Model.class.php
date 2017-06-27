@@ -69,9 +69,4 @@ abstract class Model extends Entity
     {
         $this->_sContents = str_replace('[DB_PREFIX]', Db::prefix(), $this->_sContents);
     }
-
-    public function __destruct()
-    {
-        unset($this->orm, $this->cache);
-    }
 }
