@@ -126,32 +126,32 @@ class Record
      *
      * @param string $sTable
      * @param array $aValues
-     * @return mixed (integer | boolean) Returns the last Insert ID on success or FALSE on failure.
+     *
+     * @return integer|boolean Returns the last Insert ID on success or FALSE on failure.
      */
     public function insert($sTable, array $aValues)
     {
-        $aValues = is_null($aValues) ? $this->_aValues : $aValues;
+        $aValues = ($aValues === null) ? $this->_aValues : $aValues;
         $this->_sSql = 'INSERT INTO' . Db::prefix($sTable) . 'SET ';
 
-        $oCachingIterator = new \CachingIterator(new \ArrayIterator($aValues));
+        $oCachingIterator = new CachingIterator(new ArrayIterator($aValues));
 
-        try
-        {
+        try {
             $oDb = Db::getInstance();
 
             // We start the transaction.
             $oDb->beginTransaction();
 
-            foreach ($oCachingIterator as $sField => $sValue)
-            {
+            foreach ($oCachingIterator as $sField => $sValue) {
                 $this->_sSql .= $sField . ' = :' . $sField;
                 $this->_sSql .= $oCachingIterator->hasNext() ? ',' : '';
             }
 
             $rStmt = $oDb->prepare($this->_sSql);
 
-            foreach ($aValues as $sField => $sValue)
+            foreach ($aValues as $sField => $sValue) {
                 $rStmt->bindParam(':' . $sField, $sValue);
+            }
 
             $rStmt->execute($aValues);
 
@@ -394,17 +394,17 @@ class Record
      *
      * @param string $sTable
      * @param array $aValues
-     * @return object this
+     *
+     * @return self
      */
     public function updates($sTable, array $aValues)
     {
-        $aValues = is_null($aValues) ? $this->_aValues : $aValues;
+        $aValues = ($aValues === null) ? $this->_aValues : $aValues;
         $this->_sSql = 'UPDATE' . Db::prefix($sTable) . 'SET ';
 
-        $oCachingIterator = new \CachingIterator(new \ArrayIterator($aValues));
+        $oCachingIterator = new CachingIterator(new ArrayIterator($aValues));
 
-        foreach ($oCachingIterator as $sField => $sValue)
-        {
+        foreach ($oCachingIterator as $sField => $sValue) {
             $this->_sSql .= $sField . ' = ' . $this->escape($sValue);
             $this->_sSql .= $oCachingIterator->hasNext() ? ',' : '';
         }

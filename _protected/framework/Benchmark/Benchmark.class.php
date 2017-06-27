@@ -119,7 +119,7 @@ class Benchmark
     {
         $mod = 1024;
 
-        if (is_null($format)) {
+        if ($format === null) {
             $format = '%.2f%s';
         }
 
@@ -147,7 +147,7 @@ class Benchmark
      */
     public static function readableElapsedTime($microtime, $format = null, $round = 3)
     {
-        if (is_null($format)) {
+        if ($format === null) {
             $format = '%.3f%s';
         }
 

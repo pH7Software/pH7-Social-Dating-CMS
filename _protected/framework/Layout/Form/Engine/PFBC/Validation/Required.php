@@ -14,14 +14,15 @@ class Required extends \PFBC\Validation
     }
 
     /**
-     * @param mixed (array or string) $mValue
+     * @param array|string $mValue
+     *
      * @return boolean
      */
     public function isValid($mValue)
     {
         $bValid = false; // Default value
 
-        if (!is_null($mValue)) {
+        if ($mValue !== null) {
             if (is_array($mValue)) {
                 foreach ($mValue as $sItem) {
                     if (!$bValid = $this->isValid($sItem)) {
