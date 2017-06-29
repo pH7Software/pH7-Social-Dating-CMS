@@ -41,10 +41,11 @@ class ConfigFileCoreFormProcess extends Form
         $this->file->chmod($sIniFile, 0644);
 
         $sRedirectUrl = $this->httpRequest->previousPage();
-        if ($this->file->save($sIniFile, $sData))
-            Header::redirect($sRedirectUrl, ('Configuration updated!'));
-        else
-            Header::redirect($sRedirectUrl, t('The config file could not be saved. Please check your file permissions (must be in  write mode)'), 'error');
+        if ($this->file->save($sIniFile, $sData)) {
+            Header::redirect($sRedirectUrl, t('Configuration updated!'));
+        } else {
+            Header::redirect($sRedirectUrl, t('The config file could not be saved. Please check your file permissions (must be in write mode)'), 'error');
+        }
 
         // Check again and correct the file permission if necessary.
         $this->file->chmod($sIniFile, 0644);

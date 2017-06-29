@@ -10,14 +10,14 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\Engine as D,
-PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Mvc\Model\Engine as D;
+use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Router\Uri;
 
 class ToolController extends Controller
 {
-
+    /** @var  string */
     private $sTitle;
 
     public function index()
@@ -32,7 +32,7 @@ class ToolController extends Controller
     public function cache()
     {
         // Adding a CSRF token for the remove ajax cache.
-        $this->view->csrf_token = (new Framework\Security\CSRF\Token)->generate('cache');
+        $this->view->csrf_token = (new Token)->generate('cache');
 
         // Adding the common CSS and JS files for the ajax cache and the chart.
         $this->design->addCss(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_CSS, 'general.css');
@@ -103,7 +103,7 @@ class ToolController extends Controller
         $this->view->aDumpList = $aDumpList;
 
 
-        $oSecurityToken = new Framework\Security\CSRF\Token;
+        $oSecurityToken = new Token;
 
         if ($this->httpRequest->postExists('backup'))
         {
@@ -268,7 +268,9 @@ class ToolController extends Controller
      */
      private function _checkPost()
      {
-         if (!$this->_isPost()) exit( Form::wrongRequestMethodMsg('POST') );
+         if (!$this->_isPost()) {
+             exit(Form::wrongRequestMethodMsg('POST'));
+         }
      }
 
     /**
@@ -278,7 +280,6 @@ class ToolController extends Controller
      */
     private function _isPost()
     {
-        return ($this->httpRequest->postExists('is'));
+        return $this->httpRequest->postExists('is');
     }
-
 }

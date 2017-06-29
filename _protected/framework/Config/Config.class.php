@@ -135,7 +135,7 @@ class Config implements Configurable
      */
     private function _setMode($sReplace)
     {
-        $sSearch = ($sReplace === self::DEVELOPMENT_MODE) ? self::PRODUCTION_MODE : self::DEVELOPMENT_MODE;
+        $sSearch = $sReplace === self::DEVELOPMENT_MODE ? self::PRODUCTION_MODE : self::DEVELOPMENT_MODE;
 
         $oFile = new File;
 

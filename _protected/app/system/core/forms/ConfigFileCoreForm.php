@@ -11,7 +11,8 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Str\Str, PH7\Framework\Registry\Registry;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Registry\Registry;
 
 class ConfigFileCoreForm
 {
@@ -19,16 +20,18 @@ class ConfigFileCoreForm
 
     /**
      * @param string $sConfigVar Specify the variable in the INI file where module options. Default: module.setting
-     * @param string $sConfigPath Specify the path of INI file configuration WITHOUT "config.ini". The default value is the current configuration module file. Default: NULL
+     * @param string $sConfigPath Specify the path of INI file configuration WITHOUT "config.ini". The default value is the current configuration module file.
+     *
      * @return void
      */
     public static function display($sConfigVar = 'module.setting', $sConfigPath = null)
     {
-        $sIniFile = (empty($sConfigPath)) ? Registry::getInstance()->path_module_config . static::CONFIG_FILE : $sConfigPath . static::CONFIG_FILE;
+        $sIniFile = empty($sConfigPath) ? Registry::getInstance()->path_module_config . static::CONFIG_FILE : $sConfigPath . static::CONFIG_FILE;
 
         if (isset($_POST['submit_config'])) {
-            if (\PFBC\Form::isValid($_POST['submit_config']))
+            if (\PFBC\Form::isValid($_POST['submit_config'])) {
                 new ConfigFileCoreFormProcess($sConfigVar, $sIniFile);
+            }
 
             Framework\Url\Header::redirect();
         }
