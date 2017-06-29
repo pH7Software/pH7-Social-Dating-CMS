@@ -10,32 +10,30 @@
  */
 
 namespace PH7\Framework\Acl;
+
 defined('PH7') or exit('Restricted access');
 
 class Acl
 {
-
     /**
-     * @access protected
      * @var array $aRoles
      */
     protected $aRoles = array();
 
     /**
-     * @access protected
      * @var array $aResources
      */
     protected $aResources = array();
 
     /**
-     * @desc Add a role
      * @param string $sName
-     * @return object Instance of Role
+     *
+     * @return Role Instance of Role
      */
     public function addRole($sName)
     {
         $oRole = new Role;
-        $role->sName = $sName;
+        $oRole->sName = $sName;
         $this->aRoles[] = $oRole;
 
         // allow for chaining
@@ -43,70 +41,60 @@ class Acl
     }
 
     /**
-     * @desc Add a resource
      * @param string $sName
      * @param array $aAllowed
-     * @return object Instance of Resource
+     *
+     * @return AclResource
      */
     public function addResource($sName, array $aAllowed)
     {
-        $oResource = new Resource;
+        $oResource = new AclResource;
         $oResource->sName = $sName;
         $oResource->aAllowed = $aAllowed;
         $this->aResources[] = $oResource;
+
         // allow chaining
         return $oResource;
     }
 
     /**
-     * @desc Allowed
-     * @param object $oRole
-     * @param object $oResource
+     * @param Role $oRole
+     * @param AclResource $oResource
+     *
      * @return boolean
      */
-    public function isAllowed($oRole, $oResource)
+    public function isAllowed(Role $oRole, AclResource $oResource)
     {
         return in_array($oRole->sName, $oResource->aAllowed);
     }
 
 
     /**
-     * @desc Get a resource
      * @param string $sName
+     *
      * @return resource
      */
     public function getResource($sName)
     {
-        $rResource = null;
-
-        foreach ($this->aResources as $r)
-        {
-            if ($r->getName() == $sName)
-            {
-                $rResource = $r;
-                break;
+        foreach ($this->aResources as $oResource) {
+            if ($oResource->getName() == $sName) {
+                return $oResource;
             }
         }
-        return $rResource;
     }
 
     /**
-     * @desc Get a role
      * @param string $sName
-     * @return role
+     *
+     * @return Role
      */
     public function getRole($sName)
     {
-        foreach ($this->aRoles as $r)
-        {
-            if ($r->getName() == $sName)
-            {
-                $rRole = $r;
-                break;
+        foreach ($this->aRoles as $oRole) {
+            if ($oRole->getName() == $sName) {
+                return $oRole;
             }
         }
-        //var_dump($rRole); exit;
-        return $rRole;
     }
 
     /* Add more methods here */

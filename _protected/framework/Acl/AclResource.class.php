@@ -10,20 +10,20 @@
  */
 
 namespace PH7\Framework\Acl;
+
 defined('PH7') or exit('Restricted access');
 
-class Resource
+class AclResource
 {
-
     /**
-     * @desc Settor
      * @param string $sName
      * @param string $sValue
+     *
+     * @throws Exception
      */
     public function __set($sName, $sValue)
     {
-        switch ($sName)
-        {
+        switch ($sName) {
             case 'sName':
             case 'aAllowed':
                 $this->$sName = $sValue;
@@ -35,21 +35,30 @@ class Resource
     }
 
     /**
-     * @desc Gettor
      * @param string $sName
+     *
+     * @throws Exception
      */
     public function __get($sName)
     {
-        switch ($sName)
-        {
+        switch ($sName) {
             case 'sName':
             case 'aAllowed':
                 return $this->$sName;
-            break;
+                break;
 
             default:
                 throw new Exception("Unable to get \"$sName\".");
         }
     }
 
+    /**
+     * @param string $sName
+     *
+     * @return bool
+     */
+    public function __isset($sName)
+    {
+        return isset($this->$sName);
+    }
 }

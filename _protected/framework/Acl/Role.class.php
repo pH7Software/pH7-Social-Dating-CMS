@@ -10,24 +10,25 @@
  */
 
 namespace PH7\Framework\Acl;
+
 defined('PH7') or exit('Restricted access');
 
 class Role
 {
-
     /**
-     * @desc Settor
      * @param string $sName
+     *
      * @param string $sValue
+     *
+     * @throws Exception
      */
     public function __set($sName, $sValue)
     {
-        switch ($sName)
-        {
+        switch ($sName) {
             case 'sName':
             case 'sPermissions':
                 $this->$sName = $sValue;
-            break;
+                break;
 
             default:
                 throw new Exception("Unable to set \"$sName\".");
@@ -35,22 +36,32 @@ class Role
     }
 
     /**
-     * @desc Gettor
      * @param string $sName
+     *
      * @return string
+     *
+     * @throws Exception
      */
     public function __get($sName)
     {
-        switch ($sName)
-        {
+        switch ($sName) {
             case 'sName':
             case 'sPermissions':
                 return $this->sName;
-            break;
+                break;
 
             default:
                 throw new Exception("Unable to get \"$sName\".");
         }
     }
 
+    /**
+     * @param string $sName
+     *
+     * @return bool
+     */
+    public function __isset($sName)
+    {
+        return isset($this->$sName);
+    }
 }
