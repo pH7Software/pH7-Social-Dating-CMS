@@ -35,7 +35,7 @@ class ConfigFileCoreForm
                 new ConfigFileCoreFormProcess($sConfigVar, $sIniFile);
             }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_config');

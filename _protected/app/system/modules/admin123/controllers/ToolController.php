@@ -12,6 +12,11 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine as D;
 use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Layout\Html\Security as HtmlSecurity;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Mvc\Router\Uri;
 
@@ -43,10 +48,10 @@ class ToolController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $this->view->aChartData = [
-            ['title' => t('Database and Other Data'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Cache\Cache::CACHE_DIR)],
-            ['title' => t('Server Code Template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl::COMPILE_DIR)],
-            ['title' => t('HTML Template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl::CACHE_DIR)],
-            ['title' => t('Static Files'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Framework\Layout\Gzip\Gzip::CACHE_DIR)]
+            ['title' => t('Database and Other Data'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Cache::CACHE_DIR)],
+            ['title' => t('Server Code Template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . PH7Tpl::COMPILE_DIR)],
+            ['title' => t('HTML Template'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . PH7Tpl::CACHE_DIR)],
+            ['title' => t('Static Files'), 'size' => $this->file->getDirSize(PH7_PATH_CACHE . Gzip::CACHE_DIR)]
         ];
 
         $this->output();
@@ -91,7 +96,7 @@ class ToolController extends Controller
 
     public function backup()
     {
-        $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
+        $this->view->designSecurity = new HtmlSecurity; // Security Design Class
 
         $this->sTitle = t('Backup Management');
         $this->view->page_title = $this->sTitle;
