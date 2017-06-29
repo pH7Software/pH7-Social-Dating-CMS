@@ -5,7 +5,6 @@
 
 namespace PFBC\Element;
 
-use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Date extends Textbox
@@ -16,9 +15,8 @@ class Date extends Textbox
         $iCurrentYear = date('Y');
         $iMin = $iCurrentYear - DbConfig::getSetting('maxAgeRegistration');
         $iMax = $iCurrentYear - DbConfig::getSetting('minAgeRegistration');
-        $sDateFormat = Config::getInstance()->values['language.application']['date_format'];
 
-        echo 'jQuery("#', $this->attributes['id'], '").datepicker({dateFormat:\''. $sDateFormat . '\',defaultDate:-9862,changeMonth:true,changeYear:true,yearRange:\''.$iMin.':'.$iMax.'\'});';
+        echo 'jQuery("#', $this->attributes['id'], '").datepicker({dateFormat:\'mm/dd/yy\',defaultDate:-9862,changeMonth:true,changeYear:true,yearRange:\''.$iMin.':'.$iMax.'\'});';
     }
 
     public function render()
