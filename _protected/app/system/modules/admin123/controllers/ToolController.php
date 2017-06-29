@@ -164,7 +164,7 @@ class ToolController extends Controller
                     {
                         $mStatus = (new D\Util\Backup($sDumpFile))->restore();
                     }
-                    elseif ($this->file->getFileExt($sNameFile) == 'gz')
+                    elseif ($this->file->getFileExt($sDumpFile) == 'gz')
                     {
                         $mStatus = (new D\Util\Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
                     }
