@@ -11,20 +11,22 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Str\Str;
 use PH7\Framework\Registry\Registry;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Url\Header;
 
 class ConfigFileCoreForm
 {
     const CONFIG_FILE = 'config.ini';
+    const CONFIG_SETTING_SECTION = 'module.setting';
 
     /**
      * @param string $sConfigVar Specify the variable in the INI file where module options. Default: module.setting
-     * @param string $sConfigPath Specify the path of INI file configuration WITHOUT "config.ini". The default value is the current configuration module file.
+     * @param string|null $sConfigPath Specify the path of INI file configuration WITHOUT "config.ini". The default value is the current configuration module file.
      *
      * @return void
      */
-    public static function display($sConfigVar = 'module.setting', $sConfigPath = null)
+    public static function display($sConfigVar = self::CONFIG_SETTING_SECTION, $sConfigPath = null)
     {
         $sIniFile = empty($sConfigPath) ? Registry::getInstance()->path_module_config . static::CONFIG_FILE : $sConfigPath . static::CONFIG_FILE;
 
