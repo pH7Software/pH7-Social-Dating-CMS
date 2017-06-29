@@ -16,7 +16,7 @@ class Date extends Textbox
         $iCurrentYear = date('Y');
         $iMin = $iCurrentYear - DbConfig::getSetting('maxAgeRegistration');
         $iMax = $iCurrentYear - DbConfig::getSetting('minAgeRegistration');
-        $sDateFormat = Config::getInstance()->values['language.application']['date_time_format'];
+        $sDateFormat = Config::getInstance()->values['language.application']['date_format'];
 
         echo 'jQuery("#', $this->attributes['id'], '").datepicker({dateFormat:\''. $sDateFormat . '\',defaultDate:-9862,changeMonth:true,changeYear:true,yearRange:\''.$iMin.':'.$iMax.'\'});';
     }
