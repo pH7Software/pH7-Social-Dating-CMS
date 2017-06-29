@@ -11,19 +11,21 @@
  */
 
 namespace PH7\App\Includes\Classes\Loader;
+
 defined('PH7') or exit('Restricted access');
 
-use \PH7\Framework\Registry\Registry;
+use PH7\Framework\Pattern\Singleton;
+use PH7\Framework\Registry\Registry;
 
 final class Autoloader
 {
     /**
      * It's a singleton class, so include the singleton trait.
      */
-    use \PH7\Framework\Pattern\Singleton;
+    use Singleton;
 
     /**
-     * We do not put a "__construct" and "__clone" "private" because it is already done in the \PH7\Framework\Pattern\Statik trait which is included in the \PH7\Framework\Pattern\Singleton trait.
+     * We do not put a "__construct" and "__clone" "private" because it is already done in the \PH7\Framework\Pattern\Statik trait which is included in the Singleton trait.
      */
 
 
@@ -47,6 +49,7 @@ final class Autoloader
      * Autoload Controllers.
      *
      * @param string $sClass
+     *
      * @return void
      */
     private function _loadController($sClass)
@@ -62,6 +65,7 @@ final class Autoloader
      * Autoload Classes.
      *
      * @param string $sClass
+     *
      * @return void
      */
     private function _loadClass($sClass)
@@ -93,6 +97,7 @@ final class Autoloader
      * Autoload Models.
      *
      * @param string $sClass
+     *
      * @return void
      */
     private function _loadModel($sClass)
@@ -120,6 +125,7 @@ final class Autoloader
      * Autoload Forms.
      *
      * @param string $sClass
+     *
      * @return void
      */
     private function _loadForm($sClass)
@@ -145,6 +151,7 @@ final class Autoloader
      * Hack to remove the 'PH7' namespace.
      *
      * @param string $sClass
+     *
      * @return string
      */
     private function _removeNamespace($sClass)

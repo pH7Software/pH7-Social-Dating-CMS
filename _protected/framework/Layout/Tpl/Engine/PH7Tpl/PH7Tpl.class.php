@@ -261,7 +261,7 @@ class PH7Tpl extends Kernel
      * Adds a new array index to the variable property. This
      * new array index will be treated as a variable by the templates.
      *
-     * @see assign()
+     * @see pH7Tpl::assign()
      *
      * @param string $sName The variable name to use in the template
      * @param mixed $mValue (string, object, array, integer, ...) Value Variable
@@ -276,7 +276,7 @@ class PH7Tpl extends Kernel
     /**
      * Retrieve an assigned variable (overload the magic __get method).
      *
-     * @see getVar()
+     * @see pH7Tpl::getVar()
      *
      * @param string $sKey The variable name.
      *

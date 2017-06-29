@@ -24,5 +24,4 @@ class Date extends Textbox
         $this->validation[] = new \PFBC\Validation\Date;
         parent::render();
     }
-
 }

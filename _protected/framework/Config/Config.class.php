@@ -11,16 +11,20 @@
  */
 
 namespace PH7\Framework\Config;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\File;
+use PH7\Framework\Pattern\Singleton;
 
 /**
  * @class Singleton Class
  */
 class Config implements Configurable
 {
-    const DEVELOPMENT_MODE = 'development', PRODUCTION_MODE = 'production';
+    const DEVELOPMENT_MODE = 'development';
+    const PRODUCTION_MODE = 'production';
 
     /**
      * @var array $values;
@@ -40,7 +44,7 @@ class Config implements Configurable
     /**
      * Import the Singleton trait.
      */
-    use \PH7\Framework\Pattern\Singleton;
+    use Singleton;
 
     /**
      * Set to private so nobody can create a new instance using new.
@@ -57,6 +61,7 @@ class Config implements Configurable
      * Load ini file.
      *
      * @param string $sFile
+     *
      * @return boolean Returne FALSE if the file doesn't exist, TRUE otherwise.
      */
     public function load($sFile)
@@ -72,6 +77,7 @@ class Config implements Configurable
      * Get a config option by key.
      *
      * @param string $sKey The configuration setting key.
+     *
      * @return string
      */
     public function getValue($sKey)
@@ -84,7 +90,9 @@ class Config implements Configurable
      *
      * @param string $sKey A unique config key.
      * @param string $sValue The value to add.
+     *
      * @return void
+     *
      * @throws PH7InvalidArgumentException
      */
     public function setValue($sKey, $sValue)

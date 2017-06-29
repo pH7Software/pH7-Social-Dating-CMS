@@ -11,12 +11,13 @@
  */
 
 namespace PH7\Framework\Loader;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\File,
-PH7\Framework\Registry\Registry,
-PH7\Framework\Date\Various as VDate;
+use PH7\Framework\Date\Various as VDate;
+use PH7\Framework\File\File;
+use PH7\Framework\Pattern\Singleton;
+use PH7\Framework\Registry\Registry;
 
 /**
  * We include the Singleton trait before use, because at this stage the class can not load the trait automatically.
@@ -31,7 +32,7 @@ final class Autoloader
     /**
      * Make the class singleton by importing the appropriate trait.
      */
-    use \PH7\Framework\Pattern\Singleton;
+    use Singleton;
 
     /**
      * We do not put a "__construct" and "__clone" "private" because it is already done in the \PH7\Framework\Pattern\Statik trait which is included in the \PH7\Framework\Pattern\Singleton trait.
@@ -65,8 +66,7 @@ final class Autoloader
      */
     public function launchInternetCheck()
     {
-        if (!\PH7\is_internet())
-        {
+        if (!\PH7\is_internet()) {
             $sMsg = '<p class="warning">No Internet Connection</p>
             <p>Whoops! Your server has to be connected to the Internet in order to get your website working.</p>';
 
@@ -79,14 +79,14 @@ final class Autoloader
      * Autoload Classes.
      *
      * @param string $sClass
+     *
      * @return void
      */
     private function _loadClass($sClass)
     {
         $sClass = $this->_clean($sClass);
 
-        switch (true)
-        {
+        switch (true) {
             /***** To include the libraries *****/
 
             // To include Classes
@@ -123,6 +123,7 @@ final class Autoloader
      * Check and load the files if necessary.
      *
      * @param string $sFileNamePath A pH7Framework filename path.
+     *
      * @return void
      */
     private function _loadFile($sFileNamePath)
@@ -133,8 +134,7 @@ final class Autoloader
         $bFileExists = $oFile->existFile($sFullPath);
         $bIsTooSmallFile = ($oFile->size($sFullPath) < 1000);
 
-        if (!$bFileExists || $bIsTooSmallFile || $bIsExpiredFile)
-        {
+        if (!$bFileExists || $bIsTooSmallFile || $bIsExpiredFile) {
             /**
              * First off, check if the server is connected to the Internet in order to be able to download the remote files.
              */
@@ -145,9 +145,7 @@ final class Autoloader
                 $oFile->deleteFile($sFullPath);
 
             $this->_downloadFile($sFileNamePath, $oFile);
-        }
-        else
-        {
+        } else {
             Registry::getInstance()->is_internet_needed = false;
         }
         unset($oFile);
@@ -157,7 +155,8 @@ final class Autoloader
      * Download Files protected by the license.
      *
      * @param string $sFileNamePath A pH7Framework filename path.
-     * @param object \PH7\Framework\File\File $oFile
+     * @param File $oFile
+     *
      * @return void
      */
     private function _downloadFile($sFileNamePath, File $oFile)
@@ -170,7 +169,7 @@ final class Autoloader
      * Get the filename of the file storage server.
      *
      * @param string $sFileNamePath A pH7Framework filename path.
-     * @param object \PH7\Framework\File\File $oFile
+     *
      * @return string The filename.
      */
     private function _getServerFileName($sFileNamePath)
@@ -182,6 +181,7 @@ final class Autoloader
      * For all classes, hack to remove the namespace, slash and backslash.
      *
      * @param string The class name to clean.
+     *
      * @return string The class cleaned.
      */
     private function _clean($sClass)

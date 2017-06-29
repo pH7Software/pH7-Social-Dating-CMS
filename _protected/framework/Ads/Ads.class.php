@@ -16,6 +16,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Model\Ads as ModelAds;
 use PH7\Framework\Parse\SysVar;
 use PH7\Framework\Analytics\Statistic;
+use stdClass;
 
 class Ads
 {
@@ -24,11 +25,11 @@ class Ads
     /**
      * Output Advertisement.
      *
-     * @param object $oData Db query.
+     * @param stdClass $oData Db query.
      *
      * @return string
      */
-    public static function output($oData)
+    public static function output(stdClass $oData)
     {
         // Stat Advertisement Shows
         Statistic::setView($oData->adsId, 'Ads');
