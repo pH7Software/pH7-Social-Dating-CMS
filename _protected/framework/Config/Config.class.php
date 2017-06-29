@@ -130,25 +130,28 @@ class Config implements Configurable
      * @param string $sReplace The Mode site.
      * @see PH7\Framework\Config\Config::setProductionMode()
      * @see PH7\Framework\Config\Config::setDevelopmentMode()
+     *
      * @return void
      */
     private function _setMode($sReplace)
     {
         $sSearch = ($sReplace === self::DEVELOPMENT_MODE) ? self::PRODUCTION_MODE : self::DEVELOPMENT_MODE;
 
-        $oFile = new \PH7\Framework\File\File;
+        $oFile = new File;
 
         // Check and correct the file permission if necessary.
         $oFile->chmod($this->_sConfigAppFilePath, 0666);
 
-        $sContents = $oFile->getFile($this->_sConfigAppFilePath);
-        $sNewContents = str_replace('environment = ' . $sSearch .  ' ; production or development', 'environment = ' . $sReplace . ' ; production or development', $sContents);
+        $sFileContents = $oFile->getFile($this->_sConfigAppFilePath);
+        $sSearchContents = 'environment = ' . $sSearch .  ' ; production or development';
+        $sReplaceContents = 'environment = ' . $sReplace . ' ; production or development';
+        $sNewContents = str_replace($sSearchContents, $sReplaceContents, $sFileContents);
         $oFile->putFile($this->_sConfigAppFilePath, $sNewContents);
 
         // Check and correct the file permission if necessary.
         $oFile->chmod($this->_sConfigAppFilePath, 0644);
 
-        unset($oFile, $sContents);
+        unset($oFile, $sFileContents);
     }
 
     /**
