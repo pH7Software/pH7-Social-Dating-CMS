@@ -143,8 +143,8 @@ class Config implements Configurable
         $oFile->chmod($this->_sConfigAppFilePath, 0666);
 
         $sFileContents = $oFile->getFile($this->_sConfigAppFilePath);
-        $sSearchContents = 'environment = ' . $sSearch .  ' ; production or development';
-        $sReplaceContents = 'environment = ' . $sReplace . ' ; production or development';
+        $sSearchContents = 'environment = ' . $sSearch;
+        $sReplaceContents = 'environment = ' . $sReplace;
         $sNewContents = str_replace($sSearchContents, $sReplaceContents, $sFileContents);
         $oFile->putFile($this->_sConfigAppFilePath, $sNewContents);
 
