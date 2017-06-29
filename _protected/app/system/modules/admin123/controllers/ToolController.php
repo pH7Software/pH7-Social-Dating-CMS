@@ -123,27 +123,28 @@ class ToolController extends Controller
             {
                 // Clean the site name to avoid bug with the backup path
                 $sSiteName = str_replace(array(' ', '/', '\\'), '_', $this->registry->site_name);
+                $sCurrentDate = (new CDateTime)->get()->date();
 
                 switch ($this->httpRequest->post('backup_type'))
                 {
                     case 'server':
-                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . (new Framework\Date\CDateTime)->get()->date() . '.sql';
+                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql';
                         (new D\Util\Backup($sFullPath))->back()->save();
                         $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
                     break;
 
                     case 'server_archive':
-                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . (new Framework\Date\CDateTime)->get()->date() . '.sql.gz';
+                        $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql.gz';
                         (new D\Util\Backup($sFullPath))->back()->saveArchive();
                         $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
                     break;
 
                     case 'client':
-                        (new D\Util\Backup($sSiteName . '_' . (new Framework\Date\CDateTime)->get()->date() . '.sql'))->back()->download();
+                        (new D\Util\Backup($sSiteName . '_' . $sCurrentDate . '.sql'))->back()->download();
                     break;
 
                     case 'client_archive':
-                        (new D\Util\Backup($sSiteName . '_' . (new Framework\Date\CDateTime)->get()->date() . '.sql.gz'))->back()->downloadArchive();
+                        (new D\Util\Backup($sSiteName . '_' . $sCurrentDate . '.sql.gz'))->back()->downloadArchive();
                     break;
 
                     case 'show':
