@@ -11,21 +11,22 @@
  */
 
 namespace PH7\Framework\Mvc\Model\Engine;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Core;
+use PDO;
+use PDOStatement;
 
 /**
  * @class Singleton Class
  */
 class Db
 {
-
     const ASC = 'ASC', DESC = 'DESC', RAND = 'RAND()';
 
     /**
      * Static attributes of the class.
-     * Holds an insance of self with the \PDO class.
+     * Holds an insance of self with PDO class.
      *
      * @staticvar string $_sDsn Data Source Name
      * @staticvar string $_sUsername
@@ -34,7 +35,7 @@ class Db
      * @staticvar array $_aDriverOptions
      * @staticvar integer $_iCount
      * @staticvar float $_fTime
-     * @staticvar object $_oInstance
+     * @staticvar Db $_oInstance
      */
     private static $_sDsn, $_sUsername, $_sPassword, $_sPrefix, $_aDriverOptions, $_iCount = 0, $_fTime = 0.0, $_oInstance = NULL, $_oDb;
 
@@ -44,33 +45,33 @@ class Db
     private function __construct() {}
 
     /**
-     * @return object Returns the PDO instance class or create initial connection.
+     * @return Db Returns the PDO instance class or create initial connection.
      */
     public static function getInstance($sDsn = NULL, $sUsername = NULL, $sPassword = NULL, $aDriverOptions = NULL, $sPrefix = NULL)
     {
-        if(NULL === self::$_oInstance)
+        if (NULL === self::$_oInstance)
         {
-            if(!empty($sDsn))
+            if (!empty($sDsn))
                 self::$_sDsn = $sDsn;
 
-            if(!empty($sUsername))
+            if (!empty($sUsername))
                 self::$_sUsername = $sUsername;
 
-            if(!empty($sPassword))
+            if (!empty($sPassword))
                 self::$_sPassword = $sPassword;
 
-            if(!empty($aDriverOptions))
+            if (!empty($aDriverOptions))
                 self::$_aDriverOptions = $aDriverOptions;
 
-            if(!empty($sPrefix))
+            if (!empty($sPrefix))
                 self::$_sPrefix = $sPrefix;
 
             self::$_oInstance = new static;
 
             try
             {
-                self::$_oDb = new \PDO(self::$_sDsn, self::$_sUsername, self::$_sPassword, self::$_aDriverOptions);
-                self::$_oDb->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+                self::$_oDb = new PDO(self::$_sDsn, self::$_sUsername, self::$_sPassword, self::$_aDriverOptions);
+                self::$_oDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             catch (Exception $oE)
             {
@@ -127,7 +128,7 @@ class Db
      * Execute an SQL statement and return the number of affected rows.
      *
      * @param string $sStatement
-     * @return mixed (boolean | integer)
+     * @return boolean|integer
      */
     public function exec($sStatement)
     {
@@ -142,6 +143,7 @@ class Db
      * Retrieve a database connection attribute.
      *
      * @param int $iAttribute
+     *
      * @return mixed
      */
     public function getAttribute($iAttribute)
@@ -162,7 +164,8 @@ class Db
     /**
      * Returns the ID of the last inserted row or sequence value.
      *
-     * @param string $sName Name of the sequence object from which the ID should be returned. Default NULL
+     * @param string $sName Name of the sequence object from which the ID should be returned.
+     *
      * @return string
      */
     public function lastInsertId($sName = null)
@@ -174,6 +177,7 @@ class Db
      * Prepares a statement for execution and returns a statement object.
      *
      * @param string $sStatement A valid SQL statement for the target database server.
+     *
      * @return PDOStatement
      */
     public function prepare($sStatement)
@@ -189,6 +193,7 @@ class Db
      * Execute an SQL prepared with prepare() method.
      *
      * @param string $sStatement
+     *
      * @return boolean
      */
     public function execute($sStatement)
@@ -200,7 +205,8 @@ class Db
      * Executes an SQL statement, returning a result set as a PDOStatement object.
      *
      * @param string $sStatement
-     * @return mixed (object | boolean) PDOStatement object, or FALSE on failure.
+     *
+     * @return PDOStatement|boolean Returns PDOStatement object, or FALSE on failure.
      */
     public function query($sStatement)
     {
@@ -215,6 +221,7 @@ class Db
      * Execute query and return all rows in assoc array.
      *
      * @param string $sStatement
+     *
      * @return array
      */
     public function queryFetchAllAssoc($sStatement)
@@ -226,6 +233,7 @@ class Db
      * Execute query and return one row in assoc array.
      *
      * @param string $sStatement
+     *
      * @return array
      */
     public function queryFetchRowAssoc($sStatement)
@@ -237,6 +245,7 @@ class Db
      * Execute query and select one column only.
      *
      * @param string $sStatement
+     *
      * @return mixed
      */
     public function queryFetchColAssoc($sStatement)
@@ -249,6 +258,7 @@ class Db
      *
      * @param string $sInput
      * @param integer $iParameterType
+     *
      * @return string
      */
     public function quote($sInput, $iParameterType = 0)
@@ -271,6 +281,7 @@ class Db
      *
      * @param integer $iAttribute
      * @param mixed $mValue
+     *
      * @return boolean
      */
     public function setAttribute($iAttribute, $mValue)
@@ -291,7 +302,7 @@ class Db
     /**
      * Show all tables.
      *
-     * @return mixed (object | boolean) PDOStatement object, or FALSE on failure.
+     * @return PDOStatement|boolean Returns PDOStatement object, or FALSE on failure.
      */
     public static function showTables()
     {
@@ -313,6 +324,7 @@ class Db
      *
      * @param string $sTable Table name. Default ''
      * @param boolean $bTrim With or without a space before and after the table name. Default valut is FALSE, so with space before and after table name.
+     *
      * @return string prefixed table name, just prefix if table name is empty.
      */
     public static function prefix($sTable = '', $bTrim = false)
@@ -324,22 +336,23 @@ class Db
     /**
      * Free database.
      *
-     * @param object \PDOStatement $rStmt Close cursor of PDOStatement class. Default NULL
-     * @param boolean $bCloseConnection Close connection of PDO. Default FALSE
+     * @param PDOStatement $rStmt Close cursor of PDOStatement class.
+     * @param boolean $bCloseConnection Close connection of PDO.
+     *
      * @return void
      */
-    public static function free(\PDOStatement &$rStmt = NULL, $bCloseConnection = FALSE)
+    public static function free(PDOStatement &$rStmt = NULL, $bCloseConnection = FALSE)
     {
         // Close Cursor
-        if(NULL !== $rStmt)
-        {
+        if (NULL !== $rStmt) {
             $rStmt->closeCursor();
             unset($rStmt);
         }
 
         // Free instance of the PDO object
-        if(TRUE === $bCloseConnection)
+        if (TRUE === $bCloseConnection) {
             self::$_oDb = NULL;
+        }
     }
 
     /**
@@ -362,7 +375,11 @@ class Db
     public static function repair()
     {
         $oAllTables = static::showTables();
-        while($aTableNames = $oAllTables->fetch()) static::getInstance()->query('REPAIR TABLE '. $aTableNames[0]);
+
+        while ($aTableNames = $oAllTables->fetch()) {
+            static::getInstance()->query('REPAIR TABLE '. $aTableNames[0]);
+        }
+
         unset($oAllTables);
     }
 
@@ -373,9 +390,11 @@ class Db
      */
     public static function checkMySqlVersion()
     {
-        $sMySQLVer = self::$_oDb->getAttribute(\PDO::ATTR_SERVER_VERSION);
-        if(version_compare($sMySQLVer, PH7_REQUIRE_SQL_VERSION, '<'))
+        $sMySQLVer = self::$_oDb->getAttribute(PDO::ATTR_SERVER_VERSION);
+
+        if (version_compare($sMySQLVer, PH7_REQUIRE_SQL_VERSION, '<')) {
             exit('ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . PH7_REQUIRE_SQL_VERSION . ' or newer.');
+        }
     }
 
     /**
@@ -383,6 +402,7 @@ class Db
      *
      * @param float $fStartTime
      * @param float $fEndTime
+     *
      * @return void
      */
     private function _addTime($fStartTime, $fEndTime)
@@ -406,5 +426,4 @@ class Db
     private function __clone()
     {
     }
-
 }
