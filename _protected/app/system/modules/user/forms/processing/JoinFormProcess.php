@@ -152,4 +152,16 @@ class JoinFormProcess extends Form
             Header::redirect(Uri::get('user', 'signup', 'done'));
         }
     }
+
+    /**
+     * @return string
+     */
+    private function getAffiliateRefence()
+    {
+        $sVariableName = Registration::REFERENCE_VAR_NAME;
+        $sRef = $this->session->exists($sVariableName) ? $this->session->get($sVariableName) : t('No reference');
+        $this->session->remove($sVariableName);
+
+        return $sRef;
+    }
 }

@@ -26,28 +26,23 @@ class SignupController extends Controller
         $bRef = $this->httpRequest->getExists('ref');
         $bUserRef = $this->httpRequest->getExists(array('ref', 'a', 'u', 'f_n', 's'));
 
-        if ($bRef || $bUserRef)
-        {
+        if ($bRef || $bUserRef) {
             $sRef = $this->httpRequest->get('ref'); // For the statistics
             $sRefTxt = t('Reference: %0%', $sRef);
         }
 
-        if ($bUserRef)
-        {
+        if ($bUserRef) {
             $sAction = $this->httpRequest->get('a'); // For the statistics
             $sUsername = $this->httpRequest->get('u'); // For the statistics and user image block
             $sSex = $this->httpRequest->get('s'); // For the statistics and user image block
 
             $sSessContents = $sRefTxt . ' | ' . t('Action: %0%', $sAction) . ' | ' . t('Sex: %0%', $sSex) . ' | ' . t('Username: %0%', $sUsername);
-            $this->session->set('join_ref', $sSessContents);
-        }
-        elseif ($bRef)
-        {
-            $this->session->set('join_ref', $sRefTxt);
+            $this->session->set(Registration::REFERENCE_VAR_NAME, $sSessContents);
+        } elseif ($bRef) {
+            $this->session->set(Registration::REFERENCE_VAR_NAME, $sRefTxt);
         }
 
-        if ($bUserRef)
-        {
+        if ($bUserRef) {
             /* Enable the user image block in the view */
             $this->view->user_ref = 1;
 
