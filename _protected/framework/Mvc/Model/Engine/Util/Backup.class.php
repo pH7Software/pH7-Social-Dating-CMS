@@ -12,23 +12,27 @@
  */
 
 namespace PH7\Framework\Mvc\Model\Engine\Util;
+
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Core\Kernel,
-PH7\Framework\Config\Config,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Navigation\Browser,
-PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Mvc\Model\Engine\Db;
 
 class Backup
 {
-    private $_sPathName, $_sSql;
+    const SQL_FILE_EXT = 'sql';
+    const ARCHIVE_FILE_EXT = 'gz';
+
+    /** @var string */
+    private $_sPathName;
+
+    /** @var string */
+    private $_sSql;
 
     /**
-     * Constructor.
-     *
-     * @access public
      * @param string $sPathName Can be null for showing the data only ( by using Backup->back()->show() ). Default NULL
      */
     public function __construct($sPathName = null)
@@ -39,8 +43,7 @@ class Backup
     /**
      * Makes a SQL contents backup.
      *
-     * @access public
-     * @return object this
+     * @return self
      */
     public function back()
     {
@@ -124,7 +127,6 @@ class Backup
     /**
      * Gets the SQL contents.
      *
-     * @access public
      * @return string
      */
     public function show()
@@ -135,7 +137,6 @@ class Backup
     /**
      * Saves the backup in the server.
      *
-     * @access public
      * @return void
      */
     public function save()
@@ -148,7 +149,6 @@ class Backup
     /**
      * Saves the backup in the gzip compressed archive in the server.
      *
-     * @access public
      * @return void
      */
     public function saveArchive()
@@ -161,28 +161,27 @@ class Backup
     /**
      * Restore SQL backup file.
      *
-     * @access public
-     * @return mixed (boolean | string) Returns TRUE if there are no errors, otherwise returns "the error message".
+     * @return boolean|string Returns TRUE if there are no errors, otherwise returns "the error message".
      */
     public function restore()
     {
         $mRet = Various::execQueryFile($this->_sPathName);
-        return ($mRet !== true) ? print_r($mRet, true) : true;
+        return $mRet !== true ? print_r($mRet, true) : true;
     }
 
     /**
      * Restore the gzip compressed archive backup.
      *
-     * @access public
-     * @return mixed (boolean | string) Returns TRUE if there are no errors, otherwise returns "the error message".
+     * @return boolean|string Returns TRUE if there are no errors, otherwise returns "the error message".
      */
     public function restoreArchive()
     {
         $rArchive = gzopen($this->_sPathName, 'r');
 
         $sSqlContent = '';
-        while (!feof($rArchive))
+        while (!feof($rArchive)) {
             $sSqlContent .= gzread($rArchive, filesize($this->_sPathName));
+        }
 
         gzclose($rArchive);
 
@@ -190,13 +189,12 @@ class Backup
         $oDb = Db::getInstance()->exec($sSqlContent);
         unset($sSqlContent);
 
-        return ($oDb === false) ? print_r($oDb->errorInfo(), true) : true;
+        return $oDb === false ? print_r($oDb->errorInfo(), true) : true;
     }
 
     /**
      * Download the backup on the desktop.
      *
-     * @access public
      * @return void
      */
     public function download()
@@ -207,7 +205,6 @@ class Backup
     /**
      * Download the backup in the gzip compressed archive on the desktop.
      *
-     * @access public
      * @return void
      */
     public function downloadArchive()
@@ -218,15 +215,15 @@ class Backup
     /**
      * Generic method that allows you to download a file or a SQL file gzip compressed archive.
      *
-     * @access private
-     * @param boolean $bArchive If TRUE, the string will be compressed in gzip. Default FALSE
+     * @param boolean $bArchive If TRUE, the string will be compressed in gzip.
+     *
      * @return void
      */
     private function _download($bArchive = false)
     {
         ob_start();
         /***** Set Headers *****/
-        (new Browser)->nocache(); // No cache
+        (new Browser)->noCache(); // No cache
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=' . $this->_sPathName);
 

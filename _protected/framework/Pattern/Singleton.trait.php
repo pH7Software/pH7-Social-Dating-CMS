@@ -25,13 +25,11 @@ trait Singleton
     /**
      * Get instance of class.
      *
-     * @access public
-     * @static
-     * @return object Returns the instance class or create initial instance of the class.
+     * @return self Returns the instance class or create initial instance of the class.
      */
     public static function getInstance()
     {
-        return (null === static::$_oInstance) ? static::$_oInstance = new static : static::$_oInstance;
+        return null === static::$_oInstance ? static::$_oInstance = new static : static::$_oInstance;
     }
 
     /**
