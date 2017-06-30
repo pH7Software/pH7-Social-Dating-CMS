@@ -8,14 +8,14 @@
  * @package        PH7 / App / System / Module / User / Controller
  * @version        1.0
  */
+
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class SignupController extends Controller
 {
-    private $sTitle;
-
     public function step1()
     {
         // Add CSS and JavaScript files for the left profiles block
@@ -50,9 +50,7 @@ class SignupController extends Controller
             $this->view->username = $sUsername;
             $this->view->first_name = $sFirstName;
             $this->view->sex = $sSex;
-        }
-        else
-        {
+        } else {
             /* For Members Block */
             $this->view->userDesignModel = new UserDesignCoreModel();
         }
@@ -96,8 +94,9 @@ class SignupController extends Controller
 
     public function done()
     {
-        if (!$this->session->exists('mail_step3'))
-            Header::redirect(Uri::get('user','signup','step3'));
+        if (!$this->session->exists('mail_step3')) {
+            Header::redirect(Uri::get('user', 'signup', 'step3'));
+        }
 
         $this->session->destroy(); // Remove all sessions created pending registration
         Header::redirect(Uri::get('user','main','login'), (new Registration)->getMsg());
@@ -106,6 +105,7 @@ class SignupController extends Controller
     /**
      * @param int $iStep Number of the current step (e.g. 1, 2, 3).
      * @param int $iPercentage Percentage of progression.
+     *
      * @return void
      */
     protected function setupProgressbar($iStep, $iPercentage)
@@ -118,6 +118,7 @@ class SignupController extends Controller
      * Set title and heading.
      *
      * @param string $sTitle
+     *
      * @return void
      */
     private function setTitle($sTitle)

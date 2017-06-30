@@ -35,8 +35,9 @@ abstract class RegistrationCore extends Core
      * Send an email.
      *
      * @param array $aInfo
-     * @param boolean $bIsUniversalLogin Default: FALSE
-     * @return object this
+     * @param boolean $bIsUniversalLogin
+     *
+     * @return self
      */
     public function sendMail(array $aInfo, $bIsUniversalLogin = false)
     {

@@ -16,13 +16,18 @@ use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Util\Various;
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Ip\Ip;
+use SDA\TAC\Register\EdenFlirt;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
 class JoinFormProcess extends Form
 {
-    private $oUserModel, $iActiveType;
+    /** @var UserModel */
+    private $oUserModel;
+
+    /** @var integer */
+    private $iActiveType;
 
     public function __construct()
     {
