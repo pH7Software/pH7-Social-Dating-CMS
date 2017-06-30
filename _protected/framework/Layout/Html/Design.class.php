@@ -408,20 +408,16 @@ class Design
           ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $aSites = [
-                ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Rencontre d\'un soir', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => 'Rencontre à Paris Gratuite', 'link' => 'http://coolonweb.com']
+                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
             ];
         } else { // Default links, set to English
             $aSites = [
                 ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
-                ['title' => 'Kik or Not', 'link' => 'http://kikornot.com'],
                 ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
                 ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
                 ['title' => 'Android London Dating App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
             ];
