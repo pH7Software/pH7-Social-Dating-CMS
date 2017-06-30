@@ -10,7 +10,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Engine as D;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Util\Backup;
 use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Layout\Html\Security as HtmlSecurity;
 use PH7\Framework\Date\CDateTime;
@@ -129,26 +130,26 @@ class ToolController extends Controller
                 {
                     case 'server':
                         $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql';
-                        (new D\Util\Backup($sFullPath))->back()->save();
+                        (new Backup($sFullPath))->back()->save();
                         $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
                     break;
 
                     case 'server_archive':
                         $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql.gz';
-                        (new D\Util\Backup($sFullPath))->back()->saveArchive();
+                        (new Backup($sFullPath))->back()->saveArchive();
                         $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
                     break;
 
                     case 'client':
-                        (new D\Util\Backup($sSiteName . '_' . $sCurrentDate . '.sql'))->back()->download();
+                        (new Backup($sSiteName . '_' . $sCurrentDate . '.sql'))->back()->download();
                     break;
 
                     case 'client_archive':
-                        (new D\Util\Backup($sSiteName . '_' . $sCurrentDate . '.sql.gz'))->back()->downloadArchive();
+                        (new Backup($sSiteName . '_' . $sCurrentDate . '.sql.gz'))->back()->downloadArchive();
                     break;
 
                     case 'show':
-                        $this->view->sql_content = (new D\Util\Backup)->back()->show();
+                        $this->view->sql_content = (new Backup)->back()->show();
                     break;
 
                     default:
@@ -169,13 +170,13 @@ class ToolController extends Controller
 
                 if (!empty($sDumpFile))
                 {
-                    if ($this->file->getFileExt($sDumpFile) == 'sql')
+                    if ($this->file->getFileExt($sDumpFile) === Backup::SQL_FILE_EXT)
                     {
-                        $mStatus = (new D\Util\Backup($sDumpFile))->restore();
+                        $mStatus = (new Backup($sDumpFile))->restore();
                     }
-                    elseif ($this->file->getFileExt($sDumpFile) == 'gz')
+                    elseif ($this->file->getFileExt($sDumpFile) === Backup::ARCHIVE_FILE_EXT)
                     {
-                        $mStatus = (new D\Util\Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
+                        $mStatus = (new Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
                     }
                     else
                     {
@@ -225,13 +226,13 @@ class ToolController extends Controller
                 $sNameFile = $_FILES['sql_file']['name'];
                 $sTmpFile = $_FILES['sql_file']['tmp_name'];
 
-                if ($this->file->getFileExt($sNameFile) == 'sql')
+                if ($this->file->getFileExt($sNameFile) === Backup::SQL_FILE_EXT)
                 {
-                    $mStatus = (new D\Util\Backup($sTmpFile))->restore();
+                    $mStatus = (new Backup($sTmpFile))->restore();
                 }
-                elseif ($this->file->getFileExt($sNameFile) == 'gz')
+                elseif ($this->file->getFileExt($sNameFile) === Backup::ARCHIVE_FILE_EXT)
                 {
-                    $mStatus = (new D\Util\Backup($sTmpFile))->restoreArchive();
+                    $mStatus = (new Backup($sTmpFile))->restoreArchive();
                 }
                 else
                 {
@@ -258,7 +259,7 @@ class ToolController extends Controller
     {
         $this->_checkPost();
 
-        D\Db::optimize();
+        Db::optimize();
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been optimized!'));
     }
 
@@ -266,7 +267,7 @@ class ToolController extends Controller
     {
         $this->_checkPost();
 
-        D\Db::repair();
+        Db::repair();
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
     }
 
