@@ -10,7 +10,7 @@ label{display:block}
 button{margin:6px}
 button.success{font-weight:bold}
 button:active{color: #000}
-border:hover, border:active{border-color:2px solid #000}
+border:hover, border:active{border:2px solid #000}
 .is_checked{background:#FF8}
 textarea{white-space:pre-line !important}
 
