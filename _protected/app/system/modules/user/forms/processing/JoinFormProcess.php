@@ -40,14 +40,12 @@ class JoinFormProcess extends Form
     public function step1()
     {
         $iAffId = (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME);
-        $sRef = ($this->session->exists('join_ref')) ? $this->session->get('join_ref') : t('No reference'); // Statistics
-        $this->session->remove('join_ref');
 
         $aData = [
             'email' => $this->httpRequest->post('mail'),
             'username' => $this->httpRequest->post('username'),
             'first_name' => $this->httpRequest->post('first_name'),
-            'reference' => $sRef,
+            'reference' => $this->getAffiliateRefence(),
             'ip' => Ip::get(),
             'hash_validation' => Various::genRnd(),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
