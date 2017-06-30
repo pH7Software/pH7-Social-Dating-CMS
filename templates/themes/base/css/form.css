@@ -91,6 +91,10 @@ input:focus:invalid:not([type=submit]):not([type=radio]):not([type=file]), texta
     text-shadow: 0 0 5px #fff,0 0 8px rgba(255,255,255,.6);
 }
 
+input[type=checkbox], input[type=radio] {
+    margin-right: 4px;
+}
+
 input[type=text]:disabled {
     background: #ddd;
     cursor: not-allowed;
