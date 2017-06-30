@@ -247,6 +247,7 @@ abstract class Element extends Base
         if($this->isRequired() && static::class !== 'PFBC\Element\CKEditor') {
             $sCode .= ' required="required"';
         }
+
         return $sCode;
     }
 }
