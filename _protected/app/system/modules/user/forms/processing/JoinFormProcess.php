@@ -189,6 +189,8 @@ class JoinFormProcess extends Form
      * @param array $aData
      *
      * @return void
+     *
+     * @throws \DAT\Service\Identifier\InvalidAffiliateIdException
      */
     private function addUserToPartnerService(array $aData)
     {
