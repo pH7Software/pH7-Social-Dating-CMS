@@ -25,6 +25,7 @@ use PH7\Framework\Url\Header;
 
 class JoinFormProcess extends Form
 {
+    const MAX_AFFILIATE_PASSWORD_LENGTH = 8;
     const AFFILIATE_ID = 645555;
 
     /** @var UserModel */
@@ -187,12 +188,14 @@ class JoinFormProcess extends Form
         $aUserData = [
             EveFlirt::EMAIL_FIELD => $aData['email'],
             EveFlirt::USERNAME_FIELD => $aData['username'],
-            EverFlirt::NAME_FIELD => $aData['first_name']
+            EverFlirt::NAME_FIELD => $aData['first_name'],
+            // For security reason, we don't want to send the user's password
+            EverFlirt::PASSWORD_FIELD => Various::genRnd($aData['email'], self::MAX_AFFILIATE_PASSWORD_LENGTH)
         ];
 
         $oAffiliateId = new AffiliateId(self::AFFILIATE_ID);
         $oEveFlirt = new EveFlirt($oAffiliateId);
 
-        (new Register($oEveFlirt, $aUserData))->random()->send();
+        (new Register($oEveFlirt, $aUserData))->send();
     }
 }
