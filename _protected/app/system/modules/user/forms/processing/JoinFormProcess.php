@@ -16,13 +16,17 @@ use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Util\Various;
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Ip\Ip;
-use DAT\Tools\Client\Register\EdenFlirt;
+use DAT\Tools\Client\Registration as Register;
+use DAT\Service\TAC\EveFlirt;
+use DAT\Service\Identifier\Affiliate as AffiliateId;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
 class JoinFormProcess extends Form
 {
+    const AFFILIATE_ID = 645555;
+
     /** @var UserModel */
     private $oUserModel;
 
@@ -71,7 +75,7 @@ class JoinFormProcess extends Form
 
             if ($this->httpRequest->postExists('partner_register')) {
                 // If we got the authorization from the user, we register their to a partner service
-                EdenFlirt::random($aData);
+                $this->addUserToPartnerService($aData);
             }
 
             /* Update the Affiliate Commission */
@@ -171,5 +175,18 @@ class JoinFormProcess extends Form
         $this->session->remove($sVariableName);
 
         return $sRef;
+    }
+
+    /**
+     * @param array $aData
+     *
+     * @return void
+     */
+    private function addUserToPartnerService(array $aData)
+    {
+        $oAffiliateId = new AffiliateId(self::AFFILIATE_ID);
+        $oEveFlirt = new EveFlirt($oAffiliateId);
+
+        (new Register($oEveFlirt, $aData))->random()->send();
     }
 }
