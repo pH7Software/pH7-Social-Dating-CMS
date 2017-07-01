@@ -209,7 +209,7 @@ class JoinFormProcess extends Form
             EveFlirt::POSTALCODE_FIELD => $aData['zip_code'],
 
             // For security reason, we don't want to send the user's password
-            EverFlirt::PASSWORD_FIELD => Various::genRnd(null, EveFlirt::MAX_PASSWORD_LENGTH)
+            EveFlirt::PASSWORD_FIELD => Various::genRnd(null, EveFlirt::MAX_PASSWORD_LENGTH)
         ];
 
         $oAffiliateId = new AffiliateId(self::PARTNER_AFF_ID);
