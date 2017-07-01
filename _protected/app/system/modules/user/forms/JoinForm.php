@@ -65,7 +65,7 @@ class JoinForm
         if (DbConfig::getSetting('allowUserToPartner') &&
             (new AdminCoreModel)->getRootIp() !== Ip::get() && !AdminCore::auth()
         ) {
-            $oForm->addElement(new \PFBC\Element\Checkbox('', 'partner_register', array('yes' => '<em class="small">' . t('Register me to EdenFlirt for free and get much more chance to date the right one.') . '</em>'), array('value' => 'yes')));
+            $oForm->addElement(new \PFBC\Element\Checkbox('', 'partner_register', array('yes' => '<em class="small">' . t('Join also EdenFlirt for increasing the chance to date the right person.') . '</em>'), array('value' => 'yes')));
         }
 
         $oForm->addElement(new \PFBC\Element\Button(t('Join for free!'), 'submit', array('icon' => 'heart')));
