@@ -101,6 +101,8 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Require photo to be uploaded:'), 'require_registration_avatar', array('1' => t('Yes'), '0' => t('No')), array('description' => t('Require Members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo because users can still close the page and not finish the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1)));
 
+        $oForm->addElement(new \PFBC\Element\Select(t('Allow Users to Register on Partner Service:'), 'allow_user_to_partner', array('1' => t('Enable (recommended)'), '0' => t('Disable')), array('description' => t('Gives the possibility to users to register them instantly on another dating service and increase the service quality.'), 'value' => DbConfig::getSetting('allowUserToPartner'), 'required' => 1)));
+
         $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), array('value'=>DbConfig::getSetting('defaultMembershipGroupId'), 'required'=>1)));
 
 
