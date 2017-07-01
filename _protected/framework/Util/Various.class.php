@@ -25,7 +25,7 @@ class Various
     /**
      * Generate Random.
      *
-     * @param string $sStr
+     * @param string|null $sStr
      * @param integer $iLength Default is 40 Characters.
      *
      * @return string

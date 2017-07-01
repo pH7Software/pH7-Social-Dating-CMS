@@ -25,7 +25,8 @@ use PH7\Framework\Url\Header;
 
 class JoinFormProcess extends Form
 {
-    const AFFILIATE_ID = 645555;
+    const PARTNER_AFF_VAR_NAME = 'partner_register';
+    const PARTNER_AFF_ID = 645555;
 
     /** @var UserModel */
     private $oUserModel;
@@ -71,16 +72,17 @@ class JoinFormProcess extends Form
                 t('Please try again with new information in the form fields or come back later.')
             );
         } else {
-            // Successful registration in the database for step 1!
-
-            if ($this->httpRequest->postExists('partner_register')) {
-                // If we got the authorization from the user, we register their to a partner service
-                $this->addUserToPartnerService($aData);
+            /**
+             * Update the Affiliate Commission
+             * Only if the user's account is already activated
+             */
+            if ($this->iActiveType == 0) {
+                AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
             }
 
-            /* Update the Affiliate Commission */
-            if ($this->iActiveType == 0) // Only if the user's account is already activated
-                AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
+            if ($this->httpRequest->postExists(self::PARTNER_AFF_VAR_NAME)) {
+                $this->session->set(self::PARTNER_AFF_VAR_NAME, 1);
+            }
 
             // Send email
             (new Registration)->sendMail($aData);
@@ -88,6 +90,7 @@ class JoinFormProcess extends Form
             $aSessData = [
                 'mail_step1' => $aData['email'],
                 'username' => $aData['username'],
+                'first_name' => $aData['first_name'],
                 'profile_id' => $iProfileId
             ];
             $this->session->set($aSessData);
@@ -123,7 +126,12 @@ class JoinFormProcess extends Form
                 t('Please try again with new information in the form fields or come back later.')
             );
         } else {
-            // Registered successfully in database for step 2!
+            if ($this->session->exists(self::PARTNER_AFF_VAR_NAME)) {
+                // If we got the authorization from the user, we register their to a partner service
+                $aData = $aData1 + $aData2;
+                $this->addUserToPartnerService($aData);
+            }
+
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
             Header::redirect(Uri::get('user','signup','step3'));
         }
@@ -184,15 +192,27 @@ class JoinFormProcess extends Form
      */
     private function addUserToPartnerService(array $aData)
     {
+        $aBirthDate = explode('-', $aData['birth_date']); // "Y-m-d" pattern
+
         $aUserData = [
-            EveFlirt::EMAIL_FIELD => $aData['email'],
-            EveFlirt::USERNAME_FIELD => $aData['username'],
-            EverFlirt::NAME_FIELD => $aData['first_name'],
+            EveFlirt::PLATFORM_FIELD => 'desktop',
+            EveFlirt::TOS_FIELD => 'on',
+            EveFlirt::EMAIL_FIELD => $this->session->get('mail_step1'),
+            EveFlirt::USERNAME_FIELD => $this->session->get('username'),
+            EveFlirt::FIRSTNAME_FIELD => $this->session->get('first_name'),
+            EveFlirt::GENDER_FIELD => ($aData['sex'] === 'male' ? 1 : 2),
+            EveFlirt::BIRTH_YEAR_FIELD => $aBirthDate[0],
+            EveFlirt::BIRTH_MONTH_FIELD => $aBirthDate[1],
+            EveFlirt::BIRTH_DAY_FIELD => $aBirthDate[2],
+            EveFlirt::COUNTRY_FIELD => $aData['country'],
+            EveFlirt::CITY_FIELD => $aData['city'],
+            EveFlirt::POSTALCODE_FIELD => $aData['zip_code'],
+
             // For security reason, we don't want to send the user's password
-            EverFlirt::PASSWORD_FIELD => Various::genRnd($aData['email'], EveFlirt::MAX_PASSWORD_LENGTH)
+            EverFlirt::PASSWORD_FIELD => Various::genRnd(null, EveFlirt::MAX_PASSWORD_LENGTH)
         ];
 
-        $oAffiliateId = new AffiliateId(self::AFFILIATE_ID);
+        $oAffiliateId = new AffiliateId(self::PARTNER_AFF_ID);
         $oEveFlirt = new EveFlirt($oAffiliateId);
 
         (new Register($oEveFlirt, $aUserData))->send();
