@@ -58,7 +58,7 @@ class JoinForm
           $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
-        $oForm->addElement(new \PFBC\Element\Checkbox('', 'terms', array(1 => '<em>' . t('I have read and agree to the %0%.', '<a href="' . Uri::get('page', 'main', 'terms') . '" rel="nofollow" target="_blank">' . t('Terms of Service') . '</a>') . '</em>'), array('id' => 'terms', 'onblur' => 'CValid(this.checked, this.id)', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox(t('Terms of Service'), 'terms', array(1 => '<em>' . t('I have read and agree to the %0%.', '<a href="' . Uri::get('page', 'main', 'terms') . '" rel="nofollow" target="_blank">' . t('Terms of Service') . '</a>') . '</em>'), array('id' => 'terms', 'onblur' => 'CValid(this.checked, this.id)', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error terms-0"></span>'));
 
         if ((new AdminCoreModel)->getRootIp() !== Ip::get() && !AdminCore::auth()) {
