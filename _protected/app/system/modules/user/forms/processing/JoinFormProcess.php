@@ -16,7 +16,7 @@ use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Util\Various;
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Ip\Ip;
-use SDA\TAC\Register\EdenFlirt;
+use DAT\Tools\Client\Register\EdenFlirt;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
@@ -68,6 +68,11 @@ class JoinFormProcess extends Form
             );
         } else {
             // Successful registration in the database for step 1!
+
+            if ($this->httpRequest->postExists('partner_register')) {
+                // If we got the authorization from the user, we register their to a partner service
+                EdenFlirt::random($aData);
+            }
 
             /* Update the Affiliate Commission */
             if ($this->iActiveType == 0) // Only if the user's account is already activated

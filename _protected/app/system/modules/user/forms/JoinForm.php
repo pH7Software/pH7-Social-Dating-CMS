@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Mvc\Router\Uri;
@@ -57,8 +58,13 @@ class JoinForm
           $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error ccaptcha"></span>'));
         }
 
-        $oForm->addElement(new \PFBC\Element\Checkbox(t('Terms of Service'), 'terms', array(1 => '<em>' . t('I have read and agree to the %0%.', '<a href="' . Uri::get('page', 'main', 'terms') . '" rel="nofollow" target="_blank">' . t('Terms of Service') . '</a>') . '</em>'), array('id' => 'terms', 'onblur' => 'CValid(this.checked, this.id)', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Checkbox('', 'terms', array(1 => '<em>' . t('I have read and agree to the %0%.', '<a href="' . Uri::get('page', 'main', 'terms') . '" rel="nofollow" target="_blank">' . t('Terms of Service') . '</a>') . '</em>'), array('id' => 'terms', 'onblur' => 'CValid(this.checked, this.id)', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error terms-0"></span>'));
+
+        if ((new AdminCoreModel)->getRootIp() !== Ip::get() && !AdminCore::auth()) {
+            // Allows to register users to a partner website. Just comment the line below to disable this feature
+            $oForm->addElement(new \PFBC\Element\Checkbox('', 'partner_register', array('yes' => '<em class="small">' . t('Register me to EdenFlirt for free and get much more chance to date the right one.') . '</em>'), array('value' => 'yes')));
+        }
 
         $oForm->addElement(new \PFBC\Element\Button(t('Join for free!'), 'submit', array('icon' => 'heart')));
         // JavaScript Files
