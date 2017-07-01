@@ -184,9 +184,15 @@ class JoinFormProcess extends Form
      */
     private function addUserToPartnerService(array $aData)
     {
+        $aUserData = [
+            EveFlirt::EMAIL_FIELD => $aData['email'],
+            EveFlirt::USERNAME_FIELD => $aData['username'],
+            EverFlirt::NAME_FIELD => $aData['first_name']
+        ];
+
         $oAffiliateId = new AffiliateId(self::AFFILIATE_ID);
         $oEveFlirt = new EveFlirt($oAffiliateId);
 
-        (new Register($oEveFlirt, $aData))->random()->send();
+        (new Register($oEveFlirt, $aUserData))->random()->send();
     }
 }

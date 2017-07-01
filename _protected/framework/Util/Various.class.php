@@ -11,6 +11,7 @@
  */
 
 namespace PH7\Framework\Util;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Str\Str;
@@ -24,9 +25,9 @@ class Various
     /**
      * Generate Random.
      *
-     * @static
      * @param string $sStr
      * @param integer $iLength Default is 40 Characters.
+     *
      * @return string
      */
     public static function genRnd($sStr = null, $iLength = self::MAX_LENGTH)
@@ -39,9 +40,9 @@ class Various
     /**
      * Padding String.
      *
-     * @static
      * @param string $sStr
      * @param integer $iLength
+     *
      * @return string
      */
     public static function padStr($sStr, $iLength = self::MAX_LENGTH)
@@ -53,9 +54,9 @@ class Various
     /**
      * Generate Random Word.
      *
-     * @static
      * @param integer $iMinLength
      * @param integer $iMaxLength
+     *
      * @return string
      */
     public static function genRndWord($iMinLength, $iMaxLength)
@@ -82,8 +83,8 @@ class Various
 
             if (feof($rHandle)) fseek($rHandle, 0); // if at end, go to start
 
-            $sWord = fgets($rHandle, 80);  // skip first word as it could be partial
-            $sWord = fgets($rHandle, 80);  // the potential password
+            $sWord = fgets($rHandle, 80);  // Skip the first word as it could be partial
+            $sWord = fgets($rHandle, 80);  // Potential word/password
         }
         while ( ($iWordLength < $iMinLength) || ($iWordLength > $iMaxLength) || (strstr($sWord, "'")) );
 
