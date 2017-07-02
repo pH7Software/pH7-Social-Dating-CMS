@@ -10,22 +10,23 @@
  */
 
 namespace PH7\Framework\Cron\Run;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Core\Core;
 use PH7\Framework\Url\Uri;
 
-abstract class Cron extends \PH7\Framework\Core\Core
+abstract class Cron extends Core
 {
-
     protected $iTime;
-    private $_oUri;
+    private $oUri;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->iTime = time();
-        $this->_oUri = Uri::getInstance();
+        $this->oUri = Uri::getInstance();
     }
 
     /**
@@ -36,45 +37,54 @@ abstract class Cron extends \PH7\Framework\Core\Core
         $sFullPath = PH7_PATH_SYS . 'core/assets/cron/_delay/' . $this->getFileName() . '.txt';
         $bStatus = true; // Default status is TRUE
 
-        if ($this->file->existFile($sFullPath))
-        {
+        if ($this->file->existFile($sFullPath)) {
             $iSavedTime = $this->file->getFile($sFullPath);
-            $iSeconds = $this->getDelay() * 3600; // Convert hours to seconds
-            $iCronTime = $iSavedTime + $iSeconds;
+            $iHours = $this->getDelay();
+            $iCronTime = $iSavedTime + $this->convertHoursIntoSeconds($iHours);
 
-            $bStatus = ($iCronTime < $this->iTime); // Status is FALSE if the delay has not yet elapsed
+            // Status is FALSE if the delay has not yet elapsed
+            $bStatus = ($iCronTime < $this->iTime);
 
-            if ($bStatus)
+            if ($bStatus) {
                 $this->file->deleteFile($sFullPath);
+            }
         }
 
-        if ($bStatus)
+        if ($bStatus) {
             $this->file->putFile($sFullPath, $this->iTime);
+        }
 
         return $bStatus;
     }
 
     /**
-     * Get file name.
-     *
      * @return string File name.
      */
     protected function getFileName()
     {
-        return strtolower($this->_oUri->fragment(3));
+        return strtolower($this->oUri->fragment(3));
     }
 
     /**
      * Get the cron delay.
      *
-     * @return integer Delay in hour.
+     * @return int Delay in hour.
      */
     protected function getDelay()
     {
         /**
          * @internal We cast the value into integer type to get only the integer data (without the 'h' character).
          */
-        return (int) $this->_oUri->fragment(2);
+        return (int) $this->oUri->fragment(2);
     }
 
+    /**
+     * @param int $iHours Hour(s).
+     *
+     * @return int Seconds
+     */
+    private function convertHoursIntoSeconds($iHours)
+    {
+        return $iHours * 3600;
+    }
 }
