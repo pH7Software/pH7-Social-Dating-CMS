@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b15bd902ba4aff4d3d267baaacad86e",
+    "content-hash": "2e7504c7461124f35a7081536014ba2c",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -276,16 +276,16 @@
         },
         {
             "name": "ph-7/dating-affiliate-tools",
-            "version": "v1.0",
+            "version": "v2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pH-7/dating-affiliate-tools.git",
-                "reference": "7ee3819e632eff8156656caf42b9f866202fd233"
+                "reference": "04ddea469f3c5fc9bae399a9134bd4d332cfd55d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pH-7/dating-affiliate-tools/zipball/7ee3819e632eff8156656caf42b9f866202fd233",
-                "reference": "7ee3819e632eff8156656caf42b9f866202fd233",
+                "url": "https://api.github.com/repos/pH-7/dating-affiliate-tools/zipball/04ddea469f3c5fc9bae399a9134bd4d332cfd55d",
+                "reference": "04ddea469f3c5fc9bae399a9134bd4d332cfd55d",
                 "shasum": ""
             },
             "require": {
@@ -326,7 +326,7 @@
                 "the adult company",
                 "tools"
             ],
-            "time": "2017-07-01T21:10:38+00:00"
+            "time": "2017-07-02T15:35:05+00:00"
         },
         {
             "name": "ph-7/ph7client",
