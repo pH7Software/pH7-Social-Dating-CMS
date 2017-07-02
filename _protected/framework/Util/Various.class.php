@@ -14,9 +14,9 @@ namespace PH7\Framework\Util;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Str\Str;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Str\Str;
 
 class Various
 {

@@ -9,7 +9,8 @@
  * @version        1.0
  */
 namespace PH7;
-use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {

@@ -7,12 +7,11 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Str\Str,
-PH7\Framework\Security\CSRF\Token,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Url\Header;
 
 class EditAdminBlogForm
 {

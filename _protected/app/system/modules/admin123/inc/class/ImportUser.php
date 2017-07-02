@@ -11,10 +11,9 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Util\Various,
-PH7\Framework\Security\Validate\Validate,
-PH7\Framework\Ip\Ip;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Util\Various;
 
 /** Reset the time limit and increase the memory **/
 @set_time_limit(0);

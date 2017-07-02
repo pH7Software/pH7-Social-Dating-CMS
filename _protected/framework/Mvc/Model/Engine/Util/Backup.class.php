@@ -15,11 +15,11 @@ namespace PH7\Framework\Mvc\Model\Engine\Util;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel;
 use PH7\Framework\Config\Config;
+use PH7\Framework\Core\Kernel;
 use PH7\Framework\Date\CDateTime;
-use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Navigation\Browser;
 
 class Backup
 {

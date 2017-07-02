@@ -8,10 +8,9 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Security\Validate\Validate,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Mail\Mail;
+use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Validate\Validate;
 
 class InviteFormProcess extends Form
 {

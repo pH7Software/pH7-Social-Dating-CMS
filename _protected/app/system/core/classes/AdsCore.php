@@ -7,7 +7,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Pattern\Statik;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Pattern\Statik;
 
 class AdsCore extends Framework\Ads\Ads
 {

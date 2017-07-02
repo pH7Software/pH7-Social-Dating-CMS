@@ -13,13 +13,13 @@ namespace PH7\Framework\Mvc\Model;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Ads\Ads as Banner;
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Layout\Html\Design as HtmlDesign;
 use PH7\Framework\Mvc\Model\Engine\Db;
-use PH7\Framework\Registry\Registry;
-use PH7\Framework\Cache\Cache;
-use PH7\Framework\Parse\SysVar;
 use PH7\Framework\Navigation\Page;
-use PH7\Framework\Ads\Ads as Banner;
+use PH7\Framework\Parse\SysVar;
+use PH7\Framework\Registry\Registry;
 
 class Design extends HtmlDesign
 {

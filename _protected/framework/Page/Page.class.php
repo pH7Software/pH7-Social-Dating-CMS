@@ -11,7 +11,8 @@
 namespace PH7\Framework\Page;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Http\Http, PH7\Framework\Navigation\Browser;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Navigation\Browser;
 
 class Page
 {

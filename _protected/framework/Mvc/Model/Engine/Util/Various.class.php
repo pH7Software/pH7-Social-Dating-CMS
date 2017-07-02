@@ -12,7 +12,8 @@
 namespace PH7\Framework\Mvc\Model\Engine\Util;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\Engine\Db, PH7\Framework\Pattern\Statik;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Pattern\Statik;
 
 class Various
 {

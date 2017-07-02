@@ -10,8 +10,8 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Url;
 

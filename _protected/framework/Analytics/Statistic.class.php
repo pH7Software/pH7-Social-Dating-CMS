@@ -14,8 +14,8 @@ namespace PH7\Framework\Analytics;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc;
-use PH7\Framework\Session\Session;
 use PH7\Framework\Pattern\Statik;
+use PH7\Framework\Session\Session;
 
 class Statistic
 {

@@ -13,34 +13,34 @@ namespace PH7\Framework\Layout\Html;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel;
-use PH7\UserCore;
-use PH7\UserCoreModel;
 use PH7\AdminCore;
 use PH7\AdminCoreModel;
 use PH7\AffiliateCore;
-use PH7\Framework\Registry\Registry;
-use PH7\Framework\Mvc\Model\Engine\Db;
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Parse\Url as UrlParser;
-use PH7\Framework\Url\Url;
-use PH7\Framework\Ip\Ip;
-use PH7\Framework\Geo\Ip\Geo;
-use PH7\Framework\Str\Str;
-use PH7\Framework\File\File;
-use PH7\Framework\Session\Session;
-use PH7\Framework\Navigation\Page;
-use PH7\Framework\Geo\Misc\Country;
 use PH7\Framework\Benchmark\Benchmark;
 use PH7\Framework\Cache\Cache;
-use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Navigation\Pagination;
-use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\File\File;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Geo\Misc\Country;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
-use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Navigation\Pagination;
+use PH7\Framework\Parse\Url as UrlParser;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Url\Url;
+use PH7\UserCore;
+use PH7\UserCoreModel;
 
 class Design
 {

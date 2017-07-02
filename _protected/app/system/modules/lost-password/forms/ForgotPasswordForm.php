@@ -10,8 +10,8 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Url\Header;
 
 class ForgotPasswordForm

@@ -13,11 +13,10 @@
 namespace PH7\Framework\Error;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\File,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Http\Http,
-PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\File\File;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\Engine\Db;
 
 final class LoggerExcept extends Logger
 {

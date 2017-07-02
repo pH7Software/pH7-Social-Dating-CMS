@@ -8,12 +8,12 @@
 
 namespace PH7;
 
-use PH7\Framework\Navigation\Page;
 use PH7\Framework\Layout\Html\Design;
-use PH7\Framework\Security\CSRF\Token;
 use PH7\Framework\Layout\Html\Security;
-use PH7\Framework\Url\Header;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Url\Header;
 use stdClass;
 
 class MainController extends Controller

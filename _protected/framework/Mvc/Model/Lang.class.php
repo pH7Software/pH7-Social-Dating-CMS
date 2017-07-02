@@ -13,7 +13,8 @@ namespace PH7\Framework\Mvc\Model;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\Engine\Db, PH7\Framework\Cache\Cache;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Mvc\Model\Engine\Db;
 
 class Lang
 {

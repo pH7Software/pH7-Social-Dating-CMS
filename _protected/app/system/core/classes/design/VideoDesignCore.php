@@ -16,10 +16,10 @@
 namespace PH7;
 
 use PH7\Framework\Date\Various;
-use PH7\Framework\Video\Api as VideoApi;
+use PH7\Framework\File\File;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Pattern\Statik;
-use PH7\Framework\File\File;
+use PH7\Framework\Video\Api as VideoApi;
 
 class VideoDesignCore
 {

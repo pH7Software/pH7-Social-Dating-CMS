@@ -13,9 +13,8 @@
 namespace PH7\Framework\Mvc\Model;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Mvc\Model\Engine\Db,
-PH7\Framework\Security\Spam\Spam as SecMsg;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Security\Spam\Spam as SecMsg;
 
 class Spam
 {

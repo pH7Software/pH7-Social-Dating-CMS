@@ -10,8 +10,8 @@ namespace PH7\Framework\Mvc\Model\Engine;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Error\CException\Escape;
 use PDOException;
+use PH7\Framework\Error\CException\Escape;
 
 class Exception extends PDOException
 {

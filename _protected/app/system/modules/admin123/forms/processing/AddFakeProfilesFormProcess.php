@@ -12,11 +12,10 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Url\Url,
-PH7\Framework\Geo\Misc\Country,
-PH7\Framework\Security\Validate\Validate,
-PH7\Framework\Ip\Ip;
+use PH7\Framework\Geo\Misc\Country;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Url\Url;
 
 /** Reset the time limit and increase the memory **/
 @set_time_limit(0);

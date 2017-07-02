@@ -8,13 +8,12 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Util\Various,
-PH7\Framework\Cookie\Cookie,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Mail\Mail;
+use PH7\Framework\Cookie\Cookie;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Util\Various;
 
 class SubscriptionFormProcess extends Form
 {

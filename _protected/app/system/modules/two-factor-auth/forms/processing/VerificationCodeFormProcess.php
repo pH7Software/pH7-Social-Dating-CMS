@@ -10,11 +10,11 @@ namespace PH7;
 
 defined('PH7') or die('Restricted access');
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use RobThree\Auth\TwoFactorAuth as Authenticator;
-use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class VerificationCodeFormProcess extends Form
 {

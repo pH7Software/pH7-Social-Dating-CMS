@@ -7,10 +7,9 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Model\Module as ModuleModel;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Module as ModuleModel;
+use PH7\Framework\Mvc\Router\Uri;
 
 class DisableModuleForm
 {

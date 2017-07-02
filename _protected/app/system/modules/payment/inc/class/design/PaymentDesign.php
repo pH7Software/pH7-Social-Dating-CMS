@@ -10,8 +10,8 @@
 
 namespace PH7;
 
-use PH7\Framework\Payment\Gateway\Api\Api as PaymentApi;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Payment\Gateway\Api\Api as PaymentApi;
 use stdClass;
 
 class PaymentDesign extends Framework\Core\Core

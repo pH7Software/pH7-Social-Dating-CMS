@@ -10,7 +10,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Config\Config, PH7\Framework\File as F;
+use PH7\Framework\Config\Config;
+use PH7\Framework\File as F;
 
 @set_time_limit(0);
 @ini_set('memory_limit', '528M');

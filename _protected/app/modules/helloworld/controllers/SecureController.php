@@ -7,7 +7,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Http\Http, PH7\Framework\Translate\Lang;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Translate\Lang;
 
 class SecureController extends Controller
 {

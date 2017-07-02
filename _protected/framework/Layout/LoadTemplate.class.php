@@ -12,7 +12,8 @@
 namespace PH7\Framework\Layout;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Cookie\Cookie;
 
 class LoadTemplate
 {

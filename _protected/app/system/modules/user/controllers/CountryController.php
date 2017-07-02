@@ -7,10 +7,9 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Navigation\Page,
-PH7\Framework\Geo\Map\Map;
+use PH7\Framework\Geo\Map\Map;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Navigation\Page;
 
 class CountryController extends Controller
 {

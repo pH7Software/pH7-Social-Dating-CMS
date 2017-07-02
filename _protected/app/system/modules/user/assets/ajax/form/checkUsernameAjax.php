@@ -8,10 +8,9 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Security\Validate\Validate,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Security\Validate\Validate;
 
 $oHttpRequest = new Http;
 
