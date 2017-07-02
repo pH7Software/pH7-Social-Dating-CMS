@@ -10,18 +10,18 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Security\Security;
-use PH7\Framework\Mvc\Request\Http;
-use PH7\Framework\Util\Various;
-use PH7\Framework\Cookie\Cookie;
-use PH7\Framework\Ip\Ip;
-use DAT\Tool\Client\Registration as Register;
-use DAT\Service\Provider\TAC\EveFlirt;
 use DAT\Service\Identifier\Affiliate as AffiliateId;
+use DAT\Service\Provider\TAC\EveFlirt;
+use DAT\Tool\Client\Registration as Register;
+use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Security;
 use PH7\Framework\Url\Header;
+use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form
 {
