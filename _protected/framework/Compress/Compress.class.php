@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * @title            Compress Class
  * @desc             This class that compresses the data.
  *
@@ -8,16 +8,18 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Compress
- * @version          0.9
+ * @version          1.0
  */
 
 namespace PH7\Framework\Compress;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
 
 class Compress
 {
+    const MAX_LIMIT_GOOGLE_CLOSURE = 200000; // 200KB
 
     /**
      * For Stylesheet and JavaScript.
