@@ -8,7 +8,7 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     // Load plugin specific language pack
     tinymce.PluginManager.requireLangPack('example');
 
@@ -21,29 +21,29 @@
          * @param {tinymce.Editor} ed Editor instance that the plugin is initialized in.
          * @param {string} url Absolute URL to where the plugin is located.
          */
-        init : function(ed, url) {
+        init: function (ed, url) {
             // Register the command so that it can be invoked by using tinyMCE.activeEditor.execCommand('mceExample');
-            ed.addCommand('mceExample', function() {
+            ed.addCommand('mceExample', function () {
                 ed.windowManager.open({
-                    file : url + '/dialog.htm',
-                    width : 320 + parseInt(ed.getLang('example.delta_width', 0)),
-                    height : 120 + parseInt(ed.getLang('example.delta_height', 0)),
-                    inline : 1
+                    file: url + '/dialog.htm',
+                    width: 320 + parseInt(ed.getLang('example.delta_width', 0)),
+                    height: 120 + parseInt(ed.getLang('example.delta_height', 0)),
+                    inline: 1
                 }, {
-                    plugin_url : url, // Plugin absolute URL
-                    some_custom_arg : 'custom arg' // Custom argument
+                    plugin_url: url, // Plugin absolute URL
+                    some_custom_arg: 'custom arg' // Custom argument
                 });
             });
 
             // Register example button
             ed.addButton('example', {
-                title : 'example.desc',
-                cmd : 'mceExample',
-                image : url + '/img/example.gif'
+                title: 'example.desc',
+                cmd: 'mceExample',
+                image: url + '/img/example.gif'
             });
 
             // Add a node change handler, selects the button in the UI when a image is selected
-            ed.onNodeChange.add(function(ed, cm, n) {
+            ed.onNodeChange.add(function (ed, cm, n) {
                 cm.setActive('example', n.nodeName == 'IMG');
             });
         },
@@ -58,7 +58,7 @@
          * @param {tinymce.ControlManager} cm Control manager to use inorder to create new control.
          * @return {tinymce.ui.Control} New control instance or null if no control was created.
          */
-        createControl : function(n, cm) {
+        createControl: function (n, cm) {
             return null;
         },
 
@@ -68,13 +68,13 @@
          *
          * @return {Object} Name/value array containing information about the plugin.
          */
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Example plugin',
-                author : 'Some author',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/example',
-                version : "1.0"
+                longname: 'Example plugin',
+                author: 'Some author',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/example',
+                version: "1.0"
             };
         }
     });

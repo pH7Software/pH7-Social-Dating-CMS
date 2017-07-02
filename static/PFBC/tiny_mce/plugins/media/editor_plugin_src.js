@@ -8,7 +8,7 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     var rootAttributes = tinymce.explode('id,name,width,height,style,align,class,hspace,vspace,bgcolor,type'), excludedAttrs = tinymce.makeMap(rootAttributes.join(',')), Node = tinymce.html.Node,
         mediaTypes, scriptRegExp, JSON = tinymce.util.JSON, mimeTypes;
 
@@ -47,7 +47,7 @@
     };
 
     tinymce.create('tinymce.plugins.MediaPlugin', {
-        init : function(ed, url) {
+        init: function (ed, url) {
             var self = this, lookup = {}, i, y, item, name;
 
             function isMediaImg(node) {
@@ -63,10 +63,10 @@
                 name = mediaTypes[i][0];
 
                 item = {
-                    name : name,
-                    clsids : tinymce.explode(mediaTypes[i][1] || ''),
-                    mimes : tinymce.explode(mediaTypes[i][2] || ''),
-                    codebase : mediaTypes[i][3]
+                    name: name,
+                    clsids: tinymce.explode(mediaTypes[i][1] || ''),
+                    mimes: tinymce.explode(mediaTypes[i][2] || ''),
+                    codebase: mediaTypes[i][3]
                 };
 
                 for (y = 0; y < item.clsids.length; y++)
@@ -93,7 +93,7 @@
                 "realmedia=rm,ra,ram;" +
                 "java=jar;" +
                 "audio=mp3,ogg"
-            ).split(';'), function(item) {
+            ).split(';'), function (item) {
                 var i, extensions, type;
 
                 item = item.split(/=/);
@@ -109,12 +109,12 @@
             scriptRegExp = new RegExp('write(' + scriptRegExp + ')\\(([^)]+)\\)');
             self.lookup = lookup;
 
-            ed.onPreInit.add(function() {
+            ed.onPreInit.add(function () {
                 // Allow video elements
                 ed.schema.addValidElements('object[id|style|width|height|classid|codebase|*],param[name|value],embed[id|style|width|height|type|src|*],video[*],audio[*],source[*]');
 
                 // Convert video elements to image placeholder
-                ed.parser.addNodeFilter('object,embed,video,audio,script,iframe', function(nodes) {
+                ed.parser.addNodeFilter('object,embed,video,audio,script,iframe', function (nodes) {
                     var i = nodes.length;
 
                     while (i--)
@@ -122,7 +122,7 @@
                 });
 
                 // Convert image placeholders to video elements
-                ed.serializer.addNodeFilter('img', function(nodes, name, args) {
+                ed.serializer.addNodeFilter('img', function (nodes, name, args) {
                     var i = nodes.length, node;
 
                     while (i--) {
@@ -133,10 +133,10 @@
                 });
             });
 
-            ed.onInit.add(function() {
+            ed.onInit.add(function () {
                 // Display "media" instead of "img" in element path
                 if (ed.theme && ed.theme.onResolveName) {
-                    ed.theme.onResolveName.add(function(theme, path_object) {
+                    ed.theme.onResolveName.add(function (theme, path_object) {
                         if (path_object.name === 'img' && ed.dom.hasClass(path_object.node, 'mceItemMedia'))
                             path_object.name = 'media';
                     });
@@ -144,15 +144,15 @@
 
                 // Add contect menu if it's loaded
                 if (ed && ed.plugins.contextmenu) {
-                    ed.plugins.contextmenu.onContextMenu.add(function(plugin, menu, element) {
+                    ed.plugins.contextmenu.onContextMenu.add(function (plugin, menu, element) {
                         if (element.nodeName === 'IMG' && element.className.indexOf('mceItemMedia') !== -1)
-                            menu.add({title : 'media.edit', icon : 'media', cmd : 'mceMedia'});
+                            menu.add({title: 'media.edit', icon: 'media', cmd: 'mceMedia'});
                     });
                 }
             });
 
             // Register commands
-            ed.addCommand('mceMedia', function() {
+            ed.addCommand('mceMedia', function () {
                 var data, img;
 
                 img = ed.selection.getNode();
@@ -162,7 +162,7 @@
                         data = JSON.parse(data);
 
                         // Add some extra properties to the data object
-                        tinymce.each(rootAttributes, function(name) {
+                        tinymce.each(rootAttributes, function (name) {
                             var value = ed.dom.getAttrib(img, name);
 
                             if (value)
@@ -175,33 +175,33 @@
 
                 if (!data) {
                     data = {
-                        type : 'flash',
-                        video: {sources:[]},
+                        type: 'flash',
+                        video: {sources: []},
                         params: {}
                     };
                 }
 
                 ed.windowManager.open({
-                    file : url + '/media.htm',
-                    width : 430 + parseInt(ed.getLang('media.delta_width', 0)),
-                    height : 500 + parseInt(ed.getLang('media.delta_height', 0)),
-                    inline : 1
+                    file: url + '/media.htm',
+                    width: 430 + parseInt(ed.getLang('media.delta_width', 0)),
+                    height: 500 + parseInt(ed.getLang('media.delta_height', 0)),
+                    inline: 1
                 }, {
-                    plugin_url : url,
-                    data : data
+                    plugin_url: url,
+                    data: data
                 });
             });
 
             // Register buttons
-            ed.addButton('media', {title : 'media.desc', cmd : 'mceMedia'});
+            ed.addButton('media', {title: 'media.desc', cmd: 'mceMedia'});
 
             // Update media selection status
-            ed.onNodeChange.add(function(ed, cm, node) {
+            ed.onNodeChange.add(function (ed, cm, node) {
                 cm.setActive('media', isMediaImg(node));
             });
         },
 
-        convertUrl : function(url, force_absolute) {
+        convertUrl: function (url, force_absolute) {
             var self = this, editor = self.editor, settings = editor.settings,
                 urlConverter = settings.url_converter,
                 urlConverterScope = settings.url_converter_scope || self;
@@ -215,20 +215,20 @@
             return urlConverter.call(urlConverterScope, url, 'src', 'object');
         },
 
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Media',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/media',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Media',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/media',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         },
 
         /**
          * Converts the JSON data object to an img node.
          */
-        dataToImg : function(data, force_absolute) {
+        dataToImg: function (data, force_absolute) {
             var self = this, editor = self.editor, baseUri = editor.documentBaseURI, sources, attrs, img, i;
 
             data.params.src = self.convertUrl(data.params.src, force_absolute);
@@ -247,12 +247,12 @@
             }
 
             img = self.editor.dom.create('img', {
-                id : data.id,
-                style : data.style,
-                align : data.align,
-                src : self.editor.theme.url + '/img/trans.gif',
-                'class' : 'mceItemMedia mceItem' + self.getType(data.type).name,
-                'data-mce-json' : JSON.serialize(data, "'")
+                id: data.id,
+                style: data.style,
+                align: data.align,
+                src: self.editor.theme.url + '/img/trans.gif',
+                'class': 'mceItemMedia mceItem' + self.getType(data.type).name,
+                'data-mce-json': JSON.serialize(data, "'")
             });
 
             img.width = data.width || (data.type == 'audio' ? "300" : "320");
@@ -264,19 +264,22 @@
         /**
          * Converts the JSON data object to a HTML string.
          */
-        dataToHtml : function(data, force_absolute) {
-            return this.editor.serializer.serialize(this.dataToImg(data, force_absolute), {forced_root_block : '', force_absolute : force_absolute});
+        dataToHtml: function (data, force_absolute) {
+            return this.editor.serializer.serialize(this.dataToImg(data, force_absolute), {
+                forced_root_block: '',
+                force_absolute: force_absolute
+            });
         },
 
         /**
          * Converts the JSON data object to a HTML string.
          */
-        htmlToData : function(html) {
+        htmlToData: function (html) {
             var fragment, img, data;
 
             data = {
-                type : 'flash',
-                video: {sources:[]},
+                type: 'flash',
+                video: {sources: []},
                 params: {}
             };
 
@@ -288,7 +291,7 @@
                 data.type = this.getType(img.attr('class')).name.toLowerCase();
 
                 // Add some extra properties to the data object
-                tinymce.each(rootAttributes, function(name) {
+                tinymce.each(rootAttributes, function (name) {
                     var value = img.attr(name);
 
                     if (value)
@@ -306,7 +309,7 @@
          * @param {String} value Value to get type item by.
          * @return {Object} Type item object or undefined.
          */
-        getType : function(value) {
+        getType: function (value) {
             var i, values, typeItem;
 
             // Find type by checking the classes
@@ -322,7 +325,7 @@
         /**
          * Converts a tinymce.html.Node image element to video/object/embed.
          */
-        imgToObject : function(node, args) {
+        imgToObject: function (node, args) {
             var self = this, editor = self.editor, video, object, embed, iframe, name, value, data,
                 source, sources, params, param, typeItem, i, item, mp4Source, replacement,
                 posterSrc, style, audio;
@@ -344,8 +347,8 @@
 
                     // Generate flash vars
                     flashVarsOutput = '';
-                    flashVars = editor.getParam('flash_video_player_flashvars', {url : '$url', poster : '$poster'});
-                    tinymce.each(flashVars, function(value, name) {
+                    flashVars = editor.getParam('flash_video_player_flashvars', {url: '$url', poster: '$poster'});
+                    tinymce.each(flashVars, function (value, name) {
                         // Replace $url and $poster variables in flashvars value
                         value = value.replace(/\$url/, video_src || '');
                         value = value.replace(/\$poster/, poster_src || '');
@@ -362,7 +365,7 @@
                         allowscriptaccess: true
                     });
 
-                    tinymce.each(params, function(value, name) {
+                    tinymce.each(params, function (value, name) {
                         data.params[name] = "" + value;
                     });
                 }
@@ -387,7 +390,7 @@
             if (typeItem.name === 'Iframe') {
                 replacement = new Node('iframe', 1);
 
-                tinymce.each(rootAttributes, function(name) {
+                tinymce.each(rootAttributes, function (name) {
                     var value = node.attr(name);
 
                     if (name == 'class' && value)
@@ -416,9 +419,9 @@
 
                 value = new Node('#text', 3);
                 value.value = 'write' + typeItem.name + '(' + JSON.serialize(tinymce.extend(data.params, {
-                    width: node.attr('width'),
-                    height: node.attr('height')
-                })) + ');';
+                        width: node.attr('width'),
+                        height: node.attr('height')
+                    })) + ');';
 
                 replacement.append(value);
                 node.replace(replacement);
@@ -430,10 +433,10 @@
             if (typeItem.name === 'Video' && data.video.sources[0]) {
                 // Create new object element
                 video = new Node('video', 1).attr(tinymce.extend({
-                    id : node.attr('id'),
+                    id: node.attr('id'),
                     width: node.attr('width'),
                     height: node.attr('height'),
-                    style : style
+                    style: style
                 }, data.video.attrs));
 
                 // Get poster source and use that for flash fallback
@@ -469,10 +472,10 @@
             if (typeItem.name === 'Audio' && data.video.sources[0]) {
                 // Create new object element
                 audio = new Node('audio', 1).attr(tinymce.extend({
-                    id : node.attr('id'),
+                    id: node.attr('id'),
                     width: node.attr('width'),
                     height: node.attr('height'),
-                    style : style
+                    style: style
                 }, data.video.attrs));
 
                 // Get poster source and use that for flash fallback
@@ -505,13 +508,13 @@
 
                 // Create new object element
                 object = new Node('object', 1).attr({
-                    id : node.attr('id'),
+                    id: node.attr('id'),
                     width: node.attr('width'),
                     height: node.attr('height'),
-                    style : style
+                    style: style
                 });
 
-                tinymce.each(rootAttributes, function(name) {
+                tinymce.each(rootAttributes, function (name) {
                     if (data[name] && name != 'type')
                         object.attr(name, data[name]);
                 });
@@ -548,14 +551,14 @@
                         id: node.attr('id'),
                         width: node.attr('width'),
                         height: node.attr('height'),
-                        style : style,
+                        style: style,
                         type: typeItem.mimes[0]
                     });
 
                     for (name in data.params)
                         embed.attr(name, data.params[name]);
 
-                    tinymce.each(rootAttributes, function(name) {
+                    tinymce.each(rootAttributes, function (name) {
                         if (data[name] && name != 'type')
                             embed.attr(name, data[name]);
                     });
@@ -611,7 +614,7 @@
          * The JSON structure will be like this:
          * {'params':{'flashvars':'something','quality':'high','src':'someurl'}, 'video':{'sources':[{src: 'someurl', type: 'video/mp4'}]}}
          */
-        objectToImg : function(node) {
+        objectToImg: function (node) {
             var object, embed, video, iframe, img, name, id, width, height, style, i, html,
                 param, params, source, sources, data, type, lookup = this.lookup,
                 matches, attrs, urlConverter = this.editor.settings.url_converter,
@@ -637,21 +640,21 @@
                     return;
 
                 type = matches[1];
-                data = {video : {}, params : JSON.parse(matches[2])};
+                data = {video: {}, params: JSON.parse(matches[2])};
                 width = data.params.width;
                 height = data.params.height;
             }
 
             // Setup data objects
             data = data || {
-                video : {},
-                params : {}
-            };
+                    video: {},
+                    params: {}
+                };
 
             // Setup new image object
             img = new Node('img', 1);
             img.attr({
-                src : this.editor.theme.url + '/img/trans.gif'
+                src: this.editor.theme.url + '/img/trans.gif'
             });
 
             // Video element
@@ -663,7 +666,7 @@
                 width = video.attr('width');
                 height = video.attr('height');
                 id = video.attr('id');
-                data.video = {attrs : {}, sources : []};
+                data.video = {attrs: {}, sources: []};
 
                 // Get all video attributes
                 attrs = data.video.attrs;
@@ -672,7 +675,7 @@
 
                 source = node.attr('src');
                 if (source)
-                    data.video.sources.push({src : urlConverter.call(urlConverterScope, source, 'src', node.name)});
+                    data.video.sources.push({src: urlConverter.call(urlConverterScope, source, 'src', node.name)});
 
                 // Get all sources
                 sources = video.getAll("source");
@@ -748,7 +751,7 @@
                 style = style || iframe.attr('style');
                 id = iframe.attr('id');
 
-                tinymce.each(rootAttributes, function(name) {
+                tinymce.each(rootAttributes, function (name) {
                     img.attr(name, iframe.attr(name));
                 });
 
@@ -807,12 +810,12 @@
 
             // Set width/height of placeholder
             img.attr({
-                id : id,
-                'class' : 'mceItemMedia mceItem' + (type || 'Flash'),
-                style : style,
-                width : width || (node.name == 'audio' ? "300" : "320"),
-                height : height || (node.name == 'audio' ? "32" : "240"),
-                "data-mce-json" : JSON.serialize(data, "'")
+                id: id,
+                'class': 'mceItemMedia mceItem' + (type || 'Flash'),
+                style: style,
+                width: width || (node.name == 'audio' ? "300" : "320"),
+                height: height || (node.name == 'audio' ? "32" : "240"),
+                "data-mce-json": JSON.serialize(data, "'")
             });
         }
     });

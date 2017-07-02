@@ -8,27 +8,27 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     var each = tinymce.each,
         defs = {
-            paste_auto_cleanup_on_paste : true,
-            paste_enable_default_filters : true,
-            paste_block_drop : false,
-            paste_retain_style_properties : "none",
-            paste_strip_class_attributes : "mso",
-            paste_remove_spans : false,
-            paste_remove_styles : false,
-            paste_remove_styles_if_webkit : true,
-            paste_convert_middot_lists : true,
-            paste_convert_headers_to_strong : false,
-            paste_dialog_width : "450",
-            paste_dialog_height : "400",
-            paste_text_use_dialog : false,
-            paste_text_sticky : false,
-            paste_text_sticky_default : false,
-            paste_text_notifyalways : false,
-            paste_text_linebreaktype : "p",
-            paste_text_replacements : [
+            paste_auto_cleanup_on_paste: true,
+            paste_enable_default_filters: true,
+            paste_block_drop: false,
+            paste_retain_style_properties: "none",
+            paste_strip_class_attributes: "mso",
+            paste_remove_spans: false,
+            paste_remove_styles: false,
+            paste_remove_styles_if_webkit: true,
+            paste_convert_middot_lists: true,
+            paste_convert_headers_to_strong: false,
+            paste_dialog_width: "450",
+            paste_dialog_height: "400",
+            paste_text_use_dialog: false,
+            paste_text_sticky: false,
+            paste_text_sticky_default: false,
+            paste_text_notifyalways: false,
+            paste_text_linebreaktype: "p",
+            paste_text_replacements: [
                 [/\u2026/g, "..."],
                 [/[\x93\x94\u201c\u201d]/g, '"'],
                 [/[\x60\x91\x92\u2018\u2019]/g, "'"]
@@ -40,7 +40,7 @@
     }
 
     tinymce.create('tinymce.plugins.PastePlugin', {
-        init : function(ed, url) {
+        init: function (ed, url) {
             var t = this;
 
             t.editor = ed;
@@ -55,16 +55,16 @@
             t.onPostProcess.add(t._postProcess);
 
             // Register optional preprocess handler
-            t.onPreProcess.add(function(pl, o) {
+            t.onPreProcess.add(function (pl, o) {
                 ed.execCallback('paste_preprocess', pl, o);
             });
 
             // Register optional postprocess
-            t.onPostProcess.add(function(pl, o) {
+            t.onPostProcess.add(function (pl, o) {
                 ed.execCallback('paste_postprocess', pl, o);
             });
 
-            ed.onKeyDown.addToTop(function(ed, e) {
+            ed.onKeyDown.addToTop(function (ed, e) {
                 // Block ctrl+v from adding an undo level since the default logic in tinymce.Editor will add that
                 if (((tinymce.isMac ? e.metaKey : e.ctrlKey) && e.keyCode == 86) || (e.shiftKey && e.keyCode == 45))
                     return false; // Stop other listeners
@@ -99,7 +99,7 @@
                 t.onPostProcess.dispatch(t, o);
 
                 // Serialize content
-                o.content = ed.serializer.serialize(o.node, {getInner : 1, forced_root_block : ''});
+                o.content = ed.serializer.serialize(o.node, {getInner: 1, forced_root_block: ''});
 
                 // Plain text option active?
                 if ((!force_rich) && (ed.pasteAsPlainText)) {
@@ -115,12 +115,12 @@
             }
 
             // Add command for external usage
-            ed.addCommand('mceInsertClipboardContent', function(u, o) {
+            ed.addCommand('mceInsertClipboardContent', function (u, o) {
                 process(o, true);
             });
 
             if (!getParam(ed, "paste_text_use_dialog")) {
-                ed.addCommand('mcePasteText', function(u, v) {
+                ed.addCommand('mcePasteText', function (u, v) {
                     var cookie = tinymce.util.Cookie;
 
                     ed.pasteAsPlainText = !ed.pasteAsPlainText;
@@ -155,7 +155,7 @@
 
                     if (ed.pasteAsPlainText) {
                         e.preventDefault();
-                        process({content : dom.encode(textContent).replace(/\r?\n/g, '<br />')});
+                        process({content: dom.encode(textContent).replace(/\r?\n/g, '<br />')});
                         return;
                     }
                 }
@@ -164,7 +164,7 @@
                     return;
 
                 // Create container to paste into
-                n = dom.add(body, 'div', {id : '_mcePaste', 'class' : 'mcePaste', 'data-mce-bogus' : '1'}, '\uFEFF\uFEFF');
+                n = dom.add(body, 'div', {id: '_mcePaste', 'class': 'mcePaste', 'data-mce-bogus': '1'}, '\uFEFF\uFEFF');
 
                 // If contentEditable mode we need to find out the position of the closest element
                 if (body != ed.getDoc().body)
@@ -175,12 +175,12 @@
                 // Styles needs to be applied after the element is added to the document since WebKit will otherwise remove all styles
                 // If also needs to be in view on IE or the paste would fail
                 dom.setStyles(n, {
-                    position : 'absolute',
-                    left : tinymce.isGecko ? -40 : 0, // Need to move it out of site on Gecko since it will othewise display a ghost resize rect for the div
-                    top : posY - 25,
-                    width : 1,
-                    height : 1,
-                    overflow : 'hidden'
+                    position: 'absolute',
+                    left: tinymce.isGecko ? -40 : 0, // Need to move it out of site on Gecko since it will othewise display a ghost resize rect for the div
+                    top: posY - 25,
+                    width: 1,
+                    height: 1,
+                    overflow: 'hidden'
                 });
 
                 if (tinymce.isIE) {
@@ -210,9 +210,9 @@
                     // For some odd reason we need to detach the the mceInsertContent call from the paste event
                     // It's like IE has a reference to the parent element that you paste in and the selection gets messed up
                     // when it tries to restore the selection
-                    setTimeout(function() {
+                    setTimeout(function () {
                         // Process contents
-                        process({content : n.innerHTML});
+                        process({content: n.innerHTML});
                     }, 0);
 
                     // Block the real paste event
@@ -236,7 +236,7 @@
                     sel.setRng(rng);
 
                     // Wait a while and grab the pasted contents
-                    window.setTimeout(function() {
+                    window.setTimeout(function () {
                         var h = '', nl;
 
                         // Paste divs duplicated in paste divs seems to happen when you paste plain text so lets first look for that broken behavior in WebKit
@@ -244,7 +244,7 @@
                             nl = dom.select('div.mcePaste');
 
                             // WebKit will split the div into multiple ones so this will loop through then all and join them to get the whole HTML string
-                            each(nl, function(n) {
+                            each(nl, function (n) {
                                 var child = n.firstChild;
 
                                 // WebKit inserts a DIV container with lots of odd styles
@@ -253,12 +253,12 @@
                                 }
 
                                 // Remove apply style spans
-                                each(dom.select('span.Apple-style-span', n), function(n) {
+                                each(dom.select('span.Apple-style-span', n), function (n) {
                                     dom.remove(n, 1);
                                 });
 
                                 // Remove bogus br elements
-                                each(dom.select('br[data-mce-bogus]', n), function(n) {
+                                each(dom.select('br[data-mce-bogus]', n), function (n) {
                                     dom.remove(n);
                                 });
 
@@ -273,7 +273,7 @@
                         }
 
                         // Remove the nodes
-                        each(dom.select('div.mcePaste'), function(n) {
+                        each(dom.select('div.mcePaste'), function (n) {
                             dom.remove(n);
                         });
 
@@ -281,7 +281,7 @@
                         if (or)
                             sel.setRng(or);
 
-                        process({content : h});
+                        process({content: h});
 
                         // Unblock events ones we got the contents
                         dom.unbind(ed.getDoc(), 'mousedown', block);
@@ -294,24 +294,24 @@
             if (getParam(ed, "paste_auto_cleanup_on_paste")) {
                 // Is it's Opera or older FF use key handler
                 if (tinymce.isOpera || /Firefox\/2/.test(navigator.userAgent)) {
-                    ed.onKeyDown.addToTop(function(ed, e) {
+                    ed.onKeyDown.addToTop(function (ed, e) {
                         if (((tinymce.isMac ? e.metaKey : e.ctrlKey) && e.keyCode == 86) || (e.shiftKey && e.keyCode == 45))
                             grabContent(e);
                     });
                 } else {
                     // Grab contents on paste event on Gecko and WebKit
-                    ed.onPaste.addToTop(function(ed, e) {
+                    ed.onPaste.addToTop(function (ed, e) {
                         return grabContent(e);
                     });
                 }
             }
 
-            ed.onInit.add(function() {
+            ed.onInit.add(function () {
                 ed.controlManager.setActive("pastetext", ed.pasteAsPlainText);
 
                 // Block all drag/drop events
                 if (getParam(ed, "paste_block_drop")) {
-                    ed.dom.bind(ed.getBody(), ['dragend', 'dragover', 'draggesture', 'dragdrop', 'drop', 'drag'], function(e) {
+                    ed.dom.bind(ed.getBody(), ['dragend', 'dragover', 'draggesture', 'dragdrop', 'drop', 'drag'], function (e) {
                         e.preventDefault();
                         e.stopPropagation();
 
@@ -324,17 +324,17 @@
             t._legacySupport();
         },
 
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Paste text/word',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/paste',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Paste text/word',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/paste',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         },
 
-        _preProcess : function(pl, o) {
+        _preProcess: function (pl, o) {
             var ed = this.editor,
                 h = o.content,
                 grep = tinymce.grep,
@@ -345,7 +345,7 @@
             //console.log('Before preprocess:' + o.content);
 
             function process(items) {
-                each(items, function(v) {
+                each(items, function (v) {
                     // Remove or replace
                     if (v.constructor == RegExp)
                         h = h.replace(v, '');
@@ -425,25 +425,25 @@
                     process([
                         // Convert <span style="mso-spacerun:yes">___</span> to string of alternating breaking/non-breaking spaces of same length
                         [/<span\s+style\s*=\s*"\s*mso-spacerun\s*:\s*yes\s*;?\s*"\s*>([\s\u00a0]*)<\/span>/gi,
-                            function(str, spaces) {
-                                return (spaces.length > 0)? spaces.replace(/./, " ").slice(Math.floor(spaces.length/2)).split("").join("\u00a0") : "";
+                            function (str, spaces) {
+                                return (spaces.length > 0) ? spaces.replace(/./, " ").slice(Math.floor(spaces.length / 2)).split("").join("\u00a0") : "";
                             }
                         ],
 
                         // Examine all styles: delete junk, transform some, and keep the rest
                         [/(<[a-z][^>]*)\sstyle="([^"]*)"/gi,
-                            function(str, tag, style) {
+                            function (str, tag, style) {
                                 var n = [],
                                     i = 0,
                                     s = explode(trim(style).replace(/&quot;/gi, "'"), ";");
 
                                 // Examine each style definition within the tag's style attribute
-                                each(s, function(v) {
+                                each(s, function (v) {
                                     var name, value,
                                         parts = explode(v, ":");
 
                                     function ensureUnits(v) {
-                                        return v + ((v !== "0") && (/\d$/.test(v)))? "px" : "";
+                                        return v + ((v !== "0") && (/\d$/.test(v))) ? "px" : "";
                                     }
 
                                     if (parts.length == 2) {
@@ -553,16 +553,16 @@
 
             if (stripClass !== "none") {
                 function removeClasses(match, g1) {
-                        if (stripClass === "all")
-                            return '';
+                    if (stripClass === "all")
+                        return '';
 
-                        var cls = grep(explode(g1.replace(/^(["'])(.*)\1$/, "$2"), " "),
-                            function(v) {
-                                return (/^(?!mso)/i.test(v));
-                            }
-                        );
+                    var cls = grep(explode(g1.replace(/^(["'])(.*)\1$/, "$2"), " "),
+                        function (v) {
+                            return (/^(?!mso)/i.test(v));
+                        }
+                    );
 
-                        return cls.length ? ' class="' + cls.join(" ") + '"' : '';
+                    return cls.length ? ' class="' + cls.join(" ") + '"' : '';
                 };
 
                 h = h.replace(/ class="([^"]+)"/gi, removeClasses);
@@ -582,7 +582,7 @@
         /**
          * Various post process items.
          */
-        _postProcess : function(pl, o) {
+        _postProcess: function (pl, o) {
             var t = this, ed = t.editor, dom = ed.dom, styleProps;
 
             if (ed.settings.paste_enable_default_filters == false) {
@@ -591,7 +591,7 @@
 
             if (o.wordContent) {
                 // Remove named anchors or TOC links
-                each(dom.select('a', o.node), function(a) {
+                each(dom.select('a', o.node), function (a) {
                     if (!a.href || a.href.indexOf('#_Toc') != -1)
                         dom.remove(a, 1);
                 });
@@ -608,7 +608,7 @@
                     styleProps = tinymce.explode(styleProps.replace(/^none$/i, ""));
 
                     // Retains some style properties
-                    each(dom.select('*', o.node), function(el) {
+                    each(dom.select('*', o.node), function (el) {
                         var newStyle = {}, npc = 0, i, sp, sv;
 
                         // Store a subset of the existing styles
@@ -630,15 +630,15 @@
                         if (styleProps && npc > 0)
                             dom.setStyles(el, newStyle); // Add back the stored subset of styles
                         else // Remove empty span tags that do not have class attributes
-                            if (el.nodeName == 'SPAN' && !el.className)
-                                dom.remove(el, true);
+                        if (el.nodeName == 'SPAN' && !el.className)
+                            dom.remove(el, true);
                     });
                 }
             }
 
             // Remove all style information or only specifically on WebKit to avoid the style bug on that browser
             if (getParam(ed, "paste_remove_styles") || (getParam(ed, "paste_remove_styles_if_webkit") && tinymce.isWebKit)) {
-                each(dom.select('*[style]', o.node), function(el) {
+                each(dom.select('*[style]', o.node), function (el) {
                     el.removeAttribute('style');
                     el.removeAttribute('data-mce-style');
                 });
@@ -646,7 +646,7 @@
                 if (tinymce.isWebKit) {
                     // We need to compress the styles on WebKit since if you paste <img border="0" /> it will become <img border="0" style="... lots of junk ..." />
                     // Removing the mce_style that contains the real value will force the Serializer engine to compress the styles
-                    each(dom.select('*', o.node), function(el) {
+                    each(dom.select('*', o.node), function (el) {
                         el.removeAttribute('data-mce-style');
                     });
                 }
@@ -656,11 +656,11 @@
         /**
          * Converts the most common bullet and number formats in Office into a real semantic UL/LI list.
          */
-        _convertLists : function(pl, o) {
+        _convertLists: function (pl, o) {
             var dom = pl.editor.dom, listElm, li, lastMargin = -1, margin, levels = [], lastType, html;
 
             // Convert middot lists into real semantic lists
-            each(dom.select('p', o.node), function(p) {
+            each(dom.select('p', o.node), function (p) {
                 var sib, val = '', type, html, idx, parents;
 
                 // Get text node value at beginning of paragraph
@@ -700,7 +700,7 @@
                     }
 
                     // Remove middot or number spans if they exists
-                    each(dom.select('span', p), function(span) {
+                    each(dom.select('span', p), function (span) {
                         var html = span.innerHTML.replace(/<\/?\w+[^>]*>/gi, '');
 
                         // Remove span with the middot or the number
@@ -737,14 +737,14 @@
         /**
          * Inserts the specified contents at the caret position.
          */
-        _insert : function(h, skip_undo) {
+        _insert: function (h, skip_undo) {
             var ed = this.editor, r = ed.selection.getRng();
 
             // First delete the contents seems to work better on WebKit when the selection spans multiple list items or multiple table cells.
             if (!ed.selection.isCollapsed() && r.startContainer != r.endContainer)
                 ed.getDoc().execCommand('Delete', false, null);
 
-            ed.execCommand('mceInsertContent', false, h, {skip_undo : skip_undo});
+            ed.execCommand('mceInsertContent', false, h, {skip_undo: skip_undo});
         },
 
         /**
@@ -756,14 +756,14 @@
          * plugin, and requires minimal changes to add the new functionality.
          * Speednet - June 2009
          */
-        _insertPlainText : function(content) {
+        _insertPlainText: function (content) {
             var ed = this.editor,
                 linebr = getParam(ed, "paste_text_linebreaktype"),
                 rl = getParam(ed, "paste_text_replacements"),
                 is = tinymce.is;
 
             function process(items) {
-                each(items, function(v) {
+                each(items, function (v) {
                     if (v.constructor == RegExp)
                         content = content.replace(v, "");
                     else
@@ -827,11 +827,11 @@
         /**
          * This method will open the old style paste dialogs. Some users might want the old behavior but still use the new cleanup engine.
          */
-        _legacySupport : function() {
+        _legacySupport: function () {
             var t = this, ed = t.editor;
 
             // Register command(s) for backwards compatibility
-            ed.addCommand("mcePasteWord", function() {
+            ed.addCommand("mcePasteWord", function () {
                 ed.windowManager.open({
                     file: t.url + "/pasteword.htm",
                     width: parseInt(getParam(ed, "paste_dialog_width")),
@@ -841,18 +841,18 @@
             });
 
             if (getParam(ed, "paste_text_use_dialog")) {
-                ed.addCommand("mcePasteText", function() {
+                ed.addCommand("mcePasteText", function () {
                     ed.windowManager.open({
-                        file : t.url + "/pastetext.htm",
+                        file: t.url + "/pastetext.htm",
                         width: parseInt(getParam(ed, "paste_dialog_width")),
                         height: parseInt(getParam(ed, "paste_dialog_height")),
-                        inline : 1
+                        inline: 1
                     });
                 });
             }
 
             // Register button for backwards compatibility
-            ed.addButton("pasteword", {title : "paste.paste_word_desc", cmd : "mcePasteWord"});
+            ed.addButton("pasteword", {title: "paste.paste_word_desc", cmd: "mcePasteWord"});
         }
     });
 

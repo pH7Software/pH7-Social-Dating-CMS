@@ -1,33 +1,37 @@
 tinyMCEPopup.requireLangPack();
 
 var TemplateDialog = {
-    preInit : function() {
+    preInit: function () {
         var url = tinyMCEPopup.getParam("template_external_list_url");
 
         if (url != null)
-            document.write('<sc'+'ript language="javascript" type="text/javascript" src="' + tinyMCEPopup.editor.documentBaseURI.toAbsolute(url) + '"></sc'+'ript>');
+            document.write('<sc' + 'ript language="javascript" type="text/javascript" src="' + tinyMCEPopup.editor.documentBaseURI.toAbsolute(url) + '"></sc' + 'ript>');
     },
 
-    init : function() {
+    init: function () {
         var ed = tinyMCEPopup.editor, tsrc, sel, x, u;
 
-         tsrc = ed.getParam("template_templates", false);
-         sel = document.getElementById('tpath');
+        tsrc = ed.getParam("template_templates", false);
+        sel = document.getElementById('tpath');
 
         // Setup external template list
         if (!tsrc && typeof(tinyMCETemplateList) != 'undefined') {
-            for (x=0, tsrc = []; x<tinyMCETemplateList.length; x++)
-                tsrc.push({title : tinyMCETemplateList[x][0], src : tinyMCETemplateList[x][1], description : tinyMCETemplateList[x][2]});
+            for (x = 0, tsrc = []; x < tinyMCETemplateList.length; x++)
+                tsrc.push({
+                    title: tinyMCETemplateList[x][0],
+                    src: tinyMCETemplateList[x][1],
+                    description: tinyMCETemplateList[x][2]
+                });
         }
 
-        for (x=0; x<tsrc.length; x++)
+        for (x = 0; x < tsrc.length; x++)
             sel.options[sel.options.length] = new Option(tsrc[x].title, tinyMCEPopup.editor.documentBaseURI.toAbsolute(tsrc[x].src));
 
         this.resize();
         this.tsrc = tsrc;
     },
 
-    resize : function() {
+    resize: function () {
         var w, h, e;
 
         if (!self.innerWidth) {
@@ -46,15 +50,15 @@ var TemplateDialog = {
         }
     },
 
-    loadCSSFiles : function(d) {
+    loadCSSFiles: function (d) {
         var ed = tinyMCEPopup.editor;
 
-        tinymce.each(ed.getParam("content_css", '').split(','), function(u) {
+        tinymce.each(ed.getParam("content_css", '').split(','), function (u) {
             d.write('<link href="' + ed.documentBaseURI.toAbsolute(u) + '" rel="stylesheet" type="text/css" />');
         });
     },
 
-    selectTemplate : function(u, ti) {
+    selectTemplate: function (u, ti) {
         var d = window.frames['templatesrc'].document, x, tsrc = this.tsrc;
 
         if (!u)
@@ -62,22 +66,22 @@ var TemplateDialog = {
 
         d.body.innerHTML = this.templateHTML = this.getFileContents(u);
 
-        for (x=0; x<tsrc.length; x++) {
+        for (x = 0; x < tsrc.length; x++) {
             if (tsrc[x].title == ti)
                 document.getElementById('tmpldesc').innerHTML = tsrc[x].description || '';
         }
     },
 
-     insert : function() {
+    insert: function () {
         tinyMCEPopup.execCommand('mceInsertTemplate', false, {
-            content : this.templateHTML,
-            selection : tinyMCEPopup.editor.selection.getContent()
+            content: this.templateHTML,
+            selection: tinyMCEPopup.editor.selection.getContent()
         });
 
         tinyMCEPopup.close();
     },
 
-    getFileContents : function(u) {
+    getFileContents: function (u) {
         var x, d, t = 'text/plain';
 
         function g(s) {

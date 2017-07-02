@@ -9,41 +9,37 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <script type="text/javascript">
 
-function gup( name )
-{
-    name = name.replace( /[\[]/, '\\\[' ).replace( /[\]]/, '\\\]' ) ;
-    var regexS = '[\\?&]' + name + '=([^&#]*)' ;
-    var regex = new RegExp( regexS ) ;
-    var results = regex.exec( window.location.href ) ;
+        function gup(name) {
+            name = name.replace(/[\[]/, '\\\[').replace(/[\]]/, '\\\]');
+            var regexS = '[\\?&]' + name + '=([^&#]*)';
+            var regex = new RegExp(regexS);
+            var results = regex.exec(window.location.href);
 
-    if ( results )
-        return results[ 1 ] ;
-    else
-        return '' ;
-}
-
-var interval;
-
-function sendData2Master()
-{
-    var destination = window.parent.parent ;
-    try
-    {
-        if ( destination.XDTMaster )
-        {
-            var t = destination.XDTMaster.read( [ gup( 'cmd' ), gup( 'data' ) ] ) ;
-            window.clearInterval( interval ) ;
+            if (results)
+                return results[1];
+            else
+                return '';
         }
-    }
-    catch (e) {}
-}
 
-function onLoad()
-{
-    interval = window.setInterval( sendData2Master, 100 );
-}
+        var interval;
 
-</script>
+        function sendData2Master() {
+            var destination = window.parent.parent;
+            try {
+                if (destination.XDTMaster) {
+                    var t = destination.XDTMaster.read([gup('cmd'), gup('data')]);
+                    window.clearInterval(interval);
+                }
+            }
+            catch (e) {
+            }
+        }
+
+        function onLoad() {
+            interval = window.setInterval(sendData2Master, 100);
+        }
+
+    </script>
 </head>
 <body onload="onLoad()"><p></p></body>
 </html>

@@ -13,9 +13,9 @@ function writeFlash(p) {
 
 function writeShockWave(p) {
     writeEmbed(
-    '166B1BCA-3F9C-11CF-8075-444553540000',
-    'http://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=8,5,1,0',
-    'application/x-director',
+        '166B1BCA-3F9C-11CF-8075-444553540000',
+        'http://download.macromedia.com/pub/shockwave/cabs/director/sw.cab#version=8,5,1,0',
+        'application/x-director',
         p
     );
 }

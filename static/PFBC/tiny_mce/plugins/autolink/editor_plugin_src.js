@@ -8,55 +8,55 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     tinymce.create('tinymce.plugins.AutolinkPlugin', {
-    /**
-    * Initializes the plugin, this will be executed after the plugin has been created.
-    * This call is done before the editor instance has finished it's initialization so use the onInit event
-    * of the editor instance to intercept that event.
-    *
-    * @param {tinymce.Editor} ed Editor instance that the plugin is initialized in.
-    * @param {string} url Absolute URL to where the plugin is located.
-    */
+        /**
+         * Initializes the plugin, this will be executed after the plugin has been created.
+         * This call is done before the editor instance has finished it's initialization so use the onInit event
+         * of the editor instance to intercept that event.
+         *
+         * @param {tinymce.Editor} ed Editor instance that the plugin is initialized in.
+         * @param {string} url Absolute URL to where the plugin is located.
+         */
 
-    init : function(ed, url) {
-        var t = this;
+        init: function (ed, url) {
+            var t = this;
 
-        // Internet Explorer has built-in automatic linking
-        if (tinyMCE.isIE)
-            return;
+            // Internet Explorer has built-in automatic linking
+            if (tinyMCE.isIE)
+                return;
 
-        // Add a key down handler
-        ed.onKeyDown.add(function(ed, e) {
-            if (e.keyCode == 13)
-                return t.handleEnter(ed);
+            // Add a key down handler
+            ed.onKeyDown.add(function (ed, e) {
+                if (e.keyCode == 13)
+                    return t.handleEnter(ed);
             });
 
-        ed.onKeyPress.add(function(ed, e) {
-            if (e.which == 41)
-                return t.handleEclipse(ed);
-        });
-
-        // Add a key up handler
-        ed.onKeyUp.add(function(ed, e) {
-            if (e.keyCode == 32)
-                return t.handleSpacebar(ed);
+            ed.onKeyPress.add(function (ed, e) {
+                if (e.which == 41)
+                    return t.handleEclipse(ed);
             });
-           },
 
-        handleEclipse : function(ed) {
+            // Add a key up handler
+            ed.onKeyUp.add(function (ed, e) {
+                if (e.keyCode == 32)
+                    return t.handleSpacebar(ed);
+            });
+        },
+
+        handleEclipse: function (ed) {
             this.parseCurrentLine(ed, -1, '(', true);
         },
 
-        handleSpacebar : function(ed) {
-             this.parseCurrentLine(ed, 0, '', true);
-         },
+        handleSpacebar: function (ed) {
+            this.parseCurrentLine(ed, 0, '', true);
+        },
 
-        handleEnter : function(ed) {
+        handleEnter: function (ed) {
             this.parseCurrentLine(ed, -1, '', false);
         },
 
-        parseCurrentLine : function(ed, end_offset, delimiter, goback) {
+        parseCurrentLine: function (ed, end_offset, delimiter, goback) {
             var r, end, start, endContainer, bookmark, text, matches, prev, len;
 
             // We need at least five characters to form a URL,
@@ -109,7 +109,7 @@
                 end -= 1;
 
                 // Loop until one of the following is found: a blank space, &nbsp;, delimeter, (end-2) >= 0
-            } while (r.toString() != ' ' && r.toString() != '' && r.toString().charCodeAt(0) != 160 && (end -2) >= 0 && r.toString() != delimiter);
+            } while (r.toString() != ' ' && r.toString() != '' && r.toString().charCodeAt(0) != 160 && (end - 2) >= 0 && r.toString() != delimiter);
 
             if (r.toString() == delimiter || r.toString().charCodeAt(0) == 160) {
                 r.setStart(endContainer, end);
@@ -135,7 +135,7 @@
                 bookmark = ed.selection.getBookmark();
 
                 ed.selection.setRng(r);
-                tinyMCE.execCommand('createlink',false, matches[1] + matches[2]);
+                tinyMCE.execCommand('createlink', false, matches[1] + matches[2]);
                 ed.selection.moveToBookmark(bookmark);
 
                 // TODO: Determine if this is still needed.
@@ -151,18 +151,18 @@
         },
 
         /**
-        * Returns information about the plugin as a name/value array.
-        * The current keys are longname, author, authorurl, infourl and version.
-        *
-        * @return {Object} Name/value array containing information about the plugin.
-        */
-        getInfo : function() {
+         * Returns information about the plugin as a name/value array.
+         * The current keys are longname, author, authorurl, infourl and version.
+         *
+         * @return {Object} Name/value array containing information about the plugin.
+         */
+        getInfo: function () {
             return {
-                longname : 'Autolink',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/autolink',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Autolink',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/autolink',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         }
     });

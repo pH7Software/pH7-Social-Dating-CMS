@@ -6,9 +6,9 @@ function init() {
     ed = tinyMCEPopup.editor;
     tinyMCEPopup.resizeToInnerSize();
 
-    document.getElementById('backgroundimagebrowsercontainer').innerHTML = getBrowserHTML('backgroundimagebrowser','backgroundimage','image','table');
-    document.getElementById('bordercolor_pickcontainer').innerHTML = getColorPickerHTML('bordercolor_pick','bordercolor');
-    document.getElementById('bgcolor_pickcontainer').innerHTML = getColorPickerHTML('bgcolor_pick','bgcolor')
+    document.getElementById('backgroundimagebrowsercontainer').innerHTML = getBrowserHTML('backgroundimagebrowser', 'backgroundimage', 'image', 'table');
+    document.getElementById('bordercolor_pickcontainer').innerHTML = getColorPickerHTML('bordercolor_pick', 'bordercolor');
+    document.getElementById('bgcolor_pickcontainer').innerHTML = getColorPickerHTML('bgcolor_pick', 'bgcolor')
 
     var inst = ed;
     var tdElm = ed.dom.getParent(ed.selection.getStart(), "td,th");
@@ -77,7 +77,7 @@ function updateAction() {
     // Cell is selected
     if (ed.dom.hasClass(tdElm, 'mceSelected')) {
         // Update all selected sells
-        tinymce.each(ed.dom.select('td.mceSelected,th.mceSelected'), function(td) {
+        tinymce.each(ed.dom.select('td.mceSelected,th.mceSelected'), function (td) {
             updateCell(td);
         });
 
@@ -93,16 +93,16 @@ function updateAction() {
             var celltype = getSelectValue(formObj, 'celltype');
             var scope = getSelectValue(formObj, 'scope');
 
-            function doUpdate(s) {
-                if (s) {
-                    updateCell(tdElm);
+        function doUpdate(s) {
+            if (s) {
+                updateCell(tdElm);
 
-                    ed.addVisual();
-                    ed.nodeChanged();
-                    inst.execCommand('mceEndUndoLevel');
-                    tinyMCEPopup.close();
-                }
-            };
+                ed.addVisual();
+                ed.nodeChanged();
+                inst.execCommand('mceEndUndoLevel');
+                tinyMCEPopup.close();
+            }
+        };
 
             if (ed.getParam("accessibility_warnings", 1)) {
                 if (celltype == "th" && scope == "")
@@ -140,7 +140,7 @@ function updateAction() {
                 col += cell.getAttribute("colspan");
             } while ((cell = nextCell(cell)) != null);
 
-            for (var i=0; i<rows.length; i++) {
+            for (var i = 0; i < rows.length; i++) {
                 cell = rows[i].firstChild;
 
                 if (cell.nodeName != "TD" && cell.nodeName != "TH")
@@ -161,7 +161,7 @@ function updateAction() {
         case "all":
             var rows = tableElm.getElementsByTagName("tr");
 
-            for (var i=0; i<rows.length; i++) {
+            for (var i = 0; i < rows.length; i++) {
                 var cell = rows[i].firstChild;
 
                 if (cell.nodeName != "TD" && cell.nodeName != "TH")
@@ -237,10 +237,10 @@ function updateCell(td, skip_id) {
         // changing to a different node type
         var newCell = doc.createElement(celltype);
 
-        for (var c=0; c<td.childNodes.length; c++)
+        for (var c = 0; c < td.childNodes.length; c++)
             newCell.appendChild(td.childNodes[c].cloneNode(1));
 
-        for (var a=0; a<td.attributes.length; a++)
+        for (var a = 0; a < td.attributes.length; a++)
             ed.dom.setAttrib(newCell, td.attributes[a].name, ed.dom.getAttrib(td, td.attributes[a].name));
 
         td.parentNode.replaceChild(newCell, td);
@@ -307,12 +307,12 @@ function changedStyle() {
 
     if (st['background-color']) {
         formObj.bgcolor.value = st['background-color'];
-        updateColor('bgcolor_pick','bgcolor');
+        updateColor('bgcolor_pick', 'bgcolor');
     }
 
     if (st['border-color']) {
         formObj.bordercolor.value = st['border-color'];
-        updateColor('bordercolor_pick','bordercolor');
+        updateColor('bordercolor_pick', 'bordercolor');
     }
 }
 

@@ -8,7 +8,7 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     var each = tinymce.each, Event = tinymce.dom.Event, bookmark;
 
     // Skips text nodes that only contain whitespace since they aren't semantically important.
@@ -20,19 +20,19 @@
     }
 
     function skipWhitespaceNodesBackwards(e) {
-        return skipWhitespaceNodes(e, function(e) {
+        return skipWhitespaceNodes(e, function (e) {
             return e.previousSibling;
         });
     }
 
     function skipWhitespaceNodesForwards(e) {
-        return skipWhitespaceNodes(e, function(e) {
+        return skipWhitespaceNodes(e, function (e) {
             return e.nextSibling;
         });
     }
 
     function hasParentInList(ed, e, list) {
-        return ed.dom.getParent(e, function(p) {
+        return ed.dom.getParent(e, function (p) {
             return tinymce.inArray(list, p) !== -1;
         });
     }
@@ -49,7 +49,7 @@
             tmp = skipWhitespaceNodesBackwards(nested.previousSibling);
         }
         if (nested) {
-            wrapItem = dom.create('li', { style: 'list-style-type: none;'});
+            wrapItem = dom.create('li', {style: 'list-style-type: none;'});
             dom.split(element, nested);
             dom.insertAfter(wrapItem, nested);
             wrapItem.appendChild(nested);
@@ -144,7 +144,7 @@
     }
 
     tinymce.create('tinymce.plugins.Lists', {
-        init: function(ed, url) {
+        init: function (ed, url) {
             var LIST_TABBING = 0;
             var LIST_EMPTY_ITEM = 1;
             var LIST_ESCAPE = 2;
@@ -166,7 +166,7 @@
                 if (isList(grandParent)) {
                     return grandParent.parentNode && grandParent.parentNode.tagName === 'LI';
                 } else {
-                    return  grandParent.tagName === 'LI';
+                    return grandParent.tagName === 'LI';
                 }
             }
 
@@ -195,7 +195,9 @@
 
             function isEmptyIE9Li(li) {
                 // only consider this to be last item if there is no list item content or that content is nbsp or space since IE9 creates these
-                var lis = tinymce.grep(li.parentNode.childNodes, function(n) {return n.nodeName == 'LI'});
+                var lis = tinymce.grep(li.parentNode.childNodes, function (n) {
+                    return n.nodeName == 'LI'
+                });
                 var isLastLi = li == lis[lis.length - 1];
                 var child = li.firstChild;
                 return tinymce.isIE9 && isLastLi && (child.nodeValue == String.fromCharCode(160) || child.nodeValue == String.fromCharCode(32));
@@ -304,16 +306,16 @@
             this.ed = ed;
             ed.addCommand('Indent', this.indent, this);
             ed.addCommand('Outdent', this.outdent, this);
-            ed.addCommand('InsertUnorderedList', function() {
+            ed.addCommand('InsertUnorderedList', function () {
                 this.applyList('UL', 'OL');
             }, this);
-            ed.addCommand('InsertOrderedList', function() {
+            ed.addCommand('InsertOrderedList', function () {
                 this.applyList('OL', 'UL');
             }, this);
 
-            ed.onInit.add(function() {
+            ed.onInit.add(function () {
                 ed.editorCommands.addCommands({
-                    'outdent': function() {
+                    'outdent': function () {
                         var sel = ed.selection, dom = ed.dom;
 
                         function hasStyleIndent(n) {
@@ -326,14 +328,14 @@
                 }, 'state');
             });
 
-            ed.onKeyUp.add(function(ed, e) {
+            ed.onKeyUp.add(function (ed, e) {
                 if (state == LIST_TABBING) {
                     ed.execCommand(e.shiftKey ? 'Outdent' : 'Indent', true, null);
                     state = LIST_UNKNOWN;
                     return Event.cancel(e);
                 } else if (state == LIST_EMPTY_ITEM) {
                     var li = getLi();
-                    var shouldOutdent =  ed.settings.list_outdent_on_enter === true || e.shiftKey;
+                    var shouldOutdent = ed.settings.list_outdent_on_enter === true || e.shiftKey;
                     ed.execCommand(shouldOutdent ? 'Outdent' : 'Indent', true, null);
                     if (tinymce.isIE) {
                         setCursorPositionToOriginalLi(li);
@@ -353,15 +355,17 @@
                     }
                 }
             });
-            ed.onKeyDown.add(function(_, e) { state = getListKeyState(e); });
+            ed.onKeyDown.add(function (_, e) {
+                state = getListKeyState(e);
+            });
             ed.onKeyDown.add(cancelEnterAndTab);
             ed.onKeyDown.add(imageJoiningListItem);
             ed.onKeyPress.add(cancelEnterAndTab);
         },
 
-        applyList: function(targetListType, oppositeListType) {
+        applyList: function (targetListType, oppositeListType) {
             var t = this, ed = t.ed, dom = ed.dom, applied = [], hasSameType = false, hasOppositeType = false, hasNonList = false, actions,
-                    selectedBlocks = ed.selection.getSelectedBlocks();
+                selectedBlocks = ed.selection.getSelectedBlocks();
 
             function cleanupBr(e) {
                 if (e && e.tagName === 'BR') {
@@ -382,7 +386,7 @@
                 if (element.tagName === 'LI') {
                     // No change required.
                 } else if (element.tagName === 'P' || element.tagName === 'DIV' || element.tagName === 'BODY') {
-                    processBrs(element, function(startSection, br, previousBR) {
+                    processBrs(element, function (startSection, br, previousBR) {
                         doWrapList(startSection, br, element.tagName === 'BODY' ? null : startSection.parentNode);
                         li = startSection.parentNode;
                         adjustIndentForNewList(li);
@@ -436,7 +440,7 @@
 
             function processBrs(element, callback) {
                 var startSection, previousBR, END_TO_START = 3, START_TO_END = 1,
-                        breakElements = 'br,ul,ol,p,div,h1,h2,h3,h4,h5,h6,table,blockquote,address,pre,form,center,dl';
+                    breakElements = 'br,ul,ol,p,div,h1,h2,h3,h4,h5,h6,table,blockquote,address,pre,form,center,dl';
 
                 function isAnyPartSelected(start, end) {
                     var r = dom.createRng(), sel;
@@ -463,7 +467,7 @@
                 startSection = element.firstChild;
                 // First mark the BRs that have any part of the previous section selected.
                 var trailingContentSelected = false;
-                each(dom.select(breakElements, element), function(br) {
+                each(dom.select(breakElements, element), function (br) {
                     var b;
                     if (br.hasAttribute && br.hasAttribute('_mce_bogus')) {
                         return true; // Skip the bogus Brs that are put in to appease Firefox and Safari.
@@ -475,7 +479,7 @@
                 });
                 trailingContentSelected = (startSection && isAnyPartSelected(startSection, undefined));
                 startSection = element.firstChild;
-                each(dom.select(breakElements, element), function(br) {
+                each(dom.select(breakElements, element), function (br) {
                     // Got a section from start to br.
                     var tmp = nextLeaf(br);
                     if (br.hasAttribute && br.hasAttribute('_mce_bogus')) {
@@ -495,7 +499,7 @@
             }
 
             function wrapList(element) {
-                processBrs(element, function(startSection, br, previousBR) {
+                processBrs(element, function (startSection, br, previousBR) {
                     // Need to indent this part
                     doWrapList(startSection, br);
                     cleanupBr(br);
@@ -549,7 +553,7 @@
                 }
             }
 
-            each(selectedBlocks, function(e) {
+            each(selectedBlocks, function (e) {
                 e = findItemToOperateOn(e, dom);
                 if (e.tagName === oppositeListType || (e.tagName === 'LI' && e.parentNode.tagName === oppositeListType)) {
                     hasOppositeType = true;
@@ -582,22 +586,22 @@
             this.process(actions);
         },
 
-        indent: function() {
+        indent: function () {
             var ed = this.ed, dom = ed.dom, indented = [];
 
             function createWrapItem(element) {
-                var wrapItem = dom.create('li', { style: 'list-style-type: none;'});
+                var wrapItem = dom.create('li', {style: 'list-style-type: none;'});
                 dom.insertAfter(wrapItem, element);
                 return wrapItem;
             }
 
             function createWrapList(element) {
                 var wrapItem = createWrapItem(element),
-                        list = dom.getParent(element, 'ol,ul'),
-                        listType = list.tagName,
-                        listStyle = dom.getStyle(list, 'list-style-type'),
-                        attrs = {},
-                        wrapList;
+                    list = dom.getParent(element, 'ol,ul'),
+                    listType = list.tagName,
+                    listStyle = dom.getStyle(list, 'list-style-type'),
+                    attrs = {},
+                    wrapList;
                 if (listStyle !== '') {
                     attrs.style = 'list-style-type: ' + listStyle + ';';
                 }
@@ -624,7 +628,7 @@
 
         },
 
-        outdent: function() {
+        outdent: function () {
             var t = this, ed = t.ed, dom = ed.dom, outdented = [];
 
             function outdentLI(element) {
@@ -664,7 +668,7 @@
             each(outdented, attemptMergeWithAdjacent);
         },
 
-        process: function(actions) {
+        process: function (actions) {
             var t = this, sel = t.ed.selection, dom = t.ed.dom, selectedBlocks, r;
 
             function processElement(element) {
@@ -686,12 +690,12 @@
 
             function brAtEdgeOfSelection(container, offset) {
                 return offset >= 0 && container.hasChildNodes() && offset < container.childNodes.length &&
-                        container.childNodes[offset].tagName === 'BR';
+                    container.childNodes[offset].tagName === 'BR';
             }
 
             selectedBlocks = sel.getSelectedBlocks();
             if (selectedBlocks.length === 0) {
-                selectedBlocks = [ dom.getRoot() ];
+                selectedBlocks = [dom.getRoot()];
             }
 
             r = sel.getRng(true);
@@ -725,19 +729,19 @@
             t.ed.execCommand('mceRepaint');
         },
 
-        splitSafeEach: function(elements, f) {
+        splitSafeEach: function (elements, f) {
             if (tinymce.isGecko && (/Firefox\/[12]\.[0-9]/.test(navigator.userAgent) ||
-                    /Firefox\/3\.[0-4]/.test(navigator.userAgent))) {
+                /Firefox\/3\.[0-4]/.test(navigator.userAgent))) {
                 this.classBasedEach(elements, f);
             } else {
                 each(elements, f);
             }
         },
 
-        classBasedEach: function(elements, f) {
+        classBasedEach: function (elements, f) {
             var dom = this.ed.dom, nodes, element;
             // Mark nodes
-            each(elements, function(element) {
+            each(elements, function (element) {
                 dom.addClass(element, '_mce_act_on');
             });
             nodes = dom.select('._mce_act_on');
@@ -749,12 +753,12 @@
             }
         },
 
-        adjustPaddingFunction: function(isIndent) {
+        adjustPaddingFunction: function (isIndent) {
             var indentAmount, indentUnits, ed = this.ed;
             indentAmount = ed.settings.indentation;
             indentUnits = /[a-z%]+/i.exec(indentAmount);
             indentAmount = parseInt(indentAmount, 10);
-            return function(element) {
+            return function (element) {
                 var currentIndent, newIndentAmount;
                 currentIndent = parseInt(ed.dom.getStyle(element, 'margin-left') || 0, 10) + parseInt(ed.dom.getStyle(element, 'padding-left') || 0, 10);
                 if (isIndent) {
@@ -767,13 +771,13 @@
             };
         },
 
-        getInfo: function() {
+        getInfo: function () {
             return {
-                longname : 'Lists',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/lists',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Lists',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/lists',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         }
     });

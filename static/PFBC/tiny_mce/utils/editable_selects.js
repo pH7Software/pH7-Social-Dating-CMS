@@ -9,12 +9,12 @@
  */
 
 var TinyMCE_EditableSelects = {
-    editSelectElm : null,
+    editSelectElm: null,
 
-    init : function() {
+    init: function () {
         var nl = document.getElementsByTagName("select"), i, d = document, o;
 
-        for (i=0; i<nl.length; i++) {
+        for (i = 0; i < nl.length; i++) {
             if (nl[i].className.indexOf('mceEditableSelect') != -1) {
                 o = new Option(tinyMCEPopup.editor.translate('value'), '__mce_add_custom__');
 
@@ -26,7 +26,7 @@ var TinyMCE_EditableSelects = {
         }
     },
 
-    onChangeEditableSelect : function(e) {
+    onChangeEditableSelect: function (e) {
         var d = document, ne, se = window.event ? window.event.srcElement : e.target;
 
         if (se.options[se.selectedIndex].value == '__mce_add_custom__') {
@@ -45,7 +45,7 @@ var TinyMCE_EditableSelects = {
         }
     },
 
-    onBlurEditableSelectInput : function() {
+    onBlurEditableSelectInput: function () {
         var se = TinyMCE_EditableSelects.editSelectElm;
 
         if (se) {
@@ -61,7 +61,7 @@ var TinyMCE_EditableSelects = {
         }
     },
 
-    onKeyDown : function(e) {
+    onKeyDown: function (e) {
         e = e || window.event;
 
         if (e.keyCode == 13)

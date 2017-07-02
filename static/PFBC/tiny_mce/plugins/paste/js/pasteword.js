@@ -1,7 +1,7 @@
 tinyMCEPopup.requireLangPack();
 
 var PasteWordDialog = {
-    init : function() {
+    init: function () {
         var ed = tinyMCEPopup.editor, el = document.getElementById('iframecontainer'), ifr, doc, css, cssHTML = '';
 
         // Create iframe
@@ -12,7 +12,7 @@ var PasteWordDialog = {
         // Force absolute CSS urls
         css = [ed.baseURI.toAbsolute("themes/" + ed.settings.theme + "/skins/" + ed.settings.skin + "/content.css")];
         css = css.concat(tinymce.explode(ed.settings.content_css) || []);
-        tinymce.each(css, function(u) {
+        tinymce.each(css, function (u) {
             cssHTML += '<link href="' + ed.documentBaseURI.toAbsolute('' + u) + '" rel="stylesheet" type="text/css" />';
         });
 
@@ -24,25 +24,25 @@ var PasteWordDialog = {
         doc.designMode = 'on';
         this.resize();
 
-        window.setTimeout(function() {
+        window.setTimeout(function () {
             ifr.contentWindow.focus();
         }, 10);
     },
 
-    insert : function() {
+    insert: function () {
         var h = document.getElementById('iframe').contentWindow.document.body.innerHTML;
 
-        tinyMCEPopup.editor.execCommand('mceInsertClipboardContent', false, {content : h, wordContent : true});
+        tinyMCEPopup.editor.execCommand('mceInsertClipboardContent', false, {content: h, wordContent: true});
         tinyMCEPopup.close();
     },
 
-    resize : function() {
+    resize: function () {
         var vp = tinyMCEPopup.dom.getViewPort(window), el;
 
         el = document.getElementById('iframe');
 
         if (el) {
-            el.style.width  = (vp.w - 20) + 'px';
+            el.style.width = (vp.w - 20) + 'px';
             el.style.height = (vp.h - 90) + 'px';
         }
     }

@@ -8,14 +8,14 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     tinymce.create('tinymce.plugins.Directionality', {
-        init : function(ed, url) {
+        init: function (ed, url) {
             var t = this;
 
             t.editor = ed;
 
-            ed.addCommand('mceDirectionLTR', function() {
+            ed.addCommand('mceDirectionLTR', function () {
                 var e = ed.dom.getParent(ed.selection.getNode(), ed.dom.isBlock);
 
                 if (e) {
@@ -28,7 +28,7 @@
                 ed.nodeChanged();
             });
 
-            ed.addCommand('mceDirectionRTL', function() {
+            ed.addCommand('mceDirectionRTL', function () {
                 var e = ed.dom.getParent(ed.selection.getNode(), ed.dom.isBlock);
 
                 if (e) {
@@ -41,25 +41,25 @@
                 ed.nodeChanged();
             });
 
-            ed.addButton('ltr', {title : 'directionality.ltr_desc', cmd : 'mceDirectionLTR'});
-            ed.addButton('rtl', {title : 'directionality.rtl_desc', cmd : 'mceDirectionRTL'});
+            ed.addButton('ltr', {title: 'directionality.ltr_desc', cmd: 'mceDirectionLTR'});
+            ed.addButton('rtl', {title: 'directionality.rtl_desc', cmd: 'mceDirectionRTL'});
 
             ed.onNodeChange.add(t._nodeChange, t);
         },
 
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Directionality',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/directionality',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Directionality',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/directionality',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         },
 
         // Private methods
 
-        _nodeChange : function(ed, cm, n) {
+        _nodeChange: function (ed, cm, n) {
             var dom = ed.dom, dir;
 
             n = dom.getParent(n, dom.isBlock);

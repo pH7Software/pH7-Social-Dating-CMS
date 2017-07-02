@@ -8,23 +8,23 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     tinymce.create('tinymce.plugins.Nonbreaking', {
-        init : function(ed, url) {
+        init: function (ed, url) {
             var t = this;
 
             t.editor = ed;
 
             // Register commands
-            ed.addCommand('mceNonBreaking', function() {
+            ed.addCommand('mceNonBreaking', function () {
                 ed.execCommand('mceInsertContent', false, (ed.plugins.visualchars && ed.plugins.visualchars.state) ? '<span data-mce-bogus="1" class="mceItemHidden mceItemNbsp">&nbsp;</span>' : '&nbsp;');
             });
 
             // Register buttons
-            ed.addButton('nonbreaking', {title : 'nonbreaking.nonbreaking_desc', cmd : 'mceNonBreaking'});
+            ed.addButton('nonbreaking', {title: 'nonbreaking.nonbreaking_desc', cmd: 'mceNonBreaking'});
 
             if (ed.getParam('nonbreaking_force_tab')) {
-                ed.onKeyDown.add(function(ed, e) {
+                ed.onKeyDown.add(function (ed, e) {
                     if (e.keyCode == 9) {
                         e.preventDefault();
 
@@ -36,13 +36,13 @@
             }
         },
 
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Nonbreaking space',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/nonbreaking',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Nonbreaking space',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/nonbreaking',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         }
 

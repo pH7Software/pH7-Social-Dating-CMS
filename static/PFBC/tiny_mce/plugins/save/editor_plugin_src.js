@@ -8,9 +8,9 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     tinymce.create('tinymce.plugins.Save', {
-        init : function(ed, url) {
+        init: function (ed, url) {
             var t = this;
 
             t.editor = ed;
@@ -20,26 +20,26 @@
             ed.addCommand('mceCancel', t._cancel, t);
 
             // Register buttons
-            ed.addButton('save', {title : 'save.save_desc', cmd : 'mceSave'});
-            ed.addButton('cancel', {title : 'save.cancel_desc', cmd : 'mceCancel'});
+            ed.addButton('save', {title: 'save.save_desc', cmd: 'mceSave'});
+            ed.addButton('cancel', {title: 'save.cancel_desc', cmd: 'mceCancel'});
 
             ed.onNodeChange.add(t._nodeChange, t);
             ed.addShortcut('ctrl+s', ed.getLang('save.save_desc'), 'mceSave');
         },
 
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Save',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/save',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Save',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/save',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         },
 
         // Private methods
 
-        _nodeChange : function(ed, cm, n) {
+        _nodeChange: function (ed, cm, n) {
             var ed = this.editor;
 
             if (ed.getParam('save_enablewhendirty')) {
@@ -50,7 +50,7 @@
 
         // Private methods
 
-        _save : function() {
+        _save: function () {
             var ed = this.editor, formObj, os, i, elementId;
 
             formObj = tinymce.DOM.get(ed.id).form || tinymce.DOM.getParent(ed.id, 'form');
@@ -63,7 +63,7 @@
             // Use callback instead
             if (os = ed.getParam("save_onsavecallback")) {
                 if (ed.execCallback('save_onsavecallback', ed)) {
-                    ed.startContent = tinymce.trim(ed.getContent({format : 'raw'}));
+                    ed.startContent = tinymce.trim(ed.getContent({format: 'raw'}));
                     ed.nodeChanged();
                 }
 
@@ -81,7 +81,7 @@
                 ed.windowManager.alert("Error: No form element found.");
         },
 
-        _cancel : function() {
+        _cancel: function () {
             var ed = this.editor, os, h = tinymce.trim(ed.startContent);
 
             // Use callback instead

@@ -8,7 +8,7 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     tinyMCEPopup.requireLangPack();
 
     var defaultDocTypes =
@@ -62,7 +62,7 @@
     };
 
     window.FullPageDialog = {
-        changedStyle : function() {
+        changedStyle: function () {
             var val, styles = tinyMCEPopup.editor.dom.parseStyle(getVal('style'));
 
             setVal('fontface', styles['font-face']);
@@ -107,7 +107,7 @@
             updateColor('textcolor_pick', 'textcolor');
         },
 
-        changedStyleProp : function() {
+        changedStyleProp: function () {
             var val, dom = tinyMCEPopup.editor.dom, styles = dom.parseStyle(getVal('style'));
 
             styles['font-face'] = getVal('fontface');
@@ -147,10 +147,10 @@
             this.changedStyle();
         },
 
-        update : function() {
+        update: function () {
             var data = {};
 
-            tinymce.each(tinyMCEPopup.dom.select('select,input,textarea'), function(node) {
+            tinymce.each(tinyMCEPopup.dom.select('select,input,textarea'), function (node) {
                 data[node.id] = getVal(node.id);
             });
 
@@ -195,13 +195,13 @@
         }
 
         // Setup color pickers
-        document.getElementById('bgcolor_pickcontainer').innerHTML = getColorPickerHTML('bgcolor_pick','bgcolor');
-        document.getElementById('link_color_pickcontainer').innerHTML = getColorPickerHTML('link_color_pick','link_color');
-        document.getElementById('visited_color_pickcontainer').innerHTML = getColorPickerHTML('visited_color_pick','visited_color');
-        document.getElementById('active_color_pickcontainer').innerHTML = getColorPickerHTML('active_color_pick','active_color');
-        document.getElementById('textcolor_pickcontainer').innerHTML = getColorPickerHTML('textcolor_pick','textcolor');
-        document.getElementById('stylesheet_browsercontainer').innerHTML = getBrowserHTML('stylesheetbrowser','stylesheet','file','fullpage');
-        document.getElementById('bgimage_pickcontainer').innerHTML = getBrowserHTML('bgimage_browser','bgimage','image','fullpage');
+        document.getElementById('bgcolor_pickcontainer').innerHTML = getColorPickerHTML('bgcolor_pick', 'bgcolor');
+        document.getElementById('link_color_pickcontainer').innerHTML = getColorPickerHTML('link_color_pick', 'link_color');
+        document.getElementById('visited_color_pickcontainer').innerHTML = getColorPickerHTML('visited_color_pick', 'visited_color');
+        document.getElementById('active_color_pickcontainer').innerHTML = getColorPickerHTML('active_color_pick', 'active_color');
+        document.getElementById('textcolor_pickcontainer').innerHTML = getColorPickerHTML('textcolor_pick', 'textcolor');
+        document.getElementById('stylesheet_browsercontainer').innerHTML = getBrowserHTML('stylesheetbrowser', 'stylesheet', 'file', 'fullpage');
+        document.getElementById('bgimage_pickcontainer').innerHTML = getBrowserHTML('bgimage_browser', 'bgimage', 'image', 'fullpage');
 
         // Resize some elements
         if (isVisible('stylesheetbrowser'))
@@ -214,7 +214,7 @@
             document.getElementById('bgimage').style.width = '210px';
 
         // Update form
-        tinymce.each(tinyMCEPopup.getWindowArg('data'), function(value, key) {
+        tinymce.each(tinyMCEPopup.getWindowArg('data'), function (value, key) {
             setVal(key, value);
         });
 

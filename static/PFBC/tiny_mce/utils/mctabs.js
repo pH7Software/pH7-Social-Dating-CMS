@@ -13,11 +13,11 @@ function MCTabs() {
     this.onChange = tinyMCEPopup.editor.windowManager.createInstance('tinymce.util.Dispatcher');
 };
 
-MCTabs.prototype.init = function(settings) {
+MCTabs.prototype.init = function (settings) {
     this.settings = settings;
 };
 
-MCTabs.prototype.getParam = function(name, default_value) {
+MCTabs.prototype.getParam = function (name, default_value) {
     var value = null;
 
     value = (typeof(this.settings[name]) == "undefined") ? default_value : this.settings[name];
@@ -29,15 +29,15 @@ MCTabs.prototype.getParam = function(name, default_value) {
     return value;
 };
 
-MCTabs.prototype.showTab =function(tab){
+MCTabs.prototype.showTab = function (tab) {
     tab.className = 'current';
     tab.setAttribute("aria-selected", true);
     tab.setAttribute("aria-expanded", true);
     tab.tabIndex = 0;
 };
 
-MCTabs.prototype.hideTab =function(tab){
-    var t=this;
+MCTabs.prototype.hideTab = function (tab) {
+    var t = this;
 
     tab.className = '';
     tab.setAttribute("aria-selected", false);
@@ -45,21 +45,21 @@ MCTabs.prototype.hideTab =function(tab){
     tab.tabIndex = -1;
 };
 
-MCTabs.prototype.showPanel = function(panel) {
+MCTabs.prototype.showPanel = function (panel) {
     panel.className = 'current';
     panel.setAttribute("aria-hidden", false);
 };
 
-MCTabs.prototype.hidePanel = function(panel) {
+MCTabs.prototype.hidePanel = function (panel) {
     panel.className = 'panel';
     panel.setAttribute("aria-hidden", true);
 };
 
-MCTabs.prototype.getPanelForTab = function(tabElm) {
+MCTabs.prototype.getPanelForTab = function (tabElm) {
     return tinyMCEPopup.dom.getAttrib(tabElm, "aria-controls");
 };
 
-MCTabs.prototype.displayTab = function(tab_id, panel_id, avoid_focus) {
+MCTabs.prototype.displayTab = function (tab_id, panel_id, avoid_focus) {
     var panelElm, panelContainerElm, tabElm, tabContainerElm, selectionClass, nodes, i, t = this;
 
     tabElm = document.getElementById(tab_id);
@@ -68,7 +68,7 @@ MCTabs.prototype.displayTab = function(tab_id, panel_id, avoid_focus) {
         panel_id = t.getPanelForTab(tabElm);
     }
 
-    panelElm= document.getElementById(panel_id);
+    panelElm = document.getElementById(panel_id);
     panelContainerElm = panelElm ? panelElm.parentNode : null;
     tabContainerElm = tabElm ? tabElm.parentNode : null;
     selectionClass = t.getParam('selection_class', 'current');
@@ -105,7 +105,7 @@ MCTabs.prototype.displayTab = function(tab_id, panel_id, avoid_focus) {
     }
 };
 
-MCTabs.prototype.getAnchor = function() {
+MCTabs.prototype.getAnchor = function () {
     var pos, url = document.location.href;
 
     if ((pos = url.lastIndexOf('#')) != -1)
@@ -118,35 +118,35 @@ MCTabs.prototype.getAnchor = function() {
 //Global instance
 var mcTabs = new MCTabs();
 
-tinyMCEPopup.onInit.add(function() {
+tinyMCEPopup.onInit.add(function () {
     var tinymce = tinyMCEPopup.getWin().tinymce, dom = tinyMCEPopup.dom, each = tinymce.each;
 
-    each(dom.select('div.tabs'), function(tabContainerElm) {
+    each(dom.select('div.tabs'), function (tabContainerElm) {
         var keyNav;
 
         dom.setAttrib(tabContainerElm, "role", "tablist");
 
         var items = tinyMCEPopup.dom.select('li', tabContainerElm);
-        var action = function(id) {
+        var action = function (id) {
             mcTabs.displayTab(id, mcTabs.getPanelForTab(id));
             mcTabs.onChange.dispatch(id);
         };
 
-        each(items, function(item) {
+        each(items, function (item) {
             dom.setAttrib(item, 'role', 'tab');
-            dom.bind(item, 'click', function(evt) {
+            dom.bind(item, 'click', function (evt) {
                 action(item.id);
             });
         });
 
-        dom.bind(dom.getRoot(), 'keydown', function(evt) {
+        dom.bind(dom.getRoot(), 'keydown', function (evt) {
             if (evt.keyCode === 9 && evt.ctrlKey && !evt.altKey) { // Tab
                 keyNav.moveFocus(evt.shiftKey ? -1 : 1);
                 tinymce.dom.Event.cancel(evt);
             }
         });
 
-        each(dom.select('a', tabContainerElm), function(a) {
+        each(dom.select('a', tabContainerElm), function (a) {
             dom.setAttrib(a, 'tabindex', '-1');
         });
 

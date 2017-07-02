@@ -8,23 +8,23 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     tinymce.create('tinymce.plugins.Print', {
-        init : function(ed, url) {
-            ed.addCommand('mcePrint', function() {
+        init: function (ed, url) {
+            ed.addCommand('mcePrint', function () {
                 ed.getWin().print();
             });
 
-            ed.addButton('print', {title : 'print.print_desc', cmd : 'mcePrint'});
+            ed.addButton('print', {title: 'print.print_desc', cmd: 'mcePrint'});
         },
 
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Print',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/print',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Print',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/print',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         }
     });

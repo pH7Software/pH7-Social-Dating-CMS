@@ -8,26 +8,26 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     var Event = tinymce.dom.Event;
 
     tinymce.create('tinymce.plugins.NonEditablePlugin', {
-        init : function(ed, url) {
+        init: function (ed, url) {
             var t = this, editClass, nonEditClass, state;
 
             t.editor = ed;
             editClass = ed.getParam("noneditable_editable_class", "mceEditable");
             nonEditClass = ed.getParam("noneditable_noneditable_class", "mceNonEditable");
 
-            ed.onNodeChange.addToTop(function(ed, cm, n) {
+            ed.onNodeChange.addToTop(function (ed, cm, n) {
                 var sc, ec;
 
                 // Block if start or end is inside a non editable element
-                sc = ed.dom.getParent(ed.selection.getStart(), function(n) {
+                sc = ed.dom.getParent(ed.selection.getStart(), function (n) {
                     return ed.dom.hasClass(n, nonEditClass);
                 });
 
-                ec = ed.dom.getParent(ed.selection.getEnd(), function(n) {
+                ec = ed.dom.getParent(ed.selection.getEnd(), function (n) {
                     return ed.dom.hasClass(n, nonEditClass);
                 });
 
@@ -43,17 +43,17 @@
             });
         },
 
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Non editable elements',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/noneditable',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Non editable elements',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/noneditable',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         },
 
-        _block : function(ed, e) {
+        _block: function (ed, e) {
             var k = e.keyCode;
 
             // Don't block arrow keys, pg up/down, and F1-F12
@@ -63,10 +63,10 @@
             return Event.cancel(e);
         },
 
-        _setDisabled : function(s) {
+        _setDisabled: function (s) {
             var t = this, ed = t.editor;
 
-            tinymce.each(ed.controlManager.controls, function(c) {
+            tinymce.each(ed.controlManager.controls, function (c) {
                 c.setDisabled(s);
             });
 

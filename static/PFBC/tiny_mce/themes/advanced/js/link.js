@@ -1,14 +1,14 @@
 tinyMCEPopup.requireLangPack();
 
 var LinkDialog = {
-    preInit : function() {
+    preInit: function () {
         var url;
 
         if (url = tinyMCEPopup.getParam("external_link_list_url"))
             document.write('<script language="javascript" type="text/javascript" src="' + tinyMCEPopup.editor.documentBaseURI.toAbsolute(url) + '"></script>');
     },
 
-    init : function() {
+    init: function () {
         var f = document.forms[0], ed = tinyMCEPopup.editor;
 
         // Setup browse button
@@ -30,7 +30,7 @@ var LinkDialog = {
         }
     },
 
-    update : function() {
+    update: function () {
         var f = document.forms[0], ed = tinyMCEPopup.editor, e, b, href = f.href.value.replace(/ /g, '%20');
 
         tinyMCEPopup.restoreSelection();
@@ -51,26 +51,26 @@ var LinkDialog = {
         // Create new anchor elements
         if (e == null) {
             ed.getDoc().execCommand("unlink", false, null);
-            tinyMCEPopup.execCommand("mceInsertLink", false, "#mce_temp_url#", {skip_undo : 1});
+            tinyMCEPopup.execCommand("mceInsertLink", false, "#mce_temp_url#", {skip_undo: 1});
 
-            tinymce.each(ed.dom.select("a"), function(n) {
+            tinymce.each(ed.dom.select("a"), function (n) {
                 if (ed.dom.getAttrib(n, 'href') == '#mce_temp_url#') {
                     e = n;
 
                     ed.dom.setAttribs(e, {
-                        href : href,
-                        title : f.linktitle.value,
-                        target : f.target_list ? getSelectValue(f, "target_list") : null,
-                        'class' : f.class_list ? getSelectValue(f, "class_list") : null
+                        href: href,
+                        title: f.linktitle.value,
+                        target: f.target_list ? getSelectValue(f, "target_list") : null,
+                        'class': f.class_list ? getSelectValue(f, "class_list") : null
                     });
                 }
             });
         } else {
             ed.dom.setAttribs(e, {
-                href : href,
-                title : f.linktitle.value,
-                target : f.target_list ? getSelectValue(f, "target_list") : null,
-                'class' : f.class_list ? getSelectValue(f, "class_list") : null
+                href: href,
+                title: f.linktitle.value,
+                target: f.target_list ? getSelectValue(f, "target_list") : null,
+                'class': f.class_list ? getSelectValue(f, "class_list") : null
             });
         }
 
@@ -86,7 +86,7 @@ var LinkDialog = {
         tinyMCEPopup.close();
     },
 
-    checkPrefix : function(n) {
+    checkPrefix: function (n) {
         if (n.value && Validator.isEmail(n) && !/^\s*mailto:/i.test(n.value) && confirm(tinyMCEPopup.getLang('advanced_dlg.link_is_email')))
             n.value = 'mailto:' + n.value;
 
@@ -94,7 +94,7 @@ var LinkDialog = {
             n.value = 'http://' + n.value;
     },
 
-    fillFileList : function(id, l) {
+    fillFileList: function (id, l) {
         var dom = tinyMCEPopup.dom, lst = dom.get(id), v, cl;
 
         l = window[l];
@@ -102,23 +102,23 @@ var LinkDialog = {
         if (l && l.length > 0) {
             lst.options[lst.options.length] = new Option('', '');
 
-            tinymce.each(l, function(o) {
+            tinymce.each(l, function (o) {
                 lst.options[lst.options.length] = new Option(o[0], o[1]);
             });
         } else
             dom.remove(dom.getParent(id, 'tr'));
     },
 
-    fillClassList : function(id) {
+    fillClassList: function (id) {
         var dom = tinyMCEPopup.dom, lst = dom.get(id), v, cl;
 
         if (v = tinyMCEPopup.getParam('theme_advanced_styles')) {
             cl = [];
 
-            tinymce.each(v.split(';'), function(v) {
+            tinymce.each(v.split(';'), function (v) {
                 var p = v.split('=');
 
-                cl.push({'title' : p[0], 'class' : p[1]});
+                cl.push({'title': p[0], 'class': p[1]});
             });
         } else
             cl = tinyMCEPopup.editor.dom.getClasses();
@@ -126,14 +126,14 @@ var LinkDialog = {
         if (cl.length > 0) {
             lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
 
-            tinymce.each(cl, function(o) {
+            tinymce.each(cl, function (o) {
                 lst.options[lst.options.length] = new Option(o.title || o['class'], o['class']);
             });
         } else
             dom.remove(dom.getParent(id, 'tr'));
     },
 
-    fillTargetList : function(id) {
+    fillTargetList: function (id) {
         var dom = tinyMCEPopup.dom, lst = dom.get(id), v;
 
         lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
@@ -141,7 +141,7 @@ var LinkDialog = {
         lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('advanced_dlg.link_target_blank'), '_blank');
 
         if (v = tinyMCEPopup.getParam('theme_advanced_link_targets')) {
-            tinymce.each(v.split(','), function(v) {
+            tinymce.each(v.split(','), function (v) {
                 v = v.split('=');
                 lst.options[lst.options.length] = new Option(v[0], v[1]);
             });

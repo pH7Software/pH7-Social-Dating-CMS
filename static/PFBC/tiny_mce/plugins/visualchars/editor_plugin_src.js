@@ -8,9 +8,9 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
     tinymce.create('tinymce.plugins.VisualChars', {
-        init : function(ed, url) {
+        init: function (ed, url) {
             var t = this;
 
             t.editor = ed;
@@ -19,9 +19,9 @@
             ed.addCommand('mceVisualChars', t._toggleVisualChars, t);
 
             // Register buttons
-            ed.addButton('visualchars', {title : 'visualchars.desc', cmd : 'mceVisualChars'});
+            ed.addButton('visualchars', {title: 'visualchars.desc', cmd: 'mceVisualChars'});
 
-            ed.onBeforeGetContent.add(function(ed, o) {
+            ed.onBeforeGetContent.add(function (ed, o) {
                 if (t.state && o.format != 'raw' && !o.draft) {
                     t.state = true;
                     t._toggleVisualChars(false);
@@ -29,19 +29,19 @@
             });
         },
 
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Visual characters',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/visualchars',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Visual characters',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/visualchars',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         },
 
         // Private methods
 
-        _toggleVisualChars : function(bookmark) {
+        _toggleVisualChars: function (bookmark) {
             var t = this, ed = t.editor, nl, i, h, d = ed.getDoc(), b = ed.getBody(), nv, s = ed.selection, bo, div, bm;
 
             t.state = !t.state;
@@ -52,7 +52,7 @@
 
             if (t.state) {
                 nl = [];
-                tinymce.walk(b, function(n) {
+                tinymce.walk(b, function (n) {
                     if (n.nodeType == 3 && n.nodeValue && n.nodeValue.indexOf('\u00a0') != -1)
                         nl.push(n);
                 }, 'childNodes');

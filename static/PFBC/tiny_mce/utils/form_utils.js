@@ -17,7 +17,7 @@ function getColorPickerHTML(id, target_form_element) {
         label.id = label.id || dom.uniqueId();
     }
 
-    h += '<a role="button" aria-labelledby="' + id + '_label" id="' + id + '_link" href="javascript:;" onclick="tinyMCEPopup.pickColor(event,\'' + target_form_element +'\');" onmousedown="return false;" class="pickcolor">';
+    h += '<a role="button" aria-labelledby="' + id + '_label" id="' + id + '_link" href="javascript:;" onclick="tinyMCEPopup.pickColor(event,\'' + target_form_element + '\');" onmousedown="return false;" class="pickcolor">';
     h += '<span id="' + id + '" title="' + tinyMCEPopup.getLang('browse') + '">&nbsp;<span id="' + id + '_label" class="mceVoiceLabel mceIconOnly" style="display:none;">' + tinyMCEPopup.getLang('browse') + '</span></span></a>';
 
     return h;
@@ -77,7 +77,7 @@ function selectByValue(form_obj, field_name, value, add_custom, ignore_case) {
     var sel = form_obj.elements[field_name];
 
     var found = false;
-    for (var i=0; i<sel.options.length; i++) {
+    for (var i = 0; i < sel.options.length; i++) {
         var option = sel.options[i];
 
         if (option.value == value || (ignore_case && option.value.toLowerCase() == value.toLowerCase())) {
@@ -121,7 +121,7 @@ function addClassesToList(list_id, specific_option) {
     if (styles) {
         var stylesAr = styles.split(';');
 
-        for (var i=0; i<stylesAr.length; i++) {
+        for (var i = 0; i < stylesAr.length; i++) {
             if (stylesAr != "") {
                 var key, value;
 
@@ -132,7 +132,7 @@ function addClassesToList(list_id, specific_option) {
             }
         }
     } else {
-        tinymce.each(tinyMCEPopup.editor.dom.getClasses(), function(o) {
+        tinymce.each(tinyMCEPopup.editor.dom.getClasses(), function (o) {
             styleSelectElm.options[styleSelectElm.length] = new Option(o.title || o['class'], o['class']);
         });
     }

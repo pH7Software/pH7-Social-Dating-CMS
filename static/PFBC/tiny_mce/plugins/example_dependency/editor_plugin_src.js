@@ -8,7 +8,7 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function() {
+(function () {
 
     tinymce.create('tinymce.plugins.ExampleDependencyPlugin', {
         /**
@@ -19,7 +19,7 @@
          * @param {tinymce.Editor} ed Editor instance that the plugin is initialized in.
          * @param {string} url Absolute URL to where the plugin is located.
          */
-        init : function(ed, url) {
+        init: function (ed, url) {
         },
 
 
@@ -29,13 +29,13 @@
          *
          * @return {Object} Name/value array containing information about the plugin.
          */
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Example Dependency plugin',
-                author : 'Some author',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/example_dependency',
-                version : "1.0"
+                longname: 'Example Dependency plugin',
+                author: 'Some author',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/example_dependency',
+                version: "1.0"
             };
         }
     });

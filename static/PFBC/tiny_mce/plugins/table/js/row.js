@@ -3,8 +3,8 @@ tinyMCEPopup.requireLangPack();
 function init() {
     tinyMCEPopup.resizeToInnerSize();
 
-    document.getElementById('backgroundimagebrowsercontainer').innerHTML = getBrowserHTML('backgroundimagebrowser','backgroundimage','image','table');
-    document.getElementById('bgcolor_pickcontainer').innerHTML = getColorPickerHTML('bgcolor_pick','bgcolor');
+    document.getElementById('backgroundimagebrowsercontainer').innerHTML = getBrowserHTML('backgroundimagebrowser', 'backgroundimage', 'image', 'table');
+    document.getElementById('bgcolor_pickcontainer').innerHTML = getColorPickerHTML('bgcolor_pick', 'bgcolor');
 
     var inst = tinyMCEPopup.editor;
     var dom = inst.dom;
@@ -67,7 +67,7 @@ function updateAction() {
 
     // Update all selected rows
     if (dom.select('td.mceSelected,th.mceSelected', trElm).length > 0) {
-        tinymce.each(tableElm.rows, function(tr) {
+        tinymce.each(tableElm.rows, function (tr) {
             var i;
 
             for (i = 0; i < tr.cells.length; i++) {
@@ -93,7 +93,7 @@ function updateAction() {
         case "all":
             var rows = tableElm.getElementsByTagName("tr");
 
-            for (var i=0; i<rows.length; i++)
+            for (var i = 0; i < rows.length; i++)
                 updateRow(rows[i], true);
 
             break;
@@ -102,7 +102,7 @@ function updateAction() {
         case "even":
             var rows = tableElm.getElementsByTagName("tr");
 
-            for (var i=0; i<rows.length; i++) {
+            for (var i = 0; i < rows.length; i++) {
                 if ((i % 2 == 0 && action == "odd") || (i % 2 != 0 && action == "even"))
                     updateRow(rows[i], true, true);
             }
@@ -208,7 +208,7 @@ function changedStyle() {
 
     if (st['background-color']) {
         formObj.bgcolor.value = st['background-color'];
-        updateColor('bgcolor_pick','bgcolor');
+        updateColor('bgcolor_pick', 'bgcolor');
     }
 }
 

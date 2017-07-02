@@ -8,32 +8,32 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function(tinymce) {
+(function (tinymce) {
     tinymce.create('tinymce.plugins.EmotionsPlugin', {
-        init : function(ed, url) {
+        init: function (ed, url) {
             // Register commands
-            ed.addCommand('mceEmotion', function() {
+            ed.addCommand('mceEmotion', function () {
                 ed.windowManager.open({
-                    file : url + '/emotions.htm',
-                    width : 250 + parseInt(ed.getLang('emotions.delta_width', 0)),
-                    height : 160 + parseInt(ed.getLang('emotions.delta_height', 0)),
-                    inline : 1
+                    file: url + '/emotions.htm',
+                    width: 250 + parseInt(ed.getLang('emotions.delta_width', 0)),
+                    height: 160 + parseInt(ed.getLang('emotions.delta_height', 0)),
+                    inline: 1
                 }, {
-                    plugin_url : url
+                    plugin_url: url
                 });
             });
 
             // Register buttons
-            ed.addButton('emotions', {title : 'emotions.emotions_desc', cmd : 'mceEmotion'});
+            ed.addButton('emotions', {title: 'emotions.emotions_desc', cmd: 'mceEmotion'});
         },
 
-        getInfo : function() {
+        getInfo: function () {
             return {
-                longname : 'Emotions',
-                author : 'Moxiecode Systems AB',
-                authorurl : 'http://tinymce.moxiecode.com',
-                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/emotions',
-                version : tinymce.majorVersion + "." + tinymce.minorVersion
+                longname: 'Emotions',
+                author: 'Moxiecode Systems AB',
+                authorurl: 'http://tinymce.moxiecode.com',
+                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/emotions',
+                version: tinymce.majorVersion + "." + tinymce.minorVersion
             };
         }
     });

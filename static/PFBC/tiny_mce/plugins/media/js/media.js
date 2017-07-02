@@ -1,4 +1,4 @@
-(function() {
+(function () {
     var url;
 
     if (url = tinyMCEPopup.getParam("media_external_list_url"))
@@ -38,20 +38,20 @@
     }
 
     window.Media = {
-        init : function() {
+        init: function () {
             var html, editor;
 
             this.editor = editor = tinyMCEPopup.editor;
 
             // Setup file browsers and color pickers
-            get('filebrowsercontainer').innerHTML = getBrowserHTML('filebrowser','src','media','media');
-            get('qtsrcfilebrowsercontainer').innerHTML = getBrowserHTML('qtsrcfilebrowser','quicktime_qtsrc','media','media');
-            get('bgcolor_pickcontainer').innerHTML = getColorPickerHTML('bgcolor_pick','bgcolor');
-            get('video_altsource1_filebrowser').innerHTML = getBrowserHTML('video_filebrowser_altsource1','video_altsource1','media','media');
-            get('video_altsource2_filebrowser').innerHTML = getBrowserHTML('video_filebrowser_altsource2','video_altsource2','media','media');
-            get('audio_altsource1_filebrowser').innerHTML = getBrowserHTML('audio_filebrowser_altsource1','audio_altsource1','media','media');
-            get('audio_altsource2_filebrowser').innerHTML = getBrowserHTML('audio_filebrowser_altsource2','audio_altsource2','media','media');
-            get('video_poster_filebrowser').innerHTML = getBrowserHTML('filebrowser_poster','video_poster','media','image');
+            get('filebrowsercontainer').innerHTML = getBrowserHTML('filebrowser', 'src', 'media', 'media');
+            get('qtsrcfilebrowsercontainer').innerHTML = getBrowserHTML('qtsrcfilebrowser', 'quicktime_qtsrc', 'media', 'media');
+            get('bgcolor_pickcontainer').innerHTML = getColorPickerHTML('bgcolor_pick', 'bgcolor');
+            get('video_altsource1_filebrowser').innerHTML = getBrowserHTML('video_filebrowser_altsource1', 'video_altsource1', 'media', 'media');
+            get('video_altsource2_filebrowser').innerHTML = getBrowserHTML('video_filebrowser_altsource2', 'video_altsource2', 'media', 'media');
+            get('audio_altsource1_filebrowser').innerHTML = getBrowserHTML('audio_filebrowser_altsource1', 'audio_altsource1', 'media', 'media');
+            get('audio_altsource2_filebrowser').innerHTML = getBrowserHTML('audio_filebrowser_altsource2', 'audio_altsource2', 'media', 'media');
+            get('video_poster_filebrowser').innerHTML = getBrowserHTML('filebrowser_poster', 'video_poster', 'media', 'image');
 
             html = this.getMediaListHTML('medialist', 'src', 'media', 'media');
             if (html == "")
@@ -82,7 +82,7 @@
             this.preview();
         },
 
-        insert : function() {
+        insert: function () {
             var editor = tinyMCEPopup.editor;
 
             this.formToData();
@@ -92,39 +92,39 @@
             tinyMCEPopup.close();
         },
 
-        preview : function() {
+        preview: function () {
             get('prev').innerHTML = this.editor.plugins.media.dataToHtml(this.data, true);
         },
 
-        moveStates : function(to_form, field) {
+        moveStates: function (to_form, field) {
             var data = this.data, editor = this.editor, data = this.data,
                 mediaPlugin = editor.plugins.media, ext, src, typeInfo, defaultStates, src;
 
             defaultStates = {
                 // QuickTime
-                quicktime_autoplay : true,
-                quicktime_controller : true,
+                quicktime_autoplay: true,
+                quicktime_controller: true,
 
                 // Flash
-                flash_play : true,
-                flash_loop : true,
-                flash_menu : true,
+                flash_play: true,
+                flash_loop: true,
+                flash_menu: true,
 
                 // WindowsMedia
-                windowsmedia_autostart : true,
-                windowsmedia_enablecontextmenu : true,
-                windowsmedia_invokeurls : true,
+                windowsmedia_autostart: true,
+                windowsmedia_enablecontextmenu: true,
+                windowsmedia_invokeurls: true,
 
                 // RealMedia
-                realmedia_autogotourl : true,
-                realmedia_imagestatus : true
+                realmedia_autogotourl: true,
+                realmedia_imagestatus: true
             };
 
             function parseQueryParams(str) {
                 var out = {};
 
                 if (str) {
-                    tinymce.each(str.split('&'), function(item) {
+                    tinymce.each(str.split('&'), function (item) {
                         var parts = item.split('=');
 
                         out[unescape(parts[0])] = unescape(parts[1]);
@@ -250,7 +250,10 @@
                 } else {
                     // Check flash vars
                     if (data.type == 'flash') {
-                        tinymce.each(editor.getParam('flash_video_player_flashvars', {url : '$url', poster : '$poster'}), function(value, name) {
+                        tinymce.each(editor.getParam('flash_video_player_flashvars', {
+                            url: '$url',
+                            poster: '$poster'
+                        }), function (value, name) {
                             if (value == '$url')
                                 data.params.src = parseQueryParams(data.params.flashvars)[name] || data.params.src;
                         });
@@ -286,28 +289,28 @@
                     if (!data.video.sources)
                         data.video.sources = [];
 
-                    data.video.sources[0] = {src : src};
+                    data.video.sources[0] = {src: src};
 
                     src = getVal("video_altsource1");
                     if (src)
-                        data.video.sources[1] = {src : src};
+                        data.video.sources[1] = {src: src};
 
                     src = getVal("video_altsource2");
                     if (src)
-                        data.video.sources[2] = {src : src};
+                        data.video.sources[2] = {src: src};
                 } else if (data.type == 'audio') {
                     if (!data.video.sources)
                         data.video.sources = [];
 
-                    data.video.sources[0] = {src : src};
+                    data.video.sources[0] = {src: src};
 
                     src = getVal("audio_altsource1");
                     if (src)
-                        data.video.sources[1] = {src : src};
+                        data.video.sources[1] = {src: src};
 
                     src = getVal("audio_altsource2");
                     if (src)
-                        data.video.sources[2] = {src : src};
+                        data.video.sources[2] = {src: src};
                 } else
                     data.params.src = src;
 
@@ -317,11 +320,11 @@
             }
         },
 
-        dataToForm : function() {
+        dataToForm: function () {
             this.moveStates(true);
         },
 
-        formToData : function(field) {
+        formToData: function (field) {
             if (field == "width" || field == "height")
                 this.changeSize(field);
 
@@ -341,12 +344,12 @@
             }
         },
 
-        beforeResize : function() {
+        beforeResize: function () {
             this.width = parseInt(getVal('width') || (this.data.type == 'audio' ? "300" : "320"), 10);
             this.height = parseInt(getVal('height') || (this.data.type == 'audio' ? "32" : "240"), 10);
         },
 
-        changeSize : function(type) {
+        changeSize: function (type) {
             var width, height, scale, size;
 
             if (get('constrain').checked) {
@@ -363,14 +366,14 @@
             }
         },
 
-        getMediaListHTML : function() {
+        getMediaListHTML: function () {
             if (typeof(tinyMCEMediaList) != "undefined" && tinyMCEMediaList.length > 0) {
                 var html = "";
 
                 html += '<select id="linklist" name="linklist" style="width: 250px" onchange="this.form.src.value=this.options[this.selectedIndex].value;Media.formToData(\'src\');">';
                 html += '<option value="">---</option>';
 
-                for (var i=0; i<tinyMCEMediaList.length; i++)
+                for (var i = 0; i < tinyMCEMediaList.length; i++)
                     html += '<option value="' + tinyMCEMediaList[i][1] + '">' + tinyMCEMediaList[i][0] + '</option>';
 
                 html += '</select>';
@@ -383,7 +386,7 @@
     };
 
     tinyMCEPopup.requireLangPack();
-    tinyMCEPopup.onInit.add(function() {
+    tinyMCEPopup.onInit.add(function () {
         Media.init();
     });
 })();
