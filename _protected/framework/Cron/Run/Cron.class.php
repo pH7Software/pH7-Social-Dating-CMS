@@ -40,7 +40,7 @@ abstract class Cron extends Core
         if ($this->file->existFile($sFullPath)) {
             $iSavedTime = $this->file->getFile($sFullPath);
             $iHours = $this->getDelay();
-            $iCronTime = $iSavedTime + $this->convertHoursIntoSeconds($iHours);
+            $iCronTime = $iSavedTime + $this->convertHoursToSeconds($iHours);
 
             // Status is FALSE if the delay has not yet elapsed
             $bStatus = ($iCronTime < $this->iTime);
@@ -83,7 +83,7 @@ abstract class Cron extends Core
      *
      * @return int Seconds
      */
-    private function convertHoursIntoSeconds($iHours)
+    private function convertHoursToSeconds($iHours)
     {
         return $iHours * 3600;
     }
