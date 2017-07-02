@@ -150,7 +150,6 @@ class JoinFormProcess extends Form
                 t('Please try again with new information in the form fields or come back later.')
             );
         } else {
-            // Registered successfully in database for step 3!
             $this->session->set('mail_step3', $this->session->get('mail_step1'));
             Header::redirect(Uri::get('user','signup','step4'), t('Your account has just been created!'));
         }
