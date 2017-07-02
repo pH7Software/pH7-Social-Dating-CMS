@@ -61,9 +61,10 @@ class JoinForm
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Terms of Service'), 'terms', array(1 => '<em>' . t('I have read and agree to the %0%.', '<a href="' . Uri::get('page', 'main', 'terms') . '" rel="nofollow" target="_blank">' . t('Terms of Service') . '</a>') . '</em>'), array('id' => 'terms', 'onblur' => 'CValid(this.checked, this.id)', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error terms-0"></span>'));
 
-        // We don't want to register an admin to a partner website
         if (DbConfig::getSetting('allowUserToPartner') &&
-            (new AdminCoreModel)->getRootIp() !== Ip::get() && !AdminCore::auth()
+            // We don't want to register an admin to a partner website
+            !AdminCore::auth() &&
+            (new AdminCoreModel)->getRootIp() !== Ip::get()
         ) {
             $oForm->addElement(new \PFBC\Element\Checkbox('', 'partner_register', array('yes' => '<em class="small">' . t('Join also EdenFlirt for increasing the chance to date the right person.') . '</em>'), array('value' => 'yes')));
         }
