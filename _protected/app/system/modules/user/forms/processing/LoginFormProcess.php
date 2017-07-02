@@ -11,10 +11,10 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Security\Security;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Security;
 use PH7\Framework\Url\Header;
 
 class LoginFormProcess extends Form implements LoginableForm

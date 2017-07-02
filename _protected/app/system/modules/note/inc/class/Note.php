@@ -6,7 +6,8 @@
  * @package        PH7 / App / System / Module / Note / Inc / Class
  */
 namespace PH7;
-use PH7\Framework\Util\Various, PH7\Framework\Config\Config;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Util\Various;
 
 class Note extends WriteCore
 {

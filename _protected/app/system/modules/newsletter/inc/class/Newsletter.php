@@ -8,7 +8,8 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mail\Mail;
+use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Request\Http;
 
 /** Reset the time limit and increase the memory **/
 @set_time_limit(0);

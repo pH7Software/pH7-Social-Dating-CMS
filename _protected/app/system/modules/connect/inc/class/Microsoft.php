@@ -13,15 +13,14 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\Import,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Config\Config,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Util\Various,
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\File\Import;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Util\Various;
 
 class Microsoft extends Api
 {

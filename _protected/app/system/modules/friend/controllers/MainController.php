@@ -7,9 +7,9 @@
  */
 namespace PH7;
 
-use PH7\Framework\Security\CSRF\Token;
-use PH7\Framework\Navigation\Page;
 use PH7\Framework\Layout\Html\Meta;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Security\CSRF\Token;
 
 class MainController extends Controller
 {

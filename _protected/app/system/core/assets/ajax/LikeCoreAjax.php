@@ -12,7 +12,8 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Ip\Ip;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Request\Http;
 
 class LikeCoreAjax
 {

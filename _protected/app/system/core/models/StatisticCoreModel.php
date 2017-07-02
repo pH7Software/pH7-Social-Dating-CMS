@@ -10,10 +10,9 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\Engine\Db,
-PH7\Framework\Mvc\Model\Engine\Record,
-PH7\Framework\Cache\Cache;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Record;
 
 class StatisticCoreModel extends Framework\Mvc\Model\Statistic
 {

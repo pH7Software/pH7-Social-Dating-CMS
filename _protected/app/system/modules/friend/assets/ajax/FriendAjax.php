@@ -10,11 +10,11 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Http\Http;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Security\CSRF\Token;
-use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\CSRF\Token;
 
 class FriendAjax extends Core
 {

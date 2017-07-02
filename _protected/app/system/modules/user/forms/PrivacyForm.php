@@ -7,7 +7,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Session\Session, PH7\Framework\Registry\Registry;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Session\Session;
 
 class PrivacyForm
 {

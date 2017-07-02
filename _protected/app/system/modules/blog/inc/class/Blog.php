@@ -6,7 +6,8 @@
  * @package        PH7 / App / System / Module / Blog / Inc / Class
  */
 namespace PH7;
-use PH7\Framework\File\File, PH7\Framework\Config\Config;
+use PH7\Framework\Config\Config;
+use PH7\Framework\File\File;
 
 class Blog extends WriteCore
 {

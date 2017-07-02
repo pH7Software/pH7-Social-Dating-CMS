@@ -13,16 +13,16 @@ namespace PH7\Framework\File;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Parse\Url as ParseUrl;
+use PH7\Framework\Registry\Registry;
 use PH7\Framework\Server\Server;
 use PH7\Framework\Url\Url;
-use PH7\Framework\Parse\Url as ParseUrl;
-use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Registry\Registry;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileObject;
 use ZipArchive;
-use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class File
 {

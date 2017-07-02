@@ -16,8 +16,8 @@ defined('PH7') or exit('Restricted access');
 
 use ArrayIterator;
 use CachingIterator;
-use PH7\Framework\Pattern\Singleton;
 use PDO;
+use PH7\Framework\Pattern\Singleton;
 use stdClass;
 
 /**

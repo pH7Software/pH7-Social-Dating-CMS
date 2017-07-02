@@ -7,7 +7,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Engine\Db, PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 // Abstract Class
 class RatingCoreModel extends Framework\Mvc\Model\Engine\Model

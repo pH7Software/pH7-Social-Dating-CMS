@@ -14,10 +14,10 @@ namespace PH7\Framework\Error\CException;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Error\LoggerExcept;
-use PH7\Framework\Error\Debug;
-use PH7\Framework\Page\Page;
 use Exception;
+use PH7\Framework\Error\Debug;
+use PH7\Framework\Error\LoggerExcept;
+use PH7\Framework\Page\Page;
 
 class PH7Exception extends Exception
 {

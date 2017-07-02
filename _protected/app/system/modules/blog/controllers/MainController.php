@@ -7,12 +7,11 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Parse\Emoticon,
-PH7\Framework\Navigation\Page,
-PH7\Framework\Analytics\Statistic,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Analytics\Statistic;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Parse\Emoticon;
+use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {

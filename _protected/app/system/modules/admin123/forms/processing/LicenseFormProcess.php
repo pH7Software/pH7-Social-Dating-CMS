@@ -9,9 +9,8 @@ namespace PH7;
 
 defined('PH7') or die('Restricted access');
 
-use
-PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl,
-PH7\Framework\Mvc\Model\License;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Mvc\Model\License;
 
 class LicenseFormProcess extends Form
 {

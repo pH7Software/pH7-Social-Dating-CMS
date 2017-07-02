@@ -13,19 +13,18 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\Import,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Config\Config,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Ip\Ip,
-PH7\Framework\File\File,
-PH7\Framework\Util\Various,
-PH7\Framework\Session\Session,
-PH7\Framework\Registry\Registry,
-PH7\Framework\Mvc\Request\Http as HttpRequest,
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\File\File;
+use PH7\Framework\File\Import;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Util\Various;
 
 class Google extends Api implements IApi
 {

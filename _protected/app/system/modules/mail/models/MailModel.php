@@ -8,9 +8,9 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Spam as SpamModel;
-use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Spam as SpamModel;
 
 class MailModel extends MailCoreModel
 {

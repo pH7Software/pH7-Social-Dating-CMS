@@ -8,8 +8,8 @@
  */
 namespace PFBC\Element;
 
-use PH7\Framework\Mvc\Model\DbConfig;
 use PFBC\OptionElement;
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class Age extends OptionElement
 {

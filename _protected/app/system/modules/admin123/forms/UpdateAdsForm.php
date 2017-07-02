@@ -7,7 +7,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Parse\SysVar, PH7\Framework\Navigation\Page;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Parse\SysVar;
 
 class UpdateAdsForm
 {

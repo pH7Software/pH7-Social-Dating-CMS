@@ -8,10 +8,10 @@
 
 namespace PH7;
 
-use PH7\Framework\Session\Session;
 use PH7\Framework\Cookie\Cookie;
-use PH7\Framework\Url\Header;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class Affiliate extends AffiliateCore
 {

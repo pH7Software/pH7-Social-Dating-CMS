@@ -14,15 +14,15 @@ namespace PH7\Framework\Security\CSRF;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Session\Session;
-use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Util\Various;
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Mvc\Request\Http;
-use PH7\Framework\Ip\Ip;
-use PH7\UserCore;
 use PH7\AdminCore;
 use PH7\AffiliateCore;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Util\Various;
+use PH7\UserCore;
 
 /**
  * This class provides functions of numbers against the XSS (Cross-site scripting) vulnerability.

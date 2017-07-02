@@ -14,10 +14,10 @@ namespace PH7\Framework\Navigation;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Str\Str;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Server\Server;
-use PH7\Framework\Http\Http;
+use PH7\Framework\Str\Str;
 
 /**
  * @internal In this class, there're some yoda conditions.

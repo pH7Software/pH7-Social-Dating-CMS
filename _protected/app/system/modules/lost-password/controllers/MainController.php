@@ -7,13 +7,12 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Util\Various,
-PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel,
-PH7\Framework\Mail\Mail,
-PH7\Framework\Layout\Html\Meta,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Layout\Html\Meta;
+use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Util\Various;
 
 class MainController extends Controller
 {

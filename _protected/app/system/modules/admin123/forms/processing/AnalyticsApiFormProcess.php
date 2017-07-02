@@ -9,11 +9,10 @@ namespace PH7;
 
 defined('PH7') or die('Restricted access');
 
-use
-PH7\Framework\Mvc\Model\Design,
-PH7\Framework\Mvc\Model\Analytics,
-PH7\Framework\Cache\Cache,
-PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Mvc\Model\Analytics;
+use PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Mvc\Request\Http;
 
 class AnalyticsApiFormProcess extends Form
 {

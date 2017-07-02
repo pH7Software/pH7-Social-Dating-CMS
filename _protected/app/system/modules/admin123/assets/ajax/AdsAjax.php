@@ -8,7 +8,8 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Mvc\Request\Http;
 
 class AdsAjax
 {

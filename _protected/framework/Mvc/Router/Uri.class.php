@@ -12,10 +12,10 @@ namespace PH7\Framework\Mvc\Router;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Pattern\Statik;
-use PH7\Framework\Parse\Url;
-use PH7\Framework\File\Exception as FileException;
 use DOMDocument;
+use PH7\Framework\File\Exception as FileException;
+use PH7\Framework\Parse\Url;
+use PH7\Framework\Pattern\Statik;
 
 class Uri
 {

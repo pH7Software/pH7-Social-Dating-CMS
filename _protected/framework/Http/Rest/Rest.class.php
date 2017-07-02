@@ -15,9 +15,9 @@ namespace PH7\Framework\Http\Rest;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\Stream;
-use PH7\Framework\Str\Str;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Str\Str;
 
 class Rest extends Http
 {

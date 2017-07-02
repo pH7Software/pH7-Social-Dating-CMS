@@ -9,9 +9,8 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Cache\Cache,
-PH7\Framework\Mvc\Model\Module as ModuleModel;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Mvc\Model\Module as ModuleModel;
 
 class DisableModuleFormProcess extends Form
 {

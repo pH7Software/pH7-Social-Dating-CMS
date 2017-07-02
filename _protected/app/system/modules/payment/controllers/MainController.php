@@ -11,11 +11,11 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Mail\Mail;
 use PH7\Framework\Cache\Cache;
-use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 use PH7\Framework\File\File;
+use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 
 class MainController extends Controller
 {

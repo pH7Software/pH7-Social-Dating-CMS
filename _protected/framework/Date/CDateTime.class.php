@@ -14,9 +14,9 @@ namespace PH7\Framework\Date;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Config\Config;
 use DateTime;
 use DateTimeZone;
+use PH7\Framework\Config\Config;
 
 class CDateTime
 {

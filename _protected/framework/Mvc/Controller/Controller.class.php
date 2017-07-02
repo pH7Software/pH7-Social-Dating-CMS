@@ -13,15 +13,14 @@
 namespace PH7\Framework\Mvc\Controller;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Security\Ban\Ban,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Http\Http,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Mobile\MobApp,
-PH7\Framework\Module\Various as SysMod,
-PH7\Framework\Mvc\Model as M;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mobile\MobApp;
+use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Mvc\Model as M;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Ban\Ban;
 
 abstract class Controller extends \PH7\Framework\Core\Core
 {

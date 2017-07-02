@@ -12,7 +12,8 @@
 namespace PH7\Framework\Api;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Config\Config, PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Mvc\Request\Http;
 
 class Tool
 {

@@ -12,9 +12,9 @@ namespace PH7\Framework\Security\Moderation;
 
 defined('PH7') or exit('Restricted access');
 
+use Image_FleshSkinQuantifier;
 use PH7\Framework\File\Import;
 use PH7\Framework\Pattern\Statik;
-use Image_FleshSkinQuantifier;
 
 class Filter
 {

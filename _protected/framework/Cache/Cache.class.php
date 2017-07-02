@@ -14,10 +14,10 @@ namespace PH7\Framework\Cache;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel;
 use PH7\Framework\Config\Config;
-use PH7\Framework\File\File;
+use PH7\Framework\Core\Kernel;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\File;
 
 class Cache
 {

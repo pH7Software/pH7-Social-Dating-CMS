@@ -7,10 +7,9 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Session\Session,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Session\Session;
 
 class EditForm
 {

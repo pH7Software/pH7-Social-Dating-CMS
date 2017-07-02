@@ -9,7 +9,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Security\Validate\Validate, PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Security\Validate\Validate;
 
 class UserController extends MainController
 {

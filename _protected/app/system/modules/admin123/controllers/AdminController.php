@@ -9,10 +9,9 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Navigation\Page,
-PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Url\Header;
 
 class AdminController extends Controller
 {

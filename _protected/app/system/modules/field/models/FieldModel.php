@@ -7,10 +7,9 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\Engine\Util\Various,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Request\Http;
 
 class FieldModel extends Framework\Mvc\Model\Engine\Model
 {

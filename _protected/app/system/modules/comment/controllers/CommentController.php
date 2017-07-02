@@ -7,11 +7,10 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Security\Ban\Ban,
-PH7\Framework\Http\Http,
-PH7\Framework\Navigation\Page,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Security\Ban\Ban;
 
 class CommentController extends Controller
 {

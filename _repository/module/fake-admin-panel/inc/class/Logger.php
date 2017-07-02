@@ -11,11 +11,10 @@
 
 namespace PH7;
 
-use
-PH7\Framework\Security\Ban\Ban,
-PH7\Framework\Http\Http,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Mail\Mail;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mail\Mail;
+use PH7\Framework\Security\Ban\Ban;
 
 class Logger extends Core
 {

@@ -9,11 +9,11 @@ namespace PH7;
 
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Registry\Registry;
-use PH7\Framework\Session\Session;
 use PH7\Framework\Cookie\Cookie;
-use PH7\Framework\Security\Security;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Security\Security;
+use PH7\Framework\Session\Session;
 
 // Automatic connection
 if (!UserCore::auth() && Registry::getInstance()->action !== 'soon') {

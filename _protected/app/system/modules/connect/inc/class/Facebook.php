@@ -13,23 +13,22 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Config\Config,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Ip\Ip,
-PH7\Framework\File\File,
-PH7\Framework\Util\Various,
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Error\CException\PH7Exception,
-Facebook\Facebook as FB,
-Facebook\FacebookResponse,
-Facebook\Helpers\FacebookRedirectLoginHelper,
-Facebook\GraphNodes\GraphUser,
-Facebook\GraphNodes\GraphLocation,
-Facebook\Exceptions\FacebookSDKException,
-Facebook\Exceptions\FacebookResponseException,
-PH7\Framework\Mvc\Router\Uri;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Facebook as FB;
+use Facebook\FacebookResponse;
+use Facebook\GraphNodes\GraphLocation;
+use Facebook\GraphNodes\GraphUser;
+use Facebook\Helpers\FacebookRedirectLoginHelper;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Error\CException\PH7Exception;
+use PH7\Framework\File\File;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Util\Various;
 
 class Facebook extends Api implements IApi
 {

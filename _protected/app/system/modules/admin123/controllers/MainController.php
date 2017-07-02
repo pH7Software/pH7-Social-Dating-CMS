@@ -11,8 +11,8 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Layout\Html\Meta;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Security\Version;
 
 class MainController extends Controller

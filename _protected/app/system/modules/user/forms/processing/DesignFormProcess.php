@@ -8,9 +8,8 @@
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Security\Moderation\Filter;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Security\Moderation\Filter;
 
 class DesignFormProcess extends Form
 {

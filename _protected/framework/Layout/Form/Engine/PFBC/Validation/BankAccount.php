@@ -4,7 +4,8 @@
  * By pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Validation;
-use PH7\Framework\Security\Ban\Ban, PH7\ExistsCoreModel;
+use PH7\ExistsCoreModel;
+use PH7\Framework\Security\Ban\Ban;
 
 class BankAccount extends \PFBC\Validation
 {
