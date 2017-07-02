@@ -5,7 +5,7 @@
 /* Atelier-Plateau Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #7e7777;
+    color: #7e7777;
 }
 
 /* Atelier-Plateau Red */
@@ -19,7 +19,7 @@
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #ca4949;
+    color: #ca4949;
 }
 
 /* Atelier-Plateau Orange */
@@ -30,55 +30,55 @@
 .hljs-literal,
 .hljs-type,
 .hljs-params {
-  color: #b45a3c;
+    color: #b45a3c;
 }
 
 /* Atelier-Plateau Green */
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet {
-  color: #4b8b8b;
+    color: #4b8b8b;
 }
 
 /* Atelier-Plateau Blue */
 .hljs-title,
 .hljs-section {
-  color: #7272ca;
+    color: #7272ca;
 }
 
 /* Atelier-Plateau Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-  color: #8464c4;
+    color: #8464c4;
 }
 
 .hljs-deletion,
 .hljs-addition {
-  color: #1b1818;
-  display: inline-block;
-  width: 100%;
+    color: #1b1818;
+    display: inline-block;
+    width: 100%;
 }
 
 .hljs-deletion {
-  background-color: #ca4949;
+    background-color: #ca4949;
 }
 
 .hljs-addition {
-  background-color: #4b8b8b;
+    background-color: #4b8b8b;
 }
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  background: #1b1818;
-  color: #8a8585;
-  padding: 0.5em;
+    display: block;
+    overflow-x: auto;
+    background: #1b1818;
+    color: #8a8585;
+    padding: 0.5em;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }
 
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }

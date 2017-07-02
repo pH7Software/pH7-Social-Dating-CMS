@@ -5,11 +5,11 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 */
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: white;
-  color: black;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: white;
+    color: black;
 }
 
 .hljs-string,
@@ -21,14 +21,14 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .hljs-addition,
 .hljs-attribute,
 .hljs-link {
-  color: #888;
+    color: #888;
 }
 
 .hljs-comment,
 .hljs-quote,
 .hljs-meta,
 .hljs-deletion {
-  color: #ccc;
+    color: #ccc;
 }
 
 .hljs-keyword,
@@ -37,9 +37,9 @@ Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiac
 .hljs-name,
 .hljs-type,
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }

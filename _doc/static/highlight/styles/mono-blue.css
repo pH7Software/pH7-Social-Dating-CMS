@@ -2,14 +2,14 @@
   Five-color theme from a single blue hue.
 */
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #eaeef3;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #eaeef3;
 }
 
 .hljs {
-  color: #00193a;
+    color: #00193a;
 }
 
 .hljs-keyword,
@@ -19,11 +19,11 @@
 .hljs-doctag,
 .hljs-name,
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .hljs-comment {
-  color: #738191;
+    color: #738191;
 }
 
 .hljs-string,
@@ -38,7 +38,7 @@
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #0048ab;
+    color: #0048ab;
 }
 
 .hljs-meta,
@@ -51,9 +51,9 @@
 .hljs-template-variable,
 .hljs-link,
 .hljs-bullet {
-  color: #4c81c9;
+    color: #4c81c9;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }
