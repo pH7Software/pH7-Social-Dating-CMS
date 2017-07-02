@@ -29,7 +29,7 @@ final class Version
     const KERNEL_VERSION_NAME = 'NaOH';
     const KERNEL_VERSION = '8.0.0';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2017-07-03';
+    const KERNEL_RELASE_DATE = '2017-07-10';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
