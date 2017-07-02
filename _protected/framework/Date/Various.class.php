@@ -116,7 +116,7 @@ class Various
             if ($iDays < 7)
                 $sTxt = $iDays === 1 ? t('one day ago.') : t('%0% days ago.', $iDays);
             elseif ($iWeeks < 4)
-                 $sTxt = $iWeeks === 1 ? t('one week ago.') : t('%0% weeks ago.', $iWeeks);
+                $sTxt = $iWeeks === 1 ? t('one week ago.') : t('%0% weeks ago.', $iWeeks);
             elseif ($iMonths < 12)
                 $sTxt = $iMonths === 1 ? t('one month ago.') : t('%0% months ago.', $iMonths);
             else
