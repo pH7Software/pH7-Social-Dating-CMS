@@ -3,34 +3,41 @@ div.content {
     clear: left;
     padding: 1em;
     float: left;
-    width:100%;
+    width: 100%;
     background-color: #fff;
 }
+
 div.content.inactive {
     display: none;
 }
+
 ol#toc {
     height: 2em;
     list-style: none;
     margin: 0;
     padding: 0;
 }
+
 ol#toc li {
     float: left;
 }
+
 ol#toc li a.active span, ol#toc span:hover {
     background-color: #2d99e5;
 }
+
 ol#toc li a.active span {
     font-weight: bold;
 }
+
 ol#toc a {
-    font: 12px Verdana,Helvetica,sans-serif;
+    font: 12px Verdana, Helvetica, sans-serif;
     color: #fff;
     float: left;
     text-decoration: none;
     line-height: 2em;
 }
+
 ol#toc span {
     background-color: #3af;
     display: block;
@@ -45,10 +52,12 @@ ol#toc span {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
     }
+
     ol#toc li {
         margin: 0 1px 0 0;
     }
 }
+
 /* 1229px or less */
 @media (max-width: 1229px) {
     ol#toc span {
