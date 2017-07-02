@@ -315,7 +315,7 @@ var Messenger = {
                 }
             }
 
-            sNewCookie = sNewCookie.slice(0, -1)
+            sNewCookie = sNewCookie.slice(0, -1);
 
 
             $.cookie('chatbox_minimized', sNewCookie);

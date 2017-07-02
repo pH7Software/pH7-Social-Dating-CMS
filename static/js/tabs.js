@@ -190,7 +190,7 @@ function makeActivatable(paramName, tabs) {
         } else if (typeof item == 'string') {
             var path = basePath ? basePath.slice(0) : [];
             var e = document.getElementById(item);
-            if (!e) throw 'Could not find "' + item + '".'
+            if (!e) throw 'Could not find "' + item + '".';;
             path.push(e);
 
             if (!first) first = item;
