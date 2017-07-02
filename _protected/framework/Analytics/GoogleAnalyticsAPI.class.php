@@ -16,7 +16,8 @@ defined('PH7') or exit('Restricted access');
 *  @ version         30/04/2011
 */
 
-class GoogleAnalyticsAPI {
+class GoogleAnalyticsAPI
+{
 
     /** Google account login (email) **/
     private $login;
@@ -87,6 +88,45 @@ class GoogleAnalyticsAPI {
 
         // Authentication
         $this->login();
+    }
+
+    /**
+     * Login to the google server
+     * See : http://google-data-api.blogspot.com/2008/05/clientlogin-with-php-curl.html
+     *
+     * @return void
+     */
+
+    private function login()
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://www.google.com/accounts/ClientLogin");
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+
+        $data = array('accountType' => 'GOOGLE',
+            'Email' => $this->login,
+            'Passwd' => $this->password,
+            'source' => 'php_curl_analytics',
+            'service' => 'analytics');
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+        $hasil = curl_exec($ch);
+        curl_close($ch);
+
+        // Get the login token
+        // SID=DQA...oUE
+        // LSID=DQA...bbo
+        // Auth=DQA...Sxq
+        if (preg_match('/Auth=(.*)$/', $hasil, $matches) > 0) {
+            $this->loginToken = $matches[1];
+        } else {
+            trigger_error('Authentication problem', E_USER_WARNING);
+            return null;
+        }
     }
 
     /**
@@ -197,41 +237,26 @@ class GoogleAnalyticsAPI {
         }
     }
 
-    /**
-     * Login to the google server
-     * See : http://google-data-api.blogspot.com/2008/05/clientlogin-with-php-curl.html
-     *
-     * @return void
-     */
-
-    private function login()
+    public function getAccounts()
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://www.google.com/accounts/ClientLogin");
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        $url = 'https://www.google.com/analytics/feeds/accounts/default?';
 
-        $data = array('accountType' => 'GOOGLE',
-                      'Email' => $this->login,
-                      'Passwd' => $this->password,
-                      'source' => 'php_curl_analytics',
-                      'service' => 'analytics');
+        if ($this->maxResults > 0) {
+            $url .= '&max-results=' . $this->maxResults;
+        }
 
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        if ($this->startIndex > 0) {
+            $url .= '&start-index=' . $this->startIndex;
+        }
 
-        $hasil = curl_exec($ch);
-        curl_close($ch);
-
-        // Get the login token
-        // SID=DQA...oUE
-        // LSID=DQA...bbo
-        // Auth=DQA...Sxq
-        if (preg_match('/Auth=(.*)$/', $hasil, $matches) > 0) {
-            $this->loginToken = $matches[1];
+        if ($this->getContent($url) == 200) {
+            $XML_object = simplexml_load_string($this->response);
+            $datas = array();
+            foreach ($XML_object->entry as $m) {
+                $datas [] = array('id' => (string)$m->id, 'title' => (string)$m->title);
+            }
+            return $datas;
         } else {
-            trigger_error('Authentication problem', E_USER_WARNING);
             return null;
         }
     }
@@ -264,30 +289,6 @@ class GoogleAnalyticsAPI {
         curl_close($ch);
 
         return $infos['http_code'];
-    }
-
-    public function getAccounts()
-    {
-        $url = 'https://www.google.com/analytics/feeds/accounts/default?';
-
-        if ($this->maxResults > 0) {
-            $url .= '&max-results=' . $this->maxResults;
-        }
-
-        if ($this->startIndex > 0) {
-            $url .= '&start-index=' . $this->startIndex;
-        }
-
-        if ($this->getContent($url) == 200) {
-            $XML_object = simplexml_load_string($this->response);
-            $datas = array();
-            foreach ($XML_object->entry as $m) {
-                $datas [] = array('id' => (string)$m->id, 'title' => (string)$m->title);
-            }
-            return $datas;
-        } else {
-            return null;
-        }
     }
 
     /**

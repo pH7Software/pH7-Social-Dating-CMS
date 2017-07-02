@@ -17,25 +17,6 @@ class AclResource
 {
     /**
      * @param string $sName
-     * @param string $sValue
-     *
-     * @throws Exception
-     */
-    public function __set($sName, $sValue)
-    {
-        switch ($sName) {
-            case 'sName':
-            case 'aAllowed':
-                $this->$sName = $sValue;
-            break;
-
-            default:
-                throw new Exception("Unable to set \"$sName\".");
-        }
-    }
-
-    /**
-     * @param string $sName
      *
      * @throws Exception
      */
@@ -49,6 +30,25 @@ class AclResource
 
             default:
                 throw new Exception("Unable to get \"$sName\".");
+        }
+    }
+
+    /**
+     * @param string $sName
+     * @param string $sValue
+     *
+     * @throws Exception
+     */
+    public function __set($sName, $sValue)
+    {
+        switch ($sName) {
+            case 'sName':
+            case 'aAllowed':
+                $this->$sName = $sValue;
+                break;
+
+            default:
+                throw new Exception("Unable to set \"$sName\".");
         }
     }
 

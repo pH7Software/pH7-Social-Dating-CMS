@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Analytics
- * @version          0.4
+ * @version          0.6
  */
 
 namespace PH7\Framework\Analytics;
@@ -18,15 +18,6 @@ use PH7\Framework\Navigation\Browser;
 
 class Analytics extends StoreStats
 {
-    /** @var null|string */
-    private $_sUserAgent;
-
-    /** @var null|string */
-    private $_sReferer;
-
-    /** @var string */
-    private $_sUserLang;
-
     /**
      * OS list.
      *
@@ -85,9 +76,9 @@ class Analytics extends StoreStats
         'sharp' => 'Sharp',
         'amoi' => 'Amoi',
         'palm|palmsource|elaine' => 'Palm',
-        'palmscape'    => 'Palmscape',
+        'palmscape' => 'Palmscape',
         'symbian' => 'Symbian',
-        'symbianos'    => 'Symbian OS',
+        'symbianos' => 'Symbian OS',
         'cocoon' => 'O2 Cocoon',
         'playstation portable' => 'PlayStation Portable (PSP)',
         'hiptop' => 'Danger Hiptop',
@@ -100,9 +91,9 @@ class Analytics extends StoreStats
         'zte' => 'ZTE',
         'xda' => 'XDA',
         'mda' => 'MDA',
-        'digital paths'    => 'Digital Paths',
+        'digital paths' => 'Digital Paths',
         'avantgo' => 'AvantGo',
-        'xiino'    => 'Xiino',
+        'xiino' => 'Xiino',
         'novarra' => 'Novarra Transcoder',
         'vodafone' => 'Vodafone',
         'docomo' => 'NTT DoCoMo',
@@ -139,9 +130,9 @@ class Analytics extends StoreStats
         'amaya' => 'Amaya',
         'phoenix' => 'Phoenix',
         'firebird' => 'Firebird',
-        'obigo'    => 'Obigo',
+        'obigo' => 'Obigo',
         'netfront' => 'Netfront Browser',
-        'mobilexplorer'    => 'Mobile Explorer',
+        'mobilexplorer' => 'Mobile Explorer',
         'icab' => 'iCab',
         'ibrowse' => 'IBrowse',
     ];
@@ -189,6 +180,13 @@ class Analytics extends StoreStats
         'dmoz',
     ];
 
+    /** @var null|string */
+    private $_sUserAgent;
+    /** @var null|string */
+    private $_sReferer;
+    /** @var string */
+    private $_sUserLang;
+
     public function __construct()
     {
         $oBrowser = new Browser;
@@ -198,6 +196,29 @@ class Analytics extends StoreStats
         unset($oBrowser);
 
         $this->init();
+    }
+
+    /**
+     * Init method.
+     *
+     * @return void
+     */
+    protected function init()
+    {
+        // Check and retrieve
+        $sOs = $this->checkOs();
+        $sWebBrowser = $this->checkWebBrowsers();
+        $sBot = $this->checkBots();
+        $sIpBot = $this->checkIpBots();
+        $sKeyword = $this->checkKeywords();
+
+        // Save
+        $this->add('OS', $sOs);
+        $this->add('WebBrowsers', $sWebBrowser);
+        $this->add('Bots', $sBot);
+        $this->add('IpBots', $sIpBot);
+        $this->add('Keywords', $sKeyword);
+        $this->add('UserLanguage', $this->_sUserLang);
     }
 
     /**
@@ -217,6 +238,19 @@ class Analytics extends StoreStats
         }
 
         return $sOs;
+    }
+
+    /**
+     * Find a word in contents using the RegEx pattern.
+     *
+     * @param string $sToFind
+     * @param string $sContents
+     *
+     * @return boolean
+     */
+    protected function find($sToFind, $sContents)
+    {
+        return preg_match('/' . $sToFind . '/i', $sContents);
     }
 
     /**
@@ -294,18 +328,6 @@ class Analytics extends StoreStats
     }
 
     /**
-     * Retrieve data cache.
-     *
-     * @param string $sFileName
-     *
-     * @return array Analytics data.
-     */
-    public function get($sFileName)
-    {
-        return $this->read($sFileName);
-    }
-
-    /**
      * Add data in the cache.
      *
      * @param string $sType File name.
@@ -319,38 +341,14 @@ class Analytics extends StoreStats
     }
 
     /**
-     * Init method.
+     * Retrieve data cache.
      *
-     * @return void
+     * @param string $sFileName
+     *
+     * @return array Analytics data.
      */
-    protected function init()
+    public function get($sFileName)
     {
-        // Check and retrieve
-        $sOs = $this->checkOs();
-        $sWebBrowser = $this->checkWebBrowsers();
-        $sBot = $this->checkBots();
-        $sIpBot = $this->checkIpBots();
-        $sKeyword = $this->checkKeywords();
-
-        // Save
-        $this->add('OS', $sOs);
-        $this->add('WebBrowsers', $sWebBrowser);
-        $this->add('Bots', $sBot);
-        $this->add('IpBots', $sIpBot);
-        $this->add('Keywords', $sKeyword);
-        $this->add('UserLanguage', $this->_sUserLang);
-    }
-
-    /**
-     * Find a word in contents using the RegEx pattern.
-     *
-     * @param string $sToFind
-     * @param string $sContents
-     *
-     * @return boolean
-     */
-    protected function find($sToFind, $sContents)
-    {
-        return preg_match('/' . $sToFind . '/i', $sContents);
+        return $this->read($sFileName);
     }
 }

@@ -26,8 +26,7 @@ class CArray
      */
     public static function merge(array $aFrom, array $aTo)
     {
-        foreach ($aTo as $mKey => $mVal)
-        {
+        foreach ($aTo as $mKey => $mVal) {
             if (is_int($mKey))
                 $aFrom[] = $mVal;
             elseif (is_array($mVal) && isset($aFrom[$mKey]) && is_array($aFrom[$mKey]))
@@ -50,6 +49,18 @@ class CArray
     {
         $mKey = array_search($sValue, $aArray);
         return static::_get($mKey);
+    }
+
+    /**
+     * Check if the key exists.
+     *
+     * @access private
+     * @param mixed (string | boolean) $mKey The key for needle if it is found in the array, FALSE otherwise.
+     * @return string The name key. If the key is not found, Returns NULL.
+     */
+    private static function _get($mKey)
+    {
+        return ($mKey !== false) ? $mKey : null;
     }
 
     /**
@@ -77,18 +88,6 @@ class CArray
     public static function getValueByKey($sKey, array $aArray)
     {
         return (array_key_exists($sKey, $aArray) && !empty($aArray[$sKey])) ? $aArray[$sKey] : null;
-    }
-
-    /**
-     * Check if the key exists.
-     *
-     * @access private
-     * @param mixed (string | boolean) $mKey The key for needle if it is found in the array, FALSE otherwise.
-     * @return string The name key. If the key is not found, Returns NULL.
-     */
-    private static function _get($mKey)
-    {
-        return ($mKey !== false) ? $mKey : null;
     }
 
 }

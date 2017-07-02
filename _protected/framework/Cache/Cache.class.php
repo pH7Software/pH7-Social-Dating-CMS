@@ -101,21 +101,6 @@ class Cache
     }
 
     /**
-     * Sets the time expire cache.
-     *
-     * @param integer $iExpire (the time with the 'touch' function).
-     *
-     * @return self
-     */
-    public function setExpire($iExpire)
-    {
-        // How long to cache for (in seconds, e.g. 3600*24 = 24 hour)
-        @touch($this->_getFile(), time()+(int)$this->_iTtl);
-
-        return $this;
-    }
-
-    /**
      * Start the cache.
      *
      * @param string $sGroup The Group Cache (This creates a folder).
@@ -126,17 +111,29 @@ class Cache
      */
     public function start($sGroup, $sId, $iTtl)
     {
-      $this->_checkCacheDir();
+        $this->_checkCacheDir();
 
-      if ($this->_bEnabled)
-      {
-          $this->_sGroup = $sGroup . PH7_DS;
-          $this->_sId = $sId;
-          $this->_iTtl = $iTtl;
-          ob_start();
-      }
+        if ($this->_bEnabled) {
+            $this->_sGroup = $sGroup . PH7_DS;
+            $this->_sId = $sId;
+            $this->_iTtl = $iTtl;
+            ob_start();
+        }
 
-      return $this;
+        return $this;
+    }
+
+    /**
+     * Checks if the cache directory has been defined otherwise we create a default directory.
+     * If the folder cache does not exist, it creates a folder.
+     *
+     * @return self
+     */
+    private function _checkCacheDir()
+    {
+        $this->_sCacheDir = (empty($this->_sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->_sCacheDir;
+
+        return $this;
     }
 
     /**
@@ -165,6 +162,94 @@ class Cache
     }
 
     /**
+     * Writes data in a cache file.
+     *
+     * @param string $sData
+     *
+     * @return boolean
+     *
+     * @throws Exception If the file cannot be written.
+     */
+    final private function _write($sData)
+    {
+        if (!$this->_bEnabled) {
+            return null;
+        }
+
+        $sFile = $this->_getFile();
+        $this->_oFile->createDir($this->_sCacheDir . $this->_sGroup);
+
+        $sPhpHeader = $this->getHeaderContents();
+
+        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<\'EOF\'' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL . '?>';
+
+        if ($rHandle = @fopen($sFile, 'wb')) {
+            if (@flock($rHandle, LOCK_EX)) {
+                fwrite($rHandle, $sData);
+            }
+
+            fclose($rHandle);
+            $this->setExpire($this->_iTtl);
+            $this->_oFile->chmod($sFile, 420);
+            return true;
+        }
+
+        throw new Exception('Could not write cache file: \'' . $sFile . '\'');
+
+        return false;
+    }
+
+    /**
+     * Get the header content to put in the file.
+     *
+     * @return string
+     */
+    final protected function getHeaderContents()
+    {
+        return 'defined(\'PH7\') or exit(\'Restricted access\');
+/*
+Created on ' . gmdate('Y-m-d H:i:s') . '
+File ID: ' . $this->_sId . '
+*/
+/***************************************************************************
+ *     ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_COMPANY . '
+ *               --------------------
+ * @since      Mon Oct 14 2011
+ * @author     SORIA Pierre-Henry
+ * @email      ' . Kernel::SOFTWARE_EMAIL . '
+ * @link       ' . Kernel::SOFTWARE_WEBSITE . '
+ * @copyright  ' . Kernel::SOFTWARE_COPYRIGHT . '
+ * @license    ' . Kernel::SOFTWARE_LICENSE . '
+ ***************************************************************************/
+';
+    }
+
+    /**
+     * Sets the time expire cache.
+     *
+     * @param integer $iExpire (the time with the 'touch' function).
+     *
+     * @return self
+     */
+    public function setExpire($iExpire)
+    {
+        // How long to cache for (in seconds, e.g. 3600*24 = 24 hour)
+        @touch($this->_getFile(), time() + (int)$this->_iTtl);
+
+        return $this;
+    }
+
+    /**
+     * Gets the file cache.
+     *
+     * @return string
+     */
+    private function _getFile()
+    {
+        return $this->_sCacheDir . $this->_sGroup . sha1($this->_sId) . static::CACHE_FILE_EXT;
+    }
+
+    /**
      * Gets the data cache.
      *
      * @param boolean $bPrint Default FALSE
@@ -179,6 +264,48 @@ class Cache
         }
 
         return $mData;
+    }
+
+    /**
+     * Reads the Cache.
+     *
+     * @param boolean $bPrint
+     * @return boolean|string Returns TRUE or a string if successful, FALSE otherwise.
+     */
+    private function _read($bPrint)
+    {
+        if ($this->_check()) {
+            require $this->_getFile();
+
+            if (!empty($_mData)) {
+                if ($bPrint) {
+                    echo $_mData;
+                    return true;
+                } else {
+                    return $_mData;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Checks the cache.
+     *
+     * @return boolean
+     */
+    private function _check()
+    {
+        $sFile = $this->_getFile();
+
+        if (!$this->_bEnabled || !is_file($sFile) || (!empty($this->_iTtl) && $this->_oFile->getModifTime($sFile) < time())) {
+            // If the cache has expired
+            $this->_oFile->deleteFile($this->_getFile());
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -208,12 +335,11 @@ class Cache
     {
         if (!empty($this->_sId))
             $this->_oFile->deleteFile($this->_getFile());
-         else
+        else
             $this->_oFile->deleteDir($this->_sCacheDir . $this->_sGroup);
 
-         return $this;
+        return $this;
     }
-
 
     /**
      * Get the creation/modification time of the current cache file.
@@ -223,133 +349,5 @@ class Cache
     public function getTimeOfCacheFile()
     {
         return $this->_oFile->getModifTime($this->_getFile());
-    }
-
-    /**
-     * Get the header content to put in the file.
-     *
-     * @return string
-     */
-    final protected function getHeaderContents()
-    {
-        return 'defined(\'PH7\') or exit(\'Restricted access\');
-/*
-Created on ' . gmdate('Y-m-d H:i:s') . '
-File ID: ' . $this->_sId . '
-*/
-/***************************************************************************
- *     ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_COMPANY . '
- *               --------------------
- * @since      Mon Oct 14 2011
- * @author     SORIA Pierre-Henry
- * @email      ' . Kernel::SOFTWARE_EMAIL . '
- * @link       ' . Kernel::SOFTWARE_WEBSITE . '
- * @copyright  ' . Kernel::SOFTWARE_COPYRIGHT . '
- * @license    ' . Kernel::SOFTWARE_LICENSE . '
- ***************************************************************************/
-';
-    }
-
-    /**
-     * Writes data in a cache file.
-     *
-     * @param string $sData
-     *
-     * @return boolean
-     *
-     * @throws Exception If the file cannot be written.
-     */
-    final private function _write($sData)
-    {
-      if (!$this->_bEnabled) {
-          return null;
-      }
-
-      $sFile = $this->_getFile();
-      $this->_oFile->createDir($this->_sCacheDir . $this->_sGroup);
-
-      $sPhpHeader = $this->getHeaderContents();
-
-        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<\'EOF\'' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL . '?>';
-
-        if ($rHandle = @fopen($sFile, 'wb')) {
-            if (@flock($rHandle, LOCK_EX)) {
-                fwrite($rHandle, $sData);
-            }
-
-            fclose($rHandle);
-            $this->setExpire($this->_iTtl);
-            $this->_oFile->chmod($sFile, 420);
-            return true;
-        }
-
-        throw new Exception('Could not write cache file: \'' . $sFile . '\'');
-
-        return false;
-    }
-
-    /**
-     * Reads the Cache.
-     *
-     * @param boolean $bPrint
-     * @return boolean|string Returns TRUE or a string if successful, FALSE otherwise.
-     */
-    private function _read($bPrint)
-    {
-        if ($this->_check()) {
-            require $this->_getFile();
-
-            if (!empty($_mData)) {
-                if ($bPrint) {
-                    echo $_mData;
-                    return true;
-                } else {
-                    return $_mData;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Gets the file cache.
-     *
-     * @return string
-     */
-    private function _getFile()
-    {
-        return $this->_sCacheDir . $this->_sGroup . sha1($this->_sId) . static::CACHE_FILE_EXT;
-    }
-
-    /**
-     * Checks the cache.
-     *
-     * @return boolean
-     */
-    private function _check()
-    {
-        $sFile = $this->_getFile();
-
-        if (!$this->_bEnabled || !is_file($sFile) || (!empty($this->_iTtl) && $this->_oFile->getModifTime($sFile) < time())) {
-            // If the cache has expired
-            $this->_oFile->deleteFile($this->_getFile());
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Checks if the cache directory has been defined otherwise we create a default directory.
-     * If the folder cache does not exist, it creates a folder.
-     *
-     * @return self
-     */
-    private function _checkCacheDir()
-    {
-        $this->_sCacheDir = (empty($this->_sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->_sCacheDir;
-
-        return $this;
     }
 }
