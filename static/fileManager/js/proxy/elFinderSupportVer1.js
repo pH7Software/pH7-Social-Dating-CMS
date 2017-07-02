@@ -10,10 +10,10 @@
  *
  * @author Dmitry (dio) Levashov
  **/
-window.elFinderSupportVer1 = function(upload) {
+window.elFinderSupportVer1 = function (upload) {
     var self = this,
         dateObj, today, yesterday,
-        getDateString = function(date) {
+        getDateString = function (date) {
             return date.replace('Today', today).replace('Yesterday', yesterday);
         };
 
@@ -24,19 +24,19 @@ window.elFinderSupportVer1 = function(upload) {
 
     this.upload = upload || 'auto';
 
-    this.init = function(fm) {
+    this.init = function (fm) {
         this.fm = fm;
-        this.fm.parseUploadData = function(text) {
+        this.fm.parseUploadData = function (text) {
             var data;
 
             if (!$.trim(text)) {
-                return {error : ['errResponse', 'errDataEmpty']};
+                return {error: ['errResponse', 'errDataEmpty']};
             }
 
             try {
                 data = JSON.parse(text);
             } catch (e) {
-                return {error : ['errResponse', 'errDataNotJSON']}
+                return {error: ['errResponse', 'errDataNotJSON']}
             }
 
             return self.normalize('upload', data);
@@ -44,7 +44,7 @@ window.elFinderSupportVer1 = function(upload) {
     }
 
 
-    this.send = function(opts) {
+    this.send = function (opts) {
         var self = this,
             fm = this.fm,
             dfrd = $.Deferred(),
@@ -54,7 +54,7 @@ window.elFinderSupportVer1 = function(upload) {
             data,
             xhr;
 
-        dfrd.abort = function() {
+        dfrd.abort = function () {
             if (xhr.state() == 'pending') {
                 xhr.quiet = true;
                 xhr.abort();
@@ -67,7 +67,7 @@ window.elFinderSupportVer1 = function(upload) {
                 break;
             case 'parents':
             case 'tree':
-                return dfrd.resolve({tree : []});
+                return dfrd.resolve({tree: []});
                 break;
             case 'get':
                 opts.data.cmd = 'read';
@@ -89,17 +89,17 @@ window.elFinderSupportVer1 = function(upload) {
             case 'duplicate':
                 _opts = $.extend(true, {}, opts);
 
-                $.each(opts.data.targets, function(i, hash) {
-                    $.ajax($.extend(_opts, {data : {cmd : 'duplicate', target : hash, current : fm.file(hash).phash}}))
-                        .error(function(error) {
+                $.each(opts.data.targets, function (i, hash) {
+                    $.ajax($.extend(_opts, {data: {cmd: 'duplicate', target: hash, current: fm.file(hash).phash}}))
+                        .error(function (error) {
                             fm.error(fm.res('error', 'connect'));
                         })
-                        .done(function(data) {
+                        .done(function (data) {
                             data = self.normalize('duplicate', data);
                             if (data.error) {
                                 fm.error(data.error);
                             } else if (data.added) {
-                                fm.trigger('add', {added : data.added});
+                                fm.trigger('add', {added: data.added});
                             }
                         })
                 });
@@ -112,8 +112,8 @@ window.elFinderSupportVer1 = function(upload) {
                 break;
             case 'paste':
                 opts.data.current = opts.data.dst;
-                if (! opts.data.tree) {
-                    $.each(opts.data.targets, function(i, h) {
+                if (!opts.data.tree) {
+                    $.each(opts.data.targets, function (i, h) {
                         if (fm.file(h) && fm.file(h).mime === 'directory') {
                             opts.data.tree = '1';
                             return false;
@@ -123,10 +123,10 @@ window.elFinderSupportVer1 = function(upload) {
                 break;
 
             case 'size':
-                return dfrd.resolve({error : fm.res('error', 'cmdsupport')});
+                return dfrd.resolve({error: fm.res('error', 'cmdsupport')});
                 break;
             case 'search':
-                return dfrd.resolve({error : fm.res('error', 'cmdsupport')});
+                return dfrd.resolve({error: fm.res('error', 'cmdsupport')});
                 break;
 
             case 'file':
@@ -137,17 +137,17 @@ window.elFinderSupportVer1 = function(upload) {
         // cmd = opts.data.cmd
 
         xhr = $.ajax(opts)
-            .fail(function(error) {
+            .fail(function (error) {
                 dfrd.reject(error)
             })
-            .done(function(raw) {
+            .done(function (raw) {
                 data = self.normalize(cmd, raw);
 
                 if (cmd == 'paste') {
-                    if (! data.error && ! data.added.length && ! data.removed.length && ! data.changed.length) {
-                        data.error = [opts.data.cut? 'errMove' : 'errCopy', fm.i18n('items'), 'errExists', fm.file(opts.data.targets[0]).name];
+                    if (!data.error && !data.added.length && !data.removed.length && !data.changed.length) {
+                        data.error = [opts.data.cut ? 'errMove' : 'errCopy', fm.i18n('items'), 'errExists', fm.file(opts.data.targets[0]).name];
                     }
-                    if (! data.error) {
+                    if (!data.error) {
                         fm.sync();
                     }
                 }
@@ -173,17 +173,19 @@ window.elFinderSupportVer1 = function(upload) {
     //     'Unable to extract files from archive'             : 'Unable to extract files from "$1".'
     // }
 
-    this.normalize = function(cmd, data) {
+    this.normalize = function (cmd, data) {
         var self = this,
-            fm   = this.fm,
+            fm = this.fm,
             files = {},
-            filter = function(file) { return file && file.hash && file.name && file.mime ? file : null; },
-            getDirs = function(items) {
-                return $.map(items, function(i) {
-                    return i && i.mime && i.mime === 'directory'? i : null;
+            filter = function (file) {
+                return file && file.hash && file.name && file.mime ? file : null;
+            },
+            getDirs = function (items) {
+                return $.map(items, function (i) {
+                    return i && i.mime && i.mime === 'directory' ? i : null;
                 });
             },
-            getTreeDiff = function(files) {
+            getTreeDiff = function (files) {
                 var dirs = getDirs(files);
                 treeDiff = fm.diff(dirs, null, ['date', 'ts']);
                 if (treeDiff.added.length) {
@@ -194,7 +196,7 @@ window.elFinderSupportVer1 = function(upload) {
                 }
                 if (treeDiff.removed.length) {
                     var removed = [];
-                    $.each(treeDiff.removed, function(i, h) {
+                    $.each(treeDiff.removed, function (i, h) {
                         var item;
                         if ((item = fm.file(h)) && item.mime === 'directory') {
                             removed.push(h);
@@ -231,7 +233,7 @@ window.elFinderSupportVer1 = function(upload) {
         if (cmd == 'put') {
 
             phash = fm.file(data.target.hash).phash;
-            return {changed : [this.normalizeFile(data.target, phash)]};
+            return {changed: [this.normalizeFile(data.target, phash)]};
         }
 
         phash = data.cwd.hash;
@@ -239,12 +241,12 @@ window.elFinderSupportVer1 = function(upload) {
         isCwd = (phash == fm.cwd().hash);
 
         if (data.tree) {
-            $.each(this.normalizeTree(data.tree), function(i, file) {
+            $.each(this.normalizeTree(data.tree), function (i, file) {
                 files[file.hash] = file;
             });
         }
 
-        $.each(data.cdc||[], function(i, file) {
+        $.each(data.cdc || [], function (i, file) {
             var hash = file.hash,
                 mcts;
 
@@ -264,7 +266,7 @@ window.elFinderSupportVer1 = function(upload) {
         });
 
         if (!data.tree) {
-            $.each(fm.files(), function(hash, file) {
+            $.each(fm.files(), function (hash, file) {
                 if (!files[hash] && file.phash != phash && file.mime == 'directory') {
                     files[hash] = file;
                 }
@@ -273,12 +275,14 @@ window.elFinderSupportVer1 = function(upload) {
 
         if (cmd == 'open') {
             return {
-                    cwd     : files[phash] || this.normalizeFile(data.cwd),
-                    files   : $.map(files, function(f) { return f }),
-                    options : self.normalizeOptions(data),
-                    init    : !!data.params,
-                    debug   : data.debug
-                };
+                cwd: files[phash] || this.normalizeFile(data.cwd),
+                files: $.map(files, function (f) {
+                    return f
+                }),
+                options: self.normalizeOptions(data),
+                init: !!data.params,
+                debug: data.debug
+            };
         }
 
         if (isCwd) {
@@ -288,18 +292,18 @@ window.elFinderSupportVer1 = function(upload) {
                 diff = getTreeDiff(files);
             } else {
                 diff = {
-                    added   : [],
-                    removed : [],
-                    changed : []
+                    added: [],
+                    removed: [],
+                    changed: []
                 };
             }
         }
 
         return $.extend({
-            current : data.cwd.hash,
-            error   : data.error,
-            warning : data.warning,
-            options : {tmb : !!data.tmb}
+            current: data.cwd.hash,
+            error: data.error,
+            warning: data.warning,
+            options: {tmb: !!data.tmb}
         }, diff);
 
     }
@@ -310,10 +314,10 @@ window.elFinderSupportVer1 = function(upload) {
      * @param  Object  root dir
      * @return Array
      */
-    this.normalizeTree = function(root) {
-        var self     = this,
-            result   = [],
-            traverse = function(dirs, phash) {
+    this.normalizeTree = function (root) {
+        var self = this,
+            result = [],
+            traverse = function (dirs, phash) {
                 var i, dir;
 
                 for (i = 0; i < dirs.length; i++) {
@@ -335,24 +339,24 @@ window.elFinderSupportVer1 = function(upload) {
      * @param  String  parent dir hash
      * @return Object
      */
-    this.normalizeFile = function(file, phash, tmb) {
+    this.normalizeFile = function (file, phash, tmb) {
         var mime = file.mime || 'directory',
             size = mime == 'directory' && !file.linkTo ? 0 : file.size,
-            mcts = file.date? Date.parse(getDateString(file.date)) : void 0,
+            mcts = file.date ? Date.parse(getDateString(file.date)) : void 0,
             info = {
-                url    : file.url,
-                hash   : file.hash,
-                phash  : phash,
-                name   : file.name,
-                mime   : mime,
-                ts     : file.ts,
-                size   : size,
-                read   : file.read,
-                write  : file.write,
-                locked : !phash ? true : file.rm === void(0) ? false : !file.rm
+                url: file.url,
+                hash: file.hash,
+                phash: phash,
+                name: file.name,
+                mime: mime,
+                ts: file.ts,
+                size: size,
+                read: file.read,
+                write: file.write,
+                locked: !phash ? true : file.rm === void(0) ? false : !file.rm
             };
 
-        if (! info.ts) {
+        if (!info.ts) {
             if (mcts && !isNaN(mcts)) {
                 info.ts = Math.floor(mcts / 1000);
             } else {
@@ -391,20 +395,20 @@ window.elFinderSupportVer1 = function(upload) {
         return info;
     }
 
-    this.normalizeOptions = function(data) {
+    this.normalizeOptions = function (data) {
         var opts = {
-                path          : data.cwd.rel,
-                disabled      : $.merge((data.disabled || []), [ 'search', 'netmount', 'zipdl' ]),
-                tmb           : !!data.tmb,
-                copyOverwrite : true
-            };
+            path: data.cwd.rel,
+            disabled: $.merge((data.disabled || []), ['search', 'netmount', 'zipdl']),
+            tmb: !!data.tmb,
+            copyOverwrite: true
+        };
 
         if (data.params) {
-            opts.api      = 1;
-            opts.url      = data.params.url;
+            opts.api = 1;
+            opts.url = data.params.url;
             opts.archivers = {
-                create  : data.params.archives || [],
-                extract : data.params.extract || []
+                create: data.params.archives || [],
+                extract: data.params.extract || []
             }
         }
 

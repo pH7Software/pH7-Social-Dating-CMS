@@ -5,6 +5,6 @@
  */
 
 var pH7LangIM = {
-    cannot_chat_yourself : "あなたは自分自身とチャットすることができません。",
-    say : "言います..."
+    cannot_chat_yourself: "あなたは自分自身とチャットすることができません。",
+    say: "言います..."
 };
