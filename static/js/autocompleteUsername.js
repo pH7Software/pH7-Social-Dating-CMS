@@ -33,7 +33,6 @@ $(document).ready(function () {
                 }
             });
         },
-
         open: function () {
             var oUl = $(this).autocomplete('widget');
             oUl.css('width', '400px');
