@@ -193,7 +193,7 @@ class Twitter extends Api implements IApi
         $this->_aUserInfo = [
             'email' => $aProfile['email'],
             'username' => $this->_sUsername,
-            'password' => Various::genRndWord(8,30),
+            'password' => Various::genRndWord(15),
             'first_name' => (!empty($aProfile['given_name'])) ? $aProfile['given_name'] : '',
             'last_name' => (!empty($aProfile['family_name'])) ? $aProfile['family_name'] : '',
             'sex' => $sSex,

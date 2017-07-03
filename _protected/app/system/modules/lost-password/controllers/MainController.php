@@ -17,8 +17,7 @@ use PH7\Framework\Util\Various;
 
 class MainController extends Controller
 {
-    const MIN_PASSWORD_LENGTH = 8;
-    const MAX_PASSWORD_LENGTH = 40;
+    const DEFAULT_PASSWORD_LENGTH = 10;
 
     public function forgot($sMod = '')
     {
@@ -65,7 +64,7 @@ class MainController extends Controller
     protected function sendMail($sTable, $sEmail)
     {
         // Get new password and change it in DB
-        $sNewPassword = Various::genRndWord(self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH);
+        $sNewPassword = Various::genRndWord(self::DEFAULT_PASSWORD_LENGTH);
         (new UserCoreModel)->changePassword($sEmail, $sNewPassword, $sTable);
 
         $this->view->content = t('Hello,') . '<br />' .

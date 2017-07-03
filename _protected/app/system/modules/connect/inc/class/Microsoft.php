@@ -115,7 +115,7 @@ class Microsoft extends Api
         $this->_aUserInfo = [
             'email' => $oProfile->emails->account,
             'username' => $this->_sUsername,
-            'password' => Various::genRndWord(8,30),
+            'password' => Various::genRndWord(15),
             'first_name' => (!empty($oProfile->first_name)) ? $oProfile->first_name : '',
             'last_name' => (!empty($oProfile->last_name)) ? $oProfile->last_name : '',
             'sex' => $sSex,
