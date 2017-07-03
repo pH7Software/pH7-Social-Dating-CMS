@@ -6,6 +6,8 @@
  * @package        PH7 / App / System / Module / Page / Controller
  */
 namespace PH7;
+
+use PH7\Framework\Layout\Html\Meta;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class MainController extends Controller
@@ -54,6 +56,9 @@ class MainController extends Controller
 
     public function terms()
     {
+        // For SEO: Google shouldn't waste time indexing TOS page
+        $this->view->header = Meta::NOINDEX;
+
         $this->sTitle = t('Terms and Conditions of Use');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Terms and Conditions of Use, Terms of Use - %site_name%');
@@ -63,6 +68,8 @@ class MainController extends Controller
 
     public function affiliateTerms()
     {
+        $this->view->header = Meta::NOINDEX;
+
         $this->sTitle = t('Affiliate Terms and Conditions of Use');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Affiliate Terms and Conditions of Use, Terms of Use - %site_name%');
@@ -72,6 +79,8 @@ class MainController extends Controller
 
     public function privacy()
     {
+        $this->view->header = Meta::NOINDEX;
+
         $this->sTitle = t('Privacy Policy');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Privacy Policy - %site_name%');
@@ -81,6 +90,8 @@ class MainController extends Controller
 
     public function legalNotice()
     {
+        $this->view->header = Meta::NOINDEX;
+
         $this->sTitle = t('Legal Notice');
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Legal Notice - %site_name%');
