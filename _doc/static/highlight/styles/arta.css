@@ -4,37 +4,37 @@ Author: pumbur <pumbur@pumbur.net>
 */
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #222;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #222;
 }
 
 .hljs,
 .hljs-subst {
-  color: #aaa;
+    color: #aaa;
 }
 
 .hljs-section {
-  color: #fff;
+    color: #fff;
 }
 
 .hljs-comment,
 .hljs-quote,
 .hljs-meta {
-  color: #444;
+    color: #444;
 }
 
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet,
 .hljs-regexp {
-  color: #ffcc33;
+    color: #ffcc33;
 }
 
 .hljs-number,
 .hljs-addition {
-  color: #00cc66;
+    color: #00cc66;
 }
 
 .hljs-built_in,
@@ -44,7 +44,7 @@ Author: pumbur <pumbur@pumbur.net>
 .hljs-template-variable,
 .hljs-attribute,
 .hljs-link {
-  color: #32aaee;
+    color: #32aaee;
 }
 
 .hljs-keyword,
@@ -52,22 +52,22 @@ Author: pumbur <pumbur@pumbur.net>
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #6644aa;
+    color: #6644aa;
 }
 
 .hljs-title,
 .hljs-variable,
 .hljs-deletion,
 .hljs-template-tag {
-  color: #bb1166;
+    color: #bb1166;
 }
 
 .hljs-section,
 .hljs-doctag,
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }

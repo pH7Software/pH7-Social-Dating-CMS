@@ -5,7 +5,7 @@
 /* Atelier-Heath Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #9e8f9e;
+    color: #9e8f9e;
 }
 
 /* Atelier-Heath Red */
@@ -19,7 +19,7 @@
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #ca402b;
+    color: #ca402b;
 }
 
 /* Atelier-Heath Orange */
@@ -30,40 +30,40 @@
 .hljs-literal,
 .hljs-type,
 .hljs-params {
-  color: #a65926;
+    color: #a65926;
 }
 
 /* Atelier-Heath Green */
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet {
-  color: #918b3b;
+    color: #918b3b;
 }
 
 /* Atelier-Heath Blue */
 .hljs-title,
 .hljs-section {
-  color: #516aec;
+    color: #516aec;
 }
 
 /* Atelier-Heath Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-  color: #7b59c0;
+    color: #7b59c0;
 }
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  background: #1b181b;
-  color: #ab9bab;
-  padding: 0.5em;
+    display: block;
+    overflow-x: auto;
+    background: #1b181b;
+    color: #ab9bab;
+    padding: 0.5em;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }
 
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }
