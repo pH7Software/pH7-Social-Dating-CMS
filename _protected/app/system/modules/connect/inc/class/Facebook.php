@@ -129,7 +129,7 @@ class Facebook extends Api implements IApi
         $this->aUserInfo = [
             'email' => $this->oProfile->getEmail(),
             'username' => $this->sUsername,
-            'password' => Various::genRndWord(8,30),
+            'password' => Various::genRndWord(15),
             'first_name' => $this->oProfile->getFirstName(),
             'last_name' => $this->oProfile->getLastName(),
             'middle_name' => $this->oProfile->getMiddleName(),

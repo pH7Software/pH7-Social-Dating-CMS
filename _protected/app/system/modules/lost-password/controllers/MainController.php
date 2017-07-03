@@ -65,7 +65,7 @@ class MainController extends Controller
     protected function sendMail($sTable, $sEmail)
     {
         // Get new password and change it in DB
-        $sNewPassword = Various::genRndWord(self::MIN_PASSWORD_LENGTH, self::MAX_PASSWORD_LENGTH);
+        $sNewPassword = Various::genRndWord(self::DEFAULT_PASSWORD_LENGTH);
         (new UserCoreModel)->changePassword($sEmail, $sNewPassword, $sTable);
 
         $this->view->content = t('Hello,') . '<br />' .

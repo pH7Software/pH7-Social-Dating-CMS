@@ -54,44 +54,20 @@ class Various
     /**
      * Generate Random Word.
      *
-     * @param integer $iMinLength
-     * @param integer $iMaxLength
+     * @param int $iLength
      *
      * @return string
      */
-    public static function genRndWord($iMinLength, $iMaxLength)
+    public static function genRndWord($iLength)
     {
-        // Grab a random word from dictionary between the two lengths
-        // and return it
+        $sWord = '';
+        $aSpecialChars = ['-', '_', '~', '|', '%', '^', '!', '$', '#', '@', '?'];
+        $aKeys = array_merge(range(0, 9), range('a', 'z'), $aSpecialChars);
 
-        $sWord = ''; // Default value
+        for ($i = 0; $i < $iLength; $i++) {
+            $sWord .= $aKeys[array_rand($aKeys)];
+        }
 
-        // Remember to change this path to suit your system
-        $sDir = PH7_PATH_FRAMEWORK . 'Translate/Dict/';
-        $sDict = (file_exists($sDir . PH7_LANG_CODE)) ? PH7_LANG_CODE : PH7_DEFAULT_LANG_CODE;
-        if (!$rHandle = @fopen($sDir . $sDict, 'r')) return false;
-        $iSize = filesize($sDir . $sDict);
-
-        // Go to a random location in dictionary
-        $iRandLocation = rand(0, $iSize);
-        fseek($rHandle, $iRandLocation);
-
-        // Get the next whole word of the right length in the file
-        do {
-            $iWordLength = (new Str)->length($sWord);
-
-            if (feof($rHandle)) fseek($rHandle, 0); // if at end, go to start
-
-            $sWord = fgets($rHandle, 80);  // Skip the first word as it could be partial
-            $sWord = fgets($rHandle, 80);  // Potential word/password
-        } while (($iWordLength < $iMinLength) || ($iWordLength > $iMaxLength) || (strstr($sWord, "'")));
-
-        fclose($rHandle);
-
-        $sWord = trim($sWord); // trim the trailing \n from fgets
-        // add a number  between 0 and 999 to it
-        // to make it a slightly better password
-        $iRandNumber = mt_rand(0, 999);
-        return $sWord . $iRandNumber;
+        return $sWord;
     }
 }
