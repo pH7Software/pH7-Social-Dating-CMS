@@ -199,29 +199,6 @@ class Analytics extends StoreStats
     }
 
     /**
-     * Init method.
-     *
-     * @return void
-     */
-    protected function init()
-    {
-        // Check and retrieve
-        $sOs = $this->checkOs();
-        $sWebBrowser = $this->checkWebBrowsers();
-        $sBot = $this->checkBots();
-        $sIpBot = $this->checkIpBots();
-        $sKeyword = $this->checkKeywords();
-
-        // Save
-        $this->add('OS', $sOs);
-        $this->add('WebBrowsers', $sWebBrowser);
-        $this->add('Bots', $sBot);
-        $this->add('IpBots', $sIpBot);
-        $this->add('Keywords', $sKeyword);
-        $this->add('UserLanguage', $this->_sUserLang);
-    }
-
-    /**
      * Check OS
      *
      * @return string OS name.
@@ -238,19 +215,6 @@ class Analytics extends StoreStats
         }
 
         return $sOs;
-    }
-
-    /**
-     * Find a word in contents using the RegEx pattern.
-     *
-     * @param string $sToFind
-     * @param string $sContents
-     *
-     * @return boolean
-     */
-    protected function find($sToFind, $sContents)
-    {
-        return preg_match('/' . $sToFind . '/i', $sContents);
     }
 
     /**
@@ -350,5 +314,41 @@ class Analytics extends StoreStats
     public function get($sFileName)
     {
         return $this->read($sFileName);
+    }
+
+    /**
+     * Init method.
+     *
+     * @return void
+     */
+    protected function init()
+    {
+        // Check and retrieve
+        $sOs = $this->checkOs();
+        $sWebBrowser = $this->checkWebBrowsers();
+        $sBot = $this->checkBots();
+        $sIpBot = $this->checkIpBots();
+        $sKeyword = $this->checkKeywords();
+
+        // Save
+        $this->add('OS', $sOs);
+        $this->add('WebBrowsers', $sWebBrowser);
+        $this->add('Bots', $sBot);
+        $this->add('IpBots', $sIpBot);
+        $this->add('Keywords', $sKeyword);
+        $this->add('UserLanguage', $this->_sUserLang);
+    }
+
+    /**
+     * Find a word in contents using the RegEx pattern.
+     *
+     * @param string $sToFind
+     * @param string $sContents
+     *
+     * @return boolean
+     */
+    protected function find($sToFind, $sContents)
+    {
+        return preg_match('/' . $sToFind . '/i', $sContents);
     }
 }
