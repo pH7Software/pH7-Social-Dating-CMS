@@ -21,11 +21,11 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-         // Level for Admins
+        // Level for Admins
         if (!AdminCore::auth() && $this->registry->controller === 'AdminController') {
             // For security reasons, we don't redirect the user to the admin panel URL
             Header::redirect(
-                Uri::get('fake-admin-panel','main','login'),
+                Uri::get('fake-admin-panel', 'main', 'login'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );

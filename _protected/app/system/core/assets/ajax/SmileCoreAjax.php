@@ -29,14 +29,12 @@ class SmileCoreAjax extends \PH7\Framework\Service\Emoticon
 
     private static function _get()
     {
-        $oCache = (new Cache)->start('str/json', 'emoticons', 120*48*30);
+        $oCache = (new Cache)->start('str/json', 'emoticons', 120 * 48 * 30);
 
-        if (!static::$_sData = $oCache->get())
-        {
+        if (!static::$_sData = $oCache->get()) {
             $aEmoticons = static::get();
 
-            foreach ($aEmoticons as $sEmoticonKey => $aEmoticon)
-            {
+            foreach ($aEmoticons as $sEmoticonKey => $aEmoticon) {
                 $mCode = static::getCode($aEmoticon);
                 $sImg = static::getUrl($sEmoticonKey);
                 $sName = static::getName($aEmoticon);

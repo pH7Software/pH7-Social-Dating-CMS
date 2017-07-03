@@ -35,6 +35,17 @@ class AdminCore extends UserCore
     }
 
     /**
+     * Determines if the ID is from Root Admin (main admin).
+     *
+     * @param  integer $iProfileId
+     * @return boolean
+     */
+    public static function isRootProfileId($iProfileId)
+    {
+        return $iProfileId == static::ROOT_PROILE_ID;
+    }
+
+    /**
      * Set an admin authentication.
      *
      * @param stdClass $oAdminData User database object.
@@ -64,16 +75,5 @@ class AdminCore extends UserCore
         $oSession->set($aSessionData);
         $oSecurityModel->addLoginLog($oAdminData->email, $oAdminData->username, '*****', 'Logged in!', 'Admins');
         $oAdminModel->setLastActivity($oAdminData->profileId, 'Admins');
-    }
-
-    /**
-     * Determines if the ID is from Root Admin (main admin).
-     *
-     * @param  integer $iProfileId
-     * @return boolean
-     */
-    public static function isRootProfileId($iProfileId)
-    {
-        return $iProfileId == static::ROOT_PROILE_ID;
     }
 }

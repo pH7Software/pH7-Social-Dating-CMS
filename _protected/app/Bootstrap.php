@@ -90,8 +90,7 @@ class Bootstrap
      */
     public function run()
     {
-        try
-        {
+        try {
             $this->loadInitFiles();
 
             //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
@@ -108,29 +107,19 @@ class Bootstrap
             Registry::getInstance()->start_time = microtime(true);
 
             /**
-              * Initialize the FrontController, we are asking the front controller to process the HTTP request
+             * Initialize the FrontController, we are asking the front controller to process the HTTP request
              */
             FrontController::getInstance()->runRouter();
-        }
-        # \PH7\Framework\Error\CException\UserException
-        catch (Except\UserException $oE)
-        {
+        } # \PH7\Framework\Error\CException\UserException
+        catch (Except\UserException $oE) {
             echo $oE->getMessage(); // Simple User Error with Exception
-        }
-
-        # \PH7\Framework\Error\CException\PH7Exception
-        catch (Except\PH7Exception $oE)
-        {
+        } # \PH7\Framework\Error\CException\PH7Exception
+        catch (Except\PH7Exception $oE) {
             Except\PH7Exception::launch($oE);
-        }
-
-        # \Exception and other...
-        catch (\Exception $oE)
-        {
+        } # \Exception and other...
+        catch (\Exception $oE) {
             Except\PH7Exception::launch($oE);
-        }
-        finally
-        {
+        } finally {
             if (session_status() === PHP_SESSION_ACTIVE) {
                 session_write_close();
             }
@@ -181,5 +170,9 @@ class Bootstrap
         After that, please <a href="' . PH7_URL_ROOT . '">retry</a>.</p>';
 
         echo html_body("Apache's mod_rewrite is required", $sMsg);
+    }
+
+    private function __clone()
+    {
     }
 }
