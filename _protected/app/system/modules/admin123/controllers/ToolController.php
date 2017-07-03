@@ -229,10 +229,18 @@ class ToolController extends Controller
 
     public function optimize()
     {
-        $this->_checkPost();
+        $this->checkPost();
 
         Db::optimize();
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been optimized!'));
+    }
+
+    public function repair()
+    {
+        $this->checkPost();
+
+        Db::repair();
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
     }
 
     /**
@@ -240,9 +248,9 @@ class ToolController extends Controller
      *
      * @return string The text by exit() function.
      */
-    private function _checkPost()
+    private function checkPost()
     {
-        if (!$this->_isPost()) {
+        if (!$this->isPost()) {
             exit(Form::wrongRequestMethodMsg('POST'));
         }
     }
@@ -252,16 +260,8 @@ class ToolController extends Controller
      *
      * @return boolean
      */
-    private function _isPost()
+    private function isPost()
     {
         return $this->httpRequest->postExists('is');
-    }
-
-    public function repair()
-    {
-        $this->_checkPost();
-
-        Db::repair();
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
     }
 }
