@@ -209,19 +209,19 @@ class Http
         $sHttps = strtolower(Server::getVar(Server::HTTPS));
 
         if (null !== $sHttps) {
-             $sHttps = strtolower($sHttps);
+            $sHttps = strtolower($sHttps);
 
-             if ('on' == $sHttps) {
-                 return true;
-             } elseif ('1' == $sHttps) {
-                 return true;
-             } else {
-                 $iPort = Server::getVar(Server::SERVER_PORT);
+            if ('on' == $sHttps) {
+                return true;
+            } elseif ('1' == $sHttps) {
+                return true;
+            } else {
+                $iPort = Server::getVar(Server::SERVER_PORT);
 
-                 if ('443' == $iPort) {
-                     return true;
-                 }
-             }
+                if ('443' == $iPort) {
+                    return true;
+                }
+            }
         }
 
         return false;

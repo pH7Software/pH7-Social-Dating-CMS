@@ -5,8 +5,10 @@
  */
 namespace PFBC\Error;
 
-class Standard extends \PFBC\Error {
-    public function applyAjaxErrorResponse() {
+class Standard extends \PFBC\Error
+{
+    public function applyAjaxErrorResponse()
+    {
         $id = $this->form->getId();
         echo <<<JS
 var errorSize = response.errors.length;

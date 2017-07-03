@@ -3,6 +3,7 @@
  * This file has been made by pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Element;
+
 use PFBC\Validation\Token as ValidationToken;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;

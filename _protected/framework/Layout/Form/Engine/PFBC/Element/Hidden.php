@@ -12,10 +12,10 @@ class Hidden extends \PFBC\Element
 
     public function __construct($sName, $sValue = '', array $aProperties = null)
     {
-        if(!is_array($aProperties))
+        if (!is_array($aProperties))
             $aProperties = array();
 
-        if(isset($sValue))
+        if (isset($sValue))
             $aProperties['value'] = $sValue;
 
         // We remove the session of the hidden fields
