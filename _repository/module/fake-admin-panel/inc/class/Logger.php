@@ -30,7 +30,7 @@ class Logger extends Core
      * @access private
      * @var $_aData
      */
-     private $_aData;
+    private $_aData;
 
     /**
      * IP address.
@@ -76,37 +76,39 @@ class Logger extends Core
      * @access protected
      * @return object this
      */
-     protected function setLogMsg()
-     {
-        $sReferer = (null !== ($mReferer = $this->browser->getHttpReferer() )) ? $mReferer : 'NO HTTP REFERER';
-        $sAgent = (null !== ($mAgent = $this->browser->getUserAgent() )) ? $mAgent : 'NO USER AGENT';
-        $sQuery = (null !== ($mQuery = (new Http)->getQueryString() )) ? $mQuery : 'NO QUERY STRING';
+    protected function setLogMsg()
+    {
+        $sReferer = (null !== ($mReferer = $this->browser->getHttpReferer())) ? $mReferer : 'NO HTTP REFERER';
+        $sAgent = (null !== ($mAgent = $this->browser->getUserAgent())) ? $mAgent : 'NO USER AGENT';
+        $sQuery = (null !== ($mQuery = (new Http)->getQueryString())) ? $mQuery : 'NO QUERY STRING';
 
         $this->_sIp = Ip::get();
 
         $this->_sContents =
-        t('Date: %0%', $this->dateTime->get()->dateTime()) . "\n" .
-        t('IP: %0%', $this->_sIp) . "\n" .
-        t('QUERY: %0%', $sQuery) . "\n" .
-        t('Agent: %0%', $sAgent) . "\n" .
-        t('Referer: %0%', $sReferer) . "\n" .
-        t('LOGIN - Email: %0% - Username: %1% - Password: %2%', $this->_aData['mail'], $this->_aData['username'], $this->_aData['password']) . "\n\n\n";
+            t('Date: %0%', $this->dateTime->get()->dateTime()) . "\n" .
+            t('IP: %0%', $this->_sIp) . "\n" .
+            t('QUERY: %0%', $sQuery) . "\n" .
+            t('Agent: %0%', $sAgent) . "\n" .
+            t('Referer: %0%', $sReferer) . "\n" .
+            t('LOGIN - Email: %0% - Username: %1% - Password: %2%', $this->_aData['mail'], $this->_aData['username'], $this->_aData['password']) . "\n\n\n";
 
         return $this;
     }
 
     /**
-     * Write a log file with the hacher information.
+     * Send an email to admin.
      *
      * @access protected
-     * @return object this
+     * @return integer
      */
-    protected function writeFile()
+    protected function sendMessage()
     {
-        $sFullPath = $this->registry->path_module_inc . static::ATTACK_DIR . $this->_sIp . '.log';
-        file_put_contents($sFullPath, $this->_sContents, FILE_APPEND);
+        $aInfo = [
+            'to' => $this->config->values['logging']['bug_report_email'],
+            'subject' => t('Reporting of the Fake Admin Honeypot')
+        ];
 
-        return $this;
+        return (new Mail)->send($aInfo, $this->_sContents, false);
     }
 
     /**
@@ -124,19 +126,17 @@ class Logger extends Core
     }
 
     /**
-     * Send an email to admin.
+     * Write a log file with the hacher information.
      *
      * @access protected
-     * @return integer
+     * @return object this
      */
-    protected function sendMessage()
+    protected function writeFile()
     {
-        $aInfo = [
-          'to' => $this->config->values['logging']['bug_report_email'],
-          'subject' => t('Reporting of the Fake Admin Honeypot')
-        ];
+        $sFullPath = $this->registry->path_module_inc . static::ATTACK_DIR . $this->_sIp . '.log';
+        file_put_contents($sFullPath, $this->_sContents, FILE_APPEND);
 
-        return (new Mail)->send($aInfo, $this->_sContents, false);
+        return $this;
     }
 
 }
