@@ -10,4 +10,6 @@ namespace PH7\Framework\File\Transfer;
 
 use PH7\Framework\Error\CException\PH7RuntimeException;
 
-class MissingExtensionException extends PH7RuntimeException {}
+class MissingExtensionException extends PH7RuntimeException
+{
+}

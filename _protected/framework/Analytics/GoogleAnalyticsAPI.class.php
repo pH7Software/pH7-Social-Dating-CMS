@@ -1,5 +1,7 @@
 <?php
+
 namespace PH7\Framework\Analytics;
+
 defined('PH7') or exit('Restricted access');
 
 /*
@@ -11,13 +13,17 @@ defined('PH7') or exit('Restricted access');
 *
 * This copyright notice MUST APPEAR in all copies of the script!
 *
-*  @author            CERDAN Yohann <cerdanyohann@yahoo.fr>
-*  @copyright      (c) 2009  CERDAN Yohann, All rights reserved
-*  @ version         30/04/2011
+*  @author        CERDAN Yohann <cerdanyohann@yahoo.fr>
+*  @copyright     (c) 2009  CERDAN Yohann, All rights reserved
+*  @version       30/04/2011
+*
+* MODIFIED BY:
+* @author         Pierre-Henry Soria <hello@ph7cms.com>
+* @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
 */
 
-class GoogleAnalyticsAPI {
-
+class GoogleAnalyticsAPI
+{
     /** Google account login (email) **/
     private $login;
 
@@ -66,7 +72,6 @@ class GoogleAnalyticsAPI {
      *
      * @return void
      */
-
     public function __construct($login, $password, $ids, $dateBegin, $dateEnd = null)
     {
         $this->login = $login;
@@ -96,7 +101,6 @@ class GoogleAnalyticsAPI {
      *
      * @return void
      */
-
     public function setSortByMetrics($sort)
     {
         if ($sort == true) {
@@ -114,7 +118,6 @@ class GoogleAnalyticsAPI {
      *
      * @return void
      */
-
     public function setSortByDimensions($sort)
     {
         if ($sort == true) {
@@ -132,7 +135,6 @@ class GoogleAnalyticsAPI {
      *
      * @return void
      */
-
     public function setIds($ids)
     {
         $this->ids = $ids;
@@ -145,7 +147,6 @@ class GoogleAnalyticsAPI {
      *
      * @return void
      */
-
     public function setMaxResults($maxResults)
     {
         $this->maxResults = $maxResults;
@@ -158,7 +159,6 @@ class GoogleAnalyticsAPI {
      *
      * @return void
      */
-
     public function setStartIndex($startIndex)
     {
         $this->startIndex = $startIndex;
@@ -171,7 +171,6 @@ class GoogleAnalyticsAPI {
      *
      * @return void
      */
-
     public function setFilter($filter)
     {
         $this->filter = $filter;
@@ -185,7 +184,6 @@ class GoogleAnalyticsAPI {
      *
      * @return void
      */
-
     public function setDate($dateBegin, $dateEnd = null)
     {
         $this->dateBegin = $dateBegin;
@@ -196,76 +194,6 @@ class GoogleAnalyticsAPI {
             $this->dateEnd = $dateEnd;
         }
     }
-
-    /**
-     * Login to the google server
-     * See : http://google-data-api.blogspot.com/2008/05/clientlogin-with-php-curl.html
-     *
-     * @return void
-     */
-
-    private function login()
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://www.google.com/accounts/ClientLogin");
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-
-        $data = array('accountType' => 'GOOGLE',
-                      'Email' => $this->login,
-                      'Passwd' => $this->password,
-                      'source' => 'php_curl_analytics',
-                      'service' => 'analytics');
-
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-
-        $hasil = curl_exec($ch);
-        curl_close($ch);
-
-        // Get the login token
-        // SID=DQA...oUE
-        // LSID=DQA...bbo
-        // Auth=DQA...Sxq
-        if (preg_match('/Auth=(.*)$/', $hasil, $matches) > 0) {
-            $this->loginToken = $matches[1];
-        } else {
-            trigger_error('Authentication problem', E_USER_WARNING);
-            return null;
-        }
-    }
-
-    /**
-     * Get URL content using cURL.
-     *
-     * @param string $url the url
-     *
-     * @return string the html code
-     */
-
-    function getContent($url)
-    {
-        if (!extension_loaded('curl')) {
-            throw new Exception('curl extension is not available');
-        }
-
-        $ch = curl_init($url);
-
-        $header[] = 'Authorization: GoogleLogin auth=' . $this->loginToken;
-
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HEADER, false);
-
-        $this->response = curl_exec($ch);
-        $infos = curl_getinfo($ch);
-        curl_close($ch);
-
-        return $infos['http_code'];
-    }
-
     public function getAccounts()
     {
         $url = 'https://www.google.com/analytics/feeds/accounts/default?';
@@ -291,6 +219,35 @@ class GoogleAnalyticsAPI {
     }
 
     /**
+     * Get URL content using cURL.
+     *
+     * @param string $url the url
+     *
+     * @return string the html code
+     */
+    function getContent($url)
+    {
+        if (!extension_loaded('curl')) {
+            throw new Exception('curl extension is not available');
+        }
+
+        $ch = curl_init($url);
+
+        $header[] = 'Authorization: GoogleLogin auth=' . $this->loginToken;
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+
+        $this->response = curl_exec($ch);
+        $infos = curl_getinfo($ch);
+        curl_close($ch);
+
+        return $infos['http_code'];
+    }
+
+    /**
      * Get the google analytics datas by dimensions and metrics
      * See : http://code.google.com/intl/fr/apis/analytics/docs/gdata/gdataReferenceDimensionsMetrics.html
      * For all the parameters : http://code.google.com/intl/fr-FR/apis/analytics/docs/gdata/gdataReferenceDataFeed.html
@@ -300,7 +257,6 @@ class GoogleAnalyticsAPI {
      *
      * @return array
      */
-
     public function getDimensionByMetric($metrics, $dimensions, $filters = null)
     {
         $url = 'https://www.google.com/analytics/feeds/data?ids=ga:' . $this->ids;
@@ -365,7 +321,6 @@ class GoogleAnalyticsAPI {
      *
      * @return array
      */
-
     public function getMetric($metrics, $filters = null)
     {
         $url = 'https://www.google.com/analytics/feeds/data?ids=ga:' . $this->ids;
@@ -398,6 +353,41 @@ class GoogleAnalyticsAPI {
         }
     }
 
-}
+    /**
+     * Login to the google server
+     * See : http://google-data-api.blogspot.com/2008/05/clientlogin-with-php-curl.html
+     *
+     * @return void
+     */
+    private function login()
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://www.google.com/accounts/ClientLogin");
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
-?>
+        $data = array('accountType' => 'GOOGLE',
+            'Email' => $this->login,
+            'Passwd' => $this->password,
+            'source' => 'php_curl_analytics',
+            'service' => 'analytics');
+
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+        $hasil = curl_exec($ch);
+        curl_close($ch);
+
+        // Get the login token
+        // SID=DQA...oUE
+        // LSID=DQA...bbo
+        // Auth=DQA...Sxq
+        if (preg_match('/Auth=(.*)$/', $hasil, $matches) > 0) {
+            $this->loginToken = $matches[1];
+        } else {
+            trigger_error('Authentication problem', E_USER_WARNING);
+            return null;
+        }
+    }
+}

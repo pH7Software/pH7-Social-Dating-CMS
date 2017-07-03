@@ -12,7 +12,7 @@ class Username extends Textbox
     public function render()
     {
         // Adding the username pattern
-        $this->attributes['pattern'] = PH7_USERNAME_PATTERN.'{'.DbConfig::getSetting('minUsernameLength').','.DbConfig::getSetting('maxUsernameLength').'}';
+        $this->attributes['pattern'] = PH7_USERNAME_PATTERN . '{' . DbConfig::getSetting('minUsernameLength') . ',' . DbConfig::getSetting('maxUsernameLength') . '}';
         parent::render();
     }
 }

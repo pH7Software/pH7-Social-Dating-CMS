@@ -35,7 +35,7 @@ class Various
 
         $iBytes = max($iBytes, 0);
         $iPow = floor(($iBytes ? log($iBytes) : 0) / log(1024));
-        $iPow = min($iPow, count($aUnits)-1);
+        $iPow = min($iPow, count($aUnits) - 1);
         $iBytes /= (1 << (10 * $iPow));
 
         return t($aUnits[$iPow], round($iBytes, $iPrecision));

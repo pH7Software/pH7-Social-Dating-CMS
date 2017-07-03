@@ -10,21 +10,21 @@
  */
 
 namespace PH7\Framework\Ajax {
-defined('PH7') or exit('Restricted access');
+    defined('PH7') or exit('Restricted access');
 
- class Ajax
- {
-     /**
-      * @param integer $iStatus, 1 = success, 0 = error
-      * @param string $sTxt
-      *
-      * @return string JSON Format
-      */
-     public static function jsonMsg($iStatus, $sTxt)
-     {
-         return '{"status":' . $iStatus . ',"txt":"' . $sTxt . '"}';
-     }
- }
+    class Ajax
+    {
+        /**
+         * @param integer $iStatus , 1 = success, 0 = error
+         * @param string $sTxt
+         *
+         * @return string JSON Format
+         */
+        public static function jsonMsg($iStatus, $sTxt)
+        {
+            return '{"status":' . $iStatus . ',"txt":"' . $sTxt . '"}';
+        }
+    }
 
 }
 

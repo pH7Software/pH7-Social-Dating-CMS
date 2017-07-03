@@ -18,26 +18,6 @@ class Role
     /**
      * @param string $sName
      *
-     * @param string $sValue
-     *
-     * @throws Exception
-     */
-    public function __set($sName, $sValue)
-    {
-        switch ($sName) {
-            case 'sName':
-            case 'sPermissions':
-                $this->$sName = $sValue;
-                break;
-
-            default:
-                throw new Exception("Unable to set \"$sName\".");
-        }
-    }
-
-    /**
-     * @param string $sName
-     *
      * @return string
      *
      * @throws Exception
@@ -52,6 +32,26 @@ class Role
 
             default:
                 throw new Exception("Unable to get \"$sName\".");
+        }
+    }
+
+    /**
+     * @param string $sName
+     *
+     * @param string $sValue
+     *
+     * @throws Exception
+     */
+    public function __set($sName, $sValue)
+    {
+        switch ($sName) {
+            case 'sName':
+            case 'sPermissions':
+                $this->$sName = $sValue;
+                break;
+
+            default:
+                throw new Exception("Unable to set \"$sName\".");
         }
     }
 

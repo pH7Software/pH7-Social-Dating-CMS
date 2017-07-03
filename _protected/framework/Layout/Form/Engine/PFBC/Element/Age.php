@@ -48,14 +48,12 @@ class Age extends OptionElement
         $sSelect = '';
         $sAttrName = ($sType == static::MIN_AGE) ? 'iMinAge' : 'iMaxAge';
 
-        for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++)
-        {
+        for ($iAge = $this->iMinAge; $iAge <= $this->iMaxAge; $iAge++) {
             $sSelect .= '<option value="' . $iAge . '"';
 
             if (!empty($this->attributes['value'][$sType]) && $iAge == $this->attributes['value'][$sType]
                 || empty($this->attributes['value'][$sType]) && $iAge == $this->$sAttrName
-            )
-            {
+            ) {
                 $sSelect .= ' selected="selected"';
             }
 

@@ -180,7 +180,7 @@ class Record
      * Update a value in a table.
      *
      * @param string $sTable
-     * @param string $sField, The field to be updated
+     * @param string $sField The field to be updated
      * @param string $sValue The new value
      * @param string $sPk The primary key. Default: NULL
      * @param string $sId The id. Default: NULL
