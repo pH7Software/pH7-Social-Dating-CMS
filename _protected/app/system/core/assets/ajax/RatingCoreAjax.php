@@ -12,7 +12,8 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Cookie\Cookie;
+use PH7\Framework\Cookie\Cookie;
+use PH7\Framework\Mvc\Request\Http;
 
 class RatingCoreAjax
 {
@@ -68,13 +69,11 @@ class RatingCoreAjax
     {
         $this->_oRatingModel = new RatingCoreModel;
         $this->_sTable = $this->_oHttpRequest->post('table');
-        $this->_iId = (int) $this->_oHttpRequest->post('id');
+        $this->_iId = (int)$this->_oHttpRequest->post('id');
 
-        if($this->_sTable == 'Members')
-        {
-            $iProfileId = (int) (new Framework\Session\Session)->get('member_id');
-            if($iProfileId === $this->_iId)
-            {
+        if ($this->_sTable == 'Members') {
+            $iProfileId = (int)(new Framework\Session\Session)->get('member_id');
+            if ($iProfileId === $this->_iId) {
                 $this->_iStatus = 0;
                 $this->_sTxt = t('You can not vote your own profile!');
                 return;
@@ -86,15 +85,12 @@ class RatingCoreAjax
          */
         $oCookie = new Cookie;
         $sCookieName = 'pHSVoting' . $this->_iId . $this->_sTable;
-        if($oCookie->exists($sCookieName))
-        {
+        if ($oCookie->exists($sCookieName)) {
             $this->_iStatus = 0;
             $this->_sTxt = t('You have already voted!');
             return;
-        }
-        else
-        {
-            $oCookie->set($sCookieName, 1, 3600*24*7); // A week
+        } else {
+            $oCookie->set($sCookieName, 1, 3600 * 24 * 7); // A week
         }
         unset($oCookie);
 
@@ -102,7 +98,7 @@ class RatingCoreAjax
         $this->update();
         $this->_iStatus = 1;
         $sVoteTxt = (static::$_iVotes > 1) ? t('Votes') : t('Vote');
-        $this->_sTxt = t('Score: %0% - %2%: %1%', number_format( $this->_fScore / static::$_iVotes, 1 ), static::$_iVotes, $sVoteTxt);
+        $this->_sTxt = t('Score: %0% - %2%: %1%', number_format($this->_fScore / static::$_iVotes, 1), static::$_iVotes, $sVoteTxt);
     }
 
     /**

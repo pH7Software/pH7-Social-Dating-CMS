@@ -7,7 +7,9 @@
  */
 namespace PH7;
 
-use PH7\Framework\Config\Config, PH7\Framework\Str\Str, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Str\Str;
 
 class MembershipForm
 {

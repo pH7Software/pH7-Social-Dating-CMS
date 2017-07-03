@@ -7,7 +7,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Mvc\Model\License;
+use PH7\Framework\Mvc\Model\License;
+use PH7\Framework\Mvc\Router\Uri;
 
 class LicenseForm
 {

@@ -10,7 +10,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Date\CDateTime, PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Mvc\Model\Engine\Db;
 
 class BirthdayCoreModel
 {

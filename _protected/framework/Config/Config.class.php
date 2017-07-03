@@ -27,13 +27,13 @@ class Config implements Configurable
     const PRODUCTION_MODE = 'production';
 
     /**
-     * @var array $values;
-     */
+     * @var array $values
+    */
     public $values = array();
 
-   /**
-    * @var string $_sConfigAppFilePath
-    */
+    /**
+     * @var string $_sConfigAppFilePath
+     */
     private $_sConfigAppFilePath;
 
     /**

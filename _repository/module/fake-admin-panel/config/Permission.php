@@ -11,10 +11,9 @@
 
 namespace PH7;
 
-use
-PH7\Framework\Layout\Html\Design,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class Permission extends PermissionCore
 {
@@ -22,11 +21,11 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-         // Level for Admins
+        // Level for Admins
         if (!AdminCore::auth() && $this->registry->controller === 'AdminController') {
             // For security reasons, we don't redirect the user to the admin panel URL
             Header::redirect(
-                Uri::get('fake-admin-panel','main','login'),
+                Uri::get('fake-admin-panel', 'main', 'login'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );

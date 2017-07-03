@@ -23,10 +23,8 @@ function get_dir_list($sDir)
 {
     $aDirList = array();
 
-    if ($rHandle = opendir($sDir))
-    {
-        while (false !== ($sFile = readdir($rHandle)))
-        {
+    if ($rHandle = opendir($sDir)) {
+        while (false !== ($sFile = readdir($rHandle))) {
             if ($sFile != '.' && $sFile != '..' && is_dir($sDir . '/' . $sFile))
                 $aDirList[] = $sFile;
         }
@@ -190,12 +188,12 @@ function redirect($sUrl)
 function delete_dir($sPath)
 {
     return (
-        is_file($sPath) ?
-          @unlink($sPath) :
+    is_file($sPath) ?
+        @unlink($sPath) :
         (is_dir($sPath) ?
-          array_map(__NAMESPACE__ . '\delete_dir', glob($sPath.'/*')) === @rmdir($sPath) :
-        false)
-        );
+            array_map(__NAMESPACE__ . '\delete_dir', glob($sPath . '/*')) === @rmdir($sPath) :
+            false)
+    );
 }
 
 /**
@@ -275,7 +273,7 @@ function clean_string($sVal)
  */
 function generate_hash($iLength = 80)
 {
-    return substr(hash('whirlpool', time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid(mt_rand(), true) . microtime(true)*999999999999)), 0, $iLength);
+    return substr(hash('whirlpool', time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid(mt_rand(), true) . microtime(true) * 999999999999)), 0, $iLength);
 }
 
 /**
@@ -304,8 +302,7 @@ function is_url_rewrite()
         return false;
 
     // Check if mod_rewrite is installed and is configured to be used via .htaccess
-    if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on'))
-    {
+    if (!$bIsRewrite = (strtolower(getenv('HTTP_MOD_REWRITE')) == 'on')) {
         $sOutputMsg = 'mod_rewrite Works!';
 
         if (!empty($_GET['a']) && $_GET['a'] == 'test_mod_rewrite')
@@ -362,8 +359,7 @@ function zip_extract($sFile, $sDir)
 
     $mRes = $oZip->open($sFile);
 
-    if ($mRes === true)
-    {
+    if ($mRes === true) {
         $oZip->extractTo($sDir);
         $oZip->close();
         return true;
@@ -415,7 +411,7 @@ function send_mail(array $aParams)
 
     // Removing any HTML tags to get a text format.
     // If any of our lines are larger than 70 characterse, we return to the new line.
-    $sTextBody =  wordwrap(strip_tags($aParams['body']), 70);
+    $sTextBody = wordwrap(strip_tags($aParams['body']), 70);
 
     // HTML format (you can change the layout below).
     $sHtmlBody = <<<EOF

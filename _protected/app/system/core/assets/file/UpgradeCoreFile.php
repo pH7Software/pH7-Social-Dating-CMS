@@ -12,13 +12,12 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Core\Kernel,
-PH7\Framework\Config\Config,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Security\Version,
-PH7\Framework\File as F;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\File as F;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Security\Version;
 
 @set_time_limit(0);
 @ini_set('memory_limit', '528M');

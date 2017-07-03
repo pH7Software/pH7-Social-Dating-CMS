@@ -13,7 +13,7 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-ini_set('log_errors' , 'On');
+ini_set('log_errors', 'On');
 ini_set('error_log', PH7_PATH_LOG . 'php_error.log');
 ini_set('ignore_repeated_errors', 'On'); // Do not log repeated errors that occur in same file on same line
 

@@ -15,13 +15,12 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Util\Various,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header,
-PH7\Framework\File as F,
-PH7\Framework\Video as V;
+use PH7\Framework\File as F;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Util\Various;
+use PH7\Framework\Video as V;
 
 class VideoFormProcess extends Form
 {

@@ -8,12 +8,10 @@
  * Link:            http://github.com/pH-7/Slim-HTML5-Audio-jQuery-Plugin
  */
 
-(function($)
-{
+(function ($) {
     jQuery.sound = {
 
-        play: function()
-        {
+        play: function () {
             return jQuery('<audio style="display:none" autoplay="autoplay" src="' + arguments[0] + '"><embed src="' + arguments[0] + '" hidden="true" autostart="true" loop="false"></audio>').appendTo('body');
         }
 

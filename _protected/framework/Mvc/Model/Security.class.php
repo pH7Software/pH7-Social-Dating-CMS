@@ -13,8 +13,8 @@ namespace PH7\Framework\Mvc\Model;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class Security

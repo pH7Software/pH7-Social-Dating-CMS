@@ -10,9 +10,9 @@ namespace PH7\Test\Unit\Framework\Layout\Html;
 
 @session_start();
 
+use PH7\Framework\Config\Config;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Session\Session;
-use PH7\Framework\Config\Config;
 
 class DesignTest extends \PHPUnit_Framework_TestCase
 {

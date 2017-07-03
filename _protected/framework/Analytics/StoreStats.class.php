@@ -49,13 +49,10 @@ class StoreStats
         $sExceptMsg = 'Couldn\'t write cache file: \'' . $sFullPath . '\'';
         $aData = array();
 
-        if (!is_file($sFullPath))
-        {
+        if (!is_file($sFullPath)) {
             if (!@file_put_contents($sFullPath, serialize($aData)))
                 throw new \PH7\Framework\Cache\Exception($sExceptMsg);
-        }
-        else
-        {
+        } else {
             $aLine = file($sFullPath);
             $aData = unserialize($aLine[0]);
             $sContents = strtolower($sContents); // Case-insensitive

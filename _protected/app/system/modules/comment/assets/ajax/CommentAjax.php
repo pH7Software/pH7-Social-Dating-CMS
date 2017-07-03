@@ -8,10 +8,9 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Security\CSRF\Token,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Session\Session;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Session\Session;
 
 class Comment
 {

@@ -11,13 +11,12 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Image\Image,
-PH7\Framework\Security\Moderation\Filter,
-PH7\Framework\Util\Various,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Router\Uri,
-PH7\Framework\Url\Header;
+use PH7\Framework\Image\Image;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Moderation\Filter;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Util\Various;
 
 class PictureFormProcess extends Form
 {

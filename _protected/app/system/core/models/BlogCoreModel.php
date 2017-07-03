@@ -8,8 +8,8 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
 class BlogCoreModel extends Model
 {

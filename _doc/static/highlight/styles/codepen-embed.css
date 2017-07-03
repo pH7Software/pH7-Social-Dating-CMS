@@ -5,16 +5,16 @@
 */
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #222;
-  color: #fff;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #222;
+    color: #fff;
 }
 
 .hljs-comment,
 .hljs-quote {
-  color: #777;
+    color: #777;
 }
 
 .hljs-variable,
@@ -31,7 +31,7 @@
 .hljs-bullet,
 .hljs-link,
 .hljs-deletion {
-  color: #ab875d;
+    color: #ab875d;
 }
 
 .hljs-section,
@@ -41,20 +41,20 @@
 .hljs-selector-class,
 .hljs-type,
 .hljs-attribute {
-  color: #9b869b;
+    color: #9b869b;
 }
 
 .hljs-string,
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-addition {
-  color: #8f9c6c;
+    color: #8f9c6c;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }
 
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }

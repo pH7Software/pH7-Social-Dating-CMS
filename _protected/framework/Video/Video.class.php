@@ -14,12 +14,12 @@ namespace PH7\Framework\Video;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Date\Various;
 use PH7\Framework\Config\Config;
+use PH7\Framework\Date\Various;
 use PH7\Framework\File\File;
-use PH7\Framework\File\Upload;
-use PH7\Framework\File\TooLargeException;
 use PH7\Framework\File\MissingProgramException;
+use PH7\Framework\File\TooLargeException;
+use PH7\Framework\File\Upload;
 
 class Video extends Upload
 {

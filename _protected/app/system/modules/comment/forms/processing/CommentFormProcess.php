@@ -8,10 +8,9 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class CommentFormProcess extends Form
 {

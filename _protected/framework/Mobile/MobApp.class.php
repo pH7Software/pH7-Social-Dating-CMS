@@ -11,7 +11,8 @@
 namespace PH7\Framework\Mobile;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Session\Session;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Session\Session;
 
 class MobApp
 {

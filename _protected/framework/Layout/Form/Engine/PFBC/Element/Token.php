@@ -3,10 +3,10 @@
  * This file has been made by pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Element;
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Security\CSRF\Token as SecurityToken,
-PFBC\Validation\Token as ValidationToken;
+
+use PFBC\Validation\Token as ValidationToken;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 
 class Token extends Hidden
 {

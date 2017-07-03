@@ -7,7 +7,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Http\Http, PH7\Framework\Translate\Lang;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Translate\Lang;
 
 class SecureController extends Controller
 {
@@ -20,8 +21,7 @@ class SecureController extends Controller
         $sUsr = $this->config->values['module.setting']['user'];
         $sPwd = $this->config->values['module.setting']['password'];
 
-        if (Http::requireAuth($sUsr, $sPwd))
-        {
+        if (Http::requireAuth($sUsr, $sPwd)) {
             // Meta Tags
             $this->view->page_title = t('HTTP Secure Page');
             $this->view->meta_description = t('Simple HTTP Secure Page');

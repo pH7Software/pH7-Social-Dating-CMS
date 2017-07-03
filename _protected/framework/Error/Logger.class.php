@@ -47,6 +47,8 @@ class Logger extends \PH7\Framework\Core\Core
      * Clone is set to private to stop cloning.
      * @access private
      */
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 
 }

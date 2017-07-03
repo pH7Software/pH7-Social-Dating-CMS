@@ -12,13 +12,14 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Ip\Ip;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Request\Http;
 
 class LikeCoreAjax
 {
 
-    private $_oHttpRequest, $_oLikeModel, $_sKey, $_iVote, $_fLastIp, $_fLastIpVoted;
     private static $_iVotesLike = 0;
+    private $_oHttpRequest, $_oLikeModel, $_sKey, $_iVote, $_fLastIp, $_fLastIpVoted;
 
     public function __construct()
     {
@@ -63,20 +64,16 @@ class LikeCoreAjax
     protected function select()
     {
         $oResult = $this->_oLikeModel->select($this->_sKey);
-        if(!empty($oResult))
-        {
-            foreach($oResult as $mRow)
-            {
-                 static::$_iVotesLike = (int)$mRow->votes;
-                 $this->_fLastIpVoted = $mRow->lastIp;
+        if (!empty($oResult)) {
+            foreach ($oResult as $mRow) {
+                static::$_iVotesLike = (int)$mRow->votes;
+                $this->_fLastIpVoted = $mRow->lastIp;
             }
-            if($this->_iVote)
-                if($this->checkPerm()) $this->update();
-        }
-        else
-        {
-            if($this->_iVote)
-                if($this->checkPerm()) $this->insert();
+            if ($this->_iVote)
+                if ($this->checkPerm()) $this->update();
+        } else {
+            if ($this->_iVote)
+                if ($this->checkPerm()) $this->insert();
         }
     }
 

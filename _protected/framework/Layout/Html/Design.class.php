@@ -13,34 +13,34 @@ namespace PH7\Framework\Layout\Html;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel;
-use PH7\UserCore;
-use PH7\UserCoreModel;
 use PH7\AdminCore;
 use PH7\AdminCoreModel;
 use PH7\AffiliateCore;
-use PH7\Framework\Registry\Registry;
-use PH7\Framework\Mvc\Model\Engine\Db;
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Parse\Url as UrlParser;
-use PH7\Framework\Url\Url;
-use PH7\Framework\Ip\Ip;
-use PH7\Framework\Geo\Ip\Geo;
-use PH7\Framework\Str\Str;
-use PH7\Framework\File\File;
-use PH7\Framework\Session\Session;
-use PH7\Framework\Navigation\Page;
-use PH7\Framework\Geo\Misc\Country;
 use PH7\Framework\Benchmark\Benchmark;
 use PH7\Framework\Cache\Cache;
-use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Navigation\Pagination;
-use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\File\File;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Geo\Misc\Country;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
-use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Navigation\Pagination;
+use PH7\Framework\Parse\Url as UrlParser;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Url\Url;
+use PH7\UserCore;
+use PH7\UserCoreModel;
 
 class Design
 {
@@ -408,20 +408,16 @@ class Design
           ];
         } elseif (substr($sLangCode,0,2) == 'fr') {
             $aSites = [
-                ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Rencontre d\'un soir', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => 'Rencontre à Paris Gratuite', 'link' => 'http://coolonweb.com']
+                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
             ];
         } else { // Default links, set to English
             $aSites = [
                 ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
-                ['title' => 'Kik or Not', 'link' => 'http://kikornot.com'],
                 ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
                 ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
                 ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
                 ['title' => 'Android London Dating App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
             ];
@@ -435,8 +431,8 @@ class Design
     {
         if (
             (!defined('PH7_VALID_LICENSE') || !PH7_VALID_LICENSE)
-            && (new AdminCoreModel)->getRootIp() !== Ip::get()
             && !AdminCore::auth()
+            && (new AdminCoreModel)->getRootIp() !== Ip::get()
         ) {
             $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742" />';
 

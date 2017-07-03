@@ -5,12 +5,15 @@
  */
 
 // Only for members
-function friend(sType, iFriendId, sCSRFToken)
-{
-    $.post(pH7Url.base + 'friend/asset/ajax/Friend', {type : sType, friendId : iFriendId, security_token : sCSRFToken}, function(oResponseData) {
-        if(oResponseData.status == 1) {
+function friend(sType, iFriendId, sCSRFToken) {
+    $.post(pH7Url.base + 'friend/asset/ajax/Friend', {
+        type: sType,
+        friendId: iFriendId,
+        security_token: sCSRFToken
+    }, function (oResponseData) {
+        if (oResponseData.status == 1) {
             $('.msg').addClass('alert alert-success');
-            $('#friend_' +  iFriendId).hide('slow');
+            $('#friend_' + iFriendId).hide('slow');
         } else {
             $('.msg').addClass('alert alert-danger');
         }

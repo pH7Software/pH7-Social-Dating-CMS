@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Core / Class
  */
 namespace PH7;
+
 use PH7\Framework\Mail\Mail;
 
 class BirthdayCore extends Core

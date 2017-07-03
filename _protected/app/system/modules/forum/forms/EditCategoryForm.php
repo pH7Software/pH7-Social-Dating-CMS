@@ -7,7 +7,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Config\Config, PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Mvc\Request\Http;
 
 class EditCategoryForm
 {

@@ -14,11 +14,10 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Util\Various,
-PH7\Framework\Error\CException\UserException;
+use PH7\Framework\Error\CException\UserException;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Util\Various;
 
 class UploadPictureAjax
 {

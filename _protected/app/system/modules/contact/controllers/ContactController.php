@@ -8,10 +8,18 @@
 
 namespace PH7;
 
+use PH7\Framework\Layout\Html\Meta;
+
 class ContactController extends Controller
 {
     public function index()
     {
+        /**
+         * For SEO: Google shouldn't waste time indexing a contact form.
+         * Instead, it will use that time indexing important pages on pH7CMS
+         */
+        $this->view->header = Meta::NOINDEX;
+
         $this->view->page_title = t('Contact Us');
         $this->view->h1_title = t('Contact %site_name%');
         $this->output();

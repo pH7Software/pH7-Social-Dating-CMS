@@ -8,8 +8,8 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Model\DbConfig;
 
 class Contact extends Core
 {

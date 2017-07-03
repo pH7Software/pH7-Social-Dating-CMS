@@ -9,13 +9,11 @@
  * Version:         1.3
  */
 
-$(document).ready(function()
-{
-    if(window.history && history.pushState)
-    {
+$(document).ready(function () {
+    if (window.history && history.pushState) {
         bHistoryEdited = false;
-        $(window).bind('popstate', function() {
-            if(bHistoryEdited) {
+        $(window).bind('popstate', function () {
+            if (bHistoryEdited) {
                 loadPage(location.pathname + location.search);
             }
         });
@@ -23,11 +21,9 @@ $(document).ready(function()
     }
 });
 
-function doPager()
-{
+function doPager() {
     // Loading the ajax pages
-    $('a[data-load=ajax]').click(function(oE)
-    {
+    $('a[data-load=ajax]').click(function (oE) {
         oE.preventDefault();
         $('#ajph').html("<div id='loading'>Loading...</div>");
         loadPage($(this).attr('href'));
@@ -42,20 +38,18 @@ function doPager()
  * @param {String} Link
  * @return {Void}
  */
-function loadPage(sLink)
-{
+function loadPage(sLink) {
     $.ajax({
         url: sLink,
         processData: true,
-        dataType:'html',
-        success: function(oData)
-        {
+        dataType: 'html',
+        success: function (oData) {
             var oContent = $(oData).find("#sub_ajph"); // Get the new Contents
             var oTitle = $(oData).filter('title'); // Get the new Title tag
             var oHeadings = $(oData).find('#headings:first'); // Get the Headings Group
             $('title').text(oTitle.text()); // Set Title
             $('#headings:first').html(oHeadings.html()); // Set the Headings Group
-            $('#ajph').fadeOut(200, function() {
+            $('#ajph').fadeOut(200, function () {
                 $(this).html(oContent.html()).fadeIn(200); // Set Contents
             });
         }

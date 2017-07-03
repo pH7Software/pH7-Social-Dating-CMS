@@ -8,13 +8,13 @@
 
 namespace PH7;
 
+use PH7\Framework\Config\Config;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Registry\Registry;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Util\Various;
-use PH7\Framework\Ip\Ip;
-use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Config\Config;
-use PH7\Framework\Registry\Registry;
-use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use stdClass;
 
 // Abstract Class
@@ -48,7 +48,7 @@ class AffiliateCore extends UserCore
     public function setAuth(stdClass $oAffData, UserCoreModel $oAffModel, Session $oSession, SecurityModel $oSecurityModel)
     {
         // Remove the session if the affiliate is logged on as "user" or "affiliate".
-        if(UserCore::auth() || AdminCore::auth())
+        if (UserCore::auth() || AdminCore::auth())
             $oSession->destroy();
 
         // Regenerate the session ID to prevent session fixation attack

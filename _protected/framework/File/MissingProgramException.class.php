@@ -10,4 +10,6 @@ namespace PH7\Framework\File;
 
 use PH7\Framework\Error\CException\PH7RuntimeException;
 
-class MissingProgramException extends PH7RuntimeException {}
+class MissingProgramException extends PH7RuntimeException
+{
+}

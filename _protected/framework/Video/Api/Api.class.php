@@ -14,8 +14,8 @@ namespace PH7\Framework\Video\Api;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\File\File;
-use PH7\Framework\Str\Str;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Str\Str;
 
 abstract class Api
 {

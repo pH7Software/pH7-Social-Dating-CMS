@@ -8,8 +8,8 @@
 
 namespace PH7\Test\Unit\Framework\Util;
 
-use PH7\Framework\Translate\Lang;
 use PH7\Framework\Registry\Registry;
+use PH7\Framework\Translate\Lang;
 
 class LangTest extends \PHPUnit_Framework_TestCase
 {

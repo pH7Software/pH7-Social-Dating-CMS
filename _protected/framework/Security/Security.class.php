@@ -14,10 +14,10 @@ namespace PH7\Framework\Security;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Util\Various;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Util\Various;
 
 final class Security
 {

@@ -8,10 +8,9 @@
 
 namespace PH7;
 
-use
-PH7\Framework\Url\Header,
-PH7\Framework\Parse\Url,
-RobThree\Auth\TwoFactorAuth as Authenticator;
+use PH7\Framework\Parse\Url;
+use PH7\Framework\Url\Header;
+use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
 {

@@ -4,10 +4,8 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-function loveCounter(iNumber, iMax)
-{
-    if(iNumber < iMax)
-    {
+function loveCounter(iNumber, iMax) {
+    if (iNumber < iMax) {
         iNumber++;
         $('.heart span').text(iNumber);
         var iSizeTxt = (iNumber > 10 ? iNumber : 10);

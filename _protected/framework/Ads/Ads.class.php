@@ -12,10 +12,10 @@ namespace PH7\Framework\Ads;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http as HttpRequest;
-use PH7\Framework\Mvc\Model\Ads as ModelAds;
-use PH7\Framework\Parse\SysVar;
 use PH7\Framework\Analytics\Statistic;
+use PH7\Framework\Mvc\Model\Ads as ModelAds;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Parse\SysVar;
 use stdClass;
 
 class Ads

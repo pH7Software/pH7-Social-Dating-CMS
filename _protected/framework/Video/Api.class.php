@@ -13,9 +13,9 @@ namespace PH7\Framework\Video;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Http\Http;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Http\Http;
 
 class Api
 {

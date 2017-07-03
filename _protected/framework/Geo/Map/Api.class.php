@@ -205,7 +205,7 @@ class Api
     /**
      * Set the size of the gmap
      *
-     * @param int $width  GoogleMap  width
+     * @param int $width GoogleMap  width
      * @param int $height GoogleMap  height
      *
      * @return void
@@ -247,7 +247,7 @@ class Api
     /**
      * Set the size of the icon markers
      *
-     * @param int $iconWidth  GoogleMap  marker icon width
+     * @param int $iconWidth GoogleMap  marker icon width
      * @param int $iconHeight GoogleMap  marker icon height
      *
      * @return void
@@ -261,7 +261,7 @@ class Api
     /**
      * Set the size of anchor icon markers
      *
-     * @param int $iconAnchorWidth  GoogleMap  anchor icon width
+     * @param int $iconAnchorWidth GoogleMap  anchor icon width
      * @param int $iconAnchorHeight GoogleMap  anchor icon height
      *
      * @return void
