@@ -11,17 +11,17 @@
  */
 
 namespace PH7\Framework\CArray;
+
 defined('PH7') or exit('Restricted access');
 
 class CArray
 {
-
     /**
      * Merge two Arrays into one recursively.
      *
-     * @access public
      * @param array $aFrom The array to be merged to.
      * @param array $aTo The array to be merged from.
+     *
      * @return array Returns the merged array (the original arrays are not changed).
      */
     public static function merge(array $aFrom, array $aTo)
@@ -34,55 +34,44 @@ class CArray
             else
                 $aFrom[$mKey] = $mVal;
         }
+
         return $aFrom;
     }
 
     /**
      * Get Key in Array By Array Value.
      *
-     * @access public
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
+     *
      * @return string The name key. If the key is not found, Returns NULL.
      */
     public static function getKeByVal($sValue, array $aArray)
     {
         $mKey = array_search($sValue, $aArray);
-        return static::_get($mKey);
-    }
-
-    /**
-     * Check if the key exists.
-     *
-     * @access private
-     * @param mixed (string | boolean) $mKey The key for needle if it is found in the array, FALSE otherwise.
-     * @return string The name key. If the key is not found, Returns NULL.
-     */
-    private static function _get($mKey)
-    {
-        return ($mKey !== false) ? $mKey : null;
+        return static::get($mKey);
     }
 
     /**
      * Get Key in Array By Array Value without case sensitive.
      *
-     * @access public
      * @param string $sValue The value in the array.
      * @param array $aArray The array.
+     *
      * @return string The name key. If the key is not found, Returns NULL.
      */
     public static function getKeyByValIgnoreCase($sValue, array $aArray)
     {
         $mKey = array_search(strtolower($sValue), array_map('strtolower', $aArray));
-        return static::_get($mKey);
+        return static::get($mKey);
     }
 
     /**
      * Get Value in Array By Array Key
      *
-     * @access public
      * @param string $sKey The key in the array.
      * @param array $aArray The array.
+     *
      * @return string The value of the array. If the value is not found, Returns NULL.
      */
     public static function getValueByKey($sKey, array $aArray)
@@ -90,4 +79,15 @@ class CArray
         return (array_key_exists($sKey, $aArray) && !empty($aArray[$sKey])) ? $aArray[$sKey] : null;
     }
 
+    /**
+     * Check if the key exists.
+     *
+     * @param string|boolean $mKey The key for needle if it is found in the array, FALSE otherwise.
+     *
+     * @return string The name key. If the key is not found, Returns NULL.
+     */
+    private static function get($mKey)
+    {
+        return ($mKey !== false) ? $mKey : null;
+    }
 }
