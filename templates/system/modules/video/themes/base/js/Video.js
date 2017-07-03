@@ -12,25 +12,21 @@ var Video = {
 
     oVideo: document.getElementsByTagName('video')[0],
 
-    playPause: function ()
-    {
+    playPause: function () {
         (this.oVideo.paused) ? this.oVideo.play() : this.oVideo.pause();
     },
 
-    bigSize: function ()
-    {
+    bigSize: function () {
         this.oVideo.width = 920;
         this.oVideo.height = 600;
     },
 
-    smallSize: function ()
-    {
+    smallSize: function () {
         this.oVideo.width = 400;
         this.oVideo.height = 200;
     },
 
-    normalSize: function ()
-    {
+    normalSize: function () {
         this.oVideo.width = 600;
         this.oVideo.height = 400;
     }

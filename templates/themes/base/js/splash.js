@@ -14,11 +14,10 @@ var iImgSum = $(".img_reel img").size();
 var iImgReelWidth = iImgWidth * iImgSum;
 
 // Adjust the image reel to its new size
-$(".img_reel").css({'width' : iImgReelWidth});
+$(".img_reel").css({'width': iImgReelWidth});
 
 // Paging + Slider Function
-rotate = function()
-{
+rotate = function () {
     var iTriggerId = $active.attr("rel") - 1; // Get number of times to slide
     var iImgRealPosition = iTriggerId * iImgWidth; // Determines the distance the image reel needs to slide
 
@@ -27,17 +26,16 @@ rotate = function()
 
     //Slider Animation
     $(".img_reel").animate({
-        left: - iImgRealPosition
-    }, 500 );
+        left: -iImgRealPosition
+    }, 500);
 
 };
 
 // Rotation + Timing Event
-rotateSwitch = function(){
-    play = setInterval(function()
-    { // Set timer - this will repeat itself every 3 seconds
+rotateSwitch = function () {
+    play = setInterval(function () { // Set timer - this will repeat itself every 3 seconds
         $active = $('.paging a.active').next();
-        if ( $active.length === 0) { // If paging reaches the end...
+        if ($active.length === 0) { // If paging reaches the end...
             $active = $('.paging a:first'); //go back to first
         }
         rotate(); // Trigger the paging and slider function
@@ -47,16 +45,15 @@ rotateSwitch = function(){
 rotateSwitch(); // Run function on launch
 
 //On Hover
-$(".img_reel a").hover(function() {
-    clearInterval(play); // Stop the rotation
-},  function() {
+$(".img_reel a").hover(function () {
+        clearInterval(play); // Stop the rotation
+    }, function () {
         rotateSwitch(); // Resume rotation
     }
 );
 
 // On Click
-$(".paging a").click(function()
-{
+$(".paging a").click(function () {
     $active = $(this); // Activate the clicked paging
     // Reset Timer
     clearInterval(play); // Stop the rotation

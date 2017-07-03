@@ -4,12 +4,15 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-function report(sType, iReportId, sCSRFToken)
-{
-    $.post(pH7Url.base + 'report/asset/ajax/Report', {type : sType, reportId : iReportId, security_token : sCSRFToken}, function(oResponseData) {
-        if(oResponseData.status == 1) {
+function report(sType, iReportId, sCSRFToken) {
+    $.post(pH7Url.base + 'report/asset/ajax/Report', {
+        type: sType,
+        reportId: iReportId,
+        security_token: sCSRFToken
+    }, function (oResponseData) {
+        if (oResponseData.status == 1) {
             $('.msg').addClass('alert alert-success');
-            $('#report_' +  iReportId).hide("slow");
+            $('#report_' + iReportId).hide("slow");
         } else {
             $('.msg').addClass('alert alert-danger');
         }
