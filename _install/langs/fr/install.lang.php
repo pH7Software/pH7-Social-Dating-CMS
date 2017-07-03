@@ -60,7 +60,7 @@ $LANG = array(
     'all_fields_mandatory' => 'Tous les champs marqués d\'un astérisque (*) sont obligatoires',
     'db_hostname' => 'Nom de l\'hôte du serveur de la base de données',
     'desc_db_hostname' => '(Très souvent cette valeur est &quot;localhost&quot; ou &quot;127.0.0.1&quot;)',
-    'db_name' =>'Nom de la base de données',
+    'db_name' => 'Nom de la base de données',
     'db_username' => 'Nom d\'utilisateur de la base de données',
     'db_password' => 'Mot de passe de la base de données',
     'db_prefix' => 'Le préfixe des tables de la base de données',
@@ -136,7 +136,7 @@ $LANG = array(
     'recommended' => 'Recommandée',
     'recommended_desc' => 'Choisissez cette niche si vous ne savez pas quelle niche choisir',
     'note_able_to_change_niche_settings_later' => 'Veuillez noter que vous pourrez changer le thème et activer/désactiver les modules par la suite dans votre panneau d\'administration.',
-    'looking_hosting' =>'À la recherche d\'un hébergement Web ? Regardez <a href="' . Controller::SOFTWARE_HOSTING_LIST_FR_URL . '" target="_blank">notre Liste d\'Hébergeurs</a> ?',
+    'looking_hosting' => 'À la recherche d\'un hébergement Web ? Regardez <a href="' . Controller::SOFTWARE_HOSTING_LIST_FR_URL . '" target="_blank">notre Liste d\'Hébergeurs</a> ?',
     'warning_no_js' => 'Cette page Web est incompatible sans l\'activation de JavaScript.<br />
         Veuillez activer JavaScript via les options de votre navigateur Web.',
     'admin_url' => 'URL du panneau d\'administration',
