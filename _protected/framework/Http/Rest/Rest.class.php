@@ -103,7 +103,7 @@ class Rest extends Http
         if (is_array($mData)) {
             $aCleanInput = array();
 
-            foreach($mData as $sKey => $sValue) {
+            foreach ($mData as $sKey => $sValue) {
                 $aCleanInput[$sKey] = $this->_cleanInputs($sValue);
             }
 

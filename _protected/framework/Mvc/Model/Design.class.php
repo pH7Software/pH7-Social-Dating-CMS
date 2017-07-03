@@ -126,7 +126,7 @@ class Design extends HtmlDesign
     /**
      * Get the custom code.
      *
-     * @param string $sType  Choose between 'css' and 'js'.
+     * @param string $sType Choose between 'css' and 'js'.
      *
      * @return string
      */
@@ -151,7 +151,7 @@ class Design extends HtmlDesign
     /**
      * Get CSS/JS files.
      *
-     * @param string $sType  Choose between 'css' and 'js'.
+     * @param string $sType Choose between 'css' and 'js'.
      * @param boolean $bOnlyActive If TRUE, it will get only the files activated.
      *
      * @return void HTML output.

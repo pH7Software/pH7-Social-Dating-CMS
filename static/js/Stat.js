@@ -5,17 +5,17 @@
  * Version:       0.3
  */
 
-function Stat()
-{
+function Stat() {
     var oMe = this; // Self Object
     this.sUrl = 'asset/ajax/Stat/';
 
-    this.totalUsers = function()
-    {
-         $.post(pH7Url.base + this.sUrl, {type : 'total_users'}, function(iData){
-              $('.stat_total_users').flipCounter({number:parseInt(iData)});
-         });
-         setTimeout(function() {oMe.totalUsers()},1000);
+    this.totalUsers = function () {
+        $.post(pH7Url.base + this.sUrl, {type: 'total_users'}, function (iData) {
+            $('.stat_total_users').flipCounter({number: parseInt(iData)});
+        });
+        setTimeout(function () {
+            oMe.totalUsers()
+        }, 1000);
     };
 }
 

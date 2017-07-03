@@ -29,8 +29,7 @@ class Tool
      */
     public static function checkAccess(Config $oConfig, Http $oRequest)
     {
-        if (strcmp($oRequest->gets('private_api_key'), $oConfig->values['ph7cms.api']['private_key']) === 0)
-        {
+        if (strcmp($oRequest->gets('private_api_key'), $oConfig->values['ph7cms.api']['private_key']) === 0) {
             return in_array($oRequest->gets('url'), $oConfig->values['ph7cms.api']['allow_domains']);
         }
         return false;

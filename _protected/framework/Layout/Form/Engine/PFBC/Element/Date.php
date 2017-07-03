@@ -16,7 +16,7 @@ class Date extends Textbox
         $iMin = $iCurrentYear - DbConfig::getSetting('maxAgeRegistration');
         $iMax = $iCurrentYear - DbConfig::getSetting('minAgeRegistration');
 
-        echo 'jQuery("#', $this->attributes['id'], '").datepicker({dateFormat:\'mm/dd/yy\',defaultDate:-9862,changeMonth:true,changeYear:true,yearRange:\''.$iMin.':'.$iMax.'\'});';
+        echo 'jQuery("#', $this->attributes['id'], '").datepicker({dateFormat:\'mm/dd/yy\',defaultDate:-9862,changeMonth:true,changeYear:true,yearRange:\'' . $iMin . ':' . $iMax . '\'});';
     }
 
     public function render()

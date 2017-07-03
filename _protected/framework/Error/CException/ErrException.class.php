@@ -11,43 +11,41 @@
  */
 
 namespace PH7\Framework\Error\CException {
-defined('PH7') or exit('Restricted access');
+    defined('PH7') or exit('Restricted access');
 
- /**
- * This function for display errors with the ErrorException class which is defined by PH7Exception class.
- * @access public
- */
+    /**
+     * This function for display errors with the ErrorException class which is defined by PH7Exception class.
+     * @access public
+     */
+    final class ErrException extends \ErrorException
+    {
 
- final class ErrException extends \ErrorException
- {
+        public function __toString()
+        {
+            switch ($this->severity) {
+                case E_USER_ERROR : // If the user issues a fatal error
+                    $sType = 'Fatal error ';
+                    break;
 
-     public function __toString()
-     {
-         switch ($this->severity)
-         {
-             case E_USER_ERROR : // If the user issues a fatal error
-                 $sType = 'Fatal error ';
-             break;
+                case E_WARNING : // If PHP issues a warning
+                case E_USER_WARNING : // If the user issues a warning
+                    $sType = 'Warning error';
+                    break;
 
-             case E_WARNING : // If PHP issues a warning
-             case E_USER_WARNING : // If the user issues a warning
-                 $sType = 'Warning error';
-             break;
+                case E_NOTICE : // If PHP issues a notice
+                case E_USER_NOTICE : // If the user issues a notice
+                    $sType = 'Notice error';
+                    break;
 
-             case E_NOTICE : // If PHP issues a notice
-             case E_USER_NOTICE : // If the user issues a notice
-                 $sType = 'Notice error';
-             break;
+                default : // Unknown error
+                    $sType = 'Unknown error';
+                    break;
+            }
 
-             default : // Unknown error
-                 $sType = 'Unknown error';
-             break;
-         }
+            return '<strong>' . $sType . '</strong> : [' . $this->code . '] ' . htmlspecialchars($this->message, ENT_QUOTES) . '<br /><strong>' . $this->file . '</strong> to line <strong>' . $this->line . '</strong>';
+        }
 
-         return '<strong>' . $sType . '</strong> : [' . $this->code . '] ' . htmlspecialchars($this->message, ENT_QUOTES) . '<br /><strong>' . $this->file . '</strong> to line <strong>' . $this->line . '</strong>';
-     }
-
- }
+    }
 
 }
 

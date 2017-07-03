@@ -66,7 +66,6 @@
             init: function (options) {
 
                 return this.each(
-
                     function () {
 
                         // Set reference to this DOM object
@@ -114,7 +113,6 @@
                         _renderCounter();
 
                     }
-
                 )
 
             },
@@ -123,7 +121,6 @@
             renderCounter: function (value) {
 
                 return this.each(
-
                     function () {
 
                         obj = $(this);
@@ -135,7 +132,6 @@
                         _renderCounter();
 
                     }
-
                 );
 
             },
@@ -144,7 +140,6 @@
             setNumber: function (value) {
 
                 return this.each(
-
                     function () {
 
                         obj = $(this);
@@ -156,7 +151,6 @@
                         _renderCounter();
 
                     }
-
                 );
 
             },
@@ -167,7 +161,6 @@
                 var val = false;
 
                 this.each(
-
                     val = function () {
 
                         obj = $(this);
@@ -179,7 +172,6 @@
                         return val;
 
                     }
-
                 );
 
                 return val;
@@ -190,7 +182,6 @@
             startAnimation: function (options) {
 
                 return this.each(
-
                     function () {
 
                         obj = $(this);
@@ -200,7 +191,6 @@
                         obj.trigger('startAnimation', options);
 
                     }
-
                 );
 
             },
@@ -209,7 +199,6 @@
             stopAnimation: function () {
 
                 return this.each(
-
                     function () {
 
                         obj = $(this);
@@ -219,7 +208,6 @@
                         obj.trigger('stopAnimation');
 
                     }
-
                 );
 
             },
@@ -228,7 +216,6 @@
             pauseAnimation: function () {
 
                 return this.each(
-
                     function () {
 
                         obj = $(this);
@@ -238,7 +225,6 @@
                         obj.trigger('pauseAnimation');
 
                     }
-
                 );
 
             },
@@ -247,7 +233,6 @@
             resumeAnimation: function () {
 
                 return this.each(
-
                     function () {
 
                         obj = $(this);
@@ -257,7 +242,6 @@
                         obj.trigger('resumeAnimation');
 
                     }
-
                 );
 
             }
@@ -359,18 +343,15 @@
 
             // Add the invisible span if it doesn't already exist
             obj.find('.' + _getOption('digitClass')).each(
-
                 function () {
 
-                    if (0 == $(this).find('span').length)
-                    {
+                    if (0 == $(this).find('span').length) {
 
                         $(this).append('<span style="visibility:hidden">0</span>');
 
                     }
 
                 }
-
             );
 
         }
@@ -387,7 +368,7 @@
             $.each(digits, function (index, value) {
 
                 digit = number.toString().charAt(pos);
-                $(this).attr('style',  _getDigitStyle(digit));
+                $(this).attr('style', _getDigitStyle(digit));
                 $(this).find('span').text(digit.replace(' ', '&nbsp;').toString()); // replace empty space with &nbsp; to prevent rendering bug
                 pos++
 
@@ -445,8 +426,7 @@
             var str_number = '';
 
             // Number formatter plugin is being used
-            if (_getOption('formatNumberOptions'))
-            {
+            if (_getOption('formatNumberOptions')) {
 
                 if ($.formatNumber) {
 
@@ -474,7 +454,7 @@
 
                     str_number += number.toFixed(_getOption('numFractionalDigits'));
 
-                 // if less than zero remove leading zeros and add minus sign
+                    // if less than zero remove leading zeros and add minus sign
                 } else {
 
                     str_number = '-' + Math.abs(number.toFixed(_getOption('numFractionalDigits')));
@@ -488,8 +468,7 @@
         }
 
         // Get CSS background image positiong
-        function _getDigitStyle(character)
-        {
+        function _getDigitStyle(character) {
 
             var style = "height:" + _getOption('digitHeight') + "px; width:" + _getOption('digitWidth') + "px; display:inline-block; background-image:url('" + _getOption('imagePath') + "'); background-repeat:no-repeat; ";
 
@@ -510,8 +489,7 @@
             bg_pos[','] = _getOption('digitWidth') * -12;
             bg_pos[' '] = _getOption('digitWidth') * -13;
 
-            if( character in bg_pos)
-            {
+            if (character in bg_pos) {
 
                 return style + 'background-position: ' + bg_pos[character] + 'px 0px;'
 
@@ -608,12 +586,11 @@
 
                 var new_num = 0;
 
-                if(typeof easing == 'function') {
+                if (typeof easing == 'function') {
 
                     new_num = easing.apply(obj, [false, time, start_number, number_change, duration]);
                 }
-                else
-                {
+                else {
 
                     new_num = _noEasing(false, time, start_number, number_change, duration);
 

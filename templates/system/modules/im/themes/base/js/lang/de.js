@@ -5,6 +5,6 @@
  */
 
 var pH7LangIM = {
-    cannot_chat_yourself : "Man kann nicht mit sich selbst unterhalten.",
-    say : "sagt..."
+    cannot_chat_yourself: "Man kann nicht mit sich selbst unterhalten.",
+    say: "sagt..."
 };

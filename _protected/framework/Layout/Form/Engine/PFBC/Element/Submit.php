@@ -12,7 +12,7 @@ class Submit extends \PFBC\Element
     {
         $this->attributes = array('type' => 'submit', 'value' => $sLabel);
 
-        if(!is_array($aProperties))
+        if (!is_array($aProperties))
             $aProperties = array();
 
         parent::__construct('', '', $aProperties);

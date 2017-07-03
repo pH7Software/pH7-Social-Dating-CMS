@@ -9,9 +9,11 @@
     margin-bottom: 8px;
     border: 1px solid #ccc;
 }
+
 #cache_chart, #free_space_chart {
     height: 350px;
 }
+
 #user_chart {
     height: 300px;
 }

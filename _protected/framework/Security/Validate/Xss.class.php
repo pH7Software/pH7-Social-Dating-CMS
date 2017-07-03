@@ -15,6 +15,22 @@ defined('PH7') or exit('Restricted access');
 abstract class Xss
 {
     /**
+     * Purify an array of any dimension.
+     *
+     * @param array $aValues Values to purify.
+     *
+     * @return array Values purified.
+     */
+    protected function arrayClean(array $aValues)
+    {
+        foreach ($aValues as $sKey => $mVal) {
+            $aValues[$sKey] = is_array($mVal) ? $this->arrayClean($mVal) : $this->clean($mVal);
+        }
+
+        return $aValues;
+    }
+
+    /**
      * XSS Clean.
      *
      * @param string $sValue Value to purify.
@@ -24,21 +40,5 @@ abstract class Xss
     protected function clean($sValue)
     {
 
-    }
-
-    /**
-     * Purify an array of any dimension.
-     *
-     * @param array $aValues Values to purify.
-     *
-     * @return array Values purified.
-     */
-    protected function arrayClean(array $aValues)
-    {
-         foreach ($aValues as $sKey => $mVal) {
-             $aValues[$sKey] = is_array($mVal) ? $this->arrayClean($mVal) : $this->clean($mVal);
-         }
-
-         return $aValues;
     }
 }

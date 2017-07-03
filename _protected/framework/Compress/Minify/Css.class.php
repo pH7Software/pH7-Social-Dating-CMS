@@ -1,5 +1,7 @@
 <?php
+
 namespace PH7\Framework\Compress\Minify;
+
 defined('PH7') or exit('Restricted access');
 
 /**
@@ -20,9 +22,33 @@ defined('PH7') or exit('Restricted access');
  * @package Minify
  * @author Stephen Clay <steve@mrclay.org>
  * @author http://code.google.com/u/1stvamp/ (Issue 64 patch)
+ *
+ * THIS FILE HAS BEEN MODIFIED BY:
+ * @author Pierre-Henry Soria <hello@ph7cms.com>
+ * @copyright (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
  */
 class Css
 {
+    /**
+     * @var array
+     */
+    protected $_options = null;
+    /**
+     * Are we "in" a hack? I.e. are some browsers targetted until the next comment?
+     *
+     * @var bool
+     */
+    protected $_inHack = false;
+
+    /**
+     * Constructor
+     *
+     * @param array $options (currently ignored)
+     */
+    private function __construct($options)
+    {
+        $this->_options = $options;
+    }
 
     /**
      * Minify a CSS string
@@ -36,28 +62,6 @@ class Css
     public static function process($css, $options = array())
     {
         return (new self($options))->_process($css);
-    }
-
-    /**
-     * @var array
-     */
-    protected $_options = null;
-
-    /**
-     * Are we "in" a hack? I.e. are some browsers targetted until the next comment?
-     *
-     * @var bool
-     */
-    protected $_inHack = false;
-
-
-    /**
-     * Constructor
-     *
-     * @param array $options (currently ignored)
-     */
-    private function __construct($options) {
-        $this->_options = $options;
     }
 
     /**
@@ -82,7 +86,7 @@ class Css
 
         // apply callback to all valid comments (and strip out surrounding ws
         $css = preg_replace_callback('@\\s*/\\*([\\s\\S]*?)\\*/\\s*@'
-            ,array($this, '_commentCB'), $css);
+            , array($this, '_commentCB'), $css);
 
         // remove ws around { } and last semicolon in declaration block
         $css = preg_replace('/\\s*{\\s*/', '{', $css);
@@ -124,7 +128,7 @@ class Css
                 [^~>+,\\s]+      # selector part
                 {                # open declaration block
             /x'
-            ,array($this, '_selectorsCB'), $css);
+            , array($this, '_selectorsCB'), $css);
 
         // minimize hex colors
         $css = preg_replace('/([^=])#([a-f\\d])\\2([a-f\\d])\\3([a-f\\d])\\4([\\s;\\}])/i'
@@ -132,7 +136,7 @@ class Css
 
         // remove spaces between font families
         $css = preg_replace_callback('/font-family:([^;}]+)([;}])/'
-            ,array($this, '_fontFamilyCB'), $css);
+            , array($this, '_fontFamilyCB'), $css);
 
         $css = preg_replace('/@import\\s+url/', '@import url', $css);
 
@@ -147,7 +151,7 @@ class Css
             ((?:padding|margin|border|outline):\\d+(?:px|em)?) # 1 = prop : 1st numeric value
             \\s+
             /x'
-            ,"$1\n", $css);
+            , "$1\n", $css);
 
         // prevent triggering IE6 bug: http://www.crankygeek.com/ie6pebug/
         $css = preg_replace('/:first-l(etter|ine)\\{/', ':first-l$1 {', $css);
@@ -249,5 +253,4 @@ class Css
         }
         return $out . $m[2];
     }
-
 }

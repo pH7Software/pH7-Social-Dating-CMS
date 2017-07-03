@@ -10,7 +10,10 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
+
+use Exception;
 
 /* We define the URL if mod_rewrite is enabled (to enable it, sample.htaccess has to be renamed to .htaccess) */
 define('PH7_URL_SLUG_INSTALL', PH7_URL_INSTALL . (!is_url_rewrite() ? '?a=' : ''));
@@ -23,21 +26,19 @@ $sAction = (!empty($_GET['a'])) ? $_GET['a'] : 'index';
 if (is_file(PH7_ROOT_PUBLIC . '_constants.php') && $sCtrlName == 'InstallController' && $sAction == 'index')
     exit('Your site is already installed.<br />If you want to redo a clean install, please delete your "_constants.php" file and delete all the content of your database.');
 
-try
-{
-    if (is_file(PH7_ROOT_INSTALL . 'controllers/' . $sCtrlName . '.php') && class_exists($sCtrlClass))
-    {
+try {
+    if (
+        is_file(PH7_ROOT_INSTALL . 'controllers/' . $sCtrlName . '.php') &&
+        class_exists($sCtrlClass)
+    ) {
         $oCtrl = new $sCtrlClass;
 
         if (method_exists($oCtrl, $sAction))
             call_user_func(array($oCtrl, $sAction));
         else
             (new $sMainCtrlClass)->error_404();
-    }
-    else
+    } else
         (new $sMainCtrlClass)->error_404();
-}
-catch (\Exception $oE)
-{
+} catch (Exception $oE) {
     echo $oE->getMessage();
 }

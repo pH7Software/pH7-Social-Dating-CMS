@@ -14,11 +14,11 @@ class Sort extends \PFBC\OptionElement
 
     public function render()
     {
-        if(substr($this->attributes["name"], -2) != "[]")
+        if (substr($this->attributes["name"], -2) != "[]")
             $this->attributes["name"] .= "[]";
 
         echo '<div id="', $this->attributes["id"], '"><ul>';
-        foreach($this->options as $value => $text) {
+        foreach ($this->options as $value => $text) {
             $value = $this->getOptionValue($value);
             echo '<li class="ui-state-default"><input type="hidden" name="', $this->attributes["name"], '" value="', $value, '"/>', $text, '</li>';
         }

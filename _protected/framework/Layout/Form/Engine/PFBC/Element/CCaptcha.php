@@ -4,6 +4,7 @@
  * By pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Element;
+
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 
 class CCaptcha extends Textbox

@@ -9,7 +9,7 @@
 /* Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #989498;
+    color: #989498;
 }
 
 /* Red */
@@ -23,7 +23,7 @@
 .hljs-regexp,
 .hljs-link,
 .hljs-deletion {
-  color: #dd464c;
+    color: #dd464c;
 }
 
 /* Orange */
@@ -33,12 +33,12 @@
 .hljs-literal,
 .hljs-type,
 .hljs-params {
-  color: #fd8b19;
+    color: #fd8b19;
 }
 
 /* Yellow */
 .hljs-class .hljs-title {
-  color: #fdcc59;
+    color: #fdcc59;
 }
 
 /* Green */
@@ -46,38 +46,38 @@
 .hljs-symbol,
 .hljs-bullet,
 .hljs-addition {
-  color: #8fc13e;
+    color: #8fc13e;
 }
 
 /* Aqua */
 .hljs-meta {
-  color: #149b93;
+    color: #149b93;
 }
 
 /* Blue */
 .hljs-function,
 .hljs-section,
 .hljs-title {
-  color: #1290bf;
+    color: #1290bf;
 }
 
 /* Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-  color: #c85e7c;
+    color: #c85e7c;
 }
 
 .hljs {
-  display: block;
-  background: #322931;
-  color: #b9b5b8;
-  padding: 0.5em;
+    display: block;
+    background: #322931;
+    color: #b9b5b8;
+    padding: 0.5em;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }
 
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }

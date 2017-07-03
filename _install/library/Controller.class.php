@@ -69,7 +69,7 @@ abstract class Controller implements Controllable
         $this->oView->use_sub_dirs = true;
         $this->oView->setTemplateDir(PH7_ROOT_INSTALL . 'views/' . self::DEFAULT_THEME);
         $this->oView->setCompileDir(PH7_ROOT_INSTALL . 'data/caches/smarty_compile');
-        $this->oView->setCacheDir(PH7_ROOT_INSTALL  . 'data/caches/smarty_cache');
+        $this->oView->setCacheDir(PH7_ROOT_INSTALL . 'data/caches/smarty_cache');
         $this->oView->setPluginsDir(PH7_ROOT_INSTALL . 'library/Smarty/plugins');
         // Smarty Cache
         $this->oView->caching = 0; // 0 = Cache disabled |  1 = Cache never expires | 2 = Set the cache duration at "cache_lifetime" attribute

@@ -10,4 +10,6 @@ namespace PH7\Framework\Cache\Storage;
 
 use PH7\Framework\Error\CException\PH7RuntimeException;
 
-class MissingExtensionException extends PH7RuntimeException {}
+class MissingExtensionException extends PH7RuntimeException
+{
+}
