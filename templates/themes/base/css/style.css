@@ -17,40 +17,40 @@ code {
 
 /** TITLE (h1, h2, h3, h4) **/
 h1 {
-    font-size: 18px
+    font-size: 18px;
 }
 
 h2 {
-    font-size: 16px
+    font-size: 16px;
 }
 
 h3 {
-    font-size: 15px
+    font-size: 15px;
 }
 
 h4 {
-    font-size: 14px
+    font-size: 14px;
 }
 
 h1::first-letter, h2::first-letter {
-    text-transform: capitalize
+    text-transform: capitalize;
 }
 
 h1, h2, h3, h4 {
     margin-top: 2px;
-    font-weight: bold
+    font-weight: bold;
 }
 
 p {
-    margin: 0 0 0
+    margin: 0 0 0;
 }
 
 img {
-    border: 0
+    border: 0;
 }
 
 p, li, pre {
-    line-height: 1.5em
+    line-height: 1.5em;
 }
 
 /* A tag */
@@ -68,21 +68,21 @@ a:hover, a:active {
 }
 
 ul li {
-    display: block
+    display: block;
 }
 
 abbr {
-    border-bottom: 1px dotted #666
+    border-bottom: 1px dotted #666;
 }
 
 h2.first {
-    margin: 0 0 10px
+    margin: 0 0 10px;
 }
 
 /** Table **/
 table {
     border-spacing: 0;
-    border-collapse: collapse
+    border-collapse: collapse;
 }
 
 .quote::before, .quote::after {
@@ -98,28 +98,28 @@ table {
 }
 
 .italic {
-    font-style: italic
+    font-style: italic;
 }
 
 .small {
-    font-size: x-small
+    font-size: x-small;
 }
 
 .border {
     margin: 2px;
-    border: 1px solid #ccc
+    border: 1px solid #ccc;
 }
 
 .underline {
-    text-decoration: underline
+    text-decoration: underline;
 }
 
 .hidden {
-    display: none
+    display: none;
 }
 
 .inline {
-    display: inline
+    display: inline;
 }
 
 .s_button, .m_button, .b_button {
@@ -145,7 +145,7 @@ table {
 }
 
 .s_button {
-    font-size: 11px
+    font-size: 11px;
 }
 
 .m_button {
@@ -161,19 +161,19 @@ table {
 }
 
 .success {
-    color: green
+    color: green;
 }
 
 dt {
-    font-weight: bold
+    font-weight: bold;
 }
 
 dd {
-    margin-bottom: 4px
+    margin-bottom: 4px;
 }
 
 .pic {
-    margin: 5px 0 15px
+    margin: 5px 0 15px;
 }
 
 .pic img {
@@ -188,7 +188,7 @@ dd {
 }
 
 .pic img:hover {
-    opacity: 0.5
+    opacity: 0.5;
 }
 
 .label_flow {
@@ -201,47 +201,47 @@ dd {
 
 /* Very Small Margin */
 .vs_marg {
-    margin: 5px
+    margin: 5px;
 }
 
 /* Small Margin */
 .s_marg {
-    margin: 12px
+    margin: 12px;
 }
 
 /* Medium Margin */
 .m_marg {
-    margin: 20px
+    margin: 20px;
 }
 
 /* Small Top Margin */
 .s_tMarg {
-    margin-top: 12px
+    margin-top: 12px;
 }
 
 /* Small Bottom Margin */
 .s_bMarg {
-    margin-bottom: 12px
+    margin-bottom: 12px;
 }
 
 /* Small Left Margin */
 .s_lMarg {
-    margin-left: 12px
+    margin-left: 12px;
 }
 
 /* Small Right Margin */
 .s_rMarg {
-    margin-right: 12px
+    margin-right: 12px;
 }
 
 /* Very Small Padding */
 .vs_padd {
-    padding: 5px
+    padding: 5px;
 }
 
 /* Small Padding */
 .s_padd {
-    padding: 12px
+    padding: 12px;
 }
 
 .thumb {
