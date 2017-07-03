@@ -3,7 +3,7 @@
 tinyMCEPopup.requireLangPack();
 
 var templates = {
-    "window.open": "window.open('${url}','${target}','${options}')"
+    "window.open" : "window.open('${url}','${target}','${options}')"
 };
 
 function preinit() {
@@ -28,19 +28,19 @@ function init() {
     var action = "insert";
     var html;
 
-    document.getElementById('hrefbrowsercontainer').innerHTML = getBrowserHTML('hrefbrowser', 'href', 'file', 'advlink');
-    document.getElementById('popupurlbrowsercontainer').innerHTML = getBrowserHTML('popupurlbrowser', 'popupurl', 'file', 'advlink');
-    document.getElementById('targetlistcontainer').innerHTML = getTargetListHTML('targetlist', 'target');
+    document.getElementById('hrefbrowsercontainer').innerHTML = getBrowserHTML('hrefbrowser','href','file','advlink');
+    document.getElementById('popupurlbrowsercontainer').innerHTML = getBrowserHTML('popupurlbrowser','popupurl','file','advlink');
+    document.getElementById('targetlistcontainer').innerHTML = getTargetListHTML('targetlist','target');
 
     // Link list
-    html = getLinkListHTML('linklisthref', 'href');
+    html = getLinkListHTML('linklisthref','href');
     if (html == "")
         document.getElementById("linklisthrefrow").style.display = 'none';
     else
         document.getElementById("linklisthrefcontainer").innerHTML = html;
 
     // Anchor list
-    html = getAnchorListHTML('anchorlist', 'href');
+    html = getAnchorListHTML('anchorlist','href');
     if (html == "")
         document.getElementById("anchorlistrow").style.display = 'none';
     else
@@ -218,19 +218,19 @@ function parseLink(link) {
         var variableNames = template.match(new RegExp("'?\\$\\{[A-Za-z0-9\.]*\\}'?", "gi"));
         var regExp = "\\s*[A-Za-z0-9\.]*\\s*\\(";
         var replaceStr = "";
-        for (var i = 0; i < variableNames.length; i++) {
+        for (var i=0; i<variableNames.length; i++) {
             // Is string value
             if (variableNames[i].indexOf("'${") != -1)
                 regExp += "'(.*)'";
             else // Number value
                 regExp += "([0-9]*)";
 
-            replaceStr += "$" + (i + 1);
+            replaceStr += "$" + (i+1);
 
             // Cleanup variable name
             variableNames[i] = variableNames[i].replace(new RegExp("[^A-Za-z0-9]", "gi"), "");
 
-            if (i != variableNames.length - 1) {
+            if (i != variableNames.length-1) {
                 regExp += "\\s*,\\s*";
                 replaceStr += "<delim>";
             } else
@@ -243,7 +243,7 @@ function parseLink(link) {
         var variables = [];
         variables["_function"] = fnName;
         var variableValues = link.replace(new RegExp(regExp, "gi"), replaceStr).split('<delim>');
-        for (var i = 0; i < variableNames.length; i++)
+        for (var i=0; i<variableNames.length; i++)
             variables[variableNames[i]] = variableValues[i];
 
         return variables;
@@ -264,7 +264,7 @@ function parseOptions(opts) {
     var optionChunks = opts.split(',');
     var options = [];
 
-    for (var i = 0; i < optionChunks.length; i++) {
+    for (var i=0; i<optionChunks.length; i++) {
         var parts = optionChunks[i].split('=');
 
         if (parts.length == 2)
@@ -319,18 +319,18 @@ function buildOnClick() {
         if (formObj.popupleft.value != "c")
             onclick += "left=" + formObj.popupleft.value + ",";
         else
-            onclick += "left='+(screen.availWidth/2-" + (formObj.popupwidth.value / 2) + ")+',";
+            onclick += "left='+(screen.availWidth/2-" + (formObj.popupwidth.value/2) + ")+',";
     }
 
     if (formObj.popuptop.value != "") {
         if (formObj.popuptop.value != "c")
             onclick += "top=" + formObj.popuptop.value + ",";
         else
-            onclick += "top='+(screen.availHeight/2-" + (formObj.popupheight.value / 2) + ")+',";
+            onclick += "top='+(screen.availHeight/2-" + (formObj.popupheight.value/2) + ")+',";
     }
 
-    if (onclick.charAt(onclick.length - 1) == ',')
-        onclick = onclick.substring(0, onclick.length - 1);
+    if (onclick.charAt(onclick.length-1) == ',')
+        onclick = onclick.substring(0, onclick.length-1);
 
     onclick += "');";
 
@@ -367,7 +367,7 @@ function setAttrib(elm, attrib, value) {
 function getAnchorListHTML(id, target) {
     var ed = tinyMCEPopup.editor, nodes = ed.dom.select('a'), name, i, len, html = "";
 
-    for (i = 0, len = nodes.length; i < len; i++) {
+    for (i=0, len=nodes.length; i<len; i++) {
         if ((name = ed.dom.getAttrib(nodes[i], "name")) != "")
             html += '<option value="#' + name + '">' + name + '</option>';
     }
@@ -407,12 +407,10 @@ function insertAction() {
     // Create new anchor elements
     if (elm == null) {
         inst.getDoc().execCommand("unlink", false, null);
-        tinyMCEPopup.execCommand("mceInsertLink", false, "#mce_temp_url#", {skip_undo: 1});
+        tinyMCEPopup.execCommand("mceInsertLink", false, "#mce_temp_url#", {skip_undo : 1});
 
-        elementArray = tinymce.grep(inst.dom.select("a"), function (n) {
-            return inst.dom.getAttrib(n, 'href') == '#mce_temp_url#';
-        });
-        for (i = 0; i < elementArray.length; i++)
+        elementArray = tinymce.grep(inst.dom.select("a"), function(n) {return inst.dom.getAttrib(n, 'href') == '#mce_temp_url#';});
+        for (i=0; i<elementArray.length; i++)
             setAllAttribs(elm = elementArray[i]);
     } else
         setAllAttribs(elm);
@@ -491,7 +489,7 @@ function getLinkListHTML(elm_id, target_form_element, onchange_func) {
 
     html += '"><option value="">---</option>';
 
-    for (var i = 0; i < tinyMCELinkList.length; i++)
+    for (var i=0; i<tinyMCELinkList.length; i++)
         html += '<option value="' + tinyMCELinkList[i][1] + '">' + tinyMCELinkList[i][0] + '</option>';
 
     html += '</select>';
@@ -512,7 +510,7 @@ function getTargetListHTML(elm_id, target_form_element) {
     html += '<option value="_parent">' + tinyMCEPopup.getLang('advlink_dlg.target_parent') + ' (_parent)</option>';
     html += '<option value="_top">' + tinyMCEPopup.getLang('advlink_dlg.target_top') + ' (_top)</option>';
 
-    for (var i = 0; i < targets.length; i++) {
+    for (var i=0; i<targets.length; i++) {
         var key, value;
 
         if (targets[i] == "")

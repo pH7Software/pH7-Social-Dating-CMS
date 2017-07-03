@@ -8,9 +8,9 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function () {
+(function() {
     tinymce.create('tinymce.plugins.Layer', {
-        init: function (ed, url) {
+        init : function(ed, url) {
             var t = this;
 
             t.editor = ed;
@@ -18,25 +18,25 @@
             // Register commands
             ed.addCommand('mceInsertLayer', t._insertLayer, t);
 
-            ed.addCommand('mceMoveForward', function () {
+            ed.addCommand('mceMoveForward', function() {
                 t._move(1);
             });
 
-            ed.addCommand('mceMoveBackward', function () {
+            ed.addCommand('mceMoveBackward', function() {
                 t._move(-1);
             });
 
-            ed.addCommand('mceMakeAbsolute', function () {
+            ed.addCommand('mceMakeAbsolute', function() {
                 t._toggleAbsolute();
             });
 
             // Register buttons
-            ed.addButton('moveforward', {title: 'layer.forward_desc', cmd: 'mceMoveForward'});
-            ed.addButton('movebackward', {title: 'layer.backward_desc', cmd: 'mceMoveBackward'});
-            ed.addButton('absolute', {title: 'layer.absolute_desc', cmd: 'mceMakeAbsolute'});
-            ed.addButton('insertlayer', {title: 'layer.insertlayer_desc', cmd: 'mceInsertLayer'});
+            ed.addButton('moveforward', {title : 'layer.forward_desc', cmd : 'mceMoveForward'});
+            ed.addButton('movebackward', {title : 'layer.backward_desc', cmd : 'mceMoveBackward'});
+            ed.addButton('absolute', {title : 'layer.absolute_desc', cmd : 'mceMakeAbsolute'});
+            ed.addButton('insertlayer', {title : 'layer.insertlayer_desc', cmd : 'mceInsertLayer'});
 
-            ed.onInit.add(function () {
+            ed.onInit.add(function() {
                 if (tinymce.isIE)
                     ed.getDoc().execCommand('2D-Position', false, true);
             });
@@ -45,19 +45,19 @@
             ed.onVisualAid.add(t._visualAid, t);
         },
 
-        getInfo: function () {
+        getInfo : function() {
             return {
-                longname: 'Layer',
-                author: 'Moxiecode Systems AB',
-                authorurl: 'http://tinymce.moxiecode.com',
-                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/layer',
-                version: tinymce.majorVersion + "." + tinymce.minorVersion
+                longname : 'Layer',
+                author : 'Moxiecode Systems AB',
+                authorurl : 'http://tinymce.moxiecode.com',
+                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/layer',
+                version : tinymce.majorVersion + "." + tinymce.minorVersion
             };
         },
 
         // Private methods
 
-        _nodeChange: function (ed, cm, n) {
+        _nodeChange : function(ed, cm, n) {
             var le, p;
 
             le = this._getParentLayer(n);
@@ -77,10 +77,10 @@
 
         // Private methods
 
-        _visualAid: function (ed, e, s) {
+        _visualAid : function(ed, e, s) {
             var dom = ed.dom;
 
-            tinymce.each(dom.select('div,p', e), function (e) {
+            tinymce.each(dom.select('div,p', e), function(e) {
                 if (/^(absolute|relative|static)$/i.test(e.style.position)) {
                     if (s)
                         dom.addClass(e, 'mceItemVisualAid');
@@ -90,17 +90,17 @@
             });
         },
 
-        _move: function (d) {
+        _move : function(d) {
             var ed = this.editor, i, z = [], le = this._getParentLayer(ed.selection.getNode()), ci = -1, fi = -1, nl;
 
             nl = [];
-            tinymce.walk(ed.getBody(), function (n) {
+            tinymce.walk(ed.getBody(), function(n) {
                 if (n.nodeType == 1 && /^(absolute|relative|static)$/i.test(n.style.position))
                     nl.push(n);
             }, 'childNodes');
 
             // Find z-indexes
-            for (i = 0; i < nl.length; i++) {
+            for (i=0; i<nl.length; i++) {
                 z[i] = nl[i].style.zIndex ? parseInt(nl[i].style.zIndex) : 0;
 
                 if (ci < 0 && nl[i] == le)
@@ -111,7 +111,7 @@
                 // Move back
 
                 // Try find a lower one
-                for (i = 0; i < z.length; i++) {
+                for (i=0; i<z.length; i++) {
                     if (z[i] < z[ci]) {
                         fi = i;
                         break;
@@ -129,7 +129,7 @@
                 // Move forward
 
                 // Try find a higher one
-                for (i = 0; i < z.length; i++) {
+                for (i=0; i<z.length; i++) {
                     if (z[i] > z[ci]) {
                         fi = i;
                         break;
@@ -146,28 +146,28 @@
             ed.execCommand('mceRepaint');
         },
 
-        _getParentLayer: function (n) {
-            return this.editor.dom.getParent(n, function (n) {
+        _getParentLayer : function(n) {
+            return this.editor.dom.getParent(n, function(n) {
                 return n.nodeType == 1 && /^(absolute|relative|static)$/i.test(n.style.position);
             });
         },
 
-        _insertLayer: function () {
+        _insertLayer : function() {
             var ed = this.editor, p = ed.dom.getPos(ed.dom.getParent(ed.selection.getNode(), '*'));
 
             ed.dom.add(ed.getBody(), 'div', {
-                style: {
-                    position: 'absolute',
-                    left: p.x,
-                    top: (p.y > 20 ? p.y : 20),
-                    width: 100,
-                    height: 100
+                style : {
+                    position : 'absolute',
+                    left : p.x,
+                    top : (p.y > 20 ? p.y : 20),
+                    width : 100,
+                    height : 100
                 },
-                'class': 'mceItemVisualAid'
+                'class' : 'mceItemVisualAid'
             }, ed.selection.getContent() || ed.getLang('layer.content'));
         },
 
-        _toggleAbsolute: function () {
+        _toggleAbsolute : function() {
             var ed = this.editor, le = this._getParentLayer(ed.selection.getNode());
 
             if (!le)
@@ -176,11 +176,11 @@
             if (le) {
                 if (le.style.position.toLowerCase() == "absolute") {
                     ed.dom.setStyles(le, {
-                        position: '',
-                        left: '',
-                        top: '',
-                        width: '',
-                        height: ''
+                        position : '',
+                        left : '',
+                        top : '',
+                        width : '',
+                        height : ''
                     });
 
                     ed.dom.removeClass(le, 'mceItemVisualAid');

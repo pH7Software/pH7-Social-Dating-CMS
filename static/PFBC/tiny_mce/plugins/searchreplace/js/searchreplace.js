@@ -1,7 +1,7 @@
 tinyMCEPopup.requireLangPack();
 
 var SearchReplaceDialog = {
-    init: function (ed) {
+    init : function(ed) {
         var t = this, f = document.forms[0], m = tinyMCEPopup.getWindowArg("mode");
 
         t.switchMode(m);
@@ -11,12 +11,12 @@ var SearchReplaceDialog = {
         // Focus input field
         f[m + '_panel_searchstring'].focus();
 
-        mcTabs.onChange.add(function (tab_id, panel_id) {
+        mcTabs.onChange.add(function(tab_id, panel_id) {
             t.switchMode(tab_id.substring(0, tab_id.indexOf('_')));
         });
     },
 
-    switchMode: function (m) {
+    switchMode : function(m) {
         var f, lm = this.lastMode;
 
         if (lm != m) {
@@ -29,14 +29,14 @@ var SearchReplaceDialog = {
                 f[m + '_panel_casesensitivebox'].checked = f[lm + '_panel_casesensitivebox'].checked;
             }
 
-            mcTabs.displayTab(m + '_tab', m + '_panel');
+            mcTabs.displayTab(m + '_tab',  m + '_panel');
             document.getElementById("replaceBtn").style.display = (m == "replace") ? "inline" : "none";
             document.getElementById("replaceAllBtn").style.display = (m == "replace") ? "inline" : "none";
             this.lastMode = m;
         }
     },
 
-    searchNext: function (a) {
+    searchNext : function(a) {
         var ed = tinyMCEPopup.editor, se = ed.selection, r = se.getRng(), f, m = this.lastMode, s, b, fl = 0, w = ed.getWin(), wm = ed.windowManager, fo = 0;
 
         // Get input

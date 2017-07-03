@@ -1,7 +1,7 @@
 tinyMCEPopup.requireLangPack();
 
 var AnchorDialog = {
-    init: function (ed) {
+    init : function(ed) {
         var action, elm, f = document.forms[0];
 
         this.editor = ed;
@@ -16,7 +16,7 @@ var AnchorDialog = {
         f.insert.value = ed.getLang(elm ? 'update' : 'insert');
     },
 
-    update: function () {
+    update : function() {
         var ed = this.editor, elm, name = document.forms[0].anchorName.value;
 
         if (!name || !/^[a-z][a-z0-9\-\_:\.]*$/i.test(name)) {
@@ -33,7 +33,7 @@ var AnchorDialog = {
         if (elm)
             elm.name = name;
         else
-            ed.execCommand('mceInsertContent', 0, ed.dom.createHTML('a', {name: name, 'class': 'mceItemAnchor'}, ''));
+            ed.execCommand('mceInsertContent', 0, ed.dom.createHTML('a', {name : name, 'class' : 'mceItemAnchor'}, ''));
 
         tinyMCEPopup.close();
     }

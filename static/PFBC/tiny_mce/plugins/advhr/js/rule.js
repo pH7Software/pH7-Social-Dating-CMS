@@ -1,5 +1,5 @@
 var AdvHRDialog = {
-    init: function (ed) {
+    init : function(ed) {
         var dom = ed.dom, f = document.forms[0], n = ed.selection.getNode(), w;
 
         w = dom.getAttrib(n, 'width');
@@ -9,7 +9,7 @@ var AdvHRDialog = {
         selectByValue(f, 'width2', w.indexOf('%') != -1 ? '%' : 'px');
     },
 
-    update: function () {
+    update : function() {
         var ed = tinyMCEPopup.editor, h, f = document.forms[0], st = '';
 
         h = '<hr';

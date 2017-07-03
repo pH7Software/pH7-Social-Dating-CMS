@@ -102,7 +102,7 @@
     height: 108px;
 }
 
-#link_element .panel_wrapper div.current {
+#link_element  .panel_wrapper div.current {
     height: 140px;
 }
 
@@ -140,6 +140,4 @@ textarea {
     height: 55px;
 }
 
-.panel_wrapper div.current {
-    height: 420px;
-}
+.panel_wrapper div.current {height:420px;}

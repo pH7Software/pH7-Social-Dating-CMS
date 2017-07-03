@@ -1,5 +1,5 @@
 var ImageDialog = {
-    preInit: function () {
+    preInit : function() {
         var url;
 
         tinyMCEPopup.requireLangPack();
@@ -8,7 +8,7 @@ var ImageDialog = {
             document.write('<script language="javascript" type="text/javascript" src="' + tinyMCEPopup.editor.documentBaseURI.toAbsolute(url) + '"></script>');
     },
 
-    init: function (ed) {
+    init : function(ed) {
         var f = document.forms[0], nl = f.elements, ed = tinyMCEPopup.editor, dom = ed.dom, n = ed.selection.getNode(), fl = tinyMCEPopup.getParam('external_image_list', 'tinyMCEImageList');
 
         tinyMCEPopup.resizeToInnerSize();
@@ -60,17 +60,17 @@ var ImageDialog = {
         }
 
         // Setup browse button
-        document.getElementById('srcbrowsercontainer').innerHTML = getBrowserHTML('srcbrowser', 'src', 'image', 'theme_advanced_image');
+        document.getElementById('srcbrowsercontainer').innerHTML = getBrowserHTML('srcbrowser','src','image','theme_advanced_image');
         if (isVisible('srcbrowser'))
             document.getElementById('src').style.width = '260px';
 
         // Setup browse button
-        document.getElementById('onmouseoversrccontainer').innerHTML = getBrowserHTML('overbrowser', 'onmouseoversrc', 'image', 'theme_advanced_image');
+        document.getElementById('onmouseoversrccontainer').innerHTML = getBrowserHTML('overbrowser','onmouseoversrc','image','theme_advanced_image');
         if (isVisible('overbrowser'))
             document.getElementById('onmouseoversrc').style.width = '260px';
 
         // Setup browse button
-        document.getElementById('onmouseoutsrccontainer').innerHTML = getBrowserHTML('outbrowser', 'onmouseoutsrc', 'image', 'theme_advanced_image');
+        document.getElementById('onmouseoutsrccontainer').innerHTML = getBrowserHTML('outbrowser','onmouseoutsrc','image','theme_advanced_image');
         if (isVisible('outbrowser'))
             document.getElementById('onmouseoutsrc').style.width = '260px';
 
@@ -88,7 +88,7 @@ var ImageDialog = {
         this.showPreviewImage(nl.src.value, 1);
     },
 
-    insert: function (file, title) {
+    insert : function(file, title) {
         var ed = tinyMCEPopup.editor, t = this, f = document.forms[0];
 
         if (f.src.value === '') {
@@ -103,7 +103,7 @@ var ImageDialog = {
 
         if (tinyMCEPopup.getParam("accessibility_warnings", 1)) {
             if (!f.alt.value) {
-                tinyMCEPopup.confirm(tinyMCEPopup.getLang('advimage_dlg.missing_alt'), function (s) {
+                tinyMCEPopup.confirm(tinyMCEPopup.getLang('advimage_dlg.missing_alt'), function(s) {
                     if (s)
                         t.insertAndClose();
                 });
@@ -115,7 +115,7 @@ var ImageDialog = {
         t.insertAndClose();
     },
 
-    insertAndClose: function () {
+    insertAndClose : function() {
         var ed = tinyMCEPopup.editor, f = document.forms[0], nl = f.elements, v, args = {}, el;
 
         tinyMCEPopup.restoreSelection();
@@ -126,34 +126,34 @@ var ImageDialog = {
 
         if (!ed.settings.inline_styles) {
             args = {
-                vspace: nl.vspace.value,
-                hspace: nl.hspace.value,
-                border: nl.border.value,
-                align: getSelectValue(f, 'align')
+                vspace : nl.vspace.value,
+                hspace : nl.hspace.value,
+                border : nl.border.value,
+                align : getSelectValue(f, 'align')
             };
         } else {
             // Remove deprecated values
             args = {
-                vspace: '',
-                hspace: '',
-                border: '',
-                align: ''
+                vspace : '',
+                hspace : '',
+                border : '',
+                align : ''
             };
         }
 
         tinymce.extend(args, {
-            src: nl.src.value.replace(/ /g, '%20'),
-            width: nl.width.value,
-            height: nl.height.value,
-            alt: nl.alt.value,
-            title: nl.title.value,
-            'class': getSelectValue(f, 'class_list'),
-            style: nl.style.value,
-            id: nl.id.value,
-            dir: nl.dir.value,
-            lang: nl.lang.value,
-            usemap: nl.usemap.value,
-            longdesc: nl.longdesc.value
+            src : nl.src.value.replace(/ /g, '%20'),
+            width : nl.width.value,
+            height : nl.height.value,
+            alt : nl.alt.value,
+            title : nl.title.value,
+            'class' : getSelectValue(f, 'class_list'),
+            style : nl.style.value,
+            id : nl.id.value,
+            dir : nl.dir.value,
+            lang : nl.lang.value,
+            usemap : nl.usemap.value,
+            longdesc : nl.longdesc.value
         });
 
         args.onmouseover = args.onmouseout = '';
@@ -171,13 +171,13 @@ var ImageDialog = {
         if (el && el.nodeName == 'IMG') {
             ed.dom.setAttribs(el, args);
         } else {
-            tinymce.each(args, function (value, name) {
+            tinymce.each(args, function(value, name) {
                 if (value === "") {
                     delete args[name];
                 }
             });
 
-            ed.execCommand('mceInsertContent', false, tinyMCEPopup.editor.dom.createHTML('img', args), {skip_undo: 1});
+            ed.execCommand('mceInsertContent', false, tinyMCEPopup.editor.dom.createHTML('img', args), {skip_undo : 1});
             ed.undoManager.add();
         }
 
@@ -186,7 +186,7 @@ var ImageDialog = {
         tinyMCEPopup.close();
     },
 
-    getAttrib: function (e, at) {
+    getAttrib : function(e, at) {
         var ed = tinyMCEPopup.editor, dom = ed.dom, v, v2;
 
         if (ed.settings.inline_styles) {
@@ -220,7 +220,7 @@ var ImageDialog = {
                 case 'border':
                     v = 0;
 
-                    tinymce.each(['top', 'right', 'bottom', 'left'], function (sv) {
+                    tinymce.each(['top', 'right', 'bottom', 'left'], function(sv) {
                         sv = dom.getStyle(e, 'border-' + sv + '-width');
 
                         // False or not the same as prev
@@ -246,7 +246,7 @@ var ImageDialog = {
         return '';
     },
 
-    setSwapImage: function (st) {
+    setSwapImage : function(st) {
         var f = document.forms[0];
 
         f.onmousemovecheck.checked = st;
@@ -260,19 +260,19 @@ var ImageDialog = {
             f.out_list.disabled = !st;
 
         f.onmouseoversrc.disabled = !st;
-        f.onmouseoutsrc.disabled = !st;
+        f.onmouseoutsrc.disabled  = !st;
     },
 
-    fillClassList: function (id) {
+    fillClassList : function(id) {
         var dom = tinyMCEPopup.dom, lst = dom.get(id), v, cl;
 
         if (v = tinyMCEPopup.getParam('theme_advanced_styles')) {
             cl = [];
 
-            tinymce.each(v.split(';'), function (v) {
+            tinymce.each(v.split(';'), function(v) {
                 var p = v.split('=');
 
-                cl.push({'title': p[0], 'class': p[1]});
+                cl.push({'title' : p[0], 'class' : p[1]});
             });
         } else
             cl = tinyMCEPopup.editor.dom.getClasses();
@@ -281,14 +281,14 @@ var ImageDialog = {
             lst.options.length = 0;
             lst.options[lst.options.length] = new Option(tinyMCEPopup.getLang('not_set'), '');
 
-            tinymce.each(cl, function (o) {
+            tinymce.each(cl, function(o) {
                 lst.options[lst.options.length] = new Option(o.title || o['class'], o['class']);
             });
         } else
             dom.remove(dom.getParent(id, 'tr'));
     },
 
-    fillFileList: function (id, l) {
+    fillFileList : function(id, l) {
         var dom = tinyMCEPopup.dom, lst = dom.get(id), v, cl;
 
         l = typeof(l) === 'function' ? l() : window[l];
@@ -297,20 +297,20 @@ var ImageDialog = {
         if (l && l.length > 0) {
             lst.options[lst.options.length] = new Option('', '');
 
-            tinymce.each(l, function (o) {
+            tinymce.each(l, function(o) {
                 lst.options[lst.options.length] = new Option(o[0], o[1]);
             });
         } else
             dom.remove(dom.getParent(id, 'tr'));
     },
 
-    resetImageData: function () {
+    resetImageData : function() {
         var f = document.forms[0];
 
         f.elements.width.value = f.elements.height.value = '';
     },
 
-    updateImageData: function (img, st) {
+    updateImageData : function(img, st) {
         var f = document.forms[0];
 
         if (!st) {
@@ -321,7 +321,7 @@ var ImageDialog = {
         this.preloadImg = img;
     },
 
-    changeAppearance: function () {
+    changeAppearance : function() {
         var ed = tinyMCEPopup.editor, f = document.forms[0], img = document.getElementById('alignSampleImg');
 
         if (img) {
@@ -336,7 +336,7 @@ var ImageDialog = {
         }
     },
 
-    changeHeight: function () {
+    changeHeight : function() {
         var f = document.forms[0], tp, t = this;
 
         if (!f.constrain.checked || !t.preloadImg) {
@@ -350,7 +350,7 @@ var ImageDialog = {
         f.height.value = tp.toFixed(0);
     },
 
-    changeWidth: function () {
+    changeWidth : function() {
         var f = document.forms[0], tp, t = this;
 
         if (!f.constrain.checked || !t.preloadImg) {
@@ -364,8 +364,8 @@ var ImageDialog = {
         f.width.value = tp.toFixed(0);
     },
 
-    updateStyle: function (ty) {
-        var dom = tinyMCEPopup.dom, b, bStyle, bColor, v, isIE = tinymce.isIE, f = document.forms[0], img = dom.create('img', {style: dom.get('style').value});
+    updateStyle : function(ty) {
+        var dom = tinyMCEPopup.dom, b, bStyle, bColor, v, isIE = tinymce.isIE, f = document.forms[0], img = dom.create('img', {style : dom.get('style').value});
 
         if (tinyMCEPopup.editor.settings.inline_styles) {
             // Handle align
@@ -437,10 +437,10 @@ var ImageDialog = {
         }
     },
 
-    changeMouseMove: function () {
+    changeMouseMove : function() {
     },
 
-    showPreviewImage: function (u, st) {
+    showPreviewImage : function(u, st) {
         if (!u) {
             tinyMCEPopup.dom.setHTML('prev', '');
             return;

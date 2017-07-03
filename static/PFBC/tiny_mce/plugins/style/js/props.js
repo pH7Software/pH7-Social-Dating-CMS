@@ -32,15 +32,15 @@ function init() {
 
     ce.style.cssText = tinyMCEPopup.getWindowArg('style_text');
 
-    h = getBrowserHTML('background_image_browser', 'background_image', 'image', 'advimage');
+    h = getBrowserHTML('background_image_browser','background_image','image','advimage');
     document.getElementById("background_image_browser").innerHTML = h;
 
-    document.getElementById('text_color_pickcontainer').innerHTML = getColorPickerHTML('text_color_pick', 'text_color');
-    document.getElementById('background_color_pickcontainer').innerHTML = getColorPickerHTML('background_color_pick', 'background_color');
-    document.getElementById('border_color_top_pickcontainer').innerHTML = getColorPickerHTML('border_color_top_pick', 'border_color_top');
-    document.getElementById('border_color_right_pickcontainer').innerHTML = getColorPickerHTML('border_color_right_pick', 'border_color_right');
-    document.getElementById('border_color_bottom_pickcontainer').innerHTML = getColorPickerHTML('border_color_bottom_pick', 'border_color_bottom');
-    document.getElementById('border_color_left_pickcontainer').innerHTML = getColorPickerHTML('border_color_left_pick', 'border_color_left');
+    document.getElementById('text_color_pickcontainer').innerHTML = getColorPickerHTML('text_color_pick','text_color');
+    document.getElementById('background_color_pickcontainer').innerHTML = getColorPickerHTML('background_color_pick','background_color');
+    document.getElementById('border_color_top_pickcontainer').innerHTML = getColorPickerHTML('border_color_top_pick','border_color_top');
+    document.getElementById('border_color_right_pickcontainer').innerHTML = getColorPickerHTML('border_color_right_pick','border_color_right');
+    document.getElementById('border_color_bottom_pickcontainer').innerHTML = getColorPickerHTML('border_color_bottom_pick','border_color_bottom');
+    document.getElementById('border_color_left_pickcontainer').innerHTML = getColorPickerHTML('border_color_left_pick','border_color_left');
 
     fillSelect(0, 'text_font', 'style_font', defaultFonts, ';', true);
     fillSelect(0, 'text_size', 'style_font_size', defaultSizes, ';', true);
@@ -337,11 +337,11 @@ function isSame(e, pr, sf, b) {
     a[2] = e.style[pr + b[2] + sf];
     a[3] = e.style[pr + b[3] + sf];
 
-    for (i = 0; i < a.length; i++) {
+    for (i=0; i<a.length; i++) {
         if (a[i] == null)
             return false;
 
-        for (x = 0; x < a.length; x++) {
+        for (x=0; x<a.length; x++) {
             if (a[x] != a[i])
                 return false;
         }
@@ -353,11 +353,11 @@ function isSame(e, pr, sf, b) {
 function hasEqualValues(a) {
     var i, x;
 
-    for (i = 0; i < a.length; i++) {
+    for (i=0; i<a.length; i++) {
         if (a[i] == null)
             return false;
 
-        for (x = 0; x < a.length; x++) {
+        for (x=0; x<a.length; x++) {
             if (a[x] != a[i])
                 return false;
         }
@@ -547,8 +547,8 @@ function isNum(s) {
 function showDisabledControls() {
     var f = document.forms, i, a;
 
-    for (i = 0; i < f.length; i++) {
-        for (a = 0; a < f[i].elements.length; a++) {
+    for (i=0; i<f.length; i++) {
+        for (a=0; a<f[i].elements.length; a++) {
             if (f[i].elements[a].disabled)
                 tinyMCEPopup.editor.dom.addClass(f[i].elements[a], "disabled");
             else
@@ -567,7 +567,7 @@ function fillSelect(f, s, param, dval, sep, em) {
         addSelectValue(f, s, "", "");
 
     ar = tinyMCEPopup.getParam(param, dval).split(sep);
-    for (i = 0; i < ar.length; i++) {
+    for (i=0; i<ar.length; i++) {
         se = false;
 
         if (ar[i].charAt(0) == '+') {

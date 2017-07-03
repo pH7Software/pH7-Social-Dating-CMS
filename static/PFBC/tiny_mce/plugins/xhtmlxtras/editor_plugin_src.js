@@ -8,85 +8,85 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function () {
+(function() {
     tinymce.create('tinymce.plugins.XHTMLXtrasPlugin', {
-        init: function (ed, url) {
+        init : function(ed, url) {
             // Register commands
-            ed.addCommand('mceCite', function () {
+            ed.addCommand('mceCite', function() {
                 ed.windowManager.open({
-                    file: url + '/cite.htm',
-                    width: 350 + parseInt(ed.getLang('xhtmlxtras.cite_delta_width', 0)),
-                    height: 250 + parseInt(ed.getLang('xhtmlxtras.cite_delta_height', 0)),
-                    inline: 1
+                    file : url + '/cite.htm',
+                    width : 350 + parseInt(ed.getLang('xhtmlxtras.cite_delta_width', 0)),
+                    height : 250 + parseInt(ed.getLang('xhtmlxtras.cite_delta_height', 0)),
+                    inline : 1
                 }, {
-                    plugin_url: url
+                    plugin_url : url
                 });
             });
 
-            ed.addCommand('mceAcronym', function () {
+            ed.addCommand('mceAcronym', function() {
                 ed.windowManager.open({
-                    file: url + '/acronym.htm',
-                    width: 350 + parseInt(ed.getLang('xhtmlxtras.acronym_delta_width', 0)),
-                    height: 250 + parseInt(ed.getLang('xhtmlxtras.acronym_delta_height', 0)),
-                    inline: 1
+                    file : url + '/acronym.htm',
+                    width : 350 + parseInt(ed.getLang('xhtmlxtras.acronym_delta_width', 0)),
+                    height : 250 + parseInt(ed.getLang('xhtmlxtras.acronym_delta_height', 0)),
+                    inline : 1
                 }, {
-                    plugin_url: url
+                    plugin_url : url
                 });
             });
 
-            ed.addCommand('mceAbbr', function () {
+            ed.addCommand('mceAbbr', function() {
                 ed.windowManager.open({
-                    file: url + '/abbr.htm',
-                    width: 350 + parseInt(ed.getLang('xhtmlxtras.abbr_delta_width', 0)),
-                    height: 250 + parseInt(ed.getLang('xhtmlxtras.abbr_delta_height', 0)),
-                    inline: 1
+                    file : url + '/abbr.htm',
+                    width : 350 + parseInt(ed.getLang('xhtmlxtras.abbr_delta_width', 0)),
+                    height : 250 + parseInt(ed.getLang('xhtmlxtras.abbr_delta_height', 0)),
+                    inline : 1
                 }, {
-                    plugin_url: url
+                    plugin_url : url
                 });
             });
 
-            ed.addCommand('mceDel', function () {
+            ed.addCommand('mceDel', function() {
                 ed.windowManager.open({
-                    file: url + '/del.htm',
-                    width: 340 + parseInt(ed.getLang('xhtmlxtras.del_delta_width', 0)),
-                    height: 310 + parseInt(ed.getLang('xhtmlxtras.del_delta_height', 0)),
-                    inline: 1
+                    file : url + '/del.htm',
+                    width : 340 + parseInt(ed.getLang('xhtmlxtras.del_delta_width', 0)),
+                    height : 310 + parseInt(ed.getLang('xhtmlxtras.del_delta_height', 0)),
+                    inline : 1
                 }, {
-                    plugin_url: url
+                    plugin_url : url
                 });
             });
 
-            ed.addCommand('mceIns', function () {
+            ed.addCommand('mceIns', function() {
                 ed.windowManager.open({
-                    file: url + '/ins.htm',
-                    width: 340 + parseInt(ed.getLang('xhtmlxtras.ins_delta_width', 0)),
-                    height: 310 + parseInt(ed.getLang('xhtmlxtras.ins_delta_height', 0)),
-                    inline: 1
+                    file : url + '/ins.htm',
+                    width : 340 + parseInt(ed.getLang('xhtmlxtras.ins_delta_width', 0)),
+                    height : 310 + parseInt(ed.getLang('xhtmlxtras.ins_delta_height', 0)),
+                    inline : 1
                 }, {
-                    plugin_url: url
+                    plugin_url : url
                 });
             });
 
-            ed.addCommand('mceAttributes', function () {
+            ed.addCommand('mceAttributes', function() {
                 ed.windowManager.open({
-                    file: url + '/attributes.htm',
-                    width: 380 + parseInt(ed.getLang('xhtmlxtras.attr_delta_width', 0)),
-                    height: 370 + parseInt(ed.getLang('xhtmlxtras.attr_delta_height', 0)),
-                    inline: 1
+                    file : url + '/attributes.htm',
+                    width : 380 + parseInt(ed.getLang('xhtmlxtras.attr_delta_width', 0)),
+                    height : 370 + parseInt(ed.getLang('xhtmlxtras.attr_delta_height', 0)),
+                    inline : 1
                 }, {
-                    plugin_url: url
+                    plugin_url : url
                 });
             });
 
             // Register buttons
-            ed.addButton('cite', {title: 'xhtmlxtras.cite_desc', cmd: 'mceCite'});
-            ed.addButton('acronym', {title: 'xhtmlxtras.acronym_desc', cmd: 'mceAcronym'});
-            ed.addButton('abbr', {title: 'xhtmlxtras.abbr_desc', cmd: 'mceAbbr'});
-            ed.addButton('del', {title: 'xhtmlxtras.del_desc', cmd: 'mceDel'});
-            ed.addButton('ins', {title: 'xhtmlxtras.ins_desc', cmd: 'mceIns'});
-            ed.addButton('attribs', {title: 'xhtmlxtras.attribs_desc', cmd: 'mceAttributes'});
+            ed.addButton('cite', {title : 'xhtmlxtras.cite_desc', cmd : 'mceCite'});
+            ed.addButton('acronym', {title : 'xhtmlxtras.acronym_desc', cmd : 'mceAcronym'});
+            ed.addButton('abbr', {title : 'xhtmlxtras.abbr_desc', cmd : 'mceAbbr'});
+            ed.addButton('del', {title : 'xhtmlxtras.del_desc', cmd : 'mceDel'});
+            ed.addButton('ins', {title : 'xhtmlxtras.ins_desc', cmd : 'mceIns'});
+            ed.addButton('attribs', {title : 'xhtmlxtras.attribs_desc', cmd : 'mceAttributes'});
 
-            ed.onNodeChange.add(function (ed, cm, n, co) {
+            ed.onNodeChange.add(function(ed, cm, n, co) {
                 n = ed.dom.getParent(n, 'CITE,ACRONYM,ABBR,DEL,INS');
 
                 cm.setDisabled('cite', co);
@@ -110,19 +110,19 @@
                 }
             });
 
-            ed.onPreInit.add(function () {
+            ed.onPreInit.add(function() {
                 // Fixed IE issue where it can't handle these elements correctly
                 ed.dom.create('abbr');
             });
         },
 
-        getInfo: function () {
+        getInfo : function() {
             return {
-                longname: 'XHTML Xtras Plugin',
-                author: 'Moxiecode Systems AB',
-                authorurl: 'http://tinymce.moxiecode.com',
-                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/xhtmlxtras',
-                version: tinymce.majorVersion + "." + tinymce.minorVersion
+                longname : 'XHTML Xtras Plugin',
+                author : 'Moxiecode Systems AB',
+                authorurl : 'http://tinymce.moxiecode.com',
+                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/xhtmlxtras',
+                version : tinymce.majorVersion + "." + tinymce.minorVersion
             };
         }
     });

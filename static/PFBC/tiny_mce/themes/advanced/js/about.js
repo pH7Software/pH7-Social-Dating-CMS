@@ -23,7 +23,7 @@ function init() {
     html += '</thead>';
     html += '<tbody>';
 
-    tinymce.each(ed.plugins, function (p, n) {
+    tinymce.each(ed.plugins, function(p, n) {
         var info;
 
         if (!p.getInfo)

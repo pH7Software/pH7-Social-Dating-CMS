@@ -8,24 +8,24 @@
  * Contributing: http://tinymce.moxiecode.com/contributing
  */
 
-(function () {
+(function() {
     var DOM = tinymce.DOM;
 
     tinymce.create('tinymce.plugins.FullScreenPlugin', {
-        init: function (ed, url) {
+        init : function(ed, url) {
             var t = this, s = {}, vp, posCss;
 
             t.editor = ed;
 
             // Register commands
-            ed.addCommand('mceFullScreen', function () {
+            ed.addCommand('mceFullScreen', function() {
                 var win, de = DOM.doc.documentElement;
 
                 if (ed.getParam('fullscreen_is_enabled')) {
                     if (ed.getParam('fullscreen_new_window'))
                         closeFullscreen(); // Call to close in new window
                     else {
-                        DOM.win.setTimeout(function () {
+                        DOM.win.setTimeout(function() {
                             tinymce.dom.Event.remove(DOM.win, 'resize', t.resizeFunc);
                             tinyMCE.get(ed.getParam('fullscreen_editor_id')).setContent(ed.getContent());
                             tinyMCE.remove(ed);
@@ -85,12 +85,11 @@
                         posCss = 'fixed;top:0';
 
                     n = DOM.add(DOM.doc.body, 'div', {
-                        id: 'mce_fullscreen_container',
-                        style: 'position:' + posCss + ';left:0;width:' + vp.w + 'px;height:' + vp.h + 'px;z-index:200000;'
-                    });
-                    DOM.add(n, 'div', {id: 'mce_fullscreen'});
+                        id : 'mce_fullscreen_container',
+                        style : 'position:' + posCss + ';left:0;width:' + vp.w + 'px;height:' + vp.h + 'px;z-index:200000;'});
+                    DOM.add(n, 'div', {id : 'mce_fullscreen'});
 
-                    tinymce.each(ed.settings, function (v, n) {
+                    tinymce.each(ed.settings, function(v, n) {
                         s[n] = v;
                     });
 
@@ -100,12 +99,12 @@
                     s.fullscreen_is_enabled = true;
                     s.fullscreen_editor_id = ed.id;
                     s.theme_advanced_resizing = false;
-                    s.save_onsavecallback = function () {
+                    s.save_onsavecallback = function() {
                         ed.setContent(tinyMCE.get(s.id).getContent());
                         ed.execCommand('mceSave');
                     };
 
-                    tinymce.each(ed.getParam('fullscreen_settings'), function (v, k) {
+                    tinymce.each(ed.getParam('fullscreen_settings'), function(v, k) {
                         s[k] = v;
                     });
 
@@ -113,7 +112,7 @@
                         s.theme_advanced_toolbar_location = 'top';
 
                     t.fullscreenEditor = new tinymce.Editor('mce_fullscreen', s);
-                    t.fullscreenEditor.onInit.add(function () {
+                    t.fullscreenEditor.onInit.add(function() {
                         t.fullscreenEditor.setContent(ed.getContent());
                         t.fullscreenEditor.focus();
                     });
@@ -124,7 +123,7 @@
                     t.fullscreenElement.update();
                     //document.body.overflow = 'hidden';
 
-                    t.resizeFunc = tinymce.dom.Event.add(DOM.win, 'resize', function () {
+                    t.resizeFunc = tinymce.dom.Event.add(DOM.win, 'resize', function() {
                         var vp = tinymce.DOM.getViewPort(), fed = t.fullscreenEditor, outerSize, innerSize;
 
                         // Get outer/inner size to get a delta size that can be used to calc the new iframe size
@@ -137,20 +136,20 @@
             });
 
             // Register buttons
-            ed.addButton('fullscreen', {title: 'fullscreen.desc', cmd: 'mceFullScreen'});
+            ed.addButton('fullscreen', {title : 'fullscreen.desc', cmd : 'mceFullScreen'});
 
-            ed.onNodeChange.add(function (ed, cm) {
+            ed.onNodeChange.add(function(ed, cm) {
                 cm.setActive('fullscreen', ed.getParam('fullscreen_is_enabled'));
             });
         },
 
-        getInfo: function () {
+        getInfo : function() {
             return {
-                longname: 'Fullscreen',
-                author: 'Moxiecode Systems AB',
-                authorurl: 'http://tinymce.moxiecode.com',
-                infourl: 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/fullscreen',
-                version: tinymce.majorVersion + "." + tinymce.minorVersion
+                longname : 'Fullscreen',
+                author : 'Moxiecode Systems AB',
+                authorurl : 'http://tinymce.moxiecode.com',
+                infourl : 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/fullscreen',
+                version : tinymce.majorVersion + "." + tinymce.minorVersion
             };
         }
     });

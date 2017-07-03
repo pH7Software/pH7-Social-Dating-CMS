@@ -35,7 +35,7 @@ function initCommonAttributes(elm) {
 }
 
 function setFormValue(name, value) {
-    if (document.forms[0].elements[name]) document.forms[0].elements[name].value = value;
+    if(document.forms[0].elements[name]) document.forms[0].elements[name].value = value;
 }
 
 function insertDateTime(id) {
@@ -47,7 +47,7 @@ function getDateTime(d, fmt) {
     fmt = fmt.replace("%r", "%I:%M:%S %p");
     fmt = fmt.replace("%Y", "" + d.getFullYear());
     fmt = fmt.replace("%y", "" + d.getYear());
-    fmt = fmt.replace("%m", addZeros(d.getMonth() + 1, 2));
+    fmt = fmt.replace("%m", addZeros(d.getMonth()+1, 2));
     fmt = fmt.replace("%d", addZeros(d.getDate(), 2));
     fmt = fmt.replace("%H", "" + addZeros(d.getHours(), 2));
     fmt = fmt.replace("%M", "" + addZeros(d.getMinutes(), 2));
@@ -65,7 +65,7 @@ function addZeros(value, len) {
     value = "" + value;
 
     if (value.length < len) {
-        for (i = 0; i < (len - value.length); i++)
+        for (i=0; i<(len-value.length); i++)
             value = "0" + value;
     }
 
@@ -79,7 +79,7 @@ function selectByValue(form_obj, field_name, value, add_custom, ignore_case) {
     var sel = form_obj.elements[field_name];
 
     var found = false;
-    for (var i = 0; i < sel.options.length; i++) {
+    for (var i=0; i<sel.options.length; i++) {
         var option = sel.options[i];
 
         if (option.value == value || (ignore_case && option.value.toLowerCase() == value.toLowerCase())) {
@@ -112,28 +112,28 @@ function setAllCommonAttribs(elm) {
     setAttrib(elm, 'dir');
     setAttrib(elm, 'lang');
     /*setAttrib(elm, 'onfocus');
-     setAttrib(elm, 'onblur');
-     setAttrib(elm, 'onclick');
-     setAttrib(elm, 'ondblclick');
-     setAttrib(elm, 'onmousedown');
-     setAttrib(elm, 'onmouseup');
-     setAttrib(elm, 'onmouseover');
-     setAttrib(elm, 'onmousemove');
-     setAttrib(elm, 'onmouseout');
-     setAttrib(elm, 'onkeypress');
-     setAttrib(elm, 'onkeydown');
-     setAttrib(elm, 'onkeyup');*/
+    setAttrib(elm, 'onblur');
+    setAttrib(elm, 'onclick');
+    setAttrib(elm, 'ondblclick');
+    setAttrib(elm, 'onmousedown');
+    setAttrib(elm, 'onmouseup');
+    setAttrib(elm, 'onmouseover');
+    setAttrib(elm, 'onmousemove');
+    setAttrib(elm, 'onmouseout');
+    setAttrib(elm, 'onkeypress');
+    setAttrib(elm, 'onkeydown');
+    setAttrib(elm, 'onkeyup');*/
 }
 
 SXE = {
-    currentAction: "insert",
-    inst: tinyMCEPopup.editor,
-    updateElement: null
+    currentAction : "insert",
+    inst : tinyMCEPopup.editor,
+    updateElement : null
 }
 
 SXE.focusElement = SXE.inst.selection.getNode();
 
-SXE.initElementDialog = function (element_name) {
+SXE.initElementDialog = function(element_name) {
     addClassesToList('class', 'xhtmlxtras_styles');
     TinyMCE_EditableSelects.init();
 
@@ -151,17 +151,17 @@ SXE.initElementDialog = function (element_name) {
     document.forms[0].insert.value = tinyMCEPopup.getLang(SXE.currentAction, 'Insert', true);
 }
 
-SXE.insertElement = function (element_name) {
+SXE.insertElement = function(element_name) {
     var elm = SXE.inst.dom.getParent(SXE.focusElement, element_name.toUpperCase()), h, tagName;
 
     if (elm == null) {
         var s = SXE.inst.selection.getContent();
-        if (s.length > 0) {
+        if(s.length > 0) {
             tagName = element_name;
 
             insertInlineElement(element_name);
             var elementArray = tinymce.grep(SXE.inst.dom.select(element_name));
-            for (var i = 0; i < elementArray.length; i++) {
+            for (var i=0; i<elementArray.length; i++) {
                 var elm = elementArray[i];
 
                 if (SXE.inst.dom.getAttrib(elm, 'data-mce-new')) {
@@ -181,26 +181,26 @@ SXE.insertElement = function (element_name) {
     tinyMCEPopup.execCommand('mceEndUndoLevel');
 }
 
-SXE.removeElement = function (element_name) {
+SXE.removeElement = function(element_name){
     element_name = element_name.toLowerCase();
     elm = SXE.inst.dom.getParent(SXE.focusElement, element_name.toUpperCase());
-    if (elm && elm.nodeName.toUpperCase() == element_name.toUpperCase()) {
+    if(elm && elm.nodeName.toUpperCase() == element_name.toUpperCase()){
         tinyMCE.execCommand('mceRemoveNode', false, elm);
         SXE.inst.nodeChanged();
         tinyMCEPopup.execCommand('mceEndUndoLevel');
     }
 }
 
-SXE.showRemoveButton = function () {
-    document.getElementById("remove").style.display = '';
+SXE.showRemoveButton = function() {
+        document.getElementById("remove").style.display = '';
 }
 
-SXE.containsClass = function (elm, cl) {
+SXE.containsClass = function(elm,cl) {
     return (elm.className.indexOf(cl) > -1) ? true : false;
 }
 
-SXE.removeClass = function (elm, cl) {
-    if (elm.className == null || elm.className == "" || !SXE.containsClass(elm, cl)) {
+SXE.removeClass = function(elm,cl) {
+    if(elm.className == null || elm.className == "" || !SXE.containsClass(elm,cl)) {
         return true;
     }
     var classNames = elm.className.split(" ");
@@ -210,11 +210,11 @@ SXE.removeClass = function (elm, cl) {
             newClassNames += (classNames[x] + " ");
         }
     }
-    elm.className = newClassNames.substring(0, newClassNames.length - 1); //removes extra space at the end
+    elm.className = newClassNames.substring(0,newClassNames.length-1); //removes extra space at the end
 }
 
-SXE.addClass = function (elm, cl) {
-    if (!SXE.containsClass(elm, cl)) elm.className ? elm.className += " " + cl : elm.className = cl;
+SXE.addClass = function(elm,cl) {
+    if(!SXE.containsClass(elm,cl)) elm.className ? elm.className += " " + cl : elm.className = cl;
     return true;
 }
 
@@ -222,8 +222,8 @@ function insertInlineElement(en) {
     var ed = tinyMCEPopup.editor, dom = ed.dom;
 
     ed.getDoc().execCommand('FontName', false, 'mceinline');
-    tinymce.each(dom.select('span,font'), function (n) {
+    tinymce.each(dom.select('span,font'), function(n) {
         if (n.style.fontFamily == 'mceinline' || n.face == 'mceinline')
-            dom.replace(dom.create(en, {'data-mce-new': 1}), n, 1);
+            dom.replace(dom.create(en, {'data-mce-new' : 1}), n, 1);
     });
 }

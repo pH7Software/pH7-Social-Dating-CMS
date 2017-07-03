@@ -73,7 +73,7 @@ class CKEditor
      * When %CKEditor is created with the editor() method, a HTML &lt;textarea&gt; element is created,
      * it will be displayed to anyone with JavaScript disabled or with incompatible browser.
      */
-    public $textareaAttributes = array("rows" => 8, "cols" => 60);
+    public $textareaAttributes = array( "rows" => 8, "cols" => 60 );
     /**
      * A string indicating the creation date of %CKEditor.
      * Do not change it unless you want to force browsers to not use previously cached version of %CKEditor.
@@ -91,10 +91,9 @@ class CKEditor
     /**
      * Main Constructor.
      *
-     * @param $basePath (string) URL to the %CKEditor installation directory (optional).
+     *  @param $basePath (string) URL to the %CKEditor installation directory (optional).
      */
-    function __construct($basePath = null)
-    {
+    function __construct($basePath = null) {
         if (!empty($basePath)) {
             $this->basePath = $basePath;
         }
@@ -133,7 +132,7 @@ class CKEditor
     {
         $attr = "";
         foreach ($this->textareaAttributes as $key => $val) {
-            $attr .= " " . $key . '="' . str_replace('"', '&quot;', $val) . '"';
+            $attr.= " " . $key . '="' . str_replace('"', '&quot;', $val) . '"';
         }
         $out = "<textarea name=\"" . $name . "\"" . $attr . ">" . htmlspecialchars($value) . "</textarea>\n";
         if (!$this->initialized) {
@@ -144,9 +143,9 @@ class CKEditor
 
         $js = $this->returnGlobalEvents();
         if (!empty($_config))
-            $js .= "CKEDITOR.replace('" . $name . "', " . $this->jsEncode($_config) . ");";
+            $js .= "CKEDITOR.replace('".$name."', ".$this->jsEncode($_config).");";
         else
-            $js .= "CKEDITOR.replace('" . $name . "');";
+            $js .= "CKEDITOR.replace('".$name."');";
 
         $out .= $this->script($js);
 
@@ -182,9 +181,10 @@ class CKEditor
 
         $js = $this->returnGlobalEvents();
         if (!empty($_config)) {
-            $js .= "CKEDITOR.replace('" . $id . "', " . $this->jsEncode($_config) . ");";
-        } else {
-            $js .= "CKEDITOR.replace('" . $id . "');";
+            $js .= "CKEDITOR.replace('".$id."', ".$this->jsEncode($_config).");";
+        }
+        else {
+            $js .= "CKEDITOR.replace('".$id."');";
         }
         $out .= $this->script($js);
 
@@ -226,19 +226,21 @@ class CKEditor
         if (empty($_config)) {
             if (empty($className)) {
                 $js .= "CKEDITOR.replaceAll();";
-            } else {
-                $js .= "CKEDITOR.replaceAll('" . $className . "');";
             }
-        } else {
+            else {
+                $js .= "CKEDITOR.replaceAll('".$className."');";
+            }
+        }
+        else {
             $classDetection = "";
             $js .= "CKEDITOR.replaceAll( function(textarea, config)
-            $js .= "CKEDITOR . replaceAll( {\n";
+            $js .= "CKEDITOR.replaceAll( {\n";
             if (!empty($className)) {
                 $js .= "    var classRegex = new RegExp('(?:^| )' + '". $className ."' + '(?:$| )');\n";
-                $js .= "    if (!classRegex . test(textarea . className)) \n";
+                $js .= "    if (!classRegex.test(textarea.className))\n";
                 $js .= "        return false;\n";
             }
-            $js .= "    CKEDITOR . tools . extend(config, ". $this->jsEncode($_config) .", true);";
+            $js .= "    CKEDITOR.tools.extend(config, ". $this->jsEncode($_config) .", true);";
             $js .= "} );";
 
         }
@@ -341,7 +343,7 @@ class CKEditor
      */
     private function script($js)
     {
-        $out = " < script type = \"text/javascript\">";
+        $out = "<script type=\"text/javascript\">";
         $out .= "//<![CDATA[\n";
         $out .= $js;
         $out .= "\n//]]>";
@@ -350,43 +352,43 @@ class CKEditor
         return $out;
     }
 
-        /**
-         * Returns the configuration array (global and instance specific settings are merged into one array).
-         *
-         * @param $config (array) The specific configurations to apply to editor instance.
-         * @param $events (array) Event listeners for editor instance.
-         */
-        private
-        function configSettings($config = array(), $events = array())
-        {
-            $_config = $this->config;
-            $_events = $this->events;
+    /**
+     * Returns the configuration array (global and instance specific settings are merged into one array).
+     *
+     * @param $config (array) The specific configurations to apply to editor instance.
+     * @param $events (array) Event listeners for editor instance.
+     */
+    private function configSettings($config = array(), $events = array())
+    {
+        $_config = $this->config;
+        $_events = $this->events;
 
-            if (is_array($config) && !empty($config)) {
-                $_config = array_merge($_config, $config);
-            }
+        if (is_array($config) && !empty($config)) {
+            $_config = array_merge($_config, $config);
+        }
 
-            if (is_array($events) && !empty($events)) {
-                foreach ($events as $eventName => $code) {
-                    if (!isset($_events[$eventName])) {
-                        $_events[$eventName] = array();
-                    }
-                    if (!in_array($code, $_events[$eventName])) {
-                        $_events[$eventName][] = $code;
-                    }
+        if (is_array($events) && !empty($events)) {
+            foreach ($events as $eventName => $code) {
+                if (!isset($_events[$eventName])) {
+                    $_events[$eventName] = array();
+                }
+                if (!in_array($code, $_events[$eventName])) {
+                    $_events[$eventName][] = $code;
                 }
             }
+        }
 
-            if (!empty($_events)) {
-                foreach ($_events as $eventName => $handlers) {
-                    if (empty($handlers)) {
-                        continue;
-                    } else if (count($handlers) == 1) {
-                        $_config['on'][$eventName] = '@@' . $handlers[0];
-                    } else {
-                        $_config['on'][$eventName] = '@@function (ev)
-                    $_config['on'][$eventName] = '@@{
-                            ';
+        if (!empty($_events)) {
+            foreach($_events as $eventName => $handlers) {
+                if (empty($handlers)) {
+                    continue;
+                }
+                else if (count($handlers) == 1) {
+                    $_config['on'][$eventName] = '@@'.$handlers[0];
+                }
+                else {
+                    $_config['on'][$eventName] = '@@function (ev)
+                    $_config['on'][$eventName] = '@@{';
                     foreach ($handlers as $handler => $code) {
                         $_config['on'][$eventName] .= '('.$code.')(ev);';
                     }
@@ -449,15 +451,15 @@ class CKEditor
         $ckeditorPath = $this->ckeditorPath();
 
         if (!empty($this->timestamp) && $this->timestamp != "%"."TIMESTAMP%") {
-            $args = ' ? t = ' . $this->timestamp;
+            $args = '?t=' . $this->timestamp;
         }
 
         // Skip relative paths...
-        if (strpos($ckeditorPath, ' ..') !== 0) {
+        if (strpos($ckeditorPath, '..') !== 0) {
             $out .= $this->script("window.CKEDITOR_BASEPATH='". $ckeditorPath ."';");
         }
 
-        $out .= "<script type=\"text/javascript\" src=\"" . $ckeditorPath . 'ckeditor . js' . $args . "\"></script>\n";
+        $out .= "<script type=\"text/javascript\" src=\"" . $ckeditorPath . 'ckeditor.js' . $args . "\"></script>\n";
 
         $extraCode = "";
         if ($this->timestamp != self::timestamp) {
@@ -493,7 +495,7 @@ class CKEditor
             /**
              * realpath - Returns canonicalized absolute pathname
              */
-            $realPath = realpath( ' ./' ) ;
+            $realPath = realpath( './' ) ;
         }
 
         /**
@@ -533,7 +535,7 @@ class CKEditor
             return $val;
         }
         if (is_float($val)) {
-            return str_replace(',', ' . ', $val);
+            return str_replace(',', '.', $val);
         }
         if (is_array($val) || is_object($val)) {
             if (is_array($val) && (array_keys($val) === range(0,count($val)-1))) {
@@ -543,15 +545,14 @@ class CKEditor
             foreach ($val as $k => $v){
                 $temp[] = $this->jsEncode("{$k}") . ':' . $this->jsEncode($v);
             }
-            return '{
-                            ' . implode(',', $temp) . '}';
+            return '{' . implode(',', $temp) . '}';
         }
         // String otherwise
         if (strpos($val, '@@') === 0)
             return substr($val, 2);
-        if (strtoupper(substr($val, 0, 9)) == 'CKEDITOR . ')
+        if (strtoupper(substr($val, 0, 9)) == 'CKEDITOR.')
             return $val;
 
-        return '"' . str_replace(array("\\", " / ", "\n", "\t", "\r", "\x08", "\x0c", '"'), array('\\\\', '\\ / ', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'), $val) . '"';
+        return '"' . str_replace(array("\\", "/", "\n", "\t", "\r", "\x08", "\x0c", '"'), array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'), $val) . '"';
     }
 }
