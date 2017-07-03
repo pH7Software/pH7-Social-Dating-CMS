@@ -17,8 +17,7 @@ use PH7\Framework\Util\Various;
 
 class MainController extends Controller
 {
-    const MIN_PASSWORD_LENGTH = 8;
-    const MAX_PASSWORD_LENGTH = 40;
+    const DEFAULT_PASSWORD_LENGTH = 10;
 
     public function forgot($sMod = '')
     {
