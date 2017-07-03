@@ -14,34 +14,28 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Url;
 
-if (AdminCore::auth() || UserCore::auth() || AffiliateCore::auth())
-{
+if (AdminCore::auth() || UserCore::auth() || AffiliateCore::auth()) {
     $oHttpRequest = new Http;
     $oDesign = new Design;
     $oDesign->htmlHeader();
     $oDesign->usefulHtmlHeader();
     echo '<div class="center">';
 
-    if ($oHttpRequest->getExists( array('mod', 'ctrl', 'act', 'id') ))
-    {
+    if ($oHttpRequest->getExists(array('mod', 'ctrl', 'act', 'id'))) {
         $sLabel = $oHttpRequest->get('label');
         $sMod = $oHttpRequest->get('mod');
         $sCtrl = $oHttpRequest->get('ctrl');
         $sAct = $oHttpRequest->get('act');
         $mId = $oHttpRequest->get('id');
 
-        ConfirmCoreForm::display( array('label' => Url::decode($sLabel), 'module' => $sMod, 'controller' => $sCtrl, 'action' => $sAct, 'id' => $mId) );
-    }
-    else
-    {
+        ConfirmCoreForm::display(array('label' => Url::decode($sLabel), 'module' => $sMod, 'controller' => $sCtrl, 'action' => $sAct, 'id' => $mId));
+    } else {
         echo '<p>' . t('Bad parameters in the URL!') . '</p>';
     }
 
     echo '</div>';
     $oDesign->htmlFooter();
     unset($oHttpRequest, $oDesign);
-}
-else
-{
+} else {
     Header::redirect(Uri::get('user', 'signup', 'step1'), t('You must be registered to report an abuse.'));
 }

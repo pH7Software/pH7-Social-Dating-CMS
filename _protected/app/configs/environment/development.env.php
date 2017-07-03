@@ -14,7 +14,7 @@ defined('PH7') or exit('Restricted access');
 
 // If php.ini is inadequate, we fix it.
 error_reporting(E_ALL); // Since PHP 5.4 E_STRICT became part of E_ALL
-ini_set('display_errors' , 'On');
+ini_set('display_errors', 'On');
 ini_set('display_startup_errors', 'On');
 ini_set('track_errors', 'On');
 ini_set('html_errors', 'On');

@@ -17,27 +17,23 @@ use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Session\Session;
 
 // Only for members
-if(UserCore::auth())
-{
+if (UserCore::auth()) {
     $oHttpRequest = new Http;
 
-    if($oHttpRequest->postExists('username'))
-    {
-        if($oUsernameResult = (new UserCoreModel)->getUsernameList($oHttpRequest->post('username')))
-        {
-          // XML tags
-          echo '<users><ul>';
-             foreach($oUsernameResult as $oList)
-             {
-                 // Do not include the user profile that is connected since it doesn't make sense.
-                 if($oList->profileId == (new Session)->get('member_id')) break;
+    if ($oHttpRequest->postExists('username')) {
+        if ($oUsernameResult = (new UserCoreModel)->getUsernameList($oHttpRequest->post('username'))) {
+            // XML tags
+            echo '<users><ul>';
+            foreach ($oUsernameResult as $oList) {
+                // Do not include the user profile that is connected since it doesn't make sense.
+                if ($oList->profileId == (new Session)->get('member_id')) break;
 
                 echo '<li>
                         <username>', escape($oList->username, true), '</username>
                         <avatar>', (new Design)->getUserAvatar($oList->username, $oList->sex, 32), '</avatar>
                       </ul>';
-             }
-         echo '</ul></users>';
+            }
+            echo '</ul></users>';
         }
     }
 
