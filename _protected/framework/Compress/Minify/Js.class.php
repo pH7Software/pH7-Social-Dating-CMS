@@ -1,5 +1,7 @@
 <?php
+
 namespace PH7\Framework\Compress\Minify;
+
 defined('PH7') or exit('Restricted access');
 
 /**
@@ -47,10 +49,13 @@ defined('PH7') or exit('Restricted access');
  * @license http://opensource.org/licenses/mit-license.php MIT License
  * @version 1.1.2 (2012-05-01)
  * @link https://github.com/rgrove/jsmin-php
+ *
+ * THIS FILE HAS BEEN MODIFIED BY:
+ * @author Pierre-Henry Soria <hello@ph7cms.com>
+ * @copyright (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
  */
 class JS
 {
-
     const ORD_LF = 10;
     const ORD_SPACE = 32;
     const ACTION_KEEP_A = 1;
@@ -389,5 +394,4 @@ class JS
     {
         return ord($c) > 126 || $c === '\\' || preg_match('/^[\w\$]$/', $c) === 1;
     }
-
 }

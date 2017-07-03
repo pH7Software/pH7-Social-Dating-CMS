@@ -1,5 +1,7 @@
 <?php
+
 namespace PH7\Framework\Compress\Minify;
+
 defined('PH7') or exit('Restricted access');
 
 /**
@@ -20,10 +22,13 @@ defined('PH7') or exit('Restricted access');
  * @package Minify
  * @author Stephen Clay <steve@mrclay.org>
  * @author http://code.google.com/u/1stvamp/ (Issue 64 patch)
+ *
+ * THIS FILE HAS BEEN MODIFIED BY:
+ * @author Pierre-Henry Soria <hello@ph7cms.com>
+ * @copyright (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
  */
 class Css
 {
-
     /**
      * @var array
      */
@@ -248,5 +253,4 @@ class Css
         }
         return $out . $m[2];
     }
-
 }
