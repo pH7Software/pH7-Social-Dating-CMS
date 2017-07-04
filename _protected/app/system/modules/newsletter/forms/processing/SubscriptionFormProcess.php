@@ -5,11 +5,14 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Form / Processing
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
@@ -17,7 +20,6 @@ use PH7\Framework\Util\Various;
 
 class SubscriptionFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -27,12 +29,9 @@ class SubscriptionFormProcess extends Form
         $sName = $this->httpRequest->post('name');
         $bIsSubscriber = (new ExistsCoreModel)->email($sEmail, 'Subscribers');
 
-        switch ($this->httpRequest->post('direction'))
-        {
-            case 'subscrire':
-            {
-                if (!$bIsSubscriber)
-                {
+        switch ($this->httpRequest->post('direction')) {
+            case 'subscrire': {
+                if (!$bIsSubscriber) {
                     $aData = [
                         'name' => $sName,
                         'email' => $sEmail,
@@ -43,39 +42,30 @@ class SubscriptionFormProcess extends Form
                         'affiliated_id' => (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME)
                     ];
 
-                    if ($this->sendMail($aData))
-                    {
+                    if ($this->sendMail($aData)) {
                         \PFBC\Form::setSuccess('form_subscription', t('Please activate your subscription by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam.'));
                         $oSubscriptionModel->add($aData);
-                    }
-                    else
-                    {
+                    } else {
                         \PFBC\Form::setError('form_subscription', Form::errorSendingEmail());
                     }
-                }
-                else
-                {
+                } else {
                     \PFBC\Form::setError('form_subscription', t('Oops! You are already subscribed to our newsletter.'));
                 }
             }
             break;
 
-            case 'unsubscribe':
-            {
-                if ($bIsSubscriber)
-                {
+            case 'unsubscribe': {
+                if ($bIsSubscriber) {
                     $oSubscriptionModel->unsubscribe($sEmail);
                     \PFBC\Form::setSuccess('form_subscription', t('Your subscription was successfully canceled.'));
-                }
-                else
-                {
+                } else {
                     \PFBC\Form::setError('form_subscription', t('We have not found any subscriber with the email address.'));
                 }
             }
             break;
 
             default:
-                Framework\Http\Http::setHeadersByCode(400);
+                Http::setHeadersByCode(400);
                 exit('Bad Request Error!');
         }
         unset($oSubscriptionModel);
@@ -85,6 +75,7 @@ class SubscriptionFormProcess extends Form
      * Send confirm email.
      *
      * @param array $aData The data details.
+     *
      * @return integer Number of recipients who were accepted for delivery.
      */
     protected function sendMail(array $aData)
@@ -97,7 +88,10 @@ class SubscriptionFormProcess extends Form
         $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aData['email']) . '<br />' .
         t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/newsletter/registration.tpl', $aData['email']);
+        $sMessageHtml = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/newsletter/registration.tpl',
+            $aData['email']
+        );
 
         $aInfo = [
             'subject' => t('Confirm you email address!'),

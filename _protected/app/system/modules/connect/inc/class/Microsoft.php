@@ -21,6 +21,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Util\Various;
+use stdClass;
 
 class Microsoft extends Api
 {

@@ -101,7 +101,8 @@ class Google extends Api implements IApi
 
     /**
      * @param array $aProfile
-     * @param object \PH7\UserCoreModel $oUserModel
+     * @param UserCoreModel $oUserModel
+     *
      * @return void
      */
     public function add(array $aProfile, UserCoreModel $oUserModel)

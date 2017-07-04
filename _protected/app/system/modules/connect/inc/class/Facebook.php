@@ -34,9 +34,26 @@ class Facebook extends Api implements IApi
 {
     const GRAPH_URL = 'https://graph.facebook.com/';
 
-    private $oProfile, $oLocation, $sAvatarFile, $sUsername, $iProfileId, $aUserInfo;
+    /** @var \Facebook\GraphNodes\GraphObject */
+    private $oProfile;
 
-    private $aPermissions = [
+    /** @var \Facebook\GraphNodes\GraphObject */
+    private $oLocation;
+
+    /** @var string */
+    private $sAvatarFile;
+
+    /** @var string */
+    private $sUsername;
+
+    /** @var int */
+    private $iProfileId;
+
+    /** @var array */
+    private $aUserInfo;
+
+    /** @var array */
+    private static $aPermissions = [
         'email',
         'user_birthday',
         'user_relationships',
@@ -114,7 +131,8 @@ class Facebook extends Api implements IApi
     }
 
     /**
-     * @param \PH7\UserCoreModel $oUserModel
+     * @param UserCoreModel $oUserModel
+     *
      * @return void
      */
     public function add(UserCoreModel $oUserModel)
@@ -156,6 +174,7 @@ class Facebook extends Api implements IApi
      * Set Avatar.
      *
      * @param string $sUserId FB user ID.
+     *
      * @return void
      */
     public function setAvatar($sUserId)
@@ -175,12 +194,12 @@ class Facebook extends Api implements IApi
      * Set the FB Login URL.
      *
      * @param FacebookRedirectLoginHelper $oHelper
+     *
      * @return void
      */
     protected function setLoginUrl(FacebookRedirectLoginHelper $oHelper)
     {
-
-        $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect','main','home'), $this->aPermissions);
+        $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect','main','home'), self::$aPermissions);
     }
 
     private function initClassAttrs(FacebookResponse $oResponse)

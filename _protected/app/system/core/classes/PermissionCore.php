@@ -38,9 +38,9 @@ abstract class PermissionCore extends Framework\Core\Core
                 $this->session->get('member_id'),
                 $this->dateTime->get()->dateTime('Y-m-d H:i:s')
             );
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     public function signUpRedirect()

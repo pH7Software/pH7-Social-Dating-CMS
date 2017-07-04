@@ -150,12 +150,15 @@ class MessengerAjax extends PermissionCore
     protected function startSession()
     {
         $sItems = '';
-        if (!empty($_SESSION['messenger_openBoxes']))
-            foreach ($_SESSION['messenger_openBoxes'] as $sBox => $sVoid)
+        if (!empty($_SESSION['messenger_openBoxes'])) {
+            foreach ($_SESSION['messenger_openBoxes'] as $sBox => $sVoid) {
                 $sItems .= $this->boxSession($sBox);
+            }
+        }
 
-        if ($sItems != '')
+        if ($sItems != '') {
             $sItems = substr($sItems, 0, -1);
+        }
 
         Http::setContentType('application/json');
         echo '{
