@@ -8,4 +8,7 @@
 
 namespace PH7;
 
-class Registration extends RegistrationCore {}
+class Registration extends RegistrationCore
+{
+    const DEFAULT_PASSWORD_LENGTH = 10;
+}
