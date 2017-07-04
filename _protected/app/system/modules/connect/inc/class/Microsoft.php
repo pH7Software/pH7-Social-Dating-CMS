@@ -100,11 +100,12 @@ class Microsoft extends Api
     }
 
     /**
-     * @param object $oProfile
-     * @param object \PH7\UserCoreModel $oUserModel
+     * @param stdClass $oProfile
+     * @param UserCoreModel $oUserModel
+     *
      * @return void
      */
-    public function add($oProfile, UserCoreModel $oUserModel)
+    public function add(stdClass $oProfile, UserCoreModel $oUserModel)
     {
         $oUser = new UserCore;
         $sBirthDate = (isset($oProfile->birth_month, $oProfile->birth_day, $oProfile->birth_year)) ? $oProfile->birth_month . '/' . $oProfile->birth_day . '/' . $oProfile->birth_year : date('m/d/Y', strtotime('-30 year'));
