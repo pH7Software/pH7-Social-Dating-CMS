@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -17,6 +18,7 @@ abstract class PermissionCore extends Framework\Core\Core
 {
     const VISITOR_GROUP_ID = 1;
 
+    /** @var \stdClass */
     protected $group;
 
     public function __construct()

@@ -72,7 +72,10 @@ class MainController extends Controller
             t('Your new password is %0%', '<em>"' . $sNewPassword . '"</em>') . '<br />' .
             t("Please change it when you're logged in (Account -> Edit Profile -> Change Password).");
 
-        $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/recover_password.tpl', $sEmail);
+        $sMessageHtml = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/recover_password.tpl',
+            $sEmail
+        );
 
         $aInfo = [
             'to' => $sEmail,
