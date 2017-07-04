@@ -159,7 +159,7 @@ class Facebook extends Api implements IApi
             'state' => !empty($this->oLocation->getState()) ? $this->oLocation->getState() : Geo::getState(),
             'zip_code' => !empty($this->oLocation->getZip()) ? $this->oLocation->getZip() : Geo::getZipCode(),
             'description' => $this->oProfile->getDescription(),
-            'social_network_site' => $oProfie->getLink(),
+            'social_network_site' => $this->oProfile->getLink(),
             'ip' => Ip::get(),
             'prefix_salt' => Various::genRnd(),
             'suffix_salt' => Various::genRnd(),
