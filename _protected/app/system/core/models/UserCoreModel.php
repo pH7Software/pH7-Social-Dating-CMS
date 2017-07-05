@@ -25,7 +25,8 @@ use stdClass;
 // Abstract Class
 class UserCoreModel extends Model
 {
-    const CACHE_GROUP = 'db/sys/mod/user', CACHE_TIME = 604800;
+    const CACHE_GROUP = 'db/sys/mod/user';
+    const CACHE_TIME = 604800;
 
     /** @var string */
     protected $sCurrentDate;

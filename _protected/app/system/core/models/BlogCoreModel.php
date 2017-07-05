@@ -13,7 +13,8 @@ use PH7\Framework\Mvc\Model\Engine\Model;
 
 class BlogCoreModel extends Model
 {
-    const CACHE_GROUP = 'db/sys/mod/blog', CACHE_TIME = 999990;
+    const CACHE_GROUP = 'db/sys/mod/blog';
+    const CACHE_TIME = 999990;
 
     /**
      * Gets all blog posts.
