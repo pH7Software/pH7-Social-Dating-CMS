@@ -17,6 +17,7 @@ use PH7\Framework\Cache\Cache;
 
 final class Version
 {
+    const CACHE_TIME = 86400; // 1 day
     const LATEST_VERSION_URL = 'http://xml.ph7cms.com/software-info.xml';
     const PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
@@ -27,7 +28,7 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW" and 7.*, 8.* is NaOH
      */
     const KERNEL_VERSION_NAME = 'NaOH';
-    const KERNEL_VERSION = '8.0.0';
+    const KERNEL_VERSION = '8.0.2';
     const KERNEL_BUILD = '1';
     const KERNEL_RELASE_DATE = '2017-07-10';
 
