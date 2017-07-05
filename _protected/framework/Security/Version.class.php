@@ -48,7 +48,7 @@ final class Version
      */
     public static function getLatestInfo()
     {
-        $oCache = (new Cache)->start('str/security', 'version-info', 3600*24); // Stored for 1 day
+        $oCache = (new Cache)->start('str/security', 'version-info', self::CACHE_TIME); // Stored for 1 day
         if (!$mData = $oCache->get()) {
             $oDom = new \DOMDocument;
 
