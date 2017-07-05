@@ -44,17 +44,15 @@ use PH7\UserCoreModel;
 
 class Design
 {
-    const
-    CACHE_GROUP = 'str/design',
-    CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
+    const CACHE_GROUP = 'str/design';
+    const CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
 
     const AVATAR_IMG_EXT = '.png';
 
-    const
-    SUCCESS_TYPE = 'success',
-    ERROR_TYPE = 'error',
-    WARNING_TYPE = 'warning',
-    INFO_TYPE = 'info';
+    const SUCCESS_TYPE = 'success';
+    const ERROR_TYPE = 'error';
+    const WARNING_TYPE = 'warning';
+    const INFO_TYPE = 'info';
 
     const MESSAGE_TYPES = [
         self::SUCCESS_TYPE,
@@ -63,22 +61,41 @@ class Design
         self::INFO_TYPE
     ];
 
-    const
-    FLASH_MSG = 'flash_msg',
-    FLASH_TYPE = 'flash_type';
+    const FLASH_MSG = 'flash_msg';
+    const FLASH_TYPE = 'flash_type';
 
-    protected
-    $bIsDiv = false,
-    $oStr,
-    $oSession,
-    $oHttpRequest,
-    $aCssDir = array(),
-    $aCssFiles = array(),
-    $aCssMedia = array(),
-    $aJsDir = array(),
-    $aJsFiles = array(),
-    $aMessages = array(),
-    $aErrors = array();
+    /** @var boolean */
+    protected $bIsDiv = false;
+
+    /** @var Str */
+    protected $oStr;
+
+    /** @var Session */
+    protected $oSession;
+
+    /** @var HttpRequest */
+    protected $oHttpRequest;
+
+    /** @var array */
+    protected $aCssDir = array();
+
+    /** @var array */
+    protected $aCssFiles = array();
+
+    /** @var array */
+    protected $aCssMedia = array();
+
+    /** @var array */
+    protected $aJsDir = array();
+
+    /** @var array */
+    protected $aJsFiles = array();
+
+    /** @var array */
+    protected $aMessages = array();
+
+    /** @var array */
+    protected $aErrors = array();
 
     public function __construct()
     {
