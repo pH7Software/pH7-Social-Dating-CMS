@@ -395,32 +395,33 @@ class Design
         // Get Client's Language Code
         $sLangCode = (new Browser)->getLanguage(true);
 
-        if ($sLangCode == 'en-ie') {
+        // Default links, set to English
+        $aSites = [
+            ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
+            ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
+            ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
+            ['title' => 'iPhone LONDON Dating App', 'link' => 'https://itunes.apple.com/us/app/meet-date-lovely-people-in/id1155373742'],
+            ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
+            ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
+            ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
+            ['title' => 'Android LONDON DATING App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
+        ];
+
+        if ($sLangCode === 'en-ie') {
             $aSites = [
                 ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com'],
                 ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://dublin.meetlovelypeople.com']
             ];
-        } elseif ($sLangCode == 'en-gb') {
+        } elseif ($sLangCode === 'en-gb') {
           $aSites = [
               ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
               ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com'],
               ['title' => 'Date Londoners', 'link' => 'http://flirt-dating.london']
           ];
-        } elseif (substr($sLangCode,0,2) == 'fr') {
+        } elseif (strpos($sLangCode, 'fr') !== false) {
             $aSites = [
                 ['title' => 'Rencontre d\'un soir', 'link' => 'http://flirt-rencontre.net'],
                 ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
-            ];
-        } else { // Default links, set to English
-            $aSites = [
-                ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
-                ['title' => 'iPhone LONDON Dating App', 'link' => 'https://itunes.apple.com/us/app/meet-date-lovely-people-in/id1155373742'],
-                ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
-                ['title' => 'Android LONDON DATING App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
             ];
         }
 
