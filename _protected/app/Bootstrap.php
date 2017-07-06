@@ -32,7 +32,7 @@ require 'includes/helpers/misc.php';
 class Bootstrap
 {
     /**
-     * @staticvar object $oInstance
+     * @var Bootstrap $oInstance
      */
     private static $oInstance = null;
 
@@ -59,8 +59,9 @@ class Bootstrap
      */
     public function setTimezoneIfNotSet()
     {
-        if (!ini_get('date.timezone'))
+        if (!ini_get('date.timezone')) {
             ini_set('date.timezone', PH7_DEFAULT_TIMEZONE);
+        }
     }
 
     /**

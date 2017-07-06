@@ -34,7 +34,7 @@ class File
     /**
      * Mime Types list.
      *
-     * @staticvar array $aMimeTypes
+     * @var array $aMimeTypes
      */
     private static $aMimeTypes = [
         'pdf' => 'application/pdf',

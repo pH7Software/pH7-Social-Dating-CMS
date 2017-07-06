@@ -22,7 +22,9 @@ use PDOStatement;
  */
 class Db
 {
-    const ASC = 'ASC', DESC = 'DESC', RAND = 'RAND()';
+    const ASC = 'ASC';
+    const DESC = 'DESC';
+    const RAND = 'RAND()';
 
     /**
      * Static attributes of the class.
