@@ -116,12 +116,10 @@ class Rss extends DomDocument
     /**
      * Create the XML.
      *
-     * @access public
      * @return string The XML string
      */
     public function __toString()
     {
         return $this->saveXML();
     }
-
 }
