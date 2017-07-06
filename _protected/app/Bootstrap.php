@@ -172,8 +172,4 @@ class Bootstrap
 
         echo html_body("Apache's mod_rewrite is required", $sMsg);
     }
-
-    private function __clone()
-    {
-    }
 }
