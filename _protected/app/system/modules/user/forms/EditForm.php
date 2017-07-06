@@ -11,6 +11,7 @@ use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class EditForm
 {
@@ -20,7 +21,7 @@ class EditForm
             if (\PFBC\Form::isValid($_POST['submit_user_edit_account'])) {
                 new EditFormProcess;
             }
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $bAdminLogged = (AdminCore::auth() && !User::auth()); // Check if the admin is logged.
