@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
@@ -20,10 +21,19 @@ class ForumController extends Controller
     const FORUMS_PER_PAGE = 20;
     const POSTS_PER_PAGE = 10;
 
+    /** @var ForumModel */
     private $oForumModel;
+
+    /** @var Page */
     private $oPage;
+
+    /** @var string */
     private $sTitle;
+
+    /** @var string */
     private $sMsg;
+
+    /** @var int */
     private $iTotalTopics;
 
     public function __construct()
@@ -288,7 +298,10 @@ class ForumController extends Controller
             $this->sMsg = t('Oops! Your topic could not be deleted');
         }
 
-        Header::redirect(Uri::get('forum', 'forum', 'topic', $sForumName . ',' . $iForumId), $this->sMsg);
+        Header::redirect(
+            Uri::get('forum', 'forum', 'topic', $sForumName . ',' . $iForumId),
+            $this->sMsg
+        );
     }
 
     public function deleteMessage()
@@ -307,7 +320,8 @@ class ForumController extends Controller
             $this->sMsg = t('Oops! Your message could not be deleted');
         }
 
-        Header::redirect(Uri::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId),
+        Header::redirect(
+            Uri::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId),
             $this->sMsg
         );
     }
@@ -315,13 +329,14 @@ class ForumController extends Controller
     /**
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
-     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false". Default: TRUE
+     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false".
+     *
      * @return void
      */
     private function notFound($b404Status = true)
     {
         if ($b404Status === true) {
-            Framework\Http\Http::setHeadersByCode(404);
+            Http::setHeadersByCode(404);
         }
 
         $sErrMsg = '';
