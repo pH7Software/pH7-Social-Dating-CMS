@@ -12,26 +12,28 @@
  */
 
 namespace PH7\Framework\Xml\Feed;
+
 defined('PH7') or exit('Restricted access');
 
-class Rss extends \DomDocument
+use DomDocument;
+
+class Rss extends DomDocument
 {
+    const DOCUMENT_VERSION = '2.0';
 
     /**
      * RSS channel object.
      *
-     * @access private
-     * @var object $_oChannel
+     * @var \DOMNode $_oChannel
      */
     private $_oChannel;
 
     /**
-     * @constructor Sets up the DOM environment.
-     * @access public
+     * Sets up the DOM environment.
+     *
      * @param string $sTitle The site title
      * @param string $sLink The link to the site
      * @param string $sDescription The site description
-     * @return void
      */
     public function __construct($sTitle, $sLink, $sDescription)
     {
@@ -42,7 +44,7 @@ class Rss extends \DomDocument
         $oRoot = $this->appendChild($this->createElement('rss'));
 
         // Sets to RSS version 2
-        $oRoot->setAttribute('version', '2.0');
+        $oRoot->setAttribute('version', self::DOCUMENT_VERSION);
 
         // Sets the channel node
         $this->_oChannel = $oRoot->appendChild($this->createElement('channel'));
