@@ -39,7 +39,7 @@ class AddAffiliateForm
         $oForm->addElement(new \PFBC\Element\Textbox(t('Postal Code:'), 'zip_code', array('id'=>'str_zip_code', 'validation'=>new \PFBC\Validation\Str(2,15), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Phone(t('Phone Number:'), 'phone', array('description'=>t('Enter full phone number with area code (e.g., +44768374890).'), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\CKEditor(t('Description:'), 'description', array('description'=>t("Description of the affiliate's site(s)."), 'validation'=>new \PFBC\Validation\Str(10,2000), 'required' =>1)));
-        $oForm->addElement(new \PFBC\Element\Url(t('Website:'), 'website', array('description'=>t('Main website where the affiliate is the owner.'), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Url(t('Website:'), 'website', array('description'=>t('Main website where the affiliate is the owner (e.g. http://ph7cms.com)'), 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\Email(t('Bank Account:'), 'bank_account', array('description'=>t('Bank Account (PayPal Email Address).'), 'validation'=>new \PFBC\Validation\BankAccount, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'geo/autocompleteCity.js"></script>'));
         $oForm->addElement(new \PFBC\Element\Button);

@@ -14,7 +14,6 @@ use PH7\Framework\Session\Session;
 
 class EditForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_aff_edit_account'])) {
@@ -62,7 +61,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Email(t('Your Email:'), 'mail', array('description'=>t('For security reasons and to avoid spam, you cannot change your email address.'), 'disabled'=>'disabled', 'value'=>$oAff->email)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error phone"></span>'));
 
-        $oForm->addElement(new \PFBC\Element\Radio(t('Your Sex:'), 'sex', array('male'=>t('Male'), 'female'=>t('Female')), array('value'=> $oAff->sex,'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('male'=>t('Man'), 'female'=>t('Woman')), array('value'=> $oAff->sex, 'required'=>1)));
 
         $oForm->addElement(new \PFBC\Element\Date(t('Your Date of birth:'), 'birth_date', array('id'=>'birth_date', 'onblur'=>'CValid(this.value, this.id)', 'value'=>$sBirthDate, 'validation'=> new \PFBC\Validation\BirthDate, 'required'=>1)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<span class="input_error birth_date"></span>'));
@@ -77,5 +76,4 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
         $oForm->render();
     }
-
 }
