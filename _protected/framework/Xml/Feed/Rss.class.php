@@ -59,31 +59,27 @@ class Rss extends DomDocument
     /**
      * Adding the Items to the RSS Feed.
      *
-     * @access public
      * @param array $aItems
-     * @return object this
+     *
+     * @return self
      */
     public function addItem($aItems)
     {
         // Create an item
         $oItem = $this->createElement('item');
 
-        foreach ($aItems as $sElement => $sValue)
-        {
-            switch ($sElement)
-            {
+        foreach ($aItems as $sElement => $mValue) {
+            switch ($sElement) {
                 // Create the sub elements here
                 case 'image':
                 case 'skipHour':
-                case 'skipDay':
-                {
-                    $oIm = $this->createElement('image');
-                    $this->_oChannel->appendChild($oIm);
+                case 'skipDay': {
+                    $oImage = $this->createElement('image');
+                    $this->_oChannel->appendChild($oImage);
 
-                    foreach ($aValue as $sSubElement => $sSubValue)
-                    {
+                    foreach ($mValue as $sSubElement => $sSubValue) {
                         $oSub = $this->createElement($sSubElement, $sSubValue);
-                        $oIm->appendChild($oSub);
+                        $oImage->appendChild($oSub);
                     }
                 }
                 break;
@@ -105,7 +101,7 @@ class Rss extends DomDocument
                 case 'rating':
                 case 'textInput':
                 case 'source':
-                    $oItem->appendChild($this->createElement($sElement, $sValue));
+                    $oItem->appendChild($this->createElement($sElement, $mValue));
                 break;
             }
         }
