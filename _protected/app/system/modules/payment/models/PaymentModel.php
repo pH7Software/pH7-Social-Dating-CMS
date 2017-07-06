@@ -8,17 +8,18 @@
  * @package        PH7/ App / System / Module / Payment / Model
  * @version        1.1
  */
+
 namespace PH7;
 
 class PaymentModel extends UserCoreModel
 {
-
     /**
      * Update a membership group.
      *
      * @param string $sSection
      * @param string $sValue
      * @param integer $iGroupId
+     *
      * @return void
      */
     public function updateMembershipGroup($sSection, $sValue, $iGroupId)
@@ -30,6 +31,7 @@ class PaymentModel extends UserCoreModel
      * Add a membership group.
      *
      * @param array $aData The parameters for the insertion in database for the new membership.
+     *
      * @return void
      */
     public function addMembership(array $aData)
@@ -41,11 +43,11 @@ class PaymentModel extends UserCoreModel
      * Delete a membership group.
      *
      * @param integer $iGroupId
+     *
      * @return void
      */
     public function deleteMembership($iGroupId)
     {
         $this->orm->delete('Memberships', 'groupId', $iGroupId);
     }
-
 }
