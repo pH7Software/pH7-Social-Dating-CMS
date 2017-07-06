@@ -72,7 +72,7 @@ class XmlDesignCore
         try {
             $aNews = (new NewsFeedCore)->getSoftware($iNum);
 
-            if (cound($aNews) > 0) {
+            if (count($aNews) > 0) {
                 foreach ($aNews as $aItems) {
                     echo '<h4><a href="', $aItems['link'], '" target="_blank">', escape($aItems['title'], true), '</a></h4>';
                     echo '<p>', escape($aItems['description'], true), '</p>';
