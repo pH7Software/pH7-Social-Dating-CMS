@@ -46,7 +46,7 @@ class LoadTemplate
         if (!empty($_REQUEST['tpl']) && strlen($_REQUEST['tpl']) < 50) {
             $this->sUserTpl = $_REQUEST['tpl'];
             $oCookie->set('site_tpl', $this->sUserTpl, 60 * 60 * 48);
-        } else if ($oCookie->exists('site_tpl')) {
+        } elseif ($oCookie->exists('site_tpl')) {
             $this->sUserTpl = $oCookie->get('site_tpl');
         }
 
@@ -109,9 +109,9 @@ class LoadTemplate
             $this->oConfig->load(PH7_PATH_TPL . $this->sUserTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)
         ) {
             $this->sTplName = $this->sUserTpl;
-        } else if ($this->oConfig->load(PH7_PATH_TPL . $this->sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
+        } elseif ($this->oConfig->load(PH7_PATH_TPL . $this->sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sTplName = $this->sDefaultTpl;
-        } else if ($this->oConfig->load(PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
+        } elseif ($this->oConfig->load(PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sTplName = PH7_DEFAULT_THEME;
         } else {
             throw new Exception('Template file not found! File: \'' . PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
@@ -131,9 +131,9 @@ class LoadTemplate
 
         if ($this->oConfig->load($oRegistry->path_module_views . $this->sUserTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sModTplName = $this->sUserTpl;
-        } else if ($this->oConfig->load($oRegistry->path_module_views . $this->sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
+        } elseif ($this->oConfig->load($oRegistry->path_module_views . $this->sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sModTplName = $this->sDefaultTpl;
-        } else if ($this->oConfig->load($oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
+        } elseif ($this->oConfig->load($oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sModTplName = PH7_DEFAULT_TPL_MOD;
         } else {
             throw new Exception('Module template file not found! File: \'' . $oRegistry->path_module_views . PH7_DEFAULT_TPL_MOD . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
@@ -153,9 +153,9 @@ class LoadTemplate
     {
         if ($this->oConfig->load(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . $this->sUserTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sMailTplName = $this->sUserTpl;
-        } else if ($this->oConfig->load(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . $this->sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
+        } elseif ($this->oConfig->load(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . $this->sDefaultTpl . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sMailTplName = $this->sDefaultTpl;
-        } else if ($this->oConfig->load(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
+        } elseif ($this->oConfig->load(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE)) {
             $this->sMailTplName = PH7_DEFAULT_THEME;
         } else {
             throw new Exception('Mail template file not found! File: \'' . PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_DEFAULT_THEME . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE . '\' doesn\'t exist.');
