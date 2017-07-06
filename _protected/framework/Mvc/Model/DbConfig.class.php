@@ -154,7 +154,7 @@ final class DbConfig
      */
     public static function setSiteMode($sStatus)
     {
-        if ($sStatus != self::MAINTENANCE_SITE && $sStatus != self::ENABLE_SITE) {
+        if ($sStatus !== self::MAINTENANCE_SITE && $sStatus !== self::ENABLE_SITE) {
             exit('Wrong maintenance mode type!');
         }
 
