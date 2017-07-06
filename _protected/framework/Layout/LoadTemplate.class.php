@@ -10,6 +10,7 @@
  */
 
 namespace PH7\Framework\Layout;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;

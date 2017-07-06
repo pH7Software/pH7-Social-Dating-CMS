@@ -11,19 +11,20 @@
  */
 
 namespace PH7\Framework\Mail;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Mail
 {
-
     /**
      * Send an email with Swift library engine.
      *
      * @param array $aInfo
      * @param string $sContents
-     * @param boolean $bHtmlFormat Default TRUE
+     * @param boolean $bHtmlFormat
+     *
      * @return integer Number of recipients who were accepted for delivery.
      */
     public function send(array $aInfo, $sContents, $bHtmlFormat = true)
@@ -54,7 +55,6 @@ class Mail
          * Check if Swift is able to send message, otherwise we use the traditional native PHP mail() function
          * as on some hosts config, Swift Mail doesn't work.
          */
-
         if (!$iResult) {
             $aData = ['from' => $sFromMail, 'to' => $sToMail, 'subject' => $sSubject, 'body' => $sContents];
             $iResult = (int) $this->phpMail($aData);
@@ -63,18 +63,19 @@ class Mail
         return $iResult;
     }
 
-
     /**
      * Send an email with the native PHP mail() function in text and HTML format.
      *
      * @param array $aParams The parameters information to send email.
+     *
      * @return boolean Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
      */
     protected function phpMail(array $aParams)
     {
         // If the email sender is empty, we define the server email.
-        if (empty($aParams['from']))
+        if (empty($aParams['from'])) {
             $aParams['from'] = $_SERVER['SERVER_ADMIN'];
+        }
 
         /*** Headers ***/
         // To avoid the email goes in the spam folder of email client.
@@ -87,5 +88,4 @@ class Mail
         /** Send Email ***/
         return @mail($aParams['to'], $aParams['subject'], $aParams['body'], $sHeaders);
     }
-
 }
