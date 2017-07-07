@@ -10,18 +10,16 @@
  * @version        1.1
  */
 
-namespace PH7\Framework\Error {
+namespace PH7\Framework\Error
+{
     defined('PH7') or exit('Restricted access');
 
     use PH7\Framework\Config\Config;
 
     final class Debug
     {
-
         /**
          * Private constructor to prevent instantiation of class since it's a static class.
-         *
-         * @access private
          */
         private function __construct()
         {
@@ -30,18 +28,19 @@ namespace PH7\Framework\Error {
         /**
          * Gets Information (message, code, file, line, trace) of an Exception.
          *
-         * @param object $oE Exception object.
+         * @param Exception $oE
+         *
          * @return string
          */
         public static function getInfoExcept($oE)
         {
             $sDebug = $oE->getMessage();
             $sDebug .= '<br />';
-            $sDebug = $oE->getCode();
+            $sDebug .= $oE->getCode();
             $sDebug .= '<br />';
-            $sDebug = $oE->getFile();
+            $sDebug .= $oE->getFile();
             $sDebug .= '<br />';
-            $sDebug = $oE->getLine();
+            $sDebug .= $oE->getLine();
             $sDebug .= '<br />';
             $sDebug .= $oE->getTraceAsString();
 
@@ -60,15 +59,12 @@ namespace PH7\Framework\Error {
 
         /**
          * Clone is set to private to stop cloning.
-         *
-         * @access private
          */
         private function __clone()
         {
         }
 
     }
-
 }
 
 namespace {
