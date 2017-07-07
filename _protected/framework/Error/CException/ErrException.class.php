@@ -19,7 +19,6 @@ namespace PH7\Framework\Error\CException
      */
     final class ErrException extends \ErrorException
     {
-
         public function __toString()
         {
             switch ($this->severity) {
@@ -44,7 +43,6 @@ namespace PH7\Framework\Error\CException
 
             return '<strong>' . $sType . '</strong> : [' . $this->code . '] ' . htmlspecialchars($this->message, ENT_QUOTES) . '<br /><strong>' . $this->file . '</strong> to line <strong>' . $this->line . '</strong>';
         }
-
     }
 }
 
