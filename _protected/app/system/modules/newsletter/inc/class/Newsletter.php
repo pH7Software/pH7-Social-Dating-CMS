@@ -20,9 +20,13 @@ use stdClass;
 
 class Newsletter extends Core
 {
-    const MAX_BULK_EMAIL_NUMBER = 250, SLEEP_SEC = 10;
+    const MAX_BULK_EMAIL_NUMBER = 250;
+    const SLEEP_SEC = 10;
 
+    /** @var SubscriptionModel */
     private $_oSubscriptionModel;
+
+    /** @var int */
     private static $_iTotalSent = 0;
 
     public function __construct()
