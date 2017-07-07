@@ -11,6 +11,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -19,7 +20,6 @@ use PH7\Framework\Mvc\Model\Engine\Util\Backup;
 
 class DatabaseCoreCron extends Cron
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -198,6 +198,7 @@ class DatabaseCoreCron extends Cron
      * @param integer $iOlderThanXDay Delete data older than X days (e.g., 365 for data older than 1 year).
      * @param string $sTable Table name. Choose between 'Comments<TYPE>', 'Messages' and 'Messenger'
      * @param string $sDateColumn The DB column that indicates when the data has been created/updated (e.g., sendDate, updatedDate).
+     *
      * @return integer Returns the number of rows.
      */
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
@@ -211,7 +212,6 @@ class DatabaseCoreCron extends Cron
         $rStmt->execute();
         return $rStmt->rowCount();
     }
-
 }
 
 // Go!
