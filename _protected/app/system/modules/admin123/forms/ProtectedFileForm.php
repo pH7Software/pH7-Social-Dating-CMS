@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -13,8 +14,7 @@ class ProtectedFileForm
 
     public static function display()
     {
-        if (isset($_POST['submit_file']))
-        {
+        if (isset($_POST['submit_file'])) {
             if (\PFBC\Form::isValid($_POST['submit_file']))
                 new ProtectedFileFormProcess;
 

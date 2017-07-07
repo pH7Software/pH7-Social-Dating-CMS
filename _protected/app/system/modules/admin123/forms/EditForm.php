@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Request\Http;
@@ -29,7 +30,7 @@ class EditForm
         $oAdmin = (new AdminModel)->readProfile($iProfileId, 'Admins');
 
         $oForm = new \PFBC\Form('form_admin_edit_account');
-        $oForm->configure(array('action' => '' ));
+        $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_admin_edit_account', 'form_admin_edit_account'));
         $oForm->addElement(new \PFBC\Element\Token('edit_account'));
 
@@ -44,7 +45,7 @@ class EditForm
         $oForm->addElement(new \PFBC\Element\Email(t('Login Email:'), 'mail', array('value' => $oAdmin->email, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('First Name:'), 'first_name', array('value' => $oAdmin->firstName, 'required' => 1, 'validation' => new \PFBC\Validation\Name)));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Last Name:'), 'last_name', array('value' => $oAdmin->lastName, 'required' => 1, 'validation' => new \PFBC\Validation\Name)));
-        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('male' => t('Man'), 'female' => t('Female')), array('value' => $oAdmin->sex,'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Radio(t('Gender:'), 'sex', array('male' => t('Man'), 'female' => t('Female')), array('value' => $oAdmin->sex, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Timezone('Time Zone:', 'time_zone', array('value' => $oAdmin->timeZone, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
