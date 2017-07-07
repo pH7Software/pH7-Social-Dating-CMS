@@ -187,7 +187,7 @@ class UserCoreModel extends Model
      *
      * @return void
      */
-    public function updateProfile($sSection, $sValue, $iProfileId, $sTable ='Members')
+    public function updateProfile($sSection, $sValue, $iProfileId, $sTable = 'Members')
     {
         Various::checkModelTable($sTable);
 
@@ -1059,16 +1059,16 @@ class UserCoreModel extends Model
      */
     public function getGeoProfiles($sCountry, $sCity, $bCount, $sOrder, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sOrder = !$bCount ? SearchCoreModel::order($sOrder, SearchCoreModel::DESC) : '';
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId) AS totalUsers';
 
-        $sSqlCity = !empty($sCity) ?  'AND (city LIKE :city)' : '';
+        $sSqlCity = !empty($sCity) ? 'AND (city LIKE :city)' : '';
 
         $rStmt = Db::getInstance()->prepare(
             'SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'AS m LEFT JOIN' . Db::prefix('MembersInfo') . 'AS i USING(profileId)
@@ -1249,7 +1249,7 @@ class UserCoreModel extends Model
         }
 
         return $sData;
-   }
+    }
 
     /**
      * Get Gender (sex) of a user.

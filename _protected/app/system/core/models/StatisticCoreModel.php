@@ -96,7 +96,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
      */
     public function totalAdmins($iDay = 0, $sGenger = 'all')
     {
-        return  (new UserCoreModel)->total('Admins', $iDay, $sGenger);
+        return (new UserCoreModel)->total('Admins', $iDay, $sGenger);
     }
 
     public function totalBlogs($iDay = 0)
