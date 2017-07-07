@@ -8,4 +8,6 @@
 
 namespace PH7;
 
-interface Controllable {}
+interface Controllable
+{
+}
