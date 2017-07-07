@@ -63,12 +63,11 @@ namespace PH7\Framework\Error
         private function __clone()
         {
         }
-
     }
 }
 
-namespace {
-
+namespace
+{
     /**
      * Alias for \PH7\Framework\Error\Debug::is()
      */
@@ -76,5 +75,4 @@ namespace {
     {
         return PH7\Framework\Error\Debug::is();
     }
-
 }

@@ -14,9 +14,10 @@ namespace PH7\Framework\Error;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Core\Core;
 use PH7\Framework\File\File;
 
-class Logger extends \PH7\Framework\Core\Core
+class Logger extends Core
 {
     const LOG_DIR = 'pH7log/';
     const EXCEPT_DIR = 'except/';

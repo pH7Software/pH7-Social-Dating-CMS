@@ -11,6 +11,7 @@
  */
 
 namespace PH7\Framework\Error;
+
 defined('PH7') or exit('Restricted access');
 
 use Exception;
