@@ -216,13 +216,13 @@ class Validate
      */
     public function username($sUsername, $iMin = self::DEF_MIN_USERNAME_LENGTH, $iMax = PH7_MAX_USERNAME_LENGTH, $sTable = 'Members')
     {
-         $sUsername = trim($sUsername);
+        $sUsername = trim($sUsername);
 
-         return (
-             preg_match('#^'.PH7_USERNAME_PATTERN.'{'.$iMin.','.$iMax.'}$#', $sUsername) &&
-             !is_file(PH7_PATH_ROOT . $sUsername . PH7_PAGE_EXT) && !Ban::isUsername($sUsername) &&
-             !(new ExistsCoreModel)->username($sUsername, $sTable)
-         );
+        return (
+            preg_match('#^' . PH7_USERNAME_PATTERN . '{' . $iMin . ',' . $iMax . '}$#', $sUsername) &&
+            !is_file(PH7_PATH_ROOT . $sUsername . PH7_PAGE_EXT) && !Ban::isUsername($sUsername) &&
+            !(new ExistsCoreModel)->username($sUsername, $sTable)
+        );
     }
 
     /**
@@ -256,11 +256,10 @@ class Validate
         if ($bRealHost) {
             $sEmailHost = substr(strrchr($sEmail, '@'), 1);
             // This function now works with Windows since version PHP 5.3, so we mustn't include the PEAR NET_DNS library.
-            if ( !(checkdnsrr($sEmailHost, 'MX') && checkdnsrr($sEmailHost, 'A')) ) return false;
+            if (!(checkdnsrr($sEmailHost, 'MX') && checkdnsrr($sEmailHost, 'A'))) return false;
         }
         return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false && $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail));
     }
-
 
     /**
      * Validate Birthday.
@@ -299,7 +298,7 @@ class Validate
         try {
             new DateTime($sValue);
             return true;
-        } catch(Exception $oE) {
+        } catch (Exception $oE) {
             return false;
         }
     }

@@ -111,15 +111,14 @@ class Design
         //$aLangs = (new File)->getDirList(Registry::getInstance()->path_module_lang);
         $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
 
-        foreach ($aLangs as $sLang)
-        {
+        foreach ($aLangs as $sLang) {
             if ($sLang === PH7_LANG_NAME) {
                 // Skip the current lang
                 continue;
             }
 
             // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang,0,2);
+            $sAbbrLang = substr($sLang, 0, 2);
 
             echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
@@ -138,10 +137,9 @@ class Design
         $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
 
         echo '<link rel="alternate" hreflang="x-default" href="', PH7_URL_ROOT, '">'; // For pages that are not specifically targeted
-        foreach ($aLangs as $sLang)
-        {
+        foreach ($aLangs as $sLang) {
             // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang,0,2);
+            $sAbbrLang = substr($sLang, 0, 2);
             echo '<link rel="alternate" hreflang="', $sAbbrLang, '" href="', $sCurrentPage, $sLang, '" />';
         }
 
@@ -168,7 +166,7 @@ class Design
     public function message()
     {
         if ($this->oHttpRequest->getExists('msg'))
-            $this->aMessages[] = substr($this->oHttpRequest->get('msg'),0,300);
+            $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, 300);
 
         $iMsgNum = count($this->aMessages);
         /*** Check if there are any messages in the aMessages array ***/
@@ -180,7 +178,7 @@ class Design
             if ($iMsgNum > 1)
                 echo '<strong>', t('You have'), ' <em>', $iMsgNum, '</em> ', nt('message:', 'messages:', $iMsgNum), '</strong><br />';
 
-            for ($i=0; $i < $iMsgNum; $i++)
+            for ($i = 0; $i < $iMsgNum; $i++)
                 echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$i])), '<br />';
 
             echo '\')});</script>';

@@ -10,4 +10,6 @@ namespace PH7\Framework\Server;
 
 use PH7\Framework\Error\CException\PH7Exception;
 
-class Exception extends PH7Exception {}
+class Exception extends PH7Exception
+{
+}

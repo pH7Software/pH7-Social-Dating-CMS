@@ -82,7 +82,7 @@ class Rss extends DomDocument
                         $oImage->appendChild($oSub);
                     }
                 }
-                break;
+                    break;
 
                 case 'title':
                 case 'pubDate':
@@ -102,7 +102,7 @@ class Rss extends DomDocument
                 case 'textInput':
                 case 'source':
                     $oItem->appendChild($this->createElement($sElement, $mValue));
-                break;
+                    break;
             }
         }
 

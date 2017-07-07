@@ -35,8 +35,7 @@ class Module implements Mixable
 
     public function mixer()
     {
-        switch ($this->_sModName)
-        {
+        switch ($this->_sModName) {
 
         }
     }

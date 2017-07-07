@@ -108,7 +108,7 @@ class UserCoreModel extends Model
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable.'LogSess') . '(email, username, firstName, ip)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable . 'LogSess') . '(email, username, firstName, ip)
         VALUES (:email, :username, :firstName, :ip)');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
@@ -606,7 +606,7 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('SELECT email, username, firstName, hashValidation FROM' . Db::prefix($sTable) . 'WHERE email = :email AND active = 2');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->execute();
-        $oRow =  $rStmt->fetch(\PDO::FETCH_OBJ);
+        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $oRow;
