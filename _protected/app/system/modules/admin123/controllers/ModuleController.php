@@ -34,24 +34,17 @@ class ModuleController extends Controller
 
     public function index()
     {
-        if ($this->httpRequest->postExists('submit_mod_install'))
-        {
-            if ($this->_oModule->checkModFolder(Module::INSTALL, $this->httpRequest->post('submit_mod_install')))
-            {
+        if ($this->httpRequest->postExists('submit_mod_install')) {
+            if ($this->_oModule->checkModFolder(Module::INSTALL, $this->httpRequest->post('submit_mod_install'))) {
                 $this->_sModsDirModFolder = $this->httpRequest->post('submit_mod_install'); // Module Directory Path
                 $this->_install();
             }
-        }
-        elseif ($this->httpRequest->postExists('submit_mod_uninstall'))
-        {
-            if ($this->_oModule->checkModFolder(Module::UNINSTALL, $this->httpRequest->post('submit_mod_uninstall')))
-            {
+        } elseif ($this->httpRequest->postExists('submit_mod_uninstall')) {
+            if ($this->_oModule->checkModFolder(Module::UNINSTALL, $this->httpRequest->post('submit_mod_uninstall'))) {
                 $this->_sModsDirModFolder = $this->httpRequest->post('submit_mod_uninstall'); // Module Directory Path
                 $this->_unInstall();
             }
-        }
-        else
-        {
+        } else {
             $this->_sTitle = t('Module Manager');
             $this->view->page_title = $this->_sTitle;
             $this->view->h1_title = $this->_sTitle;

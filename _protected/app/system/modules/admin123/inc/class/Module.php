@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  * @version        1.1
  */
+
 namespace PH7;
 
 use PH7\Framework\Config\Config;
@@ -53,8 +54,7 @@ class Module
 
     public function run($sSwitch)
     {
-        if(empty($this->_sModsDirModFolder))
-        {
+        if (empty($this->_sModsDirModFolder)) {
             /**
              * $this->_sModsDirModFolder attribute must be defined by the method Module::setPath() before executing the following methods!
              * See the ModuleController for more information (Module::setPath() method).

@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -24,7 +25,7 @@ class DisableModuleFormProcess extends Form
         $this->disableMods($oModuleModel);
 
         // Then, enable the mods selected to be enabled
-        foreach($this->httpRequest->post('module_id') as $iModId) {
+        foreach ($this->httpRequest->post('module_id') as $iModId) {
             $oModuleModel->update($iModId, '1'); // Need to be string because in DB it's an "enum" type
         }
         unset($oModuleModel);
