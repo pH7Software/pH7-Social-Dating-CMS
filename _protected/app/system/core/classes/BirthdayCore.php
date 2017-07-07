@@ -9,17 +9,20 @@
 namespace PH7;
 
 use PH7\Framework\Mail\Mail;
+use stdClass;
 
 class BirthdayCore extends Core
 {
-    const MAX_BULK_EMAIL_NUMBER = 300, SLEEP_SEC = 10;
+    const MAX_BULK_EMAIL_NUMBER = 300;
+    const SLEEP_SEC = 10;
 
+    /** @var int */
     private static $_iTotalSent = 0;
 
     /**
      * Sent Birthday emails.
      *
-     * @return integer Total emails sent.
+     * @return int Total emails sent.
      */
     public function sendMails()
     {
@@ -32,7 +35,7 @@ class BirthdayCore extends Core
                 sleep(self::SLEEP_SEC);
             }
 
-            if ($this->sendMail($oBirths, $oMail)) {
+            if ($this->sendMail($oBirth, $oMail)) {
                 self::$_iTotalSent++;
             }
         }
@@ -44,17 +47,21 @@ class BirthdayCore extends Core
     /**
      * Send birthday emails to users.
      *
-     * @param object $oUser User data from the DB.
-     * @param \PH7\Framework\Mail\Mail $oMail
-     * @return integer Number of recipients who were accepted for delivery.
+     * @param stdClass $oUser User data from the DB.
+     * @param Mail $oMail
+     *
+     * @return int Number of recipients who were accepted for delivery.
      */
-    protected function sendMail($oUser, Mail $oMail)
+    protected function sendMail(stdClass $oUser, Mail $oMail)
     {
         $this->view->content = t('Hi %0%!', $oUser->firstName) . '<br />' .
             t("The %site_name%'s team wish you a very happy birthday!") . '<br />' .
             t('Enjoy it well and enjoy yourself!');
 
-        $sHtmlMsg = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/user/birthday.tpl', $oUser->email);
+        $sHtmlMsg = $this->view->parseMail(
+            PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_DEFAULT_THEME . '/tpl/mail/sys/mod/user/birthday.tpl',
+            $oUser->email
+        );
 
         $aInfo = [
             'subject' => t('Happy Birthday %0%!', $oUser->firstName),
