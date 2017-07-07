@@ -10,12 +10,12 @@
  * @version        1.1
  */
 
-namespace PH7\Framework\Error\CException {
+namespace PH7\Framework\Error\CException
+{
     defined('PH7') or exit('Restricted access');
 
     /**
      * This function for display errors with the ErrorException class which is defined by PH7Exception class.
-     * @access public
      */
     final class ErrException extends \ErrorException
     {
@@ -46,10 +46,11 @@ namespace PH7\Framework\Error\CException {
         }
 
     }
-
 }
 
-namespace {
+namespace
+{
+    use PH7\Framework\Error\CException\ErrException;
 
     /**
      * The code serves as severity
@@ -59,7 +60,8 @@ namespace {
      * @param string $sMessage
      * @param string $sFile
      * @param string $sLine
-     * @throws \PH7\Framework\Error\CException\ErrException
+     *
+     * @throws ErrException
      */
     function errExcept($iCode, $sMessage, $sFile, $sLine)
     {
@@ -67,7 +69,7 @@ namespace {
     }
 
     /**
-     * @param object $oExcept The \PH7\Framework\Error\CException\ErrException object.
+     * @param ErrException $oExcept
      */
     function customExcept(ErrException $oExcept)
     {
@@ -77,5 +79,4 @@ namespace {
 
     set_error_handler('errExcept');
     set_exception_handler('customExcept');
-
 }
