@@ -75,7 +75,7 @@ class Module
 
         $sValue = $this->_checkParam($sSwitch);
 
-        if($sValue === static::INSTALL) {
+        if ($sValue === static::INSTALL) {
             $this->_file($sValue);
             $this->_route($sValue);
             $this->_sql($sValue);
@@ -118,7 +118,7 @@ class Module
         $sValue = $this->_checkParam($sSwitch);
         $sFullPath = ($sValue === static::INSTALL) ? PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder : PH7_PATH_MOD . $sFolder;
 
-        return (!preg_match('#^[a-z0-9\-]{2,35}#i', $sFolder) || !is_file($sFullPath . PH7_CONFIG . PH7_CONFIG_FILE) || (PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder == PH7_PATH_MOD . $sFolder)) ? false : true;
+        return !preg_match('#^[a-z0-9\-]{2,35}#i', $sFolder) || !is_file($sFullPath . PH7_CONFIG . PH7_CONFIG_FILE) || (PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sFolder === PH7_PATH_MOD . $sFolder) ? false : true;
     }
 
     /**
@@ -148,7 +148,7 @@ class Module
     {
         $sValue = $this->_checkParam($sSwitch);
         $sDir = $this->_sModsDirModFolder . static::INSTALL_DIR . PH7_DS . static::INFO_DIR . PH7_DS;
-        $sPath = ($sValue == static::INSTALL) ? PH7_PATH_MOD . $sDir . static::INSTALL_INST_CONCL_FILE : PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sDir . static::UNINSTALL_INST_CONCL_FILE;
+        $sPath = ($sValue === static::INSTALL) ? PH7_PATH_MOD . $sDir . static::INSTALL_INST_CONCL_FILE : PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $sDir . static::UNINSTALL_INST_CONCL_FILE;
 
         try {
             return F\Import::file($sPath);
@@ -180,7 +180,7 @@ class Module
      */
     private function _file($sSwitch)
     {
-        if($sSwitch === static::INSTALL) {
+        if ($sSwitch === static::INSTALL) {
             $this->_oFile->systemRename(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sModsDirModFolder, PH7_PATH_MOD); // Files of module
             $this->_oFile->chmod(PH7_PATH_MOD . $this->_sModsDirModFolder, 0777);
         } else {
@@ -198,7 +198,7 @@ class Module
      */
     private function _sql($sSwitch)
     {
-        $sSqlFile = Config::getInstance()->values['database']['type_name'] . PH7_DS . ($sSwitch == static::INSTALL ? static::INSTALL_SQL_FILE : static::UNINSTALL_SQL_FILE);
+        $sSqlFile = Config::getInstance()->values['database']['type_name'] . PH7_DS . ($sSwitch === static::INSTALL ? static::INSTALL_SQL_FILE : static::UNINSTALL_SQL_FILE);
         $sPath = PH7_PATH_MOD . $this->_sModsDirModFolder . static::INSTALL_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $sSqlFile;
 
         if (is_file($sPath) && filesize($sPath) > 12) {
@@ -221,7 +221,7 @@ class Module
     {
         $this->_sModRoutePath = PH7_PATH_MOD . $this->_sModsDirModFolder . static::INSTALL_DIR . PH7_DS . static::ROUTE_FILE;
 
-        if(is_file($this->_sModRoutePath)) {
+        if (is_file($this->_sModRoutePath)) {
             ($sSwitch === static::INSTALL) ? $this->_addRoute() : $this->_removeRoute();
         }
     }
