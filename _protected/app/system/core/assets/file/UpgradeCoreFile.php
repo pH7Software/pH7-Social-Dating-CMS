@@ -9,6 +9,7 @@
  * @package          PH7 / App / System / Core / Asset / File
  * @version          1.3
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -180,10 +181,8 @@ class UpgradeCore extends Kernel
 
                 $this->_sHtml .= '</form>';
 
-                if ($this->_oHttpRequest->postExists('submit_upgrade'))
-                {
-                    if ($this->_checkUpgradeFolder($this->_oHttpRequest->post('submit_upgrade')))
-                    {
+                if ($this->_oHttpRequest->postExists('submit_upgrade')) {
+                    if ($this->_checkUpgradeFolder($this->_oHttpRequest->post('submit_upgrade'))) {
                         $this->_sUpgradesDirUpgradeFolder = $this->_oHttpRequest->post('submit_upgrade'); // Upgrade Directory Path
 
                         $this->_readConfig();
@@ -199,34 +198,26 @@ class UpgradeCore extends Kernel
                         $this->_check(); // Checking
 
                         // If not found error
-                        if (!$this->_displayIfErr())
-                        {
+                        if (!$this->_displayIfErr()) {
                             $this->_run(); // Run Upgrade!
 
                             // If no error
-                            if (!$this->_displayIfErr())
-                            {
+                            if (!$this->_displayIfErr()) {
                                 /**
                                  * It resets the HTML variable ($this->_sHtml) to not display versions upgrade available.
                                  * The user can refresh the page to réaficher the upgrade available.
-                                */
+                                 */
                                 $this->_sHtml = '<h3 class="success">' . t('Your update ran successfully!') . '</h3>';
 
-                                if ($this->_bAutoRemoveUpgradeDir)
-                                {
-                                    if ($this->_removeUpgradeDir())
-                                    {
+                                if ($this->_bAutoRemoveUpgradeDir) {
+                                    if ($this->_removeUpgradeDir()) {
                                         $this->_sHtml .= '<p class="success">' . t('The upgrade directory <em>(~%0%)</em> has been deleted!', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder) . '</p>';
                                         $this->_sHtml .= '<p class="success">' . t('Status... OK!') . '</p>';
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         $this->_sHtml .= '<p class="error">' . t('The upgrade directory <em>(~%0%)</em> could not be deleted, please delete it manually using an FTP client or SSH.', PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder) . '</p>';
                                         $this->_sHtml .= '<p class="error">' . t('Status... Failure!') . '</p>';
                                     }
-                                }
-                                else
-                                {
+                                } else {
                                     $this->_sHtml .= '<p>' . t('Please delete the upgrade file using an FTP client or SSH.') . '</p>';
                                 }
 

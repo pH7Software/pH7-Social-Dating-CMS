@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form / Processing
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -20,18 +21,12 @@ class ResendActivationCoreFormProcess extends Form
 
         $sMail = $this->httpRequest->post('mail');
 
-        if ( ! (new ExistsCoreModel)->email($sMail, $sTable) )
-        {
-            \PFBC\Form::setError('form_resend_activation', t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sMail,0,PH7_MAX_EMAIL_LENGTH))));
-        }
-        else
-        {
-            if ( !$mHash = (new UserCoreModel)->getHashValidation($sMail) )
-            {
+        if (!(new ExistsCoreModel)->email($sMail, $sTable)) {
+            \PFBC\Form::setError('form_resend_activation', t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sMail, 0, PH7_MAX_EMAIL_LENGTH))));
+        } else {
+            if (!$mHash = (new UserCoreModel)->getHashValidation($sMail)) {
                 \PFBC\Form::setError('form_resend_activation', t('Oops! Your account is already activated.'));
-            }
-            else
-            {
+            } else {
                 $iRet = $this->sendMail($mHash, $sTable);
 
                 if ($iRet)
@@ -52,7 +47,7 @@ class ResendActivationCoreFormProcess extends Form
     protected function sendMail($oHash, $sTable)
     {
         $sMod = ($sTable == 'Affiliates') ? 'affiliate' : 'user';
-        $sActivateLink = Uri::get($sMod,'account','activate') . PH7_SH . $oHash->email . PH7_SH . $oHash->hashValidation;
+        $sActivateLink = Uri::get($sMod, 'account', 'activate') . PH7_SH . $oHash->email . PH7_SH . $oHash->hashValidation;
 
         $this->view->content = t('Welcome to %site_name%, %0%!', $oHash->firstName) . '<br />' .
             t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $oHash->firstName) . '<br />' .
@@ -63,7 +58,7 @@ class ResendActivationCoreFormProcess extends Form
             t('Password: ***** (this field is hidden to protect against theft of your account).') . '</em>';
 
         $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $oHash->email) . '<br />' .
-                t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
+            t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
         $sHtmlMessage = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/resend_activation.tpl', $oHash->email);
 

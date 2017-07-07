@@ -8,6 +8,7 @@
  * @package          PH7 / App / System / Core / Asset / Cron / 24H
  * @version          1.0
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 

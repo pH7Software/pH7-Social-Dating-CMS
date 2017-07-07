@@ -16,7 +16,7 @@ use PH7\Framework\Mvc\Router\Uri;
  */
 abstract class RegistrationCore extends Core
 {
-    const REFERENCE_VAR_NAME ='join_ref';
+    const REFERENCE_VAR_NAME = 'join_ref';
 
     /**
      * @var integer $iActiveType
@@ -26,9 +26,9 @@ abstract class RegistrationCore extends Core
 
     public function __construct()
     {
-       parent::__construct();
+        parent::__construct();
 
-       $this->iActiveType = DbConfig::getSetting('userActivationType');
+        $this->iActiveType = DbConfig::getSetting('userActivationType');
     }
 
     /**
@@ -41,21 +41,20 @@ abstract class RegistrationCore extends Core
      */
     public function sendMail(array $aInfo, $bIsUniversalLogin = false)
     {
-        switch($this->iActiveType)
-        {
+        switch ($this->iActiveType) {
             case 1:
-                $sEmailMsg = t('Please %0% now to meet new people!', '<a href="' . Uri::get('user','main','login') . '"><b>'.t('log in').'</b></a>');
-            break;
+                $sEmailMsg = t('Please %0% now to meet new people!', '<a href="' . Uri::get('user', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
+                break;
 
             case 2:
                 /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
-                $sActivateLink = Uri::get('user','account','activate') . PH7_SH . $aInfo['email'] . PH7_SH . $aInfo['hash_validation'];
+                $sActivateLink = Uri::get('user', 'account', 'activate') . PH7_SH . $aInfo['email'] . PH7_SH . $aInfo['hash_validation'];
                 $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
-            break;
+                break;
 
             case 3:
                 $sEmailMsg = t('Caution! Your account is not activated yet. You will receive an email of any decision.');
-            break;
+                break;
 
             default:
                 $sEmailMsg = '';
@@ -68,21 +67,21 @@ abstract class RegistrationCore extends Core
         }
 
         $this->view->content = t('Welcome to %site_name%, %0%!', $aInfo['first_name']) . '<br />' .
-        t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $aInfo['first_name']) . '<br />' .
-        $sEmailMsg . '<br />' .
-        '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
-        t('Email: %0%.', $aInfo['email']) . '<br />' .
-        t('Username: %0%.', $aInfo['username']) . '<br />' .
-        $sPwdMsg . '</em>';
+            t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $aInfo['first_name']) . '<br />' .
+            $sEmailMsg . '<br />' .
+            '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
+            t('Email: %0%.', $aInfo['email']) . '<br />' .
+            t('Username: %0%.', $aInfo['username']) . '<br />' .
+            $sPwdMsg . '</em>';
         $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aInfo['email']) . '<br />' .
-        t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
+            t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
         $sTplName = (defined('PH7_TPL_MAIL_NAME')) ? PH7_TPL_MAIL_NAME : PH7_DEFAULT_THEME;
         $sMsgHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . $sTplName . '/tpl/mail/sys/mod/user/account_registration.tpl', $aInfo['email']);
 
         $aMailInfo = [
-          'to' => $aInfo['email'],
-          'subject' => t('Hello %0%, Welcome to %site_name%!', $aInfo['first_name'])
+            'to' => $aInfo['email'],
+            'subject' => t('Hello %0%, Welcome to %site_name%!', $aInfo['first_name'])
         ];
 
         (new Framework\Mail\Mail)->send($aMailInfo, $sMsgHtml);
@@ -97,19 +96,18 @@ abstract class RegistrationCore extends Core
      */
     public function getMsg()
     {
-        switch($this->iActiveType)
-        {
+        switch ($this->iActiveType) {
             case 1:
                 $sMsg = t('Login now!');
-            break;
+                break;
 
             case 2:
                 $sMsg = t('Please activate your account by clicking the activation link you received by email. If you can not find the email, please look in your SPAM FOLDER and mark as not spam.');
-             break;
+                break;
 
             case 3:
                 $sMsg = t('Your account must be approved by an administrator. You will receive an email of any decision.');
-            break;
+                break;
 
             default:
                 $sMsg = '';

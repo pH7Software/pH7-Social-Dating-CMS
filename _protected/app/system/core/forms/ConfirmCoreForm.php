@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -13,16 +14,16 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class ConfirmCoreForm
 {
-   /**
-    * @param array $aParam The parameters
-    * @return void
-    */
+    /**
+     * @param array $aParam The parameters
+     * @return void
+     */
     public static function display(array $aParam)
     {
         $sUrl = Uri::get($aParam['module'], $aParam['controller'], $aParam['action']);
 
         $oForm = new \PFBC\Form('form_confirm');
-        $oForm->configure(array('action'=>$sUrl));
+        $oForm->configure(array('action' => $sUrl));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_confirm', 'form_confirm'));
         $oForm->addElement(new \PFBC\Element\Token(substr($sUrl, -14, -6))); // Create a name token and generate a random token
         $oForm->addElement(new \PFBC\Element\Hidden('id', $aParam['id']));
@@ -33,7 +34,7 @@ class ConfirmCoreForm
          * Bug Ajax jQuery -> https://github.com/jquery/jquery-mobile/issues/3202
          * $oForm->addElement(new \PFBC\Element\Button($aParam['label'], 'submit', array('formaction'=>$sUrl)));
          */
-        $oForm->addElement(new \PFBC\Element\Button(t('Cancel'), 'cancel', array('onclick'=>'$("form").attr("action", "");parent.$.colorbox.close();return false'))); // Bug fixes
+        $oForm->addElement(new \PFBC\Element\Button(t('Cancel'), 'cancel', array('onclick' => '$("form").attr("action", "");parent.$.colorbox.close();return false'))); // Bug fixes
         $oForm->render();
     }
 }

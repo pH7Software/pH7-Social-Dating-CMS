@@ -48,28 +48,43 @@ abstract class PermissionCore extends Framework\Core\Core
     public function signUpRedirect()
     {
         Header::redirect(
-            Uri::get('user','signup','step1'),
+            Uri::get('user', 'signup', 'step1'),
             $this->signUpMsg(),
             Design::ERROR_TYPE
         );
     }
 
+    public function signUpMsg()
+    {
+        return t('Please register or login to continue.');
+    }
+
     public function signInRedirect()
     {
         Header::redirect(
-            Uri::get('user','main','login'),
+            Uri::get('user', 'main', 'login'),
             $this->signInMsg(),
             Design::ERROR_TYPE
         );
     }
 
+    public function signInMsg()
+    {
+        return t('Please sign in first 😉');
+    }
+
     public function alreadyConnectedRedirect()
     {
         Header::redirect(
-            Uri::get('user','account','index'),
+            Uri::get('user', 'account', 'index'),
             $this->alreadyConnectedMsg(),
             Design::ERROR_TYPE
         );
+    }
+
+    public function alreadyConnectedMsg()
+    {
+        return t('Oops! You are already connected.');
     }
 
     /**
@@ -80,34 +95,19 @@ abstract class PermissionCore extends Framework\Core\Core
     public function paymentRedirect()
     {
         Header::redirect(
-            Uri::get('payment','main','index'),
+            Uri::get('payment', 'main', 'index'),
             $this->upgradeMembershipMsg(),
             Design::WARNING_TYPE
         );
     }
 
-    public function signInMsg()
+    public function upgradeMembershipMsg()
     {
-        return t('Please sign in first 😉');
+        return t('Please upgrade your membership!');
     }
 
     public function adminSignInMsg()
     {
         return t('Please go to the admin panel and log in as administrator.');
-    }
-
-    public function alreadyConnectedMsg()
-    {
-        return t('Oops! You are already connected.');
-    }
-
-    public function signUpMsg()
-    {
-        return t('Please register or login to continue.');
-    }
-
-    public function upgradeMembershipMsg()
-    {
-        return t('Please upgrade your membership!');
     }
 }
