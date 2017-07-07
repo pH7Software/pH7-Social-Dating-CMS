@@ -26,7 +26,9 @@ final class DbConfig
     /**
      * Private constructor to prevent instantiation of class, because it's a static class.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * @param string $sSetting You can specify a specific parameter. Default NULL

@@ -19,15 +19,14 @@ class Module extends Engine\Model
     /**
      * Get all modules status (enabled & disabled).
      *
-     * @param string $sFolderName  Name of the module folder. Default: NULL
+     * @param string $sFolderName Name of the module folder. Default: NULL
      * @return object
      */
     public function get($sFolderName = null)
     {
         $this->cache->start(static::CACHE_GROUP, 'list' . $sFolderName, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             $bIsFolderName = !empty($sFolderName);
             $sSelect = ($bIsFolderName) ? 'enabled' : '*';
             $sSqlWhere = ($bIsFolderName) ? 'WHERE folderName = :modName LIMIT 1' : '';

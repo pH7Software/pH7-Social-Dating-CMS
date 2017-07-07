@@ -106,8 +106,7 @@ class Browser
             return true;
 
         $sHttpAccept = Server::getVar(Server::HTTP_ACCEPT);
-        if (null !== $sHttpAccept)
-        {
+        if (null !== $sHttpAccept) {
             $sHttpAccept = strtolower($sHttpAccept);
 
             if (false !== strpos($sHttpAccept, 'wap'))
@@ -115,8 +114,7 @@ class Browser
         }
 
         $sUserAgent = self::getUserAgent();
-        if (null !== $sUserAgent)
-        {
+        if (null !== $sUserAgent) {
             // For most mobile/tablet browsers
             if (false !== strpos($sUserAgent, 'Mobile'))
                 return true;

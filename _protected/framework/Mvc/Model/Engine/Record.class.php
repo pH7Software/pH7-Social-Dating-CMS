@@ -82,8 +82,7 @@ class Record
     public function getErrors()
     {
         $sErrMsg = '';
-        if (count($this->_aErrors) > 1)
-        {
+        if (count($this->_aErrors) > 1) {
             foreach ($this->_aErrors as $sError)
                 $sErrMsg .= $sError . "\r\n";
         }
@@ -310,8 +309,7 @@ class Record
      */
     public function getAllInOne($mTable, $sField = null, $sId = null, $mWhat = '*', array $aJoin = null, $sOptions = null)
     {
-        try
-        {
+        try {
             if (is_array($mTable)) {
                 $sTable = '';
                 foreach ($mTable as $sTable) {
@@ -354,9 +352,7 @@ class Record
             Db::free($rStmt);
 
             return $oRow;
-        }
-        catch (Exception $oE)
-        {
+        } catch (Exception $oE) {
             $this->_aErrors[] = $oE->getMessage();
         }
     }

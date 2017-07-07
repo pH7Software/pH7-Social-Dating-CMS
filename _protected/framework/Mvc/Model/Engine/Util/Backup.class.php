@@ -62,14 +62,12 @@ class Backup
         $oDb = Db::getInstance();
 
         // Loop through tables
-        foreach ($aTables as $sTable)
-        {
+        foreach ($aTables as $sTable) {
             $oResult = $oDb->query('SHOW CREATE TABLE ' . $sTable);
 
-            $iNum = (int) $oResult->rowCount();
+            $iNum = (int)$oResult->rowCount();
 
-            if ($iNum > 0)
-            {
+            if ($iNum > 0) {
                 $aRow = $oResult->fetch();
 
                 $this->_sSql .= "#\n# Table: $sTable\r\n#\r\n\r\n";
@@ -89,16 +87,12 @@ class Backup
 
             $oResult = $oDb->query('SELECT * FROM ' . $sTable);
 
-            $iNum = (int) $oResult->rowCount();
+            $iNum = (int)$oResult->rowCount();
 
-            if ($iNum > 0)
-            {
-                while ($aRow = $oResult->fetch())
-                {
-                    foreach ($aRow as $sColumn => $sValue)
-                    {
-                        if (!is_numeric($sColumn))
-                        {
+            if ($iNum > 0) {
+                while ($aRow = $oResult->fetch()) {
+                    foreach ($aRow as $sColumn => $sValue) {
+                        if (!is_numeric($sColumn)) {
                             if (!is_numeric($sValue) && !empty($sValue))
                                 $sValue = Db::getInstance()->quote($sValue);
 
@@ -141,9 +135,9 @@ class Backup
      */
     public function save()
     {
-         $rHandle = fopen($this->_sPathName, 'wb');
-         fwrite($rHandle, $this->_sSql);
-         fclose($rHandle);
+        $rHandle = fopen($this->_sPathName, 'wb');
+        fwrite($rHandle, $this->_sSql);
+        fclose($rHandle);
     }
 
     /**
@@ -185,7 +179,7 @@ class Backup
 
         gzclose($rArchive);
 
-        $sSqlContent = str_replace(PH7_TABLE_PREFIX,  Db::prefix(), $sSqlContent);
+        $sSqlContent = str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
         $oDb = Db::getInstance()->exec($sSqlContent);
         unset($sSqlContent);
 
@@ -228,7 +222,7 @@ class Backup
         header('Content-Disposition: attachment; filename=' . $this->_sPathName);
 
         /***** Show the SQL contents *****/
-        echo ($bArchive ? gzencode($this->_sSql, 9, FORCE_GZIP) : $this->_sSql);
+        echo($bArchive ? gzencode($this->_sSql, 9, FORCE_GZIP) : $this->_sSql);
 
         /***** Catch output *****/
         $sBuffer = ob_get_contents();

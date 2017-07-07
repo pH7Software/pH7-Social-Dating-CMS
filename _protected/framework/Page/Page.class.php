@@ -22,7 +22,9 @@ class Page
      *
      * @access private
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Set a maintenance page.

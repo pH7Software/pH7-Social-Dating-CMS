@@ -71,7 +71,7 @@ class Uri
     public static function get($sModule, $sController, $sAction, $sVars = null, $bFullClean = true)
     {
         static::$_bFullClean = $bFullClean;
-        $sUrl = static::_uri( array('module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars) );
+        $sUrl = static::_uri(array('module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars));
         return $sUrl;
     }
 
@@ -114,7 +114,7 @@ class Uri
                 $sUri = $oRoute->getAttribute('url');
                 $sUri = str_replace('\\', '', $sUri);
                 $sUri = preg_replace('#\(.+\)#', '', $sUri);
-                $sUri = preg_replace('#([/\?]+)$#', '',$sUri);
+                $sUri = preg_replace('#([/\?]+)$#', '', $sUri);
 
                 return PH7_URL_ROOT . $sUri . $sVars;
             }

@@ -19,7 +19,9 @@ class Various
      *
      * @access private
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Convert bytes to human readable format.

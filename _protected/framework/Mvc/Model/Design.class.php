@@ -45,9 +45,9 @@ class Design extends HtmlDesign
             }
 
             // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang->langId,0,2);
+            $sAbbrLang = substr($sLang->langId, 0, 2);
 
-            echo '<a href="', $sCurrentPage, $sLang->langId, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang),'" title="', t($sAbbrLang),'" /></a>&nbsp;';
+            echo '<a href="', $sCurrentPage, $sLang->langId, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
 
         unset($oLangs);

@@ -91,29 +91,24 @@ class Security
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable.'AttemptsLogin') . 'WHERE ip = :ip LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable . 'AttemptsLogin') . 'WHERE ip = :ip LIMIT 1');
         $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_STR);
         $rStmt->execute();
 
-        if ($rStmt->rowCount() == 1)
-        {
+        if ($rStmt->rowCount() == 1) {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
 
-            if ($oRow->attempts >= $iMaxAttempts)
-            {
+            if ($oRow->attempts >= $iMaxAttempts) {
                 $sLockoutTime = (new \DateTime($oRow->lastLogin))->add(\DateInterval::createFromDateString("$iAttemptTime minutes"))->format('Y-m-d H:i:s');
 
-                if ($sLockoutTime > $this->_sCurrentTime)
-                {
+                if ($sLockoutTime > $this->_sCurrentTime) {
                     /**
                      * Send email to prevent that someone tries to hack their member account.
                      * We test that the number of attempts equals the number of maximim tantatives to avoid duplication of sending emails.
                      */
                     if ($oRow->attempts == $iMaxAttempts)
                         (new \PH7\Security)->sendAlertLoginAttemptsExceeded($iMaxAttempts, $iAttemptTime, $this->_sIp, $sEmail, $oView, $sTable);
-                }
-                else
-                {
+                } else {
                     // Clear Login Attempts
                     $this->clearLoginAttempts($sTable);
                     return true; // Authorized

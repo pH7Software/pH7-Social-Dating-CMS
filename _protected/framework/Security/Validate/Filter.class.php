@@ -33,7 +33,8 @@ defined('PH7') or exit('Restricted access');
  * @author        ExpressionEngine Dev Team
  * @link        http://codeigniter.com/user_guide/libraries/security.html
  */
-class Filter {
+class Filter
+{
 
     /**
      * Random Hash for protecting URLs

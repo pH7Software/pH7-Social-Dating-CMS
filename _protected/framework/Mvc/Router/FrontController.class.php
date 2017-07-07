@@ -71,8 +71,7 @@ final class FrontController
 
         $this->indexFileRouter();
 
-        if ($this->oUri->fragment(0) === 'asset' && $this->oUri->fragment(1) === 'gzip')
-        {
+        if ($this->oUri->fragment(0) === 'asset' && $this->oUri->fragment(1) === 'gzip') {
             // Loading and compress CSS and JavaScript files
             $this->gzipRouter();
             exit;
@@ -589,18 +588,15 @@ final class FrontController
 
         $this->_templateInitialize();
 
-        if (is_file($this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php'))
-        {
+        if (is_file($this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php')) {
             // For additional options modules
             if (is_file($this->oRegistry->path_module . 'Bootstrap.php'))
                 require_once $this->oRegistry->path_module . 'Bootstrap.php'; // Include Bootstrap Module if there exists
 
             $sController = 'PH7\\' . $this->oRegistry->controller;
-            if (class_exists($sController) && (new \ReflectionClass($sController))->hasMethod($this->oRegistry->action))
-            {
+            if (class_exists($sController) && (new \ReflectionClass($sController))->hasMethod($this->oRegistry->action)) {
                 $oMvc = new \ReflectionMethod($sController, $this->oRegistry->action);
-                if ($oMvc->isPublic())
-                {
+                if ($oMvc->isPublic()) {
                     $oCtrl = new $sController;
 
                     // And finally we perform the controller's action
@@ -635,14 +631,11 @@ final class FrontController
     {
         $aRequest = array();
 
-        if (count($this->aRequestParameter) > 0)
-        {
-            foreach ($this->aRequestParameter as $sVal)
-            {
+        if (count($this->aRequestParameter) > 0) {
+            foreach ($this->aRequestParameter as $sVal) {
                 $sVal = trim($this->secureRequestParameter($sVal));
 
-                if ($sVal !== '')
-                {
+                if ($sVal !== '') {
                     // Clean the slug URL
                     $sVal = $this->cleanSlugUrl($sVal);
 
