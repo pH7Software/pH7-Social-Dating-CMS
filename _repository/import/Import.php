@@ -9,6 +9,7 @@
  * @package          PH7 / Install / Class
  * @version          0.1
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
