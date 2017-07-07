@@ -41,9 +41,22 @@ JS;
         }
     }
 
-    public function renderAjaxErrorResponse() {
+    private function parse($errors)
+    {
+        $list = array();
+        if (!empty($errors)) {
+            $keys = array_keys($errors);
+            $keySize = sizeof($keys);
+            for ($k = 0; $k < $keySize; ++$k)
+                $list = array_merge($list, $errors[$keys[$k]]);
+        }
+        return $list;
+    }
+
+    public function renderAjaxErrorResponse()
+    {
         $errors = $this->parse($this->form->getErrors());
-        if(!empty($errors)) {
+        if (!empty($errors)) {
             \PH7\Framework\Http\Http::setContentType('application/json');
             echo json_encode(array('errors' => $errors));
         }

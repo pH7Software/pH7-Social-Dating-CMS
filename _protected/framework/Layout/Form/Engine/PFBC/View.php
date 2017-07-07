@@ -47,5 +47,26 @@ CSS;
         }
     }
 
-    public function renderJS() {}
+    public function renderJS()
+    {
+    }
+
+    protected function renderLabel(Element $element)
+    {
+        $label = $element->getLabel();
+        $id = $element->getID();
+        $description = $element->getDescription();
+        if (!empty($label) || !empty($description)) {
+            echo '<div class="pfbc-label">';
+            if (!empty($label)) {
+                echo '<label for="', $id, '">';
+                if ($element->isRequired())
+                    echo '<strong>*</strong> ';
+                echo $label, '</label>';
+            }
+            if (!empty($description))
+                echo '<em>', $description, '</em>';
+            echo '</div>';
+        }
+    }
 }
