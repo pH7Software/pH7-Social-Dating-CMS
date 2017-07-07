@@ -1,28 +1,32 @@
 <?php
+
 namespace PFBC\View;
 
-class Horizontal extends \PFBC\View {
+class Horizontal extends \PFBC\View
+{
     protected $labelPaddingTop;
 
-    public function jQueryDocumentReady() {
+    public function jQueryDocumentReady()
+    {
         $id = $this->form->getId();
         echo 'jQuery("#', $id, ' .pfbc-element:last").css("margin-right", "0");';
     }
 
-    public function render() {
+    public function render()
+    {
         echo '<form', $this->form->getAttributes(), '>';
         $this->form->getError()->render();
 
         $elements = $this->form->getElements();
         $elementSize = sizeof($elements);
-        for($e = 0; $e < $elementSize; ++$e) {
+        for ($e = 0; $e < $elementSize; ++$e) {
             $element = $elements[$e];
 
-            if($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTMLExternal)
+            if ($element instanceof \PFBC\Element\Hidden || $element instanceof \PFBC\Element\HTMLExternal)
                 $element->render();
             else {
                 echo '<div class="pfbc-element">', $element->getPreHTML();
-                if(!$element instanceof \PFBC\Element\Button)
+                if (!$element instanceof \PFBC\Element\Button)
                     $this->renderLabel($element);
                 $element->render();
                 echo $element->getPostHTML(), '</div>';
@@ -32,7 +36,8 @@ class Horizontal extends \PFBC\View {
         echo '<div style="clear: both;"></div></form>';
     }
 
-    public function renderCSS() {
+    public function renderCSS()
+    {
         $id = $this->form->getId();
 
         parent::renderCSS();
@@ -42,11 +47,11 @@ class Horizontal extends \PFBC\View {
 #$id .pfbc-label { float: left; margin-right: .25em; }
 CSS;
 
-        if(empty($this->labelPaddingTop) && !in_array("style", $this->form->getPrevent()))
+        if (empty($this->labelPaddingTop) && !in_array("style", $this->form->getPrevent()))
             $this->labelPaddingTop = ".75em";
 
-        if(!empty($this->labelPaddingTop)) {
-            if(is_numeric($this->labelPaddingTop))
+        if (!empty($this->labelPaddingTop)) {
+            if (is_numeric($this->labelPaddingTop))
                 $this->labelPaddingTop .= "px";
             echo '#', $id, ' .pfbc-label { padding-top: ', $this->labelPaddingTop, '; }';
         }
