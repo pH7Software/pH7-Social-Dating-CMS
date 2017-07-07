@@ -30,7 +30,9 @@ final class LoggerExcept extends Logger
             FrontController::getInstance()->_databaseInitialize();
         } catch (ModelException $oE) {
             // If we are not in development mode, we display an error message to avoid showing information on the database.
-            if (!Debug::is()) exit('Could not connect to database server!');
+            if (!Debug::is()) {
+                exit('Could not connect to database server!');
+            }
         }
 
         parent::__construct();
@@ -39,7 +41,8 @@ final class LoggerExcept extends Logger
     /**
      * Write to the logfile.
      *
-     * @param object $oExcept \Exception object.
+     * @param Exception $oExcept
+     *
      * @return void
      */
     public function except(Exception $oExcept)
