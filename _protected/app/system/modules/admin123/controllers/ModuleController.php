@@ -12,7 +12,14 @@ use PH7\Framework\File\File;
 
 class ModuleController extends Controller
 {
-    private $_oModule, $_sModsDirModFolder, $_sTitle;
+    /** @var Module */
+    private $_oModule;
+
+    /** @var string */
+    private $_sModsDirModFolder;
+
+    /** @var string */
+    private $_sTitle;
 
     public function __construct()
     {

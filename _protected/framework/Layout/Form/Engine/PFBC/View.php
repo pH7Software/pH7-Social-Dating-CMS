@@ -64,8 +64,10 @@ CSS;
                     echo '<strong>*</strong> ';
                 echo $label, '</label>';
             }
-            if (!empty($description))
+            if (!empty($description)) {
                 echo '<em>', $description, '</em>';
+            }
+
             echo '</div>';
         }
     }
