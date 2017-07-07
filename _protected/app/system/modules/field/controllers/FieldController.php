@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Field / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
@@ -46,16 +47,13 @@ class FieldController extends Controller
 
     public function edit($sMod = '', $sName = '')
     {
-        if (Field::isExists($sMod, $sName))
-        {
+        if (Field::isExists($sMod, $sName)) {
             $this->sTitle = t('Edit a Field');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
 
             $this->output();
-        }
-        else
-        {
+        } else {
             $this->displayPageNotFound(t('Field "%0%" is not found!', $sName));
         }
     }
@@ -67,8 +65,7 @@ class FieldController extends Controller
 
         if (Field::unmodifiable($sName) || !Field::isExists($sMod, $sName))
             $bStatus = false;
-        else
-        {
+        else {
             $bStatus = (new FieldModel(Field::getTable($sMod), $sName))->delete();
             /* Clean UserCoreModel Cache */
             if ($bStatus) (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();

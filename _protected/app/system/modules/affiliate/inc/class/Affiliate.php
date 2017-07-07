@@ -24,7 +24,7 @@ class Affiliate extends AffiliateCore
     {
         (new Session)->destroy();
 
-        Header::redirect(Uri::get('affiliate','home','index'), t('You are successfully logged out.'));
+        Header::redirect(Uri::get('affiliate', 'home', 'index'), t('You are successfully logged out.'));
     }
 
     /**
@@ -41,13 +41,10 @@ class Affiliate extends AffiliateCore
 
         $iAffId = $oAffModel->getId(null, $sUsername, 'Affiliates');
 
-        if (!$oCookie->exists(static::COOKIE_NAME))
-        {
+        if (!$oCookie->exists(static::COOKIE_NAME)) {
             $this->_setCookie($iAffId, $oCookie); // Set a week
             $oAffModel->addRefer($iAffId); // Add a reference only for new clicks (if the cookie does not exist)
-        }
-        else
-        {
+        } else {
             $this->_setCookie($iAffId, $oCookie); // Add an extra week
         }
 
@@ -63,6 +60,6 @@ class Affiliate extends AffiliateCore
      */
     private function _setCookie($iAffId, Cookie $oCookie)
     {
-        $oCookie->set(static::COOKIE_NAME, $iAffId, 3600*24*7);
+        $oCookie->set(static::COOKIE_NAME, $iAffId, 3600 * 24 * 7);
     }
 }

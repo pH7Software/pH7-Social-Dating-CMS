@@ -7,6 +7,7 @@
  * @link           http://ph7cms.com
  * @link           http://github.com/pH7Software/pH7CMS-HTTP-REST-Push-Data
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -28,12 +29,9 @@ class UserController extends MainController
 
     public function createAccount()
     {
-        if ($this->oRest->getRequestMethod() != 'POST')
-        {
+        if ($this->oRest->getRequestMethod() != 'POST') {
             $this->oRest->response('', 406);
-        }
-        else
-        {
+        } else {
             $aReqs = $this->oRest->getRequest();
 
             // Set the User Setting variables

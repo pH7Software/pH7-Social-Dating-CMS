@@ -60,7 +60,7 @@ abstract class Api
         $oUserData = $oUserModel->readProfile($iId);
         $oUser = new UserCore;
 
-        if(true === ($sErrMsg = $oUser->checkAccountStatus($oUserData)))
+        if (true === ($sErrMsg = $oUser->checkAccountStatus($oUserData)))
             $oUser->setAuth($oUserData, $oUserModel, new Framework\Session\Session, new Framework\Mvc\Model\Security);
 
         unset($oUser, $oUserModel);

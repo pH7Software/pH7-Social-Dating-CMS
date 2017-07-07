@@ -3,9 +3,9 @@
 <script src="{url_static}fileManager/js/elfinder.js"></script>
 
 <script>
-$(function() {
-  $('#elfinder').elfinder({
-    url: pH7Url.base + '{url_admin_mod}asset/ajax/fileManager/{type}Connector/'
-  }).elfinder('instance');
-});
+    $(function () {
+        $('#elfinder').elfinder({
+            url: pH7Url.base + '{url_admin_mod}asset/ajax/fileManager/{type}Connector/'
+        }).elfinder('instance');
+    });
 </script>

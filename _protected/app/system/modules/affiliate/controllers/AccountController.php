@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -54,18 +55,13 @@ class AccountController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
-        if ($this->httpRequest->get('delete_status') == 'yesdelete')
-        {
+        if ($this->httpRequest->get('delete_status') == 'yesdelete') {
             $this->session->set('yes_delete', 1);
             Header::redirect(Uri::get('affiliate', 'account', 'yesdelete'));
-        }
-        elseif ($this->httpRequest->get('delete_status') == 'nodelete')
-        {
+        } elseif ($this->httpRequest->get('delete_status') == 'nodelete') {
             $this->view->delete_status = false;
             $this->design->setRedirect(Uri::get('affiliate', 'home', 'index'), null, null, 4);
-        }
-        else
-        {
+        } else {
             $this->view->delete_status = true;
         }
 

@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Comment / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -15,8 +16,7 @@ class CommentModel extends CommentCoreModel
     {
         $this->cache->start(static::CACHE_GROUP, 'get' . $iCommentId . $iApproved . $sTable, static::CACHE_TIME);
 
-        if(!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             $sTable = CommentCore::checkTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') . 'AS m ON c.sender = m.profileId WHERE commentId = :commentId AND c.approved =:approved LIMIT 1');

@@ -40,7 +40,7 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt->bindValue(':lastActivity', $aData['current_date'], \PDO::PARAM_STR);
         $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();
-        $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the affiliate's ID
+        $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the affiliate's ID
         Db::free($rStmt);
 
         return $this->join2($aData);

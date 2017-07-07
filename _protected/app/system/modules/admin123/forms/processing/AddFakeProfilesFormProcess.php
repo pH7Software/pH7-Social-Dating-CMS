@@ -8,6 +8,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -35,12 +36,10 @@ class AddFakeProfilesFormProcess extends Form
         $oExistsModel = new ExistsCoreModel;
         $oValidate = new Validate;
 
-        foreach ($this->getApiClient()['results'] as $aUser)
-        {
+        foreach ($this->getApiClient()['results'] as $aUser) {
             $sEmail = trim($aUser['email']);
             $sUsername = trim($aUser['login']['username']);
-            if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail) && $oValidate->username($sUsername))
-            {
+            if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail) && $oValidate->username($sUsername)) {
                 $aData['username'] = $sUsername;
                 $aData['email'] = $sEmail;
                 $aData['first_name'] = $aUser['name']['first'];
