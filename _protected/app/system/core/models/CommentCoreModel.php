@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Core / Model
  * @version        1.0
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -62,8 +63,7 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         $this->cache->start(static::CACHE_GROUP, 'total' . $iRecipientId . $sTable, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             $sTable = CommentCore::checkTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('Comments' . $sTable) . ' WHERE recipient = :recipient');

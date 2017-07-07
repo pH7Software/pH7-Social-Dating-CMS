@@ -76,7 +76,7 @@ class SearchCoreModel
             case static::UPDATED:
                 $sAsTable = (!empty($sAsTable)) ? $sAsTable . '.' : '';
                 $sOrderBy = $sColumn;
-            break;
+                break;
 
             default:
                 $sAsTable = ''; // No Alias because it is an SQL function

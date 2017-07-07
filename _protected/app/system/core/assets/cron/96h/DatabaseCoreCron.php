@@ -25,29 +25,27 @@ class DatabaseCoreCron extends Cron
         parent::__construct();
 
         // Available options
-        if ($this->httpRequest->getExists('option'))
-        {
-            switch ($this->httpRequest->get('option'))
-            {
+        if ($this->httpRequest->getExists('option')) {
+            switch ($this->httpRequest->get('option')) {
                 // Backup
                 case 'backup':
                     $this->backup();
-                break;
+                    break;
 
                 // Restart Stat
                 case 'stat':
                     $this->stat();
-                break;
+                    break;
 
                 // Repair Tables
                 case 'repair':
                     $this->repair();
-                break;
+                    break;
 
                 // Delete Log
                 case 'remove_log':
                     $this->removeLog();
-                break;
+                    break;
 
                 default:
                     Framework\Http\Http::setHeadersByCode(400);

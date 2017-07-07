@@ -39,7 +39,7 @@ class CommentCore
             case 'note':
             case 'game':
                 return ucfirst($sTable);
-            break;
+                break;
 
             default:
                 Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);

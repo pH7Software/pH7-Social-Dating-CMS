@@ -40,12 +40,11 @@ class AdsCore extends Framework\Ads\Ads
      */
     public static function checkTable($sTable)
     {
-        switch ($sTable)
-        {
+        switch ($sTable) {
             case 'Ads':
             case 'AdsAffiliates':
                 return $sTable;
-            break;
+                break;
 
             default:
                 Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
@@ -61,12 +60,11 @@ class AdsCore extends Framework\Ads\Ads
      */
     public static function convertTableToId($sTable)
     {
-        switch ($sTable)
-        {
+        switch ($sTable) {
             case 'Ads':
             case 'AdsAffiliates':
                 $sId = 'adsId';
-            break;
+                break;
 
             default:
                 Framework\Mvc\Model\Engine\Util\Various::launchErr();

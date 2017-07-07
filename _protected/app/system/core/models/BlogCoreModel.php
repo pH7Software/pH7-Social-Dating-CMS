@@ -58,22 +58,21 @@ class BlogCoreModel extends Model
      */
     public function totalPosts($iDay = 0)
     {
-         $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_TIME);
 
-         if (!$iData = $this->cache->get())
-         {
-             $iDay = (int) $iDay;
-             $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
+        if (!$iData = $this->cache->get()) {
+            $iDay = (int)$iDay;
+            $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
-             $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix('Blogs') . $sSqlDay);
-             $rStmt->execute();
-             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-             Db::free($rStmt);
-             $iData = (int) $oRow->totalPosts;
-             unset($oRow);
-             $this->cache->put($iData);
-         }
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) AS totalPosts FROM' . Db::prefix('Blogs') . $sSqlDay);
+            $rStmt->execute();
+            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $iData = (int)$oRow->totalPosts;
+            unset($oRow);
+            $this->cache->put($iData);
+        }
 
-         return $iData;
+        return $iData;
     }
 }

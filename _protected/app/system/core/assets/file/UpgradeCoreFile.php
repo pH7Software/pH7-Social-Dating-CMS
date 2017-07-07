@@ -75,67 +75,26 @@ class UpgradeCore extends Kernel
         $this->_prepare(); // Preparation and verification for software upgrade
     }
 
-    public function display()
-    {
-        echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>', t('Upgrade %software_name% | Version %0%', $this->_sVerNumber), '</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.bold,.error{font-weight:bold;font-size:13px}.red,.error{color:red}.success{color:green}.italic{font-style:italic}.underline{text-decoration:underline}pre{margin:2px;font-style:italic}code{font-style:italic;font-size:11px}</style></head><body><div class="center">';
-        echo $this->_sHtml;
-        echo '</div></body></html>';
-    }
-
-    /**
-     * @return array Returns all version numbers.
-     */
-    public function getVersions()
-    {
-        return file(static::REMOTE_URL . 'all_versions.txt');
-    }
-
-    /**
-     * Checks and returns the correct needed version for the current pH7CMS installation.
-     *
-     * @return mixed (string | boolean) The version needed number for the current pH7CMS installation.
-     */
-    public function getNextVersion()
-    {
-        $aVersions = $this->getVersions();
-
-        if ($iKey = array_search(Kernel::SOFTWARE_VERSION, $aVersions))
-        {
-            return $aVersions[$iKey+1];
-        }
-        else
-        {
-            // If no next version is found, just returns the current one.
-            return Kernel::SOFTWARE_VERSION;
-        }
-    }
-
     private function _prepare()
     {
-        if (!AdminCore::auth())
-        {
+        if (!AdminCore::auth()) {
             // Checking if the administrator is logged in
             $this->_aErrors[] = t('You must be logged in as administrator to upgrade your site.');
         }
 
-        if (!$this->_displayIfErr())
-        {
+        if (!$this->_displayIfErr()) {
             // Download the next upgrade patch to "~/_repository/" folder
             $this->_download($this->getNextVersion());
 
             // If not found error
-            if (!$this->_showAvailableUpgrades())
-            {
+            if (!$this->_showAvailableUpgrades()) {
                 $this->_sHtml .= '<h2>' . t('No upgrade path for %software_name%!') . '</h2>';
-            }
-            else
-            {
+            } else {
                 $this->_sHtml .= '<h2>' . t('Upgrade available for %software_name%:') . '</h2>';
 
                 $this->_sHtml .= '<form method="post">';
 
-                foreach($this->_showAvailableUpgrades() as $sFolder)
-                {
+                foreach ($this->_showAvailableUpgrades() as $sFolder) {
                     $this->_sUpgradesDirUpgradeFolder = $this->_oFile->checkExtDir($sFolder);
 
                     $this->_readConfig();
@@ -145,12 +104,10 @@ class UpgradeCore extends Kernel
                     $iVerBuild = $this->_oConfig->values['upgrade.version']['build'];
                     $sDesc = $this->_oConfig->values['upgrade.information']['description'];
 
-                    if ($this->_checkUpgradeFolder($this->_sUpgradesDirUpgradeFolder))
-                    {
+                    if ($this->_checkUpgradeFolder($this->_sUpgradesDirUpgradeFolder)) {
                         $this->_sHtml .= '<p class="underline italic">' . t('Version Name: %0%, Version Number: %1%, Version Build: %2%', $sVerName, $sVerNumber, $iVerBuild) . '</p>';
 
-                        if ($this->_checkVersion($sVerName, $sVerNumber, $iVerBuild))
-                        {
+                        if ($this->_checkVersion($sVerName, $sVerNumber, $iVerBuild)) {
                             $sMsg = t('Upgrade <span class="bold italic">%software_version_name% %software_version% Build %software_build%</span> to version <span class="bold italic">%0%</span>', '<span class="bold italic">' . $sVerName . ' ' . $sVerNumber . ' Build ' . $iVerBuild . '</span>');
                             $this->_sHtml .= '<button type="submit" class="success" name="submit_upgrade" value="' . $this->_sUpgradesDirUpgradeFolder . '" onclick="return confirm(\'' . t('Have you made a backup of your website files, folders and database?') . '\');">' . $sMsg . '</button>';
 
@@ -161,15 +118,11 @@ class UpgradeCore extends Kernel
                             // Introduction file
                             $this->_sHtml .= '<p class="bold underline">' . t('Introductory instruction:') . '</p>';
                             $this->_sHtml .= $this->_readInstruction(static::INST_INTRO_FILE);
-                        }
-                        else
-                        {
+                        } else {
                             $sMsg = t('Bad "version name, version number or version build" of upgrade path!');
                             $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $sMsg = t('Upgrade path is not valid!');
                         $this->_sHtml .= '<button type="submit" class="error" disabled="disabled">' . $sMsg . '</button>';
                     }

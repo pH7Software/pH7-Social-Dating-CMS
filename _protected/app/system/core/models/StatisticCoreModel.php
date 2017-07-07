@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Core / Model
  * @version        1.1
  */
+
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
@@ -45,7 +46,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
      */
     public function totalMembers($iDay = 0, $sGenger = 'all')
     {
-        return  (new UserCoreModel)->total('Members', $iDay, $sGenger);
+        return (new UserCoreModel)->total('Members', $iDay, $sGenger);
     }
 
     /**
@@ -57,7 +58,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
      */
     public function totalAffiliates($iDay = 0, $sGenger = 'all')
     {
-        return  (new UserCoreModel)->total('Affiliates', $iDay, $sGenger);
+        return (new UserCoreModel)->total('Affiliates', $iDay, $sGenger);
     }
 
     /**

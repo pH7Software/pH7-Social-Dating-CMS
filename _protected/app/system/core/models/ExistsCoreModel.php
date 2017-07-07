@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * @title            Exists Core Model Class
  * @desc             Checks if a field in a table exists.
  *
@@ -9,6 +9,7 @@
  * @package          PH7 / App / System / Core / Model
  * @version          1.6
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
