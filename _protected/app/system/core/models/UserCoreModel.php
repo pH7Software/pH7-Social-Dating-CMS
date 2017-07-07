@@ -644,7 +644,7 @@ class UserCoreModel extends Model
 
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Members') . '(email, username, password, firstName, lastName, sex, matchSex, birthDate, active, ip, hashValidation, joinDate, lastActivity)
             VALUES (:email, :username, :password, :firstName, :lastName, :sex, :matchSex, :birthDate, :active, :ip, :hashValidation, :joinDate, :lastActivity)');
-        $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
+        $rStmt->bindValue(':email', trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
         $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
@@ -658,7 +658,7 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':joinDate', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $this->sCurrentDate, \PDO::PARAM_STR);
         $rStmt->execute();
-        $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the user's ID
+        $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the user's ID
         Db::free($rStmt);
         $this->setInfoFields($aData);
         $this->setDefaultPrivacySetting();
@@ -990,7 +990,7 @@ class UserCoreModel extends Model
         Various::checkModelTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('SELECT profileId, username, sex FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\' AND username LIKE :username');
-        $rStmt->bindValue(':username', '%'.$sUsernameSearch.'%', \PDO::PARAM_STR);
+        $rStmt->bindValue(':username', '%' . $sUsernameSearch . '%', \PDO::PARAM_STR);
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);

@@ -38,8 +38,7 @@ class RatingDesignCore
         (new Design)->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/rating.js');
 
 
-
-        $fRate = ($iVotes > 0) ? number_format( $fScore / $iVotes, 1) : 0;
+        $fRate = ($iVotes > 0) ? number_format($fScore / $iVotes, 1) : 0;
 
         $sPHSClass = 'pHS' . $iId . $sTable;
 
