@@ -3,6 +3,7 @@
  * We made many changes in this code.
  * By pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Validation;
 
 class RegExp extends \PFBC\Validation
@@ -18,7 +19,7 @@ class RegExp extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        if($this->isNotApplicable($sValue) || preg_match('#^'.$this->pattern.'$#', $sValue))
+        if ($this->isNotApplicable($sValue) || preg_match('#^' . $this->pattern . '$#', $sValue))
             return true;
         return false;
     }

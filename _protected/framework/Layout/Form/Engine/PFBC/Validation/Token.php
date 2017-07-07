@@ -2,6 +2,7 @@
 /**
  * This file has been made by pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Validation;
 
 use PH7\Framework\Layout\Form\Form as FormMessage;

@@ -2,6 +2,7 @@
 /**
  * This file has been made by pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Element;
 
 use PFBC\Validation\Token as ValidationToken;

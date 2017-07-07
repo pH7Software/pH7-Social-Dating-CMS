@@ -144,16 +144,13 @@ class File
     {
         $bExists = false; // Default value
 
-        if (is_array($mFile))
-        {
+        if (is_array($mFile)) {
             foreach ($mFile as $sFile) {
                 if (!$bExists = $this->existFile($sFile)) {
                     return false;
                 }
             }
-        }
-        else
-        {
+        } else {
             $bExists = is_file($mFile);
         }
 

@@ -3,6 +3,7 @@
  * We made many changes in this code.
  * By pH7.
  */
+
 namespace PFBC\Error;
 
 class Standard extends \PFBC\Error
@@ -26,22 +27,12 @@ JS;
 
     }
 
-    private function parse($errors) {
-        $list = array();
-        if(!empty($errors)) {
-            $keys = array_keys($errors);
-            $keySize = sizeof($keys);
-            for($k = 0; $k < $keySize; ++$k)
-                $list = array_merge($list, $errors[$keys[$k]]);
-        }
-        return $list;
-    }
-
-    public function render() {
+    public function render()
+    {
         $errors = $this->parse($this->form->getErrors());
-        if(!empty($errors)) {
+        if (!empty($errors)) {
             $size = sizeof($errors);
-            if($size == 1)
+            if ($size == 1)
                 $format = "error was";
             else
                 $format = $size . " errors were";

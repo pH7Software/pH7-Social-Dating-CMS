@@ -3,6 +3,7 @@
  * We made some changes in this code.
  * By pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Element;
 
 class Select extends \PFBC\OptionElement

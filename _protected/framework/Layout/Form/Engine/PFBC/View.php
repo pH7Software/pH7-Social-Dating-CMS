@@ -2,6 +2,7 @@
 /**
  *  This file has been modified by pH7 developers team (Pierre-Henry SORIA).
  */
+
 namespace PFBC;
 
 abstract class View extends Base
@@ -14,47 +15,29 @@ abstract class View extends Base
     }
 
     /*This method encapsulates the various pieces that are included in an element's label.*/
-    protected function renderLabel(Element $element)
-    {
-        $label = $element->getLabel();
-        $id = $element->getID();
-        $description = $element->getDescription();
-        if(!empty($label) || !empty($description))
-        {
-            echo '<div class="pfbc-label">';
-            if(!empty($label))
-            {
-                echo '<label for="', $id, '">';
-                if($element->isRequired())
-                    echo '<strong>*</strong> ';
-                echo $label, '</label>';
-            }
-            if(!empty($description))
-                echo '<em>', $description, '</em>';
-            echo '</div>';
-        }
-    }
 
     public function setForm(Form $form)
     {
         $this->form = $form;
     }
 
-    /*jQuery is used to apply css entries to the last element.*/
     public function jQueryDocumentReady()
     {
         echo 'jQuery("#', $this->form->getId(), ' .pfbc-element:last").css({ "margin-bottom": "0", "padding-bottom": "0", "border-bottom": "none" });';
     }
 
-    public function render() {}
+    /*jQuery is used to apply css entries to the last element.*/
+
+    public function render()
+    {
+    }
 
     public function renderCSS()
     {
         $id = $this->form->getId();
 
         /*For ease-of-use, default styles are applied to form elements.*/
-        if(!in_array('style', $this->form->getPrevent()))
-        {
+        if (!in_array('style', $this->form->getPrevent())) {
             echo <<<CSS
 #$id .pfbc-label label{font-weight:bold}
 #$id em{font-size:.9em;color:#888}

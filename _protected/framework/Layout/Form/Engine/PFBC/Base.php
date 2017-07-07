@@ -3,6 +3,7 @@
  * Many changes have been made in this file.
  * By pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC;
 
 abstract class Base

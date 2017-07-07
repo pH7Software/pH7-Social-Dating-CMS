@@ -2,6 +2,7 @@
 /**
  *  This file has been modified by pH7 developers team (Pierre-Henry SORIA).
  */
+
 namespace PFBC;
 
 use PH7\Framework\Layout\Html\Design;
@@ -299,13 +300,13 @@ class Form extends Base
         /*When validation errors occur, the form's submitted values are saved in a session
         array, which allows them to be pre-populated when the user is redirected to the form.*/
         $values = self::getSessionValues($this->attributes['id']);
-        if(!empty($values))
+        if (!empty($values))
             $this->setValues($values);
         $this->applyValues();
 
         $this->formatWidthProperties();
 
-        if($returnHTML)
+        if ($returnHTML)
             ob_start();
 
         $this->renderCSS();
@@ -315,64 +316,73 @@ class Form extends Base
         /*The form's instance is serialized and saved in a session variable for use during validation.*/
         $this->save();
 
-        if($returnHTML)
-        {
+        if ($returnHTML) {
             $html = ob_get_contents();
             ob_end_clean();
             return $html;
         }
     }
 
-    /*When ajax is used to submit the form's data, validation errors need to be manually sent back to the
-    form using json.*/
-    public static function renderAjaxErrorResponse($id = 'pfbc')
+    public static function getSessionValues($id = 'pfbc')
     {
-        $form = self::recover($id);
-        if(!empty($form))
-            $form->error->renderAjaxErrorResponse();
+        $values = array();
+        if (!empty($_SESSION['pfbc'][$id]['values']))
+            $values = $_SESSION['pfbc'][$id]['values'];
+        return $values;
     }
+
+    public function setValues(array $values)
+    {
+        $this->values = array_merge($this->values, $values);
+    }
+
+    private function applyValues()
+    {
+        foreach ($this->elements as $element) {
+            $name = $element->getName();
+            if (isset($this->values[$name]))
+                $element->setValue($this->values[$name]);
+            elseif (substr($name, -2) == '[]' && isset($this->values[substr($name, 0, -2)]))
+                $element->setValue($this->values[substr($name, 0, -2)]);
+        }
+    }
+
+    public function formatWidthProperties()
+    {
+        if (!empty($this->width)) {
+            if (substr($this->width, -1) == '%') {
+                $this->width = substr($this->width, 0, -1);
+                $this->widthSuffix = '%';
+            } elseif (substr($this->width, -2) == 'px')
+                $this->width = substr($this->width, 0, -2);
+        } else {
+            /*If the form's width property is empty, 100% will be assumed.*/
+            $this->width = 100;
+            $this->widthSuffix = '%';
+        }
+    }
+
+    /*The save method serialized the form's instance and saves it in the session.*/
 
     private function renderCSS()
     {
         echo '<style scoped="scoped">';
         $this->view->renderCSS();
         $this->error->renderCSS();
-        foreach($this->elements as $element)
+        foreach ($this->elements as $element)
             $element->renderCSS();
         echo '</style>';
     }
 
-    private function renderCSSFiles()
-    {
-        $urls = array();
-        /**
-         * These files are already included by default in layout.tpl, therefore it is unnecessary to include them again.
-         *
-        if(!in_array('jQueryUI', $this->prevent))
-            $urls[] = $this->prefix . '://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/' . $this->jQueryUITheme . '/jquery-ui.css';
-         */
-        foreach($this->elements as $element)
-        {
-            $elementUrls = $element->getCSSFiles();
-            if(is_array($elementUrls))
-                $urls = array_merge($urls, $elementUrls);
-        }
-
-        //*This section prevents duplicate css files from being loaded.*/
-        if(!empty($urls))
-        {
-            $urls = array_values(array_unique($urls));
-            foreach($urls as $url)
-                echo '<link rel="stylesheet" href="', $url, '"/>';
-        }
-    }
+    /*Valldation errors are saved in the session after the form submission, and will be displayed to the user
+    when redirected back to the form.*/
 
     private function renderJS()
     {
         $this->renderJSFiles();
         echo '<script>';
         $this->view->renderJS();
-        foreach($this->elements as $element)
+        foreach ($this->elements as $element)
             $element->renderJS();
 
         $id = $this->attributes['id'];
@@ -381,28 +391,25 @@ class Form extends Base
 
         /*When the form is submitted, disable all submit buttons to prevent duplicate submissions.*/
         echo 'jQuery("#', $id, '").bind("submit", function() {';
-        if(!in_array('jQueryUIButtons', $this->prevent))
-        {
+        if (!in_array('jQueryUIButtons', $this->prevent)) {
             echo 'jQuery(this).find("button[type=submit]").button("disable");';
             echo 'jQuery(this).find("button[type=submit] span.ui-button-text").css("padding-right", "2.1em").append(\'<img class="pfbc-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAIiIiAAAAGdnZyMjIwAAADQ0NEVFRU5OTiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt="Loading..."/>\');';
-        }
-        else
+        } else
             echo 'jQuery(this).find("button[type=submit]").attr("disabled", "disabled");';
         echo '});';
 
         /*jQuery is used to set the focus of the form's initial element.*/
         // We don't want the focus in the form field if we are on the home page.
-        if( ((new \PH7\Framework\Mvc\Request\Http)->currentUrl() != PH7_URL_ROOT ) && !in_array('focus', $this->prevent))
+        if (((new \PH7\Framework\Mvc\Request\Http)->currentUrl() != PH7_URL_ROOT) && !in_array('focus', $this->prevent))
             echo 'jQuery("#', $id, ' :input:visible:enabled:first").focus();';
 
         $this->view->jQueryDocumentReady();
-        foreach($this->elements as $element)
+        foreach ($this->elements as $element)
             $element->jQueryDocumentReady();
 
         /*For ajax, an anonymous onsubmit javascript function is bound to the form using jQuery.  jQuery's
         serialize function is used to grab each element's name/value pair.*/
-        if(!empty($this->ajax))
-        {
+        if (!empty($this->ajax)) {
             echo 'jQuery("#', $id, '").bind("submit", {';
             $this->error->clear();
             echo <<<JS
@@ -420,17 +427,15 @@ JS;
                     else {
 JS;
             /*A callback function can be specified to handle any post submission events.*/
-            if(!empty($this->ajaxCallback))
+            if (!empty($this->ajaxCallback))
                 echo $this->ajaxCallback, '(response);';
 
             echo '}';
 
-            if(!in_array('jQueryUIButtons', $this->prevent))
-            {
+            if (!in_array('jQueryUIButtons', $this->prevent)) {
                 echo 'jQuery("#', $id, ' button[type=submit] span.ui-button-text").css("padding-right", "1em").find("img").remove();';
                 echo 'jQuery("#', $id, ' button[type=submit]").button("enable");';
-            }
-            else
+            } else
                 echo 'jQuery("#', $id, '").find("button[type=submit]").removeAttr("disabled");';
 
             echo <<<JS
