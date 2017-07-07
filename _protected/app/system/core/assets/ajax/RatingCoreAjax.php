@@ -14,37 +14,56 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cookie\Cookie;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Session\Session;
 
 class RatingCoreAjax
 {
+    /** @var HttpRequest */
+    private $_oHttpRequest;
 
-    private $_oHttpRequest, $_oRatingModel, $_sTxt, $_sTable, $_iStatus, $_iId, $_fScore;
+    /** @var RatingCoreModel */
+    private $_oRatingModel;
+
+    /** @var string */
+    private $_sTxt;
+
+    /** @var string */
+    private $_sTable;
+
+    /** @var int */
+    private $_iStatus;
+
+    /** @var int */
+    private $_iId;
+
+    /** @var float */
+    private $_fScore;
+
+    /** @var int */
     private static $_iVotes;
 
     public function __construct()
     {
-        $this->_oHttpRequest = new Http;
+        $this->_oHttpRequest = new HttpRequest;
 
-        if($this->_oHttpRequest->postExists('action') && $this->_oHttpRequest->postExists('table') && $this->_oHttpRequest->postExists('score') && $this->_oHttpRequest->postExists('id'))
-        {
-            if($this->_oHttpRequest->post('action') == 'rating')
-            {
+        if ($this->_oHttpRequest->postExists('action') &&
+            $this->_oHttpRequest->postExists('table') &&
+            $this->_oHttpRequest->postExists('score') &&
+            $this->_oHttpRequest->postExists('id')
+        ) {
+            if ($this->_oHttpRequest->post('action') == 'rating') {
                 // Only for the Members
-                if(!UserCore::auth())
-                {
+                if (!UserCore::auth()) {
                     $this->_iStatus = 0;
                     $this->_sTxt = t('Please <b>register</b> or <b>login</b> to vote.');
-                }
-                else
-                {
+                } else {
                     $this->initialize();
                 }
             }
-        }
-        else
-        {
-            Framework\Http\Http::setHeadersByCode(400);
+        } else {
+            Http::setHeadersByCode(400);
             exit('Bad Request Error!');
         }
     }
@@ -52,7 +71,6 @@ class RatingCoreAjax
     /**
      * Displays the votes.
      *
-     * @access public
      * @return string
      */
     public function show()
@@ -63,17 +81,17 @@ class RatingCoreAjax
     /**
      * Initialize the methods of the class.
      *
-     * @access protected
      * @return void
      */
     protected function initialize()
     {
         $this->_oRatingModel = new RatingCoreModel;
         $this->_sTable = $this->_oHttpRequest->post('table');
-        $this->_iId = (int)$this->_oHttpRequest->post('id');
+        $this->_iId = (int) $this->_oHttpRequest->post('id');
 
         if ($this->_sTable == 'Members') {
-            $iProfileId = (int)(new Framework\Session\Session)->get('member_id');
+            $iProfileId = (int)(new Session)->get('member_id');
+
             if ($iProfileId === $this->_iId) {
                 $this->_iStatus = 0;
                 $this->_sTxt = t('You can not vote your own profile!');
@@ -105,7 +123,6 @@ class RatingCoreAjax
     /**
      * Adds voting in the database and increment the static attribute to vote.
      *
-     * @access protected
      * @return void
      */
     protected function select()
@@ -122,7 +139,6 @@ class RatingCoreAjax
     /**
      * Updates the vote in the database.
      *
-     * @access protected
      * @return void
      */
     protected function update()
