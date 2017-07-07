@@ -10,11 +10,11 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class BirthdayCoreCron extends Cron
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -26,12 +26,12 @@ class BirthdayCoreCron extends Cron
     {
         $iNum = (new BirthdayCore)->sendMails();
 
-        if ($iNum == 0)
+        if ($iNum == 0) {
             echo t('No birthday today.');
-        else
+        } else {
             echo nt('%n% email sent.', '%n% emails sent.', $iNum);
+        }
     }
-
 }
 
 // Go!
