@@ -20,6 +20,6 @@ class Exception extends UserException
 {
     public function __construct($sMethodName)
     {
-        parent::__construct( Form::wrongRequestMethodMsg($sMethodName) );
+        parent::__construct(Form::wrongRequestMethodMsg($sMethodName));
     }
 }

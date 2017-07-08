@@ -48,7 +48,7 @@ class Cache
     public function __construct()
     {
         $this->_oFile = new File;
-        $this->_bEnabled = (bool) Config::getInstance()->values['cache']['enable.general.cache'];
+        $this->_bEnabled = (bool)Config::getInstance()->values['cache']['enable.general.cache'];
     }
 
     /**
@@ -60,7 +60,7 @@ class Cache
      */
     public function enabled($bIsEnable)
     {
-        $this->_bEnabled = (bool) $bIsEnable;
+        $this->_bEnabled = (bool)$bIsEnable;
 
         return $this;
     }

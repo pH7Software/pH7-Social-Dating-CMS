@@ -111,15 +111,14 @@ class Design
         //$aLangs = (new File)->getDirList(Registry::getInstance()->path_module_lang);
         $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
 
-        foreach ($aLangs as $sLang)
-        {
+        foreach ($aLangs as $sLang) {
             if ($sLang === PH7_LANG_NAME) {
                 // Skip the current lang
                 continue;
             }
 
             // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang,0,2);
+            $sAbbrLang = substr($sLang, 0, 2);
 
             echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
@@ -138,10 +137,9 @@ class Design
         $aLangs = (new File)->getDirList(PH7_PATH_APP_LANG);
 
         echo '<link rel="alternate" hreflang="x-default" href="', PH7_URL_ROOT, '">'; // For pages that are not specifically targeted
-        foreach ($aLangs as $sLang)
-        {
+        foreach ($aLangs as $sLang) {
             // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang,0,2);
+            $sAbbrLang = substr($sLang, 0, 2);
             echo '<link rel="alternate" hreflang="', $sAbbrLang, '" href="', $sCurrentPage, $sLang, '" />';
         }
 
@@ -168,7 +166,7 @@ class Design
     public function message()
     {
         if ($this->oHttpRequest->getExists('msg'))
-            $this->aMessages[] = substr($this->oHttpRequest->get('msg'),0,300);
+            $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, 300);
 
         $iMsgNum = count($this->aMessages);
         /*** Check if there are any messages in the aMessages array ***/
@@ -180,7 +178,7 @@ class Design
             if ($iMsgNum > 1)
                 echo '<strong>', t('You have'), ' <em>', $iMsgNum, '</em> ', nt('message:', 'messages:', $iMsgNum), '</strong><br />';
 
-            for ($i=0; $i < $iMsgNum; $i++)
+            for ($i = 0; $i < $iMsgNum; $i++)
                 echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aMessages[$i])), '<br />';
 
             echo '\')});</script>';
@@ -344,7 +342,7 @@ class Design
         echo (is_file(PH7_PATH_STATIC . PH7_IMG . 'flag/s/' . $sIcon)) ? $sDir . $sIcon : $sDir . 'none.gif';
     }
 
-     /**
+    /**
      * Provide a "Powered By" link.
      *
      * @param boolean $bLink To include a link to pH7CMS or pH7Framework. Default TRUE
@@ -352,7 +350,7 @@ class Design
      * @param boolean $bVersion To include the version being used. Default TRUE
      * @param boolean $bComment HTML comment. Default TRUE
      * @param boolean $bEmail Is it for email content or not. Default FALSE
-      *
+     *
      * @return void
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
@@ -379,7 +377,7 @@ class Design
             You can never claim that you took, developed, or helped in any other way in this software if it is wrong! -->';
         }
 
-        echo ($bSoftwareName ?  '<p class="italic"><strong>' . t('Powered by') : ''), ' ', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong></p>' : ''),
+        echo($bSoftwareName ? '<p class="italic"><strong>' . t('Powered by') : ''), ' ', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong></p>' : ''),
 
         '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
     }
@@ -430,11 +428,11 @@ class Design
                 ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://dublin.meetlovelypeople.com']
             ];
         } elseif ($sLangCode === 'en-gb') {
-          $aSites = [
-              ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
-              ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com'],
-              ['title' => 'Date Londoners', 'link' => 'http://flirt-dating.london']
-          ];
+            $aSites = [
+                ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
+                ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com'],
+                ['title' => 'Date Londoners', 'link' => 'http://flirt-dating.london']
+            ];
         } elseif (strpos($sLangCode, 'fr') !== false) {
             $aSites = [
                 ['title' => 'Rencontre d\'un soir', 'link' => 'http://flirt-rencontre.net'],
@@ -442,7 +440,7 @@ class Design
             ];
         }
 
-        $iRand = mt_rand(0,count($aSites)-1);
+        $iRand = mt_rand(0, count($aSites) - 1);
         echo '<a href="', $aSites[$iRand]['link'], '">', $aSites[$iRand]['title'], '</a>';
     }
 
@@ -581,7 +579,7 @@ class Design
     public function ip($sIp = null, $bPrint = true)
     {
         $sIp = Ip::get($sIp);
-        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See info of this IP, %0%', $sIp) . '" target="_blank">' . $this->oStr->extract($sIp,0,15) . '</a>';
+        $sHtml = '<a href="' . Ip::api($sIp) . '" title="' . t('See info of this IP, %0%', $sIp) . '" target="_blank">' . $this->oStr->extract($sIp, 0, 15) . '</a>';
 
         if (!$bPrint) {
             return $sHtml;
@@ -617,7 +615,7 @@ class Design
      * Pagination.
      *
      * @param integer $iTotalPages
-     * @param integer  $iCurrentPage
+     * @param integer $iCurrentPage
      *
      * @return void The HTML pagination code.
      */
@@ -687,7 +685,7 @@ class Design
              * @internal Clean URL for parameters in Gravatar URL to make the HTML code valid.
              * If we set replace '&' by '&amp;' before checking the 404's Gravatar URL, it will always return '200 OK', that's why we need to clean the URL now.
              */
-            $oCache->put( Url::clean($sUrl) );
+            $oCache->put(Url::clean($sUrl));
         }
 
         unset($oCache);
@@ -806,7 +804,7 @@ class Design
      */
     public function littleLikeApi()
     {
-        if ((bool) DbConfig::getSetting('socialMediaWidgets')) {
+        if ((bool)DbConfig::getSetting('socialMediaWidgets')) {
             echo '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
         }
     }
@@ -824,7 +822,7 @@ class Design
      */
     public function report($iId, $sUsername, $sFirstName, $sSex)
     {
-        $iId = (int) $iId;
+        $iId = (int)$iId;
 
         if ($iId > PH7_GHOST_ID) {
             $sReportLink = (UserCore::auth()) ?
@@ -940,7 +938,7 @@ class Design
         <meta name="creator" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="designer" content="', Kernel::SOFTWARE_NAME, '" />
         <meta name="generator" content="', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, '" />';
-        $this->externalCssFile(PH7_URL_STATIC. PH7_CSS . 'js/jquery/smoothness/jquery-ui.css');
+        $this->externalCssFile(PH7_URL_STATIC . PH7_CSS . 'js/jquery/smoothness/jquery-ui.css');
         $this->staticFiles('css', PH7_LAYOUT . PH7_TPL . PH7_DEFAULT_THEME . PH7_SH . PH7_CSS, 'common.css,style.css,form.css');
         $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery.js');
         $this->externalJsFile(PH7_URL_STATIC . PH7_JS . 'jquery/jquery-ui.js');

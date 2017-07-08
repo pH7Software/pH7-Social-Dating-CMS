@@ -217,7 +217,7 @@ class PH7Tpl extends Kernel
      */
     public function setHtmlCompress($bCompressor)
     {
-        $this->bHtmlCompressor = (bool) $bCompressor;
+        $this->bHtmlCompressor = (bool)$bCompressor;
     }
 
     /**
@@ -229,7 +229,7 @@ class PH7Tpl extends Kernel
      */
     public function setPhpCompress($bCompressor)
     {
-        $this->bPhpCompressor = (bool) $bCompressor;
+        $this->bPhpCompressor = (bool)$bCompressor;
     }
 
     /**
@@ -241,7 +241,7 @@ class PH7Tpl extends Kernel
      */
     public function setCacheExpire($iLifeTime)
     {
-        $this->mCacheExpire = (int) $iLifeTime; // 3600 seconds = 1 hour cache duration
+        $this->mCacheExpire = (int)$iLifeTime; // 3600 seconds = 1 hour cache duration
     }
 
     /**
@@ -371,7 +371,7 @@ class PH7Tpl extends Kernel
     {
         /***** Includes *****/
         $this->sCode = str_replace('{auto_include}', '<?php $this->display($this->getCurrentController() . PH7_DS . $this->registry->action . \'' .
-                $this->sTplExt . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>', $this->sCode);
+            $this->sTplExt . '\', $this->registry->path_module_views . PH7_TPL_MOD_NAME . PH7_DS); ?>', $this->sCode);
         $this->sCode = preg_replace('#{include ([^\{\}\n]+)}#', '<?php $this->display($1); ?>', $this->sCode);
         $this->sCode = preg_replace('#{main_include ([^\{\}\n]+)}#', '<?php $this->display($1, PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS); ?>', $this->sCode);
         $this->sCode = preg_replace('#{def_main_auto_include}#', '<?php $this->display(\'' . $this->sTplFile . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS); ?>', $this->sCode);
@@ -386,7 +386,7 @@ class PH7Tpl extends Kernel
 
         /***** XML Syntax *****/
         if ($this->bXmlTags)
-           $this->xmlSyntax();
+            $this->xmlSyntax();
 
         /***** Variables *****/
         $this->sCode = preg_replace('#{([a-z0-9_]+)}#i', '<?php echo $$1; ?>', $this->sCode);

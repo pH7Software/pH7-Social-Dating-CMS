@@ -30,7 +30,7 @@ class BankForm
         $oAff = (new AffiliateModel)->readProfile($iProfileId, 'Affiliates');
 
         $oForm = new \PFBC\Form('form_bank_account');
-        $oForm->configure(array('action'=> '' ));
+        $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_bank_account', 'form_bank_account'));
         $oForm->addElement(new \PFBC\Element\Token('bank_account'));
 
@@ -39,12 +39,12 @@ class BankForm
         }
         unset($oHR);
 
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2 class="underline">'.t('Bank Information:').'</h2>'));
-        $sHtmlPayPalIcon = '<a href="http://paypal.com" target="_blank"><img src="'.PH7_URL_STATIC.PH7_IMG.'icon/paypal_small.gif" alt="PayPal" title="PayPal"></a><br />';
-        $oForm->addElement(new \PFBC\Element\Email($sHtmlPayPalIcon . t('Your Bank Account:'), 'bank_account', array('id'=>'email_paypal', 'onblur'=>'CValid(this.value,this.id)', 'description'=>t('Your Bank Account (PayPal Email Address).'), 'value'=>$oAff->bankAccount, 'validation'=>new \PFBC\Validation\BankAccount, 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2 class="underline">' . t('Bank Information:') . '</h2>'));
+        $sHtmlPayPalIcon = '<a href="http://paypal.com" target="_blank"><img src="' . PH7_URL_STATIC . PH7_IMG . 'icon/paypal_small.gif" alt="PayPal" title="PayPal"></a><br />';
+        $oForm->addElement(new \PFBC\Element\Email($sHtmlPayPalIcon . t('Your Bank Account:'), 'bank_account', array('id' => 'email_paypal', 'onblur' => 'CValid(this.value,this.id)', 'description' => t('Your Bank Account (PayPal Email Address).'), 'value' => $oAff->bankAccount, 'validation' => new \PFBC\Validation\BankAccount, 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\HtmlExternal('<span class="input_error email_paypal"></span>'));
         $oForm->addElement(new \PFBC\Element\Button);
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'validate.js"></script>'));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
 }

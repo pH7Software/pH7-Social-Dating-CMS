@@ -31,7 +31,7 @@ class JoinFormProcess extends Form
     public function step1()
     {
         $sBirthDate = $this->dateTime->get($this->httpRequest->post('birth_date'))->date('Y-m-d');
-        $iAffId = (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME);
+        $iAffId = (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME);
 
         $aData = [
             'email' => $this->httpRequest->post('mail'),
@@ -54,7 +54,7 @@ class JoinFormProcess extends Form
 
         $oAffModel = new AffiliateModel;
 
-        $iTimeDelay = (int) DbConfig::getSetting('timeDelayUserRegistration');
+        $iTimeDelay = (int)DbConfig::getSetting('timeDelayUserRegistration');
         if (!$oAffModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date'], 'Affiliates')) {
             \PFBC\Form::setError('form_join_aff', Form::waitRegistrationMsg($iTimeDelay));
         } elseif (!$oAffModel->join($aData)) {

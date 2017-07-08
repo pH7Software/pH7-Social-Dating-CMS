@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Game / Form / Processing
  */
+
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
@@ -31,6 +32,6 @@ class AdminEditFormProcess extends Form
         /* Clean GameModel Cache */
         (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
 
-         Header::redirect(Uri::get('game', 'main', 'index'), t('The game has been successfully updated'));
+        Header::redirect(Uri::get('game', 'main', 'index'), t('The game has been successfully updated'));
     }
 }

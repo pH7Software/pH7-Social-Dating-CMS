@@ -28,7 +28,7 @@ class LostPwdDesignCore
      */
     public static function link($sMod, $bPrint = true)
     {
-        $sHtml = '<a rel="nofollow" href="' . Uri::get('lost-password','main','forgot',$sMod) . '">' . t('Forgot your password?') . '</a>';
+        $sHtml = '<a rel="nofollow" href="' . Uri::get('lost-password', 'main', 'forgot', $sMod) . '">' . t('Forgot your password?') . '</a>';
 
         if (!$bPrint) {
             return $sHtml;

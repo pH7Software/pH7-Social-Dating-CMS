@@ -5,7 +5,9 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Forum / Model
  */
+
 namespace PH7;
+
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class ForumModel extends ForumCoreModel
@@ -15,10 +17,10 @@ class ForumModel extends ForumCoreModel
     {
         $bIsLimit = isset($iOffset, $iLimit);
 
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
-        $sSqlLimit = ($bIsLimit) ?  ' LIMIT :offset, :limit' : '';
+        $sSqlLimit = ($bIsLimit) ? ' LIMIT :offset, :limit' : '';
         $sSqlCategoryId = (!empty($iCategoryId)) ? ' WHERE categoryId = :categoryId ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('ForumsCategories') . $sSqlCategoryId . 'ORDER BY title ASC' . $sSqlLimit);
@@ -32,22 +34,21 @@ class ForumModel extends ForumCoreModel
 
     public function getTopic($sForumName, $iForumId, $sTopicSubject, $iTopicId, $iProfileId, $iApproved, $iOffset, $iLimit)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
-        $sSqlProfileId = (isset($iProfileId)) ?  'AND t.profileId = :profileId ' : '';
-        $sSqlMsg = (isset($sTopicSubject, $iTopicId)) ? ' AND (t.title LIKE :topicSubject AND t.topicId = :topicId) ': '';
+        $sSqlProfileId = (isset($iProfileId)) ? 'AND t.profileId = :profileId ' : '';
+        $sSqlMsg = (isset($sTopicSubject, $iTopicId)) ? ' AND (t.title LIKE :topicSubject AND t.topicId = :topicId) ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') .
             'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') .
             ' AS m ON t.profileId = m.profileId WHERE (t.forumId = :forumId AND f.name LIKE :forumName) ' . $sSqlMsg . $sSqlProfileId . ' AND (t.approved = :approved) ORDER BY t.createdDate DESC LIMIT :offset, :limit');
 
-        $rStmt->bindValue(':forumName', $sForumName.'%', \PDO::PARAM_STR);
+        $rStmt->bindValue(':forumName', $sForumName . '%', \PDO::PARAM_STR);
         $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
 
-        if (isset($sTopicSubject, $iTopicId))
-        {
-            $rStmt->bindValue(':topicSubject', $sTopicSubject.'%', \PDO::PARAM_STR);
+        if (isset($sTopicSubject, $iTopicId)) {
+            $rStmt->bindValue(':topicSubject', $sTopicSubject . '%', \PDO::PARAM_STR);
             $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
         }
 
@@ -246,37 +247,33 @@ class ForumModel extends ForumCoreModel
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 't');
 
-        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ?  'f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId) AS totalTopics';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? 'f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId) AS totalTopics';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE t.topicId = :looking ' : ' WHERE t.message LIKE :looking OR t.title LIKE :looking OR m.username LIKE :looking';
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) $oRow->totalTopics;
+            $mData = (int)$oRow->totalTopics;
             unset($oRow);
         }
 
@@ -285,8 +282,8 @@ class ForumModel extends ForumCoreModel
 
     public function getPostByProfile($iProfileId, $iApproved, $iOffset, $iLimit)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Forums') . ' AS f INNER JOIN ' . Db::prefix('ForumsTopics') .
             'AS t ON f.forumId = t.forumId WHERE t.profileId = :profileId AND t.approved = :approved GROUP BY t.topicId ORDER BY t.createdDate DESC LIMIT :offset, :limit');
@@ -307,7 +304,7 @@ class ForumModel extends ForumCoreModel
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return (int) $oRow->totalForums;
+        return (int)$oRow->totalForums;
     }
 
     /**
@@ -326,7 +323,7 @@ class ForumModel extends ForumCoreModel
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return (int) $oRow->totalTopics;
+        return (int)$oRow->totalTopics;
     }
 
     public function totalMessages($iTopicId = null, $iProfileId = null)
@@ -337,7 +334,7 @@ class ForumModel extends ForumCoreModel
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return (int) $oRow->totalMessages;
+        return (int)$oRow->totalMessages;
     }
 
     /**

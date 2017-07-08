@@ -1,4 +1,5 @@
 <?php
+
 namespace PFBC\Element;
 
 use PH7\Framework\Mvc\Model\DbConfig;

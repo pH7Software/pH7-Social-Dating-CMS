@@ -70,13 +70,10 @@ class Db
 
             self::$_oInstance = new static;
 
-            try
-            {
+            try {
                 self::$_oDb = new PDO(self::$_sDsn, self::$_sUsername, self::$_sPassword, self::$_aDriverOptions);
                 self::$_oDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            }
-            catch (Exception $oE)
-            {
+            } catch (Exception $oE) {
                 exit('Error Establishing a Database Connection');
             }
 

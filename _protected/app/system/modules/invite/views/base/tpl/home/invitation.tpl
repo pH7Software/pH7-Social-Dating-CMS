@@ -6,6 +6,6 @@
 </div>
 
 <div class="right col-md-4">
-  <div class="ad_336_280">{{ $designModel->ad(336,280) }}</div>
-  {{ $design->likeApi() }}
+    <div class="ad_336_280">{{ $designModel->ad(336,280) }}</div>
+    {{ $design->likeApi() }}
 </div>

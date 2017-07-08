@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
+
 namespace PH7;
 
 use PH7\Framework\File\File;
@@ -17,8 +18,7 @@ class MetaMainForm
 
     public static function display()
     {
-        if (isset($_POST['submit_meta']))
-        {
+        if (isset($_POST['submit_meta'])) {
             if (\PFBC\Form::isValid($_POST['submit_meta']))
                 new MetaMainFormProcess;
 
@@ -41,15 +41,15 @@ class MetaMainForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<h3 class="underline"><a href="#showDiv_listLang" title="' . t('Click here to show/hide the languages') . '">' . t('Change language for the Meta Tags') . '</a></h3>'));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<ul class="hidden" id="showDiv_listLang">'));
 
-            for ($i=0; $i < $iTotalLangs; $i++) {
+            for ($i = 0; $i < $iTotalLangs; $i++) {
                 $sAbbrLang = substr($aLangs[$i], 0, 2);
-                $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($i+1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$i], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$i] . ')</a></li>'));
+                $oForm->addElement(new \PFBC\Element\HTMLExternal('<li>' . ($i + 1) . ') ' . '<a class="bold" href="' . Uri::get(PH7_ADMIN_MOD, 'setting', 'metamain', $aLangs[$i], false) . '" title="' . t($sAbbrLang) . '">' . t($sAbbrLang) . ' (' . $aLangs[$i] . ')</a></li>'));
             }
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</ul></div>'));
         }
         unset($aLangs);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', array('disabled'=>'disabled', 'value' => $oMeta->langId)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Language:'), 'lang_id', array('disabled' => 'disabled', 'value' => $oMeta->langId)));
 
         $oForm->addElement(new \PFBC\Element\Textbox(t('Home page title:'), 'page_title', array('value' => $oMeta->pageTitle, 'validation' => new \PFBC\Validation\Str(2, 100), 'required' => 1)));
 

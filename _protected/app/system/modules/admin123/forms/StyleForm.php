@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Design as Design;
@@ -14,8 +15,7 @@ class StyleForm
 
     public static function display()
     {
-        if (isset($_POST['submit_style']))
-        {
+        if (isset($_POST['submit_style'])) {
             if (\PFBC\Form::isValid($_POST['submit_style']))
                 new StyleFormProcess;
             Framework\Url\Header::redirect();

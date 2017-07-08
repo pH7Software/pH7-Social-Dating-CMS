@@ -30,10 +30,10 @@ class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         $bIsLimit = isset($iOffset, $iLimit);
 
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
-        $sSqlLimit = ($bIsLimit) ?  ' LIMIT :offset, :limit' : '';
+        $sSqlLimit = ($bIsLimit) ? ' LIMIT :offset, :limit' : '';
         $sSqlForumId = (!empty($iForumId)) ? 'WHERE forumId = :forumId ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Forums') . $sSqlForumId . 'ORDER BY ' . $sOrder . $sSqlLimit);
@@ -72,8 +72,8 @@ class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function getMessage($iTopicId, $iMessageId = null, $iProfileId = null, $iApproved, $iOffset, $iLimit, $sSort = Db::ASC)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sSqlMessageId = (!empty($iMessageId)) ? ' AND msg.messageId = :messageId ' : '';
         $sSqlProfileId = (!empty($iProfileId)) ? ' AND msg.profileId = :profileId ' : '';

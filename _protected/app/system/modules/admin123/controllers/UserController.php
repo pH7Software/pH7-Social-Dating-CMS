@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -45,13 +46,10 @@ class UserController extends Controller
         $oBrowse = $this->oAdminModel->browse($oPage->getFirstItem(), $oPage->getNbItemsPerPage());
         unset($oPage);
 
-        if (empty($oBrowse))
-        {
+        if (empty($oBrowse)) {
             $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'));
             $this->displayPageNotFound(t('No user were found.'));
-        }
-        else
-        {
+        } else {
             // Add the JS file for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
@@ -96,13 +94,10 @@ class UserController extends Controller
         $sWhere = $this->httpRequest->get('where');
         $sWhat = $this->httpRequest->get('what');
 
-        if ($sWhere !== 'all' && $sWhere !== SearchCoreModel::USERNAME && $sWhere !== SearchCoreModel::EMAIL && $sWhere !== SearchCoreModel::FIRST_NAME && $sWhere !== SearchCoreModel::LAST_NAME && $sWhere !== SearchCoreModel::IP)
-        {
+        if ($sWhere !== 'all' && $sWhere !== SearchCoreModel::USERNAME && $sWhere !== SearchCoreModel::EMAIL && $sWhere !== SearchCoreModel::FIRST_NAME && $sWhere !== SearchCoreModel::LAST_NAME && $sWhere !== SearchCoreModel::IP) {
             \PFBC\Form::setError('form_user_search', 'Invalid argument.');
             Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
-        }
-        else
-        {
+        } else {
             $this->iTotalUsers = $this->oAdminModel->searchUser(
                 $sWhat,
                 $sWhere,
@@ -131,13 +126,10 @@ class UserController extends Controller
             );
             unset($oPage);
 
-            if (empty($oSearch))
-            {
+            if (empty($oSearch)) {
                 $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
                 $this->displayPageNotFound('No results found. Please try again with wider/new search parameters.');
-            }
-            else
-            {
+            } else {
                 // Add the JS file for the browse form
                 $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
@@ -153,8 +145,7 @@ class UserController extends Controller
 
     public function loginUserAs($iId = null)
     {
-        if ($oUser = $this->oAdminModel->readProfile($iId))
-        {
+        if ($oUser = $this->oAdminModel->readProfile($iId)) {
             $aSessionData = [
                 'login_user_as' => 1,
                 'member_id' => $oUser->profileId,
@@ -172,9 +163,7 @@ class UserController extends Controller
             unset($oUser, $aSessionData);
 
             Header::redirect($this->registry->site_url, $this->sMsg);
-        }
-        else
-        {
+        } else {
             Header::redirect($this->httpRequest->previousPage(), t("This user doesn't exist."), 'error');
         }
     }
@@ -214,15 +203,11 @@ class UserController extends Controller
 
     public function approveAll($iId)
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
-                $iId = (int) explode('_', $sAction)[0];
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
+                $iId = (int)explode('_', $sAction)[0];
                 $this->sMsg = $this->_moderateRegistration($iId, 1);
             }
         }
@@ -232,15 +217,11 @@ class UserController extends Controller
 
     public function disapproveAll($iId)
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
-                $iId = (int) explode('_', $sAction)[0];
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
+                $iId = (int)explode('_', $sAction)[0];
                 $this->sMsg = $this->_moderateRegistration($iId, 0);
             }
         }
@@ -252,13 +233,10 @@ class UserController extends Controller
     {
         $iId = $this->httpRequest->post('id');
 
-        if ($this->oAdminModel->ban($iId, 1))
-        {
+        if ($this->oAdminModel->ban($iId, 1)) {
             $this->oAdmin->clearReadProfileCache($iId);
             $this->sMsg = t('The profile has been banned.');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! An error has occurred while banishment the profile.');
         }
 
@@ -269,13 +247,10 @@ class UserController extends Controller
     {
         $iId = $this->httpRequest->post('id');
 
-        if ($this->oAdminModel->ban($iId, 0))
-        {
+        if ($this->oAdminModel->ban($iId, 0)) {
             $this->oAdmin->clearReadProfileCache($iId);
             $this->sMsg = t('The profile has been unbanned.');
-        }
-        else
-        {
+        } else {
             $this->sMsg = t('Oops! An error has occurred while unban the profile.');
         }
 
@@ -285,8 +260,8 @@ class UserController extends Controller
     public function delete()
     {
         $aData = explode('_', $this->httpRequest->post('id'));
-        $iId = (int) $aData[0];
-        $sUsername = (string) $aData[1];
+        $iId = (int)$aData[0];
+        $sUsername = (string)$aData[1];
 
         $this->oAdmin->delete($iId, $sUsername);
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The profile has been deleted.'));
@@ -294,15 +269,11 @@ class UserController extends Controller
 
     public function banAll()
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
-                $iId = (int) explode('_', $sAction)[0];
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
+                $iId = (int)explode('_', $sAction)[0];
 
                 $this->oAdminModel->ban($iId, 1);
 
@@ -316,15 +287,11 @@ class UserController extends Controller
 
     public function unBanAll()
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
-                $iId = (int) explode('_', $sAction)[0];
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
+                $iId = (int)explode('_', $sAction)[0];
 
                 $this->oAdminModel->ban($iId, 0);
                 $this->oAdmin->clearReadProfileCache($iId);
@@ -337,17 +304,13 @@ class UserController extends Controller
 
     public function deleteAll()
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
                 $aData = explode('_', $sAction);
-                $iId = (int) $aData[0];
-                $sUsername = (string) $aData[1];
+                $iId = (int)$aData[0];
+                $sUsername = (string)$aData[1];
 
                 $this->oAdmin->delete($iId, $sUsername);
             }

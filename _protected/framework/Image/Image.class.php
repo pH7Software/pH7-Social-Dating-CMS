@@ -89,24 +89,24 @@ class Image
                 case static::JPG:
                     $this->rImage = imagecreatefromjpeg($this->sFile);
                     $this->sType = 'jpg';
-                break;
+                    break;
 
                 // PNG
                 case static::PNG:
                     $this->rImage = imagecreatefrompng($this->sFile);
                     $this->sType = 'png';
-                break;
+                    break;
 
                 // GIF
                 case static::GIF:
                     $this->rImage = imagecreatefromgif($this->sFile);
                     $this->sType = 'gif';
-                break;
+                    break;
 
                 case static::WEBP:
                     $this->rImage = imagecreatefromgif($this->sFile);
                     $this->sType = 'webp';
-                break;
+                    break;
 
                 // Invalid Zone
                 default:

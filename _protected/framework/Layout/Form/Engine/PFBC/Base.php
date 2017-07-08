@@ -3,6 +3,7 @@
  * Many changes have been made in this file.
  * By pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC;
 
 abstract class Base
@@ -56,25 +57,26 @@ abstract class Base
     }
 
     /*This method converted special characters to entities in HTML attributes from breaking the markup.*/
-    protected function filter($sText)
+
+    public function getAttributes($ignore = '')
     {
-        return htmlspecialchars($sText, ENT_QUOTES);
+        $str = "";
+        if (!empty($this->attributes)) {
+            if (!is_array($ignore))
+                $ignore = array($ignore);
+            $attributes = array_diff(array_keys($this->attributes), $ignore);
+            foreach ($attributes as $attribute)
+                $str .= ' ' . $attribute . '="' . $this->filter($this->attributes[$attribute]) . '"';
+        }
+        return $str;
     }
 
     /*This method is used by the Form class and all Element classes to return a string of html
     attributes.  There is an ignore parameter that allows special attributes from being included.*/
-    public function getAttributes($ignore = '')
+
+    protected function filter($sText)
     {
-        $str = "";
-        if(!empty($this->attributes))
-        {
-            if(!is_array($ignore))
-                $ignore = array($ignore);
-            $attributes = array_diff(array_keys($this->attributes), $ignore);
-            foreach($attributes as $attribute)
-                $str .= ' ' . $attribute . '="' . $this->filter($this->attributes[$attribute]) . '"';
-        }
-        return $str;
+        return htmlspecialchars($sText, ENT_QUOTES);
     }
 
 }

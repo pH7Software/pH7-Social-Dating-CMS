@@ -1,4 +1,5 @@
 <?php
+
 namespace PH7\Framework\Security\Validate;
 defined('PH7') or exit('Restricted access');
 
@@ -33,7 +34,8 @@ defined('PH7') or exit('Restricted access');
  * @author        ExpressionEngine Dev Team
  * @link        http://codeigniter.com/user_guide/libraries/security.html
  */
-class Filter {
+class Filter
+{
 
     /**
      * Random Hash for protecting URLs
@@ -41,14 +43,14 @@ class Filter {
      * @var string
      * @access protected
      */
-    protected $_xss_hash            = '';
+    protected $_xss_hash = '';
     /**
      * Random Hash for Cross Site Request Forgery Protection Cookie
      *
      * @var string
      * @access protected
      */
-    protected $_csrf_hash            = '';
+    protected $_csrf_hash = '';
     /**
      * Expiration time for Cross Site Request Forgery Protection Cookie
      * Defaults to two hours (in seconds)
@@ -56,21 +58,21 @@ class Filter {
      * @var int
      * @access protected
      */
-    protected $_csrf_expire            = 7200;
+    protected $_csrf_expire = 7200;
     /**
      * Token name for Cross Site Request Forgery Protection Cookie
      *
      * @var string
      * @access protected
      */
-    protected $_csrf_token_name        = 'ci_csrf_token';
+    protected $_csrf_token_name = 'ci_csrf_token';
     /**
      * Cookie name for Cross Site Request Forgery Protection Cookie
      *
      * @var string
      * @access protected
      */
-    protected $_csrf_cookie_name    = 'ci_csrf_token';
+    protected $_csrf_cookie_name = 'ci_csrf_token';
     /**
      * List of never allowed strings
      *
@@ -78,16 +80,16 @@ class Filter {
      * @access protected
      */
     protected $_never_allowed_str = array(
-                    'document.cookie'    => '', // '' OR [removed]
-                    'document.write'    => '', // '' OR [removed]
-                    '.parentNode'        => '', // '' OR [removed]
-                    '.innerHTML'        => '', // '' OR [removed]
-                    'window.location'    => '', // '' OR [removed]
-                    '-moz-binding'        => '', // '' OR [removed]
-                    '<!--'                => '&lt;!--',
-                    '-->'                => '--&gt;',
-                    '<![CDATA['            => '&lt;![CDATA[',
-                    '<comment>'            => '&lt;comment&gt;'
+        'document.cookie' => '', // '' OR [removed]
+        'document.write' => '', // '' OR [removed]
+        '.parentNode' => '', // '' OR [removed]
+        '.innerHTML' => '', // '' OR [removed]
+        'window.location' => '', // '' OR [removed]
+        '-moz-binding' => '', // '' OR [removed]
+        '<!--' => '&lt;!--',
+        '-->' => '--&gt;',
+        '<![CDATA[' => '&lt;![CDATA[',
+        '<comment>' => '&lt;comment&gt;'
     );
 
     /* never allowed, regex replacement */
@@ -98,10 +100,10 @@ class Filter {
      * @access protected
      */
     protected $_never_allowed_regex = array(
-                    "javascript\s*:"            => '', // '' OR [removed]
-                    "expression\s*(\(|&\#40;)"    => '[removed]', // CSS and IE
-                    "vbscript\s*:"                => '[removed]', // IE, surprise!
-                    "Redirect\s+302"            => '[removed]'
+        "javascript\s*:" => '', // '' OR [removed]
+        "expression\s*(\(|&\#40;)" => '[removed]', // CSS and IE
+        "vbscript\s*:" => '[removed]', // IE, surprise!
+        "Redirect\s+302" => '[removed]'
     );
 
     /**
@@ -110,18 +112,15 @@ class Filter {
     public function __construct()
     {
         // CSRF config
-        foreach(array('csrf_expire', 'csrf_token_name', 'csrf_cookie_name') as $key)
-        {
-            if (FALSE !== ($val = config_item($key)))
-            {
-                $this->{'_'.$key} = $val;
+        foreach (array('csrf_expire', 'csrf_token_name', 'csrf_cookie_name') as $key) {
+            if (FALSE !== ($val = config_item($key))) {
+                $this->{'_' . $key} = $val;
             }
         }
 
         // Append application specific cookie prefix
-        if (config_item('cookie_prefix'))
-        {
-            $this->_csrf_cookie_name = config_item('cookie_prefix').$this->_csrf_cookie_name;
+        if (config_item('cookie_prefix')) {
+            $this->_csrf_cookie_name = config_item('cookie_prefix') . $this->_csrf_cookie_name;
         }
 
         // Set the CSRF hash

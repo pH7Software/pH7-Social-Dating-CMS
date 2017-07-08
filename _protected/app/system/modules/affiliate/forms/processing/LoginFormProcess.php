@@ -32,30 +32,25 @@ class LoginFormProcess extends Form implements LoginableForm
         $sPassword = $this->httpRequest->post('password', HttpRequest::NO_CLEAN);
 
         /** Check if the connection is not locked **/
-        $bIsLoginAttempt = (bool) DbConfig::getSetting('isAffiliateLoginAttempt');
-        $iMaxAttempts = (int) DbConfig::getSetting('maxAffiliateLoginAttempts');
-        $iTimeDelay = (int) DbConfig::getSetting('loginAffiliateAttemptTime');
+        $bIsLoginAttempt = (bool)DbConfig::getSetting('isAffiliateLoginAttempt');
+        $iMaxAttempts = (int)DbConfig::getSetting('maxAffiliateLoginAttempts');
+        $iTimeDelay = (int)DbConfig::getSetting('loginAffiliateAttemptTime');
 
-        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Affiliates'))
-        {
+        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Affiliates')) {
             \PFBC\Form::setError('form_login_aff', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }
 
         // Check Login
         $sLogin = $this->oAffModel->login($sEmail, $sPassword, 'Affiliates');
-        if ($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist')
-        {
+        if ($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist') {
             sleep(1); // Security against brute-force attack to avoid drowning the server and the database
 
-            if ($sLogin === 'email_does_not_exist')
-            {
+            if ($sLogin === 'email_does_not_exist') {
                 $this->enableCaptcha();
-                \PFBC\Form::setError('form_login_aff', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail,0,PH7_MAX_EMAIL_LENGTH))));
+                \PFBC\Form::setError('form_login_aff', t('Oops! "%0%" is not associated with any %site_name% account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH))));
                 $oSecurityModel->addLoginLog($sEmail, 'Guest', 'No Password', 'Failed! Incorrect Username', 'Affiliates');
-            }
-            elseif ($sLogin === 'password_does_not_exist')
-            {
+            } elseif ($sLogin === 'password_does_not_exist') {
                 $oSecurityModel->addLoginLog($sEmail, 'Guest', $sPassword, 'Failed! Incorrect Password', 'Affiliates');
 
                 if ($bIsLoginAttempt) {
@@ -65,12 +60,10 @@ class LoginFormProcess extends Form implements LoginableForm
                 $this->enableCaptcha();
                 $sWrongPwdTxt = t('Oops! This password you entered is incorrect.') . '<br />';
                 $sWrongPwdTxt .= t('Please try again (make sure your caps lock is off).') . '<br />';
-                $sWrongPwdTxt .= t('Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('lost-password','main','forgot','affiliate'));
+                $sWrongPwdTxt .= t('Forgot your password? <a href="%0%">Request a new one</a>.', Uri::get('lost-password', 'main', 'forgot', 'affiliate'));
                 \PFBC\Form::setError('form_login_aff', $sWrongPwdTxt);
             }
-        }
-        else
-        {
+        } else {
             $oSecurityModel->clearLoginAttempts('Affiliates');
             $this->session->remove('captcha_aff_enabled');
             $iId = $this->oAffModel->getId($sEmail, null, 'Affiliates');

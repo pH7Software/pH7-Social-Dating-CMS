@@ -3,7 +3,9 @@
  * We made this code.
  * By pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Validation;
+
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Password extends \PFBC\Validation
@@ -21,7 +23,7 @@ class Password extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        if($this->isNotApplicable($sValue)) return true;
+        if ($this->isNotApplicable($sValue)) return true;
         return $this->oValidate->password($sValue, $this->iMin, $this->iMax);
     }
 }

@@ -7,15 +7,18 @@
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / Module / Hello World / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Translate\Lang;
 
 class HomeController extends Controller
 {
-
     /**
      * Example URL: http://your-domain.com/m/helloworld/home/index/Pierre-Henry/Soria
+     *
+     * @param string $sFirstName
+     * @param string $sLastName
      */
     public function index($sFirstName = '', $sLastName = '')
     {
@@ -32,8 +35,7 @@ class HomeController extends Controller
         $this->view->h3_title = t('H3 title example');
         $this->view->desc = t('Hello world %0% %1%, how are you on %2%?', $this->str->upperFirst($sFirstName), $this->str->upperFirst($sLastName), $this->dateTime->get()->date('Y-m-d'));
 
-        // Go Display
+        // Display the page
         $this->output();
     }
-
 }

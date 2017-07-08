@@ -23,7 +23,7 @@ $sPhp_self = str_replace('\\', '', dirname(htmlspecialchars($_SERVER['PHP_SELF']
 
 ########## OTHER ##########
 
-define('SELF', (substr($sPhp_self,-1) !== '/') ? $sPhp_self . '/' : $sPhp_self);
+define('SELF', (substr($sPhp_self, -1) !== '/') ? $sPhp_self . '/' : $sPhp_self);
 define('RELATIVE', SELF);
 define('DEF_LANG', 'en');
 define('TPL', 'base');

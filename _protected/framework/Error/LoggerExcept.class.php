@@ -11,6 +11,7 @@
  */
 
 namespace PH7\Framework\Error;
+
 defined('PH7') or exit('Restricted access');
 
 use Exception;
@@ -30,7 +31,9 @@ final class LoggerExcept extends Logger
             FrontController::getInstance()->_databaseInitialize();
         } catch (ModelException $oE) {
             // If we are not in development mode, we display an error message to avoid showing information on the database.
-            if (!Debug::is()) exit('Could not connect to database server!');
+            if (!Debug::is()) {
+                exit('Could not connect to database server!');
+            }
         }
 
         parent::__construct();
@@ -39,7 +42,8 @@ final class LoggerExcept extends Logger
     /**
      * Write to the logfile.
      *
-     * @param object $oExcept \Exception object.
+     * @param Exception $oExcept
+     *
      * @return void
      */
     public function except(Exception $oExcept)
@@ -85,14 +89,14 @@ final class LoggerExcept extends Logger
                     fclose($rHandler);
                 }
             }
-            break;
+                break;
 
             case 'database': {
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('LogError') . 'SET logError = :line');
                 $rStmt->execute(array(':line' => $sContents));
                 Db::free($rStmt);
             }
-            break;
+                break;
 
             case 'email': {
                 $aInfo = [
@@ -102,7 +106,7 @@ final class LoggerExcept extends Logger
 
                 (new Mail)->send($aInfo, $sContents, false);
             }
-            break;
+                break;
 
             default:
                 exit(t('Invalid Log Option.'));

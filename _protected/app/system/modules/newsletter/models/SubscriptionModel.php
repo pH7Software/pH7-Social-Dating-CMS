@@ -47,7 +47,7 @@ class SubscriptionModel extends UserCoreModel
         $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();
 
-        return (int) Db::getInstance()->lastInsertId();
+        return (int)Db::getInstance()->lastInsertId();
     }
 
     /**
@@ -79,9 +79,9 @@ class SubscriptionModel extends UserCoreModel
      */
     public function browse($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
@@ -93,8 +93,7 @@ class SubscriptionModel extends UserCoreModel
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
@@ -105,7 +104,7 @@ class SubscriptionModel extends UserCoreModel
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            $mData = (int) $oRow->totalUsers;
+            $mData = (int)$oRow->totalUsers;
             unset($oRow);
         }
         Db::free($rStmt);

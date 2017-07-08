@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7/ App / System / Module / Friend / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -98,10 +99,10 @@ class FriendModel extends FriendCoreModel
      */
     public function approval($iProfileId, $iFriendId)
     {
-        $iProfileId = (int) $iProfileId;
-        $iFriendId = (int) $iFriendId;
+        $iProfileId = (int)$iProfileId;
+        $iFriendId = (int)$iFriendId;
 
-        $rStmt = Db::getInstance()->prepare('UPDATE'.Db::prefix('MembersFriends') .
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('MembersFriends') .
             'SET pending = 0 WHERE profileId = :friendId AND friendId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
@@ -119,8 +120,8 @@ class FriendModel extends FriendCoreModel
      */
     public function delete($iProfileId, $iFriendId)
     {
-        $iProfileId = (int) $iProfileId;
-        $iFriendId = (int) $iFriendId;
+        $iProfileId = (int)$iProfileId;
+        $iFriendId = (int)$iFriendId;
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('MembersFriends') .
             'WHERE (profileId = :profileId AND friendId = :friendId) OR (friendId = :profileId AND profileId = :friendId)');

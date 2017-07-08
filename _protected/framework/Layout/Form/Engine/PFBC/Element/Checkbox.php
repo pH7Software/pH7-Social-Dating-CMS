@@ -1,4 +1,5 @@
 <?php
+
 namespace PFBC\Element;
 
 class Checkbox extends \PFBC\OptionElement

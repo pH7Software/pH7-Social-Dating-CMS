@@ -42,8 +42,7 @@ class VideoDesignCore
     {
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
 
-        if ( (new VideoCore)->isApi($oData->file) )
-        {
+        if ((new VideoCore)->isApi($oData->file)) {
             $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
 
             if ($sMedia == 'preview')
@@ -51,22 +50,18 @@ class VideoDesignCore
                 echo $sDurationTag, '<a href="', $oData->file, '" title="', $oData->title, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>';
             else
                 echo $oVideo;
-        }
-        else
-        {
+        } else {
             $sDir = 'video/file/' . $oData->username . PH7_SH . $oData->albumId . PH7_SH;
             $sVidPath1 = $sDir . $oData->file . '.webm';
             $sVidPath2 = $sDir . $oData->file . '.mp4';
 
             // If the video is not found on the server, we show a video that shows an appropriate message.
-            if ( !(is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath1) && is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath2)) )
-            {
+            if (!(is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath1) && is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sVidPath2))) {
                 $sVidPath1 = 'video/not_found.webm';
                 $sVidPath2 = 'video/not_found.mp4';
             }
 
-            if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $oData->thumb))
-            {
+            if (is_file(PH7_PATH_PUBLIC_DATA_SYS_MOD . $sDir . $oData->thumb)) {
                 $oFile = new File;
                 $sThumbName = $oFile->getFileWithoutExt($oData->thumb);
                 $sThumbExt = $oFile->getFileExt($oData->thumb);
@@ -75,9 +70,7 @@ class VideoDesignCore
                 $aThumb = ['', '-1', '-2', '-3', '-4'];
                 shuffle($aThumb);
                 $sThumbUrl = PH7_URL_DATA_SYS_MOD . $sDir . $sThumbName . $aThumb[0] . PH7_DOT . $sThumbExt;
-            }
-            else
-            {
+            } else {
                 $sThumbUrl = PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'icon/none.jpg';
             }
 

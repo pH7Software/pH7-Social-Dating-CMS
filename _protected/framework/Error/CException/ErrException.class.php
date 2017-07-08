@@ -15,11 +15,9 @@ namespace PH7\Framework\Error\CException {
 
     /**
      * This function for display errors with the ErrorException class which is defined by PH7Exception class.
-     * @access public
      */
     final class ErrException extends \ErrorException
     {
-
         public function __toString()
         {
             switch ($this->severity) {
@@ -44,12 +42,12 @@ namespace PH7\Framework\Error\CException {
 
             return '<strong>' . $sType . '</strong> : [' . $this->code . '] ' . htmlspecialchars($this->message, ENT_QUOTES) . '<br /><strong>' . $this->file . '</strong> to line <strong>' . $this->line . '</strong>';
         }
-
     }
-
 }
 
 namespace {
+
+    use PH7\Framework\Error\CException\ErrException;
 
     /**
      * The code serves as severity
@@ -59,7 +57,8 @@ namespace {
      * @param string $sMessage
      * @param string $sFile
      * @param string $sLine
-     * @throws \PH7\Framework\Error\CException\ErrException
+     *
+     * @throws ErrException
      */
     function errExcept($iCode, $sMessage, $sFile, $sLine)
     {
@@ -67,7 +66,7 @@ namespace {
     }
 
     /**
-     * @param object $oExcept The \PH7\Framework\Error\CException\ErrException object.
+     * @param ErrException $oExcept
      */
     function customExcept(ErrException $oExcept)
     {
@@ -77,5 +76,4 @@ namespace {
 
     set_error_handler('errExcept');
     set_exception_handler('customExcept');
-
 }

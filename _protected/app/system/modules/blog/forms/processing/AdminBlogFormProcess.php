@@ -34,7 +34,7 @@ class AdminBlogFormProcess extends Form
                 'title' => $this->httpRequest->post('title'),
                 'content' => $this->httpRequest->post('content', Http::ONLY_XSS_CLEAN), // HTML contents, so we use Http::ONLY_XSS_CLEAN constant
                 'slogan' => $this->httpRequest->post('$slogan'),
-                'tags'=> $this->httpRequest->post('tags'),
+                'tags' => $this->httpRequest->post('tags'),
                 'page_title' => $this->httpRequest->post('page_title'),
                 'meta_description' => $this->httpRequest->post('meta_description'),
                 'meta_keywords' => $this->httpRequest->post('meta_keywords'),

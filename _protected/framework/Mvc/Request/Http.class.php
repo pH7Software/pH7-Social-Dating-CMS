@@ -223,10 +223,10 @@ class Http extends \PH7\Framework\Http\Http
         }
 
         // Clear the CSRF token in the request variable
-       /*
-        * CSRF token is not used in all URLs
-        $this->_aGet[$sKey] = $this->_clearCSRFToken($this->_aGet, $sKey);
-        */
+        /*
+         * CSRF token is not used in all URLs
+         $this->_aGet[$sKey] = $this->_clearCSRFToken($this->_aGet, $sKey);
+         */
 
         if ($sParam === self::NO_CLEAN) {
             return $this->_aGet[$sKey];

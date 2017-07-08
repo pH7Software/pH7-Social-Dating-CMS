@@ -52,7 +52,7 @@ class SubscriptionFormProcess extends Form
                     \PFBC\Form::setError('form_subscription', t('Oops! You are already subscribed to our newsletter.'));
                 }
             }
-            break;
+                break;
 
             case 'unsubscribe': {
                 if ($bIsSubscriber) {
@@ -62,7 +62,7 @@ class SubscriptionFormProcess extends Form
                     \PFBC\Form::setError('form_subscription', t('We have not found any subscriber with the email address.'));
                 }
             }
-            break;
+                break;
 
             default:
                 Http::setHeadersByCode(400);

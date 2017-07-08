@@ -48,7 +48,7 @@ class VideoCoreModel extends Framework\Mvc\Model\Engine\Model
     public function deleteVideo($iProfileId, $iAlbumId, $iVideoId = null)
     {
         $sSqlVideoId = (!empty($iVideoId)) ? ' AND videoId=:videoId ' : '';
-        $rStmt = Db::getInstance()->prepare('DELETE FROM'.Db::prefix('Videos').'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlVideoId);
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Videos') . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlVideoId);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         if (!empty($iVideoId))

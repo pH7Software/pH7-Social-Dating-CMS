@@ -26,7 +26,7 @@ class NoteFormProcess extends Form
         $oNoteModel = new NoteModel;
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iProfileId = $this->session->get('member_id');
-        $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendNote');
+        $iTimeDelay = (int)DbConfig::getSetting('timeDelaySendNote');
 
         $sPostId = $this->str->lower($this->httpRequest->post('post_id'));
         if (!$oNote->checkPostId($sPostId, $iProfileId, $oNoteModel)) {
@@ -52,7 +52,7 @@ class NoteFormProcess extends Form
                 'meta_copyright' => $this->httpRequest->post('meta_copyright'),
                 'enable_comment' => $this->httpRequest->post('enable_comment'),
                 'created_date' => $sCurrentTime,
-                'approved' =>  $iApproved
+                'approved' => $iApproved
             ];
 
             if (count($this->httpRequest->post('category_id')) > Note::MAX_CATEGORY_ALLOWED) {
@@ -73,7 +73,7 @@ class NoteFormProcess extends Form
                     $sMsg = t('Post successfully created!');
                 }
 
-                Header::redirect(Uri::get('note','main','read',$this->session->get('member_username') .','. $sPostId), $sMsg);
+                Header::redirect(Uri::get('note', 'main', 'read', $this->session->get('member_username') . ',' . $sPostId), $sMsg);
             }
         }
     }

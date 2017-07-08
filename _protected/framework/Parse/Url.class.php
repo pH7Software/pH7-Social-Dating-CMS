@@ -28,7 +28,7 @@ class Url
      */
     public static function clean($sUrl, $bFullClean = true)
     {
-        $sUrl = preg_replace( '/[\s]+/', '-', $sUrl);
+        $sUrl = preg_replace('/[\s]+/', '-', $sUrl);
         $sUrl = str_replace(array('«', '»', '"', '~', '#', '$', '@', '`', '§', '$', '£', 'µ', '\\', '[', ']', '<', '>', '%', '*', '{', '}'), '-', $sUrl);
 
         if ($bFullClean) {

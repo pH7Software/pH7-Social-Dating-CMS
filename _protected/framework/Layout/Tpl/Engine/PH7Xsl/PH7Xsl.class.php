@@ -56,7 +56,7 @@ class PH7Xsl
      */
     public function enablePhpFunctions($bEnable = true)
     {
-        $this->_bPhpFunc = (bool) $bEnable;
+        $this->_bPhpFunc = (bool)$bEnable;
 
         return $this;
     }
@@ -77,8 +77,7 @@ class PH7Xsl
         $sRoot = $this->_oXml->createElement($sNamespace);
         $this->_oRoot->appendChild($sRoot);
 
-        foreach ($aData as $sKey => $sValue)
-        {
+        foreach ($aData as $sKey => $sValue) {
             $sNode = $this->_oXml->createElement($sKey);
             $sRoot->appendChild($sNode);
             $sContent = $this->_oXml->createTextNode(utf8_encode($sValue));

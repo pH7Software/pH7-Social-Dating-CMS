@@ -23,7 +23,9 @@ class Geo
     /**
      * Static Class.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Get the country ISO Code (e.g., en, it, es, ru, fr, ...).

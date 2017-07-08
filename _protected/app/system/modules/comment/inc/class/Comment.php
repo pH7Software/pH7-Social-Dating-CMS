@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Comment / Inc / Class
  */
+
 namespace PH7;
 
 class Comment extends CommentCore
@@ -17,31 +18,30 @@ class Comment extends CommentCore
      */
     public static function getTable($sTable)
     {
-        switch ($sTable)
-        {
+        switch ($sTable) {
             case 'Profile':
                 $sNewTable = 'Members';
-            break;
+                break;
 
             case 'Picture':
                 $sNewTable = 'Pictures';
-            break;
+                break;
 
             case 'Video':
                 $sNewTable = 'Videos';
-            break;
+                break;
 
             case 'Blog':
                 $sNewTable = 'Blogs';
-            break;
+                break;
 
             case 'Note':
                 $sNewTable = 'Notes';
-            break;
+                break;
 
             case 'Game':
                 $sNewTable = 'Games';
-            break;
+                break;
 
             default:
                 Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);

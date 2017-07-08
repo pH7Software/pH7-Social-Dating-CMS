@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -17,10 +18,9 @@ class LikeCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function select($sKey)
     {
-        $this->cache->start(self::CACHE_GROUP, 'select' . $sKey, 3600*168);
+        $this->cache->start(self::CACHE_GROUP, 'select' . $sKey, 3600 * 168);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Likes') . 'WHERE keyId =:key LIMIT 1');
             $rStmt->bindValue(':key', $sKey, \PDO::PARAM_STR);
             $rStmt->execute();

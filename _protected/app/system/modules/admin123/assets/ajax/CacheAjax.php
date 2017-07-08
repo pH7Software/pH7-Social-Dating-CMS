@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Asset / Ajax
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -23,23 +24,22 @@ class CacheAjax extends Framework\Core\Kernel
 
     protected function clearCache()
     {
-        switch ($this->httpRequest->post('type'))
-        {
+        switch ($this->httpRequest->post('type')) {
             case 'general':
                 $this->file->deleteDir(PH7_PATH_CACHE . Framework\Cache\Cache::CACHE_DIR);
-            break;
+                break;
 
             case 'tpl_compile':
                 $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl::COMPILE_DIR);
-            break;
+                break;
 
             case 'tpl_html':
                 $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl::CACHE_DIR);
-            break;
+                break;
 
             case 'static':
                 $this->file->deleteDir(PH7_PATH_CACHE . Framework\Layout\Gzip\Gzip::CACHE_DIR);
-            break;
+                break;
 
             default:
                 Framework\Http\Http::setHeadersByCode(400);

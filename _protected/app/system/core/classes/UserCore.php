@@ -79,7 +79,7 @@ class UserCore
 
         /* Clean UserCoreModel and Avatar Cache */
         (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear()
-        ->start(Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear();
+            ->start(Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear();
     }
 
     /**
@@ -193,7 +193,7 @@ class UserCore
 
         /* Clean User Avatar Cache */
         (new Cache)->start(Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear()
-        ->start(UserCoreModel::CACHE_GROUP, 'avatar' . $iProfileId, null)->clear();
+            ->start(UserCoreModel::CACHE_GROUP, 'avatar' . $iProfileId, null)->clear();
     }
 
     /**
@@ -230,12 +230,12 @@ class UserCore
         // Add the profile background
         (new UserCoreModel)->addBackground($iProfileId, $sFile, $iApproved);
 
-         // Saved the new background
-         $oWallpaper->save($sPath . $sFile);
+        // Saved the new background
+        $oWallpaper->save($sPath . $sFile);
 
-         unset($oWallpaper);
+        unset($oWallpaper);
 
-         return true;
+        return true;
     }
 
     /**
@@ -245,7 +245,7 @@ class UserCore
      */
     public function deleteBackground($iProfileId, $sUsername)
     {
-         // We start to delete the file before the data in the database if we could not delete the file since we would have lost the link to the file found in the database.
+        // We start to delete the file before the data in the database if we could not delete the file since we would have lost the link to the file found in the database.
         $sFile = (new UserCoreModel)->getBackground($iProfileId, null);
 
         (new File)->deleteFile(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'user/background/img/' . $sUsername . PH7_SH . $sFile);
@@ -278,8 +278,7 @@ class UserCore
      */
     public function getProfileSignupLink($sUsername, $sFirstName, $sSex)
     {
-        if (!self::auth() && !AdminCore::auth())
-        {
+        if (!self::auth() && !AdminCore::auth()) {
             $aHttpParams = [
                 'ref' => (new Framework\Mvc\Request\Http)->currentController(),
                 'a' => Registry::getInstance()->action,
@@ -360,11 +359,10 @@ class UserCore
             $sLastName . '-' . $sFirstName . $sRnd
         ];
 
-        foreach($aUsernameList as $sUsername)
-        {
+        foreach ($aUsernameList as $sUsername) {
             $sUsername = substr($sUsername, 0, $iMaxLen);
 
-            if ( (new Framework\Security\Validate\Validate)->username($sUsername) )
+            if ((new Framework\Security\Validate\Validate)->username($sUsername))
                 break;
             else
                 $sUsername = Various::genRnd('pOH_Pierre-Henry_Soria_Béghin_Rollier', $iMaxLen); // Default value
@@ -383,23 +381,15 @@ class UserCore
     {
         $mRet = true; // Default value
 
-        if ($oDbProfileData->active != 1)
-        {
-            if ($oDbProfileData->active == 2)
-            {
+        if ($oDbProfileData->active != 1) {
+            if ($oDbProfileData->active == 2) {
                 $mRet = t('Sorry, your account has not been activated yet. Please activate it by clicking the activation link that was emailed.');
-            }
-            elseif ($oDbProfileData->active == 3)
-            {
+            } elseif ($oDbProfileData->active == 3) {
                 $mRet = t('Sorry, your account has not been activated yet. An administrator must validate your account.');
-            }
-            else
-            {
+            } else {
                 $mRet = t('Your account does not have a valid activation status. Please contact the database administrator so that it solves this problem.');
             }
-        }
-        elseif ($oDbProfileData->ban == 1)
-        {
+        } elseif ($oDbProfileData->ban == 1) {
             $mRet = t('Sorry, Your account has been banned.');
         }
 
@@ -423,11 +413,9 @@ class UserCore
         $sRedirectIndexUrl = ($sMod == 'newsletter' ? PH7_URL_ROOT : ($sMod == 'affiliate' ? Uri::get('affiliate', 'home', 'index') : Uri::get('user', 'main', 'index')));
         $sSuccessMsg = ($sMod == 'newsletter' ? t('Your subscription to our newsletters has been successfully validated!') : t('Your account has been successfully validated. You can now login!'));
 
-        if (isset($sEmail, $sHash))
-        {
+        if (isset($sEmail, $sHash)) {
             $oUserModel = new AffiliateCoreModel;
-            if ($oUserModel->validateAccount($sEmail, $sHash, $sTable))
-            {
+            if ($oUserModel->validateAccount($sEmail, $sHash, $sTable)) {
                 $iId = $oUserModel->getId($sEmail, null, $sTable);
                 if ($sMod != 'newsletter')
                     $this->clearReadProfileCache($iId, $sTable);

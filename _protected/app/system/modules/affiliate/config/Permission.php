@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Config
  */
+
 namespace PH7;
 
 defined('PH7') or die('Restricted access');
@@ -24,25 +25,27 @@ class Permission extends PermissionCore
 
         if (!$bAffAuth && ($this->registry->controller === 'AdsController' || $this->registry->action === 'logout')) {
             Header::redirect(
-                Uri::get('affiliate','signup','step1'),
+                Uri::get('affiliate', 'signup', 'step1'),
                 $this->signUpMsg(),
                 Design::ERROR_TYPE
             );
         }
 
         if ((!$bAffAuth && !$bAdminAuth) && ($this->registry->controller === 'AccountController'
-        && $this->registry->action !== 'activate')) {
+                && $this->registry->action !== 'activate')
+        ) {
             Header::redirect(
-                Uri::get('affiliate','signup','step1'),
+                Uri::get('affiliate', 'signup', 'step1'),
                 $this->signUpMsg(),
                 Design::ERROR_TYPE
             );
         }
 
         if ($bAffAuth && ($this->registry->controller === 'SignupController' || $this->registry->action === 'activate'
-        || $this->registry->action === 'resendactivation' || $this->registry->action === 'login')) {
+                || $this->registry->action === 'resendactivation' || $this->registry->action === 'login')
+        ) {
             Header::redirect(
-                Uri::get('affiliate','account','index'),
+                Uri::get('affiliate', 'account', 'index'),
                 $this->alreadyConnectedMsg(),
                 Design::ERROR_TYPE
             );
@@ -51,7 +54,7 @@ class Permission extends PermissionCore
         if (!$bAdminAuth && $this->registry->controller === 'AdminController') {
             // For security reasons, we don't redirect the user to the admin panel URL
             Header::redirect(
-                Uri::get('affiliate','home','index'),
+                Uri::get('affiliate', 'home', 'index'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );

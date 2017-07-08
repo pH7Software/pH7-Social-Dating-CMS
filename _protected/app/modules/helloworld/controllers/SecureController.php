@@ -5,6 +5,7 @@
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / Module / Hello World / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Http\Http;
@@ -12,7 +13,6 @@ use PH7\Framework\Translate\Lang;
 
 class SecureController extends Controller
 {
-
     public function index()
     {
         // Loading Gettext Language File ...
@@ -37,5 +37,4 @@ class SecureController extends Controller
             $this->output();
         }
     }
-
 }

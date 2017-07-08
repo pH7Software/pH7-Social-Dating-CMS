@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -48,7 +49,7 @@ class PictureCoreModel extends Framework\Mvc\Model\Engine\Model
     public function deletePhoto($iProfileId, $iAlbumId, $iPictureId = null)
     {
         $sSqlPictureId = (!empty($iPictureId)) ? ' AND pictureId=:pictureId ' : '';
-        $rStmt = Db::getInstance()->prepare('DELETE FROM'.Db::prefix('Pictures').'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlPictureId);
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Pictures') . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlPictureId);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
         if (!empty($iPictureId))

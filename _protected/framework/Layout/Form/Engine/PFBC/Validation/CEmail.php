@@ -3,7 +3,9 @@
  * We made this code.
  * By pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Validation;
+
 use PH7\ExistsCoreModel;
 
 class CEmail extends \PFBC\Validation

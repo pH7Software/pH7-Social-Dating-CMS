@@ -42,7 +42,9 @@ class SearchCoreModel
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Order By method.
@@ -76,7 +78,7 @@ class SearchCoreModel
             case static::UPDATED:
                 $sAsTable = (!empty($sAsTable)) ? $sAsTable . '.' : '';
                 $sOrderBy = $sColumn;
-            break;
+                break;
 
             default:
                 $sAsTable = ''; // No Alias because it is an SQL function

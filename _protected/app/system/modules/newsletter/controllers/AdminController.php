@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -66,13 +67,10 @@ class AdminController extends Controller
         );
         unset($oPage);
 
-        if (empty($oBrowse))
-        {
+        if (empty($oBrowse)) {
             $this->design->setRedirect(Uri::get('newsletter', 'admin', 'browse'));
             $this->displayPageNotFound(t('Sorry, Your search returned no results!'));
-        }
-        else
-        {
+        } else {
             // Add the js file necessary for the browse form
             $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
 
@@ -95,8 +93,7 @@ class AdminController extends Controller
     {
         if (!(new Framework\Security\CSRF\Token)->check('subscriber_action'))
             $this->sMsg = Form::errorTokenMsg();
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
+        elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sEmail)
                 $this->oSubscriptionModel->unsubscribe($sEmail);
 

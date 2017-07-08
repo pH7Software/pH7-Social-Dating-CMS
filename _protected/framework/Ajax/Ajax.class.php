@@ -25,17 +25,14 @@ namespace PH7\Framework\Ajax {
             return '{"status":' . $iStatus . ',"txt":"' . $sTxt . '"}';
         }
     }
-
 }
 
 namespace {
-
     /**
-     * Alias of the \PH7\Framework\Ajax\Ajax::jsonMsg() method.
+     * Alias of \PH7\Framework\Ajax\Ajax::jsonMsg() method.
      */
     function jsonMsg($iStatus, $sTxt)
     {
         return PH7\Framework\Ajax\Ajax::jsonMsg($iStatus, $sTxt);
     }
-
 }

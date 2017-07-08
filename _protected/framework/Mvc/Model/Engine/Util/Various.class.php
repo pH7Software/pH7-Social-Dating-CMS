@@ -36,7 +36,7 @@ class Various
         if (!is_file($sSqlFile)) return false;
 
         $sSqlContent = file_get_contents($sSqlFile);
-        $sSqlContent = str_replace(PH7_TABLE_PREFIX,  Db::prefix(), $sSqlContent);
+        $sSqlContent = str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
         $rStmt = Db::getInstance()->exec($sSqlContent);
         unset($sSqlContent);
 
@@ -86,32 +86,31 @@ class Various
      * @return string The correct module name.
      * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
      */
-     public static function convertTableToMod($sTable)
-     {
-         switch ($sTable)
-         {
-             case 'Members':
-                 $sMod = 'user';
-             break;
+    public static function convertTableToMod($sTable)
+    {
+        switch ($sTable) {
+            case 'Members':
+                $sMod = 'user';
+                break;
 
-             case 'Affiliates':
-                 $sMod = 'affiliate';
-             break;
+            case 'Affiliates':
+                $sMod = 'affiliate';
+                break;
 
-             case 'Subscribers':
-                 $sMod = 'newsletter';
-             break;
+            case 'Subscribers':
+                $sMod = 'newsletter';
+                break;
 
-             case 'Admins':
-                 $sMod = PH7_ADMIN_MOD;
-             break;
+            case 'Admins':
+                $sMod = PH7_ADMIN_MOD;
+                break;
 
-             default:
-                 static::launchErr($sTable);
-         }
+            default:
+                static::launchErr($sTable);
+        }
 
-         return $sMod;
-     }
+        return $sMod;
+    }
 
     /**
      * Convert table to ID.
@@ -124,48 +123,47 @@ class Various
      */
     public static function convertTableToId($sTable)
     {
-        switch ($sTable)
-        {
+        switch ($sTable) {
             case 'Members':
                 $sId = 'profileId';
-            break;
+                break;
 
             case 'Pictures':
                 $sId = 'pictureId';
-            break;
+                break;
 
             case 'AlbumsPictures':
                 $sId = 'albumId';
-            break;
+                break;
 
             case 'Videos':
                 $sId = 'videoId';
-            break;
+                break;
 
             case 'AlbumsVideos':
                 $sId = 'albumId';
-            break;
+                break;
 
             case 'Blogs':
                 $sId = 'blogId';
-            break;
+                break;
 
             case 'Notes':
                 $sId = 'noteId';
-            break;
+                break;
 
             case 'Games':
                 $sId = 'GameId';
-            break;
+                break;
 
             case 'ForumsTopics':
                 $sId = 'topicId';
-            break;
+                break;
 
             /** Check Ads Tables **/
             case \PH7\AdsCore::checkTable($sTable):
                 $sId = \PH7\AdsCore::convertTableToId($sTable);
-            break;
+                break;
 
             default:
                 static::launchErr($sTable);
@@ -185,8 +183,7 @@ class Various
      */
     public static function checkTable($sTable)
     {
-        switch ($sTable)
-        {
+        switch ($sTable) {
             case 'Members':
             case 'AlbumsPictures':
             case 'AlbumsVideos':
@@ -196,12 +193,12 @@ class Various
             case 'Blogs':
             case 'Notes':
                 return $sTable;
-            break;
+                break;
 
             /** Check Ads Tables **/
             case \PH7\AdsCore::checkTable($sTable):
                 return $sTable;
-            break;
+                break;
 
             default:
                 static::launchErr($sTable);
@@ -219,8 +216,7 @@ class Various
      */
     public static function checkModelTable($sTable)
     {
-        switch ($sTable)
-        {
+        switch ($sTable) {
             case 'Members':
             case 'Affiliates':
             case 'MembersInfo':

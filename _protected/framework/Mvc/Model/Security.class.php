@@ -36,14 +36,14 @@ class Security
      */
     public function blockIp($sIp, $iExpir = 86400)
     {
-        $iExpir = time() + (int) $iExpir;
+        $iExpir = time() + (int)$iExpir;
         $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix('BlockIp') . 'WHERE ip = :ip LIMIT 1');
         $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
         $rStmt->execute();
 
         if ($rStmt->rowCount() == 0) // Not Found IP
         {
-            $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('BlockIp'). 'VALUES (:ip, :expiration)');
+            $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('BlockIp') . 'VALUES (:ip, :expiration)');
             $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
             $rStmt->bindValue(':expiration', $iExpir, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -66,7 +66,7 @@ class Security
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable.'LogLogin') . '(email, username, password, status, ip)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable . 'LogLogin') . '(email, username, password, status, ip)
         VALUES (:email, :username, :password, :status, :ip)');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
@@ -91,29 +91,24 @@ class Security
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable.'AttemptsLogin') . 'WHERE ip = :ip LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable . 'AttemptsLogin') . 'WHERE ip = :ip LIMIT 1');
         $rStmt->bindValue(':ip', $this->_sIp, \PDO::PARAM_STR);
         $rStmt->execute();
 
-        if ($rStmt->rowCount() == 1)
-        {
+        if ($rStmt->rowCount() == 1) {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
 
-            if ($oRow->attempts >= $iMaxAttempts)
-            {
+            if ($oRow->attempts >= $iMaxAttempts) {
                 $sLockoutTime = (new \DateTime($oRow->lastLogin))->add(\DateInterval::createFromDateString("$iAttemptTime minutes"))->format('Y-m-d H:i:s');
 
-                if ($sLockoutTime > $this->_sCurrentTime)
-                {
+                if ($sLockoutTime > $this->_sCurrentTime) {
                     /**
                      * Send email to prevent that someone tries to hack their member account.
                      * We test that the number of attempts equals the number of maximim tantatives to avoid duplication of sending emails.
                      */
                     if ($oRow->attempts == $iMaxAttempts)
                         (new \PH7\Security)->sendAlertLoginAttemptsExceeded($iMaxAttempts, $iAttemptTime, $this->_sIp, $sEmail, $oView, $sTable);
-                }
-                else
-                {
+                } else {
                     // Clear Login Attempts
                     $this->clearLoginAttempts($sTable);
                     return true; // Authorized

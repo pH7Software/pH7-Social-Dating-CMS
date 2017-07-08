@@ -69,38 +69,27 @@ class TwoCheckOut extends Provider implements Api
         foreach ($_POST as $sKey => $sVal)
             $aInsMsg[$sKey] = $sVal;
 
-        if (!empty($_POST['message_type']) && $_POST['message_type'] == 'FRAUD_STATUS_CHANGED' && !empty($aInsMsg['md5_hash']))
-        {
+        if (!empty($_POST['message_type']) && $_POST['message_type'] == 'FRAUD_STATUS_CHANGED' && !empty($aInsMsg['md5_hash'])) {
             $sHash = strtoupper(md5($aInsMsg['sale_id'] . $sVendorId . $aInsMsg['invoice_id'] . $sSecretWord));
 
-            if ($sHash == $aInsMsg['md5_hash'])
-            {
+            if ($sHash == $aInsMsg['md5_hash']) {
                 $this->_bValid = true;
                 $this->_sMsg = t('Refund transaction valid.');
-            }
-            else
-            {
+            } else {
                 $this->_bValid = false;
                 $this->_sMsg = t('Invalid refund transaction.');
             }
-        }
-        elseif (!empty($_REQUEST['key']) && !empty($aInsMsg['order_number']) && !empty($aInsMsg['total']))
-        {
+        } elseif (!empty($_REQUEST['key']) && !empty($aInsMsg['order_number']) && !empty($aInsMsg['total'])) {
             $sHash = strtoupper(md5($sSecretWord . $sVendorId . $aInsMsg['order_number'] . $aInsMsg['total']));
 
-            if ($sHash != $_REQUEST['key'])
-            {
+            if ($sHash != $_REQUEST['key']) {
                 $this->_bValid = true;
                 $this->_sMsg = t('Purchase transaction valid.');
-            }
-            else
-            {
+            } else {
                 $this->_bValid = false;
                 $this->_sMsg = t('Invalid purchase transaction.');
             }
-        }
-        else
-        {
+        } else {
             $this->_bValid = false;
             $this->_sMsg = t('Invalid connection to 2CheckOut.');
         }

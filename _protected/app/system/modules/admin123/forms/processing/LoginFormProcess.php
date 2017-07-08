@@ -39,12 +39,11 @@ class LoginFormProcess extends Form implements LoginableForm
         $sIpLogin = DbConfig::getSetting('ipLogin');
 
         /*** Check if the connection is not locked ***/
-        $bIsLoginAttempt = (bool) DbConfig::getSetting('isAdminLoginAttempt');
-        $iMaxAttempts = (int) DbConfig::getSetting('maxAdminLoginAttempts');
-        $iTimeDelay = (int) DbConfig::getSetting('loginAdminAttemptTime');
+        $bIsLoginAttempt = (bool)DbConfig::getSetting('isAdminLoginAttempt');
+        $iMaxAttempts = (int)DbConfig::getSetting('maxAdminLoginAttempts');
+        $iTimeDelay = (int)DbConfig::getSetting('loginAdminAttemptTime');
 
-        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Admins'))
-        {
+        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Admins')) {
             \PFBC\Form::setError('form_admin_login', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }
@@ -57,8 +56,7 @@ class LoginFormProcess extends Form implements LoginableForm
         {
             sleep(2); // Security against brute-force attack to avoid drowning the server and the database
 
-            if (!$bIsLogged)
-            {
+            if (!$bIsLogged) {
                 $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Incorrect Email, Username or Password', 'Admins');
 
                 if ($bIsLoginAttempt) {
@@ -67,16 +65,12 @@ class LoginFormProcess extends Form implements LoginableForm
 
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('"Email", "Username" or "Password" is Incorrect'));
-            }
-            elseif ($bIpNotAllowed)
-            {
+            } elseif ($bIpNotAllowed) {
                 $this->enableCaptcha();
                 \PFBC\Form::setError('form_admin_login', t('Incorrect Login!'));
                 $oSecurityModel->addLoginLog($sEmail, $sUsername, $sPassword, 'Failed! Wrong IP address', 'Admins');
             }
-        }
-        else
-        {
+        } else {
             $oSecurityModel->clearLoginAttempts('Admins');
             $this->session->remove('captcha_admin_enabled');
             $iId = $this->oAdminModel->getId($sEmail, null, 'Admins');
@@ -85,15 +79,12 @@ class LoginFormProcess extends Form implements LoginableForm
             $this->updatePwdHashIfNeeded($sPassword, $oAdminData->password, $sEmail);
 
             $o2FactorModel = new TwoFactorAuthCoreModel(PH7_ADMIN_MOD);
-            if ($o2FactorModel->isEnabled($iId))
-            {
+            if ($o2FactorModel->isEnabled($iId)) {
                 // Store the admin ID for 2FA
                 $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
                 Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', PH7_ADMIN_MOD));
-            }
-            else
-            {
+            } else {
                 (new AdminCore)->setAuth($oAdminData, $this->oAdminModel, $this->session, $oSecurityModel);
 
                 Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'index'), t('You are successfully logged in!'));

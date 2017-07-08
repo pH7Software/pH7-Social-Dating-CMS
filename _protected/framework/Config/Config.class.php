@@ -28,7 +28,7 @@ class Config implements Configurable
 
     /**
      * @var array $values
-    */
+     */
     public $values = array();
 
     /**

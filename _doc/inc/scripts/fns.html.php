@@ -18,14 +18,13 @@ function get_links_html()
     $aFiles = glob(DATA_PATH . LANG . '/*.tpl');
 
     $sHtml = '<ul>';
-    for ($i = 0, $iCount = count($aFiles); $i < $iCount; $i++)
-    {
+    for ($i = 0, $iCount = count($aFiles); $i < $iCount; $i++) {
         $sLink = $aFiles[$i];
 
         $sLink = htmlentities(str_replace(array('.tpl', DATA_PATH, LANG . '/'), '', $sLink));
         $sName = ucfirst(str_replace(array('/', '-'), array('', ' '), $sLink));
 
-        $sHtml .= '<li>' . ($i+1) . ') <a href="' . RELATIVE . LANG . '/' . $sLink . '" title="' . $sName . '" data-load="ajax">' . $sName . '</a>.</li>';
+        $sHtml .= '<li>' . ($i + 1) . ') <a href="' . RELATIVE . LANG . '/' . $sLink . '" title="' . $sName . '" data-load="ajax">' . $sName . '</a>.</li>';
     }
     $sHtml .= '</ul>';
 
@@ -41,10 +40,9 @@ function get_langs_html()
     $aLangsList = include(ROOT_PATH . 'inc/conf.lang.php');
 
     $sHtml = '<div id="lang">';
-    foreach ($aLangs as $sLang)
-    {
+    foreach ($aLangs as $sLang) {
         if ($sLang === LANG) continue;
-        $sHtml .= '<a href="' . RELATIVE . substr($sLang,0,2) . '" data-load="ajax"><img src="' . STATIC_URL . 'img/flags/' . $sLang . '.gif" alt="' . $aLangsList[$sLang] . '" title="' . $aLangsList[$sLang] . '" /></a>&nbsp;';
+        $sHtml .= '<a href="' . RELATIVE . substr($sLang, 0, 2) . '" data-load="ajax"><img src="' . STATIC_URL . 'img/flags/' . $sLang . '.gif" alt="' . $aLangsList[$sLang] . '" title="' . $aLangsList[$sLang] . '" /></a>&nbsp;';
     }
     $sHtml .= '</div>';
 

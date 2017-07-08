@@ -41,9 +41,9 @@ class SearchUserCoreForm
             self::setAttrVals();
         }
 
-         // Generate the Quick Search form
+        // Generate the Quick Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
-        $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get'));
+        $oForm->configure(array('action' => Uri::get('user', 'browse', 'index') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', ['male' => t('Man'), 'female' => t('Woman'), 'couple' => t('Couple')], self::$aSexOption));
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for a:'), 'sex', ['female' => t('Woman'), 'male' => t('Man'), 'couple' => t('Couple')], self::$aMatchSexOption));
@@ -104,8 +104,7 @@ class SearchUserCoreForm
         $sUserSex = 'male';
         $aMatchSex = ['male', 'female', 'couple'];
 
-        if(UserCore::auth())
-        {
+        if (UserCore::auth()) {
             $sUserSex = $oUserModel->getSex($oSession->get('member_id'));
             $aMatchSex = Form::getVal($oUserModel->getMatchSex($oSession->get('member_id')));
         }

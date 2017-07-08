@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
 namespace PH7;
 
 use PH7\Framework\Pattern\Statik;
@@ -38,7 +39,7 @@ class CommentCore
             case 'note':
             case 'game':
                 return ucfirst($sTable);
-            break;
+                break;
 
             default:
                 Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
