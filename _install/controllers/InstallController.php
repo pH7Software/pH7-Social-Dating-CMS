@@ -464,37 +464,6 @@ class InstallController extends Controller
         $this->oView->display('niche.tpl');
     }
 
-    /**
-     * Update module status (enabled/disabled).
-     *
-     * @param Db $oDb
-     * @param string $sModName Module Name.
-     * @param string $sStatus '1' = Enabled | '0' = Disabled (need to be string because in DB it is an "enum").
-     *
-     * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
-     */
-    private function _updateMods(Db $oDb, $sModName, $sStatus)
-    {
-        $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'SysModsEnabled SET enabled = :status WHERE folderName = :modName LIMIT 1';
-        $rStmt = $oDb->prepare($sSql);
-        return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
-    }
-
-    /**
-     * Update Settings.
-     *
-     * @param array $aParams
-     * @return void
-     */
-    private function _updateSettings(array $aParams)
-    {
-        // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
-        Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
-
-        // Enable/Disable Social Media Widgets according to the chosen niche
-        Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
-    }
-
     /********************* STEP 6 *********************/
     public function service()
     {
@@ -596,6 +565,36 @@ class InstallController extends Controller
         setcookie($sCookieName, 0, 0);
         // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
         unset($_COOKIE[$sCookieName]);
+    }
+
+    /**
+     * Update module status (enabled/disabled).
+     *
+     * @param Db $oDb
+     * @param string $sModName Module Name.
+     * @param string $sStatus '1' = Enabled | '0' = Disabled (need to be string because in DB it is an "enum").
+     *
+     * @return integer|boolean Returns the number of rows on success or FALSE on failure.
+     */
+    private function _updateMods(Db $oDb, $sModName, $sStatus)
+    {
+        $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'SysModsEnabled SET enabled = :status WHERE folderName = :modName LIMIT 1';
+        $rStmt = $oDb->prepare($sSql);
+        return $rStmt->execute(['modName' => $sModName, 'status' => $sStatus]);
+    }
+
+    /**
+     * @param array $aParams
+     *
+     * @return void
+     */
+    private function _updateSettings(array $aParams)
+    {
+        // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
+        Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
+
+        // Enable/Disable Social Media Widgets according to the chosen niche
+        Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
     }
 
     /***** Get the loading image *****/
