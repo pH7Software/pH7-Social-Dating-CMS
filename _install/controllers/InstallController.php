@@ -384,13 +384,6 @@ class InstallController extends Controller
         $this->oView->display('config_site.tpl');
     }
 
-    /***** Set the correct permission to the config files *****/
-    private function _chmodConfigFiles()
-    {
-        @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
-        @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
-    }
-
     /********************* STEP 5 *********************/
     public function niche()
     {
