@@ -508,17 +508,23 @@ class InstallController extends Controller
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
 
-        if (!empty($_SESSION['val']['admin_login_email']) && !empty($_SESSION['val']['admin_username'])) {
-            $this->_sendWelcomeEmail();
+        if (
+            !empty($_SESSION['val']['admin_login_email'])
+            && !empty($_SESSION['val']['admin_username'])
+        ) {
+            $this->sendWelcomeEmail();
 
             $this->oView->assign('admin_login_email', $_SESSION['val']['admin_login_email']);
             $this->oView->assign('admin_username', $_SESSION['val']['admin_username']);
         }
 
-        $this->_removeSessions();
-        $this->_removeCookies();
+        $this->removeSessions();
+        $this->removeCookies();
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['confirm_remove_install'])) {
+        if (
+            $_SERVER['REQUEST_METHOD'] == 'POST'
+            && !empty($_POST['confirm_remove_install'])
+        ) {
             remove_install_dir();
             clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
             exit(header('Location: ' . PH7_URL_ROOT));
