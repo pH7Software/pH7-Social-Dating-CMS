@@ -5,7 +5,9 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / HotOrNot / Model
  */
+
 namespace PH7;
+
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class HotOrNotModel extends Framework\Mvc\Model\Engine\Model
@@ -25,7 +27,7 @@ class HotOrNotModel extends Framework\Mvc\Model\Engine\Model
     public function getPicture($iProfileId = null, $iApproved = 1, $iOffset = 0, $iLimit = 1)
     {
         $sSql = (!empty($iProfileId)) ? ' AND (profileId <> :profileId) ' : ' ';
-        $rStmt = Db::getInstance()->prepare('SELECT profileId, username, firstName, sex, avatar FROM'.Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')' . $sSql . 'AND (avatar IS NOT NULL) AND (approvedAvatar = :approved) ORDER BY RAND() LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT profileId, username, firstName, sex, avatar FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')' . $sSql . 'AND (avatar IS NOT NULL) AND (approvedAvatar = :approved) ORDER BY RAND() LIMIT :offset, :limit');
 
         if (!empty($iProfileId)) $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);

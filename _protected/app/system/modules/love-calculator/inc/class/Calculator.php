@@ -9,6 +9,7 @@
  * @package        PH7 / App / System / Module / Love Calculator / Inc / Class
  * @version        1.2
  */
+
 namespace PH7;
 
 class Calculator

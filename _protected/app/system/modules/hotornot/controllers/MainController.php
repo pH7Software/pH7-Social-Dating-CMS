@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / HotOrNot / Controller
  */
+
 namespace PH7;
 
 class MainController extends Controller
@@ -42,13 +43,10 @@ class MainController extends Controller
         $iProfileId = (UserCore::auth()) ? $this->session->get('member_id') : null;
         $oData = $this->oHoNModel->getPicture($iProfileId);
 
-        if (empty($oData))
-        {
+        if (empty($oData)) {
             Framework\Http\Http::setHeadersByCode(404);
             $this->view->error = t("Sorry, we haven't found any photo to Hot Or Not Party.");
-        }
-        else
-        {
+        } else {
             $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
             $this->view->data = $oData;
         }

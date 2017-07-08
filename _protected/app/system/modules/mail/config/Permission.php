@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Mail / Config
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -36,7 +37,7 @@ class Permission extends PermissionCore
         if (!$bAdminAuth && $this->registry->controller === 'AdminController') {
             // For security reasons, we do not redirectionnons the user to hide the url of the administrative part.
             Header::redirect(
-                Uri::get('user','main','login'),
+                Uri::get('user', 'main', 'login'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );

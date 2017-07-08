@@ -17,15 +17,14 @@ class HttpController extends Controller
 
     public function index()
     {
-        switch ($this->httpRequest->get('code', 'int'))
-        {
+        switch ($this->httpRequest->get('code', 'int')) {
             case 400:
                 Http::setHeadersByCode(400);
                 $this->sTitle = t('Bad Request');
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
                 $this->view->error_desc = t('The request cannot be fulfilled due to bad syntax.');
-            break;
+                break;
 
             case 401:
                 Http::setHeadersByCode(401);
@@ -33,7 +32,7 @@ class HttpController extends Controller
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
                 $this->view->error_desc = t('Your IP address or the username/password you entered were not correct. Your request was denied as you have no permission to access the data.');
-            break;
+                break;
 
             case 402:
                 Http::setHeadersByCode(402);
@@ -41,7 +40,7 @@ class HttpController extends Controller
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
                 $this->view->error_desc = t('The data is not accessible at the time. The owner of the space has not yet payed their service provider.');
-            break;
+                break;
 
             case 403:
                 Http::setHeadersByCode(403);
@@ -49,7 +48,7 @@ class HttpController extends Controller
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
                 $this->view->error_desc = t('Your IP address or the username/password you entered were not correct. Your request was denied as you have no permission to access the data.<br />OR<br />The server was unable to serve the data that was requested.');
-            break;
+                break;
 
             case 405:
                 Http::setHeadersByCode(405);
@@ -57,7 +56,7 @@ class HttpController extends Controller
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
                 $this->view->error_desc = t('A request was made of a resource using a request method not supported by that resource;[2] for example, using GET on a form which requires data to be presented via POST, or using PUT on a read-only resource.');
-            break;
+                break;
 
             case 500:
                 Http::setHeadersByCode(500);
@@ -65,7 +64,7 @@ class HttpController extends Controller
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
                 $this->view->error_desc = t('The server encountered an error. This is most often caused by a scripting problem, a failed database access attempt, or other similar reasons.<br />Please come back later!');
-            break;
+                break;
 
             case 501:
                 Http::setHeadersByCode(501);
@@ -82,7 +81,7 @@ class HttpController extends Controller
                POST<br />
                PUT<br />
                TRACE';
-            break;
+                break;
 
             case 502:
                 Http::setHeadersByCode(502);
@@ -90,7 +89,7 @@ class HttpController extends Controller
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
                 $this->view->error_desc = t('The server was acting as a gateway or proxy and received an invalid response from the upstream server.');
-            break;
+                break;
 
             case 504:
                 Http::setHeadersByCode(504);
@@ -98,7 +97,7 @@ class HttpController extends Controller
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
                 $this->view->error_desc = t("Most likely the client has lost connectivity (disconnected from the internet) or the client's host is having technical difficulties.<br /> This could also meanthat a server that allows access to the requested server is down, having bandwidth/load issues, or otherwise unavailable.");
-            break;
+                break;
 
             case 505:
                 Http::setHeadersByCode(505);
@@ -106,7 +105,7 @@ class HttpController extends Controller
                 $this->view->page_title = $this->sTitle;
                 $this->view->h1_title = $this->sTitle;
                 $this->view->error_desc = t('The server does not support the HTTP protocol version used in the request.');
-            break;
+                break;
 
             default:
                 // Add an image for 404 not found page, so we need to include a stylesheet file

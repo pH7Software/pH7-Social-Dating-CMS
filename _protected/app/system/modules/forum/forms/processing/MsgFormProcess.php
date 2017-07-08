@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Forum / Form / Processing
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -25,22 +26,17 @@ class MsgFormProcess extends Form
 
         $sMessage = $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN);
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
-        $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendForumTopic');
-        $iProfileId = (int) $this->session->get('member_id');
+        $iTimeDelay = (int)DbConfig::getSetting('timeDelaySendForumTopic');
+        $iProfileId = (int)$this->session->get('member_id');
         $iForumId = $this->httpRequest->get('forum_id', 'int');
 
-        if (!$oForumModel->checkWaitTopic($iProfileId, $iTimeDelay, $sCurrentTime))
-        {
+        if (!$oForumModel->checkWaitTopic($iProfileId, $iTimeDelay, $sCurrentTime)) {
             \PFBC\Form::setError('form_msg', Form::waitWriteMsg($iTimeDelay));
-        }
-        elseif ($oForumModel->isDuplicateTopic($iProfileId, $sMessage))
-        {
+        } elseif ($oForumModel->isDuplicateTopic($iProfileId, $sMessage)) {
             \PFBC\Form::setError('form_msg', Form::duplicateContentMsg());
-        }
-        else
-        {
+        } else {
             $oForumModel->addTopic($iProfileId, $iForumId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
-            Header::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name').','.$iForumId.','.$this->httpRequest->post('title').','.Db::getInstance()->lastInsertId()), t('Your message has been added successfully!'));
+            Header::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->post('title') . ',' . Db::getInstance()->lastInsertId()), t('Your message has been added successfully!'));
         }
         unset($oForumModel);
     }

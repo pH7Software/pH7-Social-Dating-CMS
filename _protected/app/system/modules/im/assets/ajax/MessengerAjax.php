@@ -41,23 +41,22 @@ class MessengerAjax extends PermissionCore
         $this->_oHttpRequest = new HttpRequest;
         $this->_oMessengerModel = new MessengerModel;
 
-        switch ($this->_oHttpRequest->get('act'))
-        {
+        switch ($this->_oHttpRequest->get('act')) {
             case 'heartbeat':
                 $this->heartbeat();
-            break;
+                break;
 
             case 'send':
                 $this->send();
-            break;
+                break;
 
             case 'close':
                 $this->close();
-            break;
+                break;
 
             case 'startsession':
                 $this->startSession();
-            break;
+                break;
 
             default:
                 Http::setHeadersByCode(400);
@@ -79,8 +78,7 @@ class MessengerAjax extends PermissionCore
         $oQuery = $this->_oMessengerModel->select($sFrom);
         $sItems = '';
 
-        foreach ($oQuery as $oData)
-        {
+        foreach ($oQuery as $oData) {
             $sFrom = escape($oData->fromUser, true);
             $sSent = escape($oData->sent, true);
             $sMsg = $this->sanitize($oData->message);
@@ -100,16 +98,12 @@ class MessengerAjax extends PermissionCore
             $_SESSION['messenger_openBoxes'][$sFrom] = $sSent;
         }
 
-        if (!empty($_SESSION['messenger_openBoxes']))
-        {
-            foreach ($_SESSION['messenger_openBoxes'] as $sBox => $sTime)
-            {
-                if (!isset($_SESSION['messenger_boxes'][$sBox]))
-                {
+        if (!empty($_SESSION['messenger_openBoxes'])) {
+            foreach ($_SESSION['messenger_openBoxes'] as $sBox => $sTime) {
+                if (!isset($_SESSION['messenger_boxes'][$sBox])) {
                     $iNow = time() - strtotime($sTime);
                     $sMsg = t('Sent at %0%', VDate::textTimeStamp($sTime));
-                    if ($iNow > 180)
-                    {
+                    if ($iNow > 180) {
                         $sItems .= $this->setJsonContent(['status' => '2', 'user' => $sBox, 'msg' => $sMsg]);
 
                         if (!isset($_SESSION['messenger_history'][$sBox]))
@@ -125,7 +119,7 @@ class MessengerAjax extends PermissionCore
         if (!$this->isOnline($sFrom))
             $sItems = t('You must have the ONLINE status in order to speak instantaneous.');
         elseif ($sTo !== 0 && !$this->isOnline($sTo))
-            $sItems = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
+            $sItems = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail', 'main', 'compose', $sTo)) . '</em></small>';
         else
             $this->_oMessengerModel->update($sFrom, $sTo);
 
@@ -183,11 +177,11 @@ class MessengerAjax extends PermissionCore
             $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] = '';
 
         if (!$this->checkMembership() || !$this->group->instant_messaging)
-            $sMsgTransform = t("You need to <a href='%0%'>upgrade your membership</a> to be able to chat.", Uri::get('payment','main','index'));
+            $sMsgTransform = t("You need to <a href='%0%'>upgrade your membership</a> to be able to chat.", Uri::get('payment', 'main', 'index'));
         elseif (!$this->isOnline($sFrom))
             $sMsgTransform = t('You must have the ONLINE status in order to chat with other users.');
         elseif (!$this->isOnline($sTo))
-            $sMsgTransform = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail','main','compose', $sTo)) . '</em></small>';
+            $sMsgTransform = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail', 'main', 'compose', $sTo)) . '</em></small>';
         else
             $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new CDateTime)->get()->dateTime('Y-m-d H:i:s'));
 

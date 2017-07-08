@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Field / Form / Processing
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -25,21 +26,16 @@ class EditFieldFormProcess extends Form
         $iLength = $this->httpRequest->post('length');
         $sDefVal = $this->httpRequest->post('value');
 
-        if (Field::unmodifiable($sName))
-        {
+        if (Field::unmodifiable($sName)) {
             \PFBC\Form::setError('form_edit_field', t('Bad field name!'));
-        }
-        else
-        {
-            $bRet = ( new FieldModel(Field::getTable($sMod), $sName, $sType, $iLength, $sDefVal) )->update();
+        } else {
+            $bRet = (new FieldModel(Field::getTable($sMod), $sName, $sType, $iLength, $sDefVal))->update();
 
-            if ($bRet)
-            {
+            if ($bRet) {
                 /* Clean UserCoreModel Cache */
                 (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
                 Header::redirect(Uri::get('field', 'field', 'all', $sMod), t('The field has been edited.'));
-            }
-            else
+            } else
                 \PFBC\Form::setError('form_edit_field', t('Oops! An error occurred while adding the field, please try again.'));
         }
     }

@@ -67,7 +67,7 @@ class MainController extends Controller
 
     public function index()
     {
-        Header::redirect(Uri::get('mail','main','inbox'));
+        Header::redirect(Uri::get('mail', 'main', 'inbox'));
     }
 
     public function compose()
@@ -337,7 +337,7 @@ class MainController extends Controller
         } else {
             if (count($this->httpRequest->post('action')) > 0) {
                 foreach ($this->httpRequest->post('action') as $iId) {
-                    $iId = (int) $iId;
+                    $iId = (int)$iId;
                     $this->oMailModel->setTo(
                         $this->_iProfileId,
                         $iId,
@@ -348,7 +348,7 @@ class MainController extends Controller
             }
         }
 
-        Header::redirect(Uri::get('mail','main','inbox'), $this->sMsg);
+        Header::redirect(Uri::get('mail', 'main', 'inbox'), $this->sMsg);
     }
 
     public function setRestor()
@@ -365,7 +365,7 @@ class MainController extends Controller
             $this->sMsg = t('Your message does not exist anymore in your inbox.');
         }
 
-        Header::redirect(Uri::get('mail','main','trash'), $this->sMsg, $this->_getStatusType());
+        Header::redirect(Uri::get('mail', 'main', 'trash'), $this->sMsg, $this->_getStatusType());
     }
 
     public function setRestorAll()
@@ -375,7 +375,7 @@ class MainController extends Controller
         } else {
             if (count($this->httpRequest->post('action')) > 0) {
                 foreach ($this->httpRequest->post('action') as $iId) {
-                    $iId = (int) $iId;
+                    $iId = (int)$iId;
                     $this->oMailModel->setTo(
                         $this->_iProfileId,
                         $iId,
@@ -386,7 +386,7 @@ class MainController extends Controller
             }
         }
 
-        Header::redirect(Uri::get('mail','main','trash'), $this->sMsg);
+        Header::redirect(Uri::get('mail', 'main', 'trash'), $this->sMsg);
     }
 
     public function setDelete()
@@ -409,7 +409,7 @@ class MainController extends Controller
             $this->sMsg = t('Your message does not exist anymore.');
         }
 
-        $sUrl = $this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage();
+        $sUrl = $this->_bAdminLogged ? Uri::get('mail', 'admin', 'msglist') : $this->httpRequest->previousPage();
         Header::redirect($sUrl, $this->sMsg, $this->_getStatusType());
     }
 
@@ -420,7 +420,7 @@ class MainController extends Controller
         } else {
             if (count($this->httpRequest->post('action')) > 0) {
                 foreach ($this->httpRequest->post('action') as $iId) {
-                    $iId = (int) $iId;
+                    $iId = (int)$iId;
 
                     if ($this->_bAdminLogged) {
                         $this->oMailModel->adminDeleteMsg($iId);

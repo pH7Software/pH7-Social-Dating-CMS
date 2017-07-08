@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Game / Config
  */
+
 namespace PH7;
 
 defined('PH7') or die('Restricted access');
@@ -21,19 +22,16 @@ class Permission extends PermissionCore
 
         $bAdminAuth = AdminCore::auth();
 
-        if (!$bAdminAuth || UserCore::isAdminLoggedAs())
-        {
-            if (!$this->checkMembership() || !$this->group->games_access)
-            {
+        if (!$bAdminAuth || UserCore::isAdminLoggedAs()) {
+            if (!$this->checkMembership() || !$this->group->games_access) {
                 $this->paymentRedirect();
             }
         }
 
-        if (!$bAdminAuth && $this->registry->controller === 'AdminController')
-        {
+        if (!$bAdminAuth && $this->registry->controller === 'AdminController') {
             // For security reasons, we don't redirect the user to the admin panel URL
             Header::redirect(
-                Uri::get('game','main','index'),
+                Uri::get('game', 'main', 'index'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );

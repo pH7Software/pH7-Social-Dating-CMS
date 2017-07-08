@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Game / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -15,22 +16,18 @@ class GameModel extends GameCoreModel
     {
         $this->cache->start(static::CACHE_GROUP, 'category' . $iCategoryId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
 
-        if(!$oData = $this->cache->get())
-        {
-            if($bCount)
-            {
+        if (!$oData = $this->cache->get()) {
+            if ($bCount) {
                 $sSql = 'SELECT c.*, COUNT(g.gameId) AS totalCatGames FROM' . Db::prefix('GamesCategories') . 'AS c INNER JOIN' . Db::prefix('Games') . 'AS g
                 ON c.categoryId = g.categoryId GROUP BY c.name ASC LIMIT :offset, :limit';
-            }
-            else
-            {
+            } else {
                 $sSqlCategoryId = (!empty($iCategoryId)) ? ' WHERE categoryId = :categoryId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix('GamesCategories') . $sSqlCategoryId . 'ORDER BY name ASC LIMIT :offset, :limit';
             }
 
             $rStmt = Db::getInstance()->prepare($sSql);
 
-            if(!empty($iCategoryId)) $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
+            if (!empty($iCategoryId)) $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -53,9 +50,9 @@ class GameModel extends GameCoreModel
      */
     public function category($sCategoryName, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $sCategoryName = trim($sCategoryName);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort, 'n');
@@ -67,24 +64,20 @@ class GameModel extends GameCoreModel
 
         $rStmt->bindValue(':name', '%' . $sCategoryName . '%', \PDO::PARAM_STR);
 
-        if(!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if(!$bCount)
-        {
+        if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) $oRow->totalGames;
+            $mData = (int)$oRow->totalGames;
             unset($oRow);
         }
 
@@ -95,8 +88,7 @@ class GameModel extends GameCoreModel
     {
         $this->cache->start(static::CACHE_GROUP, 'file' . $iGameId, static::CACHE_TIME);
 
-        if(!$sData = $this->cache->get())
-        {
+        if (!$sData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix('Games') . 'WHERE gameId = :gameId LIMIT 1');
             $rStmt->bindValue(':gameId', $iGameId, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -124,9 +116,9 @@ class GameModel extends GameCoreModel
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
@@ -144,24 +136,20 @@ class GameModel extends GameCoreModel
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
-        if(!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if(!$bCount)
-        {
+        if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) $oRow->totalGames;
+            $mData = (int)$oRow->totalGames;
             unset($oRow);
         }
 
@@ -172,13 +160,12 @@ class GameModel extends GameCoreModel
     {
         $this->cache->start(static::CACHE_GROUP, 'totalGames', static::CACHE_TIME);
 
-        if(!$sData = $this->cache->get())
-        {
+        if (!$sData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(gameId) AS totalGames FROM' . Db::prefix('Games'));
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $sData = (int) $oRow->totalGames;
+            $sData = (int)$oRow->totalGames;
             unset($oRow);
             $this->cache->put($sData);
         }
@@ -214,7 +201,7 @@ class GameModel extends GameCoreModel
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return (int) $oRow->downloads;
+        return (int)$oRow->downloads;
     }
 
     public function add(array $aData)
