@@ -130,10 +130,10 @@ class RatingCoreAjax
         $iVotes = $this->_oRatingModel->getVote($this->_iId, $this->_sTable);
         $fRate = $this->_oRatingModel->getScore($this->_iId, $this->_sTable);
 
-        static::$_iVotes = $iVotes+=1;
-        $fScore = (float) $this->_oHttpRequest->post('score');
+        static::$_iVotes = $iVotes += 1;
+        $fScore = (float)$this->_oHttpRequest->post('score');
 
-        $this->_fScore = $fRate+=$fScore;
+        $this->_fScore = $fRate += $fScore;
     }
 
     /**

@@ -34,7 +34,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO'. Db::prefix('Comments' . $sTable).'(comment, recipient, sender, approved, createdDate) VALUES(:comment, :recipient, :sender, :approved, :createdDate)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Comments' . $sTable) . '(comment, recipient, sender, approved, createdDate) VALUES(:comment, :recipient, :sender, :approved, :createdDate)');
         $rStmt->bindValue(':comment', $iCommentId, \PDO::PARAM_STR);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
@@ -47,7 +47,7 @@ class CommentModel extends CommentCoreModel
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE'. Db::prefix('Comments' . $sTable).'SET comment = :comment, approved = :approved, updatedDate = :updatedDate WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Comments' . $sTable) . 'SET comment = :comment, approved = :approved, updatedDate = :updatedDate WHERE commentId = :commentId AND recipient = :recipient AND sender = :sender LIMIT 1');
         $rStmt->bindValue('commentId', $iCommentId, \PDO::PARAM_INT);
         $rStmt->bindValue('recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindValue(':sender', $iSenderId, \PDO::PARAM_INT);
@@ -77,23 +77,22 @@ class CommentModel extends CommentCoreModel
      */
     public function idExists($iId, $sTable)
     {
-       $this->cache->start(static::CACHE_GROUP, 'idExists' . $iId . $sTable, static::CACHE_TIME);
+        $this->cache->start(static::CACHE_GROUP, 'idExists' . $iId . $sTable, static::CACHE_TIME);
 
-       if(!$bData = $this->cache->get())
-       {
-           $iId = (int)$iId;
-           $sTable = CommentCore::checkTable($sTable);
-           $sRealTable = Comment::getTable($sTable);
-           $sProfileIdColumn = lcfirst($sTable) . 'Id';
+        if (!$bData = $this->cache->get()) {
+            $iId = (int)$iId;
+            $sTable = CommentCore::checkTable($sTable);
+            $sRealTable = Comment::getTable($sTable);
+            $sProfileIdColumn = lcfirst($sTable) . 'Id';
 
-           $rStmt = Db::getInstance()->prepare('SELECT COUNT(' . $sProfileIdColumn . ') FROM' . Db::prefix($sRealTable) . 'WHERE ' . $sProfileIdColumn . ' = :id LIMIT 1');
-           $rStmt->bindValue(':id',$iId, \PDO::PARAM_INT);
-           $rStmt->execute();
-           $bData = ($rStmt->fetchColumn() == 1);
-           Db::free($rStmt);
-           $this->cache->put($bData);
-       }
-       return $bData;
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(' . $sProfileIdColumn . ') FROM' . Db::prefix($sRealTable) . 'WHERE ' . $sProfileIdColumn . ' = :id LIMIT 1');
+            $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
+            $rStmt->execute();
+            $bData = ($rStmt->fetchColumn() == 1);
+            Db::free($rStmt);
+            $this->cache->put($bData);
+        }
+        return $bData;
     }
 
     /**

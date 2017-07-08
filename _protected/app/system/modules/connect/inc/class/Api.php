@@ -41,12 +41,12 @@ abstract class Api
      * @param string $sUrl
      * @return string The path of the Avatar
      */
-     public function getAvatar($sUrl)
-     {
-         $sTmpDest = PH7_PATH_TMP . Various::genRnd() . '.jpg';
-         @copy($sUrl, $sTmpDest);
-         return $sTmpDest;
-     }
+    public function getAvatar($sUrl)
+    {
+        $sTmpDest = PH7_PATH_TMP . Various::genRnd() . '.jpg';
+        @copy($sUrl, $sTmpDest);
+        return $sTmpDest;
+    }
 
     /**
      * Set an user authentication.
