@@ -138,7 +138,7 @@ final class DbConfig
      */
     public static function setSocialWidgets($sStatus)
     {
-        $sStatus = (string) $sStatus; // Cast into string to be sure it will work as in DB it's an "enum" type
+        $sStatus = (string)$sStatus; // Cast into string to be sure it will work as in DB it's an "enum" type
 
         self::setSetting($sStatus, 'socialMediaWidgets');
 
