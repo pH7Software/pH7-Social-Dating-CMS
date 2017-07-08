@@ -9,8 +9,7 @@
  * @version          0.5
  */
 
-namespace PH7\Framework\Ajax
-{
+namespace PH7\Framework\Ajax {
     defined('PH7') or exit('Restricted access');
 
     class Ajax
@@ -28,8 +27,7 @@ namespace PH7\Framework\Ajax
     }
 }
 
-namespace
-{
+namespace {
     /**
      * Alias of \PH7\Framework\Ajax\Ajax::jsonMsg() method.
      */
