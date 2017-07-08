@@ -85,16 +85,6 @@ final class Server
     }
 
     /**
-     * Get the server name.
-     *
-     * @return string
-     */
-    public static function getName()
-    {
-        return self::getVar(self::SERVER_NAME);
-    }
-
-    /**
      * Get the IP address of server.
      *
      * @internal We use LOCAL_ADDR variable for compatibility with Windows servers.
@@ -104,18 +94,6 @@ final class Server
     public static function getIp()
     {
         return self::getVar(self::SERVER_ADDR, self::getVar(self::LOCAL_ADDR, gethostbyname(self::getName())));
-    }
-
-    /**
-     * Check if the server is in local.
-     *
-     * @return boolean TRUE if it is in local mode, FALSE if not.
-     */
-    public static function isLocalHost()
-    {
-        $sServerName = self::getName();
-        $sHttpHost = self::getVar(self::HTTP_HOST);
-        return ($sServerName === 'localhost' || $sServerName === '127.0.0.1' || $sHttpHost === 'localhost' || $sHttpHost === '127.0.0.1');
     }
 
     /**
@@ -134,10 +112,32 @@ final class Server
     }
 
     /**
+     * Get the server name.
+     *
+     * @return string
+     */
+    public static function getName()
+    {
+        return self::getVar(self::SERVER_NAME);
+    }
+
+    /**
+     * Check if the server is in local.
+     *
+     * @return boolean TRUE if it is in local mode, FALSE if not.
+     */
+    public static function isLocalHost()
+    {
+        $sServerName = self::getName();
+        $sHttpHost = self::getVar(self::HTTP_HOST);
+        return ($sServerName === 'localhost' || $sServerName === '127.0.0.1' || $sHttpHost === 'localhost' || $sHttpHost === '127.0.0.1');
+    }
+
+    /**
      * Check if Apache's mod_rewrite is installed.
      *
      * @return boolean
-    */
+     */
     public static function isRewriteMod()
     {
         // Check if mod_rewrite is installed and is configured to be used via .htaccess
