@@ -10,8 +10,7 @@
  * @version        1.1
  */
 
-namespace PH7\Framework\Error
-{
+namespace PH7\Framework\Error {
     defined('PH7') or exit('Restricted access');
 
     use PH7\Framework\Config\Config;
@@ -66,8 +65,7 @@ namespace PH7\Framework\Error
     }
 }
 
-namespace
-{
+namespace {
     /**
      * Alias for \PH7\Framework\Error\Debug::is()
      */
