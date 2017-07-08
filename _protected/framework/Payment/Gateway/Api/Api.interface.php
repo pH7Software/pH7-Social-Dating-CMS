@@ -15,7 +15,6 @@ defined('PH7') or exit('Restricted access');
 
 interface Api
 {
-
     /**
      * Get Checkout URL.
      *
@@ -36,8 +35,8 @@ interface Api
      *
      * @param string $sOptionalParam1 Default ''
      * @param string $sOptionalParam2 Default ''
+     *
      * @return boolean
      */
     public function valid($sOptionalParam1 = '', $sOptionalParam2 = '');
-
 }

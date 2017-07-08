@@ -10,6 +10,7 @@
  */
 
 namespace PH7\Framework\Payment\Gateway\Api;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Router\Uri;

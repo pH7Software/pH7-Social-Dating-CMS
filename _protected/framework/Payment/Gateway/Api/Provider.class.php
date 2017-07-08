@@ -10,16 +10,17 @@
  */
 
 namespace PH7\Framework\Payment\Gateway\Api;
+
 defined('PH7') or exit('Restricted access');
 
 abstract class Provider
 {
-
     protected $aParams = array();
 
     /**
      * @param string $sName
      * @param string $sValue
+     *
      * @return object this
      */
     public function param($sName, $sValue)
@@ -42,5 +43,4 @@ abstract class Provider
 
         return $sHtml;
     }
-
 }

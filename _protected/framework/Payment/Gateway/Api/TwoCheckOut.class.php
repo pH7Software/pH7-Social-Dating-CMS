@@ -10,24 +10,31 @@
  */
 
 namespace PH7\Framework\Payment\Gateway\Api;
+
 defined('PH7') or exit('Restricted access');
 
 class TwoCheckOut extends Provider implements Api
 {
+    /** @var string */
+    private $_sUrl = 'https://www.2checkout.com/checkout/';
 
-    private
-    $_sUrl = 'https://www.2checkout.com/checkout/',
-    $_sMsg,
-    $_bValid = false;
+    /** @var string */
+    private $_sMsg;
+
+    /** @var bool */
+    private $_bValid = false;
 
 
     /**
-     * @param boolean $bSandbox Default FALSE
+     * @param bool $bSandbox
+     *
      * @return void
      */
     public function __construct($bSandbox = false)
     {
-        if ($bSandbox) $this->param('demo', '1');
+        if ($bSandbox) {
+            $this->param('demo', '1');
+        }
 
         $this->param('mode', '2CO');
     }
@@ -35,12 +42,14 @@ class TwoCheckOut extends Provider implements Api
     /**
      * Get Checkout URL.
      *
-     * @param boolean $bSinglePage TRUE = Single page, FALSE = Standard multi page. Default FALSE
+     * @param bool $bSinglePage TRUE = Single page, FALSE = Standard multi page.
+     *
      * @return string
      */
     public function getUrl($bSinglePage = false)
     {
         $sPurchasePage = (true === (bool) $bSinglePage) ? 'spurchase' : 'purchase';
+
         return $this->_sUrl . $sPurchasePage;
     }
 
@@ -59,54 +68,51 @@ class TwoCheckOut extends Provider implements Api
      *
      * @param string $sVendorId
      * @param string $sSecretWord
-     * @return boolean
+     *
+     * @return bool
      */
     public function valid($sVendorId = '', $sSecretWord = '')
     {
         // Instant Notification Service Messages
         $aInsMsg = array();
 
-        foreach ($_POST as $sKey => $sVal)
+        foreach ($_POST as $sKey => $sVal) {
             $aInsMsg[$sKey] = $sVal;
+        }
 
-        if (!empty($_POST['message_type']) && $_POST['message_type'] == 'FRAUD_STATUS_CHANGED' && !empty($aInsMsg['md5_hash']))
-        {
+        if (
+            !empty($_POST['message_type'])
+            && $_POST['message_type'] == 'FRAUD_STATUS_CHANGED' && !empty($aInsMsg['md5_hash'])
+        ) {
             $sHash = strtoupper(md5($aInsMsg['sale_id'] . $sVendorId . $aInsMsg['invoice_id'] . $sSecretWord));
 
-            if ($sHash == $aInsMsg['md5_hash'])
-            {
+            if ($sHash == $aInsMsg['md5_hash']) {
                 $this->_bValid = true;
                 $this->_sMsg = t('Refund transaction valid.');
-            }
-            else
-            {
+            } else {
                 $this->_bValid = false;
                 $this->_sMsg = t('Invalid refund transaction.');
             }
-        }
-        elseif (!empty($_REQUEST['key']) && !empty($aInsMsg['order_number']) && !empty($aInsMsg['total']))
-        {
+        } elseif (
+            !empty($_REQUEST['key']) && !empty($aInsMsg['order_number']) &&
+            !empty($aInsMsg['total'])
+        ) {
             $sHash = strtoupper(md5($sSecretWord . $sVendorId . $aInsMsg['order_number'] . $aInsMsg['total']));
 
-            if ($sHash != $_REQUEST['key'])
-            {
+            if ($sHash != $_REQUEST['key']) {
                 $this->_bValid = true;
                 $this->_sMsg = t('Purchase transaction valid.');
-            }
-            else
-            {
+            } else {
                 $this->_bValid = false;
                 $this->_sMsg = t('Invalid purchase transaction.');
             }
-        }
-        else
-        {
+        } else {
             $this->_bValid = false;
             $this->_sMsg = t('Invalid connection to 2CheckOut.');
         }
 
         unset($aInsMsg);
+
         return $this->_bValid;
     }
-
 }
