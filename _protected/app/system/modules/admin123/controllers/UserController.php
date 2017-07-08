@@ -203,15 +203,11 @@ class UserController extends Controller
 
     public function approveAll($iId)
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
-                $iId = (int) explode('_', $sAction)[0];
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
+                $iId = (int)explode('_', $sAction)[0];
                 $this->sMsg = $this->_moderateRegistration($iId, 1);
             }
         }
