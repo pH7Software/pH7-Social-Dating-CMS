@@ -14,10 +14,10 @@ namespace PH7\Framework\Cache;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel;
 use PH7\Framework\Config\Config;
-use PH7\Framework\File\File;
+use PH7\Framework\Core\Kernel;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\File;
 
 class Cache
 {
@@ -101,21 +101,6 @@ class Cache
     }
 
     /**
-     * Sets the time expire cache.
-     *
-     * @param integer $iExpire (the time with the 'touch' function).
-     *
-     * @return self
-     */
-    public function setExpire($iExpire)
-    {
-        // How long to cache for (in seconds, e.g. 3600*24 = 24 hour)
-        @touch($this->_getFile(), time()+(int)$this->_iTtl);
-
-        return $this;
-    }
-
-    /**
      * Start the cache.
      *
      * @param string $sGroup The Group Cache (This creates a folder).
@@ -126,17 +111,16 @@ class Cache
      */
     public function start($sGroup, $sId, $iTtl)
     {
-      $this->_checkCacheDir();
+        $this->_checkCacheDir();
 
-      if ($this->_bEnabled)
-      {
-          $this->_sGroup = $sGroup . PH7_DS;
-          $this->_sId = $sId;
-          $this->_iTtl = $iTtl;
-          ob_start();
-      }
+        if ($this->_bEnabled) {
+            $this->_sGroup = $sGroup . PH7_DS;
+            $this->_sId = $sId;
+            $this->_iTtl = $iTtl;
+            ob_start();
+        }
 
-      return $this;
+        return $this;
     }
 
     /**
@@ -162,6 +146,21 @@ class Cache
         }
 
         return $sBuffer;
+    }
+
+    /**
+     * Sets the time expire cache.
+     *
+     * @param integer $iExpire (the time with the 'touch' function).
+     *
+     * @return self
+     */
+    public function setExpire($iExpire)
+    {
+        // How long to cache for (in seconds, e.g. 3600*24 = 24 hour)
+        @touch($this->_getFile(), time() + (int)$this->_iTtl);
+
+        return $this;
     }
 
     /**
@@ -208,12 +207,11 @@ class Cache
     {
         if (!empty($this->_sId))
             $this->_oFile->deleteFile($this->_getFile());
-         else
+        else
             $this->_oFile->deleteDir($this->_sCacheDir . $this->_sGroup);
 
-         return $this;
+        return $this;
     }
-
 
     /**
      * Get the creation/modification time of the current cache file.
@@ -251,78 +249,6 @@ File ID: ' . $this->_sId . '
     }
 
     /**
-     * Writes data in a cache file.
-     *
-     * @param string $sData
-     *
-     * @return boolean
-     *
-     * @throws Exception If the file cannot be written.
-     */
-    final private function _write($sData)
-    {
-      if (!$this->_bEnabled) {
-          return null;
-      }
-
-      $sFile = $this->_getFile();
-      $this->_oFile->createDir($this->_sCacheDir . $this->_sGroup);
-
-      $sPhpHeader = $this->getHeaderContents();
-
-        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<\'EOF\'' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL . '?>';
-
-        if ($rHandle = @fopen($sFile, 'wb')) {
-            if (@flock($rHandle, LOCK_EX)) {
-                fwrite($rHandle, $sData);
-            }
-
-            fclose($rHandle);
-            $this->setExpire($this->_iTtl);
-            $this->_oFile->chmod($sFile, 420);
-            return true;
-        }
-
-        throw new Exception('Could not write cache file: \'' . $sFile . '\'');
-
-        return false;
-    }
-
-    /**
-     * Reads the Cache.
-     *
-     * @param boolean $bPrint
-     * @return boolean|string Returns TRUE or a string if successful, FALSE otherwise.
-     */
-    private function _read($bPrint)
-    {
-        if ($this->_check()) {
-            require $this->_getFile();
-
-            if (!empty($_mData)) {
-                if ($bPrint) {
-                    echo $_mData;
-                    return true;
-                } else {
-                    return $_mData;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Gets the file cache.
-     *
-     * @return string
-     */
-    private function _getFile()
-    {
-        return $this->_sCacheDir . $this->_sGroup . sha1($this->_sId) . static::CACHE_FILE_EXT;
-    }
-
-    /**
      * Checks the cache.
      *
      * @return boolean
@@ -351,5 +277,77 @@ File ID: ' . $this->_sId . '
         $this->_sCacheDir = (empty($this->_sCacheDir)) ? PH7_PATH_CACHE . static::CACHE_DIR : $this->_sCacheDir;
 
         return $this;
+    }
+
+    /**
+     * Gets the file cache.
+     *
+     * @return string
+     */
+    private function _getFile()
+    {
+        return $this->_sCacheDir . $this->_sGroup . sha1($this->_sId) . static::CACHE_FILE_EXT;
+    }
+
+    /**
+     * Reads the Cache.
+     *
+     * @param boolean $bPrint
+     * @return boolean|string Returns TRUE or a string if successful, FALSE otherwise.
+     */
+    private function _read($bPrint)
+    {
+        if ($this->_check()) {
+            require $this->_getFile();
+
+            if (!empty($_mData)) {
+                if ($bPrint) {
+                    echo $_mData;
+                    return true;
+                } else {
+                    return $_mData;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Writes data in a cache file.
+     *
+     * @param string $sData
+     *
+     * @return boolean
+     *
+     * @throws Exception If the file cannot be written.
+     */
+    final private function _write($sData)
+    {
+        if (!$this->_bEnabled) {
+            return null;
+        }
+
+        $sFile = $this->_getFile();
+        $this->_oFile->createDir($this->_sCacheDir . $this->_sGroup);
+
+        $sPhpHeader = $this->getHeaderContents();
+
+        $sData = '<?php ' . $sPhpHeader . '$_mData = <<<\'EOF\'' . File::EOL . $sData . File::EOL . 'EOF;' . File::EOL . '?>';
+
+        if ($rHandle = @fopen($sFile, 'wb')) {
+            if (@flock($rHandle, LOCK_EX)) {
+                fwrite($rHandle, $sData);
+            }
+
+            fclose($rHandle);
+            $this->setExpire($this->_iTtl);
+            $this->_oFile->chmod($sFile, 420);
+            return true;
+        }
+
+        throw new Exception('Could not write cache file: \'' . $sFile . '\'');
+
+        return false;
     }
 }

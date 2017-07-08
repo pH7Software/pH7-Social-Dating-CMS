@@ -110,7 +110,7 @@ class Ftp extends File
      */
     public function existDir($sDir)
     {
-        $sCurrentDir= $this->getCurrentDir();
+        $sCurrentDir = $this->getCurrentDir();
 
         if ($this->changeDir($sCurrentDir)) {
             $this->changeDir($sDir);

@@ -11,7 +11,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Engine\Db, PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
 {

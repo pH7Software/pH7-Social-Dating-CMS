@@ -14,9 +14,9 @@ namespace PH7\Framework\Date;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Config\Config;
 use DateTime;
 use DateTimeZone;
+use PH7\Framework\Config\Config;
 
 class CDateTime
 {
@@ -42,7 +42,7 @@ class CDateTime
      */
     public function get($mTime = null)
     {
-        $sSetTime = $mTime !== null ? date(self::DEFAULT_DATE_FORMAT, (!is_numeric($mTime) ? strtotime($mTime) : $mTime) ) : 'now';
+        $sSetTime = $mTime !== null ? date(self::DEFAULT_DATE_FORMAT, (!is_numeric($mTime) ? strtotime($mTime) : $mTime)) : 'now';
         $this->_oDateTime = new DateTime($sSetTime, new DateTimeZone($this->_oConfig->values['language.application']['timezone']));
 
         return $this;

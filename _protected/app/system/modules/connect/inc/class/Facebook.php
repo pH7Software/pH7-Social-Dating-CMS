@@ -13,31 +13,47 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Config\Config,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Ip\Ip,
-PH7\Framework\File\File,
-PH7\Framework\Util\Various,
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Error\CException\PH7Exception,
-Facebook\Facebook as FB,
-Facebook\FacebookResponse,
-Facebook\Helpers\FacebookRedirectLoginHelper,
-Facebook\GraphNodes\GraphUser,
-Facebook\GraphNodes\GraphLocation,
-Facebook\Exceptions\FacebookSDKException,
-Facebook\Exceptions\FacebookResponseException,
-PH7\Framework\Mvc\Router\Uri;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
+use Facebook\Facebook as FB;
+use Facebook\FacebookResponse;
+use Facebook\GraphNodes\GraphLocation;
+use Facebook\GraphNodes\GraphUser;
+use Facebook\Helpers\FacebookRedirectLoginHelper;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Error\CException\PH7Exception;
+use PH7\Framework\File\File;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Util\Various;
 
 class Facebook extends Api implements IApi
 {
     const GRAPH_URL = 'https://graph.facebook.com/';
 
-    private $oProfile, $oLocation, $sAvatarFile, $sUsername, $iProfileId, $aUserInfo;
+    /** @var \Facebook\GraphNodes\GraphObject */
+    private $oProfile;
 
-    private $aPermissions = [
+    /** @var \Facebook\GraphNodes\GraphObject */
+    private $oLocation;
+
+    /** @var string */
+    private $sAvatarFile;
+
+    /** @var string */
+    private $sUsername;
+
+    /** @var int */
+    private $iProfileId;
+
+    /** @var array */
+    private $aUserInfo;
+
+    /** @var array */
+    private static $aPermissions = [
         'email',
         'user_birthday',
         'user_relationships',
@@ -115,7 +131,8 @@ class Facebook extends Api implements IApi
     }
 
     /**
-     * @param \PH7\UserCoreModel $oUserModel
+     * @param UserCoreModel $oUserModel
+     *
      * @return void
      */
     public function add(UserCoreModel $oUserModel)
@@ -130,7 +147,7 @@ class Facebook extends Api implements IApi
         $this->aUserInfo = [
             'email' => $this->oProfile->getEmail(),
             'username' => $this->sUsername,
-            'password' => Various::genRndWord(8,30),
+            'password' => Various::genRndWord(Registration::DEFAULT_PASSWORD_LENGTH),
             'first_name' => $this->oProfile->getFirstName(),
             'last_name' => $this->oProfile->getLastName(),
             'middle_name' => $this->oProfile->getMiddleName(),
@@ -142,7 +159,7 @@ class Facebook extends Api implements IApi
             'state' => !empty($this->oLocation->getState()) ? $this->oLocation->getState() : Geo::getState(),
             'zip_code' => !empty($this->oLocation->getZip()) ? $this->oLocation->getZip() : Geo::getZipCode(),
             'description' => $this->oProfile->getDescription(),
-            'social_network_site' => $oProfie->getLink(),
+            'social_network_site' => $this->oProfile->getLink(),
             'ip' => Ip::get(),
             'prefix_salt' => Various::genRnd(),
             'suffix_salt' => Various::genRnd(),
@@ -157,6 +174,7 @@ class Facebook extends Api implements IApi
      * Set Avatar.
      *
      * @param string $sUserId FB user ID.
+     *
      * @return void
      */
     public function setAvatar($sUserId)
@@ -176,12 +194,12 @@ class Facebook extends Api implements IApi
      * Set the FB Login URL.
      *
      * @param FacebookRedirectLoginHelper $oHelper
+     *
      * @return void
      */
     protected function setLoginUrl(FacebookRedirectLoginHelper $oHelper)
     {
-
-        $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect','main','home'), $this->aPermissions);
+        $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect','main','home'), self::$aPermissions);
     }
 
     private function initClassAttrs(FacebookResponse $oResponse)

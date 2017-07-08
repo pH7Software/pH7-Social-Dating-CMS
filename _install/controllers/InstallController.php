@@ -85,8 +85,7 @@ class InstallController extends Controller
         $aLangsList = include PH7_ROOT_INSTALL . 'inc/lang_list.inc.php';
         $sLangSelect = '';
 
-        foreach ($aLangs as $sLang)
-        {
+        foreach ($aLangs as $sLang) {
             $sSel = (empty($_REQUEST['l']) ? $sLang == $this->sCurrentLang ? '" selected="selected' : '' : ($sLang == $_REQUEST['l']) ? '" selected="selected' : '');
             $sLangSelect .= '<option value="?l=' . $sLang . $sSel . '">' . $aLangsList[$sLang] . '</option>';
         }
@@ -104,37 +103,27 @@ class InstallController extends Controller
         if (empty($_SESSION['val']['path_protected']))
             $_SESSION['val']['path_protected'] = PH7_ROOT_PUBLIC . '_protected' . PH7_DS;
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected']))
-        {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected'])) {
             $_SESSION['val']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
 
-            if (is_dir($_SESSION['val']['path_protected']))
-            {
-                if (is_readable($_SESSION['val']['path_protected']))
-                {
+            if (is_dir($_SESSION['val']['path_protected'])) {
+                if (is_readable($_SESSION['val']['path_protected'])) {
                     $sConstantContent = file_get_contents(PH7_ROOT_INSTALL . 'data/configs/constants.php');
 
                     $sConstantContent = str_replace('%path_protected%', addslashes($_SESSION['val']['path_protected']), $sConstantContent);
 
-                    if (!@file_put_contents(PH7_ROOT_PUBLIC . '_constants.php', $sConstantContent))
-                    {
+                    if (!@file_put_contents(PH7_ROOT_PUBLIC . '_constants.php', $sConstantContent)) {
                         $aErrors[] = $LANG['no_public_writable'];
-                    }
-                    else
-                    {
+                    } else {
                         $_SESSION['step2'] = 1;
                         unset($_SESSION['val']);
 
                         redirect(PH7_URL_SLUG_INSTALL . 'config_system');
                     }
-                }
-                else
-                {
+                } else {
                     $aErrors[] = $LANG['no_protected_readable'];
                 }
-            }
-            else
-            {
+            } else {
                 $aErrors[] = $LANG['no_protected_exist'];
             }
         }
@@ -150,12 +139,10 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if (!empty($_SESSION['step2']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
-        {
+        if (!empty($_SESSION['step2']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
             session_regenerate_id(true);
 
-            if (empty($_SESSION['val']))
-            {
+            if (empty($_SESSION['val'])) {
                 $_SESSION['db']['type_name'] = 'MySQL';
                 $_SESSION['db']['type'] = 'mysql';
                 $_SESSION['db']['hostname'] = 'localhost';
@@ -169,22 +156,17 @@ class InstallController extends Controller
                 $_SESSION['val']['ffmpeg_path'] = ffmpeg_path();
             }
 
-            if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_system_submit']))
-            {
-                if (filled_out($_POST))
-                {
-                    foreach ($_POST as $sKey => $sVal)
-                    {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_system_submit'])) {
+                if (filled_out($_POST)) {
+                    foreach ($_POST as $sKey => $sVal) {
                         $_SESSION['db'][str_replace('db_', '', $sKey)] = trim($sVal);
                     }
 
                     $_SESSION['val']['bug_report_email'] = trim($_POST['bug_report_email']);
                     $_SESSION['val']['ffmpeg_path'] = trim($_POST['ffmpeg_path']);
 
-                    if (validate_email($_SESSION['val']['bug_report_email']))
-                    {
-                        try
-                        {
+                    if (validate_email($_SESSION['val']['bug_report_email'])) {
+                        try {
                             require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
                             @require_once PH7_ROOT_PUBLIC . '_constants.php';
                             @require_once PH7_PATH_APP . 'configs/constants.php';
@@ -209,18 +191,15 @@ class InstallController extends Controller
                             $sConfigContent = str_replace('%private_key%', generate_hash(40), $sConfigContent);
                             $sConfigContent = str_replace('%rand_id%', generate_hash(5), $sConfigContent);
 
-                            if (!@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $sConfigContent))
-                            {
+                            if (!@file_put_contents(PH7_PATH_APP_CONFIG . 'config.ini', $sConfigContent)) {
                                 $aErrors[] = $LANG['no_app_config_writable'];
-                            }
-                            else
-                            {
-                                if (!($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql' && version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRE_SQL_VERSION, '>=')))
-                                {
+                            } else {
+                                if (
+                                    !($DB->getAttribute(\PDO::ATTR_DRIVER_NAME) == 'mysql' &&
+                                    version_compare($DB->getAttribute(\PDO::ATTR_SERVER_VERSION), PH7_REQUIRE_SQL_VERSION, '>='))
+                                ) {
                                     $aErrors[] = $LANG['require_mysql_version'];
-                                }
-                                else
-                                {
+                                } else {
                                     $aDumps = [
                                         /*** Game ***/
                                         // We need to install the Game before the Core SQL for "foreign keys" that work are correct.
@@ -254,25 +233,17 @@ class InstallController extends Controller
                                     redirect(PH7_URL_SLUG_INSTALL . 'config_site');
                                 }
                             }
-                        }
-                        catch (\PDOException $oE)
-                        {
+                        } catch (\PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $aErrors[] = $LANG['bad_email'];
                     }
-                }
-                else
-                {
+                } else {
                     $aErrors[] = $LANG['all_fields_mandatory'];
                 }
             }
-        }
-        else
-        {
+        } else {
             redirect(PH7_URL_SLUG_INSTALL . 'config_path');
         }
 
@@ -287,14 +258,11 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if (empty($_SESSION['step4']))
-        {
-            if (!empty($_SESSION['step3']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
-            {
+        if (empty($_SESSION['step4'])) {
+            if (!empty($_SESSION['step3']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
                 session_regenerate_id(true);
 
-                if (empty($_SESSION['val']))
-                {
+                if (empty($_SESSION['val'])) {
                     $_SESSION['val']['site_name'] = Controller::DEFAULT_SITE_NAME;
                     $_SESSION['val']['admin_login_email'] = '';
                     $_SESSION['val']['admin_email'] = '';
@@ -305,29 +273,19 @@ class InstallController extends Controller
                     $_SESSION['val']['admin_last_name'] = '';
                 }
 
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_site_submit']))
-                {
-                    if (filled_out($_POST))
-                    {
-                        foreach ($_POST as $sKey => $sVal)
-                        {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['config_site_submit'])) {
+                    if (filled_out($_POST)) {
+                        foreach ($_POST as $sKey => $sVal) {
                             $_SESSION['val'][$sKey] = trim($sVal);
                         }
 
-                        if (validate_email($_SESSION['val']['admin_login_email']) && validate_email($_SESSION['val']['admin_email']) && validate_email($_SESSION['val']['admin_feedback_email']) && validate_email($_SESSION['val']['admin_return_email']))
-                        {
-                            if (validate_username($_SESSION['val']['admin_username']) == 0)
-                            {
-                                if (validate_password($_SESSION['val']['admin_password']) == 0)
-                                {
-                                    if (validate_identical($_SESSION['val']['admin_password'], $_SESSION['val']['admin_passwords']))
-                                    {
-                                        if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name']))
-                                        {
-                                            if (validate_name($_SESSION['val']['admin_first_name']))
-                                            {
-                                                if (validate_name($_SESSION['val']['admin_last_name']))
-                                                {
+                        if (validate_email($_SESSION['val']['admin_login_email']) && validate_email($_SESSION['val']['admin_email']) && validate_email($_SESSION['val']['admin_feedback_email']) && validate_email($_SESSION['val']['admin_return_email'])) {
+                            if (validate_username($_SESSION['val']['admin_username']) == 0) {
+                                if (validate_password($_SESSION['val']['admin_password']) == 0) {
+                                    if (validate_identical($_SESSION['val']['admin_password'], $_SESSION['val']['admin_passwords'])) {
+                                        if (!find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_username']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_first_name']) && !find($_SESSION['val']['admin_password'], $_SESSION['val']['admin_last_name'])) {
+                                            if (validate_name($_SESSION['val']['admin_first_name'])) {
+                                                if (validate_name($_SESSION['val']['admin_last_name'])) {
                                                     @require_once PH7_ROOT_PUBLIC . '_constants.php';
                                                     @require_once PH7_PATH_APP . 'configs/constants.php';
 
@@ -336,8 +294,7 @@ class InstallController extends Controller
                                                     // To load "\PH7\Framework\Security\Security" class
                                                     Framework\Loader\Autoloader::getInstance()->init();
 
-                                                    try
-                                                    {
+                                                    try {
                                                         require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                                                         // SQL EXECUTE
@@ -350,9 +307,9 @@ class InstallController extends Controller
                                                             'username' => $_SESSION['val']['admin_username'],
                                                             'password' => Framework\Security\Security::hashPwd($_SESSION['val']['admin_password']),
                                                             'email' => $_SESSION['val']['admin_login_email'],
-                                                            'firstName'=> $_SESSION['val']['admin_first_name'],
-                                                            'lastName'=> $_SESSION['val']['admin_last_name'],
-                                                            'joinDate'=> $sCurrentDate,
+                                                            'firstName' => $_SESSION['val']['admin_first_name'],
+                                                            'lastName' => $_SESSION['val']['admin_last_name'],
+                                                            'joinDate' => $sCurrentDate,
                                                             'lastActivity' => $sCurrentDate,
                                                             'ip' => client_ip()
                                                         ]);
@@ -375,80 +332,48 @@ class InstallController extends Controller
                                                         $_SESSION['step4'] = 1;
 
                                                         redirect(PH7_URL_SLUG_INSTALL . 'niche');
-                                                    }
-                                                    catch (\PDOException $oE)
-                                                    {
+                                                    } catch (\PDOException $oE) {
                                                         $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                                                     }
-                                                }
-                                                else
-                                                {
+                                                } else {
                                                     $aErrors[] = $LANG['bad_last_name'];
                                                 }
-                                            }
-                                            else
-                                            {
+                                            } else {
                                                 $aErrors[] = $LANG['bad_first_name'];
                                             }
-                                        }
-                                        else
-                                        {
+                                        } else {
                                             $aErrors[] = $LANG['insecure_password'];
                                         }
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         $aErrors[] = $LANG['passwords_different'];
                                     }
-                                }
-                                elseif (validate_password($_SESSION['val']['admin_password']) == 1)
-                                {
+                                } elseif (validate_password($_SESSION['val']['admin_password']) == 1) {
                                     $aErrors[] = $LANG['password_too_short'];
-                                }
-                                elseif (validate_password($_SESSION['val']['admin_password']) == 2)
-                                {
+                                } elseif (validate_password($_SESSION['val']['admin_password']) == 2) {
                                     $aErrors[] = $LANG['password_too_long'];
-                                }
-                                elseif (validate_password($_SESSION['val']['admin_password']) ==  3)
-                                {
+                                } elseif (validate_password($_SESSION['val']['admin_password']) == 3) {
                                     $aErrors[] = $LANG['password_no_number'];
-                                }
-                                elseif (validate_password($_SESSION['val']['admin_password']) ==  4)
-                                {
+                                } elseif (validate_password($_SESSION['val']['admin_password']) == 4) {
                                     $aErrors[] = $LANG['password_no_upper'];
                                 }
-                            }
-                            elseif (validate_username($_SESSION['val']['admin_username']) == 1)
-                            {
+                            } elseif (validate_username($_SESSION['val']['admin_username']) == 1) {
                                 $aErrors[] = $LANG['username_too_short'];
-                            }
-                            elseif (validate_username($_SESSION['val']['admin_username']) == 2)
-                            {
+                            } elseif (validate_username($_SESSION['val']['admin_username']) == 2) {
                                 $aErrors[] = $LANG['username_too_long'];
-                            }
-                            elseif (validate_username($_SESSION['val']['admin_username']) == 3)
-                            {
+                            } elseif (validate_username($_SESSION['val']['admin_username']) == 3) {
                                 $aErrors[] = $LANG['bad_username'];
                             }
-                        }
-                        else
-                        {
+                        } else {
                             $aErrors[] = $LANG['bad_email'];
                         }
-                    }
-                    else
-                    {
+                    } else {
                         $aErrors[] = $LANG['all_fields_mandatory'];
                     }
                 }
-            }
-            else
-            {
+            } else {
                 redirect(PH7_URL_SLUG_INSTALL . 'config_system');
             }
-        }
-        else
-        {
+        } else {
             redirect(PH7_URL_SLUG_INSTALL . 'niche');
         }
 
@@ -459,42 +384,44 @@ class InstallController extends Controller
         $this->oView->display('config_site.tpl');
     }
 
+    /***** Set the correct permission to the config files *****/
+    private function _chmodConfigFiles()
+    {
+        @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
+        @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
+    }
+
     /********************* STEP 5 *********************/
     public function niche()
     {
         global $LANG;
 
-        if (empty($_SESSION['step5']))
-        {
-            if (!empty($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
-            {
+        if (empty($_SESSION['step5'])) {
+            if (!empty($_SESSION['step4']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
                 session_regenerate_id(true);
 
-                if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['niche_submit']))
-                {
+                if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['niche_submit'])) {
                     $bUpdateNeeded = false; // Value by default. Don't need to update the DB for the Social-Dating Niche
 
-                    switch ($_POST['niche_submit'])
-                    {
+                    switch ($_POST['niche_submit']) {
                         case 'zendate':
                             $bUpdateNeeded = true;
                             $sTheme = 'zendate';
                             $aModUpdate = self::SOCIAL_MODS;
                             $aSettingUpdate = self::SOCIAL_SETTINGS;
-                        break;
+                            break;
 
                         case 'datelove':
                             $bUpdateNeeded = true;
                             $sTheme = 'datelove';
                             $aModUpdate = self::DATING_MODS;
                             $aSettingUpdate = self::DATING_SETTINGS;
-                        break;
+                            break;
 
                         // Or for 'base', don't do anything. Just use the default settings already setup in the database
                     }
 
-                    if ($bUpdateNeeded)
-                    {
+                    if ($bUpdateNeeded) {
                         @require_once PH7_ROOT_PUBLIC . '_constants.php';
                         @require_once PH7_PATH_APP . 'configs/constants.php';
 
@@ -503,8 +430,7 @@ class InstallController extends Controller
                         // To load "PH7\Framework\Mvc\Model\DbConfig" class
                         Framework\Loader\Autoloader::getInstance()->init();
 
-                        try
-                        {
+                        try {
                             require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                             // Enable/Disable the modules according to the chosen niche
@@ -517,9 +443,7 @@ class InstallController extends Controller
                             $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
                             $rStmt = $DB->prepare($sSql);
                             $rStmt->execute(['theme' => $sTheme]);
-                        }
-                        catch (\PDOException $oE)
-                        {
+                        } catch (\PDOException $oE) {
                             $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
                         }
                     }
@@ -527,14 +451,10 @@ class InstallController extends Controller
 
                     redirect(PH7_URL_SLUG_INSTALL . 'service');
                 }
-            }
-            else
-            {
+            } else {
                 redirect(PH7_URL_SLUG_INSTALL . 'config_site');
             }
-        }
-        else
-        {
+        } else {
             redirect(PH7_URL_SLUG_INSTALL . 'service');
         }
 
@@ -542,89 +462,6 @@ class InstallController extends Controller
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
         $this->oView->display('niche.tpl');
-    }
-
-    /********************* STEP 6 *********************/
-    public function service()
-    {
-        $this->oView->assign('sept_number', 6);
-        $this->oView->display('service.tpl');
-    }
-
-    /********************* STEP 7 *********************/
-    public function license()
-    {
-        global $LANG;
-
-        if (!empty($_SESSION['step5']) && is_file(PH7_ROOT_PUBLIC . '_constants.php'))
-        {
-            if (empty($_SESSION['val']['license']))
-                $_SESSION['val']['license'] = '';
-
-            if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license']))
-            {
-                $sKey = trim($_POST['license']);
-                if (check_license($sKey))
-                {
-                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
-                    @require_once PH7_PATH_APP . 'configs/constants.php';
-
-                    try
-                    {
-                        require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
-
-                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'License SET licenseKey = :key WHERE licenseId = 1');
-                        $rStmt->execute(['key' => $sKey]);
-
-                        redirect(PH7_URL_SLUG_INSTALL . 'finish');
-                    }
-                    catch (\PDOException $oE)
-                    {
-                        $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
-                    }
-                }
-                else
-                {
-                    $aErrors[] = $LANG['failure_license'];
-                }
-            }
-        }
-        else
-        {
-            redirect(PH7_URL_SLUG_INSTALL . 'niche');
-        }
-
-        $this->oView->assign('sept_number', 7);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
-        $this->oView->display('license.tpl');
-    }
-
-    /********************* STEP 8 *********************/
-    public function finish()
-    {
-        @require_once PH7_ROOT_PUBLIC . '_constants.php';
-
-        if (!empty($_SESSION['val']['admin_login_email']) && !empty($_SESSION['val']['admin_username']))
-        {
-            $this->_sendWelcomeEmail();
-
-            $this->oView->assign('admin_login_email', $_SESSION['val']['admin_login_email']);
-            $this->oView->assign('admin_username', $_SESSION['val']['admin_username']);
-        }
-
-        $this->_removeSessions();
-        $this->_removeCookies();
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['confirm_remove_install']))
-        {
-            remove_install_dir();
-            clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
-            exit(header('Location: ' . PH7_URL_ROOT));
-        }
-
-        $this->oView->assign('sept_number', 8);
-        $this->oView->display('finish.tpl');
     }
 
     /**
@@ -658,14 +495,75 @@ class InstallController extends Controller
         Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
     }
 
-    /***** Get the loading image *****/
-    private function _loadImg()
+    /********************* STEP 6 *********************/
+    public function service()
+    {
+        $this->oView->assign('sept_number', 6);
+        $this->oView->display('service.tpl');
+    }
+
+    /********************* STEP 7 *********************/
+    public function license()
     {
         global $LANG;
 
-        return '<div style="text-align:center"><p>' . $LANG['wait_importing_database'] . '</p>
-        <p><img src="data:image/gif;base64,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" alt="' . $LANG['loading'] . '" /></p>
-        </div>';
+        if (!empty($_SESSION['step5']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
+            if (empty($_SESSION['val']['license']))
+                $_SESSION['val']['license'] = '';
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license'])) {
+                $sKey = trim($_POST['license']);
+                if (check_license($sKey)) {
+                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
+                    @require_once PH7_PATH_APP . 'configs/constants.php';
+
+                    try {
+                        require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
+
+                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'License SET licenseKey = :key WHERE licenseId = 1');
+                        $rStmt->execute(['key' => $sKey]);
+
+                        redirect(PH7_URL_SLUG_INSTALL . 'finish');
+                    } catch (\PDOException $oE) {
+                        $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
+                    }
+                } else {
+                    $aErrors[] = $LANG['failure_license'];
+                }
+            }
+        } else {
+            redirect(PH7_URL_SLUG_INSTALL . 'niche');
+        }
+
+        $this->oView->assign('sept_number', 7);
+        $this->oView->assign('errors', @$aErrors);
+        unset($aErrors);
+        $this->oView->display('license.tpl');
+    }
+
+    /********************* STEP 8 *********************/
+    public function finish()
+    {
+        @require_once PH7_ROOT_PUBLIC . '_constants.php';
+
+        if (!empty($_SESSION['val']['admin_login_email']) && !empty($_SESSION['val']['admin_username'])) {
+            $this->_sendWelcomeEmail();
+
+            $this->oView->assign('admin_login_email', $_SESSION['val']['admin_login_email']);
+            $this->oView->assign('admin_username', $_SESSION['val']['admin_username']);
+        }
+
+        $this->_removeSessions();
+        $this->_removeCookies();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['confirm_remove_install'])) {
+            remove_install_dir();
+            clearstatcache(); // We remove the files status cache as the "_install" folder doesn't exist anymore by now.
+            exit(header('Location: ' . PH7_URL_ROOT));
+        }
+
+        $this->oView->assign('sept_number', 8);
+        $this->oView->display('finish.tpl');
     }
 
     /**
@@ -684,13 +582,6 @@ class InstallController extends Controller
         send_mail($aParams);
     }
 
-    /***** Set the correct permission to the config files *****/
-    private function _chmodConfigFiles()
-    {
-        @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
-        @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
-    }
-
     private function _removeSessions()
     {
         $_SESSION = [];
@@ -705,5 +596,15 @@ class InstallController extends Controller
         setcookie($sCookieName, 0, 0);
         // and then, we delete the cookie value locally to avoid using it by mistake in following our script.
         unset($_COOKIE[$sCookieName]);
+    }
+
+    /***** Get the loading image *****/
+    private function _loadImg()
+    {
+        global $LANG;
+
+        return '<div style="text-align:center"><p>' . $LANG['wait_importing_database'] . '</p>
+        <p><img src="data:image/gif;base64,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" alt="' . $LANG['loading'] . '" /></p>
+        </div>';
     }
 }

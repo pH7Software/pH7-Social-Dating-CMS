@@ -13,15 +13,15 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\Import,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Config\Config,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Util\Various,
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\File\Import;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Util\Various;
+use stdClass;
 
 class Microsoft extends Api
 {
@@ -100,11 +100,12 @@ class Microsoft extends Api
     }
 
     /**
-     * @param object $oProfile
-     * @param object \PH7\UserCoreModel $oUserModel
+     * @param stdClass $oProfile
+     * @param UserCoreModel $oUserModel
+     *
      * @return void
      */
-    public function add($oProfile, UserCoreModel $oUserModel)
+    public function add(stdClass $oProfile, UserCoreModel $oUserModel)
     {
         $oUser = new UserCore;
         $sBirthDate = (isset($oProfile->birth_month, $oProfile->birth_day, $oProfile->birth_year)) ? $oProfile->birth_month . '/' . $oProfile->birth_day . '/' . $oProfile->birth_year : date('m/d/Y', strtotime('-30 year'));
@@ -116,7 +117,7 @@ class Microsoft extends Api
         $this->_aUserInfo = [
             'email' => $oProfile->emails->account,
             'username' => $this->_sUsername,
-            'password' => Various::genRndWord(8,30),
+            'password' => Various::genRndWord(Registration::DEFAULT_PASSWORD_LENGTH),
             'first_name' => (!empty($oProfile->first_name)) ? $oProfile->first_name : '',
             'last_name' => (!empty($oProfile->last_name)) ? $oProfile->last_name : '',
             'sex' => $sSex,

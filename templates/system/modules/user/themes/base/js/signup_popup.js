@@ -5,11 +5,10 @@
  */
 
 // Only for visitors
-$(document).ready(function()
-{
+$(document).ready(function () {
     var $oDialog = $('div#box').html('<iframe style="border:0px" src="' + pH7Url.base + 'user/asset/ajax/popup/signup" width="100%" height="100%"></iframe>').dialog
     ({
-        open: function() {
+        open: function () {
             $('.ui-dialog-titlebar-close').hide()
         },
         autoOpen: false,
@@ -23,7 +22,7 @@ $(document).ready(function()
         title: pH7LangCore.join_now
     });
 
-    setTimeout(function() {
+    setTimeout(function () {
         $('.ui-front').css('z-index', 10999); // z-index!!! Otherwise, the menu of the site will be in front.
         $('title').text(pH7LangCore.join_now); // Set an attractive title
         $oDialog.dialog('open');

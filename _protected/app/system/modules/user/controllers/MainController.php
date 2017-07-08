@@ -8,9 +8,9 @@
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mobile\MobApp;
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class MainController extends Controller
 {

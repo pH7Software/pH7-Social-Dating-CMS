@@ -16,8 +16,8 @@ namespace PH7\Framework\Image;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\File;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\File;
 use PH7\Framework\File\TooLargeException;
 
 class Image

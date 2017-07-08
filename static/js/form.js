@@ -6,24 +6,22 @@
 
 var sButtonPattern = 'button[type=submit]';
 
-function enable_button()
-{
+function enable_button() {
     $(sButtonPattern).attr('disabled', false);
-    $(sButtonPattern).css({background:'#E6E6E6'});
+    $(sButtonPattern).css({background: '#E6E6E6'});
 }
 
-function disable_button()
-{
+function disable_button() {
     $(sButtonPattern).attr('disabled', 'disabled');
-    $(sButtonPattern).css({background:'#FFF'});
+    $(sButtonPattern).css({background: '#FFF'});
 }
 
 var sInputAgree = 'input[name="agree[]"]';
-$(sInputAgree).click(function() {
-    $(sInputAgree+':checked').val()==1?enable_button():disable_button();
+$(sInputAgree).click(function () {
+    $(sInputAgree + ':checked').val() == 1 ? enable_button() : disable_button();
 });
 
-$('input[name=all_action]').on('click', function() {
+$('input[name=all_action]').on('click', function () {
     $('input[name="action[]"]').prop('checked', $(this).is(':checked'));
 });
 
@@ -33,13 +31,12 @@ $('input[name=all_action]').on('click', function() {
  * @param {Boolean} [extra=false]. Put FALSE if you do not want the confirmation alert. Default: TRUE
  * @return {Boolean}
  */
-function checkChecked(bIsConfirmAlert)
-{
+function checkChecked(bIsConfirmAlert) {
     if (typeof bIsConfirmAlert == "undefined")
         var bIsConfirmAlert = true; // Default value
 
     var iCountChecked = 0;
-    $('input[name="action[]"]').each(function() {
+    $('input[name="action[]"]').each(function () {
         iCountChecked += $(this).is(':checked');
     });
 

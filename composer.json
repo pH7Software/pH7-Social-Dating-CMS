@@ -27,6 +27,7 @@
         "ph-7/qrcode-generator-php-class": "^2.0",
         "robthree/twofactorauth": "^1.4",
         "facebook/graph-sdk": "^5.3",
+        "ph-7/dating-affiliate-tools": "^2.0",
         "ext-curl": "*",
         "ext-zip": "*",
         "ext-zlib": "*",

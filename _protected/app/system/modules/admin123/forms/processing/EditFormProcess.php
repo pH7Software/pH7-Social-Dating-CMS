@@ -9,10 +9,9 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Cache\Cache,
-PH7\Framework\Security\Validate\Validate,
-PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Security\Validate\Validate;
 
 class EditFormProcess extends Form
 {

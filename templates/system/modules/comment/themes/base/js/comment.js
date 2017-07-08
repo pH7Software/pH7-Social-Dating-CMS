@@ -5,16 +5,21 @@
  */
 
 // This feature is only for members!
-function comment(sType, iCommentId, iRecipientId, iSenderId, sTable, sCSRFToken)
-{
-    var oDataString = {type : sType, id : iCommentId, recipient_id : iRecipientId, sender_id : iSenderId, table : sTable, security_token : sCSRFToken};
+function comment(sType, iCommentId, iRecipientId, iSenderId, sTable, sCSRFToken) {
+    var oDataString = {
+        type: sType,
+        id: iCommentId,
+        recipient_id: iRecipientId,
+        sender_id: iSenderId,
+        table: sTable,
+        security_token: sCSRFToken
+    };
 
-    $.post(pH7Url.base + 'comment/asset/ajax/Comment', oDataString, function(oResponseData)
-    {
-        if(oResponseData.status == 1) {
+    $.post(pH7Url.base + 'comment/asset/ajax/Comment', oDataString, function (oResponseData) {
+        if (oResponseData.status == 1) {
             $('.msg').show();
             $('.msg').addClass('alert alert-success');
-            $('#' +  iCommentId).hide("slow");
+            $('#' + iCommentId).hide("slow");
         } else {
             $('.msg').addClass('alert alert-danger');
         }

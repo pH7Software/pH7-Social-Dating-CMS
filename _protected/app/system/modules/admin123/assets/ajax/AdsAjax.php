@@ -8,7 +8,8 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http, PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Mvc\Request\Http;
 
 class AdsAjax
 {
@@ -85,17 +86,14 @@ class AdsAjax
 
         $this->_bStatus = $this->_oAdsModel->delete($this->_oHttpRequest->post('adsId'), $sTable);
 
-        if ($this->_bStatus)
-        {
+        if ($this->_bStatus) {
             /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
             (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear()
-                    ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
-                    ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
+                ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
+                ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
 
             $this->_sMsg = jsonMsg(1, t('The banner has been deleted.'));
-        }
-        else
-        {
+        } else {
             $this->_sMsg = jsonMsg(0, t('Cannot remove the banner. Please try later.'));
         }
         echo $this->_sMsg;

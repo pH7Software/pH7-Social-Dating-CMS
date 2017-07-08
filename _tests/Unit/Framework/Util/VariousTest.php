@@ -9,11 +9,24 @@
 namespace PH7\Test\Unit\Framework\Util;
 
 use PH7\Framework\Util\Various;
+use PHPUnit_Framework_TestCase;
 
-class VariousTest extends \PHPUnit_Framework_TestCase
+class VariousTest extends PHPUnit_Framework_TestCase
 {
+    public function testGenerateRandom()
+    {
+        $iStringLength = strlen(Various::genRnd('Pierre-Henry Random :D', 8));
+        $this->assertSame(8, $iStringLength);
+    }
+
     public function testPaddingString()
     {
-        $this->assertEquals('abc def ghiabc def ghiabc def ghiabc def', Various::padStr('abc def ghi'));
+        $this->assertSame('abc def ghiabc def ghiabc def ghiabc def', Various::padStr('abc def ghi', 40));
     }
- }
+
+    public function testGenerateRandomWord()
+    {
+        $iStringLength = strlen(Various::genRndWord(10));
+        $this->assertSame(10, $iStringLength);
+    }
+}

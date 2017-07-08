@@ -5,19 +5,20 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Layout\Html\Design,
-PH7\Framework\Url\Header,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 abstract class PermissionCore extends Framework\Core\Core
 {
     const VISITOR_GROUP_ID = 1;
 
+    /** @var \stdClass */
     protected $group;
 
     public function __construct()
@@ -39,9 +40,9 @@ abstract class PermissionCore extends Framework\Core\Core
                 $this->session->get('member_id'),
                 $this->dateTime->get()->dateTime('Y-m-d H:i:s')
             );
-        } else {
-            return true;
         }
+
+        return true;
     }
 
     public function signUpRedirect()

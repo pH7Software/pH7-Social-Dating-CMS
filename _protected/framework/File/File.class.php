@@ -13,16 +13,16 @@ namespace PH7\Framework\File;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Parse\Url as ParseUrl;
+use PH7\Framework\Registry\Registry;
 use PH7\Framework\Server\Server;
 use PH7\Framework\Url\Url;
-use PH7\Framework\Parse\Url as ParseUrl;
-use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Registry\Registry;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use SplFileObject;
 use ZipArchive;
-use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class File
 {
@@ -34,7 +34,7 @@ class File
     /**
      * Mime Types list.
      *
-     * @staticvar array $aMimeTypes
+     * @var array $aMimeTypes
      */
     private static $aMimeTypes = [
         'pdf' => 'application/pdf',
@@ -171,16 +171,13 @@ class File
     {
         $bExists = false; // Default value
 
-        if (is_array($mDir))
-        {
+        if (is_array($mDir)) {
             foreach ($mDir as $sDir) {
                 if (!$bExists = $this->existDir($sDir)) {
                     return false;
                 }
             }
-        }
-        else
-        {
+        } else {
             $bExists = is_dir($mDir);
         }
 
@@ -196,10 +193,8 @@ class File
     {
         $aDirList = array();
 
-        if ($rHandle = opendir($sDir))
-        {
-            while (false !== ($sFile = readdir($rHandle)))
-            {
+        if ($rHandle = opendir($sDir)) {
+            while (false !== ($sFile = readdir($rHandle))) {
                 if ($sFile != '.' && $sFile != '..' && is_dir($sDir . PH7_DS . $sFile))
                     $aDirList[] = $sFile;
             }
@@ -233,30 +228,20 @@ class File
         $aTree = array();
         $sDir = $this->checkExtDir($sDir);
 
-        if (is_dir($sDir) && $rHandle = opendir($sDir))
-        {
-            while (false !== ($sF = readdir($rHandle)))
-            {
-                if ($sF !== '.' && $sF !== '..')
-                {
-                    if (is_dir($sDir . $sF))
-                    {
+        if (is_dir($sDir) && $rHandle = opendir($sDir)) {
+            while (false !== ($sF = readdir($rHandle))) {
+                if ($sF !== '.' && $sF !== '..') {
+                    if (is_dir($sDir . $sF)) {
                         $aTree = array_merge($aTree, $this->getFileList($sDir . $sF, $mExt));
-                    }
-                    else
-                    {
-                        if (!empty($mExt))
-                        {
-                            $aExt = (array) $mExt;
+                    } else {
+                        if (!empty($mExt)) {
+                            $aExt = (array)$mExt;
 
-                            foreach ($aExt as $sExt)
-                            {
+                            foreach ($aExt as $sExt) {
                                 if (substr($sF, -strlen($sExt)) === $sExt)
                                     $aTree[] = $sDir . $sF;
                             }
-                        }
-                        else
-                        {
+                        } else {
                             $aTree[] = $sDir . $sF;
                         }
                     }
@@ -814,7 +799,7 @@ class File
                 return true;
             }
 
-            $rHandle  = fopen($sFile, 'r');
+            $rHandle = fopen($sFile, 'r');
             $sContents = fread($rHandle, 512); // Get 512 bytes of the file.
             fclose($rHandle);
             clearstatcache();

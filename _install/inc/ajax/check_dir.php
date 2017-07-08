@@ -11,8 +11,7 @@ define('PH7', 1);
 
 require '_ajax.inc.php';
 
-if (!empty($_POST['dir']))
-{
+if (!empty($_POST['dir'])) {
     if (is_directory($_POST['dir']))
         echo '<p class="success">' . $LANG['yes_dir'] . '</p>';
     else

@@ -11,8 +11,8 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Layout\Gzip\Gzip;
-use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Navigation\Browser;
 
 class SettingFormProcess extends Form
 {
@@ -55,6 +55,7 @@ class SettingFormProcess extends Form
         'min_age_registration' => 'minAgeRegistration',
         'max_age_registration' => 'maxAgeRegistration',
         'require_registration_avatar' => 'requireRegistrationAvatar',
+        'allow_user_to_partner' => 'allowUserToPartner',
         'default_membership_group_id' => 'defaultMembershipGroupId',
 
         // Picture and Video

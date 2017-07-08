@@ -14,8 +14,8 @@ namespace PH7\Framework\Parse;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Layout\Optimization;
 use PH7\Framework\File\File;
+use PH7\Framework\Layout\Optimization;
 use PH7\Framework\Service\Emoticon as EmoticonService;
 
 class Emoticon extends EmoticonService

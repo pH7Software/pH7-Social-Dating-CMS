@@ -13,23 +13,22 @@
 namespace PH7\Framework\Error;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\File,
-PH7\Framework\Ip\Ip,
-PH7\Framework\Http\Http,
-PH7\Framework\Mvc\Model\Engine\Db;
+use Exception;
+use PH7\Framework\File\File;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Exception as ModelException;
+use PH7\Framework\Mvc\Router\FrontController;
 
 final class LoggerExcept extends Logger
 {
-
     public function __construct()
     {
-        try
-        {
-            \PH7\Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
-        }
-        catch (\PH7\Framework\Mvc\Model\Engine\Exception $oE)
-        {
+        try {
+            FrontController::getInstance()->_databaseInitialize();
+        } catch (ModelException $oE) {
             // If we are not in development mode, we display an error message to avoid showing information on the database.
             if (!Debug::is()) exit('Could not connect to database server!');
         }
@@ -43,7 +42,7 @@ final class LoggerExcept extends Logger
      * @param object $oExcept \Exception object.
      * @return void
      */
-    public function except(\Exception $oExcept)
+    public function except(Exception $oExcept)
     {
         // Time: Set the log date/time.
         // IP: The IP address of the client.
@@ -54,38 +53,33 @@ final class LoggerExcept extends Logger
         // Level: contains the log level.
         // File: constains the file name.
         // Line: constains the line number.
-        $sAgent = (null !== ($mAgent = $this->browser->getUserAgent() )) ? $mAgent : 'NO USER AGENT';
-        $sQuery = (null !== ($mQuery = (new Http)->getQueryString() )) ? $mQuery : 'NO QUERY STRING';
+        $sAgent = (null !== ($mAgent = $this->browser->getUserAgent())) ? $mAgent : 'NO USER AGENT';
+        $sQuery = (null !== ($mQuery = (new Http)->getQueryString())) ? $mQuery : 'NO QUERY STRING';
         $aLog = [
-            'Time'        => $this->dateTime->get()->dateTime(),
-            'IP'          => Ip::get(),
-            'UserAgent'   => $sAgent,
-            'UrlPag'      => $this->httpRequest->currentUrl(),
-            'Query'       => $sQuery,
-            'Message'     => $oExcept->getMessage(),
-            'Level'       => $oExcept->getCode(),
-            'File'        => $oExcept->getFile(),
-            'Line'        => $oExcept->getLine()
+            'Time' => $this->dateTime->get()->dateTime(),
+            'IP' => Ip::get(),
+            'UserAgent' => $sAgent,
+            'UrlPag' => $this->httpRequest->currentUrl(),
+            'Query' => $sQuery,
+            'Message' => $oExcept->getMessage(),
+            'Level' => $oExcept->getCode(),
+            'File' => $oExcept->getFile(),
+            'Line' => $oExcept->getLine()
         ];
 
         // Encode the line
         $sContents = json_encode($aLog) . File::EOL . File::EOL . File::EOL;
-        switch ($this->config->values['logging']['log_handler'])
-        {
-            case 'file':
-            {
+        switch ($this->config->values['logging']['log_handler']) {
+            case 'file': {
                 $sFullFile = $this->sDir . static::EXCEPT_DIR . $this->sFileName . '.json';
                 $sFullGzipFile = $this->sDir . static::EXCEPT_DIR . static::GZIP_DIR . $this->sFileName . '.gz';
 
                 // If the log file is larger than 5 Mo then it compresses it into gzip
-                if (file_exists($sFullFile) && filesize($sFullFile) >= 5 * 1024 * 1024)
-                {
+                if (file_exists($sFullFile) && filesize($sFullFile) >= 5 * 1024 * 1024) {
                     $rHandler = @gzopen($sFullGzipFile, 'a') or exit('Unable to write to log file gzip.');
                     gzwrite($rHandler, $sContents);
                     gzclose($rHandler);
-                }
-                else
-                {
+                } else {
                     $rHandler = @fopen($sFullFile, 'a') or exit('Unable to write to log file.');
                     fwrite($rHandler, $sContents);
                     fclose($rHandler);
@@ -93,28 +87,25 @@ final class LoggerExcept extends Logger
             }
             break;
 
-            case 'database':
-            {
+            case 'database': {
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('LogError') . 'SET logError = :line');
                 $rStmt->execute(array(':line' => $sContents));
                 Db::free($rStmt);
             }
             break;
 
-            case 'email':
-            {
+            case 'email': {
                 $aInfo = [
                     'to' => $this->config->values['logging']['bug_report_email'],
-                    'subject' => t('Errors Reporting of the pH7 Framework')
+                    'subject' => t('Errors Reporting of pH7Framework')
                 ];
 
-                (new \PH7\Framework\Mail\Mail)->send($aInfo, $sContents, false);
+                (new Mail)->send($aInfo, $sContents, false);
             }
             break;
 
             default:
-                exit('Invalid Log Option.');
+                exit(t('Invalid Log Option.'));
         }
     }
-
 }

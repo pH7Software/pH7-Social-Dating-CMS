@@ -6,6 +6,6 @@
 
 // This is the simplified Chinese
 var pH7LangIM = {
-    cannot_chat_yourself : "您可以与自己聊天。",
-    say : "说..."
+    cannot_chat_yourself: "您可以与自己聊天。",
+    say: "说..."
 };

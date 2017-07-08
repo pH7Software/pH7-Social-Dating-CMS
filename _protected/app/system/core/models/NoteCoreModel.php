@@ -5,14 +5,15 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
 
 class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
 {
-
-    const CACHE_GROUP = 'db/sys/mod/note', CACHE_TIME = 999990;
+    const CACHE_GROUP = 'db/sys/mod/note';
+    const CACHE_TIME = 999990;
 
     /**
      * Gets all note posts.
@@ -21,6 +22,7 @@ class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
      * @param integer $iLimit
      * @param string $sOrder A constant: SearchCoreModel::CREATED (default value) or SearchCoreModel::UPDATED
      * @param integer $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
+     *
      * @return string
      */
     public function getPosts($iOffset, $iLimit, $sOrder = SearchCoreModel::CREATED, $iApproved = 1)
@@ -30,8 +32,7 @@ class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
         // We do not have a long duration of the cache for the changes of positions to be easily updated on the list of Notes of the home page.
         $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder . $iApproved, 3600);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             $iOffset = (int) $iOffset;
             $iLimit = (int) $iLimit;
 
@@ -46,6 +47,7 @@ class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
@@ -54,14 +56,14 @@ class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param integer $iApproved (0 = Unmoderated | 1 = Approved | NULL = unmoderated and approved) Default 1
      * @param integer $iDay Default 0
+     *
      * @return integer
      */
     public function totalPosts($iApproved = 1, $iDay = 0)
     {
         $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             $iDay = (int) $iDay;
             $sSqlWhere = (isset($iApproved)) ? 'WHERE' : '';
             $sSqlAnd = (isset($iApproved) && $iDay > 0 ? ' AND' : ($iDay > 0 ? 'WHERE' : ''));
@@ -77,7 +79,7 @@ class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
             unset($oRow);
             $this->cache->put($iData);
         }
+
         return $iData;
     }
-
 }

@@ -14,8 +14,8 @@ namespace PH7\Framework\Ip;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Server\Server;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Server\Server;
 
 class Ip
 {

@@ -8,14 +8,14 @@
  * @package        PH7 / App / System / Module / User / Controller
  * @version        1.0
  */
+
 namespace PH7;
 
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class SignupController extends Controller
 {
-    private $sTitle;
-
     public function step1()
     {
         // Add CSS and JavaScript files for the left profiles block
@@ -26,28 +26,23 @@ class SignupController extends Controller
         $bRef = $this->httpRequest->getExists('ref');
         $bUserRef = $this->httpRequest->getExists(array('ref', 'a', 'u', 'f_n', 's'));
 
-        if ($bRef || $bUserRef)
-        {
+        if ($bRef || $bUserRef) {
             $sRef = $this->httpRequest->get('ref'); // For the statistics
             $sRefTxt = t('Reference: %0%', $sRef);
         }
 
-        if ($bUserRef)
-        {
+        if ($bUserRef) {
             $sAction = $this->httpRequest->get('a'); // For the statistics
             $sUsername = $this->httpRequest->get('u'); // For the statistics and user image block
             $sSex = $this->httpRequest->get('s'); // For the statistics and user image block
 
             $sSessContents = $sRefTxt . ' | ' . t('Action: %0%', $sAction) . ' | ' . t('Sex: %0%', $sSex) . ' | ' . t('Username: %0%', $sUsername);
-            $this->session->set('join_ref', $sSessContents);
-        }
-        elseif ($bRef)
-        {
-            $this->session->set('join_ref', $sRefTxt);
+            $this->session->set(Registration::REFERENCE_VAR_NAME, $sSessContents);
+        } elseif ($bRef) {
+            $this->session->set(Registration::REFERENCE_VAR_NAME, $sRefTxt);
         }
 
-        if ($bUserRef)
-        {
+        if ($bUserRef) {
             /* Enable the user image block in the view */
             $this->view->user_ref = 1;
 
@@ -55,9 +50,7 @@ class SignupController extends Controller
             $this->view->username = $sUsername;
             $this->view->first_name = $sFirstName;
             $this->view->sex = $sSex;
-        }
-        else
-        {
+        } else {
             /* For Members Block */
             $this->view->userDesignModel = new UserDesignCoreModel();
         }
@@ -101,8 +94,9 @@ class SignupController extends Controller
 
     public function done()
     {
-        if (!$this->session->exists('mail_step3'))
-            Header::redirect(Uri::get('user','signup','step3'));
+        if (!$this->session->exists('mail_step3')) {
+            Header::redirect(Uri::get('user', 'signup', 'step3'));
+        }
 
         $this->session->destroy(); // Remove all sessions created pending registration
         Header::redirect(Uri::get('user','main','login'), (new Registration)->getMsg());
@@ -111,6 +105,7 @@ class SignupController extends Controller
     /**
      * @param int $iStep Number of the current step (e.g. 1, 2, 3).
      * @param int $iPercentage Percentage of progression.
+     *
      * @return void
      */
     protected function setupProgressbar($iStep, $iPercentage)
@@ -123,6 +118,7 @@ class SignupController extends Controller
      * Set title and heading.
      *
      * @param string $sTitle
+     *
      * @return void
      */
     private function setTitle($sTitle)

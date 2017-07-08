@@ -10,19 +10,21 @@
 
 namespace PH7;
 
-use PH7\Framework\Session\Session;
-use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Ip\Ip;
-use PH7\Framework\File\File;
-use PH7\Framework\Util\Various;
-use PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel;
-use PH7\Framework\Config\Config;
-use PH7\Framework\Registry\Registry;
 use PH7\Framework\Cache\Cache;
-use PH7\Framework\Mvc\Router\Uri;
-use PH7\Framework\Url\Header;
+use PH7\Framework\Config\Config;
+use PH7\Framework\File\File;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Url\Url;
+use PH7\Framework\Util\Various;
 use stdClass;
 
 // Abstract Class
@@ -77,7 +79,7 @@ class UserCore
 
         /* Clean UserCoreModel and Avatar Cache */
         (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear()
-        ->start(Framework\Layout\Html\Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear();
+        ->start(Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear();
     }
 
     /**
@@ -190,7 +192,7 @@ class UserCore
         (new UserCoreModel)->deleteAvatar($iProfileId);
 
         /* Clean User Avatar Cache */
-        (new Cache)->start(Framework\Layout\Html\Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear()
+        (new Cache)->start(Design::CACHE_AVATAR_GROUP . $sUsername, null, null)->clear()
         ->start(UserCoreModel::CACHE_GROUP, 'avatar' . $iProfileId, null)->clear();
     }
 
@@ -286,7 +288,7 @@ class UserCore
                 's' => $sSex
             ];
 
-            $sLink = Uri::get('user','signup','step1', '?' . Framework\Url\Url::httpBuildQuery($aHttpParams), false);
+            $sLink = Uri::get('user','signup','step1', '?' . Url::httpBuildQuery($aHttpParams), false);
         }
         else
         {
@@ -344,8 +346,6 @@ class UserCore
     public function findUsername($sNickname, $sFirstName, $sLastName)
     {
         $sRnd = Various::genRnd('pH_Pierre-Henry_Soria_Sanz_González', 4); // Random String
-        $iMinLen = DbConfig::getSetting('minUsernameLength'); // Minimum Length
-        $iMaxLen = DbConfig::getSetting('maxUsernameLength'); // Maximum Length
 
         $aUsernameList = [
             $sNickname,
@@ -354,7 +354,6 @@ class UserCore
             $sNickname . $sRnd,
             $sFirstName . $sRnd,
             $sLastName . $sRnd,
-            Various::genRndWord($iMinLen, $iMaxLen),
             $sFirstName . '-' . $sLastName,
             $sLastName . '-' . $sFirstName,
             $sFirstName . '-' . $sLastName . $sRnd,

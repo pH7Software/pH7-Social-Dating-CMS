@@ -10,15 +10,13 @@
  * @param {String} The ID name of link.
  * @return {Void}
  */
-function switchPage(sLinkId)
-{
+function switchPage(sLinkId) {
     $("#switchPage").children().removeClass().toggleClass("hidden");
     $("#switchPage " + sLinkId).removeClass().toggleClass("visible");
 }
 
-$(document).ready(function ()
-{
-    $('#switchPage a').click(function() {
+$(document).ready(function () {
+    $('#switchPage a').click(function () {
         $(this).attr('href', switchPage($(this).attr('href')));
     });
 });

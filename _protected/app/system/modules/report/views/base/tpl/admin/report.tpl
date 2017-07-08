@@ -6,7 +6,7 @@
   <p><span class="bold">{lang 'URL:'}</span> <span class="italic"><a href="{% $report->url %}" target="_blank">{% $report->url %}</a></span></p>
   <p><span class="bold">{lang 'Description of report'}</span> <span class="italic">{% $report->description %}</span></p>
   <p><span class="bold">{lang 'Date:'}</span><span class="italic">{% $dateTime->get($report->dateTime)->dateTime() %}</span></p>
-
+  <p>&nbsp;</p>
   <div class="btn btn-default btn-md inline">{{ LinkCoreForm::display(t('Delete Report'), 'report', 'admin', 'delete', array('id'=>$report->reportId)) }}</div>
 
 </div>

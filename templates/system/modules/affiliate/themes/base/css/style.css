@@ -9,9 +9,11 @@
     margin: 20px;
     width: 300px;
     height: 274px;
-    margin: 2px 2px 2px 2px;border:1px solid #999;
+    margin: 2px 2px 2px 2px;
+    border: 1px solid #999;
     border-radius: 5px;
 }
+
 .aff_login {
     margin-top: 20px;
 }

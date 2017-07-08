@@ -13,48 +13,46 @@ namespace PH7\Framework\Layout\Html;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Core\Kernel;
-use PH7\UserCore;
-use PH7\UserCoreModel;
 use PH7\AdminCore;
 use PH7\AdminCoreModel;
 use PH7\AffiliateCore;
-use PH7\Framework\Registry\Registry;
-use PH7\Framework\Mvc\Model\Engine\Db;
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Parse\Url as UrlParser;
-use PH7\Framework\Url\Url;
-use PH7\Framework\Ip\Ip;
-use PH7\Framework\Geo\Ip\Geo;
-use PH7\Framework\Str\Str;
-use PH7\Framework\File\File;
-use PH7\Framework\Session\Session;
-use PH7\Framework\Navigation\Page;
-use PH7\Framework\Geo\Misc\Country;
 use PH7\Framework\Benchmark\Benchmark;
 use PH7\Framework\Cache\Cache;
-use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Navigation\Pagination;
-use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\File\File;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Geo\Misc\Country;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
-use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Navigation\Page;
+use PH7\Framework\Navigation\Pagination;
+use PH7\Framework\Parse\Url as UrlParser;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Security\Validate\Validate;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Url\Url;
+use PH7\UserCore;
+use PH7\UserCoreModel;
 
 class Design
 {
-    const
-    CACHE_GROUP = 'str/design',
-    CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
+    const CACHE_GROUP = 'str/design';
+    const CACHE_AVATAR_GROUP = 'str/design/avatar/'; // We put a slash for after creating a directory for each username
 
     const AVATAR_IMG_EXT = '.png';
 
-    const
-    SUCCESS_TYPE = 'success',
-    ERROR_TYPE = 'error',
-    WARNING_TYPE = 'warning',
-    INFO_TYPE = 'info';
+    const SUCCESS_TYPE = 'success';
+    const ERROR_TYPE = 'error';
+    const WARNING_TYPE = 'warning';
+    const INFO_TYPE = 'info';
 
     const MESSAGE_TYPES = [
         self::SUCCESS_TYPE,
@@ -63,22 +61,41 @@ class Design
         self::INFO_TYPE
     ];
 
-    const
-    FLASH_MSG = 'flash_msg',
-    FLASH_TYPE = 'flash_type';
+    const FLASH_MSG = 'flash_msg';
+    const FLASH_TYPE = 'flash_type';
 
-    protected
-    $bIsDiv = false,
-    $oStr,
-    $oSession,
-    $oHttpRequest,
-    $aCssDir = array(),
-    $aCssFiles = array(),
-    $aCssMedia = array(),
-    $aJsDir = array(),
-    $aJsFiles = array(),
-    $aMessages = array(),
-    $aErrors = array();
+    /** @var boolean */
+    protected $bIsDiv = false;
+
+    /** @var Str */
+    protected $oStr;
+
+    /** @var Session */
+    protected $oSession;
+
+    /** @var HttpRequest */
+    protected $oHttpRequest;
+
+    /** @var array */
+    protected $aCssDir = array();
+
+    /** @var array */
+    protected $aCssFiles = array();
+
+    /** @var array */
+    protected $aCssMedia = array();
+
+    /** @var array */
+    protected $aJsDir = array();
+
+    /** @var array */
+    protected $aJsFiles = array();
+
+    /** @var array */
+    protected $aMessages = array();
+
+    /** @var array */
+    protected $aErrors = array();
 
     public function __construct()
     {
@@ -395,35 +412,33 @@ class Design
         // Get Client's Language Code
         $sLangCode = (new Browser)->getLanguage(true);
 
-        if ($sLangCode == 'en-ie') {
+        // Default links, set to English
+        $aSites = [
+            ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
+            ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
+            ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
+            ['title' => 'iPhone LONDON Dating App', 'link' => 'https://itunes.apple.com/us/app/meet-date-lovely-people-in/id1155373742'],
+            ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
+            ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
+            ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
+            ['title' => 'Android LONDON DATING App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
+        ];
+
+        if ($sLangCode === 'en-ie') {
             $aSites = [
                 ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com'],
                 ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://dublin.meetlovelypeople.com']
             ];
-        } elseif ($sLangCode == 'en-gb') {
+        } elseif ($sLangCode === 'en-gb') {
           $aSites = [
               ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
               ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com'],
               ['title' => 'Date Londoners', 'link' => 'http://flirt-dating.london']
           ];
-        } elseif (substr($sLangCode,0,2) == 'fr') {
+        } elseif (strpos($sLangCode, 'fr') !== false) {
             $aSites = [
-                ['title' => '1er Site de Rencontre Cool!', 'link' => 'http://coolonweb.com'],
                 ['title' => 'Rencontre d\'un soir', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => 'Rencontre à Paris Gratuite', 'link' => 'http://coolonweb.com']
-            ];
-        } else { // Default links, set to English
-            $aSites = [
-                ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
-                ['title' => 'Kik or Not', 'link' => 'http://kikornot.com'],
-                ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
-                ['title' => 'Meet Amazing People', 'link' => 'http://coolonweb.com/p/dooba'],
-                ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
-                ['title' => 'Android London Dating App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
+                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
             ];
         }
 
@@ -435,8 +450,8 @@ class Design
     {
         if (
             (!defined('PH7_VALID_LICENSE') || !PH7_VALID_LICENSE)
-            && (new AdminCoreModel)->getRootIp() !== Ip::get()
             && !AdminCore::auth()
+            && (new AdminCoreModel)->getRootIp() !== Ip::get()
         ) {
             $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742" />';
 

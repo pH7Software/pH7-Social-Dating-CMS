@@ -5,15 +5,15 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 */
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #F0F0F0;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #F0F0F0;
 }
 
 .hljs,
 .hljs-subst {
-  color: #444;
+    color: #444;
 }
 
 .hljs-keyword,
@@ -22,7 +22,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .hljs-meta-keyword,
 .hljs-doctag,
 .hljs-name {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .hljs-built_in,
@@ -30,7 +30,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .hljs-bullet,
 .hljs-code,
 .hljs-addition {
-  color: #1F811F;
+    color: #1F811F;
 }
 
 .hljs-regexp,
@@ -40,7 +40,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .hljs-link,
 .hljs-selector-attr,
 .hljs-selector-pseudo {
-  color: #BC6060;
+    color: #BC6060;
 }
 
 .hljs-type,
@@ -51,27 +51,27 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 .hljs-quote,
 .hljs-template-tag,
 .hljs-deletion {
-  color: #880000;
+    color: #880000;
 }
 
 .hljs-title,
 .hljs-section {
-  color: #880000;
-  font-weight: bold;
+    color: #880000;
+    font-weight: bold;
 }
 
 .hljs-comment {
-  color: #888888;
+    color: #888888;
 }
 
 .hljs-meta {
-  color: #2B6EA1;
+    color: #2B6EA1;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }
 
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }

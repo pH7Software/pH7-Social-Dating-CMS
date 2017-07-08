@@ -14,14 +14,14 @@ namespace PH7\Framework\Layout\Gzip;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\File;
-use PH7\Framework\Config\Config;
 use PH7\Framework\Compress\Compress;
-use PH7\Framework\Layout\Optimization;
-use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Http\Http;
-use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\File;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Layout\Optimization;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Navigation\Browser;
 
 class Gzip
 {

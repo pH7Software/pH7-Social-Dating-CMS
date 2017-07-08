@@ -8,8 +8,8 @@
 
 namespace PH7;
 
-use PH7\Framework\Security\Security;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Security\Security;
 
 class AdminModel extends AdminCoreModel
 {

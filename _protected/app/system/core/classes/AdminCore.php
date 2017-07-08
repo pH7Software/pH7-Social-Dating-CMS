@@ -8,11 +8,11 @@
 
 namespace PH7;
 
-use PH7\Framework\Session\Session;
 use PH7\Framework\Ip\Ip;
-use PH7\Framework\Util\Various;
-use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Util\Various;
 use stdClass;
 
 // Abstract Class
@@ -32,6 +32,17 @@ class AdminCore extends UserCore
         unset($oSession);
 
         return $bIsConnected;
+    }
+
+    /**
+     * Determines if the ID is from Root Admin (main admin).
+     *
+     * @param  integer $iProfileId
+     * @return boolean
+     */
+    public static function isRootProfileId($iProfileId)
+    {
+        return $iProfileId == static::ROOT_PROILE_ID;
     }
 
     /**
@@ -64,16 +75,5 @@ class AdminCore extends UserCore
         $oSession->set($aSessionData);
         $oSecurityModel->addLoginLog($oAdminData->email, $oAdminData->username, '*****', 'Logged in!', 'Admins');
         $oAdminModel->setLastActivity($oAdminData->profileId, 'Admins');
-    }
-
-    /**
-     * Determines if the ID is from Root Admin (main admin).
-     *
-     * @param  integer $iProfileId
-     * @return boolean
-     */
-    public static function isRootProfileId($iProfileId)
-    {
-        return $iProfileId == static::ROOT_PROILE_ID;
     }
 }

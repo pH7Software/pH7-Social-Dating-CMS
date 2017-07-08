@@ -14,16 +14,16 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Server\Server;
+use PH7\App\Includes\Classes\Loader\Autoloader as AppLoader;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Core\Kernel;
+use PH7\Framework\Error\CException as Except;
+use PH7\Framework\File\Import;
+use PH7\Framework\Loader\Autoloader as FrameworkLoader;
+use PH7\Framework\Mvc\Router\FrontController;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Registry\Registry;
-use PH7\Framework\Mvc\Router\FrontController;
-use PH7\Framework\Config\Config;
-use PH7\Framework\File\Import;
-use PH7\Framework\Core\Kernel;
-use PH7\Framework\Loader\Autoloader as FrameworkLoader;
-use PH7\App\Includes\Classes\Loader\Autoloader as AppLoader;
-use PH7\Framework\Error\CException as Except;
+use PH7\Framework\Server\Server;
 
 /*** Begin Loading Files ***/
 require 'configs/constants.php';
@@ -32,7 +32,7 @@ require 'includes/helpers/misc.php';
 class Bootstrap
 {
     /**
-     * @staticvar object $oInstance
+     * @var Bootstrap $oInstance
      */
     private static $oInstance = null;
 
@@ -59,8 +59,9 @@ class Bootstrap
      */
     public function setTimezoneIfNotSet()
     {
-        if (!ini_get('date.timezone'))
+        if (!ini_get('date.timezone')) {
             ini_set('date.timezone', PH7_DEFAULT_TIMEZONE);
+        }
     }
 
     /**
@@ -90,8 +91,7 @@ class Bootstrap
      */
     public function run()
     {
-        try
-        {
+        try {
             $this->loadInitFiles();
 
             //** Temporary code. In the near future, pH7CMS will be usable without mod_rewrite
@@ -108,29 +108,19 @@ class Bootstrap
             Registry::getInstance()->start_time = microtime(true);
 
             /**
-              * Initialize the FrontController, we are asking the front controller to process the HTTP request
+             * Initialize the FrontController, we are asking the front controller to process the HTTP request
              */
             FrontController::getInstance()->runRouter();
-        }
-        # \PH7\Framework\Error\CException\UserException
-        catch (Except\UserException $oE)
-        {
+        } # \PH7\Framework\Error\CException\UserException
+        catch (Except\UserException $oE) {
             echo $oE->getMessage(); // Simple User Error with Exception
-        }
-
-        # \PH7\Framework\Error\CException\PH7Exception
-        catch (Except\PH7Exception $oE)
-        {
+        } # \PH7\Framework\Error\CException\PH7Exception
+        catch (Except\PH7Exception $oE) {
             Except\PH7Exception::launch($oE);
-        }
-
-        # \Exception and other...
-        catch (\Exception $oE)
-        {
+        } # \Exception and other...
+        catch (\Exception $oE) {
             Except\PH7Exception::launch($oE);
-        }
-        finally
-        {
+        } finally {
             if (session_status() === PHP_SESSION_ACTIVE) {
                 session_write_close();
             }

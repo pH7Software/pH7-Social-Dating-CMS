@@ -12,16 +12,14 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Config\Config,
-PH7\Framework\Cache\Cache,
-PH7\Framework\Compress\Compress,
-PH7\Framework\Service\Suggestion;
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Compress\Compress;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Service\Suggestion;
 
-$oCache = (new Cache)->start('str/js', 'mailcheck', 120*48*30);
+$oCache = (new Cache)->start('str/js', 'mailcheck', 120 * 48 * 30);
 
-if (!$sData = $oCache->get())
-{
+if (!$sData = $oCache->get()) {
     $sData = '
     var domains = [\'' . Suggestion::email() . '\'];
     $(\'input[id^=email]\').blur(function(){
@@ -43,8 +41,7 @@ if (!$sData = $oCache->get())
         })
     });';
 
-    if (Config::getInstance()->values['cache']['enable.static.minify'])
-    {
+    if (Config::getInstance()->values['cache']['enable.static.minify']) {
         // Compression of JavaScript Code
         $sData = (new Compress)->parseJs($sData);
     }

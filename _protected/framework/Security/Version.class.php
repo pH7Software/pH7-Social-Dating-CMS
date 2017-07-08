@@ -17,6 +17,7 @@ use PH7\Framework\Cache\Cache;
 
 final class Version
 {
+    const CACHE_TIME = 86400; // 1 day
     const LATEST_VERSION_URL = 'http://xml.ph7cms.com/software-info.xml';
     const PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
@@ -24,12 +25,12 @@ final class Version
      * Framework Kernel.
      *
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW" and 7.* is NaOH
+     * 5.* was "pCO", 6.* was "WoW" and 7.*, 8.* is NaOH
      */
     const KERNEL_VERSION_NAME = 'NaOH';
-    const KERNEL_VERSION = '7.1.3';
+    const KERNEL_VERSION = '8.0.2';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2017-07-03';
+    const KERNEL_RELASE_DATE = '2017-07-10';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
@@ -47,7 +48,7 @@ final class Version
      */
     public static function getLatestInfo()
     {
-        $oCache = (new Cache)->start('str/security', 'version-info', 3600*24); // Stored for 1 day
+        $oCache = (new Cache)->start('str/security', 'version-info', self::CACHE_TIME); // Stored for 1 day
         if (!$mData = $oCache->get()) {
             $oDom = new \DOMDocument;
 

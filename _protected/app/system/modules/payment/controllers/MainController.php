@@ -11,11 +11,11 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Mail\Mail;
 use PH7\Framework\Cache\Cache;
-use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 use PH7\Framework\File\File;
+use PH7\Framework\Mail\Mail;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 
 class MainController extends Controller
 {
@@ -63,6 +63,9 @@ class MainController extends Controller
         }
     }
 
+    /**
+     * @param null|integer $iMembershipId
+     */
     public function pay($iMembershipId = null)
     {
         $iMembershipId = (int) $iMembershipId;
@@ -84,6 +87,9 @@ class MainController extends Controller
         }
     }
 
+    /**
+     * @param string $sProvider
+     */
     public function process($sProvider = '')
     {
         switch ($sProvider) {
@@ -153,7 +159,8 @@ class MainController extends Controller
 
                 $iItemNumber = $this->httpRequest->post('cart_order_id');
                 if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id')) {
-                    if ($this->oUserModel->updateMembership(
+                    if (
+                        $this->oUserModel->updateMembership(
                         $iItemNumber,
                         $this->iProfileId,
                         $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
@@ -196,8 +203,8 @@ class MainController extends Controller
     }
 
     /**
-     * @param  string  $sGatewayName
-     * @param  integer $iItemNumber
+     * @param string  $sGatewayName
+     * @param integer $iItemNumber
      *
      * @return void
      */

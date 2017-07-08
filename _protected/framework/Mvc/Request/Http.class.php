@@ -15,8 +15,8 @@ namespace PH7\Framework\Mvc\Request;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Registry\Registry;
 use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security as Secty;
 
 /**

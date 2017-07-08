@@ -8,11 +8,11 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\File\File;
 use PH7\Framework\Ip\Ip;
-use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Module\Various as SysMod;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
 
 class SettingForm
 {
@@ -100,6 +100,8 @@ class SettingForm
         $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration')+1, 'validation' => new \PFBC\Validation\Str(1,3), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Require photo to be uploaded:'), 'require_registration_avatar', array('1' => t('Yes'), '0' => t('No')), array('description' => t('Require Members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo because users can still close the page and not finish the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1)));
+
+        $oForm->addElement(new \PFBC\Element\Select(t('Allow Users to Register on Partner Service:'), 'allow_user_to_partner', array('1' => t('Enable (recommended)'), '0' => t('Disable')), array('description' => t('Gives the possibility to users to register them instantly on another dating service and increase their user experience.') . '<br /><small>' . t("The partner service is a third-party one and doesn't belong to you.") . '</small>', 'value' => DbConfig::getSetting('allowUserToPartner'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), array('value'=>DbConfig::getSetting('defaultMembershipGroupId'), 'required'=>1)));
 

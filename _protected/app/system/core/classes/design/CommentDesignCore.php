@@ -7,7 +7,8 @@
  */
 namespace PH7;
 
-use PH7\Framework\Pattern\Statik, PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Pattern\Statik;
 
 class CommentDesignCore
 {

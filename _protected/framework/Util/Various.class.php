@@ -11,11 +11,12 @@
  */
 
 namespace PH7\Framework\Util;
+
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Str\Str;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Navigation\Browser;
+use PH7\Framework\Str\Str;
 
 class Various
 {
@@ -24,24 +25,24 @@ class Various
     /**
      * Generate Random.
      *
-     * @static
-     * @param string $sStr
-     * @param integer $iLength Default is 40 Characters.
+     * @param string|null $sStr
+     * @param int $iLength Default is 40 Characters.
+     *
      * @return string
      */
     public static function genRnd($sStr = null, $iLength = self::MAX_LENGTH)
     {
         $sStr = (!empty($sStr)) ? (string) $sStr : '';
-        $sChars = hash('whirlpool', hash('whirlpool', uniqid(mt_rand(), true) . $sStr . Ip::get() . time()) . hash('sha512', (new Browser)->getUserAgent() . microtime(true)*9999));
+        $sChars = hash('whirlpool', hash('whirlpool', uniqid(mt_rand(), true) . $sStr . Ip::get() . time()) . hash('sha512', (new Browser)->getUserAgent() . microtime(true) * 9999));
         return self::padStr($sChars, $iLength);
     }
 
     /**
      * Padding String.
      *
-     * @static
      * @param string $sStr
-     * @param integer $iLength
+     * @param int $iLength
+     *
      * @return string
      */
     public static function padStr($sStr, $iLength = self::MAX_LENGTH)
@@ -53,46 +54,20 @@ class Various
     /**
      * Generate Random Word.
      *
-     * @static
-     * @param integer $iMinLength
-     * @param integer $iMaxLength
+     * @param int $iLength
+     *
      * @return string
      */
-    public static function genRndWord($iMinLength, $iMaxLength)
+    public static function genRndWord($iLength)
     {
-        // Grab a random word from dictionary between the two lengths
-        // and return it
+        $sWord = '';
+        $aSpecialChars = ['-', '_', '~', '|', '%', '^', '!', '$', '#', '@', '?'];
+        $aKeys = array_merge(range(0, 9), range('a', 'z'), $aSpecialChars);
 
-        $sWord = ''; // Default value
-
-        // Remember to change this path to suit your system
-        $sDir = PH7_PATH_FRAMEWORK . 'Translate/Dict/';
-        $sDict = (file_exists($sDir . PH7_LANG_CODE)) ? PH7_LANG_CODE : PH7_DEFAULT_LANG_CODE;
-        if (!$rHandle = @fopen($sDir . $sDict, 'r')) return false;
-        $iSize = filesize($sDir . $sDict);
-
-        // Go to a random location in dictionary
-        $iRandLocation = rand(0, $iSize);
-        fseek($rHandle, $iRandLocation);
-
-        // Get the next whole word of the right length in the file
-        do
-        {
-            $iWordLength = (new Str)->length($sWord);
-
-            if (feof($rHandle)) fseek($rHandle, 0); // if at end, go to start
-
-            $sWord = fgets($rHandle, 80);  // skip first word as it could be partial
-            $sWord = fgets($rHandle, 80);  // the potential password
+        for ($i = 0; $i < $iLength; $i++) {
+            $sWord .= $aKeys[array_rand($aKeys)];
         }
-        while ( ($iWordLength < $iMinLength) || ($iWordLength > $iMaxLength) || (strstr($sWord, "'")) );
 
-        fclose($rHandle);
-
-        $sWord = trim($sWord); // trim the trailing \n from fgets
-        // add a number  between 0 and 999 to it
-        // to make it a slightly better password
-        $iRandNumber = mt_rand(0, 999);
-        return $sWord . $iRandNumber;
+        return $sWord;
     }
 }

@@ -5,13 +5,15 @@
  */
 
 // This feature is only for members!
-function mail(sType, iMsgId, sCSRFToken)
-{
-    $.post(pH7Url.base + 'mail/asset/ajax/Mail', {type : sType, msg_id : iMsgId, security_token : sCSRFToken}, function(oResponseData)
-    {
-        if(oResponseData.status == 1) {
+function mail(sType, iMsgId, sCSRFToken) {
+    $.post(pH7Url.base + 'mail/asset/ajax/Mail', {
+        type: sType,
+        msg_id: iMsgId,
+        security_token: sCSRFToken
+    }, function (oResponseData) {
+        if (oResponseData.status == 1) {
             $('.msg').addClass('alert alert-success');
-            $('#mail_' +  iMsgId).hide("slow");
+            $('#mail_' + iMsgId).hide("slow");
         } else {
             $('.msg').addClass('alert alert-danger');
         }

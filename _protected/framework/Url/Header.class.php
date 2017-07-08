@@ -14,13 +14,12 @@ namespace PH7\Framework\Url;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Http\Http;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Header
 {
-
     /**
      * Allows a redirection URL respecting the HTTP status code for search engines friendly.
      *
@@ -59,7 +58,7 @@ class Header
      */
     public static function selfUrl()
     {
-        $sSecure = (!empty($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 's' : '';
+        $sSecure = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on') ? 's' : '';
         $sServerProtocol = strtolower($_SERVER['SERVER_PROTOCOL']);
         $sProtocol = substr($sServerProtocol, 0, strpos($sServerProtocol, PH7_SH)) . $sSecure;
 
@@ -68,5 +67,4 @@ class Header
 
         return $sProtocol . '://' . $_SERVER['SERVER_NAME'] . $mPort . $_SERVER['REQUEST_URI'];
     }
-
 }

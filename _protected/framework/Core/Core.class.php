@@ -14,10 +14,10 @@ namespace PH7\Framework\Core;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Session\Session;
-use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Session\Session;
 
 abstract class Core extends Kernel
 {

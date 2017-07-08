@@ -13,8 +13,8 @@ namespace PH7\Framework\Parse;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\ExistsCoreModel;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\UserCore;
 
 class User

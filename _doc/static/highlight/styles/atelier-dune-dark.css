@@ -5,7 +5,7 @@
 /* Atelier-Dune Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #999580;
+    color: #999580;
 }
 
 /* Atelier-Dune Red */
@@ -19,7 +19,7 @@
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #d73737;
+    color: #d73737;
 }
 
 /* Atelier-Dune Orange */
@@ -30,40 +30,40 @@
 .hljs-literal,
 .hljs-type,
 .hljs-params {
-  color: #b65611;
+    color: #b65611;
 }
 
 /* Atelier-Dune Green */
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet {
-  color: #60ac39;
+    color: #60ac39;
 }
 
 /* Atelier-Dune Blue */
 .hljs-title,
 .hljs-section {
-  color: #6684e1;
+    color: #6684e1;
 }
 
 /* Atelier-Dune Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-  color: #b854d4;
+    color: #b854d4;
 }
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  background: #20201d;
-  color: #a6a28c;
-  padding: 0.5em;
+    display: block;
+    overflow-x: auto;
+    background: #20201d;
+    color: #a6a28c;
+    padding: 0.5em;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }
 
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }

@@ -12,10 +12,9 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\Mvc\Model\Engine\Db,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Mvc\Model\Engine\Util\Backup;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Util\Backup;
 
 class DatabaseCoreCron extends Cron
 {

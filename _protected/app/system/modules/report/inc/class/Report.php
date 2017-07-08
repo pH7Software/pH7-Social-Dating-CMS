@@ -8,9 +8,9 @@
 
 namespace PH7;
 
-use PH7\Framework\Mail\Mail;
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
+use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 
 class Report

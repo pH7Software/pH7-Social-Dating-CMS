@@ -5,23 +5,33 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Forum / Controller
  */
+
 namespace PH7;
-use PH7\Framework\Mvc\Router\Uri, PH7\Framework\Url\Header;
+
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class AdminController extends Controller
 {
+    /** @var ForumModel */
+    private $oForumModel;
 
-    private $oForumModel, $sMsg;
+    /** @var string */
+    private $sMsg;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->oForumModel = new ForumModel();
     }
 
     public function index()
     {
-        Header::redirect(Uri::get('forum', 'forum', 'index'), t('Welcome to the forum administrator mode.'));
+        Header::redirect(
+            Uri::get('forum', 'forum', 'index'),
+            t('Welcome to the forum administrator mode.')
+        );
     }
 
     public function addCategory()
@@ -58,12 +68,16 @@ class AdminController extends Controller
 
     public function deleteCategory()
     {
-        if ($this->oForumModel->deleteCategory($this->httpRequest->post('id')))
+        if ($this->oForumModel->deleteCategory($this->httpRequest->post('id'))) {
             $this->sMsg = t('Your Category has been deleted!');
-        else
+        } else {
             $this->sMsg = t('Oops! Your Category could not be deleted');
+        }
 
-        Header::redirect(Uri::get('forum', 'forum', 'index'), $this->sMsg);
+        Header::redirect(
+            Uri::get('forum', 'forum', 'index'),
+            $this->sMsg
+        );
     }
 
     public function deleteForum()
@@ -73,12 +87,9 @@ class AdminController extends Controller
         else
             $this->sMsg = t('Oops! Your Forum could not be deleted');
 
-        Header::redirect(Uri::get('forum', 'forum', 'index'), $this->sMsg);
+        Header::redirect(
+            Uri::get('forum', 'forum', 'index'),
+            $this->sMsg
+        );
     }
-
-    public function __destruct()
-    {
-        unset($this->oForumModel, $this->sMsg);
-    }
-
 }

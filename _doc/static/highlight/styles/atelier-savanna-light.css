@@ -5,7 +5,7 @@
 /* Atelier-Savanna Comment */
 .hljs-comment,
 .hljs-quote {
-  color: #5f6d64;
+    color: #5f6d64;
 }
 
 /* Atelier-Savanna Red */
@@ -19,7 +19,7 @@
 .hljs-name,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: #b16139;
+    color: #b16139;
 }
 
 /* Atelier-Savanna Orange */
@@ -30,55 +30,55 @@
 .hljs-literal,
 .hljs-type,
 .hljs-params {
-  color: #9f713c;
+    color: #9f713c;
 }
 
 /* Atelier-Savanna Green */
 .hljs-string,
 .hljs-symbol,
 .hljs-bullet {
-  color: #489963;
+    color: #489963;
 }
 
 /* Atelier-Savanna Blue */
 .hljs-title,
 .hljs-section {
-  color: #478c90;
+    color: #478c90;
 }
 
 /* Atelier-Savanna Purple */
 .hljs-keyword,
 .hljs-selector-tag {
-  color: #55859b;
+    color: #55859b;
 }
 
 .hljs-deletion,
 .hljs-addition {
-  color: #171c19;
-  display: inline-block;
-  width: 100%;
+    color: #171c19;
+    display: inline-block;
+    width: 100%;
 }
 
 .hljs-deletion {
-  background-color: #b16139;
+    background-color: #b16139;
 }
 
 .hljs-addition {
-  background-color: #489963;
+    background-color: #489963;
 }
 
 .hljs {
-  display: block;
-  overflow-x: auto;
-  background: #ecf4ee;
-  color: #526057;
-  padding: 0.5em;
+    display: block;
+    overflow-x: auto;
+    background: #ecf4ee;
+    color: #526057;
+    padding: 0.5em;
 }
 
 .hljs-emphasis {
-  font-style: italic;
+    font-style: italic;
 }
 
 .hljs-strong {
-  font-weight: bold;
+    font-weight: bold;
 }

@@ -13,7 +13,10 @@ namespace PH7\Framework\Translate
 {
  defined('PH7') or exit('Restricted access');
 
- use PH7\Framework\Config\Config, PH7\Framework\Cookie\Cookie;
+ use PH7\Framework\Config\Config;
+ use PH7\Framework\Cookie\Cookie;
+ use PH7\Framework\Navigation\Browser;
+ use PH7\Framework\Registry\Registry;
 
  class Lang
  {
@@ -27,18 +30,13 @@ namespace PH7\Framework\Translate
          $oCookie = new Cookie;
 
          // Check a template name has been entered and if it meets the required length.
-         if (!empty($_REQUEST['l']) && strlen($_REQUEST['l']) == 5)
-         {
+         if (!empty($_REQUEST['l']) && strlen($_REQUEST['l']) == 5) {
              $this->_sUserLang = $_REQUEST['l'];
              $oCookie->set(static::COOKIE_NAME, $this->_sUserLang, 60*60*48);
-         }
-         else if ($oCookie->exists(static::COOKIE_NAME))
-         {
+         } elseif ($oCookie->exists(static::COOKIE_NAME)) {
              $this->_sUserLang = $oCookie->get(static::COOKIE_NAME);
-         }
-         else
-         {
-             $this->_sUserLang = (new \PH7\Framework\Navigation\Browser)->getLanguage();
+         } else {
+             $this->_sUserLang = (new Browser)->getLanguage();
          }
 
          unset($oCookie);
@@ -48,7 +46,8 @@ namespace PH7\Framework\Translate
       * Set the default language name.
       *
       * @param string $sNewDefLang Prefix of the language.
-      * @return object $this
+      *
+      * @return self
       */
      public function setDefaultLang($sNewDefLang)
      {
@@ -60,8 +59,9 @@ namespace PH7\Framework\Translate
      /**
       * Set the user language name.
       *
-      * @param string $sNewDefaultLang Prefix of the language.
-      * @return object $this
+      * @param string $sNewUserLang Prefix of the language.
+      *
+      * @return self
       */
      public function setUserLang($sNewUserLang)
      {
@@ -93,39 +93,38 @@ namespace PH7\Framework\Translate
      /**
       * Get JavaScript language file.
       *
-      * @static
       * @param string $sPath The path.
       * @param string $sFileName The language name. Default is the constant: 'PH7_LANG_CODE'
+      *
       * @return string Valid file name (with the extension).
-      * @throws \PH7\Framework\Translate\Exception If the language file is not found.
+      *
+      * @throws Exception If the language file is not found.
       */
      public static function getJsFile($sPath, $sFileName = PH7_LANG_CODE)
      {
-         if (is_file($sPath . $sFileName . '.js'))
-         {
+         if (is_file($sPath . $sFileName . '.js')) {
              return $sFileName . '.js';
          }
-         else if (is_file($sPath . PH7_DEFAULT_LANG_CODE . '.js'))
-         {
+
+         if (is_file($sPath . PH7_DEFAULT_LANG_CODE . '.js')) {
              return PH7_DEFAULT_LANG_CODE . '.js';
          }
-         else
-         {
-             throw new Exception('Language file \'' . $sPath . PH7_DEFAULT_LANG_CODE . '.js\' not found.');
-         }
+
+         throw new Exception('Language file \'' . $sPath . PH7_DEFAULT_LANG_CODE . '.js\' not found.');
      }
 
      /**
       * Load the language file.
       *
       * @param string $sFileName The language filename (e.g., "global").
-      * @param string $sPath If you want to change the default path (the path to the current module), you can specify the path. Default NULL
-      * @return object $this
+      * @param string $sPath If you want to change the default path (the path to the current module), you can specify the path.
+      *
+      * @return self
       */
      public function load($sFileName, $sPath = null)
      {
          textdomain($sFileName);
-         bindtextdomain($sFileName, (empty($sPath) ? \PH7\Framework\Registry\Registry::getInstance()->path_module_lang : $sPath) );
+         bindtextdomain($sFileName, (empty($sPath) ? Registry::getInstance()->path_module_lang : $sPath) );
          bind_textdomain_codeset($sFileName, PH7_ENCODING);
 
          return $this;
@@ -134,8 +133,9 @@ namespace PH7\Framework\Translate
      /**
       * Loading language files.
       *
-      * @return object $this
-      * @throws \PH7\Framework\Translate\Exception If the language file is not found.
+      * @return self
+      *
+      * @throws Exception If the language file is not found.
       */
      public function init()
      {
@@ -145,13 +145,13 @@ namespace PH7\Framework\Translate
              include PH7_PATH_APP_LANG . $this->_sUserLang . '/language.php';
              date_default_timezone_set($this->_oConfig->values['language.application']['timezone']);
          }
-         else if ($this->_oConfig->load(PH7_PATH_APP_LANG . $this->_sDefaultLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . $this->_sDefaultLang . '/language.php' ))
+         elseif ($this->_oConfig->load(PH7_PATH_APP_LANG . $this->_sDefaultLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . $this->_sDefaultLang . '/language.php' ))
          {
              $this->_sLangName = $this->_sDefaultLang;
              include PH7_PATH_APP_LANG . $this->_sDefaultLang . '/language.php';
              date_default_timezone_set($this->_oConfig->values['language.application']['timezone']);
          }
-         else if ($this->_oConfig->load(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php' ))
+         elseif ($this->_oConfig->load(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php' ))
          {
              $this->_sLangName = PH7_DEFAULT_LANG;
              include PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php';
@@ -175,8 +175,9 @@ namespace PH7\Framework\Translate
      */
     private function _setEncoding()
     {
-        if (!defined('PH7_ENCODING'))
+        if (!defined('PH7_ENCODING')) {
             define('PH7_ENCODING', $this->_oConfig->values['language']['charset']);
+        }
 
         mb_internal_encoding(PH7_ENCODING);
         mb_http_output(PH7_ENCODING);
@@ -190,19 +191,21 @@ namespace PH7\Framework\Translate
 
 namespace
 {
-
- use PH7\Framework\Registry\Registry, PH7\Framework\Parse\SysVar;
+ use PH7\Framework\Parse\SysVar;
+ use PH7\Framework\Registry\Registry;
 
  /**
   * Check if GetText PHP extension exists, if not, it'll includes the GetText library.
   */
- if (!function_exists('gettext'))
+ if (!function_exists('gettext')) {
      require __DIR__ . '/Adapter/Gettext/gettext.inc.php';
+ }
 
  /**
   * Language helper function.
   *
   * @param string $sVar [, string $... ]
+  *
   * @return string Returns the text with gettext function or language in an array (this depends on whether a key language was found in the language table).
   */
  function t(...$aTokens)
@@ -223,6 +226,7 @@ namespace
   * @param string $sMsg1 Singular string.
   * @param string $sMsg2 Plurial string.
   * @param integer $iNumber
+  *
   * @return string Returns the text with ngettext function which is the correct plural form of message identified by msgid1 and msgid2 for count n.
   */
  function nt($sMsg1, $sMsg2, $iNumber)
@@ -232,5 +236,4 @@ namespace
 
      return ngettext($sMsg1, $sMsg2, $iNumber);
  }
-
 }

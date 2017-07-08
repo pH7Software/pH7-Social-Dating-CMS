@@ -18,11 +18,10 @@ use PH7\Framework\Cache\Cache;
 
 final class DbConfig
 {
-    const
-    CACHE_GROUP = 'db/config',
-    CACHE_TIME = 999000,
-    ENABLE_SITE = 'enable',
-    MAINTENANCE_SITE = 'maintenance';
+    const CACHE_GROUP = 'db/config';
+    const CACHE_TIME = 999000;
+    const ENABLE_SITE = 'enable';
+    const MAINTENANCE_SITE = 'maintenance';
 
     /**
      * Private constructor to prevent instantiation of class, because it's a static class.
@@ -155,7 +154,7 @@ final class DbConfig
      */
     public static function setSiteMode($sStatus)
     {
-        if ($sStatus != self::MAINTENANCE_SITE && $sStatus != self::ENABLE_SITE) {
+        if ($sStatus !== self::MAINTENANCE_SITE && $sStatus !== self::ENABLE_SITE) {
             exit('Wrong maintenance mode type!');
         }
 

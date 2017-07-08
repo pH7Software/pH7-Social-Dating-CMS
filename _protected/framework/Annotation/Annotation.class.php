@@ -8,27 +8,43 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Annotation
- * @version          1.0
+ * @version          1.1
  */
 
 namespace PH7\Framework\Annotation;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\CArray\CArray;
+use ReflectionClass;
 
 abstract class Annotation
 {
-
     const CACHE_GROUP = 'str/annotation';
 
     /**
-     * @access private
-     * @var object $_oCache
+     * @var object $oCache
      */
-    private $_oCache;
+    private $oCache;
+
+    /**
+     * Get an Annotation.
+     *
+     * @param string $sName The name of the annotation.
+     *
+     * @return string|null The value annotation. If the annotation name is not found, Returns NULL.
+     */
+    public function getAnnotation($sName)
+    {
+        $aAnnotations = $this->getAnnotations();
+
+        return CArray::getValueByKey($sName, $aAnnotations);
+    }
 
     /**
      * Get the annotations.
      *
-     * @access public
      * @return array
      */
     public function getAnnotations()
@@ -37,16 +53,14 @@ abstract class Annotation
 
         $this->initializeAnnotations($sClassName);
 
-        if (!$aChema = $this->_oCache->get())
-        {
+        if (!$aChema = $this->oCache->get()) {
             $aClassVars = get_class_vars($sClassName);
 
-            $oReflection = new \ReflectionClass($this);
+            $oReflection = new ReflectionClass($this);
 
             $aChema = array();
 
-            foreach ($aClassVars as $sName => $sValue)
-            {
+            foreach ($aClassVars as $sName => $sValue) {
                 $oProperty = $oReflection->getProperty($sName);
                 $sComment = $oProperty->getDocComment();
 
@@ -56,10 +70,8 @@ abstract class Annotation
                 $sKey = $sVal = null;
                 $aChema[$sName] = array();
 
-                foreach ($aComment as $sCommentLine)
-                {
-                    if (preg_match('/@(.*?): (.*)/i', $sCommentLine, $aMatches))
-                    {
+                foreach ($aComment as $sCommentLine) {
+                    if (preg_match('/@(.*?): (.*)/i', $sCommentLine, $aMatches)) {
                         $sKey = $aMatches[1];
                         $sKey = $aMatches[2];
 
@@ -72,43 +84,29 @@ abstract class Annotation
 
             $this->saveAnnotations($aChema);
         }
-        return $aChema;
-    }
 
-    /**
-     * Get an Annotation.
-     *
-     * @access public
-     * @param string $sName The name of the annotation.
-     * @return string (string | null) The value annotation. If the annotation name is not found, Returns NULL.
-     */
-    public function getAnnotation($sName)
-    {
-        $aAnnotations = $this->getAnnotations();
-        return \PH7\Framework\CArray\CArray::getValueByKey($sName, $aAnnotations);
+        return $aChema;
     }
 
     /**
      * Initialize Cache Annotations.
      *
-     * @access protected
      * @param string $sClassName
      */
     protected function initializeAnnotations($sClassName)
     {
-        $this->_oCache = (new \PH7\Framework\Cache\Cache)->start(static::CACHE_GROUP, $sClassName, null); // The last parameter is NULL, then the cache will never expire.
+        $this->oCache = (new Cache)->start(static::CACHE_GROUP, $sClassName, null); // The last parameter is NULL, then the cache will never expire
     }
 
     /**
      * Save the Annotations in the cache.
      *
-     * @access protected
      * @param array $aAnnotations
+     *
      * @return void
      */
     protected function saveAnnotations(array $aAnnotations)
     {
-        $this->_oCache->put($aAnnotations);
+        $this->oCache->put($aAnnotations);
     }
-
 }

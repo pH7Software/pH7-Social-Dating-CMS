@@ -13,19 +13,18 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use
-PH7\Framework\File\Import,
-PH7\Framework\Date\CDateTime,
-PH7\Framework\Config\Config,
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\Ip\Ip,
-PH7\Framework\File\File,
-PH7\Framework\Util\Various,
-PH7\Framework\Session\Session,
-PH7\Framework\Registry\Registry,
-PH7\Framework\Mvc\Request\Http as HttpRequest,
-PH7\Framework\Geo\Ip\Geo,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Config\Config;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\File\File;
+use PH7\Framework\File\Import;
+use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Session\Session;
+use PH7\Framework\Util\Various;
 
 class Google extends Api implements IApi
 {
@@ -102,7 +101,8 @@ class Google extends Api implements IApi
 
     /**
      * @param array $aProfile
-     * @param object \PH7\UserCoreModel $oUserModel
+     * @param UserCoreModel $oUserModel
+     *
      * @return void
      */
     public function add(array $aProfile, UserCoreModel $oUserModel)
@@ -115,7 +115,7 @@ class Google extends Api implements IApi
         $this->_aUserInfo = [
             'email' => $aProfile['email'],
             'username' => $this->_sUsername,
-            'password' => Various::genRndWord(8,30),
+            'password' => Various::genRndWord(Registration::DEFAULT_PASSWORD_LENGTH),
             'first_name' => (!empty($aProfile['given_name'])) ? $aProfile['given_name'] : '',
             'last_name' => (!empty($aProfile['family_name'])) ? $aProfile['family_name'] : '',
             'sex' => $sSex,

@@ -16,20 +16,20 @@ namespace PH7\Framework\Mvc\Router;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Translate\Lang;
-use PH7\Framework\Layout\LoadTemplate;
-use PH7\Framework\Mvc\Model\Engine\Db;
-use PH7\Framework\Registry\Registry;
 use PH7\Framework\Config\Config;
-use PH7\Framework\File\Import as FileImporter;
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Layout\Gzip\Gzip;
-use PH7\Framework\Url\Header;
-use PH7\Framework\Mvc\Request\Http;
-use PH7\Framework\Url\Uri;
-use PH7\Framework\Mvc\Router\Uri as UriRoute;
 use PH7\Framework\Error\CException\PH7Exception;
+use PH7\Framework\File\Import as FileImporter;
+use PH7\Framework\Layout\Gzip\Gzip;
+use PH7\Framework\Layout\LoadTemplate;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Router\Uri as UriRoute;
 use PH7\Framework\Pattern\Singleton;
+use PH7\Framework\Registry\Registry;
+use PH7\Framework\Translate\Lang;
+use PH7\Framework\Url\Header;
+use PH7\Framework\Url\Uri;
 
 /**
  * @class Singleton Class

@@ -14,10 +14,10 @@ namespace PH7\Framework\Parse;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Registry\Registry;
 use PH7\Framework\Core\Kernel;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Registry\Registry;
 use PH7\Framework\Session\Session;
 
 class SysVar

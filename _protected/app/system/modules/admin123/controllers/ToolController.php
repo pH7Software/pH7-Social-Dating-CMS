@@ -10,16 +10,16 @@
  */
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Layout\Gzip\Gzip;
+use PH7\Framework\Layout\Html\Security as HtmlSecurity;
+use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Backup;
-use PH7\Framework\Security\CSRF\Token;
-use PH7\Framework\Layout\Html\Security as HtmlSecurity;
-use PH7\Framework\Date\CDateTime;
-use PH7\Framework\Cache\Cache;
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
-use PH7\Framework\Layout\Gzip\Gzip;
-use PH7\Framework\Url\Header;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\CSRF\Token;
+use PH7\Framework\Url\Header;
 
 class ToolController extends Controller
 {
@@ -158,33 +158,21 @@ class ToolController extends Controller
             }
         }
 
-        if ($this->httpRequest->postExists('restore_dump'))
-        {
-            if (!$oSecurityToken->check('backup'))
-            {
+        if ($this->httpRequest->postExists('restore_dump')) {
+            if (!$oSecurityToken->check('backup')) {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
-            }
-            else
-            {
+            } else {
                 $sDumpFile = $this->httpRequest->post('dump_file');
 
-                if (!empty($sDumpFile))
-                {
-                    if ($this->file->getFileExt($sDumpFile) === Backup::SQL_FILE_EXT)
-                    {
+                if (!empty($sDumpFile)) {
+                    if ($this->file->getFileExt($sDumpFile) === Backup::SQL_FILE_EXT) {
                         $mStatus = (new Backup($sDumpFile))->restore();
-                    }
-                    elseif ($this->file->getFileExt($sDumpFile) === Backup::ARCHIVE_FILE_EXT)
-                    {
+                    } elseif ($this->file->getFileExt($sDumpFile) === Backup::ARCHIVE_FILE_EXT) {
                         $mStatus = (new Backup(PH7_PATH_BACKUP_SQL . $sDumpFile))->restoreArchive();
-                    }
-                    else
-                    {
+                    } else {
                         $mStatus = t('Dump file must be a SQL type (extension ".sql" or compressed archive ".gz")');
                     }
-                }
-                else
-                {
+                } else {
                     $mStatus = t('Please select a dump file.');
                 }
 
@@ -194,23 +182,16 @@ class ToolController extends Controller
             }
         }
 
-        if ($this->httpRequest->postExists('remove_dump'))
-        {
-            if (!$oSecurityToken->check('backup'))
-            {
+        if ($this->httpRequest->postExists('remove_dump')) {
+            if (!$oSecurityToken->check('backup')) {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
-            }
-            else
-            {
+            } else {
                 $sDumpFile = $this->httpRequest->post('dump_file');
 
-                if (!empty($sDumpFile))
-                {
+                if (!empty($sDumpFile)) {
                     $this->file->deleteFile(PH7_PATH_BACKUP_SQL . $sDumpFile);
                     $this->design->setFlashMsg(t('Dump file successfully deleted!'));
-                }
-                else
-                {
+                } else {
                     $this->design->setFlashMsg(t('Please select a dump file.'), 'error');
                 }
             }
@@ -219,31 +200,22 @@ class ToolController extends Controller
         unset($oSecurityToken);
 
 
-        if ($this->httpRequest->postExists('restore_sql_file'))
-        {
-            if (!empty($_FILES['sql_file']['tmp_name']))
-            {
+        if ($this->httpRequest->postExists('restore_sql_file')) {
+            if (!empty($_FILES['sql_file']['tmp_name'])) {
                 $sNameFile = $_FILES['sql_file']['name'];
                 $sTmpFile = $_FILES['sql_file']['tmp_name'];
 
-                if ($this->file->getFileExt($sNameFile) === Backup::SQL_FILE_EXT)
-                {
+                if ($this->file->getFileExt($sNameFile) === Backup::SQL_FILE_EXT) {
                     $mStatus = (new Backup($sTmpFile))->restore();
-                }
-                elseif ($this->file->getFileExt($sNameFile) === Backup::ARCHIVE_FILE_EXT)
-                {
+                } elseif ($this->file->getFileExt($sNameFile) === Backup::ARCHIVE_FILE_EXT) {
                     $mStatus = (new Backup($sTmpFile))->restoreArchive();
-                }
-                else
-                {
+                } else {
                     $mStatus = t('Dump file must be a SQL type (extension ".sql" or compressed archive ".gz")');
                 }
 
                 // Remove the temporary file
                 $this->file->deleteFile($sTmpFile);
-            }
-            else
-            {
+            } else {
                 $mStatus = t('Please select a dump SQL file.');
             }
 
@@ -257,7 +229,7 @@ class ToolController extends Controller
 
     public function optimize()
     {
-        $this->_checkPost();
+        $this->checkPost();
 
         Db::optimize();
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been optimized!'));
@@ -265,7 +237,7 @@ class ToolController extends Controller
 
     public function repair()
     {
-        $this->_checkPost();
+        $this->checkPost();
 
         Db::repair();
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'tool', 'index'), t('All tables have been repaired!'));
@@ -276,19 +248,19 @@ class ToolController extends Controller
      *
      * @return string The text by exit() function.
      */
-     private function _checkPost()
-     {
-         if (!$this->_isPost()) {
-             exit(Form::wrongRequestMethodMsg('POST'));
-         }
-     }
+    private function checkPost()
+    {
+        if (!$this->isPost()) {
+            exit(Form::wrongRequestMethodMsg('POST'));
+        }
+    }
 
     /**
      * Checks if the request been made ​​by the post method.
      *
      * @return boolean
      */
-    private function _isPost()
+    private function isPost()
     {
         return $this->httpRequest->postExists('is');
     }

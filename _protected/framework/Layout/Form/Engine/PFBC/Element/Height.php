@@ -4,6 +4,7 @@
  * By pH7 (Pierre-Henry SORIA).
  */
 namespace PFBC\Element;
+
 use PH7\Framework\Math\Measure\Height as H;
 
 class Height extends Select
@@ -13,7 +14,7 @@ class Height extends Select
     {
         $aOptions = array();
 
-        for($iHeight = 120; $iHeight <= 220; $iHeight+=2)
+        for ($iHeight = 120; $iHeight <= 220; $iHeight += 2)
             $aOptions[$iHeight] = (new H($iHeight))->display();
 
         parent::__construct($sLabel, $sName, $aOptions, $aProperties);

@@ -10,8 +10,7 @@
 /**
  * @class Wall
  */
-function Wall()
-{
+function Wall() {
     /**
      * @property oMe
      * @type {Object} This
@@ -29,14 +28,15 @@ function Wall()
      *
      * @async
      */
-    this.show = function()
-    {
-        $.post(pH7Url.base + this.sUrl, {type : 'show'}).success(function(sHtmlData) {
+    this.show = function () {
+        $.post(pH7Url.base + this.sUrl, {type: 'show'}).success(function (sHtmlData) {
             $('#wall').html(sHtmlData);
-        }).error(function() {
+        }).error(function () {
             $('.msg').addClass('alert alert-danger').text(pH7LangCore.unable_retrive_feeds).delay(2000).fadeOut();
         });
-        setTimeout(function() {oMe.show()}, 5000);
+        setTimeout(function () {
+            oMe.show()
+        }, 5000);
     };
 
     /**
@@ -44,14 +44,15 @@ function Wall()
      *
      * @async
      */
-    this.showComment = function()
-    {
-        $.post(pH7Url.base + this.sUrl, {type : 'showCommentProfile'}).success(function(sHtmlData) {
+    this.showComment = function () {
+        $.post(pH7Url.base + this.sUrl, {type: 'showCommentProfile'}).success(function (sHtmlData) {
             $('#wall').html(sHtmlData);
-        }).error(function() {
+        }).error(function () {
             $('.msg').addClass('alert alert-danger').text(pH7LangCore.unable_retrive_feeds).delay(2000).fadeOut();
         });
-        setTimeout(function() {oMe.showComment()}, 5000);
+        setTimeout(function () {
+            oMe.showComment()
+        }, 5000);
     };
 
     /**
@@ -59,11 +60,10 @@ function Wall()
      *
      * @async
      */
-    this.add = function()
-    {
+    this.add = function () {
         var sPost = $('.wall_post').val();
 
-        $.post(pH7Url.base + this.sUrl, {type : 'add', 'post' : sPost}, function(oData) {
+        $.post(pH7Url.base + this.sUrl, {type: 'add', 'post': sPost}, function (oData) {
             oMe._output(oData);
         }, 'json');
     };
@@ -74,11 +74,10 @@ function Wall()
      *
      * @async
      */
-    this.edit = function()
-    {
+    this.edit = function () {
         var sPost = $('.wall_post').val();
 
-        $.post(pH7Url.base + this.sUrl, {type : 'edit', 'post' : sPost}, function(oData) {
+        $.post(pH7Url.base + this.sUrl, {type: 'edit', 'post': sPost}, function (oData) {
             oMe._output(oData);
         }, 'json');
     };
@@ -89,11 +88,10 @@ function Wall()
      *
      * @async
      */
-    this.del = function()
-    {
+    this.del = function () {
         var sPost = $('.wall_id').val();
 
-        $.post(pH7Url.base + this.sUrl, {type : 'delete', 'post' : sPost}, function(oData) {
+        $.post(pH7Url.base + this.sUrl, {type: 'delete', 'post': sPost}, function (oData) {
             oMe._output(oData);
         }, 'json');
     };
@@ -104,13 +102,12 @@ function Wall()
      * @param {Object} Data.
      * @return {Void} Set data to HTML contents.
      */
-    this._output = function(oData)
-    {
+    this._output = function (oData) {
         if (oData.status == 1) {
             $('.msg').addClass('alert alert-success');
-            $('#wall_' +  oData.msgId).hide("slow");
+            $('#wall_' + oData.msgId).hide("slow");
         } else {
-           $('.msg').addClass('alert alert-danger');
+            $('.msg').addClass('alert alert-danger');
         }
         $('.msg').text(oData.txt).delay(2000).fadeOut();
     };

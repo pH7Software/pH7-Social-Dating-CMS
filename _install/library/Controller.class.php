@@ -35,10 +35,10 @@ abstract class Controller implements Controllable
 
     /**
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW" and 7.* is NaOH
+     * 5.* was "pCO", 6.* was "WoW" and 7.*, 8.* is NaOH
      */
     const SOFTWARE_VERSION_NAME = 'NaOH';
-    const SOFTWARE_VERSION = '7.1.3';
+    const SOFTWARE_VERSION = '8.0.2';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';
@@ -69,7 +69,7 @@ abstract class Controller implements Controllable
         $this->oView->use_sub_dirs = true;
         $this->oView->setTemplateDir(PH7_ROOT_INSTALL . 'views/' . self::DEFAULT_THEME);
         $this->oView->setCompileDir(PH7_ROOT_INSTALL . 'data/caches/smarty_compile');
-        $this->oView->setCacheDir(PH7_ROOT_INSTALL  . 'data/caches/smarty_cache');
+        $this->oView->setCacheDir(PH7_ROOT_INSTALL . 'data/caches/smarty_cache');
         $this->oView->setPluginsDir(PH7_ROOT_INSTALL . 'library/Smarty/plugins');
         // Smarty Cache
         $this->oView->caching = 0; // 0 = Cache disabled |  1 = Cache never expires | 2 = Set the cache duration at "cache_lifetime" attribute

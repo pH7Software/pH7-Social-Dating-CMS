@@ -12,26 +12,28 @@
  */
 
 namespace PH7\Framework\Xml\Feed;
+
 defined('PH7') or exit('Restricted access');
 
-class Rss extends \DomDocument
+use DomDocument;
+
+class Rss extends DomDocument
 {
+    const DOCUMENT_VERSION = '2.0';
 
     /**
      * RSS channel object.
      *
-     * @access private
-     * @var object $_oChannel
+     * @var \DOMNode $_oChannel
      */
     private $_oChannel;
 
     /**
-     * @constructor Sets up the DOM environment.
-     * @access public
+     * Sets up the DOM environment.
+     *
      * @param string $sTitle The site title
      * @param string $sLink The link to the site
      * @param string $sDescription The site description
-     * @return void
      */
     public function __construct($sTitle, $sLink, $sDescription)
     {
@@ -42,7 +44,7 @@ class Rss extends \DomDocument
         $oRoot = $this->appendChild($this->createElement('rss'));
 
         // Sets to RSS version 2
-        $oRoot->setAttribute('version', '2.0');
+        $oRoot->setAttribute('version', self::DOCUMENT_VERSION);
 
         // Sets the channel node
         $this->_oChannel = $oRoot->appendChild($this->createElement('channel'));
@@ -57,31 +59,27 @@ class Rss extends \DomDocument
     /**
      * Adding the Items to the RSS Feed.
      *
-     * @access public
      * @param array $aItems
-     * @return object this
+     *
+     * @return self
      */
     public function addItem($aItems)
     {
         // Create an item
         $oItem = $this->createElement('item');
 
-        foreach ($aItems as $sElement => $sValue)
-        {
-            switch ($sElement)
-            {
+        foreach ($aItems as $sElement => $mValue) {
+            switch ($sElement) {
                 // Create the sub elements here
                 case 'image':
                 case 'skipHour':
-                case 'skipDay':
-                {
-                    $oIm = $this->createElement('image');
-                    $this->_oChannel->appendChild($oIm);
+                case 'skipDay': {
+                    $oImage = $this->createElement('image');
+                    $this->_oChannel->appendChild($oImage);
 
-                    foreach ($aValue as $sSubElement => $sSubValue)
-                    {
+                    foreach ($mValue as $sSubElement => $sSubValue) {
                         $oSub = $this->createElement($sSubElement, $sSubValue);
-                        $oIm->appendChild($oSub);
+                        $oImage->appendChild($oSub);
                     }
                 }
                 break;
@@ -103,7 +101,7 @@ class Rss extends \DomDocument
                 case 'rating':
                 case 'textInput':
                 case 'source':
-                    $oItem->appendChild($this->createElement($sElement, $sValue));
+                    $oItem->appendChild($this->createElement($sElement, $mValue));
                 break;
             }
         }
@@ -118,12 +116,10 @@ class Rss extends \DomDocument
     /**
      * Create the XML.
      *
-     * @access public
      * @return string The XML string
      */
     public function __toString()
     {
         return $this->saveXML();
     }
-
 }

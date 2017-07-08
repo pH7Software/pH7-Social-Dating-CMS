@@ -4,4 +4,6 @@
  * License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  */
 
-.paypal_logo{ margin:-48px 40px 12px; }
+.paypal_logo {
+    margin: -48px 40px 12px;
+}

@@ -10,12 +10,12 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Util\Various;
 use PH7\Framework\Cookie\Cookie;
-use PH7\Framework\Ip\Ip;
 use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form
 {

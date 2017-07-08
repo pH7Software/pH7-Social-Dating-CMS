@@ -7,11 +7,10 @@
  */
 namespace PH7;
 
-use
-PH7\Framework\Mvc\Model\DbConfig,
-PH7\Framework\File\File,
-PH7\Framework\Mvc\Request\Http,
-PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\File\File;
+use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Router\Uri;
 
 class MetaMainForm
 {

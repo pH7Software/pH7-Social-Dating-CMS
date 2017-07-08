@@ -8,12 +8,15 @@
  * @package        PH7 / App / System / Module / Payment / Controller
  * @version        1.0
  */
+
 namespace PH7;
-use PH7\Framework\Url\Header, PH7\Framework\Mvc\Router\Uri;
+
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
-
     public function index()
     {
         $this->sTitle = t('Administration of Payment System');
@@ -34,12 +37,9 @@ class AdminController extends MainController
     {
         $oMembership = $this->oPayModel->getMemberships();
 
-        if (empty($oMembership))
-        {
+        if (empty($oMembership)) {
             $this->displayPageNotFound(t('No membership found!'));
-        }
-        else
-        {
+        } else {
             $this->sTitle = t('Memberships List');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
@@ -68,9 +68,11 @@ class AdminController extends MainController
     {
         $this->oPayModel->deleteMembership( $this->httpRequest->post('id') );
         /* Clean UserCoreModel Cache */
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
-        Header::redirect(Uri::get('payment', 'admin', 'membershiplist'), t('The Membership has been removed!'));
+        Header::redirect(
+            Uri::get('payment', 'admin', 'membershiplist'),
+            t('The Membership has been removed!')
+        );
     }
-
 }
