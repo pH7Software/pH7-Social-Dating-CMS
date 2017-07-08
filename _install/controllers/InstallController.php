@@ -327,7 +327,7 @@ class InstallController extends Controller
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
                                                         // We finalise by putting the correct permission to the config files
-                                                        $this->_chmodConfigFiles();
+                                                        $this->chmodConfigFiles();
 
                                                         $_SESSION['step4'] = 1;
 
@@ -435,9 +435,9 @@ class InstallController extends Controller
 
                             // Enable/Disable the modules according to the chosen niche
                             foreach ($aModUpdate as $sModName => $sStatus)
-                                $this->_updateMods($DB, $sModName, $sStatus);
+                                $this->updateMods($DB, $sModName, $sStatus);
 
-                            $this->_updateSettings($aSettingUpdate);
+                            $this->updateSettings($aSettingUpdate);
 
                             // Set the theme for the chosen niche
                             $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
@@ -538,7 +538,7 @@ class InstallController extends Controller
     /**
      * Send an email to say the installation is now done, and give some information...
      */
-    private function _sendWelcomeEmail()
+    private function sendWelcomeEmail()
     {
         global $LANG;
 
@@ -551,14 +551,14 @@ class InstallController extends Controller
         send_mail($aParams);
     }
 
-    private function _removeSessions()
+    private function removeSessions()
     {
         $_SESSION = [];
         session_unset();
         session_destroy();
     }
 
-    private function _removeCookies()
+    private function removeCookies()
     {
         $sCookieName = Controller::SOFTWARE_PREFIX_COOKIE_NAME . '_install_lang';
         // We are asking the browser to delete the cookie.
@@ -576,7 +576,7 @@ class InstallController extends Controller
      *
      * @return integer|boolean Returns the number of rows on success or FALSE on failure.
      */
-    private function _updateMods(Db $oDb, $sModName, $sStatus)
+    private function updateMods(Db $oDb, $sModName, $sStatus)
     {
         $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'SysModsEnabled SET enabled = :status WHERE folderName = :modName LIMIT 1';
         $rStmt = $oDb->prepare($sSql);
@@ -588,7 +588,7 @@ class InstallController extends Controller
      *
      * @return void
      */
-    private function _updateSettings(array $aParams)
+    private function updateSettings(array $aParams)
     {
         // Initialize the site's database to get "\PH7\Framework\Mvc\Model\Engine\Db" class working (as it uses that DB and not the installer one)
         Framework\Mvc\Router\FrontController::getInstance()->_databaseInitialize();
@@ -597,8 +597,15 @@ class InstallController extends Controller
         Framework\Mvc\Model\DbConfig::setSocialWidgets($aParams['social_media_widgets']);
     }
 
+    /***** Set the correct permission to the config files *****/
+    private function chmodConfigFiles()
+    {
+        @chmod(PH7_PATH_APP_CONFIG . 'config.ini', 0644);
+        @chmod(PH7_ROOT_PUBLIC . '_constants.php', 0644);
+    }
+
     /***** Get the loading image *****/
-    private function _loadImg()
+    private function loadImg()
     {
         global $LANG;
 
