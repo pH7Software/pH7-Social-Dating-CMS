@@ -88,8 +88,8 @@ class MailFormProcess extends Form
     protected function sendMail($iRecipientId, $iMsgId, UserCoreModel $oUserModel)
     {
         $this->view->content = t('Hello %0%!', $this->httpRequest->post('recipient')) . '<br />' .
-        t('You received a new message from %0%', $this->session->get('member_username')) . '<br />' .
-        '<a href="' . Uri::get('mail', 'main', 'inbox', $iMsgId) . '">' . t('Click here') . '</a>' . t('to read your message.');
+            t('You received a new message from %0%', $this->session->get('member_username')) . '<br />' .
+            '<a href="' . Uri::get('mail', 'main', 'inbox', $iMsgId) . '">' . t('Click here') . '</a>' . t('to read your message.');
 
         $sRecipientEmail = $oUserModel->getEmail($iRecipientId);
 

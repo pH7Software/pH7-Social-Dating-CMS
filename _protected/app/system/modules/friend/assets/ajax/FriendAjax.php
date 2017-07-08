@@ -42,15 +42,15 @@ class FriendAjax extends Core
         switch ($this->httpRequest->post('type')) {
             case 'add':
                 $this->add();
-            break;
+                break;
 
             case 'approval';
                 $this->approval();
-            break;
+                break;
 
             case 'delete':
                 $this->delete();
-            break;
+                break;
 
             default:
                 Http::setHeadersByCode(400);
@@ -149,8 +149,8 @@ class FriendAjax extends Core
         $sSiteName = DbConfig::getSetting('siteName');
 
         $this->view->content = t('Hello %0%!', $sFriendUsername) . '<br />' .
-        t('<strong>%0%</strong> sent you a friendship request on %1%.', $this->session->get('member_username'), $sSiteName) . '<br />' .
-        t('<a href="%0%">Click here</a> to see your friend request.', Uri::get('friend', 'main', 'index'));
+            t('<strong>%0%</strong> sent you a friendship request on %1%.', $this->session->get('member_username'), $sSiteName) . '<br />' .
+            t('<a href="%0%">Click here</a> to see your friend request.', Uri::get('friend', 'main', 'index'));
 
         /* Because we work in Ajax, the constant "PH7_TPL_NAME" is not yet defined.
          * So we use the constant "PH7_DEFAULT_THEME" is already defined.

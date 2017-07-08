@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
@@ -54,7 +55,7 @@ class AdminController extends MainController
             $this->sMsg = t('Oops! The Note could not be approved!');
         }
 
-        Header::redirect(Uri::get('note','admin','unmoderated'), $this->sMsg);
+        Header::redirect(Uri::get('note', 'admin', 'unmoderated'), $this->sMsg);
     }
 
     public function disapproved()

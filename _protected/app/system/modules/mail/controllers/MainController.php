@@ -293,10 +293,10 @@ class MainController extends Controller
             $this->httpRequest->get('order'),
             $this->httpRequest->get('sort'),
             $this->oPage->getFirstItem(),
-             $this->oPage->getNbItemsPerPage(),
-             $this->_iProfileId,
-             $sType
-         );
+            $this->oPage->getNbItemsPerPage(),
+            $this->_iProfileId,
+            $sType
+        );
 
         if (empty($oSearch)) {
             $this->sTitle = t('Your search did not match any of your messages.');

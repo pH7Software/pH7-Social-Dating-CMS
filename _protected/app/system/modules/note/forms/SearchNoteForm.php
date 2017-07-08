@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -15,7 +16,7 @@ class SearchNoteForm
     {
         $aOptions = ['description' => t('Enter Name, Keyword of posts, Author (username, first name, last name) or ID of a note.')];
         if (!empty($iWidth)) {
-            $aOptions += ['style' => 'width:' . ((int)$iWidth*1.09) . 'px'];
+            $aOptions += ['style' => 'width:' . ((int)$iWidth * 1.09) . 'px'];
         }
 
         $oForm = new \PFBC\Form('form_search', $iWidth);
