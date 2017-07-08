@@ -219,8 +219,8 @@ class AdminController extends Controller
     public function delete()
     {
         $aData = explode('_', $this->httpRequest->post('id'));
-        $iId = (int) $aData[0];
-        $sUsername = (string) $aData[1];
+        $iId = (int)$aData[0];
+        $sUsername = (string)$aData[1];
 
         $this->oAff->delete($iId, $sUsername);
         Header::redirect(Uri::get('affiliate', 'admin', 'browse'), t('The affiliate has been deleted.'));
@@ -262,17 +262,13 @@ class AdminController extends Controller
 
     public function deleteAll()
     {
-        if(!(new Framework\Security\CSRF\Token)->check('aff_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('aff_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
                 $aData = explode('_', $sAction);
-                $iId = (int) $aData[0];
-                $sUsername = (string) $aData[1];
+                $iId = (int)$aData[0];
+                $sUsername = (string)$aData[1];
 
                 $this->oAff->delete($iId, $sUsername);
             }

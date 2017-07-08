@@ -42,7 +42,9 @@ class SearchCoreModel
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Order By method.

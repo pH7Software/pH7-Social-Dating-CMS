@@ -39,12 +39,11 @@ class LoginFormProcess extends Form implements LoginableForm
         $sIpLogin = DbConfig::getSetting('ipLogin');
 
         /*** Check if the connection is not locked ***/
-        $bIsLoginAttempt = (bool) DbConfig::getSetting('isAdminLoginAttempt');
-        $iMaxAttempts = (int) DbConfig::getSetting('maxAdminLoginAttempts');
-        $iTimeDelay = (int) DbConfig::getSetting('loginAdminAttemptTime');
+        $bIsLoginAttempt = (bool)DbConfig::getSetting('isAdminLoginAttempt');
+        $iMaxAttempts = (int)DbConfig::getSetting('maxAdminLoginAttempts');
+        $iTimeDelay = (int)DbConfig::getSetting('loginAdminAttemptTime');
 
-        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Admins'))
-        {
+        if ($bIsLoginAttempt && !$oSecurityModel->checkLoginAttempt($iMaxAttempts, $iTimeDelay, $sEmail, $this->view, 'Admins')) {
             \PFBC\Form::setError('form_admin_login', Form::loginAttemptsExceededMsg($iTimeDelay));
             return; // Stop execution of the method.
         }

@@ -30,10 +30,9 @@ class BlogCoreModel extends Model
         // We do not have a long duration of the cache for the changes of positions to be easily updated on the list of Blogs of the home page.
         $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder, 3600);
 
-        if (!$oData = $this->cache->get())
-        {
-            $iOffset = (int) $iOffset;
-            $iLimit = (int) $iLimit;
+        if (!$oData = $this->cache->get()) {
+            $iOffset = (int)$iOffset;
+            $iLimit = (int)$iLimit;
 
             $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 

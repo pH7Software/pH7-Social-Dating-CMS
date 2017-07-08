@@ -33,8 +33,8 @@ class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
         $this->cache->start(self::CACHE_GROUP, 'posts' . $iOffset . $iLimit . $sOrder . $iApproved, 3600);
 
         if (!$oData = $this->cache->get()) {
-            $iOffset = (int) $iOffset;
-            $iLimit = (int) $iLimit;
+            $iOffset = (int)$iOffset;
+            $iLimit = (int)$iLimit;
 
             $sSqlApproved = (isset($iApproved)) ? ' WHERE approved = :approved' : '';
             $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
@@ -64,7 +64,7 @@ class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
         $this->cache->start(self::CACHE_GROUP, 'totalPosts', static::CACHE_TIME);
 
         if (!$iData = $this->cache->get()) {
-            $iDay = (int) $iDay;
+            $iDay = (int)$iDay;
             $sSqlWhere = (isset($iApproved)) ? 'WHERE' : '';
             $sSqlAnd = (isset($iApproved) && $iDay > 0 ? ' AND' : ($iDay > 0 ? 'WHERE' : ''));
             $sSqlApproved = (isset($iApproved)) ? ' approved = :approved' : '';
@@ -75,7 +75,7 @@ class NoteCoreModel extends Framework\Mvc\Model\Engine\Model
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->totalPosts;
+            $iData = (int)$oRow->totalPosts;
             unset($oRow);
             $this->cache->put($iData);
         }

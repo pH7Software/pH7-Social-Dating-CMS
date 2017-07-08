@@ -17,8 +17,8 @@ class GameCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function get($sTitle = null, $iGameId = null, $iOffset, $iLimit, $sOrder = SearchCoreModel::NAME)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 

@@ -71,7 +71,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
     public function totalLogins($sTable = 'Members', $iDay = 0, $sGenger = 'all')
     {
         Framework\Mvc\Model\Engine\Util\Various::checkModelTable($sTable);
-        $iDay = (int) $iDay;
+        $iDay = (int)$iDay;
 
         $bIsDay = ($iDay > 0);
         $bIsGenger = ($sTable === 'Members' ? ($sGenger === 'male' || $sGenger === 'female' || $sGenger === 'couple') : ($sGenger === 'male' || $sGenger === 'female'));
@@ -79,12 +79,12 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
         $sSqlDay = $bIsDay ? ' AND (lastActivity + INTERVAL :day DAY) > NOW()' : '';
         $sSqlGender = $bIsGenger ? ' AND sex = :gender' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) AS totalLogins FROM' . Db::prefix($sTable) . 'WHERE username <> \''.PH7_GHOST_USERNAME.'\'' . $sSqlDay . $sSqlGender);
-        if($bIsDay) $rStmt->bindValue(':day', $iDay, \PDO::PARAM_INT);
-        if($bIsGenger) $rStmt->bindValue(':gender', $sGenger, \PDO::PARAM_STR);
+        $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) AS totalLogins FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\'' . $sSqlDay . $sSqlGender);
+        if ($bIsDay) $rStmt->bindValue(':day', $iDay, \PDO::PARAM_INT);
+        if ($bIsGenger) $rStmt->bindValue(':gender', $sGenger, \PDO::PARAM_STR);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-        return (int) $oRow->totalLogins;
+        return (int)$oRow->totalLogins;
     }
 
     /**
@@ -111,14 +111,14 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
 
     public function totalMails($iDay = 0)
     {
-        $iDay = (int) $iDay;
+        $iDay = (int)$iDay;
         $sSqlDay = ($iDay > 0) ? ' WHERE (sendDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMails FROM' . Db::prefix('Messages') . $sSqlDay);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return (int) $oRow->totalMails;
+        return (int)$oRow->totalMails;
     }
 
     public function totalProfileComments($iDay = 0)

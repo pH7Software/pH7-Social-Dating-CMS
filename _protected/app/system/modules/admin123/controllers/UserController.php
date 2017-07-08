@@ -221,15 +221,11 @@ class UserController extends Controller
 
     public function disapproveAll($iId)
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
-                $iId = (int) explode('_', $sAction)[0];
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
+                $iId = (int)explode('_', $sAction)[0];
                 $this->sMsg = $this->_moderateRegistration($iId, 0);
             }
         }
@@ -268,8 +264,8 @@ class UserController extends Controller
     public function delete()
     {
         $aData = explode('_', $this->httpRequest->post('id'));
-        $iId = (int) $aData[0];
-        $sUsername = (string) $aData[1];
+        $iId = (int)$aData[0];
+        $sUsername = (string)$aData[1];
 
         $this->oAdmin->delete($iId, $sUsername);
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), t('The profile has been deleted.'));
@@ -277,15 +273,11 @@ class UserController extends Controller
 
     public function banAll()
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
-                $iId = (int) explode('_', $sAction)[0];
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
+                $iId = (int)explode('_', $sAction)[0];
 
                 $this->oAdminModel->ban($iId, 1);
 
@@ -299,15 +291,11 @@ class UserController extends Controller
 
     public function unBanAll()
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
-                $iId = (int) explode('_', $sAction)[0];
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
+                $iId = (int)explode('_', $sAction)[0];
 
                 $this->oAdminModel->ban($iId, 0);
                 $this->oAdmin->clearReadProfileCache($iId);
@@ -320,17 +308,13 @@ class UserController extends Controller
 
     public function deleteAll()
     {
-        if(!(new Framework\Security\CSRF\Token)->check('user_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $sAction)
-            {
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $sAction) {
                 $aData = explode('_', $sAction);
-                $iId = (int) $aData[0];
-                $sUsername = (string) $aData[1];
+                $iId = (int)$aData[0];
+                $sUsername = (string)$aData[1];
 
                 $this->oAdmin->delete($iId, $sUsername);
             }

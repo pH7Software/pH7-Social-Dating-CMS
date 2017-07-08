@@ -97,9 +97,9 @@ class AffiliateModel extends AffiliateCoreModel
      */
     public function searchAff($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
@@ -128,7 +128,7 @@ class AffiliateModel extends AffiliateCoreModel
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            $mData = (int) $oRow->totalUsers;
+            $mData = (int)$oRow->totalUsers;
             unset($oRow);
         }
         Db::free($rStmt);
@@ -150,7 +150,7 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Affiliates') . '(email, username, password, firstName, lastName, sex, birthDate, bankAccount, ip, joinDate, lastActivity)
         VALUES (:email, :username, :password, :firstName, :lastName, :sex, :birthDate, :bankAccount, :ip, :joinDate, :lastActivity)');
 
-        $rStmt->bindValue(':email',   trim($aData['email']), \PDO::PARAM_STR);
+        $rStmt->bindValue(':email', trim($aData['email']), \PDO::PARAM_STR);
         $rStmt->bindValue(':username', trim($aData['username']), \PDO::PARAM_STR);
         $rStmt->bindValue(':password', Security::hashPwd($aData['password']), \PDO::PARAM_STR);
         $rStmt->bindValue(':firstName', $aData['first_name'], \PDO::PARAM_STR);
@@ -162,7 +162,7 @@ class AffiliateModel extends AffiliateCoreModel
         $rStmt->bindValue(':joinDate', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->execute();
-        $this->setKeyId( Db::getInstance()->lastInsertId() ); // Set the affiliate's ID
+        $this->setKeyId(Db::getInstance()->lastInsertId()); // Set the affiliate's ID
         Db::free($rStmt);
         $this->setInfoFields($aData);
 

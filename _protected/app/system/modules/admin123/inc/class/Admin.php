@@ -35,7 +35,7 @@ class Admin extends AdminCore
      */
     public function delete($iProfileId, $sUsername)
     {
-        $iProfileId = (int) $iProfileId;
+        $iProfileId = (int)$iProfileId;
 
         if (AdminCore::isRootProfileId($iProfileId)) {
             exit('You cannot delete the Root Administrator!');

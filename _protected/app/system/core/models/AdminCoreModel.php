@@ -58,12 +58,12 @@ class AdminCoreModel extends UserCoreModel
      */
     public function searchUser($mWhat, $sWhere, $iGroupId, $iBanned, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mWhat = trim($mWhat);
 
-        $sSqlLimit = (!$bCount) ?  ' LIMIT :offset, :limit' : '';
+        $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? 'm.*, g.name AS membershipName' : 'COUNT(m.profileId) AS totalUsers';
 
         $sSqlQuery = (!empty($iBanned)) ? '(ban = 1) AND ' : '';
@@ -91,12 +91,10 @@ class AdminCoreModel extends UserCoreModel
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return $oRow;
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            return (int) $oRow->totalUsers;
+            return (int)$oRow->totalUsers;
         }
     }
 
@@ -111,8 +109,8 @@ class AdminCoreModel extends UserCoreModel
     {
         Various::checkModelTable($sTable);
 
-        $iProfileId = (int) $iProfileId;
-        $iBan = (int) $iBan;
+        $iProfileId = (int)$iProfileId;
+        $iBan = (int)$iBan;
 
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET ban = :ban WHERE profileId = :profileId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);

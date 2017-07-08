@@ -72,8 +72,8 @@ class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function getMessage($iTopicId, $iMessageId = null, $iProfileId = null, $iApproved, $iOffset, $iLimit, $sSort = Db::ASC)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sSqlMessageId = (!empty($iMessageId)) ? ' AND msg.messageId = :messageId ' : '';
         $sSqlProfileId = (!empty($iProfileId)) ? ' AND msg.profileId = :profileId ' : '';

@@ -165,9 +165,9 @@ class DatabaseCoreCron extends Cron
      */
     protected function cleanData()
     {
-        $iCleanComment = (int) DbConfig::getSetting('cleanComment');
-        $iCleanMsg = (int) DbConfig::getSetting('cleanMsg');
-        $iCleanMessenger = (int) DbConfig::getSetting('cleanMessenger');
+        $iCleanComment = (int)DbConfig::getSetting('cleanComment');
+        $iCleanMsg = (int)DbConfig::getSetting('cleanMsg');
+        $iCleanMessenger = (int)DbConfig::getSetting('cleanMessenger');
 
         // If the option is enabled for Comments
         if ($iCleanComment > 0) {

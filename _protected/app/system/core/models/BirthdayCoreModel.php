@@ -35,9 +35,9 @@ class BirthdayCoreModel
         $bIsLimit = (null !== $iOffset && null !== $iLimit);
         $bIsSex = ($sGender !== self::ALL);
 
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sSqlLimit = (!$bCount && $bIsLimit) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(profileId) AS totalBirths';
@@ -48,25 +48,21 @@ class BirthdayCoreModel
         $rStmt->bindValue(':date', '%' . (new CDateTime)->get()->date('-m-d'), \PDO::PARAM_STR);
         if ($bIsSex) $rStmt->bindValue(':sex', $sGender, \PDO::PARAM_STR);
 
-        if (!$bCount && $bIsLimit)
-        {
+        if (!$bCount && $bIsLimit) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return $oRow;
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            return (int) $oRow->totalBirths;
+            return (int)$oRow->totalBirths;
         }
     }
 

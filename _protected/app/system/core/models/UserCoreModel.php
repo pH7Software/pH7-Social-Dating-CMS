@@ -156,7 +156,7 @@ class UserCoreModel extends Model
     public function total($sTable = 'Members', $iDay = 0, $sGenger = 'all')
     {
         Various::checkModelTable($sTable);
-        $iDay = (int) $iDay;
+        $iDay = (int)$iDay;
 
         $bIsDay = ($iDay > 0);
         $bIsGenger = ($sTable === 'Members' ? ($sGenger === 'male' || $sGenger === 'female' || $sGenger === 'couple') : ($sGenger === 'male' || $sGenger === 'female'));
@@ -174,7 +174,7 @@ class UserCoreModel extends Model
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return (int) $oRow->totalUsers;
+        return (int)$oRow->totalUsers;
     }
 
     /**
@@ -281,9 +281,9 @@ class UserCoreModel extends Model
      */
     public function search(array $aParams, $bCount, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $bIsFirstName = !empty($aParams[SearchQueryCore::FIRST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::FIRST_NAME]);
         $bIsMiddleName = !empty($aParams[SearchQueryCore::MIDDLE_NAME]) && Str::noSpaces($aParams[SearchQueryCore::MIDDLE_NAME]);
@@ -433,8 +433,8 @@ class UserCoreModel extends Model
      */
     public function isOnline($iProfileId, $iTime = 1)
     {
-        $iProfileId = (int) $iProfileId;
-        $iTime = (int) $iTime;
+        $iProfileId = (int)$iProfileId;
+        $iTime = (int)$iTime;
 
         $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId
             AND userStatus = 1 AND lastActivity >= DATE_SUB(:currentTime, INTERVAL :time MINUTE) LIMIT 1');
@@ -476,7 +476,7 @@ class UserCoreModel extends Model
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->userStatus;
+            $iData = (int)$oRow->userStatus;
             unset($oRow);
             $this->cache->put($iData);
         }
@@ -885,8 +885,8 @@ class UserCoreModel extends Model
      */
     public function delete($iProfileId, $sUsername)
     {
-        $sUsername = (string) $sUsername;
-        $iProfileId = (int) $iProfileId;
+        $sUsername = (string)$sUsername;
+        $iProfileId = (int)$iProfileId;
 
         if ($sUsername === PH7_GHOST_USERNAME) {
             exit('You cannot delete this profile!');
@@ -1010,10 +1010,10 @@ class UserCoreModel extends Model
     {
         $bIsLimit = $iOffset !== null && $iLimit !== null;
         $bHideUserLogged = !empty($this->iProfileId);
-        $bOnlyAvatarsSet = (bool) DbConfig::getSetting('profileWithAvatarSet');
+        $bOnlyAvatarsSet = (bool)DbConfig::getSetting('profileWithAvatarSet');
 
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sOrder = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 
@@ -1096,7 +1096,7 @@ class UserCoreModel extends Model
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            return (int) $oRow->totalUsers;
+            return (int)$oRow->totalUsers;
         }
 
     }
@@ -1113,7 +1113,7 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'privacySetting' . $iProfileId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $iProfileId = (int) $iProfileId;
+            $iProfileId = (int)$iProfileId;
 
             $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('MembersPrivacy') . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
@@ -1154,11 +1154,11 @@ class UserCoreModel extends Model
             if ($rStmt->rowCount() === 0) {
                 return false;
             } else {
-               $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-               Db::free($rStmt);
-               $iData = (int) $oRow->profileId;
-               unset($oRow);
-               $this->cache->put($iData);
+                $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+                Db::free($rStmt);
+                $iData = (int)$oRow->profileId;
+                unset($oRow);
+                $this->cache->put($iData);
             }
         }
 
@@ -1359,7 +1359,7 @@ class UserCoreModel extends Model
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $sData = (int) $oRow->groupId;
+            $sData = (int)$oRow->groupId;
             unset($oRow);
             $this->cache->put($sData);
         }
@@ -1405,8 +1405,8 @@ class UserCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'membershipdetails' . $iProfileId, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members'). 'AS m INNER JOIN ' . Db::prefix('Memberships') .
-            'AS g USING(groupId) WHERE profileId = :profileId LIMIT 1';
+            $sSql = 'SELECT m.*, g.expirationDays, g.name AS membershipName FROM' . Db::prefix('Members') . 'AS m INNER JOIN ' . Db::prefix('Memberships') .
+                'AS g USING(groupId) WHERE profileId = :profileId LIMIT 1';
 
             $rStmt = Db::getInstance()->prepare($sSql);
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);

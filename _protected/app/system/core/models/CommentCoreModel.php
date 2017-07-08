@@ -42,8 +42,8 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
     public function read($iRecipientId, $iApproved, $iOffset, $iLimit, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sSqlRecipientId = (!empty($iRecipientId)) ? 'c.recipient =:recipient AND' : '';
 

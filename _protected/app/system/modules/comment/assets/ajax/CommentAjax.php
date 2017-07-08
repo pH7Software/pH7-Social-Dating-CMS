@@ -27,11 +27,10 @@ class Comment
         $this->_oHttpRequest = new Http;
         $this->_oCommentModel = new CommentModel;
 
-        switch ($this->_oHttpRequest->post('type'))
-        {
+        switch ($this->_oHttpRequest->post('type')) {
             case 'delete':
                 $this->delete();
-            break;
+                break;
 
             default:
                 Framework\Http\Http::setHeadersByCode(400);
@@ -41,24 +40,18 @@ class Comment
 
     protected function delete()
     {
-        if ((($this->_oSession->get('member_id') == $this->_oHttpRequest->post('recipient_id')) || ($this->_oSession->get('member_id') == $this->_oHttpRequest->post('sender_id'))) || AdminCore::auth())
-        {
+        if ((($this->_oSession->get('member_id') == $this->_oHttpRequest->post('recipient_id')) || ($this->_oSession->get('member_id') == $this->_oHttpRequest->post('sender_id'))) || AdminCore::auth()) {
             $this->_bStatus = $this->_oCommentModel->delete($this->_oHttpRequest->post('id'), $this->_oHttpRequest->post('recipient_id'), $this->_oHttpRequest->post('sender_id'), $this->_oHttpRequest->post('table'));
 
-            if ($this->_bStatus)
-            {
+            if ($this->_bStatus) {
                 /* Clean All Data of CommentModel Cache */
                 (new Framework\Cache\Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
 
                 $this->_sMsg = jsonMsg(1, t('Your comment has been successfully removed!'));
-            }
-            else
-            {
+            } else {
                 $this->_sMsg = jsonMsg(0, t('Your comment does not exist anymore.'));
             }
-        }
-        else
-        {
+        } else {
             $this->_sMsg = jsonMsg(0, t('Whoops! The comment could not be removed!'));
         }
         echo $this->_sMsg;
