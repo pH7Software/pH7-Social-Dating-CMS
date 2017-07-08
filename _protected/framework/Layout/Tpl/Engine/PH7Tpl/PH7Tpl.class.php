@@ -217,7 +217,7 @@ class PH7Tpl extends Kernel
      */
     public function setHtmlCompress($bCompressor)
     {
-        $this->bHtmlCompressor = (bool) $bCompressor;
+        $this->bHtmlCompressor = (bool)$bCompressor;
     }
 
     /**
@@ -229,7 +229,7 @@ class PH7Tpl extends Kernel
      */
     public function setPhpCompress($bCompressor)
     {
-        $this->bPhpCompressor = (bool) $bCompressor;
+        $this->bPhpCompressor = (bool)$bCompressor;
     }
 
     /**
@@ -241,7 +241,7 @@ class PH7Tpl extends Kernel
      */
     public function setCacheExpire($iLifeTime)
     {
-        $this->mCacheExpire = (int) $iLifeTime; // 3600 seconds = 1 hour cache duration
+        $this->mCacheExpire = (int)$iLifeTime; // 3600 seconds = 1 hour cache duration
     }
 
     /**

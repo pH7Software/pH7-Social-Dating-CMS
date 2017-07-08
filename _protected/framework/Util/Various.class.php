@@ -47,7 +47,7 @@ class Various
      */
     public static function padStr($sStr, $iLength = self::MAX_LENGTH)
     {
-        $iLength = (int) $iLength;
+        $iLength = (int)$iLength;
         return ((new Str)->length($sStr) >= $iLength) ? substr($sStr, 0, $iLength) : str_pad($sStr, $iLength, $sStr);
     }
 

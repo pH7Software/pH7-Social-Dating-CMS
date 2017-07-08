@@ -46,19 +46,19 @@ class Api
             case 'youtube':
             case 'youtu':
                 $sClass = (new Api\Youtube)->getVideo($sUrl);
-            break;
+                break;
 
             case 'vimeo':
                 $sClass = (new Api\Vimeo)->getVideo($sUrl);
-            break;
+                break;
 
             case 'dailymotion':
                 $sClass = (new Api\Dailymotion)->getVideo($sUrl);
-            break;
+                break;
 
             case 'metacafe':
                 $sClass = (new Api\Metacafe)->getVideo($sUrl);
-            break;
+                break;
 
             default:
                 return false;
@@ -86,22 +86,22 @@ class Api
                 $oYoutube->setKey($sKey); // Youtube's API v3+ requires an API key
                 $oClass = $oYoutube->getInfo($sUrl);
                 unset($oYoutube);
-            break;
+                break;
 
             case 'vimeo':
                 $oClass = (new Api\Vimeo)->getInfo($sUrl);
-            break;
+                break;
 
             case 'dailymotion':
                 $oClass = (new Api\Dailymotion)->getInfo($sUrl);
-            break;
+                break;
 
             case 'metacafe':
                 $oClass = (new Api\Metacafe)->getInfo($sUrl);
-            break;
+                break;
 
             default:
-                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \''  . $sClass . '\'');
+                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \'' . $sClass . '\'');
         }
 
         return $oClass;

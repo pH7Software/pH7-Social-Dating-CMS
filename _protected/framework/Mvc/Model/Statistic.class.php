@@ -52,7 +52,7 @@ class Statistic
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
-        return (int) @$oRow->views;
+        return (int)@$oRow->views;
     }
 
 }

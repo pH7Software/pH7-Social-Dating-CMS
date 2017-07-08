@@ -108,7 +108,7 @@ final class DbConfig
                 ];
 
                 Engine\Record::getInstance()->insert('MetaMain', $aData); // Create the new meta data language
-                $oData = (object) $aData;
+                $oData = (object)$aData;
                 unset($aData);
             }
             Engine\Db::free($rStmt);

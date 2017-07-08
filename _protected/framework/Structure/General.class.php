@@ -10,41 +10,39 @@
  * @version          1.0
  */
 
-namespace PH7\Framework\Structure
-{
-defined('PH7') or exit('Restricted access');
+namespace PH7\Framework\Structure {
+    defined('PH7') or exit('Restricted access');
 
- class General
- {
-     /**
-      * PHP 6 was to give birth to this function, but the development PHP team to decline this feature :-(, so we create this.
-      *
-      * @param string $sVar a variable (e.g. $_GET['foo'])
-      * @param string $sOr a message if $sVar is empty (optional)
-      *
-      * @return string $sVar or $sOr
-      */
-     public function ifsetor($sVar, $sOr = '')
-     {
-         return (isset($sVar)) ? $sVar : $sOr;
-     }
+    class General
+    {
+        /**
+         * Emit a signal.
+         *
+         * @param mixed $mVar [, string $... ]
+         * @return string
+         */
+        public static function emit()
+        {
+            $aArgs = func_get_args();
+            return implode("\t", $aArgs) . \PH7\Framework\File\File::EOL;
+        }
 
-     /**
-      * Emit a signal.
-      *
-      * @param mixed $mVar [, string $... ]
-      * @return string
-      */
-     public static function emit()
-     {
-         $aArgs = func_get_args();
-         return implode("\t", $aArgs) . \PH7\Framework\File\File::EOL;
-     }
- }
+        /**
+         * PHP 6 was to give birth to this function, but the development PHP team to decline this feature :-(, so we create this.
+         *
+         * @param string $sVar a variable (e.g. $_GET['foo'])
+         * @param string $sOr a message if $sVar is empty (optional)
+         *
+         * @return string $sVar or $sOr
+         */
+        public function ifsetor($sVar, $sOr = '')
+        {
+            return (isset($sVar)) ? $sVar : $sOr;
+        }
+    }
 }
 
-namespace
-{
+namespace {
     /**
      * Alias for \PH7\Framework\Structure\General::ifsetor()
      */

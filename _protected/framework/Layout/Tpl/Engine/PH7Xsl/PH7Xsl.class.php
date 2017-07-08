@@ -56,7 +56,7 @@ class PH7Xsl
      */
     public function enablePhpFunctions($bEnable = true)
     {
-        $this->_bPhpFunc = (bool) $bEnable;
+        $this->_bPhpFunc = (bool)$bEnable;
 
         return $this;
     }

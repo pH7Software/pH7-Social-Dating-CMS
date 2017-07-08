@@ -62,6 +62,6 @@ class Year implements Measurable
             $iAge--;
         }
 
-        return (int) $iAge;
+        return (int)$iAge;
     }
 }

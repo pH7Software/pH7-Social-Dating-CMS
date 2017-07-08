@@ -36,14 +36,14 @@ class Security
      */
     public function blockIp($sIp, $iExpir = 86400)
     {
-        $iExpir = time() + (int) $iExpir;
+        $iExpir = time() + (int)$iExpir;
         $rStmt = Db::getInstance()->prepare('SELECT ip FROM' . Db::prefix('BlockIp') . 'WHERE ip = :ip LIMIT 1');
         $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
         $rStmt->execute();
 
         if ($rStmt->rowCount() == 0) // Not Found IP
         {
-            $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix('BlockIp'). 'VALUES (:ip, :expiration)');
+            $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('BlockIp') . 'VALUES (:ip, :expiration)');
             $rStmt->bindValue(':ip', $sIp, \PDO::PARAM_STR);
             $rStmt->bindValue(':expiration', $iExpir, \PDO::PARAM_INT);
             $rStmt->execute();
@@ -66,7 +66,7 @@ class Security
     {
         Various::checkModelTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable.'LogLogin') . '(email, username, password, status, ip)
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable . 'LogLogin') . '(email, username, password, status, ip)
         VALUES (:email, :username, :password, :status, :ip)');
         $rStmt->bindValue(':email', $sEmail, \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);

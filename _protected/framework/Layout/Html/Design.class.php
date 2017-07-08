@@ -822,7 +822,7 @@ class Design
      */
     public function report($iId, $sUsername, $sFirstName, $sSex)
     {
-        $iId = (int) $iId;
+        $iId = (int)$iId;
 
         if ($iId > PH7_GHOST_ID) {
             $sReportLink = (UserCore::auth()) ?
