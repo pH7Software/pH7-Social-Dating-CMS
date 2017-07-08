@@ -804,7 +804,7 @@ class Design
      */
     public function littleLikeApi()
     {
-        if ((bool) DbConfig::getSetting('socialMediaWidgets')) {
+        if ((bool)DbConfig::getSetting('socialMediaWidgets')) {
             echo '<div class="addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_button_tweet" tw:count="horizontal"></a></div>';
         }
     }
