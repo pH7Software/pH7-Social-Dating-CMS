@@ -13,7 +13,6 @@ use PH7\Framework\Translate\Lang;
 
 class SecureController extends Controller
 {
-
     public function index()
     {
         // Loading Gettext Language File ...
@@ -38,5 +37,4 @@ class SecureController extends Controller
             $this->output();
         }
     }
-
 }
