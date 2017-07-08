@@ -1,4 +1,5 @@
 <?php
+
 namespace PFBC\Element;
 
 class HTML extends \PFBC\Element

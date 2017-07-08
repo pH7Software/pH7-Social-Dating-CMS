@@ -41,13 +41,13 @@ class SettingForm
 
         $oFile = new File;
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Site Name:'), 'site_name', array('value' => DbConfig::getSetting('siteName'), 'validation' => new \PFBC\Validation\Str(2,50), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Site Name:'), 'site_name', array('value' => DbConfig::getSetting('siteName'), 'validation' => new \PFBC\Validation\Str(2, 50), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Default Theme:'), 'default_template', self::getTpls($oFile), array('value' => DbConfig::getSetting('defaultTemplate'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Default Module:'), 'default_sys_module', self::getDefMods(), array('description' => t('The default module is the one running by default on the homepage (recommended to keep the "user" module).'), 'value' => DbConfig::getSetting('defaultSysModule'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Default Language:'), 'default_language', self::getLangs($oFile), array('description' => t('Documentation: <a href="%0%">Translate your site to another language</a>.', self::I18N_DOC_URL), 'value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5,5), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Default Language:'), 'default_language', self::getLangs($oFile), array('description' => t('Documentation: <a href="%0%">Translate your site to another language</a>.', self::I18N_DOC_URL), 'value' => DbConfig::getSetting('defaultLanguage'), 'validation' => new \PFBC\Validation\Str(5, 5), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Map Type:'), 'map_type', array('roadmap' => t('Roadmap (default)'), 'hybrid' => t('Hybrid'), 'terrain' => t('Terrain'), 'satellite' => t('Satellite')), array('value' => DbConfig::getSetting('mapType'), 'required' => 1)));
 
@@ -55,7 +55,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Display Profiles on Guest Homepage:'), 'users_block', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Display or not the newest users on the homepage for visitors. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('usersBlock'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', array('description' => t('The number of profiles to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Number of Profiles on Splash Page:'), 'number_profile_splash_page', array('description' => t('The number of profiles to display on the Splash Homepage. <br /><em>Available only if "Profiles on Guest Homepage" is enabled and if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('numberProfileSplashPage'), 'validation' => new \PFBC\Validation\Str(1, 2), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Splash Homepage:'), 'splash_page', array('1' => t('Enable'), '0' => t('Disable')), array('description' => t('Use the Splash Page (recommended) for visitors (not logged), otherwise the classic page will be used. <br /><em>Available only if "User" is the Default Module.</em>'), 'value' => DbConfig::getSetting('splashPage'), 'required' => 1)));
 
@@ -91,19 +91,19 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Select(t('Account activation type for Affiliates:'), 'aff_activation_type', array('1' => t('No activation required'), '2' => t('Self activation via email'), '3' => t('Manual activation by administrator')), array('value' => DbConfig::getSetting('affActivationType'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Minimum username length:'), 'min_username_length', array('value' => DbConfig::getSetting('minUsernameLength'), 'max' => DbConfig::getSetting('maxUsernameLength')-1, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Minimum username length:'), 'min_username_length', array('value' => DbConfig::getSetting('minUsernameLength'), 'max' => DbConfig::getSetting('maxUsernameLength') - 1, 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Maximum username length:'), 'max_username_length', array('value' => DbConfig::getSetting('maxUsernameLength'), 'min' => DbConfig::getSetting('minUsernameLength')+1, 'max' => PH7_MAX_USERNAME_LENGTH, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Maximum username length:'), 'max_username_length', array('value' => DbConfig::getSetting('maxUsernameLength'), 'min' => DbConfig::getSetting('minUsernameLength') + 1, 'max' => PH7_MAX_USERNAME_LENGTH, 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Minimum age for registration:'), 'min_age_registration', array('value' => DbConfig::getSetting('minAgeRegistration'), 'max' => DbConfig::getSetting('maxAgeRegistration')-1, 'validation' => new \PFBC\Validation\Str(1,2), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Minimum age for registration:'), 'min_age_registration', array('value' => DbConfig::getSetting('minAgeRegistration'), 'max' => DbConfig::getSetting('maxAgeRegistration') - 1, 'validation' => new \PFBC\Validation\Str(1, 2), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration')+1, 'validation' => new \PFBC\Validation\Str(1,3), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Number(t('Maximum age for registration:'), 'max_age_registration', array('value' => DbConfig::getSetting('maxAgeRegistration'), 'min' => DbConfig::getSetting('minAgeRegistration') + 1, 'validation' => new \PFBC\Validation\Str(1, 3), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Require photo to be uploaded:'), 'require_registration_avatar', array('1' => t('Yes'), '0' => t('No')), array('description' => t('Require Members to upload a profile photo during sign up.') . '<br /><small>' . t("Doesn't guarantee that all users will have a profile photo because users can still close the page and not finish the registration process.") . '</small>', 'value' => DbConfig::getSetting('requireRegistrationAvatar'), 'required' => 1)));
 
         $oForm->addElement(new \PFBC\Element\Select(t('Allow Users to Register on Partner Service:'), 'allow_user_to_partner', array('1' => t('Enable (recommended)'), '0' => t('Disable')), array('description' => t('Gives the possibility to users to register them instantly on another dating service and increase their user experience.') . '<br /><small>' . t("The partner service is a third-party one and doesn't belong to you.") . '</small>', 'value' => DbConfig::getSetting('allowUserToPartner'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), array('value'=>DbConfig::getSetting('defaultMembershipGroupId'), 'required'=>1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Default Membership Group:'), 'default_membership_group_id', self::getMembershipGroups(), array('value' => DbConfig::getSetting('defaultMembershipGroupId'), 'required' => 1)));
 
 
         /********** Picture and Video **********/
@@ -255,7 +255,7 @@ class SettingForm
         /********** Automation **********/
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div></div><div class="content" id="automation"><div class="col-md-10"><h2 class="underline">' . t('Automation') . '</h2>'));
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Secret word for the cron URL:'), 'cron_security_hash', array('description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(1,64))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Secret word for the cron URL:'), 'cron_security_hash', array('description' => t('Your very secret word for the cron URL. It will be used for running automated cron jobs.'), 'value' => DbConfig::getSetting('cronSecurityHash'), 'required' => 1, 'validation' => new \PFBC\Validation\Str(1, 64))));
 
         $oForm->addElement(new \PFBC\Element\Number(t('User inactivity timeout:'), 'user_timeout', array('description' => t('The number of minutes that a member becomes inactive (offline).'), 'value' => DbConfig::getSetting('userTimeout'), 'required' => 1)));
 

@@ -80,10 +80,14 @@ class TwoCheckOut extends Provider implements Api
             $aInsMsg[$sKey] = $sVal;
         }
 
+<<<<<<< HEAD
         if (
             !empty($_POST['message_type'])
             && $_POST['message_type'] == 'FRAUD_STATUS_CHANGED' && !empty($aInsMsg['md5_hash'])
         ) {
+=======
+        if (!empty($_POST['message_type']) && $_POST['message_type'] == 'FRAUD_STATUS_CHANGED' && !empty($aInsMsg['md5_hash'])) {
+>>>>>>> 350dfb327ffcff78050b9a3aeca020d1147b96fb
             $sHash = strtoupper(md5($aInsMsg['sale_id'] . $sVendorId . $aInsMsg['invoice_id'] . $sSecretWord));
 
             if ($sHash == $aInsMsg['md5_hash']) {
@@ -93,10 +97,14 @@ class TwoCheckOut extends Provider implements Api
                 $this->_bValid = false;
                 $this->_sMsg = t('Invalid refund transaction.');
             }
+<<<<<<< HEAD
         } elseif (
             !empty($_REQUEST['key']) && !empty($aInsMsg['order_number']) &&
             !empty($aInsMsg['total'])
         ) {
+=======
+        } elseif (!empty($_REQUEST['key']) && !empty($aInsMsg['order_number']) && !empty($aInsMsg['total'])) {
+>>>>>>> 350dfb327ffcff78050b9a3aeca020d1147b96fb
             $sHash = strtoupper(md5($sSecretWord . $sVendorId . $aInsMsg['order_number'] . $aInsMsg['total']));
 
             if ($sHash != $_REQUEST['key']) {

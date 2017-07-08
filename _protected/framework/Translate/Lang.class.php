@@ -186,7 +186,6 @@ namespace PH7\Framework\Translate
         mb_regex_encoding(PH7_ENCODING);
     }
  }
-
 }
 
 namespace

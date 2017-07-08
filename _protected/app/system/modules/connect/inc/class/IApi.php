@@ -39,5 +39,5 @@ interface IApi
      * @param string $sUrl
      * @return string The Avatar
      */
-     public function getAvatar($sUrl);
+    public function getAvatar($sUrl);
 }

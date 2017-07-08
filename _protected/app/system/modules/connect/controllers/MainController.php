@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Module / Connect / Controller
  * @version        1.0
  */
+
 namespace PH7;
 
 class MainController extends Controller

@@ -3,6 +3,7 @@
  * We made this code.
  * By pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Validation;
 
 class AlphaNumeric extends RegExp

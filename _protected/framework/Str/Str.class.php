@@ -10,8 +10,8 @@
  * @version          1.2
  */
 
-namespace PH7\Framework\Str {
-
+namespace PH7\Framework\Str
+{
  defined('PH7') or exit('Restricted access');
 
  class Str
@@ -343,12 +343,11 @@ namespace PH7\Framework\Str {
          return self::$_sRegexDelimiter . trim($sPattern, self::$_sRegexDelimiter) . self::$_sRegexDelimiter;
      }
  }
-
 }
 
 namespace {
       /**
-       * Alias of the \PH7\Framework\Str\Str::escape() method.
+       * Alias of \PH7\Framework\Str\Str::escape() method.
        */
     function escape($mText, $bStrip = false)
     {

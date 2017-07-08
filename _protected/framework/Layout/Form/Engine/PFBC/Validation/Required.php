@@ -27,7 +27,7 @@ class Required extends \PFBC\Validation
                 foreach ($mValue as $sItem) {
                     if (!$bValid = $this->isValid($sItem)) {
                         return false;
-                      }
+                    }
                 }
             } else {
                 $bValid = ($mValue !== '');

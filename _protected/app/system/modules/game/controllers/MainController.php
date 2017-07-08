@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Game / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Statistic as Stat;
@@ -55,13 +56,10 @@ class MainController extends Controller
 
         $this->setMenuVars();
 
-        if (empty($oGames))
-        {
+        if (empty($oGames)) {
             $this->sTitle = t('No Games Found!');
             $this->_notFound();
-        }
-        else
-        {
+        } else {
             $this->view->page_title = t('Games Zone - Free Games');
             $this->view->h1_title = t('Games Zone Party');
             $this->view->meta_description = t('Free Games for Gamers, Flash Games, Free Online Games');
@@ -82,13 +80,10 @@ class MainController extends Controller
             1
         );
 
-        if (empty($oGame))
-        {
+        if (empty($oGame)) {
             $this->sTitle = t('No Games Found!');
             $this->_notFound();
-        }
-        else
-        {
+        } else {
             $this->sTitle = t('Game - %0%', substr($oGame->description, 0, 100));
             $this->view->page_title = t('%0% Games Zone - %1%', $oGame->name, $oGame->title);
             $this->view->h1_title = $oGame->title;
@@ -136,14 +131,11 @@ class MainController extends Controller
         );
         $this->setMenuVars();
 
-        $sCategoryTxt = substr($sCategory,0,60);
-        if (empty($oSearch))
-        {
+        $sCategoryTxt = substr($sCategory, 0, 60);
+        if (empty($oSearch)) {
             $this->sTitle = t('No "%0%" category found.', $sCategoryTxt);
             $this->_notFound();
-        }
-        else
-        {
+        } else {
             $this->sTitle = t('Search by Category: "%0%" Game', $sCategoryTxt);
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
@@ -191,13 +183,10 @@ class MainController extends Controller
         );
         $this->setMenuVars();
 
-        if (empty($oSearch))
-        {
+        if (empty($oSearch)) {
             $this->sTitle = t('Sorry, Your search returned no results!');
             $this->_notFound();
-        }
-        else
-        {
+        } else {
             $this->sTitle = t('Game - Your search returned');
             $this->view->page_title = $this->sTitle;
             $this->view->h2_title = $this->sTitle;
@@ -214,17 +203,14 @@ class MainController extends Controller
 
     public function download()
     {
-        if ($this->httpRequest->getExists('id'))
-        {
+        if ($this->httpRequest->getExists('id')) {
             $iId = $this->httpRequest->get('id');
 
-            if (is_numeric($iId))
-            {
+            if (is_numeric($iId)) {
                 $sFile = @$this->oGameModel->getFile($iId);
                 $sPathFile = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/' . $sFile;
 
-                if (!empty($sFile) && is_file($sPathFile))
-                {
+                if (!empty($sFile) && is_file($sPathFile)) {
                     $sFileName = basename($sFile);
                     $this->file->download($sPathFile, $sFileName);
                     $this->oGameModel->setDownloadStat($iId);

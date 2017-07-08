@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
 namespace PH7;
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
@@ -38,12 +39,12 @@ class Security
         $sForgotPwdLink = Uri::get('lost-password', 'main', 'forgot', Various::convertTableToMod($sTable));
 
         $oView->content = t('Dear, %0%', $sFirstName) . '<br />' .
-        t('Someone tried to login more than %0% times with the IP address: "%1%".', $iMaxAttempts, $sIp) . '<br />' .
-        t('For safety and security reasons, we have blocked access to this person for a delay of %0% minutes.', $iAttemptTime) . '<br /><ol><li>' .
-        t('If it was you who tried to login to your account, we suggest to <a href="%1%">request a new password</a> in %0% minutes.', $iAttemptTime, $sForgotPwdLink) . '</li><li>' .
-        t('If you do not know the person who made the login attempts, you should be very careful and change your password to a new one more complicated.') . '<br />' .
-        t('We also recommend that you change the password of your emailbox, because it is with this emalbox we send a potential new password in case you forget it.') . '</li></ol><br /><hr />' .
-        t('Have a nice day!');
+            t('Someone tried to login more than %0% times with the IP address: "%1%".', $iMaxAttempts, $sIp) . '<br />' .
+            t('For safety and security reasons, we have blocked access to this person for a delay of %0% minutes.', $iAttemptTime) . '<br /><ol><li>' .
+            t('If it was you who tried to login to your account, we suggest to <a href="%1%">request a new password</a> in %0% minutes.', $iAttemptTime, $sForgotPwdLink) . '</li><li>' .
+            t('If you do not know the person who made the login attempts, you should be very careful and change your password to a new one more complicated.') . '<br />' .
+            t('We also recommend that you change the password of your emailbox, because it is with this emalbox we send a potential new password in case you forget it.') . '</li></ol><br /><hr />' .
+            t('Have a nice day!');
 
         $sMessageHtml = $oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/alert_login_attempt.tpl', $sTo);
 

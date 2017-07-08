@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
 namespace PH7;
 
 use PH7\Framework\File\File;
@@ -30,7 +31,7 @@ class PictureCore
             $sDir . str_replace('original', '800', $sPictureLink),
             $sDir . str_replace('original', '1000', $sPictureLink),
             $sDir . str_replace('original', '1200', $sPictureLink)
-        ] ;
+        ];
 
         (new File)->deleteFile($aFiles);
         unset($aFiles);

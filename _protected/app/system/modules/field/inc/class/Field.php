@@ -5,11 +5,11 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Field / Inc / Class
  */
+
 namespace PH7;
 
 class Field
 {
-
     /**
      * @desc Block constructing.
      * @access private
@@ -20,6 +20,7 @@ class Field
      * Get table.
      *
      * @param string $sMod
+     *
      * @return string
      */
     public static function getTable($sMod)
@@ -32,6 +33,7 @@ class Field
      *
      * @param string $sMod Mod name.
      * @param string $sField Field name.
+     *
      * @return boolean
      */
     public static function isExists($sMod, $sField)
@@ -44,13 +46,14 @@ class Field
      * Checks if the field is editable.
      *
      * @param string $sField
+     *
      * @return boolean
      */
     public static function unmodifiable($sField)
     {
         $aList = ['profileid', 'middlename', 'description', 'businessname', 'address', 'street', 'city', 'state', 'zipcode', 'country', 'phone', 'fax', 'website', 'socialnetworksite', 'height', 'weight'];
+
         return in_array(strtolower($sField), $aList);
 
     }
-
 }

@@ -7,6 +7,7 @@
  * @link           http://ph7cms.com
  * @link           http://github.com/pH7Software/pH7CMS-HTTP-REST-Push-Data
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');

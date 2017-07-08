@@ -74,7 +74,7 @@ class AdminModel extends AdminCoreModel
      */
     public function delete($iProfileId, $sUsername)
     {
-        $iProfileId = (int) $iProfileId;
+        $iProfileId = (int)$iProfileId;
 
         if (AdminCore::isRootProfileId($iProfileId)) {
             exit('You cannot delete the Root Administrator!');
@@ -97,9 +97,9 @@ class AdminModel extends AdminCoreModel
      */
     public function searchAdmin($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
@@ -130,7 +130,7 @@ class AdminModel extends AdminCoreModel
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) $oRow->totalUsers;
+            $mData = (int)$oRow->totalUsers;
             unset($oRow);
         }
 
@@ -141,7 +141,7 @@ class AdminModel extends AdminCoreModel
      * Update the custom code.
      *
      * @param string $sCode
-     * @param string $sType  Choose between 'css' and 'js'
+     * @param string $sType Choose between 'css' and 'js'
      *
      * @return integer|boolean Returns the number of rows on success or FALSE on failure
      */

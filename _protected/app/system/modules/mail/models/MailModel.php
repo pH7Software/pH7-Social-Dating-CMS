@@ -213,9 +213,9 @@ class MailModel extends MailCoreModel
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iProfileId = null, $sType = 'all')
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? ' LIMIT :offset, :limit' : '';
@@ -226,16 +226,16 @@ class MailModel extends MailCoreModel
         switch ($sType) {
             case self::INBOX:
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (NOT FIND_IN_SET(\'recipient\', msg.trash)) AND';
-            break;
+                break;
 
             case self::OUTBOX:
                 $sSql = 'msg.recipient = m.profileId WHERE (msg.sender = :profileId) AND (NOT FIND_IN_SET(\'sender\', msg.toDelete)) AND';
-            break;
+                break;
 
             case self::TRASH:
                 $sSql = 'msg.sender = m.profileId WHERE (msg.recipient = :profileId) AND (FIND_IN_SET(\'recipient\', msg.trash)) AND
                 (NOT FIND_IN_SET(\'recipient\', msg.toDelete)) AND';
-            break;
+                break;
 
             default:
                 // All messages
@@ -243,7 +243,7 @@ class MailModel extends MailCoreModel
         }
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Messages') . 'AS msg LEFT JOIN ' . Db::prefix('Members') . 'AS m ON ' .
-        $sSql . $sSqlFind . $sSqlOrder . $sSqlLimit);
+            $sSql . $sSqlFind . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
@@ -262,7 +262,7 @@ class MailModel extends MailCoreModel
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            $mData = (int) $oRow->totalMails;
+            $mData = (int)$oRow->totalMails;
             unset($oRow);
         }
 

@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -27,8 +28,7 @@ class DisableModuleForm
         $aSelectedMods = [];
         $sDefaultCoreMod = DbConfig::getSetting('defaultSysModule');
 
-        foreach ($oModuleData as $oData)
-        {
+        foreach ($oModuleData as $oData) {
             // Ignore the default core module (since it cannot be disabled)
             if ($oData->folderName === $sDefaultCoreMod)
                 continue;

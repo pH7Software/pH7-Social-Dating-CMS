@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -16,8 +17,8 @@ class GameCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function get($sTitle = null, $iGameId = null, $iOffset, $iLimit, $sOrder = SearchCoreModel::NAME)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sOrderBy = SearchCoreModel::order($sOrder, SearchCoreModel::DESC);
 

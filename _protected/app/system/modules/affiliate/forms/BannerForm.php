@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Navigation\Page;
@@ -38,7 +39,7 @@ class BannerForm
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<h2>' . $oRow->name . '</h2>'));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<p>' . t('Preview Banner:') . '</p>'));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<div>' . $oSysVar->parse($oRow->code) . '</div>'));
-            $oForm->addElement(new \PFBC\Element\Textarea(t('Banner:'),'code', array('readonly'=>'readonly','onclick'=>'this.select()','value'=>$oSysVar->parse($oRow->code))));
+            $oForm->addElement(new \PFBC\Element\Textarea(t('Banner:'), 'code', array('readonly' => 'readonly', 'onclick' => 'this.select()', 'value' => $oSysVar->parse($oRow->code))));
             // End ads div tags
             $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<br /><hr /><br />'));

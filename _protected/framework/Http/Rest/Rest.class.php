@@ -75,21 +75,21 @@ class Rest extends Http
         switch ($this->getRequestMethod()) {
             case HttpRequest::METHOD_POST:
                 $this->_aRequest = $this->_cleanInputs($_POST);
-            break;
+                break;
 
             case HttpRequest::METHOD_GET:
             case HttpRequest::METHOD_DELETE:
                 $this->_aRequest = $this->_cleanInputs($_GET);
-            break;
+                break;
 
             case HttpRequest::METHOD_PUT:
                 parse_str(Stream::getInput(), $this->_aRequest);
                 $this->_aRequest = $this->_cleanInputs($this->_aRequest);
-            break;
+                break;
 
             default:
                 $this->response('', 406);
-            break;
+                break;
         }
     }
 

@@ -18,7 +18,7 @@ abstract class Validation extends Base
 
         if (!empty($message)) {
             $this->message = t('%element% is invalid.');
-          }
+        }
     }
 
     public function getMessage()

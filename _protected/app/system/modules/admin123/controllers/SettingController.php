@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -110,24 +111,23 @@ class SettingController extends Controller
     {
         $bIsErr = true; // Set default value
 
-        switch (PH7_LICENSE_STATUS)
-        {
+        switch (PH7_LICENSE_STATUS) {
             case 'active':
                 $sMsg = t('Hurrah! Your License Key has been successfully enabled!');
                 $bIsErr = false;
-            break;
+                break;
 
             case 'invalid':
                 $sMsg = t('Oops! Your license key is Invalid.');
-            break;
+                break;
 
             case 'expired':
                 $sMsg = t('Oops! Your license key is Expired.');
-            break;
+                break;
 
             case 'suspended':
                 $sMsg = t('We are sorry, but your license key is Suspended.');
-            break;
+                break;
 
             default:
                 $sMsg = t('Oops! We have received an invalid response from the server. Please try again later.');

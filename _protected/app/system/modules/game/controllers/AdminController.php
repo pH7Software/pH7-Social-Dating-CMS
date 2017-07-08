@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Game / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -35,9 +36,8 @@ class AdminController extends MainController
 
     public function delete()
     {
-        if ( $this->httpRequest->postExists( array('id', 'thumb', 'file') ))
-        {
-            $this->oGameModel->delete( $this->httpRequest->post('id', 'int') );
+        if ($this->httpRequest->postExists(array('id', 'thumb', 'file'))) {
+            $this->oGameModel->delete($this->httpRequest->post('id', 'int'));
 
             $aFiles = [
                 'thumb' => PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/img/thumb/' . $this->httpRequest->post('thumb'),
@@ -50,9 +50,7 @@ class AdminController extends MainController
             (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
 
             $sMsg = t('The game has been removed.');
-        }
-        else
-        {
+        } else {
             $sMsg = t('The game could not be removed.');
         }
 

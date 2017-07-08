@@ -26,13 +26,13 @@ class DeleteUserCoreFormProcess extends Form
         parent::__construct();
 
         $this->sSessPrefix = ($this->registry->module == 'user') ? 'member' : 'affiliate';
-        $this->sUsername = $this->session->get($this->sSessPrefix.'_username');
-        $this->sEmail = $this->session->get($this->sSessPrefix.'_email');
+        $this->sUsername = $this->session->get($this->sSessPrefix . '_username');
+        $this->sEmail = $this->session->get($this->sSessPrefix . '_email');
         $sTable = ($this->registry->module == 'user') ? 'Members' : 'Affiliates';
 
         $mLogin = (new UserCoreModel)->login($this->sEmail, $this->httpRequest->post('password', Http::NO_CLEAN), $sTable);
         if ($mLogin === 'password_does_not_exist') {
-            \PFBC\Form::setError('form_delete_account',t('Oops! This password you entered is incorrect.'));
+            \PFBC\Form::setError('form_delete_account', t('Oops! This password you entered is incorrect.'));
         } else {
             $this->session->regenerateId();
             $this->sendWarnEmail();
@@ -57,10 +57,10 @@ class DeleteUserCoreFormProcess extends Form
         $this->view->footer_title = t('User Information');
         $this->view->email = t('Email: %0%', $this->sEmail);
         $this->view->username = t('Username: %0%', $this->sUsername);
-        $this->view->first_name = t('First Name: %0%', $this->session->get($this->sSessPrefix.'_first_name'));
-        $this->view->sex = t('Sex: %0%', $this->session->get($this->sSessPrefix.'_sex'));
-        $this->view->ip = t('User IP: %0%', $this->session->get($this->sSessPrefix.'_ip'));
-        $this->view->browser_info = t('Browser info: %0%', $this->session->get($this->sSessPrefix.'_http_user_agent'));
+        $this->view->first_name = t('First Name: %0%', $this->session->get($this->sSessPrefix . '_first_name'));
+        $this->view->sex = t('Sex: %0%', $this->session->get($this->sSessPrefix . '_sex'));
+        $this->view->ip = t('User IP: %0%', $this->session->get($this->sSessPrefix . '_ip'));
+        $this->view->browser_info = t('Browser info: %0%', $this->session->get($this->sSessPrefix . '_http_user_agent'));
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/delete_account.tpl', DbConfig::getSetting('adminEmail'));
 
@@ -84,7 +84,7 @@ class DeleteUserCoreFormProcess extends Form
     protected function removeAccount()
     {
         $oUserModel = ($this->registry->module == 'user') ? new UserCore : new AffiliateCore;
-        $oUserModel->delete($this->session->get($this->sSessPrefix.'_id'), $this->sUsername);
+        $oUserModel->delete($this->session->get($this->sSessPrefix . '_id'), $this->sUsername);
         unset($oUserModel);
     }
 
@@ -95,6 +95,6 @@ class DeleteUserCoreFormProcess extends Form
      */
     protected function goSoon()
     {
-        Header::redirect(Uri::get('user','main','soon'), t('Your account has been removed successfully!'));
+        Header::redirect(Uri::get('user', 'main', 'soon'), t('Your account has been removed successfully!'));
     }
 }

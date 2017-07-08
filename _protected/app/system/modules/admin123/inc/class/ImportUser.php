@@ -8,6 +8,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Inc / Class
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -174,9 +175,9 @@ class ImportUser extends Core
             'password' => Various::genRnd(),
             'first_name' => 'Alex' . $sFiveChars,
             'last_name' => 'Rolli' . $sFiveChars,
-            'sex' => $this->_aGenderList[mt_rand(0,2)], // Generate randomly it
-            'match_sex' => $this->_aGenderList[mt_rand(0,2)], // Generate randomly it
-            'birth_date' => date('Y')-mt_rand(20,50).'-'.mt_rand(1,12).'-'.mt_rand(1,28), // Generate randomly the anniversary date
+            'sex' => $this->_aGenderList[mt_rand(0, 2)], // Generate randomly it
+            'match_sex' => $this->_aGenderList[mt_rand(0, 2)], // Generate randomly it
+            'birth_date' => date('Y') - mt_rand(20, 50) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28), // Generate randomly the anniversary date
             'country' => 'US',
             'city' => 'Virginia',
             'state' => 'Doswell',

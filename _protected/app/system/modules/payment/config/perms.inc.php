@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Payment / Config
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -28,7 +29,7 @@ return array(
     'chat' => 1,
     'chatroulette' => 1,
     'hot_or_not' => 1,
-    'love_calculator' =>1,
+    'love_calculator' => 1,
     'read_notes' => 1,
     'write_notes' => 1,
     'read_blog_posts' => 1,

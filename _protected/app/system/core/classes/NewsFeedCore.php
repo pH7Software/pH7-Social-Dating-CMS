@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Core / Class
  * @version        1.0
  */
+
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
@@ -36,16 +37,14 @@ class NewsFeedCore
      */
     public function getSoftware($iNum = 10)
     {
-        $this->_oCache->start(self::CACHE_GROUP, 'software_feed_news' . $iNum, 3600*24);
+        $this->_oCache->start(self::CACHE_GROUP, 'software_feed_news' . $iNum, 3600 * 24);
 
-        if (!$this->_aData = $this->_oCache->get())
-        {
+        if (!$this->_aData = $this->_oCache->get()) {
             if (!@$this->_oXml->load(static::NEWS_URL))
                 throw new Framework\Error\CException\PH7Exception('Unable to retrieve news feeds for the URL: "' . static::NEWS_URL . '"');
 
             $iCount = 0;
-            foreach ($this->_oXml->getElementsByTagName('item') as $oItem)
-            {
+            foreach ($this->_oXml->getElementsByTagName('item') as $oItem) {
                 $sLink = $oItem->getElementsByTagName('link')->item(0)->nodeValue;
 
                 $this->_aData[$sLink]['title'] = $oItem->getElementsByTagName('title')->item(0)->nodeValue;

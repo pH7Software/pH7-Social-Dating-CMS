@@ -30,7 +30,7 @@ class Cookie
      */
     public function set($mName, $sValue = null, $iTime = null, $bSecure = null)
     {
-        $iTime = time() + ((int) !empty($iTime) ? $iTime : Config::getInstance()->values['cookie']['expiration']);
+        $iTime = time() + ((int)!empty($iTime) ? $iTime : Config::getInstance()->values['cookie']['expiration']);
         $bSecure = (!empty($bSecure) && is_bool($bSecure)) ? $bSecure : (substr(PH7_URL_PROT, 0, 5) === 'https');
 
         if (is_array($mName)) {

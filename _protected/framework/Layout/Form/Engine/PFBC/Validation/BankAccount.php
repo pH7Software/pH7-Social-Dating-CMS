@@ -3,7 +3,9 @@
  * We made this code.
  * By pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Validation;
+
 use PH7\ExistsCoreModel;
 use PH7\Framework\Security\Ban\Ban;
 
@@ -29,26 +31,17 @@ class BankAccount extends \PFBC\Validation
      */
     public function isValid($sValue)
     {
-        if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue))
-        {
-            if (!Ban::isBankAccount($sValue))
-            {
-                if (!(new ExistsCoreModel)->bankAccount($sValue, $this->sTable))
-                {
+        if ($this->isNotApplicable($sValue) || $this->oValidate->email($sValue)) {
+            if (!Ban::isBankAccount($sValue)) {
+                if (!(new ExistsCoreModel)->bankAccount($sValue, $this->sTable)) {
                     return true;
-                }
-                else
-                {
+                } else {
                     $this->message = t('Error: Another account with the same bank account already exists. Please choose another.');
                 }
-            }
-            else
-            {
+            } else {
                 $this->message = t('Sorry, This bank account is not supported by our payment system.');
             }
-        }
-        else
-        {
+        } else {
             $this->message = t('Error: Your bank account is incorrect!');
         }
         return false;

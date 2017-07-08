@@ -23,7 +23,7 @@ class Admin extends AdminCore
     {
         (new Session)->destroy();
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD,'main','login'), t('You are successfully logged out.'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'login'), t('You are successfully logged out.'));
     }
 
     /**
@@ -35,7 +35,7 @@ class Admin extends AdminCore
      */
     public function delete($iProfileId, $sUsername)
     {
-        $iProfileId = (int) $iProfileId;
+        $iProfileId = (int)$iProfileId;
 
         if (AdminCore::isRootProfileId($iProfileId)) {
             exit('You cannot delete the Root Administrator!');

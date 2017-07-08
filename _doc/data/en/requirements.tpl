@@ -4,17 +4,27 @@
 <h3>Minimum:</h3>
 <ul>
     <li>Operating System - Linux/Unix (Red Hat, CentOS, Debian, FreeBSD, Mandrake, Mac OS, etc.), Windows.</li>
-    <li>Web Server - Apache with mod_php enabled, PHP in CGI, FastCGI mode, or with <a href="http://ph7cms.com/doc/en/nginx-configuration">nginx</a> (lighttpd, LiteSpeed and IIS should also work but you have to change some piece of code to make it working).</li>
-    <li>URL rewriting extension module - Apache, nginx, lighttpd, LiteSpeed, IIS (for Web.config, you have a <a href="http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/">good tutorial here</a>).</li>
+    <li>Web Server - Apache with mod_php enabled, PHP in CGI, FastCGI mode, or with <a
+                href="http://ph7cms.com/doc/en/nginx-configuration">nginx</a> (lighttpd, LiteSpeed and IIS should also
+        work but you have to change some piece of code to make it working).
+    </li>
+    <li>URL rewriting extension module - Apache, nginx, lighttpd, LiteSpeed, IIS (for Web.config, you have a <a
+                href="http://www.phpgenious.com/2010/04/url-rewriting-with-php-and-iis-7/">good tutorial here</a>).
+    </li>
     <li>Minimum Web Space - 2.0 GB</li>
     <li>Specific Requirement - Server has to be connected to Internet</li>
     <li>Video Module Requirement (only if enabled) - <a href="http://ffmpeg.org">FFmpeg</a></li>
 </ul>
 
 <h3>Recommended:</h3>
-  <ul>
-    <li>JRE (Java Runtime Environment) - 1.6 or higher (used for compressing static files. The option is disabled by default and uses our homemade compressor instead. However, if you have Java installed on your server, it would be nicer to enable that option).</li>
-    <li>mod_security/mod_security2 disabled - pH7CMS may not work correctly if enabled so we advise to disable it for your domain (just ask your Web host or do it through cPanel).</li>
+<ul>
+    <li>JRE (Java Runtime Environment) - 1.6 or higher (used for compressing static files. The option is disabled by
+        default and uses our homemade compressor instead. However, if you have Java installed on your server, it would
+        be nicer to enable that option).
+    </li>
+    <li>mod_security/mod_security2 disabled - pH7CMS may not work correctly if enabled so we advise to disable it for
+        your domain (just ask your Web host or do it through cPanel).
+    </li>
 </ul>
 
 
@@ -44,7 +54,11 @@
 
 <h3>Recommended:</h3>
 <ul>
-    <li><span class="bold">PHP 7.0.4</span> or higher <small>(pH7CMS has been especially optimized for PHP 7+ and is about over 2x faster than older versions. Please note your server configuration can also change a lot your site performance).</small></li>
+    <li><span class="bold">PHP 7.0.4</span> or higher
+        <small>(pH7CMS has been especially optimized for PHP 7+ and is about over 2x faster than older versions. Please
+            note your server configuration can also change a lot your site performance).
+        </small>
+    </li>
 </ul>
 
 <h3>Recommended Extensions:</h3>
@@ -59,7 +73,7 @@
 
 <h2>MySQL or MariaDB</h2>
 <h3>Minimum:</h3>
- <ul>
+<ul>
     <li>Version - 5.0.15 or higher</li>
     <li>InnoDB table support</li>
 </ul>

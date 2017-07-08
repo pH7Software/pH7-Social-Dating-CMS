@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Game / Form / Processing
  */
+
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
@@ -22,8 +23,7 @@ class AdminFormProcess extends Form
 
         // Thumbnail
         $oImg = new Image($_FILES['thumb']['tmp_name']);
-        if (!$oImg->validate())
-        {
+        if (!$oImg->validate()) {
             \PFBC\Form::setError('form_game', Form::wrongImgFileTypeMsg());
             return; // Stop execution of the method.
         }
@@ -37,17 +37,14 @@ class AdminFormProcess extends Form
 
         // Game
         $sGameFile = Various::genRnd($_FILES['file']['name'], 30) . PH7_DOT . $this->file->getFileExt($_FILES['file']['name']);
-        $sGameDir =  PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/';
+        $sGameDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/';
 
         // If the folders is not created (games not installed), yet we will create.
-        $this->file->createDir( array($sThumbDir, $sGameDir) );
+        $this->file->createDir(array($sThumbDir, $sGameDir));
 
-        if (!@move_uploaded_file($_FILES['file']['tmp_name'], $sGameDir . $sGameFile))
-        {
+        if (!@move_uploaded_file($_FILES['file']['tmp_name'], $sGameDir . $sGameFile)) {
             \PFBC\Form::setError('form_game', t('Impossible to upload the game. Please check if the folder "%0%" has the write permission (CHMOD 755) or contact your host to check it.', PH7_PATH_PUBLIC_DATA_SYS_MOD . 'game/file/'));
-        }
-        else
-        {
+        } else {
             $aData = [
                 'category_id' => $this->httpRequest->post('category_id', 'int'),
                 'name' => $this->httpRequest->post('name'),
@@ -63,7 +60,7 @@ class AdminFormProcess extends Form
             /* Clean GameModel Cache */
             (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
 
-            Header::redirect(Uri::get('game', 'main', 'game', $aData['title'].','.Db::getInstance()->lastInsertId()), t('The game has been successfully added!'));
+            Header::redirect(Uri::get('game', 'main', 'game', $aData['title'] . ',' . Db::getInstance()->lastInsertId()), t('The game has been successfully added!'));
         }
     }
 }

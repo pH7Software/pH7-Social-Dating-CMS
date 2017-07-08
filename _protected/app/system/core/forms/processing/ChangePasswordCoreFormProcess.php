@@ -32,16 +32,13 @@ class ChangePasswordCoreFormProcess extends Form
         $sAction = ($this->registry->module == 'affiliate') ? 'home' : 'main';
 
         // Login
-        if ($this->registry->module == PH7_ADMIN_MOD)
-        {
+        if ($this->registry->module == PH7_ADMIN_MOD) {
             $mLogin = $oPasswordModel->adminLogin(
                 $sEmail,
                 $this->session->get('admin_username'),
                 $this->httpRequest->post('old_password', Http::NO_CLEAN)
             );
-        }
-        else
-        {
+        } else {
             $mLogin = $oPasswordModel->login(
                 $sEmail,
                 $this->httpRequest->post('old_password', Http::NO_CLEAN),
@@ -50,20 +47,13 @@ class ChangePasswordCoreFormProcess extends Form
         }
 
         // Check
-        if ($this->httpRequest->post('new_password', Http::NO_CLEAN) !== $this->httpRequest->post('new_password2', Http::NO_CLEAN))
-        {
+        if ($this->httpRequest->post('new_password', Http::NO_CLEAN) !== $this->httpRequest->post('new_password2', Http::NO_CLEAN)) {
             \PFBC\Form::setError('form_change_password', t('The passwords do not match.'));
-        }
-        elseif ($this->httpRequest->post('old_password', Http::NO_CLEAN) === $this->httpRequest->post('new_password', Http::NO_CLEAN))
-        {
+        } elseif ($this->httpRequest->post('old_password', Http::NO_CLEAN) === $this->httpRequest->post('new_password', Http::NO_CLEAN)) {
             \PFBC\Form::setError('form_change_password', t('The old and new passwords are identical. So why do you change your password?'));
-        }
-        elseif ($mLogin !== true)
-        {
+        } elseif ($mLogin !== true) {
             \PFBC\Form::setError('form_change_password', t('The old password is not correct.'));
-        }
-        else
-        {
+        } else {
             // Regenerate the session ID to prevent session fixation attack
             $this->session->regenerateId();
 

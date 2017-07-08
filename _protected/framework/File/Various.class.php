@@ -19,7 +19,9 @@ class Various
      *
      * @access private
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Convert bytes to human readable format.
@@ -52,24 +54,23 @@ class Various
     public static function sizeToBytes($sSize)
     {
         $cSuffix = strtolower(substr(trim($sSize), -1));
-        $iSize = (int) $sSize;
+        $iSize = (int)$sSize;
 
-        switch ($cSuffix)
-        {
+        switch ($cSuffix) {
             // kilobyte
             case 'k':
                 $iSize *= 1024;
-            break;
+                break;
 
             // megabyte
             case 'm':
                 $iSize *= 1024 * 1024;
-            break;
+                break;
 
             // gigabyte
             case 'g':
                 $iSize *= 1024 * 1024 * 1024;
-            break;
+                break;
 
             default:
                 throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Bad suffix: \'' . $cSuffix . '\'! Choose between: K, M, G');

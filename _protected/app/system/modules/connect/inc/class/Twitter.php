@@ -117,16 +117,15 @@ class Twitter extends Api implements IApi
     public function auth()
     {
         // state 1 requires a GET variable to exist
-        if($this->_iState == 1 && !isset($_GET['oauth_verifier'])) {
+        if ($this->_iState == 1 && !isset($_GET['oauth_verifier'])) {
             $this->_iState = 0;
         }
 
         // Step 1: Get a request token
-        if($this->_iState == 0) {
+        if ($this->_iState == 0) {
             return $this->_getRequestToken();
-        }
-        // Step 2: Get an access token
-        elseif($this->_iState == 1) {
+        } // Step 2: Get an access token
+        elseif ($this->_iState == 1) {
             return $this->_getAccessToken();
         }
 
@@ -232,19 +231,15 @@ class Twitter extends Api implements IApi
         ));
 
         // Try to get the URL for the avatar size standard
-        if($this->_oTwOAuth->response['code'] == 302)
-        {
+        if ($this->_oTwOAuth->response['code'] == 302) {
             // the direct URL is in the Location header
             $this->_sAvatarFile = $this->getAvatar($this->_oTwOAuth->response['headers']['location']);
-        }
-        else
-        {
+        } else {
             // If this does not work, we try to recover the URL for the original image in full size
             $this->_sAvatarFile = $this->getAvatar($aUserData['profile_image_url']);
         }
 
-        if($this->_sAvatarFile)
-        {
+        if ($this->_sAvatarFile) {
             $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
             (new UserCore)->setAvatar($this->_iProfileId, $this->_sUsername, $this->_sAvatarFile, $iApproved);
         }

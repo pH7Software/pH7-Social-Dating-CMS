@@ -5,11 +5,14 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Inc / Class
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Request\Http;
+use stdClass;
 
 /** Reset the time limit and increase the memory **/
 @set_time_limit(0);
@@ -17,9 +20,13 @@ use PH7\Framework\Mvc\Request\Http;
 
 class Newsletter extends Core
 {
-    const MAX_BULK_EMAIL_NUMBER = 250, SLEEP_SEC = 10;
+    const MAX_BULK_EMAIL_NUMBER = 250;
+    const SLEEP_SEC = 10;
 
+    /** @var SubscriptionModel */
     private $_oSubscriptionModel;
+
+    /** @var int */
     private static $_iTotalSent = 0;
 
     public function __construct()
@@ -60,11 +67,12 @@ class Newsletter extends Core
     /**
      * Send the newsletter to the subscribers.
      *
-     * @param object $oSubscriber Subscriber data from the DB.
-     * @param \PH7\Framework\Mail\Mail $oMail
+     * @param stdClass $oSubscriber Subscriber data from the DB.
+     * @param Mail $oMail
+     *
      * @return integer Number of recipients who were accepted for delivery.
      */
-    protected function sendMail($oSubscriber, Mail $oMail)
+    protected function sendMail(stdClass $oSubscriber, Mail $oMail)
     {
         $this->view->content = $this->httpRequest->post('body', Http::NO_CLEAN);
 

@@ -7,6 +7,7 @@
  * @link           http://ph7cms.com
  * @link           http://github.com/pH7Software/pH7CMS-HTTP-REST-Push-Data
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -28,12 +29,9 @@ class UserController extends MainController
 
     public function createAccount()
     {
-        if ($this->oRest->getRequestMethod() != 'POST')
-        {
+        if ($this->oRest->getRequestMethod() != 'POST') {
             $this->oRest->response('', 406);
-        }
-        else
-        {
+        } else {
             $aReqs = $this->oRest->getRequest();
 
             // Set the User Setting variables
@@ -96,29 +94,21 @@ class UserController extends MainController
 
     public function login()
     {
-        if ($this->oRest->getRequestMethod() != 'POST')
-        {
+        if ($this->oRest->getRequestMethod() != 'POST') {
             $this->oRest->response('', 406);
-        }
-        else
-        {
+        } else {
             $aReqs = $this->oRest->getRequest();
 
-            if (empty($aReqs['email']) || empty($aReqs['password']))
-            {
+            if (empty($aReqs['email']) || empty($aReqs['password'])) {
                 $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('The Email and/or the password is empty.'))), 400);
-            }
-            // Check Login
-            elseif ($this->oUserModel->login($aReqs['email'], $aReqs['password']) === true)
-            {
+            } // Check Login
+            elseif ($this->oUserModel->login($aReqs['email'], $aReqs['password']) === true) {
                 $iId = $this->oUserModel->getId($aReqs['email']);
                 $oUserData = $this->oUserModel->readProfile($iId);
                 $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session, new Framework\Mvc\Model\Security);
 
                 $this->oRest->response($this->set($aReqs));
-            }
-            else
-            {
+            } else {
                 $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('The Password or Email was incorrected'))), 400);
             }
         }
@@ -132,25 +122,16 @@ class UserController extends MainController
      */
     public function user($iId = null)
     {
-        if ($this->oRest->getRequestMethod() != 'GET')
-        {
+        if ($this->oRest->getRequestMethod() != 'GET') {
             $this->oRest->response('', 406);
-        }
-        else
-        {
-            if (empty($iId))
-            {
+        } else {
+            if (empty($iId)) {
                 $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('Profile ID Empty'))), 400);
-            }
-            else
-            {
+            } else {
                 $oUser = $this->oUserModel->readProfile($iId);
-                if (!empty($oUser->profileId) && $iId === $oUser->profileId)
-                {
+                if (!empty($oUser->profileId) && $iId === $oUser->profileId) {
                     $this->oRest->response($this->set([$oUser]));
-                }
-                else
-                {
+                } else {
                     $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('Profile Not Found'))), 404);
                 }
             }

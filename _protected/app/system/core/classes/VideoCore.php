@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Core / Class
  * @version        1.0
  */
+
 namespace PH7;
 
 use PH7\Framework\File\File;

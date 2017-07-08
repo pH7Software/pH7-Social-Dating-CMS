@@ -42,17 +42,12 @@ class Microsoft extends Api
         /* API permissions */
         $this->_oClient->scope = 'wl.basic wl.emails wl.birthday';
 
-        if(($bSuccess = $this->_oClient->Initialize()))
-        {
-            if(($bSuccess = $this->_oClient->Process()))
-            {
-                if(strlen($this->_oClient->authorization_error))
-                {
+        if (($bSuccess = $this->_oClient->Initialize())) {
+            if (($bSuccess = $this->_oClient->Process())) {
+                if (strlen($this->_oClient->authorization_error)) {
                     $this->_oClient->error = $this->_oClient->authorization_error;
                     $bSuccess = false;
-                }
-                elseif(strlen($this->_oClient->access_token))
-                {
+                } elseif (strlen($this->_oClient->access_token)) {
                     $bSuccess = $this->_oClient->CallAPI(
                         'https://apis.live.net/v5.0/me',
                         'GET',

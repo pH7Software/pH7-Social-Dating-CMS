@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Request\Http;
@@ -39,12 +40,11 @@ class AdsCore extends Framework\Ads\Ads
      */
     public static function checkTable($sTable)
     {
-        switch ($sTable)
-        {
+        switch ($sTable) {
             case 'Ads':
             case 'AdsAffiliates':
                 return $sTable;
-            break;
+                break;
 
             default:
                 Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
@@ -60,12 +60,11 @@ class AdsCore extends Framework\Ads\Ads
      */
     public static function convertTableToId($sTable)
     {
-        switch ($sTable)
-        {
+        switch ($sTable) {
             case 'Ads':
             case 'AdsAffiliates':
                 $sId = 'adsId';
-            break;
+                break;
 
             default:
                 Framework\Mvc\Model\Engine\Util\Various::launchErr();

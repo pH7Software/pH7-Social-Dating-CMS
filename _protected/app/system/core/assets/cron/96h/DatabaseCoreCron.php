@@ -9,7 +9,9 @@
  * @package          PH7 / App / System / Core / Asset / Cron / 96H
  * @version          1.1
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -18,35 +20,32 @@ use PH7\Framework\Mvc\Model\Engine\Util\Backup;
 
 class DatabaseCoreCron extends Cron
 {
-
     public function __construct()
     {
         parent::__construct();
 
         // Available options
-        if ($this->httpRequest->getExists('option'))
-        {
-            switch ($this->httpRequest->get('option'))
-            {
+        if ($this->httpRequest->getExists('option')) {
+            switch ($this->httpRequest->get('option')) {
                 // Backup
                 case 'backup':
                     $this->backup();
-                break;
+                    break;
 
                 // Restart Stat
                 case 'stat':
                     $this->stat();
-                break;
+                    break;
 
                 // Repair Tables
                 case 'repair':
                     $this->repair();
-                break;
+                    break;
 
                 // Delete Log
                 case 'remove_log':
                     $this->removeLog();
-                break;
+                    break;
 
                 default:
                     Framework\Http\Http::setHeadersByCode(400);
@@ -166,9 +165,9 @@ class DatabaseCoreCron extends Cron
      */
     protected function cleanData()
     {
-        $iCleanComment = (int) DbConfig::getSetting('cleanComment');
-        $iCleanMsg = (int) DbConfig::getSetting('cleanMsg');
-        $iCleanMessenger = (int) DbConfig::getSetting('cleanMessenger');
+        $iCleanComment = (int)DbConfig::getSetting('cleanComment');
+        $iCleanMsg = (int)DbConfig::getSetting('cleanMsg');
+        $iCleanMessenger = (int)DbConfig::getSetting('cleanMessenger');
 
         // If the option is enabled for Comments
         if ($iCleanComment > 0) {
@@ -199,6 +198,7 @@ class DatabaseCoreCron extends Cron
      * @param integer $iOlderThanXDay Delete data older than X days (e.g., 365 for data older than 1 year).
      * @param string $sTable Table name. Choose between 'Comments<TYPE>', 'Messages' and 'Messenger'
      * @param string $sDateColumn The DB column that indicates when the data has been created/updated (e.g., sendDate, updatedDate).
+     *
      * @return integer Returns the number of rows.
      */
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
@@ -212,7 +212,6 @@ class DatabaseCoreCron extends Cron
         $rStmt->execute();
         return $rStmt->rowCount();
     }
-
 }
 
 // Go!

@@ -32,6 +32,7 @@ final class Registry
      * Import the Singleton trait.
      */
     use Singleton;
+
     /**
      * @internal We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
      */

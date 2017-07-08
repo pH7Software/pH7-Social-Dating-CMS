@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Request\Http;
@@ -79,8 +80,7 @@ class EditAdminBlogForm
             $oForm->addElement(new \PFBC\Element\Button);
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_TPL_SYS_MOD . 'blog/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'));
             $oForm->render();
-        }
-        else
+        } else
             echo '<p class="center bold">' . t('Post Not Found!') . '</p>';
     }
 }

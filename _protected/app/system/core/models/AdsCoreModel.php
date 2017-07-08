@@ -24,11 +24,11 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
     public function get($mActive = 1, $iOffset, $iLimit, $sTable = 'Ads')
     {
         AdsCore::checkTable($sTable);
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sSqlActive = (!empty($mActive)) ? 'WHERE active= :active' : '';
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM'.Db::prefix($sTable) . $sSqlActive . ' ORDER BY active ASC, name ASC LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix($sTable) . $sSqlActive . ' ORDER BY active ASC, name ASC LIMIT :offset, :limit');
         if (!empty($mActive)) $rStmt->bindValue(':active', $mActive, \PDO::PARAM_INT);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
@@ -42,7 +42,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
     {
         AdsCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('INSERT INTO'.Db::prefix($sTable).'(name, code, width, height) VALUES(:name, :code, :width, :height)');
+        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix($sTable) . '(name, code, width, height) VALUES(:name, :code, :width, :height)');
         $rStmt->bindValue(':name', $sName, \PDO::PARAM_STR);
         $rStmt->bindValue(':code', $sCode, \PDO::PARAM_STR);
         $rStmt->bindValue(':width', $iWidth, \PDO::PARAM_INT);
@@ -54,7 +54,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
     {
         AdsCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE'.Db::prefix($sTable).'SET active = :status WHERE adsId =:adsId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = :status WHERE adsId =:adsId');
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
         $rStmt->bindValue(':status', $iStatus, \PDO::PARAM_INT);
         return $rStmt->execute();
@@ -64,7 +64,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
     {
         AdsCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('DELETE FROM'.Db::prefix($sTable).'WHERE adsId =:adsId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE adsId =:adsId');
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
         return $rStmt->execute();
     }
@@ -73,7 +73,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
     {
         AdsCore::checkTable($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE'.Db::prefix($sTable).'SET name =:name, code = :code WHERE adsId =:adsId');
+        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET name =:name, code = :code WHERE adsId =:adsId');
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $sName, \PDO::PARAM_STR);
         $rStmt->bindValue(':code', $sCode, \PDO::PARAM_STR);
@@ -90,15 +90,14 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
     {
         $this->cache->start(self::CACHE_GROUP, 'total' . $sTable, 604800);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             AdsCore::checkTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(adsId) AS totalAds FROM' . Db::prefix($sTable));
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->totalAds;
+            $iData = (int)$oRow->totalAds;
             unset($oRow);
             $this->cache->put($iData);
         }

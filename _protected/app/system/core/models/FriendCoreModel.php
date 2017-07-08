@@ -29,9 +29,9 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function get($iIdProfileId, $iFriendId = null, $mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $mPending = 'all')
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';

@@ -25,8 +25,8 @@ class BlogModel extends BlogCoreModel
         $this->cache->start(self::CACHE_GROUP, 'category' . $iBlogId . $iOffset . $iLimit . $bCount, static::CACHE_TIME);
 
         if (!$oData = $this->cache->get()) {
-            $iOffset = (int) $iOffset;
-            $iLimit = (int) $iLimit;
+            $iOffset = (int)$iOffset;
+            $iLimit = (int)$iLimit;
 
             if ($bCount) {
                 $sSql = 'SELECT *, COUNT(c.blogId) AS totalCatBlogs FROM' . Db::prefix('BlogsDataCategories') . 'AS d INNER JOIN' . Db::prefix('BlogsCategories') . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name ASC LIMIT :offset, :limit';
@@ -155,7 +155,7 @@ class BlogModel extends BlogCoreModel
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) $oRow->totalBlogs;
+            $mData = (int)$oRow->totalBlogs;
             unset($oRow);
         }
 
@@ -174,15 +174,15 @@ class BlogModel extends BlogCoreModel
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
 
-        $sSqlLimit = (!$bCount) ?  'LIMIT :offset, :limit' : '';
-        $sSqlSelect = (!$bCount) ?  '*' : 'COUNT(blogId) AS totalBlogs';
+        $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
+        $sSqlSelect = (!$bCount) ? '*' : 'COUNT(blogId) AS totalBlogs';
 
         if (ctype_digit($mLooking)) {
             $sSqlWhere = ' WHERE blogId = :looking';
@@ -208,7 +208,7 @@ class BlogModel extends BlogCoreModel
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) $oRow->totalBlogs;
+            $mData = (int)$oRow->totalBlogs;
             unset($oRow);
         }
 
@@ -248,7 +248,7 @@ class BlogModel extends BlogCoreModel
         $this->cache->start(self::CACHE_GROUP, 'postIdExists' . $sPostId, static::CACHE_TIME);
 
         if (!$bData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) FROM'.Db::prefix('Blogs').'WHERE postId = :postId LIMIT 1');
+            $rStmt = Db::getInstance()->prepare('SELECT COUNT(postId) FROM' . Db::prefix('Blogs') . 'WHERE postId = :postId LIMIT 1');
             $rStmt->bindValue(':postId', $sPostId, \PDO::PARAM_STR);
             $rStmt->execute();
             $bData = ($rStmt->fetchColumn() == 1);
@@ -266,7 +266,7 @@ class BlogModel extends BlogCoreModel
      */
     public function deletePost($iBlogId)
     {
-        $iBlogId = (int) $iBlogId;
+        $iBlogId = (int)$iBlogId;
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Blogs') . 'WHERE blogId = :blogId');
         $rStmt->bindValue(':blogId', $iBlogId, \PDO::PARAM_INT);
 
@@ -278,7 +278,7 @@ class BlogModel extends BlogCoreModel
      */
     public function deleteCategory($iBlogId)
     {
-        $iBlogId = (int) $iBlogId;
+        $iBlogId = (int)$iBlogId;
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('BlogsCategories') . 'WHERE blogId = :blogId');
         $rStmt->bindValue(':blogId', $iBlogId, \PDO::PARAM_INT);
@@ -290,8 +290,8 @@ class BlogModel extends BlogCoreModel
      * @param string $sValue
      * @param integer $iBlogId
      */
-     public function updatePost($sSection, $sValue, $iBlogId)
-     {
-         $this->orm->update('Blogs', $sSection, $sValue, 'blogId', $iBlogId);
-     }
+    public function updatePost($sSection, $sValue, $iBlogId)
+    {
+        $this->orm->update('Blogs', $sSection, $sValue, 'blogId', $iBlogId);
+    }
 }

@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Request\Http;
@@ -24,7 +25,7 @@ class ShareUrlCoreForm
 
         $oForm = new \PFBC\Form('form_share_url', $iWidth);
         $oForm->configure(array('class' => 'center'));
-        $oForm->addElement(new \PFBC\Element\Url($sLabel, 'share', array('value'=>$sUrl, 'readonly'=>'readonly', 'onclick'=>'this.select()')));
+        $oForm->addElement(new \PFBC\Element\Url($sLabel, 'share', array('value' => $sUrl, 'readonly' => 'readonly', 'onclick' => 'this.select()')));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<br />'));
         $oForm->render();
     }

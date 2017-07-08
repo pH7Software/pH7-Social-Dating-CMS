@@ -9,6 +9,7 @@
  * @package        PH7 / App / System / Core / Asset / Ajax
  * @version        0.6
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 

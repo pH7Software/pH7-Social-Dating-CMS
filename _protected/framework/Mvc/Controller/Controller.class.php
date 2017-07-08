@@ -289,8 +289,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      */
     private function _checkBanStatus()
     {
-        if (Ban::isIp(Ip::get()))
-        {
+        if (Ban::isIp(Ip::get())) {
             \PH7\Framework\Page\Page::banned();
         }
     }

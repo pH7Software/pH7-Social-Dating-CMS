@@ -5,7 +5,9 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Inc / Class
  */
+
 namespace PH7;
+
 use PH7\Framework\Config\Config;
 use PH7\Framework\Util\Various;
 
@@ -23,15 +25,11 @@ class Note extends WriteCore
      */
     public function setThumb($oPost, NoteModel $oNoteModel, Framework\File\File $oFile)
     {
-        if (!empty($_FILES['thumb']['tmp_name']))
-        {
+        if (!empty($_FILES['thumb']['tmp_name'])) {
             $oImage = new Framework\Image\Image($_FILES['thumb']['tmp_name']);
-            if (!$oImage->validate())
-            {
+            if (!$oImage->validate()) {
                 \PFBC\Form::setError('form_note', Form::wrongImgFileTypeMsg());
-            }
-            else
-            {
+            } else {
                 /**
                  * The method deleteFile first test if the file exists, if so it delete the file.
                  */

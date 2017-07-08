@@ -288,9 +288,9 @@ class ForumController extends Controller
     public function deleteTopic()
     {
         $aData = explode('_', $this->httpRequest->post('id'));
-        $iTopicId = (int) $aData[0];
-        $iForumId = (int) $aData[1];
-        $sForumName = (string) $aData[2];
+        $iTopicId = (int)$aData[0];
+        $iForumId = (int)$aData[1];
+        $sForumName = (string)$aData[2];
 
         if ($this->oForumModel->deleteTopic($this->session->get('member_id'), $iTopicId)) {
             $this->sMsg = t('Your topic has been deleted.');
@@ -307,11 +307,11 @@ class ForumController extends Controller
     public function deleteMessage()
     {
         $aData = explode('_', $this->httpRequest->post('id'));
-        $iMessageId = (int) $aData[0];
-        $iTopicId = (int) $aData[1];
-        $iForumId = (int) $aData[2];
-        $sTopicTitle = (string) $aData[3];
-        $sForumName = (string) $aData[4];
+        $iMessageId = (int)$aData[0];
+        $iTopicId = (int)$aData[1];
+        $iForumId = (int)$aData[2];
+        $sTopicTitle = (string)$aData[3];
+        $sForumName = (string)$aData[4];
         unset($aData);
 
         if ($this->oForumModel->deleteMessage($this->session->get('member_id', 'int'), $iMessageId)) {

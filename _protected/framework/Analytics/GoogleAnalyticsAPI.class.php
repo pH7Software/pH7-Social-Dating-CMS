@@ -194,6 +194,7 @@ class GoogleAnalyticsAPI
             $this->dateEnd = $dateEnd;
         }
     }
+
     public function getAccounts()
     {
         $url = 'https://www.google.com/analytics/feeds/accounts/default?';

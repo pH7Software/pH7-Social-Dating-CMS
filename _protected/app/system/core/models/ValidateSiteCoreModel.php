@@ -20,6 +20,6 @@ class ValidateSiteCoreModel extends Framework\Mvc\Model\Engine\Model
      */
     public function is()
     {
-        return (bool) DbConfig::getSetting('isSiteValidated');
+        return (bool)DbConfig::getSetting('isSiteValidated');
     }
 }

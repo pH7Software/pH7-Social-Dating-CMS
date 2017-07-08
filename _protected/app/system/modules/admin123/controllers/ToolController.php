@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Module / Admin / Controller
  * @version        1.1
  */
+
 namespace PH7;
 
 use PH7\Framework\Cache\Cache;
@@ -108,49 +109,46 @@ class ToolController extends Controller
 
         $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, array('.sql', '.gz'));
         // Removing the path
-        $aDumpList = array_map(function ($sValue) { return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue); }, $aDumpList);
+        $aDumpList = array_map(function ($sValue) {
+            return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue);
+        }, $aDumpList);
         $this->view->aDumpList = $aDumpList;
 
 
         $oSecurityToken = new Token;
 
-        if ($this->httpRequest->postExists('backup'))
-        {
-            if (!$oSecurityToken->check('backup'))
-            {
+        if ($this->httpRequest->postExists('backup')) {
+            if (!$oSecurityToken->check('backup')) {
                 $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
-            }
-            else
-            {
+            } else {
                 // Clean the site name to avoid bug with the backup path
                 $sSiteName = str_replace(array(' ', '/', '\\'), '_', $this->registry->site_name);
                 $sCurrentDate = (new CDateTime)->get()->date();
 
-                switch ($this->httpRequest->post('backup_type'))
-                {
+                switch ($this->httpRequest->post('backup_type')) {
                     case 'server':
                         $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql';
                         (new Backup($sFullPath))->back()->save();
                         $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
-                    break;
+                        break;
 
                     case 'server_archive':
                         $sFullPath = PH7_PATH_BACKUP_SQL . 'Database-dump.' . $sCurrentDate . '.sql.gz';
                         (new Backup($sFullPath))->back()->saveArchive();
                         $this->view->msg_success = t('Data successfully dumped into file "%0%"', $sFullPath);
-                    break;
+                        break;
 
                     case 'client':
                         (new Backup($sSiteName . '_' . $sCurrentDate . '.sql'))->back()->download();
-                    break;
+                        break;
 
                     case 'client_archive':
                         (new Backup($sSiteName . '_' . $sCurrentDate . '.sql.gz'))->back()->downloadArchive();
-                    break;
+                        break;
 
                     case 'show':
                         $this->view->sql_content = (new Backup)->back()->show();
-                    break;
+                        break;
 
                     default:
                         $this->design->setFlashMsg(t('Please select a field.'), 'error');

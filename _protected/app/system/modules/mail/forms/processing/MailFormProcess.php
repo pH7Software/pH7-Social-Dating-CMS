@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Mail / Form / Processing
  */
+
 namespace PH7;
 defined('PH7') or die('Restricted access');
 
@@ -87,8 +88,8 @@ class MailFormProcess extends Form
     protected function sendMail($iRecipientId, $iMsgId, UserCoreModel $oUserModel)
     {
         $this->view->content = t('Hello %0%!', $this->httpRequest->post('recipient')) . '<br />' .
-        t('You received a new message from %0%', $this->session->get('member_username')) . '<br />' .
-        '<a href="' . Uri::get('mail', 'main', 'inbox', $iMsgId) . '">' . t('Click here') . '</a>' . t('to read your message.');
+            t('You received a new message from %0%', $this->session->get('member_username')) . '<br />' .
+            '<a href="' . Uri::get('mail', 'main', 'inbox', $iMsgId) . '">' . t('Click here') . '</a>' . t('to read your message.');
 
         $sRecipientEmail = $oUserModel->getEmail($iRecipientId);
 

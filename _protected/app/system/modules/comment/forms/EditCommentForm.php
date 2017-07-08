@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Comment / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Request\Http;
@@ -14,8 +15,7 @@ class EditCommentForm
 
     public static function display()
     {
-        if (isset($_POST['submit_edit_comment']))
-        {
+        if (isset($_POST['submit_edit_comment'])) {
             if (\PFBC\Form::isValid($_POST['submit_edit_comment']))
                 new EditCommentFormProcess();
 

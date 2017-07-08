@@ -9,12 +9,13 @@
  * @package          PH7 / App / System / Core / Asset / Cron / 96H
  * @version          1.0
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class GeneralCoreCron extends Cron
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -25,11 +26,11 @@ class GeneralCoreCron extends Cron
         echo t('The Jobs Cron is working to complete successfully!');
     }
 
-
     /**
      * Checks file permissions and tries to correct them if they are incorrect.
      *
      * @access protected
+     *
      * @return void
      */
     protected function chmod()
@@ -40,7 +41,6 @@ class GeneralCoreCron extends Cron
 
         echo t('Chmod file... Ok!') . '<br />';
     }
-
 }
 
 // Go!

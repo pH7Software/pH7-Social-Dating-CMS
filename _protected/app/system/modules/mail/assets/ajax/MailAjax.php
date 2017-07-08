@@ -32,14 +32,14 @@ class Mail
         switch ($this->_oHttpRequest->post('type')) {
             case 'trash':
                 $this->trash();
-            break;
+                break;
 
             case 'restor':
                 $this->restor();
 
             case 'delete':
                 $this->delete();
-            break;
+                break;
 
             default:
                 Framework\Http\Http::setHeadersByCode(400);

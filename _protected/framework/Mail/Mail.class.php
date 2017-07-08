@@ -57,7 +57,7 @@ class Mail
          */
         if (!$iResult) {
             $aData = ['from' => $sFromMail, 'to' => $sToMail, 'subject' => $sSubject, 'body' => $sContents];
-            $iResult = (int) $this->phpMail($aData);
+            $iResult = (int)$this->phpMail($aData);
         }
 
         return $iResult;

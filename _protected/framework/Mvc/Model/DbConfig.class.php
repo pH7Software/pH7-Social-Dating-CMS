@@ -26,7 +26,9 @@ final class DbConfig
     /**
      * Private constructor to prevent instantiation of class, because it's a static class.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * @param string $sSetting You can specify a specific parameter. Default NULL
@@ -106,7 +108,7 @@ final class DbConfig
                 ];
 
                 Engine\Record::getInstance()->insert('MetaMain', $aData); // Create the new meta data language
-                $oData = (object) $aData;
+                $oData = (object)$aData;
                 unset($aData);
             }
             Engine\Db::free($rStmt);
@@ -136,7 +138,7 @@ final class DbConfig
      */
     public static function setSocialWidgets($sStatus)
     {
-        $sStatus = (string) $sStatus; // Cast into string to be sure it will work as in DB it's an "enum" type
+        $sStatus = (string)$sStatus; // Cast into string to be sure it will work as in DB it's an "enum" type
 
         self::setSetting($sStatus, 'socialMediaWidgets');
 

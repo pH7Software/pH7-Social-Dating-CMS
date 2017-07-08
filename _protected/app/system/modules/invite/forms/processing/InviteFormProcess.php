@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Invite / Form / Processing
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -20,26 +21,18 @@ class InviteFormProcess extends Form
         parent::__construct();
 
         $aTo = explode(',', $this->httpRequest->post('to'));
-        if (count($aTo) > 10)
-        {
+        if (count($aTo) > 10) {
             \PFBC\Form::setError('form_invite', t('To prevent spam, you cannot put more than 10 email addresses at a time.'));
-        }
-        else
-        {
+        } else {
             $oMail = new Mail;
-            foreach ($aTo as $sMail)
-            {
-                if (!(new Validate)->email($sMail))
-                {
+            foreach ($aTo as $sMail) {
+                if (!(new Validate)->email($sMail)) {
                     \PFBC\Form::setError('form_invite', t('One or more email addresses are invalid!'));
-                }
-                else
-                {
+                } else {
                     if (!$this->sendMail($sMail, $oMail))
                         \PFBC\Form::setError('form_invite', Form::errorSendingEmail());
                     else
-                     \PFBC\Form::setSuccess('form_invite', t('Cool! We have sent that.'));
-                    ;
+                        \PFBC\Form::setSuccess('form_invite', t('Cool! We have sent that.'));;
                 }
             }
             unset($oMail);
@@ -56,9 +49,9 @@ class InviteFormProcess extends Form
     protected function sendMail($sMail, Mail $oMail)
     {
         $this->view->content = t('Hello!') . '<br />' .
-        t('You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%') . '<br />' .
-        '<strong><a href="' . Uri::get('user','signup','step1', '?ref=invitation') . '">' . t('Get exclusive privilege to join your friend is waiting for you!') . '</a></strong><br />' .
-        t('Message left by your friend:') . '<br />"<em>' . $this->httpRequest->post('message') . '</em>"';
+            t('You have received a privilege on the invitation from your friend on the new platform to meet new generation - %site_name%') . '<br />' .
+            '<strong><a href="' . Uri::get('user', 'signup', 'step1', '?ref=invitation') . '">' . t('Get exclusive privilege to join your friend is waiting for you!') . '</a></strong><br />' .
+            t('Message left by your friend:') . '<br />"<em>' . $this->httpRequest->post('message') . '</em>"';
         $this->view->footer = t('You are receiving this message because "%0%" you know has entered your email address in the form of invitation of friends to our site. This is not spam!', $this->httpRequest->post('first_name'));
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/invite/invitation.tpl', $sMail);

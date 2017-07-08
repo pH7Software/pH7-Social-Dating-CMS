@@ -2,7 +2,9 @@
 /**
  * This code has been made by pH7 (Pierre-Henry SORIA).
  */
+
 namespace PFBC\Validation;
+
 use PH7\Framework\Security\Spam\Captcha\Captcha;
 
 class CCaptcha extends \PFBC\Validation
