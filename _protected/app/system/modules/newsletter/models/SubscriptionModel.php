@@ -47,7 +47,7 @@ class SubscriptionModel extends UserCoreModel
         $rStmt->bindValue(':affiliatedId', $aData['affiliated_id'], \PDO::PARAM_INT);
         $rStmt->execute();
 
-        return (int) Db::getInstance()->lastInsertId();
+        return (int)Db::getInstance()->lastInsertId();
     }
 
     /**

@@ -96,7 +96,7 @@ class MainController extends Controller
 
                     /***** CONTENTS *****/
                     'h1_title' => Ban::filterWord($oPost->title),
-                    'categories' => $this->oNoteModel->getCategory($oPost->noteId, 0,300),
+                    'categories' => $this->oNoteModel->getCategory($oPost->noteId, 0, 300),
 
                     /** Date **/
                     'dateTime' => $this->dateTime,
@@ -106,15 +106,11 @@ class MainController extends Controller
 
                 // Set Notes Post Views Statistics
                 Statistic::setView($oPost->noteId, 'Notes');
-            }
-            else
-            {
+            } else {
                 $this->sTitle = t('No Note Found.');
                 $this->notFound();
             }
-        }
-        else
-        {
+        } else {
             Header::redirect(Uri::get('note', 'main', 'index'));
         }
 
@@ -150,14 +146,11 @@ class MainController extends Controller
         );
         $this->setMenuVars();
 
-        $sCategoryTxt = substr($sCategory,0,60);
-        if (empty($oSearch))
-        {
+        $sCategoryTxt = substr($sCategory, 0, 60);
+        if (empty($oSearch)) {
             $this->sTitle = t('Not "%0%" category found!', $sCategoryTxt);
             $this->notFound();
-        }
-        else
-        {
+        } else {
             $this->sTitle = t('Search by Category: "%0%" Note', $sCategoryTxt);
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Note Found!', '%n% Notes Found!', $this->iTotalNotes);
@@ -201,16 +194,13 @@ class MainController extends Controller
         $this->setMenuVars();
 
         $sAuthorTxt = substr($sAuthor, 0, 60);
-        if (empty($oSearch))
-        {
+        if (empty($oSearch)) {
             $this->sTitle = t('None "%0%" author was found!', $sAuthorTxt);
             $this->notFound(false); // For the Ajax profile blocks, we can not put HTTP error code 404, so the attribute is "false"
             $this->view->error = t("No %0%'s posts found.", $sAuthor); // We change the error message
-        }
-        else
-        {
+        } else {
             $this->sTitle = t('Search by Author: "%0%" Note', $sAuthorTxt);
-            $this->view->page_title =  $this->view->h2_title = $this->sTitle;
+            $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Note Found!', '%n% Notes Found!', $this->iTotalNotes);
             $this->view->meta_description = t('Search Note Post by Author %0% - Dating Social Community Note', $sAuthorTxt);
             $this->view->meta_keywords = t('author,search,post,blog,note,dating,social network,community,news');
@@ -255,13 +245,10 @@ class MainController extends Controller
         );
         $this->setMenuVars();
 
-        if (empty($oSearch))
-        {
+        if (empty($oSearch)) {
             $this->sTitle = t('Sorry, your search returned no results!');
             $this->notFound();
-        }
-        else
-        {
+        } else {
             $this->sTitle = t('Dating Social Note - Your search returned');
             $this->view->page_title = $this->view->h2_title = $this->sTitle;
             $this->view->h3_title = nt('%n% Note Found!', '%n% Notes Found!', $this->iTotalNotes);
