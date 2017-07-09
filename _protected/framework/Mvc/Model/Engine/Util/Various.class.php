@@ -91,7 +91,7 @@ class Various
      *
      * @return string The correct module name.
      *
-     * @throws self::launchErr() If the table is not valid.
+     * @throws PH7InvalidArgumentException If the table is not valid.
      */
     public static function convertTableToMod($sTable)
     {
@@ -128,7 +128,7 @@ class Various
      *
      * @return string|void Returns the table if it is correct.
      *
-     * @throws self::launchErr() If the table is not valid.
+     * @throws PH7InvalidArgumentException If the table is not valid.
      */
     public static function convertTableToId($sTable)
     {
@@ -190,7 +190,7 @@ class Various
      *
      * @return string|void Returns the table if it is correct.
      *
-     * @throws self::launchErr() If the table is not valid.
+     * @throws PH7InvalidArgumentException If the table is not valid.
      */
     public static function checkTable($sTable)
     {
@@ -220,9 +220,10 @@ class Various
      * @see self::launchErr()
      *
      * @param string $sTable
+     *
      * @return string|void Returns the table if it is correct.
      *
-     * @throws self::launchErr() If the table is not valid.
+     * @throws PH7InvalidArgumentException If the table is not valid.
      */
     public static function checkModelTable($sTable)
     {
