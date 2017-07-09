@@ -271,6 +271,7 @@ class UserCore
     {
         $sUsername = (new Framework\Str\Str)->lower($sUsername);
         //return (strlen($sUsername) >1) ? PH7_URL_ROOT . $sUsername . PH7_PAGE_EXT : '#';
+
         return PH7_URL_ROOT . $sUsername . PH7_PAGE_EXT;
     }
 
