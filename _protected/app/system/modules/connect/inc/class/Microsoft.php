@@ -61,18 +61,17 @@ class Microsoft extends Api
             $bSuccess = $this->_oClient->Finalize($bSuccess);
         }
 
-        if($this->_oClient->exit)
+        if ($this->_oClient->exit) {
             exit(1);
+        }
 
-        if($bSuccess)
-        {
+        if ($bSuccess) {
             // User info is ok? Here we will be connect the user and/or adding the login and registering routines...
             $oUserModel = new UserCoreModel;
 
-            if(!$iId = $oUserModel->getId($oUserData->emails->account))
-            {
+            if (!$iId = $oUserModel->getId($oUserData->emails->account)) {
                 // Add User if it does not exist in our database
-                $this->add(escape($oUserData, true), $oUserModel);
+                $this->add($oUserData, $oUserModel);
 
                 $this->oDesign->setFlashMsg( t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
                 $this->sUrl = Uri::get('connect','main','register');

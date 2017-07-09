@@ -49,7 +49,7 @@ class Google extends Api implements IApi
 
         $oOauth = new \Google_Oauth2Service($oClient);
 
-        if($oHttpRequest->getExists('code')) {
+        if ($oHttpRequest->getExists('code')) {
             $oClient->authenticate();
             $oSession->set('token', $oClient->getAccessToken());
             $this->sUrl = Uri::get('connect','main','home');
@@ -59,28 +59,25 @@ class Google extends Api implements IApi
             $oClient->setAccessToken($oSession->get('token', false));
         }
 
-        if ($oClient->getAccessToken())
-        {
+        if ($oClient->getAccessToken()) {
             // User info is ok? Here we will be connect the user and/or adding the login and registering routines...
             $oUserModel = new UserCoreModel;
 
             // Get information of user
             $aUserData = $oOauth->userinfo->get();
 
-            if(!$iId = $oUserModel->getId($aUserData['email']))
-            {
+            if (!$iId = $oUserModel->getId($aUserData['email'])) {
                 // Add User if it does not exist in our database
                 $this->add(escape($aUserData, true), $oUserModel);
 
                 // Add User Avatar
-                if(!empty($aUserData['picture']))
+                if (!empty($aUserData['picture'])) {
                     $this->setAvatar($aUserData['picture']);
+                }
 
                 $this->oDesign->setFlashMsg( t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
                 $this->sUrl = Uri::get('connect','main','register');
-            }
-            else
-            {
+            } else {
                 // Login
                 $this->setLogin($iId, $oUserModel);
                 $this->sUrl = Uri::get('connect','main','home');
@@ -90,9 +87,7 @@ class Google extends Api implements IApi
             $oSession->set('token', $oClient->getAccessToken());
 
             unset($oUserModel);
-        }
-        else
-        {
+        } else {
             $this->sUrl = $oClient->createAuthUrl();
         }
 
@@ -142,6 +137,7 @@ class Google extends Api implements IApi
      * Set Avatar.
      *
      * @param string $sUrl
+     *
      * @return void
      */
     public function setAvatar($sUrl)
@@ -161,6 +157,7 @@ class Google extends Api implements IApi
      * Set Configuration of OAuth API.
      *
      * @param \Google_Client $oClient
+     *
      * @return void
      */
     private function _setConfig(\Google_Client $oClient)
