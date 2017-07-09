@@ -52,29 +52,28 @@ class Various
      *
      * @param string $Mod
      *
-     * @return string|voi) Returns the table if it is correct.
+     * @return string|void Returns the table if it is correct.
      *
-     * @throws self::launchErr() If the table is not valid.
+     * @throws PH7InvalidArgumentException If the table is not valid.
      */
     public static function convertModToTable($Mod)
     {
-        switch ($Mod)
-        {
+        switch ($Mod) {
             case 'user':
                 $sTable = 'Members';
-            break;
+                break;
 
             case 'affiliate':
                 $sTable = 'Affiliates';
-            break;
+                break;
 
             case 'newsletter':
                 $sTable = 'Subscribers';
-            break;
+                break;
 
             case PH7_ADMIN_MOD:
                 $sTable = 'Admins';
-            break;
+                break;
 
             default:
                static::launchErr($Mod);
