@@ -48,72 +48,96 @@ class ImportUser extends Core
         'ip'
     ];
 
+    /** @var array */
+    private $aFile;
+
+    /** @var array */
+    private $aData = [];
+
+    /** @var array */
+    private $aTmpData;
+
+    /** @var array */
+    private $aFileData;
+
+    /** @var array */
+    private $aRes;
+
+    /** @var int */
+    private $iErrType;
+
+    /**
+     * @var array $aGenderList Gender types available for pH7CMS.
+     */
+    private static $aGenderList = ['male', 'female', 'couple'];
+
     /**
      * @param array $aFiles
      * @param string $sDelimiter Delimiter Field delimiter (one character).
      * @param string $sEnclosure Enclosure Field enclosure (one character).
+     *
      * @return void
      */
     public function __construct(array $aFiles, $sDelimiter, $sEnclosure)
     {
         parent::__construct();
 
-        $this->_aFile = $aFiles;
-        $sExtFile = $this->file->getFileExt($this->_aFile['name']);
+        $this->aFile = $aFiles;
+        $sExtFile = $this->file->getFileExt($this->aFile['name']);
 
         if ($sExtFile != 'csv' && $sExtFile != 'txt')
-            $this->_iErrType = static::ERR_BAD_FILE;
-        elseif ($this->_aFile['error'] == UPLOAD_ERR_INI_SIZE)
-            $this->_iErrType = static::ERR_TOO_LARGE;
-        elseif (!$rHandler = @fopen($this->_aFile['tmp_name'], 'rb'))
-            $this->_iErrType = static::ERR_INVALID;
-        elseif (!($this->_aFileData = @fgetcsv($rHandler, 0, $sDelimiter, $sEnclosure)) || !is_array($this->_aFileData))
-            $this->_iErrType = static::ERR_INVALID;
+            $this->iErrType = static::ERR_BAD_FILE;
+        elseif ($this->aFile['error'] == UPLOAD_ERR_INI_SIZE)
+            $this->iErrType = static::ERR_TOO_LARGE;
+        elseif (!$rHandler = @fopen($this->aFile['tmp_name'], 'rb'))
+            $this->iErrType = static::ERR_INVALID;
+        elseif (!($this->aFileData = @fgetcsv($rHandler, 0, $sDelimiter, $sEnclosure)) || !is_array($this->aFileData))
+            $this->iErrType = static::ERR_INVALID;
 
-        if (!empty($this->_iErrType)) {
-            $this->_removeTmpFile();
-            $this->_aRes = ['status' => false, 'msg' => $this->getErrMsg()];
+        if (!empty($this->iErrType)) {
+            $this->removeTmpFile();
+            $this->aRes = ['status' => false, 'msg' => $this->getErrMsg()];
         } else {
             $this->setDefVals();
 
-            foreach ($this->_aFileData as $sKey => $sVal) {
+            foreach ($this->aFileData as $sKey => $sVal) {
                 // Clean the text to make comparisons easier...
                 $sVal = strtolower(trim(str_replace(['-', '_', ' '], '', $sVal)));
 
                 // Test comparisons of strings and adding values in an array "ImportUser::$_aTmpData"
-                if ($sVal == 'username' || $sVal == 'login' || $sVal == 'user' || $sVal == 'nickname') $this->_aTmpData['username'] = $sKey;
-                if ($sVal == 'name' || $sVal == 'firstname' || $sVal == 'forname') $this->_aTmpData['first_name'] = $sKey;
-                if ($sVal == 'lastname' || $sVal == 'surname') $this->_aTmpData['last_name'] = $sKey;
-                if ($sVal == 'matchsex' || $sVal == 'looking' || $sVal == 'lookingfor') $this->_aTmpData['match_sex'] = $sKey;
-                if ($sVal == 'sex' || $sVal == 'gender') $this->_aTmpData['sex'] = $sKey;
-                if ($sVal == 'email' || $sVal == 'mail') $this->_aTmpData['email'] = $sKey;
-                if ($sVal == 'desc' || $sVal == 'description' || $sVal == 'descriptionme' || $sVal == 'generaldescription' || $sVal == 'about' || $sVal == 'aboutme' || $sVal == 'bio' || $sVal == 'biography' || $sVal == 'comment') $this->_aTmpData['description'] = $sKey;
-                if ($sVal == 'country' || $sVal == 'countryid') $this->_aTmpData['country'] = $sKey;
-                if ($sVal == 'city' || $sVal == 'town') $this->_aTmpData['city'] = $sKey;
-                if ($sVal == 'state' || $sVal == 'district' || $sVal == 'province' || $sVal == 'region') $this->_aTmpData['state'] = $sKey;
-                if ($sVal == 'zip' || $sVal == 'zipcode' || $sVal == 'postal' || $sVal == 'postalcode' || $sVal == 'eircode') $this->_aTmpData['zip_code'] = $sKey;
-                if ($sVal == 'website' || $sVal == 'site' || $sVal == 'url') $this->_aTmpData['website'] = $sKey;
-                if ($sVal == 'birthday' || $sVal == 'birthdate' || $sVal == 'dateofbirth') $this->_aTmpData['birth_date'] = $sKey;
+                if ($sVal == 'username' || $sVal == 'login' || $sVal == 'user' || $sVal == 'nickname') $this->aTmpData['username'] = $sKey;
+                if ($sVal == 'name' || $sVal == 'firstname' || $sVal == 'forname') $this->aTmpData['first_name'] = $sKey;
+                if ($sVal == 'lastname' || $sVal == 'surname') $this->aTmpData['last_name'] = $sKey;
+                if ($sVal == 'matchsex' || $sVal == 'looking' || $sVal == 'lookingfor') $this->aTmpData['match_sex'] = $sKey;
+                if ($sVal == 'sex' || $sVal == 'gender') $this->aTmpData['sex'] = $sKey;
+                if ($sVal == 'email' || $sVal == 'mail') $this->aTmpData['email'] = $sKey;
+                if ($sVal == 'desc' || $sVal == 'description' || $sVal == 'descriptionme' || $sVal == 'generaldescription' || $sVal == 'about' || $sVal == 'aboutme' || $sVal == 'bio' || $sVal == 'biography' || $sVal == 'comment') $this->aTmpData['description'] = $sKey;
+                if ($sVal == 'country' || $sVal == 'countryid') $this->aTmpData['country'] = $sKey;
+                if ($sVal == 'city' || $sVal == 'town') $this->aTmpData['city'] = $sKey;
+                if ($sVal == 'state' || $sVal == 'district' || $sVal == 'province' || $sVal == 'region') $this->aTmpData['state'] = $sKey;
+                if ($sVal == 'zip' || $sVal == 'zipcode' || $sVal == 'postal' || $sVal == 'postalcode' || $sVal == 'eircode') $this->aTmpData['zip_code'] = $sKey;
+                if ($sVal == 'website' || $sVal == 'site' || $sVal == 'url') $this->aTmpData['website'] = $sKey;
+                if ($sVal == 'birthday' || $sVal == 'birthdate' || $sVal == 'dateofbirth') $this->aTmpData['birth_date'] = $sKey;
             }
 
             $iRow = 0;
             $oUserModel = new UserCoreModel;
             $oExistsModel = new ExistsCoreModel;
             $oValidate = new Validate;
-            while (($this->_aFileData = fgetcsv($rHandler, 0, $sDelimiter, $sEnclosure)) !== false) {
-                $sEmail = trim($this->_aFileData[$this->_aTmpData['email']]);
+            while (($this->aFileData = fgetcsv($rHandler, 0, $sDelimiter, $sEnclosure)) !== false) {
+                $sEmail = trim($this->aFileData[$this->aTmpData['email']]);
                 if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail)) {
                     $this->setData($iRow);
-                    $oUserModel->add(escape($this->_aData[$iRow], true));
+                    $oUserModel->add(escape($this->aData[$iRow], true));
                     $iRow++;
                 }
             }
 
-            $this->_removeTmpFile();
+            $this->removeTmpFile();
             fclose($rHandler);
-            unset($rHandler, $oUserModel, $oExistsModel, $oValidate, $this->_aTmpData, $this->_aFileData, $this->_aData);
+            unset($rHandler, $oUserModel, $oExistsModel, $oValidate, $this->aTmpData, $this->aFileData, $this->aData);
 
-            $this->_aRes = ['status' => true, 'msg' => nt('%n% user has been successfully added.', '%n% users has been successfully added.', $iRow)];
+            $this->aRes = ['status' => true, 'msg' => nt('%n% user has been successfully added.', '%n% users has been successfully added.', $iRow)];
         }
     }
 
@@ -162,16 +186,16 @@ class ImportUser extends Core
      */
     protected function setDefVals()
     {
-        $sFiveChars = Various::genRnd($this->_aFile['name'], 5);
+        $sFiveChars = Various::genRnd($this->aFile['name'], 5);
 
-        $this->_aTmpData = [
+        $this->aTmpData = [
             'email' => 'pierrehenrysoriasanz' . $sFiveChars . '@ph7cms' . $sFiveChars . '.com',
             'username' => 'pH7CMS' . $sFiveChars,
             'password' => Various::genRnd(),
             'first_name' => 'Alex' . $sFiveChars,
             'last_name' => 'Rolli' . $sFiveChars,
-            'sex' => $this->_aGenderList[mt_rand(0, 2)], // Generate randomly it
-            'match_sex' => $this->_aGenderList[mt_rand(0, 2)], // Generate randomly it
+            'sex' => self::$aGenderList[mt_rand(0, 2)], // Generate randomly it
+            'match_sex' => self::$aGenderList[mt_rand(0, 2)], // Generate randomly it
             'birth_date' => date('Y') - mt_rand(20, 50) . '-' . mt_rand(1, 12) . '-' . mt_rand(1, 28), // Generate randomly the anniversary date
             'country' => 'US',
             'city' => 'Virginia',
@@ -191,18 +215,18 @@ class ImportUser extends Core
      */
     protected function getErrMsg()
     {
-        switch ($this->_iErrType) {
+        switch ($this->iErrType) {
             case static::ERR_BAD_FILE:
                 $sErrMsg = t('Invalid File Format! Please select a valid CSV/TXT file containing data members.');
-            break;
+                break;
 
             case static::ERR_TOO_LARGE:
                 $sErrMsg = t('The file is too large. Please select a smaller file or change your server PHP settings. Especially "upload_max_filesize" and "post_max_size" directives in the php.ini file.');
-            break;
+                break;
 
             case static::ERR_INVALID:
                 $sErrMsg = t('The file is Invalid/empty or incorrect Delimiter/Enclosure set.');
-            break;
+                break;
         }
 
         return $sErrMsg;
@@ -212,14 +236,16 @@ class ImportUser extends Core
      * Check (and modify if incorrect) the gender type.
      *
      * @param string $sSex
+     *
      * @return string
      */
     protected function checkGender($sSex)
     {
         $sSex = strtolower($sSex);
 
-        if (!in_array($sSex, $this->_aGenderList))
-            $sSex = $this->_aGenderList[mt_rand(0,2)];
+        if (!in_array($sSex, self::$aGenderList)) {
+            $sSex = self::$aGenderList[mt_rand(0, 2)];
+        }
 
         return $sSex;
     }
@@ -229,9 +255,8 @@ class ImportUser extends Core
      *
      * @return void
      */
-    private function _removeTmpFile()
+    private function removeTmpFile()
     {
-        $this->file->deleteFile($this->_aFile['tmp_name']);
+        $this->file->deleteFile($this->aFile['tmp_name']);
     }
-
 }
