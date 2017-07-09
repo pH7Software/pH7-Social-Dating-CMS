@@ -158,7 +158,7 @@ class Twitter extends Api implements IApi
             'status' => $sText
         ));
 
-        return ($this->_oTwOAuth->response['code'] == 200);
+        return $this->_oTwOAuth->response['code'] == 200;
     }
 
     /**
