@@ -8,13 +8,17 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
+
 class Comment extends CommentCore
 {
 
     /**
      * @param string $sTable
-     * @return mixed (string or void) Returns the table if it is correct.
-     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
+     *
+     * @return string|void Returns the table if it is correct.
+     *
+     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
      */
     public static function getTable($sTable)
     {
@@ -44,10 +48,9 @@ class Comment extends CommentCore
                 break;
 
             default:
-                Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
+                Various::launchErr($sTable);
         }
 
         return $sNewTable;
     }
-
 }

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Pattern\Statik;
 
@@ -29,14 +30,16 @@ class AdsCore extends Framework\Ads\Ads
         $oHttpRequest = new Http;
         $sTable = ($oHttpRequest->getExists('ads_type') && $oHttpRequest->get('ads_type') == 'affiliate') ? 'AdsAffiliates' : 'Ads';
         unset($oHttpRequest);
+
         return $sTable;
     }
 
     /**
      * Checks Ads Table.
      *
-     * @return mixed (string or void if table is not valid) Returns the table if it is correct.
-     * @throws If the table is not valid, it throws an exception and displays an error message with the method \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() and exit().
+     * @return string|void Returns the table name if it is correct, nothing otherwise.
+     *
+     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the table is not valid.
      */
     public static function checkTable($sTable)
     {

@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Pattern\Statik;
 
 class CommentCore
@@ -23,9 +24,12 @@ class CommentCore
      * Check table.
      *
      * @param string $sTable
-     * @return mixed (string or void) Returns the table if it is correct.
-     * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
-     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
+     *
+     * @return string|void Returns the table if it is correct.
+     *
+     * @see Various::launchErr()
+     *
+     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the table is not valid.
      */
     public static function checkTable($sTable)
     {
@@ -39,22 +43,24 @@ class CommentCore
             case 'note':
             case 'game':
                 return ucfirst($sTable);
-                break;
 
             default:
-                Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
+                Various::launchErr($sTable);
         }
     }
 
     /**
-     * @desc Count Comment with a HTML text.
+     * Count Comment with a HTML text.
+     *
      * @param integer $iId
      * @param string $sTable
+     *
      * @return string
      */
     public static function count($iId, $sTable)
     {
         $iCommentNumber = (new CommentCoreModel)->total($iId, $sTable);
+
         return nt('%n% Comment', '%n% Comments', $iCommentNumber);
     }
 }
