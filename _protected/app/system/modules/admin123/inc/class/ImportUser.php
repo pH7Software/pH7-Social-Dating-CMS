@@ -22,20 +22,14 @@ use PH7\Framework\Util\Various;
 
 class ImportUser extends Core
 {
-
-    const ERR_BAD_FILE = 1, ERR_TOO_LARGE = 2, ERR_INVALID = 3;
-
-    private $_aFile, $_aData = [], $_aTmpData, $_aFileData, $_aRes, $_iErrType;
-
-    /**
-     * @var array $_aGenderList Gender types available for pH7CMS.
-     */
-    private $_aGenderList = ['male', 'female', 'couple'];
+    const ERR_BAD_FILE = 1;
+    const ERR_TOO_LARGE = 2;
+    const ERR_INVALID = 3;
 
     /*
-     * @var array $_aDbTypes Array containing the DB data types.
+     * @var array Array containing the DB data types.
      */
-    private $_aDbTypes = [
+    const DB_TYPES = [
         'first_name',
         'last_name',
         'username',
@@ -128,32 +122,33 @@ class ImportUser extends Core
      */
     public function getResponse()
     {
-        return $this->_aRes;
+        return $this->aRes;
     }
 
     /**
      * Check and set the data from the CSV file.
      *
-     * @param integer $iRow Number of row of the CSV file
+     * @param int $iRow Number of row of the CSV file
+     *
      * @return void
      */
     protected function setData($iRow)
     {
         $oUser = new UserCore;
 
-        foreach ($this->_aDbTypes as $sType) {
-            $sData = (!empty($this->_aFileData[$this->_aTmpData[$sType]])) ? trim($this->_aFileData[$this->_aTmpData[$sType]]) : $this->_aTmpData[$sType];
+        foreach (self::DB_TYPES as $sType) {
+            $sData = (!empty($this->aFileData[$this->aTmpData[$sType]])) ? trim($this->aFileData[$this->aTmpData[$sType]]) : $this->aTmpData[$sType];
 
             if ($sType == 'username') {
-                $this->_aData[$iRow][$sType] = $oUser->findUsername($sData, $this->_aData[$iRow]['first_name'], $this->_aData[$iRow]['last_name']);
+                $this->aData[$iRow][$sType] = $oUser->findUsername($sData, $this->aData[$iRow]['first_name'], $this->aData[$iRow]['last_name']);
             } elseif ($sType == 'sex') {
-                $this->_aData[$iRow][$sType] = $this->checkGender($sData);
+                $this->aData[$iRow][$sType] = $this->checkGender($sData);
             } elseif ($sType == 'match_sex') {
-                $this->_aData[$iRow][$sType] = [$this->checkGender($sData)];
+                $this->aData[$iRow][$sType] = [$this->checkGender($sData)];
             } elseif ($sType == 'birth_date') {
-                $this->_aData[$iRow][$sType] = $this->dateTime->get($sData)->date('Y-m-d');
+                $this->aData[$iRow][$sType] = $this->dateTime->get($sData)->date('Y-m-d');
             } else {
-                $this->_aData[$iRow][$sType] = $sData;
+                $this->aData[$iRow][$sType] = $sData;
             }
         }
 
