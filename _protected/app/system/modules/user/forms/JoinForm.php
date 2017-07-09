@@ -64,7 +64,7 @@ class JoinForm
         if (DbConfig::getSetting('allowUserToPartner') &&
             // We don't want to register an admin to a partner website
             !AdminCore::auth() &&
-            (new AdminCoreModel)->getRootIp() !== Ip::get()
+            !AdminCore::isAdminIp(new AdminCoreModel)
         ) {
             $oForm->addElement(new \PFBC\Element\Checkbox('', 'partner_register', array('yes' => '<em class="small">' . t('Join also EdenFlirt for increasing the chance to date the right person.') . '</em>'), array('value' => 'yes')));
         }

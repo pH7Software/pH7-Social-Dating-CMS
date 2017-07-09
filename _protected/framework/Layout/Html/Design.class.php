@@ -449,7 +449,7 @@ class Design
         if (
             (!defined('PH7_VALID_LICENSE') || !PH7_VALID_LICENSE)
             && !AdminCore::auth()
-            && (new AdminCoreModel)->getRootIp() !== Ip::get()
+            && !AdminCore::isAdminIp(new AdminCoreModel)
         ) {
             $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742" />';
 

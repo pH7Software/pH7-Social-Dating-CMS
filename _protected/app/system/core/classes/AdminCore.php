@@ -47,19 +47,31 @@ class AdminCore extends UserCore
     }
 
     /**
+     * @param AdminCoreModel $oAdminModel
+     *
+     * @return bool TRUE if the IP is the one the site was installed, FALSE otherwise.
+     */
+    public static function isAdminIp(AdminCoreModel $oAdminModel)
+    {
+        return $oAdminModel->getRootIp() === Ip::get();
+    }
+
+    /**
      * Set an admin authentication.
      *
      * @param stdClass $oAdminData User database object.
      * @param UserCoreModel $oAdminModel
      * @param Session $oSession
      * @param SecurityModel $oSecurityModel
+     *
      * @return void
      */
     public function setAuth(stdClass $oAdminData, UserCoreModel $oAdminModel, Session $oSession, SecurityModel $oSecurityModel)
     {
         // Remove the session if the admin is logged in as "user" or "affiliate".
-        if (UserCore::auth() || AffiliateCore::auth())
+        if (UserCore::auth() || AffiliateCore::auth()) {
             $oSession->destroy();
+        }
 
         // Regenerate the session ID to prevent session fixation attack
         $oSession->regenerateId();
