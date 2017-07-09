@@ -10,8 +10,10 @@
  */
 
 namespace PH7\Framework\Mvc\Model\Engine\Util;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Pattern\Statik;
 
@@ -29,7 +31,8 @@ class Various
      * Executes SQL queries.
      *
      * @param string $sSqlFile File SQL.
-     * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
+     *
+     * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
      */
     public static function execQueryFile($sSqlFile)
     {
@@ -47,8 +50,10 @@ class Various
      * Convert mod to table.
      *
      * @param string $Mod
-     * @return mixed (string | void) Returns the table if it is correct.
-     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
+     *
+     * @return string|voi) Returns the table if it is correct.
+     *
+     * @throws self::launchErr() If the table is not valid.
      */
     public static function convertModToTable($Mod)
     {
@@ -80,11 +85,13 @@ class Various
     /**
      * Convert table to module name.
      *
-     * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
+     * @see self::launchErr()
      *
      * @param string $sTable
+     *
      * @return string The correct module name.
-     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
+     *
+     * @throws self::launchErr() If the table is not valid.
      */
     public static function convertTableToMod($sTable)
     {
@@ -115,11 +122,13 @@ class Various
     /**
      * Convert table to ID.
      *
-     * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
+     * @see self::launchErr()
      *
      * @param string $sTable
-     * @return mixed (string | void) Returns the table if it is correct.
-     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
+     *
+     * @return string|void Returns the table if it is correct.
+     *
+     * @throws self::launchErr() If the table is not valid.
      */
     public static function convertTableToId($sTable)
     {
@@ -175,11 +184,13 @@ class Various
     /**
      * Check table.
      *
-     * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
+     * @see self::launchErr()
      *
      * @param string $sTable
-     * @return mixed (string | void) Returns the table if it is correct.
-     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
+     *
+     * @return string|void Returns the table if it is correct.
+     *
+     * @throws self::launchErr() If the table is not valid.
      */
     public static function checkTable($sTable)
     {
@@ -208,11 +219,12 @@ class Various
     /**
      * Check the model table.
      *
-     * @see \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr()
+     * @see self::launchErr()
      *
      * @param string $sTable
-     * @return mixed (string | void) Returns the table if it is correct.
-     * @throws \PH7\Framework\Mvc\Model\Engine\Util\Various::launchErr() If the table is not valid.
+     * @return string|void Returns the table if it is correct.
+     *
+     * @throws self::launchErr() If the table is not valid.
      */
     public static function checkModelTable($sTable)
     {
@@ -224,7 +236,7 @@ class Various
             case 'Subscribers':
             case 'Admins':
                 return $sTable;
-            break;
+                break;
 
             default:
                 static::launchErr($sTable);
