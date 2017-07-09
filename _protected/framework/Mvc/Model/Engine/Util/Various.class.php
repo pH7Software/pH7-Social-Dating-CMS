@@ -204,12 +204,10 @@ class Various
             case 'Blogs':
             case 'Notes':
                 return $sTable;
-                break;
 
             /** Check Ads Tables **/
-            case \PH7\AdsCore::checkTable($sTable):
+            case AdsCore::checkTable($sTable):
                 return $sTable;
-                break;
 
             default:
                 static::launchErr($sTable);
@@ -236,7 +234,6 @@ class Various
             case 'Subscribers':
             case 'Admins':
                 return $sTable;
-                break;
 
             default:
                 static::launchErr($sTable);
