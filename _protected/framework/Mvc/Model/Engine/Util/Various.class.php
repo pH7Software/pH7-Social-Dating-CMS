@@ -13,6 +13,7 @@ namespace PH7\Framework\Mvc\Model\Engine\Util;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\AdsCore;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Pattern\Statik;
@@ -170,8 +171,8 @@ class Various
                 break;
 
             /** Check Ads Tables **/
-            case \PH7\AdsCore::checkTable($sTable):
-                $sId = \PH7\AdsCore::convertTableToId($sTable);
+            case AdsCore::checkTable($sTable):
+                $sId = AdsCore::convertTableToId($sTable);
                 break;
 
             default:
