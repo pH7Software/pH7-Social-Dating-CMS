@@ -247,12 +247,14 @@ class Various
      * Set an Error Message with an Exception then exit() function.
      *
      * @param string $sTable The table value.
+     *
      * @return integer 1 (with exit function).
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message.
+     *
+     * @throws PH7InvalidArgumentException Explanatory message.
      */
     public static function launchErr($sTable)
     {
-        throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Bad data table: "' . $sTable . '"!');
+        throw new PH7InvalidArgumentException('Bad data table: "' . $sTable . '"!');
         exit(1);
     }
 }
