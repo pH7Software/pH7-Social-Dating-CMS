@@ -26,7 +26,6 @@ class AclResource
             case 'sName':
             case 'aAllowed':
                 return $this->$sName;
-                break;
 
             default:
                 throw new Exception("Unable to get \"$sName\".");

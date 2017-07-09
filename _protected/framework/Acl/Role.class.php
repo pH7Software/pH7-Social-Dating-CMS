@@ -28,7 +28,6 @@ class Role
             case 'sName':
             case 'sPermissions':
                 return $this->sName;
-                break;
 
             default:
                 throw new Exception("Unable to get \"$sName\".");
