@@ -38,7 +38,8 @@ class AdminCore extends UserCore
      * Determines if the ID is from Root Admin (main admin).
      *
      * @param  integer $iProfileId
-     * @return boolean
+     *
+     * @return bool
      */
     public static function isRootProfileId($iProfileId)
     {

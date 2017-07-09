@@ -43,6 +43,7 @@ class AffiliateCore extends UserCore
      * @param UserCoreModel $oAffModel
      * @param Session $oSession
      * @param SecurityModel $oSecurityModel
+     *
      * @return void
      */
     public function setAuth(stdClass $oAffData, UserCoreModel $oAffModel, Session $oSession, SecurityModel $oSecurityModel)
@@ -73,7 +74,7 @@ class AffiliateCore extends UserCore
     /**
      * Check if an admin is logged as an affiliate.
      *
-     * @return boolean
+     * @return bool
      */
     public static function isAdminLoggedAs()
     {
@@ -86,6 +87,7 @@ class AffiliateCore extends UserCore
      * @param integer $iAffId Affiliate ID
      * @param Config $oConfig
      * @param Registry $oRegistry
+     *
      * @return void
      */
     public static function updateJoinCom($iAffId, Config $oConfig, Registry $oRegistry)
@@ -107,6 +109,7 @@ class AffiliateCore extends UserCore
      *
      * @param integer $iProfileId
      * @param string $sUsername
+     *
      * @return void
      */
     public function delete($iProfileId, $sUsername)

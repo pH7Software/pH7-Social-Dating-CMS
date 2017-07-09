@@ -49,7 +49,7 @@ class UserCore
     /**
      * Check if an admin is logged as a user.
      *
-     * @return boolean
+     * @return bool
      */
     public static function isAdminLoggedAs()
     {
@@ -61,6 +61,7 @@ class UserCore
      *
      * @param integer $iProfileId
      * @param string $sUsername
+     *
      * @return void
      */
     public function delete($iProfileId, $sUsername)
@@ -88,8 +89,9 @@ class UserCore
      * @param integer $iProfileId
      * @param integer $sUsername
      * @param string $sFile
-     * @param integer $iApproved (1 = approved 0 = pending) Default 1
-     * @return boolean TRUE if success, FALSE if the extension is wrong.
+     * @param integer $iApproved (1 = approved 0 = pending)
+     *
+     * @return bool TRUE if success, FALSE if the extension is wrong.
      */
     public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1)
     {
@@ -162,6 +164,7 @@ class UserCore
      *
      * @param integer $iProfileId
      * @param string $sUsername
+     *
      * @return void
      */
     public function deleteAvatar($iProfileId, $sUsername)
@@ -202,8 +205,9 @@ class UserCore
      * @param integer $iProfileId
      * @param string $sUsername
      * @param string $sFile
-     * @param integer $iApproved (1 = approved 0 = pending) Default 1
-     * @return boolean TRUE if success, FALSE if the extension is wrong.
+     * @param integer $iApproved (1 = approved 0 = pending)
+     *
+     * @return bool TRUE if success, FALSE if the extension is wrong.
      */
     public function setBackground($iProfileId, $sUsername, $sFile, $iApproved = 1)
     {
@@ -241,6 +245,7 @@ class UserCore
     /**
      * @param integer $iProfileId
      * @param string $sUsername
+     *
      * @return void
      */
     public function deleteBackground($iProfileId, $sUsername)
@@ -259,6 +264,7 @@ class UserCore
      * Get the Profile Link.
      *
      * @param string $sUsername
+     *
      * @return string The Absolute Profile Link
      */
     public function getProfileLink($sUsername)
@@ -274,6 +280,7 @@ class UserCore
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
+     *
      * @return string The link
      */
     public function getProfileSignupLink($sUsername, $sFirstName, $sSex)
@@ -304,6 +311,7 @@ class UserCore
      * @param UserCoreModel $oUserModel
      * @param Session $oSession
      * @param SecurityModel $oSecurityModel
+     *
      * @return void
      */
     public function setAuth(stdClass $oUserData, UserCoreModel $oUserModel, Session $oSession, SecurityModel $oSecurityModel)
@@ -340,6 +348,7 @@ class UserCore
      * @param string $sNickname
      * @param string $sFirstName
      * @param string $sLastName
+     *
      * @return string Username
      */
     public function findUsername($sNickname, $sFirstName, $sLastName)
@@ -375,7 +384,8 @@ class UserCore
      * Check account status of profile.
      *
      * @param stdClass $oDbProfileData User database object.
-     * @return boolean|string Returns a boolean TRUE if the account status is correct, otherwise returns an error message.
+     *
+     * @return bool|string Returns a boolean TRUE if the account status is correct, otherwise returns an error message.
      */
     public function checkAccountStatus(stdClass $oDbProfileData)
     {
@@ -403,7 +413,8 @@ class UserCore
      * @param string $sHash
      * @param Config $oConfig
      * @param Registry $oRegistry
-     * @param string $sMod (user, affiliate, newsletter). Default 'user'
+     * @param string $sMod (user, affiliate, newsletter).
+     *
      * @return void
      */
     public function activateAccount($sEmail, $sHash, Config $oConfig, Registry $oRegistry, $sMod = 'user')
@@ -442,6 +453,7 @@ class UserCore
      * Get the correct matching sex.
      *
      * @param string $sSex
+     *
      * @return string The Match Sex.
      */
     public function getMatchSex($sSex)
@@ -455,6 +467,7 @@ class UserCore
      *
      * @param integer $iId Profile ID.
      * @param string $sTable Default 'Members'
+     *
      * @return void
      */
     public function clearReadProfileCache($iId, $sTable = 'Members')
@@ -468,6 +481,7 @@ class UserCore
      *
      * @param integer $iId Profile ID.
      * @param string $sTable Default 'MembersInfo'
+     *
      * @return void
      */
     public function clearInfoFieldCache($iId, $sTable = 'MembersInfo')
@@ -481,6 +495,7 @@ class UserCore
      * @param string $sId Cache ID.
      * @param integer $iId User ID.
      * @param string $sTable Table name.
+     *
      * @return void
      */
     private function _clearCache($sId, $iId, $sTable)

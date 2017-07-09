@@ -132,6 +132,7 @@ class AdminCoreModel extends UserCoreModel
             $sIp = $this->orm->getOne('Admins', 'profileId', 1, 'ip')->ip;
             $this->cache->put($sIp);
         }
+
         return $sIp;
     }
 }
