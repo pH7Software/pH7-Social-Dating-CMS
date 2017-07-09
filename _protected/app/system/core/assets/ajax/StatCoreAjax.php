@@ -13,39 +13,43 @@
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Http\Http;
 
 class StatCoreAjax
 {
+    /** @var UserCoreModel */
+    private $oUserModel;
 
-    private $_oUserModel, $_mOutput;
+    /** @var mixed */
+    private $mOutput;
 
     public function __construct()
     {
-        $this->_oUserModel = new UserCoreModel;
+        $this->oUserModel = new UserCoreModel;
         $this->_init();
     }
 
     public function display()
     {
-        return $this->_mOutput;
+        return $this->mOutput;
     }
 
     private function _init()
     {
-        switch( (new Http)->post('type') )
-        {
+        $sType = (new HttpRequest)->post('type');
+
+        switch ($sType) {
             case 'total_users':
-              $this->_mOutput = $this->_oUserModel->total();
-            break;
+              $this->mOutput = $this->oUserModel->total();
+                break;
 
            // If we receive another invalid value, we display a message with a HTTP header.
            default:
-             Framework\Http\Http::setHeadersByCode(400);
-           exit('Bad Request Error!');
+               Http::setHeadersByCode(400);
+                exit('Bad Request Error!');
        }
    }
-
 }
 
 echo (new StatCoreAjax)->display();
