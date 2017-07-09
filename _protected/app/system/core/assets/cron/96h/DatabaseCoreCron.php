@@ -14,9 +14,12 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Date\CDateTime;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Util\Backup;
+use PH7\Framework\Mvc\Model\Engine\Util\Various as DbVarious;
 
 class DatabaseCoreCron extends Cron
 {
@@ -48,7 +51,7 @@ class DatabaseCoreCron extends Cron
                     break;
 
                 default:
-                    Framework\Http\Http::setHeadersByCode(400);
+                    Http::setHeadersByCode(400);
                     exit('Bad Request Error!');
             }
         }
@@ -112,7 +115,7 @@ class DatabaseCoreCron extends Cron
 
     protected function backup()
     {
-        (new Backup(PH7_PATH_BACKUP_SQL . 'Periodic-database-update.' . (new Framework\Date\CDateTime)->get()->date() . '.sql.gz'))->back()->saveArchive();
+        (new Backup(PH7_PATH_BACKUP_SQL . 'Periodic-database-update.' . (new CDateTime)->get()->date() . '.sql.gz'))->back()->saveArchive();
 
         echo t('Backup of the Database... Ok!') . '<br />';
     }
@@ -204,7 +207,7 @@ class DatabaseCoreCron extends Cron
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
         if (strstr($sTable, 'Comments') === false && $sTable !== 'Messages' && $sTable !== 'Messenger') {
-            Framework\Mvc\Model\Engine\Util\Various::launchErr($sTable);
+           DbVarious::launchErr($sTable);
         }
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE (' . $sDateColumn . ' < NOW() - INTERVAL :dayNumber DAY)');

@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Geo\Map\Map;
@@ -60,9 +61,7 @@ class CountryController extends Controller
             $sMemberTxt = nt('%n% member', '%n% members', $iTotalUsers);
             $this->view->h3_title = t('%0% lives near %1% %2%', $sMemberTxt, $this->registry->country, $this->registry->city);
 
-        }
-        else
-        {
+        } else {
             // Not found page
             Framework\Http\Http::setHeadersByCode(404);
             $this->view->error = t('Error, country is empty.');
@@ -76,5 +75,4 @@ class CountryController extends Controller
         $sCountryCode = Framework\CArray\CArray::getKeyByValIgnoreCase($this->registry->country, $this->registry->lang);
         return (strlen($sCountryCode) == 2) ? $sCountryCode : substr($this->registry->country, 0, 2);
     }
-
 }

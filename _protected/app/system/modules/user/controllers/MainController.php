@@ -147,11 +147,11 @@ class MainController extends Controller
         switch ($this->httpRequest->get('force')) {
             case 'classic':
                 $sPage = static::GUEST_FILE;
-            break;
+                break;
 
             case 'splash':
                 $sPage = static::GUEST_SPLASH_FILE;
-            break;
+                break;
 
             default:
                 throw new PH7InvalidArgumentException('You can only choose between "classic" or "splash"');
