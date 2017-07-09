@@ -7,14 +7,20 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Asset / Ajax
  */
+
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Request\Http;
 
 class ApiAjax
 {
-    private $_oUser, $_mOutput;
+    /** @var UserCore */
+    private $_oUser;
+
+    /** @var mixed */
+    private $mOutput;
 
     public function __construct()
     {
@@ -24,7 +30,7 @@ class ApiAjax
 
     public function display()
     {
-        return $this->_mOutput;
+        return $this->mOutput;
     }
 
     private function _init()
@@ -34,16 +40,15 @@ class ApiAjax
         $sType = $oHttpRequest->post('type');
         unset($oHttpRequest);
 
-        switch($sType)
-        {
+        switch($sType) {
             case 'profile_link':
-                $this->_mOutput = $this->_oUser->getProfileLink($sParam);
-            break;
+                $this->mOutput = $this->_oUser->getProfileLink($sParam);
+                break;
 
             // If we receive another invalid value, we display a message with a HTTP header.
             default:
                 Framework\Http\Http::setHeadersByCode(400);
-            exit('Bad Request Error!');
+                exit('Bad Request Error!');
         }
     }
 }
