@@ -129,8 +129,8 @@ namespace PH7\Framework\Str
       */
      public function equals($sText1, $sText2)
      {
-         //return (strcmp($sText1, $sText2) === 0);
-         return ($sText1 === $sText2);
+         //return strcmp($sText1, $sText2) === 0;
+         return $sText1 === $sText2;
      }
 
      /**
@@ -143,7 +143,7 @@ namespace PH7\Framework\Str
       */
      public function equalsIgnoreCase($sText1, $sText2)
      {
-         //return (strcasecmp($sText1, $sText2) === 0);
+         //return strcasecmp($sText1, $sText2) === 0;
          $sText1 = $this->lower($sText1);
          $sText2 = $this->lower($sText2);
          return $this->equals($sText1, $sText2);
