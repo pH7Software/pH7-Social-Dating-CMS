@@ -14,6 +14,8 @@ use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Server\Server;
 use PH7\Framework\Service\SearchImage\Google as GoogleImage;
+use PH7\Framework\Service\SearchImage\InvalidUrlException;
+use PH7\Framework\Service\SearchImage\Url as ImageUrl;
 
 class AvatarDesignCore extends Design
 {
@@ -96,17 +98,24 @@ class AvatarDesignCore extends Design
 
     /**
      * @param string $sAvatarUrl
+     *
+     * @throws InvalidUrlException
      */
     protected function showAvatarOnGoogleLink($sAvatarUrl)
     {
-        $oSearchImage = new GoogleImage($sAvatarUrl);
+        try {
+            $oAvatarUrl = new ImageUrl($sAvatarUrl);
+            $oSearchImage = new GoogleImage($oAvatarUrl);
 
-        $aLinkAttrs = [
-            'href' => $oSearchImage->getSearchImageUrl(),
-            'title' => t('See any matching images with this profile photo'),
-            'target' => '_blank',
-            'class' => 'italic btn btn-default btn-xs'
-        ];
-        $this->htmlTag('a', $aLinkAttrs, true, t('Check it on Google Images'));
+            $aLinkAttrs = [
+                'href' => $oSearchImage->getSearchImageUrl(),
+                'title' => t('See any matching images with this profile photo'),
+                'target' => '_blank',
+                'class' => 'italic btn btn-default btn-xs'
+            ];
+            $this->htmlTag('a', $aLinkAttrs, true, t('Check it on Google Images'));
+        } catch (InvalidUrlException $oExcept) {
+            // Display nothing
+        }
     }
 }

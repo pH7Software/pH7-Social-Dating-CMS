@@ -10,21 +10,23 @@ namespace PH7\Framework\Service\SearchImage;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Url\Url;
+use PH7\Framework\Url\Url as UrlHelper;
 
 class Google implements Imageable
 {
     const SEARCH_IMAGE_LINK = 'https://www.google.com/searchbyimage?image_url=';
 
     /** @var string */
-    private $sImageUrl;
+    private $oImageUrl;
 
     /**
-     * @param string $sImageUrl
+     * @param Url $oImageUrl
+     *
+     * @throws InvalidUrlException
      */
-    public function __construct($sImageUrl)
+    public function __construct(Url $oImageUrl)
     {
-        $this->sImageUrl = $sImageUrl;
+        $this->oImageUrl = $oImageUrl;
     }
 
     /**
@@ -40,6 +42,6 @@ class Google implements Imageable
      */
     public function getSearchImageUrl()
     {
-        return static::SEARCH_IMAGE_LINK . Url::encode($this->sImageUrl);
+        return static::SEARCH_IMAGE_LINK . UrlHelper::encode($this->oImageUrl->getValue());
     }
 }
