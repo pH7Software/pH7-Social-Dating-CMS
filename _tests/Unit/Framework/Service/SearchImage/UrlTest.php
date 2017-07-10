@@ -39,7 +39,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
         return [
             ['blablabla'],
             [''],
-            [str_pad('abc', FILTER_VALIDATE_URL * 2, 'abc')]
+            ['http://' . str_pad('abc', FILTER_VALIDATE_URL * 3, 'abc') . '.com']
         ];
     }
 }
