@@ -21,7 +21,7 @@ class Url
     {
         if (
             filter_var($sUrl, FILTER_VALIDATE_URL) === false ||
-            strlen($sUrl) >= PH7_MAX_URL_LENGTH
+            strlen($sUrl) >= $this->getMaxImageLength()
         ) {
             throw new InvalidUrlException('Invalid URL');
         }
@@ -35,5 +35,15 @@ class Url
     public function getValue()
     {
         return $this->sUrl;
+    }
+
+    /**
+     * Images length are longer. It multiples the regular URL length by 2.
+     *
+     * @return int
+     */
+    private function getMaxImageLength()
+    {
+        return PH7_MAX_URL_LENGTH * 2;
     }
 }
