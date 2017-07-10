@@ -23,7 +23,7 @@ class Url
             filter_var($sUrl, FILTER_VALIDATE_URL) === false ||
             strlen($sUrl) >= $this->getMaxImageLength()
         ) {
-            throw new InvalidUrlException('Invalid URL');
+            throw new InvalidUrlException(sprintf('%s is an invalid URL', $sUrl));
         }
 
         $this->sUrl = $sUrl;
