@@ -29,6 +29,9 @@ define('PH7_PATH_APP_CONFIG', PH7_PATH_TEST . 'fixtures/config/');
 define('PH7_PATH_SYS', PH7_PATH_APP_CONFIG);
 define('PH7_CONFIG_FILE', 'test.ini');
 
+// Max Values Constants
+define('PH7_MAX_URL_LENGTH', 120);
+
 require PH7_PATH_FRAMEWORK . 'Loader/Autoloader.php';
 
 FrameworkLoader::getInstance()->init();
