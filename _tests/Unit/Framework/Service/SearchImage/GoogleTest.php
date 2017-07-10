@@ -6,7 +6,7 @@
  * @package          PH7 / Test / Unit / Framework / Service / SearchImage
  */
 
-namespace PH7\Test\Unit\Framework\Security;
+namespace PH7\Test\Unit\Framework\Service\SearchImage;
 
 use PH7\Framework\Service\SearchImage\Google as GoogleImage;
 use PH7\Framework\Service\SearchImage\Url as ImageUrl;
