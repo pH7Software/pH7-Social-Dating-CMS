@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
@@ -25,14 +26,20 @@ class MainController extends Controller
     const ITEMS_MENU_AUTHORS = 5;
     const ITEMS_MENU_CATEGORIES = 10;
 
-    /**
-     * @internal Protected access because AdminController derived class uses these attributes
-     * @var object $oNoteModel
-     * @var object $oPage
-     * @var string $sTitle
-     * @var integer $iTotalNotes
-     */
-    protected $oNoteModel, $oPage, $sTitle, $iTotalNotes, $iApproved;
+    /** @var NoteModel */
+    protected $oNoteModel;
+
+    /** @var Page */
+    protected $oPage;
+
+    /** @var string */
+    protected $sTitle;
+
+    /** @var int */
+    protected $iTotalNotes;
+
+    /** @var int|null */
+    protected $iApproved;
 
     public function __construct()
     {
@@ -60,14 +67,11 @@ class MainController extends Controller
         );
         $this->setMenuVars();
 
-        if (empty($oPosts))
-        {
+        if (empty($oPosts)) {
             $this->sTitle = t('No Notes');
             $this->notFound(false); // We disable the HTTP error code 404 for Ajax requests running
             $this->view->error = t('Oops! There are no notes at the moment.'); // We change the error message
-        }
-        else
-        {
+        } else {
             $this->view->posts = $oPosts;
         }
 
@@ -76,13 +80,14 @@ class MainController extends Controller
 
     public function read($sUsername, $sPostId)
     {
-        if (isset($sUsername, $sPostId))
-        {
+        if (isset($sUsername, $sPostId)) {
             $iProfileId = (new UserCoreModel)->getId(null, $sUsername);
             $oPost = $this->oNoteModel->readPost($sPostId, $iProfileId, $this->iApproved);
 
-            if (!empty($oPost->postId) && $this->str->equals($sPostId, $oPost->postId))
-            {
+            if (
+                !empty($oPost->postId) &&
+                $this->str->equals($sPostId, $oPost->postId)
+            ) {
                 $aVars = [
                     /***** META TAGS *****/
                     'page_title' => Ban::filterWord($oPost->pageTitle, false),
@@ -328,13 +333,14 @@ class MainController extends Controller
     /**
      * Set a custom Not Found Error Message with HTTP 404 Code Status.
      *
-     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to "false". Default: TRUE
+     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE
+     *
      * @return void
      */
     protected function notFound($b404Status = true)
     {
         if ($b404Status) {
-            Framework\Http\Http::setHeadersByCode(404);
+           Http::setHeadersByCode(404);
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
@@ -347,8 +353,10 @@ class MainController extends Controller
 
     /**
      * @internal Warning! Thumbnail must be removed before the note post in the database.
+     *
      * @param integer $iId
      * @param integer $iProfileId
+     *
      * @return boolean
      */
     private function _deleteThumbFile($iId, $iProfileId)

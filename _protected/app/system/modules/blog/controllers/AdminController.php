@@ -8,14 +8,19 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 
 class AdminController extends MainController
 {
     public function index()
     {
-        Header::redirect(Uri::get('blog', 'main', 'index'), t('Welcome to the Blog administrator mode.'));
+        Header::redirect(
+            Uri::get('blog', 'main', 'index'),
+            t('Welcome to the Blog administrator mode.')
+        );
     }
 
     public function add()
@@ -41,19 +46,25 @@ class AdminController extends MainController
         (new Blog)->deleteThumb($iId, 'blog', $this->file);
 
         /* Clean BlogModel Cache  */
-        (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
 
-        Header::redirect(Uri::get('blog', 'main', 'index'), t('Your post has been deleted!'));
+        Header::redirect(
+            Uri::get('blog', 'main', 'index'),
+            t('Your post has been deleted!')
+        );
     }
 
     public function removeThumb($iId)
     {
-        if (!(new Framework\Security\CSRF\Token)->checkUrl()) {
+        if (!(new SecurityToken)->checkUrl()) {
             exit(Form::errorTokenMsg());
         }
 
         (new Blog)->deleteThumb($iId, 'blog', $this->file);
 
-        Header::redirect(Uri::get('blog', 'admin', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
+        Header::redirect(
+            Uri::get('blog', 'admin', 'edit', $iId),
+            t('The thumbnail has been deleted successfully!')
+        );
     }
 }

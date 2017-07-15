@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\Emoticon;
@@ -22,18 +23,22 @@ class MainController extends Controller
     const ITEMS_MENU_TOP_RATING = 5;
     const ITEMS_MENU_CATEGORIES = 10;
 
-    /**
-     * @internal Protected access because AdminController derived class uses these attributes
-     * @var object $oBlogModel
-     * @var object $oPage
-     * @var string $sTitle
-     * @var integer $iTotalBlogs
-     */
-    protected $oBlogModel, $oPage, $sTitle, $iTotalBlogs;
+    /** @var BlogModel */
+    protected $oBlogModel;
+
+    /** @var Page */
+    protected $oPage;
+
+    /** @var string */
+    protected $sTitle;
+
+    /** @var int */
+    protected $iTotalBlogs;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->oBlogModel = new BlogModel;
         $this->oPage = new Page;
     }
@@ -100,7 +105,9 @@ class MainController extends Controller
                 $this->notFound();
             }
         } else {
-            Header::redirect(Uri::get('blog', 'main', 'index'));
+            Header::redirect(
+                Uri::get('blog', 'main', 'index')
+            );
         }
 
         $this->output();
@@ -194,33 +201,43 @@ class MainController extends Controller
     protected function setMenuVars()
     {
         $this->view->top_views = $this->oBlogModel->getPosts(
-            0, self::ITEMS_MENU_TOP_VIEWS, SearchCoreModel::VIEWS
+            0,
+            self::ITEMS_MENU_TOP_VIEWS,
+            SearchCoreModel::VIEWS
         );
+
         $this->view->top_rating = $this->oBlogModel->getPosts(
-            0, self::ITEMS_MENU_TOP_RATING, SearchCoreModel::RATING
+            0, self::ITEMS_MENU_TOP_RATING,
+            SearchCoreModel::RATING
         );
+
         $this->view->categories = $this->oBlogModel->getCategory(
-            null, 0, self::ITEMS_MENU_CATEGORIES, true
+            null,
+            0,
+            self::ITEMS_MENU_CATEGORIES,
+            true
         );
     }
 
     /**
      * Set a custom Not Found Error Message with HTTP 404 Code Status.
      *
-     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to "false". Default: TRUE
+     * @param boolean $b404Status For the Ajax blocks and others, we can not put HTTP error code 404, so the attribute must be set to FALSE
+     *
      * @return void
      */
     protected function notFound($b404Status = true)
     {
         if ($b404Status) {
-            Framework\Http\Http::setHeadersByCode(404);
+            Http::setHeadersByCode(404);
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         $this->view->error = t("Sorry, we weren't able to find the page you requested.") . '<br />' .
             t('You can go back on the <a href="%0%">blog homepage</a> or <a href="%1%">search with different keywords</a>.',
-                Uri::get('blog', 'main', 'index'), Uri::get('blog', 'main', 'search')
+                Uri::get('blog', 'main', 'index'),
+                Uri::get('blog', 'main', 'search')
             );
     }
 }

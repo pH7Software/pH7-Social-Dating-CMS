@@ -28,6 +28,7 @@ class AdminController extends MainController
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oNoteModel->totalPosts('0'), self::POSTS_PER_PAGE
         );
+
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oPosts = $this->oNoteModel->getPosts(
             $this->oPage->getFirstItem(),
