@@ -23,14 +23,16 @@ use PH7\Framework\Registry\Registry;
 
 class Design extends HtmlDesign
 {
-    const CACHE_STATIC_GROUP = 'db/design/static', CACHE_TIME = 172800;
+    const CACHE_STATIC_GROUP = 'db/design/static';
+    const CACHE_TIME = 172800;
 
-    private $_oCache;
+    /** @var Cache */
+    private $oCache;
 
     public function __construct()
     {
         parent::__construct();
-        $this->_oCache = new Cache;
+        $this->oCache = new Cache;
     }
 
     public function langList()
@@ -69,9 +71,9 @@ class Design extends HtmlDesign
             return false;
         }
 
-        $this->_oCache->start(self::CACHE_STATIC_GROUP, 'ads' . $iWidth . $iHeight . $bOnlyActive, static::CACHE_TIME);
+        $this->oCache->start(self::CACHE_STATIC_GROUP, 'ads' . $iWidth . $iHeight . $bOnlyActive, static::CACHE_TIME);
 
-        if (!$oData = $this->_oCache->get()) {
+        if (!$oData = $this->oCache->get()) {
             $sSqlActive = ($bOnlyActive) ? ' AND (active=\'1\') ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT * FROM ' . Db::prefix('Ads') . 'WHERE (width=:width) AND (height=:height)' . $sSqlActive . 'ORDER BY RAND() LIMIT 1');
             $rStmt->bindValue(':width', $iWidth, \PDO::PARAM_INT);
@@ -79,7 +81,7 @@ class Design extends HtmlDesign
             $rStmt->execute();
             $oData = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->_oCache->put($oData);
+            $this->oCache->put($oData);
         }
 
         /**
@@ -103,9 +105,9 @@ class Design extends HtmlDesign
      */
     public function analyticsApi($bPrint = true, $bOnlyActive = true)
     {
-        $this->_oCache->start(self::CACHE_STATIC_GROUP, 'analyticsApi' . $bOnlyActive, static::CACHE_TIME);
+        $this->oCache->start(self::CACHE_STATIC_GROUP, 'analyticsApi' . $bOnlyActive, static::CACHE_TIME);
 
-        if (!$sData = $this->_oCache->get()) {
+        if (!$sData = $this->oCache->get()) {
             $sSqlWhere = ($bOnlyActive) ? 'WHERE active=\'1\'' : '';
             $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix('AnalyticsApi') . $sSqlWhere . ' LIMIT 1');
             $rStmt->execute();
@@ -113,7 +115,7 @@ class Design extends HtmlDesign
             Db::free($rStmt);
             $sData = $oRow->code;
             unset($oRow);
-            $this->_oCache->put($sData);
+            $this->oCache->put($sData);
         }
 
         if (!$bPrint) {
@@ -132,9 +134,9 @@ class Design extends HtmlDesign
      */
     public function customCode($sType)
     {
-        $this->_oCache->start(self::CACHE_STATIC_GROUP, 'customCode' . $sType, static::CACHE_TIME);
+        $this->oCache->start(self::CACHE_STATIC_GROUP, 'customCode' . $sType, static::CACHE_TIME);
 
-        if (!$sData = $this->_oCache->get()) {
+        if (!$sData = $this->oCache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT code FROM ' . Db::prefix('CustomCode') . 'WHERE codeType = :type LIMIT 1');
             $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
@@ -142,7 +144,7 @@ class Design extends HtmlDesign
             Db::free($rStmt);
             $sData = (!empty($oRow->code)) ? $oRow->code : null;
             unset($oRow);
-            $this->_oCache->put($sData);
+            $this->oCache->put($sData);
         }
 
         return $sData;
@@ -158,16 +160,16 @@ class Design extends HtmlDesign
      */
     public function files($sType, $bOnlyActive = true)
     {
-        $this->_oCache->start(self::CACHE_STATIC_GROUP, 'files' . $sType . $bOnlyActive, static::CACHE_TIME);
+        $this->oCache->start(self::CACHE_STATIC_GROUP, 'files' . $sType . $bOnlyActive, static::CACHE_TIME);
 
-        if (!$oData = $this->_oCache->get()) {
+        if (!$oData = $this->oCache->get()) {
             $sSqlWhere = ($bOnlyActive) ? ' AND active=\'1\'' : '';
             $rStmt = Db::getInstance()->prepare('SELECT file FROM ' . Db::prefix('StaticFiles') . 'WHERE fileType = :type' . $sSqlWhere);
             $rStmt->bindValue(':type', $sType, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $this->_oCache->put($oData);
+            $this->oCache->put($oData);
         }
 
         if (!empty($oData)) {
