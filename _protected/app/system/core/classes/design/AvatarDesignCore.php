@@ -91,13 +91,13 @@ class AvatarDesignCore extends Design
             $sAvatarUrl = $this->getUserAvatar($sUsername, $sSex, null, false);
 
             echo '<p>';
-            $this->showAvatarOnGoogleLink($sAvatarUrl);
+            $this->showAvatarOnGoogleLink(PH7_URL_PROT . PH7_DOMAIN . $sAvatarUrl);
             echo '</p>';
         }
     }
 
     /**
-     * @param string $sAvatarUrl
+     * @param string $sAvatarUrl Absolute URL with protocol (e.g. https://ph7cms.com)
      *
      * @throws InvalidUrlException
      */
@@ -113,7 +113,7 @@ class AvatarDesignCore extends Design
                 'target' => '_blank',
                 'class' => 'italic btn btn-default btn-xs'
             ];
-            $this->htmlTag('a', $aLinkAttrs, true, t('Check it on Google Images'));
+            echo $this->htmlTag('a', $aLinkAttrs, true, t('Check it on Google Images'));
         } catch (InvalidUrlException $oExcept) {
             // Display nothing
         }
