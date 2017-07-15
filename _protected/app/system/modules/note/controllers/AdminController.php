@@ -18,7 +18,10 @@ class AdminController extends MainController
 
     public function index()
     {
-        Header::redirect(Uri::get('note', 'main', 'index'), t('Welcome to the Note administrator mode.'));
+        Header::redirect(
+            Uri::get('note', 'main', 'index'),
+            t('Welcome to the Note administrator mode.')
+        );
     }
 
     public function unmoderated()
