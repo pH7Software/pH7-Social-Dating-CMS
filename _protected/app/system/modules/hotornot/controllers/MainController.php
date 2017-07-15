@@ -10,7 +10,6 @@ namespace PH7;
 
 class MainController extends Controller
 {
-
     private $oHoNModel;
 
     public function __construct()
@@ -22,8 +21,9 @@ class MainController extends Controller
     public function rating()
     {
         /*** JS File Only to Members. For its part, the Rating System will redirect the visitors who are not connected to the registration form. ***/
-        if (UserCore::auth())
+        if (UserCore::auth()) {
             $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'script.js');
+        }
 
         /*** Meta Tags ***/
         /**
@@ -53,5 +53,4 @@ class MainController extends Controller
 
         $this->output();
     }
-
 }

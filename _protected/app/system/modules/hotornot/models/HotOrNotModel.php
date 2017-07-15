@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class HotOrNotModel extends Framework\Mvc\Model\Engine\Model
 {
-
     /**
      * Get random picture.
      *
@@ -37,7 +36,7 @@ class HotOrNotModel extends Framework\Mvc\Model\Engine\Model
 
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oRow;
     }
-
 }
