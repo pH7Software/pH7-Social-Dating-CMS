@@ -21,14 +21,17 @@ class HotOrNotModel extends Framework\Mvc\Model\Engine\Model
      * @param integer $iApproved Default 1
      * @param integer $iOffset Default 0
      * @param integer $iLimit Default 1
-     * @return object DATA ot the user (profileId, username, firstName, sex, avatar).
+     *
+     * @return \stdClass DATA ot the user (profileId, username, firstName, sex, avatar).
      */
     public function getPicture($iProfileId = null, $iApproved = 1, $iOffset = 0, $iLimit = 1)
     {
         $sSql = (!empty($iProfileId)) ? ' AND (profileId <> :profileId) ' : ' ';
         $rStmt = Db::getInstance()->prepare('SELECT profileId, username, firstName, sex, avatar FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')' . $sSql . 'AND (avatar IS NOT NULL) AND (approvedAvatar = :approved) ORDER BY RAND() LIMIT :offset, :limit');
 
-        if (!empty($iProfileId)) $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        if (!empty($iProfileId)) {
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        }
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
