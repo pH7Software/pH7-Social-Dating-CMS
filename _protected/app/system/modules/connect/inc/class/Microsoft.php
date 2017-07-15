@@ -25,7 +25,19 @@ use stdClass;
 
 class Microsoft extends Api
 {
-    private $_oClient, $_sUsername, $_iProfileId, $_aUserInfo;
+    const API_URL = 'https://apis.live.net/v5.0/me';
+
+    /** @var \oauth_client_class */
+    private $_oClient;
+
+    /** @var string */
+    private $_sUsername;
+
+    /** @var int */
+    private $_iProfileId;
+
+    /** @var array */
+    private $_aUserInfo;
 
     public function __construct()
     {
@@ -49,7 +61,7 @@ class Microsoft extends Api
                     $bSuccess = false;
                 } elseif (strlen($this->_oClient->access_token)) {
                     $bSuccess = $this->_oClient->CallAPI(
-                        'https://apis.live.net/v5.0/me',
+                        self::API_URL,
                         'GET',
                         array(),
                         array('FailOnAccessError' => true),
