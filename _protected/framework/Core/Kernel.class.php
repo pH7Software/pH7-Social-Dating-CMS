@@ -96,7 +96,7 @@ abstract class Kernel
         $aLicData = $oLicense->checkCopyright();
         //define('PH7_SOFTWARE_STATUS', !$oLicense->isBanned());
         define('PH7_SOFTWARE_STATUS', true);
-        define('PH7_LICENSE_STATUS', true);
+        define('PH7_LICENSE_STATUS', 'active');
         define('PH7_LICENSE_NAME', (!empty($aLicData['productname']) ? $aLicData['productname'] : 'Trial'));
         define('PH7_VALID_LICENSE', (PH7_LICENSE_STATUS === 'active'));
         unset($aLicData, $oLicense);
