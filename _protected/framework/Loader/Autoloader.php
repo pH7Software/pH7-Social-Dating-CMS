@@ -130,24 +130,27 @@ final class Autoloader
     {
         $oFile = new File;
         $sFullPath = PH7_PATH_FRAMEWORK . $sFileNamePath;
-        $bIsExpiredFile = (VDate::setTime('-2 months') > $oFile->getModifTime($sFullPath));
         $bFileExists = $oFile->existFile($sFullPath);
         $bIsTooSmallFile = ($oFile->size($sFullPath) < 1000);
 
-        if (!$bFileExists || $bIsTooSmallFile || $bIsExpiredFile) {
+        if (!$bFileExists || $bIsTooSmallFile) {
             /**
              * First off, check if the server is connected to the Internet in order to be able to download the remote files.
              */
             Registry::getInstance()->is_internet_needed = true;
             $this->launchInternetCheck();
 
-            if ($bFileExists) // Delete the file if it already exists
+
+            if ($bFileExists) {
+                // Delete the file if it already exists
                 $oFile->deleteFile($sFullPath);
+            }
 
             $this->_downloadFile($sFileNamePath, $oFile);
         } else {
             Registry::getInstance()->is_internet_needed = false;
         }
+
         unset($oFile);
     }
 

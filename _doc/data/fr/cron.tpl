@@ -15,6 +15,3 @@ Faites ceci pour le reste des URLs avec l'heure correspondent au nom du dossier.
 Toutes les tâches cron se trouvent dans le répertoire suivant : <pre>"/CHEMIN-DU-SERVEUR/VOTRE-DOSSIER-PROTECTED/app/system/assets/cron/"</pre><br />
 
 <strong>Attention, vous ne devez pas mettre la fin du fichier : "Cron.php" dans l'exécuteur des tâches cron.</strong></p>
-
-<p>Si vous avez des difficultés avec la configuration des Crons Jobs, veuillez simplement <a href="http://clients.hizup.com/support">acheter un ticket</a> et nous allons le configurer correctement pour vous.<br />
-<em>Un soutien professionnel est la meilleure solution pour votre site internet !</em></p>

@@ -17,6 +17,8 @@ use Smarty;
 
 abstract class Controller implements Controllable
 {
+    const PHP_TIMEZONE_DIRECTIVE = 'date.timezone';
+
     const SOFTWARE_NAME = 'pH7CMS';
     const DEFAULT_SITE_NAME = 'Social Dating App';
     const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
@@ -35,10 +37,10 @@ abstract class Controller implements Controllable
 
     /**
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW" and 7.*, 8.* is NaOH
+     * 5.* was "pCO", 6.* was "WoW" and 7.*, 8.*, 10.* is NaOH
      */
     const SOFTWARE_VERSION_NAME = 'NaOH';
-    const SOFTWARE_VERSION = '8.0.3';
+    const SOFTWARE_VERSION = '10.0.8';
     const SOFTWARE_BUILD = '1';
 
     const DEFAULT_LANG = 'en';
@@ -108,7 +110,7 @@ abstract class Controller implements Controllable
      */
     protected function checkTimezone()
     {
-        if (!ini_get('date.timezone'))
+        if (!ini_get(self::PHP_TIMEZONE_DIRECTIVE))
             date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
     }
 }

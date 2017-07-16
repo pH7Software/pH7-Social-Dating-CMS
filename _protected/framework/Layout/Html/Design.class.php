@@ -213,30 +213,30 @@ class Design
         $iErrNum = count($this->aErrors);
         /*** Check if there are any errors in the aErrors array ***/
         if ($iErrNum > 0) {
-           $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
+            $this->staticFiles('js', PH7_STATIC . PH7_JS, 'jquery/apprise.js');
 
-           echo '<script>$(function(){Apprise(\'';
-           echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
+            echo '<script>$(function(){Apprise(\'';
+            echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
 
-           for ($i=0; $i < $iErrNum; $i++)
-             echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
+            for ($i=0; $i < $iErrNum; $i++)
+                echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
 
-           echo '\')});</script>';
+            echo '\')});</script>';
         }
 
         unset($this->aErrors);
     }
 
-   /**
-    * Redirect Page using Refresh with Header.
-    *
-    * @param string $sUrl If NULL, the URL will be the current page. Default NULL
-    * @param string $sMsg, Optional, display a message after redirect of the page.
-    * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
-    * @param integer $iTime Optional, a time. Default: "3" seconds.
-    *
-    * @return void
-    */
+    /**
+     * Redirect Page using Refresh with Header.
+     *
+     * @param string $sUrl If NULL, the URL will be the current page. Default NULL
+     * @param string $sMsg, Optional, display a message after redirect of the page.
+     * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
+     * @param integer $iTime Optional, a time. Default: "3" seconds.
+     *
+     * @return void
+     */
     public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = 3)
     {
         if (!empty($sMsg)) {
@@ -355,10 +355,6 @@ class Design
      */
     final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) {
-            return;
-        }
-
         if ($bLink) {
             $bSoftwareName = true;
         }
@@ -389,10 +385,6 @@ class Design
      */
     final public function smallLink()
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) {
-            return;
-        }
-
         echo '<p><strong>', t('Proudly Powered by'), ' <a href="', Kernel::SOFTWARE_WEBSITE, '" title="', Kernel::SOFTWARE_DESCRIPTION, '">', Kernel::SOFTWARE_NAME, '</a> ', Kernel::SOFTWARE_VERSION, '</strong></p>';
     }
 
@@ -403,40 +395,30 @@ class Design
      */
     final public function smartLink()
     {
-        if (defined('PH7_VALID_LICENSE') && PH7_VALID_LICENSE) {
-            return;
-        }
-
         // Get Client's Language Code
         $sLangCode = (new Browser)->getLanguage(true);
 
         // Default links, set to English
         $aSites = [
-            ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
-            ['title' => 'iPhone LONDON Dating App', 'link' => 'https://itunes.apple.com/us/app/meet-date-lovely-people-in/id1155373742'],
-            ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
-            ['title' => 'Android LONDON DATING App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
+            ['title' => 'Open Source Social Dating CMS', 'link' => 'https://github.com/pH7Software/pH7-Social-Dating-CMS'],
+            ['title' => 'Flirt Hot Girls', 'link' => 'http://01script.com/p/dooba'],
+            ['title' => 'Date your Friends', 'link' => 'http://01script.com/p/dooba']
         ];
 
         if ($sLangCode === 'en-ie') {
             $aSites = [
-                ['title' => 'Dublin Dating Site', 'link' => 'http://dublin.meetlovelypeople.com'],
-                ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://dublin.meetlovelypeople.com']
+                ['title' => 'FREE Flirt in Dublin City', 'link' => 'http://01script.com/p/dooba'],
+                ['title' => 'Date Dubs in the Town!', 'link' => 'http://01script.com/p/dooba']
             ];
         } elseif ($sLangCode === 'en-gb') {
             $aSites = [
-                ['title' => 'London Dating App', 'link' => 'http://london.meetlovelypeople.com'],
-                ['title' => 'Meet Singles in Pubs/Bars', 'link' => 'http://london.meetlovelypeople.com'],
-                ['title' => 'Date Londoners', 'link' => 'http://flirt-dating.london']
+                ['title' => 'Date Brits near from YOU', 'link' => 'http://01script.com/p/dooba'],
+                ['title' => 'Date Londoners', 'link' => 'http://01script.com/p/dooba']
             ];
         } elseif (strpos($sLangCode, 'fr') !== false) {
             $aSites = [
-                ['title' => 'Rencontre d\'un soir', 'link' => 'http://flirt-rencontre.net'],
-                ['title' => ' Flirt Coquin', 'link' => 'http://flirt-rencontre.net']
+                ['title' => 'Rencontre d\'un soir', 'link' => 'http://01script.com/p/dooba'],
+                ['title' => ' Flirt Coquin', 'link' => 'http://01script.com/p/dooba']
             ];
         }
 
@@ -1002,15 +984,5 @@ class Design
     public function externalJsFile($sFile)
     {
         echo '<script src="', $sFile, '"></script>';
-    }
-
-    public function __destruct()
-    {
-        unset(
-          $this->bIsDiv,
-          $this->oStr,
-          $this->oSession,
-          $this->oHttpRequest
-        );
     }
 }

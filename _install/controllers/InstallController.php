@@ -100,8 +100,9 @@ class InstallController extends Controller
     {
         global $LANG;
 
-        if (empty($_SESSION['val']['path_protected']))
+        if (empty($_SESSION['val']['path_protected'])) {
             $_SESSION['val']['path_protected'] = PH7_ROOT_PUBLIC . '_protected' . PH7_DS;
+        }
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['path_protected'])) {
             $_SESSION['val']['path_protected'] = check_ext_start(check_ext_end(trim($_POST['path_protected'])));
@@ -442,13 +443,13 @@ class InstallController extends Controller
                     }
                     $_SESSION['step5'] = 1;
 
-                    redirect(PH7_URL_SLUG_INSTALL . 'service');
+                    redirect(PH7_URL_SLUG_INSTALL . 'finish');
                 }
             } else {
                 redirect(PH7_URL_SLUG_INSTALL . 'config_site');
             }
         } else {
-            redirect(PH7_URL_SLUG_INSTALL . 'service');
+            redirect(PH7_URL_SLUG_INSTALL . 'finish');
         }
 
         $this->oView->assign('sept_number', 5);
@@ -458,52 +459,6 @@ class InstallController extends Controller
     }
 
     /********************* STEP 6 *********************/
-    public function service()
-    {
-        $this->oView->assign('sept_number', 6);
-        $this->oView->display('service.tpl');
-    }
-
-    /********************* STEP 7 *********************/
-    public function license()
-    {
-        global $LANG;
-
-        if (!empty($_SESSION['step5']) && is_file(PH7_ROOT_PUBLIC . '_constants.php')) {
-            if (empty($_SESSION['val']['license']))
-                $_SESSION['val']['license'] = '';
-
-            if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['license'])) {
-                $sKey = trim($_POST['license']);
-                if (check_license($sKey)) {
-                    @require_once PH7_ROOT_PUBLIC . '_constants.php';
-                    @require_once PH7_PATH_APP . 'configs/constants.php';
-
-                    try {
-                        require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
-
-                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'License SET licenseKey = :key WHERE licenseId = 1');
-                        $rStmt->execute(['key' => $sKey]);
-
-                        redirect(PH7_URL_SLUG_INSTALL . 'finish');
-                    } catch (\PDOException $oE) {
-                        $aErrors[] = $LANG['database_error'] . escape($oE->getMessage());
-                    }
-                } else {
-                    $aErrors[] = $LANG['failure_license'];
-                }
-            }
-        } else {
-            redirect(PH7_URL_SLUG_INSTALL . 'niche');
-        }
-
-        $this->oView->assign('sept_number', 7);
-        $this->oView->assign('errors', @$aErrors);
-        unset($aErrors);
-        $this->oView->display('license.tpl');
-    }
-
-    /********************* STEP 8 *********************/
     public function finish()
     {
         @require_once PH7_ROOT_PUBLIC . '_constants.php';
@@ -530,7 +485,7 @@ class InstallController extends Controller
             exit(header('Location: ' . PH7_URL_ROOT));
         }
 
-        $this->oView->assign('sept_number', 8);
+        $this->oView->assign('sept_number', 6);
         $this->oView->display('finish.tpl');
     }
 
