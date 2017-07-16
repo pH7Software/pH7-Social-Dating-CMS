@@ -131,7 +131,7 @@ final class Autoloader
         $oFile = new File;
         $sFullPath = PH7_PATH_FRAMEWORK . $sFileNamePath;
         $bFileExists = $oFile->existFile($sFullPath);
-        $bIsTooSmallFile = ($oFile->size($sFullPath) < 1000);
+        $bIsTooSmallFile = ($oFile->size($sFullPath) < 100);
 
         if (!$bFileExists || $bIsTooSmallFile) {
             /**
