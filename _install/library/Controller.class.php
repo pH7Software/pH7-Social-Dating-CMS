@@ -37,10 +37,11 @@ abstract class Controller implements Controllable
     const TOTAL_INSTALL_STEPS = 6;
 
     /**
+     * VERSION NAMES:
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
-     * 5.* was "pCO", 6.* was "WoW" and 7.*, 8.*, 10.* is NaOH
+     * 5.* was "pCO", 6.* was "WoW", 7.*, 8.* were "NaOH" and 10.* is "pKa"
      */
-    const SOFTWARE_VERSION_NAME = 'NaOH';
+    const SOFTWARE_VERSION_NAME = 'pKa';
     const SOFTWARE_VERSION = '10.0.8';
     const SOFTWARE_BUILD = '1';
 
