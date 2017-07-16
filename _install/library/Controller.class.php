@@ -34,6 +34,7 @@ abstract class Controller implements Controllable
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
     const SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
     const SOFTWARE_COPYRIGHT = '© (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.';
+    const TOTAL_INSTALL_STEPS = 6;
 
     /**
      * 1.0, 1.1 branches were "pOH", 1.2 was "pOW", 1.3, 1.4 were "p[H]", 2.* was "H2O", 3.* was "H3O", 4.* was "HCO",
@@ -89,6 +90,7 @@ abstract class Controller implements Controllable
         $this->oView->assign('software_email', self::SOFTWARE_EMAIL);
         $this->oView->assign('tpl_name', self::DEFAULT_THEME);
         $this->oView->assign('current_lang', $this->sCurrentLang);
+        $this->oView->assign('total_install_steps', self::TOTAL_INSTALL_STEPS);
     }
 
     /**
