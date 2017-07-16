@@ -99,8 +99,9 @@ abstract class Controller implements Controllable
      */
     protected function initializePHPSession()
     {
-        if (session_status() !== PHP_SESSION_ACTIVE)
+        if (session_status() !== PHP_SESSION_ACTIVE) {
             @session_start();
+        }
     }
 
     /**
@@ -110,7 +111,8 @@ abstract class Controller implements Controllable
      */
     protected function checkTimezone()
     {
-        if (!ini_get(self::PHP_TIMEZONE_DIRECTIVE))
+        if (!ini_get(self::PHP_TIMEZONE_DIRECTIVE)) {
             date_default_timezone_set(PH7_DEFAULT_TIMEZONE);
+        }
     }
 }
