@@ -59,15 +59,10 @@ function run() {
             rm ./composer.phar
             rm ./phpunit.phar
             rm ./phpunit.xml.dist
-            rm ./_install/_license-key.txt
             rm ./_protected/app/configs/config.ini
             rm -rf ./.idea/ # PHPStorm
 
             ## Other
-            rm ./_protected/framework/Core/Kernel.class.php
-            rm ./_protected/framework/Core/Kernel_tmp.class.php
-            rm ./_protected/framework/Core/License.class.php
-            rm ./_protected/framework/Core/License_tmp.class.php
             rm -f ./_protected/app/system/core/assets/cron/_delay/*
             rm -rf ./_repository/import/*
             rm -rf ./_repository/module/*

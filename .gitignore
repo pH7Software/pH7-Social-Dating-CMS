@@ -1,14 +1,9 @@
-_install/_license-key.txt
 _install/data/caches/smarty_cache/*
 _install/data/caches/smarty_compile/*
 data/*
 _constants.php
 _protected/app/configs/config.ini
 _protected/app/system/core/assets/cron/_delay/
-_protected/framework/Core/Kernel.class.php
-_protected/framework/Core/Kernel_tmp.class.php
-_protected/framework/Core/License.class.php
-_protected/framework/Core/License_tmp.class.php
 _protected/data/tmp/*
 _protected/data/log/pH7log/*
 _protected/data/backup/*
