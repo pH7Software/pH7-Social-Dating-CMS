@@ -81,7 +81,7 @@ abstract class Controller implements Controllable
 
         $this->oView->assign('LANG', $LANG);
         $this->oView->assign('software_name', self::SOFTWARE_NAME);
-        $this->oView->assign('software_version', self::SOFTWARE_VERSION . ' Build ' . self::SOFTWARE_BUILD . ' - ' . self::SOFTWARE_VERSION_NAME);
+        $this->oView->assign('software_version', self::SOFTWARE_VERSION . ' ' . self::SOFTWARE_VERSION_NAME . ' - Build ' . self::SOFTWARE_BUILD);
         $this->oView->assign('software_website', self::SOFTWARE_WEBSITE);
         $this->oView->assign('software_license_url', self::SOFTWARE_LICENSE_URL);
         $this->oView->assign('software_help_url', self::SOFTWARE_HELP_URL);
