@@ -137,7 +137,6 @@ $LANG = array(
     'recommended' => 'Recommended',
     'recommended_desc' => 'Choose this niche if you haven\'t an idea yet.',
     'note_able_to_change_niche_settings_later' => 'Please note that you will be able to change the template and enable/disable the modules later in your admin panel.',
-    'looking_hosting' => 'Looking for a Web host compatible with pH7CMS? See <a href="' . Controller::SOFTWARE_HOSTING_LIST_URL . '" target="_blank">our Web Hosting List</a>!',
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
         Please enable JavaScript via the options of your Web browser in order to use this website.',
     'admin_url' => 'Admin Panel URL',

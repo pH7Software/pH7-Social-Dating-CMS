@@ -136,7 +136,6 @@ $LANG = array(
     'recommended' => 'Recommandée',
     'recommended_desc' => 'Choisissez cette niche si vous ne savez pas quelle niche choisir',
     'note_able_to_change_niche_settings_later' => 'Veuillez noter que vous pourrez changer le thème et activer/désactiver les modules par la suite dans votre panneau d\'administration.',
-    'looking_hosting' => 'À la recherche d\'un hébergement Web ? Regardez <a href="' . Controller::SOFTWARE_HOSTING_LIST_FR_URL . '" target="_blank">notre Liste d\'Hébergeurs</a> ?',
     'warning_no_js' => 'Cette page Web est incompatible sans l\'activation de JavaScript.<br />
         Veuillez activer JavaScript via les options de votre navigateur Web.',
     'admin_url' => 'URL du panneau d\'administration',

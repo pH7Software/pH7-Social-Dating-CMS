@@ -28,8 +28,6 @@ abstract class Controller implements Controllable
     const SOFTWARE_LICENSE_KEY_URL = 'http://ph7cms.com/web/buysinglelicense';
     const SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/';
     const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';
-    const SOFTWARE_HOSTING_LIST_URL = 'http://ph7cms.com/hosting';
-    const SOFTWARE_HOSTING_LIST_FR_URL = 'http://ph7cms.com/doc/fr/h%C3%A9bergement-web';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
     const SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
