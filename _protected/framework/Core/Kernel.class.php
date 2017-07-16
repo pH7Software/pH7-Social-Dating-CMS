@@ -30,10 +30,10 @@ abstract class Kernel
     const SOFTWARE_NAME = 'pH7CMS';
     const SOFTWARE_DESCRIPTION = 'pH7CMS Software allows to build next generation Social Dating app/website for your business!';
     const SOFTWARE_WEBSITE = 'http://ph7cms.com';
-    const SOFTWARE_LICENSE_KEY_URL = 'https://ph7cms.com/memberships';
-    const SOFTWARE_DOC_URL = 'https://ph7cms.com/doc';
-    const SOFTWARE_FAQ_URL = 'https://ph7cms.com/faq';
-    const SOFTWARE_FORUM_URL = 'https://ph7cms.com/forum';
+    const SOFTWARE_LICENSE_KEY_URL = 'http://ph7cms.com/memberships';
+    const SOFTWARE_DOC_URL = 'http://ph7cms.com/doc';
+    const SOFTWARE_FAQ_URL = 'http://ph7cms.com/faq';
+    const SOFTWARE_FORUM_URL = 'http://ph7cms.com/forum';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
     const SOFTWARE_COMPANY = 'Social Dating CMS | By Pierre-Henry Soria';
