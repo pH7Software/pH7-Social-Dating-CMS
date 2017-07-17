@@ -14,10 +14,8 @@ namespace PH7\Framework\Loader;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Date\Various as VDate;
 use PH7\Framework\File\File;
 use PH7\Framework\Pattern\Singleton;
-use PH7\Framework\Registry\Registry;
 
 /**
  * We include the Singleton trait before use, because at this stage the class can not load the trait automatically.

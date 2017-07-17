@@ -23,7 +23,6 @@ use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Page\Page;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security\Version;
-use PH7\Framework\Server\Server;
 use PH7\Framework\Str\Str;
 use PH7\Framework\Url\Header;
 
@@ -92,8 +91,6 @@ abstract class Kernel
      */
     final private function _checkLicense()
     {
-        $this->_checkInternetConnection(); // First we check the Internet connection
-
         define('PH7_SOFTWARE_STATUS', true);
         define('PH7_LICENSE_STATUS', 'active');
         define('PH7_LICENSE_NAME', 'pH7Builder, Open License');
@@ -137,18 +134,6 @@ abstract class Kernel
         } else {
             // Message for guests
             exit(t('#LICENSE ERROR# The owner of this website needs to pay a <a href="%0%">pH7CMS License</a> to use this feature.', self::SOFTWARE_WEBSITE));
-        }
-    }
-
-    /**
-     * Check Internet connection.
-     *
-     * @return integer Returns '1' if it is not connected to the Internet and stops the script with the exit() function.
-     */
-    final private function _checkInternetConnection()
-    {
-        if (!Server::checkInternetConnection()) {
-            Page::message(t('Your server must be connected to the Internet to work properly.'));
         }
     }
 
