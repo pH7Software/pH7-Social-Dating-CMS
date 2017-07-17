@@ -158,7 +158,7 @@ final class Autoloader
         $sMsg = <<<HTML
 <p class="warning">Third-Party Libraries Not Installed</p>
 <p>Whoops! It seems you downloaded pH7CMS from Github. We don't include third-party libraries on Github.<br />
-Please <strong><a href="%0%">read those instructions</a></strong> to install the third-party libraries or download it from <strong><a href="https://sourceforge.net/projects/ph7socialdating/">Sourceforge</a></strong> if you don't want to download the third-party libraries.</p>'
+Please <strong><a href="https://github.com/pH7Software/pH7-Social-Dating-CMS#installation">read those instructions</a></strong> to install the third-party libraries or download it from <strong><a href="https://sourceforge.net/projects/ph7socialdating/files/latest/download">Sourceforge</a></strong> if you don't want to download the third-party libraries.</p>'
 HTML;
         echo \PH7\html_body('You need to run Composer', $sMsg);
     }
