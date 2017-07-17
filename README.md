@@ -134,9 +134,9 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
     * Install Composer (https://getcomposer.org)
     * `composer create-project ph7software/ph7cms --prefer-dist website`
   * Sourceforge:
-    * Directly download the latest stable version [from Sourceforge](https://sourceforge.net/projects/ph7socialdating/)
+    * Directly download the latest stable version from [Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
   * Softaculous:
-    * If your Web host offers Softaculous, you might be able to install [pH7CMS in one-click with Softaculous](http://www.softaculous.com/softwares/socialnetworking/pH7CMS)
+    * If your Web host offers Softaculous, you might be able to install [pH7CMS in one-click with Softaculous](http://www.softaculous.com/softwares/socialnetworking/pH7CMS).
 
 
 ## Nginx Configuration
