@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Loader
- * @version          1.8
+ * @version          1.9
  */
 
 namespace PH7\Framework\Loader;
@@ -28,7 +28,6 @@ require_once PH7_PATH_FRAMEWORK . 'Pattern/Singleton.trait.php';
 final class Autoloader
 {
     const MIN_VALID_SIZE_FILE = 1000;
-    const DOWNLOAD_URL = 'http://download.hizup.com/files/';
 
     /**
      * Make the class singleton by importing the appropriate trait.
@@ -53,26 +52,8 @@ final class Autoloader
         // Register the loader methods
         spl_autoload_register(array(__CLASS__, 'loadClass'));
 
-        $this->loadFile('Core/Kernel.class.php');
-
         // Include Composer libraries (GeoIp2, Swift, Stripe, ...)
-        require_once PH7_PATH_PROTECTED . 'vendor/autoload.php';
-    }
-
-    /**
-     * Display a message if the server isn't connected to the Internet.
-     *
-     * @return void Display an error message and exit the script if there is no Internet, otherwise doing nothing.
-     */
-    public function launchInternetCheck()
-    {
-        if (!\PH7\is_internet()) {
-            $sMsg = '<p class="warning">No Internet Connection</p>
-            <p>Whoops! Your server has to be connected to the Internet in order to get your website working.</p>';
-
-            echo \PH7\html_body('Enable your Internet connection', $sMsg);
-            exit;
-        }
+        $this->loadComposerLoader();
     }
 
     /**
@@ -117,55 +98,6 @@ final class Autoloader
         }
 
         require_once $sFile;
-    }
-
-    /**
-     * Check and load the files if necessary.
-     *
-     * @param string $sFileNamePath A pH7Framework filename path.
-     *
-     * @return void
-     */
-    private function loadFile($sFileNamePath)
-    {
-        $oFile = new File;
-        $sFullPath = PH7_PATH_FRAMEWORK . $sFileNamePath;
-        $bFileExists = $oFile->existFile($sFullPath);
-        $bIsTooSmallFile = $this->isFileTooSmall($sFullPath, $oFile);
-
-        if (!$bFileExists || $bIsTooSmallFile) {
-            /**
-             * First off, check if the server is connected to the Internet in order to be able to download the remote files.
-             */
-            Registry::getInstance()->is_internet_needed = true;
-            $this->launchInternetCheck();
-
-
-            if ($bFileExists) {
-                // Delete the file if it already exists
-                $oFile->deleteFile($sFullPath);
-            }
-
-            $this->downloadFile($sFileNamePath, $oFile);
-        } else {
-            Registry::getInstance()->is_internet_needed = false;
-        }
-
-        unset($oFile);
-    }
-
-    /**
-     * Download Kernel protected files if they don't already exist in the release build.
-     *
-     * @param string $sFileNamePath A pH7Framework filename path.
-     * @param File $oFile
-     *
-     * @return void
-     */
-    private function downloadFile($sFileNamePath, File $oFile)
-    {
-        $rFile = $oFile->getUrlContents(self::DOWNLOAD_URL . $this->getServerFileName($sFileNamePath));
-        $oFile->putFile(PH7_PATH_FRAMEWORK . $sFileNamePath, $rFile);
     }
 
     /**
