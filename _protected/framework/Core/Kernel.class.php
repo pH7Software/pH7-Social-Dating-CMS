@@ -16,14 +16,16 @@ namespace PH7\Framework\Core;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
-use PH7\Framework\Str\Str;
 use PH7\Framework\File\File;
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Registry\Registry;
 use PH7\Framework\Page\Page;
+use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security\Version;
 use PH7\Framework\Server\Server;
+use PH7\Framework\Str\Str;
+use PH7\Framework\Url\Header;
 
 abstract class Kernel
 {
@@ -131,7 +133,7 @@ abstract class Kernel
     {
         if (\PH7\AdminCore::auth()) {
             // Message for admins
-            \PH7\Framework\Url\Header::redirect(\PH7\Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), t('You are still using the Free Version. It\'s time now to buy a Pro License and get all amazing features and be able to use this module.'), 'error');
+            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), t('You are still using the Free Version. It\'s time now to buy a Pro License and get all amazing features and be able to use this module.'), 'error');
         } else {
             // Message for guests
             exit(t('#LICENSE ERROR# The owner of this website needs to pay a <a href="%0%">pH7CMS License</a> to use this feature.', self::SOFTWARE_WEBSITE));
