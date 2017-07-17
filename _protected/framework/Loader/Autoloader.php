@@ -155,7 +155,7 @@ final class Autoloader
     }
 
     /**
-     * Download Files protected by the license.
+     * Download Kernel protected files if they don't already exist in the release build.
      *
      * @param string $sFileNamePath A pH7Framework filename path.
      * @param File $oFile
