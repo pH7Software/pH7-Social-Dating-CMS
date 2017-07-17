@@ -51,9 +51,9 @@ final class Autoloader
         spl_autoload_extensions('.class.php, .interface.php, .trait.php');
 
         // Register the loader methods
-        spl_autoload_register(array(__CLASS__, '_loadClass'));
+        spl_autoload_register(array(__CLASS__, 'loadClass'));
 
-        $this->_loadFile('Core/Kernel.class.php');
+        $this->loadFile('Core/Kernel.class.php');
 
         // Include Composer libraries (GeoIp2, Swift, Stripe, ...)
         require_once PH7_PATH_PROTECTED . 'vendor/autoload.php';
@@ -82,9 +82,9 @@ final class Autoloader
      *
      * @return void
      */
-    private function _loadClass($sClass)
+    private function loadClass($sClass)
     {
-        $sClass = $this->_clean($sClass);
+        $sClass = $this->clean($sClass);
 
         switch (true) {
             /***** To include the libraries *****/
@@ -126,12 +126,12 @@ final class Autoloader
      *
      * @return void
      */
-    private function _loadFile($sFileNamePath)
+    private function loadFile($sFileNamePath)
     {
         $oFile = new File;
         $sFullPath = PH7_PATH_FRAMEWORK . $sFileNamePath;
         $bFileExists = $oFile->existFile($sFullPath);
-        $bIsTooSmallFile = ($oFile->size($sFullPath) < self::MIN_VALID_SIZE_FILE);
+        $bIsTooSmallFile = $this->isFileTooSmall($sFullPath, $oFile);
 
         if (!$bFileExists || $bIsTooSmallFile) {
             /**
@@ -146,7 +146,7 @@ final class Autoloader
                 $oFile->deleteFile($sFullPath);
             }
 
-            $this->_downloadFile($sFileNamePath, $oFile);
+            $this->downloadFile($sFileNamePath, $oFile);
         } else {
             Registry::getInstance()->is_internet_needed = false;
         }
@@ -162,9 +162,9 @@ final class Autoloader
      *
      * @return void
      */
-    private function _downloadFile($sFileNamePath, File $oFile)
+    private function downloadFile($sFileNamePath, File $oFile)
     {
-        $rFile = $oFile->getUrlContents(self::DOWNLOAD_URL . $this->_getServerFileName($sFileNamePath));
+        $rFile = $oFile->getUrlContents(self::DOWNLOAD_URL . $this->getServerFileName($sFileNamePath));
         $oFile->putFile(PH7_PATH_FRAMEWORK . $sFileNamePath, $rFile);
     }
 
@@ -175,7 +175,7 @@ final class Autoloader
      *
      * @return string The filename.
      */
-    private function _getServerFileName($sFileNamePath)
+    private function getServerFileName($sFileNamePath)
     {
         return md5(strtolower(str_replace(array('/', '.class', '.php'), '', $sFileNamePath))) . '.dwld';
     }
