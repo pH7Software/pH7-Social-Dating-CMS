@@ -11,9 +11,14 @@
 
   <h2 class="underline">{lang 'Software Version'}</h2>
   <div class="italic">
-    <p>{lang 'Name: %software_version_name%'}</p>
     <p>{lang 'Version: %software_version%'}</p>
-    <p>{lang 'Build: %software_build%'}</p>
+    <p>{lang 'Version Name: %software_version_name%'}</p>
+    <p>{lang 'Version Build: %software_build%'}</p>
     <p>{lang 'Release Date: %0%', $release_date}</p>
+    <p>{lang 'License Type: <a href="%0%">%1%</a>', $license_form_link, PH7_LICENSE_NAME}</p>
   </div>
+
+  <div class="s_bMarg"></div>
+
+  <p><a class="underline" href="https://sourceforge.net/p/ph7socialdating">Give a Nice Review on Sourceforge</a></p>
 </div>

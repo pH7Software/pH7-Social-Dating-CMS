@@ -34,6 +34,7 @@ class InfoController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
         $this->view->release_date = $this->dateTime->get(Framework\Security\Version::KERNEL_RELASE_DATE)->date();
+        $this->view->license_form_link = Uri::get(PH7_ADMIN_MOD, 'setting', 'license');
         $this->output();
     }
 }
