@@ -42,9 +42,6 @@ function is_internet()
     // Sometimes, hosts ban a domain name, so check with several random domain name in case this happened
     $aRandomHosts = ['www.google.com', 'www.bing.com', 'www.yahoo.com', 'www.facebook.com', 'twitter.com'];
 
-    if (false === Registry::getInstance()->is_internet_needed)
-        return true;
-
     // Use random domain from the array to avoid a loop (it's fine for this usage. At worst the user will have to reload twice the page)
     return (bool)@fsockopen($aRandomHosts[mt_rand(0, 4)], 80, $iErrno, $sErrStr, 5);
 }
