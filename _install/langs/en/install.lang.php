@@ -32,10 +32,6 @@ $LANG = array(
     'later' => 'Not Now',
     'register' => 'Save It!',
     'site_name' => 'Site Name',
-    'license' => 'Your License',
-    'license_desc' => 'Please read the license carefully and accept it before continuing the installation of the software!',
-    'registration_for_license' => 'If you haven\'t done it yet, it\'s a good time to buy now <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">a license key</a> to get all Professional Premium Features offered by the software.<br /> If you wish to try first pH7CMS with its basic features and promo links, you can skip this step.',
-    'your_license' => 'Your License Key',
     'agree_license' => 'I have read and agree to the above Terms.',
     'step' => 'Step',
     'welcome' => 'Welcome to the installation of',
@@ -106,7 +102,6 @@ $LANG = array(
             Your Admin Login Password is: <em>****** (hidden for security reasons. It\'s the one you chose during the installation).</em>
         </p>
         <p>Don\'t forget to show off by showing YOUR new Social Dating Business to all your friends, your colleagues and your Facebook\'s mates (and even to your haters... or not :-) ).</p>
-        <p>Finally, if you haven\'t done it yet, it\'s a really good time to buy a license today by simply <a href="' . Controller::SOFTWARE_LICENSE_KEY_URL . '" target="_blank">visiting our website</a> in order to get all Premium Modules/Features, Remove all Links and Copyright Notice on your Website and even get access to the Unlimited Support Ticket.</p>
         <p>&nbsp;</p>
         <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
         please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
@@ -117,13 +112,6 @@ $LANG = array(
     'no_dir' => 'The directory does not exist.',
     'wait_importing_database' => 'Please wait while importing the database.<br />
         This may take several minutes.',
-    'service' => 'Useful additional services',
-    'buy_copyright_license_title' => 'Buy a Copyright Removal License',
-    'buy_copyright_license' => '<span class="gray">One-time Payment</span><br /> <span class="bold">Buy Now</span>',
-    'buy_copyright_license_desc' => 'By buying a License, you won\'t have any Links and Copyright Notice on your site, you will get all Premium Mods/Features and also be entitled to all next Update/Upgrade versions of the software.',
-    'buy_individual_ticket_support_title' => 'Buy an Individual Support Service',
-    'buy_individual_ticket_support' => '<span class="gray">Full ticket support for one month</span><br /> <span class="bold">Buy Now</span>',
-    'buy_individual_ticket_support_desc' => 'By purchasing an individual unlimited ticket support, we\'ll help you whenever you have an issue/problem with the software. We are at your total disposal to solve any problem encountered with pH7CMS.',
     'niche' => 'Choose the Kind of Site you Want to Build',
     'social_dating_niche' => 'Social-Dating Niche',
     'social_niche' => 'Community Niche',
