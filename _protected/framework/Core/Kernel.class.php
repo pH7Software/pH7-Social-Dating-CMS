@@ -92,14 +92,10 @@ abstract class Kernel
     {
         $this->_checkInternetConnection(); // First we check the Internet connection
 
-        $oLicense = new License;
-        $aLicData = $oLicense->checkCopyright();
-        //define('PH7_SOFTWARE_STATUS', !$oLicense->isBanned());
         define('PH7_SOFTWARE_STATUS', true);
         define('PH7_LICENSE_STATUS', 'active');
-        define('PH7_LICENSE_NAME', (!empty($aLicData['productname']) ? $aLicData['productname'] : 'Trial'));
+        define('PH7_LICENSE_NAME', 'pH7Builder, Open License');
         define('PH7_VALID_LICENSE', (PH7_LICENSE_STATUS === 'active'));
-        unset($aLicData, $oLicense);
 
         if (!PH7_SOFTWARE_STATUS) {
             $sLicenseMsg = t('You need to buy a <strong>valid <a href="%0%">pH7CMS</a> License Key</strong> to use the features requiring a license key!', self::SOFTWARE_WEBSITE);
