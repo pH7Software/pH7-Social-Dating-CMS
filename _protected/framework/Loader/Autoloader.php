@@ -84,7 +84,7 @@ final class Autoloader
                 break;
 
 
-            /***** To include third-party library that does not have the same naming convention that our CMS *****/
+            /***** To include third-party libraries that does not have the same naming convention than pH7CMS *****/
 
             // Include PFBC (PHP Form Builder Class) library
             case is_file(PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php'):
