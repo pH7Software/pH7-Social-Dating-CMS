@@ -12,7 +12,7 @@
 --
 -- Set the variables --
 --
-SET @sDefaultSiteName = 'Social Dating App';
+SET @sDefaultSiteName = 'Online Dating Startup';
 SET @sAdminEmail = 'admin@yoursite.com';
 SET @sFeedbackEmail = 'feedback@yoursite.com';
 SET @sNoReplyEmail = 'noreply@yoursite.com';
