@@ -187,8 +187,19 @@ final class Autoloader
      *
      * @return string The class cleaned.
      */
-    private function _clean($sClass)
+    private function clean($sClass)
     {
         return str_replace(array('PH7\Framework', '\\', '//'), array('/', '/', ''), $sClass);
+    }
+
+    /**
+     * @param $sFullPathFile
+     * @param File $oFile
+     *
+     * @return bool
+     */
+    private function isFileTooSmall($sFullPathFile, File $oFile)
+    {
+        return $oFile->size($sFullPathFile) < self::MIN_VALID_SIZE_FILE;
     }
 }
