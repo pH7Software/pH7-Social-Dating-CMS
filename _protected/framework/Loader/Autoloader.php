@@ -132,4 +132,34 @@ final class Autoloader
     {
         return $oFile->size($sFullPathFile) < self::MIN_VALID_SIZE_FILE;
     }
+
+    /**
+     * @return void
+     */
+    private function loadComposerLoader()
+    {
+        $sComposerLoaderFile = PH7_PATH_PROTECTED . 'vendor/autoload.php';
+
+        if (!is_file($sComposerLoaderFile)) {
+            $this->needToRunComposerPage();
+            exit;
+        }
+
+        require_once $sComposerLoaderFile;
+    }
+
+    /**
+     * Display a message if composer isn't installed.
+     *
+     * @return void
+     */
+    private function needToRunComposerPage()
+    {
+        $sMsg = <<<HTML
+<p class="warning">Third-Party Libraries Not Installed</p>
+<p>Whoops! It seems you downloaded pH7CMS from Github. We don't include third-party libraries on Github.<br />
+Please <strong><a href="%0%">read those instructions</a></strong> to install the third-party libraries or download it from <strong><a href="https://sourceforge.net/projects/ph7socialdating/">Sourceforge</a></strong> if you don't want to download the third-party libraries.</p>'
+HTML;
+        echo \PH7\html_body('You need to run Composer', $sMsg);
+    }
 }
