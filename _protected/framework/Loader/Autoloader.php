@@ -7,7 +7,7 @@
  * @copyright        (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Loader
- * @version          1.5
+ * @version          1.8
  */
 
 namespace PH7\Framework\Loader;
@@ -27,6 +27,7 @@ require_once PH7_PATH_FRAMEWORK . 'Pattern/Singleton.trait.php';
 
 final class Autoloader
 {
+    const MIN_VALID_SIZE_FILE = 1000;
     const DOWNLOAD_URL = 'http://download.hizup.com/files/';
 
     /**
@@ -131,7 +132,7 @@ final class Autoloader
         $oFile = new File;
         $sFullPath = PH7_PATH_FRAMEWORK . $sFileNamePath;
         $bFileExists = $oFile->existFile($sFullPath);
-        $bIsTooSmallFile = ($oFile->size($sFullPath) < 100);
+        $bIsTooSmallFile = ($oFile->size($sFullPath) < self::MIN_VALID_SIZE_FILE);
 
         if (!$bFileExists || $bIsTooSmallFile) {
             /**
