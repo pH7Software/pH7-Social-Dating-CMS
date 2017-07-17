@@ -337,15 +337,15 @@ class PH7Tpl extends Kernel
             }
 
             // It is forbidden to violate the copyright!
-            // Thought for those who have spent years for developing a professional, high-quality software and done their best to help developers!
+            // Thought for me who has spent years for developing a professional, high-quality software and done their best to help developers!
             if (!$this->isMarkCopyright()) {
                 $this->setErrMsg();
             }
         }
 
-        if ($this->isXmlSitemapCompilePage())
-            if (!$this->isSmallMarkCopyright() && !$this->bLicense)
-                $this->setErrMsg();
+        if ($this->isXmlSitemapCompilePage() && !$this->isSmallMarkCopyright()) {
+            $this->setErrMsg();
+        }
 
         if ($this->bPhpCompressor)
             $this->sCode = (new Compress)->parsePhp($this->sCode);
@@ -943,12 +943,14 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     final private function isMarkCopyright()
     {
         // Skip this step if it's not the base template (because there is no "smartLink()" and "link()" in layout.tpl of other templates as it includes the "base" one)
-        if ($this->notBaseTheme())
+        if ($this->notBaseTheme()) {
             return true;
+        }
 
-        // "design->smartLink()" can be removed ONLY if you bought a license
-        if (!$this->bLicense && false === strpos($this->sCode, 'design->smartLink()'))
+        // "design->smartLink()" can never be removed.
+        if (false === strpos($this->sCode, 'design->smartLink()')) {
             return false;
+        }
 
         // "design->link()" can never be removed. Copyright notices won't be displayed if you bought a license
         return false !== strpos($this->sCode, 'design->link()');
