@@ -92,17 +92,17 @@ final class Autoloader
             // To include Classes
             case is_file(PH7_PATH_FRAMEWORK . $sClass . '.class.php'):
                 $sFile = PH7_PATH_FRAMEWORK . $sClass . '.class.php';
-            break;
+                break;
 
             // To include Interfaces
             case is_file(PH7_PATH_FRAMEWORK . $sClass . '.interface.php'):
                 $sFile = PH7_PATH_FRAMEWORK . $sClass . '.interface.php';
-            break;
+                break;
 
             // To include Traits
             case is_file(PH7_PATH_FRAMEWORK . $sClass . '.trait.php'):
                 $sFile =  PH7_PATH_FRAMEWORK . $sClass . '.trait.php';
-            break;
+                break;
 
 
             /***** To include third-party library that does not have the same naming convention that our CMS *****/
@@ -110,7 +110,7 @@ final class Autoloader
             // Include PFBC (PHP Form Builder Class) library
             case is_file(PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php'):
                 $sFile = PH7_PATH_FRAMEWORK . 'Layout/Form/Engine/' . $sClass . '.class.php';
-            break;
+                break;
 
             default:
                 return; // Stop it
