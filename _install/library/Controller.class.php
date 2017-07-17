@@ -24,8 +24,6 @@ abstract class Controller implements Controllable
     const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
     const SOFTWARE_WEBSITE = 'http://ph7cms.com';
     const SOFTWARE_LICENSE_URL = 'http://ph7cms.com/legal/license';
-    const SOFTWARE_HELP_URL = 'http://clients.hizup.com/support'; // Help Desk URL
-    const SOFTWARE_LICENSE_KEY_URL = 'http://ph7cms.com/web/buysinglelicense';
     const SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/';
     const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
@@ -82,8 +80,6 @@ abstract class Controller implements Controllable
         $this->oView->assign('software_version', self::SOFTWARE_VERSION . ' ' . self::SOFTWARE_VERSION_NAME . ' - Build ' . self::SOFTWARE_BUILD);
         $this->oView->assign('software_website', self::SOFTWARE_WEBSITE);
         $this->oView->assign('software_license_url', self::SOFTWARE_LICENSE_URL);
-        $this->oView->assign('software_help_url', self::SOFTWARE_HELP_URL);
-        $this->oView->assign('software_license_key_url', self::SOFTWARE_LICENSE_KEY_URL);
         $this->oView->assign('software_author', self::SOFTWARE_AUTHOR);
         $this->oView->assign('software_copyright', self::SOFTWARE_COPYRIGHT);
         $this->oView->assign('software_email', self::SOFTWARE_EMAIL);
