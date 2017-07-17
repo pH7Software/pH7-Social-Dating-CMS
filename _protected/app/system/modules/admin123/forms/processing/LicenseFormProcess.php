@@ -11,7 +11,7 @@ namespace PH7;
 defined('PH7') or die('Restricted access');
 
 use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
-use PH7\Framework\Mvc\Model\License;
+use PH7\Framework\Mvc\Model\License as LicenseModel;
 
 class LicenseFormProcess extends Form
 {
@@ -19,16 +19,16 @@ class LicenseFormProcess extends Form
     {
         parent::__construct();
 
-        $oLicense = new License;
+        $oLicenseModel = new LicenseModel;
         $sKey = $this->httpRequest->post('copyright_key');
 
-        if (!$this->str->equals($sKey, $oLicense->get($iLicenseId))) {
-            $oLicense->save($sKey, $iLicenseId);
+        if (!$this->str->equals($sKey, $oLicenseModel->get($iLicenseId))) {
+            $oLicenseModel->save($sKey, $iLicenseId);
 
             // Clean caches to remove the copyright notices
             $this->file->deleteDir(PH7_PATH_CACHE . PH7Tpl::COMPILE_DIR);
             $this->file->deleteDir(PH7_PATH_CACHE . PH7Tpl::CACHE_DIR);
         }
-        unset($oLicense);
+        unset($oLicenseModel);
     }
 }
