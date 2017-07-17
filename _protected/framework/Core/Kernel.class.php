@@ -8,7 +8,7 @@
  * @license          CC-BY License - http://creativecommons.org/licenses/by/3.0/
  * @link             http://ph7cms.com
  * @package          PH7 / Framework / Core
- * @version          1.3
+ * @version          1.5
  */
 
 namespace PH7\Framework\Core;
