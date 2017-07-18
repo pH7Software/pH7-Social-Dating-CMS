@@ -14,14 +14,13 @@ use PH7\Framework\Url\Header;
 
 class LicenseForm
 {
-
-    private static $_iLicenseId = 1;
+    private static $iLicenseId = 1;
 
     public static function display()
     {
         if (isset($_POST['submit_license'])) {
             if (\PFBC\Form::isValid($_POST['submit_license'])) {
-                new LicenseFormProcess(self::$_iLicenseId);
+                new LicenseFormProcess(self::$iLicenseId);
             }
 
             Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'license', '?set_msg=1'));
@@ -38,9 +37,8 @@ class LicenseForm
         $oForm->addElement(new \PFBC\Element\Token('license'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="bold">' . t('License Status: %0%', $sStatusTxt) . '</p>'));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<p class="bold">' . t('Current License Type: %0%', $sLicTypeTxt) . '</p>'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Your License Key:'), 'copyright_key', array('description' => '<strong> ' . $sLicLink . '</strong> ' . t('to remove all Links and Copyright Notice, be able to Monetize your site, get All Premium Features and have access to the lifetime Support/Update/Upgrade!'), 'value' => (new License)->get(self::$_iLicenseId), 'autocomplete' => 'off', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Your License Key:'), 'copyright_key', array('description' => '<strong> ' . $sLicLink . '</strong> ' . t('to remove all Links and Copyright Notice, be able to Monetize your site, get All Premium Features and have access to the lifetime Support/Update/Upgrade!'), 'value' => (new License)->get(self::$iLicenseId), 'autocomplete' => 'off', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button(t('Register'), 'submit', array('icon' => 'key')));
         $oForm->render();
     }
-
 }
