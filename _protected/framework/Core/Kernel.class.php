@@ -46,7 +46,7 @@ abstract class Kernel
     const SOFTWARE_TECHNOLOGY_NAME = Version::KERNEL_TECHNOLOGY_NAME;
     const SOFTWARE_SERVER_NAME = Version::KERNEL_SERVER_NAME;
     const SOFTWARE_USER_AGENT = 'pH7 Web Simulator/1.1.2'; // USER AGENT NAME of Web Simulator
-    const SOFTWARE_CRAWLER_NAME = 'ph7hizupcrawler'; // CRAWLER BOT NAME
+    const SOFTWARE_CRAWLER_NAME = 'ph7crawler'; // CRAWLER BOT NAME
 
     /** @var Config */
     protected $config;
