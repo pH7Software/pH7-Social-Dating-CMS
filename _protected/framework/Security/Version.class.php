@@ -81,7 +81,7 @@ final class Version
     /**
      * Checks if there is an update available.
      *
-     * @return boolean Returns TRUE if a new update is available, FALSE otherwise.
+     * @return bool Returns TRUE if a new update is available, FALSE otherwise.
      */
     public static function isUpdateEligible()
     {
