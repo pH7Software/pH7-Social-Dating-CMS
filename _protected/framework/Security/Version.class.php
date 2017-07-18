@@ -13,7 +13,9 @@ namespace PH7\Framework\Security;
 
 defined('PH7') or exit('Restricted access');
 
+use DOMDocument;
 use PH7\Framework\Cache\Cache;
+use PH7\Framework\Security\Validate\Validate;
 
 final class Version
 {
@@ -45,13 +47,13 @@ final class Version
     /**
      * Gets information on the lastest software version.
      *
-     * @return array|boolean Returns version information in an array or FALSE if an error occurred.
+     * @return array|bool Returns version information in an array or FALSE if an error occurred.
      */
     public static function getLatestInfo()
     {
         $oCache = (new Cache)->start('str/security', 'version-info', self::CACHE_TIME); // Stored for 1 day
         if (!$mData = $oCache->get()) {
-            $oDom = new \DOMDocument;
+            $oDom = new DOMDocument;
 
             if (!@$oDom->load(self::LATEST_VERSION_URL)) {
                 return false;
@@ -60,7 +62,7 @@ final class Version
             foreach ($oDom->getElementsByTagName('ph7') as $oSoft) {
                 foreach ($oSoft->getElementsByTagName('social-dating-cms') as $oInfo) {
                     // "Validate::bool()" returns TRUE for "1", "true", "on" and "yes", FALSE otherwise
-                    $bIsAlert = (new Validate\Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
+                    $bIsAlert = (new Validate)->bool($oInfo->getElementsByTagName('upd-alert')->item(0)->nodeValue);
                     $sVerName = $oInfo->getElementsByTagName('name')->item(0)->nodeValue;
                     $sVerNumber = $oInfo->getElementsByTagName('version')->item(0)->nodeValue;
                     $sVerBuild = $oInfo->getElementsByTagName('build')->item(0)->nodeValue;
