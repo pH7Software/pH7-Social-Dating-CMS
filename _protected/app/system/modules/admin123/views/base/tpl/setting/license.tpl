@@ -1,8 +1,8 @@
 <div class="col-md-8">
     <h1 class="pH1">{lang 'We have eyes on you!'}</h1>
     <h2 class="underline">
-        <a href="{software_license_url}" title="{lang 'Buy a License Key'}">
-            {lang 'Unlock all premium features and use your site for commercial use'}
+        <a href="{software_license_url}?from=license_form_heading" title="{lang 'Buy a License Key'}">
+            {lang 'Use your Web App for Commercial Use and Unlock All Features'}
         </a>
     </h2>
 
