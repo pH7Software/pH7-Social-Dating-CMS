@@ -25,6 +25,9 @@ require_once PH7_PATH_FRAMEWORK . 'Pattern/Singleton.trait.php';
 
 final class Autoloader
 {
+    const INFO_INSTALL_COMPOSER_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS#installation';
+    const DOWNLOAD_SOFTWARE_LINK = 'https://sourceforge.net/projects/ph7socialdating/files/latest/download';
+
     const MIN_VALID_SIZE_FILE = 1000;
 
     /**
@@ -155,10 +158,13 @@ final class Autoloader
      */
     private function needToRunComposerPage()
     {
+        $sInstallComposerLink = self::INFO_INSTALL_COMPOSER_LINK;
+        $sDownloadLink = self::DOWNLOAD_SOFTWARE_LINK;
+
         $sMsg = <<<HTML
 <p class="warning">Third-Party Libraries Not Installed</p>
-<p>Whoops! It seems you downloaded pH7CMS from Github. We don't include third-party libraries on Github.<br />
-Please <strong><a href="https://github.com/pH7Software/pH7-Social-Dating-CMS#installation">read those instructions</a></strong> to install the third-party libraries or download it from <strong><a href="https://sourceforge.net/projects/ph7socialdating/files/latest/download">Sourceforge</a></strong> if you don't want to download the third-party libraries.</p>'
+<p>Oops! It seems you downloaded pH7CMS from Github. We don't include third-party libraries on Github.<br />
+Please <strong><a href="{$sInstallComposerLink}">read those instructions</a></strong> to install the third-party libraries or download it from <strong><a href="{$sDownloadLink}">Sourceforge</a></strong> if you don't want to download the third-party libraries.</p>'
 HTML;
         echo \PH7\html_body('You need to run Composer', $sMsg);
     }
