@@ -14,7 +14,6 @@ namespace PH7\Framework\Loader;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\File\File;
 use PH7\Framework\Pattern\Singleton;
 
 /**
@@ -27,8 +26,6 @@ final class Autoloader
 {
     const INFO_INSTALL_COMPOSER_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS#installation';
     const DOWNLOAD_SOFTWARE_LINK = 'https://sourceforge.net/projects/ph7socialdating/files/latest/download';
-
-    const MIN_VALID_SIZE_FILE = 1000;
 
     /**
      * Make the class singleton by importing the appropriate trait.
@@ -102,18 +99,6 @@ final class Autoloader
     }
 
     /**
-     * Get the filename of the file storage server.
-     *
-     * @param string $sFileNamePath A pH7Framework filename path.
-     *
-     * @return string The filename.
-     */
-    private function getServerFileName($sFileNamePath)
-    {
-        return md5(strtolower(str_replace(array('/', '.class', '.php'), '', $sFileNamePath))) . '.dwld';
-    }
-
-    /**
      * For all classes, hack to remove the namespace, slash and backslash.
      *
      * @param string The class name to clean.
@@ -123,17 +108,6 @@ final class Autoloader
     private function clean($sClass)
     {
         return str_replace(array('PH7\Framework', '\\', '//'), array('/', '/', ''), $sClass);
-    }
-
-    /**
-     * @param $sFullPathFile
-     * @param File $oFile
-     *
-     * @return bool
-     */
-    private function isFileTooSmall($sFullPathFile, File $oFile)
-    {
-        return $oFile->size($sFullPathFile) < self::MIN_VALID_SIZE_FILE;
     }
 
     /**
