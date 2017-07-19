@@ -118,7 +118,7 @@ final class Autoloader
         $sComposerLoaderFile = PH7_PATH_PROTECTED . 'vendor/autoload.php';
 
         if (!is_file($sComposerLoaderFile)) {
-            $this->needToRunComposerPage();
+            $this->showComposerNotInstalledPage();
             exit;
         }
 
@@ -130,7 +130,7 @@ final class Autoloader
      *
      * @return void
      */
-    private function needToRunComposerPage()
+    private function showComposerNotInstalledPage()
     {
         $sInstallComposerLink = self::INFO_INSTALL_COMPOSER_LINK;
         $sDownloadLink = self::DOWNLOAD_SOFTWARE_LINK;
