@@ -102,7 +102,7 @@ class Page
      */
     public static function cleanDynamicUrl($sVar)
     {
-        $sCurrentUrl = (new Http)->currentUrl();
+        $sCurrentUrl = (new HttpRequest)->currentUrl();
         $sUrl = preg_replace('#\?.+$#', '', $sCurrentUrl);
 
         if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl))
