@@ -415,11 +415,9 @@ class Design
             ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
             ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
             ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
-            ['title' => 'iPhone LONDON Dating App', 'link' => 'https://itunes.apple.com/us/app/meet-date-lovely-people-in/id1155373742'],
             ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
             ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
-            ['title' => 'Android LONDON DATING App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
+            ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com']
         ];
 
         if ($sLangCode === 'en-ie') {
