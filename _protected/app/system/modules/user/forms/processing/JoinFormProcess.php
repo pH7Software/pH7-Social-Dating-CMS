@@ -10,9 +10,6 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use DAT\Service\Identifier\Affiliate as AffiliateId;
-use DAT\Service\Provider\TAC\EveFlirt;
-use DAT\Tool\Client\Registration as Register;
 use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Ip\Ip;
@@ -21,12 +18,12 @@ use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Url\Header;
+use PH7\Framework\Util\PartnerAdder;
 use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form
 {
     const PARTNER_AFF_VAR_NAME = 'partner_register';
-    const PARTNER_AFF_ID = 645555;
 
     /** @var UserModel */
     private $oUserModel;
@@ -188,34 +185,22 @@ class JoinFormProcess extends Form
      * @param array $aData
      *
      * @return void
-     *
-     * @throws \DAT\Service\Identifier\InvalidAffiliateIdException
      */
     private function addUserToPartnerService(array $aData)
     {
-        $aBirthDate = explode('-', $aData['birth_date']); // "Y-m-d" pattern
-
         $aUserData = [
-            EveFlirt::PLATFORM_FIELD => 'desktop',
-            EveFlirt::TOS_FIELD => 'on',
-            EveFlirt::EMAIL_FIELD => $this->session->get('mail_step1'),
-            EveFlirt::USERNAME_FIELD => $this->session->get('username'),
-            EveFlirt::FIRSTNAME_FIELD => $this->session->get('first_name'),
-            EveFlirt::GENDER_FIELD => ($aData['sex'] === 'male' ? 1 : 2),
-            EveFlirt::BIRTH_YEAR_FIELD => $aBirthDate[0],
-            EveFlirt::BIRTH_MONTH_FIELD => $aBirthDate[1],
-            EveFlirt::BIRTH_DAY_FIELD => $aBirthDate[2],
-            EveFlirt::COUNTRY_FIELD => $aData['country'],
-            EveFlirt::CITY_FIELD => $aData['city'],
-            EveFlirt::POSTALCODE_FIELD => $aData['zip_code'],
+            'email' => $this->session->get('mail_step1'),
+            'first_name' => $this->session->get('first_name'),
+            'sex' => ($aData['sex'] === 'male' ? 1 : 2),
+            'match_sex' => ($aData['match_sex'] === 'male' ? 1 : 2),
+            'birth_date' => $aData['birth_date'],
+            'country' => $aData['country'],
+            'zip_code' => $aData['zip_code'],
 
             // For security reason, we don't want to send the user's password
-            EveFlirt::PASSWORD_FIELD => Various::genRnd(null, EveFlirt::MAX_PASSWORD_LENGTH)
+            'password' => Various::genRnd(null, 8)
         ];
 
-        $oAffiliateId = new AffiliateId(self::PARTNER_AFF_ID);
-        $oEveFlirt = new EveFlirt($oAffiliateId);
-
-        (new Register($oEveFlirt, $aUserData))->send();
+        new PartnerAdder($aUserData);
     }
 }

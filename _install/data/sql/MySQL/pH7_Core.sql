@@ -962,7 +962,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.3.8', 1);
+('pH7CMS', 'SQL System Schema', '1.3.9', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -1022,7 +1022,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('minUsernameLength', 3, '', 'registration'),
 ('maxUsernameLength', 30, '', 'registration'),
 ('requireRegistrationAvatar', 0, '', 'registration'),
-('allowUserToPartner', 0, 'If 1, gives the possibility to register instantly an account to a partner website', 'registration'),
+('allowUserToPartner', 1, 'If 1, gives the possibility to register instantly an account to a partner website', 'registration'),
 ('userActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('affActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('defaultMembershipGroupId', 2, 'Default Membership Group', 'registration'),

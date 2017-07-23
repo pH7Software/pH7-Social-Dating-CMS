@@ -415,11 +415,9 @@ class Design
             ['title' => 'Flirt Hot Girls', 'link' => 'http://meetlovelypeople.com'],
             ['title' => 'Flirt Naughty & Girls', 'link' => 'http://meetlovelypeople.com'],
             ['title' => 'The MOBILE Dating App', 'link' => 'http://flirt-dating.london'],
-            ['title' => 'iPhone LONDON Dating App', 'link' => 'https://itunes.apple.com/us/app/meet-date-lovely-people-in/id1155373742'],
             ['title' => 'Dating App', 'link' => 'http://meetlovelypeople.com'],
             ['title' => 'Date People by Mobile App', 'link' => 'http://meetlovelypeople.com'],
-            ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com'],
-            ['title' => 'Android LONDON DATING App', 'link' => 'https://play.google.com/store/apps/details?id=com.MLPLondon']
+            ['title' => 'Dating App for Dating Singles', 'link' => 'http://london-dating-app.meetlovelypeople.com']
         ];
 
         if ($sLangCode === 'en-ie') {
@@ -442,23 +440,6 @@ class Design
 
         $iRand = mt_rand(0, count($aSites) - 1);
         echo '<a href="', $aSites[$iRand]['link'], '">', $aSites[$iRand]['title'], '</a>';
-    }
-
-    final public function smartAppBanner(PH7Tpl $oView)
-    {
-        if (
-            (!defined('PH7_VALID_LICENSE') || !PH7_VALID_LICENSE)
-            && !AdminCore::auth()
-            && !AdminCore::isAdminIp(new AdminCoreModel)
-        ) {
-            $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742" />';
-
-            if (empty($oView->header)) {
-                $oView->header = $sIOSBanner;
-            } else {
-                $oView->header .= $sIOSBanner;
-            }
-        }
     }
 
     /**
