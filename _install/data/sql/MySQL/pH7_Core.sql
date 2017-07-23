@@ -1022,7 +1022,7 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('minUsernameLength', 3, '', 'registration'),
 ('maxUsernameLength', 30, '', 'registration'),
 ('requireRegistrationAvatar', 0, '', 'registration'),
-('allowUserToPartner', 0, 'If 1, gives the possibility to register instantly an account to a partner website', 'registration'),
+('allowUserToPartner', 1, 'If 1, gives the possibility to register instantly an account to a partner website', 'registration'),
 ('userActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('affActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('defaultMembershipGroupId', 2, 'Default Membership Group', 'registration'),
