@@ -149,7 +149,8 @@ class Validate
     public function int($iInt, $iMin = 0, $iMax = self::MAX_INT_NUMBER)
     {
         $iInt = filter_var($iInt, FILTER_SANITIZE_NUMBER_INT);
-        return (filter_var($iInt, FILTER_VALIDATE_INT, static::getFilterOption($iMin, $iMax)) !== false);
+
+        return filter_var($iInt, FILTER_VALIDATE_INT, static::getFilterOption($iMin, $iMax)) !== false;
 
     }
 
@@ -189,7 +190,8 @@ class Validate
     public function float($fFloat, $mMin = 0, $mMax = self::MAX_INT_NUMBER)
     {
         $fFloat = filter_var($fFloat, FILTER_SANITIZE_NUMBER_FLOAT);
-        return (filter_var($fFloat, FILTER_VALIDATE_FLOAT, static::getFilterOption($mMin, $mMax)) !== false);
+
+        return filter_var($fFloat, FILTER_VALIDATE_FLOAT, static::getFilterOption($mMin, $mMax)) !== false;
     }
 
     /**
@@ -238,7 +240,7 @@ class Validate
     {
         $iPwdLength = $this->_oStr->length($sPwd);
 
-        return ($iPwdLength >= $iMin && $iPwdLength <= $iMax);
+        return $iPwdLength >= $iMin && $iPwdLength <= $iMax;
     }
 
     /**
@@ -258,7 +260,9 @@ class Validate
             // This function now works with Windows since version PHP 5.3, so we mustn't include the PEAR NET_DNS library.
             if (!(checkdnsrr($sEmailHost, 'MX') && checkdnsrr($sEmailHost, 'A'))) return false;
         }
-        return (filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false && $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail));
+
+        return filter_var($sEmail, FILTER_VALIDATE_EMAIL) !== false &&
+            $this->_oStr->length($sEmail) <= PH7_MAX_EMAIL_LENGTH && !Ban::isEmail($sEmail);
     }
 
     /**
@@ -283,7 +287,7 @@ class Validate
 
         $iUserAge = (new YearMeasure($aBirthDate[2], $aBirthDate[0], $aBirthDate[1]))->get(); // Get the current user's age
 
-        return ($iUserAge >= $iMin && $iUserAge <= $iMax);
+        return $iUserAge >= $iMin && $iUserAge <= $iMax;
     }
 
     /**
@@ -329,7 +333,7 @@ class Validate
             $iResponse = (int) curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
             curl_close($rCurl);
 
-            return ($iResponse === 200 || $iResponse === 301 || $iResponse === 302);
+            return $iResponse === 200 || $iResponse === 301 || $iResponse === 302;
         }
 
         return true;
@@ -344,7 +348,7 @@ class Validate
      */
     public function ip($sIp)
     {
-        return (filter_var($sIp, FILTER_VALIDATE_IP) !== false);
+        return filter_var($sIp, FILTER_VALIDATE_IP) !== false;
     }
 
     /**
