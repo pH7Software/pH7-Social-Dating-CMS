@@ -122,6 +122,7 @@ class Page
      * Returns a trailing slash if needed.
      *
      * @param  string $sUrl
+     *
      * @return string
      */
     protected static function trailingSlash($sUrl)
