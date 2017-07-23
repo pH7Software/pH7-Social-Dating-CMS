@@ -444,23 +444,6 @@ class Design
         echo '<a href="', $aSites[$iRand]['link'], '">', $aSites[$iRand]['title'], '</a>';
     }
 
-    final public function smartAppBanner(PH7Tpl $oView)
-    {
-        if (
-            (!defined('PH7_VALID_LICENSE') || !PH7_VALID_LICENSE)
-            && !AdminCore::auth()
-            && !AdminCore::isAdminIp(new AdminCoreModel)
-        ) {
-            $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742" />';
-
-            if (empty($oView->header)) {
-                $oView->header = $sIOSBanner;
-            } else {
-                $oView->header .= $sIOSBanner;
-            }
-        }
-    }
-
     /**
      * @param string $sType (js or css).
      * @param string $sDir
