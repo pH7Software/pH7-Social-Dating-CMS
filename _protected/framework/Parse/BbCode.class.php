@@ -11,13 +11,12 @@
  */
 
 namespace PH7\Framework\Parse;
+
 defined('PH7') or exit('Restricted access');
 
 class BbCode extends Code
 {
-
     /**
-     * @access public
      * @param string $sText
      */
     public function __construct($sText)
@@ -27,7 +26,6 @@ class BbCode extends Code
     }
 
     /**
-     * @access public
      * @return string The code parsed
      */
     public function __toString()
@@ -38,7 +36,6 @@ class BbCode extends Code
     /**
      * Run the parse methods
      *
-     * @access protected
      * @return void
      */
     protected function run()
@@ -50,7 +47,6 @@ class BbCode extends Code
     /**
      * Parse text and processing
      *
-     * @access protected
      * @return void
      */
     protected function parse()
