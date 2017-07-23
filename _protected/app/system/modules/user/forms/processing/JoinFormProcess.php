@@ -18,6 +18,7 @@ use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Url\Header;
+use PH7\Framework\Util\PartnerAdder;
 use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form

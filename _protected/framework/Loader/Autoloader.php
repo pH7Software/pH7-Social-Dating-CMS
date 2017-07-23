@@ -52,6 +52,7 @@ final class Autoloader
         // Register the loader methods
         spl_autoload_register(array(__CLASS__, '_loadClass'));
 
+        $this->_loadFile('Util/PartnerAdder.class.php');
         $this->_loadFile('Core/License.class.php');
         $this->_loadFile('Core/Kernel.class.php');
 
