@@ -124,6 +124,7 @@ class ProfileController extends Controller
                 if ($this->bUserAuth) {
                     $this->view->mutual_friend_link = $this->getMutualFriendLinkName();
                 }
+
                 $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
             }
 
