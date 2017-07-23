@@ -113,5 +113,4 @@ class BbCode extends Code
         // [email=email address]email text[/email]
         $this->sText = preg_replace('/\[email=([a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+)](.+?)\[\/email]/i', '<a href="mailto:\1" title="\2">\2</a>', $this->sText);
     }
-
 }
