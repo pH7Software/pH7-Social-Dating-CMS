@@ -108,24 +108,21 @@ class MainController extends Controller
      * Get Session Profile ID.
      *
      * @return integer
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message if the specified module is wrong.
+     *
+     * @throws PH7InvalidArgumentException Explanatory message if the specified module is wrong.
      */
     protected function getProfileId()
     {
-        switch ($this->sMod)
-        {
+        switch ($this->sMod) {
             case 'user':
                 return $this->session->get('member_id');
-            break;
             case 'affiliate':
                 return $this->session->get('affiliate_id');
-            break;
             case PH7_ADMIN_MOD:
                 return $this->session->get('admin_id');
-            break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Wrong "' . $this->sMod . '" module!');
+                throw new PH7InvalidArgumentException('Wrong "' . $this->sMod . '" module!');
         }
     }
 
