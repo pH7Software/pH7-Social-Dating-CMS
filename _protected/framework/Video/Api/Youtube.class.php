@@ -22,7 +22,7 @@ class Youtube extends Api implements IApi
     const REGEX_TIME_FORMAT = '/[0-9]+[HMS]/';
 
     /** @var \stdClass */
-    private $_oContentDetails;
+    private $oContentDetails;
 
     /**
      * @param string $sUrl
@@ -37,9 +37,9 @@ class Youtube extends Api implements IApi
     /**
      * @param string $sUrl URL video (e.g., https://www.youtube.com/watch?v=q-1eHnBOg4A).
      *
-     * @throws Exception If the is a problem with Youtube API service.
-     *
      * @return Youtube|self|boolean FALSE if unable to open the API URL, otherwise Youtube
+     *
+     * @throws Exception If the is a problem with Youtube API service.
      */
     public function getInfo($sUrl)
     {
@@ -52,7 +52,7 @@ class Youtube extends Api implements IApi
                     throw new Exception('YouTube API: ' . $oData->error->errors[0]->message);
                 } else {
                     $this->oData = $oData->items[0]->snippet;
-                    $this->_oContentDetails = $oData->items[0]->contentDetails; // Need only for getting the video duration
+                    $this->oContentDetails = $oData->items[0]->contentDetails; // Need only for getting the video duration
                 }
             }
 
@@ -71,7 +71,7 @@ class Youtube extends Api implements IApi
      */
     public function getDuration()
     {
-        return $this->getDurationTime($this->_oContentDetails->duration);
+        return $this->getDurationTime($this->oContentDetails->duration);
     }
 
     /**
@@ -112,18 +112,16 @@ class Youtube extends Api implements IApi
 
         foreach ($aMatches as $aMatch) {
             foreach ($aMatch as $iPors) {
-                switch(substr($iPors, strlen($iPors)-1)) {
+                switch (substr($iPors, strlen($iPors)-1)) {
                     case 'H':
                         $iDuration += substr($iPors, 0, strlen($iPors)-1)*60*60;
-                    break;
-
+                        break;
                     case 'M':
                         $iDuration += substr($iPors, 0, strlen($iPors)-1)*60;
-                    break;
-
+                        break;
                     case 'S':
                         $iDuration += substr($iPors, 0, strlen($iPors)-1);
-                    break;
+                        break;
                 }
             }
         }

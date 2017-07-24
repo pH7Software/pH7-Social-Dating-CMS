@@ -8,13 +8,27 @@
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Url\Header;
 use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
 {
-    private $o2FactorModel, $oAuthenticator, $sMod, $iIsEnabled, $iProfileId;
+    /** @var TwoFactorAuthModel */
+    private $o2FactorModel;
+
+    /** @var Authenticator */
+    private $oAuthenticator;
+
+    /** @var string */
+    private $sMod;
+
+    /** @var int */
+    private $iIsEnabled;
+
+    /** @var int */
+    private $iProfileId;
 
     public function __construct()
     {
@@ -73,11 +87,12 @@ class MainController extends Controller
      * Download the backup 2FA code (text file).
      *
      * @param string $sSecret The 2FA secret.
+     *
      * @return void
      */
     protected function download($sSecret)
     {
-        $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Framework\Parse\Url::clean($this->registry->site_name) . '.txt';
+        $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Url::clean($this->registry->site_name) . '.txt';
         header('Content-Disposition: attachment; filename=" ' . $sFileName . '"');
 
         echo t('BACKUP VERIFICATION CODE - %site_url% | %0% area', $this->sMod) . "\r\n\r\n";

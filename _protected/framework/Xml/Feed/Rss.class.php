@@ -81,8 +81,7 @@ class Rss extends DomDocument
                         $oSub = $this->createElement($sSubElement, $sSubValue);
                         $oImage->appendChild($oSub);
                     }
-                }
-                    break;
+                } break;
 
                 case 'title':
                 case 'pubDate':
