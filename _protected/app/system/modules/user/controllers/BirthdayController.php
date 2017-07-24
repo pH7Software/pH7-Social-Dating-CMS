@@ -70,7 +70,6 @@ class BirthdayController extends Controller
             case BirthdayModel::MALE:
             case BirthdayModel::FEMALE:
                 return $sSexType;
-            break;
 
             default:
                 $this->displayPageNotFound();
