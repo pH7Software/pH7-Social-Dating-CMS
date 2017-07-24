@@ -93,7 +93,7 @@ class MainController extends Controller
     protected function download($sSecret)
     {
         $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Url::clean($this->registry->site_name) . '.txt';
-        header('Content-Disposition: attachment; filename=" ' . $sFileName . '"');
+        header('Content-Disposition: attachment; filename=' . $sFileName);
 
         echo t('BACKUP VERIFICATION CODE - %site_url% | %0% area', $this->sMod) . "\r\n\r\n";
         echo t('Code: %0%', $this->oAuthenticator->getCode($sSecret)) . "\r\n\r\n";
