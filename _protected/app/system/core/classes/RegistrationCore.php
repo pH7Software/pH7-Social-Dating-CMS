@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 
@@ -32,34 +33,15 @@ abstract class RegistrationCore extends Core
     }
 
     /**
-     * Send an email.
+     * Send the confirmation email with registration details.
      *
      * @param array $aInfo
-     * @param boolean $bIsUniversalLogin
+     * @param bool $bIsUniversalLogin
      *
      * @return self
      */
     public function sendMail(array $aInfo, $bIsUniversalLogin = false)
     {
-        switch ($this->iActiveType) {
-            case 1:
-                $sEmailMsg = t('Please %0% now to meet new people!', '<a href="' . Uri::get('user', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
-                break;
-
-            case 2:
-                /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
-                $sActivateLink = Uri::get('user', 'account', 'activate') . PH7_SH . $aInfo['email'] . PH7_SH . $aInfo['hash_validation'];
-                $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
-                break;
-
-            case 3:
-                $sEmailMsg = t('Caution! Your account is not activated yet. You will receive an email of any decision.');
-                break;
-
-            default:
-                $sEmailMsg = '';
-        }
-
         if ($bIsUniversalLogin) {
             $sPwdMsg = t('Password: %0% (please change it next time you login).', $aInfo['password']);
         } else {
@@ -68,7 +50,7 @@ abstract class RegistrationCore extends Core
 
         $this->view->content = t('Welcome to %site_name%, %0%!', $aInfo['first_name']) . '<br />' .
             t('Hi %0%! We are proud to welcome you as a member of %site_name%!', $aInfo['first_name']) . '<br />' .
-            $sEmailMsg . '<br />' .
+            $this->getEmailMsg() . '<br />' .
             '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
             t('Email: %0%.', $aInfo['email']) . '<br />' .
             t('Username: %0%.', $aInfo['username']) . '<br />' .
@@ -84,15 +66,15 @@ abstract class RegistrationCore extends Core
             'subject' => t('Hello %0%, Welcome to %site_name%!', $aInfo['first_name'])
         ];
 
-        (new Framework\Mail\Mail)->send($aMailInfo, $sMsgHtml);
+        (new Mail)->send($aMailInfo, $sMsgHtml);
 
         return $this;
     }
 
     /**
-     * Get the registration message.
+     * Get the registration status message.
      *
-     * @return string The message.
+     * @return string
      */
     public function getMsg()
     {
@@ -114,5 +96,34 @@ abstract class RegistrationCore extends Core
         }
 
         return $sMsg;
+    }
+
+    /**
+     * The the email message to send.
+     *
+     * @return string
+     */
+    private function getEmailMsg()
+    {
+        switch ($this->iActiveType) {
+            case 1:
+                $sEmailMsg = t('Please %0% to meet new people from today!', '<a href="' . Uri::get('user', 'main', 'login') . '"><b>' . t('log in') . '</b></a>');
+                break;
+
+            case 2:
+                /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
+                $sActivateLink = Uri::get('user', 'account', 'activate') . PH7_SH . $aInfo['email'] . PH7_SH . $aInfo['hash_validation'];
+                $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
+                break;
+
+            case 3:
+                $sEmailMsg = t('Caution! Your account is not activated yet. You will receive an email of any decision.');
+                break;
+
+            default:
+                $sEmailMsg = '';
+        }
+
+        return $sEmailMsg;
     }
 }

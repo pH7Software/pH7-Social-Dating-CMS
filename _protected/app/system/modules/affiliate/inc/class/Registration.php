@@ -8,12 +8,12 @@
 
 namespace PH7;
 
+use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
 
 class Registration extends RegistrationCore
 {
-
     public function __construct()
     {
        parent::__construct();
@@ -21,31 +21,19 @@ class Registration extends RegistrationCore
        $this->iActiveType = DbConfig::getSetting('affActivationType');
     }
 
+    /**
+     * Send the confirmation email with registration details.
+     *
+     * @param array $aInfo
+     * @param bool $bIsUniversalLogin
+     *
+     * @return self
+     */
     public function sendMail(array $aInfo, $bIsUniversalLogin = false)
     {
-        switch($this->iActiveType)
-        {
-            case 1:
-              $sEmailMsg = t('Please %0% now to make money!', '<a href="' . Uri::get('affiliate','home','login') . '"><b>'.t('log in').'</b></a>');
-            break;
-
-            case 2:
-              /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
-              $sActivateLink = Uri::get('affiliate','account','activate') . PH7_SH . $aInfo['email'] . PH7_SH . $aInfo['hash_validation'];
-              $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
-            break;
-
-            case 3:
-              $sEmailMsg = t('Caution! Your account is not activated yet. You will receive an email of any decision.');
-            break;
-
-            default:
-              $sEmailMsg = '';
-        }
-
         $this->view->content = t('Dear %0% %1%, welcome to affiliate platform %site_name%!', $aInfo['last_name'], $aInfo['first_name']) . '<br />' .
         t('Hello %0%! We are proud to welcome you as an affiliate on our %site_name%!', $aInfo['first_name']) . '<br />' .
-        $sEmailMsg .
+        $this->getEmailMsg() .
         '<br /><span style="text-decoration:underline">' . t('Please save the following information for future refenrence:') . '</span><br /><em>' .
         t('Email: %0%.', $aInfo['email']) . '<br />' .
         t('Username: %0%.', $aInfo['username']) . '<br />' .
@@ -60,9 +48,37 @@ class Registration extends RegistrationCore
           'subject' => t('Dear %0% %1%, Welcome to our affiliate platform!', $aInfo['last_name'], $aInfo['first_name'])
         ];
 
-        (new Framework\Mail\Mail)->send($aMailInfo, $sMsgHtml);
+        (new Mail)->send($aMailInfo, $sMsgHtml);
 
         return $this;
     }
 
+    /**
+     * The the email message to send.
+     *
+     * @return string
+     */
+    private function getEmailMsg()
+    {
+        switch ($this->iActiveType) {
+            case 1:
+                $sEmailMsg = t('Please %0% to make money from today!', '<a href="' . Uri::get('affiliate','home','login') . '"><b>'.t('log in').'</b></a>');
+                break;
+
+            case 2:
+                /** We place the text outside of Uri::get() otherwise special characters will be deleted and the parameters passed in the url will be unusable thereafter. **/
+                $sActivateLink = Uri::get('affiliate','account','activate') . PH7_SH . $aInfo['email'] . PH7_SH . $aInfo['hash_validation'];
+                $sEmailMsg = t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
+                break;
+
+            case 3:
+                $sEmailMsg = t('Caution! Your account is not activated yet. You will receive an email of any decision.');
+                break;
+
+            default:
+                $sEmailMsg = '';
+        }
+
+        return $sEmailMsg;
+    }
 }
