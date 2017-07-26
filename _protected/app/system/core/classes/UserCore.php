@@ -13,15 +13,19 @@ namespace PH7;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
 use PH7\Framework\File\File;
+use PH7\Framework\Image\Image;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Util\Various as VariousModel;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Registry\Registry;
+use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Str\Str;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Url;
 use PH7\Framework\Util\Various;
@@ -101,7 +105,7 @@ class UserCore
          */
         if (!isDebug()) error_reporting(0);
 
-        $oAvatar1 = new Framework\Image\Image($sFile, 600, 800);
+        $oAvatar1 = new Image($sFile, 600, 800);
 
         if (!$oAvatar1->validate()) return false; // File type incompatible.
 
@@ -217,7 +221,7 @@ class UserCore
          */
         if (!isDebug()) error_reporting(0);
 
-        $oWallpaper = new Framework\Image\Image($sFile, 600, 800);
+        $oWallpaper = new Image($sFile, 600, 800);
 
         if (!$oWallpaper->validate()) return false;
 
@@ -269,7 +273,7 @@ class UserCore
      */
     public function getProfileLink($sUsername)
     {
-        $sUsername = (new Framework\Str\Str)->lower($sUsername);
+        $sUsername = (new Str)->lower($sUsername);
         //return (strlen($sUsername) >1) ? PH7_URL_ROOT . $sUsername . PH7_PAGE_EXT : '#';
 
         return PH7_URL_ROOT . $sUsername . PH7_PAGE_EXT;
@@ -288,7 +292,7 @@ class UserCore
     {
         if (!self::auth() && !AdminCore::auth()) {
             $aHttpParams = [
-                'ref' => (new Framework\Mvc\Request\Http)->currentController(),
+                'ref' => (new HttpRequest)->currentController(),
                 'a' => Registry::getInstance()->action,
                 'u' => $sUsername,
                 'f_n' => $sFirstName,
@@ -372,7 +376,7 @@ class UserCore
         foreach ($aUsernameList as $sUsername) {
             $sUsername = substr($sUsername, 0, $iMaxLen);
 
-            if ((new Framework\Security\Validate\Validate)->username($sUsername))
+            if ((new Validate)->username($sUsername))
                 break;
             else
                 $sUsername = Various::genRnd('pOH_Pierre-Henry_Soria_Béghin_Rollier', $iMaxLen); // Default value
