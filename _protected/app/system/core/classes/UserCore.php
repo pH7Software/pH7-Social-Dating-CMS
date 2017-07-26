@@ -358,6 +358,7 @@ class UserCore
      */
     public function findUsername($sNickname, $sFirstName, $sLastName)
     {
+        $iMaxLen = DbConfig::getSetting('maxUsernameLength');
         $sRnd = Various::genRnd('pH_Pierre-Henry_Soria_Sanz_González', 4); // Random String
 
         $aUsernameList = [
