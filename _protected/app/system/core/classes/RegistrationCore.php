@@ -80,7 +80,7 @@ abstract class RegistrationCore extends Core
     {
         switch ($this->iActiveType) {
             case 1:
-                $sMsg = t('Login now!');
+                $sMsg = t('Log in now!');
                 break;
 
             case 2:
