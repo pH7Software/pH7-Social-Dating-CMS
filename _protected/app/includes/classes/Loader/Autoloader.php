@@ -19,6 +19,8 @@ use PH7\Framework\Registry\Registry;
 
 final class Autoloader
 {
+    const PROJECT_NAMESPACE = 'PH7\\';
+
     /**
      * It's a singleton class, so include the singleton trait.
      */
@@ -156,6 +158,6 @@ final class Autoloader
      */
     private function _removeNamespace($sClass)
     {
-        return str_replace('PH7\\', '', $sClass);
+        return str_replace(self::PROJECT_NAMESPACE, '', $sClass);
     }
 }
