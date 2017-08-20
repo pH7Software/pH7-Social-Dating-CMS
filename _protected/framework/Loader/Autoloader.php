@@ -27,6 +27,7 @@ require_once PH7_PATH_FRAMEWORK . 'Pattern/Singleton.trait.php';
 
 final class Autoloader
 {
+    const FRAMEWORK_NAMESPACE = 'PH7\Framework';
     const DOWNLOAD_URL = 'http://download.hizup.com/files/';
 
     /**
@@ -187,6 +188,6 @@ final class Autoloader
      */
     private function _clean($sClass)
     {
-        return str_replace(array('PH7\Framework', '\\', '//'), array('/', '/', ''), $sClass);
+        return str_replace([self::FRAMEWORK_NAMESPACE, '\\', '//'], ['/', '/', ''], $sClass);
     }
 }
