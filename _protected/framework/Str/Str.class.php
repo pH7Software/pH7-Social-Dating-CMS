@@ -16,6 +16,8 @@ namespace PH7\Framework\Str
 
  class Str
  {
+     const ENCODING = 'UTF-8';
+  
      private static $_sRegexDelimiter = '#';
 
      /**
@@ -335,7 +337,7 @@ namespace PH7\Framework\Str
       */
      protected function htmlSpecialChars($sText)
      {
-         return htmlspecialchars($sText, ENT_QUOTES, 'utf-8');
+         return htmlspecialchars($sText, ENT_QUOTES, static::ENCODING);
      }
 
      private static function _regexNormalize($sPattern)
