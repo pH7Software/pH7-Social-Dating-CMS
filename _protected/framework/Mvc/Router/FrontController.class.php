@@ -258,7 +258,7 @@ final class FrontController
      */
     private function simpleModuleRouter()
     {
-        if ($this->oUri->fragment(1) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(1)))
+        if ($this->oUri->fragment(1) && preg_match(self::REGEX_MODULE_FORMAT, $this->oUri->fragment(1)))
         {
             // Set module
             $this->oRegistry->module = $this->oUri->fragment(1);
@@ -288,7 +288,7 @@ final class FrontController
             $this->ajaxRouter($this->oRegistry->path_module);
             exit;
         }
-        elseif ($this->oUri->fragment(2) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(2)))
+        elseif ($this->oUri->fragment(2) && preg_match(self::REGEX_CONTROLLER_FORMAT, $this->oUri->fragment(2)))
         {
             // Set the controller
             $this->oRegistry->controller = ucfirst($this->oUri->fragment(2)) . 'Controller';
@@ -299,7 +299,7 @@ final class FrontController
             $this->oRegistry->controller = ucfirst($this->oConfig->values['module']['default_controller']) . 'Controller';
         }
 
-        if ($this->oUri->fragment(3) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(3)))
+        if ($this->oUri->fragment(3) && preg_match(self::REGEX_ACTION_REGEX, $this->oUri->fragment(3)))
         {
             // Set the action
             $this->oRegistry->action = $this->oUri->fragment(3);
