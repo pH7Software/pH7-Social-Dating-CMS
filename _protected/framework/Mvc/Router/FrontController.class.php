@@ -37,6 +37,7 @@ use PH7\Framework\Url\Uri;
 final class FrontController
 {
     const INDEX_FILE = 'index.php';
+
     const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
     const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9\_]+$#i';
     const REGEX_ACTION_FORMAT = '#^[a-z0-9\_]+$#i';
