@@ -37,6 +37,9 @@ use PH7\Framework\Url\Uri;
 final class FrontController
 {
     const INDEX_FILE = 'index.php';
+    const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
+    const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9\_]+$#i';
+    const REGEX_ACTION_FORMAT = '#^[a-z0-9\_]+$#i;
 
     /** @var Config */
     private $oConfig;
@@ -182,7 +185,7 @@ final class FrontController
      */
     private function simpleRouter()
     {
-        if ($this->oUri->fragment(0) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(0)))
+        if ($this->oUri->fragment(0) && preg_match(self::REGEX_MODULE_FORMAT, $this->oUri->fragment(0)))
         {
             // Set system module
             $this->oRegistry->module = $this->oUri->fragment(0);
@@ -222,7 +225,7 @@ final class FrontController
             exit;
 
         }
-        elseif ($this->oUri->fragment(1) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(1)))
+        elseif ($this->oUri->fragment(1) && preg_match(self::REGEX_CONTROLLER_FORMAT, $this->oUri->fragment(1)))
         {
             // Set the controller
             $this->oRegistry->controller = ucfirst($this->oUri->fragment(1)) . 'Controller';
@@ -233,7 +236,7 @@ final class FrontController
             $this->oRegistry->controller = ucfirst($this->oConfig->values['module']['default_controller']) . 'Controller';
         }
 
-        if ($this->oUri->fragment(2) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(2)))
+        if ($this->oUri->fragment(2) && preg_match(self::REGEX_ACTION_FORMAT, $this->oUri->fragment(2)))
         {
             // Set the action
             $this->oRegistry->action = $this->oUri->fragment(2);
