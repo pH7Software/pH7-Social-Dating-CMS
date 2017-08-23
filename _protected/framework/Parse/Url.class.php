@@ -17,22 +17,45 @@ use PH7\Framework\Str\Str;
 
 class Url
 {
-
+    const UNWANTED_SPECIAL_CHARS = [
+        '«',
+        '»',
+        '"',
+        '~',
+        '#',
+        '$',
+        '@',
+        '`', 
+        '§',
+        '€',
+        '£',
+        'µ',
+        '\\',
+        '[',
+        ']',
+        '<',
+        '>',
+        '%',
+        '*',
+        '{',
+        '}'
+    ];
+        
     /**
      * Clean URL.
      *
      * @param string $sUrl
-     * @param boolean $bFullClean Also removes points, puts characters to lowercase, etc.
+     * @param bool $bFullClean Also removes points, puts characters to lowercase, etc.
      *
      * @return string The new clean URL
      */
     public static function clean($sUrl, $bFullClean = true)
     {
         $sUrl = preg_replace('/[\s]+/', '-', $sUrl);
-        $sUrl = str_replace(array('«', '»', '"', '~', '#', '$', '@', '`', '§', '$', '£', 'µ', '\\', '[', ']', '<', '>', '%', '*', '{', '}'), '-', $sUrl);
+        $sUrl = str_replace(self::UNWANTED_SPECIAL_CHARS, '-', $sUrl);
 
         if ($bFullClean) {
-            $sUrl = str_replace(array('.', '^', ',', ':', ';', '!'), '', $sUrl);
+            $sUrl = str_replace(['.', '^', ',', ':', ';', '!'], '', $sUrl);
             $oStr = new Str;
             $sUrl = $oStr->lower($sUrl);
             $sUrl = $oStr->escape($sUrl, true);
@@ -57,5 +80,4 @@ class Url
 
         return $sLink;
     }
-
 }
