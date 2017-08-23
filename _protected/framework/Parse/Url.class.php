@@ -17,6 +17,9 @@ use PH7\Framework\Str\Str;
 
 class Url
 {
+    const REGEX_SPACE = '/[\s]+/';
+    const REGEX_URL_FORMAT = '#(^https?://|www\.|\.[a-z]{2,4}/?$)#i';
+
     const UNWANTED_SPECIAL_CHARS = [
         '«',
         '»',
@@ -40,6 +43,15 @@ class Url
         '{',
         '}'
     ];
+
+    const MINOR_SPECIAL_CHARS = [
+        '.',
+        '^',
+        ',',
+        ':',
+        ';',
+        '!'
+    ];
         
     /**
      * Clean URL.
@@ -51,11 +63,11 @@ class Url
      */
     public static function clean($sUrl, $bFullClean = true)
     {
-        $sUrl = preg_replace('/[\s]+/', '-', $sUrl);
+        $sUrl = preg_replace(self::REGEX_SPACE, '-', $sUrl);
         $sUrl = str_replace(self::UNWANTED_SPECIAL_CHARS, '-', $sUrl);
 
         if ($bFullClean) {
-            $sUrl = str_replace(['.', '^', ',', ':', ';', '!'], '', $sUrl);
+            $sUrl = str_replace(self::MINOR_SPECIAL_CHARS, '', $sUrl);
             $oStr = new Str;
             $sUrl = $oStr->lower($sUrl);
             $sUrl = $oStr->escape($sUrl, true);
@@ -75,7 +87,7 @@ class Url
     public static function name($sLink)
     {
         $oStr = new Str;
-        $sLink = $oStr->upperFirst(preg_replace('#(^https?://|www\.|\.[a-z]{2,4}/?$)#i', '', $oStr->lower($sLink)));
+        $sLink = $oStr->upperFirst(preg_replace(self::REGEX_URL_FORMAT, '', $oStr->lower($sLink)));
         unset($oStr);
 
         return $sLink;
