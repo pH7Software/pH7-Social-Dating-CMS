@@ -54,7 +54,7 @@ class Url
      */
     public static function clean($sUrl)
     {
-        return str_replace(array(' ', '&'), array('%20', '&amp;'), $sUrl);
+        return str_replace([' ', '&'], ['%20', '&amp;'], $sUrl);
     }
 
     /**
