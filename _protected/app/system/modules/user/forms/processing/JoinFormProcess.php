@@ -44,7 +44,7 @@ class JoinFormProcess extends Form
             'email' => $this->httpRequest->post('mail'),
             'username' => $this->httpRequest->post('username'),
             'first_name' => $this->httpRequest->post('first_name'),
-            'reference' => $this->getAffiliateRefence(),
+            'reference' => $this->getAffiliateReference(),
             'ip' => Ip::get(),
             'hash_validation' => Various::genRnd(),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
@@ -159,7 +159,7 @@ class JoinFormProcess extends Form
     /**
      * @return string
      */
-    private function getAffiliateRefence()
+    private function getAffiliateReference()
     {
         $sVariableName = Registration::REFERENCE_VAR_NAME;
         $sRef = $this->session->exists($sVariableName) ? $this->session->get($sVariableName) : t('No reference');
