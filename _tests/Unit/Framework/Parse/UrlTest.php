@@ -25,7 +25,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
      * @param string $sUrl
      * @param string $sExpected
      *
-     * @dataProvider urlNameProvider
+     * @dataProvider urlsNamesProvider
      */
     public function testName($sUrl, $sExpected)
     {
@@ -35,7 +35,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     /**
      * @return array
      */
-    public function urlNameProvider()
+    public function urlsNamesProvider()
     {
         return [
             ['https://ph7cms.com', 'Ph7cms'],
