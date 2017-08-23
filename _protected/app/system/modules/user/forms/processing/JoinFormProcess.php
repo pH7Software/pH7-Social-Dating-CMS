@@ -18,13 +18,10 @@ use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Security;
 use PH7\Framework\Url\Header;
-use PH7\Framework\Util\PartnerAdder;
 use PH7\Framework\Util\Various;
 
 class JoinFormProcess extends Form
 {
-    const PARTNER_AFF_VAR_NAME = 'partner_register';
-
     /** @var UserModel */
     private $oUserModel;
 
@@ -77,10 +74,6 @@ class JoinFormProcess extends Form
                 AffiliateCore::updateJoinCom($iAffId, $this->config, $this->registry);
             }
 
-            if ($this->httpRequest->postExists(self::PARTNER_AFF_VAR_NAME)) {
-                $this->session->set(self::PARTNER_AFF_VAR_NAME, 1);
-            }
-
             // Send email
             (new Registration)->sendMail($aData);
 
@@ -123,12 +116,6 @@ class JoinFormProcess extends Form
                 t('Please try again with new information in the form fields or come back later.')
             );
         } else {
-            if ($this->session->exists(self::PARTNER_AFF_VAR_NAME)) {
-                // If we got the authorization from the user, we register their to a partner service
-                $aData = $aData1 + $aData2;
-                $this->addUserToPartnerService($aData);
-            }
-
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
             Header::redirect(Uri::get('user','signup','step3'));
         }
@@ -179,28 +166,5 @@ class JoinFormProcess extends Form
         $this->session->remove($sVariableName);
 
         return $sRef;
-    }
-
-    /**
-     * @param array $aData
-     *
-     * @return void
-     */
-    private function addUserToPartnerService(array $aData)
-    {
-        $aUserData = [
-            'email' => $this->session->get('mail_step1'),
-            'first_name' => $this->session->get('first_name'),
-            'sex' => ($aData['sex'] === 'male' ? 1 : 2),
-            'match_sex' => ($aData['match_sex'] === 'male' ? 1 : 2),
-            'birth_date' => $aData['birth_date'],
-            'country' => $aData['country'],
-            'zip_code' => $aData['zip_code'],
-
-            // For security reason, we don't want to send the user's password
-            'password' => Various::genRnd(null, 8)
-        ];
-
-        new PartnerAdder($aUserData);
     }
 }
