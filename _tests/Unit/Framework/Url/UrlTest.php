@@ -23,10 +23,10 @@ class UrlTest extends PHPUnit_Framework_TestCase
 
     public function testDecode()
     {
-        $sUrl = 'https%3A%2F%2Fph7cms.com%2Fmy-route+%26+the+new_2%C2%A3POST%21';
+        $sEncodedUrl = 'https%3A%2F%2Fph7cms.com%2Fmy-route+%26+the+new_2%C2%A3POST%21';
         $sExpected = 'https://ph7cms.com/my-route & the new_2£POST!';
 
-        $this->assertSame($sExpected, Url::decode($sUrl));
+        $this->assertSame($sExpected, Url::decode($sEncodedUrl));
     }
 
     /**
