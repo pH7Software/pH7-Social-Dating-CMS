@@ -14,7 +14,6 @@ namespace PH7;
 
 class AdminController extends MainController
 {
-
     public function index()
     {
         $this->sTitle = t('Logs | Administration of Fake Admin');
@@ -31,5 +30,4 @@ class AdminController extends MainController
         $this->view->h2_title = $this->sTitle;
         $this->output();
     }
-
 }
