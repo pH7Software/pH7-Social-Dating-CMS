@@ -18,7 +18,7 @@ namespace PH7\Framework\Str
  {
      const DEF_MAX_TEXT_EXTRACT_LENGTH = 150;
      const ENCODING = 'UTF-8';
-  
+
      private static $_sRegexDelimiter = '#';
 
      /**
