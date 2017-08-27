@@ -28,9 +28,9 @@ final class Version
      * 5.* was "pCO", 6.* was "WoW" and 7.*, 8.* is NaOH
      */
     const KERNEL_VERSION_NAME = 'NaOH';
-    const KERNEL_VERSION = '8.0.4';
+    const KERNEL_VERSION = '8.0.6';
     const KERNEL_BUILD = '1';
-    const KERNEL_RELASE_DATE = '2017-07-24';
+    const KERNEL_RELASE_DATE = '2017-08-28';
 
     /***** Framework Server *****/
     const KERNEL_TECHNOLOGY_NAME = 'pH7T/1.0.1'; // Ph7 Technology
