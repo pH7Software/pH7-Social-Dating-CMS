@@ -2,13 +2,13 @@
 
 <h2>{$LANG.finish}</h2>
 
-<p class="bold"><a href="{$smarty.const.PH7_URL_ROOT}" target="_blank">{$LANG.go_your_site}</a> &nbsp; | &nbsp; <a href="{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}" target="_blank">{$LANG.go_your_admin_panel} (<em>{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}</em>)</a></p>
+<p class="bold"><a href="{$smarty.const.PH7_URL_ROOT}" target="_blank">{$LANG.go_your_site}</a> &nbsp; | &nbsp; <a href="{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}" target="_blank">{$LANG.go_your_admin_panel} (<em class="text-info">{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}</em>)</a></p>
 
 {if !empty($admin_login_email) && !empty($admin_username)}
     <ul>
-        <li>{$LANG.admin_url}: <strong><a href="{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}" target="_blank">{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}</a></strong></li>
-        <li>{$LANG.admin_login_email}: <strong>{$admin_login_email|escape}</strong></li>
-        <li>{$LANG.admin_username}: <strong>{$admin_username|escape}</strong></li>
+        <li>{$LANG.admin_url}: <strong class="text-info"><a href="{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}" target="_blank">{$smarty.const.PH7_URL_ROOT}{$smarty.const.PH7_ADMIN_MOD}</a></strong></li>
+        <li>{$LANG.admin_login_email}: <strong class="text-info">{$admin_login_email|escape}</strong></li>
+        <li>{$LANG.admin_username}: <strong class="text-info">{$admin_username|escape}</strong></li>
     </ul>
 {/if}
 
