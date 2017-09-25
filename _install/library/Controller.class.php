@@ -24,7 +24,6 @@ abstract class Controller implements Controllable
     const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
     const SOFTWARE_WEBSITE = 'http://ph7cms.com';
     const SOFTWARE_LICENSE_URL = 'http://ph7cms.com/legal/license';
-    const SOFTWARE_DOWNLOAD_URL = 'http://download.hizup.com/';
     const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
