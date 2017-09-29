@@ -109,7 +109,7 @@ class AddFakeProfilesFormProcess extends Form
         }
 
         // Create a temporary file before creating the avatar images
-        $sTmpFile = PH7_PATH_TMP . PH7_DS . uniqid() . sha1($aData['avatar']) . '.tmp';
+        $sTmpFile = PH7_PATH_TMP . PH7_DS . uniqid(mt_rand(), true) . sha1($aData['avatar']) . '.tmp';
         $this->file->putFile($sTmpFile, $rFile);
 
         // Create different avatar sizes, save them and set the avatar into the DB
