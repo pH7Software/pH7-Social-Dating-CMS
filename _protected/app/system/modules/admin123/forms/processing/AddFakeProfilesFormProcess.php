@@ -40,23 +40,8 @@ class AddFakeProfilesFormProcess extends Form
             $sEmail = trim($aUser['email']);
             $sUsername = trim($aUser['login']['username']);
             if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail) && $oValidate->username($sUsername)) {
-                $aData['username'] = $sUsername;
-                $aData['email'] = $sEmail;
-                $aData['first_name'] = $aUser['name']['first'];
-                $aData['last_name'] = $aUser['name']['last'];
-                $aData['password'] = $aUser['login']['password'];
-                $aData['sex'] = $aUser['gender'];
-                $aData['match_sex'] = array($oUser->getMatchSex($aData['sex']));
-                $aData['country'] = Country::fixCode($aUser['nat']);
-                $aData['city'] = $aUser['location']['city'];
-                $aData['state'] = $aUser['location']['state'];
-                $aData['zip_code'] = $aUser['location']['postcode'];
-                $aData['birth_date'] = $this->dateTime->get($aUser['dob'])->date('Y-m-d');
-                $aData['avatar'] = $aUser['picture']['large'];
-                $aData['ip'] = Ip::get();
-
+                $aData = $this->storeUserDataIntoArray($sUsername, $sEmail, $aUser, $oUser);
                 $aData['profile_id'] = $oUserModel->add(escape($aData, true));
-
                 $this->addAvatar($aData, $oUser);
             }
         }
@@ -132,5 +117,34 @@ class AddFakeProfilesFormProcess extends Form
 
         // Remove the temporary file since we don't need it anymore
         $this->file->deleteFile($sTmpFile);
+    }
+
+    /**
+     * @param string $sUsername
+     * @param string $sEmail
+     * @param array $aUser
+     * @param UserCore $oUser
+     *
+     * @return array
+     */
+    private function storeUserDataIntoArray($sUsername, $sEmail, array $aUser, UserCore $oUser)
+    {
+        $aData = [];
+        $aData['username'] = $sUsername;
+        $aData['email'] = $sEmail;
+        $aData['first_name'] = $aUser['name']['first'];
+        $aData['last_name'] = $aUser['name']['last'];
+        $aData['password'] = $aUser['login']['password'];
+        $aData['sex'] = $aUser['gender'];
+        $aData['match_sex'] = array($oUser->getMatchSex($aData['sex']));
+        $aData['country'] = Country::fixCode($aUser['nat']);
+        $aData['city'] = $aUser['location']['city'];
+        $aData['state'] = $aUser['location']['state'];
+        $aData['zip_code'] = $aUser['location']['postcode'];
+        $aData['birth_date'] = $this->dateTime->get($aUser['dob'])->date('Y-m-d');
+        $aData['avatar'] = $aUser['picture']['large'];
+        $aData['ip'] = Ip::get();
+
+        return $aData;
     }
 }
