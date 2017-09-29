@@ -56,7 +56,7 @@ final class Server
     /**
      * Check to see if we are on a Windows server.
      *
-     * @return boolean TRUE if windows, FALSE if not.
+     * @return bool TRUE if windows, FALSE if not.
      */
     public static function isWindows()
     {
@@ -67,7 +67,7 @@ final class Server
     /**
      * Check to see if we are on a Unix server.
      *
-     * @return boolean TRUE if Unix, FALSE if not.
+     * @return bool TRUE if Unix, FALSE if not.
      */
     public static function isUnix()
     {
@@ -78,7 +78,7 @@ final class Server
     /**
      * Check to see if we are on a Mac OS server.
      *
-     * @return boolean TRUE if windows, FALSE if not.
+     * @return bool TRUE if windows, FALSE if not.
      */
     public static function isMac()
     {
@@ -125,7 +125,7 @@ final class Server
     /**
      * Check if the server is in local.
      *
-     * @return boolean TRUE if it is in local mode, FALSE if not.
+     * @return bool TRUE if it is in local mode, FALSE if not.
      */
     public static function isLocalHost()
     {
@@ -137,7 +137,7 @@ final class Server
     /**
      * Check if Apache's mod_rewrite is installed.
      *
-     * @return boolean
+     * @return bool
      */
     public static function isRewriteMod()
     {
@@ -159,7 +159,7 @@ final class Server
     /**
      * Alias method of the checkInternetConnection() function (located in ~/_protected/app/includes/helpers/misc.php).
      *
-     * @return boolean Returns TRUE if the Internet connection is enabled, FALSE otherwise.
+     * @return bool Returns TRUE if the Internet connection is enabled, FALSE otherwise.
      */
     public static function checkInternetConnection()
     {
