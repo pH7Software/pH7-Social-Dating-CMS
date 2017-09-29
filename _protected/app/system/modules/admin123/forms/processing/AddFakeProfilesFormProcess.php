@@ -97,7 +97,7 @@ class AddFakeProfilesFormProcess extends Form
      * Add User's Avatar.
      *
      * @param array $aData
-     * @param object \PH7\UserCore $oUser
+     * @param object UserCore $oUser
      *
      * @return void
      */
