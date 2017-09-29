@@ -323,7 +323,7 @@ function is_url_rewrite()
  */
 function is_windows()
 {
-    return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
+    return 0 === stripos(PHP_OS, 'WIN');
 }
 
 /**
@@ -382,7 +382,7 @@ function check_url($sUrl)
     $iResponse = (int) curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
     curl_close($rCurl);
 
-    return ($iResponse === 200 || $iResponse === 301 || $iResponse === 302);
+    return $iResponse === 200 || $iResponse === 301 || $iResponse === 302;
 }
 
 /**

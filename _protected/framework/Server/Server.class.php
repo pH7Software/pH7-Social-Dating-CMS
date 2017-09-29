@@ -60,7 +60,8 @@ final class Server
      */
     public static function isWindows()
     {
-        return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
+
+        return 0 === stripos(PHP_OS, 'WIN');
     }
 
     /**
@@ -71,7 +72,7 @@ final class Server
     public static function isUnix()
     {
         $sOS = strtoupper(PHP_OS);
-        return ($sOS === 'UNIX' || $sOS === 'LINUX' || $sOS === 'FREEBSD' || $sOS === 'OPENBSD');
+        return $sOS === 'UNIX' || $sOS === 'LINUX' || $sOS === 'FREEBSD' || $sOS === 'OPENBSD';
     }
 
     /**
@@ -81,7 +82,7 @@ final class Server
      */
     public static function isMac()
     {
-        return strtoupper(substr(PHP_OS, 0, 3) === 'MAC');
+        return 0 === stripos(PHP_OS, 'MAC');
     }
 
     /**
