@@ -59,9 +59,9 @@ class AddFakeProfilesFormProcess extends Form
     protected function getApiClient()
     {
         $sApiUrl = static::API_URL;
-        $sApiParms = '?' . Url::httpBuildQuery($this->getApiParameters(), null, '&');
+        $sApiParams = '?' . Url::httpBuildQuery($this->getApiParameters(), null, '&');
         $sApiVer = static::API_VER;
-        $rUserData = $this->getApiResults($sApiUrl, $sApiParms, $sApiVer);
+        $rUserData = $this->getApiResults($sApiUrl, $sApiParams, $sApiVer);
         return json_decode($rUserData, true);
     }
 
@@ -79,17 +79,17 @@ class AddFakeProfilesFormProcess extends Form
      * Get Data from the third-party API.
      *
      * @param string $sApiUrl API URL.
-     * @param string $sApiParms Parameters to send to the API.
+     * @param string $sApiParams Parameters to send to the API.
      * @param string $sApiVersion Version of the API it will use. If fails from the API server, it will ignore it.
      *
      * @return void
      */
-    private function getApiResults($sApiUrl, $sApiParms, $sApiVersion)
+    private function getApiResults($sApiUrl, $sApiParams, $sApiVersion)
     {
-        if ($rData = $this->file->getFile($sApiUrl . PH7_SH . $sApiVersion . PH7_SH . $sApiParms)) {
+        if ($rData = $this->file->getFile($sApiUrl . PH7_SH . $sApiVersion . PH7_SH . $sApiParams)) {
             return $rData;
         } else {
-            return $this->file->getFile($sApiUrl . PH7_SH . $sApiParms);
+            return $this->file->getFile($sApiUrl . PH7_SH . $sApiParams);
         }
     }
 
