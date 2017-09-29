@@ -39,6 +39,7 @@ class AddFakeProfilesFormProcess extends Form
         foreach ($this->getApiClient()['results'] as $aUser) {
             $sEmail = trim($aUser['email']);
             $sUsername = trim($aUser['login']['username']);
+
             if ($oValidate->email($sEmail) && !$oExistsModel->email($sEmail) && $oValidate->username($sUsername)) {
                 $aData = $this->storeUserDataIntoArray($sUsername, $sEmail, $aUser, $oUser);
                 $aData['profile_id'] = $oUserModel->add(escape($aData, true));
@@ -62,6 +63,7 @@ class AddFakeProfilesFormProcess extends Form
         $sApiParams = '?' . Url::httpBuildQuery($this->getApiParameters(), null, '&');
         $sApiVer = static::API_VER;
         $rUserData = $this->getApiResults($sApiUrl, $sApiParams, $sApiVer);
+
         return json_decode($rUserData, true);
     }
 
@@ -88,9 +90,9 @@ class AddFakeProfilesFormProcess extends Form
     {
         if ($rData = $this->file->getFile($sApiUrl . PH7_SH . $sApiVersion . PH7_SH . $sApiParams)) {
             return $rData;
-        } else {
-            return $this->file->getFile($sApiUrl . PH7_SH . $sApiParams);
         }
+
+        return $this->file->getFile($sApiUrl . PH7_SH . $sApiParams);
     }
 
     /**
