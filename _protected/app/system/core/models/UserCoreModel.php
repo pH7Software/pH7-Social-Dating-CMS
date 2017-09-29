@@ -548,7 +548,7 @@ class UserCoreModel extends Model
     /**
      * Set the last activity of a user.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sTable Default 'Members'
      *
      * @return void
@@ -563,7 +563,7 @@ class UserCoreModel extends Model
     /**
      * Set the last edit account of a user.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sTable Default 'Members'
      *
      * @return void
@@ -578,8 +578,8 @@ class UserCoreModel extends Model
     /**
      * Approve a profile.
      *
-     * @param integer $iProfileId
-     * @param integer $iStatus 1 = apprved | 0 = not approved
+     * @param int $iProfileId
+     * @param int $iStatus 1 = apprved | 0 = not approved
      * @param string $sTable Default 'Members'
      *
      * @return void
@@ -597,7 +597,7 @@ class UserCoreModel extends Model
      * @param string $sEmail User's email address.
      * @param string $sTable Default 'Members'
      *
-     * @return stdClass|boolean Returns the data member (email, username, firstName, hashValidation) on success, otherwise returns false if there is an error.
+     * @return stdClass|bool Returns the data member (email, username, firstName, hashValidation) on success, otherwise returns false if there is an error.
      */
     public function getHashValidation($sEmail, $sTable = 'Members')
     {
@@ -619,7 +619,7 @@ class UserCoreModel extends Model
      * @param string $sHash
      * @param string $sTable Default 'Members'
      *
-     * @return boolean
+     * @return bool
      */
     public function validateAccount($sEmail, $sHash, $sTable = 'Members')
     {
@@ -636,7 +636,7 @@ class UserCoreModel extends Model
      *
      * @param array $aData
      *
-     * @return integer The ID of the User.
+     * @return int The ID of the User.
      */
     public function add(array $aData)
     {
@@ -677,7 +677,7 @@ class UserCoreModel extends Model
     /**
      * @param array $aData
      *
-     * @return boolean
+     * @return bool
      */
     public function setInfoFields(array $aData)
     {
@@ -699,7 +699,7 @@ class UserCoreModel extends Model
     /**
      * Set the default privacy settings.
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function setDefaultPrivacySetting()
     {
@@ -713,7 +713,7 @@ class UserCoreModel extends Model
     /**
      * Set the default notifications.
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function setDefaultNotification()
     {
@@ -729,11 +729,11 @@ class UserCoreModel extends Model
      * Waiting time before a new registration with the same IP address.
      *
      * @param string $sIp
-     * @param integer $iWaitTime In minutes!
+     * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      * @param string $sTable Default 'Members'
      *
-     * @return boolean Return TRUE if the weather was fine, FALSE otherwise.
+     * @return bool Return TRUE if the weather was fine, FALSE otherwise.
      */
     public function checkWaitJoin($sIp, $iWaitTime, $sCurrentTime, $sTable = 'Members')
     {
@@ -755,9 +755,9 @@ class UserCoreModel extends Model
     /**
      * Update or add a new avatar.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sAvatar
-     * @param integer $iApproved
+     * @param int $iApproved
      *
      * @return boolean
      */
@@ -774,8 +774,8 @@ class UserCoreModel extends Model
     /**
      * Get avatar.
      *
-     * @param integer $iProfileId
-     * @param integer $iApproved (1 = approved | 0 = pending | NULL = approved and pending)
+     * @param int $iProfileId
+     * @param int $iApproved (1 = approved | 0 = pending | NULL = approved and pending)
      *
      * @return stdClass The Avatar (SQL alias is pic), profileId and approvedAvatar
      */
@@ -800,7 +800,7 @@ class UserCoreModel extends Model
     /**
      * Delete an avatar in the database.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
      * @return boolean
      */
@@ -815,8 +815,8 @@ class UserCoreModel extends Model
     /**
      * Get file of a user background.
      *
-     * @param integer $iProfileId
-     * @param integer $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
+     * @param int $iProfileId
+     * @param int $iApproved (1 = approved | 0 = pending | NULL = approved and pending) Default NULL
      *
      * @return string
      */
@@ -845,9 +845,9 @@ class UserCoreModel extends Model
     /**
      * Add profile background.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sFile
-     * @param integer $iApproved
+     * @param int $iApproved
      *
      * @return boolean
      */
@@ -864,7 +864,7 @@ class UserCoreModel extends Model
     /**
      * Delete profile background.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
      * @return boolean
      */
@@ -878,7 +878,7 @@ class UserCoreModel extends Model
     /**
      * Delete User.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      *
      * @return void
@@ -1001,8 +1001,8 @@ class UserCoreModel extends Model
      * Get profiles data.
      *
      * @param string $sOrder
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      *
      * @return stdClass Data of users
      */
@@ -1052,10 +1052,10 @@ class UserCoreModel extends Model
      * @param string $sCity
      * @param boolean $bCount
      * @param string $sOrder
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return stdClass|integer Object with the users list returned or integer for the total number users returned.
+     * @return stdClass|int Object with the users list returned or integer for the total number users returned.
      */
     public function getGeoProfiles($sCountry, $sCity, $bCount, $sOrder, $iOffset, $iLimit)
     {
@@ -1104,7 +1104,7 @@ class UserCoreModel extends Model
     /**
      * Updating the privacy settings.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
      * @return stdClass
      */
@@ -1133,7 +1133,7 @@ class UserCoreModel extends Model
      * @param string $sUsername Default NULL
      * @param string $sTable Default 'Members'
      *
-     * @return integer|boolean The Member ID if it is found or FALSE if not found.
+     * @return int|bool The Member ID if it is found or FALSE if not found.
      */
     public function getId($sEmail = null, $sUsername = null, $sTable = 'Members')
     {
@@ -1166,7 +1166,7 @@ class UserCoreModel extends Model
     }
 
     /**
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sTable Default 'Members'
      *
      * @return string The email address of a member
@@ -1194,7 +1194,7 @@ class UserCoreModel extends Model
     /**
      * Retrieves the username from the user ID.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sTable Default 'Members'
      *
      * @return string The Username of member
@@ -1226,7 +1226,7 @@ class UserCoreModel extends Model
     /**
      * Retrieves the first name from the user ID.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sTable Default 'Members'
      *
      * @return string The first name of member
@@ -1254,7 +1254,7 @@ class UserCoreModel extends Model
     /**
      * Get Gender (sex) of a user.
      *
-     * @param integer $iProfileId Default NULL
+     * @param int $iProfileId Default NULL
      * @param string $sUsername Default NULL
      * @param string $sTable Default 'Members'
      *
@@ -1289,7 +1289,7 @@ class UserCoreModel extends Model
     /**
      * Get Match sex for a member (so only from the Members table, because Affiliates and Admins don't have match sex).
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
      * @return string The User's birthdate.
      */
@@ -1314,7 +1314,7 @@ class UserCoreModel extends Model
     /**
      * Get Birth Date of a user.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sTable Default 'Members'
      *
      * @return string The User's birthdate.
@@ -1342,10 +1342,10 @@ class UserCoreModel extends Model
     /**
      * Get user's group.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string sTable Default 'Members'
      *
-     * @return integer The Group ID of a member
+     * @return int The Group ID of a member
      */
     public function getGroupId($iProfileId, $sTable = 'Members')
     {
@@ -1370,7 +1370,7 @@ class UserCoreModel extends Model
     /**
      * Get the membership(s) data.
      *
-     * @param integer $iGroupId Group ID. Select only the specific membership from a group ID.
+     * @param int $iGroupId Group ID. Select only the specific membership from a group ID.
      *
      * @return stdClass The membership(s) data.
      */
