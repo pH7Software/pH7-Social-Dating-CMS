@@ -68,20 +68,21 @@ final class Token
         // If the token is still valid, it returns the correct token
         if ($this->_oSession->exists('security_token_' . $sName)) {
             return $this->_oSession->get('security_token_' . $sName);
-        } else {
-            $sToken = Various::genRnd($sName);
-
-            $aSessionData = [
-                'security_token_' . $sName => $sToken,
-                'security_token_time_' . $sName => time(),
-                //'security_token_http_referer_' . $sName => $this->_sHttpReferer,
-                'security_token_ip_' . $sName => Ip::get(),
-                'security_token_http_user_agent_' . $sName => $this->_sUserAgent
-            ];
-
-            $this->_oSession->set($aSessionData);
-            return $sToken;
         }
+
+        $sToken = Various::genRnd($sName);
+
+        $aSessionData = [
+            'security_token_' . $sName => $sToken,
+            'security_token_time_' . $sName => time(),
+            //'security_token_http_referer_' . $sName => $this->_sHttpReferer,
+            'security_token_ip_' . $sName => Ip::get(),
+            'security_token_http_user_agent_' . $sName => $this->_sUserAgent
+        ];
+
+        $this->_oSession->set($aSessionData);
+
+        return $sToken;
     }
 
     /**
@@ -96,7 +97,7 @@ final class Token
      */
     public function check($sName, $sInputToken = null, $iTime = null)
     {
-        $iTime = (empty($iTime)) ? DbConfig::getSetting('securityTokenLifetime') : $iTime;
+        $iTime = ($iTime === null) ? DbConfig::getSetting('securityTokenLifetime') : $iTime;
 
         // The default tag name for the security token
         $sInputToken = (empty($sInputToken)) ? (new Http)->post('security_token') : $sInputToken;
@@ -114,8 +115,7 @@ final class Token
                 if ($this->_oSession->get('security_token_time_' . $sName) >= (time() - $iTime))
                     //if ($this->_sHttpReferer === $this->_oSession->get('security_token_http_referer_' . $sName))
                         if (Ip::get() === $this->_oSession->get('security_token_ip_' . $sName))
-                            if ($this->_sUserAgent === $this->_oSession->get('security_token_http_user_agent_' . $sName))
-                            {
+                            if ($this->_sUserAgent === $this->_oSession->get('security_token_http_user_agent_' . $sName)) {
                                 // Delete the token and data sessions expired
                                 $this->_oSession->remove($aCheckSession);
                                 return true;
@@ -123,6 +123,7 @@ final class Token
 
         // Delete the token and data sessions expired
         $this->_oSession->remove($aCheckSession);
+
         return false;
     }
 
