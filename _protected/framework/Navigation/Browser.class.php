@@ -38,8 +38,8 @@ class Browser
         $sLang = explode(',', Server::getVar(Server::HTTP_ACCEPT_LANGUAGE))[0];
         // The rtrim function is slightly faster than chop function
         $iFullLangCode = ($bFullLangCode ? 5 : 2);
+
         return $oStr->escape($oStr->lower(substr(rtrim($sLang), 0, $iFullLangCode)));
-        unset($oStr);
     }
 
     /**
