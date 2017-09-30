@@ -18,7 +18,6 @@ use PH7\Framework\Security\Ban\Ban;
 
 class Logger extends Core
 {
-
     /**
      * Folder of the information logs files.
      */
@@ -138,5 +137,4 @@ class Logger extends Core
 
         return $this;
     }
-
 }

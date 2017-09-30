@@ -38,6 +38,11 @@ final class FrontController
 {
     const INDEX_FILE = 'index.php';
 
+    const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
+    const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9\_]+$#i';
+    const REGEX_ACTION_FORMAT = '#^[a-z0-9\_]+$#i';
+    const REGEX_FOLDER_FORMAT = '#^[\w]+$#';
+
     /** @var Config */
     private $oConfig;
 
@@ -182,7 +187,7 @@ final class FrontController
      */
     private function simpleRouter()
     {
-        if ($this->oUri->fragment(0) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(0)))
+        if ($this->oUri->fragment(0) && preg_match(self::REGEX_MODULE_FORMAT, $this->oUri->fragment(0)))
         {
             // Set system module
             $this->oRegistry->module = $this->oUri->fragment(0);
@@ -222,7 +227,7 @@ final class FrontController
             exit;
 
         }
-        elseif ($this->oUri->fragment(1) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(1)))
+        elseif ($this->oUri->fragment(1) && preg_match(self::REGEX_CONTROLLER_FORMAT, $this->oUri->fragment(1)))
         {
             // Set the controller
             $this->oRegistry->controller = ucfirst($this->oUri->fragment(1)) . 'Controller';
@@ -233,7 +238,7 @@ final class FrontController
             $this->oRegistry->controller = ucfirst($this->oConfig->values['module']['default_controller']) . 'Controller';
         }
 
-        if ($this->oUri->fragment(2) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(2)))
+        if ($this->oUri->fragment(2) && preg_match(self::REGEX_ACTION_FORMAT, $this->oUri->fragment(2)))
         {
             // Set the action
             $this->oRegistry->action = $this->oUri->fragment(2);
@@ -255,7 +260,7 @@ final class FrontController
      */
     private function simpleModuleRouter()
     {
-        if ($this->oUri->fragment(1) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(1)))
+        if ($this->oUri->fragment(1) && preg_match(self::REGEX_MODULE_FORMAT, $this->oUri->fragment(1)))
         {
             // Set module
             $this->oRegistry->module = $this->oUri->fragment(1);
@@ -285,7 +290,7 @@ final class FrontController
             $this->ajaxRouter($this->oRegistry->path_module);
             exit;
         }
-        elseif ($this->oUri->fragment(2) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(2)))
+        elseif ($this->oUri->fragment(2) && preg_match(self::REGEX_CONTROLLER_FORMAT, $this->oUri->fragment(2)))
         {
             // Set the controller
             $this->oRegistry->controller = ucfirst($this->oUri->fragment(2)) . 'Controller';
@@ -296,7 +301,7 @@ final class FrontController
             $this->oRegistry->controller = ucfirst($this->oConfig->values['module']['default_controller']) . 'Controller';
         }
 
-        if ($this->oUri->fragment(3) && preg_match('#^[a-z0-9\.\-_]+$#i', $this->oUri->fragment(3)))
+        if ($this->oUri->fragment(3) && preg_match(self::REGEX_ACTION_REGEX, $this->oUri->fragment(3)))
         {
             // Set the action
             $this->oRegistry->action = $this->oUri->fragment(3);
@@ -483,7 +488,7 @@ final class FrontController
 
             $this->_pathInitialize();
 
-            $sFolder = ($this->oUri->fragment(4) && preg_match('#^[\w]+$#', $this->oUri->fragment(4))) ? PH7_DS . $this->oUri->fragment(4) : '';
+            $sFolder = ($this->oUri->fragment(4) && preg_match(self::REGEX_FOLDER_FORMAT, $this->oUri->fragment(4))) ? PH7_DS . $this->oUri->fragment(4) : '';
             if (is_file($sMod . 'assets/ajax/' . $this->oUri->fragment(3) . $sFolder . 'Ajax.php'))
             {
                 include_once $sMod . 'assets/ajax/' . $this->oUri->fragment(3) . $sFolder . 'Ajax.php';
@@ -495,8 +500,7 @@ final class FrontController
         }
         else
         {
-            // For all scripts of the pH7 DatingCms
-            $sFolder = ($this->oUri->fragment(3) && preg_match('#^[\w]+$#', $this->oUri->fragment(3))) ? PH7_DS . $this->oUri->fragment(3) : '';
+            $sFolder = ($this->oUri->fragment(3) && preg_match(self::REGEX_FOLDER_FORMAT, $this->oUri->fragment(3))) ? PH7_DS . $this->oUri->fragment(3) : '';
 
             if (is_file(PH7_PATH_SYS . 'core/assets/ajax/' . $this->oUri->fragment(2) . $sFolder . 'CoreAjax.php'))
             {

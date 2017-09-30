@@ -93,11 +93,7 @@ class LoginFormProcess extends Form implements LoginableForm
     }
 
     /**
-     * @param string $sPassword
-     * @param string $sUserPasswordHash
-     * @param string $sEmail
-     *
-     * @return void
+     * {@inheritDoc}
      */
     public function updatePwdHashIfNeeded($sPassword, $sUserPasswordHash, $sEmail)
     {
@@ -107,7 +103,7 @@ class LoginFormProcess extends Form implements LoginableForm
     }
 
     /**
-     * @return void
+     * {@inheritDoc}
      */
     public function enableCaptcha()
     {

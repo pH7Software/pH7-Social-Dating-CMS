@@ -13,18 +13,19 @@ Options +FollowSymLinks
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    ## Uncomment "#RewriteBase /" below (remove "#") if pH7CMS is installed in a folder, and add the folder name after the slash "/"
+
+    ## Uncomment the below "#RewriteBase /" (remove "#") if pH7CMS is installed in a folder, and add the folder name after the slash "/"
     ## Example: If pH7CMS is installed in "/public_html/ph7cms/", then it should be "RewriteBase /ph7cms/", however it may depends of your Apache configuration.
     ## If you need, please ask your hosting company or check the Apache doc: http://httpd.apache.org/docs/current/mod/mod_rewrite.html
 
     #RewriteBase /
 </IfModule>
 
-
 <IfModule mod_php5.c>
     php_flag allow_url_include Off
     php_flag expose_php Off
 </IfModule>
+
 
 ### Security and Spam ###
 
@@ -33,6 +34,7 @@ Options +FollowSymLinks
     RewriteRule "(^|/)\.git" - [F,L]
 </IfModule>
 
+
 # Remove Apache version
 #ServerTokens Prod
 # Remove the version number and installed module versions in the list at the bottom error pages (404, 403, ...)
@@ -40,19 +42,19 @@ ServerSignature Off
 
 # Deny access to all CGI, Perl, Python, Bash, SQL, Template, INI configuration, cache, log, temporary and text files
 <FilesMatch "\.(cgi|pl|py|sh|sql|tpl|ini|cache|log|tmp|txt)">
-Deny from all
+    Deny from all
 </FilesMatch>
 
 # Leave open the humans.txt and robots.txt file
 <FilesMatch humans.txt|robots.txt>
-Allow from all
+    Allow from all
 </FilesMatch>
 
 # Prevent downloading files .htaccess (Default configuration of Apache)
 <Files ~ "^\.ht">
- Order allow,deny
- Deny from all
- Satisfy All
+    Order allow,deny
+    Deny from all
+    Satisfy All
 </Files>
 
 # block bots spam
@@ -570,9 +572,9 @@ Allow from all
 </IfModule>
 
 <Limit GET POST PUT DELETE HEAD>
- Order Allow,Deny
- Allow from All
- Deny from env=bad_bot
+    Order Allow,Deny
+    Allow from All
+    Deny from env=bad_bot
 </Limit>
 
 ErrorDocument 400 /error/http/index?code=400
@@ -599,7 +601,7 @@ ErrorDocument 505 /error/http/index?code=505
     # RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 
     # Force the URL to be https (only if you have an SSL certificate)
-    # RewriteCond %{HTTP:X-Forwarded-SSL} !on
+    # RewriteCond %{SERVER_PORT} 80
     # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
     ### For pH7CMS's URL router (DO NOT REMOVE THESE FOLLOWING CODE) ###

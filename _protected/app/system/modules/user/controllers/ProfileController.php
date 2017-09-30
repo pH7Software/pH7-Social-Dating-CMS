@@ -105,8 +105,6 @@ class ProfileController extends Controller
             $this->view->meta_description = t('Meet %0% %1% | %2% - %3%', $sFirstName, $sLastName,
                 $oUser->username, substr($sDescription, 0, 100));
 
-            $this->design->smartAppBanner($this->view);
-
             $this->view->h1_title = t('Meet <span class="pH1">%0%</span> on <span class="pH0">%site_name%</span>',
                 $sFirstName);
 
@@ -126,6 +124,7 @@ class ProfileController extends Controller
                 if ($this->bUserAuth) {
                     $this->view->mutual_friend_link = $this->getMutualFriendLinkName();
                 }
+
                 $this->view->befriend_link = $this->getBeFriendLink($sFirstName, $oUser);
             }
 

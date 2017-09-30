@@ -14,76 +14,95 @@ namespace PH7\Framework\Navigation;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Page
 {
     const DEFAULT_NUMBER_ITEMS = 10;
 
-    private $_oHttpRequest, $_iTotalPages, $_iTotalItems, $_iNbItemsPerPage, $_iCurrentPage, $_iFirstItem;
+    /** @var HttpRequest */
+    private $oHttpRequest;
+
+    /** @var int */
+    private $iTotalPages;
+
+    /** @var int */
+    private $iTotalItems;
+
+    /** @var int */
+    private $iNbItemsPerPage;
+
+    /** @var int */
+    private $iCurrentPage;
+
+    /** @var int */
+    private $iFirstItem;
 
     public function __construct()
     {
-        $this->_oHttpRequest = new Http;
+        $this->oHttpRequest = new HttpRequest;
     }
 
     /**
-     * @param integer $iTotalItems
-     * @param integer $iNbItemsPerPage
+     * @param int $iTotalItems
+     * @param int $iNbItemsPerPage
+     *
      * @return void
      */
     protected function totalPages($iTotalItems, $iNbItemsPerPage)
     {
-        $this->_iTotalItems = (int) $iTotalItems;
-        $this->_iNbItemsPerPage = (int) $iNbItemsPerPage; // or intval() function, but it is slower than casting
-        $this->_iCurrentPage = (int) $this->_oHttpRequest->getExists('p') ? $this->_oHttpRequest->get('p') : 1;
+        $this->iTotalItems = (int) $iTotalItems;
+        $this->iNbItemsPerPage = (int) $iNbItemsPerPage; // or intval() function, but it is slower than casting
+        $this->iCurrentPage = (int) $this->oHttpRequest->getExists('p') ? $this->oHttpRequest->get('p') : 1;
 
         // Ternary condition to prevent division by zero
-        $this->_iTotalPages = (int) ($this->_iTotalItems !== 0 && $this->_iNbItemsPerPage !== 0) ? ceil($this->_iTotalItems / $this->_iNbItemsPerPage) : 0;
+        $this->iTotalPages = (int) ($this->iTotalItems !== 0 && $this->iNbItemsPerPage !== 0) ? ceil($this->iTotalItems / $this->iNbItemsPerPage) : 0;
 
-        $this->_iFirstItem = (int) ($this->_iCurrentPage-1) * $this->_iNbItemsPerPage;
+        $this->iFirstItem = (int) ($this->iCurrentPage-1) * $this->iNbItemsPerPage;
     }
 
     /**
-     * @param integer $iTotalItems
-     * @param integer $iNbItemsPerPage Default 10
-     * @return integer The number of pages.
+     * @param int $iTotalItems
+     * @param int $iNbItemsPerPage Default 10
+     *
+     * @return int The number of pages.
      */
     public function getTotalPages($iTotalItems, $iNbItemsPerPage = self::DEFAULT_NUMBER_ITEMS)
     {
         $this->totalPages($iTotalItems, $iNbItemsPerPage);
-        return ($this->_iTotalPages < 1) ? 1 : $this->_iTotalPages;
+        return ($this->iTotalPages < 1) ? 1 : $this->iTotalPages;
     }
 
     public function getTotalItems()
     {
-        return $this->_iTotalItems;
+        return $this->iTotalItems;
     }
 
     public function getFirstItem()
     {
-        return ($this->_iFirstItem < 0) ? 0 : $this->_iFirstItem;
+        return $this->iFirstItem < 0 ? 0 : $this->iFirstItem;
     }
 
     public function getNbItemsPerPage()
     {
-        return $this->_iNbItemsPerPage;
+        return $this->iNbItemsPerPage;
     }
 
     public function getCurrentPage()
     {
-        return $this->_iCurrentPage;
+        return $this->iCurrentPage;
     }
 
     /**
      * Clean a Dynamic URL for some features CMS.
      *
      * @param string $sVar The Query URL (e.g. www.pierre-henry-soria.com/my-mod/?query=value).
+     *
      * @return string $sPageUrl The new clean URL.
      */
     public static function cleanDynamicUrl($sVar)
     {
-        $sCurrentUrl = (new Http)->currentUrl();
+        $sCurrentUrl = (new HttpRequest)->currentUrl();
         $sUrl = preg_replace('#\?.+$#', '', $sCurrentUrl);
 
         if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl))
@@ -103,6 +122,7 @@ class Page
      * Returns a trailing slash if needed.
      *
      * @param  string $sUrl
+     *
      * @return string
      */
     protected static function trailingSlash($sUrl)

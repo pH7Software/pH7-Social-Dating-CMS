@@ -88,15 +88,13 @@ final class LoggerExcept extends Logger
                     fwrite($rHandler, $sContents);
                     fclose($rHandler);
                 }
-            }
-                break;
+            } break;
 
             case 'database': {
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('LogError') . 'SET logError = :line');
                 $rStmt->execute(array(':line' => $sContents));
                 Db::free($rStmt);
-            }
-                break;
+            } break;
 
             case 'email': {
                 $aInfo = [
@@ -105,8 +103,7 @@ final class LoggerExcept extends Logger
                 ];
 
                 (new Mail)->send($aInfo, $sContents, false);
-            }
-                break;
+            } break;
 
             default:
                 exit(t('Invalid Log Option.'));

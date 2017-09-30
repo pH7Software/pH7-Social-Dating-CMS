@@ -1,6 +1,6 @@
 {
     "name": "ph7software/ph7cms",
-    "description": "Professional Social/Dating App/Site Builder",
+    "description": "pH7CMS is a Professional Social/Dating App/Site Builder",
     "keywords": ["Web business builder","CMS","dating","social","social network","social networking","community","portal","user","member","member area","payment","business"],
     "type": "project",
     "homepage": "http://ph7cms.com",
@@ -27,7 +27,6 @@
         "ph-7/qrcode-generator-php-class": "^2.0",
         "robthree/twofactorauth": "^1.4",
         "facebook/graph-sdk": "^5.3",
-        "ph-7/dating-affiliate-tools": "^2.0",
         "ext-curl": "*",
         "ext-zip": "*",
         "ext-zlib": "*",

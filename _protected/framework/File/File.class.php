@@ -15,7 +15,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Navigation\Browser;
-use PH7\Framework\Parse\Url as ParseUrl;
+use PH7\Framework\Parse\Url as UrlParser;
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Server\Server;
 use PH7\Framework\Url\Url;
@@ -628,7 +628,7 @@ class File
 
         $sPrefix = Registry::getInstance()->site_name . '_'; // the prefix
         header('Content-Type: ' . $sMimeType);
-        header('Content-Disposition: attachment; filename=' . ParseUrl::clean($sPrefix) . $sName);
+        header('Content-Disposition: attachment; filename=' . UrlParser::clean($sPrefix) . $sName);
         header('Content-Transfer-Encoding: binary');
         header('Accept-Ranges: bytes');
         header('Content-Length: ' . $this->size($sFile));

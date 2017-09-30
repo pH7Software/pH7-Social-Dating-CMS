@@ -24,6 +24,7 @@ require_once PH7_PATH_FRAMEWORK . 'Pattern/Singleton.trait.php';
 
 final class Autoloader
 {
+    const FRAMEWORK_NAMESPACE = 'PH7\Framework';
     const INFO_INSTALL_COMPOSER_LINK = 'https://github.com/pH7Software/pH7-Social-Dating-CMS#installation';
     const DOWNLOAD_SOFTWARE_LINK = 'https://sourceforge.net/projects/ph7socialdating/files/latest/download';
 
@@ -107,7 +108,7 @@ final class Autoloader
      */
     private function clean($sClass)
     {
-        return str_replace(array('PH7\Framework', '\\', '//'), array('/', '/', ''), $sClass);
+        return str_replace([self::FRAMEWORK_NAMESPACE, '\\', '//'], ['/', '/', ''], $sClass);
     }
 
     /**

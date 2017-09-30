@@ -14,7 +14,6 @@ namespace PH7\Framework\Layout\Html;
 defined('PH7') or exit('Restricted access');
 
 use PH7\AdminCore;
-use PH7\AdminCoreModel;
 use PH7\AffiliateCore;
 use PH7\Framework\Benchmark\Benchmark;
 use PH7\Framework\Cache\Cache;
@@ -24,7 +23,6 @@ use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Geo\Misc\Country;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Ip\Ip;
-use PH7\Framework\Layout\Tpl\Engine\PH7Tpl\PH7Tpl;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -427,23 +425,6 @@ class Design
 
         $iRand = mt_rand(0, count($aSites) - 1);
         echo '<a href="', $aSites[$iRand]['link'], '">', $aSites[$iRand]['title'], '</a>';
-    }
-
-    final public function smartAppBanner(PH7Tpl $oView)
-    {
-        if (
-            (!defined('PH7_VALID_LICENSE') || !PH7_VALID_LICENSE)
-            && !AdminCore::auth()
-            && !AdminCore::isAdminIp(new AdminCoreModel)
-        ) {
-            $sIOSBanner = '<meta name="apple-itunes-app" content="app-id=1155373742" />';
-
-            if (empty($oView->header)) {
-                $oView->header = $sIOSBanner;
-            } else {
-                $oView->header .= $sIOSBanner;
-            }
-        }
     }
 
     /**

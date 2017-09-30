@@ -16,6 +16,9 @@ namespace PH7\Framework\Str
 
  class Str
  {
+     const DEF_MAX_TEXT_EXTRACT_LENGTH = 150;
+     const ENCODING = 'UTF-8';
+
      private static $_sRegexDelimiter = '#';
 
      /**
@@ -210,7 +213,7 @@ namespace PH7\Framework\Str
       *
       * @return string
       */
-     public function extract($sText, $iStart = 0, $iLength = 150, $sTrimMarker = '...')
+     public function extract($sText, $iStart = 0, $iLength = self::DEF_MAX_TEXT_EXTRACT_LENGTH, $sTrimMarker = '...')
      {
          if (function_exists('mb_strimwidth')) {
              $sText = mb_strimwidth($sText, $iStart, $iLength, $sTrimMarker, PH7_ENCODING);
@@ -335,7 +338,7 @@ namespace PH7\Framework\Str
       */
      protected function htmlSpecialChars($sText)
      {
-         return htmlspecialchars($sText, ENT_QUOTES, 'utf-8');
+         return htmlspecialchars($sText, ENT_QUOTES, static::ENCODING);
      }
 
      private static function _regexNormalize($sPattern)

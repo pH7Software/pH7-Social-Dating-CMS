@@ -19,6 +19,8 @@ use PH7\Framework\Registry\Registry;
 
 final class Autoloader
 {
+    const PROJECT_NAMESPACE = 'PH7\\';
+
     /**
      * It's a singleton class, so include the singleton trait.
      */
@@ -39,10 +41,10 @@ final class Autoloader
         // Specify the extensions that may be loaded
         spl_autoload_extensions('.php');
         /** Register the loader methods **/
-        spl_autoload_register(array(__CLASS__, '_loadController'));
-        spl_autoload_register(array(__CLASS__, '_loadClass'));
-        spl_autoload_register(array(__CLASS__, '_loadModel'));
-        spl_autoload_register(array(__CLASS__, '_loadForm'));
+        spl_autoload_register(array(__CLASS__, 'loadController'));
+        spl_autoload_register(array(__CLASS__, 'loadClass'));
+        spl_autoload_register(array(__CLASS__, 'loadModel'));
+        spl_autoload_register(array(__CLASS__, 'loadForm'));
     }
 
     /**
@@ -52,9 +54,9 @@ final class Autoloader
      *
      * @return void
      */
-    private function _loadController($sClass)
+    private function loadController($sClass)
     {
-        $sClass = $this->_removeNamespace($sClass);
+        $sClass = $this->removeNamespace($sClass);
 
         // For the Controllers of the modules
         if (is_file(Registry::getInstance()->path_module_controllers . $sClass . '.php'))
@@ -68,9 +70,9 @@ final class Autoloader
      *
      * @return void
      */
-    private function _loadClass($sClass)
+    private function loadClass($sClass)
     {
-        $sClass = $this->_removeNamespace($sClass);
+        $sClass = $this->removeNamespace($sClass);
 
         // For the global Classes of the pH7Framework
         if (is_file(PH7_PATH_APP . 'includes/classes/' . $sClass . '.php'))
@@ -100,9 +102,9 @@ final class Autoloader
      *
      * @return void
      */
-    private function _loadModel($sClass)
+    private function loadModel($sClass)
     {
-        $sClass = $this->_removeNamespace($sClass);
+        $sClass = $this->removeNamespace($sClass);
 
         // For the Core Models
         if (is_file(PH7_PATH_SYS . 'core/' . PH7_MODELS . $sClass . '.php'))
@@ -128,9 +130,9 @@ final class Autoloader
      *
      * @return void
      */
-    private function _loadForm($sClass)
+    private function loadForm($sClass)
     {
-        $sClass = $this->_removeNamespace($sClass);
+        $sClass = $this->removeNamespace($sClass);
 
         // For the Core Forms
         if (is_file(PH7_PATH_SYS . 'core/' . PH7_FORMS . $sClass . '.php'))
@@ -154,8 +156,8 @@ final class Autoloader
      *
      * @return string
      */
-    private function _removeNamespace($sClass)
+    private function removeNamespace($sClass)
     {
-        return str_replace('PH7\\', '', $sClass);
+        return str_replace(self::PROJECT_NAMESPACE, '', $sClass);
     }
 }

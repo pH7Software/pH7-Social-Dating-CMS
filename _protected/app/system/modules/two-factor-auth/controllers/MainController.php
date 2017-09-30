@@ -8,13 +8,27 @@
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Url\Header;
 use RobThree\Auth\TwoFactorAuth as Authenticator;
 
 class MainController extends Controller
 {
-    private $o2FactorModel, $oAuthenticator, $sMod, $iIsEnabled, $iProfileId;
+    /** @var TwoFactorAuthModel */
+    private $o2FactorModel;
+
+    /** @var Authenticator */
+    private $oAuthenticator;
+
+    /** @var string */
+    private $sMod;
+
+    /** @var int */
+    private $iIsEnabled;
+
+    /** @var int */
+    private $iProfileId;
 
     public function __construct()
     {
@@ -73,12 +87,13 @@ class MainController extends Controller
      * Download the backup 2FA code (text file).
      *
      * @param string $sSecret The 2FA secret.
+     *
      * @return void
      */
     protected function download($sSecret)
     {
-        $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Framework\Parse\Url::clean($this->registry->site_name) . '.txt';
-        header('Content-Disposition: attachment; filename=" ' . $sFileName . '"');
+        $sFileName = '2FA-backup-code-' . $this->sMod . '-' . Url::clean($this->registry->site_name) . '.txt';
+        header('Content-Disposition: attachment; filename=' . $sFileName);
 
         echo t('BACKUP VERIFICATION CODE - %site_url% | %0% area', $this->sMod) . "\r\n\r\n";
         echo t('Code: %0%', $this->oAuthenticator->getCode($sSecret)) . "\r\n\r\n";
@@ -93,24 +108,21 @@ class MainController extends Controller
      * Get Session Profile ID.
      *
      * @return integer
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message if the specified module is wrong.
+     *
+     * @throws PH7InvalidArgumentException Explanatory message if the specified module is wrong.
      */
     protected function getProfileId()
     {
-        switch ($this->sMod)
-        {
+        switch ($this->sMod) {
             case 'user':
                 return $this->session->get('member_id');
-            break;
             case 'affiliate':
                 return $this->session->get('affiliate_id');
-            break;
             case PH7_ADMIN_MOD:
                 return $this->session->get('admin_id');
-            break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Wrong "' . $this->sMod . '" module!');
+                throw new PH7InvalidArgumentException('Wrong "' . $this->sMod . '" module!');
         }
     }
 
@@ -121,7 +133,8 @@ class MainController extends Controller
      */
     protected function update2FaStatus()
     {
-        $this->iIsEnabled = ($this->iIsEnabled == 1 ? 0 : 1); // Get the opposite value (if 1 so 0 | if 0 so 1)
+        $this->iIsEnabled = ($this->iIsEnabled === 1) ? 0 : 1; // Get the opposite value (if 1 so 0 | if 0 so 1)
+
         $this->o2FactorModel->setStatus($this->iIsEnabled, $this->iProfileId);
     }
 
@@ -138,7 +151,12 @@ class MainController extends Controller
 
     private function checkMod()
     {
-        if ($this->sMod !== 'user' && $this->sMod !== 'affiliate' && $this->sMod !== PH7_ADMIN_MOD)
+        if (
+            $this->sMod !== 'user' &&
+            $this->sMod !== 'affiliate' &&
+            $this->sMod !== PH7_ADMIN_MOD
+        ) {
             Header::redirect($this->registry->site_url, t('No module found!'), 'error');
+        }
     }
 }

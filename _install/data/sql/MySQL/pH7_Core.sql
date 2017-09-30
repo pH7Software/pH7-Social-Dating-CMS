@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS pH7_Members (
   hashValidation varchar(40) DEFAULT NULL,
   isTwoFactorAuth enum('1','0') DEFAULT '0',
   twoFactorAuthSecret varchar(40) DEFAULT NULL,
-  views int(11) NOT NULL DEFAULT 0,
+  views int(11) unsigned NOT NULL DEFAULT 0,
   reference varchar(255) DEFAULT NULL,
   votes int(11) DEFAULT 0,
   score float DEFAULT 0,
@@ -231,8 +231,8 @@ CREATE TABLE IF NOT EXISTS pH7_Ads (
   name varchar(40) DEFAULT NULL,
   code text,
   active enum('1','0') DEFAULT '1',
-  width smallint(3) DEFAULT NULL,
-  height smallint(3) DEFAULT NULL,
+  width smallint(3) unsigned DEFAULT NULL,
+  height smallint(3) unsigned DEFAULT NULL,
   views int(10) unsigned NOT NULL DEFAULT 0,
   clicks int(10) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (adsId)
@@ -262,8 +262,8 @@ CREATE TABLE IF NOT EXISTS pH7_AdsAffiliates (
   name varchar(40) DEFAULT NULL,
   code text,
   active enum('1','0') DEFAULT '1',
-  width smallint(3) DEFAULT NULL,
-  height smallint(3) DEFAULT NULL,
+  width smallint(3) unsigned DEFAULT NULL,
+  height smallint(3) unsigned DEFAULT NULL,
   PRIMARY KEY (adsId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
@@ -635,7 +635,7 @@ CREATE TABLE IF NOT EXISTS pH7_ForumsTopics (
   approved enum('1','0') DEFAULT '1',
   createdDate datetime NULL,
   updatedDate datetime DEFAULT NULL,
-  views int(11) NOT NULL DEFAULT '0',
+  views int(11) unsigned NOT NULL DEFAULT '0',
   -- Maybe we'll let the topic of member even if the member is deleted
   -- FOREIGN KEY (profileId) pH7_Members(profileId),
   FOREIGN KEY (forumId) REFERENCES pH7_Forums(forumId),
@@ -962,7 +962,7 @@ CREATE TABLE IF NOT EXISTS pH7_Modules (
 
 INSERT INTO pH7_Modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of the SQL schema of pH7CMS (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.3.8', 1);
+('pH7CMS', 'SQL System Schema', '1.4.0', 1);
 
 
 CREATE TABLE IF NOT EXISTS pH7_Report (
@@ -1022,7 +1022,6 @@ INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('minUsernameLength', 3, '', 'registration'),
 ('maxUsernameLength', 30, '', 'registration'),
 ('requireRegistrationAvatar', 0, '', 'registration'),
-('allowUserToPartner', 0, 'If 1, gives the possibility to register instantly an account to a partner website', 'registration'),
 ('userActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('affActivationType', 1, '1 = no activation, 2 = email activation, 3 = Manual activation by the administrator', 'registration'),
 ('defaultMembershipGroupId', 2, 'Default Membership Group', 'registration'),

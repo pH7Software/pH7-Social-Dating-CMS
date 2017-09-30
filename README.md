@@ -45,6 +45,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Full Moderation of all contents posted by your users
 * Nudity Filter Option for all images uploaded by users
 * Dating Scammer Detector (see if profile photos aren't used by scammers)
+* Anti-Scam Tools
 * Watermark Branding
 * Chat Rooms
 * Chatroulette

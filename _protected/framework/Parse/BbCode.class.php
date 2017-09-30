@@ -11,13 +11,12 @@
  */
 
 namespace PH7\Framework\Parse;
+
 defined('PH7') or exit('Restricted access');
 
 class BbCode extends Code
 {
-
     /**
-     * @access public
      * @param string $sText
      */
     public function __construct($sText)
@@ -27,7 +26,6 @@ class BbCode extends Code
     }
 
     /**
-     * @access public
      * @return string The code parsed
      */
     public function __toString()
@@ -38,7 +36,6 @@ class BbCode extends Code
     /**
      * Run the parse methods
      *
-     * @access protected
      * @return void
      */
     protected function run()
@@ -50,7 +47,6 @@ class BbCode extends Code
     /**
      * Parse text and processing
      *
-     * @access protected
      * @return void
      */
     protected function parse()
@@ -117,5 +113,4 @@ class BbCode extends Code
         // [email=email address]email text[/email]
         $this->sText = preg_replace('/\[email=([a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+)](.+?)\[\/email]/i', '<a href="mailto:\1" title="\2">\2</a>', $this->sText);
     }
-
 }

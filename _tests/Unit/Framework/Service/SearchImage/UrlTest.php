@@ -31,6 +31,7 @@ class UrlTest extends PHPUnit_Framework_TestCase
     {
         new Url($sUrl);
     }
+
     /**
      * @return array
      */
