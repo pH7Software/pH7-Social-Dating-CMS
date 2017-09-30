@@ -171,5 +171,4 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
 
         return (int) $oRow->totalComments;
     }
-
 }

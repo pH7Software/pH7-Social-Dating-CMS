@@ -27,7 +27,7 @@ class Browser
     /**
      * Detect the user's preferred language.
      *
-     * @param boolean $bFullLangCode If TRUE, returns the full lang code (e.g., en-us, en-gb, en-ie, en-au, fr-fr, fr-be, fr-ca, fr-ch, ...),
+     * @param bool $bFullLangCode If TRUE, returns the full lang code (e.g., en-us, en-gb, en-ie, en-au, fr-fr, fr-be, fr-ca, fr-ch, ...),
      *     otherwise returns the two letters of the client browser's language (e.g., en, it, fr, ru, ...). Default: FALSE
      *
      * @return string Client's Language Code (in lowercase).
@@ -98,44 +98,50 @@ class Browser
     /**
      * Check if the user is from a mobile device or desktop.
      *
-     * @return boolean TRUE if mobile device, FALSE otherwise.
+     * @return bool TRUE if mobile device, FALSE otherwise.
      */
     public function isMobile()
     {
-        if (null !== Server::getVar(Server::HTTP_X_WAP_PROFILE) || null !== Server::getVar(Server::HTTP_PROFILE))
+        if (null !== Server::getVar(Server::HTTP_X_WAP_PROFILE) || null !== Server::getVar(Server::HTTP_PROFILE)) {
             return true;
+        }
 
         $sHttpAccept = Server::getVar(Server::HTTP_ACCEPT);
         if (null !== $sHttpAccept) {
             $sHttpAccept = strtolower($sHttpAccept);
 
-            if (false !== strpos($sHttpAccept, 'wap'))
+            if (false !== strpos($sHttpAccept, 'wap')) {
                 return true;
+            }
         }
 
         $sUserAgent = self::getUserAgent();
         if (null !== $sUserAgent) {
             // For most mobile/tablet browsers
-            if (false !== strpos($sUserAgent, 'Mobile'))
+            if (false !== strpos($sUserAgent, 'Mobile')) {
                 return true;
+            }
 
             // Mainly for (i)Phone
-            if (false !== strpos($sUserAgent, 'Phone'))
+            if (false !== strpos($sUserAgent, 'Phone')) {
                 return true;
+            }
 
             // For Android
-            if (false !== strpos($sUserAgent, 'Android'))
+            if (false !== strpos($sUserAgent, 'Android')) {
                 return true;
+            }
 
-            if (false !== strpos($sUserAgent, 'Opera Mini'))
+            if (false !== strpos($sUserAgent, 'Opera Mini')) {
                 return true;
+            }
         }
 
         return false;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isFullAjaxSite()
     {
@@ -159,7 +165,7 @@ class Browser
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isAjaxRequest()
     {
@@ -169,7 +175,6 @@ class Browser
     /**
      * Get favicon from a URL.
      *
-     * @static
      * @param string $sUrl
      *
      * @return string The favicon image.
