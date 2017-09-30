@@ -155,7 +155,7 @@ final class Token
      *
      * @return string|bool The "token" if a user is logged or "true" if no user is logged.
      */
-    protected function currentSess()
+    private function currentSess()
     {
         if (UserCore::auth())
             $sToken = $this->_oSession->get('member_token');
