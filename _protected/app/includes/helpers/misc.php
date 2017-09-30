@@ -12,8 +12,6 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Registry\Registry;
-
 /**
  * Display a basic HTML body page.
  * Since it will display a dynamic page,
