@@ -16,6 +16,8 @@ use PH7\Framework\Url\Header;
 class ValidateSiteCore
 {
     const SESS_IS_VISITED = 'validatesitebox_visited';
+    const VALIDATE_FORM_PAGE_DELAY = '-2 months';
+    const VALIDATE_FORM_POPUP_DELAY = '-4 days';
 
     /**
      * Check if the JS validationbox has to be added and redirect if the site hasn't been validated yet for a while.
@@ -30,10 +32,13 @@ class ValidateSiteCore
         $iSinceSiteCreated = VDate::getTime(StatisticCoreModel::getDateOfCreation());
 
         // After over 2 months, the site is still not validated, maybe the validation box doesn't really work, so we redirected to the page form
-        if (!$oValidateSiteModel->is() && VDate::setTime('-2 months') >= $iSinceSiteCreated && !$oSession->exists(self::SESS_IS_VISITED)) {
+        if (
+            !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSinceSiteCreated &&
+            !$oSession->exists(self::SESS_IS_VISITED)
+        ) {
             Header::redirect(Uri::get('validate-site', 'main', 'validationbox'));
         }
 
-        return !$oValidateSiteModel->is() && VDate::setTime('-2 days') >= $iSinceSiteCreated;
+        return !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_POPUP_DELAY) >= $iSinceSiteCreated;
     }
 }
