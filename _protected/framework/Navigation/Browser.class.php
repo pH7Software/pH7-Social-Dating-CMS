@@ -78,19 +78,22 @@ class Browser
     /**
      * Are we capable to receive gzipped data?
      *
-     * @return string|boolean Returns the encoding if it is accepted, false otherwise. Maybe additional check for Mac OS...
+     * @return string|bool Returns the encoding if it is accepted, false otherwise. Maybe additional check for Mac OS...
      */
     public function encoding()
     {
-        if (headers_sent() || connection_aborted())
+        if (headers_sent() || connection_aborted()) {
             return false;
+        }
 
         $sEncoding = Server::getVar(Server::HTTP_ACCEPT_ENCODING);
-        if (false !== strpos($sEncoding, 'gzip'))
+        if (false !== strpos($sEncoding, 'gzip')) {
             return 'gzip';
+        }
 
-        if (false !== strpos($sEncoding, 'x-gzip'))
+        if (false !== strpos($sEncoding, 'x-gzip')) {
             return 'x-gzip';
+        }
 
         return false;
     }
