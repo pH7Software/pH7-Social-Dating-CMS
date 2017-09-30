@@ -148,32 +148,35 @@ class UserCoreModel extends Model
      * Get the total number of members.
      *
      * @param string $sTable Default 'Members'
-     * @param integer $iDay Default '0'
-     * @param string $sGenger Values ​​available 'all', 'male', 'female'. 'couple' is only available to Members. Default 'all'
+     * @param int $iDay Default '0'
+     * @param string $sGender Values ​​available 'all', 'male', 'female'. 'couple' is only available to Members. Default 'all'
      *
-     * @return integer Total Users
+     * @return int Total Users
      */
-    public function total($sTable = 'Members', $iDay = 0, $sGenger = 'all')
+    public function total($sTable = 'Members', $iDay = 0, $sGender = 'all')
     {
         Various::checkModelTable($sTable);
+
         $iDay = (int)$iDay;
 
         $bIsDay = ($iDay > 0);
-        $bIsGenger = ($sTable === 'Members' ? ($sGenger === 'male' || $sGenger === 'female' || $sGenger === 'couple') : ($sGenger === 'male' || $sGenger === 'female'));
+        $bIsGender = ($sTable === 'Members' ? ($sGender === 'male' || $sGender === 'female' || $sGender === 'couple') : ($sGender === 'male' || $sGender === 'female'));
 
         $sSqlDay = $bIsDay ? ' AND (joinDate + INTERVAL :day DAY) > NOW()' : '';
-        $sSqlGender = $bIsGenger ? ' AND sex = :gender' : '';
+        $sSqlGender = $bIsGender ? ' AND sex = :gender' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(profileId) AS totalUsers FROM' . Db::prefix($sTable) . 'WHERE username <> \'' . PH7_GHOST_USERNAME . '\'' . $sSqlDay . $sSqlGender);
         if ($bIsDay) {
             $rStmt->bindValue(':day', $iDay, \PDO::PARAM_INT);
         }
-        if ($bIsGenger) {
-            $rStmt->bindValue(':gender', $sGenger, \PDO::PARAM_STR);
+        if ($bIsGender) {
+            $rStmt->bindValue(':gender', $sGender, \PDO::PARAM_STR);
         }
         $rStmt->execute();
+
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return (int)$oRow->totalUsers;
     }
 
