@@ -68,7 +68,7 @@ class UserCoreModel extends Model
      * @param string $sPassword
      * @param string $sTable Default 'Members'
      *
-     * @return mixed (boolean "true" or string "message")
+     * @return bool|string (boolean "true" or string "message")
      */
     public function login($sEmail, $sPassword, $sTable = 'Members')
     {
@@ -121,7 +121,7 @@ class UserCoreModel extends Model
     /**
      * Read Profile Data.
      *
-     * @param integer $iProfileId The user ID
+     * @param int $iProfileId The user ID
      * @param string $sTable Default 'Members'
      *
      * @return stdClass The data of a member
@@ -182,7 +182,7 @@ class UserCoreModel extends Model
      *
      * @param string $sSection
      * @param string $sValue
-     * @param integer $iProfileId Profile ID
+     * @param int $iProfileId Profile ID
      * @param string $sTable Default 'Members'
      *
      * @return void
@@ -199,7 +199,7 @@ class UserCoreModel extends Model
      *
      * @param string $sSection
      * @param string $sValue
-     * @param integer $iProfileId Profile ID
+     * @param int $iProfileId Profile ID
      *
      * @return void
      */
@@ -215,7 +215,7 @@ class UserCoreModel extends Model
      * @param string $sNewPassword
      * @param string $sTable
      *
-     * @return boolean
+     * @return bool
      */
     public function changePassword($sEmail, $sNewPassword, $sTable)
     {
@@ -231,11 +231,11 @@ class UserCoreModel extends Model
     /**
      * Set a new hash validation.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sHash
      * @param string $sTable
      *
-     * @return boolean
+     * @return bool
      */
     public function setNewHashValidation($iProfileId, $sHash, $sTable)
     {
@@ -255,7 +255,7 @@ class UserCoreModel extends Model
      * @param string $sHash
      * @param string $sTable
      *
-     * @return boolean
+     * @return bool
      */
     public function checkHashValidation($sEmail, $sHash, $sTable)
     {
@@ -273,11 +273,11 @@ class UserCoreModel extends Model
      * Search users.
      *
      * @param array $aParams
-     * @param boolean $bCount
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param bool $bCount
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return stdClass|integer Object for the users list returned or Integer for the total number users returned.
+     * @return stdClass|int Object for the users list returned or integer for the total number users returned.
      */
     public function search(array $aParams, $bCount, $iOffset, $iLimit)
     {
@@ -415,21 +415,23 @@ class UserCoreModel extends Model
         if (!$bCount) {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
+
             return $oRow;
-        } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            return (int) $oRow->totalUsers;
         }
+
+        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        Db::free($rStmt);
+
+        return (int)$oRow->totalUsers;
     }
 
     /**
      * Check online status.
      *
-     * @param integer $iProfileId
-     * @param integer $iTime Number of minutes that a member becomes inactive (offline). Default 1 minute
+     * @param int $iProfileId
+     * @param int $iTime Number of minutes that a member becomes inactive (offline). Default 1 minute
      *
-     * @return boolean
+     * @return bool
      */
     public function isOnline($iProfileId, $iTime = 1)
     {
@@ -449,8 +451,8 @@ class UserCoreModel extends Model
     /**
      * Set the user status.
      *
-     * @param integer iProfileId
-     * @param integer $iStatus Values: 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
+     * @param int iProfileId
+     * @param int $iStatus Values: 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
      *
      * @return void
      */
@@ -462,9 +464,9 @@ class UserCoreModel extends Model
     /**
      * Get the user status.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
-     * @return integer The user status. 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
+     * @return int The user status. 0 = Offline, 1 = Online, 2 = Busy, 3 = Away
      */
     public function getUserStatus($iProfileId)
     {
@@ -489,7 +491,7 @@ class UserCoreModel extends Model
      *
      * @param string $sSection
      * @param string $sValue
-     * @param integer $iProfileId Profile ID
+     * @param int $iProfileId Profile ID
      *
      * @return void
      */
@@ -501,7 +503,7 @@ class UserCoreModel extends Model
     /**
      * Get the user notifications.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
      * @return stdClass
      */
@@ -759,7 +761,7 @@ class UserCoreModel extends Model
      * @param string $sAvatar
      * @param int $iApproved
      *
-     * @return boolean
+     * @return bool
      */
     public function setAvatar($iProfileId, $sAvatar, $iApproved)
     {
@@ -802,7 +804,7 @@ class UserCoreModel extends Model
      *
      * @param int $iProfileId
      *
-     * @return boolean
+     * @return bool
      */
     public function deleteAvatar($iProfileId)
     {
@@ -849,7 +851,7 @@ class UserCoreModel extends Model
      * @param string $sFile
      * @param int $iApproved
      *
-     * @return boolean
+     * @return bool
      */
     public function addBackground($iProfileId, $sFile, $iApproved = 1)
     {
@@ -866,7 +868,7 @@ class UserCoreModel extends Model
      *
      * @param int $iProfileId
      *
-     * @return boolean
+     * @return bool
      */
     public function deleteBackground($iProfileId)
     {
@@ -1050,7 +1052,7 @@ class UserCoreModel extends Model
      *
      * @param string $sCountry
      * @param string $sCity
-     * @param boolean $bCount
+     * @param bool $bCount
      * @param string $sOrder
      * @param int $iOffset
      * @param int $iLimit
@@ -1396,7 +1398,7 @@ class UserCoreModel extends Model
     /**
      * Get the membership details of a user.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      *
      * @return stdClass The membership detais.
      */
@@ -1422,10 +1424,10 @@ class UserCoreModel extends Model
     /**
      * Check if membership is expired.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      *
-     * @return boolean
+     * @return bool
      */
     public function checkMembershipExpiration($iProfileId, $sCurrentTime)
     {
@@ -1437,17 +1439,17 @@ class UserCoreModel extends Model
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_INT);
         $rStmt->execute();
 
-        return ($rStmt->rowCount() === 1);
+        return $rStmt->rowCount() === 1;
     }
 
     /**
      * Update the membership group of a user.
      *
-     * @param integer $iNewGroupId The new ID of membership group.
-     * @param integer $iProfileId The user ID.
+     * @param int $iNewGroupId The new ID of membership group.
+     * @param int $iProfileId The user ID.
      * @param string $sDateTime In date format: 0000-00-00 00:00:00
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function updateMembership($iNewGroupId, $iProfileId, $sDateTime = null)
     {
@@ -1470,7 +1472,7 @@ class UserCoreModel extends Model
     /**
      * Get Info Fields from profile ID.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sTable Default 'MembersInfo'
      *
      * @return stdClass
