@@ -238,7 +238,7 @@ You will also be eligible to [pH7CMS VIP members](http://ph7cms.com/get-one-tine
 
 ## Contact
 
-You can send email for any suggestions or feedback at *hello {AT} ph7cms {D0T} com* OR *pierrehenrysoria {AT} gmail {D0T} com*
+You can send email for any suggestions or feedback at *hello {AT} ph7cms {D0T} com* OR *hi {AT} ph7 {D0T} me*
 
 
 ## License
