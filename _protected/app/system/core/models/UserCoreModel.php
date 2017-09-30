@@ -1097,13 +1097,14 @@ class UserCoreModel extends Model
         if (!$bCount) {
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
+
             return $oRow;
-        } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            return (int)$oRow->totalUsers;
         }
 
+        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        Db::free($rStmt);
+
+        return (int)$oRow->totalUsers;
     }
 
     /**
@@ -1158,13 +1159,13 @@ class UserCoreModel extends Model
 
             if ($rStmt->rowCount() === 0) {
                 return false;
-            } else {
-                $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-                Db::free($rStmt);
-                $iData = (int)$oRow->profileId;
-                unset($oRow);
-                $this->cache->put($iData);
             }
+
+            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            Db::free($rStmt);
+            $iData = (int)$oRow->profileId;
+            unset($oRow);
+            $this->cache->put($iData);
         }
 
         return $iData;
