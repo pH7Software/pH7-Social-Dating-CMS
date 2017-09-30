@@ -15,6 +15,8 @@ use PH7\Framework\Url\Header;
 class MainController extends Controller
 {
     const HASH_VALIDATION = '681cd81b17b71c746e9ab7ac0445d3a3c960c329';
+    const HASH_VALIDATION_START_POSITION = 3;
+    const HASH_VALIDATION_LENGTH = 24;
 
     /** @var ValidateSiteModel */
     private $oValidateModel;
@@ -73,8 +75,13 @@ class MainController extends Controller
         }
     }
 
+    /**
+     * @return bool
+     */
     protected function checkHash($sHash)
     {
-        return (self::HASH_VALIDATION === sha1(substr($sHash,3,24)));
+        $sHash = substr($sHash, self::HASH_VALIDATION_START_POSITION, self::HASH_VALIDATION_LENGTH);
+
+        return self::HASH_VALIDATION === sha1($sHash);
     }
 }
