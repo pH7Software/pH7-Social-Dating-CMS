@@ -78,7 +78,7 @@ class MainController extends Controller
     /**
      * @return bool
      */
-    protected function checkHash($sHash)
+    private function checkHash($sHash)
     {
         $sHash = substr($sHash, self::HASH_VALIDATION_START_POSITION, self::HASH_VALIDATION_LENGTH);
 
