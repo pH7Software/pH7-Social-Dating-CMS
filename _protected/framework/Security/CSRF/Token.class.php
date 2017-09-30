@@ -90,9 +90,9 @@ final class Token
      * @param string $sInputToken The name of the token inserted in the hidden tag of the form.
      * (e.g. for a from with method "post" and the field "<input type="hidden" name="my_token" />" the name of the token is "$_POST['my_token']" Default NULL
      *
-     * @param integer $iTime Lifetime of token in seconds. Default NULL (value specified in the database settings).
+     * @param int $iTime Lifetime of token in seconds. Default NULL (value specified in the database settings).
      *
-     * @return boolean Returns TRUE if the token is validated, FALSE otherwise.
+     * @return bool Returns TRUE if the token is validated, FALSE otherwise.
      */
     public function check($sName, $sInputToken = null, $iTime = null)
     {
@@ -139,7 +139,7 @@ final class Token
     /**
      * Checks the URL Token.
      *
-     * @return boolean
+     * @return bool
      */
     public function checkUrl()
     {
@@ -153,7 +153,7 @@ final class Token
     /**
      * Gets The Current Session Token.
      *
-     * @return string|boolean The "token" if a user is logged or "true" if no user is logged.
+     * @return string|bool The "token" if a user is logged or "true" if no user is logged.
      */
     protected function currentSess()
     {

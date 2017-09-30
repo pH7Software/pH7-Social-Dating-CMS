@@ -14,13 +14,13 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 // Abstract Class
 class AffiliateCoreModel extends AdminCoreModel
 {
-
     /**
      * Update Affiliate Commission.
      *
-     * @param integer $iProfileId Affiliate ID.
-     * @param integer $iAffCom Amount.
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @param int $iProfileId Affiliate ID.
+     * @param int $iAffCom Amount.
+     *
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function updateUserJoinCom($iProfileId, $iAffCom)
     {
@@ -28,15 +28,17 @@ class AffiliateCoreModel extends AdminCoreModel
         $rStmt->bindValue(':amount', $iAffCom, \PDO::PARAM_INT);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         Db::free($rStmt);
+
         return $rStmt->execute();
     }
 
     /**
      * Get the Affiliated Id of a User.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sTable 'Members', 'Affiliates' or 'Subscribers'. Default 'Members'
-     * @return integer The Affiliated ID
+     *
+     * @return int The Affiliated ID
      */
     public function getAffiliatedId($iProfileId, $sTable = 'Members')
     {
@@ -61,8 +63,9 @@ class AffiliateCoreModel extends AdminCoreModel
     /**
      * Delete Affiliate.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
+     *
      * @return void
      */
     public function delete($iProfileId, $sUsername)
@@ -74,5 +77,4 @@ class AffiliateCoreModel extends AdminCoreModel
         $oDb->exec('DELETE FROM' . Db::prefix('Affiliates') . 'WHERE profileId = ' . $iProfileId . ' LIMIT 1');
         unset($oDb);
     }
-
 }
