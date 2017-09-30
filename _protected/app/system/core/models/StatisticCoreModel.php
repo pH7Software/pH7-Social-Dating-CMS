@@ -14,6 +14,7 @@ namespace PH7;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Record;
+use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class StatisticCoreModel extends Framework\Mvc\Model\Statistic
 {
@@ -161,6 +162,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('Comments' . $sTable) . $sSqlDay);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+
         return (int) $oRow->totalComments;
     }
 
