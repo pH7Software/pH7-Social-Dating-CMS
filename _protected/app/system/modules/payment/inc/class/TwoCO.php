@@ -8,16 +8,17 @@
  * @package        PH7 / App / System / Module / Payment / Inc / Class
  * @version        0.2
  */
+
 namespace PH7;
 
-class TwoCO extends Framework\Payment\Gateway\Api\TwoCheckOut
-{
+use PH7\Framework\Payment\Gateway\Api\TwoCheckOut as TwoCheckOutGateway;
 
+class TwoCO extends TwoCheckOutGateway
+{
     use Api; // Import the Api trait
 
     public function __construct($bSandbox)
     {
         parent::__construct($bSandbox);
     }
-
 }

@@ -3,7 +3,7 @@
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2015-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @package        PH7 / App / System / Module / Validate Site / Config
+ * @package        PH7 / App / System / Module / pH7CMS Donation / Config
  */
 
 namespace PH7;
