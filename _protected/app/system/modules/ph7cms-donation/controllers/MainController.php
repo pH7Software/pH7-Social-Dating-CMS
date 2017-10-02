@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Payment\Gateway\Api\PayPal;
 use PH7\Framework\Url\Header;
 
@@ -38,12 +39,7 @@ class MainController extends Controller
             
             $oPayPal = new PayPal();
             $oPayPal->param('business', $this->config->values['module.setting']['paypal.donation_email'])
-                ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price)) // Use base64_encode() to discourage curious people
-                ->param('item_name', $this->registry->site_name . ' ' . $oMembership->name)
-                ->param('no_note', 1)
-                ->param('no_shipping', 1)
                 ->param('currency_code', $this->config->values['module.setting']['currency'])
-                ->param('tax_cart', $this->config->values['module.setting']['vat_rate'])
                 ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', 'HASH'));
                 
                 $sForm = '<form action="' . $oPayPal->getUrl() . '" method="post">';
