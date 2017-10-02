@@ -8,16 +8,17 @@
  * @package        PH7 / App / System / Module / Payment / Inc / Class
  * @version        0.2
  */
+
 namespace PH7;
 
-class PayPal extends Framework\Payment\Gateway\Api\PayPal
-{
+use PH7\Framework\Payment\Gateway\Api\PayPal as PayPalGateway;
 
+class PayPal extends PayPalGateway
+{
     use Api; // Import the Api trait
 
     public function __construct($bSandbox)
     {
         parent::__construct($bSandbox);
     }
-
 }
