@@ -81,7 +81,7 @@ class MainController extends Controller
             // Regenerate the session ID to prevent the session fixation attack
             $this->session->regenerateId();
 
-            $this->view->page_title = $this->view->h2_title = t('Pay!');
+            $this->view->page_title = $this->view->h1_title = t('Payment Option');
             $this->view->membership = $oMembershipData;
             $this->output();
         }
