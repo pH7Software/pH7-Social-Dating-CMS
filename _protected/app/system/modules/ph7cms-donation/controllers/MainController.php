@@ -40,7 +40,7 @@ class MainController extends Controller
             ->param('currency_code', $this->config->values['module.setting']['currency'])
             ->param('cmd', '_donations')
             ->param('item_name', 'pH7CMS Contribution')
-            ->param('amount', '39.00')
+            ->param('amount', $this->config->values['module.setting']['donation_amount'])
             ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', 'JkdjkPh7Pd5548OOSdgPU_92AIdO'));
 
         $this->view->form_action = $oPayPal->getUrl();
