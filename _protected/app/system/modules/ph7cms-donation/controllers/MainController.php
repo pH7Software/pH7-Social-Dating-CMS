@@ -32,24 +32,21 @@ class MainController extends Controller
 
     public function donationBox()
     {
-        // Display the form box only if the site isn't validated yet
-        if (!$this->oValidateModel->is()) {
-            $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
-            $this->view->page_title = t('Will You Help pH7CMS?');
+        $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
+        $this->view->page_title = t('Will You Help pH7CMS?');
 
-            $oPayPal = new PayPal();
-            $oPayPal->param('business', $this->config->values['module.setting']['paypal.donation_email'])
-                ->param('currency_code', $this->config->values['module.setting']['currency'])
-                ->param('cmd', '_donations')
-                ->param('item_name', 'pH7CMS Contribution')
-                ->param('amount', '39.00')
-                ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', 'JkdjkPh7Pd5548OOSdgPU_92AIdO'));
+        $oPayPal = new PayPal();
+        $oPayPal->param('business', $this->config->values['module.setting']['paypal.donation_email'])
+            ->param('currency_code', $this->config->values['module.setting']['currency'])
+            ->param('cmd', '_donations')
+            ->param('item_name', 'pH7CMS Contribution')
+            ->param('amount', '39.00')
+            ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', 'JkdjkPh7Pd5548OOSdgPU_92AIdO'));
 
-                $this->view->form_action = $oPayPal->getUrl();
-                $this->view->form_body = $oPayPal->generate();
+        $this->view->form_action = $oPayPal->getUrl();
+        $this->view->form_body = $oPayPal->generate();
 
-                $this->output();
-        }
+        $this->output();
     }
 
     public function validator($sHash = null)
