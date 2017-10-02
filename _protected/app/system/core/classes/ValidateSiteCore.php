@@ -20,7 +20,7 @@ class ValidateSiteCore
     const VALIDATE_FORM_POPUP_DELAY = '-4 days';
 
     /**
-     * Check if the JS validationbox has to be added and redirect if the site hasn't been validated yet for a while.
+     * Check if the JS bonation box has to be added and redirect if the site hasn't been validated yet for a while.
      *
      * @param ValidateSiteCoreModel $oValidateSiteModel
      * @param Session $oSession
