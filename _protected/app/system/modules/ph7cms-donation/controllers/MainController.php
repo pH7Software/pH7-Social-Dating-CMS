@@ -36,7 +36,7 @@ class MainController extends Controller
         $this->view->page_title = t('Will You Help pH7CMS?');
 
         $oPayPal = new PayPal();
-        $oPayPal->param('business', $this->config->values['module.setting']['paypal.donation_email'])
+        $oPayPal->param('business', base64_decode($this->config->values['module.setting']['paypal.donation_email']))
             ->param('currency_code', $this->config->values['module.setting']['currency'])
             ->param('cmd', '_donations')
             ->param('item_name', $this->config->values['module.setting']['donation.item_name'])
