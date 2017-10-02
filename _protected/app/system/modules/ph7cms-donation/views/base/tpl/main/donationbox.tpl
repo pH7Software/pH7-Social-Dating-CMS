@@ -6,5 +6,5 @@
             <input type="image" name="submit" src="{url_tpl_mod_img}paypal_donate_btn.png" alt="Donate" />
         </form>
     </div>
-    <p class="center">Will You Be Nice Today...? Like 78% of our users who contribute on a regular basis.</p>
+    <p class="center">Will You Be Nice Today...? Like 78% of our users who contribute to the software on a regular basis.</p>
 </div>
