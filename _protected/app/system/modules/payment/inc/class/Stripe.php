@@ -8,9 +8,12 @@
  * @package        PH7 / App / System / Module / Payment / Inc / Class
  * @version        1.0
  */
+
 namespace PH7;
 
-class Stripe extends Framework\Payment\Gateway\Api\Stripe
+use PH7\Framework\Payment\Gateway\Api\Stripe as StripeGateway;
+
+class Stripe extends StripeGateway
 {
     use Api; // Import the Api trait
 

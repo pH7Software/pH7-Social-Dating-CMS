@@ -3,18 +3,20 @@
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2015-2017, Pierre-Henry Soria. All Rights Reserved.
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
- * @package        PH7 / App / System / Module / Validate Site / Controller
+ * @package        PH7 / App / System / Module / pH7CMS Donation / Controller
  */
 
 namespace PH7;
 
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Payment\Gateway\Api\PayPal;
 use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    const HASH_VALIDATION = '681cd81b17b71c746e9ab7ac0445d3a3c960c329';
+    const HASH_VALIDATION = 'b9e67702a6f47dea30477d33160110934a16875c';
     const HASH_VALIDATION_START_POSITION = 3;
     const HASH_VALIDATION_LENGTH = 24;
 
@@ -28,22 +30,22 @@ class MainController extends Controller
         $this->oValidateModel = new ValidateSiteModel;
     }
 
-    public function validationBox()
+    public function donationBox()
     {
-        // Display the form box only if the site isn't validated yet
-        if (!$this->oValidateModel->is()) {
-            $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
-            $this->view->page_title = t('Validate your Site');
-            $this->output();
-        } else {
-            $this->displayPageNotFound(t('Whoops! It appears the site has already been activated.'));
-        }
-    }
+        $this->session->set(ValidateSiteCore::SESS_IS_VISITED, 1);
+        $this->view->page_title = t('Will You Help pH7CMS?');
 
-    public function pending()
-    {
-        $this->view->page_title = t('Pending Status: Please confirm your site');
-        $this->view->h1_title = t('We sent an email. Please confirm your Site');
+        $oPayPal = new PayPal();
+        $oPayPal->param('business', $this->config->values['module.setting']['paypal.donation_email'])
+            ->param('currency_code', $this->config->values['module.setting']['currency'])
+            ->param('cmd', '_donations')
+            ->param('item_name', 'pH7CMS Contribution')
+            ->param('amount', $this->config->values['module.setting']['donation_amount'])
+            ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', 'JkdjkPh7Pd5548OOSdgPU_92AIdO'));
+
+        $this->view->form_action = $oPayPal->getUrl();
+        $this->view->form_body = $oPayPal->generate();
+
         $this->output();
     }
 
@@ -63,15 +65,11 @@ class MainController extends Controller
 
             Header::redirect(
                 PH7_ADMIN_MOD,
-                t('Congrats! Your site has now the Published status and you will be aware by email to any security patches or updates.'),
+                t('Thanks a LOT for your donation! Highly appreviate.'),
                 Design::SUCCESS_TYPE
             );
         } else {
-            Header::redirect(
-                PH7_ADMIN_MOD,
-                t('The hash is incorrect. Please copy/paste the hash link received in your email in Web browser URL bar.'),
-                Design::ERROR_TYPE
-            );
+            Header::redirect(PH7_ADMIN_MOD);
         }
     }
 

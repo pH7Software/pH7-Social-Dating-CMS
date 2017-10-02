@@ -15,17 +15,17 @@ use PH7\Framework\Url\Header;
 
 class ValidateSiteCore
 {
-    const SESS_IS_VISITED = 'validatesitebox_visited';
+    const SESS_IS_VISITED = 'donationbox_visited';
     const VALIDATE_FORM_PAGE_DELAY = '-2 months';
     const VALIDATE_FORM_POPUP_DELAY = '-4 days';
 
     /**
-     * Check if the JS validationbox has to be added and redirect if the site hasn't been validated yet for a while.
+     * Check if the JS bonation box has to be added and redirect if the site hasn't been validated yet for a while.
      *
      * @param ValidateSiteCoreModel $oValidateSiteModel
      * @param Session $oSession
      *
-     * @return boolean
+     * @return bool
      */
     public static function needInject(ValidateSiteCoreModel $oValidateSiteModel, Session $oSession)
     {
@@ -36,7 +36,7 @@ class ValidateSiteCore
             !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSinceSiteCreated &&
             !$oSession->exists(self::SESS_IS_VISITED)
         ) {
-            Header::redirect(Uri::get('validate-site', 'main', 'validationbox'));
+            Header::redirect(Uri::get('ph7cms-donation', 'main', 'donationbox'));
         }
 
         return !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_POPUP_DELAY) >= $iSinceSiteCreated;
