@@ -25,7 +25,7 @@ class ValidateSiteCore
      * @param ValidateSiteCoreModel $oValidateSiteModel
      * @param Session $oSession
      *
-     * @return boolean
+     * @return bool
      */
     public static function needInject(ValidateSiteCoreModel $oValidateSiteModel, Session $oSession)
     {
