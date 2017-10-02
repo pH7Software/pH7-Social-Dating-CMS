@@ -16,7 +16,7 @@ use PH7\Framework\Url\Header;
 
 class MainController extends Controller
 {
-    const HASH_VALIDATION = '681cd81b17b71c746e9ab7ac0445d3a3c960c329';
+    const HASH_VALIDATION = 'b9e67702a6f47dea30477d33160110934a16875c';
     const HASH_VALIDATION_START_POSITION = 3;
     const HASH_VALIDATION_LENGTH = 24;
 
@@ -71,6 +71,8 @@ class MainController extends Controller
                 t('Thanks a LOT for your donation! Highly appreviate.'),
                 Design::SUCCESS_TYPE
             );
+        } else {
+            Header::redirect(PH7_ADMIN_MOD);
         }
     }
 
