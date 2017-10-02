@@ -3,7 +3,7 @@
         <h1>{lang "Will You Help pH7CMS?"}</h1>
         <form action="{form_action}" method="post">
             {form_body}
-            <input type="image" name="submit" src="{url_tpl_mod_img}paypal_donate_btn.png" alt="Donate" />
+            <input type="image" name="submit" src="{url_tpl_mod_img}paypal_donate.en.png" alt="Donate" />
         </form>
         <p>{lang 'OR'}</p>
         <p class="s_bMarg"><a href="https://www.patreon.com/bePatron?u=3534366" data-patreon-widget-type="become-patron-button">Become a Patron!</a></p>
