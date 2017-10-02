@@ -7,7 +7,7 @@
 var $donationBox = (function () {
     $.get(pH7Url.base + 'ph7cms-donation/main/donationbox', function (oData) {
         $.colorbox({
-            width: '200px',
+            width: '220px',
             height: '200px',
             speed: 500,
             scrolling: false,
