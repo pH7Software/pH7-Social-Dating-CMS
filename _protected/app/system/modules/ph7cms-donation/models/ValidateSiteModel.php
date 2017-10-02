@@ -15,8 +15,9 @@ class ValidateSiteModel extends ValidateSiteCoreModel
     /**
      * Set a site validated/unvalidated.
      *
-     * @param integer $iStatus Set "1" to validate the site or "0" to unvalidated it. Default: 1
-     * @return integer 1 on success.
+     * @param int $iStatus Set "1" to validate the site or "0" to unvalidated it. Default: 1
+     *
+     * @return int 1 on success.
      */
     public function set($iStatus = 1)
     {
