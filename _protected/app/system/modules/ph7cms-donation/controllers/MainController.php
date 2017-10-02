@@ -43,7 +43,7 @@ class MainController extends Controller
                 ->param('cmd', '_donations')
                 ->param('item_name', 'pH7CMS Contribution')
                 ->param('amount', '39.00')
-                ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', 'HASH'));
+                ->param('return', Uri::get('ph7cms-donation', 'main', 'validator', 'JkdjkPh7Pd5548OOSdgPU_92AIdO'));
 
                 $this->view->form_action = $oPayPal->getUrl();
                 $this->view->form_body = $oPayPal->generate();
