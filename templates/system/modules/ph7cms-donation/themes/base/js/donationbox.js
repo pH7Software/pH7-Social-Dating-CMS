@@ -5,7 +5,7 @@
  */
 
 var $validationBox = (function () {
-    $.get(pH7Url.base + 'validate-site/main/validationbox', function (oData) {
+    $.get(pH7Url.base + 'ph7cms-donation/main/donationbox', function (oData) {
         $.colorbox({
             width: '100%',
             maxWidth: '450px',

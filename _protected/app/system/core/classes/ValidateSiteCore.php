@@ -15,7 +15,7 @@ use PH7\Framework\Url\Header;
 
 class ValidateSiteCore
 {
-    const SESS_IS_VISITED = 'validatesitebox_visited';
+    const SESS_IS_VISITED = 'donationbox_visited';
     const VALIDATE_FORM_PAGE_DELAY = '-2 months';
     const VALIDATE_FORM_POPUP_DELAY = '-4 days';
 
@@ -36,7 +36,7 @@ class ValidateSiteCore
             !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_PAGE_DELAY) >= $iSinceSiteCreated &&
             !$oSession->exists(self::SESS_IS_VISITED)
         ) {
-            Header::redirect(Uri::get('validate-site', 'main', 'validationbox'));
+            Header::redirect(Uri::get('ph7cms-donation', 'main', 'donationbox'));
         }
 
         return !$oValidateSiteModel->is() && VDate::setTime(self::VALIDATE_FORM_POPUP_DELAY) >= $iSinceSiteCreated;
