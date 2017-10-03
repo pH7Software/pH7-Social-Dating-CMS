@@ -12,14 +12,16 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+
 class FileController extends Controller
 {
-
     private $sTitle;
 
     public function index()
     {
-        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'file', 'display'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'file', 'display'));
     }
 
     public function display($sDir = '')

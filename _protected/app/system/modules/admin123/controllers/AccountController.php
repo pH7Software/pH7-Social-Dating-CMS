@@ -10,13 +10,16 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+
 class AccountController extends Controller
 {
     private $sTitle;
 
     public function index()
     {
-        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get(PH7_ADMIN_MOD, 'account', 'edit'));
+        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'account', 'edit'));
     }
 
     public function password()

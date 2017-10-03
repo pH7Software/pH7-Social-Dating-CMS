@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
 
 class AdminController extends Controller
@@ -94,7 +95,7 @@ class AdminController extends Controller
 
     public function deleteAll()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('admin_action')) {
+        if (!(new SecurityToken)->check('admin_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
