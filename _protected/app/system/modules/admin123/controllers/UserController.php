@@ -193,12 +193,18 @@ class UserController extends Controller
 
     public function approve()
     {
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 1));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->_moderateRegistration($this->httpRequest->post('id'), 1)
+        );
     }
 
     public function disapprove()
     {
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'user', 'browse'), $this->_moderateRegistration($this->httpRequest->post('id'), 0));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
+            $this->_moderateRegistration($this->httpRequest->post('id'), 0)
+        );
     }
 
     public function approveAll($iId)
