@@ -120,5 +120,4 @@ class FileController extends Controller
 
         $this->view->filesList = $this->file->getFileList($sFile, $mExt);
     }
-
 }

@@ -37,5 +37,4 @@ class AccountController extends Controller
         $this->view->h2_title = $this->sTitle;
         $this->output();
     }
-
 }
