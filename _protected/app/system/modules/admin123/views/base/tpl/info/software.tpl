@@ -4,7 +4,7 @@
   <div class="italic">
     <p>{lang 'Name: %0%', '<a href="%software_website%">%software_name%</a>'}</p>
     <p>Github: <a href="https://github.com/pH7Software/pH7-Social-Dating-CMS">https://github.com/pH7Software/pH7-Social-Dating-CMS</a></p>
-    <p>{lang 'Official Website: %0%', '<a href="%software_website%">%software_name%</a>'}</p>
+    <p>{lang 'Author: %0%', '<a href="http://ph7.me">Pierre-Henry Soria</a>'}</p>
   </div>
 
   <div class="s_bMarg"></div>
