@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Version;
 use PH7\Framework\Url\Header;
 
 class InfoController extends Controller
@@ -33,7 +34,7 @@ class InfoController extends Controller
         $this->sTitle = t('%software_name% Information');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
-        $this->view->release_date = $this->dateTime->get(Framework\Security\Version::KERNEL_RELASE_DATE)->date();
+        $this->view->release_date = $this->dateTime->get(Version::KERNEL_RELASE_DATE)->date();
         $this->view->license_form_link = Uri::get(PH7_ADMIN_MOD, 'setting', 'license');
         $this->output();
     }
