@@ -19,6 +19,6 @@
   </div>
 
   <div class="s_bMarg"></div>
-
-  <p><a class="underline" href="https://sourceforge.net/p/ph7socialdating">Give a Nice Review on Sourceforge</a></p>
+  <p><a class="bold" href="{{ $design->url('ph7cms-donation','main','donationbox') }}">{lang 'Contribute to pH7CMS'}</a></p>
+  <p><a class="underline" href="https://sourceforge.net/p/ph7socialdating">{lang 'Give a Nice Review on Sourceforge'}</a></p>
 </div>
