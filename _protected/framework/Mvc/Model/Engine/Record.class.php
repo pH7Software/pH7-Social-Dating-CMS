@@ -387,10 +387,13 @@ class Record
             $this->_sSql .= 'LIMIT 0,1'; // Get only one column
 
             $rStmt = Db::getInstance()->prepare($this->_sSql);
-            if ($bIsWhere) $rStmt->bindParam(':id', $sId);
+            if ($bIsWhere) {
+                $rStmt->bindParam(':id', $sId);
+            }
             $rStmt->execute();
             $mRow = $rStmt->fetch(PDO::FETCH_OBJ);
             Db::free($rStmt);
+
             return $mRow;
         } catch (Exception $oE) {
             $this->_aErrors[] = $oE->getMessage();
