@@ -54,11 +54,10 @@ class UserCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('SELECT permissions FROM' . Db::prefix('Memberships') . 'WHERE groupId = :groupId LIMIT 1');
         $rStmt->bindValue(':groupId', $oSession->get('member_group_id'), \PDO::PARAM_INT);
         $rStmt->execute();
-        $oFetch = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $sPermissions = $rStmt->fetchColumn();
         Db::free($rStmt);
-        unset($oSession);
 
-        return ObjArr::toObject(unserialize($oFetch->permissions));
+        return ObjArr::toObject(unserialize($sPermissions));
     }
 
     /**
@@ -475,18 +474,17 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'userStatus' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get()) {
+        if (!$iUserStatus = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT userStatus FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iUserStatus = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->userStatus;
-            unset($oRow);
-            $this->cache->put($iData);
+
+            $this->cache->put($iUserStatus);
         }
 
-        return $iData;
+        return $iUserStatus;
     }
 
     /**
@@ -829,22 +827,21 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'background' . $iProfileId, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
-            $sSqlApproved = (isset($iApproved)) ? ' AND approved = :approved ' : ' ';
+        if (!$sFile = $this->cache->get()) {
+            $sSqlApproved = $iApproved !== null ? ' AND approved = :approved ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT file FROM' . Db::prefix('MembersBackground') . 'WHERE profileId = :profileId' . $sSqlApproved . 'LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-            if (isset($iApproved)) {
+            if ($iApproved !== null) {
                 $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
             }
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $sFile = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = @$oRow->file;
-            unset($oRow);
-            $this->cache->put($sData);
+
+            $this->cache->put($sFile);
         }
 
-        return $sData;
+        return $sFile;
     }
 
     /**
@@ -1145,7 +1142,7 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'id' . $sEmail . $sUsername . $sTable, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get()) {
+        if (!$iProfileId = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             if (!empty($sEmail)) {
@@ -1155,20 +1152,19 @@ class UserCoreModel extends Model
                 $rStmt = Db::getInstance()->prepare('SELECT profileId FROM' . Db::prefix($sTable) . 'WHERE username = :username LIMIT 1');
                 $rStmt->bindValue(':username', $sUsername, \PDO::PARAM_STR);
             }
+
             $rStmt->execute();
 
             if ($rStmt->rowCount() === 0) {
                 return false;
             }
 
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iProfileId = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $iData = (int)$oRow->profileId;
-            unset($oRow);
-            $this->cache->put($iData);
+            $this->cache->put($iProfileId);
         }
 
-        return $iData;
+        return $iProfileId;
     }
 
     /**
@@ -1181,20 +1177,19 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'email' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
+        if (!$sEmail = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT email FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $sEmail = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = @$oRow->email;
-            unset($oRow);
-            $this->cache->put($sData);
+
+            $this->cache->put($sEmail);
         }
 
-        return $sData;
+        return $sEmail;
     }
 
     /**
@@ -1213,20 +1208,19 @@ class UserCoreModel extends Model
 
         $this->cache->start(self::CACHE_GROUP, 'username' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
+        if (!$sUsername = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT username FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $sUsername = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = @$oRow->username;
-            unset($oRow);
-            $this->cache->put($sData);
+
+            $this->cache->put($sUsername);
         }
 
-        return $sData;
+        return $sUsername;
     }
 
     /**
@@ -1241,20 +1235,19 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'firstName' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
+        if (!$sFirstName = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT firstName FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $sFirstName = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = @$oRow->firstName;
-            unset($oRow);
-            $this->cache->put($sData);
+
+            $this->cache->put($sFirstName);
         }
 
-        return $sData;
+        return $sFirstName;
     }
 
     /**
@@ -1270,7 +1263,7 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'sex' . $iProfileId . $sUsername . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
+        if (!$sSex = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             if (!empty($iProfileId)) {
@@ -1282,14 +1275,13 @@ class UserCoreModel extends Model
             }
 
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $sSex = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = @$oRow->sex;
-            unset($oRow);
-            $this->cache->put($sData);
+
+            $this->cache->put($sSex);
         }
 
-        return $sData;
+        return $sSex;
     }
 
     /**
@@ -1303,18 +1295,17 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'matchsex' . $iProfileId, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
+        if (!$sMatchSex = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT matchSex FROM' . Db::prefix('Members') . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $sMatchSex = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = $oRow->matchSex;
-            unset($oRow);
-            $this->cache->put($sData);
+
+            $this->cache->put($sMatchSex);
         }
 
-        return $sData;
+        return $sMatchSex;
     }
 
     /**
@@ -1329,20 +1320,19 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'birthdate' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
+        if (!$sBirthDate = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT birthDate FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $sBirthDate = $rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = $oRow->birthDate;
-            unset($oRow);
-            $this->cache->put($sData);
+
+            $this->cache->put($sBirthDate);
         }
 
-        return $sData;
+        return $sBirthDate;
     }
 
     /**
@@ -1357,20 +1347,19 @@ class UserCoreModel extends Model
     {
         $this->cache->start(self::CACHE_GROUP, 'groupId' . $iProfileId . $sTable, static::CACHE_TIME);
 
-        if (!$sData = $this->cache->get()) {
+        if (!$iGroupId = $this->cache->get()) {
             Various::checkModelTable($sTable);
 
             $rStmt = Db::getInstance()->prepare('SELECT groupId FROM' . Db::prefix($sTable) . 'WHERE profileId = :profileId LIMIT 1');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $iGroupId = (int)$rStmt->fetchColumn();
             Db::free($rStmt);
-            $sData = (int)$oRow->groupId;
-            unset($oRow);
-            $this->cache->put($sData);
+
+            $this->cache->put($iGroupId);
         }
 
-        return $sData;
+        return $iGroupId;
     }
 
     /**
