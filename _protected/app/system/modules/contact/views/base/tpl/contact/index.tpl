@@ -3,4 +3,6 @@
     <p class="italic red">{lang 'Your IP is: %0%', $ip}</p>
 </div>
 
-<div class="right col-md-2 ad_160_600">{{ $designModel->ad(160,600) }}</div>
+<div class="right col-md-2 ad_160_600">
+    {{ $designModel->ad(160,600) }}
+</div>

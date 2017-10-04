@@ -17,7 +17,9 @@
       {if $membership->enable == 1 AND $membership->price != 0}
           {{ $oDesign = new PaymentDesign }}
 
-          <div class="paypal_logo left"><img src="{url_tpl_mod_img}payment-icon.png" alt="Payment Gateways" title="{lang 'Purchase your subscription safely!'}" /></div>
+          <div class="paypal_logo left">
+              <img src="{url_tpl_mod_img}payment-icon.png" alt="Payment Gateways" title="{lang 'Purchase your subscription safely!'}" />
+          </div>
 
           {if $is_paypal}
               <div class="left vs_marg">
