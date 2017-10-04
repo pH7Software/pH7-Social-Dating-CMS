@@ -10,14 +10,13 @@
  */
 
 namespace PH7\Framework\Layout\Tpl\Engine\PH7Xsl;
+
 defined('PH7') or exit('Restricted access');
 
 class Exception extends \PH7\Framework\Layout\Exception
 {
-
     public function __construct($sMsg)
     {
         parent::__construct('ERROR XSLT Template: ' . $sMsg);
     }
-
 }
