@@ -13,7 +13,6 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 // Abstract Class
 class MailCoreModel extends Framework\Mvc\Model\Engine\Model
 {
-
     public static function countUnreadMsg($iProfileId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(status) AS unread FROM' . Db::prefix('Messages') .
@@ -21,9 +20,9 @@ class MailCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt->bindValue(':recipient', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iUnread = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
-        return (int)$oRow->unread;
-    }
 
+        return $iUnread;
+    }
 }

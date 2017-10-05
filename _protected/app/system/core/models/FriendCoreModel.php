@@ -116,10 +116,10 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iPendingFriends = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int) $oRow->pendingFds;
+        return $iPendingFriends;
     }
 
     /**
@@ -136,9 +136,9 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->execute();
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $iTotalFriends = (int)$rStmt->fetchColumn();
         Db::free($rStmt);
 
-        return (int) $oRow->totalFds;
+        return $iTotalFriends;
     }
 }
