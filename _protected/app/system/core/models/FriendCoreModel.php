@@ -41,6 +41,7 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
             $sSqlSelect = 'COUNT(f.friendId) AS totalFriends';
         }
 
+        $sSqlWhere = '(f.profileId = :profileId OR f.friendId = :profileId)';
         if (!empty($iFriendId)) {
             $sSqlWhere = 'f.profileId IN
            (SELECT * FROM (SELECT (m.profileId)
@@ -50,14 +51,11 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
                SELECT (f.friendId) FROM ' . Db::prefix('MembersFriends') . ' AS f
                WHERE (f.profileId IN(:profileId, :friendId))) AS fd
                GROUP BY fd.profileId HAVING COUNT(fd.profileId) > 1)';
-        } else {
-            $sSqlWhere = '(f.profileId = :profileId OR f.friendId = :profileId)';
         }
 
+        $sSqlSearchWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         if (ctype_digit($mLooking)) {
             $sSqlSearchWhere = '(m.profileId = :profileId AND f.friendId= :profileId) OR (m.profileId = :friendId OR f.friendId= :friendId)';
-        } else {
-            $sSqlSearchWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         }
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
@@ -69,7 +67,12 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
         );
 
         $rStmt->bindValue(':profileId', $iIdProfileId, \PDO::PARAM_INT);
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+
+        if (ctype_digit($mLooking)) {
+            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+        } else {
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        }
 
         if (!empty($iFriendId)) {
             $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
