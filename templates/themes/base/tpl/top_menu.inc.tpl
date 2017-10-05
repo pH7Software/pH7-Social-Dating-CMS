@@ -194,7 +194,7 @@
               {if $is_note_enabled}
                 <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('note','main','index') }}" title="{lang 'Notes'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="{{ $design->url('note','main','add') }}" title="{lang 'Add a Note'}"><i class="fa fa-newspaper-o"></i> {lang 'Add a Note'}</a></li>
+                    <li><a href="{{ $design->url('note','main','add') }}" title="{lang 'Add a Note'}">{lang 'Add a Note'}</a></li>
                     <li><a href="{{ $design->url('note','main','author', $oSession->get('member_username')) }}" title="{lang 'My Notes'}">{lang 'My Notes'}</a></li>
                   </ul>
                 </li>
