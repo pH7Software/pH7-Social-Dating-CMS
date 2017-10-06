@@ -11,20 +11,23 @@
  */
 
 namespace PH7\Framework\Mvc\Controller;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Core\Core;
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mobile\MobApp;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model as M;
+use PH7\Framework\Mvc\Router\FrontController;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Page\Page;
 use PH7\Framework\Security\Ban\Ban;
 
-abstract class Controller extends \PH7\Framework\Core\Core
+abstract class Controller extends Core
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -94,7 +97,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
         /**
          * Remove database information for the tpl files in order to prevent any attack attempt.
          **/
-        \PH7\Framework\Mvc\Router\FrontController::getInstance()->_removeDatabaseInfo();
+        FrontController::getInstance()->_removeDatabaseInfo();
 
        /**
         * Destroy all object instances of PDO and close the connection to the database before the display and the start of the template and free memory
