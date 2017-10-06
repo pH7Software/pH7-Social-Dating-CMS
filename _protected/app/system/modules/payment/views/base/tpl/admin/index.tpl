@@ -1,3 +1,3 @@
 <div class="center">
-  <p>{lang 'Welcome to Payment Module!'}</p>
+    <p>{lang 'Welcome to the Payment Module!'}</p>
 </div>

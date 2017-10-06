@@ -161,9 +161,10 @@ class MainController extends Controller
                 if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id')) {
                     if (
                         $this->oUserModel->updateMembership(
-                        $iItemNumber,
-                        $this->iProfileId,
-                        $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
+                            $iItemNumber,
+                            $this->iProfileId,
+                            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                        )
                     ) {
                         $this->_bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);

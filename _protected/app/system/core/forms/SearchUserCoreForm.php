@@ -125,8 +125,7 @@ class SearchUserCoreForm
         $iMinAge = (int) DbConfig::getSetting('minAgeRegistration');
         $iMaxAge = (int) DbConfig::getSetting('maxAgeRegistration');
 
-        if(UserCore::auth())
-        {
+        if(UserCore::auth()) {
             $sBirthDate = $oUserModel->getBirthDate($oSession->get('member_id'));
             $aAge = explode('-', $sBirthDate);
             $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
