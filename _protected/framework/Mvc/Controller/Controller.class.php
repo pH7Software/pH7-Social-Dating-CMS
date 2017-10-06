@@ -163,11 +163,14 @@ abstract class Controller extends \PH7\Framework\Core\Core
      * Set an Access Denied page.
      *
      * @param boolean $b403Status Set the Forbidden status. For the Ajax blocks and others, we cannot put the HTTP 403 error code, so the attribute must be set to FALSE. Default TRUE
+     *
      * @return void Quits the page with the exit() function
      */
     public function displayPageDenied($b403Status = true)
     {
-        if ($b403Status) Http::setHeadersByCode(403);
+        if ($b403Status) {
+            Http::setHeadersByCode(403);
+        }
 
         $sTitle = t('Access Denied!');
         $this->view->page_title = $sTitle;
@@ -263,8 +266,9 @@ abstract class Controller extends \PH7\Framework\Core\Core
      */
     private function _checkModStatus()
     {
-        if (!SysMod::isEnabled($this->registry->module))
+        if (!SysMod::isEnabled($this->registry->module)) {
             $this->displayPageNotFound();
+        }
     }
 
     /**
@@ -274,8 +278,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      */
     private function _checkPerms()
     {
-        if (is_file($this->registry->path_module_config . 'Permission.php'))
-        {
+        if (is_file($this->registry->path_module_config . 'Permission.php')) {
             require $this->registry->path_module_config . 'Permission.php';
             new \PH7\Permission;
         }
@@ -290,7 +293,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
     private function _checkBanStatus()
     {
         if (Ban::isIp(Ip::get())) {
-            \PH7\Framework\Page\Page::banned();
+            Page::banned();
         }
     }
 
@@ -301,10 +304,10 @@ abstract class Controller extends \PH7\Framework\Core\Core
      */
     private function _checkSiteStatus()
     {
-        if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE
-            && !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD)
-        {
-            \PH7\Framework\Page\Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
+        if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
+            !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD
+        ) {
+           Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
         }
     }
 
@@ -315,8 +318,7 @@ abstract class Controller extends \PH7\Framework\Core\Core
      */
     private function _ddosProtection()
     {
-        if (!isDebug() && (bool)M\DbConfig::getSetting('DDoS'))
-        {
+        if (!isDebug() && (bool)M\DbConfig::getSetting('DDoS')) {
             $oDDoS = new \PH7\Framework\Security\DDoS\Stop;
             if ($oDDoS->cookie() || $oDDoS->session()) {
                 $oDDoS->wait();
@@ -324,5 +326,4 @@ abstract class Controller extends \PH7\Framework\Core\Core
             unset($oDDoS);
         }
     }
-
 }
