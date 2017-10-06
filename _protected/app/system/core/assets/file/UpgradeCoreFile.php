@@ -29,7 +29,7 @@ class UpgradeCore extends Kernel
     /**
      * Remote update URL.
      */
-    const REMOTE_URL = 'http://update.hizup.com/';
+    const REMOTE_URL = 'http://update.ph7cms.com/';
 
     /**
      * Internal update folders.

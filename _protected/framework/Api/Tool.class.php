@@ -18,7 +18,7 @@ use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Tool
 {
-    const SOFTWARE_API_URL = 'http://api.hizup.com/';
+    const SOFTWARE_API_URL = 'http://api.ph7cms.com/';
 
     /**
      * Check if an external app can have access to the API.
