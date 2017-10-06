@@ -25,9 +25,9 @@ interface Controllable
      * Not Found Error Page.
      *
      * @param string $sMsg Default is empty ('')
-     * @param boolean $b404Status Default is "true"
+     * @param bool $b404Status Default is "true"
+     *
      * @return void
      */
     public function displayPageNotFound($sMsg = '', $b404Status = true);
-
 }
