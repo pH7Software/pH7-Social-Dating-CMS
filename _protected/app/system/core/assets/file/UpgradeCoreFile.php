@@ -44,9 +44,10 @@ class UpgradeCore extends Kernel
     const SQL_DIR = 'sql';
     const INFO_DIR = 'info';
 
-    const UPGRADE_FILE = 'upgrade.sql';
     const INST_INTRO_FILE = 'introduction';
     const INST_CONCL_FILE = 'conclusion';
+    const UPGRADE_FILE = 'upgrade.sql';
+    const VERSION_LIST_FILE = 'all_versions.txt';
 
 
     /** @var Http */
@@ -105,7 +106,7 @@ class UpgradeCore extends Kernel
      */
     public function getVersions()
     {
-        return (array)file(static::REMOTE_URL . 'all_versions.txt');
+        return (array)file(static::REMOTE_URL . static::VERSION_LIST_FILE);
     }
 
     /**
