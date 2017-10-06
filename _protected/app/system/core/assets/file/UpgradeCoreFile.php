@@ -444,13 +444,11 @@ class UpgradeCore extends Kernel
      */
     private function _readInstruction($sInstFile)
     {
-      try {
-        return F\Import::file(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . $sInstFile);
-      }
-      catch (Framework\File\Exception $e)
-      {
-        return '<p class="error">' . t('Instruction file not found!') . '</p>';
-      }
+        try {
+            return F\Import::file(PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::INFO_DIR . PH7_DS . $sInstFile);
+        } catch (F\Exception $e) {
+            return '<p class="error">' . t('Instruction file not found!') . '</p>';
+        }
     }
 }
 
