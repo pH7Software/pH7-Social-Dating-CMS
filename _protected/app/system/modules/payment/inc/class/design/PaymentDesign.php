@@ -110,7 +110,7 @@ class PaymentDesign extends Framework\Core\Core
     public function buttonCCBill(stdClass $oMembership)
     {
         // Not implemented yet.
-        // Feel free to contribute on our open source repo: https://github.com/pH7Software/pH7-Social-Dating-CMS
+        // Feel free to contribute: https://github.com/pH7Software/pH7-Social-Dating-CMS
     }
 
     /**
