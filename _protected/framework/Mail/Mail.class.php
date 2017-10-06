@@ -68,7 +68,7 @@ class Mail
      *
      * @param array $aParams The parameters information to send email.
      *
-     * @return boolean Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
+     * @return bool Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
      */
     protected function phpMail(array $aParams)
     {

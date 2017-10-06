@@ -64,7 +64,9 @@ class MainController extends Controller
     }
 
     /**
-     * @param null|integer $iMembershipId
+     * @param null|int $iMembershipId
+     *
+     * @return void
      */
     public function pay($iMembershipId = null)
     {
@@ -89,6 +91,8 @@ class MainController extends Controller
 
     /**
      * @param string $sProvider
+     *
+     * @return void
      */
     public function process($sProvider = '')
     {
@@ -205,7 +209,7 @@ class MainController extends Controller
 
     /**
      * @param string  $sGatewayName
-     * @param integer $iItemNumber
+     * @param int $iItemNumber
      *
      * @return void
      */
@@ -270,9 +274,9 @@ class MainController extends Controller
     /**
      * Send a notification email to the admin about the payment (IPN -> Instant Payment Notification).
      *
-     * @param integer $iMembershipId
+     * @param int$iMembershipId
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendNotifyMail($iMembershipId)
     {

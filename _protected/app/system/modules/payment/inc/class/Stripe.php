@@ -18,7 +18,8 @@ class Stripe extends StripeGateway
 
     /**
      * @param string $sPrice Normal price format (e.g., 19.95).
-     * @return integer Returns amount in cents (without points) to be validated for Stripe.
+     *
+     * @return int Returns amount in cents (without points) to be validated for Stripe.
      */
     public static function getAmount($sPrice)
     {

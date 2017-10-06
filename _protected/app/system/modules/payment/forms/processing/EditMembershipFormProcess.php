@@ -65,7 +65,8 @@ class EditMembershipFormProcess extends Form
      * Update serialized permission data.
      *
      * @param PaymentModel $oPayModel
-     * @param integer $iGroupId
+     * @param int $iGroupId
+     *
      * @return void
      */
     private function updatePermsFields(PaymentModel $oPayModel, $iGroupId)

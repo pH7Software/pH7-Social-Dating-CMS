@@ -18,7 +18,7 @@ class PaymentModel extends UserCoreModel
      *
      * @param string $sSection
      * @param string $sValue
-     * @param integer $iGroupId
+     * @param int $iGroupId
      *
      * @return void
      */
@@ -42,7 +42,7 @@ class PaymentModel extends UserCoreModel
     /**
      * Delete a membership group.
      *
-     * @param integer $iGroupId
+     * @param int $iGroupId
      *
      * @return void
      */
