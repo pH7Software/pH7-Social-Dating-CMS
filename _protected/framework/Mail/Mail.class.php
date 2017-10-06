@@ -23,18 +23,18 @@ class Mail
      *
      * @param array $aInfo
      * @param string $sContents
-     * @param boolean $bHtmlFormat
+     * @param bool $bHtmlFormat
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     public function send(array $aInfo, $sContents, $bHtmlFormat = true)
     {
         // Default values
-        $sFromMail = (empty($aInfo['from'])) ? DbConfig::getSetting('returnEmail') : $aInfo['from']; // Email noreply (generally noreply@yoursite.com)
-        $sFromName = (empty($aInfo['form_name'])) ? DbConfig::getSetting('emailName') : $aInfo['form_name'];
+        $sFromMail = empty($aInfo['from']) ? DbConfig::getSetting('returnEmail') : $aInfo['from']; // Email noreply (generally noreply@yoursite.com)
+        $sFromName = empty($aInfo['form_name']) ? DbConfig::getSetting('emailName') : $aInfo['form_name'];
 
-        $sToMail = (empty($aInfo['to'])) ? DbConfig::getSetting('adminEmail') : $aInfo['to'];
-        $sToName = (empty($aInfo['to_name'])) ? $sToMail : $aInfo['to_name'];
+        $sToMail = empty($aInfo['to']) ? DbConfig::getSetting('adminEmail') : $aInfo['to'];
+        $sToName = empty($aInfo['to_name']) ? $sToMail : $aInfo['to_name'];
 
         $sSubject = $aInfo['subject'];
 
