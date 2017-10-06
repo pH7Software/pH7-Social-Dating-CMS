@@ -93,6 +93,38 @@ class UpgradeCore extends Kernel
         $this->_prepare(); // Preparation and verification for software upgrade
     }
 
+    public function display()
+    {
+        echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>', t('Upgrade %software_name% | Version %0%', $this->_sVerNumber), '</title><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><style>body{background:#EFEFEF;color:#555;font:normal 10pt Arial,Helvetica,sans-serif;margin:0;padding:0}.center{margin-left:auto;margin-right:auto;text-align:center;width:80%}.bold,.error{font-weight:bold;font-size:13px}.red,.error{color:red}.success{color:green}.italic{font-style:italic}.underline{text-decoration:underline}pre{margin:2px;font-style:italic}code{font-style:italic;font-size:11px}</style></head><body><div class="center">';
+        echo $this->_sHtml;
+        echo '</div></body></html>';
+    }
+
+    /**
+     * @return array Returns all version numbers.
+     */
+    public function getVersions()
+    {
+        return file(static::REMOTE_URL . 'all_versions.txt');
+    }
+
+    /**
+     * Checks and returns the correct needed version for the current pH7CMS installation.
+     *
+     * @return string|bool The version needed number for the current pH7CMS installation.
+     */
+    public function getNextVersion()
+    {
+        $aVersions = $this->getVersions();
+
+        if ($iKey = array_search(Kernel::SOFTWARE_VERSION, $aVersions)) {
+            return $aVersions[$iKey+1];
+        } else {
+            // If no next version is found, just returns the current one.
+            return Kernel::SOFTWARE_VERSION;
+        }
+    }
+
     private function _prepare()
     {
         if (!AdminCore::auth()) {
