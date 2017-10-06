@@ -10,29 +10,30 @@
  */
 
 namespace PH7\Framework\Api;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class Tool
 {
-
     const SOFTWARE_API_URL = 'http://api.hizup.com/';
 
     /**
      * Check if an external app can have access to the API.
      *
-     * @param \PH7\Framework\Config\Config $oConfig
-     * @param \PH7\Framework\Mvc\Request\Http $oRequest
-     * @return boolean Returns TRUE if the app has access, FALSE otherwise.
+     * @param Config $oConfig
+     * @param HttpRequest $oRequest
+     *
+     * @return bool Returns TRUE if the app has access, FALSE otherwise.
      */
-    public static function checkAccess(Config $oConfig, Http $oRequest)
+    public static function checkAccess(Config $oConfig, HttpRequest $oRequest)
     {
         if (strcmp($oRequest->gets('private_api_key'), $oConfig->values['ph7cms.api']['private_key']) === 0) {
             return in_array($oRequest->gets('url'), $oConfig->values['ph7cms.api']['allow_domains']);
         }
+
         return false;
     }
-
 }

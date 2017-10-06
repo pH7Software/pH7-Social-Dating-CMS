@@ -9,11 +9,11 @@
  */
 
 namespace PH7\Framework\Api;
+
 defined('PH7') or exit('Restricted access');
 
 trait Api
 {
-
     public function __construct()
     {
     }
@@ -21,14 +21,16 @@ trait Api
     /**
      * Encode the data to JSON
      *
+     * @param mixed $mData
+     *
      * @return string|bool Returns the data encoded to JSON or FALSE if the data is invalid.
      */
     public function set($mData)
     {
-        if (is_array($mData))
+        if (is_array($mData)) {
             return json_encode($mData);
+        }
 
         return false;
     }
-
 }
