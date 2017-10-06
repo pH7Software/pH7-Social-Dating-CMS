@@ -151,8 +151,6 @@ abstract class Kernel
 
     /**
      * Clone is set to private to stop cloning.
-     *
-     * @access private
      */
     private function __clone() {}
 }
