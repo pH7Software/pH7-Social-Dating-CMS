@@ -20,14 +20,14 @@ use PH7\Framework\Session\Session;
 class SearchUserCoreForm
 {
     /**
-     * Defaut field attriutes.
+     * Default field attributes.
      */
     private static $aSexOption = ['required' => 1];
     private static $aMatchSexOption = ['required' => 1];
-    private static $aAgeOption = null;
     private static $aCountryOption = ['id' => 'str_country'];
     private static $aCityOption = ['id' => 'str_city'];
     private static $aStateOption = ['id' => 'str_state'];
+    private static $aAgeOption;
 
     /**
      * @param integer $iWidth Width of the form in pixel. If null, will be 100%
@@ -160,10 +160,9 @@ class SearchUserCoreForm
             self::$aMatchSexOption += ['value' => self::getGenderVals($oUserModel, $oSession)['match_sex']];
         }
 
+        self::$aAgeOption = ['value' => self::getAgeVals($oUserModel, $oSession)];
         if ($oHttpRequest->getExists(['age1', 'age2'])) {
             self::$aAgeOption = ['value' => ['min_age' => $oHttpRequest->get('age1'), 'max_age' => $oHttpRequest->get('age2')]];
-        } else {
-            self::$aAgeOption = ['value' => self::getAgeVals($oUserModel, $oSession)];
         }
 
         if ($oHttpRequest->getExists('country')) {
