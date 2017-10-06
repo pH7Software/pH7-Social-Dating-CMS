@@ -133,21 +133,23 @@ abstract class Controller extends Core
      *
      * @param string $sMsg Default is empty ('')
      * @param boolean $b404Status For the Ajax blocks and others, we cannot put the HTTP 404 error code, so the attribute must be set to FALSE. Default TRUE
+     *
      * @return void Quits the page with the exit() function
      */
     public function displayPageNotFound($sMsg = '', $b404Status = true)
     {
-        if ($b404Status) Http::setHeadersByCode(404);
+        if ($b404Status) {
+            Http::setHeadersByCode(404);
+        }
 
         $this->view->page_title = (!empty($sMsg)) ? t('%0% - Page Not Found', $sMsg) : t('Page Not Found');
         $this->view->h1_title = (!empty($sMsg)) ? $sMsg : t('Whoops! The page you requested was not found.');
 
-        $sErrorDesc = t('You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive.') . '<br />
-        <strong><em>' . t('Suggestions:') . '</em></strong><br />
-        <a href="' . $this->registry->site_url . '">' . t('Return home') . '</a><br />';
+        $sErrorDesc = t('You may have clicked an expired link or mistyped the address. Some web addresses are case sensitive.') .
+            '<br /><strong><em>' . t('Suggestions:') .
+            '</em></strong><br /><a href="' . $this->registry->site_url . '">' . t('Return home') . '</a><br />';
 
-        if (!\PH7\UserCore::auth())
-        {
+        if (!\PH7\UserCore::auth()) {
             $sErrorDesc .=
             '<a href="' . Uri::get('user','signup','step1') . '">' . t('Join Now') . '</a><br />
              <a href="' . Uri::get('user','main','login') . '">' . t('Login') . '</a><br />';
@@ -254,12 +256,15 @@ abstract class Controller extends Core
     }
 
     /**
-     * @param boolean $bIsUserLogged
-     * @return boolean TRUE if visitor is on the homepage (index).
+     * @param bool $bIsUserLogged
+     *
+     * @return bool TRUE if visitor is on the homepage (index).
      */
     private function _isGuestOnHomepage($bIsUserLogged)
     {
-        return (!$bIsUserLogged && $this->registry->module == 'user' && $this->registry->controller == 'MainController' && $this->registry->action == 'index');
+        return !$bIsUserLogged && $this->registry->module === 'user' &&
+            $this->registry->controller === 'MainController' &&
+            $this->registry->action === 'index';
     }
 
     /**
