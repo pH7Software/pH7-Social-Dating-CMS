@@ -88,8 +88,8 @@ abstract class Controller extends Core
     /**
      * Output Stream Views.
      *
-     * @final
      * @param string $sFile Specify another display file instead of the default layout file. Default NULL
+     *
      * @return void
      */
     final public function output($sFile = null)
@@ -119,8 +119,8 @@ abstract class Controller extends Core
      * Includes a template file in the main layout.
      * Note: For viewing you need to use the \PH7\Framework\Mvc\Controller::output() method.
      *
-     * @final
      * @param string $sFile
+     *
      * @return void
      */
     final public function manualTplInclude($sFile)
