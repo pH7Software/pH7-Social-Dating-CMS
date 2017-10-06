@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
  *
  * 1 = Yes | 0 = No
  */
-return array(
+return [
     'quick_search_profiles' => 1,
     'advanced_search_profiles' => 1,
     'read_mails' => 1,
@@ -41,4 +41,4 @@ return array(
     'games_access' => 1,
     'webcam_access' => 1,
     'member_site_access' => 1,
-);
+];

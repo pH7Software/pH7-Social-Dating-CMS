@@ -18,7 +18,7 @@ defined('PH7') or exit('Restricted access');
  * Default ad sizes.
  */
 
-return array(
+return [
     '728x90',
     '200x200',
     '250x250',
@@ -27,5 +27,4 @@ return array(
     '336x280',
     '120x600',
     '160x600',
-);
-
+];
