@@ -16,8 +16,8 @@ use PH7\Framework\Url\Header;
 
 class EditMembershipFormProcess extends Form
 {
-
-    private $aFields = [
+    /** @var array */
+    private static $aFields = [
         'name' => 'name',
         'description' => 'description',
         'price' => 'price',
@@ -40,21 +40,25 @@ class EditMembershipFormProcess extends Form
         /* Clean UserCoreModel Cache */
         (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
-        Header::redirect(Uri::get('payment','admin','membershiplist'), t('The Membership has been saved successfully!'));
+        Header::redirect(
+            Uri::get('payment','admin','membershiplist'),
+            t('The Membership has been saved successfully!')
+        );
     }
 
     /**
      * Update fields into the DB (the modified ones only).
      *
      * @param PaymentModel $oPayModel
-     * @param integer $iGroupId
+     * @param int $iGroupId
+     *
      * @return void
      */
     private function updateTextFields(PaymentModel $oPayModel, $iGroupId)
     {
         $oMembership = $oPayModel->getMemberships($iGroupId);
 
-        foreach ($this->aFields as $sKey => $sVal) {
+        foreach (self::$aFields as $sKey => $sVal) {
             if (!$this->str->equals($this->httpRequest->post($sKey), $oMembership->$sVal)) {
                 $oPayModel->updateMembershipGroup($sVal, $this->httpRequest->post($sKey), $oMembership->groupId);
             }
