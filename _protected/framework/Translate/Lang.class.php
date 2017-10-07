@@ -14,9 +14,9 @@ namespace PH7\Framework\Translate
     defined('PH7') or exit('Restricted access');
 
     use PH7\Framework\Config\Config;
-     use PH7\Framework\Cookie\Cookie;
-     use PH7\Framework\Navigation\Browser;
-     use PH7\Framework\Registry\Registry;
+    use PH7\Framework\Cookie\Cookie;
+    use PH7\Framework\Navigation\Browser;
+    use PH7\Framework\Registry\Registry;
 
     class Lang
     {
