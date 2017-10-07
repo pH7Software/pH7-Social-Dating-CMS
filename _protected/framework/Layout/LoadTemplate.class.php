@@ -19,6 +19,9 @@ use PH7\Framework\Registry\Registry;
 
 class LoadTemplate
 {
+    const MAX_TPL_FOLDER_LENGTH = 50;
+    const COOKIE_LIFETIME = 172800;
+
     /** @var Config */
     private $oConfig;
 
@@ -43,9 +46,9 @@ class LoadTemplate
         $oCookie = new Cookie;
 
         // Check a template name has been entered and if it exceeds the maximum length (49 characters).
-        if (!empty($_REQUEST['tpl']) && strlen($_REQUEST['tpl']) < 50) {
+        if (!empty($_REQUEST['tpl']) && strlen($_REQUEST['tpl']) < static::MAX_TPL_FOLDER_LENGTH) {
             $this->sUserTpl = $_REQUEST['tpl'];
-            $oCookie->set('site_tpl', $this->sUserTpl, 60 * 60 * 48);
+            $oCookie->set('site_tpl', $this->sUserTpl, static::COOKIE_LIFETIME);
         } elseif ($oCookie->exists('site_tpl')) {
             $this->sUserTpl = $oCookie->get('site_tpl');
         }

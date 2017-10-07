@@ -21,22 +21,34 @@ namespace PH7\Framework\Translate
  class Lang
  {
      const COOKIE_NAME = 'pHSLang';
+     const LANG_FOLDER_LENGTH = 5;
+     const COOKIE_LIFETIME = 172800;
 
-     private $_oConfig, $_sDefaultLang, $_sUserLang, $_sLangName;
+     /** @var Config */
+     private $oConfig;
+
+     /** @var string */
+     private $sDefaultLang;
+
+     /** @var string */
+     private $sUserLang;
+
+     /** @var string */
+     private $sLangName;
 
      public function __construct()
      {
-         $this->_oConfig = Config::getInstance();
+         $this->oConfig = Config::getInstance();
          $oCookie = new Cookie;
 
-         // Check a template name has been entered and if it meets the required length.
-         if (!empty($_REQUEST['l']) && strlen($_REQUEST['l']) == 5) {
-             $this->_sUserLang = $_REQUEST['l'];
-             $oCookie->set(static::COOKIE_NAME, $this->_sUserLang, 60*60*48);
+         // Check a template name has been specify and if it meets the length requirement
+         if (!empty($_REQUEST['l']) && strlen($_REQUEST['l']) === static::LANG_FOLDER_LENGTH) {
+             $this->sUserLang = $_REQUEST['l'];
+             $oCookie->set(static::COOKIE_NAME, $this->sUserLang, static::COOKIE_LIFETIME);
          } elseif ($oCookie->exists(static::COOKIE_NAME)) {
-             $this->_sUserLang = $oCookie->get(static::COOKIE_NAME);
+             $this->sUserLang = $oCookie->get(static::COOKIE_NAME);
          } else {
-             $this->_sUserLang = (new Browser)->getLanguage();
+             $this->sUserLang = (new Browser)->getLanguage();
          }
 
          unset($oCookie);
