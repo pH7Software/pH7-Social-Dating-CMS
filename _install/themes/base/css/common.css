@@ -176,7 +176,6 @@ footer {
     margin-right: 12px;
     line-height: 1;
     border: 1px solid #ddd;
-    border-radius: 4px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
@@ -189,4 +188,8 @@ footer {
     max-width: 100%;
     margin-right: auto;
     margin-left: auto;
+}
+
+.img_thumb, .img_thumb > img {
+    border-radius: 4px;
 }
