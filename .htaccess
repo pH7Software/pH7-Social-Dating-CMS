@@ -46,7 +46,7 @@ ServerSignature Off
 </FilesMatch>
 
 # Leave open the humans.txt and robots.txt file
-<FilesMatch humans.txt|robots.txt>
+<FilesMatch "humans\.txt|robots\.txt">
     Allow from all
 </FilesMatch>
 
