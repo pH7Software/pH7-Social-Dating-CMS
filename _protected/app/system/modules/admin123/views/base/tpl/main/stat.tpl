@@ -6,30 +6,29 @@
     function showUserChart() {
         $('#user_chart').html('');
 
-        oDate = new Date;
+        var oDate = new Date;
+        var aDateOptions = {
+           day: "numeric", month: "short", year: "numeric"
+        };
 
         oDate.setFullYear(oDate.getFullYear());
-        var sYear = oDate.toLocaleDateString();
+        var sYear = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', aDateOptions);
 
         oDate.setMonth(oDate.getMonth()-1);
-        var sMonth = oDate.toLocaleDateString();
+        var sMonth = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', aDateOptions);
 
         oDate.setDate(oDate.getDay()-7);
-        var sWeek = oDate.toLocaleDateString();
+        var sWeek = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', aDateOptions);
 
         oDate.setDate(oDate.getDay());
-        var sDay = oDate.toLocaleDateString();
-
-        oDate.setTime(Date.parse('{since_date}'));
-        var sDateSince = oDate.toLocaleDateString();
+        var sDay = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', aDateOptions);
 
         var aData = google.visualization.arrayToDataTable([
           ['{lang 'Time'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couples'}'],
           [sDay, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}],
           [sWeek, {week_total_members}, {week_total_male_members}, {week_total_female_members}, {week_total_couple_members}],
           [sMonth, {month_total_members}, {month_total_male_members}, {month_total_female_members}, {month_total_couple_members}],
-          [sYear, {year_total_members}, {year_total_male_members}, {year_total_female_members}, {year_total_couple_members}],
-          [sDateSince, {total_members}, {total_male_members}, {total_female_members}, {total_couple_members}]
+          [sYear, {year_total_members}, {year_total_male_members}, {year_total_female_members}, {year_total_couple_members}]
         ]);
 
         var aOptions = {
