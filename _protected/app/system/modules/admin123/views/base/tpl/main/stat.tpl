@@ -7,21 +7,21 @@
         $('#user_chart').html('');
 
         var oDate = new Date;
-        var aDateOptions = {
+        var oDateOptions = {
            day: "numeric", month: "short", year: "numeric"
         };
 
         oDate.setFullYear(oDate.getFullYear());
-        var sYear = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', aDateOptions);
+        var sYear = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', oDateOptions);
 
         oDate.setMonth(oDate.getMonth()-1);
-        var sMonth = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', aDateOptions);
+        var sMonth = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', oDateOptions);
 
         oDate.setDate(oDate.getDay()-7);
-        var sWeek = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', aDateOptions);
+        var sWeek = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', oDateOptions);
 
         oDate.setDate(oDate.getDay());
-        var sDay = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', aDateOptions);
+        var sDay = oDate.toLocaleDateString('{% $config->values['language']['lang'] %}', oDateOptions);
 
         var aData = google.visualization.arrayToDataTable([
           ['{lang 'Time'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couples'}'],
