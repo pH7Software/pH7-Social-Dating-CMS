@@ -24,6 +24,6 @@
     </div>
 
     <p class="red">
-        {lang 'Note: If all folders are on the same hard disk, you will have the same size'}
+        {lang 'Note: If all folders are on the same hard disk, you will have the same size everywhere.'}
     </p>
 </div>
