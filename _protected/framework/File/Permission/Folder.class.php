@@ -9,15 +9,20 @@
  */
 
 namespace PH7\Framework\File\Permission;
+
 defined('PH7') or exit('Restricted access');
 
 class Folder
 {
-
+    /**
+     * @param string $sFolder
+     *
+     * @return bool
+     */
     public function canReadWrite($sFolder)
     {
         clearstatcache();
-        return (is_folder($sFolder) && is_readable($sFolder) && is_writable($sFolder));
-    }
 
+        return is_folder($sFolder) && is_readable($sFolder) && is_writable($sFolder);
+    }
 }

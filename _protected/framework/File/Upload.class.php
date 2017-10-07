@@ -45,11 +45,10 @@ abstract class Upload
     /**
      * Check the file size.
      *
-     * @return boolean
+     * @return bool
      */
     protected function checkSize()
     {
-        return ($this->iFileSize < $this->getMaxSize());
+        return $this->iFileSize < $this->getMaxSize();
     }
-
 }
