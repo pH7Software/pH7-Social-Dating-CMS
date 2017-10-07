@@ -254,7 +254,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Messages'}</td>
+            <td>{lang 'Private Messages'}</td>
             <td>{today_total_mails}</td>
             <td>{week_total_mails}</td>
             <td>{month_total_mails}</td>
