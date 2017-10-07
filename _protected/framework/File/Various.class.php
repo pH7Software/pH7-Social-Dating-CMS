@@ -26,9 +26,9 @@ class Various
     /**
      * Convert bytes to human readable format.
      *
-     * @static
-     * @param integer $iBytes The size in bytes.
-     * @param integer $iPrecision Default 2
+     * @param int $iBytes The size in bytes.
+     * @param int $iPrecision Default 2
+     *
      * @return string The size.
      */
     public static function bytesToSize($iBytes, $iPrecision = 2)

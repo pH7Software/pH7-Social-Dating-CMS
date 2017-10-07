@@ -24,7 +24,7 @@ abstract class Upload
     /**
      * Check if everything is correct.
      *
-     * @return boolean
+     * @return bool
      */
     public function check()
     {
