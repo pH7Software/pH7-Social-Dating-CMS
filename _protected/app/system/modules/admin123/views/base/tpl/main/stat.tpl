@@ -56,7 +56,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'All Members Logins'}</td>
+            <td>{lang 'All Member Logins'}</td>
             <td>{today_login_members}</td>
             <td>{week_login_members}</td>
             <td>{month_login_members}</td>
@@ -65,7 +65,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Men Members Logins'}</td>
+            <td>{lang 'Men Member Logins'}</td>
             <td>{today_login_male_members}</td>
             <td>{week_login_male_members}</td>
             <td>{month_login_male_members}</td>
@@ -74,7 +74,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Women Members Logins'}</td>
+            <td>{lang 'Women Member Logins'}</td>
             <td>{today_login_female_members}</td>
             <td>{week_login_female_members}</td>
             <td>{month_login_female_members}</td>
@@ -83,7 +83,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Couple Members Logins'}</td>
+            <td>{lang 'Couple Member Logins'}</td>
             <td>{today_login_couple_members}</td>
             <td>{week_login_couple_members}</td>
             <td>{month_login_couple_members}</td>
@@ -92,7 +92,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'All Affiliates Logins'}</td>
+            <td>{lang 'All Affiliate Logins'}</td>
             <td>{today_login_affiliate}</td>
             <td>{week_login_affiliate}</td>
             <td>{month_login_affiliate}</td>
@@ -101,7 +101,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Men Affiliates Logins'}</td>
+            <td>{lang 'Men Affiliate Logins'}</td>
             <td>{today_login_male_affiliate}</td>
             <td>{week_login_male_affiliate}</td>
             <td>{month_login_male_affiliate}</td>
@@ -110,7 +110,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Women Affiliates Logins'}</td>
+            <td>{lang 'Women Affiliate Logins'}</td>
             <td>{today_login_female_affiliate}</td>
             <td>{week_login_female_affiliate}</td>
             <td>{month_login_female_affiliate}</td>
@@ -119,7 +119,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'All Admins Logins'}</td>
+            <td>{lang 'All Admin Logins'}</td>
             <td>{today_login_admins}</td>
             <td>{week_login_admins}</td>
             <td>{month_login_admins}</td>
@@ -128,7 +128,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Men Admins Logins'}</td>
+            <td>{lang 'Men Admin Logins'}</td>
             <td>{today_login_male_admins}</td>
             <td>{week_login_male_admins}</td>
             <td>{month_login_male_admins}</td>
@@ -137,7 +137,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Women Admins Logins'}</td>
+            <td>{lang 'Women Admin Logins'}</td>
             <td>{today_login_female_admins}</td>
             <td>{week_login_female_admins}</td>
             <td>{month_login_female_admins}</td>
@@ -146,7 +146,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'All Members Registrations'}</td>
+            <td>{lang 'All Member Registrations'}</td>
             <td>{today_total_members}</td>
             <td>{week_total_members}</td>
             <td>{month_total_members}</td>
@@ -155,7 +155,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Men Members Registrations'}</td>
+            <td>{lang 'Men Member Registrations'}</td>
             <td>{today_total_male_members}</td>
             <td>{week_total_male_members}</td>
             <td>{month_total_male_members}</td>
@@ -164,7 +164,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Women Members Registrations'}</td>
+            <td>{lang 'Women Member Registrations'}</td>
             <td>{today_total_female_members}</td>
             <td>{week_total_female_members}</td>
             <td>{month_total_female_members}</td>
@@ -173,7 +173,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Couple Members Registrations'}</td>
+            <td>{lang 'Couple Member Registrations'}</td>
             <td>{today_total_couple_members}</td>
             <td>{week_total_couple_members}</td>
             <td>{month_total_couple_members}</td>
@@ -182,7 +182,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'All Affiliates Registrations'}</td>
+            <td>{lang 'All Affiliate Registrations'}</td>
             <td>{today_total_affiliate}</td>
             <td>{week_total_affiliate}</td>
             <td>{month_total_affiliate}</td>
@@ -191,7 +191,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Men Affiliates Registrations'}</td>
+            <td>{lang 'Men Affiliate Registrations'}</td>
             <td>{today_total_male_affiliate}</td>
             <td>{week_total_male_affiliate}</td>
             <td>{month_total_male_affiliate}</td>
@@ -200,7 +200,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Women Affiliates Registrations'}</td>
+            <td>{lang 'Women Affiliate Registrations'}</td>
             <td>{today_total_female_affiliate}</td>
             <td>{week_total_female_affiliate}</td>
             <td>{month_total_female_affiliate}</td>
@@ -209,7 +209,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'All Admins Registrations'}</td>
+            <td>{lang 'All Admin Registrations'}</td>
             <td>{today_total_admins}</td>
             <td>{week_total_admins}</td>
             <td>{month_total_admins}</td>
@@ -218,7 +218,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Men Admins Registrations'}</td>
+            <td>{lang 'Men Admin Registrations'}</td>
             <td>{today_total_male_admins}</td>
             <td>{week_total_male_admins}</td>
             <td>{month_total_male_admins}</td>
@@ -227,7 +227,7 @@
         </tr>
 
         <tr>
-            <td>{lang 'Women Admins Registrations'}</td>
+            <td>{lang 'Women Admin Registrations'}</td>
             <td>{today_total_female_admins}</td>
             <td>{week_total_female_admins}</td>
             <td>{month_total_female_admins}</td>
@@ -272,7 +272,7 @@
         </tr>
 
         <tr>
-          <td>{lang 'Picture Comments'}</td>
+          <td>{lang 'Photo Comments'}</td>
           <td>{today_total_picture_comments}</td>
           <td>{week_total_picture_comments}</td>
           <td>{month_total_picture_comments}</td>
