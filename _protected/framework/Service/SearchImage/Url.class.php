@@ -30,7 +30,7 @@ class Url
     }
 
     /**
-     * @param string
+     * @return string
      */
     public function getValue()
     {
