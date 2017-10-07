@@ -9,7 +9,10 @@
  */
 
 namespace PH7\Framework\File;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 abstract class Upload
 {
@@ -31,7 +34,9 @@ abstract class Upload
     /**
      * Get maximum file size.
      *
-     * @return integer Bytes.
+     * @return int Bytes.
+     *
+     * @throws PH7InvalidArgumentException
      */
     public function getMaxSize()
     {

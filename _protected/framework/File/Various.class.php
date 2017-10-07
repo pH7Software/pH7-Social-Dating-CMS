@@ -9,15 +9,15 @@
  */
 
 namespace PH7\Framework\File;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 
 class Various
 {
-
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
-     *
-     * @access private
      */
     private function __construct()
     {
@@ -46,10 +46,11 @@ class Various
     /**
      * Convert the string size to bytes.
      *
-     * @static
      * @param string The size (e.g.,10K, 10M, 10G).
+     *
      * @return string The integer bytes.
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message.
+     *
+     * @throws PH7InvalidArgumentException Explanatory message.
      */
     public static function sizeToBytes($sSize)
     {
@@ -73,10 +74,9 @@ class Various
                 break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Bad suffix: \'' . $cSuffix . '\'! Choose between: K, M, G');
+                throw new PH7InvalidArgumentException('Bad suffix: \'' . $cSuffix . '\'! Choose between: K, M, G');
         }
 
         return $iSize;
     }
-
 }
