@@ -17,17 +17,19 @@ interface Controllable
     /**
      * Output Stream Views.
      *
+     * @param string|null $sFile Specify another display file instead of the default layout file. Default NULL
+     *
      * @return void
      */
-    public function output();
+    public function output($sFile);
 
     /**
-     * Not Found Error Page.
+     * Set a Not Found Error Message with HTTP 404 Code Status.
      *
      * @param string $sMsg Default is empty ('')
-     * @param bool $b404Status Default is "true"
+     * @param bool $b404Status For the Ajax blocks and others, we cannot put the HTTP 404 error code, so the attribute must be set to FALSE. Default TRUE
      *
-     * @return void
+     * @return void Quits the page with the exit() function
      */
     public function displayPageNotFound($sMsg = '', $b404Status = true);
 }

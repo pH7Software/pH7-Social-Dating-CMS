@@ -58,11 +58,7 @@ class Config implements Configurable
     }
 
     /**
-     * Load ini file.
-     *
-     * @param string $sFile
-     *
-     * @return boolean Returne FALSE if the file doesn't exist, TRUE otherwise.
+     * {@inheritdoc}
      */
     public function load($sFile)
     {
@@ -74,11 +70,7 @@ class Config implements Configurable
     }
 
     /**
-     * Get a config option by key.
-     *
-     * @param string $sKey The configuration setting key.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getValue($sKey)
     {
@@ -86,12 +78,7 @@ class Config implements Configurable
     }
 
     /**
-     * Set dynamically a value to config data.
-     *
-     * @param string $sKey A unique config key.
-     * @param string $sValue The value to add.
-     *
-     * @return void
+     * {@inheritdoc}
      *
      * @throws PH7InvalidArgumentException
      */

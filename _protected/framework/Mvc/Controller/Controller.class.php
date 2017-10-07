@@ -86,11 +86,7 @@ abstract class Controller extends Core
     }
 
     /**
-     * Output Stream Views.
-     *
-     * @param string $sFile Specify another display file instead of the default layout file. Default NULL
-     *
-     * @return void
+     * {@inheritdoc}
      */
     final public function output($sFile = null)
     {
@@ -129,12 +125,7 @@ abstract class Controller extends Core
     }
 
     /**
-     * Set a Not Found Error Message with HTTP 404 Code Status.
-     *
-     * @param string $sMsg Default is empty ('')
-     * @param boolean $b404Status For the Ajax blocks and others, we cannot put the HTTP 404 error code, so the attribute must be set to FALSE. Default TRUE
-     *
-     * @return void Quits the page with the exit() function
+     * {@inheritdoc}
      */
     public function displayPageNotFound($sMsg = '', $b404Status = true)
     {
