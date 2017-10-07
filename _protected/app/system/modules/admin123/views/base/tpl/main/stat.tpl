@@ -24,7 +24,7 @@
         var sDateSince = oDate.toLocaleDateString();
 
         var aData = google.visualization.arrayToDataTable([
-          ['{lang 'Days'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couples'}'],
+          ['{lang 'Time'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couples'}'],
           [sDay, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}],
           [sWeek, {week_total_members}, {week_total_male_members}, {week_total_female_members}, {week_total_couple_members}],
           [sMonth, {month_total_members}, {month_total_male_members}, {month_total_female_members}, {month_total_couple_members}],
