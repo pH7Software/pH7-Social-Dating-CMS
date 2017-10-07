@@ -6,33 +6,34 @@
     function showUserChart() {
         $('#user_chart').html('');
 
-        oD = new Date;
+        oDate = new Date;
 
-        oD.setFullYear(oD.getFullYear());
-        var sYear = oD.toLocaleDateString();
+        oDate.setFullYear(oDate.getFullYear());
+        var sYear = oDate.toLocaleDateString();
 
-        oD.setMonth(oD.getMonth()-1);
-        var sMonth = oD.toLocaleDateString();
+        oDate.setMonth(oDate.getMonth()-1);
+        var sMonth = oDate.toLocaleDateString();
 
-        oD.setDate(oD.getDay()-7);
-        var sWeek = oD.toLocaleDateString();
+        oDate.setDate(oDate.getDay()-7);
+        var sWeek = oDate.toLocaleDateString();
 
-        var sDay = oD.toLocaleDateString();
+        oDate.setDate(oDate.getDay());
+        var sDay = oDate.toLocaleDateString();
 
-        oD.setTime(Date.parse('{since_date}'));
-        var sDateSince = oD.toLocaleDateString();
+        oDate.setTime(Date.parse('{since_date}'));
+        var sDateSince = oDate.toLocaleDateString();
 
         var aData = google.visualization.arrayToDataTable([
-          ['{lang 'Days'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couple'}'],
+          ['{lang 'Days'}', '{lang 'All'}', '{lang 'Man'}', '{lang 'Women'}', '{lang 'Couples'}'],
           [sDay, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}],
           [sWeek, {week_total_members}, {week_total_male_members}, {week_total_female_members}, {week_total_couple_members}],
           [sMonth, {month_total_members}, {month_total_male_members}, {month_total_female_members}, {month_total_couple_members}],
           [sYear, {year_total_members}, {year_total_male_members}, {year_total_female_members}, {year_total_couple_members}],
-          [sDateSince, {today_total_members}, {today_total_male_members}, {today_total_female_members}, {today_total_couple_members}]
+          [sDateSince, {total_members}, {total_male_members}, {total_female_members}, {total_couple_members}]
         ]);
 
         var aOptions = {
-          title: '{lang 'Users Statistics'}'
+          title: '{lang 'User Statistics'}'
         };
 
         new google.visualization.LineChart($('#user_chart')[0]).draw(aData, aOptions);
