@@ -63,7 +63,7 @@ namespace PH7\Framework\Translate
       */
      public function setDefaultLang($sNewDefLang)
      {
-         $this->_sDefaultLang = $sNewDefLang;
+         $this->sDefaultLang = $sNewDefLang;
 
          return $this;
      }
@@ -77,7 +77,7 @@ namespace PH7\Framework\Translate
       */
      public function setUserLang($sNewUserLang)
      {
-         $this->_sUserLang = $sNewUserLang;
+         $this->sUserLang = $sNewUserLang;
 
          return $this;
      }
@@ -89,7 +89,7 @@ namespace PH7\Framework\Translate
       */
      public function getDefaultLang()
      {
-         return $this->_sDefaultLang;
+         return $this->sDefaultLang;
      }
 
      /**
@@ -99,7 +99,7 @@ namespace PH7\Framework\Translate
       */
      public function getLang()
      {
-         return $this->_sLangName;
+         return $this->sLangName;
      }
 
      /**
@@ -151,23 +151,23 @@ namespace PH7\Framework\Translate
       */
      public function init()
      {
-         if (!empty($this->_sUserLang) && $this->_oConfig->load(PH7_PATH_APP_LANG . $this->_sUserLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . $this->_sUserLang . '/language.php' ))
+         if (!empty($this->sUserLang) && $this->oConfig->load(PH7_PATH_APP_LANG . $this->sUserLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . $this->sUserLang . '/language.php' ))
          {
-             $this->_sLangName = $this->_sUserLang;
-             include PH7_PATH_APP_LANG . $this->_sUserLang . '/language.php';
-             date_default_timezone_set($this->_oConfig->values['language.application']['timezone']);
+             $this->sLangName = $this->sUserLang;
+             include PH7_PATH_APP_LANG . $this->sUserLang . '/language.php';
+             date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
          }
-         elseif ($this->_oConfig->load(PH7_PATH_APP_LANG . $this->_sDefaultLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . $this->_sDefaultLang . '/language.php' ))
+         elseif ($this->oConfig->load(PH7_PATH_APP_LANG . $this->sDefaultLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . $this->sDefaultLang . '/language.php' ))
          {
-             $this->_sLangName = $this->_sDefaultLang;
-             include PH7_PATH_APP_LANG . $this->_sDefaultLang . '/language.php';
-             date_default_timezone_set($this->_oConfig->values['language.application']['timezone']);
+             $this->sLangName = $this->sDefaultLang;
+             include PH7_PATH_APP_LANG . $this->sDefaultLang . '/language.php';
+             date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
          }
-         elseif ($this->_oConfig->load(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php' ))
+         elseif ($this->oConfig->load(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) && is_file( PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php' ))
          {
-             $this->_sLangName = PH7_DEFAULT_LANG;
+             $this->sLangName = PH7_DEFAULT_LANG;
              include PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php';
-             date_default_timezone_set($this->_oConfig->values['language.application']['timezone']);
+             date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
          }
          else
          {
@@ -175,7 +175,7 @@ namespace PH7\Framework\Translate
          }
 
          // Set the encoding for the specific language set.
-         $this->_setEncoding();
+         $this->setEncoding();
 
          return $this;
      }
@@ -185,10 +185,10 @@ namespace PH7\Framework\Translate
      *
      * @return void
      */
-    private function _setEncoding()
+    private function setEncoding()
     {
         if (!defined('PH7_ENCODING')) {
-            define('PH7_ENCODING', $this->_oConfig->values['language']['charset']);
+            define('PH7_ENCODING', $this->oConfig->values['language']['charset']);
         }
 
         mb_internal_encoding(PH7_ENCODING);
