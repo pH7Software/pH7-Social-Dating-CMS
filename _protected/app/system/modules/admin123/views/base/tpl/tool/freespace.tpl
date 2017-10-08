@@ -9,8 +9,8 @@
                 $('#free_space_chart').html('');
 
                 var oDataTable = new google.visualization.DataTable();
-                oDataTable.addColumn('string', 'Free Space');
-                oDataTable.addColumn('number', 'Size');
+                oDataTable.addColumn('string', '{lang 'Free Space'}');
+                oDataTable.addColumn('number', '{lang 'Size'}');
                 var aData = [
                     {each $aData in $aChartData}
                         ["{% $aData['title'] %}", {v:{% $aData['size'] %}, f:"{% Framework\File\Various::bytesToSize($aData['size']) %}"}],

@@ -17,8 +17,8 @@
                 $('#cache_chart').html('');
 
                 var oDataTable = new google.visualization.DataTable();
-                oDataTable.addColumn('string', 'Cache');
-                oDataTable.addColumn('number', 'Size');
+                oDataTable.addColumn('string', '{lang 'Cache'}');
+                oDataTable.addColumn('number', '{lang 'Size'}');
                 var aData = [
                     {each $aData in $aChartData}
                         ["{% $aData['title'] %}", {v:{% $aData['size'] %}, f:"{% Framework\File\Various::bytesToSize($aData['size']) %}"}],
