@@ -48,10 +48,11 @@ class MainController extends Controller
         if (!(new UserCoreModel)->checkHashValidation($sEmail, $sHash, $sTable)) {
             Header::redirect($this->registry->site_url, t('Oops! Email or hash is invalid.'), Design::ERROR_TYPE);
         } else {
-            if (!$this->sendMail($sTable, $sEmail))
+            if (!$this->sendMail($sTable, $sEmail)) {
                 Header::redirect($this->registry->site_url, Form::errorSendingEmail(), Design::ERROR_TYPE);
-            else
+            } else {
                 Header::redirect($this->registry->site_url, t('Your new password has been emailed to you.'), Design::SUCCESS_TYPE);
+            }
         }
     }
 
@@ -88,15 +89,16 @@ class MainController extends Controller
 
     public function account()
     {
-        if (UserCore::auth())
+        if (UserCore::auth()) {
             $sUrl = Uri::get('user', 'account', 'index');
-        elseif (AffiliateCore::auth())
+        } elseif (AffiliateCore::auth()) {
             $sUrl = Uri::get('affiliate', 'account', 'index');
-        elseif (AdminCore::auth())
+        } elseif (AdminCore::auth()) {
             $sUrl = Uri::get(PH7_ADMIN_MOD, 'main', 'index');
-        else
+        } else {
             $sUrl = $this->registry->site_url;
-        Header::redirect($sUrl);
+        }
 
+        Header::redirect($sUrl);
     }
 }

@@ -44,10 +44,8 @@ class SitemapController extends MainController
         $this->view->current_date = DateFormat::getSitemap(); // Date format for sitemap
 
         // XML router
-        if (!empty($sAction))
-        {
-            switch ($sAction)
-            {
+        if (!empty($sAction)) {
+            switch ($sAction) {
                 case 'main':
                 case 'user':
                 case 'blog':
@@ -75,13 +73,10 @@ class SitemapController extends MainController
                 default:
                     $this->displayPageNotFound(t('Not Found Site Map!'));
             }
-        }
-        else
-        {
+        } else {
             $this->sAction = 'home';
         }
 
         $this->xmlOutput();
     }
-
 }

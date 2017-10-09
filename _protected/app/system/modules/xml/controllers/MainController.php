@@ -54,8 +54,7 @@ class MainController extends Controller
         $this->view->games = $this->oDataModel->getGames();
 
         // For the Comments
-        switch ($sAction)
-        {
+        switch ($sAction) {
             case 'comment-profile':
                 $this->view->table = 'profile';
                 $this->view->comments = (!empty($mParam) && is_numeric($mParam)) ? $this->oDataModel->getRecipientCommentsProfiles($mParam) : $this->view->comments = $this->oDataModel->getCommentsProfiles();
@@ -86,7 +85,6 @@ class MainController extends Controller
                 $this->view->comments = (!empty($mParam) && is_numeric($mParam)) ? $this->oDataModel->getRecipientCommentsGames($mParam) : $this->view->comments = $this->oDataModel->getCommentsGames();
             break;
         }
-
     }
 
     protected function xmlOutput()
