@@ -12,8 +12,9 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 {
-
-    const TB_PICTURE = 'Pictures', TB_VIDEO = 'Videos', MAX_ITEMS = 1000;
+    const TB_PICTURE = 'Pictures';
+    const TB_VIDEO = 'Videos';
+    const MAX_ITEMS = 1000;
 
     public function getPicsVids($sTable, $sOrder, $iOffset, $iLimit)
     {
@@ -159,5 +160,4 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         return (new GameCoreModel)->get(null, null, 0, static::MAX_ITEMS, SearchCoreModel::ADDED_DATE);
     }
-
 }
