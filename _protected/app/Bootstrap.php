@@ -105,20 +105,17 @@ class Bootstrap
 
             new Server; // Start Server
 
-            Registry::getInstance()->start_time = microtime(true);
+            $this->startPageBenchmark();
 
             /**
              * Initialize the FrontController, we are asking the front controller to process the HTTP request
              */
             FrontController::getInstance()->runRouter();
-        } # \PH7\Framework\Error\CException\UserException
-        catch (Except\UserException $oE) {
+        } catch (Except\UserException $oE) {
             echo $oE->getMessage(); // Simple User Error with Exception
-        } # \PH7\Framework\Error\CException\PH7Exception
-        catch (Except\PH7Exception $oE) {
+        } catch (Except\PH7Exception $oE) {
             Except\PH7Exception::launch($oE);
-        } # \Exception and other...
-        catch (\Exception $oE) {
+        } catch (\Exception $oE) {
             Except\PH7Exception::launch($oE);
         } finally {
             if (session_status() === PHP_SESSION_ACTIVE) {
