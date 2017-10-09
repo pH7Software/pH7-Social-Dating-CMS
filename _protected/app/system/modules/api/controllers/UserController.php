@@ -11,12 +11,19 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Model\Security as SecurityModel;
 use PH7\Framework\Security\Validate\Validate;
 
 class UserController extends MainController
 {
+    /** @var UserCore */
+    protected $oUser;
 
-    protected $oUser, $oUserModel, $oValidate;
+    /** @var UserCoreModel */
+    protected $oUserModel;
+
+    /** @var Validate */
+    protected $oValidate;
 
     public function __construct()
     {

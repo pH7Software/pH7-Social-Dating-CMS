@@ -14,9 +14,9 @@ use PH7\Framework\Http\Rest\Rest;
 
 class MainController extends Controller
 {
-
     use Framework\Api\Api; // Import the Api Trait
 
+    /** @var Rest */
     protected $oRest;
 
     public function __construct()
