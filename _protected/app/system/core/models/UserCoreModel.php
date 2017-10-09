@@ -1051,7 +1051,7 @@ class UserCoreModel extends Model
     /**
      * Get users from the location data.
      *
-     * @param string $sCountry
+     * @param string $sCountryCode The country code. e.g. US, CA, FR, ES, BE, NL
      * @param string $sCity
      * @param bool $bCount
      * @param string $sOrder
@@ -1060,7 +1060,7 @@ class UserCoreModel extends Model
      *
      * @return stdClass|int Object with the users list returned or integer for the total number users returned.
      */
-    public function getGeoProfiles($sCountry, $sCity, $bCount, $sOrder, $iOffset, $iLimit)
+    public function getGeoProfiles($sCountryCode, $sCity, $bCount, $sOrder, $iOffset, $iLimit)
     {
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
@@ -1079,7 +1079,7 @@ class UserCoreModel extends Model
             AND (firstName IS NOT NULL) AND (sex IS NOT NULL) AND (matchSex IS NOT NULL) AND (country IS NOT NULL)
             AND (city IS NOT NULL) AND (groupId <> 1) AND (groupId <> 9) AND (ban = 0)' . $sOrder . $sSqlLimit
         );
-        $rStmt->bindParam(':country', $sCountry, \PDO::PARAM_STR, 2);
+        $rStmt->bindParam(':country', $sCountryCode, \PDO::PARAM_STR, 2);
 
         if (!empty($sCity)) {
             $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR);
