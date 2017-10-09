@@ -62,7 +62,7 @@ abstract class Api
      */
     public function getTitle()
     {
-        return (!empty($this->oData->title) ? $this->oStr->escape($this->oData->title, true) : false);
+        return !empty($this->oData->title) ? $this->oStr->escape($this->oData->title, true) : false;
     }
 
     /**
@@ -74,7 +74,7 @@ abstract class Api
      */
     public function getDescription()
     {
-        return (!empty($this->oData->description) ? $this->oStr->escape($this->oData->description, true) : false);
+        return !empty($this->oData->description) ? $this->oStr->escape($this->oData->description, true) : false;
     }
 
     /**
@@ -86,7 +86,7 @@ abstract class Api
      */
     public function getDuration()
     {
-        return (!empty($this->oData->duration) ? (int)$this->oData->duration : false);
+        return !empty($this->oData->duration) ? (int)$this->oData->duration : false;
     }
 
     /**

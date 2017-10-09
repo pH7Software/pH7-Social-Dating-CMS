@@ -62,7 +62,7 @@ class Metacafe extends Api implements IApi
             $sTitle = $oElement->nodeValue;
         }
 
-        return (!empty($sTitle) ? $this->oStr->escape($sTitle, true) : false);
+        return !empty($sTitle) ? $this->oStr->escape($sTitle, true) : false;
     }
 
     /**
@@ -80,7 +80,7 @@ class Metacafe extends Api implements IApi
             $sDescription = $oElement->nodeValue;
         }
 
-        return (!empty($sDescription) ? $this->oStr->escape($sDescription, true) : false);
+        return !empty($sDescription) ? $this->oStr->escape($sDescription, true) : false;
     }
 
     /**
@@ -98,7 +98,7 @@ class Metacafe extends Api implements IApi
             $iDuration = $oElement->getAttribute('duration');
         }
 
-        return (!empty($iDuration) ? (int)$iDuration : false);
+        return !empty($iDuration) ? (int)$iDuration : false;
     }
 
     /**
