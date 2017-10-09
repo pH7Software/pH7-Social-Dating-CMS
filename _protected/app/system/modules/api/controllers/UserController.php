@@ -39,7 +39,7 @@ class UserController extends MainController
         if ($this->oRest->getRequestMethod() != 'POST') {
             $this->oRest->response('', 406);
         } else {
-            $aReqs = $this->oRest->getRequest();
+            $aRequests = $this->oRest->getRequest();
 
             // Set the User Setting variables
             $iMinUsr = DbConfig::getSetting('minUsernameLength');
@@ -49,44 +49,41 @@ class UserController extends MainController
             $iMinAge = DbConfig::getSetting('minAgeRegistration');
             $iMaxAge = DbConfig::getSetting('maxAgeRegistration');
 
-            if (empty($aReqs['email']) || empty($aReqs['username']) || empty($aReqs['password']) || empty($aReqs['first_name']) ||
-            empty($aReqs['last_name']) || empty($aReqs['sex']) || empty($aReqs['match_sex']) || empty($aReqs['birth_date']) || empty($aReqs['country']) ||
-            empty($aReqs['city']) || empty($aReqs['state']) || empty($aReqs['zip_code']) || empty($aReqs['description']))
-            {
-                $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('One or several profile fields are empty.'))), 400);
-            }
-            elseif (!$this->oValidate->email($aReqs['email']))
-            {
-                $this->oRest->response($this->set(array('status' => 'form_error', 'msg' => t('The Email is not valid.'))), 400);
-            }
-            elseif (!$this->oValidate->username($aReqs['username'], $iMinUsr, $iMaxUsr))
-            {
-                $this->oRest->response($this->set(array('status' => 'form_error', 'msg' => t('The Username must contain from %0% to %1% characters, the Username is not available or it is already used by other member.', $iMinUsr, $iMaxUsr))), 400);
-            }
-            elseif (!$this->oValidate->password($aReqs['password'], $iMinPwd, $iMaxPwd))
-            {
-                $this->oRest->response($this->set(array('status' => 'form_error', 'msg' => t('The Password must contain from %0% to %1% characters.', $iMinPwd, $iMaxPwd))), 400);
-            }
-            elseif (!$this->oValidate->birthDate($aReqs['birth_date'], $iMinAge, $iMaxAge))
-            {
-                $this->oRest->response($this->set(array('status' => 'form_error', 'msg' => t('You must be %0% to %1% years to register on the site.', $iMinAge, $iMinAge))), 400);
-            }
-            else
-            {
+            if (
+                empty($aRequests['email']) || empty($aRequests['username']) || empty($aRequests['password']) ||
+                empty($aRequests['first_name']) || empty($aRequests['last_name']) || empty($aRequests['sex']) ||
+                empty($aRequests['match_sex']) || empty($aRequests['birth_date']) || empty($aRequests['country']) ||
+                empty($aRequests['city']) || empty($aRequests['state']) || empty($aRequests['zip_code']) || empty($aRequests['description'])
+            ) {
+                $aResults = ['status' => 'failed', 'msg' => t('One or several profile fields are empty.')];
+                $this->oRest->response($this->set($aResults), 400);
+            } elseif (!$this->oValidate->email($aRequests['email'])) {
+                $aResults = ['status' => 'form_error', 'msg' => t('The Email is not valid.')];
+                $this->oRest->response($this->set($aResults), 400);
+            } elseif (!$this->oValidate->username($aRequests['username'], $iMinUsr, $iMaxUsr)) {
+                $aResults = ['status' => 'form_error', 'msg' => t('The Username must contain from %0% to %1% characters, the Username is not available or it is already used by other member.', $iMinUsr, $iMaxUsr)];
+                $this->oRest->response($this->set($aResults), 400);
+            } elseif (!$this->oValidate->password($aRequests['password'], $iMinPwd, $iMaxPwd)) {
+                $aResults = ['status' => 'form_error', 'msg' => t('The Password must contain from %0% to %1% characters.', $iMinPwd, $iMaxPwd)];
+                $this->oRest->response($this->set($aResults), 400);
+            } elseif (!$this->oValidate->birthDate($aRequests['birth_date'], $iMinAge, $iMaxAge)) {
+                $aResults = ['status' => 'form_error', 'msg' => t('You must be %0% to %1% years to register on the site.', $iMinAge, $iMinAge)];
+                $this->oRest->response($this->set($aResults), 400);
+            } else {
                 $aData = [
-                    'email' => $aReqs['email'],
-                    'username' => $aReqs['username'],
-                    'password' => $aReqs['password'],
-                    'first_name' => $aReqs['first_name'],
-                    'last_name' =>  $aReqs['last_name'],
-                    'sex' => $aReqs['sex'],
-                    'match_sex' => is_array($aReqs['match_sex']) ?: array($aReqs['match_sex']), // PHP 5.3 short ternary operator "?:"
-                    'birth_date' => $this->dateTime->get($aReqs['birth_date'])->date('Y-m-d'),
-                    'country' => $aReqs['country'],
-                    'city' => $aReqs['city'],
-                    'state' => $aReqs['state'],
-                    'zip_code' => $aReqs['zip_code'],
-                    'description' => $aReqs['description'],
+                    'email' => $aRequests['email'],
+                    'username' => $aRequests['username'],
+                    'password' => $aRequests['password'],
+                    'first_name' => $aRequests['first_name'],
+                    'last_name' =>  $aRequests['last_name'],
+                    'sex' => $aRequests['sex'],
+                    'match_sex' => is_array($aRequests['match_sex']) ?: array($aRequests['match_sex']), // PHP 5.3 short ternary operator "?:"
+                    'birth_date' => $this->dateTime->get($aRequests['birth_date'])->date('Y-m-d'),
+                    'country' => $aRequests['country'],
+                    'city' => $aRequests['city'],
+                    'state' => $aRequests['state'],
+                    'zip_code' => $aRequests['zip_code'],
+                    'description' => $aRequests['description'],
                     'ip' => Framework\Ip\Ip::get(),
                 ];
 
