@@ -37,18 +37,19 @@ class MainController extends Controller
                 $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
                 $this->view->related_profiles = $oRelatedProfiles;
                 $this->view->id = $iProfileId;
-                $this->output();
-                return true;
             }
         }
+
         $this->output();
     }
 
     /**
      * Get related profile data.
      *
-     * @param object $oProfile Profile User Data.
-     * @return stdClass Profile data.
+     * @param stdClass $oProfile User data.
+     * @param stdClass $oProfileFields Profile fields.
+     *
+     * @return stdClass Related profiles.
      */
     private function relatedProdiles(stdClass $oProfile, stdClass $oProfileFields)
     {

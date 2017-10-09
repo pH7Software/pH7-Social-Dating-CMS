@@ -13,7 +13,6 @@ use PH7\Framework\Mvc\Request\Http;
 
 class ForumForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_forum'])) {
@@ -44,5 +43,4 @@ class ForumForm
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'validate.js"></script>'));
         $oForm->render();
     }
-
 }
