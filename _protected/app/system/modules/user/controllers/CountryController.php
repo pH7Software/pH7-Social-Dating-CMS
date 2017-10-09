@@ -16,8 +16,8 @@ use PH7\Framework\Navigation\Page;
 
 class CountryController extends Controller
 {
-    const MAX_PROFILE_PER_PAGE = 20;
     const COUNTRY_CODE_LENGTH = 2;
+    const MAX_PROFILE_PER_PAGE = 20;
     const MAX_COUNTRY_LENGTH = 50;
     const MAX_CITY_LENGTH = 50;
 
