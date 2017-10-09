@@ -303,8 +303,8 @@ final class FrontController
     {
         $aDriverOptions[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $this->oConfig->values['database']['charset'];
 
-        Db::getInstance(
         /* DSN */
+        Db::getInstance(
             $this->oConfig->values['database']['type'] . ':host=' . $this->oConfig->values['database']['hostname'] . ';port=' . $this->oConfig->values['database']['port'] . ';dbname=' . $this->oConfig->values['database']['name'],
             /* Username */
             $this->oConfig->values['database']['username'],
@@ -334,8 +334,9 @@ final class FrontController
      */
     public function _languageInitialize()
     {
-        if (!defined('PH7_PREF_LANG'))
+        if (!defined('PH7_PREF_LANG')) {
             define('PH7_PREF_LANG', DbConfig::getSetting('defaultLanguage'));
+        }
 
         if (!defined('PH7_LANG_NAME')) {
             // Set the default language of the site and load the default language path
@@ -476,10 +477,11 @@ final class FrontController
      */
     private function fileRouter()
     {
-        if (is_file(PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php'))
+        if (is_file(PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php')) {
             include_once PH7_PATH_SYS . 'core/assets/file/' . $this->oUri->fragment(2) . 'CoreFile.php';
-        else
+        } else {
             $this->notFound('Error while loading the file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'file' . PH7_DS . $this->oUri->fragment(2) . 'CoreFile.php does not exist', 1);
+        }
     }
 
     /**
@@ -488,10 +490,11 @@ final class FrontController
     private function cronRouter()
     {
         if (strcmp($this->oHttpRequest->get('secret_word'), DbConfig::getSetting('cronSecurityHash')) === 0) {
-            if (is_file(PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php'))
+            if (is_file(PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php')) {
                 require PH7_PATH_SYS . 'core/assets/cron/' . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php';
-            else
+            } else {
                 $this->notFound('Error while loading the Cron Jobs file<br />File: ' . PH7_PATH_SYS . 'core' . PH7_DS . 'assets' . PH7_DS . 'cron' . PH7_DS . $this->oUri->fragment(2) . PH7_DS . $this->oUri->fragment(3) . 'CoreCron.php does not exist', 1);
+            }
         } else {
             Http::setHeadersByCode(403);
             exit('Secret word is invalid for the cron hash!');
@@ -619,18 +622,20 @@ final class FrontController
         $sVar = escape($sVar, true);
 
         // Convert programatic characters to entities and return
-        return str_replace(array(
+        return str_replace([
+            // Bad
             '$',
             '(',
             ')',
             '%28',
-            '%29'), // Bad
-            array(
+            '%29'],
+            [    // Good
                 '&#36;',
                 '&#40;',
                 '&#41;',
                 '&#40;',
-                '&#41;'), // Good
+                '&#41;'
+            ],
             $sVar);
     }
 
