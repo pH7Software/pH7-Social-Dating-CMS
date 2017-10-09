@@ -42,6 +42,7 @@ final class FrontController
     const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9\_]+$#i';
     const REGEX_ACTION_FORMAT = '#^[a-z0-9\_]+$#i';
     const REGEX_FOLDER_FORMAT = '#^[\w]+$#';
+    const REGEX_URL_EXTRA_OPTIONS = '/?(?:\?[^/]+\=[^/]+)?$`';
 
     /** @var Config */
     private $oConfig;
@@ -119,8 +120,9 @@ final class FrontController
     private function launchRewritingRouter()
     {
         $oUrl = UriRoute::loadFile(new \DomDocument);
+
         foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
-            if (preg_match('`^' . $oRoute->getAttribute('url') . '/?(?:\?[^/]+\=[^/]+)?$`', $this->oHttpRequest->requestUri(), $aMatches)) {
+            if (preg_match('`^' . $oRoute->getAttribute('url') . self::REGEX_URL_EXTRA_OPTIONS, $this->oHttpRequest->requestUri(), $aMatches)) {
                 $this->setRewritingRouter();
 
                 $sPathModule = $oRoute->getAttribute('path') . PH7_SH;
