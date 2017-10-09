@@ -8,13 +8,18 @@
 
 namespace PH7;
 
+use PH7\Framework\CArray\CArray;
 use PH7\Framework\Geo\Map\Map;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Navigation\Page;
 
 class CountryController extends Controller
 {
     const MAX_PROFILE_PER_PAGE = 20;
+    const COUNTRY_CODE_LENGTH = 2;
+    const MAX_COUNTRY_LENGTH = 50;
+    const MAX_CITY_LENGTH = 50;
 
     public function index()
     {
@@ -22,9 +27,9 @@ class CountryController extends Controller
         $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'tooltip.css');
 
         if ($this->httpRequest->getExists('country')) {
-            // Get the country and city, limited to 50 characters and remove hyphens in too automatically insert the url.
-            $this->registry->country = str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('country')), 0, 50));
-            $this->registry->city = ($this->httpRequest->getExists('city')) ? str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('city')), 0, 50)) : '';
+            // Get the country and city, limited to 50 characters and remove dashes automatically added in the URL
+            $this->registry->country = $this->displayCountry();
+            $this->registry->city = $this->httpRequest->getExists('city') ? $this->displayCity() : '';
 
             // Set parameters Google Map
             $oMap = new Map;
@@ -60,10 +65,9 @@ class CountryController extends Controller
             $this->view->h1_title = t('Meet new people in %0% %1%', '<span class="pH1">'.$this->registry->country.'</span>', '<span class="pH1">'.$this->registry->city.'</span>');
             $sMemberTxt = nt('%n% member', '%n% members', $iTotalUsers);
             $this->view->h3_title = t('%0% lives near %1% %2%', $sMemberTxt, $this->registry->country, $this->registry->city);
-
         } else {
             // Not found page
-            Framework\Http\Http::setHeadersByCode(404);
+            Http::setHeadersByCode(404);
             $this->view->error = t('Error, country is empty.');
         }
 
@@ -72,7 +76,21 @@ class CountryController extends Controller
 
     private function getCountryCode()
     {
-        $sCountryCode = Framework\CArray\CArray::getKeyByValIgnoreCase($this->registry->country, $this->registry->lang);
-        return (strlen($sCountryCode) == 2) ? $sCountryCode : substr($this->registry->country, 0, 2);
+        $sCountryCode = CArray::getKeyByValIgnoreCase($this->registry->country, $this->registry->lang);
+
+        return strlen($sCountryCode) === self::COUNTRY_CODE_LENGTH ?
+            $sCountryCode :
+            substr($this->registry->country, 0, self::COUNTRY_CODE_LENGTH);
+    }
+
+
+    private function displayCountry()
+    {
+        return str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('country')), 0, self::MAX_COUNTRY_LENGTH));
+    }
+
+    private function displayCity()
+    {
+        return str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('city')), 0, self::MAX_CITY_LENGTH));
     }
 }
