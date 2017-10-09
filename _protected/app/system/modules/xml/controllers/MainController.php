@@ -9,8 +9,17 @@ namespace PH7;
 
 class MainController extends Controller
 {
+    /** @var DataCoreModel */
+    protected $oDataModel;
 
-    protected $oDataModel, $sTitle, $sAction, $sXmlType;
+    /** @var string */
+    protected $sTitle;
+
+    /** @var string */
+    protected $sAction;
+
+    /** @var string */
+    protected $sXmlType;
 
     public function __construct()
     {
@@ -35,9 +44,9 @@ class MainController extends Controller
     }
 
     /**
-     * @access protected
      * @param string $sAction
      * @param mixed (array, string, integer, ...) $mParam Default Type.
+     *
      * @return void
      */
     protected function _xmlRouter($sAction, $mParam = null)
