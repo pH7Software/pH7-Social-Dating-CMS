@@ -13,7 +13,7 @@ use stdClass;
 
 class MainController extends Controller
 {
-    const MAX_PROFILE = 5;
+    const MAX_PROFILES = 5;
 
     private $oUserModel;
 
@@ -60,7 +60,6 @@ class MainController extends Controller
             SearchQueryCore::CITY => $oProfileFields->city
         ];
 
-        return $this->oUserModel->search($aParams, false, 0, self::MAX_PROFILE);
-        $this->output();
+        return $this->oUserModel->search($aParams, false, 0, self::MAX_PROFILES);
     }
 }
