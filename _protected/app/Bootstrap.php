@@ -155,6 +155,11 @@ class Bootstrap
         // Import::pH7FwkClass('Structure.General');
     }
 
+    /**
+     * Initialize the benchmark time. It is calculated in Framework\Layout\Html\Design::stat()
+     *
+     * @return void
+     */
     private function startPageBenchmark()
     {
         Registry::getInstance()->start_time = microtime(true);
