@@ -14,7 +14,6 @@ use PH7\Framework\Url\Url;
 
 class HomeController extends Controller
 {
-
     public function index()
     {
         $this->view->page_title = t('Free Chat Room Dating');
@@ -24,5 +23,4 @@ class HomeController extends Controller
         $this->view->chat_room = Url::clean( (new SysVar)->parse( DbConfig::getSetting('chatApi') ) );
         $this->output();
     }
-
 }

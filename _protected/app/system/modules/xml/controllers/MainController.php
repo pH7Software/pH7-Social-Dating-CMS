@@ -104,5 +104,4 @@ class MainController extends Controller
     {
         header('Content-Type: text/xml; charset=' . PH7_ENCODING);
     }
-
 }
