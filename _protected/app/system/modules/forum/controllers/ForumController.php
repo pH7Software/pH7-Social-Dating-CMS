@@ -20,6 +20,7 @@ class ForumController extends Controller
     const TOPICS_PER_PAGE = 20;
     const FORUMS_PER_PAGE = 20;
     const POSTS_PER_PAGE = 10;
+    const MAX_SUMMARY_MESSAGE_LENGTH = 150;
 
     /** @var ForumModel */
     private $oForumModel;
@@ -100,17 +101,17 @@ class ForumController extends Controller
             $this->oPage->getNbItemsPerPage()
         );
 
-        $this->view->forum_name = $this->httpRequest->get('forum_name');
+        $this->view->forum_name = $sForumName;
         $this->view->forum_id = $this->httpRequest->get('forum_id', 'int');
 
         if (empty($oTopics)) {
             $this->sTitle = t('No Topics found.');
             $this->notFound();
         } else {
-            $this->view->page_title = t('%0% - Forums', $this->str->upperFirst($this->httpRequest->get('forum_name')));
-            $this->view->meta_description = t('%0% - Topics - Discussion Forums', $this->httpRequest->get('forum_name'));
-            $this->view->meta_keywords = t('%0%,forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum', str_replace(' ', ',', $this->httpRequest->get('forum_name')));
-            $this->view->h1_title = $this->str->upperFirst($this->httpRequest->get('forum_name'));
+            $this->view->page_title = t('%0% - Forums', $this->str->upperFirst($sForumName));
+            $this->view->meta_description = t('%0% - Topics - Discussion Forums', $sForumName);
+            $this->view->meta_keywords = t('%0%,forum,discussion,dating forum,social forum,people,meet people,forums,free dating forum', $this->getNameAsKeywords($sForumName));
+            $this->view->h1_title = $this->str->upperFirst($sForumName);
             $this->view->topics = $oTopics;
         }
         $this->output();
@@ -156,7 +157,7 @@ class ForumController extends Controller
             $this->view->header = '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Posts') . '" href="' . Uri::get('xml', 'rss', 'xmlrouter', 'forum-post,' . $oPost->topicId) . '" />';
             $this->sTitle = t('%0% | %1% - Forum', $this->str->upperFirst($sForumName), $this->getTitle($oPost->title));
             $this->view->page_title = $this->sTitle;
-            $this->view->meta_description = t('%0% Topics - Discussion Forums', $this->getShortMessage($oPost->message));
+            $this->view->meta_description = t('%0% Topics - Discussion Forums', $this->getShortedMessage($oPost->message));
 
             // Generates beautiful meta keywords for good SEO
             $this->view->meta_keywords = t('%0%,%1%,forum,discussion,dating forum,social forum', $this->getNameAsKeywords($sForumName), $this->getTitleAsKeywords($oPost->title));
@@ -328,6 +329,36 @@ class ForumController extends Controller
             Uri::get('forum', 'forum', 'post', $sForumName . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId),
             $this->sMsg
         );
+    }
+
+    private function getNameAsKeywords($sForumName)
+    {
+        return str_replace(' ', ',', $sForumName);
+    }
+
+    private function getTitleAsKeywords($sTitle)
+    {
+        return str_replace(' ', ',', Ban::filterWord($sTitle, false));
+    }
+
+    /**
+     * @param string $sTitle
+     *
+     * @return string
+     */
+    private function getTitle($sTitle)
+    {
+        return $this->str->escape(Ban::filterWord($sTitle), true);
+    }
+
+    /**
+     * @param string $sMessage
+     *
+     * @return string
+     */
+    private function getShortedMessage($sMessage)
+    {
+        return substr($this->str->escape(Ban::filterWord($sMessage), true), 0, self::MAX_SUMMARY_MESSAGE_LENGTH);
     }
 
     /**
