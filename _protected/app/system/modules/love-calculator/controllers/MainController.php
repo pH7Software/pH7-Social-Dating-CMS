@@ -14,8 +14,14 @@ namespace PH7;
 
 class MainController extends Controller
 {
+    /** @var UserCoreModel */
+    private $oUserModel;
 
-    private $oUserModel, $oExists, $sTitle;
+    /** @var ExistsCoreModel */
+    private $oExists;
+
+    /** @var string */
+    private $sTitle;
 
     public function __construct()
     {

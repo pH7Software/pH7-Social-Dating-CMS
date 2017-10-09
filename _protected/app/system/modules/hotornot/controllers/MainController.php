@@ -10,6 +10,7 @@ namespace PH7;
 
 class MainController extends Controller
 {
+    /** @var HotOrNotModel */
     private $oHoNModel;
 
     public function __construct()

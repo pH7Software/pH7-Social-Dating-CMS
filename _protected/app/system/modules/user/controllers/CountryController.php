@@ -27,7 +27,7 @@ class CountryController extends Controller
         $this->design->addCss(PH7_LAYOUT . PH7_TPL . PH7_TPL_NAME . PH7_SH . PH7_CSS, 'tooltip.css');
 
         if ($this->httpRequest->getExists('country')) {
-            // Get the country and city, limited to 50 characters and remove dashes automatically added in the URL
+            // Get the country and city, limited to 50 characters and remove dashes automatically added from the URL
             $this->registry->country = $this->getCountry();
             $this->registry->city = $this->httpRequest->getExists('city') ? $this->getCity() : '';
 
