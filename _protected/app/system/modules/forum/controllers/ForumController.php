@@ -331,11 +331,21 @@ class ForumController extends Controller
         );
     }
 
+    /**
+     * @param string $sForumName
+     *
+     * @return string
+     */
     private function getNameAsKeywords($sForumName)
     {
         return str_replace(' ', ',', $sForumName);
     }
 
+    /**
+     * @param string $sTitle
+     *
+     * @return string
+     */
     private function getTitleAsKeywords($sTitle)
     {
         return str_replace(' ', ',', Ban::filterWord($sTitle, false));
