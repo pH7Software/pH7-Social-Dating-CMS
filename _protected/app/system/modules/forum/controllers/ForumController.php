@@ -83,12 +83,14 @@ class ForumController extends Controller
 
     public function topic()
     {
+        $sForumName = $this->httpRequest->get('forum_name');
+
         $this->view->total_pages = $this->oPage->getTotalPages(
             $this->oForumModel->totalTopics(), self::TOPICS_PER_PAGE
         );
         $this->view->current_page = $this->oPage->getCurrentPage();
         $oTopics = $this->oForumModel->getTopic(
-            strstr($this->httpRequest->get('forum_name'), '-', true),
+            strstr($sForumName, '-', true),
             $this->httpRequest->get('forum_id', 'int'),
             null,
             null,
@@ -148,14 +150,16 @@ class ForumController extends Controller
             $this->sTitle = t('Topic Not Found!');
             $this->notFound();
         } else {
+            $sForumName = $this->httpRequest->get('forum_name');
+
             // Adding the RSS link
             $this->view->header = '<link rel="alternate" type="application/rss+xml" title="' . t('Latest Forum Posts') . '" href="' . Uri::get('xml', 'rss', 'xmlrouter', 'forum-post,' . $oPost->topicId) . '" />';
-            $this->sTitle = t('%0% | %1% - Forum', $this->str->upperFirst($this->httpRequest->get('forum_name')), $this->str->escape(Ban::filterWord($oPost->title), true));
+            $this->sTitle = t('%0% | %1% - Forum', $this->str->upperFirst($sForumName), $this->getTitle($oPost->title));
             $this->view->page_title = $this->sTitle;
-            $this->view->meta_description = t('%0% Topics - Discussion Forums', substr($this->str->escape(Ban::filterWord($oPost->message), true), 0, 150));
+            $this->view->meta_description = t('%0% Topics - Discussion Forums', $this->getShortMessage($oPost->message));
 
             // Generates beautiful meta keywords for good SEO
-            $this->view->meta_keywords = t('%0%,%1%,forum,discussion,dating forum,social forum', str_replace(' ', ',', $this->httpRequest->get('forum_name')), substr(str_replace(' ', ',', Ban::filterWord($oPost->title, false)), 0, 250));
+            $this->view->meta_keywords = t('%0%,%1%,forum,discussion,dating forum,social forum', $this->getNameAsKeywords($sForumName), $this->getTitleAsKeywords($oPost->title));
             $this->view->h1_title = $this->sTitle;
 
             $this->view->dateTime = $this->dateTime;
