@@ -28,8 +28,8 @@ class CountryController extends Controller
 
         if ($this->httpRequest->getExists('country')) {
             // Get the country and city, limited to 50 characters and remove dashes automatically added in the URL
-            $this->registry->country = $this->displayCountry();
-            $this->registry->city = $this->httpRequest->getExists('city') ? $this->displayCity() : '';
+            $this->registry->country = $this->getCountry();
+            $this->registry->city = $this->httpRequest->getExists('city') ? $this->getCity() : '';
 
             // Set parameters Google Map
             $oMap = new Map;
@@ -84,12 +84,12 @@ class CountryController extends Controller
     }
 
 
-    private function displayCountry()
+    private function getCountry()
     {
         return str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('country')), 0, self::MAX_COUNTRY_LENGTH));
     }
 
-    private function displayCity()
+    private function getCity()
     {
         return str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('city')), 0, self::MAX_CITY_LENGTH));
     }
