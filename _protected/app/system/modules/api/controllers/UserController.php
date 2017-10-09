@@ -172,4 +172,31 @@ class UserController extends MainController
             }
         }
     }
+
+    /**
+     * Get profiles from geo location.
+     *
+     * @param string $sCountryCode The country code. e.g. US, CA, FR, ES, BE, NL
+     * @param string $sCity
+     * @param string $sOrder
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return stdClass Data of users
+     */
+    public function usersFromLocation($sCountryCode, $sCity, $sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
+    {
+        if ($this->oRest->getRequestMethod() != 'GET') {
+            $this->oRest->response('', 406);
+        } else {
+            $oUsers = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, $sOrder, $iOffset, $iLimit);
+
+            if (!empty($oUsers)) {
+                $this->oRest->response($this->set([$oUsers]));
+            } else {
+                $aResults = ['status' => 'failed', 'msg' => t('No profiles found in %0%, %1%', $sCity, $sCountry)];
+                $this->oRest->response($this->set($aResults), 404);
+            }
+        }
+    }
 }
