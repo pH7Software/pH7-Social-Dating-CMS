@@ -386,7 +386,8 @@ class ForumController extends Controller
 
         $sErrMsg = '';
         if ($b404Status === true) {
-            $sErrMsg = '<br />' . t('Please return to the <a href="%0%">main forum page</a> or <a href="%1%">the previous page</a>.', Uri::get('forum', 'forum', 'index'), 'javascript:history.back();');
+            $sForumHomepageUrl = Uri::get('forum', 'forum', 'index');
+            $sErrMsg = '<br />' . t('Please return to the <a href="%0%">main forum page</a> or <a href="%1%">the previous page</a>.', $sForumHomepageUrl, 'javascript:history.back();');
         }
 
         $this->view->page_title = $this->sTitle;
