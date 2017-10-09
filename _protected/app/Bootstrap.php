@@ -155,6 +155,11 @@ class Bootstrap
         // Import::pH7FwkClass('Structure.General');
     }
 
+    private function startPageBenchmark()
+    {
+        Registry::getInstance()->start_time = microtime(true);
+    }
+
     /**
      * Display an error message if the Apache mod_rewrite is not enabled.
      *
