@@ -101,50 +101,75 @@ class UserController extends MainController
         if ($this->oRest->getRequestMethod() != 'POST') {
             $this->oRest->response('', 406);
         } else {
-            $aReqs = $this->oRest->getRequest();
+            $aRequests = $this->oRest->getRequest();
 
-            if (empty($aReqs['email']) || empty($aReqs['password'])) {
-                $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('The Email and/or the password is empty.'))), 400);
+            if (empty($aRequests['email']) || empty($aRequests['password'])) {
+                $aResults = ['status' => 'failed', 'msg' => t('The Email and/or the password is empty.')];
+                $this->oRest->response($this->set([$aResults]), 400);
             } // Check Login
-            elseif ($this->oUserModel->login($aReqs['email'], $aReqs['password']) === true) {
-                $iId = $this->oUserModel->getId($aReqs['email']);
+            elseif ($this->oUserModel->login($aRequests['email'], $aRequests['password']) === true) {
+                $iId = $this->oUserModel->getId($aRequests['email']);
                 $oUserData = $this->oUserModel->readProfile($iId);
-                $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session, new Framework\Mvc\Model\Security);
+                $this->oUser->setAuth($oUserData, $this->oUserModel, $this->session, new SecurityModel);
 
-                $this->oRest->response($this->set($aReqs));
+                $this->oRest->response($this->set($aRequests));
             } else {
-                $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('The Password or Email was incorrected'))), 400);
+                $aResults = ['status' => 'failed', 'msg' => t('The Password or Email was incorrected')];
+                $this->oRest->response($this->set($aResults), 400);
             }
         }
     }
 
     /**
-     * Get User Data.
+     * Get profile data from their ID.
      *
-     * @param int $iId Profile ID (ID has to end with a trailing slash "/")
+     * @param int $iId Profile ID (ID has to end with a trailing slash "/" when calling this resource from the API URI)
+     *
      * @return void
      */
-    public function user($iId = null)
+    public function user($iId)
     {
         if ($this->oRest->getRequestMethod() != 'GET') {
             $this->oRest->response('', 406);
         } else {
             if (empty($iId)) {
-                $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('Profile ID Empty'))), 400);
+                $aResults = ['status' => 'failed', 'msg' => t('Profile ID Empty')];
+                $this->oRest->response($this->set($aResults), 400);
             } else {
                 $oUser = $this->oUserModel->readProfile($iId);
+
                 if (!empty($oUser->profileId) && $iId === $oUser->profileId) {
                     $this->oRest->response($this->set([$oUser]));
                 } else {
-                    $this->oRest->response($this->set(array('status' => 'failed', 'msg' => t('Profile Not Found'))), 404);
+                    $aResults = ['status' => 'failed', 'msg' => t('Profile Not Found')];
+                    $this->oRest->response($this->set($aResults), 404);
                 }
             }
         }
     }
 
-    public function users()
+    /**
+     * Get all profile data.
+     *
+     * @param string $sOrder
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return stdClass Data of users
+     */
+    public function users($sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
+        if ($this->oRest->getRequestMethod() != 'GET') {
+            $this->oRest->response('', 406);
+        } else {
+            $oUsers = $this->oUserModel->getProfiles($sOrder, $iOffset, $iLimit);
 
+            if (!empty($oUsers)) {
+                $this->oRest->response($this->set([$oUsers]));
+            } else {
+                $aResults = ['status' => 'failed', 'msg' => t('No Profiles Found')];
+                $this->oRest->response($this->set($aResults), 404);
+            }
+        }
     }
-
 }
