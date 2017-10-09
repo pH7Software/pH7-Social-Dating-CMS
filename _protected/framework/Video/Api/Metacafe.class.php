@@ -17,6 +17,7 @@ class Metacafe extends Api implements IApi
 {
     const API_URL = 'http://www.metacafe.com/api/item/';
     const PLAYER_URL = 'http://metacafe.com/fplayer/';
+    const REGEX_URI_FORMAT = '#/(?:watch|fplayer)/([\d]+)/(?:[\w-]+)/\w*#i';
 
     /**
      * @param string $sUrl
@@ -129,8 +130,9 @@ class Metacafe extends Api implements IApi
      */
     public function getVideoId($sUrl)
     {
-        preg_match('#/(?:watch|fplayer)/([\w-]+)/\w*#i', $sUrl, $aMatch);
-        return (!empty($aMatch[1])) ? $aMatch[1] : false;
+        preg_match(static::REGEX_URI_FORMAT, $sUrl, $aMatch);
+
+        return !empty($aMatch[1]) ? $aMatch[1] : false;
     }
 
     /**

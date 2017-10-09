@@ -17,6 +17,8 @@ class Dailymotion extends Api implements IApi
 {
     const API_URL = 'https://api.dailymotion.com/video/';
     const PLAYER_URL = 'https://www.dailymotion.com/embed/video/';
+    const REGEX_EMBED_FORMAT1 = '#/video/(\w+)_#i';
+    const REGEX_EMBED_FORMAT2 = '#/embed/video/(\w+)#i';
 
     /**
      * @param string $sUrl
@@ -64,12 +66,12 @@ class Dailymotion extends Api implements IApi
      */
     public function getVideoId($sUrl)
     {
-        preg_match('#/video/(\w+)_#i', $sUrl, $aMatch);
+        preg_match(static::REGEX_EMBED_FORMAT1, $sUrl, $aMatch);
         if (!empty($aMatch[1])) {
             return $aMatch[1];
         }
 
-        preg_match('#/embed/video/(\w+)#i', $sUrl, $aMatch);
+        preg_match(static::REGEX_EMBED_FORMAT2, $sUrl, $aMatch);
         if (!empty($aMatch[1])) {
             return $aMatch[1];
         }

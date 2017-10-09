@@ -17,6 +17,7 @@ class Vimeo extends Api implements IApi
 {
     const API_URL = 'https://vimeo.com/api/v2/video/';
     const PLAYER_URL = 'https://player.vimeo.com/video/';
+    const REGEX_VIDEO_ID = '#/(\d+)($|/)#i';
 
     /**
      * @param string $sUrl
@@ -73,8 +74,8 @@ class Vimeo extends Api implements IApi
      */
     public function getVideoId($sUrl)
     {
-        preg_match('#/(\d+)($|/)#i', $sUrl, $aMatch);
+        preg_match(static::REGEX_VIDEO_ID, $sUrl, $aMatch);
 
-        return (!empty($aMatch[1])) ? $aMatch[1] : false;
+        return !empty($aMatch[1]) ? $aMatch[1] : false;
     }
 }
