@@ -996,11 +996,12 @@ class UserCoreModel extends Model
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oRow;
     }
 
     /**
-     * Get profiles data.
+     * Get (all) profile data.
      *
      * @param string $sOrder
      * @param int $iOffset
@@ -1048,7 +1049,7 @@ class UserCoreModel extends Model
     }
 
     /**
-     * Get the users from the location data.
+     * Get users from the location data.
      *
      * @param string $sCountry
      * @param string $sCity
