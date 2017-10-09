@@ -49,7 +49,7 @@ class Bootstrap
      */
     public static function getInstance()
     {
-        return (null === static::$oInstance) ? static::$oInstance = new static : static::$oInstance;
+        return null === static::$oInstance ? static::$oInstance = new static : static::$oInstance;
     }
 
     /**
