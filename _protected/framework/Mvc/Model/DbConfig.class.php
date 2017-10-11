@@ -31,8 +31,9 @@ final class DbConfig
     }
 
     /**
-     * @param string $sSetting You can specify a specific parameter. Default NULL
-     * @return mixed (string | integer | object) Returns a string or an integer if you specify a specific parameter, otherwise returns an object.
+     * @param string|null $sSetting You can specify a specific parameter.
+     *
+     * @return string|int|\stdClass A string or an integer if you specify a specific parameter, otherwise returns an object.
      */
     public static function getSetting($sSetting = null)
     {
@@ -125,6 +126,7 @@ final class DbConfig
      * @param string $sSection
      * @param string $sValue
      * @param string $sLangId
+     *
      * @return void
      */
     public static function setMetaMain($sSection, $sValue, $sLangId)
@@ -134,6 +136,7 @@ final class DbConfig
 
     /**
      * @param string $sStatus '0' = Disable | '1' = Enable. (need to be string because in DB it is an "enum").
+     *
      * @return void
      */
     public static function setSocialWidgets($sStatus)
@@ -152,6 +155,7 @@ final class DbConfig
 
     /**
      * @param string $sStatus The constant 'DbConfig::ENABLE_SITE' or 'DbConfig::MAINTENANCE_SITE'
+     *
      * @return void
      */
     public static function setSiteMode($sStatus)
