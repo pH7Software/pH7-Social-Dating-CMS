@@ -41,13 +41,11 @@ final class DbConfig
         // @return value of config the database
         if (!empty($sSetting)) {
             if (!$sData = $oCache->get()) {
-                $rStmt = Engine\Db::getInstance()->prepare('SELECT value FROM' . Engine\Db::prefix('Settings') . 'WHERE name = :setting');
+                $rStmt = Engine\Db::getInstance()->prepare('SELECT settingValue FROM' . Engine\Db::prefix('Settings') . 'WHERE settingName = :setting');
                 $rStmt->bindParam(':setting', $sSetting, \PDO::PARAM_STR);
                 $rStmt->execute();
-                $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+                $sData = $rStmt->fetchColumn();
                 Engine\Db::free($rStmt);
-                $sData = $oRow->value;
-                unset($oRow);
                 $oCache->put($sData);
             }
             $mData = $sData;
@@ -63,17 +61,19 @@ final class DbConfig
         }
 
         unset($oCache);
+
         return empty($mData) ? 0 : $mData;
     }
 
     /**
      * @param string $sValue Value to set.
      * @param string $sName Name of the DB pH7_Settings column.
-     * @return integer 1 on success.
+     *
+     * @return int 1 on success.
      */
     public static function setSetting($sValue, $sName)
     {
-        return Engine\Record::getInstance()->update('Settings', 'value', $sValue, 'name', $sName);
+        return Engine\Record::getInstance()->update('Settings', 'settingValue', $sValue, 'settingName', $sName);
     }
 
     public static function getMetaMain($sLangId)

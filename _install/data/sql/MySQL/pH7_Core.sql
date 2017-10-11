@@ -980,14 +980,14 @@ CREATE TABLE IF NOT EXISTS pH7_Report (
 
 
 CREATE TABLE IF NOT EXISTS pH7_Settings (
-  `name` varchar(64) NOT NULL,
-  value varchar(150) DEFAULT '',
-  `desc` varchar(120) DEFAULT '' COMMENT 'Informative desc about the setting',
-  `group` varchar(12) NOT NULL,
-  PRIMARY KEY (`name`)
+  settingName varchar(64) NOT NULL,
+  settingValue varchar(150) DEFAULT '',
+  description varchar(120) DEFAULT '' COMMENT 'Informative desc about the setting',
+  settingGroup varchar(12) NOT NULL,
+  PRIMARY KEY (settingName)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
+INSERT INTO pH7_Settings (settingName, settingValue, description, settingGroup) VALUES
 ('siteName', @sDefaultSiteName, '', 'general'),
 ('adminEmail', @sAdminEmail, '', 'email'),
 ('defaultLanguage', 'en_US', '', 'language'),

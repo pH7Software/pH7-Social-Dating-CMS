@@ -315,16 +315,16 @@ class InstallController extends Controller
                                                             'ip' => client_ip()
                                                         ]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :siteName WHERE name = \'siteName\' LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :siteName WHERE settingName = \'siteName\' LIMIT 1');
                                                         $rStmt->execute(['siteName' => $_SESSION['val']['site_name']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :adminEmail WHERE name = \'adminEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :adminEmail WHERE settingName = \'adminEmail\'  LIMIT 1');
                                                         $rStmt->execute(['adminEmail' => $_SESSION['val']['admin_email']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :feedbackEmail WHERE name = \'feedbackEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :feedbackEmail WHERE settingName = \'feedbackEmail\'  LIMIT 1');
                                                         $rStmt->execute(['feedbackEmail' => $_SESSION['val']['admin_feedback_email']]);
 
-                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :returnEmail WHERE name = \'returnEmail\'  LIMIT 1');
+                                                        $rStmt = $DB->prepare('UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :returnEmail WHERE settingName = \'returnEmail\'  LIMIT 1');
                                                         $rStmt->execute(['returnEmail' => $_SESSION['val']['admin_return_email']]);
 
                                                         // We finalise by putting the correct permission to the config files
@@ -428,13 +428,14 @@ class InstallController extends Controller
                             require_once PH7_ROOT_INSTALL . 'inc/_db_connect.inc.php';
 
                             // Enable/Disable the modules according to the chosen niche
-                            foreach ($aModUpdate as $sModName => $sStatus)
+                            foreach ($aModUpdate as $sModName => $sStatus) {
                                 $this->updateMods($DB, $sModName, $sStatus);
+                            }
 
                             $this->updateSettings($aSettingUpdate);
 
                             // Set the theme for the chosen niche
-                            $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET value = :theme WHERE name = \'defaultTemplate\' LIMIT 1';
+                            $sSql = 'UPDATE ' . $_SESSION['db']['prefix'] . 'Settings SET settingValue = :theme WHERE settingName = \'defaultTemplate\' LIMIT 1';
                             $rStmt = $DB->prepare($sSql);
                             $rStmt->execute(['theme' => $sTheme]);
                         } catch (\PDOException $oE) {
