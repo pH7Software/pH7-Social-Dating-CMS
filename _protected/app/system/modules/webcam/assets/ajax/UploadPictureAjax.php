@@ -12,6 +12,7 @@
  * This code was inspired by Martin Angelov's tutorial: http://tutorialzine.com/2011/04/jquery-webcam-photobooth/
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Error\CException\UserException;
