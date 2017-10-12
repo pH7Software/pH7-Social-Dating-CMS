@@ -255,8 +255,9 @@ class MainController extends Controller
     public function notification($sGatewayName = '', $iItemNumber = 0)
     {
         // Save buyer information to a log file
-        if ($sGatewayName == 'PayPal' || $sGatewayName == 'Stripe' || $sGatewayName == 'TwoCO' || $sGatewayName == 'CCBill') {
-            $sGatewayName = 'PH7\\' . $sGatewayName;
+        if ($sGatewayName === PayPal::class || $sGatewayName === Braintree::class ||
+            $sGatewayName === Stripe::class || $sGatewayName === TwoCO::class
+        ) {
             $this->log(new $sGatewayName(false), t('%0% payment was made with the following information:', $sGatewayName));
         }
 
