@@ -137,7 +137,7 @@ class PaymentDesign extends Framework\Core\Core
     /**
      * @param PaymentApi $oPaymentProvider
      * @param string $sMembershipName
-     * @param string $sProviderName
+     * @param string $sProviderName The payment provider name.
      *
      * @return string
      */
