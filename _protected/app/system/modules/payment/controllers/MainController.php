@@ -19,6 +19,13 @@ use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 
 class MainController extends Controller
 {
+    const PAYPAL_GATEWAY_NAME = 'paypal';
+    const STRIPE_GATEWAY_NAME = 'stripe';
+    const BRAINTREE_GATEWAY_NAME = 'braintree';
+    const TWO_CHECKOUT_GATEWAY_NAME = '2co';
+    const CCBILL_GATEWAY_NAME = 'ccbill';
+
+
     /** @var AffiliateCoreModel */
     protected $oUserModel;
 
@@ -97,8 +104,7 @@ class MainController extends Controller
     public function process($sProvider = '')
     {
         switch ($sProvider) {
-            case 'paypal':
-            {
+            case static::PAYPAL_GATEWAY_NAME: {
                 $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
                 if ($oPayPal->valid() && $this->httpRequest->postExists('custom')) {
                     $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
@@ -114,11 +120,9 @@ class MainController extends Controller
                     }
                 }
                 unset($oPayPal);
-            }
-            break;
+            } break;
 
-            case 'stripe':
-            {
+            case static::STRIPE_GATEWAY_NAME: {
                 if ($this->httpRequest->postExists('stripeToken')) {
                     \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
                     $sAmount = $this->httpRequest->post('amount');
