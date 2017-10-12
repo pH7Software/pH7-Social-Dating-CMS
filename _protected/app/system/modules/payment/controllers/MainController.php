@@ -180,18 +180,15 @@ class MainController extends Controller
                     }
                 }
                 unset($o2CO);
-            }
-            break;
+            } break;
 
-            case 'ccbill':
-            {
+            case static::CCBILL_GATEWAY_NAME: {
                 // Still in developing...
                 // You are more than welcome to contribute on Github: https://github.com/pH7Software/pH7-Social-Dating-CMS
-            }
-            break;
+            } break;
 
             default:
-                $this->displayPageNotFound(t('Provinder Not Found!'));
+                $this->displayPageNotFound(t('Provider Not Found!'));
         }
 
         // Set the page titles
