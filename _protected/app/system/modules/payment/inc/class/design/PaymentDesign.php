@@ -45,7 +45,7 @@ class PaymentDesign extends Framework\Core\Core
     }
 
     /**
-     * Generates Stripe Payment form thanks the Stripe API.
+     * Generates Stripe Payment form Stripe API.
      *
      * @param stdClass $oMembership
      *
