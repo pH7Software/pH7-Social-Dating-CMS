@@ -77,6 +77,27 @@ class PaymentDesign extends Framework\Core\Core
     }
 
     /**
+     * Generates Braintree Payment form Braintree API.
+     *
+     * @param stdClass $oMembership
+     *
+     * @return void
+     */
+    public function buttonBraintree(stdClass $oMembership)
+    {
+        $oBraintree = new Braintree;
+
+        $oBraintree->param('item_number', $oMembership->groupId)
+            ->param('amount', $oMembership->price);
+
+        echo '<script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>';
+
+        echo self::displayGatewayForm($oBraintree, $oMembership->name, 'Braintree');
+
+        unset($oBraintree);
+    }
+
+    /**
      * @param stdClass $oMembership
      *
      * @return void

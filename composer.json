@@ -37,7 +37,8 @@
         "ext-json": "*",
         "ext-gd": "*",
         "ext-hash": "*",
-        "ext-pdo_mysql": "*"
+        "ext-pdo_mysql": "*",
+        "braintree/braintree_php": "^3.25"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.5",

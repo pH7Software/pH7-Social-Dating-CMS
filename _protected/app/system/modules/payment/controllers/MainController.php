@@ -11,10 +11,13 @@
 
 namespace PH7;
 
+use Braintree_Configuration;
+use Braintree_Transaction;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\File\File;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 
 class MainController extends Controller
@@ -156,11 +159,46 @@ class MainController extends Controller
                         $this->design->setMessage( $this->str->escape($oE->getMessage(), true) );
                     }
                 }
-            }
-            break;
+            } break;
 
-            case '2co':
-            {
+            case static::BRAINTREE_GATEWAY_NAME: {
+                if ($this->httpRequest->getMethod() === HttpRequest::METHOD_POST) {
+                    $sEnvironment = ((bool)$this->config->values['module.setting']['sandbox.enabled']) ? 'sandbox' : 'production';
+                    Braintree_Configuration::environment($sEnvironment);
+
+                    Braintree_Configuration::merchantId($this->config->values['module.setting']['braintree.merchant_id']);
+                    Braintree_Configuration::publicKey($this->config->values['module.setting']['braintree.public_key']);
+                    Braintree_Configuration::privateKey($this->config->values['module.setting']['braintree.private_ke']);
+
+                    $oResult = Braintree_Transaction::sale([
+                        'amount' => $this->httpRequest->post('amount'),
+                        'paymentMethodNonce' => 'nonceFromTheClient',
+                        'options' => [ 'submitForSettlement' => true ]
+                    ]);
+
+                    if ($oResult->success) {
+                        $iItemNumber = $this->httpRequest->post('item_number');
+                        if ($this->oUserModel->updateMembership(
+                            $iItemNumber,
+                            $this->iProfileId,
+                            $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
+                        ) {
+                            $this->_bStatus = true; // Status is OK
+                            $this->updateUserGroupId($iItemNumber);
+                            $this->notification('Braintree', $iItemNumber); // Add info into the log file
+                        }
+                    } else if ($oResult->transaction) {
+                        print_r("Error processing transaction:");
+                        print_r("\n  code: " . $oResult->transaction->processorResponseCode);
+                        print_r("\n  text: " . $oResult->transaction->processorResponseText);
+                    } else {
+                        print_r("Validation errors: \n");
+                        print_r($oResult->errors->deepAll());
+                    }
+                }
+            } break;
+
+            case static::TWO_CHECKOUT_GATEWAY_NAME: {
                 $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enabled']);
                 $sVendorId = $this->config->values['module.setting']['2co.vendor_id'];
                 $sSecretWord = $this->config->values['module.setting']['2co.secret_word'];
