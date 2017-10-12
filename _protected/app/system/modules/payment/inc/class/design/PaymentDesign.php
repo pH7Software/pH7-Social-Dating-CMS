@@ -25,7 +25,8 @@ class PaymentDesign extends Framework\Core\Core
     {
         $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
 
-        $oPayPal->param('business', $this->config->values['module.setting']['paypal.email'])
+        $oPayPal
+            ->param('business', $this->config->values['module.setting']['paypal.email'])
             ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price)) // Use base64_encode() to discourage curious people
             ->param('amount', $oMembership->price)
             ->param('item_number', $oMembership->groupId)
@@ -55,7 +56,8 @@ class PaymentDesign extends Framework\Core\Core
     {
         $oStripe = new Stripe;
 
-        $oStripe->param('item_number', $oMembership->groupId)
+        $oStripe
+            ->param('item_number', $oMembership->groupId)
             ->param('amount', $oMembership->price);
 
         echo
@@ -85,13 +87,12 @@ class PaymentDesign extends Framework\Core\Core
      */
     public function buttonBraintree(stdClass $oMembership)
     {
-        $oBraintree = new Braintree;
-
-        $oBraintree->param('item_number', $oMembership->groupId)
-            ->param('amount', $oMembership->price);
-
         echo '<script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>';
 
+        $oBraintree = new Braintree;
+        $oBraintree
+            ->param('item_number', $oMembership->groupId)
+            ->param('amount', $oMembership->price);
         echo self::displayGatewayForm($oBraintree, $oMembership->name, 'Braintree');
 
         unset($oBraintree);
@@ -106,7 +107,8 @@ class PaymentDesign extends Framework\Core\Core
     {
         $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enabled']);
 
-        $o2CO->param('sid', $this->config->values['module.setting']['2co.vendor_id'])
+        $o2CO
+            ->param('sid', $this->config->values['module.setting']['2co.vendor_id'])
             ->param('id_type', 1)
             ->param('cart_order_id', $oMembership->groupId)
             ->param('merchant_order_id', $oMembership->groupId)
