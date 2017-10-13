@@ -133,7 +133,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
     * From a command line opened in the folder, run `composer install` to install pH7CMS's dependencies.
   * Composer:
     * Install Composer (https://getcomposer.org)
-    * `composer create-project ph7software/ph7cms --prefer-dist website`
+    * `composer create-project ph7software/ph7cms --prefer-dist ph7cms`
   * Sourceforge:
     * Directly download the latest stable version from [Sourceforge](https://sourceforge.net/projects/ph7socialdating/).
   * Softaculous:
