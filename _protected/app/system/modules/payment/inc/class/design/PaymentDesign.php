@@ -87,7 +87,7 @@ class PaymentDesign extends Framework\Core\Core
      */
     public function buttonBraintree(stdClass $oMembership)
     {
-        echo '<script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>';
+        echo '<script src="https://js.braintreegateway.com/v2/braintree.js"></script>';
 
         $oBraintree = new Braintree;
         $oBraintree
@@ -96,6 +96,13 @@ class PaymentDesign extends Framework\Core\Core
         echo self::displayGatewayForm($oBraintree, $oMembership->name, 'Braintree');
 
         unset($oBraintree);
+
+        echo '<script>';
+        echo '$(function () {';
+        echo "braintree.setup('", $this->config->values['module.setting']['braintree.public_key'], "', 'dropin', {";
+        echo "container: 'payment-form'});";
+        echo '})';
+        echo '</script>';
     }
 
     /**
