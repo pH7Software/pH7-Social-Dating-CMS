@@ -11,13 +11,11 @@
 
 namespace PH7;
 
-use Braintree_Configuration;
 use Braintree_Transaction;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\File\File;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 
 class MainController extends Controller
@@ -162,17 +160,12 @@ class MainController extends Controller
             } break;
 
             case static::BRAINTREE_GATEWAY_NAME: {
-                if ($this->httpRequest->getMethod() === HttpRequest::METHOD_POST) {
-                    $sEnvironment = ((bool)$this->config->values['module.setting']['sandbox.enabled']) ? 'sandbox' : 'production';
-                    Braintree_Configuration::environment($sEnvironment);
-
-                    Braintree_Configuration::merchantId($this->config->values['module.setting']['braintree.merchant_id']);
-                    Braintree_Configuration::publicKey($this->config->values['module.setting']['braintree.public_key']);
-                    Braintree_Configuration::privateKey($this->config->values['module.setting']['braintree.private_ke']);
+                if ($sNonce = $this->httpRequest->post('payment_method_nonce')) {
+                    Braintree::init($this->config);
 
                     $oResult = Braintree_Transaction::sale([
                         'amount' => $this->httpRequest->post('amount'),
-                        'paymentMethodNonce' => 'nonceFromTheClient',
+                        'paymentMethodNonce' => $sNonce,
                         'options' => [ 'submitForSettlement' => true ]
                     ]);
 

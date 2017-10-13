@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use Braintree_ClientToken;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Payment\Gateway\Api\Api as PaymentApi;
 use stdClass;
@@ -87,6 +88,9 @@ class PaymentDesign extends Framework\Core\Core
      */
     public function buttonBraintree(stdClass $oMembership)
     {
+        Braintree::init($this->config);
+        $sClientToken = Braintree_ClientToken::generate();
+
         echo '<script src="https://js.braintreegateway.com/v2/braintree.js"></script>';
 
         $oBraintree = new Braintree;
@@ -99,7 +103,7 @@ class PaymentDesign extends Framework\Core\Core
 
         echo '<script>';
         echo '$(function () {';
-        echo "braintree.setup('", $this->config->values['module.setting']['braintree.public_key'], "', 'dropin', {";
+        echo "braintree.setup('$sClientToken', 'dropin', {";
         echo "container: 'payment-form'});";
         echo '})';
         echo '</script>';
@@ -152,10 +156,11 @@ class PaymentDesign extends Framework\Core\Core
      */
     private function displayGatewayForm(PaymentApi $oPaymentProvider, $sMembershipName, $sProviderName)
     {
-        echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">',
+        echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">
+            <div id="payment-form"></div>',
             $oPaymentProvider->generate(),
             '<button class="btn btn-primary btn-md" type="submit" name="submit">', self::buyTxt($sMembershipName, $sProviderName), '</button>
-        </form>';
+            </form>';
     }
 
     /**

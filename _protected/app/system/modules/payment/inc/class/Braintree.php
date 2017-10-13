@@ -10,9 +10,21 @@
 
 namespace PH7;
 
+use Braintree_Configuration;
+use PH7\Framework\Config\Config;
 use PH7\Framework\Payment\Gateway\Api\Braintree as BraintreeGateway;
 
 class Braintree extends BraintreeGateway
 {
     use Api; // Import the Api trait
+
+    public static function init(Config $oConfig)
+    {
+        $sEnvironment = ((bool)$oConfig->values['module.setting']['sandbox.enabled']) ? 'sandbox' : 'production';
+        Braintree_Configuration::environment($sEnvironment);
+
+        Braintree_Configuration::merchantId($oConfig->values['module.setting']['braintree.merchant_id']);
+        Braintree_Configuration::publicKey($oConfig->values['module.setting']['braintree.public_key']);
+        Braintree_Configuration::privateKey($oConfig->values['module.setting']['braintree.private_ke']);
+    }
 }
