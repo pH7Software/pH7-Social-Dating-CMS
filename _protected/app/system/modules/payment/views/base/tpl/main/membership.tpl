@@ -9,7 +9,7 @@
                             <li class="list-group-item clearfix">
                                 <div class="pull-left">
                                     <h4>{% $membership->name %}</h4>
-                                    <h4>{% $membership->price %}</h4>
+                                    <h5>{% $config->values['module.setting']['currency_sign'] %}{% $membership->price %}</h5>
                                     <p class="italic">{% $membership->description %}</p>
                                 </div>
                                 <p class="pull-right">
