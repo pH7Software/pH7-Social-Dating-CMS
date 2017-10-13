@@ -160,12 +160,12 @@ class MainController extends Controller
             } break;
 
             case static::BRAINTREE_GATEWAY_NAME: {
-                if ($sNonce = $this->httpRequest->post('payment_method_nonce')) {
+                if ($bNonce = $this->httpRequest->post('payment_method_nonce')) {
                     Braintree::init($this->config);
 
                     $oResult = Braintree_Transaction::sale([
                         'amount' => $this->httpRequest->post('amount'),
-                        'paymentMethodNonce' => $sNonce,
+                        'paymentMethodNonce' => $bNonce,
                         'options' => [ 'submitForSettlement' => true ]
                     ]);
 

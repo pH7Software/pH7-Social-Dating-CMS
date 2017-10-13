@@ -163,8 +163,9 @@ class Design
      */
     public function message()
     {
-        if ($this->oHttpRequest->getExists('msg'))
+        if ($this->oHttpRequest->getExists('msg')) {
             $this->aMessages[] = substr($this->oHttpRequest->get('msg'), 0, 300);
+        }
 
         $iMsgNum = count($this->aMessages);
         /*** Check if there are any messages in the aMessages array ***/
