@@ -180,13 +180,9 @@ class MainController extends Controller
                             $this->updateUserGroupId($iItemNumber);
                             $this->notification('Braintree', $iItemNumber); // Add info into the log file
                         }
-                    } else if ($oResult->transaction) {
-                        print_r("Error processing transaction:");
-                        print_r("\n  code: " . $oResult->transaction->processorResponseCode);
-                        print_r("\n  text: " . $oResult->transaction->processorResponseText);
-                    } else {
-                        print_r("Validation errors: \n");
-                        print_r($oResult->errors->deepAll());
+                    } elseif ($oResult->transaction) {
+                        $sErrMsg = t('Error processing transaction: %0%', $oResult->transaction->processorResponseText);
+                        $this->design->setMessage( $this->str->escape($sErrMsg, true) );
                     }
                 }
             } break;
