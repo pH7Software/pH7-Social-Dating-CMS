@@ -47,7 +47,7 @@ class PaymentDesign extends Framework\Core\Core
     }
 
     /**
-     * Generates Stripe Payment form Stripe API.
+     * Generates Stripe payment form Stripe API.
      *
      * @param stdClass $oMembership
      *
@@ -80,7 +80,7 @@ class PaymentDesign extends Framework\Core\Core
     }
 
     /**
-     * Generates Braintree Payment form Braintree API.
+     * Generates Braintree payment form Braintree API.
      *
      * @param stdClass $oMembership
      *
@@ -164,7 +164,7 @@ class PaymentDesign extends Framework\Core\Core
     }
 
     /**
-     * Build a "buy message".
+     * Build a "buy text" message.
      *
      * @param string $sMembershipName Membership name (e.g., Platinum, Silver, ...).
      * @param string $sProviderName Provider name (e.g., PayPal, 2CO, ...).
