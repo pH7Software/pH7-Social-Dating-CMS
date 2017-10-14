@@ -15,7 +15,6 @@ use PH7\Framework\File\File;
 
 class VideoCore
 {
-
     /**
      * Check if this is a url, if so, this is a video from an external site.
      *
@@ -56,5 +55,4 @@ class VideoCore
         $oFile->deleteFile($sDir . $sThumbName . '-4' . $sThumbExt);
         unset($oFile);
     }
-
 }
