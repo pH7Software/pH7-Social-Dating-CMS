@@ -121,10 +121,9 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
             break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid Field type!');
+                throw new PH7InvalidArgumentException('Invalid Field type!');
         }
 
         return $this->_sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->_sDefVal) . ';';
     }
-
 }
