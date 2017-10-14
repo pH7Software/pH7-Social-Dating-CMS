@@ -27,8 +27,6 @@ class TwoCheckOut extends Provider implements Api
 
     /**
      * @param bool $bSandbox
-     *
-     * @return void
      */
     public function __construct($bSandbox = false)
     {
