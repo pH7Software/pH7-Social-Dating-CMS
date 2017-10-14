@@ -97,7 +97,7 @@ class PaymentDesign extends Framework\Core\Core
         $oBraintree
             ->param('item_number', $oMembership->groupId)
             ->param('amount', $oMembership->price);
-        echo self::displayGatewayForm($oBraintree, $oMembership->name, 'Braintree');
+        echo self::displayGatewayForm($oBraintree, $oMembership->name, '<u>Braintree</u>');
 
         unset($oBraintree);
 
