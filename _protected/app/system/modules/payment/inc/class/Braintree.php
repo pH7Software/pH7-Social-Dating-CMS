@@ -18,9 +18,19 @@ class Braintree extends BraintreeGateway
 {
     use Api; // Import the Api trait
 
+    const SANDBOX_MERCHANT_ID = 'cbqd3ncztsszwbrh';
+
     public static function init(Config $oConfig)
     {
-        $sEnvironment = ((bool)$oConfig->values['module.setting']['sandbox.enabled']) ? 'sandbox' : 'production';
+        $sEnvironment = 'production';
+
+        if (
+            (bool)$oConfig->values['module.setting']['sandbox.enabled'] ||
+            $oConfig->values['module.setting']['braintree.merchant_id'] === static::SANDBOX_MERCHANT_ID
+        ) {
+            $sEnvironment = 'sandbox';
+        }
+
         Braintree_Configuration::environment($sEnvironment);
 
         Braintree_Configuration::merchantId($oConfig->values['module.setting']['braintree.merchant_id']);
