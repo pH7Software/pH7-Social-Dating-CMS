@@ -40,7 +40,7 @@ class MainController extends Controller
     protected $iProfileId;
 
     /** @var bool Payment status. Default is failure (FALSE) */
-    private $_bStatus = false;
+    private $bStatus = false;
 
 
     public function __construct()
@@ -115,7 +115,7 @@ class MainController extends Controller
                         $this->iProfileId,
                         $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                     ) {
-                        $this->_bStatus = true; // Status is OK
+                        $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
                         // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
                     }
@@ -144,14 +144,14 @@ class MainController extends Controller
                             $this->iProfileId,
                             $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                         ) {
-                            $this->_bStatus = true; // Status is OK
+                            $this->bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
                             $this->notification('Stripe', $iItemNumber); // Add info into the log file
                         }
                     }
                     catch (\Stripe\Error\Card $oE) {
                         // The card has been declined
-                        // Do nothing here as "$this->_bStatus" is by default FALSE and so it will display "Error occurred" msg later
+                        // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
                     }
                     catch (\Stripe\Error\Base $oE) {
                         $this->design->setMessage( $this->str->escape($oE->getMessage(), true) );
@@ -176,7 +176,7 @@ class MainController extends Controller
                             $this->iProfileId,
                             $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                         ) {
-                            $this->_bStatus = true; // Status is OK
+                            $this->bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
                             $this->notification('Braintree', $iItemNumber); // Add info into the log file
                         }
@@ -201,7 +201,7 @@ class MainController extends Controller
                             $this->dateTime->get()->dateTime('Y-m-d H:i:s')
                         )
                     ) {
-                        $this->_bStatus = true; // Status is OK
+                        $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
                         $this->notification('TwoCO', $iItemNumber); // Add info into the log file
                     }
@@ -219,17 +219,20 @@ class MainController extends Controller
         }
 
         // Set the page titles
-        $this->sTitle = ($this->_bStatus) ? t('Thank you!') : t('Error occurred!');
+        $this->sTitle = ($this->bStatus) ? t('Thank you!') : t('Error occurred!');
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
-        if ($this->_bStatus) {
+        if ($this->bStatus) {
             $this->updateAffCom();
             $this->clearCache();
         }
 
-        // Set the valid page
-        $sPage = ($this->_bStatus) ? 'success' : 'error';
-        $this->manualTplInclude($sPage . $this->view->getTplExt());
+        // Set the valid template page
+        $this->manualTplInclude($this->getTemplatePageName() . $this->view->getTplExt());
+
+        if ($this->bStatus) {
+            $this->setAutomaticRedirectionToHomepage();
+        }
 
         // Output
         $this->output();
@@ -369,5 +372,23 @@ class MainController extends Controller
     private function updateUserGroupId($iItemNumber)
     {
         $this->session->set('member_group_id', $iItemNumber);
+    }
+
+    /**
+     * Set automatic redirection to homepage if payment was successful.
+     *
+     * @return void
+     */
+    private function setAutomaticRedirectionToHomepage()
+    {
+        $this->design->setRedirect($this->registry->site_url, null, null, 4);
+    }
+
+    /**
+     * @return string
+     */
+    private function getTemplatePageName()
+    {
+        return $this->bStatus ? 'success' : 'error';
     }
 }
