@@ -8,26 +8,43 @@
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 use PH7\Framework\Mvc\Request\Http;
 
-class FieldModel extends Framework\Mvc\Model\Engine\Model
+class FieldModel extends Model
 {
+    /** @var string */
+    private $_sTable;
 
-    private $_sTable, $_sName, $_sType, $_iLength, $_sDefVal, $_sSql;
+    /** @var null|string */
+    private $_sName;
+
+    /** @var null|string */
+    private $_sType;
+
+    /** @var null|int */
+    private $_iLength;
+
+    /** @var null|string */
+    private $_sDefVal;
+
+    /** @var string */
+    private $_sSql;
 
     /**
-     * Constructor.
-     *
      * @param string $sTable Table name.
-     * @param string $sName Fielde name. Default NULL
-     * @param string $sType Field type. Default NULL
-     * @param integer $iLength Length field. Default NULL
-     * @param string $sDefVal Default field value. Default NULL
+     * @param string $sName Field name.
+     * @param string $sType Field type.
+     * @param int $iLength Length field.
+     * @param string $sDefVal Default field value.
      */
     public function __construct($sTable, $sName = null, $sType = null, $iLength = null, $sDefVal = null)
     {
+        parent::__construct();
+
         $this->_sTable = Various::checkModelTable($sTable);
         $this->_sName = $sName;
         $this->_sType = $sType;
@@ -38,7 +55,6 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Get all fields.
      *
-     * @return object Data of users
      * @return array All fields.
      */
     public function all()
@@ -54,8 +70,9 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
             {
                 foreach ($aRow as $sColumn => $sValue)
                 {
-                    if (!is_numeric($sColumn) && $sColumn !== 'profileId')
+                    if (!is_numeric($sColumn) && $sColumn !== 'profileId') {
                         $aColumn[] = $sColumn;
+                    }
                 }
             }
         }
@@ -84,7 +101,7 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Count fields.
      *
-     * @return integer
+     * @return int
      */
     public function total()
     {
@@ -94,19 +111,19 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Executes SQL queries.
      *
-     * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message.
+     * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
+     *
+     * @throws PH7InvalidArgumentException Explanatory message.
      */
     protected function execute()
     {
         $rStmt = Db::getInstance()->exec($this->_sSql);
-        return ($rStmt === false) ? $rStmt->errorInfo() : true;
+        return $rStmt === false ? $rStmt->errorInfo() : true;
     }
 
     protected function getType()
     {
-        switch ($this->_sType)
-        {
+        switch ($this->_sType) {
             case 'textbox':
                 if (mb_strlen($this->_sDefVal) > $this->_iLength) $this->_iLength = mb_strlen($this->_sDefVal);
                 if ($this->_iLength == 0 || $this->_iLength > 255) $this->_iLength = 255;
@@ -121,10 +138,9 @@ class FieldModel extends Framework\Mvc\Model\Engine\Model
             break;
 
             default:
-                throw new \PH7\Framework\Error\CException\PH7InvalidArgumentException('Invalid Field type!');
+                throw new PH7InvalidArgumentException('Invalid Field type!');
         }
 
         return $this->_sSql . ' NOT NULL DEFAULT ' . Db::getInstance()->quote($this->_sDefVal) . ';';
     }
-
 }

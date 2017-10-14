@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Cookie\Cookie;
 use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\Mobile\MobApp;
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -100,7 +101,7 @@ class MainController extends Controller
     public function soon()
     {
         // If the "member_remember" and "member_id" cookies do not exist, nothing happens.
-        (new Framework\Cookie\Cookie)->remove( array('member_remember', 'member_id' ) );
+        (new Cookie)->remove(['member_remember', 'member_id']);
 
         $this->_sTitle = t('See you soon!');
         $this->view->page_title = $this->_sTitle;
@@ -128,7 +129,7 @@ class MainController extends Controller
             $sPage = static::GUEST_SPLASH_FILE;
         } else {
             $bIsSplashPage = (bool) DbConfig::getSetting('splashPage');
-            $sPage = ($bIsSplashPage) ? static::GUEST_SPLASH_FILE : static::GUEST_FILE;
+            $sPage = $bIsSplashPage ? static::GUEST_SPLASH_FILE : static::GUEST_FILE;
         }
 
         return $sPage;

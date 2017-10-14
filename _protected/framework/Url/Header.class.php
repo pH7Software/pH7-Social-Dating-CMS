@@ -26,7 +26,7 @@ class Header
      * @param string $sUrl Default NULL, so it's the current URL.
      * @param string $sMessage Default NULL, so no message.
      * @param string $sType Type of message: "Design::SUCCESS_TYPE", "Design::INFO_TYPE", "Design::WARNING_TYPE" or "Design::ERROR_TYPE"
-     * @param integer $iRedirectCode Default NULL, so the redirect code will be "301".
+     * @param int $iRedirectCode Default NULL, so the redirect code will be "301".
      *
      * @return void
      */
@@ -39,11 +39,11 @@ class Header
         Http::setHeadersByCode(Http::getStatusCodes($iRedirectCode));
 
         $oHttpRequest = new HttpRequest;
-        $sUrl = (!empty($sUrl)) ? $sUrl : $oHttpRequest->currentUrl();
+        $sUrl = ($sUrl !== null) ? $sUrl : $oHttpRequest->currentUrl();
         $sUrl = $oHttpRequest->pH7Url($sUrl);
         unset($oHttpRequest);
 
-        if (!empty($sMessage)) {
+        if ($sMessage !== null) {
             (new Design)->setFlashMsg($sMessage, $sType);
         }
 

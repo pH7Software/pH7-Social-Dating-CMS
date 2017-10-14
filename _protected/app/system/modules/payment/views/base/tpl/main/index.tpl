@@ -4,7 +4,7 @@
     <h4>&bull; {lang 'Want to increase your chances of meeting someone reliable?'}</h4>
 
     <p class="italic">
-        {lang 'Secure your membership TODAY and get all premium advantages'}
+        {lang 'Secure your membership TODAY and get all premium advantages!'}
     </p>
 
     <p class="bold">

@@ -15,7 +15,6 @@ use PH7\Framework\File\File;
 
 class VideoCore
 {
-
     /**
      * Check if this is a url, if so, this is a video from an external site.
      *
@@ -31,8 +30,9 @@ class VideoCore
      * @param integer $iAlbumId
      * @param string $sUsername
      * @param string $sVideoLink (file with the extension)
-     * @param string $sVideoExt Separate the different extensions with commas. (extension with the point. e.g., .ogg,.webm,.mp4) Default: .webm,.mp4
-     * @param string $sThumbExt (extension of thumbnail with the point) Default: .jpg
+     * @param string $sVideoExt Separate the different extensions with commas (extension with the point. e.g. .ogg,.webm,.mp4)
+     * @param string $sThumbExt (extension of thumbnail with the point
+     *
      * @return void
      */
     public function deleteVideo($iAlbumId, $sUsername, $sVideoLink, $sVideoExt = '.webm,.mp4', $sThumbExt = '.jpg')
@@ -55,5 +55,4 @@ class VideoCore
         $oFile->deleteFile($sDir . $sThumbName . '-4' . $sThumbExt);
         unset($oFile);
     }
-
 }

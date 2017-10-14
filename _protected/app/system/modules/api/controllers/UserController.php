@@ -12,6 +12,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\Validate\Validate;
 
 class UserController extends MainController
@@ -36,7 +37,7 @@ class UserController extends MainController
 
     public function createAccount()
     {
-        if ($this->oRest->getRequestMethod() != 'POST') {
+        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_POST) {
             $this->oRest->response('', 406);
         } else {
             $aRequests = $this->oRest->getRequest();
@@ -98,7 +99,7 @@ class UserController extends MainController
 
     public function login()
     {
-        if ($this->oRest->getRequestMethod() != 'POST') {
+        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_POST) {
             $this->oRest->response('', 406);
         } else {
             $aRequests = $this->oRest->getRequest();
@@ -129,7 +130,7 @@ class UserController extends MainController
      */
     public function user($iId)
     {
-        if ($this->oRest->getRequestMethod() != 'GET') {
+        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
             $this->oRest->response('', 406);
         } else {
             if (empty($iId)) {
@@ -159,7 +160,7 @@ class UserController extends MainController
      */
     public function users($sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
-        if ($this->oRest->getRequestMethod() != 'GET') {
+        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
             $this->oRest->response('', 406);
         } else {
             $oUsers = $this->oUserModel->getProfiles($sOrder, $iOffset, $iLimit);
@@ -186,7 +187,7 @@ class UserController extends MainController
      */
     public function usersFromLocation($sCountryCode, $sCity, $sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
-        if ($this->oRest->getRequestMethod() != 'GET') {
+        if ($this->oRest->getRequestMethod() !== HttpRequest::METHOD_GET) {
             $this->oRest->response('', 406);
         } else {
             $oUsers = $this->oUserModel->getGeoProfiles($sCountryCode, $sCity, false, $sOrder, $iOffset, $iLimit);

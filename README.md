@@ -57,7 +57,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Member approval system
 * Advanced Admin Panel
 * Complete Membership System
-* Payment Gateways Integration for PayPal, Stripe, Bitcoin and 2CheckOut
+* Payment Gateways Integration for PayPal, Stripe, Braintree, Bitcoin and 2CheckOut
 * Statistics & Analytics System
 * Live Notification System
 * Registration delay (to avoid spam)

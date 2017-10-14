@@ -11,6 +11,7 @@
 
 namespace PH7;
 
+use Braintree_Transaction;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\File\File;
 use PH7\Framework\Mail\Mail;
@@ -19,6 +20,13 @@ use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 
 class MainController extends Controller
 {
+    const PAYPAL_GATEWAY_NAME = 'paypal';
+    const STRIPE_GATEWAY_NAME = 'stripe';
+    const BRAINTREE_GATEWAY_NAME = 'braintree';
+    const TWO_CHECKOUT_GATEWAY_NAME = '2co';
+    const CCBILL_GATEWAY_NAME = 'ccbill';
+
+
     /** @var AffiliateCoreModel */
     protected $oUserModel;
 
@@ -32,7 +40,7 @@ class MainController extends Controller
     protected $iProfileId;
 
     /** @var bool Payment status. Default is failure (FALSE) */
-    private $_bStatus = false;
+    private $bStatus = false;
 
 
     public function __construct()
@@ -97,8 +105,7 @@ class MainController extends Controller
     public function process($sProvider = '')
     {
         switch ($sProvider) {
-            case 'paypal':
-            {
+            case static::PAYPAL_GATEWAY_NAME: {
                 $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
                 if ($oPayPal->valid() && $this->httpRequest->postExists('custom')) {
                     $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
@@ -108,17 +115,15 @@ class MainController extends Controller
                         $this->iProfileId,
                         $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                     ) {
-                        $this->_bStatus = true; // Status is OK
+                        $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
                         // PayPal will call automatically the "notification()" method thanks its IPN feature and "notify_url" form attribute.
                     }
                 }
                 unset($oPayPal);
-            }
-            break;
+            } break;
 
-            case 'stripe':
-            {
+            case static::STRIPE_GATEWAY_NAME: {
                 if ($this->httpRequest->postExists('stripeToken')) {
                     \Stripe\Stripe::setApiKey($this->config->values['module.setting']['stripe.secret_key']);
                     $sAmount = $this->httpRequest->post('amount');
@@ -139,69 +144,98 @@ class MainController extends Controller
                             $this->iProfileId,
                             $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
                         ) {
-                            $this->_bStatus = true; // Status is OK
+                            $this->bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
-                            $this->notification('Stripe', $iItemNumber); // Add info into the log file
+                            $this->notification(Stripe::class, $iItemNumber);
                         }
                     }
                     catch (\Stripe\Error\Card $oE) {
                         // The card has been declined
-                        // Do nothing here as "$this->_bStatus" is by default FALSE and so it will display "Error occurred" msg later
+                        // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
                     }
                     catch (\Stripe\Error\Base $oE) {
                         $this->design->setMessage( $this->str->escape($oE->getMessage(), true) );
                     }
                 }
-            }
-            break;
+            } break;
 
-            case '2co':
-            {
+            case static::BRAINTREE_GATEWAY_NAME: {
+                if ($bNonce = $this->httpRequest->post('payment_method_nonce')) {
+                    Braintree::init($this->config);
+
+                    $oResult = Braintree_Transaction::sale([
+                        'amount' => $this->httpRequest->post('amount'),
+                        'paymentMethodNonce' => $bNonce,
+                        'options' => [ 'submitForSettlement' => true ]
+                    ]);
+
+                    if ($oResult->success) {
+                        $iItemNumber = $this->httpRequest->post('item_number');
+                        if ($this->oUserModel->updateMembership(
+                            $iItemNumber,
+                            $this->iProfileId,
+                            $this->dateTime->get()->dateTime('Y-m-d H:i:s'))
+                        ) {
+                            $this->bStatus = true; // Status is OK
+                            $this->updateUserGroupId($iItemNumber);
+                            $this->notification(Braintree::class, $iItemNumber);
+                        }
+                    } elseif ($oResult->transaction) {
+                        $sErrMsg = t('Error processing transaction: %0%', $oResult->transaction->processorResponseText);
+                        $this->design->setMessage( $this->str->escape($sErrMsg, true) );
+                    }
+                }
+            } break;
+
+            case static::TWO_CHECKOUT_GATEWAY_NAME: {
                 $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enabled']);
                 $sVendorId = $this->config->values['module.setting']['2co.vendor_id'];
                 $sSecretWord = $this->config->values['module.setting']['2co.secret_word'];
 
                 $iItemNumber = $this->httpRequest->post('cart_order_id');
-                if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id')) {
+                if ($o2CO->valid($sVendorId, $sSecretWord)
+                    && $this->httpRequest->postExists('sale_id')
+                ) {
                     if (
                         $this->oUserModel->updateMembership(
                             $iItemNumber,
                             $this->iProfileId,
-                            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                            $this->dateTime->get()
+                                ->dateTime('Y-m-d H:i:s')
                         )
                     ) {
-                        $this->_bStatus = true; // Status is OK
+                        $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
-                        $this->notification('TwoCO', $iItemNumber); // Add info into the log file
+                        $this->notification(TwoCO::class, $iItemNumber);
                     }
                 }
                 unset($o2CO);
-            }
-            break;
+            } break;
 
-            case 'ccbill':
-            {
+            case static::CCBILL_GATEWAY_NAME: {
                 // Still in developing...
                 // You are more than welcome to contribute on Github: https://github.com/pH7Software/pH7-Social-Dating-CMS
-            }
-            break;
+            } break;
 
             default:
-                $this->displayPageNotFound(t('Provinder Not Found!'));
+                $this->displayPageNotFound(t('Provider Not Found!'));
         }
 
         // Set the page titles
-        $this->sTitle = ($this->_bStatus) ? t('Thank you!') : t('Error occurred!');
+        $this->sTitle = ($this->bStatus) ? t('Thank you!') : t('Error occurred!');
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
-        if ($this->_bStatus) {
+        if ($this->bStatus) {
             $this->updateAffCom();
             $this->clearCache();
         }
 
-        // Set the valid page
-        $sPage = ($this->_bStatus) ? 'success' : 'error';
-        $this->manualTplInclude($sPage . $this->view->getTplExt());
+        // Set the valid template page
+        $this->manualTplInclude($this->getTemplatePageName() . $this->view->getTplExt());
+
+        if ($this->bStatus) {
+            $this->setAutomaticRedirectionToHomepage();
+        }
 
         // Output
         $this->output();
@@ -216,8 +250,10 @@ class MainController extends Controller
     public function notification($sGatewayName = '', $iItemNumber = 0)
     {
         // Save buyer information to a log file
-        if ($sGatewayName == 'PayPal' || $sGatewayName == 'Stripe' || $sGatewayName == 'TwoCO' || $sGatewayName == 'CCBill') {
-            $sGatewayName = 'PH7\\' . $sGatewayName;
+        if ($sGatewayName === PayPal::class || $sGatewayName === Braintree::class ||
+            $sGatewayName === Stripe::class || $sGatewayName === TwoCO::class
+        ) {
+            // Add payment info into the log file
             $this->log(new $sGatewayName(false), t('%0% payment was made with the following information:', $sGatewayName));
         }
 
@@ -340,5 +376,23 @@ class MainController extends Controller
     private function updateUserGroupId($iItemNumber)
     {
         $this->session->set('member_group_id', $iItemNumber);
+    }
+
+    /**
+     * Set automatic redirection to homepage if payment was successful.
+     *
+     * @return void
+     */
+    private function setAutomaticRedirectionToHomepage()
+    {
+        $this->design->setRedirect($this->registry->site_url, null, null, 4);
+    }
+
+    /**
+     * @return string
+     */
+    private function getTemplatePageName()
+    {
+        return $this->bStatus ? 'success' : 'error';
     }
 }

@@ -10,6 +10,7 @@
 
 namespace PH7;
 
+use Braintree_ClientToken;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Payment\Gateway\Api\Api as PaymentApi;
 use stdClass;
@@ -25,7 +26,8 @@ class PaymentDesign extends Framework\Core\Core
     {
         $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
 
-        $oPayPal->param('business', $this->config->values['module.setting']['paypal.email'])
+        $oPayPal
+            ->param('business', $this->config->values['module.setting']['paypal.email'])
             ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price)) // Use base64_encode() to discourage curious people
             ->param('amount', $oMembership->price)
             ->param('item_number', $oMembership->groupId)
@@ -36,7 +38,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('tax_cart', $this->config->values['module.setting']['vat_rate'])
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
             ->param('rm', 2) // Auto redirection in POST data
-            ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PayPal,' . $oMembership->groupId))
+            ->param('notify_url', Uri::get('payment', 'main', 'notification', 'PH7\PayPal,' . $oMembership->groupId))
             ->param('cancel_return', Uri::get('payment', 'main', 'membership', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
 
         echo self::displayGatewayForm($oPayPal, $oMembership->name, 'PayPal');
@@ -45,7 +47,7 @@ class PaymentDesign extends Framework\Core\Core
     }
 
     /**
-     * Generates Stripe Payment form thanks the Stripe API.
+     * Generates Stripe payment form Stripe API.
      *
      * @param stdClass $oMembership
      *
@@ -55,7 +57,8 @@ class PaymentDesign extends Framework\Core\Core
     {
         $oStripe = new Stripe;
 
-        $oStripe->param('item_number', $oMembership->groupId)
+        $oStripe
+            ->param('item_number', $oMembership->groupId)
             ->param('amount', $oMembership->price);
 
         echo
@@ -77,6 +80,36 @@ class PaymentDesign extends Framework\Core\Core
     }
 
     /**
+     * Generates Braintree payment form Braintree API.
+     *
+     * @param stdClass $oMembership
+     *
+     * @return void
+     */
+    public function buttonBraintree(stdClass $oMembership)
+    {
+        Braintree::init($this->config);
+        $sClientToken = Braintree_ClientToken::generate();
+
+        echo '<script src="https://js.braintreegateway.com/v2/braintree.js"></script>';
+
+        $oBraintree = new Braintree;
+        $oBraintree
+            ->param('item_number', $oMembership->groupId)
+            ->param('amount', $oMembership->price);
+        echo self::displayGatewayForm($oBraintree, $oMembership->name, '<u>Braintree</u>');
+
+        unset($oBraintree);
+
+        echo '<script>';
+        echo '$(function () {';
+        echo "braintree.setup('$sClientToken', 'dropin', {";
+        echo "container: 'payment-form'});";
+        echo '})';
+        echo '</script>';
+    }
+
+    /**
      * @param stdClass $oMembership
      *
      * @return void
@@ -85,7 +118,8 @@ class PaymentDesign extends Framework\Core\Core
     {
         $o2CO = new TwoCO($this->config->values['module.setting']['sandbox.enabled']);
 
-        $o2CO->param('sid', $this->config->values['module.setting']['2co.vendor_id'])
+        $o2CO
+            ->param('sid', $this->config->values['module.setting']['2co.vendor_id'])
             ->param('id_type', 1)
             ->param('cart_order_id', $oMembership->groupId)
             ->param('merchant_order_id', $oMembership->groupId)
@@ -116,20 +150,21 @@ class PaymentDesign extends Framework\Core\Core
     /**
      * @param PaymentApi $oPaymentProvider
      * @param string $sMembershipName
-     * @param string $sProviderName
+     * @param string $sProviderName The payment provider name.
      *
      * @return string
      */
     private function displayGatewayForm(PaymentApi $oPaymentProvider, $sMembershipName, $sProviderName)
     {
-        echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">',
+        echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">
+            <div id="payment-form"></div>',
             $oPaymentProvider->generate(),
             '<button class="btn btn-primary btn-md" type="submit" name="submit">', self::buyTxt($sMembershipName, $sProviderName), '</button>
-        </form>';
+            </form>';
     }
 
     /**
-     * Build a "buy message".
+     * Build a "buy text" message.
      *
      * @param string $sMembershipName Membership name (e.g., Platinum, Silver, ...).
      * @param string $sProviderName Provider name (e.g., PayPal, 2CO, ...).

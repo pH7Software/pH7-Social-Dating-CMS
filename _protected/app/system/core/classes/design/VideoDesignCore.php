@@ -32,7 +32,7 @@ class VideoDesignCore
     /**
      * Generates HTML contents Video.
      *
-     * @param object $oData
+     * @param \stdClass $oData
      * @param string $sMedia Type of the media ('preview' or 'movie'). Default: 'movie'
      * @param integer $iWidth Default: 600
      * @param integer $iHeight Default: 400
@@ -88,11 +88,12 @@ class VideoDesignCore
                 <button class="btn btn-default btn-sm" onclick="Video.smallSize()">' . t('Small') . '</button>
             </div>';
 
-            if ($sMedia == 'preview')
+            if ($sMedia == 'preview') {
                 echo $sDurationTag, '<a href="#watch', $oData->videoId, '" title="', $oData->title, '" data-popup="video"><img src="', $sThumbUrl, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>
                 <div class="hidden"><div id="watch', $oData->videoId, '">', $sVideoTag, '</div></div>';
-            else
+            } else {
                 echo $sVideoTag;
+            }
         }
     }
 }

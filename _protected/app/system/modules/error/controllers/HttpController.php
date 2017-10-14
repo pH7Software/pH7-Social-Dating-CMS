@@ -12,7 +12,7 @@ use PH7\Framework\Http\Http;
 
 class HttpController extends Controller
 {
-
+    /** @var string */
     private $sTitle;
 
     public function index()
@@ -116,5 +116,4 @@ class HttpController extends Controller
 
         $this->output();
     }
-
 }
