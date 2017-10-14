@@ -22,6 +22,12 @@
                 <img src="{url_tpl_mod_img}payment-icon.png" alt="Payment Gateways" title="{lang 'Purchase your subscription safely!'}" />
             </div>
 
+            {if $is_braintree}
+                <div class="left vs_marg">
+                    {{ $oDesign->buttonBraintree($membership) }}
+                </div>
+            {/if}
+
             {if $is_paypal}
                 <div class="left vs_marg">
                     {{ $oDesign->buttonPayPal($membership) }}
@@ -31,12 +37,6 @@
             {if $is_stripe}
                 <div class="left vs_marg">
                     {{ $oDesign->buttonStripe($membership) }}
-                </div>
-            {/if}
-
-            {if $is_braintree}
-                <div class="left vs_marg">
-                    {{ $oDesign->buttonBraintree($membership) }}
                 </div>
             {/if}
 
