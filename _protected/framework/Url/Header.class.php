@@ -39,11 +39,11 @@ class Header
         Http::setHeadersByCode(Http::getStatusCodes($iRedirectCode));
 
         $oHttpRequest = new HttpRequest;
-        $sUrl = (!empty($sUrl)) ? $sUrl : $oHttpRequest->currentUrl();
+        $sUrl = ($sUrl !== null) ? $sUrl : $oHttpRequest->currentUrl();
         $sUrl = $oHttpRequest->pH7Url($sUrl);
         unset($oHttpRequest);
 
-        if (!empty($sMessage)) {
+        if ($sMessage !== null) {
             (new Design)->setFlashMsg($sMessage, $sType);
         }
 
