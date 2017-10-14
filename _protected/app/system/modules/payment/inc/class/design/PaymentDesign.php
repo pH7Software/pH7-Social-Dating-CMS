@@ -38,7 +38,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('tax_cart', $this->config->values['module.setting']['vat_rate'])
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
             ->param('rm', 2) // Auto redirection in POST data
-            ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PayPal,' . $oMembership->groupId))
+            ->param('notify_url',  Uri::get('payment', 'main', 'notification', 'PH7\PayPal,' . $oMembership->groupId))
             ->param('cancel_return', Uri::get('payment', 'main', 'membership', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
 
         echo self::displayGatewayForm($oPayPal, $oMembership->name, 'PayPal');

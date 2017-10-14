@@ -146,7 +146,7 @@ class MainController extends Controller
                         ) {
                             $this->bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
-                            $this->notification('Stripe', $iItemNumber); // Add info into the log file
+                            $this->notification(Stripe::class, $iItemNumber); // Add info into the log file
                         }
                     }
                     catch (\Stripe\Error\Card $oE) {
@@ -178,7 +178,7 @@ class MainController extends Controller
                         ) {
                             $this->bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
-                            $this->notification('Braintree', $iItemNumber); // Add info into the log file
+                            $this->notification(Braintree::class, $iItemNumber); // Add info into the log file
                         }
                     } elseif ($oResult->transaction) {
                         $sErrMsg = t('Error processing transaction: %0%', $oResult->transaction->processorResponseText);
@@ -203,7 +203,7 @@ class MainController extends Controller
                     ) {
                         $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
-                        $this->notification('TwoCO', $iItemNumber); // Add info into the log file
+                        $this->notification(TwoCO::class, $iItemNumber); // Add info into the log file
                     }
                 }
                 unset($o2CO);
