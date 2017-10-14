@@ -24,6 +24,7 @@ class CommentDesignCore
      *
      * @param integer $iId
      * @param string $sTable
+     *
      * @return void
      */
     public static function link($iId, $sTable)

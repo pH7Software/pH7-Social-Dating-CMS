@@ -32,7 +32,7 @@ class VideoDesignCore
     /**
      * Generates HTML contents Video.
      *
-     * @param object $oData
+     * @param \stdClass $oData
      * @param string $sMedia Type of the media ('preview' or 'movie'). Default: 'movie'
      * @param integer $iWidth Default: 600
      * @param integer $iHeight Default: 400
