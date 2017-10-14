@@ -70,8 +70,9 @@ class FieldModel extends Model
             {
                 foreach ($aRow as $sColumn => $sValue)
                 {
-                    if (!is_numeric($sColumn) && $sColumn !== 'profileId')
+                    if (!is_numeric($sColumn) && $sColumn !== 'profileId') {
                         $aColumn[] = $sColumn;
+                    }
                 }
             }
         }
@@ -110,19 +111,19 @@ class FieldModel extends Model
     /**
      * Executes SQL queries.
      *
-     * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException Explanatory message.
+     * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
+     *
+     * @throws PH7InvalidArgumentException Explanatory message.
      */
     protected function execute()
     {
         $rStmt = Db::getInstance()->exec($this->_sSql);
-        return ($rStmt === false) ? $rStmt->errorInfo() : true;
+        return $rStmt === false ? $rStmt->errorInfo() : true;
     }
 
     protected function getType()
     {
-        switch ($this->_sType)
-        {
+        switch ($this->_sType) {
             case 'textbox':
                 if (mb_strlen($this->_sDefVal) > $this->_iLength) $this->_iLength = mb_strlen($this->_sDefVal);
                 if ($this->_iLength == 0 || $this->_iLength > 255) $this->_iLength = 255;
