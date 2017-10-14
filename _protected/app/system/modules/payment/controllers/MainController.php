@@ -146,7 +146,7 @@ class MainController extends Controller
                         ) {
                             $this->bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
-                            $this->notification(Stripe::class, $iItemNumber); // Add info into the log file
+                            $this->notification(Stripe::class, $iItemNumber);
                         }
                     }
                     catch (\Stripe\Error\Card $oE) {
@@ -178,7 +178,7 @@ class MainController extends Controller
                         ) {
                             $this->bStatus = true; // Status is OK
                             $this->updateUserGroupId($iItemNumber);
-                            $this->notification(Braintree::class, $iItemNumber); // Add info into the log file
+                            $this->notification(Braintree::class, $iItemNumber);
                         }
                     } elseif ($oResult->transaction) {
                         $sErrMsg = t('Error processing transaction: %0%', $oResult->transaction->processorResponseText);
@@ -250,6 +250,7 @@ class MainController extends Controller
         if ($sGatewayName === PayPal::class || $sGatewayName === Braintree::class ||
             $sGatewayName === Stripe::class || $sGatewayName === TwoCO::class
         ) {
+            // Add payment info into the log file
             $this->log(new $sGatewayName(false), t('%0% payment was made with the following information:', $sGatewayName));
         }
 
