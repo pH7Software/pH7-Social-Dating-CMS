@@ -242,7 +242,7 @@ class Design
             $this->setFlashMsg($sMsg, $sType);
         }
 
-        $sUrl = (!empty($sUrl)) ? $sUrl : $this->oHttpRequest->currentUrl();
+        $sUrl = ($sUrl !== null) ? $sUrl : $this->oHttpRequest->currentUrl();
 
         header('Refresh: ' . $iTime . '; URL=' . $this->oHttpRequest->pH7Url($sUrl));
     }
