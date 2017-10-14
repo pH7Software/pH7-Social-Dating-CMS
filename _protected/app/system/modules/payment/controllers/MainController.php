@@ -193,17 +193,20 @@ class MainController extends Controller
                 $sSecretWord = $this->config->values['module.setting']['2co.secret_word'];
 
                 $iItemNumber = $this->httpRequest->post('cart_order_id');
-                if ($o2CO->valid($sVendorId, $sSecretWord) && $this->httpRequest->postExists('sale_id')) {
+                if ($o2CO->valid($sVendorId, $sSecretWord)
+                    && $this->httpRequest->postExists('sale_id')
+                ) {
                     if (
                         $this->oUserModel->updateMembership(
                             $iItemNumber,
                             $this->iProfileId,
-                            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+                            $this->dateTime->get()
+                                ->dateTime('Y-m-d H:i:s')
                         )
                     ) {
                         $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
-                        $this->notification(TwoCO::class, $iItemNumber); // Add info into the log file
+                        $this->notification(TwoCO::class, $iItemNumber);
                     }
                 }
                 unset($o2CO);

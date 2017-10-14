@@ -24,8 +24,7 @@ class Braintree extends BraintreeGateway
     {
         $sEnvironment = 'production';
 
-        if (
-            (bool)$oConfig->values['module.setting']['sandbox.enabled'] ||
+        if ((bool)$oConfig->values['module.setting']['sandbox.enabled'] ||
             $oConfig->values['module.setting']['braintree.merchant_id'] === static::SANDBOX_MERCHANT_ID
         ) {
             $sEnvironment = 'sandbox';
