@@ -36,5 +36,4 @@ class AddFieldForm
         $oForm->addElement(new \PFBC\Element\Button(t('Add')));
         $oForm->render();
     }
-
 }

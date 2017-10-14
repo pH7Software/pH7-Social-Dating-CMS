@@ -37,5 +37,4 @@ class EditFieldForm
         $oForm->addElement(new \PFBC\Element\Button(t('Edit')));
         $oForm->render();
     }
-
 }
