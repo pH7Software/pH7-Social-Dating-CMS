@@ -14,11 +14,17 @@ namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mvc\Model\Security as SecurityModel;
+use PH7\Framework\Session\Session;
 use PH7\Framework\Util\Various;
 
 abstract class Api
 {
-    protected $oDesign, $sUrl;
+    /** @var Design */
+    protected $oDesign;
+
+    /** @var string */
+    protected $sUrl;
 
     public function __construct()
     {
@@ -39,6 +45,7 @@ abstract class Api
      * Get and saves the Avatar in the temporary directory.
      *
      * @param string $sUrl
+     *
      * @return string The path of the Avatar
      */
     public function getAvatar($sUrl)
@@ -53,6 +60,7 @@ abstract class Api
      *
      * @param integer $iId
      * @param UserCoreModel $oUserModel
+     *
      * @return void
      */
     public function setLogin($iId, UserCoreModel $oUserModel)
@@ -60,8 +68,9 @@ abstract class Api
         $oUserData = $oUserModel->readProfile($iId);
         $oUser = new UserCore;
 
-        if (true === ($sErrMsg = $oUser->checkAccountStatus($oUserData)))
-            $oUser->setAuth($oUserData, $oUserModel, new Framework\Session\Session, new Framework\Mvc\Model\Security);
+        if (true === ($sErrMsg = $oUser->checkAccountStatus($oUserData))) {
+            $oUser->setAuth($oUserData, $oUserModel, new Session, new SecurityModel);
+        }
 
         unset($oUser, $oUserModel);
 
@@ -72,6 +81,7 @@ abstract class Api
      * Check if gender value is correct.
      *
      * @param string $sGender The gender (sex).
+     *
      * @return string
      */
     protected function checkGender($sGender)

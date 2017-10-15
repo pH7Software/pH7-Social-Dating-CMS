@@ -26,7 +26,6 @@ class MainController extends Controller
     const TWO_CHECKOUT_GATEWAY_NAME = '2co';
     const CCBILL_GATEWAY_NAME = 'ccbill';
 
-
     /** @var AffiliateCoreModel */
     protected $oUserModel;
 
@@ -41,7 +40,6 @@ class MainController extends Controller
 
     /** @var bool Payment status. Default is failure (FALSE) */
     private $bStatus = false;
-
 
     public function __construct()
     {
