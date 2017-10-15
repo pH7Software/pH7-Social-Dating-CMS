@@ -24,8 +24,11 @@ class MainController extends Controller
      */
     protected $sTitle;
 
-    private $_sApi, $_sUrl;
+    /** @var string */
+    private $_sApi;
 
+    /** @var string */
+    private $_sUrl;
 
     public function index()
     {
