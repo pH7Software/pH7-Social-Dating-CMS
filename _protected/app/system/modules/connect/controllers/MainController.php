@@ -13,6 +13,10 @@ namespace PH7;
 
 class MainController extends Controller
 {
+    const FB_PROVIDER = 'fb';
+    const GOOGLE_PROVIDER = 'google';
+    const TWITTER_PROVIDER = 'twitter';
+    const MICROSOFT_PROVIDER = 'microsoft';
 
     /**
      * @access protected Protected access for the AdminController class derived from this class.
@@ -76,24 +80,23 @@ class MainController extends Controller
 
     private function _whatApi()
     {
-        switch ($this->_sApi)
-        {
-            case 'fb':
+        switch ($this->_sApi) {
+            case self::FB_PROVIDER:
                 if (!$this->config->values['module.api']['facebook.enabled']) continue;
                 $this->_sUrl = new Facebook;
             break;
 
-            case 'google':
+            case self::GOOGLE_PROVIDER:
                 if (!$this->config->values['module.api']['google.enabled']) continue;
                 $this->_sUrl = new Google($this->session, $this->httpRequest, $this->registry);
             break;
 
-            case 'twitter':
+            case self::TWITTER_PROVIDER:
                 if (!$this->config->values['module.api']['twitter.enabled']) continue;
                 $this->_sUrl = new Twitter;
             break;
 
-            case 'microsoft':
+            case self::MICROSOFT_PROVIDER:
                 if (!$this->config->values['module.api']['microsoft.enabled']) continue;
                 $this->_sUrl = new Microsoft;
             break;
@@ -102,5 +105,4 @@ class MainController extends Controller
                 $this->displayPageNotFound(t('The %0% API is incorrect.', $this->_sApi));
         }
     }
-
 }
