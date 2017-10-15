@@ -10,7 +10,6 @@ namespace PH7;
 
 class AdminController extends MainController
 {
-
     public function config()
     {
         $this->sTitle = t('Config Universal Login - API Keys');
@@ -18,5 +17,4 @@ class AdminController extends MainController
         $this->view->h2_title = $this->sTitle;
         $this->output();
     }
-
 }

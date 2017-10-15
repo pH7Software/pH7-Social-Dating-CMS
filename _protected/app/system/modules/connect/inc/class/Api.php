@@ -53,6 +53,7 @@ abstract class Api
      *
      * @param integer $iId
      * @param UserCoreModel $oUserModel
+     *
      * @return void
      */
     public function setLogin($iId, UserCoreModel $oUserModel)
@@ -72,6 +73,7 @@ abstract class Api
      * Check if gender value is correct.
      *
      * @param string $sGender The gender (sex).
+     *
      * @return string
      */
     protected function checkGender($sGender)
