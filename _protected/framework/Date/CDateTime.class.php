@@ -36,7 +36,7 @@ class CDateTime
     /**
      * Get, initialization method.
      *
-     * @param string|integer $mTime If specified, you must enter a date/timestamp, otherwise it's the current time.
+     * @param string|int $mTime If specified, you must enter a date/timestamp, otherwise it's the current time.
      *
      * @return CDateTime
      */
