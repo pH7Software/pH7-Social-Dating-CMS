@@ -36,12 +36,14 @@ try {
     ) {
         $oCtrl = new $sCtrlClass;
 
-        if (method_exists($oCtrl, $sAction))
-            call_user_func(array($oCtrl, $sAction));
-        else
+        if (method_exists($oCtrl, $sAction)) {
+            $oCtrl->$sAction();
+        } else {
             (new $sMainCtrlClass)->error_404();
-    } else
+        }
+    } else {
         (new $sMainCtrlClass)->error_404();
+    }
 } catch (Exception $oE) {
     echo $oE->getMessage();
 }
