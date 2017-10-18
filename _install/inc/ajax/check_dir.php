@@ -7,6 +7,7 @@
  */
 
 namespace PH7;
+
 define('PH7', 1);
 
 require '_ajax.inc.php';
