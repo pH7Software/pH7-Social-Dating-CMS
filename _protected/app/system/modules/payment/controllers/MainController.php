@@ -63,7 +63,7 @@ class MainController extends Controller
         if (empty($oMembershipData)) {
             $this->displayPageNotFound(t('No membership found!'));
         } else {
-            $this->view->page_title = $this->view->h2_title = t('Memberships List');
+            $this->view->page_title = $this->view->h2_title = t('Memberships Plans');
             $this->view->memberships = $oMembershipData;
             $this->output();
         }
