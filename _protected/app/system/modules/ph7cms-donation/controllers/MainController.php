@@ -51,21 +51,17 @@ class MainController extends Controller
 
     public function validator($sHash = null)
     {
-        if ($this->oValidateModel->is()) {
-            Header::redirect(
-                PH7_ADMIN_MOD,
-                t('Your site is already validated!'),
-                Design::SUCCESS_TYPE
-            );
-        } elseif (!empty($sHash) && $this->checkHash($sHash)) {
-            // Set the site to "validated" status
-            $this->oValidateModel->set();
+        if (!empty($sHash) && $this->checkHash($sHash)) {
+            if (!$this->oValidateModel->is()) {
+                // Set the site to "validated" status
+                $this->oValidateModel->set();
 
-            DbConfig::clearCache();
+                DbConfig::clearCache();
+            }
 
             Header::redirect(
                 PH7_ADMIN_MOD,
-                t('Thanks a LOT for your donation! Highly appreviate.'),
+                t('Thanks a LOT for your donation!!! Highly appreciate :-)'),
                 Design::SUCCESS_TYPE
             );
         } else {
