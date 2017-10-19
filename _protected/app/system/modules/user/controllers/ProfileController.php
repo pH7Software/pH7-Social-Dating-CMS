@@ -151,7 +151,7 @@ class ProfileController extends Controller
             $this->view->is_logged = $this->bUserAuth;
             $this->view->is_own_profile = $this->isOwnProfile();
 
-            // Stat Profile
+            // Count number of views
             Statistic::setView($this->iProfileId, 'Members');
         } else {
             $this->notFound();
