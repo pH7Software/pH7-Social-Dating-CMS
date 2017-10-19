@@ -199,8 +199,7 @@ class ProfileController extends Controller
         $oPrivacyViewsUser = $oUserModel->getPrivacySetting($this->iProfileId);
 
         if ($oPrivacyViewsUser->searchProfile == 'no') {
-            // Exclude profile of search engines
-            $this->view->header = Meta::NOINDEX;
+            $this->excludeProfileFromSearchEngines();
         }
 
         if (!$this->bUserAuth && $oPrivacyViewsUser->privacyProfile == 'only_members') {
@@ -343,6 +342,16 @@ class ProfileController extends Controller
         $sMutFriendTxt = ($iNbMutFriend <= 1) ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
 
         return $sMutFriendTxt . $sNbMutFriend;
+    }
+
+    /**
+     * Set noindex meta tag to exclude the profile from search engines.
+     *
+     * @return void
+     */
+    private function excludeProfileFromSearchEngines()
+    {
+        $this->view->header = Meta::NOINDEX;
     }
 
     /**
