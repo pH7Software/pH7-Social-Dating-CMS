@@ -80,7 +80,11 @@
         {if !empty($messages)}
             {main_include 'page_nav.inc.tpl'}
         {/if}
-        <p><a href="{{ $design->url('xml','rss','xmlrouter','forum-post,'.$post->topicId) }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
+        <p>
+            <a href="{{ $design->url('xml','rss','xmlrouter','forum-post,'.$post->topicId) }}">
+                <img src="{url_static_img}icon/feed.png" alt="RSS Feed" />
+            </a>
+        </p>
     {else}
         <p>{error}</p>
     {/if}
