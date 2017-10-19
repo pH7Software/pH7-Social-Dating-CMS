@@ -16,7 +16,7 @@ SET @sDefaultSiteName = 'Dating Web App';
 SET @sAdminEmail = 'admin@yoursite.com';
 SET @sFeedbackEmail = 'feedback@yoursite.com';
 SET @sNoReplyEmail = 'noreply@yoursite.com';
-SET @sIpApiUrl = 'http://whatismyipaddress.com/ip/';
+SET @sIpApiUrl = 'https://whatismyipaddress.com/ip/';
 SET @sDefaultVideoUrl = 'https://www.youtube.com/watch?v=q-1eHnBOg4A';
 SET @sChatApiUrl = 'https://ph7cms.com/addons/chat/?name=%site_name%&url=%site_url%&skin=4';
 SET @sChatrouletteApiUrl = 'https://ph7cms.com/addons/chatroulette/?name=%site_name%&url=%site_url%&skin=1';
