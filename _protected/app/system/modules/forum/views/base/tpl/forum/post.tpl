@@ -3,7 +3,13 @@
         {* Post *}
         <div class="left">
             {{ $avatarDesign->get($post->username, $post->firstName, $post->sex, 64) }}<br />
-            <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$post->username) }}" data-load="ajax">{lang "See %0%'s Topics", $post->username}</a></p>
+            <p>
+                <a
+                    href="{{ $design->url('forum','forum','showpostbyprofile', $post->username) }}"
+                    title="{lang "See %0%'s topics", $post->username}"
+                    data-load="ajax">{lang "%0%'s topics", $post->username}
+                </a>
+            </p>
         </div>
 
         <p>{% Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($post->message)) %}</p>

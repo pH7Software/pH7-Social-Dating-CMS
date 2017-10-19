@@ -4,7 +4,11 @@
             {{ $total_views = Framework\Mvc\Model\Statistic::getView($topic->topicId,'ForumsTopics') }}
             {{ $total_reply = (new ForumModel)->totalMessages($topic->topicId) }}
 
-            <h3><a href="{{ $design->url('forum', 'forum', 'post', "$topic->name,$topic->forumId,$topic->title,$topic->topicId") }}">{% escape(Framework\Security\Ban\Ban::filterWord($topic->title), true) %}</a></h3>
+            <h3>
+                <a href="{{ $design->url('forum', 'forum', 'post', "$topic->name,$topic->forumId,$topic->title,$topic->topicId") }}">
+                    {% escape(Framework\Security\Ban\Ban::filterWord($topic->title), true) %}
+                </a>
+            </h3>
 
             <p>{% substr(escape(Framework\Security\Ban\Ban::filterWord($topic->message), true), 0, 100) %} | <span class="small italic">{lang 'Reply: %0%', $total_reply} | {lang 'Views: %0%', $total_views}</span></p>
         {/each}
@@ -20,5 +24,9 @@
 
     {main_include 'page_nav.inc.tpl'}
 
-    <p><a href="{{ $design->url('xml','rss','xmlrouter','forum-topic') }}"><img src="{url_static_img}icon/feed.png" alt="RSS Feed" /></a></p>
+    <p>
+        <a href="{{ $design->url('xml','rss','xmlrouter','forum-topic') }}">
+            <img src="{url_static_img}icon/feed.png" alt="RSS Feed" />
+        </a>
+    </p>
 </div>
