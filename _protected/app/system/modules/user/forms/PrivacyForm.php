@@ -9,21 +9,21 @@ namespace PH7;
 
 use PH7\Framework\Registry\Registry;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class PrivacyForm
 {
-
     public static function display()
     {
         $oUserModel = new UserCoreModel;
         $iProfileId = (int) (new Session)->get('member_id');
 
-        if (isset($_POST['submit_privacy_account']))
-        {
-            if (\PFBC\Form::isValid($_POST['submit_privacy_account']))
+        if (isset($_POST['submit_privacy_account'])) {
+            if (\PFBC\Form::isValid($_POST['submit_privacy_account'])) {
                 new PrivacyFormProcess($iProfileId, $oUserModel);
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oPrivacy = $oUserModel->getPrivacySetting($iProfileId);
@@ -45,5 +45,4 @@ class PrivacyForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }
