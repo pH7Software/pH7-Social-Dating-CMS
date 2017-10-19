@@ -46,7 +46,13 @@
                 <div class="msg_content" id="{% $msg->messageId %}">
                     <div class="left">
                         {{ $avatarDesign->get($msg->username, $msg->firstName, $msg->sex, 64) }}<br />
-                        <p><a href="{{ $design->url('forum','forum','showpostbyprofile',$msg->username) }}" data-load="ajax">{lang "See %0%'s Topics", $msg->username}</a></p>
+                        <p>
+                            <a
+                                href="{{ $design->url('forum','forum','showpostbyprofile', $msg->username) }}"
+                                title="{lang "See %0%'s topics", $msg->username}"
+                                data-load="ajax">{lang "%0%'s topics", $msg->username}
+                            </a>
+                        </p>
                     </div>
 
                     <p>{% Framework\Parse\User::atUsernameToLink(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($msg->message))) %}</p>
