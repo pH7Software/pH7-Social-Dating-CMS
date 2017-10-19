@@ -367,7 +367,7 @@ class ProfileController extends Controller
         Http::setHeadersByCode(404);
 
         /**
-         * @internal We can include HTML tags in the title since the template will erase them before display.
+         * @internal We can include HTML tags in the title since the template will automatically escape them before displaying it.
          */
         $this->sTitle = t('Whoops! The "%0%" profile is not found.', substr($this->sUsername, 0, PH7_MAX_USERNAME_LENGTH), true);
         $this->view->page_title = $this->sTitle;
