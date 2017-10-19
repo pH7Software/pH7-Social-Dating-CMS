@@ -289,7 +289,10 @@ class ProfileController extends Controller
                 'f_n' => $sFirstName,
                 's' => $oUser->sex
             ];
-            $sMessengerLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms), false);
+            $sMessengerLink = Uri::get(
+                'user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParms),
+                false
+            );
         }
 
         return $sMessengerLink;
