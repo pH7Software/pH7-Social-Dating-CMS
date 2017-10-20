@@ -89,8 +89,9 @@ class Http
      */
     public static function getStatusCodes($iStatus)
     {
-        $iStatus = (int) $iStatus;
-        return (!empty(static::STATUS_CODE[$iStatus])) ? $iStatus : false;
+        $iStatus = (int)$iStatus;
+
+        return !empty(static::STATUS_CODE[$iStatus]) ? $iStatus : false;
     }
 
     /**
@@ -141,7 +142,9 @@ class Http
     /**
      * Parse headers for a given status code.
      *
-     * @param integer $iCode The code to use, possible values are: 200, 301, 302, 304, 307, 400, 401, 403, 404, 410, 500, 501, ... Default: 200
+     * @param integer $iCode The code to use, possible values are: 200, 301, 302, 304, 307, 400, 401, 403, 404, 410, 500, 501, ...
+     *
+     * @throws Exception
      */
     public static function setHeadersByCode($iCode = 200)
     {
@@ -157,6 +160,8 @@ class Http
      * Set a HTTP Content Type.
      *
      * @param string $sType Example: "text/xml".
+     *
+     * @throws Exception
      */
     public static function setContentType($sType)
     {
@@ -187,7 +192,7 @@ class Http
         $sAuthUsr = Server::getVar(Server::AUTH_USER);
         $sAuthPwd = Server::getVar(Server::AUTH_PW);
 
-        if (!($sAuthUsr == $sUsr && $sAuthPwd == $sPwd)) {
+        if (!($sAuthUsr === $sUsr && $sAuthPwd === $sPwd)) {
             header('WWW-Authenticate: Basic realm="HTTP Basic Authentication"');
             static::setHeadersByCode(401);
             echo t('You must enter a valid login ID and password to access this resource.') . "\n";
@@ -236,7 +241,7 @@ class Http
      */
     public function isRelativeUrl($sUrl)
     {
-        return (0 !== stripos($sUrl, 'http'));
+        return 0 !== stripos($sUrl, 'http');
     }
 
     /**
@@ -263,7 +268,7 @@ class Http
         $sHost = static::getHostName($sUrl);
         $aDomainParts = explode('.', $sHost);
 
-        return (count($aDomainParts) > 2) ? $aDomainParts[0] : null;
+        return count($aDomainParts) > 2 ? $aDomainParts[0] : null;
     }
 
     /**
