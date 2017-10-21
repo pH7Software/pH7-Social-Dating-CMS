@@ -137,7 +137,7 @@ namespace PH7\Framework\Translate
         public function load($sFileName, $sPath = null)
         {
             textdomain($sFileName);
-            bindtextdomain($sFileName, (empty($sPath) ? Registry::getInstance()->path_module_lang : $sPath) );
+            bindtextdomain($sFileName, (empty($sPath) ? Registry::getInstance()->path_module_lang : $sPath));
             bind_textdomain_codeset($sFileName, PH7_ENCODING);
 
             return $this;
@@ -154,20 +154,19 @@ namespace PH7\Framework\Translate
         {
             if (!empty($this->sUserLang) &&
                 $this->oConfig->load(PH7_PATH_APP_LANG . $this->sUserLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) &&
-                is_file( PH7_PATH_APP_LANG . $this->sUserLang . '/language.php' )
+                is_file(PH7_PATH_APP_LANG . $this->sUserLang . '/language.php')
             ) {
                 $this->sLangName = $this->sUserLang;
                 include PH7_PATH_APP_LANG . $this->sUserLang . '/language.php';
                 date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
             } elseif ($this->oConfig->load(PH7_PATH_APP_LANG . $this->sDefaultLang . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) &&
-                is_file( PH7_PATH_APP_LANG . $this->sDefaultLang . '/language.php' )
+                is_file(PH7_PATH_APP_LANG . $this->sDefaultLang . '/language.php')
             ) {
                 $this->sLangName = $this->sDefaultLang;
                 include PH7_PATH_APP_LANG . $this->sDefaultLang . '/language.php';
                 date_default_timezone_set($this->oConfig->values['language.application']['timezone']);
-            }
-            elseif ($this->oConfig->load(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) &&
-                is_file( PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php' )
+            } elseif ($this->oConfig->load(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . PH7_DS . PH7_CONFIG . PH7_CONFIG_FILE) &&
+                is_file(PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php')
             ) {
                 $this->sLangName = PH7_DEFAULT_LANG;
                 include PH7_PATH_APP_LANG . PH7_DEFAULT_LANG . '/language.php';
@@ -239,7 +238,7 @@ namespace
         $sToken = (Registry::getInstance()->lang !== '' && array_key_exists($sToken, Registry::getInstance()->lang) ? Registry::getInstance()->lang[$sToken] : gettext($sToken));
 
         for ($i = 1, $iFuncArgs = count($aTokens); $i < $iFuncArgs; $i++) {
-            $sToken = str_replace('%'. ($i-1) . '%', $aTokens[$i], $sToken);
+            $sToken = str_replace('%' . ($i - 1) . '%', $aTokens[$i], $sToken);
         }
 
         return (new SysVar)->parse($sToken);
