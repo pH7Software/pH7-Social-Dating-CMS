@@ -83,9 +83,13 @@
       </noscript>
 
       {if $is_guest_homepage}
-        <div class="row">
-          <div role="banner" id="logo" class="col-md-8"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
-        </div>
+          <div class="row">
+              <div role="banner" id="logo" class="col-md-8">
+                  <h1>
+                      <a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a>
+                  </h1>
+              </div>
+          </div>
       {/if}
 
       {* Headings group *}
@@ -105,7 +109,9 @@
       </div>
       {* Don't display the top middle banner on the the splash page *}
       {if !$is_guest_homepage}
-          <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
+          <div role="banner" class="center ad_468_60">
+              {{ $designModel->ad(468, 60) }}
+          </div>
       {/if}
 
       <div class="clear"></div>
@@ -143,13 +149,17 @@
         </div>
       </div>
     </div>
-    <div role="banner" class="center ad_468_60">{{ $designModel->ad(468,60) }}</div>
+    <div role="banner" class="center ad_468_60">
+        {{ $designModel->ad(468, 60) }}
+    </div>
 
     <!-- End Content -->
 
     <!-- Begin Footer -->
     <footer>
-      <div role="banner" class="center ad_728_90">{{ $designModel->ad(728,90) }}</div>
+      <div role="banner" class="center ad_728_90">
+          {{ $designModel->ad(728, 90) }}
+      </div>
       {{ $design->link() }}
 
       {* To avoid scammers *}
