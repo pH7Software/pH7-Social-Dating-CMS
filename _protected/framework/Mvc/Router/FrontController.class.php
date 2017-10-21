@@ -346,8 +346,8 @@ final class FrontController
         }
 
         /*** Get the ISO language code (the two first letters) ***/
-        define('PH7_DEFAULT_LANG_CODE', substr(PH7_DEFAULT_LANG, 0, 2));
-        define('PH7_LANG_CODE', substr(PH7_LANG_NAME, 0, 2));
+        define('PH7_DEFAULT_LANG_CODE', Lang::getIsoCode(PH7_DEFAULT_LANG));
+        define('PH7_LANG_CODE', Lang::getIsoCode(PH7_LANG_NAME));
 
         /*** Set locale environment variables for gettext ***/
         putenv('LC_ALL=' . PH7_LANG_NAME);

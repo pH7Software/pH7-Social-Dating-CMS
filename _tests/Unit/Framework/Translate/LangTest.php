@@ -22,6 +22,14 @@ class LangTest extends \PHPUnit_Framework_TestCase
     public function testTranslate()
     {
         $sName = 'Pierre-Henry';
-        $this->assertEquals('Hello Pierre-Henry', t('Hello %0%', $sName));
+        $this->assertSame('Hello Pierre-Henry', t('Hello %0%', $sName));
+    }
+
+    public function testIsoCode()
+    {
+        $sLocale = 'en_US';
+        $sLangCode = Lang::getIsoCode($sLocale);
+
+        $this->assertSame('en', $sLangCode);
     }
  }

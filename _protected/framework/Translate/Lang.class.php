@@ -23,6 +23,7 @@ namespace PH7\Framework\Translate
         const COOKIE_NAME = 'pHSLang';
         const LANG_FOLDER_LENGTH = 5;
         const COOKIE_LIFETIME = 172800;
+        const ISO_LANG_CODE_LENGTH = 2;
 
         /** @var Config */
         private $oConfig;
@@ -179,6 +180,18 @@ namespace PH7\Framework\Translate
             $this->setEncoding();
 
             return $this;
+        }
+
+        /**
+         * Get the two-letter country code; ISO 3166-1 alpha-2
+         *
+         * @param string $sValue Language code (e.g., locale such as "en_US", ..)
+         *
+         * @return string
+         */
+        public static function getIsoCode($sValue)
+        {
+            return substr($sValue, 0, static::ISO_LANG_CODE_LENGTH);
         }
 
         /**

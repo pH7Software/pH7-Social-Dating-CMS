@@ -20,6 +20,7 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\SysVar;
 use PH7\Framework\Registry\Registry;
+use PH7\Framework\Translate\Lang;
 
 class Design extends HtmlDesign
 {
@@ -46,8 +47,8 @@ class Design extends HtmlDesign
                 continue;
             }
 
-            // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang->langId, 0, 2);
+            // Get the two-letter country code
+            $sAbbrLang = Lang::getIsoCode($sLang->langId);
 
             echo '<a href="', $sCurrentPage, $sLang->langId, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }

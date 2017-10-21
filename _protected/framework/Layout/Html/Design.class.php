@@ -36,6 +36,7 @@ use PH7\Framework\Registry\Registry;
 use PH7\Framework\Security\Validate\Validate;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Str\Str;
+use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Url;
 use PH7\UserCore;
 use PH7\UserCoreModel;
@@ -115,8 +116,8 @@ class Design
                 continue;
             }
 
-            // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang, 0, 2);
+            // Get the two-letter country code
+            $sAbbrLang = Lang::getIsoCode($sLang);
 
             echo '<a href="', $sCurrentPage, $sLang, '" hreflang="', $sAbbrLang, '"><img src="', PH7_URL_STATIC, PH7_IMG, 'flag/s/', $sAbbrLang, '.gif" alt="', t($sAbbrLang), '" title="', t($sAbbrLang), '" /></a>&nbsp;';
         }
@@ -136,8 +137,8 @@ class Design
 
         echo '<link rel="alternate" hreflang="x-default" href="', PH7_URL_ROOT, '">'; // For pages that are not specifically targeted
         foreach ($aLangs as $sLang) {
-            // Retrieve only the first two characters
-            $sAbbrLang = substr($sLang, 0, 2);
+            // Get only the two-letter country code
+            $sAbbrLang = Lang::getIsoCode($sLang);
             echo '<link rel="alternate" hreflang="', $sAbbrLang, '" href="', $sCurrentPage, $sLang, '" />';
         }
 
