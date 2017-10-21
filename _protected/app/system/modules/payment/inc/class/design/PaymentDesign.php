@@ -88,6 +88,10 @@ class PaymentDesign extends Framework\Core\Core
      */
     public function buttonBraintree(stdClass $oMembership)
     {
+        $fPrice = $oMembership->price;
+        $sCurrency = $this->config->values['module.setting']['currency'];
+        $sLocale = PH7_LANG_NAME;
+
         Braintree::init($this->config);
         $sClientToken = Braintree_ClientToken::generate();
 
@@ -96,7 +100,7 @@ class PaymentDesign extends Framework\Core\Core
         $oBraintree = new Braintree;
         $oBraintree
             ->param('item_number', $oMembership->groupId)
-            ->param('amount', $oMembership->price);
+            ->param('amount', $fPrice);
         echo self::displayGatewayForm($oBraintree, $oMembership->name, '<u>Braintree</u>');
 
         unset($oBraintree);
@@ -104,8 +108,9 @@ class PaymentDesign extends Framework\Core\Core
         echo '<script>';
         echo '$(function () {';
         echo "braintree.setup('$sClientToken', 'dropin', {";
-        echo "container: 'payment-form'});";
-        echo '})';
+        echo "container: 'payment-form',";
+        echo "paypal: {singleUse: true, amount: '$fPrice', currency: '$sCurrency', locale: '$sLocale'}";
+        echo '})})';
         echo '</script>';
     }
 
