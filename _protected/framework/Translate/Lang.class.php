@@ -55,6 +55,41 @@ namespace PH7\Framework\Translate {
         }
 
         /**
+         * Get JavaScript language file.
+         *
+         * @param string $sPath The path.
+         * @param string $sFileName The language name. Default is the constant: 'PH7_LANG_CODE'
+         *
+         * @return string Valid file name (with the extension).
+         *
+         * @throws Exception If the language file is not found.
+         */
+        public static function getJsFile($sPath, $sFileName = PH7_LANG_CODE)
+        {
+            if (is_file($sPath . $sFileName . '.js')) {
+                return $sFileName . '.js';
+            }
+
+            if (is_file($sPath . PH7_DEFAULT_LANG_CODE . '.js')) {
+                return PH7_DEFAULT_LANG_CODE . '.js';
+            }
+
+            throw new Exception('Language file \'' . $sPath . PH7_DEFAULT_LANG_CODE . '.js\' not found.');
+        }
+
+        /**
+         * Get the two-letter country code; ISO 3166-1 alpha-2
+         *
+         * @param string $sValue Language code (e.g., locale such as "en_US", ..)
+         *
+         * @return string
+         */
+        public static function getIsoCode($sValue)
+        {
+            return substr($sValue, 0, static::ISO_LANG_CODE_LENGTH);
+        }
+
+        /**
          * Set the default language name.
          *
          * @param string $sNewDefLang Prefix of the language.
@@ -100,29 +135,6 @@ namespace PH7\Framework\Translate {
         public function getLang()
         {
             return $this->sLangName;
-        }
-
-        /**
-         * Get JavaScript language file.
-         *
-         * @param string $sPath The path.
-         * @param string $sFileName The language name. Default is the constant: 'PH7_LANG_CODE'
-         *
-         * @return string Valid file name (with the extension).
-         *
-         * @throws Exception If the language file is not found.
-         */
-        public static function getJsFile($sPath, $sFileName = PH7_LANG_CODE)
-        {
-            if (is_file($sPath . $sFileName . '.js')) {
-                return $sFileName . '.js';
-            }
-
-            if (is_file($sPath . PH7_DEFAULT_LANG_CODE . '.js')) {
-                return PH7_DEFAULT_LANG_CODE . '.js';
-            }
-
-            throw new Exception('Language file \'' . $sPath . PH7_DEFAULT_LANG_CODE . '.js\' not found.');
         }
 
         /**
@@ -178,18 +190,6 @@ namespace PH7\Framework\Translate {
             $this->setEncoding();
 
             return $this;
-        }
-
-        /**
-         * Get the two-letter country code; ISO 3166-1 alpha-2
-         *
-         * @param string $sValue Language code (e.g., locale such as "en_US", ..)
-         *
-         * @return string
-         */
-        public static function getIsoCode($sValue)
-        {
-            return substr($sValue, 0, static::ISO_LANG_CODE_LENGTH);
         }
 
         /**
