@@ -9,8 +9,7 @@
  * @package          PH7 / Framework / Translate
  */
 
-namespace PH7\Framework\Translate
-{
+namespace PH7\Framework\Translate {
     defined('PH7') or exit('Restricted access');
 
     use PH7\Framework\Config\Config;
@@ -213,8 +212,8 @@ namespace PH7\Framework\Translate
     }
 }
 
-namespace
-{
+namespace {
+
     use PH7\Framework\Parse\SysVar;
     use PH7\Framework\Registry\Registry;
 
