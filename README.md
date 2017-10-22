@@ -1,6 +1,6 @@
 # pH7 Social Dating CMS
 
-### The Most Secure and Powerful Professional Dating Web App Builder
+### The Most Secure, Powerful & Professional Dating Web App Builder
 
 
 [![Build Status](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/build.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pH7Software/pH7-Social-Dating-CMS/?branch=master) [![PayPal donate button](http://img.shields.io/badge/paypal-donate-orange.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6 "Help keep me off the streets! ;)")
@@ -99,7 +99,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Everyone can easily contribute to this great innovative project with our [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
 
 
-**It's not a hazard that pH7CMS is considered to be the first choice for creating enterprise level Dating Apps/Service or Social Networking Sites**
+**It's not a hazard that pH7CMS is considered to be the first choice for creating an enterprise level dating web app or social networking website**
 
 *Great features [like here](http://ph7cms.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7CMS!*
 
@@ -196,7 +196,7 @@ You can find and add other languages on the [I18N repo](https://github.com/pH7So
 
 ## Website
 
-**[Social Dating Script](http://ph7cms.com)**
+**[pH7CMS Social Dating Script](http://ph7cms.com)**
 
 
 ## Documentation
