@@ -80,8 +80,8 @@ abstract class Kernel
         /**
          * @internal The "_checkLicense" method cannot be declare more than one time. The "Kernel.class.php" file is included many times in the software, so we need to check that with a constant.
          */
-        if (!defined( 'PH7_CHECKED_LIC' )) {
-            define( 'PH7_CHECKED_LIC', 1 ); // OK, now we have checked the license key
+        if (!defined('PH7_CHECKED_LIC')) {
+            define('PH7_CHECKED_LIC', 1); // OK, now we have checked the license key
             $this->_checkLicense();
         }
     }
@@ -158,5 +158,7 @@ abstract class Kernel
     /**
      * Clone is set to private to stop cloning.
      */
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 }
