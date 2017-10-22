@@ -995,7 +995,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function setErrMsg()
     {
-        $this->sCode = static::ERR_MSG;
+        $this->sCode = sprintf(static::ERR_MSG, self::SOFTWARE_EMAIL);
     }
 
     public function __destruct()
