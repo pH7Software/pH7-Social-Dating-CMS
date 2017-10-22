@@ -34,24 +34,23 @@ use PH7\Framework\Parse\SysVar;
 
 class PH7Tpl extends Kernel
 {
-    const
-    NAME = 'PH7Tpl',
-    AUTHOR = 'Pierre-Henry Soria',
-    VERSION = '1.3.0',
-    LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/',
-    ERR_MSG = 'It seems you have removed some copyright links/notice in the software. If you want to remove them, first you should upgrade your site to <a href="http://ph7cms.com/order">pH7CMSPro</a><br /> or if you hold <a href="http://ph7cms.com/pro">pH7CMSPro</a>, please contact the support to get it fixed.',
+    const NAME = 'PH7Tpl';
+    const AUTHOR = 'Pierre-Henry Soria';
+    const VERSION = '1.3.0';
+    const LICENSE = 'Creative Commons Attribution 3.0 License - http://creativecommons.org/licenses/by/3.0/';
+    const ERR_MSG = 'It seems you have removed some copyright links/notice in the software. If you want to remove them, please email at: %s';
 
     /**
      * @internal For better compatibility with Windows, we didn't put a slash at the end of the directory constants.
      */
-    COMPILE_DIR = 'pH7tpl_compile',
-    CACHE_DIR = 'pH7tpl_cache',
-    MAIN_COMPILE_DIR = 'public_main',
+    const COMPILE_DIR = 'pH7tpl_compile';
+    const CACHE_DIR = 'pH7tpl_cache';
+    const MAIN_COMPILE_DIR = 'public_main';
 
-    MAIN_PAGE = 'layout',
-    MAIN_COMPILE_PAGE = 'layout.cpl.php',
-    XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php',
-    COMPILE_FILE_EXT = '.cpl.php';
+    const MAIN_PAGE = 'layout';
+    const MAIN_COMPILE_PAGE = 'layout.cpl.php';
+    const XML_SITEMAP_COMPILE_PAGE = 'mainlayout.xsl.cpl.php';
+    const COMPILE_FILE_EXT = '.cpl.php';
 
     /**
      * The attributes must always be private (or protected), so we do not indicate convention ($_var)
