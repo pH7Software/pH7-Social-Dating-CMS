@@ -17,6 +17,7 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Config\Config;
 use PH7\Framework\File\File;
+use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Browser;
@@ -131,7 +132,11 @@ abstract class Kernel
     {
         if (\PH7\AdminCore::auth()) {
             // Message for admins
-            Header::redirect(Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), t('You are still using the Free Version. It\'s time now to buy a Pro License and get all amazing features and be able to use this module.'), 'error');
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'setting', 'license'),
+                t("You are still using the Free version. It's now time to switch to the Pro version and get all amazing features and be able to use this module."),
+                Design::ERROR_TYPE
+            );
         } else {
             // Message for guests
             exit(t('#LICENSE ERROR# The owner of this website needs to pay a <a href="%0%">pH7CMS License</a> to use this feature.', self::SOFTWARE_WEBSITE));
