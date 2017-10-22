@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Http\Http;
+
 class MainController extends Controller
 {
     /** @var HotOrNotModel */
@@ -16,6 +18,7 @@ class MainController extends Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->oHoNModel = new HotOrNotModel();
     }
 
@@ -31,7 +34,7 @@ class MainController extends Controller
          * @internal We can include HTML tags in the title since the template will erase them before display.
          */
         $sMenDesc = t('You Men!') . '<br />' . t('Vote for the most beautiful women, the sexiest and hottest!');
-        $sWomenDesc = t('You Women!') . '<br />' .t('Vote for the best men, the sexiest and hottest!');
+        $sWomenDesc = t('You Women!') . '<br />' . t('Vote for the best men, the sexiest and hottest!');
 
         $this->view->page_title = t('Hot On Not - Free Online Dating Site');
         $this->view->meta_description = $sMenDesc . ' ' . $sWomenDesc;
@@ -45,7 +48,7 @@ class MainController extends Controller
         $oData = $this->oHoNModel->getPicture($iProfileId);
 
         if (empty($oData)) {
-            Framework\Http\Http::setHeadersByCode(404);
+            Http::setHeadersByCode(404);
             $this->view->error = t("Sorry, we haven't found any photo to Hot Or Not Party.");
         } else {
             $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class

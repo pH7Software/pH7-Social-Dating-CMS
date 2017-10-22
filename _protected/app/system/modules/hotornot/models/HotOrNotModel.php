@@ -8,9 +8,11 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class HotOrNotModel extends Framework\Mvc\Model\Engine\Model
+class HotOrNotModel extends Model
 {
     /**
      * Get random picture.
@@ -30,14 +32,14 @@ class HotOrNotModel extends Framework\Mvc\Model\Engine\Model
         $rStmt = Db::getInstance()->prepare('SELECT profileId, username, firstName, sex, avatar FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\')' . $sSql . 'AND (avatar IS NOT NULL) AND (approvedAvatar = :approved) ORDER BY RAND() LIMIT :offset, :limit');
 
         if (!empty($iProfileId)) {
-            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
         }
-        $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindValue(':approved', $iApproved, PDO::PARAM_INT);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
 
-        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
         return $oRow;
