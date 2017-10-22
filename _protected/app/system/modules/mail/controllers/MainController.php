@@ -90,7 +90,7 @@ class MainController extends Controller
             $oMsg = $this->oMailModel->readMsg($this->_iProfileId, $this->httpRequest->get('id'));
 
             if (empty($oMsg)) {
-                $this->sTitle = t('No Message Found!');
+                $this->sTitle = t('No Messages Found!');
                 $this->_notFound();
             } else {
                 $this->_setRead($oMsg);
@@ -127,10 +127,10 @@ class MainController extends Controller
             );
 
             if (empty($oMail)) {
-                $this->sTitle = t('No message in your inbox');
+                $this->sTitle = t('No messages in your inbox');
                 $this->_notFound();
                 // We modify the default error message
-                $this->view->error = t('Sorry %0%, you do not have any messages in your inbox.', '<em>' . $this->session->get('member_first_name') . '</em>');
+                $this->view->error = t("Sorry %0%, you don't have any messages in your inbox.", '<em>' . $this->session->get('member_first_name') . '</em>');
             } else {
                 $this->view->msgs = $oMail;
             }
@@ -189,7 +189,7 @@ class MainController extends Controller
                 $this->sTitle = t('Sorry!');
                 $this->_notFound();
                 // We modify the default error message
-                $this->view->error = t('No message found.');
+                $this->view->error = t('No messages found.');
             } else {
                 $this->view->msgs = $oMail;
             }
@@ -250,7 +250,7 @@ class MainController extends Controller
                 $this->sTitle = t('Sorry!');
                 $this->_notFound();
                 // We modify the default 404 error message
-                $this->view->error = t('No trash was found.');
+                $this->view->error = t('No trashed messages were found.');
             } else {
                 $this->view->msgs = $oMail;
             }
@@ -299,7 +299,7 @@ class MainController extends Controller
         );
 
         if (empty($oSearch)) {
-            $this->sTitle = t('Your search did not match any of your messages.');
+            $this->sTitle = t("Your search didn't match any of your messages.");
             $this->_notFound();
         } else {
             $this->sTitle = t('Mail | Message - Your search returned');
@@ -324,7 +324,7 @@ class MainController extends Controller
         if ($this->_bStatus) {
             $this->sMsg = t('Your message has been moved to your trash bin.');
         } else {
-            $this->sMsg = t('Your message does not exist anymore in your trash bin.');
+            $this->sMsg = t("Your message doesn't exist anymore in your trash bin.");
         }
 
         Header::redirect(Uri::get('mail','main','inbox'), $this->sMsg, $this->_getStatusType());
@@ -362,7 +362,7 @@ class MainController extends Controller
         if ($this->_bStatus) {
             $this->sMsg = t('Your message has been moved to your inbox.');
         } else {
-            $this->sMsg = t('Your message does not exist anymore in your inbox.');
+            $this->sMsg = t("Your message doesn't exist anymore in your inbox.");
         }
 
         Header::redirect(Uri::get('mail', 'main', 'trash'), $this->sMsg, $this->_getStatusType());
@@ -406,7 +406,7 @@ class MainController extends Controller
         if ($this->_bStatus) {
             $this->sMsg = t('Your message has been deleted successfully');
         } else {
-            $this->sMsg = t('Your message does not exist anymore.');
+            $this->sMsg = t("Your message doesn't exist anymore.");
         }
 
         $sUrl = $this->_bAdminLogged ? Uri::get('mail', 'admin', 'msglist') : $this->httpRequest->previousPage();
