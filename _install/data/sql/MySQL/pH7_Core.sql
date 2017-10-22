@@ -921,7 +921,7 @@ CREATE TABLE IF NOT EXISTS pH7_SysModsEnabled (
   moduleId tinyint(2) unsigned NOT NULL AUTO_INCREMENT,
   moduleTitle varchar(50) NOT NULL,
   folderName varchar(20) NOT NULL,
-  premiumMod enum('0','1') NOT NULL DEFAULT '0', -- If the module required pH7CMSPro (http://ph7cms.com/pro/)
+  premiumMod enum('0','1') NOT NULL DEFAULT '0',
   enabled enum('0','1') NOT NULL DEFAULT '1',
   PRIMARY KEY (moduleId)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
