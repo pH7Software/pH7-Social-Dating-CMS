@@ -27,8 +27,8 @@ class LangTest extends \PHPUnit_Framework_TestCase
 
     public function testIsoCode()
     {
-        $sLocale = 'en_US';
-        $sLangCode = Lang::getIsoCode($sLocale);
+        $sLocaleName = 'en_US';
+        $sLangCode = Lang::getIsoCode($sLocaleName);
 
         $this->assertSame('en', $sLangCode);
     }
