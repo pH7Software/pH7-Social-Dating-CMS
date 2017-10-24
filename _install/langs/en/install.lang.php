@@ -124,8 +124,8 @@ $LANG = array(
     'recommended_desc' => 'Choose this niche if you haven\'t an idea yet.',
     'note_able_to_change_niche_settings_later' => 'Please note that you will be able to change the template and enable/disable the modules later in your admin panel.',
     'will_you_make_donation' => 'Will you help me to maintain &amp; improve the software?',
-    'donate_here' => 'Make a donation here',
-    'or_paypal_donation' => '...Or by PayPal',
+    'donate_here' => 'Make a donation now',
+    'or_paypal_donation' => '...Or donate by PayPal',
     'warning_no_js' => 'JavaScript is disabled on your Web browser!<br />
         Please enable JavaScript via the options of your Web browser in order to use this website.',
     'admin_url' => 'Admin Panel URL',

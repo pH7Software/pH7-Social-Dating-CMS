@@ -123,8 +123,8 @@ $LANG = array(
     'recommended_desc' => 'Choisissez cette niche si vous ne savez pas quelle niche choisir',
     'note_able_to_change_niche_settings_later' => 'Veuillez noter que vous pourrez changer le thème et activer/désactiver les modules par la suite dans votre panneau d\'administration.',
     'will_you_make_donation' => 'Allez-vous m\'aider à améliorer le logiciel ?',
-    'donate_here' => 'Faites une donation ici',
-    'or_paypal_donation' => 'ou par PayPal',
+    'donate_here' => 'Faire une donation maintenant',
+    'or_paypal_donation' => 'ou le faire par PayPal',
     'warning_no_js' => 'Cette page Web est incompatible sans l\'activation de JavaScript.<br />
         Veuillez activer JavaScript via les options de votre navigateur Web.',
     'admin_url' => 'URL du panneau d\'administration',
