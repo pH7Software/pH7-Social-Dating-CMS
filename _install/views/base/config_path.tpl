@@ -20,11 +20,9 @@
 {literal}
 <script>
 var oCheckDir = document.getElementById("path_protected");
-oCheckDir.onkeyup = function()
-{
+oCheckDir.onkeyup = function() {
   var sDir = oCheckDir.value, sHtmlId = "txtDir";
-  if(sDir == "")
-  {
+  if (sDir == "") {
     document.getElementById(sHtmlId).innerHTML = "";
     return;
   }
