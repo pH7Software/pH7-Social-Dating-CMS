@@ -16,7 +16,7 @@
  *
  * @author          Pierre-Henry SORIA <ph7software@gmail.com>
  * @copyright       (c) 2011-2017, Pierre-Henry SORIA, All Rights Reserved.
- * @version         Last update 04/21/2017
+ * @version         Last update 10/23/2017
  * @package         pH7CMS
  */
 
@@ -24,6 +24,7 @@ namespace PH7\Framework\Geo\Map;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Compress\Compress;
 use PH7\Framework\Config\Config;
 
 /**
@@ -33,6 +34,8 @@ use PH7\Framework\Config\Config;
  */
 class Api
 {
+    const API_KEY_MIN_LENGTH = 10;
+
     /** GoogleMap ID for the HTML DIV and identifier for all the methods (to have several gmaps) **/
     protected $googleMapId = 'googlemapapi';
 
@@ -413,8 +416,9 @@ class Api
      */
     public function getMap()
     {
-        if ($this->bCompressor)
-            $this->content = (new \PH7\Framework\Compress\Compress)->parseJs($this->content);
+        if ($this->bCompressor) {
+            $this->content = (new Compress)->parseJs($this->content);
+        }
 
         return $this->content;
     }
@@ -617,7 +621,7 @@ class Api
 
         $this->content .= '<script>' . "\n";
 
-        if (empty($this->key) || strlen($this->key) <= 10) {
+        if ($this->isApiKeyNotSet()) {
             $this->content .= 'document.write("' . t('You need to get a Google Maps API key to get it working. Please go to your pH7CMS Admin Panel -> Settings -> General -> API -> Google Maps API Key') . '".toUpperCase());' . "\n";
         }
 
@@ -872,5 +876,13 @@ class Api
 
         //Fermeture du javascript
         $this->content .= '</script>' . "\n";
+    }
+
+    /**
+     * @return bool
+     */
+    private function isApiKeyNotSet()
+    {
+        return empty($this->key) || strlen($this->key) <= self::API_KEY_MIN_LENGTH;
     }
 }
