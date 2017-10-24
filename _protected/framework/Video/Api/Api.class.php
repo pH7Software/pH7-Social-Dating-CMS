@@ -42,7 +42,7 @@ abstract class Api
     }
 
     /**
-     * Set API key (currentyl required only by Youtube API class).
+     * Set API key (currently only required by Youtube API class).
      *
      * @param string $sApiKey
      *
