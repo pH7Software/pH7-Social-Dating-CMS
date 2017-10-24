@@ -25,6 +25,8 @@ abstract class Controller implements Controllable
     const SOFTWARE_WEBSITE = 'http://ph7cms.com';
     const SOFTWARE_LICENSE_URL = 'http://ph7cms.com/legal/license';
     const SOFTWARE_REQUIREMENTS_URL = 'http://ph7cms.com/doc/en/requirements';
+    const PAYPAL_DONATE_URL = 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6';
+    const PATREON_URL = 'https://www.patreon.com/bePatron?u=3534366';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';
     const SOFTWARE_LICENSE = 'GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.';
@@ -80,6 +82,8 @@ abstract class Controller implements Controllable
         $this->oView->assign('software_version', self::SOFTWARE_VERSION . ' ' . self::SOFTWARE_VERSION_NAME . ' - Build ' . self::SOFTWARE_BUILD);
         $this->oView->assign('software_website', self::SOFTWARE_WEBSITE);
         $this->oView->assign('software_license_url', self::SOFTWARE_LICENSE_URL);
+        $this->oView->assign('paypal_donate_url', self::PAYPAL_DONATE_URL);
+        $this->oView->assign('patreon_url', self::PATREON_URL);
         $this->oView->assign('software_author', self::SOFTWARE_AUTHOR);
         $this->oView->assign('software_copyright', self::SOFTWARE_COPYRIGHT);
         $this->oView->assign('software_email', self::SOFTWARE_EMAIL);

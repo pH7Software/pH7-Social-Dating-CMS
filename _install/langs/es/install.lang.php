@@ -118,6 +118,9 @@ $LANG = array(
     'recommended' => 'Recomendada',
     'recommended_desc' => 'Elegir este lugar si no sabe qué elegir el recreo.',
     'note_able_to_change_niche_settings_later' => 'Por favor, tenga en cuenta que puede cambiar el tema y activar/desactivar los módulos más tarde en su panel de administración.',
+    'will_you_make_donation' => 'Will you help me to maintain &amp; improve the software?',
+    'donate_here' => 'Make a donation here',
+    'or_paypal_donation' => '... Or by PayPal',
     'warning_no_js' => 'Esta página web no es compatible sin tener Javascript activado.<br />
         Por favor, activa JavaScript en las opciones de su navegador web.',
     'admin_url' => 'URL del panel de administración',
