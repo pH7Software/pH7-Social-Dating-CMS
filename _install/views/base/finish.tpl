@@ -13,7 +13,7 @@
 {/if}
 
 <p>
-    <span class="bold">{$LANG.will_you_make_donation}</span> <a href="{$patreon_url}" data-patreon-widget-type="become-patron-button" target="_blank" rel="noopener noreferrer">{$LANG.donate_here}</a>.<br />
+    <span class="bold">{$LANG.will_you_make_donation}</span> <a href="{$patreon_url}" target="_blank" rel="noopener noreferrer">{$LANG.donate_here}</a>.<br />
     <span class="small"><a href="{$paypal_donate_url}" target="_blank" rel="noopener noreferrer">{$LANG.or_paypal_donation}</a></span>
 </p>
 
@@ -25,7 +25,5 @@
         <span class="italic">{$LANG.remove_install_folder}</span>
     </p>
 </form>
-
-<script async="async" src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
 
 {include file="inc/footer.tpl"}
