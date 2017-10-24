@@ -133,7 +133,7 @@ class Youtube extends Api implements IApi
     /**
      * @return bool
      */
-    private function isApiKeySet()
+    public function isApiKeySet()
     {
         return !empty($this->sApiKey) && strlen($this->sApiKey) > self::API_KEY_MIN_LENGTH;
     }

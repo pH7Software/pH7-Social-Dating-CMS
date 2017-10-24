@@ -881,7 +881,7 @@ class Api
     /**
      * @return bool
      */
-    private function isApiKeyNotSet()
+    public function isApiKeyNotSet()
     {
         return empty($this->key) || strlen($this->key) <= self::API_KEY_MIN_LENGTH;
     }
