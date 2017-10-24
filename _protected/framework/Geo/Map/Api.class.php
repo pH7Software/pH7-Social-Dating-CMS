@@ -297,7 +297,7 @@ class Api
      */
     public function setKey($key)
     {
-        $this->key = $key;
+        $this->key = trim($key);
     }
 
     /**
