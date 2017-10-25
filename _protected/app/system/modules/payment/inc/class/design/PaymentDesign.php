@@ -161,11 +161,15 @@ class PaymentDesign extends Framework\Core\Core
      */
     private function displayGatewayForm(PaymentApi $oPaymentProvider, $sMembershipName, $sProviderName)
     {
-        echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">
-            <div id="payment-form"></div>',
-            $oPaymentProvider->generate(),
-            '<button class="btn btn-primary btn-md" type="submit" name="submit">', self::buyTxt($sMembershipName, $sProviderName), '</button>
-            </form>';
+        echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">';
+
+        if ($oPaymentProvider instanceof Braintree) {
+            echo '<div id="payment-form"></div>';
+        }
+
+        echo $oPaymentProvider->generate();
+        echo '<button class="btn btn-primary btn-md" type="submit" name="submit">', self::buyTxt($sMembershipName, $sProviderName), '</button>';
+        echo '</form>';
     }
 
     /**
