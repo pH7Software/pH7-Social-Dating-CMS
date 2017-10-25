@@ -43,7 +43,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('notify_url', Uri::get('payment', 'main', 'notification', 'PH7\PayPal,' . $oMembership->groupId))
             ->param('cancel_return', Uri::get('payment', 'main', 'membership', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
 
-        echo self::displayGatewayForm($oPayPal, $oMembership->name, 'PayPal');
+        $this->displayGatewayForm($oPayPal, $oMembership->name, 'PayPal');
 
         unset($oPayPal, $oMembership);
     }
@@ -103,7 +103,8 @@ class PaymentDesign extends Framework\Core\Core
         $oBraintree
             ->param('item_number', $oMembership->groupId)
             ->param('amount', $fPrice);
-        echo self::displayGatewayForm($oBraintree, $oMembership->name, '<u>Braintree</u>');
+
+        $this->displayGatewayForm($oBraintree, $oMembership->name, '<u>Braintree</u>');
 
         unset($oBraintree);
 
@@ -138,7 +139,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('c_tangible', 'N')
             ->param('x_receipt_link_url', Uri::get('payment', 'main', 'process', '2co'));
 
-        echo self::displayGatewayForm($o2CO, $oMembership->name, '2CO');
+        $this->displayGatewayForm($o2CO, $oMembership->name, '2CO');
 
         unset($o2CO);
     }
@@ -159,18 +160,18 @@ class PaymentDesign extends Framework\Core\Core
      * @param string $sMembershipName
      * @param string $sProviderName The payment provider name.
      *
-     * @return string
+     * @return void HTML output,
      */
     private function displayGatewayForm(PaymentApi $oPaymentProvider, $sMembershipName, $sProviderName)
     {
         echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">';
 
         if ($oPaymentProvider instanceof Braintree) {
-            echo $this->displayDivFormContainer();
+            echo $this->getDivFormContainer();
         }
 
         echo $oPaymentProvider->generate();
-        echo '<button class="btn btn-primary btn-md" type="submit" name="submit">', self::buyTxt($sMembershipName, $sProviderName), '</button>';
+        echo '<button class="btn btn-primary btn-md" type="submit" name="submit">', $this->buyTxt($sMembershipName, $sProviderName), '</button>';
         echo '</form>';
     }
 
@@ -182,7 +183,7 @@ class PaymentDesign extends Framework\Core\Core
      *
      * @return string
      */
-    private static function buyTxt($sMembershipName, $sProviderName)
+    private function buyTxt($sMembershipName, $sProviderName)
     {
         return t('Buy %0% with %1%!', $sMembershipName, '<b>' . $sProviderName . '</b>');
     }
