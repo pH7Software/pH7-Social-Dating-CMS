@@ -191,7 +191,7 @@ class PaymentDesign extends Framework\Core\Core
     /**
      * @return string
      */
-    private function displayDivFormContainer()
+    private function getDivFormContainer()
     {
         return '<div id="' . self::DIV_CONTAINER_NAME . '"></div>';
     }
