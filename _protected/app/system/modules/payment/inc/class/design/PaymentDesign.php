@@ -17,6 +17,8 @@ use stdClass;
 
 class PaymentDesign extends Framework\Core\Core
 {
+    const DIV_CONTAINER_NAME = 'payment-form';
+
     /**
      * @param stdClass $oMembership
      *
@@ -108,7 +110,7 @@ class PaymentDesign extends Framework\Core\Core
         echo '<script>';
         echo '$(function () {';
         echo "braintree.setup('$sClientToken', 'dropin', {";
-        echo "container: 'payment-form',";
+        echo "container: '" . self::DIV_CONTAINER_NAME . "',";
         echo "paypal: {singleUse: true, amount: '$fPrice', currency: '$sCurrency', locale: '$sLocale'}";
         echo '})})';
         echo '</script>';
@@ -164,7 +166,7 @@ class PaymentDesign extends Framework\Core\Core
         echo '<form action="', $oPaymentProvider->getUrl(), '" method="post">';
 
         if ($oPaymentProvider instanceof Braintree) {
-            echo '<div id="payment-form"></div>';
+            echo $this->displayDivFormContainer();
         }
 
         echo $oPaymentProvider->generate();
@@ -183,5 +185,13 @@ class PaymentDesign extends Framework\Core\Core
     private static function buyTxt($sMembershipName, $sProviderName)
     {
         return t('Buy %0% with %1%!', $sMembershipName, '<b>' . $sProviderName . '</b>');
+    }
+
+    /**
+     * @return string
+     */
+    private function displayDivFormContainer()
+    {
+        return '<div id="' . self::DIV_CONTAINER_NAME . '"></div>';
     }
 }
