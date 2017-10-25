@@ -39,8 +39,9 @@ abstract class Provider
     {
         $sHtml = ''; // Default Value
 
-        foreach ($this->aParams as $sKey => $sVal)
+        foreach ($this->aParams as $sKey => $sVal) {
             $sHtml .= "<input type=\"hidden\" name=\"$sKey\" value=\"$sVal\" />\n";
+        }
 
         return $sHtml;
     }
