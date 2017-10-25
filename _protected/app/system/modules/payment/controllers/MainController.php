@@ -263,7 +263,7 @@ class MainController extends Controller
 
     public function info()
     {
-        $this->sTitle = t('Details of the membership');
+        $this->sTitle = t('Membership Details');
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         $oInfo = $this->oUserModel->getMembershipDetails($this->iProfileId);
