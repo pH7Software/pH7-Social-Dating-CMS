@@ -21,11 +21,12 @@ abstract class Provider
      * @param string $sName
      * @param string $sValue
      *
-     * @return object this
+     * @return self
      */
     public function param($sName, $sValue)
     {
         $this->aParams[$sName] = $sValue;
+
         return $this;
     }
 
