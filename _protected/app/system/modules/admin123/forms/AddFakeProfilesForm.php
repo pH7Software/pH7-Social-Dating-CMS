@@ -10,15 +10,18 @@
 
 namespace PH7;
 
+use PH7\Framework\Url\Header;
+
 class AddFakeProfilesForm
 {
     public static function display()
     {
         if (isset($_POST['submit_add_fake_profiles'])) {
-            if (\PFBC\Form::isValid($_POST['submit_add_fake_profiles']))
+            if (\PFBC\Form::isValid($_POST['submit_add_fake_profiles'])) {
                 new AddFakeProfilesFormProcess;
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_add_fake_profiles');

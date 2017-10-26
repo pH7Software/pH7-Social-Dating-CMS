@@ -7,18 +7,21 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
+
+use PH7\Framework\Url\Header;
 
 class PublicFileForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_file'])) {
-            if (\PFBC\Form::isValid($_POST['submit_file']))
+            if (\PFBC\Form::isValid($_POST['submit_file'])) {
                 new PublicFileFormProcess;
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         if (!$rData = @file_get_contents(PH7_PATH_ROOT . $_GET['file'])) {
