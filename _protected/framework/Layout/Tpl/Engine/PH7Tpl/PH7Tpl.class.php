@@ -876,7 +876,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
  * @author     SORIA Pierre-Henry
  * @email      ' . self::SOFTWARE_EMAIL . '
  * @link       ' . self::SOFTWARE_WEBSITE . '
- * @copyright  ' . self::SOFTWARE_COPYRIGHT . '
+ * @copyright  ' . sprintf(self::SOFTWARE_COPYRIGHT, date('Y')) . '
  * @license    ' . self::LICENSE . '
  ***************************************************************************/
 ';

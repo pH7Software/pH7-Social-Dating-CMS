@@ -242,7 +242,7 @@ File ID: ' . $this->_sId . '
  * @author     SORIA Pierre-Henry
  * @email      ' . Kernel::SOFTWARE_EMAIL . '
  * @link       ' . Kernel::SOFTWARE_WEBSITE . '
- * @copyright  ' . Kernel::SOFTWARE_COPYRIGHT . '
+ * @copyright  ' . sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')) . '
  * @license    ' . Kernel::SOFTWARE_LICENSE . '
  ***************************************************************************/
 ';
