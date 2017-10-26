@@ -68,7 +68,7 @@ class PH7Xsl
     /**
      * Enable or disable the PHP functions in the XSTL template.
      *
-     * @param bool $bEnable Default TRUE
+     * @param bool $bEnable
      *
      * @return self
      */
@@ -83,7 +83,7 @@ class PH7Xsl
      * Generate XML Node.
      *
      * @param mixed $aData array
-     * @param string $sNamespace Optional. Default ''
+     * @param string $sNamespace
      *
      * @return self
      *
@@ -129,8 +129,8 @@ class PH7Xsl
      * Set variables.
      *
      * @param array|string $mKey
-     * @param string $sValue Optional only if the variables are passed through an array. Default ''
-     * @param string $sNamespace Optional. Default ''
+     * @param string $sValue Optional. Only if the variables are passed through an array.
+     * @param string $sNamespace
      *
      * @return self
      */
