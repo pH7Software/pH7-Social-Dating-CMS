@@ -8,9 +8,14 @@
 
 namespace PH7;
 
+use PH7\Framework\Ip\Ip;
+use PH7\Framework\Layout\Html\Security as HtmlSecurity;
+use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Url\Header;
+use PH7\Framework\Util\Various;
 
 class UserController extends Controller
 {
@@ -26,7 +31,7 @@ class UserController extends Controller
         $this->oAdminModel = new AdminModel;
 
         // Assigns variables for views
-        $this->view->designSecurity = new Framework\Layout\Html\Security; // Security Design Class
+        $this->view->designSecurity = new HtmlSecurity; // Security Design Class
         $this->view->dateTime = $this->dateTime; // Date Time Class
         $this->view->avatarDesign = new AvatarDesignCore; // For Avatar User
     }
@@ -154,9 +159,9 @@ class UserController extends Controller
                 'member_first_name' => $oUser->firstName,
                 'member_sex' => $oUser->sex,
                 'member_group_id' => $oUser->groupId,
-                'member_ip' => Framework\Ip\Ip::get(),
+                'member_ip' => Ip::get(),
                 'member_http_user_agent' => $this->browser->getUserAgent(),
-                'member_token' => Framework\Util\Various::genRnd($oUser->email)
+                'member_token' => Various::genRnd($oUser->email)
             ];
             $this->session->set($aSessionData);
             $this->sMsg = t('You are now logged in as member: %0%!', $oUser->username);
@@ -209,7 +214,7 @@ class UserController extends Controller
 
     public function approveAll($iId)
     {
-        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
+        if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
@@ -223,7 +228,7 @@ class UserController extends Controller
 
     public function disapproveAll($iId)
     {
-        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
+        if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
@@ -275,7 +280,7 @@ class UserController extends Controller
 
     public function banAll()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
+        if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
@@ -293,7 +298,7 @@ class UserController extends Controller
 
     public function unBanAll()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
+        if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
@@ -310,7 +315,7 @@ class UserController extends Controller
 
     public function deleteAll()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('user_action')) {
+        if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
         } elseif (count($this->httpRequest->post('action')) > 0) {
             foreach ($this->httpRequest->post('action') as $sAction) {
@@ -369,7 +374,7 @@ class UserController extends Controller
                     // Send email
                     $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl', $oUser->email);
                     $aInfo = ['to' => $oUser->email, 'subject' => $sSubject];
-                    (new Framework\Mail\Mail)->send($aInfo, $sMessageHtml);
+                    (new Mail)->send($aInfo, $sMessageHtml);
 
                     $this->oAdmin->clearReadProfileCache($oUser->profileId);
 
