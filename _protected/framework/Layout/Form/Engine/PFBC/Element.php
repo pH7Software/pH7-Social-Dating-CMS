@@ -20,10 +20,10 @@ abstract class Element extends Base
 
     public function __construct($label, $name, array $properties = null)
     {
-        $configuration = array(
+        $configuration = [
             'label' => $label,
             'name' => $name
-        );
+        ];
 
         /*Merge any properties provided with an associative array containing the label
         and name properties.*/

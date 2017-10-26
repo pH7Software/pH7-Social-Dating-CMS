@@ -15,7 +15,6 @@ namespace PH7\Framework\Layout\Form;
 
 abstract class Form extends \PH7\Framework\Core\Core
 {
-
     /**
      * Launch Error Token Message.
      *
@@ -140,5 +139,4 @@ abstract class Form extends \PH7\Framework\Core\Core
 
         return $iWaitTime;
     }
-
 }

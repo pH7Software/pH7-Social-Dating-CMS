@@ -4,7 +4,6 @@ namespace PFBC\View;
 
 class Standard extends \PFBC\View
 {
-
     public function render()
     {
         echo '<form', $this->form->getAttributes(), '>';
@@ -67,5 +66,4 @@ CSS;
             }
         }
     }
-
 }

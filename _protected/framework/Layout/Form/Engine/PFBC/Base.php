@@ -17,8 +17,9 @@ abstract class Base
             case-insensitively.*/
             $available = array_keys(get_class_vars($class));
             $property_reference = array();
-            foreach ($available as $property)
+            foreach ($available as $property) {
                 $property_reference[strtolower($property)] = $property;
+            }
 
             /*The method reference lookup array is created so that "set" methods can be called
             case-insensitively.*/

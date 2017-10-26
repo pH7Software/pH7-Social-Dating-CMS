@@ -153,16 +153,23 @@ class Form extends Base
         $_SESSION['pfbc'][$id]['values'][$element] = $value;
     }
 
+    /**
+     * Validation errors are saved in the session after the form submission, and will be displayed to the user
+     * when redirected back to the form.
+     */
     public static function setError($id, $messages, $element = '')
     {
-        if (!is_array($messages))
+        if (!is_array($messages)) {
             $messages = array($messages);
+        }
 
-        if (empty($_SESSION['pfbc'][$id]['errors'][$element]))
+        if (empty($_SESSION['pfbc'][$id]['errors'][$element])) {
             $_SESSION['pfbc'][$id]['errors'][$element] = array();
+        }
 
-        foreach ($messages as $message)
+        foreach ($messages as $message) {
             $_SESSION['pfbc'][$id]['errors'][$element][] = $message;
+        }
     }
 
     /**
@@ -324,25 +331,37 @@ class Form extends Base
         $this->values = array_merge($this->values, $values);
     }
 
+    /**
+     * Values that have been set through the setValues method, either manually by the developer
+     * or after validation errors, are applied to elements within this method.
+     */
     private function applyValues()
     {
         foreach ($this->elements as $element) {
             $name = $element->getName();
-            if (isset($this->values[$name]))
+            if (isset($this->values[$name])) {
                 $element->setValue($this->values[$name]);
-            elseif (substr($name, -2) == '[]' && isset($this->values[substr($name, 0, -2)]))
+            } elseif (substr($name, -2) == '[]' &&
+                isset($this->values[substr($name, 0, -2)])
+            ) {
                 $element->setValue($this->values[substr($name, 0, -2)]);
+            }
         }
     }
 
+    /**
+     * This method parses the form's width property into a numeric width value and a width suffix - either px or %.
+     * These values are used by the form's concrete view class.
+     */
     public function formatWidthProperties()
     {
         if (!empty($this->width)) {
             if (substr($this->width, -1) == '%') {
                 $this->width = substr($this->width, 0, -1);
                 $this->widthSuffix = '%';
-            } elseif (substr($this->width, -2) == 'px')
+            } elseif (substr($this->width, -2) == 'px') {
                 $this->width = substr($this->width, 0, -2);
+            }
         } else {
             /*If the form's width property is empty, 100% will be assumed.*/
             $this->width = 100;
@@ -383,12 +402,16 @@ class Form extends Base
 
         /*jQuery is used to set the focus of the form's initial element.*/
         // We don't want the focus in the form field if we are on the home page.
-        if (((new \PH7\Framework\Mvc\Request\Http)->currentUrl() != PH7_URL_ROOT) && !in_array('focus', $this->prevent))
+        if (((new HttpRequest)->currentUrl() !== PH7_URL_ROOT) &&
+            !in_array('focus', $this->prevent)
+        ) {
             echo 'jQuery("#', $id, ' :input:visible:enabled:first").focus();';
+        }
 
         $this->view->jQueryDocumentReady();
-        foreach ($this->elements as $element)
+        foreach ($this->elements as $element) {
             $element->jQueryDocumentReady();
+        }
 
         /*For ajax, an anonymous onsubmit javascript function is bound to the form using jQuery.  jQuery's
         serialize function is used to grab each element's name/value pair.*/
