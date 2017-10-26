@@ -21,7 +21,6 @@ if (in_array('__autoload', spl_autoload_functions()))
 
 class Form extends Base
 {
-
     private static $sFormId;
     protected $ajax;
     protected $ajaxCallback;
@@ -64,8 +63,6 @@ class Form extends Base
         $this->resourcesPath = PH7_URL_STATIC . 'PFBC';
     }
 
-    /*When a form is serialized and stored in the session, this function prevents any non-essential
-    information from being included.*/
     public static function isValid($id = 'pfbc', $clearValues = true)
     {
         $valid = true;
@@ -244,13 +241,14 @@ class Form extends Base
     public function getErrors()
     {
         $errors = array();
-        if (session_status() !== PHP_SESSION_ACTIVE)
+        if (session_status() !== PHP_SESSION_ACTIVE) {
             $errors[''] = array('Error: pH7CMS requires an active session to work properly.  Simply add session_start() to your script before any output has been sent to the browser.');
-        else {
+        } else {
             $errors = array();
             $id = $this->attributes['id'];
-            if (!empty($_SESSION['pfbc'][$id]['errors']))
+            if (!empty($_SESSION['pfbc'][$id]['errors'])) {
                 $errors = $_SESSION['pfbc'][$id]['errors'];
+            }
         }
 
         return $errors;
@@ -280,8 +278,9 @@ class Form extends Base
 
         $this->formatWidthProperties();
 
-        if ($returnHTML)
+        if ($returnHTML) {
             ob_start();
+        }
 
         $this->renderCSS();
         $this->view->render();
@@ -471,8 +470,9 @@ JS;
         //*This section prevents duplicate css files from being loaded.*/
         if (!empty($urls)) {
             $urls = array_values(array_unique($urls));
-            foreach ($urls as $url)
+            foreach ($urls as $url) {
                 echo '<link rel="stylesheet" href="', $url, '"/>';
+            }
         }
     }
 }
