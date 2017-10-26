@@ -1001,27 +1001,5 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
     public function __destruct()
     {
         $this->clean();
-
-        parent::__destruct();
-        unset(
-          $this->designModel,
-          $this->sTplFile,
-          $this->bLicense,
-          $this->sTemplateDir,
-          $this->sCompileDir,
-          $this->sCompileDir2,
-          $this->sCacheDir,
-          $this->sCacheDir2,
-          $this->sCode,
-          $this->sTemplateDirFile,
-          $this->sCompileDirFile,
-          $this->sCacheDirFile,
-          $this->sTplExt,
-          $this->bCaching,
-          $this->bHtmlCompressor,
-          $this->bPhpCompressor,
-          $this->mCacheExpire,
-          $this->bXmlTags
-        );
     }
 }

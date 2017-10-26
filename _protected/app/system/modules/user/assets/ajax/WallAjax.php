@@ -136,14 +136,6 @@ class WallAjax extends Core
 
         echo $this->_sMsg;
     }
-
-    public function __destruct()
-    {
-        parent::__destruct();
-
-        unset($this->_oWallModel, $this->_oAvatarDesign, $this->_sMsg, $this->_bStatus);
-    }
-
 }
 
 // Only for the members

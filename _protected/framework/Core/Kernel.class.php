@@ -143,18 +143,6 @@ abstract class Kernel
         }
     }
 
-    public function __destruct()
-    {
-        unset(
-            $this->config,
-            $this->str,
-            $this->file,
-            $this->httpRequest,
-            $this->browser,
-            $this->registry
-        );
-    }
-
     /**
      * Clone is set to private to stop cloning.
      */
