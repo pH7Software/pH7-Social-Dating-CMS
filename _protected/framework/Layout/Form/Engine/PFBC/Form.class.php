@@ -118,18 +118,20 @@ class Form extends Base
                     self::clearValues($id);
                 self::clearErrors($id);
             }
-        } else
+        } else {
             $valid = false;
+        }
 
         return $valid;
     }
 
     private static function recover($id)
     {
-        if (!empty($_SESSION['pfbc'][$id]['form']))
+        if (!empty($_SESSION['pfbc'][$id]['form'])) {
             return unserialize($_SESSION['pfbc'][$id]['form']);
-        else
-            return '';
+        }
+
+        return '';
     }
 
     public static function clearValues($id = 'pfbc')
