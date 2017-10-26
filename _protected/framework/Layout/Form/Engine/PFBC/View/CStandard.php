@@ -5,11 +5,10 @@
  */
 
 namespace PFBC\View;
-// Class for the pH7 CMS
+// Class for pH7CMS
 
 class CStandard extends \PFBC\View
 {
-
     public function render()
     {
         echo '<form', $this->form->getAttributes(), '>';
@@ -74,5 +73,4 @@ CSS;
             }
         }
     }
-
 }

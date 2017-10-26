@@ -8,6 +8,7 @@ namespace PFBC;
 
 abstract class Error extends Base
 {
+    /** @var Form */
     protected $form;
 
     public function __construct(array $properties = null)
