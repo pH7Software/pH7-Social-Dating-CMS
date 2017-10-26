@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Asset / Ajax
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -12,8 +13,20 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class WallAjax extends Core
 {
+    /** @var WallModel */
+    private $_oWallModel;
 
-    private $_oWallModel, $_oAvatarDesign, $_sMsg, $_mContents, $_bStatus;
+    /** @var AvatarDesignCore */
+    private $_oAvatarDesign;
+
+    /** @var string */
+    private $_sMsg;
+
+    /** @var mixed */
+    private $_mContents;
+
+    /** @var bool */
+    private $_bStatus;
 
     public function __construct()
     {
@@ -21,27 +34,26 @@ class WallAjax extends Core
 
         $this->_oWallModel = new WallModel;
         $this->_oAvatarDesign = new AvatarDesignCore; // Avatar Design Class
-        switch ($this->httpRequest->post('type'))
-        {
+        switch ($this->httpRequest->post('type')) {
             case 'show':
                 $this->show();
-            break;
+                break;
 
             case 'showCommentProfile':
                 $this->showCommentProfile();
-            break;
+                break;
 
             case 'add':
                 $this->add();
-            break;
+                break;
 
             case 'edit':
                 $this->edit();
-            break;
+                break;
 
             case 'delete':
                 $this->delete();
-            break;
+                break;
 
             default:
                 Framework\Http\Http::setHeadersByCode(400);
@@ -52,14 +64,10 @@ class WallAjax extends Core
     protected function show()
     {
         $this->_mContents = $this->_oWallModel->get($this->session->get('member_id'), null, 0, 20);
-        if (!$this->_mContents)
-        {
+        if (!$this->_mContents) {
             echo '<p class="alert alert-danger">', t('Oops...! No news feed available at the moment.'), '</p>';
-        }
-        else
-        {
-            foreach ($this->_mContents as $oRow)
-            {
+        } else {
+            foreach ($this->_mContents as $oRow) {
                 echo '<p>';
                 $this->_oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
                 echo '</p><p>', Framework\Parse\Emoticon::init(escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($oRow->post), 0, 80))), '</p>
@@ -73,14 +81,10 @@ class WallAjax extends Core
     protected function showCommentProfile()
     {
         $this->_mContents = $this->_oWallModel->getCommentProfile(null, 0, 20);
-        if (!$this->_mContents)
-        {
+        if (!$this->_mContents) {
             echo '<p class="alert alert-danger">', t('No news feed available at the moment. Start commenting some profiles!'), '</p>';
-        }
-        else
-        {
-            foreach ($this->_mContents as $oRow)
-            {
+        } else {
+            foreach ($this->_mContents as $oRow) {
                 echo '<p>';
                 $this->_oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
                 echo '</p><p>', Framework\Parse\User::atUsernameToLink(escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($oRow->comment), 0, 80))), '</p>
