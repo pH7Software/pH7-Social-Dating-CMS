@@ -33,13 +33,10 @@ JS;
     {
         $errors = $this->parse($this->form->getErrors());
         if (!empty($errors)) {
-            $size = sizeof($errors);
-            if ($size == 1)
-                $format = "error was";
-            else
-                $format = $size . " errors were";
-
-            echo '<div class="pfbc-error ui-state-error ui-corner-all">The following ', $format, ' found:<ul><li>', implode('</li><li>', $errors), '</li></ul></div>';
+            $size = count($errors);
+            echo '<div class="pfbc-error ui-state-error ui-corner-all">';
+            echo nt('The following error was found:', 'The following errors were found:', $size);
+            echo '<ul><li>', implode('</li><li>', $errors), '</li></ul></div>';
         }
     }
 
