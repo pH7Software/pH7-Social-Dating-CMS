@@ -42,7 +42,8 @@ final class FrontController
     const REGEX_CONTROLLER_FORMAT = '#^[a-z0-9\_]+$#i';
     const REGEX_ACTION_FORMAT = '#^[a-z0-9\_]+$#i';
     const REGEX_FOLDER_FORMAT = '#^[\w]+$#';
-    const REGEX_URL_EXTRA_OPTIONS = '/?(?:\?[^/]+\=[^/]+)?$`';
+    const REGEX_URL_EXTRA_OPTIONS = '/?(?:\?[^/]+\=[^/]+)?';
+    const REGEX_URL_PARAMS = '#&[^/]+\=[^/]+$#';
 
     /** @var Config */
     private $oConfig;
@@ -609,7 +610,7 @@ final class FrontController
      */
     private function cleanSlugUrl($sVal)
     {
-        return preg_replace('#&[^/]+\=[^/]+$#', '', $sVal);
+        return preg_replace(self::REGEX_URL_PARAMS, '', $sVal);
     }
 
     /**
