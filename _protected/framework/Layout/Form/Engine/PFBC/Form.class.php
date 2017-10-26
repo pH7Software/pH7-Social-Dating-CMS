@@ -410,16 +410,18 @@ JS;
                     else {
 JS;
             /*A callback function can be specified to handle any post submission events.*/
-            if (!empty($this->ajaxCallback))
+            if (!empty($this->ajaxCallback)) {
                 echo $this->ajaxCallback, '(response);';
+            }
 
             echo '}';
 
             if (!in_array('jQueryUIButtons', $this->prevent)) {
                 echo 'jQuery("#', $id, ' button[type=submit] span.ui-button-text").css("padding-right", "1em").find("img").remove();';
                 echo 'jQuery("#', $id, ' button[type=submit]").button("enable");';
-            } else
+            } else {
                 echo 'jQuery("#', $id, '").find("button[type=submit]").removeAttr("disabled");';
+            }
 
             echo <<<JS
                 }
