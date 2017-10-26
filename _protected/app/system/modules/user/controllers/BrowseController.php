@@ -43,7 +43,8 @@ class BrowseController extends Controller
         if (empty($oUsers)) {
             Header::redirect(
                 Uri::get('user', 'search', 'index'),
-                t('No results. Please try again with wider or new search options.')
+                t('No results. Please try again with wider or new search criteria.'),
+                Design::WARNING_TYPE
             );
         } else {
             // We can put HTML tags in the <title> tag as our template engine will remove all HTML tags present in the title tag, ...
