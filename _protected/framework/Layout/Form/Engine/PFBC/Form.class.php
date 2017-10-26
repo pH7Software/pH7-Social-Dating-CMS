@@ -50,8 +50,9 @@ class Form extends Base
             'method' => 'post'
         ));
 
-        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')
+        if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
             $this->prefix = 'https';
+        }
 
         /*The Standard view class is applied by default and will be used unless a different view is
         specified in the form's configure method*/
