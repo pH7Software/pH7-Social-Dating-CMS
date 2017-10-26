@@ -22,7 +22,6 @@
             <div role="banner" id="logo" class="navbar-brand"><h1><a href="{{ $design->homePageUrl() }}" title="{slogan}">{site_name}</a></h1></div>
           </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
