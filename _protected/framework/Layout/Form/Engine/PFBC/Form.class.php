@@ -173,11 +173,18 @@ class Form extends Base
         return self::$sFormId;
     }
 
+    /**
+     * When ajax is used to submit the form's data, validation errors need to be manually sent back to the
+     * form using json.
+     *
+     * @param string $id
+     */
     public static function renderAjaxErrorResponse($id = 'pfbc')
     {
         $form = self::recover($id);
-        if (!empty($form))
+        if (!empty($form)) {
             $form->error->renderAjaxErrorResponse();
+        }
     }
 
     public static function setSuccess($id, $message, $element = '')
@@ -306,6 +313,12 @@ class Form extends Base
         return $values;
     }
 
+    /**
+     * An associative array is used to pre-populate form elements.  The keys of this array correspond with
+     * the element names.
+     *
+     * @param array $values
+     */
     public function setValues(array $values)
     {
         $this->values = array_merge($this->values, $values);
@@ -337,7 +350,6 @@ class Form extends Base
         }
     }
 
-    /*The save method serialized the form's instance and saves it in the session.*/
     private function renderCSS()
     {
         echo '<style scoped="scoped">';
@@ -444,11 +456,15 @@ JS;
         /*This section prevents duplicate css files from being loaded.*/
         if (!empty($urls)) {
             $urls = array_values(array_unique($urls));
-            foreach ($urls as $url)
+            foreach ($urls as $url) {
                 echo '<script src="', $url, '"></script>';
+            }
         }
     }
 
+    /**
+     * The save method serialized the form's instance and saves it in the session.
+     */
     private function save()
     {
         $_SESSION['pfbc'][$this->attributes['id']]['form'] = serialize($this);
