@@ -30,7 +30,7 @@ class PublicFileForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_file', 'form_file'));
         $oForm->addElement(new \PFBC\Element\Token('file'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('File Content'), 'content', array('value' => $rData, 'style' => 'height:650px', 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('File Contents'), 'content', array('value' => $rData, 'style' => 'height:650px', 'required' => 1)));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
