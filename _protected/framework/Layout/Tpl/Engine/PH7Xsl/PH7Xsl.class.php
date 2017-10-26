@@ -14,16 +14,33 @@ namespace PH7\Framework\Layout\Tpl\Engine\PH7Xsl;
 
 defined('PH7') or exit('Restricted access');
 
+use DOMDocument;
+use DOMElement;
+use XsltProcessor;
+
 class PH7Xsl
 {
     const ROOT_NAMESPACE = 'template';
 
+    /** @var DOMDocument */
     private $oXml;
+
+    /** @var DOMDocument */
     private $oXsl;
+
+    /** @var XsltProcessor */
     private $oXslProcessor;
+
+    /** @var string */
     private $sOutput;
+
+    /** @var DOMElement */
     private $oRoot;
+
+    /** @var string */
     private $sFile;
+
+    /** @var bool */
     private $bPhpFunc = true;
 
     /**
@@ -34,9 +51,9 @@ class PH7Xsl
     public function __construct($sFile)
     {
         // Creating objects
-        $this->oXml = new \DOMDocument('1.0', 'UTF-8');
-        $this->oXsl = new \DOMDocument;
-        $this->oXslProcessor = new \XsltProcessor;
+        $this->oXml = new DOMDocument('1.0', 'UTF-8');
+        $this->oXsl = new DOMDocument;
+        $this->oXslProcessor = new XsltProcessor;
 
         $this->sFile = $sFile;
 
@@ -51,7 +68,7 @@ class PH7Xsl
     /**
      * Enable or disable the PHP functions in the XSTL template.
      *
-     * @param boolean $bEnable Default TRUE
+     * @param bool $bEnable Default TRUE
      *
      * @return self
      */
