@@ -239,7 +239,7 @@ class Design
      */
     public function setRedirect($sUrl = null, $sMsg = null, $sType = self::SUCCESS_TYPE, $iTime = 3)
     {
-        if (!empty($sMsg)) {
+        if ($sMsg !== null) {
             $this->setFlashMsg($sMsg, $sType);
         }
 
@@ -316,7 +316,7 @@ class Design
      */
     public function popupLinkConfirm($sLabel, $sMod, $sCtrl, $sAct, $mId, $sClass = null)
     {
-        $sClass = (!empty($sClass)) ? ' class="' . $sClass . '" ' : ' ';
+        $sClass = ($sClass !== null) ? ' class="' . $sClass . '" ' : ' ';
 
         $aHttpParams = [
             'label' => Url::encode($sLabel),
@@ -841,7 +841,7 @@ class Design
     {
         $aDefAttrs = ['src' => $sImg, 'alt' => $sAlt];
 
-        if (!empty($aAttrs)) {
+        if ($aAttrs !== null) {
             $aDefAttrs += $aAttrs; // Update the attributes if necessary
         }
 
@@ -862,7 +862,7 @@ class Design
     {
         $sAttrs = '';
 
-        if (!empty($aAttrs)) {
+        if ($aAttrs !== null) {
             foreach ($aAttrs as $sName => $sValue) {
                 $sAttrs .= ' ' . $sName . '="' . $sValue . '"';
             }
@@ -957,7 +957,7 @@ class Design
      */
     public function externalCssFile($sFile, $sCssMedia = null)
     {
-        $sCssMedia = (!empty($sCssMedia)) ? ' media="' . $sCssMedia . '"' : '';
+        $sCssMedia = ($sCssMedia !== null) ? ' media="' . $sCssMedia . '"' : '';
         echo '<link rel="stylesheet" href="', $sFile, '"', $sCssMedia, ' />';
     }
 
