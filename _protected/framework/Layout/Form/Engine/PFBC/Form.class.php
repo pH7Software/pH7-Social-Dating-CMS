@@ -6,6 +6,7 @@
 namespace PFBC;
 
 use PH7\Framework\Layout\Html\Design;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 /*This project's namespace structure is leveraged to autoload requested classes at runtime.*/
 function Load($class)
