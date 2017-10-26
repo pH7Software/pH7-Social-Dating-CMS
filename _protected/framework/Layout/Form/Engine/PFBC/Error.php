@@ -16,16 +16,16 @@ abstract class Error extends Base
         $this->configure($properties);
     }
 
-    public abstract function applyAjaxErrorResponse();
+    abstract public function applyAjaxErrorResponse();
 
     public function clear()
     {
         echo 'jQuery("#', $this->form->getId(), ' .pfbc-error").remove();';
     }
 
-    public abstract function render();
+    abstract public function render();
 
-    public abstract function renderAjaxErrorResponse();
+    abstract public function renderAjaxErrorResponse();
 
     public function renderCSS()
     {
