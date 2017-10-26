@@ -199,6 +199,10 @@ class Form extends Base
         return (new Design)->setFlashMsg($message, Design::SUCCESS_TYPE);
     }
 
+    /**
+     * When a form is serialized and stored in the session, this function prevents any
+     * non-essential information from being included.
+     */
     public function __sleep()
     {
         return array('attributes', 'elements', 'error');

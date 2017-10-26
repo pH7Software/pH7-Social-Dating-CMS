@@ -58,9 +58,18 @@ abstract class Base
         echo '<pre>', print_r($this, true), '</pre>';
     }
 
+    /**
+     * This method is used by the Form class and all Element classes to return a string of html
+     * attributes.
+     * There is an ignore parameter that allows special attributes from being included.
+     *
+     * @param array|string $ignore
+     *
+     * @return string
+     */
     public function getAttributes($ignore = '')
     {
-        $str = "";
+        $str = '';
         if (!empty($this->attributes)) {
             if (!is_array($ignore)) {
                 $ignore = array($ignore);

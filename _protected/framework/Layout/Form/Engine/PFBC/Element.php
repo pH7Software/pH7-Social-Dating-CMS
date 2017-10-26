@@ -34,13 +34,19 @@ abstract class Element extends Base
         $this->configure($configuration);
     }
 
-    /*When an element is serialized and stored in the session, this method prevents any non-essential
-    information from being included.*/
+    /**
+     * When an element is serialized and stored in the session, this method prevents any non-essential
+     * information from being included.
+     */
     public function __sleep()
     {
         return array('attributes', 'label', 'validation');
     }
 
+    /**
+     * If an element requires external stylesheets, this method is used to return an
+     * array of entries that will be applied before the form is rendered.
+     */
     public function getCSSFiles()
     {
     }
@@ -142,10 +148,19 @@ abstract class Element extends Base
         return $valid;
     }
 
+    /**
+     * If an element requires jQuery, this method is used to include a section of javascript
+     * that will be applied within the jQuery(document).ready(function() {}); section after the
+     * form has been rendered.
+     */
     public function jQueryDocumentReady()
     {
     }
 
+    /**
+     * Elements that have the jQueryOptions property included (Date, Sort, Checksort, and Color)
+     * can make use of this method to render out the element's appropriate jQuery options.
+     */
     public function jQueryOptions()
     {
         if (!empty($this->jQueryOptions)) {
@@ -164,6 +179,11 @@ abstract class Element extends Base
         }
     }
 
+    /**
+     * Many of the included elements make use of the <input> tag for display.  These include the Hidden, Textbox,
+     * Password, Date, Color, Button, Email, and File element classes.  The project's other element classes will
+     * override this method with their own implementation.
+     */
     public function render()
     {
         if (isset($this->attributes['value']) && is_array($this->attributes['value'])) {
@@ -187,6 +207,9 @@ abstract class Element extends Base
         return $sCode;
     }
 
+    /**
+     * This method provides a shortcut for checking if an element is required.
+     */
     public function isRequired()
     {
         if (!empty($this->validation)) {
@@ -199,10 +222,18 @@ abstract class Element extends Base
         return false;
     }
 
+    /**
+     * If an element requires inline stylesheet definitions, this method is used send them to the browser before
+     * the form is rendered.
+     */
     public function renderCSS()
     {
     }
 
+    /**
+     * If an element requires javascript to be loaded, this method is used send them to the browser after
+     * the form is rendered.
+     */
     public function renderJS()
     {
     }
@@ -245,6 +276,12 @@ abstract class Element extends Base
         }
     }
 
+    /**
+     * This method applies one or more validation rules to an element.  If can accept a single concrete
+     * validation class or an array of entries.
+     *
+     * @param array|string $validation
+     */
     public function setValidation($validation)
     {
         /*If a single validation class is provided, an array is created in order to reuse the same logic.*/
