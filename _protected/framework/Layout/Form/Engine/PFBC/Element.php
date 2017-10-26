@@ -75,10 +75,11 @@ abstract class Element extends Base
 
     public function getName()
     {
-        if (!empty($this->attributes['name']))
+        if (!empty($this->attributes['name'])) {
             return $this->attributes['name'];
-        else
-            return "";
+        }
+
+        return '';
     }
 
     public function getPostHTML()
