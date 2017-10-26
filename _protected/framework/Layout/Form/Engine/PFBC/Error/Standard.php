@@ -46,9 +46,11 @@ JS;
         if (!empty($errors)) {
             $keys = array_keys($errors);
             $keySize = sizeof($keys);
-            for ($k = 0; $k < $keySize; ++$k)
+            for ($k = 0; $k < $keySize; ++$k) {
                 $list = array_merge($list, $errors[$keys[$k]]);
+            }
         }
+
         return $list;
     }
 
