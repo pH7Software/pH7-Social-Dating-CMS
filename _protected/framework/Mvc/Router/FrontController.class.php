@@ -122,7 +122,7 @@ final class FrontController
         $oUrl = UriRoute::loadFile(new \DomDocument);
 
         foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
-            if (preg_match('`^' . $oRoute->getAttribute('url') . self::REGEX_URL_EXTRA_OPTIONS, $this->oHttpRequest->requestUri(), $aMatches)) {
+            if (preg_match('`^' . $oRoute->getAttribute('url') . self::REGEX_URL_EXTRA_OPTIONS . '$`', $this->oHttpRequest->requestUri(), $aMatches)) {
                 $this->setRewritingRouter();
 
                 $sPathModule = $oRoute->getAttribute('path') . PH7_SH;
