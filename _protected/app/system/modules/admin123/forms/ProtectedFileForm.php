@@ -37,5 +37,4 @@ class ProtectedFileForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

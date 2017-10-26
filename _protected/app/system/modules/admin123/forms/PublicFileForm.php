@@ -37,5 +37,4 @@ class PublicFileForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

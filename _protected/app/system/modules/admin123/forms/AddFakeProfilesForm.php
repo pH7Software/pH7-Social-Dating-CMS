@@ -62,5 +62,4 @@ class AddFakeProfilesForm
             'TR' => t('Turkish'),
         ];
     }
-
 }
