@@ -35,5 +35,5 @@ abstract class Validation extends Base
         return ($value === null || is_array($value) || $value === '');
     }
 
-    public abstract function isValid($value);
+    abstract public function isValid($value);
 }
