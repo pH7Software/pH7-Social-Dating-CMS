@@ -8,7 +8,6 @@ namespace PFBC;
 
 abstract class Base
 {
-
     public function configure(array $properties = null)
     {
         if (!empty($properties)) {
@@ -50,33 +49,39 @@ abstract class Base
         return $this;
     }
 
-    /*This method can be used to view a class' state.*/
+    /**
+     * This method can be used to view a class' state.
+     */
     public function debug()
     {
         echo '<pre>', print_r($this, true), '</pre>';
     }
 
-    /*This method converted special characters to entities in HTML attributes from breaking the markup.*/
-
     public function getAttributes($ignore = '')
     {
         $str = "";
         if (!empty($this->attributes)) {
-            if (!is_array($ignore))
+            if (!is_array($ignore)) {
                 $ignore = array($ignore);
+            }
+
             $attributes = array_diff(array_keys($this->attributes), $ignore);
-            foreach ($attributes as $attribute)
+            foreach ($attributes as $attribute) {
                 $str .= ' ' . $attribute . '="' . $this->filter($this->attributes[$attribute]) . '"';
+            }
         }
         return $str;
     }
 
-    /*This method is used by the Form class and all Element classes to return a string of html
-    attributes.  There is an ignore parameter that allows special attributes from being included.*/
-
+    /**
+     * This method converted special characters to entities in HTML attributes from breaking the markup.
+     *
+     * @param string $sText
+     *
+     * @return string
+     */
     protected function filter($sText)
     {
         return htmlspecialchars($sText, ENT_QUOTES);
     }
-
 }

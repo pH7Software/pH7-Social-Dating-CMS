@@ -152,7 +152,6 @@
     <div role="banner" class="center ad_468_60">
         {{ $designModel->ad(468, 60) }}
     </div>
-
     <!-- End Content -->
 
     <!-- Begin Footer -->

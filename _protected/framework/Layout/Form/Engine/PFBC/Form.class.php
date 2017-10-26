@@ -66,7 +66,6 @@ class Form extends Base
 
     /*When a form is serialized and stored in the session, this function prevents any non-essential
     information from being included.*/
-
     public static function isValid($id = 'pfbc', $clearValues = true)
     {
         $valid = true;
@@ -136,28 +135,24 @@ class Form extends Base
             return '';
     }
 
-    /*Values that have been set through the setValues method, either manually by the developer
-    or after validation errors, are applied to elements within this method.*/
-
     public static function clearValues($id = 'pfbc')
     {
-        if (!empty($_SESSION['pfbc'][$id]['values']))
+        if (!empty($_SESSION['pfbc'][$id]['values'])) {
             unset($_SESSION['pfbc'][$id]['values']);
+        }
     }
 
     public static function clearErrors($id = 'pfbc')
     {
-        if (!empty($_SESSION['pfbc'][$id]['errors']))
+        if (!empty($_SESSION['pfbc'][$id]['errors'])) {
             unset($_SESSION['pfbc'][$id]['errors']);
+        }
     }
 
     public static function setSessionValue($id, $element, $value)
     {
         $_SESSION['pfbc'][$id]['values'][$element] = $value;
     }
-
-    /*This method parses the form's width property into a numeric width value and a width suffix - either px or %.
-    These values are used by the form's concrete view class.*/
 
     public static function setError($id, $messages, $element = '')
     {
@@ -261,8 +256,6 @@ class Form extends Base
         return $errors;
     }
 
-    /*This method restores the serialized form instance.*/
-
     public function getWidth()
     {
         return $this->width;
@@ -272,9 +265,6 @@ class Form extends Base
     {
         return $this->widthSuffix;
     }
-
-    /*When ajax is used to submit the form's data, validation errors need to be manually sent back to the
-    form using json.*/
 
     public function render($returnHTML = false)
     {
@@ -347,7 +337,6 @@ class Form extends Base
     }
 
     /*The save method serialized the form's instance and saves it in the session.*/
-
     private function renderCSS()
     {
         echo '<style scoped="scoped">';
@@ -357,9 +346,6 @@ class Form extends Base
             $element->renderCSS();
         echo '</style>';
     }
-
-    /*Valldation errors are saved in the session after the form submission, and will be displayed to the user
-    when redirected back to the form.*/
 
     private function renderJS()
     {
@@ -437,8 +423,6 @@ JS;
 JS;
     }
 
-    /*setSuccess*/
-
     private function renderJSFiles()
     {
         $urls = array();
@@ -469,9 +453,6 @@ JS;
         $_SESSION['pfbc'][$this->attributes['id']]['form'] = serialize($this);
     }
 
-    /*An associative array is used to pre-populate form elements.  The keys of this array correspond with
-    the element names.*/
-
     private function renderCSSFiles()
     {
         $urls = array();
@@ -494,5 +475,4 @@ JS;
                 echo '<link rel="stylesheet" href="', $url, '"/>';
         }
     }
-
 }
