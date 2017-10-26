@@ -132,8 +132,8 @@ class UserController extends Controller
             unset($oPage);
 
             if (empty($oSearch)) {
-                $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'));
-                $this->displayPageNotFound('No results found. Please try again with wider/new search parameters.');
+                $this->design->setRedirect(Uri::get(PH7_ADMIN_MOD, 'user', 'search'), null, null, 2);
+                $this->displayPageNotFound('No results found. Please try again with wider/new search criteria');
             } else {
                 // Add the JS file for the browse form
                 $this->design->addJs(PH7_STATIC . PH7_JS, 'form.js');
