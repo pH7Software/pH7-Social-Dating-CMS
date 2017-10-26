@@ -624,7 +624,7 @@ final class FrontController
     {
         $sVar = escape($sVar, true);
 
-        // Convert programatic characters to entities and return
+        // Convert characters to entities and return them
         return str_replace([
             // Bad
             '$',
