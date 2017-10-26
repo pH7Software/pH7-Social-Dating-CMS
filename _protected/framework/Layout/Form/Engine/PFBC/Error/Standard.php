@@ -6,6 +6,8 @@
 
 namespace PFBC\Error;
 
+use PH7\Framework\Http\Http;
+
 class Standard extends \PFBC\Error
 {
     public function applyAjaxErrorResponse()
@@ -57,7 +59,7 @@ JS;
     {
         $errors = $this->parse($this->form->getErrors());
         if (!empty($errors)) {
-            \PH7\Framework\Http\Http::setContentType('application/json');
+            Http::setContentType('application/json');
             echo json_encode(array('errors' => $errors));
         }
     }
