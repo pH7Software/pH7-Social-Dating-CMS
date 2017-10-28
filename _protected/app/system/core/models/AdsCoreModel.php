@@ -17,9 +17,10 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
     /**
      * Get Advertisements in the database.
      *
-     * @param mixed (null or integer) $mActive 1 = active otherwise null. Default value is 1.
-     * @param string $sTable The table. Default value is Ads.
-     * @return object The advertisements data.
+     * @param int|null $mActive 1 = active otherwise null. Default value is 1.
+     * @param string $sTable The table.
+     *
+     * @return \stdClass The advertisements data.
      */
     public function get($mActive = 1, $iOffset, $iLimit, $sTable = 'Ads')
     {
@@ -35,9 +36,19 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oRow;
     }
 
+    /**
+     * @param string $sName
+     * @param string $sCode
+     * @param int $iWidth
+     * @param int $iHeight
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function add($sName, $sCode, $iWidth, $iHeight, $sTable = 'Ads')
     {
         AdsCore::checkTable($sTable);
@@ -57,18 +68,34 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET active = :status WHERE adsId =:adsId');
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
         $rStmt->bindValue(':status', $iStatus, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function delete($iId, $sTable = 'Ads')
     {
         AdsCore::checkTable($sTable);
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE adsId =:adsId');
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iId
+     * @param string $sName
+     * @param string $sCode
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function update($iId, $sName, $sCode, $sTable = 'Ads')
     {
         AdsCore::checkTable($sTable);
@@ -77,14 +104,16 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
         $rStmt->bindValue(':adsId', $iId, \PDO::PARAM_INT);
         $rStmt->bindValue(':name', $sName, \PDO::PARAM_STR);
         $rStmt->bindValue(':code', $sCode, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
     /**
      * Get Total Advertisements.
      *
-     * @param string $sTable Default 'Ads'
-     * @return integer
+     * @param string $sTable
+     *
+     * @return int
      */
     public function total($sTable = 'Ads')
     {
