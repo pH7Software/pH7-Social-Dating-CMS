@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Xml / Inc / Class
  */
+
 namespace PH7;
 
 class DateFormat
@@ -13,7 +14,9 @@ class DateFormat
     /**
      * Private constructor to prevent instantiation of class because it's a static class.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Get date format for RSS feed.

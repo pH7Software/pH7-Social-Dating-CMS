@@ -25,7 +25,7 @@ class RssController extends MainController
         $this->view->h1_title = $this->sTitle;
 
         /*** Get the links ***/
-        $sUrl = Framework\Mvc\Router\Uri::get('xml','rss','xmllink');
+        $sUrl = Framework\Mvc\Router\Uri::get('xml', 'rss', 'xmllink');
         $this->view->urls = (new Link($sUrl))->get();
         $this->output();
     }
@@ -45,13 +45,12 @@ class RssController extends MainController
         $this->view->current_date = DateFormat::getRss(); // Date format for RSS feed
 
         // RSS router
-        switch ($sAction)
-        {
+        switch ($sAction) {
             case 'blog':
             case 'note':
             case 'forum-topic':
                 $this->sAction = $sAction;
-            break;
+                break;
 
             case 'comment-profile':
             case 'comment-blog':
@@ -61,13 +60,13 @@ class RssController extends MainController
             case 'comment-game':
                 $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router.
                 $this->sAction = 'comment.inc';
-            break;
+                break;
 
             case 'forum-post' && !empty($mParam) && is_numeric($mParam):
                 $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router.
                 $this->view->forums_messages = $this->oDataModel->getForumsMessages($mParam);
                 $this->sAction = $sAction;
-            break;
+                break;
 
             default:
                 $this->displayPageNotFound(t('Not Found RSS Feed!'));
