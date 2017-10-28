@@ -1,6 +1,6 @@
 ==============================================
 
-CREATED, DEVELOPED, PRODUCTED AND POWERED BY SORIA PIERRE-HENRY, All Rights Reserved.
+CREATED, DEVELOPED, PRODUCTED AND POWERED BY PIERRE-HENRY SORIA, All Rights Reserved.
 
 ==============================================
 
