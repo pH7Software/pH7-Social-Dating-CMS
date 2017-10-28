@@ -329,38 +329,38 @@ class Image
      *
      * @return self
      */
-     public function watermarkText($sText, $iSize)
-     {
-         $iWidthText = $this->iWidth-imagefontwidth($iSize)*mb_strlen($sText)-3;
-         $iHeightText = $this->iHeight-imagefontheight($iSize)-3;
+    public function watermarkText($sText, $iSize)
+    {
+        $iWidthText = $this->iWidth - imagefontwidth($iSize) * mb_strlen($sText) - 3;
+        $iHeightText = $this->iHeight - imagefontheight($iSize) - 3;
 
-         $rWhite = imagecolorallocate($this->rImage, 255, 255, 255);
-         $rBlack = imagecolorallocate($this->rImage, 0, 0, 0);
-         $rGray = imagecolorallocate($this->rImage, 127, 127, 127);
+        $rWhite = imagecolorallocate($this->rImage, 255, 255, 255);
+        $rBlack = imagecolorallocate($this->rImage, 0, 0, 0);
+        $rGray = imagecolorallocate($this->rImage, 127, 127, 127);
 
-         if ($iWidthText > 0 && $iHeightText > 0) {
-             if (imagecolorat($this->rImage, $iWidthText, $iHeightText) > $rGray) {
-                 $rColor = $rBlack;
-             }
-             if (imagecolorat($this->rImage, $iWidthText, $iHeightText) < $rGray) {
-                 $rColor = $rWhite;
-             }
-         } else {
-             $rColor = $rWhite;
-         }
+        if ($iWidthText > 0 && $iHeightText > 0) {
+            if (imagecolorat($this->rImage, $iWidthText, $iHeightText) > $rGray) {
+                $rColor = $rBlack;
+            }
+            if (imagecolorat($this->rImage, $iWidthText, $iHeightText) < $rGray) {
+                $rColor = $rWhite;
+            }
+        } else {
+            $rColor = $rWhite;
+        }
 
-         imagestring($this->rImage, $iSize, $iWidthText-1, $iHeightText-1, $sText, $rWhite-$rColor);
-         imagestring($this->rImage, $iSize, $iWidthText+1, $iHeightText+1, $sText, $rWhite-$rColor);
-         imagestring($this->rImage, $iSize, $iWidthText-1, $iHeightText+1, $sText, $rWhite-$rColor);
-         imagestring($this->rImage, $iSize, $iWidthText+1, $iHeightText-1, $sText, $rWhite-$rColor);
-         imagestring($this->rImage, $iSize, $iWidthText-1, $iHeightText, $sText, $rWhite-$rColor);
-         imagestring($this->rImage, $iSize, $iWidthText+1, $iHeightText, $sText, $rWhite-$rColor);
-         imagestring($this->rImage, $iSize, $iWidthText, $iHeightText-1, $sText, $rWhite-$rColor);
-         imagestring($this->rImage, $iSize, $iWidthText, $iHeightText+1, $sText, $rWhite-$rColor);
-         imagestring($this->rImage, $iSize, $iWidthText, $iHeightText, $sText, $rColor);
+        imagestring($this->rImage, $iSize, $iWidthText - 1, $iHeightText - 1, $sText, $rWhite - $rColor);
+        imagestring($this->rImage, $iSize, $iWidthText + 1, $iHeightText + 1, $sText, $rWhite - $rColor);
+        imagestring($this->rImage, $iSize, $iWidthText - 1, $iHeightText + 1, $sText, $rWhite - $rColor);
+        imagestring($this->rImage, $iSize, $iWidthText + 1, $iHeightText - 1, $sText, $rWhite - $rColor);
+        imagestring($this->rImage, $iSize, $iWidthText - 1, $iHeightText, $sText, $rWhite - $rColor);
+        imagestring($this->rImage, $iSize, $iWidthText + 1, $iHeightText, $sText, $rWhite - $rColor);
+        imagestring($this->rImage, $iSize, $iWidthText, $iHeightText - 1, $sText, $rWhite - $rColor);
+        imagestring($this->rImage, $iSize, $iWidthText, $iHeightText + 1, $sText, $rWhite - $rColor);
+        imagestring($this->rImage, $iSize, $iWidthText, $iHeightText, $sText, $rColor);
 
-         return $this;
-     }
+        return $this;
+    }
 
     /**
      * Save an image.
