@@ -2,6 +2,7 @@
 /**
  * Changes have been made by Pierre-Henry Soria <hi@ph7.me>
  */
+
 namespace PFBC;
 
 abstract class OptionElement extends Element
