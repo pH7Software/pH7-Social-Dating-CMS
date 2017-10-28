@@ -59,7 +59,7 @@ class PH7Xsl
 
         $this->load();
 
-         // Creation of the XML root node mandatory
+        // Creation of the XML root node mandatory
         $this->oRoot = $this->oXml->createElement(static::ROOT_NAMESPACE);
         // Insertion of this node in the tree view of the XML file
         $this->oXml->appendChild($this->oRoot);
