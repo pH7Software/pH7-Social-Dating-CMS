@@ -1,6 +1,6 @@
 ==============================================
 
-CREATED, DEVELOPED, PRODUCTED AND POWERED BY SORIA PIERRE-HENRY, All Rights Reserved.
+CREATED, DEVELOPED, PRODUCTED AND POWERED BY PIERRE-HENRY SORIA, All Rights Reserved.
 
 ==============================================
 
@@ -21,7 +21,7 @@ For license, please read the PH7.LICENSE.txt and PH7.COPYRIGHT.txt files.
 
 ==============================================
 
-Author: Soria Pierre-Henry
-Contact me at: pierrehenrysoria [AT] gmail [D0T] com
+Author: Pierre-Henry Soria
+Contact me at: pierrehenrysoria {[AT]} gmail {[D0T]} com  /  hi {[AT]} ph7 {[D0T]} me
 
 ==============================================

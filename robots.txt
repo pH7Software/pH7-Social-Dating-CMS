@@ -14,6 +14,7 @@ Crawl-delay: 10
 Disallow:
 
 # Disallow Internet Archiver Wayback Machine
+# Uncomment the two lines below if you don't want to be saved in archive.org
 # User-agent: ia_archiver
 # Disallow: /
 

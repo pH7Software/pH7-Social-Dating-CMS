@@ -1,7 +1,13 @@
 <div class="center">
     {if empty($error)}
         {{ $avatarDesign->get($com->username, $com->firstName, $com->sex, 32) }}
-        {{ $comment = nl2br(Framework\Parse\User::atUsernameToLink(Framework\Parse\Emoticon::init(escape(Framework\Security\Ban\Ban::filterWord($com->comment), true)))) }}
+        {{ $comment = nl2br(
+            Framework\Parse\User::atUsernameToLink(
+                Framework\Parse\Emoticon::init(
+                    escape(Framework\Security\Ban\Ban::filterWord($com->comment), true)
+                )
+            )
+        ) }}
 
         <p class="com_txt center">{comment}</p>
         <br /><hr />
