@@ -13,7 +13,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Parse\Emoticon;
-use PH7\Framework\Parse\User;
+use PH7\Framework\Parse\User as UserParser;
 use PH7\Framework\Security\Ban\Ban;
 
 class WallAjax extends Core
@@ -92,7 +92,7 @@ class WallAjax extends Core
             foreach ($this->_mContents as $oRow) {
                 echo '<p>';
                 $this->_oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
-                echo '</p><p>', User::atUsernameToLink(escape($this->str->extract(Ban::filterWord($oRow->comment), 0, 80))), '</p>
+                echo '</p><p>', UserParser::atUsernameToLink(escape($this->str->extract(Ban::filterWord($oRow->comment), 0, 80))), '</p>
                 <p class="small"><a href="', Uri::get('comment', 'comment', 'read', "profile,$oRow->recipient"), '#', $oRow->commentId, '">', t('Read more'), '</a> &bull; ',
                 t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
                 if (!empty($oRow->updatedDate)) echo ' &bull; ', t('Last Edited %0%', $this->dateTime->get($oRow->updatedDate)->dateTime());
