@@ -12,7 +12,11 @@
             </p>
         </div>
 
-        <p>{% Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($post->message)) %}</p>
+        <p>
+            {% Framework\Parse\Emoticon::init(
+                Framework\Security\Ban\Ban::filterWord($post->message)
+            ) %}
+        </p>
 
         <div class="post-ident">
             <p class="small italic">
@@ -55,7 +59,13 @@
                         </p>
                     </div>
 
-                    <p>{% Framework\Parse\User::atUsernameToLink(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($msg->message))) %}</p>
+                    <p>
+                        {% Framework\Parse\Emoticon::init(
+                            Framework\Parse\User::atUsernameToLink(
+                                Framework\Security\Ban\Ban::filterWord($msg->message)
+                            )
+                        ) %}
+                    </p>
 
                     <div class="post-ident">
                         <p class="small italic">
@@ -74,7 +84,9 @@
                     {/if}
                 </div>
             {/each}
-            <p><a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'reply', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Reply to the topic'}">{lang 'Reply'}</a></p>
+            <p>
+                <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'reply', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Reply to the topic'}">{lang 'Reply'}</a>
+            </p>
         {/if}
 
         {if !empty($messages)}

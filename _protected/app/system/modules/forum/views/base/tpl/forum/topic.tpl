@@ -16,11 +16,13 @@
         <p>{error}</p>
     {/if}
 
-    {if isset($forum_name,$forum_id)}
-        <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'addtopic', "$forum_name,$forum_id") }}">{lang 'Create a new Topic'}</a>
-    {else}
-        <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'search') }}">{lang 'New Search'}</a>
-    {/if}
+    <p>
+        {if isset($forum_name,$forum_id)}
+            <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'addtopic', "$forum_name,$forum_id") }}">{lang 'Create a new Topic'}</a>
+        {else}
+            <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'search') }}">{lang 'New Search'}</a>
+        {/if}
+    </p>
 
     {main_include 'page_nav.inc.tpl'}
 

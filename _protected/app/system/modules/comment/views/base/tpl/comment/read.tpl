@@ -6,7 +6,13 @@
                 {{ $relative_url = Framework\Mvc\Router\Uri::get('comment','comment','read',"$table,$com->recipient") . '#' . $com->commentId }}
 
                 {{ $avatarDesign->get($com->username, $com->firstName, $com->sex, 32) }}
-                {{ $comment = nl2br(Framework\Parse\User::atUsernameToLink(Framework\Parse\Emoticon::init(escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($com->comment)), true)))) }}
+                {{ $comment = nl2br(
+                    Framework\Parse\User::atUsernameToLink(
+                        Framework\Parse\Emoticon::init(
+                            escape($this->str->extract(Framework\Security\Ban\Ban::filterWord($com->comment)), true)
+                        )
+                    )
+                ) }}
 
                 <p><span class="com_txt">{comment}</span><br />
                 <a href="{absolute_url}">{lang 'See more'}</a></p>
