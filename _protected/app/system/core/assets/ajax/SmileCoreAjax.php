@@ -10,6 +10,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
@@ -17,7 +18,7 @@ use PH7\Framework\Http\Http;
 
 class SmileCoreAjax extends \PH7\Framework\Service\Emoticon
 {
-
+    /** @var string */
     private static $_sData = '';
 
     public static function output()
@@ -56,7 +57,6 @@ EOD;
         }
         unset($oCache);
     }
-
 }
 
 // Output

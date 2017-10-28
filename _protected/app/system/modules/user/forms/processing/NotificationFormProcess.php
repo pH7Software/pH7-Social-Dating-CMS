@@ -7,15 +7,14 @@
  */
 
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 class NotificationFormProcess extends Form
 {
-
     /**
      * @param integer $iProfileId
-     * @param \PH7\UserCoreModel $oUserModel
-     * @return void
+     * @param UserCoreModel $oUserModel
      */
     public function __construct($iProfileId, UserCoreModel $oUserModel)
     {
@@ -32,13 +31,10 @@ class NotificationFormProcess extends Form
         if (!$this->str->equals($this->httpRequest->post('friend_request'), $oGetNotofication->friendRequest))
             $oUserModel->setNotification('friendRequest', $this->httpRequest->post('friend_request'), $iProfileId);
 
-        unset($oUserModel);
-
         /* Clean UserCoreModel Cache */
         (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'notification' . $iProfileId, null)->clear()
             ->start(UserCoreModel::CACHE_GROUP, 'isNotification' . $iProfileId, null)->clear();
 
         \PFBC\Form::setSuccess('form_notification', t('Your notifications settings have been saved successfully!'));
     }
-
 }

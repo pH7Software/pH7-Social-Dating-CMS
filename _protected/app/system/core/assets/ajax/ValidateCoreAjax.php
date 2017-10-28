@@ -11,6 +11,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -41,6 +42,7 @@ class ValidateCoreAjax
      * @param string $sFieldId
      * @param string $sParam1
      * @param string $sParam2
+     *
      * @return void
      */
     public function form($sInputVal, $sFieldId, $sParam1, $sParam2)

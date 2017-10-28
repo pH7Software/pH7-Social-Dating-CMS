@@ -31,5 +31,4 @@ class WallFormProcess extends Form
 
         Header::redirect(Uri::get('user', 'main', 'index'), t('Your message has been added successfully!'));
     }
-
 }

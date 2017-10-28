@@ -7,15 +7,14 @@
  */
 
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 class PrivacyFormProcess extends Form
 {
-
     /**
      * @param integer $iProfileId
-     * @param \PH7\UserCoreModel $oUserModel
-     * @return void
+     * @param UserCoreModel $oUserModel
      */
     public function __construct($iProfileId, UserCoreModel $oUserModel)
     {
@@ -41,5 +40,4 @@ class PrivacyFormProcess extends Form
 
         \PFBC\Form::setSuccess('form_privacy_account', t('Your privacy settings have been saved successfully!'));
     }
-
 }
