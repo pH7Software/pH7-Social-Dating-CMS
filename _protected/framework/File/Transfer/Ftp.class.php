@@ -269,10 +269,10 @@ class Ftp extends File
      *
      * @return string Current directory name.
      */
-     public function getCurrentDir()
-     {
-         return ftp_pwd($this->_rStream);
-     }
+    public function getCurrentDir()
+    {
+        return ftp_pwd($this->_rStream);
+    }
 
     /**
      * Changes the current directory.

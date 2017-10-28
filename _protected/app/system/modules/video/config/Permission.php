@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Video / Config
  */
+
 namespace PH7;
 
 defined('PH7') or exit('Restricted access');
@@ -37,7 +38,7 @@ class Permission extends PermissionCore
             if ($this->registry->controller === 'AdminController') {
                 // For security reasons, we don't redirect the user to the admin panel URL
                 Header::redirect(
-                    Uri::get('user','main','login'),
+                    Uri::get('user', 'main', 'login'),
                     $this->adminSignInMsg(),
                     Design::ERROR_TYPE
                 );

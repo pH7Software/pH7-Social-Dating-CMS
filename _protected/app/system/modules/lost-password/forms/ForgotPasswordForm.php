@@ -18,7 +18,7 @@ class ForgotPasswordForm
 {
     public static function display()
     {
-        $sTable = Various::convertModToTable( (new Http)->get('mod') );
+        $sTable = Various::convertModToTable((new Http)->get('mod'));
 
         if (isset($_POST['submit_forgot_password'])) {
             if (\PFBC\Form::isValid($_POST['submit_forgot_password'])) {

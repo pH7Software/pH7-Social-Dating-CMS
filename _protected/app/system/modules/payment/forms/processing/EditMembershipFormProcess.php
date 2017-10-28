@@ -41,7 +41,7 @@ class EditMembershipFormProcess extends Form
         (new Cache)->start(UserCoreModel::CACHE_GROUP, null, null)->clear();
 
         Header::redirect(
-            Uri::get('payment','admin','membershiplist'),
+            Uri::get('payment', 'admin', 'membershiplist'),
             t('The Membership has been saved successfully!')
         );
     }

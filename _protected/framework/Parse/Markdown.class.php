@@ -172,7 +172,7 @@ class Markdown extends Code
      */
     protected function heading()
     {
-        $this->sText = preg_replace ('/##### (.+?)\n/', '<h5>\1</h5>', $this->sText); //h5
+        $this->sText = preg_replace('/##### (.+?)\n/', '<h5>\1</h5>', $this->sText); //h5
         $this->sText = preg_replace('/#### (.+?)\n/', '<h4>\1</h4>', $this->sText); //h4
         $this->sText = preg_replace('/### (.+?)\n/', '<h3>\1</h3>', $this->sText); //h3
         $this->sText = preg_replace('/## (.+?)\n/', '<h2>\1</h2>', $this->sText); //h2

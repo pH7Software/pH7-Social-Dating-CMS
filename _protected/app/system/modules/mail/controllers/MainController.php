@@ -327,7 +327,7 @@ class MainController extends Controller
             $this->sMsg = t("Your message doesn't exist anymore in your trash bin.");
         }
 
-        Header::redirect(Uri::get('mail','main','inbox'), $this->sMsg, $this->_getStatusType());
+        Header::redirect(Uri::get('mail', 'main', 'inbox'), $this->sMsg, $this->_getStatusType());
     }
 
     public function setTrashAll()
@@ -436,7 +436,7 @@ class MainController extends Controller
             }
         }
 
-        $sUrl = $this->_bAdminLogged ? Uri::get('mail','admin','msglist') : $this->httpRequest->previousPage();
+        $sUrl = $this->_bAdminLogged ? Uri::get('mail', 'admin', 'msglist') : $this->httpRequest->previousPage();
         Header::redirect($sUrl, $this->sMsg);
     }
 
@@ -451,7 +451,7 @@ class MainController extends Controller
         $this->view->h2_title = $this->sTitle;
         $this->view->error = t("Sorry, we weren't able to find the page you requested.") . '<br />' .
             t('Please <a href="%0%">research with different keywords</a>.',
-                Uri::get('mail','main','search')
+                Uri::get('mail', 'main', 'search')
             );
     }
 
@@ -466,10 +466,10 @@ class MainController extends Controller
     }
 
     /**
-    * @param stdClass $oMsg
-    *
-    * @return void
-    */
+     * @param stdClass $oMsg
+     *
+     * @return void
+     */
     private function _setRead(stdClass $oMsg)
     {
         if ($oMsg->status == 1) {

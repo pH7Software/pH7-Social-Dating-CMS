@@ -79,7 +79,7 @@ class Facebook extends Api implements IApi
 
         try {
             $sAccessToken = $oHelper->getAccessToken();
-        } catch(FacebookSDKException $oE) {
+        } catch (FacebookSDKException $oE) {
             PH7Exception::launch($oE);
         }
 
@@ -95,7 +95,7 @@ class Facebook extends Api implements IApi
         try {
             $oResponse = $oFb->get('/me');
             $this->initClassAttrs($oResponse);
-        } catch(FacebookResponseException $oE) {
+        } catch (FacebookResponseException $oE) {
             PH7Exception::launch($oE);
         }
 
@@ -112,19 +112,19 @@ class Facebook extends Api implements IApi
                 // Add User Avatar
                 $this->setAvatar($this->oProfile->getId());
 
-                $this->oDesign->setFlashMsg( t('You have now been registered! %0%', (new Registration)->sendMail($this->aUserInfo, true)->getMsg()) );
-                $this->sUrl = Uri::get('connect','main','register');
+                $this->oDesign->setFlashMsg(t('You have now been registered! %0%', (new Registration)->sendMail($this->aUserInfo, true)->getMsg()));
+                $this->sUrl = Uri::get('connect', 'main', 'register');
             } else {
                 // Login
                 $this->setLogin($iId, $oUserModel);
-                $this->sUrl = Uri::get('connect','main','home');
+                $this->sUrl = Uri::get('connect', 'main', 'home');
             }
 
             unset($oUserModel);
         } else {
             // For testing purposes, if there was an error, let's kill the script
             $this->oDesign->setFlashMsg(t('Oops! An error has occurred. Please try again later.'));
-            $this->sUrl = Uri::get('connect','main','index');
+            $this->sUrl = Uri::get('connect', 'main', 'index');
         }
 
         unset($oFb);
@@ -181,13 +181,13 @@ class Facebook extends Api implements IApi
     {
         $this->sAvatarFile = $this->getAvatar(static::GRAPH_URL . $sUserId . '/picture?type=large');
 
-         if ($this->sAvatarFile) {
-             $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
-             (new UserCore)->setAvatar($this->iProfileId, $this->sUsername, $this->sAvatarFile, $iApproved);
-         }
+        if ($this->sAvatarFile) {
+            $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
+            (new UserCore)->setAvatar($this->iProfileId, $this->sUsername, $this->sAvatarFile, $iApproved);
+        }
 
-         // Remove the temporary avatar
-         (new File)->deleteFile($this->sAvatarFile);
+        // Remove the temporary avatar
+        (new File)->deleteFile($this->sAvatarFile);
     }
 
     /**
@@ -199,7 +199,7 @@ class Facebook extends Api implements IApi
      */
     protected function setLoginUrl(FacebookRedirectLoginHelper $oHelper)
     {
-        $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect','main','home'), self::$aPermissions);
+        $this->sUrl = $oHelper->getLoginUrl(Uri::get('connect', 'main', 'home'), self::$aPermissions);
     }
 
     private function initClassAttrs(FacebookResponse $oResponse)

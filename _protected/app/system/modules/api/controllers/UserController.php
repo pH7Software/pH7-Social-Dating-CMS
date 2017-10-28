@@ -76,7 +76,7 @@ class UserController extends MainController
                     'username' => $aRequests['username'],
                     'password' => $aRequests['password'],
                     'first_name' => $aRequests['first_name'],
-                    'last_name' =>  $aRequests['last_name'],
+                    'last_name' => $aRequests['last_name'],
                     'sex' => $aRequests['sex'],
                     'match_sex' => is_array($aRequests['match_sex']) ?: array($aRequests['match_sex']), // PHP 5.3 short ternary operator "?:"
                     'birth_date' => $this->dateTime->get($aRequests['birth_date'])->date('Y-m-d'),

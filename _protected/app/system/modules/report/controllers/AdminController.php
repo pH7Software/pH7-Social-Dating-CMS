@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Report / Controller
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -55,7 +56,7 @@ class AdminController extends Controller
 
     public function report($iId = '')
     {
-        $iId = (int) $iId;
+        $iId = (int)$iId;
 
         $this->sTitle = t('Report #%0%', $iId);
         $this->view->page_title = $this->sTitle;
@@ -67,22 +68,18 @@ class AdminController extends Controller
 
     public function delete()
     {
-        $this->bStatus = $this->oReportModel->delete( $this->httpRequest->post('id', 'int') );
+        $this->bStatus = $this->oReportModel->delete($this->httpRequest->post('id', 'int'));
         $this->sMsg = ($this->bStatus) ? t('The report has been deleted.') : t('A problem occurred during the deleted of the reporting.');
         Header::redirect(Uri::get('report', 'admin', 'index'), $this->sMsg);
     }
 
     public function deleteAll()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('report_action'))
-        {
+        if (!(new Framework\Security\CSRF\Token)->check('report_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        }
-        elseif (count($this->httpRequest->post('action')) > 0)
-        {
-            foreach ($this->httpRequest->post('action') as $iId)
-            {
-                $iId = (int) $iId;
+        } elseif (count($this->httpRequest->post('action')) > 0) {
+            foreach ($this->httpRequest->post('action') as $iId) {
+                $iId = (int)$iId;
                 $this->oReportModel->delete($iId);
             }
             $this->sMsg = t('Report successfully deleted.');

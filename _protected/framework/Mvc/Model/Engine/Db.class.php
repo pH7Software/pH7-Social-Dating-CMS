@@ -44,15 +44,16 @@ class Db
     /**
      * The constructor is set to private, so nobody can create a new instance using new.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * @return Db Returns the PDO instance class or create initial connection.
      */
     public static function getInstance($sDsn = NULL, $sUsername = NULL, $sPassword = NULL, $aDriverOptions = NULL, $sPrefix = NULL)
     {
-        if (NULL === self::$_oInstance)
-        {
+        if (NULL === self::$_oInstance) {
             if (!empty($sDsn))
                 self::$_sDsn = $sDsn;
 
@@ -362,7 +363,7 @@ class Db
     public static function optimize()
     {
         $oAllTables = static::showTables();
-        while($aTableNames = $oAllTables->fetch()) static::getInstance()->query('OPTIMIZE TABLE '. $aTableNames[0]);
+        while ($aTableNames = $oAllTables->fetch()) static::getInstance()->query('OPTIMIZE TABLE ' . $aTableNames[0]);
         unset($oAllTables);
     }
 
@@ -376,7 +377,7 @@ class Db
         $oAllTables = static::showTables();
 
         while ($aTableNames = $oAllTables->fetch()) {
-            static::getInstance()->query('REPAIR TABLE '. $aTableNames[0]);
+            static::getInstance()->query('REPAIR TABLE ' . $aTableNames[0]);
         }
 
         unset($oAllTables);

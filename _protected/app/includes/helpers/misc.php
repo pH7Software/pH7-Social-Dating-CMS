@@ -19,6 +19,7 @@ defined('PH7') or exit('Restricted access');
  *
  * @param string $sTitle Title of the page.
  * @param string $sMsg Message to display to the page.
+ *
  * @return string The HTML body.
  */
 function html_body($sTitle, $sMsg)
@@ -33,7 +34,7 @@ function html_body($sTitle, $sMsg)
 /**
  * Check Internet Connection.
  *
- * @return boolean Returns TRUE if the Internet connection is enabled, FALSE otherwise.
+ * @return bool Returns TRUE if the Internet connection is enabled, FALSE otherwise.
  */
 function is_internet()
 {

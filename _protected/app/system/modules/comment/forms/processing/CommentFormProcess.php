@@ -24,35 +24,25 @@ class CommentFormProcess extends Form
 
         $sComment = $this->httpRequest->post('comment');
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
-        $iTimeDelay = (int) DbConfig::getSetting('timeDelaySendComment');
+        $iTimeDelay = (int)DbConfig::getSetting('timeDelaySendComment');
         $sTable = $this->httpRequest->get('table');
         $iRecipientId = $this->httpRequest->get('recipient', 'int');
-        $iSenderId = (int) $this->session->get('member_id');
+        $iSenderId = (int)$this->session->get('member_id');
 
-        if (!$oCommentModel->idExists($iRecipientId, $sTable))
-        {
+        if (!$oCommentModel->idExists($iRecipientId, $sTable)) {
             \PFBC\Form::setError('form_comment', t('The comment recipient does not exists.'));
-        }
-        elseif (!$oCommentModel->checkWaitSend($iSenderId, $iTimeDelay, $sCurrentTime, $sTable))
-        {
+        } elseif (!$oCommentModel->checkWaitSend($iSenderId, $iTimeDelay, $sCurrentTime, $sTable)) {
             \PFBC\Form::setError('form_comment', Form::waitWriteMsg($iTimeDelay));
-        }
-        elseif ($oCommentModel->isDuplicateContent($iSenderId, $sComment, $sTable))
-        {
+        } elseif ($oCommentModel->isDuplicateContent($iSenderId, $sComment, $sTable)) {
             \PFBC\Form::setError('form_comment', Form::duplicateContentMsg());
-        }
-        else
-        {
-            if (!$oCommentModel->add($sComment, $iRecipientId, $iSenderId, 1, $sCurrentTime, $sTable))
-            {
+        } else {
+            if (!$oCommentModel->add($sComment, $iRecipientId, $iSenderId, 1, $sCurrentTime, $sTable)) {
                 \PFBC\Form::setError('form_comment', t('Oops! Error when adding comment.'));
-            }
-            else
-            {
+            } else {
                 /* Clean All Data of CommentModel Cache */
                 (new Framework\Cache\Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
 
-                Header::redirect(Uri::get('comment','comment','read', $sTable . ',' . $iRecipientId), t('The comment has been sent successfully!'));
+                Header::redirect(Uri::get('comment', 'comment', 'read', $sTable . ',' . $iRecipientId), t('The comment has been sent successfully!'));
             }
         }
         unset($oCommentModel);

@@ -1,5 +1,5 @@
 <?php
- /**
+/**
  * @title          Set User Last Activity
  *
  * @author         Pierre-Henry Soria <ph7software@gmail.com>
@@ -8,11 +8,11 @@
  * @package        PH7 / App / System / Module / User / Asset / Ajax
  * @version        1.0
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
 // Only for members
-if(UserCore::auth())
-{
+if (UserCore::auth()) {
     (new UserCoreModel)->setLastActivity((new Framework\Session\Session)->get('member_id'));
 }

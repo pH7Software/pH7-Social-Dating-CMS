@@ -102,8 +102,8 @@ class Mail
             <tr><td>
             <div class="break"></div>
             <p class="foot1">' . $this->bottomFooter() . '</p>
-            <p class="foot2">' . $this->privacyPolicyFooter($sEmail) .'</p>
-            <p class="foot2">' . $this->link() .'</p>
+            <p class="foot2">' . $this->privacyPolicyFooter($sEmail) . '</p>
+            <p class="foot2">' . $this->link() . '</p>
             </td></tr>
             </table>';
     }

@@ -47,7 +47,7 @@ final class Security
      */
     public static function hashPwd($sPassword)
     {
-        return password_hash($sPassword , self::PWD_ALGORITHM, self::$_aPwdOptions);
+        return password_hash($sPassword, self::PWD_ALGORITHM, self::$_aPwdOptions);
     }
 
     /**

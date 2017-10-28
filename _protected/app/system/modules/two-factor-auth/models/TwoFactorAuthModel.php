@@ -17,7 +17,7 @@ class TwoFactorAuthModel extends TwoFactorAuthCoreModel
      */
     public function setStatus($iIsEnabled, $iProfileId)
     {
-        $iIsEnabled = (string) $iIsEnabled; // Need to be string because in DB it's an "enum" type
+        $iIsEnabled = (string)$iIsEnabled; // Need to be string because in DB it's an "enum" type
 
         return $this->orm->update($this->sTable, 'isTwoFactorAuth', $iIsEnabled, 'profileId', $iProfileId);
     }

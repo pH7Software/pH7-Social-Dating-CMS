@@ -306,7 +306,7 @@ class MainController extends Controller
         $this->oNoteModel->deleteThumb($iId, $iProfileId);
 
         Note::clearCache();
-        Header::redirect(Uri::get('note','main','edit', $iId), t('The thumbnail has been deleted successfully!'));
+        Header::redirect(Uri::get('note', 'main', 'edit', $iId), t('The thumbnail has been deleted successfully!'));
     }
 
     /**
@@ -340,14 +340,14 @@ class MainController extends Controller
     protected function notFound($b404Status = true)
     {
         if ($b404Status) {
-           Http::setHeadersByCode(404);
+            Http::setHeadersByCode(404);
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         $this->view->error = t("Sorry, we weren't able to find the page you requested.") . '<br />' .
             t('You can go back on the <a href="%0%">note homepage</a> or <a href="%1%">search with different keywords</a>.',
-                Uri::get('note','main','index'), Uri::get('note','main','search')
+                Uri::get('note', 'main', 'index'), Uri::get('note', 'main', 'search')
             );
     }
 

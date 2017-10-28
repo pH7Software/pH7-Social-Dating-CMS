@@ -68,41 +68,41 @@ class Validate
             case 'str':
             case 'string':
                 $bValid = is_string($sValue);
-            break;
+                break;
 
             case 'int':
             case 'integer':
                 $bValid = is_int($sValue);
-            break;
+                break;
 
             case 'float':
             case 'double':
                 $bValid = is_float($sValue);
-            break;
+                break;
 
             case 'bool':
             case 'boolean':
                 $bValid = is_bool($sValue);
-            break;
+                break;
 
             case 'num':
             case 'numeric':
                 $bValid = is_numeric($sValue);
-            break;
+                break;
 
             case 'arr':
             case 'array':
                 $bValid = is_array($sValue);
-            break;
+                break;
 
             case 'null':
                 $bValid = is_null($sValue);
-            break;
+                break;
 
             case 'obj':
             case 'object':
                 $bValid = is_object($sValue);
-            break;
+                break;
 
             default:
                 throw new PH7InvalidArgumentException('Invalid Type!');
@@ -330,7 +330,7 @@ class Validate
             $rCurl = curl_init();
             curl_setopt_array($rCurl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_URL => $sUrl]);
             curl_exec($rCurl);
-            $iResponse = (int) curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
+            $iResponse = (int)curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
             curl_close($rCurl);
 
             return $iResponse === 200 || $iResponse === 301 || $iResponse === 302;
@@ -360,7 +360,7 @@ class Validate
      */
     public function phone($sNumber)
     {
-        return preg_match('#^'. Config::getInstance()->values['validate']['phone.pattern'] . '$#', $sNumber);
+        return preg_match('#^' . Config::getInstance()->values['validate']['phone.pattern'] . '$#', $sNumber);
     }
 
     /**

@@ -105,13 +105,10 @@ class Page
         $sCurrentUrl = (new HttpRequest)->currentUrl();
         $sUrl = preg_replace('#\?.+$#', '', $sCurrentUrl);
 
-        if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl))
-        {
+        if (preg_match('#\?(.+[^\./])=(.+[^\./])$#', $sCurrentUrl)) {
             $sUrlSlug = (strpos($sCurrentUrl, '&amp;') !== false) ? strrchr($sCurrentUrl, '?') : strrchr($sCurrentUrl, '?');
             $sPageUrl = $sUrl . $sUrlSlug . '&amp;' . $sVar . '=';
-        }
-        else
-        {
+        } else {
             $sPageUrl = $sUrl . static::trailingSlash($sUrl) . '?' . $sVar . '=';
         }
 

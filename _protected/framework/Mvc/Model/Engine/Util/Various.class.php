@@ -76,7 +76,7 @@ class Various
                 break;
 
             default:
-               static::launchErr($Mod);
+                static::launchErr($Mod);
         }
 
         return $sTable;

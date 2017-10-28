@@ -53,8 +53,8 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'latest', array('1' => '<span class="bold">' . t('Latest members') . '</span>')));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'avatar', array('1' => '<span class="bold">' . t('Only with Avatar') . '</span>')));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', array('1' => '<span class="bold green2">' . t('Only Online') . '</span>')));
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'),'submit', array('icon' => 'search')));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'geo/autocompleteCity.js"></script>'));
+        $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
     }
 
@@ -70,9 +70,9 @@ class SearchUserCoreForm
             self::setAttrVals();
         }
 
-         // Generate the Advanced Search form
+        // Generate the Advanced Search form
         $oForm = new \PFBC\Form('form_search', $iWidth);
-        $oForm->configure(array('action' => Uri::get('user','browse','index') . PH7_SH, 'method' => 'get' ));
+        $oForm->configure(array('action' => Uri::get('user', 'browse', 'index') . PH7_SH, 'method' => 'get'));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_search', 'form_search'));
         $oForm->addElement(new \PFBC\Element\Select(t('I am a:'), 'match_sex', array('male' => t('Male'), 'female' => t('Woman'), 'couple' => t('Couple')), self::$aSexOption));
         $oForm->addElement(new \PFBC\Element\Checkbox(t('Looking for:'), 'sex', array('female' => t('Woman'), 'male' => t('Male'), 'couple' => t('Couple')), self::$aMatchSexOption));
@@ -86,8 +86,8 @@ class SearchUserCoreForm
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'online', array('1' => '<span class="bold green2">' . t('Only Online') . '</span>')));
         $oForm->addElement(new \PFBC\Element\Select(t('Browse By:'), 'order', array(SearchCoreModel::LATEST => t('Latest Members'), SearchCoreModel::LAST_ACTIVITY => t('Last Activity'), SearchCoreModel::VIEWS => t('Most Popular'), SearchCoreModel::RATING => t('Top Rated'), SearchCoreModel::USERNAME => t('Username'), SearchCoreModel::FIRST_NAME => t('First Name'), SearchCoreModel::LAST_NAME => t('Last Name'), SearchCoreModel::EMAIL => t('Email'))));
         $oForm->addElement(new \PFBC\Element\Select(t('Direction:'), 'sort', array(SearchCoreModel::DESC => t('Descending'), SearchCoreModel::ASC => t('Ascending'))));
-        $oForm->addElement(new \PFBC\Element\Button(t('Search'),'submit', array('icon' => 'search')));
-        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="'.PH7_URL_STATIC.PH7_JS.'geo/autocompleteCity.js"></script>'));
+        $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
+        $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));
         $oForm->render();
     }
 
@@ -122,15 +122,15 @@ class SearchUserCoreForm
      */
     protected static function getAgeVals(UserCoreModel $oUserModel, Session $oSession)
     {
-        $iMinAge = (int) DbConfig::getSetting('minAgeRegistration');
-        $iMaxAge = (int) DbConfig::getSetting('maxAgeRegistration');
+        $iMinAge = (int)DbConfig::getSetting('minAgeRegistration');
+        $iMaxAge = (int)DbConfig::getSetting('maxAgeRegistration');
 
-        if(UserCore::auth()) {
+        if (UserCore::auth()) {
             $sBirthDate = $oUserModel->getBirthDate($oSession->get('member_id'));
             $aAge = explode('-', $sBirthDate);
             $iAge = (new Year($aAge[0], $aAge[1], $aAge[2]))->get();
-            $iMinAge = ($iAge-5 < $iMinAge) ? $iMinAge : $iAge-5;
-            $iMaxAge = ($iAge+5 > $iMaxAge) ? $iMaxAge : $iAge+5;
+            $iMinAge = ($iAge - 5 < $iMinAge) ? $iMinAge : $iAge - 5;
+            $iMaxAge = ($iAge + 5 > $iMaxAge) ? $iMaxAge : $iAge + 5;
         }
 
         return ['min_age' => $iMinAge, 'max_age' => $iMaxAge];
@@ -177,6 +177,6 @@ class SearchUserCoreForm
         }
         self::$aCityOption += ['value' => $sCity, 'onfocus' => "if('" . $sCity . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . $sCity . "';"];
 
-        self::$aStateOption += ['value'=> Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
+        self::$aStateOption += ['value' => Geo::getState(), 'onfocus' => "if('" . Geo::getState() . "' == this.value) this.value = '';", 'onblur' => "if ('' == this.value) this.value = '" . Geo::getState() . "';"];
     }
 }

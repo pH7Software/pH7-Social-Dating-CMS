@@ -23,7 +23,7 @@ class Permission extends PermissionCore
         if (!AdminCore::auth()) {
             // For security reasons, we don't redirect the user to the admin panel URL
             Header::redirect(
-                Uri::get('user','main','login'),
+                Uri::get('user', 'main', 'login'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );

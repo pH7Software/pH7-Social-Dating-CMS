@@ -218,7 +218,7 @@ class Design
             echo '<script>$(function(){Apprise(\'';
             echo '<strong>', t('You have'), ' <em>', $iErrNum, '</em> ', nt('error:', 'errors:', $iErrNum), '</strong><br />';
 
-            for ($i=0; $i < $iErrNum; $i++)
+            for ($i = 0; $i < $iErrNum; $i++)
                 echo $this->oStr->upperFirst(str_replace('-', ' ', $this->aErrors[$i])), '<br />';
 
             echo '\')});</script>';
@@ -231,7 +231,7 @@ class Design
      * Redirect Page using Refresh with Header.
      *
      * @param string $sUrl If NULL, the URL will be the current page. Default NULL
-     * @param string $sMsg, Optional, display a message after redirect of the page.
+     * @param string $sMsg , Optional, display a message after redirect of the page.
      * @param string $sType Type of message: "success", "info", "warning" or "error". Default: "success".
      * @param integer $iTime Optional, a time. Default: "3" seconds.
      *
@@ -692,7 +692,7 @@ class Design
      *
      * @param string $sEmail The user email address.
      * @param string $sType The default image type to show. Default: 'wavatar'
-     * @param integer $iSize  The size of the image. Default: 80
+     * @param integer $iSize The size of the image. Default: 80
      * @param character $cRating The max image rating allowed. Default: 'g' (for all)
      * @param boolean $bSecure Display avatar via HTTPS, for example if the site uses HTTPS, you should use this option to not get a warning with most Web browsers. Default: FALSE
      *
@@ -702,7 +702,7 @@ class Design
     {
         $sProtocol = $bSecure ? 'https' : 'http';
         $bSubDomain = $bSecure ? 'secure' : 'www';
-        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5( strtolower($sEmail) ) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $cRating;
+        return $sProtocol . '://' . $bSubDomain . '.gravatar.com/avatar/' . md5(strtolower($sEmail)) . '?d=' . $sType . '&s=' . $iSize . '&r=' . $cRating;
     }
 
     /**
@@ -717,7 +717,7 @@ class Design
         $sImg = Browser::favicon($sUrl);
         $sName = Http::getHostName($sUrl);
 
-        $this->imgTag($sImg, $sName, ['width'=>16, 'height'=>16]);
+        $this->imgTag($sImg, $sName, ['width' => 16, 'height' => 16]);
     }
 
     /**
@@ -759,7 +759,7 @@ class Design
      */
     public function likeApi()
     {
-        if ((bool) DbConfig::getSetting('socialMediaWidgets')) {
+        if ((bool)DbConfig::getSetting('socialMediaWidgets')) {
             echo '<br /><br /><div class="center addthis_toolbox addthis_default_style"><a class="addthis_button_facebook_like"></a><a class="addthis_button_tweet" tw:count="horizontal"></a><a class="addthis_button_google_plusone" g:plusone:size="medium"></a><a class="addthis_counter addthis_pill_style"></a></div>';
         }
     }
@@ -845,7 +845,7 @@ class Design
             $aDefAttrs += $aAttrs; // Update the attributes if necessary
         }
 
-        $this->htmlTag('img',  $aDefAttrs);
+        $this->htmlTag('img', $aDefAttrs);
     }
 
     /**

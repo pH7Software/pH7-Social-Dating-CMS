@@ -276,21 +276,16 @@ class AdminController extends Controller
 
     private function _moderateRegistration($iId, $iStatus)
     {
-        if (isset($iId, $iStatus))
-        {
-            if ($oUser = $this->oAffModel->readProfile($iId, 'Affiliates'))
-            {
-                if ($iStatus == 0)
-                {
+        if (isset($iId, $iStatus)) {
+            if ($oUser = $this->oAffModel->readProfile($iId, 'Affiliates')) {
+                if ($iStatus == 0) {
                     // Set user not active
                     $this->oAffModel->approve($oUser->profileId, 0, 'Affiliates');
 
                     // We leave the user in disapproval (but send an email). After we can ban or delete it.
                     $sSubject = t('Your membership account has been declined');
                     $this->sMsg = t('Sorry, Your membership account has been declined.');
-                }
-                elseif ($iStatus == 1)
-                {
+                } elseif ($iStatus == 1) {
                     // Approve user
                     $this->oAffModel->approve($oUser->profileId, 1, 'Affiliates');
 
@@ -301,19 +296,16 @@ class AdminController extends Controller
                     $this->sMsg = t('Congratulations! Your account has been approved by our team of administrators.<br />You can now %0% to meeting new people!',
                         '<a href="' . Uri::get('affiliate', 'home', 'login') . '"><b>' . t('log in') .
                         '</b></a>');
-                }
-                else
-                {
+                } else {
                     // Error...
                     $this->sMsg = null;
                 }
 
-                if (!empty($this->sMsg))
-                {
+                if (!empty($this->sMsg)) {
                     // Set message
                     $this->view->content = t('Dear %0%,', $oUser->firstName) . '<br />' . $this->sMsg;
                     $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $oUser->email) . '<br />' .
-                    t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
+                        t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
                     // Send email
                     $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/moderate_registration.tpl', $oUser->email);
@@ -323,19 +315,13 @@ class AdminController extends Controller
                     $this->oAff->clearReadProfileCache($oUser->profileId, 'Affiliates');
 
                     $sOutputMsg = t('Done!');
-                }
-                else
-                {
+                } else {
                     $sOutputMsg = t('Error! Bad argument in the URL.');
                 }
-            }
-            else
-            {
+            } else {
                 $sOutputMsg = t('The user is not found!');
             }
-        }
-        else
-        {
+        } else {
             $sOutputMsg = t('Error! Missing argument in the URL.');
         }
 

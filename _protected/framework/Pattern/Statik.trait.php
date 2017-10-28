@@ -20,6 +20,11 @@ trait Statik
     /**
      * Pivate Constructor & Cloning to prevent direct creation of object and blocking cloning.
      */
-    final private function __construct() {}
-    final private function __clone() {}
+    final private function __construct()
+    {
+    }
+
+    final private function __clone()
+    {
+    }
 }

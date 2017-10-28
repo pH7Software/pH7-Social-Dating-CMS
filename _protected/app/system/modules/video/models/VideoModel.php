@@ -55,8 +55,7 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'albumName' . $iProfileId, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT albumId, name FROM' . Db::prefix('AlbumsVideos') . ' WHERE profileId = :profileId');
             (!empty($iProfileId)) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : '';
 
@@ -72,10 +71,9 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'video' . $iProfileId . $iAlbumId . $iVideoId . $iApproved . $iOffset . $iLimit, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
-            $iOffset = (int) $iOffset;
-            $iLimit = (int) $iLimit;
+        if (!$oData = $this->cache->get()) {
+            $iOffset = (int)$iOffset;
+            $iLimit = (int)$iLimit;
 
             $sSqlVideoId = (!empty($iVideoId)) ? ' v.videoId=:videoId AND ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT v.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
@@ -101,15 +99,14 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalAlbums' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             $sSqlProfileId = (!empty($iProfileId)) ? ' WHERE profileId=:profileId' : '';
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix('AlbumsVideos') . $sSqlProfileId);
             (!empty($iProfileId)) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : '';
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->totalAlbums;
+            $iData = (int)$oRow->totalAlbums;
             unset($oRow);
             $this->cache->put($iData);
         }
@@ -120,14 +117,13 @@ class VideoModel extends VideoCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalVideos' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(videoId) AS totalVideos FROM' . Db::prefix('Videos') . 'WHERE profileId=:profileId');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->totalVideos;
+            $iData = (int)$oRow->totalVideos;
             unset($oRow);
             $this->cache->put($iData);
         }
@@ -173,9 +169,9 @@ class VideoModel extends VideoCoreModel
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iApproved = 1)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
@@ -185,29 +181,25 @@ class VideoModel extends VideoCoreModel
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE v.videoId = :looking' : ' WHERE v.title LIKE :looking OR v.description LIKE :looking';
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ', a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Videos') . 'AS v INNER JOIN'
-                . Db::prefix('AlbumsVideos') . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix('Members') . 'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved=:approved' . $sSqlOrder . $sSqlLimit);
+            . Db::prefix('AlbumsVideos') . 'AS a ON v.albumId = a.albumId INNER JOIN' . Db::prefix('Members') . 'AS m ON v.profileId = m.profileId' . $sSqlWhere . ' AND v.approved=:approved' . $sSqlOrder . $sSqlLimit);
 
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) @$oRow->totalVideos;
+            $mData = (int)@$oRow->totalVideos;
             unset($oRow);
         }
         return $mData;

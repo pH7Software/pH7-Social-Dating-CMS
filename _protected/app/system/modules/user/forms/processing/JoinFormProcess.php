@@ -38,7 +38,7 @@ class JoinFormProcess extends Form
 
     public function step1()
     {
-        $iAffId = (int) (new Cookie)->get(AffiliateCore::COOKIE_NAME);
+        $iAffId = (int)(new Cookie)->get(AffiliateCore::COOKIE_NAME);
 
         $aData = [
             'email' => $this->httpRequest->post('mail'),
@@ -49,7 +49,7 @@ class JoinFormProcess extends Form
             'hash_validation' => Various::genRnd(),
             'current_date' => (new CDateTime)->get()->dateTime('Y-m-d H:i:s'),
             'is_active' => $this->iActiveType,
-            'group_id' => (int) DbConfig::getSetting('defaultMembershipGroupId'),
+            'group_id' => (int)DbConfig::getSetting('defaultMembershipGroupId'),
             'affiliated_id' => $iAffId
         ];
 
@@ -57,7 +57,7 @@ class JoinFormProcess extends Form
         $sPassword = $this->httpRequest->post('password', Http::NO_CLEAN);
         $aData += ['password' => Security::hashPwd($sPassword)];
 
-        $iTimeDelay = (int) DbConfig::getSetting('timeDelayUserRegistration');
+        $iTimeDelay = (int)DbConfig::getSetting('timeDelayUserRegistration');
         if (!$this->oUserModel->checkWaitJoin($aData['ip'], $iTimeDelay, $aData['current_date'])) {
             \PFBC\Form::setError('form_join_user', Form::waitRegistrationMsg($iTimeDelay));
         } elseif (!$iProfileId = $this->oUserModel->join($aData)) {
@@ -85,7 +85,7 @@ class JoinFormProcess extends Form
             ];
             $this->session->set($aSessData);
 
-            Header::redirect(Uri::get('user','signup','step2'));
+            Header::redirect(Uri::get('user', 'signup', 'step2'));
         }
     }
 
@@ -117,7 +117,7 @@ class JoinFormProcess extends Form
             );
         } else {
             $this->session->set('mail_step2', $this->session->get('mail_step1'));
-            Header::redirect(Uri::get('user','signup','step3'));
+            Header::redirect(Uri::get('user', 'signup', 'step3'));
         }
     }
 
@@ -135,7 +135,7 @@ class JoinFormProcess extends Form
             );
         } else {
             $this->session->set('mail_step3', $this->session->get('mail_step1'));
-            Header::redirect(Uri::get('user','signup','step4'), t('Your account has just been created!'));
+            Header::redirect(Uri::get('user', 'signup', 'step4'), t('Your account has just been created!'));
         }
     }
 
@@ -143,7 +143,7 @@ class JoinFormProcess extends Form
     {
         // If no photo added from the form, automatically skip this step
         if (empty($_FILES['avatar']['tmp_name'])) {
-            Header::redirect(Uri::get('user','signup','done'));
+            Header::redirect(Uri::get('user', 'signup', 'done'));
         }
 
         $iApproved = (DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';

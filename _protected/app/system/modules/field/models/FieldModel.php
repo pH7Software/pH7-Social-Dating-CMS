@@ -48,7 +48,7 @@ class FieldModel extends Model
         $this->_sTable = Various::checkModelTable($sTable);
         $this->_sName = $sName;
         $this->_sType = $sType;
-        $this->_iLength = (int) $iLength;
+        $this->_iLength = (int)$iLength;
         $this->_sDefVal = $sDefVal;
     }
 
@@ -61,15 +61,12 @@ class FieldModel extends Model
     {
         $rStmt = Db::getInstance()->query('SELECT * FROM' . Db::prefix($this->_sTable) . 'LIMIT 1');
 
-        $iNum = (int) $rStmt->rowCount();
+        $iNum = (int)$rStmt->rowCount();
         $aColumn = array();
 
-        if ($iNum > 0)
-        {
-            while ($aRow = $rStmt->fetch())
-            {
-                foreach ($aRow as $sColumn => $sValue)
-                {
+        if ($iNum > 0) {
+            while ($aRow = $rStmt->fetch()) {
+                foreach ($aRow as $sColumn => $sValue) {
                     if (!is_numeric($sColumn) && $sColumn !== 'profileId') {
                         $aColumn[] = $sColumn;
                     }
@@ -105,7 +102,7 @@ class FieldModel extends Model
      */
     public function total()
     {
-        return (int) count($this->all());
+        return (int)count($this->all());
     }
 
     /**
@@ -128,14 +125,14 @@ class FieldModel extends Model
                 if (mb_strlen($this->_sDefVal) > $this->_iLength) $this->_iLength = mb_strlen($this->_sDefVal);
                 if ($this->_iLength == 0 || $this->_iLength > 255) $this->_iLength = 255;
                 $this->_sSql .= 'VARCHAR(' . $this->_iLength . ')';
-            break;
+                break;
 
             case 'number':
                 if (!is_numeric($this->_sDefVal)) $this->_sDefVal = 0;
                 if (strlen($this->_sDefVal) > $this->_iLength) $this->_iLength = strlen($this->_sDefVal);
                 if ($this->_iLength == 0 || $this->_iLength > 11) $this->_iLength = 9; // Set the default maximum length value.
                 $this->_sSql .= 'INT(' . $this->_iLength . ')';
-            break;
+                break;
 
             default:
                 throw new PH7InvalidArgumentException('Invalid Field type!');

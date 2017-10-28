@@ -24,8 +24,9 @@ class Form extends Framework\Layout\Form\Form
         $aVal = array(); // Default Value
         $aValue = explode(',', $sValue);
 
-        foreach ($aValue as $sVal)
+        foreach ($aValue as $sVal) {
             $aVal[] = $sVal;
+        }
 
         return $aVal;
     }
@@ -34,14 +35,16 @@ class Form extends Framework\Layout\Form\Form
      * To set Value Data into the database.
      *
      * @param array $aValue
+     *
      * @return string
      */
     public static function setVal($aValue)
     {
         $sVal = ''; // Devault Value
 
-        foreach ($aValue as $sValue)
+        foreach ($aValue as $sValue) {
             $sVal .= $sValue . ',';
+        }
 
         return rtrim($sVal, ','); // Removes the last comma
     }

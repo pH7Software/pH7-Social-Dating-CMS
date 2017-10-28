@@ -59,7 +59,7 @@ class EditFormProcess extends Form
 
         // Update dynamic fields.
         $oFields = $oUserModel->getInfoFields($iProfileId);
-        foreach($oFields as $sColumn => $sValue) {
+        foreach ($oFields as $sColumn => $sValue) {
             $sHRParam = ($sColumn == 'description') ? Http::ONLY_XSS_CLEAN : null;
             if (!$this->str->equals($this->httpRequest->post($sColumn, $sHRParam), $sValue)) {
                 $oUserModel->updateProfile($sColumn, $this->httpRequest->post($sColumn, $sHRParam), $iProfileId, 'MembersInfo');

@@ -8,6 +8,7 @@
  * @package        PH7/ App / System / Module / User / Model
  * @version        0.2
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -35,7 +36,7 @@ class WallModel extends Framework\Mvc\Model\Engine\Model
 
     public function delete($iProfileId, $iWallId)
     {
-        $rStmt = Db::getInstance()->prepare('DELETE FROM'.Db::prefix('MembersWall') . 'WHERE :profileId=:profileId AND wallId=:wallId');
+        $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('MembersWall') . 'WHERE :profileId=:profileId AND wallId=:wallId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
         return $rStmt->execute();
@@ -43,12 +44,12 @@ class WallModel extends Framework\Mvc\Model\Engine\Model
 
     public function get($iProfileId, $iWallId = null, $iOffset, $iLimit)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sSqlWallId = (!empty($iWallId)) ? ' AND wallId=:wallId ' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM'.Db::prefix('MembersWall') . ' AS w LEFT JOIN'.Db::prefix('Members') . 'AS m ON w.profileId = m.profileId WHERE :profileId=:profileId ' . $sSqlWallId . ' ORDER BY dateTime DESC LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('MembersWall') . ' AS w LEFT JOIN' . Db::prefix('Members') . 'AS m ON w.profileId = m.profileId WHERE :profileId=:profileId ' . $sSqlWallId . ' ORDER BY dateTime DESC LIMIT :offset, :limit');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         if (!empty($iWallId)) $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);

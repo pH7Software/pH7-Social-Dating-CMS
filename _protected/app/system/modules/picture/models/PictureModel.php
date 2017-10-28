@@ -53,8 +53,7 @@ class PictureModel extends PictureCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'albumName' . $iProfileId, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
+        if (!$oData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT albumId, name FROM' . Db::prefix('AlbumsPictures') . ' WHERE profileId = :profileId');
             (!empty($iProfileId)) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : '';
 
@@ -70,10 +69,9 @@ class PictureModel extends PictureCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'photo' . $iProfileId . $iAlbumId . $iPictureId . $iApproved . $iOffset . $iLimit, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
-            $iOffset = (int) $iOffset;
-            $iLimit = (int) $iLimit;
+        if (!$oData = $this->cache->get()) {
+            $iOffset = (int)$iOffset;
+            $iLimit = (int)$iLimit;
 
             $sSqlPictureId = (!empty($iPictureId)) ? ' p.pictureId=:pictureId AND ' : ' ';
             $rStmt = Db::getInstance()->prepare('SELECT p.*, a.name, m.username, m.firstName, m.sex FROM' . Db::prefix('Pictures') . 'AS p INNER JOIN' .
@@ -99,15 +97,14 @@ class PictureModel extends PictureCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalAlbums' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             $sSqlProfileId = (!empty($iProfileId)) ? ' WHERE profileId=:profileId' : '';
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(albumId) AS totalAlbums FROM' . Db::prefix('AlbumsPictures') . $sSqlProfileId);
             (!empty($iProfileId)) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : '';
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->totalAlbums;
+            $iData = (int)$oRow->totalAlbums;
             unset($oRow);
             $this->cache->put($iData);
         }
@@ -118,14 +115,13 @@ class PictureModel extends PictureCoreModel
     {
         $this->cache->start(self::CACHE_GROUP, 'totalPhotos' . $iProfileId, static::CACHE_TIME);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(pictureId) AS totalPhotos FROM' . Db::prefix('Pictures') . 'WHERE profileId=:profileId');
             $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->totalPhotos;
+            $iData = (int)$oRow->totalPhotos;
             unset($oRow);
             $this->cache->put($iData);
         }
@@ -172,9 +168,9 @@ class PictureModel extends PictureCoreModel
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iApproved = 1)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
@@ -190,24 +186,20 @@ class PictureModel extends PictureCoreModel
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
 
         $rStmt->execute();
 
-        if (!$bCount)
-        {
+        if (!$bCount) {
             $mData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-        }
-        else
-        {
+        } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) @$oRow->totalPictures;
+            $mData = (int)@$oRow->totalPictures;
             unset($oRow);
         }
         return $mData;

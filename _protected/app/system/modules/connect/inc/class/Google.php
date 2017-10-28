@@ -52,7 +52,7 @@ class Google extends Api implements IApi
         if ($oHttpRequest->getExists('code')) {
             $oClient->authenticate();
             $oSession->set('token', $oClient->getAccessToken());
-            $this->sUrl = Uri::get('connect','main','home');
+            $this->sUrl = Uri::get('connect', 'main', 'home');
         }
 
         if ($oSession->exists('token')) {
@@ -75,12 +75,12 @@ class Google extends Api implements IApi
                     $this->setAvatar($aUserData['picture']);
                 }
 
-                $this->oDesign->setFlashMsg( t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
-                $this->sUrl = Uri::get('connect','main','register');
+                $this->oDesign->setFlashMsg(t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()));
+                $this->sUrl = Uri::get('connect', 'main', 'register');
             } else {
                 // Login
                 $this->setLogin($iId, $oUserModel);
-                $this->sUrl = Uri::get('connect','main','home');
+                $this->sUrl = Uri::get('connect', 'main', 'home');
             }
 
             // Add the access token
@@ -164,7 +164,7 @@ class Google extends Api implements IApi
     {
         $oClient->setClientId(Config::getInstance()->values['module.api']['google.client_id']);
         $oClient->setClientSecret(Config::getInstance()->values['module.api']['google.client_secret_key']);
-        $oClient->setRedirectUri(Uri::get('connect','main','login','google'));
+        $oClient->setRedirectUri(Uri::get('connect', 'main', 'login', 'google'));
         $oClient->setDeveloperKey(Config::getInstance()->values['module.api']['google.developer_key']);
     }
 }
