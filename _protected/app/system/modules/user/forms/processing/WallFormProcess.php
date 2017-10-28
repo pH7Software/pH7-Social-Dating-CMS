@@ -5,23 +5,20 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form / Processing
  */
+
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
+/*
+ * This class is still under development.
+ * If you wish, you are more than welcome to contribute on Github: https://github.com/pH7Software/pH7-Social-Dating-CMS
+ */
 class WallFormProcess extends Form
 {
-
-/*
- * Wall form processing class is still under development, if you are a developer and you want to help us and join our volunteer team of developers to continue development of this module, you are welcome!
- * Please contact us by email: ph7software@gmail.com
- *
- * Thank you,
- * The developers team (Pierre-Henry Soria).
- */
-
     public function __construct()
     {
         parent::__construct();
@@ -30,5 +27,4 @@ class WallFormProcess extends Form
 
         Header::redirect(Uri::get('user', 'main', 'index'), t('Your message has been added successfully!'));
     }
-
 }

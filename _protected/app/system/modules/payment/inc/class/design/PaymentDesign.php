@@ -30,7 +30,7 @@ class PaymentDesign extends Framework\Core\Core
 
         $oPayPal
             ->param('business', $this->config->values['module.setting']['paypal.email'])
-            ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price)) // Use base64_encode() to discourage curious people
+            ->param('custom', base64_encode($oMembership->groupId . '|' . $oMembership->price))// Use base64_encode() to discourage curious people
             ->param('amount', $oMembership->price)
             ->param('item_number', $oMembership->groupId)
             ->param('item_name', $this->registry->site_name . ' ' . $oMembership->name)
@@ -39,7 +39,7 @@ class PaymentDesign extends Framework\Core\Core
             ->param('currency_code', $this->config->values['module.setting']['currency'])
             ->param('tax_cart', $this->config->values['module.setting']['vat_rate'])
             ->param('return', Uri::get('payment', 'main', 'process', 'paypal'))
-            ->param('rm', 2) // Auto redirection in POST data
+            ->param('rm', 2)// Auto redirection in POST data
             ->param('notify_url', Uri::get('payment', 'main', 'notification', 'PH7\PayPal,' . $oMembership->groupId))
             ->param('cancel_return', Uri::get('payment', 'main', 'membership', '?msg=' . t('The payment was aborted. No charge has been taken from your account.'), false));
 

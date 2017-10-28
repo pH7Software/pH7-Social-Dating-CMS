@@ -37,7 +37,7 @@ abstract class Model extends Entity
      */
     public function exec($sFile, $sPath, array $aParams = null)
     {
-        $rStmt = Db::getInstance()->prepare( $this->getQuery($sFile, $sPath) );
+        $rStmt = Db::getInstance()->prepare($this->getQuery($sFile, $sPath));
         $bRet = $rStmt->execute($aParams);
         Db::free($rStmt);
         return $bRet;

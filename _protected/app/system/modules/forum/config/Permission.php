@@ -24,33 +24,25 @@ class Permission extends PermissionCore
         $bAdminAuth = AdminCore::auth();
 
         if ((!UserCore::auth() && !$bAdminAuth) && ($this->registry->action === 'addtopic' || $this->registry->action === 'edittopic'
-        || $this->registry->action === 'deletetopic' || $this->registry->action === 'reply' || $this->registry->action === 'editmessage'
-        || $this->registry->action === 'deletemessage'))
-        {
+                || $this->registry->action === 'deletetopic' || $this->registry->action === 'reply' || $this->registry->action === 'editmessage'
+                || $this->registry->action === 'deletemessage')) {
             $this->signInRedirect();
         }
 
-        if (!$bAdminAuth || UserCore::isAdminLoggedAs())
-        {
-            if (!$this->checkMembership() || !$this->group->forum_access)
-            {
+        if (!$bAdminAuth || UserCore::isAdminLoggedAs()) {
+            if (!$this->checkMembership() || !$this->group->forum_access) {
                 $this->paymentRedirect();
-            }
-            elseif ($this->registry->action === 'addtopic' && !$this->group->create_forum_topics)
-            {
+            } elseif ($this->registry->action === 'addtopic' && !$this->group->create_forum_topics) {
                 $this->paymentRedirect();
-            }
-            elseif ($this->registry->action === 'reply' && !$this->group->answer_forum_topics)
-            {
+            } elseif ($this->registry->action === 'reply' && !$this->group->answer_forum_topics) {
                 $this->paymentRedirect();
             }
         }
 
-        if (!$bAdminAuth && $this->registry->controller === 'AdminController')
-        {
+        if (!$bAdminAuth && $this->registry->controller === 'AdminController') {
             // For security reasons, we don't redirect the user to the admin panel URL
             Header::redirect(
-                Uri::get('forum','forum','index'),
+                Uri::get('forum', 'forum', 'index'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );

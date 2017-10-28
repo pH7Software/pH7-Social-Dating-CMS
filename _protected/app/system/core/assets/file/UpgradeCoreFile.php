@@ -119,7 +119,7 @@ class UpgradeCore extends Kernel
         $aVersions = $this->getVersions();
 
         if ($iKey = array_search(Kernel::SOFTWARE_VERSION, $aVersions)) {
-            return $aVersions[$iKey+1];
+            return $aVersions[$iKey + 1];
         } else {
             // If no next version is found, just returns the current one.
             return Kernel::SOFTWARE_VERSION;
@@ -263,15 +263,15 @@ class UpgradeCore extends Kernel
 
     private function _sql()
     {
-       $sPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $this->_oConfig->values['database']['type_name'] . PH7_DS . static::UPGRADE_FILE . PH7_DS;
+        $sPath = PH7_PATH_REPOSITORY . static::DIR . PH7_DS . $this->_sUpgradesDirUpgradeFolder . static::DATA_DIR . PH7_DS . static::SQL_DIR . PH7_DS . $this->_oConfig->values['database']['type_name'] . PH7_DS . static::UPGRADE_FILE . PH7_DS;
 
-       if (is_file($sPath) && filesize($sPath) > 12) {
-           $mQuery = (new UpgradeCoreModel)->run($sPath);
+        if (is_file($sPath) && filesize($sPath) > 12) {
+            $mQuery = (new UpgradeCoreModel)->run($sPath);
 
-           if ($mQuery !== true) {
-               $this->_aErrors[] = t('Unable to execute the upgrade of the database SQL.<br />Error Message: %0%', '<pre>' . print_r($mQuery) . '</pre>');
-           }
-       }
+            if ($mQuery !== true) {
+                $this->_aErrors[] = t('Unable to execute the upgrade of the database SQL.<br />Error Message: %0%', '<pre>' . print_r($mQuery) . '</pre>');
+            }
+        }
     }
 
     private function _check()
@@ -287,16 +287,16 @@ class UpgradeCore extends Kernel
 
         if (!isDebug()) {
             $this->_aErrors[] = t('You must put your site in development mode in order to launch the upgrade of your site!') . '<br />' .
-            t('1) Please change the permission of the ~%0% file for writing for all groups (0666 in octal).', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
-            t('2) Edit ~%0% file and find the code:', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
-            '"<code>environment = production ; production or development</code>"<br />' .
-             t('and replace it with the code:') . '<br />' .
-             '"<code>environment = development ; production or development</code>"<br />' .
-             t('3) After installation, please edit ~%0% file and find the code:', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
-             '"<code>environment = development ; production or development</code>"<br />' .
-             t('and replace it with the code:') . '<br />' .
-             '"<code>environment = production ; production or development</code>"<br />' .
-             t('4) Change the permission of the file to write only for users and reading for the other groups (0644 in octal).');
+                t('1) Please change the permission of the ~%0% file for writing for all groups (0666 in octal).', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
+                t('2) Edit ~%0% file and find the code:', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
+                '"<code>environment = production ; production or development</code>"<br />' .
+                t('and replace it with the code:') . '<br />' .
+                '"<code>environment = development ; production or development</code>"<br />' .
+                t('3) After installation, please edit ~%0% file and find the code:', PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE) . '<br />' .
+                '"<code>environment = development ; production or development</code>"<br />' .
+                t('and replace it with the code:') . '<br />' .
+                '"<code>environment = production ; production or development</code>"<br />' .
+                t('4) Change the permission of the file to write only for users and reading for the other groups (0644 in octal).');
         }
     }
 
@@ -336,15 +336,15 @@ class UpgradeCore extends Kernel
     private function _displayIfErr()
     {
         if ($this->_isErr()) {
-           $iErrors = count($this->_aErrors);
+            $iErrors = count($this->_aErrors);
 
-           $this->_sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
+            $this->_sHtml .= '<h3 class="error underline italic">' . t('You have %0% error(s):', $iErrors) . '</h3>';
 
-           for ($i=0; $i < $iErrors; $i++) {
-               $this->_sHtml .= '<p class="error">' . t('%0%) %1%', $i + 1, $this->_aErrors[$i]) . '</p>';
-           }
+            for ($i = 0; $i < $iErrors; $i++) {
+                $this->_sHtml .= '<p class="error">' . t('%0%) %1%', $i + 1, $this->_aErrors[$i]) . '</p>';
+            }
 
-           return true;
+            return true;
         }
 
         return false;

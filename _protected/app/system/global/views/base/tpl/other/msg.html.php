@@ -23,16 +23,16 @@ $aMeta = [
 
 <!-- Begin Content -->
 <div id="content" class="center s_padd">
-<br />
-<h1><?php echo t('Whoops!') ?></h1>
-<p>&nbsp;</p>
-<p class="center"><?php echo $sMsg ?></p>
+    <br />
+    <h1><?php echo t('Whoops!') ?></h1>
+    <p>&nbsp;</p>
+    <p class="center"><?php echo $sMsg ?></p>
 </div>
 <!-- End Content -->
 
 <!-- Begin Footer -->
 <footer>
-<?php $oDesign->link(); ?>
+    <?php $oDesign->link(); ?>
 </footer>
 <!-- End Footer -->
 <?php $oDesign->htmlFooter(); ?>

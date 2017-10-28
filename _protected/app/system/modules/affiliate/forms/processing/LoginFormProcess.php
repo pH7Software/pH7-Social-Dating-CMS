@@ -72,25 +72,19 @@ class LoginFormProcess extends Form implements LoginableForm
             $this->updatePwdHashIfNeeded($sPassword, $oAffData->password, $sEmail);
 
             $oAff = new AffiliateCore;
-            if (true !== ($mStatus = $oAff->checkAccountStatus($oAffData)))
-            {
+            if (true !== ($mStatus = $oAff->checkAccountStatus($oAffData))) {
                 \PFBC\Form::setError('form_login_aff', $mStatus);
-            }
-            else
-            {
+            } else {
                 $o2FactorModel = new TwoFactorAuthCoreModel('affiliate');
-                if ($o2FactorModel->isEnabled($iId))
-                {
+                if ($o2FactorModel->isEnabled($iId)) {
                     // Store the affiliate ID for 2FA
                     $this->session->set(TwoFactorAuthCore::PROFILE_ID_SESS_NAME, $iId);
 
                     Header::redirect(Uri::get('two-factor-auth', 'main', 'verificationcode', 'affiliate'));
-                }
-                else
-                {
+                } else {
                     $oAff->setAuth($oAffData, $this->oAffModel, $this->session, $oSecurityModel);
 
-                    Header::redirect(Uri::get('affiliate','account','index'), t('You are successfully logged in!'));
+                    Header::redirect(Uri::get('affiliate', 'account', 'index'), t('You are successfully logged in!'));
                 }
             }
         }

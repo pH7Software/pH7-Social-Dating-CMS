@@ -48,11 +48,11 @@ class Backup
     public function back()
     {
         $this->_sSql =
-        "#################### Database Backup ####################\n" .
-        '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
-        '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
-        '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
-        "#########################################################\r\n\r\n";
+            "#################### Database Backup ####################\n" .
+            '# ' . Kernel::SOFTWARE_NAME . ' ' . Kernel::SOFTWARE_VERSION . ', Build ' . Kernel::SOFTWARE_BUILD . "\r\n" .
+            '# Database name: ' . Config::getInstance()->values['database']['name'] . "\r\n" .
+            '# Created on ' . (new CDateTime)->get()->dateTime() . "\r\n" .
+            "#########################################################\r\n\r\n";
 
         $aTables = $aColumns = $aValues = array();
         $oAllTables = Db::showTables();

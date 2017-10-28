@@ -134,7 +134,7 @@ class Http
         }
 
         // Loop elements and set header
-        foreach ((array) $mHeaders as $sHeader) {
+        foreach ((array)$mHeaders as $sHeader) {
             header((string)$sHeader);
         }
     }
@@ -298,10 +298,10 @@ class Http
     /**
      * @return string The HTTP server protocol.
      */
-     public static function getProtocol()
-     {
-         return Server::getVar(Server::SERVER_PROTOCOL);
-     }
+    public static function getProtocol()
+    {
+        return Server::getVar(Server::SERVER_PROTOCOL);
+    }
 
     /**
      * Checks if any headers were already sent.

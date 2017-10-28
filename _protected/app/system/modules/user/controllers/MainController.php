@@ -42,12 +42,12 @@ class MainController extends Controller
             // To check if the site is called by a Mobile or Mobile Native App
             $this->_bIsMobile = $this->view->is_mobile = (MobApp::is($this->httpRequest, $this->session) || $this->browser->isMobile());
 
-            $this->view->is_users_block = (bool) DbConfig::getSetting('usersBlock');
+            $this->view->is_users_block = (bool)DbConfig::getSetting('usersBlock');
 
             // Background video is used only for the Splash page
             if ($this->_getGuestTplPage() === static::GUEST_SPLASH_FILE) {
                 // Enable the Splash Video Background if enabled
-                $bIsBgVideo = (bool) DbConfig::getSetting('bgSplashVideo');
+                $bIsBgVideo = (bool)DbConfig::getSetting('bgSplashVideo');
 
                 // Assign the background video option (this tpl var is only available in index.guest_splash.tpl)
                 $this->view->is_bg_video = $bIsBgVideo;
@@ -128,7 +128,7 @@ class MainController extends Controller
             /* 'index.guest.inc.tpl' is not responsive enough for very small screen resolutions, so set to 'index.guest_splash.inc.tpl' by default */
             $sPage = static::GUEST_SPLASH_FILE;
         } else {
-            $bIsSplashPage = (bool) DbConfig::getSetting('splashPage');
+            $bIsSplashPage = (bool)DbConfig::getSetting('splashPage');
             $sPage = $bIsSplashPage ? static::GUEST_SPLASH_FILE : static::GUEST_FILE;
         }
 

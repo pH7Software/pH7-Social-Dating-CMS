@@ -40,7 +40,7 @@ class AvatarFormProcess extends Form
             \PFBC\Form::setError('form_avatar', Form::wrongImgFileTypeMsg());
         } else {
             $sModerationText = t('Your profile photo has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
-            $sText =  t('Your profile photo has been updated successfully!');
+            $sText = t('Your profile photo has been updated successfully!');
             $sMsg = ($this->iApproved == '0') ? $sModerationText : $sText;
             \PFBC\Form::setSuccess('form_avatar', $sMsg);
         }

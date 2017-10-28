@@ -25,7 +25,7 @@ class SitemapController extends MainController
         $this->view->h1_title = $this->sTitle;
 
         /*** Get the links ***/
-        $sUrl = Framework\Mvc\Router\Uri::get('xml','sitemap','xmllink');
+        $sUrl = Framework\Mvc\Router\Uri::get('xml', 'sitemap', 'xmllink');
         $this->view->urls = (new Link($sUrl))->get();
         $this->output();
     }
@@ -58,7 +58,7 @@ class SitemapController extends MainController
                 case 'video':
                 case 'game':
                     $this->sAction = $sAction;
-                break;
+                    break;
 
                 case 'comment-profile':
                 case 'comment-blog':
@@ -68,7 +68,7 @@ class SitemapController extends MainController
                 case 'comment-game':
                     $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router.
                     $this->sAction = 'comment.inc';
-                break;
+                    break;
 
                 default:
                     $this->displayPageNotFound(t('Not Found Site Map!'));

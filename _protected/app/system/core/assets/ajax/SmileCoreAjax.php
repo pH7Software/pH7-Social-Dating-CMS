@@ -10,6 +10,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
@@ -17,7 +18,7 @@ use PH7\Framework\Http\Http;
 
 class SmileCoreAjax extends \PH7\Framework\Service\Emoticon
 {
-
+    /** @var string */
     private static $_sData = '';
 
     public static function output()
@@ -32,7 +33,8 @@ class SmileCoreAjax extends \PH7\Framework\Service\Emoticon
     {
         $oCache = (new Cache)->start('str/json', 'emoticons', 120 * 48 * 30);
 
-        if (!static::$_sData = $oCache->get()) {
+        static::$_sData = $oCache->get();
+        if (!static::$_sData) {
             $aEmoticons = static::get();
 
             foreach ($aEmoticons as $sEmoticonKey => $aEmoticon) {
@@ -56,7 +58,6 @@ EOD;
         }
         unset($oCache);
     }
-
 }
 
 // Output

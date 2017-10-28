@@ -11,7 +11,8 @@ if (!\PH7\Admin::auth()) exit('Restricted access'); // Accessible only for admin
  * @author Troex Nevelin
  * @author Alexey Sukhotin
  **/
-class elFinder {
+class elFinder
+{
 
     /**
      * API version number
@@ -322,7 +323,8 @@ class elFinder {
      * @param  array  elFinder and roots configurations
      * @author Dmitry (dio) Levashov
      */
-    public function __construct($opts) {
+    public function __construct($opts)
+    {
         // set error handler of WARNING, NOTICE
         set_error_handler('elFinder::phpErrorHandler', E_WARNING | E_NOTICE | E_USER_WARNING | E_USER_NOTICE);
 
@@ -333,8 +335,8 @@ class elFinder {
             ini_set('diaplay_errors', '1');
         }
 
-        if (! interface_exists('elFinderSessionInterface')) {
-            include_once dirname(__FILE__).'/elFinderSessionInterface.php';
+        if (!interface_exists('elFinderSessionInterface')) {
+            include_once dirname(__FILE__) . '/elFinderSessionInterface.php';
         }
 
         // session handler

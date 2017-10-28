@@ -207,7 +207,7 @@ class DatabaseCoreCron extends Cron
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
         if (strstr($sTable, 'Comments') === false && $sTable !== 'Messages' && $sTable !== 'Messenger') {
-           DbVarious::launchErr($sTable);
+            DbVarious::launchErr($sTable);
         }
 
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix($sTable) . 'WHERE (' . $sDateColumn . ' < NOW() - INTERVAL :dayNumber DAY)');

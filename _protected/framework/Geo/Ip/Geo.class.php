@@ -137,6 +137,8 @@ class Geo
     /**
      * Block cloning.
      */
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 
 }

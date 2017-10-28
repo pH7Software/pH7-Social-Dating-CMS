@@ -70,7 +70,7 @@ class Video extends Upload
 
         /** Attributes from "Upload" abstract class **/
         $this->sMaxSize = Config::getInstance()->values['video']['upload.max_size'];
-        $this->iFileSize = (int) $this->aFile['size'];
+        $this->iFileSize = (int)$this->aFile['size'];
     }
 
     /**
@@ -152,9 +152,9 @@ class Video extends Upload
      */
     public function getDuration()
     {
-         $sTime = exec($this->sFfmpegPath . ' -i ' . $this->aFile['tmp_name'] . ' 2>&1 | grep "Duration" | cut -d \' \' -f 4 | sed s/,//');
-         return Various::timeToSec($sTime);
-     }
+        $sTime = exec($this->sFfmpegPath . ' -i ' . $this->aFile['tmp_name'] . ' 2>&1 | grep "Duration" | cut -d \' \' -f 4 | sed s/,//');
+        return Various::timeToSec($sTime);
+    }
 
     /**
      * Get Type Video File.

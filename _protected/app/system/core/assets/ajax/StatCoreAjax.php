@@ -11,6 +11,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Http\Http;
@@ -41,15 +42,15 @@ class StatCoreAjax
 
         switch ($sType) {
             case 'total_users':
-              $this->mOutput = $this->oUserModel->total();
+                $this->mOutput = $this->oUserModel->total();
                 break;
 
-           // If we receive another invalid value, we display a message with a HTTP header.
-           default:
-               Http::setHeadersByCode(400);
+            // If we receive another invalid value, we display a message with a HTTP header.
+            default:
+                Http::setHeadersByCode(400);
                 exit('Bad Request Error!');
-       }
-   }
+        }
+    }
 }
 
 echo (new StatCoreAjax)->display();

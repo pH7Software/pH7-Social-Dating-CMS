@@ -43,17 +43,17 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
         return $this->_is('username', $sUsername, $sTable);
     }
 
-     /**
-      * Checks if the same ID already exists. Ignore the ghost ID (1)
-      *
-      * @param integer $iId
-      * @param string $sTable Default is "Members"
-      * @return boolean
-      */
-     public function id($iId, $sTable = 'Members')
-     {
-         return $this->_is('profileId', $iId, $sTable, \PDO::PARAM_INT, 'AND profileId <> ' . PH7_GHOST_ID);
-     }
+    /**
+     * Checks if the same ID already exists. Ignore the ghost ID (1)
+     *
+     * @param integer $iId
+     * @param string $sTable Default is "Members"
+     * @return boolean
+     */
+    public function id($iId, $sTable = 'Members')
+    {
+        return $this->_is('profileId', $iId, $sTable, \PDO::PARAM_INT, 'AND profileId <> ' . PH7_GHOST_ID);
+    }
 
     /**
      * SECURITY Checks if there is not another affiliate with the same bank account.

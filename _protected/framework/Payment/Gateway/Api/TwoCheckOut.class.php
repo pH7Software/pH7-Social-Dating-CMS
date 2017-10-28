@@ -46,7 +46,7 @@ class TwoCheckOut extends Provider implements Api
      */
     public function getUrl($bSinglePage = false)
     {
-        $sPurchasePage = (true === (bool) $bSinglePage) ? 'spurchase' : 'purchase';
+        $sPurchasePage = (true === (bool)$bSinglePage) ? 'spurchase' : 'purchase';
 
         return $this->_sUrl . $sPurchasePage;
     }

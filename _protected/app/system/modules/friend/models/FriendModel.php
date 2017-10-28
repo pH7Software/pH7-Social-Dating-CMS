@@ -25,13 +25,13 @@ class FriendModel extends FriendCoreModel
      */
     public function inList($iProfileId, $iFriendId, $mPending = 'all')
     {
-        $iProfileId = (int) $iProfileId;
-        $iFriendId = (int) $iFriendId;
+        $iProfileId = (int)$iProfileId;
+        $iFriendId = (int)$iFriendId;
 
         $sSqlPending = ($mPending !== 'all') ? 'AND pending = :pending' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('MembersFriends') .
-          'WHERE profileId = :profileId AND friendId = :friendId ' . $sSqlPending . ' LIMIT 1');
+            'WHERE profileId = :profileId AND friendId = :friendId ' . $sSqlPending . ' LIMIT 1');
 
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);
@@ -49,14 +49,14 @@ class FriendModel extends FriendCoreModel
      * @param integer $iProfileId = user Id
      * @param integer $iFriendId friend id
      * @param string $sRequestDate Date of the Request Friend.
-     * @param integer $iPending  1 = approved or 0 = pending friend requests. Default value is 1
+     * @param integer $iPending 1 = approved or 0 = pending friend requests. Default value is 1
      *
      * @return string Status in word: 'error', 'id_does_not_exist', 'friend_exists' or 'success'
      */
     public function add($iProfileId, $iFriendId, $sRequestDate, $iPending = 1)
     {
-        $iProfileId = (int) $iProfileId;
-        $iFriendId = (int) $iFriendId;
+        $iProfileId = (int)$iProfileId;
+        $iFriendId = (int)$iFriendId;
 
         // Check if the two existing ID
         $oExistsModel = new ExistsCoreModel;
@@ -64,7 +64,7 @@ class FriendModel extends FriendCoreModel
         if ($oExistsModel->id($iProfileId, 'Members') && $oExistsModel->id($iFriendId, 'Members')) {
             if (!$this->inList($iProfileId, $iFriendId)) {
                 $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersFriends') .
-                  '(profileId, friendId, pending, requestDate) VALUES (:profileId, :friendId, :pending, :requestDate)');
+                    '(profileId, friendId, pending, requestDate) VALUES (:profileId, :friendId, :pending, :requestDate)');
 
                 $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
                 $rStmt->bindValue(':friendId', $iFriendId, \PDO::PARAM_INT);

@@ -425,8 +425,8 @@ class ForumModel extends ForumCoreModel
      * @param integer $iCategoryId
      * @return object
      */
-     protected function getForumIdsFromCatId($iCategoryId)
-     {
+    protected function getForumIdsFromCatId($iCategoryId)
+    {
         $rStmt = Db::getInstance()->prepare('SELECT forumId FROM' . Db::prefix('Forums') . 'WHERE categoryId = :categoryId');
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
         $rStmt->execute();
@@ -443,9 +443,8 @@ class ForumModel extends ForumCoreModel
     {
         $oTopicIds = $this->getTopicIdsFromForumId($iForumId);
 
-        foreach ($oTopicIds as $oId)
-        {
-            $iId = (int) $oId->topicId;
+        foreach ($oTopicIds as $oId) {
+            $iId = (int)$oId->topicId;
 
             $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsMessages') . 'WHERE topicId = :topicId');
             $rStmt->bindValue(':topicId', $iId, \PDO::PARAM_INT);
@@ -463,9 +462,8 @@ class ForumModel extends ForumCoreModel
     {
         $oForumIds = $this->getForumIdsFromCatId($iCategoryId);
 
-        foreach ($oForumIds as $oId)
-        {
-            $iId = (int) $oId->forumId;
+        foreach ($oForumIds as $oId) {
+            $iId = (int)$oId->forumId;
             $this->_delMsgsFromForumId($iId);
 
             $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsTopics') . 'WHERE forumId = :forumId');

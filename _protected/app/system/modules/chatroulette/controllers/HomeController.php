@@ -20,7 +20,7 @@ class HomeController extends Controller
         $this->view->meta_description = t('Free Live Speed Dating with the Chatroulette of %site_name%, Meet new people near you and make new friends, sex friends and free flirting, Free online dating site for singles without registration with Video Chat Rooms!');
         $this->view->meta_keywords = t('chat, chatroulette, sex friend, single, speed dating, meet singles, dating, free dating, chat room, chat webcam');
         $this->view->h1_title = t('Welcome to <span class="pH1">Speed Dating ChatRoulette</span> of <span class="pH0">%site_name%</span>!');
-        $this->view->chatroulette = Url::clean( (new SysVar)->parse( DbConfig::getSetting('chatrouletteApi') ) );
+        $this->view->chatroulette = Url::clean((new SysVar)->parse(DbConfig::getSetting('chatrouletteApi')));
         $this->output();
     }
 }

@@ -16,9 +16,9 @@ class Registration extends RegistrationCore
 {
     public function __construct()
     {
-       parent::__construct();
+        parent::__construct();
 
-       $this->iActiveType = DbConfig::getSetting('affActivationType');
+        $this->iActiveType = DbConfig::getSetting('affActivationType');
     }
 
     /**

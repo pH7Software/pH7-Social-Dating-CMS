@@ -116,12 +116,12 @@ class Metacafe extends Api implements IApi
         $sVideoUrl = $this->getEmbedUrl($sUrl);
 
         if ($sMedia == 'preview') {
-            return 'http://s' . mt_rand(1,4) . '.mcstatic.com/thumb/' . $sIdVideo . '.jpg';
+            return 'http://s' . mt_rand(1, 4) . '.mcstatic.com/thumb/' . $sIdVideo . '.jpg';
         }
 
         $sParam = ($this->bAutoplay) ? 'autoPlay=yes' : 'autoPlay=no';
 
-        return '<embed flashVars="playerVars=showStats=no|' . $sParam . '|" src="' . $sVideoUrl . '" width="' . $iWidth . '" height="' . $iHeight . '" wmode="transparent" allowFullScreen="true" allowScriptAccess="always" name="Metacafe_'. $sIdVideo . '" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>';
+        return '<embed flashVars="playerVars=showStats=no|' . $sParam . '|" src="' . $sVideoUrl . '" width="' . $iWidth . '" height="' . $iHeight . '" wmode="transparent" allowFullScreen="true" allowScriptAccess="always" name="Metacafe_' . $sIdVideo . '" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash"></embed>';
     }
 
     /**

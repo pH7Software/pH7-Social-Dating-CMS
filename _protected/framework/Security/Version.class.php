@@ -42,7 +42,9 @@ final class Version
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Gets information on the lastest software version.
