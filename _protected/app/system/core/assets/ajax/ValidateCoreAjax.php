@@ -102,15 +102,17 @@ class ValidateCoreAjax
     /**
      * Validate the username (must not be empty or already known).
      *
-     * @access protected
      * @param string $sValue
      * @param string $sTable
+     *
      * @return void
      */
     protected function username($sValue, $sTable)
     {
         // Checks and corrects the table if it is incorrect.
-        if ($sTable !== 'Members' && $sTable !== 'Affiliates' && $sTable !== 'Admins') $sTable = 'Members';
+        if ($sTable !== 'Members' && $sTable !== 'Affiliates' && $sTable !== 'Admins') {
+            $sTable = 'Members';
+        }
 
         $this->_iStatus = ($this->_oValidate->username($sValue, DbConfig::getSetting('minUsernameLength'), DbConfig::getSetting('maxUsernameLength'), $sTable)) ? 1 : 0;
         $this->_sMsg = ($this->_iStatus) ? t('This Username is available!') : t('Sorry, but this Username is not available.');
@@ -119,10 +121,10 @@ class ValidateCoreAjax
     /**
      * Validate the email address.
      *
-     * @access protected
      * @param string $sValue
      * @param string $sParam
      * @param string $sTable
+     *
      * @return void
      */
     protected function email($sValue, $sParam, $sTable)
@@ -145,8 +147,8 @@ class ValidateCoreAjax
     /**
      * Validation of the password.
      *
-     * @access protected
      * @param string $sValue
+     *
      * @return void
      */
     protected function password($sValue)
@@ -165,8 +167,8 @@ class ValidateCoreAjax
     /**
      * Validation of the date and birthday.
      *
-     * @access protected
      * @param string $sValue
+     *
      * @return void
      */
     protected function birthDate($sValue)
@@ -187,10 +189,10 @@ class ValidateCoreAjax
     /**
      * Check whether the type of a variable is string.
      *
-     * @access protected
      * @param string $sValue
-     * @param integer $iMin Default NULL
-     * @param integer $iMax Default NULL
+     * @param integer $iMin
+     * @param integer $iMax
+     *
      * @return void
      */
     protected function txt($sValue, $iMin = null, $iMax = null)
@@ -215,8 +217,8 @@ class ValidateCoreAjax
     /**
      * Validation of names.
      *
-     * @access protected
      * @param string $sValue
+     *
      * @return void
      */
     protected function name($sValue)
@@ -232,8 +234,8 @@ class ValidateCoreAjax
     /**
      * Validation of the url.
      *
-     * @access protected
      * @param string $sValue
+     *
      * @return void
      */
     protected function url($sValue)
@@ -249,8 +251,8 @@ class ValidateCoreAjax
     /**
      * Validate Captcha.
      *
-     * @access protected
      * @return string $sValue
+     *
      * @return void
      */
     protected function captcha($sValue)
@@ -266,8 +268,8 @@ class ValidateCoreAjax
     /**
      * Validate international phone numbers in EPP format.
      *
-     * @access protected
      * @return string $sValue
+     *
      * @return void
      */
     protected function phone($sValue)
@@ -283,8 +285,8 @@ class ValidateCoreAjax
     /**
      * Validation of the acceptance of the terms of use.
      *
-     * @access protected
      * @return string $sValue
+     *
      * @return void
      */
     protected function terms($sValue)
