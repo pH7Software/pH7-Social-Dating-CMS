@@ -7,21 +7,18 @@
  */
 
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
+/*
+ * This class is still under development.
+ * If you wish, you are more than welcome to contribute on Github: https://github.com/pH7Software/pH7-Social-Dating-CMS
+ */
 class EditWallFormProcess extends Form
 {
-
-/*
- * This class is still under development, if you are a developer and you want to help us and join our volunteer team of developers to continue development of this module, you are welcome!
- * Please contact us by email: ph7software@gmail.com
- *
- * Thank you,
- * The developers team.
- */
     public function __construct()
     {
         parent::__construct();
