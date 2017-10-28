@@ -89,7 +89,7 @@ class Youtube extends Api implements IApi
             $aThumb = ['default', 1, 2, 3];
             shuffle($aThumb);
 
-            return 'https://i' . mt_rand(1,4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
+            return 'https://i' . mt_rand(1, 4) . '.ytimg.com/vi/' . $this->getVideoId($sUrl) . PH7_SH . $aThumb[0] . '.jpg';
         } else {
             $sParam = ($this->bAutoplay) ? '?autoplay=1&amp;' : '?';
 
@@ -113,15 +113,15 @@ class Youtube extends Api implements IApi
 
         foreach ($aMatches as $aMatch) {
             foreach ($aMatch as $iPors) {
-                switch (substr($iPors, strlen($iPors)-1)) {
+                switch (substr($iPors, strlen($iPors) - 1)) {
                     case 'H':
-                        $iDuration += substr($iPors, 0, strlen($iPors)-1)*60*60;
+                        $iDuration += substr($iPors, 0, strlen($iPors) - 1) * 60 * 60;
                         break;
                     case 'M':
-                        $iDuration += substr($iPors, 0, strlen($iPors)-1)*60;
+                        $iDuration += substr($iPors, 0, strlen($iPors) - 1) * 60;
                         break;
                     case 'S':
-                        $iDuration += substr($iPors, 0, strlen($iPors)-1);
+                        $iDuration += substr($iPors, 0, strlen($iPors) - 1);
                         break;
                 }
             }

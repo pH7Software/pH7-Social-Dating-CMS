@@ -81,7 +81,7 @@ final class Autoloader
 
             // To include Traits
             case is_file(PH7_PATH_FRAMEWORK . $sClass . '.trait.php'):
-                $sFile =  PH7_PATH_FRAMEWORK . $sClass . '.trait.php';
+                $sFile = PH7_PATH_FRAMEWORK . $sClass . '.trait.php';
                 break;
 
 

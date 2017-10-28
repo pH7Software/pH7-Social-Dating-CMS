@@ -95,14 +95,14 @@ abstract class Controller extends Core
          **/
         FrontController::getInstance()->_removeDatabaseInfo();
 
-       /**
-        * Destroy all object instances of PDO and close the connection to the database before the display and the start of the template and free memory
-        */
+        /**
+         * Destroy all object instances of PDO and close the connection to the database before the display and the start of the template and free memory
+         */
         M\Engine\Db::free();
 
-       /**
-        * Output our template and encoding.
-        */
+        /**
+         * Output our template and encoding.
+         */
 
         $sFile = (!empty($sFile)) ? $sFile : $this->view->getMainPage();
 
@@ -306,7 +306,7 @@ abstract class Controller extends Core
         if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
             !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD
         ) {
-           Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
+            Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
         }
     }
 

@@ -10,8 +10,7 @@
  * @version          1.2
  */
 
-namespace PH7\Framework\Str
-{
+namespace PH7\Framework\Str {
     defined('PH7') or exit('Restricted access');
 
     class Str
@@ -105,7 +104,7 @@ namespace PH7\Framework\Str
          */
         public function sanitize($sText, $sFilter = null, $sFlag = null)
         {
-            $sFlag = (!empty($sFlag)) ? (string) $sFlag : '';
+            $sFlag = (!empty($sFlag)) ? (string)$sFlag : '';
 
             if (!empty($sFilter)) {
                 $aFilters = explode(',', $sFilter);
@@ -236,7 +235,7 @@ namespace PH7\Framework\Str
             }
 
             return $sText;
-         }
+        }
 
         /**
          * Return the string if the variable is not empty else return empty string.
@@ -322,7 +321,7 @@ namespace PH7\Framework\Str
          */
         protected function cEscape($sText, $bStrip)
         {
-            return  $bStrip === true ? $this->stripTags($sText) : $this->htmlSpecialChars($sText);
+            return $bStrip === true ? $this->stripTags($sText) : $this->htmlSpecialChars($sText);
         }
 
         /**
@@ -356,7 +355,8 @@ namespace {
     /**
      * Alias of \PH7\Framework\Str\Str::escape() method.
      */
-    function escape($mText, $bStrip = false) {
+    function escape($mText, $bStrip = false)
+    {
         return (new PH7\Framework\Str\Str)->escape($mText, $bStrip);
     }
 }

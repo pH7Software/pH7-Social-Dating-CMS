@@ -121,30 +121,30 @@ class Api
     {
         $sClass = $this->clear($sUrl);
 
-        $sMedia = ( isset($sMedia) ? $sMedia : 'movie' );
-        $iWidth = ( isset($iWidth) ? $iWidth : $this->iWidth );
-        $iHeight = (isset($iHeight) ? $iHeight : $this->iHeight );
+        $sMedia = (isset($sMedia) ? $sMedia : 'movie');
+        $iWidth = (isset($iWidth) ? $iWidth : $this->iWidth);
+        $iHeight = (isset($iHeight) ? $iHeight : $this->iHeight);
 
         switch ($sClass) {
             case 'youtube':
             case 'youtu':
                 $sClass = (new Api\Youtube)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-            break;
+                break;
 
             case 'vimeo':
                 $sClass = (new Api\Vimeo)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-            break;
+                break;
 
             case 'dailymotion':
                 $sClass = (new Api\Dailymotion)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-            break;
+                break;
 
             case 'metacafe':
                 $sClass = (new Api\Metacafe)->getMeta($sUrl, $sMedia, $iWidth, $iHeight);
-            break;
+                break;
 
             default:
-                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \''  . $sClass . '\'');
+                throw new PH7InvalidArgumentException('Invalid Api Video Type! Bad Type is: \'' . $sClass . '\'');
         }
 
         return $sClass;

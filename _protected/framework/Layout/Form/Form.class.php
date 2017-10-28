@@ -117,7 +117,7 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     private static function _getTimeText($iWaitTime)
     {
-        $iWaitTime = (int) $iWaitTime;
+        $iWaitTime = (int)$iWaitTime;
 
         return ($iWaitTime < 2 ? t('minute') : ($iWaitTime < 60 ? t('minutes') : ($iWaitTime < 120 ? t('hour') : ($iWaitTime < 1440 ? t('hours') : ($iWaitTime < 2880 ? t('day') : t('days'))))));
     }
@@ -130,9 +130,9 @@ abstract class Form extends \PH7\Framework\Core\Core
      */
     private static function _convertTime($iWaitTime)
     {
-        $iWaitTime = (int) $iWaitTime;
+        $iWaitTime = (int)$iWaitTime;
 
-        if($iWaitTime > 60) {
+        if ($iWaitTime > 60) {
             $iDivide = ($iWaitTime < 1440) ? 60 : 1440;
             $iWaitTime = floor($iWaitTime / $iDivide);
         }

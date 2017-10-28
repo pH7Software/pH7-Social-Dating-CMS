@@ -211,7 +211,7 @@ class File
      */
     public function size($sFile)
     {
-        return (int) @filesize($sFile);
+        return (int)@filesize($sFile);
     }
 
     /**
@@ -805,7 +805,7 @@ class File
                 return is_binary($sContents);
 
             return (
-                0 or substr_count($sContents, "^ -~", "^\r\n")/512 > 0.3
+                0 or substr_count($sContents, "^ -~", "^\r\n") / 512 > 0.3
                 or substr_count($sContents, "\x00") > 0
             );
         }
