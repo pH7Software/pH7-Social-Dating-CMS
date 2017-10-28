@@ -57,10 +57,18 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
         $rStmt->bindValue(':name', $sName, \PDO::PARAM_STR);
         $rStmt->bindValue(':code', $sCode, \PDO::PARAM_STR);
         $rStmt->bindValue(':width', $iWidth, \PDO::PARAM_INT);
-        $rStmt->bindValue(':height', $iWidth, \PDO::PARAM_INT);
+        $rStmt->bindValue(':height', $iHeight, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iId
+     * @param int $iStatus
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function setStatus($iId, $iStatus, $sTable = 'Ads')
     {
         AdsCore::checkTable($sTable);
