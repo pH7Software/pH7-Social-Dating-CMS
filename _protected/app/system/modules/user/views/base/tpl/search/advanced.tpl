@@ -2,6 +2,6 @@
     {{ SearchUserCoreForm::advanced() }}
 </div>
 
-<div class="right col-md-2 ad_160_600">
+<div class="right col-md-2 col-md-offset-2 ad_160_600">
     {{ $designModel->ad(160,600) }}
 </div>
