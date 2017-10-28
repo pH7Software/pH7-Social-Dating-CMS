@@ -9,15 +9,16 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class WebcamController extends Controller
 {
-
+    /** @var string */
     private $sTitle;
 
     public function index()
     {
-        Framework\Url\Header::redirect(Uri::get('webcam', 'webcam', 'picture'));
+        Header::redirect(Uri::get('webcam', 'webcam', 'picture'));
     }
 
     public function picture()
