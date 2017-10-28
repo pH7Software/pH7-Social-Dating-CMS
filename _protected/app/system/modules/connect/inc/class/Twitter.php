@@ -75,22 +75,22 @@ class Twitter extends Api implements IApi
                     // Add User Avatar
                     $this->setAvatar($aProfile);
 
-                    $this->oDesign->setFlashMsg( t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()) );
-                    $this->sUrl = Uri::get('connect','main','register');
+                    $this->oDesign->setFlashMsg(t('You have now been registered! %0%', (new Registration)->sendMail($this->_aUserInfo, true)->getMsg()));
+                    $this->sUrl = Uri::get('connect', 'main', 'register');
                 } else {
                     // Login
                     $this->setLogin($iId, $oUserModel);
-                    $this->sUrl = Uri::get('connect','main','home');
+                    $this->sUrl = Uri::get('connect', 'main', 'home');
                 }
 
                 unset($oUserModel);
             } else {
                 // For testing purposes, if there was an error, let's kill the script
                 $this->oDesign->setFlashMsg(t('Oops! An error has occurred. Please try again later.'));
-                $this->sUrl = Uri::get('connect','main','index');
+                $this->sUrl = Uri::get('connect', 'main', 'index');
             }
         } else {
-            $this->sUrl = Uri::get('connect','main','index');
+            $this->sUrl = Uri::get('connect', 'main', 'index');
         }
     }
 
@@ -285,8 +285,8 @@ class Twitter extends Api implements IApi
         if ($this->_oTwOAuth->response['code'] == 200) {
             // get the access token and store it in a cookie
             $aResponse = $this->_oTwOAuth->extract_params($this->_oTwOAuth->response['response']);
-            setcookie('access_token', $aResponse['oauth_token'], time()+3600*24*30);
-            setcookie('access_token_secret', $aResponse['oauth_token_secret'], time()+3600*24*30);
+            setcookie('access_token', $aResponse['oauth_token'], time() + 3600 * 24 * 30);
+            setcookie('access_token_secret', $aResponse['oauth_token_secret'], time() + 3600 * 24 * 30);
 
             // state is now 2
             $_SESSION['authstate'] = 2;

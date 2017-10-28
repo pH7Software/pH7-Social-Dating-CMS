@@ -8,6 +8,7 @@
  * @package        PH7 / App / System / Module / Picture / Form / Processing
  * @version        1.4
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -38,8 +39,7 @@ class PictureFormProcess extends Form
          * This test is necessary because when the selection exists but that no option is available (this can when a user wants to add photos but he has no album)
          * the return value is of type "string" and the value is "1".
          */
-        if (!is_numeric($this->httpRequest->post('album_id')))
-        {
+        if (!is_numeric($this->httpRequest->post('album_id'))) {
             \PFBC\Form::setError('form_picture', t('Please add a category before you add some photos.'));
             return; // Stop execution of the method.
         }
@@ -48,17 +48,15 @@ class PictureFormProcess extends Form
          * @desc Resizing and saving some photos
          */
         $aPhotos = $_FILES['photos']['tmp_name'];
-        for ($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++)
-        {
+        for ($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++) {
             $oPicture1 = new Image($aPhotos[$i], 2500, 2500);
-            if (!$oPicture1->validate())
-            {
+            if (!$oPicture1->validate()) {
                 \PFBC\Form::setError('form_picture', Form::wrongImgFileTypeMsg());
                 return; // Stop execution of the method.
             }
 
             $sAlbumTitle = $this->httpRequest->post('album_title');
-            $iAlbumId = (int) $this->httpRequest->post('album_id');
+            $iAlbumId = (int)$this->httpRequest->post('album_id');
 
             $oPicture2 = clone $oPicture1;
             $oPicture3 = clone $oPicture1;
@@ -121,7 +119,7 @@ class PictureFormProcess extends Form
         $this->clearCache();
 
         $sModerationText = t('Your photo(s) has/have been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
-        $sText =  t('Your photo(s) has/have been added successfully!');
+        $sText = t('Your photo(s) has/have been added successfully!');
         $sMsg = ($this->iApproved == '0') ? $sModerationText : $sText;
         Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
     }

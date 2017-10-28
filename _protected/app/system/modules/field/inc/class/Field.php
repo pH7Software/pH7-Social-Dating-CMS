@@ -14,7 +14,9 @@ class Field
      * @desc Block constructing.
      * @access private
      */
-    private function __construct() {}
+    private function __construct()
+    {
+    }
 
     /**
      * Get table.

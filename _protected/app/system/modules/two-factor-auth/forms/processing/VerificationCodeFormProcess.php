@@ -66,15 +66,15 @@ class VerificationCodeFormProcess extends Form
         switch ($sMod) {
             case 'user':
                 $oClass = 'UserCore';
-            break;
+                break;
 
             case 'affiliate':
-                 $oClass = 'AffiliateCore';
-            break;
+                $oClass = 'AffiliateCore';
+                break;
 
             case PH7_ADMIN_MOD:
                 $oClass = 'AdminCore';
-            break;
+                break;
 
             default:
                 throw new PH7InvalidArgumentException('Wrong "' . $sMod . '" module specified to get the class name');

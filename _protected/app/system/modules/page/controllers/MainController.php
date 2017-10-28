@@ -17,10 +17,10 @@ class MainController extends Controller
 
     public function __construct()
     {
-          parent::__construct();
+        parent::__construct();
 
-          // Global variable for all template pages of this module
-          $this->view->admin_email = DbConfig::getSetting('adminEmail');
+        // Global variable for all template pages of this module
+        $this->view->admin_email = DbConfig::getSetting('adminEmail');
     }
 
     public function index()

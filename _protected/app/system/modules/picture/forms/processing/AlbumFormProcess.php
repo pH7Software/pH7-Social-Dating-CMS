@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Picture / Form / Processing
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -33,12 +34,9 @@ class AlbumFormProcess extends Form
         // Resizing and saving the thumbnail
         $oPicture = new Image($_FILES['album']['tmp_name']);
 
-        if (!$oPicture->validate())
-        {
+        if (!$oPicture->validate()) {
             \PFBC\Form::setError('form_picture_album', Form::wrongImgFileTypeMsg());
-        }
-        else
-        {
+        } else {
             $this->iApproved = (DbConfig::getSetting('pictureManualApproval') == 0) ? '1' : '0';
 
             $this->checkNudityFilter();
@@ -53,7 +51,7 @@ class AlbumFormProcess extends Form
                 $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
                 $this->iApproved
             );
-            $iLastAlbumId = (int) Db::getInstance()->lastInsertId();
+            $iLastAlbumId = (int)Db::getInstance()->lastInsertId();
 
             $oPicture->square(200);
 

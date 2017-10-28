@@ -76,7 +76,7 @@ class MainController extends Controller
      */
     public function pay($iMembershipId = null)
     {
-        $iMembershipId = (int) $iMembershipId;
+        $iMembershipId = (int)$iMembershipId;
 
         $oMembershipData = $this->oPayModel->getMemberships($iMembershipId);
 
@@ -107,7 +107,7 @@ class MainController extends Controller
                 $oPayPal = new PayPal($this->config->values['module.setting']['sandbox.enabled']);
                 if ($oPayPal->valid() && $this->httpRequest->postExists('custom')) {
                     $aData = explode('|', base64_decode($this->httpRequest->post('custom')));
-                    $iItemNumber = (int) $aData[0];
+                    $iItemNumber = (int)$aData[0];
                     if ($this->oUserModel->updateMembership(
                         $iItemNumber,
                         $this->iProfileId,
@@ -132,7 +132,7 @@ class MainController extends Controller
                                 'amount' => Stripe::getAmount($sAmount),
                                 'currency' => $this->config->values['module.setting']['currency'],
                                 'source' => $this->httpRequest->post('stripeToken'),
-                                'description'    => 'Membership charged for ' . $this->httpRequest->post('stripeEmail')
+                                'description' => 'Membership charged for ' . $this->httpRequest->post('stripeEmail')
                             ]
                         );
 
@@ -164,7 +164,7 @@ class MainController extends Controller
                     $oResult = Braintree_Transaction::sale([
                         'amount' => $this->httpRequest->post('amount'),
                         'paymentMethodNonce' => $bNonce,
-                        'options' => [ 'submitForSettlement' => true ]
+                        'options' => ['submitForSettlement' => true]
                     ]);
 
                     if ($oResult->success) {
@@ -240,7 +240,7 @@ class MainController extends Controller
     }
 
     /**
-     * @param string  $sGatewayName
+     * @param string $sGatewayName
      * @param int $iItemNumber
      *
      * @return void
@@ -269,7 +269,7 @@ class MainController extends Controller
         $oInfo = $this->oUserModel->getMembershipDetails($this->iProfileId);
         if ($oInfo->expirationDays != 0 && !empty($oInfo->membershipDate)) {
             $oDate = new \DateTime($oInfo->membershipDate);
-            $oDate->add(new \DateInterval( sprintf('P%dD', $oInfo->expirationDays)) );
+            $oDate->add(new \DateInterval(sprintf('P%dD', $oInfo->expirationDays)));
             $this->view->expirationDate = $oDate->format($this->config->values['language.application']['date_time_format']);
             unset($oDate);
         } else {
@@ -298,7 +298,7 @@ class MainController extends Controller
         }
 
         $iAmount = $this->oUserModel->readProfile($this->iProfileId)->price;
-        $iAffCom = ($iAmount*$this->config->values['module.setting']['rate.user_membership_payment']/100);
+        $iAffCom = ($iAmount * $this->config->values['module.setting']['rate.user_membership_payment'] / 100);
 
         if ($iAffCom > 0) {
             $this->oUserModel->updateUserJoinCom($iAffId, $iAffCom);
@@ -308,7 +308,7 @@ class MainController extends Controller
     /**
      * Send a notification email to the admin about the payment (IPN -> Instant Payment Notification).
      *
-     * @param int$iMembershipId
+     * @param int $iMembershipId
      *
      * @return int Number of recipients who were accepted for delivery.
      */

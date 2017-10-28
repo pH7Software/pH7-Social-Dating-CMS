@@ -46,8 +46,8 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
 
     public function get($iId = null, $iOffset, $iLimit)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $sSqlId = (!empty($iId)) ? ' WHERE reportId = :id ' : ' ';
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Report') . $sSqlId . 'LIMIT :offset, :limit');
@@ -76,6 +76,6 @@ class ReportModel extends Framework\Mvc\Model\Engine\Model
         $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
         Db::free($rStmt);
 
-        return (int) $oRow->totalRpts;
+        return (int)$oRow->totalRpts;
     }
 }

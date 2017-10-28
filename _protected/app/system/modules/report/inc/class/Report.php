@@ -74,19 +74,19 @@ class Report
         $sDate = (new CDateTime)->get($aData['date'])->dateTime();
 
         $this->_oView->content =
-        t('Reporter:') . ' <b><a href="' . $oUser->getProfileLink($sReporterUsername) . '">' . $sReporterUsername . '</a></b><br /><br /> ' .
-        t('Spammer:') . ' <b><a href="' . $oUser->getProfileLink($sSpammerUsername) . '">' . $sSpammerUsername . '</a></b><br /><br /> ' .
-        t('Contant Type:') . ' <b>' . $aData['type'] . '</b><br /><br /> ' .
-        t('URL:') . ' <b>' . $aData['url'] . '</b><br /><br /> ' .
-        t('Description of report:') . ' <b>' . $aData['desc'] . '</b><br /><br /> '.
-        t('Date:') . ' <b>' . $sDate . '</b><br /><br />';
+            t('Reporter:') . ' <b><a href="' . $oUser->getProfileLink($sReporterUsername) . '">' . $sReporterUsername . '</a></b><br /><br /> ' .
+            t('Spammer:') . ' <b><a href="' . $oUser->getProfileLink($sSpammerUsername) . '">' . $sSpammerUsername . '</a></b><br /><br /> ' .
+            t('Contant Type:') . ' <b>' . $aData['type'] . '</b><br /><br /> ' .
+            t('URL:') . ' <b>' . $aData['url'] . '</b><br /><br /> ' .
+            t('Description of report:') . ' <b>' . $aData['desc'] . '</b><br /><br /> ' .
+            t('Date:') . ' <b>' . $sDate . '</b><br /><br />';
 
         unset($oUser, $oUserModel);
 
         $sHtmlMessage = $this->_oView->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/report/abuse.tpl', DbConfig::getSetting('adminEmail'));
 
         $aInfo = [
-           'subject' => t('Spam report from %site_name%')
+            'subject' => t('Spam report from %site_name%')
         ];
 
         return (new Mail)->send($aInfo, $sHtmlMessage);

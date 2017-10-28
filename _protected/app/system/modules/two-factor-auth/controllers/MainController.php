@@ -58,7 +58,7 @@ class MainController extends Controller
         $this->view->page_title = $this->view->h2_title = t('Two-Factor Authentication');
         $this->view->mod = $this->sMod;
 
-        $this->iIsEnabled = (int) $this->o2FactorModel->isEnabled($this->iProfileId);
+        $this->iIsEnabled = (int)$this->o2FactorModel->isEnabled($this->iProfileId);
         if ($this->httpRequest->postExists('status')) {
             $this->update2FaStatus();
         }

@@ -5,7 +5,9 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Webcam / Controller
  */
+
 namespace PH7;
+
 use PH7\Framework\Mvc\Router\Uri;
 
 class WebcamController extends Controller
@@ -15,7 +17,7 @@ class WebcamController extends Controller
 
     public function index()
     {
-        Framework\Url\Header::redirect(Uri::get('webcam','webcam','picture'));
+        Framework\Url\Header::redirect(Uri::get('webcam', 'webcam', 'picture'));
     }
 
     public function picture()

@@ -8,4 +8,6 @@
 
 namespace PH7;
 
-class Video extends VideoCore {}
+class Video extends VideoCore
+{
+}

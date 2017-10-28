@@ -8,4 +8,6 @@
 
 namespace PH7;
 
-class Picture extends PictureCore {}
+class Picture extends PictureCore
+{
+}
