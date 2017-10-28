@@ -222,7 +222,7 @@ class SettingFormProcess extends Form
                  */
                 $sPathName = PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS . PH7_IMG . self::LOGO_FILENAME;
                 $this->file->deleteFile($sPathName); // It erases the old logo.
-                $oLogo->dynamicResize(250,60);
+                $oLogo->dynamicResize(250, 60);
                 $oLogo->save($sPathName);
 
                 // Clear CSS cache, because the logo is storaged with data URI in the CSS cache file

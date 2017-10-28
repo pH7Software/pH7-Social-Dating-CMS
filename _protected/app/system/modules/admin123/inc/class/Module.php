@@ -79,11 +79,11 @@ class Module
             $this->_file($sValue);
             $this->_route($sValue);
             $this->_sql($sValue);
-         } else {
+        } else {
             $this->_sql($sValue);
             $this->_route($sValue);
             $this->_file($sValue);
-         }
+        }
     }
 
     /**
@@ -98,7 +98,7 @@ class Module
         $sValue = $this->_checkParam($sSwitch);
         $aFolders = array();
 
-        foreach($this->_readMods($sValue) as $sFolder) {
+        foreach ($this->_readMods($sValue) as $sFolder) {
             $aFolders[$sFolder] = $sFolder;
         }
 
@@ -283,7 +283,7 @@ class Module
             return static::INSTALL;
         }
 
-        if ($sSwitch === static::UNINSTALL){
+        if ($sSwitch === static::UNINSTALL) {
             return static::UNINSTALL;
         }
 

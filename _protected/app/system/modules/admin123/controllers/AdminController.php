@@ -86,8 +86,8 @@ class AdminController extends Controller
     public function delete()
     {
         $aData = explode('_', $this->httpRequest->post('id'));
-        $iId = (int) $aData[0];
-        $sUsername = (string) $aData[1];
+        $iId = (int)$aData[0];
+        $sUsername = (string)$aData[1];
 
         (new Admin)->delete($iId, $sUsername);
         Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The admin has been deleted.'));
