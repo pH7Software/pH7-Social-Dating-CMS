@@ -85,10 +85,10 @@ class Gzip
         $this->oFile = new File;
         $this->oHttpRequest = new HttpRequest;
 
-        $this->bCaching = (bool) Config::getInstance()->values['cache']['enable.static.cache'];
-        $this->bCompressor = (bool) Config::getInstance()->values['cache']['enable.static.minify'];
-        $this->bGzipContent = (bool) Config::getInstance()->values['cache']['enable.static.gzip_compress'];
-        $this->bDataUri = (bool) Config::getInstance()->values['cache']['enable.static.data_uri'];
+        $this->bCaching = (bool)Config::getInstance()->values['cache']['enable.static.cache'];
+        $this->bCompressor = (bool)Config::getInstance()->values['cache']['enable.static.minify'];
+        $this->bGzipContent = (bool)Config::getInstance()->values['cache']['enable.static.gzip_compress'];
+        $this->bDataUri = (bool)Config::getInstance()->values['cache']['enable.static.data_uri'];
 
         $this->bIsGzip = $this->isGzip();
     }
@@ -249,15 +249,15 @@ class Gzip
         switch ($this->sType) {
             case 'html':
                 $this->sContents = $oCompress->parseHtml($this->sContents);
-            break;
+                break;
 
             case 'css':
                 $this->sContents = $oCompress->parseCss($this->sContents);
-            break;
+                break;
 
             case 'javascript':
                 $this->sContents = $oCompress->parseJs($this->sContents);
-            break;
+                break;
 
             default:
                 Http::setHeadersByCode(503);
@@ -316,12 +316,12 @@ class Gzip
     /**
      * @return void
      */
-     protected function setHeaders()
-     {
+    protected function setHeaders()
+    {
         // Send Content-Type
         header('Content-Type: text/' . $this->sType);
         header('Vary: Accept-Encoding');
-        header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600*24*10) . ' GMT'); // 10 days
+        header('Expires: ' . gmdate('D, d M Y H:i:s', time() + 3600 * 24 * 10) . ' GMT'); // 10 days
 
         // Send compressed contents
         if ($this->bIsGzip) {
@@ -358,7 +358,7 @@ class Gzip
             return !empty($aDirs[2]) ? $aDirs[2] : PH7_DEFAULT_THEME;
         };
 
-        $this->setVariables( include('variables.inc.php') );
+        $this->setVariables(include('variables.inc.php'));
     }
 
     /**
@@ -404,7 +404,7 @@ class Gzip
 
             // If the image-file exists and if file-size is lower than 24 KB, we convert it into base64 data URI
             if ($this->bDataUri && is_file($sImgPath) && $this->oFile->size($sImgPath) < self::MAX_IMG_SIZE_BASE64_CONVERTOR) {
-                $this->sContents =  str_replace($aHit[0][$i], 'url(' . Optimization::dataUri($sImgPath, $this->oFile) . ')', $this->sContents);
+                $this->sContents = str_replace($aHit[0][$i], 'url(' . Optimization::dataUri($sImgPath, $this->oFile) . ')', $this->sContents);
             } else {
                 $this->sContents = str_replace($aHit[0][$i], 'url(' . $sImgUrl . ')', $this->sContents);
             }
