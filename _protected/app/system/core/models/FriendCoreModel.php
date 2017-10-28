@@ -95,7 +95,7 @@ class FriendCoreModel extends Framework\Mvc\Model\Engine\Model
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $mData = (int) $oRow->totalFriends;
+            $mData = (int)$oRow->totalFriends;
             unset($oRow);
         }
 

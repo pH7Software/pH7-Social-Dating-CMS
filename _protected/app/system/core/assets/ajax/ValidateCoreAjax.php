@@ -48,55 +48,43 @@ class ValidateCoreAjax
         $sInputVal = $this->_oStr->escape($sInputVal, true);
 
         // Determine the field to validate and perform validation.
-        if (strstr($sFieldId, 'str_'))
-        {   // Check Text
+        if (strstr($sFieldId, 'str_')) {   // Check Text
             $this->txt($sInputVal, $sParam1, $sParam2);
-        }
-        elseif (strstr($sFieldId, 'name_'))
-        {
+        } elseif (strstr($sFieldId, 'name_')) {
             $this->name($sInputVal);
-        }
-        elseif (strstr($sFieldId, 'email'))
-        {   // Check email address.
-             $this->email($sInputVal, $sParam1, $sParam2);
-        }
-        elseif (strstr($sFieldId, 'url'))
-        {  // Check the url address.
+        } elseif (strstr($sFieldId, 'email')) {   // Check email address.
+            $this->email($sInputVal, $sParam1, $sParam2);
+        } elseif (strstr($sFieldId, 'url')) {  // Check the url address.
             $this->url($sInputVal);
-        }
-        elseif (strstr($sFieldId, 'phone'))
-        {
+        } elseif (strstr($sFieldId, 'phone')) {
             // Check the phone number
             $this->phone($sInputVal);
-        }
-        else
-        {
-            switch ($sFieldId)
-            {
+        } else {
+            switch ($sFieldId) {
                 // Check that the username is valid.
                 case 'username':
                     $this->username($sInputVal, $sParam1);
-                break;
+                    break;
 
                 // Check Password.
                 case 'password':
                     $this->password($sInputVal);
-                break;
+                    break;
 
                 // Check of the date of birth
                 case 'birth_date':
                     $this->birthDate($sInputVal);
-                break;
+                    break;
 
                 // Check the captcha.
                 case 'ccaptcha':
                     $this->captcha($sInputVal);
-                break;
+                    break;
 
                 // Check acceptance of the terms of use.
                 case 'terms-0':
                     $this->terms($sInputVal);
-                break;
+                    break;
 
                 // If we receive another invalid value, we display a message with a HTTP header.
                 default:
@@ -105,7 +93,7 @@ class ValidateCoreAjax
             }
         }
 
-        echo json_encode(array('status'=>$this->_iStatus,'msg'=>$this->_sMsg,'fieldId'=>$sFieldId));
+        echo json_encode(array('status' => $this->_iStatus, 'msg' => $this->_sMsg, 'fieldId' => $sFieldId));
     }
 
 
@@ -140,20 +128,13 @@ class ValidateCoreAjax
         // Checks and corrects the table if it is incorrect.
         if ($sTable !== 'Members' && $sTable !== 'Affiliates' && $sTable !== 'Admins') $sTable = 'Members';
 
-        if (!$this->_oValidate->email($sValue))
-        {
+        if (!$this->_oValidate->email($sValue)) {
             $this->_sMsg = t('Invalid Email Address!');
-        }
-        elseif ($sParam == 'guest' && $this->_oExistsModel->email($sValue, $sTable))
-        {
+        } elseif ($sParam == 'guest' && $this->_oExistsModel->email($sValue, $sTable)) {
             $this->_sMsg = t('This email already used by another member.');
-        }
-        elseif ($sParam == 'user' && !$this->_oExistsModel->email($sValue, $sTable))
-        {
-            $this->_sMsg = sprintf(t('Oops! "%s" is not associated with any %site_name% account.'), substr($sValue,0,50));
-        }
-        else
-        {
+        } elseif ($sParam == 'user' && !$this->_oExistsModel->email($sValue, $sTable)) {
+            $this->_sMsg = sprintf(t('Oops! "%s" is not associated with any %site_name% account.'), substr($sValue, 0, 50));
+        } else {
             $this->_iStatus = 1;
             $this->_sMsg = t('Valid Email!');
         }
@@ -168,15 +149,12 @@ class ValidateCoreAjax
      */
     protected function password($sValue)
     {
-        $iMin =  DbConfig::getSetting('minPasswordLength');
+        $iMin = DbConfig::getSetting('minPasswordLength');
         $iMax = DbConfig::getSetting('maxPasswordLength');
 
-        if (!$this->_oValidate->password($sValue, $iMin, $iMax))
-        {
+        if (!$this->_oValidate->password($sValue, $iMin, $iMax)) {
             $this->_sMsg = sprintf(t('Your Password has to contain from %d to %d characters.'), $iMin, $iMax);
-        }
-        else
-        {
+        } else {
             $this->_iStatus = 1;
             $this->_sMsg = t('Correct Password!');
         }
@@ -194,16 +172,11 @@ class ValidateCoreAjax
         $iMin = DbConfig::getSetting('minAgeRegistration');
         $iMax = DbConfig::getSetting('maxAgeRegistration');
 
-        if (!$this->_oValidate->date($sValue))
-        {
+        if (!$this->_oValidate->date($sValue)) {
             $this->_sMsg = t('Your must enter a date valid (Month/Day/Year).');
-        }
-        elseif (!$this->_oValidate->birthDate($sValue, $iMin, $iMax))
-        {
+        } elseif (!$this->_oValidate->birthDate($sValue, $iMin, $iMax)) {
             $this->_sMsg = sprintf(t('You must be %d to %d years to register on the site.'), $iMin, $iMax);
-        }
-        else
-        {
+        } else {
             $this->_iStatus = 1;
             $this->_sMsg = t('OK!');
         }
@@ -221,29 +194,19 @@ class ValidateCoreAjax
     protected function txt($sValue, $iMin = null, $iMax = null)
     {
         $sValue = trim($sValue);
-        if (!empty($sValue))
-        {
-            if (!empty($iMin) && $this->_oStr->length($sValue) < $iMin)
-            {
+        if (!empty($sValue)) {
+            if (!empty($iMin) && $this->_oStr->length($sValue) < $iMin) {
                 $this->_sMsg = sprintf(t('Please, enter %d character(s) or more.'), $iMin);
-            }
-            elseif (!empty($iMax) && $this->_oStr->length($sValue) > $iMax)
-            {
+            } elseif (!empty($iMax) && $this->_oStr->length($sValue) > $iMax) {
                 $this->_sMsg = sprintf(t('Please, enter %d character(s) or less.'), $iMax);
-            }
-            elseif (!is_string($sValue))
-            {
+            } elseif (!is_string($sValue)) {
                 $this->_sMsg = t('Please enter a string.');
-            }
-            else
-            {
+            } else {
                 $this->_iStatus = 1;
                 $this->_sMsg = t('OK!');
             }
-        }
-        else
-        {
-          $this->_sMsg = t('This field is required!');
+        } else {
+            $this->_sMsg = t('This field is required!');
         }
     }
 
@@ -256,12 +219,9 @@ class ValidateCoreAjax
      */
     protected function name($sValue)
     {
-        if (!$this->_oValidate->name($sValue))
-        {
+        if (!$this->_oValidate->name($sValue)) {
             $this->_sMsg = t("Your name doesn't seem to be correct.");
-        }
-        else
-        {
+        } else {
             $this->_iStatus = 1;
             $this->_sMsg = t('OK!');
         }
@@ -276,12 +236,9 @@ class ValidateCoreAjax
      */
     protected function url($sValue)
     {
-        if (!$this->_oValidate->url($sValue))
-        {
+        if (!$this->_oValidate->url($sValue)) {
             $this->_sMsg = t('Your must enter a valid url (e.g. http://www.coolonweb.com).');
-        }
-        else
-        {
+        } else {
             $this->_iStatus = 1;
             $this->_sMsg = t('OK!');
         }
@@ -296,13 +253,10 @@ class ValidateCoreAjax
      */
     protected function captcha($sValue)
     {
-        if ((new Framework\Security\Spam\Captcha\Captcha)->check($sValue))
-        {
+        if ((new Framework\Security\Spam\Captcha\Captcha)->check($sValue)) {
             $this->_iStatus = 1;
             $this->_sMsg = t('OK!');
-        }
-        else
-        {
+        } else {
             $this->_sMsg = t('Captcha check failed!');
         }
     }
@@ -316,12 +270,9 @@ class ValidateCoreAjax
      */
     protected function phone($sValue)
     {
-        if (!$this->_oValidate->phone($sValue))
-        {
+        if (!$this->_oValidate->phone($sValue)) {
             $this->_sMsg = t('Please enter a correct phone number with area code!');
-        }
-        else
-        {
+        } else {
             $this->_iStatus = 1;
             $this->_sMsg = t('OK!');
         }

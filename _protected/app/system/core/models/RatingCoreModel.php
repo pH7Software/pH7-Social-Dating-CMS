@@ -20,20 +20,19 @@ class RatingCoreModel extends Framework\Mvc\Model\Engine\Model
     public function getVote($iId, $sTable)
     {
         $this->cache->start(self::CACHE_GROUP, 'getVote' . $iId . $sTable, static::
-            CACHE_TIME);
+        CACHE_TIME);
 
         $sTable = Various::checkTable($sTable);
         $sWhere = Various::convertTableToId($sTable);
 
-        if (!$iData = $this->cache->get())
-        {
+        if (!$iData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT votes FROM' . Db::prefix($sTable) .
                 'WHERE ' . $sWhere . ' = :id LIMIT 1');
             $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) @$oRow->votes;
+            $iData = (int)@$oRow->votes;
             unset($oRow);
             $this->cache->put($iData);
         }
@@ -43,20 +42,19 @@ class RatingCoreModel extends Framework\Mvc\Model\Engine\Model
     public function getScore($iId, $sTable)
     {
         $this->cache->start(self::CACHE_GROUP, 'getScore' . $iId . $sTable, static::
-            CACHE_TIME);
+        CACHE_TIME);
 
         $sTable = Various::checkTable($sTable);
         $sWhere = Various::convertTableToId($sTable);
 
-        if (!$fData = $this->cache->get())
-        {
+        if (!$fData = $this->cache->get()) {
             $rStmt = Db::getInstance()->prepare('SELECT score FROM' . Db::prefix($sTable) .
                 'WHERE ' . $sWhere . ' = :id LIMIT 1');
             $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $fData = (float) @$oRow->score;
+            $fData = (float)@$oRow->score;
             unset($oRow);
             $this->cache->put($fData);
         }

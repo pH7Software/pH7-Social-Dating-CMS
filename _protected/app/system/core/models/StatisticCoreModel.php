@@ -161,7 +161,7 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
     protected function totalComments($sTable, $iDay = 0)
     {
         CommentCore::checkTable($sTable);
-        $iDay = (int) $iDay;
+        $iDay = (int)$iDay;
 
         $sSqlDay = ($iDay > 0) ? ' WHERE (createdDate + INTERVAL ' . $iDay . ' DAY) > NOW()' : '';
 
@@ -169,6 +169,6 @@ class StatisticCoreModel extends Framework\Mvc\Model\Statistic
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
 
-        return (int) $oRow->totalComments;
+        return (int)$oRow->totalComments;
     }
 }

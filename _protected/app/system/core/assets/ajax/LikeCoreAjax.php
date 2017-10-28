@@ -37,7 +37,7 @@ class LikeCoreAjax
      */
     public function show()
     {
-        $sTxt = (static::$_iVotesLike > 1) ? nt('You and one other have voted for this!', 'You and %n% other people have voted for this!', static::$_iVotesLike-1) : t('Congrats! You are the first to like it');
+        $sTxt = (static::$_iVotesLike > 1) ? nt('You and one other have voted for this!', 'You and %n% other people have voted for this!', static::$_iVotesLike - 1) : t('Congrats! You are the first to like it');
         return '{"votes":' . static::$_iVotesLike . ',"txt":"' . $sTxt . '"}';
     }
 
@@ -109,8 +109,7 @@ class LikeCoreAjax
      */
     protected function update()
     {
-        if($this->_fLastIpVoted != $this->_fLastIp)
-        {
+        if ($this->_fLastIpVoted != $this->_fLastIp) {
             static::$_iVotesLike++;
             $this->_oLikeModel->update($this->_sKey, $this->_fLastIp);
         }

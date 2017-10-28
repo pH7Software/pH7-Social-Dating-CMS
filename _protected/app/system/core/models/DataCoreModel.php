@@ -18,8 +18,8 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function getPicsVids($sTable, $sOrder, $iOffset, $iLimit)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $rStmt = Db::getInstance()->prepare('SELECT data.*, m.username FROM' . Db::prefix($sTable) . 'AS data INNER JOIN' . Db::prefix('Members') . 'AS m ON data.profileId = m.profileId WHERE data.approved=1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
@@ -33,8 +33,8 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
 
     public function getForumsPosts($sOrder, $iOffset, $iLimit)
     {
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $rStmt = Db::getInstance()->prepare('SELECT f.name, t.title, t.message, t.createdDate, t.updatedDate, t.forumId, t.topicId, m.username FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') . ' AS m ON t.profileId = m.profileId WHERE t.approved=1 ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);

@@ -1507,5 +1507,7 @@ class UserCoreModel extends Model
     /**
      * Clone is set to private to stop cloning.
      */
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 }

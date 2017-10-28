@@ -299,14 +299,12 @@ class UserCore
                 's' => $sSex
             ];
 
-            $sLink = Uri::get('user','signup','step1', '?' . Url::httpBuildQuery($aHttpParams), false);
-        }
-        else
-        {
+            $sLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
+        } else {
             $sLink = $this->getProfileLink($sUsername);
         }
 
-       return $sLink;
+        return $sLink;
     }
 
     /**
@@ -442,15 +440,11 @@ class UserCore
                 AffiliateCore::updateJoinCom($iAffId, $oConfig, $oRegistry);
 
                 Header::redirect($sRedirectLoginUrl, $sSuccessMsg);
-            }
-            else
-            {
+            } else {
                 Header::redirect($sRedirectLoginUrl, t('Oops! The URL is either invalid or you already have activated your account.'), 'error');
             }
             unset($oUserModel);
-        }
-        else
-        {
+        } else {
             Header::redirect($sRedirectIndexUrl, t('Invalid approach, please use the link that has been send to your email.'), 'error');
         }
     }
@@ -514,5 +508,7 @@ class UserCore
     /**
      * Clone is set to private to stop cloning.
      */
-    private function __clone() {}
+    private function __clone()
+    {
+    }
 }

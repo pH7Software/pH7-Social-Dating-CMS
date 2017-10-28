@@ -17,16 +17,16 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
 {
 
     const
-    CACHE_GROUP = 'db/sys/mod/comment',
-    CACHE_TIME = 345600,
-    CREATED = 'createdDate',
-    UPDATED = 'updatedDate';
+        CACHE_GROUP = 'db/sys/mod/comment',
+        CACHE_TIME = 345600,
+        CREATED = 'createdDate',
+        UPDATED = 'updatedDate';
 
     public function gets($sTable, $iApproved = 1, $sOrder = self::UPDATED, $iOffset = 0, $iLimit = 500)
     {
         $sTable = CommentCore::checkTable($sTable);
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
 
         $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') . 'AS m ON c.sender = m.profileId WHERE c.approved = :approved ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
 
@@ -71,7 +71,7 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
             $rStmt->execute();
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            $iData = (int) $oRow->totalComments;
+            $iData = (int)$oRow->totalComments;
             unset($oRow);
             $this->cache->put($iData);
         }
@@ -89,7 +89,7 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         $sTable = CommentCore::checkTable($sTable);
 
-        $iRecipientId = (int) $iRecipientId;
+        $iRecipientId = (int)$iRecipientId;
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) . 'WHERE recipient = :recipient');
         $rStmt->bindValue(':recipient', $iRecipientId, \PDO::PARAM_INT);
         return $rStmt->execute();
