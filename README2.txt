@@ -21,7 +21,7 @@ For license, please read the PH7.LICENSE.txt and PH7.COPYRIGHT.txt files.
 
 ==============================================
 
-Author: Soria Pierre-Henry
-Contact me at: pierrehenrysoria [AT] gmail [D0T] com
+Author: Pierre-Henry Soria
+Contact me at: pierrehenrysoria {[AT]} gmail {[D0T]} com  /  hi {[AT]} ph7 {[D0T]} me
 
 ==============================================
