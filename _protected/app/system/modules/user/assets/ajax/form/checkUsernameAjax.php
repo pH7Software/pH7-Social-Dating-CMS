@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Asset / Ajax / Form
  */
+
 namespace PH7;
 defined('PH7') or exit('Restricted access');
 
@@ -16,11 +17,10 @@ $oHttpRequest = new Http;
 
 $iStatus = 0; // Error Default Value
 
-if($oHttpRequest->postExists('username'))
-{
+if ($oHttpRequest->postExists('username')) {
     $iStatus = ((new Validate)->username($oHttpRequest->post('username'), DbConfig::getSetting('minUsernameLength'), DbConfig::getSetting('maxUsernameLength'))) ? 1 : 0;
 }
 
-echo json_encode(array('status'=>$iStatus));
+echo json_encode(array('status' => $iStatus));
 
 unset($oHttpRequest);

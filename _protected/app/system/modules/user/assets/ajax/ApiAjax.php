@@ -40,7 +40,7 @@ class ApiAjax
         $sType = $oHttpRequest->post('type');
         unset($oHttpRequest);
 
-        switch($sType) {
+        switch ($sType) {
             case 'profile_link':
                 $this->mOutput = $this->_oUser->getProfileLink($sParam);
                 break;
