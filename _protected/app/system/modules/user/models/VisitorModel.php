@@ -26,8 +26,8 @@ class VisitorModel
      */
     public function __construct($iProfileId, $iVisitorId = null, $sDateVisit = null)
     {
-        $this->_iProfileId = (int) $iProfileId;
-        $this->_iVisitorId = (int) $iVisitorId;
+        $this->_iProfileId = (int)$iProfileId;
+        $this->_iVisitorId = (int)$iVisitorId;
         $this->_sDateVisit = $sDateVisit;
     }
 
@@ -61,9 +61,9 @@ class VisitorModel
      */
     public function get($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
-        $bCount = (bool) $bCount;
-        $iOffset = (int) $iOffset;
-        $iLimit = (int) $iLimit;
+        $bCount = (bool)$bCount;
+        $iOffset = (int)$iOffset;
+        $iLimit = (int)$iLimit;
         $mLooking = trim($mLooking);
 
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
@@ -97,7 +97,7 @@ class VisitorModel
         } else {
             $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
             Db::free($rStmt);
-            return (int) $oRow->totalVisitors;
+            return (int)$oRow->totalVisitors;
         }
     }
 

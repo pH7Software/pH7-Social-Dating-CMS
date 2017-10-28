@@ -55,7 +55,7 @@ class SignupController extends Controller
             $this->view->userDesignModel = new UserDesignCoreModel();
         }
 
-        $this->view->page_title = ($bUserRef) ? t('Register for free to meet %0% on %site_name%. The Real Social Dating app!',  $sFirstName) : t('Free Sign Up to Meet Lovely People!');
+        $this->view->page_title = ($bUserRef) ? t('Register for free to meet %0% on %site_name%. The Real Social Dating app!', $sFirstName) : t('Free Sign Up to Meet Lovely People!');
 
         if ($bUserRef) {
             $sH1Txt = t('Register for Free to Meet <span class="pink2">%0%</span> (<span class="pink1">%1%</span>) on <span class="pink2">%site_name%</span>!', $sFirstName, $this->str->upperFirst($sUsername));
@@ -99,7 +99,7 @@ class SignupController extends Controller
         }
 
         $this->session->destroy(); // Remove all sessions created pending registration
-        Header::redirect(Uri::get('user','main','login'), (new Registration)->getMsg());
+        Header::redirect(Uri::get('user', 'main', 'login'), (new Registration)->getMsg());
     }
 
     /**

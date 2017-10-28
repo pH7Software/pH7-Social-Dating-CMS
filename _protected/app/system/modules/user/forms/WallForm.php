@@ -18,8 +18,8 @@ class WallForm
      * This class is still under development, if you are a developer and you want to contribute,
      * Feel free to fork pH7CMS repo https://github.com/pH7Software/pH7-Social-Dating-CMS and open a PR with your changes.
      */
-   public static function display()
-   {
+    public static function display()
+    {
         if (isset($_POST['submit_wall'])) {
             if (\PFBC\Form::isValid($_POST['submit_wall'])) {
                 new WallFormProcess();
@@ -29,10 +29,10 @@ class WallForm
         }
 
         $oForm = new \PFBC\Form('form_wall', 500);
-        $oForm->configure(array('action' => '' ));
+        $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_wall', 'form_wall'));
         $oForm->addElement(new \PFBC\Element\Token('wall'));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Content:'), 'post', array('validation'=>new \PFBC\Validation\Str(1,900))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Content:'), 'post', array('validation' => new \PFBC\Validation\Str(1, 900))));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

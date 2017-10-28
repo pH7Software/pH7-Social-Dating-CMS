@@ -5,6 +5,7 @@
  * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Form
  */
+
 namespace PH7;
 
 use PH7\Framework\Registry\Registry;
@@ -16,7 +17,7 @@ class PrivacyForm
     public static function display()
     {
         $oUserModel = new UserCoreModel;
-        $iProfileId = (int) (new Session)->get('member_id');
+        $iProfileId = (int)(new Session)->get('member_id');
 
         if (isset($_POST['submit_privacy_account'])) {
             if (\PFBC\Form::isValid($_POST['submit_privacy_account'])) {

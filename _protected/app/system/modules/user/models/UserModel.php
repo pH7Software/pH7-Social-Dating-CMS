@@ -8,6 +8,7 @@
  * @package        PH7/ App / System / Module / User / Model
  * @version        1.0
  */
+
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -31,7 +32,7 @@ class UserModel extends UserCoreModel
      */
     public function join(array $aData)
     {
-        $rStmt = Db::getInstance()->prepare( $this->getQuery('join', $this->_sQueryPath) );
+        $rStmt = Db::getInstance()->prepare($this->getQuery('join', $this->_sQueryPath));
         $rStmt->bindValue(':email', $aData['email'], \PDO::PARAM_STR);
         $rStmt->bindValue(':username', $aData['username'], \PDO::PARAM_STR);
         $rStmt->bindValue(':password', $aData['password'], \PDO::PARAM_STR);
