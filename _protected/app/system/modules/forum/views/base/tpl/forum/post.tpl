@@ -84,7 +84,9 @@
                     {/if}
                 </div>
             {/each}
-            <p><a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'reply', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Reply to the topic'}">{lang 'Reply'}</a></p>
+            <p>
+                <a class="btn btn-default btn-sm" rel="nofollow" href="{{ $design->url('forum', 'forum', 'reply', "$post->name,$post->forumId,$post->title,$post->topicId") }}" title="{lang 'Reply to the topic'}">{lang 'Reply'}</a>
+            </p>
         {/if}
 
         {if !empty($messages)}
