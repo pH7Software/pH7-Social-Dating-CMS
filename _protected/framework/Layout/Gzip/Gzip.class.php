@@ -119,8 +119,7 @@ class Gzip
      * @return void
      *
      * @throws Exception If the cache file couldn't be written.
-     *
-     * @throws \PH7\Framework\File\Exception
+     * @throws Exception If the file couldn't be read.
      */
     public function run()
     {
@@ -187,8 +186,7 @@ class Gzip
      * @return string The cached contents.
      *
      * @throws Exception If the cache file couldn't be written.
-     *
-     * @throws \PH7\Framework\File\Exception If the file cannot be created.
+     * @throws Exception If the file couldn't be read.
      */
     public function cache()
     {

@@ -432,6 +432,9 @@ final class FrontController
 
     /**
      * @return void
+     *
+     * @throws \PH7\Framework\Layout\Gzip\Exception If the cache file couldn't be written.
+     * @throws \PH7\Framework\Layout\Gzip\Exception If the file couldn't be read.
      */
     private function gzipRouter()
     {
