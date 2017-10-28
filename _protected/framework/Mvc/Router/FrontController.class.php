@@ -178,6 +178,7 @@ final class FrontController
 
     /**
      * Simple Router.
+     *
      * @return void
      */
     private function simpleRouter()
@@ -424,7 +425,7 @@ final class FrontController
                     break;
 
                 default:
-                    $this->notFound('Not found Asset file!', 1);
+                    $this->notFound('Asset file not found!', 1);
             }
             exit;
         }

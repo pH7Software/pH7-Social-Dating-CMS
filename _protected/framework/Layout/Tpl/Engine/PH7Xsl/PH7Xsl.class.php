@@ -44,8 +44,6 @@ class PH7Xsl
     private $bPhpFunc = true;
 
     /**
-     * Constructor.
-     *
      * @param string $sFile The XSL file.
      */
     public function __construct($sFile)
