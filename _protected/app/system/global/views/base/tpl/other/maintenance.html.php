@@ -24,11 +24,12 @@ $aMeta = [
 
 <!-- Begin Content -->
 <div id="content" class="center s_padd">
-    <br/>
+    <br />
     <h1><?php echo t('Site Maintenance') ?></h1>
-    <p><?php echo t('Whoops! Our website is currently down for maintenance.') ?><br/>
-        <?php echo t('Please come back later!') ?><br/><br/>
-        <span class="small italic"><?php echo t('Kind regards, The Team.') ?></span></p>
+    <p><?php echo t('Whoops! Our website is currently down for maintenance.') ?><br />
+        <?php echo t('Please come back later!') ?><br /><br />
+        <span class="small italic"><?php echo t('Kind regards, The Team.') ?></span>
+    </p>
 </div>
 <!-- End Content -->
 

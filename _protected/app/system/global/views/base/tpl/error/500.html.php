@@ -24,12 +24,15 @@ $aMeta = [
 
 <!-- Begin Content -->
 <div id="content" class="center s_padd">
-    <br/>
+    <br />
     <h1>Internal Server Error</h1>
     <p>The server encountered an error. This is most often caused by a scripting problem, a failed database access
-        attempt, or other similar reasons.</p>
+        attempt, or other similar reasons.
+    </p>
+
     <p>If you are the administrator of the site, please go to your admin panel -> Tools -> Environment Mode and set to
-        "Development", then go back here to see the details of the error.</p>
+        "Development", then go back here to see the details of the error.
+    </p>
 </div>
 <!-- End Content -->
 

@@ -23,7 +23,7 @@ $aMeta = [
 
 <!-- Begin Content -->
 <div id="content" class="center s_padd">
-    <br/>
+    <br />
     <h1><?php echo t('Whoops!') ?></h1>
     <p>&nbsp;</p>
     <p class="center"><?php echo $sMsg ?></p>

@@ -2,8 +2,8 @@
 {inc_sub_header}
 
 <p>{content}</p>
-<p><br/>
-<hr/></p>
+<p><br /></p>
+<hr />
 <p>{b_footer}</p>
 <p>
     <small>{footer}</small>
