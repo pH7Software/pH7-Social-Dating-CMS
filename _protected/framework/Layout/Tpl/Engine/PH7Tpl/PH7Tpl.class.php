@@ -96,8 +96,8 @@ class PH7Tpl extends Kernel
         // Enable (true) or Disables (false) html comments in the source code of the site that shows information conernant template engine such as name, version, ...
         $this->bLicense = PH7_VALID_LICENSE;
 
-        $this->bHtmlCompressor = (bool) $this->config->values['cache']['enable.static.minify'];
-        $this->bPhpCompressor = (bool) $this->config->values['cache']['enable.static.minify'];
+        $this->bHtmlCompressor = (bool)$this->config->values['cache']['enable.static.minify'];
+        $this->bPhpCompressor = (bool)$this->config->values['cache']['enable.static.minify'];
     }
 
     /**
@@ -194,7 +194,7 @@ class PH7Tpl extends Kernel
      */
     public function setCaching($bCaching)
     {
-        $this->bCaching = (bool) $bCaching;
+        $this->bCaching = (bool)$bCaching;
     }
 
     /**
@@ -204,7 +204,7 @@ class PH7Tpl extends Kernel
      */
     public function isEnableCache()
     {
-        return (bool) $this->bCaching;
+        return (bool)$this->bCaching;
     }
 
     /**
@@ -250,10 +250,10 @@ class PH7Tpl extends Kernel
      *
      * @return void
      */
-     public function setXmlSyntax($bIsActive)
-     {
-         $this->bXmlTags = (bool) $bIsActive;
-     }
+    public function setXmlSyntax($bIsActive)
+    {
+        $this->bXmlTags = (bool)$bIsActive;
+    }
 
     /**
      * Adds a variable that can be used by the templates.
@@ -429,7 +429,7 @@ class PH7Tpl extends Kernel
         }
 
         $this->sCompileDirFile = ($this->isMainDir($sDirPath)) ? $this->sCompileDir2 . $this->file->getFileWithoutExt($this->sTplFile) . static::COMPILE_FILE_EXT : $this->sCompileDir2 .
-                str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
+            str_replace($this->getCurrentController(), '', $this->file->getFileWithoutExt($this->sTplFile)) . static::COMPILE_FILE_EXT;
 
         if (!$this->file->existFile($this->sTemplateDirFile)) {
             throw new TplException('File \'' . $this->sTemplateDirFile . '\' does no exist');
@@ -438,26 +438,21 @@ class PH7Tpl extends Kernel
 
         /*** If the file does not exist or if the template has been modified, recompile the makefiles ***/
         if ($this->file->getModifTime($this->sTemplateDirFile) > $this->file->
-                        getModifTime($this->sCompileDirFile)) {
+            getModifTime($this->sCompileDirFile)) {
             $this->compile();
         }
 
         if (!empty($_bInclude)) {
-            $bCaching = (bool) $this->config->values['cache']['enable.html.tpl.cache'];
+            $bCaching = (bool)$this->config->values['cache']['enable.html.tpl.cache'];
 
-            if ($this->isEnableCache() === true && $bCaching === true && !$this->isMainCompilePage())
-            {
+            if ($this->isEnableCache() === true && $bCaching === true && !$this->isMainCompilePage()) {
                 $this->cache();
-            }
-            else
-            {
+            } else {
                 // Extraction Variables
                 extract($this->_aVars);
                 require $this->sCompileDirFile;
             }
-        }
-        else
-        {
+        } else {
             return $this->sCompileDirFile;
         }
     }
@@ -673,14 +668,13 @@ class PH7Tpl extends Kernel
         $this->file->createDir($this->sCacheDir);
 
         $this->sCacheDir2 = $this->sCacheDir . $this->registry->module . '_' . md5($this->
-                        registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . PH7_LANG_NAME . PH7_DS . $this->getCurrentController() . PH7_DS;
+            registry->path_module) . PH7_DS . PH7_TPL_MOD_NAME . PH7_DS . PH7_LANG_NAME . PH7_DS . $this->getCurrentController() . PH7_DS;
         $this->file->createDir($this->sCacheDir2);
         $this->sCacheDirFile = $this->sCacheDir2 . str_replace(PH7_DS, '_', $this->file->getFileWithoutExt($this->sTplFile)) . '.cache.html';
 
         // If the cache has expired
         if ($this->file->getModifTime($this->sCompileDirFile) > $this->file->getModifTime($this->sCacheDirFile) || (!empty($this->mCacheExpire) && $this->
-                file->getModifTime($this->sCacheDirFile) < time() - $this->mCacheExpire))
-        {
+                file->getModifTime($this->sCacheDirFile) < time() - $this->mCacheExpire)) {
             ob_start();
 
             // Extraction Variables

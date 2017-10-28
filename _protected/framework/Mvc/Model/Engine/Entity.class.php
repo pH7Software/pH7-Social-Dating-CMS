@@ -41,7 +41,7 @@ abstract class Entity
      */
     public function setKeyId($iId)
     {
-        $this->_iId = (int) $iId;
+        $this->_iId = (int)$iId;
     }
 
     /**
