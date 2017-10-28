@@ -278,7 +278,7 @@ class ValidateCoreAjax
     {
         if (!$this->_oValidate->url($sValue))
         {
-            $this->_sMsg = t('Your must enter a valid url (e.g. http://www.coolonweb.com).');
+            $this->_sMsg = t('Your must enter a valid url (e.g., http://ph7cms.com).');
         }
         else
         {
