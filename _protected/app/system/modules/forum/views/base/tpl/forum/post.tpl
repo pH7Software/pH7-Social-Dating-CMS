@@ -12,7 +12,11 @@
             </p>
         </div>
 
-        <p>{% Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($post->message)) %}</p>
+        <p>
+            {% Framework\Parse\Emoticon::init(
+                Framework\Security\Ban\Ban::filterWord($post->message)
+            ) %}
+        </p>
 
         <div class="post-ident">
             <p class="small italic">
@@ -55,7 +59,13 @@
                         </p>
                     </div>
 
-                    <p>{% Framework\Parse\User::atUsernameToLink(Framework\Parse\Emoticon::init(Framework\Security\Ban\Ban::filterWord($msg->message))) %}</p>
+                    <p>
+                        {% Framework\Parse\Emoticon::init(
+                            Framework\Parse\User::atUsernameToLink(
+                                Framework\Security\Ban\Ban::filterWord($msg->message)
+                            )
+                        ) %}
+                    </p>
 
                     <div class="post-ident">
                         <p class="small italic">
