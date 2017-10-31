@@ -15,13 +15,20 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
 {
+    const CACHE_GROUP = 'db/sys/mod/comment';
+    const CACHE_TIME = 345600;
+    const CREATED = 'createdDate';
+    const UPDATED = 'updatedDate';
 
-    const
-        CACHE_GROUP = 'db/sys/mod/comment',
-        CACHE_TIME = 345600,
-        CREATED = 'createdDate',
-        UPDATED = 'updatedDate';
-
+    /**
+     * @param string $sTable
+     * @param int $iApproved
+     * @param string $sOrder
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function gets($sTable, $iApproved = 1, $sOrder = self::UPDATED, $iOffset = 0, $iLimit = 500)
     {
         $sTable = CommentCore::checkTable($sTable);
@@ -39,6 +46,15 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
         return $oData;
     }
 
+    /**
+     * @param int $iRecipientId
+     * @param int $iApproved
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param string $sTable
+     *
+     * @return array
+     */
     public function read($iRecipientId, $iApproved, $iOffset, $iLimit, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
@@ -47,7 +63,9 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $sSqlRecipientId = (!empty($iRecipientId)) ? 'c.recipient =:recipient AND' : '';
 
-        $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') . 'AS m ON c.sender = m.profileId WHERE ' . $sSqlRecipientId . ' c.approved =:approved ORDER BY c.createdDate DESC LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' .
+            Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') .
+            'AS m ON c.sender = m.profileId WHERE ' . $sSqlRecipientId . ' c.approved =:approved ORDER BY c.createdDate DESC LIMIT :offset, :limit');
 
         if (!empty($iRecipientId)) $rStmt->bindParam(':recipient', $iRecipientId, \PDO::PARAM_INT);
         $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
@@ -59,6 +77,12 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
         return $oData;
     }
 
+    /**
+     * @param int $iRecipientId
+     * @param string $sTable
+     *
+     * @return array|bool|float|int|object|string
+     */
     public function total($iRecipientId, $sTable)
     {
         $this->cache->start(static::CACHE_GROUP, 'total' . $iRecipientId . $sTable, static::CACHE_TIME);
@@ -81,9 +105,10 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Delete a comment.
      *
-     * @param integer $iRecipientId The Comment Recipient ID.
+     * @param int $iRecipientId The Comment Recipient ID.
      * @param string $sTable The Comment Table.
-     * @return boolean Returns TRUE on success, FALSE on failure.
+     *
+     * @return bool Returns TRUE on success, FALSE on failure.
      */
     public static function deleteRecipient($iRecipientId, $sTable)
     {
