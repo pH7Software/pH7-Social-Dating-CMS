@@ -35,7 +35,7 @@ class CommentCore
      *
      * @param string $sTable
      *
-     * @return string|void Returns the table if it is correct.
+     * @return string|void Returns the table name if it is correct.
      *
      * @see Various::launchErr()
      *

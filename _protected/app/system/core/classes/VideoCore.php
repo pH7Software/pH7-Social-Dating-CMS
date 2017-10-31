@@ -44,8 +44,9 @@ class VideoCore
 
         // Delete video file
         $aVideoExt = explode(',', $sVideoExt);
-        foreach ($aVideoExt as $sExt)
+        foreach ($aVideoExt as $sExt) {
             $oFile->deleteFile($sDir . $sVideoLink . $sExt);
+        }
 
         // Delete thumbnail
         $oFile->deleteFile($sDir . $sThumbName . $sThumbExt);

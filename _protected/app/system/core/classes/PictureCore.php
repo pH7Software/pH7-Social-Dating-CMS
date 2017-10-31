@@ -12,11 +12,11 @@ use PH7\Framework\File\File;
 
 class PictureCore
 {
-
     /**
      * @param integer $iAlbumId
      * @param string $sUsername
      * @param string $sPictureLink (file with the extension)
+     *
      * @return void
      */
     public function deletePhoto($iAlbumId, $sUsername, $sPictureLink)
@@ -36,5 +36,4 @@ class PictureCore
         (new File)->deleteFile($aFiles);
         unset($aFiles);
     }
-
 }

@@ -8,17 +8,21 @@
 
 namespace PH7;
 
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
+use PH7\Framework\File\File;
+
 abstract class WriteCore
 {
     const THUMBNAIL_FILENAME = 'thumb.png';
 
     /**
-     * @param mixed (integer | string) $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
+     * @param int|string $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
-     * @param \PH7\Framework\File\File $oFile
-     * @return boolean
+     * @param File $oFile
+     *
+     * @return bool
      */
-    public function deleteThumb($mId, $sMod, Framework\File\File $oFile)
+    public function deleteThumb($mId, $sMod, File $oFile)
     {
         self::checkMod($sMod);
 
