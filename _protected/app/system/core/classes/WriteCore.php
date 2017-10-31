@@ -35,13 +35,15 @@ abstract class WriteCore
 
     /**
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
+     *
      * @return void
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the module is incorrect.
+     *
+     * @throws PH7InvalidArgumentException If the module is incorrect.
      */
     public static function checkMod($sMod)
     {
         if ($sMod !== 'blog' && $sMod !== 'note') {
-            Framework\Error\CException\PH7InvalidArgumentException('Bad module: ' . $sMod);
+            throw new PH7InvalidArgumentException('Bad module: ' . $sMod);
         }
     }
 }
