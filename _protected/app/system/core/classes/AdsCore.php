@@ -14,6 +14,14 @@ use PH7\Framework\Pattern\Statik;
 
 class AdsCore extends Framework\Ads\Ads
 {
+    const ID_COLUMN_NAME = 'adsId';
+
+    /** @var array */
+    private static $aTableNames = [
+        'Ads',
+        'AdsAffiliates'
+    ];
+
     /**
      * Import the trait to set the class static.
      * The trait sets constructor/clone private to prevent instantiation.
@@ -37,20 +45,19 @@ class AdsCore extends Framework\Ads\Ads
     /**
      * Checks Ads Table.
      *
+     * @param string $sTable
+     *
      * @return string|void Returns the table name if it is correct, nothing otherwise.
      *
      * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException If the table is not valid.
      */
     public static function checkTable($sTable)
     {
-        switch ($sTable) {
-            case 'Ads':
-            case 'AdsAffiliates':
-                return $sTable;
-
-            default:
-                Various::launchErr($sTable);
+        if (in_array($sTable, static::$aTableNames, true)) {
+            return $sTable;
         }
+
+        Various::launchErr($sTable);
     }
 
     /**
@@ -64,13 +71,10 @@ class AdsCore extends Framework\Ads\Ads
      */
     public static function convertTableToId($sTable)
     {
-        switch ($sTable) {
-            case 'Ads':
-            case 'AdsAffiliates':
-                return 'adsId';
-
-            default:
-                Various::launchErr();
+        if (in_array($sTable, static::$aTableNames, true)) {
+            return static::ID_COLUMN_NAME;
         }
+
+        Various::launchErr();
     }
 }

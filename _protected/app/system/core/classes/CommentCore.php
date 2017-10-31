@@ -13,6 +13,16 @@ use PH7\Framework\Pattern\Statik;
 
 class CommentCore
 {
+    /** @var array */
+    private static $aLowercaseTableNames = [
+        'profile',
+        'picture',
+        'video',
+        'blog',
+        'note',
+        'game'
+    ];
+
     /**
      * Import the trait to set the class static.
      *
@@ -35,18 +45,11 @@ class CommentCore
     {
         $sTable = strtolower($sTable); // Case insensitivity
 
-        switch ($sTable) {
-            case 'profile':
-            case 'picture':
-            case 'video':
-            case 'blog':
-            case 'note':
-            case 'game':
-                return ucfirst($sTable);
-
-            default:
-                Various::launchErr($sTable);
+        if (in_array($sTable, self::$aLowercaseTableNames, true)) {
+            return ucfirst($sTable);
         }
+
+        Various::launchErr($sTable);
     }
 
     /**
