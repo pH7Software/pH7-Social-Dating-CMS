@@ -24,6 +24,7 @@ class Security
      * @param string $sTo Email address of the user to send the message.
      * @param PH7Tpl $oView
      * @param string $sTable Default 'Members'
+     *
      * @return void
      */
     public function sendAlertLoginAttemptsExceeded($iMaxAttempts, $iAttemptTime, $sIp, $sTo, PH7Tpl $oView, $sTable = 'Members')

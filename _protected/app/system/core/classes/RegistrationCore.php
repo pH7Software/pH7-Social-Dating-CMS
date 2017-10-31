@@ -21,6 +21,7 @@ abstract class RegistrationCore extends Core
 
     /**
      * @var integer $iActiveType
+     *
      * @internal Set protected visibility because this attribute is used in child classes.
      */
     protected $iActiveType;
