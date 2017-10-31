@@ -16,7 +16,7 @@
  *
  * @author          Pierre-Henry SORIA <ph7software@gmail.com>
  * @copyright       (c) 2011-2017, Pierre-Henry SORIA, All Rights Reserved.
- * @version         Last update 10/23/2017
+ * @version         Last update 10/31/2017
  * @package         pH7CMS
  */
 
@@ -173,8 +173,8 @@ class Api
      */
     public function setMapType($type)
     {
-        $mapsType = array('ROADMAP', 'HYBRID', 'TERRAIN', 'SATELLITE');
-        if (!in_array(strtoupper($type), $mapsType)) {
+        $mapsType = ['ROADMAP', 'HYBRID', 'TERRAIN', 'SATELLITE'];
+        if (!in_array(strtoupper($type), $mapsType, true)) {
             $this->mapType = $mapsType[0];
         } else {
             $this->mapType = strtoupper($type);

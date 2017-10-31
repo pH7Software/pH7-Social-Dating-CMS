@@ -87,7 +87,7 @@ class Video extends Upload
                 throw new TooLargeException('The file could not be uploaded. Possibly too large.');
             }
         } else {
-            return in_array($this->sType, self::$aAllowedTypes);
+            return in_array($this->sType, self::$aAllowedTypes, true);
         }
     }
 
