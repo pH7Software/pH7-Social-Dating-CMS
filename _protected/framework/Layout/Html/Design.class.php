@@ -345,22 +345,22 @@ class Design
     /**
      * Provide a "Powered By" link.
      *
-     * @param boolean $bLink To include a link to pH7CMS or pH7Framework. Default TRUE
-     * @param boolean $bSoftwareName Default TRUE
-     * @param boolean $bVersion To include the version being used. Default TRUE
-     * @param boolean $bComment HTML comment. Default TRUE
-     * @param boolean $bEmail Is it for email content or not. Default FALSE
+     * @param bool $bLink To include a link to pH7CMS or pH7Framework.
+     * @param bool $bSoftwareName
+     * @param bool $bVersion To include the version being used.
+     * @param bool $bComment HTML comment.
+     * @param bool $bEmailContext Is it for email content or not.
      *
      * @return void
      */
-    final public function link($bLink = true, $bSoftwareName = true, $bVersion = true, $bComment = true, $bEmail = false)
+    final public function link($bLink = true, $bSoftwareName = true, $bVersion = false, $bComment = true, $bEmailContext = false)
     {
         if ($bLink) {
             $bSoftwareName = true;
         }
 
         /**
-        if (!$bEmail && AdminCore::auth()) {
+        if (!$bEmailContext && AdminCore::auth()) {
             echo '<p class="s_bMarg underline"><strong><em><a class="red" href="', Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), '">', t('Need to remove the link below?'), '</a></em></strong><br /><em class="small">' . t('(... and get rid of all other promo notices)') . '</em></p>';
         }
         //*/
