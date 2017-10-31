@@ -151,6 +151,6 @@ class Ban
     {
         $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
 
-        return in_array($sVal, array_map('trim', $aBans));
+        return in_array($sVal, array_map('trim', $aBans), true);
     }
 }
