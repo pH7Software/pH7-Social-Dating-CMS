@@ -11,9 +11,11 @@
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
+class CommentCoreModel extends Model
 {
     const CACHE_GROUP = 'db/sys/mod/comment';
     const CACHE_TIME = 345600;
@@ -37,12 +39,13 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $rStmt = Db::getInstance()->prepare('SELECT c.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') . 'AS m ON c.sender = m.profileId WHERE c.approved = :approved ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
 
-        $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        $rStmt->bindParam(':approved', $iApproved, PDO::PARAM_INT);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
-        $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $oData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oData;
     }
 
@@ -67,13 +70,16 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
             Db::prefix('Comments' . $sTable) . ' AS c LEFT JOIN' . Db::prefix('Members') .
             'AS m ON c.sender = m.profileId WHERE ' . $sSqlRecipientId . ' c.approved =:approved ORDER BY c.createdDate DESC LIMIT :offset, :limit');
 
-        if (!empty($iRecipientId)) $rStmt->bindParam(':recipient', $iRecipientId, \PDO::PARAM_INT);
-        $rStmt->bindParam(':approved', $iApproved, \PDO::PARAM_INT);
-        $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        if (!empty($iRecipientId)) {
+            $rStmt->bindParam(':recipient', $iRecipientId, PDO::PARAM_INT);
+        }
+        $rStmt->bindParam(':approved', $iApproved, PDO::PARAM_INT);
+        $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+        $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
         $rStmt->execute();
-        $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        $oData = $rStmt->fetchAll(PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oData;
     }
 
@@ -93,12 +99,13 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
             $rStmt = Db::getInstance()->prepare('SELECT COUNT(commentId) AS totalComments FROM' . Db::prefix('Comments' . $sTable) . ' WHERE recipient = :recipient');
             $rStmt->bindParam(':recipient', $iRecipientId);
             $rStmt->execute();
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+            $oRow = $rStmt->fetch(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $iData = (int)$oRow->totalComments;
             unset($oRow);
             $this->cache->put($iData);
         }
+
         return $iData;
     }
 
@@ -116,8 +123,8 @@ class CommentCoreModel extends Framework\Mvc\Model\Engine\Model
 
         $iRecipientId = (int)$iRecipientId;
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Comments' . $sTable) . 'WHERE recipient = :recipient');
-        $rStmt->bindValue(':recipient', $iRecipientId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':recipient', $iRecipientId, PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
-
 }
