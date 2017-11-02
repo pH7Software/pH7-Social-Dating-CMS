@@ -46,11 +46,11 @@ class ChangePasswordCoreFormProcess extends Form
 
         // Check
         if ($this->httpRequest->post('new_password', Http::NO_CLEAN) !== $this->httpRequest->post('new_password2', Http::NO_CLEAN)) {
-            \PFBC\Form::setError('form_change_password', t('The passwords do not match.'));
+            \PFBC\Form::setError('form_change_password', t("The passwords don't match."));
         } elseif ($this->httpRequest->post('old_password', Http::NO_CLEAN) === $this->httpRequest->post('new_password', Http::NO_CLEAN)) {
-            \PFBC\Form::setError('form_change_password', t('The old and new passwords are identical. So why do you change your password?'));
+            \PFBC\Form::setError('form_change_password', t('Your current and new passwords are identical. So why do you want to change it?'));
         } elseif ($mLogin !== true) {
-            \PFBC\Form::setError('form_change_password', t('The old password is not correct.'));
+            \PFBC\Form::setError('form_change_password', t("Your current password isn't correct."));
         } else {
             // Regenerate the session ID to prevent session fixation attack
             $this->session->regenerateId();
