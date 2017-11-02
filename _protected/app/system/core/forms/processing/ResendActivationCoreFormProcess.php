@@ -29,10 +29,11 @@ class ResendActivationCoreFormProcess extends Form
             } else {
                 $iRet = $this->sendMail($mHash, $sTable);
 
-                if ($iRet)
+                if ($iRet) {
                     \PFBC\Form::setSuccess('form_resend_activation', t('Your activation link has been emailed to you.'));
-                else
+                } else {
                     \PFBC\Form::setError('form_resend_activation', Form::errorSendingEmail());
+                }
             }
         }
     }
