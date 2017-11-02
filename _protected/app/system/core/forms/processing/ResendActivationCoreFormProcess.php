@@ -40,13 +40,13 @@ class ResendActivationCoreFormProcess extends Form
     /**
      * Send the confirmation email.
      *
-     * @param object $oHash User data from the DB.
+     * @param \stdClass $oHash User data from the DB.
      * @param string $sTable Table name.
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail($oHash, $sTable)
     {
-        $sMod = ($sTable == 'Affiliates') ? 'affiliate' : 'user';
+        $sMod = ($sTable === 'Affiliates') ? 'affiliate' : 'user';
         $sActivateLink = Uri::get($sMod, 'account', 'activate') . PH7_SH . $oHash->email . PH7_SH . $oHash->hashValidation;
 
         $this->view->content = t('Welcome to %site_name%, %0%!', $oHash->firstName) . '<br />' .

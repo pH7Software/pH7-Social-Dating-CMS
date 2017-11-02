@@ -25,10 +25,10 @@ class DeleteUserCoreFormProcess extends Form
     {
         parent::__construct();
 
-        $this->sSessPrefix = ($this->registry->module == 'user') ? 'member' : 'affiliate';
+        $this->sSessPrefix = ($this->registry->module === 'user') ? 'member' : 'affiliate';
         $this->sUsername = $this->session->get($this->sSessPrefix . '_username');
         $this->sEmail = $this->session->get($this->sSessPrefix . '_email');
-        $sTable = ($this->registry->module == 'user') ? 'Members' : 'Affiliates';
+        $sTable = ($this->registry->module === 'user') ? 'Members' : 'Affiliates';
 
         $mLogin = (new UserCoreModel)->login($this->sEmail, $this->httpRequest->post('password', Http::NO_CLEAN), $sTable);
         if ($mLogin === 'password_does_not_exist') {
@@ -49,7 +49,7 @@ class DeleteUserCoreFormProcess extends Form
      */
     protected function sendWarnEmail()
     {
-        $sMembershipType = ($this->registry->module == 'affiliate') ? t('Affiliate') : t('Member');
+        $sMembershipType = ($this->registry->module === 'affiliate') ? t('Affiliate') : t('Member');
 
         $this->view->membership = t('User Type: %0%.', $sMembershipType);
         $this->view->message = nl2br($this->httpRequest->post('message'));
@@ -64,7 +64,7 @@ class DeleteUserCoreFormProcess extends Form
 
         $sMessageHtml = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/core/delete_account.tpl', DbConfig::getSetting('adminEmail'));
 
-        $sMembershipName = ($this->registry->module == 'user') ? t('Member') : t('Affiliate');
+        $sMembershipName = ($this->registry->module === 'user') ? t('Member') : t('Affiliate');
 
         /**
          * Set the details for sending the email, then send it.
@@ -83,7 +83,7 @@ class DeleteUserCoreFormProcess extends Form
      */
     protected function removeAccount()
     {
-        $oUserModel = ($this->registry->module == 'user') ? new UserCore : new AffiliateCore;
+        $oUserModel = ($this->registry->module === 'user') ? new UserCore : new AffiliateCore;
         $oUserModel->delete($this->session->get($this->sSessPrefix . '_id'), $this->sUsername);
         unset($oUserModel);
     }
