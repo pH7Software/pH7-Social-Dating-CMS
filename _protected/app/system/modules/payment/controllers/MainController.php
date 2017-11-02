@@ -132,7 +132,7 @@ class MainController extends Controller
                                 'amount' => Stripe::getAmount($sAmount),
                                 'currency' => $this->config->values['module.setting']['currency'],
                                 'source' => $this->httpRequest->post('stripeToken'),
-                                'description' => 'Membership charged for ' . $this->httpRequest->post('stripeEmail')
+                                'description' => t('Membership charged for %0%', $this->httpRequest->post('stripeEmail'))
                             ]
                         );
 
