@@ -60,4 +60,36 @@ class ChangePasswordCoreFormProcess extends Form
             \PFBC\Form::setSuccess('form_change_password', t('Your password has been successfully changed.'));
         }
     }
+
+    /**
+     * @return string
+     */
+    private function getUserEmail()
+    {
+        if ($this->registry->module === 'user') {
+            return $this->session->get('member_email');
+        }
+
+        if ($this->registry->module === PH7_ADMIN_MOD) {
+            return $this->session->get('admin_email');
+        }
+
+        return $this->session->get('affiliate_email');
+    }
+
+    /**
+     * @return string
+     */
+    private function getTableName()
+    {
+        if ($this->registry->module === 'user') {
+            return 'Members';
+        }
+
+        if ($this->registry->module === PH7_ADMIN_MOD) {
+            return 'Admins';
+        }
+
+        return 'Affiliates';
+    }
 }
