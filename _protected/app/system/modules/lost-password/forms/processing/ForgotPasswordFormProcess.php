@@ -34,10 +34,11 @@ class ForgotPasswordFormProcess extends Form
             (new UserCore)->clearReadProfileCache($iProfileId, $sTable); // Clean the profile data (for the new hash)
 
 
-            if (!$this->sendMail($sTable, $iProfileId))
+            if (!$this->sendMail($sTable, $iProfileId)) {
                 \PFBC\Form::setError('form_forgot_password', Form::errorSendingEmail());
-            else
+            } else {
                 \PFBC\Form::setSuccess('form_forgot_password', t('Password reset instructions sent to %0%', $sEmail));
+            }
         }
     }
 
