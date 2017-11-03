@@ -23,7 +23,8 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param string $sEmail
      * @param string $sTable Default is "Members"
-     * @return boolean
+     *
+     * @return bool
      */
     public function email($sEmail, $sTable = 'Members')
     {
@@ -36,7 +37,8 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param string $sUsername
      * @param string $sTable Default is "Members"
-     * @return boolean
+     *
+     * @return bool
      */
     public function username($sUsername, $sTable = 'Members')
     {
@@ -48,7 +50,8 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param integer $iId
      * @param string $sTable Default is "Members"
-     * @return boolean
+     *
+     * @return bool
      */
     public function id($iId, $sTable = 'Members')
     {
@@ -60,7 +63,8 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
      *
      * @param string $sAccount
      * @param string $sTable Default is "Affiliate"
-     * @return boolean
+     *
+     * @return bool
      */
     public function bankAccount($sAccount, $sTable = 'Affiliates')
     {
@@ -70,13 +74,13 @@ class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
     /**
      * Generic method to check if the field exists and with the check \PH7\Framework\Mvc\Model\Engine\Util\Various::checkModelTable() method.
      *
-     * @access protected
      * @param string $sColumn
      * @param string $sValue
      * @param string $sTable
      * @param string $sType PDO PARAM TYPE (\PDO::PARAM_*). Default is \PDO::PARAM_STR
      * @param string $sParam Optional WHERE parameter SQL.
-     * @return boolean Returns TRUE if it exists, FALSE otherwise.
+     *
+     * @return bool Returns TRUE if it exists, FALSE otherwise.
      */
     protected function _is($sColumn, $sValue, $sTable, $sType = null, $sParam = null)
     {
