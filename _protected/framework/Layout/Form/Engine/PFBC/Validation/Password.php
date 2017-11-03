@@ -23,7 +23,10 @@ class Password extends \PFBC\Validation
 
     public function isValid($sValue)
     {
-        if ($this->isNotApplicable($sValue)) return true;
+        if ($this->isNotApplicable($sValue)) {
+            return true;
+        }
+
         return $this->oValidate->password($sValue, $this->iMin, $this->iMax);
     }
 }
