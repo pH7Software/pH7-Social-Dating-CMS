@@ -117,9 +117,7 @@ class Bootstrap
         } catch (\Exception $oE) {
             Except\PH7Exception::launch($oE);
         } finally {
-            if (session_status() === PHP_SESSION_ACTIVE) {
-                session_write_close();
-            }
+            $this->closeAppSession();
         }
     }
 
@@ -162,6 +160,18 @@ class Bootstrap
     private function startPageBenchmark()
     {
         Registry::getInstance()->start_time = microtime(true);
+    }
+
+    /**
+     * If sessions status are enabled, writes session data and ends session.
+     *
+     * @return void
+     */
+    private function closeAppSession()
+    {
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_write_close();
+        }
     }
 
     /**
