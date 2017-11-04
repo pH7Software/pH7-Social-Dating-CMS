@@ -76,6 +76,7 @@ class Compress
     {
         $sPhp = preg_replace('#/\*.*+\*#', '', $sPhp); # Removing PHP comments
         $sPhp = $this->parseHtml($sPhp);
+
         return $sPhp;
     }
 
