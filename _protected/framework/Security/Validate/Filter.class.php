@@ -4,7 +4,7 @@ namespace PH7\Framework\Security\Validate;
 defined('PH7') or exit('Restricted access');
 
 /**
- * NOTE: This script has been modified by P.H. Soria pH7 Developers Team.
+ * NOTE: This script has been modified by Pierre-Henry Soria
  *
  * - We accept the HTML tag "style" for the functioning of "CKEditor" and "TinyMCE".
  *
@@ -836,7 +836,8 @@ class Filter
                 return $this->_csrf_hash = $_COOKIE[$this->_csrf_cookie_name];
             }
 
-            return $this->_csrf_hash = md5(uniqid(rand(), TRUE));
+            $sPrefix = (string)mt_rand();
+            return $this->_csrf_hash = md5(uniqid($sPrefix, true));
         }
 
         return $this->_csrf_hash;

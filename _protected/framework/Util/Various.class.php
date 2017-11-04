@@ -32,8 +32,9 @@ class Various
      */
     public static function genRnd($sStr = null, $iLength = self::MAX_LENGTH)
     {
+        $sPrefix = (string)mt_rand();
         $sStr = (!empty($sStr)) ? (string)$sStr : '';
-        $sChars = hash('whirlpool', hash('whirlpool', uniqid(mt_rand(), true) . $sStr . Ip::get() . time()) . hash('sha512', (new Browser)->getUserAgent() . microtime(true) * 9999));
+        $sChars = hash('whirlpool', hash('whirlpool', uniqid($sPrefix, true) . $sStr . Ip::get() . time()) . hash('sha512', (new Browser)->getUserAgent() . microtime(true) * 9999));
         return self::padStr($sChars, $iLength);
     }
 

@@ -273,7 +273,9 @@ function clean_string($sVal)
  */
 function generate_hash($iLength = 80)
 {
-    return substr(hash('whirlpool', time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid(mt_rand(), true) . microtime(true) * 999999999999)), 0, $iLength);
+    $sPrefix = (string)mt_rand();
+
+    return substr(hash('whirlpool', time() . hash('sha512', getenv('REMOTE_ADDR') . uniqid($sPrefix, true) . microtime(true) * 999999999999)), 0, $iLength);
 }
 
 /**
