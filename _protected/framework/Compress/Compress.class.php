@@ -88,9 +88,12 @@ class Compress
         $sHtml = preg_replace('/>[\s]+</', '> <', $sHtml); # Remove new lines, spaces, tabs
         $sHtml = preg_replace('/[\s]+/', ' ', $sHtml); # Remove new lines, spaces, tabs
         $sHtml = preg_replace('#(?ix)(?>[^\S ]\s*|\s{2,})(?=(?:(?:[^<]++|<(?!/?(?:textarea|pre)\b))*+)(?:<(?>textarea|pre)\b|\z))#', '', $sHtml);
-        if (!empty($aPre[0]))
-            foreach ($aPre[0] as $sTag)
+        if (!empty($aPre[0])) {
+            foreach ($aPre[0] as $sTag) {
                 $sHtml = preg_replace('!#pre#!', $sTag, $sHtml, 1);# Putting back pre|code tags
+            }
+        }
+
         return $sHtml;
     }
 
