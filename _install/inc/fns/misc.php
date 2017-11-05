@@ -233,12 +233,13 @@ function remove_install_dir()
  */
 function client_ip()
 {
-    if (!empty($_SERVER['HTTP_CLIENT_IP']))
+    $sIp = $_SERVER['REMOTE_ADDR']; // Default value
+
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         $sIp = $_SERVER['HTTP_CLIENT_IP'];
-    elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
         $sIp = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    else
-        $sIp = $_SERVER['REMOTE_ADDR'];
+    }
 
     return preg_match('/^[a-z0-9:.]{7,}$/', $sIp) ? $sIp : '0.0.0.0';
 }
