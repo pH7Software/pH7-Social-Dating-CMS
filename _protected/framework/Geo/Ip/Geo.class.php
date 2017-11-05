@@ -123,14 +123,15 @@ class Geo
      */
     protected static function get($sIpAddress = null)
     {
-        $sIpAddr = (!empty($sIpAddress) ? $sIpAddress : Ip::get());
+        $sIpAddr = ($sIpAddress !== null ? $sIpAddress : Ip::get());
 
-        if ($sIpAddr == '127.0.0.1') {
+        if ($sIpAddr === Ip::DEFAULT_IP) {
             // Set a valid IP address, if it's the invalid local one
             $sIpAddr = self::DEFAULT_VALID_IP;
         }
 
         $oReader = new Reader(__DIR__ . '/GeoLite2-City.mmdb');
+
         return @$oReader->city($sIpAddr);
     }
 
