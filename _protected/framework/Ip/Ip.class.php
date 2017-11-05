@@ -19,6 +19,7 @@ use PH7\Framework\Server\Server;
 
 class Ip
 {
+    const DEFAULT_IP = '127.0.0.1';
     const IP_PATTERN = '[a-z0-9:.]{7,}';
 
     /**
@@ -35,10 +36,10 @@ class Ip
         }
 
         if (static::isPrivate($sIp)) {
-            $sIp = '127.0.0.1'; // Avoid invalid local IP for GeoIp
+            $sIp = static::DEFAULT_IP; // Avoid invalid local IP for GeoIp
         }
 
-        return preg_match('/^' . static::IP_PATTERN . '$/', $sIp) ? $sIp : '127.0.0.1';
+        return preg_match('/^' . static::IP_PATTERN . '$/', $sIp) ? $sIp : static::DEFAULT_IP;
     }
 
     /**
