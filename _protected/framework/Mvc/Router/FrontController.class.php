@@ -36,6 +36,7 @@ use PH7\Framework\Url\Uri;
  */
 final class FrontController
 {
+    const PROJECT_NAMESPACE = 'PH7\\';
     const INDEX_FILE = 'index.php';
 
     const REGEX_MODULE_FORMAT = '#^[a-z0-9\.\-_]+$#i';
@@ -554,23 +555,20 @@ final class FrontController
 
         if (is_file($this->oRegistry->path_module_controllers . $this->oRegistry->controller . '.php')) {
             // For additional options modules
-            if (is_file($this->oRegistry->path_module . 'Bootstrap.php'))
+            if (is_file($this->oRegistry->path_module . 'Bootstrap.php')) {
                 require_once $this->oRegistry->path_module . 'Bootstrap.php'; // Include Bootstrap Module if there exists
+            }
 
-            $sController = 'PH7\\' . $this->oRegistry->controller;
+            $sController = self::PROJECT_NAMESPACE . $this->oRegistry->controller;
             if (class_exists($sController) && (new \ReflectionClass($sController))->hasMethod($this->oRegistry->action)) {
                 $oMvc = new \ReflectionMethod($sController, $this->oRegistry->action);
                 if ($oMvc->isPublic()) {
-                    $oCtrl = new $sController;
-
                     // And finally we perform the controller's action
-                    $oMvc->invokeArgs($oCtrl, $this->getRequestParameter());
-
-                    // Destruct the object to minimize CPU resources
-                    unset($oCtrl);
+                    $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
                 } else {
                     $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
                 }
+                unset($oMvc); // Destruct the object to minimize CPU resources
             } else {
                 $this->notFound('The <b>' . $this->oRegistry->action . '</b> method of the <b>' . $this->oRegistry->controller . '</b> controller does not exist.', 1);
             }
