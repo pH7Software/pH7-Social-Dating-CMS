@@ -70,7 +70,7 @@ class SubscriptionFormProcess extends Form
     }
 
     /**
-     * Send confirm email.
+     * Send a email to confirm their email address.
      *
      * @param array $aData The data details.
      *
