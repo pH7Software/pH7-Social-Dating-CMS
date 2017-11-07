@@ -15,6 +15,7 @@ namespace PH7\Framework\Loader;
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Pattern\Singleton;
+use function PH7\html_body;
 
 /**
  * We include the Singleton trait before use, because at this stage the class can not load the trait automatically.
@@ -141,6 +142,6 @@ final class Autoloader
 <p>Oops! It seems you downloaded pH7CMS from Github. We don't include third-party libraries on Github.<br />
 Please <strong><a href="{$sInstallComposerLink}" target="_blank" rel="noopener">read those instructions</a></strong> to install the third-party libraries or download it from <strong><a href="{$sDownloadLink}" target="_blank" rel="noopener">Sourceforge</a></strong> if you don't want to download the third-party libraries.</p>'
 HTML;
-        echo \PH7\html_body('You need to run Composer', $sMsg);
+        echo html_body('You need to run Composer', $sMsg);
     }
 }
