@@ -16,6 +16,8 @@ namespace PH7\Framework\Mvc\Router;
 
 defined('PH7') or exit('Restricted access');
 
+use DomDocument;
+use PDO;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Error\CException\PH7Exception;
 use PH7\Framework\File\Import as FileImporter;
@@ -30,6 +32,9 @@ use PH7\Framework\Registry\Registry;
 use PH7\Framework\Translate\Lang;
 use PH7\Framework\Url\Header;
 use PH7\Framework\Url\Uri;
+use ReflectionClass;
+use ReflectionException;
+use ReflectionMethod;
 
 /**
  * @class Singleton Class
@@ -118,10 +123,12 @@ final class FrontController
 
     /**
      *  Router for the modules that are rewriting through the custom XML route file.
+     *
+     * @throws \PH7\Framework\File\Exception If the XML route file is not found.
      */
     private function launchRewritingRouter()
     {
-        $oUrl = UriRoute::loadFile(new \DomDocument);
+        $oUrl = UriRoute::loadFile(new DomDocument);
 
         foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
             if (preg_match('`^' . $oRoute->getAttribute('url') . self::REGEX_URL_EXTRA_OPTIONS . '$`', $this->oHttpRequest->requestUri(), $aMatches)) {
@@ -306,7 +313,7 @@ final class FrontController
      */
     public function _databaseInitialize()
     {
-        $aDriverOptions[\PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $this->oConfig->values['database']['charset'];
+        $aDriverOptions[PDO::MYSQL_ATTR_INIT_COMMAND] = 'SET NAMES ' . $this->oConfig->values['database']['charset'];
 
         /* DSN */
         Db::getInstance(
@@ -541,7 +548,7 @@ final class FrontController
      *
      * @return void
      *
-     * @throws \ReflectionException If the class or method doesn't exist.
+     * @throws ReflectionException If the class or method doesn't exist.
      */
     public function runRouter()
     {
