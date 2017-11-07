@@ -34,7 +34,7 @@ final class Autoloader
     use Singleton;
 
     /**
-     * We do not put a "__construct" and "__clone" "private" because it is already done in the \PH7\Framework\Pattern\Statik trait which is included in the \PH7\Framework\Pattern\Singleton trait.
+     * We do not put a "__construct" and "__clone" "private" because it is already done in \PH7\Framework\Pattern\Statik trait which is included in \PH7\Framework\Pattern\Singleton trait.
      */
 
 
