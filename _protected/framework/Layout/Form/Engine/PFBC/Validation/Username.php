@@ -22,7 +22,7 @@ class Username extends Validation
         $this->sTable = $sTable;
         $this->iMin = DbConfig::getSetting('minUsernameLength');
         $this->iMax = DbConfig::getSetting('maxUsernameLength');
-        $this->message = t('Error: Username has to contain %0% to %1% characters, or is not available or it is already used by other user.', $this->iMin, $this->iMax);
+        $this->message = t('Error: Username has to be from %0% to %1% characters long, or it is not available or already used by other user.', $this->iMin, $this->iMax);
     }
 
     public function isValid($sValue)
