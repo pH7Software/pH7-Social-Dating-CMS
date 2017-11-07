@@ -8,7 +8,6 @@ namespace PFBC\Element;
 
 class Country extends Select
 {
-
     public function __construct($sLabel, $sName, array $aProperties = null)
     {
         $aOptions = array();
@@ -19,5 +18,4 @@ class Country extends Select
 
         parent::__construct($sLabel, $sName, $aOptions, $aProperties);
     }
-
 }
