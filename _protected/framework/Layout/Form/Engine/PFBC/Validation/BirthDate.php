@@ -17,7 +17,7 @@ class BirthDate extends \PFBC\Validation
 
         $this->iMin = DbConfig::getSetting('minAgeRegistration');
         $this->iMax = DbConfig::getSetting('maxAgeRegistration');
-        $this->message = t('You must be %0% to %1% years to register on the site.', $this->iMin, $this->iMax);
+        $this->message = t('You must be from %0% to %1% years old to join the service.', $this->iMin, $this->iMax);
     }
 
     /**
