@@ -10,6 +10,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 // If php.ini is inadequate, we fix it.

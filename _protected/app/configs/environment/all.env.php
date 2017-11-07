@@ -11,6 +11,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 ini_set('log_errors', 'On');
