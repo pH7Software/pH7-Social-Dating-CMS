@@ -569,17 +569,21 @@ final class FrontController
             }
 
             $sController = self::PROJECT_NAMESPACE . $this->oRegistry->controller;
-            if (class_exists($sController) && (new \ReflectionClass($sController))->hasMethod($this->oRegistry->action)) {
-                $oMvc = new \ReflectionMethod($sController, $this->oRegistry->action);
-                if ($oMvc->isPublic()) {
-                    // And finally we perform the controller's action
-                    $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
+            try {
+                if (class_exists($sController) && (new ReflectionClass($sController))->hasMethod($this->oRegistry->action)) {
+                    $oMvc = new ReflectionMethod($sController, $this->oRegistry->action);
+                    if ($oMvc->isPublic()) {
+                        // And finally we perform the controller's action
+                        $oMvc->invokeArgs(new $sController, $this->getRequestParameter());
+                    } else {
+                        $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
+                    }
+                    unset($oMvc); // Destruct the object to minimize CPU resources
                 } else {
-                    $this->notFound('The <b>' . $this->oRegistry->action . '</b> method is not public!', 1);
+                    $this->notFound('The <b>' . $this->oRegistry->action . '</b> method of the <b>' . $this->oRegistry->controller . '</b> controller does not exist.', 1);
                 }
-                unset($oMvc); // Destruct the object to minimize CPU resources
-            } else {
-                $this->notFound('The <b>' . $this->oRegistry->action . '</b> method of the <b>' . $this->oRegistry->controller . '</b> controller does not exist.', 1);
+            } catch (ReflectionException $oExcept) {
+                $this->notFound($oExcept->getMessage());
             }
         } else {
             $this->notFound('The <b>' . $this->oRegistry->controller . '</b> controller of the <b>' . $this->oRegistry->module .
