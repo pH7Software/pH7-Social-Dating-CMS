@@ -41,7 +41,7 @@ Options +FollowSymLinks
 ServerSignature Off
 
 # Deny access to all CGI, Perl, Python, Bash, SQL, Template, INI configuration, cache, log, temporary and text files
-<FilesMatch "\.(cgi|pl|py|sh|bash|ql|tpl|ini|cache|log|tmp|txt)">
+<FilesMatch "\.(cgi|pl|py|sh|bash|sql|tpl|ini|cache|log|tmp|txt)">
     Deny from all
 </FilesMatch>
 
