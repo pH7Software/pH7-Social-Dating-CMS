@@ -189,7 +189,7 @@ class ProfileController extends Controller
     /**
      * Privacy Profile.
      *
-     * @param \PH7\UserModel $oUserModel
+     * @param UserModel $oUserModel
      *
      * @return void
      */
