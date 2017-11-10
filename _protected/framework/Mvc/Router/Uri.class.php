@@ -39,18 +39,7 @@ class Uri
      */
     public static function loadFile(DOMDocument $oDom)
     {
-        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . '.xml';
-        $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . '.xml';
-
-        if (is_file($sPathLangName)) {
-            $sRoutePath = $sPathLangName;
-        } elseif (is_file($sPathDefaultLang)) {
-            $sRoutePath = $sPathDefaultLang;
-        } else {
-            throw new FileException('File route xml not found: ' . $sPathDefaultLang);
-        }
-
-        $sContents = file_get_contents($sRoutePath); // Get the XML contents
+        $sContents = file_get_contents(static::getRouteFilePath()); // Get the XML contents
         $sContents = static::parseVariable($sContents); // Parse the variables
         $oDom->loadXML($sContents); // Load the XML contents
 
@@ -109,6 +98,26 @@ class Uri
         unset($oUrl);
 
         return PH7_URL_ROOT . "$sModule/$sController/$sAction$sVars";
+    }
+
+    /**
+     * @return string XML route filename.
+     *
+     * @throws FileException If the file is not found.
+     */
+    private static function getRouteFilePath() {
+        $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . '.xml';
+        $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . '.xml';
+
+        if (is_file($sPathLangName)) {
+            return $sPathLangName;
+        }
+
+        if (is_file($sPathDefaultLang)) {
+            return $sPathDefaultLang;
+        }
+
+        throw new FileException('File route xml not found: ' . $sPathDefaultLang);
     }
 
     /**
