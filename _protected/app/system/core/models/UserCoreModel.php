@@ -123,7 +123,7 @@ class UserCoreModel extends Model
      * @param int $iProfileId The user ID
      * @param string $sTable Default 'Members'
      *
-     * @return stdClass The data of a member
+     * @return stdClass|bool The data of a member if exists, FALSE otherwise.
      */
     public function readProfile($iProfileId, $sTable = 'Members')
     {
