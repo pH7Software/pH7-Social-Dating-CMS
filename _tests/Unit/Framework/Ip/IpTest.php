@@ -9,15 +9,16 @@
 namespace PH7\Test\Unit\Framework\Ip;
 
 use PH7\Framework\Ip\Ip;
+use PHPUnit_Framework_TestCase;
 
-class IpTest extends \PHPUnit_Framework_TestCase
+class IpTest extends PHPUnit_Framework_TestCase
 {
     public function testInvalidIpAddress()
     {
-        $_SERVER['REMOTE_ADDR'] = '1222222222233';
+        $_SERVER['REMOTE_ADDR'] = '122222';
 
-        // When it's an invald IP, it musts return "127.0.0.1" instead
-        $this->assertEquals('127.0.0.1', Ip::get());
+        // When it's an invalid IP, it musts return "127.0.0.1" instead
+        $this->assertSame('127.0.0.1', Ip::get());
     }
 
     public function testPrivateIpAddress()
