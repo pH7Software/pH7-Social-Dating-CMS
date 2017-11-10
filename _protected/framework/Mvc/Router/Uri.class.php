@@ -62,14 +62,16 @@ class Uri
      * @param string $sController
      * @param string $sAction
      * @param string $sVars Default NULL
-     * @param boolean $bFullClean Default TRUE
+     * @param bool $bFullClean Default TRUE
      *
      * @return string
+     *
+     * @throws FileException
      */
     public static function get($sModule, $sController, $sAction, $sVars = null, $bFullClean = true)
     {
-        static::$_bFullClean = $bFullClean;
-        $sUrl = static::_uri(array('module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars));
+        static::$bFullClean = $bFullClean;
+        $sUrl = static::uri(['module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars]);
         return $sUrl;
     }
 
