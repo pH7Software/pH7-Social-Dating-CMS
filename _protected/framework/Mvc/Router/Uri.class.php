@@ -82,26 +82,13 @@ class Uri
      *
      * @throws FileException If the XML file is not found.
      */
-    private static function _uri(array $aParams)
+    private static function uri(array $aParams)
     {
         $sModule = $aParams['module'];
         $sController = $aParams['controller'];
         $sAction = $aParams['action'];
-        $sVars = ''; // Default value
 
-        if (!empty($aParams['vars'])) {
-            // Omit the commas which may be part of a sentence in the URL parameters
-            $aParams['vars'] = str_replace(array(', ', ' ,'), '', $aParams['vars']);
-
-            $aVars = explode(',', $aParams['vars']);
-            foreach ($aVars as $sVar) {
-                $sVars .= PH7_SH . $sVar;
-            }
-            unset($aVars);
-
-            $sVars = Url::clean($sVars, static::$_bFullClean);
-
-        }
+        $sVars = !empty($aParams['vars']) ? self::getVariables($aParams['vars']) : '';
 
         $oUrl = static::loadFile(new DOMDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
@@ -146,5 +133,25 @@ class Uri
         $sContents = str_replace('[$admin_mod]', PH7_ADMIN_MOD, $sContents);
 
         return $sContents;
+    }
+
+    /**
+     * @param string $sVariables
+     *
+     * @return string
+     */
+    private static function getVariables($sVariables)
+    {
+        // Omit commas which may be part of a sentence in the URL parameters
+        $sVariables = str_replace([', ', ' ,'], '', $sVariables);
+
+        $sVars = '';
+        $aVars = explode(',', $sVariables);
+        foreach ($aVars as $sVar) {
+            $sVars .= PH7_SH . $sVar;
+        }
+        unset($aVars);
+
+        return Url::clean($sVars, static::$bFullClean);
     }
 }
