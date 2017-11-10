@@ -293,7 +293,7 @@ namespace PH7\Framework\Str {
          */
         public function escape($mText, $bStrip = false)
         {
-            return (is_array($mText)) ? $this->arrayEscape($mText, $bStrip) : $this->cEscape($mText, $bStrip);
+            return is_array($mText) ? $this->arrayEscape($mText, $bStrip) : $this->cEscape($mText, $bStrip);
         }
 
         /**
