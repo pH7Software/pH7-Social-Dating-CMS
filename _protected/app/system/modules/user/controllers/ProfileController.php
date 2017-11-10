@@ -71,7 +71,7 @@ class ProfileController extends Controller
         // Read the Profile information
         $oUser = $oUserModel->readProfile($this->iProfileId);
 
-        if (!empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username)) {
+        if ($this->doesProfileExist($oUser)) {
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
                 $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
@@ -341,10 +341,20 @@ class ProfileController extends Controller
     private function getMutualFriendLinkName()
     {
         $iNbMutFriend = (new FriendCoreModel)->get($this->iVisitorId, $this->iProfileId, null, true, null, null, null, null);
-        $sNbMutFriend = ($iNbMutFriend > 0) ? ' (' . $iNbMutFriend . ')' : '';
-        $sMutFriendTxt = ($iNbMutFriend <= 1) ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
+        $sNbMutFriend = $iNbMutFriend > 0 ? ' (' . $iNbMutFriend . ')' : '';
+        $sMutFriendTxt = $iNbMutFriend <= 1 ? ($iNbMutFriend == 1) ? t('Mutual Friend:') : t('No Mutual Friends') : t('Mutuals Friends:');
 
         return $sMutFriendTxt . $sNbMutFriend;
+    }
+
+    /**
+     * @param stdClass $oUser
+     *
+     * @return bool
+     */
+    private function doesProfileExist(stdClass $oUser)
+    {
+        return !empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username);
     }
 
     /**
