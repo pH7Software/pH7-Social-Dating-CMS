@@ -88,7 +88,7 @@ class Uri
         $sController = $aParams['controller'];
         $sAction = $aParams['action'];
 
-        $sVars = !empty($aParams['vars']) ? self::getVariables($aParams['vars']) : '';
+        $sVars = self::areVariablesSet($aParams) ? self::getVariables($aParams['vars']) : '';
 
         $oUrl = static::loadFile(new DOMDocument);
         foreach ($oUrl->getElementsByTagName('route') as $oRoute) {
@@ -133,6 +133,16 @@ class Uri
         $sContents = str_replace('[$admin_mod]', PH7_ADMIN_MOD, $sContents);
 
         return $sContents;
+    }
+
+    /**
+     * @param array $aParams
+     *
+     * @return bool
+     */
+    private static function areVariablesSet(array $aParams)
+    {
+        return !empty($aParams['vars']);
     }
 
     /**
