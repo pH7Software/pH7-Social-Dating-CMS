@@ -84,14 +84,14 @@ class ProfileController extends Controller
 
             unset($oUserModel);
 
-            $sFirstName = (!empty($oUser->firstName)) ? $this->str->escape($this->str->upperFirst($oUser->firstName), true) : '';
-            $sLastName = (!empty($oUser->lastName)) ? $this->str->escape($this->str->upperFirst($oUser->lastName), true) : '';
-            $sMiddleName = (!empty($oFields->middleName)) ? $this->str->escape($this->str->upperFirst($oFields->middleName), true) : '';
+            $sFirstName = !empty($oUser->firstName) ? $this->str->escape($this->str->upperFirst($oUser->firstName), true) : '';
+            $sLastName = !empty($oUser->lastName) ? $this->str->escape($this->str->upperFirst($oUser->lastName), true) : '';
+            $sMiddleName = !empty($oFields->middleName) ? $this->str->escape($this->str->upperFirst($oFields->middleName), true) : '';
 
-            $sCountry = (!empty($oFields->country)) ? $oFields->country : '';
-            $sCity = (!empty($oFields->city)) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
-            $sState = (!empty($oFields->state)) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
-            $sDescription = (!empty($oFields->description)) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
+            $sCountry = !empty($oFields->country) ? $oFields->country : '';
+            $sCity = !empty($oFields->city) ? $this->str->escape($this->str->upperFirst($oFields->city), true) : '';
+            $sState = !empty($oFields->state) ? $this->str->escape($this->str->upperFirst($oFields->state), true) : '';
+            $sDescription = !empty($oFields->description) ? Emoticon::init(Ban::filterWord($oFields->description)) : '';
 
             // Age
             $this->view->birth_date = $oUser->birthDate;
@@ -329,8 +329,8 @@ class ProfileController extends Controller
     private function getFriendLinkName()
     {
         $iNbFriend = FriendCoreModel::total($this->iProfileId);
-        $sNbFriend = ($iNbFriend > 0) ? ' (' . $iNbFriend . ')' : '';
-        $sFriendTxt = ($iNbFriend <= 1) ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') : t('Friends:');
+        $sNbFriend = $iNbFriend > 0 ? ' (' . $iNbFriend . ')' : '';
+        $sFriendTxt = $iNbFriend <= 1 ? ($iNbFriend == 1) ? t('Friend:') : t('No Friends') : t('Friends:');
 
         return $sFriendTxt . $sNbFriend;
     }
