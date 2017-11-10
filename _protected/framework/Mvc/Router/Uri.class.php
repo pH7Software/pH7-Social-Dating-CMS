@@ -117,7 +117,7 @@ class Uri
             return $sPathDefaultLang;
         }
 
-        throw new FileException('File route xml not found: ' . $sPathDefaultLang);
+        throw new FileException('XML route file not found: ' . $sPathDefaultLang);
     }
 
     /**
