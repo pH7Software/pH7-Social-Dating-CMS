@@ -26,13 +26,13 @@ class IpTest extends PHPUnit_Framework_TestCase
         $_SERVER['REMOTE_ADDR'] = '172.16.0.0';
 
         // When it's private IP, it musts return "127.0.0.1" instead
-        $this->assertEquals('127.0.0.1', Ip::get());
+        $this->assertSame('127.0.0.1', Ip::get());
     }
 
     public function testValidIpAddress()
     {
         $_SERVER['REMOTE_ADDR'] = '108.170.3.142';
-        $this->assertEquals('108.170.3.142', Ip::get());
+        $this->assertSame('108.170.3.142', Ip::get());
     }
 
     public function testIsPrivate()
@@ -44,4 +44,4 @@ class IpTest extends PHPUnit_Framework_TestCase
     {
         $this->assertFalse(Ip::isPrivate('52.53.189.95'));
     }
- }
+}
