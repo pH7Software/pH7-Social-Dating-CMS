@@ -19,10 +19,8 @@ use PH7\Framework\Pattern\Statik;
 
 class Uri
 {
-    /**
-     * @staticvar boolean $_bFullClean If you need to completely clean URL.
-     */
-    private static $_bFullClean;
+    /** @var bool */
+    private static $bFullClean;
 
     /**
      * Import the trait to set the class static.
@@ -53,7 +51,7 @@ class Uri
         }
 
         $sContents = file_get_contents($sRoutePath); // Get the XML contents
-        $sContents = static::_parseVariable($sContents); // Parse the variables
+        $sContents = static::parseVariable($sContents); // Parse the variables
         $oDom->loadXML($sContents); // Load the XML contents
 
         return $oDom;
@@ -131,7 +129,7 @@ class Uri
      *
      * @return string The contents parsed.
      */
-    private static function _parseVariable($sContents)
+    private static function parseVariable($sContents)
     {
         /**
          * Replace the "[$page_ext]" variable by the "PH7_PAGE_EXT" constant.
