@@ -74,6 +74,9 @@ class CountryController extends Controller
         $this->output();
     }
 
+    /**
+     * @return string
+     */
     private function getCountryCode()
     {
         $sCountryCode = CArray::getKeyByValIgnoreCase($this->registry->country, $this->registry->lang);
@@ -86,11 +89,17 @@ class CountryController extends Controller
     }
 
 
+    /**
+     * @return string
+     */
     private function getCountry()
     {
         return str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('country')), 0, self::MAX_COUNTRY_LENGTH));
     }
 
+    /**
+     * @return string
+     */
     private function getCity()
     {
         return str_replace('-', ' ', substr($this->str->upperFirst($this->httpRequest->get('city')), 0, self::MAX_CITY_LENGTH));
