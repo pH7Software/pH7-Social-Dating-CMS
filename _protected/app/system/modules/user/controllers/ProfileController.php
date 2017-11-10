@@ -71,7 +71,7 @@ class ProfileController extends Controller
         // Read the Profile information
         $oUser = $oUserModel->readProfile($this->iProfileId);
 
-        if ($this->doesProfileExist($oUser)) {
+        if ($oUser && $this->doesProfileExist($oUser)) {
             // The administrators can view all profiles and profile visits are not saved.
             if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
                 $this->initPrivacy($oUserModel, $this->iProfileId, $this->iVisitorId);
