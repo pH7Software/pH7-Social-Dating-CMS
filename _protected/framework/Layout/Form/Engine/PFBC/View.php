@@ -60,6 +60,7 @@ CSS;
         $label = $element->getLabel();
         $id = $element->getID();
         $description = $element->getDescription();
+
         if (!empty($label) || !empty($description)) {
             echo '<div class="pfbc-label">';
             if (!empty($label)) {

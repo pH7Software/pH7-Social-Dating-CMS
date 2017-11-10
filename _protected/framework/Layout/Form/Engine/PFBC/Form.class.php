@@ -56,11 +56,13 @@ class Form extends Base
 
         /*The Standard view class is applied by default and will be used unless a different view is
         specified in the form's configure method*/
-        if (empty($this->view))
+        if (empty($this->view)) {
             $this->view = new View\CStandard;
+        }
 
-        if (empty($this->error))
+        if (empty($this->error)) {
             $this->error = new Error\Standard;
+        }
 
         $this->resourcesPath = PH7_URL_STATIC . 'PFBC';
     }
@@ -85,25 +87,30 @@ class Form extends Base
             if (!empty($form->elements)) {
                 foreach ($form->elements as $element) {
                     $name = $element->getName();
-                    if (substr($name, -2) == '[]')
+                    if (substr($name, -2) == '[]') {
                         $name = substr($name, 0, -2);
+                    }
 
                     /*The File element must be handled differently b/c it uses the $_FILES superglobal and
                     not $_GET or $_POST.*/
-                    if ($element instanceof Element\File)
+                    if ($element instanceof Element\File) {
                         $data[$name] = $_FILES[$name]['name'];
+                    }
 
                     if (isset($data[$name])) {
                         $value = $data[$name];
                         if (is_array($value)) {
                             $valueSize = sizeof($value);
-                            for ($v = 0; $v < $valueSize; ++$v)
+                            for ($v = 0; $v < $valueSize; ++$v) {
                                 $value[$v] = stripslashes($value[$v]);
-                        } else
+                            }
+                        } else {
                             $value = stripslashes($value);
+                        }
                         self::setSessionValue($id, $name, $value);
-                    } else
+                    } else {
                         $value = null;
+                    }
 
                     /*If a validation error is found, the error message is saved in the session along with
                     the element's name.*/
@@ -116,8 +123,9 @@ class Form extends Base
 
             /*If no validation errors were found, the form's session values are cleared.*/
             if ($valid) {
-                if ($clearValues)
+                if ($clearValues) {
                     self::clearValues($id);
+                }
                 self::clearErrors($id);
             }
         } else {
@@ -380,8 +388,9 @@ class Form extends Base
         echo '<style scoped="scoped">';
         $this->view->renderCSS();
         $this->error->renderCSS();
-        foreach ($this->elements as $element)
+        foreach ($this->elements as $element) {
             $element->renderCSS();
+        }
         echo '</style>';
     }
 
@@ -390,8 +399,9 @@ class Form extends Base
         $this->renderJSFiles();
         echo '<script>';
         $this->view->renderJS();
-        foreach ($this->elements as $element)
+        foreach ($this->elements as $element) {
             $element->renderJS();
+        }
 
         $id = $this->attributes['id'];
 
@@ -402,8 +412,9 @@ class Form extends Base
         if (!in_array('jQueryUIButtons', $this->prevent)) {
             echo 'jQuery(this).find("button[type=submit]").button("disable");';
             echo 'jQuery(this).find("button[type=submit] span.ui-button-text").css("padding-right", "2.1em").append(\'<img class="pfbc-loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAIiIiAAAAGdnZyMjIwAAADQ0NEVFRU5OTiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" alt="Loading..."/>\');';
-        } else
+        } else {
             echo 'jQuery(this).find("button[type=submit]").attr("disabled", "disabled");';
+        }
         echo '});';
 
         /*jQuery is used to set the focus of the form's initial element.*/
@@ -480,8 +491,9 @@ JS;
          */
         foreach ($this->elements as $element) {
             $elementUrls = $element->getJSFiles();
-            if (is_array($elementUrls))
+            if (is_array($elementUrls)) {
                 $urls = array_merge($urls, $elementUrls);
+            }
         }
 
         /*This section prevents duplicate css files from being loaded.*/
