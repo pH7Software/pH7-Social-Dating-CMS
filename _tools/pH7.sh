@@ -155,13 +155,13 @@ function file-strict-permissions() {
 # Push the project into GitHub and Bitbucket repos
 function save-code() {
     # Bitbucket repo
-    _save-git-project-to-repo git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
+    _save-project-to-repo git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
 
     # GitLab repo
-    _save-git-project-to-repo git@gitlab.com:pH-7/pH7CMS.git
+    _save-project-to-repo git@gitlab.com:pH-7/pH7CMS.git
 
     # GitHub repo
-    _save-git-project-to-repo git@github.com:pH7Software/pH7-Social-Dating-CMS.git
+    _save-project-to-repo git@github.com:pH7Software/pH7-Social-Dating-CMS.git
 
     echo "Yaaay! Changes successfully saved into remote repos!"
 }
@@ -231,7 +231,7 @@ function _cache-permissions() {
 }
 
 # Save a git project to the specified repo (e.g. github, bitbucket)
-function _save-git-project-to-repo() {
+function _save-project-to-repo() {
     git remote rm origin
     git remote add origin $1
     git push
