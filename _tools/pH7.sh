@@ -209,7 +209,7 @@ extra_empty_lines,encoding
     find . -type f -name "*.php" -exec php $cs_script fix {} --fixers=$indents \;
 }
 
-# CHange permissions of the folders/files (CHMOD)
+# Change permissions of the folders/files (CHMOD)
 function _permissions() {
     find . -type f -print0 | sudo xargs -0 chmod $1 # First parameter for Files
     find . -type d -print0 | sudo xargs -0 chmod $2 # Second parameter for Folders
