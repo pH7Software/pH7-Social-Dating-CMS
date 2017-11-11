@@ -71,8 +71,8 @@ class MainController extends Controller
         (new UserCoreModel)->changePassword($sEmail, $sNewPassword, $sTable);
 
         $this->view->content = t('Hello,') . '<br />' .
-            t('Your new password is %0%', '<em>"' . $sNewPassword . '"</em>') . '<br />' .
-            t("Please change it when you're logged in (Account -> Edit Profile -> Change Password).");
+            t('Your new password is: %0%', '<em>' . $sNewPassword . '</em>') . '<br />' .
+            t('Please change it once you are <a href="%0%">logged in</a> (Account -> Edit Profile -> Change Password).', $this->getLoginUrl());
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/recover_password.tpl',
@@ -100,5 +100,23 @@ class MainController extends Controller
         }
 
         Header::redirect($sUrl);
+    }
+
+    /**
+     * @return string
+     */
+    private function getLoginUrl()
+    {
+        if (UserCore::auth()) {
+            return Uri::get('user', 'main', 'index');
+        }
+
+        if (AffiliateCore::auth()) {
+            return Uri::get('affiliate', 'home', 'login');
+        }
+
+        if (AdminCore::auth()) {
+            return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
+        }
     }
 }
