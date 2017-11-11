@@ -41,3 +41,10 @@ footer a, footer p {
 #logo a {
     color: #EEE;
 }
+
+
+/* Make sure Bootstrap "alert" message is always well displayed */
+.alert {
+    z-index: 999;
+    position: absolute;
+}
