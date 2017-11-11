@@ -159,6 +159,11 @@ function save-code() {
     git remote add origin git@bitbucket.org:pH_7/ph7cms-social-dating-app-site-builder.git
     git push
 
+    # GitLab repo
+    git remote rm origin
+    git remote add origin git@gitlab.com:pH-7/pH7CMS.git
+    git push
+
     # GitHub repo
     git remote rm origin
     git remote add origin git@github.com:pH7Software/pH7-Social-Dating-CMS.git
