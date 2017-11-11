@@ -72,7 +72,7 @@ class MainController extends Controller
 
         $this->view->content = t('Hello,') . '<br />' .
             t('Your new password is: %0%', '<em>' . $sNewPassword . '</em>') . '<br />' .
-            t('Please change it once you are <a href="%0%">logged in</a> (Account -> Edit Profile -> Change Password).', $this->getLoginUrl());
+            t('Please change it once you are <a href="%0%">logged in</a> (Account -> Edit Profile -> Change Password).', $this->getLoginUrl($sTable));
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/lost-password/recover_password.tpl',
@@ -103,20 +103,21 @@ class MainController extends Controller
     }
 
     /**
+     * @param string $sTableName
+     *
      * @return string
      */
-    private function getLoginUrl()
+    private function getLoginUrl($sTableName)
     {
-        if (UserCore::auth()) {
-            return Uri::get('user', 'main', 'index');
-        }
+        switch($sTableName) {
+            case 'Members':
+                return Uri::get('user', 'main', 'index');
 
-        if (AffiliateCore::auth()) {
-            return Uri::get('affiliate', 'home', 'login');
-        }
+            case 'Affiliates':
+                return Uri::get('affiliate', 'home', 'login');
 
-        if (AdminCore::auth()) {
-            return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
+            case 'Admins':
+                return Uri::get(PH7_ADMIN_MOD, 'main', 'login');
         }
     }
 }
