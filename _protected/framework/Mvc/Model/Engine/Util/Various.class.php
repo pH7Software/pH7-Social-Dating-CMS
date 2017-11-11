@@ -37,7 +37,9 @@ class Various
      */
     public static function execQueryFile($sSqlFile)
     {
-        if (!is_file($sSqlFile)) return false;
+        if (!is_file($sSqlFile)) {
+            return false;
+        }
 
         $sSqlContent = file_get_contents($sSqlFile);
         $sSqlContent = str_replace(PH7_TABLE_PREFIX, Db::prefix(), $sSqlContent);
