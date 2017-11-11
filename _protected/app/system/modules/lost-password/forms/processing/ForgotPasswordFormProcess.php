@@ -7,18 +7,21 @@
  */
 
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
-use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Util\Various;
 
 class ForgotPasswordFormProcess extends Form
 {
-
+    /** @var UserCoreModel */
     private $oUserModel;
 
+    /**
+     * @param string $sTable
+     */
     public function __construct($sTable)
     {
         parent::__construct();
@@ -44,8 +47,9 @@ class ForgotPasswordFormProcess extends Form
 
     /**
      * @param string $sTable DB table name.
-     * @param integer $iProfileId The user profile ID.
-     * @return integer Number of recipients who were accepted for delivery.
+     * @param int $iProfileId The user profile ID.
+     *
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail($sTable, $iProfileId)
     {
@@ -70,5 +74,4 @@ class ForgotPasswordFormProcess extends Form
 
         return (new Mail)->send($aInfo, $sMessageHtml);
     }
-
 }
