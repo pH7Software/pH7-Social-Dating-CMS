@@ -13,6 +13,7 @@ use PH7\Framework\Url\Header;
 
 class AccountController extends Controller
 {
+    /** @var string */
     private $sTitle;
 
     public function index()
@@ -70,12 +71,17 @@ class AccountController extends Controller
 
     public function yesDelete()
     {
-        if (!$this->session->exists('yes_delete'))
+        if (!$this->session->exists('yes_delete')) {
             Header::redirect(Uri::get('affiliate', 'account', 'delete'));
-        else
+        } else {
             $this->output();
+        }
     }
 
+    /**
+     * @param string $sMail
+     * @param string $sHash
+     */
     public function activate($sMail, $sHash)
     {
         (new UserCore)->activateAccount($sMail, $sHash, $this->config, $this->registry, 'affiliate');
