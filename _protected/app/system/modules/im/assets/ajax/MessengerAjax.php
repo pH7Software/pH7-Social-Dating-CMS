@@ -63,11 +63,13 @@ class MessengerAjax extends PermissionCore
                 exit('Bad Request Error!');
         }
 
-        if (empty($_SESSION['messenger_history']))
+        if (empty($_SESSION['messenger_history'])) {
             $_SESSION['messenger_history'] = [];
+        }
 
-        if (empty($_SESSION['messenger_openBoxes']))
+        if (empty($_SESSION['messenger_openBoxes'])) {
             $_SESSION['messenger_openBoxes'] = [];
+        }
     }
 
     protected function heartbeat()
@@ -89,8 +91,9 @@ class MessengerAjax extends PermissionCore
 
             $sItems .= $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsg]);
 
-            if (!isset($_SESSION['messenger_history'][$sFrom]))
+            if (!isset($_SESSION['messenger_history'][$sFrom])) {
                 $_SESSION['messenger_history'][$sFrom] = '';
+            }
 
             $_SESSION['messenger_history'][$sFrom] .= $this->setJsonContent(['user' => $sFrom, 'msg' => $sMsg]);
 
@@ -116,15 +119,17 @@ class MessengerAjax extends PermissionCore
             }
         }
 
-        if (!$this->isOnline($sFrom))
+        if (!$this->isOnline($sFrom)) {
             $sItems = t('You must have the ONLINE status in order to speak instantaneous.');
-        elseif ($sTo !== 0 && !$this->isOnline($sTo))
+        } elseif ($sTo !== 0 && !$this->isOnline($sTo)) {
             $sItems = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail', 'main', 'compose', $sTo)) . '</em></small>';
-        else
+        } else {
             $this->_oMessengerModel->update($sFrom, $sTo);
+        }
 
-        if ($sItems != '')
+        if ($sItems != '') {
             $sItems = substr($sItems, 0, -1);
+        }
 
         Http::setContentType('application/json');
         echo '{"items": [' . $sItems . ']}';
@@ -173,17 +178,19 @@ class MessengerAjax extends PermissionCore
         $sMsgTransform = $this->sanitize($sMsg);
         $sMsgTransform = Emoticon::init($sMsgTransform, false);
 
-        if (!isset($_SESSION['messenger_history'][$this->_oHttpRequest->post('to')]))
+        if (!isset($_SESSION['messenger_history'][$this->_oHttpRequest->post('to')])) {
             $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] = '';
+        }
 
-        if (!$this->checkMembership() || !$this->group->instant_messaging)
+        if (!$this->checkMembership() || !$this->group->instant_messaging) {
             $sMsgTransform = t("You need to <a href='%0%'>upgrade your membership</a> to be able to chat.", Uri::get('payment', 'main', 'index'));
-        elseif (!$this->isOnline($sFrom))
+        } elseif (!$this->isOnline($sFrom)) {
             $sMsgTransform = t('You must have the ONLINE status in order to chat with other users.');
-        elseif (!$this->isOnline($sTo))
+        } elseif (!$this->isOnline($sTo)) {
             $sMsgTransform = '<small><em>' . t("%0% is offline. Send a <a href='%1%'>Private Message</a> instead.", $sTo, Uri::get('mail', 'main', 'compose', $sTo)) . '</em></small>';
-        else
+        } else {
             $this->_oMessengerModel->insert($sFrom, $sTo, $sMsg, (new CDateTime)->get()->dateTime('Y-m-d H:i:s'));
+        }
 
         $_SESSION['messenger_history'][$this->_oHttpRequest->post('to')] .= $this->setJsonContent(['status' => '1', 'user' => $sTo, 'msg' => $sMsgTransform]);
 
@@ -237,14 +244,9 @@ EOD;
         $sText = str_replace("\n\r", "\n", $sText);
         $sText = str_replace("\r\n", "\n", $sText);
         $sText = str_replace("\n", "<br>", $sText);
+
         return $sText;
     }
-
-    public function __destruct()
-    {
-        unset($this->_oHttpRequest, $this->_oMessengerModel);
-    }
-
 }
 
 // Go only if the user is logged

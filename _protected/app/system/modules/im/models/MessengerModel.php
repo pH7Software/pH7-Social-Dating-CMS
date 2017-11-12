@@ -25,10 +25,13 @@ class MessengerModel extends Model
      */
     public function select($sTo)
     {
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Messenger') .
-            'WHERE (toUser = :to AND recd = 0) ORDER BY messengerId ASC');
+        $sSqlQuery = 'SELECT * FROM' . Db::prefix('Messenger') .
+            'WHERE (toUser = :to AND recd = 0) ORDER BY messengerId ASC';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':to', $sTo, PDO::PARAM_STR);
         $rStmt->execute();
+
         return $rStmt->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -42,10 +45,13 @@ class MessengerModel extends Model
      */
     public function update($sFrom, $sTo)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Messenger') .
-            'SET recd = 1 WHERE (fromUser = :from OR toUser = :to) AND recd = 0');
+        $sSqlQuery = 'UPDATE' . Db::prefix('Messenger') .
+            'SET recd = 1 WHERE (fromUser = :from OR toUser = :to) AND recd = 0';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':from', $sFrom, PDO::PARAM_STR);
         $rStmt->bindValue(':to', $sTo, PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -61,12 +67,15 @@ class MessengerModel extends Model
      */
     public function insert($sFrom, $sTo, $sMessage, $sDate)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Messenger') .
-            '(fromUser, toUser, message, sent) VALUES (:from, :to, :message, :date)');
+        $sSqlQuery = 'INSERT INTO' . Db::prefix('Messenger') .
+            '(fromUser, toUser, message, sent) VALUES (:from, :to, :message, :date)';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':from', $sFrom, PDO::PARAM_STR);
         $rStmt->bindValue(':to', $sTo, PDO::PARAM_STR);
         $rStmt->bindValue(':message', $sMessage, PDO::PARAM_STR);
         $rStmt->bindValue(':date', $sDate, PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 }
