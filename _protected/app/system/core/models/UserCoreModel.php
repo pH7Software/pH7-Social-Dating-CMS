@@ -1060,15 +1060,17 @@ class UserCoreModel extends Model
      *
      * @return stdClass|int Object with the users list returned or integer for the total number users returned.
      */
-    public function getGeoProfiles($sCountryCode, $sCity, $bCount, $sOrder, $iOffset, $iLimit)
+    public function getGeoProfiles($sCountryCode, $sCity, $bCount, $sOrder, $iOffset = null, $iLimit = null)
     {
+        $bLimit = $iOffset !== null && $iLimit !== null;
+
         $bCount = (bool)$bCount;
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
         $sOrder = !$bCount ? SearchCoreModel::order($sOrder, SearchCoreModel::DESC) : '';
 
-        $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
+        $sSqlLimit = (!$bCount || $bLimit) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId) AS totalUsers';
 
         $sSqlCity = !empty($sCity) ? 'AND (city LIKE :city)' : '';
@@ -1085,7 +1087,7 @@ class UserCoreModel extends Model
             $rStmt->bindValue(':city', '%' . $sCity . '%', \PDO::PARAM_STR);
         }
 
-        if (!$bCount) {
+        if (!$bCount || $bLimit) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         }
