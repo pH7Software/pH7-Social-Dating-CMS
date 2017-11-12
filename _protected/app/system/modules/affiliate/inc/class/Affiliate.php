@@ -31,7 +31,9 @@ class Affiliate extends AffiliateCore
      * Add Refer Link.
      *
      * @param string $sUsername The Affiliate Username.
+     *
      * @return void
+     *
      * @internal Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database.
      */
     public function addRefer($sUsername)
@@ -56,6 +58,7 @@ class Affiliate extends AffiliateCore
      *
      * @param integer $iAffId
      * @param Cookie $oCookie
+     *
      * @return void
      */
     private function _setCookie($iAffId, Cookie $oCookie)

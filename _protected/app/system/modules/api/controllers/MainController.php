@@ -36,7 +36,7 @@ class MainController extends Controller
         if ($this->oRest->getRequestMethod() != 'POST') {
             $this->oRest->response('', 406);
         } else {
-            $this->oRest->response($this->set(array('return' => 'It Works!')));
+            $this->oRest->response($this->set(['return' => 'It Works!']));
         }
     }
 }
