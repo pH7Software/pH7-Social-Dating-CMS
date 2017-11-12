@@ -8,12 +8,17 @@
 
 namespace PH7;
 
+use PH7\Framework\Core\Kernel;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Security\Version;
 use PH7\Framework\Url\Header;
+use PH7\Framework\Url\Url;
 
 class InfoController extends Controller
 {
+    const TWITTER_TWEET_URL = 'https://twitter.com/intent/tweet?text=';
+
+    /** @var string */
     private $sTitle;
 
     public function index()
@@ -26,6 +31,7 @@ class InfoController extends Controller
         $this->sTitle = t('PHP Information');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -36,6 +42,15 @@ class InfoController extends Controller
         $this->view->h1_title = $this->sTitle;
         $this->view->release_date = $this->dateTime->get(Version::KERNEL_RELASE_DATE)->date();
         $this->view->license_form_link = Uri::get(PH7_ADMIN_MOD, 'setting', 'license');
+        $this->view->tweet_msg = $this->getTweetPost();
+
         $this->output();
+    }
+
+    private function getTweetPost()
+    {
+        $sMsg = t('I built my social dating business with pH7CMS -> %0%', Kernel::SOFTWARE_WEBSITE);
+
+        return self::TWITTER_TWEET_URL . Url::encode($sMsg);
     }
 }
