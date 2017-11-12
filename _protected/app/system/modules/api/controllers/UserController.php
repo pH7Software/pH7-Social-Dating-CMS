@@ -156,7 +156,7 @@ class UserController extends MainController
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return stdClass Data of users
+     * @return void
      */
     public function users($sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
@@ -183,7 +183,7 @@ class UserController extends MainController
      * @param int $iOffset
      * @param int $iLimit
      *
-     * @return stdClass Data of users
+     * @return void
      */
     public function usersFromLocation($sCountryCode, $sCity, $sOrder = SearchCoreModel::LAST_ACTIVITY, $iOffset = null, $iLimit = null)
     {
