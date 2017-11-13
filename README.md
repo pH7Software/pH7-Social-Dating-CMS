@@ -39,6 +39,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Hot or Not
 * Love Calculator
 * Geolocation
+* People Nearby
 * Photo Albums
 * Videos (and possibility to upload videos from API v3 YouTube, Vimeo, Metacafe and Dailymotion)
 * Forums
@@ -72,7 +73,7 @@ To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **b
 * Cache system for the database, pH7Tpl (our template engine), static files (HTML, CSS, JS), string content, ...
 * Maintenance Mode
 * Database Backup
-* Report
+* Report Abuse
 * SEO-Friendly (Title, Content, Code, ...), Sitemap module, [hreflang](https://support.google.com/webmasters/answer/189077), possibility to translate each URL, ...
 * Multilingual URLs
 * Check that all UGC (User-Generated Content) are Unique (to avoid spam and malicious users)
