@@ -136,6 +136,7 @@ class Db
         $mReturn = self::$_oDb->exec($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
+
         return $mReturn;
     }
 
@@ -186,6 +187,7 @@ class Db
         $bReturn = self::$_oDb->prepare($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
+
         return $bReturn;
     }
 
@@ -214,6 +216,7 @@ class Db
         $mReturn = self::$_oDb->query($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
+
         return $mReturn;
     }
 
@@ -330,6 +333,7 @@ class Db
     public static function prefix($sTable = '', $bTrim = false)
     {
         $sSpace = (!$bTrim) ? ' ' : '';
+
         return ($sTable !== '') ? $sSpace . self::$_sPrefix . $sTable . $sSpace : self::$_sPrefix;
     }
 
@@ -363,7 +367,9 @@ class Db
     public static function optimize()
     {
         $oAllTables = static::showTables();
-        while ($aTableNames = $oAllTables->fetch()) static::getInstance()->query('OPTIMIZE TABLE ' . $aTableNames[0]);
+        while ($aTableNames = $oAllTables->fetch()) {
+            static::getInstance()->query('OPTIMIZE TABLE ' . $aTableNames[0]);
+        }
         unset($oAllTables);
     }
 

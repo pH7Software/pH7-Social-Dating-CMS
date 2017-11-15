@@ -23,6 +23,7 @@ class Exception extends PDOException
     public function __construct($sMsg)
     {
         parent::__construct($sMsg);
+
         $this->init($sMsg);
     }
 }
