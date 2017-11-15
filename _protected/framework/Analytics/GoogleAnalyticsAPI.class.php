@@ -19,7 +19,7 @@ defined('PH7') or exit('Restricted access');
 *
 * MODIFIED BY:
 * @author         Pierre-Henry Soria <hello@ph7cms.com>
-* @copyright      (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+* @copyright      (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
 */
 
 class GoogleAnalyticsAPI

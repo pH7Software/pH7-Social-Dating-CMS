@@ -1,6 +1,6 @@
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
--- Copyright:     (c) 2016-2017, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2016-2018, Pierre-Henry Soria. All Rights Reserved.
 -- License:       GNU General Public License; https://www.gnu.org/licenses/gpl-3.0.en.html
 --
 

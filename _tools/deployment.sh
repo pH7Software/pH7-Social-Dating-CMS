@@ -6,7 +6,7 @@
 #                  To work correctly, you have to execute this script when you're in the project root with your terminal (generally the parent folder of "_tools/").
 #                  (e.g., you@you:/path/to/root-project$ bash _tools/pH7.sh).
 # Author:          Pierre-Henry Soria <ph7software@gmail.com>
-# Copyright:       (c) 2014-2017, Pierre-Henry Soria. All Rights Reserved.
+# Copyright:       (c) 2014-2018, Pierre-Henry Soria. All Rights Reserved.
 # License:         GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 ##
 
