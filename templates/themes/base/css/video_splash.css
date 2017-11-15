@@ -17,6 +17,10 @@ body {
     color: #F55959 !important;
 }
 
+#promo_text {
+    max-width: 500px;
+}
+
 footer a, footer p {
     color: #EEE;
 }
