@@ -223,8 +223,9 @@ class InstallController extends Controller
                                         'pH7_SampleData'
                                     ];
 
-                                    for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++)
+                                    for ($i = 0, $iCount = count($aDumps); $i < $iCount; $i++) {
                                         exec_query_file($DB, PH7_ROOT_INSTALL . 'data/sql/' . $_SESSION['db']['type_name'] . '/' . $aDumps[$i] . '.sql');
+                                    }
 
                                     unset($DB);
 
@@ -251,6 +252,7 @@ class InstallController extends Controller
         $this->oView->assign('sept_number', 3);
         $this->oView->assign('errors', @$aErrors);
         unset($aErrors);
+
         $this->oView->display('config_system.tpl');
     }
 
