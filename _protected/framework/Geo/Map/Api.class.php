@@ -16,7 +16,7 @@
  *
  * @author          Pierre-Henry SORIA <ph7software@gmail.com>
  * @copyright       (c) 2011-2017, Pierre-Henry SORIA, All Rights Reserved.
- * @version         Last update 10/31/2017
+ * @version         Last update 11/15/2017
  * @package         pH7CMS
  */
 
@@ -97,7 +97,7 @@ class Api
     protected $useClusterer = false;
     protected $gridSize = 100;
     protected $maxZoom = 9;
-    protected $clustererLibrarypath = 'https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer_packed.js';
+    protected $clustererLibrarypath = 'https://cdnjs.cloudflare.com/ajax/libs/js-marker-clusterer/1.0.0/markerclusterer.js';
 
     /** Enable automatic center/zoom **/
     protected $enableAutomaticCenterZoom = false;
