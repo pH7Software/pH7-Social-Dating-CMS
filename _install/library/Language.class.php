@@ -9,11 +9,12 @@
  */
 
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 class Language
 {
-
+    /** @var string */
     private $_sLang;
 
     public function __construct()
@@ -45,5 +46,4 @@ class Language
     {
         return $this->_sLang;
     }
-
 }
