@@ -18,11 +18,15 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!$this->session->exists(TwoFactorAuthCore::PROFILE_ID_SESS_NAME) && $this->registry->action == 'verificationcode') {
+        if ($this->registry->action === 'verificationcode' &&
+            !$this->session->exists(TwoFactorAuthCore::PROFILE_ID_SESS_NAME)
+        ) {
             Header::redirect($this->registry->site_url);
         }
 
-        if (!UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth() && $this->registry->action == 'setup') {
+        if ($this->registry->action === 'setup' &&
+            !UserCore::auth() && !AffiliateCore::auth() && !AdminCore::auth()
+        ) {
             Header::redirect($this->registry->site_url);
         }
     }
