@@ -19,6 +19,9 @@ use PH7\Framework\Url\Header;
 
 class LoginFormProcess extends Form implements LoginableForm
 {
+    const BRUTE_FORCE_SLEEP_DELAY = 1;
+
+    /** @var AffiliateModel */
     private $oAffModel;
 
     public function __construct()
@@ -44,7 +47,7 @@ class LoginFormProcess extends Form implements LoginableForm
         // Check Login
         $sLogin = $this->oAffModel->login($sEmail, $sPassword, 'Affiliates');
         if ($sLogin === 'email_does_not_exist' || $sLogin === 'password_does_not_exist') {
-            sleep(1); // Security against brute-force attack to avoid drowning the server and the database
+            $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
 
             if ($sLogin === 'email_does_not_exist') {
                 $this->enableCaptcha();
