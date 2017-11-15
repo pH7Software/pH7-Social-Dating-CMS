@@ -3,7 +3,7 @@ Except certain files and libraries (JavaScript, PHP, or other) whose license and
 
 All the Copyright Notice, Links and Copyright Comments can never be removed from the source code!
 
-Copyright (C) 2011-2017  Soria Pierre-Henry
+Copyright (C) 2011-2018  Soria Pierre-Henry
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the License.
