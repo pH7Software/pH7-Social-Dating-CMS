@@ -17,6 +17,7 @@ use PH7\Framework\File\File;
 use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
+use stdClass;
 
 class MainController extends Controller
 {
@@ -195,12 +196,12 @@ class MainController extends Controller
                     && $this->httpRequest->postExists('sale_id')
                 ) {
                     if (
-                        $this->oUserModel->updateMembership(
-                            $iItemNumber,
-                            $this->iProfileId,
-                            $this->dateTime->get()
-                                ->dateTime('Y-m-d H:i:s')
-                        )
+                    $this->oUserModel->updateMembership(
+                        $iItemNumber,
+                        $this->iProfileId,
+                        $this->dateTime->get()
+                            ->dateTime('Y-m-d H:i:s')
+                    )
                     ) {
                         $this->bStatus = true; // Status is OK
                         $this->updateUserGroupId($iItemNumber);
@@ -267,7 +268,7 @@ class MainController extends Controller
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         $oInfo = $this->oUserModel->getMembershipDetails($this->iProfileId);
-        if ($oInfo->expirationDays != 0 && !empty($oInfo->membershipDate)) {
+        if ($this->isMembershipExpirable($oInfo)) {
             $oDate = new \DateTime($oInfo->membershipDate);
             $oDate->add(new \DateInterval(sprintf('P%dD', $oInfo->expirationDays)));
             $this->view->expirationDate = $oDate->format($this->config->values['language.application']['date_time_format']);
@@ -374,6 +375,16 @@ class MainController extends Controller
     private function updateUserGroupId($iItemNumber)
     {
         $this->session->set('member_group_id', $iItemNumber);
+    }
+
+    /**
+     * @param stdClass $oInfo
+     *
+     * @return bool
+     */
+    private function isMembershipExpirable(stdClass $oInfo)
+    {
+        return $oInfo->expirationDays != 0 && !empty($oInfo->membershipDate);
     }
 
     /**
