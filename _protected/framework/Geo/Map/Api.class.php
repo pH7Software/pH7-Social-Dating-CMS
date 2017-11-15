@@ -614,7 +614,7 @@ class Api
             $this->content .= '</script>' . "\n";
 
             // Clusterer JS
-            if ($this->useClusterer == true) {
+            if ($this->useClusterer) {
                 $this->content .= '<script src="' . $this->clustererLibraryPath . '" type="text/javascript"></script>' . "\n";
             }
         }
@@ -671,7 +671,7 @@ class Api
         $this->content .= "\t\t" . '});' . "\n";
 
         // Display direction inputs in the info window
-        if ($this->displayDirectionFields == true) {
+        if ($this->displayDirectionFields) {
             $this->content .= "\t\t" . 'content += \'<div style="clear:both;height:20px;"></div>\';' . "\n";
             $this->content .= "\t\t" . 'id_name = \'marker_\'+gmarkers.length;' . "\n";
             $this->content .= "\t\t" . 'content += \'<input type="text" id="\'+id_name+\'"/>\';' . "\n";
@@ -687,7 +687,7 @@ class Api
         $this->content .= "\t\t\t" . 'infowindow.open(currentmap,marker);' . "\n";
 
         // Enable the zoom when you click on a marker
-        if ($this->enableWindowZoom == true) {
+        if ($this->enableWindowZoom) {
             $this->content .= "\t\t\t" . 'currentmap.setCenter(new google.maps.LatLng(latlng.lat(),latlng.lng()),' . $this->infoWindowZoom . ');' . "\n";
         }
 
@@ -697,7 +697,7 @@ class Api
         $this->content .= "\t\t" . 'gmarkers.push(marker);' . "\n";
 
         // Hide marker by default
-        if ($this->defaultHideMarker == true) {
+        if ($this->defaultHideMarker) {
             $this->content .= "\t\t" . 'marker.setVisible(false);' . "\n";
         }
         $this->content .= "\t" . '}' . "\n";
@@ -825,7 +825,7 @@ class Api
         $this->content .= "\t" . 'map' . $this->googleMapId . ' = new google.maps.Map(document.getElementById("' . $this->googleMapId . '"), myOptions);' . "\n";
 
         // Center
-        if ($this->enableAutomaticCenterZoom == true) {
+        if ($this->enableAutomaticCenterZoom) {
             $lenLng = $this->maxLng - $this->minLng;
             $lenLat = $this->maxLat - $this->minLat;
             $this->minLng -= $lenLng * $this->coordCoef;
@@ -864,7 +864,7 @@ class Api
         $this->content .= $this->contentMarker;
 
         // Clusterer JS
-        if ($this->useClusterer == true) {
+        if ($this->useClusterer) {
             $this->content .= "\t" . 'var markerCluster = new MarkerClusterer(map' . $this->googleMapId . ', gmarkers,{gridSize: ' . $this->gridSize . ', maxZoom: ' . $this->maxZoom . '});' . "\n";
         }
 
