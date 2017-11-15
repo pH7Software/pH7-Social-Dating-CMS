@@ -11,9 +11,10 @@ namespace PH7;
 class TwoFactorAuthModel extends TwoFactorAuthCoreModel
 {
     /**
-     * @param integer $iIsEnabled 1 = Enabled | 0 = Disabled
-     * @param integer $iProfileId Profile ID.
-     * @return integer|boolean Returns the number of rows on success or FALSE on failure.
+     * @param int $iIsEnabled 1 = Enabled | 0 = Disabled
+     * @param int $iProfileId Profile ID.
+     *
+     * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
     public function setStatus($iIsEnabled, $iProfileId)
     {
@@ -24,8 +25,9 @@ class TwoFactorAuthModel extends TwoFactorAuthCoreModel
 
     /**
      * @param string $sSecret 2FA secret code.
-     * @param integer $iProfileId Profile ID.
-     * @return integer|boolean Returns the number of rows on success or FALSE on failure.
+     * @param int $iProfileId Profile ID.
+     *
+     * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
     public function setSecret($sSecret, $iProfileId)
     {
@@ -33,7 +35,8 @@ class TwoFactorAuthModel extends TwoFactorAuthCoreModel
     }
 
     /**
-     * @param integer $iProfileId Profile ID.
+     * @param int $iProfileId Profile ID.
+     *
      * @return string The 2FA secret code.
      */
     public function getSecret($iProfileId)
