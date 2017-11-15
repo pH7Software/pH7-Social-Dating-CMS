@@ -65,22 +65,21 @@ class VerificationCodeFormProcess extends Form
     {
         switch ($sMod) {
             case 'user':
-                $oClass = 'UserCore';
+                $sFullClassName = UserCore::class;
                 break;
 
             case 'affiliate':
-                $oClass = 'AffiliateCore';
+                $sFullClassName = AffiliateCore::class;
                 break;
 
             case PH7_ADMIN_MOD:
-                $oClass = 'AdminCore';
+                $sFullClassName = AdminCore::class;
                 break;
 
             default:
                 throw new PH7InvalidArgumentException('Wrong "' . $sMod . '" module specified to get the class name');
         }
 
-        // Need to use the fully qualified name (with namespace) as we create the class name dynamically
-        return 'PH7\\' . $oClass;
+        return $sFullClassName;
     }
 }
