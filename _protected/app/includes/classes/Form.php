@@ -49,4 +49,16 @@ class Form extends Framework\Layout\Form\Form
 
         return rtrim($sVal, ','); // Removes the last comma
     }
+
+    /**
+     * Prevent against brute-force attack to avoid drowning the server and database.
+     *
+     * @param int $iDelay Delay in seconds.
+     *
+     * @return void
+     */
+    protected function preventBruteForce($iDelay)
+    {
+        sleep($iDelay);
+    }
 }

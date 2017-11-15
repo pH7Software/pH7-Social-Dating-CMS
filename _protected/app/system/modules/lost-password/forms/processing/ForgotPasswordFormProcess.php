@@ -16,6 +16,8 @@ use PH7\Framework\Util\Various;
 
 class ForgotPasswordFormProcess extends Form
 {
+    const BRUTE_FORCE_SLEEP_DELAY = 1;
+
     /** @var UserCoreModel */
     private $oUserModel;
 
@@ -30,12 +32,11 @@ class ForgotPasswordFormProcess extends Form
         $sEmail = $this->httpRequest->post('mail');
 
         if (!$iProfileId = $this->oUserModel->getId($sEmail, null, $sTable)) {
-            sleep(1); // Security against brute-force attack to avoid drowning the server and the database
+            $this->preventBruteForce(self::BRUTE_FORCE_SLEEP_DELAY);
             \PFBC\Form::setError('form_forgot_password', t('Oops, this "%0%" is not associated with any %site_name% account. Please, make sure that you entered the e-mail address used in creating your account.', escape(substr($sEmail, 0, PH7_MAX_EMAIL_LENGTH))));
         } else {
             $this->oUserModel->setNewHashValidation($iProfileId, Various::genRnd(), $sTable);
             (new UserCore)->clearReadProfileCache($iProfileId, $sTable); // Clean the profile data (for the new hash)
-
 
             if (!$this->sendMail($sTable, $iProfileId)) {
                 \PFBC\Form::setError('form_forgot_password', Form::errorSendingEmail());
