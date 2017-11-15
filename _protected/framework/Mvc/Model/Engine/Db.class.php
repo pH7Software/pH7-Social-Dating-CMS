@@ -4,7 +4,7 @@
  * @desc             PDO Singleton Class
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
- * @copyright        (c) 2011-2017, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright        (c) 2011-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine
  * @version          1.6
@@ -136,6 +136,7 @@ class Db
         $mReturn = self::$_oDb->exec($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
+
         return $mReturn;
     }
 
@@ -186,6 +187,7 @@ class Db
         $bReturn = self::$_oDb->prepare($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
+
         return $bReturn;
     }
 
@@ -214,6 +216,7 @@ class Db
         $mReturn = self::$_oDb->query($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
+
         return $mReturn;
     }
 
@@ -330,6 +333,7 @@ class Db
     public static function prefix($sTable = '', $bTrim = false)
     {
         $sSpace = (!$bTrim) ? ' ' : '';
+
         return ($sTable !== '') ? $sSpace . self::$_sPrefix . $sTable . $sSpace : self::$_sPrefix;
     }
 
@@ -363,7 +367,9 @@ class Db
     public static function optimize()
     {
         $oAllTables = static::showTables();
-        while ($aTableNames = $oAllTables->fetch()) static::getInstance()->query('OPTIMIZE TABLE ' . $aTableNames[0]);
+        while ($aTableNames = $oAllTables->fetch()) {
+            static::getInstance()->query('OPTIMIZE TABLE ' . $aTableNames[0]);
+        }
         unset($oAllTables);
     }
 
