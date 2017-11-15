@@ -129,6 +129,6 @@ All confidential information, including, but not limited to, any business, techn
 15.7. If any provision of this Agreement is held to be invalid or unenforceable, that provision shall be eliminated or limited to the minimum extent necessary such that the intent of the parties is effectuated, and the remainder of this agreement shall have full force and effect.<br /><br />
 </p>
 <p class="bold red">I HAVE READ THIS AGREEMENT AND AGREE TO ALL OF THE PROVISIONS CONTAINED ABOVE.</p>
-<p class="small text-muted">Last Updated On December 29th, 2016.</p>
+<p class="small text-muted">Last updated on December 29th, 2016.</p>
 
 </div>
