@@ -3,7 +3,7 @@
  * Description:     This class makes use of Ajax easier.
  *
  * Author:          Pierre-Henry Soria <ph7software@gmail.com>
- * Copyright:       (c) 2012-2017, Pierre-Henry Soria. All Rights Reserved.
+ * Copyright:       (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * License:         General Public License (GPL) 3 or later (http://www.gnu.org/copyleft/gpl.html)
  * Link:            http://github.com/pH-7/AJAPH
  * Version:         1.3
