@@ -83,6 +83,7 @@ class NoteFormProcess extends Form
      *
      * @param integer $iProfileId
      * @param NoteModel $oNoteModel
+     *
      * @return void
      *
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,

@@ -13,16 +13,18 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class VideoForm
 {
     public static function display()
     {
         if (isset($_POST['submit_video'])) {
-            if (\PFBC\Form::isValid($_POST['submit_video']))
+            if (\PFBC\Form::isValid($_POST['submit_video'])) {
                 new VideoFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oHttpRequest = new Http;
@@ -31,7 +33,9 @@ class VideoForm
 
         $oAlbumId = (new VideoModel)->getAlbumsName((new Session)->get('member_id'));
         $aAlbumName = array();
-        foreach ($oAlbumId as $iId) $aAlbumName[$iId->albumId] = $iId->name;
+        foreach ($oAlbumId as $iId) {
+            $aAlbumName[$iId->albumId] = $iId->name;
+        }
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 

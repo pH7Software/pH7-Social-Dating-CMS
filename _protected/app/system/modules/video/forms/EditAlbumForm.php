@@ -11,16 +11,18 @@ namespace PH7;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class EditAlbumForm
 {
     public static function display()
     {
         if (isset($_POST['submit_edit_video_album'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_video_album']))
+            if (\PFBC\Form::isValid($_POST['submit_edit_video_album'])) {
                 new EditAlbumFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oAlbum = (new VideoModel)->album((new Session)->get('member_id'), (new Http)->get('album_id'), 1, 0, 1);

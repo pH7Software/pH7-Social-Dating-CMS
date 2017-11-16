@@ -11,16 +11,18 @@ namespace PH7;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class EditVideoForm
 {
     public static function display()
     {
         if (isset($_POST['submit_edit_video'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_video']))
+            if (\PFBC\Form::isValid($_POST['submit_edit_video'])) {
                 new EditVideoFormProcess;
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];

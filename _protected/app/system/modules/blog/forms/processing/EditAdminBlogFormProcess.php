@@ -96,6 +96,7 @@ class EditAdminBlogFormProcess extends Form
      * @param integer $iBlogId
      * @param stdClass $oPost Post data from the database.
      * @param BlogModel $oBlogModel
+     *
      * @return void
      *
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
