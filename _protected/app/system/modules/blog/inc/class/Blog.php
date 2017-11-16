@@ -8,19 +8,29 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
 use PH7\Framework\File\File;
+use PH7\Framework\Navigation\Browser;
+use stdClass;
 
 class Blog extends WriteCore
 {
+    const THUMBNAIL_IMAGE_SIZE = 100;
+
     /**
      * Sets the Blog Thumbnail.
      *
-     * @param object $oPost
-     * @param \PH7\Framework\File\File $oFile
+     * @param stdClass $oPost
+     * @param File $oFile
+     *
      * @return void
+     *
+     * @throws \PH7\Framework\File\TooLargeException
+     * @throws \PH7\Framework\File\Exception
+     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
      */
-    public function setThumb($oPost, File $oFile)
+    public function setThumb(stdClass $oPost, File $oFile)
     {
         if (!empty($_FILES['thumb']['tmp_name'])) {
             $oImage = new Framework\Image\Image($_FILES['thumb']['tmp_name']);

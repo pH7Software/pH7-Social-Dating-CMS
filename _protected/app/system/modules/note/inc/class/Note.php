@@ -8,25 +8,35 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
+use PH7\Framework\File\File;
+use PH7\Framework\Image\Image;
 use PH7\Framework\Util\Various;
+use stdClass;
 
 class Note extends WriteCore
 {
     const MAX_CATEGORY_ALLOWED = 3;
+    const THUMBNAIL_IMAGE_SIZE = 100;
 
     /**
      * Sets the Note Thumbnail.
      *
-     * @param object $oPost
-     * @param \PH7\NoteModel $oNoteModel
-     * @param \PH7\Framework\File\File $oFile
+     * @param stdClass $oPost
+     * @param NoteModel $oNoteModel
+     * @param File $oFile
+     *
      * @return void
+     *
+     * @throws \PH7\Framework\File\TooLargeException
+     * @throws \PH7\Framework\File\Exception
+     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
      */
-    public function setThumb($oPost, NoteModel $oNoteModel, Framework\File\File $oFile)
+    public function setThumb(stdClass $oPost, NoteModel $oNoteModel, File $oFile)
     {
         if (!empty($_FILES['thumb']['tmp_name'])) {
-            $oImage = new Framework\Image\Image($_FILES['thumb']['tmp_name']);
+            $oImage = new Image($_FILES['thumb']['tmp_name']);
             if (!$oImage->validate()) {
                 \PFBC\Form::setError('form_note', Form::wrongImgFileTypeMsg());
             } else {
