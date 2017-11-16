@@ -29,10 +29,9 @@ abstract class WriteDesignCoreModel
 
         echo '<p class="small">', t('Categories:'), ' <span class="italic">';
 
-        foreach ($oCategories as $oCategory)
+        foreach ($oCategories as $oCategory) {
             $sContents .= '<a href="' . Uri::get($sMod, 'main', 'category', $oCategory->name, ',title,asc') . '" data-load="ajax">' . $oCategory->name . '</a> &bull; ';
-
-        unset($oCategories);
+        }
 
         // Remove the last " &bull; " since not needed for the last category
         $sContents = rtrim($sContents, ' &bull; ');
