@@ -21,7 +21,7 @@ class BannerForm
         $oPage = new Page;
         $oAdsModel = new AdsCoreModel;
 
-        $oPage->getTotalPages($oAdsModel->total('AdsAffiliates'), self::ADS_PER_PAGE);
+        $oPage->getTotalPages($oAdsModel->total(AdsCore::AFFILIATE_AD_TABLE_NAME), self::ADS_PER_PAGE);
         $oAds = $oAdsModel->get(
             null,
             $oPage->getFirstItem(),
