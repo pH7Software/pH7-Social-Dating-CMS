@@ -11,6 +11,7 @@
 namespace PH7;
 
 use PH7\Framework\Geo\Ip\Geo;
+use PH7\Framework\Url\Header;
 
 class AddUserForm
 {
@@ -20,7 +21,8 @@ class AddUserForm
             if (\PFBC\Form::isValid($_POST['submit_add_user'])) {
                 new AddUserFormProcess;
             }
-            Framework\Url\Header::redirect();
+
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_add_user');

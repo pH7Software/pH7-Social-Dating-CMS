@@ -8,6 +8,8 @@
 
 namespace PH7;
 
+use PH7\Framework\Url\Header;
+
 class AddAdminForm
 {
     public static function display()
@@ -16,7 +18,8 @@ class AddAdminForm
             if (\PFBC\Form::isValid($_POST['submit_add_admin'])) {
                 new AddAdminFormProcess;
             }
-            Framework\Url\Header::redirect();
+
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_add_admin');

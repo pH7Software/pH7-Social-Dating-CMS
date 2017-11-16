@@ -7,8 +7,10 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -17,13 +19,17 @@ class EditAlbumFormProcess extends Form
     public function __construct()
     {
         parent::__construct();
+
         $iAlbumId = (int)$this->httpRequest->get('album_id');
 
         (new PictureModel)->updateAlbum($this->session->get('member_id'), $iAlbumId, $this->httpRequest->post('name'), $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-
-        /* Clean PictureModel Cache */
-        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        $this->clearCache();
 
         Header::redirect(Uri::get('picture', 'main', 'albums', $this->session->get('member_username'), $iAlbumId), t('Your album has been updated successfully!'));
+    }
+
+    private function clearCache()
+    {
+        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
     }
 }

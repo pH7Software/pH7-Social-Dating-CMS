@@ -9,15 +9,18 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Url\Header;
 
 class AnalyticsApiForm
 {
     public static function display()
     {
         if (isset($_POST['submit_analytics'])) {
-            if (\PFBC\Form::isValid($_POST['submit_analytics']))
+            if (\PFBC\Form::isValid($_POST['submit_analytics'])) {
                 new AnalyticsApiFormProcess;
-            Framework\Url\Header::redirect();
+            }
+
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_analytics');

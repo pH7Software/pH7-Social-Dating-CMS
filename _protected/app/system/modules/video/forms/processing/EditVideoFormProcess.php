@@ -7,8 +7,10 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -17,15 +19,19 @@ class EditVideoFormProcess extends Form
     public function __construct()
     {
         parent::__construct();
+
         $iAlbumId = (int)$this->httpRequest->get('album_id');
         $sVideoTitle = $this->httpRequest->post('title');
         $iVideoId = (int)$this->httpRequest->get('video_id');
 
         (new VideoModel)->updateVideo($this->session->get('member_id'), $iAlbumId, $iVideoId, $sVideoTitle, $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-
-        /* Clean VideoModel Cache */
-        (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+        $this->clearCache();
 
         Header::redirect(Uri::get('video', 'main', 'video', $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sVideoTitle . ',' . $iVideoId), t('Your video has been updated successfully!'));
+    }
+
+    private function clearCache()
+    {
+        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
     }
 }

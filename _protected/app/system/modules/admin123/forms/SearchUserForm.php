@@ -12,13 +12,14 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchUserForm
 {
-
     public static function display()
     {
         $oGroupId = (new AdminModel)->getMemberships();
 
         $aGroupName = array();
-        foreach ($oGroupId as $iId) $aGroupName[$iId->groupId] = $iId->name;
+        foreach ($oGroupId as $iId) {
+            $aGroupName[$iId->groupId] = $iId->name;
+        }
 
         $oForm = new \PFBC\Form('form_user_search');
         $oForm->configure(array('action' => Uri::get(PH7_ADMIN_MOD, 'user', 'result') . PH7_SH, 'method' => 'get'));
@@ -35,5 +36,4 @@ class SearchUserForm
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
         $oForm->render();
     }
-
 }

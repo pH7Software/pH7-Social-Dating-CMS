@@ -13,6 +13,7 @@ use PH7\Framework\Ip\Ip;
 use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class SettingForm
 {
@@ -27,7 +28,7 @@ class SettingForm
                 new SettingFormProcess;
             }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_setting');

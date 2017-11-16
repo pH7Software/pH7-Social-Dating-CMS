@@ -8,7 +8,8 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Design as Design;
+use PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Url\Header;
 
 class ScriptForm
 {
@@ -16,9 +17,11 @@ class ScriptForm
     public static function display()
     {
         if (isset($_POST['submit_script'])) {
-            if (\PFBC\Form::isValid($_POST['submit_script']))
+            if (\PFBC\Form::isValid($_POST['submit_script'])) {
                 new ScriptFormProcess;
-            Framework\Url\Header::redirect();
+            }
+
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_script');

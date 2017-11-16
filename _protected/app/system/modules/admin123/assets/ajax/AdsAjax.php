@@ -7,25 +7,31 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
+use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Model\Design;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
+use PH7\Framework\Security\CSRF\Token;
 
 class AdsAjax
 {
-
-    private $_oHttpRequest, $_oAdsModel, $_sMsg, $_bStatus;
+    private $oHttpRequest;
+    private $oAdsModel;
+    private $sMsg;
+    private $bStatus;
 
     public function __construct()
     {
-        if (!(new Framework\Security\CSRF\Token)->check('ads'))
+        if (!(new Token)->check('ads'))
             exit(jsonMsg(0, Form::errorTokenMsg()));
 
-        $this->_oHttpRequest = new Http;
-        $this->_oAdsModel = new AdsCoreModel;
+        $this->oHttpRequest = new HttpRequest;
+        $this->oAdsModel = new AdsCoreModel;
 
-        switch ($this->_oHttpRequest->post('type')) {
+        switch ($this->oHttpRequest->post('type')) {
             case 'activate':
                 $this->activate();
                 break;
@@ -39,7 +45,7 @@ class AdsAjax
                 break;
 
             default:
-                Framework\Http\Http::setHeadersByCode(400);
+                Http::setHeadersByCode(400);
                 exit('Bad Request Error');
         }
     }
@@ -48,58 +54,53 @@ class AdsAjax
     {
         $sTable = AdsCore::getTable();
 
-        $this->_bStatus = $this->_oAdsModel->setStatus($this->_oHttpRequest->post('adsId'), 1, $sTable);
+        $this->bStatus = $this->oAdsModel->setStatus($this->oHttpRequest->post('adsId'), 1, $sTable);
 
-        if ($this->_bStatus) {
-            (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
-            $this->_sMsg = jsonMsg(1, t('The banner has been activated.'));
+        if ($this->bStatus) {
+            (new Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
+            $this->sMsg = jsonMsg(1, t('The banner has been activated.'));
         } else {
-            $this->_sMsg = jsonMsg(0, t('Cannot activate the banner. Please try later.'));
+            $this->sMsg = jsonMsg(0, t('Cannot activate the banner. Please try later.'));
         }
-        echo $this->_sMsg;
+        echo $this->sMsg;
     }
 
     protected function deactivate()
     {
         $sTable = AdsCore::getTable();
 
-        $this->_bStatus = $this->_oAdsModel->setStatus($this->_oHttpRequest->post('adsId'), 0, $sTable);
+        $this->bStatus = $this->oAdsModel->setStatus($this->oHttpRequest->post('adsId'), 0, $sTable);
 
-        if ($this->_bStatus) {
-            (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
-            $this->_sMsg = jsonMsg(1, t('The banner has been deactivated.'));
+        if ($this->bStatus) {
+            (new Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear();
+            $this->sMsg = jsonMsg(1, t('The banner has been deactivated.'));
         } else {
-            $this->_sMsg = jsonMsg(0, t('Cannot deactivate the banner. Please try later.'));
+            $this->sMsg = jsonMsg(0, t('Cannot deactivate the banner. Please try later.'));
         }
-        echo $this->_sMsg;
+        echo $this->sMsg;
     }
 
     protected function delete()
     {
         $sTable = AdsCore::getTable();
 
-        $this->_bStatus = $this->_oAdsModel->delete($this->_oHttpRequest->post('adsId'), $sTable);
+        $this->bStatus = $this->oAdsModel->delete($this->oHttpRequest->post('adsId'), $sTable);
 
-        if ($this->_bStatus) {
+        if ($this->bStatus) {
             /* Clean AdminCoreModel Ads and Model\Design for STATIC data */
-            (new Framework\Cache\Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear()
+            (new Cache)->start(Design::CACHE_STATIC_GROUP, null, null)->clear()
                 ->start(AdsCoreModel::CACHE_GROUP, 'totalAds', null)->clear()
                 ->start(AdsCoreModel::CACHE_GROUP, 'totalAdsAffiliates', null)->clear();
 
-            $this->_sMsg = jsonMsg(1, t('The banner has been deleted.'));
+            $this->sMsg = jsonMsg(1, t('The banner has been deleted.'));
         } else {
-            $this->_sMsg = jsonMsg(0, t('Cannot remove the banner. Please try later.'));
+            $this->sMsg = jsonMsg(0, t('Cannot remove the banner. Please try later.'));
         }
-        echo $this->_sMsg;
+        echo $this->sMsg;
     }
-
-    public function __destruct()
-    {
-        unset($this->_oHttpRequest, $this->_oAdsModel, $this->_sMsg, $this->_bStatus);
-    }
-
 }
 
 // Only for the Admins
-if (Admin::auth())
+if (Admin::auth()) {
     new AdsAjax;
+}

@@ -14,6 +14,7 @@ use PH7\Framework\Url\Header;
 
 class LicenseForm
 {
+    /** @var int */
     private static $iLicenseId = 1;
 
     public static function display()
