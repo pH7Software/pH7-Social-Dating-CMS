@@ -108,11 +108,12 @@ class EditNoteFormProcess extends Form
     /**
      * Update categories.
      *
-     * @param integer $iNoteId
-     * @param integer $iProfileId
+     * @param int $iNoteId
+     * @param int $iProfileId
      * @param stdClass $oPost Post data from the database
      * @param NoteModel $oNoteModel
-     * @return boolean FALSE if the maximal number of categories allowed has been reached, FALSE otherwise.
+     *
+     * @return bool FALSE if the maximal number of categories allowed has been reached, TRUE otherwise.
      *
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,
      * otherwise Http::post() method removes the special tags and damages the SET function SQL for entry into the database.
