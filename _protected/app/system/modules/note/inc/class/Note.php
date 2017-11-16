@@ -47,7 +47,7 @@ class Note extends WriteCore
                 $oFile->deleteFile($sPathName); // It erases the old thumbnail
                 $oFile->createDir($sPathName);
                 $sFileName = Various::genRnd($oImage->getFileName(), 20) . PH7_DOT . $oImage->getExt();
-                $oImage->square(100);
+                $oImage->square(static::THUMBNAIL_IMAGE_SIZE);
                 $oImage->save($sPathName . $sFileName);
                 $oNoteModel->updatePost('thumb', $sFileName, $oPost->noteId, $oPost->profileId);
             }
@@ -59,17 +59,18 @@ class Note extends WriteCore
      * Checks the Post ID.
      *
      * @param string $sPostId
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param NoteModel $oNoteModel
-     * @return boolean
+     *
+     * @return bool
      */
     public function checkPostId($sPostId, $iProfileId, NoteModel $oNoteModel)
     {
-        return (preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !$oNoteModel->postIdExists($sPostId, $iProfileId));
+        return preg_match('#^' . Config::getInstance()->values['module.setting']['post_id.pattern'] . '$#', $sPostId) && !$oNoteModel->postIdExists($sPostId, $iProfileId);
     }
 
     public static function clearCache()
     {
-        (new Framework\Cache\Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(NoteModel::CACHE_GROUP, null, null)->clear();
     }
 }
