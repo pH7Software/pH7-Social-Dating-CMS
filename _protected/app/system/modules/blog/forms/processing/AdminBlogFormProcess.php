@@ -64,6 +64,7 @@ class AdminBlogFormProcess extends Form
      * Set the categorie(s).
      *
      * @param BlogModel $oBlogModel
+     *
      * @return void
      *
      * @internal WARNING: Be careful, you should use Http::NO_CLEAN constant,

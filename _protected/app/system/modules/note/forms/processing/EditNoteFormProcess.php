@@ -130,6 +130,7 @@ class EditNoteFormProcess extends Form
                 $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
             }
         }
+
         return true;
     }
 }
