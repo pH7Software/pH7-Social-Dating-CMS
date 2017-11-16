@@ -63,7 +63,7 @@ class Blog extends WriteCore
     public static function getThumb($iBlogId)
     {
         $sFullPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_DS . PH7_IMG . $iBlogId . PH7_DS . static::THUMBNAIL_FILENAME;
-        $sThumb = is_file($sFullPath) ? $iBlogId . PH7_SH . static::THUMBNAIL_FILENAME . '?v=' . File::version($sFullPath) : 'default_thumb.jpg';
+        $sThumb = is_file($sFullPath) ? $iBlogId . PH7_SH . static::THUMBNAIL_FILENAME . '?v=' . File::version($sFullPath) : static::DEFAULT_THUMBNAIL_FILENAME;
         return PH7_URL_DATA_SYS_MOD . 'blog' . PH7_SH . PH7_IMG . $sThumb;
     }
 
