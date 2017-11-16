@@ -14,6 +14,7 @@ use PH7\Framework\File\File;
 abstract class WriteCore
 {
     const THUMBNAIL_FILENAME = 'thumb.png';
+    const DEFAULT_THUMBNAIL_FILENAME = 'default_thumb.jpg';
 
     /**
      * @param int|string $mId Put the username + the PH7_DS constant + the image file for the Note module or just the post ID for the Blog module.
