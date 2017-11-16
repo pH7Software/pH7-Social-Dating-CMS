@@ -22,7 +22,7 @@ class AdsFormProcess extends Form
     {
         parent::__construct();
 
-        $iIsAff = (AdsCore::getTable() == 'AdsAffiliates');
+        $bIsAff = (AdsCore::getTable() === AdsCore::AFFILIATE_AD_TABLE_NAME);
 
         $sTable = AdsCore::getTable();
         $sTitle = $this->httpRequest->post('title');

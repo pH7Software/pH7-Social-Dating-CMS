@@ -55,8 +55,9 @@ class UpdateAdsForm
             // mt_rand() function for generate an ID different if it causes problems in the display.
             $oForm->addElement(new \PFBC\Element\Button(t('Update'), 'submit', array('id' => mt_rand())));
 
-            if (AdsCore::getTable() == 'Ads') // This feature is not available for affiliate banners
+            if (AdsCore::getTable() === AdsCore::AD_TABLE_NAME) {// This feature is not available for affiliate banners
                 $oForm->addElement(new \PFBC\Element\HTMLExternal(t('Views: %0% | Clicks: %1%', $oRow->views, $oRow->clicks) . ' | '));
+            }
 
             $oForm->addElement(new \PFBC\Element\HTMLExternal('<a href="javascript:void(0)" onclick="ads(\'delete\',' . $oRow->adsId . ',\'' . $sCSRFToken . '\')">' . t('Delete') . '</a> | '));
 
