@@ -7,8 +7,10 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Image\Image;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Engine\Db;
@@ -29,7 +31,9 @@ class AlbumFormProcess extends Form
          * This can cause minor errors (eg if a user sent a file that is not a video).
          * So we hide the errors if we are not in development mode.
          */
-        if (!isDebug()) error_reporting(0);
+        if (!isDebug()) {
+            error_reporting(0);
+        }
 
         // Resizing and saving the video album thumbnail
         $oPicture = new Image($_FILES['album']['tmp_name']);
@@ -81,6 +85,6 @@ class AlbumFormProcess extends Form
 
     private function clearCache()
     {
-        (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
     }
 }

@@ -18,7 +18,7 @@ class AdsController extends Controller
 
     public function index()
     {
-        $iTotalAds = (new AdsCoreModel)->total('AdsAffiliates');
+        $iTotalAds = (new AdsCoreModel)->total(AdsCore::AFFILIATE_AD_TABLE_NAME);
 
         $oPage = new Page;
         $this->view->total_pages = $oPage->getTotalPages($iTotalAds, self::ADS_PER_PAGE);

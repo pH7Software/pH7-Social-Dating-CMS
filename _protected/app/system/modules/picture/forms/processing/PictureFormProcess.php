@@ -10,8 +10,10 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Image\Image;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
@@ -31,7 +33,9 @@ class PictureFormProcess extends Form
          * @desc This can cause minor errors (eg if a user sent a file that is not a photo).
          * So we hide the errors if we are not in development mode.
          */
-        if (!isDebug()) error_reporting(0);
+        if (!isDebug()) {
+            error_reporting(0);
+        }
 
         /**
          * @desc
@@ -45,7 +49,7 @@ class PictureFormProcess extends Form
         }
 
         /**
-         * @desc Resizing and saving some photos
+         * Resizing and saving some photos
          */
         $aPhotos = $_FILES['photos']['tmp_name'];
         for ($i = 0, $iNumPhotos = count($aPhotos); $i < $iNumPhotos; $i++) {
@@ -126,6 +130,7 @@ class PictureFormProcess extends Form
 
     /**
      * @param string $sFile File path.
+     *
      * @return void
      */
     protected function checkNudityFilter($sFile)
@@ -138,6 +143,6 @@ class PictureFormProcess extends Form
 
     private function clearCache()
     {
-        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
     }
 }

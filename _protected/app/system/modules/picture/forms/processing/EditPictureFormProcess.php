@@ -7,8 +7,10 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 
@@ -17,15 +19,19 @@ class EditPictureFormProcess extends Form
     public function __construct()
     {
         parent::__construct();
+
         $iAlbumId = (int)$this->httpRequest->get('album_id');
         $sPictureTitle = $this->httpRequest->post('title');
         $iPictureId = (int)$this->httpRequest->get('picture_id');
 
         (new PictureModel)->updatePhoto($this->session->get('member_id'), $iAlbumId, $iPictureId, $sPictureTitle, $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-
-        /* Clean PictureModel Cache */
-        (new Framework\Cache\Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        $this->clearCache();
 
         Header::redirect(Uri::get('picture', 'main', 'photo', $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sPictureTitle . ',' . $iPictureId), t('Your photo has been updated successfully!'));
+    }
+
+    private function clearCache()
+    {
+        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
     }
 }

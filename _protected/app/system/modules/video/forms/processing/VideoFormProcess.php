@@ -13,8 +13,10 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\File as F;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Router\Uri;
@@ -32,7 +34,9 @@ class VideoFormProcess extends Form
          * This can cause minor errors (eg if a user sent a file that is not a video).
          * So we hide the errors if we are not in development mode.
          */
-        if (!isDebug()) error_reporting(0);
+        if (!isDebug()) {
+            error_reporting(0);
+        }
 
         /**
          * Check if the video album ID is valid. The value must be numeric.
@@ -145,6 +149,6 @@ class VideoFormProcess extends Form
 
     private function clearCache()
     {
-        (new Framework\Cache\Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
     }
 }

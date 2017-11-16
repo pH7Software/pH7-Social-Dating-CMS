@@ -12,6 +12,7 @@ use PH7\Framework\File\File;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class MetaMainForm
 {
@@ -19,10 +20,11 @@ class MetaMainForm
     public static function display()
     {
         if (isset($_POST['submit_meta'])) {
-            if (\PFBC\Form::isValid($_POST['submit_meta']))
+            if (\PFBC\Form::isValid($_POST['submit_meta'])) {
                 new MetaMainFormProcess;
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $sWhereLang = (new Http)->get('meta_lang');

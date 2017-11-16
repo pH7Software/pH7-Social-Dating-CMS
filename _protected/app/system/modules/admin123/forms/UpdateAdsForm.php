@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Parse\SysVar;
+use PH7\Framework\Url\Header;
 
 class UpdateAdsForm
 {
@@ -21,7 +22,8 @@ class UpdateAdsForm
             if (\PFBC\Form::isValid($_POST['submit_update_ads'])) {
                 new UpdateAdsFormProcess;
             }
-            Framework\Url\Header::redirect();
+
+            Header::redirect();
         }
 
         $oPage = new Page;

@@ -8,17 +8,19 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Model\Design as Design;
+use PH7\Framework\Mvc\Model\Design;
+use PH7\Framework\Url\Header;
 
 class StyleForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_style'])) {
-            if (\PFBC\Form::isValid($_POST['submit_style']))
+            if (\PFBC\Form::isValid($_POST['submit_style'])) {
                 new StyleFormProcess;
-            Framework\Url\Header::redirect();
+            }
+
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_style');
@@ -29,5 +31,4 @@ class StyleForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

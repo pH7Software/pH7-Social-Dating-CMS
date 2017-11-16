@@ -11,6 +11,7 @@ namespace PH7;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Model\Module as ModuleModel;
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class DisableModuleForm
 {
@@ -20,7 +21,8 @@ class DisableModuleForm
             if (\PFBC\Form::isValid($_POST['submit_module'])) {
                 new DisableModuleFormProcess;
             }
-            Framework\Url\Header::redirect();
+
+            Header::redirect();
         }
 
         $oModuleData = (new ModuleModel)->get();
@@ -30,8 +32,9 @@ class DisableModuleForm
 
         foreach ($oModuleData as $oData) {
             // Ignore the default core module (since it cannot be disabled)
-            if ($oData->folderName === $sDefaultCoreMod)
+            if ($oData->folderName === $sDefaultCoreMod) {
                 continue;
+            }
 
             if ((int)$oData->enabled === 1) {
                 $aSelectedMods[] = $oData->moduleId;
