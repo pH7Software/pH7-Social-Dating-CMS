@@ -43,11 +43,11 @@ class Blog extends WriteCore
                 $sPathName = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_DS . PH7_IMG . $oPost->blogId;
                 $oFile->deleteFile($sPathName); // It erases the old thumbnail
                 $oFile->createDir($sPathName);
-                $oImage->square(100);
+                $oImage->square(static::THUMBNAIL_IMAGE_SIZE);
                 $oImage->save($sPathName . PH7_DS . static::THUMBNAIL_FILENAME);
 
                 // Clear the Web browser cache
-                (new Framework\Navigation\Browser)->noCache();
+                (new Browser)->noCache();
             }
             unset($oImage);
         }
@@ -56,13 +56,14 @@ class Blog extends WriteCore
     /**
      * Get the thumbnail of blog post.
      *
-     * @param integer $iBlogId The ID of the Blog Post.
+     * @param int $iBlogId The ID of the Blog Post.
+     *
      * @return string The URL of the thumbnail.
      */
     public static function getThumb($iBlogId)
     {
         $sFullPath = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'blog' . PH7_DS . PH7_IMG . $iBlogId . PH7_DS . static::THUMBNAIL_FILENAME;
-        $sThumb = (is_file($sFullPath)) ? $iBlogId . PH7_SH . static::THUMBNAIL_FILENAME . '?v=' . File::version($sFullPath) : 'default_thumb.jpg';
+        $sThumb = is_file($sFullPath) ? $iBlogId . PH7_SH . static::THUMBNAIL_FILENAME . '?v=' . File::version($sFullPath) : 'default_thumb.jpg';
         return PH7_URL_DATA_SYS_MOD . 'blog' . PH7_SH . PH7_IMG . $sThumb;
     }
 
@@ -71,7 +72,8 @@ class Blog extends WriteCore
      *
      * @param string $sPostId
      * @param BlogModel $oBlogModel
-     * @return boolean
+     *
+     * @return bool
      */
     public function checkPostId($sPostId, BlogModel $oBlogModel)
     {
@@ -80,6 +82,6 @@ class Blog extends WriteCore
 
     public static function clearCache()
     {
-        (new Framework\Cache\Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
+        (new Cache)->start(BlogModel::CACHE_GROUP, null, null)->clear();
     }
 }
