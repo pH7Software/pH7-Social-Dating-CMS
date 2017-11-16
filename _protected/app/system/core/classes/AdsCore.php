@@ -38,7 +38,11 @@ class AdsCore extends Framework\Ads\Ads
     public static function getTable()
     {
         $oHttpRequest = new Http;
-        $sTable = ($oHttpRequest->getExists('ads_type') && $oHttpRequest->get('ads_type') == 'affiliate') ? 'AdsAffiliates' : 'Ads';
+        if ($oHttpRequest->getExists('ads_type') && $oHttpRequest->get('ads_type') == 'affiliate') {
+            $sTable = self::AFFILIATE_AD_TABLE_NAME;
+        } else {
+            $sTable = self::AD_TABLE_NAME;
+        }
         unset($oHttpRequest);
 
         return $sTable;
@@ -55,7 +59,7 @@ class AdsCore extends Framework\Ads\Ads
      */
     public static function checkTable($sTable)
     {
-        if (in_array($sTable, static::$aTableNames, true)) {
+        if (self::doesTableExist($sTable)) {
             return $sTable;
         }
 
@@ -73,10 +77,20 @@ class AdsCore extends Framework\Ads\Ads
      */
     public static function convertTableToId($sTable)
     {
-        if (in_array($sTable, static::$aTableNames, true)) {
+        if (self::doesTableExist($sTable)) {
             return static::ID_COLUMN_NAME;
         }
 
         Various::launchErr();
+    }
+
+    /**
+     * @param string $sTable
+     *
+     * @return bool
+     */
+    private static function doesTableExist($sTable)
+    {
+        return in_array($sTable, self::TABLE_NAMES, true);
     }
 }
