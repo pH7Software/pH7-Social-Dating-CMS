@@ -9,17 +9,19 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
+use stdClass;
 
 abstract class WriteDesignCoreModel
 {
     /**
      * Generate the categories links.
      *
-     * @param object $oCategories Categories queries.
+     * @param stdClass $oCategories Categories queries.
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
+     *
      * @return void Output the categories list.
      */
-    public static function categories($oCategories, $sMod)
+    public static function categories(stdClass $oCategories, $sMod)
     {
         WriteCore::checkMod($sMod);
 
