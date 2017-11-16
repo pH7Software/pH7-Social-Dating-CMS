@@ -53,12 +53,12 @@ class Form extends Framework\Layout\Form\Form
     /**
      * Prevent against brute-force attack to avoid drowning the server and database.
      *
-     * @param int $iDelay Delay in seconds.
+     * @param int $iDelayInSec Delay in seconds.
      *
      * @return void
      */
-    protected function preventBruteForce($iDelay)
+    protected function preventBruteForce($iDelayInSec)
     {
-        sleep($iDelay);
+        sleep($iDelayInSec);
     }
 }
