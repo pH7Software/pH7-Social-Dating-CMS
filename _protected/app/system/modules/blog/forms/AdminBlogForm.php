@@ -13,7 +13,7 @@ use PH7\Framework\Url\Header;
 
 class AdminBlogForm
 {
-    const MAX_BLOG_POSTS = 300;
+    const MAX_CATEGORIES = 300;
 
     public static function display()
     {
@@ -25,7 +25,7 @@ class AdminBlogForm
             Header::redirect();
         }
 
-        $oCategoryData = (new BlogModel)->getCategory(null, 0, self::MAX_BLOG_POSTS);
+        $oCategoryData = (new BlogModel)->getCategory(null, 0, self::MAX_CATEGORIES);
 
         $aCategoryNames = array();
         foreach ($oCategoryData as $oId) {
