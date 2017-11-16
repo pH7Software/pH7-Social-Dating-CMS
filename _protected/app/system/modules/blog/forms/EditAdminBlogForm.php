@@ -16,6 +16,8 @@ use PH7\Framework\Url\Header;
 
 class EditAdminBlogForm
 {
+    const MAX_CATEGORIES = 300;
+
     public static function display()
     {
         if (isset($_POST['submit_edit_blog'])) {
@@ -32,7 +34,7 @@ class EditAdminBlogForm
         $oPost = $oBlogModel->readPost($sPostId);
 
         if (!empty($oPost) && (new Str)->equals($iBlogId, $oPost->blogId)) {
-            $oCategoryData = $oBlogModel->getCategory(null, 0, 300);
+            $oCategoryData = $oBlogModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aCategoryNames = array();
             foreach ($oCategoryData as $oId) {
@@ -40,7 +42,7 @@ class EditAdminBlogForm
             }
 
             $aSelectedCategories = array();
-            $oCategoryIds = $oBlogModel->getCategory($iBlogId, 0, 300);
+            $oCategoryIds = $oBlogModel->getCategory($iBlogId, 0, self::MAX_CATEGORIES);
             unset($oBlogModel);
 
             foreach ($oCategoryIds as $oId) {

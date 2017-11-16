@@ -17,12 +17,15 @@ use PH7\Framework\Url\Header;
 
 class EditNoteForm
 {
+    const MAX_CATEGORIES = 300;
+
     public static function display()
     {
         if (isset($_POST['submit_edit_note'])) {
             if (\PFBC\Form::isValid($_POST['submit_edit_note'])) {
                 new EditNoteFormProcess();
             }
+
             Header::redirect();
         }
 
@@ -35,7 +38,7 @@ class EditNoteForm
         $oPost = $oNoteModel->readPost($sPostId, $iProfileId);
 
         if (!empty($oPost) && (new Str)->equals($iNoteId, $oPost->noteId)) {
-            $oCategoryData = $oNoteModel->getCategory(null, 0, 300);
+            $oCategoryData = $oNoteModel->getCategory(null, 0, self::MAX_CATEGORIES);
 
             $aCategoryNames = array();
             foreach ($oCategoryData as $oId) {
@@ -43,7 +46,7 @@ class EditNoteForm
             }
 
             $aSelectedCategories = array();
-            $oCategoryIds = $oNoteModel->getCategory($iNoteId, 0, 300);
+            $oCategoryIds = $oNoteModel->getCategory($iNoteId, 0, self::MAX_CATEGORIES);
             unset($oNoteModel);
 
             foreach ($oCategoryIds as $iId) {
