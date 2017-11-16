@@ -16,10 +16,12 @@ class AdsCore extends Framework\Ads\Ads
 {
     const ID_COLUMN_NAME = 'adsId';
 
-    /** @var array */
-    private static $aTableNames = [
-        'Ads',
-        'AdsAffiliates'
+    const AD_TABLE_NAME = 'Ads';
+    const AFFILIATE_AD_TABLE_NAME = 'AdsAffiliates';
+
+    const TABLE_NAMES = [
+        self::AD_TABLE_NAME,
+        self::AFFILIATE_AD_TABLE_NAME
     ];
 
     /**
