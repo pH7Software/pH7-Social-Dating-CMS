@@ -13,16 +13,19 @@ use PH7\Framework\Url\Header;
 
 class AdminBlogForm
 {
+    const MAX_BLOG_POSTS = 300;
+
     public static function display()
     {
         if (isset($_POST['submit_blog'])) {
             if (\PFBC\Form::isValid($_POST['submit_blog'])) {
                 new AdminBlogFormProcess();
             }
+
             Header::redirect();
         }
 
-        $oCategoryData = (new BlogModel)->getCategory(null, 0, 300);
+        $oCategoryData = (new BlogModel)->getCategory(null, 0, self::MAX_BLOG_POSTS);
 
         $aCategoryNames = array();
         foreach ($oCategoryData as $oId) {
