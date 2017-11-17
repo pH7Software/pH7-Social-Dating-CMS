@@ -48,7 +48,9 @@ class BirthdayCoreModel
 
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Members') . 'WHERE (username <> \'' . PH7_GHOST_USERNAME . '\') AND (groupId <> 1) AND (groupId <> 9) AND (birthDate LIKE :date)' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
         $rStmt->bindValue(':date', '%' . (new CDateTime)->get()->date('-m-d'), \PDO::PARAM_STR);
-        if ($bIsSex) $rStmt->bindValue(':sex', $sGender, \PDO::PARAM_STR);
+        if ($bIsSex) {
+            $rStmt->bindValue(':sex', $sGender, \PDO::PARAM_STR);
+        }
 
         if (!$bCount && $bIsLimit) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
@@ -67,5 +69,4 @@ class BirthdayCoreModel
             return (int)$oRow->totalBirths;
         }
     }
-
 }
