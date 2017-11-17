@@ -15,19 +15,22 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class BirthdayCoreModel
 {
-
-    const ALL = 'all', COUPLE = 'couple', MALE = 'male', FEMALE = 'female';
+    const ALL = 'all';
+    const COUPLE = 'couple';
+    const MALE = 'male';
+    const FEMALE = 'female';
 
     /**
      * Gets Viewed Profile.
      *
      * @param string $sGender Constant (self::ALL, self::COUPLE, self::MALE, self::FEMALE). Default: self::ALL
-     * @param boolean $bCount Put TRUE for count birthdays or FALSE for the result of birthdays. Default: TRUE
+     * @param bool $bCount Put TRUE for count birthdays or FALSE for the result of birthdays. Default: TRUE
      * @param string $sOrderBy Default: SearchCoreModel::LAST_ACTIVITY
-     * @param integer $iSort Default: SearchCoreModel::DESC
-     * @param integer $iOffset Default: NULL
-     * @param integer $iLimit Default: NULL
-     * @return mixed (object | integer) object for the birthdays list returned or integer for the total number birthdays returned.
+     * @param int $iSort Default: SearchCoreModel::DESC
+     * @param int $iOffset Default: NULL
+     * @param int $iLimit Default: NULL
+     *
+     * @return \stdClass|int object for the birthdays list returned or integer for the total number birthdays returned.
      */
     public function get($sGender = self::ALL, $bCount = false, $sOrderBy = SearchCoreModel::LAST_ACTIVITY, $iSort = SearchCoreModel::DESC, $iOffset = null, $iLimit = null)
     {
