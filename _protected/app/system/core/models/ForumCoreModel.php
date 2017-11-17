@@ -100,8 +100,8 @@ class ForumCoreModel extends Model
 
         if (!empty($iProfileId)) {
             return $rStmt->fetch(\PDO::FETCH_OBJ);
-        } else {
-            return $rStmt->fetchAll(\PDO::FETCH_OBJ);
         }
+
+        return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 }
