@@ -13,22 +13,21 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 class VideoCoreModel extends Framework\Mvc\Model\Engine\Model
 {
     const
-    CACHE_GROUP = 'db/sys/mod/video',
-    CACHE_TIME = 172800,
-    CREATED = 'createdDate',
-    UPDATED = 'updatedDate';
+        CACHE_GROUP = 'db/sys/mod/video',
+        CACHE_TIME = 172800,
+        CREATED = 'createdDate',
+        UPDATED = 'updatedDate';
 
     public function album($iProfileId = null, $iAlbumId = null, $iApproved = 1, $iOffset, $iLimit, $sOrder = self::CREATED)
     {
-        $this->cache->start(self::CACHE_GROUP, 'album' . $iProfileId . $iAlbumId . $iApproved . $iOffset . $iLimit .$sOrder, static::CACHE_TIME);
+        $this->cache->start(self::CACHE_GROUP, 'album' . $iProfileId . $iAlbumId . $iApproved . $iOffset . $iLimit . $sOrder, static::CACHE_TIME);
 
-        if (!$oData = $this->cache->get())
-        {
-            $iOffset = (int) $iOffset;
-            $iLimit = (int) $iLimit;
+        if (!$oData = $this->cache->get()) {
+            $iOffset = (int)$iOffset;
+            $iLimit = (int)$iLimit;
 
             $sSqlProfileId = (!empty($iProfileId)) ? ' a.profileId = :profileId AND ' : '';
-            $sSqlAlbum  = (!empty($iAlbumId)) ? ' a.albumId=:albumId AND ' : '';
+            $sSqlAlbum = (!empty($iAlbumId)) ? ' a.albumId=:albumId AND ' : '';
             $rStmt = Db::getInstance()->prepare('SELECT a.*, m.username, m.firstName, m.sex FROM' . Db::prefix('AlbumsVideos') . 'AS a INNER JOIN' . Db::prefix('Members') . 'AS m ON a.profileId = m.profileId WHERE' . $sSqlProfileId . $sSqlAlbum . ' a.approved=:approved ORDER BY ' . $sOrder . ' DESC LIMIT :offset, :limit');
             (!empty($iProfileId)) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : '';
             (!empty($iAlbumId)) ? $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT) : '';
