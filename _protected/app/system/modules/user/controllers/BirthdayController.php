@@ -14,7 +14,20 @@ class BirthdayController extends Controller
 {
     const MAX_PROFILE_PER_PAGE = 20;
 
-    private $oBirthModel, $oPage, $sTitle, $sCurrentDate, $iTotalBirths;
+    /** @var BirthdayModel */
+    private $oBirthModel;
+
+    /** @var Page */
+    private $oPage;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var string */
+    private $sCurrentDate;
+
+    /** @var int */
+    private $iTotalBirths;
 
     public function __construct()
     {

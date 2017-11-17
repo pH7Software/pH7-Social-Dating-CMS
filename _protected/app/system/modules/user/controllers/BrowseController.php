@@ -17,7 +17,14 @@ class BrowseController extends Controller
 {
     const MAX_PROFILE_PER_PAGE = 40;
 
-    private $oUserModel, $oPage, $iTotalUsers;
+    /** @var UserModel */
+    private $oUserModel;
+
+    /** @var Page */
+    private $oPage;
+
+    /** @var int */
+    private $iTotalUsers;
 
     public function __construct()
     {

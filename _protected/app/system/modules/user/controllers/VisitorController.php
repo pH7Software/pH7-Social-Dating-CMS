@@ -14,7 +14,26 @@ class VisitorController extends Controller
 {
     const MAX_PROFILE_PER_PAGE = 10;
 
-    private $oUserModel, $oVisitorModel, $oPage, $sUsername, $sTitle, $iId, $iTotalVisitors;
+    /** @var UserModel */
+    private $oUserModel;
+
+    /** @var VisitorModel */
+    private $oVisitorModel;
+
+    /** @var Page */
+    private $oPage;
+
+    /** @var string */
+    private $sUsername;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var int */
+    private $iId;
+
+    /** @var int */
+    private $iTotalVisitors;
 
     public function __construct()
     {
