@@ -37,10 +37,10 @@ class ProfileController extends Controller
     /** @var string */
     private $sTitle;
 
-    /** @var integer */
+    /** @var int */
     private $iProfileId;
 
-    /** @var integer */
+    /** @var int */
     private $iVisitorId;
 
     public function __construct()
