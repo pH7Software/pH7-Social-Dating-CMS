@@ -6,6 +6,7 @@
  * @package        PH7 / App / System / Global / View / Base / Error
  */
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Layout\Html\Design;
