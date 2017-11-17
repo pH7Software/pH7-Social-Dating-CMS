@@ -88,7 +88,7 @@ class VisitorModel
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('MembersWhoViews') . 'AS who LEFT JOIN ' . Db::prefix('Members') .
             'AS m ON who.visitorId = m.profileId WHERE (who.profileId = :profileId) AND ' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
 
-        $rStmt->bindValue(':profileId', $this->_iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
         (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
 
         if (!$bCount) {
@@ -118,9 +118,9 @@ class VisitorModel
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('MembersWhoViews') .
             'SET lastVisit = :dateLastVisit WHERE profileId = :profileId AND visitorId = :visitorId LIMIT 1');
-        $rStmt->bindValue(':profileId', $this->_iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':visitorId', $this->_iVisitorId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':dateLastVisit', $this->_sDateVisit, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':visitorId', $this->iVisitorId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':dateLastVisit', $this->sDateVisit, \PDO::PARAM_STR);
         $rStmt->execute();
         Db::free($rStmt);
     }
@@ -134,9 +134,9 @@ class VisitorModel
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersWhoViews') .
             '(profileId, visitorId, lastVisit) VALUES(:profileId, :visitorId, :dateVisit)');
-        $rStmt->bindValue(':profileId', $this->_iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':visitorId', $this->_iVisitorId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':dateVisit', $this->_sDateVisit, \PDO::PARAM_STR);
+        $rStmt->bindValue(':profileId', $this->iProfileId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':visitorId', $this->iVisitorId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':dateVisit', $this->sDateVisit, \PDO::PARAM_STR);
         $rStmt->execute();
         Db::free($rStmt);
     }
