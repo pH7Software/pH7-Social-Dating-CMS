@@ -20,14 +20,15 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if(!UserCore::auth() && ($this->registry->action === 'addalbum' || $this->registry->action === 'addvideo'
-        || $this->registry->action === 'editalbum' || $this->registry->action === 'editvideo'
-        || $this->registry->action === 'deletevideo' || $this->registry->action === 'deletealbum'))
-        {
+        if (!UserCore::auth() && ($this->registry->action === 'addalbum' ||
+                $this->registry->action === 'addvideo' ||
+                $this->registry->action === 'editalbum' || $this->registry->action === 'editvideo' ||
+                $this->registry->action === 'deletevideo' || $this->registry->action === 'deletealbum')
+        ) {
             $this->signInRedirect();
         }
 
-         // If the admin is not logged (but can be if the admin use "login as user" feature)
+        // If the admin is not logged (but can be if the admin use "login as user" feature)
         if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
             if (!$this->checkMembership() || !$this->group->view_videos) {
                 $this->paymentRedirect();
