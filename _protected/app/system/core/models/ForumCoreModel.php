@@ -9,14 +9,14 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class ForumCoreModel extends Framework\Mvc\Model\Engine\Model
+class ForumCoreModel extends Model
 {
-    const
-    CACHE_GROUP = 'db/sys/mod/forum',
-    CREATED = 'createdDate DESC',
-    UPDATED = 'updatedDate DESC',
-    NAME = 'name ASC';
+    const CACHE_GROUP = 'db/sys/mod/forum';
+    const CREATED = 'createdDate DESC';
+    const UPDATED = 'updatedDate DESC';
+    const NAME = 'name ASC';
 
     /**
      * @param integer|null $iForumId
