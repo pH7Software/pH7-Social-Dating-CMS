@@ -382,7 +382,7 @@ function check_url($sUrl)
     $rCurl = curl_init();
     curl_setopt_array($rCurl, [CURLOPT_RETURNTRANSFER => true, CURLOPT_URL => $sUrl]);
     curl_exec($rCurl);
-    $iResponse = (int) curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
+    $iResponse = (int)curl_getinfo($rCurl, CURLINFO_HTTP_CODE);
     curl_close($rCurl);
 
     return $iResponse === 200 || $iResponse === 301 || $iResponse === 302;
