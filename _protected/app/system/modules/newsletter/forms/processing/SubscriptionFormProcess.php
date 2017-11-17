@@ -78,13 +78,13 @@ class SubscriptionFormProcess extends Form
      */
     protected function sendMail(array $aData)
     {
-        $sActivateLink = Uri::get('newsletter','home','activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
+        $sActivateLink = Uri::get('newsletter', 'home', 'activate') . PH7_SH . $aData['email'] . PH7_SH . $aData['hash_validation'];
 
         $this->view->content = t('Hi %0%!', $aData['name']) . '<br />' .
-        t("Welcome to %site_name%'s Subscription!") . '<br />' .
-        t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
-        $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aData['email']) . '<br />' .
-        t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
+            t("Welcome to %site_name%'s Subscription!") . '<br />' .
+            t('Activation link: %0%.', '<a href="' . $sActivateLink . '">' . $sActivateLink . '</a>');
+            $this->view->footer = t('You are receiving this email because we received a registration application with "%0%" email address for %site_name% (%site_url%).', $aData['email']) . '<br />' .
+            t('If you think someone has used your email address without your knowledge to create an account on %site_name%, please contact us using our contact form available on our website.');
 
         $sMessageHtml = $this->view->parseMail(
             PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/newsletter/registration.tpl',
