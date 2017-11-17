@@ -15,13 +15,12 @@ defined('PH7') or exit('Restricted access');
  */
 abstract class Emoticon
 {
-    const DIR = 'smile/', EXT = '.gif';
+    const DIR = 'smile/';
+    const EXT = '.gif';
 
     /**
      * Gets the list of emoticons.
      *
-     * @access protected
-     * @static
      * @return array
      */
     protected static function get()
@@ -32,9 +31,8 @@ abstract class Emoticon
     /**
      * Gets the path of emoticon.
      *
-     * @access protected
-     * @static
      * @param string $sName
+     *
      * @return Emoticon path.
      */
     protected static function getPath($sName)
@@ -45,9 +43,8 @@ abstract class Emoticon
     /**
      * Gets the URL of emoticon.
      *
-     * @access protected
-     * @static
      * @param string $sName
+     *
      * @return Emoticon URL.
      */
     protected static function getUrl($sName)
@@ -58,9 +55,8 @@ abstract class Emoticon
     /**
      * Gets the name of emoticon.
      *
-     * @access protected
-     * @static
      * @param array $aVal
+     *
      * @return Emoticon name.
      */
     protected static function getName($aVal)
@@ -71,9 +67,8 @@ abstract class Emoticon
     /**
      * Gets the emoticon code.
      *
-     * @access protected
-     * @static
      * @param array $aVal
+     *
      * @return Emoticon code.
      */
     protected static function getCode($aVal)

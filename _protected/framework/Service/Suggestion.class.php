@@ -19,32 +19,29 @@ class Suggestion
      */
     use Statik;
 
-    const
-    DIR = 'suggestions/',
-    EMAIL_FILE = 'email.txt';
+    const DIR = 'suggestions/';
+    const EMAIL_FILE = 'email.txt';
 
-    private static $_sFile;
+    /** @var string */
+    private static $sFile;
 
     /**
-     * @static
      * @return string Suggestion email address.
      */
     public static function email()
     {
-        self::$_sFile = static::EMAIL_FILE;
+        self::$sFile = static::EMAIL_FILE;
         return self::_get();
     }
 
     /**
      * Generic method to to pick and translate words.
      *
-     * @access private
-     * @static
      * @return string The transform words.
      */
     private static function _get()
     {
-        $aSuggestions = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
+        $aSuggestions = file(PH7_PATH_APP_CONFIG . static::DIR . self::$sFile);
 
         // It removes all spaces, line breaks, ...
         $aSuggestions = array_map('trim', $aSuggestions);
