@@ -19,8 +19,6 @@ class Page
 {
     /**
      * Private constructor to prevent instantiation of class since it's a static class.
-     *
-     * @access private
      */
     private function __construct()
     {
