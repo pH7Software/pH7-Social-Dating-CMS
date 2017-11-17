@@ -23,9 +23,7 @@ abstract class Annotation
 {
     const CACHE_GROUP = 'str/annotation';
 
-    /**
-     * @var object $oCache
-     */
+    /** @var Cache */
     private $oCache;
 
     /**
