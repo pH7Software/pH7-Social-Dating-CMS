@@ -124,7 +124,7 @@ class ToolController extends Controller
                 $this->design->setFlashMsg(Form::errorTokenMsg(), 'error');
             } else {
                 // Clean the site name to avoid bug with the backup path
-                $sSiteName = str_replace(array(' ', '/', '\\'), '_', $this->registry->site_name);
+                $sSiteName = str_replace([' ', '/', '\\'], '_', $this->registry->site_name);
                 $sCurrentDate = (new CDateTime)->get()->date();
 
                 switch ($this->httpRequest->post('backup_type')) {
