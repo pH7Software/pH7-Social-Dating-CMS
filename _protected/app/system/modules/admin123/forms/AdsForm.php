@@ -39,7 +39,7 @@ class AdsForm
     private static function getBannerDesc()
     {
         if (AdsCore::getTable() === AdsCore::AFFILIATE_AD_TABLE_NAME) {
-            return  t('The predefined variable for the URL of an affiliate account to put in the HTML is: %0%.', '<strong>#!%affiliate_url%!#</strong>');
+            return t('The predefined variable for the URL of an affiliate account to put in the HTML is: %0%.', '<strong>#!%affiliate_url%!#</strong>');
         }
 
         return t('The predefined variable to the URL of your site to indicate this in the HTML is: %0%.', '<strong>#!%site_url%!#</strong>');
