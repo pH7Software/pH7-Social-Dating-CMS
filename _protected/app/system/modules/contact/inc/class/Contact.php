@@ -49,7 +49,7 @@ class Contact extends Core
     /**
      * Send the email.
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      *
      * @throws \PH7\Framework\Layout\Tpl\Engine\PH7Tpl\Exception
      */
@@ -72,10 +72,10 @@ class Contact extends Core
         $sHtmlMessage = $this->view->parseMail(PH7_PATH_SYS . 'global/' . PH7_VIEWS . PH7_TPL_MAIL_NAME . '/tpl/mail/sys/mod/contact/contact_form.tpl', $this->sFeedbackEmail);
 
         $aInfo = [
-          'from' => $this->sMail,
-          'form_name' => $this->httpRequest->post('last_name') . ' ' . $this->httpRequest->post('first_name'),
-          'subject' => t('Contact Form: %0%', $this->sSubject),
-          'to' => $this->sFeedbackEmail
+            'from' => $this->sMail,
+            'form_name' => $this->httpRequest->post('last_name') . ' ' . $this->httpRequest->post('first_name'),
+            'subject' => t('Contact Form: %0%', $this->sSubject),
+            'to' => $this->sFeedbackEmail
         ];
 
         return (new Mail)->send($aInfo, $sHtmlMessage);
