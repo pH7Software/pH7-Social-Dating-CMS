@@ -65,13 +65,13 @@ abstract class Annotation
                 $sComment = preg_replace('/\/\*\*(.*)\*\//', '$1', $sComment);
                 $aComment = preg_split('/\n/', $sComment);
 
-                $sKey = $sVal = null;
+                $sKey = $sVal = null; // Set default values
                 $aChema[$sName] = array();
 
                 foreach ($aComment as $sCommentLine) {
                     if (preg_match('/@(.*?): (.*)/i', $sCommentLine, $aMatches)) {
                         $sKey = $aMatches[1];
-                        $sKey = $aMatches[2];
+                        $sVal = $aMatches[2];
 
                         $aChema[$sName][trim($sKey)] = trim($sVal);
                     }
