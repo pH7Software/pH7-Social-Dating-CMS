@@ -84,9 +84,8 @@ class Page
     /**
      * Set exception page.
      *
-     * @access public
-     * @static
-     * @param object $oExcept \Exception
+     * @param \Exception $oExcept
+     *
      * @return void
      */
     public static function exception(\Exception $oExcept)
