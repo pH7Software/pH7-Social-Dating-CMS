@@ -105,7 +105,8 @@ class Uri
      *
      * @throws FileException If the file is not found.
      */
-    private static function getRouteFilePath() {
+    private static function getRouteFilePath()
+    {
         $sPathLangName = PH7_PATH_APP_CONFIG . 'routes/' . PH7_LANG_CODE . '.xml';
         $sPathDefaultLang = PH7_PATH_APP_CONFIG . 'routes/' . PH7_DEFAULT_LANG_CODE . '.xml';
 
