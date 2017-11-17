@@ -10,7 +10,6 @@ namespace PH7;
 
 class SearchController extends Controller
 {
-
     public function index()
     {
         Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('user', 'search', 'quick'));
@@ -27,5 +26,4 @@ class SearchController extends Controller
         $this->view->page_title = $this->view->h1_title = t('Advanced Search');
         $this->output();
     }
-
 }
