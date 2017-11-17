@@ -22,43 +22,43 @@ use PH7\Framework\Session\Session;
 class RatingCoreAjax
 {
     /** @var HttpRequest */
-    private $_oHttpRequest;
+    private $oHttpRequest;
 
     /** @var RatingCoreModel */
-    private $_oRatingModel;
+    private $oRatingModel;
 
     /** @var string */
-    private $_sTxt;
+    private $sTxt;
 
     /** @var string */
-    private $_sTable;
+    private $sTable;
 
     /** @var int */
-    private $_iStatus;
+    private static $iVotes;
 
     /** @var int */
-    private $_iId;
+    private $iStatus;
+
+    /** @var int */
+    private $iId;
 
     /** @var float */
-    private $_fScore;
-
-    /** @var int */
-    private static $_iVotes;
+    private $fScore;
 
     public function __construct()
     {
-        $this->_oHttpRequest = new HttpRequest;
+        $this->oHttpRequest = new HttpRequest;
 
-        if ($this->_oHttpRequest->postExists('action') &&
-            $this->_oHttpRequest->postExists('table') &&
-            $this->_oHttpRequest->postExists('score') &&
-            $this->_oHttpRequest->postExists('id')
+        if ($this->oHttpRequest->postExists('action') &&
+            $this->oHttpRequest->postExists('table') &&
+            $this->oHttpRequest->postExists('score') &&
+            $this->oHttpRequest->postExists('id')
         ) {
-            if ($this->_oHttpRequest->post('action') == 'rating') {
+            if ($this->oHttpRequest->post('action') == 'rating') {
                 // Only for the Members
                 if (!UserCore::auth()) {
-                    $this->_iStatus = 0;
-                    $this->_sTxt = t('Please <b>register</b> or <b>login</b> to vote.');
+                    $this->iStatus = 0;
+                    $this->sTxt = t('Please <b>register</b> or <b>login</b> to vote.');
                 } else {
                     $this->initialize();
                 }
@@ -76,7 +76,7 @@ class RatingCoreAjax
      */
     public function show()
     {
-        return jsonMsg($this->_iStatus, $this->_sTxt);
+        return jsonMsg($this->iStatus, $this->sTxt);
     }
 
     /**
@@ -86,16 +86,16 @@ class RatingCoreAjax
      */
     protected function initialize()
     {
-        $this->_oRatingModel = new RatingCoreModel;
-        $this->_sTable = $this->_oHttpRequest->post('table');
-        $this->_iId = (int) $this->_oHttpRequest->post('id');
+        $this->oRatingModel = new RatingCoreModel;
+        $this->sTable = $this->oHttpRequest->post('table');
+        $this->iId = (int)$this->oHttpRequest->post('id');
 
-        if ($this->_sTable == 'Members') {
-            $iProfileId = (int) (new Session)->get('member_id');
+        if ($this->sTable == 'Members') {
+            $iProfileId = (int)(new Session)->get('member_id');
 
-            if ($iProfileId === $this->_iId) {
-                $this->_iStatus = 0;
-                $this->_sTxt = t('You can not vote your own profile!');
+            if ($iProfileId === $this->iId) {
+                $this->iStatus = 0;
+                $this->sTxt = t('You can not vote your own profile!');
                 return;
             }
         }
@@ -104,10 +104,10 @@ class RatingCoreAjax
          * @internal Today's IP address is also easier to change than delete a cookie, so we have chosen the Cookie instead save the IP address in the database.
          */
         $oCookie = new Cookie;
-        $sCookieName = 'pHSVoting' . $this->_iId . $this->_sTable;
+        $sCookieName = 'pHSVoting' . $this->iId . $this->sTable;
         if ($oCookie->exists($sCookieName)) {
-            $this->_iStatus = 0;
-            $this->_sTxt = t('You have already voted!');
+            $this->iStatus = 0;
+            $this->sTxt = t('You have already voted!');
             return;
         } else {
             $oCookie->set($sCookieName, 1, 3600 * 24 * 7); // A week
@@ -116,9 +116,9 @@ class RatingCoreAjax
 
         $this->select();
         $this->update();
-        $this->_iStatus = 1;
-        $sVoteTxt = (static::$_iVotes > 1) ? t('Votes') : t('Vote');
-        $this->_sTxt = t('Score: %0% - %2%: %1%', number_format($this->_fScore / static::$_iVotes, 1), static::$_iVotes, $sVoteTxt);
+        $this->iStatus = 1;
+        $sVoteTxt = (static::$iVotes > 1) ? t('Votes') : t('Vote');
+        $this->sTxt = t('Score: %0% - %2%: %1%', number_format($this->fScore / static::$iVotes, 1), static::$iVotes, $sVoteTxt);
     }
 
     /**
@@ -128,13 +128,13 @@ class RatingCoreAjax
      */
     protected function select()
     {
-        $iVotes = $this->_oRatingModel->getVote($this->_iId, $this->_sTable);
-        $fRate = $this->_oRatingModel->getScore($this->_iId, $this->_sTable);
+        $iVotes = $this->oRatingModel->getVote($this->iId, $this->sTable);
+        $fRate = $this->oRatingModel->getScore($this->iId, $this->sTable);
 
-        static::$_iVotes = $iVotes += 1;
-        $fScore = (float)$this->_oHttpRequest->post('score');
+        static::$iVotes = $iVotes += 1;
+        $fScore = (float)$this->oHttpRequest->post('score');
 
-        $this->_fScore = $fRate += $fScore;
+        $this->fScore = $fRate += $fScore;
     }
 
     /**
@@ -144,10 +144,9 @@ class RatingCoreAjax
      */
     protected function update()
     {
-        $this->_oRatingModel->updateVotes($this->_iId, $this->_sTable);
-        $this->_oRatingModel->updateScore($this->_fScore, $this->_iId, $this->_sTable);
+        $this->oRatingModel->updateVotes($this->iId, $this->sTable);
+        $this->oRatingModel->updateScore($this->fScore, $this->iId, $this->sTable);
     }
-
 }
 
 echo (new RatingCoreAjax)->show();
