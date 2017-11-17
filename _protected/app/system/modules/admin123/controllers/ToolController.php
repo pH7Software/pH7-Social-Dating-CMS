@@ -110,6 +110,7 @@ class ToolController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, static::BACKUP_FILE_EXTS);
+
         // Removing the path
         $aDumpList = array_map(function ($sValue) {
             return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue);
@@ -258,7 +259,7 @@ class ToolController extends Controller
     /**
      * Checks if the request been made ​​by the post method.
      *
-     * @return boolean
+     * @return bool
      */
     private function isPost()
     {
