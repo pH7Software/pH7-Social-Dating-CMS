@@ -24,6 +24,8 @@ use PH7\Framework\Str\Str;
  */
 class Browser
 {
+    const GOOGLE_FAVICON_URL = 'https://www.google.com/s2/favicons?domain=';
+
     /**
      * Detect the user's preferred language.
      *
@@ -185,9 +187,8 @@ class Browser
      */
     public static function favicon($sUrl)
     {
-        $sApiUrl = 'https://www.google.com/s2/favicons?domain=';
         $sDomainName = Http::getHostName($sUrl);
 
-        return $sApiUrl . $sDomainName;
+        return static::GOOGLE_FAVICON_URL . $sDomainName;
     }
 }
