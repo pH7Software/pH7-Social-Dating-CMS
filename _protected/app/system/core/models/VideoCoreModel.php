@@ -9,15 +9,25 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class VideoCoreModel extends Framework\Mvc\Model\Engine\Model
+class VideoCoreModel extends Model
 {
-    const
-        CACHE_GROUP = 'db/sys/mod/video',
-        CACHE_TIME = 172800,
-        CREATED = 'createdDate',
-        UPDATED = 'updatedDate';
+    const CACHE_GROUP = 'db/sys/mod/video';
+    const CACHE_TIME = 172800;
+    const CREATED = 'createdDate';
+    const UPDATED = 'updatedDate';
 
+    /**
+     * @param null|int $iProfileId
+     * @param null|int $iAlbumId
+     * @param int $iApproved
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param string $sOrder
+     *
+     * @return \stdClass
+     */
     public function album($iProfileId = null, $iAlbumId = null, $iApproved = 1, $iOffset, $iLimit, $sOrder = self::CREATED)
     {
         $this->cache->start(self::CACHE_GROUP, 'album' . $iProfileId . $iAlbumId . $iApproved . $iOffset . $iLimit . $sOrder, static::CACHE_TIME);
@@ -37,13 +47,20 @@ class VideoCoreModel extends Framework\Mvc\Model\Engine\Model
             $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
 
             $rStmt->execute();
-            $oData = (isset($iProfileId, $iAlbumId)) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $oData = isset($iProfileId, $iAlbumId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($oData);
         }
         return $oData;
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     * @param null|int $iVideoId
+     *
+     * @return bool
+     */
     public function deleteVideo($iProfileId, $iAlbumId, $iVideoId = null)
     {
         $sSqlVideoId = (!empty($iVideoId)) ? ' AND videoId=:videoId ' : '';

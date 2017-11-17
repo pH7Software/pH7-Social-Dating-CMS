@@ -9,16 +9,25 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class PictureCoreModel extends Framework\Mvc\Model\Engine\Model
+class PictureCoreModel extends Model
 {
+    const CACHE_GROUP = 'db/sys/mod/picture';
+    const CACHE_TIME = 172800;
+    const CREATED = 'createdDate';
+    const UPDATED = 'updatedDate';
 
-    const
-        CACHE_GROUP = 'db/sys/mod/picture',
-        CACHE_TIME = 172800,
-        CREATED = 'createdDate',
-        UPDATED = 'updatedDate';
-
+    /**
+     * @param null|int $iProfileId
+     * @param null|int $iAlbumId
+     * @param int $iApproved
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param string $sOrder
+     *
+     * @return \stdClass
+     */
     public function album($iProfileId = null, $iAlbumId = null, $iApproved = 1, $iOffset, $iLimit, $sOrder = self::CREATED)
     {
         $this->cache->start(self::CACHE_GROUP, 'album' . $iProfileId . $iAlbumId . $iApproved . $iOffset . $iLimit . $sOrder, static::CACHE_TIME);
@@ -42,19 +51,27 @@ class PictureCoreModel extends Framework\Mvc\Model\Engine\Model
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iAlbumId
+     * @param nul|intl $iPictureId
+     *
+     * @return bool
+     */
     public function deletePhoto($iProfileId, $iAlbumId, $iPictureId = null)
     {
         $sSqlPictureId = (!empty($iPictureId)) ? ' AND pictureId=:pictureId ' : '';
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Pictures') . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlPictureId);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
-        if (!empty($iPictureId))
+        if (!empty($iPictureId)) {
             $rStmt->bindValue(':pictureId', $iPictureId, \PDO::PARAM_INT);
+        }
 
         return $rStmt->execute();
     }
-
 }
