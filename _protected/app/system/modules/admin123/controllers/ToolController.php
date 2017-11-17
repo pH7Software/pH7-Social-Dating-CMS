@@ -24,6 +24,8 @@ use PH7\Framework\Url\Header;
 
 class ToolController extends Controller
 {
+    const BACKUP_FILE_EXTS = ['.sql', '.gz'];
+
     /** @var  string */
     private $sTitle;
 
@@ -107,7 +109,7 @@ class ToolController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
 
-        $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, array('.sql', '.gz'));
+        $aDumpList = $this->file->getFileList(PH7_PATH_BACKUP_SQL, static::BACKUP_FILE_EXTS);
         // Removing the path
         $aDumpList = array_map(function ($sValue) {
             return str_replace(PH7_PATH_BACKUP_SQL, '', $sValue);
