@@ -15,13 +15,13 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class WallModel extends Framework\Mvc\Model\Engine\Model
 {
-
     public function add($iProfileId, $sPost, $sCreatedDate)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersWall') . '(profileId, post, createdDate) VALUES (:profileId, :post, :createdDate)');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':post', $sPost, \PDO::PARAM_STR);
         $rStmt->bindValue(':dateTime', $sCreatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -31,6 +31,7 @@ class WallModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':post', $sPost, \PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -39,6 +40,7 @@ class WallModel extends Framework\Mvc\Model\Engine\Model
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('MembersWall') . 'WHERE :profileId=:profileId AND wallId=:wallId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -57,6 +59,7 @@ class WallModel extends Framework\Mvc\Model\Engine\Model
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oRow;
     }
 
@@ -64,5 +67,4 @@ class WallModel extends Framework\Mvc\Model\Engine\Model
     {
         return (new CommentCoreModel)->read($iProfileId, 1, $iOffset, $iLimit, 'profile');
     }
-
 }
