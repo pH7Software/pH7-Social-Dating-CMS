@@ -46,6 +46,7 @@ class ProfileController extends Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->bUserAuth = User::auth();
     }
 
@@ -383,7 +384,7 @@ class ProfileController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->view->error = '<strong><em>' . t('Suggestions:') . '</em></strong><br />
-        <a href="' . $this->registry->site_url . '">' . t('Return home') . '</a><br />
-        <a href="javascript:history.back();">' . t('Go back to the previous page') . '</a><br />';
+            <a href="' . $this->registry->site_url . '">' . t('Return home') . '</a><br />
+            <a href="javascript:history.back();">' . t('Go back to the previous page') . '</a><br />';
     }
 }
