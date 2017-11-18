@@ -99,7 +99,8 @@ $LANG = array(
             Your Admin Login Username is: <em>' . (!empty($_SESSION['val']['admin_username']) ? $_SESSION['val']['admin_username'] : '') . '</em><br />
             Your Admin Login Password is: <em>****** (hidden for security reasons. It\'s the one you chose during the installation).</em>
         </p>
-        <p>Don\'t forget to show off by showing YOUR new Social Dating Business to all your friends, your colleagues and your Facebook\'s mates (and even to your haters... or not :-) ).</p>
+        <p>Don\'t forget to show off YOUR new Social Dating Website to your friends, colleagues and Facebook\'s mates (and even to your haters... why not! :-) ).</p>
+        <p>Here is a <strong><a href="' . get_tweet_post(Controller::SOFTWARE_WEBSITE) . '">pre-written Tweet</a></strong> (which you can edit, of course)</p>
         <p>&nbsp;</p>
         <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
         please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
