@@ -14,17 +14,29 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Url\Header;
+use PH7\Framework\Http\Http;
 
 class MainController extends Controller
 {
     const ALBUMS_PER_PAGE = 14;
     const VIDEOS_PER_PAGE = 10;
 
+    /** @var VideoModel */
     private $oVideoModel;
+
+    /** @var Page */
     private $oPage;
+
+    /** @var string */
     private $sUsername;
+
+    /** @var int */
     private $iProfileId;
+
+    /** @var string */
     private $sTitle;
+
+    /** @var int */
     private $iTotalVideos;
 
     public function __construct()
