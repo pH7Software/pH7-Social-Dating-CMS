@@ -275,13 +275,14 @@ class MainController extends Controller
     /**
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
-     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false". Default: TRUE
+     * @param bool $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false". Default: TRUE
+     *
      * @return void
      */
     private function notFound($b404Status = true)
     {
         if ($b404Status === true) {
-            Framework\Http\Http::setHeadersByCode(404);
+            Http::setHeadersByCode(404);
         }
 
         $sErrMsg = '';
