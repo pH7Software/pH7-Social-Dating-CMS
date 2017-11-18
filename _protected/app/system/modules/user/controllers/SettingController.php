@@ -48,7 +48,7 @@ class SettingController extends Controller
         $this->view->avatarDesign = new AvatarDesignCore; // Avatar Design Class
 
         /** For the wallpaper on the index and design page **/
-        $this->view->path_img_background = $this->_getWallpaper();
+        $this->view->path_img_background = $this->getWallpaper();
 
         /** For the 'display_status' function on the index and privacy page **/
         $this->design->addJs(PH7_LAYOUT . PH7_SYS . PH7_MOD . $this->registry->module . PH7_SH . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS, 'common.js');
@@ -81,7 +81,7 @@ class SettingController extends Controller
         $this->view->h2_title = t('Change your Profile Photo');
 
         if ($this->httpRequest->postExists('del')) {
-            $this->_removeAvatar();
+            $this->removeAvatar();
         }
 
         $this->output();
@@ -94,7 +94,7 @@ class SettingController extends Controller
         $this->view->h2_title = $this->sTitle;
 
         if ($this->httpRequest->postExists('del')) {
-            $this->_removeWallpaper();
+            $this->removeWallpaper();
         }
 
         $this->output();
@@ -155,15 +155,14 @@ class SettingController extends Controller
         }
     }
 
-
-    private function _removeAvatar()
+    private function removeAvatar()
     {
         (new UserCore)->deleteAvatar($this->iProfileId, $this->sUsername);
 
         Header::redirect(null, t('Profile photo successfully deleted'));
     }
 
-    private function _getWallpaper()
+    private function getWallpaper()
     {
         $sBackground = (new UserModel)->getBackground($this->iProfileId, 1);
 
@@ -176,7 +175,7 @@ class SettingController extends Controller
         return $sBgFullPath;
     }
 
-    private function _removeWallpaper()
+    private function removeWallpaper()
     {
         (new UserCore)->deleteBackground($this->iProfileId, $this->sUsername);
 
