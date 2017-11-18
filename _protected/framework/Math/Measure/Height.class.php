@@ -34,7 +34,7 @@ class Height extends Measure implements Measurable
      *
      * @see self::get()
      *
-     * @param boolean $bPrint Default FALSE
+     * @param bool $bPrint
      *
      * @return void|string
      */

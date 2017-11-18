@@ -15,11 +15,11 @@ defined('PH7') or exit('Restricted access');
 
 abstract class Measure
 {
-    /** @var integer */
+    /** @var int */
     protected $iUnit;
 
     /**
-     * @param integer
+     * @param int $iUnit
      */
     public function __construct($iUnit)
     {

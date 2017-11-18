@@ -10,14 +10,15 @@
  */
 
 namespace PH7\Framework\Math\Measure;
+
 defined('PH7') or exit('Restricted access');
 
 interface Measurable
 {
     /**
-     * Get measure.
+     * Get the measure.
      *
-     * @return integer
+     * @return mixed
      */
     public function get();
 }
