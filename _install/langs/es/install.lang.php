@@ -99,8 +99,8 @@ $LANG = array(
         <p>P.D. Para informes de errores, sugerencias, colaboración, participación en el desarrollo y / o traducción de software, etc,
             por favor visite nuestro <a href="' . Controller::SOFTWARE_WEBSITE . '">sitio web</a>.</p>
         <p>---</p>
-        <p>Saludos cordiales,</p>
-        <p>El equipo de desarrolladores pH7CMS.</p>',
+        <p>Saludos cordiales,<br />
+        <a href="' . Controller::AUTHOR_URL . '">Pierre-Henry Soria</a></p>',
     'yes_dir' => '¡El directorio se encuentra correctamente!',
     'no_dir' => 'El directorio no existe.',
     'wait_importing_database' => 'Espere al importar la base de datos por favor.<br />
