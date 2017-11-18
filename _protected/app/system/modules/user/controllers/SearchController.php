@@ -8,11 +8,14 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
+
 class SearchController extends Controller
 {
     public function index()
     {
-        Framework\Url\Header::redirect(Framework\Mvc\Router\Uri::get('user', 'search', 'quick'));
+        Header::redirect(Uri::get('user', 'search', 'quick'));
     }
 
     public function quick()
