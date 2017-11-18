@@ -62,6 +62,7 @@ class SettingController extends Controller
         $this->sTitle = t('Account Settings');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -70,6 +71,7 @@ class SettingController extends Controller
         $this->sTitle = t('Edit Your Profile');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -78,8 +80,9 @@ class SettingController extends Controller
         $this->view->page_title = t('Profile Photo');
         $this->view->h2_title = t('Change your Profile Photo');
 
-        if ($this->httpRequest->postExists('del'))
+        if ($this->httpRequest->postExists('del')) {
             $this->_removeAvatar();
+        }
 
         $this->output();
     }
@@ -90,8 +93,9 @@ class SettingController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
-        if ($this->httpRequest->postExists('del'))
+        if ($this->httpRequest->postExists('del')) {
             $this->_removeWallpaper();
+        }
 
         $this->output();
     }
@@ -101,6 +105,7 @@ class SettingController extends Controller
         $this->sTitle = t('Notifications');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -109,6 +114,7 @@ class SettingController extends Controller
         $this->sTitle = t('Privacy Settings');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -117,6 +123,7 @@ class SettingController extends Controller
         $this->sTitle = t('Change Password');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -141,10 +148,11 @@ class SettingController extends Controller
 
     public function yesDelete()
     {
-        if (!$this->session->exists('yes_delete'))
+        if (!$this->session->exists('yes_delete')) {
             Header::redirect(Uri::get('user', 'setting', 'delete'));
-        else
+        } else {
             $this->output();
+        }
     }
 
 
