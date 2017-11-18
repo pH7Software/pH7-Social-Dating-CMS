@@ -17,7 +17,7 @@ class BirthdayCore extends Core
     const SLEEP_SEC = 10;
 
     /** @var int */
-    private static $_iTotalSent = 0;
+    private static $iTotalSent = 0;
 
     /**
      * Sent Birthday emails.
@@ -31,17 +31,17 @@ class BirthdayCore extends Core
 
         foreach ($oBirths as $oBirth) {
             // Do not send any emails at the same time to avoid overloading the mail server.
-            if (self::$_iTotalSent > self::MAX_BULK_EMAIL_NUMBER) {
+            if (self::$iTotalSent > self::MAX_BULK_EMAIL_NUMBER) {
                 sleep(self::SLEEP_SEC);
             }
 
             if ($this->sendMail($oBirth, $oMail)) {
-                self::$_iTotalSent++;
+                self::$iTotalSent++;
             }
         }
         unset($oMail, $oBirths);
 
-        return self::$_iTotalSent;
+        return self::$iTotalSent;
     }
 
     /**
