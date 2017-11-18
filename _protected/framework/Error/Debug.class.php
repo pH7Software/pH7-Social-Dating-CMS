@@ -13,6 +13,7 @@
 namespace PH7\Framework\Error {
     defined('PH7') or exit('Restricted access');
 
+    use Exception;
     use PH7\Framework\Config\Config;
 
     final class Debug
@@ -31,7 +32,7 @@ namespace PH7\Framework\Error {
          *
          * @return string
          */
-        public static function getInfoExcept($oE)
+        public static function getInfoExcept(Exception $oE)
         {
             $sDebug = $oE->getMessage();
             $sDebug .= '<br />';
