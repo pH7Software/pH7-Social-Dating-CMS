@@ -13,12 +13,15 @@ namespace PH7\Framework\Analytics;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc;
+use PH7\Framework\Mvc\Model\Statistic as StatisticModel;
 use PH7\Framework\Pattern\Statik;
 use PH7\Framework\Session\Session;
 
 class Statistic
 {
+    /** pHV = "pH Views" */
+    const SESSION_PREFIX = 'pHV';
+
     /**
      * Import the trait to set the class static.
      *
@@ -37,10 +40,10 @@ class Statistic
     public static function setView($iId, $sTable)
     {
         $oSession = new Session;
-        $sSessionName = 'pHV' . $iId . $sTable;
+        $sSessionName = static::SESSION_PREFIX . $iId . $sTable;
 
         if (!$oSession->exists($sSessionName)) {
-            Mvc\Model\Statistic::setView($iId, $sTable);
+            StatisticModel::setView($iId, $sTable);
             $oSession->set($sSessionName, 1);
         }
 
