@@ -3,11 +3,11 @@
  * @title            Registry Class
  * @desc             Recording data (variables).
  *
- * @author           Pierre-Henry Soria <ph7software@gmail.com>
+ * @author           Pierre-Henry Soria <hi@ph7.me>
  * @copyright        (c) 2012-2018, Pierre-Henry Soria. All Rights Reserved.
  * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Registry
- * @version          1.2
+ * @version          1.3
  */
 
 namespace PH7\Framework\Registry;
@@ -21,12 +21,8 @@ use PH7\Framework\Pattern\Singleton;
  */
 final class Registry
 {
-
-    /**
-     * @access private
-     * @staticvar array $_aData The data array.
-     */
-    private static $_aData = array();
+    /** @var array */
+    private static $aData = array();
 
     /**
      * Import the Singleton trait.
@@ -34,19 +30,20 @@ final class Registry
     use Singleton;
 
     /**
-     * @internal We do not put a "__construct" and "__clone" "private" because it is already included in the class \PH7\Framework\Pattern\Base that is included in the \PH7\Framework\Pattern\Singleton class.
+     * @internal We don't add "__construct()" and "__clone"() private methods because it's already done in \PH7\Framework\Pattern\Base which is included in \PH7\Framework\Pattern\Singleton
      */
 
     /**
      * Get a data in the register.
      *
      * @param string $sName
-     * @return string (string | null) If it finds a given, it returns the data, otherwise returns null.
+     *
+     * @return string|null If it finds a given, it returns the data, otherwise returns null.
      */
     public function __get($sName)
     {
-        if (isset(self::$_aData[$sName])) {
-            return self::$_aData[$sName];
+        if (isset(self::$aData[$sName])) {
+            return self::$aData[$sName];
         }
 
         return null;
@@ -57,11 +54,11 @@ final class Registry
      *
      * @param string $sName
      * @param string $sValue
+     *
      * @return void
      */
     public function __set($sName, $sValue)
     {
-        self::$_aData[$sName] = $sValue;
+        self::$aData[$sName] = $sValue;
     }
-
 }
