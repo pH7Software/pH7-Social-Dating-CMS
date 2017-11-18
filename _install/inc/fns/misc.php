@@ -17,6 +17,7 @@ defined('PH7') or exit('Restricted access');
  * Get the list of name of directories inside a directory.
  *
  * @param string $sDir
+ *
  * @return array
  */
 function get_dir_list($sDir)
@@ -39,7 +40,8 @@ function get_dir_list($sDir)
  * Check valid directory.
  *
  * @param string $sDir
- * @return boolean
+ *
+ * @return bool
  */
 function is_directory($sDir)
 {
@@ -54,6 +56,7 @@ function is_directory($sDir)
  * Check start extension.
  *
  * @param string $sDir
+ *
  * @return string The good extension.
  */
 function check_ext_start($sDir)
@@ -65,6 +68,7 @@ function check_ext_start($sDir)
  * Check end extension.
  *
  * @param string $sDir
+ *
  * @return string The good extension.
  */
 function check_ext_end($sDir)
@@ -76,9 +80,10 @@ function check_ext_end($sDir)
  * Validate name (first and last name).
  *
  * @param string $sName
- * @param integer $iMin Default 2
- * @param integer $iMax Default 20
- * @return boolean
+ * @param int $iMin Default 2
+ * @param int $iMax Default 20
+ *
+ * @return bool
  */
 function validate_name($sName, $iMin = 2, $iMax = 20)
 {
@@ -89,9 +94,10 @@ function validate_name($sName, $iMin = 2, $iMax = 20)
  * Validate username.
  *
  * @param string $sUsername
- * @param integer $iMin Default 3
- * @param integer $iMax Default 30
- * @return integer (0 = OK | 1 = too short | 2 = too long | 3 = bad username).
+ * @param int $iMin Default 3
+ * @param int $iMax Default 30
+ *
+ * @return int (0 = OK | 1 = too short | 2 = too long | 3 = bad username).
  */
 function validate_username($sUsername, $iMin = 3, $iMax = 30)
 {
@@ -105,9 +111,10 @@ function validate_username($sUsername, $iMin = 3, $iMax = 30)
  * Validate password.
  *
  * @param string $sPassword
- * @param integer $iMin 6
- * @param integer $iMax 92
- * @return integer (0 = OK | 1 = too short | 2 = too long | 3 = no number | 4 = no upper).
+ * @param int $iMin 6
+ * @param int $iMax 92
+ *
+ * @return int (0 = OK | 1 = too short | 2 = too long | 3 = no number | 4 = no upper).
  */
 function validate_password($sPassword, $iMin = 6, $iMax = 92)
 {
@@ -122,7 +129,8 @@ function validate_password($sPassword, $iMin = 6, $iMax = 92)
  * Validate email.
  *
  * @param string $sEmail
- * @return boolean
+ *
+ * @return bool
  */
 function validate_email($sEmail)
 {
@@ -134,7 +142,8 @@ function validate_email($sEmail)
  *
  * @param string $sVal1
  * @param string $sVal2
- * @return boolean
+ *
+ * @return bool
  */
 function validate_identical($sVal1, $sVal2)
 {
@@ -146,7 +155,8 @@ function validate_identical($sVal1, $sVal2)
  *
  * @param string $sText Sentence.
  * @param string $sWord Word to find.
- * @return boolean Returns TRUE if the word is found, FALSE otherwise.
+ *
+ * @return bool Returns TRUE if the word is found, FALSE otherwise.
  */
 function find($sText, $sWord)
 {
@@ -157,7 +167,8 @@ function find($sText, $sWord)
  * Check that all fields are filled.
  *
  * @param array $aVars
- * @return boolean
+ *
+ * @return bool
  */
 function filled_out(array $aVars)
 {
@@ -171,6 +182,7 @@ function filled_out(array $aVars)
  * Redirect to another URL.
  *
  * @param string $sUrl
+ *
  * @return void
  */
 function redirect($sUrl)
@@ -183,7 +195,8 @@ function redirect($sUrl)
  * Delete directory.
  *
  * @param string $sPath
- * @return boolean
+ *
+ * @return bool
  */
 function delete_dir($sPath)
 {
@@ -201,7 +214,8 @@ function delete_dir($sPath)
  *
  * @param Db $oDb
  * @param string $sSqlFile SQL File.
- * @return boolean|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
+ *
+ * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
  */
 function exec_query_file(Db $oDb, $sSqlFile)
 {
@@ -248,6 +262,7 @@ function client_ip()
  * Escape string.
  *
  * @param string $sVal
+ *
  * @return string The escaped string.
  */
 function escape($sVal)
@@ -259,6 +274,7 @@ function escape($sVal)
  * Clean string.
  *
  * @param string $sVal
+ *
  * @return string The cleaned string.
  */
 function clean_string($sVal)
@@ -269,7 +285,8 @@ function clean_string($sVal)
 /**
  * Generate Hash.
  *
- * @param integer $iLength Default 80
+ * @param int $iLength Default 80
+ *
  * @return string The random hash. Maximum 128 characters with whirlpool encryption.
  */
 function generate_hash($iLength = 80)
@@ -297,7 +314,7 @@ function ffmpeg_path()
 /**
  * Check if Apache's mod_rewrite is installed.
  *
- * @return boolean
+ * @return bool
  */
 function is_url_rewrite()
 {
@@ -322,7 +339,7 @@ function is_url_rewrite()
 /**
  * Check if the OS is Windows.
  *
- * @return boolean
+ * @return bool
  */
 function is_windows()
 {
@@ -333,7 +350,8 @@ function is_windows()
  * Get the URL contents with CURL.
  *
  * @param string $sFile
- * @return string|boolean Returns the result content on success, FALSE on failure.
+ *
+ * @return string|bool Returns the result content on success, FALSE on failure.
  */
 function get_url_contents($sFile)
 {
@@ -354,7 +372,8 @@ function get_url_contents($sFile)
  *
  * @param string $sFile Zip file.
  * @param string $sDir Destination to extract the file.
- * @return boolean
+ *
+ * @return bool
  */
 function zip_extract($sFile, $sDir)
 {
@@ -375,7 +394,8 @@ function zip_extract($sFile, $sDir)
  * Checks if the URL is valid and contains the HTTP status code '200 OK', '301 Moved Permanently' or '302 Found'
  *
  * @param string $sUrl
- * @return boolean
+ *
+ * @return bool
  */
 function check_url($sUrl)
 {
@@ -392,7 +412,8 @@ function check_url($sUrl)
  * Check license key.
  *
  * @param string $sKey The License Key.
- * @return integer
+ *
+ * @return int
  */
 function check_license($sKey)
 {
@@ -405,7 +426,8 @@ function check_license($sKey)
  * Send an email (text and HTML format).
  *
  * @param array $aParams The parameters information to send email.
- * @return boolean Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
+ *
+ * @return bool Returns TRUE if the mail was successfully accepted for delivery, FALSE otherwise.
  */
 function send_mail(array $aParams)
 {
