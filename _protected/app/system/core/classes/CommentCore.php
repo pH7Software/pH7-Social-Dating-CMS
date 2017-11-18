@@ -31,7 +31,7 @@ class CommentCore
     use Statik;
 
     /**
-     * Check table.
+     * Check table names.
      *
      * @param string $sTable
      *
@@ -45,7 +45,7 @@ class CommentCore
     {
         $sTable = strtolower($sTable); // Case insensitivity
 
-        if (in_array($sTable, self::$aLowercaseTableNames, true)) {
+        if (static::doesTableNameExist($sTable)) {
             return ucfirst($sTable);
         }
 
@@ -65,5 +65,15 @@ class CommentCore
         $iCommentNumber = (new CommentCoreModel)->total($iId, $sTable);
 
         return nt('%n% Comment', '%n% Comments', $iCommentNumber);
+    }
+
+    /**
+     * @param string $sTable
+     *
+     * @return bool
+     */
+    private static function doesTableNameExist($sTable)
+    {
+        return in_array($sTable, self::$aLowercaseTableNames, true);
     }
 }
