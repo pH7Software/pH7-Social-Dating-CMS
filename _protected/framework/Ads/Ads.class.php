@@ -36,7 +36,9 @@ class Ads
 
         // Advertisement Clicks
         $oHttpRequest = new HttpRequest;
-        if ($oHttpRequest->getExists(static::PARAM_URL) && $oHttpRequest->get(static::PARAM_URL) == $oData->adsId) {
+        if ($oHttpRequest->getExists(static::PARAM_URL) &&
+            $oHttpRequest->get(static::PARAM_URL) == $oData->adsId
+        ) {
             ModelAds::setClick($oData->adsId);
         }
         unset($oHttpRequest);
