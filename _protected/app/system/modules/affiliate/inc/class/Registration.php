@@ -64,7 +64,7 @@ class Registration extends RegistrationCore
     {
         switch ($this->iActiveType) {
             case 1:
-                $sEmailMsg = t('Please %0% to make money from today!', '<a href="' . Uri::get('affiliate', 'home', 'login') . '"><b>'.t('log in').'</b></a>');
+                $sEmailMsg = t('Please %0% to make money from today!', '<a href="' . Uri::get('affiliate', 'home', 'login') . '"><b>' . t('log in') . '</b></a>');
                 break;
 
             case 2:
