@@ -49,7 +49,8 @@ class CArray
      */
     public static function getKeByVal($sValue, array $aArray)
     {
-        $mKey = array_search($sValue, $aArray);
+        $mKey = array_search($sValue, $aArray, true);
+
         return static::get($mKey);
     }
 
@@ -63,7 +64,8 @@ class CArray
      */
     public static function getKeyByValIgnoreCase($sValue, array $aArray)
     {
-        $mKey = array_search(strtolower($sValue), array_map('strtolower', $aArray));
+        $mKey = array_search(strtolower($sValue), array_map('strtolower', $aArray), true);
+
         return static::get($mKey);
     }
 
