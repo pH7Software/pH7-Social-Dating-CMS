@@ -33,7 +33,7 @@ class Weight extends Measure implements Measurable
      *
      * @see self::get()
      *
-     * @param boolean $bPrint
+     * @param bool $bPrint
      *
      * @return void|string
      */
