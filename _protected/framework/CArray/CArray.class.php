@@ -79,7 +79,7 @@ class CArray
      */
     public static function getValueByKey($sKey, array $aArray)
     {
-        return (array_key_exists($sKey, $aArray) && !empty($aArray[$sKey])) ? $aArray[$sKey] : null;
+        return array_key_exists($sKey, $aArray) && !empty($aArray[$sKey]) ? $aArray[$sKey] : null;
     }
 
     /**
@@ -91,6 +91,6 @@ class CArray
      */
     private static function get($mKey)
     {
-        return ($mKey !== false) ? $mKey : null;
+        return $mKey !== false ? $mKey : null;
     }
 }
