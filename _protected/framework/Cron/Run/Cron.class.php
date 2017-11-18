@@ -18,7 +18,10 @@ use PH7\Framework\Url\Uri;
 
 abstract class Cron extends Core
 {
+    /** @var int */
     protected $iTime;
+
+    /** @var Uri */
     private $oUri;
 
     public function __construct()

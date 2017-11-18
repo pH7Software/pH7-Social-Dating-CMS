@@ -23,11 +23,11 @@ class Logger extends Core
     const EXCEPT_DIR = 'except/';
     const GZIP_DIR = 'gzip/';
 
-    /**
-     * @var string $sDir
-     * @var string $sFileName
-     */
-    protected $sDir, $sFileName;
+    /** @var string */
+    protected $sDir;
+
+    /** @var string */
+    protected $sFileName;
 
     public function __construct()
     {
