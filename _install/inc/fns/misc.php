@@ -464,8 +464,9 @@ function send_mail(array $aParams)
 EOF;
 
     // If the email sender is empty, we define the server email.
-    if (empty($aParams['from']))
+    if (empty($aParams['from'])) {
         $aParams['from'] = $_SERVER['SERVER_ADMIN'];
+    }
 
     /*** Headers ***/
     // To avoid the email goes in the spam folder of email client.
