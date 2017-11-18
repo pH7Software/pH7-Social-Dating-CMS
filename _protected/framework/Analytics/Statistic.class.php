@@ -32,7 +32,7 @@ class Statistic
     /**
      * Set Views (pH Views) Statistics with a verification session to avoid duplication in the number of page views.
      *
-     * @param integer $iId
+     * @param int $iId
      * @param string $sTable
      *
      * @return void
