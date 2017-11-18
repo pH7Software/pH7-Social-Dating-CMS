@@ -152,14 +152,12 @@ class Cache
     /**
      * Sets the time expire cache.
      *
-     * @param integer $iExpire (the time with the 'touch' function).
-     *
      * @return self
      */
-    public function setExpire($iExpire)
+    public function setExpire()
     {
         // How long to cache for (in seconds, e.g. 3600*24 = 24 hour)
-        @touch($this->_getFile(), time() + (int)$this->_iTtl);
+        @touch($this->getFile(), time() + $this->iTtl);
 
         return $this;
     }
