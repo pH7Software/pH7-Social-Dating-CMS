@@ -103,10 +103,10 @@ $LANG = array(
         <p><strong>Here is a <a href="' . get_tweet_post(Controller::SOFTWARE_WEBSITE) . '">pre-written Tweet</a> (which you can edit, of course)</strong>.</p>
         <p>&nbsp;</p>
         <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
-        please visit our <a href="' . Controller::SOFTWARE_WEBSITE . '">website</a>.</p>
+        please visit the <a href="' . Controller::SOFTWARE_WEBSITE . '">official website</a>.</p>
         <p>---</p>
-        <p>Kind regards,</p>
-        <p>The pH7CMS developers team.</p>',
+        <p>Best regards,<br />
+        <a href="' . Controller::AUTHOR_URL . '">Pierre-Henry Soria</a></p>',
     'yes_dir' => 'The directory was found successfully!',
     'no_dir' => 'The directory does not exist.',
     'wait_importing_database' => 'Please wait while importing the database.<br />

@@ -103,8 +103,8 @@ $LANG = array(
         <p>Pour tous rapport de bogues, suggestions, partenariat, participation au développement du logiciel et/ou à sa traduction, etc.,
         veuillez visiter notre <a href="' . Controller::SOFTWARE_WEBSITE . '">site Web</a>.</p>
         <p>---</p>
-        <p>Cordialement,</p>
-        <p>L\'équipe de développement de pH7CMS.</p>',
+        <p>Cordialement,<br />
+        <a href="' . Controller::AUTHOR_URL . '">Pierre-Henry Soria</a></p>',
     'yes_dir' => 'Le répertoire a été trouvé avec succès !',
     'no_dir' => 'Le répertoire n\'existe pas.',
     'wait_importing_database' => 'Veuillez patienter pendant l\'importation de la base de donnée.<br />
