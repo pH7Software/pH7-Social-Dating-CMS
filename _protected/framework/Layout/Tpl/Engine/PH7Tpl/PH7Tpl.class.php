@@ -935,18 +935,13 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      */
     final private function isMarkCopyright()
     {
-        // Skip this step if it's not the base template (because there is no "smartLink()" and "link()" in layout.tpl of other templates as it includes the "base" one)
+        // Skip this step if it's not the base template (because there is no "link()" in layout.tpl of other templates as it includes the "base" one)
         if ($this->notBaseTheme()) {
             return true;
         }
 
-        // "design->smartLink()" can never be removed.
-        if (false === strpos($this->sCode, 'design->smartLink()')) {
-            return false;
-        }
-
         // "design->link()" can never be removed. Copyright notices won't be displayed if you bought a license
-        return false !== strpos($this->sCode, 'design->link()');
+        return (false !== strpos($this->sCode, 'design->link()'));
     }
 
     /**
