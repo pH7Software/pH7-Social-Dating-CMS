@@ -26,24 +26,16 @@ class Config implements Configurable
     const DEVELOPMENT_MODE = 'development';
     const PRODUCTION_MODE = 'production';
 
-    /**
-     * @var array $values
-     */
+    /** @var array */
     public $values = array();
 
-    /**
-     * @var string $_sConfigAppFilePath
-     */
-    private $_sConfigAppFilePath;
+    /** @var string */
+    private $sConfigAppFilePath;
 
-    /**
-     * @var string $_sConfigAppFilePath
-     */
-    private $_sConfigSysFilePath;
+    /** @var string */
+    private $sConfigSysFilePath;
 
-    /**
-     * Import the Singleton trait.
-     */
+    /** Import the Singleton trait*/
     use Singleton;
 
     /**
@@ -51,10 +43,10 @@ class Config implements Configurable
      */
     private function __construct()
     {
-        $this->_sConfigAppFilePath = PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE;
-        $this->_sConfigSysFilePath = PH7_PATH_SYS . PH7_CONFIG . PH7_CONFIG_FILE;
+        $this->sConfigAppFilePath = PH7_PATH_APP_CONFIG . PH7_CONFIG_FILE;
+        $this->sConfigSysFilePath = PH7_PATH_SYS . PH7_CONFIG . PH7_CONFIG_FILE;
 
-        $this->_read();
+        $this->read();
     }
 
     /**
@@ -98,7 +90,7 @@ class Config implements Configurable
      */
     public function setProductionMode()
     {
-        $this->_setMode(self::PRODUCTION_MODE);
+        $this->setMode(self::PRODUCTION_MODE);
     }
 
     /**
@@ -108,35 +100,36 @@ class Config implements Configurable
      */
     public function setDevelopmentMode()
     {
-        $this->_setMode(self::DEVELOPMENT_MODE);
+        $this->setMode(self::DEVELOPMENT_MODE);
     }
 
     /**
      * Set a Mode (Generic method).
      *
      * @param string $sReplace The Mode site.
-     * @see PH7\Framework\Config\Config::setProductionMode()
-     * @see PH7\Framework\Config\Config::setDevelopmentMode()
+     *
+     * @see Config::setProductionMode()
+     * @see Config::setDevelopmentMode()
      *
      * @return void
      */
-    private function _setMode($sReplace)
+    private function setMode($sReplace)
     {
         $sSearch = $sReplace === self::DEVELOPMENT_MODE ? self::PRODUCTION_MODE : self::DEVELOPMENT_MODE;
 
         $oFile = new File;
 
         // Check and correct the file permission if necessary.
-        $oFile->chmod($this->_sConfigAppFilePath, 0666);
+        $oFile->chmod($this->sConfigAppFilePath, 0666);
 
-        $sFileContents = $oFile->getFile($this->_sConfigAppFilePath);
+        $sFileContents = $oFile->getFile($this->sConfigAppFilePath);
         $sSearchContents = 'environment = ' . $sSearch;
         $sReplaceContents = 'environment = ' . $sReplace;
         $sNewContents = str_replace($sSearchContents, $sReplaceContents, $sFileContents);
-        $oFile->putFile($this->_sConfigAppFilePath, $sNewContents);
+        $oFile->putFile($this->sConfigAppFilePath, $sNewContents);
 
         // Check and correct the file permission if necessary.
-        $oFile->chmod($this->_sConfigAppFilePath, 0644);
+        $oFile->chmod($this->sConfigAppFilePath, 0644);
 
         unset($oFile, $sFileContents);
     }
@@ -146,14 +139,14 @@ class Config implements Configurable
      *
      * @return void
      */
-    private function _read()
+    private function read()
     {
         /* Loading configuration files */
 
         // 1) Load app config file
-        $this->values = parse_ini_file($this->_sConfigAppFilePath, true);
+        $this->values = parse_ini_file($this->sConfigAppFilePath, true);
         // 2) Now we have to use array_merge() function, so we do with the Config::load() method for loading system config file
-        $this->load($this->_sConfigSysFilePath);
+        $this->load($this->sConfigSysFilePath);
 
         /* The config constants */
         define('PH7_DEFAULT_THEME', $this->values['application']['default_theme']);
