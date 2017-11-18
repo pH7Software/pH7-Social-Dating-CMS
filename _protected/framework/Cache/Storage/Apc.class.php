@@ -17,10 +17,10 @@ defined('PH7') or exit('Restricted access');
 class Apc
 {
     /** @var int|float */
-    private $_iDefaultTtl;
+    private $iDefaultTtl;
 
     /** @var array */
-    private $_aTtlOverride = array();
+    private $aTtlOverride = array();
 
     /**
      * @param int $iDefaultTtl
@@ -29,7 +29,7 @@ class Apc
      */
     public function __construct($iDefaultTtl = 0)
     {
-        $this->_iDefaultTtl = abs($iDefaultTtl);
+        $this->iDefaultTtl = abs($iDefaultTtl);
 
         if (!extension_loaded('apc')) {
             throw new MissingExtensionException('APC PHP extension is not installed.');
@@ -48,12 +48,12 @@ class Apc
         $iTtl = abs($iTtl);
 
         if ($iTtl === 0) {
-            $iTtl = $this->_iDefaultTtl;
+            $iTtl = $this->iDefaultTtl;
         }
 
         // See if this ID exists in the override table.
-        if (isset($this->_aTtlOverride[$sId])) {
-            $iTtl = $this->_aTtlOverride[$sId];
+        if (isset($this->aTtlOverride[$sId])) {
+            $iTtl = $this->aTtlOverride[$sId];
         }
 
         if ($sValue !== null) {
@@ -112,6 +112,7 @@ class Apc
     public function clear()
     {
         apc_clear_cache();
+
         return true;
     }
 }
