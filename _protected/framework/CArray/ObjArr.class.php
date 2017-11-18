@@ -45,7 +45,6 @@ class ObjArr
     /**
      * Converting an Object to an Array.
      *
-     * @static
      * @param stdClass|array $oObj The object to convert.
      *
      * @return array
