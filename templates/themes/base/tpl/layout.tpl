@@ -78,7 +78,9 @@
       {/if}
 
       <noscript>
-          <div class="noscript err_msg">{lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}</div>
+        <div class="noscript err_msg">
+          {lang}JavaScript is disabled on your Web browser!<br /> Please enable JavaScript via the options of your Web browser in order to use this website.{/lang}
+        </div>
       </noscript>
 
       {if $is_guest_homepage}
@@ -192,9 +194,12 @@
         </p>
       {/if}
     </footer>
-    <!-- Required for free version of MaxMind GeoDB. Ref: https://dev.maxmind.com/geoip/geoip2/geolite2/#License -->
+
     <div class="clear"></div>
-    <div class="right vs_marg"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow" class="gray">http://www.maxmind.com</a></small></div>
+    <div class="right vs_marg">
+      <!-- Required for free version of MaxMind GeoDB. Ref: https://dev.maxmind.com/geoip/geoip2/geolite2/#License -->
+      <small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow" class="gray">http://www.maxmind.com</a></small>
+    </div>
     <!-- End Footer -->
 
     <!-- Begin Footer JavaScript -->
