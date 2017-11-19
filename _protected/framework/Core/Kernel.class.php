@@ -35,7 +35,8 @@ abstract class Kernel
     const SOFTWARE_LICENSE_KEY_URL = 'http://ph7cms.com/memberships';
     const SOFTWARE_DOC_URL = 'http://ph7cms.com/doc';
     const SOFTWARE_FAQ_URL = 'http://ph7cms.com/faq';
-    const SOFTWARE_ISSUE_URL = 'https://github.com/pH7Software/pH7-Social-Dating-CMS/issues/';
+    const SOFTWARE_GIT_REPO = 'https://github.com/pH7Software/pH7-Social-Dating-CMS';
+    const SOFTWARE_ISSUE_URL = self::SOFTWARE_GIT_REPO . '/issues/';
     const SOFTWARE_FORUM_URL = 'http://ph7cms.com/forum';
     const SOFTWARE_EMAIL = 'hello@ph7cms.com';
     const SOFTWARE_AUTHOR = 'Pierre-Henry Soria';

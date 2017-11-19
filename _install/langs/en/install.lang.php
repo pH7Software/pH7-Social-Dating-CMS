@@ -100,7 +100,7 @@ $LANG = array(
             Your Admin Login Password is: <em>****** (hidden for security reasons. It\'s the one you chose during the installation).</em>
         </p>
         <p>Don\'t forget to show off YOUR new Social Dating Website to your friends, colleagues and Facebook\'s mates (and even to your haters... why not! :-) ).</p>
-        <p><strong>Here is a <a href="' . get_tweet_post(Controller::SOFTWARE_WEBSITE) . '">pre-written Tweet</a> (which you can edit, of course)</strong>.</p>
+        <p><strong>Here is a <a href="' . get_tweet_post(Controller::SOFTWARE_WEBSITE, Controller::SOFTWARE_GIT_REPO) . '">pre-written Tweet</a> (which you can edit, of course)</strong>.</p>
         <p>&nbsp;</p>
         <p>P.S. For any bug reports, suggestions, partnership, translation, contribution or other,
         please visit the <a href="' . Controller::SOFTWARE_WEBSITE . '">official website</a>.</p>
