@@ -192,7 +192,7 @@
         </p>
       {/if}
     </footer>
-    <!-- Required for the free version of MaxMind Geo DB -->
+    <!-- Required for free version of MaxMind GeoDB. Ref: https://dev.maxmind.com/geoip/geoip2/geolite2/#License -->
     <div class="clear"></div>
     <div class="right vs_marg"><small>This product includes GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com" rel="nofollow" class="gray">http://www.maxmind.com</a></small></div>
     <!-- End Footer -->
