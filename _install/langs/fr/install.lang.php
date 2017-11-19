@@ -104,7 +104,7 @@ $LANG = array(
         veuillez visiter notre <a href="' . Controller::SOFTWARE_WEBSITE . '">site Web</a>.</p>
         <p>---</p>
         <p>Cordialement,<br />
-        <a href="' . Controller::AUTHOR_URL . '">Pierre-Henry Soria</a></p>',
+        <a href="' . Controller::AUTHOR_URL . '">Pierre Soria</a></p>',
     'yes_dir' => 'Le répertoire a été trouvé avec succès !',
     'no_dir' => 'Le répertoire n\'existe pas.',
     'wait_importing_database' => 'Veuillez patienter pendant l\'importation de la base de donnée.<br />
