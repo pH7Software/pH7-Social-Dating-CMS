@@ -9,14 +9,13 @@
     <title>{if $page_title}{% $this->str->escape($this->str->upperFirst($page_title), true) %} - {site_name}{else}{site_name} - {slogan}{/if}</title>
     <meta name="description" content="{% $this->str->escape($this->str->upperFirst($meta_description), true) %}" />
     <meta name="keywords" content="{% $this->str->escape($meta_keywords, true) %}" />
+    <meta name="robots" content="{meta_robots}" />
     <link rel="shortcut icon" href="{url_relative}favicon.ico" />
     <link rel="canonical" href="{current_url}" />
-    {if !$is_user_auth}{{ $design->regionalUrls() }}{/if}
     <link rel="author" href="{url_root}humans.txt" />
-    <meta name="robots" content="{meta_robots}" />
+    {if !$is_user_auth}{{ $design->regionalUrls() }}{/if}
     <meta name="author" content="{meta_author}" />
     <meta name="copyright" content="{meta_copyright}" />
-    <meta name="revisit-after" content="7 days" />
     <meta name="category" content="{meta_category}" />
     <meta name="rating" content="{meta_rating}" />
     <meta name="distribution" content="{meta_distribution}" />
