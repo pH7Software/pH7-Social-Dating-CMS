@@ -12,9 +12,17 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
-class WallModel extends Framework\Mvc\Model\Engine\Model
+class WallModel extends Model
 {
+    /**
+     * @param int $iProfileId
+     * @param string $sPost
+     * @param string $sCreatedDate
+     *
+     * @return bool
+     */
     public function add($iProfileId, $sPost, $sCreatedDate)
     {
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('MembersWall') . '(profileId, post, createdDate) VALUES (:profileId, :post, :createdDate)');
