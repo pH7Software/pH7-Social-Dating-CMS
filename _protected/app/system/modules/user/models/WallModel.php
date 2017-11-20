@@ -65,16 +65,29 @@ class WallModel extends Model
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int|null $iWallId
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function get($iProfileId, $iWallId = null, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $sSqlWallId = (!empty($iWallId)) ? ' AND wallId=:wallId ' : '';
+        $sSqlWallId = !empty($iWallId) ? ' AND wallId=:wallId ' : '';
+        $sSqlQuery = 'SELECT * FROM' . Db::prefix('MembersWall') . ' AS w LEFT JOIN' .
+            Db::prefix('Members') . 'AS m ON w.profileId = m.profileId WHERE :profileId=:profileId ' .
+            $sSqlWallId . ' ORDER BY dateTime DESC LIMIT :offset, :limit';
 
-        $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('MembersWall') . ' AS w LEFT JOIN' . Db::prefix('Members') . 'AS m ON w.profileId = m.profileId WHERE :profileId=:profileId ' . $sSqlWallId . ' ORDER BY dateTime DESC LIMIT :offset, :limit');
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        if (!empty($iWallId)) $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
+        if (!empty($iWallId)) {
+            $rStmt->bindValue(':wallId', $iWallId, \PDO::PARAM_INT);
+        }
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
