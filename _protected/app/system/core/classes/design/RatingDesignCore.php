@@ -47,8 +47,8 @@ class RatingDesignCore
               <script>$(".', $sPHSClass, '").pHRating({length:5,decimalLength:1,rateMax:5});</script>';
 
         /**
-         * Redirectionne the member to the registration page if not logged in.
-         * For security, a check on to ajax server side is already present, but this JS code allows the visitor to login easier.
+         * Redirect the member to the registration page if not logged in.
+         * For security reason, a check on the server-side is already present, because this JS code allows users to login easily by modifying it.
          */
         if (!UserCore::auth()) {
             $sUrl = Framework\Mvc\Router\Uri::get('user', 'signup', 'step1', '?msg=' . t('You need to be a member for voting.'), false);
