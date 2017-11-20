@@ -110,10 +110,10 @@ abstract class Api
     public function getVideoId($sUrl)
     {
         $aData = parse_url($sUrl);
-        $sUrl = str_replace(array('://', 'v=', 'v/', '?', '=', '//', $aData['scheme'], $aData['host'], 'watch', 'feature', 'player_embedded'), '', $sUrl);
+        $sUrl = str_replace(['://', 'v=', 'v/', '?', '=', '//', $aData['scheme'], $aData['host'], 'watch', 'feature', 'player_embedded'], '', $sUrl);
         $sUrl = preg_replace('#^/#', '', $sUrl);
         $sUrl = preg_replace('#^([^/&=\?]+)(?:.+)?$#i', '$1', $sUrl);
-        $sUrl = str_replace(array('&', '/'), '', $sUrl); // To finish the cleaning
+        $sUrl = str_replace(['&', '/'], '', $sUrl); // To finish the cleaning
 
         return $sUrl;
     }
