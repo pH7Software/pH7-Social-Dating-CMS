@@ -15,6 +15,7 @@ defined('PH7') or exit('Restricted access');
 /*
  * In developing!
  * In the near future it is possible that this class overrides the Filter class to no longer depend on CodeIgniter.
+ * You can contribute too! => https://github.com/pH7Software/pH7-Social-Dating-CMS
  */
 
 class Purifer extends Xss
