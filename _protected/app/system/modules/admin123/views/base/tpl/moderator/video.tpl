@@ -7,7 +7,7 @@
       {{ $action = ($video->approved == 1) ? 'disapprovedvideo' : 'approvedvideo' }}
 
       <div class="m_video">
-        {{ VideoDesignCore::generate($video, 'preview', 200, 200) }}
+        {{ VideoDesignCore::generate($video, VideoDesignCore::PREVIEW_MEDIA_TYPE, 200, 200) }}
         <p class="italic">{lang 'Posted by'} {{ $design->getProfileLink($video->username) }}</p>
 
         <div>
