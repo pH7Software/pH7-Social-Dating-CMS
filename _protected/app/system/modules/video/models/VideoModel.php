@@ -23,6 +23,7 @@ class VideoModel extends VideoCoreModel
         $rStmt->bindValue(':thumb', $sThumb, \PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -40,6 +41,7 @@ class VideoModel extends VideoCoreModel
         $rStmt->bindValue(':duration', $sDuration, \PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -48,6 +50,7 @@ class VideoModel extends VideoCoreModel
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsVideos') . 'WHERE profileId=:profileId AND albumId=:albumId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -64,6 +67,7 @@ class VideoModel extends VideoCoreModel
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
@@ -92,6 +96,7 @@ class VideoModel extends VideoCoreModel
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
@@ -110,6 +115,7 @@ class VideoModel extends VideoCoreModel
             unset($oRow);
             $this->cache->put($iData);
         }
+
         return $iData;
     }
 
@@ -127,6 +133,7 @@ class VideoModel extends VideoCoreModel
             unset($oRow);
             $this->cache->put($iData);
         }
+
         return $iData;
     }
 
@@ -140,6 +147,7 @@ class VideoModel extends VideoCoreModel
         $rStmt->bindValue(':name', $sTitle, \PDO::PARAM_STR);
         $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -202,6 +210,7 @@ class VideoModel extends VideoCoreModel
             $mData = (int)@$oRow->totalVideos;
             unset($oRow);
         }
+
         return $mData;
     }
 }
