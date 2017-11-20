@@ -19,7 +19,8 @@ class VideoCore
      * Check if this is a url, if so, this is a video from an external site.
      *
      * @param string $sFile
-     * @return boolean
+     *
+     * @return bool
      */
     public function isApi($sFile)
     {
@@ -27,7 +28,7 @@ class VideoCore
     }
 
     /**
-     * @param integer $iAlbumId
+     * @param int $iAlbumId
      * @param string $sUsername
      * @param string $sVideoLink (file with the extension)
      * @param string $sVideoExt Separate the different extensions with commas (extension with the point. e.g. .ogg,.webm,.mp4)
