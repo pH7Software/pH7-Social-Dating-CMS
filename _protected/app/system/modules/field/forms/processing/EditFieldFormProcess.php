@@ -7,6 +7,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
@@ -15,7 +16,6 @@ use PH7\Framework\Url\Header;
 
 class EditFieldFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -39,5 +39,4 @@ class EditFieldFormProcess extends Form
                 \PFBC\Form::setError('form_edit_field', t('Oops! An error occurred while adding the field, please try again.'));
         }
     }
-
 }

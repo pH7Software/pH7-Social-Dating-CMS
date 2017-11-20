@@ -37,5 +37,4 @@ class EditCommentForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }

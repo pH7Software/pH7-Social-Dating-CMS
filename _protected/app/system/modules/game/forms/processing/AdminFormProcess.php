@@ -7,7 +7,9 @@
  */
 
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
+
 
 use PH7\Framework\Image\Image;
 use PH7\Framework\Mvc\Model\Engine\Db;

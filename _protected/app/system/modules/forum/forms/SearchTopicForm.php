@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchTopicForm
 {
-
     public static function display()
     {
         $oForm = new \PFBC\Form('form_search');
@@ -23,5 +22,4 @@ class SearchTopicForm
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
         $oForm->render();
     }
-
 }

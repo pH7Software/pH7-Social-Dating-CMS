@@ -36,5 +36,4 @@ class EditReplyMsgForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
-
 }
