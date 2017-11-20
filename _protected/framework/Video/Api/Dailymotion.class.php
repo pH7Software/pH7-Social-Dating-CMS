@@ -33,7 +33,7 @@ class Dailymotion extends Api implements IApi
     /**
      * @param string $sUrl
      *
-     * @return Dailymotion|boolean FALSE if unable to open the URL, otherwise Dailymotion class.
+     * @return Dailymotion|bool FALSE if unable to open the URL, otherwise Dailymotion class.
      */
     public function getInfo($sUrl)
     {
@@ -44,8 +44,8 @@ class Dailymotion extends Api implements IApi
     /**
      * @param string $sUrl
      * @param string $sMedia
-     * @param integer $iWidth
-     * @param integer $iHeight
+     * @param int $iWidth
+     * @param int $iHeight
      *
      * @return string
      */
@@ -62,7 +62,7 @@ class Dailymotion extends Api implements IApi
     /**
      * @param string $sUrl
      *
-     * @return integer|boolean Returns the ID of the video if it was found, FALSE otherwise.
+     * @return int|bool Returns the ID of the video if it was found, FALSE otherwise.
      */
     public function getVideoId($sUrl)
     {
