@@ -382,7 +382,7 @@ class ForumController extends Controller
     /**
      * Set a Not Found Error Message with HTTP 404 Code Status.
      *
-     * @param boolean $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false".
+     * @param bool $b404Status For the Ajax blocks profile, we can not put HTTP error code 404, so the attribute must be set to "false".
      *
      * @return void
      */
