@@ -39,7 +39,7 @@ class Benchmark
     /** @var float */
     protected $fEndTime;
 
-    /** @var integer */
+    /** @var int */
     protected $iMemoryUsage;
 
     /**
@@ -66,7 +66,7 @@ class Benchmark
     /**
      * Returns the elapsed time, readable or not
      *
-     * @param  boolean $raw Whether the result must be human readable
+     * @param  bool $raw Whether the result must be human readable
      * @param  string $format The format to display (printf format)
      *
      * @return string|float
@@ -109,7 +109,7 @@ class Benchmark
     /**
      * Returns the memory usage at the end checkpoint
      *
-     * @param  boolean $raw Whether the result must be human readable
+     * @param  bool $raw Whether the result must be human readable
      * @param  string $format The format to display (printf format)
      *
      * @return string|float
@@ -152,7 +152,7 @@ class Benchmark
     /**
      * Returns the memory peak, readable or not
      *
-     * @param  boolean $raw Whether the result must be human readable
+     * @param  bool $raw Whether the result must be human readable
      * @param  string $format The format to display (printf format)
      *
      * @return string|float
