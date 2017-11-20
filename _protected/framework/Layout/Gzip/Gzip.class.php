@@ -26,6 +26,8 @@ use PH7\Framework\Navigation\Browser;
 class Gzip
 {
     const REGEX_IMAGE_FORMAT = '/url\([\'"]*(.+?\.)(gif|png|jpg|jpeg|otf|eot|ttf|woff|svg)[\'"]*\)*/msi';
+    const REGEX_JS_INCLUDE_FORMAT = '/include\([\'"]*(.+?\.)(js)[\'"]*\)\s{0,};/msi';
+    const REGEX_CSS_IMPORT_FORMAT = '/@import\s+url\([\'"]*(.+?\.)(css)[\'"]*\)\s{0,};/msi';
     const CACHE_DIR = 'pH7_static/';
     const MAX_IMG_SIZE_BASE64_CONVERTOR = 24000; // 24KB
 
@@ -365,7 +367,7 @@ class Gzip
     protected function getSubCssFile()
     {
         // We also collect the files included in the CSS files. So we can also cache and compressed.
-        preg_match_all('/@import\s+url\([\'"]*(.+?\.)(css)[\'"]*\)\s{0,};/msi', $this->sContents, $aHit, PREG_PATTERN_ORDER);
+        preg_match_all(self::REGEX_CSS_IMPORT_FORMAT, $this->sContents, $aHit, PREG_PATTERN_ORDER);
 
         for ($i = 0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++) {
             $this->sContents = str_replace($aHit[0][$i], '', $this->sContents);
@@ -379,7 +381,7 @@ class Gzip
     protected function getSubJsFile()
     {
         // We also collect the files included in the JavaScript files. So we can also cache and compressed.
-        preg_match_all('/include\([\'"]*(.+?\.)(js)[\'"]*\)\s{0,};/msi', $this->sContents, $aHit, PREG_PATTERN_ORDER);
+        preg_match_all(self::REGEX_JS_INCLUDE_FORMAT, $this->sContents, $aHit, PREG_PATTERN_ORDER);
 
         for ($i = 0, $iCountHit = count($aHit[0]); $i < $iCountHit; $i++) {
             $this->sContents = str_replace($aHit[0][$i], '', $this->sContents);
