@@ -114,6 +114,7 @@ class ForumController extends Controller
             $this->view->h1_title = $this->str->upperFirst($sForumName);
             $this->view->topics = $oTopics;
         }
+
         $this->output();
     }
 
@@ -204,6 +205,7 @@ class ForumController extends Controller
             $this->view->h2_title = $this->sTitle;
             $this->view->topics = $oTopics;
         }
+
         $this->output();
     }
 
@@ -213,6 +215,7 @@ class ForumController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Topic Search - Discussion Forum - %site_name%');
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -255,6 +258,7 @@ class ForumController extends Controller
         }
 
         $this->manualTplInclude('topic.tpl');
+
         $this->output();
     }
 
@@ -263,6 +267,7 @@ class ForumController extends Controller
         $this->sTitle = t('Add a new Topic');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -271,6 +276,7 @@ class ForumController extends Controller
         $this->sTitle = t('Edit Topic');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -279,6 +285,7 @@ class ForumController extends Controller
         $this->sTitle = t('Edit your Message');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -287,6 +294,7 @@ class ForumController extends Controller
         $this->sTitle = t('Reply Message');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
