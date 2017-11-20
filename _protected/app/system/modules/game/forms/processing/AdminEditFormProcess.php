@@ -30,8 +30,7 @@ class AdminEditFormProcess extends Form
 
         (new GameModel)->update($aData);
 
-        /* Clean GameModel Cache */
-        (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
+        Game::clearCache();
 
         Header::redirect(Uri::get('game', 'main', 'index'), t('The game has been successfully updated'));
     }
