@@ -31,21 +31,39 @@ class ForumModel extends ForumCoreModel
         $sSqlCategoryId = (!empty($iCategoryId)) ? ' WHERE categoryId = :categoryId ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('ForumsCategories') . $sSqlCategoryId . 'ORDER BY title ASC' . $sSqlLimit);
-        if (!empty($iCategoryId)) $rStmt->bindParam(':categoryId', $iCategoryId, \PDO::PARAM_INT);
-        if ($bIsLimit) $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-        if ($bIsLimit) $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        if (!empty($iCategoryId)) {
+            $rStmt->bindParam(':categoryId', $iCategoryId, \PDO::PARAM_INT);
+        }
+        if ($bIsLimit) {
+            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
+        }
+        if ($bIsLimit) {
+            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+        }
         $rStmt->execute();
 
-        return (!empty($iCategoryId)) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+        return !empty($iCategoryId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param string $sForumName
+     * @param int $iForumId
+     * @param string $sTopicSubject
+     * @param int $iTopicId
+     * @param int $iProfileId
+     * @param int $iApproved
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array|mixed
+     */
     public function getTopic($sForumName, $iForumId, $sTopicSubject, $iTopicId, $iProfileId, $iApproved, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $sSqlProfileId = (isset($iProfileId)) ? 'AND t.profileId = :profileId ' : '';
-        $sSqlMsg = (isset($sTopicSubject, $iTopicId)) ? ' AND (t.title LIKE :topicSubject AND t.topicId = :topicId) ' : '';
+        $sSqlProfileId = isset($iProfileId) ? 'AND t.profileId = :profileId ' : '';
+        $sSqlMsg = isset($sTopicSubject, $iTopicId) ? ' AND (t.title LIKE :topicSubject AND t.topicId = :topicId) ' : '';
 
         $rStmt = Db::getInstance()->prepare('SELECT f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex FROM' . Db::prefix('Forums') .
             'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') .
