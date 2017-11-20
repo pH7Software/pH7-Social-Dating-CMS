@@ -511,6 +511,7 @@ class ForumModel extends ForumCoreModel
      * @param int $iProfileId
      * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
+     *
      * @return bool Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitTopic($iProfileId, $iWaitTime, $sCurrentTime)
