@@ -15,6 +15,7 @@ namespace PH7\Framework\Core;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\AdminCore;
 use PH7\Framework\Config\Config;
 use PH7\Framework\File\File;
 use PH7\Framework\Layout\Html\Design;
@@ -84,45 +85,54 @@ abstract class Kernel
          */
         if (!defined('PH7_CHECKED_LIC')) {
             define('PH7_CHECKED_LIC', 1); // OK, now we have checked the license key
-            $this->_checkLicense();
+            $this->checkLicense();
         }
     }
 
     /**
      * Check License key.
      *
-     * @return integer Returns '1' if the license key is invalid and stops the script with the exit() function.
+     * @return int Returns '1' if the license key is invalid and stops the script with the exit() function.
      */
-    final private function _checkLicense()
+    final private function checkLicense()
     {
         define('PH7_SOFTWARE_STATUS', true);
         define('PH7_LICENSE_STATUS', 'active');
         define('PH7_LICENSE_NAME', 'pH7Builder, Open License');
-        define('PH7_VALID_LICENSE', (PH7_LICENSE_STATUS === 'active'));
+        define('PH7_VALID_LICENSE', $this->checkLicenseStatus());
 
         if (!PH7_SOFTWARE_STATUS) {
             $sLicenseMsg = t('You need to buy a <strong>valid <a href="%0%">pH7CMS</a> License Key</strong> to use the features requiring a license key!', self::SOFTWARE_WEBSITE);
             Page::message($sLicenseMsg);
         }
 
-        if (!PH7_VALID_LICENSE) {
-            if ($this->_isLicenseFeature()) {
-                $this->licenseErrMsg();
-            }
+        if (!PH7_VALID_LICENSE && $this->isLicenseFeature()) {
+            $this->licenseErrMsg();
         }
     }
 
     /**
      * Checks if there's a feature that requires a license key.
      *
-     * @return boolean Returns TRUE if the feature requires a license, FALSE otherwise.
+     * @return bool Returns TRUE if the feature requires a license, FALSE otherwise.
      */
-    final private function _isLicenseFeature()
+    final private function isLicenseFeature()
     {
         return (
-            ($this->registry->module === PH7_ADMIN_MOD && ($this->registry->action === 'ads' || $this->registry->action === 'addfakeprofiles' || $this->registry->action === 'import')) ||
-            ($this->registry->module === 'payment' || $this->httpRequest->getExists('mobapp') || false !== stripos($this->httpRequest->currentUrl(), 'upgrade'))
+            ($this->registry->module === PH7_ADMIN_MOD &&
+                ($this->registry->action === 'ads' ||
+                    $this->registry->action === 'addfakeprofiles' ||
+                    $this->registry->action === 'import')
+            ) ||
+            ($this->registry->module === 'payment' || $this->httpRequest->getExists('mobapp') ||
+                false !== stripos($this->httpRequest->currentUrl(), 'upgrade')
+            )
         );
+    }
+
+    final private function checkLicenseStatus()
+    {
+        return PH7_LICENSE_STATUS === 'active';
     }
 
     /**
@@ -132,7 +142,7 @@ abstract class Kernel
      */
     final private function licenseErrMsg()
     {
-        if (\PH7\AdminCore::auth()) {
+        if (AdminCore::auth()) {
             // Message for admins
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'setting', 'license'),
