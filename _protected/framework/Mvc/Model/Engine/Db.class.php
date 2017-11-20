@@ -99,7 +99,7 @@ class Db
     /**
      * Initiates a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function beginTransaction()
     {
@@ -109,7 +109,7 @@ class Db
     /**
      * Commits a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function commit()
     {
@@ -140,7 +140,7 @@ class Db
      * Execute an SQL statement and return the number of affected rows.
      *
      * @param string $sStatement
-     * @return boolean|integer
+     * @return bool|int
      */
     public function exec($sStatement)
     {
@@ -208,7 +208,7 @@ class Db
      *
      * @param string $sStatement
      *
-     * @return boolean
+     * @return bool
      */
     public function execute($sStatement)
     {
@@ -220,7 +220,7 @@ class Db
      *
      * @param string $sStatement
      *
-     * @return PDOStatement|boolean Returns PDOStatement object, or FALSE on failure.
+     * @return PDOStatement|bool Returns PDOStatement object, or FALSE on failure.
      */
     public function query($sStatement)
     {
@@ -272,7 +272,7 @@ class Db
      * Quotes a string for use in a query.
      *
      * @param string $sInput
-     * @param integer $iParameterType
+     * @param int $iParameterType
      *
      * @return string
      */
@@ -284,7 +284,7 @@ class Db
     /**
      * Rolls back a transaction.
      *
-     * @return boolean
+     * @return bool
      */
     public function rollBack()
     {
@@ -294,10 +294,10 @@ class Db
     /**
      * Set an attribute.
      *
-     * @param integer $iAttribute
+     * @param int $iAttribute
      * @param mixed $mValue
      *
-     * @return boolean
+     * @return bool
      */
     public function setAttribute($iAttribute, $mValue)
     {
@@ -317,7 +317,7 @@ class Db
     /**
      * Show all tables.
      *
-     * @return PDOStatement|boolean Returns PDOStatement object, or FALSE on failure.
+     * @return PDOStatement|bool Returns PDOStatement object, or FALSE on failure.
      */
     public static function showTables()
     {
@@ -338,7 +338,7 @@ class Db
      * If table name is empty, only prefix will be returned otherwise the table name with its prefix will be returned.
      *
      * @param string $sTable Table name. Default ''
-     * @param boolean $bTrim With or without a space before and after the table name. Default valut is FALSE, so with space before and after table name.
+     * @param bool $bTrim With or without a space before and after the table name. Default valut is FALSE, so with space before and after table name.
      *
      * @return string prefixed table name, just prefix if table name is empty.
      */
@@ -353,7 +353,7 @@ class Db
      * Free database.
      *
      * @param PDOStatement $rStmt Close cursor of PDOStatement class.
-     * @param boolean $bCloseConnection Close connection of PDO.
+     * @param bool $bCloseConnection Close connection of PDO.
      *
      * @return void
      */
