@@ -32,9 +32,11 @@ class Module extends Engine\Model
             $sSqlWhere = ($bIsFolderName) ? 'WHERE folderName = :modName LIMIT 1' : '';
 
             $rStmt = Db::getInstance()->prepare('SELECT ' . $sSelect . ' FROM ' . DB::prefix('SysModsEnabled') . $sSqlWhere);
-            if ($bIsFolderName) $rStmt->bindValue(':modName', $sFolderName, \PDO::PARAM_STR);
+            if ($bIsFolderName) {
+                $rStmt->bindValue(':modName', $sFolderName, \PDO::PARAM_STR);
+            }
             $rStmt->execute();
-            $sFetchMethod = ($bIsFolderName) ? 'fetch' : 'fetchAll';
+            $sFetchMethod = ($bIsFolderName ? 'fetch' : 'fetchAll');
             $oData = $rStmt->$sFetchMethod(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($oData);
