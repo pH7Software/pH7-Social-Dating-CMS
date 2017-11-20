@@ -10,9 +10,27 @@ namespace PH7;
 
 class Field
 {
+    const UNMODIFIABLE_FIELDS = [
+        'profileid',
+        'middlename',
+        'description',
+        'businessname',
+        'address',
+        'street',
+        'city',
+        'state',
+        'zipcode',
+        'country',
+        'phone',
+        'fax',
+        'website',
+        'socialnetworksite',
+        'height',
+        'weight'
+    ];
+
     /**
-     * @desc Block constructing.
-     * @access private
+     * Block constructing.
      */
     private function __construct()
     {
@@ -49,13 +67,11 @@ class Field
      *
      * @param string $sField
      *
-     * @return boolean
+     * @return bool
      */
     public static function unmodifiable($sField)
     {
-        $aList = ['profileid', 'middlename', 'description', 'businessname', 'address', 'street', 'city', 'state', 'zipcode', 'country', 'phone', 'fax', 'website', 'socialnetworksite', 'height', 'weight'];
-
-        return in_array(strtolower($sField), $aList);
+        return in_array(strtolower($sField), static::UNMODIFIABLE_FIELDS, true);
 
     }
 }
