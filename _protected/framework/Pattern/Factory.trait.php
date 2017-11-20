@@ -13,6 +13,9 @@ namespace PH7\Framework\Pattern;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\Framework\Error\CException\PH7RuntimeException;
+use ReflectionClass;
+
 trait Factory
 {
     use Statik;
@@ -20,21 +23,21 @@ trait Factory
     /**
      * Loading a class.
      *
-     * @access public
-     * @static
      * @return object Return the instance of the class.
-     * @throws \PH7\Framework\Error\CException\PH7RuntimeException If the class is not found or if it has not been defined.
+     *
+     * @throws PH7RuntimeException If the class is not found or if it has not been defined.
+     * @throws \ReflectionException If the class doesn't exist.
      */
     public static function load(...$aArgs)
     {
         $sClass = static::class;
 
         if (class_exists($sClass)) {
-            return (new \ReflectionClass($sClass))->newInstanceArgs($aArgs);
-        } else {
-            throw new \PH7\Framework\Error\CException\PH7RuntimeException(
-                'The "' . $sClass . '" was not found or is not defined.'
-            );
+            return (new ReflectionClass($sClass))->newInstanceArgs($aArgs);
         }
+
+        throw new PH7RuntimeException(
+            'The "' . $sClass . '" was not found or is not defined.'
+        );
     }
 }
