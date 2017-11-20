@@ -34,7 +34,7 @@ class InviteFormProcess extends Form
                     if (!$this->sendMail($sMail, $oMail)) {
                         \PFBC\Form::setError('form_invite', Form::errorSendingEmail());
                     } else {
-                        \PFBC\Form::setSuccess('form_invite', t('Cool! We have sent that.'));;
+                        \PFBC\Form::setSuccess('form_invite', t('Cool! We have sent that.'));
                     }
                 }
             }
