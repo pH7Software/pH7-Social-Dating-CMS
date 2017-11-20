@@ -34,8 +34,9 @@ class AvatarDesignCore extends Design
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
-     * @param integer $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
-     * @param boolean $bRollover CSS effect
+     * @param int $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
+     *
+     * @param bool $bRollover CSS effect
      */
     public function get($sUsername = '', $sFirstName = '', $sSex = null, $iSize = 32, $bRollover = false)
     {
@@ -67,7 +68,7 @@ class AvatarDesignCore extends Design
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
-     * @param integer $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
+     * @param int $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
      */
     public function lightbox($sUsername = '', $sFirstName = '', $sSex = null, $iSize = 400)
     {
