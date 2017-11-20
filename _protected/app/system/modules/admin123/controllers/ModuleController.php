@@ -13,48 +13,48 @@ use PH7\Framework\File\File;
 class ModuleController extends Controller
 {
     /** @var Module */
-    private $_oModule;
+    private $oModule;
 
     /** @var string */
-    private $_sModsDirModFolder;
+    private $sModsDirModFolder;
 
     /** @var string */
-    private $_sTitle;
+    private $sTitle;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->_oModule = new Module;
+        $this->oModule = new Module;
 
         $this->view->oFile = new File;
-        $this->view->oModule = $this->_oModule;
+        $this->view->oModule = $this->oModule;
     }
 
     public function disable()
     {
-        $this->_sTitle = t('Enable/Disable System Modules');
-        $this->view->page_title = $this->_sTitle;
-        $this->view->h1_title = $this->_sTitle;
+        $this->sTitle = t('Enable/Disable System Modules');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
         $this->output();
     }
 
     public function index()
     {
         if ($this->httpRequest->postExists('submit_mod_install')) {
-            if ($this->_oModule->checkModFolder(Module::INSTALL, $this->httpRequest->post('submit_mod_install'))) {
-                $this->_sModsDirModFolder = $this->httpRequest->post('submit_mod_install'); // Module Directory Path
+            if ($this->oModule->checkModFolder(Module::INSTALL, $this->httpRequest->post('submit_mod_install'))) {
+                $this->sModsDirModFolder = $this->httpRequest->post('submit_mod_install'); // Module Directory Path
                 $this->_install();
             }
         } elseif ($this->httpRequest->postExists('submit_mod_uninstall')) {
-            if ($this->_oModule->checkModFolder(Module::UNINSTALL, $this->httpRequest->post('submit_mod_uninstall'))) {
-                $this->_sModsDirModFolder = $this->httpRequest->post('submit_mod_uninstall'); // Module Directory Path
+            if ($this->oModule->checkModFolder(Module::UNINSTALL, $this->httpRequest->post('submit_mod_uninstall'))) {
+                $this->sModsDirModFolder = $this->httpRequest->post('submit_mod_uninstall'); // Module Directory Path
                 $this->_unInstall();
             }
         } else {
-            $this->_sTitle = t('Module Manager');
-            $this->view->page_title = $this->_sTitle;
-            $this->view->h1_title = $this->_sTitle;
+            $this->sTitle = t('Module Manager');
+            $this->view->page_title = $this->sTitle;
+            $this->view->h1_title = $this->sTitle;
 
             $this->output();
         }
@@ -62,15 +62,15 @@ class ModuleController extends Controller
 
     private function _install()
     {
-        $this->_sTitle = t('Install Module Finished');
-        $this->view->page_title = $this->_sTitle;
-        $this->view->h1_title = $this->_sTitle;
+        $this->sTitle = t('Install Module Finished');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
 
-        $this->_oModule->setPath($this->_sModsDirModFolder);
+        $this->oModule->setPath($this->sModsDirModFolder);
 
-        $this->_oModule->run(Module::INSTALL); // Run Install Module!
+        $this->oModule->run(Module::INSTALL); // Run Install Module!
 
-        $this->view->content = $this->_oModule->readInstruction(Module::INSTALL);
+        $this->view->content = $this->oModule->readInstruction(Module::INSTALL);
 
         $this->manualTplInclude('install.tpl');
         $this->output();
@@ -78,14 +78,14 @@ class ModuleController extends Controller
 
     private function _unInstall()
     {
-        $this->_sTitle = t('Uninstall Module Finished');
-        $this->view->page_title = $this->_sTitle;
-        $this->view->h1_title = $this->_sTitle;
+        $this->sTitle = t('Uninstall Module Finished');
+        $this->view->page_title = $this->sTitle;
+        $this->view->h1_title = $this->sTitle;
 
-        $this->_oModule->setPath($this->_sModsDirModFolder);
-        $this->_oModule->run(Module::UNINSTALL); // Run Uninstall Module!
+        $this->oModule->setPath($this->sModsDirModFolder);
+        $this->oModule->run(Module::UNINSTALL); // Run Uninstall Module!
 
-        $this->view->content = $this->_oModule->readInstruction(Module::UNINSTALL);
+        $this->view->content = $this->oModule->readInstruction(Module::UNINSTALL);
 
         $this->manualTplInclude('uninstall.tpl');
         $this->output();
