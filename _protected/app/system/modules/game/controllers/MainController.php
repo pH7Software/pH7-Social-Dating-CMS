@@ -11,6 +11,7 @@ namespace PH7;
 use PH7\Framework\Mvc\Model\Statistic as Stat;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Http\Http;
 
 class MainController extends Controller
 {
@@ -252,9 +253,10 @@ class MainController extends Controller
      *
      * @return void
      */
-    private function _notFound()
+    private function notFound()
     {
-        Framework\Http\Http::setHeadersByCode(404);
+        Http::setHeadersByCode(404);
+
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
         $this->view->error = $this->sTitle . '<br />' . t('Please return to the <a href="%0%">main game page</a> or <a href="%1%">the previous page</a>.', Uri::get('game', 'main', 'index'), 'javascript:history.back();');
