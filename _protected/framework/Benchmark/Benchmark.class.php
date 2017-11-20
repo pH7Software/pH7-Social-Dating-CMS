@@ -33,6 +33,8 @@ defined('PH7') or exit('Restricted access');
 
 class Benchmark
 {
+    const SIZE_MODE = 1024;
+
     /** @var float */
     protected $fStartTime;
 
@@ -130,16 +132,14 @@ class Benchmark
      */
     public static function readableSize($size, $format = null, $round = 3)
     {
-        $mod = 1024;
-
         if ($format === null) {
             $format = '%.2f%s';
         }
 
         $units = explode(' ', 'B Kb Mb Gb Tb');
 
-        for ($i = 0; $size > $mod; $i++) {
-            $size /= $mod;
+        for ($i = 0; $size > static::SIZE_MODE; $i++) {
+            $size /= static::SIZE_MODE;
         }
 
         if (0 === $i) {
