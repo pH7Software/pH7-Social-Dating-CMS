@@ -26,12 +26,12 @@ class Ban
     const IP_FILE = 'ip.txt';
 
     /** @var string */
-    private static $_sFile;
+    private static $sFile;
 
     /** @var string */
-    private static $_sVal;
+    private static $sVal;
 
-    /** @var boolean */
+    /** @var bool */
     private static $_bIsEmail = false;
 
     /**
@@ -45,51 +45,55 @@ class Ban
      *
      * @param string $sVal
      *
-     * @return boolean
+     * @return bool
      */
     public static function isUsername($sVal)
     {
-        self::$_sFile = static::USERNAME_FILE;
-        self::$_sVal = $sVal;
-        return self::_is();
+        self::$sFile = static::USERNAME_FILE;
+        self::$sVal = $sVal;
+
+        return self::is();
     }
 
     /**
      * @param string $sVal
      *
-     * @return boolean
+     * @return bool
      */
     public static function isEmail($sVal)
     {
-        self::$_sFile = static::EMAIL_FILE;
-        self::$_sVal = $sVal;
-        self::$_bIsEmail = true;
-        return self::_is();
+        self::$sFile = static::EMAIL_FILE;
+        self::$sVal = $sVal;
+        self::$bIsEmail = true;
+
+        return self::is();
     }
 
     /**
      * @param string $sVal
      *
-     * @return boolean
+     * @return bool
      */
     public static function isBankAccount($sVal)
     {
-        self::$_sFile = static::BANK_ACCOUNT_FILE;
-        self::$_sVal = $sVal;
-        self::$_bIsEmail = true;
-        return self::_is();
+        self::$sFile = static::BANK_ACCOUNT_FILE;
+        self::$sVal = $sVal;
+        self::$bIsEmail = true;
+
+        return self::is();
     }
 
     /**
      * @param string $sVal
      *
-     * @return boolean
+     * @return bool
      */
     public static function isIp($sVal)
     {
-        self::$_sFile = static::IP_FILE;
-        self::$_sVal = $sVal;
-        return self::_is();
+        self::$sFile = static::IP_FILE;
+        self::$sVal = $sVal;
+
+        return self::is();
     }
 
     /**
@@ -101,55 +105,56 @@ class Ban
      */
     public static function filterWord($sVal, $bWordReplace = true)
     {
-        self::$_sFile = static::WORD_FILE;
-        self::$_sVal = $sVal;
-        return self::_replace($bWordReplace);
+        self::$sFile = static::WORD_FILE;
+        self::$sVal = $sVal;
+
+        return self::replace($bWordReplace);
     }
 
     /**
      * Generic method that checks if there.
      *
-     * @return boolean Returns TRUE if the text is banned, FALSE otherwise.
+     * @return bool Returns TRUE if the text is banned, FALSE otherwise.
      */
-    private static function _is()
+    private static function is()
     {
-        if (self::$_bIsEmail) {
-            if (self::_check(strrchr(self::$_sVal, '@'))) {
+        if (self::$bIsEmail) {
+            if (self::check(strrchr(self::$sVal, '@'))) {
                 return true;
             }
         }
 
-        return self::_check(self::$_sVal);
+        return self::check(self::$sVal);
     }
 
     /**
      * Generic method to replace forbidden words.
      *
-     * @param boolean $bWordReplace TRUE = Replace the ban word by an other word. FALSE = Replace the ban word by an empty string.
+     * @param bool $bWordReplace TRUE = Replace the ban word by an other word. FALSE = Replace the ban word by an empty string.
      *
      * @return string The clean text.
      */
-    private static function _replace($bWordReplace)
+    private static function replace($bWordReplace)
     {
-        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
+        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$sFile);
 
         foreach ($aBans as $sBan) {
             $sBan = trim($sBan);
             $sWordReplace = $bWordReplace ? DbConfig::getSetting('banWordReplace') : '';
-            self::$_sVal = str_ireplace($sBan, $sWordReplace, self::$_sVal);
+            self::$sVal = str_ireplace($sBan, $sWordReplace, self::$sVal);
         }
 
-        return self::$_sVal;
+        return self::$sVal;
     }
 
     /**
      * @param string $sVal
      *
-     * @return boolean Returns TRUE if the value is banned, FALSE otherwise.
+     * @return bool Returns TRUE if the value is banned, FALSE otherwise.
      */
-    private static function _check($sVal)
+    private static function check($sVal)
     {
-        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$_sFile);
+        $aBans = file(PH7_PATH_APP_CONFIG . static::DIR . self::$sFile);
 
         return in_array($sVal, array_map('trim', $aBans), true);
     }
