@@ -16,20 +16,50 @@ defined('PH7') or exit('Restricted access');
 
 class Spam
 {
+    const ERASE_CHARACTERS = [
+        '#',
+        '@',
+        '&nbsp;',
+        '-',
+        '_',
+        '|',
+        ';',
+        '.',
+        ',',
+        '!',
+        '?',
+        '&',
+        "'",
+        '"',
+        '(',
+        ')',
+        '<p>',
+        '</p>',
+        '<span>',
+        '</span>',
+        '<div>',
+        '</div>',
+        '<br',
+        '<',
+        '>',
+        "\n",
+        "\r",
+        "\t",
+        ' '
+    ];
+
     /**
      * Detect duplicate contents. Processing strings case-insensitive.
      *
      * @param string $sText1
      * @param string $sText2
      *
-     * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
+     * @return bool Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public static function detectDuplicate($sText1, $sText2)
     {
-        $aErase = array('#', '@', '&nbsp;', '-', '_', '|', ';', '.', ',', '!', '?', '&', "'", '"', '(', ')', '<p>', '</p>', '<span>', '</span>', '<div>', '</div>', '<br', '<', '>', "\n", "\r", "\t", " ");
-
-        $sText1 = str_ireplace($aErase, '', $sText1);
-        $sText2 = str_ireplace($aErase, '', $sText2);
+        $sText1 = str_ireplace(static::ERASE_CHARACTERS, '', $sText1);
+        $sText2 = str_ireplace(static::ERASE_CHARACTERS, '', $sText2);
 
         return stripos($sText1, $sText2) !== false;
     }
