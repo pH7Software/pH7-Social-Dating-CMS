@@ -8,9 +8,10 @@
 
 namespace PH7;
 
+use PH7\Framework\Date\Exception;
+
 class DateFormat
 {
-
     /**
      * Private constructor to prevent instantiation of class because it's a static class.
      */
