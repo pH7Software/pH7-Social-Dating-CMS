@@ -16,7 +16,6 @@ use PH7\Framework\Url\Header;
 
 class EditMsgFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
