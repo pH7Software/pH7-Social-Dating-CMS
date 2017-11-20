@@ -33,6 +33,13 @@ class WallModel extends Model
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iProfileId
+     * @param string $sPost
+     * @param string $sUpdatedDate
+     *
+     * @return bool
+     */
     public function edit($iProfileId, $sPost, $sUpdatedDate)
     {
         $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('MembersWall') . 'SET post = :post, updatedDate = :updatedDate WHERE profileId = :profileId');
@@ -43,6 +50,12 @@ class WallModel extends Model
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iWallId
+     *
+     * @return bool
+     */
     public function delete($iProfileId, $iWallId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('MembersWall') . 'WHERE :profileId=:profileId AND wallId=:wallId');
@@ -71,6 +84,13 @@ class WallModel extends Model
         return $oRow;
     }
 
+    /**
+     * @param int $iProfileId
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function getCommentProfile($iProfileId, $iOffset, $iLimit)
     {
         return (new CommentCoreModel)->read($iProfileId, 1, $iOffset, $iLimit, 'profile');
