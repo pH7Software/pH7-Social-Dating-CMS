@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Date\CDateTime;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Security\Security;
 
@@ -40,11 +41,11 @@ class AdminModel extends AdminCoreModel
      *
      * @param array $aData
      *
-     * @return integer The ID of the Admin.
+     * @return int The ID of the Admin.
      */
     public function add(array $aData)
     {
-        $sCurrentDate = (new Framework\Date\CDateTime)->get()->dateTime('Y-m-d H:i:s');
+        $sCurrentDate = (new CDateTime)->get()->dateTime('Y-m-d H:i:s');
 
         $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Admins') .
             '(email, username, password, firstName, lastName, sex, timeZone, ip, joinDate, lastActivity)
