@@ -86,10 +86,11 @@ class AdminController extends Controller
 
     public function deleteForum()
     {
-        if ($this->oForumModel->deleteForum($this->httpRequest->post('id')))
+        if ($this->oForumModel->deleteForum($this->httpRequest->post('id'))) {
             $this->sMsg = t('Your Forum has been deleted.');
-        else
+        } else {
             $this->sMsg = t('Oops! Your Forum could not be deleted.');
+        }
 
         Header::redirect(
             Uri::get('forum', 'forum', 'index'),
