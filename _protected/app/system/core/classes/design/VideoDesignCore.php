@@ -23,8 +23,8 @@ use PH7\Framework\Video\Api as VideoApi;
 
 class VideoDesignCore
 {
-    const PREVIEW_MEDIA_TYPE = 'preview';
-    const MOVIE_MEDIA_TYPE = 'movie';
+    const PREVIEW_MEDIA_MODE = 'preview';
+    const MOVIE_MEDIA_MODE = 'movie';
 
     /**
      * @internal Import the trait to set the class static.
@@ -42,14 +42,14 @@ class VideoDesignCore
      *
      * @return void
      */
-    public static function generate($oData, $sMedia = self::MOVIE_MEDIA_TYPE, $iWidth = 600, $iHeight = 400)
+    public static function generate($oData, $sMedia = self::MOVIE_MEDIA_MODE, $iWidth = 600, $iHeight = 400)
     {
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
 
         if ((new VideoCore)->isApi($oData->file)) {
             $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
 
-            if ($sMedia === self::PREVIEW_MEDIA_TYPE) {
+            if ($sMedia === self::PREVIEW_MEDIA_MODE) {
                 echo $sDurationTag, '<a href="', $oData->file, '" title="', $oData->title, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>';
             } else {
                 echo $oVideo;
@@ -92,7 +92,7 @@ class VideoDesignCore
                 <button class="btn btn-default btn-sm" onclick="Video.smallSize()">' . t('Small') . '</button>
             </div>';
 
-            if ($sMedia === self::PREVIEW_MEDIA_TYPE) {
+            if ($sMedia === self::PREVIEW_MEDIA_MODE) {
                 echo $sDurationTag, '<a href="#watch', $oData->videoId, '" title="', $oData->title, '" data-popup="video"><img src="', $sThumbUrl, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>
                 <div class="hidden"><div id="watch', $oData->videoId, '">', $sVideoTag, '</div></div>';
             } else {
