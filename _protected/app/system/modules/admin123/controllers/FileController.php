@@ -127,7 +127,6 @@ class FileController extends Controller
         }
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
-
         $this->view->filesList = $this->file->getFileList($sFile, $mExt);
     }
 }
