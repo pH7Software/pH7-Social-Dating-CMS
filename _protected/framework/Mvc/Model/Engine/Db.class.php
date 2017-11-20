@@ -368,17 +368,17 @@ class Db
      *
      * @return void
      */
-    public static function free(PDOStatement &$rStmt = NULL, $bCloseConnection = FALSE)
+    public static function free(PDOStatement &$rStmt = null, $bCloseConnection = false)
     {
         // Close Cursor
-        if (NULL !== $rStmt) {
+        if ($rStmt !== null) {
             $rStmt->closeCursor();
             unset($rStmt);
         }
 
         // Free instance of the PDO object
         if (TRUE === $bCloseConnection) {
-            self::$oDb = NULL;
+            self::$oDb = null;
         }
     }
 
