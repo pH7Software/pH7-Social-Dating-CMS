@@ -110,8 +110,8 @@ class Api
     /**
      * @param string $sUrl
      * @param string $sMedia (preview or movie)
-     * @param integer $iWidth
-     * @param integer $iHeight
+     * @param int $iWidth
+     * @param int $iHeight
      *
      * @throws PH7InvalidArgumentException If the Video Api is invalid.
      *

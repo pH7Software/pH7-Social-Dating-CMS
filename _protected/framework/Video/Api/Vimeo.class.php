@@ -22,7 +22,7 @@ class Vimeo extends Api implements IApi
     /**
      * @param string $sUrl
      *
-     * @return string|boolean Returns the video embed URL if it was found and is valid, FALSE otherwise.
+     * @return string|bool Returns the video embed URL if it was found and is valid, FALSE otherwise.
      */
     public function getVideo($sUrl)
     {
@@ -32,7 +32,7 @@ class Vimeo extends Api implements IApi
     /**
      * @param string $sUrl
      *
-     * @return Vimeo|boolean FALSE if unable to open the url, otherwise Vimeo class.
+     * @return Vimeo|bool FALSE if unable to open the url, otherwise Vimeo class.
      */
     public function getInfo($sUrl)
     {
@@ -49,8 +49,8 @@ class Vimeo extends Api implements IApi
     /**
      * @param string $sUrl
      * @param string $sMedia
-     * @param integer $iWidth
-     * @param integer $iHeight
+     * @param int $iWidth
+     * @param int $iHeight
      *
      * @return string
      */
@@ -70,7 +70,7 @@ class Vimeo extends Api implements IApi
     /**
      * @param string $sUrl
      *
-     * @return integer|boolean Returns the ID of the video if it was found, FALSE otherwise.
+     * @return int|bool Returns the ID of the video if it was found, FALSE otherwise.
      */
     public function getVideoId($sUrl)
     {

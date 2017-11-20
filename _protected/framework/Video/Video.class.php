@@ -133,9 +133,9 @@ class Video extends Upload
      * Generate a thumbnail with FFmpeg.
      *
      * @param string $sPicturePath
-     * @param integer $iSeconds
-     * @param integer $iWidth
-     * @param integer $iHeight
+     * @param int $iSeconds
+     * @param int $iWidth
+     * @param int $iHeight
      *
      * @return string The thumbnail file that you entered in the parameter of this method.
      */
@@ -148,7 +148,7 @@ class Video extends Upload
     /**
      * Gets video duration.
      *
-     * @return integer Seconds.
+     * @return int Seconds.
      */
     public function getDuration()
     {

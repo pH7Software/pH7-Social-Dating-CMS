@@ -28,7 +28,7 @@ abstract class Api
     /** @var string */
     protected $sApiKey;
 
-    /** @var boolean */
+    /** @var bool */
     protected $bAutoplay;
 
     public function __construct()
