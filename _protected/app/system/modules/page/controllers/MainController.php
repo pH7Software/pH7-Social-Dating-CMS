@@ -31,6 +31,7 @@ class MainController extends Controller
         $this->view->meta_keywords = t('dating, free dating, online dating, people, meeting, romance, woman, man, dating site, flirt, chat, chat room, webcam, video chat, %site_name%');
         $this->view->h1_title = t('Free Online Dating with %site_name%!');
         $this->view->h2_title = t('Innovative Online Dating Platform');
+
         $this->output();
     }
 
@@ -40,6 +41,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -53,6 +55,7 @@ class MainController extends Controller
         $this->sTitle = t('Frequently asked questions of %site_name%');
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -65,6 +68,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Terms and Conditions of Use, Terms of Use - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -76,6 +80,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Affiliate Terms and Conditions of Use, Terms of Use - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -87,6 +92,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Privacy Policy - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -98,6 +104,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Legal Notice - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -107,6 +114,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Help US - %site_name%');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -116,6 +124,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = t('Do you like %site_name% and want it even more popular, then share this site on your website, blog, discussion forum, etc...');
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -125,6 +134,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -134,6 +144,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = t('Careers, Jobs and Internships at %site_name%');
+
         $this->output();
     }
 
@@ -143,6 +154,7 @@ class MainController extends Controller
         $this->view->page_title = $this->sTitle;
         $this->view->meta_description = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 }
