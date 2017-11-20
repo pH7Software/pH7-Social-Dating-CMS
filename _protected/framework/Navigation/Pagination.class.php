@@ -31,7 +31,7 @@ class Pagination
     private $sHtmlOutput;
 
     /** @var array */
-    private $aOptions = [
+    private static $aOptions = [
         'range'               => 3, // Number of items to display on each side of the current page
         'text_first_page'     => '&laquo;', // Button text "First Page"
         'text_last_page'      => '&raquo;', // Button text "Last Page"
@@ -54,14 +54,14 @@ class Pagination
         $this->iCurrentPage = $iCurrentPage;
 
         // Put options update
-        $this->aOptions += $aOptions;
+        self::$aOptions += $aOptions;
 
         // It retrieves the address of the page
         $this->sPageName = Page::cleanDynamicUrl($sPageName);
 
 
         // Management pages to see
-        $this->iShowItems = ($this->aOptions['range'] * 2) + 1;
+        $this->iShowItems = (self::$aOptions['range'] * 2) + 1;
 
         // It generates the paging
         $this->_generate();
@@ -89,36 +89,36 @@ class Pagination
             $this->sHtmlOutput = '<div class="clear"></div><nav class="center" role="navigation"><ul class="pagination">';
 
             // Management link to go to the first page
-            if ($this->aOptions['text_first_page']) {
-                if ($this->iCurrentPage > 2 && $this->iCurrentPage > $this->aOptions['range'] + 1 && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . '1"><span aria-hidden="true">' . $this->aOptions['text_first_page'] . '</span></a></li>';
+            if (self::$aOptions['text_first_page']) {
+                if ($this->iCurrentPage > 2 && $this->iCurrentPage > self::$aOptions['range'] + 1 && $this->iShowItems < $this->iTotalPages) {
+                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . '1"><span aria-hidden="true">' . self::$aOptions['text_first_page'] . '</span></a></li>';
                 }
             }
 
             // Management the Previous link
-            if ($this->aOptions['text_previous_page']) {
+            if (self::$aOptions['text_previous_page']) {
                 if ($this->iCurrentPage > 2 && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . ($this->iCurrentPage - 1) . '" aria-label="Previous"><span aria-hidden="true">' . $this->aOptions['text_previous_page'] . '</span></a></li>';
+                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . ($this->iCurrentPage - 1) . '" aria-label="Previous"><span aria-hidden="true">' . self::$aOptions['text_previous_page'] . '</span></a></li>';
                 }
             }
             // Management of other paging buttons...
             for ($i = 1; $i <= $this->iTotalPages; $i++) {
-                if (($i >= $this->iCurrentPage - $this->aOptions['range'] && $i <= $this->iCurrentPage + $this->aOptions['range']) || $this->iTotalPages <= $this->iShowItems) {
+                if (($i >= $this->iCurrentPage - self::$aOptions['range'] && $i <= $this->iCurrentPage + self::$aOptions['range']) || $this->iTotalPages <= $this->iShowItems) {
                     $this->sHtmlOutput .= '<li' . ($this->iCurrentPage == $i ? ' class="active"' : '') . '><a href="' . $this->sPageName . $i . '">' . $i . '</a></li>';
                 }
             }
 
             //  Management the "Next" link
-            if ($this->aOptions['text_next_page']) {
+            if (self::$aOptions['text_next_page']) {
                 if ($this->iCurrentPage < $this->iTotalPages - 1 && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . ($this->iCurrentPage + 1) . '" aria-label="Next"><span aria-hidden="true">' . $this->aOptions['text_next_page'] . '</span></a></li>';
+                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . ($this->iCurrentPage + 1) . '" aria-label="Next"><span aria-hidden="true">' . self::$aOptions['text_next_page'] . '</span></a></li>';
                 }
             }
 
             // Management link to go to the last page
-            if ($this->aOptions['text_last_page']) {
-                if ($this->iCurrentPage < $this->iTotalPages - 1 && $this->iCurrentPage + $this->aOptions['range'] < $this->iTotalPages && $this->iShowItems < $this->iTotalPages) {
-                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . $this->iTotalPages . '"><span aria-hidden="true">' . $this->aOptions['text_last_page'] . '</span></a></li>';
+            if (self::$aOptions['text_last_page']) {
+                if ($this->iCurrentPage < $this->iTotalPages - 1 && $this->iCurrentPage + self::$aOptions['range'] < $this->iTotalPages && $this->iShowItems < $this->iTotalPages) {
+                    $this->sHtmlOutput .= '<li><a href="' . $this->sPageName . $this->iTotalPages . '"><span aria-hidden="true">' . self::$aOptions['text_last_page'] . '</span></a></li>';
                 }
             }
 
