@@ -28,17 +28,13 @@ class Record
     /**
      * @var array $_aErrors
      */
-    private $_aErrors = array();
+    private $aErrors = array();
 
-    /**
-     * @var string $_sSql
-     */
-    private $_sSql;
+    /** @var string $_sSql */
+    private $sSql;
 
-    /**
-     * @var array $_aValues
-     */
-    private $_aValues = array();
+    /** @var array $_aValues */
+    private $aValues = array();
 
     /**
      * Import the Singleton trait.
@@ -59,7 +55,7 @@ class Record
      */
     public function addValue($sKey, $sValue)
     {
-        $this->_aValues[$sKey] = $sValue;
+        $this->aValues[$sKey] = $sValue;
 
         return $this;
     }
@@ -73,7 +69,7 @@ class Record
      */
     public function setValues(array $aValues)
     {
-        $this->_aValues = $aValues;
+        $this->aValues = $aValues;
     }
 
     /**
@@ -84,8 +80,8 @@ class Record
     public function getErrors()
     {
         $sErrMsg = '';
-        if (count($this->_aErrors) > 1) {
-            foreach ($this->_aErrors as $sError) {
+        if (count($this->aErrors) > 1) {
+            foreach ($this->aErrors as $sError) {
                 $sErrMsg .= $sError . "\r\n";
             }
         }
@@ -110,8 +106,8 @@ class Record
             // We start the transaction.
             $oDb->beginTransaction();
 
-            $this->_sSql = 'DELETE FROM' . Db::prefix($sTable) . "WHERE $sField = :id";
-            $rStmt = $oDb->prepare($this->_sSql);
+            $this->sSql = 'DELETE FROM' . Db::prefix($sTable) . "WHERE $sField = :id";
+            $rStmt = $oDb->prepare($this->sSql);
             $rStmt->bindParam(':id', $sId);
             $bStatus = $rStmt->execute();
 
@@ -122,7 +118,7 @@ class Record
 
             return $bStatus;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
@@ -140,8 +136,8 @@ class Record
      */
     public function insert($sTable, array $aValues)
     {
-        $aValues = ($aValues === null) ? $this->_aValues : $aValues;
-        $this->_sSql = 'INSERT INTO' . Db::prefix($sTable) . 'SET ';
+        $aValues = ($aValues === null) ? $this->aValues : $aValues;
+        $this->sSql = 'INSERT INTO' . Db::prefix($sTable) . 'SET ';
 
         $oCachingIterator = new CachingIterator(new ArrayIterator($aValues));
 
@@ -152,11 +148,11 @@ class Record
             $oDb->beginTransaction();
 
             foreach ($oCachingIterator as $sField => $sValue) {
-                $this->_sSql .= $sField . ' = :' . $sField;
-                $this->_sSql .= $oCachingIterator->hasNext() ? ',' : '';
+                $this->sSql .= $sField . ' = :' . $sField;
+                $this->sSql .= $oCachingIterator->hasNext() ? ',' : '';
             }
 
-            $rStmt = $oDb->prepare($this->_sSql);
+            $rStmt = $oDb->prepare($this->sSql);
 
             foreach ($aValues as $sField => $sValue) {
                 $rStmt->bindParam(':' . $sField, $sValue);
@@ -170,7 +166,7 @@ class Record
             Db::free($rStmt);
             return $oDb->lastInsertId();
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
@@ -200,13 +196,13 @@ class Record
 
             $bIsWhere = isset($sPk, $sId);
 
-            $this->_sSql = 'UPDATE' . Db::prefix($sTable) . "SET $sField = :value";
+            $this->sSql = 'UPDATE' . Db::prefix($sTable) . "SET $sField = :value";
 
             if ($bIsWhere) {
-                $this->_sSql .= " WHERE $sPk = :id";
+                $this->sSql .= " WHERE $sPk = :id";
             }
 
-            $rStmt = $oDb->prepare($this->_sSql);
+            $rStmt = $oDb->prepare($this->sSql);
             $rStmt->bindParam(':value', $sValue);
             if ($bIsWhere) {
                 $rStmt->bindParam(':id', $sId);
@@ -221,7 +217,7 @@ class Record
 
             return $iRow;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
@@ -256,7 +252,7 @@ class Record
             Db::free($rStmt);
             return $oRow;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
 
             // We cancel the transaction if an error occurs.
             $oDb->rollBack();
@@ -271,7 +267,7 @@ class Record
      */
     public function execute()
     {
-        return $this->query($this->_sSql);
+        return $this->query($this->sSql);
     }
 
     /**
@@ -283,8 +279,8 @@ class Record
     public function clean()
     {
         // Set to default values
-        $this->_sSql = '';
-        $this->_aValues = array();
+        $this->sSql = '';
+        $this->aValues = array();
     }
 
     /**
@@ -333,21 +329,21 @@ class Record
 
             $bIsWhere = isset($sField, $sId);
 
-            $this->_sSql = "SELECT $sWhat FROM " . $sTable;
+            $this->sSql = "SELECT $sWhat FROM " . $sTable;
 
             if (!empty($aJoin) && count($aJoin) == 2) {
-                $this->_sSql .= " LEFT JOIN $aJoin[0] ON $sTable.$aJoin[1] = $aJoin[0].$aJoin[1]";
+                $this->sSql .= " LEFT JOIN $aJoin[0] ON $sTable.$aJoin[1] = $aJoin[0].$aJoin[1]";
             }
 
             if ($bIsWhere) {
-                $this->_sSql .= " WHERE $sField = :id";
+                $this->sSql .= " WHERE $sField = :id";
             }
 
             if (!empty($sOptions)) {
-                $this->_sSql .= " $sOptions";
+                $this->sSql .= " $sOptions";
             }
 
-            $rStmt = Db::getInstance()->prepare($this->_sSql);
+            $rStmt = Db::getInstance()->prepare($this->sSql);
             if ($bIsWhere) {
                 $rStmt->bindParam(':id', $sId);
             }
@@ -357,7 +353,7 @@ class Record
 
             return $oRow;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
         }
     }
 
@@ -378,19 +374,19 @@ class Record
         try {
             $bIsWhere = isset($sField, $sId);
 
-            $this->_sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
+            $this->sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
 
             if ($bIsWhere) {
-                $this->_sSql .= "WHERE $sField = :id ";
+                $this->sSql .= "WHERE $sField = :id ";
             }
 
             if (!empty($sOptions)) {
-                $this->_sSql .= " $sOptions ";
+                $this->sSql .= " $sOptions ";
             }
 
-            $this->_sSql .= 'LIMIT 0,1'; // Get only one column
+            $this->sSql .= 'LIMIT 0,1'; // Get only one column
 
-            $rStmt = Db::getInstance()->prepare($this->_sSql);
+            $rStmt = Db::getInstance()->prepare($this->sSql);
             if ($bIsWhere) {
                 $rStmt->bindParam(':id', $sId);
             }
@@ -400,7 +396,7 @@ class Record
 
             return $mRow;
         } catch (Exception $oE) {
-            $this->_aErrors[] = $oE->getMessage();
+            $this->aErrors[] = $oE->getMessage();
         }
     }
 
@@ -415,14 +411,14 @@ class Record
      */
     public function updates($sTable, array $aValues)
     {
-        $aValues = ($aValues === null) ? $this->_aValues : $aValues;
-        $this->_sSql = 'UPDATE' . Db::prefix($sTable) . 'SET ';
+        $aValues = ($aValues === null) ? $this->aValues : $aValues;
+        $this->sSql = 'UPDATE' . Db::prefix($sTable) . 'SET ';
 
         $oCachingIterator = new CachingIterator(new ArrayIterator($aValues));
 
         foreach ($oCachingIterator as $sField => $sValue) {
-            $this->_sSql .= $sField . ' = ' . $this->escape($sValue);
-            $this->_sSql .= $oCachingIterator->hasNext() ? ',' : '';
+            $this->sSql .= $sField . ' = ' . $this->escape($sValue);
+            $this->sSql .= $oCachingIterator->hasNext() ? ',' : '';
         }
 
         return $this;
@@ -439,7 +435,7 @@ class Record
      */
     public function select($sTable, $sWhat = '*')
     {
-        $this->_sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
+        $this->sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
 
         return $this;
     }
@@ -630,7 +626,7 @@ class Record
      */
     protected function clause($sClsName, $sVal)
     {
-        $this->_sSql .= " $sClsName $sVal";
+        $this->sSql .= " $sClsName $sVal";
 
         return $this;
     }
@@ -648,7 +644,7 @@ class Record
     protected function optClause($sClsName, $sField, $sVal, $sOpt)
     {
         $sVal = $this->escape($sVal);
-        $this->_sSql .= " $sClsName $sField $sOpt $sVal";
+        $this->sSql .= " $sClsName $sField $sOpt $sVal";
 
         return $this;
     }
