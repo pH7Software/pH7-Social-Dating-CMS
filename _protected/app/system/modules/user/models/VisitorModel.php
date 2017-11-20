@@ -77,10 +77,9 @@ class VisitorModel
         $sSqlLimit = (!$bCount) ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = (!$bCount) ? '*' : 'COUNT(who.profileId) AS totalVisitors';
 
+        $sSqlWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         if (ctype_digit($mLooking)) {
             $sSqlWhere = '(who.visitorId = :looking)';
-        } else {
-            $sSqlWhere = '(m.username LIKE :looking OR m.firstName LIKE :looking OR m.lastName LIKE :looking OR m.email LIKE :looking)';
         }
 
         $sSqlOrder = SearchCoreModel::order($sOrderBy, $iSort);
