@@ -143,7 +143,7 @@ class MainController extends Controller
 
     public function outbox()
     {
-        $this->view->page_title = t('MailBox : Messages Sent');
+        $this->sTitle = t('MailBox : Messages Sent');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
@@ -202,7 +202,7 @@ class MainController extends Controller
 
     public function trash()
     {
-        $this->view->page_title = t('MailBox : Trash');
+        $this->sTitle = t('MailBox : Trash');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
 
