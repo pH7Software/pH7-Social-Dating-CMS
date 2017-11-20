@@ -46,8 +46,9 @@ class InviteFormProcess extends Form
      * Send the confirm email.
      *
      * @param string $sMail The user email.
-     * @param object \PH7\Framework\Mail\Mail $oMail
-     * @return integer Number of recipients who were accepted for delivery.
+     * @param Mail $oMail
+     *
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail($sMail, Mail $oMail)
     {
