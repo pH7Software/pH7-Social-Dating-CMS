@@ -65,27 +65,27 @@ class Db
      */
     public static function getInstance($sDsn = NULL, $sUsername = NULL, $sPassword = NULL, $aDriverOptions = NULL, $sPrefix = NULL)
     {
-        if (NULL === self::$_oInstance) {
+        if (NULL === self::$oInstance) {
             if (!empty($sDsn))
-                self::$_sDsn = $sDsn;
+                self::$sDsn = $sDsn;
 
             if (!empty($sUsername))
-                self::$_sUsername = $sUsername;
+                self::$sUsername = $sUsername;
 
             if (!empty($sPassword))
-                self::$_sPassword = $sPassword;
+                self::$sPassword = $sPassword;
 
             if (!empty($aDriverOptions))
-                self::$_aDriverOptions = $aDriverOptions;
+                self::$aDriverOptions = $aDriverOptions;
 
             if (!empty($sPrefix))
-                self::$_sPrefix = $sPrefix;
+                self::$sPrefix = $sPrefix;
 
-            self::$_oInstance = new static;
+            self::$oInstance = new static;
 
             try {
-                self::$_oDb = new PDO(self::$_sDsn, self::$_sUsername, self::$_sPassword, self::$_aDriverOptions);
-                self::$_oDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                self::$oDb = new PDO(self::$sDsn, self::$sUsername, self::$sPassword, self::$aDriverOptions);
+                self::$oDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (Exception $oE) {
                 exit('Error Establishing a Database Connection');
             }
@@ -93,7 +93,7 @@ class Db
             static::checkMySqlVersion();
         }
 
-        return self::$_oInstance;
+        return self::$oInstance;
     }
 
     /**
@@ -103,7 +103,7 @@ class Db
      */
     public function beginTransaction()
     {
-        return self::$_oDb->beginTransaction();
+        return self::$oDb->beginTransaction();
     }
 
     /**
@@ -113,7 +113,7 @@ class Db
      */
     public function commit()
     {
-        return self::$_oDb->commit();
+        return self::$oDb->commit();
     }
 
     /**
@@ -123,7 +123,7 @@ class Db
      */
     public function errorCode()
     {
-        return self::$_oDb->errorCode();
+        return self::$oDb->errorCode();
     }
 
     /**
@@ -133,7 +133,7 @@ class Db
      */
     public function errorInfo()
     {
-        return self::$_oDb->errorInfo();
+        return self::$oDb->errorInfo();
     }
 
     /**
@@ -145,7 +145,7 @@ class Db
     public function exec($sStatement)
     {
         $fStartTime = microtime(true);
-        $mReturn = self::$_oDb->exec($sStatement);
+        $mReturn = self::$oDb->exec($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
 
@@ -161,7 +161,7 @@ class Db
      */
     public function getAttribute($iAttribute)
     {
-        return self::$_oDb->getAttribute($iAttribute);
+        return self::$oDb->getAttribute($iAttribute);
     }
 
     /**
@@ -171,7 +171,7 @@ class Db
      */
     public function getAvailableDrivers()
     {
-        return self::$_oDb->getAvailableDrivers();
+        return self::$oDb->getAvailableDrivers();
     }
 
     /**
@@ -183,7 +183,7 @@ class Db
      */
     public function lastInsertId($sName = null)
     {
-        return self::$_oDb->lastInsertId($sName);
+        return self::$oDb->lastInsertId($sName);
     }
 
     /**
@@ -196,7 +196,7 @@ class Db
     public function prepare($sStatement)
     {
         $fStartTime = microtime(true);
-        $bReturn = self::$_oDb->prepare($sStatement);
+        $bReturn = self::$oDb->prepare($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
 
@@ -212,7 +212,7 @@ class Db
      */
     public function execute($sStatement)
     {
-        return self::$_oDb->execute($sStatement);
+        return self::$oDb->execute($sStatement);
     }
 
     /**
@@ -225,7 +225,7 @@ class Db
     public function query($sStatement)
     {
         $fStartTime = microtime(true);
-        $mReturn = self::$_oDb->query($sStatement);
+        $mReturn = self::$oDb->query($sStatement);
         $this->_increment();
         $this->_addTime($fStartTime, microtime(true));
 
@@ -241,7 +241,7 @@ class Db
      */
     public function queryFetchAllAssoc($sStatement)
     {
-        return self::$_oDb->query($sStatement)->fetchAll(PDO::FETCH_ASSOC);
+        return self::$oDb->query($sStatement)->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -253,7 +253,7 @@ class Db
      */
     public function queryFetchRowAssoc($sStatement)
     {
-        return self::$_oDb->query($sStatement)->fetch(PDO::FETCH_ASSOC);
+        return self::$oDb->query($sStatement)->fetch(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -265,7 +265,7 @@ class Db
      */
     public function queryFetchColAssoc($sStatement)
     {
-        return self::$_oDb->query($sStatement)->fetchColumn();
+        return self::$oDb->query($sStatement)->fetchColumn();
     }
 
     /**
@@ -278,7 +278,7 @@ class Db
      */
     public function quote($sInput, $iParameterType = 0)
     {
-        return self::$_oDb->quote($sInput, $iParameterType);
+        return self::$oDb->quote($sInput, $iParameterType);
     }
 
     /**
@@ -288,7 +288,7 @@ class Db
      */
     public function rollBack()
     {
-        return self::$_oDb->rollBack();
+        return self::$oDb->rollBack();
     }
 
     /**
@@ -301,7 +301,7 @@ class Db
      */
     public function setAttribute($iAttribute, $mValue)
     {
-        return self::$_oDb->setAttribute($iAttribute, $mValue);
+        return self::$oDb->setAttribute($iAttribute, $mValue);
     }
 
     /**
@@ -311,7 +311,7 @@ class Db
      */
     public static function queryCount()
     {
-        return self::$_iCount;
+        return self::$iCount;
     }
 
     /**
@@ -331,7 +331,7 @@ class Db
      */
     public static function time()
     {
-        return self::$_fTime;
+        return self::$fTime;
     }
 
     /**
@@ -346,7 +346,7 @@ class Db
     {
         $sSpace = (!$bTrim) ? ' ' : '';
 
-        return ($sTable !== '') ? $sSpace . self::$_sPrefix . $sTable . $sSpace : self::$_sPrefix;
+        return ($sTable !== '') ? $sSpace . self::$sPrefix . $sTable . $sSpace : self::$sPrefix;
     }
 
     /**
@@ -367,7 +367,7 @@ class Db
 
         // Free instance of the PDO object
         if (TRUE === $bCloseConnection) {
-            self::$_oDb = NULL;
+            self::$oDb = NULL;
         }
     }
 
@@ -408,7 +408,7 @@ class Db
      */
     public static function checkMySqlVersion()
     {
-        $sMySQLVer = self::$_oDb->getAttribute(PDO::ATTR_SERVER_VERSION);
+        $sMySQLVer = self::$oDb->getAttribute(PDO::ATTR_SERVER_VERSION);
 
         if (version_compare($sMySQLVer, PH7_REQUIRE_SQL_VERSION, '<')) {
             exit('ERROR: Your MySQL version is ' . $sMySQLVer . '. pH7CMS requires MySQL ' . PH7_REQUIRE_SQL_VERSION . ' or newer.');
@@ -425,7 +425,7 @@ class Db
      */
     private function _addTime($fStartTime, $fEndTime)
     {
-        self::$_fTime += round($fEndTime - $fStartTime, 6);
+        self::$fTime += round($fEndTime - $fStartTime, 6);
     }
 
     /**
@@ -435,7 +435,7 @@ class Db
      */
     private function _increment()
     {
-        ++self::$_iCount;
+        ++self::$iCount;
     }
 
     /**
