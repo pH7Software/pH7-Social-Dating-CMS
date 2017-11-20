@@ -19,12 +19,16 @@ use PH7\Framework\Service\SearchImage\Url as ImageUrl;
 
 class AvatarDesignCore extends Design
 {
+    const DEF_AVATAR_SIZE = 32;
+    const DEF_LIGHTBOX_AVATAR_SIZE = 400;
+
     /** @var UserCore */
     private $_oUser;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->_oUser = new UserCore;
     }
 
@@ -35,10 +39,11 @@ class AvatarDesignCore extends Design
      * @param string $sFirstName
      * @param string $sSex
      * @param int $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
-     *
      * @param bool $bRollover CSS effect
+     *
+     * @return void
      */
-    public function get($sUsername = '', $sFirstName = '', $sSex = null, $iSize = 32, $bRollover = false)
+    public function get($sUsername = '', $sFirstName = '', $sSex = null, $iSize = self::DEF_AVATAR_SIZE, $bRollover = false)
     {
         // The profile does not exist, so it creates a fake profile = ghost
         if ($sUsername === PH7_ADMIN_USERNAME) {
@@ -69,8 +74,10 @@ class AvatarDesignCore extends Design
      * @param string $sFirstName
      * @param string $sSex
      * @param int $iSize Avatar size (available sizes: 32, 64, 100, 150, 200, 400)
+     *
+     * @return void
      */
-    public function lightbox($sUsername = '', $sFirstName = '', $sSex = null, $iSize = 400)
+    public function lightbox($sUsername = '', $sFirstName = '', $sSex = null, $iSize = self::DEF_LIGHTBOX_AVATAR_SIZE)
     {
         // The profile does not exist, so it creates a fake profile = ghost
         if (empty($sUsername)) {
