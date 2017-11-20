@@ -9,17 +9,18 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Url\Header;
 
 class EditCommentForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_edit_comment'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit_comment']))
+            if (\PFBC\Form::isValid($_POST['submit_edit_comment'])) {
                 new EditCommentFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oHttpRequest = new Http;

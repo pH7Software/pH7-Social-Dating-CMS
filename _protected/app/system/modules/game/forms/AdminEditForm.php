@@ -11,16 +11,18 @@ namespace PH7;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Str\Str;
+use PH7\Framework\Url\Header;
 
 class AdminEditForm
 {
     public static function display()
     {
         if (isset($_POST['submit_edit'])) {
-            if (\PFBC\Form::isValid($_POST['submit_edit']))
+            if (\PFBC\Form::isValid($_POST['submit_edit'])) {
                 new AdminEditFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oHttpRequest = new Http;
