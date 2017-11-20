@@ -300,13 +300,13 @@ class ValidateCoreAjax
     /**
      * Validation of the acceptance of the terms of use.
      *
-     * @return string $sValue
+     * @param string $sValue
      *
      * @return void
      */
     protected function terms($sValue)
     {
-        if ($sValue != 'true') {
+        if ($sValue !== 'true') {
             $this->sMsg = t('You must read and approve the terms of use!');
         } else {
             $this->iStatus = 1;
