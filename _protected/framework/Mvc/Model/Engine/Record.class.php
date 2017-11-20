@@ -85,9 +85,11 @@ class Record
     {
         $sErrMsg = '';
         if (count($this->_aErrors) > 1) {
-            foreach ($this->_aErrors as $sError)
+            foreach ($this->_aErrors as $sError) {
                 $sErrMsg .= $sError . "\r\n";
+            }
         }
+
         return $sErrMsg;
     }
 
