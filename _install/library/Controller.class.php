@@ -20,7 +20,7 @@ abstract class Controller implements Controllable
     const PHP_TIMEZONE_DIRECTIVE = 'date.timezone';
 
     const SOFTWARE_NAME = 'pH7CMS';
-    const DEFAULT_SITE_NAME = 'Dating Web App';
+    const DEFAULT_SITE_NAME = 'My Dating WebApp';
     const SOFTWARE_PREFIX_COOKIE_NAME = 'pH7';
     const SOFTWARE_WEBSITE = 'http://ph7cms.com';
     const SOFTWARE_LICENSE_URL = 'http://ph7cms.com/legal/license';
