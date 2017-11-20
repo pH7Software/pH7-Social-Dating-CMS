@@ -794,9 +794,24 @@ class Design
         $iId = (int)$iId;
 
         if ($iId > PH7_GHOST_ID) {
-            $sReportLink = (UserCore::auth()) ?
-                Uri::get('report', 'main', 'abuse', '?spammer=' . $iId . '&amp;url=' . $this->oHttpRequest->currentUrl() . '&amp;type=' . Registry::getInstance()->module, false) . '" data-popup="block-page' :
-                Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery(['msg' => t('You must be registered to report contents.'), 'ref' => 'profile', 'a' => 'report', 'u' => $sUsername, 'f_n' => $sFirstName, 's' => $sSex]), false);
+            if (UserCore::auth()) {
+                $aUrlParams = [
+                    'spammer' => $iId,
+                    'url' => $this->oHttpRequest->currentUrl(),
+                    'type' => Registry::getInstance()->module
+                ];
+                $sReportLink = Uri::get('report', 'main', 'abuse', '?' . Url::httpBuildQuery($aUrlParams), false) . '" data-popup="block-page';
+            } else {
+                $aUrlParams = [
+                    'msg' => t('You need to be a user to report contents.'),
+                    'ref' => 'profile',
+                    'a' => 'report',
+                    'u' => $sUsername,
+                    'f_n' => $sFirstName,
+                    's' => $sSex
+                ];
+                $sReportLink = Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aUrlParams), false);
+            }
 
             echo '<a rel="nofollow" href="', $sReportLink, '" title="', t('Report Abuse'), '">', t('Report'), '</a>';
         } else {

@@ -61,6 +61,7 @@ class Uri
     {
         static::$bFullClean = $bFullClean;
         $sUrl = static::uri(['module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars]);
+
         return $sUrl;
     }
 
