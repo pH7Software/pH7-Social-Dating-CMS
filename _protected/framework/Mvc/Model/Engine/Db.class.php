@@ -435,7 +435,7 @@ class Db
      */
     private function increment()
     {
-        ++self::$iCount;
+        self::$iCount++;
     }
 
     /**
