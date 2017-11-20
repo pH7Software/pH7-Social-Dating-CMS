@@ -25,7 +25,7 @@ class Spam
      * @param string $sCheckContent Message content to check.
      * @param string $sFindColumn
      * @param string $sColumnId
-     * @param integer $iFindId
+     * @param int $iFindId
      * @param string $sTable
      * @param string $sAdditionalSql Additional SQL code.
      *
