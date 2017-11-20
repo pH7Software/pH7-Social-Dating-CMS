@@ -446,6 +446,6 @@ class Gzip
      */
     private function clearUrl($sPath)
     {
-        return str_replace(array('\\', '//'), '/', $sPath);
+        return str_replace(['\\', '//'], '/', $sPath);
     }
 }
