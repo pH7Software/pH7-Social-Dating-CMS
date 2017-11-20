@@ -25,20 +25,16 @@ use stdClass;
  */
 class Record
 {
-    /**
-     * @var array $_aErrors
-     */
+    /** @var array */
     private $aErrors = array();
 
-    /** @var string $_sSql */
+    /** @var string */
     private $sSql;
 
-    /** @var array $_aValues */
+    /** @var array */
     private $aValues = array();
 
-    /**
-     * Import the Singleton trait.
-     */
+    /** Import the Singleton trait */
     use Singleton;
 
     /**
