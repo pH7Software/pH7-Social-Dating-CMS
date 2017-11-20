@@ -41,20 +41,22 @@ class Statistic
      * This method was created to avoid retrieving the column "views" with the general Model of the module,
      * since it uses the cache and therefore cannot retrieve the number of real-time views.
      *
-     * @param integer $iId
+     * @param int $iId
      * @param string $sTable
-     * @return integer Number of views.
+     *
+     * @return int Number of views.
      */
     public static function getView($iId, $sTable)
     {
         $sWhere = Various::convertTableToId($sTable);
 
-        $rStmt = Db::getInstance()->prepare('SELECT views FROM' . Db::prefix($sTable) . 'WHERE ' . $sWhere . ' = :id LIMIT 1');
+        $sSqlQuery = 'SELECT views FROM' . Db::prefix($sTable) . 'WHERE ' . $sWhere . ' = :id LIMIT 1';
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return (int)@$oRow->views;
     }
-
 }
