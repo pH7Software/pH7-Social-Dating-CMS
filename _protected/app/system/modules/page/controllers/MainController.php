@@ -13,6 +13,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 
 class MainController extends Controller
 {
+    /** @var string */
     private $sTitle;
 
     public function __construct()
