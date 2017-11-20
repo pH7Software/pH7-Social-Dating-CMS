@@ -19,7 +19,7 @@ class Ads extends Engine\Model
     /**
      * Adding an Advertisement Click.
      *
-     * @param integer $iAdsId
+     * @param int $iAdsId
      *
      * @return void
      */
