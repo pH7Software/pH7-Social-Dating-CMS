@@ -18,7 +18,6 @@ use PH7\Framework\Url\Header;
 
 class MsgFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
