@@ -100,7 +100,7 @@ final class Token
         $iTime = ($iTime === null) ? DbConfig::getSetting('securityTokenLifetime') : $iTime;
 
         // The default tag name for the security token
-        $sInputToken = (empty($sInputToken)) ? (new Http)->post('security_token') : $sInputToken;
+        $sInputToken = (empty($sInputToken)) ? (new HttpRequest)->post('security_token') : $sInputToken;
 
         $aCheckSession = [
             'security_token_' . $sName,
