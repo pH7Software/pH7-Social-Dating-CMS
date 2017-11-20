@@ -21,7 +21,7 @@ class AdminModel extends AdminCoreModel
      * @param string $sUsername
      * @param string $sPassword
      *
-     * @return boolean Returns TRUE if successful otherwise FALSE
+     * @return bool Returns TRUE if successful otherwise FALSE
      */
     public function adminLogin($sEmail, $sUsername, $sPassword)
     {

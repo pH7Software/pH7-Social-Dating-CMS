@@ -16,9 +16,12 @@ class ModeratorModel extends ModeratorCoreModel
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
-        $rStmt = Db::getInstance()->prepare('SELECT m.profileId, m.username, a.* FROM' .
+
+        $sSqlQuery = 'SELECT m.profileId, m.username, a.* FROM' .
             Db::prefix('AlbumsPictures') . 'AS a INNER JOIN' . Db::prefix('Members') .
-            'AS m USING(profileId) WHERE a.approved = \'0\' LIMIT :offset, :limit');
+            'AS m USING(profileId) WHERE a.approved = \'0\' LIMIT :offset, :limit';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
