@@ -50,7 +50,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Template Files');
 
-        $this->_displayAction(PH7_PATH_TPL, self::THEME_FILE_EXTS);
+        $this->displayAction(PH7_PATH_TPL, self::THEME_FILE_EXTS);
         $this->manualTplInclude('publicdisplay.inc.tpl');
 
         $this->output();
@@ -60,7 +60,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Email Templates');
 
-        $this->_displayAction(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_TPL_MAIL_NAME . PH7_DS . 'tpl' . PH7_DS . 'mail' . PH7_DS, '.tpl');
+        $this->displayAction(PH7_PATH_SYS . 'global' . PH7_DS . PH7_VIEWS . PH7_TPL_MAIL_NAME . PH7_DS . 'tpl' . PH7_DS . 'mail' . PH7_DS, '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
@@ -70,7 +70,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Ban Files');
 
-        $this->_displayAction(PH7_PATH_APP_CONFIG . Ban::DIR, '.txt');
+        $this->displayAction(PH7_PATH_APP_CONFIG . Ban::DIR, '.txt');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
@@ -80,7 +80,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Suggestion Files');
 
-        $this->_displayAction(PH7_PATH_APP_CONFIG . Suggestion::DIR, '.txt');
+        $this->displayAction(PH7_PATH_APP_CONFIG . Suggestion::DIR, '.txt');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
@@ -90,7 +90,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Pages');
 
-        $this->_displayAction(PH7_PATH_SYS_MOD . 'page' . PH7_DS . PH7_VIEWS . PH7_TPL_MOD_NAME, '.tpl');
+        $this->displayAction(PH7_PATH_SYS_MOD . 'page' . PH7_DS . PH7_VIEWS . PH7_TPL_MOD_NAME, '.tpl');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
@@ -98,7 +98,7 @@ class FileController extends Controller
 
     public function somethingProtectedAppDisplay()
     {
-        $this->_displayAction(PH7_PATH_APP . $this->httpRequest->get('dir'));
+        $this->displayAction(PH7_PATH_APP . $this->httpRequest->get('dir'));
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
@@ -128,7 +128,7 @@ class FileController extends Controller
      *
      * @return void
      */
-    private function _displayAction($sFile, $mExt = null)
+    private function displayAction($sFile, $mExt = null)
     {
         if (empty($this->sTitle)) {
             $this->sTitle = t('File Manager');
