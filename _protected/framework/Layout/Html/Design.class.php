@@ -745,7 +745,7 @@ class Design
         $sLikeLink = ($bIsLogged) ? '#' : Uri::get('user', 'signup', 'step1', '?' . Url::httpBuildQuery($aHttpParams), false);
         $sLikeId = ($bIsLogged) ? ' id="like"' : '';
 
-        $sUrlKey = (empty($sForceUrlKey)) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
+        $sUrlKey = empty($sForceUrlKey) ? $this->oHttpRequest->currentUrl() : $sForceUrlKey;
         echo '<a rel="nofollow" href="', $sLikeLink, '" data-key="', $sUrlKey, '" title="', t('Like %0%', $sFirstName), '" class="like"', $sLikeId, '>', t('Like %0%', $sFirstName), '</a>';
         $this->staticFiles('js', PH7_STATIC . PH7_JS, 'Like.js');
     }
