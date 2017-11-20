@@ -352,11 +352,18 @@ namespace PH7\Framework\Str {
 }
 
 namespace {
+    use PH7\Framework\Str\Str;
+
     /**
-     * Alias of \PH7\Framework\Str\Str::escape() method.
+     * Alias of Str::escape() method.
+     *
+     * @param array|string $mText
+     * @param bool $bStrip
+     *
+     * @return array|string
      */
     function escape($mText, $bStrip = false)
     {
-        return (new PH7\Framework\Str\Str)->escape($mText, $bStrip);
+        return (new Str)->escape($mText, $bStrip);
     }
 }
