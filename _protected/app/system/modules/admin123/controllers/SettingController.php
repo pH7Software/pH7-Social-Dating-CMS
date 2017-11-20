@@ -105,28 +105,27 @@ class SettingController extends Controller
     /**
      * Get the status and the message for the license key.
      *
-     * @access private
      * @return array ['is_err' => BOOLEAN, 'msg' => STRING];
      */
-    private function _getLicStatusMsg()
+    private function getLicStatusMsg()
     {
         $bIsErr = true; // Set default value
 
         switch (PH7_LICENSE_STATUS) {
-            case 'active':
+            case License::ACTIVE_STATUS:
                 $sMsg = t('Hurrah! Your License Key has been successfully enabled!');
                 $bIsErr = false;
                 break;
 
-            case 'invalid':
+            case License::INVALID_STATUS:
                 $sMsg = t('Oops! Your license key is Invalid.');
                 break;
 
-            case 'expired':
+            case License::EXPIRED_STATUS:
                 $sMsg = t('Oops! Your license key is Expired.');
                 break;
 
-            case 'suspended':
+            case License::SUSPENDED_STATUS:
                 $sMsg = t('We are sorry, but your license key is Suspended.');
                 break;
 
