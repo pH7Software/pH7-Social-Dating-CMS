@@ -18,19 +18,20 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class Statistic
 {
-
     /**
      * Set Views Statistics.
      *
-     * @param integer $iId
+     * @param int $iId
      * @param string $sTable
+     *
      * @return void
      */
     public static function setView($iId, $sTable)
     {
         $sWhere = Various::convertTableToId($sTable);
 
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix($sTable) . 'SET views = views+1 WHERE ' . $sWhere . ' = :id LIMIT 1');
+        $sSqlQuery = 'UPDATE' . Db::prefix($sTable) . 'SET views = views+1 WHERE ' . $sWhere . ' = :id LIMIT 1';
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':id', $iId, \PDO::PARAM_INT);
         $rStmt->execute();
         Db::free($rStmt);
