@@ -90,7 +90,11 @@ class AdminController extends Controller
         $sUsername = (string)$aData[1];
 
         (new Admin)->delete($iId, $sUsername);
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'), t('The admin has been deleted.'));
+
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+            t('The admin has been deleted.')
+        );
     }
 
     public function deleteAll()
