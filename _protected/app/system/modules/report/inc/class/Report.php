@@ -16,14 +16,14 @@ use PH7\Framework\Mvc\Model\DbConfig;
 class Report
 {
     /** @var PH7Tpl */
-    private $_oView;
+    private $oView;
 
     /** @var string|bool */
-    private $_mStatus = false;
+    private $mStatus = false;
 
     public function __construct()
     {
-        $this->_oView = new PH7Tpl;
+        $this->oView = new PH7Tpl;
     }
 
     /**
@@ -38,9 +38,9 @@ class Report
         $oExistsModel = new ExistsCoreModel;
 
         if ($oExistsModel->id($aData['reporter_id']) && $oExistsModel->id($aData['spammer_id'])) {
-            $this->_mStatus = (new ReportModel)->add($aData);
+            $this->mStatus = (new ReportModel)->add($aData);
 
-            if ($this->_mStatus === true) {
+            if ($this->mStatus === true) {
                 if (DbConfig::getSetting('sendReportMail')) {
                     $this->sendMail($aData);
                 }
