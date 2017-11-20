@@ -16,13 +16,14 @@ use PH7\Framework\Url\Header;
 
 class CategoryFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
 
         (new ForumModel)->addCategory($this->httpRequest->post('title'));
-        Header::redirect(Uri::get('forum', 'admin', 'addforum', Db::getInstance()->lastInsertId()), t('The Category has been successfully added!'));
+        Header::redirect(
+            Uri::get('forum', 'admin', 'addforum', Db::getInstance()->lastInsertId()),
+            t('The Category has been successfully added!')
+        );
     }
-
 }

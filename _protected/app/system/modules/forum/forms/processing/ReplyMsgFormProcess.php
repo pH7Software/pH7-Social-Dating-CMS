@@ -36,9 +36,16 @@ class ReplyMsgFormProcess extends Form
             \PFBC\Form::setError('form_reply', Form::duplicateContentMsg());
         } else {
             $oForumModel->addMessage($iProfileId, $iTopicId, $sMessage, $sCurrentTime);
-            Header::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->get('topic_name') . ',' . $iTopicId), t('Your message has been updated successfully!'));
+            Header::redirect(
+                Uri::get(
+                    'forum',
+                    'forum',
+                    'post',
+                    $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->get('topic_name') . ',' . $iTopicId
+                ),
+                t('Your message has been updated successfully!')
+            );
         }
         unset($oForumModel);
     }
-
 }

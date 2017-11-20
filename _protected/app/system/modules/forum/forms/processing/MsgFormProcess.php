@@ -37,9 +37,16 @@ class MsgFormProcess extends Form
             \PFBC\Form::setError('form_msg', Form::duplicateContentMsg());
         } else {
             $oForumModel->addTopic($iProfileId, $iForumId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
-            Header::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->post('title') . ',' . Db::getInstance()->lastInsertId()), t('Your message has been added successfully!'));
+            Header::redirect(
+                Uri::get(
+                    'forum',
+                    'forum',
+                    'post',
+                    $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->post('title') . ',' . Db::getInstance()->lastInsertId()
+                ),
+                t('Your message has been added successfully!')
+            );
         }
         unset($oForumModel);
     }
-
 }

@@ -15,15 +15,22 @@ use PH7\Framework\Url\Header;
 
 class EditForumFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
 
         $iForumId = $this->httpRequest->get('forum_id', 'int');
 
-        (new ForumModel)->updateForum($iForumId, $this->httpRequest->post('category_id'), $this->httpRequest->post('name'), $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        Header::redirect(Uri::get('forum', 'forum', 'index'), t('Your message has been updated successfully!'));
-    }
+        (new ForumModel)->updateForum(
+            $iForumId, $this->httpRequest->post('category_id'),
+            $this->httpRequest->post('name'),
+            $this->httpRequest->post('description'),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+        );
 
+        Header::redirect(
+            Uri::get('forum', 'forum', 'index'),
+            t('Your message has been updated successfully!')
+        );
+    }
 }

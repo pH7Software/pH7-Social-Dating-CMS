@@ -24,8 +24,19 @@ class EditReplyMsgFormProcess extends Form
         $iTopicId = $this->httpRequest->get('topic_id', 'int');
         $iMessageId = $this->httpRequest->get('message_id', 'int');
 
-        (new ForumModel)->updateMessage($this->session->get('member_id'), $iMessageId, $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        Header::redirect(Uri::get('forum', 'forum', 'post', $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->get('topic_name') . ',' . $iTopicId), t('Your message has been updated successfully!'));
-    }
+        (new ForumModel)->updateMessage(
+            $this->session->get('member_id'),
+            $iMessageId, $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN), $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+        );
 
+        Header::redirect(
+            Uri::get(
+                'forum',
+                'forum',
+                'post',
+                $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->get('topic_name') . ',' . $iTopicId
+            ),
+            t('Your message has been updated successfully!')
+        );
+    }
 }

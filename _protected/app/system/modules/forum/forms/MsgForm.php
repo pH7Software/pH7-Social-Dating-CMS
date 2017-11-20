@@ -27,8 +27,9 @@ class MsgForm
 
         $oForumsId = (new ForumModel)->getForum();
         $aForumsName = array();
-        foreach ($oForumsId as $oId)
+        foreach ($oForumsId as $oId) {
             $aForumsName[$oId->forumId] = $oId->name;
+        }
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
