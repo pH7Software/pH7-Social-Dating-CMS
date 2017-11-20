@@ -70,6 +70,7 @@ final class Stop
         }
 
         unset($oSession);
+
         return $bStatus;
     }
 

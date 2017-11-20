@@ -1,6 +1,7 @@
 <?php
 
 namespace PH7\Framework\Security\Validate;
+
 defined('PH7') or exit('Restricted access');
 
 /**
