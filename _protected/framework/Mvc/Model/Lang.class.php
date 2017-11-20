@@ -23,7 +23,7 @@ class Lang
     /**
      * Get information about the language.
      *
-     * @param boolean $bOnlyActive Only active lang
+     * @param bool $bOnlyActive Only active lang
      *
      * @return \stdClass Language data.
      */
