@@ -21,7 +21,17 @@ class UserController extends Controller
 {
     const PROFILES_PER_PAGE = 15;
 
-    private $oAdmin, $oAdminModel, $sMsg, $iTotalUsers;
+    /** @var AdminCore */
+    private $oAdmin;
+
+    /** @var AdminModel */
+    private $oAdminModel;
+
+    /** @var string */
+    private $sMsg;
+
+    /** @var int */
+    private $iTotalUsers;
 
     public function __construct()
     {
