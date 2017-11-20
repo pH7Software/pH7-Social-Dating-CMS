@@ -13,7 +13,6 @@ use PH7\Framework\Mvc\Router\Uri;
 
 class SearchVisitorForm
 {
-
     public static function display()
     {
         $sUsername = (new Http)->get('username');
@@ -26,5 +25,4 @@ class SearchVisitorForm
         $oForm->addElement(new \PFBC\Element\Button(t('Search'), 'submit', array('icon' => 'search')));
         $oForm->render();
     }
-
 }
