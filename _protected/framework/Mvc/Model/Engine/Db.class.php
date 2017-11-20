@@ -28,7 +28,7 @@ class Db
 
     /**
      * Static attributes of the class.
-     * Holds an insance of self with PDO class.
+     * Holds an instance of self with PDO class.
      *
      * @staticvar string $_sDsn Data Source Name
      * @staticvar string $_sUsername
