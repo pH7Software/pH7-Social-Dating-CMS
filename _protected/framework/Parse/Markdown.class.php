@@ -16,7 +16,6 @@ class Markdown extends Code
 {
 
     /**
-     * @access public
      * @param string The text formatted in Markdown
      */
     public function __construct($sText)
@@ -26,7 +25,6 @@ class Markdown extends Code
     }
 
     /**
-     * @access public
      * @return string The code parsed
      */
     public function __toString()
@@ -37,7 +35,6 @@ class Markdown extends Code
     /**
      * Run the transform methods
      *
-     * @access protected
      * @return void
      */
     protected function run()
@@ -57,7 +54,6 @@ class Markdown extends Code
     /**
      * Strong
      *
-     * @access protected
      * @return void
      */
     protected function strong()
@@ -72,7 +68,6 @@ class Markdown extends Code
     /**
      * Italic
      *
-     * @access protected
      * @return void
      */
     protected function italic()
@@ -87,7 +82,6 @@ class Markdown extends Code
     /**
      * Code
      *
-     * @access protected
      * @return void
      */
     protected function code()
@@ -98,7 +92,6 @@ class Markdown extends Code
     /**
      * Links
      *
-     * @access protected
      * @return void
      */
     protected function link()
@@ -117,7 +110,6 @@ class Markdown extends Code
      *
      * Images
      *
-     * @access protected
      * @return void
      */
     protected function img()
@@ -132,7 +124,6 @@ class Markdown extends Code
     /**
      * Blockquote
      *
-     * @access protected
      * @return void
      */
     protected function blockquote()
@@ -144,7 +135,6 @@ class Markdown extends Code
     /**
      * Break line
      *
-     * @access protected
      * @return void
      */
     protected function br()
@@ -156,7 +146,6 @@ class Markdown extends Code
     /**
      * Thematic break
      *
-     * @access protected
      * @return void
      */
     protected function hr()
@@ -167,7 +156,6 @@ class Markdown extends Code
     /**
      * Headings
      *
-     * @access protected
      * @return void
      */
     protected function heading()

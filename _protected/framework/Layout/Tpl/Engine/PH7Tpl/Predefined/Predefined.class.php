@@ -43,7 +43,6 @@ abstract class Predefined
     /**
      * Adding Variable.
      *
-     * @access protected
      * @param string $sKey
      * @param string $sValue
      * @param boolean Print the variable. Default TRUE
@@ -59,7 +58,6 @@ abstract class Predefined
     /**
      * Adding Function.
      *
-     * @access protected
      * @param string $sKey
      * @param string $sValue
      *

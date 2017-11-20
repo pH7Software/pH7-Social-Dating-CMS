@@ -19,7 +19,8 @@ class MainController extends Controller
     const MICROSOFT_PROVIDER = 'microsoft';
 
     /**
-     * @access protected Protected access for the AdminController class derived from this class.
+     * @internal Protected access for the AdminController class derived from this class.
+     *
      * @var string $sTitle
      */
     protected $sTitle;
