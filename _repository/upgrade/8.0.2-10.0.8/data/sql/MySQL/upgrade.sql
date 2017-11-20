@@ -1,6 +1,6 @@
 --
 -- Author:        Pierre-Henry Soria <hi@ph7.me>
--- Copyright:     (c) 2017, Pierre-Henry Soria. All Rights Reserved.
+-- Copyright:     (c) 2017-2018, Pierre-Henry Soria. All Rights Reserved.
 -- License:       GNU General Public License
 --
 
