@@ -39,6 +39,7 @@ class AdminController extends Controller
         $this->sTitle = t('Add a new Category');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -47,6 +48,7 @@ class AdminController extends Controller
         $this->sTitle = t('Add a new Forum');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -55,6 +57,7 @@ class AdminController extends Controller
         $this->sTitle = t('Edit the Category');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
