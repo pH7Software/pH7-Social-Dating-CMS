@@ -18,7 +18,7 @@ use PH7\AdminCore;
 use PH7\AffiliateCore;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Mvc\Model\DbConfig;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Navigation\Browser;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Util\Various;
@@ -144,7 +144,7 @@ final class Token
      */
     public function checkUrl()
     {
-        $oHttpRequest = new Http;
+        $oHttpRequest = new HttpRequest;
         $bRet = ( ($this->currentSess() === true) || $oHttpRequest->currentUrl() === PH7_URL_ROOT || ($oHttpRequest->get(static::VAR_NAME) === $this->currentSess()) );
         unset($oHttpRequest);
 
