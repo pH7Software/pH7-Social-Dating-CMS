@@ -54,12 +54,13 @@ class Field
      * @param string $sMod Mod name.
      * @param string $sField Field name.
      *
-     * @return boolean
+     * @return bool
      */
     public static function isExists($sMod, $sField)
     {
         $aFields = (new FieldModel(static::getTable($sMod)))->all();
-        return in_array(strtolower($sField), array_map('strtolower', $aFields));
+
+        return in_array(strtolower($sField), array_map('strtolower', $aFields), true);
     }
 
     /**
