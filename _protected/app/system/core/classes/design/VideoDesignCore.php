@@ -23,6 +23,9 @@ use PH7\Framework\Video\Api as VideoApi;
 
 class VideoDesignCore
 {
+    const PREVIEW_MEDIA_TYPE = 'preview';
+    const MOVIE_MEDIA_TYPE = 'movie';
+
     /**
      * @internal Import the trait to set the class static.
      * The trait sets constructor/clone private to prevent instantiation.
@@ -33,23 +36,24 @@ class VideoDesignCore
      * Generates HTML contents Video.
      *
      * @param \stdClass $oData
-     * @param string $sMedia Type of the media ('preview' or 'movie'). Default: 'movie'
-     * @param integer $iWidth Default: 600
-     * @param integer $iHeight Default: 400
+     * @param string $sMedia Type of the media ('preview' or 'movie').
+     * @param integer $iWidth
+     * @param integer $iHeight
+     *
      * @return void
      */
-    public static function generate($oData, $sMedia = 'movie', $iWidth = 600, $iHeight = 400)
+    public static function generate($oData, $sMedia = self::MOVIE_MEDIA_TYPE, $iWidth = 600, $iHeight = 400)
     {
         $sDurationTag = '<div class="video_duration">' . Various::secToTime($oData->duration) . '</div>';
 
         if ((new VideoCore)->isApi($oData->file)) {
             $oVideo = (new VideoApi)->getMeta($oData->file, $sMedia, $iWidth, $iHeight);
 
-            if ($sMedia == 'preview')
-
+            if ($sMedia === self::PREVIEW_MEDIA_TYPE) {
                 echo $sDurationTag, '<a href="', $oData->file, '" title="', $oData->title, '" data-popup="frame-video"><img src="', $oVideo, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>';
-            else
+            } else {
                 echo $oVideo;
+            }
         } else {
             $sDir = 'video/file/' . $oData->username . PH7_SH . $oData->albumId . PH7_SH;
             $sVidPath1 = $sDir . $oData->file . '.webm';
@@ -88,7 +92,7 @@ class VideoDesignCore
                 <button class="btn btn-default btn-sm" onclick="Video.smallSize()">' . t('Small') . '</button>
             </div>';
 
-            if ($sMedia == 'preview') {
+            if ($sMedia === self::PREVIEW_MEDIA_TYPE) {
                 echo $sDurationTag, '<a href="#watch', $oData->videoId, '" title="', $oData->title, '" data-popup="video"><img src="', $sThumbUrl, '" alt="', $oData->title, '" title="', $oData->title, '" /></a>
                 <div class="hidden"><div id="watch', $oData->videoId, '">', $sVideoTag, '</div></div>';
             } else {
