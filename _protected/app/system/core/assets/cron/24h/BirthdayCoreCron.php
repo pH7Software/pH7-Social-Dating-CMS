@@ -26,7 +26,7 @@ class BirthdayCoreCron extends Cron
     {
         $iNum = (new BirthdayCore)->sendMails();
 
-        if ($iNum == 0) {
+        if ($iNum === 0) {
             echo t('No birthday today.');
         } else {
             echo nt('%n% email sent.', '%n% emails sent.', $iNum);
