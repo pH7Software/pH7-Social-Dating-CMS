@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class ModeratorModel extends ModeratorCoreModel
 {
-
     public function getAlbumsPicture($iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
@@ -157,7 +156,7 @@ class ModeratorModel extends ModeratorCoreModel
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsVideos') .
             'WHERE albumId = :albumId');
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
-
 }
