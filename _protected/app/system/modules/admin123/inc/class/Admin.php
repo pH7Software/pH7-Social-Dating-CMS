@@ -23,14 +23,18 @@ class Admin extends AdminCore
     {
         (new Session)->destroy();
 
-        Header::redirect(Uri::get(PH7_ADMIN_MOD, 'main', 'login'), t('You are successfully logged out.'));
+        Header::redirect(
+            Uri::get(PH7_ADMIN_MOD, 'main', 'login'),
+            t('You are successfully logged out.')
+        );
     }
 
     /**
      * Delete Admin.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
+     *
      * @return void
      */
     public function delete($iProfileId, $sUsername)
