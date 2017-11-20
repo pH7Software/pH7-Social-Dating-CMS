@@ -307,6 +307,9 @@ class MainController extends Controller
         unset($oStatModel);
     }
 
+    /**
+     * @return void
+     */
     protected function checkUpdates()
     {
         if (Version::isUpdateEligible()) {
