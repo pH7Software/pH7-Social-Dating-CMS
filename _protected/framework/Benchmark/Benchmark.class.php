@@ -138,8 +138,8 @@ class Benchmark
 
         $units = explode(' ', 'B Kb Mb Gb Tb');
 
-        for ($i = 0; $size > static::SIZE_MODE; $i++) {
-            $size /= static::SIZE_MODE;
+        for ($i = 0; $size > self::SIZE_MODE; $i++) {
+            $size /= self::SIZE_MODE;
         }
 
         if (0 === $i) {
