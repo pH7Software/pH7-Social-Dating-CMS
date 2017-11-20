@@ -66,20 +66,25 @@ class Db
     public static function getInstance($sDsn = NULL, $sUsername = NULL, $sPassword = NULL, $aDriverOptions = NULL, $sPrefix = NULL)
     {
         if (NULL === self::$oInstance) {
-            if (!empty($sDsn))
+            if (!empty($sDsn)) {
                 self::$sDsn = $sDsn;
+            }
 
-            if (!empty($sUsername))
+            if (!empty($sUsername)) {
                 self::$sUsername = $sUsername;
+            }
 
-            if (!empty($sPassword))
+            if (!empty($sPassword)) {
                 self::$sPassword = $sPassword;
+            }
 
-            if (!empty($aDriverOptions))
+            if (!empty($aDriverOptions)) {
                 self::$aDriverOptions = $aDriverOptions;
+            }
 
-            if (!empty($sPrefix))
+            if (!empty($sPrefix)) {
                 self::$sPrefix = $sPrefix;
+            }
 
             self::$oInstance = new static;
 
