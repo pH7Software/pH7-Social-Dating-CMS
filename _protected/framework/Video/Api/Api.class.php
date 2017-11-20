@@ -54,7 +54,7 @@ abstract class Api
      *
      * @see Api::getInfo();
      *
-     * @return string|boolean The title with escape function if found otherwise returns false.
+     * @return string|bool The title with escape function if found otherwise returns false.
      */
     public function getTitle()
     {
@@ -66,7 +66,7 @@ abstract class Api
      *
      * @see Api::getInfo();
      *
-     * @return string|boolean The description with escape function if found otherwise returns false.
+     * @return string|bool The description with escape function if found otherwise returns false.
      */
     public function getDescription()
     {
@@ -78,7 +78,7 @@ abstract class Api
      *
      * @see Api::getInfo();
      *
-     * @return integer|boolean The video duration if found, FALSE otherwise.
+     * @return int|bool The video duration if found, FALSE otherwise.
      */
     public function getDuration()
     {
@@ -88,7 +88,7 @@ abstract class Api
     /**
      * @param string $sUrl
      *
-     * @return string|boolean The embed URL if id is valid, false otherwise.
+     * @return string|bool The embed URL if id is valid, false otherwise.
      */
     public function getEmbedUrl($sUrl)
     {
@@ -123,7 +123,7 @@ abstract class Api
      *
      * @param string $sUrl
      *
-     * @return \stdClass|boolean Returns data object on success or FALSE on failure.
+     * @return \stdClass|bool Returns data object on success or FALSE on failure.
      */
     protected function getData($sUrl)
     {
