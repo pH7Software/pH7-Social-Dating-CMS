@@ -246,14 +246,16 @@ class ForumModel extends ForumCoreModel
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->bindValue(':message', $sMessage, \PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
     /**
      * Deletes the category and forums, topics and posts in it.
      *
-     * @param integer $iCategoryId
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @param int $iCategoryId
+     *
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function deleteCategory($iCategoryId)
     {
@@ -268,14 +270,16 @@ class ForumModel extends ForumCoreModel
         // Category
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsCategories') . 'WHERE categoryId = :categoryId LIMIT 1');
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
     /**
      * Deletes the forum and the topics and posts in it.
      *
-     * @param integer $iForumId
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @param int $iForumId
+     *
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function deleteForum($iForumId)
     {
@@ -290,15 +294,17 @@ class ForumModel extends ForumCoreModel
         // Forum
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Forums') . 'WHERE forumId = :forumId LIMIT 1');
         $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
     /**
      * Deletes the topic and posts in it.
      *
-     * @param integer $iProfileId
-     * @param integer $iTopicId
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @param int $iProfileId
+     * @param int $iTopicId
+     *
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function deleteTopic($iProfileId, $iTopicId)
     {
@@ -312,34 +318,38 @@ class ForumModel extends ForumCoreModel
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsTopics') . 'WHERE profileId = :profileId AND topicId = :topicId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
     /**
      * Deletes posts.
      *
-     * @param integer $iProfileId
-     * @param integer $iMessageId
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @param int $iProfileId
+     * @param int $iMessageId
+     *
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function deleteMessage($iProfileId, $iMessageId)
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('ForumsMessages') . 'WHERE profileId = :profileId AND messageId = :messageId LIMIT 1');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
     /**
      * Search Topics.
      *
-     * @param integer|string $mLooking (integer for Topic ID or string for a keyword)
-     * @param boolean $bCount Put 'true' for count the topics or 'false' for the result of topics.
+     * @param int|string $mLooking (integer for Topic ID or string for a keyword)
+     * @param bool $bCount Put 'true' for count the topics or 'false' for the result of topics.
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
-     * @return integer|object (integer for the number topics returned or an object for the topics list)
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return int|\stdClass (integer for the number topics returned or an object for the topics list)
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -397,26 +407,36 @@ class ForumModel extends ForumCoreModel
         $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
         $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
+    /**
+     * @param int|null $iProfileId
+     *
+     * @return int
+     */
     public function totalForums($iProfileId = null)
     {
         $sSqlProfileId = (!empty($iProfileId)) ? ' WHERE profileId = :profileId' : '';
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(forumId) AS totalForums FROM' . Db::prefix('Forums') . $sSqlProfileId);
-        if (!empty($iProfileId)) $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        if (!empty($iProfileId)) {
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        }
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return (int)$oRow->totalForums;
     }
 
     /**
      * Get the total number of topic.
      *
-     * @param integer $iForumId Search by topic ID. Default NULL
-     * @param integer $iProfileId Search by user ID. Default NULL
-     * @return integer
+     * @param int $iForumId Search by topic ID. Default NULL
+     * @param int $iProfileId Search by user ID. Default NULL
+     *
+     * @return int
      */
     public function totalTopics($iForumId = null, $iProfileId = null)
     {
@@ -453,34 +473,36 @@ class ForumModel extends ForumCoreModel
      * Check Duplicate Topics.
      *
      * @param string $sCheckMsg
-     * @param integer $iProfileId
-     * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
+     * @param int $iProfileId
+     *
+     * @return bool Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public function isDuplicateTopic($iProfileId, $sCheckMsg)
     {
-        return Framework\Mvc\Model\Spam::detectDuplicate($sCheckMsg, 'message', 'topicId', $iProfileId, 'ForumsTopics');
+        return Spam::detectDuplicate($sCheckMsg, 'message', 'topicId', $iProfileId, 'ForumsTopics');
     }
 
     /**
      * Check Duplicate Messages.
      *
      * @param string $sCheckMsg
-     * @param integer $iProfileId
-     * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
+     * @param int $iProfileId
+     *
+     * @return bool Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public function isDuplicateMessage($iProfileId, $sCheckMsg)
     {
-        return Framework\Mvc\Model\Spam::detectDuplicate($sCheckMsg, 'message', 'messageId', $iProfileId, 'ForumsMessages');
+        return Spam::detectDuplicate($sCheckMsg, 'message', 'messageId', $iProfileId, 'ForumsMessages');
     }
 
     /**
      * To prevent spam!
      * Waiting time to send a new topic in the forum.
      *
-     * @param integer $iProfileId
-     * @param integer $iWaitTime In minutes!
+     * @param int $iProfileId
+     * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
-     * @return boolean Return TRUE if the weather was fine, otherwise FALSE
+     * @return bool Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitTopic($iProfileId, $iWaitTime, $sCurrentTime)
     {
@@ -491,18 +513,20 @@ class ForumModel extends ForumCoreModel
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
-        return ($rStmt->rowCount() === 0);
+
+        return $rStmt->rowCount() === 0;
     }
 
     /**
      * To prevent spam!
      * Waiting time to send a reply message in the same topic.
      *
-     * @param integer $iTopicId
-     * @param integer $iProfileId
-     * @param integer $iWaitTime In minutes!
+     * @param int $iTopicId
+     * @param int $iProfileId
+     * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
-     * @return boolean Return TRUE if the weather was fine, otherwise FALSE
+     *
+     * @return bool Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitReply($iTopicId, $iProfileId, $iWaitTime, $sCurrentTime)
     {
@@ -514,41 +538,47 @@ class ForumModel extends ForumCoreModel
         $rStmt->bindValue(':waitTime', $iWaitTime, \PDO::PARAM_INT);
         $rStmt->bindValue(':currentTime', $sCurrentTime, \PDO::PARAM_STR);
         $rStmt->execute();
-        return ($rStmt->rowCount() === 0);
+
+        return $rStmt->rowCount() === 0;
     }
 
     /**
      * Get Topic IDs from Forum ID.
      *
-     * @param integer $iForumId
-     * @return object
+     * @param int $iForumId
+     *
+     * @return \stdClass
      */
     protected function getTopicIdsFromForumId($iForumId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT topicId FROM' . Db::prefix('ForumsTopics') . 'WHERE forumId = :forumId');
         $rStmt->bindValue(':forumId', $iForumId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
     /**
      * Get Forum IDs from Category ID.
      *
-     * @param integer $iCategoryId
-     * @return object
+     * @param int $iCategoryId
+     *
+     * @return \stdClass
      */
     protected function getForumIdsFromCatId($iCategoryId)
     {
         $rStmt = Db::getInstance()->prepare('SELECT forumId FROM' . Db::prefix('Forums') . 'WHERE categoryId = :categoryId');
         $rStmt->bindValue(':categoryId', $iCategoryId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetchAll(\PDO::FETCH_OBJ);
     }
 
     /**
      * Delete Messages from Forum ID.
      *
-     * @param integer $iForumId
+     * @param int $iForumId
+     *
      * @return void
      */
     private function _delMsgsFromForumId($iForumId)
@@ -567,7 +597,8 @@ class ForumModel extends ForumCoreModel
     /**
      * Delete Messages and Topics from Category ID.
      *
-     * @param integer $iCategoryId
+     * @param int $iCategoryId
+     *
      * @return void
      */
     private function _delMsgsTopicsFromCatId($iCategoryId)
