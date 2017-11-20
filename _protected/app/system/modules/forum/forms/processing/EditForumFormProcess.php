@@ -30,7 +30,7 @@ class EditForumFormProcess extends Form
 
         Header::redirect(
             Uri::get('forum', 'forum', 'index'),
-            t('Your message has been updated successfully!')
+            t('Message successfully updated!')
         );
     }
 }
