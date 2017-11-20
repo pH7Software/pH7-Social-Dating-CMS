@@ -19,6 +19,12 @@ use PH7\Framework\Url\Header;
 
 class FileController extends Controller
 {
+    const THEME_FILE_EXTS = [
+        '.tpl',
+        '.css',
+        '.js'
+    ];
+
     /** @var string */
     private $sTitle;
 
@@ -44,7 +50,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Template Files');
 
-        $this->_displayAction(PH7_PATH_TPL, array('.tpl', '.css', '.js'));
+        $this->_displayAction(PH7_PATH_TPL, self::THEME_FILE_EXTS);
         $this->manualTplInclude('publicdisplay.inc.tpl');
 
         $this->output();
