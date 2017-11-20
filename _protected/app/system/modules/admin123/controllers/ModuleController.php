@@ -44,12 +44,12 @@ class ModuleController extends Controller
         if ($this->httpRequest->postExists('submit_mod_install')) {
             if ($this->oModule->checkModFolder(Module::INSTALL, $this->httpRequest->post('submit_mod_install'))) {
                 $this->sModsDirModFolder = $this->httpRequest->post('submit_mod_install'); // Module Directory Path
-                $this->_install();
+                $this->install();
             }
         } elseif ($this->httpRequest->postExists('submit_mod_uninstall')) {
             if ($this->oModule->checkModFolder(Module::UNINSTALL, $this->httpRequest->post('submit_mod_uninstall'))) {
                 $this->sModsDirModFolder = $this->httpRequest->post('submit_mod_uninstall'); // Module Directory Path
-                $this->_unInstall();
+                $this->unInstall();
             }
         } else {
             $this->sTitle = t('Module Manager');
@@ -60,7 +60,7 @@ class ModuleController extends Controller
         }
     }
 
-    private function _install()
+    private function install()
     {
         $this->sTitle = t('Install Module Finished');
         $this->view->page_title = $this->sTitle;
@@ -76,7 +76,7 @@ class ModuleController extends Controller
         $this->output();
     }
 
-    private function _unInstall()
+    private function unInstall()
     {
         $this->sTitle = t('Uninstall Module Finished');
         $this->view->page_title = $this->sTitle;
