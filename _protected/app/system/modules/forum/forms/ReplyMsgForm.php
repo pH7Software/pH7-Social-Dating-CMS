@@ -9,16 +9,18 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
+use PH7\Framework\Url\Header;
 
 class ReplyMsgForm
 {
     public static function display()
     {
         if (isset($_POST['submit_reply'])) {
-            if (\PFBC\Form::isValid($_POST['submit_reply']))
+            if (\PFBC\Form::isValid($_POST['submit_reply'])) {
                 new ReplyMsgFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_reply');

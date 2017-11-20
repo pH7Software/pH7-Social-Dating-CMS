@@ -9,17 +9,18 @@
 namespace PH7;
 
 use PH7\Framework\Config\Config;
+use PH7\Framework\Url\Header;
 
 class CategoryForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_category'])) {
-            if (\PFBC\Form::isValid($_POST['submit_category']))
+            if (\PFBC\Form::isValid($_POST['submit_category'])) {
                 new CategoryFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
