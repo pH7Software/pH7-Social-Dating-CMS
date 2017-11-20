@@ -33,6 +33,7 @@ class Filter
         self::importLibrary();
 
         $oNudityFilter = new Image_FleshSkinQuantifier($sPath);
+
         return $oNudityFilter->isPorn();
     }
 
