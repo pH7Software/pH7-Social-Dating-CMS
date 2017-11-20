@@ -66,15 +66,16 @@ class AdminController extends Controller
         $this->sTitle = t('Edit the Forum');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
     public function deleteCategory()
     {
         if ($this->oForumModel->deleteCategory($this->httpRequest->post('id'))) {
-            $this->sMsg = t('Your Category has been deleted!');
+            $this->sMsg = t('Your Category has been deleted.');
         } else {
-            $this->sMsg = t('Oops! Your Category could not be deleted');
+            $this->sMsg = t('Oops! Your Category could not be deleted.');
         }
 
         Header::redirect(
@@ -86,9 +87,9 @@ class AdminController extends Controller
     public function deleteForum()
     {
         if ($this->oForumModel->deleteForum($this->httpRequest->post('id')))
-            $this->sMsg = t('Your Forum has been deleted!');
+            $this->sMsg = t('Your Forum has been deleted.');
         else
-            $this->sMsg = t('Oops! Your Forum could not be deleted');
+            $this->sMsg = t('Oops! Your Forum could not be deleted.');
 
         Header::redirect(
             Uri::get('forum', 'forum', 'index'),
