@@ -37,7 +37,7 @@ class AdminCore extends UserCore
     /**
      * Determines if the ID is from Root Admin (main admin).
      *
-     * @param  integer $iProfileId
+     * @param int $iProfileId
      *
      * @return bool
      */

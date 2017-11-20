@@ -17,12 +17,12 @@ class HotOrNotModel extends Model
     /**
      * Get random picture.
      *
-     * @param integer $iProfileId Default NULL
+     * @param int $iProfileId Default NULL
      * If the user is logged in, you need to set the ID of that user in this parameter to not display the avatar of the user since the user cannot vote for himself.
      *
-     * @param integer $iApproved Default 1
-     * @param integer $iOffset Default 0
-     * @param integer $iLimit Default 1
+     * @param int $iApproved Default 1
+     * @param int $iOffset Default 0
+     * @param int $iLimit Default 1
      *
      * @return \stdClass DATA ot the user (profileId, username, firstName, sex, avatar).
      */

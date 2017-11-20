@@ -23,7 +23,7 @@ class Dailymotion extends Api implements IApi
     /**
      * @param string $sUrl
      *
-     * @return string|boolean Returns the video embed URL if it was found, FALSE otherwise.
+     * @return string|bool Returns the video embed URL if it was found, FALSE otherwise.
      */
     public function getVideo($sUrl)
     {
