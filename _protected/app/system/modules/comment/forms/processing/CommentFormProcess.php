@@ -7,6 +7,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -15,7 +16,6 @@ use PH7\Framework\Url\Header;
 
 class CommentFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -47,5 +47,4 @@ class CommentFormProcess extends Form
         }
         unset($oCommentModel);
     }
-
 }

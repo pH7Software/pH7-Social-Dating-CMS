@@ -12,7 +12,6 @@ use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
 class Comment extends CommentCore
 {
-
     /**
      * @param string $sTable
      *

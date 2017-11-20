@@ -7,6 +7,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Router\Uri;
@@ -14,7 +15,6 @@ use PH7\Framework\Url\Header;
 
 class EditCommentFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -43,5 +43,4 @@ class EditCommentFormProcess extends Form
         }
         unset($oCommentModel);
     }
-
 }

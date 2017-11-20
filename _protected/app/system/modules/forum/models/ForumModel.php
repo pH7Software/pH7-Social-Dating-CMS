@@ -471,5 +471,4 @@ class ForumModel extends ForumCoreModel
             $rStmt->execute();
         }
     }
-
 }
