@@ -23,6 +23,7 @@ class PictureModel extends PictureCoreModel
         $rStmt->bindValue(':thumb', $sThumb, \PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -38,6 +39,7 @@ class PictureModel extends PictureCoreModel
         $rStmt->bindValue(':file', $sFile, \PDO::PARAM_STR);
         $rStmt->bindValue(':createdDate', $sCreatedDate, \PDO::PARAM_STR);
         $rStmt->bindValue(':approved', $iApproved, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -46,6 +48,7 @@ class PictureModel extends PictureCoreModel
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('AlbumsPictures') . 'WHERE profileId=:profileId AND albumId=:albumId');
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
@@ -62,6 +65,7 @@ class PictureModel extends PictureCoreModel
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
@@ -90,6 +94,7 @@ class PictureModel extends PictureCoreModel
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
@@ -108,6 +113,7 @@ class PictureModel extends PictureCoreModel
             unset($oRow);
             $this->cache->put($iData);
         }
+
         return $iData;
     }
 
@@ -125,6 +131,7 @@ class PictureModel extends PictureCoreModel
             unset($oRow);
             $this->cache->put($iData);
         }
+
         return $iData;
     }
 
@@ -138,6 +145,7 @@ class PictureModel extends PictureCoreModel
         $rStmt->bindValue(':name', $sTitle, \PDO::PARAM_STR);
         $rStmt->bindValue(':description', $sDescription, \PDO::PARAM_STR);
         $rStmt->bindValue(':updatedDate', $sUpdatedDate, \PDO::PARAM_STR);
+
         return $rStmt->execute();
     }
 
@@ -202,6 +210,7 @@ class PictureModel extends PictureCoreModel
             $mData = (int)@$oRow->totalPictures;
             unset($oRow);
         }
+
         return $mData;
     }
 }
