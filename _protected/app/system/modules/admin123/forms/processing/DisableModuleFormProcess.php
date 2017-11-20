@@ -21,7 +21,7 @@ class DisableModuleFormProcess extends Form
 
         $oModuleModel = new ModuleModel;
 
-        // First, disable all mods as uncheckboxes elements aren't send throughth the form
+        // First, disable all mods as uncheckboxes elements aren't send through the form
         $this->disableMods($oModuleModel);
 
         // Then, enable the mods selected to be enabled
