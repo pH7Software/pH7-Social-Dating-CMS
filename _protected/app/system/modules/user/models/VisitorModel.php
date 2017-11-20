@@ -101,11 +101,11 @@ class VisitorModel
             $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
             Db::free($rStmt);
             return $oRow;
-        } else {
-            $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
-            Db::free($rStmt);
-            return (int)$oRow->totalVisitors;
         }
+
+        $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
+        Db::free($rStmt);
+        return (int)$oRow->totalVisitors;
     }
 
     /**
