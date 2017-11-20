@@ -65,13 +65,24 @@ class DateFormat
      */
     private static function get($sFormat, $sDate)
     {
-        if (in_array($sFormat, self::AVAILABLE_FORMATS, true)) {
-            $sDateFormats = implode('", "', self::AVAILABLE_FORMATS);
-            throw new Exception('Wrong date format! You can only choose between "%0%"', $sDateFormats);
+        if (!in_array($sFormat, self::AVAILABLE_FORMATS, true)) {
+            throw new Exception(self::getExceptionMessage());
         }
 
         $iTime = (!empty($sDate)) ? strtotime($sDate) : time();
 
         return date($sFormat, $iTime);
+    }
+
+    /**
+     * @param string $sFormat
+     *
+     * @return string
+     */
+    private static function getExceptionMessage($sFormat)
+    {
+        $sDateFormats = implode('", "', self::AVAILABLE_FORMATS);
+
+        return sprintf('Wrong "%s" date format! You can only choose between "%s"', $sFormat, $sDateFormats);
     }
 }
