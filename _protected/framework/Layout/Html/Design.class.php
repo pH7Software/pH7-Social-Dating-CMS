@@ -733,7 +733,7 @@ class Design
     public function like($sUsername, $sFirstName, $sSex, $sForceUrlKey = null)
     {
         $aHttpParams = [
-            'msg' => t('Please join for free to vote that'),
+            'msg' => t('You need to be a member for liking contents.'),
             'ref' => $this->oHttpRequest->currentController(),
             'a' => 'like',
             'u' => $sUsername,
