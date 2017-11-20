@@ -32,7 +32,7 @@ class Ban
     private static $sVal;
 
     /** @var bool */
-    private static $_bIsEmail = false;
+    private static $bIsEmail = false;
 
     /**
      * Import the trait to set the class static.
