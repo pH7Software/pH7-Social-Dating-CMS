@@ -15,6 +15,7 @@ use PH7\Framework\Url\Header;
 
 class AccountController extends Controller
 {
+    /** @var string */
     private $sTitle;
 
     public function index()

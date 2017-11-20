@@ -19,7 +19,17 @@ class AdminController extends Controller
 {
     const PROFILES_PER_PAGE = 15;
 
-    private $oAdminModel, $sTitle, $sMsg, $iTotalAdmins;
+    /** @var AdminModel */
+    private $oAdminModel;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var string */
+    private $sMsg;
+
+    /** @var int */
+    private $iTotalAdmins;
 
     public function __construct()
     {
