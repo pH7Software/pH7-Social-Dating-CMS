@@ -41,7 +41,7 @@ class MessengerModel extends Model
      * @param string $sFrom The 'from' username
      * @param string $sTo The 'to' username
      *
-     * @return boolean Returns TRUE on success or FALSE on failure
+     * @return bool Returns TRUE on success or FALSE on failure
      */
     public function update($sFrom, $sTo)
     {
@@ -63,7 +63,7 @@ class MessengerModel extends Model
      * @param string $sMessage Message content
      * @param string $sDate In date format: 0000-00-00 00:00:00
      *
-     * @return boolean Returns TRUE on success or FALSE on failure
+     * @return bool Returns TRUE on success or FALSE on failure
      */
     public function insert($sFrom, $sTo, $sMessage, $sDate)
     {
