@@ -25,7 +25,7 @@ class Db
     const ASC = 'ASC';
     const DESC = 'DESC';
     const RAND = 'RAND()';
-    
+
     /** @var  string */
     private static $sDsn;
 
@@ -61,11 +61,17 @@ class Db
     }
 
     /**
-     * @return Db Returns the PDO instance class or create initial connection.
+     * @param string|null $sDsn
+     * @param string|null $sUsername
+     * @param string|null $sPassword
+     * @param array|null $aDriverOptions
+     * @param string|null $sPrefix
+     *
+     * @return self Returns the PDO instance class or create initial connection.
      */
-    public static function getInstance($sDsn = NULL, $sUsername = NULL, $sPassword = NULL, $aDriverOptions = NULL, $sPrefix = NULL)
+    public static function getInstance($sDsn = null, $sUsername = null, $sPassword = null, $aDriverOptions = null, $sPrefix = null)
     {
-        if (NULL === self::$oInstance) {
+        if (self::$oInstance === null) {
             if (!empty($sDsn)) {
                 self::$sDsn = $sDsn;
             }
