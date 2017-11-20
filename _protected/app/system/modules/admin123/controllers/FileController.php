@@ -32,9 +32,9 @@ class FileController extends Controller
         /* Add the stylesheet files for the Elfinder File Manager */
         $this->design->addCss(PH7_STATIC . 'fileManager/css/', 'elfinder.css,theme.css');
 
-        $sIsDirTxt = ($sDir == 'protected') ? t('Protected') : t('Public');
+        $sIsDirTxt = ($sDir === 'protected') ? t('Protected') : t('Public');
         $this->sTitle = t('File Manager System | %0%', $sIsDirTxt);
-        $this->view->type = ($sDir == 'protected') ? 'protected' : 'public';
+        $this->view->type = ($sDir === 'protected') ? 'protected' : 'public';
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
 
         $this->output();
