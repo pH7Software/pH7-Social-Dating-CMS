@@ -10,10 +10,12 @@ namespace PH7;
 
 defined('PH7') or die('Restricted access');
 
+use PH7\Framework\Cache\Cache;
+
 class NotificationFormProcess extends Form
 {
     /**
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param UserCoreModel $oUserModel
      */
     public function __construct($iProfileId, UserCoreModel $oUserModel)
