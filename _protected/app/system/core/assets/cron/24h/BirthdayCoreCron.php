@@ -15,6 +15,9 @@ defined('PH7') or exit('Restricted access');
 
 class BirthdayCoreCron extends Cron
 {
+    /** @var int */
+    private $iNum;
+
     public function __construct()
     {
         parent::__construct();
@@ -24,13 +27,21 @@ class BirthdayCoreCron extends Cron
 
     protected function send()
     {
-        $iNum = (new BirthdayCore)->sendMails();
+        $$this->iNum = (new BirthdayCore)->sendMails();
 
-        if ($iNum === 0) {
+        if ($this->hasBirthdays()) {
             echo t('No birthday today.');
         } else {
             echo nt('%n% email sent.', '%n% emails sent.', $iNum);
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function hasBirthdays()
+    {
+        return $this->iNum === 0;
     }
 }
 
