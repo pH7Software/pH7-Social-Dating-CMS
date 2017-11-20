@@ -53,17 +53,17 @@ class Report
     /**
      * Get status
      *
-     * @return string|boolean Text of the statute or boolean
+     * @return string|bool Text of the statute or boolean
      */
     public function get()
     {
-        return $this->_mStatus;
+        return $this->mStatus;
     }
 
     /**
      * @param array $aData Report's details.
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail(array $aData)
     {
@@ -73,7 +73,7 @@ class Report
         $sSpammerUsername = $oUserModel->getUsername($aData['spammer_id']);
         $sDate = (new CDateTime)->get($aData['date'])->dateTime();
 
-        $this->_oView->content =
+        $this->oView->content =
             t('Reporter:') . ' <b><a href="' . $oUser->getProfileLink($sReporterUsername) . '">' . $sReporterUsername . '</a></b><br /><br /> ' .
             t('Spammer:') . ' <b><a href="' . $oUser->getProfileLink($sSpammerUsername) . '">' . $sSpammerUsername . '</a></b><br /><br /> ' .
             t('Contant Type:') . ' <b>' . $aData['type'] . '</b><br /><br /> ' .
