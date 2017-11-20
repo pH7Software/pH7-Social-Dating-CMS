@@ -314,9 +314,7 @@ class ValidateCoreAjax
     }
 }
 
-
 $oHttpRequest = new HttpRequest;
-
 if ($oHttpRequest->postExists('fieldId')) {
     (new ValidateCoreAjax)->form(
         $oHttpRequest->post('inputVal'),
@@ -325,5 +323,4 @@ if ($oHttpRequest->postExists('fieldId')) {
         $oHttpRequest->post('param2')
     );
 }
-
 unset($oHttpRequest);
