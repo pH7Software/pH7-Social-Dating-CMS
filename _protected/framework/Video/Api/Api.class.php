@@ -28,16 +28,12 @@ abstract class Api
     /** @var string */
     protected $sApiKey;
 
-    /** @var string */
-    protected $bDefaultVideo;
-
     /** @var boolean */
     protected $bAutoplay;
 
     public function __construct()
     {
         $this->oStr = new Str;
-        $this->sDefaultVideo = DbConfig::getSetting('defaultVideo');
         $this->bAutoplay = DbConfig::getSetting('autoplayVideo');
     }
 
