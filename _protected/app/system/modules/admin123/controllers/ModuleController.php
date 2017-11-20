@@ -36,6 +36,7 @@ class ModuleController extends Controller
         $this->sTitle = t('Enable/Disable System Modules');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -73,6 +74,7 @@ class ModuleController extends Controller
         $this->view->content = $this->oModule->readInstruction(Module::INSTALL);
 
         $this->manualTplInclude('install.tpl');
+
         $this->output();
     }
 
@@ -88,6 +90,7 @@ class ModuleController extends Controller
         $this->view->content = $this->oModule->readInstruction(Module::UNINSTALL);
 
         $this->manualTplInclude('uninstall.tpl');
+
         $this->output();
     }
 }

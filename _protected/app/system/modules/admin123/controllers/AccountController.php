@@ -28,6 +28,7 @@ class AccountController extends Controller
         $this->sTitle = t('Change Password');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -36,6 +37,7 @@ class AccountController extends Controller
         $this->sTitle = t('Edit your account');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 }
