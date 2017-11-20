@@ -284,6 +284,7 @@ class SettingForm
 
     /**
      * @param File $oFile
+     *
      * @return array
      */
     private static function getLangs(File $oFile)

@@ -61,13 +61,14 @@ class AdminModel extends AdminCoreModel
         $rStmt->bindValue(':lastActivity', $sCurrentDate, \PDO::PARAM_STR);
         $rStmt->execute();
         Db::free($rStmt);
+
         return Db::getInstance()->lastInsertId();
     }
 
     /**
      * Delete Admin.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      *
      * @return void
@@ -86,14 +87,14 @@ class AdminModel extends AdminCoreModel
     }
 
     /**
-     * @param integer|string $mLooking
-     * @param boolean $bCount
+     * @param int|string $mLooking
+     * @param bool $bCount
      * @param string $sOrderBy
      * @param string $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      *
-     * @return integer|object
+     * @return int|\stdClass
      */
     public function searchAdmin($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit)
     {
@@ -143,7 +144,7 @@ class AdminModel extends AdminCoreModel
      * @param string $sCode
      * @param string $sType Choose between 'css' and 'js'
      *
-     * @return integer|boolean Returns the number of rows on success or FALSE on failure
+     * @return int|bool Returns the number of rows on success or FALSE on failure
      */
     public function updateCustomCode($sCode, $sType)
     {
