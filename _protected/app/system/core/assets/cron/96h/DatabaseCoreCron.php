@@ -138,8 +138,9 @@ class DatabaseCoreCron extends Cron
     {
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Messages') . 'WHERE FIND_IN_SET(\'sender\', toDelete) AND FIND_IN_SET(\'recipient\', toDelete)');
 
-        if ($rStmt->execute())
+        if ($rStmt->execute()) {
             echo nt('Deleted %n% temporary message... OK!', 'Deleted %n% temporary messages... OK!', $rStmt->rowCount()) . '<br />';
+        }
     }
 
     protected function removeLog()
@@ -206,7 +207,8 @@ class DatabaseCoreCron extends Cron
      */
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
-        if (strstr($sTable, 'Comments') === false && $sTable !== 'Messages' && $sTable !== 'Messenger') {
+        if (strstr($sTable, 'Comments') === false &&
+            $sTable !== 'Messages' && $sTable !== 'Messenger') {
             DbVarious::launchErr($sTable);
         }
 
