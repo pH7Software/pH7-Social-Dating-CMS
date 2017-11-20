@@ -99,7 +99,7 @@ abstract class Kernel
         define('PH7_SOFTWARE_STATUS', true);
         define('PH7_LICENSE_STATUS', 'active');
         define('PH7_LICENSE_NAME', 'pH7Builder, Open License');
-        define('PH7_VALID_LICENSE', $this->checkLicenseStatus());
+        define('PH7_VALID_LICENSE', $this->getLicenseStatus());
 
         if (!PH7_SOFTWARE_STATUS) {
             $sLicenseMsg = t('You need to buy a <strong>valid <a href="%0%">pH7CMS</a> License Key</strong> to use the features requiring a license key!', self::SOFTWARE_WEBSITE);
@@ -130,7 +130,10 @@ abstract class Kernel
         );
     }
 
-    final private function checkLicenseStatus()
+    /**
+     * @return bool
+     */
+    final private function getLicenseStatus()
     {
         return PH7_LICENSE_STATUS === 'active';
     }
