@@ -38,7 +38,7 @@ class DateFormat
      */
     public static function getRss($sDate = null)
     {
-        return static::get(self::RFC_2822_FORMAT, $sDate);
+        return self::get(self::RFC_2822_FORMAT, $sDate);
     }
 
     /**
@@ -52,7 +52,7 @@ class DateFormat
      */
     public static function getSitemap($sDate = null)
     {
-        return static::get(self::ISO_8601_FORMAT, $sDate);
+        return self::get(self::ISO_8601_FORMAT, $sDate);
     }
 
     /**
