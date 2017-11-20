@@ -28,6 +28,7 @@ class SitemapController extends MainController
         /*** Get the links ***/
         $sUrl = Uri::get('xml', 'sitemap', 'xmllink');
         $this->view->urls = (new Link($sUrl))->get();
+
         $this->output();
     }
 
