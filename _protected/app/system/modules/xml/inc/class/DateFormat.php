@@ -12,6 +12,14 @@ use PH7\Framework\Date\Exception;
 
 class DateFormat
 {
+    const RFC_2822_FORMAT = 'r';
+    const ISO_8601_FORMAT = 'c';
+
+    const AVAILABLE_FORMATS = [
+        self::RFC_2822_FORMAT,
+        self::ISO_8601_FORMAT
+    ];
+
     /**
      * Private constructor to prevent instantiation of class because it's a static class.
      */
@@ -25,10 +33,12 @@ class DateFormat
      * @param string|null $sDate
      *
      * @return string
+     *
+     * @throws Exception
      */
     public static function getRss($sDate = null)
     {
-        return static::get('r', $sDate);
+        return static::get(self::RFC_2822_FORMAT, $sDate);
     }
 
     /**
@@ -37,28 +47,31 @@ class DateFormat
      * @param string|null $sDate
      *
      * @return string
+     *
+     * @throws Exception
      */
     public static function getSitemap($sDate = null)
     {
-        return static::get('c', $sDate);
+        return static::get(self::ISO_8601_FORMAT, $sDate);
     }
 
     /**
-     * @param char $cFormat
+     * @param string $sFormat
      * @param string $sDate
      *
      * @return string
      *
      * @throws Exception If the date format is incorrect.
      */
-    private static function get($cFormat, $sDate)
+    private static function get($sFormat, $sDate)
     {
-        if ('c' != $cFormat && 'r' != $cFormat) {
-            throw new  Exception('Wrong format for the date! You only need to choose between "r" and "c".');
+        if (in_array($sFormat, self::AVAILABLE_FORMATS, true)) {
+            $sDateFormats = implode('", "', self::AVAILABLE_FORMATS);
+            throw new Exception('Wrong format for the date! You only need to choose between "%0%"', $sDateFormats);
         }
 
         $iTime = (!empty($sDate)) ? strtotime($sDate) : time();
 
-        return date($cFormat, $iTime);
+        return date($sFormat, $iTime);
     }
 }
