@@ -60,6 +60,7 @@ class Record
     public function addValue($sKey, $sValue)
     {
         $this->_aValues[$sKey] = $sValue;
+
         return $this;
     }
 
@@ -67,6 +68,7 @@ class Record
      * Set the values.
      *
      * @param array $aValues
+     *
      * @return void
      */
     public function setValues(array $aValues)
@@ -432,11 +434,11 @@ class Record
      * @param string $sWhat Default: '*'
      *
      * @return self
-     *
      */
     public function select($sTable, $sWhat = '*')
     {
         $this->_sSql = 'SELECT ' . $sWhat . ' FROM' . Db::prefix($sTable);
+
         return $this;
     }
 
@@ -449,11 +451,11 @@ class Record
      * @param string $sValue
      *
      * @return self
-     *
      */
     public function find($sField, $sValue)
     {
         $this->where($sField, $sValue, '=');
+
         return $this;
     }
 
@@ -466,11 +468,11 @@ class Record
      * @param string $sValue
      *
      * @return self
-     *
      */
     public function andFind($sField, $sValue)
     {
         $this->andClause($sField, $sValue, '=');
+
         return $this;
     }
 
@@ -483,11 +485,11 @@ class Record
      * @param string $sValue
      *
      * @return self
-     *
      */
     public function orFind($sField, $sValue)
     {
         $this->orClause($sField, $sValue, '=');
+
         return $this;
     }
 
@@ -504,6 +506,7 @@ class Record
     public function havingFind($sField, $sValue)
     {
         $this->having($sField, $sValue, '=');
+
         return $this;
     }
 
@@ -515,11 +518,11 @@ class Record
      * @param string $sOperator Default: '='
      *
      * @return self
-     *
      */
     public function where($sField, $sValue, $sOperator = '=')
     {
         $this->optClause('WHERE', $sField, $sValue, $sOperator);
+
         return $this;
     }
 
@@ -535,6 +538,7 @@ class Record
     public function andClause($sField, $sValue, $sOperator = '=')
     {
         $this->optClause('AND', $sField, $sValue, $sOperator);
+
         return $this;
     }
 
@@ -550,20 +554,22 @@ class Record
     public function orClause($sField, $sValue, $sOperator = '=')
     {
         $this->optClause('OR', $sField, $sValue, $sOperator);
+
         return $this;
     }
 
     /**
      * Set limit.
      *
-     * @param integer $iOffset
-     * @param integer $iLimit
+     * @param int $iOffset
+     * @param int $iLimit
      *
      * @return self
      */
     public function limit($iOffset, $iLimit)
     {
         $this->clause('LIMIT', "$iOffset, $iLimit");
+
         return $this;
     }
 
@@ -578,6 +584,7 @@ class Record
     public function orderBy($sField, $sOrder = Db::ASC)
     {
         $this->clause('ORDER BY', "$sField $sOrder");
+
         return $this;
     }
 
@@ -591,6 +598,7 @@ class Record
     public function groupBy($sGroup)
     {
         $this->clause('GROUP BY', $sGroup);
+
         return $this;
     }
 
@@ -606,6 +614,7 @@ class Record
     public function having($sField, $sValue, $sOperator = '=')
     {
         $this->optClause('HAVING', $sField, $sValue, $sOperator);
+
         return $this;
     }
 
@@ -620,6 +629,7 @@ class Record
     protected function clause($sClsName, $sVal)
     {
         $this->_sSql .= " $sClsName $sVal";
+
         return $this;
     }
 
