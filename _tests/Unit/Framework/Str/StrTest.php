@@ -9,8 +9,9 @@
 namespace PH7\Test\Unit\Framework\Str;
 
 use PH7\Framework\Str\Str;
+use PHPUnit_Framework_TestCase;
 
-class StrTest extends \PHPUnit_Framework_TestCase
+class StrTest extends PHPUnit_Framework_TestCase
 {
     private $oStr;
 
