@@ -176,7 +176,7 @@ class DatabaseCoreCron extends Cron
         if ($iCleanComment > 0) {
             $aCommentMod = ['Blog', 'Note', 'Picture', 'Video', 'Game', 'Profile'];
             foreach ($aCommentMod as $sSuffixTable) {
-                if ($iRow = $this->pruningDb($iCleanComment, 'Comments' . $sSuffixTable, 'updatedDate') > 0) {
+                if ($iRow = ($this->pruningDb($iCleanComment, 'Comments' . $sSuffixTable, 'updatedDate') > 0)) {
                     echo t('Deleted %0% %1% comment(s) ... OK!', $iRow, $sSuffixTable) . '<br />';
                 }
             }
@@ -184,25 +184,25 @@ class DatabaseCoreCron extends Cron
 
         // If the option is enabled for Messages
         if ($iCleanMsg > 0) {
-            if ($iRow = $this->pruningDb($iCleanMsg, 'Messages', 'sendDate') > 0) {
+            if ($iRow = ($this->pruningDb($iCleanMsg, 'Messages', 'sendDate') > 0)) {
                 echo nt('Deleted %n% message... OK!', 'Deleted %n% messages... OK!', $iRow) . '<br />';
             }
         }
 
         // If the option is enabled for Messenger
         if ($iCleanMessenger > 0) {
-            if ($iRow = $this->pruningDb($iCleanMessenger, 'Messenger', 'sent') > 0) {
+            if ($iRow = ($this->pruningDb($iCleanMessenger, 'Messenger', 'sent') > 0)) {
                 echo nt('Deleted %n% IM message... OK!', 'Deleted %n% IM messages... OK!', $iRow) . '<br />';
             }
         }
     }
 
     /**
-     * @param integer $iOlderThanXDay Delete data older than X days (e.g., 365 for data older than 1 year).
+     * @param int $iOlderThanXDay Delete data older than X days (e.g., 365 for data older than 1 year).
      * @param string $sTable Table name. Choose between 'Comments<TYPE>', 'Messages' and 'Messenger'
      * @param string $sDateColumn The DB column that indicates when the data has been created/updated (e.g., sendDate, updatedDate).
      *
-     * @return integer Returns the number of rows.
+     * @return int Returns the number of rows.
      */
     protected function pruningDb($iOlderThanXDay, $sTable, $sDateColumn)
     {
