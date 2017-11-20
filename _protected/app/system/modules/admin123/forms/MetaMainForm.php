@@ -16,7 +16,6 @@ use PH7\Framework\Url\Header;
 
 class MetaMainForm
 {
-
     public static function display()
     {
         if (isset($_POST['submit_meta'])) {
@@ -81,5 +80,4 @@ class MetaMainForm
 
         $oForm->render();
     }
-
 }
