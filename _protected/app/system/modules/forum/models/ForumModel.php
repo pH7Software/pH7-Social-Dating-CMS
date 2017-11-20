@@ -364,7 +364,12 @@ class ForumModel extends ForumCoreModel
         $sSqlSelect = (!$bCount) ? 'f.*, f.createdDate AS forumCreatedDate, f.updatedDate AS forumUpdatedDate, t.*, m.username, m.firstName, m.sex' : 'COUNT(t.topicId) AS totalTopics';
         $sSqlWhere = (ctype_digit($mLooking)) ? ' WHERE t.topicId = :looking ' : ' WHERE t.message LIKE :looking OR t.title LIKE :looking OR m.username LIKE :looking';
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sSqlSelect . ' FROM' . Db::prefix('Forums') . 'AS f INNER JOIN' . Db::prefix('ForumsTopics') . 'AS t ON f.forumId = t.forumId LEFT JOIN' . Db::prefix('Members') . ' AS m ON t.profileId = m.profileId' . $sSqlWhere . $sSqlOrder . $sSqlLimit);
-        (ctype_digit($mLooking)) ? $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT) : $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+
+        if (ctype_digit($mLooking)) {
+            $rStmt->bindValue(':looking', $mLooking, \PDO::PARAM_INT);
+        } else {
+            $rStmt->bindValue(':looking', '%' . $mLooking . '%', \PDO::PARAM_STR);
+        }
 
         if (!$bCount) {
             $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
@@ -461,7 +466,11 @@ class ForumModel extends ForumCoreModel
     {
         $sSql = (!empty($iTopicId) ? ' WHERE topicId = :topicId' : (!empty($iProfileId) ? ' WHERE profileId = :profileId' : ''));
         $rStmt = Db::getInstance()->prepare('SELECT COUNT(messageId) AS totalMessages FROM' . Db::prefix('ForumsMessages') . $sSql);
-        (!empty($iTopicId) ? $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT) : (!empty($iProfileId) ? $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT) : ''));
+        if (!empty($iTopicId)) {
+            $rStmt->bindValue(':topicId', $iTopicId, \PDO::PARAM_INT);
+        } elseif (!empty($iProfileId)) {
+            $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+        }
         $rStmt->execute();
         $oRow = $rStmt->fetch(\PDO::FETCH_OBJ);
         Db::free($rStmt);
