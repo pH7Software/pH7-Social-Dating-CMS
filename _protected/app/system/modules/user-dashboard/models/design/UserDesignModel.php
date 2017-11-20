@@ -25,7 +25,11 @@ class UserDesignModel extends UserDesignCoreModel
                 $sFirstName = $this->oStr->upperFirst($oRow->firstName);
                 $sCity = $this->oStr->upperFirst($oRow->city);
 
-                echo '<li><a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oRow->username, $sFirstName, $oRow->sex), '"><img src="', $this->getUserAvatar($oRow->username, $oRow->sex, $iSize), '" width="', $iSize, '" height="', $iSize, '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" class="avatar" /></a></li>';
+                echo '<li>
+                    <a rel="nofollow" href="', $this->oUser->getProfileSignupLink($oRow->username, $sFirstName, $oRow->sex), '">
+                        <img src="', $this->getUserAvatar($oRow->username, $oRow->sex, $iSize), '" width="', $iSize, '" height="', $iSize, '" alt="', t('Meet %0% on %site_name%', $oRow->username), '" class="avatar" />
+                    </a>
+                </li>';
             }
 
             echo '</ul>';
