@@ -29,8 +29,6 @@ class GeneralCoreCron extends Cron
     /**
      * Checks file permissions and tries to correct them if they are incorrect.
      *
-     * @access protected
-     *
      * @return void
      */
     protected function chmod()

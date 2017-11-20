@@ -116,7 +116,6 @@ class Geo
     /**
      * Get Geo Ip Data Information.
      *
-     * @access protected
      * @param string $sIpAddress Specify an IP address. If NULL, it will address the current customer who visits the site
      *
      * @return string|\GeoIp2\Model\City
