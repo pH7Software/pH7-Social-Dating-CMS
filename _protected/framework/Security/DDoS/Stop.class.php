@@ -26,7 +26,7 @@ final class Stop
     const COOKIE_NAME = 'sss';
 
     /**
-     * @return boolean Return "true" If we believe that this person takes too much request otherwise "false"
+     * @return bool Return "true" If we believe that this person takes too much request otherwise "false"
      */
     public function cookie()
     {
@@ -50,7 +50,7 @@ final class Stop
     }
 
     /**
-     * @return boolean Return "true" If we believe that this person takes too much request otherwise "false"
+     * @return bool Return "true" If we believe that this person takes too much request otherwise "false"
      */
     public function session()
     {
