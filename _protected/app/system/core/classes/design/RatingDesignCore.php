@@ -51,7 +51,7 @@ class RatingDesignCore
          * For security, a check on to ajax server side is already present, but this JS code allows the visitor to login easier.
          */
         if (!UserCore::auth()) {
-            $sUrl = Framework\Mvc\Router\Uri::get('user', 'signup', 'step1', '?msg=' . t('Please join for free to vote that'), false);
+            $sUrl = Framework\Mvc\Router\Uri::get('user', 'signup', 'step1', '?msg=' . t('You need to be a member for voting.'), false);
             echo '<script>$(".', $sPHSClass, '").click(function(){window.location=\'', $sUrl, '\'});</script>';
         }
     }
