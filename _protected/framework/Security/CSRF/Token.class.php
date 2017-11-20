@@ -38,21 +38,21 @@ final class Token
     const VAR_NAME = 'pHST';
 
     /** @var Session */
-    private $_oSession;
+    private $oSession;
 
     /** @var null|string */
-    private $_sHttpReferer;
+    private $sHttpReferer;
 
     /** @var null|string */
-    private $_sUserAgent;
+    private $sUserAgent;
 
     public function __construct()
     {
-        $this->_oSession = new Session;
+        $this->oSession = new Session;
 
         $oBrowser = new Browser;
-        $this->_sHttpReferer = $oBrowser->getHttpReferer();
-        $this->_sUserAgent = $oBrowser->getUserAgent();
+        $this->sHttpReferer = $oBrowser->getHttpReferer();
+        $this->sUserAgent = $oBrowser->getUserAgent();
         unset($oBrowser);
     }
 
@@ -66,8 +66,8 @@ final class Token
     public function generate($sName)
     {
         // If the token is still valid, it returns the correct token
-        if ($this->_oSession->exists('security_token_' . $sName)) {
-            return $this->_oSession->get('security_token_' . $sName);
+        if ($this->oSession->exists('security_token_' . $sName)) {
+            return $this->oSession->get('security_token_' . $sName);
         }
 
         $sToken = Various::genRnd($sName);
@@ -75,12 +75,12 @@ final class Token
         $aSessionData = [
             'security_token_' . $sName => $sToken,
             'security_token_time_' . $sName => time(),
-            //'security_token_http_referer_' . $sName => $this->_sHttpReferer,
+            //'security_token_http_referer_' . $sName => $this->sHttpReferer,
             'security_token_ip_' . $sName => Ip::get(),
-            'security_token_http_user_agent_' . $sName => $this->_sUserAgent
+            'security_token_http_user_agent_' . $sName => $this->sUserAgent
         ];
 
-        $this->_oSession->set($aSessionData);
+        $this->oSession->set($aSessionData);
 
         return $sToken;
     }
@@ -110,19 +110,19 @@ final class Token
             'security_token_http_user_agent_' . $sName
         ];
 
-        if ($this->_oSession->exists($aCheckSession) && !empty($sInputToken))
-            if ($this->_oSession->get('security_token_' . $sName) === $sInputToken)
-                if ($this->_oSession->get('security_token_time_' . $sName) >= (time() - $iTime))
-                    //if ($this->_sHttpReferer === $this->_oSession->get('security_token_http_referer_' . $sName))
-                        if (Ip::get() === $this->_oSession->get('security_token_ip_' . $sName))
-                            if ($this->_sUserAgent === $this->_oSession->get('security_token_http_user_agent_' . $sName)) {
+        if ($this->oSession->exists($aCheckSession) && !empty($sInputToken))
+            if ($this->oSession->get('security_token_' . $sName) === $sInputToken)
+                if ($this->oSession->get('security_token_time_' . $sName) >= (time() - $iTime))
+                    //if ($this->sHttpReferer === $this->oSession->get('security_token_http_referer_' . $sName))
+                        if (Ip::get() === $this->oSession->get('security_token_ip_' . $sName))
+                            if ($this->sUserAgent === $this->oSession->get('security_token_http_user_agent_' . $sName)) {
                                 // Delete the token and data sessions expired
-                                $this->_oSession->remove($aCheckSession);
+                                $this->oSession->remove($aCheckSession);
                                 return true;
                             }
 
         // Delete the token and data sessions expired
-        $this->_oSession->remove($aCheckSession);
+        $this->oSession->remove($aCheckSession);
 
         return false;
     }
@@ -159,11 +159,11 @@ final class Token
     private function currentSess()
     {
         if (UserCore::auth())
-            $sToken = $this->_oSession->get('member_token');
+            $sToken = $this->oSession->get('member_token');
         elseif (AdminCore::auth())
-            $sToken = $this->_oSession->get('admin_token');
+            $sToken = $this->oSession->get('admin_token');
         elseif (AffiliateCore::auth())
-            $sToken = $this->_oSession->get('affiliate_token');
+            $sToken = $this->oSession->get('affiliate_token');
         else $sToken = true; // If nobody is logged on, we did not need to do this test, so it returns true
 
         return $sToken;
