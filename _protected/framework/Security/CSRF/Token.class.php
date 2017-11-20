@@ -134,7 +134,7 @@ final class Token
      */
     public function url()
     {
-        return ($this->currentSess() !== true) ? '?' . static::VAR_NAME . '=' . $this->currentSess() : '';
+        return ($this->currentSess() !== true ? '?' . static::VAR_NAME . '=' . $this->currentSess() : '');
     }
 
     /**
