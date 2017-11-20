@@ -59,7 +59,7 @@ class MainController extends Controller
 
         if (empty($oGames)) {
             $this->sTitle = t('No Games Found!');
-            $this->_notFound();
+            $this->notFound();
         } else {
             $this->view->page_title = t('Games Zone - Free Games');
             $this->view->h1_title = t('Games Zone Party');
@@ -83,7 +83,7 @@ class MainController extends Controller
 
         if (empty($oGame)) {
             $this->sTitle = t('No Games Found!');
-            $this->_notFound();
+            $this->notFound();
         } else {
             $this->sTitle = t('Game - %0%', substr($oGame->description, 0, 100));
             $this->view->page_title = t('%0% Games Zone - %1%', $oGame->name, $oGame->title);
@@ -135,7 +135,7 @@ class MainController extends Controller
         $sCategoryTxt = substr($sCategory, 0, 60);
         if (empty($oSearch)) {
             $this->sTitle = t('No "%0%" category found.', $sCategoryTxt);
-            $this->_notFound();
+            $this->notFound();
         } else {
             $this->sTitle = t('Search by Category: "%0%" Game', $sCategoryTxt);
             $this->view->page_title = $this->sTitle;
@@ -186,7 +186,7 @@ class MainController extends Controller
 
         if (empty($oSearch)) {
             $this->sTitle = t('Sorry, Your search returned no results!');
-            $this->_notFound();
+            $this->notFound();
         } else {
             $this->sTitle = t('Game - Your search returned');
             $this->view->page_title = $this->sTitle;
@@ -221,7 +221,7 @@ class MainController extends Controller
         }
 
         $this->sTitle = t('Wrong download ID specified!');
-        $this->_notFound();
+        $this->notFound();
         $this->manualTplInclude('game.tpl');
         $this->output();
     }
