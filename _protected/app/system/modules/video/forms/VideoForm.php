@@ -55,7 +55,7 @@ class VideoForm
         $oForm->addElement(new \PFBC\Element\File(t('Video:'), 'video', array('description' => '<span class="bold">' . t('Note:') . '</span> ' . t('Please be patient while downloading video, this may take time (especially if you download a long video).') . '</em>', 'multiple' => 'multiple', 'accept' => 'video/*')));
         $oForm->addElement(new \PFBC\Element\Checkbox('', 'agree', array('1' => t('I have the right to distribute this video'))));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div><div class="hidden" id="embed">'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Embed Code:'), 'embed_code', array('description' => t('Example: %0%', DbConfig::getSetting('defaultVideo')), 'title' => t('Video from Youtube, Vimeo, DailyMotion or MetaCafe.'), 'validation' => new \PFBC\Validation\Url)));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Embed Code:'), 'embed_code', array('description' => t('e.g., %0%', DbConfig::getSetting('defaultVideo')), 'title' => t('Video from Youtube, Vimeo or DailyMotion.'), 'validation' => new \PFBC\Validation\Url)));
         $oForm->addElement(new \PFBC\Element\HTMLExternal('</div>'));
 
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description of your video:'), 'description', array('validation' => new \PFBC\Validation\Str(2, 200))));

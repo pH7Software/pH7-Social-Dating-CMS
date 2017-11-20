@@ -77,7 +77,7 @@ class VideoFormProcess extends Form
             $sDuration = ($oInfo->getDuration() ? $oInfo->getDuration() : '0'); // Time in seconds
 
             if (!$sFile) {
-                \PFBC\Form::setError('form_video', t('Invalid Api Video Type! Choose from Youtube, Vimeo, Dailymotion and Metacafe.'));
+                \PFBC\Form::setError('form_video', t('Invalid Api Video Type! Choose from Youtube, Vimeo and Dailymotion.'));
                 return;
             }
         } elseif (!empty($_FILES['video']['tmp_name'])) {
