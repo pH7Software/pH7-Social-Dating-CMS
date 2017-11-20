@@ -78,7 +78,7 @@ class VideoDesignCore
                 $sThumbUrl = PH7_URL_TPL . PH7_TPL_NAME . PH7_SH . PH7_IMG . 'icon/none.jpg';
             }
 
-            $sParam = ($sMedia == 'movie' && DbConfig::getSetting('autoplayVideo')) ? 'autoplay="autoplay"' : '';
+            $sParam = self::isAutoplayVideo($sMedia) ? 'autoplay="autoplay"' : '';
             $sVideoTag = '
             <video poster="' . $sThumbUrl . '" width="' . $iWidth . '" height="' . $iHeight . '" controls="controls" ' . $sParam . '>
                 <source src="' . PH7_URL_DATA_SYS_MOD . $sVidPath1 . '" type="video/webm" />
@@ -99,5 +99,15 @@ class VideoDesignCore
                 echo $sVideoTag;
             }
         }
+    }
+
+    /**
+     * @param string $sMedia
+     *
+     * @return bool
+     */
+    private static function isAutoplayVideo($sMedia)
+    {
+        return $sMedia === self::MOVIE_MEDIA_MODE && DbConfig::getSetting('autoplayVideo');
     }
 }
