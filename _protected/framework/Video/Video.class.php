@@ -167,18 +167,11 @@ class Video extends Upload
     }
 
     /**
-     * Destruction of attributes and temporary file.
+     * Remove temporary file.
      */
     public function __destruct()
     {
-        // If it exists, delete the temporary video
+        // If it exists, delete the temporary video file
         $this->oFile->deleteFile($this->aFile['tmp_name']);
-
-        unset(
-            $this->oFile,
-            $this->sType,
-            $this->sFfmpegPath,
-            $this->aFile
-        );
     }
 }
