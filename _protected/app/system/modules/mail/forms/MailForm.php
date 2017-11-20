@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Url\Header;
 
 class MailForm
 {
@@ -20,7 +21,7 @@ class MailForm
                 new MailFormProcess;
             }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oHttpRequest = new Http; // For Reply Function
