@@ -9,22 +9,25 @@
 namespace PH7;
 
 use PH7\Framework\Config\Config;
+use PH7\Framework\Url\Header;
 
 class AdminForm
 {
     public static function display()
     {
         if (isset($_POST['submit_game'])) {
-            if (\PFBC\Form::isValid($_POST['submit_game']))
+            if (\PFBC\Form::isValid($_POST['submit_game'])) {
                 new AdminFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oCategoriesData = (new GameModel)->getCategory(null, 0, 500);
         $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId)
+        foreach ($oCategoriesData as $oId) {
             $aCategoriesName[$oId->categoryId] = $oId->name;
+        }
         unset($oCategoriesData);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];

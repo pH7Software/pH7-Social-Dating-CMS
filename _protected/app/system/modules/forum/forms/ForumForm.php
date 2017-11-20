@@ -10,22 +10,25 @@ namespace PH7;
 
 use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Url\Header;
 
 class ForumForm
 {
     public static function display()
     {
         if (isset($_POST['submit_forum'])) {
-            if (\PFBC\Form::isValid($_POST['submit_forum']))
+            if (\PFBC\Form::isValid($_POST['submit_forum'])) {
                 new ForumFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oCategoriesData = (new ForumModel)->getCategory();
         $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId)
+        foreach ($oCategoriesData as $oId) {
             $aCategoriesName[$oId->categoryId] = $oId->title;
+        }
         unset($oCategoriesData);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];

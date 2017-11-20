@@ -32,8 +32,9 @@ class AdminEditForm
 
         $oCategoriesData = $oGameModel->getCategory(null, 0, 500);
         $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId)
+        foreach ($oCategoriesData as $oId) {
             $aCategoriesName[$oId->categoryId] = $oId->name;
+        }
         unset($oHttpRequest, $oGameModel);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];

@@ -29,8 +29,9 @@ class EditForumForm
 
         $oCategoriesData = $oForumModel->getCategory();
         $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId)
+        foreach ($oCategoriesData as $oId) {
             $aCategoriesName[$oId->categoryId] = $oId->title;
+        }
         unset($oForumModel, $oCategoriesData);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];

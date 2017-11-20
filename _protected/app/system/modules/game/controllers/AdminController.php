@@ -15,7 +15,10 @@ class AdminController extends MainController
 {
     public function index()
     {
-        Header::redirect(Uri::get('game', 'main', 'index'), t('Welcome to the Game administrator mode.'));
+        Header::redirect(
+            Uri::get('game', 'main', 'index'),
+            t('Welcome to the Game administrator mode.')
+        );
     }
 
     public function add()
