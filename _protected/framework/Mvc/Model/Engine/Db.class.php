@@ -377,7 +377,7 @@ class Db
         }
 
         // Free instance of the PDO object
-        if (TRUE === $bCloseConnection) {
+        if (true === $bCloseConnection) {
             self::$oDb = null;
         }
     }
