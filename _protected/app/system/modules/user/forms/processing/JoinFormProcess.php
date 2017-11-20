@@ -129,7 +129,7 @@ class JoinFormProcess extends Form
         ];
 
         if (!$this->oUserModel->exe($aData, '3')) {
-            \PFBC\Form\setError('form_join_user3',
+            \PFBC\Form::setError('form_join_user3',
                 t('An error occurred during registration!') . '<br />' .
                 t('Please try again with new information in the form fields or come back later.')
             );
