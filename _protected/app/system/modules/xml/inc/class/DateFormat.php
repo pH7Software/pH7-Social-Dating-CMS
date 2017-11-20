@@ -67,7 +67,7 @@ class DateFormat
     {
         if (in_array($sFormat, self::AVAILABLE_FORMATS, true)) {
             $sDateFormats = implode('", "', self::AVAILABLE_FORMATS);
-            throw new Exception('Wrong format for the date! You only need to choose between "%0%"', $sDateFormats);
+            throw new Exception('Wrong date format! You can only choose between "%0%"', $sDateFormats);
         }
 
         $iTime = (!empty($sDate)) ? strtotime($sDate) : time();
