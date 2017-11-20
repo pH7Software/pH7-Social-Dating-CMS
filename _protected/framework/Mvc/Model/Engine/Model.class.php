@@ -19,8 +19,14 @@ abstract class Model extends Entity
 {
     const SQL_FILE_EXT = '.sql';
 
-    protected $orm, $cache;
-    private $_sContents;
+    /** @var Record */
+    protected $orm;
+
+    /** @var Cache */
+    protected $cache;
+
+    /** @var string */
+    private $sContents;
 
     public function __construct()
     {
@@ -54,10 +60,10 @@ abstract class Model extends Entity
     public function getQuery($sFile, $sPath)
     {
         $sFullPath = $sPath . $sFile . static::SQL_FILE_EXT;
-        $this->_sContents = (new File)->getFile($sFullPath);
+        $this->sContents = (new File)->getFile($sFullPath);
         $this->_parseVar();
 
-        return $this->_sContents;
+        return $this->sContents;
     }
 
     /**
@@ -67,6 +73,6 @@ abstract class Model extends Entity
      */
     private function _parseVar()
     {
-        $this->_sContents = str_replace('[DB_PREFIX]', Db::prefix(), $this->_sContents);
+        $this->sContents = str_replace('[DB_PREFIX]', Db::prefix(), $this->sContents);
     }
 }
