@@ -229,7 +229,6 @@ class MainController extends Controller
     /**
      * Sets the Menu Variables for the template.
      *
-     * @access protected
      * @return void
      */
     protected function setMenuVars()
