@@ -25,8 +25,8 @@ class MainController extends Controller
     /**
      * @internal Protected access because AdminController derived class uses these attributes
      *
-     * @var object $oGameModel
-     * @var object $sTitle
+     * @var \stdClass $oGameModel
+     * @var \stdClass $sTitle
      * @var string $$sMetaKeywords
      * @var integer $iTotalGames
      */
