@@ -86,13 +86,16 @@ class AvatarDesignCore extends Design
             $sSex = PH7_GHOST_USERNAME;
         }
 
-        echo '<div class="picture_block"><a href="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" title="', ucfirst($sUsername), '" data-popup="image"><img src="', $this->getUserAvatar($sUsername, $sSex, $iSize / 2), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" class="img_picture" /></a></div>';
+        echo '<div class="picture_block">
+            <a href="', $this->getUserAvatar($sUsername, $sSex, $iSize), '" title="', ucfirst($sUsername), '" data-popup="image">
+                <img src="', $this->getUserAvatar($sUsername, $sSex, $iSize / 2), '" alt="', ucfirst($sUsername), '" title="', ucfirst($sFirstName), '" class="img_picture" />
+            </a>
+        </div>';
 
         /**
          * @internal Google Search Image works only on non-local URLs, so check if we aren't on dev environments.
          */
-        if (
-            AdminCore::auth()
+        if (AdminCore::auth()
             && Registry::getInstance()->controller === 'ModeratorController'
             && !Server::isLocalHost()
         ) {
