@@ -49,12 +49,12 @@ class Module extends Engine\Model
      * Update the module status (enabled/disabled).
      *
      * @param string $iId Module ID
-     * @param string $sIsEnabled '1' = Enabled | '0' = Disabled. Need to be string because in DB it is an "enum". Default: '1'
-     * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
+     * @param string $sIsEnabled '1' = Enabled | '0' = Disabled. Need to be string because in DB it is an "enum"
+     *
+     * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
     public function update($iId, $sIsEnabled = '1')
     {
         return $this->orm->update('SysModsEnabled', 'enabled', $sIsEnabled, 'moduleId', $iId);
     }
-
 }

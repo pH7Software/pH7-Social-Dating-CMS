@@ -123,7 +123,8 @@ class Security
     /**
      * Add Loging Attempt.
      *
-     * @param string $sTable Default 'Members'
+     * @param string $sTable
+     *
      * @return void
      */
     public function addLoginAttempt($sTable = 'Members')
@@ -155,7 +156,8 @@ class Security
     /**
      * Clear Login Attempts.
      *
-     * @param string $sTable Default 'Members'
+     * @param string $sTable
+     *
      * @return void
      */
     public function clearLoginAttempts($sTable = 'Members')
