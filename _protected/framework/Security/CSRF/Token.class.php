@@ -158,15 +158,20 @@ final class Token
      */
     private function currentSess()
     {
-        if (UserCore::auth())
-            $sToken = $this->oSession->get('member_token');
-        elseif (AdminCore::auth())
-            $sToken = $this->oSession->get('admin_token');
-        elseif (AffiliateCore::auth())
-            $sToken = $this->oSession->get('affiliate_token');
-        else $sToken = true; // If nobody is logged on, we did not need to do this test, so it returns true
+        if (UserCore::auth()) {
+            return $this->oSession->get('member_token');
+        }
 
-        return $sToken;
+        if (AdminCore::auth()) {
+            return $this->oSession->get('admin_token');
+        }
+
+        if (AffiliateCore::auth()) {
+            return $this->oSession->get('affiliate_token');
+        }
+
+        // If nobody is logged on, we did not need to do this test, so let's return TRUE
+        return true;
     }
 
     /**
