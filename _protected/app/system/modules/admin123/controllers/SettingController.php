@@ -10,6 +10,7 @@ namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
+use PH7\Framework\Core\License;
 use PH7\Framework\Url\Header;
 
 class SettingController extends Controller
@@ -94,7 +95,7 @@ class SettingController extends Controller
         $this->view->page_title = $this->view->h1_title = t('License Key');
 
         if ($this->httpRequest->getExists('set_msg')) {
-            $aData = $this->_getLicStatusMsg();
+            $aData = $this->getLicStatusMsg();
             $this->design->setFlashMsg($aData['msg'], ($aData['is_err'] ? 'error' : 'success'));
         }
 
