@@ -59,8 +59,7 @@ class AdminFormProcess extends Form
 
             (new GameModel)->add($aData);
 
-            /* Clean GameModel Cache */
-            (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
+            Game::clearCache();
 
             Header::redirect(Uri::get('game', 'main', 'game', $aData['title'] . ',' . Db::getInstance()->lastInsertId()), t('The game has been successfully added!'));
         }

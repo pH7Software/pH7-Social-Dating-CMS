@@ -49,8 +49,7 @@ class AdminController extends MainController
 
             $this->file->deleteFile($aFiles);
 
-            /* Clean GameModel Cache */
-            (new Framework\Cache\Cache)->start(GameModel::CACHE_GROUP, null, null)->clear();
+            Game::clearCache();
 
             $sMsg = t('The game has been removed.');
         } else {
