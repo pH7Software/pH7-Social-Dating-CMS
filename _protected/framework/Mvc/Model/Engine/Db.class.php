@@ -146,8 +146,8 @@ class Db
     {
         $fStartTime = microtime(true);
         $mReturn = self::$oDb->exec($sStatement);
-        $this->_increment();
-        $this->_addTime($fStartTime, microtime(true));
+        $this->increment();
+        $this->addTime($fStartTime, microtime(true));
 
         return $mReturn;
     }
@@ -197,8 +197,8 @@ class Db
     {
         $fStartTime = microtime(true);
         $bReturn = self::$oDb->prepare($sStatement);
-        $this->_increment();
-        $this->_addTime($fStartTime, microtime(true));
+        $this->increment();
+        $this->addTime($fStartTime, microtime(true));
 
         return $bReturn;
     }
@@ -226,8 +226,8 @@ class Db
     {
         $fStartTime = microtime(true);
         $mReturn = self::$oDb->query($sStatement);
-        $this->_increment();
-        $this->_addTime($fStartTime, microtime(true));
+        $this->increment();
+        $this->addTime($fStartTime, microtime(true));
 
         return $mReturn;
     }
@@ -423,7 +423,7 @@ class Db
      *
      * @return void
      */
-    private function _addTime($fStartTime, $fEndTime)
+    private function addTime($fStartTime, $fEndTime)
     {
         self::$fTime += round($fEndTime - $fStartTime, 6);
     }
@@ -433,7 +433,7 @@ class Db
      *
      * @return void
      */
-    private function _increment()
+    private function increment()
     {
         ++self::$iCount;
     }
