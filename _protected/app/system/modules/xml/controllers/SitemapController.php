@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Xml\Link;
 
 class SitemapController extends MainController
@@ -21,11 +22,11 @@ class SitemapController extends MainController
     {
         $this->sTitle = t('Site Map');
         $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('Map of Website, Free Onlide Dating Site with Webcam Chat Rooms, Meet Single People with %site_name%');
+        $this->view->meta_description = t('Map of Website, Free Online Dating Site with Video Chat Rooms, Meet Single People with %site_name%');
         $this->view->h1_title = $this->sTitle;
 
         /*** Get the links ***/
-        $sUrl = Framework\Mvc\Router\Uri::get('xml', 'sitemap', 'xmllink');
+        $sUrl = Uri::get('xml', 'sitemap', 'xmllink');
         $this->view->urls = (new Link($sUrl))->get();
         $this->output();
     }

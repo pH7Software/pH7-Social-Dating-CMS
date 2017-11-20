@@ -8,6 +8,7 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Xml\Link;
 
 class RssController extends MainController
@@ -21,11 +22,11 @@ class RssController extends MainController
     {
         $this->sTitle = t('RSS Feed List');
         $this->view->page_title = $this->sTitle;
-        $this->view->meta_description = t('RSS Feed %site_name%, Free Onlide Dating Site with Webcam Chat Rooms, Meet Single People with %site_name%');
+        $this->view->meta_description = t('RSS Feed %site_name%, Free Online Dating Site with Video Chat Rooms, Meet Single People with %site_name%');
         $this->view->h1_title = $this->sTitle;
 
         /*** Get the links ***/
-        $sUrl = Framework\Mvc\Router\Uri::get('xml', 'rss', 'xmllink');
+        $sUrl = Uri::get('xml', 'rss', 'xmllink');
         $this->view->urls = (new Link($sUrl))->get();
         $this->output();
     }
