@@ -40,7 +40,6 @@ class MainController extends Controller
         $this->view->h1_title = $this->sTitle;
 
         $this->output();
-
     }
 
     public function register()
@@ -52,7 +51,6 @@ class MainController extends Controller
 
         $this->manualTplInclude('waiting.inc.tpl');
         $this->output();
-
     }
 
     public function login($sApiName = '')
