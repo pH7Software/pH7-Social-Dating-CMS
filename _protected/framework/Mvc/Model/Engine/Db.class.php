@@ -25,21 +25,33 @@ class Db
     const ASC = 'ASC';
     const DESC = 'DESC';
     const RAND = 'RAND()';
+    
+    /** @var  string */
+    private static $sDsn;
 
-    /**
-     * Static attributes of the class.
-     * Holds an instance of self with PDO class.
-     *
-     * @staticvar string $_sDsn Data Source Name
-     * @staticvar string $_sUsername
-     * @staticvar string $_sPassword
-     * @staticvar string $_sPrefix
-     * @staticvar array $_aDriverOptions
-     * @staticvar integer $_iCount
-     * @staticvar float $_fTime
-     * @staticvar Db $_oInstance
-     */
-    private static $_sDsn, $_sUsername, $_sPassword, $_sPrefix, $_aDriverOptions, $_iCount = 0, $_fTime = 0.0, $_oInstance = NULL, $_oDb;
+    /** @var string */
+    private static $sUsername;
+
+    /** @var string */
+    private static $sPassword;
+
+    /** @var string */
+    private static $sPrefix;
+
+    /** @var array */
+    private static $aDriverOptions;
+
+    /** @var int */
+    private static $iCount = 0;
+
+    /** @var float */
+    private static $fTime = 0.0;
+
+    /** @var self|null */
+    private static $oInstance = null;
+
+    /** @var PDO */
+    private static $oDb;
 
     /**
      * The constructor is set to private, so nobody can create a new instance using new.
