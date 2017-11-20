@@ -96,7 +96,7 @@ class Record
      * @param string $sField
      * @param string $sId
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function delete($sTable, $sField, $sId)
     {
@@ -132,7 +132,7 @@ class Record
      * @param string $sTable
      * @param array $aValues
      *
-     * @return integer|boolean Returns the last Insert ID on success or FALSE on failure.
+     * @return int|bool Returns the last Insert ID on success or FALSE on failure.
      */
     public function insert($sTable, array $aValues)
     {
@@ -184,7 +184,7 @@ class Record
      * @param string $sPk The primary key. Default: NULL
      * @param string $sId The id. Default: NULL
      *
-     * @return integer|boolean Returns the number of rows on success or FALSE on failure.
+     * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
     public function update($sTable, $sField, $sValue, $sPk = null, $sId = null)
     {
@@ -231,7 +231,7 @@ class Record
      *
      * @param string $sSql
      *
-     * @return stdClass|boolean Returns stdClass on success or FALSE on failure.
+     * @return stdClass|bool Returns stdClass on success or FALSE on failure.
      *
      */
     public function query($sSql)
@@ -263,7 +263,7 @@ class Record
     /**
      * Execute a Record query.
      *
-     * @return stdClass|boolean Returns a PDOStatement object, or FALSE on failure.
+     * @return stdClass|bool Returns a PDOStatement object, or FALSE on failure.
      */
     public function execute()
     {
@@ -305,7 +305,7 @@ class Record
      * @param array $aJoin Default: NULL
      * @param string $sOptions Default: NULL
      *
-     * @return stdClass|boolean Returns stdClass on success or throw PDOException on failure.
+     * @return stdClass|bool Returns stdClass on success or throw PDOException on failure.
      */
     public function getAllInOne($mTable, $sField = null, $sId = null, $mWhat = '*', array $aJoin = null, $sOptions = null)
     {
@@ -366,7 +366,7 @@ class Record
      * @param string $sWhat Default: '*'
      * @param string $sOptions Default: NULL
      *
-     * @return string|stdClass|boolean SQL query on success (returns string or stdClass values) or throw PDOException on failure (returns a false boolean).
+     * @return string|stdClass|bool SQL query on success (returns string or stdClass values) or throw PDOException on failure (returns a false boolean).
      *
      */
     public function getOne($sTable, $sField = null, $sId = null, $sWhat = '*', $sOptions = null)

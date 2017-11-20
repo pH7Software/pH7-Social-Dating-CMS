@@ -58,8 +58,9 @@ class Security
      * @param string $sEmail
      * @param string $sUsername
      * @param string $sPassword
-     * @param integer $sStatus
+     * @param int $sStatus
      * @param string $sTable Default 'Members'
+     *
      * @return void
      */
     public function addLoginLog($sEmail, $sUsername, $sPassword, $sStatus, $sTable = 'Members')

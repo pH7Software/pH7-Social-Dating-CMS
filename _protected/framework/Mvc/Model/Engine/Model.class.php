@@ -33,7 +33,7 @@ abstract class Model extends Entity
      * @param string $sPath Path to SQL file.
      * @param array $aParams
      *
-     * @return boolean Returns TRUE on success or FALSE on failure.
+     * @return bool Returns TRUE on success or FALSE on failure.
      */
     public function exec($sFile, $sPath, array $aParams = null)
     {

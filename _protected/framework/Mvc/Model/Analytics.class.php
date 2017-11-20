@@ -10,20 +10,19 @@
  */
 
 namespace PH7\Framework\Mvc\Model;
+
 defined('PH7') or exit('Restricted access');
 
 class Analytics
 {
-
     /**
      * Update the analytics API code.
      *
      * @param string $sCode
-     * @return mixed (integer | boolean) Returns the number of rows on success or FALSE on failure.
+     * @return int|bool Returns the number of rows on success or FALSE on failure.
      */
     public function updateApi($sCode)
     {
         return Engine\Record::getInstance()->update('AnalyticsApi', 'code', $sCode);
     }
-
 }
