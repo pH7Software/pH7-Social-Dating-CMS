@@ -24,19 +24,30 @@ class NotificationFormProcess extends Form
 
         $oGetNotofication = $oUserModel->getNotification($iProfileId);
 
-        if (!$this->str->equals($this->httpRequest->post('enable_newsletters'), $oGetNotofication->enableNewsletters))
+        if (!$this->str->equals($this->httpRequest->post('enable_newsletters'), $oGetNotofication->enableNewsletters)) {
             $oUserModel->setNotification('enableNewsletters', $this->httpRequest->post('enable_newsletters'), $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('new_msg'), $oGetNotofication->newMsg))
+        if (!$this->str->equals($this->httpRequest->post('new_msg'), $oGetNotofication->newMsg)) {
             $oUserModel->setNotification('newMsg', $this->httpRequest->post('new_msg'), $iProfileId);
+        }
 
-        if (!$this->str->equals($this->httpRequest->post('friend_request'), $oGetNotofication->friendRequest))
+        if (!$this->str->equals($this->httpRequest->post('friend_request'), $oGetNotofication->friendRequest)) {
             $oUserModel->setNotification('friendRequest', $this->httpRequest->post('friend_request'), $iProfileId);
+        }
 
-        /* Clean UserCoreModel Cache */
-        (new Framework\Cache\Cache)->start(UserCoreModel::CACHE_GROUP, 'notification' . $iProfileId, null)->clear()
-            ->start(UserCoreModel::CACHE_GROUP, 'isNotification' . $iProfileId, null)->clear();
+        $this->clearCache($iProfileId);
 
         \PFBC\Form::setSuccess('form_notification', t('Your notifications settings have been saved successfully!'));
+    }
+
+    /**
+     * @param int $iProfileId
+     */
+    private function clearCache($iProfileId)
+    {
+        (new Cache)
+            ->start(UserCoreModel::CACHE_GROUP, 'notification' . $iProfileId, null)->clear()
+            ->start(UserCoreModel::CACHE_GROUP, 'isNotification' . $iProfileId, null)->clear();
     }
 }
