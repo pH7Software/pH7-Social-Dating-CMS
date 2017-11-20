@@ -22,39 +22,43 @@ class DateFormat
     /**
      * Get date format for RSS feed.
      *
-     * @param string $sDate Default NULL
+     * @param string|null $sDate
+     *
      * @return string
      */
     public static function getRss($sDate = null)
     {
-        return static::_get('r', $sDate);
+        return static::get('r', $sDate);
     }
 
     /**
      * Get date format for sitemap.
      *
-     * @param string $sDate Default NULL
+     * @param string|null $sDate
+     *
      * @return string
      */
     public static function getSitemap($sDate = null)
     {
-        return static::_get('c', $sDate);
+        return static::get('c', $sDate);
     }
 
     /**
      * @param char $cFormat
      * @param string $sDate
+     *
      * @return string
-     * @throws \PH7\Framework\Date\Exception If the date format is incorrect.
+     *
+     * @throws Exception If the date format is incorrect.
      */
-    private static function _get($cFormat, $sDate)
+    private static function get($cFormat, $sDate)
     {
         if ('c' != $cFormat && 'r' != $cFormat) {
-            throw new  \PH7\Framework\Date\Exception('Wrong format for the date! You only need to choose between "r" and "c".');
+            throw new  Exception('Wrong format for the date! You only need to choose between "r" and "c".');
         }
 
         $iTime = (!empty($sDate)) ? strtotime($sDate) : time();
+
         return date($cFormat, $iTime);
     }
-
 }
