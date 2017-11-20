@@ -27,21 +27,24 @@ class Spam
      * @param string $sColumnId
      * @param integer $iFindId
      * @param string $sTable
-     * @param string $sAdditionalSql Additional SQL code. Default NULL
-     * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
+     * @param string $sAdditionalSql Additional SQL code.
+     *
+     * @return bool Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public static function detectDuplicate($sCheckContent, $sFindColumn, $sColumnId, $iFindId, $sTable, $sAdditionalSql = null)
     {
         $bReturn = false; // Default value
-        $sSql = (!empty($sAdditionalSql)) ? ' ' . $sAdditionalSql : '';
+        $sSql = !empty($sAdditionalSql) ? ' ' . $sAdditionalSql : '';
         $rStmt = Db::getInstance()->prepare('SELECT ' . $sFindColumn . ' AS content FROM ' . Db::prefix($sTable) . 'WHERE ' . $sColumnId . ' = :id' . $sSql);
 
         $rStmt->bindValue(':id', $iFindId, \PDO::PARAM_INT);
         $rStmt->execute();
-        while ($oRow = $rStmt->fetch(\PDO::FETCH_OBJ))
-            if ($bReturn = SecMsg::detectDuplicate($sCheckContent, $oRow->content)) break; // TRUE = Duplicate content detected, FALSE otherwise.
+        while ($oRow = $rStmt->fetch(\PDO::FETCH_OBJ)) {
+            if ($bReturn = SecMsg::detectDuplicate($sCheckContent, $oRow->content)) {
+                break; // TRUE = Duplicate content detected, FALSE otherwise.
+            }
+        }
 
         return $bReturn;
     }
-
 }
