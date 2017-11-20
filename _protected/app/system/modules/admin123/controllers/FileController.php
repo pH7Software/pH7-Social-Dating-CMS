@@ -13,6 +13,8 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Service\Suggestion;
 use PH7\Framework\Url\Header;
 
 class FileController extends Controller
@@ -62,7 +64,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Ban Files');
 
-        $this->_displayAction(PH7_PATH_APP_CONFIG . \PH7\Framework\Security\Ban\Ban::DIR, '.txt');
+        $this->_displayAction(PH7_PATH_APP_CONFIG . Ban::DIR, '.txt');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
@@ -72,7 +74,7 @@ class FileController extends Controller
     {
         $this->sTitle = t('Suggestion Files');
 
-        $this->_displayAction(PH7_PATH_APP_CONFIG . \PH7\Framework\Service\Suggestion::DIR, '.txt');
+        $this->_displayAction(PH7_PATH_APP_CONFIG . Suggestion::DIR, '.txt');
         $this->manualTplInclude('protecteddisplay.inc.tpl');
 
         $this->output();
