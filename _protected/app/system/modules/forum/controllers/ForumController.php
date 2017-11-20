@@ -308,7 +308,7 @@ class ForumController extends Controller
         if ($this->oForumModel->deleteTopic($this->session->get('member_id'), $iTopicId)) {
             $this->sMsg = t('Your topic has been deleted.');
         } else {
-            $this->sMsg = t('Oops! Your topic could not be deleted');
+            $this->sMsg = t('Oops! Your topic could not be deleted.');
         }
 
         Header::redirect(
@@ -330,7 +330,7 @@ class ForumController extends Controller
         if ($this->oForumModel->deleteMessage($this->session->get('member_id', 'int'), $iMessageId)) {
             $this->sMsg = t('Your message has been deleted.');
         } else {
-            $this->sMsg = t('Oops! Your message could not be deleted');
+            $this->sMsg = t('Oops! Your message could not be deleted.');
         }
 
         Header::redirect(
