@@ -43,7 +43,7 @@ class MsgFormProcess extends Form
                     'post',
                     $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->post('title') . ',' . Db::getInstance()->lastInsertId()
                 ),
-                t('Your message has been added successfully!')
+                t('Message posted!')
             );
         }
         unset($oForumModel);

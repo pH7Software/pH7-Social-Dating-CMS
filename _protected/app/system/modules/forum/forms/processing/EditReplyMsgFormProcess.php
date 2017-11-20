@@ -36,7 +36,7 @@ class EditReplyMsgFormProcess extends Form
                 'post',
                 $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->get('topic_name') . ',' . $iTopicId
             ),
-            t('Your message has been updated successfully!')
+            t('Reply updated!')
         );
     }
 }

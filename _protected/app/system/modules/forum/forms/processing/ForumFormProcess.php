@@ -28,7 +28,7 @@ class ForumFormProcess extends Form
 
         Header::redirect(
             Uri::get('forum', 'forum', 'index'),
-            t('The Forum has been successfully added!')
+            t('New Forum added!')
         );
     }
 }
