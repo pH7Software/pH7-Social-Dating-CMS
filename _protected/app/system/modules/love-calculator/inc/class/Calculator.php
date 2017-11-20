@@ -14,18 +14,20 @@ namespace PH7;
 
 class Calculator
 {
+    /** @var string */
+    private $sName;
 
-    private $_sName, $_iStat;
+    /** @var string */
+    private $iStat;
 
     /**
      * @param string $sName
      * @param string $sSecondName
-     * @return object this
      */
     public function __construct($sName, $sSecondName)
     {
-        $this->_sName = strtolower(escape($sName . $sSecondName));
-        $aName = count_chars($this->_sName);
+        $this->sName = strtolower(escape($sName . $sSecondName));
+        $aName = count_chars($this->sName);
 
         for ($i = 97; $i <= 122; $i++) {
             if ($aName[$i] != false) {
@@ -61,17 +63,14 @@ class Calculator
             array_splice($aCalcMore, 0);
         }
 
-        $this->_iStat = $aCalc[0] . $aCalc[1];
-
-        return $this;
+        $this->iStat = $aCalc[0] . $aCalc[1];
     }
 
     /**
-     * @return integer Amount
+     * @return int Return the love amount.
      */
     public function get()
     {
-        return $this->_iStat;
+        return $this->iStat;
     }
-
 }
