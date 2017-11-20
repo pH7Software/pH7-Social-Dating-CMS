@@ -25,7 +25,7 @@ class JoinFormProcess extends Form
     /** @var UserModel */
     private $oUserModel;
 
-    /** @var integer */
+    /** @var int */
     private $iActiveType;
 
     public function __construct()
