@@ -540,6 +540,7 @@ class Design
      * Show the user IP address with a link to get the IP information.
      *
      * @internal If it's an IPv6, show only the beginning, otherwise it would be too long in the template.
+     *
      * @param string $sIp Allows to speciy another IP address than the client one.
      * @param boolean $bPrint Print or Return the HTML code. Default TRUE
      *
@@ -785,6 +786,7 @@ class Design
      * @param string $sUsername
      * @param string $sFirstName
      * @param string $sSex
+     *
      * @internal We do not use Url::httpBuildQuery() method for the first condition otherwise the URL is distorted and it doesn't work.
      *
      * @return void

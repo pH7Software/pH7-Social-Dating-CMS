@@ -195,10 +195,6 @@ class Gzip
     {
         $this->checkCacheDir();
 
-        /**
-         * Try the cache first to see if the combined files were already generated.
-         */
-
         $oBrowser = new Browser;
 
         $this->iIfModified = (!empty($_SERVER['HTTP_IF_MODIFIED_SINCE'])) ? substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 0, 29) : null;
@@ -211,6 +207,9 @@ class Gzip
         foreach ($this->aElements as $sElement) {
             $sPath = realpath($this->sBase . $sElement);
 
+            /**
+             * We will try the cache first to see if the combined files were already generated
+             */
             if ($this->oFile->getModifTime($sPath) > $this->oFile->getModifTime($this->sCacheDir . $sCacheFile)) {
                 if (!empty($this->iIfModified) && $this->oFile->getModifTime($sPath) > $this->oFile->getModifTime($this->iIfModified)) {
                     $oBrowser->noCache();
