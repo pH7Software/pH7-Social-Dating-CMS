@@ -12,16 +12,18 @@ use PH7\Framework\Config\Config;
 use PH7\Framework\Mvc\Request\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Session\Session;
+use PH7\Framework\Url\Header;
 
 class PictureForm
 {
     public static function display()
     {
         if (isset($_POST['submit_picture'])) {
-            if (\PFBC\Form::isValid($_POST['submit_picture']))
+            if (\PFBC\Form::isValid($_POST['submit_picture'])) {
                 new PictureFormProcess();
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $oHttpRequest = new Http;
