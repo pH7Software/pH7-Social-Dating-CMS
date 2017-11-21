@@ -9,23 +9,26 @@
  */
 
 namespace PH7\Framework\Module;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Model\Module;
 
 class Various
 {
-
     /**
      * @param string $sModFolderName Name of the module folder.
-     * @return boolean
+     *
+     * @return bool
      */
     public static function isEnabled($sModFolderName)
     {
         $oMods = (new Module)->get($sModFolderName);
 
         // If the module is not in the SysModsEnabled table, return always TRUE
-        if (!isset($oMods->enabled)) return true;
+        if (!isset($oMods->enabled)) {
+            return true;
+        }
 
         return (((int)$oMods->enabled) === 1);
     }
