@@ -18,7 +18,8 @@ class Permission extends PermissionCore
 
         if (!UserCore::auth() && ($this->registry->action === 'addalbum' || $this->registry->action === 'addphoto'
                 || $this->registry->action === 'editalbum' || $this->registry->action === 'editphoto'
-                || $this->registry->action === 'deletephoto' || $this->registry->action === 'deletealbum')) {
+                || $this->registry->action === 'deletephoto' || $this->registry->action === 'deletealbum')
+        ) {
             $this->signInRedirect();
         }
 
@@ -26,7 +27,7 @@ class Permission extends PermissionCore
         {
             if (!$this->checkMembership() || !$this->group->view_pictures) {
                 $this->paymentRedirect();
-            } elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addvideo') && !$this->group->upload_pictures) {
+            } elseif (($this->registry->action === 'addalbum' || $this->registry->action === 'addphoto') && !$this->group->upload_pictures) {
                 $this->paymentRedirect();
             }
         }
