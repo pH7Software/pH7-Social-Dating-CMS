@@ -352,6 +352,7 @@ namespace PH7\Framework\Str {
 }
 
 namespace {
+
     use PH7\Framework\Str\Str;
 
     /**
