@@ -33,5 +33,4 @@ class MsgForm
         $oForm->addElement(new \PFBC\Element\Button(t('Send!'), 'submit'));
         $oForm->render();
     }
-
 }
