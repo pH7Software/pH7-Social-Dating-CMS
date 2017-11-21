@@ -35,6 +35,7 @@ class Various
         $sPrefix = (string)mt_rand();
         $sStr = (!empty($sStr)) ? (string)$sStr : '';
         $sChars = hash('whirlpool', hash('whirlpool', uniqid($sPrefix, true) . $sStr . Ip::get() . time()) . hash('sha512', (new Browser)->getUserAgent() . microtime(true) * 9999));
+
         return self::padStr($sChars, $iLength);
     }
 
@@ -49,6 +50,7 @@ class Various
     public static function padStr($sStr, $iLength = self::MAX_LENGTH)
     {
         $iLength = (int)$iLength;
+
         return ((new Str)->length($sStr) >= $iLength) ? substr($sStr, 0, $iLength) : str_pad($sStr, $iLength, $sStr);
     }
 

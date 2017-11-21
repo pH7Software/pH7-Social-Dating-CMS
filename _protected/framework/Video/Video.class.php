@@ -142,6 +142,7 @@ class Video extends Upload
     public function thumbnail($sPicturePath, $iSeconds, $iWidth, $iHeight)
     {
         exec($this->sFfmpegPath . ' -itsoffset -' . $iSeconds . ' -i ' . $this->aFile['tmp_name'] . '  -vcodec mjpeg -vframes 1 -an -f rawvideo -s ' . $iWidth . 'x' . $iHeight . ' ' . $sPicturePath);
+
         return $sPicturePath;
     }
 
@@ -153,6 +154,7 @@ class Video extends Upload
     public function getDuration()
     {
         $sTime = exec($this->sFfmpegPath . ' -i ' . $this->aFile['tmp_name'] . ' 2>&1 | grep "Duration" | cut -d \' \' -f 4 | sed s/,//');
+
         return Various::timeToSec($sTime);
     }
 
