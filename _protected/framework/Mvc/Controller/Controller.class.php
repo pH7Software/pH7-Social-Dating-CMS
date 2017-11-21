@@ -33,7 +33,7 @@ abstract class Controller extends Core
     {
         parent::__construct();
 
-        $this->_ddosProtection();
+        $this->ddosProtection();
 
         /***** Assign the values for Registry Class *****/
 
@@ -60,7 +60,7 @@ abstract class Controller extends Core
             'is_aff_auth' => \PH7\AffiliateCore::auth()
         ];
         $aGlobalViewVars = [
-            'is_guest_homepage' => $this->_isGuestOnHomepage($aAuthViewVars['is_user_auth']),
+            'is_guest_homepage' => $this->isGuestOnHomepage($aAuthViewVars['is_user_auth']),
             'is_disclaimer' => !$bIsMobApp && (bool)M\DbConfig::getSetting('disclaimer'),
             'is_cookie_consent_bar' => !$bIsMobApp && (bool)M\DbConfig::getSetting('cookieConsentBar'),
             'country' => Geo::getCountry(),
@@ -71,19 +71,19 @@ abstract class Controller extends Core
         $this->view->assigns($aGlobalViewVars);
 
         // Set other variables
-        $this->_setMetaTplVars();
-        $this->_setModsStatusTplVars();
-        $this->_setUserNotifications();
+        $this->setMetaTplVars();
+        $this->setModsStatusTplVars();
+        $this->setUserNotifications();
 
         /***** Display *****/
         $this->view->setTemplateDir($this->registry->path_module_views . PH7_TPL_MOD_NAME);
 
         /***** End Template Engine PH7Tpl *****/
 
-        $this->_checkPerms();
-        $this->_checkModStatus();
-        $this->_checkBanStatus();
-        $this->_checkSiteStatus();
+        $this->checkPerms();
+        $this->checkModStatus();
+        $this->checkBanStatus();
+        $this->checkSiteStatus();
     }
 
     /**
@@ -143,8 +143,8 @@ abstract class Controller extends Core
 
         if (!\PH7\UserCore::auth()) {
             $sErrorDesc .=
-            '<a href="' . Uri::get('user','signup','step1') . '">' . t('Join Now') . '</a><br />
-             <a href="' . Uri::get('user','main','login') . '">' . t('Login') . '</a><br />';
+                '<a href="' . Uri::get('user', 'signup', 'step1') . '">' . t('Join Now') . '</a><br />
+             <a href="' . Uri::get('user', 'main', 'login') . '">' . t('Login') . '</a><br />';
         }
 
         $sErrorDesc .= '<a href="javascript:history.back();">' . t('Go back to the previous page') . '</a><br />';
@@ -184,7 +184,7 @@ abstract class Controller extends Core
      *
      * @return void
      */
-    final private function _setMetaTplVars()
+    final private function setMetaTplVars()
     {
         $oInfo = M\DbConfig::getMetaMain(PH7_LANG_NAME);
 
@@ -208,7 +208,7 @@ abstract class Controller extends Core
         unset($oInfo, $aMetaVars);
     }
 
-    private function _setModsStatusTplVars()
+    private function setModsStatusTplVars()
     {
         $aModsEnabled = [
             'is_connect_enabled' => SysMod::isEnabled('connect'),
@@ -236,7 +236,7 @@ abstract class Controller extends Core
         unset($aModsEnabled);
     }
 
-    private function _setUserNotifications()
+    private function setUserNotifications()
     {
         $aNotificationCounter = [
             'count_unread_mail' => \PH7\MailCoreModel::countUnreadMsg($this->session->get('member_id')),
@@ -252,7 +252,7 @@ abstract class Controller extends Core
      *
      * @return bool TRUE if visitor is on the homepage (index).
      */
-    private function _isGuestOnHomepage($bIsUserLogged)
+    private function isGuestOnHomepage($bIsUserLogged)
     {
         return !$bIsUserLogged && $this->registry->module === 'user' &&
             $this->registry->controller === 'MainController' &&
@@ -264,7 +264,7 @@ abstract class Controller extends Core
      *
      * @return void If the module is disabled, displays the Not Found page and exit the script.
      */
-    private function _checkModStatus()
+    private function checkModStatus()
     {
         if (!SysMod::isEnabled($this->registry->module)) {
             $this->displayPageNotFound();
@@ -276,7 +276,7 @@ abstract class Controller extends Core
      *
      * @return void
      */
-    private function _checkPerms()
+    private function checkPerms()
     {
         if (is_file($this->registry->path_module_config . 'Permission.php')) {
             require $this->registry->path_module_config . 'Permission.php';
@@ -290,7 +290,7 @@ abstract class Controller extends Core
      *
      * @return void If banned, exit the script after displaying the ban page.
      */
-    private function _checkBanStatus()
+    private function checkBanStatus()
     {
         if (Ban::isIp(Ip::get())) {
             Page::banned();
@@ -302,7 +302,7 @@ abstract class Controller extends Core
      *
      * @return void If the status if maintenance, exit the script after displaying the maintenance page.
      */
-    private function _checkSiteStatus()
+    private function checkSiteStatus()
     {
         if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
             !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD
