@@ -8,25 +8,42 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
 use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Security\CSRF\Token as CSRFToken;
+use PH7\Framework\Url\Header;
 
 class CommentController extends Controller
 {
     const COMMENTS_PER_PAGE = 15;
 
-    private $oComment, $oCommentModel, $sTable, $sTitle, $sMsg, $iId;
+    /** @var CommentModel */
+    private $oCommentModel;
+
+    /** @var string */
+    private $sTable;
+
+    /** @var string */
+    private $sTitle;
+
+    /** @var string */
+    private $sMsg;
+
+    /** @var null|int */
+    private $iId;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->oCommentModel = new CommentModel();
 
         $this->sTable = $this->httpRequest->get('table');
         $this->view->table = $this->sTable;
-        $this->iId = (is_numeric($this->httpRequest->get('id'))) ? $this->httpRequest->get('id') : null;
+        $this->iId = $this->getProfileId();
 
         // Predefined meta_keywords tags
         $this->view->meta_keywords = t('comment,comments,social,community,friend,social network,people,dating,post,wall,social dating');
@@ -37,7 +54,7 @@ class CommentController extends Controller
 
     public function index()
     {
-        Framework\Url\Header::redirect(Uri::get('error', 'http', 'index'));
+        Header::redirect(Uri::get('error', 'http', 'index'));
     }
 
     public function read()
@@ -63,7 +80,7 @@ class CommentController extends Controller
         if (!empty($oComment)) {
             $this->view->avatarDesign = new AvatarDesignCore(); // Avatar Design Class
             $this->view->member_id = $this->session->get('member_id');
-            $this->view->csrf_token = (new Framework\Security\CSRF\Token)->generate('comment');
+            $this->view->csrf_token = (new CSRFToken)->generate('comment');
 
             $this->view->comment = $oComment;
         } else {
