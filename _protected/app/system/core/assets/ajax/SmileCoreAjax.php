@@ -15,26 +15,27 @@ defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
+use PH7\Framework\Service\Emoticon;
 
-class SmileCoreAjax extends \PH7\Framework\Service\Emoticon
+class SmileCoreAjax extends Emoticon
 {
     /** @var string */
-    private static $_sData = '';
+    private static $sData = '';
 
     public static function output()
     {
-        static::_get();
+        static::retrieve();
 
         Http::setContentType('application/json');
-        echo static::$_sData;
+        echo self::$sData;
     }
 
-    private static function _get()
+    private static function retrieve()
     {
         $oCache = (new Cache)->start('str/json', 'emoticons', 120 * 48 * 30);
 
-        static::$_sData = $oCache->get();
-        if (!static::$_sData) {
+        self::$sData = $oCache->get();
+        if (!self::$sData) {
             $aEmoticons = static::get();
 
             foreach ($aEmoticons as $sEmoticonKey => $aEmoticon) {
