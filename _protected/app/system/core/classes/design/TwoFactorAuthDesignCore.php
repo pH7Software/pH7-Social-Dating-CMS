@@ -23,6 +23,7 @@ class TwoFactorAuthDesignCore
      * Get the "Enable Two-Factor Authentication" link.
      *
      * @param string $sMod
+     *
      * @return void
      */
     public static function link($sMod)

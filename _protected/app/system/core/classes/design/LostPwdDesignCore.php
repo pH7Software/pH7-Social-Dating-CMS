@@ -23,7 +23,8 @@ class LostPwdDesignCore
      * Get the "forgot password" link.
      *
      * @param string $sMod
-     * @param boolean $bPrint Print or Return the HTML code. Default TRUE
+     * @param bool $bPrint Print or Return the HTML code.
+     *
      * @return void
      */
     public static function link($sMod, $bPrint = true)

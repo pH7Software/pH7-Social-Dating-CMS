@@ -22,7 +22,7 @@ class CommentDesignCore
     /**
      * Get the link to comments.
      *
-     * @param integer $iId
+     * @param int $iId
      * @param string $sTable
      *
      * @return void

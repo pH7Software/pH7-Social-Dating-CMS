@@ -37,8 +37,8 @@ class VideoDesignCore
      *
      * @param \stdClass $oData
      * @param string $sMedia Type of the media ('preview' or 'movie').
-     * @param integer $iWidth
-     * @param integer $iHeight
+     * @param int $iWidth
+     * @param int $iHeight
      *
      * @return void
      */
