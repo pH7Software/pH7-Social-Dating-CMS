@@ -287,21 +287,23 @@ class UserCoreModel extends Model
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;
 
-        $bIsFirstName = !empty($aParams[SearchQueryCore::FIRST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::FIRST_NAME]);
-        $bIsMiddleName = !empty($aParams[SearchQueryCore::MIDDLE_NAME]) && Str::noSpaces($aParams[SearchQueryCore::MIDDLE_NAME]);
-        $bIsLastName = !empty($aParams[SearchQueryCore::LAST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::LAST_NAME]);
-        $bIsSingleAge = !empty($aParams[SearchQueryCore::AGE]);
-        $bIsAge = empty($aParams[SearchQueryCore::AGE]) && !empty($aParams[SearchQueryCore::MIN_AGE]) && !empty($aParams[SearchQueryCore::MAX_AGE]);
-        $bIsHeight = !empty($aParams[SearchQueryCore::HEIGHT]);
-        $bIsWeight = !empty($aParams[SearchQueryCore::WEIGHT]);
-        $bIsCountry = !empty($aParams[SearchQueryCore::COUNTRY]) && Str::noSpaces($aParams[SearchQueryCore::COUNTRY]);
-        $bIsCity = !empty($aParams[SearchQueryCore::CITY]) && Str::noSpaces($aParams[SearchQueryCore::CITY]);
-        $bIsState = !empty($aParams[SearchQueryCore::STATE]) && Str::noSpaces($aParams[SearchQueryCore::STATE]);
-        $bIsZipCode = !empty($aParams[SearchQueryCore::ZIP_CODE]) && Str::noSpaces($aParams[SearchQueryCore::ZIP_CODE]);
         $bIsMail = !empty($aParams[SearchQueryCore::EMAIL]) && Str::noSpaces($aParams[SearchQueryCore::EMAIL]);
-        $bIsSex = !empty($aParams[SearchQueryCore::SEX]);
-        $bHideUserLogged = !empty($this->iProfileId);
-        $bIsMatchSex = !empty($aParams[SearchQueryCore::MATCH_SEX]);
+        $bIsFirstName = !$bIsMail && !empty($aParams[SearchQueryCore::FIRST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::FIRST_NAME]);
+        $bIsMiddleName = !$bIsMail && !empty($aParams[SearchQueryCore::MIDDLE_NAME]) && Str::noSpaces($aParams[SearchQueryCore::MIDDLE_NAME]);
+        $bIsLastName = !$bIsMail && !empty($aParams[SearchQueryCore::LAST_NAME]) && Str::noSpaces($aParams[SearchQueryCore::LAST_NAME]);
+        $bIsSingleAge = !$bIsMail && !empty($aParams[SearchQueryCore::AGE]);
+        $bIsAge = !$bIsMail && empty($aParams[SearchQueryCore::AGE]) && !empty($aParams[SearchQueryCore::MIN_AGE]) && !empty($aParams[SearchQueryCore::MAX_AGE]);
+        $bIsHeight = !$bIsMail && !empty($aParams[SearchQueryCore::HEIGHT]);
+        $bIsWeight = !$bIsMail && !empty($aParams[SearchQueryCore::WEIGHT]);
+        $bIsCountry = !$bIsMail && !empty($aParams[SearchQueryCore::COUNTRY]) && Str::noSpaces($aParams[SearchQueryCore::COUNTRY]);
+        $bIsCity = !$bIsMail && !empty($aParams[SearchQueryCore::CITY]) && Str::noSpaces($aParams[SearchQueryCore::CITY]);
+        $bIsState = !$bIsMail && !empty($aParams[SearchQueryCore::STATE]) && Str::noSpaces($aParams[SearchQueryCore::STATE]);
+        $bIsZipCode = !$bIsMail && !empty($aParams[SearchQueryCore::ZIP_CODE]) && Str::noSpaces($aParams[SearchQueryCore::ZIP_CODE]);
+        $bIsSex = !$bIsMail && !empty($aParams[SearchQueryCore::SEX]);
+        $bIsMatchSex = !$bIsMail && !empty($aParams[SearchQueryCore::MATCH_SEX]);
+        $bIsOnline = !$bIsMail && !empty($aParams[SearchQueryCore::ONLINE]);
+        $bIsAvatar = !$bIsMail && !empty($aParams[SearchQueryCore::AVATAR]);
+        $bHideUserLogged = !$bIsMail && !empty($this->iProfileId);
 
         $sSqlLimit = !$bCount ? 'LIMIT :offset, :limit' : '';
         $sSqlSelect = !$bCount ? '*' : 'COUNT(m.profileId) AS totalUsers';
@@ -317,8 +319,8 @@ class UserCoreModel extends Model
         $sSqlState = $bIsState ? ' AND state LIKE :state ' : '';
         $sSqlZipCode = $bIsZipCode ? ' AND zipCode LIKE :zipCode ' : '';
         $sSqlEmail = $bIsMail ? ' AND email LIKE :email ' : '';
-        $sSqlOnline = !empty($aParams[SearchQueryCore::ONLINE]) ? ' AND userStatus = 1 AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
-        $sSqlAvatar = !empty($aParams[SearchQueryCore::AVATAR]) ? $this->getUserWithAvatarOnlySql() : '';
+        $sSqlOnline = $bIsOnline ? ' AND userStatus = 1 AND lastActivity > DATE_SUB(\'' . $this->sCurrentDate . '\', INTERVAL ' . DbConfig::getSetting('userTimeout') . ' MINUTE) ' : '';
+        $sSqlAvatar = $bIsAvatar ? $this->getUserWithAvatarOnlySql() : '';
         $sSqlHideLoggedProfile = $bHideUserLogged ? ' AND (m.profileId <> :profileId)' : '';
 
         if (empty($aParams[SearchQueryCore::ORDER])) {
