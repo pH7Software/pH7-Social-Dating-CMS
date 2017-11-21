@@ -38,7 +38,7 @@ class EditCommentFormProcess extends Form
         $iCommentId = $this->httpRequest->get('id', 'int');
 
         if (!$oCommentModel->idExists($this->iRecipientId, $sTable)) {
-            \PFBC\Form::setError('form_comment', t('The comment recipient does not exists.'));
+            \PFBC\Form::setError('form_edit_comment', t('The comment recipient does not exists.'));
         } else {
             if ($this->isEditEligible()) {
                 if ($oCommentModel->update(
@@ -57,10 +57,10 @@ class EditCommentFormProcess extends Form
                         t('The comment has been updated successfully!')
                     );
                 } else {
-                    \PFBC\Form::setError('form_comment', t('Oops! Error when updated comment.'));
+                    \PFBC\Form::setError('form_edit_comment', t('Oops! Error when updated comment.'));
                 }
             } else {
-                \PFBC\Form::setError('form_comment', t("Oops! You don't have the permission to update the comment."));
+                \PFBC\Form::setError('form_edit_comment', t("Oops! You don't have the permission to update the comment."));
             }
         }
         unset($oCommentModel);
