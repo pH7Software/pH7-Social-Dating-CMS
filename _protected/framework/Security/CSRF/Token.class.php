@@ -25,7 +25,7 @@ use PH7\Framework\Util\Various;
 use PH7\UserCore;
 
 /**
- * This class provides functions of numbers against the XSS (Cross-site scripting) vulnerability.
+ * This class provides functions of numbers against XSS (Cross-site scripting) vulnerability.
  * PH Security Token (PHST)
  */
 final class Token
