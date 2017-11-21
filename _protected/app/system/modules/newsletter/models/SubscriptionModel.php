@@ -15,7 +15,7 @@ class SubscriptionModel extends UserCoreModel
     /**
      * Get all Active Subscribers (it is required by the law to send emails only to the confirmed opt-in subscribers).
      *
-     * @return object
+     * @return \stdClass
      */
     public function getSubscribers()
     {
@@ -23,6 +23,7 @@ class SubscriptionModel extends UserCoreModel
         $rStmt->execute();
         $oRow = $rStmt->fetchAll(\PDO::FETCH_OBJ);
         Db::free($rStmt);
+
         return $oRow;
     }
 
