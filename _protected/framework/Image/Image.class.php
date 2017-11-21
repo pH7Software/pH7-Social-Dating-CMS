@@ -117,7 +117,7 @@ class Image
             $this->iHeight = imagesy($this->rImage);
 
             // Automatic resizing if the image is too large
-            if ($this->iWidth > $this->iMaxWidth OR $this->iHeight > $this->iMaxHeight) {
+            if ($this->iWidth > $this->iMaxWidth || $this->iHeight > $this->iMaxHeight) {
                 $this->dynamicResize($this->iMaxWidth, $this->iMaxHeight);
             }
 
@@ -201,15 +201,15 @@ class Image
      */
     public function dynamicResize($iNewWidth, $iNewHeight)
     {
-        if ($iNewHeight > $iNewWidth OR ($iNewHeight == $iNewWidth AND $this->iHeight < $this->iWidth)) {
+        if ($iNewHeight > $iNewWidth || ($iNewHeight == $iNewWidth && $this->iHeight < $this->iWidth)) {
             // Taller image
-            $this->resize(NULL, $iNewHeight);
+            $this->resize(null, $iNewHeight);
 
             $iW = ($iNewWidth - $this->iWidth) / -2;
             $this->crop($iW, 0, $iNewWidth, $iNewHeight);
         } else {
             // Wider image
-            $this->resize($iNewWidth, NULL);
+            $this->resize($iNewWidth, null);
 
             $iY = ($iNewHeight - $this->iHeight) / -2;
             $this->crop(0, $iY, $iNewWidth, $iNewHeight);
