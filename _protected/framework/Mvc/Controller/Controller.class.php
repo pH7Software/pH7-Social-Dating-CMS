@@ -144,7 +144,7 @@ abstract class Controller extends Core
         if (!\PH7\UserCore::auth()) {
             $sErrorDesc .=
                 '<a href="' . Uri::get('user', 'signup', 'step1') . '">' . t('Join Now') . '</a><br />
-             <a href="' . Uri::get('user', 'main', 'login') . '">' . t('Login') . '</a><br />';
+                <a href="' . Uri::get('user', 'main', 'login') . '">' . t('Login') . '</a><br />';
         }
 
         $sErrorDesc .= '<a href="javascript:history.back();">' . t('Go back to the previous page') . '</a><br />';
