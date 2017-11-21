@@ -12,16 +12,17 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class FriendModel extends FriendCoreModel
 {
-    private $_sStatus;
+    /** @var string */
+    private $sStatus;
 
     /**
      * Check exists in the friends list
      *
-     * @param integer $iProfileId
-     * @param integer $iFriendId
-     * @param integer|string $mPending 'all' = select the friends that are approved and pending, 1 = approved or 0 = pending friend requests. Default value is 'all'
+     * @param int $iProfileId
+     * @param int $iFriendId
+     * @param int|string $mPending 'all' = select the friends that are approved and pending, 1 = approved or 0 = pending friend requests.
      *
-     * @return boolean
+     * @return bool
      */
     public function inList($iProfileId, $iFriendId, $mPending = 'all')
     {
@@ -73,29 +74,29 @@ class FriendModel extends FriendCoreModel
                 $oRow = $rStmt->execute();
                 Db::free($rStmt);
                 if (!$oRow) {
-                    $this->_sStatus = 'error';
+                    $this->sStatus = 'error';
                 } else {
-                    $this->_sStatus = 'success';
+                    $this->sStatus = 'success';
                 }
             } else {
-                $this->_sStatus = 'friend_exists';
+                $this->sStatus = 'friend_exists';
             }
         } else {
-            $this->_sStatus = 'id_does_not_exist';
+            $this->sStatus = 'id_does_not_exist';
         }
 
         unset($oExistsModel); // Destruction of the object
 
-        return $this->_sStatus;
+        return $this->sStatus;
     }
 
     /**
      * Approve friends
      *
-     * @param integer $iProfileId
-     * @param integer $iFriendId
+     * @param int $iProfileId
+     * @param int $iFriendId
      *
-     * @return boolean
+     * @return bool
      */
     public function approval($iProfileId, $iFriendId)
     {
