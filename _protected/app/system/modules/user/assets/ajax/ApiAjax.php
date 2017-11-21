@@ -12,20 +12,21 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 
 class ApiAjax
 {
     /** @var UserCore */
-    private $_oUser;
+    private $oUser;
 
     /** @var mixed */
     private $mOutput;
 
     public function __construct()
     {
-        $this->_oUser = new UserCore;
-        $this->_init();
+        $this->oUser = new UserCore;
+        $this->init();
     }
 
     public function display()
@@ -33,21 +34,21 @@ class ApiAjax
         return $this->mOutput;
     }
 
-    private function _init()
+    private function init()
     {
-        $oHttpRequest = new Http;
+        $oHttpRequest = new HttpRequest;
         $sParam = $oHttpRequest->post('param');
         $sType = $oHttpRequest->post('type');
         unset($oHttpRequest);
 
         switch ($sType) {
             case 'profile_link':
-                $this->mOutput = $this->_oUser->getProfileLink($sParam);
+                $this->mOutput = $this->oUser->getProfileLink($sParam);
                 break;
 
             // If we receive another invalid value, we display a message with a HTTP header.
             default:
-                Framework\Http\Http::setHeadersByCode(400);
+                Http::setHeadersByCode(400);
                 exit('Bad Request Error!');
         }
     }
