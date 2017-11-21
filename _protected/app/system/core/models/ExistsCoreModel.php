@@ -92,5 +92,4 @@ class ExistsCoreModel extends Model
         $rExists->execute();
         return $rExists->fetchColumn() == 1;
     }
-
 }

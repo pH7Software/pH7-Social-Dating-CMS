@@ -7,6 +7,7 @@
  */
 
 namespace PH7;
+
 defined('PH7') or die('Restricted access');
 
 use PH7\Framework\Mail\Mail;
@@ -17,7 +18,6 @@ use PH7\Framework\Url\Header;
 
 class MailFormProcess extends Form
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -87,5 +87,4 @@ class MailFormProcess extends Form
 
         return (new Mail)->send($aInfo, $sMessageHtml);
     }
-
 }
