@@ -32,6 +32,9 @@ class AdminEditFormProcess extends Form
 
         Game::clearCache();
 
-        Header::redirect(Uri::get('game', 'main', 'index'), t('The game has been successfully updated'));
+        Header::redirect(
+            Uri::get('game', 'main', 'index'),
+            t('The game has been successfully updated')
+        );
     }
 }
