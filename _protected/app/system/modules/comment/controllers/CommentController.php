@@ -84,7 +84,7 @@ class CommentController extends Controller
 
             $this->view->comment = $oComment;
         } else {
-            $this->_notFound();
+            $this->notFound();
         }
         $this->output();
     }
@@ -105,7 +105,7 @@ class CommentController extends Controller
 
             $this->view->com = $oComment;
         } else {
-            $this->_notFound();
+            $this->notFound();
             // Modified the message error
             $this->view->error = t('No comments yet, please return to the <a href="%0%">previous page</a>.', 'javascript:history.back();');
         }
@@ -156,7 +156,7 @@ class CommentController extends Controller
      *
      * @return void
      */
-    private function _notFound()
+    private function notFound()
     {
         Http::setHeadersByCode(404);
 
