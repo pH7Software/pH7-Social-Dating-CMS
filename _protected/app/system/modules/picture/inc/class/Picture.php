@@ -8,6 +8,12 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
+
 class Picture extends PictureCore
 {
+    public static function clearCache()
+    {
+        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+    }
 }

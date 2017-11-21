@@ -9,7 +9,6 @@
 namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
-use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
@@ -206,7 +205,7 @@ class MainController extends Controller
             $this->httpRequest->post('video_link')
         );
 
-        $this->clearCache();
+        Video::clearCache();
 
 
         Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')),
@@ -221,7 +220,7 @@ class MainController extends Controller
         $sDir = PH7_PATH_PUBLIC_DATA_SYS_MOD . 'video/file/' . $this->session->get('member_username') . PH7_DS . $this->httpRequest->post('album_id') . PH7_DS;
         $this->file->deleteDir($sDir);
 
-        $this->clearCache();
+        Video::clearCache();
 
         Header::redirect(Uri::get('video', 'main', 'albums'), t('Your album has been removed.'));
     }
@@ -292,13 +291,5 @@ class MainController extends Controller
 
         $this->view->page_title = $this->view->h2_title = $this->sTitle;
         $this->view->error = $this->sTitle . $sErrMsg;
-    }
-
-    /**
-     * @return void
-     */
-    private function clearCache()
-    {
-        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
     }
 }

@@ -70,7 +70,7 @@ class AlbumFormProcess extends Form
 
             $oPicture->save($sPath . $sFileName);
 
-            $this->clearCache();
+            Picture::clearCache();
 
             Header::redirect(Uri::get('picture', 'main', 'addphoto', $iLastAlbumId));
         }
@@ -85,10 +85,5 @@ class AlbumFormProcess extends Form
             // The photo doesn't seem suitable for everyone. Overwrite "$iApproved" and set for moderation
             $this->iApproved = '0';
         }
-    }
-
-    private function clearCache()
-    {
-        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
     }
 }

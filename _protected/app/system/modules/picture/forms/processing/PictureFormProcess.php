@@ -140,9 +140,4 @@ class PictureFormProcess extends Form
             $this->iApproved = '0';
         }
     }
-
-    private function clearCache()
-    {
-        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
-    }
 }
