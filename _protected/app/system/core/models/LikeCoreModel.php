@@ -21,7 +21,8 @@ class LikeCoreModel extends Model
         $this->cache->start(self::CACHE_GROUP, 'select' . $sKey, 3600 * 168);
 
         if (!$oData = $this->cache->get()) {
-            $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Likes') . 'WHERE keyId =:key LIMIT 1');
+            $sSqlQuery = 'SELECT * FROM' . Db::prefix('Likes') . 'WHERE keyId =:key LIMIT 1';
+            $rStmt = Db::getInstance()->prepare($sSqlQuery);
             $rStmt->bindValue(':key', $sKey, \PDO::PARAM_STR);
             $rStmt->execute();
             $oData = $rStmt->fetchAll(\PDO::FETCH_OBJ);
@@ -34,18 +35,25 @@ class LikeCoreModel extends Model
 
     public function update($sKey, $fLastIp)
     {
-        $rStmt = Db::getInstance()->prepare('UPDATE' . Db::prefix('Likes') . 'SET votes = votes + 1 , lastVote = NOW() , lastIp =:lastIp WHERE keyId =:key');
+        $sSqlQuery = 'UPDATE' . Db::prefix('Likes') .
+            'SET votes = votes + 1 , lastVote = NOW() , lastIp =:lastIp WHERE keyId =:key';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':key', $sKey, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastIp', $fLastIp, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
 
     public function insert($sKey, $fLastIp)
     {
-        $rStmt = Db::getInstance()->prepare('INSERT INTO' . Db::prefix('Likes') . 'SET keyId =:key ,votes=1 , lastVote = NOW(), lastIp =:lastIp');
+        $sSqlQuery = 'INSERT INTO' . Db::prefix('Likes') .
+            'SET keyId =:key ,votes=1 , lastVote = NOW(), lastIp =:lastIp';
+
+        $rStmt = Db::getInstance()->prepare($sSqlQuery);
         $rStmt->bindValue(':key', $sKey, \PDO::PARAM_STR);
         $rStmt->bindValue(':lastIp', $fLastIp, \PDO::PARAM_INT);
+
         return $rStmt->execute();
     }
-
 }
