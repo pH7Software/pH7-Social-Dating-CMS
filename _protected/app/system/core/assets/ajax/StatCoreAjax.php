@@ -28,7 +28,7 @@ class StatCoreAjax
     public function __construct()
     {
         $this->oUserModel = new UserCoreModel;
-        $this->_init();
+        $this->init();
     }
 
     public function display()
@@ -36,7 +36,7 @@ class StatCoreAjax
         return $this->mOutput;
     }
 
-    private function _init()
+    private function init()
     {
         $sType = (new HttpRequest)->post('type');
 
