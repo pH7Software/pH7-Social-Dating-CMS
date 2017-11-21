@@ -138,16 +138,20 @@ class VideoFormProcess extends Form
             $iApproved
         );
 
-        $this->clearCache();
+        Video::clearCache();
 
         $sModerationText = t('Your video has been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
-        $sText = t('Your video has been added successfully!');
+        $sText = t('Your video has been successfully added!');
         $sMsg = ($iApproved == '0') ? $sModerationText : $sText;
-        Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
-    }
 
-    private function clearCache()
-    {
-        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+        Header::redirect(
+            Uri::get(
+                'video',
+                'main',
+                'album',
+                $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId
+            ),
+            $sMsg
+        );
     }
 }

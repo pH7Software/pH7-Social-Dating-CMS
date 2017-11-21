@@ -119,12 +119,20 @@ class PictureFormProcess extends Form
             );
         }
 
-        $this->clearCache();
+        Picture::clearCache();
 
         $sModerationText = t('Your photo(s) has/have been received. It will not be visible until it is approved by our moderators. Please do not send a new one.');
-        $sText = t('Your photo(s) has/have been added successfully!');
+        $sText = t('Your photo(s) has/have been successfully added!');
         $sMsg = ($this->iApproved == '0') ? $sModerationText : $sText;
-        Header::redirect(Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId), $sMsg);
+
+        Header::redirect(
+            Uri::get('picture',
+                'main',
+                'album',
+                $this->session->get('member_username') . ',' . $sAlbumTitle . ',' . $iAlbumId
+            ),
+            $sMsg
+        );
     }
 
     /**

@@ -23,14 +23,24 @@ class EditPictureFormProcess extends Form
         $sPictureTitle = $this->httpRequest->post('title');
         $iPictureId = (int)$this->httpRequest->get('picture_id');
 
-        (new PictureModel)->updatePhoto($this->session->get('member_id'), $iAlbumId, $iPictureId, $sPictureTitle, $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        $this->clearCache();
+        (new PictureModel)->updatePhoto(
+            $this->session->get('member_id'),
+            $iAlbumId,
+            $iPictureId,
+            $sPictureTitle,
+            $this->httpRequest->post('description'),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+        );
 
-        Header::redirect(Uri::get('picture', 'main', 'photo', $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sPictureTitle . ',' . $iPictureId), t('Your photo has been updated successfully!'));
-    }
+        Picture::clearCache();
 
-    private function clearCache()
-    {
-        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        Header::redirect(
+            Uri::get('picture',
+                'main',
+                'photo',
+                $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sPictureTitle . ',' . $iPictureId
+            ),
+            t('Your photo has been successfully updated!')
+        );
     }
 }
