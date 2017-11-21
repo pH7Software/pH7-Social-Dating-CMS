@@ -113,7 +113,7 @@ class Import
 
         // Hack to remove the backslash
         if (!empty($sNameSpace)) {
-            $sFile = str_replace($sFile . '\\', '', $sClassName);
+            $sFile = str_replace($sNameSpace . '\\', '', $sFile);
         }
 
         if (is_file($sFile)) {
