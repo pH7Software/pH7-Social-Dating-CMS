@@ -9,7 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Config\Config;
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
 
@@ -32,7 +32,7 @@ class EditPictureForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_picture', 'form_edit_picture'));
         $oForm->addElement(new \PFBC\Element\Token('edit_picture'));
 
-        $oHttpRequest = new Http;
+        $oHttpRequest = new HttpRequest;
         $oPhoto = (new PictureModel)->photo((new Session)->get('member_id'), $oHttpRequest->get('album_id'), $oHttpRequest->get('picture_id'), 1, 0, 1);
         unset($oHttpRequest);
 
