@@ -9,19 +9,18 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
-use stdClass;
 
 abstract class WriteDesignCoreModel
 {
     /**
      * Generate the categories links.
      *
-     * @param stdClass $oCategories Categories queries.
+     * @param array $aCategories Categories queries.
      * @param string $sMod Module name. Choose between 'blog' and 'note'.
      *
      * @return void Output the categories list.
      */
-    public static function categories(stdClass $oCategories, $sMod)
+    public static function categories(array $aCategories, $sMod)
     {
         WriteCore::checkMod($sMod);
 
@@ -29,7 +28,7 @@ abstract class WriteDesignCoreModel
 
         echo '<p class="small">', t('Categories:'), ' <span class="italic">';
 
-        foreach ($oCategories as $oCategory) {
+        foreach ($aCategories as $oCategory) {
             $sContents .= '<a href="' . Uri::get($sMod, 'main', 'category', $oCategory->name, ',title,asc') . '" data-load="ajax">' . $oCategory->name . '</a> &bull; ';
         }
 
