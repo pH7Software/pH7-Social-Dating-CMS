@@ -42,7 +42,7 @@ class CommentFormProcess extends Form
                 /* Clean All Data of CommentModel Cache */
                 (new Framework\Cache\Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
 
-                Header::redirect(Uri::get('comment', 'comment', 'read', $sTable . ',' . $iRecipientId), t('The comment has been sent successfully!'));
+                Header::redirect(Uri::get('comment', 'comment', 'read', $sTable . ',' . $iRecipientId), t('The comment has been successfully sent!'));
             }
         }
         unset($oCommentModel);

@@ -17,7 +17,7 @@ class ContactFormProcess
         if (!$bSend) {
             \PFBC\Form::setError('form_contact', Form::errorSendingEmail());
         } else {
-            \PFBC\Form::setSuccess('form_contact', t('Your message has been sent successfully!'));
+            \PFBC\Form::setSuccess('form_contact', t('Your message has been successfully sent!'));
         }
     }
 }
