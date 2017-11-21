@@ -12,6 +12,19 @@ use PH7\Framework\Cache\Cache;
 
 class Picture extends PictureCore
 {
+    /**
+     * Clean picture title, since it cannot have blank space before the beginning and ending,
+     * otherwise the URL pattern won't work.
+     *
+     * @param string $sTitle
+     *
+     * @return string
+     */
+    public static function cleanTitle($sTitle)
+    {
+        return trim($sTitle);
+    }
+
     public static function clearCache()
     {
         (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
