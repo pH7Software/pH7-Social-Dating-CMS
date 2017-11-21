@@ -36,7 +36,7 @@ class NoteModel extends NoteCoreModel
 
             $rStmt = Db::getInstance()->prepare($sSql);
 
-            if (isset($iNoteId)) {
+            if ($iNoteId !== null) {
                 $rStmt->bindParam(':noteId', $iNoteId, \PDO::PARAM_INT);
             }
 
