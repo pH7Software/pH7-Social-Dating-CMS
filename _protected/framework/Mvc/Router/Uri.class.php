@@ -13,6 +13,7 @@ namespace PH7\Framework\Mvc\Router;
 defined('PH7') or exit('Restricted access');
 
 use DOMDocument;
+use DOMElement;
 use PH7\Framework\File\Exception as FileException;
 use PH7\Framework\Parse\Url;
 use PH7\Framework\Pattern\Statik;
@@ -87,11 +88,7 @@ class Uri
                 preg_match('#^' . $oRoute->getAttribute('controller') . '$#', $sController) &&
                 preg_match('#^' . $oRoute->getAttribute('action') . '$#', $sAction)
             ) {
-                // Strip the special characters
-                $sUri = $oRoute->getAttribute('url');
-                $sUri = str_replace('\\', '', $sUri);
-                $sUri = preg_replace('#\(.+\)#', '', $sUri);
-                $sUri = preg_replace('#([/\?]+)$#', '', $sUri);
+                $sUri = self::stripSpecialCharacters($oRoute);
 
                 return PH7_URL_ROOT . $sUri . $sVars;
             }
@@ -173,6 +170,23 @@ class Uri
         }
         unset($aVars);
 
-        return Url::clean($sVars, static::$bFullClean);
+        return Url::clean($sVars, self::$bFullClean);
+    }
+
+    /**
+     * Strip the special characters from the URI.
+     *
+     * @param DOMElement $oRoute
+     *
+     * @return string
+     */
+    private static function stripSpecialCharacters(DOMElement $oRoute)
+    {
+        $sUri = $oRoute->getAttribute('url');
+        $sUri = str_replace('\\', '', $sUri);
+        $sUri = preg_replace('#\(.+\)#', '', $sUri);
+        $sUri = preg_replace('#([/\?]+)$#', '', $sUri);
+
+        return $sUri;
     }
 }
