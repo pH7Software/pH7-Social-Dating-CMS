@@ -39,10 +39,12 @@ class CommentFormProcess extends Form
             if (!$oCommentModel->add($sComment, $iRecipientId, $iSenderId, 1, $sCurrentTime, $sTable)) {
                 \PFBC\Form::setError('form_comment', t('Oops! Error when adding comment.'));
             } else {
-                /* Clean All Data of CommentModel Cache */
-                (new Framework\Cache\Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
+                CommentCore::clearCache();
 
-                Header::redirect(Uri::get('comment', 'comment', 'read', $sTable . ',' . $iRecipientId), t('The comment has been successfully sent!'));
+                Header::redirect(
+                    Uri::get('comment', 'comment', 'read', $sTable . ',' . $iRecipientId),
+                    t('The comment has been successfully sent!')
+                );
             }
         }
         unset($oCommentModel);
