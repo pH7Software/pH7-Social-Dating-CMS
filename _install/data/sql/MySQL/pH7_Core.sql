@@ -1056,7 +1056,7 @@ INSERT INTO pH7_Settings (settingName, settingValue, description, settingGroup) 
 ('banWordReplace', '[removed]',  '',  'security'),
 ('securityToken', 0, '0 to disable or 1 to enable the CSRF security token in the forms', 'security'),
 ('securityTokenLifetime', 720, 'Time in seconds to the CSRF security token. Default 720 seconds (12 mins)', 'security'),
-('DDoS', 0,  '0 to disabled or 1 to enabled the DDoS attack protection',  'security'),
+('DDoS', 0,  '0 to disabled or 1 to enabled DDoS attack protection',  'security'),
 ('isSiteValidated', 0,  '0 = site not validated | 1 = site validated',  'security'),
 ('cleanMsg', 0, 'Delete messages older than X days. 0 = Disable', 'pruning'),
 ('cleanComment', 0, 'Delete comments older than X days. 0 = Disable', 'pruning'),
