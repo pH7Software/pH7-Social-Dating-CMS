@@ -47,10 +47,10 @@ class FriendModel extends FriendCoreModel
     /**
      * Add a friend
      *
-     * @param integer $iProfileId = user Id
-     * @param integer $iFriendId friend id
+     * @param int $iProfileId = user Id
+     * @param int $iFriendId friend id
      * @param string $sRequestDate Date of the Request Friend.
-     * @param integer $iPending 1 = approved or 0 = pending friend requests. Default value is 1
+     * @param int $iPending 1 = approved or 0 = pending friend requests.
      *
      * @return string Status in word: 'error', 'id_does_not_exist', 'friend_exists' or 'success'
      */
@@ -114,10 +114,10 @@ class FriendModel extends FriendCoreModel
     /**
      * Delete a friend
      *
-     * @param integer $iProfileId
-     * @param integer $iFriendId
+     * @param int $iProfileId
+     * @param int $iFriendId
      *
-     * @return boolean
+     * @return bool
      */
     public function delete($iProfileId, $iFriendId)
     {
