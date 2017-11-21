@@ -10,9 +10,8 @@ namespace PH7;
 
 class GeoIpCoreModel extends Framework\Mvc\Model\Engine\Model
 {
-
     /*
-     *  In developing
+     *  In development. Feel free to help me! <https://github.com/pH7Software/pH7-Social-Dating-CMS>
      */
 
     public function getCountry($sWhere)
