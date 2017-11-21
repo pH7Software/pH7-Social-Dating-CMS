@@ -35,12 +35,13 @@ class AdminController extends MainController
         $this->sTitle = t('Edit Game');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
     public function delete()
     {
-        if ($this->httpRequest->postExists(array('id', 'thumb', 'file'))) {
+        if ($this->httpRequest->postExists(['id', 'thumb', 'file'])) {
             $this->oGameModel->delete($this->httpRequest->post('id', 'int'));
 
             $aFiles = [
