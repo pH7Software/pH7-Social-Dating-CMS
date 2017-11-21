@@ -23,6 +23,7 @@ use PH7\Framework\Session\Session;
 class SysVar
 {
     const REGEX_NOT_PARSING = '/#!.+!#/';
+    const NOT_PARSING_DELIMITERS = ['#!', '!#'];
 
     /** @var string */
     private $sVar;
@@ -88,7 +89,7 @@ class SysVar
 
     private function removeNotParsingDelimiters()
     {
-        $this->sVar = str_replace(array('#!', '!#'), '', $this->sVar);
+        $this->sVar = str_replace(self::NOT_PARSING_DELIMITERS, '', $this->sVar);
     }
 
     /**
