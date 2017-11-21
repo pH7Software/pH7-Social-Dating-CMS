@@ -199,7 +199,12 @@ class MainController extends Controller
         Picture::clearCache();
 
         Header::redirect(
-            Uri::get('picture', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')),
+            Uri::get(
+                'picture',
+                'main',
+                'album',
+                $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')
+            ),
             t('Your photo has been removed.')
         );
     }
@@ -213,7 +218,14 @@ class MainController extends Controller
 
         Picture::clearCache();
 
-        Header::redirect(Uri::get('picture', 'main', 'albums'), t('Your album has been removed.'));
+        Header::redirect(
+            Uri::get(
+            'picture',
+            'main',
+            'albums'
+            ),
+            t('Your album has been removed.')
+        );
     }
 
     public function search()

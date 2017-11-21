@@ -70,7 +70,14 @@ class AlbumFormProcess extends Form
 
             Video::clearCache();
 
-            Header::redirect(Uri::get('video', 'main', 'addvideo', $iLastAlbumId));
+            Header::redirect(
+                Uri::get(
+                    'video',
+                    'main',
+                    'addvideo',
+                    $iLastAlbumId
+                )
+            );
         }
     }
 

@@ -71,7 +71,13 @@ class AlbumFormProcess extends Form
 
             Picture::clearCache();
 
-            Header::redirect(Uri::get('picture', 'main', 'addphoto', $iLastAlbumId));
+            Header::redirect(
+                Uri::get('picture',
+                    'main',
+                    'addphoto',
+                    $iLastAlbumId
+                )
+            );
         }
     }
 
