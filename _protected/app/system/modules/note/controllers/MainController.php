@@ -25,6 +25,7 @@ class MainController extends Controller
     const ITEMS_MENU_TOP_RATING = 5;
     const ITEMS_MENU_AUTHORS = 5;
     const ITEMS_MENU_CATEGORIES = 10;
+    const MAX_CATEGORIES = 300;
 
     /** @var NoteModel */
     protected $oNoteModel;
@@ -101,7 +102,7 @@ class MainController extends Controller
 
                     /***** CONTENTS *****/
                     'h1_title' => Ban::filterWord($oPost->title),
-                    'categories' => $this->oNoteModel->getCategory($oPost->noteId, 0, 300),
+                    'categories' => $this->oNoteModel->getCategory($oPost->noteId, 0, self::MAX_CATEGORIES),
 
                     /** Date **/
                     'dateTime' => $this->dateTime,

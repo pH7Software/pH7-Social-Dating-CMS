@@ -15,6 +15,8 @@ use PH7\Framework\Url\Header;
 
 class AdminEditForm
 {
+    const MAX_CATEGORIES = 500;
+
     public static function display()
     {
         if (isset($_POST['submit_edit'])) {
@@ -30,7 +32,7 @@ class AdminEditForm
         $iGameId = $oHttpRequest->get('id', 'int');
         $oGame = $oGameModel->get(strstr($oHttpRequest->get('title'), '-', true), $iGameId, 0, 1);
 
-        $oCategoriesData = $oGameModel->getCategory(null, 0, 500);
+        $oCategoriesData = $oGameModel->getCategory(null, 0, self::MAX_CATEGORIES);
         $aCategoriesName = array();
         foreach ($oCategoriesData as $oId) {
             $aCategoriesName[$oId->categoryId] = $oId->name;

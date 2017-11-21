@@ -13,6 +13,8 @@ use PH7\Framework\Url\Header;
 
 class AdminForm
 {
+    const MAX_CATEGORIES = 500;
+
     public static function display()
     {
         if (isset($_POST['submit_game'])) {
@@ -23,7 +25,7 @@ class AdminForm
             Header::redirect();
         }
 
-        $oCategoriesData = (new GameModel)->getCategory(null, 0, 500);
+        $oCategoriesData = (new GameModel)->getCategory(null, 0, self::MAX_CATEGORIES);
         $aCategoriesName = array();
         foreach ($oCategoriesData as $oId) {
             $aCategoriesName[$oId->categoryId] = $oId->name;
