@@ -118,6 +118,7 @@ class MainController extends Controller
 
         $this->view->action = '';
         $this->manualTplInclude('index.tpl');
+
         $this->output();
     }
 
@@ -154,6 +155,7 @@ class MainController extends Controller
         $this->sTitle = t("Search %0%'s friends", $this->sUsername);
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 }

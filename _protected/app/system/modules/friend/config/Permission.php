@@ -16,7 +16,8 @@ class Permission extends PermissionCore
     {
         parent::__construct();
 
-        if (!UserCore::auth() && $this->registry->controller === 'FriendController' && $this->registry->action === 'mutual') {
+        if (!UserCore::auth() && $this->registry->controller === 'FriendController' &&
+            $this->registry->action === 'mutual') {
             $this->signUpRedirect();
         }
     }
