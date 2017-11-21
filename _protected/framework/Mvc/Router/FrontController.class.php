@@ -679,8 +679,9 @@ final class FrontController
     private function indexFileRouter()
     {
         // The following code will be useless when pH7CMS will be able to work without mod_rewrite \\
-        if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE)
+        if ($this->oHttpRequest->currentUrl() === PH7_URL_ROOT . static::INDEX_FILE) {
             $this->notFound('If we\'re in production mode, we display an error page if it on the index file to indicate no file extension in order to avoid utilization of a security vulnerability  in the language.');
+        }
 
         /*
 
