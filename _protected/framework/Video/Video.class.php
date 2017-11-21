@@ -23,6 +23,8 @@ use PH7\Framework\File\Upload;
 
 class Video extends Upload
 {
+    const MP4_TYPE = 'mp4';
+
     /** @var File */
     private $oFile;
 
@@ -121,8 +123,9 @@ class Video extends Upload
         $sParams = ''; // By default, we don't use parameter
 
         $sType = $this->oFile->getFileExt($sFile); // Get the new format
-        if ($sType == 'mp4')
+        if ($sType === self::MP4_TYPE) {
             $sParams = '-c copy -copyts';
+        }
 
         exec("$this->sFfmpegPath -i {$this->aFile['tmp_name']} $sParams $sFile");
 
