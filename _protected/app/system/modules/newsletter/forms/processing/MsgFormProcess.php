@@ -7,19 +7,19 @@
  */
 
 namespace PH7;
+
 defined('PH7') or exit('Restricted access');
 
 class MsgFormProcess
 {
-
     public function __construct()
     {
         $aData = (new Newsletter)->sendMessages();
 
-        if (!$aData['status'])
+        if (!$aData['status']) {
             \PFBC\Form::setError('form_msg', Form::errorSendingEmail());
-        else
+        } else {
             \PFBC\Form::setSuccess('form_msg', nt('%n% newsletter has been sent successfully', '%n% newsletters were sent successfully!', $aData['nb_mail_sent']));
+        }
     }
-
 }

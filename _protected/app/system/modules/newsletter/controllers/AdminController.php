@@ -34,6 +34,7 @@ class AdminController extends Controller
         $this->sTitle = t('Newsletter');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
@@ -42,6 +43,7 @@ class AdminController extends Controller
         $this->sTitle = t('Search Subscribers');
         $this->view->page_title = $this->sTitle;
         $this->view->h2_title = $this->sTitle;
+
         $this->output();
     }
 
