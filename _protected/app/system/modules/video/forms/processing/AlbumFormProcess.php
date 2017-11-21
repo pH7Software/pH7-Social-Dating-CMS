@@ -69,7 +69,7 @@ class AlbumFormProcess extends Form
 
             $oPicture->save($sPath . $sFileName);
 
-            $this->clearCache();
+            Video::clearCache();
 
             Header::redirect(Uri::get('video', 'main', 'addvideo', $iLastAlbumId));
         }
@@ -81,10 +81,5 @@ class AlbumFormProcess extends Form
             // The image doesn't seem suitable for everyone. Overwrite "$iApproved" and set the image for approval
             $this->iApproved = '0';
         }
-    }
-
-    private function clearCache()
-    {
-        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
     }
 }

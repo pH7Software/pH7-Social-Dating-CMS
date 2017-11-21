@@ -8,6 +8,12 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
+
 class Video extends VideoCore
 {
+    public static function clearCache()
+    {
+        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+    }
 }
