@@ -23,21 +23,26 @@ if (AdminCore::auth() || UserCore::auth() || AffiliateCore::auth()) {
     $oDesign->usefulHtmlHeader();
     echo '<div class="center">';
 
-    if ($oHttpRequest->getExists(array('mod', 'ctrl', 'act', 'id'))) {
+    if ($oHttpRequest->getExists(['mod', 'ctrl', 'act', 'id'])) {
         $sLabel = $oHttpRequest->get('label');
         $sMod = $oHttpRequest->get('mod');
         $sCtrl = $oHttpRequest->get('ctrl');
         $sAct = $oHttpRequest->get('act');
         $mId = $oHttpRequest->get('id');
 
-        ConfirmCoreForm::display(array('label' => Url::decode($sLabel), 'module' => $sMod, 'controller' => $sCtrl, 'action' => $sAct, 'id' => $mId));
+        ConfirmCoreForm::display(['label' => Url::decode($sLabel), 'module' => $sMod, 'controller' => $sCtrl, 'action' => $sAct, 'id' => $mId]);
     } else {
-        echo '<p>' . t('Bad parameters in the URL!') . '</p>';
+        echo '<p>' . t('Wrong parameters in the URL!') . '</p>';
     }
 
     echo '</div>';
     $oDesign->htmlFooter();
     unset($oHttpRequest, $oDesign);
 } else {
-    Header::redirect(Uri::get('user', 'signup', 'step1'), t('You must be registered to report an abuse.'));
+    Header::redirect(
+        Uri::get('user',
+            'signup',
+            'step1'),
+        t('You must be registered to report an abuse.')
+    );
 }
