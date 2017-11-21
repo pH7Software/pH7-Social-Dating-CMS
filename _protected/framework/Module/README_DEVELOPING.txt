@@ -1,7 +1,5 @@
-This integration library is still under development, if you are a developer and you want to help us and join our volunteer team of developers to continue development of this library, you are welcome!
+This integration library is still under development.
+If you are a developer and you want to help building it, please fork it at: https://github.com/pH7Software/pH7-Social-Dating-CMS
 
-Please contact us by email: ph7software {AT} gmail {DOT} com
-
-
-Thank you,
-The pH7 developers team.
+Thank you!
+Pierre-Henry Soria
