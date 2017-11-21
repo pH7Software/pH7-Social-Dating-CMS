@@ -31,13 +31,13 @@ class BlogModel extends BlogCoreModel
             if ($bCount) {
                 $sSql = 'SELECT *, COUNT(c.blogId) AS totalCatBlogs FROM' . Db::prefix('BlogsDataCategories') . 'AS d INNER JOIN' . Db::prefix('BlogsCategories') . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name ASC LIMIT :offset, :limit';
             } else {
-                $sSqlBlogId = (isset($iBlogId)) ? ' INNER JOIN ' . Db::prefix('BlogsCategories') . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
+                $sSqlBlogId = ($iBlogId !== null) ? ' INNER JOIN ' . Db::prefix('BlogsCategories') . 'AS c ON d.categoryId = c.categoryId WHERE c.blogId = :blogId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix('BlogsDataCategories') . 'AS d' . $sSqlBlogId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             }
 
             $rStmt = Db::getInstance()->prepare($sSql);
 
-            if (isset($iBlogId)) {
+            if ($iBlogId !== null) {
                 $rStmt->bindParam(':blogId', $iBlogId, \PDO::PARAM_INT);
             }
 

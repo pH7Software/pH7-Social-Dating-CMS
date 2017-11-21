@@ -30,7 +30,7 @@ class NoteModel extends NoteCoreModel
             if ($bCount) {
                 $sSql = 'SELECT *, COUNT(c.noteId) AS totalCatNotes FROM' . Db::prefix('NotesDataCategories') . 'AS d INNER JOIN' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId GROUP BY d.name ASC LIMIT :offset, :limit';
             } else {
-                $sSqlNoteId = (isset($iNoteId)) ? ' INNER JOIN ' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
+                $sSqlNoteId = ($iNoteId !== null) ? ' INNER JOIN ' . Db::prefix('NotesCategories') . 'AS c ON d.categoryId = c.categoryId WHERE c.noteId = :noteId ' : ' ';
                 $sSql = 'SELECT * FROM' . Db::prefix('NotesDataCategories') . 'AS d' . $sSqlNoteId . 'ORDER BY d.name ASC LIMIT :offset, :limit';
             }
 
