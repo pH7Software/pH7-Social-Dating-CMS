@@ -9,11 +9,11 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 
 // Abstract Class
-class LikeCoreModel extends Framework\Mvc\Model\Engine\Model
+class LikeCoreModel extends Model
 {
-
     const CACHE_GROUP = 'db/sys/core/like';
 
     public function select($sKey)
