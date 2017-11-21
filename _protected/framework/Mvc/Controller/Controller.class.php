@@ -25,6 +25,7 @@ use PH7\Framework\Mvc\Router\FrontController;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Page\Page;
 use PH7\Framework\Security\Ban\Ban;
+use PH7\Framework\Security\DDoS\Stop as DDoSStoper;
 
 abstract class Controller extends Core
 {
@@ -315,10 +316,10 @@ abstract class Controller extends Core
      *
      * @return void
      */
-    private function _ddosProtection()
+    private function ddosProtection()
     {
         if (!isDebug() && (bool)M\DbConfig::getSetting('DDoS')) {
-            $oDDoS = new \PH7\Framework\Security\DDoS\Stop;
+            $oDDoS = new DDoSStoper;
             if ($oDDoS->cookie() || $oDDoS->session()) {
                 $oDDoS->wait();
             }
