@@ -21,17 +21,8 @@ class Api
 {
     const URL_PATTERN = '(^https?://|www\.|\.[a-z]{2,4}/?(.+)?$)';
 
-    /** @var int */
-    protected $iWidth;
-
-    /** @var int */
-    protected $iHeight;
-
-    public function __construct()
-    {
-        $this->iWidth = 480;
-        $this->iHeight = 295;
-    }
+    const DEF_VIDEO_WIDTH = 480;
+    const DEF_VIDEO_HEIGHT = 295;
 
     /**
      * @param string $sUrl
@@ -122,8 +113,8 @@ class Api
         $sClass = $this->clear($sUrl);
 
         $sMedia = (isset($sMedia) ? $sMedia : 'movie');
-        $iWidth = (isset($iWidth) ? $iWidth : $this->iWidth);
-        $iHeight = (isset($iHeight) ? $iHeight : $this->iHeight);
+        $iWidth = (isset($iWidth) ? $iWidth : self::DEF_VIDEO_WIDTH);
+        $iHeight = (isset($iHeight) ? $iHeight : self::DEF_VIDEO_HEIGHT);
 
         switch ($sClass) {
             case 'youtube':
