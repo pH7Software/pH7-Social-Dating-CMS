@@ -464,26 +464,14 @@ class Image
     }
 
     /**
-     * Remove the attributes, temporary file and memory resources.
+     * Remove temporary file.
      */
     public function __destruct()
     {
-        // Remove the temporary image
+        // If it exists, remove the temporary image file
         (new File)->deleteFile($this->sFile);
 
         // Free the memory associated with the image
         @imagedestroy($this->rImage);
-
-        unset(
-            $this->sFile,
-            $this->sType,
-            $this->rImage,
-            $this->iWidth,
-            $this->iHeight,
-            $this->iMaxWidth,
-            $this->iMaxHeight,
-            $this->iQuality,
-            $this->iCompression
-        );
     }
 }
