@@ -67,8 +67,9 @@ class VideoCoreModel extends Model
         $rStmt = Db::getInstance()->prepare('DELETE FROM' . Db::prefix('Videos') . 'WHERE profileId=:profileId AND albumId=:albumId' . $sSqlVideoId);
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
-        if (!empty($iVideoId))
+        if (!empty($iVideoId)) {
             $rStmt->bindValue(':videoId', $iVideoId, \PDO::PARAM_INT);
+        }
 
         return $rStmt->execute();
     }
