@@ -22,7 +22,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
      *
      * @return \stdClass The advertisements data.
      */
-    public function get($mActive = 1, $iOffset, $iLimit, $sTable = 'Ads')
+    public function get($mActive = 1, $iOffset, $iLimit, $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
         $iOffset = (int)$iOffset;
@@ -49,7 +49,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
      *
      * @return bool
      */
-    public function add($sName, $sCode, $iWidth, $iHeight, $sTable = 'Ads')
+    public function add($sName, $sCode, $iWidth, $iHeight, $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
 
@@ -69,7 +69,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
      *
      * @return bool
      */
-    public function setStatus($iId, $iStatus, $sTable = 'Ads')
+    public function setStatus($iId, $iStatus, $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
 
@@ -86,7 +86,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
      *
      * @return bool
      */
-    public function delete($iId, $sTable = 'Ads')
+    public function delete($iId, $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
 
@@ -104,7 +104,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
      *
      * @return bool
      */
-    public function update($iId, $sName, $sCode, $sTable = 'Ads')
+    public function update($iId, $sName, $sCode, $sTable = AdsCore::AD_TABLE_NAME)
     {
         AdsCore::checkTable($sTable);
 
@@ -123,7 +123,7 @@ class AdsCoreModel extends Framework\Mvc\Model\Ads
      *
      * @return int
      */
-    public function total($sTable = 'Ads')
+    public function total($sTable = AdsCore::AD_TABLE_NAME)
     {
         $this->cache->start(self::CACHE_GROUP, 'total' . $sTable, 604800);
 
