@@ -16,9 +16,9 @@ defined('PH7') or exit('Restricted access');
 
 abstract class Code
 {
-    /**
-     * @var string $sText
-     */
+    const REGEX_SCRIPT_BLOCK_PATTERN = '/<script(.*?)>(.*?)<\/script>/is';
+
+    /** @var string */
     protected $sText;
 
     public function __construct()
@@ -33,7 +33,7 @@ abstract class Code
      */
     protected function sanitize()
     {
-        $this->sText = preg_replace('/<script(.*?)>(.*?)<\/script>/is', '', $this->sText);
+        $this->sText = preg_replace(static::REGEX_SCRIPT_BLOCK_PATTERN, '', $this->sText);
         $this->convert();
     }
 
