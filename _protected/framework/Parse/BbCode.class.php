@@ -22,6 +22,7 @@ class BbCode extends Code
     public function __construct($sText)
     {
         $this->sText = $sText;
+
         parent::__construct();
     }
 

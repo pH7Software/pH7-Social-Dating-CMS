@@ -24,7 +24,7 @@ class Emoticon extends EmoticonService
      * Parse the contents.
      *
      * @param string $sContents
-     * @param boolean $bIsDataUri
+     * @param bool $bIsDataUri
      *
      * @return string Contents
      */
