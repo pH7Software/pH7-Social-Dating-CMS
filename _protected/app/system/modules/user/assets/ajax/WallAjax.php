@@ -19,26 +19,27 @@ use PH7\Framework\Security\Ban\Ban;
 class WallAjax extends Core
 {
     /** @var WallModel */
-    private $_oWallModel;
+    private $oWallModel;
 
     /** @var AvatarDesignCore */
-    private $_oAvatarDesign;
+    private $oAvatarDesign;
 
     /** @var string */
-    private $_sMsg;
+    private $sMsg;
 
     /** @var mixed */
-    private $_mContents;
+    private $mContents;
 
     /** @var bool */
-    private $_bStatus;
+    private $bStatus;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->_oWallModel = new WallModel;
-        $this->_oAvatarDesign = new AvatarDesignCore; // Avatar Design Class
+        $this->oWallModel = new WallModel;
+        $this->oAvatarDesign = new AvatarDesignCore; // Avatar Design Class
+
         switch ($this->httpRequest->post('type')) {
             case 'show':
                 $this->show();
@@ -68,13 +69,13 @@ class WallAjax extends Core
 
     protected function show()
     {
-        $this->_mContents = $this->_oWallModel->get($this->session->get('member_id'), null, 0, 20);
-        if (!$this->_mContents) {
+        $this->mContents = $this->oWallModel->get($this->session->get('member_id'), null, 0, 20);
+        if (!$this->mContents) {
             echo '<p class="alert alert-danger">', t('Oops...! No news feed available at the moment.'), '</p>';
         } else {
-            foreach ($this->_mContents as $oRow) {
+            foreach ($this->mContents as $oRow) {
                 echo '<p>';
-                $this->_oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
+                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
                 echo '</p><p>', Emoticon::init(escape($this->str->extract(Ban::filterWord($oRow->post), 0, 80))), '</p>
                     <p class="small italic">', t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
 
@@ -88,16 +89,16 @@ class WallAjax extends Core
 
     protected function showCommentProfile()
     {
-        $this->_mContents = $this->_oWallModel->getCommentProfile(null, 0, 20);
-        if (!$this->_mContents) {
+        $this->mContents = $this->oWallModel->getCommentProfile(null, 0, 20);
+        if (!$this->mContents) {
             echo '<p class="alert alert-danger">', t('No news feed available at the moment. Start commenting some profiles!'), '</p>';
         } else {
-            foreach ($this->_mContents as $oRow) {
+            foreach ($this->mContents as $oRow) {
                 echo '<p>';
-                $this->_oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
+                $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
                 echo '</p><p>', UserParser::atUsernameToLink(escape($this->str->extract(Ban::filterWord($oRow->comment), 0, 80))), '</p>
                     <p class="small"><a href="', Uri::get('comment', 'comment', 'read', "profile,$oRow->recipient"), '#', $oRow->commentId, '">', t('Read more'), '</a> &bull; ',
-                    t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
+                t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
 
                 if (!empty($oRow->updatedDate)) {
                     echo ' &bull; ', t('Last Edited %0%', $this->dateTime->get($oRow->updatedDate)->dateTime());
@@ -109,38 +110,38 @@ class WallAjax extends Core
 
     protected function add()
     {
-        $this->_bStatus = $this->_oWallModel->add($this->session->get('member_id'), $this->httpRequest->post('post'));
-        if (!$this->_bStatus) {
-            $this->_sMsg = jsonMsg(0, t('Oops, your post could not be sent. Please try again later.'));
+        $this->bStatus = $this->oWallModel->add($this->session->get('member_id'), $this->httpRequest->post('post'));
+        if (!$this->bStatus) {
+            $this->sMsg = jsonMsg(0, t('Oops, your post could not be sent. Please try again later.'));
         } else {
-            $this->_sMsg = jsonMsg(1, t('Your post has been sent successfully!'));
+            $this->sMsg = jsonMsg(1, t('Your post has been sent successfully!'));
         }
 
-        echo $this->_sMsg;
+        echo $this->sMsg;
     }
 
     protected function edit()
     {
-        $this->_bStatus = $this->_oWallModel->edit($this->session->get('member_id'), $this->httpRequest->post('post'));
-        if (!$this->_bStatus) {
-            $this->_sMsg = jsonMsg(0, t('Oops, your post could not be saved. Please try again later.'));
+        $this->bStatus = $this->oWallModel->edit($this->session->get('member_id'), $this->httpRequest->post('post'));
+        if (!$this->bStatus) {
+            $this->sMsg = jsonMsg(0, t('Oops, your post could not be saved. Please try again later.'));
         } else {
-            $this->_sMsg = jsonMsg(1, t('Your post has been saved successfully!'));
+            $this->sMsg = jsonMsg(1, t('Your post has been saved successfully!'));
         }
 
-        echo $this->_sMsg;
+        echo $this->sMsg;
     }
 
     protected function delete()
     {
-        $this->_bStatus = $this->_oWallModel->delete($this->session->get('member_id'), $this->httpRequest->post('post'));
-        if (!$this->_bStatus) {
-            $this->_sMsg = jsonMsg(0, t('Your post does not exist anymore.'));
+        $this->bStatus = $this->oWallModel->delete($this->session->get('member_id'), $this->httpRequest->post('post'));
+        if (!$this->bStatus) {
+            $this->sMsg = jsonMsg(0, t('Your post does not exist anymore.'));
         } else {
-            $this->_sMsg = jsonMsg(1, t('Your post has been sent successfully!'));
+            $this->sMsg = jsonMsg(1, t('Your post has been sent successfully!'));
         }
 
-        echo $this->_sMsg;
+        echo $this->sMsg;
     }
 }
 
