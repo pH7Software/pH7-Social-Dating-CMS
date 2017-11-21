@@ -398,15 +398,4 @@ class Http extends \PH7\Framework\Http\Http
     {
         return preg_replace('#(\?|&)' . Secty\CSRF\Token::VAR_NAME . '\=[^/]+$#', '', $aType[$sKey]);
     }
-
-    public function __destruct()
-    {
-        unset(
-            $this->_sRequestUri,
-            $this->_sMethod,
-            $this->_aRequest,
-            $this->_aGet,
-            $this->_aPost
-        );
-    }
 }
