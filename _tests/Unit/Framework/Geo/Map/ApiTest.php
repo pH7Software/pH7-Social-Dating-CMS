@@ -6,7 +6,7 @@
  * @package          PH7 / Test / Unit / Framework / Geo / Map
  */
 
-namespace PH7\Test\Unit\Framework\Geo;
+namespace PH7\Test\Unit\Framework\Geo\Map;
 
 use PH7\Framework\Geo\Map\Api as ApiMap;
 use PHPUnit_Framework_TestCase;
