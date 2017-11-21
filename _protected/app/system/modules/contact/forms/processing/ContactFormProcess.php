@@ -10,15 +10,14 @@ namespace PH7;
 
 class ContactFormProcess
 {
-
     public function __construct()
     {
         $bSend = (new Contact)->sendMessage();
 
-        if (!$bSend)
+        if (!$bSend) {
             \PFBC\Form::setError('form_contact', Form::errorSendingEmail());
-        else
+        } else {
             \PFBC\Form::setSuccess('form_contact', t('Your message has been sent successfully!'));
+        }
     }
-
 }
