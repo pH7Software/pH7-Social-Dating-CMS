@@ -336,18 +336,10 @@ class Ftp extends File
     }
 
     /**
-     * Destruction of the attributes and closes the FTP connection.
+     * Closes the FTP connection.
      */
     public function __destruct()
     {
         $this->close();
-
-        unset(
-            $this->_sHost,
-            $this->_sUsername,
-            $this->_sPassword,
-            $this->_sPath,
-            $this->_rStream
-        );
     }
 }
