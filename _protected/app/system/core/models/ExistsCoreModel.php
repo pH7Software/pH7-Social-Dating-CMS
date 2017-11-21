@@ -13,11 +13,11 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Model\Engine\Db;
+use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
-class ExistsCoreModel extends Framework\Mvc\Model\Engine\Model
+class ExistsCoreModel extends Model
 {
-
     /**
      * Checks if the same email address already exists.
      *
