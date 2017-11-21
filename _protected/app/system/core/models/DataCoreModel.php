@@ -16,6 +16,14 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
     const TB_VIDEO = 'Videos';
     const MAX_ITEMS = 1000;
 
+    /**
+     * @param string $sTable
+     * @param string $sOrder
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function getPicsVids($sTable, $sOrder, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
@@ -31,6 +39,13 @@ class DataCoreModel extends Framework\Mvc\Model\Engine\Model
         return $oData;
     }
 
+    /**
+     * @param string $sOrder
+     * @param int $iOffset
+     * @param int $iLimit
+     *
+     * @return array
+     */
     public function getForumsPosts($sOrder, $iOffset, $iLimit)
     {
         $iOffset = (int)$iOffset;
