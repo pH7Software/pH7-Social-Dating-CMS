@@ -68,6 +68,8 @@ class EditCommentFormProcess extends Form
 
     /**
      * @return bool
+     *
+     * @internal Since the ID digits might be string or integer, it won't work if we use the identity operator (===)
      */
     private function isEditEligible()
     {
