@@ -133,6 +133,7 @@ class Image
     public function quality($iQ = 100)
     {
         $this->iQuality = $iQ;
+
         return $this;
     }
 
@@ -144,6 +145,7 @@ class Image
     public function compression($iC = 4)
     {
         $this->iCompression = $iC;
+
         return $this;
     }
 
