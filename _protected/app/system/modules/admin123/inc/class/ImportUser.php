@@ -242,7 +242,7 @@ class ImportUser extends Core
     {
         $sSex = strtolower($sSex);
 
-        if (!in_array($sSex, self::$aGenderList)) {
+        if (!in_array($sSex, self::$aGenderList, true)) {
             $sSex = self::$aGenderList[mt_rand(0, 2)];
         }
 
