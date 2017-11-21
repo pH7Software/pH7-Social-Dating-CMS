@@ -55,7 +55,7 @@ class MailFormProcess extends Form
                 }
 
                 $sUrl = ($bIsAdmin ? Uri::get(PH7_ADMIN_MOD, 'user', 'browse') : Uri::get('mail', 'main', 'index'));
-                Header::redirect($sUrl, t('Your message has been sent successfully!'));
+                Header::redirect($sUrl, t('Your message has been successfully sent!'));
             }
 
             unset($oUserModel, $oMailModel);
