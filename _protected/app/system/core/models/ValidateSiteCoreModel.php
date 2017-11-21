@@ -16,7 +16,8 @@ class ValidateSiteCoreModel extends Framework\Mvc\Model\Engine\Model
      * Check if the site has been validated or not.
      *
      * @internal This method will be used also in the "admin" module through the "ValidateSiteCore" class, so it needs to be in a Core model and not in the local "ph7cms-donation" module.
-     * @return boolean
+     *
+     * @return bool
      */
     public function is()
     {
