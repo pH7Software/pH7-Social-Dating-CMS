@@ -21,14 +21,25 @@ class EditAlbumFormProcess extends Form
 
         $iAlbumId = (int)$this->httpRequest->get('album_id');
 
-        (new PictureModel)->updateAlbum($this->session->get('member_id'), $iAlbumId, $this->httpRequest->post('name'), $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        $this->clearCache();
+        (new PictureModel)->updateAlbum(
+            $this->session->get('member_id'),
+            $iAlbumId,
+            $this->httpRequest->post('name'),
+            $this->httpRequest->post('description'),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+        );
 
-        Header::redirect(Uri::get('picture', 'main', 'albums', $this->session->get('member_username'), $iAlbumId), t('Your album has been updated successfully!'));
-    }
+        Picture::clearCache();
 
-    private function clearCache()
-    {
-        (new Cache)->start(PictureModel::CACHE_GROUP, null, null)->clear();
+        Header::redirect(
+            Uri::get(
+                'picture',
+                'main',
+                'albums',
+                $this->session->get('member_username'),
+                $iAlbumId
+            ),
+            t('Your album has been successfully updated!')
+        );
     }
 }

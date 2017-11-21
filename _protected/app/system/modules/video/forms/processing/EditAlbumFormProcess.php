@@ -21,14 +21,25 @@ class EditAlbumFormProcess extends Form
 
         $iAlbumId = (int)$this->httpRequest->get('album_id');
 
-        (new VideoModel)->updateAlbum($this->session->get('member_id'), $iAlbumId, $this->httpRequest->post('name'), $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        $this->clearCache();
+        (new VideoModel)->updateAlbum(
+            $this->session->get('member_id'),
+            $iAlbumId,
+            $this->httpRequest->post('name'),
+            $this->httpRequest->post('description'),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+        );
 
-        Header::redirect(Uri::get('video', 'main', 'albums', $this->session->get('member_username'), $iAlbumId), t('Your album has been updated successfully!'));
-    }
+        Video::clearCache();
 
-    private function clearCache()
-    {
-        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+        Header::redirect(
+            Uri::get(
+                'video',
+                'main',
+                'albums',
+                $this->session->get('member_username'),
+                $iAlbumId
+            ),
+            t('Your album has been successfully updated!')
+        );
     }
 }

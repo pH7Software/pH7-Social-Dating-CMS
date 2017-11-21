@@ -23,14 +23,24 @@ class EditVideoFormProcess extends Form
         $sVideoTitle = $this->httpRequest->post('title');
         $iVideoId = (int)$this->httpRequest->get('video_id');
 
-        (new VideoModel)->updateVideo($this->session->get('member_id'), $iAlbumId, $iVideoId, $sVideoTitle, $this->httpRequest->post('description'), $this->dateTime->get()->dateTime('Y-m-d H:i:s'));
-        $this->clearCache();
+        (new VideoModel)->updateVideo(
+            $this->session->get('member_id'),
+            $iAlbumId,
+            $iVideoId,
+            $sVideoTitle,
+            $this->httpRequest->post('description'),
+            $this->dateTime->get()->dateTime('Y-m-d H:i:s')
+        );
 
-        Header::redirect(Uri::get('video', 'main', 'video', $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sVideoTitle . ',' . $iVideoId), t('Your video has been updated successfully!'));
-    }
+        Video::clearCache();
 
-    private function clearCache()
-    {
-        (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
+        Header::redirect(
+            Uri::get('video',
+                'main',
+                'video',
+                $this->session->get('member_username') . ',' . $iAlbumId . ',' . $sVideoTitle . ',' . $iVideoId
+            ),
+            t('Your video has been successfully updated!')
+        );
     }
 }
