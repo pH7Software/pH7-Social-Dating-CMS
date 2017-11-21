@@ -130,6 +130,8 @@ class FriendAjax extends Core
      *
      * @param int $iId friend ID
      * @param UserCoreModel $oUserModel
+     *
+     * @return void
      */
     protected function sendMail($iId, UserCoreModel $oUserModel)
     {

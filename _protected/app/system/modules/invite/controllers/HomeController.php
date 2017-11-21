@@ -14,6 +14,7 @@ class HomeController extends Controller
     {
         $this->view->page_title = t('Invite your Friends');
         $this->view->meta_description = t('Invite your friends to join %site_name%');
+
         $this->output();
     }
 }
