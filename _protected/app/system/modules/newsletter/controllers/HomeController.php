@@ -15,6 +15,7 @@ class HomeController extends Controller
         $this->view->page_title = t('Subscribe to our Newsletter');
         $this->view->meta_description = t('Newsletters - Subscribe to our newsletter %site_name% | Social networking, dating website.');
         $this->view->meta_keywords = t('newsletter, newsletters, subscription, email, social, social network, social networking, community, metting, dating, friends, people');
+
         $this->output();
     }
 
