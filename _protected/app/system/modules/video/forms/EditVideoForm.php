@@ -32,7 +32,7 @@ class EditVideoForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_video', 'form_edit_video'));
         $oForm->addElement(new \PFBC\Element\Token('edit_video'));
 
-        $oHttpRequest = new Http;
+        $oHttpRequest = new HttpRequest;
         $oVideo = (new VideoModel)->video((new Session)->get('member_id'), $oHttpRequest->get('album_id'), $oHttpRequest->get('video_id'), 1, 0, 1);
         unset($oHttpRequest);
 
