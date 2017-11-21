@@ -95,10 +95,7 @@ class AvatarDesignCore extends Design
         /**
          * @internal Google Search Image works only on non-local URLs, so check if we aren't on dev environments.
          */
-        if (AdminCore::auth()
-            && Registry::getInstance()->controller === 'ModeratorController'
-            && !Server::isLocalHost()
-        ) {
+        if ($this->isGoogleSearchImageEligible()) {
             $sAvatarUrl = $this->getUserAvatar($sUsername, $sSex, null, false);
 
             echo '<p>';
@@ -128,5 +125,18 @@ class AvatarDesignCore extends Design
         } catch (InvalidUrlException $oExcept) {
             // Display nothing
         }
+    }
+
+    /**
+     * Check if Google Search Image feature can be enabled.
+     *
+     * @return bool
+     */
+    private function isGoogleSearchImageEligible()
+    {
+        // It works only on non-local URLs, so check if we aren't on dev environments (e.g. http://127.0.0.1)
+        return AdminCore::auth() &&
+            Registry::getInstance()->controller === 'ModeratorController'
+            && !Server::isLocalHost();
     }
 }
