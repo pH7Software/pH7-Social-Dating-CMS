@@ -28,5 +28,4 @@ class GeoIpCoreModel extends Framework\Mvc\Model\Engine\Model
     {
         return $this->orm->select('GeoCity', 'cityId, cityTitle')->find('cityId', $sWhere)->orderBy('cityTitle')->execute();
     }
-
 }
