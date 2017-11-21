@@ -45,6 +45,7 @@ class MainController extends Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->oNoteModel = new NoteModel;
         $this->oPage = new Page;
         $this->iApproved = (AdminCore::auth() && !UserCore::isAdminLoggedAs()) ? null : 1;
