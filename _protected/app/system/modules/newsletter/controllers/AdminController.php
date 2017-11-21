@@ -16,7 +16,11 @@ class AdminController extends Controller
 {
     const SUBSCRIBERS_PER_PAGE = 30;
 
-    private $oSubscriptionModel, $sTitle;
+    /** @var SubscriptionModel */
+    private $oSubscriptionModel;
+
+    /** @var string */
+    private $sTitle;
 
     public function __construct()
     {
