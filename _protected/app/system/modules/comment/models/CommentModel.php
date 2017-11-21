@@ -12,6 +12,13 @@ use PH7\Framework\Mvc\Model\Engine\Db;
 
 class CommentModel extends CommentCoreModel
 {
+    /**
+     * @param int $iCommentId
+     * @param int $iApproved
+     * @param string $sTable
+     *
+     * @return array|bool|float|int|mixed|object|string
+     */
     public function get($iCommentId, $iApproved, $sTable)
     {
         $this->cache->start(static::CACHE_GROUP, 'get' . $iCommentId . $iApproved . $sTable, static::CACHE_TIME);
@@ -27,9 +34,20 @@ class CommentModel extends CommentCoreModel
             Db::free($rStmt);
             $this->cache->put($oData);
         }
+
         return $oData;
     }
 
+    /**
+     * @param int $iCommentId
+     * @param int $iRecipientId
+     * @param int $iSenderId
+     * @param int $iApproved
+     * @param string $sCreatedDate
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function add($iCommentId, $iRecipientId, $iSenderId, $iApproved, $sCreatedDate, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
@@ -43,6 +61,17 @@ class CommentModel extends CommentCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iCommentId
+     * @param int $iRecipientId
+     * @param int $iSenderId
+     * @param string $sComment
+     * @param int $iApproved
+     * @param string $sUpdatedDate
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function update($iCommentId, $iRecipientId, $iSenderId, $sComment, $iApproved, $sUpdatedDate, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
@@ -57,6 +86,14 @@ class CommentModel extends CommentCoreModel
         return $rStmt->execute();
     }
 
+    /**
+     * @param int $iCommentId
+     * @param int $iRecipientId
+     * @param int $iSenderId
+     * @param string $sTable
+     *
+     * @return bool
+     */
     public function delete($iCommentId, $iRecipientId, $iSenderId, $sTable)
     {
         $sTable = CommentCore::checkTable($sTable);
