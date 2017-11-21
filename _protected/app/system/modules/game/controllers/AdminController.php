@@ -58,6 +58,9 @@ class AdminController extends MainController
             $sMsg = t('The game could not be removed.');
         }
 
-        Header::redirect(Uri::get('game', 'admin', 'index'), $sMsg);
+        Header::redirect(
+            Uri::get('game', 'admin', 'index'),
+            $sMsg
+        );
     }
 }
