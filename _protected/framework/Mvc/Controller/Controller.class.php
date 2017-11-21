@@ -310,8 +310,9 @@ abstract class Controller extends Core
      */
     private function checkSiteStatus()
     {
-        if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
-            !AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD
+        if ($this->registry->module !== PH7_ADMIN_MOD &&
+            M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
+            !AdminCore::auth()
         ) {
             Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
         }
