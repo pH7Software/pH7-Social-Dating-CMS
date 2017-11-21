@@ -117,8 +117,8 @@ class RatingCoreAjax
         $this->select();
         $this->update();
         $this->iStatus = 1;
-        $sVoteTxt = (static::$iVotes > 1) ? t('Votes') : t('Vote');
-        $this->sTxt = t('Score: %0% - %2%: %1%', number_format($this->fScore / static::$iVotes, 1), static::$iVotes, $sVoteTxt);
+        $sVoteTxt = self::$iVotes > 1 ? t('Votes') : t('Vote');
+        $this->sTxt = t('Score: %0% - %2%: %1%', number_format($this->fScore / self::$iVotes, 1), self::$iVotes, $sVoteTxt);
     }
 
     /**
