@@ -30,6 +30,7 @@ class Gzip
     const REGEX_CSS_IMPORT_FORMAT = '/@import\s+url\([\'"]*(.+?\.)(css)[\'"]*\)\s{0,};/msi';
     const CACHE_DIR = 'pH7_static/';
     const MAX_IMG_SIZE_BASE64_CONVERTOR = 24000; // 24KB
+    const GZIP_COMPRESS_LEVEL = 9;
 
     /** @var File */
     private $oFile;
@@ -274,7 +275,11 @@ class Gzip
      */
     protected function gzipContent()
     {
-        $this->sContents = gzencode($this->sContents, 9, FORCE_GZIP);
+        $this->sContents = gzencode(
+            $this->sContents,
+            self::GZIP_COMPRESS_LEVEL,
+            FORCE_GZIP
+        );
     }
 
     /**
