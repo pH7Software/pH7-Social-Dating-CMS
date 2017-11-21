@@ -797,10 +797,17 @@ class Design
             if (UserCore::auth()) {
                 $aUrlParams = [
                     'spammer' => $iId,
-                    'url' => $this->oHttpRequest->currentUrl(),
                     'type' => Registry::getInstance()->module
                 ];
-                $sReportLink = Uri::get('report', 'main', 'abuse', '?' . Url::httpBuildQuery($aUrlParams), false) . '" data-popup="block-page';
+                $sReportLink = Uri::get(
+                    'report',
+                    'main',
+                    'abuse',
+                    '?' . Url::httpBuildQuery($aUrlParams) . '&amp;url=' . $this->oHttpRequest->currentUrl(),
+                    false
+                );
+
+                $sReportLink .= '" data-popup="block-page';
             } else {
                 $aUrlParams = [
                     'msg' => t('You need to be a user to report contents.'),
