@@ -9,16 +9,18 @@
 namespace PH7;
 
 use PH7\Framework\Config\Config;
+use PH7\Framework\Url\Header;
 
 class AlbumForm
 {
     public static function display()
     {
         if (isset($_POST['submit_picture_album'])) {
-            if (\PFBC\Form::isValid($_POST['submit_picture_album']))
+            if (\PFBC\Form::isValid($_POST['submit_picture_album'])) {
                 new AlbumFormProcess;
+            }
 
-            Framework\Url\Header::redirect();
+            Header::redirect();
         }
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
