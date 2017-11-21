@@ -76,7 +76,7 @@ class CommentCore
      *
      * @return bool
      *
-     * @internal Since the ID digit might be string or integer, it won't work if we use the identity operator (===)
+     * @internal Since the ID digits might be string or integer, it won't work if we use the identity operator (===)
      */
     public static function isRemovalEligible(HttpRequest $oHttpRequest, Session $oSession)
     {
