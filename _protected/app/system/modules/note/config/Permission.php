@@ -38,7 +38,7 @@ class Permission extends PermissionCore
         if (!$bAdminAuth && $this->registry->controller === 'AdminController') {
             // For security reasons, we don't redirect the user to the admin panel URL
             Header::redirect(
-                Uri::get('blog', 'main', 'index'),
+                Uri::get('note', 'main', 'index'),
                 $this->adminSignInMsg(),
                 Design::ERROR_TYPE
             );
