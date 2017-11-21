@@ -15,32 +15,62 @@ use PH7\Framework\Url\Header;
 
 class EditCommentFormProcess extends Form
 {
+    /** @var int */
+    private $iMemberId;
+
+    /** @var int */
+    private $iRecipientId;
+
+    /** @var int */
+    private $iSenderId;
+
     public function __construct()
     {
         parent::__construct();
+
+        $this->iMemberId = (int)$this->session->get('member_id');
+        $this->iRecipientId = $this->httpRequest->get('recipient', 'int');
+        $this->iSenderId = $this->httpRequest->get('sender', 'int');
 
         $oCommentModel = new CommentModel;
 
         $sTable = $this->httpRequest->get('table');
         $iCommentId = $this->httpRequest->get('id', 'int');
-        $iMemberId = (int)$this->session->get('member_id');
-        $iRecipientId = $this->httpRequest->get('recipient', 'int');
-        $iSenderId = $this->httpRequest->get('sender', 'int');
 
-        if (!$oCommentModel->idExists($iRecipientId, $sTable)) {
+        if (!$oCommentModel->idExists($this->iRecipientId, $sTable)) {
             \PFBC\Form::setError('form_comment', t('The comment recipient does not exists.'));
         } else {
-            if (($iMemberId == $iRecipientId) || ($iMemberId == $iSenderId)) {
-                if ($oCommentModel->update($iCommentId, $iRecipientId, $iSenderId, $this->httpRequest->post('comment'), 1, $this->dateTime->get()->dateTime('Y-m-d H:i:s'), $sTable)) {
-                    /* Clean All Data of CommentModel Cache */
-                    (new Framework\Cache\Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
+            if ($this->isEditEligible()) {
+                if ($oCommentModel->update(
+                    $iCommentId,
+                    $this->iRecipientId,
+                    $this->iSenderId,
+                    $this->httpRequest->post('comment'),
+                    1,
+                    $this->dateTime->get()->dateTime('Y-m-d H:i:s'),
+                    $sTable
+                )) {
+                    CommentCore::clearCache();
 
-                    Header::redirect(Uri::get('comment', 'comment', 'read', $sTable . ',' . $iRecipientId), t('The comment has been updated successfully!'));
+                    Header::redirect(
+                        Uri::get('comment', 'comment', 'read', $sTable . ',' . $this->iRecipientId),
+                        t('The comment has been updated successfully!')
+                    );
                 } else {
                     \PFBC\Form::setError('form_comment', t('Oops! Error when updated comment.'));
                 }
+            } else {
+                \PFBC\Form::setError('form_comment', t("Oops! You don't have the permission to update the comment."));
             }
         }
         unset($oCommentModel);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isEditEligible()
+    {
+        return $this->iMemberId == $this->iRecipientId || $this->iMemberId == $this->iSenderId;
     }
 }
