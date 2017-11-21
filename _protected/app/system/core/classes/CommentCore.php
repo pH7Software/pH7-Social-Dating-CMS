@@ -8,8 +8,11 @@
 
 namespace PH7;
 
+use PH7\Framework\Cache\Cache;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Pattern\Statik;
+use PH7\Framework\Session\Session;
 
 class CommentCore
 {
@@ -65,6 +68,28 @@ class CommentCore
         $iCommentNumber = (new CommentCoreModel)->total($iId, $sTable);
 
         return nt('%n% Comment', '%n% Comments', $iCommentNumber);
+    }
+
+    /**
+     * @param HttpRequest $oHttpRequest
+     * @param Session $oSession
+     *
+     * @return bool
+     *
+     * @internal Since the ID digit might be string or integer, it won't work if we use the identity operator (===)
+     */
+    public static function isRemovalEligible(HttpRequest $oHttpRequest, Session $oSession)
+    {
+        return (($oSession->get('member_id') == $oHttpRequest->post('recipient_id')) ||
+                ($oSession->get('member_id') == $oHttpRequest->post('sender_id'))) || AdminCore::auth();
+    }
+
+    /**
+     * @return void
+     */
+    public static function clearCache()
+    {
+        (new Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
     }
 
     /**
