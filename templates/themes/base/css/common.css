@@ -171,7 +171,7 @@ hr {
 
 .err_msg {
     text-align: center;
-    color: #F00;
+    color: #d9534f;
     text-transform: uppercase;
 }
 
