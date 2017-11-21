@@ -39,8 +39,8 @@ class Uri
      */
     public static function loadFile(DOMDocument $oDom)
     {
-        $sContents = file_get_contents(static::getRouteFilePath()); // Get the XML contents
-        $sContents = static::parseVariable($sContents); // Parse the variables
+        $sContents = file_get_contents(self::getRouteFilePath()); // Get the XML contents
+        $sContents = self::parseVariable($sContents); // Parse the variables
         $oDom->loadXML($sContents); // Load the XML contents
 
         return $oDom;
@@ -59,8 +59,8 @@ class Uri
      */
     public static function get($sModule, $sController, $sAction, $sVars = null, $bFullClean = true)
     {
-        static::$bFullClean = $bFullClean;
-        $sUrl = static::uri(['module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars]);
+        self::$bFullClean = $bFullClean;
+        $sUrl = self::uri(['module' => $sModule, 'controller' => $sController, 'action' => $sAction, 'vars' => $sVars]);
 
         return $sUrl;
     }
