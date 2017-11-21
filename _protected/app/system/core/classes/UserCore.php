@@ -473,7 +473,7 @@ class UserCore
      */
     public function clearReadProfileCache($iId, $sTable = 'Members')
     {
-        $this->_clearCache('readProfile', $iId, $sTable);
+        $this->clearCache('readProfile', $iId, $sTable);
     }
 
     /**
@@ -487,7 +487,7 @@ class UserCore
      */
     public function clearInfoFieldCache($iId, $sTable = 'MembersInfo')
     {
-        $this->_clearCache('infoFields', $iId, $sTable);
+        $this->clearCache('infoFields', $iId, $sTable);
     }
 
     /**
@@ -499,7 +499,7 @@ class UserCore
      *
      * @return void
      */
-    private function _clearCache($sId, $iId, $sTable)
+    private function clearCache($sId, $iId, $sTable)
     {
         VariousModel::checkModelTable($sTable);
 
