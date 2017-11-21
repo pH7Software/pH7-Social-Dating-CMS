@@ -29,7 +29,7 @@ class ExistsCoreModel extends Model
     public function email($sEmail, $sTable = 'Members')
     {
         $sEmail = filter_var($sEmail, FILTER_SANITIZE_EMAIL);
-        return $this->_is('email', $sEmail, $sTable);
+        return $this->is('email', $sEmail, $sTable);
     }
 
     /**
@@ -42,7 +42,7 @@ class ExistsCoreModel extends Model
      */
     public function username($sUsername, $sTable = 'Members')
     {
-        return $this->_is('username', $sUsername, $sTable);
+        return $this->is('username', $sUsername, $sTable);
     }
 
     /**
@@ -55,7 +55,7 @@ class ExistsCoreModel extends Model
      */
     public function id($iId, $sTable = 'Members')
     {
-        return $this->_is('profileId', $iId, $sTable, \PDO::PARAM_INT, 'AND profileId <> ' . PH7_GHOST_ID);
+        return $this->is('profileId', $iId, $sTable, \PDO::PARAM_INT, 'AND profileId <> ' . PH7_GHOST_ID);
     }
 
     /**
@@ -68,7 +68,7 @@ class ExistsCoreModel extends Model
      */
     public function bankAccount($sAccount, $sTable = 'Affiliates')
     {
-        return $this->_is('bankAccount', $sAccount, $sTable);
+        return $this->is('bankAccount', $sAccount, $sTable);
     }
 
     /**
@@ -82,7 +82,7 @@ class ExistsCoreModel extends Model
      *
      * @return bool Returns TRUE if it exists, FALSE otherwise.
      */
-    protected function _is($sColumn, $sValue, $sTable, $sType = null, $sParam = null)
+    protected function is($sColumn, $sValue, $sTable, $sType = null, $sParam = null)
     {
         Various::checkModelTable($sTable);
         $sType = (empty($sType)) ? \PDO::PARAM_STR : $sType;
