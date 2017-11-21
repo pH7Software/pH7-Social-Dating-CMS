@@ -8,7 +8,6 @@
 
 namespace PH7;
 
-use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
@@ -126,11 +125,16 @@ class CommentController extends Controller
 
     public function delete()
     {
-        if ($this->isRemovalEligible()) {
+        if (CommentCore::isRemovalEligible($this->httpRequest, $this->session)) {
             $this->sTable = $this->httpRequest->post('table');
 
-            if ($this->oCommentModel->delete($this->httpRequest->post('id'), $this->httpRequest->post('recipient_id'), $this->httpRequest->post('sender_id'), $this->sTable)) {
-                $this->clearCache();
+            if ($this->oCommentModel->delete(
+                $this->httpRequest->post('id'),
+                $this->httpRequest->post('recipient_id'),
+                $this->httpRequest->post('sender_id'),
+                $this->sTable
+            )) {
+                CommentCore::clearCache();
 
                 $this->sMsg = t('The comment has been deleted!');
             } else {
@@ -164,21 +168,11 @@ class CommentController extends Controller
         $this->view->error = t('No comments yet, <a class="bold" href="%0%">add one</a>!', Uri::get('comment', 'comment', 'add', $this->sTable . ',' . $this->str->escape($this->httpRequest->get('id'))));
     }
 
-    private function clearCache()
-    {
-        (new Cache)->start(CommentCoreModel::CACHE_GROUP, null, null)->clear();
-    }
-
+    /**
+     * @return null|int
+     */
     private function getProfileId()
     {
         return is_numeric($this->httpRequest->get('id')) ? $this->httpRequest->get('id') : null;
-    }
-
-    /**
-     * @return bool
-     */
-    private function isRemovalEligible()
-    {
-        return (($this->session->get('member_id') == $this->httpRequest->post('recipient_id')) || ($this->session->get('member_id') == $this->httpRequest->post('sender_id'))) || AdminCore::auth();
     }
 }
