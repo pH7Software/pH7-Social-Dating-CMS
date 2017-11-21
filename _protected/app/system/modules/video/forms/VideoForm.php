@@ -27,10 +27,6 @@ class VideoForm
             Header::redirect();
         }
 
-        $oHttpRequest = new Http;
-        $iAlbumIdVal = ($oHttpRequest->getExists('album_id')) ? $oHttpRequest->get('album_id') : null; // Album ID Value
-        unset($oHttpRequest);
-
         $oAlbumId = (new VideoModel)->getAlbumsName((new Session)->get('member_id'));
         $aAlbumName = array();
         foreach ($oAlbumId as $iId) {
@@ -44,7 +40,7 @@ class VideoForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_video', 'form_video'));
         $oForm->addElement(new \PFBC\Element\Token('video'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('video', 'main', 'addalbum')), 'album_id', $aAlbumName, array('value' => $iAlbumIdVal, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('video', 'main', 'addalbum')), 'album_id', $aAlbumName, array('value' => self::getAlbumId(), 'required' => 1)));
         unset($aAlbumName);
 
         $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$iId->name)); // Bad title! Thanks for finding a solution and commit it on http://github.com/pH7Software/pH7-Social-Dating-CMS or send it by email
@@ -62,5 +58,19 @@ class VideoForm
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->addElement(new \PFBC\Element\HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'form.js"></script>'));
         $oForm->render();
+    }
+
+    /**
+     * Get album ID value.
+     *
+     * @return int|null
+     */
+    private static function getAlbumId()
+    {
+        $oHttpRequest = new HttpRequest;
+        $iAlbumId = $oHttpRequest->getExists('album_id') ? $oHttpRequest->get('album_id') : null;
+        unset($oHttpRequest);
+
+        return $iAlbumId;
     }
 }
