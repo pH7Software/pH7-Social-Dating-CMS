@@ -134,6 +134,7 @@ final class Server
     {
         $sServerName = self::getName();
         $sHttpHost = self::getVar(self::HTTP_HOST);
+
         return ($sServerName === 'localhost' || $sServerName === '127.0.0.1' || $sHttpHost === 'localhost' || $sHttpHost === '127.0.0.1');
     }
 
