@@ -19,15 +19,13 @@ use PH7\Framework\Security\CSRF\Token;
 class FriendAjax extends Core
 {
     /** @var FriendModel */
-    private $_oFriendModel;
+    private $oFriendModel;
 
     /** @var string */
-    private $_sMsg;
+    private $sMsg;
 
-    /**
-     * @var boolean|string $mStatus
-     */
-    private $_mStatus;
+    /** @var bool|string */
+    private $mStatus;
 
     public function __construct()
     {
