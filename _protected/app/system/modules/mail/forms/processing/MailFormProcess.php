@@ -65,9 +65,10 @@ class MailFormProcess extends Form
     /**
      * Send notification email.
      *
-     * @param integer $iRecipientId
-     * @param integer $iMsgId
+     * @param int $iRecipientId
+     * @param int $iMsgId
      * @param UserCoreModel $oUserModel
+     *
      * @return integer Number of recipients who were accepted for delivery.
      */
     protected function sendMail($iRecipientId, $iMsgId, UserCoreModel $oUserModel)

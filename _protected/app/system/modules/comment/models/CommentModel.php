@@ -108,9 +108,10 @@ class CommentModel extends CommentCoreModel
     /**
      * Check if the recipient ID exists in the table.
      *
-     * @param  integer $iId
-     * @param  string $sTable
-     * @return boolean
+     * @param int $iId
+     * @param string $sTable
+     *
+     * @return bool
      */
     public function idExists($iId, $sTable)
     {
@@ -135,10 +136,11 @@ class CommentModel extends CommentCoreModel
     /**
      * Check Duplicate Contents.
      *
-     * @param integer $iSenderId
+     * @param int $iSenderId
      * @param string $sCheckMsg
      * @param string $sTable
-     * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
+     *
+     * @return bool Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public function isDuplicateContent($iSenderId, $sCheckMsg, $sTable)
     {
@@ -150,11 +152,12 @@ class CommentModel extends CommentCoreModel
     /**
      * To prevent spam!
      *
-     * @param integer $iSenderId
-     * @param integer $iWaitTime In minutes!
+     * @param int $iSenderId
+     * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      * @param string $sTable
-     * @return boolean Return TRUE if the weather was fine, otherwise FALSE
+     *
+     * @return bool Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitSend($iSenderId, $iWaitTime, $sCurrentTime, $sTable)
     {
