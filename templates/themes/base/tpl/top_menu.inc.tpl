@@ -455,7 +455,7 @@
             <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
             {*<li><a href="{software_faq_url}" title="{lang 'Frequently Asked Questions'}"><i class="fa fa-question"></i> {lang 'FAQ'}</a></li>*}
             <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
-            <li><a href="{software_forum_url}" title="{lang 'Support Forum'}">{lang 'Forum'}</a></li>
+            <li><a href="{software_forum_url}" title="{lang 'Support Forum'}"><i class="fa fa-comments"></i> {lang 'Forum'}</a></li>
           </ul>
         </li>
 
