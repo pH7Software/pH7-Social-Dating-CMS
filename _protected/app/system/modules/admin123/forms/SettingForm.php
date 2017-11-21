@@ -192,7 +192,7 @@ class SettingForm
 
         $oForm->addElement(new \PFBC\Element\Number(t('CSRF token lifetime:'), 'security_token_lifetime', array('description' => t('Time in seconds.'), 'value' => DbConfig::getSetting('securityTokenLifetime'), 'required' => 1)));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('System against DDoS attacks:'), 'stop_DDoS', array('1' => t('Activate'), '0' => t('Deactivate')), array('value' => DbConfig::getSetting('DDoS'), 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('System against DDoS attacks:'), 'stop_DDoS', array('1' => t('Activate'), '0' => t('Deactivate')), array('description' => t('Enable it ONLY if you think your website has real DDoS attacks or if your server is highly overloaded.'), 'value' => DbConfig::getSetting('DDoS'), 'required' => 1)));
 
 
         /********** Spam **********/
