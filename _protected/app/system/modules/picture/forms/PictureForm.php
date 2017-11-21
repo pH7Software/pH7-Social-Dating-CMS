@@ -26,9 +26,6 @@ class PictureForm
             Header::redirect();
         }
 
-        $oHttpRequest = new Http;
-        $iAlbumIdVal = ($oHttpRequest->getExists('album_id')) ? $oHttpRequest->get('album_id') : null; // Album ID Value
-        unset($oHttpRequest);
 
         $oAlbumId = (new PictureModel)->getAlbumsName((new Session)->get('member_id'));
         $aAlbumName = array();
@@ -41,7 +38,7 @@ class PictureForm
         $oForm->addElement(new \PFBC\Element\Hidden('submit_picture', 'form_picture'));
         $oForm->addElement(new \PFBC\Element\Token('picture'));
 
-        $oForm->addElement(new \PFBC\Element\Select(t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('picture', 'main', 'addalbum')), 'album_id', $aAlbumName, array('value' => $iAlbumIdVal, 'required' => 1)));
+        $oForm->addElement(new \PFBC\Element\Select(t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('picture', 'main', 'addalbum')), 'album_id', $aAlbumName, array('value' => self::getAlbumId(), 'required' => 1)));
         unset($aAlbumName);
 
         $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$iId->name)); // Bad title! Thanks for finding a solution and commit it on http://github.com/pH7Software/pH7-Social-Dating-CMS or send it by email
@@ -51,5 +48,19 @@ class PictureForm
         $oForm->addElement(new \PFBC\Element\Textarea(t('Description for your photo(s):'), 'description', array('validation' => new \PFBC\Validation\Str(2, 200))));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
+    }
+
+    /**
+     * Get the album ID value.
+     *
+     * @return int|null
+     */
+    private static function getAlbumId()
+    {
+        $oHttpRequest = new HttpRequest;
+        $iAlbumId = $oHttpRequest->getExists('album_id') ? $oHttpRequest->get('album_id') : null;
+        unset($oHttpRequest);
+
+        return $iAlbumId;
     }
 }
