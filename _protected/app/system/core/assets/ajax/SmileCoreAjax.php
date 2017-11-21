@@ -45,7 +45,7 @@ class SmileCoreAjax extends Emoticon
 
                 $sCode = (is_array($mCode)) ? $mCode[0] : $mCode;
 
-                static::$_sData .= <<<EOD
+                self::$sData .= <<<EOD
                 {
                     "code": "$sCode",
                     "img": "$sImg",
@@ -54,8 +54,8 @@ class SmileCoreAjax extends Emoticon
 EOD;
             }
 
-            static::$_sData = '{"smiles": [' . substr(static::$_sData, 0, -1) . ']}';
-            $oCache->put(static::$_sData);
+            self::$sData = '{"smiles": [' . substr(self::$sData, 0, -1) . ']}';
+            $oCache->put(self::$sData);
         }
         unset($oCache);
     }
