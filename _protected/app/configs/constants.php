@@ -65,7 +65,7 @@ define('PH7_WIDTH_SEARCH_FORM', '148px');
 /*** DDoS Attack ***/
 define('PH7_DDOS_DELAY_SLEEP', 40);
 define('PH7_DDOS_MAX_COOKIE_PAGE_LOAD', 99999999);
-define('PH7_DDOS_MAX_SESSION_PAGE_LOAD', 999);
+define('PH7_DDOS_MAX_SESSION_PAGE_LOAD', 1500);
 
 
 /***** TABLE PREFIX *****/
