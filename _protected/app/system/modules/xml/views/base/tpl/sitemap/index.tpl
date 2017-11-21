@@ -1,6 +1,6 @@
 <div class="center">
     {if !empty($error) }
-        <p>{error}</p>
+        <p class="red">{error}</p>
     {elseif sizeof($urls) > 0}
         <ul>
             {each $key => $value in $urls}
