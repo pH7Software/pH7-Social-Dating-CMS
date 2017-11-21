@@ -70,7 +70,7 @@ class Newsletter extends Core
      * @param stdClass $oSubscriber Subscriber data from the DB.
      * @param Mail $oMail
      *
-     * @return integer Number of recipients who were accepted for delivery.
+     * @return int Number of recipients who were accepted for delivery.
      */
     protected function sendMail(stdClass $oSubscriber, Mail $oMail)
     {
