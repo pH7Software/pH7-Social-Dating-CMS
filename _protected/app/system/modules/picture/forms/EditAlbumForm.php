@@ -32,8 +32,8 @@ class EditAlbumForm
         $oForm->configure(array('action' => ''));
         $oForm->addElement(new \PFBC\Element\Hidden('submit_edit_picture_album', 'form_edit_picture_album'));
         $oForm->addElement(new \PFBC\Element\Token('edit_album'));
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Name of the Album Cover:'), 'name', array('value' => $oAlbum->name, 'required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Description of the Album Cover:'), 'description', array('value' => $oAlbum->description, 'validation' => new \PFBC\Validation\Str(2, 200))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Album Cover Name:'), 'name', array('value' => $oAlbum->name, 'required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Album Cover Description:'), 'description', array('value' => $oAlbum->description, 'validation' => new \PFBC\Validation\Str(2, 200))));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

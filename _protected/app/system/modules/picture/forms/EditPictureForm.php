@@ -36,8 +36,8 @@ class EditPictureForm
         $oPhoto = (new PictureModel)->photo((new Session)->get('member_id'), $oHttpRequest->get('album_id'), $oHttpRequest->get('picture_id'), 1, 0, 1);
         unset($oHttpRequest);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Name of your photo:'), 'title', array('value' => $oPhoto->title, 'required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Description of your photo:'), 'description', array('value' => $oPhoto->description, 'validation' => new \PFBC\Validation\Str(2, 200))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Image Name:'), 'title', array('value' => $oPhoto->title, 'required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Image Description:'), 'description', array('value' => $oPhoto->description, 'validation' => new \PFBC\Validation\Str(2, 200))));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }

@@ -36,8 +36,8 @@ class EditVideoForm
         $oVideo = (new VideoModel)->video((new Session)->get('member_id'), $oHttpRequest->get('album_id'), $oHttpRequest->get('video_id'), 1, 0, 1);
         unset($oHttpRequest);
 
-        $oForm->addElement(new \PFBC\Element\Textbox(t('Name of your video:'), 'title', array('value' => $oVideo->title, 'required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
-        $oForm->addElement(new \PFBC\Element\Textarea(t('Description of your video:'), 'description', array('value' => $oVideo->description, 'validation' => new \PFBC\Validation\Str(2, 200))));
+        $oForm->addElement(new \PFBC\Element\Textbox(t('Video Name:'), 'title', array('value' => $oVideo->title, 'required' => 1, 'pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
+        $oForm->addElement(new \PFBC\Element\Textarea(t('Video Description:'), 'description', array('value' => $oVideo->description, 'validation' => new \PFBC\Validation\Str(2, 200))));
         $oForm->addElement(new \PFBC\Element\Button);
         $oForm->render();
     }
