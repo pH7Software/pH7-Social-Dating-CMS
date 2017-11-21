@@ -208,7 +208,13 @@ class MainController extends Controller
         Video::clearCache();
 
 
-        Header::redirect(Uri::get('video', 'main', 'album', $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')),
+        Header::redirect(
+            Uri::get(
+            'video',
+            'main',
+            'album',
+            $this->session->get('member_username') . ',' . $this->httpRequest->post('album_title') . ',' . $this->httpRequest->post('album_id')
+            ),
             t('Your video has been removed.')
         );
     }
@@ -222,7 +228,14 @@ class MainController extends Controller
 
         Video::clearCache();
 
-        Header::redirect(Uri::get('video', 'main', 'albums'), t('Your album has been removed.'));
+        Header::redirect(
+            Uri::get(
+            'video',
+            'main',
+            'albums'
+            ),
+            t('Your album has been removed.')
+        );
     }
 
     public function search()
