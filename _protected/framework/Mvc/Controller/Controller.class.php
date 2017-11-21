@@ -114,7 +114,7 @@ abstract class Controller extends Core
 
     /**
      * Includes a template file in the main layout.
-     * Note: For viewing you need to use the \PH7\Framework\Mvc\Controller::output() method.
+     * Note: For viewing you need to use self::output() method.
      *
      * @param string $sFile
      *
