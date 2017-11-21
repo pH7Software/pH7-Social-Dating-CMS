@@ -9,7 +9,6 @@
 namespace PH7;
 
 use PH7\Framework\Analytics\Statistic;
-use PH7\Framework\Cache\Cache;
 use PH7\Framework\Http\Http;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Navigation\Page;
