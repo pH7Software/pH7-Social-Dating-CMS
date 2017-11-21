@@ -9,6 +9,7 @@
  */
 
 namespace PH7\Framework\Mobile;
+
 defined('PH7') or exit('Restricted access');
 
 use PH7\Framework\Mvc\Request\Http;
@@ -16,14 +17,16 @@ use PH7\Framework\Session\Session;
 
 class MobApp
 {
-
     // Request name used in mobile apps
     const VAR_NAME = 'mobapp';
 
     /**
      * Check if a mobile native app called the site.
      *
-     * @return boolean
+     * @param Http $oHttp
+     * @param Session $oSession
+     *
+     * @return bool
      */
     final public static function is(Http $oHttp, Session $oSession)
     {
@@ -33,5 +36,4 @@ class MobApp
 
         return $oSession->exists(static::VAR_NAME);
     }
-
 }

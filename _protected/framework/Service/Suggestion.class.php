@@ -31,6 +31,7 @@ class Suggestion
     public static function email()
     {
         self::$sFile = static::EMAIL_FILE;
+
         return self::get();
     }
 
