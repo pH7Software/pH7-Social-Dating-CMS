@@ -94,8 +94,8 @@ class SearchUserCoreForm
     /**
      * If a user is logged, get the relative 'user_sex' and 'match_sex' for better and more intuitive search.
      *
-     * @param object UserCoreModel $oUserModel
-     * @param object Session $oSession
+     * @param UserCoreModel $oUserModel
+     * @param Session $oSession
      *
      * @return array The 'user_sex' and 'match_sex'
      */
@@ -115,8 +115,8 @@ class SearchUserCoreForm
     /**
      * If a user is logged, get "approximately" the relative age for better and more intuitive search.
      *
-     * @param object UserCoreModel $oUserModel
-     * @param object Session $oSession
+     * @param UserCoreModel $oUserModel
+     * @param Session $oSession
      *
      * @return array 'min_age' and 'max_age' which is the approximately age the user is looking for.
      */
