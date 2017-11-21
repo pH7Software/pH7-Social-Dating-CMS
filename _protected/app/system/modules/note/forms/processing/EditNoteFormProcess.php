@@ -36,13 +36,13 @@ class EditNoteFormProcess extends Form
             if ($oNote->checkPostId($sPostId, $iProfileId, $oNoteModel)) {
                 $oNoteModel->updatePost('postId', $sPostId, $iNoteId, $iProfileId);
             } else {
-                \PFBC\Form::setError('form_note', t('The post ID already exists or is incorrect.'));
+                \PFBC\Form::setError('form_edit_note', t('The post ID already exists or is incorrect.'));
                 return;
             }
         }
 
         if (!$this->updateCategories($iNoteId, $iProfileId, $oPost, $oNoteModel)) {
-            \PFBC\Form::setError('form_note', t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED));
+            \PFBC\Form::setError('form_edit_note', t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED));
             return; // Stop execution of the method
         }
 
