@@ -41,6 +41,7 @@ class SitemapController extends MainController
     public function xmlLink()
     {
         parent::xmlLink();
+
         $this->view->display('links.xml.tpl');
     }
 
