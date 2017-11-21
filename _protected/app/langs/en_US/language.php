@@ -10,7 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-Framework\Registry\Registry::getInstance()->lang = array(
+Framework\Registry\Registry::getInstance()->lang = [
 
     /***** COUNTRIES *****/
     '' => '-- Select --',
@@ -343,4 +343,4 @@ Framework\Registry\Registry::getInstance()->lang = array(
     'businessname' => 'Business Name:',
     'taxid' => 'Tax ID, VAT or SSN:',
 
-);
+];
