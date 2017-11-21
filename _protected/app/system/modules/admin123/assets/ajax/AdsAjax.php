@@ -18,15 +18,23 @@ use PH7\Framework\Security\CSRF\Token;
 
 class AdsAjax
 {
+    /** @var HttpRequest */
     private $oHttpRequest;
+
+    /** @var AdsCoreModel */
     private $oAdsModel;
+
+    /** @var string */
     private $sMsg;
+
+    /** @var bool */
     private $bStatus;
 
     public function __construct()
     {
-        if (!(new Token)->check('ads'))
+        if (!(new Token)->check('ads')) {
             exit(jsonMsg(0, Form::errorTokenMsg()));
+        }
 
         $this->oHttpRequest = new HttpRequest;
         $this->oAdsModel = new AdsCoreModel;
