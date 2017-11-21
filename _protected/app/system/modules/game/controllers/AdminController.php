@@ -26,6 +26,7 @@ class AdminController extends MainController
         $this->sTitle = t('Add a new Game');
         $this->view->page_title = $this->sTitle;
         $this->view->h1_title = $this->sTitle;
+
         $this->output();
     }
 
