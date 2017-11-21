@@ -14,6 +14,8 @@ namespace PH7\Framework\Mvc\Controller;
 
 defined('PH7') or exit('Restricted access');
 
+use PH7\AdminCore;
+use PH7\AffiliateCore;
 use PH7\Framework\Core\Core;
 use PH7\Framework\Geo\Ip\Geo;
 use PH7\Framework\Http\Http;
@@ -26,6 +28,10 @@ use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Page\Page;
 use PH7\Framework\Security\Ban\Ban;
 use PH7\Framework\Security\DDoS\Stop as DDoSStoper;
+use PH7\FriendCoreModel;
+use PH7\MailCoreModel;
+use PH7\Permission;
+use PH7\UserCore;
 
 abstract class Controller extends Core
 {
@@ -55,9 +61,9 @@ abstract class Controller extends Core
         $bIsMobApp = MobApp::is($this->httpRequest, $this->session);
 
         $aAuthViewVars = [
-            'is_admin_auth' => \PH7\AdminCore::auth(),
-            'is_user_auth' => \PH7\UserCore::auth(),
-            'is_aff_auth' => \PH7\AffiliateCore::auth()
+            'is_admin_auth' => AdminCore::auth(),
+            'is_user_auth' => UserCore::auth(),
+            'is_aff_auth' => AffiliateCore::auth()
         ];
         $aGlobalViewVars = [
             'is_guest_homepage' => $this->isGuestOnHomepage($aAuthViewVars['is_user_auth']),
@@ -141,7 +147,7 @@ abstract class Controller extends Core
             '<br /><strong><em>' . t('Suggestions:') .
             '</em></strong><br /><a href="' . $this->registry->site_url . '">' . t('Return home') . '</a><br />';
 
-        if (!\PH7\UserCore::auth()) {
+        if (!UserCore::auth()) {
             $sErrorDesc .=
                 '<a href="' . Uri::get('user', 'signup', 'step1') . '">' . t('Join Now') . '</a><br />
                 <a href="' . Uri::get('user', 'main', 'login') . '">' . t('Login') . '</a><br />';
@@ -239,8 +245,8 @@ abstract class Controller extends Core
     private function setUserNotifications()
     {
         $aNotificationCounter = [
-            'count_unread_mail' => \PH7\MailCoreModel::countUnreadMsg($this->session->get('member_id')),
-            'count_pen_friend_request' => \PH7\FriendCoreModel::getPending($this->session->get('member_id'))
+            'count_unread_mail' => MailCoreModel::countUnreadMsg($this->session->get('member_id')),
+            'count_pen_friend_request' => FriendCoreModel::getPending($this->session->get('member_id'))
         ];
 
         $this->view->assigns($aNotificationCounter);
@@ -280,7 +286,7 @@ abstract class Controller extends Core
     {
         if (is_file($this->registry->path_module_config . 'Permission.php')) {
             require $this->registry->path_module_config . 'Permission.php';
-            new \PH7\Permission;
+            new Permission;
         }
     }
 
@@ -305,7 +311,7 @@ abstract class Controller extends Core
     private function checkSiteStatus()
     {
         if (M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
-            !\PH7\AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD
+            !AdminCore::auth() && $this->registry->module !== PH7_ADMIN_MOD
         ) {
             Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
         }
