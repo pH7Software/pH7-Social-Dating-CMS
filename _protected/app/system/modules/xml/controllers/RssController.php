@@ -35,6 +35,7 @@ class RssController extends MainController
     public function xmlLink()
     {
         parent::xmlLink();
+
         $this->view->display('rss_links.xml.tpl');
     }
 
