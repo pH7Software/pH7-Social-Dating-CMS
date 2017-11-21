@@ -96,9 +96,10 @@ class WallAjax extends Core
             foreach ($this->mContents as $oRow) {
                 echo '<p>';
                 $this->oAvatarDesign->get($oRow->username, $oRow->firstName, $oRow->sex, 32, 'Members');
+
                 echo '</p><p>', UserParser::atUsernameToLink(escape($this->str->extract(Ban::filterWord($oRow->comment), 0, 80))), '</p>
                     <p class="small"><a href="', Uri::get('comment', 'comment', 'read', "profile,$oRow->recipient"), '#', $oRow->commentId, '">', t('Read more'), '</a> &bull; ',
-                t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
+                    t('Posted on: %0%', $this->dateTime->get($oRow->createdDate)->dateTime());
 
                 if (!empty($oRow->updatedDate)) {
                     echo ' &bull; ', t('Last Edited %0%', $this->dateTime->get($oRow->updatedDate)->dateTime());
