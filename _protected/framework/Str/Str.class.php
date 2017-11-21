@@ -17,8 +17,7 @@ namespace PH7\Framework\Str {
     {
         const DEF_MAX_TEXT_EXTRACT_LENGTH = 150;
         const ENCODING = 'UTF-8';
-
-        private static $_sRegexDelimiter = '#';
+        const REGEX_DELIMITER = '#';
 
         /**
          * Make a string lowercase.
@@ -259,7 +258,7 @@ namespace PH7\Framework\Str {
          */
         public static function match($sText, $sPattern)
         {
-            preg_match_all(self::_regexNormalize($sPattern), $sText, $aMatches, PREG_PATTERN_ORDER);
+            preg_match_all(self::regexNormalize($sPattern), $sText, $aMatches, PREG_PATTERN_ORDER);
 
             $mRet = null; // Default value
             if (!empty($aMatches[1])) {
@@ -344,9 +343,9 @@ namespace PH7\Framework\Str {
             return htmlspecialchars($sText, ENT_QUOTES, static::ENCODING);
         }
 
-        private static function _regexNormalize($sPattern)
+        private static function regexNormalize($sPattern)
         {
-            return self::$_sRegexDelimiter . trim($sPattern, self::$_sRegexDelimiter) . self::$_sRegexDelimiter;
+            return self::REGEX_DELIMITER . trim($sPattern, self::REGEX_DELIMITER) . self::REGEX_DELIMITER;
         }
     }
 }
