@@ -16,7 +16,7 @@ defined('PH7') or exit('Restricted access');
 class Module implements Mixable
 {
     /** @var string */
-    private $_sModName;
+    private $sModName;
 
     public function __construct()
     {
@@ -35,7 +35,7 @@ class Module implements Mixable
 
     public function mixer()
     {
-        switch ($this->_sModName) {
+        switch ($this->sModName) {
 
         }
     }
