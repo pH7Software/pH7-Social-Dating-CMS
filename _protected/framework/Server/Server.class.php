@@ -108,9 +108,11 @@ final class Server
      */
     public static function getVar($sKey = null, $sDefVal = null)
     {
-        if (null === $sKey) return $_SERVER;
+        if (null === $sKey) {
+            return $_SERVER;
+        }
 
-        return (!empty($_SERVER[$sKey])) ? htmlspecialchars($_SERVER[$sKey], ENT_QUOTES) : $sDefVal;
+        return !empty($_SERVER[$sKey]) ? htmlspecialchars($_SERVER[$sKey], ENT_QUOTES) : $sDefVal;
     }
 
     /**
