@@ -8,14 +8,14 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Mvc\Router\Uri;
 
 class SearchFriendForm
 {
     public static function display()
     {
-        $oHttpRequest = new Http;
+        $oHttpRequest = new HttpRequest;
         $sUsername = $oHttpRequest->get('username');
         $sAction = ($oHttpRequest->getExists('action')) ? 'mutual' : 'index';
         unset($oHttpRequest);
