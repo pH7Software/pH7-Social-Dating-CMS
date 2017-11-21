@@ -8,20 +8,19 @@
 
 namespace PH7;
 
+use PH7\Framework\Mvc\Model\Engine\Model;
 use PH7\Framework\Mvc\Model\Engine\Util\Various;
 
-class UpgradeCoreModel extends Framework\Mvc\Model\Engine\Model
+class UpgradeCoreModel extends Model
 {
-
     /**
      * Executes sql queries for the upgrade of the software.
      *
      * @param string $sSqlUpgradeFile File SQL
-     * @return mixed (boolean | array) Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
+     * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
      */
     public function run($sSqlUpgradeFile)
     {
         return Various::execQueryFile($sSqlUpgradeFile);
     }
-
 }
