@@ -20,7 +20,7 @@ class EditPictureFormProcess extends Form
         parent::__construct();
 
         $iAlbumId = (int)$this->httpRequest->get('album_id');
-        $sPictureTitle = $this->httpRequest->post('title');
+        $sPictureTitle = Picture::cleanTitle($this->httpRequest->post('title'));
         $iPictureId = (int)$this->httpRequest->get('picture_id');
 
         (new PictureModel)->updatePhoto(

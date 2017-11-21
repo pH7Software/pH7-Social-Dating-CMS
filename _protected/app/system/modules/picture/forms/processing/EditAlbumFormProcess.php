@@ -24,7 +24,7 @@ class EditAlbumFormProcess extends Form
         (new PictureModel)->updateAlbum(
             $this->session->get('member_id'),
             $iAlbumId,
-            $this->httpRequest->post('name'),
+            Picture::cleanTitle($this->httpRequest->post('name')),
             $this->httpRequest->post('description'),
             $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         );

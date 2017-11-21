@@ -20,7 +20,7 @@ class EditVideoFormProcess extends Form
         parent::__construct();
 
         $iAlbumId = (int)$this->httpRequest->get('album_id');
-        $sVideoTitle = $this->httpRequest->post('title');
+        $sVideoTitle = Video::cleanTitle($this->httpRequest->post('title'));
         $iVideoId = (int)$this->httpRequest->get('video_id');
 
         (new VideoModel)->updateVideo(

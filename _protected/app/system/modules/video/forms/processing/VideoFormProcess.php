@@ -47,7 +47,7 @@ class VideoFormProcess extends Form
             return; // Stop execution of the method.
         }
 
-        $sAlbumTitle = $this->httpRequest->post('album_title');
+        $sAlbumTitle = Video::cleanTitle($this->httpRequest->post('album_title'));
         $iAlbumId = (int)$this->httpRequest->post('album_id');
 
         // Default URL Thumbnail
