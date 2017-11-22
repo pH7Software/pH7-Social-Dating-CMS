@@ -15,6 +15,8 @@ use PH7\Framework\File\File;
 
 class VideoCore
 {
+    const REGEX_API_URL_FORMAT = '#(^https?://(www\.)?.+\.[a-z]{2,8})#i';
+
     /**
      * Check if this is a url, if so, this is a video from an external site.
      *
@@ -24,7 +26,7 @@ class VideoCore
      */
     public function isApi($sFile)
     {
-        return preg_match('#(^https?://(www\.)?.+\.[a-z]{2,8})#i', $sFile);
+        return preg_match(static::REGEX_API_URL_FORMAT, $sFile);
     }
 
     /**
