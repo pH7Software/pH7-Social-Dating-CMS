@@ -9,6 +9,6 @@
         </ul>
         {else}
 
-    <p>{lang 'No links found at %site_name%'}</p>
+    <p>{lang 'Oops! No links to display. Come back later ;)'}</p>
     {/if}
 </div>
