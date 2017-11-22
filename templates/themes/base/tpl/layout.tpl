@@ -186,10 +186,10 @@
 
       {if isDebug()}
         <div class="ft">
-          <p>{{ $design->stat() }}</p>
+          <p><small>{{ $design->stat() }}</small></p>
         </div>
         <p class="small darkred">
-            {lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="darkred">{lang 'here'}</a>
+          {lang 'WARNING: Your site is in development mode! You can change the mode'} <a href="{{ $design->url(PH7_ADMIN_MOD,'tool','envmode') }}" title="{lang 'Change the Environment Mode'}" class="darkred">{lang 'here'}</a>
         </p>
       {/if}
     </footer>
