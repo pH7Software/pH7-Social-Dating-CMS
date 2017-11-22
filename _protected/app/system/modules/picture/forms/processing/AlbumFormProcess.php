@@ -48,7 +48,7 @@ class AlbumFormProcess extends Form
 
             (new PictureModel)->addAlbum(
                 $this->session->get('member_id'),
-                Picture::cleanTitle($this->httpRequest->post('name')),
+                MediaCore::cleanTitle($this->httpRequest->post('name')),
                 $this->httpRequest->post('description'),
                 $sFileName,
                 $this->dateTime->get()->dateTime('Y-m-d H:i:s'),

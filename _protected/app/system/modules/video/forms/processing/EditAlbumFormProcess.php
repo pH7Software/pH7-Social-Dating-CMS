@@ -24,7 +24,7 @@ class EditAlbumFormProcess extends Form
         (new VideoModel)->updateAlbum(
             $this->session->get('member_id'),
             $iAlbumId,
-            Video::cleanTitle($this->httpRequest->post('name')),
+            MediaCore::cleanTitle($this->httpRequest->post('name')),
             $this->httpRequest->post('description'),
             $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         );

@@ -47,7 +47,7 @@ class VideoFormProcess extends Form
             return; // Stop execution of the method.
         }
 
-        $sAlbumTitle = Video::cleanTitle($this->httpRequest->post('album_title'));
+        $sAlbumTitle = MediaCore::cleanTitle($this->httpRequest->post('album_title'));
         $iAlbumId = (int)$this->httpRequest->post('album_id');
 
         // Default URL Thumbnail
@@ -124,6 +124,7 @@ class VideoFormProcess extends Form
             return;
         }
 
+        $sTitle = MediaCore::cleanTitle($sTitle);
         $iApproved = (DbConfig::getSetting('videoManualApproval') == 0) ? '1' : '0';
 
         (new VideoModel)->addVideo(

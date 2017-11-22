@@ -58,7 +58,7 @@ class PictureFormProcess extends Form
                 return; // Stop execution of the method.
             }
 
-            $sAlbumTitle = Picture::cleanTitle($this->httpRequest->post('album_title'));
+            $sAlbumTitle = MediaCore::cleanTitle($this->httpRequest->post('album_title'));
             $iAlbumId = (int)$this->httpRequest->post('album_id');
 
             $oPicture2 = clone $oPicture1;
@@ -107,6 +107,7 @@ class PictureFormProcess extends Form
 
             // It creates a nice title if no title is specified.
             $sTitle = ($this->httpRequest->postExists('title') && $this->str->length($this->str->trim($this->httpRequest->post('title'))) > 2) ? $this->httpRequest->post('title') : $this->str->upperFirst(str_replace(array('-', '_'), ' ', str_ireplace(PH7_DOT . $oPicture1->getExt(), '', escape($_FILES['photos']['name'][$i], true))));
+            $sTitle = MediaCore::cleanTitle($sTitle);
 
             (new PictureModel)->addPhoto(
                 $this->session->get('member_id'),

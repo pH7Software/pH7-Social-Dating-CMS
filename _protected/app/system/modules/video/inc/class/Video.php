@@ -12,19 +12,6 @@ use PH7\Framework\Cache\Cache;
 
 class Video extends VideoCore
 {
-    /**
-     * Clean video title, since it cannot have blank space before the beginning and ending,
-     * otherwise the URL pattern won't work.
-     *
-     * @param string $sTitle
-     *
-     * @return string
-     */
-    public static function cleanTitle($sTitle)
-    {
-        return trim($sTitle);
-    }
-
     public static function clearCache()
     {
         (new Cache)->start(VideoModel::CACHE_GROUP, null, null)->clear();
