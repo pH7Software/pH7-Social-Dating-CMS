@@ -24,8 +24,7 @@ class AvatarFormProcess extends Form
         // Number has to be string because in DB it's an "enum" type
         $this->iApproved = (AdminCore::auth() || DbConfig::getSetting('avatarManualApproval') == 0) ? '1' : '0';
 
-        $aGetVariableNames = ['profile_id', 'username'];
-        if (AdminCore::auth() && !User::auth() && $this->httpRequest->getExists($aGetVariableNames)) {
+        if ($this->doesAdminEdit()) {
             $iProfileId = $this->httpRequest->get('profile_id');
             $sUsername = $this->httpRequest->get('username');
         } else {
@@ -55,5 +54,15 @@ class AvatarFormProcess extends Form
             // Avatar doesn't seem suitable for everyone. Overwrite "$iApproved" and set for moderation
             $this->iApproved = '0';
         }
+    }
+
+    /**
+     * @return bool
+     */
+    private function doesAdminEdit()
+    {
+        $aGetVariableNames = ['profile_id', 'username'];
+
+        return AdminCore::auth() && !User::auth() && $this->httpRequest->getExists($aGetVariableNames);
     }
 }
