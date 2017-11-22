@@ -55,7 +55,7 @@
                     </table>
                 </section>
                 <footer>
-                  {{ $design->smallLink() }}
+                    <p>{{ $design->smallLink() }}</p>
                </footer>
             </body>
         </html>
