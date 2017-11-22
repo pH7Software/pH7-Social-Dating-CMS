@@ -27,12 +27,12 @@ class EditForumForm
         $oForumModel = new ForumModel;
         $oForumData = $oForumModel->getForum((new Http)->get('forum_id'), 0, 1);
 
-        $oCategoriesData = $oForumModel->getCategory();
         $aCategoriesName = array();
-        foreach ($oCategoriesData as $oId) {
-            $aCategoriesName[$oId->categoryId] = $oId->title;
+        $aCategories = $oForumModel->getCategory();
+        foreach ($aCategories as $oCategory) {
+            $aCategoriesName[$oCategory->categoryId] = $oCategory->title;
         }
-        unset($oForumModel, $oCategoriesData);
+        unset($oForumModel, $aCategories);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 

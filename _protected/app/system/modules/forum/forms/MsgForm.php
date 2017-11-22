@@ -25,11 +25,12 @@ class MsgForm
             Header::redirect();
         }
 
-        $oForumsId = (new ForumModel)->getForum();
         $aForumsName = array();
-        foreach ($oForumsId as $oId) {
-            $aForumsName[$oId->forumId] = $oId->name;
+        $oForums = (new ForumModel)->getForum();
+        foreach ($oForums as $oForum) {
+            $aForumsName[$oForum->forumId] = $oForum->name;
         }
+        unset($oForums);
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
 
