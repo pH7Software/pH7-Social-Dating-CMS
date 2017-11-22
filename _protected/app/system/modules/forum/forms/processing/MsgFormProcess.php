@@ -24,6 +24,7 @@ class MsgFormProcess extends Form
 
         $oForumModel = new ForumModel;
 
+        $sTitle = trim($this->httpRequest->post('title'));
         $sMessage = $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN);
         $sCurrentTime = $this->dateTime->get()->dateTime('Y-m-d H:i:s');
         $iTimeDelay = (int)DbConfig::getSetting('timeDelaySendForumTopic');
@@ -35,13 +36,14 @@ class MsgFormProcess extends Form
         } elseif ($oForumModel->isDuplicateTopic($iProfileId, $sMessage)) {
             \PFBC\Form::setError('form_msg', Form::duplicateContentMsg());
         } else {
-            $oForumModel->addTopic($iProfileId, $iForumId, $this->httpRequest->post('title'), $sMessage, $sCurrentTime);
+            $oForumModel->addTopic($iProfileId, $iForumId, $sTitle, $sMessage, $sCurrentTime);
+
             Header::redirect(
                 Uri::get(
                     'forum',
                     'forum',
                     'post',
-                    $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->post('title') . ',' . Db::getInstance()->lastInsertId()
+                    $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $sTitle . ',' . Db::getInstance()->lastInsertId()
                 ),
                 t('Message posted!')
             );

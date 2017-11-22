@@ -22,10 +22,12 @@ class EditMsgFormProcess extends Form
 
         $iForumId = $this->httpRequest->get('forum_id', 'int');
         $iTopicId = $this->httpRequest->get('topic_id', 'int');
+        $sTopicTitle = trim($this->httpRequest->post('title'));
 
         (new ForumModel)->updateTopic(
             $this->session->get('member_id'),
-            $iTopicId, $this->httpRequest->post('title'),
+            $iTopicId,
+            $sTopicTitle,
             $this->httpRequest->post('message', Http::ONLY_XSS_CLEAN),
             $this->dateTime->get()->dateTime('Y-m-d H:i:s')
         );
@@ -35,7 +37,7 @@ class EditMsgFormProcess extends Form
                 'forum',
                 'forum',
                 'post',
-                $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $this->httpRequest->post('title') . ',' . $iTopicId
+                $this->httpRequest->get('forum_name') . ',' . $iForumId . ',' . $sTopicTitle . ',' . $iTopicId
             ),
             t('Message updated!')
         );
