@@ -45,6 +45,7 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':recipient', $iRecipient, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
 
@@ -65,6 +66,7 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':sender', $iSender, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
 
@@ -86,6 +88,7 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
 
@@ -111,6 +114,7 @@ class MailModel extends MailCoreModel
         $rStmt->bindValue(':title', $sTitle, \PDO::PARAM_STR);
         $rStmt->bindValue(':message', $sMessage, \PDO::PARAM_STR);
         $rStmt->bindValue(':sendDate', $sCreatedDate, \PDO::PARAM_STR);
+
         return (!$rStmt->execute()) ? false : Db::getInstance()->lastInsertId();
     }
 
@@ -163,6 +167,7 @@ class MailModel extends MailCoreModel
         $rStmt = Db::getInstance()->prepare('SELECT * FROM' . Db::prefix('Messages') . 'WHERE messageId = :messageId LIMIT 1');
         $rStmt->bindValue(':messageId', $iMessageId, \PDO::PARAM_INT);
         $rStmt->execute();
+
         return $rStmt->fetch(\PDO::FETCH_OBJ);
     }
 
