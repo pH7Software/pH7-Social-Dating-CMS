@@ -8,7 +8,7 @@
 
 namespace PH7;
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Session\Session;
 use PH7\Framework\Url\Header;
 
@@ -24,8 +24,15 @@ class EditReplyMsgForm
             Header::redirect();
         }
 
-        $oHttpRequest = new Http;
-        $oMsg = (new ForumModel)->getMessage($oHttpRequest->get('topic_id'), $oHttpRequest->get('message_id'), (new Session)->get('member_id'), 1, 0, 1);
+        $oHttpRequest = new HttpRequest;
+        $oMsg = (new ForumModel)->getMessage(
+            $oHttpRequest->get('topic_id'),
+            $oHttpRequest->get('message_id'),
+            (new Session)->get('member_id'),
+            1,
+            0,
+            1
+        );
         unset($oHttpRequest);
 
         $oForm = new \PFBC\Form('form_edit_reply_msg');
