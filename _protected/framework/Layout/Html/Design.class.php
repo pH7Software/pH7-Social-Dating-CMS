@@ -360,26 +360,20 @@ class Design
                 $bSoftwareName = true;
             }
 
-            /**
-             * if (!$bEmailContext && AdminCore::auth()) {
-             * echo '<p class="s_bMarg underline"><strong><em><a class="red" href="', Uri::get(PH7_ADMIN_MOD, 'setting', 'license'), '">', t('Need to remove the link below?'), '</a></em></strong><br /><em class="small">' . t('(... and get rid of all other promo notices)') . '</em></p>';
-             * }
-             * //*/
-
-            if ($bComment) {
-                echo '
-            <!-- ' . sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')) . ' -->
-            <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
-            <!-- You must leave this comment and the back link in the footer.
-            This open source software is distributed free and you must respect the thousands of days, months and several years it takes to develop it!
-            All rights reserved for ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '
-            You can never claim that you took, developed, or helped in any other way in this software if it is wrong! -->';
-            }
-
             echo ($bSoftwareName ? '<span class="italic">' . t('Powered by') : ''), ' <strong>', ($bLink ? '<a class="underline" href="' . Kernel::SOFTWARE_WEBSITE . '" title="' . Kernel::SOFTWARE_DESCRIPTION . '">' : ''), ($bSoftwareName ? Kernel::SOFTWARE_NAME : ''), ($bVersion ? ' ' . Kernel::SOFTWARE_VERSION : ''), ($bLink ? '</a>' : ''), ($bSoftwareName ? '</strong></span>' : '');
         }
 
-        echo '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
+        if ($bComment) {
+            echo '
+                <!-- ' . sprintf(Kernel::SOFTWARE_COPYRIGHT, date('Y')) . ' -->
+                <!-- Powered by ', Kernel::SOFTWARE_NAME, ' ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->
+                <!-- You must leave this comment.
+                This open source software is distributed for free and you must respect the thousands of days, months and several years it took to develop it.
+                All rights reserved to ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_COMPANY, '
+                You can never claim that you took, developed, or helped in any other way in this software if it is wrong -->';
+        }
+
+        echo '<!-- "Powered by ', Kernel::SOFTWARE_NAME, ', ', Kernel::SOFTWARE_VERSION_NAME, ', ', Kernel::SOFTWARE_VERSION, ', Build ', Kernel::SOFTWARE_BUILD, ' -->';
     }
 
     /**
