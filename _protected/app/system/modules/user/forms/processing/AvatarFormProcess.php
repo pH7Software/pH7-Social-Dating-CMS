@@ -48,7 +48,7 @@ class AvatarFormProcess extends Form
     /**
      * @return void
      */
-    protected function checkNudityFilter()
+    private function checkNudityFilter()
     {
         if (DbConfig::getSetting('nudityFilter') && Filter::isNudity($_FILES['avatar']['tmp_name'])) {
             // Avatar doesn't seem suitable for everyone. Overwrite "$iApproved" and set for moderation
