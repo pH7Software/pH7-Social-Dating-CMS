@@ -9,6 +9,7 @@
 namespace PH7;
 
 use PH7\Framework\Mvc\Router\Uri;
+use PH7\Framework\Url\Header;
 
 class AvatarForm
 {
@@ -18,7 +19,8 @@ class AvatarForm
             if (\PFBC\Form::isValid($_POST['submit_avatar'])) {
                 new AvatarFormProcess;
             }
-            Framework\Url\Header::redirect();
+
+            Header::redirect();
         }
 
         $oForm = new \PFBC\Form('form_avatar');
