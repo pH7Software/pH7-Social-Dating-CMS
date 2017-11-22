@@ -262,7 +262,7 @@ class Design
         $sTime = Benchmark::readableElapsedTime($sMicrotime);
         $iMemory = Benchmark::readableSize(memory_get_usage(true));
 
-        echo t('Queries time: %0% | %1% %2% | Generated in %3% | Memory allocated: %4%', Db::time(), $iCountQueries, $sRequest, $sTime, $iMemory);
+        echo t('Queries time %0% | %1% %2% | Generated in %3% | Memory allocated %4%', Db::time(), $iCountQueries, $sRequest, $sTime, $iMemory);
     }
 
     /**
