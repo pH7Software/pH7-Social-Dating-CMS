@@ -19,4 +19,4 @@ INSERT INTO pH7_Settings (settingName, settingValue, description, settingGroup) 
 ('displayPoweredByLink', 1, 'Show or not the Branding link in the footer.', 'general');
 
 -- Update pH7CMS's SQL schema version
-UPDATE PH7_Modules SET version = '1.4.1' WHERE vendorName = 'pH7CMS';
+UPDATE pH7_Modules SET version = '1.4.1' WHERE vendorName = 'pH7CMS';

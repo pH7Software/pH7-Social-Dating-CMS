@@ -5,7 +5,7 @@
 --
 
 
-UPDATE PH7_Settings SET `name` = 'bgProfileManualApproval' WHERE `name` = 'profileBackgroundManualApproval';
+UPDATE pH7_Settings SET `name` = 'bgProfileManualApproval' WHERE `name` = 'profileBackgroundManualApproval';
 
-INSERT INTO PH7_Settings (`name`, value, `desc`, `group`) VALUES
+INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('socialMediaWidgets', 0, 'Enable the Social Media Widgets such as Like and Sharing buttons. 0 = Disable | 1 = Enable', 'general');
