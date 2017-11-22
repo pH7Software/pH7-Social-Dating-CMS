@@ -4,14 +4,14 @@
 -- License:       GNU General Public License; https://www.gnu.org/licenses/gpl-3.0.en.html
 --
 
-ALTER TABLE PH7_SysModsEnabled ADD COLUMN moduleTitle varchar(50) NOT NULL;
+ALTER TABLE pH7_SysModsEnabled ADD COLUMN moduleTitle varchar(50) NOT NULL;
 
-DROP TABLE PH7_SysModsEnabled;
+DROP TABLE pH7_SysModsEnabled;
 
-TRUNCATE TABLE PH7_SysModsEnabled;
+TRUNCATE TABLE pH7_SysModsEnabled;
 
 
-INSERT INTO PH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
+INSERT INTO pH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VALUES
 ('Affiliate', 'affiliate', '0', '1'),
 ('Game', 'game', '0', '1'),
 ('Chat', 'chat', '1', '0'),
@@ -32,9 +32,9 @@ INSERT INTO PH7_SysModsEnabled (moduleTitle, folderName, premiumMod, enabled) VA
 ('User Dashboard', 'user-dashboard', '0', '1');
 
 
-INSERT INTO PH7_Settings (`name`, value, `desc`, `group`) VALUES
+INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('defaultSysModule', 'user', 'The default module running by default on the index page. Recommended to keep the "user" module', 'general');
 
 
 -- Update pH7CMS's SQL schema version
-UPDATE PH7_Modules SET version = '1.3.3' WHERE vendorName = 'pH7CMS';
+UPDATE pH7_Modules SET version = '1.3.3' WHERE vendorName = 'pH7CMS';

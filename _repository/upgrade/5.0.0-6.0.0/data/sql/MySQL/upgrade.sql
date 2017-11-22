@@ -4,7 +4,7 @@
 -- License:       GNU General Public License; https://www.gnu.org/licenses/gpl-3.0.en.html
 --
 
-INSERT INTO PH7_Settings (`name`, value, `desc`, `group`) VALUES
+INSERT INTO pH7_Settings (`name`, value, `desc`, `group`) VALUES
 ('usersBlock', 1, '0 to disable or 1 to enable the profile photos on the homepage', 'homepage'),
 ('requireRegistrationAvatar', 0, '', 'registration');
 
