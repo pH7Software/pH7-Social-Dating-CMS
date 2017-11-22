@@ -56,7 +56,7 @@
                 </section>
                 <footer>
                     <p>{{ $design->smallLink() }}</p>
-               </footer>
+                </footer>
             </body>
         </html>
     </xsl:template>
