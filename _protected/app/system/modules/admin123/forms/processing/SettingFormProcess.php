@@ -39,8 +39,8 @@ class SettingFormProcess extends Form
         'social_media_widgets' => 'socialMediaWidgets',
         'disclaimer' => 'disclaimer',
         'cookie_consent_bar' => 'cookieConsentBar',
-        'is_software_news_feed' => 'isSoftwareNewsFeed',
         'display_powered_by_link' => 'displayPoweredByLink',
+        'is_software_news_feed' => 'isSoftwareNewsFeed',
 
         // Email
         'email_name' => 'emailName',
