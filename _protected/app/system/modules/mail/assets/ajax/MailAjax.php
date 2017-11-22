@@ -97,7 +97,9 @@ class Mail
     protected function delete()
     {
         if (AdminCore::auth() && !UserCore::auth()) {
-            $this->bStatus = $this->oMailModel->adminDeleteMsg($this->oHttpRequest->post('msg_id'));
+            $this->bStatus = $this->oMailModel->adminDeleteMsg(
+                $this->oHttpRequest->post('msg_id')
+            );
         } else {
             $this->bStatus = $this->oMailModel->setTo(
                 $this->oSession->get('member_id'),
