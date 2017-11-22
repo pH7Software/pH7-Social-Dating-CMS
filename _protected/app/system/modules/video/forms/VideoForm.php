@@ -27,10 +27,10 @@ class VideoForm
             Header::redirect();
         }
 
-        $oAlbumId = (new VideoModel)->getAlbumsName((new Session)->get('member_id'));
+        $oAlbums = (new VideoModel)->getAlbumsName((new Session)->get('member_id'));
         $aAlbumName = array();
-        foreach ($oAlbumId as $iId) {
-            $aAlbumName[$iId->albumId] = $iId->name;
+        foreach ($oAlbums as $oAlbum) {
+            $aAlbumName[$oAlbum->albumId] = $oAlbum->name;
         }
 
         $sTitlePattern = Config::getInstance()->values['module.setting']['url_title.pattern'];
@@ -43,7 +43,7 @@ class VideoForm
         $oForm->addElement(new \PFBC\Element\Select(t('Choose your album - OR - <a href="%0%">Add a new Album</a>', Uri::get('video', 'main', 'addalbum')), 'album_id', $aAlbumName, array('value' => self::getAlbumId(), 'required' => 1)));
         unset($aAlbumName);
 
-        $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$iId->name)); // Bad title! Thanks for finding a solution and commit it on http://github.com/pH7Software/pH7-Social-Dating-CMS
+        $oForm->addElement(new \PFBC\Element\Hidden('album_title', @$oAlbums[0]->name));
         $oForm->addElement(new \PFBC\Element\Textbox(t('Video Name:'), 'title', array('pattern' => $sTitlePattern, 'validation' => new \PFBC\Validation\RegExp($sTitlePattern))));
         $oForm->addElement(new \PFBC\Element\Select('Video Type:', 'type', array(t('Choose...'), 'embed' => t('Embed Code'), 'regular' => t('Regular')), array('id' => 'video-type', 'required' => 1)));
 
