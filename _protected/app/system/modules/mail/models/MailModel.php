@@ -14,7 +14,9 @@ use PH7\Framework\Mvc\Model\Spam as SpamModel;
 
 class MailModel extends MailCoreModel
 {
-    const INBOX = 1, OUTBOX = 2, TRASH = 3;
+    const INBOX = 1;
+    const OUTBOX = 2;
+    const TRASH = 3;
 
     const TRASH_MODE = 'trash';
     const RESTOR_MODE = 'restor';
