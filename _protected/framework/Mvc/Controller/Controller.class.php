@@ -314,7 +314,8 @@ abstract class Controller extends Core
             M\DbConfig::getSetting('siteStatus') === M\DbConfig::MAINTENANCE_SITE &&
             !AdminCore::auth()
         ) {
-            Page::maintenance(3600); // 1 hour for the duration time of the Service Unavailable HTTP status.
+            // Set 1 hour for the duration time of the "Service Unavailable" HTTP status
+            Page::maintenance(3600);
         }
     }
 
