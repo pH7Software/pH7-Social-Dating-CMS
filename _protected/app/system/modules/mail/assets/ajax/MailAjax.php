@@ -10,13 +10,26 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Mvc\Request\Http;
+use PH7\Framework\Http\Http;
+use PH7\Framework\Mvc\Request\Http as HttpRequest;
 use PH7\Framework\Security\CSRF\Token as SecurityToken;
 use PH7\Framework\Session\Session;
 
 class Mail
 {
-    private $_oSession, $_oHttpRequest, $_oMailModel, $_sMsg, $_bStatus;
+    /** @var Session */
+    private $oSession;
+
+    /** @var HttpRequest */
+    private $oHttpRequest;
+
+    /** @var MailModel */
+    private $oMailModel;
+
+    private $sMsg;
+
+    /** @var bool */
+    private $bStatus;
 
     public function __construct()
     {
@@ -25,11 +38,11 @@ class Mail
         }
 
         /** Instance objects for the class * */
-        $this->_oSession = new Session;
-        $this->_oHttpRequest = new Http;
-        $this->_oMailModel = new MailModel;
+        $this->oSession = new Session;
+        $this->oHttpRequest = new HttpRequest;
+        $this->oMailModel = new MailModel;
 
-        switch ($this->_oHttpRequest->post('type')) {
+        switch ($this->oHttpRequest->post('type')) {
             case 'trash':
                 $this->trash();
                 break;
@@ -42,64 +55,64 @@ class Mail
                 break;
 
             default:
-                Framework\Http\Http::setHeadersByCode(400);
+                Http::setHeadersByCode(400);
                 exit('Bad Request Error!');
         }
     }
 
     protected function trash()
     {
-        $this->_bStatus = $this->_oMailModel->setTo(
-            $this->_oSession->get('member_id'),
-            $this->_oHttpRequest->post('msg_id'),
+        $this->bStatus = $this->oMailModel->setTo(
+            $this->oSession->get('member_id'),
+            $this->oHttpRequest->post('msg_id'),
             MailModel::TRASH_MODE
         );
 
-        if (!$this->_bStatus) {
-            $this->_sMsg = jsonMsg(0, t('Your message does not exist anymore in your trash bin.'));
+        if (!$this->bStatus) {
+            $this->sMsg = jsonMsg(0, t('Your message does not exist anymore in your trash bin.'));
         } else {
-            $this->_sMsg = jsonMsg(1, t('Your message has been moved to your trash bin.'));
+            $this->sMsg = jsonMsg(1, t('Your message has been moved to your trash bin.'));
         }
 
-        echo $this->_sMsg;
+        echo $this->sMsg;
     }
 
     protected function restor()
     {
-        $this->_bStatus = $this->_oMailModel->setTo(
-            $this->_oSession->get('member_id'),
-            $this->_oHttpRequest->post('msg_id'),
+        $this->bStatus = $this->oMailModel->setTo(
+            $this->oSession->get('member_id'),
+            $this->oHttpRequest->post('msg_id'),
             MailModel::RESTOR_MODE
         );
 
-        if (!$this->_bStatus) {
-            $this->_sMsg = jsonMsg(0, t('Your message does not exist anymore in your inbox.'));
+        if (!$this->bStatus) {
+            $this->sMsg = jsonMsg(0, t('Your message does not exist anymore in your inbox.'));
         } else {
-            $this->_sMsg = jsonMsg(1, t('Your message has been moved to your inbox.'));
+            $this->sMsg = jsonMsg(1, t('Your message has been moved to your inbox.'));
         }
 
-        echo $this->_sMsg;
+        echo $this->sMsg;
     }
 
     protected function delete()
     {
         if (AdminCore::auth() && !UserCore::auth()) {
-            $this->_bStatus = $this->_oMailModel->adminDeleteMsg($this->_oHttpRequest->post('msg_id'));
+            $this->bStatus = $this->oMailModel->adminDeleteMsg($this->oHttpRequest->post('msg_id'));
         } else {
-            $this->_bStatus = $this->_oMailModel->setTo(
-                $this->_oSession->get('member_id'),
-                $this->_oHttpRequest->post('msg_id'),
+            $this->bStatus = $this->oMailModel->setTo(
+                $this->oSession->get('member_id'),
+                $this->oHttpRequest->post('msg_id'),
                 MailModel::DELETE_MODE
             );
         }
 
-        if (!$this->_bStatus) {
-            $this->_sMsg = jsonMsg(0, t('Your message does not exist anymore.'));
+        if (!$this->bStatus) {
+            $this->sMsg = jsonMsg(0, t('Your message does not exist anymore.'));
         } else {
-            $this->_sMsg = jsonMsg(1, t('Your message has been successfully removed!'));
+            $this->sMsg = jsonMsg(1, t('Your message has been successfully removed!'));
         }
 
-        echo $this->_sMsg;
+        echo $this->sMsg;
     }
 }
 
