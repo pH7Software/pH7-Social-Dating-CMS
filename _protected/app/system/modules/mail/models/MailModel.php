@@ -184,7 +184,7 @@ class MailModel extends MailCoreModel
      */
     public function setTo($iProfileId, $iMessageId, $sMode)
     {
-        if (!in_array($sMode, self::MODES)) {
+        if (!in_array($sMode, self::MODES, true)) {
             throw new PH7InvalidArgumentException('Bad set mode: "' . $sMode . '"!');
         }
 
