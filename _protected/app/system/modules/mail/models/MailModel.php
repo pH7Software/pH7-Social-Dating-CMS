@@ -29,8 +29,8 @@ class MailModel extends MailCoreModel
     ];
 
     /**
-     * @param integer $iRecipient
-     * @param integer $iMessageId
+     * @param int $iRecipient
+     * @param int $iMessageId
      *
      * @return \stdClass
      */
@@ -49,8 +49,8 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer $iSender
-     * @param integer $iMessageId
+     * @param int $iSender
+     * @param int $iMessageId
      *
      * @return \stdClass
      */
@@ -69,8 +69,8 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer $iProfileId
-     * @param integer $iMessageId
+     * @param int $iProfileId
+     * @param int $iMessageId
      *
      * @return \stdClass
      */
@@ -92,13 +92,13 @@ class MailModel extends MailCoreModel
     /**
      * Send a message.
      *
-     * @param integer $iSender
-     * @param integer $iRecipient
+     * @param int $iSender
+     * @param int $iRecipient
      * @param string $sTitle
      * @param string $sMessage
      * @param string $sCreatedDate
      *
-     * @return boolean|integer Returns the ID of the message on success or FALSE on failure.
+     * @return bool|int Returns the ID of the message on success or FALSE on failure.
      */
     public function sendMsg($iSender, $iRecipient, $sTitle, $sMessage, $sCreatedDate)
     {
@@ -115,10 +115,10 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer $iRecipient
-     * @param integer $iMessageId
+     * @param int $iRecipient
+     * @param int $iMessageId
      *
-     * @return boolean
+     * @return bool
      */
     public function deleteMsg($iRecipient, $iMessageId)
     {
@@ -130,9 +130,9 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer $iMessageId
+     * @param int $iMessageId
      *
-     * @return boolean
+     * @return bool
      */
     public function adminDeleteMsg($iMessageId)
     {
@@ -143,7 +143,7 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer $iMessageId
+     * @param int $iMessageId
      */
     public function setReadMsg($iMessageId)
     {
@@ -154,7 +154,7 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer $iMessageId
+     * @param int $iMessageId
      *
      * @return \stdClass
      */
@@ -169,13 +169,13 @@ class MailModel extends MailCoreModel
     /**
      * Set message to 'trash' or 'toDelete'.
      *
-     * @param integer $iProfileId User ID
-     * @param integer $iMessageId Message ID
+     * @param int $iProfileId User ID
+     * @param int $iMessageId Message ID
      * @param string $sMode Set to this category. Choose between 'trash', 'restor' and 'delete'
      *
      * @throws PH7InvalidArgumentException
      *
-     * @return boolean
+     * @return bool
      */
     public function setTo($iProfileId, $iMessageId, $sMode)
     {
@@ -202,16 +202,16 @@ class MailModel extends MailCoreModel
     }
 
     /**
-     * @param integer|string $mLooking
-     * @param boolean $bCount
+     * @param int|string $mLooking
+     * @param bool $bCount
      * @param string $sOrderBy
-     * @param integer $iSort
-     * @param integer $iOffset
-     * @param integer $iLimit
-     * @param integer|null $iProfileId
+     * @param int $iSort
+     * @param int $iOffset
+     * @param int $iLimit
+     * @param int|null $iProfileId
      * @param string $sType
      *
-     * @return integer|\stdClass
+     * @return int|\stdClass
      */
     public function search($mLooking, $bCount, $sOrderBy, $iSort, $iOffset, $iLimit, $iProfileId = null, $sType = 'all')
     {
@@ -276,10 +276,10 @@ class MailModel extends MailCoreModel
     /**
      * Check Duplicate Contents.
      *
-     * @param integer $iSenderId Sender's ID
+     * @param int $iSenderId Sender's ID
      * @param string $sMsg Message content
      *
-     * @return boolean Returns TRUE if similar content was found in the table, FALSE otherwise.
+     * @return bool Returns TRUE if similar content was found in the table, FALSE otherwise.
      */
     public function isDuplicateContent($iSenderId, $sMsg)
     {
@@ -296,11 +296,11 @@ class MailModel extends MailCoreModel
     /**
      * To prevent spam!
      *
-     * @param integer $iSenderId
-     * @param integer $iWaitTime In minutes!
+     * @param int $iSenderId
+     * @param int $iWaitTime In minutes!
      * @param string $sCurrentTime In date format: 0000-00-00 00:00:00
      *
-     * @return boolean Return TRUE if the weather was fine, otherwise FALSE
+     * @return bool Return TRUE if the weather was fine, otherwise FALSE
      */
     public function checkWaitSend($iSenderId, $iWaitTime, $sCurrentTime)
     {
