@@ -21,7 +21,7 @@ final class Version
 {
     const CACHE_TIME = 86400; // 1 day
     const LATEST_VERSION_URL = 'http://xml.ph7cms.com/software-info.xml';
-    const PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
+    const VERSION_PATTERN = '\d{1,2}\.\d{1,2}\.\d{1,2}';
 
     /**
      * Framework Kernel.
@@ -97,7 +97,7 @@ final class Version
         $sLastBuild = $aLatestInfo['build'];
         unset($aLatestInfo);
 
-        if (!$bIsAlert || !is_string($sLastName) || !preg_match('#^' . self::PATTERN . '$#', $sLastVer)) {
+        if (!$bIsAlert || !is_string($sLastName) || !preg_match('#^' . self::VERSION_PATTERN . '$#', $sLastVer)) {
             return false;
         }
 
